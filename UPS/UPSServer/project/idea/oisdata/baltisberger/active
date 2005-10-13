@@ -1,0 +1,3684 @@
+<ois>
+  <session>
+    <sessionsname>Herbst 2005</sessionsname>
+    <sessionsende>2005-10-20</sessionsende>
+    <seskez>2005H</seskez>
+    <planungFreigabe>
+      <time>1125266400000</time>
+    </planungFreigabe>
+  </session>
+  <list>
+    <anmdeldungen>
+      <lkNummer>53-335</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Forstwissenschaften</fachrichtung>
+      <studentennummer>99-314-338</studentennummer>
+      <vorname>Alexandra</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>WF F.u.V.Alp+AK Evol</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Billeter</nachname>
+      <studiengang>Forstwissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129044600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129046400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>00-922-393</studentennummer>
+      <vorname>Lars</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bingham Müller</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129030200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129032000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>01-909-100</studentennummer>
+      <vorname>Megha</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bisang</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129010400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129012200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-906-948</studentennummer>
+      <vorname>Pasqual</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Böhm</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129120200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129122000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-710-499</studentennummer>
+      <vorname>Bruno</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bonan</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128936600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128895200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-909-974</studentennummer>
+      <vorname>Parijat</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Borkovec</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129035600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129037400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-910-832</studentennummer>
+      <vorname>Katrin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Born</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128927600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128929400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-737-335</studentennummer>
+      <vorname>Johanna</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Borner</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129032000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129033800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-912-630</studentennummer>
+      <vorname>Ralph Pascal</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Borovkov</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129102200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129104000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-916-193</studentennummer>
+      <vorname>Thomas</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bösch</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129125600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129127400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-914-727</studentennummer>
+      <vorname>Emelyne Alexandra Chanelle</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bosco</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129534200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129536000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-921-581</studentennummer>
+      <vorname>Judith Eva</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bosco</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129536000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129537800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-908-373</studentennummer>
+      <vorname>Stela</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Doggwiler</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129033800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129035600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-915-956</studentennummer>
+      <vorname>Pascal Markus</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dorenbos Theler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129530600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129532400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-916-814</studentennummer>
+      <vorname>Eva Kathrin</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dörfler</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128945600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128947400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-907-135</studentennummer>
+      <vorname>Olivia Melanie</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Duarte Guilherme Pereira Tosca</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129098600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129100400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-907-887</studentennummer>
+      <vorname>Amela</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dübendorfer</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129035600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129037400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-909-982</studentennummer>
+      <vorname>Monika</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dubouloz</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129123800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129125600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-911-632</studentennummer>
+      <vorname>Andrea Ines</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Ducrest</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128951000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128952800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-912-002</studentennummer>
+      <vorname>Yves Adrian</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Duda</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128952800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128954600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-921-649</studentennummer>
+      <vorname>Frederic Martin Alexander</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dunn</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129550400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129551300000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-918-447</studentennummer>
+      <vorname>Pirmin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dunn</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129548600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129550400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-110-145</studentennummer>
+      <vorname>Andrea Rebecca</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dünnenberger</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129541400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129500000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-920-526</studentennummer>
+      <vorname>Maya Oraba</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Dürhammer</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128931200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128933000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-921-607</studentennummer>
+      <vorname>Daniela Gudrun</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Durieux</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129019400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129021200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-175</studentennummer>
+      <vorname>Aileen</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Durisch</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128933000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128934800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-910-262</studentennummer>
+      <vorname>Karin Barbara</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Giesen</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128942000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128943800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-305-299</studentennummer>
+      <vorname>Rahel</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Glanzmann</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129116600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129118400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-907-093</studentennummer>
+      <vorname>Andrea Sibylle</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Glas</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129033800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129035600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-907-440</studentennummer>
+      <vorname>Petra</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Glasl</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129100400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129102200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-909-990</studentennummer>
+      <vorname>Robin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Glatz</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129037400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129039200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-914-255</studentennummer>
+      <vorname>Vanessa</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gmelin</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128952800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128954600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-304-417</studentennummer>
+      <vorname>Gian Carlo</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gmuender</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129096800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129098600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-914-453</studentennummer>
+      <vorname>Miriam</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gnädinger</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129015800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129017600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-915-369</studentennummer>
+      <vorname>Regula</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gnädinger</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129015800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129017600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-916-060</studentennummer>
+      <vorname>Priska Sandra</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gnaegi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129105800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129107600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-921-904</studentennummer>
+      <vorname>Barbara Elfriede</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gnehm</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129021200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129023000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-043</studentennummer>
+      <vorname>Ivan</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gninenko</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129021200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129023000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-183</studentennummer>
+      <vorname>Miriam</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gnos</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129109400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129068000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-902</studentennummer>
+      <vorname>Simone Christina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Godet</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129114800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129116600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-908-993</studentennummer>
+      <vorname>Linda Corinna</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hübner</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129530600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129532400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-911-046</studentennummer>
+      <vorname>Roland</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hüppi</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129037400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129039200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-921-623</studentennummer>
+      <vorname>Isabelle</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Huser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129131000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129132800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-919-197</studentennummer>
+      <vorname>Willi Erich</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Huser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129129200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129131000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-914-438</studentennummer>
+      <vorname>Stefan</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hüser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128954600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128956400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-919-858</studentennummer>
+      <vorname>Cornelia</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Huser Bugmann</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128956400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128958200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-914-982</studentennummer>
+      <vorname>Marco</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Husi</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128954600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128956400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-916-441</studentennummer>
+      <vorname>Valentina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hüssner</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129017600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129019400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-920-542</studentennummer>
+      <vorname>Steven</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hussong</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129019400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129021200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-654</studentennummer>
+      <vorname>Adrienne Reka</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hutter</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128934800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128936600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-191</studentennummer>
+      <vorname>Beatrix Ursula</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hutter</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129536000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129537800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-923-165</studentennummer>
+      <vorname>Barbara</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hütter Carabias</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128958200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128960000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-908-183</studentennummer>
+      <vorname>Peter</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Kutti</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129546800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129548600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-911-609</studentennummer>
+      <vorname>Roland</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>La Marr</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128943800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128945600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-726-353</studentennummer>
+      <vorname>Kathrin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lang</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129118400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129120200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-913-216</studentennummer>
+      <vorname>Mirko Giuliano G.M.</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lang</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129039200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129041000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-910-782</studentennummer>
+      <vorname>Peter Jürgen</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lang</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129100400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129102200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-911-467</studentennummer>
+      <vorname>Stephanie</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lang</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129102200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129104000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-917-050</studentennummer>
+      <vorname>Delphine</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lanners</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129127400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129129200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-918-132</studentennummer>
+      <vorname>Sonja</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lanzi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129107600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129109400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-916-185</studentennummer>
+      <vorname>Marina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lanzini</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129534200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129536000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-209</studentennummer>
+      <vorname>Hedwig Beate</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Lardi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129537800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129539600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>02-601-540</studentennummer>
+      <vorname>Davide</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Latkoczy</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128924000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128925800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-919-504</studentennummer>
+      <vorname>Roland Ernst</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moeller</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129539600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129541400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-906-138</studentennummer>
+      <vorname>Simone</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Monagan-Wong</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129541400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129500000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-916-582</studentennummer>
+      <vorname>Irene</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mora</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129120200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129122000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-926-599</studentennummer>
+      <vorname>Barbara</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moretti</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128947400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128949200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-910-014</studentennummer>
+      <vorname>Arnold</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128949200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128951000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-911-475</studentennummer>
+      <vorname>Christoph Louis</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129123800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129125600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-917-902</studentennummer>
+      <vorname>Jan</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129041000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129042800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-910-790</studentennummer>
+      <vorname>Monika</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128925800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128927600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-912-408</studentennummer>
+      <vorname>Peter Robert</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129125600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129127400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-915-831</studentennummer>
+      <vorname>Ruth</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Moser Welti</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129041000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129042800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-915-005</studentennummer>
+      <vorname>Donatella</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mossi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128929400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128931200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-917-910</studentennummer>
+      <vorname>Lydia Dhanammal</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mossi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128931200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128933000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-917-266</studentennummer>
+      <vorname>Thomas</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mossi</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129107600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129109400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-662</studentennummer>
+      <vorname>Rafal</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mottl</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129023000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128981600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-923-603</studentennummer>
+      <vorname>Petra</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mouttet</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129023000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128981600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-923-702</studentennummer>
+      <vorname>Regula</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mpakali-Poulka</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128934800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128936600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-923-744</studentennummer>
+      <vorname>Regula Marianne</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Mrdak</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129114800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129116600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>94-914-405</studentennummer>
+      <vorname>Aibing</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Ottone</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129028400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129030200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-908-515</studentennummer>
+      <vorname>Jakob</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Ramp</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128936600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128895200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-908-316</studentennummer>
+      <vorname>Olivier Ernst</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rehmann</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129098600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129100400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-916-517</studentennummer>
+      <vorname>Heinrich</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Reinbothe</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128943800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128945600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-919-677</studentennummer>
+      <vorname>Andrea</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Reinhard</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129122000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129123800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-927-035</studentennummer>
+      <vorname>Katharina</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Reisen</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128947400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128949200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-910-808</studentennummer>
+      <vorname>Sibylle</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rensing</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129012200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129014000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-911-483</studentennummer>
+      <vorname>Ulrich Friedrich Edgar</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rentsch</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128951000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128952800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-912-804</studentennummer>
+      <vorname>Marcus</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Requena-Méndez</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128929400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128931200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-918-124</studentennummer>
+      <vorname>Fausta Rita</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rey</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129129200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129131000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-731-007</studentennummer>
+      <vorname>Katia Beatrice</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rey</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129118400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129120200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-921-615</studentennummer>
+      <vorname>Sara Giovanna</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rey</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128958200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128960000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-921-573</studentennummer>
+      <vorname>Sabrina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rezwan</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128933000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128934800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-920-534</studentennummer>
+      <vorname>Sibylle</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rezwan</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129109400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129068000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-918-868</studentennummer>
+      <vorname>Andreas Erwin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Rezzonico</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129042800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129044600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-926-763</studentennummer>
+      <vorname>Susanne</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Schwery</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128924000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128925800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>03-926-938</studentennummer>
+      <vorname>Manuel Renaud</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Schwerzmann</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128925800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128927600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-912-465</studentennummer>
+      <vorname>Michael Günter</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seelos</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129546800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129548600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-913-422</studentennummer>
+      <vorname>Angelika</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seiler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129014000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129015800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-913-430</studentennummer>
+      <vorname>Franziska</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seiler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129014000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129015800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-915-377</studentennummer>
+      <vorname>Karin Ursula</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seiler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129104000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129105800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-716-743</studentennummer>
+      <vorname>Katarina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seiler</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129032000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129033800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-922-951</studentennummer>
+      <vorname>Ingrid</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Seiz</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129537800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129539600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-916-278</studentennummer>
+      <vorname>Osamu</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Tschabold</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129030200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129032000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-917-382</studentennummer>
+      <vorname>Elizabeth K.</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Ulmer</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128945600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128947400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-730-000</studentennummer>
+      <vorname>Rafiqul</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Ungerer</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129539600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129541400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-906-509</studentennummer>
+      <vorname>Dethef Michael</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Urschitz</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128949200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128951000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-911-285</studentennummer>
+      <vorname>Beatrice</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>v. der Heydt</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128927600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128929400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-912-614</studentennummer>
+      <vorname>Paola Annamaria</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Vagliardo</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129039200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129041000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-915-690</studentennummer>
+      <vorname>Kathrin</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Valsecchi</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128956400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128958200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-916-334</studentennummer>
+      <vorname>Maria Cristina</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Valsesia</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129127400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129129200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>02-602-241</studentennummer>
+      <vorname>Urs</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Valtorta</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129116600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129118400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-914-073</studentennummer>
+      <vorname>Aurelia Elisabeth</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Van de Wetering</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129532400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129534200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-913-661</studentennummer>
+      <vorname>Elisabeth</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Van den Berg Jeths</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129532400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129534200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-915-385</studentennummer>
+      <vorname>Stephanie</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Van den Bergh</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129105800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129107600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>98-721-285</studentennummer>
+      <vorname>Willy</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zindel</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129042800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129044600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-925-245</studentennummer>
+      <vorname>Johanna</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zulauf</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129122000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129123800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-910-824</studentennummer>
+      <vorname>Arnold</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zürcher</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129012200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129014000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>01-718-576</studentennummer>
+      <vorname>Paulette</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zürcher</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129096800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129098600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>03-718-194</studentennummer>
+      <vorname>Lili</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Züst</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128895200000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128942000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128943800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-914-974</studentennummer>
+      <vorname>Vreni</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Züst</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129548600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129550400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-914-081</studentennummer>
+      <vorname>Cornelia</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zweiacker</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129104000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129105800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>04-916-052</studentennummer>
+      <vorname>Berta</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zweidler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129017600000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129019400000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>99-708-018</studentennummer>
+      <vorname>Dorothee</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zweidler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129028400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129030200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Fachrichtung BSc</fachrichtung>
+      <studentennummer>04-922-688</studentennummer>
+      <vorname>Walter</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zweig</nachname>
+      <studiengang>Biologie BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129068000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129131000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129132800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>551-0004-01</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Pharmazeutische Wissenschaften BSc</fachrichtung>
+      <studentennummer>02-705-887</studentennummer>
+      <vorname>Sylvia</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Systematische Biologie: Pflanzen I / Systematische Biologie: Pflanzen II</lkEinheitTitel>
+      <lkEinheitTyp>2</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zwimpfer</nachname>
+      <studiengang>Pharmazeutische Wissenschaften BSc</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Jahreskurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128981600000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129010400000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129012200000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>61-080</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Eidgenössisches Staatsexamen</fachrichtung>
+      <studentennummer>02-913-432</studentennummer>
+      <vorname>Markus</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Gerloff-Gasser</nachname>
+      <studiengang>Pharmazeutische Wissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129551300000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129554900000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>61-080</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Eidgenössisches Staatsexamen</fachrichtung>
+      <studentennummer>03-907-250</studentennummer>
+      <vorname>Sonia</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Huber Studer</nachname>
+      <studiengang>Pharmazeutische Wissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129554900000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129558500000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>61-080</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Eidgenössisches Staatsexamen</fachrichtung>
+      <studentennummer>02-724-292</studentennummer>
+      <vorname>Annika</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Hugentobler</nachname>
+      <studiengang>Pharmazeutische Wissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129551300000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129554900000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>61-080</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Eidgenössisches Staatsexamen</fachrichtung>
+      <studentennummer>03-926-821</studentennummer>
+      <vorname>Megumi</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Huittinen</nachname>
+      <studiengang>Pharmazeutische Wissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129558500000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129560300000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>61-080</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Eidgenössisches Staatsexamen</fachrichtung>
+      <studentennummer>03-919-966</studentennummer>
+      <vorname>Monica</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Morattel</nachname>
+      <studiengang>Pharmazeutische Wissenschaften</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129554900000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129558500000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>79-880</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Richtung Grundstudium</fachrichtung>
+      <studentennummer>02-925-139</studentennummer>
+      <vorname>Branko</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bodenmiller</nachname>
+      <studiengang>Biologie</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129560300000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129563900000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>79-880</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Biologische Richtung Grundstudium</fachrichtung>
+      <studentennummer>87-700-639</studentennummer>
+      <vorname>Andreas</vorname>
+      <repetent>true</repetent>
+      <lkEinheitTitel>Syst. Biol. I+II (P)</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Künzli</nachname>
+      <studiengang>Biologie</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129560300000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129563900000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>80-404</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Oekologie und Evolution</fachrichtung>
+      <studentennummer>01-923-226</studentennummer>
+      <vorname>Felix Peter</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Biosystematik</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Blanc</nachname>
+      <studiengang>Biologie</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1129500000000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1129528800000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1129530600000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>80-404</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Oekologie und Evolution</fachrichtung>
+      <studentennummer>02-909-471</studentennummer>
+      <vorname>Tu My</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Biosystematik</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Bleisch</nachname>
+      <studiengang>Biologie</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128290400000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128319200000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128321000000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+    <anmdeldungen>
+      <lkNummer>81-825</lkNummer>
+      <lkForm>1</lkForm>
+      <lkFormText>Sessionsprüfung</lkFormText>
+      <pruefungsmodeText>mündlich</pruefungsmodeText>
+      <fachrichtung>Integrative Biologie</fachrichtung>
+      <studentennummer>01-921-428</studentennummer>
+      <vorname>Susi</vorname>
+      <repetent>false</repetent>
+      <lkEinheitTitel>Biogeographie</lkEinheitTitel>
+      <lkEinheitTyp>1</lkEinheitTyp>
+      <pruefungsraum></pruefungsraum>
+      <nachname>Zenger</nachname>
+      <studiengang>Biologie</studiengang>
+      <email>test.student@rektorat.ethz.ch</email>
+      <seskez>2005H</seskez>
+      <lkEinheitTypText>Semesterkurs</lkEinheitTypText>
+      <pruefungsdatum>
+        <time>1128290400000</time>
+      </pruefungsdatum>
+      <pruefungsdatumVon>
+        <time>1128321000000</time>
+      </pruefungsdatumVon>
+      <pruefungsdatumBis>
+        <time>1128322800000</time>
+      </pruefungsdatumBis>
+    </anmdeldungen>
+  </list>
+</ois>

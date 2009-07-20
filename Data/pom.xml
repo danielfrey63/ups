@@ -32,7 +32,7 @@
                         </manifest>
                         <manifestEntries>
                             <Main-Class>data.Main</Main-Class>
-                            <Build-Version>${project.version}-${buildNumber}</Build-Version>
+                            <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
                         </manifestEntries>
                     </archive>
                 </configuration>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <parent>
+        <groupId>ch.xmatrix.ups.data</groupId>
+        <artifactId>ch.xmatrix.ups.data</artifactId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.ups.data.sessions</groupId>
+    <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
+    <name>Data Exam Sessions</name>
+    <version>SNAPSHOT</version>
+    <description>Pr�fungsinformationen</description>
+</project>

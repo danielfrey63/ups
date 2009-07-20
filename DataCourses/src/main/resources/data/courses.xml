@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252"?>
+
+<courses>
+    <course>
+        <lknr>551-0004-01</lknr>
+        <type>V</type>
+        <title>Systematische Biologie: Pflanzen II (2003)</title>
+    </course>
+    <course>
+        <lknr>551-0004-06</lknr>
+        <type>V</type>
+        <title>Systematische Biologie: Pflanzen II (2006)</title>
+    </course>
+    <!--<course>-->
+        <!--<lknr>551-0301-01</lknr>-->
+        <!--<type>V</type>-->
+        <!--<title>Phylogenie und Systematik I</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>551-0301-02</lknr>-->
+        <!--<type>V</type>-->
+        <!--<title>Phylogenie und Systematik II</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>551-0136-00</lknr>-->
+        <!--<type>G</type>-->
+        <!--<title>AK der Evolution und ?kologie h?herer Pflanzen</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>551-0252-00</lknr>-->
+        <!--<type>G</type>-->
+        <!--<title>Flora, Vegetation und B?den der Alpen</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>551-0004-02</lknr>-->
+        <!--<type>U</type>-->
+        <!--<title>Systematische Biologie: Pflanzen II</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>701-0314-00</lknr>-->
+        <!--<type>P</type>-->
+        <!--<title>Systematische Botanik</title>-->
+    <!--</course>-->
+    <!--<course>-->
+        <!--<lknr>551-0004-05</lknr>-->
+        <!--<type>U</type>-->
+        <!--<title>Systematische Biologie: Botanische Exkursionen</title>-->
+    <!--</course>-->
+</courses>

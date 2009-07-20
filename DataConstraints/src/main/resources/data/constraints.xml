@@ -1,0 +1,4715 @@
+<constraintsModels id="1">
+  <constraintsModel id="3">
+    <description>Vorgaben von Matthias Baltisberger vom Frühling 2003</description>
+    <constraintModel id="5">
+      <name>?hre</name>
+      <minimalCount>2</minimalCount>
+      <string>Agropyron repens</string>
+      <string>Brachypodium</string>
+      <string>Hordeum</string>
+      <string>Lolium</string>
+      <string>Nardus stricta</string>
+      <string>Secale cereale</string>
+      <string>Triticum aestivum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="7">
+      <name>Aceraceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Aceraceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="9">
+      <name>Achillea</name>
+      <minimalCount>1</minimalCount>
+      <string>Achillea</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="11">
+      <name>Adenostyles alliariae</name>
+      <minimalCount>1</minimalCount>
+      <string>Adenostyles alliariae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="13">
+      <name>Ajuga</name>
+      <minimalCount>1</minimalCount>
+      <string>Ajuga</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="15">
+      <name>Alchemilla</name>
+      <minimalCount>1</minimalCount>
+      <string>Alchemilla</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="17">
+      <name>Alle Taxa</name>
+      <minimalCount>300</minimalCount>
+      <string>Alle Taxa</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="19">
+      <name>Alliaria petiolata</name>
+      <minimalCount>1</minimalCount>
+      <string>Alliaria petiolata</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="21">
+      <name>Allium</name>
+      <minimalCount>1</minimalCount>
+      <string>Allium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="23">
+      <name>Alnus</name>
+      <minimalCount>1</minimalCount>
+      <string>Alnus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="25">
+      <name>Alsinoideae</name>
+      <minimalCount>3</minimalCount>
+      <string>Alsinoideae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="27">
+      <name>Amaryllidaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Amaryllidaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="29">
+      <name>Androsace</name>
+      <minimalCount>1</minimalCount>
+      <string>Androsace</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="31">
+      <name>Anemone nemorosa</name>
+      <minimalCount>1</minimalCount>
+      <string>Anemone nemorosa</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="33">
+      <name>Anthyllis vulneraria</name>
+      <minimalCount>1</minimalCount>
+      <string>Anthyllis vulneraria</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="35">
+      <name>Apiaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Apiaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="37">
+      <name>Arabis alpina</name>
+      <minimalCount>1</minimalCount>
+      <string>Arabis alpina</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="39">
+      <name>Arrhenatherum elatius</name>
+      <minimalCount>1</minimalCount>
+      <string>Arrhenatherum elatius</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="41">
+      <name>Artemisia</name>
+      <minimalCount>1</minimalCount>
+      <string>Artemisia</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="43">
+      <name>Arum maculatum</name>
+      <minimalCount>1</minimalCount>
+      <string>Arum maculatum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="45">
+      <name>Asplenium</name>
+      <minimalCount>1</minimalCount>
+      <string>Asplenium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="47">
+      <name>Asteroideae</name>
+      <minimalCount>20</minimalCount>
+      <string>Asteroideae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="49">
+      <name>Betula</name>
+      <minimalCount>1</minimalCount>
+      <string>Betula</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="51">
+      <name>Betulaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Betulaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="53">
+      <name>Boraginaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Boraginaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="55">
+      <name>Brassicaceae</name>
+      <minimalCount>8</minimalCount>
+      <string>Brassicaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="57">
+      <name>Bromus</name>
+      <minimalCount>1</minimalCount>
+      <string>Bromus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="59">
+      <name>Campanulaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Campanulaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="61">
+      <name>Caprifoliaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Caprifoliaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="63">
+      <name>Capsella bursa-pastoris</name>
+      <minimalCount>1</minimalCount>
+      <string>Capsella bursa-pastoris</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="65">
+      <name>Cardamine</name>
+      <minimalCount>1</minimalCount>
+      <string>Cardamine</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="67">
+      <name>Carex Gruppe A</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex davalliana</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="69">
+      <name>Carex Gruppe B</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex curvula</string>
+      <string>Carex spicata</string>
+      <string>Carex echinata</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="71">
+      <name>Carex Gruppe C</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex atrata</string>
+      <string>Carex parviflora</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="73">
+      <name>Carex Gruppe D</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex elata</string>
+      <string>Carex nigra</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="75">
+      <name>Carex Gruppe E</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex caryophyllea</string>
+      <string>Carex digitata</string>
+      <string>Carex hirta</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="77">
+      <name>Carex Gruppe F</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex ferruginea</string>
+      <string>Carex firma</string>
+      <string>Carex flacca</string>
+      <string>Carex flava</string>
+      <string>Carex pallescens</string>
+      <string>Carex panicea</string>
+      <string>Carex sempervirens</string>
+      <string>Carex sylvatica</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="79">
+      <name>Carum carvi</name>
+      <minimalCount>1</minimalCount>
+      <string>Carum carvi</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="81">
+      <name>Caryophyllaceae</name>
+      <minimalCount>10</minimalCount>
+      <string>Caryophyllaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="83">
+      <name>Centaurea</name>
+      <minimalCount>1</minimalCount>
+      <string>Centaurea</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="85">
+      <name>Chenopodium</name>
+      <minimalCount>1</minimalCount>
+      <string>Chenopodium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="87">
+      <name>Cichorioideae</name>
+      <minimalCount>6</minimalCount>
+      <string>Cichorioideae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="89">
+      <name>Crassulaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Crassulaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="91">
+      <name>Crepis</name>
+      <minimalCount>1</minimalCount>
+      <string>Crepis</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="93">
+      <name>Cyperaceae</name>
+      <minimalCount>10</minimalCount>
+      <string>Cyperaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="95">
+      <name>Dianthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Dianthus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="97">
+      <name>Dipsacaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Dipsacaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="99">
+      <name>Disteln</name>
+      <minimalCount>2</minimalCount>
+      <string>Carduus</string>
+      <string>Carlina acaulis</string>
+      <string>Cirsium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="101">
+      <name>Dryas octopetala</name>
+      <minimalCount>1</minimalCount>
+      <string>Dryas octopetala</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="103">
+      <name>Dryopteris filix-mas</name>
+      <minimalCount>1</minimalCount>
+      <string>Dryopteris filix-mas</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="105">
+      <name>Equisetaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Equisetaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="107">
+      <name>Ericaceae</name>
+      <minimalCount>6</minimalCount>
+      <string>Ericaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="109">
+      <name>Eriophorum</name>
+      <minimalCount>1</minimalCount>
+      <string>Eriophorum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="111">
+      <name>Euphorbiaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Euphorbiaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="113">
+      <name>Fabaceae</name>
+      <minimalCount>11</minimalCount>
+      <string>Fabaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="115">
+      <name>Fagus sylvatica</name>
+      <minimalCount>1</minimalCount>
+      <string>Fagus sylvatica</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="117">
+      <name>Festuca</name>
+      <minimalCount>1</minimalCount>
+      <string>Festuca</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="119">
+      <name>Fraxinus excelsior</name>
+      <minimalCount>1</minimalCount>
+      <string>Fraxinus excelsior</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="121">
+      <name>Gentianaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Gentianaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="123">
+      <name>Geraniaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Geraniaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="125">
+      <name>Geum</name>
+      <minimalCount>1</minimalCount>
+      <string>Geum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="127">
+      <name>Glechoma hederacea</name>
+      <minimalCount>1</minimalCount>
+      <string>Glechoma hederacea</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="129">
+      <name>Gymnospermae</name>
+      <minimalCount>6</minimalCount>
+      <string>Gymnospermae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="131">
+      <name>Heracleum sphondylium</name>
+      <minimalCount>1</minimalCount>
+      <string>Heracleum sphondylium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="133">
+      <name>Hieracium</name>
+      <minimalCount>1</minimalCount>
+      <string>Hieracium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="135">
+      <name>Iridaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Iridaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="137">
+      <name>Juncaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Juncaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="139">
+      <name>Juncus</name>
+      <minimalCount>1</minimalCount>
+      <string>Juncus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="141">
+      <name>Juniperus</name>
+      <minimalCount>1</minimalCount>
+      <string>Juniperus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="143">
+      <name>Lamiaceae</name>
+      <minimalCount>8</minimalCount>
+      <string>Lamiaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="145">
+      <name>Lamium</name>
+      <minimalCount>1</minimalCount>
+      <string>Lamium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="147">
+      <name>Larix decidua</name>
+      <minimalCount>1</minimalCount>
+      <string>Larix decidua</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="149">
+      <name>Leontodon</name>
+      <minimalCount>1</minimalCount>
+      <string>Leontodon</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="151">
+      <name>Liliaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Liliaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="153">
+      <name>Lonicera</name>
+      <minimalCount>1</minimalCount>
+      <string>Lonicera</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="155">
+      <name>Lotus corniculatus</name>
+      <minimalCount>1</minimalCount>
+      <string>Lotus corniculatus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="157">
+      <name>Luzula</name>
+      <minimalCount>1</minimalCount>
+      <string>Luzula</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="159">
+      <name>Lycopodiatae</name>
+      <minimalCount>1</minimalCount>
+      <string>Lycopodiatae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="161">
+      <name>Lysimachia nemorum</name>
+      <minimalCount>1</minimalCount>
+      <string>Lysimachia nemorum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="163">
+      <name>Margriten</name>
+      <minimalCount>1</minimalCount>
+      <string>Leucanthemopsis alpina</string>
+      <string>Leucanthemum vulgare</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="165">
+      <name>Melampyrum</name>
+      <minimalCount>1</minimalCount>
+      <string>Melampyrum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="167">
+      <name>Mercurialis perennis</name>
+      <minimalCount>1</minimalCount>
+      <string>Mercurialis perennis</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="169">
+      <name>Myosotis</name>
+      <minimalCount>1</minimalCount>
+      <string>Myosotis</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="171">
+      <name>Onagraceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Onagraceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="173">
+      <name>Orchidaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Orchidaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="175">
+      <name>Paris quadrifolia</name>
+      <minimalCount>1</minimalCount>
+      <string>Paris quadrifolia</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="177">
+      <name>Phyteuma</name>
+      <minimalCount>1</minimalCount>
+      <string>Phyteuma</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="179">
+      <name>Picea abies</name>
+      <minimalCount>1</minimalCount>
+      <string>Picea abies</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="181">
+      <name>Pinus</name>
+      <minimalCount>1</minimalCount>
+      <string>Pinus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="183">
+      <name>Plantaginaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Plantaginaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="185">
+      <name>Poa</name>
+      <minimalCount>1</minimalCount>
+      <string>Poa</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="187">
+      <name>Poaceae</name>
+      <minimalCount>18</minimalCount>
+      <string>Poaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="189">
+      <name>Polygonaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Polygonaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="191">
+      <name>Polygonatum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonatum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="193">
+      <name>Polygonum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="195">
+      <name>Potentilla</name>
+      <minimalCount>2</minimalCount>
+      <string>Potentilla</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="197">
+      <name>Primula</name>
+      <minimalCount>1</minimalCount>
+      <string>Primula</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="199">
+      <name>Primulaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Primulaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="201">
+      <name>Prunus</name>
+      <minimalCount>1</minimalCount>
+      <string>Prunus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="203">
+      <name>Pteridophyta</name>
+      <minimalCount>6</minimalCount>
+      <string>Pteridophyta</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="205">
+      <name>Pulsatilla</name>
+      <minimalCount>1</minimalCount>
+      <string>Pulsatilla</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="207">
+      <name>Quercus</name>
+      <minimalCount>1</minimalCount>
+      <string>Quercus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="209">
+      <name>Ranunculaceae</name>
+      <minimalCount>11</minimalCount>
+      <string>Ranunculaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="211">
+      <name>Ranunculus</name>
+      <minimalCount>3</minimalCount>
+      <string>Ranunculus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="213">
+      <name>Rhinanthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rhinanthus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="215">
+      <name>Rispe mit einbl?tigen ?rchen</name>
+      <minimalCount>1</minimalCount>
+      <string>Agrostis stolonifera</string>
+      <string>Apera spica-venti</string>
+      <string>Calamagrostis varia</string>
+      <string>Milium effusum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="217">
+      <name>Rosaceae</name>
+      <minimalCount>14</minimalCount>
+      <string>Rosaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="219">
+      <name>Rubiaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Rubiaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="221">
+      <name>Rubus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rubus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="223">
+      <name>Rumex</name>
+      <minimalCount>1</minimalCount>
+      <string>Rumex</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="225">
+      <name>Salicaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Salicaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="227">
+      <name>Salix reticulata</name>
+      <minimalCount>1</minimalCount>
+      <string>Salix reticulata</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="229">
+      <name>Sambucus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sambucus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="231">
+      <name>Saxifragaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Saxifragaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="233">
+      <name>Schuppenbl?tter</name>
+      <minimalCount>1</minimalCount>
+      <string>Homogyne alpina</string>
+      <string>Petasites</string>
+      <string>Tussilago farfara</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="235">
+      <name>Scrophulariaceae</name>
+      <minimalCount>9</minimalCount>
+      <string>Scrophulariaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="237">
+      <name>Senecio</name>
+      <minimalCount>1</minimalCount>
+      <string>Senecio</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="239">
+      <name>Silene</name>
+      <minimalCount>1</minimalCount>
+      <string>Silene</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="241">
+      <name>Silenoideae</name>
+      <minimalCount>4</minimalCount>
+      <string>Silenoideae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="243">
+      <name>Solanaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Solanaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="245">
+      <name>Sorbus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sorbus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="247">
+      <name>Taraxacum officinale</name>
+      <minimalCount>1</minimalCount>
+      <string>Taraxacum officinale</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="249">
+      <name>Thymus serpyllum</name>
+      <minimalCount>1</minimalCount>
+      <string>Thymus serpyllum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="251">
+      <name>Trifolium</name>
+      <minimalCount>1</minimalCount>
+      <string>Trifolium</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="253">
+      <name>Trollius europaeus</name>
+      <minimalCount>1</minimalCount>
+      <string>Trollius europaeus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="255">
+      <name>Urtica dioica</name>
+      <minimalCount>1</minimalCount>
+      <string>Urtica dioica</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="257">
+      <name>Vaccinium myrtillus</name>
+      <minimalCount>1</minimalCount>
+      <string>Vaccinium myrtillus</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="259">
+      <name>Valerianaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Valerianaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="261">
+      <name>Veronica</name>
+      <minimalCount>3</minimalCount>
+      <string>Veronica</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="263">
+      <name>Viburnum</name>
+      <minimalCount>1</minimalCount>
+      <string>Viburnum</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="265">
+      <name>Vicia</name>
+      <minimalCount>1</minimalCount>
+      <string>Vicia</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <constraintModel id="267">
+      <name>Violaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Violaceae</string>
+      <constraints reference="3"/>
+    </constraintModel>
+    <defaultList id="269">
+      <string>Lycopodium annotinum</string>
+      <string>Equisetum arvense</string>
+      <string>Asplenium ruta-muraria</string>
+      <string>Asplenium trichomanes</string>
+      <string>Asplenium viride</string>
+      <string>Athyrium filix-femina</string>
+      <string>Dryopteris filix-mas</string>
+      <string>Polypodium vulgare</string>
+      <string>Abies alba</string>
+      <string>Larix decidua</string>
+      <string>Picea abies</string>
+      <string>Pinus cembra</string>
+      <string>Pinus sylvestris</string>
+      <string>Juniperus communis</string>
+      <string>Juniperus nana</string>
+      <string>Juniperus sabina</string>
+      <string>Taxus baccata</string>
+      <string>Berberis vulgaris</string>
+      <string>Aconitum napellus</string>
+      <string>Aconitum vulparia</string>
+      <string>Trollius europaeus</string>
+      <string>Aquilegia vulgaris</string>
+      <string>Ranunculus bulbosus</string>
+      <string>Ranunculus ficaria</string>
+      <string>Ranunculus friesianus</string>
+      <string>Ranunculus repens</string>
+      <string>Ranunculus aconitifolius</string>
+      <string>Ranunculus alpestris</string>
+      <string>Clematis vitalba</string>
+      <string>Anemone nemorosa</string>
+      <string>Pulsatilla apiifolia</string>
+      <string>Pulsatilla vernalis</string>
+      <string>Chelidonium majus</string>
+      <string>Papaver rhoeas</string>
+      <string>Cerastium holosteoides</string>
+      <string>Stellaria media</string>
+      <string>Stellaria nemorum</string>
+      <string>Arenaria biflora</string>
+      <string>Minuartia verna</string>
+      <string>Dianthus carthusianorum</string>
+      <string>Dianthus sylvestris</string>
+      <string>Gypsophila repens</string>
+      <string>Saponaria ocymoides</string>
+      <string>Silene acaulis</string>
+      <string>Silene nutans</string>
+      <string>Silene rupestris</string>
+      <string>Silene vulgaris</string>
+      <string>Silene dioica</string>
+      <string>Chenopodium album</string>
+      <string>Chenopodium bonus-henricus</string>
+      <string>Polygonum viviparum</string>
+      <string>Rumex acetosa</string>
+      <string>Rumex alpinus</string>
+      <string>Rumex obtusifolius</string>
+      <string>Alnus incana</string>
+      <string>Alnus viridis</string>
+      <string>Betula pendula</string>
+      <string>Carpinus betulus</string>
+      <string>Corylus avellana</string>
+      <string>Fagus sylvatica</string>
+      <string>Quercus robur</string>
+      <string>Humulus lupulus</string>
+      <string>Ulmus glabra</string>
+      <string>Urtica dioica</string>
+      <string>Sedum album</string>
+      <string>Sempervivum arachnoideum</string>
+      <string>Saxifraga aizoides</string>
+      <string>Saxifraga androsacea</string>
+      <string>Saxifraga oppositifolia</string>
+      <string>Saxifraga paniculata</string>
+      <string>Saxifraga rotundifolia</string>
+      <string>Saxifraga stellaris</string>
+      <string>Dryas octopetala</string>
+      <string>Geum montanum</string>
+      <string>Geum rivale</string>
+      <string>Potentilla anserina</string>
+      <string>Potentilla aurea</string>
+      <string>Potentilla crantzii</string>
+      <string>Potentilla erecta</string>
+      <string>Sibbaldia procumbens</string>
+      <string>Alchemilla conjuncta</string>
+      <string>Alchemilla vulgaris</string>
+      <string>Fragaria vesca</string>
+      <string>Rosa canina</string>
+      <string>Rubus fruticosus</string>
+      <string>Crataegus monogyna</string>
+      <string>Sorbus aria</string>
+      <string>Sorbus aucuparia</string>
+      <string>Prunus padus</string>
+      <string>Prunus spinosa</string>
+      <string>Medicago lupulina</string>
+      <string>Trifolium alpinum</string>
+      <string>Trifolium pratense</string>
+      <string>Trifolium badium</string>
+      <string>Trifolium montanum</string>
+      <string>Trifolium repens</string>
+      <string>Lotus corniculatus</string>
+      <string>Lathyrus pratensis</string>
+      <string>Vicia cracca</string>
+      <string>Vicia sepium</string>
+      <string>Anthyllis vulneraria</string>
+      <string>Astragalus alpinus</string>
+      <string>Hippocrepis comosa</string>
+      <string>Epilobium angustifolium</string>
+      <string>Acer campestre</string>
+      <string>Acer platanoides</string>
+      <string>Acer pseudoplatanus</string>
+      <string>Erodium cicutarium</string>
+      <string>Geranium robertianum</string>
+      <string>Geranium sanguineum</string>
+      <string>Geranium sylvaticum</string>
+      <string>Polygala chamaebuxus</string>
+      <string>Euphorbia cyparissias</string>
+      <string>Mercurialis perennis</string>
+      <string>Carum carvi</string>
+      <string>Ligusticum mutellina</string>
+      <string>Anthriscus sylvestris</string>
+      <string>Aegopodium podagraria</string>
+      <string>Heracleum sphondylium</string>
+      <string>Peucedanum ostruthium</string>
+      <string>Helianthemum ovatum</string>
+      <string>Viola biflora</string>
+      <string>Viola reichenbachiana</string>
+      <string>Viola calcarata</string>
+      <string>Viola tricolor</string>
+      <string>Alliaria petiolata</string>
+      <string>Arabidopsis thaliana</string>
+      <string>Arabis alpina</string>
+      <string>Cardamine pratensis</string>
+      <string>Cardamine resedifolia</string>
+      <string>Biscutella levigata</string>
+      <string>Capsella bursa-pastoris</string>
+      <string>Thlaspi arvense</string>
+      <string>Draba aizoides</string>
+      <string>Populus tremula</string>
+      <string>Salix alba</string>
+      <string>Salix caprea</string>
+      <string>Salix herbacea</string>
+      <string>Salix reticulata</string>
+      <string>Lysimachia nemorum</string>
+      <string>Androsace chamaejasme</string>
+      <string>Androsace alpina</string>
+      <string>Primula elatior</string>
+      <string>Primula farinosa</string>
+      <string>Primula hirsuta</string>
+      <string>Soldanella alpina</string>
+      <string>Arctostaphylos uva-ursi</string>
+      <string>Calluna vulgaris</string>
+      <string>Erica carnea</string>
+      <string>Loiseleuria procumbens</string>
+      <string>Rhododendron ferrugineum</string>
+      <string>Vaccinium myrtillus</string>
+      <string>Vaccinium uliginosum</string>
+      <string>Vaccinium vitis-idaea</string>
+      <string>Lonicera caerulea</string>
+      <string>Lonicera xylosteum</string>
+      <string>Sambucus nigra</string>
+      <string>Sambucus racemosa</string>
+      <string>Viburnum lantana</string>
+      <string>Knautia arvensis</string>
+      <string>Valeriana tripteris</string>
+      <string>Fraxinus excelsior</string>
+      <string>Vincetoxicum hirundinaria</string>
+      <string>Gentiana acaulis</string>
+      <string>Gentiana clusii</string>
+      <string>Gentiana verna</string>
+      <string>Gentiana campestris</string>
+      <string>Galium album</string>
+      <string>Galium anisophyllum</string>
+      <string>Galium aparine</string>
+      <string>Galium odoratum</string>
+      <string>Atropa belladonna</string>
+      <string>Echium vulgare</string>
+      <string>Myosotis alpestris</string>
+      <string>Globularia cordifolia</string>
+      <string>Orobanche alba</string>
+      <string>Plantago alpina</string>
+      <string>Plantago lanceolata</string>
+      <string>Plantago major</string>
+      <string>Plantago media</string>
+      <string>Veronica chamaedrys</string>
+      <string>Veronica bellidioides</string>
+      <string>Veronica filiformis</string>
+      <string>Veronica fruticans</string>
+      <string>Linaria alpina</string>
+      <string>Bartsia alpina</string>
+      <string>Euphrasia rostkoviana</string>
+      <string>Melampyrum sylvaticum</string>
+      <string>Pedicularis verticillata</string>
+      <string>Rhinanthus alectorolophus</string>
+      <string>Ajuga pyramidalis</string>
+      <string>Ajuga reptans</string>
+      <string>Glechoma hederacea</string>
+      <string>Acinos alpinus</string>
+      <string>Lamium maculatum</string>
+      <string>Lamium montanum</string>
+      <string>Lamium purpureum</string>
+      <string>Prunella vulgaris</string>
+      <string>Salvia pratensis</string>
+      <string>Stachys recta</string>
+      <string>Origanum vulgare</string>
+      <string>Thymus serpyllum</string>
+      <string>Campanula barbata</string>
+      <string>Campanula cochleariifolia</string>
+      <string>Campanula rhomboidalis</string>
+      <string>Phyteuma hemisphaericum</string>
+      <string>Phyteuma orbiculare</string>
+      <string>Phyteuma spicatum</string>
+      <string>Carduus defloratus</string>
+      <string>Cirsium spinosissimum</string>
+      <string>Homogyne alpina</string>
+      <string>Petasites hybridus</string>
+      <string>Tussilago farfara</string>
+      <string>Adenostyles alliariae</string>
+      <string>Antennaria dioica</string>
+      <string>Artemisia absinthium</string>
+      <string>Artemisia vulgaris</string>
+      <string>Centaurea jacea</string>
+      <string>Centaurea scabiosa</string>
+      <string>Leontopodium alpinum</string>
+      <string>Arnica montana</string>
+      <string>Doronicum grandiflorum</string>
+      <string>Senecio doronicum</string>
+      <string>Senecio incanus</string>
+      <string>Senecio vulgaris</string>
+      <string>Achillea atrata</string>
+      <string>Achillea millefolium</string>
+      <string>Achillea moschata</string>
+      <string>Aster alpinus</string>
+      <string>Aster bellidiastrum</string>
+      <string>Bellis perennis</string>
+      <string>Leucanthemopsis alpina</string>
+      <string>Leucanthemum vulgare</string>
+      <string>Crepis aurea</string>
+      <string>Crepis biennis</string>
+      <string>Hieracium murorum</string>
+      <string>Hieracium pilosella</string>
+      <string>Hieracium villosum</string>
+      <string>Taraxacum officinale</string>
+      <string>Leontodon helveticus</string>
+      <string>Leontodon hispidus</string>
+      <string>Tragopogon orientalis</string>
+      <string>Galanthus nivalis</string>
+      <string>Crocus albiflorus</string>
+      <string>Iris pseudacorus</string>
+      <string>Allium ursinum</string>
+      <string>Paris quadrifolia</string>
+      <string>Veratrum lobelianum</string>
+      <string>Colchicum autumnale</string>
+      <string>Convallaria majalis</string>
+      <string>Polygonatum multiflorum</string>
+      <string>Polygonatum odoratum</string>
+      <string>Gymnadenia conopsea</string>
+      <string>Nigritella nigra</string>
+      <string>Listera ovata</string>
+      <string>Neottia nidus-avis</string>
+      <string>Juncus alpinoarticulatus</string>
+      <string>Juncus inflexus</string>
+      <string>Luzula campestris</string>
+      <string>Luzula sylvatica</string>
+      <string>Eriophorum latifolium</string>
+      <string>Eriophorum scheuchzeri</string>
+      <string>Trichophorum caespitosum</string>
+      <string>Carex davalliana</string>
+      <string>Carex curvula</string>
+      <string>Carex spicata</string>
+      <string>Carex parviflora</string>
+      <string>Carex nigra</string>
+      <string>Carex hirta</string>
+      <string>Carex flacca</string>
+      <string>Carex flava</string>
+      <string>Carex sempervirens</string>
+      <string>Carex sylvatica</string>
+      <string>Arrhenatherum elatius</string>
+      <string>Briza media</string>
+      <string>Bromus erectus</string>
+      <string>Bromus hordeaceus</string>
+      <string>Bromus sterilis</string>
+      <string>Dactylis glomerata</string>
+      <string>Festuca pratensis</string>
+      <string>Festuca valesiaca</string>
+      <string>Helictotrichon pubescens</string>
+      <string>Holcus lanatus</string>
+      <string>Phragmites australis</string>
+      <string>Poa alpina</string>
+      <string>Poa annua</string>
+      <string>Poa pratensis</string>
+      <string>Poa trivialis</string>
+      <string>Trisetum flavescens</string>
+      <string>Milium effusum</string>
+      <string>Hordeum murinum</string>
+      <string>Lolium perenne</string>
+      <string>Lolium multiflorum</string>
+      <string>Nardus stricta</string>
+      <string>Alopecurus pratensis</string>
+      <string>Anthoxantum odoratum</string>
+      <string>Melica nutans</string>
+      <string>Phleum pratense</string>
+      <string>Sesleria caerulea</string>
+      <string>Arum maculatum</string>
+    </defaultList>
+    <index id="270">
+      <entry>
+        <string>Fabaceae</string>
+        <constraintModel reference="113"/>
+      </entry>
+      <entry>
+        <string>Bromus</string>
+        <constraintModel reference="57"/>
+      </entry>
+      <entry>
+        <string>Brachypodium</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Pinus</string>
+        <constraintModel reference="181"/>
+      </entry>
+      <entry>
+        <string>Melampyrum</string>
+        <constraintModel reference="165"/>
+      </entry>
+      <entry>
+        <string>Poa</string>
+        <constraintModel reference="185"/>
+      </entry>
+      <entry>
+        <string>Adenostyles alliariae</string>
+        <constraintModel reference="11"/>
+      </entry>
+      <entry>
+        <string>Violaceae</string>
+        <constraintModel reference="267"/>
+      </entry>
+      <entry>
+        <string>Solanaceae</string>
+        <constraintModel reference="243"/>
+      </entry>
+      <entry>
+        <string>Carex digitata</string>
+        <constraintModel reference="75"/>
+      </entry>
+      <entry>
+        <string>Mercurialis perennis</string>
+        <constraintModel reference="167"/>
+      </entry>
+      <entry>
+        <string>Prunus</string>
+        <constraintModel reference="201"/>
+      </entry>
+      <entry>
+        <string>Brassicaceae</string>
+        <constraintModel reference="55"/>
+      </entry>
+      <entry>
+        <string>Carex flacca</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Alchemilla</string>
+        <constraintModel reference="15"/>
+      </entry>
+      <entry>
+        <string>Carex elata</string>
+        <constraintModel reference="73"/>
+      </entry>
+      <entry>
+        <string>Salix reticulata</string>
+        <constraintModel reference="227"/>
+      </entry>
+      <entry>
+        <string>Betulaceae</string>
+        <constraintModel reference="51"/>
+      </entry>
+      <entry>
+        <string>Leontodon</string>
+        <constraintModel reference="149"/>
+      </entry>
+      <entry>
+        <string>Orchidaceae</string>
+        <constraintModel reference="173"/>
+      </entry>
+      <entry>
+        <string>Ajuga</string>
+        <constraintModel reference="13"/>
+      </entry>
+      <entry>
+        <string>Juniperus</string>
+        <constraintModel reference="141"/>
+      </entry>
+      <entry>
+        <string>Chenopodium</string>
+        <constraintModel reference="85"/>
+      </entry>
+      <entry>
+        <string>Leucanthemum vulgare</string>
+        <constraintModel reference="163"/>
+      </entry>
+      <entry>
+        <string>Lolium</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Lysimachia nemorum</string>
+        <constraintModel reference="161"/>
+      </entry>
+      <entry>
+        <string>Heracleum sphondylium</string>
+        <constraintModel reference="131"/>
+      </entry>
+      <entry>
+        <string>Taraxacum officinale</string>
+        <constraintModel reference="247"/>
+      </entry>
+      <entry>
+        <string>Euphorbiaceae</string>
+        <constraintModel reference="111"/>
+      </entry>
+      <entry>
+        <string>Carum carvi</string>
+        <constraintModel reference="79"/>
+      </entry>
+      <entry>
+        <string>Carex curvula</string>
+        <constraintModel reference="69"/>
+      </entry>
+      <entry>
+        <string>Polygonaceae</string>
+        <constraintModel reference="189"/>
+      </entry>
+      <entry>
+        <string>Paris quadrifolia</string>
+        <constraintModel reference="175"/>
+      </entry>
+      <entry>
+        <string>Lonicera</string>
+        <constraintModel reference="153"/>
+      </entry>
+      <entry>
+        <string>Veronica</string>
+        <constraintModel reference="261"/>
+      </entry>
+      <entry>
+        <string>Salicaceae</string>
+        <constraintModel reference="225"/>
+      </entry>
+      <entry>
+        <string>Calamagrostis varia</string>
+        <constraintModel reference="215"/>
+      </entry>
+      <entry>
+        <string>Aceraceae</string>
+        <constraintModel reference="7"/>
+      </entry>
+      <entry>
+        <string>Viburnum</string>
+        <constraintModel reference="263"/>
+      </entry>
+      <entry>
+        <string>Carlina acaulis</string>
+        <constraintModel reference="99"/>
+      </entry>
+      <entry>
+        <string>Carex firma</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Boraginaceae</string>
+        <constraintModel reference="53"/>
+      </entry>
+      <entry>
+        <string>Homogyne alpina</string>
+        <constraintModel reference="233"/>
+      </entry>
+      <entry>
+        <string>Asplenium</string>
+        <constraintModel reference="45"/>
+      </entry>
+      <entry>
+        <string>Silenoideae</string>
+        <constraintModel reference="241"/>
+      </entry>
+      <entry>
+        <string>Androsace</string>
+        <constraintModel reference="29"/>
+      </entry>
+      <entry>
+        <string>Carduus</string>
+        <constraintModel reference="99"/>
+      </entry>
+      <entry>
+        <string>Allium</string>
+        <constraintModel reference="21"/>
+      </entry>
+      <entry>
+        <string>Carex ferruginea</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Carex echinata</string>
+        <constraintModel reference="69"/>
+      </entry>
+      <entry>
+        <string>Urtica dioica</string>
+        <constraintModel reference="255"/>
+      </entry>
+      <entry>
+        <string>Ranunculaceae</string>
+        <constraintModel reference="209"/>
+      </entry>
+      <entry>
+        <string>Gentianaceae</string>
+        <constraintModel reference="121"/>
+      </entry>
+      <entry>
+        <string>Alliaria petiolata</string>
+        <constraintModel reference="19"/>
+      </entry>
+      <entry>
+        <string>Ranunculus</string>
+        <constraintModel reference="211"/>
+      </entry>
+      <entry>
+        <string>Agrostis stolonifera</string>
+        <constraintModel reference="215"/>
+      </entry>
+      <entry>
+        <string>Arum maculatum</string>
+        <constraintModel reference="43"/>
+      </entry>
+      <entry>
+        <string>Valerianaceae</string>
+        <constraintModel reference="259"/>
+      </entry>
+      <entry>
+        <string>Arabis alpina</string>
+        <constraintModel reference="37"/>
+      </entry>
+      <entry>
+        <string>Carex caryophyllea</string>
+        <constraintModel reference="75"/>
+      </entry>
+      <entry>
+        <string>Dianthus</string>
+        <constraintModel reference="95"/>
+      </entry>
+      <entry>
+        <string>Festuca</string>
+        <constraintModel reference="117"/>
+      </entry>
+      <entry>
+        <string>Rhinanthus</string>
+        <constraintModel reference="213"/>
+      </entry>
+      <entry>
+        <string>Rosaceae</string>
+        <constraintModel reference="217"/>
+      </entry>
+      <entry>
+        <string>Iridaceae</string>
+        <constraintModel reference="135"/>
+      </entry>
+      <entry>
+        <string>Crassulaceae</string>
+        <constraintModel reference="89"/>
+      </entry>
+      <entry>
+        <string>Luzula</string>
+        <constraintModel reference="157"/>
+      </entry>
+      <entry>
+        <string>Silene</string>
+        <constraintModel reference="239"/>
+      </entry>
+      <entry>
+        <string>Scrophulariaceae</string>
+        <constraintModel reference="235"/>
+      </entry>
+      <entry>
+        <string>Lotus corniculatus</string>
+        <constraintModel reference="155"/>
+      </entry>
+      <entry>
+        <string>Equisetaceae</string>
+        <constraintModel reference="105"/>
+      </entry>
+      <entry>
+        <string>Dryopteris filix-mas</string>
+        <constraintModel reference="103"/>
+      </entry>
+      <entry>
+        <string>Saxifragaceae</string>
+        <constraintModel reference="231"/>
+      </entry>
+      <entry>
+        <string>Caprifoliaceae</string>
+        <constraintModel reference="61"/>
+      </entry>
+      <entry>
+        <string>Crepis</string>
+        <constraintModel reference="91"/>
+      </entry>
+      <entry>
+        <string>Plantaginaceae</string>
+        <constraintModel reference="183"/>
+      </entry>
+      <entry>
+        <string>Vicia</string>
+        <constraintModel reference="265"/>
+      </entry>
+      <entry>
+        <string>Hordeum</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Phyteuma</string>
+        <constraintModel reference="177"/>
+      </entry>
+      <entry>
+        <string>Dipsacaceae</string>
+        <constraintModel reference="97"/>
+      </entry>
+      <entry>
+        <string>Myosotis</string>
+        <constraintModel reference="169"/>
+      </entry>
+      <entry>
+        <string>Thymus serpyllum</string>
+        <constraintModel reference="249"/>
+      </entry>
+      <entry>
+        <string>Rumex</string>
+        <constraintModel reference="223"/>
+      </entry>
+      <entry>
+        <string>Betula</string>
+        <constraintModel reference="49"/>
+      </entry>
+      <entry>
+        <string>Carex parviflora</string>
+        <constraintModel reference="71"/>
+      </entry>
+      <entry>
+        <string>Triticum aestivum</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Poaceae</string>
+        <constraintModel reference="187"/>
+      </entry>
+      <entry>
+        <string>Carex davalliana</string>
+        <constraintModel reference="67"/>
+      </entry>
+      <entry>
+        <string>Trollius europaeus</string>
+        <constraintModel reference="253"/>
+      </entry>
+      <entry>
+        <string>Carex sempervirens</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Anthyllis vulneraria</string>
+        <constraintModel reference="33"/>
+      </entry>
+      <entry>
+        <string>Apiaceae</string>
+        <constraintModel reference="35"/>
+      </entry>
+      <entry>
+        <string>Geum</string>
+        <constraintModel reference="125"/>
+      </entry>
+      <entry>
+        <string>Cyperaceae</string>
+        <constraintModel reference="93"/>
+      </entry>
+      <entry>
+        <string>Carex pallescens</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Fagus sylvatica</string>
+        <constraintModel reference="115"/>
+      </entry>
+      <entry>
+        <string>Carex nigra</string>
+        <constraintModel reference="73"/>
+      </entry>
+      <entry>
+        <string>Quercus</string>
+        <constraintModel reference="207"/>
+      </entry>
+      <entry>
+        <string>Agropyron repens</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Liliaceae</string>
+        <constraintModel reference="151"/>
+      </entry>
+      <entry>
+        <string>Onagraceae</string>
+        <constraintModel reference="171"/>
+      </entry>
+      <entry>
+        <string>Lamium</string>
+        <constraintModel reference="145"/>
+      </entry>
+      <entry>
+        <string>Hieracium</string>
+        <constraintModel reference="133"/>
+      </entry>
+      <entry>
+        <string>Ericaceae</string>
+        <constraintModel reference="107"/>
+      </entry>
+      <entry>
+        <string>Centaurea</string>
+        <constraintModel reference="83"/>
+      </entry>
+      <entry>
+        <string>Cirsium</string>
+        <constraintModel reference="99"/>
+      </entry>
+      <entry>
+        <string>Cardamine</string>
+        <constraintModel reference="65"/>
+      </entry>
+      <entry>
+        <string>Primulaceae</string>
+        <constraintModel reference="199"/>
+      </entry>
+      <entry>
+        <string>Petasites</string>
+        <constraintModel reference="233"/>
+      </entry>
+      <entry>
+        <string>Achillea</string>
+        <constraintModel reference="9"/>
+      </entry>
+      <entry>
+        <string>Juncaceae</string>
+        <constraintModel reference="137"/>
+      </entry>
+      <entry>
+        <string>Amaryllidaceae</string>
+        <constraintModel reference="27"/>
+      </entry>
+      <entry>
+        <string>Alnus</string>
+        <constraintModel reference="23"/>
+      </entry>
+      <entry>
+        <string>Rubus</string>
+        <constraintModel reference="221"/>
+      </entry>
+      <entry>
+        <string>Pulsatilla</string>
+        <constraintModel reference="205"/>
+      </entry>
+      <entry>
+        <string>Potentilla</string>
+        <constraintModel reference="195"/>
+      </entry>
+      <entry>
+        <string>Larix decidua</string>
+        <constraintModel reference="147"/>
+      </entry>
+      <entry>
+        <string>Asteroideae</string>
+        <constraintModel reference="47"/>
+      </entry>
+      <entry>
+        <string>Milium effusum</string>
+        <constraintModel reference="215"/>
+      </entry>
+      <entry>
+        <string>Juncus</string>
+        <constraintModel reference="139"/>
+      </entry>
+      <entry>
+        <string>Glechoma hederacea</string>
+        <constraintModel reference="127"/>
+      </entry>
+      <entry>
+        <string>Sambucus</string>
+        <constraintModel reference="229"/>
+      </entry>
+      <entry>
+        <string>Alle Taxa</string>
+        <constraintModel reference="17"/>
+      </entry>
+      <entry>
+        <string>Primula</string>
+        <constraintModel reference="197"/>
+      </entry>
+      <entry>
+        <string>Trifolium</string>
+        <constraintModel reference="251"/>
+      </entry>
+      <entry>
+        <string>Polygonatum</string>
+        <constraintModel reference="191"/>
+      </entry>
+      <entry>
+        <string>Caryophyllaceae</string>
+        <constraintModel reference="81"/>
+      </entry>
+      <entry>
+        <string>Senecio</string>
+        <constraintModel reference="237"/>
+      </entry>
+      <entry>
+        <string>Nardus stricta</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Capsella bursa-pastoris</string>
+        <constraintModel reference="63"/>
+      </entry>
+      <entry>
+        <string>Gymnospermae</string>
+        <constraintModel reference="129"/>
+      </entry>
+      <entry>
+        <string>Sorbus</string>
+        <constraintModel reference="245"/>
+      </entry>
+      <entry>
+        <string>Lamiaceae</string>
+        <constraintModel reference="143"/>
+      </entry>
+      <entry>
+        <string>Pteridophyta</string>
+        <constraintModel reference="203"/>
+      </entry>
+      <entry>
+        <string>Carex spicata</string>
+        <constraintModel reference="69"/>
+      </entry>
+      <entry>
+        <string>Alsinoideae</string>
+        <constraintModel reference="25"/>
+      </entry>
+      <entry>
+        <string>Apera spica-venti</string>
+        <constraintModel reference="215"/>
+      </entry>
+      <entry>
+        <string>Vaccinium myrtillus</string>
+        <constraintModel reference="257"/>
+      </entry>
+      <entry>
+        <string>Eriophorum</string>
+        <constraintModel reference="109"/>
+      </entry>
+      <entry>
+        <string>Cichorioideae</string>
+        <constraintModel reference="87"/>
+      </entry>
+      <entry>
+        <string>Arrhenatherum elatius</string>
+        <constraintModel reference="39"/>
+      </entry>
+      <entry>
+        <string>Anemone nemorosa</string>
+        <constraintModel reference="31"/>
+      </entry>
+      <entry>
+        <string>Secale cereale</string>
+        <constraintModel reference="5"/>
+      </entry>
+      <entry>
+        <string>Carex panicea</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Lycopodiatae</string>
+        <constraintModel reference="159"/>
+      </entry>
+      <entry>
+        <string>Carex flava</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Carex sylvatica</string>
+        <constraintModel reference="77"/>
+      </entry>
+      <entry>
+        <string>Tussilago farfara</string>
+        <constraintModel reference="233"/>
+      </entry>
+      <entry>
+        <string>Picea abies</string>
+        <constraintModel reference="179"/>
+      </entry>
+      <entry>
+        <string>Carex hirta</string>
+        <constraintModel reference="75"/>
+      </entry>
+      <entry>
+        <string>Campanulaceae</string>
+        <constraintModel reference="59"/>
+      </entry>
+      <entry>
+        <string>Artemisia</string>
+        <constraintModel reference="41"/>
+      </entry>
+      <entry>
+        <string>Polygonum</string>
+        <constraintModel reference="193"/>
+      </entry>
+      <entry>
+        <string>Leucanthemopsis alpina</string>
+        <constraintModel reference="163"/>
+      </entry>
+      <entry>
+        <string>Fraxinus excelsior</string>
+        <constraintModel reference="119"/>
+      </entry>
+      <entry>
+        <string>Rubiaceae</string>
+        <constraintModel reference="219"/>
+      </entry>
+      <entry>
+        <string>Geraniaceae</string>
+        <constraintModel reference="123"/>
+      </entry>
+      <entry>
+        <string>Carex atrata</string>
+        <constraintModel reference="71"/>
+      </entry>
+      <entry>
+        <string>Dryas octopetala</string>
+        <constraintModel reference="101"/>
+      </entry>
+    </index>
+    <name>Vorgaben Frühling 2003</name>
+    <uid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</uid>
+    <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+    <modified id="271">2005-08-24 00:13:16.478 CEST</modified>
+    <fixed>true</fixed>
+  </constraintsModel>
+  <constraintsModel id="272">
+    <description>Vorgaben von Matthias Baltisberger ab Herbst 2007</description>
+    <constraintModel id="274">
+      <name>3 Teilblätter</name>
+      <minimalCount>1</minimalCount>
+      <string>Medicago</string>
+      <string>Melilotus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="276">
+      <name>Aceraceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Aceraceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="278">
+      <name>Ähre</name>
+      <minimalCount>2</minimalCount>
+      <string>Agropyron repens</string>
+      <string>Brachypodium</string>
+      <string>Hordeum</string>
+      <string>Lolium</string>
+      <string>Nardus stricta</string>
+      <string>Secale cereale</string>
+      <string>Triticum aestivum</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="280">
+      <name>Alle Taxa</name>
+      <minimalCount>200</minimalCount>
+      <string>Alle Taxa</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="282">
+      <name>Allium</name>
+      <minimalCount>1</minimalCount>
+      <string>Allium</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="284">
+      <name>Alnus</name>
+      <minimalCount>1</minimalCount>
+      <string>Alnus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="286">
+      <name>Alsinoideae</name>
+      <minimalCount>1</minimalCount>
+      <string>Alsinoideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="288">
+      <name>Anthyllis vulneraria</name>
+      <minimalCount>1</minimalCount>
+      <string>Anthyllis vulneraria</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="290">
+      <name>Araliales</name>
+      <minimalCount>4</minimalCount>
+      <string>Araliales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="292">
+      <name>Artemisia</name>
+      <minimalCount>1</minimalCount>
+      <string>Artemisia</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="294">
+      <name>Asplenium</name>
+      <minimalCount>1</minimalCount>
+      <string>Asplenium</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="296">
+      <name>Asteroideae</name>
+      <minimalCount>11</minimalCount>
+      <string>Asteroideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="298">
+      <name>Betulaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Betulaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="300">
+      <name>Blätter fein geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Carum carvi</string>
+      <string>Daucus carota</string>
+      <string>Ligusticum mutellina</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="302">
+      <name>Blätter grob geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Aegopodium podagraria</string>
+      <string>Astrantia major</string>
+      <string>Heracleum</string>
+      <string>Peucedanum ostruthium</string>
+      <string>Sanicula europaea</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="304">
+      <name>Blätter mittelfein geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Chaerophyllum villarsii</string>
+      <string>Anthriscus sylvestris</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="306">
+      <name>blau, klein</name>
+      <minimalCount>1</minimalCount>
+      <string>Glechoma hederacea</string>
+      <string>Ajuga</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="308">
+      <name>Boraginaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Boraginaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="310">
+      <name>Brassicaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Brassicaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="312">
+      <name>Bromus</name>
+      <minimalCount>1</minimalCount>
+      <string>Bromus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="314">
+      <name>Campanulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Campanulaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="316">
+      <name>Caprifoliaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Caprifoliaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="318">
+      <name>Capsella bursa-pastoris</name>
+      <minimalCount>1</minimalCount>
+      <string>Capsella bursa-pastoris</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="320">
+      <name>Cardamine</name>
+      <minimalCount>1</minimalCount>
+      <string>Cardamine</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="322">
+      <name>Carex Gruppe B</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex curvula</string>
+      <string>Carex spicata</string>
+      <string>Carex echinata</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="324">
+      <name>Carex Gruppe D</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex elata</string>
+      <string>Carex nigra</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="326">
+      <name>Carex Gruppe E</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex caryophyllea</string>
+      <string>Carex digitata</string>
+      <string>Carex hirta</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="328">
+      <name>Carex Gruppe F</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex ferruginea</string>
+      <string>Carex firma</string>
+      <string>Carex flacca</string>
+      <string>Carex flava</string>
+      <string>Carex pallescens</string>
+      <string>Carex panicea</string>
+      <string>Carex sempervirens</string>
+      <string>Carex sylvatica</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="330">
+      <name>Caryophyllaceae</name>
+      <minimalCount>7</minimalCount>
+      <string>Caryophyllaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="332">
+      <name>Centaurea</name>
+      <minimalCount>1</minimalCount>
+      <string>Centaurea</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="334">
+      <name>Cichorioideae</name>
+      <minimalCount>3</minimalCount>
+      <string>Cichorioideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="336">
+      <name>Crassulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Crassulaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="338">
+      <name>Cupressaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Cupressaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="340">
+      <name>Cyperaceae</name>
+      <minimalCount>6</minimalCount>
+      <string>Cyperaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="342">
+      <name>Cyperaceae (nicht Carex)</name>
+      <minimalCount>1</minimalCount>
+      <string>Eriophorum</string>
+      <string>Schoenus ferrugineus</string>
+      <string>Scirpus sylvaticus</string>
+      <string>Trichophorum caespitosum</string>
+      <string>Elyna myosuroides</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="344">
+      <name>Dactylis glomerata</name>
+      <minimalCount>1</minimalCount>
+      <string>Dactylis glomerata</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="346">
+      <name>Dianthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Dianthus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="348">
+      <name>Dipsacaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Dipsacaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="350">
+      <name>Dryopteridaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Dryopteridaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="352">
+      <name>Equisetaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Equisetaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="354">
+      <name>Ericales</name>
+      <minimalCount>2</minimalCount>
+      <string>Ericales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="356">
+      <name>Fabales</name>
+      <minimalCount>8</minimalCount>
+      <string>Fabales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="358">
+      <name>Fagus sylvatica</name>
+      <minimalCount>1</minimalCount>
+      <string>Fagus sylvatica</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="360">
+      <name>Festuca</name>
+      <minimalCount>1</minimalCount>
+      <string>Festuca</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="362">
+      <name>Gentianales</name>
+      <minimalCount>3</minimalCount>
+      <string>Gentianales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="364">
+      <name>Geraniaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Geraniaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="366">
+      <name>Geum</name>
+      <minimalCount>1</minimalCount>
+      <string>Geum</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="368">
+      <name>Gymnospermae</name>
+      <minimalCount>4</minimalCount>
+      <string>Gymnospermae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="370">
+      <name>Habitus</name>
+      <minimalCount>2</minimalCount>
+      <string>Alopecurus pratensis</string>
+      <string>Anthoxantum odoratum</string>
+      <string>Cynosurus cristatus</string>
+      <string>Melica nutans</string>
+      <string>Phleum pratense</string>
+      <string>Sesleria caerulea</string>
+      <string>Stipa pennata</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="372">
+      <name>Hieracium</name>
+      <minimalCount>1</minimalCount>
+      <string>Hieracium</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="374">
+      <name>Juncaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Juncaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="376">
+      <name>Juncus</name>
+      <minimalCount>1</minimalCount>
+      <string>Juncus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="378">
+      <name>Lamiales</name>
+      <minimalCount>5</minimalCount>
+      <string>Lamiales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="380">
+      <name>Lamium</name>
+      <minimalCount>1</minimalCount>
+      <string>Lamium</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="382">
+      <name>Liliaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Liliaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="384">
+      <name>Liliales</name>
+      <minimalCount>6</minimalCount>
+      <string>Liliales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="386">
+      <name>Lonicera</name>
+      <minimalCount>1</minimalCount>
+      <string>Lonicera</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="388">
+      <name>Lotus corniculatus</name>
+      <minimalCount>1</minimalCount>
+      <string>Lotus corniculatus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="390">
+      <name>Luzula</name>
+      <minimalCount>1</minimalCount>
+      <string>Luzula</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="392">
+      <name>Maloideae</name>
+      <minimalCount>2</minimalCount>
+      <string>Maloideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="394">
+      <name>Margriten</name>
+      <minimalCount>1</minimalCount>
+      <string>Bellis perennis</string>
+      <string>Leucanthemopsis alpina</string>
+      <string>Leucanthemum vulgare</string>
+      <string>Aster</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="396">
+      <name>mit Honigblättern</name>
+      <minimalCount>1</minimalCount>
+      <string>Aconitum</string>
+      <string>Aquilegia vulgaris</string>
+      <string>Helleborus foetidus</string>
+      <string>Trollius europaeus</string>
+      <string>Consolida regalis</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="398">
+      <name>mit Ranke</name>
+      <minimalCount>1</minimalCount>
+      <string>Vicia</string>
+      <string>Lathyrus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="400">
+      <name>ohne Honigblätter</name>
+      <minimalCount>1</minimalCount>
+      <string>Caltha palustris</string>
+      <string>Clematis vitalba</string>
+      <string>Pulsatilla</string>
+      <string>Anemone</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="402">
+      <name>Orchidaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Orchidaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="404">
+      <name>Picea abies</name>
+      <minimalCount>1</minimalCount>
+      <string>Picea abies</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="406">
+      <name>Pinus</name>
+      <minimalCount>1</minimalCount>
+      <string>Pinus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="408">
+      <name>Plantaginaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Plantaginaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="410">
+      <name>Poa</name>
+      <minimalCount>1</minimalCount>
+      <string>Poa</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="412">
+      <name>Poaceae</name>
+      <minimalCount>12</minimalCount>
+      <string>Poaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="414">
+      <name>Polygonatum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonatum</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="416">
+      <name>Polygonum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonum</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="418">
+      <name>Potentilla</name>
+      <minimalCount>1</minimalCount>
+      <string>Potentilla</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="420">
+      <name>Primulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Primulaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="422">
+      <name>Prunoideae</name>
+      <minimalCount>1</minimalCount>
+      <string>Prunoideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="424">
+      <name>Pteridophyta</name>
+      <minimalCount>4</minimalCount>
+      <string>Pteridophyta</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="426">
+      <name>Quercus</name>
+      <minimalCount>1</minimalCount>
+      <string>Quercus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="428">
+      <name>Ranunculaceae</name>
+      <minimalCount>6</minimalCount>
+      <string>Ranunculaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="430">
+      <name>Ranunculus</name>
+      <minimalCount>3</minimalCount>
+      <string>Ranunculus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="432">
+      <name>Rhinanthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rhinanthus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="434">
+      <name>Rispe</name>
+      <minimalCount>3</minimalCount>
+      <string>Arrhenatherum elatius</string>
+      <string>Avena sativa</string>
+      <string>Briza media</string>
+      <string>Deschampsia caespitosa</string>
+      <string>Helictotrichon pubescens</string>
+      <string>Holcus lanatus</string>
+      <string>Molinia caerulea</string>
+      <string>Trisetum flavescens</string>
+      <string>Phragmites australis</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="436">
+      <name>Rosaceae</name>
+      <minimalCount>10</minimalCount>
+      <string>Rosaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="438">
+      <name>Rubiaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Rubiaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="440">
+      <name>Rubus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rubus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="442">
+      <name>Rumex</name>
+      <minimalCount>1</minimalCount>
+      <string>Rumex</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="444">
+      <name>Salicaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Salicaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="446">
+      <name>Sambucus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sambucus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="448">
+      <name>Scrophulariaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Scrophulariaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="450">
+      <name>Scrophulariales</name>
+      <minimalCount>8</minimalCount>
+      <string>Scrophulariales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="452">
+      <name>Silene</name>
+      <minimalCount>1</minimalCount>
+      <string>Silene</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="454">
+      <name>Silenoideae</name>
+      <minimalCount>4</minimalCount>
+      <string>Silenoideae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="456">
+      <name>Solanales</name>
+      <minimalCount>1</minimalCount>
+      <string>Solanales</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="458">
+      <name>Sorbus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sorbus</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="460">
+      <name>Taraxacum officinale</name>
+      <minimalCount>1</minimalCount>
+      <string>Taraxacum officinale</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="462">
+      <name>Trifolium</name>
+      <minimalCount>1</minimalCount>
+      <string>Trifolium</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="464">
+      <name>Urtica dioica</name>
+      <minimalCount>1</minimalCount>
+      <string>Urtica dioica</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="466">
+      <name>Vaccinium</name>
+      <minimalCount>1</minimalCount>
+      <string>Vaccinium myrtillus</string>
+      <string>Vaccinium uliginosum</string>
+      <string>Vaccinium vitis-idaea</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="468">
+      <name>Valerianaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Valerianaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="470">
+      <name>Veronica</name>
+      <minimalCount>3</minimalCount>
+      <string>Veronica</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="472">
+      <name>Viburnum</name>
+      <minimalCount>1</minimalCount>
+      <string>Viburnum</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <constraintModel id="474">
+      <name>Violaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Violaceae</string>
+      <constraints reference="272"/>
+    </constraintModel>
+    <defaultList id="476">
+      <string>Picea abies</string>
+      <string>Fagus sylvatica</string>
+      <string>Urtica dioica</string>
+      <string>Lotus corniculatus</string>
+      <string>Anthyllis vulneraria</string>
+      <string>Capsella bursa-pastoris</string>
+      <string>Taraxacum officinale</string>
+      <string>Dactylis glomerata</string>
+      <string>Dactylis glomerata</string>
+      <string>Equisetum arvense</string>
+      <string>Asplenium trichomanes</string>
+      <string>Athyrium filix-femina</string>
+      <string>Dryopteris filix-mas</string>
+      <string>Pinus sylvestris</string>
+      <string>Larix decidua</string>
+      <string>Juniperus communis</string>
+      <string>Paris quadrifolia</string>
+      <string>Colchicum autumnale</string>
+      <string>Polygonatum multiflorum</string>
+      <string>Allium ursinum</string>
+      <string>Iris pseudacorus</string>
+      <string>Neottia nidus-avis</string>
+      <string>Dactylorhiza maculata</string>
+      <string>Juncus inflexus</string>
+      <string>Luzula sylvatica</string>
+      <string>Carex spicata</string>
+      <string>Carex elata</string>
+      <string>Carex hirta</string>
+      <string>Carex flacca</string>
+      <string>Carex sylvatica</string>
+      <string>Bromus erectus</string>
+      <string>Festuca valesiaca</string>
+      <string>Arrhenatherum elatius</string>
+      <string>Holcus lanatus</string>
+      <string>Poa pratensis</string>
+      <string>Lolium perenne</string>
+      <string>Hordeum murinum</string>
+      <string>Alopecurus pratensis</string>
+      <string>Sesleria caerulea</string>
+      <string>Phragmites australis</string>
+      <string>Aquilegia vulgaris</string>
+      <string>Anemone nemorosa</string>
+      <string>Ranunculus ficaria</string>
+      <string>Ranunculus friesianus</string>
+      <string>Ranunculus bulbosus</string>
+      <string>Ranunculus repens</string>
+      <string>Stellaria nemorum</string>
+      <string>Dianthus sylvestris</string>
+      <string>Silene vulgaris</string>
+      <string>Silene dioica</string>
+      <string>Silene nutans</string>
+      <string>Dianthus carthusianorum</string>
+      <string>Cerastium holosteoides</string>
+      <string>Polygonum bistorta</string>
+      <string>Rumex acetosa</string>
+      <string>Alnus glutinosa</string>
+      <string>Carpinus betulus</string>
+      <string>Corylus avellana</string>
+      <string>Quercus robur</string>
+      <string>Sempervivum arachnoideum</string>
+      <string>Prunus spinosa</string>
+      <string>Sorbus aucuparia</string>
+      <string>Crataegus monogyna</string>
+      <string>Geum rivale</string>
+      <string>Potentilla anserina</string>
+      <string>Rubus fruticosus</string>
+      <string>Potentilla reptans</string>
+      <string>Fragaria vesca</string>
+      <string>Alchemilla vulgaris</string>
+      <string>Rosa canina</string>
+      <string>Trifolium pratense</string>
+      <string>Vicia sepium</string>
+      <string>Hippocrepis comosa</string>
+      <string>Trifolium repens</string>
+      <string>Lathyrus pratensis</string>
+      <string>Acer pseudoplatanus</string>
+      <string>Erodium cicutarium</string>
+      <string>Geranium robertianum</string>
+      <string>Geranium sylvaticum</string>
+      <string>Carum carvi</string>
+      <string>Anthriscus sylvestris</string>
+      <string>Heracleum sphondylium</string>
+      <string>Hedera helix</string>
+      <string>Viola reichenbachiana</string>
+      <string>Viola tricolor</string>
+      <string>Cardamine pratensis</string>
+      <string>Alliaria petiolata</string>
+      <string>Arabidopsis thaliana</string>
+      <string>Cardamine hirsuta</string>
+      <string>Populus tremula</string>
+      <string>Salix caprea</string>
+      <string>Salix alba</string>
+      <string>Lysimachia nemorum</string>
+      <string>Vaccinium myrtillus</string>
+      <string>Erica carnea</string>
+      <string>Knautia arvensis</string>
+      <string>Valeriana officinalis</string>
+      <string>Lonicera xylosteum</string>
+      <string>Sambucus nigra</string>
+      <string>Viburnum lantana</string>
+      <string>Lonicera caerulea</string>
+      <string>Vinca minor</string>
+      <string>Galium odoratum</string>
+      <string>Galium aparine</string>
+      <string>Atropa belladonna</string>
+      <string>Pulmonaria obscura</string>
+      <string>Plantago lanceolata</string>
+      <string>Plantago major</string>
+      <string>Rhinanthus alectorolophus</string>
+      <string>Veronica chamaedrys</string>
+      <string>Veronica filiformis</string>
+      <string>Veronica beccabunga</string>
+      <string>Veronica persica</string>
+      <string>Ajuga reptans</string>
+      <string>Lamium maculatum</string>
+      <string>Salvia pratensis</string>
+      <string>Lamium montanum</string>
+      <string>Glechoma hederacea</string>
+      <string>Phyteuma spicatum</string>
+      <string>Hieracium murorum</string>
+      <string>Tragopogon orientalis</string>
+      <string>Artemisia vulgaris</string>
+      <string>Centaurea jacea</string>
+      <string>Bellis perennis</string>
+      <string>Artemisia absinthium</string>
+      <string>Senecio vulgaris</string>
+      <string>Achillea millefolium</string>
+      <string>Leucanthemum vulgare</string>
+      <string>Centaurea scabiosa</string>
+      <string>Tussilago farfara</string>
+      <string>Artemisia campestris</string>
+      <string>Centaurea montana</string>
+      <string>Equisetum telmateia</string>
+      <string>Abies alba</string>
+      <string>Juniperus sabina</string>
+      <string>Taxus baccata</string>
+      <string>Convallaria majalis</string>
+      <string>Polygonatum odoratum</string>
+      <string>Carex flava</string>
+      <string>Bromus sterilis</string>
+      <string>Poa annua</string>
+      <string>Stipa pennata</string>
+      <string>Chelidonium majus</string>
+      <string>Betula pendula</string>
+      <string>Ulmus glabra</string>
+      <string>Sorbus aria</string>
+      <string>Trifolium montanum</string>
+      <string>Vicia cracca</string>
+      <string>Medicago lupulina</string>
+      <string>Acer campestre</string>
+      <string>Acer platanoides</string>
+      <string>Geranium pyrenaicum</string>
+      <string>Geranium sanguineum</string>
+      <string>Oxalis acetosella</string>
+      <string>Euonymus europaea</string>
+      <string>Mercurialis perennis</string>
+      <string>Euphorbia cyparissias</string>
+      <string>Helianthemum ovatum</string>
+      <string>Salix purpurea</string>
+      <string>Primula elatior</string>
+      <string>Ilex aquifolium</string>
+      <string>Vaccinium vitis-idaea</string>
+      <string>Valerianella locusta</string>
+      <string>Fraxinus excelsior</string>
+      <string>Galium album</string>
+      <string>Solanum dulcamara</string>
+      <string>Echium vulgare</string>
+      <string>Globularia cordifolia</string>
+      <string>Lamium purpureum</string>
+      <string>Campanula rotundifolia</string>
+      <string>Crepis biennis</string>
+      <string>Hieracium pilosella</string>
+      <string>Lycopodium annotinum</string>
+      <string>Humulus lupulus</string>
+      <string>Equisetum hyemale</string>
+      <string>Berberis vulgaris</string>
+      <string>Trollius europaeus</string>
+      <string>Cerastium strictum</string>
+      <string>Saponaria ocymoides</string>
+      <string>Silene flos-cuculi</string>
+      <string>Chenopodium bonus-henricus</string>
+      <string>Juglans regia</string>
+      <string>Prunus avium</string>
+      <string>Cornus sanguinea</string>
+      <string>Sambucus racemosa</string>
+      <string>Lonicera alpigena</string>
+      <string>Juncus effusus</string>
+      <string>Arum maculatum</string>
+      <string>Briza media</string>
+      <string>Cynosurus cristatus</string>
+      <string>Eriophorum latifolium</string>
+      <string>Plantago media</string>
+      <string>Pinus mugo</string>
+      <string>Geum urbanum</string>
+      <string>Thymus serpyllum</string>
+      <string>Melica nutans</string>
+      <string>Prunus padus</string>
+      <string>Onobrychis viciifolia</string>
+      <string>Aegopodium podagraria</string>
+      <string>Reynoutria japonica</string>
+      <string>Vincetoxicum hirundinaria</string>
+    </defaultList>
+    <index id="477">
+      <entry>
+        <string>Vaccinium uliginosum</string>
+        <constraintModel reference="466"/>
+      </entry>
+      <entry>
+        <string>Melica nutans</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Heracleum</string>
+        <constraintModel reference="302"/>
+      </entry>
+      <entry>
+        <string>Bromus</string>
+        <constraintModel reference="312"/>
+      </entry>
+      <entry>
+        <string>Gentianales</string>
+        <constraintModel reference="362"/>
+      </entry>
+      <entry>
+        <string>Brachypodium</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Pinus</string>
+        <constraintModel reference="406"/>
+      </entry>
+      <entry>
+        <string>Holcus lanatus</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Poa</string>
+        <constraintModel reference="410"/>
+      </entry>
+      <entry>
+        <string>Violaceae</string>
+        <constraintModel reference="474"/>
+      </entry>
+      <entry>
+        <string>Carex digitata</string>
+        <constraintModel reference="326"/>
+      </entry>
+      <entry>
+        <string>Brassicaceae</string>
+        <constraintModel reference="310"/>
+      </entry>
+      <entry>
+        <string>Molinia caerulea</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Anthoxantum odoratum</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Bellis perennis</string>
+        <constraintModel reference="394"/>
+      </entry>
+      <entry>
+        <string>Carex flacca</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Daucus carota</string>
+        <constraintModel reference="300"/>
+      </entry>
+      <entry>
+        <string>Phragmites australis</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Carex elata</string>
+        <constraintModel reference="324"/>
+      </entry>
+      <entry>
+        <string>Betulaceae</string>
+        <constraintModel reference="298"/>
+      </entry>
+      <entry>
+        <string>Cupressaceae</string>
+        <constraintModel reference="338"/>
+      </entry>
+      <entry>
+        <string>Orchidaceae</string>
+        <constraintModel reference="402"/>
+      </entry>
+      <entry>
+        <string>Ajuga</string>
+        <constraintModel reference="306"/>
+      </entry>
+      <entry>
+        <string>Leucanthemum vulgare</string>
+        <constraintModel reference="394"/>
+      </entry>
+      <entry>
+        <string>Astrantia major</string>
+        <constraintModel reference="302"/>
+      </entry>
+      <entry>
+        <string>Prunoideae</string>
+        <constraintModel reference="422"/>
+      </entry>
+      <entry>
+        <string>Lolium</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Ericales</string>
+        <constraintModel reference="354"/>
+      </entry>
+      <entry>
+        <string>Aegopodium podagraria</string>
+        <constraintModel reference="302"/>
+      </entry>
+      <entry>
+        <string>Trichophorum caespitosum</string>
+        <constraintModel reference="342"/>
+      </entry>
+      <entry>
+        <string>Taraxacum officinale</string>
+        <constraintModel reference="460"/>
+      </entry>
+      <entry>
+        <string>Fabales</string>
+        <constraintModel reference="356"/>
+      </entry>
+      <entry>
+        <string>Carum carvi</string>
+        <constraintModel reference="300"/>
+      </entry>
+      <entry>
+        <string>Carex curvula</string>
+        <constraintModel reference="322"/>
+      </entry>
+      <entry>
+        <string>Lonicera</string>
+        <constraintModel reference="386"/>
+      </entry>
+      <entry>
+        <string>Clematis vitalba</string>
+        <constraintModel reference="400"/>
+      </entry>
+      <entry>
+        <string>Veronica</string>
+        <constraintModel reference="470"/>
+      </entry>
+      <entry>
+        <string>Salicaceae</string>
+        <constraintModel reference="444"/>
+      </entry>
+      <entry>
+        <string>Lathyrus</string>
+        <constraintModel reference="398"/>
+      </entry>
+      <entry>
+        <string>Aceraceae</string>
+        <constraintModel reference="276"/>
+      </entry>
+      <entry>
+        <string>Viburnum</string>
+        <constraintModel reference="472"/>
+      </entry>
+      <entry>
+        <string>Boraginaceae</string>
+        <constraintModel reference="308"/>
+      </entry>
+      <entry>
+        <string>Carex firma</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Elyna myosuroides</string>
+        <constraintModel reference="342"/>
+      </entry>
+      <entry>
+        <string>Helictotrichon pubescens</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Silenoideae</string>
+        <constraintModel reference="454"/>
+      </entry>
+      <entry>
+        <string>Asplenium</string>
+        <constraintModel reference="294"/>
+      </entry>
+      <entry>
+        <string>Liliales</string>
+        <constraintModel reference="384"/>
+      </entry>
+      <entry>
+        <string>Peucedanum ostruthium</string>
+        <constraintModel reference="302"/>
+      </entry>
+      <entry>
+        <string>Carex echinata</string>
+        <constraintModel reference="322"/>
+      </entry>
+      <entry>
+        <string>Allium</string>
+        <constraintModel reference="282"/>
+      </entry>
+      <entry>
+        <string>Carex ferruginea</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Dryopteridaceae</string>
+        <constraintModel reference="350"/>
+      </entry>
+      <entry>
+        <string>Urtica dioica</string>
+        <constraintModel reference="464"/>
+      </entry>
+      <entry>
+        <string>Ranunculaceae</string>
+        <constraintModel reference="428"/>
+      </entry>
+      <entry>
+        <string>Schoenus ferrugineus</string>
+        <constraintModel reference="342"/>
+      </entry>
+      <entry>
+        <string>Ranunculus</string>
+        <constraintModel reference="430"/>
+      </entry>
+      <entry>
+        <string>Valerianaceae</string>
+        <constraintModel reference="468"/>
+      </entry>
+      <entry>
+        <string>Carex caryophyllea</string>
+        <constraintModel reference="326"/>
+      </entry>
+      <entry>
+        <string>Dianthus</string>
+        <constraintModel reference="346"/>
+      </entry>
+      <entry>
+        <string>Rosaceae</string>
+        <constraintModel reference="436"/>
+      </entry>
+      <entry>
+        <string>Rhinanthus</string>
+        <constraintModel reference="432"/>
+      </entry>
+      <entry>
+        <string>Festuca</string>
+        <constraintModel reference="360"/>
+      </entry>
+      <entry>
+        <string>Trisetum flavescens</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Crassulaceae</string>
+        <constraintModel reference="336"/>
+      </entry>
+      <entry>
+        <string>Luzula</string>
+        <constraintModel reference="390"/>
+      </entry>
+      <entry>
+        <string>Silene</string>
+        <constraintModel reference="452"/>
+      </entry>
+      <entry>
+        <string>Scrophulariaceae</string>
+        <constraintModel reference="448"/>
+      </entry>
+      <entry>
+        <string>Caltha palustris</string>
+        <constraintModel reference="400"/>
+      </entry>
+      <entry>
+        <string>Lotus corniculatus</string>
+        <constraintModel reference="388"/>
+      </entry>
+      <entry>
+        <string>Melilotus</string>
+        <constraintModel reference="274"/>
+      </entry>
+      <entry>
+        <string>Equisetaceae</string>
+        <constraintModel reference="352"/>
+      </entry>
+      <entry>
+        <string>Caprifoliaceae</string>
+        <constraintModel reference="316"/>
+      </entry>
+      <entry>
+        <string>Plantaginaceae</string>
+        <constraintModel reference="408"/>
+      </entry>
+      <entry>
+        <string>Briza media</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Vicia</string>
+        <constraintModel reference="398"/>
+      </entry>
+      <entry>
+        <string>Helleborus foetidus</string>
+        <constraintModel reference="396"/>
+      </entry>
+      <entry>
+        <string>Hordeum</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Avena sativa</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Dipsacaceae</string>
+        <constraintModel reference="348"/>
+      </entry>
+      <entry>
+        <string>Araliales</string>
+        <constraintModel reference="290"/>
+      </entry>
+      <entry>
+        <string>Rumex</string>
+        <constraintModel reference="442"/>
+      </entry>
+      <entry>
+        <string>Medicago</string>
+        <constraintModel reference="274"/>
+      </entry>
+      <entry>
+        <string>Triticum aestivum</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Poaceae</string>
+        <constraintModel reference="412"/>
+      </entry>
+      <entry>
+        <string>Trollius europaeus</string>
+        <constraintModel reference="396"/>
+      </entry>
+      <entry>
+        <string>Anthyllis vulneraria</string>
+        <constraintModel reference="288"/>
+      </entry>
+      <entry>
+        <string>Carex sempervirens</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Geum</string>
+        <constraintModel reference="366"/>
+      </entry>
+      <entry>
+        <string>Cyperaceae</string>
+        <constraintModel reference="340"/>
+      </entry>
+      <entry>
+        <string>Carex pallescens</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Fagus sylvatica</string>
+        <constraintModel reference="358"/>
+      </entry>
+      <entry>
+        <string>Quercus</string>
+        <constraintModel reference="426"/>
+      </entry>
+      <entry>
+        <string>Carex nigra</string>
+        <constraintModel reference="324"/>
+      </entry>
+      <entry>
+        <string>Agropyron repens</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Liliaceae</string>
+        <constraintModel reference="382"/>
+      </entry>
+      <entry>
+        <string>Lamium</string>
+        <constraintModel reference="380"/>
+      </entry>
+      <entry>
+        <string>Hieracium</string>
+        <constraintModel reference="372"/>
+      </entry>
+      <entry>
+        <string>Aster</string>
+        <constraintModel reference="394"/>
+      </entry>
+      <entry>
+        <string>Centaurea</string>
+        <constraintModel reference="332"/>
+      </entry>
+      <entry>
+        <string>Aquilegia vulgaris</string>
+        <constraintModel reference="396"/>
+      </entry>
+      <entry>
+        <string>Primulaceae</string>
+        <constraintModel reference="420"/>
+      </entry>
+      <entry>
+        <string>Cardamine</string>
+        <constraintModel reference="320"/>
+      </entry>
+      <entry>
+        <string>Sesleria caerulea</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Aconitum</string>
+        <constraintModel reference="396"/>
+      </entry>
+      <entry>
+        <string>Juncaceae</string>
+        <constraintModel reference="374"/>
+      </entry>
+      <entry>
+        <string>Solanales</string>
+        <constraintModel reference="456"/>
+      </entry>
+      <entry>
+        <string>Consolida regalis</string>
+        <constraintModel reference="396"/>
+      </entry>
+      <entry>
+        <string>Alnus</string>
+        <constraintModel reference="284"/>
+      </entry>
+      <entry>
+        <string>Rubus</string>
+        <constraintModel reference="440"/>
+      </entry>
+      <entry>
+        <string>Potentilla</string>
+        <constraintModel reference="418"/>
+      </entry>
+      <entry>
+        <string>Pulsatilla</string>
+        <constraintModel reference="400"/>
+      </entry>
+      <entry>
+        <string>Asteroideae</string>
+        <constraintModel reference="296"/>
+      </entry>
+      <entry>
+        <string>Glechoma hederacea</string>
+        <constraintModel reference="306"/>
+      </entry>
+      <entry>
+        <string>Juncus</string>
+        <constraintModel reference="376"/>
+      </entry>
+      <entry>
+        <string>Sambucus</string>
+        <constraintModel reference="446"/>
+      </entry>
+      <entry>
+        <string>Alle Taxa</string>
+        <constraintModel reference="280"/>
+      </entry>
+      <entry>
+        <string>Trifolium</string>
+        <constraintModel reference="462"/>
+      </entry>
+      <entry>
+        <string>Polygonatum</string>
+        <constraintModel reference="414"/>
+      </entry>
+      <entry>
+        <string>Caryophyllaceae</string>
+        <constraintModel reference="330"/>
+      </entry>
+      <entry>
+        <string>Capsella bursa-pastoris</string>
+        <constraintModel reference="318"/>
+      </entry>
+      <entry>
+        <string>Sanicula europaea</string>
+        <constraintModel reference="302"/>
+      </entry>
+      <entry>
+        <string>Nardus stricta</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Scrophulariales</string>
+        <constraintModel reference="450"/>
+      </entry>
+      <entry>
+        <string>Dactylis glomerata</string>
+        <constraintModel reference="344"/>
+      </entry>
+      <entry>
+        <string>Gymnospermae</string>
+        <constraintModel reference="368"/>
+      </entry>
+      <entry>
+        <string>Sorbus</string>
+        <constraintModel reference="458"/>
+      </entry>
+      <entry>
+        <string>Pteridophyta</string>
+        <constraintModel reference="424"/>
+      </entry>
+      <entry>
+        <string>Carex spicata</string>
+        <constraintModel reference="322"/>
+      </entry>
+      <entry>
+        <string>Alsinoideae</string>
+        <constraintModel reference="286"/>
+      </entry>
+      <entry>
+        <string>Vaccinium vitis-idaea</string>
+        <constraintModel reference="466"/>
+      </entry>
+      <entry>
+        <string>Vaccinium myrtillus</string>
+        <constraintModel reference="466"/>
+      </entry>
+      <entry>
+        <string>Eriophorum</string>
+        <constraintModel reference="342"/>
+      </entry>
+      <entry>
+        <string>Cichorioideae</string>
+        <constraintModel reference="334"/>
+      </entry>
+      <entry>
+        <string>Scirpus sylvaticus</string>
+        <constraintModel reference="342"/>
+      </entry>
+      <entry>
+        <string>Stipa pennata</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Arrhenatherum elatius</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Maloideae</string>
+        <constraintModel reference="392"/>
+      </entry>
+      <entry>
+        <string>Chaerophyllum villarsii</string>
+        <constraintModel reference="304"/>
+      </entry>
+      <entry>
+        <string>Secale cereale</string>
+        <constraintModel reference="278"/>
+      </entry>
+      <entry>
+        <string>Carex panicea</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Anemone</string>
+        <constraintModel reference="400"/>
+      </entry>
+      <entry>
+        <string>Alopecurus pratensis</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Carex flava</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Carex sylvatica</string>
+        <constraintModel reference="328"/>
+      </entry>
+      <entry>
+        <string>Phleum pratense</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Picea abies</string>
+        <constraintModel reference="404"/>
+      </entry>
+      <entry>
+        <string>Deschampsia caespitosa</string>
+        <constraintModel reference="434"/>
+      </entry>
+      <entry>
+        <string>Polygonum</string>
+        <constraintModel reference="416"/>
+      </entry>
+      <entry>
+        <string>Campanulaceae</string>
+        <constraintModel reference="314"/>
+      </entry>
+      <entry>
+        <string>Artemisia</string>
+        <constraintModel reference="292"/>
+      </entry>
+      <entry>
+        <string>Carex hirta</string>
+        <constraintModel reference="326"/>
+      </entry>
+      <entry>
+        <string>Lamiales</string>
+        <constraintModel reference="378"/>
+      </entry>
+      <entry>
+        <string>Leucanthemopsis alpina</string>
+        <constraintModel reference="394"/>
+      </entry>
+      <entry>
+        <string>Cynosurus cristatus</string>
+        <constraintModel reference="370"/>
+      </entry>
+      <entry>
+        <string>Rubiaceae</string>
+        <constraintModel reference="438"/>
+      </entry>
+      <entry>
+        <string>Anthriscus sylvestris</string>
+        <constraintModel reference="304"/>
+      </entry>
+      <entry>
+        <string>Geraniaceae</string>
+        <constraintModel reference="364"/>
+      </entry>
+      <entry>
+        <string>Ligusticum mutellina</string>
+        <constraintModel reference="300"/>
+      </entry>
+    </index>
+    <name>Vorgaben Herbst 2007</name>
+    <uid>C1C9624E-F35B-1C2C-62A7-A5F266ECFF8F</uid>
+    <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+    <modified id="478">2007-05-11 17:27:16.243 CEST</modified>
+    <fixed>true</fixed>
+  </constraintsModel>
+  <constraintsModel id="1272">
+    <description>Vorgaben von Matthias Baltisberger ab Herbst 2007 ohne Fixarten</description>
+    <constraintModel id="1274">
+      <name>&quot;Margriten&quot;</name>
+      <minimalCount>1</minimalCount>
+      <string>Bellis perennis</string>
+      <string>Leucanthemopsis alpina</string>
+      <string>Leucanthemum vulgare</string>
+      <string>Aster</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1276">
+      <name>3 Teilblätter</name>
+      <minimalCount>1</minimalCount>
+      <string>Medicago</string>
+      <string>Melilotus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1278">
+      <name>Aceraceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Aceraceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1280">
+      <name>Ähre</name>
+      <minimalCount>2</minimalCount>
+      <string>Agropyron repens</string>
+      <string>Brachypodium</string>
+      <string>Hordeum</string>
+      <string>Lolium</string>
+      <string>Nardus stricta</string>
+      <string>Secale cereale</string>
+      <string>Triticum aestivum</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1282">
+      <name>Alle Taxa</name>
+      <minimalCount>200</minimalCount>
+      <string>Alle Taxa</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1284">
+      <name>Allium</name>
+      <minimalCount>1</minimalCount>
+      <string>Allium</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1286">
+      <name>Alnus</name>
+      <minimalCount>1</minimalCount>
+      <string>Alnus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1288">
+      <name>Alsinoideae</name>
+      <minimalCount>1</minimalCount>
+      <string>Alsinoideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1290">
+      <name>Araliales</name>
+      <minimalCount>4</minimalCount>
+      <string>Araliales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1292">
+      <name>Artemisia</name>
+      <minimalCount>1</minimalCount>
+      <string>Artemisia</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1294">
+      <name>Asplenium</name>
+      <minimalCount>1</minimalCount>
+      <string>Asplenium</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1296">
+      <name>Asteroideae</name>
+      <minimalCount>11</minimalCount>
+      <string>Asteroideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1298">
+      <name>Betulaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Betulaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1300">
+      <name>Blätter fein geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Carum carvi</string>
+      <string>Daucus carota</string>
+      <string>Ligusticum mutellina</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1302">
+      <name>Blätter grob geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Aegopodium podagraria</string>
+      <string>Astrantia major</string>
+      <string>Heracleum</string>
+      <string>Peucedanum ostruthium</string>
+      <string>Sanicula europaea</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1304">
+      <name>Blättermittelfein geteilt</name>
+      <minimalCount>1</minimalCount>
+      <string>Chaerophyllum villarsii</string>
+      <string>Anthriscus sylvestris</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1306">
+      <name>blau, klein</name>
+      <minimalCount>1</minimalCount>
+      <string>Glechoma hederacea</string>
+      <string>Ajuga</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1308">
+      <name>Boraginaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Boraginaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1310">
+      <name>Brassicaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Brassicaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1312">
+      <name>Bromus</name>
+      <minimalCount>1</minimalCount>
+      <string>Bromus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1314">
+      <name>Campanulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Campanulaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1316">
+      <name>Caprifoliaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Caprifoliaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1318">
+      <name>Cardamine</name>
+      <minimalCount>1</minimalCount>
+      <string>Cardamine</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1320">
+      <name>Carex Gruppe B</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex curvula</string>
+      <string>Carex spicata</string>
+      <string>Carex echinata</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1322">
+      <name>Carex Gruppe D</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex elata</string>
+      <string>Carex nigra</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1324">
+      <name>Carex Gruppe E</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex caryophyllea</string>
+      <string>Carex digitata</string>
+      <string>Carex hirta</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1326">
+      <name>Carex Gruppe F</name>
+      <minimalCount>1</minimalCount>
+      <string>Carex ferruginea</string>
+      <string>Carex firma</string>
+      <string>Carex flacca</string>
+      <string>Carex flava</string>
+      <string>Carex pallescens</string>
+      <string>Carex panicea</string>
+      <string>Carex sempervirens</string>
+      <string>Carex sylvatica</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1328">
+      <name>Caryophyllaceae</name>
+      <minimalCount>7</minimalCount>
+      <string>Caryophyllaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1330">
+      <name>Centaurea</name>
+      <minimalCount>1</minimalCount>
+      <string>Centaurea</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1332">
+      <name>Cichorioideae</name>
+      <minimalCount>3</minimalCount>
+      <string>Cichorioideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1334">
+      <name>Crassulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Crassulaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1336">
+      <name>Cupressaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Cupressaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1338">
+      <name>Cyperaceae</name>
+      <minimalCount>6</minimalCount>
+      <string>Cyperaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1340">
+      <name>Cyperaceae (nicht Carex)</name>
+      <minimalCount>1</minimalCount>
+      <string>Eriophorum</string>
+      <string>Schoenus ferrugineus</string>
+      <string>Scirpus sylvaticus</string>
+      <string>Trichophorum caespitosum</string>
+      <string>Elyna myosuroides</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1342">
+      <name>Dianthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Dianthus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1344">
+      <name>Dipsacaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Dipsacaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1346">
+      <name>Dryopteridaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Dryopteridaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1348">
+      <name>Equisetaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Equisetaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1350">
+      <name>Ericales</name>
+      <minimalCount>2</minimalCount>
+      <string>Ericales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1352">
+      <name>Fabales</name>
+      <minimalCount>8</minimalCount>
+      <string>Fabales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1354">
+      <name>Festuca</name>
+      <minimalCount>1</minimalCount>
+      <string>Festuca</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1356">
+      <name>Gentianales</name>
+      <minimalCount>3</minimalCount>
+      <string>Gentianales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1358">
+      <name>Geraniaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Geraniaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1360">
+      <name>Geum</name>
+      <minimalCount>1</minimalCount>
+      <string>Geum</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1362">
+      <name>Gymnospermae</name>
+      <minimalCount>4</minimalCount>
+      <string>Gymnospermae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1364">
+      <name>Habitus</name>
+      <minimalCount>2</minimalCount>
+      <string>Alopecurus pratensis</string>
+      <string>Anthoxantum odoratum</string>
+      <string>Cynosurus cristatus</string>
+      <string>Melica nutans</string>
+      <string>Phleum pratense</string>
+      <string>Sesleria caerulea</string>
+      <string>Stipa pennata</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1366">
+      <name>Hieracium</name>
+      <minimalCount>1</minimalCount>
+      <string>Hieracium</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1368">
+      <name>Juncaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Juncaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1370">
+      <name>Juncus</name>
+      <minimalCount>1</minimalCount>
+      <string>Juncus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1372">
+      <name>Lamiales</name>
+      <minimalCount>5</minimalCount>
+      <string>Lamiales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1374">
+      <name>Lamium</name>
+      <minimalCount>1</minimalCount>
+      <string>Lamium</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1376">
+      <name>Liliaceae</name>
+      <minimalCount>4</minimalCount>
+      <string>Liliaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1378">
+      <name>Liliales</name>
+      <minimalCount>6</minimalCount>
+      <string>Liliales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1380">
+      <name>Lonicera</name>
+      <minimalCount>1</minimalCount>
+      <string>Lonicera</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1382">
+      <name>Luzula</name>
+      <minimalCount>1</minimalCount>
+      <string>Luzula</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1384">
+      <name>Maloideae</name>
+      <minimalCount>2</minimalCount>
+      <string>Maloideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1386">
+      <name>mit Honigblättern</name>
+      <minimalCount>1</minimalCount>
+      <string>Aconitum</string>
+      <string>Aquilegia vulgaris</string>
+      <string>Helleborus foetidus</string>
+      <string>Trollius europaeus</string>
+      <string>Consolida regalis</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1388">
+      <name>mit Ranke</name>
+      <minimalCount>1</minimalCount>
+      <string>Vicia</string>
+      <string>Lathyrus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1390">
+      <name>ohne Honigblätter</name>
+      <minimalCount>1</minimalCount>
+      <string>Caltha palustris</string>
+      <string>Clematis vitalba</string>
+      <string>Pulsatilla</string>
+      <string>Anemone</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1392">
+      <name>Orchidaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Orchidaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1394">
+      <name>Pinus</name>
+      <minimalCount>1</minimalCount>
+      <string>Pinus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1396">
+      <name>Plantaginaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Plantaginaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1398">
+      <name>Poa</name>
+      <minimalCount>1</minimalCount>
+      <string>Poa</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1400">
+      <name>Poaceae</name>
+      <minimalCount>12</minimalCount>
+      <string>Poaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1402">
+      <name>Polygonatum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonatum</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1404">
+      <name>Polygonum</name>
+      <minimalCount>1</minimalCount>
+      <string>Polygonum</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1406">
+      <name>Potentilla</name>
+      <minimalCount>1</minimalCount>
+      <string>Potentilla</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1408">
+      <name>Primulaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Primulaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1410">
+      <name>Prunoideae</name>
+      <minimalCount>1</minimalCount>
+      <string>Prunoideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1412">
+      <name>Pteridophyta</name>
+      <minimalCount>4</minimalCount>
+      <string>Pteridophyta</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1414">
+      <name>Quercus</name>
+      <minimalCount>1</minimalCount>
+      <string>Quercus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1416">
+      <name>Ranunculaceae</name>
+      <minimalCount>6</minimalCount>
+      <string>Ranunculaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1418">
+      <name>Ranunculus</name>
+      <minimalCount>3</minimalCount>
+      <string>Ranunculus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1420">
+      <name>Rhinanthus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rhinanthus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1422">
+      <name>Rispe</name>
+      <minimalCount>3</minimalCount>
+      <string>Arrhenatherum elatius</string>
+      <string>Avena sativa</string>
+      <string>Briza media</string>
+      <string>Deschampsia caespitosa</string>
+      <string>Helictotrichon pubescens</string>
+      <string>Holcus lanatus</string>
+      <string>Molinia caerulea</string>
+      <string>Trisetum flavescens</string>
+      <string>Phragmites australis</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1424">
+      <name>Rosaceae</name>
+      <minimalCount>10</minimalCount>
+      <string>Rosaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1426">
+      <name>Rubiaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Rubiaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1428">
+      <name>Rubus</name>
+      <minimalCount>1</minimalCount>
+      <string>Rubus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1430">
+      <name>Rumex</name>
+      <minimalCount>1</minimalCount>
+      <string>Rumex</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1432">
+      <name>Salicaceae</name>
+      <minimalCount>3</minimalCount>
+      <string>Salicaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1434">
+      <name>Sambucus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sambucus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1436">
+      <name>Scrophulariaceae</name>
+      <minimalCount>5</minimalCount>
+      <string>Scrophulariaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1438">
+      <name>Scrophulariales</name>
+      <minimalCount>8</minimalCount>
+      <string>Scrophulariales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1440">
+      <name>Silene</name>
+      <minimalCount>1</minimalCount>
+      <string>Silene</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1442">
+      <name>Silenoideae</name>
+      <minimalCount>4</minimalCount>
+      <string>Silenoideae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1444">
+      <name>Solanales</name>
+      <minimalCount>1</minimalCount>
+      <string>Solanales</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1446">
+      <name>Sorbus</name>
+      <minimalCount>1</minimalCount>
+      <string>Sorbus</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1448">
+      <name>Trifolium</name>
+      <minimalCount>1</minimalCount>
+      <string>Trifolium</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1450">
+      <name>Vaccinium</name>
+      <minimalCount>1</minimalCount>
+      <string>Vaccinium myrtillus</string>
+      <string>Vaccinium uliginosum</string>
+      <string>Vaccinium vitis-idaea</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1452">
+      <name>Valerianaceae</name>
+      <minimalCount>1</minimalCount>
+      <string>Valerianaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1454">
+      <name>Veronica</name>
+      <minimalCount>3</minimalCount>
+      <string>Veronica</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1456">
+      <name>Viburnum</name>
+      <minimalCount>1</minimalCount>
+      <string>Viburnum</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <constraintModel id="1458">
+      <name>Violaceae</name>
+      <minimalCount>2</minimalCount>
+      <string>Violaceae</string>
+      <constraints reference="1272"/>
+    </constraintModel>
+    <defaultList id="1460">
+      <string>Picea abies</string>
+      <string>Fagus sylvatica</string>
+      <string>Urtica dioica</string>
+      <string>Lotus corniculatus</string>
+      <string>Anthyllis vulneraria</string>
+      <string>Capsella bursa-pastoris</string>
+      <string>Taraxacum officinale</string>
+      <string>Dactylis glomerata</string>
+      <string>Dactylis glomerata</string>
+      <string>Equisetum arvense</string>
+      <string>Asplenium trichomanes</string>
+      <string>Athyrium filix-femina</string>
+      <string>Dryopteris filix-mas</string>
+      <string>Pinus sylvestris</string>
+      <string>Larix decidua</string>
+      <string>Juniperus communis</string>
+      <string>Paris quadrifolia</string>
+      <string>Colchicum autumnale</string>
+      <string>Polygonatum multiflorum</string>
+      <string>Allium ursinum</string>
+      <string>Iris pseudacorus</string>
+      <string>Neottia nidus-avis</string>
+      <string>Dactylorhiza maculata</string>
+      <string>Juncus inflexus</string>
+      <string>Luzula sylvatica</string>
+      <string>Carex spicata</string>
+      <string>Carex elata</string>
+      <string>Carex hirta</string>
+      <string>Carex flacca</string>
+      <string>Carex sylvatica</string>
+      <string>Bromus erectus</string>
+      <string>Festuca valesiaca</string>
+      <string>Arrhenatherum elatius</string>
+      <string>Holcus lanatus</string>
+      <string>Poa pratensis</string>
+      <string>Lolium perenne</string>
+      <string>Hordeum murinum</string>
+      <string>Alopecurus pratensis</string>
+      <string>Sesleria caerulea</string>
+      <string>Phragmites australis</string>
+      <string>Aquilegia vulgaris</string>
+      <string>Anemone nemorosa</string>
+      <string>Ranunculus ficaria</string>
+      <string>Ranunculus friesianus</string>
+      <string>Ranunculus bulbosus</string>
+      <string>Ranunculus repens</string>
+      <string>Stellaria nemorum</string>
+      <string>Dianthus sylvestris</string>
+      <string>Silene vulgaris</string>
+      <string>Silene dioica</string>
+      <string>Silene nutans</string>
+      <string>Dianthus carthusianorum</string>
+      <string>Cerastium holosteoides</string>
+      <string>Polygonum bistorta</string>
+      <string>Rumex acetosa</string>
+      <string>Alnus glutinosa</string>
+      <string>Carpinus betulus</string>
+      <string>Corylus avellana</string>
+      <string>Quercus robur</string>
+      <string>Sempervivum arachnoideum</string>
+      <string>Prunus spinosa</string>
+      <string>Sorbus aucuparia</string>
+      <string>Crataegus monogyna</string>
+      <string>Geum rivale</string>
+      <string>Potentilla anserina</string>
+      <string>Rubus fruticosus</string>
+      <string>Potentilla reptans</string>
+      <string>Fragaria vesca</string>
+      <string>Alchemilla vulgaris</string>
+      <string>Rosa canina</string>
+      <string>Trifolium pratense</string>
+      <string>Vicia sepium</string>
+      <string>Hippocrepis comosa</string>
+      <string>Trifolium repens</string>
+      <string>Lathyrus pratensis</string>
+      <string>Acer pseudoplatanus</string>
+      <string>Erodium cicutarium</string>
+      <string>Geranium robertianum</string>
+      <string>Geranium sylvaticum</string>
+      <string>Carum carvi</string>
+      <string>Anthriscus sylvestris</string>
+      <string>Heracleum sphondylium</string>
+      <string>Hedera helix</string>
+      <string>Viola reichenbachiana</string>
+      <string>Viola tricolor</string>
+      <string>Cardamine pratensis</string>
+      <string>Alliaria petiolata</string>
+      <string>Arabidopsis thaliana</string>
+      <string>Cardamine hirsuta</string>
+      <string>Populus tremula</string>
+      <string>Salix caprea</string>
+      <string>Salix alba</string>
+      <string>Lysimachia nemorum</string>
+      <string>Vaccinium myrtillus</string>
+      <string>Erica carnea</string>
+      <string>Knautia arvensis</string>
+      <string>Valeriana officinalis</string>
+      <string>Lonicera xylosteum</string>
+      <string>Sambucus nigra</string>
+      <string>Viburnum lantana</string>
+      <string>Lonicera caerulea</string>
+      <string>Vinca minor</string>
+      <string>Galium odoratum</string>
+      <string>Galium aparine</string>
+      <string>Atropa belladonna</string>
+      <string>Pulmonaria obscura</string>
+      <string>Plantago lanceolata</string>
+      <string>Plantago major</string>
+      <string>Rhinanthus alectorolophus</string>
+      <string>Veronica chamaedrys</string>
+      <string>Veronica filiformis</string>
+      <string>Veronica beccabunga</string>
+      <string>Veronica persica</string>
+      <string>Ajuga reptans</string>
+      <string>Lamium maculatum</string>
+      <string>Salvia pratensis</string>
+      <string>Lamium montanum</string>
+      <string>Glechoma hederacea</string>
+      <string>Phyteuma spicatum</string>
+      <string>Hieracium murorum</string>
+      <string>Tragopogon orientalis</string>
+      <string>Artemisia vulgaris</string>
+      <string>Centaurea jacea</string>
+      <string>Bellis perennis</string>
+      <string>Artemisia absinthium</string>
+      <string>Senecio vulgaris</string>
+      <string>Achillea millefolium</string>
+      <string>Leucanthemum vulgare</string>
+      <string>Centaurea scabiosa</string>
+      <string>Tussilago farfara</string>
+      <string>Artemisia campestris</string>
+      <string>Centaurea montana</string>
+      <string>Equisetum telmateia</string>
+      <string>Abies alba</string>
+      <string>Juniperus sabina</string>
+      <string>Taxus baccata</string>
+      <string>Convallaria majalis</string>
+      <string>Polygonatum odoratum</string>
+      <string>Carex flava</string>
+      <string>Bromus sterilis</string>
+      <string>Poa annua</string>
+      <string>Stipa pennata</string>
+      <string>Chelidonium majus</string>
+      <string>Betula pendula</string>
+      <string>Ulmus glabra</string>
+      <string>Sorbus aria</string>
+      <string>Trifolium montanum</string>
+      <string>Vicia cracca</string>
+      <string>Medicago lupulina</string>
+      <string>Acer campestre</string>
+      <string>Acer platanoides</string>
+      <string>Geranium pyrenaicum</string>
+      <string>Geranium sanguineum</string>
+      <string>Oxalis acetosella</string>
+      <string>Euonymus europaea</string>
+      <string>Mercurialis perennis</string>
+      <string>Euphorbia cyparissias</string>
+      <string>Helianthemum ovatum</string>
+      <string>Salix purpurea</string>
+      <string>Primula elatior</string>
+      <string>Ilex aquifolium</string>
+      <string>Vaccinium vitis-idaea</string>
+      <string>Valerianella locusta</string>
+      <string>Fraxinus excelsior</string>
+      <string>Galium album</string>
+      <string>Solanum dulcamara</string>
+      <string>Echium vulgare</string>
+      <string>Globularia cordifolia</string>
+      <string>Lamium purpureum</string>
+      <string>Campanula rotundifolia</string>
+      <string>Crepis biennis</string>
+      <string>Hieracium pilosella</string>
+      <string>Lycopodium annotinum</string>
+      <string>Humulus lupulus</string>
+      <string>Equisetum hyemale</string>
+      <string>Berberis vulgaris</string>
+      <string>Trollius europaeus</string>
+      <string>Cerastium strictum</string>
+      <string>Saponaria ocymoides</string>
+      <string>Silene flos-cuculi</string>
+      <string>Chenopodium bonus-henricus</string>
+      <string>Juglans regia</string>
+      <string>Prunus avium</string>
+      <string>Cornus sanguinea</string>
+      <string>Sambucus racemosa</string>
+      <string>Lonicera alpigena</string>
+      <string>Juncus effusus</string>
+      <string>Arum maculatum</string>
+      <string>Briza media</string>
+      <string>Cynosurus cristatus</string>
+      <string>Eriophorum latifolium</string>
+      <string>Plantago media</string>
+      <string>Pinus mugo</string>
+      <string>Geum urbanum</string>
+      <string>Thymus serpyllum</string>
+      <string>Melica nutans</string>
+      <string>Prunus padus</string>
+      <string>Onobrychis viciifolia</string>
+      <string>Aegopodium podagraria</string>
+      <string>Reynoutria japonica</string>
+      <string>Vincetoxicum hirundinaria</string>
+    </defaultList>
+    <index id="1461">
+      <entry>
+        <string>Vaccinium uliginosum</string>
+        <constraintModel reference="1450"/>
+      </entry>
+      <entry>
+        <string>Melica nutans</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Heracleum</string>
+        <constraintModel reference="1302"/>
+      </entry>
+      <entry>
+        <string>Bromus</string>
+        <constraintModel reference="1312"/>
+      </entry>
+      <entry>
+        <string>Gentianales</string>
+        <constraintModel reference="1356"/>
+      </entry>
+      <entry>
+        <string>Brachypodium</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Pinus</string>
+        <constraintModel reference="1394"/>
+      </entry>
+      <entry>
+        <string>Holcus lanatus</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Poa</string>
+        <constraintModel reference="1398"/>
+      </entry>
+      <entry>
+        <string>Violaceae</string>
+        <constraintModel reference="1458"/>
+      </entry>
+      <entry>
+        <string>Carex digitata</string>
+        <constraintModel reference="1324"/>
+      </entry>
+      <entry>
+        <string>Brassicaceae</string>
+        <constraintModel reference="1310"/>
+      </entry>
+      <entry>
+        <string>Molinia caerulea</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Anthoxantum odoratum</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Bellis perennis</string>
+        <constraintModel reference="1274"/>
+      </entry>
+      <entry>
+        <string>Carex flacca</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Daucus carota</string>
+        <constraintModel reference="1300"/>
+      </entry>
+      <entry>
+        <string>Phragmites australis</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Carex elata</string>
+        <constraintModel reference="1322"/>
+      </entry>
+      <entry>
+        <string>Betulaceae</string>
+        <constraintModel reference="1298"/>
+      </entry>
+      <entry>
+        <string>Cupressaceae</string>
+        <constraintModel reference="1336"/>
+      </entry>
+      <entry>
+        <string>Orchidaceae</string>
+        <constraintModel reference="1392"/>
+      </entry>
+      <entry>
+        <string>Ajuga</string>
+        <constraintModel reference="1306"/>
+      </entry>
+      <entry>
+        <string>Leucanthemum vulgare</string>
+        <constraintModel reference="1274"/>
+      </entry>
+      <entry>
+        <string>Astrantia major</string>
+        <constraintModel reference="1302"/>
+      </entry>
+      <entry>
+        <string>Prunoideae</string>
+        <constraintModel reference="1410"/>
+      </entry>
+      <entry>
+        <string>Lolium</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Ericales</string>
+        <constraintModel reference="1350"/>
+      </entry>
+      <entry>
+        <string>Aegopodium podagraria</string>
+        <constraintModel reference="1302"/>
+      </entry>
+      <entry>
+        <string>Trichophorum caespitosum</string>
+        <constraintModel reference="1340"/>
+      </entry>
+      <entry>
+        <string>Fabales</string>
+        <constraintModel reference="1352"/>
+      </entry>
+      <entry>
+        <string>Carum carvi</string>
+        <constraintModel reference="1300"/>
+      </entry>
+      <entry>
+        <string>Carex curvula</string>
+        <constraintModel reference="1320"/>
+      </entry>
+      <entry>
+        <string>Lonicera</string>
+        <constraintModel reference="1380"/>
+      </entry>
+      <entry>
+        <string>Clematis vitalba</string>
+        <constraintModel reference="1390"/>
+      </entry>
+      <entry>
+        <string>Veronica</string>
+        <constraintModel reference="1454"/>
+      </entry>
+      <entry>
+        <string>Salicaceae</string>
+        <constraintModel reference="1432"/>
+      </entry>
+      <entry>
+        <string>Lathyrus</string>
+        <constraintModel reference="1388"/>
+      </entry>
+      <entry>
+        <string>Aceraceae</string>
+        <constraintModel reference="1278"/>
+      </entry>
+      <entry>
+        <string>Viburnum</string>
+        <constraintModel reference="1456"/>
+      </entry>
+      <entry>
+        <string>Boraginaceae</string>
+        <constraintModel reference="1308"/>
+      </entry>
+      <entry>
+        <string>Carex firma</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Elyna myosuroides</string>
+        <constraintModel reference="1340"/>
+      </entry>
+      <entry>
+        <string>Helictotrichon pubescens</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Silenoideae</string>
+        <constraintModel reference="1442"/>
+      </entry>
+      <entry>
+        <string>Asplenium</string>
+        <constraintModel reference="1294"/>
+      </entry>
+      <entry>
+        <string>Liliales</string>
+        <constraintModel reference="1378"/>
+      </entry>
+      <entry>
+        <string>Peucedanum ostruthium</string>
+        <constraintModel reference="1302"/>
+      </entry>
+      <entry>
+        <string>Carex echinata</string>
+        <constraintModel reference="1320"/>
+      </entry>
+      <entry>
+        <string>Allium</string>
+        <constraintModel reference="1284"/>
+      </entry>
+      <entry>
+        <string>Carex ferruginea</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Dryopteridaceae</string>
+        <constraintModel reference="1346"/>
+      </entry>
+      <entry>
+        <string>Ranunculaceae</string>
+        <constraintModel reference="1416"/>
+      </entry>
+      <entry>
+        <string>Schoenus ferrugineus</string>
+        <constraintModel reference="1340"/>
+      </entry>
+      <entry>
+        <string>Ranunculus</string>
+        <constraintModel reference="1418"/>
+      </entry>
+      <entry>
+        <string>Valerianaceae</string>
+        <constraintModel reference="1452"/>
+      </entry>
+      <entry>
+        <string>Carex caryophyllea</string>
+        <constraintModel reference="1324"/>
+      </entry>
+      <entry>
+        <string>Dianthus</string>
+        <constraintModel reference="1342"/>
+      </entry>
+      <entry>
+        <string>Rosaceae</string>
+        <constraintModel reference="1424"/>
+      </entry>
+      <entry>
+        <string>Rhinanthus</string>
+        <constraintModel reference="1420"/>
+      </entry>
+      <entry>
+        <string>Festuca</string>
+        <constraintModel reference="1354"/>
+      </entry>
+      <entry>
+        <string>Trisetum flavescens</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Crassulaceae</string>
+        <constraintModel reference="1334"/>
+      </entry>
+      <entry>
+        <string>Luzula</string>
+        <constraintModel reference="1382"/>
+      </entry>
+      <entry>
+        <string>Silene</string>
+        <constraintModel reference="1440"/>
+      </entry>
+      <entry>
+        <string>Scrophulariaceae</string>
+        <constraintModel reference="1436"/>
+      </entry>
+      <entry>
+        <string>Caltha palustris</string>
+        <constraintModel reference="1390"/>
+      </entry>
+      <entry>
+        <string>Melilotus</string>
+        <constraintModel reference="1276"/>
+      </entry>
+      <entry>
+        <string>Equisetaceae</string>
+        <constraintModel reference="1348"/>
+      </entry>
+      <entry>
+        <string>Caprifoliaceae</string>
+        <constraintModel reference="1316"/>
+      </entry>
+      <entry>
+        <string>Plantaginaceae</string>
+        <constraintModel reference="1396"/>
+      </entry>
+      <entry>
+        <string>Briza media</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Vicia</string>
+        <constraintModel reference="1388"/>
+      </entry>
+      <entry>
+        <string>Helleborus foetidus</string>
+        <constraintModel reference="1386"/>
+      </entry>
+      <entry>
+        <string>Hordeum</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Avena sativa</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Dipsacaceae</string>
+        <constraintModel reference="1344"/>
+      </entry>
+      <entry>
+        <string>Araliales</string>
+        <constraintModel reference="1290"/>
+      </entry>
+      <entry>
+        <string>Rumex</string>
+        <constraintModel reference="1430"/>
+      </entry>
+      <entry>
+        <string>Medicago</string>
+        <constraintModel reference="1276"/>
+      </entry>
+      <entry>
+        <string>Triticum aestivum</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Poaceae</string>
+        <constraintModel reference="1400"/>
+      </entry>
+      <entry>
+        <string>Trollius europaeus</string>
+        <constraintModel reference="1386"/>
+      </entry>
+      <entry>
+        <string>Carex sempervirens</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Geum</string>
+        <constraintModel reference="1360"/>
+      </entry>
+      <entry>
+        <string>Cyperaceae</string>
+        <constraintModel reference="1338"/>
+      </entry>
+      <entry>
+        <string>Carex pallescens</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Quercus</string>
+        <constraintModel reference="1414"/>
+      </entry>
+      <entry>
+        <string>Carex nigra</string>
+        <constraintModel reference="1322"/>
+      </entry>
+      <entry>
+        <string>Agropyron repens</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Liliaceae</string>
+        <constraintModel reference="1376"/>
+      </entry>
+      <entry>
+        <string>Lamium</string>
+        <constraintModel reference="1374"/>
+      </entry>
+      <entry>
+        <string>Hieracium</string>
+        <constraintModel reference="1366"/>
+      </entry>
+      <entry>
+        <string>Aster</string>
+        <constraintModel reference="1274"/>
+      </entry>
+      <entry>
+        <string>Centaurea</string>
+        <constraintModel reference="1330"/>
+      </entry>
+      <entry>
+        <string>Aquilegia vulgaris</string>
+        <constraintModel reference="1386"/>
+      </entry>
+      <entry>
+        <string>Primulaceae</string>
+        <constraintModel reference="1408"/>
+      </entry>
+      <entry>
+        <string>Cardamine</string>
+        <constraintModel reference="1318"/>
+      </entry>
+      <entry>
+        <string>Sesleria caerulea</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Aconitum</string>
+        <constraintModel reference="1386"/>
+      </entry>
+      <entry>
+        <string>Juncaceae</string>
+        <constraintModel reference="1368"/>
+      </entry>
+      <entry>
+        <string>Solanales</string>
+        <constraintModel reference="1444"/>
+      </entry>
+      <entry>
+        <string>Consolida regalis</string>
+        <constraintModel reference="1386"/>
+      </entry>
+      <entry>
+        <string>Alnus</string>
+        <constraintModel reference="1286"/>
+      </entry>
+      <entry>
+        <string>Rubus</string>
+        <constraintModel reference="1428"/>
+      </entry>
+      <entry>
+        <string>Potentilla</string>
+        <constraintModel reference="1406"/>
+      </entry>
+      <entry>
+        <string>Pulsatilla</string>
+        <constraintModel reference="1390"/>
+      </entry>
+      <entry>
+        <string>Asteroideae</string>
+        <constraintModel reference="1296"/>
+      </entry>
+      <entry>
+        <string>Glechoma hederacea</string>
+        <constraintModel reference="1306"/>
+      </entry>
+      <entry>
+        <string>Juncus</string>
+        <constraintModel reference="1370"/>
+      </entry>
+      <entry>
+        <string>Sambucus</string>
+        <constraintModel reference="1434"/>
+      </entry>
+      <entry>
+        <string>Alle Taxa</string>
+        <constraintModel reference="1282"/>
+      </entry>
+      <entry>
+        <string>Trifolium</string>
+        <constraintModel reference="1448"/>
+      </entry>
+      <entry>
+        <string>Polygonatum</string>
+        <constraintModel reference="1402"/>
+      </entry>
+      <entry>
+        <string>Caryophyllaceae</string>
+        <constraintModel reference="1328"/>
+      </entry>
+      <entry>
+        <string>Sanicula europaea</string>
+        <constraintModel reference="1302"/>
+      </entry>
+      <entry>
+        <string>Nardus stricta</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Scrophulariales</string>
+        <constraintModel reference="1438"/>
+      </entry>
+      <entry>
+        <string>Gymnospermae</string>
+        <constraintModel reference="1362"/>
+      </entry>
+      <entry>
+        <string>Sorbus</string>
+        <constraintModel reference="1446"/>
+      </entry>
+      <entry>
+        <string>Pteridophyta</string>
+        <constraintModel reference="1412"/>
+      </entry>
+      <entry>
+        <string>Carex spicata</string>
+        <constraintModel reference="1320"/>
+      </entry>
+      <entry>
+        <string>Alsinoideae</string>
+        <constraintModel reference="1288"/>
+      </entry>
+      <entry>
+        <string>Vaccinium vitis-idaea</string>
+        <constraintModel reference="1450"/>
+      </entry>
+      <entry>
+        <string>Vaccinium myrtillus</string>
+        <constraintModel reference="1450"/>
+      </entry>
+      <entry>
+        <string>Eriophorum</string>
+        <constraintModel reference="1340"/>
+      </entry>
+      <entry>
+        <string>Cichorioideae</string>
+        <constraintModel reference="1332"/>
+      </entry>
+      <entry>
+        <string>Scirpus sylvaticus</string>
+        <constraintModel reference="1340"/>
+      </entry>
+      <entry>
+        <string>Stipa pennata</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Arrhenatherum elatius</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Maloideae</string>
+        <constraintModel reference="1384"/>
+      </entry>
+      <entry>
+        <string>Chaerophyllum villarsii</string>
+        <constraintModel reference="1304"/>
+      </entry>
+      <entry>
+        <string>Secale cereale</string>
+        <constraintModel reference="1280"/>
+      </entry>
+      <entry>
+        <string>Carex panicea</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Anemone</string>
+        <constraintModel reference="1390"/>
+      </entry>
+      <entry>
+        <string>Alopecurus pratensis</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Carex flava</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Carex sylvatica</string>
+        <constraintModel reference="1326"/>
+      </entry>
+      <entry>
+        <string>Phleum pratense</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Deschampsia caespitosa</string>
+        <constraintModel reference="1422"/>
+      </entry>
+      <entry>
+        <string>Polygonum</string>
+        <constraintModel reference="1404"/>
+      </entry>
+      <entry>
+        <string>Campanulaceae</string>
+        <constraintModel reference="1314"/>
+      </entry>
+      <entry>
+        <string>Artemisia</string>
+        <constraintModel reference="1292"/>
+      </entry>
+      <entry>
+        <string>Carex hirta</string>
+        <constraintModel reference="1324"/>
+      </entry>
+      <entry>
+        <string>Lamiales</string>
+        <constraintModel reference="1372"/>
+      </entry>
+      <entry>
+        <string>Leucanthemopsis alpina</string>
+        <constraintModel reference="1274"/>
+      </entry>
+      <entry>
+        <string>Cynosurus cristatus</string>
+        <constraintModel reference="1364"/>
+      </entry>
+      <entry>
+        <string>Rubiaceae</string>
+        <constraintModel reference="1426"/>
+      </entry>
+      <entry>
+        <string>Anthriscus sylvestris</string>
+        <constraintModel reference="1304"/>
+      </entry>
+      <entry>
+        <string>Geraniaceae</string>
+        <constraintModel reference="1358"/>
+      </entry>
+      <entry>
+        <string>Ligusticum mutellina</string>
+        <constraintModel reference="1300"/>
+      </entry>
+    </index>
+    <name>Vorgaben Herbst 2007 ohne Fixarten</name>
+    <uid>BCC8BDA8-847B-EB8D-7550-AE48603FB26B</uid>
+    <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+    <modified id="1462">2007-04-25 16:13:24.156 CEST</modified>
+    <fixed>true</fixed>
+  </constraintsModel>
+</constraintsModels>

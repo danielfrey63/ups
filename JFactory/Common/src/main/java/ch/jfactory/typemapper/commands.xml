@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="typeedit.list.toolbar">
+        <face>
+            <text i18n="action.typeedit.toolbar.text"/>
+        </face>
+        <members>
+            <member command-id="typeedit.add"/>
+            <member command-id="typeedit.delete"/>
+        </members>
+    </group>
+    <command id="typeedit.add">
+        <face>
+            <text i18n="action.typeedit.add.text"/>
+            <icon type="classpath">16x16/outline/cross1_big.png</icon>
+            <pressed-icon type="classpath">16x16/outline/cross1_big.png</pressed-icon>
+            <description i18n="action.typeedit.add.description"/>
+            <accelerator key="i18n:action.typeedit.add.accelerator">
+                <modifier value="default"/>
+                <modifier value="shift"/>
+            </accelerator>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="typeedit.delete">
+        <face>
+            <text i18n="action.typeedit.delete.text"/>
+            <icon type="classpath">16x16/outline/bars1_big.png</icon>
+            <pressed-icon type="classpath">16x16/outline/bars1_big.png</pressed-icon>
+            <description i18n="action.typeedit.delete.description"/>
+            <accelerator key="i18n:action.typeedit.delete.accelerator">
+                <modifier value="default"/>
+                <modifier value="shift"/>
+            </accelerator>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <group id="typeedit.editor.toolbar">
+        <face>
+            <text>Editor Toolbar</text>
+        </face>
+        <members>
+            <member command-id="apply"/>
+            <member command-id="reset"/>
+        </members>
+    </group>
+    <command id="apply">
+        <face>
+            <text i18n="action.typeedit.apply.text"/>
+            <icon type="classpath">16x16/outline/floppy_save.png</icon>
+            <pressed-icon type="classpath">16x16/outline/floppy_save.png</pressed-icon>
+            <description i18n="action.typeedit.apply.description"/>
+            <accelerator key="i18n:action.typeedit.apply.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="reset">
+        <face>
+            <text i18n="action.typeedit.reset.text"/>
+            <icon type="classpath">16x16/outline/twistedarrow_left.png</icon>
+            <pressed-icon type="classpath">16x16/outline/twistedarrow_left.png</pressed-icon>
+            <description i18n="action.typeedit.reset.description"/>
+            <accelerator key="i18n:action.typeedit.reset.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="typeedit.icons">
+        <face>
+            <text/>
+            <icon type="classpath">16x16/outline/aso.png</icon>
+            <pressed-icon type="classpath">16x16/outline/aso.png</pressed-icon>
+        </face>
+    </command>
+</commands>

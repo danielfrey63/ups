@@ -1,0 +1,10 @@
+/TitleFormatter.xml|News
+/TextFormatter.xml|-- 10 Sekunden warten --
+/TextFormatter.xml|oder
+/TextFormatter.xml|-- Klicken --
+/TitleFormatter.xml|Update
+/TextFormatter.xml|Wenn Sie diese Zeilen lesen, haben Sie für die Herbar CD-ROM erfolgreich ein Update durgeführt, oder sie aber als WebStart Applikation gestartet.
+/TitleFormatter.xml|WebStart
+/TextFormatter.xml|Die Herbar CD-ROM kann nun über einen Link direkt über das Internet gestartet werden. Vorteile: Updates werden bei verfügbarer Internetverbindung automatisch durchgeführt. http://www.virtual-herbarium.com/ webstart/hcd.jnlp
+/TitleFormatter.xml|Neue Website
+/TextFormatter.xml|Die Herbar CD-ROM hat eine eigene Website unter http://www.virtual-herbarium.com. Dort befinden sich interessante Neuigkeiten, beispielsweise über neue Features oder über bekannte Fehler und wie sie umgangen werden.|http://www.appletcollection.com/advnewsscroll.html

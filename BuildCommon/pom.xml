@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.common</groupId>
+    <artifactId>ch.xmatrix.common</artifactId>
+    <packaging>pom</packaging>
+    <name>xmatrix application components</name>
+    <version>1.0</version>
+    <description>xmatrix component library</description>
+    <url>http://www.xmatrix.ch</url>
+    <inceptionYear>2009</inceptionYear>
+    <organization>
+        <name>Institute of Integrative Biologie ETH Zurich</name>
+        <url>http://www.ibz.ethz.ch</url>
+    </organization>
+    <ciManagement>
+        <notifiers>
+            <notifier>
+                <configuration>
+                    <address>dev@xmatrix.ch</address>
+                </configuration>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+    <developers>
+        <developer>
+            <id>Daniel</id>
+            <name>Daniel Frey</name>
+            <email>daniel.frey@xmatrix.ch</email>
+            <organization>xmatrix</organization>
+        </developer>
+    </developers>
+    <scm>
+        <developerConnection>scm:svn:svn://admin:geoBot@geobot1.ethz.ch/svn/repos</developerConnection>
+        <url>http://www.xmatrix.ch/</url>
+    </scm>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*NoTest.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+					<phase>validate</phase>
+					<goals>
+						<goal>create</goal>
+					</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doCheck>true</doCheck>
+					<!-- Updates do not work due to a "working copy locked" -->
+					<doUpdate>false</doUpdate>
+				</configuration>
+			</plugin>
+	    </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>local</id>
+            <name>Local Repository</name>
+            <url>file:${project.parent.relativePath}/repository</url>
+        </repository>
+        <repository>
+            <id>maven-repo-1</id>
+            <name>Maven Repository 1</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>dev-java-net-repo</id>
+            <name>Java Net Repository</name>
+            <url>https://maven-repository.dev.java.net/nonav/repository</url>
+        </repository>
+    </repositories>
+
+</project>

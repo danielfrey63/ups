@@ -21,7 +21,6 @@
         <module>DataTaxa</module>
     </modules>
     <build>
-        <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -33,6 +32,7 @@
                         </manifest>
                         <manifestEntries>
                             <Main-Class>data.Main</Main-Class>
+                            <Build-Version>${project.version}-${buildNumber}</Build-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>

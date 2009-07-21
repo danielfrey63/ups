@@ -9,8 +9,8 @@
         <relativePath>../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.jfactory</groupId>
-    <artifactId>icons</artifactId>
+    <groupId>ch.xmatrix</groupId>
+    <artifactId>icon</artifactId>
     <version>1.0-20060814</version>
     <name>JFactory Icons</name>
     <build>

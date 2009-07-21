@@ -4,17 +4,17 @@
         <groupId>ch.xmatrix</groupId>
         <artifactId>build</artifactId>
         <version>1.0</version>
-        <relativePath>BuildCommon</relativePath>
+        <relativePath>../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix</groupId>
+    <groupId>ch.xmatrix.common</groupId>
     <artifactId>main</artifactId>
-    <name>All Components</name>
-    <packaging>pom</packaging>
     <version>1.0</version>
-    <description>Everything from xmatrix</description>
+    <packaging>pom</packaging>
+    <name>Common Components</name>
+    <description>All Common Components</description>
     <modules>
-        <module>Data</module>
-        <module>JFactory</module>
+        <module>Common</module>
+        <module>Icon</module>
     </modules>
 </project>

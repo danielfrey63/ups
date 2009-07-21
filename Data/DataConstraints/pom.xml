@@ -9,6 +9,6 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>constraints</artifactId>
     <version>SNAPSHOT</version>
-    <name>All Constraints</name>
+    <name>Data Constraints</name>
     <description>Constraints</description>
 </project>

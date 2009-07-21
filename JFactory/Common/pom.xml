@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <parent>
-        <artifactId>ch.xmatrix</artifactId>
-        <groupId>build</groupId>
+        <groupId>ch.xmatrix</groupId>
+        <artifactId>build</artifactId>
         <version>1.0</version>
         <relativePath>../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
     <artifactId>common</artifactId>
-    <name>xmatrix Components</name>
     <version>2.0-20090323</version>
+    <name>xmatrix Components</name>
     <description>xmatrix Common Components</description>
     <inceptionYear>2006</inceptionYear>
     <dependencies>

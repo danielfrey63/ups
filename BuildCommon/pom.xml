@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix.common</groupId>
-    <artifactId>ch.xmatrix.common</artifactId>
+    <groupId>ch.xmatrix</groupId>
+    <artifactId>ch.xmatrix.build</artifactId>
     <packaging>pom</packaging>
     <name>xmatrix application components</name>
     <version>1.0</version>

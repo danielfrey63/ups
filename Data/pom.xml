@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <parent>
-        <groupId>ch.xmatrix.common</groupId>
-        <artifactId>ch.xmatrix.common</artifactId>
+        <groupId>ch.xmatrix</groupId>
+        <artifactId>ch.xmatrix.build</artifactId>
         <version>1.0</version>
         <relativePath>../BuildCommon</relativePath>
     </parent>

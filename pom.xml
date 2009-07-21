@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
     <artifactId>main</artifactId>
-    <name>All Components</name>
+    <name>Projects</name>
     <packaging>pom</packaging>
     <version>1.0</version>
     <description>Everything from xmatrix</description>

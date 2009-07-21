@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
-    <artifactId>ch.xmatrix</artifactId>
+    <artifactId>main</artifactId>
     <name>All Components</name>
     <packaging>pom</packaging>
     <version>1.0</version>

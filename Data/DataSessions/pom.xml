@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.data</groupId>
-    <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
+    <artifactId>sessions</artifactId>
     <name>Data Exam Sessions</name>
     <version>SNAPSHOT</version>
     <description>Pr�fungsinformationen</description>

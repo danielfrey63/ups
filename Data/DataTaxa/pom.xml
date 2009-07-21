@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.data</groupId>
-    <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
+    <artifactId>taxa</artifactId>
     <name>Data Taxa</name>
     <version>2.0.2</version>
     <description>Taxonomiebaum</description>

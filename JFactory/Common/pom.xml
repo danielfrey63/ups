@@ -2,16 +2,16 @@
 <project>
     <parent>
         <artifactId>ch.xmatrix</artifactId>
-        <groupId>ch.xmatrix.build</groupId>
+        <groupId>build</groupId>
         <version>1.0</version>
         <relativePath>../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.jfactory</groupId>
-    <artifactId>xmatrix</artifactId>
-    <name>xmatrix application components</name>
+    <groupId>ch.xmatrix</groupId>
+    <artifactId>common</artifactId>
+    <name>xmatrix Components</name>
     <version>2.0-20090323</version>
-    <description>xmatrix component library</description>
+    <description>xmatrix Common Components</description>
     <inceptionYear>2006</inceptionYear>
     <dependencies>
         <dependency>

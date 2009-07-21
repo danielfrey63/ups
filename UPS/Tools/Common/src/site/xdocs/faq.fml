@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faqs title="Häufig gestellte Frage (FAQs)">
+
+    <part id="error">
+        <title>Fehlerreports</title>
+        <faq id="errorlog-howto">
+            <question>Wie erstelle ich ein Fehlerprotokoll für eine WebStart Applikation?</question>
+            <answer>
+                <p>
+
+                    Wenn ein Fehler in einer WebStart Applikation auftritt, kann es sein, dass Sie ein Fehlerprotokoll
+                    erstellen möchten, oder dazu aufgefordert werden. Hier werden die nötigen Schritte dazu kurz
+                    beschrieben:
+
+                </p>
+                <ol>
+
+                    <li>Stellen Sie WebStart so ein, dass es Fehler mitprotokolliert.</li>
+
+                    <li>Führen Sie die Aktion, die den Fehler verursacht hat, nochmals aus.</li>
+
+                </ol>
+                <p>
+
+                    Die beiden Schritte werden nun noch weiter ausgeführt.
+
+                </p>
+                <p>
+
+                    Um WebStart fürs Mitprotokollieren zu konfigurieren, führen Sie folgende Schritte aus:
+
+                </p>
+                <ol>
+
+                    <li>
+
+                        Öffnen Sie den Java Web Start Anwendungsmanager. Auf dem PC ist er im Normalfall unter
+                        "Start- Menü -> Programme -> Java -> Java Web Start" als Anwendung "Java Web Start" zu finden.
+
+                    </li>
+
+                    <li>
+
+                        Unter dem Menü "Datei" finden Sie die Einstellungen. Öffnen Sie diese und wählen Sie das Register
+                        "Erweitert".
+
+                    </li>
+
+                    <li>
+
+                        Wählen Sie "Ausgabe protokollieren" und geben Sie einen Dateinamen mit vollständigem Pfad
+                        (=Verzeichnis + Dateiname) an, z.B. "C:\jw.log" oder "C:\Temp\protokoll.log". Beachten Sie, dass
+                        das angegebene Verzeichnis - in diesem Fall "C:\" oder "C:\Temp" - bereits existieren muss, d.h.
+                        es wird nicht automatisch angelegt. Legen Sie es gegebenenfalls manuell an oder verwenden Sie
+                        einfach ein bereits extistierendes Verzeichnis.
+
+                    </li>
+
+                </ol>
+                <p>
+
+                    Damit ist WebStart so konfiguriert, dass beim nächsten Start der WebStart Applikation
+                    ein Fehlerprotokoll erstellt wird, d.h. eine Datei auf dem Filesystem unter dem
+                    angegebenen Pfad erstellt wird.
+
+                </p>
+                <p>
+
+                    Um das Fehlerprotokoll nun schreiben zu lassen, gehen Sie wie folgt vor:
+
+                </p>
+                <ol>
+
+                    <li>Öffnen Sie die WebStart Applikation</li>
+
+                    <li>
+
+                        Führen Sie die Aktionen aus, die zum Fehler geführt haben. Achtung: Die Aktion, die den Fehler
+                        verursacht hat, ist nicht immer diejenige, ab der offensichtlich ist, dass etwas nicht
+                        funktioniert hat. Beim Öffnen einer Datei beispielsweise kann es durchaus sein, dass die
+                        Applikation beim Speichern der Datei bereits einen Fehler gemacht hat. Achten Sie deshalb
+                        darauf, dass sie möglichst alle Aktionen, die zum Fehler geführt haben, ausführen.
+
+                    </li>
+
+                    <li>
+
+                        Senden Sie das Fehlerprotokoll - in obigem Beispiel "C:\jw.log" oder "C:\Temp\protokoll.log" -
+                        zusammen mit der Sytem-Version (z.B. MacOS X 10.3.3, Microsoft Windows 2000 SP3a) und der
+                        Java-Version (cmd oder Terminal öffnen, "java -version" eintippen) an <a href="mailto:ups-
+                        support@xmatrix.ch">ups.support@xmatrix.ch</a>.
+
+                    </li>
+                </ol>
+                <p>
+
+                    Damit sind wir im Idealfall in der Lage, auf den Fehler zu schliessen und gegebenenfalls Korrekturen
+                    an der Applikation vorzunehmen.
+
+                </p>
+
+            </answer>
+        </faq>
+    </part>
+    <part id="jira">
+        <title>Allgemeines zu Issue-Tracking (JIRA)</title>
+        <faq id="what-is-jira">
+            <question>Was ist Issue-Tracking?</question>
+            <answer>
+                <p>
+
+                    Unter Issue-Tracking
+                    verstehen wir das Verfolgen von verschiedenen Anfragen. Eine Anfrage kann ein Bug, ein neues
+                    Feature, eine Verbesserung eines bereits vorhandenen Features oder eine Aufgabe sein.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="where-to-find-jira">
+            <question>Wo finde ich die Website fürs Issue-Tracking?</question>
+            <answer>
+                <p>
+
+                    Für die UPS Tools wird eine spezielle WebSite für das Issue-Tracking verwendet, zu finden unter
+                    <a href="http://www.xmatrix.ch/jira">http://www.xmatrix.ch/jira</a> (JIRA-Homepage).
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="howto-register-with-jira">
+            <question>Wie melde ich mich an?</question>
+            <answer>
+                <p>
+
+                    Die Anmeldung erfolgt über den Link "subscribe" auf der <a href="http://www.xmatrix.ch/jira">
+                    JIRA Homepage</a>. Anschliessend ein
+                    <a href="mailto:daniel.frey@xmatrix.ch">E-Mail an mich</a> senden, damit ich noch die richtige
+                    Gruppe zuweisen kann.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="howto-new-bug">
+            <question>Wie kann ich einen neuen Fehler / ein neues Feature eingeben?</question>
+            <answer>
+                <p>
+
+                    Ein neuer Antrag kann über das Menü "NEUER EINTRAG" erstellt werden. Dabei soll der
+                    richtige Antragstyp für das richtige Projekt angegeben werden. <emphasis>Wichtig:</emphasis>
+                    Immer nur einen Fehler/ein Feature pro Antrag eintragen.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="jira-rules">
+            <question>Was muss ich bei der Eingabe neuer Bugs / Features beachten?</question>
+            <answer>
+                <p>
+
+                    Vor dem Eintragen von neuen Anträgen zuerst überprüfen, ob ein solcher oder ähnlicher
+                    Antrag bereits gemacht worden ist.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="howto-find-bugs">
+            <question>Wie finde ich erfasste Bugs / Features?</question>
+            <answer>
+                <p>
+
+                    Dies geht am einfachsten über das Menü "EINTRÄGE FINDEN".
+                    Es kann auch eine bereits gespeicherte Suchabfrage, ein sogenannter Filter verwendet werden.
+                    Zum Beispiel kann unter "Filtern von Einträgen" oder "Vordefinierte Filter" auf
+                    "ausstehend" geklickt werden, damit die offenen Requests angezeigt werden.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="howto-abstract">
+            <question>Wozu dient eine Zusammenfassung? Wie schreibe ich am besten eine Zusammenfassung?</question>
+            <answer>
+                <p>
+
+                    In der Zusammenfassung beschreiben Sie den Fehler kurz. Diese Beschreibung wird in der Übersicht
+                    gezeigt. Mit Hilfe dieser kurzen Beschreibung sollte möglichst klar erkannt werden, worum es bei
+                    dem Fehler geht. In der Eingabemaske soll im Feld "Zusammenfassung" unbedingt klare, einfache
+                    und doch differenzierende Angaben zum Request gemacht werden, anhand derer der Lesende den Inhalt des
+                    Beitrags verstehen kann.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="howto-environment">
+            <question>Was soll unter "Umgebung" im neuen Antrag eingetragen werden?</question>
+            <answer>
+                <p>
+
+                    Bei Features: "Alle", falls es ein Feature für alle Plattformen ist, ansonsten die genaue Ziel-
+                    Plattform. Beispielsweise sollte ein Feature-Request für ein MacOS X-spezifisches Menü "MacOS X"
+                    enthalten.
+
+                </p>
+                <p>
+
+                    Bei Bugs: Die genaue OS Version, z.B. "MacOS X 10.3.3", "Windows XP Professional Service Pack 1".
+                    Auch die genaue Java Version ist nötig. Diese kann beispielsweise über eine Kommandozeile erhalten
+                    werden mit "java -version". Einfach Copy-Paste ans Umgebungs-Feld zur OS Information anhängen.
+                    Die Version von Java sieht etwa so aus:
+
+                    <br/>
+
+                    java version "1.4.2_04"<br/>
+                    Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.2_04-b05)<br/>
+                    Java HotSpot(TM) Client VM (build 1.4.2_04-b05, mixed mode)
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="jira-concerns-version">
+            <question>Was kann ich in "Betrifft Version" angeben?</question>
+            <answer>
+                <p>
+
+                    Wichtig ist, unter "Betrifft Version" exakt diejenige Version anzugeben, mit der der
+                    Issue erkannt worden ist. Gerade für Bugs ist es sonst schwierig, das Verhalten zu
+                    reproduzieren.
+
+                </p>
+            </answer>
+        </faq>
+    </part>
+</faqs>

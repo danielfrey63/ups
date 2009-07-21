@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ ====================================================================
+  ~  Copyright 2004-2006 www.xmatrix.ch
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+  ~  implied. See the License for the specific language governing
+  ~  permissions and limitations under the License.
+  ~ ====================================================================
+  -->
+
+<project name="UPS">
+    <title>$pom.name</title>
+    <body>
+        <menu name="Hilfe">
+            <item name="FAQs" href="faq.html"/>
+        </menu>
+        <menu name="Projekte">
+            <item name="UPS Studenten Tool" href="http://balti.ethz.ch/ups/site/ust"/>
+            <item name="UPS List Converter" href="http://balti.ethz.ch/ups/webstart/ulc/ch.xmatrix.ups.hcd.jnlp"/>
+        </menu>
+    </body>
+</project>

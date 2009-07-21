@@ -2,7 +2,7 @@
 <project>
     <parent>
         <groupId>ch.xmatrix</groupId>
-        <artifactId>ch.xmatrix.build</artifactId>
+        <artifactId>build</artifactId>
         <version>1.0</version>
         <relativePath>BuildCommon</relativePath>
     </parent>

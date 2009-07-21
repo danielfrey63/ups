@@ -2,13 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+    <parent>
+        <groupId>ch.xmatrix</groupId>
+        <artifactId>build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../BuildCommon</relativePath>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.jfactory</groupId>
     <artifactId>icons</artifactId>
     <version>1.0-20060814</version>
     <name>JFactory Icons</name>
-
     <build>
         <resources>
             <resource>
@@ -20,5 +24,4 @@
             </resource>
         </resources>
     </build>
-
 </project>

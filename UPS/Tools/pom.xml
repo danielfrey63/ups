@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <parent>
+        <groupId>ch.xmatrix</groupId>
+        <artifactId>build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../BuildCommon</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.ups.tools</groupId>
+    <artifactId>main</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>All UPS Tools</name>
+    <description>All UPS Tools</description>
+    <modules>
+        <module>Common</module>
+    </modules>
+</project>

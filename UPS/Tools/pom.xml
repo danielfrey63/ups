@@ -11,7 +11,7 @@
     <artifactId>main</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>All UPS Tools</name>
+    <name>UPS</name>
     <description>All UPS Tools</description>
     <modules>
         <module>Common</module>

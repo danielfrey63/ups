@@ -7,11 +7,11 @@
         <relativePath>../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix</groupId>
-    <artifactId>ch.xmatrix.ups.data</artifactId>
-    <name>All Data</name>
-    <packaging>pom</packaging>
+    <groupId>ch.xmatrix.ups.data</groupId>
+    <artifactId>data</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>All Data</name>
     <description>Data and Configuration</description>
     <modules>
         <module>DataConstraints</module>

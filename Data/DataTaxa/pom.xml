@@ -9,6 +9,6 @@
     <groupId>ch.xmatrix.ups.data.taxa</groupId>
     <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
     <name>Data Taxa</name>
-    <version>SNAPSHOT</version>
+    <version>2.0.2</version>
     <description>Taxonomiebaum</description>
 </project>

@@ -14,11 +14,11 @@
     <name>Data</name>
     <description>Data and Configuration</description>
     <modules>
-        <module>DataConstraints</module>
-        <module>DataCourses</module>
-        <module>DataExams</module>
-        <module>DataSessions</module>
-        <module>DataTaxa</module>
+        <module>Constraints</module>
+        <module>Courses</module>
+        <module>Exams</module>
+        <module>Sessions</module>
+        <module>Taxa</module>
     </modules>
     <build>
         <plugins>

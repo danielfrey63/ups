@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
     <parent>
         <groupId>ch.xmatrix</groupId>
         <artifactId>build</artifactId>
@@ -26,5 +27,10 @@
       <artifactId>xstream</artifactId>
       <version>1.2.2</version>
     </dependency>
+	<dependency>
+		<groupId>javax.xml</groupId>
+		<artifactId>jaxrpc-api</artifactId>
+		<version>1.1</version>
+	</dependency>
   </dependencies>
 </project>

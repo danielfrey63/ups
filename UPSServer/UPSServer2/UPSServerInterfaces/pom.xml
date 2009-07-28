@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+    <parent>
+        <groupId>ch.xmatrix</groupId>
+        <artifactId>build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../../BuildCommon</relativePath>
+    </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ch.xmatrix.upsserver</groupId>
+  <artifactId>interface</artifactId>
+  <version>20051004</version>
+  <name>UPS Server 2 Interface</name>
+</project>

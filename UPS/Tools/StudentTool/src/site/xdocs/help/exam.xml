@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/*
+ * Copyright 2004 Geobotanical Institute ETH Zürich.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+
+<document>
+
+    <properties>
+        <author email="daniel.frey@xmatrix.ch">Daniel Frey</author>
+        <title>UPS Studenten-Tool Prüfungshilfe</title>
+    </properties>
+
+    <body>
+        <section name="Begriffe und Vorgehen">
+            <p>
+
+                Hier wird erklärt, wie Sie eine Prüfungsliste erstellen und einreichen können.
+
+            </p>
+
+            <p>
+
+                Inhalt:
+
+            </p>
+
+            <ul>
+
+                <li>Begriffe</li>
+                <li>Pflanzenliste erstellen</li>
+                <li>Prüfungsliste einreichen</li>
+
+            </ul>
+
+            <p>
+
+                Letzte Änderung: $Date: 2006/08/04 15:50:02 $
+
+            </p>
+            <subsection name="Begriffe">
+                <p>
+
+                    Im UPS Studenten-Tool werden drei verschiedene Arten von Listen unterschieden, die es genau
+                    auseinanderzuhalten gilt.
+
+                </p>
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Listentyp</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+
+                                Pflanzenliste
+
+                            </td>
+                            <td>
+
+                                Eine Pflanzenliste ist eine mit dem UPS Studenten-Tool erstellte Liste. Sie wird mit dem
+                                Menübefehl "Datei -> Speichern unter..." oder "Datei -> Speichern" gesichert. Der Name
+                                ist frei wählbar bis auf die Endung, die ".xust" lauten muss. Ältere Listen der Version
+                                1.0, die auf ".ust" enden, können mit dem UPS Studenten-Tool Version 2.0 ebenfalls
+                                geöffnet werden, werden aber nur im neuen Format gesichert. Wird die Endung nicht
+                                explizit angegeben, wird sie automatisch ergänzt.
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+
+                                Prüfungsliste
+
+                            </td>
+                            <td>
+
+                                Eine Prüfungsliste ist die von Ihnen eingereichte Pflanzenliste, die als Basis für die
+                                mündliche Prüfung dient. Sie wird mit dem Menübefehl "Datei ->
+                                Prüfungsliste einreichen..." auf einem zentralen Server abgelegt. Der Befehl
+                                funktioniert nur, wenn Sie Internetzugang haben. Als Bestätigung erhalten Sie dann ein
+                                PDF-Dokument, dass Sie unterschrieben an die mündliche Prüfunge mitnehmen müssen.
+                                Achtung: Sie sind selbst verantwortlich für eine Sichererungskopie der von Ihnen als
+                                Prüfungsliste eingereichten Pflanzenliste und des Bestätigungs-Dokumentes!
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+
+                                Textliste
+
+                            </td>
+                            <td>
+
+                                Eine Textliste entsteht durch das Exportieren der Pflanzenliste als Textdatei mit dem
+                                Befehl "Datei -> Textdatei exportieren...". Textlisten können in anderen Programmen
+                                bearbeitet werden, z.B. zum Sortieren oder zum Drucken. Sie werden in dieser Hilfe
+                                nicht weiter behandelt, da Textdateien im UPS Studenten-Tool weder nochmals geöffnet
+                                noch bearbeitet werden können.
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+
+                                Taxonomie als Text
+
+                            </td>
+                            <td>
+
+                                Mit dem Befehl "Datei -> Taxonomie exportieren..." können Sie eine Pflanzenliste und
+                                das dazugehörige taxonomische System als Textdatei ablegen. Auch dieser Export ist eine
+                                Einbahnstrasse, d.h., entsprechende Dateien können im UPS Studenten-Tool nicht mehr
+                                geöffnet werden.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+            <subsection name="Pflanzenliste erstellen">
+                <p>
+
+                    Mit dem UPS Studenten-Tool haben Sie mehrere Möglichkeiten, eine Pflanzenliste zu erstellen.
+
+                </p>
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Möglichkeit</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+
+                                Neue Pflanzenliste erstellen
+
+                            </td>
+                            <td>
+
+                                Sie können mit dem Befehl "Datei -> Neu..." oder dem Shortcut "Neue Pflanzenliste..."
+                                eine neue, leere Pflanzenliste erstellen. Die Liste kann mit den Befehlen "Datei ->
+                                Speichern unter..." oder "Datei -> Speichern" als Pflanzenliste gesichert werden. Sie
+                                kann auch mit dem Befehl "Datei -> Prüfungsliste exportieren..." als Prüfungsliste
+                                abgelegt werden.
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+
+                                Vorschlagsliste verwenden
+
+                            </td>
+                            <td>
+
+                                Im UPS Studenten-Tool gibt es einen Befehl, um eine fixfertige Pflanzenliste zu laden.
+                                Verwenden Sie dazu den Befehl "Datei -> Vorschlagsliste". Die Liste kann bei Bedarf
+                                beliebig verändert und gesichert sowie als Prüfungsliste eingereicht werden.
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+
+                                Pflanzenliste bearbeiten
+
+                            </td>
+                            <td>
+
+                                Sie können eine bereits erstellt Pflanzenliste weiter bearbeiten, indem Sie sie öffnen.
+                                Verwenden Sie dazu den Befehl "Datei -> Öffnen..." oder den Shortcut "Öffne
+                                Pflanzenliste...".
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                Pflanzenliste kopieren
+                            </td>
+                            <td>
+
+                                Sie können selbstverständlich eine Pflanzenliste einer mitstudierenden Person kopieren
+                                und als Ihre eigene Prüfungsliste einreichen.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+            <subsection name="Prüfungsliste einreichen">
+                <p>
+
+                    Das Einreichen von Prüfungslisten erfolgt über den im Tool eingebauten Befehl "Datei -> Prüfungsliste einreichen".
+                    Der Befehl ist nur aktiv, wenn sämtliche Vorgaben erfüllt sind.
+
+                </p>
+                <p>
+
+                    Wird keine Prüfungsliste eingereicht, werden sämtliche Arten aus dem Vorlesungsbuch als
+                    Grundlage vorausgesetzt. Entstehen Probleme mit dem Einreichen der Prüfungsliste, melden Sie sich
+                    bitte bei <a href="mailto:daniel_frey@xmatrix.ch">Daniel Frey</a>
+
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/*
+ * Copyright 2004 Geobotanical Institute ETH Zürich.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+
+<document>
+
+    <properties>
+        <author email="daniel.frey@xmatrix.ch">Daniel Frey</author>
+        <title>UPS Studenttool Download</title>
+    </properties>
+
+    <body>
+        <section name="Voraussetzungen">
+            <p>
+                Das UPS Studenttool Version 1.0 wird als WebStart Download zur Verfügung gestellt. Voraussetzung dafür
+                ist die Runtime-Installation oder Entwickler-Version von Java (z.B. "J2SE v 1.4.2_04  JRE"). Falls Sie
+                die Runtime noch nicht installiert haben, oder eine ältere Installation auf den neusten Stand bringen
+                möchten, können Sie die aktuelle Version kostenlos bei
+                <a href="http://java.sun.com/j2se/1.4.2/download.html">Sun</a> beziehen. Für den Mac stellt Apple die
+                neuste Runtime zur Verfügung.
+            </p>
+        </section>
+        <section name="Download">
+            <p>
+                Um den WebStart Download zu beginnen, klicken Sie
+                <a href="http://www.virtual-herbarium.com/webstart/studenttool/ch.ethz.ups.studenttool.jnlp">hier</a>.
+            </p>
+            <p>
+                Sobald der Link geklickt worden ist, werden alle nötigen Daten von einem Server heruntergeladen.
+                Danach wird das UPS Student Tool gestartet. Das erste Mal erscheint eine Frage betreffend Sicherheit.
+                Bei dieser Frage (siehe Grafik) klicken Sie auf "Starten".
+            </p>
+            <p>
+                <img src="webstart.gif" align="center"/>
+            </p>
+        </section>
+    </body>
+</document>

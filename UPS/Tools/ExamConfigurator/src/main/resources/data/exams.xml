@@ -1,0 +1,38 @@
+<!--
+  ~ ====================================================================
+  ~  Copyright 2004-2006 www.xmatrix.ch
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+  ~  implied. See the License for the specific language governing
+  ~  permissions and limitations under the License.
+  ~ ====================================================================
+  -->
+
+<examModels>
+    <examModel>
+        <name>Matthias Baltisberger Frühling 2003</name>
+        <uid>C58AF48A-A820-9307-54FD-D8EB8CF6BF6C</uid>
+        <modified>2003-05-25 19:04:43.717 CEST</modified>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <fixed>true</fixed>
+        <prefsUid>4912FAB6-F08B-42BA-1A28-9E559E4401A4</prefsUid>
+        <groupsUid>C82CC690-912E-AB54-157B-39735C3208D5</groupsUid>
+        <levelsUid>436025BE-0580-6BB1-043B-AA74DBDB8A6A</levelsUid>
+        <specimensUid>035FD566-4567-4828-C780-6825AB621F1D</specimensUid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+    </examModel>
+    <examModel>
+        <name>Matthias Baltisberger Herbst 2005</name>
+        <uid>0E551699-B2B8-068F-F9FB-DB812266CF75</uid>
+        <modified>2005-10-05 15:19:31.106 CEST</modified>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <fixed>true</fixed>
+        <prefsUid>64BDCB03-772E-5FB8-B0D9-DC227E2FAD6D</prefsUid>
+        <groupsUid>A6C4C808-0DF7-C7E1-6490-D30ED32A09AE</groupsUid>
+        <levelsUid>436025BE-0580-6BB1-043B-AA74DBDB8A6A</levelsUid>
+        <specimensUid>66351433-E721-8E1B-38D4-F0D309C73BC0</specimensUid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+    </examModel>
+</examModels>

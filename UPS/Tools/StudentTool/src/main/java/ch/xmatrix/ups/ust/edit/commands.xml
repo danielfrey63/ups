@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+
+    <!-- For TaxonCheckBuilder -->
+
+    <group id="taxontree.toolbar">
+        <face>
+            <text>All</text>
+        </face>
+        <members>
+            <member command-id="tree.collapse-expand" inline="true"/>
+            <separator/>
+            <member command-id="taxontree.structure" inline="true"/>
+            <separator/>
+            <member command-id="taxontree.selected" inline="true"/>
+        </members>
+    </group>
+
+    <toggle-group id="taxontree.selected" exclusive="true">
+        <face>
+            <text>Selected Or All Species</text>
+        </face>
+        <members>
+            <member command-id="taxontree.showselected"/>
+            <member command-id="taxontree.showall"/>
+        </members>
+    </toggle-group>
+    <command id="taxontree.showselected">
+        <face>
+            <text i18n="action.taxontree.showselected.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big2_on.png, #FFFF00, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big2_on.png, #FFFF00, 1)</selected-icon>
+            <description i18n="action.taxontree.showselected.description"/>
+            <accelerator key="i18n:action.taxontree.showselected.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="taxontree.showall">
+        <face>
+            <text i18n="action.taxontree.showall.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big2_mix.png, #00FF00, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big2_mix.png, #00FF00, 1)</selected-icon>
+            <description i18n="action.taxontree.showall.description"/>
+            <accelerator key="i18n:action.taxontree.showall.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+
+    <toggle-group id="taxontree.structure" exclusive="true">
+        <face>
+            <text>Deep Or Flat Tree</text>
+        </face>
+        <members>
+            <member command-id="taxontree.deep"/>
+            <member command-id="taxontree.flat"/>
+        </members>
+    </toggle-group>
+    <command id="taxontree.deep">
+        <face>
+            <text i18n="action.taxontree.deep.text"/>
+            <icon type="icon-factory">createDropShadowIcon(tree_deep.png, #FFFF00, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(tree_deep.png, #FFFF00, 1)</selected-icon>
+            <description i18n="action.taxontree.deep.description"/>
+            <accelerator key="i18n:action.taxontree.deep.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="taxontree.flat">
+        <face>
+            <text i18n="action.taxontree.flat.text"/>
+            <icon type="icon-factory">createDropShadowIcon(tree_flat.png, #00FF00, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(tree_flat.png, #00FF00, 1)</selected-icon>
+            <description i18n="action.taxontree.flat.description"/>
+            <accelerator key="i18n:action.taxontree.flat.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+
+    <!--For ConstraintsSelectionBuilder -->
+
+    <group id="constraintstree.toolbar">
+        <face>
+            <text>All</text>
+        </face>
+        <members>
+            <member command-id="tree.collapse-expand" inline="true"/>
+            <separator/>
+            <member command-id="constraintstree.show" inline="true"/>
+        </members>
+    </group>
+
+    <toggle-group id="constraintstree.show" exclusive="true">
+        <face>
+            <text>Selected Or All Species</text>
+        </face>
+        <members>
+            <member command-id="constraintstree.showall"/>
+            <member command-id="constraintstree.showopen"/>
+        </members>
+    </toggle-group>
+    <command id="constraintstree.showall">
+        <face>
+            <text i18n="action.constraintstree.showall.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big2_mix.png, #00FF00, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big2_mix.png, #00FF00, 1)</selected-icon>
+            <description i18n="action.constraintstree.showall.description"/>
+            <accelerator key="i18n:action.constraintstree.showall.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="constraintstree.showopen">
+        <face>
+            <text i18n="action.constraintstree.showopen.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big2_off.png, #FF0000, 1)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big2_off.png, #FF0000, 1)</selected-icon>
+            <description i18n="action.constraintstree.showopen.description"/>
+            <accelerator key="i18n:action.constraintstree.showopen.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+
+    <!-- For both-->
+
+    <group id="tree.collapse-expand">
+        <face>
+            <text>Tree Collapsing</text>
+        </face>
+        <members>
+            <member command-id="collapseAll"/>
+            <member command-id="expandAll"/>
+        </members>
+    </group>
+    <command id="collapseAll">
+        <face>
+            <text i18n="action.collapseAll.text"/>
+            <icon type="icon-factory">createDropShadowIcon(tree_collapse.png, #FFFF00, 1)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(tree_collapse.png, #FFFF00, 1)</pressed-icon>
+            <description i18n="action.collapseAll.description"/>
+            <accelerator key="i18n:action.collapseAll.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="expandAll">
+        <face>
+            <text i18n="action.expandAll.text"/>
+            <icon type="icon-factory">createDropShadowIcon(tree_expand.png, #00FF00, 1)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(tree_expand.png, #00FF00, 1)</pressed-icon>
+            <description i18n="action.expandAll.description"/>
+            <accelerator key="i18n:action.expandAll.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+
+</commands>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="XAC">
+    <title>UPS Studenten-Tool</title>
+    <body>
+        <menu name="Überblick">
+            <item name="Einführung" href="project/index.html"/>
+            <item name="Herunterladen" href="project/download.html"/>
+            <item name="Änderungen" href="changes-report.html"/>
+        </menu>
+        <menu name="Hilfe">
+            <item name="Benutzeranleitung" href="help/help.html"/>
+            <item name="Begriffe und Vorgehen" href="help/exam.html"/>
+            <item name="FAQs" href="faq.html"/>
+            <item name="Feedback" href="../ups/faq.html"/>
+        </menu>
+        <menu name="UPS">
+            <item name="UPS Home" href="../ups"/>
+        </menu>
+    </body>
+</project>

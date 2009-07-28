@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+    <group id="toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="group.new"/>
+            <member command-id="group.delete"/>
+        </members>
+    </group>
+    <group id="contextmenu">
+        <face>
+            <text>Contextmenu</text>
+        </face>
+        <members>
+            <member command-id="group.addall"/>
+            <member command-id="group.forceall"/>
+            <separator/>
+            <member command-id="group.removeall"/>
+        </members>
+    </group>
+    <command id="group.new">
+        <face>
+            <text i18n="action.group.new.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big1.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(cross_big1.png, #900000)</selected-icon>
+            <description i18n="action.group.new.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="group.delete">
+        <face>
+            <text i18n="action.group.delete.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big1.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(bars_big1.png, #900000)</selected-icon>
+            <description i18n="action.group.delete.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="group.addall">
+        <face>
+            <text i18n="action.group.addall.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big2.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(cross_big2.png, #900000)</selected-icon>
+            <description i18n="action.group.addall.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="group.forceall">
+        <face>
+            <text i18n="action.group.forceall.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big2.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(cross_big2.png, #900000)</selected-icon>
+            <description i18n="action.group.forceall.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="group.removeall">
+        <face>
+            <text i18n="action.group.removeall.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big2.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(bars_big2.png, #900000)</selected-icon>
+            <description i18n="action.group.removeall.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

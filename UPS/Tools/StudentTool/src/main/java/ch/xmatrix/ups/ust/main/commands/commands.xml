@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ ====================================================================
+  ~  Copyright 2004-2006 www.xmatrix.ch
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+  ~  implied. See the License for the specific language governing
+  ~  permissions and limitations under the License.
+  ~ ====================================================================
+  -->
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+
+    <group id="menubar">
+        <face>
+            <text>Main Menu</text>
+        </face>
+        <members>
+            <member command-id="menu.file"/>
+            <member command-id="menu.help"/>
+        </members>
+    </group>
+
+    <group id="menu.file">
+        <face>
+            <text i18n="menu.file.text"/>
+        </face>
+        <members>
+            <member command-id="file.new"/>
+            <member command-id="file.newdefault"/>
+            <member command-id="file.open"/>
+            <member command-id="file.save"/>
+            <member command-id="file.saveas"/>
+            <member command-id="file.close"/>
+            <separator/>
+            <member command-id="file.exporttext"/>
+            <member command-id="file.exporttree"/>
+            <member command-id="file.submit"/>
+            <separator/>
+            <member command-id="quit"/>
+        </members>
+    </group>
+    <group id="menu.help">
+        <face>
+            <text i18n="menu.help.text"/>
+        </face>
+        <members>
+            <member command-id="inet.upshome"/>
+            <member command-id="inet.usthome"/>
+            <member command-id="inet.ustexam"/>
+            <member command-id="inet.usthelp"/>
+            <member command-id="inet.ustfaq"/>
+            <member command-id="inet.ustbugs"/>
+            <separator/>
+            <member command-id="about"/>
+        </members>
+    </group>
+
+    <command id="file.new">
+        <face>
+            <text i18n="action.new.text"/>
+            <icon type="icon-factory">createDropShadowIcon(file_line0.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(file_line0.png, #FFFF00)</selected-icon>
+            <description i18n="action.new.description"/>
+            <long-description i18n="action.new.longdescription"/>
+            <accelerator key="i18n:action.new.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.new.longdescription"/>
+        </face>
+    </command>
+    <command id="file.newdefault">
+        <face>
+            <text i18n="action.newdefault.text"/>
+            <icon type="icon-factory">createDropShadowIcon(file_line2.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(file_line2.png, #FFFF00)</selected-icon>
+            <description i18n="action.newdefault.description"/>
+            <long-description i18n="action.newdefault.longdescription"/>
+            <accelerator key="i18n:action.newdefault.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.newdefault.longdescription"/>
+        </face>
+    </command>
+    <command id="file.open">
+        <face>
+            <text i18n="action.open.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_open.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_open.png, #FFFF00)</selected-icon>
+            <description i18n="action.open.description"/>
+            <long-description i18n="action.open.longdescription"/>
+            <accelerator key="i18n:action.open.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.open.longdescription"/>
+        </face>
+    </command>
+    <command id="file.save">
+        <face>
+            <text i18n="action.save.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.save.description"/>
+            <long-description i18n="action.save.longdescription"/>
+            <accelerator key="i18n:action.save.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.save.longdescription"/>
+        </face>
+    </command>
+    <command id="file.saveas">
+        <face>
+            <text i18n="action.saveas.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.saveas.description"/>
+            <long-description i18n="action.saveas.longdescription"/>
+            <accelerator keyStroke="i18n:action.saveas.accelerator.nonmac" include-if="!mac"/>
+            <accelerator keyStroke="i18n:action.saveas.accelerator.mac" include-if="mac"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.saveas.longdescription"/>
+        </face>
+    </command>
+    <command id="file.close">
+        <face>
+            <text i18n="action.close.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big1_on.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big1_on.png, #FFFF00)</selected-icon>
+            <description i18n="action.close.description"/>
+            <long-description i18n="action.close.longdescription"/>
+            <accelerator keyStroke="i18n:action.close.accelerator.nonmac" include-if="!mac"/>
+            <accelerator keyStroke="i18n:action.close.accelerator.mac" include-if="mac"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.close.longdescription"/>
+        </face>
+    </command>
+    <command id="file.exporttext">
+        <face>
+            <text i18n="action.exporttext.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.exporttext.description"/>
+            <long-description i18n="action.exporttext.longdescription"/>
+            <accelerator key="i18n:action.exporttext.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.exporttext.longdescription"/>
+        </face>
+    </command>
+    <command id="file.exporttree">
+        <face>
+            <text i18n="action.exporttree.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.exporttree.description"/>
+            <long-description i18n="action.exporttree.longdescription"/>
+            <accelerator key="i18n:action.exporttree.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.exporttree.longdescription"/>
+        </face>
+    </command>
+    <command id="file.submit">
+        <face>
+            <text i18n="action.submit.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.submit.description"/>
+            <long-description i18n="action.submit.longdescription"/>
+            <accelerator key="i18n:action.submit.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.submit.longdescription"/>
+        </face>
+    </command>
+    <command id="quit">
+        <face>
+            <text i18n="action.quit.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big1_on.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big1_on.png, #FFFF00)</selected-icon>
+            <description i18n="action.quit.description"/>
+            <long-description i18n="action.quit.longdescription"/>
+            <accelerator keyStroke="i18n:action.quit.accelerator.nonmac" include-if="!mac"/>
+            <accelerator keyStroke="i18n:action.quit.accelerator.mac" include-if="mac"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.quit.longdescription"/>
+        </face>
+    </command>
+
+    <command id="inet.upshome">
+        <face>
+            <text i18n="action.upshome.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.upshome.description"/>
+            <long-description i18n="action.upshome.longdescription"/>
+            <accelerator key="i18n:action.upshome.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.upshome.longdescription"/>
+        </face>
+    </command>
+    <command id="inet.usthome">
+        <face>
+            <text i18n="action.usthome.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.usthome.description"/>
+            <long-description i18n="action.usthome.longdescription"/>
+            <accelerator key="i18n:action.usthome.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.usthome.longdescription"/>
+        </face>
+    </command>
+    <command id="inet.usthelp">
+        <face>
+            <text i18n="action.usthelp.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.usthelp.description"/>
+            <long-description i18n="action.usthelp.longdescription"/>
+            <accelerator key="i18n:action.usthelp.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.usthelp.longdescription"/>
+        </face>
+    </command>
+    <command id="inet.ustfaq">
+        <face>
+            <text i18n="action.ustfaq.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.ustfaq.description"/>
+            <long-description i18n="action.ustfaq.longdescription"/>
+            <accelerator key="i18n:action.ustfaq.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.ustfaq.longdescription"/>
+        </face>
+    </command>
+    <command id="inet.ustbugs">
+        <face>
+            <text i18n="action.ustbugs.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.ustbugs.description"/>
+            <long-description i18n="action.ustbugs.longdescription"/>
+            <accelerator key="i18n:action.ustbugs.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.ustbugs.longdescription"/>
+        </face>
+    </command>
+    <command id="inet.ustexam">
+        <face>
+            <text i18n="action.ustexam.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.ustexam.description"/>
+            <long-description i18n="action.ustexam.longdescription"/>
+            <accelerator key="i18n:action.ustexam.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.ustexam.longdescription"/>
+        </face>
+    </command>
+    <command id="about">
+        <face>
+            <text i18n="action.about.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe.png, #FFFF00)</selected-icon>
+            <description i18n="action.about.description"/>
+            <long-description i18n="action.about.longdescription"/>
+            <accelerator key="i18n:action.about.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.about.longdescription"/>
+        </face>
+    </command>
+</commands>

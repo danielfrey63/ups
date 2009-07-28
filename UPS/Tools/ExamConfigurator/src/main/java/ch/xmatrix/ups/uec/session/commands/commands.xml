@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+    <group id="toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="upload"/>
+        </members>
+    </group>
+    <command id="upload">
+        <face>
+            <text i18n="action.upload.text"/>
+            <icon type="icon-factory">createDropShadowIcon(globe_save.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(globe_save.png, #900000)</selected-icon>
+            <description i18n="action.upload.description"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

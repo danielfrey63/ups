@@ -1,0 +1,114 @@
+﻿
+<document>
+    <properties>
+        <title>Page title</title>
+        <author email="daniel.frey@xmatrix.ch">Daniel Frey</author>
+    </properties>
+    <body>
+        <release version="1.0-20040421" date="2004-04-21" description="Erste Testversion">
+            <action dev="daniel.frey" type="update">
+                Die erste Testversion des UPS Studenttools ist bereit.
+            </action>
+            <action dev="daniel.frey" type="add">
+                Baum mit Taxa zur Auswahl
+            </action>
+            <action dev="daniel.frey" type="add">
+                Statistiken im Taxonbaum
+            </action>
+            <action dev="daniel.frey" type="add">
+                Übersicht über die persönlichen Daten
+            </action>
+            <action dev="daniel.frey" type="add">
+                Statistik-Übersicht als Bilanz
+            </action>
+            <action dev="daniel.frey" type="add">
+                Speichern und Öffnen von Pflanzenlisten
+            </action>
+        </release>
+        <release version="1.0-20040425" date="2004-04-25" description="Weitere Features">
+            <action dev="daniel.frey" type="update">
+                Umlaute in Taxonbaum werden nun richtig dargestellt
+            </action>
+            <action dev="daniel.frey" type="update">
+                Zeichensatz im Taxonbaum nun wie alle anderen Zeichnsätze
+            </action>
+            <action dev="daniel.frey" type="update">
+                Gelandene Datei wird im Fenstertitel angezeigt
+            </action>
+            <action dev="daniel.frey" type="update">
+                Speichern und Laden von Pflanzenlisten mit Gruppen korrigiert
+            </action>
+            <action dev="daniel.frey" type="update">
+                Lichenes und Bryophyta aus dem Datenbestand eliminiert
+            </action>
+        </release>
+        <release version="1.0-20040426" date="2004-04-26" description="Bugfix">
+            <action dev="daniel.frey" type="update">
+                Tooltips werden für die Menüs und Buttons angezeigt
+            </action>
+        </release>
+        <release version="1.0-20040427" date="2004-04-27" description="Neue Features">
+            <action dev="daniel.frey" type="add">
+                Geänderte Pflanzenlisten werden nun im Titel mit einem Stern markiert
+            </action>
+            <action dev="daniel.frey" type="add">
+                Beim Beenden wird überprüft, ob eine Pflanzenliste zuerst gespeichert werden sollte, und
+                gegebenenfalls gewarnt
+            </action>
+            <action dev="daniel.frey" type="add">
+                Die Menüs für das Speichern werden nun ausgegraut, wenn speichern keinen Sinn macht
+            </action>
+        </release>
+        <release version="1.0-20040504" date="2004-05-04" description="Bugfixes">
+            <action dev="daniel.frey" type="fix" issue="UST-13">
+                Beim Öffnen von Pflanzenlisten wird nun die Dateiendung ".ust" vorgegeben.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-1">
+                Bevor die Applikation geschlossen wird, wird nun gewarnt, wenn eine nicht gespeicherte Pflanzenlist
+                offen ist.
+            </action>
+        </release>
+        <release version="1.0-20040511" date="2004-05-11" description="Bugfixes">
+            <action dev="daniel.frey" type="fix" issue="UST-14">
+                Umlaute im License-Agreement sollten jetzt auf dem Mac auch richtig dargestellt werden.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-21">
+                Bevor die Applikation geschlossen wird, wird nun gewarnt, wenn eine nicht gespeicherte Pflanzenlist
+                offen ist.
+            </action>
+        </release>
+        <release version="1.0-20040518" date="2004-05-18" description="Neue Features und Bugfixes">
+            <action dev="daniel.frey" type="add" issue="UST-16">
+                Export in eine Textdatei möglich.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-18">
+                Gattungen mit nur einer Art werden ausgeblendet.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-19">
+                Baum nun per Schaltfläche expandier und kollabierbar.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-22">
+                Bessere Separierung der Icon Gruppen im Toolbar.
+            </action>
+        </release>
+        <release version="1.0-20040519" date="2004-05-19" description="Neue Features und Bugfixes">
+            <action dev="daniel.frey" type="add" issue="UST-20">
+                Verbesserte Kontrolle der Benutzereingaben für Personendaten.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-29">
+                Filter werden nun kontinuierlich auf den Taxonbaum angewendet so dass das "Ruckeln" nicht auftritt.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-32">
+                Das Öffnen von Dateien sollte jetzt auch nach einem E-Mail transfer klappen.
+            </action>
+            <action dev="daniel.frey" type="fix" issue="UST-24">
+                Beim Beenden mit dem MacOS X Menü erscheint nun eine Abfrage bei geänderter Datei.
+            </action>
+        </release>
+        <release version="1.0-20040524" date="2004-05-24" description="Neues Feature">
+            <action dev="daniel.frey" type="add" issue="UST-35">
+                Bei den Personendaten werden die möglichen Studiengänge über eine Popup-Auswahl vorgegeben.
+            </action>
+        </release>
+    </body>
+</document>

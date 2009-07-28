@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+    <group id="toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="refresh"/>
+            <separator/>
+            <member command-id="fromFiles"/>
+            <member command-id="fromDirectory"/>
+            <member command-id="fromInternet"/>
+            <member command-id="newPerson"/>
+            <separator/>
+            <member command-id="reloadServerData"/>
+            <separator/>
+            <member command-id="remove"/>
+            <separator/>
+            <member command-id="moveUp"/>
+            <member command-id="moveDown"/>
+            <separator/>
+            <member command-id="calculate"/>
+        </members>
+    </group>
+
+    <command id="refresh">
+        <face>
+            <text i18n="action.refresh.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/arrow_refresh.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/arrow_refresh.png)</selected-icon>
+            <description i18n="action.refresh.description"/>
+            <accelerator key="i18n:action.refresh.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+
+    <command id="fromFiles">
+        <face>
+            <text i18n="action.fromfiles.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/page_add.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/page_add.png)</selected-icon>
+            <description i18n="action.fromfiles.description"/>
+            <accelerator key="i18n:action.fromfiles.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="fromDirectory">
+        <face>
+            <text i18n="action.fromdirectory.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/folder_add.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/folder_add.png)</selected-icon>
+            <description i18n="action.fromdirectory.description"/>
+            <accelerator key="i18n:action.fromdirectory.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="fromInternet">
+        <face>
+            <text i18n="action.frominternet.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/world_add.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/world_add.png)</selected-icon>
+            <description i18n="action.frominternet.description"/>
+            <accelerator key="i18n:action.frominternet.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="reloadServerData">
+        <face>
+            <text i18n="action.reloadserverdata.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/world_add.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/world_add.png)</selected-icon>
+            <description i18n="action.reloadserverdata.description"/>
+            <accelerator key="i18n:action.reloadserverdata.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="newPerson">
+        <face>
+            <text i18n="action.newperson.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/group_add.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/group_add.png)</selected-icon>
+            <description i18n="action.newperson.description"/>
+            <accelerator key="i18n:action.newperson.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="remove">
+        <face>
+            <text i18n="action.remove.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/delete.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/delete.png)</selected-icon>
+            <description i18n="action.remove.description"/>
+            <accelerator key="i18n:action.remove.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="calculate">
+        <face>
+            <text i18n="action.calculate.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/cog_go.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/cog_go.png)</selected-icon>
+            <description i18n="action.calculate.description"/>
+            <accelerator key="i18n:action.calculate.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="moveUp">
+        <face>
+            <text i18n="action.moveup.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/arrow_up.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/arrow_up.png)</selected-icon>
+            <description i18n="action.moveup.description"/>
+            <accelerator key="i18n:action.moveup.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="moveDown">
+        <face>
+            <text i18n="action.moveup.text"/>
+            <icon type="icon-factory">getIcon(/com/famfamfam/silk/arrow_down.png)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(/com/famfamfam/silk/arrow_down.png)</selected-icon>
+            <description i18n="action.moveup.description"/>
+            <accelerator key="i18n:action.moveup.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

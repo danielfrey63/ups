@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="XAC">
+    <title>Unterricht mit Prüfungen in Selbstverantwortung</title>
+    <body>
+        <menu name="Überblick">
+            <item name="Einführung" href="project/index.html"/>
+        </menu>
+        <menu name="Exam Configurator">
+            <item name="Einführung" href="download/index.html"/>
+            <item name="Download" href="download/download.html"/>
+            <item name="Änderungen" href="changes-report.html"/>
+        </menu>
+    </body>
+</project>

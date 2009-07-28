@@ -1,0 +1,18 @@
+<!-- Transformed with ch.xmatrix.ups.admin.data.v1.DataVersion1 at 2006-03-24 13:50:43.727 CET -->
+<levelsModels>
+    <levelsModel>
+        <name>Stufenbeschänkungen Frühling 2003</name>
+        <uid>436025BE-0580-6BB1-043B-AA74DBDB8A6A</uid>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <modified>2003-05-25 19:04:43.717 CEST</modified>
+        <fixed>true</fixed>
+        <levelModel>
+            <level>Familie</level>
+            <maximum>3</maximum>
+        </levelModel>
+        <levelModel>
+            <level>Gattung</level>
+            <maximum>2</maximum>
+        </levelModel>
+    </levelsModel>
+</levelsModels>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/*
+ * Copyright 2004 Geobotanical Institute ETH Zürich.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+
+<document>
+
+    <properties>
+        <author email="daniel.frey@xmatrix.ch">Daniel Frey</author>
+        <title>Benutzeranleitung</title>
+    </properties>
+
+    <body>
+        <section name="Benutzeranleitung">
+            <p>
+                In dieser Benutzeranleitung werden die wichtigsten Benutzerführungselemente erklärt.
+            </p>
+            <subsection name="Startbildschirm">
+                <p>
+
+                    Der Willkommensbildschirm stellt die wichtigsten Aufgaben dar, die Sie mit dem UPS Studenten-Tool
+                    erledigen können. Die Aufgaben sind gruppiert. Die erste Gruppe enthält Aufgaben zum Erstellen und
+                    Bearbeiten von Pflanzenlisten, die zweite und dritte rufen Internetseiten zum Thema auf, und die
+                    vierte Gruppe lässt Sie das UPS Studenten-Tool beenden. Sie können jederzeit zum Startbildschirm
+                    zurückkehren, indem Sie im (dann) vorhandenen Menü auf "Schliessen" gehen.
+
+                </p>
+                <p>
+                    <img src="welcome.png" widht="451" height="342"/>
+                </p>
+            </subsection>
+            <subsection name="Begriffe">
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Inhalt</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+                                Vorgabe
+                            </td>
+                            <td>
+
+                                Taxa, für die eine Einschränkung existiert, werden Taxa mit Vorgaben (oder kurz
+                                "Vorgaben") genannt. Vorgaben erkennen Sie daran, dass sie einen Erwartungswert und
+                                einen Istwert haben (vgl. Bilanzzahlen im Taxonbaum). Im Beispiel sehen Sie eine Vorgabe
+                                für die Pteridophyta, die besagt, dass Sie 6 Arten auswählen müssen, und 1 bisher
+                                ausgewählt ist.
+                                <br/>
+                                <img src="vorgabe1.gif"/>
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                Pflanzenlisten
+                            </td>
+                            <td>
+
+                                Pflanzenlisten können erstellt, gesichert und geladen werden.
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+                                Artenauswahl
+                            </td>
+                            <td>
+
+                                Die Taxa werden in einem Baum dargestellt, aus dem Arten ausgewählt werden können.
+                                Die Artauswahl erfolgt anhand vorgegebener Kriterien (Vorgaben) und persönlicher
+                                Präferenzen. Die Vorgaben sind im Baum ersichtlich.
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                Filter
+                            </td>
+                            <td>
+
+                                Der Taxonbaum kann insgesamt in vier verschiedenen Ansichten dargestellt werden.
+                                Dies wird über die <a href="../help/help.html">Symbole</a> durch Filter ermöglicht. Die
+                                Symbole sind in zwei Gruppen eingeteilt (zweites und drittes Paar Schaltflächen): Die
+                                einen betreffen nur die Artstufe, die anderen arbeiten auf höheren taxonomischen Stufen.
+                                Zur Klärung: Das erste Paar Schaltflächen sind keine Filter, sondern dienen zum Öffnen
+                                und Schliessen der Knoten des Baumes.
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+                                Bilanz
+                            </td>
+                            <td>
+
+                                Die Bilanz zeigt den Erfüllungsgrad der Vorgaben an. Bei jeder Änderung der Auswahl
+                                wird die Bilanz automatisch angepasst.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+            <subsection name="Bilanzzahlen im Taxonbaum">
+                <p>
+
+                    Im Taxonbaum wird für jede Vorgabe Ihre Bilanz in Klammern angezeigt. Zur Bedeutung der Farben: Rot
+                    = Vorgaben nicht erfüllt, Grün = Vorgaben erfüllt. Beachten Sie: Dies bedeutet nicht nur, dass die
+                    Vorgabe des Taxons selbst, sondern auch, dass eventuell untergeordnete Vorgaben nicht erfüllt resp.
+                    erfüllt sind. Beispiele:
+
+                </p>
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Beispiel</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+                                <img src="vorgabe1.gif"/>
+                            </td>
+                            <td>
+
+                                Es müssen für die Pteridophyta noch 5 Arten ausgewählt werden (1 Art ist gewählt, 6
+                                müssen insgesamt gewählt werden).
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                <img src="vorgabe2.gif"/>
+                            </td>
+                            <td>
+
+                                Die nötige Anzahl Arten ist ausgewählt worden und alle Vorgaben innerhalb der
+                                Pteridophyta sind erfüllt.
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+                                <img src="vorgabe3.gif"/>
+                            </td>
+                            <td>
+
+                                Es wurde zwar die nötige Anzahl Arten ausgewählt, dabei sind aber nicht alle
+                                untergeordneten Vorgaben innerhalb der Pteridophyta erfüllt worden. Hier müssen Sie die
+                                unerfüllten Vorgaben suchen und erfüllen. Damit wird sich die Anzahl der ausgewählten
+                                Arten erhöhen. Wenn Sie nicht mehr als die minimal erforderlichen 6 Pteridophyta
+                                auswählen wollen, müssen Sie bereits gewählte Arten wieder abwählen (Achtung: Beachten
+                                Sie dabei, dass die Vorgaben erfüllt bleiben!).
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                <img src="vorgabe4.gif"/>
+                            </td>
+                            <td>
+
+                                Es wurde eine Art mehr als nötig ausgewählt, aber es wurden trotzdem nicht alle
+                                untergeordneten Vorgaben innerhalb der Pteridophta erfüllt. Hier müssen Sie die offenen
+                                Vorgaben suchen und erfüllen. Damit wird sich die Anzahl der ausgewählten Arten weiter
+                                erhöhen.
+
+                            </td>
+                        </tr>
+                        <tr class="a">
+                            <td>
+                                <img src="vorgabe5.gif"/>
+                            </td>
+                            <td>
+
+                                Hier wurde eine Art mehr als nötig ausgewählt, und alle Vorgaben - inklusive der
+                                untergeordneten Vorgaben - sind erfüllt. Wenn Sie wollen, können Sie hier eine Art
+                                wieder abwählen. Beachten Sie dabei, dass die Vorgaben erfüllt bleiben.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    Strategie-Tipp: Erfüllen Sie zuerst alle Vorgaben tieferer taxonomischer Stufen und ergänzen Sie
+                    erst anschliessend diejenigen der höheren Stufen.
+                </p>
+            </subsection>
+            <subsection name="Bilanz">
+                <p>
+
+                    Die Bilanz befindet sich auf der rechten Seite. Sie gibt Ihnen eine Übersicht über den Stand,
+                    wieviel Arten Sie ausgewählt und wieviele Vorgaben Sie schon erfüllt haben. Negative Zahlen zeigen
+                    an, dass Sie mehr Arten als nötig ausgewählt haben.
+
+                </p>
+                <p>
+                    <img src="bilanz.png"/>
+                </p>
+            </subsection>
+        </section>
+        <section name="Navigation">
+            <subsection name="Navigation und Auswahl der Arten im Taxonbaum">
+                <p>
+                   Es stehen Ihnen folgende Möglichkeiten zur Navigation im Baum und Auswahl der Arten zur Verfügung:
+                </p>
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Aktion</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+                                Navigation
+                            </td>
+                            <td>
+                                Mit der Taste Pfeil-Nach-Oben bzw. Pfeil-Nach-Unten können Sie im Baum nach oben bzw.
+                                unten navigieren. Mit der Taste Pfeil-Nach-Rechts bzw. Pfeil-Nach-Links können Sie
+                                Knoten auf- bzw. zuklappen.
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                Auswahl
+                            </td>
+                            <td>
+                                Mit Hilfe der Taste Leerschlag oder einem Klick auf eine Art kann die Art aus- bzw.
+                                abgewählt werden.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+            <subsection name="Navigation mit Hilfe der Vorgabenliste">
+                <p>
+
+                    Die Vorgabenliste zeigt Vorgaben an. Sie können entweder alle anzeigen lassen, d.h. die erfüllten
+                    und die nicht erfüllten (<img src="constraints_all.png" align="absbottom"/>), oder aber nur
+                    diejenigen, die noch nicht erfüllt sind (<img src="constraints_open.png" align="absbottom"/>).
+
+                </p>
+                <p>
+                    <img src="search-constraints-all.png"/>&#160;<img src="search-constraints-open.png"/>
+                </p>
+                <p>
+
+                    Wenn Sie einen bestimmten Eintrag suchen möchten, reicht es, die ersten Buchstaben Ihrer Suche zu
+                    tippen. Stellen Sie vorher sicher, dass Sie beispielsweise mit einem Klick auf einen beliebigen
+                    Listeneintrag die Liste in den Fokus gebracht haben. Sobald Sie anfangen zu tippen, erscheint ein
+                    kleines Suchfenster im oberen linken Bereich der Liste, das Ihnen anzeigt, was Sie bisher getippt
+                    haben und ob etwas gefunden werden konnte. Um das Suchfenster wieder zum Verschwinden zu bringen,
+                    drücken Sie die ESC-Taste.
+
+                </p>
+                <p>
+                    <img src="search-constraints-found.png"/>&#160;<img src="search-constraints-notfound.png"/>
+                </p>
+            </subsection>
+            <subsection name="Navigation mit Hilfe der Artenliste">
+                <p>
+
+                    Wissen Sie bereits genau, welche Arten Sie in Ihrer Pflanzenliste haben möchten, verwenden Sie
+                    am Einfachsten die Artenliste. Die Suche darin funktioniert genauso wie in der Vorgabenliste.
+
+                </p>
+                <p>
+                    <img src="search-species.png"/>
+                </p>
+            </subsection>
+            <subsection name="Hilfsaktionen für den Taxonbaum">
+                <p>
+
+                    Der Taxonbaum hat am oberen Rand einen Toolbar, der drei Gruppen von Schaltflächen enthält. Das
+                    erste Paar Schaltfächen dient zum Öffnen und Schliessen aller Knoten des Taxonbaumes. Das zweite
+                    und dritte Paar sind Filter, die die Darstellung des Baumes beeinflussen.
+
+                </p>
+                <p>
+                    <img src="tree-toolbar.png"/>
+                </p>
+                <p>
+
+                    Mit der ersten Gruppe von Schaltflächen kann der Taxonbaum auf einen Klick expandiert oder
+                    kollabiert werden. Ein Klick auf das grüne Symbol mit den beiden Minuszeichen
+                    (<img src="tree-expand.png" align="absbottom"/>) öffnet alle Knoten, beim roten Symbol mit den
+                    beiden Pluszeichen werden sie geschlossen (<img src="tree-collapse.png" align="absbottom"/>).
+
+                </p>
+                <p>
+
+                    Die zweite Gruppe von Schaltflächen arbeitet ausschliesslich auf der Ebene der Arten. Andere
+                    taxonomische Stufen sind nicht betroffen. Eine der beiden Schaltflächen ist immer aktiv. Ist
+                    die Schaltfläche mit dem grünen Symbol aktiv (<img src="selected-only-on.png" align="absbottom"/>),
+                    so sind nur Arten sichtbar, die gewählt worden sind - ideal, um die gewählten Arten eingeordnet
+                    im taxonomischen System zu sehen. Hier können Arten abgewählt, aber keine neuen hinzugewählt werden.
+                    Wenn die andere Schaltfläche mit dem rot-grünen Symbol
+                    (<img src="selected-only-off.png" align="absbottom"/>) atkiviert ist, sehen Sie alle Arten.
+
+                </p>
+                <p>
+
+                    Die dritte Gruppe von Symbolen beeinflusst nur die taxonomischen Stufen oberhalb der Art (höhere
+                    Taxa). Arten sind von diesen Funktionen deshalb nicht betroffen. Auch bei diesen Schaltflächen ist
+                    immer eine der beiden aktiv. Bei aktiver grüner Schaltfläche
+                    (<img src="upper-on.png" align="absbottom"/>) sind alle höheren Taxa sichtbar, bei der roten
+                    (<img src="upper-off.png" align="absbottom"/>) nur jene, die eine Vorgabe darstellen.
+
+                </p>
+                <table class="bodyTable">
+                    <thead>
+                        <tr>
+                            <th>Icon</th>
+                            <th>Beispiel</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="a">
+                            <td>
+                                <img src="upper-on.png"/>
+                            </td>
+                            <td>
+                                <img src="filter1.png"/>
+                            </td>
+                            <td>
+
+                                Es werden alle Taxa gezeigt (Ginkgoaceae und Pinaceae sichtbar). Vorteil: Diese
+                                Darstellung ist die am stärksten strukturierte, die Verschachtelung der verschiedenen
+                                taxonomischen Stufen ist in ihrer vollen Tiefe enthalten. Wer sich im taxonomischen
+                                System auskennt, findet sich hier leicht zurecht. Nachteil: Die vielen Taxa trüben den
+                                Blick auf etwas sehr Wichtiges - auf die Vorgaben, denn diese sind meist in den tieferen
+                                taxonomischen Stufen zu finden.
+
+                            </td>
+                        </tr>
+                        <tr class="b">
+                            <td>
+                                <img src="upper-off.png"/>
+                            </td>
+                            <td>
+                                <img src="filter3.png"/>
+                            </td>
+                            <td>
+
+                                Neben den Arten werden nur höhere Taxa mit Vorgaben gezeigt (Ginkgoaceae und Pinaceae
+                                nicht sichtbar). Vorteil: Die Vorgaben sind schneller sichtbar, weil sie nicht so tief
+                                verschachtelt sind. Nachteil: Der Taxonbaum kann lang werden, d.h. es muss eventuell
+                                viel gescrollt werden.
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+        </section>
+    </body>
+</document>

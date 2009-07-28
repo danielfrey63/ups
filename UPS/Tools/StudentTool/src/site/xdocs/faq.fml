@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faqs title="Frequently Asked Questions">
+    <part id="general">
+        <title>Prüfung</title>
+        <faq id="exam-download">
+            <question>
+
+                Woher erhalte ich das UPS Studenten-Tool zum Erstellen einer Prüfungsliste?
+
+            </question>
+            <answer>
+                <p>
+
+                    <a href="http://balti.ethz.ch/ups/site/ust/project/download.html">Hier</a>
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="exam-howto">
+            <question>
+
+                Wie muss ich vorgehen, um eine Prüfungsliste einzureichen?
+
+            </question>
+            <answer>
+                <p>
+
+                    Eine ausführliche Beschreibung befindet sich
+                    <a href="http://balti.ethz.ch/ups/site/ust/help/exam.html">hier</a>.
+
+                </p>
+            </answer>
+        </faq>
+    </part>
+    <part id="general">
+        <title>Allgemeines zu WebStart</title>
+        <faq id="what-is-webstart">
+            <question>Was ist WebStart?</question>
+            <answer>
+                <p>
+
+                    WebStart ist eine Technologie von Sun, die die Installation einer Java Anwendung über das Internet
+                    erlaubt. Alle UPS Tools werden mit Hilfe von WebStart verteilt und zur Verfügung gestellt.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="start-without-internet">
+            <question>Kann ich die UPS Tools auch ohne Internet starten?</question>
+            <answer>
+                <p>
+
+                    Alle UPS Tools sind bzw. WebStart ist so konfiguriert, dass sie auch ohne Internetverbindung
+                    gestartet werden können. Es ist jedoch wichtig, von Zeit zu Zeit ein Tool mit Internetverbindung
+                    zu starten, damit überprüft werden kann, ob Updates vorhanden sind. Diese werden gegebenenfalls
+                    automatisch heruntergeladen: klar ersichtlich an eigens dafür geöffneten Fenster mit
+                    Download-Fortschrittsbalken.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="no-webstart-link">
+            <question>
+
+                Ich habe das Tool gestartet, erhalte aber keine Möglichkeit, einen Desktop-Shortcut erstellen zu
+                lassen. Wo bleibt die Frage zum Anlegen eines Shortcuts?
+
+            </question>
+            <answer>
+                <p>
+
+                    Die Frage nach dem automatischen Anlegen eines Desktop-Shortcuts wird im Normalfall erst dann
+                    gestellt, wenn eine Applikation zum zweiten Mal verwendet wird. Ein Shortcut kann aber auch manuell
+                    erstellt werden: WebStart Manager öffnen (PC: "Startmenü -> Java", MacOS X: "Dienstprogramme ->
+                    Java"), das Tool anklicken und im Menü "Programm" den Befehl "Verknüpfung erstellen" wählen.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="webstart-link-not-working">
+            <question>
+
+                Ich habe einen WebStart Link gespeichert, der nicht mehr funktioniert. Wie kann ich ihn reparieren?
+
+            </question>
+            <answer>
+                <p>
+
+                    Öffnen Sie den WebStart Manager (PC: "Startmenü -> Java", MacOS X: "Dienstprogramme -> Java") und
+                    wählen Sie die UPS Applikation aus. Klicken Sie auf "Start" zum Überprüfen, ob diese Applikation so
+                    richtig gestartet werden kann. Wenn ja, dann wählen Sie im Menü "Programm" den Befehl "Verknüpfung
+                    entfernen" an und danach "Verknüpfung anlegen" (oder ähnlich). Damit sollte ein neuer
+                    funktionierender Link erstellt werden.
+
+                </p>
+                <p>
+
+                    Falls die Applikation nicht richtig gestartet wird, können Sie sie entfernen und nochmals
+                    herunterladen. Öffnen Sie dazu den WebStart Manager und wählen Sie die UPS Applikation aus, die
+                    Sie neu installiert haben möchten. Im Menü "Programm" oder "Anwendung" können Sie nun "Anwendung
+                    entfernen" anwählen. Für die anschliessende Neuinstallation klicken Sie auf folgenden Link:
+                    <a href="http://balti.ethz.ch/ups/webstart/ust/ch.xmatrix.ups.ust.ust.jnlp">
+                    http://balti.ethz.ch/ups/webstart/ust/ch.xmatrix.ups.ust.jnlp</a>. Danach kann ein Desktop-Shortcut
+                    wie weiter oben beschrieben neu erstellt werden.
+
+                </p>
+            </answer>
+        </faq>
+    </part>
+    <part id="UPS Studenten-Tool">
+        <title>Export und Ausdruck</title>
+        <faq id="export-text">
+            <question>
+
+                Ich möchte die Artenliste ausdrucken. Wie kann ich das machen?
+
+            </question>
+            <answer>
+                <p>
+
+                    Das UPS Studenten-Tool unterstützt das Ausdrucken von Listen generell nicht. Es besteht jedoch die
+                    Möglichkeit, die Liste aus dem UPS Studenten-Tool zu exportieren. Die Datei wird dabei unter dem von
+                    Ihnen gegebenen Namen und der Endung ".txt" als Textdatei gesichert. Ein Export in andere Formate
+                    (z.B. Microsoft-Word DOC-Format) ist nicht vorgesehen, da die Textdatei ein universelles Format
+                    darstellt und von allen Textverarbeitungssystemen importiert bzw. geöffnet werden kann.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="export-text">
+            <question>
+
+                Ich möchte die exportierte Textdatei in meinem Textverarbeitungsprogramm öffnen. Wie geht das?
+
+            </question>
+            <answer>
+                <p>
+
+                    Diese Textdatei kann mit irgendeinem Textverarbeitungssystem geöffnet werden. Im Normalfall sollte
+                    Ihnen die Hilfe bzw. die Handbücher des jeweiligen Systems genau Auskunft darüber geben können, wie
+                    das gemacht wird. Bei Microsoft Word sollten Sie das mit dem Öffnen-Befehl bewerkstelligen können,
+                    wenn Sie den richtigen Dateityp (=Textdatei (*.txt)) angewählt haben.
+
+                </p>
+            </answer>
+        </faq>
+        <faq id="export-all">
+            <question>
+
+                Wie kann ich alle Arten (nicht nur meine Prüfungsliste) exportieren?
+
+            </question>
+            <answer>
+                <p>
+
+                    Erstellen Sie eine neue Pflanzenliste, wählen Sie alle Arten im Taxonomiebaum an und exportieren Sie
+                    sie in eine Textdatei. Ich würde das so machen: Den Taxonomie-Baum expandieren (Plus-Schaltfläche),
+                    mit der Pfeil-nach-unten Taste zur nächsten Art, mit der Leerschlagtaste die Art anwählen, usw.
+
+                </p>
+            </answer>
+        </faq>
+    </part>
+</faqs>

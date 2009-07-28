@@ -1,0 +1,4367 @@
+<!-- Transformed with ch.xmatrix.ups.admin.data.v1.DataVersion1 at 2006-03-24 13:50:43.717 CET -->
+<groupsModels id="1">
+    <groupsModel id="3">
+        <name>Gruppen Frühling 2003</name>
+        <uid>C82CC690-912E-AB54-157B-39735C3208D5</uid>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <modified id="4">2003-05-25 19:04:43.696 CEST</modified>
+        <fixed>true</fixed> id="5"
+        <groupModel id="6">
+            <name>Farne/Gymnos</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="7">
+                <string>Huperzia selago</string>
+                <string>Lycopodium annotinum</string>
+                <string>Selaginella selaginoides</string>
+                <string>Equisetum hyemale</string>
+                <string>Equisetum sylvaticum</string>
+                <string>Equisetum telmateia</string>
+                <string>Botrychium lunaria</string>
+                <string>Asplenium ruta-muraria</string>
+                <string>Asplenium trichomanes</string>
+                <string>Asplenium viride</string>
+                <string>Phyllitis scolopendrium</string>
+                <string>Blechnum spicant</string>
+                <string>Athyrium filix-femina</string>
+                <string>Cystopteris fragilis</string>
+                <string>Dryopteris filix-mas</string>
+                <string>Polypodium vulgare</string>
+                <string>Pteridium aquilinum</string>
+                <string>Ginkgo biloba</string>
+                <string>Abies alba</string>
+                <string>Larix decidua</string>
+                <string>Picea abies</string>
+                <string>Pinus cembra</string>
+                <string>Pinus mugo</string>
+                <string>Pinus sylvestris</string>
+                <string>Juniperus communis</string>
+                <string>Juniperus nana</string>
+                <string>Juniperus sabina</string>
+                <string>Taxus baccata</string>
+                <string>Equisetum arvense</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="8">
+            <name>Gräser</name>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+            <taxa id="9">
+                <string>Juncus alpinoarticulatus</string>
+                <string>Juncus trifidus</string>
+                <string>Juncus effusus</string>
+                <string>Juncus inflexus</string>
+                <string>Luzula campestris</string>
+                <string>Luzula pilosa</string>
+                <string>Luzula sylvatica</string>
+                <string>Eriophorum angustifolium</string>
+                <string>Eriophorum latifolium</string>
+                <string>Eriophorum scheuchzeri</string>
+                <string>Eriophorum vaginatum</string>
+                <string>Schoenus ferrugineus</string>
+                <string>Scirpus sylvaticus</string>
+                <string>Trichophorum caespitosum</string>
+                <string>Elyna myosuroides</string>
+                <string>Carex davalliana</string>
+                <string>Carex curvula</string>
+                <string>Carex spicata</string>
+                <string>Carex echinata</string>
+                <string>Carex atrata</string>
+                <string>Carex parviflora</string>
+                <string>Carex elata</string>
+                <string>Carex nigra</string>
+                <string>Carex caryophyllea</string>
+                <string>Carex digitata</string>
+                <string>Carex hirta</string>
+                <string>Carex ferruginea</string>
+                <string>Carex firma</string>
+                <string>Carex flacca</string>
+                <string>Carex flava</string>
+                <string>Carex pallescens</string>
+                <string>Carex panicea</string>
+                <string>Carex sempervirens</string>
+                <string>Carex sylvatica</string>
+                <string>Arrhenatherum elatius</string>
+                <string>Avena sativa</string>
+                <string>Briza media</string>
+                <string>Bromus erectus</string>
+                <string>Bromus hordeaceus</string>
+                <string>Bromus sterilis</string>
+                <string>Bromus tectorum</string>
+                <string>Dactylis glomerata</string>
+                <string>Deschampsia caespitosa</string>
+                <string>Festuca arundinacea</string>
+                <string>Festuca pratensis</string>
+                <string>Festuca rubra</string>
+                <string>Festuca valesiaca</string>
+                <string>Helictotrichon pubescens</string>
+                <string>Holcus lanatus</string>
+                <string>Molinia caerulea</string>
+                <string>Phragmites australis</string>
+                <string>Poa alpina</string>
+                <string>Poa annua</string>
+                <string>Poa bulbosa</string>
+                <string>Poa pratensis</string>
+                <string>Poa trivialis</string>
+                <string>Trisetum flavescens</string>
+                <string>Agrostis stolonifera</string>
+                <string>Apera spica-venti</string>
+                <string>Calamagrostis varia</string>
+                <string>Milium effusum</string>
+                <string>Agropyron repens</string>
+                <string>Brachypodium pinnatum</string>
+                <string>Brachypodium sylvaticum</string>
+                <string>Hordeum murinum</string>
+                <string>Hordeum vulgare</string>
+                <string>Lolium perenne</string>
+                <string>Lolium multiflorum</string>
+                <string>Nardus stricta</string>
+                <string>Secale cereale</string>
+                <string>Triticum aestivum</string>
+                <string>Alopecurus pratensis</string>
+                <string>Anthoxantum odoratum</string>
+                <string>Cynosurus cristatus</string>
+                <string>Melica nutans</string>
+                <string>Phleum pratense</string>
+                <string>Sesleria caerulea</string>
+                <string>Stipa pennata</string>
+                <string>Zea mays</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="10">
+            <name>Monocots</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="11">
+                <string>Galanthus nivalis</string>
+                <string>Leucojum vernum</string>
+                <string>Narcissus poeticus</string>
+                <string>Narcissus pseudonarcissus</string>
+                <string>Crocus albiflorus</string>
+                <string>Iris pseudacorus</string>
+                <string>Iris sibirica</string>
+                <string>Allium schoenoprasum</string>
+                <string>Allium ursinum</string>
+                <string>Lilium martagon</string>
+                <string>Lloydia serotina</string>
+                <string>Maianthemum bifolium</string>
+                <string>Paris quadrifolia</string>
+                <string>Tofieldia calyculata</string>
+                <string>Tulipa sylvestris</string>
+                <string>Veratrum lobelianum</string>
+                <string>Colchicum autumnale</string>
+                <string>Convallaria majalis</string>
+                <string>Polygonatum multiflorum</string>
+                <string>Polygonatum odoratum</string>
+                <string>Polygonatum verticillatum</string>
+                <string>Coeloglossum viride</string>
+                <string>Dactylorhiza maculata</string>
+                <string>Gymnadenia conopsea</string>
+                <string>Nigritella nigra</string>
+                <string>Orchis mascula</string>
+                <string>Orchis ustulata</string>
+                <string>Cypripedium calceolus</string>
+                <string>Listera ovata</string>
+                <string>Neottia nidus-avis</string>
+                <string>Ophrys insectifera</string>
+                <string>Typha latifolia</string>
+                <string>Arum maculatum</string>
+                <string>Lemna minor</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="12">
+            <name>Dicots 1</name>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+            <taxa id="13">
+                <string>Aconitum napellus</string>
+                <string>Aconitum vulparia</string>
+                <string>Consolida regalis</string>
+                <string>Trollius europaeus</string>
+                <string>Helleborus foetidus</string>
+                <string>Aquilegia vulgaris</string>
+                <string>Ranunculus bulbosus</string>
+                <string>Ranunculus ficaria</string>
+                <string>Ranunculus friesianus</string>
+                <string>Ranunculus montanus</string>
+                <string>Ranunculus repens</string>
+                <string>Ranunculus aconitifolius</string>
+                <string>Ranunculus alpestris</string>
+                <string>Ranunculus glacialis</string>
+                <string>Ranunculus kuepferi</string>
+                <string>Caltha palustris</string>
+                <string>Clematis vitalba</string>
+                <string>Anemone nemorosa</string>
+                <string>Pulsatilla alpina</string>
+                <string>Pulsatilla apiifolia</string>
+                <string>Pulsatilla vernalis</string>
+                <string>Adonis aestivalis</string>
+                <string>Dryas octopetala</string>
+                <string>Geum montanum</string>
+                <string>Geum rivale</string>
+                <string>Geum urbanum</string>
+                <string>Filipendula ulmaria</string>
+                <string>Potentilla anserina</string>
+                <string>Potentilla aurea</string>
+                <string>Potentilla crantzii</string>
+                <string>Potentilla erecta</string>
+                <string>Potentilla reptans</string>
+                <string>Potentilla sterilis</string>
+                <string>Sibbaldia procumbens</string>
+                <string>Alchemilla conjuncta</string>
+                <string>Alchemilla vulgaris</string>
+                <string>Sanguisorba minor</string>
+                <string>Fragaria vesca</string>
+                <string>Rosa canina</string>
+                <string>Rubus fruticosus</string>
+                <string>Rubus idaeus</string>
+                <string>Cotoneaster integerrima</string>
+                <string>Crataegus monogyna</string>
+                <string>Amelanchier ovalis</string>
+                <string>Malus sylvestris</string>
+                <string>Pyrus pyraster</string>
+                <string>Sorbus aria</string>
+                <string>Sorbus aucuparia</string>
+                <string>Sorbus torminalis</string>
+                <string>Prunus avium</string>
+                <string>Prunus padus</string>
+                <string>Prunus spinosa</string>
+                <string>Medicago falcata</string>
+                <string>Medicago lupulina</string>
+                <string>Medicago sativa</string>
+                <string>Melilotus albus</string>
+                <string>Melilotus officinalis</string>
+                <string>Trifolium alpinum</string>
+                <string>Trifolium pratense</string>
+                <string>Trifolium badium</string>
+                <string>Trifolium dubium</string>
+                <string>Trifolium montanum</string>
+                <string>Trifolium repens</string>
+                <string>Lotus corniculatus</string>
+                <string>Lathyrus pratensis</string>
+                <string>Lathyrus vernus</string>
+                <string>Vicia cracca</string>
+                <string>Vicia sativa</string>
+                <string>Vicia sepium</string>
+                <string>Anthyllis vulneraria</string>
+                <string>Astragalus alpinus</string>
+                <string>Astragalus frigidus</string>
+                <string>Hedysarum hedysaroides</string>
+                <string>Hippocrepis comosa</string>
+                <string>Onobrychis viciifolia</string>
+                <string>Oxytropis campestris</string>
+                <string>Robinia pseudoacacia</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="14">
+            <name>Dicots 2</name>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+            <taxa id="15">
+                <string>Carum carvi</string>
+                <string>Daucus carota</string>
+                <string>Ligusticum mutellina</string>
+                <string>Anthriscus sylvestris</string>
+                <string>Chaerophyllum villarsii</string>
+                <string>Aegopodium podagraria</string>
+                <string>Astrantia major</string>
+                <string>Heracleum mantegazzianum</string>
+                <string>Heracleum sphondylium</string>
+                <string>Peucedanum ostruthium</string>
+                <string>Sanicula europaea</string>
+                <string>Anagallis arvensis</string>
+                <string>Lysimachia nemorum</string>
+                <string>Androsace chamaejasme</string>
+                <string>Androsace obtusifolia</string>
+                <string>Androsace alpina</string>
+                <string>Androsace helvetica</string>
+                <string>Androsace vandellii</string>
+                <string>Primula auricula</string>
+                <string>Primula elatior</string>
+                <string>Primula veris</string>
+                <string>Primula farinosa</string>
+                <string>Primula hirsuta</string>
+                <string>Soldanella alpina</string>
+                <string>Gentiana acaulis</string>
+                <string>Gentiana clusii</string>
+                <string>Gentiana verna</string>
+                <string>Gentiana lutea</string>
+                <string>Gentiana punctata</string>
+                <string>Gentiana purpurea</string>
+                <string>Gentiana campestris</string>
+                <string>Gentiana germanica</string>
+                <string>Asperula cynanchica</string>
+                <string>Cruciata laevipes</string>
+                <string>Galium album</string>
+                <string>Galium anisophyllum</string>
+                <string>Galium aparine</string>
+                <string>Galium odoratum</string>
+                <string>Galium verum</string>
+                <string>Atropa belladonna</string>
+                <string>Datura stramonium</string>
+                <string>Solanum dulcamara</string>
+                <string>Solanum tuberosum</string>
+                <string>Echium vulgare</string>
+                <string>Eritrichium nanum</string>
+                <string>Myosotis alpestris</string>
+                <string>Myosotis arvensis</string>
+                <string>Pulmonaria obscura</string>
+                <string>Symphytum officinale</string>
+                <string>Veronica beccabunga</string>
+                <string>Veronica chamaedrys</string>
+                <string>Veronica arvensis</string>
+                <string>Veronica bellidioides</string>
+                <string>Veronica filiformis</string>
+                <string>Veronica fruticans</string>
+                <string>Veronica hederifolia</string>
+                <string>Veronica persica</string>
+                <string>Chaenorrhinum minus</string>
+                <string>Digitalis grandiflora</string>
+                <string>Linaria alpina</string>
+                <string>Linaria vulgaris</string>
+                <string>Bartsia alpina</string>
+                <string>Euphrasia rostkoviana</string>
+                <string>Melampyrum pratense</string>
+                <string>Melampyrum sylvaticum</string>
+                <string>Pedicularis tuberosa</string>
+                <string>Pedicularis verticillata</string>
+                <string>Rhinanthus alectorolophus</string>
+                <string>Rhinanthus minor</string>
+                <string>Verbascum lychnitis</string>
+                <string>Ajuga pyramidalis</string>
+                <string>Ajuga reptans</string>
+                <string>Glechoma hederacea</string>
+                <string>Teucrium montanum</string>
+                <string>Acinos alpinus</string>
+                <string>Galeopsis tetrahit</string>
+                <string>Lamium album</string>
+                <string>Lamium maculatum</string>
+                <string>Lamium montanum</string>
+                <string>Lamium purpureum</string>
+                <string>Prunella vulgaris</string>
+                <string>Salvia glutinosa</string>
+                <string>Salvia pratensis</string>
+                <string>Stachys recta</string>
+                <string>Stachys sylvatica</string>
+                <string>Origanum vulgare</string>
+                <string>Thymus serpyllum</string>
+                <string>Mentha arvensis</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="16">
+            <name>Dicots 3</name>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+            <taxa id="17">
+                <string>Campanula barbata</string>
+                <string>Campanula cochleariifolia</string>
+                <string>Campanula patula</string>
+                <string>Campanula rhomboidalis</string>
+                <string>Campanula rotundifolia</string>
+                <string>Phyteuma betonicifolium</string>
+                <string>Phyteuma hemisphaericum</string>
+                <string>Phyteuma orbiculare</string>
+                <string>Phyteuma spicatum</string>
+                <string>Carduus defloratus</string>
+                <string>Carduus personata</string>
+                <string>Carlina acaulis</string>
+                <string>Cirsium arvense</string>
+                <string>Cirsium oleraceum</string>
+                <string>Cirsium spinosissimum</string>
+                <string>Homogyne alpina</string>
+                <string>Petasites albus</string>
+                <string>Petasites hybridus</string>
+                <string>Tussilago farfara</string>
+                <string>Adenostyles alliariae</string>
+                <string>Antennaria dioica</string>
+                <string>Artemisia absinthium</string>
+                <string>Artemisia campestris</string>
+                <string>Artemisia vulgaris</string>
+                <string>Centaurea cyanus</string>
+                <string>Centaurea jacea</string>
+                <string>Centaurea montana</string>
+                <string>Centaurea scabiosa</string>
+                <string>Eupatorium cannabinum</string>
+                <string>Gnaphalium supinum</string>
+                <string>Leontopodium alpinum</string>
+                <string>Arnica montana</string>
+                <string>Doronicum clusii</string>
+                <string>Doronicum grandiflorum</string>
+                <string>Helianthus annuus</string>
+                <string>Senecio alpinus</string>
+                <string>Senecio doronicum</string>
+                <string>Senecio incanus</string>
+                <string>Senecio vulgaris</string>
+                <string>Solidago gigantea</string>
+                <string>Solidago virgaurea</string>
+                <string>Achillea atrata</string>
+                <string>Achillea macrophylla</string>
+                <string>Achillea millefolium</string>
+                <string>Achillea moschata</string>
+                <string>Aster alpinus</string>
+                <string>Aster bellidiastrum</string>
+                <string>Bellis perennis</string>
+                <string>Erigeron alpinus</string>
+                <string>Erigeron annuus</string>
+                <string>Leucanthemopsis alpina</string>
+                <string>Leucanthemum vulgare</string>
+                <string>Matricaria discoidea</string>
+                <string>Matricaria recutita</string>
+                <string>Cichorium intybus</string>
+                <string>Prenanthes purpurea</string>
+                <string>Crepis aurea</string>
+                <string>Crepis biennis</string>
+                <string>Hieracium murorum</string>
+                <string>Hieracium pilosella</string>
+                <string>Hieracium villosum</string>
+                <string>Sonchus oleraceus</string>
+                <string>Taraxacum officinale</string>
+                <string>Leontodon helveticus</string>
+                <string>Leontodon hispidus</string>
+                <string>Tragopogon orientalis</string>
+                <string>Lonicera alpigena</string>
+                <string>Lonicera caerulea</string>
+                <string>Lonicera nigra</string>
+                <string>Lonicera xylosteum</string>
+                <string>Sambucus nigra</string>
+                <string>Sambucus racemosa</string>
+                <string>Viburnum lantana</string>
+                <string>Viburnum opulus</string>
+                <string>Knautia arvensis</string>
+                <string>Scabiosa columbaria</string>
+                <string>Valeriana montana</string>
+                <string>Valeriana officinalis</string>
+                <string>Valeriana tripteris</string>
+                <string>Valerianella locusta</string>
+            </taxa>
+        </groupModel>
+        <index id="18">
+            <entry>
+                <string>Melica nutans</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Hordeum vulgare</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Campanula cochleariifolia</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Centaurea cyanus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Carex flacca</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Viburnum lantana</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Senecio alpinus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Ranunculus alpestris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Trifolium montanum</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Iris pseudacorus</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Medicago sativa</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Lysimachia nemorum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Heracleum sphondylium</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Juncus trifidus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Brachypodium pinnatum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lolium multiflorum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Equisetum hyemale</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Erigeron annuus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Pedicularis verticillata</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Ranunculus aconitifolius</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Adonis aestivalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Carex ferruginea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Galium album</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Ranunculus bulbosus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Lamium album</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Potentilla sterilis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Carex caryophyllea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Ajuga pyramidalis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Trifolium repens</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Coeloglossum viride</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Galeopsis tetrahit</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Phyllitis scolopendrium</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Cirsium arvense</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Trifolium pratense</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Leontopodium alpinum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Lotus corniculatus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Melampyrum sylvaticum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Narcissus pseudonarcissus</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Echium vulgare</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Potentilla anserina</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Ranunculus repens</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Phyteuma hemisphaericum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Convallaria majalis</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Primula veris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Matricaria discoidea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Juniperus communis</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Luzula pilosa</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Astragalus alpinus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Hieracium villosum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Juncus inflexus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Campanula patula</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Poa annua</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Carex nigra</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lilium martagon</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Agropyron repens</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Achillea macrophylla</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Erigeron alpinus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Androsace chamaejasme</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Galium verum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Linaria vulgaris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Aquilegia vulgaris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Knautia arvensis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Festuca rubra</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Digitalis grandiflora</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Bromus sterilis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Dactylis glomerata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Myosotis alpestris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Hieracium murorum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Rubus fruticosus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Sibbaldia procumbens</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Taxus baccata</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Equisetum arvense</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Carduus personata</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Valeriana montana</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Sanguisorba minor</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Achillea moschata</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Myosotis arvensis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Tofieldia calyculata</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Carex flava</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lloydia serotina</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Bartsia alpina</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Orchis mascula</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Rhinanthus minor</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Trifolium badium</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Cynosurus cristatus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Brachypodium sylvaticum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Rhinanthus alectorolophus</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Linaria alpina</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Holcus lanatus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Phyteuma orbiculare</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Centaurea scabiosa</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Veronica beccabunga</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Crataegus monogyna</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Phragmites australis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Vicia sativa</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Festuca valesiaca</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Gentiana purpurea</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Hedysarum hedysaroides</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Melilotus albus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Leucanthemum vulgare</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Medicago lupulina</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Trichophorum caespitosum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Vicia cracca</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Eriophorum scheuchzeri</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Taraxacum officinale</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Blechnum spicant</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Aconitum napellus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Listera ovata</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Potentilla crantzii</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Maianthemum bifolium</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Phyteuma betonicifolium</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Geum rivale</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Potentilla reptans</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Cirsium oleraceum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Prunus padus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Galium aparine</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Peucedanum ostruthium</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Achillea atrata</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Crepis aurea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Leucojum vernum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Chaenorrhinum minus</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Allium schoenoprasum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Origanum vulgare</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Arum maculatum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Agrostis stolonifera</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Pulmonaria obscura</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Eriophorum vaginatum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Equisetum telmateia</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Anagallis arvensis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Heracleum mantegazzianum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Trifolium alpinum</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Caltha palustris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Filipendula ulmaria</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Geum urbanum</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Dryopteris filix-mas</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Gymnadenia conopsea</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Briza media</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Poa trivialis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Ranunculus glacialis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Eupatorium cannabinum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Sorbus torminalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Avena sativa</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Crepis biennis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Lamium purpureum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Gentiana lutea</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Doronicum grandiflorum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Carex davalliana</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Androsace obtusifolia</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Lamium montanum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Anthyllis vulneraria</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Veronica fruticans</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex pallescens</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Ranunculus montanus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Festuca arundinacea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Symphytum officinale</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Asplenium trichomanes</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Stachys recta</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Hieracium pilosella</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Pinus mugo</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Lonicera xylosteum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Euphrasia rostkoviana</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Senecio incanus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Mentha arvensis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Larix decidua</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Primula farinosa</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Hordeum murinum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Nardus stricta</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Viburnum opulus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Sorbus aria</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Carex spicata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Primula auricula</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Orchis ustulata</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Polypodium vulgare</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Gentiana verna</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Equisetum sylvaticum</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Medicago falcata</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Poa bulbosa</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Chaerophyllum villarsii</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Secale cereale</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla apiifolia</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Poa pratensis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lathyrus pratensis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Juniperus sabina</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Carex sylvatica</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Tussilago farfara</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Deschampsia caespitosa</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Rubus idaeus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Vicia sepium</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Veronica filiformis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Matricaria recutita</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Ligusticum mutellina</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Dryas octopetala</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Hippocrepis comosa</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Adenostyles alliariae</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Polygonatum verticillatum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Valeriana tripteris</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Robinia pseudoacacia</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Sorbus aucuparia</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Androsace helvetica</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Primula hirsuta</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Salvia pratensis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Molinia caerulea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Primula elatior</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Juncus alpinoarticulatus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Pinus cembra</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Anthoxantum odoratum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Nigritella nigra</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Daucus carota</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex elata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Gentiana punctata</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla alpina</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla vernalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Pinus sylvestris</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Aster bellidiastrum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Aegopodium podagraria</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Aconitum vulparia</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Gentiana acaulis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex curvula</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Trifolium dubium</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Zea mays</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Veronica arvensis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Campanula rhomboidalis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Clematis vitalba</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Prunus avium</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Carlina acaulis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Elyna myosuroides</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Homogyne alpina</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Helictotrichon pubescens</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Malus sylvestris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Bromus erectus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Schoenus ferrugineus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lolium perenne</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Eriophorum angustifolium</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Tulipa sylvestris</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Poa alpina</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Trisetum flavescens</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Cotoneaster integerrima</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Ajuga reptans</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Asplenium ruta-muraria</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Sambucus racemosa</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Ginkgo biloba</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Helleborus foetidus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Lamium maculatum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Neottia nidus-avis</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Prunus spinosa</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Achillea millefolium</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Thymus serpyllum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carduus defloratus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Veronica chamaedrys</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex parviflora</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Triticum aestivum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Salvia glutinosa</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Galanthus nivalis</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Oxytropis campestris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Valeriana officinalis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Senecio vulgaris</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Sonchus oleraceus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Polygonatum odoratum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Leontodon hispidus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Typha latifolia</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Juncus effusus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Sesleria caerulea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lycopodium annotinum</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Lonicera nigra</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Consolida regalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Huperzia selago</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Fragaria vesca</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Glechoma hederacea</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Solidago virgaurea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Cichorium intybus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Sanicula europaea</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Campanula barbata</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Senecio doronicum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Allium ursinum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Luzula sylvatica</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Artemisia campestris</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Apera spica-venti</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Veratrum lobelianum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Galium odoratum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Potentilla aurea</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Stipa pennata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Scirpus sylvaticus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Asplenium viride</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Abies alba</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Anemone nemorosa</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Arrhenatherum elatius</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Pyrus pyraster</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Colchicum autumnale</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Carex panicea</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Alopecurus pratensis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Ranunculus ficaria</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Eritrichium nanum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Picea abies</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Asperula cynanchica</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex hirta</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Veronica hederifolia</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex atrata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Luzula campestris</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Veronica bellidioides</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Helianthus annuus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Prenanthes purpurea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Petasites hybridus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Gnaphalium supinum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Selaginella selaginoides</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Gentiana campestris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Solanum tuberosum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Cypripedium calceolus</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Carex digitata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Bellis perennis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Juniperus nana</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Petasites albus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Soldanella alpina</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Gentiana germanica</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Centaurea jacea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Eriophorum latifolium</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Lonicera caerulea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Astrantia major</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Artemisia vulgaris</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Centaurea montana</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Carum carvi</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Prunella vulgaris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Atropa belladonna</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Paris quadrifolia</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Lemna minor</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Calamagrostis varia</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Carex firma</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Bromus tectorum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Rosa canina</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Pteridium aquilinum</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Solanum dulcamara</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Acinos alpinus</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Carex echinata</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Polygonatum multiflorum</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Botrychium lunaria</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Veronica persica</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Narcissus poeticus</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Solidago gigantea</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Scabiosa columbaria</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Festuca pratensis</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Dactylorhiza maculata</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Androsace vandellii</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Artemisia absinthium</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Leontodon helveticus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Astragalus frigidus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Sambucus nigra</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Potentilla erecta</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Geum montanum</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Alchemilla vulgaris</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Arnica montana</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Ophrys insectifera</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Tragopogon orientalis</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Valerianella locusta</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Melilotus officinalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Cystopteris fragilis</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Trollius europaeus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Carex sempervirens</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Cirsium spinosissimum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Pedicularis tuberosa</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Galium anisophyllum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Gentiana clusii</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Phyteuma spicatum</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Verbascum lychnitis</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Lathyrus vernus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Androsace alpina</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Amelanchier ovalis</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Ranunculus kuepferi</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Milium effusum</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Iris sibirica</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Crocus albiflorus</string>
+                <groupModel reference="10"/>
+            </entry>
+            <entry>
+                <string>Melampyrum pratense</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Aster alpinus</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Stachys sylvatica</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Cruciata laevipes</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Lonicera alpigena</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Ranunculus friesianus</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Athyrium filix-femina</string>
+                <groupModel reference="6"/>
+            </entry>
+            <entry>
+                <string>Datura stramonium</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Campanula rotundifolia</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Bromus hordeaceus</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Doronicum clusii</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Teucrium montanum</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Phleum pratense</string>
+                <groupModel reference="8"/>
+            </entry>
+            <entry>
+                <string>Alchemilla conjuncta</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Leucanthemopsis alpina</string>
+                <groupModel reference="16"/>
+            </entry>
+            <entry>
+                <string>Anthriscus sylvestris</string>
+                <groupModel reference="14"/>
+            </entry>
+            <entry>
+                <string>Onobrychis viciifolia</string>
+                <groupModel reference="12"/>
+            </entry>
+            <entry>
+                <string>Antennaria dioica</string>
+                <groupModel reference="16"/>
+            </entry>
+        </index>
+    </groupsModel>
+    <groupsModel id="103">
+        <name>Gruppen Herbst 2005</name>
+        <uid>A6C4C808-0DF7-C7E1-6490-D30ED32A09AE</uid>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <modified id="104">2005-10-05 15:19:31.116 CEST</modified>
+        <fixed>true</fixed> id="105"
+        <groupModel id="106">
+            <name>Farne/Gymnos</name>
+            <minimum>1</minimum>
+            <maximum>1</maximum>
+            <taxa id="107">
+                <string>Huperzia selago</string>
+                <string>Lycopodium annotinum</string>
+                <string>Selaginella selaginoides</string>
+                <string>Equisetum hyemale</string>
+                <string>Equisetum sylvaticum</string>
+                <string>Equisetum telmateia</string>
+                <string>Botrychium lunaria</string>
+                <string>Asplenium ruta-muraria</string>
+                <string>Asplenium trichomanes</string>
+                <string>Asplenium viride</string>
+                <string>Phyllitis scolopendrium</string>
+                <string>Blechnum spicant</string>
+                <string>Athyrium filix-femina</string>
+                <string>Cystopteris fragilis</string>
+                <string>Dryopteris filix-mas</string>
+                <string>Polypodium vulgare</string>
+                <string>Pteridium aquilinum</string>
+                <string>Ginkgo biloba</string>
+                <string>Abies alba</string>
+                <string>Larix decidua</string>
+                <string>Picea abies</string>
+                <string>Pinus cembra</string>
+                <string>Pinus mugo</string>
+                <string>Pinus sylvestris</string>
+                <string>Juniperus communis</string>
+                <string>Juniperus nana</string>
+                <string>Juniperus sabina</string>
+                <string>Taxus baccata</string>
+                <string>Equisetum arvense</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="108">
+            <name>Gräser</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="109">
+                <string>Juncus alpinoarticulatus</string>
+                <string>Juncus trifidus</string>
+                <string>Juncus effusus</string>
+                <string>Juncus inflexus</string>
+                <string>Luzula campestris</string>
+                <string>Luzula pilosa</string>
+                <string>Luzula sylvatica</string>
+                <string>Eriophorum angustifolium</string>
+                <string>Eriophorum latifolium</string>
+                <string>Eriophorum scheuchzeri</string>
+                <string>Eriophorum vaginatum</string>
+                <string>Schoenus ferrugineus</string>
+                <string>Scirpus sylvaticus</string>
+                <string>Trichophorum caespitosum</string>
+                <string>Elyna myosuroides</string>
+                <string>Carex davalliana</string>
+                <string>Carex curvula</string>
+                <string>Carex spicata</string>
+                <string>Carex echinata</string>
+                <string>Carex atrata</string>
+                <string>Carex parviflora</string>
+                <string>Carex elata</string>
+                <string>Carex nigra</string>
+                <string>Carex caryophyllea</string>
+                <string>Carex digitata</string>
+                <string>Carex hirta</string>
+                <string>Carex ferruginea</string>
+                <string>Carex firma</string>
+                <string>Carex flacca</string>
+                <string>Carex flava</string>
+                <string>Carex pallescens</string>
+                <string>Carex panicea</string>
+                <string>Carex sempervirens</string>
+                <string>Carex sylvatica</string>
+                <string>Arrhenatherum elatius</string>
+                <string>Avena sativa</string>
+                <string>Briza media</string>
+                <string>Bromus erectus</string>
+                <string>Bromus hordeaceus</string>
+                <string>Bromus sterilis</string>
+                <string>Bromus tectorum</string>
+                <string>Dactylis glomerata</string>
+                <string>Deschampsia caespitosa</string>
+                <string>Festuca arundinacea</string>
+                <string>Festuca pratensis</string>
+                <string>Festuca rubra</string>
+                <string>Festuca valesiaca</string>
+                <string>Helictotrichon pubescens</string>
+                <string>Holcus lanatus</string>
+                <string>Molinia caerulea</string>
+                <string>Phragmites australis</string>
+                <string>Poa alpina</string>
+                <string>Poa annua</string>
+                <string>Poa bulbosa</string>
+                <string>Poa pratensis</string>
+                <string>Poa trivialis</string>
+                <string>Trisetum flavescens</string>
+                <string>Agrostis stolonifera</string>
+                <string>Apera spica-venti</string>
+                <string>Calamagrostis varia</string>
+                <string>Milium effusum</string>
+                <string>Agropyron repens</string>
+                <string>Brachypodium pinnatum</string>
+                <string>Brachypodium sylvaticum</string>
+                <string>Hordeum murinum</string>
+                <string>Hordeum vulgare</string>
+                <string>Lolium perenne</string>
+                <string>Lolium multiflorum</string>
+                <string>Nardus stricta</string>
+                <string>Secale cereale</string>
+                <string>Triticum aestivum</string>
+                <string>Alopecurus pratensis</string>
+                <string>Anthoxantum odoratum</string>
+                <string>Cynosurus cristatus</string>
+                <string>Melica nutans</string>
+                <string>Phleum pratense</string>
+                <string>Sesleria caerulea</string>
+                <string>Stipa pennata</string>
+                <string>Zea mays</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="110">
+            <name>Monocots</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="111">
+                <string>Galanthus nivalis</string>
+                <string>Leucojum vernum</string>
+                <string>Narcissus poeticus</string>
+                <string>Narcissus pseudonarcissus</string>
+                <string>Crocus albiflorus</string>
+                <string>Iris pseudacorus</string>
+                <string>Iris sibirica</string>
+                <string>Allium schoenoprasum</string>
+                <string>Allium ursinum</string>
+                <string>Lilium martagon</string>
+                <string>Lloydia serotina</string>
+                <string>Maianthemum bifolium</string>
+                <string>Paris quadrifolia</string>
+                <string>Tofieldia calyculata</string>
+                <string>Tulipa sylvestris</string>
+                <string>Veratrum lobelianum</string>
+                <string>Colchicum autumnale</string>
+                <string>Convallaria majalis</string>
+                <string>Polygonatum multiflorum</string>
+                <string>Polygonatum odoratum</string>
+                <string>Polygonatum verticillatum</string>
+                <string>Coeloglossum viride</string>
+                <string>Dactylorhiza maculata</string>
+                <string>Gymnadenia conopsea</string>
+                <string>Nigritella nigra</string>
+                <string>Orchis mascula</string>
+                <string>Orchis ustulata</string>
+                <string>Cypripedium calceolus</string>
+                <string>Listera ovata</string>
+                <string>Neottia nidus-avis</string>
+                <string>Ophrys insectifera</string>
+                <string>Typha latifolia</string>
+                <string>Arum maculatum</string>
+                <string>Lemna minor</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="112">
+            <name>Dicots 1</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="113">
+                <string>Aconitum napellus</string>
+                <string>Aconitum vulparia</string>
+                <string>Consolida regalis</string>
+                <string>Trollius europaeus</string>
+                <string>Helleborus foetidus</string>
+                <string>Aquilegia vulgaris</string>
+                <string>Ranunculus bulbosus</string>
+                <string>Ranunculus ficaria</string>
+                <string>Ranunculus friesianus</string>
+                <string>Ranunculus montanus</string>
+                <string>Ranunculus repens</string>
+                <string>Ranunculus aconitifolius</string>
+                <string>Ranunculus alpestris</string>
+                <string>Ranunculus glacialis</string>
+                <string>Ranunculus kuepferi</string>
+                <string>Caltha palustris</string>
+                <string>Clematis vitalba</string>
+                <string>Anemone nemorosa</string>
+                <string>Pulsatilla alpina</string>
+                <string>Pulsatilla apiifolia</string>
+                <string>Pulsatilla vernalis</string>
+                <string>Adonis aestivalis</string>
+                <string>Dryas octopetala</string>
+                <string>Geum montanum</string>
+                <string>Geum rivale</string>
+                <string>Geum urbanum</string>
+                <string>Filipendula ulmaria</string>
+                <string>Potentilla anserina</string>
+                <string>Potentilla aurea</string>
+                <string>Potentilla crantzii</string>
+                <string>Potentilla erecta</string>
+                <string>Potentilla reptans</string>
+                <string>Potentilla sterilis</string>
+                <string>Sibbaldia procumbens</string>
+                <string>Alchemilla conjuncta</string>
+                <string>Alchemilla vulgaris</string>
+                <string>Sanguisorba minor</string>
+                <string>Fragaria vesca</string>
+                <string>Rosa canina</string>
+                <string>Rubus fruticosus</string>
+                <string>Rubus idaeus</string>
+                <string>Cotoneaster integerrima</string>
+                <string>Crataegus monogyna</string>
+                <string>Amelanchier ovalis</string>
+                <string>Malus sylvestris</string>
+                <string>Pyrus pyraster</string>
+                <string>Sorbus aria</string>
+                <string>Sorbus aucuparia</string>
+                <string>Sorbus torminalis</string>
+                <string>Prunus avium</string>
+                <string>Prunus padus</string>
+                <string>Prunus spinosa</string>
+                <string>Medicago falcata</string>
+                <string>Medicago lupulina</string>
+                <string>Medicago sativa</string>
+                <string>Melilotus albus</string>
+                <string>Melilotus officinalis</string>
+                <string>Trifolium alpinum</string>
+                <string>Trifolium pratense</string>
+                <string>Trifolium badium</string>
+                <string>Trifolium dubium</string>
+                <string>Trifolium montanum</string>
+                <string>Trifolium repens</string>
+                <string>Lotus corniculatus</string>
+                <string>Lathyrus pratensis</string>
+                <string>Lathyrus vernus</string>
+                <string>Vicia cracca</string>
+                <string>Vicia sativa</string>
+                <string>Vicia sepium</string>
+                <string>Anthyllis vulneraria</string>
+                <string>Astragalus alpinus</string>
+                <string>Astragalus frigidus</string>
+                <string>Hedysarum hedysaroides</string>
+                <string>Hippocrepis comosa</string>
+                <string>Onobrychis viciifolia</string>
+                <string>Oxytropis campestris</string>
+                <string>Robinia pseudoacacia</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="114">
+            <name>Dicots 2</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="115">
+                <string>Carum carvi</string>
+                <string>Daucus carota</string>
+                <string>Ligusticum mutellina</string>
+                <string>Anthriscus sylvestris</string>
+                <string>Chaerophyllum villarsii</string>
+                <string>Aegopodium podagraria</string>
+                <string>Astrantia major</string>
+                <string>Heracleum mantegazzianum</string>
+                <string>Heracleum sphondylium</string>
+                <string>Peucedanum ostruthium</string>
+                <string>Sanicula europaea</string>
+                <string>Anagallis arvensis</string>
+                <string>Lysimachia nemorum</string>
+                <string>Androsace chamaejasme</string>
+                <string>Androsace obtusifolia</string>
+                <string>Androsace alpina</string>
+                <string>Androsace helvetica</string>
+                <string>Androsace vandellii</string>
+                <string>Primula auricula</string>
+                <string>Primula elatior</string>
+                <string>Primula veris</string>
+                <string>Primula farinosa</string>
+                <string>Primula hirsuta</string>
+                <string>Soldanella alpina</string>
+                <string>Gentiana acaulis</string>
+                <string>Gentiana clusii</string>
+                <string>Gentiana verna</string>
+                <string>Gentiana lutea</string>
+                <string>Gentiana punctata</string>
+                <string>Gentiana purpurea</string>
+                <string>Gentiana campestris</string>
+                <string>Gentiana germanica</string>
+                <string>Asperula cynanchica</string>
+                <string>Cruciata laevipes</string>
+                <string>Galium album</string>
+                <string>Galium anisophyllum</string>
+                <string>Galium aparine</string>
+                <string>Galium odoratum</string>
+                <string>Galium verum</string>
+                <string>Atropa belladonna</string>
+                <string>Datura stramonium</string>
+                <string>Solanum dulcamara</string>
+                <string>Solanum tuberosum</string>
+                <string>Echium vulgare</string>
+                <string>Eritrichium nanum</string>
+                <string>Myosotis alpestris</string>
+                <string>Myosotis arvensis</string>
+                <string>Pulmonaria obscura</string>
+                <string>Symphytum officinale</string>
+                <string>Veronica beccabunga</string>
+                <string>Veronica chamaedrys</string>
+                <string>Veronica arvensis</string>
+                <string>Veronica bellidioides</string>
+                <string>Veronica filiformis</string>
+                <string>Veronica fruticans</string>
+                <string>Veronica hederifolia</string>
+                <string>Veronica persica</string>
+                <string>Chaenorrhinum minus</string>
+                <string>Digitalis grandiflora</string>
+                <string>Linaria alpina</string>
+                <string>Linaria vulgaris</string>
+                <string>Bartsia alpina</string>
+                <string>Euphrasia rostkoviana</string>
+                <string>Melampyrum pratense</string>
+                <string>Melampyrum sylvaticum</string>
+                <string>Pedicularis tuberosa</string>
+                <string>Pedicularis verticillata</string>
+                <string>Rhinanthus alectorolophus</string>
+                <string>Rhinanthus minor</string>
+                <string>Verbascum lychnitis</string>
+                <string>Ajuga pyramidalis</string>
+                <string>Ajuga reptans</string>
+                <string>Glechoma hederacea</string>
+                <string>Teucrium montanum</string>
+                <string>Acinos alpinus</string>
+                <string>Galeopsis tetrahit</string>
+                <string>Lamium album</string>
+                <string>Lamium maculatum</string>
+                <string>Lamium montanum</string>
+                <string>Lamium purpureum</string>
+                <string>Prunella vulgaris</string>
+                <string>Salvia glutinosa</string>
+                <string>Salvia pratensis</string>
+                <string>Stachys recta</string>
+                <string>Stachys sylvatica</string>
+                <string>Origanum vulgare</string>
+                <string>Thymus serpyllum</string>
+                <string>Mentha arvensis</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="116">
+            <name>Dicots 3</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="117">
+                <string>Campanula barbata</string>
+                <string>Campanula cochleariifolia</string>
+                <string>Campanula patula</string>
+                <string>Campanula rhomboidalis</string>
+                <string>Campanula rotundifolia</string>
+                <string>Phyteuma betonicifolium</string>
+                <string>Phyteuma hemisphaericum</string>
+                <string>Phyteuma orbiculare</string>
+                <string>Phyteuma spicatum</string>
+                <string>Carduus defloratus</string>
+                <string>Carduus personata</string>
+                <string>Carlina acaulis</string>
+                <string>Cirsium arvense</string>
+                <string>Cirsium oleraceum</string>
+                <string>Cirsium spinosissimum</string>
+                <string>Homogyne alpina</string>
+                <string>Petasites albus</string>
+                <string>Petasites hybridus</string>
+                <string>Tussilago farfara</string>
+                <string>Adenostyles alliariae</string>
+                <string>Antennaria dioica</string>
+                <string>Artemisia absinthium</string>
+                <string>Artemisia campestris</string>
+                <string>Artemisia vulgaris</string>
+                <string>Centaurea cyanus</string>
+                <string>Centaurea jacea</string>
+                <string>Centaurea montana</string>
+                <string>Centaurea scabiosa</string>
+                <string>Eupatorium cannabinum</string>
+                <string>Gnaphalium supinum</string>
+                <string>Leontopodium alpinum</string>
+                <string>Arnica montana</string>
+                <string>Doronicum clusii</string>
+                <string>Doronicum grandiflorum</string>
+                <string>Helianthus annuus</string>
+                <string>Senecio alpinus</string>
+                <string>Senecio doronicum</string>
+                <string>Senecio incanus</string>
+                <string>Senecio vulgaris</string>
+                <string>Solidago gigantea</string>
+                <string>Solidago virgaurea</string>
+                <string>Achillea atrata</string>
+                <string>Achillea macrophylla</string>
+                <string>Achillea millefolium</string>
+                <string>Achillea moschata</string>
+                <string>Aster alpinus</string>
+                <string>Aster bellidiastrum</string>
+                <string>Bellis perennis</string>
+                <string>Erigeron alpinus</string>
+                <string>Erigeron annuus</string>
+                <string>Leucanthemopsis alpina</string>
+                <string>Leucanthemum vulgare</string>
+                <string>Matricaria discoidea</string>
+                <string>Matricaria recutita</string>
+                <string>Cichorium intybus</string>
+                <string>Prenanthes purpurea</string>
+                <string>Crepis aurea</string>
+                <string>Crepis biennis</string>
+                <string>Hieracium murorum</string>
+                <string>Hieracium pilosella</string>
+                <string>Hieracium villosum</string>
+                <string>Sonchus oleraceus</string>
+                <string>Taraxacum officinale</string>
+                <string>Leontodon helveticus</string>
+                <string>Leontodon hispidus</string>
+                <string>Tragopogon orientalis</string>
+                <string>Lonicera alpigena</string>
+                <string>Lonicera caerulea</string>
+                <string>Lonicera nigra</string>
+                <string>Lonicera xylosteum</string>
+                <string>Sambucus nigra</string>
+                <string>Sambucus racemosa</string>
+                <string>Viburnum lantana</string>
+                <string>Viburnum opulus</string>
+                <string>Knautia arvensis</string>
+                <string>Scabiosa columbaria</string>
+                <string>Valeriana montana</string>
+                <string>Valeriana officinalis</string>
+                <string>Valeriana tripteris</string>
+                <string>Valerianella locusta</string>
+            </taxa>
+        </groupModel>
+        <groupModel id="118">
+            <name>Dicots 4</name>
+            <minimum>1</minimum>
+            <maximum>2</maximum>
+            <taxa id="119">
+                <string>Vaccinium vitis-idaea</string>
+                <string>Vaccinium uliginosum</string>
+                <string>Rhododendron hirsutum</string>
+                <string>Rhododendron ferrugineum</string>
+                <string>Vaccinium myrtillus</string>
+                <string>Loiseleuria procumbens</string>
+                <string>Erica carnea</string>
+                <string>Calluna vulgaris</string>
+                <string>Arctostaphylos uva-ursi</string>
+                <string>Salix retusa</string>
+                <string>Salix reticulata</string>
+                <string>Salix herbacea</string>
+                <string>Salix purpurea</string>
+                <string>Salix elaeagnos</string>
+                <string>Salix caprea</string>
+                <string>Salix alba</string>
+                <string>Populus tremula</string>
+                <string>Populus alba</string>
+                <string>Lunaria annua</string>
+                <string>Draba aizoides</string>
+                <string>Thlaspi arvense</string>
+                <string>Hutchinsia alpina</string>
+                <string>Capsella bursa-pastoris</string>
+                <string>Biscutella levigata</string>
+                <string>Sinapis arvensis</string>
+                <string>Cardamine resedifolia</string>
+                <string>Cardamine pratensis</string>
+                <string>Cardamine hirsuta</string>
+                <string>Brassica oleracea</string>
+                <string>Brassica napus</string>
+                <string>Arabis alpina</string>
+                <string>Arabidopsis thaliana</string>
+                <string>Alliaria petiolata</string>
+                <string>Kernera saxatilis</string>
+                <string>Viola tricolor</string>
+                <string>Viola calcarata</string>
+                <string>Viola arvensis</string>
+                <string>Viola reichenbachiana</string>
+                <string>Viola biflora</string>
+                <string>Geranium sylvaticum</string>
+                <string>Geranium sanguineum</string>
+                <string>Geranium rotundifolium</string>
+                <string>Geranium robertianum</string>
+                <string>Geranium pyrenaicum</string>
+                <string>Erodium cicutarium</string>
+                <string>Saxifraga stellaris</string>
+                <string>Saxifraga rotundifolia</string>
+                <string>Saxifraga paniculata</string>
+                <string>Saxifraga oppositifolia</string>
+                <string>Saxifraga caesia</string>
+                <string>Saxifraga bryoides</string>
+                <string>Saxifraga androsacea</string>
+                <string>Saxifraga aizoides</string>
+                <string>Chrysosplenium alternifolium</string>
+                <string>Silene latifolia</string>
+                <string>Silene flos-cuculi</string>
+                <string>Silene dioica</string>
+                <string>Silene vulgaris</string>
+                <string>Silene rupestris</string>
+                <string>Silene nutans</string>
+                <string>Silene acaulis</string>
+                <string>Saponaria officinalis</string>
+                <string>Saponaria ocymoides</string>
+                <string>Gypsophila repens</string>
+                <string>Dianthus sylvestris</string>
+                <string>Dianthus superbus</string>
+                <string>Dianthus carthusianorum</string>
+                <string>Spergularia rubra</string>
+                <string>Herniaria glabra</string>
+                <string>Minuartia verna</string>
+                <string>Minuartia sedoides</string>
+                <string>Arenaria serpyllifolia</string>
+                <string>Arenaria biflora</string>
+                <string>Stellaria nemorum</string>
+                <string>Stellaria media</string>
+                <string>Cerastium strictum</string>
+                <string>Cerastium holosteoides</string>
+            </taxa>
+        </groupModel>
+        <index id="120">
+            <entry>
+                <string>Geranium sanguineum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Melica nutans</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Hordeum vulgare</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lunaria annua</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Campanula cochleariifolia</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Centaurea cyanus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Carex flacca</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Salix reticulata</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Viburnum lantana</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Salix retusa</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Senecio alpinus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Ranunculus alpestris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Trifolium montanum</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Silene dioica</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Iris pseudacorus</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Medicago sativa</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Lysimachia nemorum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Saxifraga caesia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Heracleum sphondylium</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Juncus trifidus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Brachypodium pinnatum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lolium multiflorum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Stellaria media</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Equisetum hyemale</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Erigeron annuus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Pedicularis verticillata</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Ranunculus aconitifolius</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Saponaria officinalis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Adonis aestivalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Cerastium holosteoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Carex ferruginea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Galium album</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Ranunculus bulbosus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Lamium album</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Potentilla sterilis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Arabis alpina</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Carex caryophyllea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Ajuga pyramidalis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Trifolium repens</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Coeloglossum viride</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Galeopsis tetrahit</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Phyllitis scolopendrium</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Viola calcarata</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Cirsium arvense</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Trifolium pratense</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Leontopodium alpinum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Lotus corniculatus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Melampyrum sylvaticum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Narcissus pseudonarcissus</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Herniaria glabra</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Echium vulgare</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Potentilla anserina</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Ranunculus repens</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Phyteuma hemisphaericum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Convallaria majalis</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Primula veris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Matricaria discoidea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Juniperus communis</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Luzula pilosa</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Dianthus sylvestris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Astragalus alpinus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Hieracium villosum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Juncus inflexus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Campanula patula</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Poa annua</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Minuartia verna</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Silene latifolia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Carex nigra</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lilium martagon</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Agropyron repens</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Achillea macrophylla</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Erigeron alpinus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Androsace chamaejasme</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Galium verum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Linaria vulgaris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Aquilegia vulgaris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Knautia arvensis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Festuca rubra</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Digitalis grandiflora</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Bromus sterilis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Spergularia rubra</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Dactylis glomerata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Myosotis alpestris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Hieracium murorum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Rubus fruticosus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Sibbaldia procumbens</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Taxus baccata</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Equisetum arvense</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Carduus personata</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Valeriana montana</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Hutchinsia alpina</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Sanguisorba minor</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Silene nutans</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Achillea moschata</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Myosotis arvensis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Cardamine pratensis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Tofieldia calyculata</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Carex flava</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lloydia serotina</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Bartsia alpina</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Orchis mascula</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Rhinanthus minor</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Trifolium badium</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Cynosurus cristatus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Cerastium strictum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Brachypodium sylvaticum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Draba aizoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Cardamine resedifolia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Geranium pyrenaicum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Rhinanthus alectorolophus</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Linaria alpina</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Holcus lanatus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Brassica oleracea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Phyteuma orbiculare</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Saxifraga aizoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Centaurea scabiosa</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Saxifraga rotundifolia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Veronica beccabunga</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Crataegus monogyna</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Phragmites australis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Vicia sativa</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Festuca valesiaca</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Gentiana purpurea</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Hedysarum hedysaroides</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Melilotus albus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Leucanthemum vulgare</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Medicago lupulina</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Arenaria serpyllifolia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Trichophorum caespitosum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Vicia cracca</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Salix caprea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Eriophorum scheuchzeri</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Taraxacum officinale</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Blechnum spicant</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Aconitum napellus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Listera ovata</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Geranium rotundifolium</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Potentilla crantzii</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Maianthemum bifolium</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Biscutella levigata</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Phyteuma betonicifolium</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Geum rivale</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Potentilla reptans</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Cirsium oleraceum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Prunus padus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Galium aparine</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Peucedanum ostruthium</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Achillea atrata</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Crepis aurea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Leucojum vernum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Chaenorrhinum minus</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Allium schoenoprasum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Origanum vulgare</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Arum maculatum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Agrostis stolonifera</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Pulmonaria obscura</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Eriophorum vaginatum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Equisetum telmateia</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Kernera saxatilis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Anagallis arvensis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Heracleum mantegazzianum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Trifolium alpinum</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Caltha palustris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Filipendula ulmaria</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Geum urbanum</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Dryopteris filix-mas</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Cardamine hirsuta</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Gymnadenia conopsea</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Briza media</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Poa trivialis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Ranunculus glacialis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Eupatorium cannabinum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Sorbus torminalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Avena sativa</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Crepis biennis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Minuartia sedoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Lamium purpureum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Salix elaeagnos</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Gentiana lutea</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Salix herbacea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Doronicum grandiflorum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Carex davalliana</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Androsace obtusifolia</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Lamium montanum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Anthyllis vulneraria</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Erodium cicutarium</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Viola reichenbachiana</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Veronica fruticans</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex pallescens</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Saxifraga oppositifolia</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Ranunculus montanus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Arenaria biflora</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Saponaria ocymoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Dianthus superbus</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Festuca arundinacea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Symphytum officinale</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Asplenium trichomanes</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Stachys recta</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Hieracium pilosella</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Silene acaulis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Pinus mugo</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Lonicera xylosteum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Euphrasia rostkoviana</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Senecio incanus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Mentha arvensis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Larix decidua</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Arctostaphylos uva-ursi</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Primula farinosa</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Hordeum murinum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Nardus stricta</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Viburnum opulus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Sorbus aria</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Carex spicata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Primula auricula</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Vaccinium vitis-idaea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Orchis ustulata</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Polypodium vulgare</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Silene rupestris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Gentiana verna</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Equisetum sylvaticum</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Medicago falcata</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Poa bulbosa</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Chaerophyllum villarsii</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Secale cereale</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Thlaspi arvense</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla apiifolia</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Poa pratensis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lathyrus pratensis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Juniperus sabina</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Carex sylvatica</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Sinapis arvensis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Tussilago farfara</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Deschampsia caespitosa</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Rubus idaeus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Vicia sepium</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Veronica filiformis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Matricaria recutita</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Ligusticum mutellina</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Dryas octopetala</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Vaccinium uliginosum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Hippocrepis comosa</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Adenostyles alliariae</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Polygonatum verticillatum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Valeriana tripteris</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Robinia pseudoacacia</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Sorbus aucuparia</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Androsace helvetica</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Erica carnea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Primula hirsuta</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Salvia pratensis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Molinia caerulea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Primula elatior</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Juncus alpinoarticulatus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Pinus cembra</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Calluna vulgaris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Anthoxantum odoratum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Nigritella nigra</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Daucus carota</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex elata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Gentiana punctata</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla alpina</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Pulsatilla vernalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Brassica napus</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Pinus sylvestris</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Aster bellidiastrum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Aegopodium podagraria</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Aconitum vulparia</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Gentiana acaulis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex curvula</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Trifolium dubium</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Viola arvensis</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Zea mays</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Veronica arvensis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Campanula rhomboidalis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Clematis vitalba</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Prunus avium</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Carlina acaulis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Viola biflora</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Elyna myosuroides</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Homogyne alpina</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Helictotrichon pubescens</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Malus sylvestris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Bromus erectus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Schoenus ferrugineus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lolium perenne</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Eriophorum angustifolium</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Tulipa sylvestris</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Poa alpina</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Populus tremula</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Trisetum flavescens</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Chrysosplenium alternifolium</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Cotoneaster integerrima</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Ajuga reptans</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Asplenium ruta-muraria</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Sambucus racemosa</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Ginkgo biloba</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Gypsophila repens</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Helleborus foetidus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Lamium maculatum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Neottia nidus-avis</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Prunus spinosa</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Achillea millefolium</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Thymus serpyllum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carduus defloratus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Veronica chamaedrys</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex parviflora</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Triticum aestivum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Salvia glutinosa</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Stellaria nemorum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Galanthus nivalis</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Oxytropis campestris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Valeriana officinalis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Senecio vulgaris</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Sonchus oleraceus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Polygonatum odoratum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Leontodon hispidus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Typha latifolia</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Juncus effusus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Viola tricolor</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Loiseleuria procumbens</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Geranium robertianum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Sesleria caerulea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lycopodium annotinum</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Lonicera nigra</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Consolida regalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Huperzia selago</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Fragaria vesca</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Glechoma hederacea</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Solidago virgaurea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Cichorium intybus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Capsella bursa-pastoris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Sanicula europaea</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Campanula barbata</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Dianthus carthusianorum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Rhododendron hirsutum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Senecio doronicum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Allium ursinum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Luzula sylvatica</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Artemisia campestris</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Apera spica-venti</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Veratrum lobelianum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Galium odoratum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Potentilla aurea</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Stipa pennata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Scirpus sylvaticus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Asplenium viride</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Abies alba</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Anemone nemorosa</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Arrhenatherum elatius</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Pyrus pyraster</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Colchicum autumnale</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Carex panicea</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Alopecurus pratensis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Ranunculus ficaria</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Eritrichium nanum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Picea abies</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Asperula cynanchica</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex hirta</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Veronica hederifolia</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Carex atrata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Luzula campestris</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Veronica bellidioides</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Helianthus annuus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Prenanthes purpurea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Petasites hybridus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Gnaphalium supinum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Selaginella selaginoides</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Gentiana campestris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Solanum tuberosum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Salix alba</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Cypripedium calceolus</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Carex digitata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Bellis perennis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Juniperus nana</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Petasites albus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Soldanella alpina</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Gentiana germanica</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Centaurea jacea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Eriophorum latifolium</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Lonicera caerulea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Astrantia major</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Artemisia vulgaris</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Centaurea montana</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Carum carvi</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Prunella vulgaris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Atropa belladonna</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Paris quadrifolia</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Lemna minor</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Calamagrostis varia</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Carex firma</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Bromus tectorum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Rosa canina</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Pteridium aquilinum</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Solanum dulcamara</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Acinos alpinus</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Saxifraga bryoides</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Carex echinata</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Polygonatum multiflorum</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Alliaria petiolata</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Botrychium lunaria</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Veronica persica</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Narcissus poeticus</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Solidago gigantea</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Scabiosa columbaria</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Festuca pratensis</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Dactylorhiza maculata</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Androsace vandellii</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Artemisia absinthium</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Leontodon helveticus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Astragalus frigidus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Sambucus nigra</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Potentilla erecta</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Geum montanum</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Rhododendron ferrugineum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Alchemilla vulgaris</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Populus alba</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Arnica montana</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Ophrys insectifera</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Tragopogon orientalis</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Valerianella locusta</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Melilotus officinalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Cystopteris fragilis</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Trollius europaeus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Carex sempervirens</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Silene flos-cuculi</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Cirsium spinosissimum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Pedicularis tuberosa</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Galium anisophyllum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Arabidopsis thaliana</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Gentiana clusii</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Phyteuma spicatum</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Salix purpurea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Saxifraga stellaris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Verbascum lychnitis</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Lathyrus vernus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Androsace alpina</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Silene vulgaris</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Saxifraga androsacea</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Amelanchier ovalis</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Ranunculus kuepferi</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Milium effusum</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Iris sibirica</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Geranium sylvaticum</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Crocus albiflorus</string>
+                <groupModel reference="110"/>
+            </entry>
+            <entry>
+                <string>Melampyrum pratense</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Aster alpinus</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Stachys sylvatica</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Cruciata laevipes</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Vaccinium myrtillus</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Lonicera alpigena</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Ranunculus friesianus</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Athyrium filix-femina</string>
+                <groupModel reference="106"/>
+            </entry>
+            <entry>
+                <string>Datura stramonium</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Campanula rotundifolia</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Bromus hordeaceus</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Doronicum clusii</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Teucrium montanum</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Phleum pratense</string>
+                <groupModel reference="108"/>
+            </entry>
+            <entry>
+                <string>Alchemilla conjuncta</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Leucanthemopsis alpina</string>
+                <groupModel reference="116"/>
+            </entry>
+            <entry>
+                <string>Saxifraga paniculata</string>
+                <groupModel reference="118"/>
+            </entry>
+            <entry>
+                <string>Anthriscus sylvestris</string>
+                <groupModel reference="114"/>
+            </entry>
+            <entry>
+                <string>Onobrychis viciifolia</string>
+                <groupModel reference="112"/>
+            </entry>
+            <entry>
+                <string>Antennaria dioica</string>
+                <groupModel reference="116"/>
+            </entry>
+        </index>
+    </groupsModel>
+</groupsModels>

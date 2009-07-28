@@ -1,0 +1,39 @@
+<!-- Transformed with ch.xmatrix.ups.admin.data.v1.DataVersion1 at 2006-03-24 13:50:43.686 CET -->
+<prefsModels>
+    <prefsModel>
+        <name>Allgemeine Einstellungen Frühling 2003</name>
+        <uid>4912FAB6-F08B-42BA-1A28-9E559E4401A4</uid>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <modified>2003-05-25 19:04:43.686 CEST</modified>
+        <fixed>true</fixed>
+        <knownTotalCount>8</knownTotalCount>
+        <unknownTotalCount>2</unknownTotalCount>
+        <knownTotalWeight>25</knownTotalWeight>
+        <unknownTotalWeight>6</unknownTotalWeight>
+        <maximumSeries>3</maximumSeries>
+    </prefsModel>
+    <prefsModel>
+        <name>Allgemeine Einstellungen Herbst 2005</name>
+        <uid>64BDCB03-772E-5FB8-B0D9-DC227E2FAD6D</uid>
+        <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
+        <modified>2005-10-05 15:19:31.106 CEST</modified>
+        <fixed>true</fixed>
+        <knownTotalCount>8</knownTotalCount>
+        <unknownTotalCount>2</unknownTotalCount>
+        <knownTotalWeight>13</knownTotalWeight>
+        <unknownTotalWeight>3</unknownTotalWeight>
+        <maximumSeries>3</maximumSeries>
+    </prefsModel>
+    <prefsModel>
+        <name>Testeinstellungen</name>
+        <uid>FFBDCB03-772E-5FB8-B0D9-DC227E2FAD6D</uid>
+        <taxaUid>5F4FFD5A-EED8-E28B-733E-2325E9AE9109</taxaUid>
+        <modified>2005-10-05 15:19:31.106 CEST</modified>
+        <fixed>false</fixed>
+        <knownTotalCount>8</knownTotalCount>
+        <unknownTotalCount>2</unknownTotalCount>
+        <knownTotalWeight>13</knownTotalWeight>
+        <unknownTotalWeight>3</unknownTotalWeight>
+        <maximumSeries>3</maximumSeries>
+    </prefsModel>
+</prefsModels>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+    <group id="menu">
+        <face>
+            <text>Menu</text>
+        </face>
+        <members>
+            <member command-id="file"/>
+        </members>
+    </group>
+    <group id="file">
+        <face>
+            <text i18n="menu.file.text"/>
+        </face>
+        <members>
+            <member command-id="opencommon"/>
+            <member command-id="openust"/>
+            <member command-id="openexam"/>
+            <member command-id="export"/>
+            <member command-id="close"/>
+            <separator/>
+            <member command-id="quit"/>
+        </members>
+    </group>
+    <command id="openust">
+        <face>
+            <text i18n="action.openust.text"/>
+            <icon type="icon-factory">createDropShadowIcon(file_line0.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(file_line0.png, #FFFF00)</selected-icon>
+            <description i18n="action.openust.description"/>
+            <accelerator key="i18n:action.openust.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.openust.longdescription"/>
+        </face>
+    </command>
+    <command id="openexam">
+        <face>
+            <text i18n="action.openexam.text"/>
+            <icon type="icon-factory">createDropShadowIcon(file_line0.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(file_line0.png, #FFFF00)</selected-icon>
+            <description i18n="action.openexam.description"/>
+            <accelerator key="i18n:action.openexam.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.openexam.longdescription"/>
+        </face>
+    </command>
+    <command id="export">
+        <face>
+            <text i18n="action.export.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.export.description"/>
+            <accelerator key="i18n:action.export.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.export.longdescription"/>
+        </face>
+    </command>
+    <command id="close">
+        <face>
+            <text i18n="action.close.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_big1_on.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(checkbox_big1_on.png, #FFFF00)</selected-icon>
+            <description i18n="action.close.description"/>
+            <long-description i18n="action.close.longdescription"/>
+            <accelerator keyStroke="i18n:action.close.accelerator.nomac" include-if="!mac"/>
+            <accelerator keyStroke="i18n:action.close.accelerator.mac" include-if="mac"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.close.longdescription"/>
+        </face>
+    </command>
+    <command id="quit">
+        <face>
+            <text i18n="action.quit.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_open.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_open.png, #FFFF00)</selected-icon>
+            <description i18n="action.quit.description"/>
+            <accelerator keyStroke="i18n:action.quit.accelerator.nomac" include-if="!mac"/>
+            <accelerator keyStroke="i18n:action.quit.accelerator.mac" include-if="mac"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.quit.longdescription"/>
+        </face>
+    </command>
+</commands>

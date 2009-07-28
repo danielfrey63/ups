@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE commands SYSTEM "commands.dtd">-->
+<commands version="1.1.0">
+    <group id="toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="newSpecimen"/>
+            <member command-id="deleteSpecimen"/>
+        </members>
+    </group>
+
+    <command id="newSpecimen">
+        <face>
+            <text i18n="action.newspecimen.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big1.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(cross_big1.png, #900000)</selected-icon>
+            <description i18n="action.newspecimen.description"/>
+            <accelerator key="i18n:action.newspecimen.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="deleteSpecimen">
+        <face>
+            <text i18n="action.deletespecimen.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big1.png, #9000000)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(bars_big1.png, #900000)</selected-icon>
+            <description i18n="action.deletespecimen.description"/>
+            <accelerator key="i18n:action.deletespecimen.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

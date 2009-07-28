@@ -15,5 +15,8 @@
     <description>All UPS Tools</description>
     <modules>
         <module>Common</module>
+        <module>ExamConfigurator</module>
+        <module>ListConverter</module>
+        <module>StudentTool</module>
     </modules>
 </project>

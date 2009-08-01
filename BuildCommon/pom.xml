@@ -89,5 +89,4 @@
             <url>https://maven-repository.dev.java.net/nonav/repository</url>
         </repository>
     </repositories>
-
 </project>

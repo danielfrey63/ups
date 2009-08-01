@@ -1,31 +1,25 @@
 package com.wegmueller.ups.webservice;
 
-
 import com.wegmueller.ups.webservice.stub.UPSWebService;
 import com.wegmueller.ups.webservice.stub.UPSWebServiceServiceLocator;
-import org.apache.axis.AxisFault;
-
-import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import javax.xml.rpc.ServiceException;
+import org.apache.axis.AxisFault;
 
-/**
- * Class to call the UPS Server remotly
- *
- *
- */
+/** Class to call the UPS Server remotly */
 class UPSServerClient {
-
 
     /**
      * Submit a Pruefungsliste and get back a PDF-File
+     *
      * @param userName
      * @param passWord
-     * @param b                 the pruefungsliste as bytearray
-     * @return                  pdf as byte array
-     * @throws UPSServerClientException
-     *      when userName/password is wrong, server is not available, another exception occurs
+     * @param b        the pruefungsliste as bytearray
+     * @return pdf as byte array
+     * @throws UPSServerClientException when userName/password is wrong, server is not available, another exception
+     *                                  occurs
      */
     public static byte[] submitPruefungsListe(final String userName, final String passWord, final byte[] b) throws UPSServerClientException {
         try {

@@ -4,16 +4,15 @@ import java.util.Calendar;
 
 /**
  * Anmeldedaten aus dem OIS System
- * @version 0.1 26.09.2005,  18:03:23
+ *
  * @author Thomas Wegmüller
+ * @version 0.1 26.09.2005,  18:03:23
  */
 public interface IAnmeldedaten {
 
     /**
-     * Klartext der Angabe, ob es sich um eine schriftliche
-     * oder um eine mündliche Prüfung handelt.
-     * Falls es sich weder um eine schriftliche noch
-     * um eine mündliche Prüfung handelt, so wird "-" ausgegeben.
+     * Klartext der Angabe, ob es sich um eine schriftliche oder um eine mündliche Prüfung handelt. Falls es sich weder
+     * um eine schriftliche noch um eine mündliche Prüfung handelt, so wird "-" ausgegeben.
      *
      * @return
      */
@@ -48,11 +47,9 @@ public interface IAnmeldedaten {
     boolean isRepetent();
 
     /**
-     * Angabe des Raums, in dem die Prüfung stattfindet,
-     * sofern diese Angabe schon bekannt ist.
-     * Diese Angabe ist  WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert.
-     * Diese Angabe ist nur für Leistungskontrollen der Form
-     * Sessionsprüfung relevant
+     * Angabe des Raums, in dem die Prüfung stattfindet, sofern diese Angabe schon bekannt ist. Diese Angabe ist
+     * WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert. Diese Angabe ist nur für
+     * Leistungskontrollen der Form Sessionsprüfung relevant
      *
      * @return
      * @see IAnmeldedaten#getLkForm()
@@ -75,21 +72,20 @@ public interface IAnmeldedaten {
 
     /**
      * Bevorzugte E-Mail.
+     *
      * @return
      */
     String getEmail();
 
     /**
-     * Nummer der Leistungskontrolle.
-     * Achtung: Nicht mit der Nummer der Lerneinheit zu verwechseln.
+     * Nummer der Leistungskontrolle. Achtung: Nicht mit der Nummer der Lerneinheit zu verwechseln.
      *
      * @return
      */
     String getLkNummer();
 
     /**
-     * Code der Form der Leistungskontrolle.
-     * Mögliche Werte (siehe Spalte Code)
+     * Code der Form der Leistungskontrolle. Mögliche Werte (siehe Spalte Code)
      * <pre>
      * Code	Kurztext	Langtext
      * 0	Keine LK	keine Leistungskontrolle
@@ -140,8 +136,8 @@ public interface IAnmeldedaten {
     String getLkEinheitTyp();
 
     /**
-     * Allenfalls vorhandener Nummernzusatz der Leistungskontrolle
-     * (nur im Zusammenhang mit modifizierten Prüfungen relevant).
+     * Allenfalls vorhandener Nummernzusatz der Leistungskontrolle (nur im Zusammenhang mit modifizierten Prüfungen
+     * relevant).
      *
      * @return
      */
@@ -154,52 +150,44 @@ public interface IAnmeldedaten {
      * 1	S	Semesterkurs
      * 2	J	Sessionsprüfung
      * 3	M	Modifizierte Prüfung
-     *</pre>
+     * </pre>
+     *
      * @return
      */
     String getLkEinheitTypText();
 
     /**
-     * Sessionskennzeichen der Anmeldung.
-     * Beispiele 2005F oder 2005H, wobei zuerst eine
-     * vierstellige Jahresangabe vorzunehmen ist und
-     * anschliessend die Angabe F -> Frühling oder H .
-     * Bemerkung: Das seskez ist bei allen gelieferten
-     * Datensätzen dasselbe. Angabe der Session, in der
-     * die Leistungskontrolle angemeldet ist.
-     * <p/>
-     * Es handelt sich um die aktuelle Planungssession
+     * Sessionskennzeichen der Anmeldung. Beispiele 2005F oder 2005H, wobei zuerst eine vierstellige Jahresangabe
+     * vorzunehmen ist und anschliessend die Angabe F -> Frühling oder H . Bemerkung: Das seskez ist bei allen
+     * gelieferten Datensätzen dasselbe. Angabe der Session, in der die Leistungskontrolle angemeldet ist. <p/> Es
+     * handelt sich um die aktuelle Planungssession
      *
      * @return
      */
     String getSeskez();
 
     /**
-     * Datum der Prüfung, sofern dieses bereits bekannt ist.
-     * Diese Angabe ist  Intervall WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert.
-     * Diese Angabe ist nur für Leistungskontrollen der Form Sessionsprüfung relevant (siehe Feld lkForm).
+     * Datum der Prüfung, sofern dieses bereits bekannt ist. Diese Angabe ist  Intervall
+     * WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert. Diese Angabe ist nur für
+     * Leistungskontrollen der Form Sessionsprüfung relevant (siehe Feld lkForm).
      *
      * @return
      */
     Calendar getPruefungsdatum();
 
     /**
-     * Angabe der Startzeit, sofern diese bereits bekannt sind.
-     * Diese Angabe ist
-     * Intervall WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert.
-     * Diese Angabe ist nur für Leistungskontrollen der Form
-     * Sessionsprüfung relevant (siehe Feld lkForm).
+     * Angabe der Startzeit, sofern diese bereits bekannt sind. Diese Angabe ist Intervall
+     * WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert. Diese Angabe ist nur für
+     * Leistungskontrollen der Form Sessionsprüfung relevant (siehe Feld lkForm).
      *
      * @return
      */
     Calendar getPruefungsdatumVon();
 
     /**
-     * Angabe der Endzeit, sofern diese bereits bekannt sind.
-     * Diese Angabe ist
-     * Intervall WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert.
-     * Diese Angabe ist nur für Leistungskontrollen der Form
-     * Sessionsprüfung relevant (siehe Feld lkForm).
+     * Angabe der Endzeit, sofern diese bereits bekannt sind. Diese Angabe ist Intervall
+     * WsPruefungssession.planungFreigabe .. WsPruefungssession.sessionende initialisiert. Diese Angabe ist nur für
+     * Leistungskontrollen der Form Sessionsprüfung relevant (siehe Feld lkForm).
      *
      * @return
      */

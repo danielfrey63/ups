@@ -12,7 +12,6 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
     public UPSWebServiceServiceLocator() {
     }
 
-
     public UPSWebServiceServiceLocator(final org.apache.axis.EngineConfiguration config) {
         super(config);
     }
@@ -23,6 +22,7 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
 
     // Use to get a proxy class for UPSWebService
     public static final java.lang.String DEFAULT_ADDRESS = "http://balti.ethz.ch:8080/upsserver/UPSWebService.jws";
+
     private java.lang.String UPSWebService_address = "http://balti.ethz.ch:8080/upsserver/UPSWebService.jws";
 
     public java.lang.String getUPSWebServiceAddress() {
@@ -41,7 +41,7 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
     }
 
     public com.wegmueller.ups.webservice.stub.UPSWebService getUPSWebService() throws javax.xml.rpc.ServiceException {
-       final java.net.URL endpoint;
+        final java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(UPSWebService_address);
         }
@@ -67,9 +67,8 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
     }
 
     /**
-     * For the given interface, get the stub implementation.
-     * If this service has no port for the given interface,
-     * then ServiceException is thrown.
+     * For the given interface, get the stub implementation. If this service has no port for the given interface, then
+     * ServiceException is thrown.
      */
     public java.rmi.Remote getPort(final Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
@@ -86,9 +85,8 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
     }
 
     /**
-     * For the given interface, get the stub implementation.
-     * If this service has no port for the given interface,
-     * then ServiceException is thrown.
+     * For the given interface, get the stub implementation. If this service has no port for the given interface, then
+     * ServiceException is thrown.
      */
     public java.rmi.Remote getPort(final javax.xml.namespace.QName portName, final Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         if (portName == null) {
@@ -97,8 +95,7 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
         final java.lang.String inputPortName = portName.getLocalPart();
         if ("UPSWebService".equals(inputPortName)) {
             return getUPSWebService();
-        }
-        else  {
+        } else {
             final java.rmi.Remote _stub = getPort(serviceEndpointInterface);
             ((org.apache.axis.client.Stub) _stub).setPortName(portName);
             return _stub;
@@ -119,21 +116,16 @@ public class UPSWebServiceServiceLocator extends org.apache.axis.client.Service 
         return ports.iterator();
     }
 
-    /**
-    * Set the endpoint address for the specified port name.
-    */
+    /** Set the endpoint address for the specified port name. */
     public void setEndpointAddress(final java.lang.String portName, final java.lang.String address) throws javax.xml.rpc.ServiceException {
         if ("UPSWebService".equals(portName)) {
             setUPSWebServiceEndpointAddress(address);
-        }
-        else { // Unknown Port Name
+        } else { // Unknown Port Name
             throw new javax.xml.rpc.ServiceException(" Cannot set Endpoint Address for Unknown Port" + portName);
         }
     }
 
-    /**
-    * Set the endpoint address for the specified port name.
-    */
+    /** Set the endpoint address for the specified port name. */
     public void setEndpointAddress(final javax.xml.namespace.QName portName, final java.lang.String address) throws javax.xml.rpc.ServiceException {
         setEndpointAddress(portName.getLocalPart(), address);
     }

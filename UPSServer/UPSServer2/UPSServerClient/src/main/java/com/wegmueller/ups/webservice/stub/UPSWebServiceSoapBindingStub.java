@@ -9,18 +9,21 @@ package com.wegmueller.ups.webservice.stub;
 
 public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.stub.UPSWebService {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
+
     private java.util.Vector cachedSerQNames = new java.util.Vector();
+
     private java.util.Vector cachedSerFactories = new java.util.Vector();
+
     private java.util.Vector cachedDeserFactories = new java.util.Vector();
 
-    static org.apache.axis.description.OperationDesc [] _operations;
+    static org.apache.axis.description.OperationDesc[] _operations;
 
     static {
         _operations = new org.apache.axis.description.OperationDesc[2];
         _initOperationDesc1();
     }
 
-    private static void _initOperationDesc1(){
+    private static void _initOperationDesc1() {
         org.apache.axis.description.OperationDesc oper;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("submit");
@@ -45,12 +48,12 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
     }
 
     public UPSWebServiceSoapBindingStub() throws org.apache.axis.AxisFault {
-         this(null);
+        this(null);
     }
 
     public UPSWebServiceSoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
-         this(service);
-         super.cachedEndpoint = endpointURL;
+        this(service);
+        super.cachedEndpoint = endpointURL;
     }
 
     public UPSWebServiceSoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
@@ -59,7 +62,7 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
         } else {
             super.service = service;
         }
-        ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.2");
+        ((org.apache.axis.client.Service) super.service).setTypeMappingVersion("1.2");
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
@@ -109,22 +112,22 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        final java.lang.Object _resp = _call.invoke(new java.lang.Object[] {userName, password, bytes});
+        try {
+            final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{userName, password, bytes});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (byte[]) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (byte[]) org.apache.axis.utils.JavaUtils.convert(_resp, byte[].class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (byte[]) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (byte[]) org.apache.axis.utils.JavaUtils.convert(_resp, byte[].class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public void throwAxisFault(final java.lang.String param) throws java.rmi.RemoteException {
@@ -140,15 +143,16 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        final java.lang.Object _resp = _call.invoke(new java.lang.Object[] {param});
+        try {
+            final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{param});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            }
+            extractAttachments(_call);
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-        extractAttachments(_call);
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
 }

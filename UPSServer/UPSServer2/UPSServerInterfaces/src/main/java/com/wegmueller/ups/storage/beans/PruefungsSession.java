@@ -1,20 +1,20 @@
 package com.wegmueller.ups.storage.beans;
 
 import com.wegmueller.ups.lka.IPruefungsSession;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 26.09.2005,  20:48:56
- */
+/** Created by: Thomas Wegmueller Date: 26.09.2005,  20:48:56 */
 public class PruefungsSession implements IPruefungsSession {
 
     private java.lang.String sessionsname;
+
     private Calendar sessionsende;
+
     private java.lang.String seskez;
+
     private Calendar planungFreigabe;
+
     private Calendar storageDate = new GregorianCalendar();
 
     public String getSessionsname() {
@@ -25,7 +25,6 @@ public class PruefungsSession implements IPruefungsSession {
         return sessionsende;
     }
 
-
     public String getSeskez() {
         return seskez;
     }
@@ -33,7 +32,6 @@ public class PruefungsSession implements IPruefungsSession {
     public Calendar getPlanungFreigabe() {
         return planungFreigabe;
     }
-
 
     public Calendar getStorageDate() {
         return storageDate;

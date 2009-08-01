@@ -9,18 +9,21 @@ package com.wegmueller.ups.webservice.impl;
 
 public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.impl.UPSWebService2 {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
+
     private java.util.Vector cachedSerQNames = new java.util.Vector();
+
     private java.util.Vector cachedSerFactories = new java.util.Vector();
+
     private java.util.Vector cachedDeserFactories = new java.util.Vector();
 
-    static org.apache.axis.description.OperationDesc [] _operations;
+    static org.apache.axis.description.OperationDesc[] _operations;
 
     static {
         _operations = new org.apache.axis.description.OperationDesc[1];
         _initOperationDesc1();
     }
 
-    private static void _initOperationDesc1(){
+    private static void _initOperationDesc1() {
         final org.apache.axis.description.OperationDesc oper;
         final org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -37,12 +40,12 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
     }
 
     public UPSWebService2SoapBindingStub() throws org.apache.axis.AxisFault {
-         this(null);
+        this(null);
     }
 
     public UPSWebService2SoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
-         this(service);
-         super.cachedEndpoint = endpointURL;
+        this(service);
+        super.cachedEndpoint = endpointURL;
     }
 
     public UPSWebService2SoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
@@ -51,28 +54,28 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
         } else {
             super.service = service;
         }
-        ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.2");
-            final java.lang.Class cls;
-            javax.xml.namespace.QName qName;
-            final javax.xml.namespace.QName qName2;
-            final java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
-            final java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
-            final java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
-            final java.lang.Class enumdf = org.apache.axis.encoding.ser.EnumDeserializerFactory.class;
-            final java.lang.Class arraysf = org.apache.axis.encoding.ser.ArraySerializerFactory.class;
-            final java.lang.Class arraydf = org.apache.axis.encoding.ser.ArrayDeserializerFactory.class;
-            final java.lang.Class simplesf = org.apache.axis.encoding.ser.SimpleSerializerFactory.class;
-            final java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
-            final java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
-            final java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "ArrayOf_xsd_string");
-            cachedSerQNames.add(qName);
-            cls = java.lang.String[].class;
-            cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string");
-            qName2 = null;
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+        ((org.apache.axis.client.Service) super.service).setTypeMappingVersion("1.2");
+        final java.lang.Class cls;
+        javax.xml.namespace.QName qName;
+        final javax.xml.namespace.QName qName2;
+        final java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
+        final java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
+        final java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
+        final java.lang.Class enumdf = org.apache.axis.encoding.ser.EnumDeserializerFactory.class;
+        final java.lang.Class arraysf = org.apache.axis.encoding.ser.ArraySerializerFactory.class;
+        final java.lang.Class arraydf = org.apache.axis.encoding.ser.ArrayDeserializerFactory.class;
+        final java.lang.Class simplesf = org.apache.axis.encoding.ser.SimpleSerializerFactory.class;
+        final java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
+        final java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
+        final java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
+        qName = new javax.xml.namespace.QName("http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "ArrayOf_xsd_string");
+        cachedSerQNames.add(qName);
+        cls = java.lang.String[].class;
+        cachedSerClasses.add(cls);
+        qName = new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string");
+        qName2 = null;
+        cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
+        cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
 
     }
 
@@ -119,16 +122,15 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
                         final java.lang.Object x = cachedSerFactories.get(i);
                         if (x instanceof Class) {
                             final java.lang.Class sf = (java.lang.Class)
-                                 cachedSerFactories.get(i);
+                                    cachedSerFactories.get(i);
                             final java.lang.Class df = (java.lang.Class)
-                                 cachedDeserFactories.get(i);
+                                    cachedDeserFactories.get(i);
                             _call.registerTypeMapping(cls, qName, sf, df, false);
-                        }
-                        else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
+                        } else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
                             final org.apache.axis.encoding.SerializerFactory sf = (org.apache.axis.encoding.SerializerFactory)
-                                 cachedSerFactories.get(i);
+                                    cachedSerFactories.get(i);
                             final org.apache.axis.encoding.DeserializerFactory df = (org.apache.axis.encoding.DeserializerFactory)
-                                 cachedDeserFactories.get(i);
+                                    cachedDeserFactories.get(i);
                             _call.registerTypeMapping(cls, qName, sf, df, false);
                         }
                     }
@@ -154,22 +156,22 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        final java.lang.Object _resp = _call.invoke(new java.lang.Object[] {args});
+        try {
+            final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{args});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
 }

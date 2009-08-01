@@ -1,12 +1,11 @@
 package com.wegmueller.ups.storage.beans;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 26.09.2005,  23:07:05
- */
+/** Created by: Thomas Wegmueller Date: 26.09.2005,  23:07:05 */
 public class OIS2LDAP {
     private String ldap;
+
     private String oisusername;
+
     private String oispassword;
 
     public String getLdap() {

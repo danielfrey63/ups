@@ -4,12 +4,11 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.lka.IPruefung;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by: Thomas Wegmueller Date: 29.09.2005,  11:22:46
- */
+/** Created by: Thomas Wegmueller Date: 29.09.2005,  11:22:46 */
 public class UPSWebServiceUtil {
 
     private static SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
     private static SimpleDateFormat tf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
     public static void dumpAnmeldungen(final IAnmeldedaten[] anm) {

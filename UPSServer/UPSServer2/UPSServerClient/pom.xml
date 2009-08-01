@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+        >
     <parent>
         <groupId>ch.xmatrix</groupId>
         <artifactId>build</artifactId>
         <version>1.0</version>
         <relativePath>../../../BuildCommon</relativePath>
     </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.xmatrix.upsserver</groupId>
-  <artifactId>client</artifactId>
-  <version>20051004</version>
-  <name>UPS Server 2 Client</name>
-  <dependencies>
-    <dependency>
-      <groupId>ch.xmatrix.upsserver</groupId>
-      <artifactId>interface</artifactId>
-      <version>20051004</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.xmatrix.upsserver</groupId>
-      <artifactId>lkaclient</artifactId>
-      <version>20051004</version>
-    </dependency>
-    <dependency>
-      <groupId>com.thoughtworks.xstream</groupId>
-      <artifactId>xstream</artifactId>
-      <version>1.2.2</version>
-    </dependency>
-	<dependency>
-		<groupId>javax.xml</groupId>
-		<artifactId>jaxrpc-api</artifactId>
-		<version>1.1</version>
-	</dependency>
-	<dependency>
-		<groupId>axis</groupId>
-		<artifactId>axis</artifactId>
-		<version>1.2.1</version>
-	</dependency>
-  </dependencies>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.upsserver</groupId>
+    <artifactId>client</artifactId>
+    <version>20051004</version>
+    <name>UPS Server 2 Client</name>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>interface</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxrpc-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+    </dependencies>
 </project>

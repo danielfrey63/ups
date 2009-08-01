@@ -1,36 +1,52 @@
 package com.wegmueller.ups.storage.beans;
 
 import com.wegmueller.ups.lka.IAnmeldedaten;
-
 import java.util.Calendar;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 26.09.2005,  20:51:09
- */
+/** Created by: Thomas Wegmueller Date: 26.09.2005,  20:51:09 */
 public class Anmeldedaten implements IAnmeldedaten {
     private Long id;
+
     private java.lang.String lkNummer;
+
     private int lkForm;
+
     private java.lang.String lkFormText;
+
     private java.lang.String pruefungsmodeText;
+
     private java.lang.String fachrichtung;
+
     private java.lang.String studentennummer;
+
     private java.lang.String vorname;
+
     private boolean repetent;
+
     private java.lang.String lkEinheitTitel;
+
     private java.lang.String lkEinheitTyp;
+
     private java.lang.String pruefungsraum;
+
     private java.lang.String lkEinheitNummerzusatz;
+
     private java.lang.String nachname;
+
     private java.lang.String studiengang;
+
     private java.lang.String email;
+
     private java.lang.String seskez;
+
     private java.lang.String lkEinheitTypText;
 
     private Calendar pruefungsdatum;
+
     private Calendar pruefungsdatumVon;
+
     private Calendar pruefungsdatumBis;
+
     private String dozentUserName;
 
     public String getLkNummer() {

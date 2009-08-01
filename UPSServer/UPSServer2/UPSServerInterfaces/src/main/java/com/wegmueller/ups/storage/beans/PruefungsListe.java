@@ -1,26 +1,29 @@
 package com.wegmueller.ups.storage.beans;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-
-/**
- * Created by: Thomas Wegmueller
- * Date: 26.09.2005,  23:12:10
- */
+/** Created by: Thomas Wegmueller Date: 26.09.2005,  23:12:10 */
 public class PruefungsListe {
 
-   private ByteTypeContent pdf;
-   private ByteTypeContent properties;
-   private ByteTypeContent pruefungsListe;
-   private Long id;
-   private String pruefung;
-   private String pruefungsSession;
-   private String studentenNummer;
-   private String userName;
+    private ByteTypeContent pdf;
+
+    private ByteTypeContent properties;
+
+    private ByteTypeContent pruefungsListe;
+
+    private Long id;
+
+    private String pruefung;
+
+    private String pruefungsSession;
+
+    private String studentenNummer;
+
+    private String userName;
+
     private Properties p;
 
     public ByteTypeContent getPdf() {
@@ -39,9 +42,8 @@ public class PruefungsListe {
         this.properties = properties;
     }
 
-
     public Properties getUserProperties() {
-        if (p==null) {
+        if (p == null) {
             p = new Properties();
             try {
                 p.load(new ByteArrayInputStream(properties.getBytes()));
@@ -56,12 +58,13 @@ public class PruefungsListe {
         this.p = p;
         try {
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            p.store(bos,"");
+            p.store(bos, "");
             properties = new ByteTypeContent(bos.toByteArray());
         } catch (IOException e) {
 
         }
     }
+
     public ByteTypeContent getPruefungsListe() {
         return pruefungsListe;
     }

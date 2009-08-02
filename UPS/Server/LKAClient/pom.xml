@@ -8,7 +8,7 @@
         <groupId>ch.xmatrix</groupId>
         <artifactId>build</artifactId>
         <version>1.0</version>
-        <relativePath>../../BuildCommon</relativePath>
+        <relativePath>../../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.upsserver</groupId>

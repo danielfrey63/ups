@@ -3,8 +3,15 @@
 set GROUPID=%1
 set ARTIFACTID=%2
 set VERSION=%3
+
 set GROUPDIR=%GROUPID:.=\%
+
+if "%4x" == "x" (
 set DIR=C:\Dokumente und Einstellungen\Daniel Frey\.m2\repository-bak\%GROUPDIR%\%ARTIFACTID%\%VERSION%
+) else (
+set DIR=%~4
+)
+
 set CURRENT=%~dp0
 
 set JAR=%DIR%\%ARTIFACTID%-%VERSION%.jar

@@ -1,7 +1,7 @@
 <!-- Transformed with ch.xmatrix.ups.admin.data.v1.DataVersion1 at 2006-03-24 13:50:43.717 CET -->
 <groupsModels id="1">
     <groupsModel id="3">
-        <name>Gruppen Fr¸hling 2003</name>
+        <name>Gruppen Fr√ºhling 2003</name>
         <uid>C82CC690-912E-AB54-157B-39735C3208D5</uid>
         <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
         <modified id="4">2003-05-25 19:04:43.696 CEST</modified>
@@ -43,7 +43,7 @@
             </taxa>
         </groupModel>
         <groupModel id="8">
-            <name>Gr‰ser</name>
+            <name>Gr√§ser</name>
             <minimum>1</minimum>
             <maximum>3</maximum>
             <taxa id="9">
@@ -2029,7 +2029,7 @@
             </taxa>
         </groupModel>
         <groupModel id="108">
-            <name>Gr‰ser</name>
+            <name>Gr√§ser</name>
             <minimum>1</minimum>
             <maximum>2</maximum>
             <taxa id="109">

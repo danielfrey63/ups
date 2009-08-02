@@ -1,7 +1,7 @@
 <!-- Transformed with ch.xmatrix.ups.admin.data.v2.DataVersion2 at 2006-03-25 00:56:06.160 CET -->
 <specimensModels id="1">
   <specimensModel id="3">
-    <name>Belege Frühling 2003</name>
+    <name>Belege FrÃ¼hling 2003</name>
     <uid>035FD566-4567-4828-C780-6825AB621F1D</uid>
     <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
     <modified id="4">2003-05-25 19:04:58.399 CEST</modified>
@@ -2244,7 +2244,7 @@
       <numberOfSpecimens>1</numberOfSpecimens>
     </specimenModel>
     <specimenModel id="259">
-      <taxon>Hippophaë rhamnoides</taxon>
+      <taxon>HippophaÃ« rhamnoides</taxon>
       <id>100117-131210</id>
       <weightIfKnown>1</weightIfKnown>
       <weightIfUnknown>3</weightIfUnknown>
@@ -5580,7 +5580,7 @@
         <specimenModel reference="549"/>
       </entry>
       <entry>
-        <string>Hippophaë rhamnoides</string>
+        <string>HippophaÃ« rhamnoides</string>
         <specimenModel reference="259"/>
       </entry>
       <entry>
@@ -9509,7 +9509,7 @@
       <numberOfSpecimens>1</numberOfSpecimens>
     </specimenModel>
     <specimenModel id="1259">
-      <taxon>Hippophaë rhamnoides</taxon>
+      <taxon>HippophaÃ« rhamnoides</taxon>
       <id>100117-131210</id>
       <weightIfKnown>1</weightIfKnown>
       <weightIfUnknown>3</weightIfUnknown>
@@ -12845,7 +12845,7 @@
         <specimenModel reference="1549"/>
       </entry>
       <entry>
-        <string>Hippophaë rhamnoides</string>
+        <string>HippophaÃ« rhamnoides</string>
         <specimenModel reference="1259"/>
       </entry>
       <entry>

@@ -1,96 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+        >
     <parent>
         <groupId>ch.xmatrix</groupId>
         <artifactId>build</artifactId>
         <version>1.0</version>
         <relativePath>../../../BuildCommon</relativePath>
     </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.xmatrix.ups</groupId>
-  <artifactId>ulc</artifactId>
-  <name>UPS List-Converter</name>
-  <version>2.0-20070222</version>
-  <description>Mit diesem Tool lassen sich Pflanzenlisten aus dem UPS Studenten-Tool in Sofflisten für die Herbar CD-ROM
-        Version 2 konvertieren. Das Tool übernimmt auch das platzieren der Listen am richtigen Ort, so dass beim
-        nächsten Start der HCD die Stofflisten zur Verfügung stehen. Insgesamt werden sieben Stofflisten erzeugt: je
-        eine für Arten, Gattungen, Unterfamilien, Familien, Ordnungen, Ordnungs-Gruppen und Unterklassen.</description>
-  <organization>
-    <name>Geobotanisches Institut ETH</name>
-    <url>http://www.geobot.umnw.ethz.ch</url>
-  </organization>
-  <dependencies>
-    <dependency>
-      <groupId>xmatrix</groupId>
-      <artifactId>xmatrix</artifactId>
-      <version>2.0-20090323</version>
-    </dependency>
-    <dependency>
-      <groupId>ups</groupId>
-      <artifactId>ch.xmatrix.ups.ust</artifactId>
-      <version>2.0-20090323</version>
-    </dependency>
-    <dependency>
-      <groupId>ups</groupId>
-      <artifactId>ch.xmatrix.ups</artifactId>
-      <version>2.0-20090323</version>
-    </dependency>
-    <dependency>
-      <groupId>ups</groupId>
-      <artifactId>ch.xmatrix.ups.data.exams</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>ups</groupId>
-      <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>ups</groupId>
-      <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>jgoodies</groupId>
-      <artifactId>binding</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>xstream</groupId>
-      <artifactId>xstream</artifactId>
-      <version>1.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>xpp3</groupId>
-      <artifactId>xpp3</artifactId>
-      <version>1.1.3.3</version>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.8</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-changes-plugin</artifactId>
-        <configuration>
-          <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
-  <distributionManagement>
-    <site>
-      <id>default</id>
-      <name>Default Site</name>
-      <url>file:///var/www/html/ups/site/ulc/</url>
-    </site>
-  </distributionManagement>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.ups</groupId>
+    <artifactId>ulc</artifactId>
+    <name>UPS List-Converter</name>
+    <version>2.0-20070222</version>
+    <description>Mit diesem Tool lassen sich Pflanzenlisten aus dem UPS Studenten-Tool in Sofflisten fÃ¼r die Herbar
+        CD-ROM Version 2 konvertieren. Das Tool Ã¼bernimmt auch das platzieren der Listen am richtigen Ort, so dass beim
+        nÃ¤chsten Start der HCD die Stofflisten zur VerfÃ¼gung stehen. Insgesamt werden sieben Stofflisten erzeugt: je
+        eine fÃ¼r Arten, Gattungen, Unterfamilien, Familien, Ordnungen, Ordnungs-Gruppen und Unterklassen.
+    </description>
+    <organization>
+        <name>Geobotanisches Institut ETH</name>
+        <url>http://www.geobot.umnw.ethz.ch</url>
+    </organization>
+    <dependencies>
+        <dependency>
+            <groupId>xmatrix</groupId>
+            <artifactId>xmatrix</artifactId>
+            <version>2.0-20090323</version>
+        </dependency>
+        <dependency>
+            <groupId>ups</groupId>
+            <artifactId>ch.xmatrix.ups.ust</artifactId>
+            <version>2.0-20090323</version>
+        </dependency>
+        <dependency>
+            <groupId>ups</groupId>
+            <artifactId>ch.xmatrix.ups</artifactId>
+            <version>2.0-20090323</version>
+        </dependency>
+        <dependency>
+            <groupId>ups</groupId>
+            <artifactId>ch.xmatrix.ups.data.exams</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ups</groupId>
+            <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ups</groupId>
+            <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jgoodies</groupId>
+            <artifactId>binding</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3</artifactId>
+            <version>1.1.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+                <configuration>
+                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+    <distributionManagement>
+        <site>
+            <id>default</id>
+            <name>Default Site</name>
+            <url>file:///var/www/html/ups/site/ulc/</url>
+        </site>
+    </distributionManagement>
 </project>

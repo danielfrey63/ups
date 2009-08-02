@@ -51,26 +51,21 @@
     <dependency>
       <groupId>ch.xmatrix.upsserver</groupId>
       <artifactId>client</artifactId>
-      <version>20060827</version>
+      <version>20090723</version>
     </dependency>
     <dependency>
-      <groupId>sourceforge</groupId>
-      <artifactId>MDateSelector</artifactId>
-      <version>14.00347</version>
+      <groupId>mdateselector</groupId>
+      <artifactId>mdateselector</artifactId>
+      <version>0.347</version>
     </dependency>
     <dependency>
-      <groupId>ganymed</groupId>
+      <groupId>ch.ethz.ganymed</groupId>
       <artifactId>ganymed-ssh2</artifactId>
       <version>build209</version>
     </dependency>
     <dependency>
       <groupId>com.jformdesigner</groupId>
       <artifactId>jfd-loader</artifactId>
-      <version>2.0.4</version>
-    </dependency>
-    <dependency>
-      <groupId>com.jgoodies</groupId>
-      <artifactId>uif-lite</artifactId>
       <version>2.0.4</version>
     </dependency>
     <dependency>
@@ -149,7 +144,7 @@
       <version>1.1.43</version>
     </dependency>
     <dependency>
-      <groupId>xstream</groupId>
+      <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
       <version>1.2.2</version>
     </dependency>

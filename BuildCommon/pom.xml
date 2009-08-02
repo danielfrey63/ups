@@ -88,5 +88,10 @@
             <name>Java Net Repository</name>
             <url>https://maven-repository.dev.java.net/nonav/repository</url>
         </repository>
+        <repository>
+            <id>sourceforge-repo</id>
+            <name>Sourceforge Repository</name>
+            <url>http://vars.sourceforge.net/maven2</url>
+        </repository>
     </repositories>
 </project>

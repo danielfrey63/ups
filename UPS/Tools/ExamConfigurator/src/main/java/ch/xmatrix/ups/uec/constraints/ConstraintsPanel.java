@@ -8,7 +8,7 @@ import java.util.*;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
-import com.jgoodies.uif_lite.component.*;
+import com.jgoodies.uif.component.*;
 
 /**
  * @author Daniel Frey

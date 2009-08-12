@@ -12,7 +12,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.upsserver</groupId>
-    <artifactId>ldapauthenticator</artifactId>
+    <artifactId>ldap</artifactId>
     <version>20051004</version>
     <name>UPS Server LDAP Authenticator</name>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>interface</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.1</version>
+        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+    </dependencies>
 </project>

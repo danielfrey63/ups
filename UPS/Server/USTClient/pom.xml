@@ -12,7 +12,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.upsserver</groupId>
-    <artifactId>ustclient</artifactId>
+    <artifactId>ust</artifactId>
     <version>20051004</version>
     <name>UPS Server UST Client</name>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>interface</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>ldap</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>pdf</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+    </dependencies>
 </project>

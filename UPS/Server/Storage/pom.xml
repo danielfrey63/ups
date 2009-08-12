@@ -15,4 +15,37 @@
     <artifactId>storage</artifactId>
     <version>20051004</version>
     <name>UPS Server Storage</name>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>interface</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>lka</artifactId>
+            <version>20051004</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>ldap</artifactId>
+            <version>20051004</version>
+        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+    </dependencies>
 </project>

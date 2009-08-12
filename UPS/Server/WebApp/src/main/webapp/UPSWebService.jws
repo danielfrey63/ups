@@ -1,0 +1,29 @@
+
+
+import org.apache.axis.*;
+import org.apache.axis.MessageContext;
+import org.apache.axis.transport.http.HTTPConstants;
+
+import com.wegmueller.ups.webservice.com.wegmueller.ups.service.StandardUPSWebService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class UPSWebService {
+
+
+    public byte[] submit(   String userName,
+                            String password,
+                            byte[] bytes) throws AxisFault {
+       try {
+            return com.wegmueller.ups.service.StandardUPSWebService.submitPruefungsListe(userName,password,bytes);
+         } catch (Throwable e) {
+             throw new AxisFault(e.getMessage());
+         }
+    }
+
+
+
+
+}

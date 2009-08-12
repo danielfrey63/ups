@@ -1,0 +1,23 @@
+import com.wegmueller.ups.webservice.*;
+import org.apache.axis.*;
+import com.wegmueller.ups.webservice.*;
+
+import com.wegmueller.ups.lka.*;
+
+public class UPSWebService2 {
+
+
+    public String invoke(String[] args) throws AxisFault {
+        try {
+            return StandardUPSWebService.invoke(args);
+        } catch (Throwable e) {
+            throw new AxisFault(e.getMessage());
+        }
+    }
+
+
+
+
+
+
+}

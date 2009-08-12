@@ -18,8 +18,15 @@
     <name>UPS Server</name>
     <description>UPS Server</description>
     <modules>
+    	<!-- Business Delegate Dependencies -->
+        <module>ServerClient</module>
         <module>LKAClient</module>
-        <module>UPSServerClient</module>
-        <module>UPSServerInterfaces</module>
+        <module>ServerInterfaces</module>
+        <!-- Server Components -->
+        <module>LDAPAuthenticator</module>
+        <module>PDFLib</module>
+        <module>Storage</module>
+        <module>WebApp</module>
+        <module>USTClient</module>
     </modules>
 </project>

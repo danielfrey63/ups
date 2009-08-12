@@ -15,8 +15,8 @@
     <inceptionYear>2006</inceptionYear>
     <dependencies>
         <dependency>
-            <groupId>ch.jfactory</groupId>
-            <artifactId>icons</artifactId>
+            <groupId>ch.xmatrix</groupId>
+            <artifactId>icon</artifactId>
             <version>1.0-20060814</version>
         </dependency>
         <dependency>

@@ -16,6 +16,6 @@
     <modules>
         <module>Data</module>
         <module>JFactory</module>
-        <module>UPSServer</module>
+        <module>UPS</module>
     </modules>
 </project>

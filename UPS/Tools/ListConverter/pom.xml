@@ -24,44 +24,76 @@
         <name>Geobotanisches Institut ETH</name>
         <url>http://www.geobot.umnw.ethz.ch</url>
     </organization>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Main-Class>ch.xmatrix.ups.hcd.Converter</Main-Class>
+                            <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo.webstart</groupId>
+                <artifactId>webstart-maven-plugin</artifactId>
+                <configuration>
+                    <jnlp>
+                        <mainClass>ch.xmatrix.ups.hcd.Converter</mainClass>
+                    </jnlp>
+                    <sign>
+                        <keystore>${project.parent.relativePath}/keystore/keystore.jks</keystore>
+                        <keypass>nxd085e</keypass>
+                        <storepass>nxd085e</storepass>
+                        <alias>hcd</alias>
+                        <verify>true</verify>
+                    </sign>
+                    <outputJarVersions>true</outputJarVersions>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
-            <groupId>xmatrix</groupId>
-            <artifactId>xmatrix</artifactId>
+            <groupId>ch.xmatrix</groupId>
+            <artifactId>common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups.ust</artifactId>
+            <groupId>ch.xmatrix.ups</groupId>
+            <artifactId>common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups</artifactId>
-            <version>2.0-20090323</version>
-        </dependency>
-        <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups.data.exams</artifactId>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>exams</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>constraints</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
-            <version>SNAPSHOT</version>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>taxa</artifactId>
+            <version>2.0.2</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>binding</artifactId>
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>xstream</groupId>
+            <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.2.2</version>
         </dependency>

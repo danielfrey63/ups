@@ -25,7 +25,7 @@
     <dependency>
       <groupId>ch.xmatrix.upsserver</groupId>
       <artifactId>client</artifactId>
-      <version>20051004</version>
+      <version>20090723</version>
     </dependency>
     <dependency>
       <groupId>ch.xmatrix</groupId>

@@ -52,6 +52,20 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
@@ -76,6 +90,11 @@
         <repository>
             <id>local</id>
             <name>Local Repository</name>
+            <url>file:BuildCommon/repository</url>
+        </repository>
+        <repository>
+            <id>local</id>
+            <name>Local Repository 2</name>
             <url>file:${project.parent.relativePath}/repository</url>
         </repository>
         <repository>

@@ -24,13 +24,13 @@
     </organization>
     <dependencies>
         <dependency>
-            <groupId>xmatrix</groupId>
-            <artifactId>xmatrix</artifactId>
+            <groupId>ch.xmatrix</groupId>
+            <artifactId>common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>ch.xmatrix.ups</artifactId>
+            <groupId>ch.xmatrix.ups</groupId>
+            <artifactId>common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
@@ -44,47 +44,47 @@
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>jfactory</groupId>
-            <artifactId>jfactory-icons</artifactId>
+            <groupId>ch.xmatrix</groupId>
+            <artifactId>icon</artifactId>
             <version>1.0-20060814</version>
         </dependency>
         <dependency>
-            <groupId>ups</groupId>
-            <artifactId>UPSServerClient</artifactId>
-            <version>20060827</version>
+            <groupId>ch.xmatrix.upsserver</groupId>
+            <artifactId>client</artifactId>
+            <version>20090723</version>
         </dependency>
         <dependency>
-            <groupId>javadesktop</groupId>
+            <groupId>org.pietschy</groupId>
             <artifactId>gui-commands</artifactId>
-            <version>1.1.42</version>
+            <version>1.1.43</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>uif</artifactId>
             <version>1.6.0</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>uif-extras</artifactId>
             <version>1.6.0.a</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>binding</artifactId>
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>validation</artifactId>
             <version>1.3.0</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>forms</artifactId>
             <version>1.0.7</version>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>looks</artifactId>
             <version>2.0.3</version>
         </dependency>
@@ -144,35 +144,30 @@
             <version>1.5.1</version>
         </dependency>
         <dependency>
-            <groupId>jformdesigner</groupId>
+            <groupId>com.jformdesigner</groupId>
             <artifactId>jfd-loader</artifactId>
             <version>2.0.4</version>
         </dependency>
         <dependency>
-            <groupId>jformdesigner</groupId>
-            <artifactId>jgoodies-uif-lite</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>xstream</groupId>
+            <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.2.2</version>
         </dependency>
         <dependency>
-            <groupId>ostermiller</groupId>
-            <artifactId>ostermiller-utils</artifactId>
-            <version>1.03.00</version>
+            <groupId>org.ostermiller</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.07.00</version>
         </dependency>
         <dependency>
-            <groupId>infonode</groupId>
+            <groupId>net.infonode</groupId>
             <artifactId>idw</artifactId>
             <version>1.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>swingfx</groupId>
-            <artifactId>swingfx</artifactId>
-            <version>0.1</version>
-        </dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>0.9.1</version>
+		</dependency>
         <dependency>
             <groupId>xpp3</groupId>
             <artifactId>xpp3</artifactId>

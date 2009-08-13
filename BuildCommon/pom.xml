@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
-    <artifactId>build</artifactId>
+    <artifactId>ch.xmatrix.build</artifactId>
     <packaging>pom</packaging>
     <name>xmatrix application components</name>
     <version>1.0</version>
@@ -57,12 +58,12 @@
                     </archive>
                 </configuration>
             </plugin>
-			<plugin>
-				<artifactId>maven-idea-plugin</artifactId>
-				<configuration>
-					<useFullNames>true</useFullNames>
-				</configuration>
-			</plugin>
+            <plugin>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <useFullNames>true</useFullNames>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -71,25 +72,25 @@
                     </includes>
                 </configuration>
             </plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
-				<executions>
-					<execution>
-					<phase>validate</phase>
-					<goals>
-						<goal>create</goal>
-					</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<doCheck>true</doCheck>
-					<!-- Updates do not work due to a "working copy locked" -->
-					<doUpdate>false</doUpdate>
-				</configuration>
-			</plugin>
-	    </plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0-beta-3</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <!-- Updates do not work due to a "working copy locked" -->
+                    <doUpdate>false</doUpdate>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <repositories>
         <repository>

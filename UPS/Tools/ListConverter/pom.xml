@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-        xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
-        >
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>ch.xmatrix</groupId>
-        <artifactId>build</artifactId>
+        <artifactId>ch.xmatrix.build</artifactId>
         <version>1.0</version>
         <relativePath>../../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix.ups</groupId>
-    <artifactId>ulc</artifactId>
+    <groupId>ch.xmatrix.ups.tools</groupId>
+    <artifactId>ch.xmatrix.ups.tools.ulc</artifactId>
     <name>UPS List-Converter</name>
     <version>2.0-20070222</version>
     <description>Mit diesem Tool lassen sich Pflanzenlisten aus dem UPS Studenten-Tool in Sofflisten für die Herbar
@@ -64,27 +61,27 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>ch.xmatrix.common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
-            <groupId>ch.xmatrix.ups</groupId>
-            <artifactId>common</artifactId>
+            <groupId>ch.xmatrix.ups.tools</groupId>
+            <artifactId>ch.xmatrix.ups.tools.common</artifactId>
             <version>2.0-20090323</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>exams</artifactId>
+            <artifactId>ch.xmatrix.ups.data.exams</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>constraints</artifactId>
+            <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>taxa</artifactId>
+            <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
             <version>2.0.2</version>
         </dependency>
         <dependency>

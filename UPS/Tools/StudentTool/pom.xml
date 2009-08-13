@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-        xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
-        >
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>ch.xmatrix</groupId>
-        <artifactId>build</artifactId>
+        <artifactId>ch.xmatrix.build</artifactId>
         <version>1.0</version>
         <relativePath>../../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix.ups</groupId>
-    <artifactId>ust</artifactId>
+    <groupId>ch.xmatrix.ups.tools</groupId>
+    <artifactId>ch.xmatrix.ups.tools.ust</artifactId>
     <name>UPS Studenten-Tool</name>
     <version>2.0-20090323</version>
     <description>Mit dem UPS Studenten-Tool können individuelle Pflanzenlisten erstellt werden. Das Werkzeug stellt die
@@ -25,32 +22,32 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>ch.xmatrix.common</artifactId>
             <version>2.0-20090323</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.ups</groupId>
-            <artifactId>common</artifactId>
-            <version>2.0-20090323</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>sessions</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>courses</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix</groupId>
-            <artifactId>icon</artifactId>
+            <artifactId>ch.xmatrix.icon</artifactId>
             <version>1.0-20060814</version>
         </dependency>
         <dependency>
-            <groupId>ch.xmatrix.upsserver</groupId>
-            <artifactId>client</artifactId>
+            <groupId>ch.xmatrix.ups.tools</groupId>
+            <artifactId>ch.xmatrix.ups.tools.common</artifactId>
+            <version>2.0-20090323</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>ch.xmatrix.ups.data.courses</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.server</groupId>
+            <artifactId>ch.xmatrix.ups.server.client</artifactId>
             <version>20090723</version>
         </dependency>
         <dependency>
@@ -163,11 +160,11 @@
             <artifactId>idw</artifactId>
             <version>1.3.0</version>
         </dependency>
-		<dependency>
-			<groupId>org.swinglabs</groupId>
-			<artifactId>swingx</artifactId>
-			<version>0.9.1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swingx</artifactId>
+            <version>0.9.1</version>
+        </dependency>
         <dependency>
             <groupId>xpp3</groupId>
             <artifactId>xpp3</artifactId>

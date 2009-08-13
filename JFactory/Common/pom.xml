@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>ch.xmatrix</groupId>
-        <artifactId>build</artifactId>
+        <artifactId>ch.xmatrix.build</artifactId>
         <version>1.0</version>
         <relativePath>../../BuildCommon</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
-    <artifactId>common</artifactId>
+    <artifactId>ch.xmatrix.common</artifactId>
     <version>2.0-20090323</version>
     <name>JFactory Components</name>
     <description>JFactory Common Components</description>
@@ -16,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix</groupId>
-            <artifactId>icon</artifactId>
+            <artifactId>ch.xmatrix.icon</artifactId>
             <version>1.0-20060814</version>
         </dependency>
         <dependency>

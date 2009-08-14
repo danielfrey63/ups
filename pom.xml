@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
-    <artifactId>main</artifactId>
+    <artifactId>ch.xmatrix</artifactId>
     <name>Projects</name>
     <packaging>pom</packaging>
     <version>1.0</version>

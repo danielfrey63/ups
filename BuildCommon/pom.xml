@@ -60,9 +60,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-idea-plugin</artifactId>
-                <configuration>
-                    <useFullNames>true</useFullNames>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

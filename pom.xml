@@ -16,7 +16,7 @@
     <description>Everything from xmatrix</description>
     <modules>
         <module>Data</module>
-        <module>JFactory</module>
+        <module>Common</module>
         <module>UPS</module>
     </modules>
 </project>

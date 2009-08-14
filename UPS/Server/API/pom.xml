@@ -11,5 +11,5 @@
     <groupId>ch.xmatrix.ups.server</groupId>
     <artifactId>ch.xmatrix.ups.server.interface</artifactId>
     <version>20051004</version>
-    <name>UPS Server 2 Interface</name>
+    <name>UPS Server 2 API</name>
 </project>

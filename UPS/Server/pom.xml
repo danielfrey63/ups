@@ -18,12 +18,12 @@
         <!-- Business Delegate Dependencies -->
         <module>ServerClient</module>
         <module>LKAClient</module>
-        <module>ServerInterfaces</module>
+        <module>API</module>
         <!-- Server Components -->
         <module>LDAPAuthenticator</module>
         <module>PDFLib</module>
         <module>Storage</module>
         <module>WebApp</module>
-        <module>USTClient</module>
+        <module>BD</module>
     </modules>
 </project>

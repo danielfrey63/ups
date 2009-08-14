@@ -19,7 +19,8 @@ import javax.swing.JTextField;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class TextEditItem extends JPanel {
+public class TextEditItem extends JPanel
+{
     private JTextField field;
 
     /**
@@ -33,7 +34,8 @@ public class TextEditItem extends JPanel {
      * @param prefix   the prefix string to use to access the different strings used to setup
      * @param listener the ActionListener to use for the button
      */
-    public TextEditItem(final String prefix, final ActionListener listener, final FocusListener focus) {
+    public TextEditItem(final String prefix, final ActionListener listener, final FocusListener focus)
+    {
         this(prefix);
         field.addFocusListener(focus);
         field.addActionListener(listener);
@@ -43,12 +45,13 @@ public class TextEditItem extends JPanel {
      * Build a panel containing a title in boldface on the first line and a edit field displaying the current status on
      * the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the
      * prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> </ul> See documentation of
-     * {@link ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate what
-     * extenstions are used to complete the keys of the button.
+     * {@link ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate
+     * what extenstions are used to complete the keys of the button.
      *
      * @param prefix the prefix string to use to access the different strings used to setup
      */
-    public TextEditItem(final String prefix) {
+    public TextEditItem(final String prefix)
+    {
         final JLabel title = new JLabel(Strings.getString(prefix + ".TITLE.TEXT"));
         title.setFont(title.getFont().deriveFont(Font.BOLD));
 
@@ -75,15 +78,18 @@ public class TextEditItem extends JPanel {
      *
      * @param userObject
      */
-    public void setText(final Object userObject) {
+    public void setText(final Object userObject)
+    {
         field.setText(userObject.toString());
     }
 
-    public String getText() {
+    public String getText()
+    {
         return field.getText();
     }
 
-    public JTextField getTextField() {
+    public JTextField getTextField()
+    {
         return field;
     }
 }

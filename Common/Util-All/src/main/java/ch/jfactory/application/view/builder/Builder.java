@@ -8,7 +8,8 @@ import javax.swing.JComponent;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/22 15:05:10 $
  */
-public interface Builder {
+public interface Builder
+{
 
     JComponent getPanel();
 }

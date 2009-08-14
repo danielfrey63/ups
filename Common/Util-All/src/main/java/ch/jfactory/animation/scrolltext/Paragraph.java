@@ -17,9 +17,6 @@
 
 package ch.jfactory.animation.scrolltext;
 
-
-
-
 /**
  * Represents a paragraph object. A paragraph consists of one to many lines of text, an associated formatting and a
  * total height and width.
@@ -27,45 +24,30 @@ package ch.jfactory.animation.scrolltext;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class Paragraph {
-    /**
-     * The formatter assicitated with this paragraph.
-     */
+public class Paragraph
+{
+    /** The formatter assicitated with this paragraph. */
     private Formatter formatter = new Formatter();
 
-    /**
-     * The lines in this paragraph.
-     */
+    /** The lines in this paragraph. */
     private String[] lines;
 
-    /**
-     * The total height of this paragraph.
-     */
+    /** The total height of this paragraph. */
     private int height;
 
-    /**
-     * The total width of this paragraph.
-     */
+    /** The total width of this paragraph. */
     private int width;
 
-    /**
-     * The The text of the paragraph.
-     */
+    /** The The text of the paragraph. */
     private String text;
 
-    /**
-     * The vertical line coordinates of the base lines in pixels.
-     */
+    /** The vertical line coordinates of the base lines in pixels. */
     private int[] verticalLineCoords;
 
-    /**
-     * The horizontal starts of the first character in pixels.
-     */
+    /** The horizontal starts of the first character in pixels. */
     private int[] horizontalLineCoords;
 
-    /**
-     * The total line lengths in pixels.
-     */
+    /** The total line lengths in pixels. */
     private int[] lengths;
 
     /**
@@ -75,7 +57,8 @@ public class Paragraph {
      * @param text      the text to break into lines
      * @param width     the width of the paragraph
      */
-    public Paragraph(final Formatter formatter, final String text, final int width) {
+    public Paragraph(final Formatter formatter, final String text, final int width)
+    {
         this.formatter = formatter;
         this.text = text;
         this.width = width;
@@ -86,8 +69,10 @@ public class Paragraph {
      *
      * @return an array of lines
      */
-    public String[] getLines() {
-        if (lines == null) {
+    public String[] getLines()
+    {
+        if (lines == null)
+        {
             init();
         }
 
@@ -99,16 +84,19 @@ public class Paragraph {
      *
      * @return the total height
      */
-    public int getHeight() {
-        if (lines == null) {
+    public int getHeight()
+    {
+        if (lines == null)
+        {
             init();
         }
 
         return height;
     }
 
-    public int[] getLength() {
-    	return lengths;
+    public int[] getLength()
+    {
+        return lengths;
     }
 
     /**
@@ -116,8 +104,10 @@ public class Paragraph {
      *
      * @return an array of vertical coordinates in pixels
      */
-    public int[] getVerticalCoords() {
-        if (lines == null) {
+    public int[] getVerticalCoords()
+    {
+        if (lines == null)
+        {
             init();
         }
 
@@ -125,13 +115,15 @@ public class Paragraph {
     }
 
     /**
-     * Returns the horizontal coordinates of the first characters. For left aligned text, each value is the same.
-     * It may be different for center or right alligned text.
+     * Returns the horizontal coordinates of the first characters. For left aligned text, each value is the same. It may
+     * be different for center or right alligned text.
      *
      * @return an array of horizontal coordinates in pixels.
      */
-    public int[] getHorizontalCoords() {
-        if (lines == null) {
+    public int[] getHorizontalCoords()
+    {
+        if (lines == null)
+        {
             init();
         }
 
@@ -143,14 +135,14 @@ public class Paragraph {
      *
      * @return the formatter used to format the paragraph
      */
-    public Formatter getFormatter() {
+    public Formatter getFormatter()
+    {
         return formatter;
     }
 
-    /**
-     * Initializes the properties.
-     */
-    private void init() {
+    /** Initializes the properties. */
+    private void init()
+    {
         lines = getFormatter().getLines(text, width);
         lengths = getFormatter().getLength(lines);
         height = getFormatter().getHeight(lines.length);

@@ -20,31 +20,40 @@ import javax.swing.text.Document;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class DefaultTextField extends JTextField {
-    public DefaultTextField() {
+public class DefaultTextField extends JTextField
+{
+    public DefaultTextField()
+    {
         this(null, "", 0);
     }
 
-    public DefaultTextField(final int columns) {
+    public DefaultTextField(final int columns)
+    {
         this(null, "", columns);
     }
 
-    public DefaultTextField(final String text) {
+    public DefaultTextField(final String text)
+    {
         this(null, text, 0);
     }
 
-    public DefaultTextField(final String text, final int columns) {
+    public DefaultTextField(final String text, final int columns)
+    {
         this(null, text, columns);
     }
 
-    public DefaultTextField(final Document doc, final String text, final int columns) {
+    public DefaultTextField(final Document doc, final String text, final int columns)
+    {
         super(doc, text, columns);
-        this.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) {
+        this.addFocusListener(new FocusListener()
+        {
+            public void focusGained(final FocusEvent e)
+            {
                 selectAll();
             }
 
-            public void focusLost(final FocusEvent e) {
+            public void focusLost(final FocusEvent e)
+            {
             }
         });
     }

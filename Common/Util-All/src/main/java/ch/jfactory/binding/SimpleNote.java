@@ -16,8 +16,8 @@
  */
 package ch.jfactory.binding;
 
-import java.awt.Color;
 import ch.jfactory.application.view.status.Message;
+import java.awt.Color;
 
 /**
  * Note object to store information for the InfoModel.
@@ -25,52 +25,65 @@ import ch.jfactory.application.view.status.Message;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/06 10:16:23 $
  */
-public class SimpleNote implements Note {
+public class SimpleNote implements Note
+{
 
     private final String message;
+
     private final String subject;
+
     private final Integer percentage;
+
     private final Color color;
+
     private final Message.Type type;
 
-    public SimpleNote(final String message) {
+    public SimpleNote(final String message)
+    {
         this(message, null, null, null, null);
     }
 
-    public SimpleNote(final String message, final String subject) {
+    public SimpleNote(final String message, final String subject)
+    {
         this(message, subject, null, null, null);
     }
 
-    public SimpleNote(final String message, final Message.Type type) {
+    public SimpleNote(final String message, final Message.Type type)
+    {
         this(message, null, null, null, type);
     }
 
-    public SimpleNote(final String message, final String subject, final Message.Type type) {
+    public SimpleNote(final String message, final String subject, final Message.Type type)
+    {
         this(message, subject, null, null, type);
     }
 
-    public SimpleNote(final String message, final int percentage) {
+    public SimpleNote(final String message, final int percentage)
+    {
         this(message, null, percentage, null, null);
     }
 
-    public SimpleNote(final String message, final Color color) {
+    public SimpleNote(final String message, final Color color)
+    {
         this(message, null, null, color, null);
     }
 
-    public SimpleNote(final String message, final Integer percentage, final Color color) {
+    public SimpleNote(final String message, final Integer percentage, final Color color)
+    {
         this(message, null, percentage, color, null);
     }
 
     /**
      * Constructs a new note with the complete set of arguments.
      *
-     * @param message the message
-     * @param subject the subject
+     * @param message    the message
+     * @param subject    the subject
      * @param percentage the percentage
-     * @param color the color
-     * @param type the {@link ch.jfactory.application.view.status.Message.Type}
+     * @param color      the color
+     * @param type       the {@link ch.jfactory.application.view.status.Message.Type}
      */
-    private SimpleNote(final String message, final String subject, final Integer percentage, final Color color, final Message.Type type) {
+    private SimpleNote(final String message, final String subject, final Integer percentage, final Color color, final Message.Type type)
+    {
         this.message = message;
         this.subject = subject;
         this.percentage = percentage;
@@ -83,37 +96,44 @@ public class SimpleNote implements Note {
      *
      * @param note the note to copy
      */
-    public SimpleNote(final Note note) {
+    public SimpleNote(final Note note)
+    {
         this(note.getMessage(), note.getSubject(), note.getPercentage(), note.getColor(), note.getType());
     }
 
     /** {@inheritDoc} */
-    public String getMessage() {
+    public String getMessage()
+    {
         return message;
     }
 
     /** {@inheritDoc} */
-    public String getSubject() {
+    public String getSubject()
+    {
         return subject;
     }
 
     /** {@inheritDoc} */
-    public Integer getPercentage() {
+    public Integer getPercentage()
+    {
         return percentage;
     }
 
     /** {@inheritDoc} */
-    public Color getColor() {
+    public Color getColor()
+    {
         return color;
     }
 
     /** {@inheritDoc} */
-    public Message.Type getType() {
+    public Message.Type getType()
+    {
         return type;
     }
 
     /** {@inheritDoc} */
-    public String toString() {
+    public String toString()
+    {
         return "Note[percent=" + percentage + ",color=" + ",subject=" + subject + color + ",message=" + message + "]";
     }
 }

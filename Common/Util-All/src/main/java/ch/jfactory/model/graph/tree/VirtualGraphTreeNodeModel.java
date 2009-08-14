@@ -13,69 +13,86 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class VirtualGraphTreeNodeModel implements GraphModel {
+public class VirtualGraphTreeNodeModel implements GraphModel
+{
 
     private VirtualGraphTreeNodeFilter rootFilter;
+
     private GraphModel model;
+
     private VirtualGraphTreeNode root = null;
+
     private HashMap fullPathCache = new HashMap();
+
     private boolean readOnly;
 
-    public VirtualGraphTreeNodeModel(final VirtualGraphTreeNodeFilter rootFilter, final GraphModel model) {
+    public VirtualGraphTreeNodeModel(final VirtualGraphTreeNodeFilter rootFilter, final GraphModel model)
+    {
         this.rootFilter = rootFilter;
         this.model = model;
     }
 
-    public VirtualGraphTreeNodeModel(final VirtualGraphTreeNodeFilter rootFilter, final GraphModel model, final GraphNode root) {
+    public VirtualGraphTreeNodeModel(final VirtualGraphTreeNodeFilter rootFilter, final GraphModel model, final GraphNode root)
+    {
         this(rootFilter, model);
         this.root = VirtualGraphTreeNode.getGraphNode(root, this, rootFilter);
     }
 
-    public VirtualGraphTreeNodeList getChildren(final VirtualGraphTreeNode parent) {
+    public VirtualGraphTreeNodeList getChildren(final VirtualGraphTreeNode parent)
+    {
 
         // collect all children for each non distinct parent
         final VirtualGraphTreeNodeList result = new VirtualGraphTreeNodeList();
         final VirtualGraphTreeNodeList nonDistincts = parent.getNonDistincts();
-        for (int i = 0; i < nonDistincts.size(); i++) {
+        for (int i = 0; i < nonDistincts.size(); i++)
+        {
             result.addAll(getChildrenFromDistinct(nonDistincts.getTreeNode(i)));
         }
 
         // unite children and keep parents
         final VirtualGraphTreeNodeList distincts = new VirtualGraphTreeNodeList();
-        for (int i = 0; i < result.size(); i++) {
+        for (int i = 0; i < result.size(); i++)
+        {
             final VirtualGraphTreeNode newChild = result.getTreeNode(i);
             boolean is = false;
             int j = 0;
-            for (; j < distincts.size(); j++) {
+            for (; j < distincts.size(); j++)
+            {
                 final VirtualGraphTreeNode node = distincts.getTreeNode(j);
-                if (node.getDependent() == newChild.getDependent()) {
+                if (node.getDependent() == newChild.getDependent())
+                {
                     is = true;
                     break;
                 }
             }
-            if (!is) {
+            if (!is)
+            {
                 distincts.add(newChild);
             }
-            else {
+            else
+            {
                 final VirtualGraphTreeNode collector = (VirtualGraphTreeNode) distincts.get(j);
                 collector.addNonDistinct(newChild);
             }
         }
         final Comparator comparator = parent.getFilter().getComparator();
-        if (comparator != null) {
+        if (comparator != null)
+        {
             distincts.sort(comparator);
         }
         return distincts;
     }
 
-    private VirtualGraphTreeNodeList getChildrenFromDistinct(final VirtualGraphTreeNode parent) {
+    private VirtualGraphTreeNodeList getChildrenFromDistinct(final VirtualGraphTreeNode parent)
+    {
 
         final VirtualGraphTreeNodeList result = new VirtualGraphTreeNodeList();
         VirtualGraphTreeNodeFilter filter = parent.getFilter();
         VirtualGraphTreeNodeFilter[] childrenFilters = filter.getChildrenFilters();
 
         // if recursive, add this filter to array of filters to search for
-        if (filter.isRecursive() | filter.getType() == VirtualGraphTreeNodeFilter.CLASSES_ALL) {
+        if (filter.isRecursive() | filter.getType() == VirtualGraphTreeNodeFilter.CLASSES_ALL)
+        {
             final int len = childrenFilters.length + 1;
             final VirtualGraphTreeNodeFilter[] tempFilters = new VirtualGraphTreeNodeFilter[len];
             System.arraycopy(childrenFilters, 0, tempFilters, 1, len - 1);
@@ -87,20 +104,24 @@ public class VirtualGraphTreeNodeModel implements GraphModel {
         // subsequently
         final GraphNode dependent = parent.getDependent();
         GraphNodeList graphNodeChildren;
-        for (int i = 0; i < childrenFilters.length; i++) {
-            filter = childrenFilters[i];
+        for (VirtualGraphTreeNodeFilter childrenFilter : childrenFilters)
+        {
+            filter = childrenFilter;
             final Class type = filter.getType();
             final Class role = filter.getRole();
 
             // descendant flag and filtering
-            if (filter.isBothDirections()) {
+            if (filter.isBothDirections())
+            {
                 graphNodeChildren = dependent.getChildren(type, role);
                 graphNodeChildren.addAll(dependent.getParents(type, role));
             }
-            else if (filter.isDescendant()) {
+            else if (filter.isDescendant())
+            {
                 graphNodeChildren = dependent.getChildren(type, role);
             }
-            else {
+            else
+            {
                 graphNodeChildren = dependent.getParents(type, role);
             }
 
@@ -108,19 +129,24 @@ public class VirtualGraphTreeNodeModel implements GraphModel {
             graphNodeChildren = getBoundChildren(graphNodeChildren, filter, parent);
 
             // visibility flag
-            for (int j = 0; j < graphNodeChildren.size(); j++) {
+            for (int j = 0; j < graphNodeChildren.size(); j++)
+            {
                 final GraphNode child = (GraphNode) graphNodeChildren.get(j);
                 final VirtualGraphTreeNode node = VirtualGraphTreeNode.getGraphNode(child, parent);
-                if (filter.isVisible()) {
+                if (filter.isVisible())
+                {
                     final AbsGraphTreeNodeFilter nodeFilter = filter.getNodeFilter();
-                    if (nodeFilter == null || (nodeFilter != null && nodeFilter.isVisible(node))) {
+                    if (nodeFilter == null || (nodeFilter != null && nodeFilter.isVisible(node)))
+                    {
                         result.add(node);
                     }
-                    else {
+                    else
+                    {
                         result.addAll(getChildren(node));
                     }
                 }
-                else {
+                else
+                {
                     result.addAll(getChildren(node));
                 }
             }
@@ -133,20 +159,26 @@ public class VirtualGraphTreeNodeModel implements GraphModel {
      * filter. After the filter has been found, the corresponding GraphNode is searched.
      */
     private GraphNodeList getBoundChildren(final GraphNodeList graphNodes,
-                                           final VirtualGraphTreeNodeFilter filter, VirtualGraphTreeNode parent) {
+                                           final VirtualGraphTreeNodeFilter filter, VirtualGraphTreeNode parent)
+    {
 
-        if (!filter.isBound()) {
+        if (!filter.isBound())
+        {
             return graphNodes;
         }
         VirtualGraphTreeNodeFilter parentFilter = filter;
         final Class boundType = filter.getType();
-        while ((parentFilter = parentFilter.getParent()) != null) {
-            if (parentFilter.getType().isAssignableFrom(boundType)) {
+        while ((parentFilter = parentFilter.getParent()) != null)
+        {
+            if (parentFilter.getType().isAssignableFrom(boundType))
+            {
                 // find the matching GraphNode
-                while (parent != null && !boundType.isAssignableFrom(parent.getDependent().getClass())) {
+                while (parent != null && !boundType.isAssignableFrom(parent.getDependent().getClass()))
+                {
                     parent = parent.getParent();
                 }
-                if (parent != null) {
+                if (parent != null)
+                {
                     graphNodes.clear();
                     graphNodes.add(parent.getDependent());
                 }
@@ -155,15 +187,18 @@ public class VirtualGraphTreeNodeModel implements GraphModel {
         return graphNodes;
     }
 
-    public void put(final TreePath key, final GraphNode value) {
+    public void put(final TreePath key, final GraphNode value)
+    {
         fullPathCache.put(key, value);
     }
 
-    public GraphNode get(final TreePath key) {
+    public GraphNode get(final TreePath key)
+    {
         return (GraphNode) fullPathCache.get(key);
     }
 
-    public void remove(final TreePath key) {
+    public void remove(final TreePath key)
+    {
         fullPathCache.remove(key);
     }
 
@@ -206,108 +241,99 @@ public class VirtualGraphTreeNodeModel implements GraphModel {
 //        return filter;
 //    }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#getRoot()
-     */
-    public GraphNode getRoot() {
-        if (root == null) {
+    /** @see ch.jfactory.model.graph.GraphModel#getRoot() */
+    public GraphNode getRoot()
+    {
+        if (root == null)
+        {
             root = VirtualGraphTreeNode.getGraphNode(model.getRoot(), this, rootFilter);
         }
-        if (!root.isType(rootFilter.getType())) {
+        if (!root.isType(rootFilter.getType()))
+        {
             throw new IllegalStateException("Root filter\'s type must match root node\'s type. filter: " + rootFilter + ", node: " + root);
         }
         return root;
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#createEdge(GraphNode, GraphNode)
-     */
-    public GraphEdge createEdge(final GraphNode parent, final GraphNode child) {
+    /** @see ch.jfactory.model.graph.GraphModel#createEdge(GraphNode, GraphNode) */
+    public GraphEdge createEdge(final GraphNode parent, final GraphNode child)
+    {
         throw new NoSuchMethodError("getEdge not implemented yet");
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphNode)
-     */
-    public void addChanged(final GraphNode node) {
+    /** @see ch.jfactory.model.graph.GraphModel#addChanged(GraphNode) */
+    public void addChanged(final GraphNode node)
+    {
         model.addChanged(((VirtualGraphTreeNode) node).getDependent());
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphEdge)
-     */
-    public void addChanged(final GraphEdge node) {
+    /** @see ch.jfactory.model.graph.GraphModel#addChanged(GraphEdge) */
+    public void addChanged(final GraphEdge node)
+    {
         model.addChanged(node);
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#createNode(GraphNode, Class)
-     */
-    public GraphNode createNode(final GraphNode parent, final Class type) {
+    /** @see ch.jfactory.model.graph.GraphModel#createNode(GraphNode, Class) */
+    public GraphNode createNode(final GraphNode parent, final Class type)
+    {
         return model.createNode(parent, type);
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#save()
-     */
-    public void save() {
+    /** @see ch.jfactory.model.graph.GraphModel#save() */
+    public void save()
+    {
         throw new NoSuchMethodError("save not implemented yet");
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphNode)
-     */
-    public void addRemoved(final GraphNode node) {
+    /** @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphNode) */
+    public void addRemoved(final GraphNode node)
+    {
         throw new NoSuchMethodError("addRemoved(node) not implemented yet");
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphEdge)
-     */
-    public void addRemoved(final GraphEdge edge) {
+    /** @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphEdge) */
+    public void addRemoved(final GraphEdge edge)
+    {
         throw new NoSuchMethodError("addRemoved(edge) not implemented yet");
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#doQuit()
-     */
-    public void doQuit() {
+    /** @see ch.jfactory.model.graph.GraphModel#doQuit() */
+    public void doQuit()
+    {
         model.doQuit();
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener)
-     */
-    public void addDirtyListener(final DirtyListener listener) {
+    /** @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener) */
+    public void addDirtyListener(final DirtyListener listener)
+    {
         model.addDirtyListener(listener);
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener)
-     */
-    public void removeDirtyListener(final DirtyListener listener) {
+    /** @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener) */
+    public void removeDirtyListener(final DirtyListener listener)
+    {
         model.removeDirtyListener(listener);
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#setDirty(boolean)
-     */
-    public void setDirty(final boolean dirty) {
+    /** @see ch.jfactory.model.graph.GraphModel#setDirty(boolean) */
+    public void setDirty(final boolean dirty)
+    {
         model.setDirty(dirty);
     }
 
-    /**
-     * @see ch.jfactory.model.graph.GraphModel#getDirty()
-     */
-    public boolean getDirty() {
+    /** @see ch.jfactory.model.graph.GraphModel#getDirty() */
+    public boolean getDirty()
+    {
         return model.getDirty();
     }
 
-    public void setReadOnly() {
+    public void setReadOnly()
+    {
         this.readOnly = true;
     }
 
-    public boolean isReadonly() {
+    public boolean isReadonly()
+    {
         return readOnly;
     }
 }

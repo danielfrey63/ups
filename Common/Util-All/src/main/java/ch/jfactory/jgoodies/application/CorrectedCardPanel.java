@@ -43,80 +43,91 @@ import javax.swing.JPanel;
  * @author Sun Microsystems
  */
 
-public class CorrectedCardPanel extends JPanel {
+public class CorrectedCardPanel extends JPanel
+{
 
-
-    private static class Layout implements LayoutManager {
+    private static class Layout implements LayoutManager
+    {
         /**
          * Set the childs name (if non-null) and and make it visible iff it's the only CardPanel child.
          *
          * @see java.awt.Component#setName(java.lang.String)
          */
-        public void addLayoutComponent(final String name, final Component child) {
-            if (name != null) {
+        public void addLayoutComponent(final String name, final Component child)
+        {
+            if (name != null)
+            {
                 child.setName(name);
             }
             child.setVisible(child.getParent().getComponentCount() == 1);
         }
 
-        /**
-         * If this child was visible, then make the first remaining child visible.
-         */
-        public void removeLayoutComponent(final Component child) {
-            if (child.isVisible()) {
+        /** If this child was visible, then make the first remaining child visible. */
+        public void removeLayoutComponent(final Component child)
+        {
+            if (child.isVisible())
+            {
                 final Container parent = child.getParent();
-                if (parent.getComponentCount() > 0) {
+                if (parent.getComponentCount() > 0)
+                {
                     parent.getComponent(0).setVisible(true);
                 }
             }
         }
 
-        /**
-         * @return the maximum preferred width/height + the parents insets
-         */
-        public Dimension preferredLayoutSize(final Container parent) {
+        /** @return the maximum preferred width/height + the parents insets */
+        public Dimension preferredLayoutSize(final Container parent)
+        {
             final int nChildren = parent.getComponentCount();
             final Insets insets = parent.getInsets();
             int width = insets.left + insets.right;
             int height = insets.top + insets.bottom;
-            for (int i = 0; i < nChildren; i++) {
+            for (int i = 0; i < nChildren; i++)
+            {
                 final Dimension d = parent.getComponent(i).getPreferredSize();
-                if (d.width > width) {
+                if (d.width > width)
+                {
                     width = d.width;
                 }
-                if (d.height > height) {
+                if (d.height > height)
+                {
                     height = d.height;
                 }
             }
             return new Dimension(width, height);
         }
 
-        /**
-         * @return the maximum minimum width/height + the parents insets
-         */
-        public Dimension minimumLayoutSize(final Container parent) {
+        /** @return the maximum minimum width/height + the parents insets */
+        public Dimension minimumLayoutSize(final Container parent)
+        {
             final int nChildren = parent.getComponentCount();
             final Insets insets = parent.getInsets();
             int width = insets.left + insets.right;
             int height = insets.top + insets.bottom;
-            for (int i = 0; i < nChildren; i++) {
+            for (int i = 0; i < nChildren; i++)
+            {
                 final Dimension d = parent.getComponent(i).getMinimumSize();
-                if (d.width > width) {
+                if (d.width > width)
+                {
                     width = d.width;
                 }
-                if (d.height > height) {
+                if (d.height > height)
+                {
                     height = d.height;
                 }
             }
             return new Dimension(width, height);
         }
 
-        public void layoutContainer(final Container parent) {
+        public void layoutContainer(final Container parent)
+        {
             final int nChildren = parent.getComponentCount();
             final Insets insets = parent.getInsets();
-            for (int i = 0; i < nChildren; i++) {
+            for (int i = 0; i < nChildren; i++)
+            {
                 final Component child = parent.getComponent(i);
-                if (child.isVisible()) {
+                if (child.isVisible())
+                {
                     final Rectangle r = parent.getBounds();
                     final int width = r.width - insets.left + insets.right;
                     final int height = r.height - insets.top + insets.bottom;
@@ -127,145 +138,156 @@ public class CorrectedCardPanel extends JPanel {
         }
     }
 
-
     /**
      * Creates a CardPanel.  Children, called "cards" in this API, should be added with add().  The first child we be
      * made visible, subsequent children will be hidden.  To show a card, use one of the show*Card methods.
      */
-    public CorrectedCardPanel() {
+    public CorrectedCardPanel()
+    {
         super(new Layout());
     }
-
 
     /**
      * Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the
      * CardPanel then we add it here.
      */
-    public Component getVisibleCard() {
+    public Component getVisibleCard()
+    {
         final int index = getVisibleChildIndex();
         return index != -1 ? getComponent(index) : null;
     }
-
 
     /**
      * Return the index of the first (and one would hope - only) visible child.  If a visible child can't be found,
      * perhaps the caller has inexlicably hidden all of the children, then return -1.
      */
-    public int getVisibleChildIndex() {
+    public int getVisibleChildIndex()
+    {
         final int nChildren = getComponentCount();
-        for (int i = 0; i < nChildren; i++) {
+        for (int i = 0; i < nChildren; i++)
+        {
             final Component child = getComponent(i);
-            if (child.isVisible()) {
+            if (child.isVisible())
+            {
                 return i;
             }
         }
         return -1;
     }
 
-
-    /**
-     * Return the name of the visible child.
-     */
-    public String getVisibleChildName() {
+    /** Return the name of the visible child. */
+    public String getVisibleChildName()
+    {
         final int i = getVisibleChildIndex();
         return -1 == i ? null : getComponent(i).getName();
     }
-
 
     /**
      * Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the
      * CardPanel then we add it here.
      */
-    public void showCard(final Component card) {
-        if (card.getParent() != this) {
+    public void showCard(final Component card)
+    {
+        if (card.getParent() != this)
+        {
             add(card);
         }
         final Component visibleComponent = getVisibleCard();
         if (visibleComponent == card)
+        {
             return;
+        }
         visibleComponent.setVisible(false);
         card.setVisible(true);
         revalidate();
         repaint();
     }
 
-
     /**
      * Show the card with the specified name.
      *
      * @see java.awt.Component#getName()
      */
-    public void showCard(final String name) {
+    public void showCard(final String name)
+    {
         final int nChildren = getComponentCount();
-        for (int i = 0; i < nChildren; i++) {
+        for (int i = 0; i < nChildren; i++)
+        {
             final Component child = getComponent(i);
-            if (child.getName().equals(name) && !child.isVisible()) {
+            if (child.getName().equals(name) && !child.isVisible())
+            {
                 showCard(child);
                 break;
             }
         }
     }
 
-
-    /**
-     * Show the first card that was added to this CardPanel.
-     */
-    public void showFirstCard() {
-        if (getComponentCount() <= 0) {
+    /** Show the first card that was added to this CardPanel. */
+    public void showFirstCard()
+    {
+        if (getComponentCount() <= 0)
+        {
             return;
         }
         showCard(getComponent(0));
     }
 
-
-    /**
-     * Show the last card that was added to this CardPanel.
-     */
-    public void showLastCard() {
-        if (getComponentCount() <= 0) {
+    /** Show the last card that was added to this CardPanel. */
+    public void showLastCard()
+    {
+        if (getComponentCount() <= 0)
+        {
             return;
         }
         showCard(getComponent(getComponentCount() - 1));
     }
 
-
     /**
      * Show the card that was added to this CardPanel after the currently visible card.  If the currently visible card
      * was added last, then show the first card.
      */
-    public void showNextCard() {
-        if (getComponentCount() <= 0) {
+    public void showNextCard()
+    {
+        if (getComponentCount() <= 0)
+        {
             return;
         }
         final int index = getVisibleChildIndex();
-        if (index == -1) {
+        if (index == -1)
+        {
             showCard(getComponent(0));
         }
-        else if (index == (getComponentCount() - 1)) {
+        else if (index == (getComponentCount() - 1))
+        {
             showCard(getComponent(0));
         }
-        else {
+        else
+        {
             showCard(getComponent(index + 1));
         }
     }
-
 
     /**
      * Show the card that was added to this CardPanel before the currently visible card.  If the currently visible card
      * was added first, then show the last card.
      */
-    public void showPreviousCard() {
-        if (getComponentCount() <= 0) {
+    public void showPreviousCard()
+    {
+        if (getComponentCount() <= 0)
+        {
             return;
         }
         final int index = getVisibleChildIndex();
-        if (index == -1) {
+        if (index == -1)
+        {
             showCard(getComponent(0));
         }
-        else if (index == 0) {
+        else if (index == 0)
+        {
             showCard(getComponent(getComponentCount() - 1));
         }
-        else {
+        else
+        {
             showCard(getComponent(index - 1));
         }
     }

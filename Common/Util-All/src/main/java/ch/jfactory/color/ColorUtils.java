@@ -26,7 +26,8 @@ import net.infonode.util.ImageUtils;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/03/14 21:27:55 $
  */
-public class ColorUtils {
+public class ColorUtils
+{
 
     /**
      * Fades the given color by the given percentage towards white. The higher the percentage, the more it is faded
@@ -36,7 +37,8 @@ public class ColorUtils {
      * @param percentage the percentage to fade
      * @return the faded color
      */
-    public static Color fade(final Color color, final double percentage) {
+    public static Color fade(final Color color, final double percentage)
+    {
 
         final int red = color.getRed();
         final int green = color.getGreen();
@@ -45,7 +47,8 @@ public class ColorUtils {
         return new Color(getFaded(red, percentage), getFaded(green, percentage), getFaded(blue, percentage));
     }
 
-    public static Color darken(final Color color, final double percentage) {
+    public static Color darken(final Color color, final double percentage)
+    {
 
         final int red = color.getRed();
         final int green = color.getGreen();
@@ -61,7 +64,8 @@ public class ColorUtils {
      * @param alpha the amount of alpha to add
      * @return a new color that is partly transparent
      */
-    public static Color alpha(final Color color, final double alpha) {
+    public static Color alpha(final Color color, final double alpha)
+    {
 
         final int red = color.getRed();
         final int green = color.getGreen();
@@ -70,11 +74,13 @@ public class ColorUtils {
         return new Color(red, green, blue, (int) (255 * alpha));
     }
 
-    private static int getFaded(final int channel, final double percentage) {
+    private static int getFaded(final int channel, final double percentage)
+    {
         return channel + (int) ((255 - channel) * percentage);
     }
 
-    private static int getDarkened(final int chanel, final double percentage) {
+    private static int getDarkened(final int chanel, final double percentage)
+    {
         return chanel - (int) (chanel * percentage);
     }
 
@@ -86,7 +92,8 @@ public class ColorUtils {
      * @param name of the color
      * @return Color object
      */
-    public static Color parseColor(final String name) {
+    public static Color parseColor(final String name)
+    {
         return parseColor(name, Color.black);
     }
 
@@ -99,36 +106,45 @@ public class ColorUtils {
      * @param defaultColor the default color in case no matching color is found
      * @return Color object
      */
-    public static Color parseColor(final String name, final Color defaultColor) {
-        if (name == null) {
+    public static Color parseColor(final String name, final Color defaultColor)
+    {
+        if (name == null)
+        {
             return defaultColor;
         }
-        else if (name.startsWith("#")) {
-            try {
+        else if (name.startsWith("#"))
+        {
+            try
+            {
                 return Color.decode(name);
             }
-            catch (NumberFormatException nf) {
+            catch (NumberFormatException nf)
+            {
                 return defaultColor;
             }
         }
-        else {
+        else
+        {
             ReflectionUtils.getField(name, defaultColor, Color.class, Color.class);
         }
         return defaultColor;
     }
 
-    public static boolean isGray(final Color color) {
+    public static boolean isGray(final Color color)
+    {
         return isGray(color.getRGB());
     }
 
-    public static boolean isGray(final int pixel) {
+    public static boolean isGray(final int pixel)
+    {
         final int r = ImageUtils.getRed(pixel);
         final int g = ImageUtils.getGreen(pixel);
         final int b = ImageUtils.getBlue(pixel);
         return (r == g) && (g == b);
     }
 
-    public static int getBrightness(final int pixel) {
+    public static int getBrightness(final int pixel)
+    {
         final int grayPixel = getGray(pixel);
         return ImageUtils.getRed(grayPixel);
     }
@@ -139,7 +155,8 @@ public class ColorUtils {
      * @param pixel the value of the color
      * @return the value of the gray color
      */
-    public static int getGray(final int pixel) {
+    public static int getGray(final int pixel)
+    {
         final int r = ImageUtils.getRed(pixel);
         final int g = ImageUtils.getGreen(pixel);
         final int b = ImageUtils.getBlue(pixel);

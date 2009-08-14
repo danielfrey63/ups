@@ -8,7 +8,8 @@ import java.util.Properties;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:56 $
  */
-public interface WizardModel {
+public interface WizardModel
+{
 
     /**
      * Return the configuration of this mode.
@@ -136,9 +137,7 @@ public interface WizardModel {
      */
     int getCurrentPaneIndex();
 
-    /**
-     * is called inside the constructor before the panes are initialize
-     */
+    /** is called inside the constructor before the panes are initialize */
     void init();
 
     /**

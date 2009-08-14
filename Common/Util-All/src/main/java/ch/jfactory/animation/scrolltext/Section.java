@@ -17,24 +17,18 @@
 
 package ch.jfactory.animation.scrolltext;
 
-
-
-
 /**
  * Class for a section of paragraphs. A section consists of one to many paragraph objects.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class Section {
-    /**
-     * The paragraphs in this section.
-     */
+public class Section
+{
+    /** The paragraphs in this section. */
     private Paragraph[] paragraphs;
 
-    /**
-     * The total height of this section.
-     */
+    /** The total height of this section. */
     private int height = -1;
 
     /**
@@ -42,7 +36,8 @@ public class Section {
      *
      * @param paragraphs an array of paragraphs which build up this section
      */
-    public Section(final Paragraph[] paragraphs) {
+    public Section(final Paragraph[] paragraphs)
+    {
         this.paragraphs = paragraphs;
     }
 
@@ -51,7 +46,8 @@ public class Section {
      *
      * @return an array of paragraphs
      */
-    public Paragraph[] getParagraphs() {
+    public Paragraph[] getParagraphs()
+    {
         return paragraphs;
     }
 
@@ -60,10 +56,12 @@ public class Section {
      *
      * @return the total height in pixels
      */
-    public int getHeight() {
-        if (height == -1) {
-            for (int i = 0; i < paragraphs.length; i++) {
-                final Paragraph paragraph = paragraphs[i];
+    public int getHeight()
+    {
+        if (height == -1)
+        {
+            for (final Paragraph paragraph : paragraphs)
+            {
                 height += paragraph.getHeight();
             }
         }

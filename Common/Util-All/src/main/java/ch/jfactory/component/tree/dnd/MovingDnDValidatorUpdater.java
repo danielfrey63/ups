@@ -26,49 +26,62 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class MovingDnDValidatorUpdater extends AbstractDnDValidatorUpdater {
+public class MovingDnDValidatorUpdater extends AbstractDnDValidatorUpdater
+{
 
-    public MovingDnDValidatorUpdater(final NotifiableTreeModel model) {
+    public MovingDnDValidatorUpdater(final NotifiableTreeModel model)
+    {
         super(model);
     }
 
-    public void updateNodesChanged() {
+    public void updateNodesChanged()
+    {
     }
 
-    public boolean isMoveAllowed(final TreePath from, final TreePath to, final int index) {
+    public boolean isMoveAllowed(final TreePath from, final TreePath to, final int index)
+    {
         final boolean isMoveAllowed;
-        if (from == null || to == null || from.equals(to) || from.isDescendant(to)) {
+        if (from == null || to == null || from.equals(to) || from.isDescendant(to))
+        {
             isMoveAllowed = false;
         }
-        else {
+        else
+        {
             final TreePath fromParent = from.getParentPath();
-            if (fromParent != null && fromParent.equals(to)) {
+            if (fromParent != null && fromParent.equals(to))
+            {
                 final int fromIndex = getModel().getIndexOfChild(fromParent.getLastPathComponent(), from.getLastPathComponent());
                 final int delta = index - fromIndex;
                 isMoveAllowed = (delta != 1) && (delta != 0);
             }
-            else {
+            else
+            {
                 isMoveAllowed = true;
             }
         }
         return isMoveAllowed;
     }
 
-    public boolean isRightShiftAllowed(final TreePath path) {
+    public boolean isRightShiftAllowed(final TreePath path)
+    {
         return false;
     }
 
-    public boolean isLeftShiftAllowed(final TreePath path) {
+    public boolean isLeftShiftAllowed(final TreePath path)
+    {
         return false;
     }
 
-    public boolean isAnyActionAllowed(final TreePath from, final TreePath to) {
+    public boolean isAnyActionAllowed(final TreePath from, final TreePath to)
+    {
         return true;
     }
 
-    public void doRightShift(final TreePath path) {
+    public void doRightShift(final TreePath path)
+    {
     }
 
-    public void doLeftShift(final TreePath path) {
+    public void doLeftShift(final TreePath path)
+    {
     }
 }

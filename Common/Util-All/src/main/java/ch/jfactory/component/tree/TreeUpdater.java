@@ -42,26 +42,19 @@ import javax.swing.tree.TreeModel;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class TreeUpdater implements Runnable {
+public class TreeUpdater implements Runnable
+{
 
-    /**
-     * The count of expanded paths that is used to make the expansion asynchronously.
-     */
+    /** The count of expanded paths that is used to make the expansion asynchronously. */
     private static final int ASYNCHRON_THRESHOLD = 10000;
 
-    /**
-     * The expansion listener.
-     */
+    /** The expansion listener. */
     private SimpleTreeExpansionListener expansionListener;
 
-    /**
-     * The selection listener.
-     */
+    /** The selection listener. */
     private SimpleTreeSelectionListener selectionListener;
 
-    /**
-     * The tree model listener. Used to refresh the other listener upon model exchanges.
-     */
+    /** The tree model listener. Used to refresh the other listener upon model exchanges. */
     private SimpleTreeModelListener treeModelListener;
 
     /**
@@ -69,7 +62,8 @@ public class TreeUpdater implements Runnable {
      *
      * @param tree the tree to observe
      */
-    public TreeUpdater(final JTree tree) {
+    public TreeUpdater(final JTree tree)
+    {
         expansionListener = new SimpleTreeExpansionListener(tree);
         selectionListener = new SimpleTreeSelectionListener(tree);
         treeModelListener = new SimpleTreeModelListener();
@@ -79,10 +73,9 @@ public class TreeUpdater implements Runnable {
         tree.getModel().addTreeModelListener(treeModelListener);
     }
 
-    /**
-     * The method to expand the paths.
-     */
-    public synchronized void run() {
+    /** The method to expand the paths. */
+    public synchronized void run()
+    {
         expansionListener.restore();
         selectionListener.restore();
     }
@@ -93,23 +86,24 @@ public class TreeUpdater implements Runnable {
      * DefaultTreeModel. If the underlying model does call the listeners in the same order as they are registered, an
      * translate should be invoked automatically by the build in tree model listener.
      */
-    public synchronized void update() {
-        if (expansionListener.getNumberOfExpandedPaths() > ASYNCHRON_THRESHOLD) {
+    public synchronized void update()
+    {
+        if (expansionListener.getNumberOfExpandedPaths() > ASYNCHRON_THRESHOLD)
+        {
             SwingUtilities.invokeLater(this);
         }
-        else {
+        else
+        {
             run();
         }
     }
 
-    /**
-     * Listener to inform other listeners about changes in the model.
-     */
-    private class SimplePropertyChangeListener implements PropertyChangeListener {
-        /**
-         * {@inheritDoc}
-         */
-        public void propertyChange(final PropertyChangeEvent evt) {
+    /** Listener to inform other listeners about changes in the model. */
+    private class SimplePropertyChangeListener implements PropertyChangeListener
+    {
+        /** {@inheritDoc} */
+        public void propertyChange(final PropertyChangeEvent evt)
+        {
             ((TreeModel) evt.getOldValue()).removeTreeModelListener(treeModelListener);
             ((TreeModel) evt.getNewValue()).addTreeModelListener(treeModelListener);
             expansionListener.translate();
@@ -118,15 +112,13 @@ public class TreeUpdater implements Runnable {
         }
     }
 
-    /**
-     * Makes sure the updates take place automatically if a tree model has been exchanged.
-     */
-    private class SimpleTreeModelListener extends TreeModelAdapter {
+    /** Makes sure the updates take place automatically if a tree model has been exchanged. */
+    private class SimpleTreeModelListener extends TreeModelAdapter
+    {
 
-        /**
-         * {@inheritDoc}
-         */
-        public void treeStructureChanged(final TreeModelEvent e) {
+        /** {@inheritDoc} */
+        public void treeStructureChanged(final TreeModelEvent e)
+        {
             update();
         }
     }

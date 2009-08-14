@@ -22,7 +22,8 @@ package ch.jfactory.application.persistence;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface SourceStateListener {
+public interface SourceStateListener
+{
 
     /**
      * Notifies for a definite source state change.

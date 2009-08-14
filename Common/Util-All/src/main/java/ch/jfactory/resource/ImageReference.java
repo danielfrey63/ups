@@ -8,32 +8,42 @@
  */
 package ch.jfactory.resource;
 
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.lang.ref.SoftReference;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
-public class ImageReference {
-    private final static Category cat = Category.getInstance(ImageReference.class);
+public class ImageReference
+{
+    private final static Logger LOGGER = Logger.getLogger(ImageReference.class);
+
     private Dimension size;
+
     private boolean imageWasLoadedOnce = false;
+
     private boolean thumbNailWasLoadedOnce = false;
+
     private SoftReference theImageItself;
+
     private SoftReference theThumbNail;
 
-    public ImageReference() {
+    public ImageReference()
+    {
     }
 
-    public synchronized void setImage(final Image i, final boolean thumb) {
-        if (thumb) {
+    public synchronized void setImage(final Image i, final boolean thumb)
+    {
+        if (thumb)
+        {
             final Image img = (theImageItself == null) ? null : (Image) theImageItself.get();
-            if (img == null) {
+            if (img == null)
+            {
                 thumbNailWasLoadedOnce = true;
                 theThumbNail = new SoftReference(i);
             }
         }
-        else {
+        else
+        {
             imageWasLoadedOnce = true;
             thumbNailWasLoadedOnce = false;
             theThumbNail = null;
@@ -41,29 +51,34 @@ public class ImageReference {
         }
     }
 
-
-    protected void setSize(final Dimension d) {
+    protected void setSize(final Dimension d)
+    {
         size = d;
     }
 
-    public Dimension getSize() {
+    public Dimension getSize()
+    {
         return size;
     }
 
-
-    public Image getImage(final boolean thumb) {
+    public Image getImage(final boolean thumb)
+    {
         Image img = null;
-        if (thumb) {
+        if (thumb)
+        {
             img = (theThumbNail == null) ? null : (Image) theThumbNail.get();
-            if (thumbNailWasLoadedOnce && (img == null)) {
-                cat.debug("*** Reference was lost ");
+            if (thumbNailWasLoadedOnce && (img == null))
+            {
+                LOGGER.debug("*** Reference was lost ");
                 thumbNailWasLoadedOnce = false;
             }
         }
-        else {
+        else
+        {
             img = (theImageItself == null) ? null : (Image) theImageItself.get();
-            if (imageWasLoadedOnce && (img == null)) {
-                cat.debug("*** Reference was lost ");
+            if (imageWasLoadedOnce && (img == null))
+            {
+                LOGGER.debug("*** Reference was lost ");
                 imageWasLoadedOnce = false;
             }
         }

@@ -40,36 +40,25 @@ import javax.swing.filechooser.FileFilter;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2006/04/18 11:14:34 $
  */
-public abstract class AbstractChooser extends AbstractDialog {
+public abstract class AbstractChooser extends AbstractDialog
+{
 
-    /**
-     * The key base string to access resource strings.
-     */
+    /** The key base string to access resource strings. */
     protected String base;
 
-    /**
-     * The frame title of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}.
-     */
+    /** The frame title of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}. */
     protected String keyErrorTitle;
 
-    /**
-     * The text of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}.
-     */
+    /** The text of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}. */
     protected String keyErrorText;
 
-    /**
-     * The panel displaying the help text.
-     */
+    /** The panel displaying the help text. */
     private I15nHeaderPanel headerPanel;
 
-    /**
-     * The file chooser.
-     */
+    /** The file chooser. */
     private JFileChooser chooser;
 
-    /**
-     * The base key for retrieving the resource strings.
-     */
+    /** The base key for retrieving the resource strings. */
 
     private FileFilter filter;
 
@@ -79,11 +68,13 @@ public abstract class AbstractChooser extends AbstractDialog {
 
     private int type = JFileChooser.SAVE_DIALOG;
 
-    public AbstractChooser(final JFrame owner, final int selectionMode, final String base, final String initialDir, final int type) {
+    public AbstractChooser(final JFrame owner, final int selectionMode, final String base, final String initialDir, final int type)
+    {
         this(owner, selectionMode, base, new File(initialDir), type);
     }
 
-    public AbstractChooser(final JFrame owner, final int selectionMode, final String base, final File initialDir, final int type) {
+    public AbstractChooser(final JFrame owner, final int selectionMode, final String base, final File initialDir, final int type)
+    {
         super(owner);
         init(null, selectionMode, initialDir, base, type);
     }
@@ -100,7 +91,8 @@ public abstract class AbstractChooser extends AbstractDialog {
      * @param initialDir the initial directory
      * @param type
      */
-    public AbstractChooser(final JFrame owner, final FileFilter filter, final String base, final String initialDir, final int type) {
+    public AbstractChooser(final JFrame owner, final FileFilter filter, final String base, final String initialDir, final int type)
+    {
         this(owner, filter, base, new File(initialDir), type);
     }
 
@@ -131,12 +123,14 @@ public abstract class AbstractChooser extends AbstractDialog {
      * @param initialDir the initial directory
      * @param type
      */
-    public AbstractChooser(final JFrame owner, final FileFilter filter, final String base, final File initialDir, final int type) {
+    public AbstractChooser(final JFrame owner, final FileFilter filter, final String base, final File initialDir, final int type)
+    {
         super(owner);
         init(filter, JFileChooser.FILES_ONLY, initialDir, base, type);
     }
 
-    private void init(final FileFilter filter, final int selectionMode, final File initialDir, final String base, final int type) {
+    private void init(final FileFilter filter, final int selectionMode, final File initialDir, final String base, final int type)
+    {
         this.filter = filter;
         this.setDirectory(initialDir);
         this.base = base;
@@ -154,43 +148,46 @@ public abstract class AbstractChooser extends AbstractDialog {
      *
      * @return the selected file
      */
-    public File[] getSelectedFiles() {
+    public File[] getSelectedFiles()
+    {
         File[] files = getChooser().getSelectedFiles();
-        if (files == null || files.length == 0) {
-            files = new File[] {getChooser().getSelectedFile()};
+        if (files == null || files.length == 0)
+        {
+            files = new File[]{getChooser().getSelectedFile()};
         }
-        if (!hasBeenCanceled()) {
+        if (!hasBeenCanceled())
+        {
             int c = 0;
-            for (int i = 0; i < files.length; i++) {
+            for (int i = 0; i < files.length; i++)
+            {
                 final File file = files[i];
-                if (file != null) files[c++] = cleanUpFileName(cleanUpFileName0(file));
+                if (file != null)
+                {
+                    files[c++] = cleanUpFileName(cleanUpFileName0(file));
+                }
             }
             final File[] clean = new File[c];
             System.arraycopy(files, 0, clean, 0, c);
             files = clean;
         }
-        else {
+        else
+        {
             files = new File[0];
         }
         return files;
     }
 
-    public void open() {
-        // Have to do lazy initialization as a bug in the compiler makes impossible to access local variables containing
-        // references to members in a subclass overriding one of the getXXX methods.
-        super.open();
-    }
-
-    /**
-     * Inits the common stuff.
-     */
-    protected void initLayout() {
+    /** Inits the common stuff. */
+    protected void initLayout()
+    {
 
         chooser = new JFileChooser(directory);
-        if (filter != null) {
+        if (filter != null)
+        {
             chooser.setFileFilter(filter);
         }
-        if (selectionMode != JFileChooser.FILES_ONLY) {
+        if (selectionMode != JFileChooser.FILES_ONLY)
+        {
             chooser.setFileSelectionMode(selectionMode);
         }
         chooser.setDialogType(type);
@@ -204,12 +201,14 @@ public abstract class AbstractChooser extends AbstractDialog {
 
     // Have to override this because it removes an incompatiblity to set the header panels preferred size corretly.
     // Basically this is a copy of Karstens code but without the pack statement.
-    protected void build() {
+    protected void build()
+    {
         final JComponent content = buildContentPane();
 
         // Work around the JRE's gray rect problem.
         // TODO: Remove this if we require Java 6.
-        if (SystemUtils.IS_JAVA_1_4 || SystemUtils.IS_JAVA_5) {
+        if (SystemUtils.IS_JAVA_1_4 || SystemUtils.IS_JAVA_5)
+        {
             setBackground(content.getBackground());
         }
 
@@ -218,17 +217,21 @@ public abstract class AbstractChooser extends AbstractDialog {
 //        pack();
         setResizable();
         locateOnScreen();
-        if (getEscapeCancelsMode().enabled()) {
+        if (getEscapeCancelsMode().enabled())
+        {
             setEscapeCancelsMode(getEscapeCancelsMode());
         }
     }
 
     /**
      * Find out the header panels preferred size.
+     *
      * @param b
      */
-    public void setVisible(final boolean b) {
-        if (b) {
+    public void setVisible(final boolean b)
+    {
+        if (b)
+        {
             final Dimension preferredSize = getChooser().getPreferredSize();
             getRootPane().setPreferredSize(new Dimension(preferredSize.width, 1200));
             pack();
@@ -246,7 +249,8 @@ public abstract class AbstractChooser extends AbstractDialog {
      *
      * @return the chooser
      */
-    protected JComponent buildContent() {
+    protected JComponent buildContent()
+    {
         return getChooser();
     }
 
@@ -255,19 +259,23 @@ public abstract class AbstractChooser extends AbstractDialog {
      *
      * @return the help text panel
      */
-    protected JComponent buildHeader() {
+    protected JComponent buildHeader()
+    {
         return headerPanel;
     }
 
-    public JFileChooser getChooser() {
+    public JFileChooser getChooser()
+    {
         return chooser;
     }
 
-    protected String getErrorTitle() {
+    protected String getErrorTitle()
+    {
         return Strings.getString(keyErrorTitle);
     }
 
-    protected String getErrorText(final File file) {
+    protected String getErrorText(final File file)
+    {
         return Strings.getString(keyErrorText, file.getName());
     }
 
@@ -277,29 +285,34 @@ public abstract class AbstractChooser extends AbstractDialog {
 
     protected abstract void execute(File[] files);
 
-    /**
-     * Called when all files have been processed. Dummy implementation.
-     */
-    protected void doEnd() {}
+    /** Called when all files have been processed. Dummy implementation. */
+    protected void doEnd()
+    {
+    }
 
-    private File cleanUpFileName0(final File file) {
+    private File cleanUpFileName0(final File file)
+    {
 
         final FileFilter filter = getChooser().getFileFilter();
-        if (filter instanceof ExtentionFileFilter && file != null) {
+        if (filter instanceof ExtentionFileFilter && file != null)
+        {
 
             // Find matching extention in which case the file is returned as is.
             final ExtentionFileFilter simpleFilter = (ExtentionFileFilter) filter;
             final String[] extentions = simpleFilter.getExtentions();
-            for (int i = 0; i < extentions.length; i++) {
-                final String extention = extentions[i];
-                if (file.getName().endsWith(extention)) {
+            for (final String extention : extentions)
+            {
+                if (file.getName().endsWith(extention))
+                {
                     return file;
                 }
             }
 
             // Complete incomlete files
-            if (extentions.length == 1) {
-                if (!file.getName().endsWith(extentions[0])) {
+            if (extentions.length == 1)
+            {
+                if (!file.getName().endsWith(extentions[0]))
+                {
                     return new File(file.getAbsoluteFile() + extentions[0]);
                 }
             }
@@ -308,20 +321,24 @@ public abstract class AbstractChooser extends AbstractDialog {
         return file;
     }
 
-    /**
-     * Wrapper to add an action listener
-     */
-    private void addListener() {
-        getChooser().addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+    /** Wrapper to add an action listener */
+    private void addListener()
+    {
+        getChooser().addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final String command = e.getActionCommand();
-                if (command == JFileChooser.CANCEL_SELECTION) {
+                if (command == JFileChooser.CANCEL_SELECTION)
+                {
                     doCancel();
                     AbstractChooser.this.close();
                 }
-                else {
+                else
+                {
                     final File[] files = getSelectedFiles();
-                    if (!hasBeenCanceled() && files != null && checkFiles(files) && command == JFileChooser.APPROVE_SELECTION) {
+                    if (!hasBeenCanceled() && files != null && checkFiles(files) && command == JFileChooser.APPROVE_SELECTION)
+                    {
                         AbstractChooser.this.close();
                         setCursor(getOwner(), Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         execute(files);
@@ -333,15 +350,19 @@ public abstract class AbstractChooser extends AbstractDialog {
         });
     }
 
-    private void setCursor(final Window owner, final Cursor cursor) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+    private void setCursor(final Window owner, final Cursor cursor)
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 owner.setCursor(cursor);
             }
         });
     }
 
-    public void setDirectory(final File directory) {
+    public void setDirectory(final File directory)
+    {
         this.directory = directory;
     }
 }

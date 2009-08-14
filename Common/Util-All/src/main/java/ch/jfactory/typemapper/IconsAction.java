@@ -17,8 +17,8 @@
 package ch.jfactory.typemapper;
 
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
-import ch.jfactory.image.ImagesPanel;
 import ch.jfactory.file.FileUtils;
+import ch.jfactory.image.ImagesPanel;
 import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.binding.value.BufferedValueModel;
 import com.jgoodies.binding.value.Trigger;
@@ -40,24 +40,34 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2007/09/27 10:41:22 $
  */
-public class IconsAction extends ActionCommand {
+public class IconsAction extends ActionCommand
+{
 
     private static final FileUtils.StringFilter FILTER = new Filter();
+
     private I15nComponentDialog dialog;
+
     private BufferedValueModel model;
+
     private ImagesPanel panel;
+
     private JScrollPane pane;
+
     private Trigger trigger;
 
-    public IconsAction(final CommandManager commandManager, final PresentationModel model) {
+    public IconsAction(final CommandManager commandManager, final PresentationModel model)
+    {
         super(commandManager, Commands.COMMANDID_EDITICONS);
         trigger = new Trigger();
         this.model = new BufferedValueModel(model.getBufferedModel(TypeMapping.PROPERTYNAME_ICON), trigger);
     }
 
-    protected void handleExecute() {
-        try {
-            if (dialog == null) {
+    protected void handleExecute()
+    {
+        try
+        {
+            if (dialog == null)
+            {
                 final Collection icons = FileUtils.getFilesFromClasspath(FILTER);
                 panel = ImagesPanel.createImagesPanel(icons, 30, 30, true);
                 pane = new JScrollPane(panel);
@@ -67,48 +77,59 @@ public class IconsAction extends ActionCommand {
             }
             dialog.setVisible(true);
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    private static class Filter implements FileUtils.StringFilter {
+    private static class Filter implements FileUtils.StringFilter
+    {
 
         private static String[] extentions = new String[]{".jpg", ".gif", ".png", ".bmp"};
 
-        public boolean accept(final String file) {
+        public boolean accept(final String file)
+        {
             boolean result = new File(file).isDirectory();
-            for (int i = 0; i < extentions.length; i++) {
-                result |= file.endsWith(extentions[i]);
+            for (String extention : extentions)
+            {
+                result |= file.endsWith(extention);
             }
             final ImageIcon icon = new ImageIcon(file);
             return result && icon.getIconHeight() == icon.getIconHeight();
         }
     }
 
-    private class IconsDialog extends I15nComponentDialog {
+    private class IconsDialog extends I15nComponentDialog
+    {
 
-        public IconsDialog(final ImagesPanel panel) {
+        public IconsDialog(final ImagesPanel panel)
+        {
             super((JFrame) null, "type.icons");
             panel.getModel().addPropertyChangeListener(ImagesPanel.SelectionModel.PROPERTYNAME_SELECTED, new Handler());
         }
 
-        protected void onApply() throws ComponentDialogException {
+        protected void onApply() throws ComponentDialogException
+        {
             model.setValue(panel.getModel().getSelected().getIconPath());
             trigger.triggerCommit();
         }
 
-        protected void onCancel() {
+        protected void onCancel()
+        {
             trigger.triggerFlush();
         }
 
-        protected JComponent createComponentPanel() {
+        protected JComponent createComponentPanel()
+        {
             return pane;
         }
 
-        private class Handler implements PropertyChangeListener {
+        private class Handler implements PropertyChangeListener
+        {
 
-            public void propertyChange(final PropertyChangeEvent evt) {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 enableApply(evt.getNewValue() != null);
             }
         }

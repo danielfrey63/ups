@@ -9,10 +9,12 @@ import java.io.IOException;
  *
  * @author Daniel Frey 27.06.2008 08:59:32
  */
-public final class Ssh2Helper {
+public final class Ssh2Helper
+{
 
     /** Hide constructor. */
-    private Ssh2Helper() {
+    private Ssh2Helper()
+    {
     }
 
     /**
@@ -28,7 +30,8 @@ public final class Ssh2Helper {
      * @throws IOException passed through
      */
     public static void upload(final String localFile, final String server, final String user, final String pass,
-                              final String remoteDirectory, final String mode) throws IOException {
+                              final String remoteDirectory, final String mode) throws IOException
+    {
         final Connection conn = new Connection(server);
         conn.connect(new DummyServerHostKeyVerifier());
         conn.authenticateWithPassword(user, pass);
@@ -48,7 +51,8 @@ public final class Ssh2Helper {
      * @throws IOException passed through
      */
     public static void download(final String remoteFile, final String server, final String user, final String pass,
-                                final String localDirectory) throws IOException {
+                                final String localDirectory) throws IOException
+    {
         final Connection conn = new Connection(server);
         conn.connect(new DummyServerHostKeyVerifier());
         conn.authenticateWithPassword(user, pass);

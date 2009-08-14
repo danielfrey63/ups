@@ -34,11 +34,15 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.4 $ $Date: 2005/11/17 11:54:58 $
  */
-public class TreeFinderModel extends Observable {
+public class TreeFinderModel extends Observable
+{
 
     private int current;
+
     private TreePath[] found;
+
     private TreeModel model;
+
     private Pattern pattern;
 
     /**
@@ -46,14 +50,16 @@ public class TreeFinderModel extends Observable {
      *
      * @param model
      */
-    public TreeFinderModel(final TreeModel model) {
+    public TreeFinderModel(final TreeModel model)
+    {
         setModel(model);
         // make sure an initial call to notifyObservers will update all
         // Observers
         setChanged();
     }
 
-    public void setModel(final TreeModel model) {
+    public void setModel(final TreeModel model)
+    {
         this.model = model;
         current = -1;
         found = new TreePath[0];
@@ -64,11 +70,14 @@ public class TreeFinderModel extends Observable {
      *
      * @return the TreePath object
      */
-    public TreePath get() {
-        if (getCount() == 0) {
+    public TreePath get()
+    {
+        if (getCount() == 0)
+        {
             return null;
         }
-        else {
+        else
+        {
             return found[current];
         }
     }
@@ -78,7 +87,8 @@ public class TreeFinderModel extends Observable {
      *
      * @return The max value
      */
-    public int getCount() {
+    public int getCount()
+    {
         return found.length;
     }
 
@@ -87,7 +97,8 @@ public class TreeFinderModel extends Observable {
      *
      * @return the current position as an int
      */
-    public int getIndex() {
+    public int getIndex()
+    {
         return current;
     }
 
@@ -96,27 +107,30 @@ public class TreeFinderModel extends Observable {
      *
      * @param pattern Description of the Parameter
      */
-    public void find(final String pattern) {
+    public void find(final String pattern)
+    {
         this.pattern = Pattern.compile(pattern);
         found = new TreePath[0];
         current = -1;
-        if (!pattern.equals("")) {
+        if (!pattern.equals(""))
+        {
             findIt(new TreePath(model.getRoot()));
         }
-        if (hasNext()) {
+        if (hasNext())
+        {
             // next does notify
             next();
         }
-        else {
+        else
+        {
             setChanged();
             notifyObservers();
         }
     }
 
-    /**
-     * @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction.
-     */
-    public boolean hasNext() {
+    /** @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction. */
+    public boolean hasNext()
+    {
         return current < getCount() - 1;
     }
 
@@ -125,7 +139,8 @@ public class TreeFinderModel extends Observable {
      *
      * @return The down value
      */
-    public boolean hasPrevious() {
+    public boolean hasPrevious()
+    {
         return current > 0;
     }
 
@@ -134,7 +149,8 @@ public class TreeFinderModel extends Observable {
      *
      * @return the TreePath at the position after incrementing the cursor.
      */
-    public TreePath next() {
+    public TreePath next()
+    {
         final int count = Math.max(0, getCount() - 1);
         current = Math.min(count, current + 1);
         setChanged();
@@ -147,7 +163,8 @@ public class TreeFinderModel extends Observable {
      *
      * @return the TreePath at the position after decrementing the cursor.
      */
-    public TreePath previous() {
+    public TreePath previous()
+    {
         current = Math.max(0, current - 1);
         setChanged();
         notifyObservers();
@@ -159,10 +176,12 @@ public class TreeFinderModel extends Observable {
      *
      * @return String of members in square brackets
      */
-    public String toString() {
+    public String toString()
+    {
         String str = "TreePath[";
         final int iL = found.length;
-        for (int i = 0; i < iL; i++) {
+        for (int i = 0; i < iL; i++)
+        {
             str = str + found[i] + (i + 1 == iL ? "" : ",");
         }
         return "FinderModel[" + current + "," + str + "]]";
@@ -174,22 +193,28 @@ public class TreeFinderModel extends Observable {
      *
      * @param tp Description of the Parameter
      */
-    private void findIt(final TreePath tp) {
+    private void findIt(final TreePath tp)
+    {
         final Object last = tp.getLastPathComponent();
-        for (int i = 0; i < model.getChildCount(last); i++) {
+        for (int i = 0; i < model.getChildCount(last); i++)
+        {
             final Object o = model.getChild(last, i);
-            if (pattern.matcher(o.toString()).matches()) {
+            if (pattern.matcher(o.toString()).matches())
+            {
                 final TreePath[] tpsTemp = new TreePath[found.length + 1];
                 int j = 0;
-                for (j = 0; j < found.length; j++) {
+                for (j = 0; j < found.length; j++)
+                {
                     tpsTemp[j] = found[j];
                 }
                 tpsTemp[j] = tp.pathByAddingChild(o);
                 found = tpsTemp;
             }
-            if (!model.isLeaf(last)) {
+            if (!model.isLeaf(last))
+            {
                 final TreePath tpNew = tp.pathByAddingChild(o);
-                if (tpNew != null) {
+                if (tpNew != null)
+                {
                     findIt(tpNew);
                 }
             }

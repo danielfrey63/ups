@@ -22,14 +22,22 @@ package ch.jfactory.command;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class CommonCommands {
+public class CommonCommands
+{
 
     public static final String COMMANDID_ABOUT = "about";
+
     public static final String COMMANDID_FILTERADDTOMODEL = "addFilter";
+
     public static final String COMMANDID_FILTERREMOVEFROMMODEL = "removeFilter";
+
     public static final String COMMANDID_TREECOLLAPSEALLNODES = "collapseAll";
+
     public static final String COMMANDID_TREEEXPANDALLNODES = "expandAll";
+
     public static final String COMMANDID_TRIGGERAPPLY = "apply";
+
     public static final String COMMANDID_TRIGGERRESET = "reset";
+
     public static final String COMMANDID_QUIT = "quit";
 }

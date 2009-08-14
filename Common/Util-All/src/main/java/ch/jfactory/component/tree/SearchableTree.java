@@ -13,7 +13,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Simple JTree that takes a TreeNode and uses a DefaultTreeModel. This tree allows for searches by implementing the
@@ -22,20 +22,23 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2006/03/14 21:27:55 $
  */
-public class SearchableTree extends JTree implements TreeFinder {
+public class SearchableTree extends JTree implements TreeFinder
+{
 
-    private static final Category CAT = Category.getInstance(SearchableTree.class);
+    private static final Logger LOGGER = Logger.getLogger(SearchableTree.class);
 
     /**
      * Creates a new instance of TaxTreePanel
      *
      * @param root the root node to display
      */
-    public SearchableTree(final TreeNode root) {
+    public SearchableTree(final TreeNode root)
+    {
         super(root);
     }
 
-    public SearchableTree(final TreeModel newModel) {
+    public SearchableTree(final TreeModel newModel)
+    {
         super(newModel);
     }
 
@@ -44,13 +47,15 @@ public class SearchableTree extends JTree implements TreeFinder {
      *
      * @param root the root TreeNode used for the model
      */
-    public void setRootTreeNode(final TreeNode root) {
+    public void setRootTreeNode(final TreeNode root)
+    {
         setModel(new DefaultTreeModel(root));
     }
 
     // Commented in interface
-    public void setSelection(final TreePath tp) {
-        CAT.debug("selecting " + tp);
+    public void setSelection(final TreePath tp)
+    {
+        LOGGER.debug("selecting " + tp);
         setSelectionPath(tp);
         TreeUtils.ensureVisibility(this, tp);
     }

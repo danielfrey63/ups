@@ -18,11 +18,10 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:54:58 $
  */
-public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater {
+public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
+{
 
-    /**
-     * The tree model used for updates
-     */
+    /** The tree model used for updates */
     private NotifiableTreeModel model;
 
     /**
@@ -31,7 +30,8 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      *
      * @param model the model used for this validator
      */
-    public AbstractDnDValidatorUpdater(final NotifiableTreeModel model) {
+    public AbstractDnDValidatorUpdater(final NotifiableTreeModel model)
+    {
         setModel(model);
     }
 
@@ -39,7 +39,8 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      * A cyclic dependency between this and the calling object might make it impossible to allocate the JTree before
      * constructing this object. Use {@link #setModel(NotifiableTreeModel)} to register the model later.
      */
-    public AbstractDnDValidatorUpdater() {
+    public AbstractDnDValidatorUpdater()
+    {
     }
 
     /**
@@ -47,7 +48,8 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      *
      * @return DefaultTreeModel
      */
-    public NotifiableTreeModel getModel() {
+    public NotifiableTreeModel getModel()
+    {
         return model;
     }
 
@@ -56,29 +58,26 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      *
      * @param model the new model object to set
      */
-    public void setModel(final NotifiableTreeModel model) {
+    public void setModel(final NotifiableTreeModel model)
+    {
         this.model = model;
     }
 
-    /**
-     * @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int)
-     */
-    public void insertInto(final TreePath missile, final TreePath parent, final int pos) {
+    /** @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int) */
+    public void insertInto(final TreePath missile, final TreePath parent, final int pos)
+    {
         getModel().insertInto(missile, parent, pos);
         updateNodesChanged();
     }
 
-    /**
-     * @see DnDValidatorUpdater #removeFromParent(TreePath)
-     */
-    public void removeFromParent(final TreePath missile) {
+    /** @see DnDValidatorUpdater #removeFromParent(TreePath) */
+    public void removeFromParent(final TreePath missile)
+    {
         getModel().removeFromParent(missile);
         updateNodesChanged();
     }
 
-    /**
-     * Informes the subclass of a change in the node structure.
-     */
+    /** Informes the subclass of a change in the node structure. */
     public abstract void updateNodesChanged();
 }
 

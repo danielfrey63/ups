@@ -15,27 +15,21 @@ import java.util.Map;
 
 /**
  * A BufferedImage of one of four types of arrow (up, down, left or right) drawn to the size specified on the
- * constructor.
- * <p/>
- * Original code by Andrew J Armstrong.
+ * constructor. <p/> Original code by Andrew J Armstrong.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2006/04/15 23:03:21 $
  */
-public class ArrowImage extends BufferedImage {
+public class ArrowImage extends BufferedImage
+{
 
-    //SystemColor.controlShadow;
-    private Color darkColor = Color.red;
-    private Color lightColor = Color.orange;
-
-    //SystemColor.controlLtHighlight;
-    private GeneralPath pathArrow = new GeneralPath();
-
-    public ArrowImage(final ArrowDirection nArrowDirection) {
+    public ArrowImage(final ArrowDirection nArrowDirection)
+    {
         this(15, 9, nArrowDirection);
     }
 
-    public ArrowImage(final int nWidth, final int nHeight, final ArrowDirection nArrowDirect) {
+    public ArrowImage(final int nWidth, final int nHeight, final ArrowDirection nArrowDirect)
+    {
         super(nWidth, nHeight, TYPE_INT_ARGB_PRE);
         // Set the width, height and image type
 
@@ -56,7 +50,11 @@ public class ArrowImage extends BufferedImage {
         final float h12 = h / 2;
         final float h23 = h * 2 / 3;
 
-        if (nArrowDirect == ArrowDirection.ARROW_UP) {
+        final GeneralPath pathArrow = new GeneralPath();
+        final Color lightColor = Color.orange;
+        final Color darkColor = Color.red;
+        if (nArrowDirect == ArrowDirection.ARROW_UP)
+        {
             pathArrow.moveTo(w12, h12);
             pathArrow.lineTo(w12, 0);
             pathArrow.lineTo(w, h - 1);
@@ -72,7 +70,8 @@ public class ArrowImage extends BufferedImage {
             g2.setColor(lightColor);
             g2.draw(new java.awt.geom.Line2D.Float(0, h - 1, w12, 0));
         }
-        else if (nArrowDirect == ArrowDirection.ARROW_DOWN) {
+        else if (nArrowDirect == ArrowDirection.ARROW_DOWN)
+        {
             pathArrow.moveTo(w12, h12);
             pathArrow.lineTo(w, 0);
             pathArrow.lineTo(w12, h - 1);
@@ -87,7 +86,8 @@ public class ArrowImage extends BufferedImage {
             g2.setColor(lightColor);
             g2.draw(new java.awt.geom.Line2D.Float(0, 0, w, 0));
         }
-        else if (nArrowDirect == ArrowDirection.ARROW_LEFT) {
+        else if (nArrowDirect == ArrowDirection.ARROW_LEFT)
+        {
             pathArrow.moveTo(w - 1, h13);
             pathArrow.lineTo(w13, h13);
             pathArrow.lineTo(w13, 0);
@@ -120,7 +120,8 @@ public class ArrowImage extends BufferedImage {
             g2.setColor(lightColor);
             g2.draw(pathArrow);
         }
-        else {
+        else
+        {
             pathArrow.moveTo(0, h13);
             pathArrow.lineTo(w23, h13);
             pathArrow.lineTo(w23, 0);
@@ -155,13 +156,18 @@ public class ArrowImage extends BufferedImage {
         }
     }
 
-    public static class ArrowDirection {
+    public static class ArrowDirection
+    {
         public static final ArrowDirection ARROW_DOWN = new ArrowDirection();
+
         public static final ArrowDirection ARROW_LEFT = new ArrowDirection();
+
         public static final ArrowDirection ARROW_RIGHT = new ArrowDirection();
+
         public static final ArrowDirection ARROW_UP = new ArrowDirection();
 
-        private ArrowDirection() {
+        private ArrowDirection()
+        {
         }
     }
 }

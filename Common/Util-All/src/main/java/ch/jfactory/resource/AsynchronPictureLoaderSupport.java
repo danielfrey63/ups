@@ -8,7 +8,6 @@
  */
 package ch.jfactory.resource;
 
-
 import java.awt.Image;
 
 /**
@@ -19,7 +18,8 @@ import java.awt.Image;
  * @version $Revision: 1.1 $
  * @created 23. Mai 2002
  */
-interface AsynchronPictureLoaderSupport {
+interface AsynchronPictureLoaderSupport
+{
     /**
      * Inform all listeners that the image loading is finished.
      *

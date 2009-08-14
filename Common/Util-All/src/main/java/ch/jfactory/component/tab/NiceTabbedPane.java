@@ -7,18 +7,22 @@ import javax.swing.JTabbedPane;
  * /repository/HerbarCD/Version2.1/xmatrix/src/com/xmatrix/gui/component/tab/NiceTabbedPane.java,v $ $Revision: 1.1 $,
  * $Author: daniel_frey $
  */
-public class NiceTabbedPane extends JTabbedPane {
+public class NiceTabbedPane extends JTabbedPane
+{
 
-    public NiceTabbedPane() {
+    public NiceTabbedPane()
+    {
         init();
     }
 
-    public NiceTabbedPane(final int top) {
+    public NiceTabbedPane(final int top)
+    {
         super(top);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
 //      setUI(new NicedTabbedPaneUI());
     }
 }

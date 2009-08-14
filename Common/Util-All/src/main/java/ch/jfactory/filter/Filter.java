@@ -63,22 +63,23 @@ package ch.jfactory.filter;
  * @author Bradley S. Huffman
  * @version $Revision: 1.1 $, $Date: 2005/11/17 11:54:58 $
  */
-public interface Filter extends java.io.Serializable {
+public interface Filter extends java.io.Serializable
+{
 
-    /**
-     * Filter that returns always true.
-     */
-    public static final Filter TRUEFILTER = new Filter() {
-        public boolean matches(final Object obj) {
+    /** Filter that returns always true. */
+    public static final Filter TRUEFILTER = new Filter()
+    {
+        public boolean matches(final Object obj)
+        {
             return true;
         }
     };
 
-    /**
-     * Filter that returns always false.
-     */
-    public static final Filter FALSEFILTER = new Filter() {
-        public boolean matches(final Object obj) {
+    /** Filter that returns always false. */
+    public static final Filter FALSEFILTER = new Filter()
+    {
+        public boolean matches(final Object obj)
+        {
             return false;
         }
     };

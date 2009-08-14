@@ -16,25 +16,31 @@ import javax.swing.Timer;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class TimerPanel extends JLabel implements ActionListener {
+public class TimerPanel extends JLabel implements ActionListener
+{
     private Timer endTimer;
+
     private Timer countTimer;
+
     private int count;
+
     private int seconds;
+
     private String zero;
 
-    /**
-     * Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer.
-     */
-    public TimerPanel(final int seconds, final ActionListener actionListener) {
+    /** Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer. */
+    public TimerPanel(final int seconds, final ActionListener actionListener)
+    {
         super("", JLabel.CENTER);
         this.seconds = seconds;
         zero = (seconds >= 3600) ? "00:00:00" : "00:00";
         setText(zero);
         setPreferredSize(getPreferredSize());
         count = seconds;
-        endTimer = new Timer(1000 * seconds + 1, new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        endTimer = new Timer(1000 * seconds + 1, new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 actionListener.actionPerformed(e);
                 setText(zero);
                 stop();
@@ -47,49 +53,59 @@ public class TimerPanel extends JLabel implements ActionListener {
     /**
      * Update component with the current time.
      *
-     * @param	evt		The current event.
+     * @param evt The current event.
      */
-    public void actionPerformed(final ActionEvent evt) {
+    public void actionPerformed(final ActionEvent evt)
+    {
         count--;
         final String text = getTimeString();
         setText(text);
     }
 
-    private String getTimeString() {
+    private String getTimeString()
+    {
         final DecimalFormat f = new DecimalFormat("00");
         String text = (seconds >= 3600) ? f.format(count / 3600) + ":" : "";
         text += f.format((count - ((int) (count / 3600)) * 3600) / 60) + ":" + f.format(count % 60);
         return text;
     }
 
-    public void start() {
+    public void start()
+    {
         countTimer.start();
         endTimer.start();
     }
 
-    public void stop() {
+    public void stop()
+    {
         countTimer.stop();
         endTimer.stop();
     }
 
-    public void resetTime() {
+    public void resetTime()
+    {
         count = seconds;
         setText(getTimeString());
     }
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         final JFrame f = new JFrame();
         final Container contentPane = f.getContentPane();
         final StatusBar statusBar = new StatusBar();
         contentPane.setLayout(new java.awt.BorderLayout());
         contentPane.add(statusBar, java.awt.BorderLayout.SOUTH);
-        final TimerPanel counter = new TimerPanel(61, new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        final TimerPanel counter = new TimerPanel(61, new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 System.out.println("stop");
             }
         });
-        f.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(final WindowEvent e) {
+        f.addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosed(final WindowEvent e)
+            {
                 counter.stop();
                 System.exit(0);
             }

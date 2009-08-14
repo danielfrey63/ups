@@ -145,92 +145,131 @@ import org.apache.log4j.helpers.OptionConverter;
  * </pre>
  *
  * The model class must provide a public field <code>DEFAULT</code> or an accessor <code>getDefaultModel()</code>. The
- * controler hast to implement {@link ch.jfactory.application.AbstractMainController} and the constructor has to
- * accept as its only argument an instance of the main model.
+ * controler hast to implement {@link ch.jfactory.application.AbstractMainController} and the constructor has to accept
+ * as its only argument an instance of the main model.
  *
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2007/09/27 10:41:22 $
  */
-public class MainRunner extends DefaultApplicationStarter {
+public class MainRunner extends DefaultApplicationStarter
+{
 
     private static Logger LOG;
 
     private static final String PROPERTYNAME_NAME_SHORT = "jfactory.main.about.name.short";
+
     private static final String PROPERTYNAME_PRODUCT_NAME = "jfactory.main.product.name";
+
     private static final String PROPERTYNAME_PRODUCT_FILENAME = "jfactory.main.product.filename";
+
     private static final String PROPERTYNAME_PRODUCT_DESCRIPTION = "jfactory.main.product.description";
+
     private static final String PROPERTYNAME_PREFERENCES_NODE_NAME = "jfactory.main.prefs.node.name";
+
     private static final String PROPERTYNAME_VERSION_SHORT = "jfactory.main.version.major";
+
     private static final String PROPERTYNAME_VERSION_FULL = "jfactory.main.version.full";
+
     private static final String PROPERTYNAME_COPYRIGHT = "jfactory.main.copyright";
+
     private static final String PROPERTYNAME_VENDOR_NAME = "jfactory.main.vendor.name";
+
     private static final String PROPERTYNAME_VENDOR_URL = "jfactory.main.vendor.url";
+
     private static final String PROPERTYNAME_VENDOR_MAIL = "jfactory.main.vendor.mail";
 
     private static final String PROPERTYNAME_RESOURCE_PATH = "jfactory.main.path.tool";
+
     private static final String PROPERTYNAME_HELP_SET_PATH = "jfactory.main.path.helpset";
+
     private static final String PROPERTYNAME_TIP_INDEX_PATH = "jfactory.main.path.tipindex";
 
     private static final String KEY_MAIN_MODEL = "jfactory.main.model";
+
     private static final String KEY_MAIN_CONTROLLER = "jfactory.main.controller";
+
     private static final String KEY_MAIN_FRAME = "jfactory.main.frame";
 
     private static final String KEY_MINIMAL_VERSION = "jfactory.version.minimal";
+
     private static final String DEFAULT_MINIMAL_VERSION = "1.0";
+
     private static final String KEY_VERSION_ERROR_TITLE = "jfactory.version.error.title";
+
     private static final String DEFAULT_VERSION_ERROR_TITLE = "Version Conflict";
+
     private static final String KEY_VERSION_ERROR_TEXT = "jfactory.version.error.text";
+
     private static final String DEFAULT_VERSION_ERROR_TEXT = "You are using Java version {1}. However, version {0} is needed.";
 
     private static final String KEY_APP_CONFIG = "app.configuration";
+
     private static final String DEFAULT_APP_CONFIG = "/xmatrix.properties";
+
     private static final String KEY_LOG_CONFIG = "log.configuration";
+
     private static final String DEFAULT_LOG_CONFIG = "/log4j.properties";
 
     private static final String KEY_SPLASH_IMAGE = "jfactory.splash.image";
+
     private static final String KEY_SPLASH_TEXTFONT = "jfactory.splash.text.font";
+
     private static final String KEY_SPLASH_TEXTFACE = "jfactory.splash.text.face";
+
     private static final String KEY_SPLASH_TEXTSIZE = "jfactory.splash.text.size";
+
     private static final String KEY_SPLASH_TEXTCOLOR = "jfactory.splash.text.color";
 
     private Object mainModel;
+
     private AbstractMainController mainController;
+
     private InfoModel infoModel;
 
-    static {
+    static
+    {
         final String appConfig = System.getProperty(KEY_APP_CONFIG, DEFAULT_APP_CONFIG);
-        try {
+        try
+        {
             initProperties(appConfig);
             final String logConfig = System.getProperty(KEY_LOG_CONFIG, DEFAULT_LOG_CONFIG);
-            try {
+            try
+            {
                 initLogging(logConfig);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 System.err.println("Make sure to supply system property \"" + KEY_LOG_CONFIG +
                         "\" or default log property file \"/log4j.property\"");
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.err.println("Make sure to supply system property \"" + KEY_APP_CONFIG +
                     "\" or default application property file \"" + DEFAULT_APP_CONFIG + "\"");
         }
     }
 
-    public Object getMainModel() {
+    public Object getMainModel()
+    {
         return mainModel;
     }
 
-    public AbstractMainController getMainController() {
+    public AbstractMainController getMainController()
+    {
         return mainController;
     }
 
-    public InfoModel getInfoModel() {
+    public InfoModel getInfoModel()
+    {
         return infoModel;
     }
 
-    protected MainRunner() {
+    protected MainRunner()
+    {
         Toolkit.getDefaultToolkit().setDynamicLayout(true);
-        try {
+        try
+        {
             final ApplicationDescription description = new ApplicationDescription(
                     System.getProperty(PROPERTYNAME_NAME_SHORT),
                     System.getProperty(PROPERTYNAME_PRODUCT_NAME),
@@ -250,12 +289,14 @@ public class MainRunner extends DefaultApplicationStarter {
 
             boot(description, configuration);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.fatal("error during initialization of application", e);
         }
     }
 
-    protected void launchApplication() {
+    protected void launchApplication()
+    {
 
         checkVersion();
 
@@ -281,20 +322,25 @@ public class MainRunner extends DefaultApplicationStarter {
         mainFrame.open();
     }
 
-    private void createSplashInfoModelGlue() {
-        getInfoModel().addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+    private void createSplashInfoModelGlue()
+    {
+        getInfoModel().addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 final Note note = (Note) evt.getNewValue();
                 Splash.setNote(note.getMessage());
                 final Integer percentage = note.getPercentage();
-                if (percentage != null) {
+                if (percentage != null)
+                {
                     Splash.setProgress(percentage);
                 }
             }
         });
     }
 
-    protected void configureSplash() {
+    protected void configureSplash()
+    {
 
         final URL resource = getResourceUrl(KEY_SPLASH_IMAGE);
         final Image image = new ImageIcon(resource).getImage();
@@ -302,7 +348,7 @@ public class MainRunner extends DefaultApplicationStarter {
         final ImageSplash splash = (ImageSplash) Splash.getProvider();
         splash.setNoteEnabled(true);
         splash.setFont(new Font(getResourceString(KEY_SPLASH_TEXTFONT),
-                ((Integer) ResourceHelper.getConstant(Font.class, getResourceString(KEY_SPLASH_TEXTFACE), int.class)).intValue(),
+                (Integer) ResourceHelper.getConstant(Font.class, getResourceString(KEY_SPLASH_TEXTFACE), int.class),
                 Integer.parseInt(getResourceString(KEY_SPLASH_TEXTSIZE))));
         splash.setTextColor(ResourceHelper.decode(getResourceString(KEY_SPLASH_TEXTCOLOR)));
         splash.setForeground(new Color(64, 64, 64));
@@ -311,14 +357,18 @@ public class MainRunner extends DefaultApplicationStarter {
         splash.setVersion("Version " + Application.getDescription().getFullVersion());
     }
 
-    private URL getResourceUrl(final String key) {
+    private URL getResourceUrl(final String key)
+    {
         final String string = getResourceString(key);
         URL resource = MainRunner.class.getResource(string);
-        if (string == null) {
+        if (string == null)
+        {
             resource = MainRunner.class.getResource(string);
-            if (resource == null) {
+            if (resource == null)
+            {
                 resource = ResourceUtils.getURL(key);
-                if (resource == null) {
+                if (resource == null)
+                {
                     System.out.println("");
                 }
             }
@@ -326,15 +376,18 @@ public class MainRunner extends DefaultApplicationStarter {
         return resource;
     }
 
-    private String getResourceString(final String key) {
+    private String getResourceString(final String key)
+    {
         String string = System.getProperty(key);
-        if (string == null) {
+        if (string == null)
+        {
             string = ResourceUtils.getString(key);
         }
         return string;
     }
 
-    protected void configureUI() {
+    protected void configureUI()
+    {
 
         Options.setUseSystemFonts(true);
 //        Options.setGlobalFontSizeHints(FontSizeHints.MIXED2);
@@ -343,11 +396,14 @@ public class MainRunner extends DefaultApplicationStarter {
 
         super.configureUI();
         final String laf = System.getProperty("ch.jfactory.laf");
-        if (laf != null) {
-            try {
+        if (laf != null)
+        {
+            try
+            {
                 UIManager.setLookAndFeel(laf);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
         }
@@ -360,25 +416,30 @@ public class MainRunner extends DefaultApplicationStarter {
         UIManager.put("Tree.font", UIManager.getFont("Label.font"));
     }
 
-    protected void initializeActions() {
+    protected void initializeActions()
+    {
         // Load action properties
         final String resource = "/" + Application.getConfiguration().getResourcePath() + "Action.properties";
         ActionBuilder.setProperties(ActionBuilder.class.getResourceAsStream(resource));
         final Properties props = ActionBuilder.getProperties();
-        try {
+        try
+        {
             // Init actions
             final Enumeration propKeys = props.keys();
             final String keySuffix = ".controller";
-            while (propKeys.hasMoreElements()) {
+            while (propKeys.hasMoreElements())
+            {
                 final String prop = (String) propKeys.nextElement();
-                if (prop.endsWith(keySuffix)) {
+                if (prop.endsWith(keySuffix))
+                {
                     final String keyPartOne = prop.substring(0, prop.indexOf(keySuffix));
                     final String value = props.getProperty(prop);
                     ActionBuilder.registerAction(keyPartOne, new ActionRedirector(getMainController(), value));
                 }
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.fatal("error during initialization of actions", e);
         }
     }
@@ -388,7 +449,8 @@ public class MainRunner extends DefaultApplicationStarter {
      *
      * @return always false
      */
-    protected boolean requestForWindowClose() {
+    protected boolean requestForWindowClose()
+    {
         return false;
     }
 
@@ -396,18 +458,22 @@ public class MainRunner extends DefaultApplicationStarter {
      * Loads the properties from the hardcoded properties file. Makes sure that these properties are overwriting the
      * properties loaded by the system or commandline.
      */
-    private static void initProperties(final String properties) throws IOException {
+    private static void initProperties(final String properties) throws IOException
+    {
         final Properties p = System.getProperties();
         p.load(MainRunner.class.getResourceAsStream(properties));
     }
 
-    private static void initLogging(final String properties) throws IOException {
+    private static void initLogging(final String properties) throws IOException
+    {
         final Properties props = System.getProperties();
         props.load(MainRunner.class.getResourceAsStream(properties));
         final Enumeration keys = props.keys();
-        while (keys.hasMoreElements()) {
+        while (keys.hasMoreElements())
+        {
             final String key = (String) keys.nextElement();
-            if (key.endsWith(".file")) {
+            if (key.endsWith(".file"))
+            {
                 final String value = props.getProperty(key);
                 final String fileName = OptionConverter.substVars(value, props);
                 new File(fileName).getParentFile().mkdirs();
@@ -417,113 +483,141 @@ public class MainRunner extends DefaultApplicationStarter {
         LOG = Logger.getLogger(MainRunner.class);
     }
 
-    private Object createMainModel() {
-        try {
+    private Object createMainModel()
+    {
+        try
+        {
             final String modelProperty = System.getProperty(KEY_MAIN_MODEL);
-            if (modelProperty == null) {
+            if (modelProperty == null)
+            {
                 throw new NullPointerException("The main model has not be defined. Please specify a \"" +
                         KEY_MAIN_MODEL + "\" system property.");
             }
             final Class modelClass = Class.forName(modelProperty);
-            try {
+            try
+            {
                 final Field field = modelClass.getField("DEFAULT");
                 return field.get(null);
             }
-            catch (NoSuchFieldException e) {
-                try {
+            catch (NoSuchFieldException e)
+            {
+                try
+                {
                     final Method defaultModel = modelClass.getMethod("getDefaultModel");
                     return defaultModel.invoke(null);
                 }
-                catch (Exception e1) {
+                catch (Exception e1)
+                {
                     e1.printStackTrace();
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 LOG.fatal("error during initialization of model", e);
             }
         }
-        catch (ClassNotFoundException e) {
+        catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
         return null;
     }
 
-    private AbstractMainController createMainController() {
+    private AbstractMainController createMainController()
+    {
         return (AbstractMainController) createObject(KEY_MAIN_CONTROLLER, "main controller");
     }
 
-    public AbstractFrame createMainFrame() {
+    public AbstractFrame createMainFrame()
+    {
         return (AbstractFrame) createObject(KEY_MAIN_FRAME, "main frame");
     }
 
-    private Object createObject(final String propertyKey, final String name) {
+    private Object createObject(final String propertyKey, final String name)
+    {
         final String propertyString = System.getProperty(propertyKey);
-        if (propertyString == null) {
+        if (propertyString == null)
+        {
             throw new NullPointerException("property for " + name + " not set. Please specify a system property \"" +
                     propertyKey + "\"");
         }
         final Class clazz;
-        try {
+        try
+        {
             clazz = Class.forName(propertyString);
         }
-        catch (ClassNotFoundException e) {
+        catch (ClassNotFoundException e)
+        {
             LOG.fatal(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
         Constructor constructor;
-        try {
+        try
+        {
             constructor = clazz.getConstructor(getMainModel().getClass(), InfoModel.class);
             return constructor.newInstance(getMainModel(), getInfoModel());
         }
-        catch (NoSuchMethodException e) {
-            try {
+        catch (NoSuchMethodException e)
+        {
+            try
+            {
                 constructor = clazz.getConstructor(getMainModel().getClass());
                 return constructor.newInstance(getMainModel());
             }
-            catch (NoSuchMethodException e1) {
+            catch (NoSuchMethodException e1)
+            {
                 LOG.fatal(e.getMessage(), e);
                 throw new RuntimeException(e.getMessage(), e);
             }
-            catch (IllegalAccessException e1) {
+            catch (IllegalAccessException e1)
+            {
                 LOG.fatal(e.getMessage(), e);
                 throw new RuntimeException(e.getMessage(), e);
             }
-            catch (InvocationTargetException e1) {
+            catch (InvocationTargetException e1)
+            {
                 LOG.fatal(e.getMessage(), e);
                 throw new RuntimeException(e.getMessage(), e);
             }
-            catch (InstantiationException e1) {
+            catch (InstantiationException e1)
+            {
                 LOG.fatal(e.getMessage(), e);
                 throw new RuntimeException(e.getMessage(), e);
             }
         }
-        catch (IllegalAccessException e) {
+        catch (IllegalAccessException e)
+        {
             LOG.fatal(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
-        catch (InvocationTargetException e) {
+        catch (InvocationTargetException e)
+        {
             LOG.fatal(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
-        catch (InstantiationException e) {
+        catch (InstantiationException e)
+        {
             LOG.fatal(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-    private static void checkVersion() {
+    private static void checkVersion()
+    {
         final String min = System.getProperty(KEY_MINIMAL_VERSION, DEFAULT_MINIMAL_VERSION);
         final MessageFormat format = new MessageFormat(System.getProperty(KEY_VERSION_ERROR_TEXT, DEFAULT_VERSION_ERROR_TEXT));
         final String running = new Version(OperatingSystem.JAVA_VERSION_TRIMMED).toString();
         final String message = format.format(new String[]{min, running});
-        if (!OperatingSystem.isMinimalVersionRunning(min)) {
+        if (!OperatingSystem.isMinimalVersionRunning(min))
+        {
             final String title = System.getProperty(KEY_VERSION_ERROR_TITLE, DEFAULT_VERSION_ERROR_TITLE);
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
 
-    public static void  main(final String[] args) {
+    public static void main(final String[] args)
+    {
         new MainRunner();
     }
 }

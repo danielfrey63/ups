@@ -22,17 +22,14 @@ package ch.jfactory.application;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:56 $
  */
-public class GuiConstants {
-    /**
-     * The gap between top menu bar and first inner panel.
-     */
+public class GuiConstants
+{
+    /** The gap between top menu bar and first inner panel. */
     public static final int LARGE_GAP = 6;
-    /**
-     * The gap between left and right outer border and inner panel.
-     */
+
+    /** The gap between left and right outer border and inner panel. */
     public static final int SMALL_GAP = 4;
-    /**
-     * No gap.
-     */
+
+    /** No gap. */
     public static final int NO_GAP = 0;
 }

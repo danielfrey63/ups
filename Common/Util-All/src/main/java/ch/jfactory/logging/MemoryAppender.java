@@ -3,7 +3,7 @@ package ch.jfactory.logging;
 import ch.jfactory.application.SystemUtil;
 import java.util.ArrayList;
 import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Priority;
+import org.apache.log4j.Level;
 import org.apache.log4j.TTCCLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
@@ -12,50 +12,69 @@ import org.apache.log4j.spi.LoggingEvent;
  *
  * @author Thomas Wegmueller
  */
-public class MemoryAppender extends AppenderSkeleton {
-    private ArrayList list;
-    private int pointer = 0;
-    private boolean filled = false;
-    protected int listSize = 100;
-    private Priority _abortPriority = Priority.ERROR;
-    private Priority _messagePriority = Priority.ERROR;
-    private Priority _logPriority = Priority.DEBUG;
-    protected String abortPriority = Priority.ERROR.toString();
-    protected String messagePriority = Priority.ERROR.toString();
-    protected String logPriority = Priority.DEBUG.toString();
+public class MemoryAppender extends AppenderSkeleton
+{
+    private ArrayList<LoggingEvent> list;
 
-    /**
-     * The default constructor constructs a ArrayList
-     */
-    public MemoryAppender() {
-        list = new ArrayList(listSize);
+    private int pointer = 0;
+
+    private boolean filled = false;
+
+    protected int listSize = 100;
+
+    private Level _abortLevel = Level.ERROR;
+
+    private Level _messageLevel = Level.ERROR;
+
+    private Level _logLevel = Level.DEBUG;
+
+    protected String abortLevel = Level.ERROR.toString();
+
+    protected String messageLevel = Level.ERROR.toString();
+
+    protected String logLevel = Level.DEBUG.toString();
+
+    /** The default constructor constructs a ArrayList */
+    public MemoryAppender()
+    {
+        list = new ArrayList<LoggingEvent>(listSize);
         setLayout(new TTCCLayout());
     }
 
-    public void close() {
+    public void close()
+    {
     }
 
-    public void activateOptions() {
-        setAbortPriority(abortPriority);
-        setMessagePriority(messagePriority);
-        setLogPriority(logPriority);
+    public void activateOptions()
+    {
+        setAbortLevel(abortLevel);
+        setMessageLevel(messageLevel);
+        setLogLevel(logLevel);
     }
 
-    public boolean requiresLayout() {
+    public boolean requiresLayout()
+    {
         return false;
     }
 
-    public String dump() {
+    public String dump()
+    {
         int start = 0;
-        if (filled) start = pointer + 1;
+        if (filled)
+        {
+            start = pointer + 1;
+        }
         final StringBuffer sb = new StringBuffer();
-        while (start != (pointer)) {
-            final LoggingEvent e = (LoggingEvent) list.get(start);
+        while (start != (pointer))
+        {
+            final LoggingEvent e = list.get(start);
             sb.append(getLayout().format(e));
             final String[] t = e.getThrowableStrRep();
-            if (t != null) {
-                for (int i = 0; i < t.length; i++) {
-                    sb.append(t[i] + "\n");
+            if (t != null)
+            {
+                for (final String aT : t)
+                {
+                    sb.append(aT).append("\n");
                 }
             }
             start++;
@@ -64,30 +83,38 @@ public class MemoryAppender extends AppenderSkeleton {
         return sb.toString();
     }
 
-    public void append(final LoggingEvent e) {
-        if (e.getLevel().isGreaterOrEqual(_logPriority)) {
+    public void append(final LoggingEvent e)
+    {
+        if (e.getLevel().isGreaterOrEqual(_logLevel))
+        {
             appendToList(e);
         }
-        if (e.getLevel().isGreaterOrEqual(_messagePriority)) {
+        if (e.getLevel().isGreaterOrEqual(_messageLevel))
+        {
             System.out.println(dump());
             final SendFeedbackDialog dialog = new SendFeedbackDialog();
             dialog.setDump(dump());
             dialog.open();
         }
-        if (e.getLevel().isGreaterOrEqual(_abortPriority)) {
+        if (e.getLevel().isGreaterOrEqual(_abortLevel))
+        {
             SystemUtil.EXIT.exit(1);
         }
     }
 
-    private void appendToList(final LoggingEvent e) {
-        if (pointer >= listSize) {
+    private void appendToList(final LoggingEvent e)
+    {
+        if (pointer >= listSize)
+        {
             pointer = 0;
             filled = true;
         }
-        if (filled) {
+        if (filled)
+        {
             list.set(pointer, e);
         }
-        else {
+        else
+        {
             list.add(e);
         }
         pointer++;
@@ -96,10 +123,11 @@ public class MemoryAppender extends AppenderSkeleton {
     /**
      * Returns the abortPriority.
      *
-     * @return Priority
+     * @return Level
      */
-    public Priority getAbortPriority() {
-        return _abortPriority;
+    public Level getAbortLevel()
+    {
+        return _abortLevel;
     }
 
     /**
@@ -107,31 +135,35 @@ public class MemoryAppender extends AppenderSkeleton {
      *
      * @param ap The abortPriority to set
      */
-    public void setAbortPriority(final String ap) {
-        setAbortPriority(Priority.toPriority(ap, _abortPriority));
+    public void setAbortLevel(final String ap)
+    {
+        setAbortLevel(Level.toLevel(ap, _abortLevel));
     }
 
-    public void setAbortPriority(final Priority ap) {
-        _abortPriority = ap;
-        abortPriority = _abortPriority.toString();
+    public void setAbortLevel(final Level ap)
+    {
+        _abortLevel = ap;
+        abortLevel = _abortLevel.toString();
     }
 
     /**
      * Returns the logPriority.
      *
-     * @return Priority
+     * @return Level
      */
-    public Priority getLogPriority() {
-        return _logPriority;
+    public Level getLogLevel()
+    {
+        return _logLevel;
     }
 
     /**
      * Returns the messagePriority.
      *
-     * @return Priority
+     * @return Level
      */
-    public Priority getMessagePriority() {
-        return _messagePriority;
+    public Level getMessageLevel()
+    {
+        return _messageLevel;
     }
 
     /**
@@ -139,13 +171,15 @@ public class MemoryAppender extends AppenderSkeleton {
      *
      * @param lp The logPriority to set
      */
-    public void setLogPriority(final String lp) {
-        setLogPriority(Priority.toPriority(lp, _logPriority));
+    public void setLogLevel(final String lp)
+    {
+        setLogLevel(Level.toLevel(lp, _logLevel));
     }
 
-    public void setLogPriority(final Priority lp) {
-        _logPriority = lp;
-        logPriority = _logPriority.toString();
+    public void setLogLevel(final Level lp)
+    {
+        _logLevel = lp;
+        logLevel = _logLevel.toString();
     }
 
     /**
@@ -153,13 +187,15 @@ public class MemoryAppender extends AppenderSkeleton {
      *
      * @param mp The messagePriority to set
      */
-    public void setMessagePriority(final String mp) {
-        setMessagePriority(Priority.toPriority(mp, _messagePriority));
+    public void setMessageLevel(final String mp)
+    {
+        setMessageLevel(Level.toLevel(mp, _messageLevel));
     }
 
-    public void setMessagePriority(final Priority mp) {
-        _messagePriority = mp;
-        messagePriority = _messagePriority.toString();
+    public void setMessageLevel(final Level mp)
+    {
+        _messageLevel = mp;
+        messageLevel = _messageLevel.toString();
     }
 
     /**
@@ -167,7 +203,8 @@ public class MemoryAppender extends AppenderSkeleton {
      *
      * @return int
      */
-    public int getListSize() {
+    public int getListSize()
+    {
         return listSize;
     }
 
@@ -176,7 +213,8 @@ public class MemoryAppender extends AppenderSkeleton {
      *
      * @param listSize The listSize to set
      */
-    public void setListSize(final int listSize) {
+    public void setListSize(final int listSize)
+    {
         this.listSize = listSize;
         list.ensureCapacity(listSize);
     }

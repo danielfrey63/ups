@@ -30,24 +30,30 @@ import org.pietschy.command.ToggleVetoException;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class RemoveFilterFromAndedFilterable extends ToggleCommand {
+public class RemoveFilterFromAndedFilterable extends ToggleCommand
+{
 
     private Filterable filterable;
+
     private Filter filter;
+
     private TreeExpandedRestorer expander;
 
     public RemoveFilterFromAndedFilterable(final CommandManager manager, final String id, final Filterable filterable,
-                                           final Filter filter, final TreeExpandedRestorer expander) {
+                                           final Filter filter, final TreeExpandedRestorer expander)
+    {
         super(manager, id);
         this.filterable = filterable;
         this.filter = filter;
         this.expander = expander;
     }
 
-    protected void handleSelection(final boolean selected) throws ToggleVetoException {
-        if (selected) {
+    protected void handleSelection(final boolean selected) throws ToggleVetoException
+    {
+        if (selected)
+        {
             expander.save();
-            ((MultiAndFilter)filterable.getFilter()).removeFilter(filter);
+            ((MultiAndFilter) filterable.getFilter()).removeFilter(filter);
             filterable.filter();
             expander.restore();
         }

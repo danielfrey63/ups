@@ -10,7 +10,7 @@ package ch.jfactory.resource;
 
 import java.io.File;
 import javax.swing.ImageIcon;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Helper class for locating images and support for image caching.
@@ -18,12 +18,16 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2006/04/25 11:09:31 $
  */
-public class ImageLocator {
+public class ImageLocator
+{
     public static final String PROPERTY_IMAGE_LOCATION = "xmatrix.picture.path";
+
     public static final CachedImageLocator pictLocator;
 
-    private static final Category cat = Category.getInstance(ImageLocator.class);
+    private static final Logger LOGGER = Logger.getLogger(ImageLocator.class);
+
     private static final CachedImageLocator iconLocator;
+
     private static final String ICON_PATH;
 
     /**
@@ -32,15 +36,18 @@ public class ImageLocator {
      * @param name name of the image
      * @return reference to the ImageIcon
      */
-    public static ImageIcon getIcon(final String name) {
-        if (name == null) {
+    public static ImageIcon getIcon(final String name)
+    {
+        if (name == null)
+        {
             return null;
         }
-        cat.debug("icon " + name);
+        LOGGER.debug("icon " + name);
         return iconLocator.getImageIcon(name);
     }
 
-    public static ImageIcon getPicture(final String name) {
+    public static ImageIcon getPicture(final String name)
+    {
         return pictLocator.getImageIcon(name);
     }
 
@@ -48,31 +55,41 @@ public class ImageLocator {
     //    pictLocator.clearCacheList();
     //}
 
-    static {
+    static
+    {
         String iconPath = System.getProperty("jfactory.resource.path");
-        if (iconPath == null) {
+        if (iconPath == null)
+        {
             iconPath = System.getProperty("user.dir");
-            cat.warn("system property \"jfactory.resource.path\" not found, defaulting to \"" + iconPath + "\"");
+            LOGGER.warn("system property \"jfactory.resource.path\" not found, defaulting to \"" + iconPath + "\"");
         }
         ICON_PATH = (iconPath.endsWith("/") || iconPath.endsWith("\\") ? iconPath : iconPath + "/");
-        iconLocator = new CachedImageLocator() {
-            public String getPath() {
+        iconLocator = new CachedImageLocator()
+        {
+            public String getPath()
+            {
                 return ICON_PATH;
             }
         };
-        pictLocator = new CachedImageLocator() {
-            public String getPath() {
+        pictLocator = new CachedImageLocator()
+        {
+            public String getPath()
+            {
                 final String root = System.getProperty("xmatrix.cd.path", "");
                 final String defaultPicturePath = System.getProperty("xmatrix.picture.path.small", "/");
                 final String picturePath = System.getProperty(PROPERTY_IMAGE_LOCATION, defaultPicturePath);
                 if (root.length() > 0)
+                {
                     return new File(root, picturePath).getPath() + "/";
+                }
                 else
+                {
                     return new File(picturePath).getPath() + "/";
+                }
             }
         };
 
-        cat.info("Icon resources at " + iconLocator.getPath());
-        cat.info("Pictures resources at " + pictLocator.getPath());
+        LOGGER.info("Icon resources at " + iconLocator.getPath());
+        LOGGER.info("Pictures resources at " + pictLocator.getPath());
     }
 }

@@ -13,7 +13,7 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * <Comments here>
@@ -21,11 +21,10 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class ActionUtils {
-    /**
-     * logger instance
-     */
-    private static final Category cat = Category.getInstance(ActionUtils.class);
+public class ActionUtils
+{
+    /** logger instance */
+    private static final Logger cat = Logger.getLogger(ActionUtils.class);
 
     /**
      * Rigister a button to a given KeyStroke. The method generates a new <code>Action</code> if it hasn't been defined
@@ -36,13 +35,16 @@ public class ActionUtils {
      * @param keyStroke given KeyStroke on which the action should occur
      * @param button    button which action will executed
      */
-    public static void registerKeyStrokeAction(final KeyStroke keyStroke, final JButton button) {
+    public static void registerKeyStrokeAction(final KeyStroke keyStroke, final JButton button)
+    {
         Action action = button.getAction();
-        if (action == null) {
+        if (action == null)
+        {
             action = new ButtonRedirector(button);
         }
         final String actionKey = keyStroke.toString() + button.hashCode();
-        if (cat.isDebugEnabled()) {
+        if (cat.isDebugEnabled())
+        {
             cat.debug("register action: " + actionKey);
         }
         button.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(keyStroke, actionKey);
@@ -57,7 +59,8 @@ public class ActionUtils {
      *
      * @param button The button to register the key with
      */
-    public static void registerEscapeKey(final JButton button) {
+    public static void registerEscapeKey(final JButton button)
+    {
         final KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         registerKeyStrokeAction(keyStroke, button);
     }

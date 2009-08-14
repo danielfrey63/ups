@@ -16,137 +16,197 @@ import javax.swing.tree.TreePath;
 //
 
 public class TreeSearchable extends Searchable
-    implements TreeModelListener {
+        implements TreeModelListener
+{
 
     private boolean _recursive;
+
     private transient List _treePathes;
 
-    public TreeSearchable(final JTree jtree) {
+    public TreeSearchable(final JTree jtree)
+    {
         super(jtree);
         _recursive = false;
-        if(jtree.getModel() != null)
+        if (jtree.getModel() != null)
+        {
             jtree.getModel().addTreeModelListener(this);
+        }
     }
 
-    public boolean isRecursive() {
+    public boolean isRecursive()
+    {
         return _recursive;
     }
 
-    public void setRecursive(final boolean flag) {
+    public void setRecursive(final boolean flag)
+    {
         _recursive = flag;
         resetTreePathes();
     }
 
-    public void uninstallListeners() {
+    public void uninstallListeners()
+    {
         super.uninstallListeners();
-        if((component instanceof JTree) && ((JTree)component).getModel() != null)
-            ((JTree)component).getModel().removeTreeModelListener(this);
+        if ((component instanceof JTree) && ((JTree) component).getModel() != null)
+        {
+            ((JTree) component).getModel().removeTreeModelListener(this);
+        }
     }
 
-    protected void setSelectedIndex(final int i, final boolean flag) {
-        if(!isRecursive()) {
-            if(flag)
-                ((JTree)component).addSelectionInterval(i, i);
+    protected void setSelectedIndex(final int i, final boolean flag)
+    {
+        if (!isRecursive())
+        {
+            if (flag)
+            {
+                ((JTree) component).addSelectionInterval(i, i);
+            }
             else
-                ((JTree)component).setSelectionRow(i);
-            ((JTree)component).scrollRowToVisible(i);
-        } else {
+            {
+                ((JTree) component).setSelectionRow(i);
+            }
+            ((JTree) component).scrollRowToVisible(i);
+        }
+        else
+        {
             final Object obj = getElementAt(i);
-            if(obj instanceof TreePath) {
-                final TreePath treepath = (TreePath)obj;
-                if(treepath != null) {
-                    if(flag)
-                        ((JTree)component).addSelectionPath(treepath);
+            if (obj instanceof TreePath)
+            {
+                final TreePath treepath = (TreePath) obj;
+                if (treepath != null)
+                {
+                    if (flag)
+                    {
+                        ((JTree) component).addSelectionPath(treepath);
+                    }
                     else
-                        ((JTree)component).setSelectionPath(treepath);
-                    ((JTree)component).scrollPathToVisible(treepath);
+                    {
+                        ((JTree) component).setSelectionPath(treepath);
+                    }
+                    ((JTree) component).scrollPathToVisible(treepath);
                 }
             }
         }
     }
 
-    protected int getSelectedIndex() {
-        if(!isRecursive()) {
-            final int[] ai = (int[])((JTree)component).getSelectionRows();
+    protected int getSelectedIndex()
+    {
+        if (!isRecursive())
+        {
+            final int[] ai = (int[]) ((JTree) component).getSelectionRows();
             return ai == null || ai.length == 0 ? -1 : ai[0];
         }
-        final TreePath[] atreepath = ((JTree)component).getSelectionPaths();
-        if(atreepath != null && atreepath.length > 0)
+        final TreePath[] atreepath = ((JTree) component).getSelectionPaths();
+        if (atreepath != null && atreepath.length > 0)
+        {
             return getTreePathes().indexOf(atreepath[0]);
+        }
         else
+        {
             return -1;
+        }
     }
 
-    protected Object getElementAt(final int i) {
-        if(i == -1)
+    protected Object getElementAt(final int i)
+    {
+        if (i == -1)
+        {
             return null;
-        if(!isRecursive())
-            return ((JTree)component).getPathForRow(i);
+        }
+        if (!isRecursive())
+        {
+            return ((JTree) component).getPathForRow(i);
+        }
         else
+        {
             return getTreePathes().get(i);
+        }
     }
 
-    protected int getElementCount() {
-        if(!isRecursive())
-            return ((JTree)component).getRowCount();
+    protected int getElementCount()
+    {
+        if (!isRecursive())
+        {
+            return ((JTree) component).getRowCount();
+        }
         else
+        {
             return getTreePathes().size();
+        }
     }
 
-    protected void populateTreePathes() {
+    protected void populateTreePathes()
+    {
         _treePathes = new ArrayList();
-        final Object obj = ((JTree)component).getModel().getRoot();
+        final Object obj = ((JTree) component).getModel().getRoot();
         populateTreePathes0(obj, new TreePath(obj));
     }
 
-    protected void resetTreePathes() {
+    protected void resetTreePathes()
+    {
         _treePathes = null;
     }
 
-    private void populateTreePathes0(final Object obj, final TreePath treepath) {
+    private void populateTreePathes0(final Object obj, final TreePath treepath)
+    {
         _treePathes.add(treepath);
-        if(obj instanceof TreeNode) {
-            for(int i = 0; i < ((TreeNode)obj).getChildCount(); i++) {
-                final TreeNode treenode = ((TreeNode)obj).getChildAt(i);
+        if (obj instanceof TreeNode)
+        {
+            for (int i = 0; i < ((TreeNode) obj).getChildCount(); i++)
+            {
+                final TreeNode treenode = ((TreeNode) obj).getChildAt(i);
                 populateTreePathes0(treenode, treepath.pathByAddingChild(treenode));
             }
 
         }
     }
 
-    protected List getTreePathes() {
-        if(_treePathes == null)
+    protected List getTreePathes()
+    {
+        if (_treePathes == null)
+        {
             populateTreePathes();
+        }
         return _treePathes;
     }
 
-    protected String convertElementToString(final Object obj) {
-        if(obj instanceof TreePath) {
-            final Object obj1 = ((TreePath)obj).getLastPathComponent();
+    protected String convertElementToString(final Object obj)
+    {
+        if (obj instanceof TreePath)
+        {
+            final Object obj1 = ((TreePath) obj).getLastPathComponent();
             return obj1.toString();
         }
-        if(obj != null)
+        if (obj != null)
+        {
             return obj.toString();
+        }
         else
+        {
             return "";
+        }
     }
 
-    public void treeNodesChanged(final TreeModelEvent treemodelevent) {
+    public void treeNodesChanged(final TreeModelEvent treemodelevent)
+    {
         hidePopup();
         resetTreePathes();
     }
 
-    public void treeNodesInserted(final TreeModelEvent treemodelevent) {
+    public void treeNodesInserted(final TreeModelEvent treemodelevent)
+    {
         hidePopup();
         resetTreePathes();
     }
 
-    public void treeNodesRemoved(final TreeModelEvent treemodelevent) {
+    public void treeNodesRemoved(final TreeModelEvent treemodelevent)
+    {
         hidePopup();
         resetTreePathes();
     }
 
-    public void treeStructureChanged(final TreeModelEvent treemodelevent) {
+    public void treeStructureChanged(final TreeModelEvent treemodelevent)
+    {
         hidePopup();
         resetTreePathes();
     }

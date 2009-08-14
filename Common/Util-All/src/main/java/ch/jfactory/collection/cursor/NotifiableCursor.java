@@ -6,7 +6,8 @@ package ch.jfactory.collection.cursor;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-public interface NotifiableCursor extends Cursor {
+public interface NotifiableCursor extends Cursor
+{
     void addCursorChangeListener(CursorChangeListener listener);
 
     void removeCursorChangeListener(CursorChangeListener listener);

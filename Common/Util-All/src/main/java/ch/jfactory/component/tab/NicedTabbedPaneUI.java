@@ -10,23 +10,28 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 
-
-public class NicedTabbedPaneUI extends MetalTabbedPaneUI {
+public class NicedTabbedPaneUI extends MetalTabbedPaneUI
+{
 
     Border contentBorder;
+
     private int size = 2;
 
-    public NicedTabbedPaneUI() {
+    public NicedTabbedPaneUI()
+    {
         super();
     }
 
-    public void installDefaults() {
+    public void installDefaults()
+    {
         super.installDefaults();
         contentBorder = BorderFactory.createLineBorder(Color.red, 10); //new TransparentBorder(0);//
     }
 
-    protected Insets getContentBorderInsets(final int tabPlacement) {
-        switch (tabPlacement) {
+    protected Insets getContentBorderInsets(final int tabPlacement)
+    {
+        switch (tabPlacement)
+        {
             case BOTTOM:
                 return new Insets(contentBorder.getBorderInsets(null).top,
                         contentBorder.getBorderInsets(null).right,
@@ -41,7 +46,8 @@ public class NicedTabbedPaneUI extends MetalTabbedPaneUI {
 
     }
 
-    protected void paintContentBorder(final Graphics g, final int tabPlacement, final int selectedIndex) {
+    protected void paintContentBorder(final Graphics g, final int tabPlacement, final int selectedIndex)
+    {
         final int width = tabPane.getWidth();
         final int height = tabPane.getHeight();
         final Insets insets = tabPane.getInsets();
@@ -52,7 +58,8 @@ public class NicedTabbedPaneUI extends MetalTabbedPaneUI {
         int h = height - insets.top - insets.bottom;
 
         int tah = 0;
-        switch (tabPlacement) {
+        switch (tabPlacement)
+        {
             case LEFT:
                 x += calculateTabAreaWidth(tabPlacement, runCount, maxTabWidth);
                 w -= (x - insets.left);
@@ -79,30 +86,38 @@ public class NicedTabbedPaneUI extends MetalTabbedPaneUI {
         }
         // Fill region behind content area
         final Color selectedColor = UIManager.getColor("TabbedPane.selected");
-        if (selectedColor == null) {
+        if (selectedColor == null)
+        {
             g.setColor(tabPane.getBackground());
         }
-        else {
+        else
+        {
             g.setColor(selectedColor);
         }
         g.fillRect(x, y, w, h);
     }
 
-    public static ComponentUI createUI(final JComponent x) {
+    public static ComponentUI createUI(final JComponent x)
+    {
         return new NicedTabbedPaneUI();
     }
 
     protected void paintTabBackground(final Graphics g, final int tabPlacement,
-                                      final int tabIndex, final int x, final int y, final int w, final int h, final boolean isSelected) {
-        if (isSelected) {
+                                      final int tabIndex, final int x, final int y, final int w, final int h, final boolean isSelected)
+    {
+        if (isSelected)
+        {
             g.setColor(selectColor);
         }
-        else {
+        else
+        {
             g.setColor(UIManager.getColor("Panel.background"));
         }
 
-        if (tabPane.getComponentOrientation().isLeftToRight()) {
-            switch (tabPlacement) {
+        if (tabPane.getComponentOrientation().isLeftToRight())
+        {
+            switch (tabPlacement)
+            {
                 case LEFT:
                     g.fillRect(x + 5, y + 1, w - 5, h - 1);
                     g.fillRect(x + 2, y + 4, 3, h - 4);
@@ -121,8 +136,10 @@ public class NicedTabbedPaneUI extends MetalTabbedPaneUI {
                     g.fillRect(x + 2, y + 5, 2, h - 5);
             }
         }
-        else {
-            switch (tabPlacement) {
+        else
+        {
+            switch (tabPlacement)
+            {
                 case LEFT:
                     g.fillRect(x + 5, y + 1, w - 5, h - 1);
                     g.fillRect(x + 2, y + 4, 3, h - 4);

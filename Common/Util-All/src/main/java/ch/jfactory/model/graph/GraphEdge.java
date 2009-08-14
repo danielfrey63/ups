@@ -4,7 +4,8 @@ package ch.jfactory.model.graph;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface GraphEdge {
+public interface GraphEdge
+{
 
     /**
      * Returns the id.
@@ -13,9 +14,7 @@ public interface GraphEdge {
      */
     public int getId();
 
-    /**
-     * Returns whether this is of the given role.
-     */
+    /** Returns whether this is of the given role. */
     public boolean isRole(Class role);
 
     /**

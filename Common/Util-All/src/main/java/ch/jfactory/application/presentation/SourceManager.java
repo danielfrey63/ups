@@ -33,26 +33,19 @@ import javax.swing.JFrame;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class SourceManager implements SourceStateListener {
+public class SourceManager implements SourceStateListener
+{
 
-    /**
-     * The action to disable or enable.
-     */
+    /** The action to disable or enable. */
     private Action saveAction;
 
-    /**
-     * The frame to ajust the title.
-     */
+    /** The frame to ajust the title. */
     private JFrame frame;
 
-    /**
-     * The original title of the frame.
-     */
+    /** The original title of the frame. */
     private String title;
 
-    /**
-     * Keeps the last state for evaluation when asking for loosing data.
-     */
+    /** Keeps the last state for evaluation when asking for loosing data. */
     private SourceStateEvent.SourceStateEventType state;
 
     /**
@@ -61,7 +54,8 @@ public class SourceManager implements SourceStateListener {
      * @param frame      the frame to ajust the title for.
      * @param saveAction the save command to dis- or enable.
      */
-    public SourceManager(final JFrame frame, final Action saveAction) {
+    public SourceManager(final JFrame frame, final Action saveAction)
+    {
         this.frame = frame;
         this.saveAction = saveAction;
         this.title = frame.getTitle();
@@ -69,37 +63,42 @@ public class SourceManager implements SourceStateListener {
         saveAction.setEnabled(false);
     }
 
-    public void sourceStateMayChange(final SourceStateEvent e) throws SourceVetoedException {
+    public void sourceStateMayChange(final SourceStateEvent e) throws SourceVetoedException
+    {
         checkForLostData(e);
     }
 
-    public void sourceStateChanged(final SourceStateEvent e) {
+    public void sourceStateChanged(final SourceStateEvent e)
+    {
         ajustTitle(e);
         ajustAction(e);
         state = e.getType();
     }
 
-    private void checkForLostData(final SourceStateEvent e) throws SourceVetoedException {
+    private void checkForLostData(final SourceStateEvent e) throws SourceVetoedException
+    {
         boolean okToFire = true;
-        if (state == SourceStateEvent.DIRTY) {
+        if (state == SourceStateEvent.DIRTY)
+        {
             final String question = "Sie haben noch ungespeicherte Eingaben. Wollen Sie diese wirklich verwerfen?";
             final int res = Dialogs.showQuestionMessageOk(frame.getRootPane(), "Beenden", question);
             okToFire = (res == Dialogs.OK);
         }
-        if (!okToFire) {
+        if (!okToFire)
+        {
             throw new SourceVetoedException();
         }
     }
 
-    private void ajustAction(final SourceStateEvent e) {
+    private void ajustAction(final SourceStateEvent e)
+    {
         final SourceStateEvent.SourceStateEventType type = e.getType();
         saveAction.setEnabled(type == SourceStateEvent.DIRTY);
     }
 
-    /**
-     * Builds a title out of the original title and the source name. If the source is dirty, an asterisk is appended.
-     */
-    private void ajustTitle(final SourceStateEvent e) {
+    /** Builds a title out of the original title and the source name. If the source is dirty, an asterisk is appended. */
+    private void ajustTitle(final SourceStateEvent e)
+    {
         final IFBusinessDelegate delegate = (IFBusinessDelegate) e.getSource();
         final Properties props = delegate.getProperties();
 

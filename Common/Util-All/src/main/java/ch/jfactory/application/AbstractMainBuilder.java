@@ -60,44 +60,60 @@ import org.pietschy.command.ActionCommand;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/08/29 13:10:43 $
  */
-public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
+public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
+{
 
     private AbstractMainModel model;
+
     private JPanel main;
+
     private final InfoModel infoModel;
+
     private final CardPanel cards = new CardPanel();
+
     private StatusBar statusBar;
+
     private String[] modelLoadedCommands;
+
     private String[] welcomePanelCommands;
+
     protected static final String TITLE_DIRTYMARKER = " *";
+
     private static final String TITLE_SEPARATOR = " - ";
 
-
     protected AbstractMainBuilder(final AbstractMainModel model, final InfoModel infoModel,
-                                  final String[] welcomPanelCommands, final String[] modelLoadedCommands) {
+                                  final String[] welcomPanelCommands, final String[] modelLoadedCommands)
+    {
         this.model = model;
         this.infoModel = infoModel;
         this.welcomePanelCommands = welcomPanelCommands;
         this.modelLoadedCommands = modelLoadedCommands;
     }
 
-    protected JComponent createMainPanel() {
+    protected JComponent createMainPanel()
+    {
         final JComponent welcomePanel = createWelcomePanel();
 //        infoModel.setNote(new SimpleNote(infoModel.getNote()));
-        cards.add(AbstractMainModel.CARDS_WELCOME.toString(), welcomePanel);
-        model.queue(new Runnable() {
-            public void run() {
+        cards.add(AbstractMainModel.CARDS_WELCOME, welcomePanel);
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 statusBar = createStatusBar();
             }
         });
-        model.queue(new Runnable() {
-            public void run() {
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 getInfoModel().setNote(new CodedNote(Strings.getString("startup.content")));
                 createNonWelcomPanels();
             }
         });
-        model.queue(new Runnable() {
-            public void run() {
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 model.setModelLoaded(true);
                 getInfoModel().setNote(new CodedNote(Strings.getString("startup.end")));
             }
@@ -107,53 +123,63 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
         return main;
     }
 
-    protected StatusBar createStatusBar() {
+    protected StatusBar createStatusBar()
+    {
         statusBar = new StatusBar();
         statusBar.setBorder(new EmptyBorder(GuiConstants.NO_GAP, GuiConstants.SMALL_GAP, GuiConstants.NO_GAP, GuiConstants.SMALL_GAP));
         statusBar.setItemBorder(new EmptyBorder(GuiConstants.NO_GAP, GuiConstants.NO_GAP, GuiConstants.NO_GAP, GuiConstants.NO_GAP));
         return statusBar;
     }
 
-    protected JComponent createWelcomePanel() {
+    protected JComponent createWelcomePanel()
+    {
         final I15nWelcomePanel panel = new I15nWelcomePanel("welcome", welcomePanelCommands, getCommandManager());
         panel.setInfoModel(getInfoModel());
         return panel;
     }
 
-    /**
-     * Here you add the rest of the panels to the cards. Use {@link #getCards()} to access the cards panel.
-     */
+    /** Here you add the rest of the panels to the cards. Use {@link #getCards()} to access the cards panel. */
     protected abstract void createNonWelcomPanels();
 
     protected abstract JMenuBar getMenuBar();
 
-    /**
-     * Inits model listeners. Make sure to call the super method in order to init the common ones.
-     */
-    protected void initModelListeners() {
-        model.queue(new Runnable() {
-            public void run() {
+    /** Inits model listeners. Make sure to call the super method in order to init the common ones. */
+    protected void initModelListeners()
+    {
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 // Check whether the user really wants to close the opened file.
-                model.addVetoableChangeListener(AbstractMainModel.EVENTNAME_CLOSING, new VetoableChangeListener() {
-                    public void vetoableChange(final PropertyChangeEvent evt) throws PropertyVetoException {
-                        if (((Boolean) evt.getNewValue()).booleanValue() && model.isDirty()) {
+                model.addVetoableChangeListener(AbstractMainModel.EVENTNAME_CLOSING, new VetoableChangeListener()
+                {
+                    public void vetoableChange(final PropertyChangeEvent evt) throws PropertyVetoException
+                    {
+                        if ((Boolean) evt.getNewValue() && model.isDirty())
+                        {
                             final String title = Strings.getString("closing.title");
                             final String question = Strings.getString("closing.text");
                             final int res = Dialogs.showQuestionMessageOk(getCards(), title, question);
                             if (res != Dialogs.OK)
+                            {
                                 throw new PropertyVetoException("quit has been stopped by user", evt);
+                            }
                         }
                     }
                 });
                 // Repaint all uis.
-                model.addPropertyChangeListener(AbstractMainModel.EVENTNAME_CLOSING, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.EVENTNAME_CLOSING, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         getCards().repaint();
                     }
                 });
                 // Install error handler feedback
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_ERROR, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_ERROR, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         final String key = (String) evt.getNewValue();
                         Dialogs.showErrorMessage(getCards().getRootPane(),
                                 Strings.getString(key + ".title"), Strings.getString(key + ".text"));
@@ -161,24 +187,29 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
                 });
                 // Change page to display
                 // Switch menubar and statusbar
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_CURRENTCARD, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_CURRENTCARD, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         getCards().showCard(evt.getNewValue().toString());
                         final JFrame frame = (JFrame) getCards().getTopLevelAncestor();
-                        if (evt.getNewValue() == AbstractMainModel.CARDS_WELCOME) {
+                        if (evt.getNewValue() == AbstractMainModel.CARDS_WELCOME)
+                        {
                             frame.setJMenuBar(null);
                             main.remove(getStatusBar());
-                            getCards().showCard(AbstractMainModel.CARDS_WELCOME.toString());
+                            getCards().showCard(AbstractMainModel.CARDS_WELCOME);
                             String title = removeChunk(frame.getTitle(), TITLE_DIRTYMARKER);
                             title = removeChunk(title, model.getCurrentFile().toString());
                             title = removeChunk(title, TITLE_SEPARATOR);
                             frame.setTitle(title);
                         }
-                        else {
+                        else
+                        {
                             frame.setJMenuBar(getMenuBar());
                             main.add(getStatusBar(), BorderLayout.SOUTH);
                             getCards().showCard(evt.getNewValue().toString());
-                            if (evt.getOldValue() == AbstractMainModel.CARDS_WELCOME) {
+                            if (evt.getOldValue() == AbstractMainModel.CARDS_WELCOME)
+                            {
                                 String title = frame.getTitle();
                                 title = removeChunk(title, TITLE_DIRTYMARKER);
                                 title += (model.isDirty() ? TITLE_DIRTYMARKER : "");
@@ -188,40 +219,50 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
                     }
                 });
                 // Enable dependent commands upon end of model load.
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_MODELLOADED, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
-                        for (int i = 0; i < modelLoadedCommands.length; i++) {
-                            final String command = modelLoadedCommands[i];
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_MODELLOADED, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
+                        for (final String command : modelLoadedCommands)
+                        {
                             getCommandManager().getCommand(command).setEnabled(true);
                         }
                     }
                 });
                 // Ajust title.
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_DIRTY, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
-                        final boolean dirty = ((Boolean) evt.getNewValue()).booleanValue();
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_DIRTY, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
+                        final boolean dirty = (Boolean) evt.getNewValue();
                         // Display asterisk in frame title
                         final Component c = SwingUtilities.getRoot(getCards());
-                        if (c instanceof Frame) {
+                        if (c instanceof Frame)
+                        {
                             final Frame top = (Frame) c;
                             final String title = top.getTitle();
-                            if (dirty) {
+                            if (dirty)
+                            {
                                 top.setTitle(title + TITLE_DIRTYMARKER);
                             }
-                            else {
+                            else
+                            {
                                 top.setTitle(title.substring(0, title.length() - TITLE_DIRTYMARKER.length()));
                             }
                         }
                     }
                 });
                 // Ajust title.
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_CURRENTFILE, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_CURRENTFILE, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         final String oldFileName = ((File) evt.getOldValue()).toString();
                         final File file = (File) evt.getNewValue();
                         final String newValue = file == null ? model.getCurrentFile().toString() : file.toString();
                         final Component c = SwingUtilities.getRoot(getCards());
-                        if (c instanceof Frame) {
+                        if (c instanceof Frame)
+                        {
                             final Frame top = (Frame) c;
                             String title = top.getTitle();
                             title = removeChunk(title, TITLE_DIRTYMARKER);
@@ -232,23 +273,29 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
                     }
                 });
                 // Make sure an exit handler is installed that redirects to the quit command
-                getCards().addAncestorListener(new AncestorListener() {
+                getCards().addAncestorListener(new AncestorListener()
+                {
 
-                    public void ancestorAdded(final AncestorEvent event) {
+                    public void ancestorAdded(final AncestorEvent event)
+                    {
                     }
 
-                    public void ancestorMoved(final AncestorEvent event) {
+                    public void ancestorMoved(final AncestorEvent event)
+                    {
                         final ActionCommand quit = getCommandManager().getCommand(CommonCommands.COMMANDID_QUIT);
                         final Component c = SwingUtilities.getRoot(getCards());
-                        if (c instanceof Frame) {
+                        if (c instanceof Frame)
+                        {
                             final Frame top = (Frame) c;
                             final WindowListener[] listeners = top.getWindowListeners();
-                            for (int i = 0; i < listeners.length; i++) {
-                                final WindowListener listener = listeners[i];
+                            for (final WindowListener listener : listeners)
+                            {
                                 top.removeWindowListener(listener);
                             }
-                            top.addWindowListener(new WindowAdapter() {
-                                public void windowClosing(final WindowEvent e) {
+                            top.addWindowListener(new WindowAdapter()
+                            {
+                                public void windowClosing(final WindowEvent e)
+                                {
                                     quit.execute();
                                 }
                             });
@@ -256,37 +303,45 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder {
                         getCards().removeAncestorListener(this);
                     }
 
-                    public void ancestorRemoved(final AncestorEvent event) {
+                    public void ancestorRemoved(final AncestorEvent event)
+                    {
                     }
                 });
             }
         });
     }
 
-    private String removeChunk(final String title, final String chunk) {
-        if (title.endsWith(chunk)) {
+    private String removeChunk(final String title, final String chunk)
+    {
+        if (title.endsWith(chunk))
+        {
             return title.substring(0, title.length() - chunk.length());
         }
         return title;
     }
 
-    public InfoModel getInfoModel() {
+    public InfoModel getInfoModel()
+    {
         return infoModel;
     }
 
-    public CardPanel getCards() {
+    public CardPanel getCards()
+    {
         return cards;
     }
 
-    public StatusBar getStatusBar() {
+    public StatusBar getStatusBar()
+    {
         return statusBar;
     }
 
-    public void setModel(final AbstractMainModel model) {
+    public void setModel(final AbstractMainModel model)
+    {
         this.model = model;
     }
 
-    public String[] getCommandMembers(final String groupId) {
+    public String[] getCommandMembers(final String groupId)
+    {
 //        final MemberList groupMembers = getCommandManager().getGroup(groupId).getCount();
 //        for (int i = 0; i < count; i++) {
 //        }

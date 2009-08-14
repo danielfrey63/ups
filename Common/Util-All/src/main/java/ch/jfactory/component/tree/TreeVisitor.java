@@ -6,7 +6,8 @@ package ch.jfactory.component.tree;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public interface TreeVisitor {
+public interface TreeVisitor
+{
 
     Object handle(Object object);
 

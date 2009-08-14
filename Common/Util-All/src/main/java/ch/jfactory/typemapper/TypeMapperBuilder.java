@@ -22,8 +22,8 @@ import ch.jfactory.binding.ResourcePathToIconConverter;
 import ch.jfactory.command.CommitPresentationModel;
 import ch.jfactory.command.CommonCommands;
 import ch.jfactory.command.ResetPresentationModel;
-import ch.jfactory.image.BlankIcon;
 import ch.jfactory.component.list.AlternateListCellRenderer;
+import ch.jfactory.image.BlankIcon;
 import ch.jfactory.resource.Strings;
 import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.binding.adapter.Bindings;
@@ -59,14 +59,19 @@ import net.infonode.docking.util.ViewMap;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/06 10:16:23 $
  */
-public class TypeMapperBuilder extends ActionCommandPanelBuilder {
+public class TypeMapperBuilder extends ActionCommandPanelBuilder
+{
 
     private TypeModel model;
+
     private final JList list = new JList();
 
-    public static void main(final String[] args) {
-        Strings.setResourceBundle(new ListResourceBundle() {
-            protected Object[][] getContents() {
+    public static void main(final String[] args)
+    {
+        Strings.setResourceBundle(new ListResourceBundle()
+        {
+            protected Object[][] getContents()
+            {
                 return new String[][]{
                         {"BUTTON.OK.TEXT", "OK"},
                         {"BUTTON.CANCEL.TEXT", "Abbrechen"},
@@ -86,11 +91,13 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
         frame.setVisible(true);
     }
 
-    public TypeMapperBuilder(final TypeModel model) {
+    public TypeMapperBuilder(final TypeModel model)
+    {
         this.model = model;
     }
 
-    protected void initCommands() {
+    protected void initCommands()
+    {
         // LIST
         initCommand(new AddType(getCommandManager(), model), true);
         initCommand(new DeleteType(getCommandManager(), model));
@@ -100,37 +107,47 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
         initCommand(new IconsAction(getCommandManager(), model.getEditorModel()));
     }
 
-    protected JComponent createMainPanel() {
+    protected JComponent createMainPanel()
+    {
         final ViewMap views = new ViewMap();
         views.addView(1, new View("Editor", null, createEditor()));
         return DockingWindowsUtils.createParentChildDisplay(createList(), views);
     }
 
-    protected void initModelListeners() {
+    protected void initModelListeners()
+    {
         // LIST
-        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 final Object selectedItem = evt.getNewValue();
                 model.getEditorModel().setBean(selectedItem);
             }
         });
-        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION_EMPTY, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final boolean isEmpty = ((Boolean) evt.getNewValue()).booleanValue();
+        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION_EMPTY, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
+                final boolean isEmpty = (Boolean) evt.getNewValue();
                 getCommandManager().getCommand(Commands.COMMANDID_DELETE).setEnabled(!isEmpty);
                 getCommandManager().getCommand(Commands.COMMANDID_EDITICONS).setEnabled(!isEmpty);
             }
         });
-        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 list.repaint();
             }
         });
 
         // EDITOR
-        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final boolean isBuffering = ((Boolean) evt.getNewValue()).booleanValue();
+        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
+                final boolean isBuffering = (Boolean) evt.getNewValue();
                 getCommandManager().getCommand(CommonCommands.COMMANDID_TRIGGERAPPLY).setEnabled(isBuffering);
                 getCommandManager().getCommand(CommonCommands.COMMANDID_TRIGGERRESET).setEnabled(isBuffering);
             }
@@ -139,13 +156,16 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
 
     // LIST
 
-    private JComponent createList() {
+    private JComponent createList()
+    {
         list.setModel(model.getSelectionInList());
         Bindings.bind(list, model.getSelectionInList());
-        list.setCellRenderer(new AlternateListCellRenderer() {
+        list.setCellRenderer(new AlternateListCellRenderer()
+        {
             private final Icon BLANK_ICON = new BlankIcon(new Color(0, 0, 0, 0), 16);
 
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+            {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 final TypeMapping mapping = (TypeMapping) value;
                 setIcon(getIcon(mapping));
@@ -153,12 +173,15 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
                 return this;
             }
 
-            private Icon getIcon(final TypeMapping mapping) {
+            private Icon getIcon(final TypeMapping mapping)
+            {
                 Icon icon = null;
-                try {
+                try
+                {
                     icon = new ImageIcon(TypeMapperBuilder.class.getResource(mapping.getIcon()));
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     icon = BLANK_ICON;
                 }
                 return icon;
@@ -172,14 +195,16 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
 
     // EDITOR
 
-    private JComponent createEditor() {
+    private JComponent createEditor()
+    {
         final JPanel panel = new JPanel(new BorderLayout());
         panel.add(createEditorPanel(), BorderLayout.CENTER);
         panel.add(getCommandManager().getGroup(Commands.GROUPID_EDITTOOLBAR).createToolBar("toolbar"), BorderLayout.NORTH);
         return panel;
     }
 
-    private JComponent createEditorPanel() {
+    private JComponent createEditorPanel()
+    {
         final FormLayout layout = new FormLayout("8dlu, r:p, 4dlu, p:g(1.0), 4dlu, p, 8dlu", "8dlu, p, 8dlu, p, 8dlu");
         final JPanel panel = new JPanel(layout);
         final CellConstraints cc = new CellConstraints();
@@ -191,13 +216,15 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder {
         return panel;
     }
 
-    private static JTextField createAndBindTextField(final PresentationModel model, final String property) {
+    private static JTextField createAndBindTextField(final PresentationModel model, final String property)
+    {
         final JTextField field = new JTextField();
         Bindings.bind(field, model.getBufferedModel(property));
         return field;
     }
 
-    private static JLabel createAndBindLabel(final PresentationModel model, final String property) {
+    private static JLabel createAndBindLabel(final PresentationModel model, final String property)
+    {
         final JLabel label = new JLabel();
         final BufferedValueModel bufferedModel = model.getBufferedModel(property);
         final ResourcePathToIconConverter converter = new ResourcePathToIconConverter(bufferedModel);

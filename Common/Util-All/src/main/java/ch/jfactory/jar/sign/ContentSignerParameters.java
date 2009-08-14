@@ -12,12 +12,13 @@ import java.util.zip.ZipFile;
 /**
  * This interface encapsulates the parameters for a ContentSigner object.
  *
- * @since 1.5
- * @version 1.2, 12/19/03
  * @author Vincent Ryan
+ * @version 1.2, 12/19/03
+ * @since 1.5
  */
 
-public interface ContentSignerParameters {
+public interface ContentSignerParameters
+{
 
     /**
      * Retrieves the command-line arguments passed to the jarsigner tool.
@@ -62,8 +63,7 @@ public interface ContentSignerParameters {
     public X509Certificate[] getSignerCertificateChain();
 
     /**
-     * Retrieves the content that was signed.
-     * The content is the JAR file's signature file.
+     * Retrieves the content that was signed. The content is the JAR file's signature file.
      *
      * @return The content bytes. May be null.
      */

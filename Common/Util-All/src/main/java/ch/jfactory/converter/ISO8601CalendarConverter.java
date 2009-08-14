@@ -19,38 +19,46 @@ import org.joda.time.format.ISODateTimeFormat;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/15 23:03:21 $
  */
-public class ISO8601CalendarConverter extends AbstractSingleValueConverter {
+public class ISO8601CalendarConverter extends AbstractSingleValueConverter
+{
 
     private DateTimeFormatter[] formatters;
 
-    public ISO8601CalendarConverter() {
+    public ISO8601CalendarConverter()
+    {
         this.formatters = createISOFormatters();
     }
 
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type)
+    {
         return type.equals(GregorianCalendar.class);
     }
 
-    public Object fromString(final String str) {
-        for (int i = 0; i < formatters.length; i++) {
-            final DateTimeFormatter formatter = formatters[i];
-            try {
+    public Object fromString(final String str)
+    {
+        for (final DateTimeFormatter formatter : formatters)
+        {
+            try
+            {
                 final DateTime dt = formatter.parseDateTime(str);
                 return dt.toCalendar(Locale.getDefault());
             }
-            catch (IllegalArgumentException e) {
+            catch (IllegalArgumentException e)
+            {
                 // try with next formatter
             }
         }
         throw new ConversionException("Cannot parse date " + str);
     }
 
-    public String toString(final Object obj) {
+    public String toString(final Object obj)
+    {
         final DateTime dt = new DateTime(obj);
         return dt.toString();
     }
 
-    private DateTimeFormatter[] createISOFormatters() {
+    private DateTimeFormatter[] createISOFormatters()
+    {
         final List<DateTimeFormatter> isoFormatters = new ArrayList<DateTimeFormatter>();
         isoFormatters.add(ISODateTimeFormat.dateTime());
         isoFormatters.add(ISODateTimeFormat.dateTimeParser());

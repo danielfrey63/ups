@@ -9,8 +9,8 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface MutableTreeModel extends TreeModel {
-
+public interface MutableTreeModel extends TreeModel
+{
 
     /**
      * An implementation of this method removes the last object of the given path from the last object of the parent

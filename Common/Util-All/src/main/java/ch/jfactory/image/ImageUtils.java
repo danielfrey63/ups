@@ -56,48 +56,59 @@ import org.apache.commons.lang.StringUtils;
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2008/01/06 10:16:23 $
  */
-public class ImageUtils {
+public class ImageUtils
+{
 
     private static final boolean DEBUG = false;
 
-    public static BufferedImage createBufferedImage(final Image image) {
+    public static BufferedImage createBufferedImage(final Image image)
+    {
         final BufferedImage result = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         result.getGraphics().drawImage(image, 0, 0, null);
         return result;
     }
 
-    public static BufferedImage createNormalizedImage(final BufferedImage image) throws ImageException {
+    public static BufferedImage createNormalizedImage(final BufferedImage image) throws ImageException
+    {
         final int w = image.getWidth(null);
         final int[] pixels = getPixels(image);
         final double d = (double) getDarkestGray(pixels);
         final double f = 255d;
         final double factor = (f - d) / f;
         final int[] normalizedPixels = new int[pixels.length];
-        for (int i = 0; i < pixels.length; i++) {
+        for (int i = 0; i < pixels.length; i++)
+        {
             final int pixel = pixels[i];
             final Color color = new Color(pixel, true);
             final double g = (double) color.getRed();
-            if (color.getAlpha() > 0) {
+            if (color.getAlpha() > 0)
+            {
                 final int newGray = (int) Math.round((g - d) / factor);
                 normalizedPixels[i] = new Color(newGray, newGray, newGray, color.getAlpha()).getRGB();
-            } else {
+            }
+            else
+            {
                 normalizedPixels[i] = color.getRGB();
             }
         }
         final BufferedImage newImage = createImageFromBuffer(normalizedPixels, w);
-        if (DEBUG) {
+        if (DEBUG)
+        {
             System.out.println("Normalized:");
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             printImagePixels(newImage);
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             debugIcon(newImage, "Normalized:");
         }
         return newImage;
     }
 
-    public static BufferedImage createImageFromBuffer(final int[] buffer, final int w) {
+    public static BufferedImage createImageFromBuffer(final int[] buffer, final int w)
+    {
         final int h = buffer.length / w;
         final Image intermediate = Toolkit.getDefaultToolkit().createImage(new MemoryImageSource(w, h, buffer, 0, w));
         final BufferedImage result = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -105,49 +116,62 @@ public class ImageUtils {
         return result;
     }
 
-    public static BufferedImage createGrayscaleImage(final Image image) throws ImageException {
+    public static BufferedImage createGrayscaleImage(final Image image) throws ImageException
+    {
         final int[] pixels = getPixels(image);
         System.out.println(pixels[0]);
-        for (int i = 0; i < pixels.length; i++) {
+        for (int i = 0; i < pixels.length; i++)
+        {
             final int pixel = pixels[i];
             pixels[i] = ColorUtils.getGray(pixel);
         }
         final BufferedImage newImage = createImageFromBuffer(pixels, image.getWidth(null));
-        if (DEBUG) {
+        if (DEBUG)
+        {
             System.out.println("Grayscale:");
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             printImagePixels(newImage);
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             debugIcon(newImage, "Grayscale:");
         }
         return newImage;
     }
 
-    public static BufferedImage createColorizedImage(final Color color, final int width, final int height) {
+    public static BufferedImage createColorizedImage(final Color color, final int width, final int height)
+    {
         final int[] buffer = new int[width * height];
-        for (int i = 0; i < buffer.length; i++) {
+        for (int i = 0; i < buffer.length; i++)
+        {
             buffer[i] = 0xFFFFFF;
         }
         final BufferedImage image = createImageFromBuffer(buffer, width);
         final BufferedImage result = createColorizedImage(image, color);
-        if (DEBUG) {
+        if (DEBUG)
+        {
             System.out.println("Original:");
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             printImagePixels(image);
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             debugIcon(image, "Original:");
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             System.out.println("Colorized:");
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             printImagePixels(result);
         }
-        if (DEBUG) {
+        if (DEBUG)
+        {
             debugIcon(result, "Colorized:");
         }
         return result;
@@ -162,49 +186,62 @@ public class ImageUtils {
      * @param factor the scaling factor
      * @return a colorized resized BufferedImage
      */
-    public static BufferedImage createColorizedImage(final Image image, final Color color, final float factor) {
+    public static BufferedImage createColorizedImage(final Image image, final Color color, final float factor)
+    {
         final int width = image.getWidth(null);
         final int height = image.getHeight(null);
         final Image resized = image.getScaledInstance((int) (width * factor), (int) (height * factor), Image.SCALE_SMOOTH);
-        try {
+        try
+        {
             waitImage(resized);
         }
-        catch (ImageException e) {
+        catch (ImageException e)
+        {
             e.printStackTrace();
         }
         return createColorizedImage(resized, color);
     }
 
-    public static BufferedImage createColorizedImage(final Image image, final Color color) {
-        try {
+    public static BufferedImage createColorizedImage(final Image image, final Color color)
+    {
+        try
+        {
             final int[] buffer = getPixels(image);
             final int[] colorized = createColorizedBuffer(buffer, color);
             final BufferedImage result = createImageFromBuffer(colorized, image.getWidth(null));
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 System.out.println("Colorized:");
             }
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 printImagePixels(result);
             }
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 debugIcon(result, "Colorized:");
             }
             return result;
         }
-        catch (ImageException e) {
+        catch (ImageException e)
+        {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static void printImagePixels(final Image image) {
-        try {
+    public static void printImagePixels(final Image image)
+    {
+        try
+        {
             final StringBuffer b = new StringBuffer();
             final int[] pixels = getPixels(image);
             final int w = image.getWidth(null);
-            for (int i = 0; i < w; i++) {
+            for (int i = 0; i < w; i++)
+            {
                 final int h = image.getHeight(null);
-                for (int j = 0; j < h; j++) {
+                for (int j = 0; j < h; j++)
+                {
                     final int pixel = pixels[w * i + j];
                     b.append(StringUtils.leftPad("" + net.infonode.util.ImageUtils.getRed(pixel), 3));
                     b.append(" ");
@@ -214,7 +251,8 @@ public class ImageUtils {
                     b.append(" ");
                     b.append(StringUtils.leftPad("" + net.infonode.util.ImageUtils.getAlpha(pixel), 3));
                     b.append(" ");
-                    if (j < h - 1) {
+                    if (j < h - 1)
+                    {
                         b.append("| ");
                     }
                 }
@@ -222,18 +260,21 @@ public class ImageUtils {
             }
             System.out.println(b.toString());
         }
-        catch (ImageException e) {
+        catch (ImageException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static int getDarkestGray(final int[] pixels) {
+    public static int getDarkestGray(final int[] pixels)
+    {
         int darkest = 256;
-        for (int i = 0; i < pixels.length; i++) {
-            final int pixel = pixels[i];
+        for (final int pixel : pixels)
+        {
             final Color color = new Color(pixel, true);
             final int red = color.getRed();
-            if (color.getAlpha() > 0 && red < darkest) {
+            if (color.getAlpha() > 0 && red < darkest)
+            {
                 darkest = red;
             }
         }
@@ -248,12 +289,15 @@ public class ImageUtils {
      * @param color  the replacment color
      * @return a new buffer
      */
-    public static int[] createColorizedBuffer(final int[] pixels, final Color color) {
+    public static int[] createColorizedBuffer(final int[] pixels, final Color color)
+    {
         final int[] result = new int[pixels.length];
-        if (DEBUG) {
+        if (DEBUG)
+        {
             printImagePixels(createImageFromBuffer(pixels, 16));
         }
-        for (int i = 0; i < pixels.length; i++) {
+        for (int i = 0; i < pixels.length; i++)
+        {
             final Color pColor = new Color(pixels[i], true);
             final float[] pHSB = Color.RGBtoHSB(pColor.getRed(), pColor.getGreen(), pColor.getBlue(), null);
             final float[] nHSB = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
@@ -264,13 +308,16 @@ public class ImageUtils {
         return result;
     }
 
-    private static void debugIcon(final BufferedImage image, final String message) {
-        try {
+    private static void debugIcon(final BufferedImage image, final String message)
+    {
+        try
+        {
             final File file = File.createTempFile("image", ".png");
             ImageIO.write(image, "png", file);
             System.out.println(message + file);
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -282,48 +329,65 @@ public class ImageUtils {
      * @return the image laoded
      * @throws java.io.IOException if a reading error occures
      */
-    public static Image createImage(final String path) throws IOException {
+    public static Image createImage(final String path) throws IOException
+    {
         final URL url = ImageUtils.class.getResource(path);
         Image image = null;
-        try {
-            if (url != null) {
+        try
+        {
+            if (url != null)
+            {
                 image = create(url);
-            } else if (new File(path).exists()) {
+            }
+            else if (new File(path).exists())
+            {
                 image = create(path);
-            } else {
+            }
+            else
+            {
                 final URL url2 = new URL(path);
                 image = create(url2);
             }
         }
-        catch (ImageException e) {
+        catch (ImageException e)
+        {
             e.printStackTrace();
         }
         return image;
     }
 
-    public static BufferedImage createThumbnail(final String path, final int w, final int h) throws IOException {
+    public static BufferedImage createThumbnail(final String path, final int w, final int h) throws IOException
+    {
         final URL url1 = ImageUtils.class.getResource(path);
         BufferedImage image = null;
-        if (url1 != null) {
+        if (url1 != null)
+        {
             image = createThumbnail(url1, w, h);
-        } else if (new File(path).exists()) {
+        }
+        else if (new File(path).exists())
+        {
             image = createThumbnail(new File(path), w, h);
-        } else {
+        }
+        else
+        {
             final URL url2 = new URL(path);
             image = createThumbnail(url2, w, h);
         }
         return image;
     }
 
-    public static BufferedImage createThumbnail(final URL url, final int w, final int h) throws IOException {
+    public static BufferedImage createThumbnail(final URL url, final int w, final int h) throws IOException
+    {
         return createThumbnail(url.openStream(), w, h);
     }
 
-    public static BufferedImage createThumbnail(final File file, final int w, final int h) throws IOException {
+    public static BufferedImage createThumbnail(final File file, final int w, final int h) throws IOException
+    {
         return createThumbnail(new FileImageInputStream(file), w, h);
     }
 
-    public static BufferedImage createThumbnail(final InputStream is, final int w, final int h) throws IOException {
+    public static BufferedImage createThumbnail(final InputStream is, final int w, final int h) throws IOException
+    {
         final File tempDir = new File(System.getProperty("java.io.tmpdir"));
         return createThumbnail(new FileCacheImageInputStream(is, tempDir), w, h);
     }
@@ -337,19 +401,26 @@ public class ImageUtils {
      * @return a buffered image
      * @throws IOException if an error occured during reading
      */
-    public static BufferedImage createThumbnail(final ImageInputStream is, final int w, final int h) throws IOException {
+    public static BufferedImage createThumbnail(final ImageInputStream is, final int w, final int h) throws IOException
+    {
         final Iterator<ImageReader> readers = ImageIO.getImageReaders(is);
         final ImageReader reader = readers.next();
         reader.setInput(is, true, true);
         final BufferedImage image;
-        if (reader.hasThumbnails(0)) {
+        if (reader.hasThumbnails(0))
+        {
             image = reader.readThumbnail(0, 0);
-        } else {
+        }
+        else
+        {
             final float sumpling;
             final float THUMBNAIL_SIZE = 64;
-            if (w > h) {
+            if (w > h)
+            {
                 sumpling = Math.max(1, w / THUMBNAIL_SIZE);
-            } else {
+            }
+            else
+            {
                 sumpling = Math.max(1, h / THUMBNAIL_SIZE);
             }
 
@@ -368,13 +439,14 @@ public class ImageUtils {
      * @param images the images to paint together
      * @return one new image including all images
      */
-    public static BufferedImage getGhostImage(final BufferedImage[] images) {
+    public static BufferedImage getGhostImage(final BufferedImage[] images)
+    {
 
         // Find broades component and total height
         double height = 0;
         double width = 0;
-        for (int i = 0; i < images.length; i++) {
-            final BufferedImage image = images[i];
+        for (final BufferedImage image : images)
+        {
             height += image.getHeight();
             width = Math.max(width, image.getWidth());
         }
@@ -384,8 +456,8 @@ public class ImageUtils {
         final Graphics2D g2 = ghost.createGraphics();
 
         int y = 0;
-        for (int i = 0; i < images.length; i++) {
-            final BufferedImage image = images[i];
+        for (final BufferedImage image : images)
+        {
             g2.drawImage(image, null, 0, y);
             y += image.getHeight();
         }
@@ -401,7 +473,8 @@ public class ImageUtils {
      * @param comp the component to derive the image from
      * @return a buffered ghost like image of the component
      */
-    public static BufferedImage getGhostImage(final JComponent comp) {
+    public static BufferedImage getGhostImage(final JComponent comp)
+    {
         // The layout manager would normally do this
         comp.setOpaque(false);
         final Color transparent = new Color(0, 0, 0, 255);
@@ -422,11 +495,14 @@ public class ImageUtils {
         // Now paint a gradient UNDER the ghosted JLabel text (but not under the icon if any). Note: this will need
         // tweaking if your icon is not positioned to the left of the text
         final int nStartOfText;
-        if (comp instanceof JLabel) {
+        if (comp instanceof JLabel)
+        {
             final JLabel label = (JLabel) comp;
             final Icon icon = label.getIcon();
             nStartOfText = (icon == null) ? 0 : icon.getIconWidth() + label.getIconTextGap();
-        } else {
+        }
+        else
+        {
             nStartOfText = 0;
         }
         // Make the gradient ghostlike
@@ -439,7 +515,8 @@ public class ImageUtils {
         return ghost;
     }
 
-    public static BufferedImage getBufferedImage(final Image image) {
+    public static BufferedImage getBufferedImage(final Image image)
+    {
 
         final BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         final Graphics g = bi.getGraphics();
@@ -449,7 +526,8 @@ public class ImageUtils {
         return bi;
     }
 
-    public static BufferedImage createHeadlessSmoothBufferedImage(final BufferedImage source, final int width, final int height) {
+    public static BufferedImage createHeadlessSmoothBufferedImage(final BufferedImage source, final int width, final int height)
+    {
 
         final int type = BufferedImage.TYPE_INT_RGB;
         final BufferedImage dest = new BufferedImage(width, height, type);
@@ -470,11 +548,13 @@ public class ImageUtils {
         int rgb1;
         int rgb2;
 
-        for (int y = 0; y < height; y++) {
+        for (int y = 0; y < height; y++)
+        {
             sourcey = y * source.getHeight() / dest.getHeight();
             ydiff = (y / scaley) - sourcey;
 
-            for (int x = 0; x < width; x++) {
+            for (int x = 0; x < width; x++)
+            {
                 sourcex = x * source.getWidth() / dest.getWidth();
                 xdiff = (x / scalex) - sourcex;
 
@@ -493,7 +573,8 @@ public class ImageUtils {
         return dest;
     }
 
-    private static int getRGBInterpolation(final int value1, final int value2, final double distance) {
+    private static int getRGBInterpolation(final int value1, final int value2, final double distance)
+    {
         final int alpha1 = (value1 & 0xFF000000) >>> 24;
         final int red1 = (value1 & 0x00FF0000) >> 16;
         final int green1 = (value1 & 0x0000FF00) >> 8;
@@ -511,61 +592,76 @@ public class ImageUtils {
     }
 
     // From InfoNode ImageUtils
-    public static Image create(final URL url) throws ImageException {
+    public static Image create(final URL url) throws ImageException
+    {
         final Image image = Toolkit.getDefaultToolkit().createImage(url);
         waitImage(image);
         return image;
     }
 
-    public static Image create(final String filename) throws ImageException {
+    public static Image create(final String filename) throws ImageException
+    {
         final Image image = Toolkit.getDefaultToolkit().createImage(filename);
         waitImage(image);
         return image;
     }
 
-    public static void waitImage(final Image image) throws ImageException {
+    public static void waitImage(final Image image) throws ImageException
+    {
         final MediaTracker tracker = new MediaTracker(new Canvas());
         tracker.addImage(image, 1);
 
-        try {
+        try
+        {
             tracker.waitForID(1);
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException e)
+        {
         }
     }
 
-    static class ImageException extends Exception {
+    static class ImageException extends Exception
+    {
 
-        public ImageException() {
+        public ImageException()
+        {
         }
 
-        public ImageException(final String message) {
+        public ImageException(final String message)
+        {
             super(message);
         }
 
-        public ImageException(final String message, final Throwable cause) {
+        public ImageException(final String message, final Throwable cause)
+        {
             super(message, cause);
         }
 
-        public ImageException(final Throwable cause) {
+        public ImageException(final Throwable cause)
+        {
             super(cause);
         }
     }
 
-    public static int[] getPixels(final Image image) throws ImageException {
+    public static int[] getPixels(final Image image) throws ImageException
+    {
         return getPixels(image, 0, 0, image.getWidth(null), image.getHeight(null));
     }
 
-    public static int[] getPixels(final Image image, final int x, final int y, final int width, final int height) throws ImageException {
+    public static int[] getPixels(final Image image, final int x, final int y, final int width, final int height) throws ImageException
+    {
         final int[] pixels = new int[width * height];
         final PixelGrabber pg = new PixelGrabber(image, x, y, width, height, pixels, 0, width);
-        try {
+        try
+        {
             pg.grabPixels();
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException e)
+        {
         }
 
-        if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
+        if ((pg.getStatus() & ImageObserver.ABORT) != 0)
+        {
             throw new ImageException("Image fetch aborted or errored");
         }
 
@@ -585,40 +681,48 @@ public class ImageUtils {
      *                      than the usual one-step technique (only useful in downscaling cases, where {@code
      *                      targetWidth} or {@code targetHeight} is smaller than the original dimensions, and generally
      *                      only when the {@code BILINEAR} hint is specified)
-     * @return a scaled version of the original {@code BufferedImage}
-     * <p/><p/>
-     * Origin: Chris Campbell http://today.java.net/pub/a/today/2007/04/03/perils-of-image-getscaledinstance.html
+     * @return a scaled version of the original {@code BufferedImage} <p/><p/> Origin: Chris Campbell
+     *         http://today.java.net/pub/a/today/2007/04/03/perils-of-image-getscaledinstance.html
      */
     public BufferedImage getScaledInstance(final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint,
-                                           final boolean higherQuality) {
+                                           final boolean higherQuality)
+    {
         final int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB :
                 BufferedImage.TYPE_INT_ARGB;
         BufferedImage ret = (BufferedImage) img;
         int w, h;
-        if (higherQuality) {
+        if (higherQuality)
+        {
             // Use multi-step technique: start with original size, then
             // scale down in multiple passes with drawImage()
             // until the target size is reached
             w = img.getWidth();
             h = img.getHeight();
-        } else {
+        }
+        else
+        {
             // Use one-step technique: scale directly from original
             // size to target size with a single drawImage() call
             w = targetWidth;
             h = targetHeight;
         }
 
-        do {
-            if (higherQuality && w > targetWidth) {
+        do
+        {
+            if (higherQuality && w > targetWidth)
+            {
                 w /= 2;
-                if (w < targetWidth) {
+                if (w < targetWidth)
+                {
                     w = targetWidth;
                 }
             }
 
-            if (higherQuality && h > targetHeight) {
+            if (higherQuality && h > targetHeight)
+            {
                 h /= 2;
-                if (h < targetHeight) {
+                if (h < targetHeight)
+                {
                     h = targetHeight;
                 }
             }
@@ -630,7 +734,8 @@ public class ImageUtils {
             g2.dispose();
 
             ret = tmp;
-        } while (w != targetWidth || h != targetHeight);
+        }
+        while (w != targetWidth || h != targetHeight);
 
         return ret;
     }

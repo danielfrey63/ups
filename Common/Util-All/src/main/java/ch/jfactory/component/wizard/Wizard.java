@@ -13,13 +13,12 @@ import javax.swing.JFrame;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:56 $
  */
-public class Wizard {
+public class Wizard
+{
     /** logging category for class */
 //    private static final Category CAT = Category.getInstance(Wizard.class);
 
-    /**
-     * the model of the wizard
-     */
+    /** the model of the wizard */
     private WizardModel model;
 
     /**
@@ -27,7 +26,8 @@ public class Wizard {
      *
      * @param panes an array of WizardPane's
      */
-    public Wizard(final WizardPane[] panes) {
+    public Wizard(final WizardPane[] panes)
+    {
         model = new DefaultWizardModel(new Properties(), panes, "UnspecifiedModel");
     }
 
@@ -36,7 +36,8 @@ public class Wizard {
      *
      * @param model the WizardModel
      */
-    public Wizard(final WizardModel model) {
+    public Wizard(final WizardModel model)
+    {
         this.model = model;
     }
 
@@ -46,7 +47,8 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(final JFrame parent) {
+    public boolean show(final JFrame parent)
+    {
         final String title = model.getDialogTitle();
         final WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
         return doShow(dlg, parent);
@@ -58,13 +60,15 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(final JDialog parent) {
+    public boolean show(final JDialog parent)
+    {
         final String title = model.getDialogTitle();
         final WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
         return doShow(dlg, parent);
     }
 
-    private boolean doShow(final WizardDialogUI dlg, final Component parent) {
+    private boolean doShow(final WizardDialogUI dlg, final Component parent)
+    {
         dlg.setModel(model);
         WindowUtils.centerOnComponent(dlg, parent);
         dlg.setVisible(true);

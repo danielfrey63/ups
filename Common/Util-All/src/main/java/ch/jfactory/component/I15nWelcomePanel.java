@@ -79,35 +79,55 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.8 $ $Date: 2008/01/06 10:16:23 $
  */
-public class I15nWelcomePanel extends GradientBackgroundPanel {
+public class I15nWelcomePanel extends GradientBackgroundPanel
+{
 
     public static final String SEPARATOR = "-";
 
-    private static final Category LOGGER = Logger.getInstance(I15nWelcomePanel.class);
+    private static final Logger LOGGER = Logger.getLogger(I15nWelcomePanel.class);
+
     private static final boolean DEBUG = LOGGER.isDebugEnabled();
+
     private static final int BORDER_HEIGHT = 80;
 
     private String resourceKey;
+
     private String infoString = "Starting...";
+
     private Color infoColor = new Color(0, 127, 0);
+
     private Font infoFont;
+
     private Rectangle infoRect;
+
     private Timer timer;
+
     private long lastTime;
+
     private int infoY;
 
     private Image backgroundImage;
+
     private Image upperRightLogo;
+
     private Image lowerRightLogo;
+
     private Image lowerLeftLogo;
+
     private CommandManager commandManager;
+
     private JPanel panel;
+
     private Map<RenderingHints.Key, Object> hints;
+
     private InfoModel infoModel = new DefaultInfoModel();
 
     private final PropertyChangeListener noteListener;
+
     private static final String KEYSUFFIX_WELCOME_TITLECOLOR = ".title.color";
+
     private static final String KEYSUFFIX_WELCOME_TITLETEXT = ".title.text";
+
     public static final String TEXT = "+";
 
     /**
@@ -118,20 +138,23 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
      * @param commandManager if the commands are based on {@link org.pietschy.command.ActionCommand} implementations.
      *                       Otherwise {@link com.jgoodies.uif.action.ActionManager} is used.
      */
-    public I15nWelcomePanel(final String resourceKey, final String[] actionKeys, final CommandManager commandManager) {
+    public I15nWelcomePanel(final String resourceKey, final String[] actionKeys, final CommandManager commandManager)
+    {
         super(false);
 
         this.commandManager = commandManager;
         this.resourceKey = resourceKey;
 
-        try {
+        try
+        {
             backgroundImage = getImage(".image");
             upperRightLogo = getImage(".upper.logo");
             lowerRightLogo = getImage(".lower.right.logo");
             lowerLeftLogo = getImage(".lower.left.logo");
 
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
@@ -141,11 +164,14 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
 
         initLayout(actionKeys);
 
-        noteListener = new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+        noteListener = new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 final Note note = (Note) evt.getNewValue();
                 infoString = note.getMessage();
-                if (note.getColor() != null) {
+                if (note.getColor() != null)
+                {
                     infoColor = note.getColor();
                 }
                 initInfoStringRect();
@@ -177,11 +203,13 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
      * @param resourceKey the base resourceKey for looking up the strings
      * @param actionKeys  the actions to put into the panel
      */
-    public I15nWelcomePanel(final String resourceKey, final String[] actionKeys) {
+    public I15nWelcomePanel(final String resourceKey, final String[] actionKeys)
+    {
         this(resourceKey, actionKeys, null);
     }
 
-    protected void paintComponent(final Graphics g) {
+    protected void paintComponent(final Graphics g)
+    {
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHints(hints);
@@ -194,8 +222,10 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         paintInfoString(g2);
     }
 
-    public void setInfoModel(final InfoModel infoModel) {
-        if (infoModel == null) {
+    public void setInfoModel(final InfoModel infoModel)
+    {
+        if (infoModel == null)
+        {
             throw new NullPointerException("info model may not be null");
         }
         this.infoModel.removePropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, noteListener);
@@ -203,15 +233,19 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         this.infoModel.addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, noteListener);
         final Note note = this.infoModel.getNote();
         infoString = note.getMessage();
-        if (note.getColor() != null) {
+        if (note.getColor() != null)
+        {
             infoColor = note.getColor();
         }
     }
 
-    private void initInfoStringRect() {
+    private void initInfoStringRect()
+    {
         final Graphics2D g2 = (Graphics2D) getGraphics();
-        if (g2 != null) {
-            if (infoFont == null) {
+        if (g2 != null)
+        {
+            if (infoFont == null)
+            {
                 infoFont = g2.getFont().deriveFont(Font.BOLD, (int) (g2.getFont().getSize() * 1.5));
             }
             final Rectangle bounds = getInfoStringBounds(g2);
@@ -219,17 +253,24 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         }
     }
 
-    public Dimension getPreferredSize() {
+    public Dimension getPreferredSize()
+    {
         final int w;
-        if (backgroundImage != null) {
+        if (backgroundImage != null)
+        {
             final int iW = backgroundImage.getWidth(this);
             final int iH = backgroundImage.getHeight(this);
             final int pH = panel.getPreferredSize().height;
             w = 80 + iW * ((pH - (2 * BORDER_HEIGHT)) / 10 * 7) / iH;
-        } else {
+        }
+        else
+        {
             w = 80;
         }
-        if (DEBUG) System.out.println("Panel: " + panel.getPreferredSize());
+        if (DEBUG)
+        {
+            System.out.println("Panel: " + panel.getPreferredSize());
+        }
         final Dimension panelSize = panel.getPreferredSize();
         return new Dimension(panelSize.width + w, panelSize.height);
     }
@@ -239,7 +280,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
      *
      * @param actionKeys keys for the actions to show
      */
-    private void initLayout(final String[] actionKeys) {
+    private void initLayout(final String[] actionKeys)
+    {
         final String colSpecs = BORDER_HEIGHT + "px, 8dlu, p:g(1.0)";
         final String rows = StringUtils.repeat(", b:p, 8dlu", actionKeys.length + 2);
         final String rowSpecs = BORDER_HEIGHT + "px, 8dlu" + rows + ", 36dlu, " + BORDER_HEIGHT + "px";
@@ -250,17 +292,29 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         final CellConstraints cc = new CellConstraints();
         panel.add(createLogoLabel(), cc.xyw(2, 3, 2));
         panel.add(createDescription(), cc.xyw(2, 5, 2));
-        for (int i = 0; i < actionKeys.length; i++) {
+        for (int i = 0; i < actionKeys.length; i++)
+        {
             final String actionKey = actionKeys[i];
-            if (actionKey.equals(SEPARATOR)) {
-            } else if (actionKey.equals(TEXT)) {
+            if (actionKey.equals(SEPARATOR))
+            {
+            }
+            else if (actionKey.equals(TEXT))
+            {
                 final JLabel label = new JLabel(getString(".subtitle." + subtitleCounter++));
 
-                if (DEBUG) System.out.println("Label: " + label.getPreferredSize());
+                if (DEBUG)
+                {
+                    System.out.println("Label: " + label.getPreferredSize());
+                }
                 panel.add(label, cc.xyw(2, 7 + i * 2, 2));
-            } else {
+            }
+            else
+            {
                 final ActionLabel label = createActionButton(actionKey);
-                if (DEBUG) System.out.println("Actionbutton: " + label.getPreferredSize());
+                if (DEBUG)
+                {
+                    System.out.println("Actionbutton: " + label.getPreferredSize());
+                }
                 panel.add(label, cc.xyw(2, 7 + i * 2, 2));
             }
         }
@@ -268,20 +322,25 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
 
-        addComponentListener(new ComponentAdapter() {
-            public void componentResized(final ComponentEvent e) {
+        addComponentListener(new ComponentAdapter()
+        {
+            public void componentResized(final ComponentEvent e)
+            {
                 infoRect = null;
                 initInfoStringRect();
             }
         });
     }
 
-    private Image getImage(final String key) {
+    private Image getImage(final String key)
+    {
         Image image = null;
-        try {
+        try
+        {
             final String imageName = getString(key + ".name");
             final String opacityString = getString(key + ".opacity");
-            if (opacityString == null) {
+            if (opacityString == null)
+            {
                 throw new NullPointerException("resource for \"" + resourceKey + key + ".opacity" + "\" not found");
             }
             final float opacity = Float.parseFloat(opacityString);
@@ -289,10 +348,12 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
             final String resourceName = System.getProperty("jfactory.resource.path") + "/" + imageName;
             URL resource = I15nWelcomePanel.class.getResource(resourceName);
             // Or load it from the classpath
-            if (resource == null) {
+            if (resource == null)
+            {
                 resource = I15nWelcomePanel.class.getResource(imageName);
             }
-            if (resource == null) {
+            if (resource == null)
+            {
                 throw new NullPointerException("resource for \"" + resourceName + "\" not found");
             }
             final Image iconImage = ImageUtils.create(resource);
@@ -301,32 +362,42 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
             image = createImage(producer);
             ImageUtils.waitImage(image);
         }
-        catch (NullPointerException e) {
+        catch (NullPointerException e)
+        {
             LOGGER.warn(e.getMessage());
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             LOGGER.warn("image or logo configuration not found for \"" + key + "\"");
         }
-        catch (ImageException e) {
+        catch (ImageException e)
+        {
             LOGGER.warn("image or logo cannot be loaded \"" + key + "\"");
         }
         return image;
     }
 
-    private String getString(final String extension) {
+    private String getString(final String extension)
+    {
         String string = null;
-        try {
+        try
+        {
             string = Strings.getSilentString(resourceKey + extension);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             // Do nothing;
         }
         return string;
     }
 
-    private JComponent createDescription() {
+    private JComponent createDescription()
+    {
         final JMultiLineLabel label = new JMultiLineLabel(getString(".text"));
-        if (DEBUG) System.out.println("Description: " + label.getPreferredSize());
+        if (DEBUG)
+        {
+            System.out.println("Description: " + label.getPreferredSize());
+        }
         return label;
     }
 
@@ -335,7 +406,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
      *
      * @return the label
      */
-    private JComponent createLogoLabel() {
+    private JComponent createLogoLabel()
+    {
 
         final JLabel label = new JLabel(getString(KEYSUFFIX_WELCOME_TITLETEXT));
         final String colorString = getString(KEYSUFFIX_WELCOME_TITLECOLOR);
@@ -345,13 +417,17 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         label.setFont(label.getFont().deriveFont(Font.BOLD, label.getFont().getSize() * 2f));
 
         final String iconString = getString(".text.logo");
-        if (!"".equals(iconString)) {
+        if (!"".equals(iconString))
+        {
             final ImageIcon icon = ImageLocator.getIcon(iconString);
             label.setIcon(icon);
             label.setIconTextGap(8);
         }
 
-        if (DEBUG) System.out.println("Logolabel: " + label.getPreferredSize());
+        if (DEBUG)
+        {
+            System.out.println("Logolabel: " + label.getPreferredSize());
+        }
         return label;
     }
 
@@ -361,17 +437,22 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
      * @param base the action base
      * @return an action button
      */
-    private ActionLabel createActionButton(final String base) {
+    private ActionLabel createActionButton(final String base)
+    {
         final ActionLabel go;
         final Action action;
-        if (commandManager != null) {
+        if (commandManager != null)
+        {
             final ActionCommand command = commandManager.getCommand(base);
-            if (command == null) {
+            if (command == null)
+            {
                 throw new NullPointerException("command not found for \"" + base + "\"");
             }
             action = command.getActionAdapter("label");
             go = new ActionLabel(action);
-        } else {
+        }
+        else
+        {
             action = ActionBuilder.getAction(base);
             go = new ActionLabel((String) action.getValue(Action.LONG_DESCRIPTION));
             go.setAction(action);
@@ -380,7 +461,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         return go;
     }
 
-    private void paintHorizontalLine(final Graphics2D g2, final int y, final Color color) {
+    private void paintHorizontalLine(final Graphics2D g2, final int y, final Color color)
+    {
 
         final int width = getWidth() * 2 / 5;
         final Color startColor = ColorUtils.fade(color, 0.8);
@@ -390,16 +472,20 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         g2.fillRect(width, y, getWidth(), 1);
     }
 
-    private void paintLowerLeftLogo(final Graphics2D g2) {
-        if (lowerLeftLogo != null) {
+    private void paintLowerLeftLogo(final Graphics2D g2)
+    {
+        if (lowerLeftLogo != null)
+        {
             final int height = lowerLeftLogo.getHeight(this);
             final int width = lowerLeftLogo.getWidth(this);
             g2.drawImage(lowerLeftLogo, 20, getHeight() - height - ((BORDER_HEIGHT - height) / 2), width, height, this);
         }
     }
 
-    private void paintLowerRightLogo(final Graphics2D g2) {
-        if (lowerRightLogo != null) {
+    private void paintLowerRightLogo(final Graphics2D g2)
+    {
+        if (lowerRightLogo != null)
+        {
             final int height = lowerRightLogo.getHeight(this);
             final int width = lowerRightLogo.getWidth(this);
             final int y = getHeight() - height - ((BORDER_HEIGHT - height) / 2);
@@ -408,15 +494,18 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         }
     }
 
-    private void paintGradient(final Graphics2D g2) {
+    private void paintGradient(final Graphics2D g2)
+    {
         g2.setColor(Color.white);
         g2.fillRect(0, getHeight() - BORDER_HEIGHT, getWidth(), BORDER_HEIGHT);
         paintHorizontalLine(g2, getHeight() - BORDER_HEIGHT, new Color(177, 227, 2));
         g2.setPaint(Color.white);
     }
 
-    private void paintBackgroundImage(final Graphics2D g2) {
-        if (backgroundImage != null) {
+    private void paintBackgroundImage(final Graphics2D g2)
+    {
+        if (backgroundImage != null)
+        {
             // Place image at 20% below upper and 10% above lower border
             final int width1 = backgroundImage.getWidth(this);
             final int height1 = backgroundImage.getHeight(this);
@@ -424,7 +513,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
             final int imageW = width1 * imageH / height1;
             final int x = getWidth() * 9 / 10 - imageW;
             final int y = (getHeight() - (2 * BORDER_HEIGHT)) / 10 * 2 + BORDER_HEIGHT;
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 g2.setColor(ColorUtils.fade(Color.blue, 0.98));
                 g2.fillRect(x, y, imageW, imageH);
                 g2.setColor(Color.blue);
@@ -439,8 +529,10 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         }
     }
 
-    private void paintUpperRightLogo(final Graphics2D g2) {
-        if (upperRightLogo != null) {
+    private void paintUpperRightLogo(final Graphics2D g2)
+    {
+        if (upperRightLogo != null)
+        {
             // Place logo vertically centered at right edge
             final int height = upperRightLogo.getHeight(this);
             final int width = upperRightLogo.getWidth(this);
@@ -448,16 +540,20 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         }
     }
 
-    private void paintInfoString(final Graphics2D g2) {
-        if (infoString != null && infoRect != null) {
-            if (DEBUG) {
+    private void paintInfoString(final Graphics2D g2)
+    {
+        if (infoString != null && infoRect != null)
+        {
+            if (DEBUG)
+            {
                 g2.setColor(ColorUtils.fade(Color.orange, 0.9));
                 g2.fill(infoRect);
                 System.out.println(infoRect);
                 g2.setColor(Color.orange);
                 g2.draw(infoRect);
             }
-            if (infoColor != null) {
+            if (infoColor != null)
+            {
                 final int d = 1000;
                 g2.setColor(ColorUtils.fade(infoColor, 1.0 - (1.0 * d / (System.currentTimeMillis() - lastTime + d))));
                 g2.setFont(infoFont);
@@ -466,8 +562,10 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
         }
     }
 
-    private Rectangle getInfoStringBounds(final Graphics2D g2) {
-        if (infoString == null) {
+    private Rectangle getInfoStringBounds(final Graphics2D g2)
+    {
+        if (infoString == null)
+        {
             return null;
         }
         g2.setFont(infoFont);
@@ -478,23 +576,28 @@ public class I15nWelcomePanel extends GradientBackgroundPanel {
                 (int) r.getWidth(), (int) r.getHeight());
     }
 
-    private static class TransparentImageFilter extends RGBImageFilter {
+    private static class TransparentImageFilter extends RGBImageFilter
+    {
 
         float alphaPercent;
 
-        public TransparentImageFilter() {
+        public TransparentImageFilter()
+        {
             this(0.75f);
         }
 
-        public TransparentImageFilter(final float aPercent) throws IllegalArgumentException {
-            if ((aPercent < 0.0) || (aPercent > 1.0)) {
+        public TransparentImageFilter(final float aPercent) throws IllegalArgumentException
+        {
+            if ((aPercent < 0.0) || (aPercent > 1.0))
+            {
                 throw new IllegalArgumentException();
             }
             alphaPercent = aPercent;
             canFilterIndexColorModel = true;
         }
 
-        public int filterRGB(final int x, final int y, final int rgb) {
+        public int filterRGB(final int x, final int y, final int rgb)
+        {
             int a = (rgb >> 24) & 0xff;
             a *= alphaPercent;
             return ((rgb & 0x00ffffff) | (a << 24));

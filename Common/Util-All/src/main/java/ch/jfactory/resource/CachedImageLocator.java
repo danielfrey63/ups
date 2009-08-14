@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.WeakHashMap;
 import javax.swing.ImageIcon;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Helper class for locating images and support for image caching.
@@ -22,26 +22,19 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderListener {
+public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderListener
+{
 
-    /**
-     * category for logging
-     */
-    private static final Category CAT = Category.getInstance(CachedImageLocator.class);
+    /** category for logging */
+    private static final Logger LOGGER = Logger.getLogger(CachedImageLocator.class);
 
-    /**
-     * map containing a cache for images especially Icons
-     */
+    /** map containing a cache for images especially Icons */
     private static Map imageCache = new WeakHashMap();
 
-    /**
-     * cache for pictures
-     */
+    /** cache for pictures */
     private PictureCache cache = new PictureCache(this);
 
-    /**
-     * loader for images
-     */
+    /** loader for images */
     private AsynchronPictureLoader loader = null;
 
     /**
@@ -50,10 +43,12 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      * @param name name of the image
      * @return reference to the ImageIcon
      */
-    public ImageIcon getImageIcon(final String name) {
-        CAT.debug("Request for " + name);
+    public ImageIcon getImageIcon(final String name)
+    {
+        LOGGER.debug("Request for " + name);
         WeakReference ref = (WeakReference) imageCache.get(name);
-        if ((ref == null) || (ref.get() == null)) {
+        if ((ref == null) || (ref.get() == null))
+        {
             final ImageIcon icon = loadImageIcon(name);
             imageCache.put(name, ref = new WeakReference(icon));
         }
@@ -61,14 +56,17 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
         return (ImageIcon) ref.get();
     }
 
-    private ImageIcon loadImageIcon(final String name) {
+    private ImageIcon loadImageIcon(final String name)
+    {
         final String fullName = locate(new String(name));
         final URL url = getClass().getResource(fullName);
         final ImageIcon icon;
-        if (url == null) {
+        if (url == null)
+        {
             icon = new ImageIcon(fullName);
         }
-        else {
+        else
+        {
             icon = new ImageIcon(url);
         }
         return icon;
@@ -79,14 +77,14 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      *
      * @param name name of the image
      */
-    public void cacheImage(final String name) {
+    public void cacheImage(final String name)
+    {
         cache.addCachedImage(locate(name));
     }
 
-    /**
-     * clear caching list.
-     */
-    public void clearCacheList() {
+    /** clear caching list. */
+    public void clearCacheList()
+    {
         cache.clearCachingList();
     }
 
@@ -95,41 +93,48 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      *
      * @param name Description of the Parameter
      */
-    public void loadImage(final String name) {
+    public void loadImage(final String name)
+    {
         final String url = locate(name);
 
         final Image img = cache.addCachedImage(url).getImage(false);
-        if (img == null) {
-            if (loader == null) {
+        if (img == null)
+        {
+            if (loader == null)
+            {
                 initLoader();
             }
             loader.loadImage(url);
         }
-        else {
-            CAT.info("get image " + url + " from cache.");
+        else
+        {
+            LOGGER.info("get image " + url + " from cache.");
             informStarted(name);
             informFinished(name, img, false);
         }
     }
 
-    /**
-     * abort current image loading
-     */
-    public void abort() {
-        if (loader != null) {
+    /** abort current image loading */
+    public void abort()
+    {
+        if (loader != null)
+        {
             loader.abort();
         }
     }
 
-    public void loadFinished(final String name, final Image img, final boolean thumbNail) {
+    public void loadFinished(final String name, final Image img, final boolean thumbNail)
+    {
         informFinished(name, img, thumbNail);
     }
 
-    public void loadAborted(final String name) {
+    public void loadAborted(final String name)
+    {
         informAborted(name);
     }
 
-    public void loadStarted(final String name) {
+    public void loadStarted(final String name)
+    {
         informStarted(name);
     }
 
@@ -138,14 +143,15 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      *
      * @throws java.lang.Throwable Description of the Exception
      */
-    protected void finalize() throws java.lang.Throwable {
-        CAT.info("CachedImageLocator going to be finalize");
+    protected void finalize() throws java.lang.Throwable
+    {
+        LOGGER.info("CachedImageLocator going to be finalize");
 
         loader.terminate();
         loader.join();
         super.finalize();
 
-        CAT.info("CachedImageLocator is finalize & thread stopped");
+        LOGGER.info("CachedImageLocator is finalize & thread stopped");
     }
 
     /**
@@ -155,7 +161,8 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      */
     public abstract String getPath();
 
-    private void initLoader() {
+    private void initLoader()
+    {
         loader = new AsynchronPictureLoader();
         loader.setPriority(Thread.MIN_PRIORITY);
         loader.attach(cache);
@@ -169,8 +176,8 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      * @param image image name
      * @return name full qualified name
      */
-    private String locate(final String image) {
-        final String url = getPath() + image;
-        return url;
+    private String locate(final String image)
+    {
+        return getPath() + image;
     }
 }

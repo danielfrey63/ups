@@ -29,7 +29,8 @@ import org.apache.log4j.Logger;
  *
  * @author Daniel Frey 31.07.2008 16:58:26
  */
-public class ClockPanel extends JPanel implements ActionListener {
+public class ClockPanel extends JPanel implements ActionListener
+{
 
     /** This class logger. */
     private static final Logger LOG = Logger.getLogger(ClockPanel.class);
@@ -50,20 +51,24 @@ public class ClockPanel extends JPanel implements ActionListener {
     private static final DateFormat formatter = new SimpleDateFormat("EEEE d.M.yyyy HH:mm:ss");
 
     /** Inits the clock object. */
-    public ClockPanel() {
+    public ClockPanel()
+    {
         init();
         start();
     }
 
-    private void init() {
+    private void init()
+    {
         setLayout(null);
         addNotify();
         initOffscreenImage();
     }
 
     /** Start the timer. */
-    public void start() {
-        if (timer == null) {
+    public void start()
+    {
+        if (timer == null)
+        {
             timer = new Timer(1000, this);
             LOG.info("starting timer");
             timer.start();
@@ -71,8 +76,10 @@ public class ClockPanel extends JPanel implements ActionListener {
     }
 
     /** Stop the timer. */
-    public void stop() {
-        if (timer != null) {
+    public void stop()
+    {
+        if (timer != null)
+        {
             LOG.info("stopping timer");
             timer.stop();
             timer = null;
@@ -80,7 +87,8 @@ public class ClockPanel extends JPanel implements ActionListener {
     }
 
     /** {@inheritDoc} */
-    public void actionPerformed(final ActionEvent actionEvent) {
+    public void actionPerformed(final ActionEvent actionEvent)
+    {
         date = formatter.format(new Date());
         final Font font = getFont();
         setPreferredSize(new Dimension(getStringWidth(date), getStringHeigth(font)));
@@ -89,9 +97,11 @@ public class ClockPanel extends JPanel implements ActionListener {
     }
 
     /** {@inheritDoc} */
-    public void paint(final Graphics graphics) {
+    public void paint(final Graphics graphics)
+    {
         initOffscreenImage();
-        if (offScreenGraphics != null && date != null) {
+        if (offScreenGraphics != null && date != null)
+        {
             offScreenGraphics.setColor(isOpaque() ? getBackground() : new Color(0, 0, 0, 0));
             offScreenGraphics.fillRect(0, 0, getWidth(), getHeight());
             offScreenGraphics.setColor(getForeground());
@@ -101,8 +111,10 @@ public class ClockPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void initOffscreenImage() {
-        if (offScreenImage == null && getWidth() > 0 && getHeight() > 0) {
+    private void initOffscreenImage()
+    {
+        if (offScreenImage == null && getWidth() > 0 && getHeight() > 0)
+        {
             offScreenImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
             offScreenGraphics = (Graphics2D) offScreenImage.getGraphics();
             offScreenGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -110,38 +122,46 @@ public class ClockPanel extends JPanel implements ActionListener {
         }
     }
 
-    public void setPreferredSize(final Dimension size) {
+    public void setPreferredSize(final Dimension size)
+    {
         super.setPreferredSize(size);
         resetOffScreenImage(size);
     }
 
-    private void resetOffScreenImage(final Dimension size) {
-        if (offScreenImage != null) {
+    private void resetOffScreenImage(final Dimension size)
+    {
+        if (offScreenImage != null)
+        {
             final int imageWidth = offScreenImage.getWidth(null);
             final int imageHeight = offScreenImage.getHeight(null);
-            if (offScreenImage != null && (imageWidth != size.getWidth() || imageHeight != size.getHeight())) {
+            if (offScreenImage != null && (imageWidth != size.getWidth() || imageHeight != size.getHeight()))
+            {
                 offScreenImage = null;
             }
         }
     }
 
-    private int getXLoc(final String text) {
+    private int getXLoc(final String text)
+    {
         final int textWidth = getStringWidth(text);
         final int extraPixelsOnSides = getWidth() - textWidth;
         return extraPixelsOnSides / 2;
     }
 
-    private int getYLoc() {
+    private int getYLoc()
+    {
         final FontMetrics fontMetrics = getFontMetrics(getFont());
         return getHeight() - fontMetrics.getDescent();
     }
 
-    private int getStringWidth(final String text) {
+    private int getStringWidth(final String text)
+    {
         final FontMetrics fontMetrics = getFontMetrics(getFont());
         return fontMetrics.stringWidth(text);
     }
 
-    private int getStringHeigth(final Font font) {
+    private int getStringHeigth(final Font font)
+    {
         final FontMetrics fontMetrics = getFontMetrics(font);
         return fontMetrics.getHeight();
     }

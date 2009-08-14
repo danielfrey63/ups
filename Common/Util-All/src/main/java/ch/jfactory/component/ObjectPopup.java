@@ -9,55 +9,71 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
-public abstract class ObjectPopup extends JPopupMenu implements ActionListener {
+public abstract class ObjectPopup extends JPopupMenu implements ActionListener
+{
 
-    private static final Category cat = Category.getInstance(ObjectPopup.class);
+    private static final Logger LOGGER = Logger.getLogger(ObjectPopup.class);
 
-    public ObjectPopup(final Object[] objects) {
+    public ObjectPopup(final Object[] objects)
+    {
         setCursor(new DefaultCursor(objects));
     }
 
-    public void setObjects(final Object[] objects) {
+    public void setObjects(final Object[] objects)
+    {
         setCursor(new DefaultCursor(objects));
     }
 
-    public void showPopup(final Component jb) {
+    public void showPopup(final Component jb)
+    {
         showPopup(jb, null, null);
     }
 
-    public void showPopup(final Component jb, final Object selected) {
+    public void showPopup(final Component jb, final Object selected)
+    {
         showPopup(jb, null, selected);
     }
 
-    public void showPopup(final Component jb, final Object[] enabled, final Object selected) {
-        try {
+    public void showPopup(final Component jb, final Object[] enabled, final Object selected)
+    {
+        try
+        {
             final int iWidthJb = jb.getSize().width;
             this.setPreferredSize(null);
             final int iWidthMe = this.getPreferredSize().width;
             final int iHeight = this.getPreferredSize().height;
-            if (iWidthJb >= iWidthMe) {
+            if (iWidthJb >= iWidthMe)
+            {
                 this.setPreferredSize(new Dimension(iWidthJb, iHeight));
             }
-            else {
+            else
+            {
                 this.setPreferredSize(null);
             }
             int iLevel = -1;
-            for (int i = getComponentCount() - 1; i >= 0; i--) {
+            for (int i = getComponentCount() - 1; i >= 0; i--)
+            {
                 final ObjectMenuItem jmi = (ObjectMenuItem) getComponent(i);
                 final Object object = jmi.getObject();
-                if (enabled != null) {
+                if (enabled != null)
+                {
                     jmi.setEnabled(ArrayUtils.contains(enabled, object) && object != selected);
                 }
-                if (object == selected) jmi.setEnabled(false);
-                if (selected == object) {
+                if (object == selected)
+                {
+                    jmi.setEnabled(false);
+                }
+                if (selected == object)
+                {
                     iLevel = i;
                 }
             }
             final int iBHeight = jb.getBounds().height;
             final int iJbOnScreen = jb.getLocationOnScreen().y;
-            if (iLevel < 0) {
+            if (iLevel < 0)
+            {
                 iLevel = 0;
             }
             Component c = getComponent(iLevel);
@@ -70,27 +86,33 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener {
             iCHeight = c.getPreferredSize().height;
             show(jb, 0, (iBHeight - iCHeight) / 2 - c.getBounds().y);
         }
-        catch (Exception p_ex) {
-            cat.error("error in object popup", p_ex);
+        catch (Exception p_ex)
+        {
+            LOGGER.error("error in object popup", p_ex);
         }
     }
 
-    public void actionPerformed(final ActionEvent e) {
+    public void actionPerformed(final ActionEvent e)
+    {
         final ObjectMenuItem jmi = (ObjectMenuItem) e.getSource();
         itemSelected(jmi.getObject());
     }
 
-    private void setCursor(final Cursor cursor) {
+    private void setCursor(final Cursor cursor)
+    {
         this.removeAll();
-        if (!cursor.isEmpty()) {
+        if (!cursor.isEmpty())
+        {
             addItem(cursor.getCurrent());
         }
-        while (cursor.hasNext()) {
+        while (cursor.hasNext())
+        {
             addItem(cursor.next());
         }
     }
 
-    private void addItem(final Object obj) {
+    private void addItem(final Object obj)
+    {
         final ObjectMenuItem jmi = new ObjectMenuItem(obj);
         jmi.addActionListener(this);
         super.add(jmi);
@@ -98,15 +120,18 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener {
 
     abstract public void itemSelected(Object obj);
 
-    class ObjectMenuItem extends JMenuItem {
+    class ObjectMenuItem extends JMenuItem
+    {
         private Object object;
 
-        public ObjectMenuItem(final Object object) {
+        public ObjectMenuItem(final Object object)
+        {
             super(object.toString());
             this.object = object;
         }
 
-        public Object getObject() {
+        public Object getObject()
+        {
             return object;
         }
     }

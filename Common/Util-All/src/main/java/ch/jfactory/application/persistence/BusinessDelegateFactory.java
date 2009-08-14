@@ -22,23 +22,30 @@ package ch.jfactory.application.persistence;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class BusinessDelegateFactory {
+public class BusinessDelegateFactory
+{
 
     private static IFBusinessDelegate businessDelegate;
 
-    public static IFBusinessDelegate getBusinessDelegate() {
-        if (businessDelegate == null) {
+    public static IFBusinessDelegate getBusinessDelegate()
+    {
+        if (businessDelegate == null)
+        {
             final String clazz = System.getProperty("xmatrix.businessdelegate");
-            try {
+            try
+            {
                 businessDelegate = (IFBusinessDelegate) Class.forName(clazz).newInstance();
             }
-            catch (ClassNotFoundException e) {
+            catch (ClassNotFoundException e)
+            {
                 e.printStackTrace();
             }
-            catch (IllegalAccessException e) {
+            catch (IllegalAccessException e)
+            {
                 e.printStackTrace();
             }
-            catch (InstantiationException e) {
+            catch (InstantiationException e)
+            {
                 e.printStackTrace();
             }
         }

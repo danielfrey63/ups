@@ -19,12 +19,12 @@ import javax.swing.text.StyledDocument;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2006/03/14 21:27:55 $
  */
-public class JMultiLineLabel extends JTextPane {
+public class JMultiLineLabel extends JTextPane
+{
 
-    /**
-     * Creates a new instance of JMultiLineLabel
-     */
-    public JMultiLineLabel() {
+    /** Creates a new instance of JMultiLineLabel */
+    public JMultiLineLabel()
+    {
         super();
 
         setFocusable(false);
@@ -48,7 +48,8 @@ public class JMultiLineLabel extends JTextPane {
      *
      * @param text the text to display
      */
-    public JMultiLineLabel(final String text) {
+    public JMultiLineLabel(final String text)
+    {
         this();
         setText(text);
     }
@@ -61,7 +62,8 @@ public class JMultiLineLabel extends JTextPane {
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public JMultiLineLabel(final String text, final int alignement) {
+    public JMultiLineLabel(final String text, final int alignement)
+    {
         this();
         setText(text);
         setHorizontalTextAlignment(alignement);
@@ -73,7 +75,8 @@ public class JMultiLineLabel extends JTextPane {
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public void setHorizontalTextAlignment(final int alignement) {
+    public void setHorizontalTextAlignment(final int alignement)
+    {
 
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, alignement);

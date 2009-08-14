@@ -30,7 +30,8 @@ import javax.swing.tree.TreePath;
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:54:58 $
  * @see ch.jfactory.component.tree.dnd.DnDTree
  */
-public interface DnDValidatorUpdater {
+public interface DnDValidatorUpdater
+{
     /**
      * Returns whether a drag to the right is appropriate. A drag to the right is detected by the <code>DnDTree</code>
      * and may be validated by this interfaces implementation.
@@ -53,8 +54,8 @@ public interface DnDValidatorUpdater {
      * Returns whether a move from one not to another is appropriate. A move action is detected by the
      * <code>DnDTree</code> and may be validated by this interfaces implementation.
      *
-     * @param from the TreePath being moved, including the node moved
-     * @param to   the TreePath <code>from</code> is moved to
+     * @param from  the TreePath being moved, including the node moved
+     * @param to    the TreePath <code>from</code> is moved to
      * @param index
      * @return whether the move shift is allowed
      */
@@ -67,8 +68,8 @@ public interface DnDValidatorUpdater {
      *
      * @param from the TreePath being moved, including the node moved
      * @param to   the TreePath <code>from</code> is moved to
-     * @return whether any action is allowed
-     * Todo remove this interface method as it is not correctly supported by the DndTree.
+     * @return whether any action is allowed Todo remove this interface method as it is not correctly supported by the
+     *         DndTree.
      */
     public boolean isAnyActionAllowed(TreePath from, TreePath to);
 
@@ -93,31 +94,39 @@ public interface DnDValidatorUpdater {
      */
     public void setModel(NotifiableTreeModel model);
 
-    public static class NopValidatorUpdater implements DnDValidatorUpdater {
+    public static class NopValidatorUpdater implements DnDValidatorUpdater
+    {
 
-        public boolean isRightShiftAllowed(final TreePath path) {
+        public boolean isRightShiftAllowed(final TreePath path)
+        {
             return false;
         }
 
-        public boolean isLeftShiftAllowed(final TreePath path) {
+        public boolean isLeftShiftAllowed(final TreePath path)
+        {
             return false;
         }
 
-        public boolean isMoveAllowed(final TreePath from, final TreePath to, final int index) {
+        public boolean isMoveAllowed(final TreePath from, final TreePath to, final int index)
+        {
             return false;
         }
 
-        public boolean isAnyActionAllowed(final TreePath from, final TreePath to) {
+        public boolean isAnyActionAllowed(final TreePath from, final TreePath to)
+        {
             return false;
         }
 
-        public void doRightShift(final TreePath path) {
+        public void doRightShift(final TreePath path)
+        {
         }
 
-        public void doLeftShift(final TreePath path) {
+        public void doLeftShift(final TreePath path)
+        {
         }
 
-        public void setModel(final NotifiableTreeModel model) {
+        public void setModel(final NotifiableTreeModel model)
+        {
         }
     }
 }

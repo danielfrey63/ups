@@ -24,48 +24,61 @@ import com.jgoodies.binding.beans.Model;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:59 $
  */
-public class TypeMapping extends Model {
+public class TypeMapping extends Model
+{
 
-    public static final String PROPERTYNAME_ICON  = "icon";
+    public static final String PROPERTYNAME_ICON = "icon";
+
     public static final String PROPERTYNAME_TEXT = "text";
 
     private String icon;
+
     private String text;
 
-    public TypeMapping(final String text, final String icon) {
+    public TypeMapping(final String text, final String icon)
+    {
         this.icon = icon;
         this.text = text;
     }
 
-    public String getIcon() {
+    public String getIcon()
+    {
         return icon;
     }
 
-    public void setIcon(final String icon) {
+    public void setIcon(final String icon)
+    {
         this.icon = icon;
     }
 
-    public String getText() {
+    public String getText()
+    {
         return text;
     }
 
-    public void setText(final String text) {
+    public void setText(final String text)
+    {
         this.text = text;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return text + " " + icon;
     }
 
-    public int hashCode() {
+    public int hashCode()
+    {
         return text.hashCode();
     }
 
-    public boolean equals(final Object obj) {
-        if (!(obj instanceof TypeMapping)) {
+    public boolean equals(final Object obj)
+    {
+        if (!(obj instanceof TypeMapping))
+        {
             return false;
         }
-        if (this == obj) {
+        if (this == obj)
+        {
             return true;
         }
         final TypeMapping other = (TypeMapping) obj;

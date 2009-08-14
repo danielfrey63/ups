@@ -9,7 +9,8 @@ import java.beans.PropertyVetoException;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface ClosingModel {
+public interface ClosingModel
+{
 
     /**
      * Indicates that currently modfied data is about to be discarded. This method fires a vetoable property change

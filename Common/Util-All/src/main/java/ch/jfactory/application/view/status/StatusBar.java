@@ -30,16 +30,16 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JSplitPane;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -51,19 +51,25 @@ import javax.swing.border.EmptyBorder;
  * @author $Author: daniel_frey $
  * @version $Date: 2008/01/06 10:16:23 $ $Revision: 1.4 $
  */
-public class StatusBar extends JPanel {
+public class StatusBar extends JPanel
+{
 
     private static final String LOGO = "\u00A9 " + Calendar.getInstance().get(Calendar.YEAR) + " www.xmatrix.ch";
 
     private final JLabel messageStatusItem;
+
     private final List<Message> history = new ArrayList<Message>();
+
     private final JPopupMenu historyPopup = new JPopupMenu();
 
     private GridBagConstraints gbc = new GridBagConstraints();
+
     private List<JComponent> components = new ArrayList<JComponent>();
+
     private List<StatusPanel> statusPanels = new ArrayList<StatusPanel>();
 
-    public StatusBar() {
+    public StatusBar()
+    {
         setItemBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
         setLayout(new GridBagLayout());
         gbc.weightx = 1;
@@ -75,15 +81,19 @@ public class StatusBar extends JPanel {
         installHistoryPopup();
     }
 
-    private void installHistoryPopup() {
+    private void installHistoryPopup()
+    {
         final JList list = new JList();
-        list.setCellRenderer(new DefaultListCellRenderer() {
+        list.setCellRenderer(new DefaultListCellRenderer()
+        {
 
             @Override
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+            {
                 final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 final Message message = (Message) value;
-                if (message.getType() == Message.Type.WARN) {
+                if (message.getType() == Message.Type.WARN)
+                {
                     label.setForeground(Color.red);
                 }
                 label.setText(message.getText());
@@ -97,20 +107,24 @@ public class StatusBar extends JPanel {
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         historyPopup.setLayout(new BorderLayout());
         historyPopup.add(scroll, BorderLayout.CENTER);
-        historyPopup.addMouseListener(new MouseAdapter() {
+        historyPopup.addMouseListener(new MouseAdapter()
+        {
 
             @Override
-            public void mouseExited(final MouseEvent e) {
+            public void mouseExited(final MouseEvent e)
+            {
                 final Point point = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, null).getPoint();
                 final Rectangle popupRect = SwingUtilities.convertRectangle(historyPopup.getParent(), historyPopup.getBounds(), null);
                 final Rectangle statusRect = SwingUtilities.convertRectangle(getParent(), getBounds(), null);
                 historyPopup.setVisible(statusRect.contains(point) || popupRect.contains(point));
             }
         });
-        addMouseListener(new MouseAdapter() {
+        addMouseListener(new MouseAdapter()
+        {
 
             @Override
-            public void mouseExited(final MouseEvent e) {
+            public void mouseExited(final MouseEvent e)
+            {
                 final Point point = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, null).getPoint();
                 final Rectangle popupRect = SwingUtilities.convertRectangle(historyPopup.getParent(), historyPopup.getBounds(), null);
                 final Rectangle statusRect = SwingUtilities.convertRectangle(getParent(), getBounds(), null);
@@ -118,7 +132,8 @@ public class StatusBar extends JPanel {
             }
 
             @Override
-            public void mouseClicked(final MouseEvent e) {
+            public void mouseClicked(final MouseEvent e)
+            {
                 list.setListData(history.toArray());
                 final Dimension preferredSize = historyPopup.getPreferredSize();
                 historyPopup.setPreferredSize(new Dimension(messageStatusItem.getWidth(), preferredSize.height));
@@ -135,13 +150,16 @@ public class StatusBar extends JPanel {
      *
      * @param component component to add
      */
-    public void addStatusComponent(final JComponent component) {
+    public void addStatusComponent(final JComponent component)
+    {
         gbc.gridx += 1;
         final StatusPanel statusPanel;
-        if (StatusPanel.class.isAssignableFrom(component.getClass())) {
+        if (StatusPanel.class.isAssignableFrom(component.getClass()))
+        {
             statusPanel = (StatusPanel) component;
         }
-        else {
+        else
+        {
             statusPanel = new StatusPanel(component);
         }
         components.add(component);
@@ -149,10 +167,12 @@ public class StatusBar extends JPanel {
         add(statusPanel, gbc);
     }
 
-    public void addStatusComponent(final JComponent component, final int index) {
+    public void addStatusComponent(final JComponent component, final int index)
+    {
         final List<JComponent> componentsCopy = new ArrayList<JComponent>(components);
         final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>(statusPanels);
-        for (int i = 1; i < components.size(); i++) {
+        for (int i = 1; i < components.size(); i++)
+        {
             remove(statusPanels.get(i));
             components.remove(i);
             statusPanels.remove(i);
@@ -162,7 +182,8 @@ public class StatusBar extends JPanel {
         gbc.gridx = 1;
         components = componentsCopy;
         statusPanels = statusPanelsCopy;
-        for (int i = 1; i < components.size(); i++) {
+        for (int i = 1; i < components.size(); i++)
+        {
             add(statusPanels.get(i), gbc);
             gbc.gridx += 1;
         }
@@ -173,29 +194,39 @@ public class StatusBar extends JPanel {
      *
      * @param text the new text to display
      */
-    public void setText(final String text) {
-        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.INFO)) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+    public void setText(final String text)
+    {
+        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.INFO))
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     messageStatusItem.setForeground(UIManager.getColor("Field.foreground"));
                     messageStatusItem.setText("".equals(text) ? LOGO : text);
                 }
             });
-            if (!"".equals(text)) {
+            if (!"".equals(text))
+            {
                 history.add(0, new SimpleMessage(text, Message.Type.INFO));
             }
         }
     }
 
-    public void setWarning(final String text) {
-        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.WARN)) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+    public void setWarning(final String text)
+    {
+        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.WARN))
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     messageStatusItem.setForeground(Color.red);
                     messageStatusItem.setText(text);
                 }
             });
-            if (!"".equals(text)) {
+            if (!"".equals(text))
+            {
                 history.add(0, new SimpleMessage(text, Message.Type.WARN));
             }
         }
@@ -206,9 +237,10 @@ public class StatusBar extends JPanel {
      *
      * @param border the border to propagate
      */
-    public void setItemBorder(final Border border) {
-        for (int i = 0; i < components.size(); i++) {
-            final JComponent component = components.get(i);
+    public void setItemBorder(final Border border)
+    {
+        for (final JComponent component : components)
+        {
             component.setBorder(border);
         }
     }
@@ -218,18 +250,23 @@ public class StatusBar extends JPanel {
      *
      * @param component the component to be removed
      */
-    public void removeStatusComponent(final JComponent component) {
+    public void removeStatusComponent(final JComponent component)
+    {
         boolean found = false;
         final List<JComponent> tempComponents = new ArrayList<JComponent>(components);
         final List<StatusPanel> tempStatusPanels = new ArrayList<StatusPanel>(statusPanels);
-        for (int i = 0; i < tempComponents.size(); i++) {
+        for (int i = 0; i < tempComponents.size(); i++)
+        {
             final JComponent comp = tempComponents.get(i);
-            if (found || comp == component) {
+            if (found || comp == component)
+            {
                 remove(tempStatusPanels.get(i));
-                if (comp != component) {
+                if (comp != component)
+                {
                     add(tempStatusPanels.get(i), gbc);
                 }
-                else {
+                else
+                {
                     components.remove(i);
                     statusPanels.remove(i);
                     found = true;
@@ -240,14 +277,16 @@ public class StatusBar extends JPanel {
     }
 
     @Override
-    public Dimension getPreferredSize() {
+    public Dimension getPreferredSize()
+    {
         final int h = super.getPreferredSize().height;
         final Container parent = getTopLevelAncestor();
         final int w = parent.getSize().width;
         return new Dimension(w, h);
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new WindowsLookAndFeel());
         final javax.swing.JButton remove = new javax.swing.JButton("Remove");
         final javax.swing.JButton add = new javax.swing.JButton("Add");
@@ -272,8 +311,10 @@ public class StatusBar extends JPanel {
         panel.add(message);
         f.getContentPane().add(status, java.awt.BorderLayout.SOUTH);
 
-        add.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        add.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final JLabel label = new JLabel("label " + (list.size() + 1));
                 status.addStatusComponent(label);
                 list.add(label);
@@ -282,8 +323,10 @@ public class StatusBar extends JPanel {
             }
         });
 
-        remove.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        remove.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
 //                int i = Integer.parseInt(text.getUserObject());
 //                JLabel label = (JLabel) list.remove(i - 1);
 //                status.setUserObject("removing " + label.getUserObject());
@@ -292,8 +335,10 @@ public class StatusBar extends JPanel {
                 f.getContentPane().repaint();
             }
         });
-        message.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        message.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 status.setText(text.getText());
             }
         });

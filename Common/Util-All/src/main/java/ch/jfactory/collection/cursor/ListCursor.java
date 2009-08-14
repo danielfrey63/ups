@@ -3,7 +3,7 @@ package ch.jfactory.collection.cursor;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Default implementation for list cursor
@@ -11,24 +11,31 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-class ListCursor implements Cursor {
-    private static final Category cat = Category.getInstance(ListCursor.class);
+class ListCursor implements Cursor
+{
+    private static final Logger LOGGER = Logger.getLogger(ListCursor.class);
+
     private List list;
+
     private ListIterator iterator;
+
     private Object currentObject = null;
 
-    public ListCursor(final List list) {
+    public ListCursor(final List list)
+    {
         this.list = list;
         this.iterator = list.listIterator();
         this.currentObject = iterator.hasNext() ? iterator.next() : null;
     }
 
-    public Object next() {
+    public Object next()
+    {
         currentObject = iterator.next();
         return currentObject;
     }
 
-    public Object previous() {
+    public Object previous()
+    {
         iterator.previous();
         currentObject = iterator.previous();
         iterator.next();
@@ -36,39 +43,49 @@ class ListCursor implements Cursor {
         return currentObject;
     }
 
-    public boolean hasNext() {
+    public boolean hasNext()
+    {
         return iterator.hasNext();
     }
 
-    public boolean hasPrevious() {
+    public boolean hasPrevious()
+    {
         return (iterator.previousIndex() != 0 && iterator.hasPrevious());
     }
 
-    public int getCurrentIndex() {
+    public int getCurrentIndex()
+    {
         return iterator.nextIndex() == 0 ? 0 : iterator.nextIndex() - 1;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return list.size();
     }
 
-    public Object getCurrent() {
+    public Object getCurrent()
+    {
         return currentObject;
     }
 
-    public void setCurrent(final Object obj) {
+    public void setCurrent(final Object obj)
+    {
         final int idx = list.indexOf(obj);
-        if (idx >= 0) {
+        if (idx >= 0)
+        {
             currentObject = obj;
-            while (getCurrentIndex() < idx) {
+            while (getCurrentIndex() < idx)
+            {
                 iterator.next();
             }
-            while (getCurrentIndex() > idx) {
+            while (getCurrentIndex() > idx)
+            {
                 iterator.previous();
             }
         }
-        else {
-            cat.error("Error setting Current Object to " + obj);
+        else
+        {
+            LOGGER.error("Error setting Current Object to " + obj);
         }
     }
 
@@ -77,11 +94,13 @@ class ListCursor implements Cursor {
      *
      * @return true if cursor is empty
      */
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return list.isEmpty();
     }
 
-    public Iterator getIterator() {
+    public Iterator getIterator()
+    {
         return list.iterator();
     }
 }

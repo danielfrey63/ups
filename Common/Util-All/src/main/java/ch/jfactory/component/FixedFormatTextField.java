@@ -59,12 +59,15 @@ import javax.swing.text.PlainDocument;
  * @author Daniel Frey
  * @version $Revision: 1.2 $
  */
-public class FixedFormatTextField extends JTextField {
+public class FixedFormatTextField extends JTextField
+{
 
     private String pattern = "";
+
     private String defaultText = "";
 
-    public FixedFormatTextField() {
+    public FixedFormatTextField()
+    {
         super();
         init();
     }
@@ -75,7 +78,8 @@ public class FixedFormatTextField extends JTextField {
      * @param pattern the pattern to use for the field
      * @param def     the default string
      */
-    public FixedFormatTextField(final String pattern, final String def) {
+    public FixedFormatTextField(final String pattern, final String def)
+    {
         super(def);
         setDefault(def);
         setPattern(pattern);
@@ -89,7 +93,8 @@ public class FixedFormatTextField extends JTextField {
      * @param def     the default string
      * @param columns the number of columns for the width of the field
      */
-    public FixedFormatTextField(final String pattern, final String def, final int columns) {
+    public FixedFormatTextField(final String pattern, final String def, final int columns)
+    {
         super(def, columns);
         setDefault(def);
         setPattern(pattern);
@@ -105,7 +110,8 @@ public class FixedFormatTextField extends JTextField {
      * @param text    the initial text
      * @param columns the number of columns for the width of the field
      */
-    public FixedFormatTextField(final String pattern, final String def, final Document doc, final String text, final int columns) {
+    public FixedFormatTextField(final String pattern, final String def, final Document doc, final String text, final int columns)
+    {
         super(doc, text, columns);
         setDefault(def);
         setPattern(pattern);
@@ -117,7 +123,8 @@ public class FixedFormatTextField extends JTextField {
      * @param def     the default string
      * @param text    the initial text
      */
-    public FixedFormatTextField(final String pattern, final String def, final String text) {
+    public FixedFormatTextField(final String pattern, final String def, final String text)
+    {
         super(text);
         setDefault(def);
         setPattern(pattern);
@@ -130,7 +137,8 @@ public class FixedFormatTextField extends JTextField {
      * @param text    the initial text
      * @param columns the number of columns for the width of the field
      */
-    public FixedFormatTextField(final String pattern, final String def, final String text, final int columns) {
+    public FixedFormatTextField(final String pattern, final String def, final String text, final int columns)
+    {
         super(text, columns);
         setDefault(def);
         setPattern(pattern);
@@ -142,7 +150,8 @@ public class FixedFormatTextField extends JTextField {
      *
      * @param pattern the pattern to set.
      */
-    public void setPattern(final String pattern) {
+    public void setPattern(final String pattern)
+    {
         this.pattern = pattern;
         init();
     }
@@ -152,22 +161,24 @@ public class FixedFormatTextField extends JTextField {
      *
      * @return the pattern string
      */
-    public String getPattern() {
+    public String getPattern()
+    {
         return pattern;
     }
 
-    public void setDefault(final String defaultText) {
+    public void setDefault(final String defaultText)
+    {
         this.defaultText = defaultText;
     }
 
-    public String getDefault() {
+    public String getDefault()
+    {
         return defaultText;
     }
 
-    /**
-     * Initializes the field.
-     */
-    private void init() {
+    /** Initializes the field. */
+    private void init()
+    {
         setDocument(new FixedFormatDocument(pattern, defaultText));
         setText(defaultText);
     }
@@ -176,31 +187,22 @@ public class FixedFormatTextField extends JTextField {
      * Document class for the FixedFormatTextField. See {@link FixedFormatTextField} for a description of the
      * behaviour.
      */
-    private final class FixedFormatDocument extends PlainDocument {
+    private final class FixedFormatDocument extends PlainDocument
+    {
 
-        /**
-         * The default string.
-         */
+        /** The default string. */
         private String def;
 
-        /**
-         * The format pattern.
-         */
+        /** The format pattern. */
         private String pattern;
 
-        /**
-         * The positions of formatting characters.
-         */
+        /** The positions of formatting characters. */
         private int[] jumpers;
 
-        /**
-         * The possible formatting symbols.
-         */
+        /** The possible formatting symbols. */
         private String keys = "NAC";
 
-        /**
-         * Defaults for the pattern symbols.
-         */
+        /** Defaults for the pattern symbols. */
         private String defaultCharacters = "0  ";
 
         /**
@@ -209,28 +211,35 @@ public class FixedFormatTextField extends JTextField {
          * @param pattern the pattern
          * @param def     the default string
          */
-        private FixedFormatDocument(final String pattern, final String def) {
-            if (def == null || def.equals("") && pattern != null && !pattern.equals("")) {
+        private FixedFormatDocument(final String pattern, final String def)
+        {
+            if (def == null || def.equals("") && pattern != null && !pattern.equals(""))
+            {
                 String temp = pattern;
-                for (int i = 0; i < keys.length(); i++) {
+                for (int i = 0; i < keys.length(); i++)
+                {
                     temp = temp.replace(keys.charAt(i), defaultCharacters.charAt(i));
                 }
                 this.def = temp;
             }
-            else {
+            else
+            {
                 this.def = def;
             }
             this.pattern = pattern;
 
-            if (!validate(this.def)) {
+            if (!validate(this.def))
+            {
                 throw new IllegalArgumentException(this.def + " is not of pattern " + pattern);
             }
 
             final int length = pattern.replaceAll("[" + keys + "]", "").length();
             int c = 0;
             jumpers = new int[length];
-            for (int i = 0; i < pattern.length(); i++) {
-                if (keys.indexOf(pattern.charAt(i)) == -1) {
+            for (int i = 0; i < pattern.length(); i++)
+            {
+                if (keys.indexOf(pattern.charAt(i)) == -1)
+                {
                     jumpers[c++] = i;
                 }
             }
@@ -244,32 +253,39 @@ public class FixedFormatTextField extends JTextField {
          * @param a      the attribute set to use
          * @throws BadLocationException
          */
-        public void insertString(final int offset, final String chunk, final AttributeSet a) throws BadLocationException {
+        public void insertString(final int offset, final String chunk, final AttributeSet a) throws BadLocationException
+        {
             final String newValue;
-            if (chunk.equals("")) {
+            if (chunk.equals(""))
+            {
                 return;
             }
 
             final int length = getLength();
-            if (length == 0) {
+            if (length == 0)
+            {
                 super.insertString(offset, def, a);
                 return;
             }
-            else {
+            else
+            {
                 final StringBuffer currentBuffer = new StringBuffer(getText(0, length));
                 currentBuffer.replace(offset, chunk.length() + offset, chunk);
                 newValue = currentBuffer.toString();
             }
-            if (validate(newValue)) {
+            if (validate(newValue))
+            {
                 super.remove(offset, chunk.length());
                 super.insertString(offset, chunk, a);
             }
-            else {
+            else
+            {
                 Toolkit.getDefaultToolkit().beep();
             }
 
             // Make sure the caret jumps over the dashes
-            while (isIn(getCaretPosition())) {
+            while (isIn(getCaretPosition()))
+            {
                 setCaretPosition(getCaretPosition() + 1);
             }
         }
@@ -281,40 +297,49 @@ public class FixedFormatTextField extends JTextField {
          * @param len  the number of characters to remove
          * @throws BadLocationException
          */
-        public void remove(final int offs, final int len) throws BadLocationException {
+        public void remove(final int offs, final int len) throws BadLocationException
+        {
             final int length = getLength();
-            if (length == 0) {
+            if (length == 0)
+            {
                 return;
             }
 
             final String currentContent = getText(0, length);
             final StringBuffer buffer = new StringBuffer();
-            if (offs > 0) {
+            if (offs > 0)
+            {
                 buffer.append(currentContent.substring(0, offs));
             }
             buffer.append(def.substring(offs, offs + len));
-            if ((offs + len) < length) {
+            if ((offs + len) < length)
+            {
                 buffer.append(currentContent.substring(offs + len));
             }
-            if (validate(buffer.toString())) {
+            if (validate(buffer.toString()))
+            {
                 super.remove(offs, len);
                 super.insertString(offs, def.substring(offs, offs + len), null);
             }
-            else {
+            else
+            {
                 Toolkit.getDefaultToolkit().beep();
             }
 
             // Make sure the caret jumps over the dashes
-            while (isIn(getCaretPosition() - 2)) {
+            while (isIn(getCaretPosition() - 2))
+            {
                 setCaretPosition(getCaretPosition() - 1);
             }
 
             // Ajust caret position after removal
             final int newPosition = getCaretPosition() - len;
-            if (newPosition >= 0 && offs >= 0) {
+            if (newPosition >= 0 && offs >= 0)
+            {
                 setCaretPosition(newPosition);
             }
-            else {
+            else
+            {
                 setCaretPosition(0);
             }
         }
@@ -325,25 +350,32 @@ public class FixedFormatTextField extends JTextField {
          * @param newValue the total field content to check
          * @return whether the total field content would be maching the pattern
          */
-        protected boolean validate(final String newValue) {
-            if (newValue.length() != pattern.length()) {
+        protected boolean validate(final String newValue)
+        {
+            if (newValue.length() != pattern.length())
+            {
                 return false;
             }
 
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++) {
+            for (int i = 0; i < newValue.length(); i++)
+            {
                 final char c = pattern.charAt(i);
                 final char v = newValue.charAt(i);
-                if (c == 'N') {
+                if (c == 'N')
+                {
                     ret &= Character.isDigit(v);
                 }
-                else if (c == 'A') {
+                else if (c == 'A')
+                {
                     ret &= Character.isLetterOrDigit(v);
                 }
-                else if (c == 'C') {
+                else if (c == 'C')
+                {
                     ret &= Character.isLetter(v);
                 }
-                else {
+                else
+                {
                     ret &= (v == pattern.charAt(i));
                 }
             }
@@ -356,10 +388,12 @@ public class FixedFormatTextField extends JTextField {
          * @param toFind the int to find in the jumpers
          * @return whether this int is present
          */
-        private boolean isIn(final int toFind) {
-            for (int i = 0; i < jumpers.length; i++) {
-                final int temp = jumpers[i];
-                if (toFind == temp) {
+        private boolean isIn(final int toFind)
+        {
+            for (final int temp : jumpers)
+            {
+                if (toFind == temp)
+                {
                     return true;
                 }
             }

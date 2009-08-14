@@ -8,61 +8,77 @@ import java.util.Iterator;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class GraphEdgeList implements Serializable {
+public class GraphEdgeList implements Serializable
+{
 
     public static final int LIST_CHILD = 0;
+
     public static final int LIST_PARENT = 1;
 
     private static final GraphModel MODEL = AbsGraphModel.getModel();
 
     private ArrayList list = new ArrayList();
+
     private GraphNode referer;
+
     private int listType;
 
-    public void printEdges(final Class type) {
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
-            final GraphEdge edge = (GraphEdge) iter.next();
-            if (getOther(edge).isType(type)) {
+    public void printEdges(final Class type)
+    {
+        for (final Object aList : list)
+        {
+            final GraphEdge edge = (GraphEdge) aList;
+            if (getOther(edge).isType(type))
+            {
                 System.out.println(edge);
             }
         }
     }
 
-    public void setReferer(final GraphNode referer) {
+    public void setReferer(final GraphNode referer)
+    {
         this.referer = referer;
     }
 
-    public void setListType(final int listType) {
+    public void setListType(final int listType)
+    {
         this.listType = listType;
     }
 
-    private GraphNode getOther(final GraphEdge edge) {
-        if (listType == LIST_PARENT) {
+    private GraphNode getOther(final GraphEdge edge)
+    {
+        if (listType == LIST_PARENT)
+        {
             return edge.getParent();
         }
-        else {
+        else
+        {
             return edge.getChild();
         }
     }
 
-    /**
-     * Returns the node for which children/parents are stored in this list.
-     */
-    private GraphNode getReferer(final GraphEdge edge) {
-        if (listType == LIST_PARENT) {
+    /** Returns the node for which children/parents are stored in this list. */
+    private GraphNode getReferer(final GraphEdge edge)
+    {
+        if (listType == LIST_PARENT)
+        {
             return edge.getChild();
         }
-        else {
+        else
+        {
             return edge.getParent();
         }
     }
 
-    private void ajustRanks() {
+    private void ajustRanks()
+    {
         GraphEdge edge;
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++)
+        {
             edge = (GraphEdge) list.get(i);
             final int old = edge.getRank();
-            if (old != i) {
+            if (old != i)
+            {
                 edge.setRank(i);
                 MODEL.addChanged(edge);
             }
@@ -74,10 +90,12 @@ public class GraphEdgeList implements Serializable {
      *
      * @return GraphNodeList of all parent {@link GraphNode}s
      */
-    public GraphNodeList getOthers() {
+    public GraphNodeList getOthers()
+    {
         final GraphNodeList result = new GraphNodeList();
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
-            final GraphEdge edge = (GraphEdge) iter.next();
+        for (final Object aList : list)
+        {
+            final GraphEdge edge = (GraphEdge) aList;
             result.add(getOther(edge));
         }
         return result;
@@ -88,74 +106,95 @@ public class GraphEdgeList implements Serializable {
      *
      * @return GraphNodeList of all parent {@link GraphNode}s
      */
-    public GraphNodeList getOthers(final Class type, final Class role) {
+    public GraphNodeList getOthers(final Class type, final Class role)
+    {
         final GraphNodeList result = new GraphNodeList();
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
-            final GraphEdge edge = (GraphEdge) iter.next();
+        for (final Object aList : list)
+        {
+            final GraphEdge edge = (GraphEdge) aList;
             final GraphNode node = getOther(edge);
-            if (node.isType(type) && edge.isRole(role)) {
+            if (node.isType(type) && edge.isRole(role))
+            {
                 result.add(node);
             }
         }
         return result;
     }
 
-    public Role getRole(final GraphNode node) {
+    public Role getRole(final GraphNode node)
+    {
         final GraphEdge edge = getEdge(node);
-        if (edge == null) {
+        if (edge == null)
+        {
             return Role.ROLE_NULL;
         }
-        else {
+        else
+        {
             return edge.getRole();
         }
     }
 
-    public void setRole(final GraphNode node, final Role role) {
+    public void setRole(final GraphNode node, final Role role)
+    {
         final GraphEdge edge = getEdge(node);
-        if (edge != null) {
+        if (edge != null)
+        {
             edge.setRole(role);
         }
     }
 
-    private GraphEdge getEdge(final GraphNode node) {
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
-            final GraphEdge edge = (GraphEdge) iter.next();
+    private GraphEdge getEdge(final GraphNode node)
+    {
+        for (final Object aList : list)
+        {
+            final GraphEdge edge = (GraphEdge) aList;
             final GraphNode other = getOther(edge);
-            if (other == node) {
+            if (other == node)
+            {
                 return edge;
             }
         }
         return null;
     }
 
-    public void setOthers(final GraphNodeList others) {
+    public void setOthers(final GraphNodeList others)
+    {
         list.clear();
         addAll(others);
     }
 
-    public void setOthers(final GraphNodeList others, final Class type, final Class role) {
-        if (getOthers(type, role).size() == others.size()) {
+    public void setOthers(final GraphNodeList others, final Class type, final Class role)
+    {
+        if (getOthers(type, role).size() == others.size())
+        {
             // Update existing edges instead of removing/creating
             int i = 0;
-            for (Iterator iter = list.iterator(); iter.hasNext();) {
-                final GraphEdge edge = (GraphEdge) iter.next();
+            for (final Object aList : list)
+            {
+                final GraphEdge edge = (GraphEdge) aList;
                 final GraphNode node = getOther(edge);
-                if (node.isType(type) && edge.isRole(role)) {
-                    if (listType == LIST_CHILD) {
+                if (node.isType(type) && edge.isRole(role))
+                {
+                    if (listType == LIST_CHILD)
+                    {
                         edge.setChild(others.get(i++));
                     }
-                    else {
+                    else
+                    {
                         edge.setParent(others.get(i++));
                     }
                     MODEL.addChanged(edge);
                 }
             }
         }
-        else {
-            for (Iterator iter = list.iterator(); iter.hasNext();) {
+        else
+        {
+            for (Iterator iter = list.iterator(); iter.hasNext();)
+            {
                 final GraphEdge edge = (GraphEdge) iter.next();
                 final GraphNode node = getOther(edge);
-                if (node.isType(type) && edge.isRole(role)) {
+                if (node.isType(type) && edge.isRole(role))
+                {
                     iter.remove();
                     MODEL.addRemoved(edge);
                 }
@@ -164,23 +203,28 @@ public class GraphEdgeList implements Serializable {
         }
     }
 
-    public boolean add(final GraphEdge edge) {
+    public boolean add(final GraphEdge edge)
+    {
         return add(list.size(), edge);
     }
 
-    public boolean add(final int index, final GraphEdge edge) {
-        if (referer != getReferer(edge)) {
+    public boolean add(final int index, final GraphEdge edge)
+    {
+        if (referer != getReferer(edge))
+        {
             getReferer(edge);
             throw new IllegalStateException("Referer is not in edges member: " + referer + "(" +
                     referer.hashCode() + ")" + " <-> " + edge);
         }
 
-        if (list.contains(edge)) {
+        if (list.contains(edge))
+        {
             return true;
         }
 
         boolean wasAdded = false;
-        if (!list.contains(edge)) {
+        if (!list.contains(edge))
+        {
             final int oldSize = list.size();
             list.add(index, edge);
             wasAdded = (oldSize != list.size());
@@ -189,64 +233,81 @@ public class GraphEdgeList implements Serializable {
         ajustRanks();
 
         // Try counterpart
-        if (wasAdded) {
+        if (wasAdded)
+        {
             final GraphNode other = getOther(edge);
-            if (listType == LIST_CHILD) {
+            if (listType == LIST_CHILD)
+            {
                 other.addParent(referer, edge.getRole());
             }
-            else {
+            else
+            {
                 other.addChild(referer, edge.getRole());
             }
         }
         return wasAdded;
     }
 
-    public boolean add(final GraphNode node) {
+    public boolean add(final GraphNode node)
+    {
         return add(list.size(), node);
     }
 
-    public boolean add(final int index, final GraphNode node) {
+    public boolean add(final int index, final GraphNode node)
+    {
         final GraphEdge edge;
-        if (listType == LIST_CHILD) {
+        if (listType == LIST_CHILD)
+        {
             edge = MODEL.createEdge(referer, node);
         }
-        else {
+        else
+        {
             edge = MODEL.createEdge(node, referer);
         }
         return add(index, edge);
     }
 
-    public boolean add(final int index, final GraphNode node, final Role role) {
+    public boolean add(final int index, final GraphNode node, final Role role)
+    {
         // Note: Role not used any more
         // Todo: Remove role definively
         final GraphEdge edge;
-        if (listType == LIST_CHILD) {
+        if (listType == LIST_CHILD)
+        {
             edge = MODEL.createEdge(referer, node);
         }
-        else {
+        else
+        {
             edge = MODEL.createEdge(node, referer);
         }
         ajustRanks();
         return add(index, edge);
     }
 
-    public void addAll(final GraphNodeList list) {
-        for (int i = 0; i < list.size(); i++) {
+    public void addAll(final GraphNodeList list)
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
             add(list.get(i));
         }
     }
 
-    public boolean removeLinkTo(final GraphNode node) {
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
+    public boolean removeLinkTo(final GraphNode node)
+    {
+        for (Iterator iter = list.iterator(); iter.hasNext();)
+        {
             final GraphEdge edge = (GraphEdge) iter.next();
             final GraphNode other = getOther(edge);
-            if (other == node) {
+            if (other == node)
+            {
                 iter.remove();
                 MODEL.addRemoved(edge);
-                if (listType == LIST_CHILD) {
+                if (listType == LIST_CHILD)
+                {
                     other.removeFromParent(referer);
                 }
-                else {
+                else
+                {
                     other.removeFromChild(referer);
                 }
                 return true;
@@ -255,21 +316,27 @@ public class GraphEdgeList implements Serializable {
         return false;
     }
 
-    public boolean delete(final GraphNode node) {
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
+    public boolean delete(final GraphNode node)
+    {
+        for (Iterator iter = list.iterator(); iter.hasNext();)
+        {
             final GraphEdge edge = (GraphEdge) iter.next();
             final GraphNode other = getOther(edge);
-            if (other == node) {
+            if (other == node)
+            {
                 iter.remove();
                 MODEL.addRemoved(edge);
                 boolean wasRemoved = false;
-                if (listType == LIST_CHILD) {
+                if (listType == LIST_CHILD)
+                {
                     wasRemoved = other.deleteParent(referer);
                 }
-                else {
+                else
+                {
                     wasRemoved = other.deleteChild(referer);
                 }
-                if (wasRemoved == true) {
+                if (wasRemoved)
+                {
                     MODEL.addRemoved(node);
                 }
                 return true;
@@ -278,14 +345,14 @@ public class GraphEdgeList implements Serializable {
         return false;
     }
 
-    public int size() {
+    public int size()
+    {
         return list.size();
     }
 
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
+    /** @see java.lang.Object#toString() */
+    public String toString()
+    {
         return referer + ", " + (listType == 0 ? "CHILD" : "PARENT") +
                 " " + list.toString();
     }

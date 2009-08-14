@@ -31,36 +31,26 @@ import javax.swing.JComponent;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:41:22 $
  */
-public class AnimationQueue extends JComponent implements StopListener {
-    /**
-     * The image to use for the background.
-     */
+public class AnimationQueue extends JComponent implements StopListener
+{
+    /** The image to use for the background. */
     private Image backgroundImage;
 
-    /**
-     * The border to set within the component.
-     */
+    /** The border to set within the component. */
     private Insets insets = new Insets(0, 0, 0, 0);
 
-    /**
-     * An array of paintables to subsequently paint.
-     */
+    /** An array of paintables to subsequently paint. */
     private Paintable[] paintables = new Paintable[0];
 
-    /**
-     * The actual painters index within {@link #paintables}.
-     */
+    /** The actual painters index within {@link #paintables}. */
     private transient int currentIndex = 0;
 
-    /**
-     * The current Paintable.
-     */
+    /** The current Paintable. */
     private Paintable currentPainter;
 
-    /**
-     * Create an animation without background image.
-     */
-    public AnimationQueue() {
+    /** Create an animation without background image. */
+    public AnimationQueue()
+    {
         this(null);
     }
 
@@ -69,27 +59,31 @@ public class AnimationQueue extends JComponent implements StopListener {
      *
      * @param backgroundImage the image used for background or null if none
      */
-    public AnimationQueue(final Image backgroundImage) {
+    public AnimationQueue(final Image backgroundImage)
+    {
         this.backgroundImage = backgroundImage;
 
         // This hack makes sure that the animation is started upon first visibility of the component.
         // Todo: Make reusable
-        addHierarchyListener(new HierarchyListener() {
-                public void hierarchyChanged(final HierarchyEvent e) {
-                    if (getTopLevelAncestor().isVisible()) {
-                        AnimationQueue.this.removeHierarchyListener(this);
-                        setOpaque(false);
-                        start();
-                    }
+        addHierarchyListener(new HierarchyListener()
+        {
+            public void hierarchyChanged(final HierarchyEvent e)
+            {
+                if (getTopLevelAncestor().isVisible())
+                {
+                    AnimationQueue.this.removeHierarchyListener(this);
+                    setOpaque(false);
+                    start();
                 }
-            });
+            }
+        });
     }
 
-    /**
-     * Starts the next paintable.
-     */
-    public void start() {
-        if (currentIndex < paintables.length) {
+    /** Starts the next paintable. */
+    public void start()
+    {
+        if (currentIndex < paintables.length)
+        {
             currentPainter = paintables[currentIndex++];
             currentPainter.start();
             System.out.println("");
@@ -101,7 +95,8 @@ public class AnimationQueue extends JComponent implements StopListener {
      *
      * @param paintable the paintable to add to the queue
      */
-    public void addPaintable(final Paintable paintable) {
+    public void addPaintable(final Paintable paintable)
+    {
         // Register this queue with the paintable for later invokation of repaint
         paintable.setAnimationQueue(this);
 
@@ -119,9 +114,11 @@ public class AnimationQueue extends JComponent implements StopListener {
      *
      * @param g the graphics to paint on
      */
-    public void paint(final Graphics g) {
+    public void paint(final Graphics g)
+    {
         // First background image
-        if (backgroundImage != null) {
+        if (backgroundImage != null)
+        {
             g.drawImage(backgroundImage, 0, 0, this);
         }
 
@@ -129,10 +126,9 @@ public class AnimationQueue extends JComponent implements StopListener {
         currentPainter.paint((Graphics2D) g);
     }
 
-    /**
-     * Receives notification of a finished paintable. Start the next one.
-     */
-    public void stopPerformed() {
+    /** Receives notification of a finished paintable. Start the next one. */
+    public void stopPerformed()
+    {
         start();
     }
 
@@ -141,7 +137,8 @@ public class AnimationQueue extends JComponent implements StopListener {
      *
      * @param insets the insets to set
      */
-    public void setInsets(final Insets insets) {
+    public void setInsets(final Insets insets)
+    {
         this.insets = insets;
     }
 
@@ -150,7 +147,8 @@ public class AnimationQueue extends JComponent implements StopListener {
      *
      * @return the insets
      */
-    public Insets getInsets() {
+    public Insets getInsets()
+    {
         return insets;
     }
 }

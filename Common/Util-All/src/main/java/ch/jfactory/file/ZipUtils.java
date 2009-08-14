@@ -22,9 +22,11 @@ import org.apache.log4j.Logger;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:23 $
  */
-public class ZipUtils {
+public class ZipUtils
+{
 
     private static final Logger LOG = Logger.getLogger(ZipUtils.class);
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     /**
@@ -34,52 +36,75 @@ public class ZipUtils {
      * @param archiveFileName The name of the file to unzip
      * @param destinationDir  The name of the destination directory
      */
-    public static void unZip(final String archiveFileName, String destinationDir) {
+    public static void unZip(final String archiveFileName, String destinationDir)
+    {
         // take no action if archive file is null
-        if (archiveFileName == null) return;
-        if (DEBUG) LOG.debug("trying to unzip " + archiveFileName + " to " + destinationDir);
+        if (archiveFileName == null)
+        {
+            return;
+        }
+        if (DEBUG)
+        {
+            LOG.debug("trying to unzip " + archiveFileName + " to " + destinationDir);
+        }
 
         // validate path to destination directory
         destinationDir = (destinationDir.endsWith("/") ? destinationDir : destinationDir + "/");
         final File destinationDirectory = new File(destinationDir);
-        if (!destinationDirectory.exists()) destinationDirectory.mkdirs();
+        if (!destinationDirectory.exists())
+        {
+            destinationDirectory.mkdirs();
+        }
 
         // open zip and extract
-        try {
+        try
+        {
             final ZipFile zip = new ZipFile(archiveFileName);
             unZip(zip, destinationDir);
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             LOG.error("Error occured while decompressing file " + archiveFileName, e);
         }
     }
 
-    public static void unZip(final ZipFile zip, final String destinationDir) {
+    public static void unZip(final ZipFile zip, final String destinationDir)
+    {
         final Enumeration entries = zip.entries();
-        while (entries.hasMoreElements()) {
+        while (entries.hasMoreElements())
+        {
             final ZipEntry entry = (ZipEntry) entries.nextElement();
-            if (DEBUG) LOG.debug("extracting " + entry);
+            if (DEBUG)
+            {
+                LOG.debug("extracting " + entry);
+            }
             final String destination = destinationDir + entry.getName();
-            if (destination.endsWith("/")) {
+            if (destination.endsWith("/"))
+            {
                 new File(destination).mkdirs();
             }
-            else {
-                try {
+            else
+            {
+                try
+                {
                     new File(new File(destination).getParent()).mkdirs();
                     final FileOutputStream os = new FileOutputStream(destination);
                     final InputStream is = zip.getInputStream(entry);
                     int chunkLength;
                     final byte[] buffer = new byte[8092];
-                    while ((chunkLength = is.read(buffer)) > 0) {
+                    while ((chunkLength = is.read(buffer)) > 0)
+                    {
                         os.write(buffer, 0, chunkLength);
                     }
                     is.close();
                     os.close();
                 }
-                catch (FileNotFoundException e) {
+                catch (FileNotFoundException e)
+                {
                     LOG.error("Error occured while extracting to " + destination, e);
                 }
-                catch (IOException e) {
+                catch (IOException e)
+                {
                     LOG.error("Error occured while opening zip entry " + entry, e);
                 }
             }
@@ -98,7 +123,8 @@ public class ZipUtils {
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */
     public static void zip(final File file, final File zip, final boolean overwriteZip, final boolean overwriteEntry)
-            throws ZipException {
+            throws ZipException
+    {
         zip(file, zip, overwriteZip, overwriteEntry, file.getName());
     }
 
@@ -115,8 +141,10 @@ public class ZipUtils {
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */
     public static void zip(final File file, final File zip, final boolean overwriteZip,
-                           final boolean overwriteEntry, final String relativePath) throws ZipException {
-        try {
+                           final boolean overwriteEntry, final String relativePath) throws ZipException
+    {
+        try
+        {
             final StringWriter writer = new StringWriter();
             final FileReader reader = new FileReader(file);
             IOUtils.copy(reader, writer);
@@ -126,10 +154,12 @@ public class ZipUtils {
 
             zip(input.getBytes(), zip, overwriteZip, overwriteEntry, relativePath);
         }
-        catch (ZipException e) {
+        catch (ZipException e)
+        {
             throw e;
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -147,23 +177,29 @@ public class ZipUtils {
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */
     public static void zip(final byte[] input, final File zip, final boolean overwriteZip,
-                           final boolean overwriteEntry, final String relativePath) throws ZipException {
-        try {
+                           final boolean overwriteEntry, final String relativePath) throws ZipException
+    {
+        try
+        {
             final byte[] buf = new byte[1024];
             final ZipOutputStream zipOutpuStream;
 
             // Copy existing zip contents into new zip file
-            if (!overwriteZip && zip.exists()) {
+            if (!overwriteZip && zip.exists())
+            {
                 final File tempZip = File.createTempFile("tmpZipper", ".zip");
                 FileUtils.copyFile(zip, tempZip);
                 final ZipInputStream tempIn = new ZipInputStream(new FileInputStream(tempZip));
                 ZipEntry tempZipEntry;
                 zipOutpuStream = new ZipOutputStream(new FileOutputStream(zip));
-                while ((tempZipEntry = tempIn.getNextEntry()) != null) {
+                while ((tempZipEntry = tempIn.getNextEntry()) != null)
+                {
                     int len;
-                    if (!(overwriteEntry && tempZipEntry.getName().equals(relativePath))) {
+                    if (!(overwriteEntry && tempZipEntry.getName().equals(relativePath)))
+                    {
                         zipOutpuStream.putNextEntry(tempZipEntry);
-                        while ((len = tempIn.read(buf, 0, 1024)) > 0) {
+                        while ((len = tempIn.read(buf, 0, 1024)) > 0)
+                        {
                             zipOutpuStream.write(buf, 0, len);
                         }
                     }
@@ -171,7 +207,8 @@ public class ZipUtils {
                 tempIn.close();
                 tempZip.delete();
             }
-            else {
+            else
+            {
                 zipOutpuStream = new ZipOutputStream(new FileOutputStream(zip));
             }
 
@@ -183,15 +220,18 @@ public class ZipUtils {
             zipOutpuStream.close();
             IOUtils.closeQuietly(byteInput);
         }
-        catch (ZipException e) {
+        catch (ZipException e)
+        {
             throw e;
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static void main(final String[] args) throws ZipException {
+    public static void main(final String[] args) throws ZipException
+    {
         final File zip = new File("C:/Dokumente und Einstellungen/Daniel Frey/Desktop/db.jar");
         unZip(zip.getAbsolutePath(), "C:/Dokumente und Einstellungen/Daniel Frey/Desktop/Temp");
     }

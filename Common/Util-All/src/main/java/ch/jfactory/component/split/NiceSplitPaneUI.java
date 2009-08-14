@@ -8,8 +8,10 @@ import javax.swing.plaf.metal.MetalSplitPaneUI;
  * /repository/HerbarCD/Version2.1/xmatrix/src/com/xmatrix/gui/component/split/NiceSplitPaneUI.java,v $ $Revision: 1.1
  * $, $Author: daniel_frey $
  */
-public class NiceSplitPaneUI extends MetalSplitPaneUI {
-    public BasicSplitPaneDivider createDefaultDivider() {
+public class NiceSplitPaneUI extends MetalSplitPaneUI
+{
+    public BasicSplitPaneDivider createDefaultDivider()
+    {
         return new NiceSplitPaneDivider(this);
     }
 

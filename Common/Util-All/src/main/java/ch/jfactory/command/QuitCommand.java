@@ -27,21 +27,26 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/03/14 21:27:55 $
  */
-public class QuitCommand extends ActionCommand {
+public class QuitCommand extends ActionCommand
+{
 
     private ClosingModel model;
 
-    public QuitCommand(final CommandManager commandManager, final ClosingModel model) {
+    public QuitCommand(final CommandManager commandManager, final ClosingModel model)
+    {
         super(commandManager, CommonCommands.COMMANDID_QUIT);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             model.setClosing();
             System.exit(0);
         }
-        catch (PropertyVetoException e) {
+        catch (PropertyVetoException e)
+        {
         }
     }
 }

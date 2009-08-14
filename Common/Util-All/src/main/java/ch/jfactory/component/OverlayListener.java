@@ -34,22 +34,30 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/08/16 10:20:18 $
  */
-public class OverlayListener extends MouseInputAdapter {
+public class OverlayListener extends MouseInputAdapter
+{
 
     JTree tree;
+
     Component oldGlassPane;
+
     TreePath path;
+
     int row;
+
     Rectangle bounds;
 
-    public OverlayListener(final JTree tree) {
+    public OverlayListener(final JTree tree)
+    {
         this.tree = tree;
         tree.addMouseListener(this);
         tree.addMouseMotionListener(this);
     }
 
-    JComponent c = new JComponent() {
-        public void paint(final Graphics g) {
+    JComponent c = new JComponent()
+    {
+        public void paint(final Graphics g)
+        {
             final boolean selected = tree.isRowSelected(row);
             final Component renderer = tree.getCellRenderer().getTreeCellRendererComponent(tree, path.getLastPathComponent(),
                     tree.isRowSelected(row), tree.isExpanded(row), tree.getModel().isLeaf(path.getLastPathComponent()), row,
@@ -58,44 +66,56 @@ public class OverlayListener extends MouseInputAdapter {
             final Rectangle paintBounds = SwingUtilities.convertRectangle(tree, bounds, this);
             SwingUtilities.paintComponent(g, renderer, this, paintBounds);
             if (selected)
+            {
                 return;
+            }
 
             g.setColor(Color.blue);
             ((Graphics2D) g).draw(paintBounds);
         }
     };
 
-    public void mouseExited(final MouseEvent e) {
+    public void mouseExited(final MouseEvent e)
+    {
         resetGlassPane();
     }
 
-    private void resetGlassPane() {
-        if (oldGlassPane != null) {
+    private void resetGlassPane()
+    {
+        if (oldGlassPane != null)
+        {
             c.setVisible(false);
             tree.getRootPane().setGlassPane(oldGlassPane);
             oldGlassPane = null;
         }
     }
 
-    public void mouseMoved(final MouseEvent me) {
+    public void mouseMoved(final MouseEvent me)
+    {
         path = tree.getPathForLocation(me.getX(), me.getY());
-        if (path == null) {
+        if (path == null)
+        {
             resetGlassPane();
             return;
         }
         row = tree.getRowForPath(path);
         bounds = tree.getPathBounds(path);
-        if (!tree.getVisibleRect().contains(bounds)) {
-            if (oldGlassPane == null) {
+        if (!tree.getVisibleRect().contains(bounds))
+        {
+            if (oldGlassPane == null)
+            {
                 oldGlassPane = tree.getRootPane().getGlassPane();
                 c.setOpaque(false);
                 tree.getRootPane().setGlassPane(c);
                 c.setVisible(true);
             }
             else
+            {
                 tree.getRootPane().repaint();
+            }
         }
-        else {
+        else
+        {
             resetGlassPane();
         }
     }

@@ -30,28 +30,38 @@ import java.awt.Window;
 /**
  * Copy of JGoodies ImageSplash to add support for version.
  *
- * @version $Revision: 1.3 $
  * @author Daniel Frey
- * @see    com.jgoodies.uif.splash.ImageSplash
- * @see    com.jgoodies.uif.splash.Splash
- * @see    com.jgoodies.uif.splash.SplashProvider
+ * @version $Revision: 1.3 $
+ * @see com.jgoodies.uif.splash.ImageSplash
+ * @see com.jgoodies.uif.splash.Splash
+ * @see com.jgoodies.uif.splash.SplashProvider
  */
 
-public final class ImageSplash extends Window implements com.jgoodies.uif.splash.SplashProvider {
+public final class ImageSplash extends Window implements com.jgoodies.uif.splash.SplashProvider
+{
 
     private static final int DEFAULT_BAR_WIDTH = 100;
+
     private static final int DEFAULT_BAR_HEIGHT = 10;
+
     private static final int VPAD = 10;
 
     private final Image image;
 
     private String note;
+
     private boolean noteEnabled;
+
     private boolean progressVisible;
+
     private Color textColor;
+
     private Rectangle progressBarBounds;
+
     private int percent;
+
     private String version;
+
     private int versionPad;
 
     // Instance Creation ****************************************************
@@ -62,10 +72,10 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param image the splash image to display
      */
-    public ImageSplash(final Image image) {
+    public ImageSplash(final Image image)
+    {
         this(image, false);
     }
-
 
     /**
      * Constructs an AWT based splash for the given <code>image</code> using a default <code>Frame</code> that has an
@@ -74,10 +84,10 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param image           the splash image to display
      * @param progressVisible true to show progress, false to hide it
      */
-    public ImageSplash(final Image image, final boolean progressVisible) {
+    public ImageSplash(final Image image, final boolean progressVisible)
+    {
         this(new Frame(), image, "Loading\u2026", progressVisible, null);
     }
-
 
     /**
      * Constructs an AWT based splash for the given Frame, Image, initial note and progress visibility.
@@ -87,7 +97,8 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param initialNote     the note that will be displayed first
      * @param progressVisible true to show progress, false to hide it
      */
-    public ImageSplash(final Frame owner, final Image image, final String initialNote, final boolean progressVisible, final String version) {
+    public ImageSplash(final Frame owner, final Image image, final String initialNote, final boolean progressVisible, final String version)
+    {
         super(owner);
         this.image = image;
         this.note = initialNote;
@@ -96,7 +107,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
         this.setVersion(version);
         setSize(image.getWidth(null), image.getHeight(null));
         setProgressBarBounds(VPAD);
-        setVersionHeight(2*VPAD);
+        setVersionHeight(2 * VPAD);
         setForeground(Color.DARK_GRAY);
         setBackground(Color.LIGHT_GRAY);
         textColor = Color.BLACK;
@@ -110,10 +121,10 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @return true if this splash changes the displayed note in {@link #setNote(String)}, false to ignore it
      */
-    public boolean isNoteEnabled() {
+    public boolean isNoteEnabled()
+    {
         return noteEnabled;
     }
-
 
     /**
      * Sets whether this splash shall honor or ignore note changes.
@@ -121,30 +132,30 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param noteEnabled true if this splash changes the displayed note in {@link #setNote(String)}, false to ignore
      *                    it
      */
-    public void setNoteEnabled(final boolean noteEnabled) {
+    public void setNoteEnabled(final boolean noteEnabled)
+    {
         this.noteEnabled = noteEnabled;
     }
-
 
     /**
      * Answers whether this splash shows a progress bar or not.
      *
      * @return true if this splash shows a progress, false if not
      */
-    public boolean isProgressVisible() {
+    public boolean isProgressVisible()
+    {
         return progressVisible;
     }
-
 
     /**
      * Shows or hides the progress bar.
      *
      * @param progressVisible true to show the progress, false to hide it
      */
-    public void setProgressVisible(final boolean progressVisible) {
+    public void setProgressVisible(final boolean progressVisible)
+    {
         this.progressVisible = progressVisible;
     }
-
 
     /**
      * Answers whether this splash shows a progress bar or not.
@@ -152,10 +163,10 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @return true if this splash shows a progress, false if not
      * @deprecated Replaced by {@link #isProgressVisible()}.
      */
-    public boolean isShowingProgress() {
+    public boolean isShowingProgress()
+    {
         return isProgressVisible();
     }
-
 
     /**
      * Shows or hides the progress bar.
@@ -163,17 +174,18 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param showingProgress true to show the progress
      * @deprecated Replaced by {@link #setProgressVisible(boolean)}.
      */
-    public void setShowingProgress(final boolean showingProgress) {
+    public void setShowingProgress(final boolean showingProgress)
+    {
         setProgressVisible(showingProgress);
     }
-
 
     /**
      * Returns the note color.
      *
      * @return the note color
      */
-    public Color getTextColor() {
+    public Color getTextColor()
+    {
         return textColor;
     }
 
@@ -182,17 +194,18 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param newTextColor the new note color
      */
-    public void setTextColor(final Color newTextColor) {
+    public void setTextColor(final Color newTextColor)
+    {
         textColor = newTextColor;
     }
-
 
     /**
      * Sets the bounds for the progress bar using the given Rectangle.
      *
      * @param r the Rectangle that describes the progress bar bounds
      */
-    public void setProgressBarBounds(final Rectangle r) {
+    public void setProgressBarBounds(final Rectangle r)
+    {
         progressBarBounds = new Rectangle(r);
     }
 
@@ -201,18 +214,19 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param bottomPad the distance in pixel from the splash's bottom
      */
-    public void setProgressBarBounds(final int bottomPad) {
+    public void setProgressBarBounds(final int bottomPad)
+    {
         setProgressBarBounds(defaultProgressBarBounds(bottomPad));
     }
 
-    public void setVersionHeight(final int bottomPad) {
+    public void setVersionHeight(final int bottomPad)
+    {
         this.versionPad = bottomPad;
     }
 
-    /**
-     * Answers the progress bar's default bounds using a pad from the dialog's bottom.
-     */
-    private Rectangle defaultProgressBarBounds(final int bottomPad) {
+    /** Answers the progress bar's default bounds using a pad from the dialog's bottom. */
+    private Rectangle defaultProgressBarBounds(final int bottomPad)
+    {
         final int x = (getWidth() - DEFAULT_BAR_WIDTH) / 2;
         final int y = getHeight() - DEFAULT_BAR_HEIGHT - bottomPad;
         return new Rectangle(x, y, DEFAULT_BAR_WIDTH, DEFAULT_BAR_HEIGHT);
@@ -220,19 +234,20 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
 
     // Painting *************************************************************
 
-    /**
-     * Renders the image and optionally a progress bar with a note.
-     */
-    public void paint(final Graphics graphics) {
-        final Graphics2D g =(Graphics2D) graphics;
+    /** Renders the image and optionally a progress bar with a note. */
+    public void paint(final Graphics graphics)
+    {
+        final Graphics2D g = (Graphics2D) graphics;
         // Check whether we are about to refresh the progress bar.
         final boolean clipIsProgressRect =
                 progressBarBounds.equals(g.getClipBounds());
 
-        if (image != null && (!progressVisible || !clipIsProgressRect)) {
+        if (image != null && (!progressVisible || !clipIsProgressRect))
+        {
             g.drawImage(image, 0, 0, this);
         }
-        if (progressVisible) {
+        if (progressVisible)
+        {
             final int x = progressBarBounds.x;
             final int y = progressBarBounds.y;
             final int w = progressBarBounds.width;
@@ -256,7 +271,8 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
             g.fillRect(1, 1, progressWidth, progressHeight);
             g.translate(-x, -y);
 
-            if (!clipIsProgressRect) {
+            if (!clipIsProgressRect)
+            {
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 final FontMetrics fm = getFontMetrics(g.getFont());
                 final int textWidth = fm.stringWidth(note);
@@ -265,7 +281,8 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
                 g.drawString(note, textX, progressBarBounds.y - VPAD / 2);
             }
         }
-        if (getVersion() != null && !"".equals(getVersion())) {
+        if (getVersion() != null && !"".equals(getVersion()))
+        {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             final FontMetrics fm = getFontMetrics(g.getFont());
             final int textWidth = fm.stringWidth(getVersion());
@@ -275,29 +292,25 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
         }
     }
 
-
-    /**
-     * Opens the splash window.
-     */
-    public void openSplash() {
+    /** Opens the splash window. */
+    public void openSplash()
+    {
         setVisible(true);
     }
 
-
-    /**
-     * Closes and disposes the splash window.
-     */
-    public void closeSplash() {
+    /** Closes and disposes the splash window. */
+    public void closeSplash()
+    {
         dispose();
     }
 
-
-    /**
-     * Sets a new progress value.
-     */
-    public void setProgress(final int percent) {
+    /** Sets a new progress value. */
+    public void setProgress(final int percent)
+    {
         if (!progressVisible)
+        {
             return;
+        }
         this.percent = percent;
         repaint(
                 progressBarBounds.x,
@@ -306,24 +319,27 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
                 progressBarBounds.height);
     }
 
-
     /**
      * Sets a new note if and only if {@link #isNoteEnabled()} returns true.
      *
      * @param newNote the note to set
      */
-    public void setNote(final String newNote) {
-        if (isNoteEnabled()) {
+    public void setNote(final String newNote)
+    {
+        if (isNoteEnabled())
+        {
             note = newNote;
             repaint();
         }
     }
 
-    public String getVersion() {
+    public String getVersion()
+    {
         return version;
     }
 
-    public void setVersion(final String version) {
+    public void setVersion(final String version)
+    {
         this.version = version;
     }
 }

@@ -51,20 +51,15 @@ import junit.framework.TestSuite;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class AnimationTest extends ComponentTestFixture {
-    /**
-     * The splash image to display.
-     */
+public class AnimationTest extends ComponentTestFixture
+{
+    /** The splash image to display. */
     private static final String SPLASH = "/splash.jpg";
 
-    /**
-     * Testseries parameter for page modi.
-     */
+    /** Testseries parameter for page modi. */
     private static final boolean[] pageModi = {false, true};
 
-    /**
-     * Testseries for paragraph delays.
-     */
+    /** Testseries for paragraph delays. */
     private static final int[] paragraphDelays = {10, 1000};
 
     /**
@@ -72,7 +67,8 @@ public class AnimationTest extends ComponentTestFixture {
      *
      * @param name
      */
-    public AnimationTest(final String name) {
+    public AnimationTest(final String name)
+    {
         super(name);
     }
 
@@ -81,11 +77,13 @@ public class AnimationTest extends ComponentTestFixture {
      *
      * @return the suite of tests being tested
      */
-    public static Test suite() {
+    public static Test suite()
+    {
         return new TestSuite(AnimationTest.class);
     }
 
-    public void testNullIconSplash() throws Exception, MultipleComponentsFoundException {
+    public void testNullIconSplash() throws Exception
+    {
         final SimpleSplash splash = new SimpleSplash(null);
         splash.setSize(new Dimension(300, 200));
         assertNotNull(splash);
@@ -96,7 +94,8 @@ public class AnimationTest extends ComponentTestFixture {
         assertFalse(splash.isVisible());
     }
 
-    public void testInvalidIconSplash() throws ComponentNotFoundException, MultipleComponentsFoundException {
+    public void testInvalidIconSplash() throws ComponentNotFoundException, MultipleComponentsFoundException
+    {
         final ImageIcon imageIcon = new ImageIcon("DoesNotExist.jpg");
         final SimpleSplash splash = new SimpleSplash(imageIcon);
         splash.start();
@@ -112,7 +111,8 @@ public class AnimationTest extends ComponentTestFixture {
         assertFalse(splash.isVisible());
     }
 
-    public void testSplashWithoutForeground() throws ComponentNotFoundException, MultipleComponentsFoundException {
+    public void testSplashWithoutForeground() throws ComponentNotFoundException, MultipleComponentsFoundException
+    {
         final URL url = AnimationTest.class.getResource(SPLASH);
         final ImageIcon imageIcon = new ImageIcon(url);
 
@@ -127,15 +127,18 @@ public class AnimationTest extends ComponentTestFixture {
         assertFalse(splash.isVisible());
     }
 
-    public void testFadingWithoutBackgroundImage() throws ComponentNotFoundException, MultipleComponentsFoundException {
+    public void testFadingWithoutBackgroundImage() throws ComponentNotFoundException, MultipleComponentsFoundException
+    {
         final JFrame frame = new JFrame("AnimationQueue Test");
         final Dimension size = new Dimension(300, 200);
 
         // Make sure that the frame is disposed and tests can go on when animation is finished
         final FadingPaintable fader = new FadingPaintable(Color.ORANGE);
         final Thread sleeper = Thread.currentThread();
-        fader.addStopListener(new StopListener() {
-            public void stopPerformed() {
+        fader.addStopListener(new StopListener()
+        {
+            public void stopPerformed()
+            {
                 frame.dispose();
                 sleeper.interrupt();
             }
@@ -158,7 +161,8 @@ public class AnimationTest extends ComponentTestFixture {
         assertFalse(foundSplash.isVisible());
     }
 
-    public void testSimpleSplashWithFaderAndScroller() {
+    public void testSimpleSplashWithFaderAndScroller()
+    {
         // The background image
         final URL url = AnimationTest.class.getResource(SPLASH);
         final ImageIcon imageIcon = new ImageIcon(url);
@@ -189,18 +193,19 @@ public class AnimationTest extends ComponentTestFixture {
         s.stop();
     }
 
-    public void testSplashWithScroller() throws ComponentNotFoundException, MultipleComponentsFoundException {
-        for (int i = 0; i < pageModi.length; i++) {
-            final boolean b = pageModi[i];
-
-            for (int j = 0; j < paragraphDelays.length; j++) {
-                final int d = paragraphDelays[j];
+    public void testSplashWithScroller() throws ComponentNotFoundException, MultipleComponentsFoundException
+    {
+        for (final boolean b : pageModi)
+        {
+            for (final int d : paragraphDelays)
+            {
                 doSplashWithForeground(b, d);
             }
         }
     }
 
-    private void doSplashWithForeground(final boolean pageModus, final int paragraphDelay) {
+    private void doSplashWithForeground(final boolean pageModus, final int paragraphDelay)
+    {
         //throws ComponentNotFoundException, MultipleComponentsFoundException {
         // The background image
         final URL url = AnimationTest.class.getResource(SPLASH);
@@ -244,9 +249,8 @@ public class AnimationTest extends ComponentTestFixture {
     }
 
     /**
-     * Tests whether a click does deliver the next page in the scrolling text component.
-     * <p/>
-     * Todo: Disabled at the moment as of a class path problem.
+     * Tests whether a click does deliver the next page in the scrolling text component. <p/> Todo: Disabled at the
+     * moment as of a class path problem.
      *
      * @throws ComponentNotFoundException
      * @throws MultipleComponentsFoundException
@@ -254,7 +258,8 @@ public class AnimationTest extends ComponentTestFixture {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public void doTestSplashScrollerMouseClick() throws ComponentNotFoundException, MultipleComponentsFoundException, IOException, URISyntaxException {
+    public void doTestSplashScrollerMouseClick() throws ComponentNotFoundException, MultipleComponentsFoundException, IOException, URISyntaxException
+    {
         final JDialog dialog = new JDialog();
         dialog.setSize(300, 200);
 
@@ -301,15 +306,20 @@ public class AnimationTest extends ComponentTestFixture {
      * @param format
      * @throws IOException when something gets wrong during io
      */
-    private void saveImage(final Component component, final String fileName, final String format) throws IOException {
+    private void saveImage(final Component component, final String fileName, final String format) throws IOException
+    {
         final BufferedImage image = new ComponentTester().capture(component);
         ImageIO.write(image, format, new File(fileName));
     }
 
-    private void sleep(final int sleepTimeInSeconds) {
-        try {
+    private void sleep(final int sleepTimeInSeconds)
+    {
+        try
+        {
             Thread.sleep(1000 * sleepTimeInSeconds);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
         }
     }
 
@@ -321,9 +331,11 @@ public class AnimationTest extends ComponentTestFixture {
      * @return whether the files are identical in contents
      * @throws IOException if a problem arises during file read io
      */
-    private boolean areFilesEqual(final File f1, final File f2) throws IOException {
+    private boolean areFilesEqual(final File f1, final File f2) throws IOException
+    {
         // compare file sizes
-        if (f1.length() != f2.length()) {
+        if (f1.length() != f2.length())
+        {
             return false;
         }
 
@@ -333,10 +345,12 @@ public class AnimationTest extends ComponentTestFixture {
         int b1;
         int b2;
 
-        do {
+        do
+        {
             b1 = i1.read();
             b2 = i2.read();
-        } while ((b1 == b2) && (b1 != -1));
+        }
+        while ((b1 == b2) && (b1 != -1));
 
         i1.close();
         i2.close();

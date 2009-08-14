@@ -25,16 +25,13 @@ import javax.swing.ImageIcon;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface SplashProvider {
+public interface SplashProvider
+{
 
-    /**
-     * Start the splash screen. Make sure this method does show the splash window.
-     */
+    /** Start the splash screen. Make sure this method does show the splash window. */
     void start();
 
-    /**
-     * Stop the splash screen. Make sure the window is displosed.
-     */
+    /** Stop the splash screen. Make sure the window is displosed. */
     void stop();
 
     /**

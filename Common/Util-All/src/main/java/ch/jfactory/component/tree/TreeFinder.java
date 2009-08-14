@@ -15,7 +15,8 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface TreeFinder {
+public interface TreeFinder
+{
 
     /**
      * Sets the path found for the node found. The path may be null.

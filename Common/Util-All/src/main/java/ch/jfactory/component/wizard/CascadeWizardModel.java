@@ -13,7 +13,8 @@ import java.util.Properties;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:56 $
  */
-abstract public class CascadeWizardModel extends DefaultWizardModel implements WizardStateListener {
+abstract public class CascadeWizardModel extends DefaultWizardModel implements WizardStateListener
+{
 
     private static final String NAME = "CascadeWizardModel";
 
@@ -21,48 +22,63 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
 
     private boolean inCascadeWizard = false;
 
-    public CascadeWizardModel(final Properties properties, final WizardPane[] panes) {
+    public CascadeWizardModel(final Properties properties, final WizardPane[] panes)
+    {
         super(properties, panes, NAME);
     }
 
-    public void setNextEnabled(final boolean isNextEnabled) {
-        if (inCascadeWizard()) {
+    public void setNextEnabled(final boolean isNextEnabled)
+    {
+        if (inCascadeWizard())
+        {
             cascadeWizardModel.setNextEnabled(isNextEnabled);
         }
-        else {
+        else
+        {
             super.setNextEnabled(isNextEnabled);
         }
     }
 
-    public void setFinishEnabled(final boolean isFinishEnabled) {
-        if (inCascadeWizard()) {
+    public void setFinishEnabled(final boolean isFinishEnabled)
+    {
+        if (inCascadeWizard())
+        {
             cascadeWizardModel.setFinishEnabled(isFinishEnabled);
         }
-        else {
+        else
+        {
             super.setFinishEnabled(isFinishEnabled);
         }
     }
 
-    public void setPreviousEnabled(final boolean isPreviousEnabled) {
-        if (inCascadeWizard()) {
+    public void setPreviousEnabled(final boolean isPreviousEnabled)
+    {
+        if (inCascadeWizard())
+        {
             cascadeWizardModel.setPreviousEnabled(isPreviousEnabled);
         }
-        else {
+        else
+        {
             super.setPreviousEnabled(isPreviousEnabled);
         }
     }
 
-    public void setCancelEnabled(final boolean isCancelEnabled) {
-        if (inCascadeWizard()) {
+    public void setCancelEnabled(final boolean isCancelEnabled)
+    {
+        if (inCascadeWizard())
+        {
             cascadeWizardModel.setCancelEnabled(isCancelEnabled);
         }
-        else {
+        else
+        {
             super.setCancelEnabled(isCancelEnabled);
         }
     }
 
-    public void setCascadeWizardModel(final WizardModel newCascadeModel) {
-        if (cascadeWizardModel != null) {
+    public void setCascadeWizardModel(final WizardModel newCascadeModel)
+    {
+        if (cascadeWizardModel != null)
+        {
             cascadeWizardModel.removeWizardStateListener(this);
         }
         cascadeWizardModel = newCascadeModel;
@@ -70,142 +86,180 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
         fireInternalState();
     }
 
-    public boolean isNextEnabled() {
-        if (inCascadeWizard()) {
+    public boolean isNextEnabled()
+    {
+        if (inCascadeWizard())
+        {
             return cascadeWizardModel.isNextEnabled();
         }
-        else {
+        else
+        {
             return super.isNextEnabled();
         }
     }
 
-    public WizardPane[] getPanes() {
+    public WizardPane[] getPanes()
+    {
         final List list = new ArrayList();
         list.addAll(Arrays.asList(super.getPanes()));
         list.addAll(Arrays.asList(cascadeWizardModel.getPanes()));
-        return (WizardPane[]) list.toArray(new WizardPane[0]);
+        return (WizardPane[]) list.toArray(new WizardPane[list.size()]);
     }
 
-    public WizardPane getPane() {
+    public WizardPane getPane()
+    {
         final int index = super.getCurrentPaneIndex();
         final int panesCount = super.getPanes().length;
-        if (index > panesCount) {
+        if (index > panesCount)
+        {
             return cascadeWizardModel.getPane(index - panesCount);
         }
-        else {
+        else
+        {
             return super.getPane(index);
         }
     }
 
-    public WizardPane getNextPane() {
+    public WizardPane getNextPane()
+    {
         final int currentPaneIndex = getCurrentPaneIndex();
         final int staticPaneCount = super.getPanes().length;
         WizardPane pane = null;
 
-        if (currentPaneIndex == (staticPaneCount - 1)) {
+        if (currentPaneIndex == (staticPaneCount - 1))
+        {
             // wizard will switch to mode wizard
-            if (cascadeWizardModel.getPanes().length > 0) {
+            if (cascadeWizardModel.getPanes().length > 0)
+            {
                 inCascadeWizard = true;
                 pane = cascadeWizardModel.getPane(0);
             }
         }
-        else if (currentPaneIndex > (staticPaneCount - 1)) {
+        else if (currentPaneIndex > (staticPaneCount - 1))
+        {
             pane = cascadeWizardModel.getNextPane();
         }
-        else {
+        else
+        {
             pane = super.getNextPane();
         }
 
         return pane;
     }
 
-    public boolean isFinishEnabled() {
-        if (inCascadeWizard()) {
+    public boolean isFinishEnabled()
+    {
+        if (inCascadeWizard())
+        {
             return cascadeWizardModel.isFinishEnabled();
         }
-        else {
+        else
+        {
             return super.isFinishEnabled();
         }
     }
 
-    public boolean isCancelEnabled() {
-        if (inCascadeWizard()) {
+    public boolean isCancelEnabled()
+    {
+        if (inCascadeWizard())
+        {
             return cascadeWizardModel.isCancelEnabled();
         }
-        else {
+        else
+        {
             return super.isCancelEnabled();
         }
     }
 
-    public boolean isPreviousEnabled() {
-        if (inCascadeWizard()) {
+    public boolean isPreviousEnabled()
+    {
+        if (inCascadeWizard())
+        {
             return cascadeWizardModel.isPreviousEnabled();
         }
-        else {
+        else
+        {
             return super.isPreviousEnabled();
         }
     }
 
-    public WizardPane getPreviousPane() {
+    public WizardPane getPreviousPane()
+    {
         WizardPane pane = null;
 
-        if (inCascadeWizard()) {
-            if (cascadeWizardModel.getCurrentPaneIndex() > 0) {
+        if (inCascadeWizard())
+        {
+            if (cascadeWizardModel.getCurrentPaneIndex() > 0)
+            {
                 pane = cascadeWizardModel.getPreviousPane();
             }
-            else {
+            else
+            {
                 inCascadeWizard = false;
                 pane = super.getPane(super.getCurrentPaneIndex());
             }
         }
-        else {
+        else
+        {
             pane = super.getPreviousPane();
         }
         return pane;
     }
 
-    public int getCurrentPaneIndex() {
-        if (inCascadeWizard()) {
+    public int getCurrentPaneIndex()
+    {
+        if (inCascadeWizard())
+        {
             final int panesCount = super.getPanes().length;
             return cascadeWizardModel.getCurrentPaneIndex() + panesCount;
         }
-        else {
+        else
+        {
             return super.getCurrentPaneIndex();
         }
     }
 
-    public boolean hasNext() {
+    public boolean hasNext()
+    {
         final int currentPaneIndex = getCurrentPaneIndex();
         final int staticPaneCount = super.getPanes().length;
         boolean hasNext = false;
 
-        if (currentPaneIndex == (staticPaneCount - 1)) {
+        if (currentPaneIndex == (staticPaneCount - 1))
+        {
             // wizard will switch to mode wizard
-            if (cascadeWizardModel != null && cascadeWizardModel.getPanes().length > 0) {
+            if (cascadeWizardModel != null && cascadeWizardModel.getPanes().length > 0)
+            {
                 hasNext = true;
             }
         }
-        else if (cascadeWizardModel != null && currentPaneIndex > (staticPaneCount - 1)) {
+        else if (cascadeWizardModel != null && currentPaneIndex > (staticPaneCount - 1))
+        {
             hasNext = cascadeWizardModel.hasNext();
         }
-        else {
+        else
+        {
             hasNext = super.hasNext();
         }
 
         return hasNext;
     }
 
-    public boolean hasPrevious() {
-        if (inCascadeWizard()) {
+    public boolean hasPrevious()
+    {
+        if (inCascadeWizard())
+        {
             // there is every time a previous pane
             return true;
         }
-        else {
+        else
+        {
             return super.hasPrevious();
         }
     }
 
-    public void change(final WizardStateChangeEvent event) {
+    public void change(final WizardStateChangeEvent event)
+    {
         // delegate event, but enable previous button
         final WizardStateChangeEvent translated = new WizardStateChangeEvent(event.getSource(), event.hasNext(), true,
                 event.isNextEnabled(), event.isPreviousEnabled(), event.isFinishEnabled(), event.isCancelEnabled());
@@ -213,7 +267,8 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
         super.fireChange(translated);
     }
 
-    private boolean inCascadeWizard() {
+    private boolean inCascadeWizard()
+    {
         return inCascadeWizard;
     }
 }

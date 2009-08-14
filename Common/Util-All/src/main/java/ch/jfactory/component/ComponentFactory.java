@@ -21,7 +21,8 @@ import javax.swing.SwingConstants;
  * properties are loaded with the {@link ch.jfactory.resource.Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1
  * $
  */
-public class ComponentFactory {
+public class ComponentFactory
+{
     /**
      * Creates a button with name, icon and tooltip by extracting the strings/icon name from a resource. If an object
      * not null is given as a discriminator, the resource associated with that object is used, otherwise the global
@@ -42,24 +43,28 @@ public class ComponentFactory {
      * <li>Shortcut: <code>PREFIX.SHORT</code></li>
      *
      * </ul> This button does -- in addition to the one created by {@link #createSimpleButton(Class, String,
-            * ActionListener)} -- a key stroke on the top level component.
+     * ActionListener)} -- a key stroke on the top level component.
      *
      * @param obj            the object to search the associated resource bundle
      * @param prefix         the prefix used to search properties
      * @param actionListener actionListener to invoke
      * @return The button created
      */
-    public static JButton createButton(final Class obj, final String prefix, final ActionListener actionListener) {
+    public static JButton createButton(final Class obj, final String prefix, final ActionListener actionListener)
+    {
         final JButton button = createSimpleButton(obj, prefix, actionListener);
         final String shortcut = Strings.getString(obj, prefix + ".SHORT");
         final KeyStroke key = KeyBindings.parseKeyStroke(shortcut);
-        if (key != null) {
+        if (key != null)
+        {
             final String shortCutHint = " (" + KeyBindings.getSymbolicModifierName(shortcut) + ")";
             button.setToolTipText(button.getToolTipText() + shortCutHint);
         }
         // registers the key binding the first time the button is showing up, guaranteed to be added to a root pane
-        button.addHierarchyListener(new HierarchyListener() {
-            public void hierarchyChanged(final HierarchyEvent e) {
+        button.addHierarchyListener(new HierarchyListener()
+        {
+            public void hierarchyChanged(final HierarchyEvent e)
+            {
                 registerKeyStroke(button, Strings.getString(obj, prefix + ".SHORT"), this);
             }
         });
@@ -67,13 +72,17 @@ public class ComponentFactory {
         return button;
     }
 
-    private static void registerKeyStroke(final JButton button, final String resourceKey, final HierarchyListener owner) {
-        if (button.getRootPane() != null) {
+    private static void registerKeyStroke(final JButton button, final String resourceKey, final HierarchyListener owner)
+    {
+        if (button.getRootPane() != null)
+        {
             final KeyStroke key = KeyBindings.parseKeyStroke(resourceKey);
-            if (key != null) {
+            if (key != null)
+            {
                 ActionUtils.registerKeyStrokeAction(key, button);
             }
-            if (button.getTopLevelAncestor() instanceof JFrame && owner != null) {
+            if (button.getTopLevelAncestor() instanceof JFrame && owner != null)
+            {
                 button.removeHierarchyListener(owner);
             }
         }
@@ -107,12 +116,14 @@ public class ComponentFactory {
      * @param actionListener The event handler for this button
      * @return a new button
      */
-    private static JButton createSimpleButton(final Class obj, final String prefix, final ActionListener actionListener) {
+    private static JButton createSimpleButton(final Class obj, final String prefix, final ActionListener actionListener)
+    {
         final JButton button = new JButton();
         button.setText(Strings.getString(obj, prefix + ".TEXT"));
         button.setIcon(ImageLocator.getIcon(Strings.getString(obj, prefix + ".ICON")));
         final String disabledIconKey = Strings.getString(obj, prefix + ".ICON2");
-        if (!"".equals(disabledIconKey)) {
+        if (!"".equals(disabledIconKey))
+        {
             button.setDisabledIcon(ImageLocator.getIcon(disabledIconKey));
         }
         button.addActionListener(actionListener);
@@ -141,11 +152,13 @@ public class ComponentFactory {
      * @param actionListener ActionListener to invoke
      * @return The button created
      */
-    public static JButton createButton(final String prefix, final ActionListener actionListener) {
+    public static JButton createButton(final String prefix, final ActionListener actionListener)
+    {
         return createButton(null, prefix, actionListener);
     }
 
-    public static JLabel createLabel(final Class obj, final String prefix) {
+    public static JLabel createLabel(final Class obj, final String prefix)
+    {
         final String text = Strings.getString(obj, prefix + ".TEXT");
         final ImageIcon icon = ImageLocator.getIcon(Strings.getString(obj, prefix + ".ICON"));
         final JLabel label = new JLabel(text, icon, JLabel.LEFT);
@@ -153,7 +166,8 @@ public class ComponentFactory {
         return label;
     }
 
-    public static JButton createLabelButton(final Class obj, final String prefix, final ActionListener action) {
+    public static JButton createLabelButton(final Class obj, final String prefix, final ActionListener action)
+    {
         final JButton button = createSimpleButton(obj, prefix, action);
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setHorizontalAlignment(SwingConstants.LEFT);
@@ -161,7 +175,8 @@ public class ComponentFactory {
         return button;
     }
 
-    public static Component createSeparator() {
+    public static Component createSeparator()
+    {
         final JLabel label = new JLabel(ImageLocator.getIcon("separator.png"));
         label.setBorder(BorderFactory.createEmptyBorder());
         return label;

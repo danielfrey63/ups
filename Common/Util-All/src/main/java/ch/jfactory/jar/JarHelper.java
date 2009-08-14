@@ -12,13 +12,15 @@ import sun.tools.jar.Main;
  *
  * @author Daniel Frey 27.06.2008 09:14:42
  */
-public final class JarHelper {
+public final class JarHelper
+{
 
     /** This class logger. */
     private static final Logger LOG = Logger.getLogger(JarHelper.class);
 
     /** Hide constructor. */
-    private JarHelper() {
+    private JarHelper()
+    {
     }
 
     /**
@@ -30,7 +32,8 @@ public final class JarHelper {
      * @param filename the name of the file within the JAR
      * @throws Exception passed through
      */
-    public static void build(final String jar, final File dir, final String filename) throws Exception {
+    public static void build(final String jar, final File dir, final String filename) throws Exception
+    {
         final String[] args = new String[]{"cf", jar, "-C", dir.getAbsolutePath(), filename};
         final ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
         final PrintStream out = new PrintStream(outBytes);
@@ -38,12 +41,14 @@ public final class JarHelper {
         final PrintStream err = new PrintStream(errBytes);
         new Main(out, err, "jar").run(args);
         final String errString = errBytes.toString();
-        if (errString != null && !"".equals(errString)) {
+        if (errString != null && !"".equals(errString))
+        {
             LOG.error("problem during building of jar: " + errString);
             throw new Exception(errString);
         }
         final String outString = outBytes.toString();
-        if (outString != null && !"".equals(outString)) {
+        if (outString != null && !"".equals(outString))
+        {
             LOG.info(outString);
         }
     }
@@ -57,7 +62,8 @@ public final class JarHelper {
      * @param pass     the keystore password
      * @throws Exception passed through
      */
-    public static void sign(final String file, final String keystore, final String alias, final String pass) throws Exception {
+    public static void sign(final String file, final String keystore, final String alias, final String pass) throws Exception
+    {
         new JarSigner().run(new String[]{"-keystore ", keystore, "-storepass ", pass, file, alias});
         LOG.info("jar " + file + " successfully signed");
     }

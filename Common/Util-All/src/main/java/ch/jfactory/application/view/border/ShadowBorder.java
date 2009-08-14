@@ -12,11 +12,13 @@ import javax.swing.border.AbstractBorder;
  * /repository/HerbarCD/Version2.1/xmatrix/src/com/xmatrix/gui/border/ShadowBorder.java,v $ $Revision: 1.1 $, $Author:
  * daniel_frey $
  */
-public class ShadowBorder extends AbstractBorder {
+public class ShadowBorder extends AbstractBorder
+{
 
     private final static Insets insets = new Insets(1, 1, 3, 3);
 
-    public Insets getBorderInsets(final Component c) {
+    public Insets getBorderInsets(final Component c)
+    {
         return insets;
     }
 
@@ -25,7 +27,8 @@ public class ShadowBorder extends AbstractBorder {
                             final int x,
                             final int y,
                             final int w,
-                            final int h) {
+                            final int h)
+    {
         final Color shadow = UIManager.getColor("controlShadow");
         g.translate(x, y);
         g.setColor(shadow);

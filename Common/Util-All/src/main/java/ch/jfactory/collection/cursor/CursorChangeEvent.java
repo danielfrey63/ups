@@ -6,8 +6,10 @@ package ch.jfactory.collection.cursor;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-public class CursorChangeEvent {
-    public CursorChangeEvent(final Cursor cursor) {
+public class CursorChangeEvent
+{
+    public CursorChangeEvent(final Cursor cursor)
+    {
         this.cursor = cursor;
     }
 
@@ -16,7 +18,8 @@ public class CursorChangeEvent {
      *
      * @return reference to cursor object
      */
-    public Cursor getCursor() {
+    public Cursor getCursor()
+    {
         return cursor;
     }
 
@@ -25,7 +28,8 @@ public class CursorChangeEvent {
      *
      * @return the current object
      */
-    public Object getCurrentObject() {
+    public Object getCurrentObject()
+    {
         return cursor.getCurrent();
     }
 

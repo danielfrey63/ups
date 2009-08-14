@@ -27,7 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Superclass for all wizard panes. All wizard panes must be inherit from this class. It enhance JPanel with some wizard
@@ -36,26 +36,19 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public abstract class WizardPane extends JPanel {
+public abstract class WizardPane extends JPanel
+{
 
-    /**
-     * logging
-     */
-    private static final Category cat = Category.getInstance(WizardPane.class);
+    /** logging */
+    private static final Logger LOGGER = Logger.getLogger(WizardPane.class);
 
-    /**
-     * the wizard model should be initialize in init
-     */
+    /** the wizard model should be initialize in init */
     private WizardModel model;
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     private String name;
 
-    /**
-     * map of properties
-     */
+    /** map of properties */
     ExtendedBeanInfo ebi;
 
     protected String prefix;
@@ -65,14 +58,16 @@ public abstract class WizardPane extends JPanel {
      *
      * @param name the name of the pane
      */
-    public WizardPane(final String name) {
+    public WizardPane(final String name)
+    {
         super();
         this.name = name;
         prefix = "WIZARD." + getName().toUpperCase();
         initGui();
     }
 
-    private void initGui() {
+    private void initGui()
+    {
         final JLabel picture = createWizardPicture(prefix + ".ICON");
         final JPanel display = createDisplayPanel(prefix);
 
@@ -97,7 +92,8 @@ public abstract class WizardPane extends JPanel {
      * @param prefix the prefix to the key to search for the text, icons, tooltips
      * @return panel containing the right hand side of the wizard pane
      */
-    protected JPanel createDisplayPanel(final String prefix) {
+    protected JPanel createDisplayPanel(final String prefix)
+    {
         final JPanel text = createTextPanel(prefix);
         final JPanel edit = createEditPanel(prefix);
 
@@ -109,13 +105,15 @@ public abstract class WizardPane extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
 
-        if (text != null) {
+        if (text != null)
+        {
             gbc.gridy += 1;
             gbc.weighty = 0.0;
             panel.add(text, gbc);
         }
 
-        if (edit != null) {
+        if (edit != null)
+        {
             gbc.gridy += 1;
             gbc.weighty = 0.0;
             panel.add(edit, gbc);
@@ -135,7 +133,8 @@ public abstract class WizardPane extends JPanel {
      * @param buttonAction the action added to the button
      * @return panel containing the component
      */
-    protected JPanel createDefaultDisplayArea(final String prefix, final ActionListener buttonAction) {
+    protected JPanel createDefaultDisplayArea(final String prefix, final ActionListener buttonAction)
+    {
         final JPanel text = createTextPanel(prefix);
         final JPanel edit = createDefaultEdit(prefix, buttonAction);
         return createDefaultDislayArea(text, edit);
@@ -149,13 +148,15 @@ public abstract class WizardPane extends JPanel {
      * @param focus           the focus listener added to the edit field
      * @return panel containing the component
      */
-    protected JPanel createDefaultDisplayArea(final String prefix, final ActionListener editFieldAction, final FocusListener focus) {
+    protected JPanel createDefaultDisplayArea(final String prefix, final ActionListener editFieldAction, final FocusListener focus)
+    {
         final JPanel text = createTextPanel(prefix);
         final JPanel edit = createDefaultTextEdit(prefix, editFieldAction, focus);
         return createDefaultDislayArea(text, edit);
     }
 
-    private JPanel createDefaultDislayArea(final JPanel text, final JPanel edit) {
+    private JPanel createDefaultDislayArea(final JPanel text, final JPanel edit)
+    {
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -185,7 +186,8 @@ public abstract class WizardPane extends JPanel {
      * @param prefix
      * @return panel
      */
-    protected JPanel createTextPanel(final String prefix) {
+    protected JPanel createTextPanel(final String prefix)
+    {
         final JMultiLineLabel text = new JMultiLineLabel(Strings.getString(prefix + ".TEXT"));
         final JPanel textPanel = new JPanel(new BorderLayout());
         textPanel.add(text, BorderLayout.CENTER);
@@ -198,7 +200,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @return JPanel containing the edit region
      */
-    protected JPanel createEditPanel(final String prefix) {
+    protected JPanel createEditPanel(final String prefix)
+    {
         return createDefaultEdit(prefix, getEditAction());
     }
 
@@ -212,12 +215,13 @@ public abstract class WizardPane extends JPanel {
      *
      * @return edit item
      */
-    protected EditItem createDefaultEdit(final String prefix, final ActionListener editAction) {
+    protected EditItem createDefaultEdit(final String prefix, final ActionListener editAction)
+    {
         return new EditItem(prefix, editAction);
     }
 
-
-    protected TextEditItem createDefaultTextEdit(final String prefix, final ActionListener editAction, final FocusListener focus) {
+    protected TextEditItem createDefaultTextEdit(final String prefix, final ActionListener editAction, final FocusListener focus)
+    {
         return new TextEditItem(prefix, editAction, focus);
     }
 
@@ -226,15 +230,18 @@ public abstract class WizardPane extends JPanel {
      *
      * @return name of the pane
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 
-    public WizardModel getWizardModel() {
+    public WizardModel getWizardModel()
+    {
         return model;
     }
 
@@ -242,14 +249,16 @@ public abstract class WizardPane extends JPanel {
      * Is invoked by the wizard if it enter this pane. Overwrite this method if you want to take actions uppon
      * activation.
      */
-    public void activate() {
+    public void activate()
+    {
     }
 
     /**
      * Is invoked by the wizard if it leaves this pane. Overwrite this method if you want to take actions uppon
      * activation.
      */
-    public void passivate() {
+    public void passivate()
+    {
     }
 
     /**
@@ -257,7 +266,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @return whether it is ok to switch to the next pane
      */
-    public boolean isNextOk() {
+    public boolean isNextOk()
+    {
         return true;
     }
 
@@ -266,7 +276,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @return whether it is ok to switch cancel the dialog
      */
-    public boolean isCancelOk() {
+    public boolean isCancelOk()
+    {
         return true;
     }
 
@@ -275,7 +286,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @return whether it is ok to switch to the previous pane
      */
-    public boolean isPreviousOk() {
+    public boolean isPreviousOk()
+    {
         return true;
     }
 
@@ -284,7 +296,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @return ActionListener to invoke when button is clicked
      */
-    protected ActionListener getEditAction() {
+    protected ActionListener getEditAction()
+    {
         return null;
     }
 
@@ -293,13 +306,13 @@ public abstract class WizardPane extends JPanel {
      *
      * @param model refernce to the model
      */
-    public void registerPropertyChangeListener(final WizardModel model) {
+    public void registerPropertyChangeListener(final WizardModel model)
+    {
     }
 
-    /**
-     * This method should be overwritten to set the standard values.
-     */
-    public void initDefaultValues() {
+    /** This method should be overwritten to set the standard values. */
+    public void initDefaultValues()
+    {
     }
 
     /**
@@ -308,16 +321,19 @@ public abstract class WizardPane extends JPanel {
      * @param name the name of the property
      * @return reference to the property value
      */
-    public Object getProperty(final String name) {
+    public Object getProperty(final String name)
+    {
         Method method = null;
-        try {
+        try
+        {
             method = ebi.getPropertyDescriptor(name).getReadMethod();
-            return method.invoke(model, new Object[0]);
+            return method.invoke(model);
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             final String msg = "Cannot get property \"" + name + "\" for WizardModel. Method invokation \"" + method +
                     "\" not successful.";
-            cat.error(msg, ex);
+            LOGGER.error(msg, ex);
             throw new IllegalStateException(msg);
         }
     }
@@ -328,20 +344,24 @@ public abstract class WizardPane extends JPanel {
      * @param name  name of the property
      * @param value value of the property
      */
-    public void setProperty(final String name, final Object value) {
+    public void setProperty(final String name, final Object value)
+    {
         Method method = null;
-        try {
+        try
+        {
             waitCursor(true);
             method = ebi.getPropertyDescriptor(name).getWriteMethod();
-            method.invoke(model, new Object[]{value});
+            method.invoke(model, value);
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             final String msg = "Cannot set property \"" + name + "\" for WizardModel. Method invokation \"" + method +
                     "\" with argument of " + value + " not successful.";
-            cat.error(msg, ex);
+            LOGGER.error(msg, ex);
             throw new IllegalStateException(msg);
         }
-        finally {
+        finally
+        {
             waitCursor(false);
         }
     }
@@ -351,20 +371,24 @@ public abstract class WizardPane extends JPanel {
      *
      * @param model the wizard model
      */
-    final public void init(final WizardModel model) {
+    final public void init(final WizardModel model)
+    {
         this.model = model;
         registerPropertyChangeListener(model);
         initDefaultValues();
     }
 
-    public void waitCursor(final boolean visible) {
+    public void waitCursor(final boolean visible)
+    {
         final JDialog dlg = (JDialog) this.getTopLevelAncestor();
-        if (dlg != null) {
+        if (dlg != null)
+        {
             dlg.getGlassPane().setVisible(visible);
         }
     }
 
-    protected JLabel createWizardPicture(final String resourceKey) {
+    protected JLabel createWizardPicture(final String resourceKey)
+    {
         final JLabel wizardPicture = new JLabel();
         wizardPicture.setIcon(ImageLocator.getIcon(Strings.getString(resourceKey)));
         wizardPicture.setBorder(BorderFactory.createEmptyBorder(0, 0, 1, 0));
@@ -379,7 +403,8 @@ public abstract class WizardPane extends JPanel {
      * @param prefix the prefix used to access the key in the string resource
      * @return JScrollPane displaying the text
      */
-    protected JScrollPane createIntroArea(final String prefix) {
+    protected JScrollPane createIntroArea(final String prefix)
+    {
         final String text = Strings.getString(prefix + ".TEXT");
         final JTextPane textDisplay = new JTextPane();
 //        textDisplay.setBackground(HerbarTheme.getBackground2());
@@ -408,7 +433,8 @@ public abstract class WizardPane extends JPanel {
      *
      * @param prefix used to prefix the key
      */
-    protected JPanel createDefaultTitlePanel(final String prefix) {
+    protected JPanel createDefaultTitlePanel(final String prefix)
+    {
         final JLabel label = new JLabel(Strings.getString(prefix + ".TITLE.TEXT"));
         label.setFont(label.getFont().deriveFont(Font.BOLD));
         final JPanel panel = new JPanel(new BorderLayout());
@@ -417,7 +443,8 @@ public abstract class WizardPane extends JPanel {
         return panel;
     }
 
-    protected JPanel createSimpleDisplayPanel(final String prefix, final JPanel edit) {
+    protected JPanel createSimpleDisplayPanel(final String prefix, final JPanel edit)
+    {
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -433,7 +460,8 @@ public abstract class WizardPane extends JPanel {
         return panel;
     }
 
-    protected JButton createListEditButton(final String prefix, final ActionListener actionListener) {
+    protected JButton createListEditButton(final String prefix, final ActionListener actionListener)
+    {
         final JButton button = ComponentFactory.createButton(prefix, actionListener);
         button.setFocusable(false);
         button.setBorder(BorderFactory.createEmptyBorder());

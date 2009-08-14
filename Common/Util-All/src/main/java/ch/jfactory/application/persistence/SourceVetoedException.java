@@ -22,20 +22,25 @@ package ch.jfactory.application.persistence;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class SourceVetoedException extends Exception {
-    public SourceVetoedException() {
+public class SourceVetoedException extends Exception
+{
+    public SourceVetoedException()
+    {
         super();
     }
 
-    public SourceVetoedException(final Throwable cause) {
+    public SourceVetoedException(final Throwable cause)
+    {
         super(cause);
     }
 
-    public SourceVetoedException(final String message) {
+    public SourceVetoedException(final String message)
+    {
         super(message);
     }
 
-    public SourceVetoedException(final String message, final Throwable cause) {
+    public SourceVetoedException(final String message, final Throwable cause)
+    {
         super(message, cause);
     }
 }

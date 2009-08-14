@@ -12,12 +12,12 @@ import ch.jfactory.action.ComponentFocusListener;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.DefaultTextField;
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.Sizes;
-import com.jgoodies.forms.layout.CellConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -33,7 +33,6 @@ import javax.swing.JTree;
 import javax.swing.KeyStroke;
 import javax.swing.tree.TreePath;
 
-
 /**
  * This class provides a panel that enables a serach in a tree. To link the panel with the tree, simply pass in a JTree
  * in the constructor. The panel will update the tree to display found items automatically.
@@ -41,16 +40,25 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2007/09/27 10:41:47 $
  */
-public class TreeFinderPanel extends JPanel implements Observer {
+public class TreeFinderPanel extends JPanel implements Observer
+{
 
     private JLabel counter;
+
     private JTextField edit;
+
     private TreeFinderModel fm;
+
     private JButton next;
+
     private JButton prev;
+
     private JTree tree;
+
     private JPanel panel;
+
     private TreeFinder defaultTreeFinder;
+
     private TreeFinder treeFinder = defaultTreeFinder;
 
     /**
@@ -59,13 +67,15 @@ public class TreeFinderPanel extends JPanel implements Observer {
      *
      * @param tree the tree to find objects in
      */
-    public TreeFinderPanel(final JTree tree) {
+    public TreeFinderPanel(final JTree tree)
+    {
         setTreeFinder(new CenteringTreeFinder(tree));
         setTree(tree);
         init();
     }
 
-    public void setTreeFinder(final TreeFinder finder) {
+    public void setTreeFinder(final TreeFinder finder)
+    {
         this.treeFinder = finder;
     }
 
@@ -75,8 +85,10 @@ public class TreeFinderPanel extends JPanel implements Observer {
      * @param obs Description of the Parameter
      * @param obj Description of the Parameter
      */
-    public void update(final Observable obs, final Object obj) {
-        if (!(obs instanceof TreeFinderModel)) {
+    public void update(final Observable obs, final Object obj)
+    {
+        if (!(obs instanceof TreeFinderModel))
+        {
             return;
         }
         final TreeFinderModel fm = (TreeFinderModel) obs;
@@ -92,16 +104,17 @@ public class TreeFinderPanel extends JPanel implements Observer {
         counter.setText(fm.getIndex() + 1 + "/" + fm.getCount());
     }
 
-    /**
-     * Description of the Method
-     */
-    private void init() {
+    /** Description of the Method */
+    private void init()
+    {
         defaultTreeFinder = new CenteringTreeFinder(tree);
 
         ActionListener action;
 
-        action = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        action = new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 fm.find(edit.getText());
                 edit.selectAll();
             }
@@ -114,10 +127,14 @@ public class TreeFinderPanel extends JPanel implements Observer {
         edit.getKeymap().removeKeyStrokeBinding(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
         // This adapter removes the unwanted replacement of the selected text
         // by a space.
-        edit.addKeyListener(new KeyAdapter() {
-            public void keyTyped(final KeyEvent e) {
-                if (edit.getSelectedText() != null && edit.getSelectedText().equals(edit.getText())) {
-                    if (e.getKeyChar() == KeyEvent.VK_SPACE) {
+        edit.addKeyListener(new KeyAdapter()
+        {
+            public void keyTyped(final KeyEvent e)
+            {
+                if (edit.getSelectedText() != null && edit.getSelectedText().equals(edit.getText()))
+                {
+                    if (e.getKeyChar() == KeyEvent.VK_SPACE)
+                    {
                         e.consume();
                     }
                 }
@@ -127,8 +144,10 @@ public class TreeFinderPanel extends JPanel implements Observer {
 
         KeyStroke keyStroke;
 
-        action = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        action = new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 fm.next();
             }
         };
@@ -136,8 +155,10 @@ public class TreeFinderPanel extends JPanel implements Observer {
         keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.ALT_MASK);
         ComponentFocusListener.registerComponentFocusListener(edit, next, keyStroke);
 
-        action = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        action = new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 fm.previous();
             }
         };
@@ -153,23 +174,23 @@ public class TreeFinderPanel extends JPanel implements Observer {
         counter.setHorizontalAlignment(JLabel.CENTER);
 
         setLayout(new FormLayout(
-			new ColumnSpec[] {
-				new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW),
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC
-			},
-			RowSpec.decodeSpecs("default")));
+                new ColumnSpec[]{
+                        new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW),
+                        FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+                        FormFactory.DEFAULT_COLSPEC,
+                        FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+                        FormFactory.DEFAULT_COLSPEC,
+                        FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+                        FormFactory.DEFAULT_COLSPEC,
+                        FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+                        FormFactory.DEFAULT_COLSPEC
+                },
+                RowSpec.decodeSpecs("default")));
         final CellConstraints cc = new CellConstraints();
         add(edit, cc.xy(1, 1));
         add(findButton, cc.xy(3, 1));
         add(prev, cc.xy(5, 1));
-        add(counter, cc.xy(7,1));
+        add(counter, cc.xy(7, 1));
         add(next, cc.xy(9, 1));
 
         fm.notifyObservers();
@@ -180,24 +201,29 @@ public class TreeFinderPanel extends JPanel implements Observer {
      *
      * @param tree the new tree
      */
-    public void setTree(final JTree tree) {
-        if (fm != null) fm.deleteObserver(this);
+    public void setTree(final JTree tree)
+    {
+        if (fm != null)
+        {
+            fm.deleteObserver(this);
+        }
         this.tree = tree;
         fm = new TreeFinderModel(this.tree.getModel());
         fm.addObserver(this);
     }
 
-    /**
-     * Just scrolls to the found tree node, making sure that it is visible.
-     */
-    public class SimpleTreeFinder implements TreeFinder {
+    /** Just scrolls to the found tree node, making sure that it is visible. */
+    public class SimpleTreeFinder implements TreeFinder
+    {
         private JTree tree;
 
-        public SimpleTreeFinder(final JTree tree) {
+        public SimpleTreeFinder(final JTree tree)
+        {
             this.tree = tree;
         }
 
-        public void setSelection(final TreePath tp) {
+        public void setSelection(final TreePath tp)
+        {
             tree.setSelectionPath(tp);
             tree.scrollPathToVisible(tp);
         }

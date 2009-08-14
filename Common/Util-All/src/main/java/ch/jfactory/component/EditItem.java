@@ -23,9 +23,12 @@ import javax.swing.JTextField;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class EditItem extends JPanel {
+public class EditItem extends JPanel
+{
     private JTextField field;
+
     private Object userObject;
+
     private JButton button;
 
     /**
@@ -39,7 +42,8 @@ public class EditItem extends JPanel {
      * @param prefix   the prefix string to use to access the different strings used to setup
      * @param listener the ActionListener to use for the button
      */
-    public EditItem(final String prefix, final ActionListener listener) {
+    public EditItem(final String prefix, final ActionListener listener)
+    {
         this(prefix);
 
         button = ComponentFactory.createButton(prefix + ".BUTTON", listener);
@@ -58,12 +62,13 @@ public class EditItem extends JPanel {
      * Build a panel containing a title in boldface on the first line and a edit field displaying the current status on
      * the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the
      * prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> </ul> See documentation of
-     * {@link ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate what
-     * extenstions are used to complete the keys of the button.
+     * {@link ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate
+     * what extenstions are used to complete the keys of the button.
      *
      * @param prefix the prefix string to use to access the different strings used to setup
      */
-    public EditItem(final String prefix) {
+    public EditItem(final String prefix)
+    {
         final JLabel title = new JLabel(Strings.getString(prefix + ".TITLE.TEXT"));
         title.setFont(title.getFont().deriveFont(Font.BOLD));
 
@@ -92,12 +97,14 @@ public class EditItem extends JPanel {
      *
      * @param userObject
      */
-    public void setUserObject(final Object userObject) {
+    public void setUserObject(final Object userObject)
+    {
         this.userObject = userObject;
         field.setText(userObject.toString());
     }
 
-    public Object getUserObject() {
+    public Object getUserObject()
+    {
         return userObject;
     }
 
@@ -106,8 +113,12 @@ public class EditItem extends JPanel {
      *
      * @param enabled whether to enable
      */
-    public void setEnabled(final boolean enabled) {
-        if (button != null) button.setEnabled(enabled);
+    public void setEnabled(final boolean enabled)
+    {
+        if (button != null)
+        {
+            button.setEnabled(enabled);
+        }
     }
 
     /**
@@ -115,12 +126,14 @@ public class EditItem extends JPanel {
      *
      * @param editable whether editing should be allowed
      */
-    public void setEditable(final boolean editable) {
+    public void setEditable(final boolean editable)
+    {
         field.setEditable(editable);
         field.setFocusable(true);
     }
 
-    public JTextField getTextField() {
+    public JTextField getTextField()
+    {
         return field;
     }
 }

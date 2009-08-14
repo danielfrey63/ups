@@ -14,21 +14,28 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * /repository/HerbarCD/Version2.1/xmatrix/src/com/xmatrix/gui/component/split/NiceSplitPaneDivider.java,v $ $Revision:
  * 1.3 $, $Author: daniel_frey $
  */
-public class NiceSplitPaneDivider extends BasicSplitPaneDivider {
+public class NiceSplitPaneDivider extends BasicSplitPaneDivider
+{
     private Color controlColor = MetalLookAndFeel.getControl();
+
     private Color shadow = MetalLookAndFeel.getControlShadow();
+
     private Color primaryControlColor = MetalLookAndFeel.getPrimaryControl();
+
     private static final double FACTOR = 0.95;
 
-    public NiceSplitPaneDivider(final BasicSplitPaneUI ui) {
+    public NiceSplitPaneDivider(final BasicSplitPaneUI ui)
+    {
         super(ui);
         setBorder(BorderFactory.createEmptyBorder());
     }
 
-    public void paint(final Graphics g) {
+    public void paint(final Graphics g)
+    {
         Color c = primaryControlColor;
         Color gradient = c;
-        if (!splitPane.hasFocus()) {
+        if (!splitPane.hasFocus())
+        {
             c = controlColor;
             gradient =
                     new Color(Math.max((int) (controlColor.getRed() * FACTOR), 0),
@@ -40,14 +47,15 @@ public class NiceSplitPaneDivider extends BasicSplitPaneDivider {
         g.setColor(c);
         g.fillRect(clip.x, clip.y, clip.width, clip.height);
         g.setColor(shadow);
-        if (splitPane.getOrientation() == JSplitPane.VERTICAL_SPLIT) {
+        if (splitPane.getOrientation() == JSplitPane.VERTICAL_SPLIT)
+        {
             g.fillRect(clip.x, clip.y, clip.width, 1);
         }
-        else {
+        else
+        {
             g.fillRect(clip.x, clip.y, 1, clip.height);
         }
         super.paint(g);
     }
-
 
 }

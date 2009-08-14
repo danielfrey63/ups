@@ -10,11 +10,14 @@ import java.util.List;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-public class DefaultCursor implements Cursor {
+public class DefaultCursor implements Cursor
+{
     private static Cursor emptyCursor = new ListCursor(new java.util.ArrayList());
+
     private Cursor cursor;
 
-    public DefaultCursor() {
+    public DefaultCursor()
+    {
         cursor = emptyCursor;
     }
 
@@ -23,11 +26,14 @@ public class DefaultCursor implements Cursor {
      *
      * @param list list for the cursor
      */
-    public DefaultCursor(final List list) {
-        if (list == null) {
+    public DefaultCursor(final List list)
+    {
+        if (list == null)
+        {
             cursor = emptyCursor;
         }
-        else {
+        else
+        {
             cursor = new ListCursor(list);
         }
     }
@@ -37,44 +43,55 @@ public class DefaultCursor implements Cursor {
      *
      * @param array an array of objects
      */
-    public DefaultCursor(final Object[] array) {
-        if (array == null) {
+    public DefaultCursor(final Object[] array)
+    {
+        if (array == null)
+        {
             cursor = emptyCursor;
         }
-        else {
+        else
+        {
             cursor = new ArrayCursor(array);
         }
     }
 
-    public Object next() {
+    public Object next()
+    {
         return cursor.next();
     }
 
-    public Object previous() {
+    public Object previous()
+    {
         return cursor.previous();
     }
 
-    public boolean hasNext() {
+    public boolean hasNext()
+    {
         return cursor.hasNext();
     }
 
-    public boolean hasPrevious() {
+    public boolean hasPrevious()
+    {
         return cursor.hasPrevious();
     }
 
-    public int getCurrentIndex() {
+    public int getCurrentIndex()
+    {
         return cursor.getCurrentIndex();
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return cursor.getSize();
     }
 
-    public Object getCurrent() {
+    public Object getCurrent()
+    {
         return cursor.getCurrent();
     }
 
-    public void setCurrent(final Object obj) {
+    public void setCurrent(final Object obj)
+    {
         cursor.setCurrent(obj);
     }
 
@@ -83,11 +100,13 @@ public class DefaultCursor implements Cursor {
      *
      * @return true if cursor is empty
      */
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return cursor.isEmpty();
     }
 
-    public Iterator getIterator() {
+    public Iterator getIterator()
+    {
         return cursor.getIterator();
     }
 }

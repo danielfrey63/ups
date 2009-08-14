@@ -21,10 +21,10 @@ import ch.jfactory.component.tree.NotifiableTreeModel;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
 import ch.jfactory.filter.Filter;
 import ch.jfactory.filter.Filterable;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreePath;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  * Wrapper around a tree model that implements the {@link Filterable} interface. If the wrapped tree model itself
@@ -37,28 +37,33 @@ import javax.swing.event.TreeModelListener;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/06 10:16:23 $
  */
-public class ModelBasedFilteredTreeModel extends AbstractTreeModel implements Filterable {
+public class ModelBasedFilteredTreeModel extends AbstractTreeModel implements Filterable
+{
 
-    /**
-     * Propertyname for tree model exchanges.
-     */
+    /** Propertyname for tree model exchanges. */
     public static final String PROPERTYNAME_MODEL = "model";
 
-    private TreeModelListener listener = new TreeModelListener() {
-        public void treeNodesChanged(final TreeModelEvent e) {
+    private TreeModelListener listener = new TreeModelListener()
+    {
+        public void treeNodesChanged(final TreeModelEvent e)
+        {
             fireTreeNodesChanged(e);
         }
 
-        public void treeNodesInserted(final TreeModelEvent e) {
+        public void treeNodesInserted(final TreeModelEvent e)
+        {
             fireTreeNodesChanged(e);
         }
 
-        public void treeNodesRemoved(final TreeModelEvent e) {
+        public void treeNodesRemoved(final TreeModelEvent e)
+        {
             fireTreeNodesRemoved(e);
         }
 
-        public void treeStructureChanged(final TreeModelEvent e) {
-            if (model.getRoot() != root) {
+        public void treeStructureChanged(final TreeModelEvent e)
+        {
+            if (model.getRoot() != root)
+            {
                 ModelBasedFilteredTreeModel.super.setRoot(model.getRoot());
             }
             fireTreeStructureChanged(e);
@@ -66,68 +71,88 @@ public class ModelBasedFilteredTreeModel extends AbstractTreeModel implements Fi
     };
 
     private TreeModel model;
+
     private Filter filter = Filter.TRUEFILTER;
 
-    public ModelBasedFilteredTreeModel() {
+    public ModelBasedFilteredTreeModel()
+    {
         this(null);
     }
 
-    public ModelBasedFilteredTreeModel(final TreeModel model) {
+    public ModelBasedFilteredTreeModel(final TreeModel model)
+    {
         super(model == null ? null : model.getRoot());
         this.setModel(model);
     }
 
     // AbstractTreeModel
 
-    public void setRoot(final Object root) {
+    public void setRoot(final Object root)
+    {
         super.setRoot(root);
         fireTreeStructureChanged(new TreeModelEvent(this, new TreePath(root)));
     }
 
-    protected void remove(final Object child, final TreePath parentPath) {
-        if (getModel() instanceof NotifiableTreeModel) {
+    protected void remove(final Object child, final TreePath parentPath)
+    {
+        if (getModel() instanceof NotifiableTreeModel)
+        {
             ((NotifiableTreeModel) getModel()).removeFromParent(parentPath.pathByAddingChild(child));
         }
-        else {
+        else
+        {
             throw new IllegalStateException("remove not supported by " + getModel().getClass().getName());
         }
     }
 
-    protected void insert(final TreePath child, final TreePath parent, final int pos) {
-        if (getModel() instanceof NotifiableTreeModel) {
+    protected void insert(final TreePath child, final TreePath parent, final int pos)
+    {
+        if (getModel() instanceof NotifiableTreeModel)
+        {
             ((NotifiableTreeModel) getModel()).insertInto(child, parent, pos);
         }
-        else {
+        else
+        {
             throw new IllegalStateException("insert not supported by " + getModel().getClass().getName());
         }
     }
 
-    public int getChildCount(final Object parent) {
+    public int getChildCount(final Object parent)
+    {
         int count = 0;
-        for (int i = 0; i < getModel().getChildCount(parent); i++) {
+        for (int i = 0; i < getModel().getChildCount(parent); i++)
+        {
             final Object child = getModel().getChild(parent, i);
-            if (isShown(child)) {
+            if (isShown(child))
+            {
                 count++;
             }
-            else {
+            else
+            {
                 count += getChildCount(child);
             }
         }
         return count;
     }
 
-    public Object getChild(final Object parent, final int index) {
+    public Object getChild(final Object parent, final int index)
+    {
         int count = 0;
-        for (int i = 0; i < getModel().getChildCount(parent); i++) {
+        for (int i = 0; i < getModel().getChildCount(parent); i++)
+        {
             final Object child = getModel().getChild(parent, i);
-            if (isShown(child)) {
-                if (count++ == index) {
+            if (isShown(child))
+            {
+                if (count++ == index)
+                {
                     return child;
                 }
             }
-            else {
+            else
+            {
                 final Object child2 = getChild(child, index - count);
-                if (child2 != null) {
+                if (child2 != null)
+                {
                     return child2;
                 }
                 count += getChildCount(child);
@@ -136,24 +161,29 @@ public class ModelBasedFilteredTreeModel extends AbstractTreeModel implements Fi
         return null;
     }
 
-    public void valueForPathChanged(final TreePath path, final Object newValue) {
+    public void valueForPathChanged(final TreePath path, final Object newValue)
+    {
         model.valueForPathChanged(path, newValue);
     }
 
     //--- Interface
 
-    public TreeModel getModel() {
+    public TreeModel getModel()
+    {
         return model;
     }
 
-    public void setModel(final TreeModel model) {
+    public void setModel(final TreeModel model)
+    {
         final TreeModel old = getModel();
-        if (old != null) {
+        if (old != null)
+        {
             old.removeTreeModelListener(listener);
         }
         this.model = model;
         super.setRoot(model == null ? null : model.getRoot());
-        if (model != null) {
+        if (model != null)
+        {
             model.addTreeModelListener(listener);
         }
         reload();
@@ -162,27 +192,32 @@ public class ModelBasedFilteredTreeModel extends AbstractTreeModel implements Fi
 
     //--- Filterable
 
-    public Filter getFilter() {
+    public Filter getFilter()
+    {
         return filter;
     }
 
-    public void setFilter(final Filter filter) {
+    public void setFilter(final Filter filter)
+    {
         this.filter = filter;
         filter();
     }
 
-    public void deleteFilter() {
+    public void deleteFilter()
+    {
         setFilter(Filter.TRUEFILTER);
     }
 
-    public void filter() {
+    public void filter()
+    {
         firePropertyChange(PROPERTYNAME_FILTER, null, filter);
         reload();
     }
 
     //--- Helper
 
-    private boolean isShown(final Object node) {
+    private boolean isShown(final Object node)
+    {
         return filter.matches(node);
     }
 }

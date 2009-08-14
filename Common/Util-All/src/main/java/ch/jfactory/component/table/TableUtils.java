@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.EventObject;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -57,7 +56,8 @@ import org.apache.commons.lang.RandomStringUtils;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2007/09/27 10:41:47 $
  */
-public class TableUtils {
+public class TableUtils
+{
 
     /**
      * Returns the selection of the table selection model as an array of ints.
@@ -65,10 +65,13 @@ public class TableUtils {
      * @param selectionModel the selection model of the table
      * @return an array of ints
      */
-    public static int[] getSelection(final ListSelectionModel selectionModel) {
+    public static int[] getSelection(final ListSelectionModel selectionModel)
+    {
         int[] ints = new int[0];
-        for (int i = selectionModel.getMinSelectionIndex(); i <= selectionModel.getMaxSelectionIndex(); i++) {
-            if (selectionModel.isSelectedIndex(i)) {
+        for (int i = selectionModel.getMinSelectionIndex(); i <= selectionModel.getMaxSelectionIndex(); i++)
+        {
+            if (selectionModel.isSelectedIndex(i))
+            {
                 ints = ArrayUtils.insert(ints, i, ints.length);
             }
         }
@@ -81,13 +84,17 @@ public class TableUtils {
      * @param ints           array of indices.
      * @param selectionModel the selection model
      */
-    public static void setSelection(final int[] ints, final ListSelectionModel selectionModel) {
-        for (int i = 0; i < ints.length; i++) {
+    public static void setSelection(final int[] ints, final ListSelectionModel selectionModel)
+    {
+        for (int i = 0; i < ints.length; i++)
+        {
             final int pos = ints[i];
-            if (i == 0) {
+            if (i == 0)
+            {
                 selectionModel.setSelectionInterval(pos, pos);
             }
-            else {
+            else
+            {
                 selectionModel.addSelectionInterval(pos, pos);
             }
         }
@@ -100,11 +107,12 @@ public class TableUtils {
      * @param table
      * @return a map for
      */
-    public static Map<MultiKey, Integer> getSelection(final JTable table) {
+    public static Map<MultiKey, Integer> getSelection(final JTable table)
+    {
         final int[] selection = getSelection(table.getSelectionModel());
         final Map<MultiKey, Integer> result = new HashMap<MultiKey, Integer>();
-        for (int i = 0; i < selection.length; i++) {
-            final int r = selection[i];
+        for (final int r : selection)
+        {
             result.put(getMultiKey(table, r), r);
         }
         return result;
@@ -116,53 +124,62 @@ public class TableUtils {
      * @param selection the selections to add
      * @param table     the table to add the selections to
      */
-    public static void setSelection(final Map<MultiKey, Integer> selection, final JTable table) {
+    public static void setSelection(final Map<MultiKey, Integer> selection, final JTable table)
+    {
         final Map<MultiKey, Integer> rows = new HashMap<MultiKey, Integer>();
-        for (int r = 0; r < table.getRowCount(); r++) {
+        for (int r = 0; r < table.getRowCount(); r++)
+        {
             rows.put(getMultiKey(table, r), r);
         }
         table.clearSelection();
         final Collection<MultiKey> selectionKeys = selection.keySet();
-        for (final Iterator<MultiKey> iterator = selectionKeys.iterator(); iterator.hasNext();) {
-            final MultiKey key = iterator.next();
-            if (rows.containsKey(key)) {
+        for (final MultiKey key : selectionKeys)
+        {
+            if (rows.containsKey(key))
+            {
                 final int row = rows.get(key);
                 table.addRowSelectionInterval(row, row);
             }
         }
     }
 
-    private static MultiKey getMultiKey(final JTable table, final int r) {
+    private static MultiKey getMultiKey(final JTable table, final int r)
+    {
         final int columns = table.getColumnCount();
         final Object[] keys = new Object[columns];
-        for (int c = 0; c < columns; c++) {
+        for (int c = 0; c < columns; c++)
+        {
             keys[c] = table.getValueAt(r, c);
         }
         return new MultiKey(keys);
     }
 
-    /**
-     * Note: Make sure to override TableModel#getColumnClass to use the renderers.
-     */
-    public static class CalendarCellRenderer extends DefaultTableCellRenderer {
+    /** Note: Make sure to override TableModel#getColumnClass to use the renderers. */
+    public static class CalendarCellRenderer extends DefaultTableCellRenderer
+    {
 
         private String pattern;
 
-        public CalendarCellRenderer(final String pattern) {
+        public CalendarCellRenderer(final String pattern)
+        {
             this.pattern = pattern;
         }
 
-        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
+        {
             final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             final Calendar cal;
-            if (value instanceof Date) {
+            if (value instanceof Date)
+            {
                 cal = Calendar.getInstance();
                 cal.setTime((Date) value);
             }
-            else if (value instanceof Calendar) {
+            else if (value instanceof Calendar)
+            {
                 cal = (Calendar) value;
             }
-            else {
+            else
+            {
                 label.setText("");
                 return label;
 //                throw new IllegalArgumentException("value (" + (value == null ? "null" : value.getClass().getName()) + ") not a Calendar or Date");
@@ -173,69 +190,83 @@ public class TableUtils {
         }
     }
 
-    /**
-     * Note: Make sure to override TableModel#getColumnClass to use the renderers.
-     */
-    public static class BooleanCellRenderer extends DefaultTableCellRenderer {
+    /** Note: Make sure to override TableModel#getColumnClass to use the renderers. */
+    public static class BooleanCellRenderer extends DefaultTableCellRenderer
+    {
 
         private Icon trueIcon;
+
         private Icon falseIcon;
 
-        public BooleanCellRenderer(final Icon trueIcon, final Icon falseIcon) {
+        public BooleanCellRenderer(final Icon trueIcon, final Icon falseIcon)
+        {
             this.trueIcon = trueIcon;
             this.falseIcon = falseIcon;
         }
 
-        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
+        {
             final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             final Boolean bool = (Boolean) value;
             label.setText("");
-            if (bool.booleanValue()) {
+            if (bool)
+            {
                 label.setIcon(trueIcon);
             }
-            else {
+            else
+            {
                 label.setIcon(falseIcon);
             }
             return label;
         }
     }
 
-    public static class StringEditor extends AbstractCellEditor implements TableCellEditor {
+    public static class StringEditor extends AbstractCellEditor implements TableCellEditor
+    {
 
-        public StringEditor(final Color background) {
+        public StringEditor(final Color background)
+        {
             super(background);
         }
 
-        public StringEditor() {
+        public StringEditor()
+        {
         }
 
-        public Object getCellEditorValue() {
+        public Object getCellEditorValue()
+        {
             return editor.getText();
         }
 
-        public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column) {
+        public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
+        {
             final String string = (String) value;
             editor.setText(string);
             return editor;
         }
 
-        public boolean isCellEditable(final EventObject evt) {
-            if (evt instanceof MouseEvent) {
+        public boolean isCellEditable(final EventObject evt)
+        {
+            if (evt instanceof MouseEvent)
+            {
                 return ((MouseEvent) evt).getClickCount() >= 2;
             }
             return true;
         }
     }
 
-    public static class CalendarEditor extends AbstractCellEditor implements TableCellEditor {
+    public static class CalendarEditor extends AbstractCellEditor implements TableCellEditor
+    {
 
         private MDateEntryField editor = new MDateEntryField(DateFormat.getDateInstance(DateFormat.MEDIUM));
 
-        public CalendarEditor() {
+        public CalendarEditor()
+        {
             this(ColorUtils.fade(Color.red, 0.9));
         }
 
-        public CalendarEditor(final Color background) {
+        public CalendarEditor(final Color background)
+        {
             final MDefaultPullDownConstraints c = new MDefaultPullDownConstraints();
             c.firstDay = Calendar.MONDAY;
             c.changerStyle = MDateChanger.BUTTON;
@@ -244,38 +275,48 @@ public class TableUtils {
             editor.getDisplay().setBackground(background);
         }
 
-        public Object getCellEditorValue() {
+        public Object getCellEditorValue()
+        {
             return editor.getText();
         }
 
-        public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column) {
-            try {
+        public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
+        {
+            try
+            {
                 final Calendar calendar = (Calendar) value;
-                if (calendar == null) {
+                if (calendar == null)
+                {
                     editor.setValue(null);
                 }
-                else {
+                else
+                {
                     editor.setValue(calendar.getTime());
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
             return editor;
         }
 
-        public boolean isCellEditable(final EventObject evt) {
-            if (evt instanceof MouseEvent) {
+        public boolean isCellEditable(final EventObject evt)
+        {
+            if (evt instanceof MouseEvent)
+            {
                 return ((MouseEvent) evt).getClickCount() >= 2;
             }
             return true;
         }
     }
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         final int size = 100;
         final Object[][] data = new Object[size][];
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             data[i] = new String[]{
                     RandomStringUtils.randomAlphabetic(5),
                     RandomStringUtils.randomAlphabetic(5),
@@ -288,8 +329,10 @@ public class TableUtils {
         );
         final JTable table = new JTable(model);
         final JButton button = new JButton("Selection");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        button.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final Map<MultiKey, Integer> selection = getSelection(table);
                 table.clearSelection();
                 setSelection(selection, table);

@@ -9,14 +9,17 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class CenteringTreeFinder implements TreeFinder {
+public class CenteringTreeFinder implements TreeFinder
+{
     private JTree tree;
 
-    public CenteringTreeFinder(final JTree tree) {
+    public CenteringTreeFinder(final JTree tree)
+    {
         this.tree = tree;
     }
 
-    public void setSelection(final TreePath tp) {
+    public void setSelection(final TreePath tp)
+    {
         tree.setSelectionPath(tp);
         final int iVis = tree.getVisibleRowCount() / 2;
         final int iRow = tree.getRowForPath(tp);

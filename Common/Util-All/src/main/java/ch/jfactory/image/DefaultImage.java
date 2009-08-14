@@ -27,12 +27,12 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.UIManager;
 
-/**
- * An image that has the background of a panel and displays a configurable string.
- */
-public class DefaultImage extends BufferedImage {
+/** An image that has the background of a panel and displays a configurable string. */
+public class DefaultImage extends BufferedImage
+{
 
-    public DefaultImage(final Dimension dim, final String string) {
+    public DefaultImage(final Dimension dim, final String string)
+    {
         super(dim.width, dim.height, TYPE_INT_ARGB_PRE);
         final Graphics2D g = this.createGraphics();
         g.setFont(new Font("Arial", Font.BOLD, 20));

@@ -26,11 +26,14 @@ import java.util.NoSuchElementException;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class ExtendedBeanInfo implements BeanInfo {
+public class ExtendedBeanInfo implements BeanInfo
+{
     private BeanInfo beanInfo;
 
     private Map eventSetDescriptors = Collections.EMPTY_MAP;
+
     private Map methodDescriptors = Collections.EMPTY_MAP;
+
     private Map propertyDescriptors = Collections.EMPTY_MAP;
 
     /**
@@ -38,74 +41,75 @@ public class ExtendedBeanInfo implements BeanInfo {
      *
      * @param beanInfo the depending BeanInfo object
      */
-    public ExtendedBeanInfo(final BeanInfo beanInfo) {
+    public ExtendedBeanInfo(final BeanInfo beanInfo)
+    {
         this.beanInfo = beanInfo;
 
         // fill maps
         final EventSetDescriptor[] esd = beanInfo.getEventSetDescriptors();
-        if (esd.length > 0) {
+        if (esd.length > 0)
+        {
             eventSetDescriptors = new HashMap(esd.length);
-            for (int i = 0; i < esd.length; i++) {
-                eventSetDescriptors.put(esd[i].getName(), esd[i]);
+            for (EventSetDescriptor anEsd : esd)
+            {
+                eventSetDescriptors.put(anEsd.getName(), anEsd);
             }
         }
 
         final MethodDescriptor[] md = beanInfo.getMethodDescriptors();
-        if (md.length > 0) {
+        if (md.length > 0)
+        {
             methodDescriptors = new HashMap(md.length);
-            for (int i = 0; i < md.length; i++) {
-                methodDescriptors.put(md[i].getName(), md[i]);
+            for (MethodDescriptor aMd : md)
+            {
+                methodDescriptors.put(aMd.getName(), aMd);
             }
         }
 
         final PropertyDescriptor[] pd = beanInfo.getPropertyDescriptors();
-        if (pd.length > 0) {
+        if (pd.length > 0)
+        {
             propertyDescriptors = new HashMap(pd.length);
-            for (int i = 0; i < pd.length; i++) {
-                propertyDescriptors.put(pd[i].getName(), pd[i]);
+            for (PropertyDescriptor aPd : pd)
+            {
+                propertyDescriptors.put(aPd.getName(), aPd);
             }
         }
     }
 
-    /**
-     * @see java.beans.BeanInfo#getAdditionalBeanInfo()
-     */
-    public BeanInfo[] getAdditionalBeanInfo() {
+    /** @see java.beans.BeanInfo#getAdditionalBeanInfo() */
+    public BeanInfo[] getAdditionalBeanInfo()
+    {
         return beanInfo.getAdditionalBeanInfo();
     }
 
-    /**
-     * @see java.beans.BeanInfo#getBeanDescriptor()
-     */
-    public BeanDescriptor getBeanDescriptor() {
+    /** @see java.beans.BeanInfo#getBeanDescriptor() */
+    public BeanDescriptor getBeanDescriptor()
+    {
         return beanInfo.getBeanDescriptor();
     }
 
-    /**
-     * @see java.beans.BeanInfo#getDefaultEventIndex()
-     */
-    public int getDefaultEventIndex() {
+    /** @see java.beans.BeanInfo#getDefaultEventIndex() */
+    public int getDefaultEventIndex()
+    {
         return beanInfo.getDefaultEventIndex();
     }
 
-    /**
-     * @see java.beans.BeanInfo#getDefaultPropertyIndex()
-     */
-    public int getDefaultPropertyIndex() {
+    /** @see java.beans.BeanInfo#getDefaultPropertyIndex() */
+    public int getDefaultPropertyIndex()
+    {
         return beanInfo.getDefaultPropertyIndex();
     }
 
-    /**
-     * @see java.beans.BeanInfo#getIcon(int)
-     */
-    public Image getIcon(final int iconKind) {
+    /** @see java.beans.BeanInfo#getIcon(int) */
+    public Image getIcon(final int iconKind)
+    {
         return beanInfo.getIcon(iconKind);
     }
 
-    /**
-     * @see java.beans.BeanInfo#getEventSetDescriptors()
-     */
-    public EventSetDescriptor[] getEventSetDescriptors() {
+    /** @see java.beans.BeanInfo#getEventSetDescriptors() */
+    public EventSetDescriptor[] getEventSetDescriptors()
+    {
         return beanInfo.getEventSetDescriptors();
     }
 
@@ -118,20 +122,21 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @throws NoSuchElementException if the EventSetDescriptor is not found
      */
     public EventSetDescriptor getEventSetDescriptor(final String name)
-            throws NoSuchElementException {
+            throws NoSuchElementException
+    {
         final EventSetDescriptor
                 desc = (EventSetDescriptor) eventSetDescriptors.get(name);
-        if (desc == null) {
+        if (desc == null)
+        {
             throw new NoSuchElementException("EventSetDescriptor with name " +
                     name + " not found.");
         }
         return desc;
     }
 
-    /**
-     * @see java.beans.BeanInfo#getMethodDescriptors()
-     */
-    public MethodDescriptor[] getMethodDescriptors() {
+    /** @see java.beans.BeanInfo#getMethodDescriptors() */
+    public MethodDescriptor[] getMethodDescriptors()
+    {
         return beanInfo.getMethodDescriptors();
     }
 
@@ -143,21 +148,22 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @throws NoSuchElementException if the MethodDescriptor is not found
      */
     public MethodDescriptor getMethodDescriptor(final String name)
-            throws NoSuchElementException {
+            throws NoSuchElementException
+    {
 
         final MethodDescriptor
                 desc = (MethodDescriptor) methodDescriptors.get(name);
-        if (desc == null) {
+        if (desc == null)
+        {
             throw new NoSuchElementException("MethodDescriptor with name " +
                     name + " not found.");
         }
         return desc;
     }
 
-    /**
-     * @see java.beans.BeanInfo#getPropertyDescriptors()
-     */
-    public PropertyDescriptor[] getPropertyDescriptors() {
+    /** @see java.beans.BeanInfo#getPropertyDescriptors() */
+    public PropertyDescriptor[] getPropertyDescriptors()
+    {
         return beanInfo.getPropertyDescriptors();
     }
 
@@ -170,10 +176,12 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @throws NoSuchElementException if the PropertyDescriptor is not found
      */
     public PropertyDescriptor getPropertyDescriptor(final String name)
-            throws NoSuchElementException {
+            throws NoSuchElementException
+    {
         final PropertyDescriptor
                 desc = (PropertyDescriptor) propertyDescriptors.get(name);
-        if (desc == null) {
+        if (desc == null)
+        {
             throw new NoSuchElementException("PropertyDescriptor with name " +
                     name + " not found.");
         }
@@ -186,7 +194,8 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param name name of the EventSetDescriptor
      * @return true = available, false = unavailable
      */
-    public boolean hasEventSetDescriptor(final String name) {
+    public boolean hasEventSetDescriptor(final String name)
+    {
         return eventSetDescriptors.containsKey(name);
     }
 
@@ -196,9 +205,11 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param names array of EventSetDescriptor names
      * @return true = available, false = unavailable
      */
-    public boolean hasEventSetDescriptors(final String[] names) {
+    public boolean hasEventSetDescriptors(final String[] names)
+    {
         boolean exists = true;
-        for (int i = 0; i < names.length && exists; i++) {
+        for (int i = 0; i < names.length && exists; i++)
+        {
             exists = hasEventSetDescriptor(names[i]);
         }
         return exists;
@@ -210,7 +221,8 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param name name of the MethodDescriptor
      * @return true = available, false = unavailable
      */
-    public boolean hasMethodDescriptor(final String name) {
+    public boolean hasMethodDescriptor(final String name)
+    {
         return methodDescriptors.containsKey(name);
     }
 
@@ -220,9 +232,11 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param names array of MethodDescriptor names
      * @return true = available, false = unavailable
      */
-    public boolean hasMethodDescriptors(final String[] names) {
+    public boolean hasMethodDescriptors(final String[] names)
+    {
         boolean exists = true;
-        for (int i = 0; i < names.length && exists; i++) {
+        for (int i = 0; i < names.length && exists; i++)
+        {
             exists = hasMethodDescriptor(names[i]);
         }
         return exists;
@@ -234,7 +248,8 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param name name of the PropertyDescriptor
      * @return true = available, false = unavailable
      */
-    public boolean hasPropertyDescriptor(final String name) {
+    public boolean hasPropertyDescriptor(final String name)
+    {
         return propertyDescriptors.containsKey(name);
     }
 
@@ -244,9 +259,11 @@ public class ExtendedBeanInfo implements BeanInfo {
      * @param names array of PropertyDescriptor names
      * @return true = available, false = unavailable
      */
-    public boolean hasPropertyDescriptors(final String[] names) {
+    public boolean hasPropertyDescriptors(final String[] names)
+    {
         boolean exists = true;
-        for (int i = 0; i < names.length && exists; i++) {
+        for (int i = 0; i < names.length && exists; i++)
+        {
             exists = hasPropertyDescriptor(names[i]);
         }
         return exists;

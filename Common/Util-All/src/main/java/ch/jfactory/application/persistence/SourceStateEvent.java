@@ -24,31 +24,22 @@ import java.util.EventObject;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class SourceStateEvent extends EventObject {
+public class SourceStateEvent extends EventObject
+{
 
-    /**
-     * Indicates an opened persistence source.
-     */
+    /** Indicates an opened persistence source. */
     public static final SourceStateEventType OPENED = new SourceStateEventType("OPENED");
 
-    /**
-     * Indicates that data has been saved to the persistence layer.
-     */
+    /** Indicates that data has been saved to the persistence layer. */
     public static final SourceStateEventType SAVED = new SourceStateEventType("SAVED");
 
-    /**
-     * Indicates that the data has been changed but not saved.
-     */
+    /** Indicates that the data has been changed but not saved. */
     public static final SourceStateEventType DIRTY = new SourceStateEventType("DIRTY");
 
-    /**
-     * Indicates that a new data has been created.
-     */
+    /** Indicates that a new data has been created. */
     public static final SourceStateEventType NEW = new SourceStateEventType("NEW");
 
-    /**
-     * The type of this event.
-     */
+    /** The type of this event. */
     private SourceStateEventType type;
 
     /**
@@ -56,7 +47,8 @@ public class SourceStateEvent extends EventObject {
      *
      * @param source The object on which the Event initially occurred.
      */
-    public SourceStateEvent(final Object source, final SourceStateEventType type) {
+    public SourceStateEvent(final Object source, final SourceStateEventType type)
+    {
         super(source);
         this.type = type;
     }
@@ -66,18 +58,22 @@ public class SourceStateEvent extends EventObject {
      *
      * @return the type
      */
-    public SourceStateEventType getType() {
+    public SourceStateEventType getType()
+    {
         return type;
     }
 
-    public static class SourceStateEventType {
+    public static class SourceStateEventType
+    {
         private String key;
 
-        private SourceStateEventType(final String key) {
+        private SourceStateEventType(final String key)
+        {
             this.key = key;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return key;
         }
     }

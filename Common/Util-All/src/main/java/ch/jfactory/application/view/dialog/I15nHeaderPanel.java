@@ -21,6 +21,8 @@ import ch.jfactory.color.ColorUtils;
 import ch.jfactory.component.JMultiLineLabel;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
+import com.jgoodies.forms.factories.Borders;
+import com.jgoodies.forms.layout.Sizes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,8 +35,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.forms.layout.Sizes;
 
 /**
  * TODO: document
@@ -42,9 +42,11 @@ import com.jgoodies.forms.layout.Sizes;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/03/22 15:05:10 $
  */
-public class I15nHeaderPanel extends JPanel {
+public class I15nHeaderPanel extends JPanel
+{
 
-    public I15nHeaderPanel(final String prefix) {
+    public I15nHeaderPanel(final String prefix)
+    {
 
         final int gap = Constants.GAP_BETWEEN_GROUP;
         final int gapTL = Constants.GAP_BORDER_LEFT_TOP;
@@ -81,7 +83,8 @@ public class I15nHeaderPanel extends JPanel {
         setBackground(UIManager.getColor("Tree.background"));
     }
 
-    protected void paintComponent(final Graphics g) {
+    protected void paintComponent(final Graphics g)
+    {
         final int width1 = getWidth();
         final int height1 = getHeight();
         final Graphics2D g2 = (Graphics2D) g;
@@ -90,13 +93,15 @@ public class I15nHeaderPanel extends JPanel {
         final int w;
         final int h;
         final Rectangle clip = g2.getClipBounds();
-        if (clip != null) {
+        if (clip != null)
+        {
             x1 = clip.x;
             y1 = clip.y;
             w = clip.width;
             h = clip.height;
         }
-        else {
+        else
+        {
             x1 = 0;
             y1 = 0;
             w = width1;
@@ -104,27 +109,28 @@ public class I15nHeaderPanel extends JPanel {
         }
         paintHorizontalGradient(g2, x1, y1, w, h, width1, height1);
         g2.setColor(ColorUtils.fade(Color.black, 0.8));
-        g2.fillRect(0, h-1, w, 1);
+        g2.fillRect(0, h - 1, w, 1);
     }
 
     /*
     * Paints a horizontal gradient background from white to the control color.
     */
-    private static void paintHorizontalGradient(final Graphics2D g2, final int x, final int y, final int w, final int h, final int width, final int height) {
+    private static void paintHorizontalGradient(final Graphics2D g2, final int x, final int y, final int w, final int h, final int width, final int height)
+    {
         final Color gradientColor = getHorizontalGradientColor(UIManager.getColor("control"));
         g2.setPaint(new GradientPaint(0, height * 2, Color.WHITE, width, -width + height, gradientColor));
         g2.fillRect(x, y, w, h);
     }
 
-    /**
-     * Computes and answers a <code>Color</code> that has a minimum brightness.
-     */
-    private static Color getHorizontalGradientColor(final Color color) {
+    /** Computes and answers a <code>Color</code> that has a minimum brightness. */
+    private static Color getHorizontalGradientColor(final Color color)
+    {
         final float minimumBrightness = 0.7f;
         final float[] hsbValues = new float[3];
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsbValues);
         final float brightness = hsbValues[2];
-        if (brightness > minimumBrightness) {
+        if (brightness > minimumBrightness)
+        {
             return color;
         }
         final float hue = hsbValues[0];

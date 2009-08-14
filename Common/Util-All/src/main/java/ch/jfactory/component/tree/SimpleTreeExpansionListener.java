@@ -23,16 +23,13 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class SimpleTreeExpansionListener implements TreeExpansionListener {
+public class SimpleTreeExpansionListener implements TreeExpansionListener
+{
 
-    /**
-     * The expanded tree paths.
-     */
+    /** The expanded tree paths. */
     private HashSet expandedTreePaths = new HashSet();
 
-    /**
-     * The tree to expand.
-     */
+    /** The tree to expand. */
     private JTree tree;
 
     /**
@@ -40,7 +37,8 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener {
      *
      * @param tree the tree to construct the expansion listener to
      */
-    public SimpleTreeExpansionListener(final JTree tree) {
+    public SimpleTreeExpansionListener(final JTree tree)
+    {
         setTree(tree);
     }
 
@@ -49,21 +47,20 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener {
      *
      * @param tree the tree to set
      */
-    private void setTree(final JTree tree) {
+    private void setTree(final JTree tree)
+    {
         this.tree = tree;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void treeExpanded(final TreeExpansionEvent treeExpansionEvent) {
+    /** {@inheritDoc} */
+    public void treeExpanded(final TreeExpansionEvent treeExpansionEvent)
+    {
         expandedTreePaths.add(treeExpansionEvent.getPath());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void treeCollapsed(final TreeExpansionEvent treeExpansionEvent) {
+    /** {@inheritDoc} */
+    public void treeCollapsed(final TreeExpansionEvent treeExpansionEvent)
+    {
         // Remove the path from the cache
         final TreePath treePath = treeExpansionEvent.getPath();
         expandedTreePaths.remove(treePath);
@@ -71,23 +68,24 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener {
         // Make sure that child paths are not expanded in the future
         final Iterator iter = expandedTreePaths.iterator();
 
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             final TreePath path = (TreePath) iter.next();
 
-            if (treePath.isDescendant(path)) {
+            if (treePath.isDescendant(path))
+            {
                 iter.remove();
             }
         }
     }
 
-    /**
-     * Restores the tree expansion state.
-     */
-    public void restore() {
-        final Iterator keys = ((HashSet) expandedTreePaths.clone()).iterator();
+    /** Restores the tree expansion state. */
+    public void restore()
+    {
 
-        while (keys.hasNext()) {
-            final TreePath path = (TreePath) keys.next();
+        for (final Object o : ((HashSet) expandedTreePaths.clone()))
+        {
+            final TreePath path = (TreePath) o;
             tree.expandPath(path);
         }
     }
@@ -97,7 +95,8 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener {
      *
      * @return the number of expanded paths
      */
-    public int getNumberOfExpandedPaths() {
+    public int getNumberOfExpandedPaths()
+    {
         return expandedTreePaths.size();
     }
 
@@ -105,7 +104,8 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener {
      * To call when the model has changed and the tree paths have to be restored to the new model. Translates
      * successfully by matching the names of the nodes only if the names are unique within a parent node.
      */
-    public void translate() {
+    public void translate()
+    {
         final Collection matches = TreeUtils.matchPaths(expandedTreePaths.iterator(), tree.getModel());
         expandedTreePaths.clear();
         expandedTreePaths.addAll(matches);

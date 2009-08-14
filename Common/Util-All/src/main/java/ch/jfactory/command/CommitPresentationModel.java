@@ -26,16 +26,19 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class CommitPresentationModel extends ActionCommand {
+public class CommitPresentationModel extends ActionCommand
+{
 
     private PresentationModel model;
 
-    public CommitPresentationModel(final CommandManager manager, final PresentationModel model) {
+    public CommitPresentationModel(final CommandManager manager, final PresentationModel model)
+    {
         super(manager, CommonCommands.COMMANDID_TRIGGERAPPLY);
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         model.triggerCommit();
     }
 }

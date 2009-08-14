@@ -1,7 +1,7 @@
 package ch.jfactory.binding;
 
-import java.awt.Color;
 import ch.jfactory.application.view.status.Message;
+import java.awt.Color;
 
 /**
  * Interface to define human readable messages. The purpose of a note is to hold a message, so there should always be a
@@ -27,7 +27,8 @@ import ch.jfactory.application.view.status.Message;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:23 $
  */
-public interface Note {
+public interface Note
+{
 
     /**
      * Message to hold. The purpose of a note is to hold a message, so this always should contain a valid value.

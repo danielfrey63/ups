@@ -8,7 +8,8 @@ import java.io.IOException;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:41:22 $
  */
-public interface UpdateModule {
+public interface UpdateModule
+{
     /**
      * This method should be overwritten to implement the update behavior. Maybe download the jar file and overwrite the
      * local version.

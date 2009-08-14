@@ -16,8 +16,8 @@
  */
 package ch.jfactory.binding;
 
-import ch.jfactory.color.ColorUtils;
 import ch.jfactory.application.view.status.Message;
+import ch.jfactory.color.ColorUtils;
 import java.awt.Color;
 
 /**
@@ -26,48 +26,71 @@ import java.awt.Color;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/06 10:16:23 $
  */
-public class CodedNote implements Note {
+public class CodedNote implements Note
+{
 
     private String message = null;
+
     private Integer percentage = null;
+
     private Color color = null;
+
     private String subject = null;
 
     /**
-     * Accepts a coded note like <code>Finished..., 10, #008000, false</code>. The first token is parsed to the
-     * message, the second into the percentage, the third into the color.
+     * Accepts a coded note like <code>Finished..., 10, #008000, false</code>. The first token is parsed to the message,
+     * the second into the percentage, the third into the color.
      *
      * @param codedNote the encoded note
      */
-    public CodedNote(final String codedNote) {
+    public CodedNote(final String codedNote)
+    {
         final String[] tokens = codedNote.split(" *, *");
-        if (tokens.length > 0) message = tokens[0];
-        if (tokens.length > 1) percentage = Integer.parseInt(tokens[1]);
-        if (tokens.length > 2) color = ColorUtils.parseColor(tokens[2]);
-        if (tokens.length > 3) subject = tokens[3];
+        if (tokens.length > 0)
+        {
+            message = tokens[0];
+        }
+        if (tokens.length > 1)
+        {
+            percentage = Integer.parseInt(tokens[1]);
+        }
+        if (tokens.length > 2)
+        {
+            color = ColorUtils.parseColor(tokens[2]);
+        }
+        if (tokens.length > 3)
+        {
+            subject = tokens[3];
+        }
     }
 
-    public String getMessage() {
+    public String getMessage()
+    {
         return message;
     }
 
-    public String getSubject() {
+    public String getSubject()
+    {
         return subject;
     }
 
-    public Integer getPercentage() {
+    public Integer getPercentage()
+    {
         return percentage;
     }
 
-    public Color getColor() {
+    public Color getColor()
+    {
         return color;
     }
 
-    public Message.Type getType() {
+    public Message.Type getType()
+    {
         return Message.Type.INFO;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "Note[percent=" + percentage + ",color=" + color + ",subject=" + subject + ",message=" + message + "]";
     }
 }

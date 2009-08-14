@@ -26,22 +26,27 @@ import javax.swing.ImageIcon;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class ResourcePathToIconConverter extends AbstractConverter {
+public class ResourcePathToIconConverter extends AbstractConverter
+{
 
-    public ResourcePathToIconConverter(final BufferedValueModel bufferedModel) {
+    public ResourcePathToIconConverter(final BufferedValueModel bufferedModel)
+    {
         super(bufferedModel);
     }
 
-    public Object convertFromSubject(final Object subjectValue) {
+    public Object convertFromSubject(final Object subjectValue)
+    {
         final String path = (String) subject.getValue();
         ImageIcon icon = null;
-        if (path != null) {
+        if (path != null)
+        {
             icon = new ImageIcon(getClass().getResource(path));
         }
         return icon;
     }
 
-    public void setValue(final Object newValue) {
+    public void setValue(final Object newValue)
+    {
         final ImageIcon icon = (ImageIcon) newValue;
         subject.setValue(icon.getDescription());
     }

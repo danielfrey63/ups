@@ -27,24 +27,27 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class RunBrowserCommand extends ActionCommand {
+public class RunBrowserCommand extends ActionCommand
+{
 
-    /**
-     * The URL to open.
-     */
+    /** The URL to open. */
     private String site;
 
-    public RunBrowserCommand(final CommandManager commandManager, final String commandId, final String site) {
+    public RunBrowserCommand(final CommandManager commandManager, final String commandId, final String site)
+    {
         super(commandManager, commandId);
         this.site = site;
         Browser.init();
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             Browser.displayURL(site);
         }
-        catch (IOException e1) {
+        catch (IOException e1)
+        {
             e1.printStackTrace();
         }
     }

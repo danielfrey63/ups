@@ -16,7 +16,8 @@ import java.awt.Image;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface AsynchronPictureLoaderListener {
+public interface AsynchronPictureLoaderListener
+{
     /**
      * Is called if the loading of the image is finished.
      *

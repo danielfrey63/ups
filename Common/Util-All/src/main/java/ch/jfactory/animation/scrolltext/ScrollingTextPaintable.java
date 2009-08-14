@@ -39,55 +39,36 @@ import org.apache.commons.io.IOUtils;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class ScrollingTextPaintable extends Paintable {
-    /**
-     * The default scroll delay.
-     */
+public class ScrollingTextPaintable extends Paintable
+{
+    /** The default scroll delay. */
     private static final int DEFAULT_SCROLL_DELAY = 10;
 
-    /**
-     * The default paragraph delay.
-     */
+    /** The default paragraph delay. */
     private static final int DEFAULT_PARAGRAPH_DELAY = 2000;
 
-    /**
-     * The delay between steps during scrolling.
-     */
+    /** The delay between steps during scrolling. */
     private int scrollDelay = DEFAULT_SCROLL_DELAY;
 
-    /**
-     * The pause in millis until the next paragraph is shown.
-     */
+    /** The pause in millis until the next paragraph is shown. */
     private int paragraphDelay = DEFAULT_PARAGRAPH_DELAY;
 
-    /**
-     * Whether to display each paragraph on its own page.
-     */
+    /** Whether to display each paragraph on its own page. */
     private boolean pageModus = true;
 
-    /**
-     * The background color.
-     */
+    /** The background color. */
     private Color backgroundColor = Color.white;
 
-    /**
-     * The file parser to parse lines.
-     */
+    /** The file parser to parse lines. */
     private final FileParser fileParser = new SimpleFileParser();
 
-    /**
-     * The array of sections to display.
-     */
+    /** The array of sections to display. */
     private transient Section[] sections;
 
-    /**
-     * The current y position.
-     */
+    /** The current y position. */
     private transient int currentY;
 
-    /**
-     * Whether the paragraph has reached the top position.
-     */
+    /** Whether the paragraph has reached the top position. */
     private transient boolean isOnTop;
 
     /**
@@ -97,14 +78,18 @@ public class ScrollingTextPaintable extends Paintable {
      * @param printSpaceWidth the print space width to use to calculate the line wraps
      * @param pageModus       whether to display one block on one page
      */
-    public ScrollingTextPaintable(final InputStream textInputStream, final int printSpaceWidth, final boolean pageModus) {
+    public ScrollingTextPaintable(final InputStream textInputStream, final int printSpaceWidth, final boolean pageModus)
+    {
         this(pageModus);
 
-        try {
+        try
+        {
             final String text = IOUtils.toString(textInputStream);
             final List rowFileLines = initText(text);
             sections = initSections(rowFileLines, printSpaceWidth);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -114,7 +99,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param pageModus the page modus to use
      */
-    private ScrollingTextPaintable(final boolean pageModus) {
+    private ScrollingTextPaintable(final boolean pageModus)
+    {
         this.pageModus = pageModus;
     }
 
@@ -122,26 +108,34 @@ public class ScrollingTextPaintable extends Paintable {
      * Sets the delays to sleep. It is dependent of whether a page is at the top of the display area and other
      * configurations.
      */
-    public void run() {
+    public void run()
+    {
         initMouseListener();
         currentY = getAnimation().getHeight();
 
-        while (isRun()) {
+        while (isRun())
+        {
             int sleepTime = scrollDelay;
             currentY -= 1;
 
-            if ((pageModus && ((currentY % getAnimation().getHeight()) == 0)) || (isOnTop)) {
+            if ((pageModus && ((currentY % getAnimation().getHeight()) == 0)) || (isOnTop))
+            {
                 sleepTime = paragraphDelay;
                 isOnTop = false;
-            } else {
+            }
+            else
+            {
                 sleepTime = scrollDelay;
             }
 
             getAnimation().repaint();
 
-            try {
+            try
+            {
                 Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
             }
         }
     }
@@ -151,8 +145,10 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param g the graphics object to paint on
      */
-    public void paint(final Graphics2D g) {
-        if (fileParser.getFormatters(g) != null) {
+    public void paint(final Graphics2D g)
+    {
+        if (fileParser.getFormatters(g) != null)
+        {
             g.setColor(backgroundColor);
 
             final int h = getAnimation().getHeight();
@@ -162,12 +158,14 @@ public class ScrollingTextPaintable extends Paintable {
             int sum = 0;
             int lineY = 0;
 
-            for (int i = 0; (i < Integer.MAX_VALUE) && (lineY < h); i++) {
+            for (int i = 0; (i < Integer.MAX_VALUE) && (lineY < h); i++)
+            {
                 final int modIndex = i % numberOfSections;
                 final Section section = sections[modIndex];
                 final Paragraph[] paragraphs = section.getParagraphs();
 
-                for (int p = 0; p < paragraphs.length; p++) {
+                for (int p = 0; p < paragraphs.length; p++)
+                {
                     final Paragraph par = paragraphs[p];
                     final Formatter formatter = par.getFormatter();
                     final String[] lines = par.getLines();
@@ -176,10 +174,12 @@ public class ScrollingTextPaintable extends Paintable {
                     g.setFont(formatter.getFont());
                     g.setColor(formatter.getColor());
 
-                    for (int l = 0; l < lines.length; l++) {
+                    for (int l = 0; l < lines.length; l++)
+                    {
                         lineY = currentY + ys[l] + sum;
 
-                        if (!pageModus && (l == 0) && (p == 0) && (lineY == ys[0])) {
+                        if (!pageModus && (l == 0) && (p == 0) && (lineY == ys[0]))
+                        {
                             isOnTop = true;
                         }
 
@@ -189,11 +189,13 @@ public class ScrollingTextPaintable extends Paintable {
                     sum += par.getHeight();
                 }
 
-                if (pageModus) {
+                if (pageModus)
+                {
                     sum += (h - section.getHeight() - 1);
                 }
 
-                if (i > (Integer.MAX_VALUE / 2)) {
+                if (i > (Integer.MAX_VALUE / 2))
+                {
                     i = modIndex;
                 }
             }
@@ -205,7 +207,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param scrollDelay the delay in millis
      */
-    public void setScrollDelay(final int scrollDelay) {
+    public void setScrollDelay(final int scrollDelay)
+    {
         this.scrollDelay = scrollDelay;
     }
 
@@ -214,7 +217,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param paragraphDelay the delay in millis
      */
-    public void setParagraphDelay(final int paragraphDelay) {
+    public void setParagraphDelay(final int paragraphDelay)
+    {
         this.paragraphDelay = paragraphDelay;
     }
 
@@ -224,7 +228,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param pageModus whether to display one paragraph per page
      */
-    public void setPageModus(final boolean pageModus) {
+    public void setPageModus(final boolean pageModus)
+    {
         this.pageModus = pageModus;
     }
 
@@ -233,7 +238,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @return the background color
      */
-    public Color getBackgroundColor() {
+    public Color getBackgroundColor()
+    {
         return backgroundColor;
     }
 
@@ -242,7 +248,8 @@ public class ScrollingTextPaintable extends Paintable {
      *
      * @param backgroundColor the background color to set
      */
-    public void setBackgroundColor(final Color backgroundColor) {
+    public void setBackgroundColor(final Color backgroundColor)
+    {
         this.backgroundColor = backgroundColor;
     }
 
@@ -252,12 +259,14 @@ public class ScrollingTextPaintable extends Paintable {
      * @param text the text to split
      * @return a list of lines
      */
-    private List initText(final String text) {
+    private List initText(final String text)
+    {
         final String sep = System.getProperty("line.separator");
         final List list = new ArrayList();
         final StringTokenizer tokenizer = new StringTokenizer(text, sep, false);
 
-        while (tokenizer.hasMoreElements()) {
+        while (tokenizer.hasMoreElements())
+        {
             list.add(tokenizer.nextElement());
         }
 
@@ -271,18 +280,20 @@ public class ScrollingTextPaintable extends Paintable {
      * @param printSpaceWidth the print space width to wrap paragraphs in
      * @return an array of sections
      */
-    private Section[] initSections(final List rowFileLines, final int printSpaceWidth) {
+    private Section[] initSections(final List rowFileLines, final int printSpaceWidth)
+    {
         final FileLine[] fileLines = fileParser.initText(rowFileLines);
 
         return SectionFactory.initSections(fileLines, printSpaceWidth);
     }
 
-    /**
-     * Init mouse listener.
-     */
-    private void initMouseListener() {
-        getAnimation().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent e) {
+    /** Init mouse listener. */
+    private void initMouseListener()
+    {
+        getAnimation().addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(final MouseEvent e)
+            {
                 getRunner().interrupt();
             }
         });

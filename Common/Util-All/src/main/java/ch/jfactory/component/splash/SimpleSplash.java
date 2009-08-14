@@ -31,10 +31,9 @@ import javax.swing.JLabel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:54:58 $
  */
-public class SimpleSplash extends JFrame implements SplashProvider {
-    /**
-     * The label that holds the background image.
-     */
+public class SimpleSplash extends JFrame implements SplashProvider
+{
+    /** The label that holds the background image. */
     private JLabel label = new JLabel();
 
     /**
@@ -42,7 +41,8 @@ public class SimpleSplash extends JFrame implements SplashProvider {
      *
      * @param backgroundImage image for the background
      */
-    public SimpleSplash(final ImageIcon backgroundImage) {
+    public SimpleSplash(final ImageIcon backgroundImage)
+    {
 
         init();
         setBackgroundImage(backgroundImage);
@@ -60,7 +60,8 @@ public class SimpleSplash extends JFrame implements SplashProvider {
      * @param backgroundImage     image for the background
      * @param foregroundComponent foregroundComponent for the foreground
      */
-    public SimpleSplash(final ImageIcon backgroundImage, final Component foregroundComponent) {
+    public SimpleSplash(final ImageIcon backgroundImage, final Component foregroundComponent)
+    {
 
         init();
         setBackgroundImage(backgroundImage);
@@ -72,14 +73,15 @@ public class SimpleSplash extends JFrame implements SplashProvider {
         start();
     }
 
-    /**
-     * Init the components listeners and properties.
-     */
-    private void init() {
+    /** Init the components listeners and properties. */
+    private void init()
+    {
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addFocusListener(new FocusAdapter() {
-            public void focusLost(final FocusEvent e) {
+        addFocusListener(new FocusAdapter()
+        {
+            public void focusLost(final FocusEvent e)
+            {
                 toFront();
             }
         });
@@ -89,17 +91,15 @@ public class SimpleSplash extends JFrame implements SplashProvider {
     // Interface SplashProvider
     //
 
-    /**
-     * Shows the splash screen.
-     */
-    public void start() {
+    /** Shows the splash screen. */
+    public void start()
+    {
         setVisible(true);
     }
 
-    /**
-     * Destroies the splash screen.
-     */
-    public void stop() {
+    /** Destroies the splash screen. */
+    public void stop()
+    {
         dispose();
     }
 
@@ -109,14 +109,18 @@ public class SimpleSplash extends JFrame implements SplashProvider {
      *
      * @param backgroundImageIcon the image to set
      */
-    public void setBackgroundImage(final ImageIcon backgroundImageIcon) {
-        if (backgroundImageIcon == null) {
+    public void setBackgroundImage(final ImageIcon backgroundImageIcon)
+    {
+        if (backgroundImageIcon == null)
+        {
             label.setText("-= Null-ImageIcon defined =-");
         }
-        else if (backgroundImageIcon.getIconHeight() < 0) {
+        else if (backgroundImageIcon.getIconHeight() < 0)
+        {
             label.setText("-= ImageIcon \"" + backgroundImageIcon + "\" not found =-");
         }
-        else {
+        else
+        {
             label.setText(null);
             label.setIcon(backgroundImageIcon);
         }

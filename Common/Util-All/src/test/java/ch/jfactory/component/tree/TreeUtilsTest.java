@@ -23,25 +23,27 @@ import org.apache.commons.collections.IteratorUtils;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/05/02 15:27:24 $
  */
-public class TreeUtilsTest extends ComponentTestFixture {
+public class TreeUtilsTest extends ComponentTestFixture
+{
 
     /**
      * Constructs a named test.
      *
      * @param base the name
      */
-    public TreeUtilsTest(final String base) {
+    public TreeUtilsTest(final String base)
+    {
         super(base);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void setUp() {
+    /** {@inheritDoc} */
+    protected void setUp()
+    {
         final ComponentTester tester = new ComponentTester();
     }
 
-    public void testTreeExpansion() {
+    public void testTreeExpansion()
+    {
         final JTree tree = new JTree();
         final List startList = new ArrayList();
         CollectionUtils.addAll(startList, IteratorUtils.asIterator(tree.getExpandedDescendants(tree.getPathForRow(0))));

@@ -4,7 +4,8 @@ package ch.jfactory.model.graph;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface GraphNode {
+public interface GraphNode
+{
 
     public int getId();
 
@@ -49,9 +50,7 @@ public interface GraphNode {
 
     public void addChild(int index, GraphNode child);
 
-    /**
-     * Adds the given child to this <code>GraphNode</code> and assigns to this relation the given role.
-     */
+    /** Adds the given child to this <code>GraphNode</code> and assigns to this relation the given role. */
     public void addChild(GraphNode child, Role role);
 
     public void addChild(int index, GraphNode child, Role role);
@@ -101,9 +100,7 @@ public interface GraphNode {
 
     public void addParent(int index, GraphNode parent);
 
-    /**
-     * Adds the given parent to this <code>GraphNode</code> and assigns to this relation the given role.
-     */
+    /** Adds the given parent to this <code>GraphNode</code> and assigns to this relation the given role. */
     public void addParent(GraphNode parent, Role role);
 
     public void addParent(int index, GraphNode parent, Role role);

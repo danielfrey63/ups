@@ -30,9 +30,11 @@ import org.pietschy.command.ActionCommand;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:23 $
  */
-public class LogicUtils {
+public class LogicUtils
+{
 
     private static final Logger LOG = Logger.getLogger(LogicUtils.class);
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     public static final int NUMBER_OF_BITS_IN_A_BYTE = 8;
@@ -144,54 +146,73 @@ public class LogicUtils {
      * @param flags array of flags to scan.
      * @return the index of the first flag with value <code>false</code>
      */
-    public static int getFirstFalse(final boolean[] flags) {
-        for (int i = 0; i < flags.length; i++) {
+    public static int getFirstFalse(final boolean[] flags)
+    {
+        for (int i = 0; i < flags.length; i++)
+        {
             final boolean flag = flags[i];
-            if (!flag) return i;
+            if (!flag)
+            {
+                return i;
+            }
         }
         return flags.length;
     }
 
-    public static int getFullIndex(final int[] flags) {
+    public static int getFullIndex(final int[] flags)
+    {
         double pos = Math.pow(2, flags.length - 1);
         int result = 0;
-        for (int i = 0; i < flags.length; i++) {
-            final int flag = flags[i];
-            if (flag == 1) result += pos;
+        for (final int flag : flags)
+        {
+            if (flag == 1)
+            {
+                result += pos;
+            }
             pos /= 2;
         }
         return result;
     }
 
-    public static int getFullIndex(final boolean[] flags) {
+    public static int getFullIndex(final boolean[] flags)
+    {
         double pos = Math.pow(2, flags.length - 1);
         int result = 0;
-        for (int i = 0; i < flags.length; i++) {
-            final boolean flag = flags[i];
-            if (flag) result += pos;
+        for (final boolean flag : flags)
+        {
+            if (flag)
+            {
+                result += pos;
+            }
             pos /= 2;
         }
         return result;
     }
 
-    public static boolean[] toBoolean(final int[] flags) {
-        if (flags == null) {
+    public static boolean[] toBoolean(final int[] flags)
+    {
+        if (flags == null)
+        {
             return new boolean[0];
         }
         final boolean[] result = new boolean[flags.length];
-        for (int i = 0; i < flags.length; i++) {
+        for (int i = 0; i < flags.length; i++)
+        {
             final int flag = flags[i];
             result[i] = (flag == 1);
         }
         return result;
     }
 
-    public static boolean[][] toBoolean(final int[][] flags) {
-        if (flags == null) {
+    public static boolean[][] toBoolean(final int[][] flags)
+    {
+        if (flags == null)
+        {
             return new boolean[0][];
         }
         final boolean[][] result = new boolean[flags.length][];
-        for (int i = 0; i < flags.length; i++) {
+        for (int i = 0; i < flags.length; i++)
+        {
             final int[] flag = flags[i];
             result[i] = toBoolean(flag);
         }
@@ -206,12 +227,15 @@ public class LogicUtils {
      * @return the logical AND of the two arrays of boolean
      * @throws IllegalArgumentException if the two arrays are of different size
      */
-    public static boolean[] and(final boolean[] booleansA, final boolean[] booleansB) {
-        if (booleansA.length != booleansB.length) {
+    public static boolean[] and(final boolean[] booleansA, final boolean[] booleansB)
+    {
+        if (booleansA.length != booleansB.length)
+        {
             throw new IllegalArgumentException("array lengths must be equal");
         }
         final boolean[] result = new boolean[booleansA.length];
-        for (int i = 0; i < booleansA.length; i++) {
+        for (int i = 0; i < booleansA.length; i++)
+        {
             result[i] = booleansA[i] && booleansB[i];
         }
         return result;
@@ -223,10 +247,12 @@ public class LogicUtils {
      * @param booleans
      * @return one boolean with the logical OR of the set of booleans
      */
-    public static boolean or(final boolean[] booleans) {
+    public static boolean or(final boolean[] booleans)
+    {
         boolean result = false;
-        for (int i = 0; i < booleans.length; i++) {
-            result |= booleans[i];
+        for (boolean aBoolean : booleans)
+        {
+            result |= aBoolean;
         }
         return result;
     }
@@ -240,18 +266,21 @@ public class LogicUtils {
      * @param numberOfHierarchicalStates the index where hierarchial mappings end and full matrix mapping starts
      */
     public static void setEnabledStates(final InfoBit[] bits, final Object[] components, final long[] componentMapps,
-                                        final int numberOfHierarchicalStates) {
+                                        final int numberOfHierarchicalStates)
+    {
         final int status = Integer.parseInt(getIntString(bits), 2);
         final int hierarchicalIndex = findLowestZeroBit(status);
 
         StringBuilder debugStringBuffer = null;
         Formatter formatter = null;
-        if (DEBUG) {
+        if (DEBUG)
+        {
             debugStringBuffer = new StringBuilder();
             formatter = new Formatter(debugStringBuffer);
             final String stat = Integer.toBinaryString(status);
             formatter.format("%n    status                    %s%s", StringUtils.repeat("0", bits.length - stat.length()), stat);
-            for (int i = bits.length - 1; i >= 0; i--) {
+            for (int i = bits.length - 1; i >= 0; i--)
+            {
                 formatter.format("%n    status                  %d %s", bits[i].isBit() ? 1 : 0, bits[i].getInfo());
             }
             formatter.format("%n    lowest hierarchical index %s", hierarchicalIndex);
@@ -259,112 +288,142 @@ public class LogicUtils {
             formatter.format("%n    hierarchical              %b", hierarchicalIndex < numberOfHierarchicalStates);
         }
 
-        for (int i = 0; i < components.length; i++) {
+        for (int i = 0; i < components.length; i++)
+        {
             final Object component = components[i];
             final long componentMapping = componentMapps[i];
             boolean enabled = false;
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 final String name = component.getClass().getName();
                 formatter.format("%n%n    component     %s", name.substring(name.lastIndexOf(".") + 1));
                 formatter.format("%n    mapping       %s", Long.toBinaryString(componentMapping));
             }
-            if (hierarchicalIndex < numberOfHierarchicalStates) {
+            if (hierarchicalIndex < numberOfHierarchicalStates)
+            {
                 enabled = isBitSet(componentMapping, hierarchicalIndex);
-                if (DEBUG) {
+                if (DEBUG)
+                {
                     final int index = Long.toBinaryString(componentMapping).length() - hierarchicalIndex;
                     formatter.format("%n    " + (enabled ? "+ enabled " : "- disabled") + " %2d %" + index + "s", hierarchicalIndex, "^");
                 }
             }
-            else {
+            else
+            {
                 final int tableIndex = status >> numberOfHierarchicalStates;
                 final int shift = tableIndex + numberOfHierarchicalStates;
                 enabled = isBitSet(componentMapping, shift);
-                if (DEBUG) {
+                if (DEBUG)
+                {
                     final int index = Long.toBinaryString(componentMapping).length() - tableIndex - numberOfHierarchicalStates;
                     formatter.format("%n    " + (enabled ? "+ enabled " : "- disabled") + " %2d %" + index + "s", shift, "^");
                 }
             }
-            if (component instanceof JComponent) {
+            if (component instanceof JComponent)
+            {
                 ((JComponent) component).setEnabled(enabled);
             }
-            else if (component instanceof ActionCommand) {
+            else if (component instanceof ActionCommand)
+            {
                 ((ActionCommand) component).setEnabled(enabled);
             }
-            else {
+            else
+            {
                 invokeSetEnabled(component, enabled);
             }
         }
-        if (DEBUG) LOG.debug(debugStringBuffer.toString());
+        if (DEBUG)
+        {
+            LOG.debug(debugStringBuffer.toString());
+        }
     }
 
-    private static void invokeSetEnabled(final Object component, final boolean enabled) {
-        try {
+    private static void invokeSetEnabled(final Object component, final boolean enabled)
+    {
+        try
+        {
             final Class clazz = component.getClass();
             final Method method = clazz.getMethod("setEnabled", boolean.class);
-            try {
+            try
+            {
                 method.invoke(component, enabled);
             }
-            catch (IllegalAccessException e) {
+            catch (IllegalAccessException e)
+            {
                 throw new IllegalArgumentException("cannot access method " + method.getName(), e);
             }
-            catch (InvocationTargetException e) {
+            catch (InvocationTargetException e)
+            {
                 throw new IllegalArgumentException("error during invokation of " + method.getName(), e);
             }
         }
-        catch (NoSuchMethodException e) {
+        catch (NoSuchMethodException e)
+        {
             throw new IllegalArgumentException("component " + component.getClass().getName()
                     + " is component without setEnabled(boolean) method.", e);
         }
     }
 
-    public static String getIntString(final boolean[] flags) {
+    public static String getIntString(final boolean[] flags)
+    {
         final StringBuffer result = new StringBuffer();
-        for (int i = 0; i < flags.length; i++) {
-            final boolean flag = flags[i];
+        for (final boolean flag : flags)
+        {
             result.append(flag ? "1" : "0");
         }
         return result.toString();
     }
 
-    public static String getIntString(final InfoBit[] flags) {
+    public static String getIntString(final InfoBit[] flags)
+    {
         final StringBuffer result = new StringBuffer();
-        for (int i = 0; i < flags.length; i++) {
-            final boolean flag = flags[i].isBit();
+        for (InfoBit flag1 : flags)
+        {
+            final boolean flag = flag1.isBit();
             result.append(flag ? "1" : "0");
         }
         return result.toString();
     }
 
-    public static int findLowestZeroBit(final int integer) {
-        for (int i = 0; i < NUMBER_OF_BITS_IN_A_BYTE; i++) {
+    public static int findLowestZeroBit(final int integer)
+    {
+        for (int i = 0; i < NUMBER_OF_BITS_IN_A_BYTE; i++)
+        {
             final int mask = (1 << i);
-            if ((integer & mask) == 0) {
+            if ((integer & mask) == 0)
+            {
                 return i;
             }
         }
         return NUMBER_OF_BITS_IN_A_BYTE;
     }
 
-    public static boolean isBitSet(final long b, final int i) {
+    public static boolean isBitSet(final long b, final int i)
+    {
         final long mask = (long) Math.pow(2, i);
         return (b & mask) == mask;
     }
 
-    public static class InfoBit {
+    public static class InfoBit
+    {
 
         private boolean bit;
+
         private String info;
 
-        public InfoBit(final boolean bit, final String yes, final String no) {
+        public InfoBit(final boolean bit, final String yes, final String no)
+        {
             this.bit = bit;
             this.info = bit ? yes : no;
         }
 
-        public boolean isBit() {
+        public boolean isBit()
+        {
             return bit;
         }
 
-        public String getInfo() {
+        public String getInfo()
+        {
             return info;
         }
     }

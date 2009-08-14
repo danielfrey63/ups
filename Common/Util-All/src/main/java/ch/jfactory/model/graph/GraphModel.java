@@ -1,11 +1,11 @@
 package ch.jfactory.model.graph;
 
-
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface GraphModel {
+public interface GraphModel
+{
 
     /**
      * Returns the root data entry for the whole model.
@@ -14,9 +14,7 @@ public interface GraphModel {
      */
     public GraphNode getRoot();
 
-    /**
-     * Creates a new GraphNode of the given type for the given parent.
-     */
+    /** Creates a new GraphNode of the given type for the given parent. */
     public GraphNode createNode(GraphNode parent, Class type);
 
     /**

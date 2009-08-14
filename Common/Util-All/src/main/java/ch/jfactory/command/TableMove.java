@@ -28,21 +28,26 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class TableMove extends ActionCommand {
+public class TableMove extends ActionCommand
+{
 
     private int delta;
+
     private SortableTableModel tableModel;
+
     private ListSelectionModel selectionModel;
 
     public TableMove(final CommandManager commandManager, final String commandId, final SortableTableModel tableModel,
-                     final ListSelectionModel selectionModel, final int delta) {
+                     final ListSelectionModel selectionModel, final int delta)
+    {
         super(commandManager, commandId);
         this.delta = delta;
         this.tableModel = tableModel;
         this.selectionModel = selectionModel;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final int[] indices = tableModel.move(TableUtils.getSelection(selectionModel), delta);
         TableUtils.setSelection(indices, selectionModel);
     }

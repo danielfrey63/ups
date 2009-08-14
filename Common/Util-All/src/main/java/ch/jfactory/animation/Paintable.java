@@ -19,7 +19,6 @@ package ch.jfactory.animation;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,25 +27,21 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public abstract class Paintable implements Runnable {
+public abstract class Paintable implements Runnable
+{
     /**
-     * The list of {@link ch.jfactory.animation.StopListener}s that will be notified upon termination of this painting thread.
+     * The list of {@link ch.jfactory.animation.StopListener}s that will be notified upon termination of this painting
+     * thread.
      */
     private List stopListeners = new ArrayList();
 
-    /**
-     * The associated {@link AnimationQueue}.
-     */
+    /** The associated {@link AnimationQueue}. */
     private transient AnimationQueue animation;
 
-    /**
-     * The painting thread.
-     */
+    /** The painting thread. */
     private transient Thread runner;
 
-    /**
-     * The state of the painting thread. If set to false, the thread will stop.
-     */
+    /** The state of the painting thread. If set to false, the thread will stop. */
     private transient boolean run;
 
     /**
@@ -54,31 +49,32 @@ public abstract class Paintable implements Runnable {
      *
      * @param animation the queue to register
      */
-    public void setAnimationQueue(final AnimationQueue animation) {
+    public void setAnimationQueue(final AnimationQueue animation)
+    {
         this.animation = animation;
     }
 
-    /**
-     * Start background repainting thread.
-     */
-    public void start() {
+    /** Start background repainting thread. */
+    public void start()
+    {
         run = true;
 
-        if (runner == null) {
+        if (runner == null)
+        {
             runner = new Thread(this);
             runner.setPriority(Thread.MAX_PRIORITY);
             runner.start();
         }
     }
 
-    /**
-     * Stop background repainting thread.
-     */
-    public void stop() {
+    /** Stop background repainting thread. */
+    public void stop()
+    {
         run = false;
 
-        for (Iterator iterator = stopListeners.iterator(); iterator.hasNext();) {
-            final StopListener stopListener = (StopListener) iterator.next();
+        for (final Object stopListener1 : stopListeners)
+        {
+            final StopListener stopListener = (StopListener) stopListener1;
             stopListener.stopPerformed();
         }
     }
@@ -88,7 +84,8 @@ public abstract class Paintable implements Runnable {
      *
      * @param stopListener the listener to notify
      */
-    public void addStopListener(final StopListener stopListener) {
+    public void addStopListener(final StopListener stopListener)
+    {
         stopListeners.add(stopListener);
     }
 
@@ -104,7 +101,8 @@ public abstract class Paintable implements Runnable {
      *
      * @return the animation queue
      */
-    protected AnimationQueue getAnimation() {
+    protected AnimationQueue getAnimation()
+    {
         return animation;
     }
 
@@ -113,17 +111,19 @@ public abstract class Paintable implements Runnable {
      *
      * @return the painting thread
      */
-    protected Thread getRunner() {
+    protected Thread getRunner()
+    {
         return runner;
     }
 
     /**
-     * <p>Returns the running state of the paining thread. If false, the thread will die or has died.</p>
-     * <p>To set the running state to false, use {@link #stop}, to set it to true {@link #start}.
+     * <p>Returns the running state of the paining thread. If false, the thread will die or has died.</p> <p>To set the
+     * running state to false, use {@link #stop}, to set it to true {@link #start}.
      *
      * @return the running state
      */
-    protected boolean isRun() {
+    protected boolean isRun()
+    {
         return run;
     }
 }

@@ -28,8 +28,10 @@ import javax.swing.text.JTextComponent;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class ComponentFocusListener implements FocusListener {
+public class ComponentFocusListener implements FocusListener
+{
     private JButton former;
+
     private JButton buttonToFocus;
 
     /**
@@ -39,7 +41,8 @@ public class ComponentFocusListener implements FocusListener {
      * @param component JComponent which should trigger the default button change
      * @param button    default button of the component
      */
-    public static void registerComponentFocusListener(final JComponent component, final JButton button) {
+    public static void registerComponentFocusListener(final JComponent component, final JButton button)
+    {
         final KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         final Action action = new ResetDefaultButtonAction(button, component);
         final String actionKey = keyStroke.toString() + button.toString();
@@ -54,10 +57,12 @@ public class ComponentFocusListener implements FocusListener {
      * @param component from within the key stroke should activte the button
      * @param keyStroke the key stroke to activate
      */
-    public static void registerComponentFocusListener(final JComponent component, final JButton button, final KeyStroke keyStroke) {
+    public static void registerComponentFocusListener(final JComponent component, final JButton button, final KeyStroke keyStroke)
+    {
         final Action action = new ButtonRedirector(button);
         final String actionKey = keyStroke.toString() + button.toString();
-        if (JTextComponent.class.isAssignableFrom(component.getClass())) {
+        if (JTextComponent.class.isAssignableFrom(component.getClass()))
+        {
             final JTextComponent text = (JTextComponent) component;
             text.getKeymap().removeKeyStrokeBinding(keyStroke);
         }
@@ -65,39 +70,48 @@ public class ComponentFocusListener implements FocusListener {
         component.getActionMap().put(actionKey, action);
     }
 
-    public ComponentFocusListener(final JButton button) {
+    public ComponentFocusListener(final JButton button)
+    {
         this.buttonToFocus = button;
     }
 
-    public void focusGained(final FocusEvent e) {
+    public void focusGained(final FocusEvent e)
+    {
         final JRootPane rootPane = buttonToFocus.getRootPane();
-        if (rootPane != null) {
+        if (rootPane != null)
+        {
             former = rootPane.getDefaultButton();
             rootPane.setDefaultButton(buttonToFocus);
         }
     }
 
-    public void focusLost(final FocusEvent e) {
+    public void focusLost(final FocusEvent e)
+    {
         final JRootPane rootPane = buttonToFocus.getRootPane();
-        if (rootPane != null && former != null) {
+        if (rootPane != null && former != null)
+        {
             rootPane.setDefaultButton(former);
         }
     }
 
-    private static class ResetDefaultButtonAction extends ButtonRedirector {
+    private static class ResetDefaultButtonAction extends ButtonRedirector
+    {
 
-		private JComponent component;
+        private JComponent component;
 
-        public ResetDefaultButtonAction(final JButton button, final JComponent component) {
+        public ResetDefaultButtonAction(final JButton button, final JComponent component)
+        {
             super(button);
             this.component = component;
         }
 
-        public void actionPerformed(final ActionEvent e) {
+        public void actionPerformed(final ActionEvent e)
+        {
             super.actionPerformed(e);
             // reset focus if component is the same
             final Component compFocusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-            if (compFocusOwner == component) {
+            if (compFocusOwner == component)
+            {
                 button.getRootPane().setDefaultButton(button);
             }
         }

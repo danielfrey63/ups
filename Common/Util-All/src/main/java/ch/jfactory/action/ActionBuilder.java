@@ -40,65 +40,42 @@ import javax.swing.KeyStroke;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public final class ActionBuilder {
-    /**
-     * The postfix to lookup the actions list.
-     */
+public final class ActionBuilder
+{
+    /** The postfix to lookup the actions list. */
     private static final String POSTFIX_ACTIONS = ".actions";
 
-    /**
-     * The postfix to lookup the long description.
-     */
+    /** The postfix to lookup the long description. */
     private static final String POSTFIX_DESCRIPTION_LONG = ".description.long";
 
-    /**
-     * The postfix to lookup the enabeld icon.
-     */
+    /** The postfix to lookup the enabeld icon. */
     private static final String POSTFIX_ICON_ENABLED = ".icon.enabled";
 
-    /**
-     * The postfix to lookup the disabled icon.
-     */
+    /** The postfix to lookup the disabled icon. */
     private static final String POSTFIX_ICON_DISABLED = ".icon.disabled";
 
-    /**
-     * The postfix to lookup the short description which is used as a tooltip text.
-     */
+    /** The postfix to lookup the short description which is used as a tooltip text. */
     private static final String POSTFIX_DESCRIPTION_SHORT = ".description.short";
 
-    /**
-     * The postfix to lookup the shortcut.
-     */
+    /** The postfix to lookup the shortcut. */
     private static final String POSTFIX_SHORTCUT = ".short";
 
-    /**
-     * The postfix to lookup the label of the action.
-     */
+    /** The postfix to lookup the label of the action. */
     private static final String POSTFIX_LABEL = ".label";
 
-    /**
-     * The character prepending the mnemonic character within the label.
-     */
+    /** The character prepending the mnemonic character within the label. */
     private static final char SYMBOL_MNEMONIC = '&';
 
-    /**
-     * The string used to identify a separator.
-     */
+    /** The string used to identify a separator. */
     private static final String SYMBOL_SEPARATOR = "-";
 
-    /**
-     * The string used to identify a simple gap.
-     */
+    /** The string used to identify a simple gap. */
     private static final String SYMBOL_GAP = "_";
 
-    /**
-     * The map to store the actions.
-     */
-    private static final Map actions = new HashMap();
+    /** The map to store the actions. */
+    private static final Map<String, Action> actions = new HashMap<String, Action>();
 
-    /**
-     * The properties associated with this instance. They are used to lookup the different action properties.
-     */
+    /** The properties associated with this instance. They are used to lookup the different action properties. */
     private static final Properties properties = new Properties();
 
     /**
@@ -106,13 +83,16 @@ public final class ActionBuilder {
      *
      * @param resource the resource to lookup actions
      */
-    public static void setProperties(final InputStream resource) {
+    public static void setProperties(final InputStream resource)
+    {
 
-        try {
+        try
+        {
             properties.load(resource);
         }
-        catch (IOException e) {
-            e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -122,7 +102,8 @@ public final class ActionBuilder {
      * @param name   the string to associate the action with
      * @param action the action to register
      */
-    public static void registerAction(final String name, final Action action) {
+    public static void registerAction(final String name, final Action action)
+    {
         configureAction(action, name);
         actions.put(name, action);
     }
@@ -133,21 +114,25 @@ public final class ActionBuilder {
      * @param s the string to identify the action
      * @return the action found or null if none
      */
-    public static Action getAction(final String s) {
-        final Action action = (Action) actions.get(s);
-        if (action == null) {
+    public static Action getAction(final String s)
+    {
+        final Action action = actions.get(s);
+        if (action == null)
+        {
             throw new IllegalArgumentException("action not found: " + s);
         }
         return action;
     }
 
-    public static Action[] getActions(final String base) {
+    public static Action[] getActions(final String base)
+    {
 
         final String items = properties.getProperty(base + POSTFIX_ACTIONS);
         final StringTokenizer stringTokenizer = new StringTokenizer(items);
         final Action[] actions = new Action[stringTokenizer.countTokens()];
 
-        for (int i = 0; stringTokenizer.hasMoreTokens(); i++) {
+        for (int i = 0; stringTokenizer.hasMoreTokens(); i++)
+        {
             final String token = stringTokenizer.nextToken();
             actions[i] = getAction(token);
         }
@@ -161,24 +146,30 @@ public final class ActionBuilder {
      * @param tools a string identifying the actions to put into the tool bar
      * @return the tool bar
      */
-    public static JToolBar createToolBar(final String tools) {
+    public static JToolBar createToolBar(final String tools)
+    {
 
         final ToolBarBuilder builder = new ToolBarBuilder();
         final String items = properties.getProperty(tools + POSTFIX_ACTIONS);
 
-        for (StringTokenizer stringTokenizer = new StringTokenizer(items); stringTokenizer.hasMoreTokens();) {
+        for (StringTokenizer stringTokenizer = new StringTokenizer(items); stringTokenizer.hasMoreTokens();)
+        {
             final String token = stringTokenizer.nextToken();
 
-            if (token.endsWith("+")) {
+            if (token.endsWith("+"))
+            {
                 builder.addToggle(getToggleAction(token.substring(0, token.length() - 1)));
             }
-            else if (token.equals(SYMBOL_SEPARATOR)) {
+            else if (token.equals(SYMBOL_SEPARATOR))
+            {
                 builder.addSeparator();
             }
-            else if (token.equals(SYMBOL_GAP)) {
+            else if (token.equals(SYMBOL_GAP))
+            {
                 builder.addGap();
             }
-            else {
+            else
+            {
                 builder.add(getAction(token));
             }
         }
@@ -189,7 +180,8 @@ public final class ActionBuilder {
         return toolBar;
     }
 
-    public static JMenuBar createMenuBar() {
+    public static JMenuBar createMenuBar()
+    {
         final String menues = properties.getProperty("menues");
         return createMenuBar(menues);
     }
@@ -200,12 +192,14 @@ public final class ActionBuilder {
      * @param menus a string identifying the menus to be build into the menu bar
      * @return the menu bar
      */
-    public static JMenuBar createMenuBar(final String menus) {
+    public static JMenuBar createMenuBar(final String menus)
+    {
         // menus contains a space-separated list of menus to build into the menu bar
         final JMenuBar menuBar = new JMenuBar();
         configureComponent(menuBar);
 
-        for (StringTokenizer stringTokenizer = new StringTokenizer(menus); stringTokenizer.hasMoreTokens();) {
+        for (StringTokenizer stringTokenizer = new StringTokenizer(menus); stringTokenizer.hasMoreTokens();)
+        {
             menuBar.add(createMenu(stringTokenizer.nextToken()));
         }
 
@@ -217,7 +211,8 @@ public final class ActionBuilder {
      *
      * @param component the component to alter the client properties for
      */
-    private static void configureComponent(final JComponent component) {
+    private static void configureComponent(final JComponent component)
+    {
         component.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
         component.putClientProperty(PlasticLookAndFeel.BORDER_STYLE_KEY, BorderStyle.SEPARATOR);
     }
@@ -229,20 +224,24 @@ public final class ActionBuilder {
      *             of action identifiers separated by space.
      * @return the menu
      */
-    private static JComponent createMenu(final String base) {
+    private static JComponent createMenu(final String base)
+    {
         final Mnemonics label = createMnemonic(base);
         final JMenu menu = new JMenu(label.label);
         menu.setMnemonic(label.mnemonic);
 
         final String menuItems = properties.getProperty(base + POSTFIX_ACTIONS);
 
-        for (StringTokenizer tokenizer = new StringTokenizer(menuItems); tokenizer.hasMoreTokens();) {
+        for (StringTokenizer tokenizer = new StringTokenizer(menuItems); tokenizer.hasMoreTokens();)
+        {
             final String item = tokenizer.nextToken();
 
-            if (item.equals(SYMBOL_SEPARATOR)) {
+            if (item.equals(SYMBOL_SEPARATOR))
+            {
                 menu.addSeparator();
             }
-            else {
+            else
+            {
                 menu.add(createMenuItem(item));
             }
         }
@@ -256,11 +255,10 @@ public final class ActionBuilder {
      * @param key the key to identify the action and wrap it into a menu item
      * @return the menu item
      */
-    private static JMenuItem createMenuItem(final String key) {
+    private static JMenuItem createMenuItem(final String key)
+    {
         final Action action = getAction(key);
-        final JMenuItem item = new JMenuItem(action);
-
-        return item;
+        return new JMenuItem(action);
     }
 
     /**
@@ -272,12 +270,13 @@ public final class ActionBuilder {
      *               #POSTFIX_ICON_ENABLED} for the icon, {@link #POSTFIX_ICON_DISABLED} for a disabled icon. The rest
      *               is generated using helper methods.
      */
-    private static void configureAction(final Action action, final String base) {
+    private static void configureAction(final Action action, final String base)
+    {
         final Mnemonics label = createMnemonic(base);
         action.putValue(Action.ACTION_COMMAND_KEY, base);
         action.putValue(Action.LONG_DESCRIPTION, properties.getProperty(base + POSTFIX_DESCRIPTION_LONG));
         action.putValue(Action.SHORT_DESCRIPTION, createShortDescription(base));
-        action.putValue(Action.MNEMONIC_KEY, new Integer(label.mnemonic));
+        action.putValue(Action.MNEMONIC_KEY, label.mnemonic);
         action.putValue(Action.NAME, label.label);
         action.putValue(Action.SMALL_ICON, ImageLocator.getIcon(properties.getProperty(base + POSTFIX_ICON_ENABLED)));
         action.putValue(ActionManager.SMALL_GRAY_ICON, ImageLocator.getIcon(properties.getProperty(base + POSTFIX_ICON_DISABLED)));
@@ -293,12 +292,14 @@ public final class ActionBuilder {
      *             short cut key from base and {@link #POSTFIX_SHORTCUT}.
      * @return the complete text
      */
-    private static Object createShortDescription(final String base) {
+    private static Object createShortDescription(final String base)
+    {
         final String text = properties.getProperty(base + POSTFIX_DESCRIPTION_SHORT, "");
         final String shortcut = properties.getProperty(base + POSTFIX_SHORTCUT);
         String shortcutText = "";
 
-        if (shortcut != null) {
+        if (shortcut != null)
+        {
             shortcutText = " (" + KeyBindings.getSymbolicModifierName(shortcut) + ")";
         }
 
@@ -312,11 +313,10 @@ public final class ActionBuilder {
      * @param base the base string
      * @return the key stroke build from the properties
      */
-    private static KeyStroke createKeyStroke(final String base) {
+    private static KeyStroke createKeyStroke(final String base)
+    {
         final String accelerator = properties.getProperty(base + POSTFIX_SHORTCUT);
-        final KeyStroke keyStroke = KeyBindings.parseKeyStroke(accelerator);
-
-        return keyStroke;
+        return KeyBindings.parseKeyStroke(accelerator);
     }
 
     /**
@@ -326,16 +326,19 @@ public final class ActionBuilder {
      * @param base the base to construct the lookup key
      * @return a Mnemonic object
      */
-    private static Mnemonics createMnemonic(final String base) {
+    private static Mnemonics createMnemonic(final String base)
+    {
         final String label = properties.getProperty(base + POSTFIX_LABEL, base);
         final int offset = label.indexOf(SYMBOL_MNEMONIC);
         final Mnemonics ret = new Mnemonics();
 
-        if (offset > -1) {
+        if (offset > -1)
+        {
             ret.label = label.substring(0, offset).concat(label.substring(offset + 1));
             ret.mnemonic = ret.label.charAt(offset);
         }
-        else {
+        else
+        {
             ret.label = label;
         }
 
@@ -348,26 +351,23 @@ public final class ActionBuilder {
      * @param key the key identifying the action
      * @return the toggle action or null if none
      */
-    private static ToggleAction getToggleAction(final String key) {
+    private static ToggleAction getToggleAction(final String key)
+    {
         return (ToggleAction) actions.get(key);
     }
 
-    public static Properties getProperties() {
+    public static Properties getProperties()
+    {
         return properties;
     }
 
-    /**
-     * Helper data class to wrap a label and a mnemonic char.
-     */
-    private static final class Mnemonics {
-        /**
-         * The label, defaults to an empty string.
-         */
+    /** Helper data class to wrap a label and a mnemonic char. */
+    private static final class Mnemonics
+    {
+        /** The label, defaults to an empty string. */
         private String label = "";
 
-        /**
-         * The mnemonic, defaults to the zero character.
-         */
+        /** The mnemonic, defaults to the zero character. */
         private int mnemonic = '\0';
     }
 }

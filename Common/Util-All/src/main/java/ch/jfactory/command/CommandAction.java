@@ -26,17 +26,19 @@ import org.pietschy.command.ActionCommand;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class CommandAction extends AbstractAction {
+public class CommandAction extends AbstractAction
+{
 
     private final ActionCommand command;
 
-    public CommandAction(final ActionCommand command) {
+    public CommandAction(final ActionCommand command)
+    {
         this.command = command;
     }
 
-    public void actionPerformed(final ActionEvent e) {
+    public void actionPerformed(final ActionEvent e)
+    {
         command.execute();
     }
-
 
 }

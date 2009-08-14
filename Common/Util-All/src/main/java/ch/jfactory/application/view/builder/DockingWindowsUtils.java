@@ -38,9 +38,11 @@ import net.infonode.tabbedpanel.TabbedPanel;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/08/29 13:10:43 $
  */
-public abstract class DockingWindowsUtils {
+public abstract class DockingWindowsUtils
+{
 
-    public static void setRootWindowProps(final RootWindow rootWindow) {
+    public static void setRootWindowProps(final RootWindow rootWindow)
+    {
 
         setBasicRootWindowProps(rootWindow);
 
@@ -50,7 +52,8 @@ public abstract class DockingWindowsUtils {
         rootWindow.getRootWindowProperties().getWindowAreaProperties().setBackgroundColor(rootBackgroundColor);
     }
 
-    public static void setBasicRootWindowProps(final RootWindow rootWindow) {
+    public static void setBasicRootWindowProps(final RootWindow rootWindow)
+    {
 
         final RootWindowProperties props = rootWindow.getRootWindowProperties();
         props.getDockingWindowProperties().getTabProperties().getHighlightedButtonProperties().
@@ -61,7 +64,8 @@ public abstract class DockingWindowsUtils {
 
     protected static void setTabProps(final WindowTabStateProperties tabProps, final boolean closeButtonVisible,
                                       final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
-                                      final boolean dockButtonVisible, final boolean undockButtonVisible) {
+                                      final boolean dockButtonVisible, final boolean undockButtonVisible)
+    {
 
         tabProps.getCloseButtonProperties().setVisible(closeButtonVisible);
         tabProps.getMinimizeButtonProperties().setVisible(minimizeButtonVisible);
@@ -73,7 +77,8 @@ public abstract class DockingWindowsUtils {
     public static void configureProperties(final RootWindow rootWindow, final boolean closeButtonVisible,
                                            final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
                                            final boolean maximizeButtonVisilbe, final boolean undockButtonVisible,
-                                           final boolean dockButtonVisible) {
+                                           final boolean dockButtonVisible)
+    {
 
         final WindowTabProperties tabProps = rootWindow.getRootWindowProperties().getTabWindowProperties().getTabProperties();
         setTabProps(tabProps.getNormalButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible);
@@ -87,7 +92,8 @@ public abstract class DockingWindowsUtils {
 //        rootWindow.getRootWindowProperties().getTabWindowProperties().getDockButtonProperties().setVisible(dockButtonVisible);
     }
 
-    public static RootWindow createParentChildDisplay(final JComponent listPanel, final ViewMap views) {
+    public static RootWindow createParentChildDisplay(final JComponent listPanel, final ViewMap views)
+    {
 
         final TabbedPanel tabbedPanel = new TabbedPanel();
         tabbedPanel.addTab(new Tab(listPanel));
@@ -116,11 +122,13 @@ public abstract class DockingWindowsUtils {
         return rootWindow;
     }
 
-    public static View[] toArray(final ViewMap views) {
+    public static View[] toArray(final ViewMap views)
+    {
 
         final int viewCount = views.getViewCount();
         final View[] array = new View[viewCount];
-        for (int i = 0; i < viewCount; i++) {
+        for (int i = 0; i < viewCount; i++)
+        {
             array[i] = views.getView(i);
         }
         return array;

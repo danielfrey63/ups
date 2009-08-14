@@ -9,10 +9,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This class is used for update functionallity
@@ -20,10 +19,12 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2007/09/27 10:41:22 $
  */
-public class UpdateLocator {
-    private static final Category cat = Category.getInstance(UpdateLocator.class);
+public class UpdateLocator
+{
+    private static final Logger LOGGER = Logger.getLogger(UpdateLocator.class);
 
     private String currentServerLocation = null;
+
     private List currentVersions = Collections.EMPTY_LIST;
 
     /**
@@ -32,17 +33,23 @@ public class UpdateLocator {
      * @param location location to the update server
      * @return true = valid, false = invalid
      */
-    public boolean isValidUpdateLocation(final String location) {
-        if (cat.isInfoEnabled()) {
-            cat.info("check update location: " + location);
+    public boolean isValidUpdateLocation(final String location)
+    {
+        if (LOGGER.isInfoEnabled())
+        {
+            LOGGER.info("check update location: " + location);
         }
 
-        try {
+        try
+        {
             getVersionsFromURL(location);
             return true;
-        } catch (Exception ex) {
-            if (cat.isInfoEnabled()) {
-                cat.info("location " + location + " isn't a valid update location.", ex);
+        }
+        catch (Exception ex)
+        {
+            if (LOGGER.isInfoEnabled())
+            {
+                LOGGER.info("location " + location + " isn't a valid update location.", ex);
             }
         }
         return false;
@@ -55,9 +62,11 @@ public class UpdateLocator {
      * @param localLocation  the location where original files are
      * @return a list of UpdateModule objects
      */
-    public List locateUpdates(final String serverLocation, final String localLocation) {
-        if (cat.isInfoEnabled()) {
-            cat.info("find updates from " + serverLocation + " for local versions " + localLocation);
+    public List locateUpdates(final String serverLocation, final String localLocation)
+    {
+        if (LOGGER.isInfoEnabled())
+        {
+            LOGGER.info("find updates from " + serverLocation + " for local versions " + localLocation);
         }
 
         // get updates from server
@@ -68,10 +77,12 @@ public class UpdateLocator {
 
         // find modules to be updated
         final List<JarUpdateModule> updates = new ArrayList<JarUpdateModule>();
-        for (final Iterator it = serverVersions.iterator(); it.hasNext();) {
-            final VersionInfo serverVersion = (VersionInfo) it.next();
+        for (final Object serverVersion1 : serverVersions)
+        {
+            final VersionInfo serverVersion = (VersionInfo) serverVersion1;
             final VersionInfo localVersion = localVersions.get(serverVersion.getName());
-            if (serverVersion.isNewerAs(localVersion)) {
+            if (serverVersion.isNewerAs(localVersion))
+            {
                 updates.add(new JarUpdateModule(serverVersion, localVersion));
             }
         }
@@ -79,9 +90,12 @@ public class UpdateLocator {
         return updates;
     }
 
-    private List getVersionsFromURL(final String location) {
-        if (!location.equals(currentServerLocation)) {
-            try {
+    private List getVersionsFromURL(final String location)
+    {
+        if (!location.equals(currentServerLocation))
+        {
+            try
+            {
                 final URL url = new URL(location);
                 final URLConnection con = url.openConnection();
                 final XMLDecoder dec = new XMLDecoder(con.getInputStream());
@@ -89,15 +103,19 @@ public class UpdateLocator {
                 dec.close();
                 // remember location only if the location was valid, otherwise no check will be performed any more!
                 currentServerLocation = location;
-            } catch (MalformedURLException mex) {
+            }
+            catch (MalformedURLException mex)
+            {
                 currentVersions = Collections.EMPTY_LIST;
                 final String msg = "the url " + location + " is not a legal url.";
-                cat.warn(msg);
+                LOGGER.warn(msg);
                 throw new IllegalArgumentException(msg);
-            } catch (IOException ioex) {
+            }
+            catch (IOException ioex)
+            {
                 currentVersions = Collections.EMPTY_LIST;
                 final String msg = "the connection to url " + location + " failed.";
-                cat.warn(msg);
+                LOGGER.warn(msg);
                 throw new IllegalStateException(msg);
             }
         }

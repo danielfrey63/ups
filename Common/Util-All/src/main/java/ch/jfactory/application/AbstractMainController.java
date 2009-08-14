@@ -13,11 +13,15 @@ import ch.jfactory.resource.Strings;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/25 11:09:31 $
  */
-public abstract class AbstractMainController {
+public abstract class AbstractMainController
+{
 
-    public AbstractMainController(final AbstractMainModel model, final InfoModel infoModel) {
-        model.queue(new Runnable() {
-            public void run() {
+    public AbstractMainController(final AbstractMainModel model, final InfoModel infoModel)
+    {
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 infoModel.setNote(new CodedNote(Strings.getString("startup.data")));
             }
         });

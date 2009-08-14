@@ -56,13 +56,17 @@ import javax.swing.tree.TreePath;
  * @author Andrei Kouznetsov
  * @version 1.3
  */
-public class ToolTipManager {
+public class ToolTipManager
+{
 
     public static final int UNDEFINED_ROW = -1;
 
     int lastRow = -1;
+
     TipWindow window;
+
     JComponent owner;
+
     boolean showFullTip;
 
     JToolTip tip = new JToolTip();
@@ -70,6 +74,7 @@ public class ToolTipManager {
     Rectangle visibleRect = new Rectangle();
 
     Rectangle rowBounds = new Rectangle();
+
     Border lb = new LineBorder(Color.gray);
 
     /**
@@ -77,7 +82,8 @@ public class ToolTipManager {
      *
      * @param tree JTree
      */
-    public ToolTipManager(final JTree tree) {
+    public ToolTipManager(final JTree tree)
+    {
         this(tree, false);
     }
 
@@ -87,7 +93,8 @@ public class ToolTipManager {
      * @param tree        JTree
      * @param showFullTip if true then full tooltip shown, otherwise only missed part shown (this is preferred way)
      */
-    public ToolTipManager(final JTree tree, final boolean showFullTip) {
+    public ToolTipManager(final JTree tree, final boolean showFullTip)
+    {
         this.owner = tree;
         this.showFullTip = showFullTip;
 
@@ -106,7 +113,8 @@ public class ToolTipManager {
      *
      * @param list JList
      */
-    public ToolTipManager(final JList list) {
+    public ToolTipManager(final JList list)
+    {
         this(list, false);
     }
 
@@ -116,7 +124,8 @@ public class ToolTipManager {
      * @param list        JList
      * @param showFullTip if true then full tooltip shown, otherwise only missed part shown (this is preferred way)
      */
-    public ToolTipManager(final JList list, final boolean showFullTip) {
+    public ToolTipManager(final JList list, final boolean showFullTip)
+    {
         this.owner = list;
         this.showFullTip = showFullTip;
 
@@ -135,7 +144,8 @@ public class ToolTipManager {
      *
      * @see #UNDEFINED_ROW
      */
-    private void resetRow() {
+    private void resetRow()
+    {
         lastRow = UNDEFINED_ROW;
     }
 
@@ -144,49 +154,58 @@ public class ToolTipManager {
      *
      * @return JWindow
      */
-    protected JWindow getTipWindow() {
-        if (this.window == null) {
+    protected JWindow getTipWindow()
+    {
+        if (this.window == null)
+        {
             final Window w = SwingUtilities.getWindowAncestor(owner);
             this.window = new TipWindow(w);
         }
         return this.window;
     }
 
-    /**
-     * TipWindow. Used for showing tooltip.
-     */
-    static class TipWindow extends JWindow {
+    /** TipWindow. Used for showing tooltip. */
+    static class TipWindow extends JWindow
+    {
 
         BufferedImage bi;
+
         CellRendererPane pane;
 
         int xOffset;
 
-        public TipWindow(final Window owner) {
+        public TipWindow(final Window owner)
+        {
             super(owner);
             pane = new CellRendererPane();
 //            getContentPane().add(pane);
         }
 
-        public void setXOffset(final int offset) {
+        public void setXOffset(final int offset)
+        {
             this.xOffset = offset;
-            if (bi != null) {
+            if (bi != null)
+            {
                 setSize(bi.getWidth(), bi.getHeight());
             }
         }
 
-        void setImage(final BufferedImage bi) {
+        void setImage(final BufferedImage bi)
+        {
             this.bi = bi;
-            if (bi != null) {
+            if (bi != null)
+            {
                 setSize(bi.getWidth(), bi.getHeight());
             }
             repaint();
         }
 
-        public void paint(final Graphics g) {
+        public void paint(final Graphics g)
+        {
             g.setColor(Color.white);
             g.fillRect(0, 0, getWidth(), getHeight());
-            if (bi != null) {
+            if (bi != null)
+            {
                 g.drawImage(bi, 0 - (bi.getWidth() - xOffset), 0, null);
             }
         }
@@ -201,11 +220,14 @@ public class ToolTipManager {
      * @see javax.swing.JTree#getRowForLocation
      * @see javax.swing.JList#locationToIndex
      */
-    private int getRow(final JComponent comp, final Point p) {
-        if (comp instanceof JTree) {
+    private int getRow(final JComponent comp, final Point p)
+    {
+        if (comp instanceof JTree)
+        {
             return ((JTree) comp).getRowForLocation(p.x, p.y);
         }
-        else if (comp instanceof JList) {
+        else if (comp instanceof JList)
+        {
             return ((JList) comp).locationToIndex(p);
         }
         throw new RuntimeException("JComponent shouls be JList or JTree");
@@ -222,11 +244,14 @@ public class ToolTipManager {
      * @see javax.swing.JTree#getRowBounds
      * @see javax.swing.JList#getCellBounds
      */
-    private Rectangle getRowBounds(final JComponent comp, final int row) {
-        if (comp instanceof JTree) {
+    private Rectangle getRowBounds(final JComponent comp, final int row)
+    {
+        if (comp instanceof JTree)
+        {
             return ((JTree) comp).getRowBounds(row);
         }
-        else if (comp instanceof JList) {
+        else if (comp instanceof JList)
+        {
             return ((JList) comp).getCellBounds(row, row);
         }
         throw new RuntimeException("JComponent shouls be JList or JTree");
@@ -238,32 +263,36 @@ public class ToolTipManager {
      * @param label the label
      * @return start of text
      */
-    static int getLabelStart(final JLabel label) {
+    static int getLabelStart(final JLabel label)
+    {
         final Icon currentI = label.getIcon();
-        if (currentI != null && label.getText() != null) {
+        if (currentI != null && label.getText() != null)
+        {
             return currentI.getIconWidth() + Math.max(0, label.getIconTextGap() - 4);
         }
         return 0;
     }
 
-    /**
-     * MouseHandler.<br> MouseListener for TLToolTipManager.
-     */
-    class MouseHandler extends MouseInputAdapter {
+    /** MouseHandler.<br> MouseListener for TLToolTipManager. */
+    class MouseHandler extends MouseInputAdapter
+    {
 
-        public void mousePressed(final MouseEvent e) {
+        public void mousePressed(final MouseEvent e)
+        {
             resetRow();
             mouseMoved(e);
         }
 
-        public void mouseMoved(final MouseEvent e) {
+        public void mouseMoved(final MouseEvent e)
+        {
             final JComponent component = (JComponent) e.getSource();
 
             final Point p = e.getPoint();
 
             final int row = getRow(component, p);
 
-            if (row == -1) {
+            if (row == -1)
+            {
                 resetRow();
                 hideTipWindow();
                 return;
@@ -271,7 +300,8 @@ public class ToolTipManager {
 
             final Rectangle rowBounds = getRowBounds(component, row);
 
-            if (!rowBounds.contains(p)) {
+            if (!rowBounds.contains(p))
+            {
                 hideTipWindow();
                 resetRow();
                 return;
@@ -279,14 +309,16 @@ public class ToolTipManager {
 
             final Rectangle vr = computeVisibleRect();
 
-            if (vr.contains(rowBounds)) {
+            if (vr.contains(rowBounds))
+            {
                 lastRow = row;
                 hideTipWindow();
                 return;
             }
 
             // row does not changed
-            if (row == lastRow) {
+            if (row == lastRow)
+            {
                 return;
             }
 
@@ -295,7 +327,8 @@ public class ToolTipManager {
 
             final Component label = getRenderer(component, row, rowBounds);
 
-            if (vr.contains(rowBounds)) {
+            if (vr.contains(rowBounds))
+            {
                 hideTipWindow();
                 return;
             }
@@ -307,11 +340,13 @@ public class ToolTipManager {
 
             getTipWindow().getContentPane().add(tip);
 
-            if (showFullTip) {
+            if (showFullTip)
+            {
                 window.setXOffset(rowBounds.width);
                 window.setLocation(screenLocation.x, screenLocation.y);
             }
-            else {
+            else
+            {
                 final int offset = (rowBounds.width + rowBounds.x) - (vr.width + vr.x);
                 window.setXOffset(offset);
                 window.setBounds(screenLocation.x + rowBounds.width - offset, screenLocation.y, offset, rowBounds.height);
@@ -319,8 +354,10 @@ public class ToolTipManager {
             window.setVisible(true);
         }
 
-        private Component getRenderer(final JComponent comp, final int row, final Rectangle rowBounds) {
-            if (comp instanceof JTree) {
+        private Component getRenderer(final JComponent comp, final int row, final Rectangle rowBounds)
+        {
+            if (comp instanceof JTree)
+            {
                 final JTree tree = (JTree) comp;
                 final TreePath tp = tree.getPathForRow(row);
                 final Object value = tp.getLastPathComponent();
@@ -331,7 +368,8 @@ public class ToolTipManager {
 
                 return renderer.getTreeCellRendererComponent(tree, value, isSelected, !tree.isCollapsed(row), isLeaf, row, false);
             }
-            else if (comp instanceof JList) {
+            else if (comp instanceof JList)
+            {
                 final JList list = (JList) comp;
                 final boolean isSelected = list.isSelectedIndex(row);
                 final ListCellRenderer renderer = list.getCellRenderer();
@@ -364,14 +402,17 @@ public class ToolTipManager {
          * @param cont      Container (JTree or JList)
          * @see #getRenderer
          */
-        private void createImage(final Rectangle rowBounds, final Component label, final Container cont) {
+        private void createImage(final Rectangle rowBounds, final Component label, final Container cont)
+        {
             final int w = rowBounds.width;
             final int h = rowBounds.height;
             BufferedImage bi = window.bi;
-            if (w > 0 && h > 0) {
+            if (w > 0 && h > 0)
+            {
                 window.getContentPane().add(label);
                 window.validate();
-                if (bi == null || bi.getWidth() < w || bi.getHeight() != h) {
+                if (bi == null || bi.getWidth() < w || bi.getHeight() != h)
+                {
                     /*BufferedImage */
                     bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
                 }
@@ -387,9 +428,11 @@ public class ToolTipManager {
             window.setImage(bi);
         }
 
-        public void mouseExited(final MouseEvent e) {
+        public void mouseExited(final MouseEvent e)
+        {
             final Rectangle vr = computeVisibleRect();
-            if (vr.contains(e.getPoint())) {
+            if (vr.contains(e.getPoint()))
+            {
                 return;
             }
             hideTipWindow();
@@ -401,29 +444,30 @@ public class ToolTipManager {
      *
      * @return visible rectangle
      */
-    protected Rectangle computeVisibleRect() {
+    protected Rectangle computeVisibleRect()
+    {
         owner.computeVisibleRect(visibleRect);
         return visibleRect;
     }
 
-    /**
-     * hide TipWindow
-     */
-    void hideTipWindow() {
+    /** hide TipWindow */
+    void hideTipWindow()
+    {
         getTipWindow().setVisible(false);
     }
 
-    /**
-     * MouseListener for TLToolTipManager
-     */
-    protected class TipMouseHandler extends MouseInputAdapter {
+    /** MouseListener for TLToolTipManager */
+    protected class TipMouseHandler extends MouseInputAdapter
+    {
 
-        public void mouseExited(final MouseEvent e) {
+        public void mouseExited(final MouseEvent e)
+        {
             hideTipWindow();
             resetRow();
         }
 
-        public void mousePressed(final MouseEvent e) {
+        public void mousePressed(final MouseEvent e)
+        {
             resetRow();
             final Point p = e.getPoint();
             final Point nps = new Point(p);
@@ -439,39 +483,44 @@ public class ToolTipManager {
                     np.x, np.y, e.getClickCount(), e.isPopupTrigger()
             );
             computeVisibleRect();
-            if (visibleRect.contains(np)) {
+            if (visibleRect.contains(np))
+            {
                 owner.dispatchEvent(ne);
             }
         }
 
-        public void mouseMoved(final MouseEvent e) {
+        public void mouseMoved(final MouseEvent e)
+        {
             final Point p = e.getPoint();
             Rectangle vr = computeVisibleRect();
             final Point rp = new Point(vr.x, vr.y);
             SwingUtilities.convertPointToScreen(rp, owner);
             SwingUtilities.convertPointToScreen(p, tip);
             vr = new Rectangle(rp.x, rp.y, vr.width, vr.height);
-            if (!vr.contains(p)) {
+            if (!vr.contains(p))
+            {
                 hideTipWindow();
                 resetRow();
             }
         }
     }
 
-    /**
-     * OwnerListener hides TipWindow if Component is resized, moved or made invisible.
-     */
-    private class OwnerListener extends ComponentAdapter {
+    /** OwnerListener hides TipWindow if Component is resized, moved or made invisible. */
+    private class OwnerListener extends ComponentAdapter
+    {
 
-        public void componentResized(final ComponentEvent e) {
+        public void componentResized(final ComponentEvent e)
+        {
             hideTipWindow();
         }
 
-        public void componentMoved(final ComponentEvent e) {
+        public void componentMoved(final ComponentEvent e)
+        {
             hideTipWindow();
         }
 
-        public void componentHidden(final ComponentEvent e) {
+        public void componentHidden(final ComponentEvent e)
+        {
             hideTipWindow();
         }
     }

@@ -18,25 +18,30 @@ package ch.jfactory.application.view.status;
 
 /**
  * TODO: document
-*
-* @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
-* @version $Revision: 1.1 $ $Date: 2008/01/06 10:16:23 $
-*/
-public class SimpleMessage implements Message {
+ *
+ * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
+ * @version $Revision: 1.1 $ $Date: 2008/01/06 10:16:23 $
+ */
+public class SimpleMessage implements Message
+{
 
     private String text;
+
     private Type type;
 
-    public SimpleMessage(final String text, final Type type) {
+    public SimpleMessage(final String text, final Type type)
+    {
         this.text = text;
         this.type = type;
     }
 
-    public String getText() {
+    public String getText()
+    {
         return text;
     }
 
-    public Type getType() {
+    public Type getType()
+    {
         return type;
     }
 }

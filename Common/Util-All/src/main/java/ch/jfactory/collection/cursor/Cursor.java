@@ -9,7 +9,8 @@ import java.util.Iterator;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public interface Cursor {
+public interface Cursor
+{
     /**
      * get the next object and move the cursor forward.
      *

@@ -9,7 +9,8 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface NotifiableTreeModel extends TreeModel, MutableTreeModel {
+public interface NotifiableTreeModel extends TreeModel, MutableTreeModel
+{
 
     /**
      * Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of
@@ -23,9 +24,7 @@ public interface NotifiableTreeModel extends TreeModel, MutableTreeModel {
      */
     void reload(TreePath path);
 
-    /**
-     * Invoke this method after you've changed how path is to be represented in the tree.
-     */
+    /** Invoke this method after you've changed how path is to be represented in the tree. */
     void nodeChanged(TreePath path);
 
     /**
@@ -47,8 +46,6 @@ public interface NotifiableTreeModel extends TreeModel, MutableTreeModel {
      */
     void nodesChanged(TreePath parentPath, int[] childIndices);
 
-    /**
-     * Invoke this method if you've totally changed the children of path and its childrens children.
-     */
+    /** Invoke this method if you've totally changed the children of path and its childrens children. */
     void nodesChanged(TreePath path);
 }

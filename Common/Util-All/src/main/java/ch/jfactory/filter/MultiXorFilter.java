@@ -26,27 +26,34 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class MultiXorFilter implements Filter {
+public class MultiXorFilter implements Filter
+{
 
     private List filters;
 
-    public MultiXorFilter(final Filter[] filters) {
+    public MultiXorFilter(final Filter[] filters)
+    {
         this.filters = new ArrayList(Arrays.asList(filters));
     }
 
-    public void addFilter(final Filter filter) {
+    public void addFilter(final Filter filter)
+    {
         filters.add(filter);
     }
 
-    public void removeFilter(final Filter filter) {
+    public void removeFilter(final Filter filter)
+    {
         filters.remove(filter);
     }
 
-    public boolean matches(final Object obj) {
+    public boolean matches(final Object obj)
+    {
         int count = 0;
-        for (int i = 0; i < filters.size(); i++) {
-            final Filter filter = (Filter) filters.get(i);
-            if (filter.matches(obj)) {
+        for (Object filter1 : filters)
+        {
+            final Filter filter = (Filter) filter1;
+            if (filter.matches(obj))
+            {
                 count++;
             }
         }

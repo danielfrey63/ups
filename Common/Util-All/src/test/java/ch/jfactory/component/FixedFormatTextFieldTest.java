@@ -23,11 +23,10 @@ import junit.extensions.abbot.ComponentTestFixture;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class FixedFormatTextFieldTest extends ComponentTestFixture {
+public class FixedFormatTextFieldTest extends ComponentTestFixture
+{
 
-    /**
-     * The abbot tester.
-     */
+    /** The abbot tester. */
     private ComponentTester tester;
 
     /**
@@ -35,21 +34,20 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
      *
      * @param base the base name for the test
      */
-    public FixedFormatTextFieldTest(final String base) {
+    public FixedFormatTextFieldTest(final String base)
+    {
         super(base);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void setUp() {
+    /** {@inheritDoc} */
+    protected void setUp()
+    {
         tester = new ComponentTester();
     }
 
-    /**
-     * Tests the creation of a field.
-     */
-    public void testDefaultPatterns() {
+    /** Tests the creation of a field. */
+    public void testDefaultPatterns()
+    {
         doTestDefault("NN-NNN", "12-345");
         doTestDefault("NN.NN.NNNN", "12.34.5678");
         doTestDefault("NN.NN. NNN", "12.34. 567");
@@ -66,7 +64,8 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
      * @param pattern the pattern to use
      * @param def     the default string
      */
-    private void doTestDefault(final String pattern, final String def) {
+    private void doTestDefault(final String pattern, final String def)
+    {
         final FixedFormatTextField field = new FixedFormatTextField(pattern, def);
         showFrame(field);
         assertEquals("Text " + field.getText() + " doesn't match the expected " + def, field.getText(), def);
@@ -78,41 +77,41 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
      * @param pattern the pattern to use
      * @param def     the default stirng
      */
-    private void doTestDefaultException(final String pattern, final String def) {
+    private void doTestDefaultException(final String pattern, final String def)
+    {
         boolean exceptionOccured = false;
 
-        try {
+        try
+        {
             new FixedFormatTextField(pattern, def);
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             exceptionOccured = true;
         }
 
         assertTrue("Expected exception not thrown for pattern " + pattern + " and string " + def, exceptionOccured);
     }
 
-    /**
-     * Tests for simple inserts.
-     */
-    public void testSimpleTyping() {
+    /** Tests for simple inserts. */
+    public void testSimpleTyping()
+    {
         doSimpleInsert("NN.NNN", "11.111", 0, "99999", "99.999");
         doSimpleInsert("NN.NNN", "11.111", 4, "99", "11.199");
         doSimpleInsert("N x-.N", "1 x-.1", 0, "99", "9 x-.9");
     }
 
-    /**
-     * Tests simple inserts but with overlength chunks. A beep should be posted.
-     */
-    public void testOverlengthTyping() {
+    /** Tests simple inserts but with overlength chunks. A beep should be posted. */
+    public void testOverlengthTyping()
+    {
         doSimpleInsert("NN.NNN", "11.111", 0, "999999", "99.999");
         doSimpleInsert("NN. NN", "11. 11", 0, "99999", "99. 99");
         doSimpleInsert("NN.NNN", "11.111", 4, "999", "11.199");
     }
 
-    /**
-     * Test chopped inserts that produce a system beep.
-     */
-    public void testChoppedInserts() {
+    /** Test chopped inserts that produce a system beep. */
+    public void testChoppedInserts()
+    {
         // Point is not inserted
         doSimpleInsert("NN.NNN", "11.111", 1, "999.99", "19.999");
         doSimpleInsert("NN.NNN", "11.111", 1, "99.9", "19.991");
@@ -127,7 +126,8 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
      * @param insert  the text to insert
      * @param result  the expected result
      */
-    private void doSimpleInsert(final String pattern, final String def, final int pos, final String insert, final String result) {
+    private void doSimpleInsert(final String pattern, final String def, final int pos, final String insert, final String result)
+    {
         final FixedFormatTextField field = new FixedFormatTextField(pattern, def);
         showFrame(field);
         tester.actionFocus(field);
@@ -139,10 +139,9 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
         assertEquals("The expected result " + result + " does not match " + text, text, result);
     }
 
-    /**
-     * Tests a simple paste of a string.
-     */
-    public void testPaste() {
+    /** Tests a simple paste of a string. */
+    public void testPaste()
+    {
         doPaste("NN-NNN", "11-111", 1, "99", "11-111");
         doPaste("NN-NNN", "11-111", 0, "99", "99-111");
         doPaste("NN-NNN", "11-111", 0, "99-99", "99-991");
@@ -157,7 +156,8 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture {
      * @param insert  the text to insert
      * @param result  the expected result
      */
-    private void doPaste(final String pattern, final String def, final int pos, final String insert, final String result) {
+    private void doPaste(final String pattern, final String def, final int pos, final String insert, final String result)
+    {
         final JTextField source = new JTextField();
         final FixedFormatTextField field = new FixedFormatTextField(pattern, def);
         final JPanel panel = new JPanel(new BorderLayout());

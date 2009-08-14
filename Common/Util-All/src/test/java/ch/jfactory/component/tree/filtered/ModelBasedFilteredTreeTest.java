@@ -22,10 +22,13 @@ import org.uispec4j.UISpec4J;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/05/02 15:27:11 $
  */
-public class ModelBasedFilteredTreeTest extends TestCase {
+public class ModelBasedFilteredTreeTest extends TestCase
+{
 
     private Tree tree;
+
     private FilteredTreeModel model;
+
     private String[] nodes = {
             "colors", "colors/blue", "colors/violet", "colors/red", "colors/yellow",
             "sports", "sports/basketball", "sports/football", "sports/hockey", "sports/soccer",
@@ -33,7 +36,8 @@ public class ModelBasedFilteredTreeTest extends TestCase {
             "shouldNotExist"
     };
 
-    static {
+    static
+    {
         UISpec4J.init();
     }
 
@@ -42,11 +46,13 @@ public class ModelBasedFilteredTreeTest extends TestCase {
      *
      * @param base the name
      */
-    public ModelBasedFilteredTreeTest(final String base) {
+    public ModelBasedFilteredTreeTest(final String base)
+    {
         super(base);
     }
 
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception
+    {
         final JTree t = new JTree();
         model = getFilteredTreeModel();
         t.setModel(model);
@@ -54,7 +60,8 @@ public class ModelBasedFilteredTreeTest extends TestCase {
         tree.expandAll();
     }
 
-    protected FilteredTreeModel getFilteredTreeModel() {
+    protected FilteredTreeModel getFilteredTreeModel()
+    {
         final MapBasedTreeModel tm = new MapBasedTreeModel("JTree");
         tm.insertInto("colors", "JTree", 0);
         tm.insertInto("blue", "colors", 0);
@@ -74,63 +81,75 @@ public class ModelBasedFilteredTreeTest extends TestCase {
         return new FilteredTreeModel(tm);
     }
 
-    public void test000Init() {
+    public void test000Init()
+    {
 
     }
 
-    /**
-     * Test the basic structure of the tree.
-     */
-    public void test001SimpleTree() {
+    /** Test the basic structure of the tree. */
+    public void test001SimpleTree()
+    {
         doTest(nodes, "1111111111111110");
     }
 
-    /**
-     * Tests a simple filter removing one node.
-     */
-    public void test002SimpleFilter() {
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+    /** Tests a simple filter removing one node. */
+    public void test002SimpleFilter()
+    {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 return !node.toString().startsWith("r");
             }
         });
         doTest(nodes, "1110111111111100");
     }
 
-    /**
-     * Tests the application of two filters removing two separate nodes.
-     */
-    public void test003DoubleFilter() {
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+    /** Tests the application of two filters removing two separate nodes. */
+    public void test003DoubleFilter()
+    {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 return !node.toString().startsWith("r");
             }
         });
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 return !node.toString().startsWith("b");
             }
         });
         doTest(nodes, "1010110111110100");
     }
 
-    public void test004DoubleFilter() {
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+    public void test004DoubleFilter()
+    {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 return !node.toString().startsWith("r");
             }
         });
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 return !node.toString().startsWith("c");
             }
         });
         doTest(nodes, "0000011111111100");
     }
 
-    public void test005EmptyParent() {
-        model.addViewFilter(new ViewFilter() {
-            public boolean isShown(final Object node) {
+    public void test005EmptyParent()
+    {
+        model.addViewFilter(new ViewFilter()
+        {
+            public boolean isShown(final Object node)
+            {
                 final String name = node.toString();
                 return !name.equals("blue") && !name.equals("red") && !name.equals("violet") && !name.equals("yellow");
             }
@@ -138,23 +157,28 @@ public class ModelBasedFilteredTreeTest extends TestCase {
         doTest(nodes, "1000011111111110");
     }
 
-    private void doTest(final String[] expectedNodeNames, final String bits) {
+    private void doTest(final String[] expectedNodeNames, final String bits)
+    {
         assert expectedNodeNames.length == bits.length();
-        for (int i = 0; i < bits.length(); i++) {
+        for (int i = 0; i < bits.length(); i++)
+        {
             final String expectedNodeName = expectedNodeNames[i];
             final char bitString = bits.charAt(i);
             final boolean available = bitString == '1';
             boolean failed = false;
-            try {
+            try
+            {
                 tree.select(expectedNodeName);
                 failed = !available;
                 tree.selectionEquals(expectedNodeName);
             }
-            catch (AssertionFailedError e) {
+            catch (AssertionFailedError e)
+            {
                 tree.selectionIsEmpty();
                 failed = available;
             }
-            if (failed) {
+            if (failed)
+            {
                 final String negate = (available ? "not " : "");
                 assertTrue("\"" + expectedNodeName + "\" should " + negate + "be available", false);
             }

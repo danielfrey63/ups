@@ -7,23 +7,20 @@ import org.apache.tools.ant.Task;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public abstract class Incrementor extends Task {
-    /**
-     * The manifest file file.
-     */
+public abstract class Incrementor extends Task
+{
+    /** The manifest file file. */
     private java.io.File file = null;
-    /**
-     * The variable to replace.
-     */
+
+    /** The variable to replace. */
     private String variable = null;
+
     private boolean debug = false;
-    /**
-     * If set to true, ncrements to the next odd number. Default is false.
-     */
+
+    /** If set to true, ncrements to the next odd number. Default is false. */
     private boolean odd = false;
-    /**
-     * Enables the incrementation into odd or even numbers.
-     */
+
+    /** Enables the incrementation into odd or even numbers. */
     private boolean steps = false;
 
     /**
@@ -31,11 +28,13 @@ public abstract class Incrementor extends Task {
      *
      * @param file The new file value
      */
-    public void setFile(final java.io.File file) {
+    public void setFile(final java.io.File file)
+    {
         this.file = file;
     }
 
-    public java.io.File getFile() {
+    public java.io.File getFile()
+    {
         return file;
     }
 
@@ -57,39 +56,52 @@ public abstract class Incrementor extends Task {
      *
      * @param variable The new variable value
      */
-    public void setVariable(final String variable) {
+    public void setVariable(final String variable)
+    {
         this.variable = variable;
     }
 
-    public String getVariable() {
+    public String getVariable()
+    {
         return variable;
     }
 
-    public void setDebug(final boolean debug) {
+    public void setDebug(final boolean debug)
+    {
         this.debug = debug;
     }
 
-    public boolean isDebug() {
+    public boolean isDebug()
+    {
         return debug;
     }
 
-    public void setOdd(final boolean odd) {
+    public void setOdd(final boolean odd)
+    {
         this.steps = true;
         this.odd = odd;
     }
 
-    public int incrementVersion(final int oldVersion) {
+    public int incrementVersion(final int oldVersion)
+    {
         return TaskTools.incrementVersion(oldVersion, steps, odd);
     }
 
-    public void execute() throws BuildException {
+    public void execute() throws BuildException
+    {
         if (null == getFile())
+        {
             throw new BuildException("The file attribute must be provided.\n" + usage());
+        }
         else if (!getFile().exists())
+        {
             throw new BuildException("The file provided could not be found: " + getFile() + "\n" + usage());
+        }
 
         if (null == getVariable())
+        {
             throw new BuildException("The variable attribute must be provided.\n" + usage());
+        }
 
         doExecute();
 

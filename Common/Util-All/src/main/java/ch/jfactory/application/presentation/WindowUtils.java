@@ -27,7 +27,8 @@ import javax.swing.plaf.SplitPaneUI;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2005/08/07 01:21:55 $
  */
-public class WindowUtils {
+public class WindowUtils
+{
 
     /**
      * Centers the given Component in the center of the given second Component.
@@ -35,18 +36,21 @@ public class WindowUtils {
      * @param c the Component to center
      * @param p the Component to be centered on
      */
-    public static void centerOnComponent(final Component c, final Component p) {
+    public static void centerOnComponent(final Component c, final Component p)
+    {
         final Point pnt = getCenterOnComponent(c, p);
         c.setLocation(pnt.x, pnt.y);
     }
 
     /**
      * Returns the center point (top-left) of the component centered on the parent component.
+     *
      * @param c the component to center
      * @param p the parent component
      * @return a Point
      */
-    public static Point getCenterOnComponent(final Component c, final Component p) {
+    public static Point getCenterOnComponent(final Component c, final Component p)
+    {
         final Point pnt = getCenterLocation(c, p.getSize());
         final Point pntP = p.getLocation();
         pnt.translate(pntP.x, pntP.y);
@@ -59,7 +63,8 @@ public class WindowUtils {
      *
      * @param c the Component to place
      */
-    public static void centerOnScreen(final Component c) {
+    public static void centerOnScreen(final Component c)
+    {
         final Point p = getCenterLocation(c, ch.jfactory.resource.OperatingSystem.getScreenBounds().getSize());
         c.setLocation(p.x, p.y);
     }
@@ -72,7 +77,8 @@ public class WindowUtils {
      *
      * @param components an array of JButtons layout
      */
-    public static void spaceComponents(final JComponent[] components) {
+    public static void spaceComponents(final JComponent[] components)
+    {
         spaceComponents(components, Constants.GAP_WITHIN_GROUP);
     }
 
@@ -86,11 +92,13 @@ public class WindowUtils {
      * @param space      the space in pixels to add between the components
      */
 
-    public static void spaceComponents(final JComponent[] components, final int space) {
+    public static void spaceComponents(final JComponent[] components, final int space)
+    {
         final int len = components.length;
 
         // A single component has not to be manipulated
-        if (len < 1) {
+        if (len < 1)
+        {
             return;
         }
 
@@ -100,7 +108,8 @@ public class WindowUtils {
         // of the first button.
         final Container parent = component.getParent();
 
-        if (!(parent.getLayout() instanceof FlowLayout)) {
+        if (!(parent.getLayout() instanceof FlowLayout))
+        {
             throw new IllegalComponentStateException("spaceComponents only supports FlowLayout containers.");
         }
 
@@ -109,29 +118,37 @@ public class WindowUtils {
         // If this method is called a second time, we need to keep track of fillers already filled in by a previous
         // pass.
         int fillers = 0;
-        for (int i = 0; i < parent.getComponentCount(); i++) {
+        for (int i = 0; i < parent.getComponentCount(); i++)
+        {
             final Component comp = parent.getComponent(i);
-            if (comp.getParent() != parent) {
+            if (comp.getParent() != parent)
+            {
                 throw new IllegalComponentStateException("All components have to be in the same component");
             }
-            if (comp instanceof Filler) {
+            if (comp instanceof Filler)
+            {
                 fillers++;
             }
-            if (comp instanceof JComponent) {
-                if (start == -1) {
+            if (comp instanceof JComponent)
+            {
+                if (start == -1)
+                {
                     start = i;
                 }
                 end = i;
             }
         }
-        if (len - 1 + fillers != end - start) {
+        if (len - 1 + fillers != end - start)
+        {
             throw new IllegalComponentStateException("Components must be added subsequently");
         }
 
         // Add spacer between buttons if not already there
-        if (fillers == 0) {
+        if (fillers == 0)
+        {
             final Dimension dim = new Dimension(space, space);
-            for (int i = end; i > start; i--) {
+            for (int i = end; i > start; i--)
+            {
                 final Filler filler = new Filler(dim, dim, dim);
                 filler.setBackground(Color.blue);
                 parent.add(filler, i);
@@ -144,21 +161,25 @@ public class WindowUtils {
      *
      * @param buttons an array of JButtons layout
      */
-    public static void equalizeButtons(final JButton[] buttons) {
+    public static void equalizeButtons(final JButton[] buttons)
+    {
         final int len = buttons.length;
-        if (len < 1) {
+        if (len < 1)
+        {
             return;
         }
         // Ajust size of each button to the wides one.
         double w = 0;
         final double h = buttons[0].getPreferredSize().getHeight();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++)
+        {
             final JButton button = buttons[i];
             button.setPreferredSize(null);
             w = Math.max(w, button.getPreferredSize().getWidth());
         }
         final Dimension dim = new Dimension((int) w, (int) h);
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++)
+        {
             buttons[i].setPreferredSize(dim);
         }
     }
@@ -170,7 +191,8 @@ public class WindowUtils {
      * @param p the Dimension the Component is centered on
      * @return the Point for the new location relative to the given dimension
      */
-    private static Point getCenterLocation(final Component c, final Dimension p) {
+    private static Point getCenterLocation(final Component c, final Dimension p)
+    {
         final Dimension dimC = c.getSize();
         final int iNewX = (p.width - dimC.width) / 2;
         final int iNewY = (p.height - dimC.height) / 3;
@@ -182,10 +204,12 @@ public class WindowUtils {
      *
      * @param pane
      */
-    public static void ensureSplitComponentsVisible(final JSplitPane pane) {
+    public static void ensureSplitComponentsVisible(final JSplitPane pane)
+    {
         final SplitPaneUI ui = pane.getUI();
         final int loc = ui.getDividerLocation(pane);
-        if (loc < ui.getMinimumDividerLocation(pane) || loc > ui.getMaximumDividerLocation(pane)) {
+        if (loc < ui.getMinimumDividerLocation(pane) || loc > ui.getMaximumDividerLocation(pane))
+        {
             pane.resetToPreferredSizes();
         }
     }

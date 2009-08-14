@@ -22,10 +22,10 @@ import java.util.Map;
 import javax.swing.tree.TreePath;
 
 /**
- * Simple implementation of {@link AbstractTreeModel AbstractTreeModel} based on object
- * mappings. The only way for a client to insert/remove children is to call the call {@link
- * #insertInto(javax.swing.tree.TreePath, javax.swing.tree.TreePath, int) insertInto(TreePath, TreePath, int)} or {@link
- * #insertInto(Object, javax.swing.tree.TreePath, int) insertInto(Object, TreePath, int)}.
+ * Simple implementation of {@link AbstractTreeModel AbstractTreeModel} based on object mappings. The only way for a
+ * client to insert/remove children is to call the call {@link #insertInto(javax.swing.tree.TreePath,
+ * javax.swing.tree.TreePath, int) insertInto(TreePath, TreePath, int)} or {@link #insertInto(Object,
+ * javax.swing.tree.TreePath, int) insertInto(Object, TreePath, int)}.
  *
  * <p/>You can insert objects into objects directly by using {@link #insertInto(Object, Object, int) insertInto(Object,
  * Object, int)}. Typically you would use this model like this:
@@ -47,41 +47,50 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.1 $
  */
-public class MapBasedTreeModel extends AbstractTreeModel {
+public class MapBasedTreeModel extends AbstractTreeModel
+{
 
     private final Map children = new HashMap();
+
     private final Map objectToPath = new HashMap();
 
-    public MapBasedTreeModel(final Object root) {
+    public MapBasedTreeModel(final Object root)
+    {
         super(root);
         final TreePath path = new TreePath(root);
         children.put(root, new ArrayList());
         objectToPath.put(root, path);
     }
 
-    public int getChildCount(final Object parent) {
+    public int getChildCount(final Object parent)
+    {
         final ArrayList children = (ArrayList) this.children.get(parent);
         return children == null ? 0 : children.size();
     }
 
-    public Object getChild(final Object parent, final int index) {
+    public Object getChild(final Object parent, final int index)
+    {
         final ArrayList children = (ArrayList) this.children.get(parent);
         return children.get(index);
     }
 
-    public void valueForPathChanged(final TreePath path, final Object newValue) {
+    public void valueForPathChanged(final TreePath path, final Object newValue)
+    {
         System.out.println("changed");
     }
 
-    protected void remove(final Object child, final TreePath parentPath) {
+    protected void remove(final Object child, final TreePath parentPath)
+    {
         final ArrayList children = (ArrayList) this.children.get(parentPath.getLastPathComponent());
         children.remove(child);
     }
 
-    protected void insert(final TreePath child, final TreePath parent, final int pos) {
+    protected void insert(final TreePath child, final TreePath parent, final int pos)
+    {
         final Object parentNode = parent.getLastPathComponent();
         ArrayList children = (ArrayList) this.children.get(parentNode);
-        if (children == null) {
+        if (children == null)
+        {
             children = new ArrayList();
             this.children.put(parentNode, children);
             objectToPath.put(parentNode, parent);
@@ -98,7 +107,8 @@ public class MapBasedTreeModel extends AbstractTreeModel {
      * @param parent   the parent to insert the child to
      * @param position the position to insert the child to
      */
-    public void insertInto(final Object child, final Object parent, final int position) {
+    public void insertInto(final Object child, final Object parent, final int position)
+    {
         final TreePath parentPath = (TreePath) objectToPath.get(parent);
         insertInto(parentPath.pathByAddingChild(child), parentPath, position);
     }

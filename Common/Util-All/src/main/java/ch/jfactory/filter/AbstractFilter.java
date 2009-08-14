@@ -23,17 +23,21 @@ package ch.jfactory.filter;
  * @author Bradley S. Huffman
  * @version $Revision: 1.1 $, $Date: 2005/11/17 11:54:58 $
  */
-public abstract class AbstractFilter implements Filter {
+public abstract class AbstractFilter implements Filter
+{
 
-    public Filter negate() {
+    public Filter negate()
+    {
         return new NegateFilter(this);
     }
 
-    public Filter or(final Filter filter) {
+    public Filter or(final Filter filter)
+    {
         return new OrFilter(this, filter);
     }
 
-    public Filter and(final Filter filter) {
+    public Filter and(final Filter filter)
+    {
         return new AndFilter(this, filter);
     }
 

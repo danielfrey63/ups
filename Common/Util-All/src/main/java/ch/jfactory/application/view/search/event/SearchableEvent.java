@@ -7,45 +7,62 @@ package ch.jfactory.application.view.search.event;
 import ch.jfactory.application.view.search.Searchable;
 import java.awt.AWTEvent;
 
-public class SearchableEvent extends AWTEvent {
+public class SearchableEvent extends AWTEvent
+{
 
     private String _searchingText;
+
     private String _oldSearchingText;
+
     private String _matchingText;
+
     private Object _matchingObject;
+
     public static final int SEARCHABLE_FIRST = 2999;
+
     public static final int SEARCHABLE_LAST = 3005;
+
     public static final int SEARCHABLE_START = 2999;
+
     public static final int SEARCHABLE_END = 3000;
+
     public static final int SEARCHABLE_MATCH = 3002;
+
     public static final int SEARCHABLE_NOMATCH = 3003;
+
     public static final int SEARCHABLE_CHANGE = 3004;
 
-    public SearchableEvent(final Searchable searchable, final int i) {
+    public SearchableEvent(final Searchable searchable, final int i)
+    {
         super(searchable, i);
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s) {
+    public SearchableEvent(final Object obj, final int i, final String s)
+    {
         super(obj, i);
         _searchingText = s;
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s, final String s1) {
+    public SearchableEvent(final Object obj, final int i, final String s, final String s1)
+    {
         super(obj, i);
         _searchingText = s;
         _oldSearchingText = s1;
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s, final Object obj1, final String s1) {
+    public SearchableEvent(final Object obj, final int i, final String s, final Object obj1, final String s1)
+    {
         super(obj, i);
         _searchingText = s;
         _matchingObject = obj1;
         _matchingText = s1;
     }
 
-    public String paramString() {
+    public String paramString()
+    {
         final String s;
-        switch (id) {
+        switch (id)
+        {
             case 2999:
                 s = "SEARCHABLE_START: searchingText = \"" + _searchingText + "\"";
                 break;
@@ -74,23 +91,28 @@ public class SearchableEvent extends AWTEvent {
         return s;
     }
 
-    public Searchable getSearchable() {
+    public Searchable getSearchable()
+    {
         return (source instanceof Searchable) ? (Searchable) source : null;
     }
 
-    public String getSearchingText() {
+    public String getSearchingText()
+    {
         return _searchingText;
     }
 
-    public String getOldSearchingText() {
+    public String getOldSearchingText()
+    {
         return _oldSearchingText;
     }
 
-    public String getMatchingText() {
+    public String getMatchingText()
+    {
         return _matchingText;
     }
 
-    public Object getMatchingObject() {
+    public Object getMatchingObject()
+    {
         return _matchingObject;
     }
 }

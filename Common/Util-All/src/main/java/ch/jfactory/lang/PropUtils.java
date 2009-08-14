@@ -27,7 +27,8 @@ import java.util.TreeMap;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/25 11:09:31 $
  */
-public final class PropUtils {
+public final class PropUtils
+{
 
     /**
      * Filters properties according to the given prefix. The prefix is removed from the resulting property keys. Keys
@@ -39,18 +40,23 @@ public final class PropUtils {
      * @return a new Properties object containing the found mappings or null if none could be found or input properties
      *         are null.
      */
-    public static Properties filterProperties(final Properties properties, final String keyPrefix, final String defaultKey) {
-        if (properties == null) {
+    public static Properties filterProperties(final Properties properties, final String keyPrefix, final String defaultKey)
+    {
+        if (properties == null)
+        {
             return null;
         }
         final Enumeration e = properties.keys();
         final Properties p = new Properties();
-        while (e.hasMoreElements()) {
+        while (e.hasMoreElements())
+        {
             final String key = e.nextElement().toString();
-            if (key.equals(keyPrefix)) {
+            if (key.equals(keyPrefix))
+            {
                 p.put(defaultKey, properties.get(key));
             }
-            else if (key.startsWith(keyPrefix)) {
+            else if (key.startsWith(keyPrefix))
+            {
                 p.put(key.substring(keyPrefix.length() + 1), properties.get(key));
             }
         }
@@ -63,20 +69,24 @@ public final class PropUtils {
      * @param properties
      * @param prefix
      */
-    public static String[] filterProperties(final Properties properties, final String prefix) {
+    public static String[] filterProperties(final Properties properties, final String prefix)
+    {
         final Enumeration<?> enumeration = properties.propertyNames();
         final TreeMap<String, String> map = new TreeMap<String, String>();
-        while (enumeration.hasMoreElements()) {
+        while (enumeration.hasMoreElements())
+        {
             final String key = (String) enumeration.nextElement();
-            if (key.startsWith(prefix)) {
+            if (key.startsWith(prefix))
+            {
                 map.put(key, properties.getProperty(key));
             }
         }
         final ArrayList<String> list = new ArrayList<String>(map.values());
-        return (String[]) list.toArray(new String[0]);
+        return (String[]) list.toArray(new String[list.size()]);
     }
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         final Properties p = new Properties();
         p.put("asdf.03", "03");
         p.put("asdf.12", "12");
@@ -87,8 +97,9 @@ public final class PropUtils {
         p.put("asdf.10", "10");
         p.put("asdf.01", "01");
         final String[] s = filterProperties(p, "asdf.");
-        for (int i = 0; i < s.length; i++) {
-            System.out.println(s[i]);
+        for (String value : s)
+        {
+            System.out.println(value);
         }
     }
 }

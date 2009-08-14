@@ -11,7 +11,8 @@ import javax.swing.text.PlainDocument;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class DynamicDocument extends PlainDocument {
+public class DynamicDocument extends PlainDocument
+{
     private String validInput;
 
     /**
@@ -19,14 +20,21 @@ public class DynamicDocument extends PlainDocument {
      *
      * @param validInput allowed characters for input
      */
-    public DynamicDocument(final String validInput) {
+    public DynamicDocument(final String validInput)
+    {
         this.validInput = validInput;
     }
 
-    public void insertString(final int offset, final String string, final AttributeSet attributes) throws BadLocationException {
-        if (string == null) return;
-        for (int i = 0; i < string.length(); i++) {
-            if (validInput.indexOf(string.charAt(i)) == -1) {
+    public void insertString(final int offset, final String string, final AttributeSet attributes) throws BadLocationException
+    {
+        if (string == null)
+        {
+            return;
+        }
+        for (int i = 0; i < string.length(); i++)
+        {
+            if (validInput.indexOf(string.charAt(i)) == -1)
+            {
                 Toolkit.getDefaultToolkit().beep();
                 return;
             }

@@ -16,10 +16,10 @@
  */
 package ch.jfactory.command;
 
+import ch.jfactory.component.tree.TreeUtils;
 import javax.swing.JTree;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import ch.jfactory.component.tree.TreeUtils;
 
 /**
  * Collapses all nodes of a given tree but the root node.
@@ -27,16 +27,19 @@ import ch.jfactory.component.tree.TreeUtils;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:41:22 $
  */
-public class CollapseAllTreeNodes extends ActionCommand {
+public class CollapseAllTreeNodes extends ActionCommand
+{
 
     private JTree tree;
 
-    public CollapseAllTreeNodes(final CommandManager commandManager, final JTree tree) {
+    public CollapseAllTreeNodes(final CommandManager commandManager, final JTree tree)
+    {
         super(commandManager, CommonCommands.COMMANDID_TREECOLLAPSEALLNODES);
         this.tree = tree;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         TreeUtils.collapseAll(tree);
     }
 }

@@ -6,12 +6,14 @@ package ch.jfactory.application.view.status;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2008/01/06 10:16:23 $
  */
-public interface Message {
+public interface Message
+{
     String getText();
 
     Type getType();
 
-    public enum Type {
+    public enum Type
+    {
 
         FATAL, ERROR, WARN, INFO, VERBOSE, DEBUG
     }

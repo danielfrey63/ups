@@ -25,37 +25,30 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 
 /**
- * An animation that fades into a given color. The animation starts with a totally transparent color, fading it
- * towards the given final color by in-/decrementing the alpha channel by one per cycle.
+ * An animation that fades into a given color. The animation starts with a totally transparent color, fading it towards
+ * the given final color by in-/decrementing the alpha channel by one per cycle.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class FadingPaintable extends Paintable {
-    /**
-     * The default deleay to wait between scroll steps.
-     */
+public class FadingPaintable extends Paintable
+{
+    /** The default deleay to wait between scroll steps. */
     private static final int DEFAULT_SCROLL_DELAY = 10;
 
-    /**
-     * The actual scroll delay. Defaults to {@link #DEFAULT_SCROLL_DELAY}.
-     */
+    /** The actual scroll delay. Defaults to {@link #DEFAULT_SCROLL_DELAY}. */
     private int scrollDelay = DEFAULT_SCROLL_DELAY;
 
     /**
-     * The final color that will be approached stepwise by setting the alpha channel one bit towards the alpha
-     * channel of the final color
+     * The final color that will be approached stepwise by setting the alpha channel one bit towards the alpha channel
+     * of the final color
      */
     private Color finalColor;
 
-    /**
-     * The shape to draw the fading area.
-     */
+    /** The shape to draw the fading area. */
     private Shape shape;
 
-    /**
-     * The actual color.
-     */
+    /** The actual color. */
     private transient Color color;
 
     /**
@@ -63,31 +56,36 @@ public class FadingPaintable extends Paintable {
      *
      * @param finalColor The color to fade towards
      */
-    public FadingPaintable(final Color finalColor) {
+    public FadingPaintable(final Color finalColor)
+    {
         this.finalColor = finalColor;
     }
 
-    /**
-     * Runs until the final color is reached.
-     */
-    public void run() {
+    /** Runs until the final color is reached. */
+    public void run()
+    {
         final Dimension size = getAnimation().getSize();
         shape = new Rectangle(0, 0, (int) size.getWidth(), (int) size.getHeight());
         color = new Color(finalColor.getRed(), finalColor.getGreen(), finalColor.getBlue(), 0);
 
-        while (isRun()) {
-            if (color.equals(finalColor)) {
+        while (isRun())
+        {
+            if (color.equals(finalColor))
+            {
                 stop();
             }
-            else {
+            else
+            {
                 color = new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() + 1);
                 getAnimation().repaint();
             }
 
-            try {
+            try
+            {
                 Thread.sleep(scrollDelay);
             }
-            catch (InterruptedException e) {
+            catch (InterruptedException e)
+            {
             }
         }
     }
@@ -97,7 +95,8 @@ public class FadingPaintable extends Paintable {
      *
      * @param g the graphics to paint on
      */
-    public void paint(final Graphics2D g) {
+    public void paint(final Graphics2D g)
+    {
         g.setColor(color);
         g.fill(shape);
     }

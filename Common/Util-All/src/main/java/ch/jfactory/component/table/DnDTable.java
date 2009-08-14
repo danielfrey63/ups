@@ -24,15 +24,18 @@ import javax.swing.TransferHandler;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class DnDTable extends SortedTable {
+public class DnDTable extends SortedTable
+{
 
-    public DnDTable(final SortableTableModel model) {
+    public DnDTable(final SortableTableModel model)
+    {
         super(model);
         setDragEnabled(true);
         setTransferHandler(new ResortingTransferHandler());
     }
 
-    private class ResortingTransferHandler extends TransferHandler {
+    private class ResortingTransferHandler extends TransferHandler
+    {
 
     }
 }

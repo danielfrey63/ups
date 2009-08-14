@@ -27,16 +27,19 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class ExpandAllTreeNodes extends ActionCommand {
+public class ExpandAllTreeNodes extends ActionCommand
+{
 
     private JTree tree;
 
-    public ExpandAllTreeNodes(final CommandManager commandManager, final JTree tree) {
+    public ExpandAllTreeNodes(final CommandManager commandManager, final JTree tree)
+    {
         super(commandManager, CommonCommands.COMMANDID_TREEEXPANDALLNODES);
         this.tree = tree;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         TreeUtils.expandAll(tree);
     }
 }

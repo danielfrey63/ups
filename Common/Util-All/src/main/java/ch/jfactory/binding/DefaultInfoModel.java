@@ -24,15 +24,18 @@ import com.jgoodies.binding.beans.Model;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:23 $
  */
-public class DefaultInfoModel extends Model implements InfoModel {
+public class DefaultInfoModel extends Model implements InfoModel
+{
 
     private Note note = new SimpleNote("", 0);
 
-    public Note getNote() {
+    public Note getNote()
+    {
         return note;
     }
 
-    public void setNote(final Note note) {
+    public void setNote(final Note note)
+    {
         final Note old = getNote();
         this.note = note;
         firePropertyChange(InfoModel.PROPERTYNAME_NOTE, old, note);

@@ -16,52 +16,44 @@
  */
 package ch.jfactory.jar.sign;
 
-import java.util.jar.Manifest;
-import java.util.jar.Attributes;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.zip.ZipFile;
-import java.security.MessageDigest;
-import java.security.PrivateKey;
-import java.security.NoSuchAlgorithmException;
-import java.security.InvalidKeyException;
-import java.security.SignatureException;
-import java.security.Principal;
-import java.security.Signature;
-import java.security.cert.X509Certificate;
-import java.security.cert.CertificateException;
-import java.io.OutputStream;
-import java.io.IOException;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Map;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
+import java.util.zip.ZipFile;
+import sun.misc.BASE64Encoder;
 import sun.security.util.ManifestDigester;
+import sun.security.x509.AlgorithmId;
+import sun.security.x509.CertificateIssuerName;
 import sun.security.x509.X500Name;
 import sun.security.x509.X509CertInfo;
-import sun.security.x509.CertificateIssuerName;
-import sun.security.x509.AlgorithmId;
-import sun.misc.BASE64Encoder;
-import ch.jfactory.jar.sign.ContentSigner;
-import ch.jfactory.jar.sign.ContentSignerParameters;
-import ch.jfactory.jar.sign.JarSignerParameters;
 
 /**
  * TODO: document
  *
  * @author Daniel Frey
- *
  */
-class SignatureFile {
+class SignatureFile
+{
 
-    /**
-     * SignatureFile
-     */
+    /** SignatureFile */
     Manifest sf;
 
-    /**
-     * .SF base name
-     */
+    /** .SF base name */
     String baseName;
 
     public SignatureFile(final MessageDigest[] digests,
@@ -83,25 +75,30 @@ class SignatureFile {
         mattr.putValue(Attributes.Name.SIGNATURE_VERSION.toString(), "1.0");
         mattr.putValue("Created-By", version + " (" + javaVendor + ")");
 
-        if (signManifest) {
+        if (signManifest)
+        {
             // sign the whole manifest
-            for (int i = 0; i < digests.length; i++) {
-                mattr.putValue(digests[i].getAlgorithm() + "-Digest-Manifest",
-                        encoder.encode(md.manifestDigest(digests[i])));
+            for (MessageDigest digest : digests)
+            {
+                mattr.putValue(digest.getAlgorithm() + "-Digest-Manifest",
+                        encoder.encode(md.manifestDigest(digest)));
             }
         }
 
         // create digest of the manifest main attributes
         ManifestDigester.Entry mde =
                 md.get(ManifestDigester.MF_MAIN_ATTRS, false);
-        if (mde != null) {
-            for (int i = 0; i < digests.length; i++) {
-                mattr.putValue(digests[i].getAlgorithm() +
+        if (mde != null)
+        {
+            for (MessageDigest digest : digests)
+            {
+                mattr.putValue(digest.getAlgorithm() +
                         "-Digest-" + ManifestDigester.MF_MAIN_ATTRS,
-                        encoder.encode(mde.digest(digests[i])));
+                        encoder.encode(mde.digest(digest)));
             }
         }
-        else {
+        else
+        {
             throw new IllegalStateException
                     ("ManifestDigester failed to create " +
                             "Manifest-Main-Attribute entry");
@@ -110,16 +107,18 @@ class SignatureFile {
         /* go through the manifest entries and create the digests */
 
         final Map entries = sf.getEntries();
-        final Iterator mit = mf.getEntries().entrySet().iterator();
-        while (mit.hasNext()) {
-            final Map.Entry e = (Map.Entry) mit.next();
+        for (final Map.Entry<String, Attributes> stringAttributesEntry : mf.getEntries().entrySet())
+        {
+            final Map.Entry e = (Map.Entry) stringAttributesEntry;
             final String name = (String) e.getKey();
             mde = md.get(name, false);
-            if (mde != null) {
+            if (mde != null)
+            {
                 final Attributes attr = new Attributes();
-                for (int i = 0; i < digests.length; i++) {
-                    attr.putValue(digests[i].getAlgorithm() + "-Digest",
-                            encoder.encode(mde.digest(digests[i])));
+                for (MessageDigest digest : digests)
+                {
+                    attr.putValue(digest.getAlgorithm() + "-Digest",
+                            encoder.encode(mde.digest(digest)));
                 }
                 entries.put(name, attr);
             }
@@ -133,21 +132,20 @@ class SignatureFile {
      * @throws java.io.IOException if an I/O error has occurred
      */
 
-    public void write(final OutputStream out) throws IOException {
+    public void write(final OutputStream out) throws IOException
+    {
         sf.write(out);
     }
 
-    /**
-     * get .SF file name
-     */
-    public String getMetaName() {
+    /** get .SF file name */
+    public String getMetaName()
+    {
         return "META-INF/" + baseName + ".SF";
     }
 
-    /**
-     * get base file name
-     */
-    public String getBaseName() {
+    /** get base file name */
+    public String getBaseName()
+    {
         return baseName;
     }
 
@@ -172,15 +170,17 @@ class SignatureFile {
                                final ContentSigner signingMechanism,
                                final String[] args, final ZipFile zipFile)
             throws NoSuchAlgorithmException, InvalidKeyException, IOException,
-            SignatureException, CertificateException {
+            SignatureException, CertificateException
+    {
         return new Block(this, privateKey, certChain, externalSF, tsaUrl,
                 tsaCert, signingMechanism, args, zipFile);
     }
 
-
-    public static class Block {
+    public static class Block
+    {
 
         private byte[] block;
+
         private String blockFileName;
 
         /*
@@ -191,10 +191,12 @@ class SignatureFile {
               final X509Certificate tsaCert, ContentSigner signingMechanism,
               final String[] args, final ZipFile zipFile)
                 throws NoSuchAlgorithmException, InvalidKeyException, IOException,
-                SignatureException, CertificateException {
+                SignatureException, CertificateException
+        {
 
             Principal issuerName = certChain[0].getIssuerDN();
-            if (!(issuerName instanceof X500Name)) {
+            if (!(issuerName instanceof X500Name))
+            {
                 // must extract the original encoded form of DN for subsequent
                 // name comparison checks (converting to a String and back to
                 // an encoded DN could cause the types of String attribute
@@ -210,10 +212,15 @@ class SignatureFile {
 
             final String digestAlgorithm;
             if (keyAlgorithm.equalsIgnoreCase("DSA"))
+            {
                 digestAlgorithm = "SHA1";
+            }
             else if (keyAlgorithm.equalsIgnoreCase("RSA"))
+            {
                 digestAlgorithm = "MD5";
-            else {
+            }
+            else
+            {
                 throw new RuntimeException("private key is not a DSA or "
                         + "RSA key");
             }
@@ -239,16 +246,20 @@ class SignatureFile {
             final byte[] signature = sig.sign();
 
             // Timestamp the signature and generate the signature block file
-            if (signingMechanism == null) {
+            if (signingMechanism == null)
+            {
                 signingMechanism = new TimestampedSigner();
             }
             URI tsaUri = null;
-            try {
-                if (tsaUrl != null) {
+            try
+            {
+                if (tsaUrl != null)
+                {
                     tsaUri = new URI(tsaUrl);
                 }
             }
-            catch (URISyntaxException e) {
+            catch (URISyntaxException e)
+            {
                 final IOException ioe = new IOException();
                 ioe.initCause(e);
                 throw ioe;
@@ -267,7 +278,8 @@ class SignatureFile {
         /*
        * get block file name.
        */
-        public String getMetaName() {
+        public String getMetaName()
+        {
             return blockFileName;
         }
 
@@ -278,7 +290,8 @@ class SignatureFile {
          * @throws java.io.IOException if an I/O error has occurred
          */
 
-        public void write(final OutputStream out) throws IOException {
+        public void write(final OutputStream out) throws IOException
+        {
             out.write(block);
         }
     }

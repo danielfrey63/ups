@@ -26,26 +26,31 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/08/29 13:10:43 $
  */
-public class MultiAndFilter implements Filter {
+public class MultiAndFilter implements Filter
+{
 
     private List<Filter> filters;
 
-    public MultiAndFilter(final Filter[] filters) {
+    public MultiAndFilter(final Filter[] filters)
+    {
         this.filters = new ArrayList<Filter>(Arrays.asList(filters));
     }
 
-    public void addFilter(final Filter filter) {
+    public void addFilter(final Filter filter)
+    {
         filters.add(filter);
     }
 
-    public void removeFilter(final Filter filter) {
+    public void removeFilter(final Filter filter)
+    {
         filters.remove(filter);
     }
 
-    public boolean matches(final Object obj) {
+    public boolean matches(final Object obj)
+    {
         boolean matches = true;
-        for (int i = 0; i < filters.size(); i++) {
-            final Filter filter = filters.get(i);
+        for (final Filter filter : filters)
+        {
             matches &= filter.matches(obj);
         }
         return matches;

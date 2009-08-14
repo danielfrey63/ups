@@ -10,9 +10,9 @@
 package ch.jfactory.component.tree.dnd;
 
 import ch.jfactory.color.ColorUtils;
-import ch.jfactory.image.ArrowImage;
 import ch.jfactory.component.tree.MutableTreeModel;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
+import ch.jfactory.image.ArrowImage;
 import ch.jfactory.image.ImageUtils;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -122,57 +122,45 @@ import javax.swing.tree.TreePath;
  *
  * @author Daniel Frey
  */
-public class DnDTree extends JTree implements Autoscroll {
+public class DnDTree extends JTree implements Autoscroll
+{
 
     private static final boolean DEBUG = false;
 
-    /**
-     * The margin at which the scrolling starts.
-     */
+    /** The margin at which the scrolling starts. */
     private static final int AUTOSCROLL_MARGIN = 30;
 
-    /**
-     * The 'drag image'
-     */
+    /** The 'drag image' */
     protected BufferedImage ghost;
 
-    /**
-     * The path being dragged
-     */
+    /** The path being dragged */
     protected TreePath sourcePath;
 
-    /**
-     * Where, in the drag image, the mouse was clicked
-     */
+    /** Where, in the drag image, the mouse was clicked */
     protected Point offset = new Point();
 
-    /**
-     * The notfiable tree model to use.
-     */
+    /** The notfiable tree model to use. */
     private MutableTreeModel mutable;
 
-    /**
-     * The drag source handler.
-     */
+    /** The drag source handler. */
     private final DragSourceHandler dragSourceHandler = new DragSourceHandler();
 
-    /**
-     * The drag gesture recognizer.
-     */
+    /** The drag gesture recognizer. */
     private final DragGestureHandler dragGestureHandler = new DragGestureHandler();
 
     /**
      * Instantiates a drag and drop tree.
      *
-     * @param mutable the NotifiableTreeModel
-     * @param validator  the DnDValidatorUpdater to validate the tree actions. May not be null.
+     * @param mutable   the NotifiableTreeModel
+     * @param validator the DnDValidatorUpdater to validate the tree actions. May not be null.
      */
-    public DnDTree(final MutableTreeModel mutable, final DnDValidatorUpdater validator) {
+    public DnDTree(final MutableTreeModel mutable, final DnDValidatorUpdater validator)
+    {
         super((TreeModel) mutable);
         setModel((TreeModel) mutable);
         // Make this JTree a drag source
         final DragSource dragSource = DragSource.getDefaultDragSource();
-        dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dragGestureHandler);
+        dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, new DragGestureHandler());
         // Also, make this JTree a drag target
         final DropTarget dropTarget = new DropTarget(this, new DropTargetHandler(validator));
         dropTarget.setDefaultActions(DnDConstants.ACTION_MOVE);
@@ -186,20 +174,25 @@ public class DnDTree extends JTree implements Autoscroll {
      * @param model the TreeModel to set. Must be a NotifiableTreeModel.
      * @throws IllegalArgumentException if the model is not an instance of NotifiableTreeModel.
      */
-    public void setModel(final TreeModel model) {
-        if (model instanceof MutableTreeModel) {
+    public void setModel(final TreeModel model)
+    {
+        if (model instanceof MutableTreeModel)
+        {
             final MutableTreeModel notifiable = (MutableTreeModel) model;
             this.mutable = notifiable;
             super.setModel((TreeModel) notifiable);
         }
-        else {
+        else
+        {
             throw new IllegalArgumentException("model must be an instance of NotifiableTreeModel");
         }
     }
 
-    public void paintComponent(final java.awt.Graphics g) {
+    public void paintComponent(final java.awt.Graphics g)
+    {
         super.paintComponent(g);
-        if (DEBUG) {
+        if (DEBUG)
+        {
             final Rectangle raOuter = getBounds();
             final Rectangle raInner = getParent().getBounds();
             g.setColor(Color.red);
@@ -210,10 +203,9 @@ public class DnDTree extends JTree implements Autoscroll {
 
     // Autoscroll interface
 
-    /**
-     * Calculate the insets for the JTree, not the viewport the tree is in. This makes it a bit messy.
-     */
-    public Insets getAutoscrollInsets() {
+    /** Calculate the insets for the JTree, not the viewport the tree is in. This makes it a bit messy. */
+    public Insets getAutoscrollInsets()
+    {
         final Rectangle raOuter = getBounds();
         final Rectangle raInner = getParent().getBounds();
         return new Insets(raInner.y - raOuter.y + AUTOSCROLL_MARGIN,
@@ -222,14 +214,14 @@ public class DnDTree extends JTree implements Autoscroll {
                 raOuter.width - raInner.width - raInner.x + raOuter.x + AUTOSCROLL_MARGIN);
     }
 
-    /**
-     * Ok, we’ve been told to scroll because the mouse cursor is in our scroll zone.
-     */
-    public void autoscroll(final Point pt) {
+    /** Ok, we’ve been told to scroll because the mouse cursor is in our scroll zone. */
+    public void autoscroll(final Point pt)
+    {
         // Figure out which row we’re on.
         final int actualRow = getClosestRowForLocation(pt.x, pt.y);
         // If we are not on a row then ignore this autoscroll request
-        if (actualRow < 0) {
+        if (actualRow < 0)
+        {
             return;
         }
         final Rectangle raOuter = getBounds();
@@ -246,7 +238,8 @@ public class DnDTree extends JTree implements Autoscroll {
 
     // More helpers...
 
-    protected boolean isRootPath(final TreePath path) {
+    protected boolean isRootPath(final TreePath path)
+    {
         return isRootVisible() && getRowForPath(path) == 0;
     }
 
@@ -259,47 +252,64 @@ public class DnDTree extends JTree implements Autoscroll {
      * @author $Author: daniel_frey $
      * @version $Revision: 1.6 $ $Date: 2006/04/15 23:03:21 $
      */
-    private class DropTargetHandler implements DropTargetListener {
+    private class DropTargetHandler implements DropTargetListener
+    {
 
         // Fields...
         private Color colorCueBox = ColorUtils.alpha(SystemColor.controlShadow, 0.25);
+
         private Color colorCueLine = ColorUtils.alpha(SystemColor.controlShadow, 0.75);
+
         private BufferedImage imgLeft = new ArrowImage(15, 15, ArrowImage.ArrowDirection.ARROW_LEFT);
+
         private BufferedImage imgRight = new ArrowImage(15, 15, ArrowImage.ArrowDirection.ARROW_RIGHT);
+
         private Rectangle2D raCueLine = new java.awt.geom.Rectangle2D.Float();
+
         private CueLine cueLine = new CueLine(7);
+
         private Rectangle2D cueBox = new Rectangle2D.Float();
+
         private Rectangle2D raGhost = new java.awt.geom.Rectangle2D.Float();
+
         private Timer timerHover;
+
         private DnDValidatorUpdater tm;
 
-        /**
-         * Cumulative left/right mouse movement
-         */
+        /** Cumulative left/right mouse movement */
         protected Point ptLast = new Point();
+
         protected int nLeftRight = 0;
+
         protected int nShift = 0;
+
         protected TreePath pathLast = null;
 
         // Constructor...
 
-        public DropTargetHandler(final DnDValidatorUpdater validator) {
+        public DropTargetHandler(final DnDValidatorUpdater validator)
+        {
             tm = validator;
 
             // Set up a hover timer, so that a node will be automatically expanded or collapsed if the user lingers on
             // it for more than a short time
-            timerHover = new Timer(2000, new ActionListener() {
-                public void actionPerformed(final ActionEvent e) {
+            timerHover = new Timer(2000, new ActionListener()
+            {
+                public void actionPerformed(final ActionEvent e)
+                {
                     // ResetPresentationModel left/right movement trend
                     nLeftRight = 0;
                     // Do nothing if we are hovering over the root node
-                    if (isRootPath(pathLast)) {
+                    if (isRootPath(pathLast))
+                    {
                         return;
                     }
-                    if (isExpanded(pathLast)) {
+                    if (isExpanded(pathLast))
+                    {
                         collapsePath(pathLast);
                     }
-                    else {
+                    else
+                    {
                         expandPath(pathLast);
                     }
                 }
@@ -310,14 +320,17 @@ public class DnDTree extends JTree implements Autoscroll {
 
         // Helpers...
 
-        public boolean isDragAcceptable(final DropTargetDragEvent e) {
+        public boolean isDragAcceptable(final DropTargetDragEvent e)
+        {
             // Only accept COPY or MOVE gestures (ie LINK is not supported)
-            if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0) {
+            if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0)
+            {
                 return false;
             }
 
             // Only accept this particular flavor
-            if (!e.isDataFlavorSupported(TransferableTreePaths.TREEPATH_FLAVOR)) {
+            if (!e.isDataFlavorSupported(TransferableTreePaths.TREEPATH_FLAVOR))
+            {
                 return false;
             }
 
@@ -326,14 +339,17 @@ public class DnDTree extends JTree implements Autoscroll {
             return tm.isMoveAllowed(sourcePath, getDropPath(location), getDropIndex(location));
         }
 
-        public boolean isDropAcceptable(final DropTargetDropEvent e) {
+        public boolean isDropAcceptable(final DropTargetDropEvent e)
+        {
             // Only accept COPY or MOVE gestures (ie LINK is not supported)
-            if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0) {
+            if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0)
+            {
                 return false;
             }
 
             // Only accept this particular flavor
-            if (!e.isDataFlavorSupported(TransferableTreePaths.TREEPATH_FLAVOR)) {
+            if (!e.isDataFlavorSupported(TransferableTreePaths.TREEPATH_FLAVOR))
+            {
                 return false;
             }
 
@@ -349,11 +365,14 @@ public class DnDTree extends JTree implements Autoscroll {
          *
          * @param e the event
          */
-        public void dragEnter(final DropTargetDragEvent e) {
-            if (!isDragAcceptable(e)) {
+        public void dragEnter(final DropTargetDragEvent e)
+        {
+            if (!isDragAcceptable(e))
+            {
                 e.rejectDrag();
             }
-            else {
+            else
+            {
                 e.acceptDrag(e.getDropAction());
             }
         }
@@ -363,8 +382,10 @@ public class DnDTree extends JTree implements Autoscroll {
          *
          * @param e the event
          */
-        public void dragExit(final DropTargetEvent e) {
-            if (!DragSource.isDragImageSupported()) {
+        public void dragExit(final DropTargetEvent e)
+        {
+            if (!DragSource.isDragImageSupported())
+            {
                 repaint(raGhost.getBounds());
             }
         }
@@ -374,17 +395,20 @@ public class DnDTree extends JTree implements Autoscroll {
          *
          * @param e the event
          */
-        public void dragOver(final DropTargetDragEvent e) {
+        public void dragOver(final DropTargetDragEvent e)
+        {
             // Even if the mouse is not moving, this method is still invoked 10 times per second
             final Point pt = e.getLocation();
-            if (pt.equals(ptLast)) {
+            if (pt.equals(ptLast))
+            {
                 return;
             }
 
             // Try to determine whether the user is flicking the cursor right or left.
             // Switching direction resets flicking.
             final int nDeltaLeftRight = pt.x - ptLast.x;
-            if ((nLeftRight > 0 && nDeltaLeftRight < 0) || (nLeftRight < 0 && nDeltaLeftRight > 0)) {
+            if ((nLeftRight > 0 && nDeltaLeftRight < 0) || (nLeftRight < 0 && nDeltaLeftRight > 0))
+            {
                 nLeftRight = 0;
             }
             nLeftRight += nDeltaLeftRight;
@@ -398,7 +422,8 @@ public class DnDTree extends JTree implements Autoscroll {
             g2.setRenderingHints(hints);
 
             // If a drag image is not supported by the platform, then draw my own drag image
-            if (!DragSource.isDragImageSupported()) {
+            if (!DragSource.isDragImageSupported())
+            {
                 // Rub out the last ghost image and cue line
                 paintImmediately(raGhost.getBounds());
                 // And remember where we are about to draw the new ghost imagep
@@ -406,7 +431,8 @@ public class DnDTree extends JTree implements Autoscroll {
                 g2.drawImage(ghost, AffineTransform.getTranslateInstance(raGhost.getX(), raGhost.getY()), null);
             }
             // Just rub out the last cue line
-            else {
+            else
+            {
                 paintImmediately(raCueLine.getBounds());
             }
 
@@ -416,33 +442,40 @@ public class DnDTree extends JTree implements Autoscroll {
             final boolean isLowerQuart = isLowerQuart(pt);
 
             final Shape insertionMarker;
-            if (isMiddleHalf(pt)) {
+            if (isMiddleHalf(pt))
+            {
                 insertionMarker = cueBox;
                 cueBox.setRect(0, bounds.y, getWidth(), bounds.height);
                 g2.setColor(colorCueBox);
             }
-            else {
+            else
+            {
                 final int x;
                 final int y;
-                if (isBeyondLast(pt)) {
+                if (isBeyondLast(pt))
+                {
                     final Rectangle parentBounds = getPathBounds(getParent(pt));
                     x = parentBounds.x;
                     y = bounds.y + bounds.height;
                 }
-                else if (isUpperQuart(pt)) {
+                else if (isUpperQuart(pt))
+                {
                     x = bounds.x;
                     y = bounds.y;
                 }
-                else if (isLowerQuart && isParentToNext(pt)) {
+                else if (isLowerQuart && isParentToNext(pt))
+                {
                     final Rectangle nextBounds = getPathBounds(getNext(pt));
                     x = nextBounds.x;
                     y = nextBounds.y;
                 }
-                else if (isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt))) {
+                else if (isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt)))
+                {
                     x = bounds.x;
                     y = bounds.y + bounds.height;
                 }
-                else {
+                else
+                {
                     throw new IllegalStateException("unknown state in drag gesture");
                 }
                 insertionMarker = cueLine;
@@ -452,12 +485,14 @@ public class DnDTree extends JTree implements Autoscroll {
                 g2.setColor(colorCueLine);
             }
 
-            if (tm.isMoveAllowed(sourcePath, getDropPath(pt), getDropIndex(pt))) {
+            if (tm.isMoveAllowed(sourcePath, getDropPath(pt), getDropIndex(pt)))
+            {
                 g2.fill(insertionMarker);
             }
 
             final TreePath touched = getClosestPathForLocation(pt.x, pt.y);
-            if (touched != pathLast) {
+            if (touched != pathLast)
+            {
                 // We've moved up or down, so reset left/right movement trend
                 nLeftRight = 0;
                 pathLast = touched;
@@ -465,17 +500,21 @@ public class DnDTree extends JTree implements Autoscroll {
             }
 
             // Now superimpose the left/right movement indicator only if the source path is the same.
-            if ((tm.isRightShiftAllowed(sourcePath) || tm.isLeftShiftAllowed(sourcePath)) && sourcePath.equals(touched)) {
-                if (nLeftRight > 20 && tm.isRightShiftAllowed(sourcePath)) {
+            if ((tm.isRightShiftAllowed(sourcePath) || tm.isLeftShiftAllowed(sourcePath)) && sourcePath.equals(touched))
+            {
+                if (nLeftRight > 20 && tm.isRightShiftAllowed(sourcePath))
+                {
                     g2.drawImage(imgRight, AffineTransform.getTranslateInstance(pt.x - offset.x, pt.y - offset.y), null);
                     nShift = +1;
                 }
-                else if (nLeftRight < -20 && tm.isLeftShiftAllowed(sourcePath)) {
+                else if (nLeftRight < -20 && tm.isLeftShiftAllowed(sourcePath))
+                {
                     g2.drawImage(imgLeft, AffineTransform.getTranslateInstance(pt.x - offset.x, pt.y - offset.y), null);
                     nShift = -1;
                 }
             }
-            else {
+            else
+            {
                 nShift = 0;
             }
 
@@ -485,10 +524,12 @@ public class DnDTree extends JTree implements Autoscroll {
             raGhost = raGhost.createUnion(insertionMarkerBounds);
 
             // Do this if you want to prohibit dropping onto the drag source
-            if (!isDragAcceptable(e)) {
+            if (!isDragAcceptable(e))
+            {
                 e.rejectDrag();
             }
-            else {
+            else
+            {
                 e.acceptDrag(e.getDropAction());
             }
         }
@@ -498,17 +539,20 @@ public class DnDTree extends JTree implements Autoscroll {
          * insertions at wrong position or IndexOutOfBoundsException with an index of -1, as evaluation of the insertion
          * point is based on reference equality.
          */
-        public void drop(final DropTargetDropEvent e) {
+        public void drop(final DropTargetDropEvent e)
+        {
 
             // Prevent hover timer from doing an unwanted expandPath or collapsePath
             timerHover.stop();
 
             boolean completeOk = true;
 
-            if (!isDropAcceptable(e)) {
+            if (!isDropAcceptable(e))
+            {
                 e.rejectDrop();
             }
-            else {
+            else
+            {
                 e.acceptDrop(e.getDropAction());
                 completeOk = handleDrop(e);
             }
@@ -516,22 +560,27 @@ public class DnDTree extends JTree implements Autoscroll {
             e.dropComplete(completeOk);
         }
 
-        public void dropActionChanged(final DropTargetDragEvent e) {
-            if (!isDragAcceptable(e)) {
+        public void dropActionChanged(final DropTargetDragEvent e)
+        {
+            if (!isDragAcceptable(e))
+            {
                 e.rejectDrag();
             }
-            else {
+            else
+            {
                 e.acceptDrag(e.getDropAction());
             }
         }
 
-        private TreePath getNext(final Point pt) {
+        private TreePath getNext(final Point pt)
+        {
             final TreePath path = getClosestPathForLocation(pt.x, pt.y);
             final int row = getRowForPath(path);
             return getPathForRow(row + 1);
         }
 
-        private TreePath getParent(final Point pt) {
+        private TreePath getParent(final Point pt)
+        {
             final TreePath path = getClosestPathForLocation(pt.x, pt.y);
             return path.getParentPath();
         }
@@ -542,17 +591,20 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether parent to next node
          */
-        private boolean isParentToNext(final Point pt) {
+        private boolean isParentToNext(final Point pt)
+        {
             final TreePath touchedPath = getClosestPathForLocation(pt.x, pt.y);
             final Object touchedNode = touchedPath.getLastPathComponent();
             final int count = getModel().getChildCount(touchedNode);
             final boolean isParentToNext;
-            if (count > 0) {
+            if (count > 0)
+            {
                 final Object firstChildNode = getModel().getChild(touchedNode, 0);
                 final TreePath firstChild = touchedPath.pathByAddingChild(firstChildNode);
                 isParentToNext = firstChild.equals(getNext(pt));
             }
-            else {
+            else
+            {
                 isParentToNext = false;
             }
             return isParentToNext;
@@ -564,15 +616,18 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the mouse location
          * @return whether beyond last node
          */
-        private boolean isBeyondLast(final Point pt) {
+        private boolean isBeyondLast(final Point pt)
+        {
             final TreePath touched = getClosestPathForLocation(pt.x, pt.y);
             final TreePath parent = touched.getParentPath();
             final TreePath root = (isRootVisible() ? getPathForRow(0) : getPathForRow(0).getParentPath());
             final boolean beyondLast;
-            if (touched.equals(root) || (parent != null && parent.equals(root))) {
+            if (touched.equals(root) || (parent != null && parent.equals(root)))
+            {
                 beyondLast = false;
             }
-            else {
+            else
+            {
                 final Rectangle bounds = getPathBounds(touched);
                 beyondLast = bounds.y + bounds.height < pt.y;
             }
@@ -585,14 +640,17 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether last sibling
          */
-        private boolean isLastSibling(final Point pt) {
+        private boolean isLastSibling(final Point pt)
+        {
             final TreePath touched = getClosestPathForLocation(pt.x, pt.y);
             final TreePath parent = touched.getParentPath();
             final boolean isLastSibling;
-            if (parent == null) {
+            if (parent == null)
+            {
                 isLastSibling = false;
             }
-            else {
+            else
+            {
                 final Object parentNode = parent.getLastPathComponent();
                 final TreePath touchedPath = getClosestPathForLocation(pt.x, pt.y);
                 final Object touchedNode = touchedPath.getLastPathComponent();
@@ -609,7 +667,8 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether there is a following sibling
          */
-        private boolean isSiblingToNext(final Point pt) {
+        private boolean isSiblingToNext(final Point pt)
+        {
             final TreePath touched = getClosestPathForLocation(pt.x, pt.y);
             final TreePath parent = touched.getParentPath();
             final TreePath next = getNext(pt);
@@ -622,7 +681,8 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether in the lower quart.
          */
-        private boolean isLowerQuart(final Point pt) {
+        private boolean isLowerQuart(final Point pt)
+        {
             final Rectangle bounds = getPathBounds(getClosestPathForLocation(pt.x, pt.y));
             return pt.y >= bounds.y + bounds.height * 2 / 3;
         }
@@ -633,7 +693,8 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether in the upper quart
          */
-        private boolean isUpperQuart(final Point pt) {
+        private boolean isUpperQuart(final Point pt)
+        {
             final Rectangle bounds = getPathBounds(getClosestPathForLocation(pt.x, pt.y));
             return pt.y <= bounds.y + bounds.height / 3;
         }
@@ -644,67 +705,83 @@ public class DnDTree extends JTree implements Autoscroll {
          * @param pt the location to search for the node
          * @return whether in the middle half
          */
-        private boolean isMiddleHalf(final Point pt) {
+        private boolean isMiddleHalf(final Point pt)
+        {
             final TreePath path = getClosestPathForLocation(pt.x, pt.y);
             final TreePath root;
-            if (isRootVisible()) {
+            if (isRootVisible())
+            {
                 root = getPathForRow(0);
             }
-            else {
+            else
+            {
                 root = null;
             }
             return ((path.equals(root) && !isLowerQuart(pt)) || !(isLowerQuart(pt) || isUpperQuart(pt)));
         }
 
-        private TreePath getDropPath(final Point pt) {
+        private TreePath getDropPath(final Point pt)
+        {
             final TreePath path = getClosestPathForLocation(pt.x, pt.y);
             final boolean isLowerQuart = isLowerQuart(pt);
             final TreePath dropPath;
-            if (isBeyondLast(pt)) {
+            if (isBeyondLast(pt))
+            {
                 dropPath = path.getParentPath().getParentPath();
             }
-            else if (isMiddleHalf(pt) || (isLowerQuart && isParentToNext(pt))) {
+            else if (isMiddleHalf(pt) || (isLowerQuart && isParentToNext(pt)))
+            {
                 dropPath = path;
             }
-            else if (isUpperQuart(pt) || isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt))) {
+            else if (isUpperQuart(pt) || isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt)))
+            {
                 dropPath = path.getParentPath();
             }
-            else {
+            else
+            {
                 throw new IllegalStateException("drag gesture with invalid state");
             }
             return dropPath;
         }
 
-        private int getDropIndex(final Point pt) {
+        private int getDropIndex(final Point pt)
+        {
             final TreePath path = getClosestPathForLocation(pt.x, pt.y);
             final Object node = path.getLastPathComponent();
             final boolean isLowerQuart = isLowerQuart(pt);
             final int dropIndex;
-            if (isMiddleHalf(pt)) {
+            if (isMiddleHalf(pt))
+            {
                 dropIndex = getModel().getChildCount(node);
             }
-            else if (isBeyondLast(pt)) {
+            else if (isBeyondLast(pt))
+            {
                 final TreePath grandParent = path.getParentPath().getParentPath();
                 dropIndex = getModel().getChildCount(grandParent.getLastPathComponent());
             }
-            else if (isUpperQuart(pt)) {
+            else if (isUpperQuart(pt))
+            {
                 final Object parent = path.getParentPath().getLastPathComponent();
                 dropIndex = getModel().getIndexOfChild(parent, node);
             }
-            else if (isLowerQuart && isParentToNext(pt)) {
+            else if (isLowerQuart && isParentToNext(pt))
+            {
                 dropIndex = 0;
             }
-            else if (isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt))) {
+            else if (isLowerQuart && (isLastSibling(pt) || isSiblingToNext(pt)))
+            {
                 final Object parent = path.getParentPath().getLastPathComponent();
                 dropIndex = getModel().getIndexOfChild(parent, node) + 1;
             }
-            else {
+            else
+            {
                 dropIndex = 0;
             }
             return dropIndex;
         }
 
-        private boolean handleDrop(final DropTargetDropEvent e) {
+        private boolean handleDrop(final DropTargetDropEvent e)
+        {
 
             boolean completeOk = false;
 
@@ -719,10 +796,13 @@ public class DnDTree extends JTree implements Autoscroll {
             final Transferable transferable = e.getTransferable();
             final DataFlavor[] flavors = transferable.getTransferDataFlavors();
 
-            for (int i = 0; i < flavors.length && !completeOk; i++) {
+            for (int i = 0; i < flavors.length && !completeOk; i++)
+            {
                 final DataFlavor flavor = flavors[i];
-                if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
-                    try {
+                if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType))
+                {
+                    try
+                    {
 
                         final TreeModel model = jt.getModel();
                         final Point location = e.getLocation();
@@ -734,7 +814,8 @@ public class DnDTree extends JTree implements Autoscroll {
                         final TreePath[] pathMissiles = (TreePath[]) transferable.getTransferData(flavor);
                         selectionPaths = new TreePath[pathMissiles.length];
 
-                        for (int j = pathMissiles.length - 1; j >= 0; j--) {
+                        for (int j = pathMissiles.length - 1; j >= 0; j--)
+                        {
 
                             final TreePath pathMissile = pathMissiles[j];
                             final Object missile = pathMissile.getLastPathComponent();
@@ -753,19 +834,23 @@ public class DnDTree extends JTree implements Autoscroll {
                         // No need to check remaining flavors
                         completeOk = true;
                     }
-                    catch (UnsupportedFlavorException ufe) {
+                    catch (UnsupportedFlavorException ufe)
+                    {
                         System.err.println(ufe);
                     }
-                    catch (IOException ioe) {
+                    catch (IOException ioe)
+                    {
                         System.err.println(ioe);
                     }
                 }
             }
-            if (completeOk) {
+            if (completeOk)
+            {
                 ter.restore();
 
                 // Mark this as the selected path in the tree
-                if (selectionPaths != null) {
+                if (selectionPaths != null)
+                {
                     setSelectionPaths(selectionPaths);
                 }
             }
@@ -773,9 +858,11 @@ public class DnDTree extends JTree implements Autoscroll {
         }
 
         private void handleOneDrag(final TreePath pathMissile, final TreePath targetPath,
-                                   final int insertionIndex, final TreeExpandedRestorer ter, final Object missile) {
+                                   final int insertionIndex, final TreeExpandedRestorer ter, final Object missile)
+        {
 
-            if (nShift == 0) {
+            if (nShift == 0)
+            {
                 // Node has been moved up or down in the tree.
 
                 // Update model. So the node has to be removed from the old parent node and added to
@@ -784,37 +871,47 @@ public class DnDTree extends JTree implements Autoscroll {
                 mutable.insertInto(pathMissile, targetPath, insertionIndex);
                 ter.update(missile, pathMissile.getParentPath(), targetPath);
             }
-            else if (nShift > 0) {
+            else if (nShift > 0)
+            {
                 tm.doRightShift(pathMissile);
             }
-            else if (nShift < 0) {
+            else if (nShift < 0)
+            {
                 tm.doLeftShift(pathMissile);
             }
         }
     }
 
-    private class DragSourceHandler extends DragSourceAdapter {
+    private class DragSourceHandler extends DragSourceAdapter
+    {
 
-        public void dragDropEnd(final DragSourceDropEvent e) {
-            if (e.getDropSuccess()) {
+        public void dragDropEnd(final DragSourceDropEvent e)
+        {
+            if (e.getDropSuccess())
+            {
                 final int nAction = e.getDropAction();
-                if (nAction == DnDConstants.ACTION_MOVE) {
+                if (nAction == DnDConstants.ACTION_MOVE)
+                {
                     sourcePath = null;
                 }
             }
         }
     }
 
-    private class DragGestureHandler implements DragGestureListener {
+    private class DragGestureHandler implements DragGestureListener
+    {
 
-        public void dragGestureRecognized(final DragGestureEvent e) {
+        public void dragGestureRecognized(final DragGestureEvent e)
+        {
             final Point dragOrigin = e.getDragOrigin();
             final TreePath path = getPathForLocation(dragOrigin.x, dragOrigin.y);
-            if (path == null) {
+            if (path == null)
+            {
                 return;
             }
             // Ignore user trying to drag the root node
-            if (isRootPath(path)) {
+            if (isRootPath(path))
+            {
                 return;
             }
 
@@ -829,7 +926,8 @@ public class DnDTree extends JTree implements Autoscroll {
 
             // Get the cell renderer (which is a JLabel) for the path being dragged
             final BufferedImage[] ghostImages = new BufferedImage[paths.length];
-            for (int i = 0; i < paths.length; i++) {
+            for (int i = 0; i < paths.length; i++)
+            {
                 final TreePath treePath = paths[i];
                 final Object value = treePath.getLastPathComponent();
                 final JComponent comp = (JComponent) getCellRenderer().getTreeCellRendererComponent(
@@ -868,36 +966,47 @@ public class DnDTree extends JTree implements Autoscroll {
      *          13  11-19
      * </pre>
      */
-    private class CueLine implements Shape {
+    private class CueLine implements Shape
+    {
 
         private final Polygon polygon = new Polygon(new int[16], new int[16], 16);
+
         private int cue;
+
         private int thickness;
+
         private int y;
+
         private int width;
+
         private Rectangle bounds;
 
-        public CueLine(final int thickness) {
+        public CueLine(final int thickness)
+        {
             setCue(5);
             setThickness(thickness);
         }
 
-        public void setThickness(final int thickness) {
+        public void setThickness(final int thickness)
+        {
             this.thickness = thickness;
             recalculate();
         }
 
-        public void setY(final int y) {
+        public void setY(final int y)
+        {
             this.y = y;
             recalculate();
         }
 
-        public void setCue(final int cue) {
+        public void setCue(final int cue)
+        {
             this.cue = cue;
             recalculate();
         }
 
-        private void recalculate() {
+        private void recalculate()
+        {
             final int half = thickness - thickness / 2;
 
             polygon.ypoints[0] = y - half;
@@ -937,13 +1046,15 @@ public class DnDTree extends JTree implements Autoscroll {
             calculateBounds();
         }
 
-        private void calculateBounds() {
+        private void calculateBounds()
+        {
             int xMin = Integer.MAX_VALUE;
             int yMin = Integer.MAX_VALUE;
             int xMax = Integer.MIN_VALUE;
             int yMax = Integer.MIN_VALUE;
 
-            for (int i = 0; i < polygon.npoints; i++) {
+            for (int i = 0; i < polygon.npoints; i++)
+            {
                 final int x = polygon.xpoints[i];
                 xMin = Math.min(xMin, x);
                 xMax = Math.max(xMax, x);
@@ -954,51 +1065,63 @@ public class DnDTree extends JTree implements Autoscroll {
             bounds = new Rectangle(xMin, yMin, xMax - xMin, yMax - yMin);
         }
 
-        public boolean contains(final double x, final double y) {
+        public boolean contains(final double x, final double y)
+        {
             return polygon.contains(x, y);
         }
 
-        public boolean contains(final double x, final double y, final double w, final double h) {
+        public boolean contains(final double x, final double y, final double w, final double h)
+        {
             return polygon.contains(x, y, w, h);
         }
 
-        public boolean intersects(final double x, final double y, final double w, final double h) {
+        public boolean intersects(final double x, final double y, final double w, final double h)
+        {
             return polygon.intersects(x, y, w, h);
         }
 
-        public Rectangle getBounds() {
+        public Rectangle getBounds()
+        {
             return bounds;
         }
 
-        public boolean contains(final Point2D p) {
+        public boolean contains(final Point2D p)
+        {
             return polygon.contains(p);
         }
 
-        public Rectangle2D getBounds2D() {
+        public Rectangle2D getBounds2D()
+        {
             return polygon.getBounds2D();
         }
 
-        public boolean contains(final Rectangle2D r) {
+        public boolean contains(final Rectangle2D r)
+        {
             return polygon.contains(r);
         }
 
-        public boolean intersects(final Rectangle2D r) {
+        public boolean intersects(final Rectangle2D r)
+        {
             return polygon.intersects(r);
         }
 
-        public PathIterator getPathIterator(final AffineTransform at) {
+        public PathIterator getPathIterator(final AffineTransform at)
+        {
             return polygon.getPathIterator(at);
         }
 
-        public PathIterator getPathIterator(final AffineTransform at, final double flatness) {
+        public PathIterator getPathIterator(final AffineTransform at, final double flatness)
+        {
             return polygon.getPathIterator(at, flatness);
         }
 
-        public String toString() {
+        public String toString()
+        {
             return getClass().getName() + "[y=" + y + ",cue=" + cue + "]";
         }
 
-        public void setWidth(final int width) {
+        public void setWidth(final int width)
+        {
             this.width = width;
         }
     }

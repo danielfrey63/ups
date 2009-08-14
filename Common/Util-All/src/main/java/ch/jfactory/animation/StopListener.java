@@ -17,16 +17,14 @@
 
 package ch.jfactory.animation;
 
-
 /**
  * Simple listener for notification of stoped {@link ch.jfactory.animation.Paintable} objects.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public interface StopListener {
-    /**
-     * Called when paintable stops its animation.
-     */
+public interface StopListener
+{
+    /** Called when paintable stops its animation. */
     void stopPerformed();
 }

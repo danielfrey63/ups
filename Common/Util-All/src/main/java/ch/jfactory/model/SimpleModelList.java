@@ -26,91 +26,110 @@ import javax.swing.event.ListDataListener;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/09/27 10:41:22 $
  */
-public class SimpleModelList<T> extends AbstractListModel implements Iterable<T> {
+public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
+{
 
     private ArrayList<T> models = new ArrayList<T>();
+
     private Object current;
 
     protected transient int modCount = 0;
 
-    public SimpleModelList() {
+    public SimpleModelList()
+    {
         super();
     }
 
-    public SimpleModelList(final ArrayList<T> models) {
+    public SimpleModelList(final ArrayList<T> models)
+    {
         this.models = models;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return models.size();
     }
 
-    public T getElementAt(final int index) {
+    public T getElementAt(final int index)
+    {
         return models.get(index);
     }
 
-    public void add(final T model) {
+    public void add(final T model)
+    {
         final int index = models.size();
         models.add(model);
         modCount++;
         fireIntervalAdded(this, index, index);
     }
 
-    public void remove(final T model) {
+    public void remove(final T model)
+    {
         final int index = models.indexOf(model);
         models.remove(model);
         modCount++;
         fireIntervalRemoved(this, index, index);
     }
 
-    public void clear() {
+    public void clear()
+    {
         final int size = models.size();
         models.clear();
         modCount++;
         fireContentsChanged(this, 0, size - 1);
     }
 
-    public void addAll(final ArrayList<T> list) {
+    public void addAll(final ArrayList<T> list)
+    {
         models.addAll(list);
         modCount++;
         fireIntervalAdded(this, 0, list.size() - 1);
     }
 
-    public void setCurrent(final Object current) {
+    public void setCurrent(final Object current)
+    {
         this.current = current;
     }
 
-    public Object getCurrent() {
+    public Object getCurrent()
+    {
         return current;
     }
 
     // I have to initialize the listener list lazyly as loading the data from XML doesn't (and shouldn't) contain
     // listener support data.
-    public void addListDataListener(final ListDataListener l) {
-        if (listenerList == null) {
+    public void addListDataListener(final ListDataListener l)
+    {
+        if (listenerList == null)
+        {
             listenerList = new EventListenerList();
         }
         super.addListDataListener(l);
     }
 
-    public static Object[] toArray(final SimpleModelList modelList) {
+    public static Object[] toArray(final SimpleModelList modelList)
+    {
         final int size = modelList.getSize();
         final Object[] result = new Object[size];
-        for (int i = 0; i < size; i++) {
-            result[ i ] = modelList.getElementAt(i);
+        for (int i = 0; i < size; i++)
+        {
+            result[i] = modelList.getElementAt(i);
         }
         return result;
     }
 
-    public static XStream getConverter() {
+    public static XStream getConverter()
+    {
         final XStream converter = new XStream(new DomDriver("windows-1252", new ClassPathEntityResolver("windows-1252")));
         converter.omitField(AbstractListModel.class, "listenerList");
         converter.addImplicitCollection(SimpleModelList.class, "models");
         return converter;
     }
 
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public Iterator<T> iterator()
+    {
+        return new Iterator<T>()
+        {
             /**
              * Index of element to be returned by subsequent call to next.
              */
@@ -128,44 +147,55 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
              */
             int expectedModCount = modCount;
 
-            public boolean hasNext() {
+            public boolean hasNext()
+            {
                 return cursor != getSize();
             }
 
-            public T next() {
+            public T next()
+            {
                 checkForComodification();
-                try {
+                try
+                {
                     final T next = getElementAt(cursor);
                     lastRet = cursor++;
                     return next;
                 }
-                catch (IndexOutOfBoundsException e) {
+                catch (IndexOutOfBoundsException e)
+                {
                     checkForComodification();
                     throw new NoSuchElementException();
                 }
             }
 
-            public void remove() {
-                if (lastRet == -1) {
+            public void remove()
+            {
+                if (lastRet == -1)
+                {
                     throw new IllegalStateException();
                 }
                 checkForComodification();
 
-                try {
+                try
+                {
                     SimpleModelList.this.remove(getElementAt(lastRet));
-                    if (lastRet < cursor) {
+                    if (lastRet < cursor)
+                    {
                         cursor--;
                     }
                     lastRet = -1;
                     expectedModCount = modCount;
                 }
-                catch (IndexOutOfBoundsException e) {
+                catch (IndexOutOfBoundsException e)
+                {
                     throw new ConcurrentModificationException();
                 }
             }
 
-            final void checkForComodification() {
-                if (modCount != expectedModCount) {
+            final void checkForComodification()
+            {
+                if (modCount != expectedModCount)
+                {
                     throw new ConcurrentModificationException();
                 }
             }

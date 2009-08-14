@@ -17,26 +17,26 @@
 package ch.jfactory.component.table;
 
 import ch.jfactory.lang.ArrayUtils;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.Icon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
-import javax.swing.JLabel;
-import javax.swing.Icon;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 /**
  * Builds a SortedTable and encapsulates if necessary the given TableModel into a SortableTableModel.
@@ -44,26 +44,34 @@ import javax.swing.table.TableCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2007/09/27 10:41:47 $
  */
-public class SortedTable extends JTable {
+public class SortedTable extends JTable
+{
 
     public static final Direction DIRECTION_UP = new Direction("up");
+
     public static final Direction DIRECTION_DOWN = new Direction("down");
 
-    private final TableModelListener revalidator = new TableModelListener() {
-        public void tableChanged(final TableModelEvent e) {
+    private final TableModelListener revalidator = new TableModelListener()
+    {
+        public void tableChanged(final TableModelEvent e)
+        {
             revalidate();
         }
     };
 
     private Map<KeyStroke, KeyListener> upListenerMap = new HashMap<KeyStroke, KeyListener>();
+
     private Map<KeyStroke, KeyListener> downListenerMap = new HashMap<KeyStroke, KeyListener>();
+
     private SortState sortState;
 
-    public SortedTable() {
+    public SortedTable()
+    {
         this(new DefaultTableModel());
     }
 
-    public SortedTable(final TableModel model) {
+    public SortedTable(final TableModel model)
+    {
         super(model instanceof SortableTableModel ? model : new SortableTableModel(model));
         final SortableTableModel sortableTableModel = (SortableTableModel) getModel();
         sortState = sortableTableModel.getSortState();
@@ -72,9 +80,13 @@ public class SortedTable extends JTable {
         header.addMouseListener(new HeaderListener());
     }
 
-    public void setModel(final TableModel model) {
+    public void setModel(final TableModel model)
+    {
         final TableModel old = getModel();
-        if (old != null) old.removeTableModelListener(revalidator);
+        if (old != null)
+        {
+            old.removeTableModelListener(revalidator);
+        }
         super.setModel(model instanceof SortableTableModel ? model : new SortableTableModel(model));
         model.addTableModelListener(revalidator);
         final SortableTableModel sortableTableModel = (SortableTableModel) getModel();
@@ -87,72 +99,90 @@ public class SortedTable extends JTable {
      * @param direction the direction for which to link the key stroke
      * @param stroke    the key stroke to link
      */
-    public void addKeyStroke(final Direction direction, final KeyStroke stroke) {
+    public void addKeyStroke(final Direction direction, final KeyStroke stroke)
+    {
         final KeyListener listener;
-        if (direction == DIRECTION_UP) {
+        if (direction == DIRECTION_UP)
+        {
             listener = new UpKeyListener(stroke);
             upListenerMap.put(stroke, listener);
             addKeyListener(listener);
         }
-        else if (direction == DIRECTION_DOWN) {
+        else if (direction == DIRECTION_DOWN)
+        {
             listener = new DownKeyListener(stroke);
             downListenerMap.put(stroke, listener);
             addKeyListener(listener);
         }
     }
 
-    public void removeKeyStroke(final SortState.State direction, final KeyStroke stroke) {
+    public void removeKeyStroke(final SortState.State direction, final KeyStroke stroke)
+    {
         assert direction != null : "direction argument may not be null";
-        if (direction == SortState.SORT_ASCENDING) {
+        if (direction == SortState.SORT_ASCENDING)
+        {
             removeKeyListener(upListenerMap.get(stroke));
         }
-        else if (direction == SortState.SORT_DESCENDING) {
+        else if (direction == SortState.SORT_DESCENDING)
+        {
             removeKeyListener(downListenerMap.get(stroke));
         }
     }
 
-    public boolean isAtTop() {
+    public boolean isAtTop()
+    {
         final int[] rows = getSelectedRows();
         return ArrayUtils.contains(rows, 0);
     }
 
-    public boolean isAtBottom() {
+    public boolean isAtBottom()
+    {
         final int[] rows = getSelectedRows();
         return ArrayUtils.contains(rows, getRowCount() - 1);
     }
 
-    public SortableTableModel getSortableModel() {
+    public SortableTableModel getSortableModel()
+    {
         return (SortableTableModel) getModel();
     }
 
-    private class HeaderListener extends MouseAdapter {
+    private class HeaderListener extends MouseAdapter
+    {
 
-        public void mouseClicked(final MouseEvent e) {
+        public void mouseClicked(final MouseEvent e)
+        {
             final JTableHeader header = getTableHeader();
-            if (header.getTable().isEditing()) {
+            if (header.getTable().isEditing())
+            {
                 header.getTable().getCellEditor().stopCellEditing();
             }
             final int col = header.columnAtPoint(e.getPoint());
             final int sortColumn = header.getTable().convertColumnIndexToModel(col);
-            if (e.isShiftDown()) {
+            if (e.isShiftDown())
+            {
                 sortState.setDecreasedDirective(sortColumn);
             }
-            else {
+            else
+            {
                 sortState.setIncreasedDirective(sortColumn);
             }
         }
     }
 
-    private class UpKeyListener extends KeyAdapter {
+    private class UpKeyListener extends KeyAdapter
+    {
 
         private KeyStroke stroke;
 
-        public UpKeyListener(final KeyStroke stroke) {
+        public UpKeyListener(final KeyStroke stroke)
+        {
             this.stroke = stroke;
         }
 
-        public void keyPressed(final KeyEvent e) {
-            if (KeyStroke.getKeyStroke(e.getKeyCode(), e.getModifiers()) == stroke) {
+        public void keyPressed(final KeyEvent e)
+        {
+            if (KeyStroke.getKeyStroke(e.getKeyCode(), e.getModifiers()) == stroke)
+            {
                 final SortableTableModel sortableTableModel = (SortableTableModel) getModel();
                 final int[] selected = sortableTableModel.moveUp(getSelectedRows());
                 TableUtils.setSelection(selected, getSelectionModel());
@@ -160,16 +190,20 @@ public class SortedTable extends JTable {
         }
     }
 
-    private class DownKeyListener extends KeyAdapter {
+    private class DownKeyListener extends KeyAdapter
+    {
 
         private KeyStroke stroke;
 
-        public DownKeyListener(final KeyStroke stroke) {
+        public DownKeyListener(final KeyStroke stroke)
+        {
             this.stroke = stroke;
         }
 
-        public void keyPressed(final KeyEvent e) {
-            if (KeyStroke.getKeyStroke(e.getKeyCode(), e.getModifiers()) == stroke) {
+        public void keyPressed(final KeyEvent e)
+        {
+            if (KeyStroke.getKeyStroke(e.getKeyCode(), e.getModifiers()) == stroke)
+            {
                 final SortableTableModel searchableModel = (SortableTableModel) getModel();
                 final int[] selected = searchableModel.moveDown(getSelectedRows());
                 TableUtils.setSelection(selected, getSelectionModel());
@@ -181,18 +215,22 @@ public class SortedTable extends JTable {
      * @author Nobuo Tamemasa, $Author: daniel_frey $
      * @version $Revision: 1.4 $ $Date: 2007/09/27 10:41:47 $
      */
-    private class SortColumnRenderer extends JLabel implements TableCellRenderer {
+    private class SortColumnRenderer extends JLabel implements TableCellRenderer
+    {
 
         private TableCellRenderer tableCellRenderer;
 
-        public SortColumnRenderer(final TableCellRenderer tableCellRenderer) {
+        public SortColumnRenderer(final TableCellRenderer tableCellRenderer)
+        {
             this.tableCellRenderer = tableCellRenderer;
         }
 
         public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
-                                                       final boolean hasFocus, final int row, final int column) {
+                                                       final boolean hasFocus, final int row, final int column)
+        {
             final Component c = tableCellRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (c instanceof JLabel) {
+            if (c instanceof JLabel)
+            {
                 final JLabel l = (JLabel) c;
                 final int modelColumn = table.convertColumnIndexToModel(column);
                 l.setHorizontalTextPosition(JLabel.LEFT);
@@ -201,13 +239,16 @@ public class SortedTable extends JTable {
             return c;
         }
 
-        protected Icon getHeaderRendererIcon(final int column, final int size) {
+        protected Icon getHeaderRendererIcon(final int column, final int size)
+        {
             final Arrow icon;
-            if (sortState.getColumn() == column && sortState.getState() != SortState.SORT_NONE) {
+            if (sortState.getColumn() == column && sortState.getState() != SortState.SORT_NONE)
+            {
                 icon = new Arrow(sortState.getState() == SortState.SORT_DESCENDING, size, 0);
                 return icon;
             }
-            else {
+            else
+            {
                 icon = null;
             }
             return icon;
@@ -215,32 +256,40 @@ public class SortedTable extends JTable {
 
     }
 
-    public static class Direction {
+    public static class Direction
+    {
 
         private String direction;
 
-        public Direction(final String direction) {
+        public Direction(final String direction)
+        {
             this.direction = direction;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return direction;
         }
     }
 
-    private static class Arrow implements Icon {
+    private static class Arrow implements Icon
+    {
 
         private boolean descending;
+
         private int size;
+
         private int priority;
 
-        public Arrow(final boolean descending, final int size, final int priority) {
+        public Arrow(final boolean descending, final int size, final int priority)
+        {
             this.descending = descending;
             this.size = size;
             this.priority = priority;
         }
 
-        public void paintIcon(final Component c, final Graphics g, final int x, int y) {
+        public void paintIcon(final Component c, final Graphics g, final int x, int y)
+        {
             final Color color = c == null ? Color.GRAY : c.getBackground();
             // In a compound sort, make each succesive triangle 20%
             // smaller than the previous one.
@@ -262,10 +311,12 @@ public class SortedTable extends JTable {
             g.drawLine(dx / 2, dy + shift, dx, shift);
 
             // Horizontal line.
-            if (descending) {
+            if (descending)
+            {
                 g.setColor(color.darker().darker());
             }
-            else {
+            else
+            {
                 g.setColor(color.brighter().brighter());
             }
             g.drawLine(dx, 0, 0, 0);
@@ -274,11 +325,13 @@ public class SortedTable extends JTable {
             g.translate(-x, -y);
         }
 
-        public int getIconWidth() {
+        public int getIconWidth()
+        {
             return size;
         }
 
-        public int getIconHeight() {
+        public int getIconHeight()
+        {
             return size;
         }
     }

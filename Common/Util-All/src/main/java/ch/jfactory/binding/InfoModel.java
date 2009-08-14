@@ -8,7 +8,8 @@ import java.beans.PropertyChangeListener;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:23 $
  */
-public interface InfoModel {
+public interface InfoModel
+{
 
     static String PROPERTYNAME_NOTE = "note";
 

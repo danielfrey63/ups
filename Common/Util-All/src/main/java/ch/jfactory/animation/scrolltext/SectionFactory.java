@@ -26,11 +26,11 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public final class SectionFactory {
-    /**
-     * Make construction impossible.
-     */
-    private SectionFactory() {
+public final class SectionFactory
+{
+    /** Make construction impossible. */
+    private SectionFactory()
+    {
         throw new UnsupportedOperationException();
     }
 
@@ -41,25 +41,28 @@ public final class SectionFactory {
      * @param printSpaceWidth the print space width of the paragraphs/sections
      * @return an array of sections
      */
-    public static Section[] initSections(final FileLine[] fileLines, final int printSpaceWidth) {
+    public static Section[] initSections(final FileLine[] fileLines, final int printSpaceWidth)
+    {
         final List sections = new ArrayList();
         List lastFileLines = new ArrayList();
 
-        for (int i = 0; i < fileLines.length; i++) {
+        for (int i = 0; i < fileLines.length; i++)
+        {
             final FileLine line = fileLines[i];
             final Formatter formatter = line.getFormatter();
             final Paragraph par = new Paragraph(formatter, line.getText(), printSpaceWidth);
 
-            if (!formatter.isKeepWithPrevious() && (i > 0)) {
-                sections.add(new Section((Paragraph[]) lastFileLines.toArray(new Paragraph[0])));
+            if (!formatter.isKeepWithPrevious() && (i > 0))
+            {
+                sections.add(new Section((Paragraph[]) lastFileLines.toArray(new Paragraph[lastFileLines.size()])));
                 lastFileLines = new ArrayList();
             }
 
             lastFileLines.add(par);
         }
 
-        sections.add(new Section((Paragraph[]) lastFileLines.toArray(new Paragraph[0])));
+        sections.add(new Section((Paragraph[]) lastFileLines.toArray(new Paragraph[lastFileLines.size()])));
 
-        return (Section[]) sections.toArray(new Section[0]);
+        return (Section[]) sections.toArray(new Section[sections.size()]);
     }
 }

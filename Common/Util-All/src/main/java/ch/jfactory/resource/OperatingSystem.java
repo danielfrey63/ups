@@ -22,7 +22,7 @@ package ch.jfactory.resource;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Operating system detection routines.
@@ -31,11 +31,13 @@ import org.apache.log4j.Category;
  * @version $Id: OperatingSystem.java,v 1.2 2005/08/16 23:31:02 daniel_frey Exp $
  * @since jEdit 4.0pre4
  */
-public class OperatingSystem extends SystemUtils {
+public class OperatingSystem extends SystemUtils
+{
 
-    private static final Category LOGGER = Category.getInstance(OperatingSystem.class);
+    private static final Logger LOGGER = Logger.getLogger(OperatingSystem.class);
 
-    public static Rectangle getScreenBounds() {
+    public static Rectangle getScreenBounds()
+    {
         final int screenX = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         final int screenY = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         final int x;
@@ -43,19 +45,22 @@ public class OperatingSystem extends SystemUtils {
         final int w;
         final int h;
 
-        if (IS_OS_MAC_OSX) {
+        if (IS_OS_MAC_OSX)
+        {
             x = 0;
             y = 22;
             w = screenX;
             h = screenY - y - 4;//shadow size
         }
-        else if (IS_OS_WINDOWS) {
+        else if (IS_OS_WINDOWS)
+        {
             x = -4;
             y = -4;
             w = screenX - 2 * x;
             h = screenY - 2 * y;
         }
-        else {
+        else
+        {
             x = 0;
             y = 0;
             w = screenX;
@@ -65,11 +70,13 @@ public class OperatingSystem extends SystemUtils {
         return new Rectangle(x, y, w, h);
     }
 
-    public static boolean isWebStartApplication() {
+    public static boolean isWebStartApplication()
+    {
         return System.getProperty("javawebstart.version") != null;
     }
 
-    public static boolean isMinimalVersionRunning(final String minimal) {
+    public static boolean isMinimalVersionRunning(final String minimal)
+    {
         final Version runningVersion = new Version(System.getProperty("java.version"));
         final Version minimalVersion = new Version(minimal);
         LOGGER.debug("found version \"" + runningVersion + "\", minimal is \"" + minimalVersion + "\"");

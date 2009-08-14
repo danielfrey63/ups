@@ -38,61 +38,54 @@ import javax.swing.filechooser.FileFilter;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.5 $
  */
-public class OpenChooser extends AbstractChooser {
+public class OpenChooser extends AbstractChooser
+{
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final FileFilter filter, final String base, final File initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final FileFilter filter, final String base, final File initialDir)
+    {
         super((JFrame) null, filter, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final FileFilter filter, final String base, final String initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final FileFilter filter, final String base, final String initialDir)
+    {
         super((JFrame) null, filter, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final int selectionMode, final String base, final File initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final int selectionMode, final String base, final File initialDir)
+    {
         super((JFrame) null, selectionMode, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final int selectionMode, final String base, final String initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final int selectionMode, final String base, final String initialDir)
+    {
         super((JFrame) null, selectionMode, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final JFrame parent, final FileFilter filter, final String base, final File initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final JFrame parent, final FileFilter filter, final String base, final File initialDir)
+    {
         super(parent, filter, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final JFrame parent, final FileFilter filter, final String base, final String initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final JFrame parent, final FileFilter filter, final String base, final String initialDir)
+    {
         super(parent, filter, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final JFrame parent, final int selectionMode, final String base, final File initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final JFrame parent, final int selectionMode, final String base, final File initialDir)
+    {
         super(parent, selectionMode, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public OpenChooser(final JFrame parent, final int selectionMode, final String base, final String initialDir) {
+    /** {@inheritDoc} */
+    public OpenChooser(final JFrame parent, final int selectionMode, final String base, final String initialDir)
+    {
         super(parent, selectionMode, base, initialDir, JFileChooser.OPEN_DIALOG);
     }
 
@@ -102,10 +95,12 @@ public class OpenChooser extends AbstractChooser {
      * @param files the files to check
      * @return whether saving is ok
      */
-    protected boolean checkFiles(final File[] files) {
-        for (int i = 0; i < files.length; i++) {
-            final File file = files[i];
-            if (!file.exists()) {
+    protected boolean checkFiles(final File[] files)
+    {
+        for (final File file : files)
+        {
+            if (!file.exists())
+            {
                 Dialogs.showInfoMessage(getChooser(), getErrorTitle(), getErrorText(file));
                 return false;
             }
@@ -113,16 +108,19 @@ public class OpenChooser extends AbstractChooser {
         return true;
     }
 
-    protected void execute(final File[] files) {
-        if (files.length > 0) {
+    protected void execute(final File[] files)
+    {
+        if (files.length > 0)
+        {
             setDirectory(files[0].getParentFile());
         }
         load(files);
     }
 
-    protected void load(final File[] files) {
-        for (int i = 0; i < files.length; i++) {
-            final File file = files[i];
+    protected void load(final File[] files)
+    {
+        for (final File file : files)
+        {
             load(file);
         }
     }
@@ -137,30 +135,36 @@ public class OpenChooser extends AbstractChooser {
      * @param file the original file choosen
      * @return the cleaned up file
      */
-    protected File cleanUpFileName(final File file) {
+    protected File cleanUpFileName(final File file)
+    {
 
         final FileFilter filter = getChooser().getFileFilter();
-        if (filter instanceof ExtentionFileFilter && file != null) {
+        if (filter instanceof ExtentionFileFilter && file != null)
+        {
 
             // Find matching extention in which case the file is returned as is.
             final ExtentionFileFilter simpleFilter = (ExtentionFileFilter) filter;
             final String[] extentions = simpleFilter.getExtentions();
 
             // Find matching file in file system
-            if (extentions.length > 1) {
+            if (extentions.length > 1)
+            {
                 final List<File> found = new ArrayList<File>();
-                for (int i = 0; i < extentions.length; i++) {
-                    final String extention = extentions[i];
+                for (final String extention : extentions)
+                {
                     final File temp = new File(file.getAbsolutePath() + extention);
-                    if (temp.exists() && !temp.isDirectory()) {
+                    if (temp.exists() && !temp.isDirectory())
+                    {
                         found.add(temp);
                     }
                 }
                 final int size = found.size();
-                if (size == 1) {
+                if (size == 1)
+                {
                     return found.get(0);
                 }
-                else if (size > 0) {
+                else if (size > 0)
+                {
                     final String title = Strings.getString(base + ".double.title");
                     final String text = Strings.getString(base + ".double.text", size + "");
                     Dialogs.showInfoMessage(getChooser(), title, text);
@@ -178,15 +182,19 @@ public class OpenChooser extends AbstractChooser {
      *
      * @param file
      */
-    protected void load(final File file) {
+    protected void load(final File file)
+    {
     }
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         Application.setDescription(new ApplicationDescription(
                 "", "", "", "", "", "", "", "", ""
         ));
-        final ResourceBundle bundle = new ListResourceBundle() {
-            protected Object[][] getContents() {
+        final ResourceBundle bundle = new ListResourceBundle()
+        {
+            protected Object[][] getContents()
+            {
                 return new String[][]{
                         {"test.icon", "/file.png"},
                         {"test.frame.TITLE", "Öffne UST Datei"},

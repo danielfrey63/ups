@@ -8,7 +8,8 @@ import java.util.Properties;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public interface IFBusinessDelegate {
+public interface IFBusinessDelegate
+{
 
     public static final String PROPERTY_SOURCE_NAME = "SOURCE_NAME";
 

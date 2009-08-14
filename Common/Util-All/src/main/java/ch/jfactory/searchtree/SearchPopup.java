@@ -23,23 +23,30 @@ import javax.swing.JRootPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 
-
 /**
  * Popup Window for Searchtree
  *
  * @author <a href="mail@wegmueller.com">Thomas Wegmueller</a>
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-class SearchPopup {
+class SearchPopup
+{
     private JPanel panel;
+
     private JTree owner;
+
     private int x;
+
     private int y;
-    protected SearchPopup(final JTree owner, final Component contents, final int x, final int y) {
-        if (contents == null) {
+
+    protected SearchPopup(final JTree owner, final Component contents, final int x, final int y)
+    {
+        if (contents == null)
+        {
             throw new IllegalArgumentException("Contents must be non-null");
         }
-        if (panel == null) {
+        if (panel == null)
+        {
             panel = new JPanel(new BorderLayout(), true);
             panel.setOpaque(true);
         }
@@ -51,17 +58,22 @@ class SearchPopup {
         pack();
     }
 
-    public void pack() {
-        if (panel != null) {
+    public void pack()
+    {
+        if (panel != null)
+        {
             panel.setSize(panel.getPreferredSize());
         }
     }
 
-    public void hide() {
-        if (panel != null) {
+    public void hide()
+    {
+        if (panel != null)
+        {
             final Container parent = panel.getParent();
 
-            if (parent != null) {
+            if (parent != null)
+            {
                 final Rectangle bounds = panel.getBounds();
 
                 parent.remove(panel);
@@ -74,28 +86,38 @@ class SearchPopup {
         panel.removeAll();
     }
 
-    public void show() {
+    public void show()
+    {
         Container parent = null;
 
-        if (owner != null) {
+        if (owner != null)
+        {
             parent = (owner instanceof Container ? (Container) owner : owner.getParent());
         }
 
         // Try to find a JLayeredPane and Window to add
-        for (Container p = parent; p != null; p = p.getParent()) {
-            if (p instanceof JRootPane) {
-                if (p.getParent() instanceof JInternalFrame) {
+        for (Container p = parent; p != null; p = p.getParent())
+        {
+            if (p instanceof JRootPane)
+            {
+                if (p.getParent() instanceof JInternalFrame)
+                {
                     continue;
                 }
                 parent = ((JRootPane) p).getLayeredPane();
                 // Continue, so that if there is a higher JRootPane, we'll
                 // pick it up.
-            } else if (p instanceof Window) {
-                if (parent == null) {
+            }
+            else if (p instanceof Window)
+            {
+                if (parent == null)
+                {
                     parent = p;
                 }
                 break;
-            } else if (p instanceof JApplet) {
+            }
+            else if (p instanceof JApplet)
+            {
                 // Painting code stops at Applets, we don't want
                 // to add to a Component above an Applet otherwise
                 // you'll never see it painted.
@@ -105,16 +127,22 @@ class SearchPopup {
 
         final Point p = convertScreenLocationToParent(parent, x, y);
         panel.setLocation(p.x, p.y);
-        if (parent instanceof JLayeredPane) {
+        if (parent instanceof JLayeredPane)
+        {
             ((JLayeredPane) parent).add(panel, JLayeredPane.POPUP_LAYER, 0);
-        } else {
+        }
+        else
+        {
             parent.add(panel);
         }
     }
 
-    static Point convertScreenLocationToParent(final Container parent, final int x, final int y) {
-        for (Container p = parent; p != null; p = p.getParent()) {
-            if (p instanceof Window) {
+    static Point convertScreenLocationToParent(final Container parent, final int x, final int y)
+    {
+        for (Container p = parent; p != null; p = p.getParent())
+        {
+            if (p instanceof Window)
+            {
                 final Point point = new Point(x, y);
                 SwingUtilities.convertPointFromScreen(point, parent);
                 return point;

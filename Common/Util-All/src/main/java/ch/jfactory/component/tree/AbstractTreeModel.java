@@ -17,13 +17,12 @@
 package ch.jfactory.component.tree;
 
 import com.jgoodies.binding.beans.Model;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A tree model that is independent of DefaultTreeModel or MutableTreeNode. It handles notification for node changes.
@@ -62,8 +61,8 @@ import java.util.Iterator;
  * <li>{@link NotifiableTreeModel#nodesWereInserted(javax.swing.tree.TreePath,int[]) nodesWereInserted(TreePath),
  * int[])}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesWereRemoved(javax.swing.tree.TreePath,int[],Object[])
- * nodesWereRemoved(TreePath, int[], Object[])}</li>
+ * <li>{@link NotifiableTreeModel#nodesWereRemoved(javax.swing.tree.TreePath,int[],Object[]) nodesWereRemoved(TreePath,
+ * int[], Object[])}</li>
  *
  * </li></ul>
  *
@@ -78,9 +77,8 @@ import java.util.Iterator;
  * <li>{@link MutableTreeModel#removeFromParent(javax.swing.tree.TreePath) removeFromParent(TreePath)} calls abstract
  * {@link #remove remove(Object, TreePath)} to do the actual removal.</li>
  *
- * <li>{@link MutableTreeModel#insertInto(javax.swing.tree.TreePath,javax.swing.tree.TreePath,int)
- * insertInto(TreePath, TreePath, int)} calls abstract {@link #insert insert(TreePath, TreePath, int)} to do the actual
- * insertion.</li>
+ * <li>{@link MutableTreeModel#insertInto(javax.swing.tree.TreePath,javax.swing.tree.TreePath,int) insertInto(TreePath,
+ * TreePath, int)} calls abstract {@link #insert insert(TreePath, TreePath, int)} to do the actual insertion.</li>
  *
  * </ul>
  *
@@ -113,12 +111,15 @@ import java.util.Iterator;
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2008/01/06 10:16:23 $
  */
-public abstract class AbstractTreeModel extends Model implements NotifiableTreeModel {
+public abstract class AbstractTreeModel extends Model implements NotifiableTreeModel
+{
 
     private ArrayList<TreeModelListener> listenerList = new ArrayList<TreeModelListener>();
+
     protected Object root;
 
-    public AbstractTreeModel(final Object root) {
+    public AbstractTreeModel(final Object root)
+    {
         super();
         setRoot(root);
     }
@@ -128,7 +129,8 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      *
      * @param root
      */
-    public void setRoot(final Object root) {
+    public void setRoot(final Object root)
+    {
         this.root = root;
         fireTreeStructureChanged(new TreeModelEvent(this, root == null ? null : new TreePath(root)));
     }
@@ -140,7 +142,8 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      *
      * @param l the listener to add
      */
-    public void addTreeModelListener(final TreeModelListener l) {
+    public void addTreeModelListener(final TreeModelListener l)
+    {
         listenerList.add(l);
     }
 
@@ -149,24 +152,30 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      *
      * @param l the listener to remove
      */
-    public void removeTreeModelListener(final TreeModelListener l) {
+    public void removeTreeModelListener(final TreeModelListener l)
+    {
         listenerList.remove(l);
     }
 
-    public boolean isLeaf(final Object node) {
+    public boolean isLeaf(final Object node)
+    {
         return getChildCount(node) == 0;
     }
 
-    public int getIndexOfChild(final Object parent, final Object child) {
-        for (int i = 0; i < getChildCount(parent); i++) {
-            if (getChild(parent, i).equals(child)) {
+    public int getIndexOfChild(final Object parent, final Object child)
+    {
+        for (int i = 0; i < getChildCount(parent); i++)
+        {
+            if (getChild(parent, i).equals(child))
+            {
                 return i;
             }
         }
         return -1;
     }
 
-    public Object getRoot() {
+    public Object getRoot()
+    {
         return root;
     }
 
@@ -176,12 +185,15 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of
      * its listeners that the model has changed.
      */
-    public void reload() {
+    public void reload()
+    {
         final Object root = getRoot();
-        if (root != null) {
+        if (root != null)
+        {
             reload(new TreePath(root));
         }
-        else {
+        else
+        {
             reload(new TreePath(new Object()));
         }
     }
@@ -190,35 +202,39 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of
      * its listeners that the model has changed below the path <code>path</code> (PENDING).
      */
-    public void reload(final TreePath path) {
-        if (path != null) {
+    public void reload(final TreePath path)
+    {
+        if (path != null)
+        {
             fireTreeStructureChanged(new TreeModelEvent(this, path));
         }
     }
 
-    /**
-     * Invoke this method after you've changed how path is to be represented in the tree.
-     */
-    public void nodeChanged(final TreePath path) {
-        if (listenerList != null && path != null) {
+    /** Invoke this method after you've changed how path is to be represented in the tree. */
+    public void nodeChanged(final TreePath path)
+    {
+        if (listenerList != null && path != null)
+        {
             final TreePath parentPath = path.getParentPath();
-            if (parentPath != null) {
+            if (parentPath != null)
+            {
                 final Object parent = parentPath.getLastPathComponent();
                 final int index = getIndexOfChild(parent, path.getLastPathComponent());
-                if (index != -1) {
+                if (index != -1)
+                {
                     nodesChanged(parentPath, new int[]{index});
                 }
             }
-            else {
+            else
+            {
                 nodesChanged(path);
             }
         }
     }
 
-    /**
-     * Invoke this method after you've changed how path is to be represented in the tree.
-     */
-    public void nodeChanged(final Object node) {
+    /** Invoke this method after you've changed how path is to be represented in the tree. */
+    public void nodeChanged(final Object node)
+    {
         nodeChanged(TreeUtils.findPathInTreeModel(this, node));
     }
 
@@ -226,28 +242,33 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * Invoke this method after you've changed how the children identified by childIndicies are to be represented in the
      * tree.
      */
-    public void nodesChanged(final TreePath parentPath, final int[] childIndices) {
-        if (childIndices == null) {
+    public void nodesChanged(final TreePath parentPath, final int[] childIndices)
+    {
+        if (childIndices == null)
+        {
             throw new IllegalArgumentException("childIndeces must not be null");
         }
-        if (parentPath != null) {
+        if (parentPath != null)
+        {
             final int len = childIndices.length;
-            if (len > 0) {
+            if (len > 0)
+            {
                 final Object parent = parentPath.getLastPathComponent();
                 final Object[] children = new Object[len];
-                for (int i = 0; i < len; i++) {
-                    children[ i ] = getChild(parent, childIndices[ i ]);
+                for (int i = 0; i < len; i++)
+                {
+                    children[i] = getChild(parent, childIndices[i]);
                 }
                 fireTreeNodesChanged(new TreeModelEvent(this, parentPath, childIndices, children));
             }
         }
     }
 
-    /**
-     * Invoke this method if you've totally changed the children of path and its childrens children.
-     */
-    public void nodesChanged(final TreePath path) {
-        if (path != null) {
+    /** Invoke this method if you've totally changed the children of path and its childrens children. */
+    public void nodesChanged(final TreePath path)
+    {
+        if (path != null)
+        {
             fireTreeNodesChanged(new TreeModelEvent(this, path));
         }
     }
@@ -256,13 +277,16 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * Invoke this method after you've inserted some TreeNodes into path.  childIndices should be the index of the new
      * elements and must be sorted in ascending order.
      */
-    public void nodesWereInserted(final TreePath parentPath, final int[] childIndices) {
-        if (listenerList != null && parentPath != null && childIndices != null && childIndices.length > 0) {
+    public void nodesWereInserted(final TreePath parentPath, final int[] childIndices)
+    {
+        if (listenerList != null && parentPath != null && childIndices != null && childIndices.length > 0)
+        {
             final int cCount = childIndices.length;
             final Object parent = parentPath.getLastPathComponent();
             final Object[] newChildren = new Object[cCount];
-            for (int i = 0; i < cCount; i++) {
-                newChildren[ i ] = getChild(parent, childIndices[ i ]);
+            for (int i = 0; i < cCount; i++)
+            {
+                newChildren[i] = getChild(parent, childIndices[i]);
             }
             fireTreeNodesInserted(new TreeModelEvent(this, parentPath, childIndices, newChildren));
         }
@@ -273,8 +297,10 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * removed elements and must be sorted in ascending order. And removedChildren should be the array of the children
      * objects that were removed.
      */
-    public void nodesWereRemoved(final TreePath parentPath, final int[] childIndices, final Object[] removedChildren) {
-        if (parentPath != null && childIndices != null) {
+    public void nodesWereRemoved(final TreePath parentPath, final int[] childIndices, final Object[] removedChildren)
+    {
+        if (parentPath != null && childIndices != null)
+        {
             fireTreeNodesRemoved(new TreeModelEvent(this, parentPath, childIndices, removedChildren));
         }
     }
@@ -285,7 +311,8 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      *
      * @param path the child to remove
      */
-    public void removeFromParent(final TreePath path) {
+    public void removeFromParent(final TreePath path)
+    {
         final TreePath parentPath = path.getParentPath();
         final Object child = path.getLastPathComponent();
         final int index = getIndexOfChild(parentPath.getLastPathComponent(), child);
@@ -300,7 +327,8 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      * @param parent the parent to insert it to
      * @param pos    the position to insert the child
      */
-    public void insertInto(final TreePath child, final TreePath parent, final int pos) {
+    public void insertInto(final TreePath child, final TreePath parent, final int pos)
+    {
         insert(child, parent, pos);
         nodesWereInserted(parent, new int[]{pos});
     }
@@ -313,21 +341,23 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
      *
      * @param childPaths an array of paths to remove
      */
-    public void removeFromParent(final TreePath[] childPaths) {
-        for (int i = 0; i < childPaths.length; i++) {
-            final TreePath path = childPaths[ i ];
+    public void removeFromParent(final TreePath[] childPaths)
+    {
+        for (final TreePath path : childPaths)
+        {
             removeFromParent(path);
         }
     }
 
     /**
      * Convenience method to insert a new object into this model. Calls {@link #insertInto(javax.swing.tree.TreePath,
-     *javax.swing.tree.TreePath,int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
+     * javax.swing.tree.TreePath,int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
      *
      * @param child  the object to insert
      * @param parent the path to insert it to
      */
-    public void insertInto(final Object child, final TreePath parent, final int position) {
+    public void insertInto(final Object child, final TreePath parent, final int position)
+    {
         insertInto(parent.pathByAddingChild(child), parent, position);
     }
 
@@ -356,37 +386,47 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
 
     //--- Helper
 
-    protected void fireTreeNodesChanged(final TreeModelEvent event) {
+    protected void fireTreeNodesChanged(final TreeModelEvent event)
+    {
         final Iterator<TreeModelListener> i = getCopyOfListIterator();
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             i.next().treeNodesChanged(event);
         }
     }
 
-    protected void fireTreeNodesInserted(final TreeModelEvent event) {
+    protected void fireTreeNodesInserted(final TreeModelEvent event)
+    {
         final Iterator<TreeModelListener> i = getCopyOfListIterator();
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             i.next().treeNodesInserted(event);
         }
     }
 
-    protected void fireTreeNodesRemoved(final TreeModelEvent event) {
+    protected void fireTreeNodesRemoved(final TreeModelEvent event)
+    {
         final Iterator<TreeModelListener> i = getCopyOfListIterator();
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             i.next().treeNodesRemoved(event);
         }
     }
 
-    protected void fireTreeStructureChanged(final TreeModelEvent event) {
+    protected void fireTreeStructureChanged(final TreeModelEvent event)
+    {
         final Iterator<TreeModelListener> i = getCopyOfListIterator();
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             i.next().treeStructureChanged(event);
         }
     }
 
-    private Iterator<TreeModelListener> getCopyOfListIterator() {
+    private Iterator<TreeModelListener> getCopyOfListIterator()
+    {
         final ArrayList<TreeModelListener> list;
-        synchronized (this) {
+        synchronized (this)
+        {
             list = (ArrayList<TreeModelListener>) listenerList.clone();
         }
         return list.iterator();

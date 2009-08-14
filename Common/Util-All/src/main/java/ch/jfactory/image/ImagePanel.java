@@ -49,19 +49,28 @@ import javax.swing.border.LineBorder;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:41:22 $
  */
-public class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel
+{
 
     private Image image = DEFAULT_IMAGE;
+
     private Image display = image;
+
     private boolean fill = false;
+
     private Dimension lastComponentSize = getSize();
+
     private Point startPoint = new Point(0, 0);
+
     private Point imageZero = new Point(0, 0);
+
     private Point lastImageZero;
 
-    private final MouseMotionAdapter MOTION_ADAPTER = new MouseMotionAdapter() {
+    private final MouseMotionAdapter MOTION_ADAPTER = new MouseMotionAdapter()
+    {
         @Override
-        public void mouseDragged(final MouseEvent e) {
+        public void mouseDragged(final MouseEvent e)
+        {
 
             // Current diff
             final int dx = e.getPoint().x - startPoint.x;
@@ -76,38 +85,48 @@ public class ImagePanel extends JPanel {
         }
     };
 
-    private final MouseAdapter MOUSE_ADAPTER = new MouseAdapter() {
+    private final MouseAdapter MOUSE_ADAPTER = new MouseAdapter()
+    {
         @Override
-        public void mousePressed(final MouseEvent e) {
+        public void mousePressed(final MouseEvent e)
+        {
             setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             startPoint = e.getPoint();
         }
 
         @Override
-        public void mouseReleased(final MouseEvent e) {
+        public void mouseReleased(final MouseEvent e)
+        {
             setCursor(Cursor.getDefaultCursor());
             lastImageZero = new Point(imageZero);
         }
     };
 
     private static final String NO_IMAGE_STRING = "no image";
+
     private static final DefaultImage DEFAULT_IMAGE = new DefaultImage(new Dimension(500, 500), NO_IMAGE_STRING);
+
     private static final Dimension DEFAULT_NON_FILLED_PREFERRED_SIZE = new Dimension(100, 100);
 
-    public ImagePanel() {
+    public ImagePanel()
+    {
         this(null, false);
     }
 
-    public ImagePanel(final Image image) {
+    public ImagePanel(final Image image)
+    {
         this(image, false);
     }
 
-    public ImagePanel(final Image image, final boolean fill) {
+    public ImagePanel(final Image image, final boolean fill)
+    {
         this.fill = fill;
         installListener();
         setImage(image);
-        addComponentListener(new ComponentAdapter() {
-            public void componentResized(final ComponentEvent e) {
+        addComponentListener(new ComponentAdapter()
+        {
+            public void componentResized(final ComponentEvent e)
+            {
                 setDisplayImage();
                 // Just translate by the new size difference.
                 final int nw = getWidth();
@@ -123,8 +142,10 @@ public class ImagePanel extends JPanel {
         });
     }
 
-    public void setImage(final Image image) {
-        if (image != null) {
+    public void setImage(final Image image)
+    {
+        if (image != null)
+        {
             this.image = image;
             this.display = image;
             final int cw = getWidth();
@@ -135,39 +156,47 @@ public class ImagePanel extends JPanel {
             lastImageZero = new Point(imageZero);
             assureBounds();
         }
-        else {
+        else
+        {
             this.image = DEFAULT_IMAGE;
         }
         setDisplayImage();
     }
 
-    public Image getImage() {
+    public Image getImage()
+    {
         return display;
     }
 
-    public void setFill(final boolean fill) {
+    public void setFill(final boolean fill)
+    {
         this.fill = fill;
         setDisplayImage();
         installListener();
     }
 
-    public boolean getFill() {
+    public boolean getFill()
+    {
         return fill;
     }
 
-    public void paint(final Graphics g) {
+    public void paint(final Graphics g)
+    {
         super.paint(g);
-        if (display == null) {
+        if (display == null)
+        {
             return;
         }
         drawImage(g, display);
     }
 
-    public Dimension getPreferredSize() {
+    public Dimension getPreferredSize()
+    {
         return DEFAULT_NON_FILLED_PREFERRED_SIZE;
     }
 
-    private void drawImage(final Graphics g, final Image image) {
+    private void drawImage(final Graphics g, final Image image)
+    {
 
         final Insets in = getInsets();
         // Display area width and height
@@ -175,19 +204,23 @@ public class ImagePanel extends JPanel {
         final int dh = getHeight() - in.top - in.bottom;
 
         g.setClip(in.left, in.top, dw, dh);
-        if (fill || image == DEFAULT_IMAGE) {
+        if (fill || image == DEFAULT_IMAGE)
+        {
             // Image width and height
             final int iw = image.getWidth(null);
             final int ih = image.getHeight(null);
             g.drawImage(image, in.left + (dw - iw) / 2, in.top + (dh - ih) / 2, iw, ih, null);
         }
-        else {
+        else
+        {
             g.drawImage(image, imageZero.x, imageZero.y, null);
         }
     }
 
-    private void setDisplayImage() {
-        if (fill) {
+    private void setDisplayImage()
+    {
+        if (fill)
+        {
             final Insets in = getInsets();
 
             final int iw = image.getWidth(null);
@@ -199,21 +232,26 @@ public class ImagePanel extends JPanel {
             final float fh = ((float) dh) / ((float) ih);
             final float f = Math.min(fw, fh);
             final BufferedImage bi = ImageUtils.createBufferedImage(image);
-            if (f > 0) {
+            if (f > 0)
+            {
                 display = ImageUtils.createHeadlessSmoothBufferedImage(bi, (int) (iw * f), (int) (ih * f));
             }
         }
-        else {
+        else
+        {
             display = image;
         }
     }
 
-    private void installListener() {
-        if (fill) {
+    private void installListener()
+    {
+        if (fill)
+        {
             removeMouseMotionListener(MOTION_ADAPTER);
             removeMouseListener(MOUSE_ADAPTER);
         }
-        else {
+        else
+        {
             addMouseMotionListener(MOTION_ADAPTER);
             addMouseListener(MOUSE_ADAPTER);
         }
@@ -221,29 +259,36 @@ public class ImagePanel extends JPanel {
 
     // Makes sure the image stays within the bounds of the insets. There is only one exception: The display area is too
     // small to show the entire image. Here the mouse may move the image beyound the inset bounds.
-    private void assureBounds() {
+    private void assureBounds()
+    {
         final int cw = getWidth();
         final int ch = getHeight();
         final int iw = display.getWidth(null);
         final int ih = display.getHeight(null);
-        if (cw != 0 && ch != 0) {
+        if (cw != 0 && ch != 0)
+        {
             final Insets in = getInsets();
-            if (cw >= iw + in.right + in.left) {
+            if (cw >= iw + in.right + in.left)
+            {
                 imageZero.x = Math.min(Math.max(imageZero.x, in.left), cw - in.right - iw);
             }
-            else {
+            else
+            {
                 imageZero.x = Math.min(Math.max(imageZero.x, cw - in.right - iw), in.left);
             }
-            if (ch >= ih + in.top + in.bottom) {
+            if (ch >= ih + in.top + in.bottom)
+            {
                 imageZero.y = Math.min(Math.max(imageZero.y, in.top), ch - in.bottom - ih);
             }
-            else {
+            else
+            {
                 imageZero.y = Math.min(Math.max(imageZero.y, ch - in.bottom - ih), in.top);
             }
         }
     }
 
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException
+    {
         final String path = "E:/Beispiel-gross.jpg";
 //        final String path = "E:/Beispiel-klein.jpg";
         final JFrame f = new JFrame();
@@ -252,8 +297,10 @@ public class ImagePanel extends JPanel {
                 new LineBorder(Color.GRAY, 1)), new EmptyBorder(1, 1, 1, 1)));
         f.add(panel, BorderLayout.CENTER);
         final JCheckBox cb = new JCheckBox("fill");
-        cb.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        cb.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 panel.setFill(cb.isSelected());
                 panel.repaint();
             }

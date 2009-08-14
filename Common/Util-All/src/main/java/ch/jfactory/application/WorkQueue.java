@@ -19,53 +19,69 @@ import java.util.LinkedList;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:56 $
  */
-public class WorkQueue {
+public class WorkQueue
+{
 
     private final LinkedList queue;
+
     private boolean run = true;
 
-    public WorkQueue(final int nThreads) {
+    public WorkQueue(final int nThreads)
+    {
         queue = new LinkedList();
 
         final PoolWorker[] threads = new PoolWorker[nThreads];
 
-        for (int i = 0; i < nThreads; i++) {
+        for (int i = 0; i < nThreads; i++)
+        {
             threads[i] = new PoolWorker();
             threads[i].start();
             threads[i].setPriority(Thread.MIN_PRIORITY);
         }
     }
 
-    public void execute(final Runnable r) {
-        synchronized (queue) {
+    public void execute(final Runnable r)
+    {
+        synchronized (queue)
+        {
             queue.addLast(r);
             queue.notify();
         }
     }
 
-    public void unexecute(final Runnable r) {
-        synchronized (queue) {
+    public void unexecute(final Runnable r)
+    {
+        synchronized (queue)
+        {
             queue.remove(r);
             queue.notify();
         }
     }
 
-    public void destroy() {
+    public void destroy()
+    {
         run = false;
     }
 
-    private class PoolWorker extends Thread {
+    private class PoolWorker extends Thread
+    {
 
-        public void run() {
+        public void run()
+        {
             Runnable r;
 
-            while (run) {
-                synchronized (queue) {
-                    while (queue.isEmpty()) {
-                        try {
+            while (run)
+            {
+                synchronized (queue)
+                {
+                    while (queue.isEmpty())
+                    {
+                        try
+                        {
                             queue.wait();
                         }
-                        catch (InterruptedException ignored) {
+                        catch (InterruptedException ignored)
+                        {
                         }
                     }
 
@@ -73,10 +89,12 @@ public class WorkQueue {
                 }
 
                 // If we don't catch RuntimeException, the pool could leak threads
-                try {
+                try
+                {
                     r.run();
                 }
-                catch (RuntimeException e) {
+                catch (RuntimeException e)
+                {
                     e.printStackTrace();
                 }
             }

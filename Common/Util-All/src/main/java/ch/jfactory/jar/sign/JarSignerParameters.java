@@ -19,35 +19,41 @@ package ch.jfactory.jar.sign;
 import java.net.URI;
 import java.security.cert.X509Certificate;
 import java.util.zip.ZipFile;
-import ch.jfactory.jar.sign.ContentSignerParameters;
 
 /**
  * TODO: document
  *
  * @author Daniel Frey
- *
  */
-class JarSignerParameters implements ContentSignerParameters {
+class JarSignerParameters implements ContentSignerParameters
+{
 
     private String[] args;
+
     private URI tsa;
+
     private X509Certificate tsaCertificate;
+
     private byte[] signature;
+
     private String signatureAlgorithm;
+
     private X509Certificate[] signerCertificateChain;
+
     private byte[] content;
+
     private ZipFile source;
 
-    /**
-     * Create a new object.
-     */
+    /** Create a new object. */
     JarSignerParameters(final String[] args, final URI tsa, final X509Certificate tsaCertificate,
                         final byte[] signature, final String signatureAlgorithm,
                         final X509Certificate[] signerCertificateChain, final byte[] content,
-                        final ZipFile source) {
+                        final ZipFile source)
+    {
 
         if (signature == null || signatureAlgorithm == null ||
-                signerCertificateChain == null) {
+                signerCertificateChain == null)
+        {
             throw new NullPointerException();
         }
         this.args = args;
@@ -65,7 +71,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The command-line arguments. May be null.
      */
-    public String[] getCommandLine() {
+    public String[] getCommandLine()
+    {
         return args;
     }
 
@@ -74,7 +81,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The TSA identifier. May be null.
      */
-    public URI getTimestampingAuthority() {
+    public URI getTimestampingAuthority()
+    {
         return tsa;
     }
 
@@ -83,7 +91,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The TSA certificate. May be null.
      */
-    public X509Certificate getTimestampingAuthorityCertificate() {
+    public X509Certificate getTimestampingAuthorityCertificate()
+    {
         return tsaCertificate;
     }
 
@@ -92,7 +101,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The non-null signature bytes.
      */
-    public byte[] getSignature() {
+    public byte[] getSignature()
+    {
         return signature;
     }
 
@@ -101,7 +111,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The non-null string name of the signature algorithm.
      */
-    public String getSignatureAlgorithm() {
+    public String getSignatureAlgorithm()
+    {
         return signatureAlgorithm;
     }
 
@@ -110,7 +121,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The non-null array of X.509 public-key certificates.
      */
-    public X509Certificate[] getSignerCertificateChain() {
+    public X509Certificate[] getSignerCertificateChain()
+    {
         return signerCertificateChain;
     }
 
@@ -119,7 +131,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The content bytes. May be null.
      */
-    public byte[] getContent() {
+    public byte[] getContent()
+    {
         return content;
     }
 
@@ -128,7 +141,8 @@ class JarSignerParameters implements ContentSignerParameters {
      *
      * @return The original ZIP file. May be null.
      */
-    public ZipFile getSource() {
+    public ZipFile getSource()
+    {
         return source;
     }
 }

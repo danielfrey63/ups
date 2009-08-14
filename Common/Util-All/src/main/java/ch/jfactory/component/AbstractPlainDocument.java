@@ -11,47 +11,64 @@ import javax.swing.text.PlainDocument;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public abstract class AbstractPlainDocument extends PlainDocument {
+public abstract class AbstractPlainDocument extends PlainDocument
+{
     /* (non-Javadoc)
      * @see javax.swing.text.Document#insertString(int, java.lang.String, javax.swing.text.AttributeSet)
      */
-    public void insertString(final int offset, final String chunk, final AttributeSet a) throws BadLocationException {
+    public void insertString(final int offset, final String chunk, final AttributeSet a) throws BadLocationException
+    {
         final String newValue;
-        if (chunk.equals("")) return;
+        if (chunk.equals(""))
+        {
+            return;
+        }
         final int length = getLength();
-        if (length == 0) {
+        if (length == 0)
+        {
             newValue = chunk;
         }
-        else {
+        else
+        {
             final String currentContent = getText(0, length);
             final StringBuffer currentBuffer = new StringBuffer(currentContent);
             currentBuffer.insert(offset, chunk);
             newValue = currentBuffer.toString();
         }
         final boolean valid = validate(newValue);
-        if (valid) {
+        if (valid)
+        {
             super.insertString(offset, chunk, a);
         }
-        else {
+        else
+        {
             Toolkit.getDefaultToolkit().beep();
         }
     }
 
-    public void remove(final int offs, final int len) throws BadLocationException {
+    public void remove(final int offs, final int len) throws BadLocationException
+    {
         final int length = getLength();
-        if (length == 0) return;
+        if (length == 0)
+        {
+            return;
+        }
         final String currentContent = getText(0, length);
         final StringBuffer buffer = new StringBuffer();
-        if (offs > 0) {
+        if (offs > 0)
+        {
             buffer.append(currentContent.substring(0, offs));
         }
-        if (offs + len < length) {
+        if (offs + len < length)
+        {
             buffer.append(currentContent.substring(offs + len));
         }
-        if (validate(buffer.toString())) {
+        if (validate(buffer.toString()))
+        {
             super.remove(offs, len);
         }
-        else {
+        else
+        {
             Toolkit.getDefaultToolkit().beep();
         }
     }

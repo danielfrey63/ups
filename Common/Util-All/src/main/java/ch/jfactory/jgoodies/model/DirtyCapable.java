@@ -22,7 +22,8 @@ package ch.jfactory.jgoodies.model;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/03/14 21:27:55 $
  */
-public interface DirtyCapable {
+public interface DirtyCapable
+{
 
     void setDirty(boolean dirty);
 

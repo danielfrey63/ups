@@ -30,30 +30,37 @@ import java.util.GregorianCalendar;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class GregorianCalenderConverter extends AbstractConverter {
+public class GregorianCalenderConverter extends AbstractConverter
+{
 
     private SimpleDateFormat format;
 
-    public GregorianCalenderConverter(final BufferedValueModel model) {
+    public GregorianCalenderConverter(final BufferedValueModel model)
+    {
         super(model);
         format = new SimpleDateFormat();
     }
 
-    public Object convertFromSubject(final Object subjectValue) {
-        if (subjectValue != null) {
+    public Object convertFromSubject(final Object subjectValue)
+    {
+        if (subjectValue != null)
+        {
             return format.format(((Calendar) subjectValue).getTime());
         }
         return null;
     }
 
-    public void setValue(final Object newValue) {
-        try {
+    public void setValue(final Object newValue)
+    {
+        try
+        {
             final GregorianCalendar calendar = new GregorianCalendar();
             final Date date = format.parse((String) newValue);
             calendar.setTime(date);
             subject.setValue(calendar);
         }
-        catch (ParseException e) {
+        catch (ParseException e)
+        {
         }
     }
 }

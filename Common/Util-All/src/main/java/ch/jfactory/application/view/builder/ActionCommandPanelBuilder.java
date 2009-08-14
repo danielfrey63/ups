@@ -55,21 +55,28 @@ import org.pietschy.command.ToggleCommand;
  * @author Daniel Frey
  * @version $Revision: 1.10 $ $Date: 2008/01/06 10:16:23 $
  */
-public abstract class ActionCommandPanelBuilder implements Builder {
+public abstract class ActionCommandPanelBuilder implements Builder
+{
 
     private static final Logger LOG = Logger.getLogger(ActionCommandPanelBuilder.class);
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private CommandManager commandManager;
+
     private JComponent panel;
+
     private transient int panelCallCounter = 0;
 
-    public JComponent getPanel() {
+    public JComponent getPanel()
+    {
         panelCallCounter++;
-        if (panelCallCounter > 1) {
+        if (panelCallCounter > 1)
+        {
             throw new IllegalStateException("don't call getPanel twice");
         }
-        try {
+        try
+        {
             initCommandManager();
             initCommands();
             initModelListeners();
@@ -77,26 +84,31 @@ public abstract class ActionCommandPanelBuilder implements Builder {
             initComponentListeners();
             initSubpanelCommands();
         }
-        catch (LoadException e) {
+        catch (LoadException e)
+        {
             e.printStackTrace();
         }
         return panel;
     }
 
-    private void initCommandManager() throws LoadException {
+    private void initCommandManager() throws LoadException
+    {
         final String name = getClass().getPackage().getName();
         final String base = StringUtils.replace("/" + name, ".", "/");
         final String[] locations = {base, base + "/commands"};
         InputStream resource = null;
         String location = "";
-        for (int i = 0; resource == null && i < locations.length; i++) {
-            location = locations[ i ];
+        for (final String l : locations)
+        {
+            location = l;
             resource = getClass().getResourceAsStream(location + "/commands.xml");
-            if (resource != null) {
+            if (resource != null)
+            {
                 break;
             }
         }
-        if (resource != null) {
+        if (resource != null)
+        {
             commandManager = new CommandManager();
             final String prefix = System.getProperty("ch.jfactory.iconprefix", "/16x16/fill");
             final IconFactory iconFactory = new SimpleIconFactory(prefix);
@@ -104,24 +116,29 @@ public abstract class ActionCommandPanelBuilder implements Builder {
             final String bundleName = location.substring(1).replace('/', '.') + ".commands";
             final ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
             commandManager.setResourceBundle(bundle);
-            if (DEBUG) {
-                try {
+            if (DEBUG)
+            {
+                try
+                {
                     final String content = new String(IOUtils.toByteArray(resource));
                     LOG.debug(content);
                     resource = getClass().getResourceAsStream(location + "/commands.xml");
                     assert resource != null : "resource is null";
                 }
-                catch (IOException e) {
+                catch (IOException e)
+                {
                     LOG.error("could not print content of commands xml file at " + location, e);
                 }
             }
             commandManager.load(resource);
         }
-        else {
+        else
+        {
             final String locs = StringUtils.join(locations, ", ");
             final String clazz = getClass().getName();
             final String message = "command.xml for " + clazz + " not found in one of these locations: " + locs;
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 LOG.debug(message);
             }
         }
@@ -131,7 +148,8 @@ public abstract class ActionCommandPanelBuilder implements Builder {
      * Init action commands in this implementation. This is an adapter (empty) implementaiton for this method (no need
      * to call super).
      */
-    protected void initCommands() {
+    protected void initCommands()
+    {
     }
 
     /**
@@ -139,7 +157,8 @@ public abstract class ActionCommandPanelBuilder implements Builder {
      * built. Override this method to init commands which rely on a subpanels command manager. This is an adapter
      * (empty) implementaiton for this method (no need to call super).
      */
-    protected void initSubpanelCommands() {
+    protected void initSubpanelCommands()
+    {
     }
 
     /**
@@ -147,27 +166,28 @@ public abstract class ActionCommandPanelBuilder implements Builder {
      *
      * @return the panel of this builder
      */
-    protected JComponent createMainPanel() {
+    protected JComponent createMainPanel()
+    {
         return new JPanel();
     }
 
-    /**
-     * This is an adapter (empty) implementaiton for this method (no need to call super).
-     */
-    protected void initModelListeners() {
+    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
+    protected void initModelListeners()
+    {
     }
 
-    /**
-     * This is an adapter (empty) implementaiton for this method (no need to call super).
-     */
-    protected void initComponentListeners() {
+    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
+    protected void initComponentListeners()
+    {
     }
 
-    public ActionCommand getCommand(final String commandId) {
+    public ActionCommand getCommand(final String commandId)
+    {
         return commandManager.getCommand(commandId);
     }
 
-    public CommandManager getCommandManager() {
+    public CommandManager getCommandManager()
+    {
         return commandManager;
     }
 
@@ -177,7 +197,8 @@ public abstract class ActionCommandPanelBuilder implements Builder {
      * @param command the command to initialize
      * @return the action command
      */
-    protected ActionCommand initCommand(final ActionCommand command) {
+    protected ActionCommand initCommand(final ActionCommand command)
+    {
         return initCommand(command, false);
     }
 
@@ -188,13 +209,15 @@ public abstract class ActionCommandPanelBuilder implements Builder {
      * @param enabled whether to enable the command
      * @return the action command
      */
-    protected ActionCommand initCommand(final ActionCommand command, final boolean enabled) {
+    protected ActionCommand initCommand(final ActionCommand command, final boolean enabled)
+    {
         command.export();
         command.setEnabled(enabled);
         return command;
     }
 
-    protected void initToggleCommand(final ToggleCommand command, final boolean selected) {
+    protected void initToggleCommand(final ToggleCommand command, final boolean selected)
+    {
         initCommand(command, true);
         command.setSelected(selected);
     }

@@ -26,26 +26,32 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class MultiOrFilter implements Filter {
+public class MultiOrFilter implements Filter
+{
 
     private List filters;
 
-    public MultiOrFilter(final Filter[] filters) {
+    public MultiOrFilter(final Filter[] filters)
+    {
         this.filters = new ArrayList(Arrays.asList(filters));
     }
 
-    public void addFilter(final Filter filter) {
+    public void addFilter(final Filter filter)
+    {
         filters.add(filter);
     }
 
-    public void removeFilter(final Filter filter) {
+    public void removeFilter(final Filter filter)
+    {
         filters.remove(filter);
     }
 
-    public boolean matches(final Object obj) {
+    public boolean matches(final Object obj)
+    {
         boolean matches = false;
-        for (int i = 0; i < filters.size(); i++) {
-            final Filter filter = (Filter) filters.get(i);
+        for (Object filter1 : filters)
+        {
+            final Filter filter = (Filter) filter1;
             matches |= filter.matches(obj);
         }
         return matches;

@@ -25,16 +25,19 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:59 $
  */
-public class DeleteType extends ActionCommand {
+public class DeleteType extends ActionCommand
+{
 
     private TypeModel model;
 
-    public DeleteType(final CommandManager commandManager, final TypeModel model) {
+    public DeleteType(final CommandManager commandManager, final TypeModel model)
+    {
         super(commandManager, Commands.COMMANDID_DELETE);
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         System.out.println(model.getSelectionInList().getSelection());
     }
 }

@@ -1,6 +1,5 @@
 package ch.jfactory.logging;
 
-
 import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.Strings;
 import java.awt.BorderLayout;
@@ -29,35 +28,44 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-/**
- * @author Thomas Wegmueller
- */
-public class SendFeedbackDialog extends JDialog {
+/** @author Thomas Wegmueller */
+public class SendFeedbackDialog extends JDialog
+{
     private String dump = "---";
+
     private String title = Strings.getString("error.feedback.title");
+
     private Icon icon;
+
     private String description = Strings.getString("error.feedback.info");
+
     private String errorMessage = Strings.getString("error.feedback.message");
+
     private String feedbackMail = Strings.getString("error.feedback.email");
 
-    public SendFeedbackDialog() {
-        super((JFrame)null, Strings.getString("error.feedback.window"), true);
+    public SendFeedbackDialog()
+    {
+        super((JFrame) null, Strings.getString("error.feedback.window"), true);
         this.setLocation(100, 100);
     }
 
-    public void setDump(final String dump) {
+    public void setDump(final String dump)
+    {
         this.dump = dump;
     }
 
-    public void setErrorMessage(final String errorMessage) {
+    public void setErrorMessage(final String errorMessage)
+    {
         this.errorMessage = errorMessage;
     }
 
-    public void setFeedbackMail(final String feedbackMail) {
+    public void setFeedbackMail(final String feedbackMail)
+    {
         this.feedbackMail = feedbackMail;
     }
 
-    public Container buildContentPane() {
+    public Container buildContentPane()
+    {
         final JPanel panel = new JPanel(new BorderLayout(5, 5));
 
         panel.add(buildHeader(), BorderLayout.NORTH);
@@ -66,20 +74,26 @@ public class SendFeedbackDialog extends JDialog {
         return panel;
     }
 
-    public JComponent createCopyToClipboard() {
+    public JComponent createCopyToClipboard()
+    {
         final JButton btn = new JButton(Strings.getString("error.feedback.copy"));
-        btn.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        btn.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 copyToClipboard();
             }
         });
         return btn;
     }
 
-    public JComponent createCloseButton() {
+    public JComponent createCloseButton()
+    {
         final JButton btn = new JButton("Close");
-        btn.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        btn.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 dispose();
             }
         });
@@ -87,15 +101,16 @@ public class SendFeedbackDialog extends JDialog {
         return btn;
     }
 
-
-    public JComponent buildButtonBar() {
+    public JComponent buildButtonBar()
+    {
         final JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
         panel.add(createCopyToClipboard());
         panel.add(createCloseButton());
         return panel;
     }
 
-    public JComponent buildTabbedPane() {
+    public JComponent buildTabbedPane()
+    {
         final NiceTabbedPane tab = new NiceTabbedPane();
         tab.setBorder(null);
         tab.add(Strings.getString("error.feedback.helptab"), createHelp());
@@ -104,13 +119,15 @@ public class SendFeedbackDialog extends JDialog {
         return tab;
     }
 
-    private JComponent createHelp() {
+    private JComponent createHelp()
+    {
         final JComponent lab = createMultiLineLabel(errorMessage + feedbackMail);
         lab.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         return lab;
     }
 
-    public void open() {
+    public void open()
+    {
         setContentPane(buildContentPane());
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(500, 500);
@@ -118,12 +135,14 @@ public class SendFeedbackDialog extends JDialog {
         this.setVisible(true);
     }
 
-    public void copyToClipboard() {
+    public void copyToClipboard()
+    {
         final StringSelection selection = new StringSelection(dump);
         getToolkit().getSystemClipboard().setContents(selection, selection);
     }
 
-    public JComponent createMultiLineLabel(final String s) {
+    public JComponent createMultiLineLabel(final String s)
+    {
         final JTextArea area = new JTextArea(s);
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
@@ -138,23 +157,22 @@ public class SendFeedbackDialog extends JDialog {
         return pane;
     }
 
-
     /**
      * Builds and answers the panel's center component.
      *
      * @return Description of the Return Value
      */
-    protected JComponent buildHeaderComponent() {
+    protected JComponent buildHeaderComponent()
+    {
         final JComponent header = buildHeaderPanel();
         header.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 10));
         header.setMinimumSize(new Dimension(300, 70));
         return header;
     }
 
-    /**
-     * Builds the panel.
-     */
-    private JComponent buildHeader() {
+    /** Builds the panel. */
+    private JComponent buildHeader()
+    {
         final JPanel pan = new JPanel(new BorderLayout(5, 5));
         pan.add(buildHeaderComponent(), BorderLayout.CENTER);
         pan.add(new JSeparator(), BorderLayout.SOUTH);
@@ -167,7 +185,8 @@ public class SendFeedbackDialog extends JDialog {
      *
      * @return Description of the Return Value
      */
-    private JComponent buildHeaderPanel() {
+    private JComponent buildHeaderPanel()
+    {
         final JPanel panel = new JPanel(new GridBagLayout());
         panel.setOpaque(false);
 

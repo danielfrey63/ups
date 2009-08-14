@@ -16,8 +16,8 @@
     <inceptionYear>2006</inceptionYear>
     <dependencies>
         <dependency>
-            <groupId>ch.xmatrix</groupId>
-            <artifactId>ch.xmatrix.icon</artifactId>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.icon</artifactId>
             <version>1.0-20060814</version>
         </dependency>
         <dependency>

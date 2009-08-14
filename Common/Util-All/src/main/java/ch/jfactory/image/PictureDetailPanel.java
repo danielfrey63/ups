@@ -30,7 +30,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This control is used to display the Pictures with zooming support
@@ -38,18 +38,26 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-public class PictureDetailPanel extends JPanel {
+public class PictureDetailPanel extends JPanel
+{
     public static final String IMAGE = "IMAGE";
+
     public static final String ZOOM = "ZOOM";
 
     private static final int START_ZOOM_KEY = KeyEvent.VK_F1;
+
     private static final int END_ZOOM_KEY = KeyEvent.VK_ESCAPE;
-    private static final Category CAT = Category.getInstance(PictureDetailPanel.class);
+
+    private static final Logger LOGGER = Logger.getLogger(PictureDetailPanel.class);
+
     private static final int MAXSIZE = 370;
 
     private ZoomableImageComponent image;
+
     private PictureCache cache;
+
     private ThumbNailPanel thumbPanel;
+
     private PropertyChangeSupport propertySupport = new PropertyChangeSupport(this);
 
     /**
@@ -58,13 +66,15 @@ public class PictureDetailPanel extends JPanel {
      * @param locator the <code>PictureCache</code> Object from which the pictures are taken
      * @see ch.jfactory.resource.PictureCache
      */
-    public PictureDetailPanel(final CachedImageLocator locator) {
+    public PictureDetailPanel(final CachedImageLocator locator)
+    {
         this.cache = new PictureCache(locator);
         initGUI();
     }
 
-    public PictureDetailPanel(final PictureCache cache) {
-        CAT.debug("PictureDetailPanel(" + cache + ")");
+    public PictureDetailPanel(final PictureCache cache)
+    {
+        LOGGER.debug("PictureDetailPanel(" + cache + ")");
         this.cache = cache;
         initGUI();
     }
@@ -75,8 +85,9 @@ public class PictureDetailPanel extends JPanel {
      * @param name name of the image (taken from <see>PictureCache</see>)
      * @see PictureCache
      */
-    public void setImage(final String name) {
-        CAT.debug("setImage(" + name + ")");
+    public void setImage(final String name)
+    {
+        LOGGER.debug("setImage(" + name + ")");
         image.setImage(name, false);
     }
 
@@ -85,11 +96,14 @@ public class PictureDetailPanel extends JPanel {
      *
      * @return true if visible, false if not visible
      */
-    public boolean isShowing() {
+    public boolean isShowing()
+    {
         final boolean b = super.isShowing();
-        if (b && (getParent() != null)) {
+        if (b && (getParent() != null))
+        {
             final Container parent = this.getParent();
-            if (parent instanceof JTabbedPane) {
+            if (parent instanceof JTabbedPane)
+            {
                 final JTabbedPane tab = (JTabbedPane) parent;
                 return tab.getSelectedComponent() == this;
             }
@@ -97,17 +111,20 @@ public class PictureDetailPanel extends JPanel {
         return b;
     }
 
-    public void clear() {
+    public void clear()
+    {
         image.setImage(null, false);
         thumbPanel.removeAll();
     }
 
-    public void addImage(final String s, final String tooltip) {
-        CAT.debug("addImage(" + s + ")");
+    public void addImage(final String s, final String tooltip)
+    {
+        LOGGER.debug("addImage(" + s + ")");
         thumbPanel.addImage(s, tooltip, false);
     }
 
-    private void initGUI() {
+    private void initGUI()
+    {
         final int gap = Constants.GAP_WITHIN_TOGGLES;
 
         image = createImageComponent();
@@ -134,7 +151,8 @@ public class PictureDetailPanel extends JPanel {
         add(image, BorderLayout.CENTER);
     }
 
-    private ZoomableImageComponent createImageComponent() {
+    private ZoomableImageComponent createImageComponent()
+    {
         final ZoomableImageComponent image;
         final int gap = Constants.GAP_WITHIN_TOGGLES;
         image = new ZoomableImageComponent(cache, MAXSIZE);
@@ -142,11 +160,14 @@ public class PictureDetailPanel extends JPanel {
         return image;
     }
 
-    private ThumbNailPanel createThumbPanel() {
+    private ThumbNailPanel createThumbPanel()
+    {
         final ThumbNailPanel thumbPanel;
         thumbPanel = new ThumbNailPanel(cache);
-        thumbPanel.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        thumbPanel.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final String img = image.getImage();
                 image.setImage(e.getActionCommand(), false);
                 propertySupport.firePropertyChange(IMAGE, img, e.getActionCommand());
@@ -155,34 +176,45 @@ public class PictureDetailPanel extends JPanel {
         return thumbPanel;
     }
 
-    private JButton createZoomButton(final ZoomableImageComponent imageComponent) {
+    private JButton createZoomButton(final ZoomableImageComponent imageComponent)
+    {
         final JButton button = ComponentFactory.createButton("BUTTON.ZOOM.PLUS", null);
         button.setFocusable(false);
         button.setOpaque(false);
         button.setSelectedIcon(ImageLocator.getIcon(Strings.getString("BUTTON.ZOOM.MINUS.ICON")));
         button.setPressedIcon(ImageLocator.getIcon(Strings.getString("BUTTON.ZOOM.MINUS.ICON")));
         button.setModel(new ToggleButtonModel());
-        if (ZoomableImageComponent.DYNAMICZOOM) {
+        if (ZoomableImageComponent.DYNAMICZOOM)
+        {
             KeyStroke stroke = KeyStroke.getKeyStroke(END_ZOOM_KEY, 0);
-            button.registerKeyboardAction(new ActionListener() {
-                public void actionPerformed(final ActionEvent e) {
-                    if (imageComponent.isZooming()) {
+            button.registerKeyboardAction(new ActionListener()
+            {
+                public void actionPerformed(final ActionEvent e)
+                {
+                    if (imageComponent.isZooming())
+                    {
                         imageComponent.stopZooming();
                     }
-                    else if (imageComponent.isZoomStarted()) {
+                    else if (imageComponent.isZoomStarted())
+                    {
                         imageComponent.setZoomStarted(false);
                         button.repaint();
                     }
-                    else {
+                    else
+                    {
                         imageComponent.resetZoom();
                     }
                 }
             }, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
             stroke = KeyStroke.getKeyStroke(START_ZOOM_KEY, 0);
-            button.registerKeyboardAction(new ActionListener() {
-                public void actionPerformed(final ActionEvent e) {
-                    if (!imageComponent.isZooming()) {
-                        if (!imageComponent.isZoomStarted()) {
+            button.registerKeyboardAction(new ActionListener()
+            {
+                public void actionPerformed(final ActionEvent e)
+                {
+                    if (!imageComponent.isZooming())
+                    {
+                        if (!imageComponent.isZoomStarted())
+                        {
                             imageComponent.setZoomStarted(true);
                             button.repaint();
                         }
@@ -193,72 +225,95 @@ public class PictureDetailPanel extends JPanel {
         return button;
     }
 
-    public void addPropertyChangeListener(final String s, final PropertyChangeListener l) {
+    public void addPropertyChangeListener(final String s, final PropertyChangeListener l)
+    {
         propertySupport.addPropertyChangeListener(s, l);
     }
 
-    public void addPropertyChangeListener(final PropertyChangeListener l) {
+    public void addPropertyChangeListener(final PropertyChangeListener l)
+    {
         propertySupport.addPropertyChangeListener(l);
     }
 
-    public void setZoomed(final boolean b) {
+    public void setZoomed(final boolean b)
+    {
         final boolean old = image.isZoomed();
-        if (b == old) return;
-        if (ZoomableImageComponent.DYNAMICZOOM) {
+        if (b == old)
+        {
+            return;
+        }
+        if (ZoomableImageComponent.DYNAMICZOOM)
+        {
             image.setZoomStarted(b);
         }
-        else {
+        else
+        {
             image.setZoom(b);
         }
-        propertySupport.firePropertyChange(ZOOM, new Boolean(old), new Boolean(b));
+        propertySupport.firePropertyChange(ZOOM, Boolean.valueOf(old), Boolean.valueOf(b));
     }
 
-    private class ToggleButtonModel extends DefaultButtonModel {
-        public void setSelected(final boolean b) {
-            if (isSelected() == b) {
+    private class ToggleButtonModel extends DefaultButtonModel
+    {
+        public void setSelected(final boolean b)
+        {
+            if (isSelected() == b)
+            {
                 return;
             }
-            if (b) {
+            if (b)
+            {
                 stateMask |= SELECTED;
             }
-            else {
+            else
+            {
                 stateMask &= ~SELECTED;
             }
             setZoomed(b);
         }
 
-        public void setPressed(final boolean b) {
-            if ((isPressed() == b) || !isEnabled()) {
+        public void setPressed(final boolean b)
+        {
+            if ((isPressed() == b) || !isEnabled())
+            {
                 return;
             }
-            if (b == false && isArmed()) {
+            if (!b && isArmed())
+            {
                 setSelected(!isSelected());
             }
 
-            if (b) {
+            if (b)
+            {
                 stateMask |= PRESSED;
             }
-            else {
+            else
+            {
                 stateMask &= ~PRESSED;
             }
 
         }
 
-        public boolean isSelected() {
-            if (ZoomableImageComponent.DYNAMICZOOM) {
+        public boolean isSelected()
+        {
+            if (ZoomableImageComponent.DYNAMICZOOM)
+            {
                 return image.isZoomStarted();
             }
-            else {
+            else
+            {
                 return image.isZoomed();
             }
         }
     }
 
-    public void clearCachingList() {
+    public void clearCachingList()
+    {
         cache.clearCachingList();
     }
 
-    public void cacheImage(final String name, final boolean thumb) {
+    public void cacheImage(final String name, final boolean thumb)
+    {
         cache.cacheImage(name, thumb, false);
     }
 }

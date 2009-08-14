@@ -21,14 +21,20 @@ import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
-public class ZoomableImageComponent extends JScrollPane {
+public class ZoomableImageComponent extends JScrollPane
+{
     private CachedImageComponent ci;
+
     private Rectangle zoomRect;
+
     private boolean zoomStarted = false;
+
     private boolean isZooming = false;
+
     public static final boolean DYNAMICZOOM = false;
 
-    public ZoomableImageComponent(final PictureCache c, final int size) {
+    public ZoomableImageComponent(final PictureCache c, final int size)
+    {
         setViewportView(ci = new LocalCachedImageComponent(c, size));
         setBorder(BorderFactory.createEmptyBorder());
 
@@ -37,41 +43,50 @@ public class ZoomableImageComponent extends JScrollPane {
         addMouseMotionListener(dragZoom);
     }
 
-    public void setImage(final String s, final boolean b) {
+    public void setImage(final String s, final boolean b)
+    {
         ci.setImage(s, false);
     }
 
-    public String getImage() {
+    public String getImage()
+    {
         return ci.getImage().getName();
     }
 
-    public void resetZoom() {
+    public void resetZoom()
+    {
         ci.setZoomFaktor(1.0);
         getViewport().setViewSize(ci.getPreferredSize());
     }
 
-    public boolean isZoomed() {
+    public boolean isZoomed()
+    {
         return ci.getZoomFaktor() != 1.0;
     }
 
-    public void setZoom(final boolean b) {
+    public void setZoom(final boolean b)
+    {
         setZoom(b ? 2.0 : 1.0);
     }
 
-    public void setZoom(final double f) {
+    public void setZoom(final double f)
+    {
         ci.setZoomFaktor(f);
         getViewport().setViewSize(ci.getPreferredSize());
     }
 
-    private void setZoom(Rectangle r) {
-        if (r != null) {
+    private void setZoom(Rectangle r)
+    {
+        if (r != null)
+        {
             r = adjustRect(r);
             final Rectangle visi = getVisibleRect();
             visi.width *= ci.getZoomFaktor();
             visi.height *= ci.getZoomFaktor();
             final double oldzoomfaktor = ci.getZoomFaktor();
             double newzoomfaktor = ((double) visi.width / (double) r.width);
-            if (newzoomfaktor > ((double) visi.height / (double) r.height)) {
+            if (newzoomfaktor > ((double) visi.height / (double) r.height))
+            {
                 newzoomfaktor = ((double) visi.height / (double) r.height);
             }
             ci.setZoomFaktor(newzoomfaktor);
@@ -86,22 +101,27 @@ public class ZoomableImageComponent extends JScrollPane {
         repaint();
     }
 
-    public Rectangle adjustRect(final Rectangle r) {
+    public Rectangle adjustRect(final Rectangle r)
+    {
         final Rectangle r1 = new Rectangle(r);
-        if (r.width < 0) {
+        if (r.width < 0)
+        {
             r1.x = r.x + r.width;
             r1.width = -r.width;
         }
-        if (r.height < 0) {
+        if (r.height < 0)
+        {
             r1.y = r.y + r.height;
             r1.height = -r.height;
         }
         return r1;
     }
 
-    public void setZoomStarted(final boolean b) {
+    public void setZoomStarted(final boolean b)
+    {
         zoomStarted = b;
-        if (!zoomStarted) {
+        if (!zoomStarted)
+        {
             zoomRect = null;
             zoomStarted = false;
             isZooming = false;
@@ -109,13 +129,17 @@ public class ZoomableImageComponent extends JScrollPane {
         }
     }
 
-    public boolean isZoomStarted() {
+    public boolean isZoomStarted()
+    {
         return zoomStarted;
     }
 
-    public void stopZooming() {
-        if (isZooming) {
-            synchronized (zoomRect) {
+    public void stopZooming()
+    {
+        if (isZooming)
+        {
+            synchronized (zoomRect)
+            {
                 isZooming = false;
                 zoomRect = null;
             }
@@ -123,12 +147,15 @@ public class ZoomableImageComponent extends JScrollPane {
         }
     }
 
-    public boolean isZooming() {
+    public boolean isZooming()
+    {
         return isZooming;
     }
 
-    class DragZoom extends MouseAdapter implements MouseMotionListener {
+    class DragZoom extends MouseAdapter implements MouseMotionListener
+    {
         private Point m_pntLast;
+
         private Point start;
 
         /**
@@ -136,11 +163,17 @@ public class ZoomableImageComponent extends JScrollPane {
          *
          * @param e Description of the Parameter
          */
-        public void mousePressed(final MouseEvent e) {
+        public void mousePressed(final MouseEvent e)
+        {
             m_pntLast = e.getPoint();
-            if (!DYNAMICZOOM) return;
-            if (zoomStarted) {
-                if (isZooming) {
+            if (true)
+            {
+                return;
+            }
+            if (zoomStarted)
+            {
+                if (isZooming)
+                {
                     setZoom(zoomRect);
                     zoomRect = null;
                 }
@@ -154,8 +187,12 @@ public class ZoomableImageComponent extends JScrollPane {
          *
          * @param e Description of the Parameter
          */
-        public void mouseDragged(final MouseEvent e) {
-            if (isZooming) return;
+        public void mouseDragged(final MouseEvent e)
+        {
+            if (isZooming)
+            {
+                return;
+            }
 
             m_pntLast.setLocation(m_pntLast.getX() - e.getPoint().getX(),
                     m_pntLast.y - e.getPoint().getY());
@@ -164,10 +201,12 @@ public class ZoomableImageComponent extends JScrollPane {
             final Point m_pntOld = m_jvp.getViewPosition();
             double x = m_pntOld.getX();
             double y = m_pntOld.getY();
-            if (m_pntOld.getX() + m_pntLast.getX() >= 0) {
+            if (m_pntOld.getX() + m_pntLast.getX() >= 0)
+            {
                 x = m_pntOld.getX() + m_pntLast.getX();
             }
-            if (m_pntOld.getY() + m_pntLast.getY() >= 0) {
+            if (m_pntOld.getY() + m_pntLast.getY() >= 0)
+            {
                 y = m_pntOld.getY() + m_pntLast.getY();
             }
             Point m_pntNew = new Point();
@@ -180,24 +219,36 @@ public class ZoomableImageComponent extends JScrollPane {
             m_jvp.revalidate();
         }
 
-        public void mouseMoved(final MouseEvent e) {
-            if (!DYNAMICZOOM) return;
-            if (isZooming) {
+        public void mouseMoved(final MouseEvent e)
+        {
+            if (true)
+            {
+                return;
+            }
+            if (isZooming)
+            {
                 zoomRect = new Rectangle(start.x, start.y, e.getPoint().x - start.x, e.getPoint().y - start.y);
                 repaint();
             }
         }
     }
 
-    class LocalCachedImageComponent extends CachedImageComponent {
-        public LocalCachedImageComponent(final PictureCache c, final int size) {
+    class LocalCachedImageComponent extends CachedImageComponent
+    {
+        public LocalCachedImageComponent(final PictureCache c, final int size)
+        {
             super(c, size);
         }
 
-        public void paintComponent(final Graphics g) {
+        public void paintComponent(final Graphics g)
+        {
             super.paintComponent(g);
-            if (!DYNAMICZOOM) return;
-            if (zoomRect != null) {
+            if (true)
+            {
+                return;
+            }
+            if (zoomRect != null)
+            {
                 g.setColor(Color.BLUE);
                 final Rectangle r = adjustRect(zoomRect);
                 g.drawRect(r.x, r.y, r.width, r.height);

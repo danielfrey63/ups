@@ -25,13 +25,16 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/05/02 15:27:11 $
  */
-public class NodeBasedFilteredTreeTest extends ModelBasedFilteredTreeTest {
+public class NodeBasedFilteredTreeTest extends ModelBasedFilteredTreeTest
+{
 
-    public NodeBasedFilteredTreeTest(final String base) {
+    public NodeBasedFilteredTreeTest(final String base)
+    {
         super(base);
     }
 
-    protected FilteredTreeModel getFilteredTreeModel() {
+    protected FilteredTreeModel getFilteredTreeModel()
+    {
         final DefaultMutableTreeNode root = (DefaultMutableTreeNode) new JTree().getModel().getRoot();
         return new FilteredTreeModel(root);
     }

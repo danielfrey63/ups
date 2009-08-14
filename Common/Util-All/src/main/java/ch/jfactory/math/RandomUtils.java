@@ -18,12 +18,12 @@ import java.util.Random;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/04/15 23:03:21 $
  */
-public class RandomUtils {
+public class RandomUtils
+{
 
-    /**
-     * Last random seed used
-     */
+    /** Last random seed used */
     private static long seed;
+
     private static Random r;
 
     /**
@@ -31,7 +31,8 @@ public class RandomUtils {
      *
      * @return the seed as a long
      */
-    public static long getLastSeed() {
+    public static long getLastSeed()
+    {
         return seed;
     }
 
@@ -41,7 +42,8 @@ public class RandomUtils {
      * @param array the array to randomize
      * @return the random seed used to rendomize
      */
-    public static long randomize(final Object[] array) {
+    public static long randomize(final Object[] array)
+    {
         seed = System.currentTimeMillis();
         randomize(array, seed);
         return seed;
@@ -53,7 +55,8 @@ public class RandomUtils {
      * @param array the array to randomize
      * @return the random seed used to rendomize
      */
-    public static long randomize(final int[] array) {
+    public static long randomize(final int[] array)
+    {
         seed = System.currentTimeMillis();
         randomize(array, seed);
         return seed;
@@ -65,7 +68,8 @@ public class RandomUtils {
      * @param array the array to randomize
      * @param seed  the seed to use for randomization
      */
-    public static void randomize(final Object[] array, final long seed) {
+    public static void randomize(final Object[] array, final long seed)
+    {
         RandomUtils.seed = seed;
         r = new Random(seed);
         randomizeNext(array);
@@ -77,13 +81,15 @@ public class RandomUtils {
      * @param array the array to randomize
      * @param seed  the seed to use for randomization
      */
-    public static void randomize(final int[] array, final long seed) {
+    public static void randomize(final int[] array, final long seed)
+    {
         RandomUtils.seed = seed;
         r = new Random(seed);
         randomizeNext(array);
     }
 
-    public static void randomize(final List list, final long seed) {
+    public static void randomize(final List list, final long seed)
+    {
         RandomUtils.seed = seed;
         r = new Random(seed);
         randomizeNext(list);
@@ -94,8 +100,10 @@ public class RandomUtils {
      *
      * @param array
      */
-    public static void randomizeNext(final Object[] array) {
-        for (int i = 0; i < array.length; i++) {
+    public static void randomizeNext(final Object[] array)
+    {
+        for (int i = 0; i < array.length; i++)
+        {
             swap(array, i, r.nextInt(array.length));
         }
     }
@@ -105,14 +113,18 @@ public class RandomUtils {
      *
      * @param array
      */
-    public static void randomizeNext(final int[] array) {
-        for (int i = 0; i < array.length; i++) {
+    public static void randomizeNext(final int[] array)
+    {
+        for (int i = 0; i < array.length; i++)
+        {
             swap(array, i, r.nextInt(array.length));
         }
     }
 
-    public static void randomizeNext(final List list) {
-        for (int i = 0; i < list.size(); i++) {
+    public static void randomizeNext(final List list)
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
             swap(list, i, r.nextInt(list.size()));
         }
     }
@@ -123,7 +135,8 @@ public class RandomUtils {
      * @param list the list to randomize
      * @return the random seed used to rendomize
      */
-    public static long randomize(final List<Object> list) {
+    public static long randomize(final List<Object> list)
+    {
         final Object[] objects = list.toArray();
         final long seed = randomize(objects);
         list.removeAll(list);
@@ -138,7 +151,8 @@ public class RandomUtils {
      * @param i the element to swap with the k-th element
      * @param k the element to swap with the i-th element
      */
-    private static void swap(final Object[] o, final int i, final int k) {
+    private static void swap(final Object[] o, final int i, final int k)
+    {
         final Object old = o[k];
         o[k] = o[i];
         o[i] = old;
@@ -151,13 +165,15 @@ public class RandomUtils {
      * @param i the element to swap with the k-th element
      * @param k the element to swap with the i-th element
      */
-    public static void swap(final int[] o, final int i, final int k) {
+    public static void swap(final int[] o, final int i, final int k)
+    {
         final int old = o[k];
         o[k] = o[i];
         o[i] = old;
     }
 
-    public static void swap(final List list, final int i, final int k) {
+    public static void swap(final List list, final int i, final int k)
+    {
         final Object old = list.get(k);
         list.set(k, list.get(i));
         list.set(i, old);

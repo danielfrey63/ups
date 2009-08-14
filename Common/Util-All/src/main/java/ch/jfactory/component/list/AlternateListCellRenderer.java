@@ -27,8 +27,10 @@ import javax.swing.JList;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class AlternateListCellRenderer extends DefaultListCellRenderer {
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+public class AlternateListCellRenderer extends DefaultListCellRenderer
+{
+    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+    {
 
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 

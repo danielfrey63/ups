@@ -14,7 +14,8 @@ package ch.jfactory.math;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class LevensteinDistance {
+public class LevensteinDistance
+{
 
     /**
      * Returns the evaluation result for the comparison of the two strings under the given
@@ -25,7 +26,8 @@ public class LevensteinDistance {
      * @param level LevensteinLevel at whitch evaluation takes place
      * @return EvaluationResult
      */
-    public static int getDistance(final String str1, final String str2, final LevensteinLevel level) {
+    public static int getDistance(final String str1, final String str2, final LevensteinLevel level)
+    {
         int i;
         int j;
         final int len1;
@@ -35,14 +37,18 @@ public class LevensteinDistance {
         final int arrSize = Math.max(len1, len2) + 1;
         final int[][] distance = new int[arrSize][arrSize];
         distance[0][0] = 0;
-        for (j = 1; j < arrSize; j++) {
+        for (j = 1; j < arrSize; j++)
+        {
             distance[0][j] = distance[0][j - 1] + level.getAdditionCost();
         }
-        for (j = 1; j < arrSize; j++) {
+        for (j = 1; j < arrSize; j++)
+        {
             distance[j][0] = distance[j - 1][0] + level.getDeletionCost();
         }
-        for (i = 1; i <= len1; i++) {
-            for (j = 1; j <= len2; j++) {
+        for (i = 1; i <= len1; i++)
+        {
+            for (j = 1; j <= len2; j++)
+            {
                 distance[i][j] = smallestOf(distance[i - 1][j - 1] +
                         ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : level.getChangeCost()),
                         distance[i][j - 1] + level.getAdditionCost(), distance[i - 1][j] + level.getDeletionCost());
@@ -51,7 +57,8 @@ public class LevensteinDistance {
         return distance[len1][len2];
     }
 
-    private static int smallestOf(final int x, final int y, final int z) {
+    private static int smallestOf(final int x, final int y, final int z)
+    {
         return ((x < y) ? Math.min(x, z) : Math.min(y, z));
     }
 }

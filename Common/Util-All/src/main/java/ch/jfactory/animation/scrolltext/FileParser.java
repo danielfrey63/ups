@@ -26,7 +26,8 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public interface FileParser {
+public interface FileParser
+{
     /**
      * Parses the given lines into FileLine objects.
      *
@@ -36,8 +37,8 @@ public interface FileParser {
     FileLine[] initText(List fileLines);
 
     /**
-     * Returns the Formatter objects used for string formatting. May be called in some implementations after
-     * {@link FileParser#initText(List)}.
+     * Returns the Formatter objects used for string formatting. May be called in some implementations after {@link
+     * FileParser#initText(List)}.
      *
      * @param g the graphics
      * @return an array of Formatter objects

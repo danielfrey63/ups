@@ -38,49 +38,49 @@ import java.util.Random;
  * example is the use of GUIDs for primary keys in a database where you want to ensure that the keys are secret.  Random
  * GUIDs can then be used in a URL to prevent hackers (or users) from accessing records by guessing or simply by
  * incrementing sequential numbers.
-
+ *
  * <p/>
-
+ *
  * There are many other possiblities of using GUIDs in the realm of security and encryption where the element of
  * randomness is important. This class was written for these purposes but can also be used as a general purpose GUID
  * generator as well.
-
- * <p/>
-
- * RandomGUID generates truly random GUIDs by using the system's IP address (name/IP), system time in
- * milliseconds (as an integer), and a very large random number joined together in a single String that is passed
- * through an MD5 hash.  The IP address and system time make the MD5 seed globally unique and the random number
- * guarantees that the generated GUIDs will have no discernable pattern and cannot be guessed given any number of
- * previously generated GUIDs. It is generally not possible to access the seed information (IP, time, random number)
- * from the resulting GUIDs as the MD5 hash algorithm provides one way encryption.
  *
  * <p/>
-
- * <em>Security of RandomGUID:</em>ch.jfactory.math.RandomGUID can be called one of two ways --
- * with the basic java Random number generator or a cryptographically strong random generator (SecureRandom).  The
- * choice is offered because the secure random generator takes about 3.5 times longer to generate its random numbers and
- * this performance hit may not be worth the added security especially considering the basic generator is seeded with a
- * cryptographically strong random seed.
+ *
+ * RandomGUID generates truly random GUIDs by using the system's IP address (name/IP), system time in milliseconds (as
+ * an integer), and a very large random number joined together in a single String that is passed through an MD5 hash.
+ * The IP address and system time make the MD5 seed globally unique and the random number guarantees that the generated
+ * GUIDs will have no discernable pattern and cannot be guessed given any number of previously generated GUIDs. It is
+ * generally not possible to access the seed information (IP, time, random number) from the resulting GUIDs as the MD5
+ * hash algorithm provides one way encryption.
  *
  * <p/>
-
+ *
+ * <em>Security of RandomGUID:</em>ch.jfactory.math.RandomGUID can be called one of two ways -- with the basic java
+ * Random number generator or a cryptographically strong random generator (SecureRandom).  The choice is offered because
+ * the secure random generator takes about 3.5 times longer to generate its random numbers and this performance hit may
+ * not be worth the added security especially considering the basic generator is seeded with a cryptographically strong
+ * random seed.
+ *
+ * <p/>
+ *
  * Seeding the basic generator in this way effectively decouples the random numbers from the time component making it
  * virtually impossible to predict the random number component even if one had absolute knowledge of the System time.
  * Thanks to Ashutosh Narhari for the suggestion of using the static method to prime the basic random generator.
  *
  * <p/>
-
+ *
  * Using the secure random option, this class complies with the statistical random number generator tests specified in
  * FIPS 140-2, Security Requirements for Cryptographic Modules, secition 4.9.1.
  *
  * <p/>
-
+ *
  * I converted all the pieces of the seed to a String before handing it over to the MD5 hash so that you could print it
  * out to make sure it contains the data you expect to see and to give a nice warm fuzzy.  If you need better
  * performance, you may want to stick to byte[] arrays.
  *
  * <p/>
-
+ *
  * I believe that it is important that the algorithm for generating random GUIDs be open for inspection and
  * modification. This class is free for all uses.
  *
@@ -89,11 +89,15 @@ import java.util.Random;
  * - Marc
  */
 
-public class RandomGUID {
+public class RandomGUID
+{
 
     public String valueBeforeMD5 = "";
+
     public String valueAfterMD5 = "";
+
     private static Random myRand;
+
     private static SecureRandom mySecureRand;
 
     private static String s;
@@ -106,25 +110,28 @@ public class RandomGUID {
      * This block will run only once per JVM instance.
      */
 
-    static {
+    static
+    {
         mySecureRand = new SecureRandom();
         final long secureInitializer = mySecureRand.nextLong();
         myRand = new Random(secureInitializer);
-        try {
+        try
+        {
             s = InetAddress.getLocalHost().toString();
         }
-        catch (UnknownHostException e) {
+        catch (UnknownHostException e)
+        {
             e.printStackTrace();
         }
 
     }
 
-
     /*
-     * Default constructor.  With no specification of security option,
-     * this constructor defaults to lower security, high performance.
-     */
-    public RandomGUID() {
+    * Default constructor.  With no specification of security option,
+    * this constructor defaults to lower security, high performance.
+    */
+    public RandomGUID()
+    {
         getRandomGUID(false);
     }
 
@@ -134,32 +141,39 @@ public class RandomGUID {
      * strong.  Secure false defaults to the standard Random function seeded
      * with a single cryptographically strong random number.
      */
-    public RandomGUID(final boolean secure) {
+    public RandomGUID(final boolean secure)
+    {
         getRandomGUID(secure);
     }
 
     /*
      * Method to generate the random GUID
      */
-    private void getRandomGUID(final boolean secure) {
+    private void getRandomGUID(final boolean secure)
+    {
         MessageDigest md5 = null;
         final StringBuffer sbValueBeforeMD5 = new StringBuffer();
 
-        try {
+        try
+        {
             md5 = MessageDigest.getInstance("MD5");
         }
-        catch (NoSuchAlgorithmException e) {
+        catch (NoSuchAlgorithmException e)
+        {
             System.out.println("Error: " + e);
         }
 
-        try {
+        try
+        {
             final long time = System.currentTimeMillis();
             long rand = 0;
 
-            if (secure) {
+            if (secure)
+            {
                 rand = mySecureRand.nextLong();
             }
-            else {
+            else
+            {
                 rand = myRand.nextLong();
             }
 
@@ -180,27 +194,32 @@ public class RandomGUID {
 
             final byte[] array = md5.digest();
             final StringBuffer sb = new StringBuffer();
-            for (int j = 0; j < array.length; ++j) {
-                final int b = array[j] & 0xFF;
-                if (b < 0x10) sb.append('0');
+            for (byte anArray : array)
+            {
+                final int b = anArray & 0xFF;
+                if (b < 0x10)
+                {
+                    sb.append('0');
+                }
                 sb.append(Integer.toHexString(b));
             }
 
             valueAfterMD5 = sb.toString();
 
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.out.println("Error:" + e);
         }
     }
 
-
     /*
-     * Convert to the standard format for GUID
-     * (Useful for SQL Server UniqueIdentifiers, etc.)
-     * Example: C2FEEEAC-CFCD-11D1-8B05-00600806D9B6
-     */
-    public String toString() {
+    * Convert to the standard format for GUID
+    * (Useful for SQL Server UniqueIdentifiers, etc.)
+    * Example: C2FEEEAC-CFCD-11D1-8B05-00600806D9B6
+    */
+    public String toString()
+    {
         final String raw = valueAfterMD5.toUpperCase();
         final StringBuffer sb = new StringBuffer();
         sb.append(raw.substring(0, 8));
@@ -219,8 +238,10 @@ public class RandomGUID {
     /*
      * Demonstraton and self test of class
      */
-    public static void main(final String[] args) {
-        for (int i = 0; i < 100; i++) {
+    public static void main(final String[] args)
+    {
+        for (int i = 0; i < 100; i++)
+        {
             final RandomGUID myGUID = new RandomGUID();
             System.out.println("Seeding String = " + myGUID.valueBeforeMD5);
             System.out.println("rawGUID = " + myGUID.valueAfterMD5);

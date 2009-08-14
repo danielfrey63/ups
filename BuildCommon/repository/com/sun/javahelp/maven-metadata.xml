@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><metadata>
-  <groupId>com.sun</groupId>
-  <artifactId>javahelp</artifactId>
-  <version>2.0.5</version>
-  <versioning>
-    <versions>
-      <version>2.0.5</version>
-    </versions>
-    <lastUpdated>20090719133120</lastUpdated>
-  </versioning>
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <groupId>com.sun</groupId>
+    <artifactId>javahelp</artifactId>
+    <version>2.0.5</version>
+    <versioning>
+        <versions>
+            <version>2.0.5</version>
+        </versions>
+        <lastUpdated>20090719133120</lastUpdated>
+    </versioning>
 </metadata>

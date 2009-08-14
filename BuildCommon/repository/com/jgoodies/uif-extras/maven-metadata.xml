@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><metadata>
-  <groupId>com.jgoodies</groupId>
-  <artifactId>uif-extras</artifactId>
-  <version>1.6.0.a</version>
-  <versioning>
-    <versions>
-      <version>1.6.0.a</version>
-    </versions>
-    <lastUpdated>20090719133314</lastUpdated>
-  </versioning>
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <groupId>com.jgoodies</groupId>
+    <artifactId>uif-extras</artifactId>
+    <version>1.6.0.a</version>
+    <versioning>
+        <versions>
+            <version>1.6.0.a</version>
+        </versions>
+        <lastUpdated>20090719133314</lastUpdated>
+    </versioning>
 </metadata>

@@ -17,7 +17,7 @@
  */
  -->
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
- "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+        "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
 <!--
   Checkstyle checks configured for Maven.
 -->
@@ -78,7 +78,6 @@
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
 
-
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
         <module name="LocalFinalVariableName"/>
@@ -93,16 +92,15 @@
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <module name="AvoidStarImport"/>
-        <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+        <module name="IllegalImport"/>
+        <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
-
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="FileLength"/>
         <module name="ParameterNumber"/>
-
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
@@ -114,12 +112,10 @@
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround"/>
 
-
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
         <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
-
 
         <!-- Checks for blocks. You know, those {}'s         -->
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
@@ -127,15 +123,15 @@
         <module name="EmptyBlock">
             <property name="option" value="text"/>
             <property name="tokens"
-                value="LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_IF, LITERAL_FOR, LITERAL_TRY, LITERAL_WHILE, INSTANCE_INIT, STATIC_INIT"/>
+                      value="LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_IF, LITERAL_FOR, LITERAL_TRY, LITERAL_WHILE, INSTANCE_INIT, STATIC_INIT"/>
         </module>
         <module name="NeedBraces"/>
-
 
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <!-- module name="AvoidInlineConditionals"/ -->
-        <module name="DoubleCheckedLocking"/>    <!-- MY FAVOURITE -->
+        <module name="DoubleCheckedLocking"/>
+        <!-- MY FAVOURITE -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
         <!-- module name="FinalLocalVariable"/ Not supported yet -->
@@ -159,11 +155,9 @@
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier"/>
 
-
         <!-- Checks for duplicate code                           -->
         <!-- See http://checkstyle.sf.net/config_duplicates.html -->
         <!-- module name="Simian"/ -->
-
 
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->

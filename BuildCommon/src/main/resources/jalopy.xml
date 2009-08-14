@@ -14,10 +14,14 @@
                 <use>false</use>
             </modifiers>
             <method>false</method>
-            <order>Static Variables/Initializers,Instance Variables,Instance Initializers,Constructors,Methods,Interfaces,Classes</order>
+            <order>Static Variables/Initializers,Instance Variables,Instance
+                Initializers,Constructors,Methods,Interfaces,Classes
+            </order>
             <use>true</use>
             <constructor>false</constructor>
-            <orderModifiers>public,protected,private,abstract,static,final,synchronized,transient,volatile,native,strictfp</orderModifiers>
+            <orderModifiers>
+                public,protected,private,abstract,static,final,synchronized,transient,volatile,native,strictfp
+            </orderModifiers>
             <interface>false</interface>
         </sorting>
         <blankLines>
@@ -45,21 +49,22 @@
         </blankLines>
         <header>
             <text>/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
- */</text>
+                * Copyright 2004-2005 www.xmatrix.ch
+                *
+                * Licensed under the Apache License, Version 2.0 (the "License");
+                * you may not use this file except in compliance with the License.
+                * You may obtain a copy of the License at
+                *
+                * http://www.apache.org/licenses/LICENSE-2.0
+                *
+                * Unless required by applicable law or agreed to in writing, software
+                * distributed under the License is distributed on an "AS IS" BASIS,
+                * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                * implied. See the License for the specific language governing
+                * permissions and limitations under the License.
+                * ====================================================================
+                */
+            </text>
             <smartModeLines>2</smartModeLines>
             <keys>Copyright 2004-2005 www.xmatrix.ch</keys>
             <use>true</use>
@@ -118,11 +123,11 @@
                 <remove>false</remove>
                 <templates>
                     <methods>
-                        <return> * @return DOCUMENT ME!</return>
-                        <exception> * @throws $exceptionType$ DOCUMENT ME!</exception>
+                        <return>* @return DOCUMENT ME!</return>
+                        <exception>* @throws $exceptionType$ DOCUMENT ME!</exception>
                         <top>/**| * DOCUMENT ME!</top>
-                        <bottom> */</bottom>
-                        <param> * @param $paramType$ DOCUMENT ME!</param>
+                        <bottom>*/</bottom>
+                        <param>* @param $paramType$ DOCUMENT ME!</param>
                     </methods>
                 </templates>
                 <tags>
@@ -140,7 +145,7 @@
                 <method>Methods</method>
                 <staticVariableInit>Static variables/initializers</staticVariableInit>
                 <ctor>Constructors</ctor>
-                <fillCharacter>·</fillCharacter>
+                <fillCharacter>ï¿½</fillCharacter>
                 <interface>Interfaces</interface>
                 <instanceInit>Instance initializers</instanceInit>
                 <instanceVariable>Instance variables</instanceVariable>

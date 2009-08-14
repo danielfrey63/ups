@@ -16,15 +16,15 @@
  */
 package ch.xmatrix.ups.ust.main.commands;
 
-import ch.xmatrix.ups.ust.main.MainModel;
-import ch.xmatrix.ups.model.SessionModel;
-import ch.xmatrix.ups.domain.Constraints;
 import ch.jfactory.application.AbstractMainModel;
-import org.pietschy.command.ActionCommand;
-import org.pietschy.command.CommandManager;
+import ch.xmatrix.ups.domain.Constraints;
+import ch.xmatrix.ups.model.SessionModel;
+import ch.xmatrix.ups.ust.main.MainModel;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.beans.PropertyVetoException;
+import org.pietschy.command.ActionCommand;
+import org.pietschy.command.CommandManager;
 
 /**
  * Opens a default taxon list stored in the constraints.
@@ -32,19 +32,24 @@ import java.beans.PropertyVetoException;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2007/05/16 17:00:16 $
  */
-public class NewDefaultCommand extends ActionCommand {
+public class NewDefaultCommand extends ActionCommand
+{
 
     private MainModel model;
 
-    public NewDefaultCommand(final CommandManager commandManager, final MainModel model) {
+    public NewDefaultCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_NEWDEFAULT);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             final SessionModel sessionModel = Commands.runExamInfoChooser(model);
-            if (sessionModel != null) {
+            if (sessionModel != null)
+            {
                 model.sessionModels.setSelection(sessionModel);
                 Commands.setNewUserModel(model);
                 final Constraints constraints = (Constraints) AbstractMainModel.findModel(model.getUserModel().getConstraintsUid());
@@ -52,7 +57,8 @@ public class NewDefaultCommand extends ActionCommand {
                 model.setOpening();
             }
         }
-        catch (PropertyVetoException e) {
+        catch (PropertyVetoException e)
+        {
         }
     }
 }

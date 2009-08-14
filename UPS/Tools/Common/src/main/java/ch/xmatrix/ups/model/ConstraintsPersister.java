@@ -24,13 +24,17 @@ import javax.swing.ListModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ConstraintsPersister extends DirtyCapableModel {
+public class ConstraintsPersister extends DirtyCapableModel
+{
 
     private static XStream converter;
+
     private static ListModel constraints;
 
-    public static XStream getConverter() {
-        if (converter == null) {
+    public static XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.ID_REFERENCES);
             converter.alias("constraintsModels", SimpleModelList.class);

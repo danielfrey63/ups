@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.uec.prefs;
 
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 import ch.xmatrix.ups.domain.TaxonBased;
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
  * TODO: document
@@ -25,14 +25,18 @@ import ch.xmatrix.ups.domain.TaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class PrefsFactory extends MasterDetailsFactory {
+public class PrefsFactory extends MasterDetailsFactory
+{
 
-    public TaxonBased createInstance() {
+    public TaxonBased createInstance()
+    {
         return new PrefsModel();
     }
 
-    public TaxonBased createCopy(final TaxonBased orig) {
-        if (!(orig instanceof PrefsModel)) {
+    public TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof PrefsModel))
+        {
             throw new IllegalArgumentException("copy only allowed for instances of " + PrefsModel.class);
         }
         return new PrefsModel((PrefsModel) orig);

@@ -19,19 +19,17 @@ import com.jgoodies.binding.beans.Model;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public class Credentials extends Model {
+public class Credentials extends Model
+{
 
-    /**
-     * Password property key.
-     */
+    /** Password property key. */
     public static final String PROPERTYNAME_PASSWORD = "password";
 
-    /**
-     * Username property key.
-     */
+    /** Username property key. */
     public static final String PROPERTYNAME_USERNAME = "username";
 
     private String username;
+
     private String password;
 
     /**
@@ -39,7 +37,8 @@ public class Credentials extends Model {
      *
      * @return the username
      */
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
@@ -48,7 +47,8 @@ public class Credentials extends Model {
      *
      * @param username the name to set
      */
-    public void setUsername(final String username) {
+    public void setUsername(final String username)
+    {
         final String oldUsername = getUsername();
         this.username = username;
         firePropertyChange(PROPERTYNAME_USERNAME, oldUsername, username);
@@ -59,7 +59,8 @@ public class Credentials extends Model {
      *
      * @return the password
      */
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
@@ -68,7 +69,8 @@ public class Credentials extends Model {
      *
      * @param password the new password
      */
-    public void setPassword(final String password) {
+    public void setPassword(final String password)
+    {
         final String oldPassword = getPassword();
         this.password = password;
         firePropertyChange(PROPERTYNAME_PASSWORD, oldPassword, password);

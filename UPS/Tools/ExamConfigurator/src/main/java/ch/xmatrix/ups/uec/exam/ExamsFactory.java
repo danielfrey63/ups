@@ -18,7 +18,6 @@ package ch.xmatrix.ups.uec.exam;
 
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
-import ch.xmatrix.ups.uec.exam.ExamModel;
 
 /**
  * TODO: document
@@ -26,10 +25,13 @@ import ch.xmatrix.ups.uec.exam.ExamModel;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class ExamsFactory extends MasterDetailsFactory {
+public class ExamsFactory extends MasterDetailsFactory
+{
 
-    protected TaxonBased createCopy(final TaxonBased orig) {
-        if (!(orig instanceof ExamModel)) {
+    protected TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof ExamModel))
+        {
             throw new IllegalArgumentException("original must be of type " + ExamModel.class.getName() +
                     ", got " + orig.getClass().getName());
         }
@@ -37,7 +39,8 @@ public class ExamsFactory extends MasterDetailsFactory {
         return new ExamModel(original);
     }
 
-    protected TaxonBased createInstance() {
+    protected TaxonBased createInstance()
+    {
         return new ExamModel();
     }
 }

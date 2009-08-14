@@ -22,13 +22,17 @@ import javax.swing.ListModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class CoursePersister extends DirtyCapableModel {
+public class CoursePersister extends DirtyCapableModel
+{
 
     private static XStream converter;
+
     private static ListModel constraints;
 
-    public static XStream getConverter() {
-        if (converter == null) {
+    public static XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.ID_REFERENCES);
             converter.alias("courses", SimpleModelList.class);

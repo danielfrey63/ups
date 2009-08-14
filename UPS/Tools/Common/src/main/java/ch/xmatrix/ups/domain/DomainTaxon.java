@@ -17,41 +17,52 @@ package ch.xmatrix.ups.domain;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public class DomainTaxon implements TreeObject {
+public class DomainTaxon implements TreeObject
+{
 
     private SimpleTaxon taxon;
+
     private TreeObject[] children;
+
     private TreeObject parent;
 
-    public DomainTaxon(final SimpleTaxon taxon) {
+    public DomainTaxon(final SimpleTaxon taxon)
+    {
         this.setTaxon(taxon);
     }
 
-    public void setTaxon(final SimpleTaxon taxon) {
+    public void setTaxon(final SimpleTaxon taxon)
+    {
         this.taxon = taxon;
     }
 
-    public SimpleTaxon getTaxon() {
+    public SimpleTaxon getTaxon()
+    {
         return taxon;
     }
 
-    public TreeObject[] getChildren() {
+    public TreeObject[] getChildren()
+    {
         return children;
     }
 
-    public void setChildren(final TreeObject[] children) {
+    public void setChildren(final TreeObject[] children)
+    {
         this.children = children;
     }
 
-    public TreeObject getParent() {
+    public TreeObject getParent()
+    {
         return parent;
     }
 
-    public void setParent(final TreeObject parent) {
+    public void setParent(final TreeObject parent)
+    {
         this.parent = parent;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return taxon.toString();
     }
 }

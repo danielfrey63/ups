@@ -18,10 +18,10 @@ package ch.xmatrix.ups.uec.specimens;
 
 import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.SimpleTaxon;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
-import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.model.SpecimensModel;
+import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.TreeCellRenderer;
@@ -32,20 +32,24 @@ import javax.swing.tree.TreeCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/23 22:19:08 $
  */
-public class SpecimensTreeRenderer implements TreeCellRenderer {
+public class SpecimensTreeRenderer implements TreeCellRenderer
+{
 
     private final RendererPanel panel = new RendererPanel();
 
     private SpecimensModel models;
+
     private boolean enabled;
 
-    public SpecimensTreeRenderer() {
+    public SpecimensTreeRenderer()
+    {
         setEnabled(true);
     }
 
     public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
                                                   final boolean isExpanded, final boolean isLeaf, final int row,
-                                                  final boolean hasFocus) {
+                                                  final boolean hasFocus)
+    {
 
         final SimpleTaxon taxon = (SimpleTaxon) value;
         final SpecimenModel model = models == null ? null : models.find(taxon.getName());
@@ -60,11 +64,13 @@ public class SpecimensTreeRenderer implements TreeCellRenderer {
         return panel;
     }
 
-    public void setSpecimensModel(final SpecimensModel models) {
+    public void setSpecimensModel(final SpecimensModel models)
+    {
         this.models = models;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         this.enabled = enabled;
     }
 }

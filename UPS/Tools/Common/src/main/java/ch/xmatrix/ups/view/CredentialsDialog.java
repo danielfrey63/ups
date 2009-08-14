@@ -27,35 +27,43 @@ import javax.swing.JFrame;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2006/08/29 13:33:33 $
  */
-public abstract class CredentialsDialog extends I15nComponentDialog {
+public abstract class CredentialsDialog extends I15nComponentDialog
+{
 
     protected CredentialsModel model;
 
-    public CredentialsDialog(final JFrame parent) {
+    public CredentialsDialog(final JFrame parent)
+    {
         super(parent, "credentials");
     }
 
-    public CredentialsModel getModel() {
+    public CredentialsModel getModel()
+    {
         return model;
     }
 
-    protected JComponent createComponentPanel() {
+    protected JComponent createComponentPanel()
+    {
         this.model = new CredentialsModel(new Credentials());
         model.getValidationResultModel().addPropertyChangeListener(ValidationResultModel.PROPERTYNAME_RESULT,
-                new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final ValidationResult result = (ValidationResult) evt.getNewValue();
-                enableApply(result.getErrors().size() == 0);
-            }
-        });
+                new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
+                        final ValidationResult result = (ValidationResult) evt.getNewValue();
+                        enableApply(result.getErrors().size() == 0);
+                    }
+                });
         return new CredentialsPanel(model);
     }
 
-    protected void onCancel() {
+    protected void onCancel()
+    {
         model.triggerFlush();
     }
 
-    protected void onApply() throws I15nComponentDialog.ComponentDialogException {
+    protected void onApply() throws I15nComponentDialog.ComponentDialogException
+    {
         model.triggerCommit();
         doApply();
     }

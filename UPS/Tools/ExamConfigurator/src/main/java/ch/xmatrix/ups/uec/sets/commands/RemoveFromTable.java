@@ -30,23 +30,29 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:19:10 $
  */
-public class RemoveFromTable extends ActionCommand {
+public class RemoveFromTable extends ActionCommand
+{
 
     private final SetBuilder.SubmitTableModel tableModel;
+
     private final ListSelectionModel selectionModel;
+
     private final SortableTableModel sortableModel;
 
     public RemoveFromTable(final CommandManager commandManager, final SetBuilder.SubmitTableModel tableModel,
-                           final ListSelectionModel selectionModel, final SortableTableModel sortableModel) {
+                           final ListSelectionModel selectionModel, final SortableTableModel sortableModel)
+    {
         super(commandManager, Commands.COMMANDID_REMOVE);
         this.tableModel = tableModel;
         this.selectionModel = selectionModel;
         this.sortableModel = sortableModel;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final int[] indices = TableUtils.getSelection(selectionModel);
-        for (int i = indices.length - 1; i >= 0; i--) {
+        for (int i = indices.length - 1; i >= 0; i--)
+        {
             final int index = indices[i];
             final int indexToRemove = sortableModel.getIndexes()[index];
             final Registration registration = tableModel.getRegistrations()[indexToRemove];

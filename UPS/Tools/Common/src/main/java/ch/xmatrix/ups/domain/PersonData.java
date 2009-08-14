@@ -20,14 +20,22 @@ import com.jgoodies.binding.beans.Model;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public class PersonData extends Model {
+public class PersonData extends Model
+{
     public static final String FIRST_NAME = "firstName";
+
     public static final String LAST_NAME = "lastName";
+
     public static final String ID = "id";
+
     public static final String COURSE = "course";
+
     private String firstName = "";
+
     private String lastName = "";
+
     private String id = "00-000-000";
+
     private String course = "";
 
     /**
@@ -35,14 +43,14 @@ public class PersonData extends Model {
      *
      * @param person the person data to copy
      */
-    public PersonData(final PersonData person) {
+    public PersonData(final PersonData person)
+    {
         copy(person);
     }
 
-    /**
-     * Init object with defaults.
-     */
-    public PersonData() {
+    /** Init object with defaults. */
+    public PersonData()
+    {
         // Do nothing.
     }
 
@@ -51,54 +59,64 @@ public class PersonData extends Model {
      *
      * @param person the person to copy
      */
-    public void copy(final PersonData person) {
+    public void copy(final PersonData person)
+    {
         setFirstName(person.firstName);
         setLastName(person.lastName);
         setId(person.id);
         setCourse(person.course);
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
-    public void setFirstName(final String firstName) {
+    public void setFirstName(final String firstName)
+    {
         final String old = getFirstName();
         this.firstName = firstName;
         firePropertyChange(FIRST_NAME, old, firstName);
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastName(final String lastName) {
+    public void setLastName(final String lastName)
+    {
         final String old = getLastName();
         this.lastName = lastName;
         firePropertyChange(LAST_NAME, old, lastName);
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(final String id) {
+    public void setId(final String id)
+    {
         final String old = getId();
         this.id = id;
         firePropertyChange(ID, old, id);
     }
 
-    public String getCourse() {
+    public String getCourse()
+    {
         return course;
     }
 
-    public void setCourse(final String course) {
+    public void setCourse(final String course)
+    {
         final String old = getCourse();
         this.course = course;
         firePropertyChange(COURSE, old, course);
     }
 
-    public String toString() {
+    public String toString()
+    {
 
         final StringBuffer text = new StringBuffer();
         text.append(getId());

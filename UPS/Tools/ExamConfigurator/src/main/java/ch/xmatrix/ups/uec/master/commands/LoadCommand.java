@@ -26,16 +26,19 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/05/16 17:00:15 $
  */
-public class LoadCommand extends ActionCommand {
+public class LoadCommand extends ActionCommand
+{
 
     private DetailsBuilder detailsBuilder;
 
-    public LoadCommand(final CommandManager manager, final DetailsBuilder detailsBulider) {
+    public LoadCommand(final CommandManager manager, final DetailsBuilder detailsBulider)
+    {
         super(manager, Commands.COMMANDID_LOAD);
         this.detailsBuilder = detailsBulider;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         detailsBuilder.load();
     }
 }

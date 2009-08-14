@@ -11,9 +11,9 @@
  */
 package ch.xmatrix.ups.view;
 
-import javax.swing.JLabel;
-import javax.swing.Icon;
 import ch.jfactory.resource.Strings;
+import javax.swing.Icon;
+import javax.swing.JLabel;
 
 /**
  * TODO: document
@@ -21,32 +21,40 @@ import ch.jfactory.resource.Strings;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public class I15nLabel extends JLabel {
-    public I15nLabel() {
+public class I15nLabel extends JLabel
+{
+    public I15nLabel()
+    {
         super();
     }
 
-    public I15nLabel(final Icon image) {
+    public I15nLabel(final Icon image)
+    {
         super(image);
     }
 
-    public I15nLabel(final Icon image, final int horizontalAlignment) {
+    public I15nLabel(final Icon image, final int horizontalAlignment)
+    {
         super(image, horizontalAlignment);
     }
 
-    public I15nLabel(final String key) {
+    public I15nLabel(final String key)
+    {
         super(Strings.getString(key));
     }
 
-    public I15nLabel(final String key, final int horizontalAlignment) {
+    public I15nLabel(final String key, final int horizontalAlignment)
+    {
         super(Strings.getString(key), horizontalAlignment);
     }
 
-    public I15nLabel(final String key, final Icon icon, final int horizontalAlignment) {
+    public I15nLabel(final String key, final Icon icon, final int horizontalAlignment)
+    {
         super(Strings.getString(key), icon, horizontalAlignment);
     }
 
-    public void setI15nText(final String key) {
+    public void setI15nText(final String key)
+    {
         super.setText(Strings.getString(key));
     }
 }

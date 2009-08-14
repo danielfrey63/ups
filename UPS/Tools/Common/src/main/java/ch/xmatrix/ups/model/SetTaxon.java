@@ -22,22 +22,26 @@ package ch.xmatrix.ups.model;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2008/01/23 22:19:54 $
  */
-public class SetTaxon {
+public class SetTaxon
+{
 
     private SpecimenModel specimenModel;
 
     private boolean known;
 
-    public SetTaxon(final SpecimenModel specimenModel, final boolean known) {
+    public SetTaxon(final SpecimenModel specimenModel, final boolean known)
+    {
         this.specimenModel = specimenModel;
         this.known = known;
     }
 
-    public SpecimenModel getSpecimenModel() {
+    public SpecimenModel getSpecimenModel()
+    {
         return specimenModel;
     }
 
-    public String toString() {
+    public String toString()
+    {
         final String id = specimenModel.getId();
         return (id == null ? "" : id + " ") + "[" + specimenModel.getTaxon() + ", " +
                 (known ? "weightIfKnown=" + specimenModel.getWeightIfKnown() : "weightIfUnkown=" + specimenModel.getWeightIfUnknown())

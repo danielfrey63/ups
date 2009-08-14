@@ -22,9 +22,12 @@ package ch.xmatrix.ups.uec.groups.commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class Commands {
+public class Commands
+{
 
     public static final String COMMANDID_DELETEGROUP = "group.delete";
+
     public static final String COMMANDID_NEWGROUP = "group.new";
+
     public static final String GROUPID_TOOLBAR = "toolbar";
 }

@@ -16,14 +16,13 @@
  */
 package ch.xmatrix.ups.uec.specimens.commands;
 
+import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.model.SpecimensModel;
-import ch.xmatrix.ups.uec.specimens.commands.Commands;
-import ch.xmatrix.ups.domain.SimpleTaxon;
 import com.jgoodies.binding.list.SelectionInList;
+import javax.swing.tree.TreeSelectionModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import javax.swing.tree.TreeSelectionModel;
 
 /**
  * Adds a specimen to the list.
@@ -31,24 +30,29 @@ import javax.swing.tree.TreeSelectionModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/23 22:19:14 $
  */
-public class NewSpecimen extends ActionCommand {
+public class NewSpecimen extends ActionCommand
+{
 
     private SelectionInList model;
+
     private TreeSelectionModel selection;
 
     public NewSpecimen(final CommandManager commandManager, final SelectionInList model,
-                       final TreeSelectionModel selection) {
+                       final TreeSelectionModel selection)
+    {
         super(commandManager, Commands.COMMANDID_NEWSPECIMEN);
         assert model != null : "model must not be null";
         this.model = model;
         this.selection = selection;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final SpecimensModel specimens = (SpecimensModel) model.getSelection();
         final SimpleTaxon taxon = (SimpleTaxon) (selection.getSelectionCount() == 1 ?
                 selection.getSelectionPath().getLastPathComponent() : null);
-        if (specimens != null && taxon != null) {
+        if (specimens != null && taxon != null)
+        {
             final SpecimenModel specimen = new SpecimenModel();
             specimen.setTaxon(taxon.getName());
             specimens.addSpecimenModel(specimen);

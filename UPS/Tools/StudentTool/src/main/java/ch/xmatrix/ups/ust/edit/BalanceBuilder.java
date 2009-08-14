@@ -11,8 +11,8 @@
  */
 package ch.xmatrix.ups.ust.edit;
 
-import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
 import ch.jfactory.application.AbstractMainModel;
+import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
 import ch.jfactory.resource.Strings;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
@@ -38,32 +38,40 @@ import javax.swing.SwingConstants;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2007/05/16 17:00:15 $
  */
-public class BalanceBuilder extends ActionCommandPanelBuilder {
+public class BalanceBuilder extends ActionCommandPanelBuilder
+{
 
     private static final ImageIcon OK = new ImageIcon(BalanceBuilder.class.getResource("/16x16/fill/bulb_ok.png"));
+
     private static final ImageIcon NOK = new ImageIcon(BalanceBuilder.class.getResource("/16x16/fill/bulb_nok.png"));
 
     private UserModel userModel;
+
     private ArrayList<StatsLabel> statLabels = new ArrayList<StatsLabel>();
+
     private JLabel icon = new IconLabel();
 
-    public void setModel(final UserModel userModel) {
+    public void setModel(final UserModel userModel)
+    {
         this.userModel = userModel;
-        for (int i = 0; i < statLabels.size(); i++) {
+        for (int i = 0; i < statLabels.size(); i++)
+        {
             final StatsLabel label = (StatsLabel) statLabels.get(i);
             label.repaint();
         }
         icon.repaint();
     }
 
-    public ArrayList<JComponent> getComponentsToRepaint() {
+    public ArrayList<JComponent> getComponentsToRepaint()
+    {
         final ArrayList<JComponent> result = new ArrayList<JComponent>();
         result.addAll(statLabels);
         result.add(icon);
         return result;
     }
 
-    public JComponent createMainPanel() {
+    public JComponent createMainPanel()
+    {
         final JComponent panel = super.createMainPanel();
         final ComponentFactory factory = DefaultComponentFactory.getInstance();
         final CellConstraints cc = new CellConstraints();
@@ -88,17 +96,23 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         return panel;
     }
 
-    private StatsLabel createGivenSpeciesStat() {
-        final StatsLabel label = new StatsLabel() {
-            public int getStatistic(final Constraints constraints) {
+    private StatsLabel createGivenSpeciesStat()
+    {
+        final StatsLabel label = new StatsLabel()
+        {
+            public int getStatistic(final Constraints constraints)
+            {
                 int count = 0;
-                for (int i = 0; i < constraints.getConstraints().size(); i++) {
+                for (int i = 0; i < constraints.getConstraints().size(); i++)
+                {
                     final Constraint constraint = (Constraint) constraints.getConstraints().get(i);
                     final List<String> taxa = constraint.getTaxa();
-                    if (taxa.size() == 1) {
+                    if (taxa.size() == 1)
+                    {
                         final TaxonTree tree = TaxonModels.find(constraints.getTaxaUid());
                         final SimpleTaxon taxon = tree.findTaxonByName(taxa.get(0));
-                        if (SimpleTaxon.isSpecies(taxon)) {
+                        if (SimpleTaxon.isSpecies(taxon))
+                        {
                             count++;
                         }
                     }
@@ -110,9 +124,12 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         return label;
     }
 
-    private StatsLabel createSelectedSpeciesStat() {
-        final StatsLabel label = new StatsLabel() {
-            public int getStatistic(final Constraints constraints) {
+    private StatsLabel createSelectedSpeciesStat()
+    {
+        final StatsLabel label = new StatsLabel()
+        {
+            public int getStatistic(final Constraints constraints)
+            {
                 return userModel.getTaxa().size();
             }
         };
@@ -120,9 +137,12 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         return label;
     }
 
-    private StatsLabel createGivenConstraintsStat() {
-        final StatsLabel label = new StatsLabel() {
-            public int getStatistic(final Constraints constraints) {
+    private StatsLabel createGivenConstraintsStat()
+    {
+        final StatsLabel label = new StatsLabel()
+        {
+            public int getStatistic(final Constraints constraints)
+            {
                 return constraints.getConstraints().size();
             }
         };
@@ -130,9 +150,12 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         return label;
     }
 
-    private StatsLabel createCompletedConstraintsStat() {
-        final StatsLabel label = new StatsLabel() {
-            public int getStatistic(final Constraints constraints) {
+    private StatsLabel createCompletedConstraintsStat()
+    {
+        final StatsLabel label = new StatsLabel()
+        {
+            public int getStatistic(final Constraints constraints)
+            {
                 final ArrayList<String> taxa = userModel.getTaxa();
                 return ConstraintsRendererUtils.getCompleteConstraints(constraints, taxa);
             }
@@ -141,15 +164,19 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         return label;
     }
 
-    private abstract class StatsLabel extends JLabel {
+    private abstract class StatsLabel extends JLabel
+    {
 
-        public StatsLabel() {
+        public StatsLabel()
+        {
             super("-");
             setHorizontalTextPosition(JLabel.LEFT);
         }
 
-        public void repaint() {
-            if (userModel != null) {
+        public void repaint()
+        {
+            if (userModel != null)
+            {
                 final Constraints constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
                 final int statistic = getStatistic(constraints);
                 setText("" + statistic);
@@ -160,16 +187,21 @@ public class BalanceBuilder extends ActionCommandPanelBuilder {
         public abstract int getStatistic(final Constraints constraints);
     }
 
-    private class IconLabel extends JLabel {
+    private class IconLabel extends JLabel
+    {
 
-        public void repaint() {
-            if (statLabels.size() == 4) {
+        public void repaint()
+        {
+            if (statLabels.size() == 4)
+            {
                 final int totalCount = Integer.parseInt(statLabels.get(2).getText());
                 final int actualCount = Integer.parseInt(statLabels.get(3).getText());
-                if (totalCount <= actualCount) {
+                if (totalCount <= actualCount)
+                {
                     setIcon(OK);
                 }
-                else {
+                else
+                {
                     setIcon(NOK);
                 }
             }

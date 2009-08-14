@@ -16,13 +16,12 @@
  */
 package ch.xmatrix.ups.uec.groups.commands;
 
-import ch.xmatrix.ups.uec.groups.GroupsModel;
 import ch.xmatrix.ups.uec.groups.GroupModel;
-import ch.xmatrix.ups.uec.groups.commands.Commands;
+import ch.xmatrix.ups.uec.groups.GroupsModel;
 import com.jgoodies.binding.list.SelectionInList;
+import javax.swing.DefaultListModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import javax.swing.DefaultListModel;
 
 /**
  * Remove a group from the list.
@@ -30,20 +29,24 @@ import javax.swing.DefaultListModel;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class DeleteGroup extends ActionCommand {
+public class DeleteGroup extends ActionCommand
+{
 
     private SelectionInList model;
+
     private DefaultListModel listModel;
 
-    public DeleteGroup(final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel) {
+    public DeleteGroup(final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel)
+    {
         super(commandManager, Commands.COMMANDID_DELETEGROUP);
         assert model != null : "model must not be null";
-        assert listModel != null  : "list model must not be null";
+        assert listModel != null : "list model must not be null";
         this.model = model;
         this.listModel = listModel;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final GroupsModel groups = (GroupsModel) model.getSelection();
         final GroupModel group = groups.getCurrentGroup();
         groups.removeGroup();

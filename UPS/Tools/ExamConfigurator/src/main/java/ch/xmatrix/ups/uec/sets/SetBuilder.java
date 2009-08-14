@@ -26,6 +26,7 @@ import ch.jfactory.component.table.TableUtils;
 import ch.jfactory.image.SimpleIconFactory;
 import ch.jfactory.lang.ArrayUtils;
 import ch.xmatrix.ups.domain.PlantList;
+import ch.xmatrix.ups.model.Registration;
 import ch.xmatrix.ups.uec.exam.ExamModel;
 import ch.xmatrix.ups.uec.exam.ExamsBuilder;
 import ch.xmatrix.ups.uec.sets.commands.AddPerson;
@@ -34,9 +35,8 @@ import ch.xmatrix.ups.uec.sets.commands.Commands;
 import ch.xmatrix.ups.uec.sets.commands.FromDirectory;
 import ch.xmatrix.ups.uec.sets.commands.FromFiles;
 import ch.xmatrix.ups.uec.sets.commands.FromInternet;
-import ch.xmatrix.ups.uec.sets.commands.RemoveFromTable;
 import ch.xmatrix.ups.uec.sets.commands.ReloadExamDataOnServer;
-import ch.xmatrix.ups.model.Registration;
+import ch.xmatrix.ups.uec.sets.commands.RemoveFromTable;
 import com.jformdesigner.runtime.FormCreator;
 import com.jformdesigner.runtime.FormLoader;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
@@ -79,36 +79,54 @@ import org.pietschy.command.ActionCommandInterceptor;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:19:08 $
  */
-public class SetBuilder extends ActionCommandPanelBuilder {
+public class SetBuilder extends ActionCommandPanelBuilder
+{
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/sets/SetPanel.jfd";
+
     private static final SortableTableModel DUMMY_SORTABLETABLEMODEL = new SortableTableModel(new DefaultTableModel());
 
     private final SubmitTableModel submitTableModel = new SubmitTableModel(new Registration[0]);
+
     private final SortableTableModel sortableTableModel = new SortableTableModel(submitTableModel);
+
     private final ListSelectionModel selectionModel = new DefaultListSelectionModel();
+
     private final ExamsBuilder exams;
 
     private SortedTable table;
+
     private JComboBox combo;
+
     private ExamModel examModel;
+
     private ActionCommand fromInternet;
+
     private ActionCommand fromFiles;
+
     private ActionCommand fromDirectory;
+
     private ActionCommand moveUp;
+
     private ActionCommand moveDown;
+
     private ActionCommand remove;
+
     private ActionCommand calculate;
+
     private ActionCommand newPerson;
+
     private InfoModel infoModel;
 
-    public SetBuilder(final ExamsBuilder exams) {
+    public SetBuilder(final ExamsBuilder exams)
+    {
         this.exams = exams;
     }
 
     //--- ActionCommandPanelBuilder overrides
 
-    protected void initCommands() {
+    protected void initCommands()
+    {
         initCommand(new ReloadExamDataOnServer(getCommandManager()), true);
         fromInternet = initCommand(new FromInternet(getCommandManager(), submitTableModel));
         fromFiles = initCommand(new FromFiles(getCommandManager(), submitTableModel));
@@ -119,8 +137,10 @@ public class SetBuilder extends ActionCommandPanelBuilder {
         remove = initCommand(new RemoveFromTable(getCommandManager(), submitTableModel, selectionModel, sortableTableModel));
     }
 
-    protected JComponent createMainPanel() {
-        try {
+    protected JComponent createMainPanel()
+    {
+        try
+        {
             infoModel.setNote(new SimpleNote("Lade Prüfungssets-Editor", infoModel.getNote().getColor()));
 
             final FormCreator creator = new FormCreator(FormLoader.load(RESOURCE_FORM));
@@ -149,36 +169,46 @@ public class SetBuilder extends ActionCommandPanelBuilder {
 
             return creator.getPanel("panel");
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             throw new IllegalStateException("could not create submit panel", e);
         }
     }
 
-    protected void initComponentListeners() {
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
+    protected void initComponentListeners()
+    {
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+        {
+            public void valueChanged(final ListSelectionEvent e)
+            {
                 setStates(table);
             }
         });
         table.addKeyStroke(SortedTable.DIRECTION_UP, KeyStroke.getKeyStroke(KeyEvent.VK_UP, KeyEvent.CTRL_DOWN_MASK));
         table.addKeyStroke(SortedTable.DIRECTION_DOWN, KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, KeyEvent.CTRL_DOWN_MASK));
-        combo.addItemListener(new ItemListener() {
-            public void itemStateChanged(final ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
+        combo.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(final ItemEvent e)
+            {
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
                     examModel = (ExamModel) e.getItem();
                     setStates(combo);
                 }
             }
         });
-        final ActionCommandInterceptor interceptor = new ActionCommandInterceptor() {
+        final ActionCommandInterceptor interceptor = new ActionCommandInterceptor()
+        {
             private Map<MultiKey, Integer> selections;
 
-            public boolean beforeExecute(final ActionCommand command) {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 selections = TableUtils.getSelection(table);
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 TableUtils.setSelection(selections, table);
                 setStates(null);
             }
@@ -192,13 +222,15 @@ public class SetBuilder extends ActionCommandPanelBuilder {
 
     //--- Interface
 
-    public void setInfoModel(final InfoModel infoModel) {
+    public void setInfoModel(final InfoModel infoModel)
+    {
         this.infoModel = infoModel;
     }
 
     //--- Utilities
 
-    private void setStates(final Object source) {
+    private void setStates(final Object source)
+    {
         final boolean enabled = examModel != null && examModel.isFixed();
         fromInternet.setEnabled(enabled);
         fromFiles.setEnabled(enabled);
@@ -213,7 +245,8 @@ public class SetBuilder extends ActionCommandPanelBuilder {
         remove.setEnabled(selected);
         calculate.setEnabled(enabled && sortableTableModel.getRowCount() > 0);
 
-        if (source != table) {
+        if (source != table)
+        {
             table.setEnabled(enabled);
             final Map<MultiKey, Integer> selection = TableUtils.getSelection(table);
             table.setModel(DUMMY_SORTABLETABLEMODEL);
@@ -222,56 +255,70 @@ public class SetBuilder extends ActionCommandPanelBuilder {
         }
     }
 
-    private static class BooleanCellRenderer extends DefaultTableCellRenderer {
+    private static class BooleanCellRenderer extends DefaultTableCellRenderer
+    {
 
         private Icon trueIcon;
+
         private Icon falseIcon;
 
-        public BooleanCellRenderer(final Icon trueIcon, final Icon falseIcon) {
+        public BooleanCellRenderer(final Icon trueIcon, final Icon falseIcon)
+        {
             this.trueIcon = trueIcon;
             this.falseIcon = falseIcon;
         }
 
-        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
+        {
             final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             final Boolean bool = (Boolean) value;
             label.setText("");
-            if (bool.booleanValue()) {
+            if (bool.booleanValue())
+            {
                 label.setIcon(trueIcon);
             }
-            else {
+            else
+            {
                 label.setIcon(falseIcon);
             }
             return label;
         }
     }
 
-    public static class SubmitTableModel extends AbstractTableModel {
+    public static class SubmitTableModel extends AbstractTableModel
+    {
 
         private Registration[] registrations;
+
         private String[] columnNames = {"Nachname", "Vorname", "Leginummer", "Veranstaltung", "Von", "Bis", "Prüfungsliste"};
 
-        public SubmitTableModel(final Registration[] registrations) {
+        public SubmitTableModel(final Registration[] registrations)
+        {
             this.setRegistrations(registrations);
         }
 
-        public String getColumnName(final int column) {
+        public String getColumnName(final int column)
+        {
             return columnNames[column];
         }
 
-        public int getColumnCount() {
+        public int getColumnCount()
+        {
             return 7;
         }
 
-        public int getRowCount() {
+        public int getRowCount()
+        {
             return getRegistrations().length;
         }
 
-        public Object getValueAt(final int rowIndex, final int columnIndex) {
+        public Object getValueAt(final int rowIndex, final int columnIndex)
+        {
             final Registration registration = getRegistrations()[rowIndex];
             final PlantList plantlist = registration.getPlantList();
             final IAnmeldedaten anmeldedaten = registration.getAnmeldedaten();
-            switch (columnIndex) {
+            switch (columnIndex)
+            {
                 case 0:
                     return anmeldedaten.getNachname();
                 case 1:
@@ -291,8 +338,10 @@ public class SetBuilder extends ActionCommandPanelBuilder {
             }
         }
 
-        public Class getColumnClass(final int columnIndex) {
-            switch (columnIndex) {
+        public Class getColumnClass(final int columnIndex)
+        {
+            switch (columnIndex)
+            {
                 case 0:
                 case 1:
                 case 2:
@@ -308,39 +357,47 @@ public class SetBuilder extends ActionCommandPanelBuilder {
             }
         }
 
-        public void remove(final Registration registration) {
+        public void remove(final Registration registration)
+        {
             final int position = ArrayUtils.indexOf(registrations, registration);
             setRegistrations((Registration[]) ArrayUtils.remove(registrations, registration, new Registration[0]));
             fireTableRowsDeleted(position, position);
         }
 
-        public void add(final Registration registration) {
+        public void add(final Registration registration)
+        {
             setRegistrations((Registration[]) ArrayUtils.add(registrations, registration));
             final int index = registrations.length - 1;
             fireTableRowsInserted(index, index);
         }
 
-        public Registration[] getRegistrations() {
+        public Registration[] getRegistrations()
+        {
             return registrations;
         }
 
-        private void setRegistrations(final Registration[] registrations) {
+        private void setRegistrations(final Registration[] registrations)
+        {
             this.registrations = registrations;
             fireTableDataChanged();
         }
     }
 
-    public static class ComboRenderer extends DefaultListCellRenderer {
+    public static class ComboRenderer extends DefaultListCellRenderer
+    {
 
         private static final Color COLOR_DISABLED = UIManager.getColor("Label.disabledForeground");
 
-        public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+        public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+        {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             final ExamModel model = (ExamModel) value;
-            if (model != null && model.isFixed()) {
+            if (model != null && model.isFixed())
+            {
                 setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
             }
-            else {
+            else
+            {
                 setBackground(list.getBackground());
                 setForeground(list.getForeground());
                 setText(model == null ? "" : getText() + " (nicht fixiert)");

@@ -21,19 +21,22 @@ import java.util.Comparator;
 
 /**
  * TODO: document
-*
-* @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
-* @version $Revision: 1.1 $ $Date: 2006/11/16 13:25:24 $
-*/
-public class TaxonomicComparator implements Comparator<String> {
+ *
+ * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
+ * @version $Revision: 1.1 $ $Date: 2006/11/16 13:25:24 $
+ */
+public class TaxonomicComparator implements Comparator<String>
+{
 
     private TaxonTree taxa;
 
-    public TaxonomicComparator(final TaxonTree taxa) {
+    public TaxonomicComparator(final TaxonTree taxa)
+    {
         this.taxa = taxa;
     }
 
-    public int compare(final String o1, final String o2) {
+    public int compare(final String o1, final String o2)
+    {
         final SimpleTaxon t1 = taxa.findTaxonByName(o1);
         final SimpleTaxon t2 = taxa.findTaxonByName(o2);
         final int r1 = t1.getRank();

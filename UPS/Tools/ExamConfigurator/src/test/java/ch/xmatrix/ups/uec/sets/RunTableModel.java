@@ -16,20 +16,20 @@
  */
 package ch.xmatrix.ups.uec.sets;
 
-import ch.jfactory.lang.ArrayUtils;
-import ch.jfactory.component.table.TableUtils;
 import ch.jfactory.component.table.SortableTableModel;
+import ch.jfactory.component.table.TableUtils;
+import ch.jfactory.lang.ArrayUtils;
 import ch.xmatrix.ups.domain.PlantList;
 import ch.xmatrix.ups.model.Registration;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.storage.beans.Anmeldedaten;
-import java.util.Calendar;
 import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -38,9 +38,11 @@ import javax.swing.table.AbstractTableModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/23 22:19:16 $
  */
-public class RunTableModel {
+public class RunTableModel
+{
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         final JFrame f = new JFrame();
         final JTable t = new JTable();
         t.setDefaultRenderer(Calendar.class, new TableUtils.CalendarCellRenderer("HH:mm dd.MM.yyyy"));
@@ -49,8 +51,10 @@ public class RunTableModel {
         t.setModel(outer);
         f.add(t, BorderLayout.CENTER);
         final JButton b = new JButton("Add");
-        b.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        b.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final Anmeldedaten anmeldedaten = new Anmeldedaten();
                 anmeldedaten.setNachname("Frey");
                 anmeldedaten.setVorname("Daniel");
@@ -64,32 +68,40 @@ public class RunTableModel {
         f.setVisible(true);
     }
 
-    public static class TableModel extends AbstractTableModel {
+    public static class TableModel extends AbstractTableModel
+    {
 
         private Registration[] registrations;
+
         private String[] columnNames = {"Nachname", "Vorname", "Leginummer", "Veranstaltung", "Von", "Bis", "Prüfungsliste"};
 
-        public TableModel(final Registration[] registrations) {
+        public TableModel(final Registration[] registrations)
+        {
             this.setRegistrations(registrations);
         }
 
-        public String getColumnName(final int column) {
+        public String getColumnName(final int column)
+        {
             return columnNames[column];
         }
 
-        public int getColumnCount() {
+        public int getColumnCount()
+        {
             return 7;
         }
 
-        public int getRowCount() {
+        public int getRowCount()
+        {
             return getRegistrations().length;
         }
 
-        public Object getValueAt(final int rowIndex, final int columnIndex) {
+        public Object getValueAt(final int rowIndex, final int columnIndex)
+        {
             final Registration registration = getRegistrations()[rowIndex];
             final PlantList plantlist = registration.getPlantList();
             final IAnmeldedaten anmeldedaten = registration.getAnmeldedaten();
-            switch (columnIndex) {
+            switch (columnIndex)
+            {
                 case 0:
                     return anmeldedaten.getNachname();
                 case 1:
@@ -109,8 +121,10 @@ public class RunTableModel {
             }
         }
 
-        public Class getColumnClass(final int columnIndex) {
-            switch (columnIndex) {
+        public Class getColumnClass(final int columnIndex)
+        {
+            switch (columnIndex)
+            {
                 case 0:
                 case 1:
                 case 2:
@@ -126,23 +140,27 @@ public class RunTableModel {
             }
         }
 
-        public void remove(final Registration registration) {
+        public void remove(final Registration registration)
+        {
             setRegistrations((Registration[]) ArrayUtils.remove(registrations, registration, new Registration[0]));
             final int index = registrations.length;
             fireTableRowsDeleted(index, index);
         }
 
-        public void add(final Registration registration) {
+        public void add(final Registration registration)
+        {
             setRegistrations((Registration[]) ArrayUtils.add(registrations, registration));
             final int index = registrations.length - 1;
             fireTableRowsInserted(index, index);
         }
 
-        public Registration[] getRegistrations() {
+        public Registration[] getRegistrations()
+        {
             return registrations;
         }
 
-        private void setRegistrations(final Registration[] registrations) {
+        private void setRegistrations(final Registration[] registrations)
+        {
             this.registrations = registrations;
             fireTableDataChanged();
         }

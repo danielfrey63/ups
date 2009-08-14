@@ -32,48 +32,60 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class FromFiles extends LoadFilesystem {
+public class FromFiles extends LoadFilesystem
+{
 
     private static final Logger LOG = Logger.getLogger(FromFiles.class);
 
-    public FromFiles(final CommandManager commandManager, final SetBuilder.SubmitTableModel model) {
+    public FromFiles(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    {
         super(commandManager, Commands.COMMANDID_LOADFILES, model);
         getChooser();
     }
 
-    protected OpenChooser getChooser() {
+    protected OpenChooser getChooser()
+    {
         final Chooser chooser = new Chooser();
         chooser.getChooser().setMultiSelectionEnabled(true);
         return chooser;
     }
 
-    private static class Filter extends FileFilter {
+    private static class Filter extends FileFilter
+    {
 
-        public boolean accept(final File f) {
+        public boolean accept(final File f)
+        {
             return f.isDirectory() || f.getName().endsWith(EXTENTION);
         }
 
-        public String getDescription() {
+        public String getDescription()
+        {
             return "UPS Prüfungsliste (" + EXTENTION + ")";
         }
     }
 
-    private class Chooser extends OpenChooser {
+    private class Chooser extends OpenChooser
+    {
 
-        public Chooser() {
+        public Chooser()
+        {
             super(new Filter(), "openchooser", System.getProperty("user.dir"));
         }
 
-        protected void load(final File[] files) {
+        protected void load(final File[] files)
+        {
             File file = null;
-            try {
-                for (int i = 0; i < files.length; i++) {
+            try
+            {
+                for (int i = 0; i < files.length; i++)
+                {
                     file = files[i];
                     loadAnonymousFile(file);
                 }
                 writeBuffer();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 LOG.error("error during processing of file" + (file != null ? " \"" + file + "\"" : "s"), e);
                 Dialogs.showWarnMessage(null, "Warnung", "" +
                         "Während der Verarbeitung der Dateien ist ein Fehler\n" +
@@ -83,15 +95,19 @@ public class FromFiles extends LoadFilesystem {
         }
     }
 
-    public static void main(final String[] args) throws InvocationTargetException, InterruptedException {
+    public static void main(final String[] args) throws InvocationTargetException, InterruptedException
+    {
         System.setProperty("jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings");
         System.setProperty("log4j.configuration", "log4j.properties");
         final FromFiles ff = new FromFiles(new CommandManager(), null);
-        SwingUtilities.invokeAndWait(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeAndWait(new Runnable()
+        {
+            public void run()
+            {
                 ff.handleExecute();
                 final File[] files = ff.getChooser().getSelectedFiles();
-                for (int i = 0; i < files.length; i++) {
+                for (int i = 0; i < files.length; i++)
+                {
                     final File file = files[i];
                     System.out.println(file);
                 }

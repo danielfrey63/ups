@@ -33,23 +33,35 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:19 $
  */
-public class SessionListRenderer implements ListCellRenderer {
+public class SessionListRenderer implements ListCellRenderer
+{
 
     private static final Logger LOG = Logger.getLogger(SessionListRenderer.class);
+
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
     private JPanel panel;
+
     private JLabel exam;
+
     private JLabel session;
+
     private JLabel due;
+
     private JLabel dueInfo;
+
     private JLabel constraints;
+
     private JLabel constraintsInfo;
+
     private JLabel taxa;
+
     private JLabel taxaInfo;
 
-    public SessionListRenderer() {
-        try {
+    public SessionListRenderer()
+    {
+        try
+        {
             final FormCreator creator = new FormCreator(FormLoader.load("ch/xmatrix/ups/ust/edit/ExamInfoPanel.jfd"));
             creator.createAll();
             panel = creator.getPanel("mainPanel");
@@ -62,13 +74,15 @@ public class SessionListRenderer implements ListCellRenderer {
             taxa = creator.getLabel("labelTaxa");
             taxaInfo = creator.getLabel("labelTaxaInfo");
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("error while building form", e);
         }
 
     }
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+    {
 
         final SessionModel sessionModel = (SessionModel) value;
         session.setText(sessionModel.getName());

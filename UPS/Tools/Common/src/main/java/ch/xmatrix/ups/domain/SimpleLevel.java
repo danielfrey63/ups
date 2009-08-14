@@ -17,40 +17,51 @@ package ch.xmatrix.ups.domain;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/08/04 15:50:01 $
  */
-public class SimpleLevel {
+public class SimpleLevel
+{
 
     public static final SimpleLevel DUMMY_LEVEL = new SimpleLevel("DUMMY LEVEL", null, 0);
 
     private String name;
+
     private int rank;
+
     private SimpleLevel childLevel;
+
     private SimpleLevel parentLevel;
 
-    public SimpleLevel(final String name, final SimpleLevel parent, final int rank) {
+    public SimpleLevel(final String name, final SimpleLevel parent, final int rank)
+    {
         this.name = name;
         this.parentLevel = parent;
-        if (parent != null) {
+        if (parent != null)
+        {
             parent.childLevel = this;
         }
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public SimpleLevel getChildLevel() {
+    public SimpleLevel getChildLevel()
+    {
         return childLevel;
     }
 
-    public SimpleLevel getParentLevel() {
+    public SimpleLevel getParentLevel()
+    {
         return parentLevel;
     }
 
-    public int getRank() {
+    public int getRank()
+    {
         return rank;
     }
 
-    public boolean isLower(final SimpleLevel level) {
+    public boolean isLower(final SimpleLevel level)
+    {
         // root has null level
         return level == null || getRank() > level.getRank();
     }

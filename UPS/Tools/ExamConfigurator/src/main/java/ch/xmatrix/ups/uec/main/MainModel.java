@@ -22,43 +22,59 @@ import ch.xmatrix.ups.controller.Loader;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.CoursePersister;
 
-
 /**
  * TODO: document
  *
  * @author Daniel Frey
  * @version $Revision: 1.8 $ $Date: 2008/01/23 22:19:08 $
  */
-public class MainModel extends AbstractMainModel {
+public class MainModel extends AbstractMainModel
+{
 
     public static final String CARDS_UST = "ustTasks";
+
     public static final String CARDS_EXAM = "examTasks";
+
     public static final String MODELID_CONSTRAINTS = "constraints";
+
     public static final String MODELID_COURSEINFO = "courseInfo";
+
     public static final String MODELID_SESSION = "examInfo";
+
     public static final String MODELID_PREFS = "prefs";
+
     public static final String MODELID_EXAMS = "exams";
+
     public static final String MODELID_GROUPS = "groups";
+
     public static final String MODELID_LEVELS = "levels";
+
     public static final String MODELID_SPECIMENS = "specimens";
+
     public static final MainModel DEFAULT = new MainModel();
 
     // Submodels
 
-    public MainModel() {
+    public MainModel()
+    {
         // Load models that are not loaded by their corresponding editor
         final SimpleModelList model = Loader.loadModel("/data/courses.xml", "ups/uec", CoursePersister.getConverter());
         registerModels(MODELID_COURSEINFO, model);
     }
 
-    public static TaxonBased findModel(final String uid) {
-        for (int i = 0; i < MODELS.size(); i++) {
+    public static TaxonBased findModel(final String uid)
+    {
+        for (int i = 0; i < MODELS.size(); i++)
+        {
             final SimpleModelList list = MODELS.get(i);
-            for (int j = 0; j < list.getSize(); j++) {
+            for (int j = 0; j < list.getSize(); j++)
+            {
                 final Object modelObject = list.getElementAt(j);
-                if (modelObject instanceof TaxonBased) {
+                if (modelObject instanceof TaxonBased)
+                {
                     final TaxonBased model = (TaxonBased) modelObject;
-                    if (model.getUid().equals(uid)) {
+                    if (model.getUid().equals(uid))
+                    {
                         return model;
                     }
                 }

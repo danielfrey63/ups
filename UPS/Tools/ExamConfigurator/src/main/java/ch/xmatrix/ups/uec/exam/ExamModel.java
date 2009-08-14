@@ -24,16 +24,23 @@ import ch.xmatrix.ups.domain.AbstractTaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ExamModel extends AbstractTaxonBased {
+public class ExamModel extends AbstractTaxonBased
+{
 
     private String prefsUid;
+
     private String levelsUid;
+
     private String groupsUid;
+
     private String specimensUid;
+
     private String constraintsUid;
+
     private String submitUid;
 
-    public ExamModel(final ExamModel original) {
+    public ExamModel(final ExamModel original)
+    {
         prefsUid = original.prefsUid;
         levelsUid = original.levelsUid;
         groupsUid = original.groupsUid;
@@ -42,55 +49,68 @@ public class ExamModel extends AbstractTaxonBased {
         submitUid = original.submitUid;
     }
 
-    public ExamModel() {
+    public ExamModel()
+    {
         super();
     }
 
-    public String getPrefsUid() {
+    public String getPrefsUid()
+    {
         return prefsUid;
     }
 
-    public void setPrefsUid(final String prefsUid) {
+    public void setPrefsUid(final String prefsUid)
+    {
         this.prefsUid = prefsUid;
     }
 
-    public String getLevelsUid() {
+    public String getLevelsUid()
+    {
         return levelsUid;
     }
 
-    public void setLevelsUid(final String levelsUid) {
+    public void setLevelsUid(final String levelsUid)
+    {
         this.levelsUid = levelsUid;
     }
 
-    public String getGroupsUid() {
+    public String getGroupsUid()
+    {
         return groupsUid;
     }
 
-    public void setGroupsUid(final String groupsUid) {
+    public void setGroupsUid(final String groupsUid)
+    {
         this.groupsUid = groupsUid;
     }
 
-    public String getSpecimensUid() {
+    public String getSpecimensUid()
+    {
         return specimensUid;
     }
 
-    public void setSpecimensUid(final String specimensUid) {
+    public void setSpecimensUid(final String specimensUid)
+    {
         this.specimensUid = specimensUid;
     }
 
-    public String getConstraintsUid() {
+    public String getConstraintsUid()
+    {
         return constraintsUid;
     }
 
-    public void setConstraintsUid(final String constraintsUid) {
+    public void setConstraintsUid(final String constraintsUid)
+    {
         this.constraintsUid = constraintsUid;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return getName();
     }
 
-    public String toDebugString() {
+    public String toDebugString()
+    {
         return getName();
     }
 
@@ -101,8 +121,10 @@ public class ExamModel extends AbstractTaxonBased {
      * @param index the uid index
      * @return the uid
      */
-    public String get(final int index) {
-        switch (index) {
+    public String get(final int index)
+    {
+        switch (index)
+        {
             case 0:
                 return prefsUid;
             case 1:
@@ -118,8 +140,10 @@ public class ExamModel extends AbstractTaxonBased {
         }
     }
 
-    public void setUid(final int which, final String uid) {
-        switch (which) {
+    public void setUid(final int which, final String uid)
+    {
+        switch (which)
+        {
             case 0:
                 setPrefsUid(uid);
                 break;

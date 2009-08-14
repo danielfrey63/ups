@@ -32,92 +32,108 @@ import org.uispec4j.assertion.UISpecAssert;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/04/25 11:07:45 $
  */
-public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
+public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
+{
 
-    public void test000Setup() {
+    public void test000Setup()
+    {
         BUILDER = new ConstraintsBuilder();
         PANEL = new Panel(BUILDER.getPanel());
         super.test000Setup();
     }
 
-    public void test010InitialStates() {
+    public void test010InitialStates()
+    {
         super.test010InitialStates();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test011SelectFirst() {
+    public void test011SelectFirst()
+    {
         super.test011SelectFirst();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
         checkValues(false);
     }
 
-    public void test012AddButton() {
+    public void test012AddButton()
+    {
         super.test012AddButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test013SaveButton() {
+    public void test013SaveButton()
+    {
         super.test013SaveButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test014TaxtreeCombo() {
+    public void test014TaxtreeCombo()
+    {
         super.test014TaxtreeCombo();
         checkButtons(true, false, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test015SaveButton() {
+    public void test015SaveButton()
+    {
         super.test015SaveButton();
         checkButtons(true, false, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test016Rename() {
+    public void test016Rename()
+    {
         super.test016Rename();
         checkButtons(true, false, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test017SaveButton() {
+    public void test017SaveButton()
+    {
         test015SaveButton();
     }
 
-    public void test018FixButton() {
+    public void test018FixButton()
+    {
         super.test018FixButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test019SaveButton() {
+    public void test019SaveButton()
+    {
         super.test019SaveButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test020DeleteButton() {
+    public void test020DeleteButton()
+    {
         super.test020DeleteButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test021SaveButton() {
+    public void test021SaveButton()
+    {
         super.test021SaveButton();
         checkButtons(false, false, false, false);
         checkComponents(false, false, false, true);
     }
 
-    public void test100Init() {
+    public void test100Init()
+    {
         super.test012AddButton();
         super.test014TaxtreeCombo();
         super.test015SaveButton();
     }
 
-    public void test120NewConstraintButton() {
+    public void test120NewConstraintButton()
+    {
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_NEWCONSTRAINT).click();
         final Calendar date2 = new GregorianCalendar();
@@ -127,12 +143,14 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, false, true);
     }
 
-    public void test121NewConstraintSelected() {
+    public void test121NewConstraintSelected()
+    {
         final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
         UISpecAssert.assertFalse("constraint is not selected", constraints.selectionIsEmpty());
     }
 
-    public void test122DeselectConstraint() {
+    public void test122DeselectConstraint()
+    {
         final String date = getModified();
         final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
         constraints.clearSelection();
@@ -143,7 +161,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         UISpecAssert.assertTrue("constraints list should have no selection", constraints.selectionIsEmpty());
     }
 
-    public void test123SelectConstraint() {
+    public void test123SelectConstraint()
+    {
         final String date = getModified();
         final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
         constraints.selectIndex(0);
@@ -154,13 +173,15 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         UISpecAssert.assertFalse("constraints list should have selection", constraints.selectionIsEmpty());
     }
 
-    public void test124Save() {
+    public void test124Save()
+    {
         super.test015SaveButton();
         checkButtons(true, true, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test125SelectNode() {
+    public void test125SelectNode()
+    {
         final String date = getModified();
         PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree().setSelectionRow(1);
         checkModificationSame(date);
@@ -169,7 +190,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, false, true);
     }
 
-    public void test126AddTaxon() {
+    public void test126AddTaxon()
+    {
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_ADDTAXA).click();
         final Calendar date2 = new GregorianCalendar();
@@ -180,13 +202,15 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         assertEquals("taxa list should have 1 entrie,", 1, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
     }
 
-    public void test129Save() {
+    public void test129Save()
+    {
         super.test015SaveButton();
         checkButtons(true, true, false, false);
         checkComponents(true, false, true, true);
     }
 
-    public void test130RemoveConstraintButton() {
+    public void test130RemoveConstraintButton()
+    {
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_DELETECONSTRAINT).click();
         final Calendar date2 = new GregorianCalendar();
@@ -196,13 +220,15 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, false, true);
     }
 
-    public void test131Save() {
+    public void test131Save()
+    {
         super.test015SaveButton();
         checkButtons(true, false, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test132AddSameTaxon() {
+    public void test132AddSameTaxon()
+    {
         test120NewConstraintButton();
         test124Save();
         test125SelectNode();
@@ -213,7 +239,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, true, true);
     }
 
-    public void test133AddAnotherTaxon() {
+    public void test133AddAnotherTaxon()
+    {
         PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree().setSelectionRow(2);
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_ADDTAXA).click();
@@ -225,13 +252,15 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, true, true, true);
     }
 
-    public void test134Save() {
+    public void test134Save()
+    {
         super.test015SaveButton();
         checkButtons(true, true, false, false);
         checkComponents(true, true, true, true);
     }
 
-    public void test134SelectTaxon() {
+    public void test134SelectTaxon()
+    {
         final Calendar date = Calendar.getInstance();
         PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).selectIndex(0);
         checkModificationBefore(date);
@@ -240,7 +269,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, true, true, true);
     }
 
-    public void test135RemoveTaxon() {
+    public void test135RemoveTaxon()
+    {
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_REMOVETAXA).click();
         final Calendar date2 = new GregorianCalendar();
@@ -251,7 +281,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, true, true);
     }
 
-    public void test136RemoveTaxon() {
+    public void test136RemoveTaxon()
+    {
         final Calendar date1 = new GregorianCalendar();
         getButton(Commands.COMMANDID_REMOVETAXA).click();
         final Calendar date2 = new GregorianCalendar();
@@ -262,15 +293,18 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         checkComponents(true, false, false, true);
     }
 
-    public void test137Save() {
+    public void test137Save()
+    {
         super.test015SaveButton();
         checkButtons(true, true, false, false);
         checkComponents(true, false, false, true);
     }
 
-    public void test138AddSpecies() {
+    public void test138AddSpecies()
+    {
         final JTree tree = PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             tree.expandRow(i);
         }
         tree.setSelectionRow(4);
@@ -281,14 +315,16 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         assertEquals("taxa list should have 1 entrie,", 1, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
     }
 
-    public void test199RemoveAll() {
+    public void test199RemoveAll()
+    {
         super.test020DeleteButton();
     }
 
     //--- Utilities
 
     private static void checkComponents(final boolean fieldDescriptionEnabled, final boolean fieldNameEnabled,
-                                 final boolean spinnerCountEnabled, final boolean treeTaxaEnabled) {
+                                        final boolean spinnerCountEnabled, final boolean treeTaxaEnabled)
+    {
         checkEnabled(fieldDescriptionEnabled, PANEL.getTextBox(ConstraintsBuilder.COMPONENT_FIELD_DESCRIPTION), "description field");
         checkEnabled(fieldNameEnabled, PANEL.getTextBox(ConstraintsBuilder.COMPONENT_FIELD_NAME), "name field");
         checkEnabled(spinnerCountEnabled, getSpinner(ConstraintsBuilder.COMPONENT_SPINNER_COUNT), "counter");
@@ -296,11 +332,13 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
     }
 
     private static void checkButtons(final boolean newEnabled, final boolean deleteEnabled,
-                              final boolean addEnabled, final boolean removeEnabled) {
+                                     final boolean addEnabled, final boolean removeEnabled)
+    {
         final String[] buttons = {Commands.COMMANDID_NEWCONSTRAINT, Commands.COMMANDID_DELETECONSTRAINT,
                 Commands.COMMANDID_ADDTAXA, Commands.COMMANDID_REMOVETAXA};
         final boolean[] enableds = new boolean[]{newEnabled, deleteEnabled, addEnabled, removeEnabled};
-        for (int i = 0; i < buttons.length; i++) {
+        for (int i = 0; i < buttons.length; i++)
+        {
             final String name = buttons[i];
             final boolean enabled = enableds[i];
             final Button button = getButton(name);
@@ -310,7 +348,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest {
         }
     }
 
-    private static void checkValues(final boolean constraintsListEmpty) {
+    private static void checkValues(final boolean constraintsListEmpty)
+    {
         UISpecAssert.assertEquals(constraintsListEmpty, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS).isEmpty());
     }
 }

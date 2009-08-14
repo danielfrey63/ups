@@ -13,8 +13,8 @@ package ch.xmatrix.ups.ust.main;
 
 import ch.jfactory.math.RandomGUID;
 import ch.xmatrix.ups.model.TaxonModels;
-import ch.xmatrix.ups.model.TaxonomicComparator;
 import ch.xmatrix.ups.model.TaxonTree;
+import ch.xmatrix.ups.model.TaxonomicComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,28 +24,38 @@ import java.util.Collections;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/11/16 13:25:24 $
  */
-public class UserModel {
+public class UserModel
+{
 
     private String uid;
+
     private ArrayList<String> taxa;
+
     private String examInfoUid;
+
     private String constraintsUid;
+
     private String taxaUid;
 
-    public UserModel() {
+    public UserModel()
+    {
         uid = new RandomGUID().toString();
     }
 
-    public String getUid() {
+    public String getUid()
+    {
         return uid;
     }
 
-    public void setUid(final String uid) {
+    public void setUid(final String uid)
+    {
         this.uid = uid;
     }
 
-    public ArrayList<String> getTaxa() {
-        if (taxa == null) {
+    public ArrayList<String> getTaxa()
+    {
+        if (taxa == null)
+        {
             taxa = new ArrayList<String>();
         }
         final TaxonTree taxonTree = TaxonModels.find(taxaUid);
@@ -53,31 +63,38 @@ public class UserModel {
         return taxa;
     }
 
-    public void setTaxa(final ArrayList<String> taxa) {
+    public void setTaxa(final ArrayList<String> taxa)
+    {
         this.taxa = taxa;
     }
 
-    public String getConstraintsUid() {
+    public String getConstraintsUid()
+    {
         return constraintsUid;
     }
 
-    public void setConstraintsUid(final String constraintsUid) {
+    public void setConstraintsUid(final String constraintsUid)
+    {
         this.constraintsUid = constraintsUid;
     }
 
-    public String getExamInfoUid() {
+    public String getExamInfoUid()
+    {
         return examInfoUid;
     }
 
-    public void setExamInfoUid(final String examInfoUid) {
+    public void setExamInfoUid(final String examInfoUid)
+    {
         this.examInfoUid = examInfoUid;
     }
 
-    public String getTaxaUid() {
+    public String getTaxaUid()
+    {
         return taxaUid;
     }
 
-    public void setTaxaUid(final String taxaUid) {
+    public void setTaxaUid(final String taxaUid)
+    {
         this.taxaUid = taxaUid;
     }
 }

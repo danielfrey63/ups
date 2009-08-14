@@ -26,18 +26,24 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/07/27 16:38:57 $
  */
-public class HideSingleGenus implements Filter {
+public class HideSingleGenus implements Filter
+{
 
     private static final Logger LOGGER = Logger.getLogger(HideSingleGenus.class);
+
     private static final boolean DEBUG = LOGGER.isDebugEnabled();
 
-    public boolean matches(final Object obj) {
+    public boolean matches(final Object obj)
+    {
         final boolean isShown;
         final SimpleTaxon taxon = (SimpleTaxon) obj;
         final boolean isGenus = SimpleTaxon.isGenus(taxon);
         final boolean hasOneChild = taxon.getChildTaxa() != null && taxon.getChildTaxa().size() == 1;
         isShown = !(isGenus && hasOneChild);
-        if (DEBUG) LOGGER.debug("HideSingleGenus " + (isShown ? "+ " : "- ") + taxon);
+        if (DEBUG)
+        {
+            LOGGER.debug("HideSingleGenus " + (isShown ? "+ " : "- ") + taxon);
+        }
         return isShown;
     }
 }

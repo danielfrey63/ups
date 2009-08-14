@@ -22,12 +22,18 @@ package ch.xmatrix.ups.uec.constraints.commands;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/09/28 14:01:03 $
  */
-public class Commands {
+public class Commands
+{
 
     public static final String COMMANDID_DELETECONSTRAINT = "delete";
+
     public static final String COMMANDID_NEWCONSTRAINT = "new";
+
     public static final String COMMANDID_ADDTAXA = "add";
+
     public static final String COMMANDID_REMOVETAXA = "remove";
+
     public static final String COMMANDID_UPLOAD = "upload";
+
     public static final String GROUPID_TOOLBAR = "toolbar";
 }

@@ -5,7 +5,8 @@
         <uid>C82CC690-912E-AB54-157B-39735C3208D5</uid>
         <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
         <modified id="4">2003-05-25 19:04:43.696 CEST</modified>
-        <fixed>true</fixed> id="5"
+        <fixed>true</fixed>
+        id="5"
         <groupModel id="6">
             <name>Farne/Gymnos</name>
             <minimum>1</minimum>
@@ -1991,7 +1992,8 @@
         <uid>A6C4C808-0DF7-C7E1-6490-D30ED32A09AE</uid>
         <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
         <modified id="104">2005-10-05 15:19:31.116 CEST</modified>
-        <fixed>true</fixed> id="105"
+        <fixed>true</fixed>
+        id="105"
         <groupModel id="106">
             <name>Farne/Gymnos</name>
             <minimum>1</minimum>

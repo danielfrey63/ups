@@ -11,10 +11,9 @@
  */
 package ch.xmatrix.ups.ust.main;
 
+import ch.jfactory.binding.InfoModel;
 import com.jgoodies.uif.AbstractFrame;
 import com.jgoodies.uif.application.Application;
-import ch.jfactory.binding.InfoModel;
-import ch.xmatrix.ups.ust.main.MainModel;
 import javax.swing.JComponent;
 
 /**
@@ -23,9 +22,11 @@ import javax.swing.JComponent;
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2007/05/16 17:00:16 $
  */
-public class MainFrame extends AbstractFrame {
+public class MainFrame extends AbstractFrame
+{
 
     private MainModel model;
+
     private InfoModel infoModel;
 
     /**
@@ -33,7 +34,8 @@ public class MainFrame extends AbstractFrame {
      *
      * @param mainModel the applications model
      */
-    public MainFrame(final MainModel mainModel, final InfoModel infoModel) {
+    public MainFrame(final MainModel mainModel, final InfoModel infoModel)
+    {
         super(Application.getDescription().getWindowTitle());
         this.model = mainModel;
         this.infoModel = infoModel;
@@ -45,17 +47,20 @@ public class MainFrame extends AbstractFrame {
      *
      * @return the content
      */
-    protected JComponent buildContentPane() {
+    protected JComponent buildContentPane()
+    {
         final MainBuilder builder = new MainBuilder(model, infoModel);
         return builder.getPanel();
     }
 
-    protected void configureCloseOperation() {
+    protected void configureCloseOperation()
+    {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(Application.getApplicationCloseOnWindowClosingHandler());
     }
 
-    public String getWindowID() {
+    public String getWindowID()
+    {
         return "UPSStudentToolMainFrame";
     }
 }

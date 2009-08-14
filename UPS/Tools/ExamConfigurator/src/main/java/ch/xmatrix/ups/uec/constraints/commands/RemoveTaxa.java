@@ -16,13 +16,12 @@
  */
 package ch.xmatrix.ups.uec.constraints.commands;
 
-import org.pietschy.command.ActionCommand;
-import org.pietschy.command.CommandManager;
+import ch.xmatrix.ups.domain.Constraint;
+import ch.xmatrix.ups.domain.Constraints;
 import com.jgoodies.binding.list.SelectionInList;
 import javax.swing.JList;
-import ch.xmatrix.ups.domain.Constraints;
-import ch.xmatrix.ups.domain.Constraint;
-import ch.xmatrix.ups.uec.constraints.commands.Commands;
+import org.pietschy.command.ActionCommand;
+import org.pietschy.command.CommandManager;
 
 /**
  * TODO: document
@@ -30,28 +29,34 @@ import ch.xmatrix.ups.uec.constraints.commands.Commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class RemoveTaxa extends ActionCommand {
+public class RemoveTaxa extends ActionCommand
+{
 
     private SelectionInList constraintsModels;
+
     private JList selection;
 
-    public RemoveTaxa(final CommandManager manager, final SelectionInList constraintsModels) {
+    public RemoveTaxa(final CommandManager manager, final SelectionInList constraintsModels)
+    {
         super(manager, Commands.COMMANDID_REMOVETAXA);
         this.constraintsModels = constraintsModels;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final Constraints constraints = (Constraints) constraintsModels.getSelection();
         final Constraint constraint = constraints.getCurrent();
         final int[] indices = selection.getSelectedIndices();
-        for (int i = 0; i < indices.length; i++) {
+        for (int i = 0; i < indices.length; i++)
+        {
             final int index = indices[i];
             final String taxon = constraint.getTaxa().get(index);
             constraints.removeTaxon(taxon);
         }
     }
 
-    public void setList(final JList list) {
+    public void setList(final JList list)
+    {
         selection = list;
     }
 }

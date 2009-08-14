@@ -21,13 +21,13 @@ import ch.jfactory.component.tree.TreeExpandedRestorer;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.domain.TaxonBased;
-import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
-import ch.xmatrix.ups.uec.specimens.commands.Commands;
-import ch.xmatrix.ups.uec.specimens.commands.NewSpecimen;
-import ch.xmatrix.ups.uec.specimens.commands.DeleteSpecimen;
-import ch.xmatrix.ups.uec.main.MainModel;
 import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.model.SpecimensModel;
+import ch.xmatrix.ups.uec.main.MainModel;
+import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
+import ch.xmatrix.ups.uec.specimens.commands.Commands;
+import ch.xmatrix.ups.uec.specimens.commands.DeleteSpecimen;
+import ch.xmatrix.ups.uec.specimens.commands.NewSpecimen;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.Sizes;
@@ -43,9 +43,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -62,44 +62,67 @@ import org.pietschy.command.ActionCommandInterceptor;
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2008/01/23 22:19:08 $
  */
-public class SpecimensBuilder extends AbstractDetailsBuilder {
+public class SpecimensBuilder extends AbstractDetailsBuilder
+{
 
     private static final String RESOURCE_FORM = "/ch/xmatrix/ups/uec/specimens/SpecimensPanel.jfd";
+
     private static final String RESOURCE_MODEL = "/data/specimens.xml";
 
     private final SpecimensTreeRenderer renderer = new SpecimensTreeRenderer();
+
     private final TreeSelectionModel selectionModel = new DefaultTreeSelectionModel();
 
     private JTree tree;
+
     private JTextField id;
+
     private JSpinner count;
+
     private JSpinner known;
+
     private JSpinner unknown;
+
     private JCheckBox knownDisabled;
+
     private JCheckBox unknownDisabled;
+
     private XStream converter;
+
     private boolean enabledByMaster;
+
     private boolean isAdjusting;
+
     private TreeExpandedRestorer saver;
+
     private JPanel edit;
+
     private ActionCommand deleteCommand;
+
     private ActionCommand newCommand;
+
     private JCheckBox backup;
 
-    public SpecimensBuilder() {
+    public SpecimensBuilder()
+    {
         super(new SpecimensFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
     }
 
     //--- ActionCommandPanelBuilder overrides
 
-    protected void initComponentListeners() {
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(final TreeSelectionEvent e) {
-                if (!isAdjusting) {
+    protected void initComponentListeners()
+    {
+        tree.addTreeSelectionListener(new TreeSelectionListener()
+        {
+            public void valueChanged(final TreeSelectionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final TreePath path = e.getPath();
                     final SpecimensModel models = getSpecimenModels();
-                    if (path != null && models != null) {
+                    if (path != null && models != null)
+                    {
                         final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
                         final SpecimenModel model = models.find(taxon.getName());
                         models.setCurrent(model);
@@ -109,13 +132,17 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        id.getDocument().addDocumentListener(new SimpleDocumentListener() {
-            public void changedUpdate(final DocumentEvent e) {
-                if (!isAdjusting) {
+        id.getDocument().addDocumentListener(new SimpleDocumentListener()
+        {
+            public void changedUpdate(final DocumentEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
                     final String text = id.getText().trim();
-                    if (model != null && !"".equals(text) && !text.equals(model.getId())) {
+                    if (model != null && !"".equals(text) && !text.equals(model.getId()))
+                    {
                         model.setId(text);
                         setDirty();
                         setStates(id);
@@ -124,15 +151,20 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        count.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        count.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         final int c = ((Integer) count.getValue()).intValue();
                         model.setNumberOfSpecimens(c);
-                        if (c == 0) {
+                        if (c == 0)
+                        {
                             model.setDeactivatedIfKnown(true);
                             model.setDeactivatedIfUnknown(true);
                         }
@@ -143,12 +175,16 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        backup.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        backup.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null && backup.isSelected() != model.isBackup()) {
+                    if (model != null && backup.isSelected() != model.isBackup())
+                    {
                         setDirty();
                         model.setBackup(backup.isSelected());
                     }
@@ -156,12 +192,16 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        known.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        known.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         model.setWeightIfKnown(((Integer) known.getValue()).intValue());
                         setDirty();
                         setStates(known);
@@ -170,12 +210,16 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        unknown.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        unknown.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         model.setWeightIfUnknown(((Integer) unknown.getValue()).intValue());
                         setDirty();
                         setStates(unknown);
@@ -184,12 +228,16 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        knownDisabled.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                if (!isAdjusting) {
+        knownDisabled.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         model.setDeactivatedIfKnown(knownDisabled.isSelected());
                         setDirty();
                         setStates(knownDisabled);
@@ -198,12 +246,16 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        unknownDisabled.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                if (!isAdjusting) {
+        unknownDisabled.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final SpecimenModel model = getSpecimenModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         model.setDeactivatedIfUnknown(unknownDisabled.isSelected());
                         setDirty();
                         setStates(unknownDisabled);
@@ -212,12 +264,15 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        final ActionCommandInterceptor interceptor = new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        final ActionCommandInterceptor interceptor = new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 setDirty();
                 setStates(null);
             }
@@ -226,16 +281,19 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
         deleteCommand.addInterceptor(interceptor);
     }
 
-    private SpecimenModel getSpecimenModel() {
+    private SpecimenModel getSpecimenModel()
+    {
         final SpecimensModel models = getSpecimenModels();
         return models == null ? null : models.getCurrent();
     }
 
     //--- DetailsBulider implementations.
 
-    public void setModel(final TaxonBased taxonBased) {
+    public void setModel(final TaxonBased taxonBased)
+    {
         super.setModel(taxonBased);
-        if (!isAdjusting) {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             final SpecimensModel models = (SpecimensModel) taxonBased;
             renderer.setSpecimensModel(models);
@@ -244,8 +302,10 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
         }
     }
 
-    public void setEnabled(final boolean enabled) {
-        if (!isAdjusting) {
+    public void setEnabled(final boolean enabled)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             enabledByMaster = enabled;
             setStates(null);
@@ -255,7 +315,8 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
 
     //-- AbstractDetailsBuilder implementations.
 
-    protected void initComponents() {
+    protected void initComponents()
+    {
         newCommand = initCommand(new NewSpecimen(getCommandManager(), getModels(), selectionModel));
         deleteCommand = initCommand(new DeleteSpecimen(getCommandManager(), getModels()));
 
@@ -279,8 +340,10 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
         getCreator().getPanel("panelToolbar").add(bar, new CellConstraints().xy(3, 1));
     }
 
-    protected XStream getConverter() {
-        if (converter == null) {
+    protected XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.ID_REFERENCES);
             converter.alias("specimensModels", SimpleModelList.class);
@@ -291,46 +354,98 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
         return converter;
     }
 
-    protected String getInfoString() {
+    protected String getInfoString()
+    {
         return "Herbarbeleg-Editor";
     }
 
-    protected String getModelId() {
+    protected String getModelId()
+    {
         return MainModel.MODELID_SPECIMENS;
     }
 
     //--- Utilities
 
-    private void setStates(final Object caller) {
+    private void setStates(final Object caller)
+    {
         setValueStates(caller);
         setEnabledStates();
     }
 
-    private void setValueStates(final Object caller) {
+    private void setValueStates(final Object caller)
+    {
         edit.setVisible(enabledByMaster);
         final SpecimenModel model = getSpecimenModel();
-        if (model != null) {
-            if (caller != id) id.setText(model.getId());
-            if (caller != count) count.setValue(new Integer(model.getNumberOfSpecimens()));
-            if (caller != known) known.setValue(new Integer(model.getWeightIfKnown()));
-            if (caller != unknown) unknown.setValue(new Integer(model.getWeightIfUnknown()));
-            if (caller != knownDisabled) knownDisabled.setSelected(model.isDeactivatedIfKnown());
-            if (caller != unknownDisabled) unknownDisabled.setSelected(model.isDeactivatedIfUnknown());
-            if (caller != backup) backup.setSelected(model.isBackup());
+        if (model != null)
+        {
+            if (caller != id)
+            {
+                id.setText(model.getId());
+            }
+            if (caller != count)
+            {
+                count.setValue(new Integer(model.getNumberOfSpecimens()));
+            }
+            if (caller != known)
+            {
+                known.setValue(new Integer(model.getWeightIfKnown()));
+            }
+            if (caller != unknown)
+            {
+                unknown.setValue(new Integer(model.getWeightIfUnknown()));
+            }
+            if (caller != knownDisabled)
+            {
+                knownDisabled.setSelected(model.isDeactivatedIfKnown());
+            }
+            if (caller != unknownDisabled)
+            {
+                unknownDisabled.setSelected(model.isDeactivatedIfUnknown());
+            }
+            if (caller != backup)
+            {
+                backup.setSelected(model.isBackup());
+            }
         }
-        else {
-            if (caller != id) id.setText("");
-            if (caller != count) count.setValue(ZERO);
-            if (caller != known) known.setValue(ZERO);
-            if (caller != unknown) unknown.setValue(ZERO);
-            if (caller != knownDisabled) knownDisabled.setSelected(false);
-            if (caller != unknownDisabled) unknownDisabled.setSelected(false);
-            if (caller != backup) backup.setSelected(false);
+        else
+        {
+            if (caller != id)
+            {
+                id.setText("");
+            }
+            if (caller != count)
+            {
+                count.setValue(ZERO);
+            }
+            if (caller != known)
+            {
+                known.setValue(ZERO);
+            }
+            if (caller != unknown)
+            {
+                unknown.setValue(ZERO);
+            }
+            if (caller != knownDisabled)
+            {
+                knownDisabled.setSelected(false);
+            }
+            if (caller != unknownDisabled)
+            {
+                unknownDisabled.setSelected(false);
+            }
+            if (caller != backup)
+            {
+                backup.setSelected(false);
+            }
         }
-        if (caller != tree) updateTree();
+        if (caller != tree)
+        {
+            updateTree();
+        }
     }
 
-    private void setEnabledStates() {
+    private void setEnabledStates()
+    {
         final SpecimenModel model = getSpecimenModel();
         final boolean hasModel = model != null;
         final boolean modelThere = hasModel && enabledByMaster;
@@ -350,17 +465,23 @@ public class SpecimensBuilder extends AbstractDetailsBuilder {
         renderer.setEnabled(enabledByMaster);
     }
 
-    private SpecimensModel getSpecimenModels() {
+    private SpecimensModel getSpecimenModels()
+    {
         return (SpecimensModel) getModels().getSelection();
     }
 
-    private void updateTree() {
+    private void updateTree()
+    {
         saver.save();
         getTreeModel().reload();
-        if (getSpecimenModels() != null && getSpecimenModels().getTaxaUid() != null) saver.restore();
+        if (getSpecimenModels() != null && getSpecimenModels().getTaxaUid() != null)
+        {
+            saver.restore();
+        }
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
         UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
         System.setProperty("jfactory.resource.path", "/icon");

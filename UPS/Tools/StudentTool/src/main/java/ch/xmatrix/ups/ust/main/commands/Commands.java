@@ -16,14 +16,14 @@
  */
 package ch.xmatrix.ups.ust.main.commands;
 
+import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.dialog.ListDialog;
-import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.domain.Constraints;
-import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.domain.PersonData;
 import ch.xmatrix.ups.domain.PlantList;
+import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.ust.edit.SessionListRenderer;
 import ch.xmatrix.ups.ust.main.MainModel;
 import ch.xmatrix.ups.ust.main.UserModel;
@@ -44,31 +44,53 @@ import javax.swing.ListSelectionModel;
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2007/05/16 17:00:16 $
  */
-public class Commands {
+public class Commands
+{
 
     public static final String COMMANDID_NEW = "file.new";
+
     public static final String COMMANDID_NEWDEFAULT = "file.newdefault";
+
     public static final String COMMANDID_OPEN = "file.open";
+
     public static final String COMMANDID_SAVE = "file.save";
+
     public static final String COMMANDID_SAVEAS = "file.saveas";
+
     public static final String COMMANDID_CLOSE = "file.close";
+
     public static final String COMMANDID_EXPORTTEXT = "file.exporttext";
+
     public static final String COMMANDID_EXPORTTREE = "file.exporttree";
+
     public static final String COMMANDID_SUBMIT = "file.submit";
+
     public static final String COMMANDID_UPSHOME = "inet.upshome";
+
     public static final String COMMANDID_USTHOME = "inet.usthome";
+
     public static final String COMMANDID_USTEXAM = "inet.ustexam";
+
     public static final String COMMANDID_USTHELP = "inet.usthelp";
+
     public static final String COMMANDID_USTFAQ = "inet.ustfaq";
+
     public static final String COMMANDID_USTBUGS = "inet.ustbugs";
+
     public static final String COMMANDID_USTINFO = "inet.ustinfo";
+
     public static final String GROUPID_MENUBAR = "menubar";
+
     public static final String GROUPID_FILEMENU = "menu.file";
+
     public static final String GROUPID_HELPMENU = "menu.help";
+
     public static final String OLD_FILE_EXTENTION = ".ust";
+
     public static final String NEW_FILE_EXTENTION = ".xust";
 
-    public static XStream getConverterVersion1() {
+    public static XStream getConverterVersion1()
+    {
 
         final XStream converter;
         converter = new XStream(new DomDriver());
@@ -80,7 +102,8 @@ public class Commands {
         return converter;
     }
 
-    public static XStream getConverterVersion2() {
+    public static XStream getConverterVersion2()
+    {
 
         final XStream converter;
         converter = new XStream(new DomDriver());
@@ -94,7 +117,8 @@ public class Commands {
         return converter;
     }
 
-    public static XStream getConverter() {
+    public static XStream getConverter()
+    {
         return getConverterVersion2();
     }
 
@@ -105,14 +129,17 @@ public class Commands {
      * @return whether the choice was canceled
      * @throws PropertyVetoException if the user cancels quitting
      */
-    public static SessionModel runExamInfoChooser(final MainModel model) throws PropertyVetoException {
+    public static SessionModel runExamInfoChooser(final MainModel model) throws PropertyVetoException
+    {
         model.setClosing();
-        if (!model.modelValid()) {
+        if (!model.modelValid())
+        {
             return null;
         }
         final SelectionInList sessionModels = model.sessionModels;
         final int numberOfSessions = sessionModels.getSize();
-        if (numberOfSessions > 1) {
+        if (numberOfSessions > 1)
+        {
             final JFrame top = model.getMainFrame();
             final SimpleModelList holder = (SimpleModelList) sessionModels.getListHolder().getValue();
             final ListDialog dialog = new ListDialog(top, "chooseexam", SimpleModelList.toArray(holder));
@@ -121,19 +148,23 @@ public class Commands {
             dialog.setSize(new Dimension(400, 700));
             WindowUtils.centerOnComponent(dialog, top);
             dialog.setVisible(true);
-            if (!dialog.isAccepted()) {
+            if (!dialog.isAccepted())
+            {
                 return null;
             }
-            else {
+            else
+            {
                 return (SessionModel) dialog.getSelectedData()[0];
             }
         }
-        else {
+        else
+        {
             return (SessionModel) sessionModels.getElementAt(0);
         }
     }
 
-    public static void setNewUserModel(final MainModel model) {
+    public static void setNewUserModel(final MainModel model)
+    {
 
         final SessionModel sessionModel = (SessionModel) model.sessionModels.getSelection();
         final UserModel userModel = new UserModel();
@@ -150,10 +181,13 @@ public class Commands {
         model.setDirty(false);
     }
 
-    public static class Encoded {
+    public static class Encoded
+    {
 
         public List list;
+
         public String uid;
+
         public String exam;
     }
 }

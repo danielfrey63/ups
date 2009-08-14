@@ -16,11 +16,11 @@
  */
 package ch.xmatrix.ups.uec;
 
-import junit.framework.TestSuite;
-import junit.framework.Test;
 import ch.xmatrix.ups.uec.constraints.ConstraintsBuilderTest;
 import ch.xmatrix.ups.uec.groups.GroupsBuilderTest;
 import ch.xmatrix.ups.uec.prefs.PrefsBuilderTest;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * TODO: document
@@ -28,9 +28,11 @@ import ch.xmatrix.ups.uec.prefs.PrefsBuilderTest;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/21 11:02:52 $
  */
-public class AllTests extends TestSuite {
+public class AllTests extends TestSuite
+{
 
-    public static Test suite() {
+    public static Test suite()
+    {
         final TestSuite suite = new TestSuite("UEC Tests");
         suite.addTestSuite(PrefsBuilderTest.class);
         suite.addTestSuite(GroupsBuilderTest.class);

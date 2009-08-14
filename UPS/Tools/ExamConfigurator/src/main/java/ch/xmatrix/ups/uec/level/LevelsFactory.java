@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.uec.level;
 
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 import ch.xmatrix.ups.domain.TaxonBased;
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
  * TODO: document
@@ -25,14 +25,18 @@ import ch.xmatrix.ups.domain.TaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class LevelsFactory extends MasterDetailsFactory {
+public class LevelsFactory extends MasterDetailsFactory
+{
 
-    public TaxonBased createInstance() {
+    public TaxonBased createInstance()
+    {
         return new LevelsModel();
     }
 
-    public TaxonBased createCopy(final TaxonBased orig) {
-        if (!(orig instanceof LevelsModel)) {
+    public TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof LevelsModel))
+        {
             throw new IllegalArgumentException("copy only allowed for instances of " + LevelsModel.class);
         }
         return new LevelsModel((LevelsModel) orig);

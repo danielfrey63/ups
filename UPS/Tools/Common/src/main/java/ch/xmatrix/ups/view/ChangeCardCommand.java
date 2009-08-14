@@ -11,9 +11,9 @@
  */
 package ch.xmatrix.ups.view;
 
+import ch.jfactory.application.AbstractMainModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import ch.jfactory.application.AbstractMainModel;
 
 /**
  * Sets the models current card property to the card id passed during construction.
@@ -21,19 +21,23 @@ import ch.jfactory.application.AbstractMainModel;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public class ChangeCardCommand extends ActionCommand {
+public class ChangeCardCommand extends ActionCommand
+{
 
     private AbstractMainModel model;
+
     private String cardId;
 
     public ChangeCardCommand(final CommandManager commandManager, final AbstractMainModel model,
-                             final String commandId, final String cardId) {
+                             final String commandId, final String cardId)
+    {
         super(commandManager, commandId);
         this.model = model;
         this.cardId = cardId;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         model.setCurrentCard(cardId);
     }
 }

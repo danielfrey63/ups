@@ -16,12 +16,11 @@
  */
 package ch.xmatrix.ups.uec.master.commands;
 
+import ch.xmatrix.ups.domain.TaxonBased;
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
+import com.jgoodies.binding.list.SelectionInList;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.list.SelectionInList;
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
-import ch.xmatrix.ups.uec.master.commands.Commands;
-import ch.xmatrix.ups.domain.TaxonBased;
 
 /**
  * TODO: document
@@ -29,32 +28,40 @@ import ch.xmatrix.ups.domain.TaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class DeleteCommand extends ActionCommand {
+public class DeleteCommand extends ActionCommand
+{
 
     private SelectionInList models;
+
     private MasterDetailsFactory factory;
 
     public DeleteCommand(final CommandManager manager, final SelectionInList models,
-                         final MasterDetailsFactory factory) {
+                         final MasterDetailsFactory factory)
+    {
         super(manager, Commands.COMMANDID_DELETE);
         this.models = models;
         this.factory = factory;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final TaxonBased model = (TaxonBased) models.getSelection();
         final int index = models.getSelectionIndex();
         factory.delete(model);
         final int newSelection;
-        if (index == 0) {
-            if (models.getSize() > 0) {
+        if (index == 0)
+        {
+            if (models.getSize() > 0)
+            {
                 newSelection = 0;
             }
-            else {
+            else
+            {
                 newSelection = -1;
             }
         }
-        else {
+        else
+        {
             newSelection = index - 1;
         }
         models.setSelectionIndex(newSelection);

@@ -12,15 +12,13 @@
 
 package ch.xmatrix.ups.domain;
 
-import ch.xmatrix.ups.domain.ConstraintStateEvent;
-
-
 /**
  * TODO: document
  *
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public interface ConstraintStateListener {
+public interface ConstraintStateListener
+{
     void constraintStateChanged(ConstraintStateEvent event);
 }

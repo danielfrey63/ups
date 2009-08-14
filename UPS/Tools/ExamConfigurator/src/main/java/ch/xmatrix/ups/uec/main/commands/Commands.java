@@ -22,13 +22,20 @@ package ch.xmatrix.ups.uec.main.commands;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/23 22:19:08 $
  */
-public class Commands {
+public class Commands
+{
 
     public static final String COMMANDID_OPENUST = "openust";
+
     public static final String COMMANDID_OPENEXAM = "openexam";
+
     public static final String COMMANDID_CARDEDIT = "cards.edit";
+
     public static final String COMMANDID_CLOSE = "close";
+
     public static final String COMMANDID_QUIT = "quit";
+
     public static final String COMMANDID_EXPORT = "export";
+
     public static final String GROUPID_MENU = "menu";
 }

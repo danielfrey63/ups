@@ -11,15 +11,14 @@
  */
 package ch.xmatrix.ups.domain;
 
-
-
 /**
  * TODO: document
  *
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2006/04/21 11:02:52 $
  */
-public class ConstraintStats {
+public class ConstraintStats
+{
 
     /**
      * Calculates the number of constraints that are not satified.
@@ -27,10 +26,12 @@ public class ConstraintStats {
      * @param constraints the constraints to fullfil
      * @return the number of unsatisfied constraints
      */
-    public static int calculateUnsatisfiedConstraints(final Constraints constraints) {
+    public static int calculateUnsatisfiedConstraints(final Constraints constraints)
+    {
         final int count = 0;
 
-        for (int i = 0; i < constraints.getConstraints().size(); i++) {
+        for (int i = 0; i < constraints.getConstraints().size(); i++)
+        {
             final Constraint constraint = (Constraint) constraints.getConstraints().get(i);
             // Todo: Reintegrate
 //            count += ((constraint.getMinimalCount() > constraint.getTotalCount()) ? 1 : 0);
@@ -45,10 +46,12 @@ public class ConstraintStats {
      * @param constraints the constraints to fullfil
      * @return the number of unsatisfied constraints
      */
-    public static int calculateSatisfiedConstraints(final Constraints constraints) {
+    public static int calculateSatisfiedConstraints(final Constraints constraints)
+    {
         final int count = 0;
 
-        for (int i = 0; i < constraints.getConstraints().size(); i++) {
+        for (int i = 0; i < constraints.getConstraints().size(); i++)
+        {
             final Constraint constraint = (Constraint) constraints.getConstraints().get(i);
             // Todo: Reintegrate
 //            count += ((constraint.getMinimalCount() <= constraint.getTotalCount()) ? 1 : 0);
@@ -63,7 +66,8 @@ public class ConstraintStats {
      * @param constraints the constraints
      * @return the total number
      */
-    public static int calculateConstraintsCount(final Constraints constraints) {
+    public static int calculateConstraintsCount(final Constraints constraints)
+    {
         return constraints.getConstraints().size();
     }
 }

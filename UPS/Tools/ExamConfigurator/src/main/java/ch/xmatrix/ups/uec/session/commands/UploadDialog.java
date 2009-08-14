@@ -63,7 +63,8 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class UploadDialog extends Upload {
+public class UploadDialog extends Upload
+{
 
     private static final Logger LOG = Logger.getLogger(UploadDialog.class);
 
@@ -103,43 +104,53 @@ public class UploadDialog extends Upload {
 
     private transient Set<TaxonTree> taxa;
 
-    public UploadDialog(final ListModel model) {
+    public UploadDialog(final ListModel model)
+    {
         listExaminfos.setModel(model);
         loadSettings();
         initComponents();
     }
 
-    private void initComponents() {
+    private void initComponents()
+    {
         getRootPane().setDefaultButton(okButton);
-        listExaminfos.setCellRenderer(new DefaultListCellRenderer() {
+        listExaminfos.setCellRenderer(new DefaultListCellRenderer()
+        {
             @Override
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+            {
                 final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 final SessionModel sessionModel = (SessionModel) value;
                 final boolean enabled = sessionModel.isFixed();
                 label.setEnabled(enabled);
                 label.setOpaque(enabled);
-                if (!enabled) {
+                if (!enabled)
+                {
                     label.setText(label.getText() + " (nicht fixiert)");
                 }
                 return label;
             }
         });
-        listExaminfos.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
+        listExaminfos.addListSelectionListener(new ListSelectionListener()
+        {
+            public void valueChanged(final ListSelectionEvent e)
+            {
                 final SessionModel[] models = copyExamInfoModelsIntoArray();
                 okButton.setEnabled(models.length > 0);
             }
         });
     }
 
-    protected void doCancel() {
+    protected void doCancel()
+    {
         setVisible(false);
         dispose();
     }
 
-    protected void doOk() {
-        try {
+    protected void doOk()
+    {
+        try
+        {
             final Properties props = collectSettings();
             storeSettings(props);
             final SessionModel[] sessionModels = copyExamInfoModelsIntoArray();
@@ -153,7 +164,8 @@ public class UploadDialog extends Upload {
             waiter.start();
             thread.start();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("error in dialog", e);
             JOptionPane.showMessageDialog(null,
                     "Beim Dialog wurde ein Fehler entdeckt:\n" + e.getMessage(),
@@ -161,7 +173,8 @@ public class UploadDialog extends Upload {
         }
     }
 
-    protected void doSave() {
+    protected void doSave()
+    {
         storeSettings(collectSettings());
     }
 
@@ -170,12 +183,15 @@ public class UploadDialog extends Upload {
      *
      * @return the new array
      */
-    private SessionModel[] copyExamInfoModelsIntoArray() {
+    private SessionModel[] copyExamInfoModelsIntoArray()
+    {
         final Object[] objects = listExaminfos.getSelectedValues();
         final List<SessionModel> list = new ArrayList<SessionModel>();
-        for (int i = 0; i < objects.length; i++) {
+        for (int i = 0; i < objects.length; i++)
+        {
             final SessionModel sessionModel = (SessionModel) objects[i];
-            if (sessionModel.isFixed()) {
+            if (sessionModel.isFixed())
+            {
                 list.add(sessionModel);
             }
         }
@@ -187,7 +203,8 @@ public class UploadDialog extends Upload {
      *
      * @return properties with settings
      */
-    private Properties collectSettings() {
+    private Properties collectSettings()
+    {
         final Properties props = new Properties();
         props.put(PREF_KEYSTORE, fieldKeystore.getText());
         props.put(PREF_ALIAS, fieldAlias.getText());
@@ -205,7 +222,8 @@ public class UploadDialog extends Upload {
      *
      * @param props the properties to read the values from
      */
-    private void storeSettings(final Properties props) {
+    private void storeSettings(final Properties props)
+    {
         preferences.put(PREF_KEYSTORE, props.getProperty(PREF_KEYSTORE));
         preferences.put(PREF_ALIAS, props.getProperty(PREF_ALIAS));
         preferences.put(PREF_USER, props.getProperty(PREF_USER));
@@ -213,7 +231,8 @@ public class UploadDialog extends Upload {
         preferences.put(PREF_DIRECTORY, props.getProperty(PREF_DIRECTORY));
     }
 
-    private void loadSettings() {
+    private void loadSettings()
+    {
         fieldKeystore.setText(preferences.get(PREF_KEYSTORE, ""));
         fieldRemoteDir.setText(preferences.get(PREF_DIRECTORY, "/var/www/html/ups/ust-test"));
         fieldServer.setText(preferences.get(PREF_SERVER, "balti.ethz.ch"));
@@ -221,7 +240,8 @@ public class UploadDialog extends Upload {
         fieldUser.setText(preferences.get(PREF_USER, "admin"));
     }
 
-    private static class UploadThread extends Thread {
+    private static class UploadThread extends Thread
+    {
 
         /** The session models to upload. */
         private final SessionModel[] sessionModels;
@@ -255,7 +275,8 @@ public class UploadDialog extends Upload {
         private final String serverDirectory;
 
         public UploadThread(final SessionModel[] sessionModels, final Properties props,
-                            final Set<Constraints> constraints, final Set<TaxonTree> taxa) {
+                            final Set<Constraints> constraints, final Set<TaxonTree> taxa)
+        {
             this.sessionModels = sessionModels;
             this.constraints = constraints;
             this.taxa = taxa;
@@ -268,19 +289,23 @@ public class UploadDialog extends Upload {
             serverDirectory = props.getProperty(PREF_DIRECTORY);
         }
 
-        public void run() {
-            try {
+        public void run()
+        {
+            try
+            {
                 checkConsistency(sessionModels);
                 createAndUploadJar(Arrays.asList(sessionModels), JAR_SESSIONS, FILE_EXAMINFO, SessionPersister.getConverter());
                 createAndUploadJar(constraints, JAR_CONSTRAINTS, FILE_CONSTRAINTS, ConstraintsPersister.getConverter());
                 createAndUploadJar(taxa, JAR_TAXA, FILE_TAXA, TaxonModels.getConverter());
                 JOptionPane.showMessageDialog(null, "Hochladen erfolgreich abgeschlossen.");
             }
-            catch (Throwable e) {
+            catch (Throwable e)
+            {
                 Throwable lastCause = null;
                 Throwable cause = e;
                 final StringBuffer message = new StringBuffer();
-                while (cause != null && cause != lastCause) {
+                while (cause != null && cause != lastCause)
+                {
                     message.append(cause.getMessage()).append("\n");
                     lastCause = cause;
                     cause = cause.getCause();
@@ -307,13 +332,16 @@ public class UploadDialog extends Upload {
          *
          * @param sessionModels the models to investigate
          */
-        private void checkConsistency(final SessionModel[] sessionModels) {
+        private void checkConsistency(final SessionModel[] sessionModels)
+        {
             constraints = new HashSet<Constraints>();
             taxa = new HashSet<TaxonTree>();
-            for (final SessionModel sessionModel : sessionModels) {
+            for (final SessionModel sessionModel : sessionModels)
+            {
                 final String constraintsUid = sessionModel.getConstraintsUid();
                 final Constraints constraint = (Constraints) AbstractMainModel.findModel(constraintsUid);
-                if (constraint == null) {
+                if (constraint == null)
+                {
                     JOptionPane.showMessageDialog(null, "Die Vorgaben mit der id \"" + constraintsUid +
                             "\" fehlen, werden aber von \"" + sessionModel + "\" benötigt.");
                     final String message = "missing constraints (" + constraintsUid +
@@ -324,7 +352,8 @@ public class UploadDialog extends Upload {
                 constraints.add(constraint);
                 final String taxaUid = constraint.getTaxaUid();
                 final TaxonTree taxTree = TaxonModels.find(taxaUid);
-                if (taxTree == null) {
+                if (taxTree == null)
+                {
                     LOG.warn("missing taxa with uid " + taxaUid);
                     JOptionPane.showMessageDialog(null, "Der Taxonbaum mit der id \"" + taxaUid +
                             "\" für die Vorgaben mit der id \"" + constraintsUid + "\" fehlt. " +
@@ -336,7 +365,8 @@ public class UploadDialog extends Upload {
         }
 
         private void remoteBackup(final String remoteFilePath, final String remoteBackupFilePath, final String server,
-                                  final String user, final String pass) throws Exception {
+                                  final String user, final String pass) throws Exception
+        {
             final File dir = File.createTempFile("uec", "");
             dir.delete();
             dir.mkdirs();
@@ -345,20 +375,25 @@ public class UploadDialog extends Upload {
             final File localFile = new File(dir, remoteFileName);
             final String remoteBackupFileName = new File(remoteBackupFilePath).getName();
             final File localBackupFile = new File(dir, remoteBackupFileName);
-            try {
+            try
+            {
                 Ssh2Helper.download(remoteFile, server, user, pass, dir.getAbsolutePath());
                 localFile.renameTo(localBackupFile);
                 Ssh2Helper.upload(localBackupFile.getAbsolutePath(), server, user, pass, serverDirectory, "0644");
                 LOG.info("renamed remote file " + remoteFileName + " to " + remoteBackupFileName);
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 // Ignore if file does not exists on server -> backup not necessary
             }
         }
 
         private void createAndUploadJar(final Collection<? extends Object> list, final String jarFileName, final String toPackFileName,
-                                        final XStream converter) throws Exception {
+                                        final XStream converter) throws Exception
+        {
             File dir = null;
-            try {
+            try
+            {
                 final String remoteJarPath = serverDirectory + "/" + jarFileName;
                 final String remoteBackupJarPath = remoteJarPath + "." + new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());
                 remoteBackup(remoteJarPath, remoteBackupJarPath, server, user, serverPass);
@@ -369,12 +404,16 @@ public class UploadDialog extends Upload {
                 Ssh2Helper.upload(localJarPath, server, user, serverPass, serverDirectory, "0644");
                 LOG.info("jar " + localJarPath + " uploaded successfully");
             }
-            finally {
-                if (dir != null) {
-                    try {
+            finally
+            {
+                if (dir != null)
+                {
+                    try
+                    {
                         FileUtils.deleteDirectory(dir);
                     }
-                    catch (IOException e) {
+                    catch (IOException e)
+                    {
                         LOG.error("creating or uploading failed for \"" + jarFileName + "\"", e);
                     }
                 }
@@ -382,7 +421,8 @@ public class UploadDialog extends Upload {
         }
 
         private File writeTempFile(final SimpleModelList<? extends Object> selected, final String filename,
-                                   final XStream converter, final String subdirectory) throws IOException {
+                                   final XStream converter, final String subdirectory) throws IOException
+        {
             final File dir = File.createTempFile("uec", "");
             dir.delete();
             final File subdir = new File(dir, subdirectory);

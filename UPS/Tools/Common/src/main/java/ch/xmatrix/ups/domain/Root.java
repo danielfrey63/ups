@@ -20,10 +20,13 @@ import java.util.ArrayList;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public class Root extends Model {
+public class Root extends Model
+{
 
     public static final String PERSON_DATA = Root.class.getName() + ".personData";
+
     public static final String EXAM_SPECIES = Root.class.getName() + ".examSpecies";
+
     public static final String ROOT_TAXON = Root.class.getName() + ".rootTaxon";
 
     private PersonData personData = new PersonData();
@@ -32,33 +35,39 @@ public class Root extends Model {
 
     private SimpleTaxon rootTaxon;
 
-    public void setPersonData(final PersonData personData) {
+    public void setPersonData(final PersonData personData)
+    {
         final PersonData old = this.personData;
         this.personData = personData;
         firePropertyChange(PERSON_DATA, old, personData);
     }
 
-    public PersonData getPersonData() {
+    public PersonData getPersonData()
+    {
         return personData;
     }
 
-    public void setExamSpecies(final ArrayList examSpecies) {
+    public void setExamSpecies(final ArrayList examSpecies)
+    {
         final ArrayList old = this.examSpecies;
         this.examSpecies = examSpecies;
         firePropertyChange(EXAM_SPECIES, old, examSpecies);
     }
 
-    public ArrayList getExamSpecies() {
+    public ArrayList getExamSpecies()
+    {
         return examSpecies;
     }
 
-    public void setRootTaxon(final SimpleTaxon rootTaxon) {
+    public void setRootTaxon(final SimpleTaxon rootTaxon)
+    {
         final SimpleTaxon old = this.rootTaxon;
         this.rootTaxon = rootTaxon;
         firePropertyChange(ROOT_TAXON, old, rootTaxon);
     }
 
-    public SimpleTaxon getRootTaxon() {
+    public SimpleTaxon getRootTaxon()
+    {
         return rootTaxon;
     }
 }

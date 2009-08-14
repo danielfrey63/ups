@@ -20,12 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-/**
- * @author Daniel Frey
- */
-public class SetPanel {
+/** @author Daniel Frey */
+public class SetPanel
+{
 
-    private void initComponents() {
+    private void initComponents()
+    {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
         final DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
@@ -102,14 +102,23 @@ public class SetPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner non-commercial license
     private JPanel panel;
+
     private JComponent goodiesFormsSeparator2;
+
     private JLabel label1;
+
     private JComboBox combo;
+
     private JLabel label2;
+
     private JTextField field;
+
     private JPanel panelToolbar;
+
     private JComponent goodiesFormsSeparator1;
+
     private JScrollPane scroll;
+
     private SortedTable table;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

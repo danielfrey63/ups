@@ -22,9 +22,12 @@ package ch.xmatrix.ups.uec.specimens.commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class Commands {
+public class Commands
+{
 
     public static final String COMMANDID_NEWSPECIMEN = "newSpecimen";
+
     public static final String COMMANDID_DELETESPECIMEN = "deleteSpecimen";
+
     public static final String GROUPID_TOOLBAR = "toolbar";
 }

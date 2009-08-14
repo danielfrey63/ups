@@ -90,7 +90,9 @@
                             <td>
 
                                 Der Taxonbaum kann insgesamt in vier verschiedenen Ansichten dargestellt werden.
-                                Dies wird über die <a href="../help/help.html">Symbole</a> durch Filter ermöglicht. Die
+                                Dies wird über die
+                                <a href="../help/help.html">Symbole</a>
+                                durch Filter ermöglicht. Die
                                 Symbole sind in zwei Gruppen eingeteilt (zweites und drittes Paar Schaltflächen): Die
                                 einen betreffen nur die Artstufe, die anderen arbeiten auf höheren taxonomischen Stufen.
                                 Zur Klärung: Das erste Paar Schaltflächen sind keine Filter, sondern dienen zum Öffnen
@@ -214,7 +216,7 @@
         <section name="Navigation">
             <subsection name="Navigation und Auswahl der Arten im Taxonbaum">
                 <p>
-                   Es stehen Ihnen folgende Möglichkeiten zur Navigation im Baum und Auswahl der Arten zur Verfügung:
+                    Es stehen Ihnen folgende Möglichkeiten zur Navigation im Baum und Auswahl der Arten zur Verfügung:
                 </p>
                 <table class="bodyTable">
                     <thead>
@@ -255,7 +257,8 @@
 
                 </p>
                 <p>
-                    <img src="search-constraints-all.png"/>&#160;<img src="search-constraints-open.png"/>
+                    <img src="search-constraints-all.png"/>&#160;
+                    <img src="search-constraints-open.png"/>
                 </p>
                 <p>
 
@@ -268,7 +271,8 @@
 
                 </p>
                 <p>
-                    <img src="search-constraints-found.png"/>&#160;<img src="search-constraints-notfound.png"/>
+                    <img src="search-constraints-found.png"/>&#160;
+                    <img src="search-constraints-notfound.png"/>
                 </p>
             </subsection>
             <subsection name="Navigation mit Hilfe der Artenliste">

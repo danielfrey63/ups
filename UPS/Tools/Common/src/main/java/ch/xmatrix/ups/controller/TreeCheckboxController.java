@@ -27,16 +27,13 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/25 11:08:11 $
  */
-public abstract class TreeCheckboxController extends MouseAdapter implements KeyListener {
+public abstract class TreeCheckboxController extends MouseAdapter implements KeyListener
+{
 
-    /**
-     * The tree to hand the events for.
-     */
+    /** The tree to hand the events for. */
     private final JTree tree;
 
-    /**
-     * The delegate to implement a key listener.
-     */
+    /** The delegate to implement a key listener. */
     private final KeyListener keyDelegate = new CheckBoxKeyController();
 
     /**
@@ -44,7 +41,8 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @param tree the JTree to act uppon
      */
-    public TreeCheckboxController(final JTree tree) {
+    public TreeCheckboxController(final JTree tree)
+    {
         this.tree = tree;
     }
 
@@ -64,7 +62,8 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @return the tree
      */
-    protected JTree getTree() {
+    protected JTree getTree()
+    {
         return tree;
     }
 
@@ -76,7 +75,8 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @param e the mouse event
      */
-    public void mouseClicked(final MouseEvent e) {
+    public void mouseClicked(final MouseEvent e)
+    {
         final TreePath path = tree.getPathForLocation(e.getX(), e.getY());
         handleSelection(path);
     }
@@ -86,7 +86,8 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @param e the key event
      */
-    public void keyPressed(final KeyEvent e) {
+    public void keyPressed(final KeyEvent e)
+    {
         keyDelegate.keyPressed(e);
     }
 
@@ -95,7 +96,8 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @param e the key event
      */
-    public void keyReleased(final KeyEvent e) {
+    public void keyReleased(final KeyEvent e)
+    {
         keyDelegate.keyReleased(e);
     }
 
@@ -104,22 +106,24 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
      *
      * @param e the key event
      */
-    public void keyTyped(final KeyEvent e) {
+    public void keyTyped(final KeyEvent e)
+    {
         keyDelegate.keyTyped(e);
     }
 
-    /**
-     * Key adapter to handle key pressed events and filter spaces.
-     */
-    private final class CheckBoxKeyController extends KeyAdapter {
+    /** Key adapter to handle key pressed events and filter spaces. */
+    private final class CheckBoxKeyController extends KeyAdapter
+    {
 
         /**
          * Listens for spaces and delegates to handleSelection(TreePath).
          *
          * @param e the key event
          */
-        public void keyPressed(final KeyEvent e) {
-            if (e.getKeyChar() == ' ') {
+        public void keyPressed(final KeyEvent e)
+        {
+            if (e.getKeyChar() == ' ')
+            {
                 handleSelection(tree.getSelectionPath());
                 e.consume();
             }

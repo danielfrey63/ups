@@ -11,9 +11,9 @@
  */
 package ch.xmatrix.ups.ust.edit;
 
+import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
 import ch.jfactory.application.view.search.SearchableUtils;
-import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.command.AddFilterToAndedFilterable;
 import ch.jfactory.command.CollapseAllTreeNodes;
 import ch.jfactory.command.ExpandAllTreeNodes;
@@ -57,23 +57,31 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
+public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder
+{
 
     private JTree tree;
+
     private Constraints constraints;
+
     private ModelBasedFilteredTreeModel treeModel;
+
     private UserModel userModel;
+
     private ConstraintsTreeModel constraintsTreeModel;
 
-    public ConstraintsSelectionBuilder() {
+    public ConstraintsSelectionBuilder()
+    {
         tree = createConstraintsTree();
     }
 
-    public JComponent getRepaintComponent() {
+    public JComponent getRepaintComponent()
+    {
         return tree;
     }
 
-    public void setModel(final UserModel userModel) {
+    public void setModel(final UserModel userModel)
+    {
         this.userModel = userModel;
         this.constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
         final ArrayList<Constraint> allConstraints = constraints.getConstraints();
@@ -82,11 +90,13 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
         treeModel.reload();
     }
 
-    public void addTreeSelectionListener(final TreeSelectionListener listener) {
+    public void addTreeSelectionListener(final TreeSelectionListener listener)
+    {
         tree.addTreeSelectionListener(listener);
     }
 
-    public void initCommands() {
+    public void initCommands()
+    {
         final CommandManager manager = getCommandManager();
         initCommand(new ExpandAllTreeNodes(manager, tree), true);
         initCommand(new CollapseAllTreeNodes(manager, tree), true);
@@ -96,7 +106,8 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
         initToggleCommand(new RemoveFilterFromAndedFilterable(manager, Commands.COMMANDID_CONSTRAINTS_ALL, treeModel, hide, saver), true);
     }
 
-    public JComponent createMainPanel() {
+    public JComponent createMainPanel()
+    {
         final JComponent panel = super.createMainPanel();
         panel.setLayout(new BorderLayout());
         panel.add(getCommandManager().getGroup(Commands.GROUPID_CONSTRAINTS_TOOLBAR).createToolBar(), BorderLayout.NORTH);
@@ -104,7 +115,8 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
         return panel;
     }
 
-    private JTree createConstraintsTree() {
+    private JTree createConstraintsTree()
+    {
         constraintsTreeModel = new ConstraintsTreeModel();
         treeModel = new ModelBasedFilteredTreeModel(constraintsTreeModel);
         treeModel.setFilter(new MultiAndFilter(new Filter[0]));
@@ -117,24 +129,30 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
         return tree;
     }
 
-    private class HideCompletedConstraintsViewFilter implements Filter {
+    private class HideCompletedConstraintsViewFilter implements Filter
+    {
 
-        public boolean matches(final Object node) {
-            if (node instanceof Constraint) {
+        public boolean matches(final Object node)
+        {
+            if (node instanceof Constraint)
+            {
                 final Constraint constraint = (Constraint) node;
                 return isUncomplete(constraint);
             }
-            else if (node instanceof SimpleTaxon) {
+            else if (node instanceof SimpleTaxon)
+            {
                 final SimpleTaxon taxon = (SimpleTaxon) node;
                 final Constraint constraint = constraints.findConstraint(taxon.getName());
                 return isUncomplete(constraint);
             }
-            else {
+            else
+            {
                 throw new IllegalArgumentException(node.getClass().getName() + " not handable");
             }
         }
 
-        private boolean isUncomplete(final Constraint constraint) {
+        private boolean isUncomplete(final Constraint constraint)
+        {
             final ArrayList<String> userTaxa = userModel.getTaxa();
             final int totalCount = ConstraintsRendererUtils.getTotalCount(constraint, constraints, userTaxa);
             final int minimalCount = constraint.getMinimalCount();
@@ -142,101 +160,125 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder {
         }
     }
 
-    private class ConstraintsTreeModel extends AbstractTreeModel {
+    private class ConstraintsTreeModel extends AbstractTreeModel
+    {
 
         private static final String ROOT = "ConstraintsRoot";
+
         private ArrayList<Constraint> allConstraints = null;
 
-        public ConstraintsTreeModel() {
+        public ConstraintsTreeModel()
+        {
             super(ROOT);
         }
 
-        public void setConstraints(final ArrayList<Constraint> constraints) {
+        public void setConstraints(final ArrayList<Constraint> constraints)
+        {
             allConstraints = constraints;
         }
 
-        public int getChildCount(final Object parent) {
+        public int getChildCount(final Object parent)
+        {
             int result = -1;
-            if (allConstraints == null) {
+            if (allConstraints == null)
+            {
                 result = 0;
             }
-            else if (parent == ROOT) {
+            else if (parent == ROOT)
+            {
                 result = allConstraints.size();
             }
-            else if (parent instanceof Constraint) {
+            else if (parent instanceof Constraint)
+            {
                 final Constraint constraint = (Constraint) parent;
                 final int size = constraint.getTaxa().size();
                 result = size <= 1 ? 0 : size;
             }
-            else {
+            else
+            {
                 result = 0;
             }
             return result;
         }
 
-        public Object getChild(final Object parent, final int index) {
+        public Object getChild(final Object parent, final int index)
+        {
             Object result = null;
-            if (parent == ROOT) {
+            if (parent == ROOT)
+            {
                 result = allConstraints.get(index);
             }
-            else if (parent instanceof Constraint) {
+            else if (parent instanceof Constraint)
+            {
                 final Constraint constraint = (Constraint) parent;
                 final List<String> children = constraint.getTaxa();
                 final String taxonName = children.get(index);
                 final TaxonTree tree = TaxonModels.find(constraints.getTaxaUid());
                 result = tree.findTaxonByName(taxonName);
             }
-            else {
+            else
+            {
                 throw new IllegalArgumentException("unknown node type " + parent.getClass().getName());
             }
             return result;
         }
 
-        protected void remove(final Object child, final TreePath parentPath) {
+        protected void remove(final Object child, final TreePath parentPath)
+        {
             throw new IllegalArgumentException("remove not supported");
         }
 
-        protected void insert(final TreePath child, final TreePath parent, final int pos) {
+        protected void insert(final TreePath child, final TreePath parent, final int pos)
+        {
             throw new IllegalArgumentException("insert not supported");
         }
 
-        public void valueForPathChanged(final TreePath path, final Object newValue) {
+        public void valueForPathChanged(final TreePath path, final Object newValue)
+        {
             throw new IllegalArgumentException("value for path change not supported");
         }
     }
 
-    private class ConstraintsRenderer implements TreeCellRenderer {
+    private class ConstraintsRenderer implements TreeCellRenderer
+    {
 
         private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.TEXTONLY);
 
-        public ConstraintsRenderer() {
+        public ConstraintsRenderer()
+        {
             panel.setEnabled(true);
         }
 
         public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
                                                       final boolean expanded, final boolean leaf, final int row,
-                                                      final boolean hasFocus) {
+                                                      final boolean hasFocus)
+        {
             final String iconName;
-            if (value instanceof Constraint) {
+            if (value instanceof Constraint)
+            {
                 final Constraint constraint = (Constraint) value;
                 final ArrayList<String> userTaxa = userModel.getTaxa();
                 final List<String> taxa = constraint.getTaxa();
-                if (taxa != null && taxa.size() == 1) {
+                if (taxa != null && taxa.size() == 1)
+                {
                     final TaxonTree treeModel = TaxonModels.find(constraints.getTaxaUid());
                     final String taxonName = taxa.get(0);
                     final SimpleTaxon taxon = treeModel.findTaxonByName(taxonName);
                     iconName = TaxonRendererUtils.getIconForTaxon(taxon, false);
                     ConstraintsRendererUtils.configureForConstraint(panel, constraints, constraint, userTaxa, true);
                 }
-                else {
+                else
+                {
                     iconName = "group.gif";
                     ConstraintsRendererUtils.configureForConstraint(panel, constraints, constraint, userTaxa, false);
                 }
             }
-            else if (value instanceof String) {
+            else if (value instanceof String)
+            {
                 iconName = "iconRoot.png";
             }
-            else {
+            else
+            {
                 final SimpleTaxon taxon = (SimpleTaxon) value;
                 iconName = TaxonRendererUtils.getIconForTaxon(taxon, false);
             }

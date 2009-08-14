@@ -24,24 +24,29 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class UploadCommand extends ActionCommand {
+public class UploadCommand extends ActionCommand
+{
 
     private static final Logger LOG = Logger.getLogger(UploadCommand.class);
 
     private final ListModel model;
 
-    public UploadCommand(final CommandManager commandManager, final ListModel model) {
+    public UploadCommand(final CommandManager commandManager, final ListModel model)
+    {
         super(commandManager, Commands.COMMANDID_UPLOAD);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             final UploadDialog dialog = new UploadDialog(model);
             dialog.pack();
             dialog.setVisible(true);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("error during in the dialog", e);
             JOptionPane.showMessageDialog(null,
                     "Beim Dialog wurde ein Fehler entdeckt:\n" + e.getMessage(),

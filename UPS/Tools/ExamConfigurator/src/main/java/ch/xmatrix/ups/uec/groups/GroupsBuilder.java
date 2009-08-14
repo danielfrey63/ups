@@ -19,8 +19,8 @@ package ch.xmatrix.ups.uec.groups;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.component.SimpleDocumentListener;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
-import ch.jfactory.resource.Strings;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.resource.Strings;
 import ch.xmatrix.ups.controller.TreeCheckboxController;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.domain.TaxonBased;
@@ -29,8 +29,8 @@ import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.uec.groups.commands.Commands;
 import ch.xmatrix.ups.uec.groups.commands.DeleteGroup;
 import ch.xmatrix.ups.uec.groups.commands.NewGroup;
-import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
 import ch.xmatrix.ups.uec.main.MainModel;
+import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.forms.factories.Borders;
@@ -71,53 +71,84 @@ import org.pietschy.command.ActionCommandInterceptor;
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2007/09/27 10:48:07 $
  */
-public class GroupsBuilder extends AbstractDetailsBuilder {
+public class GroupsBuilder extends AbstractDetailsBuilder
+{
 
     public static final String COMPONENT_TREE = "tree";
+
     public static final String COMPONENT_LISTGROUPS = "listGroups";
+
     public static final String COMPONENT_LISTTAXA = "listTaxa";
+
     public static final String COMPONENT_NAME = "fieldName";
+
     public static final String COMPONENT_MINIMUM = "spinnerMinimum";
+
     public static final String COMPONENT_MAXIMUM = "spinnerMaximum";
 
     private static final String RESOURCE_MODEL = "/data/groups.xml";
+
     private static final String RESOURCE_FORM = "/ch/xmatrix/ups/uec/groups/GroupsPanel.jfd";
 
     private final DefaultListModel listModel = new DefaultListModel();
+
     private final SelectionInList groupModels = new SelectionInList(listModel);
+
     private final DefaultListSelectionModel groupsSelection = new DefaultListSelectionModel();
+
     private final DefaultListSelectionModel taxaSelection = new DefaultListSelectionModel();
+
     private final GroupsTreeRenderer groupsTreeRenderer = new GroupsTreeRenderer();
+
     private final GroupsListRenderer groupsListRenderer = new GroupsListRenderer();
 
     private JTree tree;
+
     private JList listGroups;
+
     private JList listTaxa;
+
     private JTextField name;
+
     private JSpinner minimum;
+
     private JSpinner maximum;
+
     private ActionCommand delete;
+
     private ActionCommand add;
+
     private XStream converter;
+
     private TreeExpandedRestorer restorer;
+
     private TaxaListRenderer taxaListRenderer;
+
     private boolean enabledByMaster;
+
     private boolean isAdjusting;
 
-    public GroupsBuilder() {
+    public GroupsBuilder()
+    {
         super(new GroupsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
     }
 
     //--- ActionCommandPanelBuilder overrides
 
-    protected void initComponentListeners() {
-        listGroups.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!isAdjusting) {
+    protected void initComponentListeners()
+    {
+        listGroups.addListSelectionListener(new ListSelectionListener()
+        {
+            public void valueChanged(final ListSelectionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
-                    if (!e.getValueIsAdjusting()) {
+                    if (!e.getValueIsAdjusting())
+                    {
                         final GroupsModel model = getGroupsModel();
-                        if (model != null) {
+                        if (model != null)
+                        {
                             model.setCurrentGroup((GroupModel) listGroups.getSelectedValue());
                             setStates(listGroups);
                         }
@@ -126,14 +157,18 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        listTaxa.addMouseListener(new MouseAdapter() {
-            public void mousePressed(final MouseEvent e) {
-                if (e.getClickCount() == 2) {
+        listTaxa.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(final MouseEvent e)
+            {
+                if (e.getClickCount() == 2)
+                {
                     final String taxonName = (String) listTaxa.getSelectedValue();
                     final TaxonTree taxonTree = getTaxonTree();
                     final ArrayList<Object> pathElements = new ArrayList<Object>();
                     SimpleTaxon taxon = taxonTree.findTaxonByName(taxonName);
-                    while (taxon != null) {
+                    while (taxon != null)
+                    {
                         pathElements.add(0, taxon);
                         taxon = taxon.getParentTaxon();
                     }
@@ -145,23 +180,31 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        tree.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent e) {
+        tree.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(final MouseEvent e)
+            {
                 setStates(tree);
             }
         });
-        tree.addKeyListener(new KeyAdapter() {
-            public void keyPressed(final KeyEvent e) {
+        tree.addKeyListener(new KeyAdapter()
+        {
+            public void keyPressed(final KeyEvent e)
+            {
                 setStates(tree);
             }
         });
-        final ActionCommandInterceptor dirtyInterceptor = new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        final ActionCommandInterceptor dirtyInterceptor = new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty();
                     setStates(null);
@@ -171,13 +214,17 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         };
         add.addInterceptor(dirtyInterceptor);
         delete.addInterceptor(dirtyInterceptor);
-        name.getDocument().addDocumentListener(new SimpleDocumentListener() {
-            public void changedUpdate(final DocumentEvent e) {
-                if (!isAdjusting) {
+        name.getDocument().addDocumentListener(new SimpleDocumentListener()
+        {
+            public void changedUpdate(final DocumentEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
                     final String text = name.getText().trim();
-                    if (model != null && text != null && !text.equals(model.getName())) {
+                    if (model != null && text != null && !text.equals(model.getName()))
+                    {
                         model.setName(text);
                         setDirty();
                         setStates(name);
@@ -186,12 +233,16 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        minimum.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        minimum.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         final Integer value = (Integer) minimum.getValue();
                         model.setMinimum(value.intValue());
                         setDirty();
@@ -201,12 +252,16 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        maximum.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
-                if (!isAdjusting) {
+        maximum.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         final Integer value = (Integer) maximum.getValue();
                         model.setMaximum(value.intValue());
                         setDirty();
@@ -220,12 +275,15 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
 
     //--- DetailsBuilder implementations
 
-    public void setEnabled(final boolean enabled) {
-        if (!isAdjusting) {
+    public void setEnabled(final boolean enabled)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             enabledByMaster = enabled;
             final GroupsModel model = getGroupsModel();
-            if (model != null) {
+            if (model != null)
+            {
                 model.setCurrentGroup(null);
             }
             setStates(null);
@@ -235,21 +293,26 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
 
     //--- AbstractDetailsBuilder overrides
 
-    public void setModel(final TaxonBased taxonBased) {
-        if (!isAdjusting) {
+    public void setModel(final TaxonBased taxonBased)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             super.setModel(taxonBased);
             final GroupsModel models = (GroupsModel) taxonBased;
-            if (models != null) {
+            if (models != null)
+            {
                 models.setCurrentGroup(null);
                 listModel.clear();
                 final ArrayList<GroupModel> groups = getGroupModels();
-                for (int i = 0; groups != null && i < groups.size(); i++) {
+                for (int i = 0; groups != null && i < groups.size(); i++)
+                {
                     final GroupModel model = groups.get(i);
                     listModel.addElement(model);
                 }
             }
-            else {
+            else
+            {
                 listModel.clear();
             }
             setStates(null);
@@ -257,7 +320,8 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         }
     }
 
-    protected boolean shouldMigrate(final String uid) {
+    protected boolean shouldMigrate(final String uid)
+    {
         final int result = Dialogs.showQuestionMessageCancel(name, "Migration",
                 "Sie wollen den taxonomischen Baum, auf dem diese Guppeneinstellungen basieren, ändern.\n" +
                         "Es kann sein, dass nicht alle Einstellungen in den neuen Baum übernommen werden können.\n" +
@@ -265,16 +329,20 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         return result == Dialogs.OK;
     }
 
-    protected ArrayList findMigrationErrors(final String uid) {
+    protected ArrayList findMigrationErrors(final String uid)
+    {
         final ArrayList<String> errors = new ArrayList<String>();
         final TaxonTree tree = TaxonModels.find(uid);
         final ArrayList<GroupModel> groups = getGroupModels();
-        for (int i = 0; groups != null && i < groups.size(); i++) {
+        for (int i = 0; groups != null && i < groups.size(); i++)
+        {
             final GroupModel model = groups.get(i);
             final ArrayList taxa = model.getTaxa();
-            for (int j = 0; j < taxa.size(); j++) {
+            for (int j = 0; j < taxa.size(); j++)
+            {
                 final String taxon = (String) taxa.get(j);
-                if (tree.findTaxonByName(taxon) == null) {
+                if (tree.findTaxonByName(taxon) == null)
+                {
                     errors.add(taxon);
                 }
             }
@@ -283,22 +351,26 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         return errors;
     }
 
-    protected void removeMigrationErrors(final ArrayList errors) {
+    protected void removeMigrationErrors(final ArrayList errors)
+    {
         final GroupsModel models = getGroupsModel();
-        for (int i = 0; i < errors.size(); i++) {
+        for (int i = 0; i < errors.size(); i++)
+        {
             final String taxon = (String) errors.get(i);
             final GroupModel model = models.find(taxon);
             model.removeTaxon(taxon);
         }
     }
 
-    protected void commitSuccessful() {
+    protected void commitSuccessful()
+    {
         Dialogs.showInfoMessage(name, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich.");
     }
 
     //--- AbstractDetailsBuilder implementations
 
-    protected void initComponents() {
+    protected void initComponents()
+    {
         final JToolBar bar = getCommandManager().getGroup(Commands.GROUPID_TOOLBAR).createToolBar();
         getCreator().getPanel("panelToolbarSeparator").add(bar, new CellConstraints().xy(3, 1));
 
@@ -322,16 +394,21 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         tree.setCellRenderer(groupsTreeRenderer);
         restorer = new TreeExpandedRestorer(tree);
 
-        final TreeCheckboxController treeHandler = new TreeCheckboxController(tree) {
-            protected void handleSelection(final TreePath path) {
+        final TreeCheckboxController treeHandler = new TreeCheckboxController(tree)
+        {
+            protected void handleSelection(final TreePath path)
+            {
                 final GroupModel selected = (GroupModel) listGroups.getSelectedValue();
-                if (selected != null && path != null && enabledByMaster) {
+                if (selected != null && path != null && enabledByMaster)
+                {
                     final GroupsModel model = getGroupsModel();
                     final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
-                    if (SimpleTaxon.isSpecies(taxon)) {
+                    if (SimpleTaxon.isSpecies(taxon))
+                    {
                         final String name = taxon.getName();
                         final GroupModel taxonsGroup = model.find(name);
-                        if (taxonsGroup == null) {
+                        if (taxonsGroup == null)
+                        {
                             model.addTaxon(name);
                             final GroupModel current = getCurrentGroupModel();
                             final ArrayList<String> taxa = current.getTaxa();
@@ -339,7 +416,8 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
                             final ArrayList<String> sorted = tree.sortTaxaStrings(taxa);
                             current.setTaxa(sorted);
                         }
-                        else if (taxonsGroup == selected) {
+                        else if (taxonsGroup == selected)
+                        {
                             model.removeTaxon(name);
                         }
                         getTree().repaint();
@@ -363,8 +441,10 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         add = getCommandManager().getCommand(Commands.COMMANDID_NEWGROUP);
     }
 
-    protected XStream getConverter() {
-        if (converter == null) {
+    protected XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.ID_REFERENCES);
             converter.alias("groupsModels", SimpleModelList.class);
@@ -376,22 +456,26 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         return converter;
     }
 
-    protected String getInfoString() {
+    protected String getInfoString()
+    {
         return "Gruppen-Editor";
     }
 
-    protected String getModelId() {
+    protected String getModelId()
+    {
         return MainModel.MODELID_GROUPS;
     }
 
     //--- Utilities
 
-    private void setStates(final Object source) {
+    private void setStates(final Object source)
+    {
         setValueStates(source);
         setEnabledStates();
     }
 
-    private void setEnabledStates() {
+    private void setEnabledStates()
+    {
         final boolean isGroupModelSelected = enabledByMaster && (GroupModel) listGroups.getSelectedValue() != null;
         groupsTreeRenderer.setEnabled(isGroupModelSelected);
         groupsListRenderer.setEnabled(enabledByMaster);
@@ -403,19 +487,43 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         add.setEnabled(enabledByMaster);
     }
 
-    private void setValueStates(final Object source) {
+    private void setValueStates(final Object source)
+    {
         final GroupModel groupModel = getCurrentGroupModel();
         final ArrayList<String> taxa = groupModel == null ? DUMMY_LIST : groupModel.getTaxa();
-        if (source != listGroups) groupsTreeRenderer.setGroupsModel(getGroupsModel());
-        if (source != listGroups) listGroups.getSelectionModel().clearSelection();
-        if (source != listGroups) listGroups.setSelectedValue(groupModel, true);
-        if (source != listTaxa) listTaxa.setModel(new ArrayListModel(taxa));
-        if (groupModel != null) {
-            if (source != name) name.setText(groupModel.getName());
-            if (source != minimum) minimum.setValue(new Integer(groupModel.getMinimum()));
-            if (source != maximum) maximum.setValue(new Integer(groupModel.getMaximum()));
+        if (source != listGroups)
+        {
+            groupsTreeRenderer.setGroupsModel(getGroupsModel());
         }
-        else {
+        if (source != listGroups)
+        {
+            listGroups.getSelectionModel().clearSelection();
+        }
+        if (source != listGroups)
+        {
+            listGroups.setSelectedValue(groupModel, true);
+        }
+        if (source != listTaxa)
+        {
+            listTaxa.setModel(new ArrayListModel(taxa));
+        }
+        if (groupModel != null)
+        {
+            if (source != name)
+            {
+                name.setText(groupModel.getName());
+            }
+            if (source != minimum)
+            {
+                minimum.setValue(new Integer(groupModel.getMinimum()));
+            }
+            if (source != maximum)
+            {
+                maximum.setValue(new Integer(groupModel.getMaximum()));
+            }
+        }
+        else
+        {
             name.setText(null);
             minimum.setValue(ZERO);
             maximum.setValue(ZERO);
@@ -425,21 +533,25 @@ public class GroupsBuilder extends AbstractDetailsBuilder {
         tree.repaint();
     }
 
-    private GroupsModel getGroupsModel() {
+    private GroupsModel getGroupsModel()
+    {
         return (GroupsModel) getModels().getSelection();
     }
 
-    private GroupModel getCurrentGroupModel() {
+    private GroupModel getCurrentGroupModel()
+    {
         final GroupsModel models = getGroupsModel();
         return models == null ? null : models.getCurrentGroup();
     }
 
-    private ArrayList<GroupModel> getGroupModels() {
+    private ArrayList<GroupModel> getGroupModels()
+    {
         final GroupsModel models = getGroupsModel();
         return models == null ? null : models.getGroups();
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
         UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
         System.setProperty("jfactory.resource.path", "/icon");

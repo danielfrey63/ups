@@ -16,9 +16,9 @@
  */
 package ch.xmatrix.ups.uec.main.commands;
 
+import ch.xmatrix.ups.uec.main.MainModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import ch.xmatrix.ups.uec.main.MainModel;
 
 /**
  * TODO: document
@@ -26,18 +26,22 @@ import ch.xmatrix.ups.uec.main.MainModel;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2007/05/16 17:00:15 $
  */
-public class OpenCommand extends ActionCommand {
+public class OpenCommand extends ActionCommand
+{
 
     private MainModel model;
+
     private String card;
 
-    public OpenCommand(final CommandManager commandManager, final MainModel model, final String id, final String card) {
+    public OpenCommand(final CommandManager commandManager, final MainModel model, final String id, final String card)
+    {
         super(commandManager, id);
         this.model = model;
         this.card = card;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         model.setCurrentCard(card);
     }
 }

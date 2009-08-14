@@ -45,36 +45,53 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/23 22:19:10 $
  */
-public abstract class LoadFilesystem extends ActionCommand {
+public abstract class LoadFilesystem extends ActionCommand
+{
 
     protected static final String EXTENTION = ".xust";
 
     private static final Logger LOG = Logger.getLogger(FromDirectory.class);
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
+
     private static final String PATTERN = "%B %I %L %F %X";
+
     private static final String PATTERN_FIRSTNAME = "%F";
+
     private static final String PATTERN_LASTNAME = "%L";
+
     private static final String PATTERN_ID = "%I";
+
     private static final String PATTERN_FROM = "%S";
+
     private static final String PATTERN_END = "%E";
+
     private static final String PATTERN_EXTENTION = "%X";
+
     private static final String PATTERN_SKIP = "%B";
+
     private static final String PATTERN_REGEX = PATTERN_FIRSTNAME + "|" + PATTERN_LASTNAME + "|" + PATTERN_END +
             "|" + PATTERN_EXTENTION + "|" + PATTERN_FROM + "|" + PATTERN_ID + "|" + PATTERN_SKIP;
 
     private final OpenChooser chooser;
 
     private SetBuilder.SubmitTableModel model;
+
     private JTextField patternField;
+
     private String lastName;
+
     private ArrayList<Registration> buffer;
+
     private String lastDirectory = System.getProperty("user.dir");
 
-    public LoadFilesystem(final CommandManager manager, final String commandId, final SetBuilder.SubmitTableModel model) {
+    public LoadFilesystem(final CommandManager manager, final String commandId, final SetBuilder.SubmitTableModel model)
+    {
         super(manager, commandId);
         this.model = model;
         chooser = getChooser();
-        try {
+        try
+        {
             final String pack = getClass().getPackage().getName();
             final String path = pack.replace('.', '/');
             final FormCreator creator = new FormCreator(FormLoader.load(path + "/PatternLayoutPanel.jfd"));
@@ -84,29 +101,35 @@ public abstract class LoadFilesystem extends ActionCommand {
             chooser.getChooser().setAccessory(creator.getPanel("panel"));
             chooser.setDirectory(new File(lastDirectory));
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("could not load chooser component", e);
         }
     }
 
     protected abstract OpenChooser getChooser();
 
-    protected void writeBuffer() {
-        if (DEBUG) {
+    protected void writeBuffer()
+    {
+        if (DEBUG)
+        {
             LOG.debug("there are " + buffer.size() + " registrations");
         }
-        for (int i = 0; model != null && i < buffer.size(); i++) {
+        for (int i = 0; model != null && i < buffer.size(); i++)
+        {
             final Registration registration = (Registration) buffer.get(i);
             model.add(registration);
         }
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         buffer = new ArrayList<Registration>();
         chooser.open();
     }
 
-    protected void loadAnonymousFile(final File file) {
+    protected void loadAnonymousFile(final File file)
+    {
         lastDirectory = file.getParent();
         lastName = file.getName();
         final IAnmeldedaten anmeldedatum = loadPersonalData(lastName, patternField.getText());
@@ -114,42 +137,50 @@ public abstract class LoadFilesystem extends ActionCommand {
         buffer.add(new Registration(anmeldedatum, list));
     }
 
-    private static Map<String, String> parsePattern(final String name, final String pattern) {
-        if (DEBUG) {
+    private static Map<String, String> parsePattern(final String name, final String pattern)
+    {
+        if (DEBUG)
+        {
             LOG.debug("parsing \"" + name + "\" with pattern \"" + pattern + "\"");
         }
         final Map<String, String> result = new HashMap<String, String>();
-        try {
+        try
+        {
             final String[] delimiters = pattern.split(PATTERN_REGEX);
             int nameCursor = 0;
             int patCursor = 0;
             final int length = delimiters.length;
-            for (int i = 0; i < length; i++) {
-                final String delim = delimiters[ i ];
+            for (int i = 0; i < length; i++)
+            {
+                final String delim = delimiters[i];
                 final int l = delim.length();
                 final int nameStart = "".equals(delim) ? 0 : name.indexOf(delim, nameCursor);
-                final int nameEnd = i == length - 1 ? name.length() : name.indexOf(delimiters[ i + 1 ], nameStart + l);
+                final int nameEnd = i == length - 1 ? name.length() : name.indexOf(delimiters[i + 1], nameStart + l);
                 final String value = name.substring(nameStart + l, nameEnd);
                 final int patStart = "".equals(delim) ? 0 : pattern.indexOf(delim, patCursor);
-                final int patEnd = i == length - 1 ? pattern.length() : pattern.indexOf(delimiters[ i + 1 ], patStart + l);
+                final int patEnd = i == length - 1 ? pattern.length() : pattern.indexOf(delimiters[i + 1], patStart + l);
                 final String key = pattern.substring(patStart + l, patEnd);
-                if (("".equals(delim) || !name.endsWith(delim)) && !PATTERN_SKIP.equals(key)) {
+                if (("".equals(delim) || !name.endsWith(delim)) && !PATTERN_SKIP.equals(key))
+                {
                     result.put(key, value);
                 }
                 nameCursor += value.length() + l;
                 patCursor += key.length() + l;
             }
-            if (DEBUG) {
+            if (DEBUG)
+            {
                 final Set<String> keys = result.keySet();
                 final StringBuffer b = new StringBuffer("result is ");
-                for (final Iterator<String> iterator = keys.iterator(); iterator.hasNext(); b.append(", ")) {
+                for (final Iterator<String> iterator = keys.iterator(); iterator.hasNext(); b.append(", "))
+                {
                     final String s = iterator.next();
                     b.append(s).append("=").append(result.get(s));
                 }
                 LOG.debug(b);
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Dialogs.showErrorMessage(null, "Fehler", "" +
                     "Beim Verarbeiten der Datei \"" + name + "\" mit dem\n" +
                     "Muster \"" + pattern + "\" ist ein Fehler aufgetreten.\n" +
@@ -159,7 +190,8 @@ public abstract class LoadFilesystem extends ActionCommand {
         return result;
     }
 
-    private IAnmeldedaten loadPersonalData(final String name, final String pattern) {
+    private IAnmeldedaten loadPersonalData(final String name, final String pattern)
+    {
         final Anmeldedaten anmeldedatum = new Anmeldedaten();
         final Map<String, String> map = parsePattern(name, pattern);
         anmeldedatum.setNachname(map.get(PATTERN_LASTNAME));
@@ -169,28 +201,34 @@ public abstract class LoadFilesystem extends ActionCommand {
     }
 
     // Todo: Make this working with new file format from UST.
-    private static PlantList loadPlantList(final File file) {
+    private static PlantList loadPlantList(final File file)
+    {
         PlantList list = null;
-        try {
+        try
+        {
             final String species = IOUtils.toString(new FileReader(file));
             final XStream converter = Commands.getConverter2();
             final Object converted = converter.fromXML(species);
-            if (converted instanceof Commands.Encoded) {
+            if (converted instanceof Commands.Encoded)
+            {
                 final Commands.Encoded encoded = (Commands.Encoded) converted;
                 list = new PlantList();
                 list.setTaxa(new ArrayList<String>(encoded.list));
             }
-            else if (converted instanceof ArrayList) {
+            else if (converted instanceof ArrayList)
+            {
                 final ArrayList<String> taxa = (ArrayList<String>) converted;
                 list = new PlantList();
                 list.setTaxa(taxa);
             }
-            else {
+            else
+            {
                 Dialogs.showErrorMessage(null, "Fehler", "Unbekanntest (altes) Dateiformat");
                 LOG.error("unknown file format");
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Dialogs.showErrorMessage(null, "Fehler", "" +
                     "Beim Verarbeiten der Datei \"" + file.getName() + "\"\n" +
                     "ist ein Fehler aufgetreten.\n" +

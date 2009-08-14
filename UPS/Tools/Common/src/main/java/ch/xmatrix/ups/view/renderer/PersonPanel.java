@@ -12,13 +12,13 @@
 package ch.xmatrix.ups.view.renderer;
 
 import ch.xmatrix.ups.domain.PersonData;
+import com.jgoodies.binding.beans.BeanUtils;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.binding.beans.BeanUtils;
+import java.beans.IntrospectionException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyDescriptor;
-import java.beans.IntrospectionException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -28,80 +28,94 @@ import javax.swing.JPanel;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public class PersonPanel extends JPanel {
+public class PersonPanel extends JPanel
+{
 
     private ch.xmatrix.ups.domain.PersonData personData;
 
     private Object[][] fieldData = {
-        {"Vorname:", new JLabel()},
-        {"Nachname:", new JLabel()},
-        {"Immatrikulationsnummer:", new JLabel()},
-        {"Studiengang:", new JLabel()}};
+            {"Vorname:", new JLabel()},
+            {"Nachname:", new JLabel()},
+            {"Immatrikulationsnummer:", new JLabel()},
+            {"Studiengang:", new JLabel()}};
 
     private Object[][] listenerData = {
-        {PersonData.FIRST_NAME, new LabelPropertyChangeListener((JLabel) fieldData[0][1])},
-        {PersonData.LAST_NAME, new LabelPropertyChangeListener((JLabel) fieldData[1][1])},
-        {PersonData.ID, new LabelPropertyChangeListener((JLabel) fieldData[2][1])},
-        {PersonData.COURSE, new LabelPropertyChangeListener((JLabel) fieldData[3][1])}};
+            {PersonData.FIRST_NAME, new LabelPropertyChangeListener((JLabel) fieldData[0][1])},
+            {PersonData.LAST_NAME, new LabelPropertyChangeListener((JLabel) fieldData[1][1])},
+            {PersonData.ID, new LabelPropertyChangeListener((JLabel) fieldData[2][1])},
+            {PersonData.COURSE, new LabelPropertyChangeListener((JLabel) fieldData[3][1])}};
 
-    public PersonPanel(final PersonData person) {
+    public PersonPanel(final PersonData person)
+    {
         this.personData = person;
         initListeners();
         build();
     }
 
-    public void setPersonData(final PersonData person) {
+    public void setPersonData(final PersonData person)
+    {
         removeListeners();
         this.personData = person;
         initListeners();
     }
 
-    private void build() {
+    private void build()
+    {
         final FormLayout layout = new FormLayout("left:pref, 3dlu, right:pref, pref:grow");
 
         final DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
         builder.setDefaultDialogBorder();
 
         builder.appendSeparator("Persönliche Daten");
-        for (int i = 0; i < fieldData.length; i++) {
+        for (int i = 0; i < fieldData.length; i++)
+        {
             final Object[] fieldDatum = fieldData[i];
             builder.append((String) fieldDatum[0], (JLabel) fieldDatum[1]);
         }
     }
 
-    private void removeListeners() {
-        for (int i = 0; i < listenerData.length; i++) {
+    private void removeListeners()
+    {
+        for (int i = 0; i < listenerData.length; i++)
+        {
             final Object[] listenerDatum = (Object[]) listenerData[i];
             personData.removePropertyChangeListener((PropertyChangeListener) listenerDatum[1]);
         }
     }
 
-    private void initListeners() {
-        for (int i = 0; i < listenerData.length; i++) {
+    private void initListeners()
+    {
+        for (int i = 0; i < listenerData.length; i++)
+        {
             final Object[] listenerDatum = (Object[]) listenerData[i];
             final String propertyName = (String) listenerDatum[0];
             final PropertyChangeListener listener = (PropertyChangeListener) listenerDatum[1];
             personData.addPropertyChangeListener(propertyName, listener);
-            try {
+            try
+            {
                 final JLabel field = (JLabel) fieldData[i][1];
                 final PropertyDescriptor descriptor = new PropertyDescriptor(propertyName, PersonData.class);
                 field.setText((String) BeanUtils.getValue(personData, descriptor));
             }
-            catch (IntrospectionException e) {
+            catch (IntrospectionException e)
+            {
                 e.printStackTrace();
             }
         }
     }
 
-    private static class LabelPropertyChangeListener implements PropertyChangeListener {
+    private static class LabelPropertyChangeListener implements PropertyChangeListener
+    {
 
         private JLabel label;
 
-        private LabelPropertyChangeListener(final JLabel label) {
+        private LabelPropertyChangeListener(final JLabel label)
+        {
             this.label = label;
         }
 
-        public void propertyChange(final PropertyChangeEvent evt) {
+        public void propertyChange(final PropertyChangeEvent evt)
+        {
             label.setText((String) evt.getNewValue());
         }
     }

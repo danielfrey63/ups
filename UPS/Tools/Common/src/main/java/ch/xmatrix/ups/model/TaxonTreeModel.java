@@ -22,45 +22,56 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2006/08/04 15:50:02 $
  */
-public class TaxonTreeModel extends AbstractTreeModel {
+public class TaxonTreeModel extends AbstractTreeModel
+{
 
-    public TaxonTreeModel(final SimpleTaxon root) {
+    public TaxonTreeModel(final SimpleTaxon root)
+    {
         super(root);
     }
 
-    protected void remove(final Object child, final TreePath parentPath) {
+    protected void remove(final Object child, final TreePath parentPath)
+    {
     }
 
-    protected void insert(final TreePath childPath, final TreePath parentPath, final int pos) {
+    protected void insert(final TreePath childPath, final TreePath parentPath, final int pos)
+    {
     }
 
-    public int getChildCount(final Object parent) {
+    public int getChildCount(final Object parent)
+    {
         final SimpleTaxon taxon = (SimpleTaxon) parent;
         final ArrayList children = taxon.getChildTaxa();
         return children == null ? 0 : children.size();
     }
 
-    public Object getChild(final Object parent, final int index) {
+    public Object getChild(final Object parent, final int index)
+    {
         final SimpleTaxon taxon = (SimpleTaxon) parent;
         final ArrayList children = taxon.getChildTaxa();
         return children.get(index);
     }
 
-    public void valueForPathChanged(final TreePath path, final Object newValue) {
+    public void valueForPathChanged(final TreePath path, final Object newValue)
+    {
     }
 
-    public TreePath getPathToRoot(final SimpleTaxon taxon) {
+    public TreePath getPathToRoot(final SimpleTaxon taxon)
+    {
         final ArrayList<SimpleTaxon> pathElements = new ArrayList<SimpleTaxon>();
         SimpleTaxon current = taxon;
-        while (current != null) {
+        while (current != null)
+        {
             pathElements.add(0, current);
             current = current.getParentTaxon();
         }
         final TreePath path;
-        if (pathElements.size() == 0) {
+        if (pathElements.size() == 0)
+        {
             path = null;
         }
-        else {
+        else
+        {
             path = new TreePath(pathElements.toArray(new SimpleTaxon[0]));
         }
         return path;

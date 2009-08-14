@@ -21,35 +21,43 @@ import javax.swing.tree.TreePath;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/04/21 11:02:52 $
  */
-public class TreeObjectTreeModel extends AbstractTreeModel {
+public class TreeObjectTreeModel extends AbstractTreeModel
+{
 
-    public TreeObjectTreeModel(final TreeObject root) {
+    public TreeObjectTreeModel(final TreeObject root)
+    {
         super(root);
     }
 
-    public void setRoot(final TreeObject root) {
+    public void setRoot(final TreeObject root)
+    {
         super.root = root;
         reload();
     }
 
-    protected void remove(final Object child, final TreePath parentPath) {
+    protected void remove(final Object child, final TreePath parentPath)
+    {
         throw new IllegalStateException("removals not supported");
     }
 
-    protected void insert(final TreePath child, final TreePath parent, final int pos) {
+    protected void insert(final TreePath child, final TreePath parent, final int pos)
+    {
         throw new IllegalStateException("insertions not supported");
     }
 
-    public int getChildCount(final Object parent) {
+    public int getChildCount(final Object parent)
+    {
         final TreeObject treeObject = (TreeObject) parent;
         final TreeObject[] children = treeObject.getChildren();
         return children == null ? 0 : children.length;
     }
 
-    public Object getChild(final Object parent, final int index) {
+    public Object getChild(final Object parent, final int index)
+    {
         return ((TreeObject) parent).getChildren()[index];
     }
 
-    public void valueForPathChanged(final TreePath path, final Object newValue) {
+    public void valueForPathChanged(final TreePath path, final Object newValue)
+    {
     }
 }

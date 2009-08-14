@@ -35,15 +35,21 @@ import javax.swing.SwingConstants;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ExamInfoBuilder extends JPanel {
+public class ExamInfoBuilder extends JPanel
+{
 
     private final JLabel session = new JLabel();
+
     private final JLabel due = new JLabel();
+
     private final JLabel constraints = new JLabel();
+
     private final JLabel taxa = new JLabel();
+
     private static final Format FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
-    public void setModel(final UserModel userModel) {
+    public void setModel(final UserModel userModel)
+    {
         final SessionModel session = (SessionModel) MainModel.findModel(userModel.getExamInfoUid());
         final Constraints constraintsModel = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
         final TaxonTree tree = TaxonModels.find(constraintsModel.getTaxaUid());
@@ -57,7 +63,8 @@ public class ExamInfoBuilder extends JPanel {
         taxa.setToolTipText(tree.getDescription());
     }
 
-    public JPanel getPanel() {
+    public JPanel getPanel()
+    {
         final FormLayout layout = new FormLayout(
                 "8dlu, r:p, 3dlu, r:p, p:g, 8dlu",
                 "8dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 8dlu");

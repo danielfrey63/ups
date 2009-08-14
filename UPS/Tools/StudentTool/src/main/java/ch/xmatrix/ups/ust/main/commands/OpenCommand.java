@@ -46,109 +46,142 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.7 $ $Date: 2008/01/23 22:19:46 $
  */
-public class OpenCommand extends ActionCommand {
+public class OpenCommand extends ActionCommand
+{
 
     private static final Logger LOG = Logger.getLogger(OpenCommand.class);
 
     private MainModel model;
+
     private ExtentionFileFilter filter = new ExtentionFileFilter(Strings.getString("openchooser.filetype.description"),
             new String[]{Commands.OLD_FILE_EXTENTION, Commands.NEW_FILE_EXTENTION}, true);
 
-    public OpenCommand(final CommandManager commandManager, final MainModel model) {
+    public OpenCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_OPEN);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             model.setClosing();
-            if (!model.modelValid()) return;
+            if (!model.modelValid())
+            {
+                return;
+            }
             new PlantlistOpenChooser().open();
         }
-        catch (PropertyVetoException e) {
+        catch (PropertyVetoException e)
+        {
         }
     }
 
-    private class PlantlistOpenChooser extends OpenChooser {
+    private class PlantlistOpenChooser extends OpenChooser
+    {
 
-        public PlantlistOpenChooser() {
+        public PlantlistOpenChooser()
+        {
             super(OpenCommand.this.filter, "openchooser", OpenCommand.this.model.getLastOpenSaveDirectory());
         }
 
-        protected void load(final File file) {
+        protected void load(final File file)
+        {
             LOG.info("loading file " + file);
-            try {
+            try
+            {
                 List<String> list = null;
                 String uid = null;
                 String examInfoUid = null;
-                if (file.getName().endsWith(Commands.NEW_FILE_EXTENTION)) {
+                if (file.getName().endsWith(Commands.NEW_FILE_EXTENTION))
+                {
                     final XStream[] decoders = new XStream[]{
                             Commands.getConverterVersion1(), Commands.getConverterVersion2()};
                     boolean done = false;
-                    for (int i = 0; i < decoders.length && !done; i++) {
+                    for (int i = 0; i < decoders.length && !done; i++)
+                    {
                         Reader reader = null;
-                        try {
+                        try
+                        {
                             final XStream decoder = decoders[i];
                             reader = new FileReader(file);
                             final Object decoded = decoder.fromXML(reader);
-                            if (decoded instanceof Commands.Encoded) {
+                            if (decoded instanceof Commands.Encoded)
+                            {
                                 final Commands.Encoded encoded = (Commands.Encoded) decoded;
                                 uid = encoded.uid;
                                 list = (List<String>) encoded.list;
-                                if (list == null) {
+                                if (list == null)
+                                {
                                     reader.close();
                                     continue;
                                 }
                                 examInfoUid = encoded.exam;
                                 done = true;
                             }
-                            else if (decoded instanceof PlantList) {
+                            else if (decoded instanceof PlantList)
+                            {
                                 final PlantList plantList = (PlantList) decoded;
                                 list = plantList.getTaxa();
                                 done = true;
                             }
-                            else if (decoded instanceof ArrayList) {
+                            else if (decoded instanceof ArrayList)
+                            {
                                 list = (ArrayList<String>) decoded;
                                 done = true;
                             }
-                            else {
+                            else
+                            {
                                 throw new IllegalStateException("Unknown format in file \"" + file + "\"");
                             }
                         }
-                        catch (ConversionException e) {
-                            if (i < decoders.length - 1) {
+                        catch (ConversionException e)
+                        {
+                            if (i < decoders.length - 1)
+                            {
                                 LOG.info("decoder failed, trying another");
                             }
-                            else {
+                            else
+                            {
                                 LOG.info("no decoder matches");
                             }
                         }
-                        finally {
-                            if (reader != null) reader.close();
+                        finally
+                        {
+                            if (reader != null)
+                            {
+                                reader.close();
+                            }
                         }
                     }
                 }
-                else if (file.getName().endsWith(Commands.OLD_FILE_EXTENTION)) {
+                else if (file.getName().endsWith(Commands.OLD_FILE_EXTENTION))
+                {
                     final InputStream stream = new FileInputStream(file);
                     final XMLDecoder decoder = new XMLDecoder(stream);
                     final Object decoded = decoder.readObject();
                     // Skip person data if there
-                    if (!(decoded instanceof ArrayList)) {
+                    if (!(decoded instanceof ArrayList))
+                    {
                         list = (ArrayList<String>) decoder.readObject();
                     }
-                    else {
+                    else
+                    {
                         list = (ArrayList<String>) decoded;
                     }
                     stream.close();
                 }
-                else {
+                else
+                {
                     model.setError("error.openwrongfileformat");
                     throw new IllegalStateException("only UST and XUST files may be opened.");
                 }
 
                 final boolean canceled = false;
                 boolean toUpdate = false;
-                if (examInfoUid == null || "".equals(examInfoUid) || MainModel.findModel(examInfoUid) == null) {
+                if (examInfoUid == null || "".equals(examInfoUid) || MainModel.findModel(examInfoUid) == null)
+                {
                     Dialogs.showInfoMessage(model.getMainFrame().getRootPane(), "Hinweis",
                             "Die Pflanzenliste ist von einer früheren Version des UPS Studenten Tools.\n" +
                                     "Sie wird im Folgenden in die neue Version konvertiert. Zuerst wird ein Dialog\n" +
@@ -157,22 +190,26 @@ public class OpenCommand extends ActionCommand {
                                     "*unter einem anderen Name* speichern sollten. Verwenden Sie dann nur noch die\n" +
                                     "neue Version.");
                     final SessionModel sessionModel = Commands.runExamInfoChooser(model);
-                    if (sessionModel != null) {
+                    if (sessionModel != null)
+                    {
                         examInfoUid = sessionModel.getUid();
                         model.sessionModels.setSelection(sessionModel);
                         LOG.info("exam info uid assigned: " + examInfoUid);
                         toUpdate = true;
 
                     }
-                    else {
+                    else
+                    {
                         LOG.info("user canceled selection of new exam info uid");
                     }
                 }
-                if (uid == null || "".equals(uid)) {
+                if (uid == null || "".equals(uid))
+                {
                     uid = new RandomGUID().toString();
                     LOG.info("new user info guid generated: " + uid);
                 }
-                if (!canceled) {
+                if (!canceled)
+                {
 
                     model.sessionModels.setSelection(MainModel.findModel(examInfoUid));
                     Commands.setNewUserModel(model);
@@ -187,11 +224,13 @@ public class OpenCommand extends ActionCommand {
                     model.setCurrentFile(file);
                     model.setOpening();
                 }
-                if (toUpdate) {
+                if (toUpdate)
+                {
                     getCommandManager().getCommand(Commands.COMMANDID_SAVEAS).execute();
                 }
             }
-            catch (Exception e1) {
+            catch (Exception e1)
+            {
                 LOG.error("file not compliant with xust format", e1);
             }
         }

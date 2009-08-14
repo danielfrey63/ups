@@ -16,12 +16,11 @@
  */
 package ch.xmatrix.ups.uec.constraints.commands;
 
+import ch.xmatrix.ups.domain.Constraint;
+import ch.xmatrix.ups.domain.Constraints;
+import com.jgoodies.binding.list.SelectionInList;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.list.SelectionInList;
-import ch.xmatrix.ups.domain.Constraints;
-import ch.xmatrix.ups.domain.Constraint;
-import ch.xmatrix.ups.uec.constraints.commands.Commands;
 
 /**
  * TODO: document
@@ -29,16 +28,19 @@ import ch.xmatrix.ups.uec.constraints.commands.Commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class NewConstraints extends ActionCommand {
+public class NewConstraints extends ActionCommand
+{
 
     private SelectionInList models;
 
-    public NewConstraints(final CommandManager manager, final SelectionInList models) {
+    public NewConstraints(final CommandManager manager, final SelectionInList models)
+    {
         super(manager, Commands.COMMANDID_NEWCONSTRAINT);
         this.models = models;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final Constraints constraints = (Constraints) models.getSelection();
         final Constraint constraint = new Constraint();
         constraint.setConstraints(constraints);

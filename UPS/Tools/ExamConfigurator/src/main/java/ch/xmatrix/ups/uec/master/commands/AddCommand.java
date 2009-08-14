@@ -16,11 +16,10 @@
  */
 package ch.xmatrix.ups.uec.master.commands;
 
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
+import com.jgoodies.binding.list.SelectionInList;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.list.SelectionInList;
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
-import ch.xmatrix.ups.uec.master.commands.Commands;
 
 /**
  * TODO: document
@@ -28,19 +27,23 @@ import ch.xmatrix.ups.uec.master.commands.Commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class AddCommand extends ActionCommand {
+public class AddCommand extends ActionCommand
+{
 
     private SelectionInList models;
+
     private MasterDetailsFactory factory;
 
     public AddCommand(final CommandManager manager, final SelectionInList models,
-                      final MasterDetailsFactory factory) {
+                      final MasterDetailsFactory factory)
+    {
         super(manager, Commands.COMMANDID_ADD);
         this.models = models;
         this.factory = factory;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final Object model = factory.create();
         models.setSelection(model);
     }

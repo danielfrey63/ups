@@ -21,12 +21,15 @@ import com.thoughtworks.xstream.XStream;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:15 $
  */
-public class SessionPersister extends DirtyCapableModel {
+public class SessionPersister extends DirtyCapableModel
+{
 
     private static XStream converter;
 
-    public static XStream getConverter() {
-        if (converter == null) {
+    public static XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.NO_REFERENCES);
             converter.alias("sessions", SimpleModelList.class);

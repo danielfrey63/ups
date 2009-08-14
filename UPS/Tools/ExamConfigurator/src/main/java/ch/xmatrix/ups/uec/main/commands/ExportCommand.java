@@ -16,13 +16,13 @@
  */
 package ch.xmatrix.ups.uec.main.commands;
 
-import ch.xmatrix.ups.uec.main.MainModel;
 import ch.jfactory.model.SimpleModelList;
+import ch.xmatrix.ups.uec.main.MainModel;
+import com.jgoodies.uifextras.fileaccess.DirectoryChooser;
+import java.io.File;
+import java.util.List;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import java.util.List;
-import java.io.File;
-import com.jgoodies.uifextras.fileaccess.DirectoryChooser;
 
 /**
  * Closes the current card, opens the welcome card, resets the dirty flag and the current file.
@@ -30,19 +30,23 @@ import com.jgoodies.uifextras.fileaccess.DirectoryChooser;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ExportCommand extends ActionCommand {
+public class ExportCommand extends ActionCommand
+{
 
     private MainModel model;
 
-    public ExportCommand(final CommandManager commandManager, final MainModel model) {
+    public ExportCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_EXPORT);
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final File dir = DirectoryChooser.chooseDirectory(null);
         final List<SimpleModelList> models = MainModel.getModels();
-        for (final SimpleModelList list : models) {
+        for (final SimpleModelList list : models)
+        {
 
         }
     }

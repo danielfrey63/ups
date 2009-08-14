@@ -16,15 +16,15 @@
  */
 package ch.xmatrix.ups.uec.constraints;
 
+import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.SimpleTaxon;
+import ch.xmatrix.ups.model.TaxonModels;
+import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.view.renderer.ConstraintsRendererUtils;
 import ch.xmatrix.ups.view.renderer.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
-import ch.xmatrix.ups.model.TaxonTree;
-import ch.xmatrix.ups.model.TaxonModels;
-import ch.jfactory.resource.ImageLocator;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,33 +38,41 @@ import javax.swing.ListCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2007/04/06 11:01:10 $
  */
-public class ConstraintsListRenderer implements ListCellRenderer {
+public class ConstraintsListRenderer implements ListCellRenderer
+{
 
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
     private final RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
 
     private Constraints models;
+
     private ArrayList<String> defaultTaxa = DUMMY_LIST;
+
     private TaxonTree tree;
+
     private boolean enabled;
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean selected, final boolean cellHasFocus) {
+    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean selected, final boolean cellHasFocus)
+    {
         final Constraint constraint = (Constraint) value;
         final List<String> taxa = constraint == null ? DUMMY_LIST : constraint.getTaxa();
         panel.setEnabled(enabled);
         panel.setSelected(selected);
         panel.setText(constraint.getName());
         final String iconName;
-        if (taxa != null && taxa.size() == 1) {
+        if (taxa != null && taxa.size() == 1)
+        {
             final String taxonName = taxa.get(0);
             final SimpleTaxon taxon = tree.findTaxonByName(taxonName);
             iconName = TaxonRendererUtils.getIconForTaxon(taxon, selected && enabled);
         }
-        else if (taxa != null && taxa.size() > 1) {
+        else if (taxa != null && taxa.size() > 1)
+        {
             iconName = "group.gif";
         }
-        else {
+        else
+        {
             iconName = null;
         }
         panel.setIcon(ImageLocator.getIcon(iconName));
@@ -73,14 +81,16 @@ public class ConstraintsListRenderer implements ListCellRenderer {
         return panel;
     }
 
-    public void setConstraints(final Constraints models) {
+    public void setConstraints(final Constraints models)
+    {
         this.models = models;
         final String[] taxa = models == null ? null : models.getDefaultTaxa();
         defaultTaxa = models == null || taxa == null ? DUMMY_LIST : new ArrayList<String>(Arrays.asList(taxa));
         tree = models == null ? null : TaxonModels.find(models.getTaxaUid());
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         this.enabled = enabled;
     }
 }

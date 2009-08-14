@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.uec.constraints;
 
-import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.domain.Constraints;
+import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
@@ -26,10 +26,13 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class ConstraintsFactory extends MasterDetailsFactory {
+public class ConstraintsFactory extends MasterDetailsFactory
+{
 
-    protected TaxonBased createCopy(final TaxonBased orig) {
-        if (!(orig instanceof Constraints)) {
+    protected TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof Constraints))
+        {
             throw new IllegalArgumentException("original must be of type " + Constraints.class.getName() +
                     ", got " + orig.getClass().getName());
         }
@@ -37,7 +40,8 @@ public class ConstraintsFactory extends MasterDetailsFactory {
         return new Constraints(original);
     }
 
-    protected TaxonBased createInstance() {
+    protected TaxonBased createInstance()
+    {
         return new Constraints();
     }
 }

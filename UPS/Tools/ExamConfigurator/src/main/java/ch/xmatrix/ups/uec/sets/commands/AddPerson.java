@@ -41,24 +41,29 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:19:10 $
  */
-public class AddPerson extends ActionCommand {
+public class AddPerson extends ActionCommand
+{
 
     private static final Logger LOG = Logger.getLogger(AddPerson.class);
 
     private final SetBuilder.SubmitTableModel model;
+
     private final AbstractDialog dialog;
 
     private PersonData person;
 
-    public AddPerson(final CommandManager commandManager, final SetBuilder.SubmitTableModel model) {
+    public AddPerson(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    {
         super(commandManager, Commands.COMMANDID_ADDPERSION);
         this.model = model;
         person = new PersonData();
         dialog = new Dialog();
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             dialog.open();
             final Anmeldedaten anmeldedaten = new Anmeldedaten();
             anmeldedaten.setVorname(person.getFirstName());
@@ -72,31 +77,38 @@ public class AddPerson extends ActionCommand {
             person.setId("");
             person.setCourse("");
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("error during action", e);
         }
     }
 
-    private class Dialog extends AbstractDialog {
+    private class Dialog extends AbstractDialog
+    {
 
         private PersonEditBuilder builder;
 
-        public Dialog() {
+        public Dialog()
+        {
             super((JFrame) null, "Neue Person", true);
         }
 
-        protected JComponent buildHeader() {
+        protected JComponent buildHeader()
+        {
             return new HeaderPanel("Angaben zum Prüfling", "" +
                     "Geben Sie hier die Daten eines Prüflings\nohne Pflanzelisten ein.");
         }
 
-        protected JComponent buildContent() {
+        protected JComponent buildContent()
+        {
             final JPanel panel = new JPanel(new BorderLayout());
             builder = new PersonEditBuilder(person);
             panel.add(builder.getPanel(), BorderLayout.CENTER);
             panel.add(buildButtonBarWithOKCancel(), BorderLayout.SOUTH);
-            builder.addCompletionListener(new PersonEditBuilder.CompletionListener() {
-                public void updateComplete(final boolean complete) {
+            builder.addCompletionListener(new PersonEditBuilder.CompletionListener()
+            {
+                public void updateComplete(final boolean complete)
+                {
                     getOKAction().setEnabled(complete);
                 }
             });
@@ -104,13 +116,15 @@ public class AddPerson extends ActionCommand {
             return panel;
         }
 
-        public void doAccept() {
+        public void doAccept()
+        {
             super.doAccept();
             builder.save();
         }
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
         final AddPerson action = new AddPerson(new CommandManager(), null);
         action.dialog.setResourceBundle(ResourceBundle.getBundle("ch.xmatrix.ups.uec.Strings"));

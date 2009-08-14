@@ -11,8 +11,8 @@
  */
 package ch.xmatrix.ups.view;
 
-import javax.swing.JLabel;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 
 /**
  * TODO: document
@@ -20,47 +20,57 @@ import javax.swing.Icon;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public class ObjectLabel extends JLabel {
+public class ObjectLabel extends JLabel
+{
 
     private Object object;
 
-    public ObjectLabel() {
+    public ObjectLabel()
+    {
         super();
     }
 
-    public ObjectLabel(final Icon image) {
+    public ObjectLabel(final Icon image)
+    {
         super(image);
     }
 
-    public ObjectLabel(final Icon image, final int horizontalAlignment) {
+    public ObjectLabel(final Icon image, final int horizontalAlignment)
+    {
         super(image, horizontalAlignment);
     }
 
-    public ObjectLabel(final Object object) {
+    public ObjectLabel(final Object object)
+    {
         super();
         setObject(object);
     }
 
-    public ObjectLabel(final Object object, final int horizontalAlignment) {
+    public ObjectLabel(final Object object, final int horizontalAlignment)
+    {
         super(object.toString(), horizontalAlignment);
         setObject(object);
     }
 
-    public ObjectLabel(final Object object, final Icon icon, final int horizontalAlignment) {
+    public ObjectLabel(final Object object, final Icon icon, final int horizontalAlignment)
+    {
         super(icon, horizontalAlignment);
         setObject(object);
     }
 
-    public void setObject(final Object object) {
+    public void setObject(final Object object)
+    {
         this.object = object;
         setText(object.toString());
     }
 
-    public Object getObject() {
+    public Object getObject()
+    {
         return object;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return getText();
     }
 }

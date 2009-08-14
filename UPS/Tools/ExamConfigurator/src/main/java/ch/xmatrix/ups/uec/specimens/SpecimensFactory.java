@@ -17,8 +17,8 @@
 package ch.xmatrix.ups.uec.specimens;
 
 import ch.xmatrix.ups.domain.TaxonBased;
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 import ch.xmatrix.ups.model.SpecimensModel;
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
  * TODO: document
@@ -26,17 +26,21 @@ import ch.xmatrix.ups.model.SpecimensModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/23 22:19:08 $
  */
-public class SpecimensFactory extends MasterDetailsFactory {
+public class SpecimensFactory extends MasterDetailsFactory
+{
 
-    protected TaxonBased createCopy(final TaxonBased orig) {
-        if (! (orig instanceof SpecimensModel)) {
+    protected TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof SpecimensModel))
+        {
             throw new IllegalArgumentException("original must be instance of " + SpecimensModel.class.getName() +
                     ", found " + orig.getClass().getName());
         }
         return new SpecimensModel((SpecimensModel) orig);
     }
 
-    protected TaxonBased createInstance() {
+    protected TaxonBased createInstance()
+    {
         return new SpecimensModel();
     }
 }

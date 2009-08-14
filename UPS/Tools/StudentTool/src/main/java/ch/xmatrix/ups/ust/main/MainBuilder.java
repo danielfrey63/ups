@@ -69,16 +69,23 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.9 $ $Date: 2007/05/16 17:00:16 $
  */
-public class MainBuilder extends AbstractMainBuilder {
+public class MainBuilder extends AbstractMainBuilder
+{
 
     private MainModel model;
+
     private ExamInfoBuilder examInfoBuilder;
+
     private BalanceBuilder balanceBuilder;
+
     private SpeciesSelectionBuilder speciesSelectionBuilder;
+
     private ConstraintsSelectionBuilder constraintsSelectionBuilder;
+
     private TaxonCheckBuilder taxonCheckBuilder;
 
-    public MainBuilder(final MainModel model, final InfoModel infoModel) {
+    public MainBuilder(final MainModel model, final InfoModel infoModel)
+    {
         super(model, infoModel, new String[]{
                 I15nWelcomePanel.SEPARATOR, Commands.COMMANDID_NEW, Commands.COMMANDID_OPEN,
                 Commands.COMMANDID_NEWDEFAULT, CommonCommands.COMMANDID_QUIT, CommonCommands.COMMANDID_ABOUT,
@@ -94,7 +101,8 @@ public class MainBuilder extends AbstractMainBuilder {
         taxonCheckBuilder = new TaxonCheckBuilder();
     }
 
-    protected void createNonWelcomPanels() {
+    protected void createNonWelcomPanels()
+    {
 
         final ViewMap map = new ViewMap();
         map.addView(1, new View(Strings.getString("info.exam.title"), null, examInfoBuilder.getPanel()));
@@ -112,15 +120,18 @@ public class MainBuilder extends AbstractMainBuilder {
         taxonCheckBuilder.addComponentToRepaint(constraintsSelectionBuilder.getRepaintComponent());
     }
 
-    protected JMenuBar getMenuBar() {
+    protected JMenuBar getMenuBar()
+    {
         return getCommandManager().getGroup(Commands.GROUPID_MENUBAR).createMenuBar();
     }
 
-    protected MainModel getMainModel() {
+    protected MainModel getMainModel()
+    {
         return model;
     }
 
-    protected void initCommands() {
+    protected void initCommands()
+    {
         final CommandManager manager = getCommandManager();
         initCommand(new NewFileCommand(manager, model), false);
         initCommand(new NewDefaultCommand(manager, model), false);
@@ -141,13 +152,18 @@ public class MainBuilder extends AbstractMainBuilder {
         initCommand(new AboutCommand(manager, ImageLocator.getIcon("ust-logo.png"), Application.getDescription().getFullVersion()), true);
     }
 
-    protected void initModelListeners() {
+    protected void initModelListeners()
+    {
         super.initModelListeners();
-        model.queue(new Runnable() {
-            public void run() {
+        model.queue(new Runnable()
+        {
+            public void run()
+            {
                 // React upon an open state change. Show the open dialog.
-                model.addPropertyChangeListener(AbstractMainModel.EVENTNAME_OPENING, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.EVENTNAME_OPENING, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         final UserModel userModel = model.getUserModel();
                         examInfoBuilder.setModel(userModel);
                         balanceBuilder.setModel(userModel);
@@ -159,44 +175,56 @@ public class MainBuilder extends AbstractMainBuilder {
                     }
                 });
 
-                speciesSelectionBuilder.addListSelectionListener(new ListSelectionListener() {
-                    public void valueChanged(final ListSelectionEvent e) {
+                speciesSelectionBuilder.addListSelectionListener(new ListSelectionListener()
+                {
+                    public void valueChanged(final ListSelectionEvent e)
+                    {
                         final JList list = (JList) e.getSource();
                         taxonCheckBuilder.setSelection((SimpleTaxon) list.getSelectedValue());
                     }
                 });
 
-                constraintsSelectionBuilder.addTreeSelectionListener(new TreeSelectionListener() {
-                    public void valueChanged(final TreeSelectionEvent e) {
+                constraintsSelectionBuilder.addTreeSelectionListener(new TreeSelectionListener()
+                {
+                    public void valueChanged(final TreeSelectionEvent e)
+                    {
                         final JTree tree = (JTree) e.getSource();
                         final TreePath path = tree.getSelectionPath();
-                        if (path != null) {
+                        if (path != null)
+                        {
                             final Object selection = path.getLastPathComponent();
                             final SessionModel session = (SessionModel) MainModel.findModel(model.getUserModel().getExamInfoUid());
                             final Constraints constraints = (Constraints) AbstractMainModel.findModel(session.getConstraintsUid());
                             final TaxonTree taxonTree = TaxonModels.find(constraints.getTaxaUid());
                             final SimpleTaxon taxon;
-                            if (selection instanceof String) {
+                            if (selection instanceof String)
+                            {
                                 taxon = taxonTree.getRootTaxon();
                             }
-                            else if (selection instanceof Constraint) {
+                            else if (selection instanceof Constraint)
+                            {
                                 final Constraint constraint = (Constraint) selection;
                                 final List<String> taxa = constraint.getTaxa();
-                                if (taxa != null && taxa.size() == 1) {
+                                if (taxa != null && taxa.size() == 1)
+                                {
                                     final String taxonName = taxa.get(0);
                                     taxon = taxonTree.findTaxonByName(taxonName);
                                 }
-                                else {
+                                else
+                                {
                                     taxon = null;
                                 }
                             }
-                            else if (selection instanceof SimpleTaxon) {
+                            else if (selection instanceof SimpleTaxon)
+                            {
                                 taxon = (SimpleTaxon) selection;
                             }
-                            else {
+                            else
+                            {
                                 taxon = null;
                             }
-                            if (taxon != null) {
+                            if (taxon != null)
+                            {
                                 taxonCheckBuilder.setSelection(taxon);
                             }
                         }
@@ -204,16 +232,20 @@ public class MainBuilder extends AbstractMainBuilder {
                 });
 
                 // Make the submit menu item dis-/enabled when list is incomplete/complete.
-                taxonCheckBuilder.addSpeciesSelectionListener(new TaxonCheckBuilder.SpeciesSelectionListener() {
-                    public void speciesSelectionChanged() {
+                taxonCheckBuilder.addSpeciesSelectionListener(new TaxonCheckBuilder.SpeciesSelectionListener()
+                {
+                    public void speciesSelectionChanged()
+                    {
                         model.setDirty(true);
                         adjustForCompletion();
                     }
                 });
 
                 // The save command is only enabled if the file is not the default file and the model is dirty.
-                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_DIRTY, new PropertyChangeListener() {
-                    public void propertyChange(final PropertyChangeEvent evt) {
+                model.addPropertyChangeListener(AbstractMainModel.PROPERTYNAME_DIRTY, new PropertyChangeListener()
+                {
+                    public void propertyChange(final PropertyChangeEvent evt)
+                    {
                         final boolean dirty = ((Boolean) evt.getNewValue()).booleanValue();
                         final boolean isDefaultFile = model.isDefaultFile();
                         getCommandManager().getCommand(Commands.COMMANDID_SAVE).setEnabled(dirty && !isDefaultFile);
@@ -223,10 +255,9 @@ public class MainBuilder extends AbstractMainBuilder {
         });
     }
 
-    /**
-     * Looks whether the constraints are complete and en-/disables the submit menu.
-     */
-    private void adjustForCompletion() {
+    /** Looks whether the constraints are complete and en-/disables the submit menu. */
+    private void adjustForCompletion()
+    {
         final UserModel userModel = model.getUserModel();
         final Constraints constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
         final int complete = ConstraintsRendererUtils.getCompleteConstraints(constraints, userModel.getTaxa());

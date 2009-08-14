@@ -70,37 +70,63 @@ import org.pietschy.command.ActionCommandInterceptor;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:20 $
  */
-public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements DirtyListener {
+public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements DirtyListener
+{
 
     public static final String RESOURCE_BUNDLE = "ch.xmatrix.ups.uec.master.masterdetail";
+
     public static final String COMPONENT_COMBO_MODELS = "comboModels";
+
     public static final String COMPONENT_PANEL_COMBO = "panelCombo";
+
     public static final String COMPONENT_COMBO_TAXTREES = "comboTaxtrees";
+
     public static final String COMPONENT_FIELD_MODIFIED = "fieldModified";
+
     public static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("d.M.yyyy HH:mm:ss.SSS");
 
     private static final Logger LOG = Logger.getLogger(MasterDetailsBuilder.class);
+
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/master/MasterDetail.jfd";
+
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(RESOURCE_BUNDLE);
 
     private JPanel main;
+
     private JPanel master;
+
     private JComboBox taxa;
+
     private JComboBox choice;
+
     private DetailsBuilder details;
+
     private SelectionInList models;
+
     private MasterDetailsFactory factory;
+
     private ActionCommand save;
+
     private ActionCommand fix;
+
     private ActionCommand load;
+
     private JTextComponent modified;
+
     private ActionCommand copy;
+
     private ActionCommand delete;
+
     private boolean dirty;
+
     private boolean isAdjusting;
+
     private boolean taxonTreeDisabled;
+
     private ActionCommand add;
+
     private FormCreator creator;
+
     private static final String COMPONENT_LABEL_TAXTREE = "labelTaxtree";
 
     //--- Public Interface.
@@ -111,7 +137,8 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      * @param details the details to add
      * @param size    the size for the first column in this panel. Use this to align components propertly.
      */
-    public void addDetails(final JComponent details, final int size) {
+    public void addDetails(final JComponent details, final int size)
+    {
         final FormLayout layout = (FormLayout) master.getLayout();
         layout.setColumnSpec(2, new ColumnSpec("max(min;" + size + "dlu)"));
         main.add(details, BorderLayout.CENTER);
@@ -122,23 +149,25 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      *
      * @param detailsBuilder the builder to register
      */
-    public void registerDetailsBuilder(final DetailsBuilder detailsBuilder) {
+    public void registerDetailsBuilder(final DetailsBuilder detailsBuilder)
+    {
         this.details = detailsBuilder;
         detailsBuilder.registerDirtyListener(this);
     }
 
-    public void registerModels(final SelectionInList models) {
+    public void registerModels(final SelectionInList models)
+    {
         this.models = models;
     }
 
-    public void registerController(final MasterDetailsFactory factory) {
+    public void registerController(final MasterDetailsFactory factory)
+    {
         this.factory = factory;
     }
 
-    /**
-     * Disables the taxon tree combo box permanently.
-     */
-    public void setTaxonTreeDisabled() {
+    /** Disables the taxon tree combo box permanently. */
+    public void setTaxonTreeDisabled()
+    {
         creator.getComboBox(COMPONENT_COMBO_TAXTREES).setVisible(false);
         creator.getLabel(COMPONENT_LABEL_TAXTREE).setVisible(false);
         taxonTreeDisabled = true;
@@ -146,8 +175,10 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
 
     //--- ActionCommandPanelBuilder overrides
 
-    protected JComponent createMainPanel() {
-        try {
+    protected JComponent createMainPanel()
+    {
+        try
+        {
             creator = new FormCreator(FormLoader.load(RESOURCE_FORM));
             creator.createAll();
             main = new JPanel(new BorderLayout());
@@ -162,7 +193,8 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
             modified = creator.getTextField(COMPONENT_FIELD_MODIFIED);
             main.add(master, BorderLayout.NORTH);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             final String message = "could not create master panel";
             LOG.error(message, e);
             throw new IllegalStateException(message);
@@ -170,7 +202,8 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         return main;
     }
 
-    protected void initCommands() {
+    protected void initCommands()
+    {
         add = initCommand(new AddCommand(getCommandManager(), models, factory), true);
         copy = initCommand(new CopyCommand(getCommandManager(), models, factory));
         delete = initCommand(new DeleteCommand(getCommandManager(), models, factory));
@@ -179,11 +212,15 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         fix = initCommand(new FixCommand(getCommandManager(), details));
     }
 
-    protected void initModelListeners() {
-        models.addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+    protected void initModelListeners()
+    {
+        models.addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 final Object model = evt.getNewValue();
-                if (!isAdjusting && (model instanceof TaxonBased || model == null)) {
+                if (!isAdjusting && (model instanceof TaxonBased || model == null))
+                {
                     isAdjusting = true;
                     final TaxonBased taxonBased = (TaxonBased) model;
                     // Make sure to first set the model in the details. All other modifications rely on it.
@@ -197,10 +234,14 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         });
     }
 
-    protected void initSubpanelCommands() {
-        choice.addItemListener(new ItemListener() {
-            public void itemStateChanged(final ItemEvent e) {
-                if (!isAdjusting) {
+    protected void initSubpanelCommands()
+    {
+        choice.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(final ItemEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setStates(choice);
                     isAdjusting = false;
@@ -208,15 +249,20 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
             }
         });
         final JTextField editor = (JTextField) choice.getEditor().getEditorComponent();
-        editor.getDocument().addDocumentListener(new SimpleDocumentListener() {
-            public void changedUpdate(final DocumentEvent e) {
-                if (!isAdjusting) {
+        editor.getDocument().addDocumentListener(new SimpleDocumentListener()
+        {
+            public void changedUpdate(final DocumentEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final TaxonBased model = (TaxonBased) models.getSelection();
-                    if (model != null) {
+                    if (model != null)
+                    {
                         final String newName = editor.getText().trim();
                         final String modelName = model.getName();
-                        if (!newName.equals(modelName)) {
+                        if (!newName.equals(modelName))
+                        {
                             model.setName(newName);
                             setDirty(true, editor, true);
                         }
@@ -226,17 +272,22 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
             }
         });
         final VetoableComboBoxModel comboTaxtreeModel = (VetoableComboBoxModel) taxa.getModel();
-        comboTaxtreeModel.addVetoableSelectionListener(new VetoableComboBoxSelectionListener() {
-            public boolean selectionChanged(final VetoableChangeEvent e) {
+        comboTaxtreeModel.addVetoableSelectionListener(new VetoableComboBoxSelectionListener()
+        {
+            public boolean selectionChanged(final VetoableChangeEvent e)
+            {
                 final TaxonTree newTree = (TaxonTree) e.getNewValue();
                 final boolean migrate;
-                if (newTree != null) {
+                if (newTree != null)
+                {
                     final TaxonBased model = (TaxonBased) models.getSelection();
                     final String uid = newTree.getUid();
                     migrate = details.handleMigration(model, uid);
-                    if (!isAdjusting) {
+                    if (!isAdjusting)
+                    {
                         isAdjusting = true;
-                        if (migrate && model != null) {
+                        if (migrate && model != null)
+                        {
                             model.setTaxaUid(uid);
                             details.setModel(model);
                             setDirty(true, taxa, true);
@@ -244,20 +295,25 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
                         isAdjusting = false;
                     }
                 }
-                else {
+                else
+                {
                     migrate = true;
                 }
                 return migrate;
             }
         });
 
-        final ActionCommandInterceptor dirtyInterceptor = new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        final ActionCommandInterceptor dirtyInterceptor = new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty(true, null, true);
                     isAdjusting = false;
@@ -266,39 +322,51 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         };
         add.addInterceptor(dirtyInterceptor);
         copy.addInterceptor(dirtyInterceptor);
-        delete.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        delete.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty(true, delete, false);
                     isAdjusting = false;
                 }
             }
         });
-        fix.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        fix.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty(true, fix, false);
                     isAdjusting = false;
                 }
             }
         });
-        final ActionCommandInterceptor cleanInterceptor = new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        final ActionCommandInterceptor cleanInterceptor = new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty(false, null, true);
                     isAdjusting = false;
@@ -317,8 +385,10 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      *
      * @param dirty the dirty state
      */
-    public void setDirty(final boolean dirty) {
-        if (!isAdjusting) {
+    public void setDirty(final boolean dirty)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             setDirty(dirty, null, true);
             isAdjusting = false;
@@ -334,24 +404,31 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      * @param name  the origin
      * @param date  indicate whether the date has to be modified in case of a true dirty.
      */
-    private void setDirty(final boolean dirty, final Object name, final boolean date) {
-        if (dirty != this.dirty) {
+    private void setDirty(final boolean dirty, final Object name, final boolean date)
+    {
+        if (dirty != this.dirty)
+        {
             this.dirty = dirty;
         }
-        if (dirty && date) {
+        if (dirty && date)
+        {
             final TaxonBased model = (TaxonBased) models.getSelection();
-            if (model != null) {
+            if (model != null)
+            {
                 model.setModified(Calendar.getInstance().getTime());
             }
         }
         setStates(name);
     }
 
-    private TaxonTree getTaxonTree(final TaxonBased model) {
+    private TaxonTree getTaxonTree(final TaxonBased model)
+    {
         final String taxaUid = model == null ? null : model.getTaxaUid();
         final TaxonTree tree = TaxonModels.find(taxaUid);
-        if (tree == null) {
-            if (taxaUid != null) {
+        if (tree == null)
+        {
+            if (taxaUid != null)
+            {
                 final String message = BUNDLE.getString("masterdetail.error.taxonTree.text");
                 final String formatted = new MessageFormat(message).format(new String[]{taxaUid});
                 Dialogs.showErrorMessage(master, BUNDLE.getString("masterdetail.error.taxonTree.title"), formatted);
@@ -360,24 +437,46 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         return tree;
     }
 
-    private void setStates(final Object source) {
+    private void setStates(final Object source)
+    {
         setValueStates(source);
         setEnabledStates();
     }
 
-    private void setValueStates(final Object source) {
+    private void setValueStates(final Object source)
+    {
         final TaxonBased model = (TaxonBased) models.getSelection();
-        if (model != null) {
+        if (model != null)
+        {
             final TaxonTree tree = model == null ? null : TaxonModels.find(model.getTaxaUid());
-            if (source != modified) modified.setText(DATEFORMAT.format(model.getModified()));
-            if (source != taxa) taxa.setSelectedItem(tree);
-            if (source != choice) choice.setSelectedItem(model);
+            if (source != modified)
+            {
+                modified.setText(DATEFORMAT.format(model.getModified()));
+            }
+            if (source != taxa)
+            {
+                taxa.setSelectedItem(tree);
+            }
+            if (source != choice)
+            {
+                choice.setSelectedItem(model);
+            }
             choice.setEditable(!model.isFixed());
         }
-        else {
-            if (source != modified) modified.setText("");
-            if (source != taxa) taxa.setSelectedItem(null);
-            if (source != choice) choice.setSelectedItem(null);
+        else
+        {
+            if (source != modified)
+            {
+                modified.setText("");
+            }
+            if (source != taxa)
+            {
+                taxa.setSelectedItem(null);
+            }
+            if (source != choice)
+            {
+                choice.setSelectedItem(null);
+            }
             choice.setEditable(false);
         }
         choice.repaint();
@@ -441,7 +540,8 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      *        low                           high
      * </pre>
      */
-    private void setEnabledStates() {
+    private void setEnabledStates()
+    {
         final TaxonBased model = (TaxonBased) models.getSelection();
         final String taxaUid = model == null ? "" : model.getTaxaUid();
         final TaxonTree tree = model == null ? null : TaxonModels.find(taxaUid);
@@ -463,7 +563,8 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
                 0xA0A0, 0x8080, 0xFF00, 0xFF00
         }, 0);
 
-        if (taxonTreeDisabled) {
+        if (taxonTreeDisabled)
+        {
             taxa.setEnabled(false);
         }
     }

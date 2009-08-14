@@ -80,118 +80,102 @@ import javax.swing.border.LineBorder;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2006/04/25 11:08:11 $
  */
-public class RendererPanel extends JPanel {
+public class RendererPanel extends JPanel
+{
 
-    /**
-     * Used to display ok-independent selected background.
-     */
+    /** Used to display ok-independent selected background. */
     private static final Color COLOR_BACKGROUND_SELECTED = UIManager.getColor("Tree.selectionBackground");
 
-    /**
-     * Used to display ok-independent deselected background.
-     */
+    /** Used to display ok-independent deselected background. */
     private static final Color COLOR_BACKGROUND_DESELECTED = UIManager.getColor("Tree.background");
 
-    /**
-     * Array of background colors.
-     */
+    /** Array of background colors. */
     private static final Color[] COLOR_BACKGROUND = {COLOR_BACKGROUND_DESELECTED, COLOR_BACKGROUND_SELECTED};
 
-    /**
-     * Used to display disabled text.
-     */
+    /** Used to display disabled text. */
     private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor("Label.disabledForeground");
 
-    /**
-     * Used to display ok-independent selected text.
-     */
+    /** Used to display ok-independent selected text. */
     private static final Color COLOR_FOREGROUND_SELECTED = UIManager.getColor("Tree.selectionForeground");
 
-    /**
-     * Used to display ok-independent deselected text.
-     */
+    /** Used to display ok-independent deselected text. */
     private static final Color COLOR_FOREGROUND_DESELECTED = UIManager.getColor("Tree.foreground");
 
-    /**
-     * Array of foreground colors.
-     */
+    /** Array of foreground colors. */
     private static final Color[] COLOR_FOREGROUND = {
             COLOR_FOREGROUND_DISABLED, COLOR_FOREGROUND_DESELECTED, COLOR_FOREGROUND_SELECTED};
 
-    /**
-     * Base color for ok state.
-     */
+    /** Base color for ok state. */
     private static final Color COLOR_OK_FULL = new Color(0, 200, 0);
 
-    /**
-     * Base color for nok state.
-     */
+    /** Base color for nok state. */
     private static final Color COLOR_NOK_FULL = Color.red;
 
-    /**
-     * Used to display selected text in ok state.
-     */
+    /** Used to display selected text in ok state. */
     private static final Color COLOR_OK_FADE = ColorUtils.fade(COLOR_OK_FULL, 0.5);
 
-    /**
-     * Used to display selected text in nok state.
-     */
+    /** Used to display selected text in nok state. */
     private static final Color COLOR_NOK_FADE = ColorUtils.fade(COLOR_NOK_FULL, 0.5);
 
-    /**
-     * Array of colors for decision table.
-     */
+    /** Array of colors for decision table. */
     private static final Color[] COLOR_OKDEPENDENT = {
             COLOR_NOK_FADE, COLOR_NOK_FADE, COLOR_OK_FADE, COLOR_OK_FADE,
             COLOR_NOK_FULL, COLOR_NOK_FADE, COLOR_OK_FULL, COLOR_OK_FADE
     };
 
-    /**
-     * Color of selected border.
-     */
+    /** Color of selected border. */
     private static final Color COLOR_BORDER_SELECTED = UIManager.getColor("Button.focus");
 
-    /**
-     * Selected border.
-     */
+    /** Selected border. */
     public static final LineBorder BORDER_SELECTED = new LineBorder(COLOR_BORDER_SELECTED);
 
-    /**
-     * Deselected border.
-     */
+    /** Deselected border. */
     public static final EmptyBorder BORDER_DESELECTED = new EmptyBorder(1, 1, 1, 1);
 
     public static final Border[] BORDERS = new Border[]{BORDER_DESELECTED, BORDER_SELECTED};
 
-    public static enum SelectionType {ALL, TEXTONLY}
+    public static enum SelectionType
+    {
+        ALL, TEXTONLY
+    }
 
     private final JPanel selectable;
+
     private final JLabel text = new JLabel();
+
     private final JLabel icon = new JLabel();
+
     private final JLabel extention = new JLabel();
+
     private final JPanel textPanel = new JPanel();
+
     private final CellConstraints cc = new CellConstraints();
 
     private JComponent prefix = null;
+
     private boolean ok = true;
+
     private boolean selected = false;
+
     private FormLayout layout;
 
-    /**
-     * Whether the prefix component (i.e. a checkbox) is enabled or not.
-     */
+    /** Whether the prefix component (i.e. a checkbox) is enabled or not. */
     private boolean prefixEnabled;
 
-    public RendererPanel() {
+    public RendererPanel()
+    {
         this(SelectionType.TEXTONLY);
     }
 
-    public RendererPanel(final SelectionType selectionType) {
-        if (selectionType == SelectionType.ALL) {
+    public RendererPanel(final SelectionType selectionType)
+    {
+        if (selectionType == SelectionType.ALL)
+        {
             selectable = this;
             textPanel.setOpaque(false);
         }
-        else {
+        else
+        {
             selectable = textPanel;
             textPanel.setOpaque(true);
         }
@@ -226,7 +210,8 @@ public class RendererPanel extends JPanel {
      *
      * @param newIcon the icon to set
      */
-    public void setIcon(final Icon newIcon) {
+    public void setIcon(final Icon newIcon)
+    {
         icon.setIcon(newIcon);
     }
 
@@ -235,7 +220,8 @@ public class RendererPanel extends JPanel {
      *
      * @param newText the text to set
      */
-    public void setText(final String newText) {
+    public void setText(final String newText)
+    {
         text.setText(newText);
     }
 
@@ -245,12 +231,15 @@ public class RendererPanel extends JPanel {
      *
      * @param extention the text to set, or null
      */
-    public void setExtentionText(final String extention) {
-        if (extention != null) {
+    public void setExtentionText(final String extention)
+    {
+        if (extention != null)
+        {
             this.extention.setText(extention);
             addExtention();
         }
-        else {
+        else
+        {
             removeExtention();
         }
     }
@@ -260,7 +249,8 @@ public class RendererPanel extends JPanel {
      *
      * @param prefixComponent the component to set
      */
-    public void setPrefixComponent(final JComponent prefixComponent) {
+    public void setPrefixComponent(final JComponent prefixComponent)
+    {
         prefix = prefixComponent;
         prefix.setOpaque(false);
     }
@@ -271,13 +261,16 @@ public class RendererPanel extends JPanel {
      *
      * @param showPrefix whether to show it
      */
-    public void setShowPrefixComponent(final boolean showPrefix) {
+    public void setShowPrefixComponent(final boolean showPrefix)
+    {
         assert prefix != null : "set the prefix component before calling setShowPrefixComponent";
-        if (showPrefix) {
+        if (showPrefix)
+        {
             add(prefix, cc.xy(3, 1));
             layout.setColumnSpec(4, FormFactory.RELATED_GAP_COLSPEC);
         }
-        else {
+        else
+        {
             remove(prefix);
             layout.setColumnSpec(4, FormFactory.createGapColumnSpec(Sizes.dluX(0)));
         }
@@ -288,9 +281,13 @@ public class RendererPanel extends JPanel {
      *
      * @param enabled whether to enable
      */
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         super.setEnabled(enabled);
-        if (prefix != null) prefix.setEnabled(enabled);
+        if (prefix != null)
+        {
+            prefix.setEnabled(enabled);
+        }
         // Extention must always be enabled, so that the foreground color can be set correctly.
         extention.setEnabled(true);
         text.setEnabled(enabled);
@@ -301,7 +298,8 @@ public class RendererPanel extends JPanel {
      *
      * @param enabled whether to enable the prefix component
      */
-    public void setPrefixEnabled(final boolean enabled) {
+    public void setPrefixEnabled(final boolean enabled)
+    {
         prefixEnabled = enabled;
     }
 
@@ -310,7 +308,8 @@ public class RendererPanel extends JPanel {
      *
      * @param newOk whether ok
      */
-    public void setOk(final boolean newOk) {
+    public void setOk(final boolean newOk)
+    {
         ok = newOk;
     }
 
@@ -319,7 +318,8 @@ public class RendererPanel extends JPanel {
      *
      * @return the ok state
      */
-    public boolean isOk() {
+    public boolean isOk()
+    {
         return ok;
     }
 
@@ -328,7 +328,8 @@ public class RendererPanel extends JPanel {
      *
      * @param newSelected whether selected
      */
-    public void setSelected(final boolean newSelected) {
+    public void setSelected(final boolean newSelected)
+    {
         selected = newSelected;
     }
 
@@ -337,7 +338,8 @@ public class RendererPanel extends JPanel {
      *
      * @return the selected state
      */
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         return selected;
     }
 
@@ -348,12 +350,14 @@ public class RendererPanel extends JPanel {
      * @see #setPrefixEnabled(boolean)
      * @see #setEnabled(boolean)
      */
-    public void update() {
+    public void update()
+    {
         selectable.setBackground(COLOR_BACKGROUND[LogicUtils.getFirstFalse(new boolean[]{isSelected() && isEnabled()})]);
         selectable.setBorder(BORDERS[LogicUtils.getFirstFalse(new boolean[]{isSelected()})]);
         text.setForeground(COLOR_FOREGROUND[LogicUtils.getFirstFalse(new boolean[]{isEnabled(), isSelected()})]);
         extention.setForeground(COLOR_OKDEPENDENT[LogicUtils.getFullIndex(new boolean[]{isEnabled(), isOk(), isSelected()})]);
-        if (prefix != null) {
+        if (prefix != null)
+        {
             prefix.setEnabled(isEnabled() && prefixEnabled);
         }
         revalidate();
@@ -361,17 +365,15 @@ public class RendererPanel extends JPanel {
 
     //--- Utilities
 
-    /**
-     * Adds the extention to the panel.
-     */
-    private void addExtention() {
+    /** Adds the extention to the panel. */
+    private void addExtention()
+    {
         textPanel.add(extention, cc.xy(3, 1));
     }
 
-    /**
-     * Removes the extention from the panel.
-     */
-    private void removeExtention() {
+    /** Removes the extention from the panel. */
+    private void removeExtention()
+    {
         textPanel.remove(extention);
     }
 }

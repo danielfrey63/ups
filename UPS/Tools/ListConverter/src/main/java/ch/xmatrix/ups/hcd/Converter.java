@@ -22,7 +22,6 @@ import java.io.FileWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,13 +35,16 @@ import javax.swing.filechooser.FileFilter;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class Converter {
+public class Converter
+{
 
     private static Map<String, ArrayList<String>> MAP = new HashMap<String, ArrayList<String>>();
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
 
-        try {
+        try
+        {
             // Introduction
             final int ret = JOptionPane.showConfirmDialog(null, "Im Folgenden wird Ihnen eine Möglichkeit geboten, eine mit dem UPS Studenten-Tool (Version 2.0-20060724)\n" +
                     "erstellten Pflanzenliste in Stofflisten für die Herbar CD-ROM Version 2 zu konvertieren. Bitte geben Sie im folgenden \n" +
@@ -50,23 +52,28 @@ public class Converter {
                     "Version 2.0-20060724 gesichert haben, damit es einwandfrei funktioniert. Falls dies nicht der Fall ist, öffnen \n" +
                     "Sie ihre Pflanzenliste zuerst im UPS Studenten-Tool Version 2.0-20060724 und speichern Sie sie in der neuen Version ab.",
                     "Hinweis", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if (ret == JOptionPane.CANCEL_OPTION) {
+            if (ret == JOptionPane.CANCEL_OPTION)
+            {
                 System.exit(0);
             }
 
             // Opendialog
             final JFileChooser chooser = new JFileChooser();
-            chooser.setFileFilter(new FileFilter() {
-                public boolean accept(final File f) {
+            chooser.setFileFilter(new FileFilter()
+            {
+                public boolean accept(final File f)
+                {
                     return f.isDirectory() || f.getName().endsWith(".xust");
                 }
 
-                public String getDescription() {
+                public String getDescription()
+                {
                     return "UPS Studenten-Tool Version 2.0-20060724 Dateien (*.xust)";
                 }
             });
             chooser.setMultiSelectionEnabled(false);
-            if (JFileChooser.CANCEL_OPTION == chooser.showOpenDialog(null)) {
+            if (JFileChooser.CANCEL_OPTION == chooser.showOpenDialog(null))
+            {
                 System.exit(0);
             }
             final File file = chooser.getSelectedFile();
@@ -75,37 +82,45 @@ public class Converter {
             final XStream x = new XStream();
             x.alias("root", Root.class);
             final Object o = x.fromXML(reader);
-            try {
-                final List<String> list;
+            try
+            {
+                final List list;
                 final Root root;
-                if (o instanceof Root) {
+                if (o instanceof Root)
+                {
                     root = (Root) o;
                     list = root.list;
                 }
-                else if (o instanceof List) {
+                else if (o instanceof List)
+                {
                     list = (List) o;
                 }
-                else {
+                else
+                {
                     throw new Exception("list of type " + o.getClass().getName() + " not valid");
                 }
 
                 // Get taxa in levels
                 final TaxonTree[] trees = TaxonModels.getTaxonTreesArray();
                 final TaxonTree taxa;
-                if (trees.length > 1) {
+                if (trees.length > 1)
+                {
                     taxa = (TaxonTree) JOptionPane.showInputDialog(null,
                             "Bitte wählen Sie einen Taxonomischen Baum, auf dessen Basis die Liste konvertiert werden soll",
                             "Auswahl des Taxonbaums", JOptionPane.QUESTION_MESSAGE, null, trees, trees[0]);
                 }
-                else if (trees.length == 1) {
+                else if (trees.length == 1)
+                {
                     taxa = trees[0];
                 }
-                else {
+                else
+                {
                     throw new Exception("no taxon trees present");
                 }
 
-                for (int i = 0; i < list.size(); i++) {
-                    final String taxon = (String) list.get(i);
+                for (final Object l : list)
+                {
+                    final String taxon = (String) l;
                     final SimpleTaxon simpleTaxon = taxa.findTaxonByName(taxon);
                     mapTaxon(simpleTaxon);
                 }
@@ -121,11 +136,11 @@ public class Converter {
                 writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + r);
                 writer.write("<filter baseFilterName=\"\" name=\"Pruefungsliste\">" + r);
                 final Set<String> levels = MAP.keySet();
-                for (final Iterator<String> iterator = levels.iterator(); iterator.hasNext();) {
-                    final String level = iterator.next();
+                for (final String level : levels)
+                {
                     final ArrayList<String> taxaOnLevel = MAP.get(level);
-                    for (final Iterator<String> iterator1 = taxaOnLevel.iterator(); iterator1.hasNext();) {
-                        final String taxon = iterator1.next();
+                    for (final String taxon : taxaOnLevel)
+                    {
                         writer.write("    <detail scope=\"" + taxon + "\">" + r);
                         writer.write("        <level>" + level + "</level>" + r);
                         writer.write("    </detail>" + r);
@@ -138,41 +153,56 @@ public class Converter {
                         "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung.",
                         "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE);
             }
-            catch (Throwable e) {
+            catch (Throwable e)
+            {
                 JOptionPane.showMessageDialog(null, "Während der Konvertierung der Pflanzenliste ist ein Fehler" +
                         "aufgetreten.\n" + e.getMessage(),
                         "Hinweis", JOptionPane.WARNING_MESSAGE);
                 e.printStackTrace();
             }
-            finally {
-                if (reader != null) reader.close();
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.close();
+                }
             }
         }
-        catch (Throwable e) {
+        catch (Throwable e)
+        {
             e.printStackTrace();
         }
         System.exit(0);
     }
 
-    private static void mapTaxon(final SimpleTaxon taxon) {
+    private static void mapTaxon(final SimpleTaxon taxon)
+    {
         final SimpleLevel level = taxon.getLevel();
-        if (level != null) {
+        if (level != null)
+        {
             final String levelString = level.getName();
             ArrayList<String> taxaInLevel = MAP.get(levelString);
-            if (taxaInLevel == null) {
+            if (taxaInLevel == null)
+            {
                 taxaInLevel = new ArrayList<String>();
                 MAP.put(levelString, taxaInLevel);
             }
             taxaInLevel.add(taxon.getName());
             final SimpleTaxon parent = taxon.getParentTaxon();
-            if (parent != null) mapTaxon(parent);
+            if (parent != null)
+            {
+                mapTaxon(parent);
+            }
         }
     }
 
-    public class Root {
+    public class Root
+    {
 
         public ArrayList<String> list;
+
         String uid;
+
         String exam;
     }
 }

@@ -59,23 +59,33 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.16 $ $Date: 2008/01/23 22:19:08 $
  */
-public class MainBuilder extends AbstractMainBuilder {
+public class MainBuilder extends AbstractMainBuilder
+{
 
     private static final Logger LOG = Logger.getLogger(MainBuilder.class);
+
     private static final String TOOL_PREFIX = "jfactory.ups.tool.";
 
     private final AbstractDetailsBuilder prefsBuilder = new PrefsBuilder();
+
     private final AbstractDetailsBuilder groupsBuilder = new GroupsBuilder();
+
     private final AbstractDetailsBuilder specimensBuilder = new SpecimensBuilder();
+
     private final AbstractDetailsBuilder levelsBuilder = new LevelsBuilder();
+
     private final AbstractDetailsBuilder constraintsBuilder = new ConstraintsBuilder();
+
     private final ExamsBuilder examsBuilder = new ExamsBuilder(prefsBuilder, groupsBuilder, specimensBuilder, levelsBuilder, constraintsBuilder);
+
     private final AbstractDetailsBuilder examInfoBuilder = new SessionBuilder();
+
     private final SetBuilder setBuilder = new SetBuilder(examsBuilder);
 
     private MainModel model;
 
-    public MainBuilder(final MainModel model, final InfoModel infoModel) {
+    public MainBuilder(final MainModel model, final InfoModel infoModel)
+    {
         super(model, infoModel,
                 new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM,
                         Commands.COMMANDID_QUIT, I15nWelcomePanel.SEPARATOR},
@@ -93,11 +103,13 @@ public class MainBuilder extends AbstractMainBuilder {
         setModel(model);
     }
 
-    public void setModel(final MainModel model) {
+    public void setModel(final MainModel model)
+    {
         this.model = model;
     }
 
-    protected void initCommands() {
+    protected void initCommands()
+    {
         super.initCommands();
         initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENUST, MainModel.CARDS_UST), false);
         initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENEXAM, MainModel.CARDS_EXAM), false);
@@ -106,8 +118,10 @@ public class MainBuilder extends AbstractMainBuilder {
         initCommand(new QuitCommand(getCommandManager(), model), true);
     }
 
-    protected void createNonWelcomPanels() {
-        try {
+    protected void createNonWelcomPanels()
+    {
+        try
+        {
             // The builders that should be inserted. If none are specified, alle builders will be used
             RootWindow rootWindow;
             ViewMap views;
@@ -135,21 +149,25 @@ public class MainBuilder extends AbstractMainBuilder {
             DockingWindowsUtils.configureProperties(rootWindow, false, false, false, false, false, false);
             getCards().add(MainModel.CARDS_EXAM, rootWindow);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.fatal("could not complete panel loading", e);
         }
     }
 
-    protected JMenuBar getMenuBar() {
+    protected JMenuBar getMenuBar()
+    {
         return getCommandManager().getGroup(Commands.GROUPID_MENU).createMenuBar();
     }
 
-    private static JComponent wrapPanel(final JComponent panel) {
+    private static JComponent wrapPanel(final JComponent panel)
+    {
         panel.setBorder(Borders.createEmptyBorder(Sizes.DLUX2, Sizes.DLUX4, Sizes.DLUX4, Sizes.DLUX4));
         return panel;
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
         UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
         System.setProperty("jfactory.resource.path", "/icon");

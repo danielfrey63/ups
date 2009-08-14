@@ -16,10 +16,10 @@
  */
 package ch.xmatrix.ups.uec.groups;
 
+import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.view.renderer.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
-import ch.jfactory.resource.ImageLocator;
 import java.awt.Component;
 import javax.swing.JCheckBox;
 import javax.swing.JTree;
@@ -32,21 +32,26 @@ import javax.swing.tree.TreeCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/25 11:07:45 $
  */
-public class GroupsTreeRenderer implements TreeCellRenderer {
+public class GroupsTreeRenderer implements TreeCellRenderer
+{
 
     private final JCheckBox checkbox = new JCheckBox();
+
     private final RendererPanel panel = new RendererPanel();
 
     private GroupsModel models;
+
     private boolean enabled = true;
 
-    public GroupsTreeRenderer() {
+    public GroupsTreeRenderer()
+    {
         checkbox.setOpaque(false);
     }
 
     public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
                                                   final boolean expanded, final boolean leaf, final int row,
-                                                  final boolean hasFocus) {
+                                                  final boolean hasFocus)
+    {
         final SimpleTaxon taxon = (SimpleTaxon) value;
         final GroupModel model1 = models == null ? null : models.find(taxon.getName());
         final GroupModel current = models == null ? null : models.getCurrentGroup();
@@ -65,7 +70,8 @@ public class GroupsTreeRenderer implements TreeCellRenderer {
         return panel;
     }
 
-    public void setGroupsModel(final GroupsModel model) {
+    public void setGroupsModel(final GroupsModel model)
+    {
         this.models = model;
     }
 
@@ -75,11 +81,13 @@ public class GroupsTreeRenderer implements TreeCellRenderer {
      *
      * @param enabled whether to pseudo-disable the tree or not.
      */
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         this.enabled = enabled;
     }
 
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return enabled;
     }
 }

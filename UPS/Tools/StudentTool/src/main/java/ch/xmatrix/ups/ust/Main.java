@@ -19,9 +19,11 @@ import ch.jfactory.application.MainRunner;
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2007/05/16 17:00:19 $
  */
-public class Main extends MainRunner {
+public class Main extends MainRunner
+{
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         MainRunner.main(args);
     }
 }

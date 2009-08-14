@@ -82,50 +82,80 @@ import org.pietschy.command.ActionCommandInterceptor;
  * @author Daniel Frey
  * @version $Revision: 1.9 $ $Date: 2007/05/16 17:00:15 $
  */
-public class ConstraintsBuilder extends AbstractDetailsBuilder {
+public class ConstraintsBuilder extends AbstractDetailsBuilder
+{
 
     public static final String COMPONENT_FIELD_DESCRIPTION = "fieldDescription";
+
     public static final String COMPONENT_LIST_CONSTRAINTS = "listConstraints";
+
     public static final String COMPONENT_LIST_TAXA = "listTaxa";
+
     public static final String COMPONENT_FIELD_NAME = "fieldConstraintName";
+
     public static final String COMPONENT_SPINNER_COUNT = "spinnerCount";
+
     public static final String COMPONENT_TREE_TAXA = "treeTaxa";
 
     protected static final String RESOURCE_FORM = "/ch/xmatrix/ups/uec/constraints/ConstraintsPanel.jfd";
+
     protected static final String RESOURCE_MODEL = "/data/constraints.xml";
 
     private final SelectionInList constraintsList = new SelectionInList();
+
     private final SelectionInList taxaList = new SelectionInList();
+
     private final TreeSelectionModel treeSelection = new DefaultTreeSelectionModel();
+
     private final TaxaListRenderer taxaRenderer = new TaxaListRenderer();
+
     private final ConstraintsTreeRenderer treeRenderer = new ConstraintsTreeRenderer();
+
     private final ConstraintsListRenderer constraintsRenderer = new ConstraintsListRenderer();
 
     private JList listConstraints;
+
     private JList taxa;
+
     private JTextComponent name;
+
     private JTextComponent description;
+
     private JSpinner count;
+
     private JTree tree;
+
     private RemoveTaxa remove;
+
     private ActionCommand add;
+
     private ActionCommand nev;
+
     private DeleteConstraints delete;
+
     private TreeExpandedRestorer restorer;
+
     private XStream converter;
+
     private boolean enabledByMaster;
+
     private boolean isAdjusting;
 
-    public ConstraintsBuilder() {
+    public ConstraintsBuilder()
+    {
         super(new ConstraintsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
     }
 
     //--- ActionCommandPanelBuilder overrides
 
-    protected void initComponentListeners() {
-        listConstraints.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting() && !isAdjusting) {
+    protected void initComponentListeners()
+    {
+        listConstraints.addListSelectionListener(new ListSelectionListener()
+        {
+            public void valueChanged(final ListSelectionEvent e)
+            {
+                if (!e.getValueIsAdjusting() && !isAdjusting)
+                {
                     isAdjusting = true;
                     final Constraints constraints = getConstraints();
                     final Constraint constraint = (Constraint) listConstraints.getSelectedValue();
@@ -136,23 +166,30 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
             }
         });
         SearchableUtils.installSearchable(listConstraints);
-        taxa.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!isAdjusting) {
+        taxa.addListSelectionListener(new ListSelectionListener()
+        {
+            public void valueChanged(final ListSelectionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setStates(taxa);
                     isAdjusting = false;
                 }
             }
         });
-        taxa.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) {
+        taxa.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(final MouseEvent e)
+            {
+                if (e.getClickCount() == 2)
+                {
                     final String taxonName = (String) taxa.getSelectedValue();
                     final TaxonTree taxonTree = getTaxonTree();
                     final ArrayList<Object> pathElements = new ArrayList<Object>();
                     SimpleTaxon taxon = taxonTree.findTaxonByName(taxonName);
-                    while (taxon != null) {
+                    while (taxon != null)
+                    {
                         pathElements.add(0, taxon);
                         taxon = taxon.getParentTaxon();
                     }
@@ -165,25 +202,33 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
             }
         });
         SearchableUtils.installSearchable(taxa);
-        final TreeCheckboxController handler = new TreeCheckboxController(tree) {
-            protected void handleSelection(final TreePath path) {
-                if (!isAdjusting) {
+        final TreeCheckboxController handler = new TreeCheckboxController(tree)
+        {
+            protected void handleSelection(final TreePath path)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final Constraints constraints = getConstraints();
-                    if (constraints != null && path != null && !constraints.isFixed()) {
+                    if (constraints != null && path != null && !constraints.isFixed())
+                    {
                         final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
                         final boolean isSpecies = SimpleTaxon.isSpecies(taxon);
-                        if (isSpecies) {
+                        if (isSpecies)
+                        {
                             final String[] defaultTaxa = constraints.getDefaultTaxa();
                             final String name = taxon.getName();
                             final Constraint constraint = constraints.findConstraint(name);
                             final boolean isObligateConstraint = constraint != null && constraint.getTaxa().size() == 1 && isSpecies;
-                            if (!isObligateConstraint) {
+                            if (!isObligateConstraint)
+                            {
                                 String[] newDefaults = null;
-                                if (ArrayUtils.contains(defaultTaxa, name)) {
+                                if (ArrayUtils.contains(defaultTaxa, name))
+                                {
                                     newDefaults = (String[]) ArrayUtils.remove(defaultTaxa, ArrayUtils.indexOf(defaultTaxa, name));
                                 }
-                                else {
+                                else
+                                {
                                     newDefaults = (String[]) ArrayUtils.add(defaultTaxa, name);
                                 }
                                 constraints.setDefaultTaxa(newDefaults);
@@ -198,9 +243,12 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
         };
         tree.addMouseListener(handler);
         tree.addKeyListener(handler);
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(final TreeSelectionEvent e) {
-                if (!isAdjusting) {
+        tree.addTreeSelectionListener(new TreeSelectionListener()
+        {
+            public void valueChanged(final TreeSelectionEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setStates(tree);
                     isAdjusting = false;
@@ -208,15 +256,20 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
             }
         });
         SearchableUtils.installSearchable(tree).setRecursive(true);
-        name.addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
-                if (!isAdjusting) {
+        name.addCaretListener(new CaretListener()
+        {
+            public void caretUpdate(final CaretEvent e)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     final Constraint constraint = getCurrentConstraint();
-                    if (constraint != null) {
+                    if (constraint != null)
+                    {
                         final String old = constraint.getName();
                         final String text = name.getText();
-                        if ((old == null && text != null) || !old.equals(text)) {
+                        if ((old == null && text != null) || !old.equals(text))
+                        {
                             constraint.setName(text);
                             setDirty();
                             setStates(name);
@@ -226,15 +279,20 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        description.addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
+        description.addCaretListener(new CaretListener()
+        {
+            public void caretUpdate(final CaretEvent e)
+            {
                 final String text = description.getText();
                 final Constraints constraints = getConstraints();
-                if (constraints != null) {
+                if (constraints != null)
+                {
                     final String old = constraints.getDescription();
-                    if (!isAdjusting) {
+                    if (!isAdjusting)
+                    {
                         isAdjusting = true;
-                        if (((old == null && !"".equals(text)) || (old != null && !old.equals(text)))) {
+                        if (((old == null && !"".equals(text)) || (old != null && !old.equals(text))))
+                        {
                             constraints.setDescription(text);
                             setDirty();
                             setStates(description);
@@ -244,14 +302,18 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        count.addChangeListener(new ChangeListener() {
-            public void stateChanged(final ChangeEvent e) {
+        count.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(final ChangeEvent e)
+            {
                 final Integer value = (Integer) count.getValue();
                 final Constraint constraint = getCurrentConstraint();
-                if (constraint != null) {
+                if (constraint != null)
+                {
                     final int old = constraint.getMinimalCount();
                     final int newValue = value.intValue();
-                    if (old != newValue) {
+                    if (old != newValue)
+                    {
                         constraint.setMinimalCount(newValue);
                         setDirty();
                         setStates(count);
@@ -259,19 +321,24 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        final ActionCommandInterceptor addRemoveInterceptor = new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        final ActionCommandInterceptor addRemoveInterceptor = new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 final Constraint constraint = getCurrentConstraint();
                 final List<String> taxa = constraint.getTaxa();
-                if (taxa != null && taxa.size() == 1) {
+                if (taxa != null && taxa.size() == 1)
+                {
                     final String taxon = taxa.get(0);
                     constraint.setName(taxon);
                     final TaxonTree tree = getTaxonTree();
-                    if (SimpleTaxon.isSpecies(tree.findTaxonByName(taxon))) {
+                    if (SimpleTaxon.isSpecies(tree.findTaxonByName(taxon)))
+                    {
                         constraint.setMinimalCount(1);
                         setDirty();
                     }
@@ -279,35 +346,45 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
             }
         };
         add.addInterceptor(addRemoveInterceptor);
-        add.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        add.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 tree.clearSelection();
                 setDirty();
                 setStates(add);
             }
         });
         remove.addInterceptor(addRemoveInterceptor);
-        remove.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        remove.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 setDirty();
                 setStates(remove);
             }
         });
-        nev.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        nev.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
-                if (!isAdjusting) {
+            public void afterExecute(final ActionCommand command)
+            {
+                if (!isAdjusting)
+                {
                     isAdjusting = true;
                     setDirty();
                     setStates(nev);
@@ -315,12 +392,15 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        delete.addInterceptor(new ActionCommandInterceptor() {
-            public boolean beforeExecute(final ActionCommand command) {
+        delete.addInterceptor(new ActionCommandInterceptor()
+        {
+            public boolean beforeExecute(final ActionCommand command)
+            {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command) {
+            public void afterExecute(final ActionCommand command)
+            {
                 final Constraints constraints = getConstraints();
                 taxaList.setList(null);
                 constraintsList.setList(null);
@@ -332,8 +412,10 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
 
     //--- DetailsBuilder implementations
 
-    public void setEnabled(final boolean enabled) {
-        if (!isAdjusting) {
+    public void setEnabled(final boolean enabled)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
             enabledByMaster = enabled;
             setStates(null);
@@ -343,14 +425,18 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
 
     //--- AbstractDetailsBuilder overrides
 
-    public void setModel(final TaxonBased model) {
+    public void setModel(final TaxonBased model)
+    {
         super.setModel(model);
-        if (!isAdjusting) {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
-            if (model != null) {
+            if (model != null)
+            {
                 final Constraints constraintsModel = (Constraints) model;
                 final ArrayList<Constraint> constraintModels = constraintsModel.getConstraints();
-                if (constraintModels != null) {
+                if (constraintModels != null)
+                {
                     Collections.sort(constraintModels, new ToStringComparator());
                 }
                 constraintsList.setList(constraintModels);
@@ -362,43 +448,52 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
 
     //--- AbstractDetailsBuilder implementations
 
-    protected ArrayList findMigrationErrors(final String uid) {
+    protected ArrayList findMigrationErrors(final String uid)
+    {
         final TaxonTree tree = TaxonModels.find(uid);
         final Constraints constraints = getConstraints();
         final ArrayList<Constraint> errors = new ArrayList<Constraint>();
         final ArrayList<Constraint> constraintList = constraints.getConstraints();
-        for (int i = 0; i < constraintList.size(); i++) {
+        for (int i = 0; i < constraintList.size(); i++)
+        {
             final Constraint constraint = (Constraint) constraintList.get(i);
             final ConstraintError constraintError = new ConstraintError(constraint);
             final List<String> taxa = constraintError.getTaxa();
-            for (final Iterator<String> iterator = taxa.iterator(); iterator.hasNext();) {
+            for (final Iterator<String> iterator = taxa.iterator(); iterator.hasNext();)
+            {
                 final String taxon = iterator.next();
-                if (tree.findTaxonByName(taxon) != null) {
+                if (tree.findTaxonByName(taxon) != null)
+                {
                     iterator.remove();
                 }
             }
-            if (taxa.size() > 0) {
+            if (taxa.size() > 0)
+            {
                 errors.add(constraintError);
             }
         }
         return errors;
     }
 
-    protected void removeMigrationErrors(final ArrayList errors) {
+    protected void removeMigrationErrors(final ArrayList errors)
+    {
         final ArrayList<ConstraintError> constraints = (ArrayList<ConstraintError>) errors;
-        for (final Iterator<ConstraintError> iterator = constraints.iterator(); iterator.hasNext();) {
+        for (final Iterator<ConstraintError> iterator = constraints.iterator(); iterator.hasNext();)
+        {
             final ConstraintError constraintError = iterator.next();
             final List<String> unknownTaxa = constraintError.getTaxa();
             final Constraint constraint = constraintError.getOriginal();
             final List<String> taxa = constraint.getTaxa();
-            for (int i = 0; i < unknownTaxa.size(); i++) {
+            for (int i = 0; i < unknownTaxa.size(); i++)
+            {
                 final String taxon = (String) unknownTaxa.get(i);
                 taxa.remove(taxon);
             }
         }
     }
 
-    protected void initComponents() {
+    protected void initComponents()
+    {
         nev = initCommand(new NewConstraints(getCommandManager(), getModels()), false);
         delete = (DeleteConstraints) initCommand(new DeleteConstraints(getCommandManager(), getModels()), false);
         add = initCommand(new AddTaxa(getCommandManager(), getModels(), treeSelection), false);
@@ -434,8 +529,10 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
         restorer = new TreeExpandedRestorer(tree);
     }
 
-    protected XStream getConverter() {
-        if (converter == null) {
+    protected XStream getConverter()
+    {
+        if (converter == null)
+        {
             converter = SimpleModelList.getConverter();
             converter.setMode(XStream.ID_REFERENCES);
             converter.alias("constraintsModels", SimpleModelList.class);
@@ -448,17 +545,20 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
         return converter;
     }
 
-    protected String getInfoString() {
+    protected String getInfoString()
+    {
         return "Vorgaben-Editor";
     }
 
-    protected String getModelId() {
+    protected String getModelId()
+    {
         return MainModel.MODELID_CONSTRAINTS;
     }
 
     //--- Utilities
 
-    private void setStates(final Object source) {
+    private void setStates(final Object source)
+    {
         setValueStates(source);
         setEnabledStates();
     }
@@ -544,7 +644,8 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
      *        &lt; low                                  high &gt;
      * </pre>
      */
-    private void setEnabledStates() {
+    private void setEnabledStates()
+    {
         final Constraints constraints = getConstraints();
         final Constraint constraint = getCurrentConstraint();
         final List<String> taxons = (constraint != null ? constraint.getTaxa() : null);
@@ -583,80 +684,150 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder {
         LogicUtils.setEnabledStates(bits, components, componentMapps, split);
     }
 
-    private void setValueStates(final Object source) {
+    private void setValueStates(final Object source)
+    {
         constraintsRenderer.setEnabled(enabledByMaster);
         taxaRenderer.setEnabled(enabledByMaster);
         final Constraints constraints = getConstraints();
         final Constraint constraint = getCurrentConstraint();
         final String[] defaultTaxa = constraints == null ? null : constraints.getDefaultTaxa();
-        if (source != constraintsRenderer) constraintsRenderer.setConstraints(constraints);
-        if (source != listConstraints) constraintsList.setSelection(constraint);
-        if (source != listConstraints) listConstraints.setModel(DUMMY_MODEL);
-        if (source != listConstraints) listConstraints.setModel(constraintsList);
-        if (source != treeRenderer) treeRenderer.setConstraints(constraints);
+        if (source != constraintsRenderer)
+        {
+            constraintsRenderer.setConstraints(constraints);
+        }
+        if (source != listConstraints)
+        {
+            constraintsList.setSelection(constraint);
+        }
+        if (source != listConstraints)
+        {
+            listConstraints.setModel(DUMMY_MODEL);
+        }
+        if (source != listConstraints)
+        {
+            listConstraints.setModel(constraintsList);
+        }
         if (source != treeRenderer)
+        {
+            treeRenderer.setConstraints(constraints);
+        }
+        if (source != treeRenderer)
+        {
             treeRenderer.setTaxa(defaultTaxa == null ? DUMMY_LIST : new ArrayList<String>(Arrays.asList(defaultTaxa)));
-        if (source != taxaRenderer) taxaRenderer.setConstraints(constraints);
-        if (constraints != null) {
+        }
+        if (source != taxaRenderer)
+        {
+            taxaRenderer.setConstraints(constraints);
+        }
+        if (constraints != null)
+        {
             restorer.save();
             final Object selection = taxaList.getSelection();
-            if (source != description) description.setText(constraints.getDescription());
-            if (source != taxa) taxaList.setList(DUMMY_LIST);
-            if (constraint != null) {
+            if (source != description)
+            {
+                description.setText(constraints.getDescription());
+            }
+            if (source != taxa)
+            {
+                taxaList.setList(DUMMY_LIST);
+            }
+            if (constraint != null)
+            {
                 final List<String> taxaArray = constraint.getTaxa();
-                if (source != name) name.setText(constraint.getName());
-                if (source != count) count.setValue(constraint.getMinimalCount());
+                if (source != name)
+                {
+                    name.setText(constraint.getName());
+                }
+                if (source != count)
+                {
+                    count.setValue(constraint.getMinimalCount());
+                }
                 listConstraints.setSelectedValue(constraint, true);
                 taxaList.setList(taxaArray);
                 taxa.setModel(DUMMY_MODEL);
                 taxa.setModel(taxaList);
             }
-            else {
-                if (source != name) name.setText("");
-                if (source != count) count.setValue(ZERO);
-                if (source != tree) tree.clearSelection();
+            else
+            {
+                if (source != name)
+                {
+                    name.setText("");
+                }
+                if (source != count)
+                {
+                    count.setValue(ZERO);
+                }
+                if (source != tree)
+                {
+                    tree.clearSelection();
+                }
             }
             taxa.setSelectedValue(selection, true);
             getTreeModel().reload();
             restorer.restore();
         }
-        else {
-            if (source != description) description.setText("");
-            if (source != name) name.setText("");
-            if (source != count) count.setValue(ZERO);
-            if (source != taxa) taxa.setModel(DUMMY_MODEL);
-            if (source != listConstraints) listConstraints.setModel(DUMMY_MODEL);
-            if (source != tree) tree.clearSelection();
+        else
+        {
+            if (source != description)
+            {
+                description.setText("");
+            }
+            if (source != name)
+            {
+                name.setText("");
+            }
+            if (source != count)
+            {
+                count.setValue(ZERO);
+            }
+            if (source != taxa)
+            {
+                taxa.setModel(DUMMY_MODEL);
+            }
+            if (source != listConstraints)
+            {
+                listConstraints.setModel(DUMMY_MODEL);
+            }
+            if (source != tree)
+            {
+                tree.clearSelection();
+            }
         }
         tree.repaint();
         taxa.repaint();
         listConstraints.repaint();
     }
 
-    private Constraints getConstraints() {
+    private Constraints getConstraints()
+    {
         return (Constraints) getModels().getSelection();
     }
 
-    private Constraint getCurrentConstraint() {
+    private Constraint getCurrentConstraint()
+    {
         final Constraints constraints = getConstraints();
         return constraints == null ? null : constraints.getCurrent();
     }
 
-    private static class ConstraintError extends Constraint {
+    private static class ConstraintError extends Constraint
+    {
 
         private Constraint original;
 
-        public ConstraintError(final Constraint original) {
+        public ConstraintError(final Constraint original)
+        {
             super(original);
             this.original = original;
         }
 
-        public Constraint getOriginal() {
+        public Constraint getOriginal()
+        {
             return original;
         }
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    {
         UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
         UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
         System.setProperty("log4j.configuration", "/log4j.properties");

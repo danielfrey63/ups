@@ -19,9 +19,9 @@ package ch.xmatrix.ups.uec.master;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
+import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.SimpleNote;
-import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.controller.Loader;
@@ -120,33 +120,50 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.8 $ $Date: 2008/01/06 10:16:20 $
  */
-public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder implements DetailsBuilder {
+public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder implements DetailsBuilder
+{
 
     private static final Logger LOG = Logger.getLogger(AbstractDetailsBuilder.class);
 
     protected static final Integer ZERO = new Integer(0);
+
     protected static final DefaultListModel DUMMY_MODEL = new DefaultListModel();
+
     protected static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
     private final String prefsPath;
+
     private final SelectionInList models;
+
     private final MasterDetailsFactory factory;
+
     private final String modelResource;
+
     private final String formResource;
+
     private final int space;
 
     private boolean loaded;
+
     private JComponent panel;
+
     private JComponent details;
+
     private FormCreator creator;
+
     private DirtyListener dirtyListener;
+
     private JTree tree = null;
+
     private TaxonTreeModel treeModel = null;
+
     private InfoModel infoModel = new DefaultInfoModel();
+
     private MasterDetailsBuilder master;
 
     protected AbstractDetailsBuilder(final MasterDetailsFactory factory, final String modelResource,
-                                     final String resourceForm, final int space) {
+                                     final String resourceForm, final int space)
+    {
         this.models = new SelectionInList();
         this.factory = factory;
         this.modelResource = modelResource;
@@ -163,16 +180,22 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @return the panel created by the MasterDetailsBuilder instance
      */
-    protected JComponent createMainPanel() {
-        try {
+    protected JComponent createMainPanel()
+    {
+        try
+        {
             infoModel.setNote(new SimpleNote("Lade " + getInfoString()));
             InputStream in;
             in = getClass().getResourceAsStream(formResource);
             // Don't know why I have to do that: On some machines an absolute path is required, on others a relative.
-            if (in == null) {
-                if (!formResource.startsWith("/")) {
+            if (in == null)
+            {
+                if (!formResource.startsWith("/"))
+                {
                     in = getClass().getResourceAsStream("/" + formResource);
-                } else {
+                }
+                else
+                {
                     in = getClass().getResourceAsStream(formResource.substring(1));
                 }
             }
@@ -193,7 +216,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
             return panel;
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             final String message = "failed to init components";
             LOG.error(message, e);
             throw new IllegalStateException(message);
@@ -202,7 +226,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
     //--- DetailsBuilder implementations.
 
-    public void lock() {
+    public void lock()
+    {
         final TaxonBased model = (TaxonBased) models.getSelection();
         dirtyListener.setDirty(true);
         model.setFixed();
@@ -213,21 +238,25 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * Loads the data from the model resource. First it tries to find the model resource in a user home subdirectory. If
      * not found it is loaded from the source.
      */
-    public void load() {
+    public void load()
+    {
         final SimpleModelList list = Loader.loadModel(modelResource, prefsPath, getConverter());
         models.setListModel(list);
         factory.setModels(list);
-        if (details != null) {
+        if (details != null)
+        {
             details.repaint();
         }
 
         MainModel.registerModels(getModelId(), list);
-        if (dirtyListener != null) {
+        if (dirtyListener != null)
+        {
             dirtyListener.setDirty(false);
         }
     }
 
-    public void save() {
+    public void save()
+    {
         Loader.saveModel(modelResource, prefsPath, getConverter(), getModels().getListModel());
         dirtyListener.setDirty(false);
     }
@@ -251,18 +280,25 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid   the new taxon tree uid
      * @return whether migration has to be done or not
      */
-    public boolean handleMigration(final TaxonBased model, final String uid) {
+    public boolean handleMigration(final TaxonBased model, final String uid)
+    {
         boolean migrate = true;
-        if (model != null && model.getTaxaUid() != null && !model.getTaxaUid().equals(uid)) {
+        if (model != null && model.getTaxaUid() != null && !model.getTaxaUid().equals(uid))
+        {
             migrate = shouldMigrate(uid);
-            if (migrate) {
+            if (migrate)
+            {
                 final ArrayList errors = findMigrationErrors(uid);
-                if (errors.size() > 0) {
+                if (errors.size() > 0)
+                {
                     migrate = commitMigrate(errors);
-                    if (migrate) {
+                    if (migrate)
+                    {
                         removeMigrationErrors(errors);
                     }
-                } else {
+                }
+                else
+                {
                     commitSuccessful();
                 }
             }
@@ -270,7 +306,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
         return migrate;
     }
 
-    public void registerDirtyListener(final DirtyListener dirtyListener) {
+    public void registerDirtyListener(final DirtyListener dirtyListener)
+    {
         this.dirtyListener = dirtyListener;
     }
 
@@ -280,12 +317,17 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param taxonBased the model
      */
-    public void setModel(final TaxonBased taxonBased) {
-        if (treeModel != null) {
+    public void setModel(final TaxonBased taxonBased)
+    {
+        if (treeModel != null)
+        {
             final TaxonTree taxa = taxonBased == null ? null : TaxonModels.find(taxonBased.getTaxaUid());
-            if (taxa != null) {
+            if (taxa != null)
+            {
                 treeModel.setRoot(taxa.getRootTaxon());
-            } else {
+            }
+            else
+            {
                 treeModel.setRoot(null);
             }
             treeModel.reload();
@@ -299,11 +341,14 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the uid of the model to find
      * @return the model with the given uid
      */
-    public TaxonBased find(final String uid) {
+    public TaxonBased find(final String uid)
+    {
         reload();
-        for (int i = 0; i < models.getSize(); i++) {
+        for (int i = 0; i < models.getSize(); i++)
+        {
             final TaxonBased model = (TaxonBased) models.getElementAt(i);
-            if (model.getUid().equals(uid)) {
+            if (model.getUid().equals(uid))
+            {
                 return model;
             }
         }
@@ -312,20 +357,24 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
     //--- Public interface.
 
-    public FormCreator getCreator() {
+    public FormCreator getCreator()
+    {
         return creator;
     }
 
-    public SelectionInList getModels() {
+    public SelectionInList getModels()
+    {
         reload();
         return models;
     }
 
-    public MasterDetailsFactory getController() {
+    public MasterDetailsFactory getController()
+    {
         return factory;
     }
 
-    public void setInfoModel(final InfoModel infoModel) {
+    public void setInfoModel(final InfoModel infoModel)
+    {
         this.infoModel = infoModel;
     }
 
@@ -368,7 +417,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the taxon tree uid
      * @return whether the migration should take place or not.
      */
-    protected boolean shouldMigrate(final String uid) {
+    protected boolean shouldMigrate(final String uid)
+    {
         final int result = Dialogs.showQuestionMessageCancel(panel, "Migration",
                 "Sie wollen den taxonomischen Baum, auf dem diese Guppeneinstellungen basieren, ändern.\n" +
                         "Es kann sein, dass nicht alle Einstellungen in den neuen Baum übernommen werden können.\n" +
@@ -382,7 +432,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the new taxon tree uid
      * @return a list of migration errors as strings
      */
-    protected ArrayList findMigrationErrors(final String uid) {
+    protected ArrayList findMigrationErrors(final String uid)
+    {
         return new ArrayList();
     }
 
@@ -391,17 +442,20 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param errors the list of errors as strings
      */
-    protected void removeMigrationErrors(final ArrayList errors) {
+    protected void removeMigrationErrors(final ArrayList errors)
+    {
     }
 
     /** Dummy implementation that does nothing. Override this if you want to feedback successful migration to the user. */
-    protected void commitSuccessful() {
+    protected void commitSuccessful()
+    {
     }
 
     //--- Subclass interface
 
     /** Marks the data as modified. As soon as the data is saved, the modified timestamp is actualized. */
-    protected void setDirty() {
+    protected void setDirty()
+    {
         dirtyListener.setDirty(true);
     }
 
@@ -410,35 +464,44 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param tree the tree component
      */
-    protected void registerTree(final JTree tree) {
+    protected void registerTree(final JTree tree)
+    {
         this.tree = tree;
         treeModel = new TaxonTreeModel(null);
         tree.setModel(treeModel);
     }
 
-    protected TaxonTreeModel getTreeModel() {
+    protected TaxonTreeModel getTreeModel()
+    {
         return treeModel;
     }
 
     //--- Utilities
 
-    private void reload() {
-        if (!loaded) {
+    private void reload()
+    {
+        if (!loaded)
+        {
             load();
             loaded = true;
         }
     }
 
-    private boolean commitMigrate(final ArrayList errors) {
+    private boolean commitMigrate(final ArrayList errors)
+    {
         final JFrame parent = (JFrame) panel.getTopLevelAncestor();
-        final I15nComponentDialog dialog = new I15nComponentDialog(parent, "migration") {
-            protected void onApply() {
+        final I15nComponentDialog dialog = new I15nComponentDialog(parent, "migration")
+        {
+            protected void onApply()
+            {
             }
 
-            protected void onCancel() {
+            protected void onCancel()
+            {
             }
 
-            protected JComponent createComponentPanel() {
+            protected JComponent createComponentPanel()
+            {
                 enableApply(true);
                 return new JScrollPane(new JList(errors.toArray()));
             }
@@ -449,12 +512,15 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
         return dialog.isAccepted();
     }
 
-    protected void loadStates() {
+    protected void loadStates()
+    {
         final String prefix = "/" + getClass().getPackage().getName().replace(".", "/");
         final InputStream in = getClass().getResourceAsStream(prefix + "/states.txt");
-        if (in != null) {
+        if (in != null)
+        {
             final StringWriter writer = new StringWriter();
-            try {
+            try
+            {
                 IOUtils.copy(in, writer);
                 final String text = writer.toString();
                 final String[] lines = text.split("\n");
@@ -467,9 +533,11 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
                 int colFrom = 0;
                 int colTo = 0;
                 int[] emptyCols = new int[0];
-                for (int i = 0; i < lines.length; i++) {
+                for (int i = 0; i < lines.length; i++)
+                {
                     final String line = lines[i];
-                    if (line.startsWith("format")) {
+                    if (line.startsWith("format"))
+                    {
                         final String[] tokens = line.split(" ");
                         final String[] ins = tokens[1].split("-");
                         inFrom = Integer.parseInt(ins[0]);
@@ -482,24 +550,30 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
                         colTo = Integer.parseInt(columns[1]);
                         final String[] empties = tokens[4].split(", *|\r");
                         emptyCols = new int[empties.length];
-                        for (int j = 0; j < empties.length; j++) {
+                        for (int j = 0; j < empties.length; j++)
+                        {
                             final String empty = empties[j];
                             emptyCols[j] = Integer.parseInt(empty);
                         }
                         all = new String[inTo - inFrom + 1 + outTo - outFrom + 1];
                     }
-                    if (inFrom > 0 && i >= inFrom && i <= inTo) {
+                    if (inFrom > 0 && i >= inFrom && i <= inTo)
+                    {
                         String data = line.substring(colFrom, colTo).replace("|", ",").replaceAll(" , ", "  ").
                                 replaceAll("  ", " ").replaceAll("  ", " 0");
-                        for (int j = emptyCols.length - 1; j >= 0; j--) {
+                        for (int j = emptyCols.length - 1; j >= 0; j--)
+                        {
                             final int col = emptyCols[j];
                             data = data.substring(0, col).substring(col + 1);
                         }
                         all[allIndex++] = data;
-                    } else if (outFrom > 0 && i >= outFrom && i <= outTo) {
+                    }
+                    else if (outFrom > 0 && i >= outFrom && i <= outTo)
+                    {
                         String data = line.substring(colFrom, colTo).replace("|", ",").replaceAll(" , ", "  ").
                                 replaceAll("  ", " ").replaceAll("  ", " 0");
-                        for (int j = emptyCols.length - 1; j >= 0; j--) {
+                        for (int j = emptyCols.length - 1; j >= 0; j--)
+                        {
                             final int col = emptyCols[j];
                             data = data.substring(0, col).substring(col + 1);
                         }
@@ -509,7 +583,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 //                final String[][] matrix = new String[all.length][];
                 System.out.println(all);
             }
-            catch (IOException e) {
+            catch (IOException e)
+            {
                 LOG.error("problems rading states matrix", e);
             }
         }
@@ -520,12 +595,14 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @return the taxon tree
      */
-    protected TaxonTree getTaxonTree() {
+    protected TaxonTree getTaxonTree()
+    {
         final TaxonBased taxonBased = (TaxonBased) getModels().getSelection();
         return taxonBased == null ? null : TaxonModels.find(taxonBased.getTaxaUid());
     }
 
-    protected void setTaxonTreeDisabled() {
+    protected void setTaxonTreeDisabled()
+    {
         master.setTaxonTreeDisabled();
     }
 }

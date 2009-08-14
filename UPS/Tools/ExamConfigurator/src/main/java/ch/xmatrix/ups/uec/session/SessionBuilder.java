@@ -55,41 +55,60 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class SessionBuilder extends AbstractDetailsBuilder {
+public class SessionBuilder extends AbstractDetailsBuilder
+{
 
     private static final String COMPONENT_DESCRIPTION = "fieldDescription";
+
     private static final String COMPONENT_SESKZ = "fieldSeskz";
+
     private static final String COMPONENT_DUE = "fieldDue";
+
     private static final String COMPONENT_CONSTRAINTS = "comboConstraints";
 
     private static final Logger LOG = Logger.getLogger(SessionBuilder.class);
+
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/session/SessionPanel.jfd";
+
     private static final String RESOURCE_MODEL = "/data/sessions.xml";
 
     private InfoModel infoModel;
+
     private JComboBox comboConstraints;
+
     private JTextField fieldDescription;
+
     private JTextField fieldSeskz;
+
     private MDateEntryField fieldDue;
+
     private ComboBoxAdapter comboBoxAdapter;
+
     private boolean isAdjusting;
+
     private boolean enabledByConstraints;
 
-    public SessionBuilder() {
+    public SessionBuilder()
+    {
         super(new SessionFactory(), RESOURCE_MODEL, RESOURCE_FORM, 50);
     }
 
     //-- ActionCommandPanelBuilder overrides
 
     @Override
-    protected void initComponentListeners() {
-        fieldDescription.addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
+    protected void initComponentListeners()
+    {
+        fieldDescription.addCaretListener(new CaretListener()
+        {
+            public void caretUpdate(final CaretEvent e)
+            {
                 final String newText = fieldDescription.getText().trim();
                 final SessionModel model = getExamInfoModel();
-                if (model != null) {
+                if (model != null)
+                {
                     final String oldText = model.getDescription() == null ? "" : model.getDescription();
-                    if (newText != null && !newText.equals(oldText) && !isAdjusting) {
+                    if (newText != null && !newText.equals(oldText) && !isAdjusting)
+                    {
                         isAdjusting = true;
                         model.setDescription(newText);
                         setDirty();
@@ -98,13 +117,17 @@ public class SessionBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        fieldSeskz.addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
+        fieldSeskz.addCaretListener(new CaretListener()
+        {
+            public void caretUpdate(final CaretEvent e)
+            {
                 final String newText = fieldSeskz.getText().trim();
                 final SessionModel model = getExamInfoModel();
-                if (model != null) {
+                if (model != null)
+                {
                     final String oldText = model.getSeskz() == null ? "" : model.getSeskz();
-                    if (newText != null && !newText.equals(oldText) && !isAdjusting) {
+                    if (newText != null && !newText.equals(oldText) && !isAdjusting)
+                    {
                         isAdjusting = true;
                         model.setSeskz(newText);
                         setDirty();
@@ -113,38 +136,49 @@ public class SessionBuilder extends AbstractDetailsBuilder {
                 }
             }
         });
-        fieldDue.addMFieldListener(new MFieldListener() {
-            public void fieldEntered(final FocusEvent event) {
+        fieldDue.addMFieldListener(new MFieldListener()
+        {
+            public void fieldEntered(final FocusEvent event)
+            {
             }
 
-            public void fieldExited(final FocusEvent event) {
-                try {
+            public void fieldExited(final FocusEvent event)
+            {
+                try
+                {
                     final Date newDate = fieldDue.getValue();
                     final Date oldDate = getExamInfoModel().getDue();
-                    if ((oldDate == null || newDate != null && !newDate.equals(oldDate)) && !isAdjusting) {
+                    if ((oldDate == null || newDate != null && !newDate.equals(oldDate)) && !isAdjusting)
+                    {
                         isAdjusting = true;
                         getExamInfoModel().setDue(newDate);
                         setDirty();
                         isAdjusting = false;
                     }
                 }
-                catch (ParseException e) {
+                catch (ParseException e)
+                {
                     LOG.warn("not a valid date: " + fieldDue.getText());
                 }
             }
         });
-        comboConstraints.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        comboConstraints.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 final Constraints newConstraints = (Constraints) comboConstraints.getSelectedItem();
                 final String newConstraintsUid = newConstraints == null ? "" : newConstraints.getUid();
-                if (newConstraints != null) {
+                if (newConstraints != null)
+                {
                     enabledByConstraints = true;
                     setEnabled(true);
                 }
                 final SessionModel model = getExamInfoModel();
-                if (model != null) {
+                if (model != null)
+                {
                     final String oldConstraintsUid = model.getConstraintsUid();
-                    if (newConstraintsUid != null && !newConstraintsUid.equals(oldConstraintsUid) && !isAdjusting) {
+                    if (newConstraintsUid != null && !newConstraintsUid.equals(oldConstraintsUid) && !isAdjusting)
+                    {
                         isAdjusting = true;
                         model.setConstraintsUid(enabledByConstraints ? newConstraintsUid : null);
                         setDirty();
@@ -157,7 +191,8 @@ public class SessionBuilder extends AbstractDetailsBuilder {
 
     //--- DetailsBuilder implementation
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         final SessionModel model = getExamInfoModel();
         comboConstraints.setEnabled(model != null && !model.isFixed());
         fieldDescription.setEnabled(enabled && enabledByConstraints);
@@ -167,12 +202,15 @@ public class SessionBuilder extends AbstractDetailsBuilder {
 
     //--- AbstractDetailsBuilder implementation
 
-    public void setInfoModel(final InfoModel infoModel) {
+    public void setInfoModel(final InfoModel infoModel)
+    {
         this.infoModel = infoModel;
     }
 
-    protected void initComponents() {
-        try {
+    protected void initComponents()
+    {
+        try
+        {
             infoModel.setNote(new SimpleNote("Lade " + getInfoString(), infoModel.getNote().getColor()));
 
             initCommand(new UploadCommand(getCommandManager(), getModels().getListModel()), true);
@@ -195,35 +233,43 @@ public class SessionBuilder extends AbstractDetailsBuilder {
             comboConstraints.setModel(comboBoxAdapter);
             setTaxonTreeDisabled();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             throw new IllegalStateException("could not create exam info panel", e);
         }
     }
 
-    protected XStream getConverter() {
+    protected XStream getConverter()
+    {
         return SessionPersister.getConverter();
     }
 
-    protected String getInfoString() {
+    protected String getInfoString()
+    {
         return "Session-Editor";
     }
 
-    protected String getModelId() {
+    protected String getModelId()
+    {
         return MainModel.MODELID_SESSION;
     }
 
     @Override
-    public void setModel(final TaxonBased model) {
-        if (!isAdjusting) {
+    public void setModel(final TaxonBased model)
+    {
+        if (!isAdjusting)
+        {
             isAdjusting = true;
-            if (model != null) {
+            if (model != null)
+            {
                 final SessionModel sessionModel = (SessionModel) model;
                 fieldDescription.setText(sessionModel.getDescription());
                 fieldSeskz.setText(sessionModel.getSeskz());
                 fieldDue.setValue(sessionModel.getDue());
                 comboBoxAdapter.setSelectedItem(AbstractMainModel.findModel(sessionModel.getConstraintsUid()));
             }
-            else {
+            else
+            {
                 fieldDescription.setText(null);
                 fieldSeskz.setText(null);
                 fieldDue.setValue(null);
@@ -235,7 +281,8 @@ public class SessionBuilder extends AbstractDetailsBuilder {
 
     //-- Utilities
 
-    private SessionModel getExamInfoModel() {
+    private SessionModel getExamInfoModel()
+    {
         return (SessionModel) getModels().getSelection();
     }
 }

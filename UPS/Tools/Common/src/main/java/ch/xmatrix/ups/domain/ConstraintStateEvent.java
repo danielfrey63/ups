@@ -20,20 +20,24 @@ import java.util.EventObject;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/04/21 11:02:52 $
  */
-public class ConstraintStateEvent extends EventObject {
+public class ConstraintStateEvent extends EventObject
+{
 
     private TreeObject[] taxa;
 
-    public ConstraintStateEvent(final Object source, final TreeObject[] taxa) {
+    public ConstraintStateEvent(final Object source, final TreeObject[] taxa)
+    {
         super(source);
         this.setTaxa(taxa);
     }
 
-    public TreeObject[] getTaxa() {
+    public TreeObject[] getTaxa()
+    {
         return taxa;
     }
 
-    private void setTaxa(final TreeObject[] taxa) {
+    private void setTaxa(final TreeObject[] taxa)
+    {
         this.taxa = taxa;
     }
 }

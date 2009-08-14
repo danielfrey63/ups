@@ -35,36 +35,45 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class FromDirectory extends LoadFilesystem {
+public class FromDirectory extends LoadFilesystem
+{
 
     private static final Logger LOG = Logger.getLogger(FromDirectory.class);
 
-    public FromDirectory(final CommandManager commandManager, final SetBuilder.SubmitTableModel model) {
+    public FromDirectory(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    {
         super(commandManager, Commands.COMMANDID_LOADDIRECTORY, model);
     }
 
-    protected OpenChooser getChooser() {
+    protected OpenChooser getChooser()
+    {
         return new Chooser();
     }
 
-    private class Chooser extends OpenChooser {
+    private class Chooser extends OpenChooser
+    {
 
-        public Chooser() {
+        public Chooser()
+        {
             super(null, JFileChooser.DIRECTORIES_ONLY, "openchooser", System.getProperty("user.dir"));
         }
 
-        protected void load(final File directory) {
+        protected void load(final File directory)
+        {
             File file = null;
-            try {
+            try
+            {
                 final File[] files = directory.listFiles(new ExtentionFileFilter("", new String[]{EXTENTION}, false));
                 Arrays.sort(files, new ToStringComparator());
-                for (int i = 0; i < files.length; i++) {
+                for (int i = 0; i < files.length; i++)
+                {
                     file = files[i];
                     loadAnonymousFile(file);
                 }
                 writeBuffer();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 LOG.error("error during processing of file" + (file != null ? " \"" + file + "\"" : "s"), e);
                 Dialogs.showWarnMessage(null, "Warnung", "" +
                         "Während der Verarbeitung der Dateien ist ein Fehler\n" +
@@ -74,15 +83,19 @@ public class FromDirectory extends LoadFilesystem {
         }
     }
 
-    public static void main(final String[] args) throws InvocationTargetException, InterruptedException {
+    public static void main(final String[] args) throws InvocationTargetException, InterruptedException
+    {
         System.setProperty("jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings");
         System.setProperty("log4j.configuration", "log4j.properties");
         final FromDirectory ff = new FromDirectory(new CommandManager(), null);
-        SwingUtilities.invokeAndWait(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeAndWait(new Runnable()
+        {
+            public void run()
+            {
                 ff.handleExecute();
                 final File[] files = ff.getChooser().getSelectedFiles();
-                for (int i = 0; i < files.length; i++) {
+                for (int i = 0; i < files.length; i++)
+                {
                     final File file = files[i];
                     System.out.println(file);
                 }

@@ -35,7 +35,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.event.DocumentEvent;
-import org.apache.log4j.Category;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,38 +43,53 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:20 $
  */
-public class PersonEditBuilder implements Builder {
+public class PersonEditBuilder implements Builder
+{
 
     private static final Logger LOG = Logger.getLogger(PersonEditBuilder.class);
 
     private Trigger trigger = new Trigger();
+
     private List<CompletionListener> listeners = new ArrayList<CompletionListener>();
+
     private Notifier notifier = new Notifier();
+
     private boolean complete = false;
 
     private PersonData person;
+
     private JPanel panel;
+
     private FixedFormatTextField idField;
+
     private JTextField firstNameField;
+
     private JTextField lastNameField;
+
     private JComboBox comboCourse;
+
     private String pattern;
 
-    public PersonEditBuilder(final PersonData person) {
+    public PersonEditBuilder(final PersonData person)
+    {
         this.person = person;
         build();
     }
 
-    public JComponent getPanel() {
+    public JComponent getPanel()
+    {
         return panel;
     }
 
-    public void save() {
+    public void save()
+    {
         trigger.triggerCommit();
     }
 
-    private void build() {
-        try {
+    private void build()
+    {
+        try
+        {
             final FormCreator creator = new FormCreator(FormLoader.load("ch/xmatrix/ups/view/editor/PersonEdit.jfd"));
             creator.createAll();
             panel = creator.getPanel("panel");
@@ -99,34 +113,42 @@ public class PersonEditBuilder implements Builder {
             final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.COURSE);
             final ArrayList<String> courseList = new ArrayList<String>();
             final ListModel list = comboCourse.getModel();
-            for (int i = 0; i < list.getSize(); i++) {
+            for (int i = 0; i < list.getSize(); i++)
+            {
                 courseList.add((String) list.getElementAt(i));
             }
             comboCourse.setModel(new ComboBoxAdapter((ListModel) new SelectionInList(courseList), new BufferedValueModel(adapter, trigger)));
-            comboCourse.addActionListener(new ActionListener() {
-                public void actionPerformed(final ActionEvent e) {
+            comboCourse.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(final ActionEvent e)
+                {
                     notifyComplete();
                 }
             });
 
             pattern = idField.getPattern();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             LOG.error("could not load form", e);
         }
     }
 
-    public boolean isComplete() {
+    public boolean isComplete()
+    {
         return !firstNameField.getText().equals("") &&
                 !lastNameField.getText().equals("") &&
                 !comboCourse.getSelectedItem().equals("") &&
                 !idField.getText().equals(pattern);
     }
 
-    private class FirstNameDocument extends AbstractPlainDocument {
-        protected boolean validate(final String newValue) {
+    private class FirstNameDocument extends AbstractPlainDocument
+    {
+        protected boolean validate(final String newValue)
+        {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++) {
+            for (int i = 0; i < newValue.length(); i++)
+            {
                 final char c = newValue.charAt(i);
                 ret &= Character.isLetter(c) || c == ' ' || c == '-';
             }
@@ -135,10 +157,13 @@ public class PersonEditBuilder implements Builder {
         }
     }
 
-    private class LastNameDocument extends AbstractPlainDocument {
-        protected boolean validate(final String newValue) {
+    private class LastNameDocument extends AbstractPlainDocument
+    {
+        protected boolean validate(final String newValue)
+        {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++) {
+            for (int i = 0; i < newValue.length(); i++)
+            {
                 final char c = newValue.charAt(i);
                 ret &= Character.isLetter(c) || c == ' ' || c == '-' || c == '(' || c == ')';
             }
@@ -146,28 +171,35 @@ public class PersonEditBuilder implements Builder {
         }
     }
 
-    public interface CompletionListener {
+    public interface CompletionListener
+    {
         void updateComplete(boolean complete);
     }
 
-    public void addCompletionListener(final CompletionListener listener) {
+    public void addCompletionListener(final CompletionListener listener)
+    {
         listeners.add(listener);
     }
 
-    private void notifyComplete() {
+    private void notifyComplete()
+    {
         final boolean oldComplete = complete;
         complete = isComplete();
-        if (oldComplete != complete) {
-            for (int i = 0; i < listeners.size(); i++) {
+        if (oldComplete != complete)
+        {
+            for (int i = 0; i < listeners.size(); i++)
+            {
                 final CompletionListener listener = listeners.get(i);
                 listener.updateComplete(complete);
             }
         }
     }
 
-    private class Notifier extends SimpleDocumentListener {
+    private class Notifier extends SimpleDocumentListener
+    {
 
-        public void changedUpdate(final DocumentEvent e) {
+        public void changedUpdate(final DocumentEvent e)
+        {
             notifyComplete();
         }
     }

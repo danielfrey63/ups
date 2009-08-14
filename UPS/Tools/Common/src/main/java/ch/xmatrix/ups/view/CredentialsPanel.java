@@ -32,21 +32,26 @@ import javax.swing.JTextField;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/04/21 11:02:52 $
  */
-public class CredentialsPanel extends JPanel {
+public class CredentialsPanel extends JPanel
+{
 
     private CredentialsModel model;
 
-    public CredentialsPanel(final CredentialsModel model) {
+    public CredentialsPanel(final CredentialsModel model)
+    {
         this.model = model;
         initLayout();
     }
 
-    private void initLayout() {
+    private void initLayout()
+    {
         setLayout(new FormLayout("8dlu, p, 4dlu, max(140dlu;p):g(1.0), 8dlu", "8dlu, p, 4dlu, p, 8dlu"));
         addLine(2, new JTextField(), "Benutzername:", Credentials.PROPERTYNAME_USERNAME, "Username");
         addLine(4, new JPasswordField(), "Passwort:", Credentials.PROPERTYNAME_PASSWORD, "Password");
-        model.getValidationResultModel().addPropertyChangeListener(ValidationResultModel.PROPERTYNAME_RESULT, new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
+        model.getValidationResultModel().addPropertyChangeListener(ValidationResultModel.PROPERTYNAME_RESULT, new PropertyChangeListener()
+        {
+            public void propertyChange(final PropertyChangeEvent evt)
+            {
                 final ValidationResult result = (ValidationResult) evt.getNewValue();
                 ValidationComponentUtils.updateComponentTreeMandatoryAndBlankBackground(CredentialsPanel.this);
                 ValidationComponentUtils.updateComponentTreeMandatoryBorder(CredentialsPanel.this);
@@ -56,7 +61,8 @@ public class CredentialsPanel extends JPanel {
         });
     }
 
-    private void addLine(final int line, final JTextField field, final String label, final String property, final String messageKey) {
+    private void addLine(final int line, final JTextField field, final String label, final String property, final String messageKey)
+    {
         final CellConstraints cc = new CellConstraints();
         Bindings.bind(field, model.getModel(property), false);
         ValidationComponentUtils.setMandatory(field, true);

@@ -21,18 +21,24 @@ import java.util.List;
  * @author Daniel Frey
  * @version $Revision: 1.11 $ $Date: 2007/04/06 11:01:11 $
  */
-public class Constraint {
+public class Constraint
+{
 
     private String name;
+
     private int minimalCount;
+
     private List<String> taxa;
+
     private Constraints constraints;
 
-    public Constraint() {
+    public Constraint()
+    {
         name = "<Neue Vorgabe>";
     }
 
-    public Constraint(final Constraint orig) {
+    public Constraint(final Constraint orig)
+    {
         name = orig.name;
         minimalCount = orig.minimalCount;
         constraints = orig.constraints;
@@ -44,7 +50,8 @@ public class Constraint {
      *
      * @return the name of this constraint.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -53,7 +60,8 @@ public class Constraint {
      *
      * @param name the name to set.
      */
-    public void setName(final String name) {
+    public void setName(final String name)
+    {
         this.name = name;
     }
 
@@ -62,7 +70,8 @@ public class Constraint {
      *
      * @return the minimal count of selected taxa needed.
      */
-    public int getMinimalCount() {
+    public int getMinimalCount()
+    {
         return minimalCount;
     }
 
@@ -71,7 +80,8 @@ public class Constraint {
      *
      * @param minimalCount the minimal count of selected taxa.
      */
-    public void setMinimalCount(final int minimalCount) {
+    public void setMinimalCount(final int minimalCount)
+    {
         this.minimalCount = minimalCount;
     }
 
@@ -80,11 +90,13 @@ public class Constraint {
      *
      * @return the taxa of this constraint.
      */
-    public List<String> getTaxa() {
+    public List<String> getTaxa()
+    {
         return taxa;
     }
 
-    public void setTaxa(final List<String> taxa) {
+    public void setTaxa(final List<String> taxa)
+    {
         this.taxa = taxa;
     }
 
@@ -94,29 +106,38 @@ public class Constraint {
      * @param i the index of the taxon to return.
      * @return the taxon
      */
-    public String getTaxon(final int i) {
+    public String getTaxon(final int i)
+    {
         return taxa.get(i);
     }
 
-    public Constraints getConstraints() {
+    public Constraints getConstraints()
+    {
         return constraints;
     }
 
-    public void setConstraints(final Constraints constraints) {
+    public void setConstraints(final Constraints constraints)
+    {
         this.constraints = constraints;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 
-    public String toDebugString() {
+    public String toDebugString()
+    {
         final StringBuffer buffer = new StringBuffer(name);
         buffer.append(" - ");
-        for (int i = 0; i < taxa.size(); i++) {
+        for (int i = 0; i < taxa.size(); i++)
+        {
             final String taxonString = taxa.get(i);
             buffer.append(taxonString);
-            if (i < taxa.size() - 1) buffer.append(", ");
+            if (i < taxa.size() - 1)
+            {
+                buffer.append(", ");
+            }
         }
         return buffer.toString();
     }

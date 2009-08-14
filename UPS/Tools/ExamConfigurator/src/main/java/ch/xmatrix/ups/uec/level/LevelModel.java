@@ -22,33 +22,41 @@ package ch.xmatrix.ups.uec.level;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class LevelModel {
+public class LevelModel
+{
 
     private String level;
+
     private int maximum;
 
-    public LevelModel(final String level, final int maximum) {
+    public LevelModel(final String level, final int maximum)
+    {
         this.level = level;
         this.maximum = maximum;
     }
 
-    public LevelModel(final LevelModel original) {
+    public LevelModel(final LevelModel original)
+    {
         this(original.getLevel(), original.getMaximum());
     }
 
-    public String getLevel() {
+    public String getLevel()
+    {
         return level;
     }
 
-    public int getMaximum() {
+    public int getMaximum()
+    {
         return maximum;
     }
 
-    public void setMaximum(final int maximum) {
+    public void setMaximum(final int maximum)
+    {
         this.maximum = maximum;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return level + "=" + maximum;
     }
 }

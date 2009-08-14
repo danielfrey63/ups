@@ -11,10 +11,10 @@
  */
 package ch.xmatrix.ups.model;
 
+import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.Note;
 import ch.jfactory.binding.SimpleNote;
-import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.controller.Loader;
 import ch.xmatrix.ups.domain.SimpleLevel;
@@ -29,21 +29,26 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.8 $ $Date: 2008/01/06 10:16:20 $
  */
-public class TaxonModels {
+public class TaxonModels
+{
 
     // Todo: Remove redundant constant in ModelUtils
     public static final String RESOURCE_MODEL = "/data/taxa.xml";
 
     private static final Logger LOG = Logger.getLogger(TaxonModels.class);
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private static SimpleModelList TREES;
+
     private static InfoModel INFO_MODEL = new DefaultInfoModel();
 
-    public static TaxonTree[] getTaxonTreesArray() {
+    public static TaxonTree[] getTaxonTreesArray()
+    {
         final ListModel list = getTaxonTrees();
         final TaxonTree[] trees = new TaxonTree[list.getSize()];
-        for (int i = 0; i < list.getSize(); i++) {
+        for (int i = 0; i < list.getSize(); i++)
+        {
             trees[i] = (TaxonTree) list.getElementAt(i);
         }
         return trees;
@@ -54,17 +59,21 @@ public class TaxonModels {
      *
      * @param infoModel the info model
      */
-    public static void setInfoModel(final InfoModel infoModel) {
+    public static void setInfoModel(final InfoModel infoModel)
+    {
         INFO_MODEL = infoModel;
     }
 
-    public static SimpleModelList getTaxonTrees() {
+    public static SimpleModelList getTaxonTrees()
+    {
         loadTaxonTrees();
         return TREES;
     }
 
-    public static void loadTaxonTrees() {
-        if (TREES == null) {
+    public static void loadTaxonTrees()
+    {
+        if (TREES == null)
+        {
             final Note note = INFO_MODEL.getNote();
             INFO_MODEL.setNote(new SimpleNote("Lade Taxonbäume", note.getPercentage() + 10, note.getColor()));
             final long start = System.currentTimeMillis();
@@ -76,7 +85,8 @@ public class TaxonModels {
         }
     }
 
-    public static XStream getConverter() {
+    public static XStream getConverter()
+    {
         final XStream x = SimpleModelList.getConverter();
         x.setMode(XStream.ID_REFERENCES);
         x.alias("taxonTrees", SimpleModelList.class);
@@ -92,15 +102,21 @@ public class TaxonModels {
      * @param uid the uid of the taxon tree
      * @return the found taxon tree or null
      */
-    public static TaxonTree find(final String uid) {
+    public static TaxonTree find(final String uid)
+    {
         final ListModel trees = getTaxonTrees();
-        for (int i = 0; i < trees.getSize(); i++) {
+        for (int i = 0; i < trees.getSize(); i++)
+        {
             final TaxonTree tree = (TaxonTree) trees.getElementAt(i);
-            if (tree.getUid().equals(uid)) {
+            if (tree.getUid().equals(uid))
+            {
                 return tree;
             }
         }
-        if (DEBUG && uid != null) LOG.debug("could not find taxon tree for uid \"" + uid + "\"");
+        if (DEBUG && uid != null)
+        {
+            LOG.debug("could not find taxon tree for uid \"" + uid + "\"");
+        }
         return null;
     }
 }

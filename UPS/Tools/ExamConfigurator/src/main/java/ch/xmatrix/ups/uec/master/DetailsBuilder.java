@@ -9,7 +9,8 @@ import ch.xmatrix.ups.domain.TaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public interface DetailsBuilder extends Builder {
+public interface DetailsBuilder extends Builder
+{
 
     /**
      * Apply the new model to your editor.
@@ -28,14 +29,10 @@ public interface DetailsBuilder extends Builder {
 
     void load();
 
-    /**
-     * Save the data.
-     */
+    /** Save the data. */
     void save();
 
-    /**
-     * Locks the gui and sets the models fixed state.
-     */
+    /** Locks the gui and sets the models fixed state. */
     void lock();
 
     boolean handleMigration(TaxonBased model, String uid);

@@ -17,7 +17,6 @@
 package ch.xmatrix.ups.uec.level;
 
 import ch.xmatrix.ups.domain.AbstractTaxonBased;
-import ch.xmatrix.ups.uec.level.LevelModel;
 import java.util.ArrayList;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -28,34 +27,39 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class LevelsModel extends AbstractTaxonBased {
+public class LevelsModel extends AbstractTaxonBased
+{
 
-    /**
-     * List of {@link LevelModel}s.
-     */
+    /** List of {@link LevelModel}s. */
     private ArrayList<LevelModel> models = new ArrayList<LevelModel>();
 
-    public LevelsModel() {
+    public LevelsModel()
+    {
         super();
     }
 
-    public LevelsModel(final LevelsModel orig) {
+    public LevelsModel(final LevelsModel orig)
+    {
         super(orig);
-        for (int i = 0; i < orig.models.size(); i++) {
+        for (int i = 0; i < orig.models.size(); i++)
+        {
             final LevelModel origModel = orig.models.get(i);
             models.add(new LevelModel(origModel));
         }
     }
 
-    public ArrayList<LevelModel> getLevelModels() {
+    public ArrayList<LevelModel> getLevelModels()
+    {
         return models;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return getName();
     }
 
-    public String toDebugString() {
+    public String toDebugString()
+    {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

@@ -17,7 +17,8 @@ package ch.xmatrix.ups.domain;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public interface TreeObject {
+public interface TreeObject
+{
 
     /**
      * Returns the children of this object. May be null for leafs.

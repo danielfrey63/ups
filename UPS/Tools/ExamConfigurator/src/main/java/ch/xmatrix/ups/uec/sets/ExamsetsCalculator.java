@@ -27,19 +27,19 @@ import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.PlantList;
 import ch.xmatrix.ups.domain.SimpleLevel;
 import ch.xmatrix.ups.domain.SimpleTaxon;
+import ch.xmatrix.ups.model.ExamsetModel;
+import ch.xmatrix.ups.model.ExamsetsModel;
+import ch.xmatrix.ups.model.Registration;
+import ch.xmatrix.ups.model.SetTaxon;
+import ch.xmatrix.ups.model.SpecimenModel;
+import ch.xmatrix.ups.model.SpecimensModel;
 import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.model.TaxonomicComparator;
-import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.uec.groups.GroupModel;
 import ch.xmatrix.ups.uec.groups.GroupsModel;
 import ch.xmatrix.ups.uec.level.LevelModel;
 import ch.xmatrix.ups.uec.level.LevelsModel;
 import ch.xmatrix.ups.uec.prefs.PrefsModel;
-import ch.xmatrix.ups.model.SpecimensModel;
-import ch.xmatrix.ups.model.ExamsetsModel;
-import ch.xmatrix.ups.model.ExamsetModel;
-import ch.xmatrix.ups.model.SetTaxon;
-import ch.xmatrix.ups.model.Registration;
 import com.thoughtworks.xstream.XStream;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.storage.beans.Anmeldedaten;
@@ -65,34 +65,52 @@ import org.apache.commons.lang.StringUtils;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:19:08 $
  */
-public class ExamsetsCalculator {
+public class ExamsetsCalculator
+{
 
     private Map<String, SpecimenModel> speciesTaxaMap = new HashMap<String, SpecimenModel>();
+
     private int weightMax = Integer.MIN_VALUE;
+
     private int weightMin = Integer.MAX_VALUE;
+
     private int[] weights;
+
     private int knownTotalSteps;
+
     private int totalWeight;
+
     private Map<SimpleTaxon, SpecimenModel> simpleToExamTaxonMap = new HashMap<SimpleTaxon, SpecimenModel>();
+
     private Map<SpecimenModel, Integer> speciesInUse;
+
     private int debug = 7;
+
     private static ArrayList<GroupModel> originalGroups = new ArrayList<GroupModel>();
+
     private ExamsetsModel models;
 
     private static final int DELAY = 0x01;
+
     private static final int LEVEL_SUMMARY = 0x02;
+
     private static final int LEVEL_DETAIL = 0x04;
 
     private StringBuffer examsetsBuffer;
+
     private StringBuffer debugBuffer = new StringBuffer();
+
     private StringBuffer examlistBuffer;
 
     private static final String ret = System.getProperty("line.separator");
 
     private SaveChooser saver = new SaveChooser(new ExtentionFileFilter("", new String[]{".txt"}, true),
-            "examsetsaver", System.getProperty("user.home")) {
-        protected void save(final File file) {
-            try {
+            "examsetsaver", System.getProperty("user.home"))
+    {
+        protected void save(final File file)
+        {
+            try
+            {
                 final FileWriter examsetWriter = new FileWriter(file);
                 IOUtils.copy(new StringReader(examsetsBuffer.toString()), examsetWriter);
                 examsetWriter.close();
@@ -174,24 +192,33 @@ public class ExamsetsCalculator {
                 xmlWriter.close();
 
             }
-            catch (IOException e) {
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
     };
 
     private final SpecimensModel specimens;
+
     private final PrefsModel prefs;
+
     private final LevelsModel levels;
+
     private final TaxonTree taxa;
+
     private final GroupsModel groups;
+
     private final Constraints constraints;
+
     private final Registration[] registrations;
+
     private long seed;
 
     public ExamsetsCalculator(final TaxonTree taxa, final PrefsModel prefs, final GroupsModel groups,
                               final SpecimensModel specimens, final LevelsModel levels,
-                              final Constraints constraints, final Registration[] registrations) {
+                              final Constraints constraints, final Registration[] registrations)
+    {
         this.taxa = taxa;
         this.prefs = prefs;
         this.groups = groups;
@@ -201,15 +228,17 @@ public class ExamsetsCalculator {
         this.registrations = registrations;
     }
 
-    private void initWeights() {
+    private void initWeights()
+    {
         weights = new int[weightMax - weightMin + 1];
-        for (int i = weightMin; i <= weightMax; i++) {
-            weights[ i - weightMin ] = i;
+        for (int i = weightMin; i <= weightMax; i++)
+        {
+            weights[i - weightMin] = i;
         }
     }
 
-
-    private void printSummaryExamTaxonMapAndExamMinMaxWeights() {
+    private void printSummaryExamTaxonMapAndExamMinMaxWeights()
+    {
         final String abundance = getAbundanceStatsString("", getWeightIfKnownStats(speciesTaxaMap.values()));
 
         debugBuffer.append("-----------------------------------").append(ret);
@@ -229,20 +258,24 @@ public class ExamsetsCalculator {
         debugBuffer.append("weight max                : ").append(weightMax).append(ret);
         debugBuffer.append("abundances                : ").append(abundance).append(ret);
 
-        class IdWrapper implements IdAware {
+        class IdWrapper implements IdAware
+        {
 
             public IdAware inner;
 
-            public IdWrapper(final IdAware inner) {
+            public IdWrapper(final IdAware inner)
+            {
                 this.inner = inner;
             }
 
-            public String getUid() {
+            public String getUid()
+            {
                 return inner.getUid();
             }
 
             @Override
-            public String toString() {
+            public String toString()
+            {
                 return inner.toString() + " (" + getUid() + ")";
             }
         }
@@ -269,20 +302,22 @@ public class ExamsetsCalculator {
         models.getConfigurations().add(levels);
     }
 
-    public long getSeed() {
+    public long getSeed()
+    {
         return seed;
     }
 
-    public void setSeed(final long seed) {
+    public void setSeed(final long seed)
+    {
         this.seed = seed;
     }
 
-    /**
-     * Iterate over all examlists.
-     */
-    public void execute() {
+    /** Iterate over all examlists. */
+    public void execute()
+    {
 
-        if (seed == 0) {
+        if (seed == 0)
+        {
             seed = Long.parseLong(System.getProperty("seed", "" + System.currentTimeMillis()));
         }
 
@@ -309,8 +344,10 @@ public class ExamsetsCalculator {
         speciesInUse = new HashMap<SpecimenModel, Integer>();
 
         // Iterate over all examlists
-        for (final Registration registration : registrations) {
-            if (registration.getPlantList() == null) {
+        for (final Registration registration : registrations)
+        {
+            if (registration.getPlantList() == null)
+            {
                 final String[] defaults = constraints.getDefaultTaxa();
                 final PlantList plantList = new PlantList();
                 plantList.setTaxa(new ArrayList<String>(Arrays.asList(defaults)));
@@ -328,7 +365,8 @@ public class ExamsetsCalculator {
      *
      * @param registration registration data
      */
-    private void calculateExamset(final Registration registration) {
+    private void calculateExamset(final Registration registration)
+    {
 
         final String studentString = getStudentString(registration);
         debugBuffer.append(studentString);
@@ -345,9 +383,11 @@ public class ExamsetsCalculator {
         final ArrayList<String> taxa = new ArrayList<String>(registration.getPlantList().getTaxa());
 
         // Add all taxa of examlist to knowns, all others to unknowns.
-        for (final String taxonName : taxa) {
+        for (final String taxonName : taxa)
+        {
             final SpecimenModel specimen = speciesTaxaMap.get(taxonName);
-            if (specimen != null) {
+            if (specimen != null)
+            {
                 knownBase.add(specimen);
             }
         }
@@ -364,15 +404,19 @@ public class ExamsetsCalculator {
         deduceCounters();
 
         // Remove taxa that are disabled of either list
-        for (final Iterator<SpecimenModel> iterator = knownBase.iterator(); iterator.hasNext();) {
+        for (final Iterator<SpecimenModel> iterator = knownBase.iterator(); iterator.hasNext();)
+        {
             final SpecimenModel taxon = iterator.next();
-            if (taxon.isDeactivatedIfKnown()) {
+            if (taxon.isDeactivatedIfKnown())
+            {
                 iterator.remove();
             }
         }
-        for (final Iterator<SpecimenModel> iterator = unknownBase.iterator(); iterator.hasNext();) {
+        for (final Iterator<SpecimenModel> iterator = unknownBase.iterator(); iterator.hasNext();)
+        {
             final SpecimenModel taxon = iterator.next();
-            if (taxon.isDeactivatedIfUnknown()) {
+            if (taxon.isDeactivatedIfUnknown())
+            {
                 iterator.remove();
             }
         }
@@ -383,12 +427,14 @@ public class ExamsetsCalculator {
         debugBuffer.append("abundances unknonws: ").append(getAbundanceStatsString("", getWeightIfKnownStats(unknownBase))).append(ret);
 
         final ArrayList<SetTaxon> set = new ArrayList<SetTaxon>();
-        try {
+        try
+        {
             final ArrayList<SetTaxon> unknowns = calculate(set, knownBase, unknownBase);
             updateUsedWith(set);
 
             RandomUtils.randomizeNext(set);
-            for (final SetTaxon setTaxon : set) {
+            for (final SetTaxon setTaxon : set)
+            {
                 examsetsBuffer.append(setTaxon).append(ret);
                 final ExamsetModel model = models.getExamsetModels().get(models.getExamsetModels().size() - 1);
                 model.getSetTaxa().add(setTaxon);
@@ -396,7 +442,8 @@ public class ExamsetsCalculator {
 
             composeExamlist(studentString, taxa, set, unknowns);
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             debugBuffer.append("Error              : ").append(e.getMessage().replaceAll("\n", ", "));
             Dialogs.showErrorMessage(null, "Fehler", e.getMessage());
         }
@@ -404,94 +451,123 @@ public class ExamsetsCalculator {
     }
 
     private void composeExamlist(final String studentString, final ArrayList<String> originalTaxa,
-                                 final ArrayList<SetTaxon> set, final ArrayList<SetTaxon> unknowns) {
-        try {
+                                 final ArrayList<SetTaxon> set, final ArrayList<SetTaxon> unknowns)
+    {
+        try
+        {
             final ArrayList<String> taxa = new ArrayList<String>(originalTaxa);
-            for (final SetTaxon taxon : unknowns) {
+            for (final SetTaxon taxon : unknowns)
+            {
                 taxa.add(taxon.getSpecimenModel().getTaxon());
             }
             Collections.sort(taxa, new TaxonomicComparator(ExamsetsCalculator.this.taxa));
             examlistBuffer.append(studentString);
-            for (final String taxon : taxa) {
+            for (final String taxon : taxa)
+            {
                 boolean foundInSet = false;
                 boolean foundInUnknowns = false;
-                for (final Iterator<SetTaxon> iter = set.iterator(); iter.hasNext() && !foundInSet;) {
+                for (final Iterator<SetTaxon> iter = set.iterator(); iter.hasNext() && !foundInSet;)
+                {
                     final SetTaxon setTaxon = iter.next();
-                    if (setTaxon.getSpecimenModel().getTaxon().equals(taxon)) {
+                    if (setTaxon.getSpecimenModel().getTaxon().equals(taxon))
+                    {
                         foundInSet = true;
                     }
                 }
-                for (final Iterator<SetTaxon> iter = unknowns.iterator(); iter.hasNext() && !foundInUnknowns;) {
+                for (final Iterator<SetTaxon> iter = unknowns.iterator(); iter.hasNext() && !foundInUnknowns;)
+                {
                     final SetTaxon unknownTaxon = iter.next();
-                    if (unknownTaxon.getSpecimenModel().getTaxon().equals(taxon)) {
+                    if (unknownTaxon.getSpecimenModel().getTaxon().equals(taxon))
+                    {
                         foundInUnknowns = true;
                     }
                 }
-                if (foundInUnknowns) {
+                if (foundInUnknowns)
+                {
                     examlistBuffer.append(" u ");
-                } else if (foundInSet) {
+                }
+                else if (foundInSet)
+                {
                     examlistBuffer.append(" + ");
-                } else {
+                }
+                else
+                {
                     examlistBuffer.append("   ");
                 }
                 examlistBuffer.append(taxon).append(ret);
             }
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             debugBuffer.append("Error              : ").append(e.getMessage().replaceAll("\n", ", "));
             Dialogs.showErrorMessage(null, "Fehler", e.getMessage());
         }
     }
 
-    private void removeUsedFrom(final ArrayList<SpecimenModel> list) {
+    private void removeUsedFrom(final ArrayList<SpecimenModel> list)
+    {
 
-        for (final SpecimenModel specimen : speciesInUse.keySet()) {
-            if (list.remove(specimen)) {
-                if ((debug & DELAY) == DELAY) {
+        for (final SpecimenModel specimen : speciesInUse.keySet())
+        {
+            if (list.remove(specimen))
+            {
+                if ((debug & DELAY) == DELAY)
+                {
                     debugBuffer.append("occupied removed   : ").append(specimen.getTaxon()).append(ret);
                 }
             }
         }
     }
 
-    private void deduceCounters() {
+    private void deduceCounters()
+    {
 
-        for (final Iterator<SpecimenModel> iterator = speciesInUse.keySet().iterator(); iterator.hasNext();) {
+        for (final Iterator<SpecimenModel> iterator = speciesInUse.keySet().iterator(); iterator.hasNext();)
+        {
             final SpecimenModel specimen = iterator.next();
             final Integer occupied = speciesInUse.get(specimen);
             final int newOccupied = occupied - 1;
-            if (newOccupied == 0) {
+            if (newOccupied == 0)
+            {
                 iterator.remove();
-                if ((debug & DELAY) == DELAY) {
+                if ((debug & DELAY) == DELAY)
+                {
                     debugBuffer.append("occupied removed   : ").append(specimen.getTaxon()).append(" removed").append(ret);
                 }
             }
-            else {
+            else
+            {
                 speciesInUse.put(specimen, newOccupied);
-                if ((debug & DELAY) == DELAY) {
+                if ((debug & DELAY) == DELAY)
+                {
                     debugBuffer.append("occupied deduced   : ").append(specimen.getTaxon()).append(" ").append(newOccupied).append(ret);
                 }
             }
         }
     }
 
-    private void updateUsedWith(final ArrayList<SetTaxon> list) {
+    private void updateUsedWith(final ArrayList<SetTaxon> list)
+    {
 
-        for (final SetTaxon setTaxon : list) {
+        for (final SetTaxon setTaxon : list)
+        {
             final SpecimenModel specimen = setTaxon.getSpecimenModel();
             final int specimens = specimen.getNumberOfSpecimens();
             final int period = prefs.getMaximumSeries();
             final int occupied = period - specimens;
-            if (!speciesInUse.keySet().contains(specimen) && occupied > 0) {
+            if (!speciesInUse.keySet().contains(specimen) && occupied > 0)
+            {
                 speciesInUse.put(specimen, occupied);
-                if ((debug & DELAY) == DELAY) {
+                if ((debug & DELAY) == DELAY)
+                {
                     debugBuffer.append("occupied added     : ").append(specimen.getTaxon()).append(" ").append(occupied).append(ret);
                 }
             }
         }
     }
 
-    private static String getStudentString(final Registration list) {
+    private static String getStudentString(final Registration list)
+    {
 
         final StringBuffer buffer = new StringBuffer();
 
@@ -507,7 +583,8 @@ public class ExamsetsCalculator {
 
     private ArrayList<SetTaxon> calculate(final ArrayList<SetTaxon> set, final ArrayList<SpecimenModel> known,
                                           final ArrayList<SpecimenModel> unknown)
-            throws IllegalArgumentException {
+            throws IllegalArgumentException
+    {
 
         final ArrayList<SpecimenModel> knownPersonalList = new ArrayList<SpecimenModel>(known);
         final ArrayList<SpecimenModel> unknownPersonalList = new ArrayList<SpecimenModel>(unknown);
@@ -545,7 +622,8 @@ public class ExamsetsCalculator {
         final ArrayList<int[]> groupCombinations = filterCombinations(groupRepetitions, knownGroupsWeight);
         final ArrayList<int[]> validGroupCombinations = matchCombinationsToRequirements(table, groupCombinations);
         //printListOfIntArrays("valids are           ", validGroupCombinations);
-        if (validGroupCombinations.size() == 0) {
+        if (validGroupCombinations.size() == 0)
+        {
             throw new IllegalArgumentException("No valid combination found to match groups\n" +
                     "number of weights: " + knownGroupSteps + "\n" +
                     "sum of weights: " + knownGroupsWeight + "\n" +
@@ -557,18 +635,21 @@ public class ExamsetsCalculator {
         final int[] validGroupCombination = validGroupCombinations.get(0);
 
         // Select taxa
-        for (int i = 0; i < globalGroups.size(); i++) {
+        for (int i = 0; i < globalGroups.size(); i++)
+        {
             final GroupModel global = globalGroups.get(i);
             final GroupModel personal = personalGroups.get(i);
             final GroupModel chosen = chosenGroups.get(i);
-            for (int j = 0; j < global.getMinimum(); j++) {
+            for (int j = 0; j < global.getMinimum(); j++)
+            {
                 fillKnowns(global, personal, knownPersonalList);
-                final int weight = validGroupCombination[ i + j ];
+                final int weight = validGroupCombination[i + j];
                 final ArrayList<String> taxa = personal.getTaxa();
                 final ArrayList<SpecimenModel> specimenModels = findSpecimens(taxa);
                 final ArrayList<SpecimenModel> candidates = filterTaxaOfKnowns(specimenModels, weight);
                 final SpecimenModel chosenTaxon = chooseTaxon(candidates);
-                if (candidates.size() == 0) {
+                if (candidates.size() == 0)
+                {
                     throw new IllegalArgumentException("All taxa have been removed by restrictions, nothing left for groups\n" +
                             "remaining taxa in exam list: " + unknownPersonalList.size() + "\n");
                 }
@@ -593,7 +674,8 @@ public class ExamsetsCalculator {
         final ArrayList<int[]> restCombinations = filterCombinations(restRepetitions, knownRestWeight);
         final Map<Integer, Integer> restRequirement = getWeightIfKnownStats(knownPersonalList);
         final ArrayList<int[]> validRestCombinations = matchCombinationsToRequirements(restRequirement, restCombinations);
-        if (validRestCombinations.size() == 0) {
+        if (validRestCombinations.size() == 0)
+        {
             throw new IllegalArgumentException("No valid combination found to match rest of known species with\n" +
                     "number of weights: " + knownRestSteps + "\n" +
                     "sum of weights: " + knownRestWeight + "\n" +
@@ -607,16 +689,18 @@ public class ExamsetsCalculator {
         RandomUtils.randomizeNext(validRestCombination);
 
         // Choose taxa
-        for (int i = 0; i < knownRestSteps; i++) {
+        for (int i = 0; i < knownRestSteps; i++)
+        {
 
             // Make sure requirements are met
             checkForMaximumRequirements(knownPersonalList, unknownPersonalList, chosenGroups);
 
             // Choose a taxon matching the weight
-            final int weight = validRestCombination[ i ];
+            final int weight = validRestCombination[i];
             final ArrayList<SpecimenModel> candidates = filterTaxaOfKnowns(knownPersonalList, weight);
             final SpecimenModel chosenTaxon = chooseTaxon(candidates);
-            if (candidates.size() == 0) {
+            if (candidates.size() == 0)
+            {
                 throw new IllegalArgumentException("All taxa have been removed by restrictions, nothing left for rest of knowns\n" +
                         "remaining taxa in exam list: " + unknownPersonalList.size() + "\n");
             }
@@ -640,7 +724,8 @@ public class ExamsetsCalculator {
         final ArrayList<int[]> unkownCombinations = filterCombinations(unknownRepetitions, unknownRestWeight);
         final Map<Integer, Integer> unknownRequirement = getWeightIfUnknownStats(unknownPersonalList);
         final ArrayList<int[]> validUnknownCombinations = matchCombinationsToRequirements(unknownRequirement, unkownCombinations);
-        if (validUnknownCombinations.size() == 0) {
+        if (validUnknownCombinations.size() == 0)
+        {
             throw new IllegalArgumentException("No valid combination found to match unknown species with\n" +
                     "number of weights: " + unknownSteps + "\n" +
                     "sum of weights: " + unknownRestWeight + "\n" +
@@ -655,15 +740,17 @@ public class ExamsetsCalculator {
 
         // Choose taxa
         final ArrayList<SetTaxon> unknownSelection = new ArrayList<SetTaxon>();
-        for (int i = 0; i < unknownSteps; i++) {
+        for (int i = 0; i < unknownSteps; i++)
+        {
 
             // Make sure requirements are met
             checkForMaximumRequirements(knownPersonalList, unknownPersonalList, chosenGroups);
 
             // Choose a taxon matching the weight
-            final int weight = validUnknownCombination[ i ];
+            final int weight = validUnknownCombination[i];
             final ArrayList<SpecimenModel> candidates = filterTaxaOfUnknowns(unknownPersonalList, weight);
-            if (candidates.size() == 0) {
+            if (candidates.size() == 0)
+            {
                 throw new IllegalArgumentException("All taxa have been removed by restrictions, nothing left for unknowns\n" +
                         "remaining taxa in exam list: " + unknownPersonalList.size() + "\n");
             }
@@ -682,11 +769,13 @@ public class ExamsetsCalculator {
         return unknownSelection;
     }
 
-    private void updateMaximumRequirements(final ArrayList<GroupModel> chosen, final SpecimenModel specimen) {
+    private void updateMaximumRequirements(final ArrayList<GroupModel> chosen, final SpecimenModel specimen)
+    {
 
         final GroupModel taxonsGroup = groups.find(specimen.getTaxon());
         final int index = originalGroups.indexOf(taxonsGroup);
-        if (taxonsGroup != null) {
+        if (taxonsGroup != null)
+        {
             final GroupModel chosenGroup = chosen.get(index);
             chosenGroup.addTaxon(specimen.getTaxon());
         }
@@ -694,16 +783,20 @@ public class ExamsetsCalculator {
 
     private void removeLevelRedundancies(final Map<SimpleTaxon, Integer> levelsFound,
                                          final ArrayList<SpecimenModel> known,
-                                         final ArrayList<SpecimenModel> unknown, final SpecimenModel specimen) {
+                                         final ArrayList<SpecimenModel> unknown, final SpecimenModel specimen)
+    {
 
         SimpleTaxon current = taxa.findTaxonByName(specimen.getTaxon());
         addLevel(current, levelsFound);
 
-        while (current != null) {
+        while (current != null)
+        {
             final int max = getMaxLevelCount(current.getLevel());
             final int actual = getCurrentLevelCount(current, levelsFound);
-            if (max != 0 && actual >= max) {
-                if ((debug & LEVEL_SUMMARY) == LEVEL_SUMMARY) {
+            if (max != 0 && actual >= max)
+            {
+                if ((debug & LEVEL_SUMMARY) == LEVEL_SUMMARY)
+                {
                     debugBuffer.append("maximum reached for: ").append(current.getName()).append(ret);
                 }
                 removeTaxa(known, current);
@@ -713,12 +806,15 @@ public class ExamsetsCalculator {
         }
     }
 
-    private int getMaxLevelCount(final SimpleLevel level) {
+    private int getMaxLevelCount(final SimpleLevel level)
+    {
 
         final ArrayList<LevelModel> levels = this.levels.getLevelModels();
-        for (int i = 0; level != null && i < levels.size(); i++) {
+        for (int i = 0; level != null && i < levels.size(); i++)
+        {
             final LevelModel levelModel = levels.get(i);
-            if (levelModel.getLevel().equals(level.getName())) {
+            if (levelModel.getLevel().equals(level.getName()))
+            {
                 return levelModel.getMaximum();
             }
         }
@@ -726,60 +822,76 @@ public class ExamsetsCalculator {
         return 0;
     }
 
-    private void removeTaxa(final ArrayList<SpecimenModel> taxa, final SimpleTaxon taxon) {
+    private void removeTaxa(final ArrayList<SpecimenModel> taxa, final SimpleTaxon taxon)
+    {
 
         // Try to find exam taxon from simple taxon
         SpecimenModel specimen = simpleToExamTaxonMap.get(taxon);
-        if (specimen == null) {
-            for (final SpecimenModel tempExamTaxon : taxa) {
+        if (specimen == null)
+        {
+            for (final SpecimenModel tempExamTaxon : taxa)
+            {
                 final SimpleTaxon simpleTaxon = this.taxa.findTaxonByName(tempExamTaxon.getTaxon());
                 simpleToExamTaxonMap.put(simpleTaxon, tempExamTaxon);
-                if (simpleTaxon == taxon) {
+                if (simpleTaxon == taxon)
+                {
                     specimen = tempExamTaxon;
                 }
             }
         }
 
-        if (taxa.remove(specimen)) {
-            if ((debug & LEVEL_DETAIL) == LEVEL_DETAIL && specimen != null) {
+        if (taxa.remove(specimen))
+        {
+            if ((debug & LEVEL_DETAIL) == LEVEL_DETAIL && specimen != null)
+            {
                 debugBuffer.append("removed            : ").append(specimen.getTaxon()).append(ret);
             }
-            else {
+            else
+            {
                 debugBuffer.append("removed            : ").append("!!! specimen is null !!!");
             }
         }
 
         final ArrayList<SimpleTaxon> children = taxon.getChildTaxa();
-        for (int i = 0; children != null && i < children.size(); i++) {
+        for (int i = 0; children != null && i < children.size(); i++)
+        {
             final SimpleTaxon child = children.get(i);
             removeTaxa(taxa, child);
         }
     }
 
-    private void addLevel(final SimpleTaxon taxon, final Map<SimpleTaxon, Integer> map) {
+    private void addLevel(final SimpleTaxon taxon, final Map<SimpleTaxon, Integer> map)
+    {
 
         final Integer count = map.get(taxon);
-        if (count == null) {
+        if (count == null)
+        {
             map.put(taxon, 1);
         }
-        else {
+        else
+        {
             map.put(taxon, count + 1);
         }
 
         final SimpleTaxon parent = taxon.getParentTaxon();
-        if (parent != null) {
+        if (parent != null)
+        {
             addLevel(parent, map);
         }
     }
 
-    private int[][] getDistributionTable(final int knownGroupSteps, final ArrayList<GroupModel> personalGroups) {
+    private int[][] getDistributionTable(final int knownGroupSteps, final ArrayList<GroupModel> personalGroups)
+    {
         final int[][] table = new int[knownGroupSteps][weightMax];
         int counter = 0;
-        for (final GroupModel group : personalGroups) {
+        for (final GroupModel group : personalGroups)
+        {
             final ArrayList<SpecimenModel> specimens = findSpecimens(group.getTaxa());
             final Map<Integer, Integer> stat = getWeightIfKnownStats(specimens);
-            for (int i = 0; i < group.getMinimum(); i++) {
-                for (final Integer weight : stat.keySet()) {
+            for (int i = 0; i < group.getMinimum(); i++)
+            {
+                for (final Integer weight : stat.keySet())
+                {
                     final Integer count = stat.get(weight);
                     table[counter][weight - weightMin] = count;
                 }
@@ -789,31 +901,38 @@ public class ExamsetsCalculator {
         return table;
     }
 
-    private ArrayList<SpecimenModel> findSpecimens(final ArrayList<String> taxa) {
+    private ArrayList<SpecimenModel> findSpecimens(final ArrayList<String> taxa)
+    {
         final ArrayList<SpecimenModel> result = new ArrayList<SpecimenModel>();
-        for (final String name : taxa) {
+        for (final String name : taxa)
+        {
             final SpecimenModel specimen = specimens.find(name);
             result.add(specimen);
         }
         return result;
     }
 
-    private int getGroupsCount(final ArrayList<GroupModel> groups) {
+    private int getGroupsCount(final ArrayList<GroupModel> groups)
+    {
         final int sum = getGroupSteps(groups);
         return totalWeight * sum / knownTotalSteps;
     }
 
     private void checkForMaximumRequirements(final ArrayList<SpecimenModel> knowns,
                                              final ArrayList<SpecimenModel> unknowns,
-                                             final ArrayList<GroupModel> chosens) {
+                                             final ArrayList<GroupModel> chosens)
+    {
 
-        for (int i = 0; i < chosens.size(); i++) {
+        for (int i = 0; i < chosens.size(); i++)
+        {
             final GroupModel chosen = chosens.get(i);
-            if (chosen.getMaximum() <= chosen.getTaxa().size()) {
+            if (chosen.getMaximum() <= chosen.getTaxa().size())
+            {
                 debugBuffer.append("max reqmnt met for : ").append(chosen.getName()).append(ret);
                 final GroupModel personal = originalGroups.get(i);
                 final ArrayList<String> taxaToRemove = personal.getTaxa();
-                for (final String taxon : taxaToRemove) {
+                for (final String taxon : taxaToRemove)
+                {
                     final SimpleTaxon taxonToRemove = taxa.findTaxonByName(taxon);
                     removeTaxa(knowns, taxonToRemove);
                     removeTaxa(unknowns, taxonToRemove);
@@ -828,18 +947,22 @@ public class ExamsetsCalculator {
      * @param model the list model to retrieve the species groups from
      * @return a new list of species groups
      */
-    private ArrayList<GroupModel> extractKnownGroups(final ArrayList<GroupModel> model) {
+    private ArrayList<GroupModel> extractKnownGroups(final ArrayList<GroupModel> model)
+    {
 
         final ArrayList<GroupModel> list = new ArrayList<GroupModel>();
 
-        for (final GroupModel group : model) {
+        for (final GroupModel group : model)
+        {
             originalGroups.add(group);
             final GroupModel copy = new GroupModel(group);
             list.add(copy);
-            for (final Iterator<String> iterator = copy.getTaxa().iterator(); iterator.hasNext();) {
+            for (final Iterator<String> iterator = copy.getTaxa().iterator(); iterator.hasNext();)
+            {
                 final String name = iterator.next();
                 final SpecimenModel taxon = specimens.find(name);
-                if (taxon.isDeactivatedIfKnown()) {
+                if (taxon.isDeactivatedIfKnown())
+                {
                     iterator.remove();
                 }
             }
@@ -857,9 +980,11 @@ public class ExamsetsCalculator {
      * @param list           the list of exam taxa
      */
     private void fillKnowns(final ArrayList<GroupModel> globalGroups, final ArrayList<GroupModel> personalGroups,
-                            final ArrayList<SpecimenModel> list) {
+                            final ArrayList<SpecimenModel> list)
+    {
 
-        for (int i = 0; i < globalGroups.size(); i++) {
+        for (int i = 0; i < globalGroups.size(); i++)
+        {
             final GroupModel globalGroup = globalGroups.get(i);
             final GroupModel personalGroup = personalGroups.get(i);
             fillKnowns(globalGroup, personalGroup, list);
@@ -874,12 +999,15 @@ public class ExamsetsCalculator {
      * @param personal the personal species groups
      * @param list     the list of exam taxa
      */
-    private void fillKnowns(final GroupModel global, final GroupModel personal, final ArrayList<SpecimenModel> list) {
+    private void fillKnowns(final GroupModel global, final GroupModel personal, final ArrayList<SpecimenModel> list)
+    {
 
         final ArrayList<String> taxa = global.getTaxa();
-        for (final String name : taxa) {
+        for (final String name : taxa)
+        {
             final SpecimenModel taxon = specimens.find(name);
-            if (list.contains(taxon)) {
+            if (list.contains(taxon))
+            {
                 personal.addTaxon(taxon.getTaxon());
             }
         }
@@ -893,52 +1021,65 @@ public class ExamsetsCalculator {
      *
      * @param taxon the taxon to get the exam taxa for.
      */
-    private void fillExamTaxonMapAndCalculateExamMinMaxWeights(final SimpleTaxon taxon) {
+    private void fillExamTaxonMapAndCalculateExamMinMaxWeights(final SimpleTaxon taxon)
+    {
 
         final SpecimenModel specimen = specimens.find(taxon.getName());
-        if (specimens != null) {
+        if (specimens != null)
+        {
             final ArrayList<SimpleTaxon> children = taxon.getChildTaxa();
-            if (children == null || children.size() == 0) {
+            if (children == null || children.size() == 0)
+            {
                 final boolean specimensAvailable = specimen.getNumberOfSpecimens() != 0;
                 final boolean activated = !specimen.isDeactivatedIfKnown() || !specimen.isDeactivatedIfUnknown();
                 final String name = taxon.getName();
-                if (specimensAvailable && activated) {
+                if (specimensAvailable && activated)
+                {
                     speciesTaxaMap.put(name, specimen);
                     weightMin = Math.min(specimen.getWeightIfKnown(), weightMin);
                     weightMax = Math.max(specimen.getWeightIfKnown(), weightMax);
                 }
-                else if (!specimensAvailable) {
+                else if (!specimensAvailable)
+                {
                     debugBuffer.append("excluded (no specimens): ").append(name).append(ret);
                 }
-                else if (!activated) {
+                else if (!activated)
+                {
                     debugBuffer.append("excluded (deactivated) : ").append(name).append(ret);
                 }
             }
 
-            for (int i = 0; children != null && i < children.size(); i++) {
+            for (int i = 0; children != null && i < children.size(); i++)
+            {
                 final SimpleTaxon child = children.get(i);
                 fillExamTaxonMapAndCalculateExamMinMaxWeights(child);
             }
         }
-        else {
+        else
+        {
             debugBuffer.append("---> specimen not found: ").append(taxon);
         }
     }
 
-    private static int getGroupSteps(final ArrayList<GroupModel> groups) {
+    private static int getGroupSteps(final ArrayList<GroupModel> groups)
+    {
 
         int sum = 0;
-        for (final GroupModel group : groups) {
+        for (final GroupModel group : groups)
+        {
             sum += group.getMinimum();
         }
 
         return sum;
     }
 
-    private static int getCurrentLevelCount(final SimpleTaxon taxon, final Map<SimpleTaxon, Integer> levelsFound) {
+    private static int getCurrentLevelCount(final SimpleTaxon taxon, final Map<SimpleTaxon, Integer> levelsFound)
+    {
 
-        for (final SimpleTaxon simpleTaxon : levelsFound.keySet()) {
-            if (simpleTaxon == taxon) {
+        for (final SimpleTaxon simpleTaxon : levelsFound.keySet())
+        {
+            if (simpleTaxon == taxon)
+            {
                 return levelsFound.get(simpleTaxon);
             }
         }
@@ -952,11 +1093,13 @@ public class ExamsetsCalculator {
      * @param original list with the given groups
      * @return new list with groups
      */
-    private static ArrayList<GroupModel> initGroups(final ArrayList<GroupModel> original) {
+    private static ArrayList<GroupModel> initGroups(final ArrayList<GroupModel> original)
+    {
 
         final ArrayList<GroupModel> list = new ArrayList<GroupModel>();
 
-        for (final GroupModel group : original) {
+        for (final GroupModel group : original)
+        {
             final GroupModel newGroup = new GroupModel(group);
             newGroup.getTaxa().clear();
             list.add(newGroup);
@@ -972,10 +1115,13 @@ public class ExamsetsCalculator {
      * @param weight the minimal weight to meet
      * @return a list of taxa meeting the weight
      */
-    private static ArrayList<SpecimenModel> filterTaxaOfKnowns(final ArrayList<SpecimenModel> taxa, final int weight) {
+    private static ArrayList<SpecimenModel> filterTaxaOfKnowns(final ArrayList<SpecimenModel> taxa, final int weight)
+    {
         final ArrayList<SpecimenModel> filtered = new ArrayList<SpecimenModel>();
-        for (final SpecimenModel taxon : taxa) {
-            if (taxon.getWeightIfKnown() == weight) {
+        for (final SpecimenModel taxon : taxa)
+        {
+            if (taxon.getWeightIfKnown() == weight)
+            {
                 filtered.add(taxon);
             }
         }
@@ -989,10 +1135,13 @@ public class ExamsetsCalculator {
      * @param weight the minimal weight to meet
      * @return a list of taxa meeting the weight
      */
-    private static ArrayList<SpecimenModel> filterTaxaOfUnknowns(final ArrayList<SpecimenModel> taxa, final int weight) {
+    private static ArrayList<SpecimenModel> filterTaxaOfUnknowns(final ArrayList<SpecimenModel> taxa, final int weight)
+    {
         final ArrayList<SpecimenModel> filtered = new ArrayList<SpecimenModel>();
-        for (final SpecimenModel taxon : taxa) {
-            if (taxon.getWeightIfUnknown() == weight) {
+        for (final SpecimenModel taxon : taxa)
+        {
+            if (taxon.getWeightIfUnknown() == weight)
+            {
                 filtered.add(taxon);
             }
         }
@@ -1005,7 +1154,8 @@ public class ExamsetsCalculator {
      * @param list the list to choose from
      * @return the object selected
      */
-    private static SpecimenModel chooseTaxon(final ArrayList<SpecimenModel> list) {
+    private static SpecimenModel chooseTaxon(final ArrayList<SpecimenModel> list)
+    {
 
         RandomUtils.randomizeNext(list);
         return list.get(0);
@@ -1023,39 +1173,47 @@ public class ExamsetsCalculator {
      * @return list of combinations valid for the personal exam list
      */
     private ArrayList<int[]> matchCombinationsToRequirements(final Map<Integer, Integer> requirements,
-                                                             final ArrayList<int[]> combinations) {
+                                                             final ArrayList<int[]> combinations)
+    {
 
         // Lookup which combinations are still valid in the personal context.
         final ArrayList<Map<Integer, Integer>> allCombinationStats = getCombinationStats(combinations);
 
         final ArrayList<int[]> personalValidCombinations = new ArrayList<int[]>();
-        for (int i = 0; i < allCombinationStats.size(); i++) {
+        for (int i = 0; i < allCombinationStats.size(); i++)
+        {
             final Map<Integer, Integer> combinationStat = allCombinationStats.get(i);
             boolean valid = true;
-            for (final Integer combinationKey : combinationStat.keySet()) {
+            for (final Integer combinationKey : combinationStat.keySet())
+            {
                 final Integer combinationValue = combinationStat.get(combinationKey);
                 final Integer requirementValue = requirements.get(combinationKey);
                 valid &= requirementValue != null && requirementValue >= combinationValue;
             }
-            if (valid) {
+            if (valid)
+            {
                 personalValidCombinations.add(combinations.get(i));
             }
         }
         return personalValidCombinations;
     }
 
-    private ArrayList<int[]> matchCombinationsToRequirements(final int[][] table, final ArrayList<int[]> combinations) {
+    private ArrayList<int[]> matchCombinationsToRequirements(final int[][] table, final ArrayList<int[]> combinations)
+    {
 
         final ArrayList<int[]> result = new ArrayList<int[]>();
 
-        for (final int[] combination : combinations) {
+        for (final int[] combination : combinations)
+        {
             boolean valid = true;
-            for (int i = 0; i < combination.length && valid; i++) {
+            for (int i = 0; i < combination.length && valid; i++)
+            {
                 final int combinationValue = combination[i];
                 final int tableValue = table[i][combinationValue - weightMin];
                 valid &= 1 <= tableValue;
             }
-            if (valid) {
+            if (valid)
+            {
                 result.add(combination);
             }
         }
@@ -1069,10 +1227,12 @@ public class ExamsetsCalculator {
      * @param combinations a list of int arrays
      * @return an array of maps with counts
      */
-    private ArrayList<Map<Integer, Integer>> getCombinationStats(final ArrayList<int[]> combinations) {
+    private ArrayList<Map<Integer, Integer>> getCombinationStats(final ArrayList<int[]> combinations)
+    {
 
         final ArrayList<Map<Integer, Integer>> allCombinationStats = new ArrayList<Map<Integer, Integer>>();
-        for (final int[] combination : combinations) {
+        for (final int[] combination : combinations)
+        {
             final Map<Integer, Integer> combinationStat = getCombinationStat(combination);
             allCombinationStats.add(combinationStat);
         }
@@ -1114,17 +1274,21 @@ public class ExamsetsCalculator {
      * @param total        the total sum expected
      * @return a list of int arrays with the combinations reaching the given total
      */
-    private static ArrayList<int[]> filterCombinations(final int[][] combinations, final int total) {
+    private static ArrayList<int[]> filterCombinations(final int[][] combinations, final int total)
+    {
 
         final ArrayList<int[]> validCombinations = new ArrayList<int[]>();
 
         // Filter
-        for (final int[] comb : combinations) {
+        for (final int[] comb : combinations)
+        {
             int sum = 0;
-            for (final int aComb : comb) {
+            for (final int aComb : comb)
+            {
                 sum += aComb;
             }
-            if (sum == total) {
+            if (sum == total)
+            {
                 validCombinations.add(comb);
             }
         }
@@ -1138,10 +1302,12 @@ public class ExamsetsCalculator {
      * @param intArray the list of ints
      * @return the counts
      */
-    private static Map<Integer, Integer> getCombinationStat(final int[] intArray) {
+    private static Map<Integer, Integer> getCombinationStat(final int[] intArray)
+    {
 
         final Map<Integer, Integer> combinationStat = new HashMap<Integer, Integer>();
-        for (final int combinationValue : intArray) {
+        for (final int combinationValue : intArray)
+        {
             final Integer stat = combinationStat.get(combinationValue);
             combinationStat.put(combinationValue, (stat == null ? 1 : stat + 1));
         }
@@ -1156,16 +1322,21 @@ public class ExamsetsCalculator {
      * @param examTaxonList the list to summarize
      * @return a map with the stats
      */
-    private static Map<Integer, Integer> getWeightIfKnownStats(final Collection<SpecimenModel> examTaxonList) {
+    private static Map<Integer, Integer> getWeightIfKnownStats(final Collection<SpecimenModel> examTaxonList)
+    {
 
         // Calculate the number of available weights.
         final Map<Integer, Integer> stats = new HashMap<Integer, Integer>();
-        for (final SpecimenModel specimen : examTaxonList) {
+        for (final SpecimenModel specimen : examTaxonList)
+        {
             final Integer weight = specimen.getWeightIfKnown();
             final Integer count = stats.get(weight);
-            if (count == null) {
+            if (count == null)
+            {
                 stats.put(weight, 1);
-            } else {
+            }
+            else
+            {
                 stats.put(weight, count + 1);
             }
         }
@@ -1180,16 +1351,21 @@ public class ExamsetsCalculator {
      * @param taxa the list to summarize
      * @return a map with the stats
      */
-    private static Map<Integer, Integer> getWeightIfUnknownStats(final Collection<SpecimenModel> taxa) {
+    private static Map<Integer, Integer> getWeightIfUnknownStats(final Collection<SpecimenModel> taxa)
+    {
 
         // Calculate the number of available weights.
         final Map<Integer, Integer> stats = new HashMap<Integer, Integer>();
-        for (final SpecimenModel specimen : taxa) {
+        for (final SpecimenModel specimen : taxa)
+        {
             final Integer weight = specimen.getWeightIfUnknown();
             final Integer count = stats.get(weight);
-            if (count == null) {
+            if (count == null)
+            {
                 stats.put(weight, 1);
-            } else {
+            }
+            else
+            {
                 stats.put(weight, count + 1);
             }
         }
@@ -1205,7 +1381,8 @@ public class ExamsetsCalculator {
      * @param label         the label to prepend
      * @param examlistStats the map of statistics data
      */
-    public void printAbundanceStats(final String label, final Map<Integer, Integer> examlistStats) {
+    public void printAbundanceStats(final String label, final Map<Integer, Integer> examlistStats)
+    {
 
         final String string = getAbundanceStatsString(label, examlistStats);
         debugBuffer.append(string).append(ret);
@@ -1217,15 +1394,19 @@ public class ExamsetsCalculator {
      * @param label           label
      * @param listOfIntArrays list of ints
      */
-    public void printListOfIntArrays(final String label, final ArrayList<int[]> listOfIntArrays) {
+    public void printListOfIntArrays(final String label, final ArrayList<int[]> listOfIntArrays)
+    {
 
         final String prefix = StringUtils.repeat(" ", label.length());
-        for (int i = 0; i < listOfIntArrays.size(); i++) {
+        for (int i = 0; i < listOfIntArrays.size(); i++)
+        {
             final int[] ints = listOfIntArrays.get(i);
-            if (i == 0) {
+            if (i == 0)
+            {
                 System.out.print(label);
             }
-            else {
+            else
+            {
                 System.out.print(prefix);
             }
             printIntArray(ints);
@@ -1237,20 +1418,24 @@ public class ExamsetsCalculator {
      *
      * @param ints the array of ints to print
      */
-    private void printIntArray(final int[] ints) {
-        for (final int anInt : ints) {
+    private void printIntArray(final int[] ints)
+    {
+        for (final int anInt : ints)
+        {
             final String p = StringUtils.repeat(" ", 3 - ("" + anInt).length());
             System.out.print(p + anInt + " ");
         }
         debugBuffer.append(ret);
     }
 
-    private static String getAbundanceStatsString(final String label, final Map<Integer, Integer> examlistStats) {
+    private static String getAbundanceStatsString(final String label, final Map<Integer, Integer> examlistStats)
+    {
 
         final StringBuffer buffer = new StringBuffer(label);
         int sum = 0;
         int prod = 1;
-        for (final Integer weight : examlistStats.keySet()) {
+        for (final Integer weight : examlistStats.keySet())
+        {
             final Integer count = examlistStats.get(weight);
             buffer.append(weight).append(" -> ").append(count).append(", ");
             sum += weight * count;

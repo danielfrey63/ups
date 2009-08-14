@@ -40,28 +40,37 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2006/08/29 13:33:56 $
  */
-public class ExportPlantlistAsTextTree extends ActionCommand {
+public class ExportPlantlistAsTextTree extends ActionCommand
+{
 
     private MainModel model;
+
     private FileFilter textFileFilter = new ExtentionFileFilter("Textdatei (*.txt)", new String[]{".txt"}, true);
 
-    public ExportPlantlistAsTextTree(final CommandManager commandManager, final MainModel model) {
+    public ExportPlantlistAsTextTree(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_EXPORTTREE);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        new SaveChooser(textFileFilter, "textchooser", model.getLastExportDirectory()) {
-            public void save(final File file) {
-                if (file != null) {
-                    try {
+    protected void handleExecute()
+    {
+        new SaveChooser(textFileFilter, "textchooser", model.getLastExportDirectory())
+        {
+            public void save(final File file)
+            {
+                if (file != null)
+                {
+                    try
+                    {
                         final FileWriter fileWriter = new FileWriter(file);
                         final BufferedWriter out = new BufferedWriter(fileWriter);
                         final ArrayList<String> taxa = model.getUserModel().getTaxa();
                         final TaxonTree tree = TaxonModels.find(model.getUserModel().getTaxaUid());
                         final int depth = tree.findTaxonByName(taxa.get(0)).getLevel().getRank() + 1;
                         final SimpleTaxon[] printedParents = new SimpleTaxon[depth];
-                        for (int i = 0; i < taxa.size(); i++) {
+                        for (int i = 0; i < taxa.size(); i++)
+                        {
                             final String name = taxa.get(i);
                             final SimpleTaxon taxon = tree.findTaxonByName(name);
                             printTaxon(taxon, out, printedParents);
@@ -71,7 +80,8 @@ public class ExportPlantlistAsTextTree extends ActionCommand {
                         fileWriter.close();
                         model.setLastExportDirectory(file.getParentFile().getAbsolutePath());
                     }
-                    catch (IOException x) {
+                    catch (IOException x)
+                    {
                         x.printStackTrace();
                     }
                 }
@@ -79,14 +89,17 @@ public class ExportPlantlistAsTextTree extends ActionCommand {
         }.open();
     }
 
-    private void printTaxon(final SimpleTaxon taxon, final Writer out, final SimpleTaxon[] printed) throws IOException {
+    private void printTaxon(final SimpleTaxon taxon, final Writer out, final SimpleTaxon[] printed) throws IOException
+    {
         final SimpleTaxon parent = taxon.getParentTaxon();
         final SimpleLevel level = taxon.getLevel();
         final int indent = (level == null ? 0 : level.getRank());
-        if (parent != null) {
+        if (parent != null)
+        {
             printTaxon(parent, out, printed);
         }
-        if (taxon != printed[indent]) {
+        if (taxon != printed[indent])
+        {
             out.write(StringUtils.repeat("  ", indent) + taxon.getName() + System.getProperty("line.separator"));
             printed[indent] = taxon;
             out.flush();

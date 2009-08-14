@@ -25,7 +25,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2008/01/23 22:19:54 $
  */
-public class SpecimenModel {
+public class SpecimenModel
+{
 
     private String taxon;
 
@@ -47,11 +48,13 @@ public class SpecimenModel {
 
     private transient String string;
 
-    public SpecimenModel() {
+    public SpecimenModel()
+    {
         super();
     }
 
-    public SpecimenModel(final SpecimenModel orig) {
+    public SpecimenModel(final SpecimenModel orig)
+    {
         taxon = orig.taxon;
         id = orig.id;
         weightIfKnown = orig.weightIfKnown;
@@ -62,98 +65,121 @@ public class SpecimenModel {
         aspects = orig.aspects;
     }
 
-    public String getTaxon() {
+    public String getTaxon()
+    {
         return taxon;
     }
 
-    public void setTaxon(final String taxon) {
+    public void setTaxon(final String taxon)
+    {
         string = null;
         this.taxon = taxon;
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(final String id) {
+    public void setId(final String id)
+    {
         string = null;
         this.id = id;
     }
 
-    public int getWeightIfKnown() {
+    public int getWeightIfKnown()
+    {
         return weightIfKnown;
     }
 
-    public void setWeightIfKnown(final int weightIfKnown) {
+    public void setWeightIfKnown(final int weightIfKnown)
+    {
         string = null;
         this.weightIfKnown = weightIfKnown;
     }
 
-    public int getWeightIfUnknown() {
+    public int getWeightIfUnknown()
+    {
         return weightIfUnknown;
     }
 
-    public void setWeightIfUnknown(final int weightIfUnknown) {
+    public void setWeightIfUnknown(final int weightIfUnknown)
+    {
         string = null;
         this.weightIfUnknown = weightIfUnknown;
     }
 
-    public boolean isDeactivatedIfKnown() {
-        if (numberOfSpecimens == 0) {
+    public boolean isDeactivatedIfKnown()
+    {
+        if (numberOfSpecimens == 0)
+        {
             deactivatedIfKnown = true;
         }
         return deactivatedIfKnown;
     }
 
-    public void setDeactivatedIfKnown(final boolean deactivatedIfKnown) {
+    public void setDeactivatedIfKnown(final boolean deactivatedIfKnown)
+    {
         string = null;
         this.deactivatedIfKnown = deactivatedIfKnown;
     }
 
-    public boolean isDeactivatedIfUnknown() {
-        if (numberOfSpecimens == 0) {
+    public boolean isDeactivatedIfUnknown()
+    {
+        if (numberOfSpecimens == 0)
+        {
             deactivatedIfUnknown = true;
         }
         return deactivatedIfUnknown;
     }
 
-    public void setDeactivatedIfUnknown(final boolean deactivatedIfUnknown) {
+    public void setDeactivatedIfUnknown(final boolean deactivatedIfUnknown)
+    {
         string = null;
         this.deactivatedIfUnknown = deactivatedIfUnknown;
     }
 
-    public int getNumberOfSpecimens() {
+    public int getNumberOfSpecimens()
+    {
         return numberOfSpecimens;
     }
 
-    public void setNumberOfSpecimens(final int numberOfSpecimens) {
+    public void setNumberOfSpecimens(final int numberOfSpecimens)
+    {
         string = null;
         this.numberOfSpecimens = numberOfSpecimens;
     }
 
-    public boolean isBackup() {
+    public boolean isBackup()
+    {
         return backup;
     }
 
-    public void setBackup(final boolean backup) {
+    public void setBackup(final boolean backup)
+    {
         this.backup = backup;
     }
 
-    public String[] getAspects() {
+    public String[] getAspects()
+    {
         return aspects;
     }
 
-    public void setAspects(final String[] aspects) {
+    public void setAspects(final String[] aspects)
+    {
         this.aspects = aspects;
     }
 
-    public String toDebugString() {
+    public String toDebugString()
+    {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append(id).append(taxon).append(numberOfSpecimens).toString();
     }
 
-    public String toString() {
-        if (string == null) {
+    public String toString()
+    {
+        if (string == null)
+        {
             final StringBuffer buffer = new StringBuffer();
             buffer.append(" (");
             buffer.append(id == null ? "<keine ID definiert>" : id).append("/");

@@ -29,25 +29,31 @@ import javax.swing.tree.TreeCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/04/06 11:01:11 $
  */
-public class ConstraintsTreeRenderer implements TreeCellRenderer {
+public class ConstraintsTreeRenderer implements TreeCellRenderer
+{
 
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
     private final RendererPanel panel = new RendererPanel();
+
     private final JCheckBox checkbox = new JCheckBox();
 
     private Constraints models;
+
     private ArrayList<String> taxa = DUMMY_LIST;
+
     private boolean enabled;
 
-    public ConstraintsTreeRenderer() {
+    public ConstraintsTreeRenderer()
+    {
         checkbox.setOpaque(false);
         panel.setPrefixComponent(checkbox);
     }
 
     public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
                                                   final boolean expanded, final boolean leaf, final int row,
-                                                  final boolean hasFocus) {
+                                                  final boolean hasFocus)
+    {
         final SimpleTaxon taxon = (SimpleTaxon) value;
         final String name = taxon.getName();
         final Constraint constraints = models == null ? null : models.findConstraint(name);
@@ -69,15 +75,18 @@ public class ConstraintsTreeRenderer implements TreeCellRenderer {
         return panel;
     }
 
-    public void setConstraints(final Constraints models) {
+    public void setConstraints(final Constraints models)
+    {
         this.models = models;
     }
 
-    public void setTaxa(final ArrayList<String> taxa) {
+    public void setTaxa(final ArrayList<String> taxa)
+    {
         this.taxa = taxa == null ? DUMMY_LIST : taxa;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         this.enabled = enabled;
     }
 }

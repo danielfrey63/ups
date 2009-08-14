@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.uec.groups;
 
-import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 import ch.xmatrix.ups.domain.TaxonBased;
+import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
  * TODO: document
@@ -25,16 +25,20 @@ import ch.xmatrix.ups.domain.TaxonBased;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class GroupsFactory extends MasterDetailsFactory {
+public class GroupsFactory extends MasterDetailsFactory
+{
 
-    protected TaxonBased createCopy(final TaxonBased model) {
-        if (!(model instanceof GroupsModel)) {
+    protected TaxonBased createCopy(final TaxonBased model)
+    {
+        if (!(model instanceof GroupsModel))
+        {
             throw new IllegalArgumentException("copy only allowed for instances of " + GroupsModel.class);
         }
         return new GroupsModel((GroupsModel) model);
     }
 
-    protected TaxonBased createInstance() {
+    protected TaxonBased createInstance()
+    {
         return new GroupsModel();
     }
 

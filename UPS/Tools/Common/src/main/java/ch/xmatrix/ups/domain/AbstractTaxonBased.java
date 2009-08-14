@@ -20,19 +20,25 @@ import java.util.Date;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public abstract class AbstractTaxonBased implements TaxonBased {
+public abstract class AbstractTaxonBased implements TaxonBased
+{
 
     private String name;
+
     private String uid;
+
     private String taxaUid;
+
     private Date modified;
+
     private boolean fixed;
 
     /**
      * Constructs a new object. Sets the name to a default string, resets the uid to a newly generated one and adjusts
      * the modified timestamp. The taxa uid is null and the fixed state false.
      */
-    public AbstractTaxonBased() {
+    public AbstractTaxonBased()
+    {
         setName("Neu");
         setUid(new RandomGUID().toString());
         setModified(new Date());
@@ -44,7 +50,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @param orig original to copy
      */
-    public AbstractTaxonBased(final TaxonBased orig) {
+    public AbstractTaxonBased(final TaxonBased orig)
+    {
         this();
         setName(orig.getName() + " Kopie");
         setTaxaUid(orig.getTaxaUid());
@@ -55,7 +62,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @return the taxa uid <code>String</code>
      */
-    public String getTaxaUid() {
+    public String getTaxaUid()
+    {
         return taxaUid;
     }
 
@@ -64,7 +72,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @param uid the new taxa uid <code>String</code>
      */
-    public void setTaxaUid(final String uid) {
+    public void setTaxaUid(final String uid)
+    {
         checkFixed();
         taxaUid = uid;
     }
@@ -74,7 +83,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @return the name <code>String</code>
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -83,15 +93,15 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @param name the name <code>String</code>
      */
-    public void setName(final String name) {
+    public void setName(final String name)
+    {
         checkFixed();
         this.name = name;
     }
 
-    /**
-     * Sets the models fixed.
-     */
-    public void setFixed() {
+    /** Sets the models fixed. */
+    public void setFixed()
+    {
         fixed = true;
     }
 
@@ -100,7 +110,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @return whether fixed
      */
-    public boolean isFixed() {
+    public boolean isFixed()
+    {
         return fixed;
     }
 
@@ -109,7 +120,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @param uid the uid <code>String</code>
      */
-    public void setUid(final String uid) {
+    public void setUid(final String uid)
+    {
         checkFixed();
         this.uid = uid;
     }
@@ -119,7 +131,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @return the uid <code>String</code>
      */
-    public String getUid() {
+    public String getUid()
+    {
         return uid;
     }
 
@@ -128,7 +141,8 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @param modified the new modification date
      */
-    public void setModified(final Date modified) {
+    public void setModified(final Date modified)
+    {
         checkFixed();
         this.modified = modified;
     }
@@ -138,12 +152,15 @@ public abstract class AbstractTaxonBased implements TaxonBased {
      *
      * @return the modification <code>Date</code>
      */
-    public Date getModified() {
+    public Date getModified()
+    {
         return modified;
     }
 
-    private void checkFixed() {
-        if (fixed){
+    private void checkFixed()
+    {
+        if (fixed)
+        {
             throw new IllegalArgumentException("model is fixed and may not be altered");
         }
     }

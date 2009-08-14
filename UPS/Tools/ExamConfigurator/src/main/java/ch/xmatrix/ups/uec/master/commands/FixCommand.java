@@ -16,7 +16,6 @@
  */
 package ch.xmatrix.ups.uec.master.commands;
 
-import ch.xmatrix.ups.uec.master.commands.Commands;
 import ch.xmatrix.ups.uec.master.DetailsBuilder;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
@@ -27,16 +26,19 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class FixCommand extends ActionCommand {
+public class FixCommand extends ActionCommand
+{
 
     private DetailsBuilder detailsBuilder;
 
-    public FixCommand(final CommandManager manager, final DetailsBuilder detailsBulider) {
+    public FixCommand(final CommandManager manager, final DetailsBuilder detailsBulider)
+    {
         super(manager, Commands.COMMANDID_FIX);
         this.detailsBuilder = detailsBulider;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         detailsBuilder.lock();
     }
 }

@@ -24,37 +24,47 @@ import ch.jfactory.model.IdAware;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/06 10:16:20 $
  */
-public class CourseModel implements IdAware {
+public class CourseModel implements IdAware
+{
 
     private String uid;
+
     private String title;
+
     private String type;
 
-    public void setUid(final String uid) {
+    public void setUid(final String uid)
+    {
         this.uid = uid;
     }
 
-    public String getUid() {
+    public String getUid()
+    {
         return uid;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(final String title)
+    {
         this.title = title;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setType(final String type) {
+    public void setType(final String type)
+    {
         this.type = type;
     }
 
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return type + ": " + title;
     }
 }

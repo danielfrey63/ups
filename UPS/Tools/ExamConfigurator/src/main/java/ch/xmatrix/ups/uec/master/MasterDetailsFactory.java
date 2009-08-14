@@ -26,25 +26,34 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.4 $ $Date: 2008/01/06 10:16:20 $
  */
-public abstract class MasterDetailsFactory {
+public abstract class MasterDetailsFactory
+{
 
     private static final Logger LOG = Logger.getLogger(MasterDetailsFactory.class);
+
     private static final boolean INFO = LOG.isInfoEnabled();
+
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private SimpleModelList models;
 
-    public void setModels(final SimpleModelList models) {
+    public void setModels(final SimpleModelList models)
+    {
         this.models = models;
     }
+
     /**
      * Adds and creates a new TaxonBased.
      *
      * @return new TaxonBased model
      */
-    public TaxonBased create() {
+    public TaxonBased create()
+    {
         final TaxonBased model = createInstance();
-        if (INFO) LOG.info("new " + model.toDebugString());
+        if (INFO)
+        {
+            LOG.info("new " + model.toDebugString());
+        }
         models.add(model);
         return model;
     }
@@ -55,10 +64,17 @@ public abstract class MasterDetailsFactory {
      * @param orig the orignial to be casted
      * @return copy of TaxonBased
      */
-    public TaxonBased copy(final TaxonBased orig) {
-        if (DEBUG) LOG.debug("copying " + orig.toDebugString());
+    public TaxonBased copy(final TaxonBased orig)
+    {
+        if (DEBUG)
+        {
+            LOG.debug("copying " + orig.toDebugString());
+        }
         final TaxonBased copy = createCopy(orig);
-        if (INFO) LOG.info("copy " + copy.toDebugString());
+        if (INFO)
+        {
+            LOG.info("copy " + copy.toDebugString());
+        }
         models.add(copy);
         return copy;
     }
@@ -68,9 +84,13 @@ public abstract class MasterDetailsFactory {
      *
      * @param model
      */
-    public void delete(final TaxonBased model) {
+    public void delete(final TaxonBased model)
+    {
         assert model != null : "taxon based model shall not be null";
-        if (INFO) LOG.info("remove " + model.toDebugString());
+        if (INFO)
+        {
+            LOG.info("remove " + model.toDebugString());
+        }
         models.remove(model);
     }
 

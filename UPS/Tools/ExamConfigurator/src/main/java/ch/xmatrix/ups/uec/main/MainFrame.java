@@ -27,27 +27,33 @@ import javax.swing.JComponent;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/03/22 15:01:40 $
  */
-public class MainFrame extends AbstractFrame {
+public class MainFrame extends AbstractFrame
+{
 
     private MainModel mainModel;
+
     private InfoModel infoModel;
 
-    public MainFrame(final MainModel mainModel, final InfoModel infoModel) {
+    public MainFrame(final MainModel mainModel, final InfoModel infoModel)
+    {
         super(Application.getDescription().getWindowTitle());
         this.mainModel = mainModel;
         this.infoModel = infoModel;
     }
 
-    public JComponent buildContentPane() {
+    public JComponent buildContentPane()
+    {
         return new MainBuilder(mainModel, infoModel).getPanel();
     }
 
-    protected void configureCloseOperation() {
+    protected void configureCloseOperation()
+    {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(Application.getApplicationCloseOnWindowClosingHandler());
     }
 
-    public String getWindowID() {
+    public String getWindowID()
+    {
         return "UPSExamConfiguratorMainFrame";
     }
 }

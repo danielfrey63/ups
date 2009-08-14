@@ -16,10 +16,10 @@
  */
 package ch.xmatrix.ups.ust.main.commands;
 
+import ch.xmatrix.ups.ust.main.MainModel;
+import java.beans.PropertyVetoException;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import java.beans.PropertyVetoException;
-import ch.xmatrix.ups.ust.main.MainModel;
 
 /**
  * Closes the current card, opens the welcome card, resets the dirty flag and the current file.
@@ -27,23 +27,28 @@ import ch.xmatrix.ups.ust.main.MainModel;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/07/27 16:38:57 $
  */
-public class CloseCommand extends ActionCommand {
+public class CloseCommand extends ActionCommand
+{
 
     private MainModel model;
 
-    public CloseCommand(final CommandManager commandManager, final MainModel model) {
+    public CloseCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_CLOSE);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             model.setClosing();
             model.setCurrentFile(null);
             model.setCurrentCard(MainModel.CARDS_WELCOME);
             model.setDirty(false);
         }
-        catch (PropertyVetoException e) {
+        catch (PropertyVetoException e)
+        {
         }
     }
 }

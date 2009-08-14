@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.model;
 
-import com.wegmueller.ups.lka.IAnmeldedaten;
 import ch.xmatrix.ups.domain.PlantList;
+import com.wegmueller.ups.lka.IAnmeldedaten;
 
 /**
  * TODO: document
@@ -25,42 +25,53 @@ import ch.xmatrix.ups.domain.PlantList;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2008/01/23 22:19:54 $
  */
-public class Registration {
+public class Registration
+{
 
     private IAnmeldedaten anmeldedaten;
+
     private PlantList plantList;
+
     private boolean defaultList = false;
 
-    public Registration(final IAnmeldedaten anmeldedaten, final PlantList plantList) {
+    public Registration(final IAnmeldedaten anmeldedaten, final PlantList plantList)
+    {
         this.setAnmeldedaten(anmeldedaten);
         this.setPlantList(plantList);
     }
 
-    public IAnmeldedaten getAnmeldedaten() {
+    public IAnmeldedaten getAnmeldedaten()
+    {
         return anmeldedaten;
     }
 
-    public void setAnmeldedaten(final IAnmeldedaten anmeldedaten) {
+    public void setAnmeldedaten(final IAnmeldedaten anmeldedaten)
+    {
         this.anmeldedaten = anmeldedaten;
     }
 
-    public PlantList getPlantList() {
+    public PlantList getPlantList()
+    {
         return plantList;
     }
 
-    public void setPlantList(final PlantList plantList) {
+    public void setPlantList(final PlantList plantList)
+    {
         this.plantList = plantList;
     }
 
-    public boolean isDefaultList() {
+    public boolean isDefaultList()
+    {
         return defaultList;
     }
 
-    public void setDefaultList(final boolean defaultList) {
+    public void setDefaultList(final boolean defaultList)
+    {
         this.defaultList = defaultList;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return anmeldedaten.getVorname() + " " + anmeldedaten.getNachname() + ", " + anmeldedaten.getStudentennummer() +
                 ", Pflanzenliste " + (plantList == null ? "keine" : "vorhanden");
     }

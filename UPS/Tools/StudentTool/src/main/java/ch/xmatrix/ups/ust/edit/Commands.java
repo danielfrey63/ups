@@ -22,7 +22,8 @@ package ch.xmatrix.ups.ust.edit;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/07/27 16:38:57 $
  */
-public class Commands {
+public class Commands
+{
 
     // Common
 
@@ -31,14 +32,20 @@ public class Commands {
     // For TaxonCheckBuilder
 
     public static final String COMMANDID_TAXTREE_SELECTEDONLY = "taxontree.showselected";
+
     public static final String COMMANDID_TAXTREE_ALLSPECIES = "taxontree.showall";
+
     public static final String COMMANDID_TAXTREE_DEEP = "taxontree.deep";
+
     public static final String COMMANDID_TAXTREE_FLAT = "taxontree.flat";
+
     public static final String GROUPID_TAXTREE_TOOLBAR = "taxontree.toolbar";
 
     // For ConstraintsSelectionBuilder
 
     public static final String COMMANDID_CONSTRAINTS_OPEN = "constraintstree.showopen";
+
     public static final String COMMANDID_CONSTRAINTS_ALL = "constraintstree.showall";
+
     public static final String GROUPID_CONSTRAINTS_TOOLBAR = "constraintstree.toolbar";
 }

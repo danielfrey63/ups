@@ -34,18 +34,22 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/07/27 16:38:57 $
  */
-public class AboutCommand extends ActionCommand {
+public class AboutCommand extends ActionCommand
+{
 
     private Icon icon = null;
+
     private String version;
 
-    public AboutCommand(final CommandManager commandManager, final Icon icon, final String version) {
+    public AboutCommand(final CommandManager commandManager, final Icon icon, final String version)
+    {
         super(commandManager, CommonCommands.COMMANDID_ABOUT);
         this.icon = icon;
         this.version = version;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final JLabel version = new JLabel("Version " + this.version, JLabel.CENTER);
         final Font font = new Font("Dialog", Font.BOLD, 10);
         version.setFont(font);

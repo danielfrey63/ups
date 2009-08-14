@@ -26,19 +26,26 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/11/16 13:25:24 $
  */
-public class PrefsModel extends AbstractTaxonBased {
+public class PrefsModel extends AbstractTaxonBased
+{
 
     private int knownTotalCount;
+
     private int unknownTotalCount;
+
     private int knownTotalWeight;
+
     private int unknownTotalWeight;
+
     private int maximumSeries;
 
-    public PrefsModel() {
+    public PrefsModel()
+    {
         super();
     }
 
-    public PrefsModel(final PrefsModel orig) {
+    public PrefsModel(final PrefsModel orig)
+    {
         super(orig);
         setKnownTotalCount(orig.getKnownTotalCount());
         setKnownTotalWeight(orig.getKnownTotalWeight());
@@ -47,51 +54,63 @@ public class PrefsModel extends AbstractTaxonBased {
         setMaximumSeries(orig.getMaximumSeries());
     }
 
-    public int getKnownTotalCount() {
+    public int getKnownTotalCount()
+    {
         return knownTotalCount;
     }
 
-    public void setKnownTotalCount(final int knownTotalCount) {
+    public void setKnownTotalCount(final int knownTotalCount)
+    {
         this.knownTotalCount = knownTotalCount;
     }
 
-    public int getUnknownTotalCount() {
+    public int getUnknownTotalCount()
+    {
         return unknownTotalCount;
     }
 
-    public void setUnknownTotalCount(final int unknownTotalCount) {
+    public void setUnknownTotalCount(final int unknownTotalCount)
+    {
         this.unknownTotalCount = unknownTotalCount;
     }
 
-    public int getKnownTotalWeight() {
+    public int getKnownTotalWeight()
+    {
         return knownTotalWeight;
     }
 
-    public void setKnownTotalWeight(final int knownTotalWeight) {
+    public void setKnownTotalWeight(final int knownTotalWeight)
+    {
         this.knownTotalWeight = knownTotalWeight;
     }
 
-    public int getUnknownTotalWeight() {
+    public int getUnknownTotalWeight()
+    {
         return unknownTotalWeight;
     }
 
-    public void setUnknownTotalWeight(final int unknownTotalWeight) {
+    public void setUnknownTotalWeight(final int unknownTotalWeight)
+    {
         this.unknownTotalWeight = unknownTotalWeight;
     }
 
-    public int getMaximumSeries() {
+    public int getMaximumSeries()
+    {
         return maximumSeries;
     }
 
-    public void setMaximumSeries(final int maximumSeries) {
+    public void setMaximumSeries(final int maximumSeries)
+    {
         this.maximumSeries = maximumSeries;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return getName();
     }
 
-    public String toDebugString() {
+    public String toDebugString()
+    {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

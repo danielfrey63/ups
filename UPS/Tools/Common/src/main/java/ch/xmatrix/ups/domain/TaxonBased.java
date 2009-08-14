@@ -12,8 +12,8 @@
 
 package ch.xmatrix.ups.domain;
 
-import java.util.Date;
 import ch.jfactory.model.IdAware;
+import java.util.Date;
 
 /**
  * Taxon based models should implement this interface.
@@ -21,7 +21,8 @@ import ch.jfactory.model.IdAware;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2007/05/16 17:00:15 $
  */
-public interface TaxonBased extends IdAware {
+public interface TaxonBased extends IdAware
+{
 
     /**
      * Sets the id of this data object.

@@ -16,10 +16,9 @@
  */
 package ch.xmatrix.ups.uec.master.commands;
 
+import ch.xmatrix.ups.uec.master.DetailsBuilder;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import ch.xmatrix.ups.uec.master.DetailsBuilder;
-import ch.xmatrix.ups.uec.master.commands.Commands;
 
 /**
  * TODO: document
@@ -27,16 +26,19 @@ import ch.xmatrix.ups.uec.master.commands.Commands;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public class SaveCommand extends ActionCommand {
+public class SaveCommand extends ActionCommand
+{
 
     private DetailsBuilder detailsBuilder;
 
-    public SaveCommand(final CommandManager manager, final DetailsBuilder detailsBuilder) {
+    public SaveCommand(final CommandManager manager, final DetailsBuilder detailsBuilder)
+    {
         super(manager, Commands.COMMANDID_SAVE);
         this.detailsBuilder = detailsBuilder;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         detailsBuilder.save();
     }
 }

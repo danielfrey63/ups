@@ -18,13 +18,13 @@
 
 package ch.xmatrix.ups.view;
 
+import ch.jfactory.resource.Strings;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import ch.jfactory.resource.Strings;
 
 /**
  * Multi line JLabel, displays a label expanding over multiple lines with word warp.
@@ -32,12 +32,12 @@ import ch.jfactory.resource.Strings;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/04/21 11:02:52 $
  */
-public class I15nMultiLineLabel extends JTextPane {
+public class I15nMultiLineLabel extends JTextPane
+{
 
-    /**
-     * Creates a new instance of JMultiLineLabel
-     */
-    public I15nMultiLineLabel() {
+    /** Creates a new instance of JMultiLineLabel */
+    public I15nMultiLineLabel()
+    {
         super();
 
         setFocusable(false);
@@ -61,7 +61,8 @@ public class I15nMultiLineLabel extends JTextPane {
      *
      * @param key the key to search for the text
      */
-    public I15nMultiLineLabel(final String key) {
+    public I15nMultiLineLabel(final String key)
+    {
         this();
         setText(Strings.getString(key));
     }
@@ -70,11 +71,12 @@ public class I15nMultiLineLabel extends JTextPane {
      * Create a new instance of JMultiLineLabel and initialize it with the given text. Sets the horizontal text
      * alignment.
      *
-     * @param key the key to search for the text
+     * @param key        the key to search for the text
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public I15nMultiLineLabel(final String key, final int alignement) {
+    public I15nMultiLineLabel(final String key, final int alignement)
+    {
         this();
         setText(Strings.getString(key));
         setHorizontalTextAlignment(alignement);
@@ -86,7 +88,8 @@ public class I15nMultiLineLabel extends JTextPane {
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public void setHorizontalTextAlignment(final int alignement) {
+    public void setHorizontalTextAlignment(final int alignement)
+    {
 
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, alignement);

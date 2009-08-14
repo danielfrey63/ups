@@ -29,27 +29,36 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class Refresh extends ActionCommand {
+public class Refresh extends ActionCommand
+{
 
     private SetBuilder.SubmitTableModel submitModel;
 
     private transient String session;
+
     private transient String pass;
+
     private transient String user;
+
     private transient ProgressMonitor progress;
+
     private transient String course;
 
-    public Refresh(final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel) {
+    public Refresh(final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel)
+    {
         super(commandManager, Commands.COMMANDID_REFRESH);
         this.submitModel = submitModel;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             final UPSServerClient2 ws = new UPSServerClient2();
             ws.reloadPruefungsDaten(user, pass);
         }
-        catch (Throwable e) {
+        catch (Throwable e)
+        {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten:\n" + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
         }

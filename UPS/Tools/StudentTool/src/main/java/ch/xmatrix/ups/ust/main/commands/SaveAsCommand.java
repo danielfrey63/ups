@@ -30,21 +30,28 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/07/27 16:38:58 $
  */
-public class SaveAsCommand extends ActionCommand {
+public class SaveAsCommand extends ActionCommand
+{
 
     private MainModel model;
+
     private ExtentionFileFilter filter = new ExtentionFileFilter(Strings.getString("savechooser.filetype.description"),
             new String[]{Commands.NEW_FILE_EXTENTION}, true);
 
-    public SaveAsCommand(final CommandManager commandManager, final MainModel model) {
+    public SaveAsCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_SAVEAS);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        new SaveChooser(filter, "savechooser", model.getLastOpenSaveDirectory()) {
-            protected void save(final File file) {
-                if (file != null) {
+    protected void handleExecute()
+    {
+        new SaveChooser(filter, "savechooser", model.getLastOpenSaveDirectory())
+        {
+            protected void save(final File file)
+            {
+                if (file != null)
+                {
                     model.setLastOpenSaveDirectory(file.getParentFile().getAbsolutePath());
                     model.setCurrentFile(file);
                     getCommandManager().getCommand(Commands.COMMANDID_SAVE).execute();

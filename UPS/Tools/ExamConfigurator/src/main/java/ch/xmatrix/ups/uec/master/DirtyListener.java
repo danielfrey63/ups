@@ -6,7 +6,8 @@ package ch.xmatrix.ups.uec.master;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
-public interface DirtyListener {
+public interface DirtyListener
+{
 
     void setDirty(boolean dirty);
 }

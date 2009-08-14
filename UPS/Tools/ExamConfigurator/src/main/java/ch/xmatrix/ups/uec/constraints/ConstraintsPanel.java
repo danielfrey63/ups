@@ -4,18 +4,28 @@
 
 package ch.xmatrix.ups.uec.constraints;
 
-import java.util.*;
-import javax.swing.*;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
-import com.jgoodies.uif.component.*;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.uif.component.UIFSplitPane;
+import java.util.ResourceBundle;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 
-/**
- * @author Daniel Frey
- */
-public class ConstraintsPanel  {
+/** @author Daniel Frey */
+public class ConstraintsPanel
+{
 
-    private void initComponents() {
+    private void initComponents()
+    {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
         ResourceBundle bundle = ResourceBundle.getBundle("ch.xmatrix.ups.uec.constraints.constraintspanel");
@@ -43,14 +53,14 @@ public class ConstraintsPanel  {
         //======== panelConstraints ========
         {
             panelConstraints.setLayout(new FormLayout(
-                "$ugap, 100dlu:grow",
-                "default, $lgap, fill:24dlu, $rgap, fill:default:grow"));
+                    "$ugap, 100dlu:grow",
+                    "default, $lgap, fill:24dlu, $rgap, fill:default:grow"));
 
             //======== panelSeparator ========
             {
                 panelSeparator.setLayout(new FormLayout(
-                    "default:grow, $lcgap, default",
-                    "default"));
+                        "default:grow, $lcgap, default",
+                        "default"));
                 panelSeparator.add(separator, cc.xy(1, 1));
             }
             panelConstraints.add(panelSeparator, cc.xywh(1, 1, 2, 1));
@@ -90,8 +100,8 @@ public class ConstraintsPanel  {
                     //======== panelEditor ========
                     {
                         panelEditor.setLayout(new FormLayout(
-                            "default, $lcgap, default:grow",
-                            "fill:default:grow, 2*($lgap, default)"));
+                                "default, $lcgap, default:grow",
+                                "fill:default:grow, 2*($lgap, default)"));
 
                         //======== scrollTaxa ========
                         {
@@ -142,22 +152,39 @@ public class ConstraintsPanel  {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner non-commercial license
     private JPanel panelConstraints;
+
     private JPanel panelSeparator;
+
     private JComponent separator;
+
     private JScrollPane scrollDescription;
+
     private JTextArea fieldDescription;
+
     private UIFSplitPane uIFSplitPane1;
+
     private UIFSplitPane uIFSplitPane2;
+
     private JScrollPane scrollConstraints;
+
     private JList listConstraints;
+
     private JPanel panelEditor;
+
     private JScrollPane scrollTaxa;
+
     private JList listTaxa;
+
     private JLabel labelName;
+
     private JTextField fieldConstraintName;
+
     private JLabel labelCount;
+
     private JSpinner spinnerCount;
+
     private JScrollPane scrollTree;
+
     private JTree treeTaxa;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

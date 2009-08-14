@@ -14,13 +14,13 @@ package ch.xmatrix.ups.ust.main;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.model.SimpleModelList;
-import ch.xmatrix.ups.model.TaxonModels;
-import ch.xmatrix.ups.model.SessionPersister;
+import ch.xmatrix.ups.controller.Loader;
 import ch.xmatrix.ups.model.ConstraintsPersister;
 import ch.xmatrix.ups.model.CoursePersister;
-import ch.xmatrix.ups.controller.Loader;
-import javax.swing.JFrame;
+import ch.xmatrix.ups.model.SessionPersister;
+import ch.xmatrix.ups.model.TaxonModels;
 import com.jgoodies.binding.list.SelectionInList;
+import javax.swing.JFrame;
 
 /**
  * TODO: document
@@ -28,24 +28,35 @@ import com.jgoodies.binding.list.SelectionInList;
  * @author Daniel Frey
  * @version $Revision: 1.9 $ $Date: 2007/09/27 10:48:43 $
  */
-public class MainModel extends AbstractMainModel {
+public class MainModel extends AbstractMainModel
+{
 
     public static final String MODELID_CONSTRAINTS = "constraints";
+
     public static final String MODELID_COURSES = "courses";
+
     public static final String MODELID_SESSIONS = "sessions";
+
     public static final String MODELID_TAXONTREES = "taxonTrees";
+
     public static final String CARDS_EDIT = "editCard";
+
     public static final MainModel DEFAULT = new MainModel();
 
     public SelectionInList sessionModels = new SelectionInList();
+
     public SelectionInList constraintsModels = new SelectionInList();
+
     public SelectionInList taxonModels = new SelectionInList();
+
     public SelectionInList courseModels = new SelectionInList();
 
     private UserModel userModel;
+
     private JFrame mainFrame;
 
-    public MainModel() {
+    public MainModel()
+    {
 
         final SimpleModelList taxonTrees = TaxonModels.getTaxonTrees();
         registerModels(MODELID_TAXONTREES, taxonTrees);
@@ -64,25 +75,31 @@ public class MainModel extends AbstractMainModel {
         courseModels.setListModel(courses);
     }
 
-    public UserModel getUserModel() {
+    public UserModel getUserModel()
+    {
         return userModel;
     }
 
-    public void setUserModel(final UserModel userModel) {
+    public void setUserModel(final UserModel userModel)
+    {
         this.userModel = userModel;
     }
 
-    public JFrame getMainFrame() {
+    public JFrame getMainFrame()
+    {
         return mainFrame;
     }
 
-    public void setMainFrame(final JFrame frame) {
+    public void setMainFrame(final JFrame frame)
+    {
         mainFrame = frame;
     }
 
-    public boolean modelValid() {
+    public boolean modelValid()
+    {
         final int numberOfSessions = findModelById(MODELID_SESSIONS).getSize();
-        if (numberOfSessions == 0) {
+        if (numberOfSessions == 0)
+        {
             Dialogs.showErrorMessage(mainFrame.getRootPane(),
                     "Fehler", "Sorry: Es stehen im Moment keine Vorgaben- und Taxonomie-Modelle zur Verfügung");
             return false;

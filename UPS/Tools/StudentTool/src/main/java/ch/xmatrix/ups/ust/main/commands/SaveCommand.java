@@ -31,21 +31,27 @@ import org.pietschy.command.CommandManager;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/07/27 16:38:58 $
  */
-public class SaveCommand extends ActionCommand {
+public class SaveCommand extends ActionCommand
+{
 
     private MainModel model;
 
-    public SaveCommand(final CommandManager commandManager, final MainModel model) {
+    public SaveCommand(final CommandManager commandManager, final MainModel model)
+    {
         super(commandManager, Commands.COMMANDID_SAVE);
         this.model = model;
     }
 
-    protected void handleExecute() {
-        if (model.isDefaultFile()) {
+    protected void handleExecute()
+    {
+        if (model.isDefaultFile())
+        {
             getCommandManager().getCommand(Commands.COMMANDID_SAVEAS).execute();
         }
-        else {
-            try {
+        else
+        {
+            try
+            {
                 final ArrayList<String> taxa = model.getUserModel().getTaxa();
                 final Commands.Encoded encoded = new Commands.Encoded();
                 encoded.list = taxa;
@@ -58,7 +64,8 @@ public class SaveCommand extends ActionCommand {
                 out.close();
                 model.setDirty(false);
             }
-            catch (IOException e1) {
+            catch (IOException e1)
+            {
                 e1.printStackTrace();
             }
         }

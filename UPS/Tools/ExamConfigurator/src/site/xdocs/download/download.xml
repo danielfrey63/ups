@@ -21,10 +21,11 @@
         <section name="Voraussetzungen">
             <p>
                 Das UPS Studenttool Version 1.0 wird als WebStart Download zur Verfügung gestellt. Voraussetzung dafür
-                ist die Runtime-Installation oder Entwickler-Version von Java (z.B. "J2SE v 1.4.2_04  JRE"). Falls Sie
+                ist die Runtime-Installation oder Entwickler-Version von Java (z.B. "J2SE v 1.4.2_04 JRE"). Falls Sie
                 die Runtime noch nicht installiert haben, oder eine ältere Installation auf den neusten Stand bringen
                 möchten, können Sie die aktuelle Version kostenlos bei
-                <a href="http://java.sun.com/j2se/1.4.2/download.html">Sun</a> beziehen. Für den Mac stellt Apple die
+                <a href="http://java.sun.com/j2se/1.4.2/download.html">Sun</a>
+                beziehen. Für den Mac stellt Apple die
                 neuste Runtime zur Verfügung.
             </p>
         </section>

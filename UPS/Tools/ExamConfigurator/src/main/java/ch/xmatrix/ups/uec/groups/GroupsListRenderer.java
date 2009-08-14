@@ -11,11 +11,11 @@
  */
 package ch.xmatrix.ups.uec.groups;
 
-import javax.swing.ListCellRenderer;
-import javax.swing.JList;
-import java.awt.Component;
 import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.view.renderer.RendererPanel;
+import java.awt.Component;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 /**
  * TODO: document
@@ -23,13 +23,16 @@ import ch.xmatrix.ups.view.renderer.RendererPanel;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/25 11:07:45 $
  */
-public class GroupsListRenderer implements ListCellRenderer {
+public class GroupsListRenderer implements ListCellRenderer
+{
 
     private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+
     private boolean enabled;
 
     public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-                                                  final boolean selected, final boolean hasFocus) {
+                                                  final boolean selected, final boolean hasFocus)
+    {
         final GroupModel model = (GroupModel) value;
         panel.setEnabled(enabled);
         panel.setIcon(ImageLocator.getIcon("group.gif"));
@@ -39,7 +42,8 @@ public class GroupsListRenderer implements ListCellRenderer {
         return panel;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final boolean enabled)
+    {
         this.enabled = enabled;
     }
 }

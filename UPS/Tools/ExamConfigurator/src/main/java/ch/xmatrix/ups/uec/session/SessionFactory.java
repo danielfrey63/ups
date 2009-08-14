@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.uec.session;
 
-import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.domain.TaxonBased;
+import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
 
 /**
@@ -26,10 +26,13 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class SessionFactory extends MasterDetailsFactory {
+public class SessionFactory extends MasterDetailsFactory
+{
 
-    protected TaxonBased createCopy(final TaxonBased orig) {
-        if (!(orig instanceof SessionModel)) {
+    protected TaxonBased createCopy(final TaxonBased orig)
+    {
+        if (!(orig instanceof SessionModel))
+        {
             throw new IllegalArgumentException("original must be of type " + SessionModel.class.getName() +
                     ", got " + orig.getClass().getName());
         }
@@ -37,7 +40,8 @@ public class SessionFactory extends MasterDetailsFactory {
         return new SessionModel(original);
     }
 
-    protected TaxonBased createInstance() {
+    protected TaxonBased createInstance()
+    {
         return new SessionModel();
     }
 }

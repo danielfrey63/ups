@@ -19,9 +19,11 @@ import ch.jfactory.application.MainRunner;
  * @author Daniel Frey
  * @version $Revision: 1.13 $ $Date: 2008/01/23 22:19:08 $
  */
-public class Main extends MainRunner {
+public class Main extends MainRunner
+{
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
 //        System.setProperty("ch.jfactory.laf", "net.sourceforge.napkinlaf.NapkinLookAndFeel");
         MainRunner.main(args);
     }

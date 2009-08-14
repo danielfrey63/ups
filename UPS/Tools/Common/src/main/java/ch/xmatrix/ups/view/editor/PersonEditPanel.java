@@ -12,8 +12,8 @@
 
 package ch.xmatrix.ups.view.editor;
 
-import ch.jfactory.component.FixedFormatTextField;
 import ch.jfactory.component.AbstractPlainDocument;
+import ch.jfactory.component.FixedFormatTextField;
 import ch.xmatrix.ups.domain.PersonData;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.adapter.DocumentAdapter;
@@ -40,29 +40,41 @@ import javax.swing.event.DocumentListener;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2006/04/21 11:02:52 $
  */
-public class PersonEditPanel extends JPanel {
+public class PersonEditPanel extends JPanel
+{
     private PersonData person;
+
     private Trigger trigger = new Trigger();
+
     private JTextField idField;
+
     private JTextField firstNameField;
+
     private JTextField lastNameField;
+
     private JComboBox courseField;
+
     private List listeners = new ArrayList();
+
     private boolean complete = false;
 
     private static final String PATTERN = "NN-NNN-NNN";
+
     private Notifier notifier = new Notifier();
 
-    public PersonEditPanel(final PersonData person) {
+    public PersonEditPanel(final PersonData person)
+    {
         this.person = person;
         build();
     }
 
-    public void save() {
+    public void save()
+    {
         trigger.triggerCommit();
     }
 
-    private void build() {
+    private void build()
+    {
         final FormLayout layout = new FormLayout("left:pref, 3dlu, pref:grow");
 
         final DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
@@ -74,7 +86,8 @@ public class PersonEditPanel extends JPanel {
         builder.append("Studiengang:", createCourseField());
     }
 
-    private JTextField createFirstNameField() {
+    private JTextField createFirstNameField()
+    {
         firstNameField = new JTextField();
         final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.FIRST_NAME);
         firstNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), new FirstNameDocument()));
@@ -82,7 +95,8 @@ public class PersonEditPanel extends JPanel {
         return firstNameField;
     }
 
-    private JTextField createLastNameField() {
+    private JTextField createLastNameField()
+    {
         lastNameField = new JTextField();
         final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.LAST_NAME);
         lastNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), new LastNameDocument()));
@@ -90,7 +104,8 @@ public class PersonEditPanel extends JPanel {
         return lastNameField;
     }
 
-    private JTextField createIdField() {
+    private JTextField createIdField()
+    {
         idField = new FixedFormatTextField(PATTERN, "00-000-000");
         final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.ID);
         idField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), idField.getDocument()));
@@ -98,7 +113,8 @@ public class PersonEditPanel extends JPanel {
         return idField;
     }
 
-    private JComboBox createCourseField() {
+    private JComboBox createCourseField()
+    {
         final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.COURSE);
         courseField = new JComboBox();
         final List courseList = new ArrayList(4);
@@ -107,25 +123,31 @@ public class PersonEditPanel extends JPanel {
         courseList.add("Pharmazie");
         courseList.add("Andere");
         courseField.setModel(new ComboBoxAdapter((ListModel) new SelectionInList(courseList), new BufferedValueModel(adapter, trigger)));
-        courseField.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        courseField.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(final ActionEvent e)
+            {
                 notifyComplete();
             }
         });
         return courseField;
     }
 
-    public boolean isComplete() {
+    public boolean isComplete()
+    {
         return !firstNameField.getText().equals("") &&
                 !lastNameField.getText().equals("") &&
                 !courseField.getSelectedItem().equals("") &&
                 !idField.getText().equals(PATTERN);
     }
 
-    private class FirstNameDocument extends AbstractPlainDocument {
-        protected boolean validate(final String newValue) {
+    private class FirstNameDocument extends AbstractPlainDocument
+    {
+        protected boolean validate(final String newValue)
+        {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++) {
+            for (int i = 0; i < newValue.length(); i++)
+            {
                 final char c = newValue.charAt(i);
                 ret &= Character.isLetter(c) || c == ' ' || c == '-';
             }
@@ -134,10 +156,13 @@ public class PersonEditPanel extends JPanel {
         }
     }
 
-    private class LastNameDocument extends AbstractPlainDocument {
-        protected boolean validate(final String newValue) {
+    private class LastNameDocument extends AbstractPlainDocument
+    {
+        protected boolean validate(final String newValue)
+        {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++) {
+            for (int i = 0; i < newValue.length(); i++)
+            {
                 final char c = newValue.charAt(i);
                 ret &= Character.isLetter(c) || c == ' ' || c == '-' || c == '(' || c == ')';
             }
@@ -145,35 +170,44 @@ public class PersonEditPanel extends JPanel {
         }
     }
 
-    public interface CompletionListener {
+    public interface CompletionListener
+    {
         void updateComplete(boolean complete);
     }
 
-    public void addCompletionListener(final CompletionListener listener) {
+    public void addCompletionListener(final CompletionListener listener)
+    {
         listeners.add(listener);
     }
 
-    private void notifyComplete() {
+    private void notifyComplete()
+    {
         final boolean oldComplete = complete;
         complete = isComplete();
-        if (oldComplete != complete) {
-            for (int i = 0; i < listeners.size(); i++) {
+        if (oldComplete != complete)
+        {
+            for (int i = 0; i < listeners.size(); i++)
+            {
                 final CompletionListener listener = (CompletionListener) listeners.get(i);
                 listener.updateComplete(complete);
             }
         }
     }
 
-    private class Notifier implements DocumentListener {
-        public void changedUpdate(final DocumentEvent e) {
+    private class Notifier implements DocumentListener
+    {
+        public void changedUpdate(final DocumentEvent e)
+        {
             notifyComplete();
         }
 
-        public void insertUpdate(final DocumentEvent e) {
+        public void insertUpdate(final DocumentEvent e)
+        {
             notifyComplete();
         }
 
-        public void removeUpdate(final DocumentEvent e) {
+        public void removeUpdate(final DocumentEvent e)
+        {
             notifyComplete();
         }
     }

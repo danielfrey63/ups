@@ -58,51 +58,47 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/23 22:19:20 $
  */
-public class PDFGenerator {
+public class PDFGenerator
+{
 
     private static final Logger LOG = Logger.getLogger(PDFGenerator.class);
+
     private static final ResourceBundle bundle = ResourceBundle.getBundle("ch.xmatrix.ups.pdf.Strings");
 
     public static final String KEY_USERNAME = "username";
+
     public static final String KEY_PASSWORD = "password";
+
     public static final String KEY_FIRSTNAME = "firstname";
+
     public static final String KEY_FAMILYNAME = "familyname";
 
-    /**
-     * The course of the student.
-     */
+    /** The course of the student. */
     public static final String KEY_DEPARTMENT = "department";
 
-    /**
-     * The identification number of the student.
-     */
+    /** The identification number of the student. */
     public static final String KEY_ID = "id";
 
-    /**
-     * Subject field in the generated pdf file.
-     */
+    /** Subject field in the generated pdf file. */
     public static final String KEY_SUBJECT = "subject";
 
-    /**
-     * Author field in the generated pdf file.
-     */
+    /** Author field in the generated pdf file. */
     public static final String KEY_AUTHOR = "author";
 
-    /**
-     * Title field in the generated pdf file.
-     */
+    /** Title field in the generated pdf file. */
     public static final String KEY_TITLE = "title";
 
-    /**
-     * Put here a byte array with the xstream-encoded ArrayList of species strings.
-     */
+    /** Put here a byte array with the xstream-encoded ArrayList of species strings. */
     public static final String KEY_SPECIES = "species";
 
-    public static byte[] createPdf(final Properties context) throws DocumentException, IOException {
+    public static byte[] createPdf(final Properties context) throws DocumentException, IOException
+    {
 
         byte[] byteArray = null;
-        try {
-            if (LOG.isDebugEnabled()) {
+        try
+        {
+            if (LOG.isDebugEnabled())
+            {
                 final Properties copy = new Properties();
                 copy.putAll(context);
                 copy.remove(KEY_SPECIES);
@@ -166,7 +162,8 @@ public class PDFGenerator {
             document.add(table);
 
             final String text = bundle.getString("pdfgeneration.text");
-            for (StringTokenizer t = new StringTokenizer(text, "\n", true); t.hasMoreTokens();) {
+            for (StringTokenizer t = new StringTokenizer(text, "\n", true); t.hasMoreTokens();)
+            {
                 final String token = t.nextToken();
                 final Element element = (token.trim().equals("\n") ? (Element) Chunk.NEWLINE : new Paragraph(token, font0));
                 document.add(element);
@@ -183,7 +180,8 @@ public class PDFGenerator {
             final byte[] bytes = (byte[]) context.get(KEY_SPECIES);
             final XStream reader = new XStream();
             final ArrayList list = (ArrayList) reader.fromXML(new String(bytes));
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++)
+            {
                 columns.addElement(new Paragraph((String) list.get(i), font3));
             }
 
@@ -193,17 +191,20 @@ public class PDFGenerator {
             byteArray = result.toByteArray();
             result.close();
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             LOG.error("could not produce pdf", e);
         }
-        catch (Throwable e) {
+        catch (Throwable e)
+        {
             LOG.error("unknown error during pdf generation", e);
         }
 
         return byteArray;
     }
 
-    public static void main(final String[] args) throws DocumentException, IOException {
+    public static void main(final String[] args) throws DocumentException, IOException
+    {
 
         final Properties context = new Properties();
         context.put(PDFGenerator.KEY_FIRSTNAME, "Daniel");
@@ -247,7 +248,8 @@ public class PDFGenerator {
         doc.add(new Paragraph("Hallo"));
         final MultiColumnText cols = new MultiColumnText();
         cols.addRegularColumns(doc.left(), doc.right(), 10f, 3);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++)
+        {
             cols.addElement(new Paragraph("Hallo"));
         }
         doc.add(cols);

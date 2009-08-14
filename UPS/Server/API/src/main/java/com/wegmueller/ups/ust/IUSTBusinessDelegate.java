@@ -3,7 +3,8 @@ package com.wegmueller.ups.ust;
 import com.wegmueller.ups.ldap.ILDAPUserRecord;
 
 /** Created by: Thomas Wegmueller Date: 26.09.2005,  18:18:03 */
-public interface IUSTBusinessDelegate {
+public interface IUSTBusinessDelegate
+{
 
     /**
      * Produziere ein PDF für den Studenten und die Prüfungsliste

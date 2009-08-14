@@ -1,7 +1,8 @@
 package com.wegmueller.ups.lka;
 
 /** OIS Daten */
-public interface ILKAData {
+public interface ILKAData
+{
     /**
      * Anmeldungen für alle Prüfungen
      *

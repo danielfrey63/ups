@@ -39,10 +39,14 @@
      * @param classname
      * @return class iff present
      */
-    Class classExists(final String classname) {
-        try {
+    Class classExists(final String classname)
+    {
+        try
+        {
             return Class.forName(classname);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e)
+        {
             return null;
         }
     }
@@ -52,14 +56,19 @@
      * @param resource
      * @return true iff present
      */
-    boolean resourceExists(final String resource) {
+    boolean resourceExists(final String resource)
+    {
         final boolean found;
         final InputStream instream = this.getClass().getResourceAsStream(resource);
         found = instream != null;
-        if (instream != null) {
-            try {
+        if (instream != null)
+        {
+            try
+            {
                 instream.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
             }
         }
         return found;
@@ -82,29 +91,41 @@
                    final String jarFile,
                    final String description,
                    final String errorText,
-                   final String homePage) throws IOException {
-        try {
+                   final String homePage) throws IOException
+    {
+        try
+        {
             final Class clazz = classExists(classname);
-            if (clazz == null) {
+            if (clazz == null)
+            {
                 String url = "";
-                if (homePage != null) {
+                if (homePage != null)
+                {
                     url = getMessage("seeHomepage", homePage, homePage);
                 }
                 out.write(getMessage("couldNotFound", category, classname, jarFile, errorText, url));
                 return 1;
-            } else {
+            }
+            else
+            {
                 final String location = getLocation(out, clazz);
 
-                if (location == null) {
+                if (location == null)
+                {
                     out.write("<li>" + getMessage("foundClass00", description, classname) + "</li><br>");
-                } else {
+                }
+                else
+                {
                     out.write("<li>" + getMessage("foundClass01", description, classname, location) + "</li><br>");
                 }
                 return 0;
             }
-        } catch (NoClassDefFoundError ncdfe) {
+        }
+        catch (NoClassDefFoundError ncdfe)
+        {
             String url = "";
-            if (homePage != null) {
+            if (homePage != null)
+            {
                 url = getMessage("seeHomepage", homePage, homePage);
             }
             out.write(getMessage("couldNotFoundDep", category, classname, errorText, url));
@@ -121,22 +142,30 @@
      */
 
     String getLocation(final JspWriter out,
-                       final Class clazz) {
-        try {
+                       final Class clazz)
+    {
+        try
+        {
             java.net.URL url = clazz.getProtectionDomain().getCodeSource().getLocation();
             String location = url.toString();
-            if (location.startsWith("jar")) {
+            if (location.startsWith("jar"))
+            {
                 url = ((java.net.JarURLConnection) url.openConnection()).getJarFileURL();
                 location = url.toString();
             }
 
-            if (location.startsWith("file")) {
+            if (location.startsWith("file"))
+            {
                 final java.io.File file = new java.io.File(url.getFile());
                 return file.getAbsolutePath();
-            } else {
+            }
+            else
+            {
                 return url.toString();
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t)
+        {
         }
         return getMessage("classFoundError");
     }
@@ -156,7 +185,8 @@
                   final String jarFile,
                   final String description,
                   final String errorText,
-                  final String homePage) throws IOException {
+                  final String homePage) throws IOException
+    {
         return probeClass(out,
                 "<b>" + getMessage("error") + "</b>",
                 classname,
@@ -181,7 +211,8 @@
                   final String jarFile,
                   final String description,
                   final String errorText,
-                  final String homePage) throws IOException {
+                  final String homePage) throws IOException
+    {
         return probeClass(out,
                 "<b>" + getMessage("warning") + "</b>",
                 classname,
@@ -196,7 +227,8 @@
      *
      */
 
-    public String getServletVersion() {
+    public String getServletVersion()
+    {
         final ServletContext context = getServletConfig().getServletContext();
         final int major = context.getMajorVersion();
         final int minor = context.getMinorVersion();
@@ -207,9 +239,11 @@
      * what parser are we using.
      * @return the classname of the parser
      */
-    private String getParserName() {
+    private String getParserName()
+    {
         final SAXParser saxParser = getSAXParser();
-        if (saxParser == null) {
+        if (saxParser == null)
+        {
             return getMessage("couldNotCreateParser");
         }
 
@@ -222,15 +256,20 @@
      * Create a JAXP SAXParser
      * @return parser or null for trouble
      */
-    private SAXParser getSAXParser() {
+    private SAXParser getSAXParser()
+    {
         final SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-        if (saxParserFactory == null) {
+        if (saxParserFactory == null)
+        {
             return null;
         }
         SAXParser saxParser = null;
-        try {
+        try
+        {
             saxParser = saxParserFactory.newSAXParser();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
         }
         return saxParser;
     }
@@ -240,9 +279,11 @@
      * @return path or null for trouble in tracking it down
      */
 
-    private String getParserLocation(final JspWriter out) {
+    private String getParserLocation(final JspWriter out)
+    {
         final SAXParser saxParser = getSAXParser();
-        if (saxParser == null) {
+        if (saxParser == null)
+        {
             return null;
         }
         final String location = getLocation(out, saxParser.getClass());
@@ -255,14 +296,19 @@
      * @param String interface name
      * @return boolean
      */
-    private boolean implementsInterface(final Class clazz, final String interfaceName) {
-        if (clazz == null) {
+    private boolean implementsInterface(final Class clazz, final String interfaceName)
+    {
+        if (clazz == null)
+        {
             return false;
         }
         final Class[] interfaces = clazz.getInterfaces();
-        if (interfaces.length != 0) {
-            for (int i = 0; i < interfaces.length; i++) {
-                if (interfaces[i].getName().equals(interfaceName)) {
+        if (interfaces.length != 0)
+        {
+            for (int i = 0; i < interfaces.length; i++)
+            {
+                if (interfaces[i].getName().equals(interfaceName))
+                {
                     return true;
                 }
             }
@@ -310,13 +356,16 @@
         final String className = "javax.xml.soap.SOAPPart";
         final String interfaceName = "org.w3c.dom.Document";
         final Class clazz = classExists(className);
-        if (clazz == null || implementsInterface(clazz, interfaceName)) {
+        if (clazz == null || implementsInterface(clazz, interfaceName))
+        {
             needed = needClass(out, "javax.xml.soap.SOAPMessage",
                     "saaj.jar",
                     "SAAJ API",
                     getMessage("criticalErrorMessage"),
                     "http://ws.apache.org/axis/");
-        } else {
+        }
+        else
+        {
             final String location = getLocation(out, clazz);
 
             out.print(getMessage("invalidSAAJ", location));
@@ -411,18 +460,24 @@
 <%
     out.write("<h3>");
     //is everythng we need here
-    if (needed == 0) {
+    if (needed == 0)
+    {
         //yes, be happy
         out.write(getMessage("happyResult00"));
-    } else {
+    }
+    else
+    {
         //no, be very unhappy
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         out.write(getMessage("unhappyResult00", Integer.toString(needed)));
     }
     //now look at wanted stuff
-    if (wanted > 0) {
+    if (wanted > 0)
+    {
         out.write(getMessage("unhappyResult01", Integer.toString(wanted)));
-    } else {
+    }
+    else
+    {
         out.write(getMessage("happyResult01"));
     }
     out.write("</h3>");
@@ -431,7 +486,8 @@
     <%
 
         //hint if anything is missing
-        if (needed > 0 || wanted > 0) {
+        if (needed > 0 || wanted > 0)
+        {
             out.write(getMessage("hintString"));
         }
 
@@ -467,7 +523,8 @@
     </table>
 </UL>
 
-<% if (xmlParser.indexOf("crimson") >= 0) { %>
+<% if (xmlParser.indexOf("crimson") >= 0)
+{ %>
 <p>
     <%= getMessage("recommendedParser") %>
 </p>
@@ -481,18 +538,25 @@
          * Dump the system properties
          */
         java.util.Enumeration e = null;
-        try {
+        try
+        {
             e = System.getProperties().propertyNames();
-        } catch (SecurityException se) {
         }
-        if (e != null) {
+        catch (SecurityException se)
+        {
+        }
+        if (e != null)
+        {
             out.write("<pre>");
-            for (; e.hasMoreElements();) {
+            for (; e.hasMoreElements();)
+            {
                 final String key = (String) e.nextElement();
                 out.write(key + "=" + System.getProperty(key) + "\n");
             }
             out.write("</pre><p>");
-        } else {
+        }
+        else
+        {
             out.write(getMessage("sysPropError"));
         }
     %>

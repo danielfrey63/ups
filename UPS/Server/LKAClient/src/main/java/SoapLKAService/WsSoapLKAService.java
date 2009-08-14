@@ -7,7 +7,8 @@
 
 package SoapLKAService;
 
-public interface WsSoapLKAService extends javax.xml.rpc.Service {
+public interface WsSoapLKAService extends javax.xml.rpc.Service
+{
     public java.lang.String getV10Address();
 
     public SoapLKAService.WsSoapLKA getV10() throws javax.xml.rpc.ServiceException;

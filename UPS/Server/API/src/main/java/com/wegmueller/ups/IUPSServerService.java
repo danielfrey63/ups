@@ -6,7 +6,8 @@ import com.wegmueller.ups.storage.IStorage;
 import com.wegmueller.ups.ust.IUSTBusinessDelegate;
 
 /** Server Service interface Date: 26.09.2005,  19:41:45 */
-public interface IUPSServerService {
+public interface IUPSServerService
+{
     /**
      * Storage System
      *

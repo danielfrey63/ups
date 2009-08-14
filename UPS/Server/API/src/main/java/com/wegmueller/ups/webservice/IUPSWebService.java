@@ -13,7 +13,8 @@ import java.util.Calendar;
  * @author Thomas Wegmüller
  * @version 0.1 (2005-09-29)
  */
-public interface IUPSWebService {
+public interface IUPSWebService
+{
 
     /**
      * Kompatibilitätscheck des Clients mit dem Server

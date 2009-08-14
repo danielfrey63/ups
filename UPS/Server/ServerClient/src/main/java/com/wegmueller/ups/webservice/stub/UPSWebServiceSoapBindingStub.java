@@ -7,7 +7,8 @@
 
 package com.wegmueller.ups.webservice.stub;
 
-public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.stub.UPSWebService {
+public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.stub.UPSWebService
+{
     private java.util.Vector cachedSerClasses = new java.util.Vector();
 
     private java.util.Vector cachedSerQNames = new java.util.Vector();
@@ -18,12 +19,14 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
     static org.apache.axis.description.OperationDesc[] _operations;
 
-    static {
+    static
+    {
         _operations = new org.apache.axis.description.OperationDesc[2];
         _initOperationDesc1();
     }
 
-    private static void _initOperationDesc1() {
+    private static void _initOperationDesc1()
+    {
         org.apache.axis.description.OperationDesc oper;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("submit");
@@ -47,60 +50,78 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
     }
 
-    public UPSWebServiceSoapBindingStub() throws org.apache.axis.AxisFault {
+    public UPSWebServiceSoapBindingStub() throws org.apache.axis.AxisFault
+    {
         this(null);
     }
 
-    public UPSWebServiceSoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public UPSWebServiceSoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault
+    {
         this(service);
         super.cachedEndpoint = endpointURL;
     }
 
-    public UPSWebServiceSoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
-        if (service == null) {
+    public UPSWebServiceSoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault
+    {
+        if (service == null)
+        {
             super.service = new org.apache.axis.client.Service();
-        } else {
+        }
+        else
+        {
             super.service = service;
         }
         ((org.apache.axis.client.Service) super.service).setTypeMappingVersion("1.2");
     }
 
-    protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
-        try {
+    protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException
+    {
+        try
+        {
             final org.apache.axis.client.Call _call =
                     (org.apache.axis.client.Call) super.service.createCall();
-            if (super.maintainSessionSet) {
+            if (super.maintainSessionSet)
+            {
                 _call.setMaintainSession(super.maintainSession);
             }
-            if (super.cachedUsername != null) {
+            if (super.cachedUsername != null)
+            {
                 _call.setUsername(super.cachedUsername);
             }
-            if (super.cachedPassword != null) {
+            if (super.cachedPassword != null)
+            {
                 _call.setPassword(super.cachedPassword);
             }
-            if (super.cachedEndpoint != null) {
+            if (super.cachedEndpoint != null)
+            {
                 _call.setTargetEndpointAddress(super.cachedEndpoint);
             }
-            if (super.cachedTimeout != null) {
+            if (super.cachedTimeout != null)
+            {
                 _call.setTimeout(super.cachedTimeout);
             }
-            if (super.cachedPortName != null) {
+            if (super.cachedPortName != null)
+            {
                 _call.setPortName(super.cachedPortName);
             }
             final java.util.Enumeration keys = super.cachedProperties.keys();
-            while (keys.hasMoreElements()) {
+            while (keys.hasMoreElements())
+            {
                 final java.lang.String key = (java.lang.String) keys.nextElement();
                 _call.setProperty(key, super.cachedProperties.get(key));
             }
             return _call;
         }
-        catch (java.lang.Throwable _t) {
+        catch (java.lang.Throwable _t)
+        {
             throw new org.apache.axis.AxisFault("Failure trying to get the Call object", _t);
         }
     }
 
-    public byte[] submit(final java.lang.String userName, final java.lang.String password, final byte[] bytes) throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
+    public byte[] submit(final java.lang.String userName, final java.lang.String password, final byte[] bytes) throws java.rmi.RemoteException
+    {
+        if (super.cachedEndpoint == null)
+        {
             throw new org.apache.axis.NoEndPointException();
         }
         final org.apache.axis.client.Call _call = createCall();
@@ -112,26 +133,37 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
         setRequestHeaders(_call);
         setAttachments(_call);
-        try {
+        try
+        {
             final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{userName, password, bytes});
 
-            if (_resp instanceof java.rmi.RemoteException) {
+            if (_resp instanceof java.rmi.RemoteException)
+            {
                 throw (java.rmi.RemoteException) _resp;
-            } else {
+            }
+            else
+            {
                 extractAttachments(_call);
-                try {
+                try
+                {
                     return (byte[]) _resp;
-                } catch (java.lang.Exception _exception) {
+                }
+                catch (java.lang.Exception _exception)
+                {
                     return (byte[]) org.apache.axis.utils.JavaUtils.convert(_resp, byte[].class);
                 }
             }
-        } catch (org.apache.axis.AxisFault axisFaultException) {
+        }
+        catch (org.apache.axis.AxisFault axisFaultException)
+        {
             throw axisFaultException;
         }
     }
 
-    public void throwAxisFault(final java.lang.String param) throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
+    public void throwAxisFault(final java.lang.String param) throws java.rmi.RemoteException
+    {
+        if (super.cachedEndpoint == null)
+        {
             throw new org.apache.axis.NoEndPointException();
         }
         final org.apache.axis.client.Call _call = createCall();
@@ -143,14 +175,18 @@ public class UPSWebServiceSoapBindingStub extends org.apache.axis.client.Stub im
 
         setRequestHeaders(_call);
         setAttachments(_call);
-        try {
+        try
+        {
             final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{param});
 
-            if (_resp instanceof java.rmi.RemoteException) {
+            if (_resp instanceof java.rmi.RemoteException)
+            {
                 throw (java.rmi.RemoteException) _resp;
             }
             extractAttachments(_call);
-        } catch (org.apache.axis.AxisFault axisFaultException) {
+        }
+        catch (org.apache.axis.AxisFault axisFaultException)
+        {
             throw axisFaultException;
         }
     }

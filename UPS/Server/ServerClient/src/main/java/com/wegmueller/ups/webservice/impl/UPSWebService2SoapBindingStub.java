@@ -7,7 +7,8 @@
 
 package com.wegmueller.ups.webservice.impl;
 
-public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.impl.UPSWebService2 {
+public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.impl.UPSWebService2
+{
     private java.util.Vector cachedSerClasses = new java.util.Vector();
 
     private java.util.Vector cachedSerQNames = new java.util.Vector();
@@ -18,12 +19,14 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
 
     static org.apache.axis.description.OperationDesc[] _operations;
 
-    static {
+    static
+    {
         _operations = new org.apache.axis.description.OperationDesc[1];
         _initOperationDesc1();
     }
 
-    private static void _initOperationDesc1() {
+    private static void _initOperationDesc1()
+    {
         final org.apache.axis.description.OperationDesc oper;
         final org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -39,19 +42,25 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
 
     }
 
-    public UPSWebService2SoapBindingStub() throws org.apache.axis.AxisFault {
+    public UPSWebService2SoapBindingStub() throws org.apache.axis.AxisFault
+    {
         this(null);
     }
 
-    public UPSWebService2SoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public UPSWebService2SoapBindingStub(final java.net.URL endpointURL, final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault
+    {
         this(service);
         super.cachedEndpoint = endpointURL;
     }
 
-    public UPSWebService2SoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
-        if (service == null) {
+    public UPSWebService2SoapBindingStub(final javax.xml.rpc.Service service) throws org.apache.axis.AxisFault
+    {
+        if (service == null)
+        {
             super.service = new org.apache.axis.client.Service();
-        } else {
+        }
+        else
+        {
             super.service = service;
         }
         ((org.apache.axis.client.Service) super.service).setTypeMappingVersion("1.2");
@@ -79,29 +88,38 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
 
     }
 
-    protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
-        try {
+    protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException
+    {
+        try
+        {
             final org.apache.axis.client.Call _call = super._createCall();
-            if (super.maintainSessionSet) {
+            if (super.maintainSessionSet)
+            {
                 _call.setMaintainSession(super.maintainSession);
             }
-            if (super.cachedUsername != null) {
+            if (super.cachedUsername != null)
+            {
                 _call.setUsername(super.cachedUsername);
             }
-            if (super.cachedPassword != null) {
+            if (super.cachedPassword != null)
+            {
                 _call.setPassword(super.cachedPassword);
             }
-            if (super.cachedEndpoint != null) {
+            if (super.cachedEndpoint != null)
+            {
                 _call.setTargetEndpointAddress(super.cachedEndpoint);
             }
-            if (super.cachedTimeout != null) {
+            if (super.cachedTimeout != null)
+            {
                 _call.setTimeout(super.cachedTimeout);
             }
-            if (super.cachedPortName != null) {
+            if (super.cachedPortName != null)
+            {
                 _call.setPortName(super.cachedPortName);
             }
             final java.util.Enumeration keys = super.cachedProperties.keys();
-            while (keys.hasMoreElements()) {
+            while (keys.hasMoreElements())
+            {
                 final java.lang.String key = (java.lang.String) keys.nextElement();
                 _call.setProperty(key, super.cachedProperties.get(key));
             }
@@ -110,23 +128,29 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
             // The type mapping information is actually registered in
             // the TypeMappingRegistry of the service, which
             // is the reason why registration is only needed for the first call.
-            synchronized (this) {
-                if (firstCall()) {
+            synchronized (this)
+            {
+                if (firstCall())
+                {
                     // must set encoding style before registering serializers
                     _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
                     _call.setEncodingStyle(org.apache.axis.Constants.URI_SOAP11_ENC);
-                    for (int i = 0; i < cachedSerFactories.size(); ++i) {
+                    for (int i = 0; i < cachedSerFactories.size(); ++i)
+                    {
                         final java.lang.Class cls = (java.lang.Class) cachedSerClasses.get(i);
                         final javax.xml.namespace.QName qName =
                                 (javax.xml.namespace.QName) cachedSerQNames.get(i);
                         final java.lang.Object x = cachedSerFactories.get(i);
-                        if (x instanceof Class) {
+                        if (x instanceof Class)
+                        {
                             final java.lang.Class sf = (java.lang.Class)
                                     cachedSerFactories.get(i);
                             final java.lang.Class df = (java.lang.Class)
                                     cachedDeserFactories.get(i);
                             _call.registerTypeMapping(cls, qName, sf, df, false);
-                        } else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
+                        }
+                        else if (x instanceof javax.xml.rpc.encoding.SerializerFactory)
+                        {
                             final org.apache.axis.encoding.SerializerFactory sf = (org.apache.axis.encoding.SerializerFactory)
                                     cachedSerFactories.get(i);
                             final org.apache.axis.encoding.DeserializerFactory df = (org.apache.axis.encoding.DeserializerFactory)
@@ -138,13 +162,16 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
             }
             return _call;
         }
-        catch (java.lang.Throwable _t) {
+        catch (java.lang.Throwable _t)
+        {
             throw new org.apache.axis.AxisFault("Failure trying to get the Call object", _t);
         }
     }
 
-    public java.lang.String invoke(final java.lang.String[] args) throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
+    public java.lang.String invoke(final java.lang.String[] args) throws java.rmi.RemoteException
+    {
+        if (super.cachedEndpoint == null)
+        {
             throw new org.apache.axis.NoEndPointException();
         }
         final org.apache.axis.client.Call _call = createCall();
@@ -156,20 +183,29 @@ public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub i
 
         setRequestHeaders(_call);
         setAttachments(_call);
-        try {
+        try
+        {
             final java.lang.Object _resp = _call.invoke(new java.lang.Object[]{args});
 
-            if (_resp instanceof java.rmi.RemoteException) {
+            if (_resp instanceof java.rmi.RemoteException)
+            {
                 throw (java.rmi.RemoteException) _resp;
-            } else {
+            }
+            else
+            {
                 extractAttachments(_call);
-                try {
+                try
+                {
                     return (java.lang.String) _resp;
-                } catch (java.lang.Exception _exception) {
+                }
+                catch (java.lang.Exception _exception)
+                {
                     return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
                 }
             }
-        } catch (org.apache.axis.AxisFault axisFaultException) {
+        }
+        catch (org.apache.axis.AxisFault axisFaultException)
+        {
             throw axisFaultException;
         }
     }

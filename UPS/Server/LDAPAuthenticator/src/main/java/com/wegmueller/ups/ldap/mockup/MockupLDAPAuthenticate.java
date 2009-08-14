@@ -3,19 +3,17 @@ package com.wegmueller.ups.ldap.mockup;
 import com.wegmueller.ups.ldap.ILDAPAuth;
 import com.wegmueller.ups.ldap.ILDAPUserRecord;
 import com.wegmueller.ups.ldap.LDAPAuthException;
-
 import java.util.ArrayList;
 import java.util.Properties;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 27.09.2005,  00:18:03
- */
-public class MockupLDAPAuthenticate implements ILDAPAuth {
+/** Created by: Thomas Wegmueller Date: 27.09.2005,  00:18:03 */
+public class MockupLDAPAuthenticate implements ILDAPAuth
+{
 
-    ArrayList storage = new ArrayList();
+    ArrayList<DummyUser> storage = new ArrayList<DummyUser>();
 
-    public MockupLDAPAuthenticate() {
+    public MockupLDAPAuthenticate()
+    {
         storage.add(new DummyUser("testuser1", "03925245", "testuser1", new Properties()));
         storage.add(new DummyUser("testuser2", "04912002", "testuser2", new Properties()));
         storage.add(new DummyUser("testuser3", "04917902", "testuser3", new Properties()));
@@ -124,10 +122,13 @@ public class MockupLDAPAuthenticate implements ILDAPAuth {
 
     }
 
-    public ILDAPUserRecord getUserData(final String userName, final String password) throws LDAPAuthException {
-        for (int i = 0; i < storage.size(); i++) {
-            final DummyUser o = (DummyUser) storage.get(i);
-            if (o.getName().equals(userName) && o.getPw().equals(password)) {
+    public ILDAPUserRecord getUserData(final String userName, final String password) throws LDAPAuthException
+    {
+        for (int i = 0; i < storage.size(); i++)
+        {
+            final DummyUser o = storage.get(i);
+            if (o.getName().equals(userName) && o.getPw().equals(password))
+            {
                 return o;
             }
         }

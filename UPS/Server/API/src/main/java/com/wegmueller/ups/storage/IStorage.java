@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.Properties;
 
 /** Created by: Thomas Wegmueller Date: 26.09.2005,  18:22:27 */
-public interface IStorage {
+public interface IStorage
+{
 
     void open() throws StorageException;
 

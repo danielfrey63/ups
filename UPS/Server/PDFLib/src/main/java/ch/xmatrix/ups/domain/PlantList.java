@@ -24,29 +24,35 @@ import java.util.ArrayList;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/08/04 15:50:02 $
  */
-public class PlantList {
+public class PlantList
+{
 
     private PersonData person;
 
     private ArrayList<String> taxa;
 
-    public PersonData getPerson() {
+    public PersonData getPerson()
+    {
         return person;
     }
 
-    public void setPerson(final PersonData person) {
+    public void setPerson(final PersonData person)
+    {
         this.person = person;
     }
 
-    public ArrayList<String> getTaxa() {
+    public ArrayList<String> getTaxa()
+    {
         return taxa;
     }
 
-    public void setTaxa(final ArrayList<String> taxa) {
+    public void setTaxa(final ArrayList<String> taxa)
+    {
         this.taxa = taxa;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return person.toString() + " - " + taxa.size();
     }
 }

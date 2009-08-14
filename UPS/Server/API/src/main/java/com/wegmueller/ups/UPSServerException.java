@@ -1,7 +1,8 @@
 package com.wegmueller.ups;
 
 /** Created by: Thomas Wegmueller Date: 26.09.2005,  20:03:15 */
-public class UPSServerException extends Throwable {
+public class UPSServerException extends Throwable
+{
 
     public static final String INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
 
@@ -15,22 +16,26 @@ public class UPSServerException extends Throwable {
 
     private String name;
 
-    public UPSServerException(final String s, final Throwable e) {
+    public UPSServerException(final String s, final Throwable e)
+    {
         super(e);
         name = s;
     }
 
-    public UPSServerException(final String s) {
+    public UPSServerException(final String s)
+    {
         super(s);
         this.name = s;
     }
 
-    public UPSServerException(final Throwable e) {
+    public UPSServerException(final Throwable e)
+    {
         super(e);
         name = e.getMessage();
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 }

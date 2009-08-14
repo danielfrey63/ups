@@ -7,8 +7,11 @@
 
 package SoapLKAService;
 
-public interface WsSoapLKA extends java.rmi.Remote {
+public interface WsSoapLKA extends java.rmi.Remote
+{
     public java.lang.String getInterfaceVersion(java.lang.String info) throws java.rmi.RemoteException;
+
     public SoapLKAData.WsPruefungssession retrieveAktuellePruefungssession(java.lang.String info) throws java.rmi.RemoteException;
+
     public SoapLKAData.WsAnmeldedaten[] retrieveAnmeldedaten(java.lang.String info, java.lang.String lkeinheitNummer) throws java.rmi.RemoteException;
 }

@@ -8,32 +8,36 @@ import com.wegmueller.ups.lka.LKABusinessDelegate;
 import com.wegmueller.ups.storage.IStorage;
 import com.wegmueller.ups.storage.StorageSystem;
 import com.wegmueller.ups.ust.IUSTBusinessDelegate;
-import com.wegmueller.ups.ust.USTBusinessDelegate;
 import com.wegmueller.ups.ust.mockup.MockupUSTBusinessDelegate;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 27.09.2005,  00:47:35
- */
-public class MockupService implements IUPSServerService {
+/** Created by: Thomas Wegmueller Date: 27.09.2005,  00:47:35 */
+public class MockupService implements IUPSServerService
+{
     private IStorage storage = new StorageSystem();
-    private ILDAPAuth ldap = new MockupLDAPAuthenticate();
-    private ILKABusinessDelegate lka = new LKABusinessDelegate();
-    private IUSTBusinessDelegate ust=new MockupUSTBusinessDelegate();
 
-    public IStorage getStorage() {
+    private ILDAPAuth ldap = new MockupLDAPAuthenticate();
+
+    private ILKABusinessDelegate lka = new LKABusinessDelegate();
+
+    private IUSTBusinessDelegate ust = new MockupUSTBusinessDelegate();
+
+    public IStorage getStorage()
+    {
         return storage;
     }
 
-    public ILDAPAuth getLDAP() {
+    public ILDAPAuth getLDAP()
+    {
         return ldap;
     }
 
-    public ILKABusinessDelegate getLKA() {
+    public ILKABusinessDelegate getLKA()
+    {
         return lka;
     }
 
-    public IUSTBusinessDelegate getUST() {
+    public IUSTBusinessDelegate getUST()
+    {
         return ust;
     }
 

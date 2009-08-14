@@ -1,28 +1,31 @@
 package com.wegmueller.ups.storage.hibernate;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.HibernateException;
-import org.hibernate.cfg.Configuration;
-import org.apache.log4j.Logger;
-
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
-/**
- * Created by: Thomas Wegmueller
- * Date: 26.09.2005,  20:41:33
- */
-public class HibernateUtil {
+/** Created by: Thomas Wegmueller Date: 26.09.2005,  20:41:33 */
+public class HibernateUtil
+{
     public static final SessionFactory sessionFactory;
     //public static final ThreadLocal session = new ThreadLocal();
 
     private static final Logger log = Logger.getLogger(HibernateUtil.class);
+
     private static Configuration cfg;
+
     private static final String[] HBM = {"upsstorage"};
 
-    static {
-        try {
-            if (log.isDebugEnabled()) log.debug("HibernateUtil...init ");
+    static
+    {
+        try
+        {
+            if (log.isDebugEnabled())
+            {
+                log.debug("HibernateUtil...init ");
+            }
             // Create the SessionFactory from hibernate.cfg.xml
             cfg = new Configuration();
 
@@ -36,30 +39,35 @@ public class HibernateUtil {
 
             }
             */
-            for (int i = 0; i < HBM.length; i++) {
+            for (int i = 0; i < HBM.length; i++)
+            {
                 cfg.addInputStream(HibernateUtil.class.getResourceAsStream("/" + HBM[i] + ".hbm.xml"));
             }
 
             cfg.configure();
             sessionFactory = cfg.buildSessionFactory();
-        } catch (Throwable ex) {
+        }
+        catch (Throwable ex)
+        {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-
-    public static Session newSession() {
+    public static Session newSession()
+    {
         final Session s = sessionFactory.openSession();
-        try {
+        try
+        {
             s.connection().setAutoCommit(true);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
         //session.set(s);
         return s;
     }
-
 
 }

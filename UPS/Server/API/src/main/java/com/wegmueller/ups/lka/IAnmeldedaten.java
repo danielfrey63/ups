@@ -8,7 +8,8 @@ import java.util.Calendar;
  * @author Thomas Wegmüller
  * @version 0.1 26.09.2005,  18:03:23
  */
-public interface IAnmeldedaten {
+public interface IAnmeldedaten
+{
 
     /**
      * Klartext der Angabe, ob es sich um eine schriftliche oder um eine mündliche Prüfung handelt. Falls es sich weder

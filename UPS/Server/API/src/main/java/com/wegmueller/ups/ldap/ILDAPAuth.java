@@ -1,7 +1,8 @@
 package com.wegmueller.ups.ldap;
 
 /** Schnittstelle zu LDAP */
-public interface ILDAPAuth {
+public interface ILDAPAuth
+{
 
     /**
      * Userdaten abholen

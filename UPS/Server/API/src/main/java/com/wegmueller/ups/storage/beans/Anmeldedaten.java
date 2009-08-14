@@ -4,7 +4,8 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.util.Calendar;
 
 /** Created by: Thomas Wegmueller Date: 26.09.2005,  20:51:09 */
-public class Anmeldedaten implements IAnmeldedaten {
+public class Anmeldedaten implements IAnmeldedaten
+{
     private Long id;
 
     private java.lang.String lkNummer;
@@ -49,179 +50,223 @@ public class Anmeldedaten implements IAnmeldedaten {
 
     private String dozentUserName;
 
-    public String getLkNummer() {
+    public String getLkNummer()
+    {
         return lkNummer;
     }
 
-    public void setLkNummer(final String lkNummer) {
+    public void setLkNummer(final String lkNummer)
+    {
         this.lkNummer = lkNummer;
     }
 
-    public int getLkForm() {
+    public int getLkForm()
+    {
         return lkForm;
     }
 
-    public void setLkForm(final int lkForm) {
+    public void setLkForm(final int lkForm)
+    {
         this.lkForm = lkForm;
     }
 
-    public String getLkFormText() {
+    public String getLkFormText()
+    {
         return lkFormText;
     }
 
-    public void setLkFormText(final String lkFormText) {
+    public void setLkFormText(final String lkFormText)
+    {
         this.lkFormText = lkFormText;
     }
 
-    public String getDozentUserName() {
+    public String getDozentUserName()
+    {
         return dozentUserName;
     }
 
-    public String getPruefungsmodeText() {
+    public String getPruefungsmodeText()
+    {
         return pruefungsmodeText;
     }
 
-    public void setPruefungsmodeText(final String pruefungsmodeText) {
+    public void setPruefungsmodeText(final String pruefungsmodeText)
+    {
         this.pruefungsmodeText = pruefungsmodeText;
     }
 
-    public String getFachrichtung() {
+    public String getFachrichtung()
+    {
         return fachrichtung;
     }
 
-    public void setFachrichtung(final String fachrichtung) {
+    public void setFachrichtung(final String fachrichtung)
+    {
         this.fachrichtung = fachrichtung;
     }
 
-    public String getStudentennummer() {
+    public String getStudentennummer()
+    {
         return studentennummer;
     }
 
-    public void setStudentennummer(final String studentennummer) {
+    public void setStudentennummer(final String studentennummer)
+    {
         this.studentennummer = studentennummer;
     }
 
-    public String getVorname() {
+    public String getVorname()
+    {
         return vorname;
     }
 
-    public void setVorname(final String vorname) {
+    public void setVorname(final String vorname)
+    {
         this.vorname = vorname;
     }
 
-    public boolean isRepetent() {
+    public boolean isRepetent()
+    {
         return repetent;
     }
 
-    public void setRepetent(final boolean repetent) {
+    public void setRepetent(final boolean repetent)
+    {
         this.repetent = repetent;
     }
 
-    public String getLkEinheitTitel() {
+    public String getLkEinheitTitel()
+    {
         return lkEinheitTitel;
     }
 
-    public void setLkEinheitTitel(final String lkEinheitTitel) {
+    public void setLkEinheitTitel(final String lkEinheitTitel)
+    {
         this.lkEinheitTitel = lkEinheitTitel;
     }
 
-    public String getLkEinheitTyp() {
+    public String getLkEinheitTyp()
+    {
         return lkEinheitTyp;
     }
 
-    public void setLkEinheitTyp(final String lkEinheitTyp) {
+    public void setLkEinheitTyp(final String lkEinheitTyp)
+    {
         this.lkEinheitTyp = lkEinheitTyp;
     }
 
-    public String getPruefungsraum() {
+    public String getPruefungsraum()
+    {
         return pruefungsraum;
     }
 
-    public void setPruefungsraum(final String pruefungsraum) {
+    public void setPruefungsraum(final String pruefungsraum)
+    {
         this.pruefungsraum = pruefungsraum;
     }
 
-    public String getLkEinheitNummerzusatz() {
+    public String getLkEinheitNummerzusatz()
+    {
         return lkEinheitNummerzusatz;
     }
 
-    public void setLkEinheitNummerzusatz(final String lkEinheitNummerzusatz) {
+    public void setLkEinheitNummerzusatz(final String lkEinheitNummerzusatz)
+    {
         this.lkEinheitNummerzusatz = lkEinheitNummerzusatz;
     }
 
-    public String getNachname() {
+    public String getNachname()
+    {
         return nachname;
     }
 
-    public void setNachname(final String nachname) {
+    public void setNachname(final String nachname)
+    {
         this.nachname = nachname;
     }
 
-    public String getStudiengang() {
+    public String getStudiengang()
+    {
         return studiengang;
     }
 
-    public void setStudiengang(final String studiengang) {
+    public void setStudiengang(final String studiengang)
+    {
         this.studiengang = studiengang;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(final String email) {
+    public void setEmail(final String email)
+    {
         this.email = email;
     }
 
-    public String getSeskez() {
+    public String getSeskez()
+    {
         return seskez;
     }
 
-    public void setSeskez(final String seskez) {
+    public void setSeskez(final String seskez)
+    {
         this.seskez = seskez;
     }
 
-    public String getLkEinheitTypText() {
+    public String getLkEinheitTypText()
+    {
         return lkEinheitTypText;
     }
 
-    public void setLkEinheitTypText(final String lkEinheitTypText) {
+    public void setLkEinheitTypText(final String lkEinheitTypText)
+    {
         this.lkEinheitTypText = lkEinheitTypText;
     }
 
-    public Calendar getPruefungsdatum() {
+    public Calendar getPruefungsdatum()
+    {
         return pruefungsdatum;
     }
 
-    public void setPruefungsdatum(final Calendar pruefungsdatum) {
+    public void setPruefungsdatum(final Calendar pruefungsdatum)
+    {
         this.pruefungsdatum = pruefungsdatum;
     }
 
-    public Calendar getPruefungsdatumVon() {
+    public Calendar getPruefungsdatumVon()
+    {
         return pruefungsdatumVon;
     }
 
-    public void setPruefungsdatumVon(final Calendar pruefungsdatumVon) {
+    public void setPruefungsdatumVon(final Calendar pruefungsdatumVon)
+    {
         this.pruefungsdatumVon = pruefungsdatumVon;
     }
 
-    public Calendar getPruefungsdatumBis() {
+    public Calendar getPruefungsdatumBis()
+    {
         return pruefungsdatumBis;
     }
 
-    public void setPruefungsdatumBis(final Calendar pruefungsdatumBis) {
+    public void setPruefungsdatumBis(final Calendar pruefungsdatumBis)
+    {
         this.pruefungsdatumBis = pruefungsdatumBis;
     }
 
-    public void setDozentUserName(final String dozentUserName) {
+    public void setDozentUserName(final String dozentUserName)
+    {
         this.dozentUserName = dozentUserName;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(final Long id) {
+    public void setId(final Long id)
+    {
         this.id = id;
     }
 }

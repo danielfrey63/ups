@@ -29,15 +29,10 @@ import org.apache.log4j.Logger;
  */
 public class Loader
 {
-
     /** Set this system property to <code>true</code> if the model should not be saved really, but printed to the log. */
     public static final String ENVIRONMENT_SIMULATESAVE = "ch.jfactory.simulatesave";
 
     private static final Logger LOG = Logger.getLogger(Loader.class);
-
-    private static final boolean DEBUG = LOG.isDebugEnabled();
-
-    private static final boolean INFO = LOG.isInfoEnabled();
 
     /**
      * Loads the model from the user home by adding a dot, the relative path and the resource to it. If it doesn't exist
@@ -97,16 +92,8 @@ public class Loader
                 in = Loader.class.getResourceAsStream(modelResource);
             }
             final Reader reader = new InputStreamReader(in);
-            final long start = System.currentTimeMillis();
             final Object object = converter.fromXML(reader);
             list = (T) object;
-            float diff = 0;
-            if (DEBUG)
-            {
-                final long end = System.currentTimeMillis();
-                diff = (float) (end - start) / 1000;
-                LOG.debug("loading of " + Loader.class.getResource(modelResource) + " in " + diff + " seconds");
-            }
         }
         catch (Exception e)
         {
@@ -138,10 +125,7 @@ public class Loader
         {
             LOG.warn("save is in simulation mode");
         }
-        if (INFO)
-        {
-            LOG.info("saved to " + file);
-        }
+        LOG.info("saved to " + file);
     }
 
     /**

@@ -121,7 +121,7 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns the abortPriority.
+     * Returns the abortLevel.
      *
      * @return Level
      */
@@ -131,9 +131,9 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Sets the abortPriority.
+     * Sets the abortLevel.
      *
-     * @param ap The abortPriority to set
+     * @param ap The abortLevel to set
      */
     public void setAbortLevel(final String ap)
     {
@@ -147,7 +147,7 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns the logPriority.
+     * Returns the logLevel.
      *
      * @return Level
      */
@@ -157,7 +157,7 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Returns the messagePriority.
+     * Returns the messageLevel.
      *
      * @return Level
      */
@@ -167,9 +167,9 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Sets the logPriority.
+     * Sets the logLevel.
      *
-     * @param lp The logPriority to set
+     * @param lp The logLevel to set
      */
     public void setLogLevel(final String lp)
     {
@@ -183,9 +183,9 @@ public class MemoryAppender extends AppenderSkeleton
     }
 
     /**
-     * Sets the messagePriority.
+     * Sets the messageLevel.
      *
-     * @param mp The messagePriority to set
+     * @param mp The messageLevel to set
      */
     public void setMessageLevel(final String mp)
     {

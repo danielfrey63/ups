@@ -32,7 +32,7 @@
         <modified>2006-11-22 14:25:00.0 CET</modified>
     </session>
     <session>
-        <constraintsUid>C2C9624E-F35B-1C2C-62A7-A5F266ECFF8F</constraintsUid>
+        <constraintsUid>C1C9624E-F35B-1C2C-62A7-A5F266ECFF8F</constraintsUid>
         <description>Mündliche Prüfung Matthias Baltisberger Herbst 2007</description>
         <seskz>2007H</seskz>
         <due>2007-07-31 00:00:00.0 CEST</due>
@@ -61,55 +61,67 @@
         <modified>2008-01-03 17:22:55.203 CET</modified>
         <fixed>true</fixed>
     </session>
+    <session>
+      <constraintsUid>0041045C-DD2B-3F1E-8D7B-E691D3A8D07F</constraintsUid>
+      <description>Mündliche Prüfung Matthias Baltisberger Sommer 2009</description>
+      <seskz>2009H</seskz>
+      <due>2009-07-11 00:00:00.0 CEST</due>
+      <name>Prüfung Sommer 2009</name>
+      <uid>B34CDE03-6975-BDBC-A883-C7A05F2FFE3B</uid>
+      <modified>2009-03-11 19:04:46.304 CET</modified>
+      <fixed>true</fixed>
+    </session>
 
-    <!--<session id="2">-->
-    <!--<name>Frühling 2006</name>-->
-    <!--<description>Mündliche Prüfung Matthias Baltisberger Frühling 2005</description>-->
-    <!--<due>2006-03-06 23:59:59 CEST</due>-->
-    <!--<seskz>2006F</seskz>-->
-    <!--<uid>B2B398A9-A985-0EF9-5B26-4AC7C21A1418</uid>-->
-    <!--<constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>-->
-    <!--<modified>2006-07-26 08:46:01.491 CEST</modified>-->
-    <!--<fixed>false</fixed>-->
-    <!--</session>-->
-    <!--<session id="2">-->
-    <!--<name>Herbst 2005</name>-->
-    <!--<description>Mündliche Prüfung Matthias Baltisberger Herbst 2005</description>-->
-    <!--<due>2005-09-30 23:59:59 CEST</due>-->
-    <!--<seskz>2005H</seskz>-->
-    <!--<uid>7BCF0FBA-34EF-5700-C663-28A6B9F47F15</uid>-->
-    <!--<constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>-->
-    <!--<modified>2006-07-26 08:46:01.491 CEST</modified>-->
-    <!--<fixed>false</fixed>-->
-    <!--</session>-->
-    <!--<session id="2">-->
-    <!--<name>Frühling 2005</name>-->
-    <!--<description>Mündliche Prüfung Matthias Baltisberger Frühling 2005</description>-->
-    <!--<due>2005-03-06 23:59:59 CEST</due>-->
-    <!--<seskz>2005F</seskz>-->
-    <!--<uid>A4546632-1E35-3049-2872-FAA0D6EF5627</uid>-->
-    <!--<constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>-->
-    <!--<modified>2006-07-26 08:46:01.491 CEST</modified>-->
-    <!--<fixed>false</fixed>-->
-    <!--</session>-->
-    <!--<session id="2">-->
-    <!--<name>Herbst 2004</name>-->
-    <!--<description>Mündliche Prüfung Matthias Baltisberger Herbst 2004</description>-->
-    <!--<due>2004-09-30 23:59:59 CEST</due>-->
-    <!--<seskz>2004H</seskz>-->
-    <!--<uid>78A96609-1278-639A-F2F7-83112F0903F8</uid>-->
-    <!--<constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>-->
-    <!--<modified>2006-07-26 08:46:01.491 CEST</modified>-->
-    <!--<fixed>false</fixed>-->
-    <!--</session>-->
-    <!--<session id="2">-->
-    <!--<name>Frühling 2004</name>-->
-    <!--<description>Mündliche Prüfung Matthias Baltisberger Frühling 2004</description>-->
-    <!--<due>2004-03-06 23:59:59 CEST</due>-->
-    <!--<seskz>2004F</seskz>-->
-    <!--<uid>5E7DE274-3245-73AD-E766-2784E7017826</uid>-->
-    <!--<constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>-->
-    <!--<modified>2006-07-26 08:46:01.491 CEST</modified>-->
-    <!--<fixed>false</fixed>-->
-    <!--</session>-->
+    <!--
+    <session>
+        <name>Frühling 2006</name>
+        <description>Mündliche Prüfung Matthias Baltisberger Frühling 2005</description>
+        <due>2006-03-06 23:59:59 CEST</due>
+        <seskz>2006F</seskz>
+        <uid>B2B398A9-A985-0EF9-5B26-4AC7C21A1418</uid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+        <modified>2006-07-26 08:46:01.491 CEST</modified>
+        <fixed>false</fixed>
+    </session>
+    <session>
+        <name>Herbst 2005</name>
+        <description>Mündliche Prüfung Matthias Baltisberger Herbst 2005</description>
+        <due>2005-09-30 23:59:59 CEST</due>
+        <seskz>2005H</seskz>
+        <uid>7BCF0FBA-34EF-5700-C663-28A6B9F47F15</uid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+        <modified>2006-07-26 08:46:01.491 CEST</modified>
+        <fixed>false</fixed>
+    </session>
+    <session>
+        <name>Frühling 2005</name>
+        <description>Mündliche Prüfung Matthias Baltisberger Frühling 2005</description>
+        <due>2005-03-06 23:59:59 CEST</due>
+        <seskz>2005F</seskz>
+        <uid>A4546632-1E35-3049-2872-FAA0D6EF5627</uid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+        <modified>2006-07-26 08:46:01.491 CEST</modified>
+        <fixed>false</fixed>
+    </session>
+    <session>
+        <name>Herbst 2004</name>
+        <description>Mündliche Prüfung Matthias Baltisberger Herbst 2004</description>
+        <due>2004-09-30 23:59:59 CEST</due>
+        <seskz>2004H</seskz>
+        <uid>78A96609-1278-639A-F2F7-83112F0903F8</uid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+        <modified>2006-07-26 08:46:01.491 CEST</modified>
+        <fixed>false</fixed>
+    </session>
+    <session>
+        <name>Frühling 2004</name>
+        <description>Mündliche Prüfung Matthias Baltisberger Frühling 2004</description>
+        <due>2004-03-06 23:59:59 CEST</due>
+        <seskz>2004F</seskz>
+        <uid>5E7DE274-3245-73AD-E766-2784E7017826</uid>
+        <constraintsUid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</constraintsUid>
+        <modified>2006-07-26 08:46:01.491 CEST</modified>
+        <fixed>false</fixed>
+    </session>
+    -->
 </sessions>

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
 /**
  * This model is provided under the assumption, that a view builds its content based on cards. It provides some common
@@ -50,6 +51,8 @@ import java.util.Map;
  */
 public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 {
+    /** This class logger. */
+    private static final Logger LOG = Logger.getLogger(AbstractMainModel.class);
 
     public static final String PROPERTYNAME_CURRENTCARD = "currentCard";
 
@@ -225,6 +228,7 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
                 }
             }
         }
+        LOG.warn("model for " + guid + " not found");
         return null;
     }
 

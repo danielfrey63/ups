@@ -11,6 +11,9 @@
  */
 package ch.xmatrix.ups.controller;
 
+import ch.jfactory.model.IdAware;
+import ch.jfactory.model.SimpleModelList;
+import ch.xmatrix.ups.model.SessionModel;
 import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -93,6 +96,19 @@ public class Loader
             }
             final Reader reader = new InputStreamReader(in);
             final Object object = converter.fromXML(reader);
+            if (object instanceof SimpleModelList)
+            {
+                final SimpleModelList sml = (SimpleModelList) object;
+                for (final Object o : sml)
+                {
+                    final IdAware ia = (IdAware) o;
+                    System.out.println("model " + modelResource + ": " + ia.getUid());
+                    if (ia instanceof SessionModel)
+                    {
+                        System.out.println("    constraints: " + ((SessionModel)ia).getConstraintsUid());
+                    }
+                }
+            }
             list = (T) object;
         }
         catch (Exception e)

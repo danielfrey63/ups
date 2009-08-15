@@ -168,9 +168,8 @@ public class Constraints extends AbstractTaxonBased
     public ArrayList<String> getObligateTaxa()
     {
         final ArrayList<String> result = new ArrayList<String>();
-        for (int i = 0; i < constraints.size(); i++)
+        for (final Constraint constraint : constraints)
         {
-            final Constraint constraint = constraints.get(i);
             final List<String> taxa = constraint.getTaxa();
             if (taxa.size() == 1)
             {

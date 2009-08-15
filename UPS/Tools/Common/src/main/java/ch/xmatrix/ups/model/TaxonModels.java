@@ -78,9 +78,8 @@ public class TaxonModels
             INFO_MODEL.setNote(new SimpleNote("Lade Taxonbäume", note.getPercentage() + 10, note.getColor()));
             final long start = System.currentTimeMillis();
             TREES = Loader.loadModel(RESOURCE_MODEL, "", getConverter());
-            float diff = 0;
             final long end = System.currentTimeMillis();
-            diff = (float) (end - start) / 1000;
+            final float diff = (float) (end - start) / 1000;
             INFO_MODEL.setNote(new SimpleNote("Lade Taxonbäume in " + diff + "s"));
         }
     }

@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix</groupId>
-    <artifactId>ch.xmatrix.build</artifactId>
+    <groupId>ch.xmatrix.common</groupId>
+    <artifactId>ch.xmatrix.common.build</artifactId>
     <packaging>pom</packaging>
     <name>xmatrix application components</name>
     <version>1.0</version>
@@ -67,6 +67,7 @@
             </plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<!--
 				<executions>
 					<execution>
 					<id>attach-javadocs</id>
@@ -75,9 +76,11 @@
 					</goals>
 					</execution>
 				</executions>
+				-->
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
+				<!--
 				<executions>
 					<execution>
 					<id>attach-sources</id>
@@ -86,6 +89,7 @@
 					</goals>
 					</execution>
 				</executions>
+				-->
 			</plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

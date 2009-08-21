@@ -101,21 +101,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-                <configuration>
-                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-    <distributionManagement>
-        <site>
-            <id>default</id>
-            <name>Default Site</name>
-            <url>file:///var/www/html/ups/site/ulc/</url>
-        </site>
-    </distributionManagement>
 </project>

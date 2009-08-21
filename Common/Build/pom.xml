@@ -290,6 +290,7 @@
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addClasspath>true</addClasspath>
                         </manifest>
                         <manifestEntries>
                             <Main-Class>${main-class}</Main-Class>
@@ -363,7 +364,6 @@
                         <keypass>upsups</keypass>
                         <storepass>upsups</storepass>
                         <alias>ups</alias>
-                        <verify>true</verify>
                     </sign>
                     <outputJarVersions>false</outputJarVersions>
                     <verbose>false</verbose>

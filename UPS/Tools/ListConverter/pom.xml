@@ -19,6 +19,7 @@
     </description>
     <properties>
         <main-class>ch.xmatrix.ups.hcd.Converter</main-class>
+        <codebase>http://geobot1.ethz.ch/ups/webstart/ulc</codebase>
     </properties>
     <dependencies>
         <dependency>

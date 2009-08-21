@@ -1,4 +1,4 @@
-<jnlp spec="$jnlpspec" codebase="http://geobot1.ethz.ch/ups/webstart/ulc" href="$outputFile">
+<jnlp spec="$jnlpspec" codebase="$codebase" href="$outputFile">
     <information>
     <title>$project.Name</title>
     <vendor>$project.Organization.Name</vendor>

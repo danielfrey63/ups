@@ -1,4 +1,6 @@
-<jnlp spec="$jnlpspec" codebase="$codebase" href="$outputFile">
+<jnlp spec="$jnlpspec"
+    codebase="$codebase"
+    href="$outputFile">
     <information>
     <title>$project.Name</title>
     <vendor>$project.Organization.Name</vendor>

@@ -357,9 +357,13 @@
                 <configuration>
                     <jnlp>
                         <mainClass>${main-class}</mainClass>
+                        <outputFile>${artifactId}.jnlp</outputFile>
+                        <!-- A bug in the plugin makes it necessary to indicate the resource path non-default -->
+                        <inputTemplateResourcePath>../../../Common/Build</inputTemplateResourcePath>
+                        <inputTemplate>src/main/jnlp/template.vm</inputTemplate>
                     </jnlp>
                     <sign>
-                        <!-- path is relative to the target/jnlp directory -->
+                        <!-- Note: Path are relative to the target/jnlp directory -->
                         <keystore>../../${project.parent.relativePath}/keystore/keystore.jks</keystore>
                         <keypass>upsups</keypass>
                         <storepass>upsups</storepass>

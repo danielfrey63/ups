@@ -1,0 +1,493 @@
+<HTML>
+<HEAD>
+    <TITLE>Java Web Start and Code Signing</TITLE>
+    <META name="keywords" content="Java Web Start, JNLP, sloppy, browser, sign, signing, signature, free, certificate">
+    <META name="description" content="My experience using Java Web Start and digitially signing code.">
+    <LINK TITLE="House Style" REL=STYLESHEET HREF="../../layout.css" TYPE="text/css">
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" onLoad="if (document.searchForm.query) document.searchForm.query.focus()">
+
+
+<TABLE WIDTH="100%" cellspacing="0" cellpadding="0">
+
+    <TR><!-- TOP BAR WITH SEARCH -->
+        <TD CLASS="navbar"><a href="/index.html">dallaway.com</a> - <a href="../index.html">Writing</a> - Web Start and
+            Code Signing
+        </TD>
+        <TD class="navbar" VALIGN="middle" ALIGN="right">
+            <form action="/spindle.jsp" name="searchForm"><input type="text" name="query" size="15"/><input align="top"
+                                                                                                            type="submit"
+                                                                                                            value="Find"
+                                                                                                            border="0"/>
+            </form>
+        </TD>
+    </TR>
+</TABLE>
+
+
+<h1>Java Web Start and Code Signing</h1>
+
+<P STYLE="margin-bottom: 0cm">
+    <A HREF="/contact">Richard Dallaway</A></P>
+
+<P STYLE="margin-bottom: 0cm">May 2002</P>
+
+<P STYLE="margin-bottom: 0cm">I had what I thought were two
+    separate problems: how to provide an easy way to install a Java
+    application I'd written; and how to start a web browser from the
+    application regardless of what operating system the application was
+    running on. Both problems were solved by using <A HREF="http://java.sun.com/products/javawebstart/">Java
+        Web Start</A>, but to get that working I also had to dip into the
+    world of code signing with digital certificates. These are my notes
+    on the experience.</P>
+
+
+<p>Changes:</p>
+<ul>
+    <li> 2005-02-21: Added example of createing a request; added note on renewing certificates.
+    <li> 2004-08-04: Added note from Barry Britnell on fixing Unsupported encoding exceptions.
+    <li> 2004-07-26: CAcert.org pointer from Paul D Reiners and a note from Jeff (Kreska?) on third party signed jars.
+    <li> 2003-04-11: Typo fix, spotted by Gábor Lipták.
+    <li> 2002-12-22: Added notes on Nicolas Carranza's Thawte fixing code.
+    <li> 2002-11-07: Updated the instructions to make them a little clearer.</li>
+    <li> 2002-10-28: A number of people had reported problems (Java exceptions) importing the Thawte certificate
+        using <code>keytool -import</code>. It seems there's been a change to the format of the certificate and you
+        now need to hand edit the file before you import it. See my example <a href="before.txt">before</a> and
+        <a href="after.txt">after</a> examples to see what you have to do. I've asked
+        Thawte to look into this.
+    </li>
+    <li> 2002-08-21: Svante Kleist reported changes on the Thawte site. Links and instructions updated.</li>
+</ul>
+
+
+<P STYLE="margin-bottom: 0cm"><B>Sloppy</B></P>
+
+
+<P STYLE="margin-bottom: 0cm"><A HREF="http://www.dallaway.com/sloppy/">Sloppy</A>
+    is an application that can be used to slow down your internet
+    connection. Often a web site is developed on a fast local network.
+    To see how it would look to a 28.8k or 56k modem user, you could
+    install the appropriate modem, get a dial-up account, configure your
+    machine to use the dial-up... all this generally involves much
+    cursing. And if you want to see what conditions are like under a
+    28.8k modem<I> and</I><SPAN STYLE="font-style: normal"> and 56k
+modem, repeat the above.</SPAN><I> </I>
+</P>
+
+<P STYLE="margin-bottom: 0cm">Or you could use Sloppy. Sloppy is a
+    &ldquo;slow proxy&rdquo;. It pretends to be the web site you're
+    testing, and artificially slows down the flow of web pages and
+    graphics to your browser. It's not perfect, but it's easier than
+    fiddling around with modem cables.</P>
+
+<P STYLE="margin-bottom: 0cm">When I first wrote Sloppy, it ran as a
+    server application. You had to have Java installed, get yourself to
+    a shell or command prompt, run the right magic command, edit the
+    right configuration file, and also launch your web browser on just
+    the right address to see the results. From the feedback I received,
+    it seemed that Sloppy needed an easier way to be installed and a
+    graphical user interface.</P>
+
+<P STYLE="margin-bottom: 0cm"><B>Web start</B></P>
+
+<P STYLE="margin-bottom: 0cm">Putting a graphical front end on Sloppy
+    wasn't so hard, but I need a way to get Sloppy installed. I also
+    decided that because of the way Sloppy worked I wanted to be able to
+    start the user's web browser. At the same time, I wanted to keep all
+    of this platform-neutral: it should run on Macs, Linux, Sun kit,
+    Windows machines ... all without modification.</P>
+
+<P STYLE="margin-bottom: 0cm">Web Start has all the key ingredients.
+    You can think of web start as a browser plug-in. When you click on a
+    link to a <FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">.</FONT><FONT SIZE=2>jnlp</FONT></FONT>
+    file, the plug-in takes over, downloads the application, makes sure
+    you have the right version of the Java runtime (installs it if
+    necessary), performs a bunch of security checks, and then launches it
+    for you.
+</P>
+
+<P STYLE="margin-bottom: 0cm">Writing a Web Start application just
+    means writing a regular Java application and providing a .<FONT SIZE=2><FONT
+            FACE="Courier New, monospace">jnlp</FONT></FONT>
+    file. For Sloppy the file looks like this:</P>
+
+<blockquote>
+<pre class="example-code">
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;jnlp spec=&quot;1.0+&quot; codebase=&quot;http://www.dallaway.com/sloppy&quot; href=&quot;sloppy.jnlp&quot;&gt;
+
+  &lt;information&gt;
+     &lt;title&gt;Sloppy&lt;/title&gt;
+     &lt;vendor&gt;Richard Dallaway&lt;/vendor&gt;
+     &lt;homepage href=&quot;index.html&quot; /&gt;
+     &lt;description&gt;Sloppy allows you to simulate different dial-up speeds.&lt;/description&gt;
+     &lt;offline-allowed /&gt;
+   &lt;/information&gt;
+
+  &lt;resources&gt;
+     &lt;j2se version=&quot;1.3+&quot;/&gt;
+     &lt;jar href=&quot;sloppy.jar&quot; main=&quot;true&quot; /&gt;
+   &lt;/resources&gt;
+
+  &lt;application-desc main-class=&quot;com.dallaway.sloppy.Sloppy&quot;/&gt;
+
+  &lt;security&gt;
+     &lt;all-permissions/&gt;
+  &lt;/security&gt;
+
+&lt;/jnlp&gt;
+
+</pre>
+</blockquote>
+
+<P STYLE="margin-bottom: 0cm">The file states where to find Sloppy
+    (the codebase), the names of the Jar files to download (<FONT FACE="Courier New, monospace">sloppy.jar</FONT>),
+    the version of the Java runtime required (1.3 or better), gave some
+    descriptions about the application, and said which <FONT FACE="Courier New, monospace">main()</FONT>
+    method to run to start Sloppy.
+</P>
+
+<P STYLE="margin-bottom: 0cm">So, with Web Start I had the way to
+    install the application on a user's machine, a way to keep it up to
+    date, and also a way to launch the user's web browser (that's one of
+    the &ldquo;services&rdquo; web start gives a developer). The end
+    user gets a relatively hassle-free way of running Java applications
+    and some faith that the security is going to be sound.</P>
+
+<P STYLE="margin-bottom: 0cm"><B>Certificates</B></P>
+
+<P STYLE="margin-bottom: 0cm">The only tricky part to all of this was
+    the security. By default, Web Start has a very strict security
+    policy. This is a good thing, because you know a Web Start
+    application won't go and trash your hard drive, start looking
+    through your email, or send messages over the net to some ad company.
+
+</P>
+
+<P STYLE="margin-bottom: 0cm">The nature of Sloppy is such that it
+    needs to be able to talk to other web sites. That's what it does: it
+    takes your requests, sends it to a web site, and then slows down the
+    response. For this to work under Web Start, I needed to give Sloppy
+    some extra security permissions. In fact, the current version of Web
+    Start means that I have to give Sloppy <I>unrestricted</I> access to
+    your computer. This is a bit over-the-top, but it's all or nothing
+    right now. In the future the JNLP specification might allow more
+    fine-grained permissions.</P>
+
+<P STYLE="margin-bottom: 0cm">To get this unrestricted permission I
+    have to &ldquo;sign&rdquo; the application. This proves that it's me
+    that sent the code, and that no-one has tampered with it. If you
+    trust me, you can run the code, safe in the knowledge that I'm not
+    interested in the contents of your hard drive or your email.
+</P>
+
+<P STYLE="margin-bottom: 0cm">To be able to digitally sign the code
+    (the JAR files), I needed a certificate. To get a certificate, I
+    needed to hand over money to a certificate authority so they could
+    run some background checks on me to prove that I am who I say I am.
+    Web Start comes with a list of certificate authorities it knows
+    about. One of them, Verisign, would like US$200 to US$400 from me
+    each year for a certificate. I'm not sure I'm willing to pay that
+    for software I'm giving away.
+</P>
+
+<P STYLE="margin-bottom: 0cm">To see why this is important, take a
+    look at the screen-shot of how Sloppy starts if I use a fake
+    certificate (figure 1).</P>
+
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><IMG SRC="index_html_14776aed.png" NAME="Figure1" ALIGN=CENTER WIDTH=466
+                                                HEIGHT=319 BORDER=0><BR CLEAR=LEFT><I>Figure
+    1: Sloppy starting with a developer certificate.</I></P>
+
+
+<P STYLE="margin-bottom: 0cm"> Notice the worrying phrases such as
+    &ldquo;it is highly recommended not to install and run the code&rdquo;?
+    The point of this exercises was to make Sloppy more available, not
+    to scare everyone off.</P>
+
+<P STYLE="margin-bottom: 0cm">I took a good look at the list of
+    certificate authorities known to Web Start and one stuck out: Thawte
+    Freemail. In particular, the word &ldquo;free&rdquo;. I chased this
+    down and it is indeed a free (no money) way to get a certificate for
+    code signing.</P>
+
+<P STYLE="margin-bottom: 0cm; page-break-before: auto; page-break-after: avoid">
+    The steps are simple enough:<BR><BR>
+</P>
+<OL>
+    <LI><P STYLE="margin-bottom: 0cm"><A HREF="http://www.thawte.com/html/COMMUNITY/index.html">Sign
+        up</A> for a "personal email certificate". There are quite a few screens to fill in, but follow
+        the process through up until the point where you're
+        asked to select the X.509 email certificate you want. At that point
+        scroll down to &ldquo;Developers of New Security Applications ONLY&rdquo;, follow the link
+        and select "Paste-in CSR Certificate Enrollment". There's quite a bit of clicking from this
+        page to get to the page with a text box that allows you to enter your public key. When you get
+        to the "public key" page you need to generate a key with <FONT SIZE=2 STYLE="font-size: 10pt"><FONT
+                FACE="Courier New, monospace">keytool</FONT></FONT>.<BR>
+    </P>
+    <LI><P STYLE="margin-bottom: 0cm">Run the Java <FONT SIZE=2 STYLE="font-size: 10pt"><FONT
+            FACE="Courier New, monospace">keytool</FONT></FONT>
+        utility.<BR><BR>First, generate a RSA key. You'll be asked all
+        sorts of information. The important thing to remember is that your
+        name must be set according to the common name you're told to use on
+        the Thawte web site. It'll be something like XVV6ePaMGHEPJN22. When the keytool prompts
+        you to enter your name, enter this value from Thawte. The
+        other important thing to remember is the password you use when you
+        create a key, because you'll need it to sign your application. <BR><BR>Obviously change your &ldquo;alias&rdquo;
+        name
+        and the location of the &ldquo;keystore&rdquo; file if you like, but
+        run something like this:<BR><BR><FONT SIZE=2 STYLE="font-size: 9pt"><FONT FACE="Courier New, monospace">keytool
+            -genkey -keyalg RSA -keystore keystore.ks -alias myalias</FONT></FONT><BR>
+    </P>
+
+        <p>
+            Here's an example run:
+        <blockquote>
+            <tt>
+	<pre>
+$ keytool -genkey -keyalg RSA -keystore keystore.ks -alias myalias
+Enter keystore password:  trustno1
+What is your first and last name?
+  [Unknown]:  XVV6ePaMGHEPJN22
+What is the name of your organizational unit?
+  [Unknown]:  sloppy
+What is the name of your organization?
+  [Unknown]:  dallaway.com
+What is the name of your City or Locality?
+  [Unknown]:  Brighton
+What is the name of your State or Province?
+  [Unknown]:  E. Sussex
+What is the two-letter country code for this unit?
+  [Unknown]:  GB
+Is CN=VsrM6zxs7edzfJ57, OU=sloppy, O=dallaway.com, L=Brighton, ST=E. Sussex, C=GB correct?
+  [no]:  yes
+
+Enter key password for &lt;myalias&gt;
+        (RETURN if same as keystore password):
+$
+	</pre>
+            </tt>
+        </blockquote>
+        </p>
+
+    <LI><P STYLE="margin-bottom: 0cm">Next, export the key to a text
+        file, which in this example is &ldquo;csr.txt&rdquo;:<BR><BR><FONT SIZE=2 STYLE="font-size: 9pt"><FONT
+                FACE="Courier New, monospace">keytool
+            -certreq -keystore keystore.ks -file csr.txt -alias myalias</FONT></FONT><BR>
+    </P>
+    <LI><P STYLE="margin-bottom: 0cm">Take the text of &ldquo;csr.txt&rdquo;
+        and paste it into the Thawte form and wait. That's your certificate
+        request. Mine took about 20 minutes to process, and I was notified
+        that it was ready by email.<BR>
+    </P>
+    <LI><P STYLE="margin-bottom: 0cm">When you download your
+        certificate, it's in two formats: Netscape and PKCS7. You want the
+        save the PKCS7 version in a file called &ldquo;my.cert&rdquo; (or
+        similar) and then run:<BR><BR><FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New, monospace">keytool
+            -import -file my.cert -alias myalias -trustcacerts -keystore
+            keystore.ks</FONT></FONT><BR><BR>
+
+
+        You should see the message: <code>Certificate reply was installed in keystore</code> <br/><br/>
+
+        However, Thawte have changed their certificate format, causing the above step to fail (e.g., with an error
+        message something
+        like <code>sun.security.pkcs.ParsingException: toDerInputStream rejects tag type -96</code>). I'm hoping
+        this is a temporary situation that Thawte will fix. In the meantime, if the above import command fails,
+        it could be because of Thawte's change to their file format. <a href="mailto:nicarran@prontomail.com">Nicolas
+            Carranza</a>
+        has kindly supplied <a href="ThawteCleaner.java">some Java source</a> for fixing the Thawte certificate format
+        problems.
+        I've packaged this as a <a href="thawtecleaner.jar">jar to download</a>. Run it like this:
+        <FONT SIZE=1 STYLE="font-size: 8pt"><FONT FACE="Courier New, monospace">java -jar thawtecleaner.jar
+            my.cert</FONT></FONT> and
+        it will create <FONT SIZE=1 STYLE="font-size: 8pt"><FONT
+                FACE="Courier New, monospace">my.cert.clean</FONT></FONT>, which you
+        can then use in the keytool -import command, above.
+
+        <BR><BR>
+        If you run into a <code>java.security.cert.CertificateException: Unsupported encoding</code> error during the
+        import, try the following: Add two carriage returns at the end of the downloaded certificate file; and
+        also change the Begin and End lines so that only BEGIN PKCS#7 and END PKCS#7 appears.
+
+    </P>
+
+
+</OL>
+
+
+<P STYLE="margin-bottom: 0cm">That's it. You have a certificate
+    that's <FONT SIZE=2 STYLE="font-size: 9pt"> good for a year, after
+        which it can be renewed (see below). </FONT>
+</P>
+
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2 STYLE="font-size: 9pt">To
+    sign the code with the certificate</FONT>, you can run an Ant task
+    such as:</P>
+
+<P STYLE="margin-left: 0.87cm; margin-bottom: 0cm"><FONT FACE="Courier New, monospace"><FONT SIZE=2
+                                                                                             STYLE="font-size: 9pt"><FONT
+        SIZE=2>
+</FONT>&lt;signjar keystore=&quot;keystore.ks&quot; </FONT></FONT>
+</P>
+
+<P STYLE="margin-left: 1cm; margin-bottom: 0cm"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">
+    jar=&quot;sloppy.jar&quot;
+</FONT></FONT>
+</P>
+
+<P STYLE="margin-left: 1cm; margin-bottom: 0cm"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">
+    alias=&quot;myalias&quot;
+</FONT></FONT>
+</P>
+
+<P STYLE="margin-left: 0.87cm; margin-bottom: 0cm"><FONT FACE="Courier New, monospace"><FONT SIZE=2
+                                                                                             STYLE="font-size: 9pt">
+    storepass=&quot;trustno1&quot;
+    /&gt;</FONT></FONT></P>
+
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2 STYLE="font-size: 9pt">When
+    I ran the Web Start with my newly signed application I get a much
+    more respectable prompt, as shown in figure 2:<BR></FONT><BR>
+</P>
+
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm">
+    <IMG SRC="index_html_m5513ac89.png" NAME="Graphic1" ALIGN=CENTER WIDTH=461 HEIGHT=313 BORDER=0>
+    <BR CLEAR=LEFT><I>Figure
+    2: Sloppy starting with a Thawte Freemail certificate.</I></P>
+
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+
+
+<P STYLE="margin-bottom: 0cm"><B>Renewal</B></P>
+
+<P STYLE="margin-bottom: 0cm">After one year you'll need to renew the certificate to avoid
+    presenting users with warnings about an expired certificate. The renew process means
+    re-running the steps needed to create a certificate. As your common name changes
+    with each renewal, there's no easy way to "renew" an existing certificate: you'll probably want to either
+    delete your keystore file before starting or run the commands with a different
+    alias name. </P>
+
+<P STYLE="margin-bottom: 0cm"><B>Web of Trust</B></P>
+
+<P STYLE="margin-bottom: 0cm">It may be possible to replace the
+    phrase &ldquo;Thawte Freemail Member&rdquo; in the certificate by
+    joining the <A HREF="http://www.thawte.com/html/COMMUNITY/wot/index.html">Thawte
+        Web of Trust</A>. This involves meeting individuals already OK-ed by
+    Thawte and demonstrating that you are who you say you are by
+    producing various forms of identification. I've not tried this yet.</P>
+
+<P STYLE="margin-bottom: 0cm">Another alternative to look forward
+    to is the supply of free certificates from <A HREF="http://www.cacert.org">CAcert.org</A>. I say
+    look forward to because at the time of writing the CAcert.org root certificate is not
+    installed by default in web start meaning that a certificate signed by CAcert won't
+    be recognized by web start. It's straight forward to add the certificate to web start, but
+    it might not be an option for you right now if you're interested in making things
+    as hassle-free as possible for your users. In time it might well be incorporated
+    into web start, and at that point it will be the solution to go for.</P>
+
+
+<P STYLE="margin-bottom: 0cm"><B>Summary</B></P>
+
+<P STYLE="margin-bottom: 0cm">Java Web Start is a useful way to
+    deploy Java applications. To gain the trust of end users it's
+    important to sign the code being downloaded, but it is possible to do
+    this at no cost using the Thawte Freemail service. In the future CAcert.org
+    will be the place to go for free certificates.</P>
+
+
+<br/> <br/>
+<hr/>
+
+<P STYLE="margin-bottom: 0cm"><B>A note on third party JAR files</B></P>
+
+<P STYLE="margin-bottom: 0cm">
+    Files referenced by your JNLP file need to all be signed using the same certificate. If you want to include files
+    signed in other ways, such as third-party JARs
+    (Java Mail, JAX-B, for example) then you need to use the extension tag in the JNLP. For example in the resource
+    section add:
+</P>
+
+<P STYLE="margin-left: 0.87cm; margin-bottom: 0cm"><FONT FACE="Courier New, monospace"><FONT SIZE=2
+                                                                                             STYLE="font-size: 9pt">
+    &lt;extension name="Jaxb" href="jaxb.jnlp"/&gt;
+</FONT></FONT>
+</P>
+
+<P STYLE="margin-bottom: 0cm">
+    Web start will request jaxb.jnlp from your site (in this case, the same location as your .jnlp file) and will
+    process it using the certificate found in the jar referenced by jaxb.jnlp. To learn more look for "Component
+    Extension" in
+    the JNLP specification.
+</P>
+<br/> <br/>
+<hr/>
+<P STYLE="margin-bottom: 0cm"><B>Resources</B></P>
+
+
+<table border="0">
+    <tr>
+        <td valign="top">
+            <OL>
+                <LI><P STYLE="margin-bottom: 0cm"><I>Java Web
+                    Start<BR></I><A HREF="http://java.sun.com/products/javawebstart/"><SPAN STYLE="font-style: normal">http</SPAN>://java.sun.com/products/javawebstart/</A><BR><BR>
+                </P>
+                <LI><P STYLE="margin-bottom: 0cm"><I>Sloppy
+                    Homepage.</I><SPAN STYLE="font-style: normal"><BR></SPAN><A HREF="http://www.dallaway.com/sloppy/">http://www.dallaway.com/sloppy/</A><BR><BR>
+                </P>
+                <LI><P STYLE="margin-bottom: 0cm"><I>Thawte's Digital Certificate
+                    Center<BR></I><A HREF="http://www.thawte.com/html/COMMUNITY/index.html"><SPAN
+                        STYLE="font-style: normal">http://www.thawte.com/html/COMMUNITY/index.html</SPAN></A><BR><BR>
+                </P>
+                <LI><P STYLE="margin-bottom: 0cm"><I>Thawte's Web of
+                    Trust</I><SPAN STYLE="font-style: normal"><BR></SPAN><A
+                        HREF="http://www.thawte.com/html/COMMUNITY/wot/index.html"><SPAN STYLE="font-style: normal">http://www.thawte.com/html/COMMUNITY/wot/index.html</SPAN></A>
+                </P>
+
+                <LI><P STYLE="margin-bottom: 0cm"><I>CAcert: Digital Certificates Become Free</I><SPAN
+                        STYLE="font-style: normal"><BR></SPAN><A HREF="http://www.onlamp.com/pub/wlg/5142"><SPAN
+                        STYLE="font-style: normal">http://www.onlamp.com/pub/wlg/5142</SPAN></A></P>
+
+                <LI><P STYLE="margin-bottom: 0cm"><I>JNLP Tag Reference</I><SPAN
+                        STYLE="font-style: normal"><BR></SPAN><A HREF="http://lopica.sourceforge.net/ref.html"><SPAN
+                        STYLE="font-style: normal">http://lopica.sourceforge.net/ref.html</SPAN></A></P>
+
+
+            </OL>
+
+        </td>
+        <td width="50px">&nbsp;</td>
+        <td valign="top" align="middle">
+            <script type="text/javascript"><!--
+            google_ad_client = "pub-7754260355934493";
+            google_ad_width = 336;
+            google_ad_height = 280;
+            google_ad_format = "336x280_as";
+            google_ad_channel = "0980590088";
+            google_color_border = "CCCCCC";
+            google_color_bg = "FFFFFF";
+            google_color_link = "000000";
+            google_color_url = "666666";
+            google_color_text = "333333";
+            //--></script>
+            <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </td>
+</table>
+
+
+<p>$Id: Java\040Web\040Start\040and\040Code\040Signing.htm,v 1.1 2006/04/21 11:02:52 daniel_frey Exp $</p>
+
+<p class="lastmod">
+    last modified Monday, 21-Feb-2005 08:59:23 GMT | <a href="/contact">Contact</a>
+</p>
+
+
+</BODY>
+</HTML>

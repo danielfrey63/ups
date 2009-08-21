@@ -8,7 +8,7 @@
     <name>xmatrix application components</name>
     <version>1.0</version>
     <description>xmatrix component library</description>
-    <url>http://www.xmatrix.ch</url>
+    <url>http://www.geobot1.ethz.ch</url>
     <inceptionYear>2009</inceptionYear>
     <organization>
         <name>Institute of Integrative Biologie ETH Zurich</name>
@@ -344,6 +344,10 @@
                     <!-- Updates do not work due to a "working copy locked" -->
                     <doUpdate>false</doUpdate>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo.webstart</groupId>
+                <artifactId>webstart-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

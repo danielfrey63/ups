@@ -46,14 +46,15 @@
                         <mainClass>ch.xmatrix.ups.hcd.Converter</mainClass>
                     </jnlp>
                     <sign>
-                        <keystore>${project.parent.relativePath}/keystore/keystore.jks</keystore>
-                        <keypass>nxd085e</keypass>
-                        <storepass>nxd085e</storepass>
-                        <alias>hcd</alias>
+                        <keystore>../../${project.parent.relativePath}/keystore/keystore.jks</keystore>
+                        <keypass>upsups</keypass>
+                        <storepass>upsups</storepass>
+                        <alias>ups</alias>
                         <verify>true</verify>
                     </sign>
-                    <outputJarVersions>true</outputJarVersions>
-                    <verbose>true</verbose>
+                    <outputJarVersions>false</outputJarVersions>
+                    <verbose>false</verbose>
+                    <unsign>true</unsign>
                 </configuration>
             </plugin>
         </plugins>

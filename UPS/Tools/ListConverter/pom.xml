@@ -63,53 +63,42 @@
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
-            <version>2.0-20090323</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-            <version>2.0-20090323</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.exams</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
-            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
             <artifactId>binding</artifactId>
-            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>xpp3</groupId>
             <artifactId>xpp3</artifactId>
-            <version>1.1.3.3</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.8</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
     <reporting>

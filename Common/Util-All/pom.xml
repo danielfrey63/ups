@@ -18,60 +18,54 @@
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
             <artifactId>ch.xmatrix.common.icon</artifactId>
-            <version>1.0-20060814</version>
-        </dependency>
-        <dependency>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.6</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>abbot</groupId>
             <artifactId>abbot</artifactId>
-            <version>0.13.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>ant</groupId>
+            <artifactId>ant</artifactId>
         </dependency>
         <dependency>
-            <groupId>mdateselector</groupId>
-            <artifactId>mdateselector</artifactId>
-            <version>0.347</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ostermiller</groupId>
-            <artifactId>utils</artifactId>
-            <version>1.07.00</version>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pietschy</groupId>
-            <artifactId>gui-commands</artifactId>
-            <version>1.1.43</version>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>javahelp</artifactId>
-            <version>2.0.5</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.3.1</version>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>binding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>forms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>looks</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>uif</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>uif-extras</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
@@ -81,63 +75,42 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.1</version>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>looks</artifactId>
-            <version>2.0.4</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>uif</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>forms</artifactId>
-            <version>1.0.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>binding</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>uif-extras</artifactId>
-            <version>1.6.0.a</version>
+            <groupId>mdateselector</groupId>
+            <artifactId>mdateselector</artifactId>
         </dependency>
         <dependency>
             <groupId>net.infonode</groupId>
             <artifactId>idw</artifactId>
-            <version>1.3.0</version>
         </dependency>
         <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
+            <groupId>org.ostermiller</groupId>
+            <artifactId>utils</artifactId>
         </dependency>
         <dependency>
-            <groupId>ch.ethz.ganymed</groupId>
-            <artifactId>ganymed-ssh2</artifactId>
-            <version>build209</version>
+            <groupId>org.pietschy</groupId>
+            <artifactId>gui-commands</artifactId>
         </dependency>
         <dependency>
             <groupId>uispec4j</groupId>
             <artifactId>uispec4j</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

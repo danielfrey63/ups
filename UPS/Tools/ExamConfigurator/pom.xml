@@ -19,157 +19,34 @@
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
             <artifactId>ch.xmatrix.common.icon</artifactId>
-            <version>1.0-20060814</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
-            <version>2.0-20090323</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.ups.tools</groupId>
-            <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-            <version>2.0-20090323</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
-            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.courses</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
-            <version>20090723</version>
         </dependency>
         <dependency>
-            <groupId>mdateselector</groupId>
-            <artifactId>mdateselector</artifactId>
-            <version>0.347</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.ethz.ganymed</groupId>
-            <artifactId>ganymed-ssh2</artifactId>
-            <version>build209</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jformdesigner</groupId>
-            <artifactId>jfd-loader</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>net.infonode</groupId>
-            <artifactId>idw</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>binding</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>forms</artifactId>
-            <version>1.0.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>looks</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>uif</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>uif-extras</artifactId>
-            <version>1.6.0.a</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>validation</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>uif-lite</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.famfamfam</groupId>
-            <artifactId>silk</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pietschy</groupId>
-            <artifactId>gui-commands</artifactId>
-            <version>1.1.43</version>
-        </dependency>
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>xpp3</groupId>
-            <artifactId>xpp3</artifactId>
-            <version>1.1.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>uispec4j</groupId>
-            <artifactId>uispec4j</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <groupId>ch.xmatrix.ups.tools</groupId>
+            <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>axis</groupId>
@@ -179,22 +56,110 @@
         <dependency>
             <groupId>axis</groupId>
             <artifactId>axis-jaxrpc</artifactId>
-            <version>1.3</version>
         </dependency>
         <dependency>
             <groupId>axis</groupId>
             <artifactId>axis-saaj</artifactId>
-            <version>1.3</version>
         </dependency>
         <dependency>
             <groupId>axis</groupId>
             <artifactId>axis-wsdl4j</artifactId>
-            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jformdesigner</groupId>
+            <artifactId>jfd-loader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.famfamfam</groupId>
+            <artifactId>silk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>binding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>forms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>looks</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>uif</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>uif-lite</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>uif-extras</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-discovery</groupId>
             <artifactId>commons-discovery</artifactId>
-            <version>0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mdateselector</groupId>
+            <artifactId>mdateselector</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.infonode</groupId>
+            <artifactId>idw</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.pietschy</groupId>
+            <artifactId>gui-commands</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uispec4j</groupId>
+            <artifactId>uispec4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3</artifactId>
         </dependency>
     </dependencies>
     <reporting>

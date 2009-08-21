@@ -269,7 +269,6 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <finalName>${groupId}.${artifactId}-${version}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -293,6 +292,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
+                            <Main-Class>${main-class}</Main-Class>
                             <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
                         </manifestEntries>
                     </archive>
@@ -313,7 +313,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <!--
                 <executions>
                     <execution>
                     <id>attach-sources</id>
@@ -322,7 +321,6 @@
                     </goals>
                     </execution>
                 </executions>
-                -->
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -350,9 +348,27 @@
                     <doUpdate>false</doUpdate>
                 </configuration>
             </plugin>
+            <!-- Run with mvn org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
+            <!-- Uses the ${main-class} property to indicate the jnlp main class -->
             <plugin>
                 <groupId>org.codehaus.mojo.webstart</groupId>
                 <artifactId>webstart-maven-plugin</artifactId>
+                <configuration>
+                    <jnlp>
+                        <mainClass>${main-class}</mainClass>
+                    </jnlp>
+                    <sign>
+                        <!-- path is relative to the target/jnlp directory -->
+                        <keystore>../../${project.parent.relativePath}/keystore/keystore.jks</keystore>
+                        <keypass>upsups</keypass>
+                        <storepass>upsups</storepass>
+                        <alias>ups</alias>
+                        <verify>true</verify>
+                    </sign>
+                    <outputJarVersions>false</outputJarVersions>
+                    <verbose>false</verbose>
+                    <unsign>true</unsign>
+                </configuration>
             </plugin>
         </plugins>
     </build>

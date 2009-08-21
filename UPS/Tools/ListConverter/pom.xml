@@ -17,48 +17,9 @@
         nächsten Start der HCD die Stofflisten zur Verfügung stehen. Insgesamt werden sieben Stofflisten erzeugt: je
         eine für Arten, Gattungen, Unterfamilien, Familien, Ordnungen, Ordnungs-Gruppen und Unterklassen.
     </description>
-    <organization>
-        <name>Geobotanisches Institut ETH</name>
-        <url>http://www.geobot.umnw.ethz.ch</url>
-    </organization>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Main-Class>ch.xmatrix.ups.hcd.Converter</Main-Class>
-                            <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo.webstart</groupId>
-                <artifactId>webstart-maven-plugin</artifactId>
-                <configuration>
-                    <jnlp>
-                        <mainClass>ch.xmatrix.ups.hcd.Converter</mainClass>
-                    </jnlp>
-                    <sign>
-                        <keystore>../../${project.parent.relativePath}/keystore/keystore.jks</keystore>
-                        <keypass>upsups</keypass>
-                        <storepass>upsups</storepass>
-                        <alias>ups</alias>
-                        <verify>true</verify>
-                    </sign>
-                    <outputJarVersions>false</outputJarVersions>
-                    <verbose>false</verbose>
-                    <unsign>true</unsign>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <properties>
+        <main-class>ch.xmatrix.ups.hcd.Converter</main-class>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>

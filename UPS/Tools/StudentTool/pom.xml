@@ -20,8 +20,8 @@
         <url>http://www.geobot.umnw.ethz.ch</url>
     </organization>
     <properties>
-        <main-class>ch.xmatrix.ups.hcd.Converter</main-class>
-        <codebase>http://geobot1.ethz.ch/ups/webstart/ulc</codebase>
+        <main-class>ch.xmatrix.ups.ust.Main</main-class>
+        <codebase>http://geobot1.ethz.ch/ups/webstart/ust</codebase>
     </properties>
     <dependencies>
         <dependency>

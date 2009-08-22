@@ -149,21 +149,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-                <configuration>
-                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>${basedir}/../UPS/conf/checkstyle.xml</configLocation>
-                    <headerLocation>${basedir}/../UPS/conf/checkstyle-header.txt</headerLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>

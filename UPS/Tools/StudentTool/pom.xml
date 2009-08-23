@@ -22,6 +22,7 @@
     <properties>
         <main-class>ch.xmatrix.ups.ust.Main</main-class>
         <codebase>http://geobot1.ethz.ch/ups/webstart/ust</codebase>
+        <default-site>scp://balti.ethz.ch/var/www/html/ups/site/ups</default-site>
     </properties>
     <dependencies>
         <dependency>

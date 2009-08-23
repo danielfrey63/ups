@@ -31,6 +31,13 @@
             <organization>xmatrix</organization>
         </developer>
     </developers>
+    <distributionManagement>
+        <site>
+            <id>default</id>
+            <name>Default Site</name>
+            <url>${default-site}</url>
+        </site>
+    </distributionManagement>
     <scm>
         <developerConnection>scm:svn:svn://admin:geoBot@geobot1.ethz.ch/svn/repos</developerConnection>
         <url>http://www.xmatrix.ch/</url>

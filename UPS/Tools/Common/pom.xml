@@ -82,29 +82,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-                <configuration>
-                    <issueLinkTemplate>%URL%/jira/ViewIssue.jspa?key=%ISSUE%</issueLinkTemplate>
-                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>${basedir}/../UPS/conf/checkstyle.xml</configLocation>
-                    <headerLocation>${basedir}/../UPS/conf/checkstyle-header.txt</headerLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-    <distributionManagement>
-        <site>
-            <id>default</id>
-            <name>Default Site</name>
-            <url>scp://balti.ethz.ch/var/www/html/ups/site/ups</url>
-        </site>
-    </distributionManagement>
 </project>

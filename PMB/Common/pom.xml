@@ -10,9 +10,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.xmatrix.ups.pmb</groupId>
   <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
-  <name>UPS Eingabe Prüfungsbilder</name>
+  <name>PMB Common Components</name>
   <version>2.0-20090503</version>
-  <description>Mit diesem Tool können Bilder für die Prüfung vorbereitet werden.</description>
+  <description>Common Components for PMB</description>
   <dependencies>
     <dependency>
       <groupId>ch.xmatrix.common</groupId>
@@ -51,20 +51,13 @@
       <artifactId>uif-lite</artifactId>
     </dependency>
     <dependency>
-      <groupId>jveez</groupId>
-      <artifactId>jveez</artifactId>
+      <groupId>com.smardec</groupId>
+      <artifactId>com.smardec.mousegestures</artifactId>
     </dependency>
     <dependency>
-      <groupId>jveez</groupId>
-      <artifactId>metadata-extractor</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jveez</groupId>
-      <artifactId>mousegestures</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jveez</groupId>
-      <artifactId>perst</artifactId>
+        <groupId>net.java.jveez</groupId>
+        <artifactId>net.java.jveez</artifactId>
+        <version>77</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -73,6 +66,10 @@
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.garret</groupId>
+      <artifactId>org.garret.perst</artifactId>
     </dependency>
   </dependencies>
 </project>

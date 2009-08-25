@@ -1,0 +1,45 @@
+/* ====================================================================
+ *  Copyright 2004-2005 www.xmatrix.ch
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  permissions and limitations under the License.
+ * ====================================================================
+ */
+package ch.xmatrix.ups.pmb.ui.controller;
+
+import ch.jfactory.application.view.status.StatusBar;
+import ch.jfactory.application.view.status.Message;
+import ch.jfactory.binding.Note;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+/**
+ * Dispatches all {@link Note}s with a type of {@link ch.jfactory.application.view.status.Message.Type#WARN} to the status bar warnings, all
+ * others to the text.
+ */
+public class StatusBarNoteHandler implements PropertyChangeListener {
+
+    private StatusBar statusBar;
+
+    public StatusBarNoteHandler(final StatusBar statusBar) {
+        this.statusBar = statusBar;
+    }
+
+    public void propertyChange(final PropertyChangeEvent evt) {
+        final Note note = (Note) evt.getNewValue();
+        if (note.getType() == Message.Type.INFO) {
+            statusBar.setText(note.getMessage());
+        } else {
+            statusBar.setWarning(note.getMessage());
+        }
+    }
+}

@@ -400,7 +400,7 @@
                         <mainClass>${main-class}</mainClass>
                         <outputFile>${artifactId}.jnlp</outputFile>
                         <!-- A bug in the plugin makes it necessary to indicate the resource path non-default -->
-                        <inputTemplateResourcePath>../../../Common/Build</inputTemplateResourcePath>
+                        <inputTemplateResourcePath>${project.parent.relativePath}</inputTemplateResourcePath>
                         <inputTemplate>src/main/jnlp/template.vm</inputTemplate>
                     </jnlp>
                     <sign>

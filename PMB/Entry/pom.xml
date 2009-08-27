@@ -17,6 +17,7 @@
         <main-class>ch.xmatrix.ups.pmb.input.Main</main-class>
         <codebase>http://geobot1.ethz.ch/ups/webstart/pmbe</codebase>
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/pmbe</default-site>
+        <max-heap-size>512m</max-heap-size>
     </properties>
   <dependencies>
     <dependency>

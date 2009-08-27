@@ -8,11 +8,11 @@
         <relativePath>../../Common/Build</relativePath>
     </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.xmatrix.ups.pmb.input</groupId>
+  <groupId>ch.xmatrix.ups.pmb</groupId>
   <artifactId>ch.xmatrix.ups.pmb.input</artifactId>
-  <name>PMB Eingabe</name>
+  <name>PMB Entry</name>
   <version>2.0-20090323</version>
-  <description>Mit diesem Tool können Bilder für die Prüfung vorbereitet werden.</description>
+  <description>Tool für die Vorbereitung von Bilder für die Prüfung.</description>
     <properties>
         <main-class>ch.xmatrix.ups.pmb.input.Main</main-class>
         <codebase>http://geobot1.ethz.ch/ups/webstart/pmbe</codebase>

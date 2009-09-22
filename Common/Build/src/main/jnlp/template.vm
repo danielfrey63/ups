@@ -1,4 +1,7 @@
-<jnlp spec="$jnlpspec"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Discriptor 1.5//EN" "http://java.sun.com/dtd/JNLP-1.5.dtd">
+<jnlp
+    spec="$jnlpspec"
     codebase="$codebase"
     href="$outputFile">
     <information>
@@ -16,7 +19,7 @@
     </security>
     #end
     <resources>
-    <j2se 
+    <j2se
         #if($max-heap-size)max-heap-size="$max-heap-size"
        #end version="$j2seVersion"/>
         $dependencies

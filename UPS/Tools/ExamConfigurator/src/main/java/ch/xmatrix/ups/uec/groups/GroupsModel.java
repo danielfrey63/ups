@@ -115,7 +115,16 @@ public class GroupsModel extends AbstractTaxonBased
 
     public ArrayList<GroupModel> getGroups()
     {
-        return groups;
+        final ArrayList<GroupModel> result;
+        if (groups == null)
+        {
+            result = new ArrayList<GroupModel>();
+        }
+        else
+        {
+            result = groups;
+        }
+        return result;
     }
 
     public GroupModel find(final String taxon)

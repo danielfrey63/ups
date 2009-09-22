@@ -94,7 +94,7 @@ public class UploadDialog extends Upload
 
     private static final String FILE_TAXA = "taxa.xml";
 
-    private static final String FILE_DATA = "data";
+    public static final String FILE_DATA = "data";
 
     private final ApplicationConfiguration configuration = Application.getConfiguration();
 

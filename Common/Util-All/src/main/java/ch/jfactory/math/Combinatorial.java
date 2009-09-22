@@ -26,9 +26,9 @@ public class Combinatorial
      * calculated.<p> <p/> Given an array of groups <code>{{a1 a2}{b1 b2 b3}}</code> the result will be <code> {{a1
      * b1}{a2 b1}{a1 b2} {a2 b2}{a1 b3}{a2 b3}}. </code> The order of the given groups will be maintained in the
      * resulting combinations.<p> <p/> The result is not randomized, so a logical order will be maintained. In order to
-     * randomize it, use i.e. {@link ch.jfactory.math.RandomArrayUtils#randomize(Object[]) ArrayUtils.randomize}.<p>
-     * <p/> Note: Cross products can reach huge sizes if explicitely enumerated, as done in this method. These huge
-     * number are not allways senseful and a subsample may be more appropriate. To get a randomized subsamples of cross
+     * randomize it, use i.e. {@link ch.jfactory.math.RandomUtils#randomize(Object[]) ArrayUtils.randomize}.<p> <p/>
+     * Note: Cross products can reach huge sizes if explicitely enumerated, as done in this method. These huge number
+     * are not allways senseful and a subsample may be more appropriate. To get a randomized subsamples of cross
      * products, see {@link #getCrossProduct(Object[][], int) getCrossProduct}.
      *
      * @param groups an array of groups of elements
@@ -92,7 +92,7 @@ public class Combinatorial
     public static int getCrossProductCount(final int[] sizes)
     {
         int result = 1;
-        for (int size : sizes)
+        for (final int size : sizes)
         {
             result *= size;
         }
@@ -200,26 +200,54 @@ public class Combinatorial
         return result;
     }
 
-    public static int getUnsortedCombinationsWithRepetitionsCount(final int n, final int k)
+    /**
+     * Calculates the number of combinations to take k elements out of a set of n elements. Repetitions are allowed and
+     * the order is not important.
+     *
+     * <pre>
+     * / n + k - 1 \   / n + k - 1 \
+     * |           | = |           |
+     * \     k     /   \   n - 1   /
+     * </pre>
+     *
+     * An efficient calculation can be achieved by the product formula:
+     *
+     * <pre>
+     * / a \     b     a + 1 - i
+     * |   | = Product ---------
+     * \ b /    i=1        i
+     * </pre>
+     *
+     * and thus
+     *
+     * <pre>
+     * / n + k - 1 \     k     n + k - i
+     * |           | = Product ---------
+     * \     k     /    i=1       i
+     * </pre>
+     *
+     * @param n the number of elements that can be choosen
+     * @param k the set size to choose
+     * @return the number of combinations
+     */
+    public static long getUnsortedCombinationsWithRepetitionsCount(final int n, final int k)
     {
-
-        int result = 1;
-        for (int i = n; i < n + k; i++)
+        long result = 1;
+        int s = n + k;
+        for (int i = 1; i < k + 1; i++)
         {
-            result *= i;
-        }
-        for (int i = 1; i <= k; i++)
-        {
+            result *= s - i;
             result /= i;
         }
+
         return result;
     }
 
     public static int[][] getUnsortedCombinationsWithRepetitions(final int n, final int k)
     {
 
-        final int r = getUnsortedCombinationsWithRepetitionsCount(n, k);
-        final int[][] result = new int[r][k];
+        final long r = getUnsortedCombinationsWithRepetitionsCount(n, k);
+        final int[][] result = new int[(int) r][k];
         for (int i = 0; i < k; i++)
         {
             result[0][i] = 1;
@@ -260,12 +288,12 @@ public class Combinatorial
      * @param array the array to get the subsets (k-tuples) from
      * @return a List containing all the variations
      */
-    public static List<List<Object>> getSubsets(final List array, final int k)
+    public static List<List<Object>> getSubsets(final List<Object> array, final int k)
     {
         // the List to store the results in
         final List<List<Object>> results = new ArrayList<List<Object>>();
         // initiate recursive call
-        getSubsets(results, new ArrayList(), array, k);
+        getSubsets(results, new ArrayList<Object>(), array, k);
         return results;
     }
 
@@ -297,7 +325,7 @@ public class Combinatorial
      * @param k       the tuple size
      * @param results the List that is filled with each new subset
      */
-    private static void getSubsets(final List<List<Object>> results, final List prefix, final List array, final int k)
+    private static void getSubsets(final List<List<Object>> results, final List<Object> prefix, final List<Object> array, final int k)
     {
         for (int i = 0; i < array.size() - k + 1; i++)
         {
@@ -305,8 +333,8 @@ public class Combinatorial
             {
                 // it is important to make new list objects as subsequent loops
                 // would not have the same prerequisites otherwise.
-                final List newbase = new ArrayList(prefix);
-                final List newobjs = new ArrayList(array);
+                final List<Object> newbase = new ArrayList<Object>(prefix);
+                final List<Object> newobjs = new ArrayList<Object>(array);
                 // need to remove the first i elements of the new object array
                 for (int j = 0; j < i; j++)
                 {

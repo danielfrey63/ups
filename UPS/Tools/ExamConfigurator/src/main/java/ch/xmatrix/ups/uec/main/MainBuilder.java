@@ -114,7 +114,7 @@ public class MainBuilder extends AbstractMainBuilder
         initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENUST, MainModel.CARDS_UST), false);
         initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENEXAM, MainModel.CARDS_EXAM), false);
         initCommand(new CloseCommand(getCommandManager(), model), true);
-        initCommand(new ExportCommand(getCommandManager(), model), true);
+        initCommand(new ExportCommand(getCommandManager()), true);
         initCommand(new QuitCommand(getCommandManager(), model), true);
     }
 

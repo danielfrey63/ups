@@ -445,9 +445,10 @@ public class ExamsetsCalculator
         catch (IllegalArgumentException e)
         {
             debugBuffer.append("Error              : ").append(e.getMessage().replaceAll("\n", ", "));
-            Dialogs.showErrorMessage(null, "Fehler", e.getMessage());
+            final IAnmeldedaten person = registration.getAnmeldedaten();
+            Dialogs.showErrorMessage(null, "Fehler", e.getMessage() + "\nset for student " + person.getVorname() + " " +
+                    person.getNachname() + " not valid");
         }
-
     }
 
     private void composeExamlist(final String studentString, final ArrayList<String> originalTaxa,
@@ -600,6 +601,7 @@ public class ExamsetsCalculator
 
         // Initialize collections. Make a deep copy of all groups and remove deactivated if kown taxa.
         final ArrayList<GroupModel> groupsListModel = groups.getGroups();
+        originalGroups.clear();
         final ArrayList<GroupModel> globalGroups = extractKnownGroups(groupsListModel);
 
         // Setup array of groups that contain only taxa occuring in the personal exam list.
@@ -698,12 +700,12 @@ public class ExamsetsCalculator
             // Choose a taxon matching the weight
             final int weight = validRestCombination[i];
             final ArrayList<SpecimenModel> candidates = filterTaxaOfKnowns(knownPersonalList, weight);
-            final SpecimenModel chosenTaxon = chooseTaxon(candidates);
             if (candidates.size() == 0)
             {
                 throw new IllegalArgumentException("All taxa have been removed by restrictions, nothing left for rest of knowns\n" +
                         "remaining taxa in exam list: " + unknownPersonalList.size() + "\n");
             }
+            final SpecimenModel chosenTaxon = chooseTaxon(candidates);
             final SetTaxon selection = new SetTaxon(chosenTaxon, true);
             debugBuffer.append("selected by rest   : ").append(selection).append(ret);
             updateMaximumRequirements(chosenGroups, chosenTaxon);

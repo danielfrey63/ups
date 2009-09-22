@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <!--<group id="entry.popup.menu">-->
+        <!--<face>-->
+            <!--<text>Popup Menu</text>-->
+        <!--</face>-->
+        <!--<members>-->
+            <!--<member command-id="entry.add"/>-->
+            <!--<member command-id="entry.delete"/>-->
+        <!--</members>-->
+    <!--</group>-->
+    <!--<command id="entry.add">-->
+        <!--<face>-->
+            <!--<text i18n="action.addentry.text"/>-->
+            <!--<icon type="classpath">util/plus_green_16.png</icon>-->
+            <!--<disabled-icon type="classpath">util/plus_green_16.png</disabled-icon>-->
+            <!--<rollover-icon type="classpath">util/plus_green_16_h.png</rollover-icon>-->
+            <!--<description i18n="action.addentry.description"/>-->
+            <!--<accelerator key="i18n:action.addentry.accelerator" useDefaultModifier="true"/>-->
+        <!--</face>-->
+        <!--<face name="toolbar" extends="[default]">-->
+            <!--<text/>-->
+        <!--</face>-->
+    <!--</command>-->
+    <!--<command id="entry.delete">-->
+        <!--<face>-->
+            <!--<text i18n="action.deleteentry.text"/>-->
+            <!--<icon type="classpath">util/minus_green_16.png</icon>-->
+            <!--<disabled-icon type="classpath">util/minus_green_16.png</disabled-icon>-->
+            <!--<rollover-icon type="classpath">util/minus_square_16_h.png</rollover-icon>-->
+            <!--<description i18n="action.deleteentry.description"/>-->
+            <!--<accelerator key="i18n:action.deleteentry.accelerator" useDefaultModifier="true"/>-->
+        <!--</face>-->
+        <!--<face name="toolbar" extends="[default]">-->
+            <!--<text/>-->
+        <!--</face>-->
+    <!--</command>-->
+</commands>

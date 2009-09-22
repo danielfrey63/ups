@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="menu.main">
+        <face>
+            <text>Menubar-Group</text>
+        </face>
+        <members>
+            <member command-id="file"/>
+            <member command-id="edit"/>
+        </members>
+    </group>
+    <group id="file">
+        <face>
+            <text i18n="action.menu.file"/>
+        </face>
+        <members>
+            <member command-id="file.open"/>
+            <member command-id="file.import"/>
+            <member command-id="file.save"/>
+            <member command-id="file.saveas"/>
+        </members>
+    </group>
+    <group id="edit">
+        <face>
+            <text i18n="action.menu.edit"/>
+        </face>
+        <members>
+            <member command-id="edit.types"/>
+        </members>
+    </group>
+    <group id="invoice">
+        <face>
+            <text>Invoice Handling</text>
+        </face>
+        <members>
+            <member command-id="invoice.add"/>
+            <member command-id="invoice.remove"/>
+        </members>
+    </group>
+    <command id="file.import">
+        <face>
+            <text i18n="action.import.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_open.png,#900000)</icon>
+            <description i18n="action.import.description"/>
+            <accelerator key="i18n:action.import.accelerator">
+                <modifier value="default"/>
+                <modifier value="shift"/>
+            </accelerator>
+        </face>
+    </command>
+    <command id="file.saveas">
+        <face>
+            <text i18n="action.saveas.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png,#900000)</icon>
+            <description i18n="action.saveas.description"/>
+            <accelerator key="i18n:action.saveas.accelerator">
+                <modifier value="default"/>
+                <modifier value="shift"/>
+            </accelerator>
+        </face>
+    </command>
+    <command id="file.open">
+        <face>
+            <text i18n="action.open.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_open.png,#900000)</icon>
+            <description i18n="action.open.description"/>
+            <accelerator key="i18n:action.open.accelerator" useDefaultModifier="true"/>
+        </face>
+    </command>
+    <command id="edit.types">
+        <face>
+            <text i18n="action.types.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big3.png, 000090)</icon>
+        </face>
+    </command>
+    <command id="invoice.add">
+        <face>
+            <text i18n="action.invoice.add.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big1.png,#000090)</icon>
+            <description i18n="action.invoice.add.description"/>
+            <accelerator key="i18n:action.invoice.add.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="invoice.remove">
+        <face>
+            <text i18n="action.invoice.remove.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big1.png,#000090)</icon>
+            <description i18n="action.invoice.remove.description"/>
+            <accelerator key="i18n:action.invoice.remove.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

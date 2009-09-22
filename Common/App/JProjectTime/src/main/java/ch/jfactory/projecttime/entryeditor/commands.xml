@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="entry.toolbar">
+        <face>
+            <text>Entry Toolbar</text>
+        </face>
+        <members>
+            <member command-id="apply"/>
+            <member command-id="reset"/>
+        </members>
+    </group>
+    <command id="apply">
+        <face>
+            <text i18n="action.entry.apply.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_save.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(floppy_save.png,#900000)</pressed-icon>
+            <description i18n="action.entry.apply.description"/>
+            <accelerator key="i18n:action.entry.apply.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="reset">
+        <face>
+            <text i18n="action.entry.reset.text"/>
+            <icon type="icon-factory">createDropShadowIcon(twistedarrow_left.png,#900000</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(twistedarrow_left.png,#900000</pressed-icon>
+            <description i18n="action.entry.reset.description"/>
+            <accelerator key="i18n:action.entry.reset.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

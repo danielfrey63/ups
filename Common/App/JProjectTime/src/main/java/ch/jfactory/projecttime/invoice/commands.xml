@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="invoice.toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="invoice.add"/>
+            <member command-id="invoice.delete"/>
+            <separator/>
+            <glue/>
+        </members>
+    </group>
+    <command id="invoice.add">
+        <face>
+            <text i18n="action.addentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big1.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(cross_big1.png,#900000)</pressed-icon>
+            <description i18n="action.addentry.description"/>
+            <accelerator key="i18n:action.addentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="invoice.delete">
+        <face>
+            <text i18n="action.deleteentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big1.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(bars_big1.png,#900000)</pressed-icon>
+            <description i18n="action.deleteentry.description"/>
+            <accelerator key="i18n:action.deleteentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

@@ -1,0 +1,11 @@
+<project default="jar:jar" xmlns:maven="jelly:maven" xmlns:j="jelly:core" xmlns:util="jelly:util">
+
+    <goal name="demo">
+        <j:set var="demo.target" value="${maven.build.dir}/classes/BLOCK-INF/block.xml"/>
+        <util:file var="target" name="${demo.target}"/>
+        <j:if test="${target.exists()}">
+            <attainGoal name="merlin:simulate"/>
+        </j:if>
+    </goal>
+
+</project>

@@ -17,5 +17,6 @@
     <modules>
         <module>Util-All</module>
         <module>Icon</module>
+        <module>App</module>
     </modules>
 </project>

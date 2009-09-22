@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="toolbar">
+        <face>
+            <text>Toolbar</text>
+        </face>
+        <members>
+            <member command-id="entry.sum"/>
+        </members>
+    </group>
+    <command id="entry.sum">
+        <face>
+            <text i18n="action.entry.sum.text"/>
+            <icon type="icon-factory">createDropShadowIcon(sum.png, 009090)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(sum.png, 009090)</pressed-icon>
+            <description i18n="action.entry.sum.description"/>
+            <accelerator key="i18n:action.entry.sum.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

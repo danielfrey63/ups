@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="entry.toolbar">
+        <face>
+            <text>Entry Toolbar</text>
+        </face>
+        <members>
+            <member command-id="entry.apply"/>
+            <member command-id="entry.reset"/>
+            <separator/>
+            <member command-id="entry.sum"/>
+        </members>
+    </group>
+    <command id="entry.apply">
+        <face>
+            <text i18n="action.entry.apply.text"/>
+            <icon type="classpath">Common/PNG/16x16/save_green_16.png</icon>
+            <disabled-icon type="classpath">Common/PNG/16x16/save_green_16_d.png</disabled-icon>
+            <rollover-icon type="classpath">Common/PNG/16x16/save_green_16_h.png</rollover-icon>
+            <description i18n="action.entry.apply.description"/>
+            <accelerator key="i18n:action.entry.apply.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="entry.reset">
+        <face>
+            <text i18n="action.entry.reset.text"/>
+            <icon type="classpath">Common/PNG/16x16/undo_square_16.png</icon>
+            <disabled-icon type="classpath">Common/PNG/16x16/undo_square_16_d.png</disabled-icon>
+            <rollover-icon type="classpath">Common/PNG/16x16/undo_square_16_h.png</rollover-icon>
+            <description i18n="action.entry.reset.description"/>
+            <accelerator key="i18n:action.entry.reset.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="entry.sum">
+        <face>
+            <text i18n="action.entry.sum.text"/>
+            <icon type="classpath">util/sum_black_16.png</icon>
+            <description i18n="action.entry.sum.description"/>
+            <accelerator key="i18n:action.entry.sum.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="button" extends="[default]">
+            <accelerator/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

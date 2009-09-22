@@ -53,7 +53,11 @@ public class ZipUtils
         final File destinationDirectory = new File(destinationDir);
         if (!destinationDirectory.exists())
         {
-            destinationDirectory.mkdirs();
+            final boolean created = destinationDirectory.mkdirs();
+            if (!created)
+            {
+                LOG.warn("cannot create directory " + destinationDirectory);
+            }
         }
 
         // open zip and extract
@@ -81,13 +85,22 @@ public class ZipUtils
             final String destination = destinationDir + entry.getName();
             if (destination.endsWith("/"))
             {
-                new File(destination).mkdirs();
+                final boolean created = new File(destination).mkdirs();
+                if (!created)
+                {
+                    LOG.warn("cannot create directory " + destination);
+                }
             }
             else
             {
                 try
                 {
-                    new File(new File(destination).getParent()).mkdirs();
+                    final String parent = new File(destination).getParent();
+                    final boolean created = new File(parent).mkdirs();
+                    if (!created)
+                    {
+                        LOG.warn("cannot create directory " + parent);
+                    }
                     final FileOutputStream os = new FileOutputStream(destination);
                     final InputStream is = zip.getInputStream(entry);
                     int chunkLength;
@@ -205,7 +218,11 @@ public class ZipUtils
                     }
                 }
                 tempIn.close();
-                tempZip.delete();
+                final boolean deleted = tempZip.delete();
+                if (!deleted)
+                {
+                    LOG.warn("cannot delete temporary zip file " + tempZip);
+                }
             }
             else
             {
@@ -227,6 +244,38 @@ public class ZipUtils
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public static void zipDirectory(final File directory, final File zip) throws IOException
+    {
+        final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip));
+        zip(directory, directory, zos);
+        zos.close();
+    }
+
+    private static void zip(final File directory, final File base, final ZipOutputStream zos) throws IOException
+    {
+        final File[] files = directory.listFiles();
+        final byte[] buffer = new byte[8192];
+        int read;
+        for (int i = 0, n = files.length; i < n; i++)
+        {
+            if (files[i].isDirectory())
+            {
+                zip(files[i], base, zos);
+            }
+            else
+            {
+                final FileInputStream in = new FileInputStream(files[i]);
+                final ZipEntry entry = new ZipEntry(files[i].getPath().substring(base.getPath().length() + 1));
+                zos.putNextEntry(entry);
+                while (-1 != (read = in.read(buffer)))
+                {
+                    zos.write(buffer, 0, read);
+                }
+                in.close();
+            }
         }
     }
 

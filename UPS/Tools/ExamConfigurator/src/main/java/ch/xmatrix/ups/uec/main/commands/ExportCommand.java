@@ -16,11 +16,15 @@
  */
 package ch.xmatrix.ups.uec.main.commands;
 
-import ch.jfactory.model.SimpleModelList;
-import ch.xmatrix.ups.uec.main.MainModel;
+import ch.jfactory.file.ZipUtils;
+import ch.xmatrix.ups.uec.session.commands.UploadDialog;
+import com.jgoodies.uif.application.Application;
 import com.jgoodies.uifextras.fileaccess.DirectoryChooser;
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 
@@ -32,22 +36,33 @@ import org.pietschy.command.CommandManager;
  */
 public class ExportCommand extends ActionCommand
 {
+    /** This class logger. */
+    private static final Logger LOG = Logger.getLogger(ExportCommand.class);
 
-    private MainModel model;
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyyMMddHHmmss");
 
-    public ExportCommand(final CommandManager commandManager, final MainModel model)
+    public ExportCommand(final CommandManager commandManager)
     {
         super(commandManager, Commands.COMMANDID_EXPORT);
-        this.model = model;
     }
 
     protected void handleExecute()
     {
-        final File dir = DirectoryChooser.chooseDirectory(null);
-        final List<SimpleModelList> models = MainModel.getModels();
-        for (final SimpleModelList list : models)
+        try
         {
+            final String prefsNode = Application.getConfiguration().getPreferencesRootName();
+            final String prefsPath = (System.getProperty("user.home") + "/." + prefsNode).replace("\\", "/");
+            final File prefsFile = new File(prefsPath + "/" + UploadDialog.FILE_DATA);
 
+            final File dir = DirectoryChooser.chooseDirectory(null);
+            final File backupFile = new File(dir + "/uec-settings-" + FORMATTER.format(new Date()) + ".zip");
+
+            ZipUtils.zipDirectory(prefsFile, backupFile);
+            LOG.info("exported existing settings to " + backupFile);
+        }
+        catch (IOException e)
+        {
+            LOG.error(e);
         }
     }
 }

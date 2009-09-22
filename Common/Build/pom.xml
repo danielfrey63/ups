@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.utils-all</artifactId>
-                <version>2.0-20090323</version>
+                <version>2.0.155</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.pmb</groupId>
@@ -103,7 +103,12 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>
                 <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-                <version>2.0-20090323</version>
+                <version>2.0.155</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.xmatrix.ups.tools</groupId>
+                <artifactId>ch.xmatrix.ups.tools.uec</artifactId>
+                <version>2.0.155</version>
             </dependency>
             <dependency>
                 <groupId>abbot</groupId>

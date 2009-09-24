@@ -366,7 +366,7 @@
                         </manifest>
                         <manifestEntries>
                             <Main-Class>${main-class}</Main-Class>
-                            <Subversion-Build>${project.version}-${buildNumber}</Subversion-Build>
+                            <Subversion-Build>${project.version}.${buildNumber}</Subversion-Build>
                         </manifestEntries>
                     </archive>
                 </configuration>

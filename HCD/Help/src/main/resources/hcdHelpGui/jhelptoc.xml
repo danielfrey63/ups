@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc version="1.0">
+    <tocitem target="d0e1" text="Benutzeranleitungen">
+        <tocitem target="IDAVAOU" text="Allgemeines">
+            <tocitem target="IDA2AOU" text="Starten der Herbar CD-ROM Version 2"/>
+            <tocitem target="IDAICOU" text="Swing Bedienungselemente"/>
+            <tocitem target="IDAJDOU" text="Tastaturkürzel"/>
+            <tocitem target="IDAZROU" text="Menübalken"/>
+            <tocitem target="IDAXTOU" text="Assistent zur Modus-Auswahl"/>
+        </tocitem>
+        <tocitem target="IDATVOU" text="Lernen">
+            <tocitem target="IDA0VOU" text="Modus Lehrgang und Abfrage">
+                <tocitem target="IDABWOU" text="Aktivieren des Modus Lehrgang und Abfrage"/>
+                <tocitem target="IDA0XOU" text="Hauptfenster">
+                    <tocitem target="IDA40OU" text="Symbolleiste und Statusleiste"/>
+                    <tocitem target="IDAE5OU" text="Ausschnitt der Taxonomie"/>
+                    <tocitem target="IDAJAPU" text="Bilderbereich"/>
+                    <tocitem target="IDAZBPU" text="Informationsbereich des Lehrgangs"/>
+                    <tocitem target="IDAXDPU" text="Eingabebereich der Abfrage">
+                        <tocitem target="IDAAFPU" text="Überprüfung des Namens"/>
+                        <tocitem target="IDAYIPU" text="Eingabe von Eigenschaften"/>
+                    </tocitem>
+                </tocitem>
+                <tocitem target="IDA5MPU" text="Einstellungen zum Lernstoff">
+                    <tocitem target="IDAZNPU" text="Lernstoff zusammenstellen"/>
+                    <tocitem target="IDATPPU" text="Assistent zum Lehrgang und Abfragemodus">
+                        <tocitem target="IDAKQPU" text="Schritt 1: Einführung"/>
+                        <tocitem target="IDAFRPU" text="Schritt 2: Stoffliste festlegen"/>
+                        <tocitem target="IDA4UPU" text="Schritt 3: Stoffspitze festlegen"/>
+                        <tocitem target="IDAXWPU" text="Schritt 4: Taxonomische Stufe festlegen"/>
+                        <tocitem target="IDA3YPU" text="Schritt 5: Reihenfolge festlegen"/>
+                        <tocitem target="IDA30PU" text="Schritt 6: Aktuell ausgewähltes Taxon festlegen"/>
+                    </tocitem>
+                </tocitem>
+                <tocitem target="IDAE3PU" text="Stofflisten">
+                    <tocitem target="IDA03PU" text="Die Idee der Stofflisten"/>
+                    <tocitem target="IDAF5PU" text="Assistent zum Zusammenstellen von Stofflisten">
+                        <tocitem target="IDATAQU" text="Schritt 1: Einführung"/>
+                        <tocitem target="IDAOBQU" text="Schritt 2: Name der Stoffliste"/>
+                        <tocitem target="IDAJCQU" text="Schritt 3: Basisliste"/>
+                        <tocitem target="IDA4DQU" text="Schritt 4: Filter bearbeiten"/>
+                        <tocitem target="IDA4JQU" text="Schritt 5: Ergebnis betrachten"/>
+                    </tocitem>
+                </tocitem>
+            </tocitem>
+            <tocitem target="IDAWKQU" text="Modus Prüfung">
+                <tocitem target="IDA3KQU" text="Allgemeines"/>
+                <tocitem target="IDAQLQU" text="Aktivieren des Modus Prüfung"/>
+                <tocitem target="IDAENQU" text="Prüfungsfenster">
+                    <tocitem target="IDA0PQU" text="Symbolleiste und Statusleiste"/>
+                    <tocitem target="IDAIQQU" text="Eingabebereich für die Namen"/>
+                    <tocitem target="IDAFRQU" text="Bilderbereich"/>
+                    <tocitem target="IDAVRQU" text="Eingabebereich der Eigenschaften"/>
+                </tocitem>
+                <tocitem target="IDANTQU" text="Prüfungsresultat"/>
+            </tocitem>
+        </tocitem>
+        <tocitem target="IDA0TQU" text="Spiele">
+            <tocitem target="IDABUQU" text="Allgemeines">
+                <tocitem target="IDAXUQU" text="Tastaturkürzel"/>
+            </tocitem>
+            <tocitem target="IDACXQU" text="Catcher">
+                <tocitem target="IDAJXQU" text="Spielidee"/>
+                <tocitem target="IDA1YQU" text="Fragen"/>
+                <tocitem target="IDANZQU" text="Spielanleitung"/>
+            </tocitem>
+            <tocitem target="IDA00QU" text="Labyrinth">
+                <tocitem target="IDAB1QU" text="Spielidee"/>
+                <tocitem target="IDAE2QU" text="Fragen"/>
+                <tocitem target="IDAC3QU" text="Spielanleitung"/>
+            </tocitem>
+            <tocitem target="IDA15QU" text="Hang Man">
+                <tocitem target="IDAFARU" text="Spielidee"/>
+                <tocitem target="IDA5ARU" text="Frage "/>
+                <tocitem target="IDAUBRU" text="Spielanleitung"/>
+            </tocitem>
+        </tocitem>
+    </tocitem>
+</toc>

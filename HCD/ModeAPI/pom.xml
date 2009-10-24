@@ -2,21 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>modeapi</artifactId>
-    <name>UBS-LE Mode API</name>
+    <artifactId>ch.xmatrix.le.modeapi</artifactId>
+    <name>Learning Environment Mode API</name>
     <parent>
-        <groupId>com.ethz.geobot.herbar</groupId>
-        <artifactId>project</artifactId>
-        <version>3.0</version>
+        <groupId>ch.xmatrix.le</groupId>
+        <artifactId>ch.xmatrix.le.project</artifactId>
+        <version>3.5</version>
     </parent>
     <dependencies>
         <dependency>
-			<groupId>ch.xmatrix.common</groupId>
-			<artifactId>ch.xmatrix.common.utils-all</artifactId>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>model</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

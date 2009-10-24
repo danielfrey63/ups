@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>application</artifactId>
-    <name>Systematics Learning Application</name>
+    <artifactId>ch.xmatrix.le.application</artifactId>
+    <name>Learning Environment Application</name>
     <parent>
-        <groupId>com.ethz.geobot.herbar</groupId>
-        <artifactId>project</artifactId>
-        <version>3.0</version>
+        <groupId>ch.xmatrix.le</groupId>
+        <artifactId>ch.xmatrix.le.project</artifactId>
+        <version>3.5</version>
     </parent>
     <dependencies>
         <dependency>
@@ -23,56 +23,52 @@
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>catcher</artifactId>
-        </dependency>
-        <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>exam</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.exam</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>gallows</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.gallows</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>help</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.help</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>lesson</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>maze</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.maze</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>modeapi</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>modeapi</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>model</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>model</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>modelimpl</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ethz.geobot.herbar</groupId>
-            <artifactId>news</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>

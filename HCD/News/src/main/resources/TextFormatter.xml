@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.4.2_03" class="java.beans.XMLDecoder">
+    <object class="ch.jfactory.animation.scrolltext.Formatter">
+        <void property="alignement">
+            <int>0</int>
+        </void>
+        <void property="color">
+            <object class="java.awt.Color">
+                <int>153</int>
+                <int>0</int>
+                <int>153</int>
+                <int>255</int>
+            </object>
+        </void>
+        <void property="font">
+            <object class="java.awt.Font">
+                <string>Arial</string>
+                <int>0</int>
+                <int>12</int>
+            </object>
+        </void>
+        <void property="name">
+            <string>Text</string>
+        </void>
+        <void property="keepWithPrevious">
+            <boolean>true</boolean>
+        </void>
+        <void property="lineSpace">
+            <int>16</int>
+        </void>
+    </object>
+</java>

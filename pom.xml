@@ -17,6 +17,7 @@
     <modules>
         <module>Data</module>
         <module>Common</module>
+        <module>HCD</module>
         <module>UPS</module>
         <module>PMB</module>
         <module>Third</module>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<!-- ==================================================================================================================
+Script to compile Herbar CD-ROM version 2.0 from Ant 1.4.1
+=================================================================================================================== -->
+<project name="resources" basedir=".." default="jar">
+
+    <property name="name" value="${ant.project.name}"/>
+    <property name="prj.dir" value="resources/"/>
+    <property name="dst.dir" value="build/"/>
+    <property name="tis.lib" value="${dst.dir}${name}.jar"/>
+    <property name="uptodate.include.pattern" value="*.jpg, *.png, *.gif, *.au"/>
+    <property name="pack.include.pattern" value="*.jpg, *.png, *.gif, *.au"/>
+
+    <!-- ==============================================================================================================
+    Release jars
+    =============================================================================================================== -->
+    <target name="release" description="Make release">
+        <ant antfile="build-common.xml" target="pack-release" inheritRefs="true"/>
+    </target>
+
+    <target name="jar" unless="${name}.uptodate" description="Make build">
+        <ant antfile="build-common.xml" target="pack-jar" inheritRefs="true"/>
+    </target>
+
+    <!-- ==============================================================================================================
+    Remove jar unused files
+    =============================================================================================================== -->
+    <target name="clean" description="Clean jar build products.">
+        <delete file="${tis.lib}"/>
+    </target>
+
+    <!-- ==============================================================================================================
+    rebuild means clean and build
+    =============================================================================================================== -->
+    <target name="rebuild" depends="clean, jar" description="Rebuild"/>
+
+    <!-- ==============================================================================================================
+    Copy to server
+    =============================================================================================================== -->
+    <target name="deploy" depends="release" description="Copy files to server">
+        <ant antfile="build-common.xml" target="deploy" inheritAll="true"/>
+    </target>
+
+</project>

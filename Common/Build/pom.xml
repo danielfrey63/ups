@@ -468,7 +468,7 @@
                 <configuration>
                     <doCheck>true</doCheck>
                     <!-- Updates do not work due to a "working copy locked" -->
-                    <doUpdate>false</doUpdate>
+                    <doUpdate>true</doUpdate>
                 </configuration>
             </plugin>
             <!-- Run with mvn org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->

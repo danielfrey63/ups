@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/*
+ * Copyright 2004 Geobotanical Institute ETH Zürich.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+
+<document>
+
+    <properties>
+        <author email="daniel.frey@xmatrix.ch">Daniel Frey</author>
+        <title>Herbar CD-ROM Version 2.2 Download</title>
+    </properties>
+
+    <body>
+        <section name="Download">
+            <p>
+
+                Für die Herbar CD-ROM gibt es nun ein Kompatibilitäts-Update. Die neue Variante läuft unter Java 5 (1.5)
+                und Java 6 (1.6). Die alte läuft wie bis anhin unter Java 1.4. Falls Sie Java bereits
+                installiert haben, wählen Sie unten die entsprechende Variante für ihr System aus und klicken Sie auf
+                die Launch-Schaltfläche, um die Herbar CD-ROM zu starten. Falls Sie Java noch nicht installiert haben
+                oder auf den aktuellen Stand bringen möchten, finden Sie weiter unten Erklärungen und Links zu den
+                Bezugsquellen.
+
+            </p>
+
+            <subsection name="Herbar CD-ROM für Java 5 (1.5) und 6 (1.6)">
+
+                <p>
+
+                    Verwenden Sie diese Version, wenn Sie bereits Java 1.4, 5 oder 6 installiert (egal, welche Version)
+                    installiert haben. Falls nötig, wird automatisch ein Update auf Java 6 durchgeführt.
+
+                </p>
+                <p>
+
+                    <a href="http://balti.ethz.ch/hcd/webstart-15/com.ethz.geobot.herbar.application.jnlp">
+                        <img src="icons/webstart.gif"/>
+                    </a>
+
+                </p>
+
+            </subsection>
+            <subsection name="Herbar CD-ROM für Java 1.4">
+
+                <p>
+
+                    Verwenden Sie diese Version, falls Sie unbedingt mit Java 1.4 weiterarbeiten wollen. Im Normalfall
+                    ist das nur nötig, wenn es andere Software gibt, die darauf angewiesen ist und mit neueren, parallel
+                    installierten Java Versionen ein Problem auftaucht.
+
+                </p>
+                <p>
+
+                    <a href="http://balti.ethz.ch/hcd/webstart/hcd.jnlp">
+                        <img src="icons/webstart.gif"/>
+                    </a>
+
+                </p>
+
+            </subsection>
+            <subsection name="Java Runtime Installation">
+                <p>
+
+                    Voraussetzung für die Herbar CD-ROM Version ist eine Java Runtime (JRE) der Version 6 (1.6), 5 (1.5)
+                    oder 1.4.
+
+                </p>
+                <p>
+
+                    Für Windows werden die JREs auf der Sun Website angeboten (
+                    <a
+                            href="http://java.sun.com/javase/downloads/index.jsp">1.6 oder der aktuellste
+                    </a>
+                    ,
+                    <a
+                            href="http://java.sun.com/javase/downloads/index_jdk5.jsp">1.5
+                    </a>
+                    ,
+                    <a
+                            href="http://java.sun.com/j2se/1.4.2/download.html">1.4
+                    </a>
+                    ). Bitte installieren Sie eine möglichst aktuelle der oben genannten Versionen.
+
+                    Für den Mac hat
+                    <a href="http://www.apple.com/java/">Apple</a>
+                    die neueste Runtime zur Verfügung: Auf MacOS X mit Java 5 (Version 1.5) läuft die Applikation nur,
+                    wenn die richtige Reihenfolge der Java Versionen für Java WebStart Applikationen eingestellt ist.
+                    Stellen Sie sicher, dass Version 1.4 vor Version 1.5 den Vorzug hat.
+
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>

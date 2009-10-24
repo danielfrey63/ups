@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.exolab.org/mapping.dtd">
+    -->
+<mapping>
+    <description>Description of the mapping</description>
+
+    <class name="com.ethz.geobot.herbar.filter.Filter">
+        <map-to xml="filter"/>
+
+        <field name="baseFilterName" type="string">
+            <bind-xml name="baseFilterName" node="attribute"/>
+        </field>
+        <field name="name" type="string">
+            <bind-xml name="name" node="attribute"/>
+        </field>
+        <field name="details" type="com.ethz.geobot.herbar.filter.Detail" collection="array">
+            <bind-xml name="detail"/>
+        </field>
+    </class>
+
+    <class name="com.ethz.geobot.herbar.filter.Detail">
+        <map-to xml="detail"/>
+
+        <field name="scope" type="string">
+            <bind-xml name="scope" node="attribute"/>
+        </field>
+        <field name="levels" type="string" collection="array">
+            <bind-xml name="level"/>
+        </field>
+    </class>
+</mapping>

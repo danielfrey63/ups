@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faqs title="Frequently Asked Questions">
+    <part id="installation">
+        <title>Installation</title>
+        <faq id="installation-simple">
+            <question>Wie kann ich die Herbar CD-ROM am einfachsten installieren?</question>
+            <answer>
+                <p>
+                    Die
+                    <a href="http://www.virtual-herbarium.com/webstart/hcd.jnlp">
+                    Herbar CD-ROM Software steht als WebStart Applikation zum Download</a> bereit.
+                    Sie benötigen Die CD-ROM selbst nur noch als Bild-Scheibe. Die Software läuft nicht ohne
+                    die CD-ROM.
+                </p>
+                <p>
+                    Die alternative Installationsmöglichkeit direkt von der CD-ROM wird nicht mehr empfohlen, da sich
+                    die Java Versionen in der Zwischenzeit weiterentwickelt haben, und damit auch ein paar Punkte
+                    berücksichtigt werden müssen, die nicht in der CD-ROM Hilfe erwähnt sind. Der Vollständigkeit
+                    halber werden die mit der direkten Installation von der CD-ROM zu berücksichtigenden Punkte im Folgenden
+                    noch aufgeführt.
+                </p>
+            </answer>
+        </faq>
+    </part>
+    <part id="update">
+        <title>Updates</title>
+        <faq id="installation-simple">
+            <question>Woher erhalte ich die neusten Updates?</question>
+            <answer>
+                <p>
+                    Die Herbar CD-ROM Applikation wird dauernd weiterentwickelt. Bekannte Fehler werden korrigiert und
+                    neue Features werden eingebaut. Die Applikation verfügt über einen eingebauten Update-Mechanismus.
+                    Sie haben zwei Möglichkeiten, immer auf dem neusten Stand zu sein:
+                </p>
+                <p>
+                    Möglichkeit 1: Verwenden Sie WebStart und stellen Sie sicher, dass Sie, wenn Sie die Software
+                    updaten möchten, den Computer am Internet angeschlossen haben. Das Update wird automatisch
+                    durchgeführt.
+                </p>
+                <p>
+                    Möglichkeit 2: Verwenden Sie die CD-ROM Version und rufen Sie über das Menü <em>Einstellungen</em>
+                    den Befehl <em>Updates...</em> auf. Die aktuelle Adresse für den Update-Server ist immer noch
+                    <em>http://www.xmatrix.ch:8080/herbarweb/update</em>.
+                </p>
+            </answer>
+        </faq>
+    </part>
+    <part id="run">
+        <title>Installation ab CD-ROM (MacOS X)</title>
+        <faq id="install-cd">
+            <question>
+                Die Installation auf dem Mac versagt. Ein Doppelklick auf <em>Install.sh</em> bringt die
+                Fehlermeldung <em>tools/linux/j2re1.4.1_02/bin/java: No such file or directory</em>.
+            </question>
+            <answer>
+                <p>
+                    Sie haben vermutlich Punkt zwei der Installationsanleitung nicht ausgeführt: Linux oder MacOS X:
+                    Öffnen Sie ein Terminal, wechseln Sie ins Verzeichnis der CD-ROM und führen Sie
+                    <em>./Install.sh</em> aus.
+                </p>
+            </answer>
+        </faq>
+        <faq id="install-double-click-apple-script">
+            <question>Ich möchte auf meinem MacOS X eine doppelklickbare Startmöglichkeit haben.</question>
+            <answer>
+                <p>
+                    Verwenden Sie WebStart. Das ist die einfachste Lösung. WebStart bietet die Möglichkeit, einen
+                    doppelt klickbaren Link anzulegen, der die Applikation (auch offline) startet. Normalerweise
+                    werden Sie nach dem zweiten Start automatisch danach gefragt. Falls das nicht möglich sein sollte
+                    (z.B. keinerlei Internet Anschluss), dann können Sie mit etwas Handanlegen ebenfalls eine
+                    einfach zu startende Anwendung erstellen:
+                </p>
+                <p>
+                    MacOS X BenutzerInnen haben die Möglichkeit, anstelle der kryptischen Terminalversion auch einen
+                    doppelklickbare AppleScript zu erstellen. Dazu muss das nachfolgend Beschriebene einmal durchgeführt
+                    werden. Hier wird die Installation plus anschliessendes Erstellen des AppleScripts erläutert:
+                </p>
+                <ol>
+                    <li>
+                        Stellen Sie sicher, dass die Software erfolgreich installiert worden ist.
+                    </li>
+                    <li>
+                        Öffnen Sie den AppleScript Editor im Verzeichnis /Applications/AppleScript und erstellen Sie
+                        ein neues AppleScript. Geben Sie folgende Zeile in den neuen AppleScript ein:<br/>
+                        <em>do shell script "cd &lt;Installationsverzeichnis&gt;; ./HCD2.sh"</em><br/>
+                        wobei &lt;Installationsverzeichnis&gt; für das Installationsverzeichnis steht. Falls Sie ein
+                        Verzeichnis mit Leerschlägen gewählt haben, müssen Sie jedem Leerzeichen einen Backslash (\)
+                        voranstellen. Also haben Sie beispielsweise das Installationsverzeichnis
+                        "/Applications/Herbar CD-ROM Version 2" gewählt, dann müsste der Befehl so aussehen:<br/>
+                        <em>do shell script "cd /Applicaitons/Herbar\ CD-ROM\ Version\ 2; ./HCD2.sh"</em>
+                    </li>
+                    <li>
+                        Speichern Sie den AppleScript als Applikation: a) Klicken Sie "Save as..." an, b) Als Typ
+                        "Applikation" auswählen, c) Ort auswählen, d) OK klicken
+                    </li>
+                </ol>
+            </answer>
+        </faq>
+        <faq id="install-without-write-privs">
+            <question>
+                Die Installation bricht ab mit einer Fehlermeldung <em>java.io.FileNotFoundException:
+                &lt;Installationsverzeichnis&gt; (Das System kann den angegebenen Pfad nicht finden)</em>.
+            </question>
+            <answer>
+                <p>
+                    Stellen Sie sicher, dass Sie auf dem Installationsverzeichnis Schreibrechte haben.
+                </p>
+            </answer>
+        </faq>
+        <faq id="install-wrong-jdk-1">
+            <question>
+                Die Installation bricht ab auf dem Mac mit einer Fehlermeldung <em>:exec format error</em>.
+            </question>
+            <answer>
+                <p>
+                    Stellen Sie sicher, dass Sie mindestens MacOS X 10.2.3 mit JDK 1.4.1 installiert haben.
+                </p>
+            </answer>
+        </faq>
+        <faq id="install-wrong-jdk-2">
+            <question>
+                Der Start des Programmes bricht auf dem Mac mit der Fehlermeldung
+                <em>java.lang.NoClassDefFoundError: java/lang/CharSequence</em> ab.
+            </question>
+            <answer>
+                <p>
+                    Stellen Sie sicher, dass Sie den JDK 1.4.1 installiert haben. Vorraussetzung dafür ist
+                    MacOS X 10.2.3.
+                </p>
+            </answer>
+        </faq>
+        <faq id="install-wrong-jdk-3">
+            <question>
+                Auf MacOS X bricht die Installation ab mit der Fehlermeldung <em>cannot execute binary file</em>.
+            </question>
+            <answer>
+                <p>
+                    Stellen Sie sicher, dass Sie den JDK auf dem Mac installiert haben, führen Sie anschliessend den
+                    Skript <a href="InstallMac.sh">InstallMac.sh</a> aus. Der Skript verwendet den installierten JDK
+                    anstelle desjenigen auf der CD-ROM.
+                </p>
+            </answer>
+        </faq>
+        <faq id="install-wrong-jdk-4">
+            <question>
+                Auf MacOS X 10.2.8 oder höher bricht die Installation ab mit einem langen Stacktrace (viele Zeilen,
+                die mit "at" beginnen). Zu Beginn des Stacktraces steht
+                <em>java.awt.image.RasterFormatException: y lies outside raster</em>.
+            </question>
+            <answer>
+                <p>
+                    Das Problem ist mit der neueren MacOS X Version aufgetaucht.
+                </p>
+                <p>
+                    Lösung 1 (empfohlen): Verwenden Sie WebStart.
+                </p>
+                <p>
+                    Lösung 2 (nicht empfohlen): Laden Sie die gesamte Installation von
+                    <a href="http://www.virtual-herbarium.com/update/download/hcd2.zip">unserem Webserver</a>.
+                    Entpacken Sie das Zip in ein Verzeichnis Ihrer Wahl. Öffnen Sie ein
+                    Termnial und geben Sie den folgenden Befehl ein, der die Datei HCD2.sh
+                    ausführbar machen soll: <em>chmode a+x HCD2.sh</em>. Danach können Sie die Herbar CD-ROM mit
+                    dem Skript starten: <em>./HCD2.sh</em>.
+                </p>
+            </answer>
+        </faq>
+    </part>
+</faqs>

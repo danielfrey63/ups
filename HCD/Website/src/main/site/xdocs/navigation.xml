@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="UPS">
+    <title>$pom.name</title>
+    <body>
+        <links>
+            <item name="xmatrix" href="http://www.xmatrix.ch"/>
+        </links>
+        <menu name="Überblick">
+            <item name="Einführung" href="project/index.html"/>
+            <item name="Ziele" href="project/goals.html"/>
+            <item name="Mitwirkende" href="project/contrib.html"/>
+        </menu>
+        <menu name="Dokumentation">
+            <item name="Hilfe" href="help/help.html"/>
+            <item name="FAQs" href="faq.html"/>
+            <item name="Download" href="download.html"/>
+        </menu>
+        <menu name="Externe Links">
+            <item name="Balti" href="http://www.balti.ethz.ch" target="_new"/>
+            <item name="Verlag v/d|f" href="http://www.vdf.ethz.ch/info/showDetails.asp?isbnNr=2850" target="_new"/>
+            <item name="Rezension 1" href="http://www.uni-online.de/artikel.php?id=920" target="_new"/>
+            <item name="Rezension 2" href="http://www.uni-online.de/artikel.php?id=1714" target="_new"/>
+            <item name="Institut für Integrative Biologie" href="http://www.peg.ethz.ch/spotlights/elearn/herbarcd"
+                  target="_new"/>
+            <item name="ETH-Life" href="http://archiv.ethlife.ethz.ch/articles/campuslife/herbarcd2.html"
+                  target="_new"/>
+        </menu>
+        <search/>
+    </body>
+</project>

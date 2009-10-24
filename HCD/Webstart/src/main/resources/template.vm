@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+    spec="1.0+"
+    codebase="http://balti.ethz.ch/hcd/webstart"
+    href="$outputFile">
+    <information>
+        <title>Herbar CD-ROM Version 3.5</title>
+        <vendor>Matthias Baltisberger</vendor>
+        <homepage href="http://www.balti.ethz.ch"/>
+        <description>Lernumgebung für "Unterricht mit Prüfungen in Selbstverantwortung" (bekannt als "Herbar CD-ROM") mit Möglichkeiten zum Lernen, Abfragen und Testen.</description>
+        <description kind="one-line">UPS Lern Umgebung (Herbar CD-ROM)</description>
+        <description kind="short">UPS Lern Umgebung</description>
+        <description kind="tooltip">UPS Lern Umgebung</description>
+        <icon href="appIcon64.png" />
+        <icon kind="splash" href="splash.jpg" />
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.5+"/>
+        $dependencies
+        <property name="file.encoding" value="windows-1252"/>
+    </resources>
+    <application-desc main-class="$mainClass"/>
+</jnlp>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VersionInfo>
+    <name>application.jar</name>
+    <author>Daniel Frey</author>
+    <description>Applikations Modul</description>
+    <majorVersion>3</majorVersion>
+    <minorVersion>0</minorVersion>
+    <buildVersion>20070401</buildVersion>
+</VersionInfo>

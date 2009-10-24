@@ -288,12 +288,12 @@ public class Combinatorial
      * @param array the array to get the subsets (k-tuples) from
      * @return a List containing all the variations
      */
-    public static List<List<Object>> getSubsets(final List<Object> array, final int k)
+    public static <T> List<List<T>> getSubsets(final List<T> array, final int k)
     {
         // the List to store the results in
-        final List<List<Object>> results = new ArrayList<List<Object>>();
+        final List<List<T>> results = new ArrayList<List<T>>();
         // initiate recursive call
-        getSubsets(results, new ArrayList<Object>(), array, k);
+        getSubsets(results, new ArrayList<T>(), array, k);
         return results;
     }
 
@@ -325,7 +325,7 @@ public class Combinatorial
      * @param k       the tuple size
      * @param results the List that is filled with each new subset
      */
-    private static void getSubsets(final List<List<Object>> results, final List<Object> prefix, final List<Object> array, final int k)
+    private static <T> void getSubsets(final List<List<T>> results, final List<T> prefix, final List<T> array, final int k)
     {
         for (int i = 0; i < array.size() - k + 1; i++)
         {
@@ -333,8 +333,8 @@ public class Combinatorial
             {
                 // it is important to make new list objects as subsequent loops
                 // would not have the same prerequisites otherwise.
-                final List<Object> newbase = new ArrayList<Object>(prefix);
-                final List<Object> newobjs = new ArrayList<Object>(array);
+                final List<T> newbase = new ArrayList<T>(prefix);
+                final List<T> newobjs = new ArrayList<T>(array);
                 // need to remove the first i elements of the new object array
                 for (int j = 0; j < i; j++)
                 {
@@ -346,7 +346,7 @@ public class Combinatorial
             }
             else
             {
-                final List<Object> chunk = new ArrayList<Object>(prefix);
+                final List<T> chunk = new ArrayList<T>(prefix);
                 chunk.add(array.get(i));
                 results.add(chunk);
             }

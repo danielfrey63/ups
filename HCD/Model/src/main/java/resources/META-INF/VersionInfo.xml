@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VersionInfo>
+    <name>model.jar</name>
+    <author>Daniel Frey</author>
+    <description>Abstraktes Datenmodel</description>
+    <majorVersion>3</majorVersion>
+    <minorVersion>0</minorVersion>
+    <buildVersion>20070401</buildVersion>
+</VersionInfo>

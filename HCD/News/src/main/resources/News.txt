@@ -1,0 +1,5 @@
+/TitleFormatter.xml|Update
+/TextFormatter.xml|Update auf Java 5 und 6
+/TextFormatter.xml|Die Herbar CD-ROM wurde für die beiden neueren Java Versionen fitt gemacht.
+/TitleFormatter.xml|Weitere Infos
+/TextFormatter.xml|Weitere Infos finden Sie auf http://www.balti.ethz.ch

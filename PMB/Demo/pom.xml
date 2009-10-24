@@ -11,8 +11,8 @@
   <groupId>ch.xmatrix.ups.pmb</groupId>
   <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
   <name>PMB Demo Set</name>
-  <version>2.0-20090323</version>
-  <description>Bilder und Set für Demo Modus</description>
+  <version>2.0</version>
+  <description>Bilder und Set fï¿½r Demo Modus</description>
   <build>
     <resources>
         <resource>

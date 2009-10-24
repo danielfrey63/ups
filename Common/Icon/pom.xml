@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.common</groupId>
     <artifactId>ch.xmatrix.common.icon</artifactId>
-    <version>1.0-20060814</version>
+    <version>1.0</version>
     <name>JFactory Icons</name>
     <build>
         <resources>

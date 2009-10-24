@@ -10,9 +10,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.xmatrix.ups.pmb.exam</groupId>
   <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
-  <name>UPS Prüfung mit Prüfungsbildern</name>
-  <version>2.0-20090503</version>
-  <description>Mit diesem Tool können Bilder für die Prüfung dargestellt werden.</description>
+  <name>UPS Prï¿½fung mit Prï¿½fungsbildern</name>
+  <version>2.0</version>
+  <description>Mit diesem Tool kï¿½nnen Bilder fï¿½r die Prï¿½fung dargestellt werden.</description>
     <properties>
         <main-class>ch.xmatrix.ups.pmb.exam.Main</main-class>
         <codebase>http://geobot1.ethz.ch/ups/webstart/pmbx</codebase>

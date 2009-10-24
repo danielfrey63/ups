@@ -52,6 +52,8 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.Properties;
+import java.util.jar.Manifest;
+import java.util.jar.Attributes;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -156,33 +158,33 @@ public class MainRunner extends DefaultApplicationStarter
 
     private static Logger LOG;
 
-    private static final String PROPERTYNAME_NAME_SHORT = "jfactory.main.about.name.short";
+    public static final String PROPERTYNAME_NAME_SHORT = "jfactory.main.about.name.short";
 
-    private static final String PROPERTYNAME_PRODUCT_NAME = "jfactory.main.product.name";
+    public static final String PROPERTYNAME_PRODUCT_NAME = "jfactory.main.product.name";
 
-    private static final String PROPERTYNAME_PRODUCT_FILENAME = "jfactory.main.product.filename";
+    public static final String PROPERTYNAME_PRODUCT_FILENAME = "jfactory.main.product.filename";
 
-    private static final String PROPERTYNAME_PRODUCT_DESCRIPTION = "jfactory.main.product.description";
+    public static final String PROPERTYNAME_PRODUCT_DESCRIPTION = "jfactory.main.product.description";
 
-    private static final String PROPERTYNAME_PREFERENCES_NODE_NAME = "jfactory.main.prefs.node.name";
+    public static final String PROPERTYNAME_PREFERENCES_NODE_NAME = "jfactory.main.prefs.node.name";
 
-    private static final String PROPERTYNAME_VERSION_SHORT = "jfactory.main.version.major";
+    public static final String PROPERTYNAME_VERSION_SHORT = "jfactory.main.version.major";
 
-    private static final String PROPERTYNAME_VERSION_FULL = "jfactory.main.version.full";
+    public static final String PROPERTYNAME_VERSION_FULL = "jfactory.main.version.full";
 
-    private static final String PROPERTYNAME_COPYRIGHT = "jfactory.main.copyright";
+    public static final String PROPERTYNAME_COPYRIGHT = "jfactory.main.copyright";
 
-    private static final String PROPERTYNAME_VENDOR_NAME = "jfactory.main.vendor.name";
+    public static final String PROPERTYNAME_VENDOR_NAME = "jfactory.main.vendor.name";
 
-    private static final String PROPERTYNAME_VENDOR_URL = "jfactory.main.vendor.url";
+    public static final String PROPERTYNAME_VENDOR_URL = "jfactory.main.vendor.url";
 
-    private static final String PROPERTYNAME_VENDOR_MAIL = "jfactory.main.vendor.mail";
+    public static final String PROPERTYNAME_VENDOR_MAIL = "jfactory.main.vendor.mail";
 
-    private static final String PROPERTYNAME_RESOURCE_PATH = "jfactory.main.path.tool";
+    public static final String PROPERTYNAME_RESOURCE_PATH = "jfactory.main.path.tool";
 
-    private static final String PROPERTYNAME_HELP_SET_PATH = "jfactory.main.path.helpset";
+    public static final String PROPERTYNAME_HELP_SET_PATH = "jfactory.main.path.helpset";
 
-    private static final String PROPERTYNAME_TIP_INDEX_PATH = "jfactory.main.path.tipindex";
+    public static final String PROPERTYNAME_TIP_INDEX_PATH = "jfactory.main.path.tipindex";
 
     private static final String KEY_MAIN_MODEL = "jfactory.main.model";
 
@@ -618,6 +620,20 @@ public class MainRunner extends DefaultApplicationStarter
 
     public static void main(final String[] args)
     {
+        try
+        {
+            final Class<MainRunner> clazz = MainRunner.class;
+            System.out.println(clazz.getPackage().getImplementationVersion());
+            final String classContainer = clazz.getProtectionDomain().getCodeSource().getLocation().toString();
+            final URL manifestUrl = new URL("jar:" + classContainer + "!/META-INF/MANIFEST.MF");
+            final Manifest manifest = new Manifest(manifestUrl.openStream());
+            final String version = manifest.getMainAttributes().getValue(Attributes.Name.IMPLEMENTATION_VERSION);
+            System.setProperty(MainRunner.PROPERTYNAME_VERSION_FULL, version);
+        }
+        catch (IOException e)
+        {
+            System.setProperty(MainRunner.PROPERTYNAME_VERSION_FULL, "Test Version");
+        }
         new MainRunner();
     }
 }

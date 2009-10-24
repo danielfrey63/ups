@@ -11,7 +11,7 @@
   <groupId>ch.xmatrix.ups.pmb</groupId>
   <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
   <name>PMB Common Components</name>
-  <version>2.0-20090503</version>
+  <version>2.0</version>
   <description>Common Components for PMB</description>
   <dependencies>
     <dependency>
@@ -57,7 +57,6 @@
     <dependency>
         <groupId>net.java.jveez</groupId>
         <artifactId>net.java.jveez</artifactId>
-        <version>77</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

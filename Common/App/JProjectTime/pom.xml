@@ -11,7 +11,7 @@
     <groupId>ch.jfactory.projecttime</groupId>
     <artifactId>ch.jfactory.projecttime</artifactId>
     <name>JFactory JProjectTime</name>
-    <version>1.0-20050906</version>
+    <version>1.0</version>
     <description></description>
     <url>http://www.jfactory.ch</url>
     <inceptionYear>2004</inceptionYear>
@@ -27,7 +27,6 @@
         <dependency>
             <groupId>saxpath</groupId>
             <artifactId>saxpath</artifactId>
-            <version>1.0-FCS</version>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>

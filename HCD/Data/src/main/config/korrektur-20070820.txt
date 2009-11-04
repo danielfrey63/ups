@@ -1,0 +1,11 @@
+SELECT * FROM EDGES e, VERTICES c, VERTICES p, VERTICES bild, EDGES comment
+WHERE p.id = e.parent_id AND c.id = e.child_id AND p.name = 'Poa trivialis'
+AND bild.ID = comment.PARENT_ID AND comment.CHILD_ID = c.ID AND p.TYPE = 'TAXON' AND c.TYPE = 'PICTURETEXT' AND bild.TYPE = 'PICTURE';
+SELECT * FROM VERTICES WHERE name = 'GramPoatri.1.jpg';
+UPDATE EDGES SET parent_id = 13239 WHERE parent_id = 5429 AND child_id = 11657;
+UPDATE VERTICES SET name = 'Nadeln gescheitelt angeordnet' WHERE name = 'Nadeln gescheitelt';
+UPDATE VERTICES SET name = 'Nadeln allseits abstehend' WHERE name = 'Nadeln abstehend';
+UPDATE VERTICES SET name = 'Nadeln stumpf, einzeln, unterseits mit 2 weisslichen Wachsstreifen' WHERE name = 'Nadeln stumpf, einzeln, gescheitelt, unterseits mit 2 weisslichen Wachsstreifen';
+UPDATE VERTICES SET name = 'Zapfen (nach der Blüte) hängend, Nadeln allseits abstehend, nicht gescheitelt' WHERE name LIKE '%Nadeln nicht gescheitelt';
+UPDATE VERTICES SET NAME = REPLACE(SELECT NAME FROM VERTICES WHERE ID = 11313, 'ohne', 'mit') WHERE ID = 11313;
+SHUTDOWN compact;

@@ -5,6 +5,11 @@
     <artifactId>ch.xmatrix.le.webstart</artifactId>
     <name>Learning Environment Webstart Application</name>
     <packaging>pom</packaging>
+    <properties>
+        <main-class>com.ethz.geobot.herbar.gui.AppHerbar</main-class>
+        <codebase>http://balti.ethz.ch/hcd/webstart</codebase>
+        <default-site>http://balti.ethz.ch/hcd/site</default-site>
+    </properties>
     <parent>
         <groupId>ch.xmatrix.le</groupId>
         <artifactId>ch.xmatrix.le.project</artifactId>
@@ -140,65 +145,4 @@
             <artifactId>xstream</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <!--<groupId>org.codehaus.mojo.webstart</groupId>-->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>webstart-maven-plugin</artifactId>
-                <!--<version>1.0-alpha-2</version>-->
-                <version>1.0-alpha-1</version>
-                <executions>
-                    <phase>package</phase>
-                    <execution>
-                        <goals>
-                            <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
-                            <goal>jnlp</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludeTransitive>true</excludeTransitive>
-                    <verbose>false</verbose>
-                    <!-- unsign already signed packages and sign them with own key -->
-                    <unsign>true</unsign>
-                    <jnlp>
-                        <inputTemplateResourcePath>${basedir}/src/main/resources</inputTemplateResourcePath>
-                        <inputTemplate>template.vm</inputTemplate>
-                        <!-- defaults to launch.jnlp -->
-                        <outputFile>hcd.jnlp</outputFile>
-                        <mainClass>com.ethz.geobot.herbar.gui.AppHerbar</mainClass>
-                    </jnlp>
-                    <dependencies>
-                        <excludes>
-                            <exclude>ant:ant-optional</exclude>
-                            <exclude>com.jgoodies:uif-extras</exclude>
-                            <exclude>com.jgoodies:uif</exclude>
-                            <exclude>commons-beanutils:commons-beanutils</exclude>
-                            <exclude>commons-collections:commons-collections</exclude>
-                            <exclude>commons-logging:commons-logging</exclude>
-                            <exclude>javax.servlet:servlet-api</exclude>
-                            <exclude>jdom:jdom</exclude>
-                            <exclude>joda-time:joda-time</exclude>
-                            <exclude>mdateselector:mdateselector</exclude>
-                            <exclude>net.infonode:idw</exclude>
-                            <exclude>org.ostermiller:utils</exclude>
-                            <exclude>org.pietschy:gui-commands</exclude>
-                            <exclude>xerces:xerces</exclude>
-                            <exclude>xml-apis:xml-apis</exclude>
-                            <exclude>xpp3:xpp3_min</exclude>
-                        </excludes>
-                    </dependencies>
-                    <sign>
-                        <keypass>leni1234</keypass>
-                        <storepass>leni1234</storepass>
-                        <storetype>jks</storetype>
-                        <alias>UPS-LE</alias>
-                        <verify>false</verify>
-                        <keystore>${basedir}/src/main/config/keystore/keystore.jks</keystore>
-                    </sign>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

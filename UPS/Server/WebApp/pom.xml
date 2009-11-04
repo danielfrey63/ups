@@ -39,6 +39,10 @@
             <artifactId>ch.xmatrix.ups.server.storage</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
@@ -49,10 +53,6 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>servletapi</groupId>
-            <artifactId>servlet-api</artifactId>
         </dependency>
     </dependencies>
     <build>

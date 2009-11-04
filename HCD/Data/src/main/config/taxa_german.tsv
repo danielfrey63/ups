@@ -1,0 +1,1058 @@
+
+2	Alle Taxa
+3	Flechten
+4	Isländisch Moos
+5	Rentierflechte
+6	Moose
+7	Farnpflanzen
+8	Bärlappähnliche
+9	Bärlappgewächse
+10	Wald-Bärlapp
+11	Tannenbärlapp
+12	Moosfarngewächse
+13	Dorniger Moosfarn
+14	Schachtelhalmgewächse
+15	Acker-Schachtelhalm
+16	Überwinternder Schachtelhalm
+17	Wald-Schachtelhalm
+18	Echte Farne
+19	Eusporangiate Farne
+20	Natterzungengewächse
+21	Gewöhnliche Mondraute
+22	Leptosporangiate Farne
+23	Streifenfarn
+24	Mauerraute
+25	Braunstieliger Streifenfarn
+26	Grünstieliger Streifenfarn
+27	Hirschzunge
+28	Gewöhnlicher Waldfarn
+29	Gewöhnlicher Wurmfarn
+30	Samenpflanzen
+31	Nacktsamer
+32	Ginkgo-Gewächse
+33	Ginkgo
+34	Föhrengewächse
+35	Tanne
+36	Lärche
+37	Fichte
+38	Föhre
+39	Arve
+40	Bergföhre
+41	Waldföhre
+42	Zypressengewächse
+43	Wacholder
+44	Gewöhnlicher Wacholder
+45	Zwerg-Wacholder
+46	Sadebaum
+47	Eibengewächse
+48	Eibe
+49	Bedecktsamer
+50	Zweikeimblättrige
+51	Sauerdorngewächse
+52	Gewöhnliche Berberitze
+53	Hahnenfussgewächse
+54	Eisenhut
+55	Gewöhnliche Akelei
+56	Europäische Trollblume
+57	Hahnenfuss
+58	Knolliger Hahnenfuss
+59	Scharbockskraut
+60	Fries Hahnenfuss
+61	Berg-Hahnenfuss
+62	Kriechender Hahnenfuss
+63	Eisenhutblättriger Hahnenfuss
+64	Alpen-Hahnenfuss
+65	Busch-Windröschen
+66	Sumpf-Dotterblume
+67	Gewöhnliche Waldrebe
+68	Küchenschelle
+69	Alpen-Anemone
+70	Schwefel-Anemone
+71	Frühlings-Anemone
+72	Papaveraceae
+73	Chelidonium majus
+74	Papaver rhoeas
+75	Nelkengewächse
+76	Leimkrautartige
+77	Leimkraut
+78	Stengelloses Leimkraut
+79	Rote Waldnelke
+80	Nickendes Leimkraut
+81	Felsen-Leimkraut
+82	Gewöhnliches Leimkraut
+83	Nelke
+84	Kartäuser-Nelke
+85	Stein-Nelke
+86	Kriechendes Gipskraut
+87	Rotes Seifenkraut
+88	Mierenartige
+89	Hornkraut
+90	Gewöhnliches Hornkraut
+91	Sternmiere
+92	Vogelmiere
+93	Gänsefussgewächse
+94	Gänsefuss
+95	Weisser Gänsefuss
+96	Guter Heinrich
+97	Knöterichgewächse
+98	Ampfer
+99	Wiesen-Sauerampfer
+100	Alpen-Ampfer
+101	Stumpfblättriger Ampfer
+102	Schildblättriger Ampfer
+103	Knöterich
+104	Schlangen-Knöterich
+105	Knöllchen-Knöterich
+106	Nesselartige
+107	Hanfgewächse
+108	Hopfen
+109	Ulmengewächse
+110	Berg-Ulme
+111	Nesselgewächse
+112	Grosse Brennessel
+113	Dickblattgewächse
+114	Mauerpfeffer
+115	Hauswurz
+116	Steinbrechgewächse
+117	Mauerpfeffer-Steinbrech
+118	Immergrüner Steinbrech
+119	Mannsschild-Steinbrech
+120	Gegenblättriger Steinbrech
+121	Rundblätriger Steinbrech
+122	Sternblütiger Steinbrech
+123	Rosengewächse
+124	Silberwurz
+125	Nelkenwurz
+126	Berg-Nelkenwurz
+127	Bach-Nelkenwurz
+128	Gewöhnliche Nelkenwurz
+129	Spierstaude
+130	Fingerkraut
+131	Gänse-Fingerkraut
+132	Gold-Fingerkraut
+133	Aufrechtes Fingerkraut
+134	Kriechendes Fingerkraut
+135	Frauenmäntel
+136	Silbermantel
+137	Frauenmantel
+138	Kleiner Wiesenknopf
+139	Kirsche
+140	Traubenkirsche
+141	Schwarzdorn
+142	Crataegus
+143	Eberesche
+144	Mehlbeerbaum
+145	Vogelbeerbaum
+146	Erdbeere
+147	Wald-Erdbeere
+148	Rose
+149	Hunds-Rose
+150	Brombeeren
+151	Hülsenfrüchtler
+152	Schmetterlingsblütler
+153	Schneckenklee
+154	Hopfenklee
+155	Klee
+156	Alpen-Klee
+157	Braun-Klee
+158	Berg-Klee
+159	Rot-Klee
+160	Weiss-Klee
+161	Lotus
+162	Gewöhnlicher Hornklee
+163	Platterbse
+164	Wiesen-Platterbse
+165	Wicke
+166	Vogel-Wicke
+167	Futter-Wicke
+168	Zaun-Wicke
+169	Gewöhnlicher Wundklee
+170	Tragant
+171	Alpen-Tragant
+172	Hufeisenklee
+173	Saat-Esparsette
+174	Spitzkiel
+175	Feld-Spitzkiel
+176	Nachtkerzengewächse
+177	Weidenröschen
+178	Aceraceae
+179	Acer
+180	Acer campestre
+181	Acer platanoides
+182	Acer pseudoplatanus
+183	Storchschnabelgewächse
+184	Gewöhnlicher Reiherschnabel
+185	Storchschnabel
+186	Pyrenäen-Storchschnabel
+187	Ruprechtskraut
+188	Blutroter Storchschnabel
+189	Wald-Storchschnabel
+190	Leingewächse
+191	Purgier-Lein
+192	Sauerkleegewächse
+193	Gewöhnlicher Sauerklee
+194	Kreuzblumengewächse
+195	Buchsblättrige Kreuzblume
+196	Gewöhnliche Kreuzblume
+197	Spindelstrauchgewächse
+198	Pfaffenhütchen
+199	Kreuzdorngewächse
+200	Faulbaum
+201	Gewöhnlicher Kreuzdorn
+202	Mistelgewächse
+203	Mistel
+204	Wolfsmilchgewächse
+205	Wolfsmilch
+206	Mandelblättrige Wolfsmilch
+207	Zypressen-Wolfsmilch
+208	Ausdauerndes Bingelkraut
+209	Ölweidengewächse
+210	Sanddorn
+211	Araliales
+212	Araliaceae
+213	Hedera helix
+214	Apiaceae
+215	Aegopodium podagraria
+216	Carum carvi
+217	Anthriscus sylvestris
+218	Heracleum sphondylium
+219	Peucedanum ostruthium
+220	Sonnentaugewächse
+221	Rundblättriger Sonnentau
+222	Zistrosengewächse
+223	Ovalblättriges Sonnenröschen
+224	Veilchengewächse
+225	Zweiblütiges Veilchen
+226	Langsporniges Stiefmütterchen
+227	Wald-Veilchen
+228	Echtes Stiefmütterchen
+229	Kreuzblütler
+230	Felsen-Kugelschötchen
+231	Knoblauchhederich
+232	Schotenkresse
+233	Alpen-Gänsekresse
+234	Schaumkraut
+235	Behaartes Schaumkraut
+236	Wiesen-Schaumkraut
+237	Resedablättriges Schaumkraut
+238	Gewöhnliches Brillenschötchen
+239	Gewöhnliches Hirtentäschchen
+240	Alpen-Gemskresse
+241	Acker-Täschelkraut
+242	Lindengewächse
+243	Linde
+244	Winter-Linde
+245	Sommer-Linde
+246	Primelgewächse
+247	Hain-Gilbweiderich
+248	Mannsschild
+249	Zwerg-Mannsschild
+250	Primel
+251	Aurikel
+252	Wald-Schlüsselblume
+253	Mehl-Primel
+254	Frühlings-Schlüsselblume
+255	Soldanelle
+256	Grosse Soldanelle
+257	Stechpalmengewächse
+258	Stechpalme
+259	Hornstrauchgewächse
+260	Hartriegel
+261	Heidekrautartige
+262	Heidekrautgewächse
+263	Bärentraube
+264	Besenheide
+265	Erika
+266	Alpenazalee
+267	Alpenrose
+268	Rostblättrige Alpenrose
+269	Bewimperte Alpenrose
+270	Heidelbeere
+271	Moorbeere
+272	Preiselbeere
+273	Kardenartige
+274	Geissblattgewächse
+275	Heckenkirsche
+276	Blaue Heckenkirsche
+277	Rote Heckenkirsche
+278	Holunder
+279	Schwarzer Holunder
+280	Roter Holunder
+281	Schneeball
+282	Wolliger Schneeball
+283	Gewöhnlicher Schneeball
+284	Kardengewächse
+285	Acker-Witwenblume
+286	Gewöhnliche Skabiose
+287	Baldriangewächse
+288	Baldrian
+289	Berg-Baldrian
+290	Gewöhnlicher Baldrian
+291	Dreiblatt-Baldrian
+292	Ölbaumgewächse
+293	Esche
+294	Gewöhnliche Esche
+295	Liguster
+296	Enzianartige
+297	Seidenpflanzengewächse
+298	Schwalbenwurz
+299	Enziangewächse
+300	Clusius Enzian
+301	Stengelloser Enzian
+302	Frühlings-Enzian
+303	Rötegewächse
+304	Labkraut
+305	Weisses Labkraut
+306	Kletten-Labkraut
+307	Waldmeister
+308	Tubiflorae
+309	Solanaceae
+310	Atropa belladonna
+311	Solanum dulcamara
+312	Boraginaceae
+313	Echium vulgare
+314	Myosotis
+315	Symphytum officinale
+316	Scrophulariales
+317	Scrophulariaceae
+318	Veronica
+319	Veronica bellidioides
+320	Veronica chamaedrys
+321	Veronica filiformis
+322	Veronica fruticans
+323	Rhinanthus
+324	Rhinanthus alectorolophus
+325	Linaria
+326	Linaria alpina
+327	Bartsia alpina
+328	Euphrasia rostkoviana
+329	Melampyrum silvaticum
+330	Pedicularis
+331	Pedicularis tuberosa
+332	Pedicularis verticillata
+333	Orobanchaceae
+334	Orobanche alba
+335	Globulariaceae
+336	Globularia cordifolia
+337	Lentibulariaceae
+338	Pinguicula
+339	Plantaginaceae
+340	Plantago alpina
+341	Plantago lanceolata
+342	Plantago major
+343	Plantago media
+344	Lamiaceae
+345	Ajuga
+346	Ajuga reptans
+347	Galeopsis
+348	Galeopsis tetrahit
+349	Glechoma hederacea
+350	Lamium
+351	Lamium maculatum
+352	Lamium montanum
+353	Lamium purpureum
+354	Prunella vulgaris
+355	Salvia pratensis
+356	Acinos alpina
+357	Thymus serpyllum
+358	Glockenblumengewächse
+359	Glockenblume
+360	Bärtige Glockenblume
+361	Kleine Glockenblume
+362	Rautenblättrige Glockenblume
+363	Rundblättrige Glockenblume
+364	Rapunzel
+365	Halbkugelige Rapunzel
+366	Rundköpfige Rapunzel
+367	Ährige Rapunzel
+368	Korbblütler
+369	Röhrenblütler
+370	Arnika
+371	Distel
+372	Kratzdistel
+373	Alpenlattich
+374	Pestwurz
+375	Huflattich
+376	Kamille
+377	Echte Kamille
+378	Strahlenlose Kamille
+379	Grauer Alpendost
+380	Gewöhnliches Katzenpfötchen
+381	Beifuss
+382	Wermut
+383	Feld-Beifuss
+384	Gewöhnlicher Beifuss
+385	Flockenblume
+386	Wiesen-Flockenblume
+387	Berg-Flockenblume
+388	Skabiosen-Flockenblume
+389	Edelweiss
+390	Schafgarbe
+391	Gewöhnliche Schafgarbe
+392	Moschus-Schafgarbe
+393	Alpen-Aster
+394	Alpenmasslieb
+395	Gänseblümchen
+396	Alpenmargerite
+397	Gewöhnliche Margerite
+398	Kreuzkraut
+399	Gemswurz-Kreuzkraut
+400	Gewöhnliches Kreuzkraut
+401	Zungenblütler
+402	Pippau
+403	Gold-Pippau
+404	Wiesen-Pippau
+405	Habichtskraut
+406	Mauer-Habichtskraut
+407	Langhaariges Habichtskraut
+408	Steifhaariger Löwenzahn
+409	Pfaffenröhrlein
+410	Wiesen-Bocksbart
+411	Buchenartige
+412	Buchengewächse
+413	Edel-Kastanie
+414	Buche
+415	Eiche
+416	Birkengewächse
+417	Erle
+418	Schwarz-Erle
+419	Grau-Erle
+420	Alpen-Erle
+421	Birke
+422	Hagebuche
+423	Haselstrauch
+424	Walnussgewächse
+425	Walnussbaum
+426	Weidengewächse
+427	Pappel
+428	Silber-Pappel
+429	Zitter-Pappel
+430	Weide
+431	Sal-Weide
+432	Purpur-Weide
+433	Kraut-Weide
+434	Netz-Weide
+435	Stumpfblättrige Weide
+436	Einkeimblättrige
+437	Lilienartige
+438	Liliengewächse
+439	Lauch
+440	Bärlauch
+441	Herbst-Zeitlose
+442	Maiglöcklein
+443	Vierblättrige Einbeere
+444	Salomonssiegel
+445	Vielblütiges Salomonssiegel
+446	Echtes Salomonssiegel
+447	Gewöhnlicher Germer
+448	Amaryllisgewächse
+449	Schneeglöckchen
+450	Märzenglöckchen
+451	Osterglocke
+452	Schwertliliengewächse
+453	Frühlings-Krokus
+454	Gelbe Schwertlilie
+455	Orchideen
+456	Grüne Hohlzunge
+457	Mücken-Nacktdrüse
+458	Nestwurz
+459	Männertreu
+460	Orchis
+461	Stattliche Orchis
+462	Binsengewächse
+463	Binse
+464	Alpen-Binse
+465	Blaugrüne Binse
+466	Hainsimse
+467	Feld-Hainsimse
+468	Luzula silvatica
+469	Sauergräser
+470	Wollgras
+471	Schmalblättriges Wollgras
+472	Rasige Haarbinse
+473	Segge
+474	Davalls Segge
+475	Krumm-Segge
+476	Gedrängtährige Segge
+477	Igelfrüchtige Segge
+478	Geschwärzte Segge
+479	Braune Segge
+480	Steife Segge
+481	Behaarte Segge
+482	Schlaffe Segge
+483	Gelbe Segge
+484	Immergrüne Segge
+485	Wald-Segge
+486	Süssgräser
+487	Gewöhnliches Ruchgras
+488	Gewöhnliches Zittergras
+489	Gewöhnliches Knäuelgras
+490	Borstgras
+491	Schilf
+492	Sesleria caerulea
+493	Kriechende Quecke
+494	Wiesen-Fuchsschwanz
+495	Cynosurus cristatus
+496	Mäuse-Gerste
+497	Lolch
+498	Englisches Raygras
+499	Italienisches Raygras
+500	Perlgras
+501	Nickendes Perlgras
+502	Wiesen-Lieschgras
+503	Federgras
+504	Arrhenatherum elatius
+505	Trespe
+506	Aufrechte Trespe
+507	Weiche Trespe
+508	Taube Trespe
+509	Dach-Trespe
+510	Festuca
+511	Festuca pratensis
+512	Festuca rubra
+513	Festuca vallesiaca
+514	Flaumhafer
+515	Wolliges Honiggras
+516	Rispengras
+517	Alpen-Rispengras
+518	Einjähriges Rispengras
+519	Knolliges Rispengras
+520	Wiesen-Rispengras
+521	Gewöhnliches Rispengras
+522	Goldhafer
+523	Aronstabgewächse
+524	Aronstab
+525	Lebermoose
+526	Laubmoose
+527	Landkartenflechte
+528	Bartflechte
+529	Riesen-Schachtelhalm
+530	Streifenfarngewächse
+531	Athyriaceae
+532	Aspidiaceae
+533	Adlerfarn
+534	Rippenfarn
+535	Gewöhnlicher Blasenfarn
+536	Narzisse
+537	Dichter-Narzisse
+538	Frühlings-Segge
+539	Gefingerte Segge
+540	Rost-Segge
+541	Polster-Segge
+542	Bleiche Segge
+543	Hirsen-Segge
+544	Nacktriedbinse
+545	Breitblättriges Wollgras
+546	Scheuchzers Wollgras
+547	Scheidiges Wollgras
+548	Rostrote Kopfbinse
+549	Waldbinse
+550	Schwertlilie
+551	Sibirische Schwertlilie
+552	Flatter-Binse
+553	Dreispaltige Binse
+554	Behaarte Hainsimse
+555	Wasserlinsengewächse
+556	Kleine Wasserlinse
+557	Schnittlauch
+558	Türkenbund
+559	Faltenlilie
+560	Zweiblättrige Schattenblume
+561	Quirlblättriges Salomonssiegel
+562	Kelch-Liliensimse
+563	Weinberg-Tulpe
+564	Frauenschuh
+565	Dactylorhiza majalis
+566	Grosses Zweiblatt
+567	Fliegen-Ragwurz
+568	Schwärzliche Orchis
+569	Kriechendes Straussgras
+570	Gewöhnlicher Windhalm
+571	Saat-Hafer
+572	Fieder-Zwenke
+573	Buntes Reitgras
+574	Rasen-Schmiele
+575	Festuca arundinacea
+576	Gerste
+577	Saat-Gerste
+578	Waldhirse
+579	Blaues Pfeifengras
+580	Roggen
+581	Gewöhnlicher Weizen
+582	Mais
+583	Zwenke
+584	Rohrkolbengewächse
+585	Breitblättriger Rohrkolben
+586	Seerosengewächse
+587	Weisse Seerose
+588	Grosse Teichrose
+589	Blauer Eisenhut
+590	Gelber Eisenhut
+591	Frühlings-Adonisröschen
+592	Anemone
+593	Acker-Rittersporn
+594	Stinkende Nieswurz
+595	Gletscher-Hahnenfuss
+596	Pyrenäen-Hahnenfuss
+597	Paronychienartige
+598	Kahles Bruchkraut
+599	Rote Schuppenmiere
+600	Arenaria
+601	Minuartia
+602	Aufrechtes Hornkraut
+603	Wald-Sternmiere
+604	Zweiblütiges Sandkraut
+605	Quendelblättriges Sandkraut
+606	Frühlings-Miere
+607	Zwerg-Miere
+608	Pracht-Nelke
+609	Seifenkraut
+610	Gewöhnliches Seifenkraut
+611	Kuckucks-Lichtnelke
+612	Weisse Waldnelke
+613	Runkelrübe
+614	Fuchsschwanzgewächse
+615	Zurückgekrümmter Fuchsschwanz
+616	Säuerling
+617	Japanischer Staudenknöterich
+618	Vogel-Knöterich
+619	Pfirsichblättriger Knöterich
+620	Hänge-Birke
+621	Moor-Birke
+622	Flaum-Eiche
+623	Stiel-Eiche
+624	Trauben-Eiche
+625	Hanf
+626	Spinnweb-Hauswurz
+627	Sempervivum montanum
+628	Weisser Mauerpfeffer
+629	Scharfer Mauerpfeffer
+630	Dunkler Mauerpfeffer
+631	Wechselblättriges Milzkraut
+632	Steinbrech
+633	Moosartiger Steinbrech
+634	Blaugrüner Steinbrech
+635	Herzblattgewächse
+636	Studentenröschen
+637	Felsenmispel
+638	Gewöhnliche Steinmispel
+639	Eingriffliger Weissdorn
+640	Holz-Apfelbaum
+641	Crantz Fingerkraut
+642	Erdbeer-Fingerkraut
+643	Süsskirsche
+644	Wild-Birnbaum
+645	Brombeere
+646	Himbeere
+647	Elsbeerbaum
+648	Sibbaldie
+649	Gletscher-Tragant
+650	Alpen-Süssklee
+651	Frühlings-Platterbse
+652	Sichelklee
+653	Saat-Luzerne
+654	Honigklee
+655	Weisser Honigklee
+656	Gewöhnlicher Honigklee
+657	Robinie
+658	Kleiner Klee
+659	Gewöhnliches Hexenkraut
+660	Gewöhnliche Nachtkerze
+661	Schmalblättriges Weidenröschen
+662	Berg-Weidenröschen
+663	Rundblättriger Storchschnabel
+664	Balsaminaceae
+665	Impatiens parviflora
+666	Impatiens noli-tangere
+667	Impatiens glandulifera
+668	Sonnenwend-Wolfsmilch
+669	Seidelbastgewächse
+670	Gewöhnlicher Seidelbast
+671	Gestreifter Seidelbast
+672	Astrantia major
+673	Chaerophyllum villarsii
+674	Daucus carota
+675	Ligusticum mutellina
+676	Sanicula europaea
+677	Heracleum mantegazzianum
+678	Heracleum
+679	Johanniskrautgewächse
+680	Gewöhnliches Johanniskraut
+681	Acker-Stiefmütterchen
+682	Kohl
+683	Raps
+684	Gemüse-Kohl
+685	Immergrünes Felsenblümchen
+686	Silberling
+687	Acker-Senf
+688	Silber-Weide
+689	Lavendel-Weide
+690	Malvengewächse
+691	Kleine Malve
+692	Wilde Malve
+693	Acker-Gauchheil
+694	Alpen-Mannsschild
+695	Schweizer Mannsschild
+696	Stumpfblättriger Mannsschild
+697	Vandellis Mannsschild
+698	Rote Felsen-Primel
+699	Kornelkirsche
+700	Krähenbeerengewächse
+701	Zwittrige Krähenbeere
+702	Alpen-Heckenkirsche
+703	Schwarze Heckenkirsche
+704	Nüsslisalat
+705	Blumen-Esche
+706	Hundsgiftgewächse
+707	Kleines Immergrün
+708	Feld-Enzian
+709	Deutscher Enzian
+710	Gelber Enzian
+711	Punktierter Enzian
+712	Purpur-Enzian
+713	Gewöhnliches Kreuzlabkraut
+714	Kreuzlabkraut
+715	Meister
+716	Hügel-Meister
+717	Ungleichblättriges Labkraut
+718	Gelbes Labkraut
+719	Solanales
+720	Convolvulaceae
+721	Calystegia sepium
+722	Convolvulus arvensis
+723	Cuscuta epithymum
+724	Cuscutaceae
+725	Solanum
+726	Solanum tuberosum
+727	Datura stramonium
+728	Myosotis alpestris
+729	Myosotis arvensis
+730	Eritrichium nanum
+731	Pulmonaria obscura
+732	Pinguicula alpina
+733	Pinguicula vulgaris
+734	Plantago atrata
+735	Chaenorrhinum minus
+736	Digitalis grandiflora
+737	Verbascum lychnitis
+738	Linaria vulgaris
+739	Melampyrum
+740	Melampyrum pratense
+741	Rhinanthus minor
+742	Veronica arvensis
+743	Veronica persica
+744	Veronica hederifolia
+745	Veronica beccabunga
+746	Lamiales
+747	Verbenaceae
+748	Verbena officinalis
+749	Ajuga pyramidalis
+750	Mentha
+751	Mentha arvensis
+752	Origanum vulgare
+753	Salvia
+754	Salvia glutinosa
+755	Stachys
+756	Stachys recta
+757	Stachys sylvatica
+758	Teucrium
+759	Teucrium montanum
+760	Wiesen-Glockenblume
+761	Betonienblättrige Rapunzel
+762	Schwarzrandige Schafgarbe
+763	Grossblättrige Schafgarbe
+764	Aster
+765	Berg-Distel
+766	Kletten-Distel
+767	Silberdistel
+768	Kornblume
+769	Stachlige Kratzdistel
+770	Kohldistel
+771	Acker-Kratzdistel
+772	Gemswurz
+773	Clusius Gemswurz
+774	Grossköpfige Gemswurz
+775	Berufkraut
+776	Alpen-Berufkraut
+777	Einjähriges Berufkraut
+778	Wasserdost
+779	Zwerg-Ruhrkraut
+780	Einjährige Sonnenblume
+781	Weisse Pestwurz
+782	Gewöhnliche Pestwurz
+783	Alpen-Kreuzkraut
+784	Graues Kreuzkraut
+785	Goldrute
+786	Spätblühende Goldrute
+787	Echte Goldrute
+788	Wegwarte
+789	Zottiges Habichtskraut
+790	Löwenzahn
+791	Schweizer Löwenzahn
+792	Hasenlattich
+793	Kohl-Gänsedistel
+794	Thallose Lebermoose
+795	Beblätterte Lebermoose
+796	Echte Laubmoose
+797	Torfmoose
+798	Aronstabartige
+799	Kleinblütige Segge
+800	Selaginella helvetica
+801	Marattiaceae
+802	Ophioglossum vulgatum
+803	Dryopteris carthusiana
+804	Engelsüss
+805	Rippenfarngewächse
+806	Tüpfelfarngewächse
+807	Adlerfarngewächse
+808	Wald-Zwenke
+809	Melica uniflora
+810	Poeae
+811	Diverseae
+812	Aveneae
+813	Triticeae
+814	Agrostideae
+815	Magnoliidae
+816	Ranunculidae
+817	Caryophyllidae
+818	Hamamelididae
+819	Rosidae
+820	Stachelbeergewächse
+821	Felsen-Johannisbeere
+822	Dilleniidae
+823	Lamiidae
+824	Asteridae
+825	Buddlejaceae
+826	Dummy Antiweizen
+827	Poaceae 2
+828	Festuca
+829	Lolium
+830	Melica
+831	Poa
+832	Apera spica-venti
+833	Briza media
+834	Cynosurus cristatus
+835	Dactylis glomerata
+836	Sesleria caerulea
+837	1: lockere Rispe, mehrblütige Ä
+838	2: lockere Rispe, 1blütige Ä
+839	3: keine lockere Rispe
+840	Festuca arundinacea
+841	Festuca pratensis
+842	Festuca rubra
+843	Festuca vallesiaca
+844	Poa annua
+845	Poa alpina
+846	Poa bulbosa
+847	Poa pratensis
+848	Poa trivialis
+849	Lolium multiflorum
+850	Lolium perenne
+851	Melica nutans
+852	Melica ciliata
+853	Brachypodium
+854	Bromus
+855	Molinia caerulea
+856	Nardus stricta
+857	Phragmites australis
+858	Stipa pennata
+859	Zea mays
+860	Brachypodium sylvaticum
+861	Brachypodium pinnatum
+862	Bromus erectus
+863	Bromus sterilis
+864	Bromus tectorum
+865	Bromus hordeaceus
+866	Anthoxantum odoratum
+867	Arrhenatherum elatius
+868	Avena sativa
+869	Deschampsia caespitosa
+870	Helictrotrichon pubescens
+871	Trisetum flavescens
+872	Hordeum
+873	Agropyron repens
+874	Secale cereale
+875	Triticum aestivum
+876	Hordeum murinum
+877	Hordeum vulgare
+878	Agrostis stolonifera
+879	Alopecurus pratensis
+880	Phleum pratense
+881	Calamagrostis varia
+882	Milium effusum
+883	Outgroup
+884	Outgroup
+885	Holcus lanatus
+886	ohne Honigblätter
+887	mit Honigblättern
+7116	Wurmfarngewächse
+7117	Athyrium filix-femina
+7118	Geflecktes Knabenkraut
+7119	Wald-Hainsimse
+7125	Seidelbast
+7127	dummy
+7128	Buddleja davidii
+7129	Plantago
+7130	Buddleja davidii
+7132	Gipfelmoos
+7133	Astmoos
+7134	Adonisröschen
+7135	xx
+7136	Mohngewächse
+7137	Klatsch-Mohn
+7138	Schöllkraut
+7141	Rosenartige
+7142	Steinobstartige
+7143	Kernobstartige
+7144	xx
+7145	xx
+7146	xx
+7147	Ahorngewächse
+7148	xx
+7149	Acer campestre
+7150	Feld-Ahorn
+7151	Spitz-Ahorn
+7152	Berg-Ahorn
+7153	Springkrautgewächse
+7154	Springkraut
+7155	Drüsiges Springkraut
+7156	Rühr-mich-nicht-an
+7157	Kleinblütiges Springkraut
+7158	Doldenartige
+7159	Efeugewächse
+7160	Doldengewächse
+7161	Efeu
+7162	Kümmel
+7163	Karotte
+7164	Muttern
+7165	Wiesen-Kerbel
+7166	Villars Kerbel
+7167	Baumtropfen
+7168	Grosse Sterndolde
+7169	Bärenklau
+7170	Riesen-Bärenklau
+7171	Wiesen-Bärenklau
+7172	Meisterwurz
+7173	Sanikel
+7174	Viola
+7175	xx
+7176	Malve
+7177	xx
+7178	Hornstrauch
+7179	xx
+7180	Witwenblume
+7181	Skabiose
+7182	xx
+7183	xx
+7184	Röhrenblütige
+7185	Asterartige
+7186	xx
+7187	Braunwurzartige
+7188	Nachtschattenartige
+7189	Taubnesselartige
+7190	Rauhhaargewächse
+7191	Windengewächse
+7192	Seidengewächse
+7193	Nachtschattengewächse
+7194	Zaunwinde
+7195	Acker-Winde
+7196	Teufelszwirn
+7197	Tollkirsche
+7198	Stechapfel
+7199	Nachtschatten
+7200	Bittersüss
+7201	Kartoffel
+7202	Natterkopf
+7203	Himmelsherold
+7204	Vergissmeinnicht
+7205	Alpen-Vergissmeinnicht
+7206	Acker-Vergissmeinnicht
+7207	Dunkelgrünes Lungenkraut
+7208	Echte Wallwurz
+7209	Schmetterlingsstrauchgewächse
+7210	Kugelblumengewächse
+7211	Wasserschlauchgewächse
+7212	Sommerwurzgewächse
+7213	Wegerichgewächse
+7214	Braunwurzgewächse
+7215	Sommerflieder
+7216	Herzblättrige Kugelblume
+7217	Fettblatt
+7218	Alpen-Fettblatt
+7219	Gewöhnliches Fettblatt
+7220	Thymian-Sommerwurz
+7221	Wegerich
+7222	Alpen-Wegerich
+7223	Berg-Wegerich
+7224	Spitz-Wegerich
+7225	Breit-Wegerich
+7226	Mittlerer Wegerich
+7227	Ehrenpreis
+7228	Bachbungen-Ehrenpreis
+7229	Gamander-Ehrenpreis
+7230	Feld-Ehrenpreis
+7231	Rosetten-Ehrenpreis
+7232	Feinstieliger Ehrenpreis
+7233	Felsen-Ehrenpreis
+7234	Efeublättriger Ehrenpreis
+7235	Persischer Ehrenpreis
+7236	Kleines Leinkraut
+7237	Grossblütiger Fingerhut
+7238	Leinkraut
+7239	Alpen-Leinkraut
+7240	Gewöhnliches Leinkraut
+7241	Alpen-Bartschie
+7242	Gewöhnlicher Augentrost
+7243	Wachtelweizen
+7244	Wiesen-Wachtelweizen
+7245	Wald-Wachtelweizen
+7246	Läusekraut
+7247	Knolliges Läusekraut
+7248	Quirlblättriges Läusekraut
+7249	Klappertopf
+7250	Behaarter Klappertopf
+7251	Kleiner Klappertopf
+7252	Lampen-Königskerze
+7253	Lippenblütler
+7254	Eisenkrautgewächse
+7255	Eisenkraut
+7256	Günsel
+7257	Pyramiden-Günsel
+7258	Kriechender Günsel
+7259	Gewöhnliche Gundelrebe
+7260	Gamander
+7261	Berg-Gamander
+7262	Alpen-Steinquendel
+7263	Hohlzahn
+7264	Gewöhnlicher Hohlzahn
+7265	Taubnessel
+7266	Weisse Taubnessel
+7267	Gefleckte Taubnessel
+7268	Berg-Goldnessel
+7269	Purpur-Taubnessel
+7270	Gewöhnliche Brunelle
+7271	Salbei
+7272	Klebrige Salbei
+7273	Wiesen-Salbei
+7274	Ziest
+7275	Aufrechter Ziest
+7276	Wald-Ziest
+7277	Dost
+7278	Feld-Thymian
+7279	Acker-Minze
+7280	Knabenkraut
+7281	xx
+7282	Ragwurz
+7283	x
+7284	Glatthafer
+7285	Schwingel
+7286	Rohr-Schwingel
+7287	Wiesen-Schwingel
+7288	Rot-Schwingel
+7289	Walliser Schwingel
+7290	Gewöhnliches Kammgras
+7299	Blaugras
+7826	sax
+8159	Storchschnabelartige
+8160	lijliu
+9308	Berg-Hauswurz

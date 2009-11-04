@@ -1,0 +1,546 @@
+1;2;3;4
+Verwendung;Nahrungsmittel;Blätter;Blätter werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Blütenstände;Blütenstände werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Früchte;Früchte werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Rüben;Rüben werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Samen;Samen werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Sprossknollen;Sprossknollen werden als Nahrungsmittel verwendet
+Verwendung;Nahrungsmittel;Zwiebeln;Zwiebeln werden als Nahrungsmittel verwendet
+Verwendung;Gewürz;Beerenzapfen;Beerenzapfen als Gewürz
+Verwendung;Gewürz;Blätter;Blätter werden als Gewürz verwendet
+Verwendung;Gewürz;Blütenstände;weibliche Blütenstände werden als Gewürz verwendet
+Verwendung;Gewürz;Früchte;Früchte werden als Gewürz verwendet
+Verwendung;Gewürz;Zwiebeln;Zwiebeln werden als Gewürz verwendet
+Verwendung;Genussmittel;Blütenstände;weibliche Blütenstände als Genussmittel zum Rauchen verwendet
+Verwendung;Zuckerproduktion;Rüben;Rüben werden zur Zuckerproduktion verwendet
+Verwendung;Tierfutter;Pflanze;Tierfutter
+Verwendung;Tierfutter;Rüben;Rüben werden als Tierfutter verwendet
+Verwendung;technisch;Holz;Holz wird technisch verwendet
+Verwendung;technisch;Stengel;Stengel liefert Fasern für technische Nutzung
+Verwendung;Zubereitung;Bier;Herstellung von Bier
+Verwendung;Zubereitung;Gin;Herstellung von Gin (aus Beerenzapfen)
+Verwendung;Zubereitung;Maibowle;Herstellung von Maibowle (aus jungen Blättern und Blütenständen)
+Verwendung;Zubereitung;Öl;Herstellung von Ölen (aus Samen)
+Verwendung;Zubereitung;Schnaps;Herstellung von Schnaps (aus Blättern)
+Verwendung;Zubereitung;Schnaps;Herstellung von Schnaps (aus Wurzeln)
+Verwendung;Zubereitung;Tee;Herstellung von Tee (aus Blütenständen)
+Verwendung;Zubereitung;Tee;Herstellung von Tee (aus Früchten)
+Inhaltsstoffe;Stoffgruppe;Alkaloide;wichtige Inhaltsstoffe gehören zur Gruppe der Alkaloide
+Inhaltsstoffe;Stoffgruppe;ätherische Öle;wichtige Inhaltsstoffe gehören zur Gruppe der ätherischen Öle
+Inhaltsstoffe;Stoffgruppe;Hopfenbitterstoffe;wichtige Inhaltsstoffe gehören zur Gruppe der Hopfenbitterstoffe
+Inhaltsstoffe;Stoffgruppe;Proteine;wichtige Inhaltsstoffe sind aus der Gruppe der Proteine
+Inhaltsstoffe;Stoffgruppe;schwefelhaltige Lauchöle;wichtige Inhaltsstoffe sind aus der Gruppe der schwefelhaltigen Lauchöle
+Inhaltsstoffe;Stoffgruppe;Senfölglykoside;wichtige Inhaltsstoffe gehören zur Gruppe der Senfölglykoside
+Inhaltsstoffe;Substanzen;Oxalsäure;enthält Oxalsäure
+Inhaltsstoffe;Substanzen;Stärke;Früchte enthalten viel Stärke
+Inhaltsstoffe;Substanzen;Stärke;Sprossknollen enthalten viel Stärke
+Inhaltsstoffe;Substanzen;Vitamin C;enthält Vitamin C (in Früchten)
+Giftpflanze;Grad;giftig;giftige Pflanze
+Giftpflanze;Grad;giftig;giftig: bei Berührung und gleichzeitiger Sonneneinstrahlung können stark juckende Hautentzündungen und Blasenbildung auftreten
+Giftpflanze;Grad;giftig;ganze Pflanze mit Ausnahme des roten Arillus giftig
+Giftpflanze;Grad;stark giftig;stark giftige Pflanze
+Giftpflanze;Grad;stark giftig;stark giftig, Vergiftung erfolgt i.d.R. durch Beeren
+Medizin;Inhaltsstoffe (Stoffgruppe);Abführ-Drogen;gehört zur Gruppe der Abführ-Drogen
+Medizin;Inhaltsstoffe (Stoffgruppe);Alkaloide;Hauptinhaltsstoffe gehören zur Gruppe der Alkaloide
+Medizin;Inhaltsstoffe (Stoffgruppe);Arbutin-Drogen;gehört zur Gruppe der Arbutin-Drogen
+Medizin;Inhaltsstoffe (Stoffgruppe);ätherische Öle;Hauptinhaltsstoffe gehören zur Gruppe der ätherischen Öle
+Medizin;Inhaltsstoffe (Stoffgruppe);Bitterstoffe;Hauptinhaltsstoffe gehören zur Gruppe der Bitterstoffe
+Medizin;Inhaltsstoffe (Stoffgruppe);Cumarine;Hauptinhaltsstoffe gehören zur Gruppe der Cumarine
+Medizin;Inhaltsstoffe (Stoffgruppe);Flavonoide;Hauptinhaltsstoffe gehören zur Gruppe der Flavonoide
+Medizin;Inhaltsstoffe (Stoffgruppe);Gerbstoffe;Hauptinhaltsstoffe gehören zur Gruppe der Gerbstoffe
+Medizin;Inhaltsstoffe (Stoffgruppe);Hopfenbitterstoffe/Bittersäuren;Hauptinhaltsstoffe gehören zur Gruppe der Hopfenbitterstoffe/Bittersäuren
+Medizin;Inhaltsstoffe (Stoffgruppe);Iridoidglykoside;Hauptinhaltsstoffe gehören zur Gruppe der Iridoidglykoside
+Medizin;Inhaltsstoffe (Stoffgruppe);Kohlenhydrate;Hauptinhaltsstoffe gehören zur Gruppe der Kohlenhydrate
+Medizin;Inhaltsstoffe (Stoffgruppe);Lipoide;Hauptinhaltsstoffe gehören zur Gruppe der Lipoide
+Medizin;Inhaltsstoffe (Stoffgruppe);Naphthodianthrone;Hauptinhaltsstoffe gehören zur Gruppe der Naphthodianthrone
+Medizin;Inhaltsstoffe (Stoffgruppe);Salicylate;Hauptinhaltsstoffe gehören zur Gruppe der Salicylate
+Medizin;Inhaltsstoffe (Stoffgruppe);Salicylsäure-Derivate;Hauptinhaltsstoffe gehören zur Gruppe der Salicylsäure-Derivate
+Medizin;Inhaltsstoffe (Stoffgruppe);Saponine;Hauptinhaltsstoffe gehören zur Gruppe der Saponine
+Medizin;Inhaltsstoffe (Stoffgruppe);Scharfstoffe (Senföle);Hauptinhaltsstoffe gehören zur Gruppe der Scharfstoffe (Senföle)
+Medizin;Inhaltsstoffe (Stoffgruppe);Schleim (Heteropolysaccharide);Hauptinhaltsstoffe gehören zur Gruppe der Schleime (Heteropolysaccharide)
+Medizin;Inhaltsstoffe (Stoffgruppe);Schleimstoffe;Hauptinhaltsstoffe gehören zur Gruppe der Schleimstoffe
+Medizin;Inhaltsstoffe (Stoffgruppe);Silikate;Hauptinhaltsstoffe gehören zur Gruppe der Silikate
+Medizin;Inhaltsstoffe (Stoffgruppe);Süssstoffe;enhält Süssstoffe
+Medizin;Inhaltsstoffe (Stoffgruppe);Valepotriate;Hauptinhaltsstoffe gehören zur Gruppe der Valepotriate
+Medizin;Inhaltsstoffe (Substanzen);(-)-alpha-Bisabolol;enthält (-)-alpha-Bisabolol
+Medizin;Inhaltsstoffe (Substanzen);(-)-Camphen;enthält (-)-Camphen
+Medizin;Inhaltsstoffe (Substanzen);(-)-Hyoscyamin;enthält (-)-Hyoscyamin
+Medizin;Inhaltsstoffe (Substanzen);(-)-Limonen;enthält (-)-Limonen
+Medizin;Inhaltsstoffe (Substanzen);(-)-Scopolamin;enthält (-)-Scopolamin
+Medizin;Inhaltsstoffe (Substanzen);(+)-Thujon;enthält (+)-Thujon
+Medizin;Inhaltsstoffe (Substanzen);8-Acetoxyachillin;enthält 8-Acetoxyachillin
+Medizin;Inhaltsstoffe (Substanzen);8-Hydroxyachillin;enthält 8-Hydroxyachillin
+Medizin;Inhaltsstoffe (Substanzen);Absinthin;enthält Absinthin
+Medizin;Inhaltsstoffe (Substanzen);Acetylcholin;enthält Acetylcholin
+Medizin;Inhaltsstoffe (Substanzen);Achillin;enthält Achillin
+Medizin;Inhaltsstoffe (Substanzen);alpha-Phellandren;enthält alpha-Phellandren
+Medizin;Inhaltsstoffe (Substanzen);alpha-Pinen;enthält alpha-Pinen
+Medizin;Inhaltsstoffe (Substanzen);Amarogentin;enthält Amarogentin
+Medizin;Inhaltsstoffe (Substanzen);Amaropanin;enthält Amaropanin
+Medizin;Inhaltsstoffe (Substanzen);Amaroswerin;enthält Amaroswerin
+Medizin;Inhaltsstoffe (Substanzen);Amylopektin;enthält Amylopektin
+Medizin;Inhaltsstoffe (Substanzen);Amylose;enthält Amylose
+Medizin;Inhaltsstoffe (Substanzen);Anabsinthin;enthält Anabsinthin
+Medizin;Inhaltsstoffe (Substanzen);Apigenin-5-glucosid;enthält Apigenin-5-glucosid
+Medizin;Inhaltsstoffe (Substanzen);Apoatropin;enthält Apoatropin
+Medizin;Inhaltsstoffe (Substanzen);Arbutin;enthält Arbutin
+Medizin;Inhaltsstoffe (Substanzen);Artabsin;enthält Artabsin
+Medizin;Inhaltsstoffe (Substanzen);Astragalin;enthält Astragalin
+Medizin;Inhaltsstoffe (Substanzen);Atropin;enthält Atropin
+Medizin;Inhaltsstoffe (Substanzen);Aucubin;enthält Aucubin
+Medizin;Inhaltsstoffe (Substanzen);Azulen;enthält Azulen
+Medizin;Inhaltsstoffe (Substanzen);Bayogenin;enthält Bayogenin
+Medizin;Inhaltsstoffe (Substanzen);Belladonnin;enthält Belladonnin
+Medizin;Inhaltsstoffe (Substanzen);Bergapten;enthält Bergapten
+Medizin;Inhaltsstoffe (Substanzen);beta-Bisabolen;enthält beta-Bisabolen
+Medizin;Inhaltsstoffe (Substanzen);beta-Carotin;enthält beta-Carotin
+Medizin;Inhaltsstoffe (Substanzen);beta-Phellandren;enthält beta-Phellandren
+Medizin;Inhaltsstoffe (Substanzen);beta-Pinen;enthält beta-Pinen
+Medizin;Inhaltsstoffe (Substanzen);beta-trans-Farnesen;enthält beta-trans-Farnesen
+Medizin;Inhaltsstoffe (Substanzen);Betuloretinsäure-, Betulinsäurederivate;enthält Betuloretinsäure- und Betulinsäurederivate
+Medizin;Inhaltsstoffe (Substanzen);Bisabololoxid A;enthält Bisabololoxid A
+Medizin;Inhaltsstoffe (Substanzen);Bisabololoxid C;enthält Bisabololoxid C
+Medizin;Inhaltsstoffe (Substanzen);Bisabolonoxid ;enthält Bisabolonoxid 
+Medizin;Inhaltsstoffe (Substanzen);Borneol;enthält Borneol
+Medizin;Inhaltsstoffe (Substanzen);Bornylacetat;enthält Bornylacetat
+Medizin;Inhaltsstoffe (Substanzen);Butanonphloroglucide;enthält Butanonphloroglucide
+Medizin;Inhaltsstoffe (Substanzen);Camphen;enthält Camphen
+Medizin;Inhaltsstoffe (Substanzen);Campher;enthält Campher
+Medizin;Inhaltsstoffe (Substanzen);Caren;enthält Caren
+Medizin;Inhaltsstoffe (Substanzen);Carvacrol;enthält Carvacrol
+Medizin;Inhaltsstoffe (Substanzen);Caryophyllen;enthält Caryophyllen
+Medizin;Inhaltsstoffe (Substanzen);Catalpol;enthält Catalpol
+Medizin;Inhaltsstoffe (Substanzen);Catechingerbstoffe;enthält Catechingerbstoffe
+Medizin;Inhaltsstoffe (Substanzen);Chamazulen;enthält Chamazulen
+Medizin;Inhaltsstoffe (Substanzen);Chelerythrin;enthält Chelerythrin
+Medizin;Inhaltsstoffe (Substanzen);Chelidonin;enthält Chelidonin
+Medizin;Inhaltsstoffe (Substanzen);Colchicin;enthält Colchicin
+Medizin;Inhaltsstoffe (Substanzen);Coptisin;enthält Coptisin
+Medizin;Inhaltsstoffe (Substanzen);Cuskhygrin;enthält Cuskhygrin
+Medizin;Inhaltsstoffe (Substanzen);Cyclopseudohypericin;enthält Cyclopseudohypericin
+Medizin;Inhaltsstoffe (Substanzen);Cymol;enthält Cymol
+Medizin;Inhaltsstoffe (Substanzen);D(+)-Limonen;enthält D(+)-Limonen
+Medizin;Inhaltsstoffe (Substanzen);Demecolcin;enthält Demecolcin
+Medizin;Inhaltsstoffe (Substanzen);Didrovaltrat;enthält Didrovaltrat
+Medizin;Inhaltsstoffe (Substanzen);Diterpentrilaktone (Ginkgolid A, B, C);enthält Diterpentrilaktone (Ginkgolid A, B, C)
+Medizin;Inhaltsstoffe (Substanzen);Ellagsäure;enthält Ellagsäure
+Medizin;Inhaltsstoffe (Substanzen);Ellag-Tannin;enthält Ellag-Tannin
+Medizin;Inhaltsstoffe (Substanzen);Ellagtannine (Agrimonin);enthält Ellagtannine (Agrimonin)
+Medizin;Inhaltsstoffe (Substanzen);Equisetonin;enthält Equisetonin
+Medizin;Inhaltsstoffe (Substanzen);Equisetrin;enthält Equisetrin
+Medizin;Inhaltsstoffe (Substanzen);Flavone (Apigenin, Luteolin, Chrysoeriol);enthält Flavone (Apigenin, Luteolin, Chrysoeriol)
+Medizin;Inhaltsstoffe (Substanzen);Flavonole (Quercetin, Isorhamnetin, 6-Methoxykämpferol);enthält Flavonole (Quercetin, Isorhamnetin, 6-Methoxykämpferol)
+Medizin;Inhaltsstoffe (Substanzen);Fragilin;enthält Fragilin
+Medizin;Inhaltsstoffe (Substanzen);Frangulin A;enthält Frangulin A
+Medizin;Inhaltsstoffe (Substanzen);Frangulin B;enthält Frangulin B
+Medizin;Inhaltsstoffe (Substanzen);Fumarprotocetrarsäure;enthält Fumarprotocetrarsäure
+Medizin;Inhaltsstoffe (Substanzen);Furanocumarine;enthält Furanocumarine
+Medizin;Inhaltsstoffe (Substanzen);Gallo-Tannin;enthält Gallo-Tannin
+Medizin;Inhaltsstoffe (Substanzen);Genkwanin;enthält Genkwanin
+Medizin;Inhaltsstoffe (Substanzen);Gentianose;enthält Gentianose
+Medizin;Inhaltsstoffe (Substanzen);Gentiopikrosid;enthält Gentiopikrosid
+Medizin;Inhaltsstoffe (Substanzen);Glucofrangulin A;enthält Glucofrangulin A
+Medizin;Inhaltsstoffe (Substanzen);Glucofrangulin B;enthält Glucofrangulin B
+Medizin;Inhaltsstoffe (Substanzen);Harzsäuren;enthält Harzsäuren
+Medizin;Inhaltsstoffe (Substanzen);Helenalin;enthält Helenalin
+Medizin;Inhaltsstoffe (Substanzen);Humulen;enthält Humulen
+Medizin;Inhaltsstoffe (Substanzen);Humulon;enthält Humulon
+Medizin;Inhaltsstoffe (Substanzen);Hyperforin;enthält Hyperforin
+Medizin;Inhaltsstoffe (Substanzen);Hypericin;enthält Hypericin
+Medizin;Inhaltsstoffe (Substanzen);Hyperosid;enthält Hyperosid
+Medizin;Inhaltsstoffe (Substanzen);Imperatorin;enthält Imperatorin
+Medizin;Inhaltsstoffe (Substanzen);Isolichenin;enthält Isolichenin
+Medizin;Inhaltsstoffe (Substanzen);Isoquercitrin;enthält Isoquercitrin
+Medizin;Inhaltsstoffe (Substanzen);Kaffeesäureester;enthält Kaffeesäureester
+Medizin;Inhaltsstoffe (Substanzen);Kaliumsalze;enthält Kaliumsalze
+Medizin;Inhaltsstoffe (Substanzen);Kieselsäure;enthält Kieselsäure
+Medizin;Inhaltsstoffe (Substanzen);L(+)-Carvon;enthält L(+)-Carvon
+Medizin;Inhaltsstoffe (Substanzen);L-Hyoscyamin;enthält L-Hyoscyamin
+Medizin;Inhaltsstoffe (Substanzen);Lichenin;enthält Lichenin
+Medizin;Inhaltsstoffe (Substanzen);Lupulon;enthält Lupulon
+Medizin;Inhaltsstoffe (Substanzen);Luteolin-5-glucosid;enthält Luteolin-5-glucosid
+Medizin;Inhaltsstoffe (Substanzen);Luteolin-7-glucosid;enthält Luteolin-7-glucosid
+Medizin;Inhaltsstoffe (Substanzen);Matricin (Chamazulen);enthält Matricin (Chamazulen)
+Medizin;Inhaltsstoffe (Substanzen);Methylarbutin;enthält Methylarbutin
+Medizin;Inhaltsstoffe (Substanzen);Myrcen;enthält Myrcen
+Medizin;Inhaltsstoffe (Substanzen);Myricetindigalactosid;enthält Myricetindigalactosid
+Medizin;Inhaltsstoffe (Substanzen);Naringenin;enthält Naringenin
+Medizin;Inhaltsstoffe (Substanzen);O-Acylglykoside von Kämpferol ;enthält O-Acylglykoside von Kämpferol 
+Medizin;Inhaltsstoffe (Substanzen);O-Acylglykoside von Quercetin;enthält O-Acylglykoside von Quercetin
+Medizin;Inhaltsstoffe (Substanzen);oligomere Procyanidine;enthält oligomere Procyanidine
+Medizin;Inhaltsstoffe (Substanzen);Pektin;enthält Pektin
+Medizin;Inhaltsstoffe (Substanzen);Populin;enthält Populin
+Medizin;Inhaltsstoffe (Substanzen);Primacrosaponin;enthält Primacrosaponin
+Medizin;Inhaltsstoffe (Substanzen);Priverosaponin B;enthält Priverosaponin B
+Medizin;Inhaltsstoffe (Substanzen);Priverosaponin B-22-acetat;enthält Priverosaponin B-22-acetat
+Medizin;Inhaltsstoffe (Substanzen);Proazulene (Achillicin);enthält Proazulene (Achillicin)
+Medizin;Inhaltsstoffe (Substanzen);Procyanidine;enthält Procyanidine
+Medizin;Inhaltsstoffe (Substanzen);Protohypericin;enthält Protohypericin
+Medizin;Inhaltsstoffe (Substanzen);Pseudohypericin;enthält Pseudohypericin
+Medizin;Inhaltsstoffe (Substanzen);Ptaquillosid;enthält Ptaquillosid
+Medizin;Inhaltsstoffe (Substanzen);Quercetin;enthält Quercetin
+Medizin;Inhaltsstoffe (Substanzen);Quercetinderivate;enthält Quercetinderivate
+Medizin;Inhaltsstoffe (Substanzen);Quercitrin;enthält Quercitrin
+Medizin;Inhaltsstoffe (Substanzen);Rutin;enthält Rutin
+Medizin;Inhaltsstoffe (Substanzen);Rutin (Violaquercitrin);enthält Rutin (Violaquercitrin)
+Medizin;Inhaltsstoffe (Substanzen);Salicin;enthält Salicin
+Medizin;Inhaltsstoffe (Substanzen);Salicortin;enthält Salicortin
+Medizin;Inhaltsstoffe (Substanzen);Salicylalkohol;enthält Salicylalkohol
+Medizin;Inhaltsstoffe (Substanzen);Sanguinarin;enthält Sanguinarin
+Medizin;Inhaltsstoffe (Substanzen);Santen;enthält Santen
+Medizin;Inhaltsstoffe (Substanzen);Scopolamin;enthält Scopolamin
+Medizin;Inhaltsstoffe (Substanzen);Scopoletin;enthält Scopoletin
+Medizin;Inhaltsstoffe (Substanzen);Sitosterol;enthält Sitosterol
+Medizin;Inhaltsstoffe (Substanzen);Stärke;enthält Stärke (in Früchten)
+Medizin;Inhaltsstoffe (Substanzen);Stärke;enthält Stärke (in Sprossknollen)
+Medizin;Inhaltsstoffe (Substanzen);Terpinen-4-ol;enthält Terpinen-4-ol
+Medizin;Inhaltsstoffe (Substanzen);Thujylalkohol;enthält Thujylalkohol
+Medizin;Inhaltsstoffe (Substanzen);Thymol;enthält Thymol
+Medizin;Inhaltsstoffe (Substanzen);Thymolmethylether;enthält Thymolmethylether
+Medizin;Inhaltsstoffe (Substanzen);Tremulacin;enthält Tremulacin
+Medizin;Inhaltsstoffe (Substanzen);Triticin;enthält Triticin
+Medizin;Inhaltsstoffe (Substanzen);Usninsäure;enthält Usninsäure
+Medizin;Inhaltsstoffe (Substanzen);Valerol;enthält Valerol
+Medizin;Inhaltsstoffe (Substanzen);Valerosidat;enthält Valerosidat
+Medizin;Inhaltsstoffe (Substanzen);Vincamin;enthält Vincamin
+Medizin;Inhaltsstoffe (Substanzen);Violanthin;enthält Violanthin
+Medizin;Inhaltsstoffe (Substanzen);Violutosid;enthält Violutosid
+Medizin;Inhaltsstoffe (Substanzen);Vitexin;enthält Vitexin
+Medizin;Inhaltsstoffe (Substanzen);Vitexin-2-O-rhamnosid;enthält Vitexin-2-O-rhamnosid
+Medizin;Inhaltsstoffe (Substanzen);Xanthone;enthält Xanthone
+Medizin;Indikation;Absorptionsmittel;Absorptionsmittel
+Medizin;Indikation;Adstringens;Adstringens
+Medizin;Indikation;Adstringens bei Blutungen (durch Gerbwirkung blutstillend);Adstringens bei Blutungen (durch Gerbwirkung blutstillend)
+Medizin;Indikation;Akne;bei Akne desinfizierend und entzündungshemmend
+Medizin;Indikation;Altersherz;bei Altersherzen
+Medizin;Indikation;Amarum zur Appetitanregung;Amarum zur Appetitanregung
+Medizin;Indikation;Analeptikum (anregende Wirkung auf das Zentralnervensystem);Analeptikum (anregende Wirkung auf das Zentralnervensystem)
+Medizin;Indikation;Analfissuren (Haut-, Schleimhautriss der Aftergegend);bei Analfissuren (Haut-, Schleimhautriss der Aftergegend) heilend
+Medizin;Indikation;Angina (Mandel- und Rachenentzündungen);bei Angina (Mandel- und Rachenentzündungen) adstringierend
+Medizin;Indikation;Angstzustände;angstlösend bei Angstzuständen
+Medizin;Indikation;Anthelminticum (Wurmbefall);Anthelminticum (bei Wurmbefall)
+Medizin;Indikation;Antidepressivum (Therapeutikum bei Depression);Antidepressivum (Therapeutikum bei Depression)
+Medizin;Indikation;Antidiarrhoikum (bei Durchfällen);Antidiarrhoikum (bei Durchfällen)
+Medizin;Indikation;Antiseptikum (Vermehrungsfähigkeit von Bakterien hemmend);Antiseptikum (Vermehrungsfähigkeit von Bakterien hemmend)
+Medizin;Indikation;"Arteriosklerose (Veränderung der Gefässwände in den Arterien, ""Verkalkung"")";"bei Arteriosklerose (Veränderung der Gefässwände in den Arterien, ""Verkalkung"")"
+Medizin;Indikation;Arthralgien (Gelenkschmerzen);bei Arthralgien (Gelenkschmerzen) schmerzlindernd
+Medizin;Indikation;Arthritis;Arthritis
+Medizin;Indikation;Asthma bronchiale (Atemnot durch Schleimabsonderung und krampfartigem Zusammenziehen der Bronchiolen);bei Asthma bronchiale (Atemnot durch Schleimabsonderung und krampfartigem Zusammenziehen der Bronchiolen)
+Medizin;Indikation;Bandwürmer;gegen Bandwürmer wirksam
+Medizin;Indikation;beginnende Herzinsuffizienz;bei beginnender Herzinsuffizienz
+Medizin;Indikation;Beschwerden bei Arteriosklerose;zur Milderung von Beschwerden bei Arteriosklerose
+Medizin;Indikation;Blasensteinleiden;bei Blasensteinleiden
+Medizin;Indikation;Blutarmut;bei Blutarmut
+Medizin;Indikation;Blutdrucksenkung;bewirkt eine Blutdrucksenkung
+Medizin;Indikation;Bronchitis;bei Bronchitis
+Medizin;Indikation;bronchopulmonale Verschleimung;schleimlösend bei bronchopulmonaler Verschleimung
+Medizin;Indikation;Cancerosen der Haut (Hautkrebs);bei Cancerosen der Haut (Hautkrebs)
+Medizin;Indikation;Carminativum (blähungstreibendes Mittel);Carminativum (blähungstreibendes Mittel)
+Medizin;Indikation;Cholagogum (gallentreibendes Mittel);Cholagogum (gallentreibendes Mittel)
+Medizin;Indikation;chronisch myelotische Leukämie;bei chronisch myelotischer Leukämie
+Medizin;Indikation;chronische Hautentzündungen;bei chronischen Hautentzündungen
+Medizin;Indikation;Colon irritabile (funktionelle Störung des Dickdarms: Schmerzen, Völlegefühl, Blähungen, Rumoren, Durchfälle/Verstopfung);bei Colon irritabile (funktionelle Störung des Dickdarms: Schmerzen, Völlegefühl, Blähungen, Rumoren, Durchfall/Verstopfung)
+Medizin;Indikation;Cystitis (Blasenentzündung);bei Cystitis (Blasenentzündung)
+Medizin;Indikation;Dermatitis (Hautentzündungen);bei Dermatitis (Hautentzündungen)
+Medizin;Indikation;Desinfektion;zur Desinfektion
+Medizin;Indikation;Diabetes mellitus;bei Diabetes mellitus
+Medizin;Indikation;diabetische Retinopathie;bei diabetischer Retinopathie
+Medizin;Indikation;Diaphoreticum (Schweiss treibendes Mittel);Diaphoreticum (Schweiss treibendes Mittel)
+Medizin;Indikation;Diarrhö (Durchfälle);bei Diarrhö (Durchfälle)
+Medizin;Indikation;Diätetikum;Diätetikum
+Medizin;Indikation;"Distorsionen (""geschlossene"" Gelenkverletzungen mit Bänderüberdehnung und/oder -riss)";"bei Distorsion (""geschlossene"" Gelenkverletzung mit Bänderüberdehnung und/oder -riss)"
+Medizin;Indikation;Diureticum (Harnfluss förderndes Mittel);Diureticum (Harnfluss förderndes Mittel)
+Medizin;Indikation;durch Entzündungen bedingte Schmerzen;durch Entzündungen bedingte Schmerzen lindernd
+Medizin;Indikation;Dysenterie (blutig-schleimiger Stuhlgang durch entzündliche Erkrankung des Dickdarms );bei Dysenterie (blutig-schleimiger Stuhlgang durch entzündliche Erkrankung des Dickdarms)
+Medizin;Indikation;Dysmenorrhö (Monatsblutung mit krampfartigen Unterleibsschmerzen);bei Dysmenorrhö (Monatsblutung mit krampfartigen Unterleibsschmerzen)
+Medizin;Indikation;Dyspeptische Beschwerden (Verdaungsbeschwerden mit Durchfällen, Blähungen, Schmerzen);bei dyspeptischen Beschwerden (Verdaungsbeschwerden mit Durchfällen, Blähungen, Schmerzen)
+Medizin;Indikation;Einschlafstörungen;bei Einschlafstörungen schlafanstossend wirksam
+Medizin;Indikation;Ekzeme (Erkrankung der Oberhaut: Bläschen, Schuppen, Knötchen);bei Ekzemen (Erkrankung der Oberhaut: Bläschen, Schuppen, Knötchen)
+Medizin;Indikation;Enteritis (Darmentzündung);bei Enteritis (Darmentzündung) entzündungshemmend
+Medizin;Indikation;Enterokolitis (Schleimhautentzündung des Dünn- und Dickdarms);bei Enterokolitis (Schleimhautentzündung des Dünn- und Dickdarms) entzündungshemmend
+Medizin;Indikation;entzündliche Veränderungen der Haut;bei entzündlichen Veränderungen der Haut
+Medizin;Indikation;entzündliche Veränderungen der Mund- und Rachenschleimhaut;bei entzündlichen Veränderungen der Mund- und Rachenschleimhaut
+Medizin;Indikation;Entzündungen des Magen- und Darmtraktes;bei Entzündungen des Magen- und Darmtraktes entzündungshemmend
+Medizin;Indikation;Enuresis (Bettnässen);bei Enuresis (Bettnässen)
+Medizin;Indikation;Epithelregeneration;zur Epithelregeneration
+Medizin;Indikation;Erfrischungstee;Erfrischungstee
+Medizin;Indikation;Erkältungskrankheiten;bei Erkältungskrankheiten
+Medizin;Indikation;Erkrankung der Atmungsorgane;bei Erkrankung der Atmungsorgane
+Medizin;Indikation;Expectorans (fördert Schleimentfernung);Expectorans (fördert Schleimentfernung)
+Medizin;Indikation;Fieber;bei Fieber
+Medizin;Indikation;Fliessregulierungsmittel;Fliessregulierungsmittel
+Medizin;Indikation;Frakturödeme (Wasseransammlung im Gewebe durch Bruch bedingt);bei Frakturödemen (durch Bruch bedingte Wasseransammlung im Gewebe)
+Medizin;Indikation;Frostbeulen;bei Frostbeulen
+Medizin;Indikation;Füllmittel;Füllmittel
+Medizin;Indikation;Furunkel;bei Furunkeln
+Medizin;Indikation;Furunkulose (wiederholtes Auftreten von Eiterbeulen/Blutgeschwüren);bei Furunkulose (wiederholtes Auftreten von Eiterbeulen/Blutgeschwüren)
+Medizin;Indikation;Fussschweiss;bei Fussschweiss
+Medizin;Indikation;Gallenblasenentzündung;bei Gallenblasenentzündung
+Medizin;Indikation;Gallenblasenerkrankungen;bei Gallenblasenerkrankungen
+Medizin;Indikation;Gallenstein;bei Gallensteinen
+Medizin;Indikation;Gastritis (Magenschleimhautentzündung);bei Gastritis (Magenschleimhautentzündung) entzündungshemmend
+Medizin;Indikation;Gastroenteritis (Schleimhautentzündung im Magen und Dünndarm);bei Gastroenteritis (Schleimhautentzündung im Magen und Dünndarm) entzündungshemmend
+Medizin;Indikation;Gehirn-Mangeldurchblutung;bei Gehirn-Mangeldurchblutung
+Medizin;Indikation;Geschmackskorrigens;Geschmackskorrigens
+Medizin;Indikation;Geschwüre;bei Geschwüren
+Medizin;Indikation;Gicht;bei Gicht
+Medizin;Indikation;Grippe;bei Grippe
+Medizin;Indikation;Hämatome (Bluterguss);bei Hämatomen (Blutergüssen)
+Medizin;Indikation;Hämorrhoiden (krampfaderartige Erweiterungen des Afterkanals);bei Hämorrhoiden (krampfaderartige Erweiterungen des Afterkanals)
+Medizin;Indikation;Harnsäurediathese (Neigung zu Gicht);bei Harnsäurediathese (Neigung zu Gicht)
+Medizin;Indikation;Hautverletzungen;bei Hautverletzungen heilend
+Medizin;Indikation;Heiserkeit;bei Heiserkeit
+Medizin;Indikation;Herzrythmusstörungen;bei Herzrythmusstörungen
+Medizin;Indikation;Herztonikum (stärkend bei Schwächezuständen des Herzens);als Herztonikum (stärkend bei Schwächezuständen des Herzens)
+Medizin;Indikation;Husten;bei Husten lindernd
+Medizin;Indikation;Hydrogelgerüstbildner;Hydrogelgerüstbildner
+Medizin;Indikation;hyperämisierend (verstärkt Durchblutung);wirkt hyperämisierend (verstärkt Durchblutung)
+Medizin;Indikation;Hypertonie (Bluthochdruck);bei Hypertonie (Bluthochdruck)
+Medizin;Indikation;Immunstimulierung (Stimulierung der körpereigenen Abwehrkräfte);Immunstimulierung (Stimulierung der körpereigenen Abwehrkräfte)
+Medizin;Indikation;Impetigo (Grindflechte);bei Impetigo (Grindflechte)
+Medizin;Indikation;Insektenstich mit Entzündung;bei Insektenstich mit Entzündung
+Medizin;Indikation;Keratitis (Krankheiten der Hornhaut des Auges);bei Keratitis (Krankheiten der Hornhaut des Auges)
+Medizin;Indikation;Koliken (Krämpfe im Bauchraum);krampflösend bei Koliken (Krämpfe im Bauchraum)
+Medizin;Indikation;Konzentrationsmangel;bei Konzentrationsmangel
+Medizin;Indikation;Laktagogum (milchbildendes Mittel);Laktagogum (milchbildendes Mittel)
+Medizin;Indikation;Laxans (Abführmittel);Laxans (Abführmittel)
+Medizin;Indikation;leichte Entzündungen im Genital- und Analbereich;entzündungshemmend bei leichten Entzündungen im Genital- und Analbereich
+Medizin;Indikation;Lithiasis (Steinleiden);bei Lithiasis (Steinleiden)
+Medizin;Indikation;Lungentuberkulose;bei Lungentuberkulose
+Medizin;Indikation;maligne Lymphome (bösartige Lymphknotenschwellung);bei malignen Lymphomen (bösartige Lymphknotenschwellungen)
+Medizin;Indikation;Mastitis (Brustdrüsenentzündungen);bei Mastitis (Brustdrüsenentzündung)
+Medizin;Indikation;Menorrhagie (verlängerte und verstärkte Monatsblutung);bei Menorrhagie (verlängerter und verstärkter Monatsblutung) regulierend
+Medizin;Indikation;Menstruationsstörungen;bei Menstruationsstörungen regulierend
+Medizin;Indikation;Milchschorf;zur Abheilung von Milchschorf
+Medizin;Indikation;Mucilaginosum (lindert Reizung);Mucilaginosum (lindert Reizung)
+Medizin;Indikation;Müdigkeit;bei Müdigkeit
+Medizin;Indikation;Myalgie (örtlicher oder diffuser Muskelschmerz);bei Myalgie (örtlicher oder diffuser Muskelschmerz)
+Medizin;Indikation;Mydriatikum (pupillenerweiterndes Mittel);Mydriatikum (pupillenerweiterndes Mittel)
+Medizin;Indikation;Narkosevorbereitung;zur Narkosevorbereitung
+Medizin;Indikation;nervöse Einschlafstörungen;bei nervösen Einschlafstörungen
+Medizin;Indikation;nervöse Unruhe;bei nervöser Unruhe
+Medizin;Indikation;Neuralgie (Nervenschmerzen);bei Neuralgien (Nervenschmerzen)
+Medizin;Indikation;Neurodermitis (teilweise stark juckende Erkrankungen der Oberhaut);bei Neurodermitis (teilweise stark juckende Erkrankungen der Oberhaut)
+Medizin;Indikation;Nieren- und Blasenbeschwerden;bei Nieren- und Blasenbeschwerden
+Medizin;Indikation;Nierensteinleiden;bei Nierensteinleiden
+Medizin;Indikation;Ödeme (Wasseransammlung im Gewebe) ;bei Ödemen (Wasseransammlungen im Gewebe)
+Medizin;Indikation;Phlebitis (Entzündung venöser Gefässe und Wandschichten);bei Phlebitis (Entzündung venöser Gefässe und Wandschichten)
+Medizin;Indikation;Plasmaersatz;Plasmaersatz
+Medizin;Indikation;Prellungen;bei Prellungen
+Medizin;Indikation;Pruritus (Juckreiz);bei Pruritus (Juckreiz) reizmildernd
+Medizin;Indikation;psychovegetative Störungen;bei psychovegetativen Störungen
+Medizin;Indikation;Pyelonephritis (bakterielle Entzündung des Nierenbeckens);bei Pyelonephritis (bakterielle Entzündung des Nierenbeckens)
+Medizin;Indikation;Quetschungen;bei Quetschungen
+Medizin;Indikation;Reisekrankheit;bei Reisekrankheit
+Medizin;Indikation;Repellent (Insektenabwehrmittel auf der Haut);Repellent (Insektenabwehrmittel auf der Haut)
+Medizin;Indikation;Rhagaden (Hautschrunden);bei Rhagaden (Hautschrunden)
+Medizin;Indikation;Rheuma;bei Rheuma
+Medizin;Indikation;Säureüberproduktion des Magens;bei Säureüberproduktion des Magens
+Medizin;Indikation;schlecht heilende Wunden;bei schlecht heilenden Wunden
+Medizin;Indikation;Schleimhautentzündungen;entzündungshemmend bei Schleimhautentzündungen
+Medizin;Indikation;Schleimhautentzündungen im Mund- und Rachenraum;entzündungshemmend bei Schleimhautentzündungen im Mund- und Rachenraum
+Medizin;Indikation;Schönungsdroge in Teemischnungen;Schönungsdroge in Teemischnungen
+Medizin;Indikation;Schwindel;bei Schwindel
+Medizin;Indikation;Schwitzkur;für Schwitzkuren
+Medizin;Indikation;Sedativum (Beruhigungsmittel);Sedativum (Beruhigungsmittel)
+Medizin;Indikation;Sekretolyticum (schleimlösendes Mittel);Sekretolyticum (schleimlösendes Mittel)
+Medizin;Indikation;Spannungszustände;bei Spannungszuständen
+Medizin;Indikation;Spasmolyticum (krampflösendes Mittel);Spasmolyticum (krampflösendes Mittel)
+Medizin;Indikation;spastische Opstipationen (Verstopfung mit Krämpfen);bei spastischer Opstipation (Verstopfung mit Krämpfen)
+Medizin;Indikation;Stoffwechselleiden;bei Stoffwechselleiden
+Medizin;Indikation;Stomachikum (Magenmittel);Stomachikum (Magenmittel)
+Medizin;Indikation;Streupulver;Streupulver
+Medizin;Indikation;"Thrombosen (""Blutpfropf""-Bildung im Kreislaufsystem)";"bei Thrombose (""Blutpfropf""-Bildung im Kreislaufsystem)"
+Medizin;Indikation;Übererregbarkeit;bei Übererregbarkeit
+Medizin;Indikation;Ulcus cruris (Unterschenkelgeschwür);bei Ulcus cruris (Unterschenkelgeschwür)
+Medizin;Indikation;Unruhe;bei Unruhe
+Medizin;Indikation;Urether- und Gallensteinkoliken (Krämpfe/Schmerzen durch Harnleiter- und Gallensteine);bei Urether- und Gallensteinkolik (Krämpfe/Schmerzen durch Harnleiter- und Gallensteine)
+Medizin;Indikation;Uretheritis (Harnleiterentzündung);entzündungshemmend bei Uretheritis (Harnleiterentzündung)
+Medizin;Indikation;Urethritis (Harnröhrenentzündung);entzündungshemmend bei Urethritis (Harnröhrenentzündung)
+Medizin;Indikation;Verbesserung der Nachtsehleistung;zur Verbesserung der Nachtsehleistung
+Medizin;Indikation;Verbrennungen;bei Verbrennungen
+Medizin;Indikation;Vergesslichkeit;bei Vergesslichkeit
+Medizin;Indikation;Verletzungs- und Unfallfolgen;bei Verletzungs- und Unfallfolgen
+Medizin;Indikation;Vernarbung von Wunden;zur Beschleunigung der Vernarbung von Wunden
+Medizin;Indikation;Völlegefühl;bei Völlegefühl
+Medizin;Indikation;Vorbeugung bei Nierengriess;zur Vorbeugung bei Nierengriess
+Medizin;Indikation;Warzenbehandlung;bei Warzen
+Medizin;Indikation;Wunden;bei Wunden
+Medizin;Indikation;Wurmkoliken (Krämpfe bei Wurmbefall);bei Wurmkoliken (Krämpfe bei Wurmbefall)
+Medizin;Indikation;Zerfallsbeschleuniger bei Tabletten;Zerfallsbeschleuniger bei Tabletten
+Medizin;Verwendung;offizinell;offizinell (im Europäischen/Schweizerischen Arzneibuch aufgeführt)
+Medizin;Verwendung;pharmazeutisch;wird pharmazeutisch verwendet
+Medizin;Verwendung;volksmedizinisch;wird volksmedizinisch verwendet
+Medizin;Droge;Absinthii herba;Absinthii herba
+Medizin;Droge;Alchemillae herba;Alchemillae herba
+Medizin;Droge;Arnicae flos cum receptaculo;Arnicae flos cum receptaculo
+Medizin;Droge;Artemisiae herba;Artemisiae herba
+Medizin;Droge;Belladonnae folium / herba;Belladonnae folium / herba
+Medizin;Droge;Betulae folium;Betulae folium
+Medizin;Droge;Carvi aetheroleum / fructus;Carvi aetheroleum / fructus
+Medizin;Droge;Cetrariae lichen;Cetrariae lichen
+Medizin;Droge;Chelidonii herba;Chelidonii herba
+Medizin;Droge;Cholchici semen;Cholchici semen
+Medizin;Droge;Crataegi folium cum flore / fructus;Crataegi folium cum flore / fructus
+Medizin;Droge;Equiseti herba;Equiseti herba
+Medizin;Droge;Filicis rhizoma;Filicis rhizoma
+Medizin;Droge;Frangulae cortex (Rhamni frangulae cortex);Frangulae cortex oder Rhamni frangulae cortex
+Medizin;Droge;Gentianae radix;Gentianae radix
+Medizin;Droge;Ginkgo folium;Ginkgo folium
+Medizin;Droge;Graminis rhizoma;Graminis rhizoma
+Medizin;Droge;Heraclei rhizoma;Heraclei rhizoma
+Medizin;Droge;Hyperici herba / oleum;Hyperici herba / oleum
+Medizin;Droge;Juniperi aetheroelum / lignum / pseudo-fructus;Juniperi aetheroelum / lignum / pseudo-fructus
+Medizin;Droge;Lichen islandicus;Lichen islandicus
+Medizin;Droge;Lupuli flos / glandula;Lupuli flos / glandula
+Medizin;Droge;Malvae folium;Malvae folium
+Medizin;Droge;Malvae sylvestris flos;Malvae sylvestris flos
+Medizin;Droge;Matricariae flos;Matricariae flos
+Medizin;Droge;Maydis amylum / stigma;Maydis amylum / stigma
+Medizin;Droge;Millefolii herba;Millefolii herba
+Medizin;Droge;Myrtilli folium / fructus recens / fructus siccus;Myrtilli folium / fructus recens / fructus siccus
+Medizin;Droge;Piceae aetheroleum;Piceae aetheroleum
+Medizin;Droge;Pini aetheroelum;Pini aetheroelum
+Medizin;Droge;Pini aetheroelum rectficatum;Pini aetheroelum rectficatum
+Medizin;Droge;Pini pumilionis aetheroleum;Pini pumilionis aetheroleum
+Medizin;Droge;Plantaginis lanceolatae folium / herba;Plantaginis lanceolatae folium / herba
+Medizin;Droge;Polypodii rhizoma;Polypodii rhizoma
+Medizin;Droge;Primulae radix;Primulae radix
+Medizin;Droge;Quercus cortex;Quercus cortex
+Medizin;Droge;Rhoeados flos (Papaver rhoeados flos);Rhoeados flos oder Papaver rhoeados flos
+Medizin;Droge;Rosae pseudofructus cum fructibus / semen;Rosae pseudofructus cum fructibus / semen
+Medizin;Droge;Salicis cortex;Salicis cortex
+Medizin;Droge;Sambuci flos / fructus;Sambuci flos / fructus
+Medizin;Droge;Solani amylum;Solani amylum
+Medizin;Droge;Solidaginis herba;Solidaginis herba
+Medizin;Droge;Stramonii folium;Stramonii folium
+Medizin;Droge;Terebinthinae balsamum;Terebinthinae balsamum
+Medizin;Droge;Tiliae flos;Tiliae flos
+Medizin;Droge;Tormentillae rhizoma;Tormentillae rhizoma
+Medizin;Droge;Tritici amylum;Tritici amylum
+Medizin;Droge;Urticae folium / herba;Urticae folium / herba
+Medizin;Droge;Uvae ursi folium;Uvae ursi folium
+Medizin;Droge;Valerianae radix;Valerianae radix
+Medizin;Droge;Vincae herba;Vincae herba
+Medizin;Droge;Violae herba cum flore;Violae herba cum flore
+Medizin;Organ;Äste;Äste werden medizinisch verwendet
+Medizin;Organ;Balsam;Balsam wird medizinisch verwendet
+Medizin;Organ;Beerenzapfen;Beerenzapfen werden medizinisch verwendet
+Medizin;Organ;Blätter;Blätter werden medizinisch verwendet
+Medizin;Organ;Blüten;Blüten werden medizinisch verwendet
+Medizin;Organ;Blütenboden;Blütenboden werden medizinisch verwendet
+Medizin;Organ;Blütenköpfe;Blütenköpfe werden medizinisch verwendet
+Medizin;Organ;Blütenstände;Blütenstände werden medizinisch verwendet
+Medizin;Organ;Früchte;Früchte werden medizinisch verwendet
+Medizin;Organ;Früchte;Stärke aus Früchten wird medizinisch verwendet
+Medizin;Organ;Fruchtfleisch;Fruchtfleisch wird medizinisch verwendet
+Medizin;Organ;ganze Pflanze;ganze Pflanze wird medizinisch verwendet
+Medizin;Organ;ganze Pflanze, besonders Saft;ganze Pflanze, besonders Saft
+Medizin;Organ;Griffel;Griffel werden medizinisch verwendet
+Medizin;Organ;Holz;Holz wird medizinisch verwendet
+Medizin;Organ;Kraut;Kraut wird medizinisch verwendet
+Medizin;Organ;Kraut mit Blüten;Kraut mit Blüten wird medizinisch verwendet
+Medizin;Organ;Nadeln;frische Nadeln werden medizinisch verwendet
+Medizin;Organ;obere Sprossteile;obere Sprossteile werden medizinisch verwendet
+Medizin;Organ;oberirdische grüne Triebe;oberirdische grüne Triebe werden medizinisch verwendet
+Medizin;Organ;Öl aus Jungtrieben;Öl aus Jungtrieben wird medizinisch verwendet
+Medizin;Organ;Reinstoffe aus Samenschale und Samen;Reinstoffe aus Samenschale und Samen werden medizinisch verwendet
+Medizin;Organ;Rhizom;Rhizom wird medizinisch verwendet
+Medizin;Organ;Rinde der Stämme und Zweige;Rinde der Stämme und Zweige wird medizinisch verwendet
+Medizin;Organ;Rinde jüngerer Zweige und Stockausschlägen;Rinde jüngerer Zweige und Stockausschläge wird medizinisch verwendet
+Medizin;Organ;Rinde von 2- bis 3-jährigen Zweigen;Rinde von 2- bis 3-jährigen Zweigen wird medizinisch verwendet
+Medizin;Organ;Samen;Samen werden medizinisch verwendet
+Medizin;Organ;Sprossknollen;Stärke aus Sprossknollen wird medizinisch verwendet
+Medizin;Organ;Sprossspitzen;Sprossspitzen werden medizinisch verwendet
+Medizin;Organ;Stengel;Stengel wird medizinisch verwendet
+Medizin;Organ;Thalli;Thalli medizinisch verwendet
+Medizin;Organ;Wurzel;Wurzel wird medizinisch verwendet
+Medizin;Organ;Wurzel, Rhizom und Ausläufer;Wurzel, Rhizom und Ausläufer werden medizinisch verwendet
+Medizin;Organ;Wurzelstock (Rhizom, befreit von Wurzeln);Wurzelstock (Rhizom, befreit von Wurzeln) wird medizinisch verwendet
+Medizin;Organ;Zweigspitzen;Zweigspitzen werden medizinisch verwendet
+Medizin;Zubereitung;ätherisches Öl;Herstellung von ätherischem Öl
+Medizin;Zubereitung;Augentropfen;Herstellung von Augentropfen
+Medizin;Zubereitung;Badeöl;Herstellung von Badeöl
+Medizin;Zubereitung;Bäder;für Bäder
+Medizin;Zubereitung;Badesalz;Herstellung von Badesalz
+Medizin;Zubereitung;Badezusätze;als Badezusatz
+Medizin;Zubereitung;Balsame;Herstellung von Balsamen
+Medizin;Zubereitung;Belladonnae extractum siccum normatum;Herstellung von Belladonnae extractum siccum normatum im Arzneibuch
+Medizin;Zubereitung;Belladonnae pulvis normatus;Herstellung von Belladonnae pulvis normatus im Arzneibuch
+Medizin;Zubereitung;Bonbons;Herstellung von Bonbons
+Medizin;Zubereitung;Brausetabletten;Herstellung von Brausetabletten
+Medizin;Zubereitung;Cremes;Herstellung von Cremes
+Medizin;Zubereitung;Dekokte;Herstellung von Dekokten
+Medizin;Zubereitung;Dickextrakte;Herstellung von Dickextrakten
+Medizin;Zubereitung;Dragées;Herstellung von Dragées
+Medizin;Zubereitung;Einreibemittel;als Einreibemittel
+Medizin;Zubereitung;Elixir;Herstellung von Elixiren
+Medizin;Zubereitung;Extrakte;Herstellung von Extrakten
+Medizin;Zubereitung;Filmtabletten;Herstellung von Filmtabletten
+Medizin;Zubereitung;Fluidextrakte;Herstellung von Fluidextrakten
+Medizin;Zubereitung;Frischpflanzenpresssaft;Herstellung von Frischpflanzenpresssaft
+Medizin;Zubereitung;Gewinnung von Reinstoffen;Gewinnung von Reinstoffen
+Medizin;Zubereitung;Granulate;Herstellung von Granulaten
+Medizin;Zubereitung;Gurgelwässer;Herstellung von Gurgelwässern
+Medizin;Zubereitung;Hautöle;Herstellung von Hautölen
+Medizin;Zubereitung;Heissperkolate;Herstellung von Heissperkolaten
+Medizin;Zubereitung;Inhalantia;Herstellung von Inhalantia
+Medizin;Zubereitung;Kapseln;Herstellung von Kapseln
+Medizin;Zubereitung;Liniment;Herstellung von Liniment
+Medizin;Zubereitung;Lösung;Herstellung von Lösungen
+Medizin;Zubereitung;Mazerate;Herstellung von Mazeraten
+Medizin;Zubereitung;Öl;Herstellung von Ölen
+Medizin;Zubereitung;Pastillen;Herstellung von Pastillen
+Medizin;Zubereitung;Pflaster;Herstellung von Pflastern
+Medizin;Zubereitung;Pinselung;Herstellung von Pinselungen
+Medizin;Zubereitung;Presssaft;Herstellung von Presssäften
+Medizin;Zubereitung;Puder;Herstellung von Pudern
+Medizin;Zubereitung;Pulver;Herstellung von Pulvern
+Medizin;Zubereitung;Saft;Herstellung von Saft
+Medizin;Zubereitung;Salbe;Herstellung von Salben
+Medizin;Zubereitung;Seifen;Herstellung von Seifen
+Medizin;Zubereitung;Sirupe;Herstellung von Sirupen
+Medizin;Zubereitung;Sitzbäder;Herstellung von Sitzbädern
+Medizin;Zubereitung;Spray;Herstellung von Spray
+Medizin;Zubereitung;Spülung;Herstellung von Spülungen
+Medizin;Zubereitung;Stramonii pulvis normatus;Herstellung von Stramonii pulvis normatus im Arzneibuch
+Medizin;Zubereitung;Suppositorien (Zäpfchen);Herstellung von Suppositorien (Zäpfchen)
+Medizin;Zubereitung;Tabletten;Herstellung von Tabletten
+Medizin;Zubereitung;Tablettensprengmittel;Tablettensprengmittel
+Medizin;Zubereitung;Tee;Herstellung von Tee
+Medizin;Zubereitung;Teepräparate;Herstellung von Teepräparaten
+Medizin;Zubereitung;Tinktur;Herstellung von Tinkturen
+Medizin;Zubereitung;Tonikum;Herstellung von Tonikum
+Medizin;Zubereitung;transdermale therapeutische Systeme (kontrolliert wirkstoffabgebende Pflaster);Herstellung von transdermalen therapeutischen Systemen (kontrolliert wirkstoffabgebende Pflaster)
+Medizin;Zubereitung;Trinktabletten;Herstellung von Trinktabletten
+Medizin;Zubereitung;Trockenextrakte;Herstellung von Trockenextrakten
+Medizin;Zubereitung;Tropfen;Herstellung von Tropfen
+Medizin;Zubereitung;Tropflösung;Herstellung von Tropflösungen
+Medizin;Zubereitung;Umschläge;Herstellung von Umschlägen
+Medizin;Zubereitung;Wärmepflaster;Herstellung von Wärmepflastern
+Medizin;Zubereitung;Wein;Herstellung von Wein
+Medizin;Zubereitung;zur Injektion;für Injektionen
+Medizin;Gefahren;alle Pflanzenteile giftig;stark giftig, insbesondere Wurzel und Samen
+Medizin;Gefahren;allergen und cardiotoxisch (giftig für Herz);innerliche Anwendung ist heute umstritten, wegen cardiotoxischer und allergener Wirkung der Helenalinderivate in höheren Dosen
+Medizin;Gefahren;Allergien;"kann Allergien auslösen: ""Schafgarbendermatitis"" (allergische Reaktion gegenüber Asteraceae: Juckreiz, Entzündungen und Bläschenbildung)"
+Medizin;Gefahren;Bioverfügbarkeit;Bioverfügbarkeit ist unsicher bei oraler Applikation und darum ist Drogenzubereitung nicht geeignet
+Medizin;Gefahren;Blutschädigung;Blutschädigung kann bei unsachgemässer Anwendung auftreten! Extrakt ist darum heute obsolet, Reinalkaloide sind hingegen bedeutende Krebsmittel
+Medizin;Gefahren;geringe therapeutische Breite;Extrakte zeigen Standardisierungsprobleme und eine geringe therapeutische Breite, eine Anwendung in der Humanmedizin ist nur beim Versagen von synthetischen Wurmmitteln angezeigt
+Medizin;Gefahren;giftig;giftig
+Medizin;Gefahren;giftig;stark giftig
+Medizin;Gefahren;giftig;stark giftig, insbesondere Beerenzapfen, Zweigspitzen und Öl
+Medizin;Gefahren;giftig;stark giftig, Vergiftung erfolgt meistens durch Beeren
+Medizin;Gefahren;Interaktionen;diverse Interaktionen mit anderen Arzneimittel werden vermutet (nicht anwenden mit Cyclosporin, Digoxin, Indinavir und cumarinartigen, gerinnungshemmenden Mitteln)
+Medizin;Gefahren;keine Vollbäder;keine Vollbäder verordnen bei nässenden, grossflächigen Ekzemen und Hautverletzungen sowie Fieber, Herzinsuffizienz und Hypertonie
+Medizin;Gefahren;Kontakallergie;kann bei häufigem Umgang Kontaktallergie auslösen
+Medizin;Gefahren;Kontrainidiziert;kontraindiziert in Schwangerschaft und Stillzeit sowie bei Kindern unter 12 Jahren
+Medizin;Gefahren;Leberschädigung;Leberschädigung: reversible hepatotoxische Nebenwirkungen (akute Hepatitis, anstieg der Leberwerte) bei Konsum von hochdosierten Extraktpräparaten
+Medizin;Gefahren;letale Dosis von Colchicin;letale Dosis von Colchicin: 0.02 g Colchicin = 5 g Samen = 50 g Tinktur
+Medizin;Gefahren;Magenbeschwerden;bei empfindlichen Personen können Magenbeschwerden auftreten
+Medizin;Gefahren;Nadeln besonders giftig;ganze Pflanze mit Ausnahme des roten Arillus giftig (Nadeln besonders giftig im Herbst)
+Medizin;Gefahren;Nierenschäden;Nierenschäden können auftreten, falls alpha-Pinen-Gehalt zu hoch ist
+Medizin;Gefahren;Reizung am Auge;Teeaufguss kann Reizungen im Bereich der Augen hervorrufen
+Medizin;Gefahren;Resorption;Resorption von Alkaloiden und anderen basischen Arzneistoffen ist vermindert
+Medizin;Gefahren;Thujongehalt;Absinthschnaps und Liköre sind durch den hohen Thujongehalt gesundheitsschädlich
+Medizin;Gefahren;Überdosierung;bei Überdosierung entsteht Brechreiz, Übelkeit und Diarrhö
+Medizin;Gefahren;Verfälschungen;Verfälschungen mit alkaloidhaltigem, toxischem Equisetum palustre sind zu beachten

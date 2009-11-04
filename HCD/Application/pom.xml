@@ -5,10 +5,17 @@
     <artifactId>ch.xmatrix.le.application</artifactId>
     <name>Learning Environment Application</name>
     <parent>
-        <groupId>ch.xmatrix.le</groupId>
-        <artifactId>ch.xmatrix.le.project</artifactId>
-        <version>3.5</version>
+        <groupId>ch.xmatrix.common</groupId>
+        <artifactId>ch.xmatrix.common.build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../Common/Build</relativePath>
     </parent>
+    <properties>
+        <main-class>com.ethz.geobot.herbar.gui.AppHerbar</main-class>
+        <codebase>http://geobot1.ethz.ch/ups/webstart/pmbx</codebase>
+        <default-site>scp://balti.ethz.ch/var/www/html/ups/site/pmbx</default-site>
+        <max-heap-size>512m</max-heap-size>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>castor</groupId>
@@ -23,8 +30,8 @@
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>ch.xmatrix.ups.data</groupId>
-            <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>

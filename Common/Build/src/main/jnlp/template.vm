@@ -21,8 +21,9 @@
     <resources>
     <j2se
         #if($max-heap-size)max-heap-size="$max-heap-size"
-       #end version="$j2seVersion"/>
+        #end version="$j2seVersion"/>
         $dependencies
+        <property name="file.encoding" value="windows-1252"/>
     </resources>
     <application-desc main-class="$mainClass"/>
 </jnlp>

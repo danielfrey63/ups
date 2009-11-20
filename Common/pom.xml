@@ -15,6 +15,7 @@
     <name>JFactory</name>
     <description>All Common Components</description>
     <modules>
+        <module>Build</module>
         <module>Util-All</module>
         <module>Icon</module>
         <module>App</module>

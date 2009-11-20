@@ -39,7 +39,7 @@
         </site>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:http://admin:geoBot@geobot1.ethz.ch/svn/repos</developerConnection>
+        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos</developerConnection>
         <url>http://www.xmatrix.ch/</url>
     </scm>
     <properties>
@@ -510,19 +510,19 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <executions>
                     <execution>
-                    <id>attach-javadocs</id>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<tagBase>http://admin:geoBot@geobot1.ethz.ch/svn/repos/tags</tagBase>
-				</configuration>
-			</plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagBase>http://geobot1.ethz.ch/svn/repos/tags</tagBase>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>

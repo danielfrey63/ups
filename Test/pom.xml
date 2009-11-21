@@ -24,7 +24,7 @@
           </repository>
           <!-- use the following if you ARE using a snapshot version. -->
           <snapshotRepository>
-            <id>distribution-snapshot-repository</</id>
+            <id>distribution-snapshot-repository</id>
             <name>Distribution Snapshot Repository</name>
             <url>scp:geobot1.ethz.ch/var/www/html/releases</url>
           </snapshotRepository>

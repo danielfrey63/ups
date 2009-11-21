@@ -7,7 +7,6 @@
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
         <version>1.0</version>
-        <relativePath>../Common/Build</relativePath>
     </parent>
     <properties>
         <main-class>HelloTest</main-class>

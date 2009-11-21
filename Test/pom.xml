@@ -18,15 +18,15 @@
     <distributionManagement>
           <!-- use the following if you're not using a snapshot version. -->
           <repository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scm:admin@geobot1.ethz.ch/var/www/html/releases</url>
+            <id>distribution-repository</id>
+            <name>Distribution Repository</name>
+            <url>scp:geobot1.ethz.ch/var/www/html/releases</url>
           </repository>
           <!-- use the following if you ARE using a snapshot version. -->
           <snapshotRepository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scm:admin@geobot1.ethz.ch/var/www/html/releases</url>
+            <id>distribution-snapshot-repository</</id>
+            <name>Distribution Snapshot Repository</name>
+            <url>scp:geobot1.ethz.ch/var/www/html/releases</url>
           </snapshotRepository>
         </distributionManagement>
   <scm>

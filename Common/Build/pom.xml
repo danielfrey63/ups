@@ -37,6 +37,16 @@
             <name>Default Site</name>
             <url>${default-site}</url>
         </site>
+        <repository>
+            <id>distribution-repository</id>
+            <name>Distribution Repository</name>
+            <url>scp://geobot1.ethz.ch/var/www/html/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>distribution-snapshot-repository</id>
+            <name>Distribution Snapshot Repository</name>
+            <url>scp://geobot1.ethz.ch/var/www/html/releases</url>
+        </snapshotRepository>
     </distributionManagement>
     <scm>
         <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos</developerConnection>

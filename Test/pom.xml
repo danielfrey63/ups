@@ -15,7 +15,20 @@
         <default-site>none</default-site>
         <max-heap-size>64m</max-heap-size>
     </properties>
-
+    <distributionManagement>
+          <!-- use the following if you're not using a snapshot version. -->
+          <repository>
+            <id>repo</id>
+            <name>Repository Name</name>
+            <url>file:${project.parent.relativePath}/repository</url>
+          </repository>
+          <!-- use the following if you ARE using a snapshot version. -->
+          <snapshotRepository>
+            <id>repo</id>
+            <name>Repository Name</name>
+            <url>file:${project.parent.relativePath}/repository</url>
+          </snapshotRepository>
+        </distributionManagement>
   <scm>
     <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.test-1.0</developerConnection>
     <url>http://www.xmatrix.ch/tags/ch.xmatrix.test-1.0</url>

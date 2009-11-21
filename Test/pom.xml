@@ -15,20 +15,6 @@
         <default-site>none</default-site>
         <max-heap-size>64m</max-heap-size>
     </properties>
-    <distributionManagement>
-          <!-- use the following if you're not using a snapshot version. -->
-          <repository>
-            <id>distribution-repository</id>
-            <name>Distribution Repository</name>
-            <url>scp:geobot1.ethz.ch/var/www/html/releases</url>
-          </repository>
-          <!-- use the following if you ARE using a snapshot version. -->
-          <snapshotRepository>
-            <id>distribution-snapshot-repository</id>
-            <name>Distribution Snapshot Repository</name>
-            <url>scp:geobot1.ethz.ch/var/www/html/releases</url>
-          </snapshotRepository>
-        </distributionManagement>
   <scm>
     <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.test-1.0</developerConnection>
     <url>http://www.xmatrix.ch/tags/ch.xmatrix.test-1.0</url>

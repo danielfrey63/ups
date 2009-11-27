@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.abuildpache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
     <name>Learning Environment Application</name>
+    <version>3.5</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
         <version>1.0</version>
-        <relativePath>../../Common/Build</relativePath>
     </parent>
     <properties>
         <main-class>com.ethz.geobot.herbar.gui.AppHerbar</main-class>
-        <codebase>http://geobot1.ethz.ch/ups/webstart/pmbx</codebase>
-        <default-site>scp://balti.ethz.ch/var/www/html/ups/site/pmbx</default-site>
+        <codebase>http://geobot1.ethz.ch/hcd/webstart</codebase>
+        <default-site>scp://geobot1.ethz.ch/hcd/site</default-site>
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>
+    	<!--
         <dependency>
             <groupId>castor</groupId>
             <artifactId>castor-xml</artifactId>
         </dependency>
+        -->
         <dependency>
             <groupId>castor</groupId>
             <artifactId>castor</artifactId>
@@ -118,7 +121,7 @@
             <artifactId>hsqldb</artifactId>
         </dependency>
         <dependency>
-            <groupId>jgoodies</groupId>
+            <groupId>com.jgoodies</groupId>
             <artifactId>animation</artifactId>
         </dependency>
         <dependency>

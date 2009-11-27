@@ -2,12 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.model</artifactId>
     <name>Learning Environment Model</name>
+    <version>3.5</version>
     <parent>
-        <groupId>ch.xmatrix.le</groupId>
-        <artifactId>ch.xmatrix.le.project</artifactId>
-        <version>3.5</version>
+        <groupId>ch.xmatrix.common</groupId>
+        <artifactId>ch.xmatrix.common.build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../Common/Build</relativePath>
     </parent>
     <dependencies>
         <dependency>

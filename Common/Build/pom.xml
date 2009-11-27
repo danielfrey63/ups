@@ -10,6 +10,7 @@
     <description>xmatrix component library</description>
     <url>http://www.geobot1.ethz.ch</url>
     <inceptionYear>2009</inceptionYear>
+
     <organization>
         <name>Institute of Integrative Biologie ETH Zurich</name>
         <url>http://www.ibz.ethz.ch</url>
@@ -57,6 +58,7 @@
         <codebase>http://geobot1.ethz.ch/ups/webstart/dummy</codebase>
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/dummy</default-site>
         <max-heap-size>512m</max-heap-size>
+    	<project.parent.relativePath>.</project.parent.relativePath>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -383,9 +385,9 @@
                 <version>1.1</version>
             </dependency>
             <dependency>
-                <groupId>jgoodies</groupId>
+                <groupId>com.jgoodies</groupId>
                 <artifactId>animation</artifactId>
-                <version>1.0</version>
+                <version>1.0.4</version>
             </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
@@ -457,7 +459,7 @@
             <dependency>
                 <groupId>xalan</groupId>
                 <artifactId>xalan</artifactId>
-                <version>0.0.0</version>
+                <version>2.4.0</version>
             </dependency>
             <dependency>
                 <groupId>xerces</groupId>
@@ -534,6 +536,10 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <!--<version>2.0-beta-5</version>-->
+            </plugin>
+            <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
                     <execution>
@@ -601,27 +607,24 @@
     <repositories>
         <repository>
             <id>local</id>
-            <name>Local Repository 2</name>
-            <url>file:${project.parent.relativePath}/repository</url>
+            <url>file:Common/Build/repository</url>
+            <!-- <url>file:${project.parent.relativePath}/repository</url> -->
         </repository>
         <repository>
-            <id>maven-repo-1</id>
-            <name>Maven Repository 1</name>
+            <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
-        <repository>
-            <id>dev-java-net-repo</id>
-            <name>Java Net Repository</name>
-            <url>https://maven-repository.dev.java.net/nonav/repository</url>
-        </repository>
+		<repository>
+			<id>java.net</id>
+			<url>http://download.java.net/maven/1</url>
+			<layout>legacy</layout>
+		</repository>
         <repository>
             <id>sourceforge-repo</id>
-            <name>Sourceforge Repository</name>
             <url>http://vars.sourceforge.net/maven2</url>
         </repository>
         <repository>
             <id>swinglabs-repo</id>
-            <name>Swinglabs Repository</name>
             <url>http://download.java.net/maven/2</url>
         </repository>
     </repositories>

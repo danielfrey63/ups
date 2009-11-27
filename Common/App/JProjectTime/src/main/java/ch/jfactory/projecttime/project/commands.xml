@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<commands version="1.1.0">
+    <group id="entry.popup.menu">
+        <face>
+            <text>Popup Menu</text>
+        </face>
+        <members>
+            <member command-id="entry.add"/>
+            <member command-id="entry.delete"/>
+            <separator/>
+            <member command-id="entry.start"/>
+            <member command-id="entry.stop"/>
+            <expansion-point separator="before"/>
+        </members>
+    </group>
+    <command id="entry.add">
+        <face>
+            <text i18n="action.addentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(cross_big1.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(cross_big1.png,#900000)</pressed-icon>
+            <description i18n="action.addentry.description"/>
+            <accelerator key="i18n:action.addentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="entry.delete">
+        <face>
+            <text i18n="action.deleteentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(bars_big1.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(bars_big1.png,#900000)</pressed-icon>
+            <description i18n="action.deleteentry.description"/>
+            <accelerator key="i18n:action.deleteentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="entry.start">
+        <face>
+            <text i18n="action.deleteentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(go1_right.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(go1_right.png,#900000)</pressed-icon>
+            <description i18n="action.deleteentry.description"/>
+            <accelerator key="i18n:action.deleteentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+    <command id="entry.stop">
+        <face>
+            <text i18n="action.deleteentry.text"/>
+            <icon type="icon-factory">createDropShadowIcon(checkbox_med1_off.png,#900000)</icon>
+            <pressed-icon type="icon-factory">createPressedIcon(checkbox_med1_off.png,#900000)</pressed-icon>
+            <description i18n="action.deleteentry.description"/>
+            <accelerator key="i18n:action.deleteentry.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+    </command>
+</commands>

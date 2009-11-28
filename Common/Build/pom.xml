@@ -572,7 +572,6 @@
                 </executions>
                 <configuration>
                     <doCheck>true</doCheck>
-                    <!-- Updates do not work due to a "working copy locked" -->
                     <doUpdate>true</doUpdate>
                 </configuration>
             </plugin>

@@ -27,12 +27,13 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class SessionModel extends AbstractTaxonBased
 {
-
     private String constraintsUid;
 
     private String description;
 
-    /** Examination session id. */
+    /**
+     * Examination session id.
+     */
     private String seskz;
 
     private Date due;
@@ -41,9 +42,9 @@ public class SessionModel extends AbstractTaxonBased
     {
     }
 
-    public SessionModel(final SessionModel copy)
+    public SessionModel( final SessionModel copy )
     {
-        super(copy);
+        super( copy );
         constraintsUid = copy.constraintsUid;
         description = copy.description;
         seskz = copy.seskz;
@@ -55,23 +56,23 @@ public class SessionModel extends AbstractTaxonBased
         return constraintsUid;
     }
 
-    public void setConstraintsUid(final String constraintsUid)
+    public void setConstraintsUid( final String constraintsUid )
     {
         this.constraintsUid = constraintsUid;
     }
 
     public String getTaxaUid()
     {
-        final Constraints constraints = (Constraints) AbstractMainModel.findModel(constraintsUid);
+        final Constraints constraints = (Constraints) AbstractMainModel.findModel( constraintsUid );
         return constraints == null ? null : constraints.getTaxaUid();
     }
 
-    public void setTaxaUid(final String taxonUid)
+    public void setTaxaUid( final String taxonUid )
     {
-        final Constraints constraints = (Constraints) AbstractMainModel.findModel(constraintsUid);
-        if (constraints != null && constraints.getTaxaUid().equals(taxonUid))
+        final Constraints constraints = (Constraints) AbstractMainModel.findModel( constraintsUid );
+        if ( constraints != null && constraints.getTaxaUid().equals( taxonUid ) )
         {
-            throw new IllegalStateException("SessionModels constraints does not match with the taxon tree given.");
+            throw new IllegalStateException( "SessionModels constraints does not match with the taxon tree given." );
         }
     }
 
@@ -80,7 +81,7 @@ public class SessionModel extends AbstractTaxonBased
         return description;
     }
 
-    public void setDescription(final String description)
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -90,7 +91,7 @@ public class SessionModel extends AbstractTaxonBased
         return due;
     }
 
-    public void setDue(final Date due)
+    public void setDue( final Date due )
     {
         this.due = due;
     }
@@ -100,7 +101,7 @@ public class SessionModel extends AbstractTaxonBased
         return seskz;
     }
 
-    public void setSeskz(final String seskz)
+    public void setSeskz( final String seskz )
     {
         this.seskz = seskz;
     }
@@ -112,8 +113,8 @@ public class SessionModel extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).
-                append("uid", getUid()).append("name", getName()).append("modified", getModified()).
-                append("due", getDue()).append("seskz", getSeskz()).toString();
+        return new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE ).
+                append( "uid", getUid() ).append( "name", getName() ).append( "modified", getModified() ).
+                append( "due", getDue() ).append( "seskz", getSeskz() ).toString();
     }
 }

@@ -34,7 +34,6 @@ import javax.swing.tree.TreeCellRenderer;
  */
 public class GroupsTreeRenderer implements TreeCellRenderer
 {
-
     private final JCheckBox checkbox = new JCheckBox();
 
     private final RendererPanel panel = new RendererPanel();
@@ -45,32 +44,32 @@ public class GroupsTreeRenderer implements TreeCellRenderer
 
     public GroupsTreeRenderer()
     {
-        checkbox.setOpaque(false);
+        checkbox.setOpaque( false );
     }
 
-    public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
-                                                  final boolean expanded, final boolean leaf, final int row,
-                                                  final boolean hasFocus)
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected,
+                                                   final boolean expanded, final boolean leaf, final int row,
+                                                   final boolean hasFocus )
     {
         final SimpleTaxon taxon = (SimpleTaxon) value;
-        final GroupModel model1 = models == null ? null : models.find(taxon.getName());
+        final GroupModel model1 = models == null ? null : models.find( taxon.getName() );
         final GroupModel current = models == null ? null : models.getCurrentGroup();
-        final GroupModel model = models == null ? null : models.find(taxon.getName());
-        checkbox.setSelected(model1 != null);
-        panel.setSelected(selected);
-        panel.setEnabled(enabled);
-        panel.setText(taxon.getName());
-        panel.setIcon(ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, false)));
-        panel.setPrefixComponent(checkbox);
-        panel.setShowPrefixComponent(taxon instanceof SimpleTaxon && SimpleTaxon.isSpecies(taxon));
-        panel.setPrefixEnabled(isEnabled() && tree.isEnabled() && (model1 == current || model1 == null));
-        panel.setExtentionText(model == null ? null : " (" + model.getName() + ")");
-        panel.setOk(true);
+        final GroupModel model = models == null ? null : models.find( taxon.getName() );
+        checkbox.setSelected( model1 != null );
+        panel.setSelected( selected );
+        panel.setEnabled( enabled );
+        panel.setText( taxon.getName() );
+        panel.setIcon( ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, false ) ) );
+        panel.setPrefixComponent( checkbox );
+        panel.setShowPrefixComponent( taxon instanceof SimpleTaxon && SimpleTaxon.isSpecies( taxon ) );
+        panel.setPrefixEnabled( isEnabled() && tree.isEnabled() && ( model1 == current || model1 == null ) );
+        panel.setExtentionText( model == null ? null : " (" + model.getName() + ")" );
+        panel.setOk( true );
         panel.update();
         return panel;
     }
 
-    public void setGroupsModel(final GroupsModel model)
+    public void setGroupsModel( final GroupsModel model )
     {
         this.models = model;
     }
@@ -81,7 +80,7 @@ public class GroupsTreeRenderer implements TreeCellRenderer
      *
      * @param enabled whether to pseudo-disable the tree or not.
      */
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

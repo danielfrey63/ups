@@ -36,14 +36,16 @@ import org.pietschy.command.CommandManager;
  */
 public class ExportCommand extends ActionCommand
 {
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(ExportCommand.class);
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( ExportCommand.class );
 
-    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyyMMddHHmmss");
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat( "yyyyMMddHHmmss" );
 
-    public ExportCommand(final CommandManager commandManager)
+    public ExportCommand( final CommandManager commandManager )
     {
-        super(commandManager, Commands.COMMANDID_EXPORT);
+        super( commandManager, Commands.COMMANDID_EXPORT );
     }
 
     protected void handleExecute()
@@ -51,18 +53,18 @@ public class ExportCommand extends ActionCommand
         try
         {
             final String prefsNode = Application.getConfiguration().getPreferencesRootName();
-            final String prefsPath = (System.getProperty("user.home") + "/." + prefsNode).replace("\\", "/");
-            final File prefsFile = new File(prefsPath + "/" + UploadDialog.FILE_DATA);
+            final String prefsPath = ( System.getProperty( "user.home" ) + "/." + prefsNode ).replace( "\\", "/" );
+            final File prefsFile = new File( prefsPath + "/" + UploadDialog.FILE_DATA );
 
-            final File dir = DirectoryChooser.chooseDirectory(null);
-            final File backupFile = new File(dir + "/uec-settings-" + FORMATTER.format(new Date()) + ".zip");
+            final File dir = DirectoryChooser.chooseDirectory( null );
+            final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
 
-            ZipUtils.zipDirectory(prefsFile, backupFile);
-            LOG.info("exported existing settings to " + backupFile);
+            ZipUtils.zipDirectory( prefsFile, backupFile );
+            LOG.info( "exported existing settings to " + backupFile );
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
-            LOG.error(e);
+            LOG.error( e );
         }
     }
 }

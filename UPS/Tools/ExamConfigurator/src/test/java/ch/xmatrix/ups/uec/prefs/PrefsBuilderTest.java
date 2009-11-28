@@ -28,11 +28,10 @@ import org.uispec4j.Panel;
  */
 public class PrefsBuilderTest extends MasterDetailsBuilderTest
 {
-
     public void test000Setup()
     {
         BUILDER = new PrefsBuilder();
-        PANEL = new Panel(BUILDER.getPanel());
+        PANEL = new Panel( BUILDER.getPanel() );
         super.test000Setup();
     }
 
@@ -44,13 +43,13 @@ public class PrefsBuilderTest extends MasterDetailsBuilderTest
     public void test011SelectFirst()
     {
         super.test011SelectFirst();
-        checkEnabled(false, false, false, false, false);
+        checkEnabled( false, false, false, false, false );
     }
 
     public void test012AddButton()
     {
         super.test012AddButton();
-        checkEnabled(false, false, false, false, false);
+        checkEnabled( false, false, false, false, false );
     }
 
     public void test013SaveButton()
@@ -61,7 +60,7 @@ public class PrefsBuilderTest extends MasterDetailsBuilderTest
     public void test014TaxtreeCombo()
     {
         super.test014TaxtreeCombo();
-        checkEnabled(true, true, true, true, true);
+        checkEnabled( true, true, true, true, true );
     }
 
     public void test015SaveButton()
@@ -108,42 +107,42 @@ public class PrefsBuilderTest extends MasterDetailsBuilderTest
 
     public void test101KnownTotalCount()
     {
-        checkSpinner(PrefsBuilder.COMPONENT_KNOWNCOUNT);
+        checkSpinner( PrefsBuilder.COMPONENT_KNOWNCOUNT );
     }
 
     public void test102KnownTotalCount()
     {
-        checkSpinner(PrefsBuilder.COMPONENT_KNOWNWEIGHT);
+        checkSpinner( PrefsBuilder.COMPONENT_KNOWNWEIGHT );
     }
 
     public void test103KnownTotalCount()
     {
-        checkSpinner(PrefsBuilder.COMPONENT_UNKNOWNCOUNT);
+        checkSpinner( PrefsBuilder.COMPONENT_UNKNOWNCOUNT );
     }
 
     public void test104KnownTotalCount()
     {
-        checkSpinner(PrefsBuilder.COMPONENT_UNKNOWNWEIGHT);
+        checkSpinner( PrefsBuilder.COMPONENT_UNKNOWNWEIGHT );
     }
 
     //--- Utilities
 
-    private void checkSpinner(final String name)
+    private void checkSpinner( final String name )
     {
         final Calendar date1 = Calendar.getInstance();
-        getSpinner(name).setValue(123);
+        getSpinner( name ).setValue( 123 );
         final Calendar date2 = Calendar.getInstance();
-        checkModificationUpdate(date1, date2);
+        checkModificationUpdate( date1, date2 );
     }
 
-    private void checkEnabled(final boolean knownCountEnabled, final boolean knownWeightEnabled,
-                              final boolean unknownCountEnabled, final boolean unknowWeightEnabled,
-                              final boolean cyclesEnabled)
+    private void checkEnabled( final boolean knownCountEnabled, final boolean knownWeightEnabled,
+                               final boolean unknownCountEnabled, final boolean unknowWeightEnabled,
+                               final boolean cyclesEnabled )
     {
-        assertEquals(knownCountEnabled, getSpinner(PrefsBuilder.COMPONENT_KNOWNCOUNT).isEnabled());
-        assertEquals(knownWeightEnabled, getSpinner(PrefsBuilder.COMPONENT_KNOWNWEIGHT).isEnabled());
-        assertEquals(unknownCountEnabled, getSpinner(PrefsBuilder.COMPONENT_UNKNOWNCOUNT).isEnabled());
-        assertEquals(unknowWeightEnabled, getSpinner(PrefsBuilder.COMPONENT_UNKNOWNWEIGHT).isEnabled());
-        assertEquals(cyclesEnabled, getSpinner(PrefsBuilder.COMPONENT_CYCLES).isEnabled());
+        assertEquals( knownCountEnabled, getSpinner( PrefsBuilder.COMPONENT_KNOWNCOUNT ).isEnabled() );
+        assertEquals( knownWeightEnabled, getSpinner( PrefsBuilder.COMPONENT_KNOWNWEIGHT ).isEnabled() );
+        assertEquals( unknownCountEnabled, getSpinner( PrefsBuilder.COMPONENT_UNKNOWNCOUNT ).isEnabled() );
+        assertEquals( unknowWeightEnabled, getSpinner( PrefsBuilder.COMPONENT_UNKNOWNWEIGHT ).isEnabled() );
+        assertEquals( cyclesEnabled, getSpinner( PrefsBuilder.COMPONENT_CYCLES ).isEnabled() );
     }
 }

@@ -28,16 +28,15 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class SessionFactory extends MasterDetailsFactory
 {
-
-    protected TaxonBased createCopy(final TaxonBased orig)
+    protected TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof SessionModel))
+        if ( !( orig instanceof SessionModel ) )
         {
-            throw new IllegalArgumentException("original must be of type " + SessionModel.class.getName() +
-                    ", got " + orig.getClass().getName());
+            throw new IllegalArgumentException( "original must be of type " + SessionModel.class.getName() +
+                    ", got " + orig.getClass().getName() );
         }
         final SessionModel original = (SessionModel) orig;
-        return new SessionModel(original);
+        return new SessionModel( original );
     }
 
     protected TaxonBased createInstance()

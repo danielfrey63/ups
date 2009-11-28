@@ -24,7 +24,6 @@ package ch.xmatrix.ups.uec.master.commands;
  */
 public class Commands
 {
-
     public static final String COMMANDID_COPY = "master.copy";
 
     public static final String COMMANDID_DELETE = "master.delete";

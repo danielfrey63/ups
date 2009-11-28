@@ -26,14 +26,13 @@ import ch.jfactory.model.IdAware;
  */
 public class CourseModel implements IdAware
 {
-
     private String uid;
 
     private String title;
 
     private String type;
 
-    public void setUid(final String uid)
+    public void setUid( final String uid )
     {
         this.uid = uid;
     }
@@ -43,7 +42,7 @@ public class CourseModel implements IdAware
         return uid;
     }
 
-    public void setTitle(final String title)
+    public void setTitle( final String title )
     {
         this.title = title;
     }
@@ -53,7 +52,7 @@ public class CourseModel implements IdAware
         return title;
     }
 
-    public void setType(final String type)
+    public void setType( final String type )
     {
         this.type = type;
     }

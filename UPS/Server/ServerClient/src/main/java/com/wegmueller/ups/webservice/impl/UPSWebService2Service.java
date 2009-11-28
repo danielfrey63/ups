@@ -13,5 +13,5 @@ public interface UPSWebService2Service extends javax.xml.rpc.Service
 
     public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2() throws javax.xml.rpc.ServiceException;
 
-    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2( java.net.URL portAddress ) throws javax.xml.rpc.ServiceException;
 }

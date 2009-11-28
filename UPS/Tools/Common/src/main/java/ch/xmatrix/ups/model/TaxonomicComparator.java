@@ -27,28 +27,27 @@ import java.util.Comparator;
  */
 public class TaxonomicComparator implements Comparator<String>
 {
+    private final TaxonTree taxa;
 
-    private TaxonTree taxa;
-
-    public TaxonomicComparator(final TaxonTree taxa)
+    public TaxonomicComparator( final TaxonTree taxa )
     {
         this.taxa = taxa;
     }
 
-    public int compare(final String o1, final String o2)
+    public int compare( final String o1, final String o2 )
     {
-        final SimpleTaxon t1 = taxa.findTaxonByName(o1);
-        final SimpleTaxon t2 = taxa.findTaxonByName(o2);
-        if (t1 == null)
+        final SimpleTaxon t1 = taxa.findTaxonByName( o1 );
+        final SimpleTaxon t2 = taxa.findTaxonByName( o2 );
+        if ( t1 == null )
         {
-            throw new NullPointerException("Cannot find taxon for " + o1);
+            throw new NullPointerException( "Cannot find taxon for " + o1 );
         }
-        if (t2 == null)
+        if ( t2 == null )
         {
-            throw new NullPointerException("Cannot find taxon for " + o2);
+            throw new NullPointerException( "Cannot find taxon for " + o2 );
         }
         final int r1 = t1.getRank();
         final int r2 = t2.getRank();
-        return (r1 == r2 ? 0 : (r1 < r2 ? -1 : 1));
+        return ( r1 == r2 ? 0 : ( r1 < r2 ? -1 : 1 ) );
     }
 }

@@ -29,12 +29,11 @@ import javax.swing.JFrame;
  */
 public abstract class CredentialsDialog extends I15nComponentDialog
 {
-
     protected CredentialsModel model;
 
-    public CredentialsDialog(final JFrame parent)
+    public CredentialsDialog( final JFrame parent )
     {
-        super(parent, "credentials");
+        super( parent, "credentials" );
     }
 
     public CredentialsModel getModel()
@@ -44,17 +43,17 @@ public abstract class CredentialsDialog extends I15nComponentDialog
 
     protected JComponent createComponentPanel()
     {
-        this.model = new CredentialsModel(new Credentials());
-        model.getValidationResultModel().addPropertyChangeListener(ValidationResultModel.PROPERTYNAME_RESULT,
+        this.model = new CredentialsModel( new Credentials() );
+        model.getValidationResultModel().addPropertyChangeListener( ValidationResultModel.PROPERTYNAME_RESULT,
                 new PropertyChangeListener()
                 {
-                    public void propertyChange(final PropertyChangeEvent evt)
+                    public void propertyChange( final PropertyChangeEvent evt )
                     {
                         final ValidationResult result = (ValidationResult) evt.getNewValue();
-                        enableApply(result.getErrors().size() == 0);
+                        enableApply( result.getErrors().size() == 0 );
                     }
-                });
-        return new CredentialsPanel(model);
+                } );
+        return new CredentialsPanel( model );
     }
 
     protected void onCancel()

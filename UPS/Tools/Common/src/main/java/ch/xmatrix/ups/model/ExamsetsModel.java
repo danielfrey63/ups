@@ -13,7 +13,6 @@ import java.util.Properties;
  */
 public class ExamsetsModel
 {
-
     private long randomSeed;
 
     private Date startDate;
@@ -33,7 +32,7 @@ public class ExamsetsModel
         return examsetModels;
     }
 
-    public void setExamsetModels(final List<ExamsetModel> examsetModels)
+    public void setExamsetModels( final List<ExamsetModel> examsetModels )
     {
         this.examsetModels = examsetModels;
     }
@@ -43,7 +42,7 @@ public class ExamsetsModel
         return randomSeed;
     }
 
-    public void setRandomSeed(final long randomSeed)
+    public void setRandomSeed( final long randomSeed )
     {
         this.randomSeed = randomSeed;
     }
@@ -53,7 +52,7 @@ public class ExamsetsModel
         return startDate;
     }
 
-    public void setStartDate(final Date startDate)
+    public void setStartDate( final Date startDate )
     {
         this.startDate = startDate;
     }
@@ -63,7 +62,7 @@ public class ExamsetsModel
         return settings;
     }
 
-    public void setSettings(final Properties settings)
+    public void setSettings( final Properties settings )
     {
         this.settings = settings;
     }
@@ -73,7 +72,7 @@ public class ExamsetsModel
         return configurations;
     }
 
-    public void setConfigurations(final List<Object> configurations)
+    public void setConfigurations( final List<Object> configurations )
     {
         this.configurations = configurations;
     }

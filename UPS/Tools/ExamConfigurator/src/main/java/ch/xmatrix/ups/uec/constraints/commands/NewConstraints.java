@@ -30,12 +30,11 @@ import org.pietschy.command.CommandManager;
  */
 public class NewConstraints extends ActionCommand
 {
+    private final SelectionInList models;
 
-    private SelectionInList models;
-
-    public NewConstraints(final CommandManager manager, final SelectionInList models)
+    public NewConstraints( final CommandManager manager, final SelectionInList models )
     {
-        super(manager, Commands.COMMANDID_NEWCONSTRAINT);
+        super( manager, Commands.COMMANDID_NEWCONSTRAINT );
         this.models = models;
     }
 
@@ -43,8 +42,8 @@ public class NewConstraints extends ActionCommand
     {
         final Constraints constraints = (Constraints) models.getSelection();
         final Constraint constraint = new Constraint();
-        constraint.setConstraints(constraints);
-        constraints.addConstraint(constraint);
-        constraints.setCurrent(constraint);
+        constraint.setConstraints( constraints );
+        constraints.addConstraint( constraint );
+        constraints.setCurrent( constraint );
     }
 }

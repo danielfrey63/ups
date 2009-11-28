@@ -42,9 +42,9 @@ import javax.swing.event.DocumentListener;
  */
 public class PersonEditPanel extends JPanel
 {
-    private PersonData person;
+    private final PersonData person;
 
-    private Trigger trigger = new Trigger();
+    private final Trigger trigger = new Trigger();
 
     private JTextField idField;
 
@@ -54,15 +54,15 @@ public class PersonEditPanel extends JPanel
 
     private JComboBox courseField;
 
-    private List listeners = new ArrayList();
+    private final List listeners = new ArrayList();
 
     private boolean complete = false;
 
     private static final String PATTERN = "NN-NNN-NNN";
 
-    private Notifier notifier = new Notifier();
+    private final Notifier notifier = new Notifier();
 
-    public PersonEditPanel(final PersonData person)
+    public PersonEditPanel( final PersonData person )
     {
         this.person = person;
         build();
@@ -75,81 +75,81 @@ public class PersonEditPanel extends JPanel
 
     private void build()
     {
-        final FormLayout layout = new FormLayout("left:pref, 3dlu, pref:grow");
+        final FormLayout layout = new FormLayout( "left:pref, 3dlu, pref:grow" );
 
-        final DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
+        final DefaultFormBuilder builder = new DefaultFormBuilder( layout, this );
         builder.setDefaultDialogBorder();
 
-        builder.append("Vorname:", createFirstNameField());
-        builder.append("Nachname:", createLastNameField());
-        builder.append("Immatrikulationsnummer:", createIdField());
-        builder.append("Studiengang:", createCourseField());
+        builder.append( "Vorname:", createFirstNameField() );
+        builder.append( "Nachname:", createLastNameField() );
+        builder.append( "Immatrikulationsnummer:", createIdField() );
+        builder.append( "Studiengang:", createCourseField() );
     }
 
     private JTextField createFirstNameField()
     {
         firstNameField = new JTextField();
-        final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.FIRST_NAME);
-        firstNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), new FirstNameDocument()));
-        firstNameField.getDocument().addDocumentListener(notifier);
+        final PropertyAdapter adapter = new PropertyAdapter( person, PersonData.FIRST_NAME );
+        firstNameField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter, trigger ), new FirstNameDocument() ) );
+        firstNameField.getDocument().addDocumentListener( notifier );
         return firstNameField;
     }
 
     private JTextField createLastNameField()
     {
         lastNameField = new JTextField();
-        final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.LAST_NAME);
-        lastNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), new LastNameDocument()));
-        lastNameField.getDocument().addDocumentListener(notifier);
+        final PropertyAdapter adapter = new PropertyAdapter( person, PersonData.LAST_NAME );
+        lastNameField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter, trigger ), new LastNameDocument() ) );
+        lastNameField.getDocument().addDocumentListener( notifier );
         return lastNameField;
     }
 
     private JTextField createIdField()
     {
-        idField = new FixedFormatTextField(PATTERN, "00-000-000");
-        final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.ID);
-        idField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter, trigger), idField.getDocument()));
-        idField.getDocument().addDocumentListener(notifier);
+        idField = new FixedFormatTextField( PATTERN, "00-000-000" );
+        final PropertyAdapter adapter = new PropertyAdapter( person, PersonData.ID );
+        idField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter, trigger ), idField.getDocument() ) );
+        idField.getDocument().addDocumentListener( notifier );
         return idField;
     }
 
     private JComboBox createCourseField()
     {
-        final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.COURSE);
+        final PropertyAdapter adapter = new PropertyAdapter( person, PersonData.COURSE );
         courseField = new JComboBox();
-        final List courseList = new ArrayList(4);
-        courseList.add("");
-        courseList.add("Biologie");
-        courseList.add("Pharmazie");
-        courseList.add("Andere");
-        courseField.setModel(new ComboBoxAdapter((ListModel) new SelectionInList(courseList), new BufferedValueModel(adapter, trigger)));
-        courseField.addActionListener(new ActionListener()
+        final List courseList = new ArrayList( 4 );
+        courseList.add( "" );
+        courseList.add( "Biologie" );
+        courseList.add( "Pharmazie" );
+        courseList.add( "Andere" );
+        courseField.setModel( new ComboBoxAdapter( (ListModel) new SelectionInList( courseList ), new BufferedValueModel( adapter, trigger ) ) );
+        courseField.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 notifyComplete();
             }
-        });
+        } );
         return courseField;
     }
 
     public boolean isComplete()
     {
-        return !firstNameField.getText().equals("") &&
-                !lastNameField.getText().equals("") &&
-                !courseField.getSelectedItem().equals("") &&
-                !idField.getText().equals(PATTERN);
+        return !firstNameField.getText().equals( "" ) &&
+                !lastNameField.getText().equals( "" ) &&
+                !courseField.getSelectedItem().equals( "" ) &&
+                !idField.getText().equals( PATTERN );
     }
 
     private class FirstNameDocument extends AbstractPlainDocument
     {
-        protected boolean validate(final String newValue)
+        protected boolean validate( final String newValue )
         {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++)
+            for ( int i = 0; i < newValue.length(); i++ )
             {
-                final char c = newValue.charAt(i);
-                ret &= Character.isLetter(c) || c == ' ' || c == '-';
+                final char c = newValue.charAt( i );
+                ret &= Character.isLetter( c ) || c == ' ' || c == '-';
             }
             notifyComplete();
             return ret;
@@ -158,13 +158,13 @@ public class PersonEditPanel extends JPanel
 
     private class LastNameDocument extends AbstractPlainDocument
     {
-        protected boolean validate(final String newValue)
+        protected boolean validate( final String newValue )
         {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++)
+            for ( int i = 0; i < newValue.length(); i++ )
             {
-                final char c = newValue.charAt(i);
-                ret &= Character.isLetter(c) || c == ' ' || c == '-' || c == '(' || c == ')';
+                final char c = newValue.charAt( i );
+                ret &= Character.isLetter( c ) || c == ' ' || c == '-' || c == '(' || c == ')';
             }
             return ret;
         }
@@ -172,41 +172,41 @@ public class PersonEditPanel extends JPanel
 
     public interface CompletionListener
     {
-        void updateComplete(boolean complete);
+        void updateComplete( boolean complete );
     }
 
-    public void addCompletionListener(final CompletionListener listener)
+    public void addCompletionListener( final CompletionListener listener )
     {
-        listeners.add(listener);
+        listeners.add( listener );
     }
 
     private void notifyComplete()
     {
         final boolean oldComplete = complete;
         complete = isComplete();
-        if (oldComplete != complete)
+        if ( oldComplete != complete )
         {
-            for (int i = 0; i < listeners.size(); i++)
+            for ( final Object listener1 : listeners )
             {
-                final CompletionListener listener = (CompletionListener) listeners.get(i);
-                listener.updateComplete(complete);
+                final CompletionListener listener = (CompletionListener) listener1;
+                listener.updateComplete( complete );
             }
         }
     }
 
     private class Notifier implements DocumentListener
     {
-        public void changedUpdate(final DocumentEvent e)
+        public void changedUpdate( final DocumentEvent e )
         {
             notifyComplete();
         }
 
-        public void insertUpdate(final DocumentEvent e)
+        public void insertUpdate( final DocumentEvent e )
         {
             notifyComplete();
         }
 
-        public void removeUpdate(final DocumentEvent e)
+        public void removeUpdate( final DocumentEvent e )
         {
             notifyComplete();
         }

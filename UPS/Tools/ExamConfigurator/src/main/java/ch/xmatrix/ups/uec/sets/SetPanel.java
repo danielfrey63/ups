@@ -20,38 +20,39 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-/** @author Daniel Frey */
+/**
+ * @author Daniel Frey
+ */
 public class SetPanel
 {
-
     private void initComponents()
     {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
         final DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         panel = new JPanel();
-        goodiesFormsSeparator2 = compFactory.createSeparator("Konfiguration");
+        goodiesFormsSeparator2 = compFactory.createSeparator( "Konfiguration" );
         label1 = new JLabel();
         combo = new JComboBox();
         label2 = new JLabel();
         field = new JTextField();
         panelToolbar = new JPanel();
-        goodiesFormsSeparator1 = compFactory.createSeparator("Pr\u00fcfungslisten");
+        goodiesFormsSeparator1 = compFactory.createSeparator( "Pr\u00fcfungslisten" );
         scroll = new JScrollPane();
         table = new SortedTable();
         final CellConstraints cc = new CellConstraints();
 
         //======== panel ========
         {
-            panel.setLayout(new FormLayout(
+            panel.setLayout( new FormLayout(
                     new ColumnSpec[]{
                             FormFactory.UNRELATED_GAP_COLSPEC,
                             FormFactory.DEFAULT_COLSPEC,
                             FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-                            new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW)
+                            new ColumnSpec( ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW )
                     },
                     new RowSpec[]{
-                            new RowSpec("max(default;16px)"),
+                            new RowSpec( "max(default;16px)" ),
                             FormFactory.LINE_GAP_ROWSPEC,
                             FormFactory.DEFAULT_ROWSPEC,
                             FormFactory.LINE_GAP_ROWSPEC,
@@ -59,42 +60,42 @@ public class SetPanel
                             FormFactory.UNRELATED_GAP_ROWSPEC,
                             FormFactory.DEFAULT_ROWSPEC,
                             FormFactory.LINE_GAP_ROWSPEC,
-                            new RowSpec(RowSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW)
-                    }));
-            panel.add(goodiesFormsSeparator2, cc.xywh(1, 1, 4, 1));
+                            new RowSpec( RowSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW )
+                    } ) );
+            panel.add( goodiesFormsSeparator2, cc.xywh( 1, 1, 4, 1 ) );
 
             //---- label1 ----
-            label1.setText("Auswahl:");
-            panel.add(label1, cc.xy(2, 3));
-            panel.add(combo, cc.xy(4, 3));
+            label1.setText( "Auswahl:" );
+            panel.add( label1, cc.xy( 2, 3 ) );
+            panel.add( combo, cc.xy( 4, 3 ) );
 
             //---- label2 ----
-            label2.setText("Random Seed:");
-            panel.add(label2, cc.xy(2, 5));
-            panel.add(field, cc.xy(4, 5));
+            label2.setText( "Random Seed:" );
+            panel.add( label2, cc.xy( 2, 5 ) );
+            panel.add( field, cc.xy( 4, 5 ) );
 
             //======== panelToolbar ========
             {
-                panelToolbar.setLayout(new FormLayout(
+                panelToolbar.setLayout( new FormLayout(
                         new ColumnSpec[]{
-                                new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW),
+                                new ColumnSpec( ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW ),
                                 FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
                                 FormFactory.DEFAULT_COLSPEC
                         },
-                        RowSpec.decodeSpecs("default")));
-                panelToolbar.add(goodiesFormsSeparator1, cc.xy(1, 1));
+                        RowSpec.decodeSpecs( "default" ) ) );
+                panelToolbar.add( goodiesFormsSeparator1, cc.xy( 1, 1 ) );
             }
-            panel.add(panelToolbar, cc.xywh(1, 7, 4, 1));
+            panel.add( panelToolbar, cc.xywh( 1, 7, 4, 1 ) );
 
             //======== scroll ========
             {
-                scroll.setEnabled(false);
+                scroll.setEnabled( false );
 
                 //---- table ----
-                table.setEnabled(false);
-                scroll.setViewportView(table);
+                table.setEnabled( false );
+                scroll.setViewportView( table );
             }
-            panel.add(scroll, cc.xywh(2, 9, 3, 1));
+            panel.add( scroll, cc.xywh( 2, 9, 3, 1 ) );
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

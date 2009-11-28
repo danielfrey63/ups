@@ -30,12 +30,11 @@ import org.pietschy.command.CommandManager;
  */
 public class DeleteSpecimen extends ActionCommand
 {
-
     private final SelectionInList model;
 
-    public DeleteSpecimen(final CommandManager commandManager, final SelectionInList model)
+    public DeleteSpecimen( final CommandManager commandManager, final SelectionInList model )
     {
-        super(commandManager, Commands.COMMANDID_DELETESPECIMEN);
+        super( commandManager, Commands.COMMANDID_DELETESPECIMEN );
         assert model != null : "SelectionInList must not be null";
         this.model = model;
     }
@@ -44,11 +43,11 @@ public class DeleteSpecimen extends ActionCommand
     {
         final SpecimensModel specimens = (SpecimensModel) model.getSelection();
         final SpecimenModel specimen = specimens.getCurrent();
-        if (specimens != null)
+        if ( specimens != null )
         {
-            specimens.setCurrent(null);
-            specimens.remove(specimen);
-            specimen.setTaxon(null);
+            specimens.setCurrent( null );
+            specimens.remove( specimen );
+            specimen.setTaxon( null );
         }
     }
 }

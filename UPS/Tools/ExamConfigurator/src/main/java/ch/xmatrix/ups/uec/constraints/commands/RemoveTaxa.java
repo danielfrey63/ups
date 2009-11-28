@@ -31,14 +31,13 @@ import org.pietschy.command.CommandManager;
  */
 public class RemoveTaxa extends ActionCommand
 {
-
-    private SelectionInList constraintsModels;
+    private final SelectionInList constraintsModels;
 
     private JList selection;
 
-    public RemoveTaxa(final CommandManager manager, final SelectionInList constraintsModels)
+    public RemoveTaxa( final CommandManager manager, final SelectionInList constraintsModels )
     {
-        super(manager, Commands.COMMANDID_REMOVETAXA);
+        super( manager, Commands.COMMANDID_REMOVETAXA );
         this.constraintsModels = constraintsModels;
     }
 
@@ -47,15 +46,14 @@ public class RemoveTaxa extends ActionCommand
         final Constraints constraints = (Constraints) constraintsModels.getSelection();
         final Constraint constraint = constraints.getCurrent();
         final int[] indices = selection.getSelectedIndices();
-        for (int i = 0; i < indices.length; i++)
+        for ( final int index : indices )
         {
-            final int index = indices[i];
-            final String taxon = constraint.getTaxa().get(index);
-            constraints.removeTaxon(taxon);
+            final String taxon = constraint.getTaxa().get( index );
+            constraints.removeTaxon( taxon );
         }
     }
 
-    public void setList(final JList list)
+    public void setList( final JList list )
     {
         selection = list;
     }

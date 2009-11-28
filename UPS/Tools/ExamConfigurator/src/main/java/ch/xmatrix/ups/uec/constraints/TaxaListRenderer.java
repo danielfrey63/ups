@@ -40,10 +40,9 @@ import javax.swing.ListCellRenderer;
  */
 public class TaxaListRenderer implements ListCellRenderer
 {
-
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
-    private final RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+    private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.ALL );
 
     private Constraints models;
 
@@ -53,36 +52,36 @@ public class TaxaListRenderer implements ListCellRenderer
 
     private boolean enabled;
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-                                                  final boolean selected, final boolean hasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index,
+                                                   final boolean selected, final boolean hasFocus )
     {
-        if (tree != null)
+        if ( tree != null )
         {
             final String taxonName = (String) value;
             final Constraint constraint = models == null ? null : models.getCurrent();
             final List<String> taxa = constraint == null ? null : constraint.getTaxa();
-            final SimpleTaxon taxon = tree.findTaxonByName(taxonName);
+            final SimpleTaxon taxon = tree.findTaxonByName( taxonName );
             final boolean singleTaxon = taxa != null && taxa.size() == 1;
-            panel.setEnabled(enabled);
-            panel.setSelected(selected);
-            panel.setText(taxonName);
-            panel.setIcon(ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, selected && enabled)));
-            ConstraintsRendererUtils.configureForConstraint(panel, models, constraint, defaultTaxa, singleTaxon);
+            panel.setEnabled( enabled );
+            panel.setSelected( selected );
+            panel.setText( taxonName );
+            panel.setIcon( ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, selected && enabled ) ) );
+            ConstraintsRendererUtils.configureForConstraint( panel, models, constraint, defaultTaxa, singleTaxon );
             panel.update();
         }
 
         return panel;
     }
 
-    public void setConstraints(final Constraints models)
+    public void setConstraints( final Constraints models )
     {
         this.models = models;
         final String[] taxa = models == null ? null : models.getDefaultTaxa();
-        defaultTaxa = models == null || taxa == null ? DUMMY_LIST : new ArrayList<String>(Arrays.asList(taxa));
-        tree = models == null ? null : TaxonModels.find(models.getTaxaUid());
+        defaultTaxa = models == null || taxa == null ? DUMMY_LIST : new ArrayList<String>( Arrays.asList( taxa ) );
+        tree = models == null ? null : TaxonModels.find( models.getTaxaUid() );
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

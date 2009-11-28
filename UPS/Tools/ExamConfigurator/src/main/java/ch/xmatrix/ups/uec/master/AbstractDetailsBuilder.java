@@ -122,10 +122,9 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder implements DetailsBuilder
 {
+    private static final Logger LOG = Logger.getLogger( AbstractDetailsBuilder.class );
 
-    private static final Logger LOG = Logger.getLogger(AbstractDetailsBuilder.class);
-
-    protected static final Integer ZERO = new Integer(0);
+    protected static final Integer ZERO = new Integer( 0 );
 
     protected static final DefaultListModel DUMMY_MODEL = new DefaultListModel();
 
@@ -161,8 +160,8 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
     private MasterDetailsBuilder master;
 
-    protected AbstractDetailsBuilder(final MasterDetailsFactory factory, final String modelResource,
-                                     final String resourceForm, final int space)
+    protected AbstractDetailsBuilder( final MasterDetailsFactory factory, final String modelResource,
+                                      final String resourceForm, final int space )
     {
         this.models = new SelectionInList();
         this.factory = factory;
@@ -184,43 +183,43 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
     {
         try
         {
-            infoModel.setNote(new SimpleNote("Lade " + getInfoString()));
+            infoModel.setNote( new SimpleNote( "Lade " + getInfoString() ) );
             InputStream in;
-            in = getClass().getResourceAsStream(formResource);
+            in = getClass().getResourceAsStream( formResource );
             // Don't know why I have to do that: On some machines an absolute path is required, on others a relative.
-            if (in == null)
+            if ( in == null )
             {
-                if (!formResource.startsWith("/"))
+                if ( !formResource.startsWith( "/" ) )
                 {
-                    in = getClass().getResourceAsStream("/" + formResource);
+                    in = getClass().getResourceAsStream( "/" + formResource );
                 }
                 else
                 {
-                    in = getClass().getResourceAsStream(formResource.substring(1));
+                    in = getClass().getResourceAsStream( formResource.substring( 1 ) );
                 }
             }
-            creator = new FormCreator(FormLoader.load(in));
+            creator = new FormCreator( FormLoader.load( in ) );
             in.close();
             details = creator.createPanel();
 
             master = new MasterDetailsBuilder();
-            master.registerController(getController());
-            master.registerModels(getModels());
-            master.registerDetailsBuilder(this);
+            master.registerController( getController() );
+            master.registerModels( getModels() );
+            master.registerDetailsBuilder( this );
             panel = master.getPanel();
 
             initComponents();
 
-            master.addDetails(details, space);
+            master.addDetails( details, space );
             reload();
 
             return panel;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             final String message = "failed to init components";
-            LOG.error(message, e);
-            throw new IllegalStateException(message);
+            LOG.error( message, e );
+            throw new IllegalStateException( message );
         }
     }
 
@@ -229,9 +228,9 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
     public void lock()
     {
         final TaxonBased model = (TaxonBased) models.getSelection();
-        dirtyListener.setDirty(true);
+        dirtyListener.setDirty( true );
         model.setFixed();
-        setEnabled(false);
+        setEnabled( false );
     }
 
     /**
@@ -240,25 +239,25 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      */
     public void load()
     {
-        final SimpleModelList list = Loader.loadModel(modelResource, prefsPath, getConverter());
-        models.setListModel(list);
-        factory.setModels(list);
-        if (details != null)
+        final SimpleModelList list = Loader.loadModel( modelResource, prefsPath, getConverter() );
+        models.setListModel( list );
+        factory.setModels( list );
+        if ( details != null )
         {
             details.repaint();
         }
 
-        MainModel.registerModels(getModelId(), list);
-        if (dirtyListener != null)
+        MainModel.registerModels( getModelId(), list );
+        if ( dirtyListener != null )
         {
-            dirtyListener.setDirty(false);
+            dirtyListener.setDirty( false );
         }
     }
 
     public void save()
     {
-        Loader.saveModel(modelResource, prefsPath, getConverter(), getModels().getListModel());
-        dirtyListener.setDirty(false);
+        Loader.saveModel( modelResource, prefsPath, getConverter(), getModels().getListModel() );
+        dirtyListener.setDirty( false );
     }
 
     /**
@@ -280,21 +279,21 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid   the new taxon tree uid
      * @return whether migration has to be done or not
      */
-    public boolean handleMigration(final TaxonBased model, final String uid)
+    public boolean handleMigration( final TaxonBased model, final String uid )
     {
         boolean migrate = true;
-        if (model != null && model.getTaxaUid() != null && !model.getTaxaUid().equals(uid))
+        if ( model != null && model.getTaxaUid() != null && !model.getTaxaUid().equals( uid ) )
         {
-            migrate = shouldMigrate(uid);
-            if (migrate)
+            migrate = shouldMigrate( uid );
+            if ( migrate )
             {
-                final ArrayList errors = findMigrationErrors(uid);
-                if (errors.size() > 0)
+                final ArrayList errors = findMigrationErrors( uid );
+                if ( errors.size() > 0 )
                 {
-                    migrate = commitMigrate(errors);
-                    if (migrate)
+                    migrate = commitMigrate( errors );
+                    if ( migrate )
                     {
-                        removeMigrationErrors(errors);
+                        removeMigrationErrors( errors );
                     }
                 }
                 else
@@ -306,7 +305,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
         return migrate;
     }
 
-    public void registerDirtyListener(final DirtyListener dirtyListener)
+    public void registerDirtyListener( final DirtyListener dirtyListener )
     {
         this.dirtyListener = dirtyListener;
     }
@@ -317,18 +316,18 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param taxonBased the model
      */
-    public void setModel(final TaxonBased taxonBased)
+    public void setModel( final TaxonBased taxonBased )
     {
-        if (treeModel != null)
+        if ( treeModel != null )
         {
-            final TaxonTree taxa = taxonBased == null ? null : TaxonModels.find(taxonBased.getTaxaUid());
-            if (taxa != null)
+            final TaxonTree taxa = taxonBased == null ? null : TaxonModels.find( taxonBased.getTaxaUid() );
+            if ( taxa != null )
             {
-                treeModel.setRoot(taxa.getRootTaxon());
+                treeModel.setRoot( taxa.getRootTaxon() );
             }
             else
             {
-                treeModel.setRoot(null);
+                treeModel.setRoot( null );
             }
             treeModel.reload();
             tree.repaint();
@@ -341,13 +340,13 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the uid of the model to find
      * @return the model with the given uid
      */
-    public TaxonBased find(final String uid)
+    public TaxonBased find( final String uid )
     {
         reload();
-        for (int i = 0; i < models.getSize(); i++)
+        for ( int i = 0; i < models.getSize(); i++ )
         {
-            final TaxonBased model = (TaxonBased) models.getElementAt(i);
-            if (model.getUid().equals(uid))
+            final TaxonBased model = (TaxonBased) models.getElementAt( i );
+            if ( model.getUid().equals( uid ) )
             {
                 return model;
             }
@@ -373,7 +372,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
         return factory;
     }
 
-    public void setInfoModel(final InfoModel infoModel)
+    public void setInfoModel( final InfoModel infoModel )
     {
         this.infoModel = infoModel;
     }
@@ -417,12 +416,12 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the taxon tree uid
      * @return whether the migration should take place or not.
      */
-    protected boolean shouldMigrate(final String uid)
+    protected boolean shouldMigrate( final String uid )
     {
-        final int result = Dialogs.showQuestionMessageCancel(panel, "Migration",
+        final int result = Dialogs.showQuestionMessageCancel( panel, "Migration",
                 "Sie wollen den taxonomischen Baum, auf dem diese Guppeneinstellungen basieren, ändern.\n" +
                         "Es kann sein, dass nicht alle Einstellungen in den neuen Baum übernommen werden können.\n" +
-                        "Möchten Sie diese Änderungen wirklich durchführen?");
+                        "Möchten Sie diese Änderungen wirklich durchführen?" );
         return result == Dialogs.OK;
     }
 
@@ -432,7 +431,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      * @param uid the new taxon tree uid
      * @return a list of migration errors as strings
      */
-    protected ArrayList findMigrationErrors(final String uid)
+    protected ArrayList findMigrationErrors( final String uid )
     {
         return new ArrayList();
     }
@@ -442,21 +441,25 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param errors the list of errors as strings
      */
-    protected void removeMigrationErrors(final ArrayList errors)
+    protected void removeMigrationErrors( final ArrayList errors )
     {
     }
 
-    /** Dummy implementation that does nothing. Override this if you want to feedback successful migration to the user. */
+    /**
+     * Dummy implementation that does nothing. Override this if you want to feedback successful migration to the user.
+     */
     protected void commitSuccessful()
     {
     }
 
     //--- Subclass interface
 
-    /** Marks the data as modified. As soon as the data is saved, the modified timestamp is actualized. */
+    /**
+     * Marks the data as modified. As soon as the data is saved, the modified timestamp is actualized.
+     */
     protected void setDirty()
     {
-        dirtyListener.setDirty(true);
+        dirtyListener.setDirty( true );
     }
 
     /**
@@ -464,11 +467,11 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @param tree the tree component
      */
-    protected void registerTree(final JTree tree)
+    protected void registerTree( final JTree tree )
     {
         this.tree = tree;
-        treeModel = new TaxonTreeModel(null);
-        tree.setModel(treeModel);
+        treeModel = new TaxonTreeModel( null );
+        tree.setModel( treeModel );
     }
 
     protected TaxonTreeModel getTreeModel()
@@ -480,17 +483,17 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
     private void reload()
     {
-        if (!loaded)
+        if ( !loaded )
         {
             load();
             loaded = true;
         }
     }
 
-    private boolean commitMigrate(final ArrayList errors)
+    private boolean commitMigrate( final ArrayList errors )
     {
         final JFrame parent = (JFrame) panel.getTopLevelAncestor();
-        final I15nComponentDialog dialog = new I15nComponentDialog(parent, "migration")
+        final I15nComponentDialog dialog = new I15nComponentDialog( parent, "migration" )
         {
             protected void onApply()
             {
@@ -502,28 +505,28 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
             protected JComponent createComponentPanel()
             {
-                enableApply(true);
-                return new JScrollPane(new JList(errors.toArray()));
+                enableApply( true );
+                return new JScrollPane( new JList( errors.toArray() ) );
             }
         };
-        dialog.setSize(300, 300);
-        WindowUtils.centerOnComponent(dialog, parent);
-        dialog.setVisible(true);
+        dialog.setSize( 300, 300 );
+        WindowUtils.centerOnComponent( dialog, parent );
+        dialog.setVisible( true );
         return dialog.isAccepted();
     }
 
     protected void loadStates()
     {
-        final String prefix = "/" + getClass().getPackage().getName().replace(".", "/");
-        final InputStream in = getClass().getResourceAsStream(prefix + "/states.txt");
-        if (in != null)
+        final String prefix = "/" + getClass().getPackage().getName().replace( ".", "/" );
+        final InputStream in = getClass().getResourceAsStream( prefix + "/states.txt" );
+        if ( in != null )
         {
             final StringWriter writer = new StringWriter();
             try
             {
-                IOUtils.copy(in, writer);
+                IOUtils.copy( in, writer );
                 final String text = writer.toString();
-                final String[] lines = text.split("\n");
+                final String[] lines = text.split( "\n" );
                 String[] all = new String[0];
                 int allIndex = 0;
                 int inFrom = 0;
@@ -533,59 +536,59 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
                 int colFrom = 0;
                 int colTo = 0;
                 int[] emptyCols = new int[0];
-                for (int i = 0; i < lines.length; i++)
+                for ( int i = 0; i < lines.length; i++ )
                 {
                     final String line = lines[i];
-                    if (line.startsWith("format"))
+                    if ( line.startsWith( "format" ) )
                     {
-                        final String[] tokens = line.split(" ");
-                        final String[] ins = tokens[1].split("-");
-                        inFrom = Integer.parseInt(ins[0]);
-                        inTo = Integer.parseInt(ins[1]);
-                        final String[] outs = tokens[2].split("-");
-                        outFrom = Integer.parseInt(outs[0]);
-                        outTo = Integer.parseInt(outs[1]);
-                        final String[] columns = tokens[3].split("-|\r");
-                        colFrom = Integer.parseInt(columns[0]);
-                        colTo = Integer.parseInt(columns[1]);
-                        final String[] empties = tokens[4].split(", *|\r");
+                        final String[] tokens = line.split( " " );
+                        final String[] ins = tokens[1].split( "-" );
+                        inFrom = Integer.parseInt( ins[0] );
+                        inTo = Integer.parseInt( ins[1] );
+                        final String[] outs = tokens[2].split( "-" );
+                        outFrom = Integer.parseInt( outs[0] );
+                        outTo = Integer.parseInt( outs[1] );
+                        final String[] columns = tokens[3].split( "-|\r" );
+                        colFrom = Integer.parseInt( columns[0] );
+                        colTo = Integer.parseInt( columns[1] );
+                        final String[] empties = tokens[4].split( ", *|\r" );
                         emptyCols = new int[empties.length];
-                        for (int j = 0; j < empties.length; j++)
+                        for ( int j = 0; j < empties.length; j++ )
                         {
                             final String empty = empties[j];
-                            emptyCols[j] = Integer.parseInt(empty);
+                            emptyCols[j] = Integer.parseInt( empty );
                         }
                         all = new String[inTo - inFrom + 1 + outTo - outFrom + 1];
                     }
-                    if (inFrom > 0 && i >= inFrom && i <= inTo)
+                    if ( inFrom > 0 && i >= inFrom && i <= inTo )
                     {
-                        String data = line.substring(colFrom, colTo).replace("|", ",").replaceAll(" , ", "  ").
-                                replaceAll("  ", " ").replaceAll("  ", " 0");
-                        for (int j = emptyCols.length - 1; j >= 0; j--)
+                        String data = line.substring( colFrom, colTo ).replace( "|", "," ).replaceAll( " , ", "  " ).
+                                replaceAll( "  ", " " ).replaceAll( "  ", " 0" );
+                        for ( int j = emptyCols.length - 1; j >= 0; j-- )
                         {
                             final int col = emptyCols[j];
-                            data = data.substring(0, col).substring(col + 1);
+                            data = data.substring( 0, col ).substring( col + 1 );
                         }
                         all[allIndex++] = data;
                     }
-                    else if (outFrom > 0 && i >= outFrom && i <= outTo)
+                    else if ( outFrom > 0 && i >= outFrom && i <= outTo )
                     {
-                        String data = line.substring(colFrom, colTo).replace("|", ",").replaceAll(" , ", "  ").
-                                replaceAll("  ", " ").replaceAll("  ", " 0");
-                        for (int j = emptyCols.length - 1; j >= 0; j--)
+                        String data = line.substring( colFrom, colTo ).replace( "|", "," ).replaceAll( " , ", "  " ).
+                                replaceAll( "  ", " " ).replaceAll( "  ", " 0" );
+                        for ( int j = emptyCols.length - 1; j >= 0; j-- )
                         {
                             final int col = emptyCols[j];
-                            data = data.substring(0, col).substring(col + 1);
+                            data = data.substring( 0, col ).substring( col + 1 );
                         }
                         all[allIndex++] = data;
                     }
                 }
 //                final String[][] matrix = new String[all.length][];
-                System.out.println(all);
+                System.out.println( all );
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
-                LOG.error("problems rading states matrix", e);
+                LOG.error( "problems rading states matrix", e );
             }
         }
     }
@@ -598,7 +601,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
     protected TaxonTree getTaxonTree()
     {
         final TaxonBased taxonBased = (TaxonBased) getModels().getSelection();
-        return taxonBased == null ? null : TaxonModels.find(taxonBased.getTaxaUid());
+        return taxonBased == null ? null : TaxonModels.find( taxonBased.getTaxaUid() );
     }
 
     protected void setTaxonTreeDisabled()

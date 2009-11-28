@@ -22,7 +22,6 @@ import javax.swing.JLabel;
  */
 public class ObjectLabel extends JLabel
 {
-
     private Object object;
 
     public ObjectLabel()
@@ -30,38 +29,38 @@ public class ObjectLabel extends JLabel
         super();
     }
 
-    public ObjectLabel(final Icon image)
+    public ObjectLabel( final Icon image )
     {
-        super(image);
+        super( image );
     }
 
-    public ObjectLabel(final Icon image, final int horizontalAlignment)
+    public ObjectLabel( final Icon image, final int horizontalAlignment )
     {
-        super(image, horizontalAlignment);
+        super( image, horizontalAlignment );
     }
 
-    public ObjectLabel(final Object object)
+    public ObjectLabel( final Object object )
     {
         super();
-        setObject(object);
+        setObject( object );
     }
 
-    public ObjectLabel(final Object object, final int horizontalAlignment)
+    public ObjectLabel( final Object object, final int horizontalAlignment )
     {
-        super(object.toString(), horizontalAlignment);
-        setObject(object);
+        super( object.toString(), horizontalAlignment );
+        setObject( object );
     }
 
-    public ObjectLabel(final Object object, final Icon icon, final int horizontalAlignment)
+    public ObjectLabel( final Object object, final Icon icon, final int horizontalAlignment )
     {
-        super(icon, horizontalAlignment);
-        setObject(object);
+        super( icon, horizontalAlignment );
+        setObject( object );
     }
 
-    public void setObject(final Object object)
+    public void setObject( final Object object )
     {
         this.object = object;
-        setText(object.toString());
+        setText( object.toString() );
     }
 
     public Object getObject()

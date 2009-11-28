@@ -2,10 +2,11 @@ package com.wegmueller.ups.lka;
 
 import java.util.Calendar;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  18:05:28 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  18:05:28
+ */
 public interface IPruefungsSession
 {
-
     /**
      * Bezeichnung der Prüfungssession.
      *

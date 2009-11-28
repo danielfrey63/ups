@@ -26,28 +26,29 @@ import java.util.ArrayList;
  */
 public class GroupModel
 {
-
     private String name;
 
     private int minimum;
 
     private int maximum;
 
-    /** List of taxon strings. */
+    /**
+     * List of taxon strings.
+     */
     private ArrayList<String> taxa;
 
-    public GroupModel(final String name)
+    public GroupModel( final String name )
     {
-        setName(name);
-        setTaxa(new ArrayList<String>());
+        setName( name );
+        setTaxa( new ArrayList<String>() );
     }
 
-    public GroupModel(final GroupModel orig)
+    public GroupModel( final GroupModel orig )
     {
-        this(orig.getName());
-        setMinimum(orig.getMinimum());
-        setMaximum(orig.getMaximum());
-        getTaxa().addAll(orig.getTaxa());
+        this( orig.getName() );
+        setMinimum( orig.getMinimum() );
+        setMaximum( orig.getMaximum() );
+        getTaxa().addAll( orig.getTaxa() );
     }
 
     public String getName()
@@ -55,7 +56,7 @@ public class GroupModel
         return name;
     }
 
-    public void setName(final String name)
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -65,7 +66,7 @@ public class GroupModel
         return minimum;
     }
 
-    public void setMinimum(final int minimum)
+    public void setMinimum( final int minimum )
     {
         this.minimum = minimum;
     }
@@ -75,7 +76,7 @@ public class GroupModel
         return maximum;
     }
 
-    public void setMaximum(final int maximum)
+    public void setMaximum( final int maximum )
     {
         this.maximum = maximum;
     }
@@ -85,23 +86,23 @@ public class GroupModel
         return taxa;
     }
 
-    public void setTaxa(final ArrayList<String> taxa)
+    public void setTaxa( final ArrayList<String> taxa )
     {
         this.taxa = taxa;
     }
 
-    public void addTaxon(final String taxon)
+    public void addTaxon( final String taxon )
     {
-        taxa.add(taxon);
+        taxa.add( taxon );
     }
 
-    public void removeTaxon(final String taxon)
+    public void removeTaxon( final String taxon )
     {
-        taxa.remove(taxon);
+        taxa.remove( taxon );
     }
 
     public String toString()
     {
-        return getName() + (taxa == null ? "" : " (" + taxa.size() + ")");
+        return getName() + ( taxa == null ? "" : " (" + taxa.size() + ")" );
     }
 }

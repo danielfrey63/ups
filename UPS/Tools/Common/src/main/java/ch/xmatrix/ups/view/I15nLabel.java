@@ -28,33 +28,33 @@ public class I15nLabel extends JLabel
         super();
     }
 
-    public I15nLabel(final Icon image)
+    public I15nLabel( final Icon image )
     {
-        super(image);
+        super( image );
     }
 
-    public I15nLabel(final Icon image, final int horizontalAlignment)
+    public I15nLabel( final Icon image, final int horizontalAlignment )
     {
-        super(image, horizontalAlignment);
+        super( image, horizontalAlignment );
     }
 
-    public I15nLabel(final String key)
+    public I15nLabel( final String key )
     {
-        super(Strings.getString(key));
+        super( Strings.getString( key ) );
     }
 
-    public I15nLabel(final String key, final int horizontalAlignment)
+    public I15nLabel( final String key, final int horizontalAlignment )
     {
-        super(Strings.getString(key), horizontalAlignment);
+        super( Strings.getString( key ), horizontalAlignment );
     }
 
-    public I15nLabel(final String key, final Icon icon, final int horizontalAlignment)
+    public I15nLabel( final String key, final Icon icon, final int horizontalAlignment )
     {
-        super(Strings.getString(key), icon, horizontalAlignment);
+        super( Strings.getString( key ), icon, horizontalAlignment );
     }
 
-    public void setI15nText(final String key)
+    public void setI15nText( final String key )
     {
-        super.setText(Strings.getString(key));
+        super.setText( Strings.getString( key ) );
     }
 }

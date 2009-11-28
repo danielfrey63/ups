@@ -28,12 +28,11 @@ import org.pietschy.command.CommandManager;
  */
 public class SaveCommand extends ActionCommand
 {
+    private final DetailsBuilder detailsBuilder;
 
-    private DetailsBuilder detailsBuilder;
-
-    public SaveCommand(final CommandManager manager, final DetailsBuilder detailsBuilder)
+    public SaveCommand( final CommandManager manager, final DetailsBuilder detailsBuilder )
     {
-        super(manager, Commands.COMMANDID_SAVE);
+        super( manager, Commands.COMMANDID_SAVE );
         this.detailsBuilder = detailsBuilder;
     }
 

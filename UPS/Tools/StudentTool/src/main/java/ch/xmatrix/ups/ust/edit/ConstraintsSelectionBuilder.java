@@ -59,7 +59,6 @@ import org.pietschy.command.CommandManager;
  */
 public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder
 {
-
     private JTree tree;
 
     private Constraints constraints;
@@ -80,81 +79,80 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder
         return tree;
     }
 
-    public void setModel(final UserModel userModel)
+    public void setModel( final UserModel userModel )
     {
         this.userModel = userModel;
-        this.constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
+        this.constraints = (Constraints) AbstractMainModel.findModel( userModel.getConstraintsUid() );
         final ArrayList<Constraint> allConstraints = constraints.getConstraints();
-        Collections.sort(allConstraints, new ToStringComparator());
-        constraintsTreeModel.setConstraints(allConstraints);
+        Collections.sort( allConstraints, new ToStringComparator() );
+        constraintsTreeModel.setConstraints( allConstraints );
         treeModel.reload();
     }
 
-    public void addTreeSelectionListener(final TreeSelectionListener listener)
+    public void addTreeSelectionListener( final TreeSelectionListener listener )
     {
-        tree.addTreeSelectionListener(listener);
+        tree.addTreeSelectionListener( listener );
     }
 
     public void initCommands()
     {
         final CommandManager manager = getCommandManager();
-        initCommand(new ExpandAllTreeNodes(manager, tree), true);
-        initCommand(new CollapseAllTreeNodes(manager, tree), true);
-        final TreeExpandedRestorer saver = new TreeExpandedRestorer(tree);
+        initCommand( new ExpandAllTreeNodes( manager, tree ), true );
+        initCommand( new CollapseAllTreeNodes( manager, tree ), true );
+        final TreeExpandedRestorer saver = new TreeExpandedRestorer( tree );
         final Filter hide = new HideCompletedConstraintsViewFilter();
-        initToggleCommand(new AddFilterToAndedFilterable(manager, Commands.COMMANDID_CONSTRAINTS_OPEN, treeModel, hide, saver), false);
-        initToggleCommand(new RemoveFilterFromAndedFilterable(manager, Commands.COMMANDID_CONSTRAINTS_ALL, treeModel, hide, saver), true);
+        initToggleCommand( new AddFilterToAndedFilterable( manager, Commands.COMMANDID_CONSTRAINTS_OPEN, treeModel, hide, saver ), false );
+        initToggleCommand( new RemoveFilterFromAndedFilterable( manager, Commands.COMMANDID_CONSTRAINTS_ALL, treeModel, hide, saver ), true );
     }
 
     public JComponent createMainPanel()
     {
         final JComponent panel = super.createMainPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(getCommandManager().getGroup(Commands.GROUPID_CONSTRAINTS_TOOLBAR).createToolBar(), BorderLayout.NORTH);
-        panel.add(new JScrollPane(tree), BorderLayout.CENTER);
+        panel.setLayout( new BorderLayout() );
+        panel.add( getCommandManager().getGroup( Commands.GROUPID_CONSTRAINTS_TOOLBAR ).createToolBar(), BorderLayout.NORTH );
+        panel.add( new JScrollPane( tree ), BorderLayout.CENTER );
         return panel;
     }
 
     private JTree createConstraintsTree()
     {
         constraintsTreeModel = new ConstraintsTreeModel();
-        treeModel = new ModelBasedFilteredTreeModel(constraintsTreeModel);
-        treeModel.setFilter(new MultiAndFilter(new Filter[0]));
-        tree = new JTree(treeModel);
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        tree.setBorder(new EmptyBorder(3, 3, 3, 3));
-        tree.setRootVisible(false);
-        tree.setCellRenderer(new ConstraintsRenderer());
-        SearchableUtils.installSearchable(tree);
+        treeModel = new ModelBasedFilteredTreeModel( constraintsTreeModel );
+        treeModel.setFilter( new MultiAndFilter( new Filter[0] ) );
+        tree = new JTree( treeModel );
+        tree.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        tree.setBorder( new EmptyBorder( 3, 3, 3, 3 ) );
+        tree.setRootVisible( false );
+        tree.setCellRenderer( new ConstraintsRenderer() );
+        SearchableUtils.installSearchable( tree );
         return tree;
     }
 
     private class HideCompletedConstraintsViewFilter implements Filter
     {
-
-        public boolean matches(final Object node)
+        public boolean matches( final Object node )
         {
-            if (node instanceof Constraint)
+            if ( node instanceof Constraint )
             {
                 final Constraint constraint = (Constraint) node;
-                return isUncomplete(constraint);
+                return isUncomplete( constraint );
             }
-            else if (node instanceof SimpleTaxon)
+            else if ( node instanceof SimpleTaxon )
             {
                 final SimpleTaxon taxon = (SimpleTaxon) node;
-                final Constraint constraint = constraints.findConstraint(taxon.getName());
-                return isUncomplete(constraint);
+                final Constraint constraint = constraints.findConstraint( taxon.getName() );
+                return isUncomplete( constraint );
             }
             else
             {
-                throw new IllegalArgumentException(node.getClass().getName() + " not handable");
+                throw new IllegalArgumentException( node.getClass().getName() + " not handable" );
             }
         }
 
-        private boolean isUncomplete(final Constraint constraint)
+        private boolean isUncomplete( final Constraint constraint )
         {
             final ArrayList<String> userTaxa = userModel.getTaxa();
-            final int totalCount = ConstraintsRendererUtils.getTotalCount(constraint, constraints, userTaxa);
+            final int totalCount = ConstraintsRendererUtils.getTotalCount( constraint, constraints, userTaxa );
             final int minimalCount = constraint.getMinimalCount();
             return minimalCount > totalCount;
         }
@@ -162,33 +160,32 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder
 
     private class ConstraintsTreeModel extends AbstractTreeModel
     {
-
         private static final String ROOT = "ConstraintsRoot";
 
         private ArrayList<Constraint> allConstraints = null;
 
         public ConstraintsTreeModel()
         {
-            super(ROOT);
+            super( ROOT );
         }
 
-        public void setConstraints(final ArrayList<Constraint> constraints)
+        public void setConstraints( final ArrayList<Constraint> constraints )
         {
             allConstraints = constraints;
         }
 
-        public int getChildCount(final Object parent)
+        public int getChildCount( final Object parent )
         {
             int result = -1;
-            if (allConstraints == null)
+            if ( allConstraints == null )
             {
                 result = 0;
             }
-            else if (parent == ROOT)
+            else if ( parent == ROOT )
             {
                 result = allConstraints.size();
             }
-            else if (parent instanceof Constraint)
+            else if ( parent instanceof Constraint )
             {
                 final Constraint constraint = (Constraint) parent;
                 final int size = constraint.getTaxa().size();
@@ -201,91 +198,90 @@ public class ConstraintsSelectionBuilder extends ActionCommandPanelBuilder
             return result;
         }
 
-        public Object getChild(final Object parent, final int index)
+        public Object getChild( final Object parent, final int index )
         {
             Object result = null;
-            if (parent == ROOT)
+            if ( parent == ROOT )
             {
-                result = allConstraints.get(index);
+                result = allConstraints.get( index );
             }
-            else if (parent instanceof Constraint)
+            else if ( parent instanceof Constraint )
             {
                 final Constraint constraint = (Constraint) parent;
                 final List<String> children = constraint.getTaxa();
-                final String taxonName = children.get(index);
-                final TaxonTree tree = TaxonModels.find(constraints.getTaxaUid());
-                result = tree.findTaxonByName(taxonName);
+                final String taxonName = children.get( index );
+                final TaxonTree tree = TaxonModels.find( constraints.getTaxaUid() );
+                result = tree.findTaxonByName( taxonName );
             }
             else
             {
-                throw new IllegalArgumentException("unknown node type " + parent.getClass().getName());
+                throw new IllegalArgumentException( "unknown node type " + parent.getClass().getName() );
             }
             return result;
         }
 
-        protected void remove(final Object child, final TreePath parentPath)
+        protected void remove( final Object child, final TreePath parentPath )
         {
-            throw new IllegalArgumentException("remove not supported");
+            throw new IllegalArgumentException( "remove not supported" );
         }
 
-        protected void insert(final TreePath child, final TreePath parent, final int pos)
+        protected void insert( final TreePath child, final TreePath parent, final int pos )
         {
-            throw new IllegalArgumentException("insert not supported");
+            throw new IllegalArgumentException( "insert not supported" );
         }
 
-        public void valueForPathChanged(final TreePath path, final Object newValue)
+        public void valueForPathChanged( final TreePath path, final Object newValue )
         {
-            throw new IllegalArgumentException("value for path change not supported");
+            throw new IllegalArgumentException( "value for path change not supported" );
         }
     }
 
     private class ConstraintsRenderer implements TreeCellRenderer
     {
-
-        private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.TEXTONLY);
+        private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.TEXTONLY );
 
         public ConstraintsRenderer()
         {
-            panel.setEnabled(true);
+            panel.setEnabled( true );
         }
 
-        public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
-                                                      final boolean expanded, final boolean leaf, final int row,
-                                                      final boolean hasFocus)
+        public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected,
+                                                       final boolean expanded, final boolean leaf, final int row,
+                                                       final boolean hasFocus )
         {
             final String iconName;
-            if (value instanceof Constraint)
+            if ( value instanceof Constraint )
             {
                 final Constraint constraint = (Constraint) value;
                 final ArrayList<String> userTaxa = userModel.getTaxa();
                 final List<String> taxa = constraint.getTaxa();
-                if (taxa != null && taxa.size() == 1)
+                if ( taxa != null && taxa.size() == 1 )
                 {
-                    final TaxonTree treeModel = TaxonModels.find(constraints.getTaxaUid());
-                    final String taxonName = taxa.get(0);
-                    final SimpleTaxon taxon = treeModel.findTaxonByName(taxonName);
-                    iconName = TaxonRendererUtils.getIconForTaxon(taxon, false);
-                    ConstraintsRendererUtils.configureForConstraint(panel, constraints, constraint, userTaxa, true);
+                    final TaxonTree treeModel = TaxonModels.find( constraints.getTaxaUid() );
+                    final String taxonName = taxa.get( 0 );
+                    final SimpleTaxon taxon = treeModel.findTaxonByName( taxonName );
+                    iconName = TaxonRendererUtils.getIconForTaxon( taxon, false );
+                    ConstraintsRendererUtils.configureForConstraint( panel, constraints, constraint, userTaxa, true );
                 }
                 else
                 {
                     iconName = "group.gif";
-                    ConstraintsRendererUtils.configureForConstraint(panel, constraints, constraint, userTaxa, false);
+                    ConstraintsRendererUtils.configureForConstraint( panel, constraints, constraint, userTaxa, false );
                 }
             }
-            else if (value instanceof String)
+            else if ( value instanceof String )
             {
                 iconName = "iconRoot.png";
             }
             else
             {
                 final SimpleTaxon taxon = (SimpleTaxon) value;
-                iconName = TaxonRendererUtils.getIconForTaxon(taxon, false);
+                iconName = TaxonRendererUtils.getIconForTaxon( taxon, false );
             }
-            final ImageIcon icon = ImageLocator.getIcon(iconName);
-            panel.setIcon(icon);
-            panel.setText(value.toString());
-            panel.setSelected(selected);
+            final ImageIcon icon = ImageLocator.getIcon( iconName );
+            panel.setIcon( icon );
+            panel.setText( value.toString() );
+            panel.setSelected( selected );
             panel.update();
             return panel;
         }

@@ -30,7 +30,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class SpecimensModel extends AbstractTaxonBased
 {
-
     private ArrayList<SpecimenModel> models = new ArrayList<SpecimenModel>();
 
     private HashMap<String, SpecimenModel> index = new HashMap<String, SpecimenModel>();
@@ -42,20 +41,20 @@ public class SpecimensModel extends AbstractTaxonBased
         super();
     }
 
-    public SpecimensModel(final SpecimensModel orig)
+    public SpecimensModel( final SpecimensModel orig )
     {
-        super(orig);
+        super( orig );
         models = new ArrayList<SpecimenModel>();
-        for (int i = 0; orig.models != null && i < orig.models.size(); i++)
+        for ( int i = 0; orig.models != null && i < orig.models.size(); i++ )
         {
-            final SpecimenModel model = orig.models.get(i);
-            final SpecimenModel copy = new SpecimenModel(model);
-            models.add(copy);
-            index.put(copy.getTaxon(), copy);
+            final SpecimenModel model = orig.models.get( i );
+            final SpecimenModel copy = new SpecimenModel( model );
+            models.add( copy );
+            index.put( copy.getTaxon(), copy );
         }
     }
 
-    public void setCurrent(final SpecimenModel current)
+    public void setCurrent( final SpecimenModel current )
     {
         this.current = current;
     }
@@ -65,29 +64,29 @@ public class SpecimensModel extends AbstractTaxonBased
         return current;
     }
 
-    public void addSpecimenModel(final SpecimenModel model)
+    public void addSpecimenModel( final SpecimenModel model )
     {
-        if (models == null)
+        if ( models == null )
         {
             models = new ArrayList<SpecimenModel>();
         }
-        if (index == null)
+        if ( index == null )
         {
             index = new HashMap<String, SpecimenModel>();
         }
-        models.add(model);
-        index.put(model.getTaxon(), model);
+        models.add( model );
+        index.put( model.getTaxon(), model );
     }
 
-    public void remove(final SpecimenModel model)
+    public void remove( final SpecimenModel model )
     {
-        models.remove(model);
-        index.remove(model.getTaxon());
+        models.remove( model );
+        index.remove( model.getTaxon() );
     }
 
-    public SpecimenModel find(final String taxon)
+    public SpecimenModel find( final String taxon )
     {
-        return index.get(taxon);
+        return index.get( taxon );
     }
 
     public String toString()
@@ -97,6 +96,6 @@ public class SpecimensModel extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).toString();
+        return new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE ).toString();
     }
 }

@@ -30,15 +30,14 @@ import org.pietschy.command.CommandManager;
  */
 public class DeleteCommand extends ActionCommand
 {
+    private final SelectionInList models;
 
-    private SelectionInList models;
+    private final MasterDetailsFactory factory;
 
-    private MasterDetailsFactory factory;
-
-    public DeleteCommand(final CommandManager manager, final SelectionInList models,
-                         final MasterDetailsFactory factory)
+    public DeleteCommand( final CommandManager manager, final SelectionInList models,
+                          final MasterDetailsFactory factory )
     {
-        super(manager, Commands.COMMANDID_DELETE);
+        super( manager, Commands.COMMANDID_DELETE );
         this.models = models;
         this.factory = factory;
     }
@@ -47,11 +46,11 @@ public class DeleteCommand extends ActionCommand
     {
         final TaxonBased model = (TaxonBased) models.getSelection();
         final int index = models.getSelectionIndex();
-        factory.delete(model);
+        factory.delete( model );
         final int newSelection;
-        if (index == 0)
+        if ( index == 0 )
         {
-            if (models.getSize() > 0)
+            if ( models.getSize() > 0 )
             {
                 newSelection = 0;
             }
@@ -64,6 +63,6 @@ public class DeleteCommand extends ActionCommand
         {
             newSelection = index - 1;
         }
-        models.setSelectionIndex(newSelection);
+        models.setSelectionIndex( newSelection );
     }
 }

@@ -16,18 +16,20 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/** @author Daniel Frey */
+/**
+ * @author Daniel Frey
+ */
 public class Uplod extends JDialog
 {
-    public Uplod(final Frame owner)
+    public Uplod( final Frame owner )
     {
-        super(owner);
+        super( owner );
         initComponents();
     }
 
-    public Uplod(final Dialog owner)
+    public Uplod( final Dialog owner )
     {
-        super(owner);
+        super( owner );
         initComponents();
     }
 
@@ -43,43 +45,43 @@ public class Uplod extends JDialog
 
         //======== this ========
         final Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        contentPane.setLayout( new BorderLayout() );
 
         //======== dialogPane ========
         {
-            dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setLayout(new BorderLayout());
+            dialogPane.setBorder( new EmptyBorder( 12, 12, 12, 12 ) );
+            dialogPane.setLayout( new BorderLayout() );
 
             //======== contentPanel ========
             {
-                contentPanel.setLayout(new BorderLayout());
+                contentPanel.setLayout( new BorderLayout() );
             }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
+            dialogPane.add( contentPanel, BorderLayout.CENTER );
 
             //======== buttonBar ========
             {
-                buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
-                buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout) buttonBar.getLayout()).columnWidths = new int[]{0, 85, 80};
-                ((GridBagLayout) buttonBar.getLayout()).columnWeights = new double[]{1.0, 0.0, 0.0};
+                buttonBar.setBorder( new EmptyBorder( 12, 0, 0, 0 ) );
+                buttonBar.setLayout( new GridBagLayout() );
+                ( (GridBagLayout) buttonBar.getLayout() ).columnWidths = new int[]{0, 85, 80};
+                ( (GridBagLayout) buttonBar.getLayout() ).columnWeights = new double[]{1.0, 0.0, 0.0};
 
                 //---- okButton ----
-                okButton.setText("OK");
-                buttonBar.add(okButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                okButton.setText( "OK" );
+                buttonBar.add( okButton, new GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 5), 0, 0));
+                        new Insets( 0, 0, 0, 5 ), 0, 0 ) );
 
                 //---- cancelButton ----
-                cancelButton.setText("Cancel");
-                buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+                cancelButton.setText( "Cancel" );
+                buttonBar.add( cancelButton, new GridBagConstraints( 2, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                        new Insets( 0, 0, 0, 0 ), 0, 0 ) );
             }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
+            dialogPane.add( buttonBar, BorderLayout.SOUTH );
         }
-        contentPane.add(dialogPane, BorderLayout.CENTER);
+        contentPane.add( dialogPane, BorderLayout.CENTER );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

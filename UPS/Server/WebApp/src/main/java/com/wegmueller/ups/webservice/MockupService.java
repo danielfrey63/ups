@@ -10,16 +10,18 @@ import com.wegmueller.ups.storage.StorageSystem;
 import com.wegmueller.ups.ust.IUSTBusinessDelegate;
 import com.wegmueller.ups.ust.mockup.MockupUSTBusinessDelegate;
 
-/** Created by: Thomas Wegmueller Date: 27.09.2005,  00:47:35 */
+/**
+ * Created by: Thomas Wegmueller Date: 27.09.2005,  00:47:35
+ */
 public class MockupService implements IUPSServerService
 {
-    private IStorage storage = new StorageSystem();
+    private final IStorage storage = new StorageSystem();
 
-    private ILDAPAuth ldap = new MockupLDAPAuthenticate();
+    private final ILDAPAuth ldap = new MockupLDAPAuthenticate();
 
-    private ILKABusinessDelegate lka = new LKABusinessDelegate();
+    private final ILKABusinessDelegate lka = new LKABusinessDelegate();
 
-    private IUSTBusinessDelegate ust = new MockupUSTBusinessDelegate();
+    private final IUSTBusinessDelegate ust = new MockupUSTBusinessDelegate();
 
     public IStorage getStorage()
     {

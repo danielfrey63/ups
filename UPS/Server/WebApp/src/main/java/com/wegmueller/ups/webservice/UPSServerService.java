@@ -10,17 +10,18 @@ import com.wegmueller.ups.storage.StorageSystem;
 import com.wegmueller.ups.ust.IUSTBusinessDelegate;
 import com.wegmueller.ups.ust.USTBusinessDelegate;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  21:21:28 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  21:21:28
+ */
 public class UPSServerService implements IUPSServerService
 {
+    private final ILDAPAuth ldap = new LDAPAuthenticate();
 
-    private ILDAPAuth ldap = new LDAPAuthenticate();
+    private final ILKABusinessDelegate lka = new LKABusinessDelegate();
 
-    private ILKABusinessDelegate lka = new LKABusinessDelegate();
+    private final IUSTBusinessDelegate ust = new USTBusinessDelegate();
 
-    private IUSTBusinessDelegate ust = new USTBusinessDelegate();
-
-    private IStorage storage = new StorageSystem();
+    private final IStorage storage = new StorageSystem();
 
     public IStorage getStorage()
     {

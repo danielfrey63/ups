@@ -55,8 +55,7 @@ import org.apache.log4j.Logger;
  */
 public class LevelsBuilder extends AbstractDetailsBuilder
 {
-
-    private static final Logger LOG = Logger.getLogger(LevelsBuilder.class);
+    private static final Logger LOG = Logger.getLogger( LevelsBuilder.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -76,51 +75,51 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
     public LevelsBuilder()
     {
-        super(new LevelsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
+        super( new LevelsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30 );
     }
 
     //--- DetailsBuilder implementations
 
-    public void setModel(final TaxonBased taxonBased)
+    public void setModel( final TaxonBased taxonBased )
     {
-        super.setModel(taxonBased);
-        if (taxonBased != null)
+        super.setModel( taxonBased );
+        if ( taxonBased != null )
         {
-            final TaxonTree tree = TaxonModels.find(taxonBased.getTaxaUid());
-            tableModel.setModel(tree == null ? null : tree.getRootLevel());
+            final TaxonTree tree = TaxonModels.find( taxonBased.getTaxaUid() );
+            tableModel.setModel( tree == null ? null : tree.getRootLevel() );
         }
         else
         {
-            tableModel.setModel(null);
+            tableModel.setModel( null );
         }
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
-        table.setEnabled(enabled);
+        table.setEnabled( enabled );
         table.getSelectionModel().clearSelection();
-        levelRenderer.setEnabled(enabled);
-        valueRenderer.setEnabled(enabled);
+        levelRenderer.setEnabled( enabled );
+        valueRenderer.setEnabled( enabled );
     }
 
     protected void initComponents()
     {
         try
         {
-            table = getCreator().getTable("tableMaxima");
-            tableModel = new LevelTableModel(getModels());
-            table.setModel(tableModel);
-            final Color color = UIManager.getColor("Table.selectionBackground");
-            levelRenderer = new LevelNameTableCellRenderer(color);
-            valueRenderer = new LevelValueCellRenderer(color);
-            table.setDefaultRenderer(String.class, levelRenderer);
-            table.setDefaultRenderer(Integer.class, valueRenderer);
+            table = getCreator().getTable( "tableMaxima" );
+            tableModel = new LevelTableModel( getModels() );
+            table.setModel( tableModel );
+            final Color color = UIManager.getColor( "Table.selectionBackground" );
+            levelRenderer = new LevelNameTableCellRenderer( color );
+            valueRenderer = new LevelValueCellRenderer( color );
+            table.setDefaultRenderer( String.class, levelRenderer );
+            table.setDefaultRenderer( Integer.class, valueRenderer );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             final String message = "failed to init components";
-            LOG.error(message, e);
-            throw new IllegalStateException(message);
+            LOG.error( message, e );
+            throw new IllegalStateException( message );
         }
     }
 
@@ -128,32 +127,31 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
     protected void initComponentListeners()
     {
-        table.getModel().addTableModelListener(new TableModelListener()
+        table.getModel().addTableModelListener( new TableModelListener()
         {
-            public void tableChanged(final TableModelEvent e)
+            public void tableChanged( final TableModelEvent e )
             {
                 setDirty();
             }
-        });
+        } );
     }
 
     //---- AbstractDetailsBuilder implementations
 
-    public ArrayList findMigrationErrors(final String uid)
+    public ArrayList findMigrationErrors( final String uid )
     {
         final LevelsModel model = (LevelsModel) getModels().getSelection();
         final ArrayList<LevelModel> levels = model.getLevelModels();
-        final TaxonTree tree = TaxonModels.find(uid);
+        final TaxonTree tree = TaxonModels.find( uid );
         final ArrayList errors = (ArrayList) levels.clone();
-        for (int i = 0; i < levels.size(); i++)
+        for ( final LevelModel m : levels )
         {
-            final LevelModel m = levels.get(i);
             SimpleLevel level = tree.getRootLevel();
-            while (level != null)
+            while ( level != null )
             {
-                if (m.getLevel().equals(level.getName()))
+                if ( m.getLevel().equals( level.getName() ) )
                 {
-                    errors.remove(m);
+                    errors.remove( m );
                 }
                 level = level.getChildLevel();
             }
@@ -161,35 +159,35 @@ public class LevelsBuilder extends AbstractDetailsBuilder
         return errors;
     }
 
-    public void removeMigrationErrors(final ArrayList errors)
+    public void removeMigrationErrors( final ArrayList errors )
     {
         final LevelsModel model = (LevelsModel) getModels().getSelection();
         final ArrayList<LevelModel> levels = model.getLevelModels();
-        for (int i = 0; i < errors.size(); i++)
+        for ( final Object error : errors )
         {
-            final LevelModel levelModel = (LevelModel) errors.get(i);
-            levels.remove(levelModel);
-            if (INFO)
+            final LevelModel levelModel = (LevelModel) error;
+            levels.remove( levelModel );
+            if ( INFO )
             {
-                LOG.info("");
+                LOG.info( "" );
             }
         }
     }
 
     protected void commitSuccessful()
     {
-        Dialogs.showInfoMessage(table, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich.");
+        Dialogs.showInfoMessage( table, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich." );
     }
 
     protected XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.alias("levelsModels", SimpleModelList.class);
-            converter.alias("levelsModel", LevelsModel.class);
-            converter.alias("levelModel", LevelModel.class);
-            converter.addImplicitCollection(LevelsModel.class, "models");
+            converter.alias( "levelsModels", SimpleModelList.class );
+            converter.alias( "levelsModel", LevelsModel.class );
+            converter.alias( "levelModel", LevelModel.class );
+            converter.addImplicitCollection( LevelsModel.class, "models" );
         }
         return converter;
     }
@@ -206,26 +204,25 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
     //--- Utilities
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
-        Strings.setResourceBundle(ResourceBundle.getBundle("ch.xmatrix.ups.uec.Strings"));
+        UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
+        UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.Strings" ) );
         final JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         final JComponent panel = new LevelsBuilder().getPanel();
-        panel.setBorder(Borders.createEmptyBorder(Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8));
-        f.getContentPane().add(panel);
-        f.setSize(450, 300);
-        f.setVisible(true);
+        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8 ) );
+        f.getContentPane().add( panel );
+        f.setSize( 450, 300 );
+        f.setVisible( true );
     }
 
     private static class LevelNameTableCellRenderer extends DefaultTableCellRenderer
     {
+        private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor( "Label.disabledForeground" );
 
-        private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor("Label.disabledForeground");
-
-        private static final Color COLOR_FOREGROUND_ENABLED = UIManager.getColor("Label.foreground");
+        private static final Color COLOR_FOREGROUND_ENABLED = UIManager.getColor( "Label.foreground" );
 
         private final Color selected;
 
@@ -239,51 +236,51 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
         private boolean enabled;
 
-        public LevelNameTableCellRenderer(final Color color)
+        public LevelNameTableCellRenderer( final Color color )
         {
-            selected = ColorUtils.darken(color, 0.5);
-            even = ColorUtils.fade(color, 0.5);
-            odd = ColorUtils.fade(color, 0.7);
-            evenDisabled = ColorUtils.fade(color, 0.7);
-            oddDisabled = ColorUtils.fade(color, 0.9);
+            selected = ColorUtils.darken( color, 0.5 );
+            even = ColorUtils.fade( color, 0.5 );
+            odd = ColorUtils.fade( color, 0.7 );
+            evenDisabled = ColorUtils.fade( color, 0.7 );
+            oddDisabled = ColorUtils.fade( color, 0.9 );
         }
 
-        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
+        public Component getTableCellRendererComponent( final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column )
         {
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            super.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
             final String text = value.toString();
-            setText(text);
-            final String iconName = "/icon/icon" + text + (isSelected ? "Selected" : "") + ".png";
-            final URL iconUrl = LevelsBuilder.class.getResource(iconName);
-            if (iconUrl != null)
+            setText( text );
+            final String iconName = "/icon/icon" + text + ( isSelected ? "Selected" : "" ) + ".png";
+            final URL iconUrl = LevelsBuilder.class.getResource( iconName );
+            if ( iconUrl != null )
             {
-                final ImageIcon icon = new ImageIcon(iconUrl);
-                setIcon(icon);
+                final ImageIcon icon = new ImageIcon( iconUrl );
+                setIcon( icon );
             }
             else
             {
-                LOG.warn("icon for " + iconName + " not found");
-                setIcon(null);
+                LOG.warn( "icon for " + iconName + " not found" );
+                setIcon( null );
             }
-            if (isSelected && enabled)
+            if ( isSelected && enabled )
             {
-                setBackground(selected);
-                setForeground(Color.white);
+                setBackground( selected );
+                setForeground( Color.white );
             }
-            else if (!enabled)
+            else if ( !enabled )
             {
-                setBackground(row % 2 == 0 ? evenDisabled : oddDisabled);
-                setForeground(COLOR_FOREGROUND_DISABLED);
+                setBackground( row % 2 == 0 ? evenDisabled : oddDisabled );
+                setForeground( COLOR_FOREGROUND_DISABLED );
             }
             else
             {
-                setBackground(row % 2 == 0 ? even : odd);
-                setForeground(COLOR_FOREGROUND_ENABLED);
+                setBackground( row % 2 == 0 ? even : odd );
+                setForeground( COLOR_FOREGROUND_ENABLED );
             }
             return this;
         }
 
-        public void setEnabled(final boolean enabled)
+        public void setEnabled( final boolean enabled )
         {
             this.enabled = enabled;
         }
@@ -291,10 +288,9 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
     private static class LevelValueCellRenderer extends DefaultTableCellRenderer
     {
+        private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor( "Label.disabledForeground" );
 
-        private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor("Label.disabledForeground");
-
-        private static final Color COLOR_FOREGROUND_ENABLED = UIManager.getColor("Label.foreground");
+        private static final Color COLOR_FOREGROUND_ENABLED = UIManager.getColor( "Label.foreground" );
 
         private final Color even;
 
@@ -306,25 +302,25 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
         private boolean enabled;
 
-        public LevelValueCellRenderer(final Color color)
+        public LevelValueCellRenderer( final Color color )
         {
-            even = ColorUtils.fade(color, 0.7);
-            odd = ColorUtils.fade(color, 0.9);
-            evenDisabled = ColorUtils.fade(color, 0.9);
-            oddDisabled = ColorUtils.fade(color, 1.0);
+            even = ColorUtils.fade( color, 0.7 );
+            odd = ColorUtils.fade( color, 0.9 );
+            evenDisabled = ColorUtils.fade( color, 0.9 );
+            oddDisabled = ColorUtils.fade( color, 1.0 );
         }
 
-        public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
+        public Component getTableCellRendererComponent( final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column )
         {
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            super.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
             final String text = value.toString();
-            setText(("0".equals(text) ? "" : text));
-            setForeground(enabled ? COLOR_FOREGROUND_ENABLED : COLOR_FOREGROUND_DISABLED);
-            setBackground(enabled ? (row % 2 == 0 ? even : odd) : (row % 2 == 0 ? evenDisabled : oddDisabled));
+            setText( ( "0".equals( text ) ? "" : text ) );
+            setForeground( enabled ? COLOR_FOREGROUND_ENABLED : COLOR_FOREGROUND_DISABLED );
+            setBackground( enabled ? ( row % 2 == 0 ? even : odd ) : ( row % 2 == 0 ? evenDisabled : oddDisabled ) );
             return this;
         }
 
-        public void setEnabled(final boolean enabled)
+        public void setEnabled( final boolean enabled )
         {
             this.enabled = enabled;
         }

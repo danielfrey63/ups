@@ -15,7 +15,6 @@ import java.util.Calendar;
  */
 public interface IUPSWebService
 {
-
     /**
      * Kompatibilitätscheck des Clients mit dem Server
      *
@@ -25,7 +24,7 @@ public interface IUPSWebService
      * @throws UPSServerException
      * @throws RemoteException
      */
-    Boolean isClientVersionOk(String application, String version) throws UPSServerException, RemoteException;
+    Boolean isClientVersionOk( String application, String version ) throws UPSServerException, RemoteException;
 
     /**
      * Gib alle gespeicherten Pruefungssessionen zurück Der Server überprüft vorher ob schon irgendwelche Daten gecached
@@ -37,7 +36,7 @@ public interface IUPSWebService
      * @throws UPSServerException
      * @throws RemoteException
      */
-    IPruefungsSession[] getPruefungsSessionen(String userName, String password) throws UPSServerException, RemoteException;
+    IPruefungsSession[] getPruefungsSessionen( String userName, String password ) throws UPSServerException, RemoteException;
 
     /**
      * Einreichen einer PrüfungsListe
@@ -53,7 +52,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
      */
-    byte[] submitPruefungsListe(String seskz, String lknumber, String userName, String password, byte[] bytes) throws UPSServerException, RemoteException;
+    byte[] submitPruefungsListe( String seskz, String lknumber, String userName, String password, byte[] bytes ) throws UPSServerException, RemoteException;
 
     /**
      * Liefert die eingereichte Prufungsliste eines Studenten oder null, wenn keine Liste eingereicht wurde
@@ -70,7 +69,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
      * @see com.wegmueller.ups.lka.IAnmeldedaten#getStudentennummer()
      */
-    byte[] getPruefungsListe(String dozent, String passwrd, String seskz, String lk, String studiNumber) throws UPSServerException, RemoteException;
+    byte[] getPruefungsListe( String dozent, String passwrd, String seskz, String lk, String studiNumber ) throws UPSServerException, RemoteException;
 
     /**
      * Einrichten eines Mapping's zwischen LDAP und OIS-Konto Nach diesem Mapping kann der LDAP-User mit seinen Konto
@@ -86,7 +85,7 @@ public interface IUPSWebService
      * @throws UPSServerException
      * @throws RemoteException
      */
-    String addMapping(String userName, String password, String ldapUser, String oisUser, String oisPassword) throws UPSServerException, RemoteException;
+    String addMapping( String userName, String password, String ldapUser, String oisUser, String oisPassword ) throws UPSServerException, RemoteException;
 
     /**
      * @param dozent  LDAP-UserName des Dozenten
@@ -96,7 +95,7 @@ public interface IUPSWebService
      * @throws RemoteException
      * @see com.wegmueller.ups.lka.IPruefungsSession
      */
-    IPruefungsSession reloadPruefungsDaten(String dozent, String passwrd) throws UPSServerException, RemoteException;
+    IPruefungsSession reloadPruefungsDaten( String dozent, String passwrd ) throws UPSServerException, RemoteException;
 
     /**
      * Daten (Tage) an denen für den angegebenen Dozenten und die angegebene Prüfung Prüfungen durchgeführt werden
@@ -111,7 +110,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
      */
-    Calendar[] getPruefungsDaten(String dozent, String passwrd, String seskz, String lkNumber) throws UPSServerException, RemoteException;
+    Calendar[] getPruefungsDaten( String dozent, String passwrd, String seskz, String lkNumber ) throws UPSServerException, RemoteException;
 
     /**
      * Daten (Tage) an denen für den angegebenen Dozenten und die angegebenen Prüfungen Prüfungen durchgeführt werden
@@ -126,7 +125,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
      */
-    Calendar[] getPruefungsDaten(String dozent, String passwrd, String seskz, String[] lkNumber) throws UPSServerException, RemoteException;
+    Calendar[] getPruefungsDaten( String dozent, String passwrd, String seskz, String[] lkNumber ) throws UPSServerException, RemoteException;
 
     /**
      * Gib die angemeldeten Studenten für diese Prüfungssession und diesen Dozenten
@@ -140,7 +139,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten
      */
-    IAnmeldedaten[] getAnmeldungen(String dozent, String passwrd, String seskz) throws UPSServerException, RemoteException;
+    IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz ) throws UPSServerException, RemoteException;
 
     /**
      * Gib die angemeldeten Studenten für diese Prüfung an diesem Tag zurück
@@ -156,7 +155,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten
      */
-    IAnmeldedaten[] getAnmeldungen(String dozent, String passwrd, String seskz, String lkNumber, Calendar cal) throws UPSServerException, RemoteException;
+    IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz, String lkNumber, Calendar cal ) throws UPSServerException, RemoteException;
 
     /**
      * Gib die angemeldeten Studenten für diese Prüfung an diesem Tag zurück
@@ -172,7 +171,7 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten
      */
-    IAnmeldedaten[] getAnmeldungen(String dozent, String passwrd, String seskz, String[] lkNumber, Calendar cal) throws UPSServerException, RemoteException;
+    IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz, String[] lkNumber, Calendar cal ) throws UPSServerException, RemoteException;
 
     /**
      * welche Prüfungen werden in dieser Prüfungssession von diesem Dozenten geprüft
@@ -186,5 +185,5 @@ public interface IUPSWebService
      * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
      * @see com.wegmueller.ups.lka.IAnmeldedaten
      */
-    IPruefung[] getPruefungen(String dozent, String passwrd, String seskz) throws UPSServerException, RemoteException;
+    IPruefung[] getPruefungen( String dozent, String passwrd, String seskz ) throws UPSServerException, RemoteException;
 }

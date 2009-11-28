@@ -25,24 +25,23 @@ import javax.swing.ListCellRenderer;
  */
 public class GroupsListRenderer implements ListCellRenderer
 {
-
-    private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+    private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.ALL );
 
     private boolean enabled;
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-                                                  final boolean selected, final boolean hasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index,
+                                                   final boolean selected, final boolean hasFocus )
     {
         final GroupModel model = (GroupModel) value;
-        panel.setEnabled(enabled);
-        panel.setIcon(ImageLocator.getIcon("group.gif"));
-        panel.setText(model.toString());
-        panel.setSelected(selected);
+        panel.setEnabled( enabled );
+        panel.setIcon( ImageLocator.getIcon( "group.gif" ) );
+        panel.setText( model.toString() );
+        panel.setSelected( selected );
         panel.update();
         return panel;
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

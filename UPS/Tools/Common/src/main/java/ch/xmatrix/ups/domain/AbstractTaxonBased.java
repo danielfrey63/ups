@@ -22,7 +22,6 @@ import java.util.Date;
  */
 public abstract class AbstractTaxonBased implements TaxonBased
 {
-
     private String name;
 
     private String uid;
@@ -39,9 +38,9 @@ public abstract class AbstractTaxonBased implements TaxonBased
      */
     public AbstractTaxonBased()
     {
-        setName("Neu");
-        setUid(new RandomGUID().toString());
-        setModified(new Date());
+        setName( "Neu" );
+        setUid( new RandomGUID().toString() );
+        setModified( new Date() );
     }
 
     /**
@@ -50,11 +49,11 @@ public abstract class AbstractTaxonBased implements TaxonBased
      *
      * @param orig original to copy
      */
-    public AbstractTaxonBased(final TaxonBased orig)
+    public AbstractTaxonBased( final TaxonBased orig )
     {
         this();
-        setName(orig.getName() + " Kopie");
-        setTaxaUid(orig.getTaxaUid());
+        setName( orig.getName() + " Kopie" );
+        setTaxaUid( orig.getTaxaUid() );
     }
 
     /**
@@ -72,7 +71,7 @@ public abstract class AbstractTaxonBased implements TaxonBased
      *
      * @param uid the new taxa uid <code>String</code>
      */
-    public void setTaxaUid(final String uid)
+    public void setTaxaUid( final String uid )
     {
         checkFixed();
         taxaUid = uid;
@@ -93,13 +92,15 @@ public abstract class AbstractTaxonBased implements TaxonBased
      *
      * @param name the name <code>String</code>
      */
-    public void setName(final String name)
+    public void setName( final String name )
     {
         checkFixed();
         this.name = name;
     }
 
-    /** Sets the models fixed. */
+    /**
+     * Sets the models fixed.
+     */
     public void setFixed()
     {
         fixed = true;
@@ -120,7 +121,7 @@ public abstract class AbstractTaxonBased implements TaxonBased
      *
      * @param uid the uid <code>String</code>
      */
-    public void setUid(final String uid)
+    public void setUid( final String uid )
     {
         checkFixed();
         this.uid = uid;
@@ -141,7 +142,7 @@ public abstract class AbstractTaxonBased implements TaxonBased
      *
      * @param modified the new modification date
      */
-    public void setModified(final Date modified)
+    public void setModified( final Date modified )
     {
         checkFixed();
         this.modified = modified;
@@ -159,9 +160,9 @@ public abstract class AbstractTaxonBased implements TaxonBased
 
     private void checkFixed()
     {
-        if (fixed)
+        if ( fixed )
         {
-            throw new IllegalArgumentException("model is fixed and may not be altered");
+            throw new IllegalArgumentException( "model is fixed and may not be altered" );
         }
     }
 }

@@ -27,14 +27,13 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class GroupsFactory extends MasterDetailsFactory
 {
-
-    protected TaxonBased createCopy(final TaxonBased model)
+    protected TaxonBased createCopy( final TaxonBased model )
     {
-        if (!(model instanceof GroupsModel))
+        if ( !( model instanceof GroupsModel ) )
         {
-            throw new IllegalArgumentException("copy only allowed for instances of " + GroupsModel.class);
+            throw new IllegalArgumentException( "copy only allowed for instances of " + GroupsModel.class );
         }
-        return new GroupsModel((GroupsModel) model);
+        return new GroupsModel( (GroupsModel) model );
     }
 
     protected TaxonBased createInstance()

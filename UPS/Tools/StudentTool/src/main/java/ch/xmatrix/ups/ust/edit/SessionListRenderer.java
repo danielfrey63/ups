@@ -35,10 +35,9 @@ import org.apache.log4j.Logger;
  */
 public class SessionListRenderer implements ListCellRenderer
 {
+    private static final Logger LOG = Logger.getLogger( SessionListRenderer.class );
 
-    private static final Logger LOG = Logger.getLogger(SessionListRenderer.class);
-
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat( "dd.MM.yyyy" );
 
     private JPanel panel;
 
@@ -62,52 +61,51 @@ public class SessionListRenderer implements ListCellRenderer
     {
         try
         {
-            final FormCreator creator = new FormCreator(FormLoader.load("ch/xmatrix/ups/ust/edit/ExamInfoPanel.jfd"));
+            final FormCreator creator = new FormCreator( FormLoader.load( "ch/xmatrix/ups/ust/edit/ExamInfoPanel.jfd" ) );
             creator.createAll();
-            panel = creator.getPanel("mainPanel");
-            exam = creator.getLabel("labelExam");
-            session = creator.getLabel("labelExamInfo");
-            due = creator.getLabel("labelDue");
-            dueInfo = creator.getLabel("labelDueInfo");
-            constraints = creator.getLabel("labelConstraints");
-            constraintsInfo = creator.getLabel("labelConstraintsInfo");
-            taxa = creator.getLabel("labelTaxa");
-            taxaInfo = creator.getLabel("labelTaxaInfo");
+            panel = creator.getPanel( "mainPanel" );
+            exam = creator.getLabel( "labelExam" );
+            session = creator.getLabel( "labelExamInfo" );
+            due = creator.getLabel( "labelDue" );
+            dueInfo = creator.getLabel( "labelDueInfo" );
+            constraints = creator.getLabel( "labelConstraints" );
+            constraintsInfo = creator.getLabel( "labelConstraintsInfo" );
+            taxa = creator.getLabel( "labelTaxa" );
+            taxaInfo = creator.getLabel( "labelTaxaInfo" );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOG.error("error while building form", e);
+            LOG.error( "error while building form", e );
         }
 
     }
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
     {
-
         final SessionModel sessionModel = (SessionModel) value;
-        session.setText(sessionModel.getName());
-        session.setToolTipText(sessionModel.getDescription());
-        dueInfo.setText(FORMAT.format(sessionModel.getDue()));
-        dueInfo.setToolTipText(sessionModel.getDescription());
-        final Constraints constraintsModel = (Constraints) MainModel.findModel(sessionModel.getConstraintsUid());
-        constraintsInfo.setText(constraintsModel.getName());
-        constraintsInfo.setToolTipText(constraintsModel.getDescription());
-        final TaxonTree taxaModel = TaxonModels.find(constraintsModel.getTaxaUid());
-        taxaInfo.setText(taxaModel.getName());
+        session.setText( sessionModel.getName() );
+        session.setToolTipText( sessionModel.getDescription() );
+        dueInfo.setText( FORMAT.format( sessionModel.getDue() ) );
+        dueInfo.setToolTipText( sessionModel.getDescription() );
+        final Constraints constraintsModel = (Constraints) MainModel.findModel( sessionModel.getConstraintsUid() );
+        constraintsInfo.setText( constraintsModel.getName() );
+        constraintsInfo.setToolTipText( constraintsModel.getDescription() );
+        final TaxonTree taxaModel = TaxonModels.find( constraintsModel.getTaxaUid() );
+        taxaInfo.setText( taxaModel.getName() );
 
-        exam.setForeground(isSelected ? Color.white : Color.black);
-        session.setForeground(isSelected ? Color.white : Color.black);
-        due.setForeground(isSelected ? Color.white : Color.black);
-        dueInfo.setForeground(isSelected ? Color.white : Color.black);
-        constraints.setForeground(isSelected ? Color.white : Color.black);
-        constraintsInfo.setForeground(isSelected ? Color.white : Color.black);
-        taxa.setForeground(isSelected ? Color.white : Color.black);
-        taxaInfo.setForeground(isSelected ? Color.white : Color.black);
+        exam.setForeground( isSelected ? Color.white : Color.black );
+        session.setForeground( isSelected ? Color.white : Color.black );
+        due.setForeground( isSelected ? Color.white : Color.black );
+        dueInfo.setForeground( isSelected ? Color.white : Color.black );
+        constraints.setForeground( isSelected ? Color.white : Color.black );
+        constraintsInfo.setForeground( isSelected ? Color.white : Color.black );
+        taxa.setForeground( isSelected ? Color.white : Color.black );
+        taxaInfo.setForeground( isSelected ? Color.white : Color.black );
 
         final Color bg1 = list.getSelectionBackground();
-        final Color bg2 = new Color(bg1.getRed(), bg1.getGreen(), bg1.getBlue(), 50);
-        panel.setBackground(isSelected ? bg1 : (index % 2 == 0 ? bg2 : list.getBackground()));
-        panel.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+        final Color bg2 = new Color( bg1.getRed(), bg1.getGreen(), bg1.getBlue(), 50 );
+        panel.setBackground( isSelected ? bg1 : ( index % 2 == 0 ? bg2 : list.getBackground() ) );
+        panel.setForeground( isSelected ? list.getSelectionForeground() : list.getForeground() );
 
         return panel;
     }

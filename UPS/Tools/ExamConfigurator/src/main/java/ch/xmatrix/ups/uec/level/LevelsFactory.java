@@ -27,18 +27,17 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class LevelsFactory extends MasterDetailsFactory
 {
-
     public TaxonBased createInstance()
     {
         return new LevelsModel();
     }
 
-    public TaxonBased createCopy(final TaxonBased orig)
+    public TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof LevelsModel))
+        if ( !( orig instanceof LevelsModel ) )
         {
-            throw new IllegalArgumentException("copy only allowed for instances of " + LevelsModel.class);
+            throw new IllegalArgumentException( "copy only allowed for instances of " + LevelsModel.class );
         }
-        return new LevelsModel((LevelsModel) orig);
+        return new LevelsModel( (LevelsModel) orig );
     }
 }

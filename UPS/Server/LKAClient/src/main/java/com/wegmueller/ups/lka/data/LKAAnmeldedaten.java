@@ -5,11 +5,12 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.util.Calendar;
 import org.apache.log4j.Logger;
 
-/** Created by: Thomas Wegmueller Date: 20.09.2005,  12:45:45 */
+/**
+ * Created by: Thomas Wegmueller Date: 20.09.2005,  12:45:45
+ */
 public class LKAAnmeldedaten implements IAnmeldedaten
 {
-
-    private static final Logger LOG = Logger.getLogger(LKAAnmeldedaten.class);
+    private static final Logger LOG = Logger.getLogger( LKAAnmeldedaten.class );
 
     private java.lang.String lkNummer;
 
@@ -51,32 +52,32 @@ public class LKAAnmeldedaten implements IAnmeldedaten
 
     private Calendar pruefungsdatumBis;
 
-    public LKAAnmeldedaten(final WsAnmeldedaten orig)
+    public LKAAnmeldedaten( final WsAnmeldedaten orig )
     {
-        setLkNummer(orig.getLkNummer());
-        setLkForm(orig.getLkForm());
-        setLkFormText(orig.getLkFormText());
-        setPruefungsmodeText(orig.getPruefungsmodeText());
-        setFachrichtung(orig.getFachrichtung());
-        setStudentennummer(orig.getStudentennummer());
-        setVorname(orig.getVorname());
-        setRepetent(orig.isRepetent());
-        setLkEinheitTitel(orig.getLkEinheitTitel());
-        setLkEinheitTyp(orig.getLkEinheitTyp());
-        setPruefungsraum(orig.getPruefungsraum());
-        setLkEinheitNummerzusatz(orig.getLkEinheitNummerzusatz());
-        setNachname(orig.getNachname());
-        setStudiengang(orig.getStudiengang());
-        setEmail(orig.getEmail());
-        setSeskez(orig.getSeskez());
-        setLkEinheitTypText(orig.getLkEinheitTypText());
+        setLkNummer( orig.getLkNummer() );
+        setLkForm( orig.getLkForm() );
+        setLkFormText( orig.getLkFormText() );
+        setPruefungsmodeText( orig.getPruefungsmodeText() );
+        setFachrichtung( orig.getFachrichtung() );
+        setStudentennummer( orig.getStudentennummer() );
+        setVorname( orig.getVorname() );
+        setRepetent( orig.isRepetent() );
+        setLkEinheitTitel( orig.getLkEinheitTitel() );
+        setLkEinheitTyp( orig.getLkEinheitTyp() );
+        setPruefungsraum( orig.getPruefungsraum() );
+        setLkEinheitNummerzusatz( orig.getLkEinheitNummerzusatz() );
+        setNachname( orig.getNachname() );
+        setStudiengang( orig.getStudiengang() );
+        setEmail( orig.getEmail() );
+        setSeskez( orig.getSeskez() );
+        setLkEinheitTypText( orig.getLkEinheitTypText() );
 
-        setPruefungsdatum(CalendarUtils.parsePruefungsdatum(orig.getPruefungsdatum()));
+        setPruefungsdatum( CalendarUtils.parsePruefungsdatum( orig.getPruefungsdatum() ) );
 
         final String pruefungszeit = orig.getPruefungszeit();
-        if ("".equals(pruefungszeit))
+        if ( "".equals( pruefungszeit ) )
         {
-            LOG.warn("Prüfungszeit ungültig für:" +
+            LOG.warn( "Prüfungszeit ungültig für:" +
                     " LkNummer: " + getLkNummer() +
                     " Fachrichtung: " + getFachrichtung() +
                     " Studentennummer: " + getStudentennummer() +
@@ -88,10 +89,10 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         }
         else
         {
-            final String vonStr = pruefungszeit.substring(0, 5);
-            final String bisStr = pruefungszeit.substring(6, 11);
-            setPruefungsdatumVon(CalendarUtils.parseTime(getPruefungsdatum(), vonStr));
-            setPruefungsdatumBis(CalendarUtils.parseTime(getPruefungsdatum(), bisStr));
+            final String vonStr = pruefungszeit.substring( 0, 5 );
+            final String bisStr = pruefungszeit.substring( 6, 11 );
+            setPruefungsdatumVon( CalendarUtils.parseTime( getPruefungsdatum(), vonStr ) );
+            setPruefungsdatumBis( CalendarUtils.parseTime( getPruefungsdatum(), bisStr ) );
         }
     }
 
@@ -100,7 +101,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkNummer;
     }
 
-    public void setLkNummer(final String lkNummer)
+    public void setLkNummer( final String lkNummer )
     {
         this.lkNummer = lkNummer;
     }
@@ -110,7 +111,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkForm;
     }
 
-    public void setLkForm(final int lkForm)
+    public void setLkForm( final int lkForm )
     {
         this.lkForm = lkForm;
     }
@@ -120,7 +121,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkFormText;
     }
 
-    public void setLkFormText(final String lkFormText)
+    public void setLkFormText( final String lkFormText )
     {
         this.lkFormText = lkFormText;
     }
@@ -130,7 +131,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return pruefungsmodeText;
     }
 
-    public void setPruefungsmodeText(final String pruefungsmodeText)
+    public void setPruefungsmodeText( final String pruefungsmodeText )
     {
         this.pruefungsmodeText = pruefungsmodeText;
     }
@@ -140,7 +141,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return fachrichtung;
     }
 
-    public void setFachrichtung(final String fachrichtung)
+    public void setFachrichtung( final String fachrichtung )
     {
         this.fachrichtung = fachrichtung;
     }
@@ -150,7 +151,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return studentennummer;
     }
 
-    public void setStudentennummer(final String studentennummer)
+    public void setStudentennummer( final String studentennummer )
     {
         this.studentennummer = studentennummer;
     }
@@ -160,7 +161,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return vorname;
     }
 
-    public void setVorname(final String vorname)
+    public void setVorname( final String vorname )
     {
         this.vorname = vorname;
     }
@@ -170,7 +171,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return repetent;
     }
 
-    public void setRepetent(final boolean repetent)
+    public void setRepetent( final boolean repetent )
     {
         this.repetent = repetent;
     }
@@ -180,7 +181,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkEinheitTitel;
     }
 
-    public void setLkEinheitTitel(final String lkEinheitTitel)
+    public void setLkEinheitTitel( final String lkEinheitTitel )
     {
         this.lkEinheitTitel = lkEinheitTitel;
     }
@@ -190,7 +191,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkEinheitTyp;
     }
 
-    public void setLkEinheitTyp(final String lkEinheitTyp)
+    public void setLkEinheitTyp( final String lkEinheitTyp )
     {
         this.lkEinheitTyp = lkEinheitTyp;
     }
@@ -200,7 +201,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return pruefungsraum;
     }
 
-    public void setPruefungsraum(final String pruefungsraum)
+    public void setPruefungsraum( final String pruefungsraum )
     {
         this.pruefungsraum = pruefungsraum;
     }
@@ -210,7 +211,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkEinheitNummerzusatz;
     }
 
-    public void setLkEinheitNummerzusatz(final String lkEinheitNummerzusatz)
+    public void setLkEinheitNummerzusatz( final String lkEinheitNummerzusatz )
     {
         this.lkEinheitNummerzusatz = lkEinheitNummerzusatz;
     }
@@ -220,7 +221,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return nachname;
     }
 
-    public void setNachname(final String nachname)
+    public void setNachname( final String nachname )
     {
         this.nachname = nachname;
     }
@@ -230,7 +231,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return studiengang;
     }
 
-    public void setStudiengang(final String studiengang)
+    public void setStudiengang( final String studiengang )
     {
         this.studiengang = studiengang;
     }
@@ -240,7 +241,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return email;
     }
 
-    public void setEmail(final String email)
+    public void setEmail( final String email )
     {
         this.email = email;
     }
@@ -250,7 +251,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return seskez;
     }
 
-    public void setSeskez(final String seskez)
+    public void setSeskez( final String seskez )
     {
         this.seskez = seskez;
     }
@@ -260,7 +261,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return lkEinheitTypText;
     }
 
-    public void setLkEinheitTypText(final String lkEinheitTypText)
+    public void setLkEinheitTypText( final String lkEinheitTypText )
     {
         this.lkEinheitTypText = lkEinheitTypText;
     }
@@ -270,7 +271,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return pruefungsdatum;
     }
 
-    public void setPruefungsdatum(final Calendar pruefungsdatum)
+    public void setPruefungsdatum( final Calendar pruefungsdatum )
     {
         this.pruefungsdatum = pruefungsdatum;
     }
@@ -280,7 +281,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return pruefungsdatumVon;
     }
 
-    public void setPruefungsdatumVon(final Calendar pruefungsdatumVon)
+    public void setPruefungsdatumVon( final Calendar pruefungsdatumVon )
     {
         this.pruefungsdatumVon = pruefungsdatumVon;
     }
@@ -290,7 +291,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         return pruefungsdatumBis;
     }
 
-    public void setPruefungsdatumBis(final Calendar pruefungsdatumBis)
+    public void setPruefungsdatumBis( final Calendar pruefungsdatumBis )
     {
         this.pruefungsdatumBis = pruefungsdatumBis;
     }

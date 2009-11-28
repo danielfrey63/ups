@@ -31,14 +31,13 @@ import org.pietschy.command.CommandManager;
  */
 public class DeleteGroup extends ActionCommand
 {
+    private final SelectionInList model;
 
-    private SelectionInList model;
+    private final DefaultListModel listModel;
 
-    private DefaultListModel listModel;
-
-    public DeleteGroup(final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel)
+    public DeleteGroup( final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel )
     {
-        super(commandManager, Commands.COMMANDID_DELETEGROUP);
+        super( commandManager, Commands.COMMANDID_DELETEGROUP );
         assert model != null : "model must not be null";
         assert listModel != null : "list model must not be null";
         this.model = model;
@@ -50,6 +49,6 @@ public class DeleteGroup extends ActionCommand
         final GroupsModel groups = (GroupsModel) model.getSelection();
         final GroupModel group = groups.getCurrentGroup();
         groups.removeGroup();
-        listModel.removeElement(group);
+        listModel.removeElement( group );
     }
 }

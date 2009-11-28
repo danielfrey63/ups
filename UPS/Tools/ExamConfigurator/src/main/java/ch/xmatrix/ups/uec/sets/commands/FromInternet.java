@@ -58,12 +58,11 @@ import org.pietschy.command.CommandManager;
  */
 public class FromInternet extends ActionCommand
 {
-
-    private static final Logger LOG = Logger.getLogger(FromInternet.class);
+    private static final Logger LOG = Logger.getLogger( FromInternet.class );
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/sets/commands/FromInternet.jfd";
 
-    private SetBuilder.SubmitTableModel submitModel;
+    private final SetBuilder.SubmitTableModel submitModel;
 
     private transient SessionModel session;
 
@@ -75,9 +74,9 @@ public class FromInternet extends ActionCommand
 
     private transient boolean goon = true;
 
-    public FromInternet(final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel)
+    public FromInternet( final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel )
     {
-        super(commandManager, Commands.COMMANDID_OPENFROMINTERNET);
+        super( commandManager, Commands.COMMANDID_OPENFROMINTERNET );
         this.submitModel = submitModel;
     }
 
@@ -85,19 +84,19 @@ public class FromInternet extends ActionCommand
     {
         try
         {
-            final FormCreator creator = new FormCreator(FormLoader.load(RESOURCE_FORM));
+            final FormCreator creator = new FormCreator( FormLoader.load( RESOURCE_FORM ) );
             creator.createAll();
-            final JDialog dialog = creator.createDialog(null);
-            final JList courseList = creator.getList("courseList");
-            final JList sessionList = creator.getList("sessionList");
-            final JButton okButton = creator.getButton("okButton");
-            final JButton cancelButton = creator.getButton("cancelButton");
-            dialog.getRootPane().setDefaultButton(okButton);
-            courseList.setModel(MainModel.findModelById(MainModel.MODELID_COURSEINFO));
-            sessionList.setModel(MainModel.findModelById(MainModel.MODELID_SESSION));
-            okButton.addActionListener(new ActionListener()
+            final JDialog dialog = creator.createDialog( null );
+            final JList courseList = creator.getList( "courseList" );
+            final JList sessionList = creator.getList( "sessionList" );
+            final JButton okButton = creator.getButton( "okButton" );
+            final JButton cancelButton = creator.getButton( "cancelButton" );
+            dialog.getRootPane().setDefaultButton( okButton );
+            courseList.setModel( MainModel.findModelById( MainModel.MODELID_COURSEINFO ) );
+            sessionList.setModel( MainModel.findModelById( MainModel.MODELID_SESSION ) );
+            okButton.addActionListener( new ActionListener()
             {
-                public void actionPerformed(final ActionEvent event)
+                public void actionPerformed( final ActionEvent event )
                 {
                     try
                     {
@@ -109,48 +108,47 @@ public class FromInternet extends ActionCommand
                                 doRequest();
                             }
                         };
-                        final WaitOverlay waitOverlay = new WaitOverlay(dialog, Color.white);
+                        final WaitOverlay waitOverlay = new WaitOverlay( dialog, Color.white );
                         waitOverlay.setTickers(
-                                waitOverlay.new FadeInTicker(0.2f, 500),
-                                waitOverlay.new WaitForThreadTicker(dialog.getRootPane(), thread),
-                                waitOverlay.new FadeOutTicker(300),
-                                waitOverlay.new DisposeDialogTicker(dialog));
+                                waitOverlay.new FadeInTicker( 0.2f, 500 ),
+                                waitOverlay.new WaitForThreadTicker( dialog.getRootPane(), thread ),
+                                waitOverlay.new FadeOutTicker( 300 ),
+                                waitOverlay.new DisposeDialogTicker( dialog ) );
                         waitOverlay.start();
                         course = (CourseModel) courseList.getSelectedValue();
                         session = (SessionModel) sessionList.getSelectedValue();
-                        user = creator.getTextField("userField").getText();
-                        pass = creator.getTextField("passField").getText();
-                        dialog.addWindowListener(new WindowAdapter()
+                        user = creator.getTextField( "userField" ).getText();
+                        pass = creator.getTextField( "passField" ).getText();
+                        dialog.addWindowListener( new WindowAdapter()
                         {
-                            public void windowClosing(final WindowEvent e)
+                            public void windowClosing( final WindowEvent e )
                             {
                                 goon = false;
                             }
-                        });
+                        } );
                         thread.start();
                     }
-                    catch (Exception e)
+                    catch ( Exception e )
                     {
                         e.printStackTrace();
                     }
                 }
-            });
-            cancelButton.addActionListener(new ActionListener()
+            } );
+            cancelButton.addActionListener( new ActionListener()
             {
-
-                public void actionPerformed(final ActionEvent e)
+                public void actionPerformed( final ActionEvent e )
                 {
                     dialog.dispose();
                 }
-            });
+            } );
             dialog.pack();
-            dialog.setLocationRelativeTo(null);
-            dialog.setVisible(true);
+            dialog.setLocationRelativeTo( null );
+            dialog.setVisible( true );
         }
-        catch (Throwable e)
+        catch ( Throwable e )
         {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten:\n" + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog( null, "Ein Fehler ist aufgetreten:\n" + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
         }
     }
 
@@ -165,102 +163,102 @@ public class FromInternet extends ActionCommand
             sessionName = session.getSeskz();
             courseName = course.getUid();
 
-            final IAnmeldedaten[] anmeldedaten = (IAnmeldedaten[]) ws.invoke("getAnmeldungen", user, pass, sessionName, courseName, Calendar.class);
-            if (anmeldedaten != null)
+            final IAnmeldedaten[] anmeldedaten = (IAnmeldedaten[]) ws.invoke( "getAnmeldungen", user, pass, sessionName, courseName, Calendar.class );
+            if ( anmeldedaten != null )
             {
                 final int length = anmeldedaten.length;
-                for (int i = 0; i < length && goon; i++)
+                for ( int i = 0; i < length && goon; i++ )
                 {
                     final IAnmeldedaten anmeldedatum = anmeldedaten[i];
                     final String lk = anmeldedatum.getLkNummer();
                     final String id1 = anmeldedatum.getStudentennummer();
-                    final byte[] bytes = ws.getPruefungsListe(user, pass, session.getSeskz(), lk, id1);
+                    final byte[] bytes = ws.getPruefungsListe( user, pass, session.getSeskz(), lk, id1 );
                     final PlantList list;
-                    if (bytes != null)
+                    if ( bytes != null )
                     {
                         final XStream converter = Commands.getConverter1();
-                        final ArrayList<String> taxa = (ArrayList<String>) converter.fromXML(new String(bytes));
+                        final ArrayList<String> taxa = (ArrayList<String>) converter.fromXML( new String( bytes ) );
                         list = new PlantList();
-                        list.setTaxa(taxa);
+                        list.setTaxa( taxa );
                     }
                     else
                     {
                         list = null;
                     }
-                    submitModel.add(new Registration(anmeldedatum, list));
+                    submitModel.add( new Registration( anmeldedatum, list ) );
                 }
             }
             else
             {
-                LOG.warn("no anmeldedaten in server database");
-                JOptionPane.showMessageDialog(null, "Keine Anmeldedaten vorhanden. Versuchen Sie die Serverdaten mit dem OIS abzugleichen", "Fehler", JOptionPane.WARNING_MESSAGE);
+                LOG.warn( "no anmeldedaten in server database" );
+                JOptionPane.showMessageDialog( null, "Keine Anmeldedaten vorhanden. Versuchen Sie die Serverdaten mit dem OIS abzugleichen", "Fehler", JOptionPane.WARNING_MESSAGE );
             }
         }
-        catch (UPSServerException e)
+        catch ( UPSServerException e )
         {
             final Throwable cause1 = e.getCause();
-            if (cause1 != null)
+            if ( cause1 != null )
             {
                 final Throwable cause2 = e.getCause();
-                if (cause2 instanceof InvocationTargetException)
+                if ( cause2 instanceof InvocationTargetException )
                 {
                     final InvocationTargetException inner2 = (InvocationTargetException) cause2;
                     final Throwable cause3 = inner2.getTargetException();
-                    if (cause3 instanceof LDAPAuthException)
+                    if ( cause3 instanceof LDAPAuthException )
                     {
-                        LOG.error("unknown user or password: " + cause2.getMessage(), cause2);
-                        JOptionPane.showMessageDialog(null, "Name oder Passwort sind unbekannt", "Fehler", JOptionPane.ERROR_MESSAGE);
+                        LOG.error( "unknown user or password: " + cause2.getMessage(), cause2 );
+                        JOptionPane.showMessageDialog( null, "Name oder Passwort sind unbekannt", "Fehler", JOptionPane.ERROR_MESSAGE );
                     }
-                    else if (cause3 instanceof UPSServerException)
+                    else if ( cause3 instanceof UPSServerException )
                     {
                         final UPSServerException inner3 = (UPSServerException) cause3;
-                        if (UPSServerException.MISSING_DATA.equals(inner3.getName()))
+                        if ( UPSServerException.MISSING_DATA.equals( inner3.getName() ) )
                         {
-                            LOG.warn("no data for \"" + sessionName + "\" and \"" + courseName + "\"", cause2);
-                            JOptionPane.showMessageDialog(null, "Keine Daten vorhanden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                            LOG.warn( "no data for \"" + sessionName + "\" and \"" + courseName + "\"", cause2 );
+                            JOptionPane.showMessageDialog( null, "Keine Daten vorhanden", "Fehler", JOptionPane.ERROR_MESSAGE );
                         }
                         else
                         {
-                            throw new IllegalStateException(e);
+                            throw new IllegalStateException( e );
                         }
                     }
                     else
                     {
-                        throw new IllegalStateException(e);
+                        throw new IllegalStateException( e );
                     }
                 }
                 else
                 {
-                    throw new IllegalStateException(e);
+                    throw new IllegalStateException( e );
                 }
             }
             else
             {
-                throw new IllegalStateException(e);
+                throw new IllegalStateException( e );
             }
         }
-        catch (MalformedURLException e)
+        catch ( MalformedURLException e )
         {
             e.printStackTrace();
         }
-        catch (RemoteException e)
+        catch ( RemoteException e )
         {
             final Throwable cause = e.getCause();
-            if (cause instanceof UnknownHostException)
+            if ( cause instanceof UnknownHostException )
             {
-                LOG.error("server not contactable", cause);
-                JOptionPane.showMessageDialog(null, "Der Server konnte nicht erreicht werden", "Fehler", JOptionPane.ERROR_MESSAGE);
+                LOG.error( "server not contactable", cause );
+                JOptionPane.showMessageDialog( null, "Der Server konnte nicht erreicht werden", "Fehler", JOptionPane.ERROR_MESSAGE );
             }
             else
             {
-                LOG.error("unknown remote exception", e);
+                LOG.error( "unknown remote exception", e );
             }
         }
-        catch (ServiceException e)
+        catch ( ServiceException e )
         {
             e.printStackTrace();
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             e.printStackTrace();
         }

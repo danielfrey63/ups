@@ -33,20 +33,19 @@ import org.pietschy.command.CommandManager;
  */
 public class SaveCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
-
-    public SaveCommand(final CommandManager commandManager, final MainModel model)
+    public SaveCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_SAVE);
+        super( commandManager, Commands.COMMANDID_SAVE );
         this.model = model;
     }
 
     protected void handleExecute()
     {
-        if (model.isDefaultFile())
+        if ( model.isDefaultFile() )
         {
-            getCommandManager().getCommand(Commands.COMMANDID_SAVEAS).execute();
+            getCommandManager().getCommand( Commands.COMMANDID_SAVEAS ).execute();
         }
         else
         {
@@ -58,13 +57,13 @@ public class SaveCommand extends ActionCommand
                 encoded.uid = model.getUserModel().getUid();
                 encoded.exam = model.getUserModel().getExamInfoUid();
                 final File file = model.getCurrentFile();
-                final FileWriter out = new FileWriter(file);
+                final FileWriter out = new FileWriter( file );
                 final XStream encoder = Commands.getConverter();
-                encoder.toXML(encoded, out);
+                encoder.toXML( encoded, out );
                 out.close();
-                model.setDirty(false);
+                model.setDirty( false );
             }
-            catch (IOException e1)
+            catch ( IOException e1 )
             {
                 e1.printStackTrace();
             }

@@ -24,7 +24,6 @@ package ch.xmatrix.ups.ust.edit;
  */
 public class Commands
 {
-
     // Common
 
     public static final String FACENAME_TOOLBAR = "toolbar";

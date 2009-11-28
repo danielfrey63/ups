@@ -13,5 +13,5 @@ public interface WsSoapLKAService extends javax.xml.rpc.Service
 
     public SoapLKAService.WsSoapLKA getV10() throws javax.xml.rpc.ServiceException;
 
-    public SoapLKAService.WsSoapLKA getV10(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public SoapLKAService.WsSoapLKA getV10( java.net.URL portAddress ) throws javax.xml.rpc.ServiceException;
 }

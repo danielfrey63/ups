@@ -30,7 +30,6 @@ import javax.swing.JFrame;
  */
 public class MainModel extends AbstractMainModel
 {
-
     public static final String MODELID_CONSTRAINTS = "constraints";
 
     public static final String MODELID_COURSES = "courses";
@@ -57,22 +56,21 @@ public class MainModel extends AbstractMainModel
 
     public MainModel()
     {
-
         final SimpleModelList taxonTrees = TaxonModels.getTaxonTrees();
-        registerModels(MODELID_TAXONTREES, taxonTrees);
-        taxonModels.setListModel(taxonTrees);
+        registerModels( MODELID_TAXONTREES, taxonTrees );
+        taxonModels.setListModel( taxonTrees );
 
-        final SimpleModelList sessions = Loader.loadModel("/data/sessions.xml", "ups/ust", SessionPersister.getConverter());
-        registerModels(MODELID_SESSIONS, sessions);
-        sessionModels.setListModel(sessions);
+        final SimpleModelList sessions = Loader.loadModel( "/data/sessions.xml", "ups/ust", SessionPersister.getConverter() );
+        registerModels( MODELID_SESSIONS, sessions );
+        sessionModels.setListModel( sessions );
 
-        final SimpleModelList constraints = Loader.loadModel("/data/constraints.xml", "ups/ust", ConstraintsPersister.getConverter());
-        registerModels(MODELID_CONSTRAINTS, constraints);
-        constraintsModels.setListModel(constraints);
+        final SimpleModelList constraints = Loader.loadModel( "/data/constraints.xml", "ups/ust", ConstraintsPersister.getConverter() );
+        registerModels( MODELID_CONSTRAINTS, constraints );
+        constraintsModels.setListModel( constraints );
 
-        final SimpleModelList courses = Loader.loadModel("/data/courses.xml", "ups/ust", CoursePersister.getConverter());
-        registerModels(MODELID_COURSES, courses);
-        courseModels.setListModel(courses);
+        final SimpleModelList courses = Loader.loadModel( "/data/courses.xml", "ups/ust", CoursePersister.getConverter() );
+        registerModels( MODELID_COURSES, courses );
+        courseModels.setListModel( courses );
     }
 
     public UserModel getUserModel()
@@ -80,7 +78,7 @@ public class MainModel extends AbstractMainModel
         return userModel;
     }
 
-    public void setUserModel(final UserModel userModel)
+    public void setUserModel( final UserModel userModel )
     {
         this.userModel = userModel;
     }
@@ -90,18 +88,18 @@ public class MainModel extends AbstractMainModel
         return mainFrame;
     }
 
-    public void setMainFrame(final JFrame frame)
+    public void setMainFrame( final JFrame frame )
     {
         mainFrame = frame;
     }
 
     public boolean modelValid()
     {
-        final int numberOfSessions = findModelById(MODELID_SESSIONS).getSize();
-        if (numberOfSessions == 0)
+        final int numberOfSessions = findModelById( MODELID_SESSIONS ).getSize();
+        if ( numberOfSessions == 0 )
         {
-            Dialogs.showErrorMessage(mainFrame.getRootPane(),
-                    "Fehler", "Sorry: Es stehen im Moment keine Vorgaben- und Taxonomie-Modelle zur Verfügung");
+            Dialogs.showErrorMessage( mainFrame.getRootPane(),
+                    "Fehler", "Sorry: Es stehen im Moment keine Vorgaben- und Taxonomie-Modelle zur Verfügung" );
             return false;
         }
         return true;

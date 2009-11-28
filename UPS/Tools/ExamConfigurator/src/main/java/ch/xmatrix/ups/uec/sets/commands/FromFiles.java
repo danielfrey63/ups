@@ -34,28 +34,26 @@ import org.pietschy.command.CommandManager;
  */
 public class FromFiles extends LoadFilesystem
 {
+    private static final Logger LOG = Logger.getLogger( FromFiles.class );
 
-    private static final Logger LOG = Logger.getLogger(FromFiles.class);
-
-    public FromFiles(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    public FromFiles( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super(commandManager, Commands.COMMANDID_LOADFILES, model);
+        super( commandManager, Commands.COMMANDID_LOADFILES, model );
         getChooser();
     }
 
     protected OpenChooser getChooser()
     {
         final Chooser chooser = new Chooser();
-        chooser.getChooser().setMultiSelectionEnabled(true);
+        chooser.getChooser().setMultiSelectionEnabled( true );
         return chooser;
     }
 
     private static class Filter extends FileFilter
     {
-
-        public boolean accept(final File f)
+        public boolean accept( final File f )
         {
-            return f.isDirectory() || f.getName().endsWith(EXTENTION);
+            return f.isDirectory() || f.getName().endsWith( EXTENTION );
         }
 
         public String getDescription()
@@ -66,53 +64,51 @@ public class FromFiles extends LoadFilesystem
 
     private class Chooser extends OpenChooser
     {
-
         public Chooser()
         {
-            super(new Filter(), "openchooser", System.getProperty("user.dir"));
+            super( new Filter(), "openchooser", System.getProperty( "user.dir" ) );
         }
 
-        protected void load(final File[] files)
+        protected void load( final File[] files )
         {
             File file = null;
             try
             {
-                for (int i = 0; i < files.length; i++)
+                for ( final File file1 : files )
                 {
-                    file = files[i];
-                    loadAnonymousFile(file);
+                    file = file1;
+                    loadAnonymousFile( file );
                 }
                 writeBuffer();
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                LOG.error("error during processing of file" + (file != null ? " \"" + file + "\"" : "s"), e);
-                Dialogs.showWarnMessage(null, "Warnung", "" +
+                LOG.error( "error during processing of file" + ( file != null ? " \"" + file + "\"" : "s" ), e );
+                Dialogs.showWarnMessage( null, "Warnung", "" +
                         "Während der Verarbeitung der Dateien ist ein Fehler\n" +
                         "aufgetreten. Allfällige bereits verarbeitete Dateien\n" +
-                        "dieses Imports werden deshalb verworfen.");
+                        "dieses Imports werden deshalb verworfen." );
             }
         }
     }
 
-    public static void main(final String[] args) throws InvocationTargetException, InterruptedException
+    public static void main( final String[] args ) throws InvocationTargetException, InterruptedException
     {
-        System.setProperty("jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings");
-        System.setProperty("log4j.configuration", "log4j.properties");
-        final FromFiles ff = new FromFiles(new CommandManager(), null);
-        SwingUtilities.invokeAndWait(new Runnable()
+        System.setProperty( "jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings" );
+        System.setProperty( "log4j.configuration", "log4j.properties" );
+        final FromFiles ff = new FromFiles( new CommandManager(), null );
+        SwingUtilities.invokeAndWait( new Runnable()
         {
             public void run()
             {
                 ff.handleExecute();
                 final File[] files = ff.getChooser().getSelectedFiles();
-                for (int i = 0; i < files.length; i++)
+                for ( final File file : files )
                 {
-                    final File file = files[i];
-                    System.out.println(file);
+                    System.out.println( file );
                 }
             }
-        });
-        System.exit(0);
+        } );
+        System.exit( 0 );
     }
 }

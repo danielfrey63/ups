@@ -31,35 +31,34 @@ import javax.swing.ListCellRenderer;
  */
 public class TaxaListRenderer implements ListCellRenderer
 {
-
     private final SelectionInList models;
 
-    private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+    private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.ALL );
 
     private boolean enabled;
 
-    public TaxaListRenderer(final SelectionInList models)
+    public TaxaListRenderer( final SelectionInList models )
     {
         this.models = models;
     }
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-                                                  final boolean selected, final boolean hasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index,
+                                                   final boolean selected, final boolean hasFocus )
     {
         final String name = (String) value;
         final GroupsModel model = (GroupsModel) models.getSelection();
-        final TaxonTree tree = TaxonModels.find(model == null ? null : model.getTaxaUid());
-        final SimpleTaxon taxon = tree.findTaxonByName(name);
-        final ImageIcon icon = ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, selected && enabled));
-        panel.setIcon(icon);
-        panel.setText(name);
-        panel.setSelected(selected);
-        panel.setEnabled(enabled);
+        final TaxonTree tree = TaxonModels.find( model == null ? null : model.getTaxaUid() );
+        final SimpleTaxon taxon = tree.findTaxonByName( name );
+        final ImageIcon icon = ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, selected && enabled ) );
+        panel.setIcon( icon );
+        panel.setText( name );
+        panel.setSelected( selected );
+        panel.setEnabled( enabled );
         panel.update();
         return panel;
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

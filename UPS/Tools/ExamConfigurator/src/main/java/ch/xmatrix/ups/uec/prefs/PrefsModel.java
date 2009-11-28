@@ -28,7 +28,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class PrefsModel extends AbstractTaxonBased
 {
-
     private int knownTotalCount;
 
     private int unknownTotalCount;
@@ -44,14 +43,14 @@ public class PrefsModel extends AbstractTaxonBased
         super();
     }
 
-    public PrefsModel(final PrefsModel orig)
+    public PrefsModel( final PrefsModel orig )
     {
-        super(orig);
-        setKnownTotalCount(orig.getKnownTotalCount());
-        setKnownTotalWeight(orig.getKnownTotalWeight());
-        setUnknownTotalCount(orig.getUnknownTotalCount());
-        setUnknownTotalWeight(orig.getUnknownTotalWeight());
-        setMaximumSeries(orig.getMaximumSeries());
+        super( orig );
+        setKnownTotalCount( orig.getKnownTotalCount() );
+        setKnownTotalWeight( orig.getKnownTotalWeight() );
+        setUnknownTotalCount( orig.getUnknownTotalCount() );
+        setUnknownTotalWeight( orig.getUnknownTotalWeight() );
+        setMaximumSeries( orig.getMaximumSeries() );
     }
 
     public int getKnownTotalCount()
@@ -59,7 +58,7 @@ public class PrefsModel extends AbstractTaxonBased
         return knownTotalCount;
     }
 
-    public void setKnownTotalCount(final int knownTotalCount)
+    public void setKnownTotalCount( final int knownTotalCount )
     {
         this.knownTotalCount = knownTotalCount;
     }
@@ -69,7 +68,7 @@ public class PrefsModel extends AbstractTaxonBased
         return unknownTotalCount;
     }
 
-    public void setUnknownTotalCount(final int unknownTotalCount)
+    public void setUnknownTotalCount( final int unknownTotalCount )
     {
         this.unknownTotalCount = unknownTotalCount;
     }
@@ -79,7 +78,7 @@ public class PrefsModel extends AbstractTaxonBased
         return knownTotalWeight;
     }
 
-    public void setKnownTotalWeight(final int knownTotalWeight)
+    public void setKnownTotalWeight( final int knownTotalWeight )
     {
         this.knownTotalWeight = knownTotalWeight;
     }
@@ -89,7 +88,7 @@ public class PrefsModel extends AbstractTaxonBased
         return unknownTotalWeight;
     }
 
-    public void setUnknownTotalWeight(final int unknownTotalWeight)
+    public void setUnknownTotalWeight( final int unknownTotalWeight )
     {
         this.unknownTotalWeight = unknownTotalWeight;
     }
@@ -99,7 +98,7 @@ public class PrefsModel extends AbstractTaxonBased
         return maximumSeries;
     }
 
-    public void setMaximumSeries(final int maximumSeries)
+    public void setMaximumSeries( final int maximumSeries )
     {
         this.maximumSeries = maximumSeries;
     }
@@ -111,6 +110,6 @@ public class PrefsModel extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return ToStringBuilder.reflectionToString( this, ToStringStyle.SHORT_PREFIX_STYLE );
     }
 }

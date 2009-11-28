@@ -45,12 +45,14 @@ public class PersonData
      *
      * @param person the person data to copy
      */
-    public PersonData(final PersonData person)
+    public PersonData( final PersonData person )
     {
-        copy(person);
+        copy( person );
     }
 
-    /** Init object with defaults. */
+    /**
+     * Init object with defaults.
+     */
     public PersonData()
     {
         // Do nothing.
@@ -61,12 +63,12 @@ public class PersonData
      *
      * @param person the person to copy
      */
-    public void copy(final PersonData person)
+    public void copy( final PersonData person )
     {
-        setFirstName(person.firstName);
-        setLastName(person.lastName);
-        setId(person.id);
-        setCourse(person.course);
+        setFirstName( person.firstName );
+        setLastName( person.lastName );
+        setId( person.id );
+        setCourse( person.course );
     }
 
     public String getFirstName()
@@ -74,7 +76,7 @@ public class PersonData
         return firstName;
     }
 
-    public void setFirstName(final String firstName)
+    public void setFirstName( final String firstName )
     {
         this.firstName = firstName;
     }
@@ -84,7 +86,7 @@ public class PersonData
         return lastName;
     }
 
-    public void setLastName(final String lastName)
+    public void setLastName( final String lastName )
     {
         this.lastName = lastName;
     }
@@ -94,7 +96,7 @@ public class PersonData
         return id;
     }
 
-    public void setId(final String id)
+    public void setId( final String id )
     {
         this.id = id;
     }
@@ -104,22 +106,21 @@ public class PersonData
         return course;
     }
 
-    public void setCourse(final String course)
+    public void setCourse( final String course )
     {
         this.course = course;
     }
 
     public String toString()
     {
-
         final StringBuffer text = new StringBuffer();
-        text.append(getId());
-        text.append(" - ");
-        text.append(getLastName());
-        text.append(" - ");
-        text.append(getFirstName());
-        text.append(" - ");
-        text.append(getCourse());
+        text.append( getId() );
+        text.append( " - " );
+        text.append( getLastName() );
+        text.append( " - " );
+        text.append( getFirstName() );
+        text.append( " - " );
+        text.append( getCourse() );
 
         return text.toString();
     }

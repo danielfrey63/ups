@@ -24,10 +24,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/** The implementation of the Storage System for the User's Data */
+/**
+ * The implementation of the Storage System for the User's Data
+ */
 public class StorageSystem implements IStorage
 {
-
     private Session session;
 
     /**
@@ -42,33 +43,29 @@ public class StorageSystem implements IStorage
      * @param pdf              PDF Report der Bestätigung (als byte[])
      * @throws StorageException
      */
-    public void storePruefungsListe(final String pruefungsSession, final String pruefung, final String uid, final String studentenNummer, final byte[] input, final Properties userPropertes, final byte[] pdf) throws StorageException
+    public void storePruefungsListe( final String pruefungsSession, final String pruefung, final String uid, final String studentenNummer, final byte[] input, final Properties userPropertes, final byte[] pdf ) throws StorageException
     {
         final Session hibernate = getSession();
         try
         {
-            PruefungsListe l = getPruefungslisteByStudentenNummer(pruefungsSession, pruefung, studentenNummer);
-            if (l == null)
+            PruefungsListe l = getPruefungslisteByStudentenNummer( pruefungsSession, pruefung, studentenNummer );
+            if ( l == null )
             {
                 l = new PruefungsListe();
             }
-            l.setUserName(uid);
-            l.setPruefungsSession(pruefungsSession);
-            l.setPruefung(pruefung);
-            l.setStudentenNummer(studentenNummer);
-            l.setUserProperties(userPropertes);
-            l.setPruefungsListe(new ByteTypeContent(input));
-            l.setPdf(new ByteTypeContent(pdf));
-            hibernate.save(l);
+            l.setUserName( uid );
+            l.setPruefungsSession( pruefungsSession );
+            l.setPruefung( pruefung );
+            l.setStudentenNummer( studentenNummer );
+            l.setUserProperties( userPropertes );
+            l.setPruefungsListe( new ByteTypeContent( input ) );
+            l.setPdf( new ByteTypeContent( pdf ) );
+            hibernate.save( l );
             hibernate.flush();
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
-        }
-        catch (StorageException e)
-        {
-            throw e;
+            throw new StorageException( e );
         }
 
     }
@@ -80,16 +77,16 @@ public class StorageSystem implements IStorage
      * @return
      * @throws IOException
      */
-    private byte[] getFileBytes(final File f) throws IOException
+    private byte[] getFileBytes( final File f ) throws IOException
     {
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        final FileInputStream fis = new FileInputStream(f);
+        final FileInputStream fis = new FileInputStream( f );
         try
         {
             int ch;
-            while ((ch = fis.read()) != -1)
+            while ( ( ch = fis.read() ) != -1 )
             {
-                bos.write(ch);
+                bos.write( ch );
             }
         }
         finally
@@ -99,23 +96,19 @@ public class StorageSystem implements IStorage
         return bos.toByteArray();
     }
 
-    public void importLegacyData(final File home) throws IOException, StorageException
+    public void importLegacyData( final File home ) throws IOException, StorageException
     {
         final File[] f = home.listFiles();
-        for (int i = 0; i < f.length; i++)
+        for ( final File aF : f )
         {
-            System.out.println("importing " + f[i].getName());
+            System.out.println( "importing " + aF.getName() );
             try
             {
-                importLegacyData(home, f[i].getName());
+                importLegacyData( home, aF.getName() );
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
                 e.printStackTrace();
-            }
-            catch (StorageException e)
-            {
-                throw e;
             }
         }
     }
@@ -128,44 +121,44 @@ public class StorageSystem implements IStorage
      * @throws IOException
      * @throws StorageException
      */
-    public void importLegacyData(final File home, final String uid) throws IOException, StorageException
+    public void importLegacyData( final File home, final String uid ) throws IOException, StorageException
     {
-        final File ldapPropertiesFile = new File(home, uid + "/pruefling.properties");
-        final File pdfFile = new File(home, uid + "/pruefungsliste.pdf");
-        final File pruefungsListe = new File(home, uid + "/pruefungsliste.xml");
+        final File ldapPropertiesFile = new File( home, uid + "/pruefling.properties" );
+        final File pdfFile = new File( home, uid + "/pruefungsliste.pdf" );
+        final File pruefungsListe = new File( home, uid + "/pruefungsliste.xml" );
 
         final Properties prop = new Properties();
-        final FileInputStream fis = new FileInputStream(ldapPropertiesFile);
+        final FileInputStream fis = new FileInputStream( ldapPropertiesFile );
         try
         {
-            prop.load(fis);
+            prop.load( fis );
         }
         finally
         {
             fis.close();
         }
-        final byte[] pruL = getFileBytes(pruefungsListe);
-        final byte[] pdfB = getFileBytes(pdfFile);
-        String studiNummer = prop.getProperty("carLicense", null);
-        if (studiNummer == null)
+        final byte[] pruL = getFileBytes( pruefungsListe );
+        final byte[] pdfB = getFileBytes( pdfFile );
+        String studiNummer = prop.getProperty( "carLicense", null );
+        if ( studiNummer == null )
         {
-            throw new IOException("Studinummer ist null");
+            throw new IOException( "Studinummer ist null" );
         }
-        if (studiNummer.length() == 8)
+        if ( studiNummer.length() == 8 )
         {
-            studiNummer = studiNummer.substring(0, 2) + "-"
-                    + studiNummer.substring(2, 5) + "-"
-                    + studiNummer.substring(5);
+            studiNummer = studiNummer.substring( 0, 2 ) + "-"
+                    + studiNummer.substring( 2, 5 ) + "-"
+                    + studiNummer.substring( 5 );
 
         }
         else
         {
-            throw new IOException("studiNummer in wrong format");
+            throw new IOException( "studiNummer in wrong format" );
         }
 
-        storePruefungsListe("2005H", "551-0004-01", uid, studiNummer,
+        storePruefungsListe( "2005H", "551-0004-01", uid, studiNummer,
                 pruL,
-                prop, pdfB);
+                prop, pdfB );
     }
 
     /**
@@ -177,10 +170,10 @@ public class StorageSystem implements IStorage
      * @return
      * @throws StorageException
      */
-    public byte[] getPruefungsliste(final String pruefungsSession, final String pruefung, final String studentenNummer) throws StorageException
+    public byte[] getPruefungsliste( final String pruefungsSession, final String pruefung, final String studentenNummer ) throws StorageException
     {
-        final PruefungsListe l = getPruefungslisteByStudentenNummer(pruefungsSession, pruefung, studentenNummer);
-        if (l == null)
+        final PruefungsListe l = getPruefungslisteByStudentenNummer( pruefungsSession, pruefung, studentenNummer );
+        if ( l == null )
         {
             return null;
         }
@@ -194,9 +187,9 @@ public class StorageSystem implements IStorage
      * @return
      * @throws StorageException
      */
-    public boolean isStored(final String userName) throws StorageException
+    public boolean isStored( final String userName ) throws StorageException
     {
-        return isStored(userName, null);
+        return isStored( userName, null );
     }
 
     /**
@@ -207,7 +200,7 @@ public class StorageSystem implements IStorage
      * @return
      * @throws StorageException
      */
-    public boolean isStored(final String session, final String userName) throws StorageException
+    public boolean isStored( final String session, final String userName ) throws StorageException
     {
         try
         {
@@ -215,77 +208,77 @@ public class StorageSystem implements IStorage
             String sql = "select count(*) from Anmeldedaten ad where " +
                     "ad.dozentUserName=?" +
                     "";
-            if (session != null)
+            if ( session != null )
             {
                 sql += "and ad.seskez=? ";
 
             }
-            final Query q = hibernate.createQuery(sql);
-            q.setString(0, userName);
-            if (session != null)
+            final Query q = hibernate.createQuery( sql );
+            q.setString( 0, userName );
+            if ( session != null )
             {
-                q.setString(1, session);
+                q.setString( 1, session );
             }
 
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return false;
             }
-            final Object obj = list.get(0);
-            if (obj instanceof Integer)
+            final Object obj = list.get( 0 );
+            if ( obj instanceof Integer )
             {
-                return ((Integer) obj).intValue() > 0;
+                return ( (Integer) obj ).intValue() > 0;
             }
-            if (obj instanceof Long)
+            if ( obj instanceof Long )
             {
-                return ((Long) obj).longValue() > 0;
+                return ( (Long) obj ).longValue() > 0;
             }
-            if (obj instanceof Number)
+            if ( obj instanceof Number )
             {
-                return ((Number) obj).longValue() > 0;
+                return ( (Number) obj ).longValue() > 0;
             }
-            throw new StorageException("unknown format of Number " + obj);
+            throw new StorageException( "unknown format of Number " + obj );
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public IPruefungsSession storePruefungsSession(final IPruefungsSession session) throws StorageException
+    public IPruefungsSession storePruefungsSession( final IPruefungsSession session ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("from PruefungsSession where seskez=?");
-            q.setString(0, session.getSeskez());
+            final Query q = hibernate.createQuery( "from PruefungsSession where seskez=?" );
+            q.setString( 0, session.getSeskez() );
             final List list = q.list();
             final PruefungsSession bean;
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 bean = new PruefungsSession();
             }
             else
             {
-                bean = (PruefungsSession) list.get(0);
+                bean = (PruefungsSession) list.get( 0 );
             }
-            bean.setPlanungFreigabe(session.getPlanungFreigabe());
-            bean.setSeskez(session.getSeskez());
-            bean.setSessionsende(session.getSessionsende());
-            bean.setSessionsname(session.getSessionsname());
-            bean.setStorageDate(new GregorianCalendar());
-            hibernate.save(bean);
+            bean.setPlanungFreigabe( session.getPlanungFreigabe() );
+            bean.setSeskez( session.getSeskez() );
+            bean.setSessionsende( session.getSessionsende() );
+            bean.setSessionsname( session.getSessionsname() );
+            bean.setStorageDate( new GregorianCalendar() );
+            hibernate.save( bean );
             hibernate.flush();
             return bean;
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public void storeAnmdeldeDaten(final String userName, final String seskez, final IAnmeldedaten[] daten) throws StorageException
+    public void storeAnmdeldeDaten( final String userName, final String seskez, final IAnmeldedaten[] daten ) throws StorageException
     {
         try
         {
@@ -294,111 +287,104 @@ public class StorageSystem implements IStorage
             try
             {
                 final String hqlDelete = "delete Anmeldedaten where dozentUserName = :dozentUserName and seskez = :seskez";
-                hibernate.createQuery(hqlDelete)
-                        .setString("dozentUserName", userName)
-                        .setString("seskez", seskez)
+                hibernate.createQuery( hqlDelete )
+                        .setString( "dozentUserName", userName )
+                        .setString( "seskez", seskez )
                         .executeUpdate();
-                for (int i = 0; i < daten.length; i++)
+                for ( final IAnmeldedaten aDaten : daten )
                 {
                     final Anmeldedaten d = new Anmeldedaten();
-                    d.setDozentUserName(userName);
-                    d.setEmail(daten[i].getEmail());
-                    d.setFachrichtung(daten[i].getFachrichtung());
-                    d.setLkEinheitNummerzusatz(daten[i].getLkEinheitNummerzusatz());
-                    d.setLkEinheitTitel(daten[i].getLkEinheitTitel());
-                    d.setLkEinheitTyp(daten[i].getLkEinheitTyp());
-                    d.setLkEinheitTypText(daten[i].getLkEinheitTypText());
-                    d.setLkForm(daten[i].getLkForm());
-                    d.setLkFormText(daten[i].getLkFormText());
-                    d.setLkNummer(daten[i].getLkNummer());
-                    d.setNachname(daten[i].getNachname());
-                    final Calendar pruefungsdatum = daten[i].getPruefungsdatum();
-                    if (pruefungsdatum != null)
+                    d.setDozentUserName( userName );
+                    d.setEmail( aDaten.getEmail() );
+                    d.setFachrichtung( aDaten.getFachrichtung() );
+                    d.setLkEinheitNummerzusatz( aDaten.getLkEinheitNummerzusatz() );
+                    d.setLkEinheitTitel( aDaten.getLkEinheitTitel() );
+                    d.setLkEinheitTyp( aDaten.getLkEinheitTyp() );
+                    d.setLkEinheitTypText( aDaten.getLkEinheitTypText() );
+                    d.setLkForm( aDaten.getLkForm() );
+                    d.setLkFormText( aDaten.getLkFormText() );
+                    d.setLkNummer( aDaten.getLkNummer() );
+                    d.setNachname( aDaten.getNachname() );
+                    final Calendar pruefungsdatum = aDaten.getPruefungsdatum();
+                    if ( pruefungsdatum != null )
                     {
-                        d.setPruefungsdatum(convertToDay(pruefungsdatum));
+                        d.setPruefungsdatum( convertToDay( pruefungsdatum ) );
                     }
-                    d.setPruefungsdatumBis(daten[i].getPruefungsdatumBis());
-                    d.setPruefungsdatumVon(daten[i].getPruefungsdatumVon());
-                    d.setPruefungsmodeText(daten[i].getPruefungsmodeText());
-                    d.setPruefungsraum(daten[i].getPruefungsraum());
-                    d.setRepetent(daten[i].isRepetent());
-                    d.setSeskez(daten[i].getSeskez());
-                    d.setStudentennummer(daten[i].getStudentennummer());
-                    d.setStudiengang(daten[i].getStudiengang());
-                    d.setVorname(daten[i].getVorname());
-                    hibernate.save(d);
+                    d.setPruefungsdatumBis( aDaten.getPruefungsdatumBis() );
+                    d.setPruefungsdatumVon( aDaten.getPruefungsdatumVon() );
+                    d.setPruefungsmodeText( aDaten.getPruefungsmodeText() );
+                    d.setPruefungsraum( aDaten.getPruefungsraum() );
+                    d.setRepetent( aDaten.isRepetent() );
+                    d.setSeskez( aDaten.getSeskez() );
+                    d.setStudentennummer( aDaten.getStudentennummer() );
+                    d.setStudiengang( aDaten.getStudiengang() );
+                    d.setVorname( aDaten.getVorname() );
+                    hibernate.save( d );
                 }
                 tx.commit();
                 hibernate.flush();
             }
-            catch (HibernateException e)
+            catch ( HibernateException e )
             {
                 tx.rollback();
                 throw e;
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
 
     }
 
-    private Calendar convertToDay(final Calendar c)
+    private Calendar convertToDay( final Calendar c )
     {
-        return new GregorianCalendar(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        return new GregorianCalendar( c.get( Calendar.YEAR ), c.get( Calendar.MONTH ), c.get( Calendar.DAY_OF_MONTH ) );
 
     }
 
-    public void mapOIS2LDAP(final String ldap, final String ois, final String pass) throws StorageException
+    public void mapOIS2LDAP( final String ldap, final String ois, final String pass ) throws StorageException
     {
-        try
+        final Session hibernate = getSession();
+        OIS2LDAP bean = getMapping( ldap );
+        if ( bean == null )
         {
-            final Session hibernate = getSession();
-            OIS2LDAP bean = getMapping(ldap);
-            if (bean == null)
-            {
-                bean = new OIS2LDAP();
-            }
-            bean.setLdap(ldap);
-            bean.setOispassword(pass);
-            bean.setOisusername(ois);
-            hibernate.save(bean);
-            hibernate.flush();
+            bean = new OIS2LDAP();
         }
-        catch (StorageException e)
-        {
-            throw e;
-        }
+        bean.setLdap( ldap );
+        bean.setOispassword( pass );
+        bean.setOisusername( ois );
+        hibernate.save( bean );
+        hibernate.flush();
 
     }
 
-    private OIS2LDAP getMapping(final String ldap) throws StorageException
+    private OIS2LDAP getMapping( final String ldap ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("from OIS2LDAP where ldap=?");
-            q.setString(0, ldap);
+            final Query q = hibernate.createQuery( "from OIS2LDAP where ldap=?" );
+            q.setString( 0, ldap );
 
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
-            return (OIS2LDAP) list.get(0);
+            return (OIS2LDAP) list.get( 0 );
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
 
     }
 
-    public String[] getOISAccount(final String userName) throws StorageException
+    public String[] getOISAccount( final String userName ) throws StorageException
     {
-        final OIS2LDAP ldap = getMapping(userName);
-        if (ldap == null)
+        final OIS2LDAP ldap = getMapping( userName );
+        if ( ldap == null )
         {
             return null;
         }
@@ -407,232 +393,232 @@ public class StorageSystem implements IStorage
 
     public IPruefungsSession[] getPruefungssessionen() throws StorageException
     {
-        final List list = getList("from PruefungsSession");
-        if (list.size() == 0)
+        final List list = getList( "from PruefungsSession" );
+        if ( list.size() == 0 )
         {
             return null;
         }
         final IPruefungsSession[] ret = new IPruefungsSession[list.size()];
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
-            ret[i] = (PruefungsSession) list.get(i);
+            ret[i] = (PruefungsSession) list.get( i );
         }
         return ret;
 
     }
 
-    public IPruefung[] getPruefungen(final String seskez, final String userName) throws StorageException
+    public IPruefung[] getPruefungen( final String seskez, final String userName ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("select ad.lkNummer, min(ad.lkEinheitTitel) as lk from Anmeldedaten  ad where ad.seskez=? and ad.dozentUserName=? group by ad.lkNummer");
-            q.setString(0, seskez);
-            q.setString(1, userName);
+            final Query q = hibernate.createQuery( "select ad.lkNummer, min(ad.lkEinheitTitel) as lk from Anmeldedaten  ad where ad.seskez=? and ad.dozentUserName=? group by ad.lkNummer" );
+            q.setString( 0, seskez );
+            q.setString( 1, userName );
 
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             final IPruefung[] ret = new IPruefung[list.size()];
-            for (int i = 0; i < list.size(); i++)
+            for ( int i = 0; i < list.size(); i++ )
             {
-                final Object[] rec = (Object[]) list.get(i);
+                final Object[] rec = (Object[]) list.get( i );
 
                 final String n0 = rec[0] == null ? "" : rec[0].toString();
                 final String n1 = rec[1] == null ? "" : rec[1].toString();
 
-                ret[i] = new PruefungImpl(n0, n1);
+                ret[i] = new PruefungImpl( n0, n1 );
             }
 
             return ret;
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public Calendar[] getPruefungsZeiten(final String seskez, final String userName) throws StorageException
+    public Calendar[] getPruefungsZeiten( final String seskez, final String userName ) throws StorageException
     {
-        return getPruefungsZeiten(seskez, (String[]) null, userName);
+        return getPruefungsZeiten( seskez, (String[]) null, userName );
     }
 
-    public Calendar[] getPruefungsZeiten(final String seskez, final String lkNummer, final String userName) throws StorageException
+    public Calendar[] getPruefungsZeiten( final String seskez, final String lkNummer, final String userName ) throws StorageException
     {
-        return getPruefungsZeiten(seskez, new String[]{lkNummer}, userName);
+        return getPruefungsZeiten( seskez, new String[]{lkNummer}, userName );
     }
 
-    public Calendar[] getPruefungsZeiten(final String seskez, final String[] lkNummer, final String userName) throws StorageException
+    public Calendar[] getPruefungsZeiten( final String seskez, final String[] lkNummer, final String userName ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
             String sql = "select ad.pruefungsdatum from Anmeldedaten  ad where ad.seskez=? " +
                     " and ad.dozentUserName=?";
-            if ((lkNummer != null) && (lkNummer.length > 0))
+            if ( ( lkNummer != null ) && ( lkNummer.length > 0 ) )
             {
                 sql += " and ad.lkNummer IN (:lkNummer) ";
             }
             sql +=
                     " group by ad.pruefungsdatum order by ad.pruefungsdatum asc";
-            final Query q = hibernate.createQuery(sql);
-            q.setString(0, seskez);
-            q.setString(1, userName);
-            if ((lkNummer != null) && (lkNummer.length > 0))
+            final Query q = hibernate.createQuery( sql );
+            q.setString( 0, seskez );
+            q.setString( 1, userName );
+            if ( ( lkNummer != null ) && ( lkNummer.length > 0 ) )
             {
-                q.setParameterList("lkNummer", lkNummer);
+                q.setParameterList( "lkNummer", lkNummer );
             }
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             final Calendar[] ret = new Calendar[list.size()];
-            for (int i = 0; i < list.size(); i++)
+            for ( int i = 0; i < list.size(); i++ )
             {
-                ret[i] = (Calendar) list.get(i);
+                ret[i] = (Calendar) list.get( i );
             }
             return ret;
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
 
     }
 
-    public IAnmeldedaten[] getAnmeldungen(final String seskez, final String userName, final String lkNummer, final Calendar c) throws StorageException
+    public IAnmeldedaten[] getAnmeldungen( final String seskez, final String userName, final String lkNummer, final Calendar c ) throws StorageException
     {
         String[] arr = null;
-        if (lkNummer != null)
+        if ( lkNummer != null )
         {
             arr = new String[]{lkNummer};
         }
-        return getAnmeldungen(seskez, userName, arr, c);
+        return getAnmeldungen( seskez, userName, arr, c );
     }
 
-    public IAnmeldedaten[] getAnmeldungen(final String seskez, final String userName) throws StorageException
+    public IAnmeldedaten[] getAnmeldungen( final String seskez, final String userName ) throws StorageException
     {
-        return getAnmeldungen(seskez, userName, (String[]) null, null);
+        return getAnmeldungen( seskez, userName, (String[]) null, null );
     }
 
-    public IAnmeldedaten[] getAnmeldungen(final String seskez, final String userName, final String lkNummer) throws StorageException
+    public IAnmeldedaten[] getAnmeldungen( final String seskez, final String userName, final String lkNummer ) throws StorageException
     {
         String[] arr = null;
-        if (lkNummer != null)
+        if ( lkNummer != null )
         {
             arr = new String[]{lkNummer};
         }
-        return getAnmeldungen(seskez, userName, arr);
+        return getAnmeldungen( seskez, userName, arr );
     }
 
-    public IAnmeldedaten[] getAnmeldungen(final String seskez, final String userName, final String[] lkNummer) throws StorageException
+    public IAnmeldedaten[] getAnmeldungen( final String seskez, final String userName, final String[] lkNummer ) throws StorageException
     {
-        return getAnmeldungen(seskez, userName, lkNummer, null);
+        return getAnmeldungen( seskez, userName, lkNummer, null );
     }
 
-    public IAnmeldedaten[] getAnmeldungen(final String seskez, final String userName, final String[] lkNummer, final Calendar c) throws StorageException
+    public IAnmeldedaten[] getAnmeldungen( final String seskez, final String userName, final String[] lkNummer, final Calendar c ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
             String sql = "from Anmeldedaten  ad where 1=1";
-            if (seskez != null)
+            if ( seskez != null )
             {
                 sql += " and ad.seskez=?";
             }
-            if (userName != null)
+            if ( userName != null )
             {
                 sql += " and ad.dozentUserName=?";
             }
-            if (c != null)
+            if ( c != null )
             {
                 sql += " and ad.pruefungsdatum=?";
             }
-            if (lkNummer != null)
+            if ( lkNummer != null )
             {
                 sql += " and ad.lkNummer in (:lkNumber)";
             }
             sql += " order by ad.pruefungsdatumVon asc";
-            final Query q = hibernate.createQuery(sql);
+            final Query q = hibernate.createQuery( sql );
             int idx = 0;
-            if (seskez != null)
+            if ( seskez != null )
             {
-                q.setString(idx++, seskez);
+                q.setString( idx++, seskez );
             }
-            if (lkNummer != null)
+            if ( lkNummer != null )
             {
-                q.setParameterList("lkNumber", lkNummer);
+                q.setParameterList( "lkNumber", lkNummer );
             }
-            if (userName != null)
+            if ( userName != null )
             {
-                q.setString(idx++, userName);
+                q.setString( idx++, userName );
             }
-            if (c != null)
+            if ( c != null )
             {
-                q.setCalendar(idx++, convertToDay(c));
+                q.setCalendar( idx++, convertToDay( c ) );
             }
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             final IAnmeldedaten[] ret = new IAnmeldedaten[list.size()];
-            for (int i = 0; i < list.size(); i++)
+            for ( int i = 0; i < list.size(); i++ )
             {
-                ret[i] = (Anmeldedaten) list.get(i);
+                ret[i] = (Anmeldedaten) list.get( i );
             }
             return ret;
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public IPruefungsSession getPruefungsSessionByID(final String s) throws StorageException
+    public IPruefungsSession getPruefungsSessionByID( final String s ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("from PruefungsSession where seskez=?");
-            q.setString(0, s);
+            final Query q = hibernate.createQuery( "from PruefungsSession where seskez=?" );
+            q.setString( 0, s );
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             else
             {
-                if (list.size() > 1)
+                if ( list.size() > 1 )
                 {
                     // Should never happen!!!
-                    throw new StorageException("Session is stored more than once: " + s);
+                    throw new StorageException( "Session is stored more than once: " + s );
                 }
-                return (IPruefungsSession) list.get(0);
+                return (IPruefungsSession) list.get( 0 );
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public boolean isAngemeldet(final String dozentUserName, final String seskz, final String lk, final String studiNumber) throws StorageException
+    public boolean isAngemeldet( final String dozentUserName, final String seskz, final String lk, final String studiNumber ) throws StorageException
     {
         //Anmeldedaten
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("from Anmeldedaten where lkNummer=? and seskez=? and dozentUserName=? and studentennummer=?");
-            q.setString(0, lk);
-            q.setString(1, seskz);
-            q.setString(2, dozentUserName);
-            q.setString(3, studiNumber);
+            final Query q = hibernate.createQuery( "from Anmeldedaten where lkNummer=? and seskez=? and dozentUserName=? and studentennummer=?" );
+            q.setString( 0, lk );
+            q.setString( 1, seskz );
+            q.setString( 2, dozentUserName );
+            q.setString( 3, studiNumber );
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return false;
             }
@@ -641,119 +627,119 @@ public class StorageSystem implements IStorage
                 return true;
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public String getPrufungsTitel(final String lk) throws StorageException
+    public String getPrufungsTitel( final String lk ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("select min(ad.lkEinheitTitel) from Anmeldedaten ad where ad.lkNummer=? group by ad.lkNummer");
-            q.setString(0, lk);
+            final Query q = hibernate.createQuery( "select min(ad.lkEinheitTitel) from Anmeldedaten ad where ad.lkNummer=? group by ad.lkNummer" );
+            q.setString( 0, lk );
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             else
             {
-                return (String) list.get(0);
+                return (String) list.get( 0 );
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    private PruefungsListe getPruefungslisteByStudentenNummer(final String pruefungsSession, final String pruefung, final String studentenNummer) throws StorageException
+    private PruefungsListe getPruefungslisteByStudentenNummer( final String pruefungsSession, final String pruefung, final String studentenNummer ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery("from PruefungsListe where pruefungsSession=? and studentenNummer=?");// and pruefung=? ");
-            q.setString(0, pruefungsSession);
-            q.setString(1, studentenNummer);
+            final Query q = hibernate.createQuery( "from PruefungsListe where pruefungsSession=? and studentenNummer=?" );// and pruefung=? ");
+            q.setString( 0, pruefungsSession );
+            q.setString( 1, studentenNummer );
             //TODO do not check as the lk is not correct!!!! q.setString(2, pruefung);
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             else
             {
-                if (list.size() > 1)
+                if ( list.size() > 1 )
                 {
-                    throw new StorageException("Mehrere pruefungslisten für den user");
+                    throw new StorageException( "Mehrere pruefungslisten für den user" );
                 }
-                return (PruefungsListe) list.get(0);
+                return (PruefungsListe) list.get( 0 );
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public String[] getStudisMitPruefungslisten(final String pruefungsSession, final String pruefung) throws StorageException
+    public String[] getStudisMitPruefungslisten( final String pruefungsSession, final String pruefung ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
             String sql = "select studentenNummer from PruefungsListe where 1=1 ";
-            if (pruefungsSession != null)
+            if ( pruefungsSession != null )
             {
                 sql += "and pruefungsSession=? ";
             }
-            if (pruefung != null)
+            if ( pruefung != null )
             {
                 sql += "and pruefung=? ";
             }
-            final Query q = hibernate.createQuery(sql);
-            if (pruefungsSession != null)
+            final Query q = hibernate.createQuery( sql );
+            if ( pruefungsSession != null )
             {
-                q.setString(0, pruefungsSession);
+                q.setString( 0, pruefungsSession );
             }
-            if (pruefung != null)
+            if ( pruefung != null )
             {
-                q.setString(1, pruefung);
+                q.setString( 1, pruefung );
             }
             final List list = q.list();
-            if (list.size() == 0)
+            if ( list.size() == 0 )
             {
                 return null;
             }
             else
             {
                 final String[] re = new String[list.size()];
-                for (int i = 0; i < list.size(); i++)
+                for ( int i = 0; i < list.size(); i++ )
                 {
-                    re[i] = (String) list.get(i);
+                    re[i] = (String) list.get( i );
                 }
                 return re;
             }
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
-    public List getList(final String s) throws StorageException
+    public List getList( final String s ) throws StorageException
     {
         try
         {
             final Session hibernate = getSession();
-            final Query q = hibernate.createQuery(s);
+            final Query q = hibernate.createQuery( s );
             return q.list();
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
     }
 
@@ -764,13 +750,13 @@ public class StorageSystem implements IStorage
 
     public void close()
     {
-        if (session != null)
+        if ( session != null )
         {
             try
             {
                 session.close();
             }
-            catch (Throwable e)
+            catch ( Throwable e )
             {
                 e.printStackTrace();
             }
@@ -780,20 +766,20 @@ public class StorageSystem implements IStorage
 
     private Session getSession()
     {
-        if (session == null)
+        if ( session == null )
         {
             session = HibernateUtil.newSession();
         }
         return session;
     }
 
-    public static void main(final String[] args) throws StorageException
+    public static void main( final String[] args ) throws StorageException
     {
         //System.setProperty("storage.db.location", "testdatabase");
         final StorageSystem s = new StorageSystem();
 //        final byte[] pruefungsliste = s.getPruefungsliste("2007H", "551-0004-01", "123456789");
         final String list = "<root><list><string>Huperzia selago</string></list><uid>1</uid><exam>123</exam></root>";
-        s.storePruefungsListe("test", "test", "test", "test", list.getBytes(), new Properties(), new SimpleDateFormat("HH:mm:ss SSS").format(new Date()).getBytes());
+        s.storePruefungsListe( "test", "test", "test", "test", list.getBytes(), new Properties(), new SimpleDateFormat( "HH:mm:ss SSS" ).format( new Date() ).getBytes() );
 //        s.storePruefungsListe("2007H", "551-0004-01", "dfrey", "123456789", list.getBytes(), new Properties(), "Test".getBytes());
         s.close();
 

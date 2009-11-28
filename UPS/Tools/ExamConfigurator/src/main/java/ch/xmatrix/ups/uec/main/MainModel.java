@@ -30,7 +30,6 @@ import ch.xmatrix.ups.model.CoursePersister;
  */
 public class MainModel extends AbstractMainModel
 {
-
     public static final String CARDS_UST = "ustTasks";
 
     public static final String CARDS_EXAM = "examTasks";
@@ -58,22 +57,21 @@ public class MainModel extends AbstractMainModel
     public MainModel()
     {
         // Load models that are not loaded by their corresponding editor
-        final SimpleModelList model = Loader.loadModel("/data/courses.xml", "ups/uec", CoursePersister.getConverter());
-        registerModels(MODELID_COURSEINFO, model);
+        final SimpleModelList model = Loader.loadModel( "/data/courses.xml", "ups/uec", CoursePersister.getConverter() );
+        registerModels( MODELID_COURSEINFO, model );
     }
 
-    public static TaxonBased findModel(final String uid)
+    public static TaxonBased findModel( final String uid )
     {
-        for (int i = 0; i < MODELS.size(); i++)
+        for ( final SimpleModelList list : MODELS )
         {
-            final SimpleModelList list = MODELS.get(i);
-            for (int j = 0; j < list.getSize(); j++)
+            for ( int j = 0; j < list.getSize(); j++ )
             {
-                final Object modelObject = list.getElementAt(j);
-                if (modelObject instanceof TaxonBased)
+                final Object modelObject = list.getElementAt( j );
+                if ( modelObject instanceof TaxonBased )
                 {
                     final TaxonBased model = (TaxonBased) modelObject;
-                    if (model.getUid().equals(uid))
+                    if ( model.getUid().equals( uid ) )
                     {
                         return model;
                     }

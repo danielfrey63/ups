@@ -26,23 +26,22 @@ import javax.swing.ListModel;
  */
 public class ConstraintsPersister extends DirtyCapableModel
 {
-
     private static XStream converter;
 
     private static ListModel constraints;
 
     public static XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.setMode(XStream.ID_REFERENCES);
-            converter.alias("constraintsModels", SimpleModelList.class);
-            converter.alias("constraintsModel", Constraints.class);
-            converter.alias("constraintModel", Constraint.class);
-            converter.aliasField("index", Constraints.class, "indexToConstraints");
-            converter.addImplicitCollection(Constraints.class, "constraints");
-            converter.addImplicitCollection(Constraint.class, "taxa");
+            converter.setMode( XStream.ID_REFERENCES );
+            converter.alias( "constraintsModels", SimpleModelList.class );
+            converter.alias( "constraintsModel", Constraints.class );
+            converter.alias( "constraintModel", Constraint.class );
+            converter.aliasField( "index", Constraints.class, "indexToConstraints" );
+            converter.addImplicitCollection( Constraints.class, "constraints" );
+            converter.addImplicitCollection( Constraint.class, "taxa" );
         }
         return converter;
     }

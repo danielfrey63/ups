@@ -23,17 +23,16 @@ import com.thoughtworks.xstream.XStream;
  */
 public class SessionPersister extends DirtyCapableModel
 {
-
     private static XStream converter;
 
     public static XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.setMode(XStream.NO_REFERENCES);
-            converter.alias("sessions", SimpleModelList.class);
-            converter.alias("session", SessionModel.class);
+            converter.setMode( XStream.NO_REFERENCES );
+            converter.alias( "sessions", SimpleModelList.class );
+            converter.alias( "session", SessionModel.class );
         }
         return converter;
     }

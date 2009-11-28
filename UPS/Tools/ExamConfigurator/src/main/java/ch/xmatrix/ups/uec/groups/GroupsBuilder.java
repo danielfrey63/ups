@@ -73,7 +73,6 @@ import org.pietschy.command.ActionCommandInterceptor;
  */
 public class GroupsBuilder extends AbstractDetailsBuilder
 {
-
     public static final String COMPONENT_TREE = "tree";
 
     public static final String COMPONENT_LISTGROUPS = "listGroups";
@@ -92,7 +91,7 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
     private final DefaultListModel listModel = new DefaultListModel();
 
-    private final SelectionInList groupModels = new SelectionInList(listModel);
+    private final SelectionInList groupModels = new SelectionInList( listModel );
 
     private final DefaultListSelectionModel groupsSelection = new DefaultListSelectionModel();
 
@@ -130,295 +129,295 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
     public GroupsBuilder()
     {
-        super(new GroupsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
+        super( new GroupsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30 );
     }
 
     //--- ActionCommandPanelBuilder overrides
 
     protected void initComponentListeners()
     {
-        listGroups.addListSelectionListener(new ListSelectionListener()
+        listGroups.addListSelectionListener( new ListSelectionListener()
         {
-            public void valueChanged(final ListSelectionEvent e)
+            public void valueChanged( final ListSelectionEvent e )
             {
-                if (!isAdjusting)
+                if ( !isAdjusting )
                 {
                     isAdjusting = true;
-                    if (!e.getValueIsAdjusting())
+                    if ( !e.getValueIsAdjusting() )
                     {
                         final GroupsModel model = getGroupsModel();
-                        if (model != null)
+                        if ( model != null )
                         {
-                            model.setCurrentGroup((GroupModel) listGroups.getSelectedValue());
-                            setStates(listGroups);
+                            model.setCurrentGroup( (GroupModel) listGroups.getSelectedValue() );
+                            setStates( listGroups );
                         }
                     }
                     isAdjusting = false;
                 }
             }
-        });
-        listTaxa.addMouseListener(new MouseAdapter()
+        } );
+        listTaxa.addMouseListener( new MouseAdapter()
         {
-            public void mousePressed(final MouseEvent e)
+            public void mousePressed( final MouseEvent e )
             {
-                if (e.getClickCount() == 2)
+                if ( e.getClickCount() == 2 )
                 {
                     final String taxonName = (String) listTaxa.getSelectedValue();
                     final TaxonTree taxonTree = getTaxonTree();
                     final ArrayList<Object> pathElements = new ArrayList<Object>();
-                    SimpleTaxon taxon = taxonTree.findTaxonByName(taxonName);
-                    while (taxon != null)
+                    SimpleTaxon taxon = taxonTree.findTaxonByName( taxonName );
+                    while ( taxon != null )
                     {
-                        pathElements.add(0, taxon);
+                        pathElements.add( 0, taxon );
                         taxon = taxon.getParentTaxon();
                     }
-                    final TreePath path = new TreePath(pathElements.toArray());
-                    tree.makeVisible(path);
-                    tree.scrollPathToVisible(path);
-                    tree.setSelectionPath(path);
+                    final TreePath path = new TreePath( pathElements.toArray() );
+                    tree.makeVisible( path );
+                    tree.scrollPathToVisible( path );
+                    tree.setSelectionPath( path );
                     tree.requestFocus();
                 }
             }
-        });
-        tree.addMouseListener(new MouseAdapter()
+        } );
+        tree.addMouseListener( new MouseAdapter()
         {
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked( final MouseEvent e )
             {
-                setStates(tree);
+                setStates( tree );
             }
-        });
-        tree.addKeyListener(new KeyAdapter()
+        } );
+        tree.addKeyListener( new KeyAdapter()
         {
-            public void keyPressed(final KeyEvent e)
+            public void keyPressed( final KeyEvent e )
             {
-                setStates(tree);
+                setStates( tree );
             }
-        });
+        } );
         final ActionCommandInterceptor dirtyInterceptor = new ActionCommandInterceptor()
         {
-            public boolean beforeExecute(final ActionCommand command)
+            public boolean beforeExecute( final ActionCommand command )
             {
                 return true;
             }
 
-            public void afterExecute(final ActionCommand command)
+            public void afterExecute( final ActionCommand command )
             {
-                if (!isAdjusting)
+                if ( !isAdjusting )
                 {
                     isAdjusting = true;
                     setDirty();
-                    setStates(null);
+                    setStates( null );
                     isAdjusting = false;
                 }
             }
         };
-        add.addInterceptor(dirtyInterceptor);
-        delete.addInterceptor(dirtyInterceptor);
-        name.getDocument().addDocumentListener(new SimpleDocumentListener()
+        add.addInterceptor( dirtyInterceptor );
+        delete.addInterceptor( dirtyInterceptor );
+        name.getDocument().addDocumentListener( new SimpleDocumentListener()
         {
-            public void changedUpdate(final DocumentEvent e)
+            public void changedUpdate( final DocumentEvent e )
             {
-                if (!isAdjusting)
+                if ( !isAdjusting )
                 {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
                     final String text = name.getText().trim();
-                    if (model != null && text != null && !text.equals(model.getName()))
+                    if ( model != null && text != null && !text.equals( model.getName() ) )
                     {
-                        model.setName(text);
+                        model.setName( text );
                         setDirty();
-                        setStates(name);
+                        setStates( name );
                     }
                     isAdjusting = false;
                 }
             }
-        });
-        minimum.addChangeListener(new ChangeListener()
+        } );
+        minimum.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
-                if (!isAdjusting)
+                if ( !isAdjusting )
                 {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
-                    if (model != null)
+                    if ( model != null )
                     {
                         final Integer value = (Integer) minimum.getValue();
-                        model.setMinimum(value.intValue());
+                        model.setMinimum( value.intValue() );
                         setDirty();
-                        setStates(minimum);
+                        setStates( minimum );
                     }
                     isAdjusting = false;
                 }
             }
-        });
-        maximum.addChangeListener(new ChangeListener()
+        } );
+        maximum.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
-                if (!isAdjusting)
+                if ( !isAdjusting )
                 {
                     isAdjusting = true;
                     final GroupModel model = getCurrentGroupModel();
-                    if (model != null)
+                    if ( model != null )
                     {
                         final Integer value = (Integer) maximum.getValue();
-                        model.setMaximum(value.intValue());
+                        model.setMaximum( value.intValue() );
                         setDirty();
-                        setStates(maximum);
+                        setStates( maximum );
                     }
                     isAdjusting = false;
                 }
             }
-        });
+        } );
     }
 
     //--- DetailsBuilder implementations
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
-        if (!isAdjusting)
+        if ( !isAdjusting )
         {
             isAdjusting = true;
             enabledByMaster = enabled;
             final GroupsModel model = getGroupsModel();
-            if (model != null)
+            if ( model != null )
             {
-                model.setCurrentGroup(null);
+                model.setCurrentGroup( null );
             }
-            setStates(null);
+            setStates( null );
             isAdjusting = false;
         }
     }
 
     //--- AbstractDetailsBuilder overrides
 
-    public void setModel(final TaxonBased taxonBased)
+    public void setModel( final TaxonBased taxonBased )
     {
-        if (!isAdjusting)
+        if ( !isAdjusting )
         {
             isAdjusting = true;
-            super.setModel(taxonBased);
+            super.setModel( taxonBased );
             final GroupsModel models = (GroupsModel) taxonBased;
-            if (models != null)
+            if ( models != null )
             {
-                models.setCurrentGroup(null);
+                models.setCurrentGroup( null );
                 listModel.clear();
                 final ArrayList<GroupModel> groups = getGroupModels();
-                for (int i = 0; groups != null && i < groups.size(); i++)
+                for ( int i = 0; groups != null && i < groups.size(); i++ )
                 {
-                    final GroupModel model = groups.get(i);
-                    listModel.addElement(model);
+                    final GroupModel model = groups.get( i );
+                    listModel.addElement( model );
                 }
             }
             else
             {
                 listModel.clear();
             }
-            setStates(null);
+            setStates( null );
             isAdjusting = false;
         }
     }
 
-    protected boolean shouldMigrate(final String uid)
+    protected boolean shouldMigrate( final String uid )
     {
-        final int result = Dialogs.showQuestionMessageCancel(name, "Migration",
+        final int result = Dialogs.showQuestionMessageCancel( name, "Migration",
                 "Sie wollen den taxonomischen Baum, auf dem diese Guppeneinstellungen basieren, ändern.\n" +
                         "Es kann sein, dass nicht alle Einstellungen in den neuen Baum übernommen werden können.\n" +
-                        "Möchten Sie diese Änderungen wirklich durchführen?");
+                        "Möchten Sie diese Änderungen wirklich durchführen?" );
         return result == Dialogs.OK;
     }
 
-    protected ArrayList findMigrationErrors(final String uid)
+    protected ArrayList findMigrationErrors( final String uid )
     {
         final ArrayList<String> errors = new ArrayList<String>();
-        final TaxonTree tree = TaxonModels.find(uid);
+        final TaxonTree tree = TaxonModels.find( uid );
         final ArrayList<GroupModel> groups = getGroupModels();
-        for (int i = 0; groups != null && i < groups.size(); i++)
+        for ( int i = 0; groups != null && i < groups.size(); i++ )
         {
-            final GroupModel model = groups.get(i);
+            final GroupModel model = groups.get( i );
             final ArrayList taxa = model.getTaxa();
-            for (int j = 0; j < taxa.size(); j++)
+            for ( final Object aTaxa : taxa )
             {
-                final String taxon = (String) taxa.get(j);
-                if (tree.findTaxonByName(taxon) == null)
+                final String taxon = (String) aTaxa;
+                if ( tree.findTaxonByName( taxon ) == null )
                 {
-                    errors.add(taxon);
+                    errors.add( taxon );
                 }
             }
         }
-        setEnabled(tree != null);
+        setEnabled( tree != null );
         return errors;
     }
 
-    protected void removeMigrationErrors(final ArrayList errors)
+    protected void removeMigrationErrors( final ArrayList errors )
     {
         final GroupsModel models = getGroupsModel();
-        for (int i = 0; i < errors.size(); i++)
+        for ( final Object error : errors )
         {
-            final String taxon = (String) errors.get(i);
-            final GroupModel model = models.find(taxon);
-            model.removeTaxon(taxon);
+            final String taxon = (String) error;
+            final GroupModel model = models.find( taxon );
+            model.removeTaxon( taxon );
         }
     }
 
     protected void commitSuccessful()
     {
-        Dialogs.showInfoMessage(name, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich.");
+        Dialogs.showInfoMessage( name, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich." );
     }
 
     //--- AbstractDetailsBuilder implementations
 
     protected void initComponents()
     {
-        final JToolBar bar = getCommandManager().getGroup(Commands.GROUPID_TOOLBAR).createToolBar();
-        getCreator().getPanel("panelToolbarSeparator").add(bar, new CellConstraints().xy(3, 1));
+        final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar();
+        getCreator().getPanel( "panelToolbarSeparator" ).add( bar, new CellConstraints().xy( 3, 1 ) );
 
-        initCommand(new DeleteGroup(getCommandManager(), getModels(), listModel), false);
-        initCommand(new NewGroup(getCommandManager(), getModels(), listModel), false);
+        initCommand( new DeleteGroup( getCommandManager(), getModels(), listModel ), false );
+        initCommand( new NewGroup( getCommandManager(), getModels(), listModel ), false );
 
-        listGroups = getCreator().getList(COMPONENT_LISTGROUPS);
-        listGroups.setModel(groupModels);
-        listGroups.setSelectionModel(groupsSelection);
-        listGroups.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listGroups.setCellRenderer(groupsListRenderer);
+        listGroups = getCreator().getList( COMPONENT_LISTGROUPS );
+        listGroups.setModel( groupModels );
+        listGroups.setSelectionModel( groupsSelection );
+        listGroups.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        listGroups.setCellRenderer( groupsListRenderer );
 
-        taxaListRenderer = new TaxaListRenderer(getModels());
-        listTaxa = getCreator().getList(COMPONENT_LISTTAXA);
-        listTaxa.setSelectionModel(taxaSelection);
-        listTaxa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listTaxa.setCellRenderer(taxaListRenderer);
+        taxaListRenderer = new TaxaListRenderer( getModels() );
+        listTaxa = getCreator().getList( COMPONENT_LISTTAXA );
+        listTaxa.setSelectionModel( taxaSelection );
+        listTaxa.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        listTaxa.setCellRenderer( taxaListRenderer );
 
-        tree = getCreator().getTree(COMPONENT_TREE);
-        registerTree(tree);
-        tree.setCellRenderer(groupsTreeRenderer);
-        restorer = new TreeExpandedRestorer(tree);
+        tree = getCreator().getTree( COMPONENT_TREE );
+        registerTree( tree );
+        tree.setCellRenderer( groupsTreeRenderer );
+        restorer = new TreeExpandedRestorer( tree );
 
-        final TreeCheckboxController treeHandler = new TreeCheckboxController(tree)
+        final TreeCheckboxController treeHandler = new TreeCheckboxController( tree )
         {
-            protected void handleSelection(final TreePath path)
+            protected void handleSelection( final TreePath path )
             {
                 final GroupModel selected = (GroupModel) listGroups.getSelectedValue();
-                if (selected != null && path != null && enabledByMaster)
+                if ( selected != null && path != null && enabledByMaster )
                 {
                     final GroupsModel model = getGroupsModel();
                     final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
-                    if (SimpleTaxon.isSpecies(taxon))
+                    if ( SimpleTaxon.isSpecies( taxon ) )
                     {
                         final String name = taxon.getName();
-                        final GroupModel taxonsGroup = model.find(name);
-                        if (taxonsGroup == null)
+                        final GroupModel taxonsGroup = model.find( name );
+                        if ( taxonsGroup == null )
                         {
-                            model.addTaxon(name);
+                            model.addTaxon( name );
                             final GroupModel current = getCurrentGroupModel();
                             final ArrayList<String> taxa = current.getTaxa();
                             final TaxonTree tree = getTaxonTree();
-                            final ArrayList<String> sorted = tree.sortTaxaStrings(taxa);
-                            current.setTaxa(sorted);
+                            final ArrayList<String> sorted = tree.sortTaxaStrings( taxa );
+                            current.setTaxa( sorted );
                         }
-                        else if (taxonsGroup == selected)
+                        else if ( taxonsGroup == selected )
                         {
-                            model.removeTaxon(name);
+                            model.removeTaxon( name );
                         }
                         getTree().repaint();
                         restorer.save();
@@ -428,30 +427,30 @@ public class GroupsBuilder extends AbstractDetailsBuilder
                 }
             }
         };
-        tree.addMouseListener(treeHandler);
-        tree.addKeyListener(treeHandler);
+        tree.addMouseListener( treeHandler );
+        tree.addKeyListener( treeHandler );
 
-        name = getCreator().getTextField(COMPONENT_NAME);
-        minimum = getCreator().getSpinner(COMPONENT_MINIMUM);
-        minimum.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-        maximum = getCreator().getSpinner(COMPONENT_MAXIMUM);
-        maximum.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+        name = getCreator().getTextField( COMPONENT_NAME );
+        minimum = getCreator().getSpinner( COMPONENT_MINIMUM );
+        minimum.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        maximum = getCreator().getSpinner( COMPONENT_MAXIMUM );
+        maximum.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
 
-        delete = getCommandManager().getCommand(Commands.COMMANDID_DELETEGROUP);
-        add = getCommandManager().getCommand(Commands.COMMANDID_NEWGROUP);
+        delete = getCommandManager().getCommand( Commands.COMMANDID_DELETEGROUP );
+        add = getCommandManager().getCommand( Commands.COMMANDID_NEWGROUP );
     }
 
     protected XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.setMode(XStream.ID_REFERENCES);
-            converter.alias("groupsModels", SimpleModelList.class);
-            converter.alias("groupsModel", GroupsModel.class);
-            converter.alias("groupModel", GroupModel.class);
-            converter.alias("taxon", String.class);
-            converter.addImplicitCollection(GroupsModel.class, "groups");
+            converter.setMode( XStream.ID_REFERENCES );
+            converter.alias( "groupsModels", SimpleModelList.class );
+            converter.alias( "groupsModel", GroupsModel.class );
+            converter.alias( "groupModel", GroupModel.class );
+            converter.alias( "taxon", String.class );
+            converter.addImplicitCollection( GroupsModel.class, "groups" );
         }
         return converter;
     }
@@ -468,65 +467,65 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
     //--- Utilities
 
-    private void setStates(final Object source)
+    private void setStates( final Object source )
     {
-        setValueStates(source);
+        setValueStates( source );
         setEnabledStates();
     }
 
     private void setEnabledStates()
     {
-        final boolean isGroupModelSelected = enabledByMaster && (GroupModel) listGroups.getSelectedValue() != null;
-        groupsTreeRenderer.setEnabled(isGroupModelSelected);
-        groupsListRenderer.setEnabled(enabledByMaster);
-        taxaListRenderer.setEnabled(enabledByMaster);
-        name.setEnabled(isGroupModelSelected);
-        minimum.setEnabled(isGroupModelSelected);
-        maximum.setEnabled(isGroupModelSelected);
-        delete.setEnabled(isGroupModelSelected);
-        add.setEnabled(enabledByMaster);
+        final boolean isGroupModelSelected = enabledByMaster && listGroups.getSelectedValue() != null;
+        groupsTreeRenderer.setEnabled( isGroupModelSelected );
+        groupsListRenderer.setEnabled( enabledByMaster );
+        taxaListRenderer.setEnabled( enabledByMaster );
+        name.setEnabled( isGroupModelSelected );
+        minimum.setEnabled( isGroupModelSelected );
+        maximum.setEnabled( isGroupModelSelected );
+        delete.setEnabled( isGroupModelSelected );
+        add.setEnabled( enabledByMaster );
     }
 
-    private void setValueStates(final Object source)
+    private void setValueStates( final Object source )
     {
         final GroupModel groupModel = getCurrentGroupModel();
         final ArrayList<String> taxa = groupModel == null ? DUMMY_LIST : groupModel.getTaxa();
-        if (source != listGroups)
+        if ( source != listGroups )
         {
-            groupsTreeRenderer.setGroupsModel(getGroupsModel());
+            groupsTreeRenderer.setGroupsModel( getGroupsModel() );
         }
-        if (source != listGroups)
+        if ( source != listGroups )
         {
             listGroups.getSelectionModel().clearSelection();
         }
-        if (source != listGroups)
+        if ( source != listGroups )
         {
-            listGroups.setSelectedValue(groupModel, true);
+            listGroups.setSelectedValue( groupModel, true );
         }
-        if (source != listTaxa)
+        if ( source != listTaxa )
         {
-            listTaxa.setModel(new ArrayListModel(taxa));
+            listTaxa.setModel( new ArrayListModel( taxa ) );
         }
-        if (groupModel != null)
+        if ( groupModel != null )
         {
-            if (source != name)
+            if ( source != name )
             {
-                name.setText(groupModel.getName());
+                name.setText( groupModel.getName() );
             }
-            if (source != minimum)
+            if ( source != minimum )
             {
-                minimum.setValue(new Integer(groupModel.getMinimum()));
+                minimum.setValue( new Integer( groupModel.getMinimum() ) );
             }
-            if (source != maximum)
+            if ( source != maximum )
             {
-                maximum.setValue(new Integer(groupModel.getMaximum()));
+                maximum.setValue( new Integer( groupModel.getMaximum() ) );
             }
         }
         else
         {
-            name.setText(null);
-            minimum.setValue(ZERO);
-            maximum.setValue(ZERO);
+            name.setText( null );
+            minimum.setValue( ZERO );
+            maximum.setValue( ZERO );
         }
         listGroups.repaint();
         listTaxa.repaint();
@@ -550,19 +549,19 @@ public class GroupsBuilder extends AbstractDetailsBuilder
         return models == null ? null : models.getGroups();
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
-        System.setProperty("jfactory.resource.path", "/icon");
-        System.setProperty("log4j.configuration", "log4j.properties");
-        Strings.setResourceBundle(ResourceBundle.getBundle("ch.xmatrix.ups.uec.Strings"));
+        UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
+        UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
+        System.setProperty( "jfactory.resource.path", "/icon" );
+        System.setProperty( "log4j.configuration", "log4j.properties" );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.Strings" ) );
         final JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         final JComponent panel = new GroupsBuilder().getPanel();
-        panel.setBorder(Borders.createEmptyBorder(Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8));
-        f.getContentPane().add(panel);
-        f.setSize(600, 500);
-        f.setVisible(true);
+        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8 ) );
+        f.getContentPane().add( panel );
+        f.setSize( 600, 500 );
+        f.setVisible( true );
     }
 }

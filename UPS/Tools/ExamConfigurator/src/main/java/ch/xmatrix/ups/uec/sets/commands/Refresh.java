@@ -31,8 +31,7 @@ import org.pietschy.command.CommandManager;
  */
 public class Refresh extends ActionCommand
 {
-
-    private SetBuilder.SubmitTableModel submitModel;
+    private final SetBuilder.SubmitTableModel submitModel;
 
     private transient String session;
 
@@ -44,9 +43,9 @@ public class Refresh extends ActionCommand
 
     private transient String course;
 
-    public Refresh(final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel)
+    public Refresh( final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel )
     {
-        super(commandManager, Commands.COMMANDID_REFRESH);
+        super( commandManager, Commands.COMMANDID_REFRESH );
         this.submitModel = submitModel;
     }
 
@@ -55,12 +54,12 @@ public class Refresh extends ActionCommand
         try
         {
             final UPSServerClient2 ws = new UPSServerClient2();
-            ws.reloadPruefungsDaten(user, pass);
+            ws.reloadPruefungsDaten( user, pass );
         }
-        catch (Throwable e)
+        catch ( Throwable e )
         {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten:\n" + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog( null, "Ein Fehler ist aufgetreten:\n" + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
         }
     }
 }

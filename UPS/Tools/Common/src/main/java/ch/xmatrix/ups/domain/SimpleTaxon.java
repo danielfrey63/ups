@@ -21,30 +21,29 @@ import java.util.ArrayList;
  */
 public class SimpleTaxon
 {
+    public static final SimpleTaxon DEFAULT = new SimpleTaxon( "Default-Taxon", null, new SimpleLevel( "Default-Level", null, 0 ), 0 );
 
-    public static final SimpleTaxon DEFAULT = new SimpleTaxon("Default-Taxon", null, new SimpleLevel("Default-Level", null, 0), 0);
+    public static final SimpleTaxon DUMMY = new SimpleTaxon( "", null, null, 0 );
 
-    public static final SimpleTaxon DUMMY = new SimpleTaxon("", null, null, 0);
+    private final SimpleTaxon parent;
 
-    private SimpleTaxon parent;
+    private final SimpleLevel level;
 
-    private SimpleLevel level;
+    private final ArrayList<SimpleTaxon> children = new ArrayList<SimpleTaxon>();
 
-    private ArrayList<SimpleTaxon> children = new ArrayList<SimpleTaxon>();
+    private final String name;
 
-    private String name;
+    private final int rank;
 
-    private int rank;
-
-    public SimpleTaxon(final String name, final SimpleTaxon parent, final SimpleLevel level, final int rank)
+    public SimpleTaxon( final String name, final SimpleTaxon parent, final SimpleLevel level, final int rank )
     {
         this.name = name;
         this.level = level;
         this.rank = rank;
         this.parent = parent;
-        if (parent != null)
+        if ( parent != null )
         {
-            parent.children.add(this);
+            parent.children.add( this );
         }
     }
 
@@ -84,12 +83,12 @@ public class SimpleTaxon
      * @param taxon the taxon to test
      * @return whether a species
      */
-    public static boolean isSpecies(final SimpleTaxon taxon)
+    public static boolean isSpecies( final SimpleTaxon taxon )
     {
         return taxon != null && taxon.getLevel() != null && taxon.getLevel().getChildLevel() == null;
     }
 
-    public static boolean isGenus(final SimpleTaxon taxon)
+    public static boolean isGenus( final SimpleTaxon taxon )
     {
         final SimpleLevel childLevel = taxon.getLevel().getChildLevel();
         return childLevel != null && childLevel.getChildLevel() == null;

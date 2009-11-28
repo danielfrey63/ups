@@ -14,25 +14,24 @@ import javax.naming.NamingException;
  */
 public class LDAPAuthException extends UPSServerException
 {
-
-    public LDAPAuthException(final AuthenticationException e)
+    public LDAPAuthException( final AuthenticationException e )
     {
-        super(INVALID_CREDENTIALS, e);
+        super( INVALID_CREDENTIALS, e );
     }
 
-    public LDAPAuthException(final NamingException e)
+    public LDAPAuthException( final NamingException e )
     {
-        super(INFRASTRUCTURE_EXCEPTION, e);
+        super( INFRASTRUCTURE_EXCEPTION, e );
     }
 
-    public LDAPAuthException(final String e)
+    public LDAPAuthException( final String e )
     {
-        super(e);
+        super( e );
     }
 
-    public LDAPAuthException(final Throwable lastThrowable)
+    public LDAPAuthException( final Throwable lastThrowable )
     {
-        super(UNKNOWN_EXCEPTION, lastThrowable);
+        super( UNKNOWN_EXCEPTION, lastThrowable );
     }
 
 }

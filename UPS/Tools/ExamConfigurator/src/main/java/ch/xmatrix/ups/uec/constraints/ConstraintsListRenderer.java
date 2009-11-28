@@ -40,10 +40,9 @@ import javax.swing.ListCellRenderer;
  */
 public class ConstraintsListRenderer implements ListCellRenderer
 {
-
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
-    private final RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+    private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.ALL );
 
     private Constraints models;
 
@@ -53,21 +52,21 @@ public class ConstraintsListRenderer implements ListCellRenderer
 
     private boolean enabled;
 
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean selected, final boolean cellHasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean selected, final boolean cellHasFocus )
     {
         final Constraint constraint = (Constraint) value;
         final List<String> taxa = constraint == null ? DUMMY_LIST : constraint.getTaxa();
-        panel.setEnabled(enabled);
-        panel.setSelected(selected);
-        panel.setText(constraint.getName());
+        panel.setEnabled( enabled );
+        panel.setSelected( selected );
+        panel.setText( constraint.getName() );
         final String iconName;
-        if (taxa != null && taxa.size() == 1)
+        if ( taxa != null && taxa.size() == 1 )
         {
-            final String taxonName = taxa.get(0);
-            final SimpleTaxon taxon = tree.findTaxonByName(taxonName);
-            iconName = TaxonRendererUtils.getIconForTaxon(taxon, selected && enabled);
+            final String taxonName = taxa.get( 0 );
+            final SimpleTaxon taxon = tree.findTaxonByName( taxonName );
+            iconName = TaxonRendererUtils.getIconForTaxon( taxon, selected && enabled );
         }
-        else if (taxa != null && taxa.size() > 1)
+        else if ( taxa != null && taxa.size() > 1 )
         {
             iconName = "group.gif";
         }
@@ -75,21 +74,21 @@ public class ConstraintsListRenderer implements ListCellRenderer
         {
             iconName = null;
         }
-        panel.setIcon(ImageLocator.getIcon(iconName));
-        ConstraintsRendererUtils.configureForConstraint(panel, models, constraint, defaultTaxa, true);
+        panel.setIcon( ImageLocator.getIcon( iconName ) );
+        ConstraintsRendererUtils.configureForConstraint( panel, models, constraint, defaultTaxa, true );
         panel.update();
         return panel;
     }
 
-    public void setConstraints(final Constraints models)
+    public void setConstraints( final Constraints models )
     {
         this.models = models;
         final String[] taxa = models == null ? null : models.getDefaultTaxa();
-        defaultTaxa = models == null || taxa == null ? DUMMY_LIST : new ArrayList<String>(Arrays.asList(taxa));
-        tree = models == null ? null : TaxonModels.find(models.getTaxaUid());
+        defaultTaxa = models == null || taxa == null ? DUMMY_LIST : new ArrayList<String>( Arrays.asList( taxa ) );
+        tree = models == null ? null : TaxonModels.find( models.getTaxaUid() );
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

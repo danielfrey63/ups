@@ -2,7 +2,9 @@ package com.wegmueller.ups.ldap;
 
 import java.util.Properties;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  18:06:30 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  18:06:30
+ */
 public interface ILDAPUserRecord
 {
     String KEY_FIRSTNAME = "givenName";

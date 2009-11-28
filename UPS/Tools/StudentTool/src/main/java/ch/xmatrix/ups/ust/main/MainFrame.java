@@ -24,22 +24,21 @@ import javax.swing.JComponent;
  */
 public class MainFrame extends AbstractFrame
 {
+    private final MainModel model;
 
-    private MainModel model;
-
-    private InfoModel infoModel;
+    private final InfoModel infoModel;
 
     /**
      * Constructs an <code>AbstractMainFrame</code> with the specified title.
      *
      * @param mainModel the applications model
      */
-    public MainFrame(final MainModel mainModel, final InfoModel infoModel)
+    public MainFrame( final MainModel mainModel, final InfoModel infoModel )
     {
-        super(Application.getDescription().getWindowTitle());
+        super( Application.getDescription().getWindowTitle() );
         this.model = mainModel;
         this.infoModel = infoModel;
-        mainModel.setMainFrame(this);
+        mainModel.setMainFrame( this );
     }
 
     /**
@@ -49,14 +48,14 @@ public class MainFrame extends AbstractFrame
      */
     protected JComponent buildContentPane()
     {
-        final MainBuilder builder = new MainBuilder(model, infoModel);
+        final MainBuilder builder = new MainBuilder( model, infoModel );
         return builder.getPanel();
     }
 
     protected void configureCloseOperation()
     {
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(Application.getApplicationCloseOnWindowClosingHandler());
+        setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
+        addWindowListener( Application.getApplicationCloseOnWindowClosingHandler() );
     }
 
     public String getWindowID()

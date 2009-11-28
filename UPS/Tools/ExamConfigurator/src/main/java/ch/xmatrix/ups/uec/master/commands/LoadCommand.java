@@ -28,12 +28,11 @@ import org.pietschy.command.CommandManager;
  */
 public class LoadCommand extends ActionCommand
 {
+    private final DetailsBuilder detailsBuilder;
 
-    private DetailsBuilder detailsBuilder;
-
-    public LoadCommand(final CommandManager manager, final DetailsBuilder detailsBulider)
+    public LoadCommand( final CommandManager manager, final DetailsBuilder detailsBulider )
     {
-        super(manager, Commands.COMMANDID_LOAD);
+        super( manager, Commands.COMMANDID_LOAD );
         this.detailsBuilder = detailsBulider;
     }
 

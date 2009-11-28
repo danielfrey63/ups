@@ -34,7 +34,6 @@ import javax.swing.event.ChangeListener;
  */
 public class PrefsBuilder extends AbstractDetailsBuilder
 {
-
     public static final String COMPONENT_KNOWNCOUNT = "spinnerKnownTotalCount";
 
     public static final String COMPONENT_KNOWNWEIGHT = "spinnerKnownTotalWeight";
@@ -63,117 +62,117 @@ public class PrefsBuilder extends AbstractDetailsBuilder
 
     public PrefsBuilder()
     {
-        super(new PrefsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30);
+        super( new PrefsFactory(), RESOURCE_MODEL, RESOURCE_FORM, 30 );
     }
 
     //--- ActionCommandPanelBuilder overrides
 
     protected void initComponentListeners()
     {
-        spinnerKnownTotalCount.addChangeListener(new ChangeListener()
+        spinnerKnownTotalCount.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
                 final PrefsModel model = (PrefsModel) getModels().getSelection();
-                if (model != null)
+                if ( model != null )
                 {
                     final Integer value = (Integer) spinnerKnownTotalCount.getValue();
-                    model.setKnownTotalCount(value.intValue());
+                    model.setKnownTotalCount( value.intValue() );
                     setDirty();
                 }
             }
-        });
-        spinnerKnownTotalWeight.addChangeListener(new ChangeListener()
+        } );
+        spinnerKnownTotalWeight.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
                 final PrefsModel model = (PrefsModel) getModels().getSelection();
-                if (model != null)
+                if ( model != null )
                 {
                     final Integer value = (Integer) spinnerKnownTotalWeight.getValue();
-                    model.setKnownTotalWeight(value.intValue());
+                    model.setKnownTotalWeight( value.intValue() );
                     setDirty();
                 }
             }
-        });
-        spinnerUnknownTotalCount.addChangeListener(new ChangeListener()
+        } );
+        spinnerUnknownTotalCount.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
                 final PrefsModel model = (PrefsModel) getModels().getSelection();
-                if (model != null)
+                if ( model != null )
                 {
                     final Integer value = (Integer) spinnerUnknownTotalCount.getValue();
-                    model.setUnknownTotalCount(value.intValue());
+                    model.setUnknownTotalCount( value.intValue() );
                     setDirty();
                 }
             }
-        });
-        spinnerUnknownTotalWeight.addChangeListener(new ChangeListener()
+        } );
+        spinnerUnknownTotalWeight.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
                 final PrefsModel model = (PrefsModel) getModels().getSelection();
-                if (model != null)
+                if ( model != null )
                 {
                     final Integer value = (Integer) spinnerUnknownTotalWeight.getValue();
-                    model.setUnknownTotalWeight(value.intValue());
+                    model.setUnknownTotalWeight( value.intValue() );
                     setDirty();
                 }
             }
-        });
-        spinnerCycles.addChangeListener(new ChangeListener()
+        } );
+        spinnerCycles.addChangeListener( new ChangeListener()
         {
-            public void stateChanged(final ChangeEvent e)
+            public void stateChanged( final ChangeEvent e )
             {
                 final PrefsModel model = (PrefsModel) getModels().getSelection();
-                if (model != null)
+                if ( model != null )
                 {
                     final Integer value = (Integer) spinnerCycles.getValue();
-                    model.setMaximumSeries(value.intValue());
+                    model.setMaximumSeries( value.intValue() );
                     setDirty();
                 }
             }
-        });
+        } );
     }
 
     //--- DetailsBuilder implementations
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
-        spinnerKnownTotalCount.setEnabled(enabled);
-        spinnerKnownTotalWeight.setEnabled(enabled);
-        spinnerUnknownTotalCount.setEnabled(enabled);
-        spinnerUnknownTotalWeight.setEnabled(enabled);
-        spinnerCycles.setEnabled(enabled);
+        spinnerKnownTotalCount.setEnabled( enabled );
+        spinnerKnownTotalWeight.setEnabled( enabled );
+        spinnerUnknownTotalCount.setEnabled( enabled );
+        spinnerUnknownTotalWeight.setEnabled( enabled );
+        spinnerCycles.setEnabled( enabled );
     }
 
-    public void setModel(final TaxonBased taxonBased)
+    public void setModel( final TaxonBased taxonBased )
     {
-        super.setModel(taxonBased);
+        super.setModel( taxonBased );
         final PrefsModel model = (PrefsModel) taxonBased;
-        if (model == null)
+        if ( model == null )
         {
-            final Integer zero = new Integer(0);
-            spinnerKnownTotalCount.setValue(zero);
-            spinnerKnownTotalWeight.setValue(zero);
-            spinnerUnknownTotalCount.setValue(zero);
-            spinnerUnknownTotalWeight.setValue(zero);
-            spinnerCycles.setValue(zero);
+            final Integer zero = new Integer( 0 );
+            spinnerKnownTotalCount.setValue( zero );
+            spinnerKnownTotalWeight.setValue( zero );
+            spinnerUnknownTotalCount.setValue( zero );
+            spinnerUnknownTotalWeight.setValue( zero );
+            spinnerCycles.setValue( zero );
         }
         else
         {
-            spinnerKnownTotalCount.setValue(new Integer(model.getKnownTotalCount()));
-            spinnerKnownTotalWeight.setValue(new Integer(model.getKnownTotalWeight()));
-            spinnerUnknownTotalCount.setValue(new Integer(model.getUnknownTotalCount()));
-            spinnerUnknownTotalWeight.setValue(new Integer(model.getUnknownTotalWeight()));
-            spinnerCycles.setValue(new Integer(model.getMaximumSeries()));
+            spinnerKnownTotalCount.setValue( new Integer( model.getKnownTotalCount() ) );
+            spinnerKnownTotalWeight.setValue( new Integer( model.getKnownTotalWeight() ) );
+            spinnerUnknownTotalCount.setValue( new Integer( model.getUnknownTotalCount() ) );
+            spinnerUnknownTotalWeight.setValue( new Integer( model.getUnknownTotalWeight() ) );
+            spinnerCycles.setValue( new Integer( model.getMaximumSeries() ) );
         }
     }
 
     //--- AbstractDetailsBuilder overrides
 
-    protected boolean shouldMigrate(final String uid)
+    protected boolean shouldMigrate( final String uid )
     {
         return true;
     }
@@ -182,11 +181,11 @@ public class PrefsBuilder extends AbstractDetailsBuilder
 
     protected XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.alias("prefsModels", SimpleModelList.class);
-            converter.alias("prefsModel", PrefsModel.class);
+            converter.alias( "prefsModels", SimpleModelList.class );
+            converter.alias( "prefsModel", PrefsModel.class );
         }
         return converter;
     }
@@ -198,16 +197,16 @@ public class PrefsBuilder extends AbstractDetailsBuilder
 
     protected void initComponents()
     {
-        spinnerKnownTotalCount = getCreator().getSpinner(COMPONENT_KNOWNCOUNT);
-        spinnerKnownTotalCount.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-        spinnerKnownTotalWeight = getCreator().getSpinner(COMPONENT_KNOWNWEIGHT);
-        spinnerKnownTotalWeight.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-        spinnerUnknownTotalCount = getCreator().getSpinner(COMPONENT_UNKNOWNCOUNT);
-        spinnerUnknownTotalCount.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-        spinnerUnknownTotalWeight = getCreator().getSpinner(COMPONENT_UNKNOWNWEIGHT);
-        spinnerUnknownTotalWeight.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-        spinnerCycles = getCreator().getSpinner(COMPONENT_CYCLES);
-        spinnerCycles.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+        spinnerKnownTotalCount = getCreator().getSpinner( COMPONENT_KNOWNCOUNT );
+        spinnerKnownTotalCount.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerKnownTotalWeight = getCreator().getSpinner( COMPONENT_KNOWNWEIGHT );
+        spinnerKnownTotalWeight.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerUnknownTotalCount = getCreator().getSpinner( COMPONENT_UNKNOWNCOUNT );
+        spinnerUnknownTotalCount.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerUnknownTotalWeight = getCreator().getSpinner( COMPONENT_UNKNOWNWEIGHT );
+        spinnerUnknownTotalWeight.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerCycles = getCreator().getSpinner( COMPONENT_CYCLES );
+        spinnerCycles.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
     }
 
     protected String getModelId()

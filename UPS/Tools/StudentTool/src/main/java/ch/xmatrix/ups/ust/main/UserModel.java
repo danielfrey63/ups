@@ -26,7 +26,6 @@ import java.util.Collections;
  */
 public class UserModel
 {
-
     private String uid;
 
     private ArrayList<String> taxa;
@@ -47,23 +46,23 @@ public class UserModel
         return uid;
     }
 
-    public void setUid(final String uid)
+    public void setUid( final String uid )
     {
         this.uid = uid;
     }
 
     public ArrayList<String> getTaxa()
     {
-        if (taxa == null)
+        if ( taxa == null )
         {
             taxa = new ArrayList<String>();
         }
-        final TaxonTree taxonTree = TaxonModels.find(taxaUid);
-        Collections.sort(taxa, new TaxonomicComparator(taxonTree));
+        final TaxonTree taxonTree = TaxonModels.find( taxaUid );
+        Collections.sort( taxa, new TaxonomicComparator( taxonTree ) );
         return taxa;
     }
 
-    public void setTaxa(final ArrayList<String> taxa)
+    public void setTaxa( final ArrayList<String> taxa )
     {
         this.taxa = taxa;
     }
@@ -73,7 +72,7 @@ public class UserModel
         return constraintsUid;
     }
 
-    public void setConstraintsUid(final String constraintsUid)
+    public void setConstraintsUid( final String constraintsUid )
     {
         this.constraintsUid = constraintsUid;
     }
@@ -83,7 +82,7 @@ public class UserModel
         return examInfoUid;
     }
 
-    public void setExamInfoUid(final String examInfoUid)
+    public void setExamInfoUid( final String examInfoUid )
     {
         this.examInfoUid = examInfoUid;
     }
@@ -93,7 +92,7 @@ public class UserModel
         return taxaUid;
     }
 
-    public void setTaxaUid(final String taxaUid)
+    public void setTaxaUid( final String taxaUid )
     {
         this.taxaUid = taxaUid;
     }

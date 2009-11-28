@@ -34,10 +34,9 @@ import javax.swing.JTextField;
  */
 public class CredentialsPanel extends JPanel
 {
+    private final CredentialsModel model;
 
-    private CredentialsModel model;
-
-    public CredentialsPanel(final CredentialsModel model)
+    public CredentialsPanel( final CredentialsModel model )
     {
         this.model = model;
         initLayout();
@@ -45,29 +44,29 @@ public class CredentialsPanel extends JPanel
 
     private void initLayout()
     {
-        setLayout(new FormLayout("8dlu, p, 4dlu, max(140dlu;p):g(1.0), 8dlu", "8dlu, p, 4dlu, p, 8dlu"));
-        addLine(2, new JTextField(), "Benutzername:", Credentials.PROPERTYNAME_USERNAME, "Username");
-        addLine(4, new JPasswordField(), "Passwort:", Credentials.PROPERTYNAME_PASSWORD, "Password");
-        model.getValidationResultModel().addPropertyChangeListener(ValidationResultModel.PROPERTYNAME_RESULT, new PropertyChangeListener()
+        setLayout( new FormLayout( "8dlu, p, 4dlu, max(140dlu;p):g(1.0), 8dlu", "8dlu, p, 4dlu, p, 8dlu" ) );
+        addLine( 2, new JTextField(), "Benutzername:", Credentials.PROPERTYNAME_USERNAME, "Username" );
+        addLine( 4, new JPasswordField(), "Passwort:", Credentials.PROPERTYNAME_PASSWORD, "Password" );
+        model.getValidationResultModel().addPropertyChangeListener( ValidationResultModel.PROPERTYNAME_RESULT, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 final ValidationResult result = (ValidationResult) evt.getNewValue();
-                ValidationComponentUtils.updateComponentTreeMandatoryAndBlankBackground(CredentialsPanel.this);
-                ValidationComponentUtils.updateComponentTreeMandatoryBorder(CredentialsPanel.this);
-                ValidationComponentUtils.updateComponentTreeSeverity(CredentialsPanel.this, result);
-                ValidationComponentUtils.updateComponentTreeSeverityBackground(CredentialsPanel.this, result);
+                ValidationComponentUtils.updateComponentTreeMandatoryAndBlankBackground( CredentialsPanel.this );
+                ValidationComponentUtils.updateComponentTreeMandatoryBorder( CredentialsPanel.this );
+                ValidationComponentUtils.updateComponentTreeSeverity( CredentialsPanel.this, result );
+                ValidationComponentUtils.updateComponentTreeSeverityBackground( CredentialsPanel.this, result );
             }
-        });
+        } );
     }
 
-    private void addLine(final int line, final JTextField field, final String label, final String property, final String messageKey)
+    private void addLine( final int line, final JTextField field, final String label, final String property, final String messageKey )
     {
         final CellConstraints cc = new CellConstraints();
-        Bindings.bind(field, model.getModel(property), false);
-        ValidationComponentUtils.setMandatory(field, true);
-        ValidationComponentUtils.setMessageKey(field, messageKey);
-        add(new JLabel(label), cc.xy(2, line));
-        add(field, cc.xy(4, line));
+        Bindings.bind( field, model.getModel( property ), false );
+        ValidationComponentUtils.setMandatory( field, true );
+        ValidationComponentUtils.setMessageKey( field, messageKey );
+        add( new JLabel( label ), cc.xy( 2, line ) );
+        add( field, cc.xy( 4, line ) );
     }
 }

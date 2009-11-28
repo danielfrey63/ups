@@ -9,7 +9,7 @@ package com.wegmueller.ups.webservice.stub;
 
 public interface UPSWebService extends java.rmi.Remote
 {
-    public byte[] submit(java.lang.String userName, java.lang.String password, byte[] bytes) throws java.rmi.RemoteException;
+    public byte[] submit( java.lang.String userName, java.lang.String password, byte[] bytes ) throws java.rmi.RemoteException;
 
-    public void throwAxisFault(java.lang.String param) throws java.rmi.RemoteException;
+    public void throwAxisFault( java.lang.String param ) throws java.rmi.RemoteException;
 }

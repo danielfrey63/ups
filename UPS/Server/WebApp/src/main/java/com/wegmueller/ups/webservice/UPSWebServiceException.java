@@ -7,7 +7,7 @@ package com.wegmueller.ups.webservice;
  */
 public class UPSWebServiceException extends Throwable
 {
-    private String name;
+    private final String name;
 
     public static final String INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
 
@@ -15,9 +15,9 @@ public class UPSWebServiceException extends Throwable
 
     public static final String MISSING_DATA = "MISSING_DATA";
 
-    public UPSWebServiceException(final String name)
+    public UPSWebServiceException( final String name )
     {
-        super(name);
+        super( name );
         this.name = name;
     }
 

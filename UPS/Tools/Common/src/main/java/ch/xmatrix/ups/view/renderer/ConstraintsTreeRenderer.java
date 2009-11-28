@@ -31,7 +31,6 @@ import javax.swing.tree.TreeCellRenderer;
  */
 public class ConstraintsTreeRenderer implements TreeCellRenderer
 {
-
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
     private final RendererPanel panel = new RendererPanel();
@@ -46,46 +45,46 @@ public class ConstraintsTreeRenderer implements TreeCellRenderer
 
     public ConstraintsTreeRenderer()
     {
-        checkbox.setOpaque(false);
-        panel.setPrefixComponent(checkbox);
+        checkbox.setOpaque( false );
+        panel.setPrefixComponent( checkbox );
     }
 
-    public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
-                                                  final boolean expanded, final boolean leaf, final int row,
-                                                  final boolean hasFocus)
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected,
+                                                   final boolean expanded, final boolean leaf, final int row,
+                                                   final boolean hasFocus )
     {
         final SimpleTaxon taxon = (SimpleTaxon) value;
         final String name = taxon.getName();
-        final Constraint constraints = models == null ? null : models.findConstraint(name);
+        final Constraint constraints = models == null ? null : models.findConstraint( name );
         final List<String> taxaInConstraint = constraints == null ? DUMMY_LIST : constraints.getTaxa();
         final boolean singleTaxon = taxaInConstraint != null && taxaInConstraint.size() == 1;
-        final boolean isSpecies = SimpleTaxon.isSpecies(taxon);
-        final boolean isInDefaultTaxa = taxa.contains(name);
-        final boolean isObligate = singleTaxon && name.equals(taxaInConstraint.get(0));
-        ConstraintsRendererUtils.configureForConstraint(panel, models, constraints, taxa, singleTaxon);
-        checkbox.setSelected(isInDefaultTaxa);
-        panel.setSelected(selected);
-        panel.setEnabled(enabled);
-        panel.setIcon(ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, false)));
-        panel.setText(taxon.getName());
-        panel.setSelected(selected);
-        panel.setPrefixEnabled(enabled && !isObligate);
-        panel.setShowPrefixComponent(isSpecies);
+        final boolean isSpecies = SimpleTaxon.isSpecies( taxon );
+        final boolean isInDefaultTaxa = taxa.contains( name );
+        final boolean isObligate = singleTaxon && name.equals( taxaInConstraint.get( 0 ) );
+        ConstraintsRendererUtils.configureForConstraint( panel, models, constraints, taxa, singleTaxon );
+        checkbox.setSelected( isInDefaultTaxa );
+        panel.setSelected( selected );
+        panel.setEnabled( enabled );
+        panel.setIcon( ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, false ) ) );
+        panel.setText( taxon.getName() );
+        panel.setSelected( selected );
+        panel.setPrefixEnabled( enabled && !isObligate );
+        panel.setShowPrefixComponent( isSpecies );
         panel.update();
         return panel;
     }
 
-    public void setConstraints(final Constraints models)
+    public void setConstraints( final Constraints models )
     {
         this.models = models;
     }
 
-    public void setTaxa(final ArrayList<String> taxa)
+    public void setTaxa( final ArrayList<String> taxa )
     {
         this.taxa = taxa == null ? DUMMY_LIST : taxa;
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

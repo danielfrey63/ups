@@ -31,14 +31,13 @@ import org.pietschy.command.CommandManager;
  */
 public class NewGroup extends ActionCommand
 {
+    private final SelectionInList model;
 
-    private SelectionInList model;
+    private final DefaultListModel listModel;
 
-    private DefaultListModel listModel;
-
-    public NewGroup(final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel)
+    public NewGroup( final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel )
     {
-        super(commandManager, Commands.COMMANDID_NEWGROUP);
+        super( commandManager, Commands.COMMANDID_NEWGROUP );
         assert model != null : "model must not be null";
         assert listModel != null : "list model must not be null";
         this.model = model;
@@ -48,11 +47,11 @@ public class NewGroup extends ActionCommand
     protected void handleExecute()
     {
         final GroupsModel groups = (GroupsModel) model.getSelection();
-        if (groups != null)
+        if ( groups != null )
         {
-            final GroupModel group = new GroupModel("<Neue Gruppe>");
-            groups.addGroup(group);
-            listModel.addElement(group);
+            final GroupModel group = new GroupModel( "<Neue Gruppe>" );
+            groups.addGroup( group );
+            listModel.addElement( group );
         }
     }
 }

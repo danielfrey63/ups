@@ -43,7 +43,6 @@ import org.pietschy.command.CommandManager;
  */
 public class CalculateExams extends ActionCommand
 {
-
     private final SortableTableModel sortableTableModel;
 
     private final SetBuilder.SubmitTableModel submitTableModel;
@@ -52,11 +51,11 @@ public class CalculateExams extends ActionCommand
 
     private final JTextField seed;
 
-    public CalculateExams(final CommandManager commandManager, final ComboBoxAdapter comboModel,
-                          final JTextField seed, final SortableTableModel sortableTableModel,
-                          final SetBuilder.SubmitTableModel submitTableModel)
+    public CalculateExams( final CommandManager commandManager, final ComboBoxAdapter comboModel,
+                           final JTextField seed, final SortableTableModel sortableTableModel,
+                           final SetBuilder.SubmitTableModel submitTableModel )
     {
-        super(commandManager, Commands.COMMANDID_CALCULATE);
+        super( commandManager, Commands.COMMANDID_CALCULATE );
         this.sortableTableModel = sortableTableModel;
         this.submitTableModel = submitTableModel;
         this.comboModel = comboModel;
@@ -67,14 +66,14 @@ public class CalculateExams extends ActionCommand
     {
         final String text = seed.getText();
         final String lastSeed;
-        if (!"".equals(text))
+        if ( !"".equals( text ) )
         {
-            final int result = Dialogs.showQuestionMessageCancel(null, "Randon Number Generator",
+            final int result = Dialogs.showQuestionMessageCancel( null, "Randon Number Generator",
                     "Das Feld \"Random Seed\" enthält einen Wert. Sind Sie sicher, dass Sie damit den\n" +
                             "Zufallsgenerator auf einen reproduzierbaren Wert festlegen wollen? Wenn ja, klicken Sie\n" +
                             "auf \"Ja\". Wenn Sie den Zufallsgenerator auf einem neuen Zufallswert laufen lassen\n" +
-                            "wollen, klicken Sie auf \"Nein\".");
-            if (result == Dialogs.OK)
+                            "wollen, klicken Sie auf \"Nein\"." );
+            if ( result == Dialogs.OK )
             {
                 lastSeed = text;
             }
@@ -88,25 +87,25 @@ public class CalculateExams extends ActionCommand
             lastSeed = null;
         }
         final ExamModel examModel = (ExamModel) comboModel.getSelectedItem();
-        final TaxonTree taxa = TaxonModels.find(examModel.getTaxaUid());
-        final PrefsModel prefs = (PrefsModel) MainModel.findModel(examModel.getPrefsUid());
-        final GroupsModel groups = (GroupsModel) MainModel.findModel(examModel.getGroupsUid());
-        final SpecimensModel specimens = (SpecimensModel) MainModel.findModel(examModel.getSpecimensUid());
-        final LevelsModel levels = (LevelsModel) MainModel.findModel(examModel.getLevelsUid());
-        final Constraints constraints = (Constraints) MainModel.findModel(examModel.getConstraintsUid());
+        final TaxonTree taxa = TaxonModels.find( examModel.getTaxaUid() );
+        final PrefsModel prefs = (PrefsModel) MainModel.findModel( examModel.getPrefsUid() );
+        final GroupsModel groups = (GroupsModel) MainModel.findModel( examModel.getGroupsUid() );
+        final SpecimensModel specimens = (SpecimensModel) MainModel.findModel( examModel.getSpecimensUid() );
+        final LevelsModel levels = (LevelsModel) MainModel.findModel( examModel.getLevelsUid() );
+        final Constraints constraints = (Constraints) MainModel.findModel( examModel.getConstraintsUid() );
 
         final Registration[] original = submitTableModel.getRegistrations();
         final Registration[] registrations = new Registration[original.length];
         final int[] indices = sortableTableModel.getIndexes();
-        for (int i = 0; i < indices.length; i++)
+        for ( int i = 0; i < indices.length; i++ )
         {
             final int index = indices[i];
             registrations[i] = original[index];
         }
         final ExamsetsCalculator calculator =
-                new ExamsetsCalculator(taxa, prefs, groups, specimens, levels, constraints, registrations);
-        calculator.setSeed(lastSeed == null ? 0 : Long.parseLong(lastSeed));
+                new ExamsetsCalculator( taxa, prefs, groups, specimens, levels, constraints, registrations );
+        calculator.setSeed( lastSeed == null ? 0 : Long.parseLong( lastSeed ) );
         calculator.execute();
-        seed.setText("" + calculator.getSeed());
+        seed.setText( "" + calculator.getSeed() );
     }
 }

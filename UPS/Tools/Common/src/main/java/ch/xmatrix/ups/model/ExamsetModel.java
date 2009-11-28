@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class ExamsetModel
 {
-
     private Registration registration;
 
     private List<SetTaxon> setTaxa = new ArrayList<SetTaxon>();
@@ -21,7 +20,7 @@ public class ExamsetModel
         return setTaxa;
     }
 
-    public void setSetTaxa(final List<SetTaxon> setTaxa)
+    public void setSetTaxa( final List<SetTaxon> setTaxa )
     {
         this.setTaxa = setTaxa;
     }
@@ -31,7 +30,7 @@ public class ExamsetModel
         return registration;
     }
 
-    public void setRegistration(final Registration registration)
+    public void setRegistration( final Registration registration )
     {
         this.registration = registration;
     }

@@ -20,5 +20,5 @@ package ch.xmatrix.ups.domain;
  */
 public interface ConstraintStateListener
 {
-    void constraintStateChanged(ConstraintStateEvent event);
+    void constraintStateChanged( ConstraintStateEvent event );
 }

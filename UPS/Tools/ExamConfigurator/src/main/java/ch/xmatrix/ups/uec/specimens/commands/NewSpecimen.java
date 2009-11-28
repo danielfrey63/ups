@@ -32,15 +32,14 @@ import org.pietschy.command.CommandManager;
  */
 public class NewSpecimen extends ActionCommand
 {
+    private final SelectionInList model;
 
-    private SelectionInList model;
+    private final TreeSelectionModel selection;
 
-    private TreeSelectionModel selection;
-
-    public NewSpecimen(final CommandManager commandManager, final SelectionInList model,
-                       final TreeSelectionModel selection)
+    public NewSpecimen( final CommandManager commandManager, final SelectionInList model,
+                        final TreeSelectionModel selection )
     {
-        super(commandManager, Commands.COMMANDID_NEWSPECIMEN);
+        super( commandManager, Commands.COMMANDID_NEWSPECIMEN );
         assert model != null : "model must not be null";
         this.model = model;
         this.selection = selection;
@@ -49,14 +48,14 @@ public class NewSpecimen extends ActionCommand
     protected void handleExecute()
     {
         final SpecimensModel specimens = (SpecimensModel) model.getSelection();
-        final SimpleTaxon taxon = (SimpleTaxon) (selection.getSelectionCount() == 1 ?
-                selection.getSelectionPath().getLastPathComponent() : null);
-        if (specimens != null && taxon != null)
+        final SimpleTaxon taxon = (SimpleTaxon) ( selection.getSelectionCount() == 1 ?
+                selection.getSelectionPath().getLastPathComponent() : null );
+        if ( specimens != null && taxon != null )
         {
             final SpecimenModel specimen = new SpecimenModel();
-            specimen.setTaxon(taxon.getName());
-            specimens.addSpecimenModel(specimen);
-            specimens.setCurrent(specimen);
+            specimen.setTaxon( taxon.getName() );
+            specimens.addSpecimenModel( specimen );
+            specimens.setCurrent( specimen );
         }
     }
 }

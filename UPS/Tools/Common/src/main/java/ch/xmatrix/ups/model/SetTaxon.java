@@ -24,12 +24,11 @@ package ch.xmatrix.ups.model;
  */
 public class SetTaxon
 {
+    private final SpecimenModel specimenModel;
 
-    private SpecimenModel specimenModel;
+    private final boolean known;
 
-    private boolean known;
-
-    public SetTaxon(final SpecimenModel specimenModel, final boolean known)
+    public SetTaxon( final SpecimenModel specimenModel, final boolean known )
     {
         this.specimenModel = specimenModel;
         this.known = known;
@@ -43,8 +42,8 @@ public class SetTaxon
     public String toString()
     {
         final String id = specimenModel.getId();
-        return (id == null ? "" : id + " ") + "[" + specimenModel.getTaxon() + ", " +
-                (known ? "weightIfKnown=" + specimenModel.getWeightIfKnown() : "weightIfUnkown=" + specimenModel.getWeightIfUnknown())
+        return ( id == null ? "" : id + " " ) + "[" + specimenModel.getTaxon() + ", " +
+                ( known ? "weightIfKnown=" + specimenModel.getWeightIfKnown() : "weightIfUnkown=" + specimenModel.getWeightIfUnknown() )
                 + ", known=" + known + "]";
     }
 }

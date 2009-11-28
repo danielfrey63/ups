@@ -28,8 +28,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class MasterDetailsFactory
 {
-
-    private static final Logger LOG = Logger.getLogger(MasterDetailsFactory.class);
+    private static final Logger LOG = Logger.getLogger( MasterDetailsFactory.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -37,7 +36,7 @@ public abstract class MasterDetailsFactory
 
     private SimpleModelList models;
 
-    public void setModels(final SimpleModelList models)
+    public void setModels( final SimpleModelList models )
     {
         this.models = models;
     }
@@ -50,11 +49,11 @@ public abstract class MasterDetailsFactory
     public TaxonBased create()
     {
         final TaxonBased model = createInstance();
-        if (INFO)
+        if ( INFO )
         {
-            LOG.info("new " + model.toDebugString());
+            LOG.info( "new " + model.toDebugString() );
         }
-        models.add(model);
+        models.add( model );
         return model;
     }
 
@@ -64,18 +63,18 @@ public abstract class MasterDetailsFactory
      * @param orig the orignial to be casted
      * @return copy of TaxonBased
      */
-    public TaxonBased copy(final TaxonBased orig)
+    public TaxonBased copy( final TaxonBased orig )
     {
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOG.debug("copying " + orig.toDebugString());
+            LOG.debug( "copying " + orig.toDebugString() );
         }
-        final TaxonBased copy = createCopy(orig);
-        if (INFO)
+        final TaxonBased copy = createCopy( orig );
+        if ( INFO )
         {
-            LOG.info("copy " + copy.toDebugString());
+            LOG.info( "copy " + copy.toDebugString() );
         }
-        models.add(copy);
+        models.add( copy );
         return copy;
     }
 
@@ -84,17 +83,17 @@ public abstract class MasterDetailsFactory
      *
      * @param model
      */
-    public void delete(final TaxonBased model)
+    public void delete( final TaxonBased model )
     {
         assert model != null : "taxon based model shall not be null";
-        if (INFO)
+        if ( INFO )
         {
-            LOG.info("remove " + model.toDebugString());
+            LOG.info( "remove " + model.toDebugString() );
         }
-        models.remove(model);
+        models.remove( model );
     }
 
-    protected abstract TaxonBased createCopy(TaxonBased orig);
+    protected abstract TaxonBased createCopy( TaxonBased orig );
 
     protected abstract TaxonBased createInstance();
 }

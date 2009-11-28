@@ -27,18 +27,17 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class PrefsFactory extends MasterDetailsFactory
 {
-
     public TaxonBased createInstance()
     {
         return new PrefsModel();
     }
 
-    public TaxonBased createCopy(final TaxonBased orig)
+    public TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof PrefsModel))
+        if ( !( orig instanceof PrefsModel ) )
         {
-            throw new IllegalArgumentException("copy only allowed for instances of " + PrefsModel.class);
+            throw new IllegalArgumentException( "copy only allowed for instances of " + PrefsModel.class );
         }
-        return new PrefsModel((PrefsModel) orig);
+        return new PrefsModel( (PrefsModel) orig );
     }
 }

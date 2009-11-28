@@ -28,10 +28,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-/** @author Daniel Frey */
+/**
+ * @author Daniel Frey
+ */
 public abstract class Upload extends JDialog
 {
-
     protected Upload() throws HeadlessException
     {
         initComponents();
@@ -52,12 +53,12 @@ public abstract class Upload extends JDialog
         contentPanel = new JPanel();
         fieldServer = new JTextField();
         fieldRemoteDir = new JTextField();
-        goodiesFormsSeparator1 = compFactory.createSeparator("Keystore");
-        goodiesFormsSeparator2 = compFactory.createSeparator("Server");
+        goodiesFormsSeparator1 = compFactory.createSeparator( "Keystore" );
+        goodiesFormsSeparator2 = compFactory.createSeparator( "Server" );
         fieldKeystorePass = new JPasswordField();
         label5 = new JLabel();
         label1 = new JLabel();
-        goodiesFormsSeparator3 = compFactory.createSeparator("Pr\u00fcfungen");
+        goodiesFormsSeparator3 = compFactory.createSeparator( "Pr\u00fcfungen" );
         label8 = new JLabel();
         label2 = new JLabel();
         fieldUser = new JTextField();
@@ -77,29 +78,29 @@ public abstract class Upload extends JDialog
         final CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setTitle("Vorgaben Upload");
+        setTitle( "Vorgaben Upload" );
         final Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        contentPane.setLayout( new BorderLayout() );
 
         //======== dialogPane ========
         {
-            dialogPane.setBorder(Borders.DIALOG_BORDER);
-            dialogPane.setLayout(new BorderLayout());
+            dialogPane.setBorder( Borders.DIALOG_BORDER );
+            dialogPane.setLayout( new BorderLayout() );
 
             //======== contentPanel ========
             {
-                contentPanel.setLayout(new FormLayout(
+                contentPanel.setLayout( new FormLayout(
                         new ColumnSpec[]{
                                 FormFactory.DEFAULT_COLSPEC,
                                 FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-                                new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW),
+                                new ColumnSpec( ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW ),
                                 FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
                                 FormFactory.DEFAULT_COLSPEC
                         },
                         new RowSpec[]{
                                 FormFactory.DEFAULT_ROWSPEC,
                                 FormFactory.LINE_GAP_ROWSPEC,
-                                new RowSpec(RowSpec.TOP, Sizes.DEFAULT, FormSpec.NO_GROW),
+                                new RowSpec( RowSpec.TOP, Sizes.DEFAULT, FormSpec.NO_GROW ),
                                 FormFactory.LINE_GAP_ROWSPEC,
                                 FormFactory.DEFAULT_ROWSPEC,
                                 FormFactory.LINE_GAP_ROWSPEC,
@@ -118,65 +119,64 @@ public abstract class Upload extends JDialog
                                 FormFactory.DEFAULT_ROWSPEC,
                                 FormFactory.LINE_GAP_ROWSPEC,
                                 FormFactory.DEFAULT_ROWSPEC
-                        }));
-                contentPanel.add(fieldServer, cc.xywh(3, 15, 3, 1));
-                contentPanel.add(fieldRemoteDir, cc.xywh(3, 21, 3, 1));
-                contentPanel.add(goodiesFormsSeparator1, cc.xywh(1, 5, 5, 1));
-                contentPanel.add(goodiesFormsSeparator2, cc.xywh(1, 13, 5, 1));
-                contentPanel.add(fieldKeystorePass, cc.xywh(3, 11, 3, 1));
+                        } ) );
+                contentPanel.add( fieldServer, cc.xywh( 3, 15, 3, 1 ) );
+                contentPanel.add( fieldRemoteDir, cc.xywh( 3, 21, 3, 1 ) );
+                contentPanel.add( goodiesFormsSeparator1, cc.xywh( 1, 5, 5, 1 ) );
+                contentPanel.add( goodiesFormsSeparator2, cc.xywh( 1, 13, 5, 1 ) );
+                contentPanel.add( fieldKeystorePass, cc.xywh( 3, 11, 3, 1 ) );
 
                 //---- label5 ----
-                label5.setText("Name/IP:");
-                contentPanel.add(label5, cc.xy(1, 15));
+                label5.setText( "Name/IP:" );
+                contentPanel.add( label5, cc.xy( 1, 15 ) );
 
                 //---- label1 ----
-                label1.setText("Datei:");
-                contentPanel.add(label1, cc.xy(1, 7));
-                contentPanel.add(goodiesFormsSeparator3, cc.xywh(1, 1, 5, 1));
+                label1.setText( "Datei:" );
+                contentPanel.add( label1, cc.xy( 1, 7 ) );
+                contentPanel.add( goodiesFormsSeparator3, cc.xywh( 1, 1, 5, 1 ) );
 
                 //---- label8 ----
-                label8.setText("Auswahl:");
-                contentPanel.add(label8, cc.xy(1, 3));
+                label8.setText( "Auswahl:" );
+                contentPanel.add( label8, cc.xy( 1, 3 ) );
 
                 //---- label2 ----
-                label2.setText("Alias:");
-                contentPanel.add(label2, cc.xy(1, 9));
-                contentPanel.add(fieldUser, cc.xywh(3, 17, 3, 1));
+                label2.setText( "Alias:" );
+                contentPanel.add( label2, cc.xy( 1, 9 ) );
+                contentPanel.add( fieldUser, cc.xywh( 3, 17, 3, 1 ) );
 
                 //---- label3 ----
-                label3.setText("Passwort:");
-                contentPanel.add(label3, cc.xy(1, 19));
-                contentPanel.add(fieldServerPass, cc.xywh(3, 19, 3, 1));
+                label3.setText( "Passwort:" );
+                contentPanel.add( label3, cc.xy( 1, 19 ) );
+                contentPanel.add( fieldServerPass, cc.xywh( 3, 19, 3, 1 ) );
 
                 //---- label4 ----
-                label4.setText("User:");
-                contentPanel.add(label4, cc.xy(1, 17));
+                label4.setText( "User:" );
+                contentPanel.add( label4, cc.xy( 1, 17 ) );
 
                 //======== scrollPane1 ========
                 {
-
                     //---- listExaminfos ----
-                    listExaminfos.setToolTipText("Verf\u00fcgbare Pr\u00fcfungssessions-Konfigurationen, wobei hier nur fixierte angezeigt werden.");
-                    scrollPane1.setViewportView(listExaminfos);
+                    listExaminfos.setToolTipText( "Verf\u00fcgbare Pr\u00fcfungssessions-Konfigurationen, wobei hier nur fixierte angezeigt werden." );
+                    scrollPane1.setViewportView( listExaminfos );
                 }
-                contentPanel.add(scrollPane1, cc.xywh(3, 3, 3, 1));
-                contentPanel.add(fieldKeystore, cc.xywh(3, 7, 3, 1));
-                contentPanel.add(fieldAlias, cc.xywh(3, 9, 3, 1));
+                contentPanel.add( scrollPane1, cc.xywh( 3, 3, 3, 1 ) );
+                contentPanel.add( fieldKeystore, cc.xywh( 3, 7, 3, 1 ) );
+                contentPanel.add( fieldAlias, cc.xywh( 3, 9, 3, 1 ) );
 
                 //---- label7 ----
-                label7.setText("Passwort:");
-                contentPanel.add(label7, cc.xy(1, 11));
+                label7.setText( "Passwort:" );
+                contentPanel.add( label7, cc.xy( 1, 11 ) );
 
                 //---- label6 ----
-                label6.setText("Verzeichnis:");
-                contentPanel.add(label6, cc.xy(1, 21));
+                label6.setText( "Verzeichnis:" );
+                contentPanel.add( label6, cc.xy( 1, 21 ) );
             }
-            dialogPane.add(contentPanel, BorderLayout.NORTH);
+            dialogPane.add( contentPanel, BorderLayout.NORTH );
 
             //======== buttonBar ========
             {
-                buttonBar.setBorder(Borders.BUTTON_BAR_GAP_BORDER);
-                buttonBar.setLayout(new FormLayout(
+                buttonBar.setBorder( Borders.BUTTON_BAR_GAP_BORDER );
+                buttonBar.setLayout( new FormLayout(
                         new ColumnSpec[]{
                                 FormFactory.GLUE_COLSPEC,
                                 FormFactory.DEFAULT_COLSPEC,
@@ -185,51 +185,51 @@ public abstract class Upload extends JDialog
                                 FormFactory.RELATED_GAP_COLSPEC,
                                 FormFactory.BUTTON_COLSPEC
                         },
-                        RowSpec.decodeSpecs("pref")));
-                ((FormLayout) buttonBar.getLayout()).setColumnGroups(new int[][]{{2, 4, 6}});
+                        RowSpec.decodeSpecs( "pref" ) ) );
+                ( (FormLayout) buttonBar.getLayout() ).setColumnGroups( new int[][]{{2, 4, 6}} );
 
                 //---- saveButton ----
-                saveButton.setText("Speichern");
-                saveButton.setToolTipText("Speichert die Eintr\u00e4ge f\u00fcr \"Keystore\" und \"Server\"");
-                saveButton.addActionListener(new ActionListener()
+                saveButton.setText( "Speichern" );
+                saveButton.setToolTipText( "Speichert die Eintr\u00e4ge f\u00fcr \"Keystore\" und \"Server\"" );
+                saveButton.addActionListener( new ActionListener()
                 {
-                    public void actionPerformed(final ActionEvent e)
+                    public void actionPerformed( final ActionEvent e )
                     {
                         doSave();
                     }
-                });
-                buttonBar.add(saveButton, cc.xy(2, 1));
+                } );
+                buttonBar.add( saveButton, cc.xy( 2, 1 ) );
 
                 //---- okButton ----
-                okButton.setText("OK");
-                okButton.setEnabled(false);
-                okButton.setToolTipText("\"Speichert die Eintr\u00e4ge f\u00fcr \"Keystore\" und \"Server\" und l\u00e4dt die Pr\u00fcfungssessionen hoch");
-                okButton.addActionListener(new ActionListener()
+                okButton.setText( "OK" );
+                okButton.setEnabled( false );
+                okButton.setToolTipText( "\"Speichert die Eintr\u00e4ge f\u00fcr \"Keystore\" und \"Server\" und l\u00e4dt die Pr\u00fcfungssessionen hoch" );
+                okButton.addActionListener( new ActionListener()
                 {
-                    public void actionPerformed(final ActionEvent e)
+                    public void actionPerformed( final ActionEvent e )
                     {
                         doOk();
                     }
-                });
-                buttonBar.add(okButton, cc.xy(4, 1));
+                } );
+                buttonBar.add( okButton, cc.xy( 4, 1 ) );
 
                 //---- cancelButton ----
-                cancelButton.setText("Cancel");
-                cancelButton.setToolTipText("Beendet den Dialog ohne etwas zu speichern");
-                cancelButton.addActionListener(new ActionListener()
+                cancelButton.setText( "Cancel" );
+                cancelButton.setToolTipText( "Beendet den Dialog ohne etwas zu speichern" );
+                cancelButton.addActionListener( new ActionListener()
                 {
-                    public void actionPerformed(final ActionEvent e)
+                    public void actionPerformed( final ActionEvent e )
                     {
                         doCancel();
                     }
-                });
-                buttonBar.add(cancelButton, cc.xy(6, 1));
+                } );
+                buttonBar.add( cancelButton, cc.xy( 6, 1 ) );
             }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
+            dialogPane.add( buttonBar, BorderLayout.SOUTH );
         }
-        contentPane.add(dialogPane, BorderLayout.CENTER);
+        contentPane.add( dialogPane, BorderLayout.CENTER );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

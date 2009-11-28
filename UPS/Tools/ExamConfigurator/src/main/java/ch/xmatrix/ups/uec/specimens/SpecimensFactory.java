@@ -28,15 +28,14 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class SpecimensFactory extends MasterDetailsFactory
 {
-
-    protected TaxonBased createCopy(final TaxonBased orig)
+    protected TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof SpecimensModel))
+        if ( !( orig instanceof SpecimensModel ) )
         {
-            throw new IllegalArgumentException("original must be instance of " + SpecimensModel.class.getName() +
-                    ", found " + orig.getClass().getName());
+            throw new IllegalArgumentException( "original must be instance of " + SpecimensModel.class.getName() +
+                    ", found " + orig.getClass().getName() );
         }
-        return new SpecimensModel((SpecimensModel) orig);
+        return new SpecimensModel( (SpecimensModel) orig );
     }
 
     protected TaxonBased createInstance()

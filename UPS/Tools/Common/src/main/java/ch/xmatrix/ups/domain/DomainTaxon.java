@@ -19,19 +19,18 @@ package ch.xmatrix.ups.domain;
  */
 public class DomainTaxon implements TreeObject
 {
-
     private SimpleTaxon taxon;
 
     private TreeObject[] children;
 
     private TreeObject parent;
 
-    public DomainTaxon(final SimpleTaxon taxon)
+    public DomainTaxon( final SimpleTaxon taxon )
     {
-        this.setTaxon(taxon);
+        this.setTaxon( taxon );
     }
 
-    public void setTaxon(final SimpleTaxon taxon)
+    public void setTaxon( final SimpleTaxon taxon )
     {
         this.taxon = taxon;
     }
@@ -46,7 +45,7 @@ public class DomainTaxon implements TreeObject
         return children;
     }
 
-    public void setChildren(final TreeObject[] children)
+    public void setChildren( final TreeObject[] children )
     {
         this.children = children;
     }
@@ -56,7 +55,7 @@ public class DomainTaxon implements TreeObject
         return parent;
     }
 
-    public void setParent(final TreeObject parent)
+    public void setParent( final TreeObject parent )
     {
         this.parent = parent;
     }

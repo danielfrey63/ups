@@ -32,29 +32,28 @@ import org.pietschy.command.CommandManager;
  */
 public class SaveAsCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
+    private final ExtentionFileFilter filter = new ExtentionFileFilter( Strings.getString( "savechooser.filetype.description" ),
+            new String[]{Commands.NEW_FILE_EXTENTION}, true );
 
-    private ExtentionFileFilter filter = new ExtentionFileFilter(Strings.getString("savechooser.filetype.description"),
-            new String[]{Commands.NEW_FILE_EXTENTION}, true);
-
-    public SaveAsCommand(final CommandManager commandManager, final MainModel model)
+    public SaveAsCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_SAVEAS);
+        super( commandManager, Commands.COMMANDID_SAVEAS );
         this.model = model;
     }
 
     protected void handleExecute()
     {
-        new SaveChooser(filter, "savechooser", model.getLastOpenSaveDirectory())
+        new SaveChooser( filter, "savechooser", model.getLastOpenSaveDirectory() )
         {
-            protected void save(final File file)
+            protected void save( final File file )
             {
-                if (file != null)
+                if ( file != null )
                 {
-                    model.setLastOpenSaveDirectory(file.getParentFile().getAbsolutePath());
-                    model.setCurrentFile(file);
-                    getCommandManager().getCommand(Commands.COMMANDID_SAVE).execute();
+                    model.setLastOpenSaveDirectory( file.getParentFile().getAbsolutePath() );
+                    model.setCurrentFile( file );
+                    getCommandManager().getCommand( Commands.COMMANDID_SAVE ).execute();
                 }
             }
         }.open();

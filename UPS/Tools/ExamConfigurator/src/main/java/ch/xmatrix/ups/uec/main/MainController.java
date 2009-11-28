@@ -28,13 +28,12 @@ import ch.jfactory.binding.InfoModel;
  */
 public class MainController extends AbstractMainController
 {
-
-    public MainController(final MainModel mainModel, final InfoModel infoModel)
+    public MainController( final MainModel mainModel, final InfoModel infoModel )
     {
-        super(mainModel, infoModel);
+        super( mainModel, infoModel );
     }
 
-    protected void initModel(final AbstractMainModel model)
+    protected void initModel( final AbstractMainModel model )
     {
     }
 }

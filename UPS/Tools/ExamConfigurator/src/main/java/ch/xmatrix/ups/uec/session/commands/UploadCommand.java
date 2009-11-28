@@ -26,14 +26,13 @@ import org.pietschy.command.CommandManager;
  */
 public class UploadCommand extends ActionCommand
 {
-
-    private static final Logger LOG = Logger.getLogger(UploadCommand.class);
+    private static final Logger LOG = Logger.getLogger( UploadCommand.class );
 
     private final ListModel model;
 
-    public UploadCommand(final CommandManager commandManager, final ListModel model)
+    public UploadCommand( final CommandManager commandManager, final ListModel model )
     {
-        super(commandManager, Commands.COMMANDID_UPLOAD);
+        super( commandManager, Commands.COMMANDID_UPLOAD );
         this.model = model;
     }
 
@@ -41,16 +40,16 @@ public class UploadCommand extends ActionCommand
     {
         try
         {
-            final UploadDialog dialog = new UploadDialog(model);
+            final UploadDialog dialog = new UploadDialog( model );
             dialog.pack();
-            dialog.setVisible(true);
+            dialog.setVisible( true );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOG.error("error during in the dialog", e);
-            JOptionPane.showMessageDialog(null,
+            LOG.error( "error during in the dialog", e );
+            JOptionPane.showMessageDialog( null,
                     "Beim Dialog wurde ein Fehler entdeckt:\n" + e.getMessage(),
-                    "Fehler", JOptionPane.ERROR_MESSAGE);
+                    "Fehler", JOptionPane.ERROR_MESSAGE );
         }
     }
 }

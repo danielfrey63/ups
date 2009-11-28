@@ -10,7 +10,6 @@ import java.util.Calendar;
  */
 public interface IAnmeldedaten
 {
-
     /**
      * Klartext der Angabe, ob es sich um eine schriftliche oder um eine mündliche Prüfung handelt. Falls es sich weder
      * um eine schriftliche noch um eine mündliche Prüfung handelt, so wird "-" ausgegeben.

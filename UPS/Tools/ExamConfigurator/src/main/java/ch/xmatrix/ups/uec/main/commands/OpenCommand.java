@@ -28,20 +28,19 @@ import org.pietschy.command.CommandManager;
  */
 public class OpenCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
+    private final String card;
 
-    private String card;
-
-    public OpenCommand(final CommandManager commandManager, final MainModel model, final String id, final String card)
+    public OpenCommand( final CommandManager commandManager, final MainModel model, final String id, final String card )
     {
-        super(commandManager, id);
+        super( commandManager, id );
         this.model = model;
         this.card = card;
     }
 
     protected void handleExecute()
     {
-        model.setCurrentCard(card);
+        model.setCurrentCard( card );
     }
 }

@@ -3,7 +3,9 @@ package com.wegmueller.ups.storage.beans;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.util.Calendar;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  20:51:09 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  20:51:09
+ */
 public class Anmeldedaten implements IAnmeldedaten
 {
     private Long id;
@@ -55,7 +57,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkNummer;
     }
 
-    public void setLkNummer(final String lkNummer)
+    public void setLkNummer( final String lkNummer )
     {
         this.lkNummer = lkNummer;
     }
@@ -65,7 +67,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkForm;
     }
 
-    public void setLkForm(final int lkForm)
+    public void setLkForm( final int lkForm )
     {
         this.lkForm = lkForm;
     }
@@ -75,7 +77,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkFormText;
     }
 
-    public void setLkFormText(final String lkFormText)
+    public void setLkFormText( final String lkFormText )
     {
         this.lkFormText = lkFormText;
     }
@@ -90,7 +92,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return pruefungsmodeText;
     }
 
-    public void setPruefungsmodeText(final String pruefungsmodeText)
+    public void setPruefungsmodeText( final String pruefungsmodeText )
     {
         this.pruefungsmodeText = pruefungsmodeText;
     }
@@ -100,7 +102,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return fachrichtung;
     }
 
-    public void setFachrichtung(final String fachrichtung)
+    public void setFachrichtung( final String fachrichtung )
     {
         this.fachrichtung = fachrichtung;
     }
@@ -110,7 +112,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return studentennummer;
     }
 
-    public void setStudentennummer(final String studentennummer)
+    public void setStudentennummer( final String studentennummer )
     {
         this.studentennummer = studentennummer;
     }
@@ -120,7 +122,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return vorname;
     }
 
-    public void setVorname(final String vorname)
+    public void setVorname( final String vorname )
     {
         this.vorname = vorname;
     }
@@ -130,7 +132,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return repetent;
     }
 
-    public void setRepetent(final boolean repetent)
+    public void setRepetent( final boolean repetent )
     {
         this.repetent = repetent;
     }
@@ -140,7 +142,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkEinheitTitel;
     }
 
-    public void setLkEinheitTitel(final String lkEinheitTitel)
+    public void setLkEinheitTitel( final String lkEinheitTitel )
     {
         this.lkEinheitTitel = lkEinheitTitel;
     }
@@ -150,7 +152,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkEinheitTyp;
     }
 
-    public void setLkEinheitTyp(final String lkEinheitTyp)
+    public void setLkEinheitTyp( final String lkEinheitTyp )
     {
         this.lkEinheitTyp = lkEinheitTyp;
     }
@@ -160,7 +162,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return pruefungsraum;
     }
 
-    public void setPruefungsraum(final String pruefungsraum)
+    public void setPruefungsraum( final String pruefungsraum )
     {
         this.pruefungsraum = pruefungsraum;
     }
@@ -170,7 +172,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkEinheitNummerzusatz;
     }
 
-    public void setLkEinheitNummerzusatz(final String lkEinheitNummerzusatz)
+    public void setLkEinheitNummerzusatz( final String lkEinheitNummerzusatz )
     {
         this.lkEinheitNummerzusatz = lkEinheitNummerzusatz;
     }
@@ -180,7 +182,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return nachname;
     }
 
-    public void setNachname(final String nachname)
+    public void setNachname( final String nachname )
     {
         this.nachname = nachname;
     }
@@ -190,7 +192,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return studiengang;
     }
 
-    public void setStudiengang(final String studiengang)
+    public void setStudiengang( final String studiengang )
     {
         this.studiengang = studiengang;
     }
@@ -200,7 +202,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return email;
     }
 
-    public void setEmail(final String email)
+    public void setEmail( final String email )
     {
         this.email = email;
     }
@@ -210,7 +212,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return seskez;
     }
 
-    public void setSeskez(final String seskez)
+    public void setSeskez( final String seskez )
     {
         this.seskez = seskez;
     }
@@ -220,7 +222,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return lkEinheitTypText;
     }
 
-    public void setLkEinheitTypText(final String lkEinheitTypText)
+    public void setLkEinheitTypText( final String lkEinheitTypText )
     {
         this.lkEinheitTypText = lkEinheitTypText;
     }
@@ -230,7 +232,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return pruefungsdatum;
     }
 
-    public void setPruefungsdatum(final Calendar pruefungsdatum)
+    public void setPruefungsdatum( final Calendar pruefungsdatum )
     {
         this.pruefungsdatum = pruefungsdatum;
     }
@@ -240,7 +242,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return pruefungsdatumVon;
     }
 
-    public void setPruefungsdatumVon(final Calendar pruefungsdatumVon)
+    public void setPruefungsdatumVon( final Calendar pruefungsdatumVon )
     {
         this.pruefungsdatumVon = pruefungsdatumVon;
     }
@@ -250,12 +252,12 @@ public class Anmeldedaten implements IAnmeldedaten
         return pruefungsdatumBis;
     }
 
-    public void setPruefungsdatumBis(final Calendar pruefungsdatumBis)
+    public void setPruefungsdatumBis( final Calendar pruefungsdatumBis )
     {
         this.pruefungsdatumBis = pruefungsdatumBis;
     }
 
-    public void setDozentUserName(final String dozentUserName)
+    public void setDozentUserName( final String dozentUserName )
     {
         this.dozentUserName = dozentUserName;
     }
@@ -265,7 +267,7 @@ public class Anmeldedaten implements IAnmeldedaten
         return id;
     }
 
-    public void setId(final Long id)
+    public void setId( final Long id )
     {
         this.id = id;
     }

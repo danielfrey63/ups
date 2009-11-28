@@ -8,6 +8,5 @@ package ch.xmatrix.ups.uec.master;
  */
 public interface DirtyListener
 {
-
-    void setDirty(boolean dirty);
+    void setDirty( boolean dirty );
 }

@@ -24,7 +24,6 @@ package ch.xmatrix.ups.uec.groups.commands;
  */
 public class Commands
 {
-
     public static final String COMMANDID_DELETEGROUP = "group.delete";
 
     public static final String COMMANDID_NEWGROUP = "group.new";

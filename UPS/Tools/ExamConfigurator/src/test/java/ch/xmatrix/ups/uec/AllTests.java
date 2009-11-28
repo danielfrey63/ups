@@ -30,13 +30,12 @@ import junit.framework.TestSuite;
  */
 public class AllTests extends TestSuite
 {
-
     public static Test suite()
     {
-        final TestSuite suite = new TestSuite("UEC Tests");
-        suite.addTestSuite(PrefsBuilderTest.class);
-        suite.addTestSuite(GroupsBuilderTest.class);
-        suite.addTestSuite(ConstraintsBuilderTest.class);
+        final TestSuite suite = new TestSuite( "UEC Tests" );
+        suite.addTestSuite( PrefsBuilderTest.class );
+        suite.addTestSuite( GroupsBuilderTest.class );
+        suite.addTestSuite( ConstraintsBuilderTest.class );
         return suite;
     }
 }

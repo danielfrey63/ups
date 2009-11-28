@@ -30,7 +30,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class TaxonTree implements IdAware
 {
-
     private String uid;
 
     private String name;
@@ -54,7 +53,7 @@ public class TaxonTree implements IdAware
         return uid;
     }
 
-    public void setUid(final String uid)
+    public void setUid( final String uid )
     {
         this.uid = uid;
     }
@@ -64,7 +63,7 @@ public class TaxonTree implements IdAware
         return name;
     }
 
-    public void setName(final String name)
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -74,7 +73,7 @@ public class TaxonTree implements IdAware
         return description;
     }
 
-    public void setDescription(final String description)
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -84,7 +83,7 @@ public class TaxonTree implements IdAware
         return lastModified;
     }
 
-    public void setLastModified(final String lastModified)
+    public void setLastModified( final String lastModified )
     {
         this.lastModified = lastModified;
     }
@@ -94,7 +93,7 @@ public class TaxonTree implements IdAware
         return version;
     }
 
-    public void setVersion(final Version version)
+    public void setVersion( final Version version )
     {
         this.version = version;
     }
@@ -104,7 +103,7 @@ public class TaxonTree implements IdAware
         return rootTaxon;
     }
 
-    public void setRootTaxon(final SimpleTaxon rootTaxon)
+    public void setRootTaxon( final SimpleTaxon rootTaxon )
     {
         this.rootTaxon = rootTaxon;
     }
@@ -114,17 +113,17 @@ public class TaxonTree implements IdAware
         return rootLevel;
     }
 
-    public void setRootLevel(final SimpleLevel rootLevel)
+    public void setRootLevel( final SimpleLevel rootLevel )
     {
         this.rootLevel = rootLevel;
     }
 
-    public SimpleTaxon findTaxonByName(final String taxon)
+    public SimpleTaxon findTaxonByName( final String taxon )
     {
-        return (SimpleTaxon) index.get(taxon);
+        return (SimpleTaxon) index.get( taxon );
     }
 
-    public void setIndex(final Map index)
+    public void setIndex( final Map index )
     {
         this.index = index;
     }
@@ -136,7 +135,7 @@ public class TaxonTree implements IdAware
 
     public String toDebugString()
     {
-        return new ToStringBuilder(this).toString();
+        return new ToStringBuilder( this ).toString();
     }
 
     //--- Utilities
@@ -147,21 +146,19 @@ public class TaxonTree implements IdAware
      * @param taxa the taxa to sort
      * @return a new list with the sorted taxa
      */
-    public ArrayList<String> sortTaxaStrings(final ArrayList<String> taxa)
+    public ArrayList<String> sortTaxaStrings( final ArrayList<String> taxa )
     {
         final ArrayList<SimpleTaxon> taxaToSort = new ArrayList<SimpleTaxon>();
-        for (int i = 0; i < taxa.size(); i++)
+        for ( final String taxonString : taxa )
         {
-            final String taxonString = (String) taxa.get(i);
-            final SimpleTaxon taxon = findTaxonByName(taxonString);
-            taxaToSort.add(taxon);
+            final SimpleTaxon taxon = findTaxonByName( taxonString );
+            taxaToSort.add( taxon );
         }
-        final ArrayList<SimpleTaxon> sortedTaxa = sortSimpleTaxa(taxaToSort);
+        final ArrayList<SimpleTaxon> sortedTaxa = sortSimpleTaxa( taxaToSort );
         final ArrayList<String> sorted = new ArrayList<String>();
-        for (int i = 0; i < sortedTaxa.size(); i++)
+        for ( final SimpleTaxon taxon : sortedTaxa )
         {
-            final SimpleTaxon taxon = (SimpleTaxon) sortedTaxa.get(i);
-            sorted.add(taxon.getName());
+            sorted.add( taxon.getName() );
         }
         return sorted;
     }
@@ -172,34 +169,34 @@ public class TaxonTree implements IdAware
      * @param taxa the taxa to sort
      * @return a new list with the sorted taxa
      */
-    public ArrayList<SimpleTaxon> sortSimpleTaxa(final ArrayList<SimpleTaxon> taxa)
+    public ArrayList<SimpleTaxon> sortSimpleTaxa( final ArrayList<SimpleTaxon> taxa )
     {
         final Comparator<SimpleTaxon> taxonComparator = new Comparator<SimpleTaxon>()
         {
-            public int compare(final SimpleTaxon t1, final SimpleTaxon t2)
+            public int compare( final SimpleTaxon t1, final SimpleTaxon t2 )
             {
                 // find common parent.
-                final ArrayList<SimpleTaxon> tp1 = getPathToRoot(t1);
-                final ArrayList<SimpleTaxon> tp2 = getPathToRoot(t2);
-                final ArrayList<SimpleTaxon> common = (ArrayList<SimpleTaxon>) CollectionUtils.intersection(tp1, tp2);
+                final ArrayList<SimpleTaxon> tp1 = getPathToRoot( t1 );
+                final ArrayList<SimpleTaxon> tp2 = getPathToRoot( t2 );
+                final ArrayList<SimpleTaxon> common = (ArrayList<SimpleTaxon>) CollectionUtils.intersection( tp1, tp2 );
                 final int size = common.size();
                 // Common is not ordered, so take the common parent from one of the original arrays.
-                final SimpleTaxon commonParent = tp1.get(size - 1);
+                final SimpleTaxon commonParent = tp1.get( size - 1 );
                 final ArrayList<SimpleTaxon> children = commonParent.getChildTaxa();
-                return new Integer(children.indexOf(tp1.get(size))).compareTo(new Integer(children.indexOf(tp2.get(size))));
+                return new Integer( children.indexOf( tp1.get( size ) ) ).compareTo( new Integer( children.indexOf( tp2.get( size ) ) ) );
             }
         };
-        Collections.sort(taxa, taxonComparator);
+        Collections.sort( taxa, taxonComparator );
         return taxa;
     }
 
-    private ArrayList<SimpleTaxon> getPathToRoot(final SimpleTaxon taxon)
+    private ArrayList<SimpleTaxon> getPathToRoot( final SimpleTaxon taxon )
     {
         final ArrayList<SimpleTaxon> taxons = new ArrayList<SimpleTaxon>();
         SimpleTaxon current = taxon;
-        while (current != null)
+        while ( current != null )
         {
-            taxons.add(0, current);
+            taxons.add( 0, current );
             current = current.getParentTaxon();
         }
         return taxons;

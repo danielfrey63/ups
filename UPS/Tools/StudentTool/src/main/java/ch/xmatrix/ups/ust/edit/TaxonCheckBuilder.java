@@ -48,11 +48,12 @@ import javax.swing.tree.TreePath;
 import org.apache.log4j.Logger;
 import org.pietschy.command.CommandManager;
 
-/** Builds the panel from which taxa can be selected and deselected. */
+/**
+ * Builds the panel from which taxa can be selected and deselected.
+ */
 public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 {
-
-    private static final Logger LOG = Logger.getLogger(TaxonCheckBuilder.class);
+    private static final Logger LOG = Logger.getLogger( TaxonCheckBuilder.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -68,61 +69,61 @@ public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 
     private Constraints constraints;
 
-    private ArrayList<JComponent> componentsToRepaint = new ArrayList<JComponent>();
+    private final ArrayList<JComponent> componentsToRepaint = new ArrayList<JComponent>();
 
-    private ArrayList<SpeciesSelectionListener> listeners = new ArrayList<SpeciesSelectionListener>();
+    private final ArrayList<SpeciesSelectionListener> listeners = new ArrayList<SpeciesSelectionListener>();
 
     private final HideSingleGenus singleGenusFilter = new HideSingleGenus();
 
-    public void setModel(final UserModel userModel)
+    public void setModel( final UserModel userModel )
     {
         this.userModel = userModel;
-        constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
-        final TaxonTree taxonTree = TaxonModels.find(constraints.getTaxaUid());
-        taxonTreeModel.setRoot(taxonTree.getRootTaxon());
-        treeRenderer.setConstraints(constraints);
-        treeRenderer.setTaxa(userModel.getTaxa());
+        constraints = (Constraints) AbstractMainModel.findModel( userModel.getConstraintsUid() );
+        final TaxonTree taxonTree = TaxonModels.find( constraints.getTaxaUid() );
+        taxonTreeModel.setRoot( taxonTree.getRootTaxon() );
+        treeRenderer.setConstraints( constraints );
+        treeRenderer.setTaxa( userModel.getTaxa() );
         taxonTreeModel.reload();
     }
 
-    public void setSelection(final SimpleTaxon taxon)
+    public void setSelection( final SimpleTaxon taxon )
     {
-        if (taxon != null)
+        if ( taxon != null )
         {
-            final TreePath path = taxonTreeModel.getPathToRoot(taxon);
-            if (path != null)
+            final TreePath path = taxonTreeModel.getPathToRoot( taxon );
+            if ( path != null )
             {
                 final Object[] pathElements = path.getPath();
-                TreePath finalPath = new TreePath(pathElements[0]);
-                for (int i = 1; i < pathElements.length; i++)
+                TreePath finalPath = new TreePath( pathElements[0] );
+                for ( int i = 1; i < pathElements.length; i++ )
                 {
                     final Object element = pathElements[i];
-                    if (singleGenusFilter.matches(element))
+                    if ( singleGenusFilter.matches( element ) )
                     {
-                        finalPath = finalPath.pathByAddingChild(element);
+                        finalPath = finalPath.pathByAddingChild( element );
                     }
                 }
-                tree.setSelection(finalPath);
+                tree.setSelection( finalPath );
             }
             else
             {
-                tree.setSelection(null);
+                tree.setSelection( null );
             }
         }
         else
         {
-            tree.setSelection(null);
+            tree.setSelection( null );
         }
     }
 
-    public void addComponentToRepaint(final JComponent componentToRepaint)
+    public void addComponentToRepaint( final JComponent componentToRepaint )
     {
-        componentsToRepaint.add(componentToRepaint);
+        componentsToRepaint.add( componentToRepaint );
     }
 
-    public void addComponentsToRepaint(final ArrayList<JComponent> componentsToRepaint)
+    public void addComponentsToRepaint( final ArrayList<JComponent> componentsToRepaint )
     {
-        this.componentsToRepaint.addAll(componentsToRepaint);
+        this.componentsToRepaint.addAll( componentsToRepaint );
     }
 
     /**
@@ -132,39 +133,38 @@ public class TaxonCheckBuilder extends ActionCommandPanelBuilder
      */
     public JComponent createMainPanel()
     {
-        final JPanel taxTreePanel = new JPanel(new BorderLayout());
+        final JPanel taxTreePanel = new JPanel( new BorderLayout() );
         tree = getTaxTree();
-        taxTreePanel.add(new JScrollPane(tree), BorderLayout.CENTER);
-        taxTreePanel.add(getCommandManager().getGroup(Commands.GROUPID_TAXTREE_TOOLBAR).createToolBar(Commands.FACENAME_TOOLBAR), BorderLayout.NORTH);
+        taxTreePanel.add( new JScrollPane( tree ), BorderLayout.CENTER );
+        taxTreePanel.add( getCommandManager().getGroup( Commands.GROUPID_TAXTREE_TOOLBAR ).createToolBar( Commands.FACENAME_TOOLBAR ), BorderLayout.NORTH );
         return taxTreePanel;
     }
 
-    public void addSpeciesSelectionListener(final SpeciesSelectionListener listener)
+    public void addSpeciesSelectionListener( final SpeciesSelectionListener listener )
     {
-        listeners.add(listener);
+        listeners.add( listener );
     }
 
     protected void initCommands()
     {
-
-        taxonTreeModel = new TaxonTreeModel(SimpleTaxon.DUMMY);
-        treeModel = new ModelBasedFilteredTreeModel(taxonTreeModel);
-        treeModel.setFilter(new MultiAndFilter(new Filter[]{singleGenusFilter}));
+        taxonTreeModel = new TaxonTreeModel( SimpleTaxon.DUMMY );
+        treeModel = new ModelBasedFilteredTreeModel( taxonTreeModel );
+        treeModel.setFilter( new MultiAndFilter( new Filter[]{singleGenusFilter} ) );
 
         final SearchableTree tree = getTaxTree();
 
         final CommandManager manager = getCommandManager();
-        initCommand(new ExpandAllTreeNodes(manager, tree), true);
-        initCommand(new CollapseAllTreeNodes(manager, tree), true);
+        initCommand( new ExpandAllTreeNodes( manager, tree ), true );
+        initCommand( new CollapseAllTreeNodes( manager, tree ), true );
 
-        final TreeExpandedRestorer saver = new TreeExpandedRestorer(tree);
+        final TreeExpandedRestorer saver = new TreeExpandedRestorer( tree );
         final Filter hide = new HideConstraintlessTaxon();
-        initToggleCommand(new RemoveFilterFromAndedFilterable(manager, Commands.COMMANDID_TAXTREE_DEEP, treeModel, hide, saver), true);
-        initToggleCommand(new AddFilterToAndedFilterable(manager, Commands.COMMANDID_TAXTREE_FLAT, treeModel, hide, saver), false);
+        initToggleCommand( new RemoveFilterFromAndedFilterable( manager, Commands.COMMANDID_TAXTREE_DEEP, treeModel, hide, saver ), true );
+        initToggleCommand( new AddFilterToAndedFilterable( manager, Commands.COMMANDID_TAXTREE_FLAT, treeModel, hide, saver ), false );
 
         final Filter non = new HideNonSelectedSpecies();
-        initToggleCommand(new RemoveFilterFromAndedFilterable(manager, Commands.COMMANDID_TAXTREE_ALLSPECIES, treeModel, non, saver), true);
-        initToggleCommand(new AddFilterToAndedFilterable(manager, Commands.COMMANDID_TAXTREE_SELECTEDONLY, treeModel, non, saver), false);
+        initToggleCommand( new RemoveFilterFromAndedFilterable( manager, Commands.COMMANDID_TAXTREE_ALLSPECIES, treeModel, non, saver ), true );
+        initToggleCommand( new AddFilterToAndedFilterable( manager, Commands.COMMANDID_TAXTREE_SELECTEDONLY, treeModel, non, saver ), false );
     }
 
     /**
@@ -174,77 +174,73 @@ public class TaxonCheckBuilder extends ActionCommandPanelBuilder
      */
     private SearchableTree getTaxTree()
     {
-        if (tree == null)
+        if ( tree == null )
         {
             treeRenderer = new ConstraintsTreeRenderer();
-            treeRenderer.setEnabled(true);
-            tree = new SearchableTree(treeModel);
+            treeRenderer.setEnabled( true );
+            tree = new SearchableTree( treeModel );
             final TreeCheckboxController checkBoxHandler = new CheckboxController();
-            tree.addMouseListener(checkBoxHandler);
-            tree.addKeyListener(checkBoxHandler);
-            tree.setBorder(new EmptyBorder(3, 3, 3, 3));
-            tree.setCellRenderer(treeRenderer);
+            tree.addMouseListener( checkBoxHandler );
+            tree.addKeyListener( checkBoxHandler );
+            tree.setBorder( new EmptyBorder( 3, 3, 3, 3 ) );
+            tree.setCellRenderer( treeRenderer );
         }
         return tree;
     }
 
     public interface SpeciesSelectionListener
     {
-
         public void speciesSelectionChanged();
     }
 
     private class CheckboxController extends TreeCheckboxController
     {
-
         public CheckboxController()
         {
-            super(TaxonCheckBuilder.this.tree);
+            super( TaxonCheckBuilder.this.tree );
         }
 
-        protected void handleSelection(final TreePath path)
+        protected void handleSelection( final TreePath path )
         {
-            if (path != null)
+            if ( path != null )
             {
                 final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
-                if (SimpleTaxon.isSpecies(taxon))
+                if ( SimpleTaxon.isSpecies( taxon ) )
                 {
                     final String name = taxon.getName();
-                    final Constraint constraint = constraints.findConstraint(name);
-                    if (constraint != null)
+                    final Constraint constraint = constraints.findConstraint( name );
+                    if ( constraint != null )
                     {
                         final List<String> children = constraint.getTaxa();
-                        if (children.size() == 1)
+                        if ( children.size() == 1 )
                         {
-                            final String constraintTaxonName = children.get(0);
-                            final TaxonTree taxonTree = TaxonModels.find(constraints.getTaxaUid());
-                            final SimpleTaxon constraintTaxon = taxonTree.findTaxonByName(constraintTaxonName);
-                            if (constraintTaxon != null && SimpleTaxon.isSpecies(constraintTaxon))
+                            final String constraintTaxonName = children.get( 0 );
+                            final TaxonTree taxonTree = TaxonModels.find( constraints.getTaxaUid() );
+                            final SimpleTaxon constraintTaxon = taxonTree.findTaxonByName( constraintTaxonName );
+                            if ( constraintTaxon != null && SimpleTaxon.isSpecies( constraintTaxon ) )
                             {
                                 return;
                             }
                         }
                     }
                     final ArrayList<String> taxa = userModel.getTaxa();
-                    final boolean toAdd = (taxa == null || !taxa.contains(name));
-                    if (toAdd)
+                    final boolean toAdd = ( taxa == null || !taxa.contains( name ) );
+                    if ( toAdd )
                     {
-                        taxa.add(name);
+                        taxa.add( name );
                     }
                     else
                     {
-                        taxa.remove(name);
+                        taxa.remove( name );
                     }
                     tree.repaint();
-                    for (int i = 0; i < componentsToRepaint.size(); i++)
+                    for ( final JComponent component : componentsToRepaint )
                     {
-                        final JComponent component = componentsToRepaint.get(i);
                         component.repaint();
                     }
-                    final ArrayList<SpeciesSelectionListener> copy = new ArrayList<SpeciesSelectionListener>(listeners);
-                    for (int i = 0; i < copy.size(); i++)
+                    final ArrayList<SpeciesSelectionListener> copy = new ArrayList<SpeciesSelectionListener>( listeners );
+                    for ( final SpeciesSelectionListener listener : copy )
                     {
-                        final SpeciesSelectionListener listener = copy.get(i);
                         listener.speciesSelectionChanged();
                     }
                 }
@@ -254,16 +250,15 @@ public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 
     private class HideConstraintlessTaxon implements Filter
     {
-
-        public boolean matches(final Object object)
+        public boolean matches( final Object object )
         {
             final SimpleTaxon taxon = (SimpleTaxon) object;
-            final boolean isSpecies = SimpleTaxon.isSpecies(taxon);
-            final boolean hasConstraint = constraints.findConstraint(taxon.getName()) != null;
+            final boolean isSpecies = SimpleTaxon.isSpecies( taxon );
+            final boolean hasConstraint = constraints.findConstraint( taxon.getName() ) != null;
             final boolean isShown = isSpecies || hasConstraint;
-            if (DEBUG)
+            if ( DEBUG )
             {
-                LOG.debug((isShown ? "hiding  " : "showing ") + object);
+                LOG.debug( ( isShown ? "hiding  " : "showing " ) + object );
             }
             return isShown;
         }
@@ -271,12 +266,11 @@ public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 
     private class HideNonSelectedSpecies implements Filter
     {
-
-        public boolean matches(final Object object)
+        public boolean matches( final Object object )
         {
             final SimpleTaxon taxon = (SimpleTaxon) object;
-            final boolean isSpecies = SimpleTaxon.isSpecies(taxon);
-            return !isSpecies || userModel.getTaxa().contains(taxon.getName());
+            final boolean isSpecies = SimpleTaxon.isSpecies( taxon );
+            return !isSpecies || userModel.getTaxa().contains( taxon.getName() );
         }
     }
 }

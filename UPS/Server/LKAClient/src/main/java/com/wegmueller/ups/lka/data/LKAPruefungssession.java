@@ -4,23 +4,25 @@ import SoapLKAData.WsPruefungssession;
 import com.wegmueller.ups.lka.IPruefungsSession;
 import java.util.Calendar;
 
-/** Created by: Thomas Wegmueller Date: 20.09.2005,  12:40:04 */
+/**
+ * Created by: Thomas Wegmueller Date: 20.09.2005,  12:40:04
+ */
 public class LKAPruefungssession implements IPruefungsSession
 {
-    private java.lang.String sessionsname;
+    private final java.lang.String sessionsname;
 
-    private Calendar sessionsende;
+    private final Calendar sessionsende;
 
-    private java.lang.String seskez;
+    private final java.lang.String seskez;
 
-    private Calendar planungFreigabe;
+    private final Calendar planungFreigabe;
 
-    public LKAPruefungssession(final WsPruefungssession s)
+    public LKAPruefungssession( final WsPruefungssession s )
     {
         sessionsname = s.getSessionsname();
-        sessionsende = CalendarUtils.parseSessionsEnded(s.getSessionsende());
+        sessionsende = CalendarUtils.parseSessionsEnded( s.getSessionsende() );
         seskez = s.getSeskez();
-        planungFreigabe = CalendarUtils.parsePlanungFreigabe(s.getPlanungFreigabe());
+        planungFreigabe = CalendarUtils.parsePlanungFreigabe( s.getPlanungFreigabe() );
 
     }
 

@@ -4,31 +4,31 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.lka.IPruefung;
 import java.text.SimpleDateFormat;
 
-/** Created by: Thomas Wegmueller Date: 29.09.2005,  11:22:46 */
+/**
+ * Created by: Thomas Wegmueller Date: 29.09.2005,  11:22:46
+ */
 public class UPSWebServiceUtil
 {
+    private static final SimpleDateFormat df = new SimpleDateFormat( "dd.MM.yyyy" );
 
-    private static SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat tf = new SimpleDateFormat( "dd.MM.yyyy HH:mm" );
 
-    private static SimpleDateFormat tf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-
-    public static void dumpAnmeldungen(final IAnmeldedaten[] anm)
+    public static void dumpAnmeldungen( final IAnmeldedaten[] anm )
     {
-        if (anm == null)
+        if ( anm == null )
         {
-            System.out.println("Keine Anmeldungen");
+            System.out.println( "Keine Anmeldungen" );
             return;
         }
-        for (int k = 0; k < anm.length; k++)
+        for ( final IAnmeldedaten anmeldung : anm )
         {
-            final IAnmeldedaten anmeldung = anm[k];
-            dumpAnmeldung(anmeldung);
+            dumpAnmeldung( anmeldung );
         }
     }
 
-    public static void dumpAnmeldung(final IAnmeldedaten anmeldung)
+    public static void dumpAnmeldung( final IAnmeldedaten anmeldung )
     {
-        System.out.println("\t\t\t"
+        System.out.println( "\t\t\t"
                 + anmeldung.getVorname()
                 + "\t"
                 + anmeldung.getLkNummer()
@@ -43,23 +43,22 @@ public class UPSWebServiceUtil
                 + "\t"
                 + anmeldung.getPruefungsraum()
                 + "\t"
-                + df.format(anmeldung.getPruefungsdatum().getTime())
+                + df.format( anmeldung.getPruefungsdatum().getTime() )
                 + "\t"
-                + tf.format(anmeldung.getPruefungsdatumVon().getTime())
+                + tf.format( anmeldung.getPruefungsdatumVon().getTime() )
                 + "\t"
-                + tf.format(anmeldung.getPruefungsdatumBis().getTime())
+                + tf.format( anmeldung.getPruefungsdatumBis().getTime() )
         );
     }
 
-    public static void dumpPruefungen(final IPruefung[] pruefungen)
+    public static void dumpPruefungen( final IPruefung[] pruefungen )
     {
-        for (int i = 0; i < pruefungen.length; i++)
+        for ( final IPruefung p : pruefungen )
         {
-            final IPruefung p = pruefungen[i];
-            System.out.println("\t"
+            System.out.println( "\t"
                     + p.getTitle()
                     + "\t"
-                    + p.getLKNummer());
+                    + p.getLKNummer() );
         }
     }
 }

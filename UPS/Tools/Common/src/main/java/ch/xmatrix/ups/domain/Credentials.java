@@ -21,11 +21,14 @@ import com.jgoodies.binding.beans.Model;
  */
 public class Credentials extends Model
 {
-
-    /** Password property key. */
+    /**
+     * Password property key.
+     */
     public static final String PROPERTYNAME_PASSWORD = "password";
 
-    /** Username property key. */
+    /**
+     * Username property key.
+     */
     public static final String PROPERTYNAME_USERNAME = "username";
 
     private String username;
@@ -47,11 +50,11 @@ public class Credentials extends Model
      *
      * @param username the name to set
      */
-    public void setUsername(final String username)
+    public void setUsername( final String username )
     {
         final String oldUsername = getUsername();
         this.username = username;
-        firePropertyChange(PROPERTYNAME_USERNAME, oldUsername, username);
+        firePropertyChange( PROPERTYNAME_USERNAME, oldUsername, username );
     }
 
     /**
@@ -69,10 +72,10 @@ public class Credentials extends Model
      *
      * @param password the new password
      */
-    public void setPassword(final String password)
+    public void setPassword( final String password )
     {
         final String oldPassword = getPassword();
         this.password = password;
-        firePropertyChange(PROPERTYNAME_PASSWORD, oldPassword, password);
+        firePropertyChange( PROPERTYNAME_PASSWORD, oldPassword, password );
     }
 }

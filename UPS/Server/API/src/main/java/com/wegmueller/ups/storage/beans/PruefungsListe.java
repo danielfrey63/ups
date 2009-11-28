@@ -5,10 +5,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  23:12:10 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  23:12:10
+ */
 public class PruefungsListe
 {
-
     private ByteTypeContent pdf;
 
     private ByteTypeContent properties;
@@ -32,7 +33,7 @@ public class PruefungsListe
         return pdf;
     }
 
-    public void setPdf(final ByteTypeContent pdf)
+    public void setPdf( final ByteTypeContent pdf )
     {
         this.pdf = pdf;
     }
@@ -42,21 +43,21 @@ public class PruefungsListe
         return properties;
     }
 
-    public void setProperties(final ByteTypeContent properties)
+    public void setProperties( final ByteTypeContent properties )
     {
         this.properties = properties;
     }
 
     public Properties getUserProperties()
     {
-        if (p == null)
+        if ( p == null )
         {
             p = new Properties();
             try
             {
-                p.load(new ByteArrayInputStream(properties.getBytes()));
+                p.load( new ByteArrayInputStream( properties.getBytes() ) );
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
                 return null;
             }
@@ -64,18 +65,17 @@ public class PruefungsListe
         return p;
     }
 
-    public void setUserProperties(final Properties p)
+    public void setUserProperties( final Properties p )
     {
         this.p = p;
         try
         {
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            p.store(bos, "");
-            properties = new ByteTypeContent(bos.toByteArray());
+            p.store( bos, "" );
+            properties = new ByteTypeContent( bos.toByteArray() );
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
-
         }
     }
 
@@ -84,7 +84,7 @@ public class PruefungsListe
         return pruefungsListe;
     }
 
-    public void setPruefungsListe(final ByteTypeContent pruefungsListe)
+    public void setPruefungsListe( final ByteTypeContent pruefungsListe )
     {
         this.pruefungsListe = pruefungsListe;
     }
@@ -94,7 +94,7 @@ public class PruefungsListe
         return id;
     }
 
-    public void setId(final Long id)
+    public void setId( final Long id )
     {
         this.id = id;
     }
@@ -104,7 +104,7 @@ public class PruefungsListe
         return pruefung;
     }
 
-    public void setPruefung(final String pruefung)
+    public void setPruefung( final String pruefung )
     {
         this.pruefung = pruefung;
     }
@@ -114,7 +114,7 @@ public class PruefungsListe
         return pruefungsSession;
     }
 
-    public void setPruefungsSession(final String pruefungsSession)
+    public void setPruefungsSession( final String pruefungsSession )
     {
         this.pruefungsSession = pruefungsSession;
     }
@@ -124,7 +124,7 @@ public class PruefungsListe
         return studentenNummer;
     }
 
-    public void setStudentenNummer(final String studentenNummer)
+    public void setStudentenNummer( final String studentenNummer )
     {
         this.studentenNummer = studentenNummer;
     }
@@ -134,7 +134,7 @@ public class PruefungsListe
         return userName;
     }
 
-    public void setUserName(final String userName)
+    public void setUserName( final String userName )
     {
         this.userName = userName;
     }

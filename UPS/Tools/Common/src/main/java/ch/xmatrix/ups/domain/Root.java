@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class Root extends Model
 {
-
     public static final String PERSON_DATA = Root.class.getName() + ".personData";
 
     public static final String EXAM_SPECIES = Root.class.getName() + ".examSpecies";
@@ -35,11 +34,11 @@ public class Root extends Model
 
     private SimpleTaxon rootTaxon;
 
-    public void setPersonData(final PersonData personData)
+    public void setPersonData( final PersonData personData )
     {
         final PersonData old = this.personData;
         this.personData = personData;
-        firePropertyChange(PERSON_DATA, old, personData);
+        firePropertyChange( PERSON_DATA, old, personData );
     }
 
     public PersonData getPersonData()
@@ -47,11 +46,11 @@ public class Root extends Model
         return personData;
     }
 
-    public void setExamSpecies(final ArrayList examSpecies)
+    public void setExamSpecies( final ArrayList examSpecies )
     {
         final ArrayList old = this.examSpecies;
         this.examSpecies = examSpecies;
-        firePropertyChange(EXAM_SPECIES, old, examSpecies);
+        firePropertyChange( EXAM_SPECIES, old, examSpecies );
     }
 
     public ArrayList getExamSpecies()
@@ -59,11 +58,11 @@ public class Root extends Model
         return examSpecies;
     }
 
-    public void setRootTaxon(final SimpleTaxon rootTaxon)
+    public void setRootTaxon( final SimpleTaxon rootTaxon )
     {
         final SimpleTaxon old = this.rootTaxon;
         this.rootTaxon = rootTaxon;
-        firePropertyChange(ROOT_TAXON, old, rootTaxon);
+        firePropertyChange( ROOT_TAXON, old, rootTaxon );
     }
 
     public SimpleTaxon getRootTaxon()

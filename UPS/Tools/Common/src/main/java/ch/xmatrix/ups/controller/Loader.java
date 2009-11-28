@@ -32,10 +32,12 @@ import org.apache.log4j.Logger;
  */
 public class Loader
 {
-    /** Set this system property to <code>true</code> if the model should not be saved really, but printed to the log. */
+    /**
+     * Set this system property to <code>true</code> if the model should not be saved really, but printed to the log.
+     */
     public static final String ENVIRONMENT_SIMULATESAVE = "ch.jfactory.simulatesave";
 
-    private static final Logger LOG = Logger.getLogger(Loader.class);
+    private static final Logger LOG = Logger.getLogger( Loader.class );
 
     /**
      * Loads the model from the user home by adding a dot, the relative path and the resource to it. If it doesn't exist
@@ -56,10 +58,10 @@ public class Loader
      * @param converter the converter to transform the content to an object
      * @return a SimpleModelList object containing the model
      */
-    public static <T> T loadModel(final String resource, final String path, final XStream converter)
+    public static <T> T loadModel( final String resource, final String path, final XStream converter )
     {
-        final File file = getSettingsFile(resource, path);
-        return Loader.<T>loadModel(file, resource, converter);
+        final File file = getSettingsFile( resource, path );
+        return Loader.<T>loadModel( file, resource, converter );
     }
 
     /**
@@ -71,77 +73,77 @@ public class Loader
      * @param converter the resource converter
      * @param model     the model to save
      */
-    public static <T> void saveModel(final String resource, final String path, final XStream converter, final T model)
+    public static <T> void saveModel( final String resource, final String path, final XStream converter, final T model )
     {
-        final File file = getSettingsFile(resource, path);
-        saveModel(converter, model, file);
+        final File file = getSettingsFile( resource, path );
+        saveModel( converter, model, file );
     }
 
-    private static <T> T loadModel(final File file, final String modelResource, final XStream converter)
+    private static <T> T loadModel( final File file, final String modelResource, final XStream converter )
     {
         final T list;
         String feedback = null;
         try
         {
             final InputStream in;
-            if (file.exists())
+            if ( file.exists() )
             {
                 feedback = "file " + file.getAbsolutePath();
-                in = new FileInputStream(file);
+                in = new FileInputStream( file );
             }
             else
             {
                 feedback = "resource " + modelResource;
-                in = Loader.class.getResourceAsStream(modelResource);
+                in = Loader.class.getResourceAsStream( modelResource );
             }
-            final Reader reader = new InputStreamReader(in);
-            final Object object = converter.fromXML(reader);
-            if (object instanceof SimpleModelList)
+            final Reader reader = new InputStreamReader( in );
+            final Object object = converter.fromXML( reader );
+            if ( object instanceof SimpleModelList )
             {
                 final SimpleModelList sml = (SimpleModelList) object;
-                for (final Object o : sml)
+                for ( final Object o : sml )
                 {
                     final IdAware ia = (IdAware) o;
-                    System.out.println("model " + modelResource + ": " + ia.getUid());
-                    if (ia instanceof SessionModel)
+                    System.out.println( "model " + modelResource + ": " + ia.getUid() );
+                    if ( ia instanceof SessionModel )
                     {
-                        System.out.println("    constraints: " + ((SessionModel)ia).getConstraintsUid());
+                        System.out.println( "    constraints: " + ( (SessionModel) ia ).getConstraintsUid() );
                     }
                 }
             }
             list = (T) object;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             final String message = "problems loading model from " + feedback;
-            LOG.error(message, e);
-            throw new IllegalStateException(message, e);
+            LOG.error( message, e );
+            throw new IllegalStateException( message, e );
         }
         return list;
     }
 
-    private static <T> void saveModel(final XStream converter, final T model, final File file)
+    private static <T> void saveModel( final XStream converter, final T model, final File file )
     {
-        final String content = converter.toXML(model);
-        if (!Boolean.parseBoolean(System.getProperty(ENVIRONMENT_SIMULATESAVE, "false")))
+        final String content = converter.toXML( model );
+        if ( !Boolean.parseBoolean( System.getProperty( ENVIRONMENT_SIMULATESAVE, "false" ) ) )
         {
             try
             {
                 file.getParentFile().mkdirs();
-                final FileWriter writer = new FileWriter(file);
-                writer.write(content);
+                final FileWriter writer = new FileWriter( file );
+                writer.write( content );
                 writer.close();
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
-                LOG.error("save to file " + file + " failed", e);
+                LOG.error( "save to file " + file + " failed", e );
             }
         }
         else
         {
-            LOG.warn("save is in simulation mode");
+            LOG.warn( "save is in simulation mode" );
         }
-        LOG.info("saved to " + file);
+        LOG.info( "saved to " + file );
     }
 
     /**
@@ -152,10 +154,10 @@ public class Loader
      * @param path     the relative path to the settings resource
      * @return the file
      */
-    private static File getSettingsFile(final String resource, final String path)
+    private static File getSettingsFile( final String resource, final String path )
     {
-        final String userHome = System.getProperty("user.home");
-        final File result = new File(userHome, "." + path);
-        return new File(result, resource);
+        final String userHome = System.getProperty( "user.home" );
+        final File result = new File( userHome, "." + path );
+        return new File( result, resource );
     }
 }

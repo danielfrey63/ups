@@ -30,7 +30,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class Constraints extends AbstractTaxonBased
 {
-
     private String description;
 
     private ArrayList<Constraint> constraints = new ArrayList<Constraint>();
@@ -46,24 +45,23 @@ public class Constraints extends AbstractTaxonBased
         super();
     }
 
-    public Constraints(final Constraints original)
+    public Constraints( final Constraints original )
     {
-        super(original);
+        super( original );
         description = original.description;
         defaultList = original.defaultList.clone();
         indexToConstraints = new HashMap<String, Constraint>();
 
-        for (int i = 0; i < original.constraints.size(); i++)
+        for ( int i = 0; i < original.constraints.size(); i++ )
         {
-            final Constraint constraint = original.constraints.get(i);
-            final Constraint newConstraint = new Constraint(constraint);
-            newConstraint.setConstraints(this);
-            constraints.add(newConstraint);
+            final Constraint constraint = original.constraints.get( i );
+            final Constraint newConstraint = new Constraint( constraint );
+            newConstraint.setConstraints( this );
+            constraints.add( newConstraint );
             final List<String> taxa = newConstraint.getTaxa();
-            for (int j = 0; j < taxa.size(); j++)
+            for ( final String taxon : taxa )
             {
-                final String taxon = taxa.get(j);
-                indexToConstraints.put(taxon, newConstraint);
+                indexToConstraints.put( taxon, newConstraint );
             }
         }
     }
@@ -73,7 +71,7 @@ public class Constraints extends AbstractTaxonBased
         return constraints;
     }
 
-    public void setConstraints(final ArrayList<Constraint> constraints, final TreeObject rootTaxon)
+    public void setConstraints( final ArrayList<Constraint> constraints, final TreeObject rootTaxon )
     {
         this.constraints = constraints;
     }
@@ -83,7 +81,7 @@ public class Constraints extends AbstractTaxonBased
         return description;
     }
 
-    public void setDescription(final String description)
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -93,7 +91,7 @@ public class Constraints extends AbstractTaxonBased
         return defaultList;
     }
 
-    public void setDefaultTaxa(final String[] defaultList)
+    public void setDefaultTaxa( final String[] defaultList )
     {
         this.defaultList = defaultList;
     }
@@ -103,55 +101,55 @@ public class Constraints extends AbstractTaxonBased
         return current;
     }
 
-    public void setCurrent(final Constraint constraint)
+    public void setCurrent( final Constraint constraint )
     {
         current = constraint;
     }
 
-    public void addConstraint(final Constraint constraint)
+    public void addConstraint( final Constraint constraint )
     {
-        constraints.add(constraint);
-        Collections.sort(constraints, new ToStringComparator());
+        constraints.add( constraint );
+        Collections.sort( constraints, new ToStringComparator() );
     }
 
-    public void removeConstraint(final Constraint constraint)
+    public void removeConstraint( final Constraint constraint )
     {
-        constraints.remove(constraint);
+        constraints.remove( constraint );
         final List<String> taxa = constraint.getTaxa();
-        for (int i = 0; taxa != null && i < taxa.size(); i++)
+        for ( int i = 0; taxa != null && i < taxa.size(); i++ )
         {
-            final String taxon = (String) taxa.get(i);
-            indexToConstraints.remove(taxon);
+            final String taxon = taxa.get( i );
+            indexToConstraints.remove( taxon );
         }
     }
 
-    public void addTaxon(final String taxon)
+    public void addTaxon( final String taxon )
     {
         List<String> taxa = current.getTaxa();
-        if (taxa == null)
+        if ( taxa == null )
         {
             taxa = new ArrayList<String>();
-            current.setTaxa(taxa);
+            current.setTaxa( taxa );
         }
-        Collections.sort(taxa);
-        taxa.add(taxon);
-        if (indexToConstraints == null)
+        Collections.sort( taxa );
+        taxa.add( taxon );
+        if ( indexToConstraints == null )
         {
             indexToConstraints = new HashMap<String, Constraint>();
         }
-        indexToConstraints.put(taxon, current);
+        indexToConstraints.put( taxon, current );
     }
 
-    public void removeTaxon(final String taxon)
+    public void removeTaxon( final String taxon )
     {
         final List<String> taxa = current.getTaxa();
-        taxa.remove(taxon);
-        indexToConstraints.remove(taxon);
+        taxa.remove( taxon );
+        indexToConstraints.remove( taxon );
     }
 
-    public Constraint findConstraint(final String taxon)
+    public Constraint findConstraint( final String taxon )
     {
-        return indexToConstraints == null ? null : indexToConstraints.get(taxon);
+        return indexToConstraints == null ? null : indexToConstraints.get( taxon );
     }
 
     public String toString()
@@ -161,24 +159,24 @@ public class Constraints extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).
-                append("uid", getUid()).append("name", getName()).append("modified", getModified()).toString();
+        return new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE ).
+                append( "uid", getUid() ).append( "name", getName() ).append( "modified", getModified() ).toString();
     }
 
     public ArrayList<String> getObligateTaxa()
     {
         final ArrayList<String> result = new ArrayList<String>();
-        for (final Constraint constraint : constraints)
+        for ( final Constraint constraint : constraints )
         {
             final List<String> taxa = constraint.getTaxa();
-            if (taxa.size() == 1)
+            if ( taxa.size() == 1 )
             {
-                final String taxonName = taxa.get(0);
-                final TaxonTree taxonModel = TaxonModels.find(getTaxaUid());
-                final boolean isSpecies = SimpleTaxon.isSpecies(taxonModel.findTaxonByName(taxonName));
-                if (isSpecies)
+                final String taxonName = taxa.get( 0 );
+                final TaxonTree taxonModel = TaxonModels.find( getTaxaUid() );
+                final boolean isSpecies = SimpleTaxon.isSpecies( taxonModel.findTaxonByName( taxonName ) );
+                if ( isSpecies )
                 {
-                    result.add(taxonName);
+                    result.add( taxonName );
                 }
             }
         }

@@ -36,31 +36,30 @@ import org.pietschy.command.CommandManager;
  */
 public class AboutCommand extends ActionCommand
 {
-
     private Icon icon = null;
 
-    private String version;
+    private final String version;
 
-    public AboutCommand(final CommandManager commandManager, final Icon icon, final String version)
+    public AboutCommand( final CommandManager commandManager, final Icon icon, final String version )
     {
-        super(commandManager, CommonCommands.COMMANDID_ABOUT);
+        super( commandManager, CommonCommands.COMMANDID_ABOUT );
         this.icon = icon;
         this.version = version;
     }
 
     protected void handleExecute()
     {
-        final JLabel version = new JLabel("Version " + this.version, JLabel.CENTER);
-        final Font font = new Font("Dialog", Font.BOLD, 10);
-        version.setFont(font);
-        version.setForeground(new Color(0xAD9300));
-        version.setBorder(new EmptyBorder(6, 0, 0, 0));
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.white);
-        panel.add(new JLabel(icon), BorderLayout.CENTER);
-        panel.add(version, BorderLayout.SOUTH);
-        panel.setBorder(new EmptyBorder(70, 100, 130, 100));
-        final DefaultAboutDialog dialog = new DefaultAboutDialog(null, panel);
+        final JLabel version = new JLabel( "Version " + this.version, JLabel.CENTER );
+        final Font font = new Font( "Dialog", Font.BOLD, 10 );
+        version.setFont( font );
+        version.setForeground( new Color( 0xAD9300 ) );
+        version.setBorder( new EmptyBorder( 6, 0, 0, 0 ) );
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.setBackground( Color.white );
+        panel.add( new JLabel( icon ), BorderLayout.CENTER );
+        panel.add( version, BorderLayout.SOUTH );
+        panel.setBorder( new EmptyBorder( 70, 100, 130, 100 ) );
+        final DefaultAboutDialog dialog = new DefaultAboutDialog( null, panel );
         dialog.open();
     }
 }

@@ -7,41 +7,40 @@
 <body>
 <%
     final PrintWriter writer = response.getWriter();
-    final String user = getParameter(request, "user", "dfrey");
-    final String pass = getParameter(request, "pw", "d178.ftx.3xf.w2e");
-    final String bind = getParameter(request, "bind", "cn=upsserver4_proxy,ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch");
-    final String base = getParameter(request, "base", "ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch");
-    final String host = getParameter(request, "server", "ldaps01.ethz.ch");
+    final String user = getParameter( request, "user", "dfrey" );
+    final String pass = getParameter( request, "pw", "d178.ftx.3xf.w2e" );
+    final String bind = getParameter( request, "bind", "cn=upsserver4_proxy,ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch" );
+    final String base = getParameter( request, "base", "ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch" );
+    final String host = getParameter( request, "server", "ldaps01.ethz.ch" );
     try
     {
-        final ILDAPUserRecord rec = LDAPAuthenticate.getUserDetails(host, user);
+        final ILDAPUserRecord rec = LDAPAuthenticate.getUserDetails( host, user );
         final Map att = rec.getAttributes();
-        writer.write("<h2>LDAP Response</h2>");
-        writer.write("<table>");
-        for (Iterator it = att.keySet().iterator(); it.hasNext();)
+        writer.write( "<h2>LDAP Response</h2>" );
+        writer.write( "<table>" );
+        for ( final Object o : att.keySet() )
         {
-            final Object o = it.next();
             final String key = (String) o;
-            writer.write("<tr><td>");
-            writer.write(key);
-            writer.write("</td><td>");
-            writer.write(att.get(key).toString());
-            writer.write("</td></tr>");
+            writer.write( "<tr><td>" );
+            writer.write( key );
+            writer.write( "</td><td>" );
+            writer.write( att.get( key ).toString() );
+            writer.write( "</td></tr>" );
         }
-        writer.write("</table>");
+        writer.write( "</table>" );
     }
-    catch (Throwable e)
+    catch ( Throwable e )
     {
-        writer.write(e.getMessage());
+        writer.write( e.getMessage() );
     }
 %>
 </body>
 </html>
 <%!
-    private String getParameter(final HttpServletRequest request, final String key, final String def)
+    private String getParameter( final HttpServletRequest request, final String key, final String def )
     {
-        String parameter = request.getParameter(key);
-        if (parameter == null)
+        String parameter = request.getParameter( key );
+        if ( parameter == null )
         {
             parameter = def;
         }

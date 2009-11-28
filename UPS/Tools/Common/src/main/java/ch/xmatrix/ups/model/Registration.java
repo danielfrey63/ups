@@ -27,17 +27,16 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
  */
 public class Registration
 {
-
     private IAnmeldedaten anmeldedaten;
 
     private PlantList plantList;
 
     private boolean defaultList = false;
 
-    public Registration(final IAnmeldedaten anmeldedaten, final PlantList plantList)
+    public Registration( final IAnmeldedaten anmeldedaten, final PlantList plantList )
     {
-        this.setAnmeldedaten(anmeldedaten);
-        this.setPlantList(plantList);
+        this.setAnmeldedaten( anmeldedaten );
+        this.setPlantList( plantList );
     }
 
     public IAnmeldedaten getAnmeldedaten()
@@ -45,7 +44,7 @@ public class Registration
         return anmeldedaten;
     }
 
-    public void setAnmeldedaten(final IAnmeldedaten anmeldedaten)
+    public void setAnmeldedaten( final IAnmeldedaten anmeldedaten )
     {
         this.anmeldedaten = anmeldedaten;
     }
@@ -55,7 +54,7 @@ public class Registration
         return plantList;
     }
 
-    public void setPlantList(final PlantList plantList)
+    public void setPlantList( final PlantList plantList )
     {
         this.plantList = plantList;
     }
@@ -65,7 +64,7 @@ public class Registration
         return defaultList;
     }
 
-    public void setDefaultList(final boolean defaultList)
+    public void setDefaultList( final boolean defaultList )
     {
         this.defaultList = defaultList;
     }
@@ -73,6 +72,6 @@ public class Registration
     public String toString()
     {
         return anmeldedaten.getVorname() + " " + anmeldedaten.getNachname() + ", " + anmeldedaten.getStudentennummer() +
-                ", Pflanzenliste " + (plantList == null ? "keine" : "vorhanden");
+                ", Pflanzenliste " + ( plantList == null ? "keine" : "vorhanden" );
     }
 }

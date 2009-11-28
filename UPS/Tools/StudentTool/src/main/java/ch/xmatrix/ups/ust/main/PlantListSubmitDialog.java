@@ -42,16 +42,15 @@ import org.apache.log4j.Logger;
  */
 public class PlantListSubmitDialog extends CredentialsDialog
 {
-
-    private static final Logger LOG = Logger.getLogger(CredentialsDialog.class);
+    private static final Logger LOG = Logger.getLogger( CredentialsDialog.class );
 
     private final UserModel userModel;
 
     private final String lknr;
 
-    public PlantListSubmitDialog(final JFrame parent, final UserModel userModel, final String lknr)
+    public PlantListSubmitDialog( final JFrame parent, final UserModel userModel, final String lknr )
     {
-        super(parent);
+        super( parent );
         this.userModel = userModel;
         this.lknr = lknr;
     }
@@ -59,7 +58,7 @@ public class PlantListSubmitDialog extends CredentialsDialog
     protected void doApply() throws ComponentDialogException
     {
         final XStream writer = Commands.getConverter();
-        final String plantlist = writer.toXML(userModel.getTaxa());
+        final String plantlist = writer.toXML( userModel.getTaxa() );
         try
         {
             final Credentials credentials = (Credentials) model.getBean();
@@ -67,85 +66,84 @@ public class PlantListSubmitDialog extends CredentialsDialog
             final String password = credentials.getPassword();
             final byte[] list = plantlist.getBytes();
             final UPSServerClient2 client = new UPSServerClient2();
-            final SessionModel session = (SessionModel) MainModel.findModel(userModel.getExamInfoUid());
+            final SessionModel session = (SessionModel) MainModel.findModel( userModel.getExamInfoUid() );
             final String seskz = session.getSeskz();
-            final byte[] pdf = client.submitPruefungsListe(seskz, lknr, username, password, list);
-            new PdfSaveChooser(pdf).open();
+            final byte[] pdf = client.submitPruefungsListe( seskz, lknr, username, password, list );
+            new PdfSaveChooser( pdf ).open();
         }
-        catch (MalformedURLException e)
+        catch ( MalformedURLException e )
         {
-            final String message = MessageFormat.format(Strings.getString("error.net.connection"), new Object[]{e.getLocalizedMessage()});
-            LOG.warn(message, e);
-            Dialogs.showErrorMessage(PlantListSubmitDialog.this.getRootPane(), "Fehler", message);
+            final String message = MessageFormat.format( Strings.getString( "error.net.connection" ), e.getLocalizedMessage() );
+            LOG.warn( message, e );
+            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
         }
-        catch (RemoteException e)
+        catch ( RemoteException e )
         {
-            final String message = MessageFormat.format(Strings.getString("error.net.connection"), new Object[]{e.getLocalizedMessage()});
-            LOG.warn(message, e);
-            Dialogs.showErrorMessage(PlantListSubmitDialog.this.getRootPane(), "Fehler", message);
+            final String message = MessageFormat.format( Strings.getString( "error.net.connection" ), e.getLocalizedMessage() );
+            LOG.warn( message, e );
+            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
         }
-        catch (ServiceException e)
+        catch ( ServiceException e )
         {
-            final String message = MessageFormat.format(Strings.getString("error.net.service"), new Object[]{e.getLocalizedMessage()});
-            LOG.warn(message, e);
-            Dialogs.showErrorMessage(PlantListSubmitDialog.this.getRootPane(), "Fehler", message);
+            final String message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
+            LOG.warn( message, e );
+            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
         }
-        catch (UPSServerException e)
+        catch ( UPSServerException e )
         {
             final Throwable cause = e.getCause();
             final String message;
-            if (cause != null)
+            if ( cause != null )
             {
                 final Throwable inner = cause.getCause();
-                if (inner instanceof LDAPAuthException)
+                if ( inner instanceof LDAPAuthException )
                 {
-                    message = MessageFormat.format(Strings.getString("error.net.credentials"), new Object[]{inner.getLocalizedMessage()});
+                    message = MessageFormat.format( Strings.getString( "error.net.credentials" ), inner.getLocalizedMessage() );
                 }
                 else
                 {
-                    message = MessageFormat.format(Strings.getString("error.net.service"), new Object[]{e.getLocalizedMessage()});
+                    message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
                 }
             }
             else
             {
-                message = MessageFormat.format(Strings.getString("error.net.service"), new Object[]{e.getLocalizedMessage()});
+                message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
             }
-            LOG.warn(message, e);
-            Dialogs.showErrorMessage(PlantListSubmitDialog.this.getRootPane(), "Fehler", message);
+            LOG.warn( message, e );
+            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
         }
-        catch (Throwable e)
+        catch ( Throwable e )
         {
-            final String message = MessageFormat.format(Strings.getString("error.net.unknown"), new Object[]{e.getLocalizedMessage()});
-            LOG.warn(message, e);
-            Dialogs.showErrorMessage(PlantListSubmitDialog.this.getRootPane(), "Fehler", message);
+            final String message = MessageFormat.format( Strings.getString( "error.net.unknown" ), e.getLocalizedMessage() );
+            LOG.warn( message, e );
+            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
         }
     }
 
     private static class PdfSaveChooser extends SaveChooser
     {
-
         private final byte[] pdf;
 
-        public PdfSaveChooser(final byte[] pdf)
+        public PdfSaveChooser( final byte[] pdf )
         {
-            super(new ExtentionFileFilter("PDF-Datei", new String[]{".pdf"}, true), "pdfconfirmation", System.getProperty("user.dir"));
+            super( new ExtentionFileFilter( "PDF-Datei", new String[]{".pdf"}, true ), "pdfconfirmation", System.getProperty( "user.dir" ) );
             this.pdf = pdf;
         }
 
-        protected void save(final File file)
+        protected void save( final File file )
         {
-            if (file != null)
+            if ( file != null )
             {
                 final FileOutputStream out;
                 try
                 {
-                    out = new FileOutputStream(file);
-                    out.write(pdf);
+                    out = new FileOutputStream( file );
+                    out.write( pdf );
                     out.close();
                 }
-                catch (IOException x)
+                catch ( IOException x )
                 {
-                    LOG.error("problem during write of confirmation PDF.", x);
+                    LOG.error( "problem during write of confirmation PDF.", x );
                 }
             }
         }

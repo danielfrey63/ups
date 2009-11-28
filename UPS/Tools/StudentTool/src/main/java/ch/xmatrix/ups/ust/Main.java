@@ -21,9 +21,8 @@ import ch.jfactory.application.MainRunner;
  */
 public class Main extends MainRunner
 {
-
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
-        MainRunner.main(args);
+        MainRunner.main( args );
     }
 }

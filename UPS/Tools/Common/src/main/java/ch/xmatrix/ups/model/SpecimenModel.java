@@ -27,7 +27,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class SpecimenModel
 {
-
     private String taxon;
 
     private String id;
@@ -53,7 +52,7 @@ public class SpecimenModel
         super();
     }
 
-    public SpecimenModel(final SpecimenModel orig)
+    public SpecimenModel( final SpecimenModel orig )
     {
         taxon = orig.taxon;
         id = orig.id;
@@ -70,7 +69,7 @@ public class SpecimenModel
         return taxon;
     }
 
-    public void setTaxon(final String taxon)
+    public void setTaxon( final String taxon )
     {
         string = null;
         this.taxon = taxon;
@@ -81,7 +80,7 @@ public class SpecimenModel
         return id;
     }
 
-    public void setId(final String id)
+    public void setId( final String id )
     {
         string = null;
         this.id = id;
@@ -92,7 +91,7 @@ public class SpecimenModel
         return weightIfKnown;
     }
 
-    public void setWeightIfKnown(final int weightIfKnown)
+    public void setWeightIfKnown( final int weightIfKnown )
     {
         string = null;
         this.weightIfKnown = weightIfKnown;
@@ -103,7 +102,7 @@ public class SpecimenModel
         return weightIfUnknown;
     }
 
-    public void setWeightIfUnknown(final int weightIfUnknown)
+    public void setWeightIfUnknown( final int weightIfUnknown )
     {
         string = null;
         this.weightIfUnknown = weightIfUnknown;
@@ -111,14 +110,14 @@ public class SpecimenModel
 
     public boolean isDeactivatedIfKnown()
     {
-        if (numberOfSpecimens == 0)
+        if ( numberOfSpecimens == 0 )
         {
             deactivatedIfKnown = true;
         }
         return deactivatedIfKnown;
     }
 
-    public void setDeactivatedIfKnown(final boolean deactivatedIfKnown)
+    public void setDeactivatedIfKnown( final boolean deactivatedIfKnown )
     {
         string = null;
         this.deactivatedIfKnown = deactivatedIfKnown;
@@ -126,14 +125,14 @@ public class SpecimenModel
 
     public boolean isDeactivatedIfUnknown()
     {
-        if (numberOfSpecimens == 0)
+        if ( numberOfSpecimens == 0 )
         {
             deactivatedIfUnknown = true;
         }
         return deactivatedIfUnknown;
     }
 
-    public void setDeactivatedIfUnknown(final boolean deactivatedIfUnknown)
+    public void setDeactivatedIfUnknown( final boolean deactivatedIfUnknown )
     {
         string = null;
         this.deactivatedIfUnknown = deactivatedIfUnknown;
@@ -144,7 +143,7 @@ public class SpecimenModel
         return numberOfSpecimens;
     }
 
-    public void setNumberOfSpecimens(final int numberOfSpecimens)
+    public void setNumberOfSpecimens( final int numberOfSpecimens )
     {
         string = null;
         this.numberOfSpecimens = numberOfSpecimens;
@@ -155,7 +154,7 @@ public class SpecimenModel
         return backup;
     }
 
-    public void setBackup(final boolean backup)
+    public void setBackup( final boolean backup )
     {
         this.backup = backup;
     }
@@ -165,29 +164,29 @@ public class SpecimenModel
         return aspects;
     }
 
-    public void setAspects(final String[] aspects)
+    public void setAspects( final String[] aspects )
     {
         this.aspects = aspects;
     }
 
     public String toDebugString()
     {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append(id).append(taxon).append(numberOfSpecimens).toString();
+        return new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE )
+                .append( id ).append( taxon ).append( numberOfSpecimens ).toString();
     }
 
     public String toString()
     {
-        if (string == null)
+        if ( string == null )
         {
             final StringBuffer buffer = new StringBuffer();
-            buffer.append(" (");
-            buffer.append(id == null ? "<keine ID definiert>" : id).append("/");
-            buffer.append(getNumberOfSpecimens()).append("/");
-            buffer.append(getWeightIfKnown()).append("/");
-            buffer.append(getWeightIfUnknown()).append("/");
-            buffer.append(!isDeactivatedIfKnown() ? "aktiv" : "inaktiv").append("/");
-            buffer.append(!isDeactivatedIfUnknown() ? "aktiv" : "inaktiv").append(")");
+            buffer.append( " (" );
+            buffer.append( id == null ? "<keine ID definiert>" : id ).append( "/" );
+            buffer.append( getNumberOfSpecimens() ).append( "/" );
+            buffer.append( getWeightIfKnown() ).append( "/" );
+            buffer.append( getWeightIfUnknown() ).append( "/" );
+            buffer.append( !isDeactivatedIfKnown() ? "aktiv" : "inaktiv" ).append( "/" );
+            buffer.append( !isDeactivatedIfUnknown() ? "aktiv" : "inaktiv" ).append( ")" );
             string = buffer.toString();
         }
         return string;

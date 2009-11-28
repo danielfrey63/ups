@@ -33,62 +33,61 @@ import org.uispec4j.assertion.UISpecAssert;
  */
 public class GroupsBuilderTest extends MasterDetailsBuilderTest
 {
-
-    private static final Integer ZERO = new Integer(0);
+    private static final Integer ZERO = new Integer( 0 );
 
     public void test000Setup()
     {
         BUILDER = new GroupsBuilder();
-        PANEL = new Panel(BUILDER.getPanel());
+        PANEL = new Panel( BUILDER.getPanel() );
         super.test000Setup();
     }
 
     public void test010InitialStates()
     {
         super.test010InitialStates();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test011SelectFirst()
     {
         super.test011SelectFirst();
-        checkEmpties(false, true, true, true);
+        checkEmpties( false, true, true, true );
     }
 
     public void test012AddButton()
     {
         super.test012AddButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test013SaveButton()
     {
         super.test013SaveButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test014TaxtreeCombo()
     {
         super.test014TaxtreeCombo();
-        checkButtons(true, false);
-        checkComponents(true, false, false, false, true);
+        checkButtons( true, false );
+        checkComponents( true, false, false, false, true );
     }
 
     public void test015SaveButton()
     {
         super.test015SaveButton();
-        checkButtons(true, false);
-        checkComponents(true, false, false, false, true);
+        checkButtons( true, false );
+        checkComponents( true, false, false, false, true );
     }
 
     public void test016Rename()
     {
         super.test016Rename();
-        checkButtons(true, false);
-        checkComponents(true, false, false, false, true);
+        checkButtons( true, false );
+        checkComponents( true, false, false, false, true );
     }
 
     public void test017SaveButton()
@@ -99,29 +98,29 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     public void test018FixButton()
     {
         super.test018FixButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test019SaveButton()
     {
         super.test019SaveButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test020DeleteButton()
     {
         super.test020DeleteButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test021SaveButton()
     {
         super.test021SaveButton();
-        checkButtons(false, false);
-        checkComponents(false, false, false, false, true);
+        checkButtons( false, false );
+        checkComponents( false, false, false, false, true );
     }
 
     public void test100Init()
@@ -135,14 +134,14 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     public void test110AddButton()
     {
         final Calendar date1 = Calendar.getInstance();
-        getButton(Commands.COMMANDID_NEWGROUP).click();
+        getButton( Commands.COMMANDID_NEWGROUP ).click();
         final Calendar date2 = Calendar.getInstance();
-        checkModificationUpdate(date1, date2);
-        assertEquals("list doesn't have 1 entry,", 1, PANEL.getListBox(GroupsBuilder.COMPONENT_LISTGROUPS).getSize());
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true);
-        checkComponents(true, true, true, true, true);
-        checkEmpties(false, false, false, false);
+        checkModificationUpdate( date1, date2 );
+        assertEquals( "list doesn't have 1 entry,", 1, PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ).getSize() );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true );
+        checkComponents( true, true, true, true, true );
+        checkEmpties( false, false, false, false );
     }
 
     public void test111Save()
@@ -153,33 +152,33 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     public void test112SelectGroup()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getListBox(GroupsBuilder.COMPONENT_LISTGROUPS).selectIndex(0);
-        checkModificationBefore(date);
-        checkButtons(true, true, true, true, false, false);
-        checkButtons(true, true);
-        checkComponents(true, true, true, true, true);
-        checkEmpties(false, false, false, false);
+        PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ).selectIndex( 0 );
+        checkModificationBefore( date );
+        checkButtons( true, true, true, true, false, false );
+        checkButtons( true, true );
+        checkComponents( true, true, true, true, true );
+        checkEmpties( false, false, false, false );
     }
 
     public void test113DeselectGroup()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getListBox(GroupsBuilder.COMPONENT_LISTGROUPS).clearSelection();
-        checkModificationBefore(date);
-        checkButtons(true, true, true, true, false, false);
-        checkButtons(true, false);
-        checkComponents(true, false, false, false, true);
-        checkEmpties(false, true, true, true);
+        PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ).clearSelection();
+        checkModificationBefore( date );
+        checkButtons( true, true, true, true, false, false );
+        checkButtons( true, false );
+        checkComponents( true, false, false, false, true );
+        checkEmpties( false, true, true, true );
     }
 
     public void test114ChangeName()
     {
         test112SelectGroup();
         final Calendar date1 = Calendar.getInstance();
-        PANEL.getTextBox(GroupsBuilder.COMPONENT_NAME).setText("Automtic Test");
+        PANEL.getTextBox( GroupsBuilder.COMPONENT_NAME ).setText( "Automtic Test" );
         final Calendar date2 = Calendar.getInstance();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
     }
 
     public void test115Save()
@@ -191,10 +190,10 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     {
         test112SelectGroup();
         final Calendar date1 = Calendar.getInstance();
-        getSpinner(GroupsBuilder.COMPONENT_MINIMUM).setValue(123);
+        getSpinner( GroupsBuilder.COMPONENT_MINIMUM ).setValue( 123 );
         final Calendar date2 = Calendar.getInstance();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
     }
 
     public void test117Save()
@@ -206,10 +205,10 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     {
         test112SelectGroup();
         final Calendar date1 = Calendar.getInstance();
-        getSpinner(GroupsBuilder.COMPONENT_MAXIMUM).setValue(123);
+        getSpinner( GroupsBuilder.COMPONENT_MAXIMUM ).setValue( 123 );
         final Calendar date2 = Calendar.getInstance();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
     }
 
     public void test119Save()
@@ -219,20 +218,19 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
 
     public void test120SelectEach()
     {
-        final ComboBox combo = PANEL.getComboBox(MasterDetailsBuilder.COMPONENT_COMBO_MODELS);
+        final ComboBox combo = PANEL.getComboBox( MasterDetailsBuilder.COMPONENT_COMBO_MODELS );
         final JComboBox box = (JComboBox) combo.getAwtComponent();
         final Object[] objects = box.getSelectedObjects();
-        for (int i = 0; i < objects.length; i++)
+        for ( final Object object : objects )
         {
-            final Object object = objects[i];
-            box.setSelectedItem(object);
-            checkEmpties(false, false, false, false);
+            box.setSelectedItem( object );
+            checkEmpties( false, false, false, false );
         }
     }
 
     public void test121DeleteGroup()
     {
-        getButton(Commands.COMMANDID_DELETEGROUP).click();
+        getButton( Commands.COMMANDID_DELETEGROUP ).click();
     }
 
     public void test199DeleteAll()
@@ -242,38 +240,38 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
 
     //--- Utilities
 
-    private static void checkButtons(final boolean addEnabled, final boolean removeEnabled)
+    private static void checkButtons( final boolean addEnabled, final boolean removeEnabled )
     {
-        checkButtonEnabled(addEnabled, Commands.COMMANDID_NEWGROUP);
-        checkButtonEnabled(removeEnabled, Commands.COMMANDID_DELETEGROUP);
+        checkButtonEnabled( addEnabled, Commands.COMMANDID_NEWGROUP );
+        checkButtonEnabled( removeEnabled, Commands.COMMANDID_DELETEGROUP );
     }
 
-    private static void checkComponents(final boolean listEnabled, final boolean nameEnabled, final boolean minimumEnabled,
-                                        final boolean maximumEnabled, final boolean treeEnabled)
+    private static void checkComponents( final boolean listEnabled, final boolean nameEnabled, final boolean minimumEnabled,
+                                         final boolean maximumEnabled, final boolean treeEnabled )
     {
-        checkEnabled(listEnabled, PANEL.getListBox(GroupsBuilder.COMPONENT_LISTGROUPS), "groups list");
-        checkEnabled(nameEnabled, PANEL.getTextBox(GroupsBuilder.COMPONENT_NAME), "name field");
-        checkEnabled(minimumEnabled, getSpinner(GroupsBuilder.COMPONENT_MINIMUM), "minimum field");
-        checkEnabled(maximumEnabled, getSpinner(GroupsBuilder.COMPONENT_MAXIMUM), "maximum field");
-        checkEnabled(treeEnabled, PANEL.getTree(GroupsBuilder.COMPONENT_TREE), "taxa tree");
+        checkEnabled( listEnabled, PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ), "groups list" );
+        checkEnabled( nameEnabled, PANEL.getTextBox( GroupsBuilder.COMPONENT_NAME ), "name field" );
+        checkEnabled( minimumEnabled, getSpinner( GroupsBuilder.COMPONENT_MINIMUM ), "minimum field" );
+        checkEnabled( maximumEnabled, getSpinner( GroupsBuilder.COMPONENT_MAXIMUM ), "maximum field" );
+        checkEnabled( treeEnabled, PANEL.getTree( GroupsBuilder.COMPONENT_TREE ), "taxa tree" );
     }
 
-    private static void checkEmpties(final boolean listEmpty, final boolean nameEmpty, final boolean minimumEmpty,
-                                     final boolean maximumEmpty)
+    private static void checkEmpties( final boolean listEmpty, final boolean nameEmpty, final boolean minimumEmpty,
+                                      final boolean maximumEmpty )
     {
-        final String m1 = "group list should " + (listEmpty ? "" : "not ") + "be empty";
-        UISpecAssert.assertEquals(m1, listEmpty, PANEL.getListBox(GroupsBuilder.COMPONENT_LISTGROUPS).isEmpty());
-        final String m2 = "name field should " + (nameEmpty ? "" : "not ") + "be empty";
-        UISpecAssert.assertEquals(m2, nameEmpty, PANEL.getTextBox(GroupsBuilder.COMPONENT_NAME).textIsEmpty());
-        final String m3 = "minimum field should " + (nameEmpty ? "" : "not ") + "be empty";
-        if (minimumEmpty)
+        final String m1 = "group list should " + ( listEmpty ? "" : "not " ) + "be empty";
+        UISpecAssert.assertEquals( m1, listEmpty, PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ).isEmpty() );
+        final String m2 = "name field should " + ( nameEmpty ? "" : "not " ) + "be empty";
+        UISpecAssert.assertEquals( m2, nameEmpty, PANEL.getTextBox( GroupsBuilder.COMPONENT_NAME ).textIsEmpty() );
+        final String m3 = "minimum field should " + ( nameEmpty ? "" : "not " ) + "be empty";
+        if ( minimumEmpty )
         {
-            assertEquals(m3, minimumEmpty, getSpinner(GroupsBuilder.COMPONENT_MINIMUM).getValue().equals(ZERO));
+            assertEquals( m3, minimumEmpty, getSpinner( GroupsBuilder.COMPONENT_MINIMUM ).getValue().equals( ZERO ) );
         }
-        final String m4 = "maximum field should " + (nameEmpty ? "" : "not ") + "be empty";
-        if (maximumEmpty)
+        final String m4 = "maximum field should " + ( nameEmpty ? "" : "not " ) + "be empty";
+        if ( maximumEmpty )
         {
-            assertEquals(m4, maximumEmpty, getSpinner(GroupsBuilder.COMPONENT_MAXIMUM).getValue().equals(ZERO));
+            assertEquals( m4, maximumEmpty, getSpinner( GroupsBuilder.COMPONENT_MAXIMUM ).getValue().equals( ZERO ) );
         }
     }
 }

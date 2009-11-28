@@ -34,12 +34,11 @@ import org.pietschy.command.CommandManager;
  */
 public class NewDefaultCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
-
-    public NewDefaultCommand(final CommandManager commandManager, final MainModel model)
+    public NewDefaultCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_NEWDEFAULT);
+        super( commandManager, Commands.COMMANDID_NEWDEFAULT );
         this.model = model;
     }
 
@@ -47,17 +46,17 @@ public class NewDefaultCommand extends ActionCommand
     {
         try
         {
-            final SessionModel sessionModel = Commands.runExamInfoChooser(model);
-            if (sessionModel != null)
+            final SessionModel sessionModel = Commands.runExamInfoChooser( model );
+            if ( sessionModel != null )
             {
-                model.sessionModels.setSelection(sessionModel);
-                Commands.setNewUserModel(model);
-                final Constraints constraints = (Constraints) AbstractMainModel.findModel(model.getUserModel().getConstraintsUid());
-                model.getUserModel().setTaxa(new ArrayList<String>(Arrays.asList(constraints.getDefaultTaxa())));
+                model.sessionModels.setSelection( sessionModel );
+                Commands.setNewUserModel( model );
+                final Constraints constraints = (Constraints) AbstractMainModel.findModel( model.getUserModel().getConstraintsUid() );
+                model.getUserModel().setTaxa( new ArrayList<String>( Arrays.asList( constraints.getDefaultTaxa() ) ) );
                 model.setOpening();
             }
         }
-        catch (PropertyVetoException e)
+        catch ( PropertyVetoException e )
         {
         }
     }

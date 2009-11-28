@@ -30,15 +30,14 @@ import org.pietschy.command.CommandManager;
  */
 public class CopyCommand extends ActionCommand
 {
+    private final SelectionInList models;
 
-    private SelectionInList models;
+    private final MasterDetailsFactory factory;
 
-    private MasterDetailsFactory factory;
-
-    public CopyCommand(final CommandManager manager, final SelectionInList models,
-                       final MasterDetailsFactory factory)
+    public CopyCommand( final CommandManager manager, final SelectionInList models,
+                        final MasterDetailsFactory factory )
     {
-        super(manager, Commands.COMMANDID_COPY);
+        super( manager, Commands.COMMANDID_COPY );
         this.models = models;
         this.factory = factory;
     }
@@ -46,8 +45,8 @@ public class CopyCommand extends ActionCommand
     protected void handleExecute()
     {
         final TaxonBased model = (TaxonBased) models.getSelection();
-        final Object copy = factory.copy(model);
-        models.setSelection(copy);
+        final Object copy = factory.copy( model );
+        models.setSelection( copy );
 //            master.repaint();
     }
 }

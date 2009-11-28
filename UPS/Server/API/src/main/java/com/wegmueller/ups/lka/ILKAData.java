@@ -1,6 +1,8 @@
 package com.wegmueller.ups.lka;
 
-/** OIS Daten */
+/**
+ * OIS Daten
+ */
 public interface ILKAData
 {
     /**

@@ -37,14 +37,13 @@ import org.pietschy.command.CommandManager;
  */
 public class ExportTextCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
+    private final FileFilter textFileFilter = new ExtentionFileFilter( "Textdatei (*.txt)", new String[]{".txt"}, true );
 
-    private FileFilter textFileFilter = new ExtentionFileFilter("Textdatei (*.txt)", new String[]{".txt"}, true);
-
-    public ExportTextCommand(final CommandManager commandManager, final MainModel model)
+    public ExportTextCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_EXPORTTEXT);
+        super( commandManager, Commands.COMMANDID_EXPORTTEXT );
         this.model = model;
     }
 
@@ -55,31 +54,29 @@ public class ExportTextCommand extends ActionCommand
 
     private class TextSaveChooser extends SaveChooser
     {
-
         public TextSaveChooser()
         {
-            super(textFileFilter, "textchooser", "");
+            super( textFileFilter, "textchooser", "" );
         }
 
-        public void save(final File file)
+        public void save( final File file )
         {
-            if (file != null)
+            if ( file != null )
             {
                 try
                 {
-                    final FileWriter fileWriter = new FileWriter(file);
-                    final BufferedWriter out = new BufferedWriter(fileWriter);
+                    final FileWriter fileWriter = new FileWriter( file );
+                    final BufferedWriter out = new BufferedWriter( fileWriter );
                     final UserModel userModel = model.getUserModel();
                     final ArrayList<String> taxa = userModel.getTaxa();
-                    for (int i = 0; i < taxa.size(); i++)
+                    for ( final String taxon : taxa )
                     {
-                        final String taxon = taxa.get(i);
-                        out.write(taxon + System.getProperty("line.separator"));
+                        out.write( taxon + System.getProperty( "line.separator" ) );
                     }
                     out.close();
                     fileWriter.close();
                 }
-                catch (IOException x)
+                catch ( IOException x )
                 {
                     x.printStackTrace();
                 }

@@ -1,6 +1,8 @@
 package com.wegmueller.ups.storage.beans;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  23:07:05 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  23:07:05
+ */
 public class OIS2LDAP
 {
     private String ldap;
@@ -14,7 +16,7 @@ public class OIS2LDAP
         return ldap;
     }
 
-    public void setLdap(final String ldap)
+    public void setLdap( final String ldap )
     {
         this.ldap = ldap;
     }
@@ -24,7 +26,7 @@ public class OIS2LDAP
         return oisusername;
     }
 
-    public void setOisusername(final String oisusername)
+    public void setOisusername( final String oisusername )
     {
         this.oisusername = oisusername;
     }
@@ -34,7 +36,7 @@ public class OIS2LDAP
         return oispassword;
     }
 
-    public void setOispassword(final String oispassword)
+    public void setOispassword( final String oispassword )
     {
         this.oispassword = oispassword;
     }

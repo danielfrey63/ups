@@ -36,57 +36,56 @@ import org.pietschy.command.CommandManager;
  */
 public class SubmitCommand extends ActionCommand
 {
+    private static final Logger LOG = Logger.getLogger( SubmitCommand.class );
 
-    private static final Logger LOG = Logger.getLogger(SubmitCommand.class);
+    private final MainModel model;
 
-    private MainModel model;
-
-    public SubmitCommand(final CommandManager commandManager, final MainModel model)
+    public SubmitCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_SUBMIT);
+        super( commandManager, Commands.COMMANDID_SUBMIT );
         this.model = model;
     }
 
     protected void handleExecute()
     {
-        final ListModel courseInfoModels = MainModel.findModelById(MainModel.MODELID_COURSES);
-        if (courseInfoModels != null)
+        final ListModel courseInfoModels = MainModel.findModelById( MainModel.MODELID_COURSES );
+        if ( courseInfoModels != null )
         {
             final int size = courseInfoModels.getSize();
-            if (size > 1)
+            if ( size > 1 )
             {
                 final CourseModel[] courses = new CourseModel[size];
-                for (int i = 0; i < size; i++)
+                for ( int i = 0; i < size; i++ )
                 {
-                    courses[i] = (CourseModel) courseInfoModels.getElementAt(i);
+                    courses[i] = (CourseModel) courseInfoModels.getElementAt( i );
                 }
-                final ListDialog courseDialog = new ListDialog((JFrame) null, "course", courses);
-                courseDialog.setSize(300, 600);
-                WindowUtils.centerOnScreen(courseDialog);
-                courseDialog.setVisible(true);
+                final ListDialog courseDialog = new ListDialog( (JFrame) null, "course", courses );
+                courseDialog.setSize( 300, 600 );
+                WindowUtils.centerOnScreen( courseDialog );
+                courseDialog.setVisible( true );
 
-                if (courseDialog.isAccepted())
+                if ( courseDialog.isAccepted() )
                 {
                     final CourseModel course = (CourseModel) courseDialog.getSelectedData()[0];
-                    submitPlantlist(course);
+                    submitPlantlist( course );
                 }
             }
-            else if (size == 1)
+            else if ( size == 1 )
             {
-                submitPlantlist((CourseModel) courseInfoModels.getElementAt(0));
+                submitPlantlist( (CourseModel) courseInfoModels.getElementAt( 0 ) );
             }
         }
         else
         {
-            LOG.fatal("no course models found");
+            LOG.fatal( "no course models found" );
         }
     }
 
-    private void submitPlantlist(final CourseModel course)
+    private void submitPlantlist( final CourseModel course )
     {
-        final CredentialsDialog dialog = new PlantListSubmitDialog(null, model.getUserModel(), course.getUid());
-        dialog.setSize(500, 300);
-        WindowUtils.centerOnScreen(dialog);
-        dialog.setVisible(true);
+        final CredentialsDialog dialog = new PlantListSubmitDialog( null, model.getUserModel(), course.getUid() );
+        dialog.setSize( 500, 300 );
+        WindowUtils.centerOnScreen( dialog );
+        dialog.setVisible( true );
     }
 }

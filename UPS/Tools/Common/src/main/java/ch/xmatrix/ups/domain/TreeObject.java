@@ -19,7 +19,6 @@ package ch.xmatrix.ups.domain;
  */
 public interface TreeObject
 {
-
     /**
      * Returns the children of this object. May be null for leafs.
      *
@@ -32,7 +31,7 @@ public interface TreeObject
      *
      * @param children the children to set
      */
-    void setChildren(TreeObject[] children);
+    void setChildren( TreeObject[] children );
 
     /**
      * Returns the parent of this object. May be null for the root object.
@@ -46,7 +45,7 @@ public interface TreeObject
      *
      * @param parent the parent to set
      */
-    void setParent(TreeObject parent);
+    void setParent( TreeObject parent );
 
     /**
      * Returns the wrapped taxon.

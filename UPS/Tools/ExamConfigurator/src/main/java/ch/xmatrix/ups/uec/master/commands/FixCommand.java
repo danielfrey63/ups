@@ -28,12 +28,11 @@ import org.pietschy.command.CommandManager;
  */
 public class FixCommand extends ActionCommand
 {
+    private final DetailsBuilder detailsBuilder;
 
-    private DetailsBuilder detailsBuilder;
-
-    public FixCommand(final CommandManager manager, final DetailsBuilder detailsBulider)
+    public FixCommand( final CommandManager manager, final DetailsBuilder detailsBulider )
     {
-        super(manager, Commands.COMMANDID_FIX);
+        super( manager, Commands.COMMANDID_FIX );
         this.detailsBuilder = detailsBulider;
     }
 

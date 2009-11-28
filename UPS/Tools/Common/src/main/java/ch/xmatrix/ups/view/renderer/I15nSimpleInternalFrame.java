@@ -28,7 +28,6 @@ import javax.swing.border.EmptyBorder;
  */
 public class I15nSimpleInternalFrame extends SimpleInternalFrame
 {
-
     private String resourceKey;
 
     /**
@@ -37,10 +36,10 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param icon        the initial icon
      * @param resourceKey the base resourceKey for looking up the strings
      */
-    public I15nSimpleInternalFrame(final Icon icon, final String resourceKey)
+    public I15nSimpleInternalFrame( final Icon icon, final String resourceKey )
     {
-        super(icon, Strings.getString(resourceKey + ".title"));
-        initThis(resourceKey);
+        super( icon, Strings.getString( resourceKey + ".title" ) );
+        initThis( resourceKey );
         initLayout();
     }
 
@@ -52,10 +51,10 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param bar         the initial tool bar
      * @param content     the initial content pane
      */
-    public I15nSimpleInternalFrame(final Icon icon, final String resourceKey, final JToolBar bar, final JComponent content)
+    public I15nSimpleInternalFrame( final Icon icon, final String resourceKey, final JToolBar bar, final JComponent content )
     {
-        super(icon, Strings.getString(resourceKey + ".title"), bar, content);
-        initThis(resourceKey);
+        super( icon, Strings.getString( resourceKey + ".title" ), bar, content );
+        initThis( resourceKey );
         initLayout();
     }
 
@@ -64,10 +63,10 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      *
      * @param resourceKey the base resourceKey for looking up the strings
      */
-    public I15nSimpleInternalFrame(final String resourceKey)
+    public I15nSimpleInternalFrame( final String resourceKey )
     {
-        super(Strings.getString(resourceKey + ".title"));
-        initThis(resourceKey);
+        super( Strings.getString( resourceKey + ".title" ) );
+        initThis( resourceKey );
         initLayout();
     }
 
@@ -78,10 +77,10 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param bar         the initial tool bar
      * @param content     the initial content pane
      */
-    public I15nSimpleInternalFrame(final String resourceKey, final JToolBar bar, final JComponent content)
+    public I15nSimpleInternalFrame( final String resourceKey, final JToolBar bar, final JComponent content )
     {
-        super(Strings.getString(resourceKey + ".title"), bar, content);
-        initThis(resourceKey);
+        super( Strings.getString( resourceKey + ".title" ), bar, content );
+        initThis( resourceKey );
         initLayout();
     }
 
@@ -91,11 +90,11 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param icon        the initial icon
      * @param resourceKey the base resourceKey for looking up the strings
      */
-    public I15nSimpleInternalFrame(final Icon icon, final String resourceKey, final Border border)
+    public I15nSimpleInternalFrame( final Icon icon, final String resourceKey, final Border border )
     {
-        super(icon, Strings.getString(resourceKey + ".title"));
-        initThis(resourceKey);
-        initLayout(border);
+        super( icon, Strings.getString( resourceKey + ".title" ) );
+        initThis( resourceKey );
+        initLayout( border );
     }
 
     /**
@@ -106,11 +105,11 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param bar         the initial tool bar
      * @param content     the initial content pane
      */
-    public I15nSimpleInternalFrame(final Icon icon, final String resourceKey, final JToolBar bar, final JComponent content, final Border border)
+    public I15nSimpleInternalFrame( final Icon icon, final String resourceKey, final JToolBar bar, final JComponent content, final Border border )
     {
-        super(icon, Strings.getString(resourceKey + ".title"), bar, content);
-        initThis(resourceKey);
-        initLayout(border);
+        super( icon, Strings.getString( resourceKey + ".title" ), bar, content );
+        initThis( resourceKey );
+        initLayout( border );
     }
 
     /**
@@ -118,11 +117,11 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      *
      * @param resourceKey the base resourceKey for looking up the strings
      */
-    public I15nSimpleInternalFrame(final String resourceKey, final Border border)
+    public I15nSimpleInternalFrame( final String resourceKey, final Border border )
     {
-        super(Strings.getString(resourceKey + ".title"));
-        initThis(resourceKey);
-        initLayout(border);
+        super( Strings.getString( resourceKey + ".title" ) );
+        initThis( resourceKey );
+        initLayout( border );
     }
 
     /**
@@ -132,11 +131,11 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
      * @param bar         the initial tool bar
      * @param content     the initial content pane
      */
-    public I15nSimpleInternalFrame(final String resourceKey, final JToolBar bar, final JComponent content, final Border border)
+    public I15nSimpleInternalFrame( final String resourceKey, final JToolBar bar, final JComponent content, final Border border )
     {
-        super(Strings.getString(resourceKey + ".title"), bar, content);
-        initThis(resourceKey);
-        initLayout(border);
+        super( Strings.getString( resourceKey + ".title" ), bar, content );
+        initThis( resourceKey );
+        initLayout( border );
     }
 
     protected String getResourceKey()
@@ -144,18 +143,18 @@ public class I15nSimpleInternalFrame extends SimpleInternalFrame
         return resourceKey;
     }
 
-    private void initThis(final String resourceKey)
+    private void initThis( final String resourceKey )
     {
         this.resourceKey = resourceKey;
     }
 
     protected void initLayout()
     {
-        initLayout(new EmptyBorder(0, 0, 0, 0));
+        initLayout( new EmptyBorder( 0, 0, 0, 0 ) );
     }
 
-    protected void initLayout(final Border innerBorder)
+    protected void initLayout( final Border innerBorder )
     {
-        setBorder(new CompoundBorder(innerBorder, getBorder()));
+        setBorder( new CompoundBorder( innerBorder, getBorder() ) );
     }
 }

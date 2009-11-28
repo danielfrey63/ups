@@ -24,7 +24,6 @@ package ch.xmatrix.ups.uec.main.commands;
  */
 public class Commands
 {
-
     public static final String COMMANDID_OPENUST = "openust";
 
     public static final String COMMANDID_OPENEXAM = "openexam";

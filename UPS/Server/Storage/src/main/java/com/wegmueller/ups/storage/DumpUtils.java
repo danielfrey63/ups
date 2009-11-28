@@ -2,37 +2,39 @@ package com.wegmueller.ups.storage;
 
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Arrays;
 import org.hibernate.HibernateException;
 
-/** Created by: Thomas Wegmueller Date: 03.10.2005,  22:21:58 */
+/**
+ * Created by: Thomas Wegmueller Date: 03.10.2005,  22:21:58
+ */
 public class DumpUtils
 {
-    public static SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+    public static SimpleDateFormat df = new SimpleDateFormat( "dd.MM.yyyy" );
 
-    public static SimpleDateFormat tf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    public static SimpleDateFormat tf = new SimpleDateFormat( "dd.MM.yyyy HH:mm" );
 
-    public static void dumpStringArray(final String[] stu) throws StorageException
+    public static void dumpStringArray( final String[] stu ) throws StorageException
     {
-        for (final String s : stu)
+        for ( final String s : stu )
         {
-            System.out.println(s);
+            System.out.println( s );
         }
     }
 
-    public static void dumpTest(final IAnmeldedaten[] list, final String[] stu) throws StorageException
+    public static void dumpTest( final IAnmeldedaten[] list, final String[] stu ) throws StorageException
     {
         try
         {
             final HashSet<String> set = new HashSet<String>();
-            set.addAll(Arrays.asList(stu));
-            for (final IAnmeldedaten anm : list)
+            set.addAll( Arrays.asList( stu ) );
+            for ( final IAnmeldedaten anm : list )
             {
-                final boolean eingereicht = set.contains(anm.getStudentennummer());
-                set.remove(anm.getStudentennummer());
-                System.out.println("\t"
+                final boolean eingereicht = set.contains( anm.getStudentennummer() );
+                set.remove( anm.getStudentennummer() );
+                System.out.println( "\t"
                         + anm.getVorname()
                         + "\t"
                         + anm.getNachname()
@@ -45,13 +47,13 @@ public class DumpUtils
                         + "\t"
                         + anm.getPruefungsraum()
                         + "\t"
-                        + df.format(anm.getPruefungsdatum().getTime())
+                        + df.format( anm.getPruefungsdatum().getTime() )
                         + "\t"
-                        + tf.format(anm.getPruefungsdatumVon().getTime())
+                        + tf.format( anm.getPruefungsdatumVon().getTime() )
                         + "\t"
-                        + tf.format(anm.getPruefungsdatumBis().getTime())
+                        + tf.format( anm.getPruefungsdatumBis().getTime() )
                         + "\t"
-                        + (eingereicht)
+                        + ( eingereicht )
                 );
             }
             /*
@@ -61,18 +63,18 @@ public class DumpUtils
             }
             */
         }
-        catch (HibernateException e)
+        catch ( HibernateException e )
         {
-            throw new StorageException(e);
+            throw new StorageException( e );
         }
 
     }
 
-    public static void dumpCalendars(final Calendar[] pruefungsZeiten)
+    public static void dumpCalendars( final Calendar[] pruefungsZeiten )
     {
-        for (final Calendar pruefungsZeit : pruefungsZeiten)
+        for ( final Calendar pruefungsZeit : pruefungsZeiten )
         {
-            System.out.println(df.format(pruefungsZeit.getTime()));
+            System.out.println( df.format( pruefungsZeit.getTime() ) );
         }
     }
 }

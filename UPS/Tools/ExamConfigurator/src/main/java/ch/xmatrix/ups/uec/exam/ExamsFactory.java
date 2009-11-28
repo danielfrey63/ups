@@ -27,16 +27,15 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class ExamsFactory extends MasterDetailsFactory
 {
-
-    protected TaxonBased createCopy(final TaxonBased orig)
+    protected TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof ExamModel))
+        if ( !( orig instanceof ExamModel ) )
         {
-            throw new IllegalArgumentException("original must be of type " + ExamModel.class.getName() +
-                    ", got " + orig.getClass().getName());
+            throw new IllegalArgumentException( "original must be of type " + ExamModel.class.getName() +
+                    ", got " + orig.getClass().getName() );
         }
         final ExamModel original = (ExamModel) orig;
-        return new ExamModel(original);
+        return new ExamModel( original );
     }
 
     protected TaxonBased createInstance()

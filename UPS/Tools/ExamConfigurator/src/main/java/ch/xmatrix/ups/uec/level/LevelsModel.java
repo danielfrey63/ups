@@ -29,22 +29,23 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class LevelsModel extends AbstractTaxonBased
 {
-
-    /** List of {@link LevelModel}s. */
-    private ArrayList<LevelModel> models = new ArrayList<LevelModel>();
+    /**
+     * List of {@link LevelModel}s.
+     */
+    private final ArrayList<LevelModel> models = new ArrayList<LevelModel>();
 
     public LevelsModel()
     {
         super();
     }
 
-    public LevelsModel(final LevelsModel orig)
+    public LevelsModel( final LevelsModel orig )
     {
-        super(orig);
-        for (int i = 0; i < orig.models.size(); i++)
+        super( orig );
+        for ( int i = 0; i < orig.models.size(); i++ )
         {
-            final LevelModel origModel = orig.models.get(i);
-            models.add(new LevelModel(origModel));
+            final LevelModel origModel = orig.models.get( i );
+            models.add( new LevelModel( origModel ) );
         }
     }
 
@@ -60,6 +61,6 @@ public class LevelsModel extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return ToStringBuilder.reflectionToString( this, ToStringStyle.SHORT_PREFIX_STYLE );
     }
 }

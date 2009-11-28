@@ -29,12 +29,11 @@ import org.pietschy.command.CommandManager;
  */
 public class CloseCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
-
-    public CloseCommand(final CommandManager commandManager, final MainModel model)
+    public CloseCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_CLOSE);
+        super( commandManager, Commands.COMMANDID_CLOSE );
         this.model = model;
     }
 
@@ -43,11 +42,11 @@ public class CloseCommand extends ActionCommand
         try
         {
             model.setClosing();
-            model.setCurrentFile(null);
-            model.setCurrentCard(MainModel.CARDS_WELCOME);
-            model.setDirty(false);
+            model.setCurrentFile( null );
+            model.setCurrentCard( MainModel.CARDS_WELCOME );
+            model.setDirty( false );
         }
-        catch (PropertyVetoException e)
+        catch ( PropertyVetoException e )
         {
         }
     }

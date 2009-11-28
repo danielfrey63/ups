@@ -37,12 +37,11 @@ import org.pietschy.command.CommandManager;
  */
 public class FromDirectory extends LoadFilesystem
 {
+    private static final Logger LOG = Logger.getLogger( FromDirectory.class );
 
-    private static final Logger LOG = Logger.getLogger(FromDirectory.class);
-
-    public FromDirectory(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    public FromDirectory( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super(commandManager, Commands.COMMANDID_LOADDIRECTORY, model);
+        super( commandManager, Commands.COMMANDID_LOADDIRECTORY, model );
     }
 
     protected OpenChooser getChooser()
@@ -52,55 +51,53 @@ public class FromDirectory extends LoadFilesystem
 
     private class Chooser extends OpenChooser
     {
-
         public Chooser()
         {
-            super(null, JFileChooser.DIRECTORIES_ONLY, "openchooser", System.getProperty("user.dir"));
+            super( null, JFileChooser.DIRECTORIES_ONLY, "openchooser", System.getProperty( "user.dir" ) );
         }
 
-        protected void load(final File directory)
+        protected void load( final File directory )
         {
             File file = null;
             try
             {
-                final File[] files = directory.listFiles(new ExtentionFileFilter("", new String[]{EXTENTION}, false));
-                Arrays.sort(files, new ToStringComparator());
-                for (int i = 0; i < files.length; i++)
+                final File[] files = directory.listFiles( new ExtentionFileFilter( "", new String[]{EXTENTION}, false ) );
+                Arrays.sort( files, new ToStringComparator() );
+                for ( final File file1 : files )
                 {
-                    file = files[i];
-                    loadAnonymousFile(file);
+                    file = file1;
+                    loadAnonymousFile( file );
                 }
                 writeBuffer();
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                LOG.error("error during processing of file" + (file != null ? " \"" + file + "\"" : "s"), e);
-                Dialogs.showWarnMessage(null, "Warnung", "" +
+                LOG.error( "error during processing of file" + ( file != null ? " \"" + file + "\"" : "s" ), e );
+                Dialogs.showWarnMessage( null, "Warnung", "" +
                         "Während der Verarbeitung der Dateien ist ein Fehler\n" +
                         "aufgetreten. Allfällige bereits verarbeitete Dateien\n" +
-                        "dieses Imports werden deshalb verworfen.");
+                        "dieses Imports werden deshalb verworfen." );
             }
         }
     }
 
-    public static void main(final String[] args) throws InvocationTargetException, InterruptedException
+    public static void main( final String[] args ) throws InvocationTargetException, InterruptedException
     {
-        System.setProperty("jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings");
-        System.setProperty("log4j.configuration", "log4j.properties");
-        final FromDirectory ff = new FromDirectory(new CommandManager(), null);
-        SwingUtilities.invokeAndWait(new Runnable()
+        System.setProperty( "jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings" );
+        System.setProperty( "log4j.configuration", "log4j.properties" );
+        final FromDirectory ff = new FromDirectory( new CommandManager(), null );
+        SwingUtilities.invokeAndWait( new Runnable()
         {
             public void run()
             {
                 ff.handleExecute();
                 final File[] files = ff.getChooser().getSelectedFiles();
-                for (int i = 0; i < files.length; i++)
+                for ( final File file : files )
                 {
-                    final File file = files[i];
-                    System.out.println(file);
+                    System.out.println( file );
                 }
             }
-        });
-        System.exit(0);
+        } );
+        System.exit( 0 );
     }
 }

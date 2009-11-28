@@ -14,8 +14,6 @@ package ch.xmatrix.ups.ust.main;
 import ch.jfactory.application.AbstractMainController;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.binding.InfoModel;
-import org.apache.log4j.Category;
-import org.apache.log4j.Logger;
 
 /**
  * TODO: document
@@ -25,18 +23,12 @@ import org.apache.log4j.Logger;
  */
 public class MainController extends AbstractMainController
 {
-
-    private static final Category LOGGER = Logger.getInstance(MainController.class);
-
-    private MainModel model;
-
-    public MainController(final MainModel model, final InfoModel infoModel)
+    public MainController( final MainModel model, final InfoModel infoModel )
     {
-        super(model, infoModel);
-        this.model = model;
+        super( model, infoModel );
     }
 
-    protected void initModel(final AbstractMainModel model)
+    protected void initModel( final AbstractMainModel model )
     {
     }
 }

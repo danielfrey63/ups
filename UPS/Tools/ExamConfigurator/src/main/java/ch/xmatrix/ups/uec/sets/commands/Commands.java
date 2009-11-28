@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class Commands
 {
-
     public static final String COMMANDID_OPENFROMINTERNET = "fromInternet";
 
     public static final String COMMANDID_REFRESH = "refresh";
@@ -58,20 +57,20 @@ public class Commands
     public static XStream getConverter1()
     {
         final XStream converter;
-        converter = new XStream(new DomDriver());
-        converter.setMode(XStream.ID_REFERENCES);
-        converter.alias("person", PersonData.class);
-        converter.alias("root", PlantList.class);
-        converter.alias("ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class);
+        converter = new XStream( new DomDriver() );
+        converter.setMode( XStream.ID_REFERENCES );
+        converter.alias( "person", PersonData.class );
+        converter.alias( "root", PlantList.class );
+        converter.alias( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
         return converter;
     }
 
     public static XStream getConverter2()
     {
         final XStream converter;
-        converter = new XStream(new DomDriver());
-        converter.setMode(XStream.ID_REFERENCES);
-        converter.alias("root", Encoded.class);
+        converter = new XStream( new DomDriver() );
+        converter.setMode( XStream.ID_REFERENCES );
+        converter.alias( "root", Encoded.class );
         return converter;
     }
 

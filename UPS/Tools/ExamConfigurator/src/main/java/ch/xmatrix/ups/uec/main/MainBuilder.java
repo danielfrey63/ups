@@ -61,8 +61,7 @@ import org.apache.log4j.Logger;
  */
 public class MainBuilder extends AbstractMainBuilder
 {
-
-    private static final Logger LOG = Logger.getLogger(MainBuilder.class);
+    private static final Logger LOG = Logger.getLogger( MainBuilder.class );
 
     private static final String TOOL_PREFIX = "jfactory.ups.tool.";
 
@@ -76,34 +75,34 @@ public class MainBuilder extends AbstractMainBuilder
 
     private final AbstractDetailsBuilder constraintsBuilder = new ConstraintsBuilder();
 
-    private final ExamsBuilder examsBuilder = new ExamsBuilder(prefsBuilder, groupsBuilder, specimensBuilder, levelsBuilder, constraintsBuilder);
+    private final ExamsBuilder examsBuilder = new ExamsBuilder( prefsBuilder, groupsBuilder, specimensBuilder, levelsBuilder, constraintsBuilder );
 
     private final AbstractDetailsBuilder examInfoBuilder = new SessionBuilder();
 
-    private final SetBuilder setBuilder = new SetBuilder(examsBuilder);
+    private final SetBuilder setBuilder = new SetBuilder( examsBuilder );
 
     private MainModel model;
 
-    public MainBuilder(final MainModel model, final InfoModel infoModel)
+    public MainBuilder( final MainModel model, final InfoModel infoModel )
     {
-        super(model, infoModel,
+        super( model, infoModel,
                 new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM,
                         Commands.COMMANDID_QUIT, I15nWelcomePanel.SEPARATOR},
-                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM});
-        TaxonModels.setInfoModel(infoModel);
+                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM} );
+        TaxonModels.setInfoModel( infoModel );
         TaxonModels.loadTaxonTrees();
-        prefsBuilder.setInfoModel(infoModel);
-        groupsBuilder.setInfoModel(infoModel);
-        specimensBuilder.setInfoModel(infoModel);
-        levelsBuilder.setInfoModel(infoModel);
-        constraintsBuilder.setInfoModel(infoModel);
-        examsBuilder.setInfoModel(infoModel);
-        examInfoBuilder.setInfoModel(infoModel);
-        setBuilder.setInfoModel(infoModel);
-        setModel(model);
+        prefsBuilder.setInfoModel( infoModel );
+        groupsBuilder.setInfoModel( infoModel );
+        specimensBuilder.setInfoModel( infoModel );
+        levelsBuilder.setInfoModel( infoModel );
+        constraintsBuilder.setInfoModel( infoModel );
+        examsBuilder.setInfoModel( infoModel );
+        examInfoBuilder.setInfoModel( infoModel );
+        setBuilder.setInfoModel( infoModel );
+        setModel( model );
     }
 
-    public void setModel(final MainModel model)
+    public void setModel( final MainModel model )
     {
         this.model = model;
     }
@@ -111,11 +110,11 @@ public class MainBuilder extends AbstractMainBuilder
     protected void initCommands()
     {
         super.initCommands();
-        initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENUST, MainModel.CARDS_UST), false);
-        initCommand(new OpenCommand(getCommandManager(), model, Commands.COMMANDID_OPENEXAM, MainModel.CARDS_EXAM), false);
-        initCommand(new CloseCommand(getCommandManager(), model), true);
-        initCommand(new ExportCommand(getCommandManager()), true);
-        initCommand(new QuitCommand(getCommandManager(), model), true);
+        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMANDID_OPENUST, MainModel.CARDS_UST ), false );
+        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMANDID_OPENEXAM, MainModel.CARDS_EXAM ), false );
+        initCommand( new CloseCommand( getCommandManager(), model ), true );
+        initCommand( new ExportCommand( getCommandManager() ), true );
+        initCommand( new QuitCommand( getCommandManager(), model ), true );
     }
 
     protected void createNonWelcomPanels()
@@ -127,57 +126,57 @@ public class MainBuilder extends AbstractMainBuilder
             ViewMap views;
 
             views = new ViewMap();
-            views.addView(0, new View(Strings.getString("settings.title"), null, wrapPanel(prefsBuilder.getPanel())));
-            views.addView(1, new View(Strings.getString("groups.title"), null, wrapPanel(groupsBuilder.getPanel())));
-            views.addView(2, new View(Strings.getString("specimens.title"), null, wrapPanel(specimensBuilder.getPanel())));
-            views.addView(3, new View(Strings.getString("levels.title"), null, wrapPanel(levelsBuilder.getPanel())));
-            views.addView(4, new View(Strings.getString("constraints.title"), null, wrapPanel(constraintsBuilder.getPanel())));
-            rootWindow = DockingUtil.createRootWindow(views, true);
-            DockingWindowsUtils.setBasicRootWindowProps(rootWindow);
-            DockingWindowsUtils.configureProperties(rootWindow, false, false, false, false, false, false);
-            getCards().add(MainModel.CARDS_UST, rootWindow);
+            views.addView( 0, new View( Strings.getString( "settings.title" ), null, wrapPanel( prefsBuilder.getPanel() ) ) );
+            views.addView( 1, new View( Strings.getString( "groups.title" ), null, wrapPanel( groupsBuilder.getPanel() ) ) );
+            views.addView( 2, new View( Strings.getString( "specimens.title" ), null, wrapPanel( specimensBuilder.getPanel() ) ) );
+            views.addView( 3, new View( Strings.getString( "levels.title" ), null, wrapPanel( levelsBuilder.getPanel() ) ) );
+            views.addView( 4, new View( Strings.getString( "constraints.title" ), null, wrapPanel( constraintsBuilder.getPanel() ) ) );
+            rootWindow = DockingUtil.createRootWindow( views, true );
+            DockingWindowsUtils.setBasicRootWindowProps( rootWindow );
+            DockingWindowsUtils.configureProperties( rootWindow, false, false, false, false, false, false );
+            getCards().add( MainModel.CARDS_UST, rootWindow );
 
             views = new ViewMap();
-            views.addView(0, new View(Strings.getString("examinfo.title"), null, wrapPanel(examInfoBuilder.getPanel())));
-            views.addView(1, new View(Strings.getString("exams.title"), null, wrapPanel(examsBuilder.getPanel())));
+            views.addView( 0, new View( Strings.getString( "examinfo.title" ), null, wrapPanel( examInfoBuilder.getPanel() ) ) );
+            views.addView( 1, new View( Strings.getString( "exams.title" ), null, wrapPanel( examsBuilder.getPanel() ) ) );
             // Todo: Remove this hack
-            System.setProperty("ch.jfactory.iconprefix", "/icons");
-            views.addView(2, new View(Strings.getString("submit.title"), null, wrapPanel(setBuilder.getPanel())));
-            System.clearProperty("ch.jfactory.iconprefix");
-            rootWindow = DockingUtil.createRootWindow(views, true);
-            DockingWindowsUtils.setBasicRootWindowProps(rootWindow);
-            DockingWindowsUtils.configureProperties(rootWindow, false, false, false, false, false, false);
-            getCards().add(MainModel.CARDS_EXAM, rootWindow);
+            System.setProperty( "ch.jfactory.iconprefix", "/icons" );
+            views.addView( 2, new View( Strings.getString( "submit.title" ), null, wrapPanel( setBuilder.getPanel() ) ) );
+            System.clearProperty( "ch.jfactory.iconprefix" );
+            rootWindow = DockingUtil.createRootWindow( views, true );
+            DockingWindowsUtils.setBasicRootWindowProps( rootWindow );
+            DockingWindowsUtils.configureProperties( rootWindow, false, false, false, false, false, false );
+            getCards().add( MainModel.CARDS_EXAM, rootWindow );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOG.fatal("could not complete panel loading", e);
+            LOG.fatal( "could not complete panel loading", e );
         }
     }
 
     protected JMenuBar getMenuBar()
     {
-        return getCommandManager().getGroup(Commands.GROUPID_MENU).createMenuBar();
+        return getCommandManager().getGroup( Commands.GROUPID_MENU ).createMenuBar();
     }
 
-    private static JComponent wrapPanel(final JComponent panel)
+    private static JComponent wrapPanel( final JComponent panel )
     {
-        panel.setBorder(Borders.createEmptyBorder(Sizes.DLUX2, Sizes.DLUX4, Sizes.DLUX4, Sizes.DLUX4));
+        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX2, Sizes.DLUX4, Sizes.DLUX4, Sizes.DLUX4 ) );
         return panel;
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        UIManager.put("ToolBar.border", new EmptyBorder(0, 0, 0, 0));
-        System.setProperty("jfactory.resource.path", "/icon");
-        Strings.setResourceBundle(ResourceBundle.getBundle("ch.xmatrix.ups.uec.view.Strings"));
+        UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
+        UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
+        System.setProperty( "jfactory.resource.path", "/icon" );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.view.Strings" ) );
         final JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final JComponent panel = new MainBuilder(new MainModel(), new DefaultInfoModel()).examsBuilder.getPanel();
-        panel.setBorder(Borders.createEmptyBorder(Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8));
-        f.getContentPane().add(panel);
-        f.setSize(650, 500);
-        f.setVisible(true);
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        final JComponent panel = new MainBuilder( new MainModel(), new DefaultInfoModel() ).examsBuilder.getPanel();
+        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8 ) );
+        f.getContentPane().add( panel );
+        f.setSize( 650, 500 );
+        f.setVisible( true );
     }
 }

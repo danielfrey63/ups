@@ -30,14 +30,13 @@ import org.pietschy.command.CommandManager;
  */
 public class DeleteConstraints extends ActionCommand
 {
-
-    private SelectionInList constraintsModels;
+    private final SelectionInList constraintsModels;
 
     private JList selection;
 
-    public DeleteConstraints(final CommandManager manager, final SelectionInList constraintsModels)
+    public DeleteConstraints( final CommandManager manager, final SelectionInList constraintsModels )
     {
-        super(manager, Commands.COMMANDID_DELETECONSTRAINT);
+        super( manager, Commands.COMMANDID_DELETECONSTRAINT );
         this.constraintsModels = constraintsModels;
     }
 
@@ -45,14 +44,13 @@ public class DeleteConstraints extends ActionCommand
     {
         final Constraints constraints = (Constraints) constraintsModels.getSelection();
         final int[] indices = selection.getSelectedIndices();
-        for (int i = 0; i < indices.length; i++)
+        for ( final int index : indices )
         {
-            final int index = indices[i];
-            constraints.removeConstraint(constraints.getConstraints().get(index));
+            constraints.removeConstraint( constraints.getConstraints().get( index ) );
         }
     }
 
-    public void setList(final JList list)
+    public void setList( final JList list )
     {
         selection = list;
     }

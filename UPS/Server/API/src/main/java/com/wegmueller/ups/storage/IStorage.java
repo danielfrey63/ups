@@ -6,10 +6,11 @@ import com.wegmueller.ups.lka.IPruefungsSession;
 import java.util.Calendar;
 import java.util.Properties;
 
-/** Created by: Thomas Wegmueller Date: 26.09.2005,  18:22:27 */
+/**
+ * Created by: Thomas Wegmueller Date: 26.09.2005,  18:22:27
+ */
 public interface IStorage
 {
-
     void open() throws StorageException;
 
     void close();
@@ -26,13 +27,13 @@ public interface IStorage
      * @param pdf              PDF Report der Bestätigung (als byte[])
      * @throws StorageException
      */
-    void storePruefungsListe(String pruefungsSession,
-                             String pruefung,
-                             String uid,
-                             String studentenNummer,
-                             byte[] input,
-                             Properties userPropertes,
-                             byte[] pdf) throws StorageException;
+    void storePruefungsListe( String pruefungsSession,
+                              String pruefung,
+                              String uid,
+                              String studentenNummer,
+                              byte[] input,
+                              Properties userPropertes,
+                              byte[] pdf ) throws StorageException;
 
     /**
      * Gibt die Pruefungsliste eines Users zurück
@@ -41,7 +42,7 @@ public interface IStorage
      * @return Pruefungsliste als byte[]
      * @throws StorageException
      */
-    byte[] getPruefungsliste(String pruefungsSession, String pruefung, String studentenNummer) throws StorageException;
+    byte[] getPruefungsliste( String pruefungsSession, String pruefung, String studentenNummer ) throws StorageException;
 
     /**
      * Wurden überhaupt schon Daten für diesen User schon gespeichert?
@@ -50,7 +51,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    boolean isStored(String userName) throws StorageException;
+    boolean isStored( String userName ) throws StorageException;
 
     /**
      * Wurden die Daten für diese Pruefungssession für diesen User schon gespeichert?
@@ -60,7 +61,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    boolean isStored(String session, String userName) throws StorageException;
+    boolean isStored( String session, String userName ) throws StorageException;
 
     /**
      * Speichere die Information einer Prüfungssession Die bestehenden Infos werden überschrieben
@@ -69,7 +70,7 @@ public interface IStorage
      * @return die gespeicherte Pruefungssession
      * @throws StorageException
      */
-    IPruefungsSession storePruefungsSession(IPruefungsSession session) throws StorageException;
+    IPruefungsSession storePruefungsSession( IPruefungsSession session ) throws StorageException;
 
     /**
      * Speichere die Anmeldungen für den Dozenten und dieser Pruefungssession Die allenfalls bestehenden Daten werden
@@ -80,7 +81,7 @@ public interface IStorage
      * @param daten
      * @throws StorageException
      */
-    void storeAnmdeldeDaten(String userName, String session, IAnmeldedaten[] daten) throws StorageException;
+    void storeAnmdeldeDaten( String userName, String session, IAnmeldedaten[] daten ) throws StorageException;
 
     /**
      * ermögliche es einem LDAP-User auf ein OIS-Konto zuzugreifen
@@ -90,7 +91,7 @@ public interface IStorage
      * @param pass
      * @throws StorageException
      */
-    void mapOIS2LDAP(String ldap, String ois, String pass) throws StorageException;
+    void mapOIS2LDAP( String ldap, String ois, String pass ) throws StorageException;
 
     /**
      * Gib die OIS-Anmeldedaten (Array[username,passwort]) für den LDAP-User zurück
@@ -99,7 +100,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    String[] getOISAccount(String userName) throws StorageException;
+    String[] getOISAccount( String userName ) throws StorageException;
 
     /**
      * Gibt die Sessionen zurück
@@ -117,7 +118,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    IPruefung[] getPruefungen(String seskez, String userName) throws StorageException;
+    IPruefung[] getPruefungen( String seskez, String userName ) throws StorageException;
 
     /**
      * Gib die Prüfungs tage zurück
@@ -128,7 +129,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    Calendar[] getPruefungsZeiten(String seskez, String lkNummer, String userName) throws StorageException;
+    Calendar[] getPruefungsZeiten( String seskez, String lkNummer, String userName ) throws StorageException;
 
     /**
      * Gib die Prüfungs tage zurück
@@ -139,7 +140,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    Calendar[] getPruefungsZeiten(String seskez, String[] lkNummer, String userName) throws StorageException;
+    Calendar[] getPruefungsZeiten( String seskez, String[] lkNummer, String userName ) throws StorageException;
 
     /**
      * Angemeldete Studis
@@ -151,7 +152,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    IAnmeldedaten[] getAnmeldungen(String seskez, String userName, String lkNummer, Calendar c) throws StorageException;
+    IAnmeldedaten[] getAnmeldungen( String seskez, String userName, String lkNummer, Calendar c ) throws StorageException;
 
     /**
      * Pruefungssessions record
@@ -160,7 +161,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    IPruefungsSession getPruefungsSessionByID(String s) throws StorageException;
+    IPruefungsSession getPruefungsSessionByID( String s ) throws StorageException;
 
     /**
      * Hat sich der Student angemeldet?
@@ -172,7 +173,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    boolean isAngemeldet(String s, String seskz, String lk, String studiNumber) throws StorageException;
+    boolean isAngemeldet( String s, String seskz, String lk, String studiNumber ) throws StorageException;
 
     /**
      * Titel der Prüfung
@@ -181,7 +182,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    String getPrufungsTitel(String lk) throws StorageException;
+    String getPrufungsTitel( String lk ) throws StorageException;
 
     /**
      * Anmeldungen
@@ -191,7 +192,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    IAnmeldedaten[] getAnmeldungen(String seskz, String userName) throws StorageException;
+    IAnmeldedaten[] getAnmeldungen( String seskz, String userName ) throws StorageException;
 
     /**
      * Anmeldungen
@@ -201,7 +202,7 @@ public interface IStorage
      * @return
      * @throws StorageException
      */
-    IAnmeldedaten[] getAnmeldungen(String seskz, String userName, String[] lkNumber, Calendar cal) throws StorageException;
+    IAnmeldedaten[] getAnmeldungen( String seskz, String userName, String[] lkNumber, Calendar cal ) throws StorageException;
 
-    String[] getStudisMitPruefungslisten(String pruefungsSession, String pruefung) throws StorageException;
+    String[] getStudisMitPruefungslisten( String pruefungsSession, String pruefung ) throws StorageException;
 }

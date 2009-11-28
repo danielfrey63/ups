@@ -24,7 +24,6 @@ package ch.xmatrix.ups.uec.specimens.commands;
  */
 public class Commands
 {
-
     public static final String COMMANDID_NEWSPECIMEN = "newSpecimen";
 
     public static final String COMMANDID_DELETESPECIMEN = "deleteSpecimen";

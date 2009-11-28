@@ -33,14 +33,13 @@ import org.pietschy.command.CommandManager;
  */
 public class AddTaxa extends ActionCommand
 {
+    private final SelectionInList models;
 
-    private SelectionInList models;
+    private final TreeSelectionModel selection;
 
-    private TreeSelectionModel selection;
-
-    public AddTaxa(final CommandManager manager, final SelectionInList models, final TreeSelectionModel selection)
+    public AddTaxa( final CommandManager manager, final SelectionInList models, final TreeSelectionModel selection )
     {
-        super(manager, Commands.COMMANDID_ADDTAXA);
+        super( manager, Commands.COMMANDID_ADDTAXA );
         this.models = models;
         this.selection = selection;
     }
@@ -49,20 +48,19 @@ public class AddTaxa extends ActionCommand
     {
         final Constraints constraints = (Constraints) models.getSelection();
         final TreePath[] paths = selection.getSelectionPaths();
-        for (int i = 0; i < paths.length; i++)
+        for ( final TreePath path : paths )
         {
-            final TreePath path = paths[i];
             final SimpleTaxon taxon = (SimpleTaxon) path.getLastPathComponent();
-            if (SimpleTaxon.isSpecies(taxon))
+            if ( SimpleTaxon.isSpecies( taxon ) )
             {
                 final String[] taxa = constraints.getDefaultTaxa();
                 final String[] temp = taxa == null ? new String[0] : taxa;
-                if (!ArrayUtils.contains(temp, taxon))
+                if ( !ArrayUtils.contains( temp, taxon ) )
                 {
-                    constraints.setDefaultTaxa((String[]) ArrayUtils.add(temp, taxon.getName()));
+                    constraints.setDefaultTaxa( (String[]) ArrayUtils.add( temp, taxon.getName() ) );
                 }
             }
-            constraints.addTaxon(taxon.getName());
+            constraints.addTaxon( taxon.getName() );
         }
     }
 }

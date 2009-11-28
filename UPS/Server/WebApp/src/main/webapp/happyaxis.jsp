@@ -39,13 +39,13 @@
      * @param classname
      * @return class iff present
      */
-    Class classExists(final String classname)
+    Class classExists( final String classname )
     {
         try
         {
-            return Class.forName(classname);
+            return Class.forName( classname );
         }
-        catch (ClassNotFoundException e)
+        catch ( ClassNotFoundException e )
         {
             return null;
         }
@@ -56,18 +56,18 @@
      * @param resource
      * @return true iff present
      */
-    boolean resourceExists(final String resource)
+    boolean resourceExists( final String resource )
     {
         final boolean found;
-        final InputStream instream = this.getClass().getResourceAsStream(resource);
+        final InputStream instream = this.getClass().getResourceAsStream( resource );
         found = instream != null;
-        if (instream != null)
+        if ( instream != null )
         {
             try
             {
                 instream.close();
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
             }
         }
@@ -85,51 +85,51 @@
      * @return the number of missing classes
      * @throws IOException
      */
-    int probeClass(final JspWriter out,
-                   final String category,
-                   final String classname,
-                   final String jarFile,
-                   final String description,
-                   final String errorText,
-                   final String homePage) throws IOException
+    int probeClass( final JspWriter out,
+                    final String category,
+                    final String classname,
+                    final String jarFile,
+                    final String description,
+                    final String errorText,
+                    final String homePage ) throws IOException
     {
         try
         {
-            final Class clazz = classExists(classname);
-            if (clazz == null)
+            final Class clazz = classExists( classname );
+            if ( clazz == null )
             {
                 String url = "";
-                if (homePage != null)
+                if ( homePage != null )
                 {
-                    url = getMessage("seeHomepage", homePage, homePage);
+                    url = getMessage( "seeHomepage", homePage, homePage );
                 }
-                out.write(getMessage("couldNotFound", category, classname, jarFile, errorText, url));
+                out.write( getMessage( "couldNotFound", category, classname, jarFile, errorText, url ) );
                 return 1;
             }
             else
             {
-                final String location = getLocation(out, clazz);
+                final String location = getLocation( out, clazz );
 
-                if (location == null)
+                if ( location == null )
                 {
-                    out.write("<li>" + getMessage("foundClass00", description, classname) + "</li><br>");
+                    out.write( "<li>" + getMessage( "foundClass00", description, classname ) + "</li><br>" );
                 }
                 else
                 {
-                    out.write("<li>" + getMessage("foundClass01", description, classname, location) + "</li><br>");
+                    out.write( "<li>" + getMessage( "foundClass01", description, classname, location ) + "</li><br>" );
                 }
                 return 0;
             }
         }
-        catch (NoClassDefFoundError ncdfe)
+        catch ( NoClassDefFoundError ncdfe )
         {
             String url = "";
-            if (homePage != null)
+            if ( homePage != null )
             {
-                url = getMessage("seeHomepage", homePage, homePage);
+                url = getMessage( "seeHomepage", homePage, homePage );
             }
-            out.write(getMessage("couldNotFoundDep", category, classname, errorText, url));
-            out.write(getMessage("theRootCause", ncdfe.getMessage(), classname));
+            out.write( getMessage( "couldNotFoundDep", category, classname, errorText, url ) );
+            out.write( getMessage( "theRootCause", ncdfe.getMessage(), classname ) );
             return 1;
         }
     }
@@ -141,22 +141,22 @@
      * @return the jar file or path where a class was found
      */
 
-    String getLocation(final JspWriter out,
-                       final Class clazz)
+    String getLocation( final JspWriter out,
+                        final Class clazz )
     {
         try
         {
             java.net.URL url = clazz.getProtectionDomain().getCodeSource().getLocation();
             String location = url.toString();
-            if (location.startsWith("jar"))
+            if ( location.startsWith( "jar" ) )
             {
-                url = ((java.net.JarURLConnection) url.openConnection()).getJarFileURL();
+                url = ( (java.net.JarURLConnection) url.openConnection() ).getJarFileURL();
                 location = url.toString();
             }
 
-            if (location.startsWith("file"))
+            if ( location.startsWith( "file" ) )
             {
-                final java.io.File file = new java.io.File(url.getFile());
+                final java.io.File file = new java.io.File( url.getFile() );
                 return file.getAbsolutePath();
             }
             else
@@ -164,10 +164,10 @@
                 return url.toString();
             }
         }
-        catch (Throwable t)
+        catch ( Throwable t )
         {
         }
-        return getMessage("classFoundError");
+        return getMessage( "classFoundError" );
     }
 
     /**
@@ -180,20 +180,20 @@
      * @throws IOException when needed
      * @return the number of missing libraries (0 or 1)
      */
-    int needClass(final JspWriter out,
-                  final String classname,
-                  final String jarFile,
-                  final String description,
-                  final String errorText,
-                  final String homePage) throws IOException
+    int needClass( final JspWriter out,
+                   final String classname,
+                   final String jarFile,
+                   final String description,
+                   final String errorText,
+                   final String homePage ) throws IOException
     {
-        return probeClass(out,
-                "<b>" + getMessage("error") + "</b>",
+        return probeClass( out,
+                "<b>" + getMessage( "error" ) + "</b>",
                 classname,
                 jarFile,
                 description,
                 errorText,
-                homePage);
+                homePage );
     }
 
     /**
@@ -206,20 +206,20 @@
      * @throws IOException when needed
      * @return the number of missing libraries (0 or 1)
      */
-    int wantClass(final JspWriter out,
-                  final String classname,
-                  final String jarFile,
-                  final String description,
-                  final String errorText,
-                  final String homePage) throws IOException
+    int wantClass( final JspWriter out,
+                   final String classname,
+                   final String jarFile,
+                   final String description,
+                   final String errorText,
+                   final String homePage ) throws IOException
     {
-        return probeClass(out,
-                "<b>" + getMessage("warning") + "</b>",
+        return probeClass( out,
+                "<b>" + getMessage( "warning" ) + "</b>",
                 classname,
                 jarFile,
                 description,
                 errorText,
-                homePage);
+                homePage );
     }
 
     /**
@@ -232,7 +232,7 @@
         final ServletContext context = getServletConfig().getServletContext();
         final int major = context.getMajorVersion();
         final int minor = context.getMinorVersion();
-        return Integer.toString(major) + '.' + Integer.toString(minor);
+        return Integer.toString( major ) + '.' + Integer.toString( minor );
     }
 
     /**
@@ -242,14 +242,13 @@
     private String getParserName()
     {
         final SAXParser saxParser = getSAXParser();
-        if (saxParser == null)
+        if ( saxParser == null )
         {
-            return getMessage("couldNotCreateParser");
+            return getMessage( "couldNotCreateParser" );
         }
 
         // check to what is in the classname
-        final String saxParserName = saxParser.getClass().getName();
-        return saxParserName;
+        return saxParser.getClass().getName();
     }
 
     /**
@@ -259,7 +258,7 @@
     private SAXParser getSAXParser()
     {
         final SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-        if (saxParserFactory == null)
+        if ( saxParserFactory == null )
         {
             return null;
         }
@@ -268,7 +267,7 @@
         {
             saxParser = saxParserFactory.newSAXParser();
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
         }
         return saxParser;
@@ -279,15 +278,14 @@
      * @return path or null for trouble in tracking it down
      */
 
-    private String getParserLocation(final JspWriter out)
+    private String getParserLocation( final JspWriter out )
     {
         final SAXParser saxParser = getSAXParser();
-        if (saxParser == null)
+        if ( saxParser == null )
         {
             return null;
         }
-        final String location = getLocation(out, saxParser.getClass());
-        return location;
+        return getLocation( out, saxParser.getClass() );
     }
 
     /**
@@ -296,18 +294,18 @@
      * @param String interface name
      * @return boolean
      */
-    private boolean implementsInterface(final Class clazz, final String interfaceName)
+    private boolean implementsInterface( final Class clazz, final String interfaceName )
     {
-        if (clazz == null)
+        if ( clazz == null )
         {
             return false;
         }
         final Class[] interfaces = clazz.getInterfaces();
-        if (interfaces.length != 0)
+        if ( interfaces.length != 0 )
         {
-            for (int i = 0; i < interfaces.length; i++)
+            for ( final Class anInterface : interfaces )
             {
-                if (interfaces[i].getName().equals(interfaceName))
+                if ( anInterface.getName().equals( interfaceName ) )
                 {
                     return true;
                 }
@@ -321,27 +319,27 @@
 
 <%
     // initialize a private HttpServletRequest
-    setRequest(request);
+    setRequest( request );
 
     // set a resouce base
-    setResouceBase("i18n");
+    setResouceBase( "i18n" );
 %>
 
 <head>
-    <title><%= getMessage("pageTitle") %>
+    <title><%= getMessage( "pageTitle" ) %>
     </title>
 </head>
 <body bgcolor='#ffffff'>
 
 <%
-    out.print("<h1>" + getMessage("pageTitle") + "</h1>");
-    out.print("<h2>" + getMessage("pageRole") + "</h2><p/>");
+    out.print( "<h1>" + getMessage( "pageTitle" ) + "</h1>" );
+    out.print( "<h2>" + getMessage( "pageRole" ) + "</h2><p/>" );
 %>
 
 <%= getLocaleChoice() %>
 
 <%
-    out.print("<h3>" + getMessage("neededComponents") + "</h3>");
+    out.print( "<h3>" + getMessage( "neededComponents" ) + "</h3>" );
 %>
 
 <UL>
@@ -355,101 +353,101 @@
         // need to check if the available version of SAAJ API meets requirements
         final String className = "javax.xml.soap.SOAPPart";
         final String interfaceName = "org.w3c.dom.Document";
-        final Class clazz = classExists(className);
-        if (clazz == null || implementsInterface(clazz, interfaceName))
+        final Class clazz = classExists( className );
+        if ( clazz == null || implementsInterface( clazz, interfaceName ) )
         {
-            needed = needClass(out, "javax.xml.soap.SOAPMessage",
+            needed = needClass( out, "javax.xml.soap.SOAPMessage",
                     "saaj.jar",
                     "SAAJ API",
-                    getMessage("criticalErrorMessage"),
-                    "http://ws.apache.org/axis/");
+                    getMessage( "criticalErrorMessage" ),
+                    "http://ws.apache.org/axis/" );
         }
         else
         {
-            final String location = getLocation(out, clazz);
+            final String location = getLocation( out, clazz );
 
-            out.print(getMessage("invalidSAAJ", location));
-            out.print(getMessage("criticalErrorMessage"));
-            out.print(getMessage("seeHomepage", "http://ws.apache.org/axis/java/install.html", getMessage("axisInstallation")));
-            out.print("<br>");
+            out.print( getMessage( "invalidSAAJ", location ) );
+            out.print( getMessage( "criticalErrorMessage" ) );
+            out.print( getMessage( "seeHomepage", "http://ws.apache.org/axis/java/install.html", getMessage( "axisInstallation" ) ) );
+            out.print( "<br>" );
         }
 
-        needed += needClass(out, "javax.xml.rpc.Service",
+        needed += needClass( out, "javax.xml.rpc.Service",
                 "jaxrpc.jar",
                 "JAX-RPC API",
-                getMessage("criticalErrorMessage"),
-                "http://ws.apache.org/axis/");
+                getMessage( "criticalErrorMessage" ),
+                "http://ws.apache.org/axis/" );
 
-        needed += needClass(out, "org.apache.axis.transport.http.AxisServlet",
+        needed += needClass( out, "org.apache.axis.transport.http.AxisServlet",
                 "axis.jar",
                 "Apache-Axis",
-                getMessage("criticalErrorMessage"),
-                "http://ws.apache.org/axis/");
+                getMessage( "criticalErrorMessage" ),
+                "http://ws.apache.org/axis/" );
 
-        needed += needClass(out, "org.apache.commons.discovery.Resource",
+        needed += needClass( out, "org.apache.commons.discovery.Resource",
                 "commons-discovery.jar",
                 "Jakarta-Commons Discovery",
-                getMessage("criticalErrorMessage"),
-                "http://jakarta.apache.org/commons/discovery/");
+                getMessage( "criticalErrorMessage" ),
+                "http://jakarta.apache.org/commons/discovery/" );
 
-        needed += needClass(out, "org.apache.commons.logging.Log",
+        needed += needClass( out, "org.apache.commons.logging.Log",
                 "commons-logging.jar",
                 "Jakarta-Commons Logging",
-                getMessage("criticalErrorMessage"),
-                "http://jakarta.apache.org/commons/logging/");
+                getMessage( "criticalErrorMessage" ),
+                "http://jakarta.apache.org/commons/logging/" );
 
-        needed += needClass(out, "org.apache.log4j.Layout",
+        needed += needClass( out, "org.apache.log4j.Layout",
                 "log4j-1.2.8.jar",
                 "Log4j",
-                getMessage("uncertainErrorMessage"),
-                "http://jakarta.apache.org/log4j");
+                getMessage( "uncertainErrorMessage" ),
+                "http://jakarta.apache.org/log4j" );
 
         //should we search for a javax.wsdl file here, to hint that it needs
         //to go into an approved directory? because we dont seem to need to do that.
-        needed += needClass(out, "com.ibm.wsdl.factory.WSDLFactoryImpl",
+        needed += needClass( out, "com.ibm.wsdl.factory.WSDLFactoryImpl",
                 "wsdl4j.jar",
                 "IBM's WSDL4Java",
-                getMessage("criticalErrorMessage"),
-                null);
+                getMessage( "criticalErrorMessage" ),
+                null );
 
-        needed += needClass(out, "javax.xml.parsers.SAXParserFactory",
+        needed += needClass( out, "javax.xml.parsers.SAXParserFactory",
                 "xerces.jar",
                 "JAXP implementation",
-                getMessage("criticalErrorMessage"),
-                "http://xml.apache.org/xerces-j/");
+                getMessage( "criticalErrorMessage" ),
+                "http://xml.apache.org/xerces-j/" );
 
-        needed += needClass(out, "javax.activation.DataHandler",
+        needed += needClass( out, "javax.activation.DataHandler",
                 "activation.jar",
                 "Activation API",
-                getMessage("criticalErrorMessage"),
-                "http://java.sun.com/products/javabeans/glasgow/jaf.html");
+                getMessage( "criticalErrorMessage" ),
+                "http://java.sun.com/products/javabeans/glasgow/jaf.html" );
     %>
 </UL>
 <%
-    out.print("<h3>" + getMessage("optionalComponents") + "</h3>");
+    out.print( "<h3>" + getMessage( "optionalComponents" ) + "</h3>" );
 %>
 <UL>
     <%
         /*
         * now the stuff we can live without
         */
-        wanted += wantClass(out, "javax.mail.internet.MimeMessage",
+        wanted += wantClass( out, "javax.mail.internet.MimeMessage",
                 "mail.jar",
                 "Mail API",
-                getMessage("attachmentsError"),
-                "http://java.sun.com/products/javamail/");
+                getMessage( "attachmentsError" ),
+                "http://java.sun.com/products/javamail/" );
 
-        wanted += wantClass(out, "org.apache.xml.security.Init",
+        wanted += wantClass( out, "org.apache.xml.security.Init",
                 "xmlsec.jar",
                 "XML Security API",
-                getMessage("xmlSecurityError"),
-                "http://xml.apache.org/security/");
+                getMessage( "xmlSecurityError" ),
+                "http://xml.apache.org/security/" );
 
-        wanted += wantClass(out, "javax.net.ssl.SSLSocketFactory",
+        wanted += wantClass( out, "javax.net.ssl.SSLSocketFactory",
                 "jsse.jar or java1.4+ runtime",
                 "Java Secure Socket Extension",
-                getMessage("httpsError"),
-                "http://java.sun.com/products/jsse/");
+                getMessage( "httpsError" ),
+                "http://java.sun.com/products/jsse/" );
         /*
         * resources on the classpath path
         */
@@ -458,51 +456,51 @@
     %>
 </UL>
 <%
-    out.write("<h3>");
+    out.write( "<h3>" );
     //is everythng we need here
-    if (needed == 0)
+    if ( needed == 0 )
     {
         //yes, be happy
-        out.write(getMessage("happyResult00"));
+        out.write( getMessage( "happyResult00" ) );
     }
     else
     {
         //no, be very unhappy
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        out.write(getMessage("unhappyResult00", Integer.toString(needed)));
+        response.setStatus( HttpServletResponse.SC_INTERNAL_SERVER_ERROR );
+        out.write( getMessage( "unhappyResult00", Integer.toString( needed ) ) );
     }
     //now look at wanted stuff
-    if (wanted > 0)
+    if ( wanted > 0 )
     {
-        out.write(getMessage("unhappyResult01", Integer.toString(wanted)));
+        out.write( getMessage( "unhappyResult01", Integer.toString( wanted ) ) );
     }
     else
     {
-        out.write(getMessage("happyResult01"));
+        out.write( getMessage( "happyResult01" ) );
     }
-    out.write("</h3>");
+    out.write( "</h3>" );
 %>
 <UL>
     <%
 
         //hint if anything is missing
-        if (needed > 0 || wanted > 0)
+        if ( needed > 0 || wanted > 0 )
         {
-            out.write(getMessage("hintString"));
+            out.write( getMessage( "hintString" ) );
         }
 
-        out.write(getMessage("noteString"));
+        out.write( getMessage( "noteString" ) );
     %>
 </UL>
 
-<h2><%= getMessage("apsExamining") %>
+<h2><%= getMessage( "apsExamining" ) %>
 </h2>
 
 <UL>
     <%
         final String servletVersion = getServletVersion();
         final String xmlParser = getParserName();
-        final String xmlParserLocation = getParserLocation(out);
+        final String xmlParserLocation = getParserLocation( out );
     %>
     <table border="1" cellpadding="10">
         <tr>
@@ -523,14 +521,14 @@
     </table>
 </UL>
 
-<% if (xmlParser.indexOf("crimson") >= 0)
+<% if ( xmlParser.indexOf( "crimson" ) >= 0 )
 { %>
 <p>
-    <%= getMessage("recommendedParser") %>
+    <%= getMessage( "recommendedParser" ) %>
 </p>
 <% } %>
 
-<h2><%= getMessage("sysExamining") %>
+<h2><%= getMessage( "sysExamining" ) %>
 </h2>
 <UL>
     <%
@@ -542,27 +540,27 @@
         {
             e = System.getProperties().propertyNames();
         }
-        catch (SecurityException se)
+        catch ( SecurityException se )
         {
         }
-        if (e != null)
+        if ( e != null )
         {
-            out.write("<pre>");
-            for (; e.hasMoreElements();)
+            out.write( "<pre>" );
+            for (; e.hasMoreElements(); )
             {
                 final String key = (String) e.nextElement();
-                out.write(key + "=" + System.getProperty(key) + "\n");
+                out.write( key + "=" + System.getProperty( key ) + "\n" );
             }
-            out.write("</pre><p>");
+            out.write( "</pre><p>" );
         }
         else
         {
-            out.write(getMessage("sysPropError"));
+            out.write( getMessage( "sysPropError" ) );
         }
     %>
 </UL>
 <hr>
-<%= getMessage("apsPlatform") %>:
+<%= getMessage( "apsPlatform" ) %>:
 <%= getServletConfig().getServletContext().getServerInfo() %>
 </body>
 </html>

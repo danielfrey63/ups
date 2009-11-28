@@ -24,7 +24,6 @@ package ch.xmatrix.ups.uec.constraints.commands;
  */
 public class Commands
 {
-
     public static final String COMMANDID_DELETECONSTRAINT = "delete";
 
     public static final String COMMANDID_NEWCONSTRAINT = "new";

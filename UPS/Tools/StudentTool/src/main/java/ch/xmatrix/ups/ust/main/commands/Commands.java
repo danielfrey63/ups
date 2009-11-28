@@ -46,7 +46,6 @@ import javax.swing.ListSelectionModel;
  */
 public class Commands
 {
-
     public static final String COMMANDID_NEW = "file.new";
 
     public static final String COMMANDID_NEWDEFAULT = "file.newdefault";
@@ -91,28 +90,26 @@ public class Commands
 
     public static XStream getConverterVersion1()
     {
-
         final XStream converter;
-        converter = new XStream(new DomDriver());
-        converter.setMode(XStream.ID_REFERENCES);
-        converter.alias("person", PersonData.class);
-        converter.alias("root", PlantList.class);
-        converter.alias("species", List.class);
+        converter = new XStream( new DomDriver() );
+        converter.setMode( XStream.ID_REFERENCES );
+        converter.alias( "person", PersonData.class );
+        converter.alias( "root", PlantList.class );
+        converter.alias( "species", List.class );
 
         return converter;
     }
 
     public static XStream getConverterVersion2()
     {
-
         final XStream converter;
-        converter = new XStream(new DomDriver());
-        converter.setMode(XStream.ID_REFERENCES);
-        converter.registerConverter(new SqlTimestampConverter());
-        converter.registerConverter(new DateConverter("yyyyMMddHHmmssSSS", new String[]{
-                "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm"}));
-        converter.alias("person", PersonData.class);
-        converter.alias("root", Encoded.class);
+        converter = new XStream( new DomDriver() );
+        converter.setMode( XStream.ID_REFERENCES );
+        converter.registerConverter( new SqlTimestampConverter() );
+        converter.registerConverter( new DateConverter( "yyyyMMddHHmmssSSS", new String[]{
+                "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm"} ) );
+        converter.alias( "person", PersonData.class );
+        converter.alias( "root", Encoded.class );
 
         return converter;
     }
@@ -129,26 +126,26 @@ public class Commands
      * @return whether the choice was canceled
      * @throws PropertyVetoException if the user cancels quitting
      */
-    public static SessionModel runExamInfoChooser(final MainModel model) throws PropertyVetoException
+    public static SessionModel runExamInfoChooser( final MainModel model ) throws PropertyVetoException
     {
         model.setClosing();
-        if (!model.modelValid())
+        if ( !model.modelValid() )
         {
             return null;
         }
         final SelectionInList sessionModels = model.sessionModels;
         final int numberOfSessions = sessionModels.getSize();
-        if (numberOfSessions > 1)
+        if ( numberOfSessions > 1 )
         {
             final JFrame top = model.getMainFrame();
             final SimpleModelList holder = (SimpleModelList) sessionModels.getListHolder().getValue();
-            final ListDialog dialog = new ListDialog(top, "chooseexam", SimpleModelList.toArray(holder));
-            dialog.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            dialog.setListCellRenderer(new SessionListRenderer());
-            dialog.setSize(new Dimension(400, 700));
-            WindowUtils.centerOnComponent(dialog, top);
-            dialog.setVisible(true);
-            if (!dialog.isAccepted())
+            final ListDialog dialog = new ListDialog( top, "chooseexam", SimpleModelList.toArray( holder ) );
+            dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+            dialog.setListCellRenderer( new SessionListRenderer() );
+            dialog.setSize( new Dimension( 400, 700 ) );
+            WindowUtils.centerOnComponent( dialog, top );
+            dialog.setVisible( true );
+            if ( !dialog.isAccepted() )
             {
                 return null;
             }
@@ -159,31 +156,29 @@ public class Commands
         }
         else
         {
-            return (SessionModel) sessionModels.getElementAt(0);
+            return (SessionModel) sessionModels.getElementAt( 0 );
         }
     }
 
-    public static void setNewUserModel(final MainModel model)
+    public static void setNewUserModel( final MainModel model )
     {
-
         final SessionModel sessionModel = (SessionModel) model.sessionModels.getSelection();
         final UserModel userModel = new UserModel();
-        model.setUserModel(userModel);
+        model.setUserModel( userModel );
 
-        final Constraints constraints = (Constraints) AbstractMainModel.findModel(sessionModel.getConstraintsUid());
-        userModel.setExamInfoUid(sessionModel.getUid());
-        userModel.setConstraintsUid(sessionModel.getConstraintsUid());
-        userModel.setTaxaUid(constraints.getTaxaUid());
-        userModel.setTaxa(constraints.getObligateTaxa());
+        final Constraints constraints = (Constraints) AbstractMainModel.findModel( sessionModel.getConstraintsUid() );
+        userModel.setExamInfoUid( sessionModel.getUid() );
+        userModel.setConstraintsUid( sessionModel.getConstraintsUid() );
+        userModel.setTaxaUid( constraints.getTaxaUid() );
+        userModel.setTaxa( constraints.getObligateTaxa() );
 
-        model.setCurrentFile(null);
-        model.setCurrentCard(MainModel.CARDS_EDIT);
-        model.setDirty(false);
+        model.setCurrentFile( null );
+        model.setCurrentCard( MainModel.CARDS_EDIT );
+        model.setDirty( false );
     }
 
     public static class Encoded
     {
-
         public List list;
 
         public String uid;

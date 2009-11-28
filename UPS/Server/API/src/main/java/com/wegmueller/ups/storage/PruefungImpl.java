@@ -8,15 +8,15 @@ import com.wegmueller.ups.lka.IPruefung;
  */
 public class PruefungImpl implements IPruefung
 {
-    private String lkNummer;
+    private final String lkNummer;
 
-    public PruefungImpl(final String lkNummer, final String title)
+    public PruefungImpl( final String lkNummer, final String title )
     {
         this.lkNummer = lkNummer;
         this.title = title;
     }
 
-    private String title;
+    private final String title;
 
     public String getLKNummer()
     {

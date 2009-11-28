@@ -24,20 +24,19 @@ import javax.swing.ListModel;
  */
 public class CoursePersister extends DirtyCapableModel
 {
-
     private static XStream converter;
 
     private static ListModel constraints;
 
     public static XStream getConverter()
     {
-        if (converter == null)
+        if ( converter == null )
         {
             converter = SimpleModelList.getConverter();
-            converter.setMode(XStream.ID_REFERENCES);
-            converter.alias("courses", SimpleModelList.class);
-            converter.alias("course", CourseModel.class);
-            converter.aliasField("lknr", CourseModel.class, "uid");
+            converter.setMode( XStream.ID_REFERENCES );
+            converter.alias( "courses", SimpleModelList.class );
+            converter.alias( "course", CourseModel.class );
+            converter.aliasField( "lknr", CourseModel.class, "uid" );
         }
         return converter;
     }

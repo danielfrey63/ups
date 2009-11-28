@@ -11,13 +11,12 @@ import ch.xmatrix.ups.domain.TaxonBased;
  */
 public interface DetailsBuilder extends Builder
 {
-
     /**
      * Apply the new model to your editor.
      *
      * @param taxonBased the new model
      */
-    void setModel(TaxonBased taxonBased);
+    void setModel( TaxonBased taxonBased );
 
     /**
      * The details builder is called to enable the details when a selection in the master details builder changes. Make
@@ -25,17 +24,21 @@ public interface DetailsBuilder extends Builder
      *
      * @param enabled whether the details should be enabled or not.
      */
-    void setEnabled(boolean enabled);
+    void setEnabled( boolean enabled );
 
     void load();
 
-    /** Save the data. */
+    /**
+     * Save the data.
+     */
     void save();
 
-    /** Locks the gui and sets the models fixed state. */
+    /**
+     * Locks the gui and sets the models fixed state.
+     */
     void lock();
 
-    boolean handleMigration(TaxonBased model, String uid);
+    boolean handleMigration( TaxonBased model, String uid );
 
-    void registerDirtyListener(DirtyListener dirtyListener);
+    void registerDirtyListener( DirtyListener dirtyListener );
 }

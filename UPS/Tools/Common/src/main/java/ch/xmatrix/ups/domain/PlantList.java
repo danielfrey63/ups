@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class PlantList
 {
-
     private PersonData person;
 
     private List<String> taxa;
@@ -31,7 +30,7 @@ public class PlantList
         return person;
     }
 
-    public void setPerson(final PersonData person)
+    public void setPerson( final PersonData person )
     {
         this.person = person;
     }
@@ -41,13 +40,13 @@ public class PlantList
         return taxa;
     }
 
-    public void setTaxa(final List<String> taxa)
+    public void setTaxa( final List<String> taxa )
     {
         this.taxa = taxa;
     }
 
     public String toString()
     {
-        return (person != null ? person.toString() + " - " : "") + taxa.size();
+        return ( person != null ? person.toString() + " - " : "" ) + taxa.size();
     }
 }

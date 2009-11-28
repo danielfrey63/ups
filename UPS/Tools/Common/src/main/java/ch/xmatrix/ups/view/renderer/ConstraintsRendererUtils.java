@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class ConstraintsRendererUtils
 {
-
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 
     private static final String[] EMPTY_STRINGS = new String[0];
@@ -41,16 +40,16 @@ public class ConstraintsRendererUtils
 
     protected List<String> defaultTaxa;
 
-    public void setConstraint(final Constraint constraint)
+    public void setConstraint( final Constraint constraint )
     {
         constraintTaxa = constraint == null ? null : constraint.getTaxa();
     }
 
-    public void setConstraints(final Constraints constraints)
+    public void setConstraints( final Constraints constraints )
     {
         this.constraints = constraints;
         final String[] defaultTaxa = constraints == null ? EMPTY_STRINGS : constraints.getDefaultTaxa();
-        this.defaultTaxa = defaultTaxa == null ? DUMMY_LIST : new ArrayList<String>(Arrays.asList(defaultTaxa));
+        this.defaultTaxa = defaultTaxa == null ? DUMMY_LIST : new ArrayList<String>( Arrays.asList( defaultTaxa ) );
     }
 
     public Constraints getConstraints()
@@ -70,28 +69,28 @@ public class ConstraintsRendererUtils
      * @param taxa        the taxa list
      * @param hideName    whether the constraint has the same name as the single taxon n it
      */
-    public static void configureForConstraint(final RendererPanel panel, final Constraints constraints,
-                                              final Constraint constraint, final ArrayList<String> taxa,
-                                              final boolean hideName)
+    public static void configureForConstraint( final RendererPanel panel, final Constraints constraints,
+                                               final Constraint constraint, final ArrayList<String> taxa,
+                                               final boolean hideName )
     {
         final StringBuilder builder = new StringBuilder();
-        if (constraint != null)
+        if ( constraint != null )
         {
             final int minimalCount = constraint.getMinimalCount();
-            final int actualCount = getTotalCount(constraint, constraints, taxa);
-            builder.append(" (");
-            builder.append(hideName ? "" : constraint.getName());
-            builder.append(hideName ? "" : " ");
-            builder.append(actualCount);
-            builder.append("/");
-            builder.append(minimalCount);
-            builder.append(")");
-            panel.setExtentionText(builder.toString());
-            panel.setOk(actualCount >= minimalCount);
+            final int actualCount = getTotalCount( constraint, constraints, taxa );
+            builder.append( " (" );
+            builder.append( hideName ? "" : constraint.getName() );
+            builder.append( hideName ? "" : " " );
+            builder.append( actualCount );
+            builder.append( "/" );
+            builder.append( minimalCount );
+            builder.append( ")" );
+            panel.setExtentionText( builder.toString() );
+            panel.setOk( actualCount >= minimalCount );
         }
         else
         {
-            panel.setExtentionText(null);
+            panel.setExtentionText( null );
         }
     }
 
@@ -104,36 +103,36 @@ public class ConstraintsRendererUtils
      * @param taxa        the taxa for which to decide (and count) whether they belong to the constraint or not
      * @return the number of taxa in the scope of the constraint
      */
-    public static int getTotalCount(final Constraint constraint, final Constraints constraints,
-                                    final ArrayList<String> taxa)
+    public static int getTotalCount( final Constraint constraint, final Constraints constraints,
+                                     final ArrayList<String> taxa )
     {
         final String uid = constraints.getTaxaUid();
-        final TaxonTree tree = TaxonModels.find(uid);
+        final TaxonTree tree = TaxonModels.find( uid );
         final List<String> constraintTaxa = constraint.getTaxa();
         int count = 0;
-        for (int i = 0; tree != null && constraintTaxa != null && i < constraintTaxa.size(); i++)
+        for ( int i = 0; tree != null && constraintTaxa != null && i < constraintTaxa.size(); i++ )
         {
-            final String constraintTaxonName = (String) constraintTaxa.get(i);
-            final SimpleTaxon constraintTaxon = tree.findTaxonByName(constraintTaxonName);
-            count += getTotalCount(constraintTaxon, taxa);
+            final String constraintTaxonName = constraintTaxa.get( i );
+            final SimpleTaxon constraintTaxon = tree.findTaxonByName( constraintTaxonName );
+            count += getTotalCount( constraintTaxon, taxa );
         }
         return count;
     }
 
-    private static int getTotalCount(final SimpleTaxon constraintTaxon, final ArrayList<String> taxa)
+    private static int getTotalCount( final SimpleTaxon constraintTaxon, final ArrayList<String> taxa )
     {
         final String name = constraintTaxon.getName();
         assert constraintTaxon == null : "taxon " + name + " not found in taxon tree";
         int count = 0;
-        if (taxa.contains(name))
+        if ( taxa.contains( name ) )
         {
             count++;
         }
         final ArrayList<SimpleTaxon> childTaxa = constraintTaxon.getChildTaxa();
-        for (int i = 0; childTaxa != null && i < childTaxa.size(); i++)
+        for ( int i = 0; childTaxa != null && i < childTaxa.size(); i++ )
         {
-            final SimpleTaxon child = childTaxa.get(i);
-            count += getTotalCount(child, taxa);
+            final SimpleTaxon child = childTaxa.get( i );
+            count += getTotalCount( child, taxa );
         }
         return count;
     }
@@ -145,16 +144,15 @@ public class ConstraintsRendererUtils
      * @param taxa        the taxa to take into account
      * @return the number of complete constraints
      */
-    public static int getCompleteConstraints(final Constraints constraints, final ArrayList<String> taxa)
+    public static int getCompleteConstraints( final Constraints constraints, final ArrayList<String> taxa )
     {
         final ArrayList<Constraint> allConstraints = constraints.getConstraints();
         int count = 0;
-        for (int i = 0; i < allConstraints.size(); i++)
+        for ( final Constraint constraint : allConstraints )
         {
-            final Constraint constraint = allConstraints.get(i);
             final int minimalCount = constraint.getMinimalCount();
-            final int actualCount = getTotalCount(constraint, constraints, taxa);
-            if (actualCount >= minimalCount)
+            final int actualCount = getTotalCount( constraint, constraints, taxa );
+            if ( actualCount >= minimalCount )
             {
                 count++;
             }

@@ -26,7 +26,6 @@ import ch.xmatrix.ups.domain.AbstractTaxonBased;
  */
 public class ExamModel extends AbstractTaxonBased
 {
-
     private String prefsUid;
 
     private String levelsUid;
@@ -39,7 +38,7 @@ public class ExamModel extends AbstractTaxonBased
 
     private String submitUid;
 
-    public ExamModel(final ExamModel original)
+    public ExamModel( final ExamModel original )
     {
         prefsUid = original.prefsUid;
         levelsUid = original.levelsUid;
@@ -59,7 +58,7 @@ public class ExamModel extends AbstractTaxonBased
         return prefsUid;
     }
 
-    public void setPrefsUid(final String prefsUid)
+    public void setPrefsUid( final String prefsUid )
     {
         this.prefsUid = prefsUid;
     }
@@ -69,7 +68,7 @@ public class ExamModel extends AbstractTaxonBased
         return levelsUid;
     }
 
-    public void setLevelsUid(final String levelsUid)
+    public void setLevelsUid( final String levelsUid )
     {
         this.levelsUid = levelsUid;
     }
@@ -79,7 +78,7 @@ public class ExamModel extends AbstractTaxonBased
         return groupsUid;
     }
 
-    public void setGroupsUid(final String groupsUid)
+    public void setGroupsUid( final String groupsUid )
     {
         this.groupsUid = groupsUid;
     }
@@ -89,7 +88,7 @@ public class ExamModel extends AbstractTaxonBased
         return specimensUid;
     }
 
-    public void setSpecimensUid(final String specimensUid)
+    public void setSpecimensUid( final String specimensUid )
     {
         this.specimensUid = specimensUid;
     }
@@ -99,7 +98,7 @@ public class ExamModel extends AbstractTaxonBased
         return constraintsUid;
     }
 
-    public void setConstraintsUid(final String constraintsUid)
+    public void setConstraintsUid( final String constraintsUid )
     {
         this.constraintsUid = constraintsUid;
     }
@@ -121,9 +120,9 @@ public class ExamModel extends AbstractTaxonBased
      * @param index the uid index
      * @return the uid
      */
-    public String get(final int index)
+    public String get( final int index )
     {
-        switch (index)
+        switch ( index )
         {
             case 0:
                 return prefsUid;
@@ -136,31 +135,31 @@ public class ExamModel extends AbstractTaxonBased
             case 4:
                 return constraintsUid;
             default:
-                throw new IllegalArgumentException("uid " + index + " not known");
+                throw new IllegalArgumentException( "uid " + index + " not known" );
         }
     }
 
-    public void setUid(final int which, final String uid)
+    public void setUid( final int which, final String uid )
     {
-        switch (which)
+        switch ( which )
         {
             case 0:
-                setPrefsUid(uid);
+                setPrefsUid( uid );
                 break;
             case 1:
-                setGroupsUid(uid);
+                setGroupsUid( uid );
                 break;
             case 2:
-                setSpecimensUid(uid);
+                setSpecimensUid( uid );
                 break;
             case 3:
-                setLevelsUid(uid);
+                setLevelsUid( uid );
                 break;
             case 4:
-                setConstraintsUid(uid);
+                setConstraintsUid( uid );
                 break;
             default:
-                throw new IllegalArgumentException("uid " + which + " cannot be set");
+                throw new IllegalArgumentException( "uid " + which + " cannot be set" );
         }
     }
 }

@@ -48,17 +48,16 @@ import org.pietschy.command.CommandManager;
  */
 public class OpenCommand extends ActionCommand
 {
+    private static final Logger LOG = Logger.getLogger( OpenCommand.class );
 
-    private static final Logger LOG = Logger.getLogger(OpenCommand.class);
+    private final MainModel model;
 
-    private MainModel model;
+    private final ExtentionFileFilter filter = new ExtentionFileFilter( Strings.getString( "openchooser.filetype.description" ),
+            new String[]{Commands.OLD_FILE_EXTENTION, Commands.NEW_FILE_EXTENTION}, true );
 
-    private ExtentionFileFilter filter = new ExtentionFileFilter(Strings.getString("openchooser.filetype.description"),
-            new String[]{Commands.OLD_FILE_EXTENTION, Commands.NEW_FILE_EXTENTION}, true);
-
-    public OpenCommand(final CommandManager commandManager, final MainModel model)
+    public OpenCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_OPEN);
+        super( commandManager, Commands.COMMANDID_OPEN );
         this.model = model;
     }
 
@@ -67,52 +66,51 @@ public class OpenCommand extends ActionCommand
         try
         {
             model.setClosing();
-            if (!model.modelValid())
+            if ( !model.modelValid() )
             {
                 return;
             }
             new PlantlistOpenChooser().open();
         }
-        catch (PropertyVetoException e)
+        catch ( PropertyVetoException e )
         {
         }
     }
 
     private class PlantlistOpenChooser extends OpenChooser
     {
-
         public PlantlistOpenChooser()
         {
-            super(OpenCommand.this.filter, "openchooser", OpenCommand.this.model.getLastOpenSaveDirectory());
+            super( OpenCommand.this.filter, "openchooser", OpenCommand.this.model.getLastOpenSaveDirectory() );
         }
 
-        protected void load(final File file)
+        protected void load( final File file )
         {
-            LOG.info("loading file " + file);
+            LOG.info( "loading file " + file );
             try
             {
                 List<String> list = null;
                 String uid = null;
                 String examInfoUid = null;
-                if (file.getName().endsWith(Commands.NEW_FILE_EXTENTION))
+                if ( file.getName().endsWith( Commands.NEW_FILE_EXTENTION ) )
                 {
                     final XStream[] decoders = new XStream[]{
                             Commands.getConverterVersion1(), Commands.getConverterVersion2()};
                     boolean done = false;
-                    for (int i = 0; i < decoders.length && !done; i++)
+                    for ( int i = 0; i < decoders.length && !done; i++ )
                     {
                         Reader reader = null;
                         try
                         {
                             final XStream decoder = decoders[i];
-                            reader = new FileReader(file);
-                            final Object decoded = decoder.fromXML(reader);
-                            if (decoded instanceof Commands.Encoded)
+                            reader = new FileReader( file );
+                            final Object decoded = decoder.fromXML( reader );
+                            if ( decoded instanceof Commands.Encoded )
                             {
                                 final Commands.Encoded encoded = (Commands.Encoded) decoded;
                                 uid = encoded.uid;
                                 list = (List<String>) encoded.list;
-                                if (list == null)
+                                if ( list == null )
                                 {
                                     reader.close();
                                     continue;
@@ -120,49 +118,49 @@ public class OpenCommand extends ActionCommand
                                 examInfoUid = encoded.exam;
                                 done = true;
                             }
-                            else if (decoded instanceof PlantList)
+                            else if ( decoded instanceof PlantList )
                             {
                                 final PlantList plantList = (PlantList) decoded;
                                 list = plantList.getTaxa();
                                 done = true;
                             }
-                            else if (decoded instanceof ArrayList)
+                            else if ( decoded instanceof ArrayList )
                             {
                                 list = (ArrayList<String>) decoded;
                                 done = true;
                             }
                             else
                             {
-                                throw new IllegalStateException("Unknown format in file \"" + file + "\"");
+                                throw new IllegalStateException( "Unknown format in file \"" + file + "\"" );
                             }
                         }
-                        catch (ConversionException e)
+                        catch ( ConversionException e )
                         {
-                            if (i < decoders.length - 1)
+                            if ( i < decoders.length - 1 )
                             {
-                                LOG.info("decoder failed, trying another");
+                                LOG.info( "decoder failed, trying another" );
                             }
                             else
                             {
-                                LOG.info("no decoder matches");
+                                LOG.info( "no decoder matches" );
                             }
                         }
                         finally
                         {
-                            if (reader != null)
+                            if ( reader != null )
                             {
                                 reader.close();
                             }
                         }
                     }
                 }
-                else if (file.getName().endsWith(Commands.OLD_FILE_EXTENTION))
+                else if ( file.getName().endsWith( Commands.OLD_FILE_EXTENTION ) )
                 {
-                    final InputStream stream = new FileInputStream(file);
-                    final XMLDecoder decoder = new XMLDecoder(stream);
+                    final InputStream stream = new FileInputStream( file );
+                    final XMLDecoder decoder = new XMLDecoder( stream );
                     final Object decoded = decoder.readObject();
                     // Skip person data if there
-                    if (!(decoded instanceof ArrayList))
+                    if ( !( decoded instanceof ArrayList ) )
                     {
                         list = (ArrayList<String>) decoder.readObject();
                     }
@@ -174,64 +172,60 @@ public class OpenCommand extends ActionCommand
                 }
                 else
                 {
-                    model.setError("error.openwrongfileformat");
-                    throw new IllegalStateException("only UST and XUST files may be opened.");
+                    model.setError( "error.openwrongfileformat" );
+                    throw new IllegalStateException( "only UST and XUST files may be opened." );
                 }
 
                 final boolean canceled = false;
                 boolean toUpdate = false;
-                if (examInfoUid == null || "".equals(examInfoUid) || MainModel.findModel(examInfoUid) == null)
+                if ( examInfoUid == null || "".equals( examInfoUid ) || MainModel.findModel( examInfoUid ) == null )
                 {
-                    Dialogs.showInfoMessage(model.getMainFrame().getRootPane(), "Hinweis",
+                    Dialogs.showInfoMessage( model.getMainFrame().getRootPane(), "Hinweis",
                             "Die Pflanzenliste ist von einer früheren Version des UPS Studenten Tools.\n" +
                                     "Sie wird im Folgenden in die neue Version konvertiert. Zuerst wird ein Dialog\n" +
                                     "gezeigt, mit dem Sie die Prüfungskonfiguration für Ihre Liste auswählen können,\n" +
                                     "dann wird ein Speichern-Dialog gezeigt, mit dem Sie die konvertierte Pflanzenliste\n" +
                                     "*unter einem anderen Name* speichern sollten. Verwenden Sie dann nur noch die\n" +
-                                    "neue Version.");
-                    final SessionModel sessionModel = Commands.runExamInfoChooser(model);
-                    if (sessionModel != null)
+                                    "neue Version." );
+                    final SessionModel sessionModel = Commands.runExamInfoChooser( model );
+                    if ( sessionModel != null )
                     {
                         examInfoUid = sessionModel.getUid();
-                        model.sessionModels.setSelection(sessionModel);
-                        LOG.info("exam info uid assigned: " + examInfoUid);
+                        model.sessionModels.setSelection( sessionModel );
+                        LOG.info( "exam info uid assigned: " + examInfoUid );
                         toUpdate = true;
 
                     }
                     else
                     {
-                        LOG.info("user canceled selection of new exam info uid");
+                        LOG.info( "user canceled selection of new exam info uid" );
                     }
                 }
-                if (uid == null || "".equals(uid))
+                if ( uid == null || "".equals( uid ) )
                 {
                     uid = new RandomGUID().toString();
-                    LOG.info("new user info guid generated: " + uid);
+                    LOG.info( "new user info guid generated: " + uid );
                 }
-                if (!canceled)
+                model.sessionModels.setSelection( MainModel.findModel( examInfoUid ) );
+                Commands.setNewUserModel( model );
+
+                final UserModel userModel = model.getUserModel();
+                userModel.setUid( uid );
+                userModel.setExamInfoUid( examInfoUid );
+                userModel.setTaxa( new ArrayList<String>( list ) );
+
+                model.setLastOpenSaveDirectory( file.getParentFile().getAbsolutePath() );
+                model.setDirty( false );
+                model.setCurrentFile( file );
+                model.setOpening();
+                if ( toUpdate )
                 {
-
-                    model.sessionModels.setSelection(MainModel.findModel(examInfoUid));
-                    Commands.setNewUserModel(model);
-
-                    final UserModel userModel = model.getUserModel();
-                    userModel.setUid(uid);
-                    userModel.setExamInfoUid(examInfoUid);
-                    userModel.setTaxa(new ArrayList<String>(list));
-
-                    model.setLastOpenSaveDirectory(file.getParentFile().getAbsolutePath());
-                    model.setDirty(false);
-                    model.setCurrentFile(file);
-                    model.setOpening();
-                }
-                if (toUpdate)
-                {
-                    getCommandManager().getCommand(Commands.COMMANDID_SAVEAS).execute();
+                    getCommandManager().getCommand( Commands.COMMANDID_SAVEAS ).execute();
                 }
             }
-            catch (Exception e1)
+            catch ( Exception e1 )
             {
-                LOG.error("file not compliant with xust format", e1);
+                LOG.error( "file not compliant with xust format", e1 );
             }
         }
     }

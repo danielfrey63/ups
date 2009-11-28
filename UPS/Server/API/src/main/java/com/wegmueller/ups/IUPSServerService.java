@@ -5,7 +5,9 @@ import com.wegmueller.ups.lka.ILKABusinessDelegate;
 import com.wegmueller.ups.storage.IStorage;
 import com.wegmueller.ups.ust.IUSTBusinessDelegate;
 
-/** Server Service interface Date: 26.09.2005,  19:41:45 */
+/**
+ * Server Service interface Date: 26.09.2005,  19:41:45
+ */
 public interface IUPSServerService
 {
     /**

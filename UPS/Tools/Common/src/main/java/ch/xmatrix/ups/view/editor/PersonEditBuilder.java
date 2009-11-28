@@ -45,18 +45,17 @@ import org.apache.log4j.Logger;
  */
 public class PersonEditBuilder implements Builder
 {
+    private static final Logger LOG = Logger.getLogger( PersonEditBuilder.class );
 
-    private static final Logger LOG = Logger.getLogger(PersonEditBuilder.class);
+    private final Trigger trigger = new Trigger();
 
-    private Trigger trigger = new Trigger();
+    private final List<CompletionListener> listeners = new ArrayList<CompletionListener>();
 
-    private List<CompletionListener> listeners = new ArrayList<CompletionListener>();
-
-    private Notifier notifier = new Notifier();
+    private final Notifier notifier = new Notifier();
 
     private boolean complete = false;
 
-    private PersonData person;
+    private final PersonData person;
 
     private JPanel panel;
 
@@ -70,7 +69,7 @@ public class PersonEditBuilder implements Builder
 
     private String pattern;
 
-    public PersonEditBuilder(final PersonData person)
+    public PersonEditBuilder( final PersonData person )
     {
         this.person = person;
         build();
@@ -90,67 +89,67 @@ public class PersonEditBuilder implements Builder
     {
         try
         {
-            final FormCreator creator = new FormCreator(FormLoader.load("ch/xmatrix/ups/view/editor/PersonEdit.jfd"));
+            final FormCreator creator = new FormCreator( FormLoader.load( "ch/xmatrix/ups/view/editor/PersonEdit.jfd" ) );
             creator.createAll();
-            panel = creator.getPanel("panel");
+            panel = creator.getPanel( "panel" );
 
-            firstNameField = creator.getTextField("fieldFirstname");
-            final PropertyAdapter adapter0 = new PropertyAdapter(person, PersonData.FIRST_NAME);
-            firstNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter0, trigger), new FirstNameDocument()));
-            firstNameField.getDocument().addDocumentListener(notifier);
+            firstNameField = creator.getTextField( "fieldFirstname" );
+            final PropertyAdapter adapter0 = new PropertyAdapter( person, PersonData.FIRST_NAME );
+            firstNameField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter0, trigger ), new FirstNameDocument() ) );
+            firstNameField.getDocument().addDocumentListener( notifier );
 
-            lastNameField = creator.getTextField("fieldFamilyname");
-            final PropertyAdapter adapter1 = new PropertyAdapter(person, PersonData.LAST_NAME);
-            lastNameField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter1, trigger), new LastNameDocument()));
-            lastNameField.getDocument().addDocumentListener(notifier);
+            lastNameField = creator.getTextField( "fieldFamilyname" );
+            final PropertyAdapter adapter1 = new PropertyAdapter( person, PersonData.LAST_NAME );
+            lastNameField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter1, trigger ), new LastNameDocument() ) );
+            lastNameField.getDocument().addDocumentListener( notifier );
 
-            idField = (FixedFormatTextField) creator.getTextField("fieldId");
-            final PropertyAdapter adapter2 = new PropertyAdapter(person, PersonData.ID);
-            idField.setDocument(new DocumentAdapter(new BufferedValueModel(adapter2, trigger), idField.getDocument()));
-            idField.getDocument().addDocumentListener(notifier);
+            idField = (FixedFormatTextField) creator.getTextField( "fieldId" );
+            final PropertyAdapter adapter2 = new PropertyAdapter( person, PersonData.ID );
+            idField.setDocument( new DocumentAdapter( new BufferedValueModel( adapter2, trigger ), idField.getDocument() ) );
+            idField.getDocument().addDocumentListener( notifier );
 
-            comboCourse = creator.getComboBox("comboCourse");
-            final PropertyAdapter adapter = new PropertyAdapter(person, PersonData.COURSE);
+            comboCourse = creator.getComboBox( "comboCourse" );
+            final PropertyAdapter adapter = new PropertyAdapter( person, PersonData.COURSE );
             final ArrayList<String> courseList = new ArrayList<String>();
             final ListModel list = comboCourse.getModel();
-            for (int i = 0; i < list.getSize(); i++)
+            for ( int i = 0; i < list.getSize(); i++ )
             {
-                courseList.add((String) list.getElementAt(i));
+                courseList.add( (String) list.getElementAt( i ) );
             }
-            comboCourse.setModel(new ComboBoxAdapter((ListModel) new SelectionInList(courseList), new BufferedValueModel(adapter, trigger)));
-            comboCourse.addActionListener(new ActionListener()
+            comboCourse.setModel( new ComboBoxAdapter( (ListModel) new SelectionInList( courseList ), new BufferedValueModel( adapter, trigger ) ) );
+            comboCourse.addActionListener( new ActionListener()
             {
-                public void actionPerformed(final ActionEvent e)
+                public void actionPerformed( final ActionEvent e )
                 {
                     notifyComplete();
                 }
-            });
+            } );
 
             pattern = idField.getPattern();
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOG.error("could not load form", e);
+            LOG.error( "could not load form", e );
         }
     }
 
     public boolean isComplete()
     {
-        return !firstNameField.getText().equals("") &&
-                !lastNameField.getText().equals("") &&
-                !comboCourse.getSelectedItem().equals("") &&
-                !idField.getText().equals(pattern);
+        return !firstNameField.getText().equals( "" ) &&
+                !lastNameField.getText().equals( "" ) &&
+                !comboCourse.getSelectedItem().equals( "" ) &&
+                !idField.getText().equals( pattern );
     }
 
     private class FirstNameDocument extends AbstractPlainDocument
     {
-        protected boolean validate(final String newValue)
+        protected boolean validate( final String newValue )
         {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++)
+            for ( int i = 0; i < newValue.length(); i++ )
             {
-                final char c = newValue.charAt(i);
-                ret &= Character.isLetter(c) || c == ' ' || c == '-';
+                final char c = newValue.charAt( i );
+                ret &= Character.isLetter( c ) || c == ' ' || c == '-';
             }
             notifyComplete();
             return ret;
@@ -159,13 +158,13 @@ public class PersonEditBuilder implements Builder
 
     private class LastNameDocument extends AbstractPlainDocument
     {
-        protected boolean validate(final String newValue)
+        protected boolean validate( final String newValue )
         {
             boolean ret = true;
-            for (int i = 0; i < newValue.length(); i++)
+            for ( int i = 0; i < newValue.length(); i++ )
             {
-                final char c = newValue.charAt(i);
-                ret &= Character.isLetter(c) || c == ' ' || c == '-' || c == '(' || c == ')';
+                final char c = newValue.charAt( i );
+                ret &= Character.isLetter( c ) || c == ' ' || c == '-' || c == '(' || c == ')';
             }
             return ret;
         }
@@ -173,32 +172,30 @@ public class PersonEditBuilder implements Builder
 
     public interface CompletionListener
     {
-        void updateComplete(boolean complete);
+        void updateComplete( boolean complete );
     }
 
-    public void addCompletionListener(final CompletionListener listener)
+    public void addCompletionListener( final CompletionListener listener )
     {
-        listeners.add(listener);
+        listeners.add( listener );
     }
 
     private void notifyComplete()
     {
         final boolean oldComplete = complete;
         complete = isComplete();
-        if (oldComplete != complete)
+        if ( oldComplete != complete )
         {
-            for (int i = 0; i < listeners.size(); i++)
+            for ( final CompletionListener listener : listeners )
             {
-                final CompletionListener listener = listeners.get(i);
-                listener.updateComplete(complete);
+                listener.updateComplete( complete );
             }
         }
     }
 
     private class Notifier extends SimpleDocumentListener
     {
-
-        public void changedUpdate(final DocumentEvent e)
+        public void changedUpdate( final DocumentEvent e )
         {
             notifyComplete();
         }

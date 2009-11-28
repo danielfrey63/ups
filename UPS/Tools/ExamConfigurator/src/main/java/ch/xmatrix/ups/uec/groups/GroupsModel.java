@@ -32,8 +32,9 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class GroupsModel extends AbstractTaxonBased
 {
-
-    /** List of {@link GroupModel}s. */
+    /**
+     * List of {@link GroupModel}s.
+     */
     private ArrayList<GroupModel> groups = new ArrayList<GroupModel>();
 
     private Map<String, GroupModel> index = new HashMap<String, GroupModel>();
@@ -45,40 +46,40 @@ public class GroupsModel extends AbstractTaxonBased
         super();
     }
 
-    public GroupsModel(final GroupsModel orig)
+    public GroupsModel( final GroupsModel orig )
     {
-        super(orig);
-        for (int i = 0; i < orig.groups.size(); i++)
+        super( orig );
+        for ( int i = 0; i < orig.groups.size(); i++ )
         {
-            final GroupModel origModel = orig.groups.get(i);
-            final GroupModel group = new GroupModel(origModel);
-            groups.add(group);
+            final GroupModel origModel = orig.groups.get( i );
+            final GroupModel group = new GroupModel( origModel );
+            groups.add( group );
             final ArrayList taxa = group.getTaxa();
-            for (int j = 0; j < taxa.size(); j++)
+            for ( final Object aTaxa : taxa )
             {
-                final String taxon = (String) taxa.get(j);
-                index.put(taxon, group);
+                final String taxon = (String) aTaxa;
+                index.put( taxon, group );
             }
         }
     }
 
-    public void addTaxon(final String taxon)
+    public void addTaxon( final String taxon )
     {
-        if (index == null)
+        if ( index == null )
         {
             index = new HashMap<String, GroupModel>();
         }
-        index.put(taxon, currentGroup);
-        currentGroup.addTaxon(taxon);
+        index.put( taxon, currentGroup );
+        currentGroup.addTaxon( taxon );
     }
 
-    public void removeTaxon(final String taxon)
+    public void removeTaxon( final String taxon )
     {
-        index.remove(taxon);
-        currentGroup.removeTaxon(taxon);
+        index.remove( taxon );
+        currentGroup.removeTaxon( taxon );
     }
 
-    public void setCurrentGroup(final GroupModel currentGroup)
+    public void setCurrentGroup( final GroupModel currentGroup )
     {
         this.currentGroup = currentGroup;
     }
@@ -88,35 +89,35 @@ public class GroupsModel extends AbstractTaxonBased
         return currentGroup;
     }
 
-    public void addGroup(final GroupModel group)
+    public void addGroup( final GroupModel group )
     {
-        if (groups == null)
+        if ( groups == null )
         {
             groups = new ArrayList<GroupModel>();
         }
-        groups.add(group);
+        groups.add( group );
         currentGroup = group;
     }
 
     public void removeGroup()
     {
-        final int i = groups.indexOf(currentGroup);
+        final int i = groups.indexOf( currentGroup );
         final ArrayList taxa = currentGroup.getTaxa();
-        for (final Iterator iterator = taxa.iterator(); iterator.hasNext();)
+        for ( final Iterator iterator = taxa.iterator(); iterator.hasNext(); )
         {
             final String taxon = (String) iterator.next();
-            index.remove(taxon);
+            index.remove( taxon );
             iterator.remove();
         }
-        groups.remove(currentGroup);
+        groups.remove( currentGroup );
         final int size = groups.size();
-        currentGroup = (GroupModel) (size == 0 ? null : groups.get(i < size ? i : (size - 1)));
+        currentGroup = size == 0 ? null : groups.get( i < size ? i : ( size - 1 ) );
     }
 
     public ArrayList<GroupModel> getGroups()
     {
         final ArrayList<GroupModel> result;
-        if (groups == null)
+        if ( groups == null )
         {
             result = new ArrayList<GroupModel>();
         }
@@ -127,9 +128,9 @@ public class GroupsModel extends AbstractTaxonBased
         return result;
     }
 
-    public GroupModel find(final String taxon)
+    public GroupModel find( final String taxon )
     {
-        return index.get(taxon);
+        return index.get( taxon );
     }
 
     public String toString()
@@ -139,6 +140,6 @@ public class GroupsModel extends AbstractTaxonBased
 
     public String toDebugString()
     {
-        return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).toString();
+        return new ReflectionToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE ).toString();
     }
 }

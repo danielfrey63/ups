@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class Constraint
 {
-
     private String name;
 
     private int minimalCount;
@@ -37,12 +36,12 @@ public class Constraint
         name = "<Neue Vorgabe>";
     }
 
-    public Constraint(final Constraint orig)
+    public Constraint( final Constraint orig )
     {
         name = orig.name;
         minimalCount = orig.minimalCount;
         constraints = orig.constraints;
-        taxa = new ArrayList<String>(orig.taxa);
+        taxa = new ArrayList<String>( orig.taxa );
     }
 
     /**
@@ -60,7 +59,7 @@ public class Constraint
      *
      * @param name the name to set.
      */
-    public void setName(final String name)
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -80,7 +79,7 @@ public class Constraint
      *
      * @param minimalCount the minimal count of selected taxa.
      */
-    public void setMinimalCount(final int minimalCount)
+    public void setMinimalCount( final int minimalCount )
     {
         this.minimalCount = minimalCount;
     }
@@ -95,7 +94,7 @@ public class Constraint
         return taxa;
     }
 
-    public void setTaxa(final List<String> taxa)
+    public void setTaxa( final List<String> taxa )
     {
         this.taxa = taxa;
     }
@@ -106,9 +105,9 @@ public class Constraint
      * @param i the index of the taxon to return.
      * @return the taxon
      */
-    public String getTaxon(final int i)
+    public String getTaxon( final int i )
     {
-        return taxa.get(i);
+        return taxa.get( i );
     }
 
     public Constraints getConstraints()
@@ -116,7 +115,7 @@ public class Constraint
         return constraints;
     }
 
-    public void setConstraints(final Constraints constraints)
+    public void setConstraints( final Constraints constraints )
     {
         this.constraints = constraints;
     }
@@ -128,15 +127,15 @@ public class Constraint
 
     public String toDebugString()
     {
-        final StringBuffer buffer = new StringBuffer(name);
-        buffer.append(" - ");
-        for (int i = 0; i < taxa.size(); i++)
+        final StringBuffer buffer = new StringBuffer( name );
+        buffer.append( " - " );
+        for ( int i = 0; i < taxa.size(); i++ )
         {
-            final String taxonString = taxa.get(i);
-            buffer.append(taxonString);
-            if (i < taxa.size() - 1)
+            final String taxonString = taxa.get( i );
+            buffer.append( taxonString );
+            if ( i < taxa.size() - 1 )
             {
-                buffer.append(", ");
+                buffer.append( ", " );
             }
         }
         return buffer.toString();

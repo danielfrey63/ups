@@ -28,16 +28,15 @@ import ch.xmatrix.ups.uec.master.MasterDetailsFactory;
  */
 public class ConstraintsFactory extends MasterDetailsFactory
 {
-
-    protected TaxonBased createCopy(final TaxonBased orig)
+    protected TaxonBased createCopy( final TaxonBased orig )
     {
-        if (!(orig instanceof Constraints))
+        if ( !( orig instanceof Constraints ) )
         {
-            throw new IllegalArgumentException("original must be of type " + Constraints.class.getName() +
-                    ", got " + orig.getClass().getName());
+            throw new IllegalArgumentException( "original must be of type " + Constraints.class.getName() +
+                    ", got " + orig.getClass().getName() );
         }
         final Constraints original = (Constraints) orig;
-        return new Constraints(original);
+        return new Constraints( original );
     }
 
     protected TaxonBased createInstance()

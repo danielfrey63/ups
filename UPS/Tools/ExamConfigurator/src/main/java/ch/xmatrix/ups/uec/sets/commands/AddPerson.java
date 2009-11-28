@@ -43,18 +43,17 @@ import org.pietschy.command.CommandManager;
  */
 public class AddPerson extends ActionCommand
 {
-
-    private static final Logger LOG = Logger.getLogger(AddPerson.class);
+    private static final Logger LOG = Logger.getLogger( AddPerson.class );
 
     private final SetBuilder.SubmitTableModel model;
 
     private final AbstractDialog dialog;
 
-    private PersonData person;
+    private final PersonData person;
 
-    public AddPerson(final CommandManager commandManager, final SetBuilder.SubmitTableModel model)
+    public AddPerson( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super(commandManager, Commands.COMMANDID_ADDPERSION);
+        super( commandManager, Commands.COMMANDID_ADDPERSION );
         this.model = model;
         person = new PersonData();
         dialog = new Dialog();
@@ -66,53 +65,52 @@ public class AddPerson extends ActionCommand
         {
             dialog.open();
             final Anmeldedaten anmeldedaten = new Anmeldedaten();
-            anmeldedaten.setVorname(person.getFirstName());
-            anmeldedaten.setNachname(person.getLastName());
-            anmeldedaten.setStudentennummer(person.getId());
-            anmeldedaten.setStudiengang(person.getCourse());
-            final Registration registration = new Registration(anmeldedaten, null);
-            model.add(registration);
-            person.setFirstName("");
-            person.setLastName("");
-            person.setId("");
-            person.setCourse("");
+            anmeldedaten.setVorname( person.getFirstName() );
+            anmeldedaten.setNachname( person.getLastName() );
+            anmeldedaten.setStudentennummer( person.getId() );
+            anmeldedaten.setStudiengang( person.getCourse() );
+            final Registration registration = new Registration( anmeldedaten, null );
+            model.add( registration );
+            person.setFirstName( "" );
+            person.setLastName( "" );
+            person.setId( "" );
+            person.setCourse( "" );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOG.error("error during action", e);
+            LOG.error( "error during action", e );
         }
     }
 
     private class Dialog extends AbstractDialog
     {
-
         private PersonEditBuilder builder;
 
         public Dialog()
         {
-            super((JFrame) null, "Neue Person", true);
+            super( (JFrame) null, "Neue Person", true );
         }
 
         protected JComponent buildHeader()
         {
-            return new HeaderPanel("Angaben zum Prüfling", "" +
-                    "Geben Sie hier die Daten eines Prüflings\nohne Pflanzelisten ein.");
+            return new HeaderPanel( "Angaben zum Prüfling", "" +
+                    "Geben Sie hier die Daten eines Prüflings\nohne Pflanzelisten ein." );
         }
 
         protected JComponent buildContent()
         {
-            final JPanel panel = new JPanel(new BorderLayout());
-            builder = new PersonEditBuilder(person);
-            panel.add(builder.getPanel(), BorderLayout.CENTER);
-            panel.add(buildButtonBarWithOKCancel(), BorderLayout.SOUTH);
-            builder.addCompletionListener(new PersonEditBuilder.CompletionListener()
+            final JPanel panel = new JPanel( new BorderLayout() );
+            builder = new PersonEditBuilder( person );
+            panel.add( builder.getPanel(), BorderLayout.CENTER );
+            panel.add( buildButtonBarWithOKCancel(), BorderLayout.SOUTH );
+            builder.addCompletionListener( new PersonEditBuilder.CompletionListener()
             {
-                public void updateComplete(final boolean complete)
+                public void updateComplete( final boolean complete )
                 {
-                    getOKAction().setEnabled(complete);
+                    getOKAction().setEnabled( complete );
                 }
-            });
-            getOKAction().setEnabled(false);
+            } );
+            getOKAction().setEnabled( false );
             return panel;
         }
 
@@ -123,11 +121,11 @@ public class AddPerson extends ActionCommand
         }
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-        final AddPerson action = new AddPerson(new CommandManager(), null);
-        action.dialog.setResourceBundle(ResourceBundle.getBundle("ch.xmatrix.ups.uec.Strings"));
+        UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
+        final AddPerson action = new AddPerson( new CommandManager(), null );
+        action.dialog.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.Strings" ) );
         action.handleExecute();
     }
 }

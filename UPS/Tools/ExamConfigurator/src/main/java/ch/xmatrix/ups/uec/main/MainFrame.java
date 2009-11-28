@@ -29,27 +29,26 @@ import javax.swing.JComponent;
  */
 public class MainFrame extends AbstractFrame
 {
+    private final MainModel mainModel;
 
-    private MainModel mainModel;
+    private final InfoModel infoModel;
 
-    private InfoModel infoModel;
-
-    public MainFrame(final MainModel mainModel, final InfoModel infoModel)
+    public MainFrame( final MainModel mainModel, final InfoModel infoModel )
     {
-        super(Application.getDescription().getWindowTitle());
+        super( Application.getDescription().getWindowTitle() );
         this.mainModel = mainModel;
         this.infoModel = infoModel;
     }
 
     public JComponent buildContentPane()
     {
-        return new MainBuilder(mainModel, infoModel).getPanel();
+        return new MainBuilder( mainModel, infoModel ).getPanel();
     }
 
     protected void configureCloseOperation()
     {
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(Application.getApplicationCloseOnWindowClosingHandler());
+        setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
+        addWindowListener( Application.getApplicationCloseOnWindowClosingHandler() );
     }
 
     public String getWindowID()

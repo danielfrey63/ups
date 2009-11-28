@@ -34,7 +34,6 @@ import javax.swing.tree.TreeCellRenderer;
  */
 public class SpecimensTreeRenderer implements TreeCellRenderer
 {
-
     private final RendererPanel panel = new RendererPanel();
 
     private SpecimensModel models;
@@ -43,33 +42,32 @@ public class SpecimensTreeRenderer implements TreeCellRenderer
 
     public SpecimensTreeRenderer()
     {
-        setEnabled(true);
+        setEnabled( true );
     }
 
-    public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected,
-                                                  final boolean isExpanded, final boolean isLeaf, final int row,
-                                                  final boolean hasFocus)
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected,
+                                                   final boolean isExpanded, final boolean isLeaf, final int row,
+                                                   final boolean hasFocus )
     {
-
         final SimpleTaxon taxon = (SimpleTaxon) value;
-        final SpecimenModel model = models == null ? null : models.find(taxon.getName());
-        panel.setEnabled(enabled);
-        panel.setSelected(selected);
-        panel.setExtentionText(model == null ? null : model.toString());
-        panel.setOk(model != null && model.getId() != null && !model.isDeactivatedIfKnown());
-        panel.setText(taxon.getName());
-        panel.setEnabled(models != null && !models.isFixed());
-        panel.setIcon(ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, false)));
+        final SpecimenModel model = models == null ? null : models.find( taxon.getName() );
+        panel.setEnabled( enabled );
+        panel.setSelected( selected );
+        panel.setExtentionText( model == null ? null : model.toString() );
+        panel.setOk( model != null && model.getId() != null && !model.isDeactivatedIfKnown() );
+        panel.setText( taxon.getName() );
+        panel.setEnabled( models != null && !models.isFixed() );
+        panel.setIcon( ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, false ) ) );
         panel.update();
         return panel;
     }
 
-    public void setSpecimensModel(final SpecimensModel models)
+    public void setSpecimensModel( final SpecimensModel models )
     {
         this.models = models;
     }
 
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
         this.enabled = enabled;
     }

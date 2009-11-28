@@ -25,29 +25,30 @@ import org.pietschy.command.CommandManager;
  */
 public class NewFileCommand extends ActionCommand
 {
+    private final MainModel model;
 
-    private MainModel model;
-
-    public NewFileCommand(final CommandManager commandManager, final MainModel model)
+    public NewFileCommand( final CommandManager commandManager, final MainModel model )
     {
-        super(commandManager, Commands.COMMANDID_NEW);
+        super( commandManager, Commands.COMMANDID_NEW );
         this.model = model;
     }
 
-    /** Sets the closeing and opening event in the main model. */
+    /**
+     * Sets the closeing and opening event in the main model.
+     */
     protected void handleExecute()
     {
         try
         {
-            final SessionModel sessionModel = Commands.runExamInfoChooser(model);
-            if (sessionModel != null)
+            final SessionModel sessionModel = Commands.runExamInfoChooser( model );
+            if ( sessionModel != null )
             {
-                model.sessionModels.setSelection(sessionModel);
-                Commands.setNewUserModel(model);
+                model.sessionModels.setSelection( sessionModel );
+                Commands.setNewUserModel( model );
                 model.setOpening();
             }
         }
-        catch (PropertyVetoException e)
+        catch ( PropertyVetoException e )
         {
         }
     }

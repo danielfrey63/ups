@@ -40,47 +40,45 @@ import javax.swing.table.AbstractTableModel;
  */
 public class RunTableModel
 {
-
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
         final JFrame f = new JFrame();
         final JTable t = new JTable();
-        t.setDefaultRenderer(Calendar.class, new TableUtils.CalendarCellRenderer("HH:mm dd.MM.yyyy"));
-        final TableModel tm = new TableModel(new Registration[0]);
-        final SortableTableModel outer = new SortableTableModel(tm);
-        t.setModel(outer);
-        f.add(t, BorderLayout.CENTER);
-        final JButton b = new JButton("Add");
-        b.addActionListener(new ActionListener()
+        t.setDefaultRenderer( Calendar.class, new TableUtils.CalendarCellRenderer( "HH:mm dd.MM.yyyy" ) );
+        final TableModel tm = new TableModel( new Registration[0] );
+        final SortableTableModel outer = new SortableTableModel( tm );
+        t.setModel( outer );
+        f.add( t, BorderLayout.CENTER );
+        final JButton b = new JButton( "Add" );
+        b.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 final Anmeldedaten anmeldedaten = new Anmeldedaten();
-                anmeldedaten.setNachname("Frey");
-                anmeldedaten.setVorname("Daniel");
-                tm.add(new Registration(anmeldedaten, new PlantList()));
+                anmeldedaten.setNachname( "Frey" );
+                anmeldedaten.setVorname( "Daniel" );
+                tm.add( new Registration( anmeldedaten, new PlantList() ) );
             }
-        });
-        f.add(b, BorderLayout.SOUTH);
-        f.setSize(400, 400);
-        f.setLocationRelativeTo(null);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
+        } );
+        f.add( b, BorderLayout.SOUTH );
+        f.setSize( 400, 400 );
+        f.setLocationRelativeTo( null );
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        f.setVisible( true );
     }
 
     public static class TableModel extends AbstractTableModel
     {
-
         private Registration[] registrations;
 
-        private String[] columnNames = {"Nachname", "Vorname", "Leginummer", "Veranstaltung", "Von", "Bis", "Prüfungsliste"};
+        private final String[] columnNames = {"Nachname", "Vorname", "Leginummer", "Veranstaltung", "Von", "Bis", "Prüfungsliste"};
 
-        public TableModel(final Registration[] registrations)
+        public TableModel( final Registration[] registrations )
         {
-            this.setRegistrations(registrations);
+            this.setRegistrations( registrations );
         }
 
-        public String getColumnName(final int column)
+        public String getColumnName( final int column )
         {
             return columnNames[column];
         }
@@ -95,12 +93,12 @@ public class RunTableModel
             return getRegistrations().length;
         }
 
-        public Object getValueAt(final int rowIndex, final int columnIndex)
+        public Object getValueAt( final int rowIndex, final int columnIndex )
         {
             final Registration registration = getRegistrations()[rowIndex];
             final PlantList plantlist = registration.getPlantList();
             final IAnmeldedaten anmeldedaten = registration.getAnmeldedaten();
-            switch (columnIndex)
+            switch ( columnIndex )
             {
                 case 0:
                     return anmeldedaten.getNachname();
@@ -115,15 +113,15 @@ public class RunTableModel
                 case 5:
                     return anmeldedaten.getPruefungsdatumBis();
                 case 6:
-                    return new Boolean(plantlist != null && !registration.isDefaultList());
+                    return new Boolean( plantlist != null && !registration.isDefaultList() );
                 default:
                     return null;
             }
         }
 
-        public Class getColumnClass(final int columnIndex)
+        public Class getColumnClass( final int columnIndex )
         {
-            switch (columnIndex)
+            switch ( columnIndex )
             {
                 case 0:
                 case 1:
@@ -140,18 +138,18 @@ public class RunTableModel
             }
         }
 
-        public void remove(final Registration registration)
+        public void remove( final Registration registration )
         {
-            setRegistrations((Registration[]) ArrayUtils.remove(registrations, registration, new Registration[0]));
+            setRegistrations( (Registration[]) ArrayUtils.remove( registrations, registration, new Registration[0] ) );
             final int index = registrations.length;
-            fireTableRowsDeleted(index, index);
+            fireTableRowsDeleted( index, index );
         }
 
-        public void add(final Registration registration)
+        public void add( final Registration registration )
         {
-            setRegistrations((Registration[]) ArrayUtils.add(registrations, registration));
+            setRegistrations( (Registration[]) ArrayUtils.add( registrations, registration ) );
             final int index = registrations.length - 1;
-            fireTableRowsInserted(index, index);
+            fireTableRowsInserted( index, index );
         }
 
         public Registration[] getRegistrations()
@@ -159,7 +157,7 @@ public class RunTableModel
             return registrations;
         }
 
-        private void setRegistrations(final Registration[] registrations)
+        private void setRegistrations( final Registration[] registrations )
         {
             this.registrations = registrations;
             fireTableDataChanged();

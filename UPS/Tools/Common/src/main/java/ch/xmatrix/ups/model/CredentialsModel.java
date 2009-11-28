@@ -28,31 +28,30 @@ import java.beans.PropertyChangeListener;
  */
 public class CredentialsModel extends PresentationModel
 {
-
     private final ValidationResultModel validationResultModel;
 
-    public CredentialsModel(final Credentials credentials)
+    public CredentialsModel( final Credentials credentials )
     {
-        super(credentials);
+        super( credentials );
         validationResultModel = new DefaultValidationResultModel();
         final PropertyChangeListener handler = new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
-                final PropertyValidationSupport support = new PropertyValidationSupport(credentials, "Credentials");
-                if (ValidationUtils.isBlank(credentials.getPassword()))
+                final PropertyValidationSupport support = new PropertyValidationSupport( credentials, "Credentials" );
+                if ( ValidationUtils.isBlank( credentials.getPassword() ) )
                 {
-                    support.addError("Credentials.Password", "Das Passwort darf nicht leer sein");
+                    support.addError( "Credentials.Password", "Das Passwort darf nicht leer sein" );
                 }
-                if (ValidationUtils.isBlank(credentials.getUsername()))
+                if ( ValidationUtils.isBlank( credentials.getUsername() ) )
                 {
-                    support.addError("Credentials.Username", "Der Benutzername darf nicht leer sein");
+                    support.addError( "Credentials.Username", "Der Benutzername darf nicht leer sein" );
                 }
-                getValidationResultModel().setResult(support.getResult());
+                getValidationResultModel().setResult( support.getResult() );
             }
         };
-        getBeanChannel().addValueChangeListener(handler);
-        addBeanPropertyChangeListener(handler);
+        getBeanChannel().addValueChangeListener( handler );
+        addBeanPropertyChangeListener( handler );
     }
 
     public ValidationResultModel getValidationResultModel()

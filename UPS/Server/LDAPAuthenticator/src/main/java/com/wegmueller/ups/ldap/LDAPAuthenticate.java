@@ -27,8 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class LDAPAuthenticate implements ILDAPAuth
 {
-
-    private static final Logger log = Logger.getLogger(LDAPAuthenticate.class);
+    private static final Logger log = Logger.getLogger( LDAPAuthenticate.class );
 
     public static String[] DEFAULT_HOSTS = {
             "ldaps01.ethz.ch",
@@ -56,17 +55,17 @@ public class LDAPAuthenticate implements ILDAPAuth
 
     public static final String INITIAL_CONTEXT_FACTORY = "com.sun.jndi.ldap.LdapCtxFactory";
 
-    private static final SearchControls SEARCH_CONTROLS = new SearchControls(SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+    private static final SearchControls SEARCH_CONTROLS = new SearchControls( SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false );
 
-    public static void main(final String[] args) throws LDAPAuthException
+    public static void main( final String[] args ) throws LDAPAuthException
     {
         final LDAPAuthenticate d = new LDAPAuthenticate();
-        final ILDAPUserRecord rec = d.getUserData("dfrey", "leni1234");
+        final ILDAPUserRecord rec = d.getUserData( "dfrey", "leni1234" );
         final Map att = rec.getAttributes();
-        for (final Object o : att.keySet())
+        for ( final Object o : att.keySet() )
         {
             final String key = (String) o;
-            System.out.println(key + "=" + att.get(key));
+            System.out.println( key + "=" + att.get( key ) );
         }
     }
 
@@ -75,141 +74,141 @@ public class LDAPAuthenticate implements ILDAPAuth
      *
      * @throws LDAPAuthException
      */
-    public ILDAPUserRecord getUserData(final String userName, final String password) throws LDAPAuthException
+    public ILDAPUserRecord getUserData( final String userName, final String password ) throws LDAPAuthException
     {
         LDAPAuthException lastException = null;
         Throwable lastThrowable = null;
-        if (log.isDebugEnabled())
+        if ( log.isDebugEnabled() )
         {
-            log.debug("Trying to get userData for " + userName);
+            log.debug( "Trying to get userData for " + userName );
         }
-        for (final String host : HOSTS)
+        for ( final String host : HOSTS )
         {
             try
             {
-                return getUserDetails(host, userName);
+                return getUserDetails( host, userName );
             }
-            catch (LDAPAuthException e)
+            catch ( LDAPAuthException e )
             {
-                if (log.isDebugEnabled())
+                if ( log.isDebugEnabled() )
                 {
-                    log.debug("LDAPAuthenticate.getUserDetails(...) failed for " + host, e);
+                    log.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
                 }
-                if (e.getName().equals(LDAPAuthException.INVALID_CREDENTIALS))
+                if ( e.getName().equals( LDAPAuthException.INVALID_CREDENTIALS ) )
                 {
                     throw e;
                 }
                 lastException = e;
             }
-            catch (Throwable e)
+            catch ( Throwable e )
             {
-                if (log.isDebugEnabled())
+                if ( log.isDebugEnabled() )
                 {
-                    log.debug("LDAPAuthenticate.getUserDetails(...) failed for " + host, e);
+                    log.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
                 }
                 lastThrowable = e;
             }
         }
-        log.error("No host can answer the question");
-        if (lastException != null)
+        log.error( "No host can answer the question" );
+        if ( lastException != null )
         {
             throw lastException;
         }
-        if (lastThrowable != null)
+        if ( lastThrowable != null )
         {
-            throw new LDAPAuthException(lastThrowable);
+            throw new LDAPAuthException( lastThrowable );
         }
-        throw new LDAPAuthException("Unknown reason Exception");
+        throw new LDAPAuthException( "Unknown reason Exception" );
     }
 
-    public static LDAPUserRecord getUserDetails(final String host, final String userName) throws LDAPAuthException
+    public static LDAPUserRecord getUserDetails( final String host, final String userName ) throws LDAPAuthException
     {
-        if (log.isDebugEnabled())
+        if ( log.isDebugEnabled() )
         {
-            log.debug("trying LDAP host " + host + " for " + userName);
+            log.debug( "trying LDAP host " + host + " for " + userName );
         }
         DirContext dirctx = null;
         try
         {
-            dirctx = getContext(host);
-            if (log.isDebugEnabled())
+            dirctx = getContext( host );
+            if ( log.isDebugEnabled() )
             {
-                log.debug("context successfully created");
+                log.debug( "context successfully created" );
             }
-            final LDAPUserRecord list = new LDAPUserRecord(userName);
+            final LDAPUserRecord list = new LDAPUserRecord( userName );
             try
             {
                 final String filter = UID_SEARCH_STRING + userName;
-                if (log.isDebugEnabled())
+                if ( log.isDebugEnabled() )
                 {
-                    log.debug("search with base: \"" + BASEDN + "\", filter: \"" + filter + "\", controls: \"" + SEARCH_CONTROLS + "\"");
+                    log.debug( "search with base: \"" + BASEDN + "\", filter: \"" + filter + "\", controls: \"" + SEARCH_CONTROLS + "\"" );
                 }
-                final NamingEnumeration<SearchResult> m = dirctx.search(BASEDN, filter, SEARCH_CONTROLS);
-                while (m.hasMore())
+                final NamingEnumeration<SearchResult> m = dirctx.search( BASEDN, filter, SEARCH_CONTROLS );
+                while ( m.hasMore() )
                 {
                     final SearchResult res = m.next();
-                    if (log.isDebugEnabled())
+                    if ( log.isDebugEnabled() )
                     {
-                        log.debug("search result: \"" + res + "\"");
+                        log.debug( "search result: \"" + res + "\"" );
                     }
                     final NamingEnumeration<? extends Attribute> en = res.getAttributes().getAll();
-                    while (en.hasMore())
+                    while ( en.hasMore() )
                     {
                         final Attribute att = en.next();
-                        if (att != null)
+                        if ( att != null )
                         {
-                            for (int i = 0; i < att.size(); i++)
+                            for ( int i = 0; i < att.size(); i++ )
                             {
-                                list.addAttribute(att.getID(), att.get(i).toString());
+                                list.addAttribute( att.getID(), att.get( i ).toString() );
                             }
                         }
                     }
                 }
-                if (log.isDebugEnabled())
+                if ( log.isDebugEnabled() )
                 {
-                    log.debug("search finished");
+                    log.debug( "search finished" );
                 }
             }
-            catch (Throwable e)
+            catch ( Throwable e )
             {
-                log.error("Authentication was successful, but an error occured retrieving the data of the user: " + userName);
+                log.error( "Authentication was successful, but an error occured retrieving the data of the user: " + userName );
             }
             return list;
         }
-        catch (AuthenticationException e)
+        catch ( AuthenticationException e )
         {
-            throw new LDAPAuthException(e);
+            throw new LDAPAuthException( e );
         }
-        catch (NamingException e)
+        catch ( NamingException e )
         {
-            throw new LDAPAuthException(e);
+            throw new LDAPAuthException( e );
         }
         finally
         {
-            if (dirctx != null)
+            if ( dirctx != null )
             {
                 try
                 {
                     dirctx.close();
                 }
-                catch (NamingException e)
+                catch ( NamingException e )
                 {
-                    log.warn("could not close context");
+                    log.warn( "could not close context" );
                 }
             }
         }
     }
 
-    private static InitialDirContext getContext(final String host) throws NamingException
+    private static InitialDirContext getContext( final String host ) throws NamingException
     {
         final Hashtable<String, String> env = new Hashtable<String, String>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY);
-        env.put(LDAP_FACTORY_SOCKET_PROPERTY, CustomSocketFactory.class.getName());
-        env.put(Context.PROVIDER_URL, LDAP_PROCOTCOL + host);
-        env.put(Context.SECURITY_PROTOCOL, SECURITY_PROTOCOL);
-        env.put(Context.SECURITY_AUTHENTICATION, SECURITY_AUTHENTICATION);
-        env.put(Context.SECURITY_PRINCIPAL, BINDDN);
-        env.put(Context.SECURITY_CREDENTIALS, PASS);
-        return new InitialDirContext(env);
+        env.put( Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY );
+        env.put( LDAP_FACTORY_SOCKET_PROPERTY, CustomSocketFactory.class.getName() );
+        env.put( Context.PROVIDER_URL, LDAP_PROCOTCOL + host );
+        env.put( Context.SECURITY_PROTOCOL, SECURITY_PROTOCOL );
+        env.put( Context.SECURITY_AUTHENTICATION, SECURITY_AUTHENTICATION );
+        env.put( Context.SECURITY_PRINCIPAL, BINDDN );
+        env.put( Context.SECURITY_CREDENTIALS, PASS );
+        return new InitialDirContext( env );
     }
 }

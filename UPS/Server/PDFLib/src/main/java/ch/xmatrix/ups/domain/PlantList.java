@@ -26,7 +26,6 @@ import java.util.ArrayList;
  */
 public class PlantList
 {
-
     private PersonData person;
 
     private ArrayList<String> taxa;
@@ -36,7 +35,7 @@ public class PlantList
         return person;
     }
 
-    public void setPerson(final PersonData person)
+    public void setPerson( final PersonData person )
     {
         this.person = person;
     }
@@ -46,7 +45,7 @@ public class PlantList
         return taxa;
     }
 
-    public void setTaxa(final ArrayList<String> taxa)
+    public void setTaxa( final ArrayList<String> taxa )
     {
         this.taxa = taxa;
     }

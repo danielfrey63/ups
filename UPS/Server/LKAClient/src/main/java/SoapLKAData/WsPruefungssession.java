@@ -25,7 +25,7 @@ public class WsPruefungssession implements java.io.Serializable
             final java.lang.String planungFreigabe,
             final java.lang.String seskez,
             final java.lang.String sessionsende,
-            final java.lang.String sessionsname)
+            final java.lang.String sessionsname )
     {
         this.sessionsname = sessionsname;
         this.sessionsende = sessionsende;
@@ -48,7 +48,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param sessionsname
      */
-    public void setSessionsname(final java.lang.String sessionsname)
+    public void setSessionsname( final java.lang.String sessionsname )
     {
         this.sessionsname = sessionsname;
     }
@@ -68,7 +68,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param sessionsende
      */
-    public void setSessionsende(final java.lang.String sessionsende)
+    public void setSessionsende( final java.lang.String sessionsende )
     {
         this.sessionsende = sessionsende;
     }
@@ -88,7 +88,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param seskez
      */
-    public void setSeskez(final java.lang.String seskez)
+    public void setSeskez( final java.lang.String seskez )
     {
         this.seskez = seskez;
     }
@@ -108,47 +108,47 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param planungFreigabe
      */
-    public void setPlanungFreigabe(final java.lang.String planungFreigabe)
+    public void setPlanungFreigabe( final java.lang.String planungFreigabe )
     {
         this.planungFreigabe = planungFreigabe;
     }
 
     private java.lang.Object __equalsCalc = null;
 
-    public synchronized boolean equals(final java.lang.Object obj)
+    public synchronized boolean equals( final java.lang.Object obj )
     {
-        if (!(obj instanceof WsPruefungssession))
+        if ( !( obj instanceof WsPruefungssession ) )
         {
             return false;
         }
         final WsPruefungssession other = (WsPruefungssession) obj;
-        if (obj == null)
+        if ( obj == null )
         {
             return false;
         }
-        if (this == obj)
+        if ( this == obj )
         {
             return true;
         }
-        if (__equalsCalc != null)
+        if ( __equalsCalc != null )
         {
-            return (__equalsCalc == obj);
+            return ( __equalsCalc == obj );
         }
         __equalsCalc = obj;
         final boolean _equals;
         _equals = true &&
-                ((this.sessionsname == null && other.getSessionsname() == null) ||
-                        (this.sessionsname != null &&
-                                this.sessionsname.equals(other.getSessionsname()))) &&
-                ((this.sessionsende == null && other.getSessionsende() == null) ||
-                        (this.sessionsende != null &&
-                                this.sessionsende.equals(other.getSessionsende()))) &&
-                ((this.seskez == null && other.getSeskez() == null) ||
-                        (this.seskez != null &&
-                                this.seskez.equals(other.getSeskez()))) &&
-                ((this.planungFreigabe == null && other.getPlanungFreigabe() == null) ||
-                        (this.planungFreigabe != null &&
-                                this.planungFreigabe.equals(other.getPlanungFreigabe())));
+                ( ( this.sessionsname == null && other.getSessionsname() == null ) ||
+                        ( this.sessionsname != null &&
+                                this.sessionsname.equals( other.getSessionsname() ) ) ) &&
+                ( ( this.sessionsende == null && other.getSessionsende() == null ) ||
+                        ( this.sessionsende != null &&
+                                this.sessionsende.equals( other.getSessionsende() ) ) ) &&
+                ( ( this.seskez == null && other.getSeskez() == null ) ||
+                        ( this.seskez != null &&
+                                this.seskez.equals( other.getSeskez() ) ) ) &&
+                ( ( this.planungFreigabe == null && other.getPlanungFreigabe() == null ) ||
+                        ( this.planungFreigabe != null &&
+                                this.planungFreigabe.equals( other.getPlanungFreigabe() ) ) );
         __equalsCalc = null;
         return _equals;
     }
@@ -157,25 +157,25 @@ public class WsPruefungssession implements java.io.Serializable
 
     public synchronized int hashCode()
     {
-        if (__hashCodeCalc)
+        if ( __hashCodeCalc )
         {
             return 0;
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        if (getSessionsname() != null)
+        if ( getSessionsname() != null )
         {
             _hashCode += getSessionsname().hashCode();
         }
-        if (getSessionsende() != null)
+        if ( getSessionsende() != null )
         {
             _hashCode += getSessionsende().hashCode();
         }
-        if (getSeskez() != null)
+        if ( getSeskez() != null )
         {
             _hashCode += getSeskez().hashCode();
         }
-        if (getPlanungFreigabe() != null)
+        if ( getPlanungFreigabe() != null )
         {
             _hashCode += getPlanungFreigabe().hashCode();
         }
@@ -184,64 +184,70 @@ public class WsPruefungssession implements java.io.Serializable
     }
 
     // Type metadata
-    private static org.apache.axis.description.TypeDesc typeDesc =
-            new org.apache.axis.description.TypeDesc(WsPruefungssession.class, true);
+    private static final org.apache.axis.description.TypeDesc typeDesc =
+            new org.apache.axis.description.TypeDesc( WsPruefungssession.class, true );
 
     static
     {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("urn:SoapLKAData", "WsPruefungssession"));
+        typeDesc.setXmlType( new javax.xml.namespace.QName( "urn:SoapLKAData", "WsPruefungssession" ) );
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("sessionsname");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "sessionsname"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
+        elemField.setFieldName( "sessionsname" );
+        elemField.setXmlName( new javax.xml.namespace.QName( "", "sessionsname" ) );
+        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setNillable( true );
+        typeDesc.addFieldDesc( elemField );
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("sessionsende");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "sessionsende"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
+        elemField.setFieldName( "sessionsende" );
+        elemField.setXmlName( new javax.xml.namespace.QName( "", "sessionsende" ) );
+        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setNillable( true );
+        typeDesc.addFieldDesc( elemField );
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("seskez");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "seskez"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
+        elemField.setFieldName( "seskez" );
+        elemField.setXmlName( new javax.xml.namespace.QName( "", "seskez" ) );
+        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setNillable( true );
+        typeDesc.addFieldDesc( elemField );
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("planungFreigabe");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "planungFreigabe"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
+        elemField.setFieldName( "planungFreigabe" );
+        elemField.setXmlName( new javax.xml.namespace.QName( "", "planungFreigabe" ) );
+        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setNillable( true );
+        typeDesc.addFieldDesc( elemField );
     }
 
-    /** Return type metadata object */
+    /**
+     * Return type metadata object
+     */
     public static org.apache.axis.description.TypeDesc getTypeDesc()
     {
         return typeDesc;
     }
 
-    /** Get Custom Serializer */
+    /**
+     * Get Custom Serializer
+     */
     public static org.apache.axis.encoding.Serializer getSerializer(
             final java.lang.String mechType,
             final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType)
+            final javax.xml.namespace.QName _xmlType )
     {
         return
                 new org.apache.axis.encoding.ser.BeanSerializer(
-                        _javaType, _xmlType, typeDesc);
+                        _javaType, _xmlType, typeDesc );
     }
 
-    /** Get Custom Deserializer */
+    /**
+     * Get Custom Deserializer
+     */
     public static org.apache.axis.encoding.Deserializer getDeserializer(
             final java.lang.String mechType,
             final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType)
+            final javax.xml.namespace.QName _xmlType )
     {
         return
                 new org.apache.axis.encoding.ser.BeanDeserializer(
-                        _javaType, _xmlType, typeDesc);
+                        _javaType, _xmlType, typeDesc );
     }
 
 }

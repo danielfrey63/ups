@@ -23,13 +23,12 @@ import java.util.Date;
  */
 public interface TaxonBased extends IdAware
 {
-
     /**
      * Sets the id of this data object.
      *
      * @param uid the id
      */
-    void setUid(String uid);
+    void setUid( String uid );
 
     /**
      * Retrieves the taxa uid of the taxon tree on which this data object is based.
@@ -43,7 +42,7 @@ public interface TaxonBased extends IdAware
      *
      * @param uid the taxa tree uid
      */
-    void setTaxaUid(String uid);
+    void setTaxaUid( String uid );
 
     /**
      * Returns the name of this value object.
@@ -57,7 +56,7 @@ public interface TaxonBased extends IdAware
      *
      * @param name the name
      */
-    void setName(String name);
+    void setName( String name );
 
     /**
      * Returns the modification timestamp.
@@ -71,7 +70,7 @@ public interface TaxonBased extends IdAware
      *
      * @param modified the timestamp
      */
-    void setModified(Date modified);
+    void setModified( Date modified );
 
     /**
      * Returns whether this data object is readonly.

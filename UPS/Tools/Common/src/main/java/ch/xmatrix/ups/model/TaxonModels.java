@@ -31,11 +31,10 @@ import org.apache.log4j.Logger;
  */
 public class TaxonModels
 {
-
     // Todo: Remove redundant constant in ModelUtils
     public static final String RESOURCE_MODEL = "/data/taxa.xml";
 
-    private static final Logger LOG = Logger.getLogger(TaxonModels.class);
+    private static final Logger LOG = Logger.getLogger( TaxonModels.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -47,9 +46,9 @@ public class TaxonModels
     {
         final ListModel list = getTaxonTrees();
         final TaxonTree[] trees = new TaxonTree[list.getSize()];
-        for (int i = 0; i < list.getSize(); i++)
+        for ( int i = 0; i < list.getSize(); i++ )
         {
-            trees[i] = (TaxonTree) list.getElementAt(i);
+            trees[i] = (TaxonTree) list.getElementAt( i );
         }
         return trees;
     }
@@ -59,7 +58,7 @@ public class TaxonModels
      *
      * @param infoModel the info model
      */
-    public static void setInfoModel(final InfoModel infoModel)
+    public static void setInfoModel( final InfoModel infoModel )
     {
         INFO_MODEL = infoModel;
     }
@@ -72,26 +71,26 @@ public class TaxonModels
 
     public static void loadTaxonTrees()
     {
-        if (TREES == null)
+        if ( TREES == null )
         {
             final Note note = INFO_MODEL.getNote();
-            INFO_MODEL.setNote(new SimpleNote("Lade Taxonbäume", note.getPercentage() + 10, note.getColor()));
+            INFO_MODEL.setNote( new SimpleNote( "Lade Taxonbäume", note.getPercentage() + 10, note.getColor() ) );
             final long start = System.currentTimeMillis();
-            TREES = Loader.loadModel(RESOURCE_MODEL, "", getConverter());
+            TREES = Loader.loadModel( RESOURCE_MODEL, "", getConverter() );
             final long end = System.currentTimeMillis();
-            final float diff = (float) (end - start) / 1000;
-            INFO_MODEL.setNote(new SimpleNote("Lade Taxonbäume in " + diff + "s"));
+            final float diff = (float) ( end - start ) / 1000;
+            INFO_MODEL.setNote( new SimpleNote( "Lade Taxonbäume in " + diff + "s" ) );
         }
     }
 
     public static XStream getConverter()
     {
         final XStream x = SimpleModelList.getConverter();
-        x.setMode(XStream.ID_REFERENCES);
-        x.alias("taxonTrees", SimpleModelList.class);
-        x.alias("taxonTree", TaxonTree.class);
-        x.alias("taxon", SimpleTaxon.class);
-        x.alias("level", SimpleLevel.class);
+        x.setMode( XStream.ID_REFERENCES );
+        x.alias( "taxonTrees", SimpleModelList.class );
+        x.alias( "taxonTree", TaxonTree.class );
+        x.alias( "taxon", SimpleTaxon.class );
+        x.alias( "level", SimpleLevel.class );
         return x;
     }
 
@@ -101,20 +100,20 @@ public class TaxonModels
      * @param uid the uid of the taxon tree
      * @return the found taxon tree or null
      */
-    public static TaxonTree find(final String uid)
+    public static TaxonTree find( final String uid )
     {
         final ListModel trees = getTaxonTrees();
-        for (int i = 0; i < trees.getSize(); i++)
+        for ( int i = 0; i < trees.getSize(); i++ )
         {
-            final TaxonTree tree = (TaxonTree) trees.getElementAt(i);
-            if (tree.getUid().equals(uid))
+            final TaxonTree tree = (TaxonTree) trees.getElementAt( i );
+            if ( tree.getUid().equals( uid ) )
             {
                 return tree;
             }
         }
-        if (DEBUG && uid != null)
+        if ( DEBUG && uid != null )
         {
-            LOG.debug("could not find taxon tree for uid \"" + uid + "\"");
+            LOG.debug( "could not find taxon tree for uid \"" + uid + "\"" );
         }
         return null;
     }

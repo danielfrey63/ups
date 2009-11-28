@@ -34,62 +34,61 @@ import org.uispec4j.assertion.UISpecAssert;
  */
 public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
 {
-
     public void test000Setup()
     {
         BUILDER = new ConstraintsBuilder();
-        PANEL = new Panel(BUILDER.getPanel());
+        PANEL = new Panel( BUILDER.getPanel() );
         super.test000Setup();
     }
 
     public void test010InitialStates()
     {
         super.test010InitialStates();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test011SelectFirst()
     {
         super.test011SelectFirst();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
-        checkValues(false);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
+        checkValues( false );
     }
 
     public void test012AddButton()
     {
         super.test012AddButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test013SaveButton()
     {
         super.test013SaveButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test014TaxtreeCombo()
     {
         super.test014TaxtreeCombo();
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test015SaveButton()
     {
         super.test015SaveButton();
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test016Rename()
     {
         super.test016Rename();
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test017SaveButton()
@@ -100,29 +99,29 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test018FixButton()
     {
         super.test018FixButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test019SaveButton()
     {
         super.test019SaveButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test020DeleteButton()
     {
         super.test020DeleteButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test021SaveButton()
     {
         super.test021SaveButton();
-        checkButtons(false, false, false, false);
-        checkComponents(false, false, false, true);
+        checkButtons( false, false, false, false );
+        checkComponents( false, false, false, true );
     }
 
     public void test100Init()
@@ -135,96 +134,96 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test120NewConstraintButton()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_NEWCONSTRAINT).click();
+        getButton( Commands.COMMANDID_NEWCONSTRAINT ).click();
         final Calendar date2 = new GregorianCalendar();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test121NewConstraintSelected()
     {
-        final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
-        UISpecAssert.assertFalse("constraint is not selected", constraints.selectionIsEmpty());
+        final ListBox constraints = PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS );
+        UISpecAssert.assertFalse( "constraint is not selected", constraints.selectionIsEmpty() );
     }
 
     public void test122DeselectConstraint()
     {
         final String date = getModified();
-        final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
+        final ListBox constraints = PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS );
         constraints.clearSelection();
-        checkModificationSame(date);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
-        UISpecAssert.assertTrue("constraints list should have no selection", constraints.selectionIsEmpty());
+        checkModificationSame( date );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
+        UISpecAssert.assertTrue( "constraints list should have no selection", constraints.selectionIsEmpty() );
     }
 
     public void test123SelectConstraint()
     {
         final String date = getModified();
-        final ListBox constraints = PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS);
-        constraints.selectIndex(0);
-        checkModificationSame(date);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
-        UISpecAssert.assertFalse("constraints list should have selection", constraints.selectionIsEmpty());
+        final ListBox constraints = PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS );
+        constraints.selectIndex( 0 );
+        checkModificationSame( date );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
+        UISpecAssert.assertFalse( "constraints list should have selection", constraints.selectionIsEmpty() );
     }
 
     public void test124Save()
     {
         super.test015SaveButton();
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test125SelectNode()
     {
         final String date = getModified();
-        PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree().setSelectionRow(1);
-        checkModificationSame(date);
-        checkButtons(true, true, true, true, false, false);
-        checkButtons(true, true, true, false);
-        checkComponents(true, false, false, true);
+        PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ).getJTree().setSelectionRow( 1 );
+        checkModificationSame( date );
+        checkButtons( true, true, true, true, false, false );
+        checkButtons( true, true, true, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test126AddTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_ADDTAXA).click();
+        getButton( Commands.COMMANDID_ADDTAXA ).click();
         final Calendar date2 = new GregorianCalendar();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, true, true);
-        assertEquals("taxa list should have 1 entrie,", 1, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, true, true );
+        assertEquals( "taxa list should have 1 entrie,", 1, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
     }
 
     public void test129Save()
     {
         super.test015SaveButton();
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, true, true);
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, true, true );
     }
 
     public void test130RemoveConstraintButton()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_DELETECONSTRAINT).click();
+        getButton( Commands.COMMANDID_DELETECONSTRAINT ).click();
         final Calendar date2 = new GregorianCalendar();
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test131Save()
     {
         super.test015SaveButton();
-        checkButtons(true, false, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, false, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test132AddSameTaxon()
@@ -233,86 +232,86 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
         test124Save();
         test125SelectNode();
         test126AddTaxon();
-        PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree().setSelectionRow(1);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, true, true);
+        PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ).getJTree().setSelectionRow( 1 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, true, true );
     }
 
     public void test133AddAnotherTaxon()
     {
-        PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree().setSelectionRow(2);
+        PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ).getJTree().setSelectionRow( 2 );
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_ADDTAXA).click();
+        getButton( Commands.COMMANDID_ADDTAXA ).click();
         final Calendar date2 = new GregorianCalendar();
-        assertEquals("taxa list should have 2 entries,", 2, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, true, true, true);
+        assertEquals( "taxa list should have 2 entries,", 2, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, true, true, true );
     }
 
     public void test134Save()
     {
         super.test015SaveButton();
-        checkButtons(true, true, false, false);
-        checkComponents(true, true, true, true);
+        checkButtons( true, true, false, false );
+        checkComponents( true, true, true, true );
     }
 
     public void test134SelectTaxon()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).selectIndex(0);
-        checkModificationBefore(date);
-        checkComponents(true, true, false, true, false, false, false, false);
-        checkButtons(true, true, false, true);
-        checkComponents(true, true, true, true);
+        PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).selectIndex( 0 );
+        checkModificationBefore( date );
+        checkComponents( true, true, false, true, false, false, false, false );
+        checkButtons( true, true, false, true );
+        checkComponents( true, true, true, true );
     }
 
     public void test135RemoveTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_REMOVETAXA).click();
+        getButton( Commands.COMMANDID_REMOVETAXA ).click();
         final Calendar date2 = new GregorianCalendar();
-        assertEquals("taxa list should have 1 entries,", 1, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, true);
-        checkComponents(true, false, true, true);
+        assertEquals( "taxa list should have 1 entries,", 1, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, true );
+        checkComponents( true, false, true, true );
     }
 
     public void test136RemoveTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton(Commands.COMMANDID_REMOVETAXA).click();
+        getButton( Commands.COMMANDID_REMOVETAXA ).click();
         final Calendar date2 = new GregorianCalendar();
-        assertEquals("taxa list should have 0 entries,", 0, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
-        checkModificationUpdate(date1, date2);
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
+        assertEquals( "taxa list should have 0 entries,", 0, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
+        checkModificationUpdate( date1, date2 );
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test137Save()
     {
         super.test015SaveButton();
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
     }
 
     public void test138AddSpecies()
     {
-        final JTree tree = PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA).getJTree();
-        for (int i = 0; i < 4; i++)
+        final JTree tree = PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ).getJTree();
+        for ( int i = 0; i < 4; i++ )
         {
-            tree.expandRow(i);
+            tree.expandRow( i );
         }
-        tree.setSelectionRow(4);
-        getButton(Commands.COMMANDID_ADDTAXA).click();
-        checkButtons(true, true, true, true, true, true);
-        checkButtons(true, true, false, false);
-        checkComponents(true, false, false, true);
-        assertEquals("taxa list should have 1 entrie,", 1, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_TAXA).getSize());
+        tree.setSelectionRow( 4 );
+        getButton( Commands.COMMANDID_ADDTAXA ).click();
+        checkButtons( true, true, true, true, true, true );
+        checkButtons( true, true, false, false );
+        checkComponents( true, false, false, true );
+        assertEquals( "taxa list should have 1 entrie,", 1, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
     }
 
     public void test199RemoveAll()
@@ -322,34 +321,34 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
 
     //--- Utilities
 
-    private static void checkComponents(final boolean fieldDescriptionEnabled, final boolean fieldNameEnabled,
-                                        final boolean spinnerCountEnabled, final boolean treeTaxaEnabled)
+    private static void checkComponents( final boolean fieldDescriptionEnabled, final boolean fieldNameEnabled,
+                                         final boolean spinnerCountEnabled, final boolean treeTaxaEnabled )
     {
-        checkEnabled(fieldDescriptionEnabled, PANEL.getTextBox(ConstraintsBuilder.COMPONENT_FIELD_DESCRIPTION), "description field");
-        checkEnabled(fieldNameEnabled, PANEL.getTextBox(ConstraintsBuilder.COMPONENT_FIELD_NAME), "name field");
-        checkEnabled(spinnerCountEnabled, getSpinner(ConstraintsBuilder.COMPONENT_SPINNER_COUNT), "counter");
-        checkEnabled(treeTaxaEnabled, PANEL.getTree(ConstraintsBuilder.COMPONENT_TREE_TAXA), "taxa tree");
+        checkEnabled( fieldDescriptionEnabled, PANEL.getTextBox( ConstraintsBuilder.COMPONENT_FIELD_DESCRIPTION ), "description field" );
+        checkEnabled( fieldNameEnabled, PANEL.getTextBox( ConstraintsBuilder.COMPONENT_FIELD_NAME ), "name field" );
+        checkEnabled( spinnerCountEnabled, getSpinner( ConstraintsBuilder.COMPONENT_SPINNER_COUNT ), "counter" );
+        checkEnabled( treeTaxaEnabled, PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ), "taxa tree" );
     }
 
-    private static void checkButtons(final boolean newEnabled, final boolean deleteEnabled,
-                                     final boolean addEnabled, final boolean removeEnabled)
+    private static void checkButtons( final boolean newEnabled, final boolean deleteEnabled,
+                                      final boolean addEnabled, final boolean removeEnabled )
     {
         final String[] buttons = {Commands.COMMANDID_NEWCONSTRAINT, Commands.COMMANDID_DELETECONSTRAINT,
                 Commands.COMMANDID_ADDTAXA, Commands.COMMANDID_REMOVETAXA};
         final boolean[] enableds = new boolean[]{newEnabled, deleteEnabled, addEnabled, removeEnabled};
-        for (int i = 0; i < buttons.length; i++)
+        for ( int i = 0; i < buttons.length; i++ )
         {
             final String name = buttons[i];
             final boolean enabled = enableds[i];
-            final Button button = getButton(name);
-            final String message = "button " + name + " is " + (enabled ? "disabled" : "enabled") +
-                    ", should be " + (enabled ? "enabled" : "disabled");
-            UISpecAssert.assertEquals(message, enabled, button.isEnabled());
+            final Button button = getButton( name );
+            final String message = "button " + name + " is " + ( enabled ? "disabled" : "enabled" ) +
+                    ", should be " + ( enabled ? "enabled" : "disabled" );
+            UISpecAssert.assertEquals( message, enabled, button.isEnabled() );
         }
     }
 
-    private static void checkValues(final boolean constraintsListEmpty)
+    private static void checkValues( final boolean constraintsListEmpty )
     {
-        UISpecAssert.assertEquals(constraintsListEmpty, PANEL.getListBox(ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS).isEmpty());
+        UISpecAssert.assertEquals( constraintsListEmpty, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_CONSTRAINTS ).isEmpty() );
     }
 }

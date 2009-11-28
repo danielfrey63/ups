@@ -43,12 +43,14 @@ public class PersonData extends Model
      *
      * @param person the person data to copy
      */
-    public PersonData(final PersonData person)
+    public PersonData( final PersonData person )
     {
-        copy(person);
+        copy( person );
     }
 
-    /** Init object with defaults. */
+    /**
+     * Init object with defaults.
+     */
     public PersonData()
     {
         // Do nothing.
@@ -59,12 +61,12 @@ public class PersonData extends Model
      *
      * @param person the person to copy
      */
-    public void copy(final PersonData person)
+    public void copy( final PersonData person )
     {
-        setFirstName(person.firstName);
-        setLastName(person.lastName);
-        setId(person.id);
-        setCourse(person.course);
+        setFirstName( person.firstName );
+        setLastName( person.lastName );
+        setId( person.id );
+        setCourse( person.course );
     }
 
     public String getFirstName()
@@ -72,11 +74,11 @@ public class PersonData extends Model
         return firstName;
     }
 
-    public void setFirstName(final String firstName)
+    public void setFirstName( final String firstName )
     {
         final String old = getFirstName();
         this.firstName = firstName;
-        firePropertyChange(FIRST_NAME, old, firstName);
+        firePropertyChange( FIRST_NAME, old, firstName );
     }
 
     public String getLastName()
@@ -84,11 +86,11 @@ public class PersonData extends Model
         return lastName;
     }
 
-    public void setLastName(final String lastName)
+    public void setLastName( final String lastName )
     {
         final String old = getLastName();
         this.lastName = lastName;
-        firePropertyChange(LAST_NAME, old, lastName);
+        firePropertyChange( LAST_NAME, old, lastName );
     }
 
     public String getId()
@@ -96,11 +98,11 @@ public class PersonData extends Model
         return id;
     }
 
-    public void setId(final String id)
+    public void setId( final String id )
     {
         final String old = getId();
         this.id = id;
-        firePropertyChange(ID, old, id);
+        firePropertyChange( ID, old, id );
     }
 
     public String getCourse()
@@ -108,24 +110,23 @@ public class PersonData extends Model
         return course;
     }
 
-    public void setCourse(final String course)
+    public void setCourse( final String course )
     {
         final String old = getCourse();
         this.course = course;
-        firePropertyChange(COURSE, old, course);
+        firePropertyChange( COURSE, old, course );
     }
 
     public String toString()
     {
-
         final StringBuffer text = new StringBuffer();
-        text.append(getId());
-        text.append(" - ");
-        text.append(getLastName());
-        text.append(" - ");
-        text.append(getFirstName());
-        text.append(" - ");
-        text.append(getCourse());
+        text.append( getId() );
+        text.append( " - " );
+        text.append( getLastName() );
+        text.append( " - " );
+        text.append( getFirstName() );
+        text.append( " - " );
+        text.append( getCourse() );
 
         return text.toString();
     }

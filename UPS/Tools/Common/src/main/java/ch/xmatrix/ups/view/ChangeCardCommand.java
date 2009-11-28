@@ -23,21 +23,20 @@ import org.pietschy.command.CommandManager;
  */
 public class ChangeCardCommand extends ActionCommand
 {
+    private final AbstractMainModel model;
 
-    private AbstractMainModel model;
+    private final String cardId;
 
-    private String cardId;
-
-    public ChangeCardCommand(final CommandManager commandManager, final AbstractMainModel model,
-                             final String commandId, final String cardId)
+    public ChangeCardCommand( final CommandManager commandManager, final AbstractMainModel model,
+                              final String commandId, final String cardId )
     {
-        super(commandManager, commandId);
+        super( commandManager, commandId );
         this.model = model;
         this.cardId = cardId;
     }
 
     protected void handleExecute()
     {
-        model.setCurrentCard(cardId);
+        model.setCurrentCard( cardId );
     }
 }

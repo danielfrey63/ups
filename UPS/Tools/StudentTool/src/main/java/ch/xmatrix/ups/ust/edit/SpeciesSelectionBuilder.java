@@ -44,68 +44,66 @@ import javax.swing.event.ListSelectionListener;
  */
 public class SpeciesSelectionBuilder extends ActionCommandPanelBuilder
 {
+    private final JList list = new JList();
 
-    private JList list = new JList();
-
-    public void setModel(final UserModel userModel)
+    public void setModel( final UserModel userModel )
     {
-        final Constraints constraints = (Constraints) AbstractMainModel.findModel(userModel.getConstraintsUid());
-        final TaxonTree tree = TaxonModels.find(constraints.getTaxaUid());
-        final SimpleTaxon[] taxa = getSpecies(tree.getRootTaxon()).toArray(new SimpleTaxon[0]);
-        Arrays.sort(taxa, new ToStringComparator());
-        list.setListData(taxa);
+        final Constraints constraints = (Constraints) AbstractMainModel.findModel( userModel.getConstraintsUid() );
+        final TaxonTree tree = TaxonModels.find( constraints.getTaxaUid() );
+        final SimpleTaxon[] taxa = getSpecies( tree.getRootTaxon() ).toArray( new SimpleTaxon[0] );
+        Arrays.sort( taxa, new ToStringComparator() );
+        list.setListData( taxa );
     }
 
-    public void addListSelectionListener(final ListSelectionListener listener)
+    public void addListSelectionListener( final ListSelectionListener listener )
     {
-        list.addListSelectionListener(listener);
+        list.addListSelectionListener( listener );
     }
 
     protected JComponent createMainPanel()
     {
         final TaxaListRenderer renderer = new TaxaListRenderer();
-        list.setBorder(new EmptyBorder(3, 3, 3, 3));
-        list.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setCellRenderer(renderer);
-        final Searchable searchable = SearchableUtils.installSearchable(list);
-        searchable.setBackground(null);
-        return new JScrollPane(list);
+        list.setBorder( new EmptyBorder( 3, 3, 3, 3 ) );
+        list.getSelectionModel().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        list.setCellRenderer( renderer );
+        final Searchable searchable = SearchableUtils.installSearchable( list );
+        searchable.setBackground( null );
+        return new JScrollPane( list );
     }
 
-    private ArrayList<SimpleTaxon> getSpecies(final SimpleTaxon taxon)
+    private ArrayList<SimpleTaxon> getSpecies( final SimpleTaxon taxon )
     {
         final ArrayList<SimpleTaxon> result = new ArrayList<SimpleTaxon>();
-        if (SimpleTaxon.isSpecies(taxon))
+        if ( SimpleTaxon.isSpecies( taxon ) )
         {
-            result.add(taxon);
+            result.add( taxon );
         }
         final ArrayList<SimpleTaxon> children = taxon.getChildTaxa();
-        for (int i = 0; children != null && i < children.size(); i++)
+        for ( int i = 0; children != null && i < children.size(); i++ )
         {
-            final SimpleTaxon child = children.get(i);
-            result.addAll(getSpecies(child));
+            final SimpleTaxon child = children.get( i );
+            result.addAll( getSpecies( child ) );
         }
         return result;
     }
 
     private class TaxaListRenderer implements ListCellRenderer
     {
-
-        private RendererPanel panel = new RendererPanel(RendererPanel.SelectionType.ALL);
+        private final RendererPanel panel = new RendererPanel( RendererPanel.SelectionType.ALL );
 
         public TaxaListRenderer()
         {
-            panel.setEnabled(true);
+            panel.setEnabled( true );
         }
 
-        public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-                                                      final boolean selected, final boolean hasFocus)
+        public Component getListCellRendererComponent( final JList list, final Object value, final int index,
+                                                       final boolean selected, final boolean hasFocus )
         {
             final SimpleTaxon taxon = (SimpleTaxon) value;
-            final ImageIcon icon = ImageLocator.getIcon(TaxonRendererUtils.getIconForTaxon(taxon, selected));
-            panel.setIcon(icon);
-            panel.setText(taxon.getName());
-            panel.setSelected(selected);
+            final ImageIcon icon = ImageLocator.getIcon( TaxonRendererUtils.getIconForTaxon( taxon, selected ) );
+            panel.setIcon( icon );
+            panel.setText( taxon.getName() );
+            panel.setSelected( selected );
             panel.update();
             return panel;
         }

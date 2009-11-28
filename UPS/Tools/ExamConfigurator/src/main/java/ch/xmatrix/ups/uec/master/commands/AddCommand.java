@@ -29,15 +29,14 @@ import org.pietschy.command.CommandManager;
  */
 public class AddCommand extends ActionCommand
 {
+    private final SelectionInList models;
 
-    private SelectionInList models;
+    private final MasterDetailsFactory factory;
 
-    private MasterDetailsFactory factory;
-
-    public AddCommand(final CommandManager manager, final SelectionInList models,
-                      final MasterDetailsFactory factory)
+    public AddCommand( final CommandManager manager, final SelectionInList models,
+                       final MasterDetailsFactory factory )
     {
-        super(manager, Commands.COMMANDID_ADD);
+        super( manager, Commands.COMMANDID_ADD );
         this.models = models;
         this.factory = factory;
     }
@@ -45,6 +44,6 @@ public class AddCommand extends ActionCommand
     protected void handleExecute()
     {
         final Object model = factory.create();
-        models.setSelection(model);
+        models.setSelection( model );
     }
 }

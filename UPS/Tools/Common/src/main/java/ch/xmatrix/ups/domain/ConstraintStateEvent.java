@@ -22,13 +22,12 @@ import java.util.EventObject;
  */
 public class ConstraintStateEvent extends EventObject
 {
-
     private TreeObject[] taxa;
 
-    public ConstraintStateEvent(final Object source, final TreeObject[] taxa)
+    public ConstraintStateEvent( final Object source, final TreeObject[] taxa )
     {
-        super(source);
-        this.setTaxa(taxa);
+        super( source );
+        this.setTaxa( taxa );
     }
 
     public TreeObject[] getTaxa()
@@ -36,7 +35,7 @@ public class ConstraintStateEvent extends EventObject
         return taxa;
     }
 
-    private void setTaxa(final TreeObject[] taxa)
+    private void setTaxa( final TreeObject[] taxa )
     {
         this.taxa = taxa;
     }

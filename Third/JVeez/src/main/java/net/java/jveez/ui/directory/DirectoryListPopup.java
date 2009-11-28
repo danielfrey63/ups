@@ -21,86 +21,101 @@ import net.java.jveez.ui.widgets.BlurPanel;
 import net.java.jveez.vfs.Directory;
 import org.apache.log4j.Logger;
 
-public class DirectoryListPopup extends BlurPanel {
+public class DirectoryListPopup extends BlurPanel
+{
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( DirectoryListPopup.class );
 
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(DirectoryListPopup.class);
+    private final DirectoryListModel listModel = new DirectoryListModel();
 
-    private DirectoryListModel listModel = new DirectoryListModel();
-    private JList directoryList = new JList(listModel);
+    private final JList directoryList = new JList( listModel );
 
-    private DirectoryBrowser directoryBrowser;
+    private final DirectoryBrowser directoryBrowser;
+
     private Popup popup;
 
-    private AWTEventListener awtEventListener = new AWTEventListener() {
-        public void eventDispatched(AWTEvent event) {
-            if (event.getID() == MouseEvent.MOUSE_PRESSED) {
-                Object source = event.getSource();
-                if (!(source instanceof Component)
-                        || DirectoryListPopup.this != SwingUtilities.getAncestorOfClass(DirectoryListPopup.class, (Component) source)) {
-                    LOG.warn("CLICKED OUTSIDE !!");
-                    hide();
+    private final AWTEventListener awtEventListener = new AWTEventListener()
+    {
+        public void eventDispatched( final AWTEvent event )
+        {
+            if ( event.getID() == MouseEvent.MOUSE_PRESSED )
+            {
+                final Object source = event.getSource();
+                if ( !( source instanceof Component )
+                        || DirectoryListPopup.this != SwingUtilities.getAncestorOfClass( DirectoryListPopup.class, (Component) source ) )
+                {
+                    LOG.warn( "CLICKED OUTSIDE !!" );
+                    setVisible(false);
                 }
             }
         }
     };
 
-    public DirectoryListPopup(DirectoryBrowser directoryBrowser) {
+    public DirectoryListPopup( final DirectoryBrowser directoryBrowser )
+    {
         this.directoryBrowser = directoryBrowser;
 
-        JScrollPane scrollPane = new JScrollPane(directoryList);
-        scrollPane.setBorder(BorderFactory.createEtchedBorder());
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setOpaque(false);
-        scrollPane.setOpaque(false);
-        scrollPane.setPreferredSize(new Dimension(300, 200));
+        final JScrollPane scrollPane = new JScrollPane( directoryList );
+        scrollPane.setBorder( BorderFactory.createEtchedBorder() );
+        scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+        scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+        scrollPane.getViewport().setOpaque( false );
+        scrollPane.setOpaque( false );
+        scrollPane.setPreferredSize( new Dimension( 300, 200 ) );
 
-        directoryList.setCellRenderer(new DirectoryListCellRenderer());
-        directoryList.setOpaque(false);
-        directoryList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting()) {
+        directoryList.setCellRenderer( new DirectoryListCellRenderer() );
+        directoryList.setOpaque( false );
+        directoryList.getSelectionModel().addListSelectionListener( new ListSelectionListener()
+        {
+            public void valueChanged( final ListSelectionEvent e )
+            {
+                if ( e.getValueIsAdjusting() )
+                {
                     return;
                 }
 
-                Directory directory = (Directory) directoryList.getSelectedValue();
-                if (directory != null) {
-                    DirectoryListPopup.this.directoryBrowser.setCurrentDirectory(directory);
+                final Directory directory = (Directory) directoryList.getSelectedValue();
+                if ( directory != null )
+                {
+                    DirectoryListPopup.this.directoryBrowser.setCurrentDirectory( directory );
                 }
-                hide();
+                setVisible(false);
             }
-        });
+        } );
 
-        setLayout(new BorderLayout());
-        add(scrollPane, BorderLayout.CENTER);
+        setLayout( new BorderLayout() );
+        add( scrollPane, BorderLayout.CENTER );
     }
 
-//  public boolean isOptimizedDrawingEnabled()
-//  {
-//    return false;
-//  }
+    public synchronized void show( final Collection<? extends Directory> directories, final int x, final int y )
+    {
+        setVisible(false);
 
-    public synchronized void show(Collection<? extends Directory> directories, int x, int y) {
-        hide();
+        setBlurSource( JVeez.getMainFrame().getContentPane() );
 
-        setBlurSource(JVeez.getMainFrame().getContentPane());
-//    setBlurSource( directoryList );
-
-        listModel.setContent(directories);
-        if (popup == null) {
-            popup = PopupFactory.getSharedInstance().getPopup(JVeez.getMainFrame(), this, x, y);
+        listModel.setContent( directories );
+        if ( popup == null )
+        {
+            popup = PopupFactory.getSharedInstance().getPopup( JVeez.getMainFrame(), this, x, y );
             popup.show();
         }
 
-        Toolkit.getDefaultToolkit().addAWTEventListener(awtEventListener, AWTEvent.MOUSE_EVENT_MASK);
+        Toolkit.getDefaultToolkit().addAWTEventListener( awtEventListener, AWTEvent.MOUSE_EVENT_MASK );
     }
 
-    public synchronized void hide() {
-        Toolkit.getDefaultToolkit().removeAWTEventListener(awtEventListener);
-        if (popup != null) {
-            popup.hide();
-            popup = null;
+    public synchronized void setVisible( final boolean visible )
+    {
+        super.setVisible( visible );
+        if ( !visible )
+        {
+            Toolkit.getDefaultToolkit().removeAWTEventListener( awtEventListener );
+            if ( popup != null )
+            {
+                popup.hide();
+                popup = null;
+            }
         }
     }
 }

@@ -25,13 +25,15 @@ package net.java.jveez.config;
 import org.garret.perst.Persistent;
 import org.garret.perst.Storage;
 
-abstract class ConfigurationItem extends Persistent {
-
-    protected ConfigurationItem() {
+abstract class ConfigurationItem extends Persistent
+{
+    protected ConfigurationItem()
+    {
     }
 
-    protected ConfigurationItem(Storage storage) {
-        super(storage);
+    protected ConfigurationItem( final Storage storage )
+    {
+        super( storage );
     }
 
     public abstract void resetToDefaults();

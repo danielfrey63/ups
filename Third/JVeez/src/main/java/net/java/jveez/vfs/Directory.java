@@ -24,8 +24,8 @@ package net.java.jveez.vfs;
 
 import javax.swing.Icon;
 
-public interface Directory {
-
+public interface Directory
+{
     public Directory getParent();
 
     public String getName();

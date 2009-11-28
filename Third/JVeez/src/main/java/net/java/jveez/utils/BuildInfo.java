@@ -22,21 +22,26 @@
 
 package net.java.jveez.utils;
 
-public class BuildInfo {
-
+public class BuildInfo
+{
     public final static String NAME;
+
     public final static String VERSION;
+
     public final static String TITLE;
 
-    static {
-        Package thisPackage = BuildInfo.class.getPackage();
-        NAME = (thisPackage.getImplementationTitle() != null ? thisPackage.getImplementationTitle() : "JVeez");
+    static
+    {
+        final Package thisPackage = BuildInfo.class.getPackage();
+        NAME = ( thisPackage.getImplementationTitle() != null ? thisPackage.getImplementationTitle() : "JVeez" );
         VERSION = thisPackage.getImplementationVersion();
 
-        if (VERSION != null) {
+        if ( VERSION != null )
+        {
             TITLE = NAME + " - " + VERSION;
         }
-        else {
+        else
+        {
             TITLE = NAME + " - Developer build";
         }
     }

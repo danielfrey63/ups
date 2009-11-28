@@ -49,184 +49,218 @@ import javax.imageio.stream.MemoryCacheImageOutputStream;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class ImageUtils {
+public class ImageUtils
+{
+    private static final Logger LOG = Logger.getLogger( ImageUtils.class );
 
-    private static final Logger LOG = Logger.getLogger(ImageUtils.class);
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private final static GraphicsConfiguration graphicsConfiguration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 
     private static final IIOReadProgressListener iioReadProgressListener = new CancellableIIOReadProgressListener();
 
-    public static GraphicsConfiguration getGraphicsconfiguration() {
+    public static GraphicsConfiguration getGraphicsconfiguration()
+    {
         return graphicsConfiguration;
     }
 
-    public static BufferedImage loadImage(Picture picture) {
+    public static BufferedImage loadImage( final Picture picture )
+    {
         DebugUtils.ensureIsNotDispatchThread();
 
         int retryCounter = 2;
-        while (retryCounter > 0) {
-            try {
-                return _loadImage(picture);
+        while ( retryCounter > 0 )
+        {
+            try
+            {
+                return _loadImage( picture );
             }
-            catch (OutOfMemoryError e) {
-                LOG.warn("Out of memory error detected ! Retrying !", e);
-                Utils.freeMemory(retryCounter < 1);
+            catch ( OutOfMemoryError e )
+            {
+                LOG.warn( "Out of memory error detected ! Retrying !", e );
+                Utils.freeMemory( retryCounter < 1 );
                 retryCounter--;
             }
-            catch (OperationCancelledException e) {
-                LOG.info("Thread has been interrupted while loading the picture \"" + picture + "\"");
+            catch ( OperationCancelledException e )
+            {
+                LOG.info( "Thread has been interrupted while loading the picture \"" + picture + "\"" );
                 Thread.currentThread().interrupt();
                 return null;
             }
-            catch (Throwable t) {
-                LOG.error("Could not load the image", t);
+            catch ( Throwable t )
+            {
+                LOG.error( "Could not load the image", t );
                 return null;
             }
         }
-        LOG.error("Could not load the image because of memory constraints !");
+        LOG.error( "Could not load the image because of memory constraints !" );
         return null;
     }
 
-    private static BufferedImage _loadImage(Picture picture) throws IOException {
+    private static BufferedImage _loadImage( final Picture picture ) throws IOException
+    {
         BufferedImage bufferedImage = null;
 
         // detect image format ...
-        ImageInputStream imageInputStream = ImageIO.createImageInputStream(picture.getFile());
-        Iterator<ImageReader> iterator = ImageIO.getImageReaders(imageInputStream);
-        ImageReader reader = (iterator.hasNext() ? iterator.next() : null);
-        if (reader == null) {
-            LOG.warn("No image reader found for " + picture);
+        final ImageInputStream imageInputStream = ImageIO.createImageInputStream( picture.getFile() );
+        final Iterator<ImageReader> iterator = ImageIO.getImageReaders( imageInputStream );
+        final ImageReader reader = ( iterator.hasNext() ? iterator.next() : null );
+        if ( reader == null )
+        {
+            LOG.warn( "No image reader found for " + picture );
             return null;
         }
-        reader.addIIOReadProgressListener(iioReadProgressListener);
-        reader.setInput(imageInputStream);
-        bufferedImage = reader.read(0);
+        reader.addIIOReadProgressListener( iioReadProgressListener );
+        reader.setInput( imageInputStream );
+        bufferedImage = reader.read( 0 );
 
         imageInputStream.close();
 
         return bufferedImage;
     }
 
-    public static BufferedImage loadImage(byte[] imageData) {
-        try {
-            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
+    public static BufferedImage loadImage( final byte[] imageData )
+    {
+        try
+        {
+            final BufferedImage bufferedImage = ImageIO.read( new ByteArrayInputStream( imageData ) );
             // here, we will copy the (unmanaged) image from ImageIO into a compatible (managed) image to ensure best performance
-            return copyIntoCompatibleImage(bufferedImage, bufferedImage.getWidth(), bufferedImage.getHeight());
+            return copyIntoCompatibleImage( bufferedImage, bufferedImage.getWidth(), bufferedImage.getHeight() );
         }
-        catch (Throwable t) {
-            LOG.error("Could not load the image", t);
+        catch ( Throwable t )
+        {
+            LOG.error( "Could not load the image", t );
             return null;
         }
     }
 
-    private static void close(ImageOutputStream output) {
-        if (output != null) {
-            try {
+    private static void close( final ImageOutputStream output )
+    {
+        if ( output != null )
+        {
+            try
+            {
                 output.close();
             }
-            catch (IOException e) {
-                LOG.warn("Could not close the output stream", e);
+            catch ( IOException e )
+            {
+                LOG.warn( "Could not close the output stream", e );
             }
         }
     }
 
-    public static BufferedImage copyIntoCompatibleImage(Image image, int width, int height) {
-        if (image == null) {
+    public static BufferedImage copyIntoCompatibleImage( final Image image, final int width, final int height )
+    {
+        if ( image == null )
+        {
             return null;
         }
 
-        BufferedImage compatibleImage = graphicsConfiguration.createCompatibleImage(width, height);
-        Graphics2D g2d = compatibleImage.createGraphics();
-        g2d.drawImage(image, 0, 0, null);
+        final BufferedImage compatibleImage = graphicsConfiguration.createCompatibleImage( width, height );
+        final Graphics2D g2d = compatibleImage.createGraphics();
+        g2d.drawImage( image, 0, 0, null );
         g2d.dispose();
         return compatibleImage;
     }
 
-    public static BufferedImage createScaledImage(BufferedImage image, int maximumWidth, int maximumHeight) {
+    public static BufferedImage createScaledImage( final BufferedImage image, final int maximumWidth, final int maximumHeight )
+    {
         final double imageWidth = image.getWidth();
         final double imageHeight = image.getHeight();
-        return createScaledImage(image, getScaleFactor(maximumWidth, imageWidth, maximumHeight, imageHeight));
+        return createScaledImage( image, getScaleFactor( maximumWidth, imageWidth, maximumHeight, imageHeight ) );
     }
 
-    private static double getScaleFactor(int maximumWidth, double imageWidth, int maximumHeight, double imageHeight) {
-        return Math.min((double) maximumWidth / imageWidth, (double) maximumHeight / imageHeight);
+    private static double getScaleFactor( final int maximumWidth, final double imageWidth, final int maximumHeight, final double imageHeight )
+    {
+        return Math.min( (double) maximumWidth / imageWidth, (double) maximumHeight / imageHeight );
     }
 
-    private static BufferedImage createScaledImage(BufferedImage image, double scale) {
-        if (scale == 1.0) {
+    private static BufferedImage createScaledImage( final BufferedImage image, final double scale )
+    {
+        if ( scale == 1.0 )
+        {
             return image;
         }
 
         final double imageWidth = image.getWidth();
         final double imageHeight = image.getHeight();
-        final int reducedWidth = (int) (imageWidth * scale);
-        final int reducedHeight = (int) (imageHeight * scale);
+        final int reducedWidth = (int) ( imageWidth * scale );
+        final int reducedHeight = (int) ( imageHeight * scale );
 
-        BufferedImage reducedImage = graphicsConfiguration.createCompatibleImage(reducedWidth, reducedHeight);
-        Graphics2D g2d = reducedImage.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.drawImage(image, AffineTransform.getScaleInstance(scale, scale), null);
+        final BufferedImage reducedImage = graphicsConfiguration.createCompatibleImage( reducedWidth, reducedHeight );
+        final Graphics2D g2d = reducedImage.createGraphics();
+        g2d.setRenderingHint( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
+        g2d.drawImage( image, AffineTransform.getScaleInstance( scale, scale ), null );
         g2d.dispose();
 
         return reducedImage;
     }
 
-    public static BufferedImage transformImage(BufferedImage image, boolean rotate, boolean clockWise, boolean flipAroundX, boolean flipAroundY) {
-        if (!rotate && !flipAroundX && !flipAroundY) {
+    public static BufferedImage transformImage( final BufferedImage image, final boolean rotate, final boolean clockWise, final boolean flipAroundX, final boolean flipAroundY )
+    {
+        if ( !rotate && !flipAroundX && !flipAroundY )
+        {
             return image;
         }
 
-        int targetWith = (rotate ? image.getHeight() : image.getWidth());
-        int targetHeight = (rotate ? image.getWidth() : image.getHeight());
+        final int targetWith = ( rotate ? image.getHeight() : image.getWidth() );
+        final int targetHeight = ( rotate ? image.getWidth() : image.getHeight() );
 
-        AffineTransform transform = new AffineTransform();
+        final AffineTransform transform = new AffineTransform();
 
-        if (flipAroundX) {
-            transform.translate(0, targetHeight);
-            transform.scale(1, -1);
+        if ( flipAroundX )
+        {
+            transform.translate( 0, targetHeight );
+            transform.scale( 1, -1 );
         }
-        if (flipAroundY) {
-            transform.translate(targetWith, 0);
-            transform.scale(-1, 1);
+        if ( flipAroundY )
+        {
+            transform.translate( targetWith, 0 );
+            transform.scale( -1, 1 );
         }
-        if (rotate) {
-            if (clockWise) {
-                transform.translate(image.getHeight(), 0);
-                transform.rotate(Math.PI / 2);
+        if ( rotate )
+        {
+            if ( clockWise )
+            {
+                transform.translate( image.getHeight(), 0 );
+                transform.rotate( Math.PI / 2 );
             }
-            else {
-                transform.translate(0, image.getWidth());
-                transform.rotate(-Math.PI / 2);
+            else
+            {
+                transform.translate( 0, image.getWidth() );
+                transform.rotate( -Math.PI / 2 );
             }
         }
 
-        BufferedImage copy = graphicsConfiguration.createCompatibleImage(targetWith, targetHeight);
-        Graphics2D g2d = copy.createGraphics();
-        g2d.drawImage(image, transform, null);
+        final BufferedImage copy = graphicsConfiguration.createCompatibleImage( targetWith, targetHeight );
+        final Graphics2D g2d = copy.createGraphics();
+        g2d.drawImage( image, transform, null );
         g2d.dispose();
 
         return copy;
     }
 
-    public static byte[] getImageBytes(BufferedImage bufferedImage, String mimeType) {
-        long start = System.currentTimeMillis();
-        ImageWriter writer = ImageIO.getImageWritersByMIMEType(mimeType).next();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageOutputStream output = new MemoryCacheImageOutputStream(bos);
+    public static byte[] getImageBytes( final BufferedImage bufferedImage, final String mimeType )
+    {
+        final long start = System.currentTimeMillis();
+        final ImageWriter writer = ImageIO.getImageWritersByMIMEType( mimeType ).next();
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final ImageOutputStream output = new MemoryCacheImageOutputStream( bos );
 
-        try {
-            writer.setOutput(output);
-            writer.write(bufferedImage);
-            LOG.debug("image stored in " + (System.currentTimeMillis() - start) + "ms");
+        try
+        {
+            writer.setOutput( output );
+            writer.write( bufferedImage );
+            LOG.debug( "image stored in " + ( System.currentTimeMillis() - start ) + "ms" );
         }
-        catch (Exception e) {
-            LOG.error("an exception has been caught while saving image as a byte array", e);
+        catch ( Exception e )
+        {
+            LOG.error( "an exception has been caught while saving image as a byte array", e );
             return null;
         }
-        finally {
-            close(output);
+        finally
+        {
+            close( output );
         }
         return bos.toByteArray();
     }
@@ -236,50 +270,61 @@ public class ImageUtils {
      * @return an <code>javax.swing.ImageIcon</code> that's represent a thumbnail from Exif metadata, and rotate it if
      *         necessary. null if the image don't support full Exif.
      */
-    public static BufferedImage loadThumbnailFromEXIF(Picture picture) {
-        if (picture == null) {
-            if (DEBUG) {
-                LOG.debug("No EXIF thumbnail for null picture");
+    public static BufferedImage loadThumbnailFromEXIF( final Picture picture )
+    {
+        if ( picture == null )
+        {
+            if ( DEBUG )
+            {
+                LOG.debug( "No EXIF thumbnail for null picture" );
             }
             return null;
         }
 
         final File file = picture.getFile();
-        if (!Utils.isSupportedExifImage(file)) {
-            if (DEBUG) {
-                LOG.debug("EXIF thumbnail not supported by \"" + file + "\"");
+        if ( !Utils.isSupportedExifImage( file ) )
+        {
+            if ( DEBUG )
+            {
+                LOG.debug( "EXIF thumbnail not supported by \"" + file + "\"" );
             }
             return null;
         }
 
-        try {
-            final Metadata metadata = JpegMetadataReader.readMetadata(file);
-            final ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory(ExifDirectory.class);
+        try
+        {
+            final Metadata metadata = JpegMetadataReader.readMetadata( file );
+            final ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory( ExifDirectory.class );
             final byte[] thumbnailBytes = exifDirectory.getThumbnailData();
 
             // some broken pictures have the thumbnail data EXIF tag but no data
-            if (thumbnailBytes == null || thumbnailBytes.length == 0) {
-                if (DEBUG) {
-                    LOG.debug("EXIF tag for thumbnail but no data for \"" + file + "\"");
+            if ( thumbnailBytes == null || thumbnailBytes.length == 0 )
+            {
+                if ( DEBUG )
+                {
+                    LOG.debug( "EXIF tag for thumbnail but no data for \"" + file + "\"" );
                 }
                 return null;
             }
 
-            BufferedImage image = loadImage(thumbnailBytes);
+            BufferedImage image = loadImage( thumbnailBytes );
 
-            if (image == null) {
-                LOG.info("Could not read the EXIF thumbnail data for \"" + file + "\"");
+            if ( image == null )
+            {
+                LOG.info( "Could not read the EXIF thumbnail data for \"" + file + "\"" );
                 return null;
             }
-            else if (DEBUG) {
-                LOG.debug("Thumbnail of size " + image.getWidth() + "x" + image.getHeight() +
-                        " loaded successfully from EXIF data for \"" + file + "\"");
+            else if ( DEBUG )
+            {
+                LOG.debug( "Thumbnail of size " + image.getWidth() + "x" + image.getHeight() +
+                        " loaded successfully from EXIF data for \"" + file + "\"" );
             }
 
-            final int exifOrientation = (exifDirectory.containsTag(ExifDirectory.TAG_ORIENTATION) ? exifDirectory.getInt(ExifDirectory.TAG_ORIENTATION) : 0);
+            final int exifOrientation = ( exifDirectory.containsTag( ExifDirectory.TAG_ORIENTATION ) ? exifDirectory.getInt( ExifDirectory.TAG_ORIENTATION ) : 0 );
 
-            if (exifOrientation > 1) {
-                LOG.info("Correcting thumbnail rotation (" + exifOrientation + ")");
+            if ( exifOrientation > 1 )
+            {
+                LOG.info( "Correcting thumbnail rotation (" + exifOrientation + ")" );
 
                 //     1        2       3      4         5            6           7          8
                 //
@@ -289,41 +334,43 @@ public class ImageUtils {
                 //    88          88      88  88
                 //    88          88  888888  888888
 
-                switch (exifOrientation) {
+                switch ( exifOrientation )
+                {
                     case 2:
-                        image = transformImage(image, false, false, false, true);
+                        image = transformImage( image, false, false, false, true );
                         break;
 
                     case 3:
-                        image = transformImage(image, false, false, true, true);
+                        image = transformImage( image, false, false, true, true );
                         break;
 
                     case 4:
-                        image = transformImage(image, false, false, true, false);
+                        image = transformImage( image, false, false, true, false );
                         break;
 
                     case 5:
-                        image = transformImage(image, true, true, false, true);
+                        image = transformImage( image, true, true, false, true );
                         break;
 
                     case 6:
-                        image = transformImage(image, true, true, false, false);
+                        image = transformImage( image, true, true, false, false );
                         break;
 
                     case 7:
-                        image = transformImage(image, true, false, false, true);
+                        image = transformImage( image, true, false, false, true );
                         break;
 
                     case 8:
-                        image = transformImage(image, true, false, false, false);
+                        image = transformImage( image, true, false, false, false );
                         break;
                 }
             }
 
             return image;
         }
-        catch (Exception e) {
-            LOG.warn("Thumbnail loading via EXIF data failed for \"" + file + "\"", e);
+        catch ( Exception e )
+        {
+            LOG.warn( "Thumbnail loading via EXIF data failed for \"" + file + "\"", e );
             return null;
         }
     }
@@ -342,76 +389,88 @@ public class ImageUtils {
      *                     RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
      * @return a scaled version of the original {@codey BufferedImage}
      */
-    public static BufferedImage createScaledImage(BufferedImage img, int targetWidth, int targetHeight, Object hint) {
-        final int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+    public static BufferedImage createScaledImage( final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint )
+    {
+        final int type = ( img.getTransparency() == Transparency.OPAQUE ) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
         // Use multi-step technique: start with original size, then
         // scale down in multiple passes with drawImage()
         // until the target size is reached
         final int imageWidth = img.getWidth();
         final int imageHeight = img.getHeight();
-        final double scale = getScaleFactor(targetWidth, imageWidth, targetHeight, imageHeight);
+        final double scale = getScaleFactor( targetWidth, imageWidth, targetHeight, imageHeight );
         int width, height;
-        if (hint == RenderingHints.VALUE_INTERPOLATION_BILINEAR && (imageHeight > targetHeight || imageWidth > targetWidth)) {
-            final double itW = ((double) imageWidth) / ((double) targetWidth);
-            final double itH = ((double) imageHeight) / ((double) targetHeight);
-            if (itW > itH) {
-                final int log = (int) (Math.log(itW) / Math.log(2) + 1);
-                final int factor = (int) Math.pow(2, log);
+        if ( hint == RenderingHints.VALUE_INTERPOLATION_BILINEAR && ( imageHeight > targetHeight || imageWidth > targetWidth ) )
+        {
+            final double itW = ( (double) imageWidth ) / ( (double) targetWidth );
+            final double itH = ( (double) imageHeight ) / ( (double) targetHeight );
+            if ( itW > itH )
+            {
+                final int log = (int) ( Math.log( itW ) / Math.log( 2 ) + 1 );
+                final int factor = (int) Math.pow( 2, log );
                 width = targetWidth * factor;
-                height = ((int) ((double) targetWidth * imageHeight / imageWidth) * factor);
+                height = ( (int) ( (double) targetWidth * imageHeight / imageWidth ) * factor );
             }
-            else {
-                final int log = (int) (Math.log(itH) / Math.log(2) + 1);
-                final int factor = (int) Math.pow(2, log);
-                width = ((int) ((double) targetWidth * imageWidth / imageHeight) * factor);
+            else
+            {
+                final int log = (int) ( Math.log( itH ) / Math.log( 2 ) + 1 );
+                final int factor = (int) Math.pow( 2, log );
+                width = ( (int) ( (double) targetWidth * imageWidth / imageHeight ) * factor );
                 height = targetHeight * factor;
             }
         }
-        else {
-            if (imageWidth > imageHeight) {
+        else
+        {
+            if ( imageWidth > imageHeight )
+            {
                 width = targetWidth;
-                height = (int) (imageHeight * scale);
+                height = (int) ( imageHeight * scale );
             }
-            else {
-                width = (int) (imageWidth * scale);
+            else
+            {
+                width = (int) ( imageWidth * scale );
                 height = targetHeight;
             }
         }
 
-        BufferedImage ret = (BufferedImage) img;
-        do {
-            if (width > targetWidth) {
+        BufferedImage ret = img;
+        do
+        {
+            if ( width > targetWidth )
+            {
                 width /= 2;
             }
 
-            if (height > targetHeight) {
+            if ( height > targetHeight )
+            {
                 height /= 2;
             }
 
-            BufferedImage tmp = new BufferedImage(width, height, type);
-            Graphics2D g2 = tmp.createGraphics();
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
-            g2.drawImage(ret, 0, 0, width, height, null);
+            final BufferedImage tmp = new BufferedImage( width, height, type );
+            final Graphics2D g2 = tmp.createGraphics();
+            g2.setRenderingHint( RenderingHints.KEY_INTERPOLATION, hint );
+            g2.drawImage( ret, 0, 0, width, height, null );
             g2.dispose();
 
             ret = tmp;
         }
-        while (width != targetWidth && height != targetHeight);
+        while ( width != targetWidth && height != targetHeight );
 
         return ret;
     }
 
-    public static VolatileImage createVolatileImage(int width, int height) {
-        return graphicsConfiguration.createCompatibleVolatileImage(width, height);
+    public static VolatileImage createVolatileImage( final int width, final int height )
+    {
+        return graphicsConfiguration.createCompatibleVolatileImage( width, height );
     }
 
-    public static BufferedImage createScaledImage(BufferedImage image, double sx, double sy) {
-        int scaledWidth = (int) Math.ceil(image.getWidth() * sx);
-        int scaledHeight = (int) Math.ceil(image.getHeight() * sy);
+    public static BufferedImage createScaledImage( final BufferedImage image, final double sx, final double sy )
+    {
+        final int scaledWidth = (int) Math.ceil( image.getWidth() * sx );
+        final int scaledHeight = (int) Math.ceil( image.getHeight() * sy );
 
-        BufferedImage scaledImage = graphicsConfiguration.createCompatibleImage(scaledWidth, scaledHeight);
-        Graphics2D graphics2D = scaledImage.createGraphics();
-        graphics2D.drawImage(image, AffineTransform.getScaleInstance(sx, sy), null);
+        final BufferedImage scaledImage = graphicsConfiguration.createCompatibleImage( scaledWidth, scaledHeight );
+        final Graphics2D graphics2D = scaledImage.createGraphics();
+        graphics2D.drawImage( image, AffineTransform.getScaleInstance( sx, sy ), null );
         graphics2D.dispose();
 
         return scaledImage;

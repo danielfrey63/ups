@@ -25,32 +25,38 @@ package net.java.jveez.utils;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-public abstract class MouseWheelAdapter implements MouseWheelListener {
-
+public abstract class MouseWheelAdapter implements MouseWheelListener
+{
     private long lastAcceptedEvent;
-    private long minimalIntervalBetweenEvents;
 
-    public MouseWheelAdapter(float maximumEventsPerSecond) {
-        this.minimalIntervalBetweenEvents = (long) (1000L / maximumEventsPerSecond);
+    private final long minimalIntervalBetweenEvents;
+
+    public MouseWheelAdapter( final float maximumEventsPerSecond )
+    {
+        this.minimalIntervalBetweenEvents = (long) ( 1000L / maximumEventsPerSecond );
     }
 
-    public final void mouseWheelMoved(MouseWheelEvent e) {
-        long eventFired = e.getWhen();
+    public final void mouseWheelMoved( final MouseWheelEvent e )
+    {
+        final long eventFired = e.getWhen();
 
-        if (eventFired - lastAcceptedEvent > minimalIntervalBetweenEvents) {
+        if ( eventFired - lastAcceptedEvent > minimalIntervalBetweenEvents )
+        {
             // accept event
             lastAcceptedEvent = eventFired;
-            int rotation = e.getWheelRotation();
-            if (rotation > 0) {
-                mouseWheelDown(e);
+            final int rotation = e.getWheelRotation();
+            if ( rotation > 0 )
+            {
+                mouseWheelDown( e );
             }
-            else if (rotation < 0) {
-                mouseWheelUp(e);
+            else if ( rotation < 0 )
+            {
+                mouseWheelUp( e );
             }
         }
     }
 
-    public abstract void mouseWheelDown(MouseWheelEvent e);
+    public abstract void mouseWheelDown( MouseWheelEvent e );
 
-    public abstract void mouseWheelUp(MouseWheelEvent e);
+    public abstract void mouseWheelUp( MouseWheelEvent e );
 }

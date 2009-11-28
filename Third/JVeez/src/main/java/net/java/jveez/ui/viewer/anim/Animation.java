@@ -22,11 +22,11 @@
 
 package net.java.jveez.ui.viewer.anim;
 
-public interface Animation {
-
+public interface Animation
+{
     public void init();
 
-    public void perform(long time);
+    public void perform( long time );
 
     public long duration();
 }

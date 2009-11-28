@@ -37,27 +37,32 @@ import org.apache.log4j.Logger;
  * @author Eric Georges
  * @author Sebastien Petrucci
  */
-public class JVeez {
-
-    private static final Logger LOG = Logger.getLogger(JVeez.class);
+public class JVeez
+{
+    private static final Logger LOG = Logger.getLogger( JVeez.class );
 
     private static MainFrame mainFrame;
 
-    public static MainFrame getMainFrame() {
+    public static MainFrame getMainFrame()
+    {
         return mainFrame;
     }
 
-    public static void showActivity(boolean b) {
-        MainFrame mainFrame = getMainFrame();
-        if (mainFrame != null) {
-            StatusBar statusBar = mainFrame.getStatusBar();
-            if (statusBar != null) {
-                statusBar.showActivity(b);
+    public static void showActivity( final boolean b )
+    {
+        final MainFrame mainFrame = getMainFrame();
+        if ( mainFrame != null )
+        {
+            final StatusBar statusBar = mainFrame.getStatusBar();
+            if ( statusBar != null )
+            {
+                statusBar.showActivity( b );
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main( final String[] args )
+    {
         BasicConfigurator.configure();
 
         ImageStore.getInstance();
@@ -65,15 +70,17 @@ public class JVeez {
 
 //    RepaintManager.setCurrentManager(new CheckingRepaintManager());
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        try
+        {
+            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
         }
-        catch (Throwable t) {
-            LOG.warn("Could not setup look & feel !", t);
+        catch ( Throwable t )
+        {
+            LOG.warn( "Could not setup look & feel !", t );
         }
 
         mainFrame = new MainFrame();
-        mainFrame.setVisible(true);
+        mainFrame.setVisible( true );
 
         Vfs.getInstance().synchronize();   // this will initialize the folder tree
     }

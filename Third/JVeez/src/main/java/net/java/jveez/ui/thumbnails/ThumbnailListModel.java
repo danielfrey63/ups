@@ -9,21 +9,20 @@ import net.java.jveez.vfs.Picture;
  * TODO: document
  *
  * @author Daniel Frey
- *
  */
-public interface ThumbnailListModel<T> extends ListModel {
+public interface ThumbnailListModel<T> extends ListModel
+{
+    Picture getPicture( int index );
 
-    Picture getPicture(int index);
+    void setPictures( Collection<? extends Picture> pictures );
 
-    void setPictures(Collection<? extends Picture> pictures);
+    void setPictureAt( int index, Picture picture );
 
-    void setPictureAt(int index, Picture picture);
-
-    int getIndexOf(Picture picture);
+    int getIndexOf( Picture picture );
 
     void clear();
 
-    void sort(SortingAlgorithm<T> algorithm);
+    void sort( SortingAlgorithm<T> algorithm );
 
-    void notifyAsUpdated(int index);
+    void notifyAsUpdated( int index );
 }

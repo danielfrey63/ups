@@ -30,32 +30,37 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 
-public class AutoHideIconButton extends JButton {
-
+public class AutoHideIconButton extends JButton
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 4049640087845220402L;
 
-    private static final MouseListener AUTO_HIDE_LISTENER = new MouseAdapter() {
-        public void mouseExited(MouseEvent e) {
-            if (e.getSource() instanceof AutoHideIconButton) {
-                ((AutoHideIconButton) e.getSource()).setVisible(false);
+    private static final MouseListener AUTO_HIDE_LISTENER = new MouseAdapter()
+    {
+        public void mouseExited( final MouseEvent e )
+        {
+            if ( e.getSource() instanceof AutoHideIconButton )
+            {
+                ( (AutoHideIconButton) e.getSource() ).setVisible( false );
             }
         }
     };
 
-    private BufferedImage icon;
+    private final BufferedImage icon;
 
-    public AutoHideIconButton(BufferedImage icon) {
+    public AutoHideIconButton( final BufferedImage icon )
+    {
         this.icon = icon;
-        setSize(icon.getWidth(), icon.getHeight());
-        setVisible(false);
-        addMouseListener(AUTO_HIDE_LISTENER);
+        setSize( icon.getWidth(), icon.getHeight() );
+        setVisible( false );
+        addMouseListener( AUTO_HIDE_LISTENER );
     }
 
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(icon, 0, 0, icon.getWidth(), icon.getHeight(), null);
+    public void paint( final Graphics g )
+    {
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage( icon, 0, 0, icon.getWidth(), icon.getHeight(), null );
     }
 }

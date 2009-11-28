@@ -25,53 +25,69 @@ package net.java.jveez.utils;
 import javax.imageio.ImageReader;
 import javax.imageio.event.IIOReadProgressListener;
 
-class CancellableIIOReadProgressListener implements IIOReadProgressListener {
-
-    public void sequenceStarted(ImageReader source, int minIndex) {
-        if (Thread.interrupted()) {
+class CancellableIIOReadProgressListener implements IIOReadProgressListener
+{
+    public void sequenceStarted( final ImageReader source, final int minIndex )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void sequenceComplete(ImageReader source) {
-        if (Thread.interrupted()) {
+    public void sequenceComplete( final ImageReader source )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void imageStarted(ImageReader source, int imageIndex) {
-        if (Thread.interrupted()) {
+    public void imageStarted( final ImageReader source, final int imageIndex )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void imageProgress(ImageReader source, float percentageDone) {
-        if (Thread.interrupted()) {
+    public void imageProgress( final ImageReader source, final float percentageDone )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void imageComplete(ImageReader source) {
+    public void imageComplete( final ImageReader source )
+    {
     }
 
-    public void thumbnailStarted(ImageReader source, int imageIndex, int thumbnailIndex) {
-        if (Thread.interrupted()) {
+    public void thumbnailStarted( final ImageReader source, final int imageIndex, final int thumbnailIndex )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void thumbnailProgress(ImageReader source, float percentageDone) {
-        if (Thread.interrupted()) {
+    public void thumbnailProgress( final ImageReader source, final float percentageDone )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void thumbnailComplete(ImageReader source) {
-        if (Thread.interrupted()) {
+    public void thumbnailComplete( final ImageReader source )
+    {
+        if ( Thread.interrupted() )
+        {
             throw new OperationCancelledException();
         }
     }
 
-    public void readAborted(ImageReader source) {
+    public void readAborted( final ImageReader source )
+    {
     }
 }

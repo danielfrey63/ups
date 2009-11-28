@@ -38,88 +38,110 @@ import net.java.jveez.vfs.Picture;
 import net.java.jveez.vfs.Vfs;
 import org.apache.log4j.Logger;
 
-public class VfsImpl extends Vfs {
+public class VfsImpl extends Vfs
+{
+    private static final Logger LOG = Logger.getLogger( VfsImpl.class );
 
-    private static final Logger LOG = Logger.getLogger(VfsImpl.class);
-
-    private static final FileFilter DIRECTORY_FILE_FILTER = new FileFilter() {
-        public boolean accept(File pathname) {
+    private static final FileFilter DIRECTORY_FILE_FILTER = new FileFilter()
+    {
+        public boolean accept( final File pathname )
+        {
             return pathname.isDirectory();
         }
     };
 
-    private static final FileFilter PICTURE_FILE_FILTER = new FileFilter() {
-        public boolean accept(File pathname) {
-            return pathname.isFile() && Utils.isSupportedImage(pathname);
+    private static final FileFilter PICTURE_FILE_FILTER = new FileFilter()
+    {
+        public boolean accept( final File pathname )
+        {
+            return pathname.isFile() && Utils.isSupportedImage( pathname );
         }
     };
 
     private static final FileSystemView FILE_SYSTEM_VIEW = FileSystemView.getFileSystemView();
-    private static final List<DirectoryImpl> EMPTY_DIRECTORY_LIST = Collections.unmodifiableList(new ArrayList<DirectoryImpl>(0));
-    private static final List<PictureImpl> EMPTY_PICTURE_LIST = Collections.unmodifiableList(new ArrayList<PictureImpl>(0));
 
-    private List<DirectoryImpl> rootDirectories = new ArrayList<DirectoryImpl>();
-    private ConcurrentMap<DirectoryImpl, List<DirectoryImpl>> directoryMap = new ConcurrentHashMap<DirectoryImpl, List<DirectoryImpl>>();
-    private ConcurrentMap<DirectoryImpl, List<PictureImpl>> pictureMap = new ConcurrentHashMap<DirectoryImpl, List<PictureImpl>>();
+    private static final List<DirectoryImpl> EMPTY_DIRECTORY_LIST = Collections.unmodifiableList( new ArrayList<DirectoryImpl>( 0 ) );
 
-    public VfsImpl() {
+    private static final List<PictureImpl> EMPTY_PICTURE_LIST = Collections.unmodifiableList( new ArrayList<PictureImpl>( 0 ) );
+
+    private final List<DirectoryImpl> rootDirectories = new ArrayList<DirectoryImpl>();
+
+    private final ConcurrentMap<DirectoryImpl, List<DirectoryImpl>> directoryMap = new ConcurrentHashMap<DirectoryImpl, List<DirectoryImpl>>();
+
+    private final ConcurrentMap<DirectoryImpl, List<PictureImpl>> pictureMap = new ConcurrentHashMap<DirectoryImpl, List<PictureImpl>>();
+
+    public VfsImpl()
+    {
         initRootDirectories();
     }
 
-    private void initRootDirectories() {
-        LOG.debug("Loading root directoryMap from file system");
+    private void initRootDirectories()
+    {
+        LOG.debug( "Loading root directoryMap from file system" );
 
-        File[] roots = FILE_SYSTEM_VIEW.getRoots();
+        final File[] roots = FILE_SYSTEM_VIEW.getRoots();
 //    File[] roots = File.listRoots();
-        for (File root : roots) {
-            rootDirectories.add(new DirectoryImpl(null, root));
+        for ( final File root : roots )
+        {
+            rootDirectories.add( new DirectoryImpl( null, root ) );
         }
 
-        LOG.debug(String.format("%d root directorie(s) has been found", rootDirectories.size()));
+        LOG.debug( String.format( "%d root directorie(s) has been found", rootDirectories.size() ) );
     }
 
-    public boolean isCached(Directory directory) {
-        if (directory == null) {
+    public boolean isCached( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return true;
         }
 
-        return directoryMap.containsKey(directory);
+        return directoryMap.containsKey( directory );
     }
 
-    public Collection<? extends Directory> getRootDirectories() {
-        return Collections.unmodifiableList(rootDirectories);
+    public Collection<? extends Directory> getRootDirectories()
+    {
+        return Collections.unmodifiableList( rootDirectories );
     }
 
-    public boolean hasSubDirectories(Directory directory) {
-        if (directory == null) {
+    public boolean hasSubDirectories( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return !rootDirectories.isEmpty();
         }
 
-        Collection<? extends Directory> directories = getSubDirectories(directory);
+        final Collection<? extends Directory> directories = getSubDirectories( directory );
         return !directories.isEmpty();
     }
 
-    public boolean hasPictures(Directory directory) {
-        if (directory == null) {
+    public boolean hasPictures( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return !rootDirectories.isEmpty();
         }
 
-        Collection<? extends Picture> pictures = getPictures(directory);
+        final Collection<? extends Picture> pictures = getPictures( directory );
         return !pictures.isEmpty();
     }
 
-    public Collection<? extends Directory> getSubDirectories(Directory directory) {
-        if (directory == null) {
+    public Collection<? extends Directory> getSubDirectories( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return rootDirectories;
         }
 
         List<DirectoryImpl> children;
-        synchronized (directory) {
-            children = directoryMap.get(directory);
-            if (children == null) {
-                DirectoryImpl parent = (DirectoryImpl) directory;
-                children = loadDirectories(parent);
-                directoryMap.put(parent, children);
+        synchronized ( directory )
+        {
+            children = directoryMap.get( directory );
+            if ( children == null )
+            {
+                final DirectoryImpl parent = (DirectoryImpl) directory;
+                children = loadDirectories( parent );
+                directoryMap.put( parent, children );
             }
         }
 
@@ -128,18 +150,22 @@ public class VfsImpl extends Vfs {
         return children;
     }
 
-    public Collection<? extends Picture> getPictures(Directory directory) {
-        if (directory == null) {
+    public Collection<? extends Picture> getPictures( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return EMPTY_PICTURE_LIST;
         }
 
         List<PictureImpl> pictures;
-        synchronized (directory) {
-            pictures = pictureMap.get(directory);
-            if (pictures == null) {
-                DirectoryImpl parent = (DirectoryImpl) directory;
-                pictures = loadPictures(parent);
-                pictureMap.put(parent, pictures);
+        synchronized ( directory )
+        {
+            pictures = pictureMap.get( directory );
+            if ( pictures == null )
+            {
+                final DirectoryImpl parent = (DirectoryImpl) directory;
+                pictures = loadPictures( parent );
+                pictureMap.put( parent, pictures );
             }
         }
 
@@ -148,60 +174,74 @@ public class VfsImpl extends Vfs {
         return pictures;
     }
 
-    private List<DirectoryImpl> loadDirectories(DirectoryImpl parent) {
-        LOG.info("Loading directories from " + parent);
+    private List<DirectoryImpl> loadDirectories( final DirectoryImpl parent )
+    {
+        LOG.info( "Loading directories from " + parent );
 
-        JVeez.showActivity(true);
-        try {
-            File[] children = FILE_SYSTEM_VIEW.getFiles(parent.getFile(), false);
+        JVeez.showActivity( true );
+        try
+        {
+            final File[] children = FILE_SYSTEM_VIEW.getFiles( parent.getFile(), false );
 
-            if (children != null && children.length > 0) {
-                List<DirectoryImpl> directories = new ArrayList<DirectoryImpl>(children.length);
-                for (File child : children) {
-                    if (!DIRECTORY_FILE_FILTER.accept(child)) {
+            if ( children != null && children.length > 0 )
+            {
+                final List<DirectoryImpl> directories = new ArrayList<DirectoryImpl>( children.length );
+                for ( final File child : children )
+                {
+                    if ( !DIRECTORY_FILE_FILTER.accept( child ) )
+                    {
                         continue;
                     }
 
-                    DirectoryImpl directoryImpl = new DirectoryImpl(parent, child);
-                    directories.add(directoryImpl);
+                    final DirectoryImpl directoryImpl = new DirectoryImpl( parent, child );
+                    directories.add( directoryImpl );
                 }
                 return directories;
             }
-            else {
+            else
+            {
                 return EMPTY_DIRECTORY_LIST;
             }
         }
-        finally {
-            JVeez.showActivity(false);
+        finally
+        {
+            JVeez.showActivity( false );
         }
     }
 
-    private List<PictureImpl> loadPictures(DirectoryImpl parent) {
-        LOG.info("Loading pictures from " + parent);
+    private List<PictureImpl> loadPictures( final DirectoryImpl parent )
+    {
+        LOG.info( "Loading pictures from " + parent );
 
-        JVeez.showActivity(true);
-        try {
-            File[] files = parent.getFile().listFiles(PICTURE_FILE_FILTER);
-            if (files != null && files.length > 0) {
-                List<PictureImpl> pictures = new ArrayList<PictureImpl>(files.length);
-                for (File file : files) {
-                    pictures.add(new PictureImpl(file));
+        JVeez.showActivity( true );
+        try
+        {
+            final File[] files = parent.getFile().listFiles( PICTURE_FILE_FILTER );
+            if ( files != null && files.length > 0 )
+            {
+                final List<PictureImpl> pictures = new ArrayList<PictureImpl>( files.length );
+                for ( final File file : files )
+                {
+                    pictures.add( new PictureImpl( file ) );
                 }
                 return pictures;
             }
-            else {
+            else
+            {
                 return EMPTY_PICTURE_LIST;
             }
         }
-        finally {
-            JVeez.showActivity(false);
+        finally
+        {
+            JVeez.showActivity( false );
         }
     }
 
     /**
      * In this method, we will scan the directory hierarchy under the root path and create the corresponding pages.
      */
-    public synchronized void synchronize() {
-        LOG.debug("synchronize()");
+    public synchronized void synchronize()
+    {
+        LOG.debug( "synchronize()" );
     }
 }

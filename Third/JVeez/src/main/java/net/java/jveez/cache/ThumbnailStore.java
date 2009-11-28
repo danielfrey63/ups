@@ -28,48 +28,59 @@ import net.java.jveez.cache.impl.MemoryImageLoader;
 import net.java.jveez.cache.impl.PersistentThumbnailLoader;
 import net.java.jveez.vfs.Picture;
 
-public class ThumbnailStore implements ImageLoader {
-
+public class ThumbnailStore implements ImageLoader
+{
     private static final int MEMORY_CACHE_CAPACITY = 100;
+
     private static final String PERSISTENT_LOADER_NAME = "thumbnail-cache";
+
     private static final int PERSISTENT_LOADER_PAGE_POOL_SIZE = 2 * 1024 * 1024;
 
     private static final ThumbnailStore instance = new ThumbnailStore();
 
     private ImageLoader delegateLoader;
 
-    private ThumbnailStore() {
-        ImageStoreThumbnailLoader imageStoreThumbnailLoader = new ImageStoreThumbnailLoader();
-        PersistentThumbnailLoader persistentThumbnailLoader = new PersistentThumbnailLoader(imageStoreThumbnailLoader, PERSISTENT_LOADER_NAME, PERSISTENT_LOADER_PAGE_POOL_SIZE);
-        delegateLoader = new MemoryImageLoader(persistentThumbnailLoader, MEMORY_CACHE_CAPACITY);
+    private ThumbnailStore()
+    {
+        final ImageStoreThumbnailLoader imageStoreThumbnailLoader = new ImageStoreThumbnailLoader();
+        final PersistentThumbnailLoader persistentThumbnailLoader = new PersistentThumbnailLoader( imageStoreThumbnailLoader, PERSISTENT_LOADER_NAME, PERSISTENT_LOADER_PAGE_POOL_SIZE );
+        delegateLoader = new MemoryImageLoader( persistentThumbnailLoader, MEMORY_CACHE_CAPACITY );
 
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
+        Runtime.getRuntime().addShutdownHook( new Thread()
+        {
+            public void run()
+            {
                 close();
             }
-        });
+        } );
     }
 
-    public boolean isCached(Picture picture) {
-        return delegateLoader.isCached(picture);
+    public boolean isCached( final Picture picture )
+    {
+        return delegateLoader.isCached( picture );
     }
 
-    public BufferedImage getImage(Picture picture) {
-        return delegateLoader.getImage(picture);
+    public BufferedImage getImage( final Picture picture )
+    {
+        return delegateLoader.getImage( picture );
     }
 
-    public void invalidateCache() {
+    public void invalidateCache()
+    {
         delegateLoader.invalidateCache();
     }
 
-    public void close() {
-        if (delegateLoader != null) {
+    public void close()
+    {
+        if ( delegateLoader != null )
+        {
             delegateLoader.close();
             delegateLoader = null;
         }
     }
 
-    public static ThumbnailStore getInstance() {
+    public static ThumbnailStore getInstance()
+    {
         return instance;
     }
 }

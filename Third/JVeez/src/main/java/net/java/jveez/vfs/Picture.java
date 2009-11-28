@@ -25,8 +25,8 @@ package net.java.jveez.vfs;
 import java.io.File;
 import javax.swing.Icon;
 
-public interface Picture {
-
+public interface Picture
+{
     public File getFile();
 
     public String getName();

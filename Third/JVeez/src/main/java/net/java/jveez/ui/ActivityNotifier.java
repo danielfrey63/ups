@@ -29,29 +29,32 @@ import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 import net.java.jveez.utils.Utils;
 
-public class ActivityNotifier extends JLabel {
-
+public class ActivityNotifier extends JLabel
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3760564174300067634L;
 
-    private static Icon activeIcon = Utils.loadIcon("net/java/jveez/icons/loading.gif");
-    private static Icon unactiveIcon = Utils.loadIcon("net/java/jveez/icons/loading-static.gif");
+    private static final Icon activeIcon = Utils.loadIcon( "net/java/jveez/icons/loading.gif" );
+
+    private static final Icon unactiveIcon = Utils.loadIcon( "net/java/jveez/icons/loading-static.gif" );
 
     private int activityCounter = 0;
 
-    public ActivityNotifier() {
+    public ActivityNotifier()
+    {
         super();
-        setText(null);
-        setIcon(unactiveIcon);
-        setHorizontalAlignment(JLabel.CENTER);
-        setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        setPreferredSize(new Dimension(32, 1));
+        setText( null );
+        setIcon( unactiveIcon );
+        setHorizontalAlignment( JLabel.CENTER );
+        setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+        setPreferredSize( new Dimension( 32, 1 ) );
     }
 
-    public void setActive(boolean active) {
-        activityCounter += (active ? 1 : -1);
-        setIcon(activityCounter > 0 ? activeIcon : unactiveIcon);
+    public void setActive( final boolean active )
+    {
+        activityCounter += ( active ? 1 : -1 );
+        setIcon( activityCounter > 0 ? activeIcon : unactiveIcon );
     }
 }

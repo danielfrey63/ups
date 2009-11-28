@@ -33,63 +33,76 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import net.java.jveez.utils.Utils;
 
-public class IconButton extends JButton {
-
+public class IconButton extends JButton
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3258409538721166389L;
 
-    private static BufferedImage mouseOverIcon = Utils.loadImage("net/java/jveez/icons/mouse-over.png");
-    private static BufferedImage mousePressedIcon = Utils.loadImage("net/java/jveez/icons/mouse-pressed.png");
-    private BufferedImage icon;
+    private static final BufferedImage mouseOverIcon = Utils.loadImage( "net/java/jveez/icons/mouse-over.png" );
+
+    private static final BufferedImage mousePressedIcon = Utils.loadImage( "net/java/jveez/icons/mouse-pressed.png" );
+
+    private final BufferedImage icon;
+
     private boolean mouseOver;
+
     private boolean mousePressed;
 
-    public IconButton(BufferedImage icon) {
+    public IconButton( final BufferedImage icon )
+    {
         this.icon = icon;
-        setSize(icon.getWidth(), icon.getHeight());
-        setPreferredSize(new Dimension(icon.getWidth(), icon.getHeight()));
-        setVisible(true);
-        setBackground(Color.WHITE);
-        setOpaque(true);
-        addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
+        setSize( icon.getWidth(), icon.getHeight() );
+        setPreferredSize( new Dimension( icon.getWidth(), icon.getHeight() ) );
+        setVisible( true );
+        setBackground( Color.WHITE );
+        setOpaque( true );
+        addMouseListener( new MouseAdapter()
+        {
+            public void mousePressed( final MouseEvent e )
+            {
                 mousePressed = true;
                 repaint();
             }
 
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased( final MouseEvent e )
+            {
                 mousePressed = false;
                 repaint();
             }
 
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered( final MouseEvent e )
+            {
                 mouseOver = true;
                 repaint();
             }
 
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited( final MouseEvent e )
+            {
                 mouseOver = false;
                 repaint();
             }
-        });
+        } );
     }
 
-    public void paint(Graphics g) {
-        int width = getWidth();
-        int height = getHeight();
+    public void paint( final Graphics g )
+    {
+        final int width = getWidth();
+        final int height = getHeight();
 
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, width, height);
-        if (mousePressed) {
-            g2d.drawImage(mousePressedIcon, 0, 0, width, height, null);
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor( Color.WHITE );
+        g2d.fillRect( 0, 0, width, height );
+        if ( mousePressed )
+        {
+            g2d.drawImage( mousePressedIcon, 0, 0, width, height, null );
         }
-        else if (mouseOver) {
-            g2d.drawImage(mouseOverIcon, 0, 0, width, height, null);
+        else if ( mouseOver )
+        {
+            g2d.drawImage( mouseOverIcon, 0, 0, width, height, null );
         }
-        g2d.setComposite(AlphaComposite.SrcOver);
-        g2d.drawImage(icon, 0, 0, width, height, null);
+        g2d.setComposite( AlphaComposite.SrcOver );
+        g2d.drawImage( icon, 0, 0, width, height, null );
     }
 }

@@ -35,68 +35,80 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import net.java.jveez.utils.Utils;
 
-public class StatusBar extends JPanel {
-
+public class StatusBar extends JPanel
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257288019714192697L;
 
-    private ActivityNotifier activityNotifier = new ActivityNotifier();
-    private JLabel memoryLabel = new JLabel("-", JLabel.CENTER);
-    private JLabel messageLabel = new JLabel("", JLabel.LEADING);
-    private JButton gcButton = new JButton("GC");
-    private Timer memoryTimer = new Timer("MemoryTimer", true);
+    private final ActivityNotifier activityNotifier = new ActivityNotifier();
 
-    public StatusBar() {
-        super(new BorderLayout());
+    private final JLabel memoryLabel = new JLabel( "-", JLabel.CENTER );
 
-        JPanel messagePanel = new JPanel(new BorderLayout());
-        messagePanel.add(messageLabel, BorderLayout.CENTER);
-        messagePanel.add(activityNotifier, BorderLayout.EAST);
+    private final JLabel messageLabel = new JLabel( "", JLabel.LEADING );
 
-        memoryLabel.setPreferredSize(new Dimension(100, 1));
-        JPanel memoryPanel = new JPanel(new BorderLayout());
-        memoryPanel.add(memoryLabel, BorderLayout.WEST);
-        memoryPanel.add(gcButton, BorderLayout.EAST);
-        memoryPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+    private final JButton gcButton = new JButton( "GC" );
 
-        messageLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+    private final Timer memoryTimer = new Timer( "MemoryTimer", true );
 
-        memoryTimer.schedule(new TimerTask() {
-            public void run() {
+    public StatusBar()
+    {
+        super( new BorderLayout() );
+
+        final JPanel messagePanel = new JPanel( new BorderLayout() );
+        messagePanel.add( messageLabel, BorderLayout.CENTER );
+        messagePanel.add( activityNotifier, BorderLayout.EAST );
+
+        memoryLabel.setPreferredSize( new Dimension( 100, 1 ) );
+        final JPanel memoryPanel = new JPanel( new BorderLayout() );
+        memoryPanel.add( memoryLabel, BorderLayout.WEST );
+        memoryPanel.add( gcButton, BorderLayout.EAST );
+        memoryPanel.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+
+        messageLabel.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+
+        memoryTimer.schedule( new TimerTask()
+        {
+            public void run()
+            {
                 updateMemoryLabel();
             }
-        }, 2000, 1000);
+        }, 2000, 1000 );
 
-        gcButton.addActionListener(new ActionListener() {
+        gcButton.addActionListener( new ActionListener()
+        {
             private long lastInvocation;
 
-            public void actionPerformed(ActionEvent e) {
-                long now = System.currentTimeMillis();
+            public void actionPerformed( final ActionEvent e )
+            {
+                final long now = System.currentTimeMillis();
                 // if the GC button has been already been pressed less than 2 seconds ago, perform a hard GC
-                Utils.freeMemory(now - lastInvocation < 2000);
+                Utils.freeMemory( now - lastInvocation < 2000 );
                 lastInvocation = now;
             }
-        });
+        } );
 
-        this.add(messagePanel, BorderLayout.CENTER);
-        this.add(memoryPanel, BorderLayout.EAST);
+        this.add( messagePanel, BorderLayout.CENTER );
+        this.add( memoryPanel, BorderLayout.EAST );
     }
 
-    public void showMessage(String message) {
-        messageLabel.setText(message);
+    public void showMessage( final String message )
+    {
+        messageLabel.setText( message );
     }
 
-    public void showActivity(boolean activity) {
-        activityNotifier.setActive(activity);
+    public void showActivity( final boolean activity )
+    {
+        activityNotifier.setActive( activity );
     }
 
-    private void updateMemoryLabel() {
-        Runtime runtime = Runtime.getRuntime();
-        long totalMemory = runtime.totalMemory();
-        long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
-        String label = String.format("%dk / %dk", new Object[]{usedMemory / 1024, totalMemory / 1024});
-        memoryLabel.setText(label);
+    private void updateMemoryLabel()
+    {
+        final Runtime runtime = Runtime.getRuntime();
+        final long totalMemory = runtime.totalMemory();
+        final long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
+        final String label = String.format( "%dk / %dk", usedMemory / 1024, totalMemory / 1024 );
+        memoryLabel.setText( label );
     }
 }

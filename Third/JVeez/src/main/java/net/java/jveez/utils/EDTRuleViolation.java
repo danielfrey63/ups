@@ -27,20 +27,22 @@ import java.awt.Component;
 /**
  * Borrowed from the Spin project : http://spin.sourceforge.net
  */
-public class EDTRuleViolation extends RuntimeException {
-
+public class EDTRuleViolation extends RuntimeException
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3833460721496633652L;
 
-    private Component component;
+    private final Component component;
 
-    public EDTRuleViolation(Component component) {
+    public EDTRuleViolation( final Component component )
+    {
         this.component = component;
     }
 
-    public Component getComponent() {
+    public Component getComponent()
+    {
         return component;
     }
 }

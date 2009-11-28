@@ -32,29 +32,34 @@ import javax.swing.border.EtchedBorder;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class ThumbnailListCellRenderer extends DefaultListCellRenderer {
+public class ThumbnailListCellRenderer extends DefaultListCellRenderer
+{
+    private static final Logger LOG = Logger.getLogger( ThumbnailListCellRenderer.class );
 
-    private static final Logger LOG = Logger.getLogger(ThumbnailListCellRenderer.class);
     private static final boolean DEBUG = LOG.isDebugEnabled();
+
     private static final long serialVersionUID = 4049921558426170167L;
 
-    public ThumbnailListCellRenderer() {
+    public ThumbnailListCellRenderer()
+    {
         super();
     }
 
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
+    {
         final Picture picture = (Picture) value;
-        final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setVerticalAlignment(JLabel.CENTER);
-        label.setText(null);
+        final JLabel label = (JLabel) super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
+        label.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+        label.setHorizontalAlignment( JLabel.CENTER );
+        label.setVerticalAlignment( JLabel.CENTER );
+        label.setText( null );
         final int width = list.getFixedCellWidth();
         final int height = list.getFixedCellHeight();
-        final Icon icon = ThumbnailAsyncLoader.getInstance().getThumbnailFor(picture, (ThumbnailList) list, index, width, height);
-        label.setIcon(icon);
-        if (DEBUG) {
-            LOG.debug("Size of icon for \"" + picture.getFile() + "\" is " + icon.getIconWidth() + "x" + icon.getIconHeight());
+        final Icon icon = ThumbnailAsyncLoader.getInstance().getThumbnailFor( picture, (ThumbnailList) list, index, width, height );
+        label.setIcon( icon );
+        if ( DEBUG )
+        {
+            LOG.debug( "Size of icon for \"" + picture.getFile() + "\" is " + icon.getIconWidth() + "x" + icon.getIconHeight() );
         }
 
         return label;

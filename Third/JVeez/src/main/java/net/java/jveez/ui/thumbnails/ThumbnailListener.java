@@ -24,7 +24,7 @@ package net.java.jveez.ui.thumbnails;
 
 import net.java.jveez.vfs.Picture;
 
-public interface ThumbnailListener {
-
-    void thumbnailClicked(Picture[] pictures, int[] indices);
+public interface ThumbnailListener
+{
+    void thumbnailClicked( Picture[] pictures, int[] indices );
 }

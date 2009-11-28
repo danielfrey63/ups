@@ -27,60 +27,71 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import net.java.jveez.vfs.impl.VfsImpl;
 import org.apache.log4j.Logger;
 
-public abstract class Vfs {
+public abstract class Vfs
+{
+    private static final Logger LOG = Logger.getLogger( Vfs.class );
 
-    private static final Logger LOG = Logger.getLogger(Vfs.class);
+    private final CopyOnWriteArrayList<VfsEventListener> listeners = new CopyOnWriteArrayList<VfsEventListener>();
 
-    private CopyOnWriteArrayList<VfsEventListener> listeners = new CopyOnWriteArrayList<VfsEventListener>();
     private volatile int allowEventDispatchCounter;
 
     private static final Vfs INSTANCE = new VfsImpl();
 
-    public static Vfs getInstance() {
+    public static Vfs getInstance()
+    {
         return INSTANCE;
     }
 
     public abstract void synchronize();
 
-    public abstract boolean isCached(Directory diectory);
+    public abstract boolean isCached( Directory diectory );
 
     public abstract Collection<? extends Directory> getRootDirectories();
 
-    public abstract boolean hasSubDirectories(Directory directory);
+    public abstract boolean hasSubDirectories( Directory directory );
 
-    public abstract boolean hasPictures(Directory directory);
+    public abstract boolean hasPictures( Directory directory );
 
-    public abstract Collection<? extends Directory> getSubDirectories(Directory directory);
+    public abstract Collection<? extends Directory> getSubDirectories( Directory directory );
 
-    public abstract Collection<? extends Picture> getPictures(Directory directory);
+    public abstract Collection<? extends Picture> getPictures( Directory directory );
 
-    public void addVfsListener(VfsEventListener listener) {
-        listeners.add(listener);
+    public void addVfsListener( final VfsEventListener listener )
+    {
+        listeners.add( listener );
     }
 
-    protected void setEventDispatchEnabled(boolean eventDispatchEnabled) {
-        LOG.debug("setEventDispatchEnabled(" + eventDispatchEnabled + ")");
-        if (eventDispatchEnabled) {
+    protected void setEventDispatchEnabled( final boolean eventDispatchEnabled )
+    {
+        LOG.debug( "setEventDispatchEnabled(" + eventDispatchEnabled + ")" );
+        if ( eventDispatchEnabled )
+        {
             allowEventDispatchCounter--;
         }
-        else {
+        else
+        {
             allowEventDispatchCounter++;
         }
     }
 
-    protected void dispatchEvent(VfsEvent event) {
-        if (allowEventDispatchCounter != 0) {
+    protected void dispatchEvent( final VfsEvent event )
+    {
+        if ( allowEventDispatchCounter != 0 )
+        {
             return;
         }
 
-        LOG.debug("dispatchEvent(" + event + ")");
+        LOG.debug( "dispatchEvent(" + event + ")" );
 
-        for (VfsEventListener listener : listeners) {
-            try {
-                listener.vfsEventDispatched(event);
+        for ( final VfsEventListener listener : listeners )
+        {
+            try
+            {
+                listener.vfsEventDispatched( event );
             }
-            catch (Throwable t) {
-                LOG.error("Throwable caught during event dispatching", t);
+            catch ( Throwable t )
+            {
+                LOG.error( "Throwable caught during event dispatching", t );
             }
         }
     }

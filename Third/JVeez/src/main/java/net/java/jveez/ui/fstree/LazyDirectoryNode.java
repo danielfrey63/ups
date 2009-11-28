@@ -33,127 +33,163 @@ import net.java.jveez.utils.Utils;
 import net.java.jveez.vfs.Directory;
 import net.java.jveez.vfs.Vfs;
 
-public class LazyDirectoryNode implements TreeNode {
+public class LazyDirectoryNode implements TreeNode
+{
+    private final Directory directory;
 
-    private Directory directory;
+    private final LazyDirectoryNode parent;
 
-    private LazyDirectoryNode parent;
     private List<LazyDirectoryNode> children;
-    private LazyDirectoryTreeModel model;
-    private AtomicBoolean loadingFlag = new AtomicBoolean(false);
 
-    public LazyDirectoryNode(LazyDirectoryTreeModel model, LazyDirectoryNode parent, Directory directory) {
+    private final LazyDirectoryTreeModel model;
+
+    private final AtomicBoolean loadingFlag = new AtomicBoolean( false );
+
+    public LazyDirectoryNode( final LazyDirectoryTreeModel model, final LazyDirectoryNode parent, final Directory directory )
+    {
         this.model = model;
-        this.parent = (parent == null ? this : parent);
+        this.parent = ( parent == null ? this : parent );
         this.directory = directory;
     }
 
-    public Directory getDirectory() {
+    public Directory getDirectory()
+    {
         return directory;
     }
 
-    protected boolean _loadContent() {
-        if (children != null) {
+    protected boolean _loadContent()
+    {
+        if ( children != null )
+        {
             return false;
         }
 
-        if (loadingFlag.getAndSet(true)) {
+        if ( loadingFlag.getAndSet( true ) )
+        {
             return true;
         }
 
-        Utils.executeAsync(new Runnable() {
-            public void run() {
-                Collection<? extends Directory> subDirectories = getSubDirectories(directory);
-                List<LazyDirectoryNode> list = new ArrayList<LazyDirectoryNode>(subDirectories.size());
-                for (Directory dir : subDirectories) {
-                    list.add(new LazyDirectoryNode(model, LazyDirectoryNode.this, dir));
+        Utils.executeAsync( new Runnable()
+        {
+            public void run()
+            {
+                final Collection<? extends Directory> subDirectories = getSubDirectories( directory );
+                final List<LazyDirectoryNode> list = new ArrayList<LazyDirectoryNode>( subDirectories.size() );
+                for ( final Directory dir : subDirectories )
+                {
+                    list.add( new LazyDirectoryNode( model, LazyDirectoryNode.this, dir ) );
                 }
 
                 children = list;
-                loadingFlag.set(false);
-                model.nodeLoaded(LazyDirectoryNode.this);
+                loadingFlag.set( false );
+                model.nodeLoaded( LazyDirectoryNode.this );
             }
-        });
+        } );
 
         return true;
     }
 
-    private Collection<? extends Directory> getSubDirectories(Directory directory) {
-        return Vfs.getInstance().getSubDirectories(directory);
+    private Collection<? extends Directory> getSubDirectories( final Directory directory )
+    {
+        return Vfs.getInstance().getSubDirectories( directory );
     }
 
-    public TreeNode getChildAt(int childIndex) {
-        if (_loadContent()) {
+    public TreeNode getChildAt( final int childIndex )
+    {
+        if ( _loadContent() )
+        {
             return null;
         }
-        else {
-            return children.get(childIndex);
+        else
+        {
+            return children.get( childIndex );
         }
     }
 
-    public int getChildCount() {
-        if (_loadContent()) {
+    public int getChildCount()
+    {
+        if ( _loadContent() )
+        {
             return 0;
         }
-        else {
+        else
+        {
             return children.size();
         }
     }
 
-    public TreeNode getParent() {
+    public TreeNode getParent()
+    {
         return parent;
     }
 
-    public int getIndex(TreeNode node) {
-        if (_loadContent()) {
+    public int getIndex( final TreeNode node )
+    {
+        if ( _loadContent() )
+        {
             return -1;
         }
-        else {
-            return children.indexOf(node);
+        else
+        {
+            return children.indexOf( node );
         }
     }
 
-    public boolean getAllowsChildren() {
+    public boolean getAllowsChildren()
+    {
         return true;
     }
 
-    public boolean isLeaf() {
-        if (_loadContent()) {
+    public boolean isLeaf()
+    {
+        if ( _loadContent() )
+        {
             return false;
         }
-        else {
+        else
+        {
             return children.isEmpty();
         }
     }
 
-    public Enumeration children() {
-        if (_loadContent()) {
-            return new Enumeration() {
-                public boolean hasMoreElements() {
+    public Enumeration children()
+    {
+        if ( _loadContent() )
+        {
+            return new Enumeration()
+            {
+                public boolean hasMoreElements()
+                {
                     return false;
                 }
 
-                public Object nextElement() {
+                public Object nextElement()
+                {
                     return null;
                 }
             };
         }
-        else {
-            return new Enumeration() {
+        else
+        {
+            return new Enumeration()
+            {
                 Iterator<LazyDirectoryNode> iterator = children.iterator();
 
-                public boolean hasMoreElements() {
+                public boolean hasMoreElements()
+                {
                     return iterator.hasNext();
                 }
 
-                public Object nextElement() {
+                public Object nextElement()
+                {
                     return iterator.next();
                 }
             };
         }
     }
 
-    public String toString() {
-        return (directory == null ? "[ROOT]" : directory.getAbsolutePath());
+    public String toString()
+    {
+        return ( directory == null ? "[ROOT]" : directory.getAbsolutePath() );
     }
 }

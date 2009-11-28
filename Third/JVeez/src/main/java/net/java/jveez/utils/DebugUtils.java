@@ -25,19 +25,23 @@ package net.java.jveez.utils;
 import javax.swing.SwingUtilities;
 import org.apache.log4j.Logger;
 
-public class DebugUtils {
+public class DebugUtils
+{
+    private static final Logger LOG = Logger.getLogger( DebugUtils.class );
 
-    private static final Logger LOG = Logger.getLogger(DebugUtils.class);
-
-    public static void ensureIsDispatchThread() {
-        if (!SwingUtilities.isEventDispatchThread()) {
-            LOG.warn("Method NOT executed by the dispatch thread !", new Exception());
+    public static void ensureIsDispatchThread()
+    {
+        if ( !SwingUtilities.isEventDispatchThread() )
+        {
+            LOG.warn( "Method NOT executed by the dispatch thread !", new Exception() );
         }
     }
 
-    public static void ensureIsNotDispatchThread() {
-        if (SwingUtilities.isEventDispatchThread()) {
-            LOG.warn("Method executed by the dispatch thread !", new Exception());
+    public static void ensureIsNotDispatchThread()
+    {
+        if ( SwingUtilities.isEventDispatchThread() )
+        {
+            LOG.warn( "Method executed by the dispatch thread !", new Exception() );
         }
     }
 }

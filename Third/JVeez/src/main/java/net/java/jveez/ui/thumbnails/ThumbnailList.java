@@ -37,168 +37,205 @@ import net.java.jveez.vfs.Picture;
 import net.java.jveez.vfs.Vfs;
 import org.apache.log4j.Logger;
 
-public class ThumbnailList extends JList {
+public class ThumbnailList extends JList
+{
+    public static final Dimension MAXIMUM_THUMBNAIL_SIZE = new Dimension( 128, 128 );
 
-    public static final Dimension MAXIMUM_THUMBNAIL_SIZE = new Dimension(128, 128);
+    private static final Logger LOG = Logger.getLogger( ThumbnailList.class );
 
-    private static final Logger LOG = Logger.getLogger(ThumbnailList.class);
     private static final long serialVersionUID = 3256725069878212915L;
-    private static final Font loadingFont = new Font("Sans Serif", 12, Font.BOLD);
+
+    private static final Font loadingFont = new Font( "Sans Serif", 12, Font.BOLD );
 
     private ThumbnailListModel model = new DefaultThumbnailListModel();
+
     private PictureSortingAlgorithm sortingAlgorithm;
+
     private boolean loading = false;
 
-    /** Whether to show a number on each thumbnail. */
+    /**
+     * Whether to show a number on each thumbnail.
+     */
     private boolean showNumber;
 
-    public ThumbnailList() {
-        this(PictureSortingAlgorithm.ByName);
+    public ThumbnailList()
+    {
+        this( PictureSortingAlgorithm.ByName );
     }
 
-    public ThumbnailList(PictureSortingAlgorithm sortingAlgorithm) {
+    public ThumbnailList( final PictureSortingAlgorithm sortingAlgorithm )
+    {
         super();
         this.sortingAlgorithm = sortingAlgorithm;
-        setModel(model);
-        setCellRenderer(new ThumbnailListCellRenderer());
-        setFixedCellHeight(MAXIMUM_THUMBNAIL_SIZE.width + 4);
-        setFixedCellWidth(MAXIMUM_THUMBNAIL_SIZE.height + 4);
-        setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        setVisibleRowCount(0);
+        setModel( model );
+        setCellRenderer( new ThumbnailListCellRenderer() );
+        setFixedCellHeight( MAXIMUM_THUMBNAIL_SIZE.width + 4 );
+        setFixedCellWidth( MAXIMUM_THUMBNAIL_SIZE.height + 4 );
+        setLayoutOrientation( JList.HORIZONTAL_WRAP );
+        setVisibleRowCount( 0 );
     }
 
-    public void setModel(ThumbnailListModel model) {
-        super.setModel(model);
+    public void setModel( final ThumbnailListModel model )
+    {
+        super.setModel( model );
         this.model = model;
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
-        if (loading) {
-            int width = getWidth();
-            int height = getHeight();
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-            g2d.setColor(Color.BLACK);
-            g2d.fillRect(0, 0, width, height);
-            g2d.setFont(loadingFont);
-            g2d.drawString("Loading ...", width / 2, height / 2);
-        } else if (showNumber) {
-            g2d.setFont(new Font("Sans Serif", 24, Font.BOLD));
-            g2d.drawString("1", 30, 30);
+    public void paint( final Graphics g )
+    {
+        super.paint( g );
+        final Graphics2D g2d = (Graphics2D) g;
+        if ( loading )
+        {
+            final int width = getWidth();
+            final int height = getHeight();
+            g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC_OVER, 0.5f ) );
+            g2d.setColor( Color.BLACK );
+            g2d.fillRect( 0, 0, width, height );
+            g2d.setFont( loadingFont );
+            g2d.drawString( "Loading ...", width / 2, height / 2 );
+        }
+        else if ( showNumber )
+        {
+            g2d.setFont( new Font( "Sans Serif", 24, Font.BOLD ) );
+            g2d.drawString( "1", 30, 30 );
         }
     }
 
-    public ThumbnailListModel getThumbnailListModel() {
+    public ThumbnailListModel getThumbnailListModel()
+    {
         return model;
     }
 
-    public void setThumbnailSize(final int size) {
-        MAXIMUM_THUMBNAIL_SIZE.setSize(size, size);
-        setFixedCellHeight(size);
-        setFixedCellWidth(size);
+    public void setThumbnailSize( final int size )
+    {
+        MAXIMUM_THUMBNAIL_SIZE.setSize( size, size );
+        setFixedCellHeight( size );
+        setFixedCellWidth( size );
         repaint();
     }
 
-    public Picture getPictureAt(int index) {
-        return getThumbnailListModel().getPicture(index);
+    public Picture getPictureAt( final int index )
+    {
+        return getThumbnailListModel().getPicture( index );
     }
 
-    public void setCurrentDirectory(final Directory directory) {
-        Utils.executeAsyncIfDisptachThread(new Runnable() {
-            public void run() {
+    public void setCurrentDirectory( final Directory directory )
+    {
+        Utils.executeAsyncIfDisptachThread( new Runnable()
+        {
+            public void run()
+            {
                 model.clear();
                 repaint();
 
-                if (directory != null) {
-                    try {
-                        setLoading(true);
+                if ( directory != null )
+                {
+                    try
+                    {
+                        setLoading( true );
 
-                        Collection<? extends Picture> pictures = Vfs.getInstance().getPictures(directory);
-                        model.setPictures(pictures);
-                        model.sort(sortingAlgorithm);
+                        final Collection<? extends Picture> pictures = Vfs.getInstance().getPictures( directory );
+                        model.setPictures( pictures );
+                        model.sort( sortingAlgorithm );
 
                     }
-                    finally {
-                        setLoading(false);
+                    finally
+                    {
+                        setLoading( false );
                     }
                 }
             }
-        });
+        } );
     }
 
-    public void setSortingAlgorithm(PictureSortingAlgorithm value) {
+    public void setSortingAlgorithm( final PictureSortingAlgorithm value )
+    {
         this.sortingAlgorithm = value;
 
-        Utils.executeAsyncIfDisptachThread(new Runnable() {
-            public void run() {
-                setEnabled(false);
+        Utils.executeAsyncIfDisptachThread( new Runnable()
+        {
+            public void run()
+            {
+                setEnabled( false );
 
                 // retrieve last object selected
                 Picture previousSelection = null;
                 int index = getSelectionModel().getAnchorSelectionIndex();
-                if (index != -1) {
-                    previousSelection = model.getPicture(index);
+                if ( index != -1 )
+                {
+                    previousSelection = model.getPicture( index );
                 }
 
-                model.sort(sortingAlgorithm);
+                model.sort( sortingAlgorithm );
 
-                if (previousSelection != null) {
-                    index = model.getIndexOf(previousSelection);
-                    setSelectedIndex(index);
-                    ensureIndexIsVisible(index);
+                if ( previousSelection != null )
+                {
+                    index = model.getIndexOf( previousSelection );
+                    setSelectedIndex( index );
+                    ensureIndexIsVisible( index );
                 }
-                setEnabled(true);
+                setEnabled( true );
             }
-        });
+        } );
     }
 
-    public int getIndexBefore(int index) {
+    public int getIndexBefore( final int index )
+    {
+        final int numberOfPictures = getThumbnailListModel().getSize();
 
-        int numberOfPictures = getThumbnailListModel().getSize();
-
-        if (numberOfPictures == 0) {
+        if ( numberOfPictures == 0 )
+        {
             return -1;
         }
 
-        int previousIndex = index - 1;
-        if (previousIndex < 0) {
+        final int previousIndex = index - 1;
+        if ( previousIndex < 0 )
+        {
             return numberOfPictures - 1;
         }
-        else {
+        else
+        {
             return previousIndex;
         }
     }
 
-    public int getIndexAfter(int index) {
+    public int getIndexAfter( final int index )
+    {
+        final int numberOfPictures = getThumbnailListModel().getSize();
 
-        int numberOfPictures = getThumbnailListModel().getSize();
-
-        if (numberOfPictures == 0) {
+        if ( numberOfPictures == 0 )
+        {
             return -1;
         }
 
-        int nextIndex = index + 1;
-        if (nextIndex >= numberOfPictures) {
+        final int nextIndex = index + 1;
+        if ( nextIndex >= numberOfPictures )
+        {
             return 0;
         }
-        else {
+        else
+        {
             return nextIndex;
         }
     }
 
-    public int getNumberOfPictures() {
+    public int getNumberOfPictures()
+    {
         return getThumbnailListModel().getSize();
     }
 
-    private void setLoading(boolean loading) {
-        if (this.loading != loading) {
+    private void setLoading( final boolean loading )
+    {
+        if ( this.loading != loading )
+        {
             this.loading = loading;
             repaint();
         }
     }
 
-    public void setShowNumber(final boolean showNumber) {
+    public void setShowNumber( final boolean showNumber )
+    {
         this.showNumber = showNumber;
     }
 }

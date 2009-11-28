@@ -27,15 +27,17 @@ import net.java.jveez.vfs.Picture;
 import org.garret.perst.Persistent;
 import org.garret.perst.Storage;
 
-public abstract class PersistentThumbnail extends Persistent {
-
+public abstract class PersistentThumbnail extends Persistent
+{
     protected String path;
 
-    protected PersistentThumbnail() {
+    protected PersistentThumbnail()
+    {
     }
 
-    protected PersistentThumbnail(Storage storage, Picture picture) {
-        super(storage);
+    protected PersistentThumbnail( final Storage storage, final Picture picture )
+    {
+        super( storage );
         this.path = picture.getAbsolutePath();
     }
 

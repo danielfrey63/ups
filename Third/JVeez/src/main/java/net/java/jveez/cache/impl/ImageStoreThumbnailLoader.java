@@ -30,66 +30,81 @@ import net.java.jveez.utils.ImageUtils;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public final class ImageStoreThumbnailLoader extends AbstractImageLoader {
+public final class ImageStoreThumbnailLoader extends AbstractImageLoader
+{
+    private static final Logger LOG = Logger.getLogger( ImageStoreThumbnailLoader.class );
 
-    private static final Logger LOG = Logger.getLogger(ImageStoreThumbnailLoader.class);
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
-    public ImageStoreThumbnailLoader() {
-        super(null);
+    public ImageStoreThumbnailLoader()
+    {
+        super( null );
     }
 
-    public boolean _isCached(Picture picture) {
+    public boolean _isCached( final Picture picture )
+    {
         return false;
     }
 
-    public BufferedImage _getImage(Picture picture) {
+    public BufferedImage _getImage( final Picture picture )
+    {
         final int width = ThumbnailList.MAXIMUM_THUMBNAIL_SIZE.width;
         final int height = ThumbnailList.MAXIMUM_THUMBNAIL_SIZE.height;
         final String source;
 
         // try to load the image from EXIF data
-        BufferedImage image = ImageUtils.loadThumbnailFromEXIF(picture);
-        if (image == null || (image.getWidth() < width && image.getHeight() < height)) {
+        BufferedImage image = ImageUtils.loadThumbnailFromEXIF( picture );
+        if ( image == null || ( image.getWidth() < width && image.getHeight() < height ) )
+        {
             source = "image";
             // otherwise load from ImageCache
-            image = ImageStore.getInstance().getImage(picture);
+            image = ImageStore.getInstance().getImage( picture );
 
             // picture available ?
-            if (image == null) {
+            if ( image == null )
+            {
                 return null;
             }
-        } else {
+        }
+        else
+        {
             source = "EXIF thumbnail";
         }
 
         // check if the picture needs to be rescaled
-        if (image.getWidth() > width || image.getHeight() > height) {
-            if (DEBUG) {
-                LOG.debug("Downscaling " + source + " for \"" + picture.getFile() + "\"");
+        if ( image.getWidth() > width || image.getHeight() > height )
+        {
+            if ( DEBUG )
+            {
+                LOG.debug( "Downscaling " + source + " for \"" + picture.getFile() + "\"" );
             }
-            image = ImageUtils.createScaledImage(image, width, height, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-        } else if (image.getWidth() < width && image.getHeight() < height) {
-            if (DEBUG) {
-                LOG.debug("Upscaling " + source + " for \"" + picture.getFile() + "\"");
+            image = ImageUtils.createScaledImage( image, width, height, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR );
+        }
+        else if ( image.getWidth() < width && image.getHeight() < height )
+        {
+            if ( DEBUG )
+            {
+                LOG.debug( "Upscaling " + source + " for \"" + picture.getFile() + "\"" );
             }
-            image = ImageUtils.createScaledImage(image, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            image = ImageUtils.createScaledImage( image, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR );
         }
 
         return image;
 
-
     }
 
-    protected void _fetchIntoCache(Picture picture, BufferedImage image) {
+    protected void _fetchIntoCache( final Picture picture, final BufferedImage image )
+    {
         // nothing to do here
     }
 
-    public void _invalidateCache() {
+    public void _invalidateCache()
+    {
         // nothing to do here
     }
 
-    public void _close() {
+    public void _close()
+    {
         // nothing to do here
     }
 }

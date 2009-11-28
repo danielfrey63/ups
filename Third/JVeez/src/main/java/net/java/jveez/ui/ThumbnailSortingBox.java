@@ -28,23 +28,26 @@ import javax.swing.JComboBox;
 import net.java.jveez.ui.thumbnails.ThumbnailPanel;
 import net.java.jveez.utils.PictureSortingAlgorithm;
 
-public class ThumbnailSortingBox extends JComboBox {
-
+public class ThumbnailSortingBox extends JComboBox
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3258411724859324210L;
 
-    public ThumbnailSortingBox(final ThumbnailPanel thumbnailPanel, PictureSortingAlgorithm algorithm) {
-        super(PictureSortingAlgorithm.values());
-        setSelectedItem(algorithm);
+    public ThumbnailSortingBox( final ThumbnailPanel thumbnailPanel, final PictureSortingAlgorithm algorithm )
+    {
+        super( PictureSortingAlgorithm.values() );
+        setSelectedItem( algorithm );
 
-        addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                PictureSortingAlgorithm value = (PictureSortingAlgorithm) getSelectedItem();
-                thumbnailPanel.setSortingAlgorithm(value);
+        addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                final PictureSortingAlgorithm value = (PictureSortingAlgorithm) getSelectedItem();
+                thumbnailPanel.setSortingAlgorithm( value );
             }
-        });
+        } );
 
     }
 }

@@ -30,8 +30,8 @@ import javax.imageio.ImageIO;
 import net.java.jveez.vfs.Picture;
 import org.garret.perst.Storage;
 
-public class PersistentJpegThumbnail extends PersistentThumbnail {
-
+public class PersistentJpegThumbnail extends PersistentThumbnail
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
@@ -39,29 +39,36 @@ public class PersistentJpegThumbnail extends PersistentThumbnail {
 
     private byte[] bytes;
 
-    public PersistentJpegThumbnail() {
+    public PersistentJpegThumbnail()
+    {
     }
 
-    public PersistentJpegThumbnail(Storage storage, Picture picture, BufferedImage image) {
-        super(storage, picture);
+    public PersistentJpegThumbnail( final Storage storage, final Picture picture, final BufferedImage image )
+    {
+        super( storage, picture );
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(2 * 1024);
-        try {
-            ImageIO.write(image, "jpeg", bos);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream( 2 * 1024 );
+        try
+        {
+            ImageIO.write( image, "jpeg", bos );
             bos.close();
         }
-        catch (IOException e) {
-            throw new RuntimeException("Failed to save the thumbnail in JPEG !", e);
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Failed to save the thumbnail in JPEG !", e );
         }
         this.bytes = bos.toByteArray();
     }
 
-    public BufferedImage getImage() {
-        try {
-            return ImageIO.read(new ByteArrayInputStream(bytes));
+    public BufferedImage getImage()
+    {
+        try
+        {
+            return ImageIO.read( new ByteArrayInputStream( bytes ) );
         }
-        catch (IOException e) {
-            throw new RuntimeException("Failed to load the thumbnail for the byte array", e);
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Failed to load the thumbnail for the byte array", e );
         }
     }
 }

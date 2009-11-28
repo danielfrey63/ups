@@ -31,71 +31,79 @@ import java.awt.image.VolatileImage;
 import net.java.jveez.utils.ImageUtils;
 import org.apache.log4j.Logger;
 
-public class OptimizedAnimationImageRenderer implements AnimationRenderer {
+public class OptimizedAnimationImageRenderer implements AnimationRenderer
+{
+    private static final Logger LOG = Logger.getLogger( OptimizedAnimationImageRenderer.class );
 
-    private static final Logger LOG = Logger.getLogger(OptimizedAnimationImageRenderer.class);
-
-    private AnimatedImageComponent imageComponent;
+    private final AnimatedImageComponent imageComponent;
 
     // image creation
     private VolatileImage imagePortion;
 
-    public OptimizedAnimationImageRenderer(AnimatedImageComponent imageComponent) {
+    public OptimizedAnimationImageRenderer( final AnimatedImageComponent imageComponent )
+    {
         this.imageComponent = imageComponent;
     }
 
-    public void render(Graphics2D g2d, int width, int height, boolean animating) {
-        BufferedImage image = imageComponent.getImage();
-        AnimationState state = imageComponent.getAnimationState();
+    public void render( final Graphics2D g2d, final int width, final int height, final boolean animating )
+    {
+        final BufferedImage image = imageComponent.getImage();
+        final AnimationState state = imageComponent.getAnimationState();
 
-        try {
-            Rectangle2D r = new Rectangle2D.Double(0, 0, width, height);
-            Shape s = state.getAffineTransform().createInverse().createTransformedShape(r);
+        try
+        {
+            final Rectangle2D r = new Rectangle2D.Double( 0, 0, width, height );
+            final Shape s = state.getAffineTransform().createInverse().createTransformedShape( r );
             Rectangle2D bounds = s.getBounds2D();
-            bounds = bounds.createIntersection(new Rectangle2D.Double(0, 0, image.getWidth(), image.getHeight()));
+            bounds = bounds.createIntersection( new Rectangle2D.Double( 0, 0, image.getWidth(), image.getHeight() ) );
 
-            int bx = (int) Math.floor(bounds.getX());
-            int by = (int) Math.floor(bounds.getY());
-            int bw = (int) Math.ceil(bounds.getWidth());
-            int bh = (int) Math.ceil(bounds.getHeight());
+            final int bx = (int) Math.floor( bounds.getX() );
+            final int by = (int) Math.floor( bounds.getY() );
+            final int bw = (int) Math.ceil( bounds.getWidth() );
+            final int bh = (int) Math.ceil( bounds.getHeight() );
 
-            AnimationState st = new AnimationState(state);
+            final AnimationState st = new AnimationState( state );
             st.x = 0;
             st.y = 0;
             st.rx = bw / 2;
             st.ry = bh / 2;
 
-            imagePortion = ImageUtils.createVolatileImage(bw, bh);
+            imagePortion = ImageUtils.createVolatileImage( bw, bh );
 
-            do {
-                int returnCode = imagePortion.validate(ImageUtils.getGraphicsconfiguration());
-                if (returnCode == VolatileImage.IMAGE_RESTORED) {
+            do
+            {
+                final int returnCode = imagePortion.validate( ImageUtils.getGraphicsconfiguration() );
+                if ( returnCode == VolatileImage.IMAGE_RESTORED )
+                {
                     // Contents need to be restored
-                    copyImagePortion(image, bx, by, bw, bh);
+                    copyImagePortion( image, bx, by, bw, bh );
                 }
-                else if (returnCode == VolatileImage.IMAGE_INCOMPATIBLE) {
+                else if ( returnCode == VolatileImage.IMAGE_INCOMPATIBLE )
+                {
                     // old vImg doesn't work with new GraphicsConfig; re-create it
-                    imagePortion = ImageUtils.createVolatileImage(bw, bh);
-                    copyImagePortion(image, bx, by, bw, bh);
+                    imagePortion = ImageUtils.createVolatileImage( bw, bh );
+                    copyImagePortion( image, bx, by, bw, bh );
                 }
 
-                g2d.drawImage(imagePortion, st.getAffineTransform(), null);
+                g2d.drawImage( imagePortion, st.getAffineTransform(), null );
             }
-            while (imagePortion.contentsLost());
+            while ( imagePortion.contentsLost() );
 
             imagePortion.flush();
             imagePortion = null;
 
         }
-        catch (NoninvertibleTransformException e) {
-            LOG.warn("oops");
+        catch ( NoninvertibleTransformException e )
+        {
+            LOG.warn( "oops" );
         }
 
     }
 
-    private void copyImagePortion(BufferedImage source, int bx, int by, int bw, int bh) {
-        Graphics2D graphics = imagePortion.createGraphics();
-        graphics.drawImage(source,
+    private void copyImagePortion( final BufferedImage source, final int bx, final int by, final int bw, final int bh )
+    {
+        final Graphics2D graphics = imagePortion.createGraphics();
+        graphics.drawImage( source,
                 0,
                 0,
                 bw,
@@ -104,7 +112,7 @@ public class OptimizedAnimationImageRenderer implements AnimationRenderer {
                 by,
                 bx + bw,
                 by + bh,
-                null);
+                null );
         graphics.dispose();
     }
 

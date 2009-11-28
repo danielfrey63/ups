@@ -33,61 +33,73 @@ import java.awt.event.MouseMotionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
-
 import org.apache.log4j.Logger;
 
-public class HidingMouseListener implements MouseMotionListener, FocusListener {
+public class HidingMouseListener implements MouseMotionListener, FocusListener
+{
+    private static final Logger LOG = Logger.getLogger( HidingMouseListener.class );
 
-    private static final Logger LOG = Logger.getLogger(HidingMouseListener.class);
+    private final Component target;
 
-    private Component target;
+    private final Cursor defaultCursor;
 
-    private Cursor defaultCursor;
-    private Cursor emptyCursor;
+    private final Cursor emptyCursor;
+
     private volatile boolean cursorHidden = false;
-    private Timer timer;
+
+    private final Timer timer;
 
     private long lastMove;
 
-    public HidingMouseListener(Component target) {
+    public HidingMouseListener( final Component target )
+    {
         this.target = target;
         this.defaultCursor = target.getCursor();
-        this.emptyCursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(0, 0), "emptyCursor");
+        this.emptyCursor = Toolkit.getDefaultToolkit().createCustomCursor( new ImageIcon( new byte[0] ).getImage(), new Point( 0, 0 ), "emptyCursor" );
 
-        this.timer = new Timer("CursorHiding", true);
-        timer.schedule(new TimerTask() {
-            public void run() {
-                if (lastMove != 0 && !cursorHidden && System.currentTimeMillis() - lastMove > 2000) {
-                    LOG.debug("hiding mouse");
-                    HidingMouseListener.this.target.setCursor(emptyCursor);
+        this.timer = new Timer( "CursorHiding", true );
+        timer.schedule( new TimerTask()
+        {
+            public void run()
+            {
+                if ( lastMove != 0 && !cursorHidden && System.currentTimeMillis() - lastMove > 2000 )
+                {
+                    LOG.debug( "hiding mouse" );
+                    HidingMouseListener.this.target.setCursor( emptyCursor );
                     cursorHidden = true;
                 }
             }
-        }, 2000, 500);
+        }, 2000, 500 );
 
-        target.addMouseMotionListener(this);
-        target.addFocusListener(this);
+        target.addMouseMotionListener( this );
+        target.addFocusListener( this );
     }
 
-    public void focusGained(FocusEvent e) {
+    public void focusGained( final FocusEvent e )
+    {
         reset();
     }
 
-    public void focusLost(FocusEvent e) {
+    public void focusLost( final FocusEvent e )
+    {
     }
 
-    public void mouseDragged(MouseEvent e) {
+    public void mouseDragged( final MouseEvent e )
+    {
         reset();
     }
 
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved( final MouseEvent e )
+    {
         reset();
     }
 
-    private void reset() {
+    private void reset()
+    {
         lastMove = System.currentTimeMillis();
-        if (cursorHidden) {
-            target.setCursor(defaultCursor);
+        if ( cursorHidden )
+        {
+            target.setCursor( defaultCursor );
             cursorHidden = false;
         }
     }

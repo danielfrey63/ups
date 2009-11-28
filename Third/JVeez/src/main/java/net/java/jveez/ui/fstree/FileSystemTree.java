@@ -29,46 +29,52 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import net.java.jveez.vfs.Directory;
 
-public class FileSystemTree extends JTree {
-
+public class FileSystemTree extends JTree
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257572789031286832L;
 
-    public FileSystemTree() {
+    public FileSystemTree()
+    {
         super();
-        setModel(new LazyDirectoryTreeModel());
-        setRootVisible(false);
-        setCellRenderer(new DirectoryNodeRenderer());
+        setModel( new LazyDirectoryTreeModel() );
+        setRootVisible( false );
+        setCellRenderer( new DirectoryNodeRenderer() );
     }
 
-    private class DirectoryNodeRenderer extends DefaultTreeCellRenderer {
-
+    private class DirectoryNodeRenderer extends DefaultTreeCellRenderer
+    {
         /**
          * Comment for <code>serialVersionUID</code>
          */
         private static final long serialVersionUID = 3256999952080188472L;
 
-        private Color normalColor;
-        private Color hiddenColor;
+        private final Color normalColor;
 
-        public DirectoryNodeRenderer() {
+        private final Color hiddenColor;
+
+        public DirectoryNodeRenderer()
+        {
             normalColor = getForeground();
 //      hiddenColor = normalColor.brighter();
             hiddenColor = Color.BLUE;
         }
 
-        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-            JLabel label = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-            Directory directory = ((LazyDirectoryNode) value).getDirectory();
-            if (directory != null) {
-                label.setIcon(directory.getIcon());
-                label.setText(directory.getName());
-                label.setForeground(directory.isHidden() ? hiddenColor : normalColor);
+        public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus )
+        {
+            final JLabel label = (JLabel) super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf, row, hasFocus );
+            final Directory directory = ( (LazyDirectoryNode) value ).getDirectory();
+            if ( directory != null )
+            {
+                label.setIcon( directory.getIcon() );
+                label.setText( directory.getName() );
+                label.setForeground( directory.isHidden() ? hiddenColor : normalColor );
             }
-            else {
-                label.setText("[NULL]");
+            else
+            {
+                label.setText( "[NULL]" );
             }
 
             return label;

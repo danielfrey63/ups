@@ -33,23 +33,27 @@ import javax.swing.Icon;
  * can be seen in the implementation of <code>javax.swing.ImageIcon</code>. Note that this simplification probably
  * offers only a pretty small performance gain.
  */
-public class BufferedImageIcon implements Icon {
+public class BufferedImageIcon implements Icon
+{
+    private final BufferedImage image;
 
-    private BufferedImage image;
-
-    public BufferedImageIcon(BufferedImage image) {
+    public BufferedImageIcon( final BufferedImage image )
+    {
         this.image = image;
     }
 
-    public void paintIcon(Component c, Graphics g, int x, int y) {
-        g.drawImage(image, x, y, c);
+    public void paintIcon( final Component c, final Graphics g, final int x, final int y )
+    {
+        g.drawImage( image, x, y, c );
     }
 
-    public int getIconWidth() {
+    public int getIconWidth()
+    {
         return image.getWidth();
     }
 
-    public int getIconHeight() {
+    public int getIconHeight()
+    {
         return image.getHeight();
     }
 }

@@ -36,62 +36,72 @@ import net.java.jveez.vfs.VfsEvent;
 import net.java.jveez.vfs.VfsEventListener;
 import org.apache.log4j.Logger;
 
-public class ThumbnailPanel extends JPanel implements VfsEventListener {
+public class ThumbnailPanel extends JPanel implements VfsEventListener
+{
+    private static final Logger LOG = Logger.getLogger( ThumbnailPanel.class );
 
-    private static final Logger LOG = Logger.getLogger(ThumbnailPanel.class);
-
-    private ThumbnailSortingBox sortingBox = new ThumbnailSortingBox(this, PictureSortingAlgorithm.ByDate);
+    private final ThumbnailSortingBox sortingBox = new ThumbnailSortingBox( this, PictureSortingAlgorithm.ByDate );
 
     //  private JLabel currentDirectoryLabel = new JLabel();
-    private DirectoryBrowser directoryBrowser = new DirectoryBrowser();
+    private final DirectoryBrowser directoryBrowser = new DirectoryBrowser();
+
     public ThumbnailList thumbnailList;
 
-    public ThumbnailPanel(ThumbnailList thumbnailList) {
+    public ThumbnailPanel( final ThumbnailList thumbnailList )
+    {
         super();
         this.thumbnailList = thumbnailList;
         setupComponents();
         layoutComponents();
 
-        Vfs.getInstance().addVfsListener(this);
+        Vfs.getInstance().addVfsListener( this );
     }
 
-    private void layoutComponents() {
-        setLayout(new BorderLayout());
-        JPanel topPanel = new JPanel(new BorderLayout());
+    private void layoutComponents()
+    {
+        setLayout( new BorderLayout() );
+        final JPanel topPanel = new JPanel( new BorderLayout() );
 
-        topPanel.add(directoryBrowser, BorderLayout.CENTER);
+        topPanel.add( directoryBrowser, BorderLayout.CENTER );
 
-        topPanel.add(sortingBox, BorderLayout.EAST);
-        add(topPanel, BorderLayout.NORTH);
+        topPanel.add( sortingBox, BorderLayout.EAST );
+        add( topPanel, BorderLayout.NORTH );
 
-        JScrollPane comp = new JScrollPane(thumbnailList);
-        add(comp, BorderLayout.CENTER);
+        final JScrollPane comp = new JScrollPane( thumbnailList );
+        add( comp, BorderLayout.CENTER );
     }
 
-    private void setupComponents() {
-        directoryBrowser.addPropertyChangeListener("directory", new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                Directory directory = (Directory) evt.getNewValue();
-                setCurrentDirectory(directory);
+    private void setupComponents()
+    {
+        directoryBrowser.addPropertyChangeListener( "directory", new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                final Directory directory = (Directory) evt.getNewValue();
+                setCurrentDirectory( directory );
             }
-        });
+        } );
     }
 
-    public void setCurrentDirectory(Directory directory) {
-        directoryBrowser.setCurrentDirectory(directory);
-        thumbnailList.setCurrentDirectory(directory);
+    public void setCurrentDirectory( final Directory directory )
+    {
+        directoryBrowser.setCurrentDirectory( directory );
+        thumbnailList.setCurrentDirectory( directory );
     }
 
-    public void setSortingAlgorithm(PictureSortingAlgorithm value) {
-        thumbnailList.setSortingAlgorithm(value);
+    public void setSortingAlgorithm( final PictureSortingAlgorithm value )
+    {
+        thumbnailList.setSortingAlgorithm( value );
     }
 
-    public void vfsEventDispatched(VfsEvent event) {
-        LOG.debug("vfsEventDispatched(" + event + ")");
+    public void vfsEventDispatched( final VfsEvent event )
+    {
+        LOG.debug( "vfsEventDispatched(" + event + ")" );
 
-        switch (event.getEventType()) {
+        switch ( event.getEventType() )
+        {
             case VFS_CLOSED:
-                setCurrentDirectory(null);
+                setCurrentDirectory( null );
                 break;
         }
     }

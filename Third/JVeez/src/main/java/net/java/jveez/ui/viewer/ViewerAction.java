@@ -31,12 +31,14 @@ import javax.swing.Icon;
 import javax.swing.KeyStroke;
 import net.java.jveez.utils.Utils;
 
-public abstract class ViewerAction extends AbstractAction {
-
+public abstract class ViewerAction extends AbstractAction
+{
     private String mouseGesture;
+
     private BufferedImage image;
 
-    protected ViewerAction() {
+    protected ViewerAction()
+    {
         onCreate();
     }
 
@@ -44,55 +46,68 @@ public abstract class ViewerAction extends AbstractAction {
 
     protected abstract void onExecute();
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed( final ActionEvent e )
+    {
         onExecute();
     }
 
-    public void setName(String name) {
-        putValue(NAME, name);
+    public void setName( final String name )
+    {
+        putValue( NAME, name );
     }
 
-    public String getName() {
-        return (String) getValue(NAME);
+    public String getName()
+    {
+        return (String) getValue( NAME );
     }
 
-    public void setIcon(Icon icon) {
-        putValue(Action.SMALL_ICON, icon);
+    public void setIcon( final Icon icon )
+    {
+        putValue( Action.SMALL_ICON, icon );
     }
 
-    public void setKeystroke(AWTKeyStroke keyStroke) {
-        putValue(ACCELERATOR_KEY, keyStroke);
+    public void setKeystroke( final AWTKeyStroke keyStroke )
+    {
+        putValue( ACCELERATOR_KEY, keyStroke );
     }
 
-    public void setDescription(String description) {
-        putValue(SHORT_DESCRIPTION, description);
+    public void setDescription( final String description )
+    {
+        putValue( SHORT_DESCRIPTION, description );
     }
 
-    public String getDescription() {
-        return (String) getValue(SHORT_DESCRIPTION);
+    public String getDescription()
+    {
+        return (String) getValue( SHORT_DESCRIPTION );
     }
 
-    public void setMouseGesture(String mouseGesture) {
+    public void setMouseGesture( final String mouseGesture )
+    {
         this.mouseGesture = mouseGesture;
     }
 
-    public boolean hasMouseGesture() {
+    public boolean hasMouseGesture()
+    {
         return mouseGesture != null;
     }
 
-    public AWTKeyStroke getKeyStroke() {
-        return (KeyStroke) getValue(ACCELERATOR_KEY);
+    public AWTKeyStroke getKeyStroke()
+    {
+        return (KeyStroke) getValue( ACCELERATOR_KEY );
     }
 
-    public String getMouseGesture() {
+    public String getMouseGesture()
+    {
         return mouseGesture;
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage()
+    {
         return image;
     }
 
-    public void setImageResourceName(String imageResourceName) {
-        this.image = Utils.loadImage(imageResourceName);
+    public void setImageResourceName( final String imageResourceName )
+    {
+        this.image = Utils.loadImage( imageResourceName );
     }
 }

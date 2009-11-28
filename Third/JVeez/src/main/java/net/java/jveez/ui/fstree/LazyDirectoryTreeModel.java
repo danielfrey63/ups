@@ -25,33 +25,38 @@ package net.java.jveez.ui.fstree;
 import javax.swing.tree.DefaultTreeModel;
 import org.apache.log4j.Logger;
 
-class LazyDirectoryTreeModel extends DefaultTreeModel {
-
+class LazyDirectoryTreeModel extends DefaultTreeModel
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257852090771649328L;
 
-    private static final Logger LOG = Logger.getLogger(LazyDirectoryTreeModel.class);
+    private static final Logger LOG = Logger.getLogger( LazyDirectoryTreeModel.class );
 
-    public LazyDirectoryTreeModel() {
-        super(null, true);
-        setRoot(new LazyDirectoryNode(this, null, null));
+    public LazyDirectoryTreeModel()
+    {
+        super( null, true );
+        setRoot( new LazyDirectoryNode( this, null, null ) );
     }
 
-    public void nodeLoaded(LazyDirectoryNode node) {
-        LOG.debug("nodeLoaded() : " + node);
+    public void nodeLoaded( final LazyDirectoryNode node )
+    {
+        LOG.debug( "nodeLoaded() : " + node );
 
-        int count = node.getChildCount();
-        if (count > 0) {
-            int[] indices = new int[count];
-            for (int i = 0; i < count; i++) {
-                indices[ i ] = i;
+        final int count = node.getChildCount();
+        if ( count > 0 )
+        {
+            final int[] indices = new int[count];
+            for ( int i = 0; i < count; i++ )
+            {
+                indices[i] = i;
             }
-            this.nodesWereInserted(node, indices);
+            this.nodesWereInserted( node, indices );
         }
-        else {
-            this.nodeChanged(node);
+        else
+        {
+            this.nodeChanged( node );
         }
 
     }

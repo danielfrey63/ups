@@ -22,7 +22,7 @@
 
 package net.java.jveez.vfs;
 
-public interface VfsEventListener {
-
-    void vfsEventDispatched(VfsEvent event);
+public interface VfsEventListener
+{
+    void vfsEventDispatched( VfsEvent event );
 }

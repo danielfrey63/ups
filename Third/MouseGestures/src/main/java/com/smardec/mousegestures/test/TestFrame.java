@@ -21,116 +21,150 @@ package com.smardec.mousegestures.test;
 
 import com.smardec.mousegestures.MouseGestures;
 import com.smardec.mousegestures.MouseGesturesListener;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Simple test frame.
  */
-public class TestFrame extends JFrame {
+public class TestFrame extends JFrame
+{
     private MouseGestures mouseGestures = new MouseGestures();
-    private JLabel statusLabel = new JLabel("Mouse gesture: ");
 
-    public static void main(String[] args) {
-        TestFrame frame = new TestFrame();
-        frame.show();
+    private final JLabel statusLabel = new JLabel( "Mouse gesture: " );
+
+    public static void main( final String[] args )
+    {
+        final TestFrame frame = new TestFrame();
+        frame.setVisible( true );
     }
 
-    public TestFrame() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Mouse Gestures Test Frame");
-        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("com/smardec/mousegestures/test/img/logo.gif")).getImage());
+    public TestFrame()
+    {
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
+        setTitle( "Mouse Gestures Test Frame" );
+        setIconImage( new ImageIcon( getClass().getClassLoader().getResource( "com/smardec/mousegestures/test/img/logo.gif" ) ).getImage() );
         initSize();
-        getContentPane().setLayout(new BorderLayout());
+        getContentPane().setLayout( new BorderLayout() );
         initControls();
         initStatusBar();
         initMouseGestures();
     }
 
-    private void initSize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension size = new Dimension(640, 480);
-        if (size.height > screenSize.height) size.height = screenSize.height;
-        if (size.width > screenSize.width) size.width = screenSize.width;
-        setSize(size);
-        setLocation((screenSize.width - size.width) / 2, (screenSize.height - size.height) / 2);
+    private void initSize()
+    {
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final Dimension size = new Dimension( 640, 480 );
+        if ( size.height > screenSize.height )
+            size.height = screenSize.height;
+        if ( size.width > screenSize.width )
+            size.width = screenSize.width;
+        setSize( size );
+        setLocation( ( screenSize.width - size.width ) / 2, ( screenSize.height - size.height ) / 2 );
     }
 
-    private void initControls() {
-        JCheckBox jCheckBoxButton1 = new JCheckBox("Right button");
-        jCheckBoxButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mouseGestures.setMouseButton(MouseEvent.BUTTON3_MASK);
+    private void initControls()
+    {
+        final JCheckBox jCheckBoxButton1 = new JCheckBox( "Right button" );
+        jCheckBoxButton1.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                mouseGestures.setMouseButton( MouseEvent.BUTTON3_MASK );
             }
-        });
-        JCheckBox jCheckBoxButton2 = new JCheckBox("Middle button");
-        jCheckBoxButton2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mouseGestures.setMouseButton(MouseEvent.BUTTON2_MASK);
+        } );
+        final JCheckBox jCheckBoxButton2 = new JCheckBox( "Middle button" );
+        jCheckBoxButton2.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                mouseGestures.setMouseButton( MouseEvent.BUTTON2_MASK );
             }
-        });
-        JCheckBox jCheckBoxButton3 = new JCheckBox("Left button");
-        jCheckBoxButton3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mouseGestures.setMouseButton(MouseEvent.BUTTON1_MASK);
+        } );
+        final JCheckBox jCheckBoxButton3 = new JCheckBox( "Left button" );
+        jCheckBoxButton3.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                mouseGestures.setMouseButton( MouseEvent.BUTTON1_MASK );
             }
-        });
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(jCheckBoxButton1);
-        buttonGroup.add(jCheckBoxButton2);
-        buttonGroup.add(jCheckBoxButton3);
-        jCheckBoxButton1.setSelected(true);
+        } );
+        final ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add( jCheckBoxButton1 );
+        buttonGroup.add( jCheckBoxButton2 );
+        buttonGroup.add( jCheckBoxButton3 );
+        jCheckBoxButton1.setSelected( true );
 
-        JPanel jPanel = new JPanel(new GridLayout(4, 1));
-        jPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        jPanel.add(new JLabel("Select mouse button used for gestures handling."));
-        jPanel.add(jCheckBoxButton1);
-        jPanel.add(jCheckBoxButton2);
-        jPanel.add(jCheckBoxButton3);
+        final JPanel jPanel = new JPanel( new GridLayout( 4, 1 ) );
+        jPanel.setBorder( BorderFactory.createEmptyBorder( 5, 10, 5, 10 ) );
+        jPanel.add( new JLabel( "Select mouse button used for gestures handling." ) );
+        jPanel.add( jCheckBoxButton1 );
+        jPanel.add( jCheckBoxButton2 );
+        jPanel.add( jCheckBoxButton3 );
 
-        getContentPane().add(jPanel, BorderLayout.NORTH);
+        getContentPane().add( jPanel, BorderLayout.NORTH );
     }
 
-    private void initStatusBar() {
-        JPanel jPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        jPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-        jPanel.add(statusLabel);
-        getContentPane().add(jPanel, BorderLayout.SOUTH);
+    private void initStatusBar()
+    {
+        final JPanel jPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
+        jPanel.setBorder( BorderFactory.createLoweredBevelBorder() );
+        jPanel.add( statusLabel );
+        getContentPane().add( jPanel, BorderLayout.SOUTH );
     }
 
-    private void initMouseGestures() {
+    private void initMouseGestures()
+    {
         mouseGestures = new MouseGestures();
-        mouseGestures.addMouseGesturesListener(new MouseGesturesListener() {
-            public void gestureMovementRecognized(String currentGesture) {
-                setGestureString(addCommas(currentGesture));
+        mouseGestures.addMouseGesturesListener( new MouseGesturesListener()
+        {
+            public void gestureMovementRecognized( final String currentGesture )
+            {
+                setGestureString( addCommas( currentGesture ) );
             }
 
-            public void processGesture(String gesture) {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {}
-                setGestureString("");
+            public void processGesture( final String gesture )
+            {
+                try
+                {
+                    Thread.sleep( 200 );
+                }
+                catch ( InterruptedException e )
+                {
+                }
+                setGestureString( "" );
             }
 
-            private String addCommas(String gesture) {
-                StringBuffer stringBuffer = new StringBuffer();
-                for (int i = 0; i < gesture.length(); i++) {
-                    stringBuffer.append(gesture.charAt(i));
-                    if (i != gesture.length() - 1)
-                        stringBuffer.append(",");
+            private String addCommas( final String gesture )
+            {
+                final StringBuffer stringBuffer = new StringBuffer();
+                for ( int i = 0; i < gesture.length(); i++ )
+                {
+                    stringBuffer.append( gesture.charAt( i ) );
+                    if ( i != gesture.length() - 1 )
+                        stringBuffer.append( "," );
                 }
                 return stringBuffer.toString();
             }
-        });
+        } );
         mouseGestures.start();
     }
 
-    private void setGestureString(String gesture) {
-        statusLabel.setText("Mouse gesture: " + gesture);
+    private void setGestureString( final String gesture )
+    {
+        statusLabel.setText( "Mouse gesture: " + gesture );
     }
 }

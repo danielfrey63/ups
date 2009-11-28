@@ -49,13 +49,13 @@ import net.java.jveez.utils.Utils;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class ViewerPanel extends JPanel {
-
+public class ViewerPanel extends JPanel
+{
     private static final long serialVersionUID = 3688782553385809462L;
 
-    private static final Logger LOG = Logger.getLogger(ViewerPanel.class);
+    private static final Logger LOG = Logger.getLogger( ViewerPanel.class );
 
-    private static final Dimension DEFAULT_DIMENSION = new Dimension(640, 480);
+    private static final Dimension DEFAULT_DIMENSION = new Dimension( 640, 480 );
 
     private volatile int currentIndex;
 
@@ -67,9 +67,9 @@ public class ViewerPanel extends JPanel {
 
     private final JPanel infoPanel;
 
-    private BufferedImage loadingImage = new DefaultImage(new Dimension(640, 480), "Loading...");
+    private BufferedImage loadingImage = new DefaultImage( new Dimension( 640, 480 ), "Loading..." );
 
-    private BufferedImage noImage = new DefaultImage(new Dimension(640, 480), "No Image");
+    private BufferedImage noImage = new DefaultImage( new Dimension( 640, 480 ), "No Image" );
 
     private ThumbnailList thumbnailList;
 
@@ -83,7 +83,7 @@ public class ViewerPanel extends JPanel {
 
     private Future previousImageLoadingJob;
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(3, Utils.newPriorityThreadFactory(Thread.NORM_PRIORITY));
+    private final ExecutorService executorService = Executors.newFixedThreadPool( 3, Utils.newPriorityThreadFactory( Thread.NORM_PRIORITY ) );
 
     private BufferedImage image;
 
@@ -91,320 +91,395 @@ public class ViewerPanel extends JPanel {
 
     private boolean toolbarVisible;
 
-    public ViewerPanel() {
-        this(null);
+    public ViewerPanel()
+    {
+        this( null );
     }
 
-    public ViewerPanel(final ThumbnailList thumbnailList) {
-        setThumnailList(thumbnailList);
+    public ViewerPanel( final ThumbnailList thumbnailList )
+    {
+        setThumnailList( thumbnailList );
 
         // setup toolbar
-        viewerActions = new ViewerActions(this, viewerImagePanel);
-        viewerToolbar = new ViewerToolbar(viewerActions.getControlButtons());
+        viewerActions = new ViewerActions( this, viewerImagePanel );
+        viewerToolbar = new ViewerToolbar( viewerActions.getControlButtons() );
 
-        infoPanel = new JPanel(new BorderLayout());
-        infoPanel.setOpaque(false);
-        infoPanel.add(Box.createVerticalStrut(50), BorderLayout.NORTH);
-        infoPanel.add(Box.createVerticalStrut(50), BorderLayout.SOUTH);
-        infoPanel.add(viewerInfoPanel, BorderLayout.EAST);
-        viewerInfoPanel.setBlurSource(viewerImagePanel);
+        infoPanel = new JPanel( new BorderLayout() );
+        infoPanel.setOpaque( false );
+        infoPanel.add( Box.createVerticalStrut( 50 ), BorderLayout.NORTH );
+        infoPanel.add( Box.createVerticalStrut( 50 ), BorderLayout.SOUTH );
+        infoPanel.add( viewerInfoPanel, BorderLayout.EAST );
+        viewerInfoPanel.setBlurSource( viewerImagePanel );
 
-        setToolbarVisible(true);
+        setToolbarVisible( true );
 
-        setLayout(new BorderLayout());
-        add(viewerImagePanel, BorderLayout.CENTER);
-        add(viewerToolbar, BorderLayout.SOUTH);
-        setBackground(Color.WHITE);
-        setSize(DEFAULT_DIMENSION);
+        setLayout( new BorderLayout() );
+        add( viewerImagePanel, BorderLayout.CENTER );
+        add( viewerToolbar, BorderLayout.SOUTH );
+        setBackground( Color.WHITE );
+        setSize( DEFAULT_DIMENSION );
 
-        new HidingMouseListener(viewerImagePanel);
+        new HidingMouseListener( viewerImagePanel );
 
     }
 
     @Override
-    public void setOpaque(final boolean isOpaque) {
-        super.setOpaque(isOpaque);
-        if (viewerImagePanel != null) {
-            viewerImagePanel.setOpaque(isOpaque);
+    public void setOpaque( final boolean isOpaque )
+    {
+        super.setOpaque( isOpaque );
+        if ( viewerImagePanel != null )
+        {
+            viewerImagePanel.setOpaque( isOpaque );
         }
     }
 
     @Override
-    public void setBackground(final Color bg) {
-        super.setBackground(bg);
-        if (viewerImagePanel != null) {
-            viewerImagePanel.setBackground(bg);
+    public void setBackground( final Color bg )
+    {
+        super.setBackground( bg );
+        if ( viewerImagePanel != null )
+        {
+            viewerImagePanel.setBackground( bg );
         }
     }
 
-    public void setToolbarVisible(final boolean visible) {
+    public void setToolbarVisible( final boolean visible )
+    {
         this.toolbarVisible = visible;
-        if (toolbarVisible) {
-            add(viewerToolbar, BorderLayout.SOUTH);
-            addKeyListener(viewerActions);
+        if ( toolbarVisible )
+        {
+            add( viewerToolbar, BorderLayout.SOUTH );
+            addKeyListener( viewerActions );
             viewerActions.addMouseWheelListener();
-        } else {
-            remove(viewerToolbar);
-            removeKeyListener(viewerActions);
+        }
+        else
+        {
+            remove( viewerToolbar );
+            removeKeyListener( viewerActions );
             viewerActions.removeMouseWheelListener();
         }
-        viewerImagePanel.setAnimating(visible);
+        viewerImagePanel.setAnimating( visible );
         revalidate();
     }
 
-    public AnimationState getAnimationState() {
+    public AnimationState getAnimationState()
+    {
         return viewerImagePanel.getAnimationState();
     }
 
-    public void setAnimationState(final AnimationState state) {
-        viewerImagePanel.setAnimationState(state);
+    public void setAnimationState( final AnimationState state )
+    {
+        viewerImagePanel.setAnimationState( state );
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage()
+    {
         return image;
     }
 
-    public JComponent getImagePanel() {
+    public JComponent getImagePanel()
+    {
         return viewerImagePanel;
     }
 
-    public boolean isToolbarVisible() {
+    public boolean isToolbarVisible()
+    {
         return toolbarVisible;
     }
 
-    public void setThumnailList(final ThumbnailList thumbnailList) {
+    public void setThumnailList( final ThumbnailList thumbnailList )
+    {
         this.thumbnailList = thumbnailList;
     }
 
-    public void toogleDisplayPictureInformation() {
-        LOG.debug("toogleDisplayPictureInformation()");
+    public void toogleDisplayPictureInformation()
+    {
+        LOG.debug( "toogleDisplayPictureInformation()" );
 
         final JFrame frame = (JFrame) getTopLevelAncestor();
-        frame.setGlassPane(infoPanel);
-        frame.getGlassPane().setVisible(!frame.getGlassPane().isVisible());
+        frame.setGlassPane( infoPanel );
+        frame.getGlassPane().setVisible( !frame.getGlassPane().isVisible() );
     }
 
-    public void closeViewer() {
-        setVisible(false);
+    public void closeViewer()
+    {
+        setVisible( false );
     }
 
-    public void gotoFirst() {
-        LOG.debug("gotoFirst()");
-        thumbnailClicked(0);
+    public void gotoFirst()
+    {
+        LOG.debug( "gotoFirst()" );
+        thumbnailClicked( 0 );
     }
 
-    public void gotoPrevious() {
-        LOG.debug("gotoPrevious()");
-        final int nextIndex = thumbnailList.getIndexBefore(currentIndex);
-        thumbnailClicked(nextIndex);
+    public void gotoPrevious()
+    {
+        LOG.debug( "gotoPrevious()" );
+        final int nextIndex = thumbnailList.getIndexBefore( currentIndex );
+        thumbnailClicked( nextIndex );
     }
 
-    public void gotoNext() {
-        LOG.debug("gotoNext()");
-        final int nextIndex = thumbnailList.getIndexAfter(currentIndex);
-        thumbnailClicked(nextIndex);
+    public void gotoNext()
+    {
+        LOG.debug( "gotoNext()" );
+        final int nextIndex = thumbnailList.getIndexAfter( currentIndex );
+        thumbnailClicked( nextIndex );
     }
 
-    public void gotoLast() {
-        LOG.debug("gotoLast()");
+    public void gotoLast()
+    {
+        LOG.debug( "gotoLast()" );
         final int nextIndex = thumbnailList.getNumberOfPictures() - 1;
-        thumbnailClicked(nextIndex);
+        thumbnailClicked( nextIndex );
     }
 
-    public Picture getCurrentPicture() {
+    public Picture getCurrentPicture()
+    {
         return currentPicture;
     }
 
-    public void setCurrentPicture(final Picture picture) {
-        setCurrentPicture(picture, null, null, null);
+    public void setCurrentPicture( final Picture picture )
+    {
+        setCurrentPicture( picture, null, null, null );
     }
 
-    public void setLoadingText(final String text) {
-        loadingImage = new DefaultImage(new Dimension(640, 480), text);
+    public void setLoadingText( final String text )
+    {
+        loadingImage = new DefaultImage( new Dimension( 640, 480 ), text );
     }
 
-    public void setNoImageText(final String text) {
-        noImage = new DefaultImage(new Dimension(640, 480), text);
+    public void setNoImageText( final String text )
+    {
+        noImage = new DefaultImage( new Dimension( 640, 480 ), text );
     }
 
-    public void setCurrentPicture(final Picture picture, final Picture previousPicture, final Picture nextPicture,
-                                  final AnimationState state) {
+    public void setCurrentPicture( final Picture picture, final Picture previousPicture, final Picture nextPicture,
+                                   final AnimationState state )
+    {
         // cancel any pending loading job
-        if (currentImageLoadingJob != null) {
-            currentImageLoadingJob.cancel(true);
+        if ( currentImageLoadingJob != null )
+        {
+            currentImageLoadingJob.cancel( true );
         }
-        if (nextImageLoadingJob != null) {
-            nextImageLoadingJob.cancel(true);
+        if ( nextImageLoadingJob != null )
+        {
+            nextImageLoadingJob.cancel( true );
         }
-        if (previousImageLoadingJob != null) {
-            previousImageLoadingJob.cancel(true);
+        if ( previousImageLoadingJob != null )
+        {
+            previousImageLoadingJob.cancel( true );
         }
 
         currentPicture = picture;
 
-        if (picture != null) {
-            if (!ImageStore.getInstance().isCached(picture)) {
-                viewerToolbar.update(picture.getName(), currentIndex, thumbnailList == null ? 1 : thumbnailList.getNumberOfPictures());
-                viewerImagePanel.setImage(loadingImage);
-                viewerImagePanel.resetStateIn(0);
+        if ( picture != null )
+        {
+            if ( !ImageStore.getInstance().isCached( picture ) )
+            {
+                viewerToolbar.update( picture.getName(), currentIndex, thumbnailList == null ? 1 : thumbnailList.getNumberOfPictures() );
+                viewerImagePanel.setImage( loadingImage );
+                viewerImagePanel.resetStateIn( 0 );
                 repaint();
-                viewerInfoPanel.updateContent(null, null);
+                viewerInfoPanel.updateContent( null, null );
 
-                final Runnable future = new Runnable() {
-
-                    public void run() {
-                        if (!Thread.interrupted()) {
+                final Runnable future = new Runnable()
+                {
+                    public void run()
+                    {
+                        if ( !Thread.interrupted() )
+                        {
                             // (eventually) load the image
-                            image = ImageStore.getInstance().getImage(picture);
-                            if (!Thread.interrupted() && image != null) {
-                                viewerImagePanel.setImage(image);
-                                if (state != null) {
-                                    viewerImagePanel.setAnimationState(state);
-                                } else {
-                                    viewerImagePanel.resetStateIn(0);
+                            image = ImageStore.getInstance().getImage( picture );
+                            if ( !Thread.interrupted() && image != null )
+                            {
+                                viewerImagePanel.setImage( image );
+                                if ( state != null )
+                                {
+                                    viewerImagePanel.setAnimationState( state );
                                 }
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    public void run() {
-                                        viewerInfoPanel.updateContent(picture, image);
+                                else
+                                {
+                                    viewerImagePanel.resetStateIn( 0 );
+                                }
+                                SwingUtilities.invokeLater( new Runnable()
+                                {
+                                    public void run()
+                                    {
+                                        viewerInfoPanel.updateContent( picture, image );
                                     }
-                                });
-                                LOG.info("fireing image loaded event from asynchronous picture loader thread");
+                                } );
+                                LOG.info( "fireing image loaded event from asynchronous picture loader thread" );
                                 firePictureLoaded();
-                                prefetchNextPicture(nextPicture);
-                                prefetchPreviousPicture(previousPicture);
-                            } else {
-                                if (state != null) {
-                                    viewerImagePanel.setAnimationState(state);
-                                } else {
-                                    viewerImagePanel.resetStateIn(0);
+                                prefetchNextPicture( nextPicture );
+                                prefetchPreviousPicture( previousPicture );
+                            }
+                            else
+                            {
+                                if ( state != null )
+                                {
+                                    viewerImagePanel.setAnimationState( state );
+                                }
+                                else
+                                {
+                                    viewerImagePanel.resetStateIn( 0 );
                                 }
                             }
                         }
                     }
                 };
-                currentImageLoadingJob = executorService.submit(future);
-            } else {
-                image = ImageStore.getInstance().getImage(picture);
-                viewerImagePanel.setImage(image);
-                if (state != null) {
-                    viewerImagePanel.setAnimationState(state);
-                } else {
-                    viewerImagePanel.resetStateIn(0);
-                }
-                viewerInfoPanel.updateContent(picture, image);
-                viewerToolbar.update(picture.getName(), currentIndex, thumbnailList == null ? 1 : thumbnailList.getNumberOfPictures());
-                LOG.info("fireing image loaded event from synchronous cache picture loading");
-                firePictureLoaded();
-                prefetchNextPicture(nextPicture);
-                prefetchPreviousPicture(previousPicture);
+                currentImageLoadingJob = executorService.submit( future );
             }
-        } else {
+            else
+            {
+                image = ImageStore.getInstance().getImage( picture );
+                viewerImagePanel.setImage( image );
+                if ( state != null )
+                {
+                    viewerImagePanel.setAnimationState( state );
+                }
+                else
+                {
+                    viewerImagePanel.resetStateIn( 0 );
+                }
+                viewerInfoPanel.updateContent( picture, image );
+                viewerToolbar.update( picture.getName(), currentIndex, thumbnailList == null ? 1 : thumbnailList.getNumberOfPictures() );
+                LOG.info( "fireing image loaded event from synchronous cache picture loading" );
+                firePictureLoaded();
+                prefetchNextPicture( nextPicture );
+                prefetchPreviousPicture( previousPicture );
+            }
+        }
+        else
+        {
             viewerToolbar.clear();
-            viewerImagePanel.setImage(noImage);
-            viewerInfoPanel.updateContent(null, noImage);
+            viewerImagePanel.setImage( noImage );
+            viewerInfoPanel.updateContent( null, noImage );
         }
     }
 
-    private void firePictureLoaded() {
-        for (final LoadedListener listener : loadedListeners) {
-            listener.imageLoaded(this);
+    private void firePictureLoaded()
+    {
+        for ( final LoadedListener listener : loadedListeners )
+        {
+            listener.imageLoaded( this );
         }
     }
 
-    public void thumbnailClicked(final int imageIndex) {
+    public void thumbnailClicked( final int imageIndex )
+    {
         JFrame f = (JFrame) getTopLevelAncestor();
-        if (f == null) {
+        if ( f == null )
+        {
             f = new JFrame();
-            f.add(this);
-            f.setSize(500, 500);
-            f.setLocationRelativeTo(null);
-        } else {
-            f.setVisible(true);
+            f.add( this );
+            f.setSize( 500, 500 );
+            f.setLocationRelativeTo( null );
+        }
+        else
+        {
+            f.setVisible( true );
         }
         currentIndex = imageIndex;
 
-        if (imageIndex == -1) {
-            setCurrentPicture(null);
+        if ( imageIndex == -1 )
+        {
+            setCurrentPicture( null );
             return;
         }
 
-        final Picture picture = thumbnailList.getPictureAt(imageIndex);
+        final Picture picture = thumbnailList.getPictureAt( imageIndex );
         Picture nextPicture = null;
         Picture previousPicture = null;
 
         // put in cache the image before the selected one (if needed)
-        final int previousIndex = thumbnailList.getIndexBefore(imageIndex);
-        if (previousIndex != -1 && previousIndex != imageIndex) {
-            previousPicture = thumbnailList.getPictureAt(previousIndex);
+        final int previousIndex = thumbnailList.getIndexBefore( imageIndex );
+        if ( previousIndex != -1 && previousIndex != imageIndex )
+        {
+            previousPicture = thumbnailList.getPictureAt( previousIndex );
         }
 
         // put in cache the image after the selected one (if needed)
-        final int nextIndex = thumbnailList.getIndexAfter(imageIndex);
-        if (nextIndex != -1 && nextIndex != imageIndex) {
-            nextPicture = thumbnailList.getPictureAt(nextIndex);
+        final int nextIndex = thumbnailList.getIndexAfter( imageIndex );
+        if ( nextIndex != -1 && nextIndex != imageIndex )
+        {
+            nextPicture = thumbnailList.getPictureAt( nextIndex );
         }
 
-        setCurrentPicture(picture, previousPicture, nextPicture, null);
+        setCurrentPicture( picture, previousPicture, nextPicture, null );
     }
 
-    public void addLoadedListener(final LoadedListener listener) {
-        loadedListeners.add(listener);
+    public void addLoadedListener( final LoadedListener listener )
+    {
+        loadedListeners.add( listener );
     }
 
-    public void removeLoadedListener(final LoadedListener listener) {
-        loadedListeners.remove(listener);
+    public void removeLoadedListener( final LoadedListener listener )
+    {
+        loadedListeners.remove( listener );
     }
 
-    private void prefetchNextPicture(final Picture nextPicture) {
-        if (nextPicture != null) {
-            nextImageLoadingJob = executorService.submit(new Runnable() {
-                public void run() {
-                    if (Thread.interrupted()) {
+    private void prefetchNextPicture( final Picture nextPicture )
+    {
+        if ( nextPicture != null )
+        {
+            nextImageLoadingJob = executorService.submit( new Runnable()
+            {
+                public void run()
+                {
+                    if ( Thread.interrupted() )
+                    {
                         return;
                     }
 
-                    ImageStore.getInstance().getImage(nextPicture);
+                    ImageStore.getInstance().getImage( nextPicture );
                 }
-            });
+            } );
         }
     }
 
-    private void prefetchPreviousPicture(final Picture nextPicture) {
-        if (nextPicture != null) {
-            previousImageLoadingJob = executorService.submit(new Runnable() {
-                public void run() {
-                    if (Thread.interrupted()) {
+    private void prefetchPreviousPicture( final Picture nextPicture )
+    {
+        if ( nextPicture != null )
+        {
+            previousImageLoadingJob = executorService.submit( new Runnable()
+            {
+                public void run()
+                {
+                    if ( Thread.interrupted() )
+                    {
                         return;
                     }
 
-                    ImageStore.getInstance().getImage(nextPicture);
+                    ImageStore.getInstance().getImage( nextPicture );
                 }
-            });
+            } );
         }
     }
 
-    static class DefaultImage extends BufferedImage {
-
-        public DefaultImage(final Dimension dim, final String string) {
-            super(dim.width, dim.height, TYPE_INT_ARGB_PRE);
+    static class DefaultImage extends BufferedImage
+    {
+        public DefaultImage( final Dimension dim, final String string )
+        {
+            super( dim.width, dim.height, TYPE_INT_ARGB_PRE );
             final Graphics2D g = this.createGraphics();
-            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.setFont( new Font( "Arial", Font.BOLD, 20 ) );
             final FontMetrics metrics = g.getFontMetrics();
-            final Rectangle2D bounds = metrics.getStringBounds(string, g);
-            final double f = Math.min(getWidth() / bounds.getWidth() / 2, getHeight() / bounds.getHeight() / 2);
-            g.setFont(new Font("Arial", Font.BOLD, (int) (12 * f)));
+            final Rectangle2D bounds = metrics.getStringBounds( string, g );
+            final double f = Math.min( getWidth() / bounds.getWidth() / 2, getHeight() / bounds.getHeight() / 2 );
+            g.setFont( new Font( "Arial", Font.BOLD, (int) ( 12 * f ) ) );
             final FontMetrics metrics2 = g.getFontMetrics();
-            final Rectangle2D bounds2 = metrics2.getStringBounds(string, g);
-            final int x = (int) ((getWidth() - bounds2.getWidth()) / 2);
-            final int y = (int) ((getHeight() - bounds2.getHeight()) / 2 + bounds2.getHeight());
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setColor(Color.lightGray);
-            g.drawString(string, x, y);
+            final Rectangle2D bounds2 = metrics2.getStringBounds( string, g );
+            final int x = (int) ( ( getWidth() - bounds2.getWidth() ) / 2 );
+            final int y = (int) ( ( getHeight() - bounds2.getHeight() ) / 2 + bounds2.getHeight() );
+            g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+            g.setColor( Color.lightGray );
+            g.drawString( string, x, y );
             g.dispose();
         }
     }
 
-    public interface LoadedListener {
-        void imageLoaded(ViewerPanel panel);
+    public interface LoadedListener
+    {
+        void imageLoaded( ViewerPanel panel );
     }
 }

@@ -27,29 +27,35 @@ import net.java.jveez.utils.ImageUtils;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public final class FileImageLoader extends AbstractImageLoader {
+public final class FileImageLoader extends AbstractImageLoader
+{
+    private static final Logger LOG = Logger.getLogger( FileImageLoader.class );
 
-    private static final Logger LOG = Logger.getLogger(FileImageLoader.class);
-
-    public FileImageLoader() {
-        super(null);
+    public FileImageLoader()
+    {
+        super( null );
     }
 
-    public boolean _isCached(Picture picture) {
+    public boolean _isCached( final Picture picture )
+    {
         return false;
     }
 
-    public BufferedImage _getImage(Picture picture) {
+    public BufferedImage _getImage( final Picture picture )
+    {
 //    log.debug("Cache miss - loading picture : " + picture);
-        return ImageUtils.loadImage(picture);
+        return ImageUtils.loadImage( picture );
     }
 
-    protected void _fetchIntoCache(Picture picture, BufferedImage image) {
+    protected void _fetchIntoCache( final Picture picture, final BufferedImage image )
+    {
     }
 
-    public void _invalidateCache() {
+    public void _invalidateCache()
+    {
     }
 
-    public void _close() {
+    public void _close()
+    {
     }
 }

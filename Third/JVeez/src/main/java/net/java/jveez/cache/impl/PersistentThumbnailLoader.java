@@ -39,103 +39,130 @@ import org.garret.perst.Key;
 import org.garret.perst.Storage;
 import org.garret.perst.StorageFactory;
 
-public final class PersistentThumbnailLoader extends AbstractImageLoader {
+public final class PersistentThumbnailLoader extends AbstractImageLoader
+{
+    private static final Logger LOG = Logger.getLogger( PersistentThumbnailLoader.class );
 
-    private static final Logger LOG = Logger.getLogger(PersistentThumbnailLoader.class);
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private final String name;
+
     private final int pagePoolSize;
-    private final BlockingQueue<Runnable> backgroundJobQueue = new ArrayBlockingQueue<Runnable>(20);
-    private final ExecutorService backgroundExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
-            backgroundJobQueue, Utils.newPriorityThreadFactory(Thread.MIN_PRIORITY));
+
+    private final BlockingQueue<Runnable> backgroundJobQueue = new ArrayBlockingQueue<Runnable>( 20 );
+
+    private final ExecutorService backgroundExecutor = new ThreadPoolExecutor( 1, 1, 0L, TimeUnit.MILLISECONDS,
+            backgroundJobQueue, Utils.newPriorityThreadFactory( Thread.MIN_PRIORITY ) );
 
     private Storage storage;
+
     private FieldIndex<PersistentThumbnail> persistentImageIndex;
 
-    public PersistentThumbnailLoader(ImageLoader delegate, String name, int pagePoolSize) {
-        super(delegate);
+    public PersistentThumbnailLoader( final ImageLoader delegate, final String name, final int pagePoolSize )
+    {
+        super( delegate );
         this.name = name;
         this.pagePoolSize = pagePoolSize;
         openPersistence();
     }
 
-    private void openPersistence() {
+    private void openPersistence()
+    {
         final File file = getPersistenceFile();
         storage = StorageFactory.getInstance().createStorage();
-        storage.setProperty("perst.object.cache.kind", "weak");
-        storage.open(file.getAbsolutePath(), pagePoolSize);
+        storage.setProperty( "perst.object.cache.kind", "weak" );
+        storage.open( file.getAbsolutePath(), pagePoolSize );
         persistentImageIndex = (FieldIndex<PersistentThumbnail>) storage.getRoot();
-        if (persistentImageIndex == null) {
-            LOG.info(String.format("Creating new persistent cache \"%s\" (poolSize=%d)", name, pagePoolSize));
-            persistentImageIndex = storage.createFieldIndex(PersistentThumbnail.class, "path", true);
-            storage.setRoot(persistentImageIndex);
+        if ( persistentImageIndex == null )
+        {
+            LOG.info( String.format( "Creating new persistent cache \"%s\" (poolSize=%d)", name, pagePoolSize ) );
+            persistentImageIndex = storage.createFieldIndex( PersistentThumbnail.class, "path", true );
+            storage.setRoot( persistentImageIndex );
         }
-        else {
-            LOG.info(String.format("Opening existing persistent cache \"%s\" (poolSize=%d)", name, pagePoolSize));
+        else
+        {
+            LOG.info( String.format( "Opening existing persistent cache \"%s\" (poolSize=%d)", name, pagePoolSize ) );
         }
     }
 
-    private File getPersistenceFile() {
-        return new File(ConfigurationManager.getInstance().getJveezHome(), name + ".db");
+    private File getPersistenceFile()
+    {
+        return new File( ConfigurationManager.getInstance().getJveezHome(), name + ".db" );
     }
 
-    protected boolean _isCached(Picture picture) {
+    protected boolean _isCached( final Picture picture )
+    {
         return false;
     }
 
-    protected BufferedImage _getImage(Picture picture) {
+    protected BufferedImage _getImage( final Picture picture )
+    {
         persistentImageIndex.sharedLock();
-        try {
-            PersistentThumbnail persistentImage = persistentImageIndex.get(getkeyForPicture(picture));
-            if (persistentImage != null) {
+        try
+        {
+            final PersistentThumbnail persistentImage = persistentImageIndex.get( getkeyForPicture( picture ) );
+            if ( persistentImage != null )
+            {
                 return persistentImage.getImage();
             }
-            if (DEBUG) {
-                LOG.debug("Cache missing \"" + picture.getFile() + "\"");
+            if ( DEBUG )
+            {
+                LOG.debug( "Cache missing \"" + picture.getFile() + "\"" );
             }
             return null;
         }
-        finally {
+        finally
+        {
             persistentImageIndex.unlock();
         }
     }
 
-    private Key getkeyForPicture(Picture picture) {
-        return new Key(picture.getAbsolutePath());
+    private Key getkeyForPicture( final Picture picture )
+    {
+        return new Key( picture.getAbsolutePath() );
     }
 
-    protected void _fetchIntoCache(Picture picture, BufferedImage image) {
-        if (DEBUG) {
-            LOG.debug("Queuing \"" + picture.getFile() + "\"");
+    protected void _fetchIntoCache( final Picture picture, final BufferedImage image )
+    {
+        if ( DEBUG )
+        {
+            LOG.debug( "Queuing \"" + picture.getFile() + "\"" );
         }
-        if (backgroundJobQueue.remainingCapacity() > 0) {
-            backgroundExecutor.execute(new ThumbnailFetcherJob(picture, image));
+        if ( backgroundJobQueue.remainingCapacity() > 0 )
+        {
+            backgroundExecutor.execute( new ThumbnailFetcherJob( picture, image ) );
         }
-        else {
-            LOG.warn("Background job queue full. Cannot process \"" + picture.getFile() + "\"");
+        else
+        {
+            LOG.warn( "Background job queue full. Cannot process \"" + picture.getFile() + "\"" );
         }
     }
 
-    void _doFetchIntoCache(Picture picture, BufferedImage image) {
-        if (DEBUG) {
-            LOG.debug("Fetch image (" + image.getWidth() + "x" + image.getHeight() + ") into cache \"" + picture.getFile() + "\"");
+    void _doFetchIntoCache( final Picture picture, final BufferedImage image )
+    {
+        if ( DEBUG )
+        {
+            LOG.debug( "Fetch image (" + image.getWidth() + "x" + image.getHeight() + ") into cache \"" + picture.getFile() + "\"" );
         }
-        Key pictureKey = getkeyForPicture(picture);
+        final Key pictureKey = getkeyForPicture( picture );
         persistentImageIndex.exclusiveLock();
-        try {
-            PersistentThumbnail persistentThumbnail = persistentImageIndex.get(pictureKey);
-            if (persistentThumbnail == null) {
-                PersistentThumbnail thumbnail = new PersistentRawThumbnail(storage, picture, image);
-                persistentImageIndex.put(thumbnail);
+        try
+        {
+            final PersistentThumbnail persistentThumbnail = persistentImageIndex.get( pictureKey );
+            if ( persistentThumbnail == null )
+            {
+                final PersistentThumbnail thumbnail = new PersistentRawThumbnail( storage, picture, image );
+                persistentImageIndex.put( thumbnail );
             }
         }
-        finally {
+        finally
+        {
             persistentImageIndex.unlock();
         }
     }
 
-    protected void _invalidateCache() {
+    protected void _invalidateCache()
+    {
         persistentImageIndex.clear();
         backgroundJobQueue.clear();
         _close();
@@ -143,9 +170,11 @@ public final class PersistentThumbnailLoader extends AbstractImageLoader {
         openPersistence();
     }
 
-    protected void _close() {
-        LOG.info("Closing cache \"" + name + "\"");
-        if (storage != null && storage.isOpened()) {
+    protected void _close()
+    {
+        LOG.info( "Closing cache \"" + name + "\"" );
+        if ( storage != null && storage.isOpened() )
+        {
             storage.commit();
             storage.close();
             storage = null;
@@ -153,21 +182,25 @@ public final class PersistentThumbnailLoader extends AbstractImageLoader {
         }
     }
 
-    private class ThumbnailFetcherJob implements Runnable {
+    private class ThumbnailFetcherJob implements Runnable
+    {
+        private final Picture picture;
 
-        private Picture picture;
-        private BufferedImage image;
+        private final BufferedImage image;
 
-        public ThumbnailFetcherJob(Picture picture, BufferedImage image) {
-            if (DEBUG) {
-                LOG.debug("Fetcher job for \"" + picture.getFile() + "\" created");
+        public ThumbnailFetcherJob( final Picture picture, final BufferedImage image )
+        {
+            if ( DEBUG )
+            {
+                LOG.debug( "Fetcher job for \"" + picture.getFile() + "\" created" );
             }
             this.picture = picture;
             this.image = image;
         }
 
-        public void run() {
-            _doFetchIntoCache(picture, image);
+        public void run()
+        {
+            _doFetchIntoCache( picture, image );
         }
     }
 }

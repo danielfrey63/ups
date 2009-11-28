@@ -24,7 +24,7 @@ package net.java.jveez.ui.viewer.anim;
 
 import java.awt.Graphics2D;
 
-public interface AnimationRenderer {
-
-    public void render(Graphics2D g2d, int width, int height, boolean animating);
+public interface AnimationRenderer
+{
+    public void render( Graphics2D g2d, int width, int height, boolean animating );
 }

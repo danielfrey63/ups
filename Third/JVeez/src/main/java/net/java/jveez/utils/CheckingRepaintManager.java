@@ -31,27 +31,29 @@ import org.apache.log4j.Logger;
 /**
  * Borrowed from the Spin project : http://spin.sourceforge.net
  */
-public class CheckingRepaintManager extends RepaintManager {
-
-    private static final Logger LOG = Logger.getLogger(CheckingRepaintManager.class);
+public class CheckingRepaintManager extends RepaintManager
+{
+    private static final Logger LOG = Logger.getLogger( CheckingRepaintManager.class );
 
     /**
      * Overriden to check EDT rule.
      */
-    public synchronized void addInvalidComponent(JComponent component) {
-        checkEDTRule(component);
+    public synchronized void addInvalidComponent( final JComponent component )
+    {
+        checkEDTRule( component );
 
-        super.addInvalidComponent(component);
+        super.addInvalidComponent( component );
     }
 
     /**
      * Overriden to check EDT rule.
      */
-    public synchronized void addDirtyRegion(JComponent component,
-                                            int x, int y, int w, int h) {
-        checkEDTRule(component);
+    public synchronized void addDirtyRegion( final JComponent component,
+                                             final int x, final int y, final int w, final int h )
+    {
+        checkEDTRule( component );
 
-        super.addDirtyRegion(component, x, y, w, h);
+        super.addDirtyRegion( component, x, y, w, h );
     }
 
     /**
@@ -59,26 +61,32 @@ public class CheckingRepaintManager extends RepaintManager {
      *
      * @param component component to be repainted
      */
-    protected void checkEDTRule(Component component) {
-        if (violatesEDTRule(component)) {
-            EDTRuleViolation violation = new EDTRuleViolation(component);
+    protected void checkEDTRule( final Component component )
+    {
+        if ( violatesEDTRule( component ) )
+        {
+            final EDTRuleViolation violation = new EDTRuleViolation( component );
 
-            StackTraceElement[] stackTrace = violation.getStackTrace();
-            try {
-                for (int e = stackTrace.length - 1; e >= 0; e--) {
-                    if (isLiableToEDTRule(stackTrace[ e ])) {
-                        StackTraceElement[] subStackTrace = new StackTraceElement[stackTrace.length - e];
-                        System.arraycopy(stackTrace, e, subStackTrace, 0, subStackTrace.length);
+            final StackTraceElement[] stackTrace = violation.getStackTrace();
+            try
+            {
+                for ( int e = stackTrace.length - 1; e >= 0; e-- )
+                {
+                    if ( isLiableToEDTRule( stackTrace[e] ) )
+                    {
+                        final StackTraceElement[] subStackTrace = new StackTraceElement[stackTrace.length - e];
+                        System.arraycopy( stackTrace, e, subStackTrace, 0, subStackTrace.length );
 
-                        violation.setStackTrace(subStackTrace);
+                        violation.setStackTrace( subStackTrace );
                     }
                 }
             }
-            catch (Exception ex) {
+            catch ( Exception ex )
+            {
                 // keep stackTrace
             }
 
-            indicate(violation);
+            indicate( violation );
         }
     }
 
@@ -88,7 +96,8 @@ public class CheckingRepaintManager extends RepaintManager {
      * @param component accessed component
      * @return <code>true</code> if EDT rule is violated
      */
-    protected boolean violatesEDTRule(Component component) {
+    protected boolean violatesEDTRule( final Component component )
+    {
         return !SwingUtilities.isEventDispatchThread() && component.isShowing();
     }
 
@@ -99,8 +108,9 @@ public class CheckingRepaintManager extends RepaintManager {
      * @return <code>true</code> if the className of the given element denotes a subclass of
      *         <code>java.awt.Component</code>
      */
-    protected boolean isLiableToEDTRule(StackTraceElement element) throws Exception {
-        return Component.class.isAssignableFrom(Class.forName(element.getClassName()));
+    protected boolean isLiableToEDTRule( final StackTraceElement element ) throws Exception
+    {
+        return Component.class.isAssignableFrom( Class.forName( element.getClassName() ) );
     }
 
     /**
@@ -109,8 +119,9 @@ public class CheckingRepaintManager extends RepaintManager {
      *
      * @param violation violation of EDT rule
      */
-    protected void indicate(EDTRuleViolation violation) throws EDTRuleViolation {
-        LOG.error("EDT rule violated", violation);
+    protected void indicate( final EDTRuleViolation violation ) throws EDTRuleViolation
+    {
+        LOG.error( "EDT rule violated", violation );
 //    throw violation;
     }
 }

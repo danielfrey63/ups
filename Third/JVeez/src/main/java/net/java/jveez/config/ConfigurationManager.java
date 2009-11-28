@@ -28,37 +28,40 @@ import org.apache.log4j.Logger;
 import org.garret.perst.Storage;
 import org.garret.perst.StorageFactory;
 
-public class ConfigurationManager {
-
-    private static final Logger LOG = Logger.getLogger(PersistentThumbnailLoader.class);
+public class ConfigurationManager
+{
+    private static final Logger LOG = Logger.getLogger( PersistentThumbnailLoader.class );
 
     private static final int CONFIG_PAGE_POOL_SIZE = 256 * 1024;  // 4 ko
 
     private static final ConfigurationManager instance = new ConfigurationManager();
 
-    private File jveezHome;
+    private final File jveezHome;
+
     private Storage storage;
 
-    private ConfigurationRoot configurationRoot;
+    private final ConfigurationRoot configurationRoot;
 
-    public static final ConfigurationManager getInstance() {
+    public static ConfigurationManager getInstance()
+    {
         return instance;
     }
 
-    private ConfigurationManager() {
+    private ConfigurationManager()
+    {
         super();
 
-        jveezHome = new File(System.getProperty("user.home"), ".jveez");
+        jveezHome = new File( System.getProperty( "user.home" ), ".jveez" );
         jveezHome.mkdirs();
 
-        File configFile = new File(jveezHome, "config.db");
+        final File configFile = new File( jveezHome, "config.db" );
 
         storage = StorageFactory.getInstance().createStorage();
-        storage.setProperty("perst.object.cache.kind", "weak");
-        storage.open(configFile.getAbsolutePath(), CONFIG_PAGE_POOL_SIZE);
-        configurationRoot = (ConfigurationRoot) storage.getRoot();
-        if (configurationRoot == null) {
-            LOG.info("Creating new configuration ...");
+        storage.setProperty( "perst.object.cache.kind", "weak" );
+        storage.open( configFile.getAbsolutePath(), CONFIG_PAGE_POOL_SIZE );
+        if ( storage.getRoot() == null )
+        {
+            LOG.info( "Creating new configuration ..." );
 
             configurationRoot = new ConfigurationRoot();
             configurationRoot.systemConfiguration = new SystemConfiguration();
@@ -66,42 +69,53 @@ public class ConfigurationManager {
             configurationRoot.mainFrameConfiguration = new MainFrameConfiguration();
             configurationRoot.mainFrameConfiguration.resetToDefaults();
 
-            storage.setRoot(configurationRoot);
+            storage.setRoot( configurationRoot );
         }
-        else {
-            LOG.info("Opening existing system configuration");
+        else
+        {
+            configurationRoot = (ConfigurationRoot) storage.getRoot();
+            LOG.info( "Opening existing system configuration" );
         }
 
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
+        Runtime.getRuntime().addShutdownHook( new Thread()
+        {
+            public void run()
+            {
                 release();
             }
-        });
+        } );
     }
 
-    public File getJveezHome() {
+    public File getJveezHome()
+    {
         return jveezHome;
     }
 
-    public SystemConfiguration getSystemConfiguration() {
+    public SystemConfiguration getSystemConfiguration()
+    {
         return configurationRoot.systemConfiguration;
     }
 
-    public MainFrameConfiguration getMainFrameConfiguration() {
+    public MainFrameConfiguration getMainFrameConfiguration()
+    {
         return configurationRoot.mainFrameConfiguration;
     }
 
-    public void flushPendingChanges() {
-        if (storage != null && storage.isOpened()) {
-            LOG.info("Flushing configuration changes ...");
+    public void flushPendingChanges()
+    {
+        if ( storage != null && storage.isOpened() )
+        {
+            LOG.info( "Flushing configuration changes ..." );
             storage.commit();
         }
     }
 
-    private void release() {
-        if (storage != null && storage.isOpened()) {
-            LOG.info("Releasing system configuration");
-            configurationRoot.systemConfiguration.setFirstRun(false);
+    private void release()
+    {
+        if ( storage != null && storage.isOpened() )
+        {
+            LOG.info( "Releasing system configuration" );
+            configurationRoot.systemConfiguration.setFirstRun( false );
             storage.commit();
             storage.close();
             storage = null;

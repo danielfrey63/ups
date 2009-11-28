@@ -28,14 +28,16 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class AnimationExecutor {
+public class AnimationExecutor
+{
+    private final BlockingQueue<Runnable> animationQueue = new LinkedBlockingQueue<Runnable>();
 
-    private BlockingQueue<Runnable> animationQueue = new LinkedBlockingQueue<Runnable>();
-    private ExecutorService executor = new ThreadPoolExecutor(1, 1,
+    private final ExecutorService executor = new ThreadPoolExecutor( 1, 1,
             0L, TimeUnit.MILLISECONDS,
-            animationQueue);
+            animationQueue );
 
-    public void post(Runnable runnable) {
-        executor.execute(runnable);
+    public void post( final Runnable runnable )
+    {
+        executor.execute( runnable );
     }
 }

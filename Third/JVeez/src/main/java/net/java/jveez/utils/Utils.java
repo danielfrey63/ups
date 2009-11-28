@@ -39,88 +39,108 @@ import net.java.jveez.cache.ImageStore;
 import net.java.jveez.cache.ThumbnailStore;
 import org.apache.log4j.Logger;
 
-public class Utils {
-
-    private static final Logger LOG = Logger.getLogger(Utils.class);
+public class Utils
+{
+    private static final Logger LOG = Logger.getLogger( Utils.class );
 
     public static final CustomUncaughtExceptionHandler UNCAUGHT_EXCEPTION_HANDLER = new CustomUncaughtExceptionHandler();
-    private static ExecutorService executor = Executors.newFixedThreadPool(1, newPriorityThreadFactory(Thread.NORM_PRIORITY));
 
-    public static Icon loadIcon(String resourceName) {
-        URL url = Utils.class.getClassLoader().getResource(resourceName);
-        return new ImageIcon(url);
+    private static final ExecutorService executor = Executors.newFixedThreadPool( 1, newPriorityThreadFactory( Thread.NORM_PRIORITY ) );
+
+    public static Icon loadIcon( final String resourceName )
+    {
+        final URL url = Utils.class.getClassLoader().getResource( resourceName );
+        return new ImageIcon( url );
     }
 
-    public static BufferedImage loadImage(String resourceName) {
-        URL url = Utils.class.getClassLoader().getResource(resourceName);
-        try {
-            return ImageIO.read(url);
+    public static BufferedImage loadImage( final String resourceName )
+    {
+        final URL url = Utils.class.getClassLoader().getResource( resourceName );
+        try
+        {
+            return ImageIO.read( url );
         }
-        catch (IOException e) {
+        catch ( IOException e )
+        {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static void executeAsyncIfDisptachThread(Runnable runnable) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            executor.execute(runnable);
+    public static void executeAsyncIfDisptachThread( final Runnable runnable )
+    {
+        if ( SwingUtilities.isEventDispatchThread() )
+        {
+            executor.execute( runnable );
         }
-        else {
+        else
+        {
             runnable.run();
         }
     }
 
-    public static void executeAsync(Runnable runnable) {
-        executor.execute(runnable);
+    public static void executeAsync( final Runnable runnable )
+    {
+        executor.execute( runnable );
     }
 
-    public static void executeWithDisptachThread(Runnable runnable) {
-        if (SwingUtilities.isEventDispatchThread()) {
+    public static void executeWithDisptachThread( final Runnable runnable )
+    {
+        if ( SwingUtilities.isEventDispatchThread() )
+        {
             runnable.run();
         }
-        else {
-            SwingUtilities.invokeLater(runnable);
+        else
+        {
+            SwingUtilities.invokeLater( runnable );
         }
     }
 
-    public static boolean isSupportedImage(File file) {
-        String fileName = file.getName().toLowerCase();
-        return fileName.endsWith(".jpg") ||
-                fileName.endsWith(".jpeg") ||
-                fileName.endsWith(".gif") ||
-                fileName.endsWith(".png") ||
-                fileName.endsWith(".bmp");
+    public static boolean isSupportedImage( final File file )
+    {
+        final String fileName = file.getName().toLowerCase();
+        return fileName.endsWith( ".jpg" ) ||
+                fileName.endsWith( ".jpeg" ) ||
+                fileName.endsWith( ".gif" ) ||
+                fileName.endsWith( ".png" ) ||
+                fileName.endsWith( ".bmp" );
     }
 
-    public static boolean isSupportedExifImage(File file) {
-        String fileName = file.getName().toLowerCase();
-        return fileName.endsWith(".jpg") ||
-                fileName.endsWith(".jpeg");
+    public static boolean isSupportedExifImage( final File file )
+    {
+        final String fileName = file.getName().toLowerCase();
+        return fileName.endsWith( ".jpg" ) ||
+                fileName.endsWith( ".jpeg" );
     }
 
-    public static Icon getSystemIconForFile(File file) {
-        return FileSystemView.getFileSystemView().getSystemIcon(file);
+    public static Icon getSystemIconForFile( final File file )
+    {
+        return FileSystemView.getFileSystemView().getSystemIcon( file );
     }
 
-    public static Rectangle fitToParent(Rectangle parent, Rectangle child, Rectangle target) {
-        float scale = Math.min((float) parent.width / (float) child.width, (float) parent.height / (float) child.height);
-        target.width = (int) (scale * child.width);
-        target.height = (int) (scale * child.height);
-        target.x = (parent.width - target.width) / 2;
-        target.y = (parent.height - target.height) / 2;
+    public static Rectangle fitToParent( final Rectangle parent, final Rectangle child, final Rectangle target )
+    {
+        final float scale = Math.min( (float) parent.width / (float) child.width, (float) parent.height / (float) child.height );
+        target.width = (int) ( scale * child.width );
+        target.height = (int) ( scale * child.height );
+        target.x = ( parent.width - target.width ) / 2;
+        target.y = ( parent.height - target.height ) / 2;
         return target;
     }
 
-    public static int countOccurencesOf(String s, char c) {
-        if (s == null || s.length() == 0) {
+    public static int countOccurencesOf( final String s, final char c )
+    {
+        if ( s == null || s.length() == 0 )
+        {
             return 0;
         }
 
-        int len = s.length();
+        final int len = s.length();
         int occurences = 0;
-        for (int i = 0; i < len; i++) {
-            if (s.charAt(i) == c) {
+        for ( int i = 0; i < len; i++ )
+        {
+            if ( s.charAt( i ) == c )
+            {
                 occurences++;
             }
         }
@@ -128,41 +148,47 @@ public class Utils {
         return occurences;
     }
 
-    public static ThreadFactory newPriorityThreadFactory(int priority) {
-        return new PriorityThreadFactory(priority);
+    public static ThreadFactory newPriorityThreadFactory( final int priority )
+    {
+        return new PriorityThreadFactory( priority );
     }
 
-    public static void freeMemory(boolean hard) {
-        LOG.debug("freeMemory(" + hard + ")");
+    public static void freeMemory( final boolean hard )
+    {
+        LOG.debug( "freeMemory(" + hard + ")" );
 
         ImageStore.getInstance().invalidateCache();
-        if (hard) {
+        if ( hard )
+        {
             ThumbnailStore.getInstance().invalidateCache();
         }
         System.runFinalization();
         System.gc();
     }
 
-    private static class PriorityThreadFactory implements ThreadFactory {
+    private static class PriorityThreadFactory implements ThreadFactory
+    {
+        private final int priority;
 
-        private int priority;
-
-        public PriorityThreadFactory(int priority) {
+        public PriorityThreadFactory( final int priority )
+        {
             this.priority = priority;
         }
 
-        public Thread newThread(Runnable r) {
-            Thread t = Executors.defaultThreadFactory().newThread(r);
-            t.setPriority(priority);
-            t.setUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER);
+        public Thread newThread( final Runnable r )
+        {
+            final Thread t = Executors.defaultThreadFactory().newThread( r );
+            t.setPriority( priority );
+            t.setUncaughtExceptionHandler( UNCAUGHT_EXCEPTION_HANDLER );
             return t;
         }
     }
 
-    private static class CustomUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
-
-        public void uncaughtException(Thread t, Throwable e) {
-            LOG.error("Thread " + t.getName() + " has thrown an unexpected exception !", e);
+    private static class CustomUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
+    {
+        public void uncaughtException( final Thread t, final Throwable e )
+        {
+            LOG.error( "Thread " + t.getName() + " has thrown an unexpected exception !", e );
         }
     }
 }

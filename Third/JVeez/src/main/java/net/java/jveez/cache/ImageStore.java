@@ -27,52 +27,66 @@ import net.java.jveez.cache.impl.FileImageLoader;
 import net.java.jveez.cache.impl.MemoryImageLoader;
 import net.java.jveez.vfs.Picture;
 
-public class ImageStore implements ImageLoader {
-
+public class ImageStore implements ImageLoader
+{
     private static int initialMemoryCacheSize = 40;
 
     private static ImageLoader delegateLoader = null;
 
     private static ImageStore instance;
 
-    private ImageStore() {
-        delegateLoader = new MemoryImageLoader(new FileImageLoader(), initialMemoryCacheSize);
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
+    private ImageStore()
+    {
+        delegateLoader = new MemoryImageLoader( new FileImageLoader(), initialMemoryCacheSize );
+        Runtime.getRuntime().addShutdownHook( new Thread()
+        {
+            public void run()
+            {
                 close();
             }
-        });
+        } );
     }
 
-    public static void setInitialMemoryCacheSize(final int initialMemoryCacheSize) {
-        if (delegateLoader == null) {
+    public static void setInitialMemoryCacheSize( final int initialMemoryCacheSize )
+    {
+        if ( delegateLoader == null )
+        {
             ImageStore.initialMemoryCacheSize = initialMemoryCacheSize;
-        } else {
-            throw new IllegalArgumentException("cannot init cache size after instantiation");
+        }
+        else
+        {
+            throw new IllegalArgumentException( "cannot init cache size after instantiation" );
         }
     }
 
-    public boolean isCached(Picture picture) {
-        return delegateLoader.isCached(picture);
+    public boolean isCached( final Picture picture )
+    {
+        return delegateLoader.isCached( picture );
     }
 
-    public BufferedImage getImage(Picture picture) {
-        return delegateLoader.getImage(picture);
+    public BufferedImage getImage( final Picture picture )
+    {
+        return delegateLoader.getImage( picture );
     }
 
-    public void invalidateCache() {
+    public void invalidateCache()
+    {
         delegateLoader.invalidateCache();
     }
 
-    public void close() {
-        if (delegateLoader != null) {
+    public void close()
+    {
+        if ( delegateLoader != null )
+        {
             delegateLoader.close();
             delegateLoader = null;
         }
     }
 
-    public static ImageStore getInstance() {
-        if (instance == null) {
+    public static ImageStore getInstance()
+    {
+        if ( instance == null )
+        {
             instance = new ImageStore();
         }
         return instance;

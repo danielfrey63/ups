@@ -30,80 +30,102 @@ import net.java.jveez.vfs.Directory;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class DirectoryImpl implements Directory, Comparable<Directory> {
-
-    private static final Logger LOG = Logger.getLogger(DirectoryImpl.class);
+public class DirectoryImpl implements Directory, Comparable<Directory>
+{
+    private static final Logger LOG = Logger.getLogger( DirectoryImpl.class );
 
     private static final FileSystemView FILE_SYSTEM_VIEW = FileSystemView.getFileSystemView();
 
-    private Directory parent;
+    private final Directory parent;
 
-    private File directory;
+    private final File directory;
+
     private String absolutePath;
+
     private String name;
+
     private Icon icon;
+
     private Boolean hidden;
+
     private List<Picture> pictures;
 
-    public DirectoryImpl(Directory parent, File directory) {
+    public DirectoryImpl( final Directory parent, final File directory )
+    {
         assert directory != null && directory.isDirectory();
         this.directory = directory;
         this.parent = parent;
     }
 
-    public File getFile() {
+    public File getFile()
+    {
         return directory;
     }
 
-    public Directory getParent() {
+    public Directory getParent()
+    {
         return parent;
     }
 
-    public String getName() {
-        if (name == null) {
-            name = FILE_SYSTEM_VIEW.getSystemDisplayName(directory);
-            if (name == null || name.length() == 0) {
-                name = FILE_SYSTEM_VIEW.getSystemTypeDescription(directory);
+    public String getName()
+    {
+        if ( name == null )
+        {
+            name = FILE_SYSTEM_VIEW.getSystemDisplayName( directory );
+            if ( name == null || name.length() == 0 )
+            {
+                name = FILE_SYSTEM_VIEW.getSystemTypeDescription( directory );
             }
         }
         return name;
     }
 
-    public String getAbsolutePath() {
-        if (absolutePath == null) {
+    public String getAbsolutePath()
+    {
+        if ( absolutePath == null )
+        {
             absolutePath = directory.getAbsolutePath();
         }
         return absolutePath;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return null;
     }
 
-    public Icon getIcon() {
-        if (icon == null) {
-            icon = FILE_SYSTEM_VIEW.getSystemIcon(directory);
+    public Icon getIcon()
+    {
+        if ( icon == null )
+        {
+            icon = FILE_SYSTEM_VIEW.getSystemIcon( directory );
         }
         return icon;
     }
 
-    public boolean isHidden() {
-        if (hidden == null) {
+    public boolean isHidden()
+    {
+        if ( hidden == null )
+        {
             hidden = directory.isHidden();
         }
         return hidden.booleanValue();
     }
 
-    public int compareTo(Directory directory) {
-        if (directory == null) {
+    public int compareTo( final Directory directory )
+    {
+        if ( directory == null )
+        {
             return 1;
         }
-        else {
-            return getAbsolutePath().compareToIgnoreCase(directory.getAbsolutePath());
+        else
+        {
+            return getAbsolutePath().compareToIgnoreCase( directory.getAbsolutePath() );
         }
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "DirectoryImpl[" +
                 "directory=" + directory +
                 "]";

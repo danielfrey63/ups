@@ -26,22 +26,25 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import org.apache.log4j.Logger;
 
-public class AnimatedImageComponent implements AnimationRenderer, AnimatedComponent {
-
-    private static final Logger LOG = Logger.getLogger(AnimatedImageComponent.class);
+public class AnimatedImageComponent implements AnimationRenderer, AnimatedComponent
+{
+    private static final Logger LOG = Logger.getLogger( AnimatedImageComponent.class );
 
     private BufferedImage image;
+
     private BufferedImage reducedImage;
-    private AnimationState state = new AnimationState();
 
-    private AnimationRenderer delegateRenderer = new AnimationImageRenderer(this);
+    private final AnimationState state = new AnimationState();
 
-    public AnimatedImageComponent() {
+    private final AnimationRenderer delegateRenderer = new AnimationImageRenderer( this );
+
+    public AnimatedImageComponent()
+    {
     }
 
-    public void setImage(BufferedImage image) {
-
-        LOG.debug("new image size is " + image.getWidth() + "x" + image.getHeight());
+    public void setImage( final BufferedImage image )
+    {
+        LOG.debug( "new image size is " + image.getWidth() + "x" + image.getHeight() );
 
         this.image = image;
 
@@ -60,48 +63,62 @@ public class AnimatedImageComponent implements AnimationRenderer, AnimatedCompon
 //        }
     }
 
-    public int getImageWidth() {
-        if (image != null) {
+    public int getImageWidth()
+    {
+        if ( image != null )
+        {
             return image.getWidth();
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
 
-    public int getImageHeight() {
-        if (image != null) {
+    public int getImageHeight()
+    {
+        if ( image != null )
+        {
             return image.getHeight();
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
 
-    public AnimationState getAnimationState() {
+    public AnimationState getAnimationState()
+    {
         return state;
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage()
+    {
         return image;
     }
 
-    public void render(Graphics2D g2d, int width, int height, boolean animating) {
-
-        if (image == null) {
+    public void render( final Graphics2D g2d, final int width, final int height, final boolean animating )
+    {
+        if ( image == null )
+        {
             return;
         }
 
-        LOG.debug("image size is " + image.getWidth() + "x" + image.getHeight() + ", state is " + state);
+        LOG.debug( "image size is " + image.getWidth() + "x" + image.getHeight() + ", state is " + state );
 
-        if (!animating || reducedImage == null) {
-            delegateRenderer.render(g2d, width, height, animating);
+        if ( !animating || reducedImage == null )
+        {
+            delegateRenderer.render( g2d, width, height, animating );
 //            g2d.drawImage(image, state.getAffineTransform(), null);
-        } else {
-            AnimationState scaledState = new AnimationState(state);
+        }
+        else
+        {
+            final AnimationState scaledState = new AnimationState( state );
             scaledState.sx *= 2;
             scaledState.sy *= 2;
             scaledState.rx *= 0.5;
             scaledState.ry *= 0.5;
-            g2d.drawImage(reducedImage, scaledState.getAffineTransform(), null);
+            g2d.drawImage( reducedImage, scaledState.getAffineTransform(), null );
         }
     }
 }

@@ -27,27 +27,34 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.garret.perst.Storage;
 
-public class MainFrameConfiguration extends ConfigurationItem {
-
+public class MainFrameConfiguration extends ConfigurationItem
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3618419311145203252L;
 
     private int x;
+
     private int y;
+
     private int width;
+
     private int height;
+
     private boolean fullscreen;
 
-    public MainFrameConfiguration() {
+    public MainFrameConfiguration()
+    {
     }
 
-    public MainFrameConfiguration(Storage storage) {
-        super(storage);
+    public MainFrameConfiguration( final Storage storage )
+    {
+        super( storage );
     }
 
-    public void setBounds(Rectangle r) {
+    public void setBounds( final Rectangle r )
+    {
         this.x = r.x;
         this.y = r.y;
         this.width = r.width;
@@ -55,67 +62,80 @@ public class MainFrameConfiguration extends ConfigurationItem {
         modify();
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+    public Rectangle getBounds()
+    {
+        return new Rectangle( x, y, width, height );
     }
 
-    public int getX() {
+    public int getX()
+    {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX( final int x )
+    {
         this.x = x;
         modify();
     }
 
-    public int getY() {
+    public int getY()
+    {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY( final int y )
+    {
         this.y = y;
         modify();
     }
 
-    public int getWidth() {
+    public int getWidth()
+    {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth( final int width )
+    {
         this.width = width;
         modify();
     }
 
-    public int getHeight() {
+    public int getHeight()
+    {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight( final int height )
+    {
         this.height = height;
         modify();
     }
 
-    public boolean isFullscreen() {
+    public boolean isFullscreen()
+    {
         return fullscreen;
     }
 
-    public void setFullscreen(boolean fullscreen) {
+    public void setFullscreen( final boolean fullscreen )
+    {
         this.fullscreen = fullscreen;
         modify();
     }
 
-    public void resetToDefaults() {
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    public void resetToDefaults()
+    {
+        final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
         this.width = 640;
         this.height = 480;
-        this.x = (d.width - width) / 2;
-        this.y = (d.height - height) / 2;
+        this.x = ( d.width - width ) / 2;
+        this.y = ( d.height - height ) / 2;
         this.fullscreen = false;
         modify();
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "MainFrameConfiguration[" +
                 "x=" + x +
                 ", y=" + y +

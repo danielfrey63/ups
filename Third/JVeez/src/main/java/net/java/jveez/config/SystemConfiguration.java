@@ -24,48 +24,57 @@ package net.java.jveez.config;
 
 import org.garret.perst.Storage;
 
-public class SystemConfiguration extends ConfigurationItem {
-
+public class SystemConfiguration extends ConfigurationItem
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3544952164523717684L;
 
     private boolean firstRun;
+
     private boolean confirmBeforeQuit;
 
-    public SystemConfiguration() {
+    public SystemConfiguration()
+    {
     }
 
-    public SystemConfiguration(Storage storage) {
-        super(storage);
+    public SystemConfiguration( final Storage storage )
+    {
+        super( storage );
     }
 
-    public boolean isConfirmBeforeQuit() {
+    public boolean isConfirmBeforeQuit()
+    {
         return confirmBeforeQuit;
     }
 
-    public void setConfirmBeforeQuit(boolean confirmBeforeQuit) {
+    public void setConfirmBeforeQuit( final boolean confirmBeforeQuit )
+    {
         this.confirmBeforeQuit = confirmBeforeQuit;
         modify();
     }
 
-    public boolean isFirstRun() {
+    public boolean isFirstRun()
+    {
         return firstRun;
     }
 
-    public void setFirstRun(boolean firstRun) {
+    public void setFirstRun( final boolean firstRun )
+    {
         this.firstRun = firstRun;
         modify();
     }
 
-    public void resetToDefaults() {
+    public void resetToDefaults()
+    {
         firstRun = true;
         confirmBeforeQuit = true;
         modify();
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "SystemConfiguration[" +
                 "firstRun=" + firstRun +
                 ", confirmBeforeQuit=" + confirmBeforeQuit +

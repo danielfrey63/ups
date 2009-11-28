@@ -32,170 +32,222 @@ import javax.swing.filechooser.FileSystemView;
 import net.java.jveez.utils.Utils;
 import net.java.jveez.vfs.ExifPicture;
 
-public class PictureImpl implements ExifPicture {
-
+public class PictureImpl implements ExifPicture
+{
     protected static FileSystemView fileSystemView = FileSystemView.getFileSystemView();
 
-    private File file;
+    private final File file;
+
     private String displayName;
+
     private String description;
+
     private Long lastModifiedDate;  // cache this info otherwise each access would require a slooow native call ...
+
     private Long length;            // cache this info otherwise each access would require a slooow native call ...
+
     private Icon icon;
+
     private String absolutePath;
 
     private boolean exifDataLoaded;
+
     private String exifDate;
+
     private String exifFocal;
+
     private String exifExposure;
+
     private String exifAperture;
+
     private String exifCamera;
+
     private String exifModel;
 
-    public PictureImpl(File file) {
+    public PictureImpl( final File file )
+    {
         this.file = file;
     }
 
-    public String getAbsolutePath() {
-        if (absolutePath == null) {
+    public String getAbsolutePath()
+    {
+        if ( absolutePath == null )
+        {
             absolutePath = file.getAbsolutePath();
         }
         return absolutePath;
     }
 
-    public Icon getIcon() {
-        if (icon == null) {
-            icon = Utils.getSystemIconForFile(getFile());
+    public Icon getIcon()
+    {
+        if ( icon == null )
+        {
+            icon = Utils.getSystemIconForFile( getFile() );
         }
         return icon;
     }
 
-    public File getFile() {
+    public File getFile()
+    {
         return file;
     }
 
-    public long getLength() {
-        if (length == null) {
+    public long getLength()
+    {
+        if ( length == null )
+        {
             length = file.length();
         }
         return length.longValue();
     }
 
-    public long getLastModifiedDate() {
-        if (lastModifiedDate == null) {
+    public long getLastModifiedDate()
+    {
+        if ( lastModifiedDate == null )
+        {
             lastModifiedDate = file.lastModified();
         }
         return lastModifiedDate;
     }
 
-    public String getName() {
-        if (displayName == null) {
-            displayName = fileSystemView.getSystemDisplayName(file);
+    public String getName()
+    {
+        if ( displayName == null )
+        {
+            displayName = fileSystemView.getSystemDisplayName( file );
         }
         return displayName;
     }
 
-    public String getDescription() {
-        if (description == null) {
-            description = fileSystemView.getSystemTypeDescription(file);
+    public String getDescription()
+    {
+        if ( description == null )
+        {
+            description = fileSystemView.getSystemTypeDescription( file );
         }
         return description;
     }
 
-    public String getExifDate() {
-        if (!exifDataLoaded) {
+    public String getExifDate()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifDate;
     }
 
-    public String getExifFocal() {
-        if (!exifDataLoaded) {
+    public String getExifFocal()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifFocal;
     }
 
-    public String getExifExposure() {
-        if (!exifDataLoaded) {
+    public String getExifExposure()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifExposure;
     }
 
-    public String getExifAperture() {
-        if (!exifDataLoaded) {
+    public String getExifAperture()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifAperture;
     }
 
-    public String getExifCamera() {
-        if (!exifDataLoaded) {
+    public String getExifCamera()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifCamera;
     }
 
-    public String getExifModel() {
-        if (!exifDataLoaded) {
+    public String getExifModel()
+    {
+        if ( !exifDataLoaded )
+        {
             loadExifData();
         }
         return exifModel;
     }
 
-    private void loadExifData() {
-        try {
-            Metadata metadata = JpegMetadataReader.readMetadata(getFile());
-            ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory(ExifDirectory.class);
-            if (exifDirectory != null) {
-                exifDate = exifDirectory.getString(ExifDirectory.TAG_DATETIME_ORIGINAL);
-                exifFocal = exifDirectory.getString(ExifDirectory.TAG_FOCAL_LENGTH);
-                if (exifFocal != null) {
+    private void loadExifData()
+    {
+        try
+        {
+            final Metadata metadata = JpegMetadataReader.readMetadata( getFile() );
+            final ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory( ExifDirectory.class );
+            if ( exifDirectory != null )
+            {
+                exifDate = exifDirectory.getString( ExifDirectory.TAG_DATETIME_ORIGINAL );
+                exifFocal = exifDirectory.getString( ExifDirectory.TAG_FOCAL_LENGTH );
+                if ( exifFocal != null )
+                {
                     exifFocal += " mm";
                 }
-                exifExposure = exifDirectory.getString(ExifDirectory.TAG_EXPOSURE_TIME);
-                if (exifExposure != null) {
+                exifExposure = exifDirectory.getString( ExifDirectory.TAG_EXPOSURE_TIME );
+                if ( exifExposure != null )
+                {
                     exifExposure += " s";
                 }
-                exifAperture = exifDirectory.getString(ExifDirectory.TAG_APERTURE);
-                if (exifAperture != null) {
+                exifAperture = exifDirectory.getString( ExifDirectory.TAG_APERTURE );
+                if ( exifAperture != null )
+                {
                     exifAperture += " APEX";
                 }
-                exifCamera = exifDirectory.getString(ExifDirectory.TAG_MAKE);
-                exifModel = exifDirectory.getString(ExifDirectory.TAG_MODEL);
+                exifCamera = exifDirectory.getString( ExifDirectory.TAG_MAKE );
+                exifModel = exifDirectory.getString( ExifDirectory.TAG_MODEL );
             }
         }
-        catch (JpegProcessingException e) {
+        catch ( JpegProcessingException e )
+        {
             // ignored
         }
-        finally {
+        finally
+        {
             exifDataLoaded = true;
         }
     }
 
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals( final Object o )
+    {
+        if ( this == o )
+        {
             return true;
         }
-        if (!(o instanceof PictureImpl)) {
+        if ( !( o instanceof PictureImpl ) )
+        {
             return false;
         }
 
         final PictureImpl picture = (PictureImpl) o;
 
-        if (!getAbsolutePath().equals(picture.getAbsolutePath())) {
+        if ( !getAbsolutePath().equals( picture.getAbsolutePath() ) )
+        {
             return false;
         }
 
         return true;
     }
 
-    public int hashCode() {
+    public int hashCode()
+    {
         return getAbsolutePath().hashCode();
     }
 
-    public String toString() {
+    public String toString()
+    {
         return getName();
     }
 }

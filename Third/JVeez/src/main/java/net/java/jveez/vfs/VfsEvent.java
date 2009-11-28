@@ -24,10 +24,10 @@ package net.java.jveez.vfs;
 
 import java.util.List;
 
-public class VfsEvent {
-
-    public static enum EventType {
-
+public class VfsEvent
+{
+    public static enum EventType
+    {
         VFS_OPENED,
         VFS_CLOSED,
         SYNCHRONIZATION_STARTED,
@@ -40,39 +40,46 @@ public class VfsEvent {
         PAGE_UPDATED,
     }
 
-    ;
+    private final EventType eventType;
 
-    private EventType eventType;
     private Directory directory;
+
     private List<? extends Directory> pages;
 
-    public VfsEvent(EventType eventType) {
+    public VfsEvent( final EventType eventType )
+    {
         this.eventType = eventType;
     }
 
-    public VfsEvent(EventType eventType, Directory directoryArgument) {
+    public VfsEvent( final EventType eventType, final Directory directoryArgument )
+    {
         this.eventType = eventType;
         this.directory = directoryArgument;
     }
 
-    public VfsEvent(EventType eventType, List<? extends Directory> pageListArgument) {
+    public VfsEvent( final EventType eventType, final List<? extends Directory> pageListArgument )
+    {
         this.eventType = eventType;
         this.pages = pageListArgument;
     }
 
-    public EventType getEventType() {
+    public EventType getEventType()
+    {
         return eventType;
     }
 
-    public List<? extends Directory> getPages() {
+    public List<? extends Directory> getPages()
+    {
         return pages;
     }
 
-    public Directory getPage() {
+    public Directory getPage()
+    {
         return directory;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "VfsEvent[" +
                 "eventType=" + eventType +
                 ", directory=" + directory +

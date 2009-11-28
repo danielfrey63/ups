@@ -25,20 +25,21 @@ package com.smardec.mousegestures;
  * @author Smardec
  * @version 1.2
  */
-public interface MouseGesturesListener {
+public interface MouseGesturesListener
+{
     /**
      * Called when full mouse gesture is recogized (mouse button is released).
      *
-     * @param gesture String representation of mouse gesture. "L" for left, "R" for right,
-     *                "U" for up, "D" for down movements. For example: "ULD".
+     * @param gesture String representation of mouse gesture. "L" for left, "R" for right, "U" for up, "D" for down
+     *                movements. For example: "ULD".
      */
-    public void processGesture(String gesture);
+    public void processGesture( String gesture );
 
     /**
      * Called when new mouse movement is recognized but mouse gesture is not yet completed.
      *
-     * @param currentGesture String representation of recognized movements. "L" for left, "R" for right,
-     *                       "U" for up, "D" for down movements. For example: "ULD".
+     * @param currentGesture String representation of recognized movements. "L" for left, "R" for right, "U" for up, "D"
+     *                       for down movements. For example: "ULD".
      */
-    public void gestureMovementRecognized(String currentGesture);
+    public void gestureMovementRecognized( String currentGesture );
 }

@@ -30,53 +30,60 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-public class ViewerToolbar extends JPanel {
-
+public class ViewerToolbar extends JPanel
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3258407348405219889L;
 
-    private JLabel imageIndexLabel = new JLabel("", JLabel.HORIZONTAL);
-    private JLabel imageNameLabel = new JLabel("", JLabel.LEADING);
-    private JComponent controlPanel;
+    private final JLabel imageIndexLabel = new JLabel( "", JLabel.HORIZONTAL );
 
-    public ViewerToolbar(JComponent controlPanel) {
-        super(new BorderLayout());
+    private final JLabel imageNameLabel = new JLabel( "", JLabel.LEADING );
+
+    private final JComponent controlPanel;
+
+    public ViewerToolbar( final JComponent controlPanel )
+    {
+        super( new BorderLayout() );
         this.controlPanel = controlPanel;
 
         setupComponents();
         layoutComponents();
     }
 
-    private void setupComponents() {
-        setOpaque(true);
+    private void setupComponents()
+    {
+        setOpaque( true );
 
-        int indexTextWidth = imageIndexLabel.getFontMetrics(imageIndexLabel.getFont()).stringWidth(" 000000/00000 ");
-        imageIndexLabel.setPreferredSize(new Dimension(indexTextWidth, 0));
+        final int indexTextWidth = imageIndexLabel.getFontMetrics( imageIndexLabel.getFont() ).stringWidth( " 000000/00000 " );
+        imageIndexLabel.setPreferredSize( new Dimension( indexTextWidth, 0 ) );
 
-        imageIndexLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        imageNameLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+        imageIndexLabel.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+        imageNameLabel.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
     }
 
-    private void layoutComponents() {
-        this.add(imageIndexLabel, BorderLayout.WEST);
-        this.add(imageNameLabel, BorderLayout.CENTER);
+    private void layoutComponents()
+    {
+        this.add( imageIndexLabel, BorderLayout.WEST );
+        this.add( imageNameLabel, BorderLayout.CENTER );
 
-        JPanel wrapperPanel = new JPanel(new BorderLayout(0, 0));
-        wrapperPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        wrapperPanel.add(controlPanel, BorderLayout.CENTER);
+        final JPanel wrapperPanel = new JPanel( new BorderLayout( 0, 0 ) );
+        wrapperPanel.setBorder( BorderFactory.createEtchedBorder( EtchedBorder.RAISED ) );
+        wrapperPanel.add( controlPanel, BorderLayout.CENTER );
 
-        this.add(wrapperPanel, BorderLayout.EAST);
+        this.add( wrapperPanel, BorderLayout.EAST );
     }
 
-    public void update(String imageName, int imageIndex, int imageCount) {
-        imageIndexLabel.setText(String.format(" %d/%d ", imageIndex + 1, imageCount));
-        imageNameLabel.setText(" " + imageName);
+    public void update( final String imageName, final int imageIndex, final int imageCount )
+    {
+        imageIndexLabel.setText( String.format( " %d/%d ", imageIndex + 1, imageCount ) );
+        imageNameLabel.setText( " " + imageName );
     }
 
-    public void clear() {
-        imageIndexLabel.setText(" ");
-        imageNameLabel.setText(" ");
+    public void clear()
+    {
+        imageIndexLabel.setText( " " );
+        imageNameLabel.setText( " " );
     }
 }

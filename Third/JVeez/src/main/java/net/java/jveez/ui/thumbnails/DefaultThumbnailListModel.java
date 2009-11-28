@@ -30,59 +30,69 @@ import net.java.jveez.utils.SortingAlgorithm;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class DefaultThumbnailListModel extends AbstractListModel implements ThumbnailListModel<Picture> {
-
+public class DefaultThumbnailListModel extends AbstractListModel implements ThumbnailListModel<Picture>
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3258131345149407289L;
 
-    private static final Logger LOG = Logger.getLogger(DefaultThumbnailListModel.class);
+    private static final Logger LOG = Logger.getLogger( DefaultThumbnailListModel.class );
 
-    private List<Picture> list = new ArrayList<Picture>();
+    private final List<Picture> list = new ArrayList<Picture>();
 
-    public int getSize() {
+    public int getSize()
+    {
         return list.size();
     }
 
-    public Picture getPicture(int index) {
-        return list.get(index);
+    public Picture getPicture( final int index )
+    {
+        return list.get( index );
     }
 
-    public Picture getElementAt(int index) {
-        return list.get(index);
+    public Picture getElementAt( final int index )
+    {
+        return list.get( index );
     }
 
-    public int getIndexOf(Picture picture) {
-        return list.indexOf(picture);
+    public int getIndexOf( final Picture picture )
+    {
+        return list.indexOf( picture );
     }
 
-    public void clear() {
-        LOG.debug("clear()");
-        int previousSize = list.size();
+    public void clear()
+    {
+        LOG.debug( "clear()" );
+        final int previousSize = list.size();
         list.clear();
-        if (previousSize > 0) {
-            fireIntervalRemoved(this, 0, previousSize - 1);
+        if ( previousSize > 0 )
+        {
+            fireIntervalRemoved( this, 0, previousSize - 1 );
         }
     }
 
-    public void setPictures(Collection<? extends Picture> pictures) {
+    public void setPictures( final Collection<? extends Picture> pictures )
+    {
         list.clear();
-        list.addAll(pictures);
-        fireContentsChanged(this, 0, list.size() - 1);
+        list.addAll( pictures );
+        fireContentsChanged( this, 0, list.size() - 1 );
     }
 
-    public void setPictureAt(final int index, final Picture picture) {
-        list.set(index, picture);
-        fireContentsChanged(this, index, index);
+    public void setPictureAt( final int index, final Picture picture )
+    {
+        list.set( index, picture );
+        fireContentsChanged( this, index, index );
     }
 
-    public void sort(SortingAlgorithm<Picture> algorithm) {
-        algorithm.sort(list);
-        fireContentsChanged(this, 0, list.size() - 1);
+    public void sort( final SortingAlgorithm<Picture> algorithm )
+    {
+        algorithm.sort( list );
+        fireContentsChanged( this, 0, list.size() - 1 );
     }
 
-    public synchronized void notifyAsUpdated(int index) {
-        fireContentsChanged(this, index, index);
+    public synchronized void notifyAsUpdated( final int index )
+    {
+        fireContentsChanged( this, index, index );
     }
 }

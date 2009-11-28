@@ -22,7 +22,7 @@
 
 package net.java.jveez.ui.viewer.anim;
 
-public interface AnimatedComponent {
-
+public interface AnimatedComponent
+{
     public AnimationState getAnimationState();
 }

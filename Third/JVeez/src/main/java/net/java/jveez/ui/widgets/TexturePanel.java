@@ -31,8 +31,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
-public class TexturePanel extends JPanel {
-
+public class TexturePanel extends JPanel
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
@@ -40,37 +40,43 @@ public class TexturePanel extends JPanel {
 
     private TexturePaint texturePaint;
 
-    public TexturePanel(BufferedImage texture, LayoutManager layout, boolean isDoubleBuffered) {
-        super(layout, isDoubleBuffered);
-        setupTexture(texture);
+    public TexturePanel( final BufferedImage texture, final LayoutManager layout, final boolean isDoubleBuffered )
+    {
+        super( layout, isDoubleBuffered );
+        setupTexture( texture );
     }
 
-    public TexturePanel(BufferedImage texture, LayoutManager layout) {
-        super(layout);
-        setupTexture(texture);
+    public TexturePanel( final BufferedImage texture, final LayoutManager layout )
+    {
+        super( layout );
+        setupTexture( texture );
     }
 
-    public TexturePanel(BufferedImage texture, boolean isDoubleBuffered) {
-        super(isDoubleBuffered);
-        setupTexture(texture);
+    public TexturePanel( final BufferedImage texture, final boolean isDoubleBuffered )
+    {
+        super( isDoubleBuffered );
+        setupTexture( texture );
     }
 
-    public TexturePanel(BufferedImage texture) {
+    public TexturePanel( final BufferedImage texture )
+    {
         super();
-        setupTexture(texture);
+        setupTexture( texture );
     }
 
-    private void setupTexture(BufferedImage texture) {
-        Rectangle2D.Float rectangle = new Rectangle2D.Float(0, 0, texture.getWidth(), texture.getHeight());
-        this.texturePaint = new TexturePaint(texture, rectangle);
+    private void setupTexture( final BufferedImage texture )
+    {
+        final Rectangle2D.Float rectangle = new Rectangle2D.Float( 0, 0, texture.getWidth(), texture.getHeight() );
+        this.texturePaint = new TexturePaint( texture, rectangle );
     }
 
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    protected void paintComponent( final Graphics g )
+    {
+        final Graphics2D g2d = (Graphics2D) g;
 
-        Paint oldPaint = g2d.getPaint();
-        g2d.setPaint(texturePaint);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-        g2d.setPaint(oldPaint);
+        final Paint oldPaint = g2d.getPaint();
+        g2d.setPaint( texturePaint );
+        g2d.fillRect( 0, 0, getWidth(), getHeight() );
+        g2d.setPaint( oldPaint );
     }
 }

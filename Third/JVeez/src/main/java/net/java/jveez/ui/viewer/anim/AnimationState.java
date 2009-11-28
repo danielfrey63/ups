@@ -26,8 +26,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 
-public class AnimationState {
-
+public class AnimationState
+{
     public double x;
 
     public double y;
@@ -42,10 +42,12 @@ public class AnimationState {
 
     public double ry;
 
-    public AnimationState() {
+    public AnimationState()
+    {
     }
 
-    public AnimationState(double x, double y, double sx, double sy, double r, double rx, double ry) {
+    public AnimationState( final double x, final double y, final double sx, final double sy, final double r, final double rx, final double ry )
+    {
         this();
         this.x = x;
         this.y = y;
@@ -56,12 +58,14 @@ public class AnimationState {
         this.ry = ry;
     }
 
-    public AnimationState(AnimationState state) {
+    public AnimationState( final AnimationState state )
+    {
         this();
-        set(state);
+        set( state );
     }
 
-    public void set(AnimationState state) {
+    public void set( final AnimationState state )
+    {
         this.x = state.x;
         this.y = state.y;
         this.sx = state.sx;
@@ -71,29 +75,35 @@ public class AnimationState {
         this.ry = state.ry;
     }
 
-    public AffineTransform getAffineTransform() {
-        AffineTransform transform = new AffineTransform();
-        transform.translate(x, y);
-        transform.scale(sx, sy);
-        transform.rotate(r, rx, ry);
+    public AffineTransform getAffineTransform()
+    {
+        final AffineTransform transform = new AffineTransform();
+        transform.translate( x, y );
+        transform.scale( sx, sy );
+        transform.rotate( r, rx, ry );
         return transform;
     }
 
-    public Point2D.Double getImagePointAt(double x, double y) {
-        try {
-            return (Point2D.Double) getAffineTransform().inverseTransform(new Point2D.Double(x, y), new Point2D.Double());
+    public Point2D.Double getImagePointAt( final double x, final double y )
+    {
+        try
+        {
+            return (Point2D.Double) getAffineTransform().inverseTransform( new Point2D.Double( x, y ), new Point2D.Double() );
         }
-        catch (NoninvertibleTransformException e) {
+        catch ( NoninvertibleTransformException e )
+        {
             // should never happen since this is an affine transform - true ? :-)
-            throw new RuntimeException(e);
+            throw new RuntimeException( e );
         }
     }
 
-    public Point2D.Double getCanvasPointAt(double x, double y) {
-        return (Point2D.Double) getAffineTransform().transform(new Point2D.Double(x, y), new Point2D.Double());
+    public Point2D.Double getCanvasPointAt( final double x, final double y )
+    {
+        return (Point2D.Double) getAffineTransform().transform( new Point2D.Double( x, y ), new Point2D.Double() );
     }
 
-    public static void add(AnimationState state1, AnimationState state2, AnimationState target) {
+    public static void add( final AnimationState state1, final AnimationState state2, final AnimationState target )
+    {
         target.x = state1.x + state2.x;
         target.y = state1.y + state2.y;
         target.sx = state1.sx + state2.sx;
@@ -103,7 +113,8 @@ public class AnimationState {
         target.ry = state1.ry + state2.ry;
     }
 
-    public static void sub(AnimationState state1, AnimationState state2, AnimationState target) {
+    public static void sub( final AnimationState state1, final AnimationState state2, final AnimationState target )
+    {
         target.x = state1.x - state2.x;
         target.y = state1.y - state2.y;
         target.sx = state1.sx - state2.sx;
@@ -113,17 +124,19 @@ public class AnimationState {
         target.ry = state1.ry - state2.ry;
     }
 
-    public static void delta(AnimationState initialState, AnimationState finalState, long duration, AnimationState deltaState) {
-        deltaState.x = (finalState.x - initialState.x) / duration;
-        deltaState.y = (finalState.y - initialState.y) / duration;
-        deltaState.sx = (finalState.sx - initialState.sx) / duration;
-        deltaState.sy = (finalState.sy - initialState.sy) / duration;
-        deltaState.r = (finalState.r - initialState.r) / duration;
-        deltaState.rx = (finalState.rx - initialState.rx) / duration;
-        deltaState.ry = (finalState.ry - initialState.ry) / duration;
+    public static void delta( final AnimationState initialState, final AnimationState finalState, final long duration, final AnimationState deltaState )
+    {
+        deltaState.x = ( finalState.x - initialState.x ) / duration;
+        deltaState.y = ( finalState.y - initialState.y ) / duration;
+        deltaState.sx = ( finalState.sx - initialState.sx ) / duration;
+        deltaState.sy = ( finalState.sy - initialState.sy ) / duration;
+        deltaState.r = ( finalState.r - initialState.r ) / duration;
+        deltaState.rx = ( finalState.rx - initialState.rx ) / duration;
+        deltaState.ry = ( finalState.ry - initialState.ry ) / duration;
     }
 
-    public static void step(AnimationState initialState, AnimationState deltaState, long time, AnimationState targetState) {
+    public static void step( final AnimationState initialState, final AnimationState deltaState, final long time, final AnimationState targetState )
+    {
         targetState.x = initialState.x + deltaState.x * time;
         targetState.y = initialState.y + deltaState.y * time;
         targetState.sx = initialState.sx + deltaState.sx * time;
@@ -133,7 +146,8 @@ public class AnimationState {
         targetState.ry = initialState.ry + deltaState.ry * time;
     }
 
-    public static void mult(AnimationState state, double c, AnimationState target) {
+    public static void mult( final AnimationState state, final double c, final AnimationState target )
+    {
         target.x = state.x * c;
         target.y = state.y * c;
         target.sx = state.sx * c;
@@ -143,8 +157,9 @@ public class AnimationState {
         target.ry = state.ry * c;
     }
 
-    public static void div(AnimationState state, double f, AnimationState target) {
-        double c = 1.0 / f;
+    public static void div( final AnimationState state, final double f, final AnimationState target )
+    {
+        final double c = 1.0 / f;
         target.x = state.x * c;
         target.y = state.y * c;
         target.sx = state.sx * c;
@@ -154,8 +169,9 @@ public class AnimationState {
         target.ry = state.ry * c;
     }
 
-    public String toString() {
-        return "AnimationState@" + Integer.toHexString(hashCode()) + "[" +
+    public String toString()
+    {
+        return "AnimationState@" + Integer.toHexString( hashCode() ) + "[" +
                 "x=" + x +
                 ", y=" + y +
                 ", sx=" + sx +

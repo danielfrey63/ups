@@ -27,62 +27,75 @@ import net.java.jveez.cache.ImageLoader;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public abstract class AbstractImageLoader implements ImageLoader {
+public abstract class AbstractImageLoader implements ImageLoader
+{
+    private static final Logger LOG = Logger.getLogger( AbstractImageLoader.class );
 
-    private static final Logger LOG = Logger.getLogger(AbstractImageLoader.class);
+    private final ImageLoader delegateImageLoader;
 
-    private ImageLoader delegateImageLoader;
-
-    protected AbstractImageLoader(ImageLoader delegateImageLoader) {
+    protected AbstractImageLoader( final ImageLoader delegateImageLoader )
+    {
         this.delegateImageLoader = delegateImageLoader;
     }
 
-    public final boolean isCached(Picture picture) {
-        if (_isCached(picture)) {
+    public final boolean isCached( final Picture picture )
+    {
+        if ( _isCached( picture ) )
+        {
             return true;
         }
-        else if (delegateImageLoader != null) {
-            return delegateImageLoader.isCached(picture);
+        else if ( delegateImageLoader != null )
+        {
+            return delegateImageLoader.isCached( picture );
         }
         return false;
     }
 
-    public final BufferedImage getImage(Picture picture) {
-        BufferedImage image = _getImage(picture);
-        if (image == null && delegateImageLoader != null) {
-            image = delegateImageLoader.getImage(picture);
-            if (image != null) {
-                _fetchIntoCache(picture, image);
+    public final BufferedImage getImage( final Picture picture )
+    {
+        BufferedImage image = _getImage( picture );
+        if ( image == null && delegateImageLoader != null )
+        {
+            image = delegateImageLoader.getImage( picture );
+            if ( image != null )
+            {
+                _fetchIntoCache( picture, image );
             }
-            else {
-                LOG.warn("Could not get image for \"" + picture.getFile() + "\"");
+            else
+            {
+                LOG.warn( "Could not get image for \"" + picture.getFile() + "\"" );
             }
             return image;
         }
-        else {
+        else
+        {
             return image;
         }
     }
 
-    public final void invalidateCache() {
-        if (delegateImageLoader != null) {
+    public final void invalidateCache()
+    {
+        if ( delegateImageLoader != null )
+        {
             delegateImageLoader.invalidateCache();
         }
         _invalidateCache();
     }
 
-    public final void close() {
-        if (delegateImageLoader != null) {
+    public final void close()
+    {
+        if ( delegateImageLoader != null )
+        {
             delegateImageLoader.close();
         }
         _close();
     }
 
-    protected abstract boolean _isCached(Picture picture);
+    protected abstract boolean _isCached( Picture picture );
 
-    protected abstract BufferedImage _getImage(Picture picture);
+    protected abstract BufferedImage _getImage( Picture picture );
 
-    protected abstract void _fetchIntoCache(Picture picture, BufferedImage image);
+    protected abstract void _fetchIntoCache( Picture picture, BufferedImage image );
 
     protected abstract void _invalidateCache();
 

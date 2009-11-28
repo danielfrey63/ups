@@ -6,25 +6,27 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import net.java.jveez.vfs.Directory;
 
-public class DirectoryListModel extends AbstractListModel {
+public class DirectoryListModel extends AbstractListModel
+{
+    private final List<Directory> directories = new ArrayList<Directory>();
 
-    private List<Directory> directories = new ArrayList<Directory>();
-
-    public void setContent(Collection<? extends Directory> collection) {
-
-        int previousSize = directories.size();
+    public void setContent( final Collection<? extends Directory> collection )
+    {
+        final int previousSize = directories.size();
 
         directories.clear();
-        directories.addAll(collection);
+        directories.addAll( collection );
 
-        fireContentsChanged(this, 0, previousSize);
+        fireContentsChanged( this, 0, previousSize );
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return directories.size();
     }
 
-    public Directory getElementAt(int index) {
-        return directories.get(index);
+    public Directory getElementAt( final int index )
+    {
+        return directories.get( index );
     }
 }

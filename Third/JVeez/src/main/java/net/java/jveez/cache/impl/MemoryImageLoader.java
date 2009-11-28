@@ -30,38 +30,41 @@ import net.java.jveez.utils.LRUMap;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public final class MemoryImageLoader extends AbstractImageLoader {
-
-    private static final Logger LOG = Logger.getLogger(MemoryImageLoader.class);
+public final class MemoryImageLoader extends AbstractImageLoader
+{
+    private static final Logger LOG = Logger.getLogger( MemoryImageLoader.class );
 
     private Map<Picture, BufferedImage> cachedImages;
 
-    public MemoryImageLoader(ImageLoader delegateLoader, int cacheCapacity) {
-        super(delegateLoader);
-        this.cachedImages = Collections.synchronizedMap(new LRUMap<Picture, BufferedImage>(cacheCapacity));
+    public MemoryImageLoader( final ImageLoader delegateLoader, final int cacheCapacity )
+    {
+        super( delegateLoader );
+        this.cachedImages = Collections.synchronizedMap( new LRUMap<Picture, BufferedImage>( cacheCapacity ) );
     }
 
-    protected boolean _isCached(Picture picture) {
-        return cachedImages.containsKey(picture);
+    protected boolean _isCached( final Picture picture )
+    {
+        return cachedImages.containsKey( picture );
     }
 
-    protected BufferedImage _getImage(Picture picture) {
-        BufferedImage image = cachedImages.get(picture);
-//    if (image == null)
-//      log.debug("Cache miss : " + picture);
-        return image;
+    protected BufferedImage _getImage( final Picture picture )
+    {
+        return cachedImages.get( picture );
     }
 
-    protected void _fetchIntoCache(Picture picture, BufferedImage image) {
+    protected void _fetchIntoCache( final Picture picture, final BufferedImage image )
+    {
 //    log.debug("Fetch into cache : " + picture);
-        cachedImages.put(picture, image);
+        cachedImages.put( picture, image );
     }
 
-    protected void _invalidateCache() {
+    protected void _invalidateCache()
+    {
         cachedImages.clear();
     }
 
-    protected void _close() {
+    protected void _close()
+    {
         cachedImages = null;
     }
 }

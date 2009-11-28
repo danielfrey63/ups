@@ -33,8 +33,8 @@ import net.java.jveez.utils.ImageUtils;
 import net.java.jveez.vfs.Picture;
 import org.garret.perst.Storage;
 
-public class PersistentRawThumbnail extends PersistentThumbnail {
-
+public class PersistentRawThumbnail extends PersistentThumbnail
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
@@ -43,36 +43,44 @@ public class PersistentRawThumbnail extends PersistentThumbnail {
     public static transient final ColorModel COLOR_MODEL = ColorModel.getRGBdefault();
 
     private int width;
+
     private int height;
+
     private int[] pix;
 
-    public PersistentRawThumbnail() {
+    public PersistentRawThumbnail()
+    {
     }
 
-    public PersistentRawThumbnail(Storage storage, Picture picture, BufferedImage image) {
-        super(storage, picture);
+    public PersistentRawThumbnail( final Storage storage, final Picture picture, final BufferedImage image )
+    {
+        super( storage, picture );
 
         this.width = image.getWidth();
         this.height = image.getHeight();
 
-        PixelGrabber pg = new PixelGrabber(image, 0, 0, width, height, true);
-        try {
+        final PixelGrabber pg = new PixelGrabber( image, 0, 0, width, height, true );
+        try
+        {
             pg.grabPixels();
         }
-        catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        catch ( InterruptedException e )
+        {
+            throw new RuntimeException( e );
         }
-        if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
-            System.err.println("image fetch aborted or errored");
-            throw new RuntimeException("Image fetch aborted or errored");
+        if ( ( pg.getStatus() & ImageObserver.ABORT ) != 0 )
+        {
+            System.err.println( "image fetch aborted or errored" );
+            throw new RuntimeException( "Image fetch aborted or errored" );
         }
 
         this.pix = (int[]) pg.getPixels();
     }
 
-    public BufferedImage getImage() {
-        Image sourceImage = Toolkit.getDefaultToolkit().createImage(new MemoryImageSource(width, height, COLOR_MODEL, pix, 0, width));
+    public BufferedImage getImage()
+    {
+        final Image sourceImage = Toolkit.getDefaultToolkit().createImage( new MemoryImageSource( width, height, COLOR_MODEL, pix, 0, width ) );
         // here, we will copy the (unmanaged) image from ImageIO into a compatible (managed) image to ensure best performance
-        return ImageUtils.copyIntoCompatibleImage(sourceImage, width, height);
+        return ImageUtils.copyIntoCompatibleImage( sourceImage, width, height );
     }
 }

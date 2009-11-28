@@ -45,60 +45,74 @@ import net.java.jveez.ui.thumbnails.ThumbnailPanel;
 import net.java.jveez.ui.viewer.ViewerPanel;
 import net.java.jveez.utils.BuildInfo;
 
-public class MainFrame extends JFrame {
-
+public class MainFrame extends JFrame
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257572814801547829L;
 
     private final FileSystemTree fileSystemTree = new FileSystemTree();
-    private final JFrame viewerFrame = new JFrame("ViewerFrame");
+
+    private final JFrame viewerFrame = new JFrame( "ViewerFrame" );
+
     private final ThumbnailList thumbnailList = new ThumbnailList();
-    private final ViewerPanel viewerPanel = new ViewerPanel(thumbnailList);
-    private final ThumbnailPanel thumbnailPanel = new ThumbnailPanel(thumbnailList);
+
+    private final ViewerPanel viewerPanel = new ViewerPanel( thumbnailList );
+
+    private final ThumbnailPanel thumbnailPanel = new ThumbnailPanel( thumbnailList );
+
     private final StatusBar statusBar = new StatusBar();
 
-    public MainFrame() throws HeadlessException {
+    public MainFrame() throws HeadlessException
+    {
         super();
         setupComponents();
         layoutComponents();
     }
 
-    private void layoutComponents() {
-        viewerFrame.add(viewerPanel);
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        splitPane.setRightComponent(thumbnailPanel);
-        splitPane.setLeftComponent(new JScrollPane(fileSystemTree));
-        splitPane.setDividerLocation(200);
+    private void layoutComponents()
+    {
+        viewerFrame.add( viewerPanel );
+        final JSplitPane splitPane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
+        splitPane.setRightComponent( thumbnailPanel );
+        splitPane.setLeftComponent( new JScrollPane( fileSystemTree ) );
+        splitPane.setDividerLocation( 200 );
 
-        getContentPane().add(splitPane, BorderLayout.CENTER);
-        getContentPane().add(statusBar, BorderLayout.SOUTH);
+        getContentPane().add( splitPane, BorderLayout.CENTER );
+        getContentPane().add( statusBar, BorderLayout.SOUTH );
 
-        setBounds(ConfigurationManager.getInstance().getMainFrameConfiguration().getBounds());
-        setVisible(true);
+        setBounds( ConfigurationManager.getInstance().getMainFrameConfiguration().getBounds() );
+        setVisible( true );
     }
 
-    private void setupComponents() {
-        setTitle(BuildInfo.TITLE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+    private void setupComponents()
+    {
+        setTitle( BuildInfo.TITLE );
+        addWindowListener( new WindowAdapter()
+        {
+            public void windowClosing( final WindowEvent e )
+            {
                 quit();
             }
-        });
-        fileSystemTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        fileSystemTree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(TreeSelectionEvent e) {
-                TreePath path = e.getPath();
-                if (path != null) {
-                    LazyDirectoryNode selectedNode = (LazyDirectoryNode) path.getLastPathComponent();
-                    thumbnailPanel.setCurrentDirectory(selectedNode != null ? selectedNode.getDirectory() : null);
+        } );
+        fileSystemTree.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        fileSystemTree.getSelectionModel().addTreeSelectionListener( new TreeSelectionListener()
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
+                final TreePath path = e.getPath();
+                if ( path != null )
+                {
+                    final LazyDirectoryNode selectedNode = (LazyDirectoryNode) path.getLastPathComponent();
+                    thumbnailPanel.setCurrentDirectory( selectedNode != null ? selectedNode.getDirectory() : null );
                 }
-                else {
-                    thumbnailPanel.setCurrentDirectory(null);
+                else
+                {
+                    thumbnailPanel.setCurrentDirectory( null );
                 }
             }
-        });
+        } );
 
 //    // setup menu bar
 //    JMenu helpMenu = new JMenu("Help");
@@ -116,48 +130,54 @@ public class MainFrame extends JFrame {
 //    this.setJMenuBar(menuBar);
     }
 
-    public StatusBar getStatusBar() {
+    public StatusBar getStatusBar()
+    {
         return statusBar;
     }
 
     // private methods
 
-    private void quit() {
-        boolean promptBeforeQuit = ConfigurationManager.getInstance().getSystemConfiguration().isConfirmBeforeQuit();
-        if (promptBeforeQuit) {
-            String title = "Quit JVeez?";
-            String message = "Are you sure you want to quit JVeez?";
-            String checkBoxText = "Do not show this message again";
+    private void quit()
+    {
+        final boolean promptBeforeQuit = ConfigurationManager.getInstance().getSystemConfiguration().isConfirmBeforeQuit();
+        if ( promptBeforeQuit )
+        {
+            final String title = "Quit JVeez?";
+            final String message = "Are you sure you want to quit JVeez?";
+            final String checkBoxText = "Do not show this message again";
 
-            JOptionPane optionPane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-            JPanel checkBoxPane = new JPanel();
-            JCheckBox checkBox = new JCheckBox(checkBoxText);
-            checkBoxPane.add(checkBox);
-            optionPane.add(checkBoxPane, 1);
-            JDialog dialog = optionPane.createDialog(this, title);
-            dialog.setVisible(true);
+            final JOptionPane optionPane = new JOptionPane( message, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION );
+            final JPanel checkBoxPane = new JPanel();
+            final JCheckBox checkBox = new JCheckBox( checkBoxText );
+            checkBoxPane.add( checkBox );
+            optionPane.add( checkBoxPane, 1 );
+            final JDialog dialog = optionPane.createDialog( this, title );
+            dialog.setVisible( true );
 
-            Object val = optionPane.getValue();
+            final Object val = optionPane.getValue();
             int rc = JOptionPane.CLOSED_OPTION;
-            if (val == null || !(val instanceof Integer)) {
+            if ( val == null || !( val instanceof Integer ) )
+            {
                 rc = JOptionPane.CLOSED_OPTION;
             }
-            else {
-                rc = ((Integer) val).intValue();
+            else
+            {
+                rc = ( (Integer) val ).intValue();
             }
 
-            if (rc != JOptionPane.YES_OPTION) {
+            if ( rc != JOptionPane.YES_OPTION )
+            {
                 return;
             }
-            else if (checkBox.isSelected())
+            else if ( checkBox.isSelected() )
             // Only remember the checkbox if they say yes
             {
-                ConfigurationManager.getInstance().getSystemConfiguration().setConfirmBeforeQuit(false);
+                ConfigurationManager.getInstance().getSystemConfiguration().setConfirmBeforeQuit( false );
             }
         }
 
-        ConfigurationManager.getInstance().getMainFrameConfiguration().setBounds(getBounds());
+        ConfigurationManager.getInstance().getMainFrameConfiguration().setBounds( getBounds() );
         ConfigurationManager.getInstance().flushPendingChanges();
-        System.exit(0);
+        System.exit( 0 );
     }
 }

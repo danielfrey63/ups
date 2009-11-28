@@ -22,25 +22,29 @@
 
 package net.java.jveez.utils;
 
-public class OperationCancelledException extends RuntimeException {
-
+public class OperationCancelledException extends RuntimeException
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3978983271487191088L;
 
-    public OperationCancelledException() {
+    public OperationCancelledException()
+    {
     }
 
-    public OperationCancelledException(String message) {
-        super(message);
+    public OperationCancelledException( final String message )
+    {
+        super( message );
     }
 
-    public OperationCancelledException(String message, Throwable cause) {
-        super(message, cause);
+    public OperationCancelledException( final String message, final Throwable cause )
+    {
+        super( message, cause );
     }
 
-    public OperationCancelledException(Throwable cause) {
-        super(cause);
+    public OperationCancelledException( final Throwable cause )
+    {
+        super( cause );
     }
 }

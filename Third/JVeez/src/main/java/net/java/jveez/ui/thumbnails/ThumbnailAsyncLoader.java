@@ -33,55 +33,66 @@ import net.java.jveez.utils.BufferedImageIcon;
 import net.java.jveez.utils.DebugUtils;
 import net.java.jveez.utils.Utils;
 import net.java.jveez.vfs.Picture;
-import org.apache.log4j.Category;
 import org.apache.log4j.Logger;
 
-public class ThumbnailAsyncLoader {
+public class ThumbnailAsyncLoader
+{
+    private static final Logger LOG = Logger.getLogger( ThumbnailAsyncLoader.class );
 
-    private static final Logger LOG = Logger.getLogger(ThumbnailAsyncLoader.class);
+    private static final ThumbnailAsyncLoader instance = new ThumbnailAsyncLoader();
 
-    private static ThumbnailAsyncLoader instance = new ThumbnailAsyncLoader();
+    private static final ExecutorService executor = Executors.newFixedThreadPool( 3, Utils.newPriorityThreadFactory( Thread.NORM_PRIORITY - 1 ) );
 
-    private static ExecutorService executor = Executors.newFixedThreadPool(3, Utils.newPriorityThreadFactory(Thread.NORM_PRIORITY - 1));
-    private static Map<Picture, Boolean> thumbnailsLoading = new ConcurrentHashMap<Picture, Boolean>();
+    private static final Map<Picture, Boolean> thumbnailsLoading = new ConcurrentHashMap<Picture, Boolean>();
 
-    public Icon getThumbnailFor(Picture picture, ThumbnailList thumbnailList, int index, int width, int height) {
+    public Icon getThumbnailFor( final Picture picture, final ThumbnailList thumbnailList, final int index, final int width, final int height )
+    {
         DebugUtils.ensureIsDispatchThread();
 
-        if (ThumbnailStore.getInstance().isCached(picture)) {
-            BufferedImage image = ThumbnailStore.getInstance().getImage(picture);
-            return new BufferedImageIcon(image);
+        if ( ThumbnailStore.getInstance().isCached( picture ) )
+        {
+            final BufferedImage image = ThumbnailStore.getInstance().getImage( picture );
+            return new BufferedImageIcon( image );
         }
-        else {
-            if (!thumbnailsLoading.containsKey(picture)) {
-                thumbnailsLoading.put(picture, Boolean.TRUE);
-                scheduleForDownloading(picture, thumbnailList, index, width, height);
+        else
+        {
+            if ( !thumbnailsLoading.containsKey( picture ) )
+            {
+                thumbnailsLoading.put( picture, Boolean.TRUE );
+                scheduleForDownloading( picture, thumbnailList, index, width, height );
             }
             return picture.getIcon();
         }
     }
 
-    private void scheduleForDownloading(final Picture picture, final ThumbnailList thumbnailList, final int index,
-                                        final int width, final int height) {
-        executor.execute(new Runnable() {
-            public void run() {
-                try {
+    private void scheduleForDownloading( final Picture picture, final ThumbnailList thumbnailList, final int index,
+                                         final int width, final int height )
+    {
+        executor.execute( new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
                     // still need to load ?
-                    if (index > thumbnailList.getLastVisibleIndex() || index < thumbnailList.getFirstVisibleIndex()) {
+                    if ( index > thumbnailList.getLastVisibleIndex() || index < thumbnailList.getFirstVisibleIndex() )
+                    {
                         return;
                     }
 
-                    ThumbnailStore.getInstance().getImage(picture);
-                    thumbnailList.getThumbnailListModel().notifyAsUpdated(index);
+                    ThumbnailStore.getInstance().getImage( picture );
+                    thumbnailList.getThumbnailListModel().notifyAsUpdated( index );
                 }
-                finally {
-                    thumbnailsLoading.remove(picture);
+                finally
+                {
+                    thumbnailsLoading.remove( picture );
                 }
             }
-        });
+        } );
     }
 
-    public static ThumbnailAsyncLoader getInstance() {
+    public static ThumbnailAsyncLoader getInstance()
+    {
         return instance;
     }
 }

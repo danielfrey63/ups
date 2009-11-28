@@ -22,49 +22,61 @@
 
 package net.java.jveez.ui.viewer.anim;
 
-public class ResetAnimation implements Animation {
+public class ResetAnimation implements Animation
+{
+    private final long duration;
 
-    private long duration;
-    private AnimatedComponent targetComponent;
+    private final AnimatedComponent targetComponent;
 
-    private AnimationState finalState = new AnimationState();
-    private AnimationState initialState = new AnimationState();
-    private AnimationState deltaState = new AnimationState();
+    private final AnimationState finalState = new AnimationState();
 
-    public ResetAnimation(AnimationState finalState, long duration, AnimatedComponent targetComponent) {
-        this.finalState.set(finalState);
+    private final AnimationState initialState = new AnimationState();
+
+    private final AnimationState deltaState = new AnimationState();
+
+    public ResetAnimation( final AnimationState finalState, final long duration, final AnimatedComponent targetComponent )
+    {
+        this.finalState.set( finalState );
         this.duration = duration;
         this.targetComponent = targetComponent;
     }
 
-    public void init() {
-        initialState.set(targetComponent.getAnimationState());
+    public void init()
+    {
+        initialState.set( targetComponent.getAnimationState() );
 
         // try to minimize the rotation move ...
-        if (initialState.r >= Math.PI) {
+        if ( initialState.r >= Math.PI )
+        {
             initialState.r -= Math.PI * 2;
         }
-        else if (initialState.r <= -Math.PI) {
+        else if ( initialState.r <= -Math.PI )
+        {
             initialState.r += Math.PI * 2;
         }
         //
 
-        if (duration > 0) {
-            AnimationState.delta(initialState, finalState, duration, deltaState);
+        if ( duration > 0 )
+        {
+            AnimationState.delta( initialState, finalState, duration, deltaState );
         }
     }
 
-    public void perform(long time) {
-        AnimationState targetState = targetComponent.getAnimationState();
-        if (time >= duration) {
-            targetState.set(finalState);
+    public void perform( final long time )
+    {
+        final AnimationState targetState = targetComponent.getAnimationState();
+        if ( time >= duration )
+        {
+            targetState.set( finalState );
         }
-        else {
-            AnimationState.step(initialState, deltaState, time, targetState);
+        else
+        {
+            AnimationState.step( initialState, deltaState, time, targetState );
         }
     }
 
-    public long duration() {
+    public long duration()
+    {
         return duration;
     }
 }

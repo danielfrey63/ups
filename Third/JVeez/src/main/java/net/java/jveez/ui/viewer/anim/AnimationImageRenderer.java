@@ -24,15 +24,17 @@ package net.java.jveez.ui.viewer.anim;
 
 import java.awt.Graphics2D;
 
-public class AnimationImageRenderer implements AnimationRenderer {
+public class AnimationImageRenderer implements AnimationRenderer
+{
+    private final AnimatedImageComponent imageComponent;
 
-    private AnimatedImageComponent imageComponent;
-
-    public AnimationImageRenderer(AnimatedImageComponent imageComponent) {
+    public AnimationImageRenderer( final AnimatedImageComponent imageComponent )
+    {
         this.imageComponent = imageComponent;
     }
 
-    public void render(Graphics2D g2d, int width, int height, boolean animating) {
-        g2d.drawImage(imageComponent.getImage(), imageComponent.getAnimationState().getAffineTransform(), null);
+    public void render( final Graphics2D g2d, final int width, final int height, final boolean animating )
+    {
+        g2d.drawImage( imageComponent.getImage(), imageComponent.getAnimationState().getAffineTransform(), null );
     }
 }

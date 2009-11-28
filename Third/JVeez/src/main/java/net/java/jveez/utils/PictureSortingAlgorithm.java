@@ -29,63 +29,82 @@ import java.util.Comparator;
 import java.util.List;
 import net.java.jveez.vfs.Picture;
 
-public enum PictureSortingAlgorithm implements SortingAlgorithm<Picture> {
-
-    ByName {
-        public void sort(List<? extends Picture> list) {
-            Collections.sort(list, new Comparator<Picture>() {
-                public int compare(Picture p1, Picture p2) {
-                    return p1.getName().compareTo(p2.getName());
+public enum PictureSortingAlgorithm implements SortingAlgorithm<Picture>
+{
+    ByName
+            {
+                public void sort( final List<? extends Picture> list )
+                {
+                    Collections.sort( list, new Comparator<Picture>()
+                    {
+                        public int compare( final Picture p1, final Picture p2 )
+                        {
+                            return p1.getName().compareTo( p2.getName() );
+                        }
+                    } );
                 }
-            });
-        }
-    },
+            },
 
-    BySize {
-        public void sort(List<? extends Picture> list) {
-            Collections.sort(list, new Comparator<Picture>() {
-                public int compare(Picture p1, Picture p2) {
-                    long l1 = p1.getLength();
-                    long l2 = p2.getLength();
+    BySize
+            {
+                public void sort( final List<? extends Picture> list )
+                {
+                    Collections.sort( list, new Comparator<Picture>()
+                    {
+                        public int compare( final Picture p1, final Picture p2 )
+                        {
+                            final long l1 = p1.getLength();
+                            final long l2 = p2.getLength();
 
-                    if (l1 < l2) {
-                        return -1;
-                    }
-                    else if (l1 > l2) {
-                        return 1;
-                    }
-                    else {
-                        return 0;
-                    }
+                            if ( l1 < l2 )
+                            {
+                                return -1;
+                            }
+                            else if ( l1 > l2 )
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 0;
+                            }
+                        }
+                    } );
                 }
-            });
-        }
-    },
+            },
 
-    ByDate {
-        public void sort(List<? extends Picture> list) {
-            Collections.sort(list, new Comparator<Picture>() {
-                public int compare(Picture p1, Picture p2) {
-                    long l1 = p1.getLastModifiedDate();
-                    long l2 = p2.getLastModifiedDate();
+    ByDate
+            {
+                public void sort( final List<? extends Picture> list )
+                {
+                    Collections.sort( list, new Comparator<Picture>()
+                    {
+                        public int compare( final Picture p1, final Picture p2 )
+                        {
+                            final long l1 = p1.getLastModifiedDate();
+                            final long l2 = p2.getLastModifiedDate();
 
-                    if (l1 < l2) {
-                        return -1;
-                    }
-                    else if (l1 > l2) {
-                        return 1;
-                    }
-                    else {
-                        return 0;
-                    }
+                            if ( l1 < l2 )
+                            {
+                                return -1;
+                            }
+                            else if ( l1 > l2 )
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 0;
+                            }
+                        }
+                    } );
                 }
-            });
-        }
-    };
+            };
 
-    public abstract void sort(List<? extends Picture> list);
+    public abstract void sort( List<? extends Picture> list );
 
-    public static void sort(File[] files) {
-        Arrays.sort(files);
+    public static void sort( final File[] files )
+    {
+        Arrays.sort( files );
     }
 }

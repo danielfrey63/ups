@@ -25,21 +25,23 @@ package net.java.jveez.utils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LRUMap<K, V> extends LinkedHashMap<K, V> {
-
+public class LRUMap<K, V> extends LinkedHashMap<K, V>
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3834024740896716600L;
 
-    private int maxCapacity;
+    private final int maxCapacity;
 
-    public LRUMap(int maxCapacity) {
-        super(maxCapacity + 1, 0.75f, true);
+    public LRUMap( final int maxCapacity )
+    {
+        super( maxCapacity + 1, 0.75f, true );
         this.maxCapacity = maxCapacity;
     }
 
-    public boolean removeEldestEntry(Map.Entry<K, V> entry) {
+    public boolean removeEldestEntry( final Map.Entry<K, V> entry )
+    {
         return size() > maxCapacity;
     }
 }

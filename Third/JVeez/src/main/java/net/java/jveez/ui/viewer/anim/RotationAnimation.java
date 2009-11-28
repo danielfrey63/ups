@@ -25,17 +25,22 @@ package net.java.jveez.ui.viewer.anim;
 import java.awt.geom.Point2D;
 import net.java.jveez.ui.viewer.ViewerImagePanel;
 
-public class RotationAnimation implements Animation {
+public class RotationAnimation implements Animation
+{
+    private final double angleDelta;
 
-    private double angleDelta;
-    private double angleDeltaIncrement;
-    private long duration;
-    private AnimatedComponent targetComponent;
-    private ViewerImagePanel viewerCanvas;
+    private final double angleDeltaIncrement;
 
-    private AnimationState initialState = new AnimationState();
+    private final long duration;
 
-    public RotationAnimation(double angleDelta, long duration, AnimatedComponent animatedComponent, ViewerImagePanel viewerCanvas) {
+    private final AnimatedComponent targetComponent;
+
+    private final ViewerImagePanel viewerCanvas;
+
+    private final AnimationState initialState = new AnimationState();
+
+    public RotationAnimation( final double angleDelta, final long duration, final AnimatedComponent animatedComponent, final ViewerImagePanel viewerCanvas )
+    {
         this.angleDelta = angleDelta;
         this.angleDeltaIncrement = angleDelta / duration;
         this.duration = duration;
@@ -43,47 +48,54 @@ public class RotationAnimation implements Animation {
         this.viewerCanvas = viewerCanvas;
     }
 
-    public void init() {
-        initialState.set(targetComponent.getAnimationState());
+    public void init()
+    {
+        initialState.set( targetComponent.getAnimationState() );
     }
 
-    public void perform(long time) {
+    public void perform( final long time )
+    {
         double newAngle = initialState.r;
-        if (time >= duration) {
+        if ( time >= duration )
+        {
             newAngle += angleDelta;
         }
-        else {
+        else
+        {
             newAngle += angleDeltaIncrement * time;
         }
 
         // avoid to have an angle >= or <= 360 degrees
-        if (newAngle >= Math.PI * 2) {
+        if ( newAngle >= Math.PI * 2 )
+        {
             newAngle -= Math.PI * 2;
         }
-        else if (newAngle <= -Math.PI * 2) {
+        else if ( newAngle <= -Math.PI * 2 )
+        {
             newAngle += Math.PI * 2;
         }
         //
 
-        float canvasCenterX = viewerCanvas.getWidth() / 2.0f;
-        float canvasCenterY = viewerCanvas.getHeight() / 2.0f;
+        final float canvasCenterX = viewerCanvas.getWidth() / 2.0f;
+        final float canvasCenterY = viewerCanvas.getHeight() / 2.0f;
 
-        AnimationState currentState = targetComponent.getAnimationState();
+        final AnimationState currentState = targetComponent.getAnimationState();
 
-        Point2D.Double transformedCanvasCenter = currentState.getImagePointAt(canvasCenterX, canvasCenterY);
+        final Point2D.Double transformedCanvasCenter = currentState.getImagePointAt( canvasCenterX, canvasCenterY );
 
         currentState.r = newAngle;
         currentState.rx = transformedCanvasCenter.x;
         currentState.ry = transformedCanvasCenter.y;
 
-        Point2D.Double newTransformedCanvasCenter = currentState.getCanvasPointAt(transformedCanvasCenter.x, transformedCanvasCenter.y);
+        final Point2D.Double newTransformedCanvasCenter = currentState.getCanvasPointAt( transformedCanvasCenter.x, transformedCanvasCenter.y );
 
         // keep the point of the image at the center of the screen at the same position
         currentState.x -= newTransformedCanvasCenter.x - canvasCenterX;
         currentState.y -= newTransformedCanvasCenter.y - canvasCenterY;
     }
 
-    public long duration() {
+    public long duration()
+    {
         return duration;
     }
 }

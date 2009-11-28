@@ -25,55 +25,66 @@ package net.java.jveez.ui.viewer.anim;
 import java.awt.geom.Point2D;
 import javax.swing.JComponent;
 
-public class ZoomAnimation implements Animation {
+public class ZoomAnimation implements Animation
+{
+    private final double zoomFactor;
 
-    private double zoomFactor;
     private double zoomFactorIncrement;
-    private long duration;
-    private AnimatedComponent targetComponent;
-    private JComponent viewerCanvas;
 
-    private AnimationState initialState = new AnimationState();
+    private final long duration;
 
-    public ZoomAnimation(double zoomFactor, long duration, AnimatedComponent targetComponent, JComponent viewerCanvas) {
+    private final AnimatedComponent targetComponent;
+
+    private final JComponent viewerCanvas;
+
+    private final AnimationState initialState = new AnimationState();
+
+    public ZoomAnimation( final double zoomFactor, final long duration, final AnimatedComponent targetComponent, final JComponent viewerCanvas )
+    {
         this.zoomFactor = zoomFactor;
         this.duration = duration;
         this.targetComponent = targetComponent;
         this.viewerCanvas = viewerCanvas;
     }
 
-    public void init() {
-        initialState.set(targetComponent.getAnimationState());
-        if (duration > 0) {
-            zoomFactorIncrement = (zoomFactor * initialState.sx - initialState.sx) / duration;
+    public void init()
+    {
+        initialState.set( targetComponent.getAnimationState() );
+        if ( duration > 0 )
+        {
+            zoomFactorIncrement = ( zoomFactor * initialState.sx - initialState.sx ) / duration;
         }
     }
 
-    public void perform(long time) {
-        float canvasCenterX = viewerCanvas.getWidth() / 2.0f;
-        float canvasCenterY = viewerCanvas.getHeight() / 2.0f;
+    public void perform( final long time )
+    {
+        final float canvasCenterX = viewerCanvas.getWidth() / 2.0f;
+        final float canvasCenterY = viewerCanvas.getHeight() / 2.0f;
 
-        AnimationState state = targetComponent.getAnimationState();
+        final AnimationState state = targetComponent.getAnimationState();
 
-        Point2D.Double transformedCanvasCenter = state.getImagePointAt(canvasCenterX, canvasCenterY);
+        final Point2D.Double transformedCanvasCenter = state.getImagePointAt( canvasCenterX, canvasCenterY );
 
-        if (time >= duration) {
+        if ( time >= duration )
+        {
             state.sx = initialState.sx * zoomFactor;
             state.sy = initialState.sy * zoomFactor;
         }
-        else {
-            state.sx = initialState.sx + (zoomFactorIncrement * time);
-            state.sy = initialState.sy + (zoomFactorIncrement * time);
+        else
+        {
+            state.sx = initialState.sx + ( zoomFactorIncrement * time );
+            state.sy = initialState.sy + ( zoomFactorIncrement * time );
         }
 
-        Point2D.Double newTransformedCanvasCenter = state.getCanvasPointAt(transformedCanvasCenter.x, transformedCanvasCenter.y);
+        final Point2D.Double newTransformedCanvasCenter = state.getCanvasPointAt( transformedCanvasCenter.x, transformedCanvasCenter.y );
 
         // keep the point of the image at the center of the screen at the same position
         state.x -= newTransformedCanvasCenter.x - canvasCenterX;
         state.y -= newTransformedCanvasCenter.y - canvasCenterY;
     }
 
-    public long duration() {
+    public long duration()
+    {
         return duration;
     }
 }

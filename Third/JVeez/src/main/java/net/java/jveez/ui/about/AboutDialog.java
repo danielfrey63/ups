@@ -34,59 +34,66 @@ import net.java.jveez.ui.widgets.TexturePanel;
 import net.java.jveez.utils.BuildInfo;
 import net.java.jveez.utils.Utils;
 
-public class AboutDialog extends JDialog {
-
+public class AboutDialog extends JDialog
+{
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3617857486338994993L;
 
     private JLabel logo;
-    private JLabel label;
-    private JButton closeButton = new JButton("close");
 
-    public AboutDialog() {
-        super(JVeez.getMainFrame());
+    private JLabel label;
+
+    private final JButton closeButton = new JButton( "close" );
+
+    public AboutDialog()
+    {
+        super( JVeez.getMainFrame() );
         setupComponents();
         layoutComponents();
     }
 
-    private void setupComponents() {
+    private void setupComponents()
+    {
         // setup dialog
-        this.setTitle("About JVeez ...");
-        this.setModal(true);
-        this.setUndecorated(true);
+        this.setTitle( "About JVeez ..." );
+        this.setModal( true );
+        this.setUndecorated( true );
 
         // setup label & logo
-        logo = new JLabel(Utils.loadIcon("net/java/jveez/icons/jveez-2.png"), JLabel.CENTER);
-        logo.setOpaque(false);
-        label = new JLabel(BuildInfo.TITLE, JLabel.CENTER);
-        label.setOpaque(false);
+        logo = new JLabel( Utils.loadIcon( "net/java/jveez/icons/jveez-2.png" ), JLabel.CENTER );
+        logo.setOpaque( false );
+        label = new JLabel( BuildInfo.TITLE, JLabel.CENTER );
+        label.setOpaque( false );
 
         // setup button
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+        closeButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                setVisible( false );
             }
-        });
+        } );
     }
 
-    private void layoutComponents() {
-        TexturePanel panel = new TexturePanel(Utils.loadImage("net/java/jveez/icons/steel-1.jpg"), new BorderLayout());
-        setContentPane(panel);
+    private void layoutComponents()
+    {
+        final TexturePanel panel = new TexturePanel( Utils.loadImage( "net/java/jveez/icons/steel-1.jpg" ), new BorderLayout() );
+        setContentPane( panel );
 
-        JPanel p = new JPanel(new BorderLayout());
-        p.setOpaque(false);
-        p.add(logo, BorderLayout.CENTER);
-        p.add(label, BorderLayout.SOUTH);
-        panel.add(p, BorderLayout.CENTER);
+        JPanel p = new JPanel( new BorderLayout() );
+        p.setOpaque( false );
+        p.add( logo, BorderLayout.CENTER );
+        p.add( label, BorderLayout.SOUTH );
+        panel.add( p, BorderLayout.CENTER );
 
         p = new JPanel();
-        p.setOpaque(false);
-        p.add(closeButton);
+        p.setOpaque( false );
+        p.add( closeButton );
 
-        panel.add(p, BorderLayout.SOUTH);
-        setLocationRelativeTo(getOwner());
+        panel.add( p, BorderLayout.SOUTH );
+        setLocationRelativeTo( getOwner() );
         pack();
     }
 }

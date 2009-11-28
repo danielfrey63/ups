@@ -10,37 +10,52 @@ import ch.jfactory.resource.Version;
  */
 public class VersionInfo
 {
-
-    /** Holds value of property name. */
+    /**
+     * Holds value of property name.
+     */
     private String name;
 
-    /** Holds value of property author. */
+    /**
+     * Holds value of property author.
+     */
     private String author;
 
-    /** Holds value of property description. */
+    /**
+     * Holds value of property description.
+     */
     private String description;
 
-    /** Holds value of property majorVersion. */
+    /**
+     * Holds value of property majorVersion.
+     */
     private int majorVersion;
 
-    /** Holds value of property minorVersion. */
+    /**
+     * Holds value of property minorVersion.
+     */
     private int minorVersion;
 
-    /** Holds the build number. */
+    /**
+     * Holds the build number.
+     */
     private int buildVersion;
 
-    /** Root path for relative file name. */
+    /**
+     * Root path for relative file name.
+     */
     private transient String relativeName;
 
-    /** Holds value of property location. */
+    /**
+     * Holds value of property location.
+     */
     private transient String location;
 
     public VersionInfo()
     {
     }
 
-    public VersionInfo(final String name, final String description, final String location, final int majorVersion, final int minorVersion,
-                       final int buildVersion)
+    public VersionInfo( final String name, final String description, final String location, final int majorVersion, final int minorVersion,
+                        final int buildVersion )
     {
         this.name = name;
         this.description = description;
@@ -65,7 +80,7 @@ public class VersionInfo
      *
      * @param name New value of property name.
      */
-    public void setName(final String name)
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -85,7 +100,7 @@ public class VersionInfo
      *
      * @param location New value of property location.
      */
-    public void setLocation(final String location)
+    public void setLocation( final String location )
     {
         this.location = location;
     }
@@ -105,7 +120,7 @@ public class VersionInfo
      *
      * @param author New value of property author.
      */
-    public void setAuthor(final String author)
+    public void setAuthor( final String author )
     {
         this.author = author;
     }
@@ -125,7 +140,7 @@ public class VersionInfo
      *
      * @param description New value of property description.
      */
-    public void setDescription(final String description)
+    public void setDescription( final String description )
     {
         this.description = description;
     }
@@ -145,7 +160,7 @@ public class VersionInfo
      *
      * @param majorVersion New value of property majorVersion.
      */
-    public void setMajorVersion(final int majorVersion)
+    public void setMajorVersion( final int majorVersion )
     {
         this.majorVersion = majorVersion;
     }
@@ -165,7 +180,7 @@ public class VersionInfo
      *
      * @param minorVersion New value of property minorVersion.
      */
-    public void setMinorVersion(final int minorVersion)
+    public void setMinorVersion( final int minorVersion )
     {
         this.minorVersion = minorVersion;
     }
@@ -175,7 +190,7 @@ public class VersionInfo
         return buildVersion;
     }
 
-    public void setBuildVersion(final int buildVersion)
+    public void setBuildVersion( final int buildVersion )
     {
         this.buildVersion = buildVersion;
     }
@@ -185,27 +200,27 @@ public class VersionInfo
         return relativeName;
     }
 
-    public void setRelativeName(final String relativeName)
+    public void setRelativeName( final String relativeName )
     {
         this.relativeName = relativeName;
     }
 
     public String getVersion()
     {
-        final StringBuffer buffer = new StringBuffer(10);
-        buffer.append(majorVersion);
-        buffer.append('.');
-        buffer.append(minorVersion);
-        buffer.append('.');
-        buffer.append(buildVersion);
+        final StringBuffer buffer = new StringBuffer( 10 );
+        buffer.append( majorVersion );
+        buffer.append( '.' );
+        buffer.append( minorVersion );
+        buffer.append( '.' );
+        buffer.append( buildVersion );
         return buffer.toString();
     }
 
-    public boolean isNewerAs(final VersionInfo info)
+    public boolean isNewerAs( final VersionInfo info )
     {
-        final Version thisVersion = new Version(majorVersion, minorVersion, buildVersion);
-        final Version otherVersion = new Version(info.majorVersion, info.minorVersion, info.buildVersion);
-        return thisVersion.compareTo(otherVersion) > 0;
+        final Version thisVersion = new Version( majorVersion, minorVersion, buildVersion );
+        final Version otherVersion = new Version( info.majorVersion, info.minorVersion, info.buildVersion );
+        return thisVersion.compareTo( otherVersion ) > 0;
 //        if (info == null) {
 //            return true;
 //        }
@@ -226,13 +241,13 @@ public class VersionInfo
 
     public String toString()
     {
-        final StringBuffer buf = new StringBuffer(100);
-        buf.append("Location: ").append(location);
-        buf.append(", Name: ").append(name);
-        buf.append(", Description: ").append(description);
-        buf.append(", MajorVersion: ").append(majorVersion);
-        buf.append(", MinorVersion: ").append(minorVersion);
-        buf.append(", BuildVersion: ").append(buildVersion);
+        final StringBuffer buf = new StringBuffer( 100 );
+        buf.append( "Location: " ).append( location );
+        buf.append( ", Name: " ).append( name );
+        buf.append( ", Description: " ).append( description );
+        buf.append( ", MajorVersion: " ).append( majorVersion );
+        buf.append( ", MinorVersion: " ).append( minorVersion );
+        buf.append( ", BuildVersion: " ).append( buildVersion );
         return buf.toString();
     }
 }

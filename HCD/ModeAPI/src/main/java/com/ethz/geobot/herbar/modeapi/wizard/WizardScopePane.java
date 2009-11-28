@@ -17,8 +17,8 @@ import javax.swing.JPanel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-public class WizardScopePane extends WizardPane {
-
+public class WizardScopePane extends WizardPane
+{
     /**
      * name of the pane
      */
@@ -27,58 +27,71 @@ public class WizardScopePane extends WizardPane {
     /**
      * display field for the selected scope
      */
-    private String modelPropertyName;
-    private String scopePropertyName;
+    private final String modelPropertyName;
+
+    private final String scopePropertyName;
+
     private EditItem edit;
 
-    public WizardScopePane(String modelPropertyName, String scopePropertyName) {
-        super(NAME, new String[]{modelPropertyName, scopePropertyName});
+    public WizardScopePane( final String modelPropertyName, final String scopePropertyName )
+    {
+        super( NAME, new String[]{modelPropertyName, scopePropertyName} );
         this.modelPropertyName = modelPropertyName;
         this.scopePropertyName = scopePropertyName;
     }
 
-    protected JPanel createDisplayPanel(String prefix) {
-        ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                if (!isVisible()) {
+    protected JPanel createDisplayPanel( final String prefix )
+    {
+        final ActionListener actionListener = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent ev )
+            {
+                if ( !isVisible() )
+                {
                     return;
                 }
-                HerbarModel herbarModel = (HerbarModel) getProperty(modelPropertyName);
-                Taxon rootTaxon = herbarModel.getRootTaxon();
-                TaxTreeDialog dlg = new TaxTreeDialog((JDialog) getTopLevelAncestor(), rootTaxon);
-                dlg.setSelectedTaxon((Taxon) getProperty(scopePropertyName));
-                dlg.setSize(400, 500);
-                dlg.setLocationRelativeTo(WizardScopePane.this);
-                dlg.setVisible(true);
-                if (dlg.isAccepted()) {
-                    Taxon selectedTaxon = dlg.getSelectedTaxon();
-                    if (selectedTaxon != null) {
-                        setProperty(scopePropertyName, selectedTaxon);
+                final HerbarModel herbarModel = (HerbarModel) getProperty( modelPropertyName );
+                final Taxon rootTaxon = herbarModel.getRootTaxon();
+                final TaxTreeDialog dlg = new TaxTreeDialog( (JDialog) getTopLevelAncestor(), rootTaxon );
+                dlg.setSelectedTaxon( (Taxon) getProperty( scopePropertyName ) );
+                dlg.setSize( 400, 500 );
+                dlg.setLocationRelativeTo( WizardScopePane.this );
+                dlg.setVisible( true );
+                if ( dlg.isAccepted() )
+                {
+                    final Taxon selectedTaxon = dlg.getSelectedTaxon();
+                    if ( selectedTaxon != null )
+                    {
+                        setProperty( scopePropertyName, selectedTaxon );
                     }
                 }
             }
         };
-        edit = createDefaultEdit(prefix, actionListener);
-        JPanel panel = createSimpleDisplayPanel(prefix, edit);
-        return panel;
+        edit = createDefaultEdit( prefix, actionListener );
+        return createSimpleDisplayPanel( prefix, edit );
     }
 
-    public void registerPropertyChangeListener(WizardModel model) {
-        model.addPropertyChangeListener(scopePropertyName, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                edit.setUserObject(event.getNewValue());
+    public void registerPropertyChangeListener( final WizardModel model )
+    {
+        model.addPropertyChangeListener( scopePropertyName, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent event )
+            {
+                edit.setUserObject( event.getNewValue() );
             }
-        });
+        } );
     }
 
     /**
      * This method should be overwritten to set the standard values.
      */
-    public void initDefaultValues() {
+    public void initDefaultValues()
+    {
         // try to set actual scope
-        Object scope = getProperty(scopePropertyName);
-        if (scope != null) {
-            edit.setUserObject(scope);
+        final Object scope = getProperty( scopePropertyName );
+        if ( scope != null )
+        {
+            edit.setUserObject( scope );
         }
     }
 }

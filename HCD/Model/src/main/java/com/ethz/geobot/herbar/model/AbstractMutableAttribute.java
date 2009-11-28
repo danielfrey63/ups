@@ -8,7 +8,6 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * <class description here>
  *
@@ -16,8 +15,8 @@ package com.ethz.geobot.herbar.model;
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
 public abstract class AbstractMutableAttribute
-        implements MorAttribute, Rankable {
-
+        implements MorAttribute, Rankable
+{
     // Interface MorAttribute
     public abstract int getId();
 
@@ -28,7 +27,7 @@ public abstract class AbstractMutableAttribute
     public abstract MorSubject getParentSubject();
 
     // Interface MorAttribute
-    public abstract MorValue getValue(int index)
+    public abstract MorValue getValue( int index )
             throws IndexOutOfBoundsException;
 
     // Interface MorAttribute
@@ -39,28 +38,28 @@ public abstract class AbstractMutableAttribute
      *
      * @param name the new name to set
      */
-    public abstract void setName(String name);
+    public abstract void setName( String name );
 
     /**
      * Sets the rank of this object.
      *
      * @param rank the new rank to set
      */
-    public abstract void setRank(int rank);
+    public abstract void setRank( int rank );
 
     /**
      * Sets the Values array of this object.
      *
      * @param values the new values to set
      */
-    public abstract void setValues(MorValue[] values);
+    public abstract void setValues( MorValue[] values );
 
     /**
      * Sets the parent MorSubject for this object.
      *
      * @param parent the new MorSubject to set as parent
      */
-    public abstract void setParentSubject(MorSubject parent);
+    public abstract void setParentSubject( MorSubject parent );
 }
 
 // $Log: AbstractMutableAttribute.java,v $

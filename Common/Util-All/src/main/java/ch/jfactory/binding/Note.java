@@ -29,7 +29,6 @@ import java.awt.Color;
  */
 public interface Note
 {
-
     /**
      * Message to hold. The purpose of a note is to hold a message, so this always should contain a valid value.
      *

@@ -9,15 +9,15 @@ import javax.swing.event.DocumentListener;
  */
 public abstract class SimpleDocumentListener implements DocumentListener
 {
-    public void insertUpdate(final DocumentEvent e)
+    public void insertUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    public void removeUpdate(final DocumentEvent e)
+    public void removeUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    public abstract void changedUpdate(DocumentEvent e);
+    public abstract void changedUpdate( DocumentEvent e );
 }

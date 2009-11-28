@@ -22,33 +22,35 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class EcologyDisplayer extends AttributeTreePanel {
-
-    EcologyDisplayer(HerbarModel hModel, Level stopper) {
-        super(hModel, stopper, Strings.getString("PROPERTY.ECOTEXT.TEXT"));
+public class EcologyDisplayer extends AttributeTreePanel
+{
+    EcologyDisplayer( final HerbarModel hModel, final Level stopper )
+    {
+        super( hModel, stopper, Strings.getString( "PROPERTY.ECOTEXT.TEXT" ) );
     }
 
-    public VirtualGraphTreeNodeFilter registerFilter() {
-        VirtualGraphTreeNodeFilter filter = new VirtualGraphTreeNodeFilter(EcoText.class,
+    public VirtualGraphTreeNodeFilter registerFilter()
+    {
+        VirtualGraphTreeNodeFilter filter = new VirtualGraphTreeNodeFilter( EcoText.class,
                 VirtualGraphTreeNodeFilter.VISIBILITY_VISIBLE,
                 VirtualGraphTreeNodeFilter.SELF_FLAT,
                 VirtualGraphTreeNodeFilter.CONSTRAINT_FREE,
                 null,
-                VirtualGraphTreeNodeFilter.LINE_RELATED);
+                VirtualGraphTreeNodeFilter.LINE_RELATED );
 
-        filter = new VirtualGraphTreeNodeFilter(Taxon.class,
+        filter = new VirtualGraphTreeNodeFilter( Taxon.class,
                 VirtualGraphTreeNodeFilter.VISIBILITY_VISIBLE,
                 VirtualGraphTreeNodeFilter.SELF_FLAT,
                 VirtualGraphTreeNodeFilter.CONSTRAINT_FREE,
                 new VirtualGraphTreeNodeFilter[]{filter},
-                VirtualGraphTreeNodeFilter.LINE_DESCENDANT);
+                VirtualGraphTreeNodeFilter.LINE_DESCENDANT );
 
-        filter = new VirtualGraphTreeNodeFilter(GraphNode.class,
+        filter = new VirtualGraphTreeNodeFilter( GraphNode.class,
                 VirtualGraphTreeNodeFilter.VISIBILITY_VISIBLE,
                 VirtualGraphTreeNodeFilter.SELF_FLAT,
                 VirtualGraphTreeNodeFilter.CONSTRAINT_FREE,
                 new VirtualGraphTreeNodeFilter[]{filter},
-                VirtualGraphTreeNodeFilter.LINE_DESCENDANT);
+                VirtualGraphTreeNodeFilter.LINE_DESCENDANT );
 
         return filter;
     }

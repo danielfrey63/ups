@@ -28,7 +28,6 @@ import javax.swing.SwingUtilities;
  */
 public class CheckThreadViolationRepaintManager extends RepaintManager
 {
-
     // it is recommended to pass the complete check
     private boolean completeCheck = true;
 
@@ -37,43 +36,43 @@ public class CheckThreadViolationRepaintManager extends RepaintManager
         return completeCheck;
     }
 
-    public void setCompleteCheck(final boolean completeCheck)
+    public void setCompleteCheck( final boolean completeCheck )
     {
         this.completeCheck = completeCheck;
     }
 
-    public synchronized void addInvalidComponent(final JComponent component)
+    public synchronized void addInvalidComponent( final JComponent component )
     {
-        checkThreadViolations(component);
-        super.addInvalidComponent(component);
+        checkThreadViolations( component );
+        super.addInvalidComponent( component );
     }
 
-    public void addDirtyRegion(final JComponent component, final int x, final int y, final int w, final int h)
+    public void addDirtyRegion( final JComponent component, final int x, final int y, final int w, final int h )
     {
-        checkThreadViolations(component);
-        super.addDirtyRegion(component, x, y, w, h);
+        checkThreadViolations( component );
+        super.addDirtyRegion( component, x, y, w, h );
     }
 
-    private void checkThreadViolations(final JComponent c)
+    private void checkThreadViolations( final JComponent c )
     {
-        if (!SwingUtilities.isEventDispatchThread() && (completeCheck || c.isShowing()))
+        if ( !SwingUtilities.isEventDispatchThread() && ( completeCheck || c.isShowing() ) )
         {
             final Exception exception = new Exception();
             boolean repaint = false;
             boolean fromSwing = false;
             final StackTraceElement[] stackTrace = exception.getStackTrace();
-            for (final StackTraceElement st : stackTrace)
+            for ( final StackTraceElement st : stackTrace )
             {
-                if (repaint && st.getClassName().startsWith("javax.swing."))
+                if ( repaint && st.getClassName().startsWith( "javax.swing." ) )
                 {
                     fromSwing = true;
                 }
-                if ("repaint".equals(st.getMethodName()))
+                if ( "repaint".equals( st.getMethodName() ) )
                 {
                     repaint = true;
                 }
             }
-            if (repaint && !fromSwing)
+            if ( repaint && !fromSwing )
             {
                 //no problems here, since repaint() is thread safe
                 return;

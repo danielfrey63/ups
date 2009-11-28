@@ -6,5 +6,5 @@ package ch.jfactory.model.graph.tree;
  */
 public abstract class AbsGraphTreeNodeFilter
 {
-    public abstract boolean isVisible(VirtualGraphTreeNode node);
+    public abstract boolean isVisible( VirtualGraphTreeNode node );
 }

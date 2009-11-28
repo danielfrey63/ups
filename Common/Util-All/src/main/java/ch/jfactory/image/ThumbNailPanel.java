@@ -29,17 +29,17 @@ public class ThumbNailPanel extends ScrollerPanel
 {
     private final static int THUMBHEIGHT = 50;
 
-    private static final Logger LOGGER = Logger.getLogger(ThumbNailPanel.class);
+    private static final Logger LOGGER = Logger.getLogger( ThumbNailPanel.class );
 
-    private JPanel panel;
+    private final JPanel panel;
 
-    private PictureCache cache;
+    private final PictureCache cache;
 
     private int size = 0;
 
     private ArrayList listener;
 
-    public ThumbNailPanel(final PictureCache cache)
+    public ThumbNailPanel( final PictureCache cache )
     {
         //this.setVerticalScrollBarPolicy(this.VERTICAL_SCROLLBAR_NEVER);
         panel = this;
@@ -54,10 +54,10 @@ public class ThumbNailPanel extends ScrollerPanel
         Insets i = getInsets();
         w += i.right + i.left;
         h += i.top + i.top;
-        i = CachedImageComponent.BORDER.getBorderInsets(null);
+        i = CachedImageComponent.BORDER.getBorderInsets( null );
         w += i.right + i.left;
         h += i.top + i.bottom;
-        return new Dimension(w, h);
+        return new Dimension( w, h );
     }
 
     public Dimension getMinimumSize()
@@ -67,10 +67,10 @@ public class ThumbNailPanel extends ScrollerPanel
         Insets i = getInsets();
         w += i.right + i.left;
         h += i.top + i.top;
-        i = CachedImageComponent.BORDER.getBorderInsets(null);
+        i = CachedImageComponent.BORDER.getBorderInsets( null );
         w += i.right + i.left;
         h += i.top + i.bottom;
-        return new Dimension(w, h);
+        return new Dimension( w, h );
     }
 
     public void initGUI()
@@ -84,112 +84,112 @@ public class ThumbNailPanel extends ScrollerPanel
         return panel.getComponentCount();
     }
 
-    public CachedImageComponent getComponentAt(final int i)
+    public CachedImageComponent getComponentAt( final int i )
     {
-        return (CachedImageComponent) panel.getComponent(i);
+        return (CachedImageComponent) panel.getComponent( i );
     }
 
-    public CachedImage getImageAt(final int i)
+    public CachedImage getImageAt( final int i )
     {
-        final CachedImageComponent ci = (CachedImageComponent) panel.getComponent(i);
+        final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( i );
         return ci.getImage();
     }
 
-    public void addImage(final String c, final String tooltip, final boolean revalidate)
+    public void addImage( final String c, final String tooltip, final boolean revalidate )
     {
-        for (int i = 0; i < panel.getComponentCount(); i++)
+        for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
-            if (!panel.getComponent(i).isVisible())
+            if ( !panel.getComponent( i ).isVisible() )
             {
-                final CachedImageComponent ci = (CachedImageComponent) panel.getComponent(i);
-                ci.setImage(c, true);
-                ci.setVisible(true);
-                ci.setToolTipText(tooltip);
-                if (revalidate)
+                final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( i );
+                ci.setImage( c, true );
+                ci.setVisible( true );
+                ci.setToolTipText( tooltip );
+                if ( revalidate )
                 {
                     revalidate();
                 }
                 return;
             }
         }
-        final CachedImageComponent ci = new CachedImageComponent(cache, THUMBHEIGHT);
-        ci.addMouseListener(new MouseAdapter()
+        final CachedImageComponent ci = new CachedImageComponent( cache, THUMBHEIGHT );
+        ci.addMouseListener( new MouseAdapter()
         {
-            public void mouseReleased(final MouseEvent e)
+            public void mouseReleased( final MouseEvent e )
             {
-                fireActionEvent((CachedImageComponent) e.getSource());
+                fireActionEvent( (CachedImageComponent) e.getSource() );
                 e.consume();
             }
-        });
-        panel.add(ci);
-        ci.setImage(c, true);
-        ci.setToolTipText(tooltip);
-        if (revalidate)
+        } );
+        panel.add( ci );
+        ci.setImage( c, true );
+        ci.setToolTipText( tooltip );
+        if ( revalidate )
         {
             revalidate();
         }
     }
 
-    public void addActionListener(final ActionListener l)
+    public void addActionListener( final ActionListener l )
     {
-        if (listener == null)
+        if ( listener == null )
         {
             listener = new ArrayList();
         }
-        listener.add(l);
+        listener.add( l );
     }
 
-    public void removeActionListener(final ActionListener l)
+    public void removeActionListener( final ActionListener l )
     {
-        listener.remove(l);
+        listener.remove( l );
     }
 
-    public void fireActionEvent(final CachedImageComponent ci)
+    public void fireActionEvent( final CachedImageComponent ci )
     {
-        if (listener == null)
+        if ( listener == null )
         {
             return;
         }
         ActionEvent e = null;
-        for (Object aListener : listener)
+        for ( final Object aListener : listener )
         {
             final ActionListener l = (ActionListener) aListener;
-            if (e == null)
+            if ( e == null )
             {
-                LOGGER.info("fireActionEvent " + ci.getImage().getName());
-                e = new ActionEvent(this, 0, ci.getImage().getName());
+                LOGGER.info( "fireActionEvent " + ci.getImage().getName() );
+                e = new ActionEvent( this, 0, ci.getImage().getName() );
 
             }
-            l.actionPerformed(e);
+            l.actionPerformed( e );
         }
     }
 
-    public void select(final CachedImage ci)
+    public void select( final CachedImage ci )
     {
-        for (int i = 0; i < panel.getComponentCount(); i++)
+        for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
-            final CachedImageComponent cic = (CachedImageComponent) panel.getComponent(i);
-            if (cic.getImage() == ci)
+            final CachedImageComponent cic = (CachedImageComponent) panel.getComponent( i );
+            if ( cic.getImage() == ci )
             {
-                cic.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+                cic.setBorder( BorderFactory.createLineBorder( Color.black, 2 ) );
             }
             else
             {
-                cic.setBorder(BorderFactory.createEmptyBorder());
+                cic.setBorder( BorderFactory.createEmptyBorder() );
             }
         }
         revalidate();
     }
 
-    public void removeImage(final String c)
+    public void removeImage( final String c )
     {
-        for (int i = 0; i < panel.getComponentCount(); i++)
+        for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
-            final CachedImageComponent ci = (CachedImageComponent) panel.getComponent(size++);
-            if (ci.getName().equals(c))
+            final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( size++ );
+            if ( ci.getName().equals( c ) )
             {
-                ci.setImage(null, true);
-                ci.setVisible(false);
+                ci.setImage( null, true );
+                ci.setVisible( false );
                 revalidate();
                 return;
             }
@@ -198,14 +198,14 @@ public class ThumbNailPanel extends ScrollerPanel
 
     public void removeAll()
     {
-        for (int i = 0; i < panel.getComponentCount(); i++)
+        for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
-            final Component c = panel.getComponent(i);
-            if (c instanceof CachedImageComponent)
+            final Component c = panel.getComponent( i );
+            if ( c instanceof CachedImageComponent )
             {
                 final CachedImageComponent ci = (CachedImageComponent) c;
-                ci.setImage(null, true);
-                ci.setVisible(false);
+                ci.setImage( null, true );
+                ci.setVisible( false );
             }
         }
         revalidate();

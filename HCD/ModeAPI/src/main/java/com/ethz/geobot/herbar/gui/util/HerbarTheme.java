@@ -28,139 +28,164 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class HerbarTheme extends DefaultMetalTheme {
+public class HerbarTheme extends DefaultMetalTheme
+{
+    public static final String FONTFACE = Strings.getString( "APPLICATION.FONT.FACE" );
 
-    public static final String FONTFACE = Strings.getString("APPLICATION.FONT.FACE");
-    public static final int FONTSIZE = Integer.parseInt(Strings.getString("APPLICATION.FONT.SIZE"));
-    public static final HerbarTheme THEME = new HerbarTheme(FONTFACE, FONTSIZE);
+    public static final int FONTSIZE = Integer.parseInt( Strings.getString( "APPLICATION.FONT.SIZE" ) );
+
+    public static final HerbarTheme THEME = new HerbarTheme( FONTFACE, FONTSIZE );
 
     static final int CONTROL_TEXT_FONT = 0;
+
     static final int SYSTEM_TEXT_FONT = 1;
+
     static final int USER_TEXT_FONT = 2;
+
     static final int MENU_TEXT_FONT = 3;
+
     static final int WINDOW_TITLE_FONT = 4;
+
     static final int SUB_TEXT_FONT = 5;
 
-    private FontDelegate fontDelegate;
+    private final FontDelegate fontDelegate;
 
-    private HerbarTheme(String name, int size) {
-        fontDelegate = new FontDelegate(name, size);
+    private HerbarTheme( final String name, final int size )
+    {
+        fontDelegate = new FontDelegate( name, size );
 
-        MetalLookAndFeel.setCurrentTheme(this);
-        UIManager.put("TabbedPane.contentBorderInsets", new Insets(1, 1, 1, 1));
-        UIManager.put("TabbedPane.shadow", UIManager.get("TabbedPane.background"));
+        MetalLookAndFeel.setCurrentTheme( this );
+        UIManager.put( "TabbedPane.contentBorderInsets", new Insets( 1, 1, 1, 1 ) );
+        UIManager.put( "TabbedPane.shadow", UIManager.get( "TabbedPane.background" ) );
 
-        UIManager.put("Tree.background", getBackground2());
+        UIManager.put( "Tree.background", getBackground2() );
 
-        UIManager.put("ScrollBar.border", BorderFactory.createEmptyBorder());
-        UIManager.put("ScrollBar.viewportBorder", new BorderUIResource(new LineBorder(Color.green, 3)));
-        UIManager.put("ScrollPane.border", new ThinBevelBorder(BevelDirection.LOWERED));
+        UIManager.put( "ScrollBar.border", BorderFactory.createEmptyBorder() );
+        UIManager.put( "ScrollBar.viewportBorder", new BorderUIResource( new LineBorder( Color.green, 3 ) ) );
+        UIManager.put( "ScrollPane.border", new ThinBevelBorder( BevelDirection.LOWERED ) );
 
-        UIManager.put("SplitPane.dividerSize", new Integer(Strings.getString("APPLICATION.DIVIDER.SIZE")));
+        UIManager.put( "SplitPane.dividerSize", new Integer( Strings.getString( "APPLICATION.DIVIDER.SIZE" ) ) );
 //        UIManager.put("SplitPane.border", new BorderUIResource(new LineBorder(Color.orange, 3)));
 
-        UIManager.put("OptionPane.yesButtonText", Strings.getString("BUTTON.YES.TEXT"));
-        UIManager.put("OptionPane.noButtonText", Strings.getString("BUTTON.NO.TEXT"));
-        UIManager.put("OptionPane.cancelButtonText", Strings.getString("BUTTON.CANCEL.TEXT"));
+        UIManager.put( "OptionPane.yesButtonText", Strings.getString( "BUTTON.YES.TEXT" ) );
+        UIManager.put( "OptionPane.noButtonText", Strings.getString( "BUTTON.NO.TEXT" ) );
+        UIManager.put( "OptionPane.cancelButtonText", Strings.getString( "BUTTON.CANCEL.TEXT" ) );
 
 //        UIManager.put("MenuBar.background", UIManager.getColor("MenuItem.selectionBackground"));
 //        UIManager.put("Menu.background", UIManager.getColor("MenuItem.selectionBackground"));
 
-        Font font = new Font(FONTFACE, Font.PLAIN, FONTSIZE);
-        Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof FontUIResource) {
-                UIManager.put(key, font);
+        final Font font = new Font( FONTFACE, Font.PLAIN, FONTSIZE );
+        final Enumeration keys = UIManager.getDefaults().keys();
+        while ( keys.hasMoreElements() )
+        {
+            final Object key = keys.nextElement();
+            final Object value = UIManager.get( key );
+            if ( value instanceof FontUIResource )
+            {
+                UIManager.put( key, font );
             }
         }
     }
 
-    public String getName() {
+    public String getName()
+    {
         return super.getName();
     }
 
-    public FontUIResource getControlTextFont() {
-        return getFont(CONTROL_TEXT_FONT);
+    public FontUIResource getControlTextFont()
+    {
+        return getFont( CONTROL_TEXT_FONT );
     }
 
-    public FontUIResource getSystemTextFont() {
-        return getFont(SYSTEM_TEXT_FONT);
+    public FontUIResource getSystemTextFont()
+    {
+        return getFont( SYSTEM_TEXT_FONT );
     }
 
-    public FontUIResource getUserTextFont() {
-        return getFont(USER_TEXT_FONT);
+    public FontUIResource getUserTextFont()
+    {
+        return getFont( USER_TEXT_FONT );
     }
 
-    public FontUIResource getMenuTextFont() {
-        return getFont(MENU_TEXT_FONT);
+    public FontUIResource getMenuTextFont()
+    {
+        return getFont( MENU_TEXT_FONT );
     }
 
-    public FontUIResource getWindowTitleFont() {
-        return getFont(WINDOW_TITLE_FONT);
+    public FontUIResource getWindowTitleFont()
+    {
+        return getFont( WINDOW_TITLE_FONT );
     }
 
-    public FontUIResource getSubTextFont() {
-        return getFont(SUB_TEXT_FONT);
+    public FontUIResource getSubTextFont()
+    {
+        return getFont( SUB_TEXT_FONT );
     }
 
-    private FontUIResource getFont(int key) {
-        return fontDelegate.getFont(key);
+    private FontUIResource getFont( final int key )
+    {
+        return fontDelegate.getFont( key );
     }
 
-    protected ColorUIResource getPrimary1() {
+    protected ColorUIResource getPrimary1()
+    {
         // borderMenu, title, labelText, statusbartext, borderTabs
         // dunkel
-        return new ColorUIResource(30, 40, 40);
+        return new ColorUIResource( 30, 40, 40 );
     }
 
-    protected ColorUIResource getPrimary2() {
+    protected ColorUIResource getPrimary2()
+    {
         // desktop; aktive menus (rollovers), borderButton onclick
         // mittel
-        return new ColorUIResource(142, 172, 172);
+        return new ColorUIResource( 142, 172, 172 );
     }
 
-    protected ColorUIResource getPrimary3() {
+    protected ColorUIResource getPrimary3()
+    {
         // jframe menubar, default ordner in tree
         // mittel
-        return new ColorUIResource(205, 215, 207);
+        return new ColorUIResource( 205, 215, 207 );
     }
 
-    protected ColorUIResource getSecondary1() {
+    protected ColorUIResource getSecondary1()
+    {
         // thin outer bordersTabs, Panels and Menu
         // dunkel
 //        return new ColorUIResource(176, 203, 191);
-        return new ColorUIResource(100, 116, 116);
+        return new ColorUIResource( 100, 116, 116 );
     }
 
-    protected ColorUIResource getSecondary2() {
+    protected ColorUIResource getSecondary2()
+    {
         // linie unter menubar, Background buttonsOnClick, Tabs passiv
         // dunkel
 //        return new ColorUIResource(182,201,192);
-        return new ColorUIResource(176, 203, 191);
+        return new ColorUIResource( 176, 203, 191 );
     }
 
-    protected ColorUIResource getSecondary3() {
+    protected ColorUIResource getSecondary3()
+    {
         // defaultGround Buttons, Panels, active Tabs, inner thin Border tabs,
         // panels
         // mittel bis hell
-        return new ColorUIResource(224, 236, 231);
+        return new ColorUIResource( 224, 236, 231 );
     }
 
-    public static Color getBackground2() {
-        return new ColorUIResource(232, 241, 237); //UIManager.getColor("Tree.background");
+    public static Color getBackground2()
+    {
+        return new ColorUIResource( 232, 241, 237 ); //UIManager.getColor("Tree.background");
     }
 
-
-    private static class FontDelegate {
-
+    private static class FontDelegate
+    {
         /**
          * Styles for the fonts.
          */
         private static final int[] fontStyles = {
                 Font.PLAIN, Font.PLAIN, Font.PLAIN, Font.PLAIN, Font.PLAIN, Font.PLAIN
         };
+
         /**
          * Sizes for the fonts.
          */
@@ -168,18 +193,21 @@ public class HerbarTheme extends DefaultMetalTheme {
                 2, 2, 2, 2, 2, 0
         };
 
-        private static int[] defaultMapping = {
+        private static final int[] defaultMapping = {
                 CONTROL_TEXT_FONT, SYSTEM_TEXT_FONT,
                 USER_TEXT_FONT, CONTROL_TEXT_FONT,
                 CONTROL_TEXT_FONT, SUB_TEXT_FONT
         };
+
         FontUIResource fonts[];
 
-        private int size;
-        private String name;
+        private final int size;
+
+        private final String name;
 
         // menu and window are mapped to controlFont
-        public FontDelegate(String name, int size) {
+        public FontDelegate( final String name, final int size )
+        {
             fonts = new FontUIResource[6];
             this.name = name;
             this.size = size;
@@ -188,41 +216,48 @@ public class HerbarTheme extends DefaultMetalTheme {
         /**
          * Returns the ideal font name for the font identified by key.
          */
-        String getDefaultFontName(int key) {
+        String getDefaultFontName( final int key )
+        {
             return name;
         }
 
         /**
          * Returns the ideal font size for the font identified by key.
          */
-        int getDefaultFontSize(int key) {
-            return fontSizes[ key ] + size;
+        int getDefaultFontSize( final int key )
+        {
+            return fontSizes[key] + size;
         }
 
         /**
          * Returns the ideal font style for the font identified by key.
          */
-        static int getDefaultFontStyle(int key) {
-            return fontStyles[ key ];
+        static int getDefaultFontStyle( final int key )
+        {
+            return fontStyles[key];
         }
 
-        public FontUIResource getFont(int type) {
-            type = defaultMapping[ type ];
-            if (fonts[ type ] == null) {
-                Font f = getPrivilegedFont(type);
+        public FontUIResource getFont( int type )
+        {
+            type = defaultMapping[type];
+            if ( fonts[type] == null )
+            {
+                Font f = getPrivilegedFont( type );
 
-                if (f == null) {
-                    f = new Font(getDefaultFontName(type),
-                            getDefaultFontStyle(type),
-                            getDefaultFontSize(type));
+                if ( f == null )
+                {
+                    f = new Font( getDefaultFontName( type ),
+                            getDefaultFontStyle( type ),
+                            getDefaultFontSize( type ) );
                 }
-                fonts[ type ] = new FontUIResource(f);
+                fonts[type] = new FontUIResource( f );
             }
-            return fonts[ type ];
+            return fonts[type];
         }
 
-        static String getDefaultPropertyName(int key) {
-            return defaultNames[ key ];
+        static String getDefaultPropertyName( final int key )
+        {
+            return defaultNames[key];
         }
 
         private static final String[] defaultNames = {
@@ -238,15 +273,17 @@ public class HerbarTheme extends DefaultMetalTheme {
          * This is the same as invoking <code>Font.getFont(key)</code>, with the exception that it is wrapped inside a
          * <code>doPrivileged</code> call.
          */
-        protected Font getPrivilegedFont(final int key) {
-            return (Font) java.security.AccessController.doPrivileged(new java.security.PrivilegedAction() {
-                public Object run() {
-                    return Font.getFont(getDefaultPropertyName(key));
+        protected Font getPrivilegedFont( final int key )
+        {
+            return (Font) java.security.AccessController.doPrivileged( new java.security.PrivilegedAction()
+            {
+                public Object run()
+                {
+                    return Font.getFont( getDefaultPropertyName( key ) );
                 }
-            });
+            } );
         }
     }
-
 
 }
 

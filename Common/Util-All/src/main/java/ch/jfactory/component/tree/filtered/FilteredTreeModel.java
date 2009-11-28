@@ -33,28 +33,31 @@ import javax.swing.tree.TreePath;
  */
 public class FilteredTreeModel extends AbstractTreeModel
 {
+    /**
+     * The list of filters.
+     */
+    private final ArrayList<ViewFilter> filters = new ArrayList<ViewFilter>();
 
-    /** The list of filters. */
-    private ArrayList<ViewFilter> filters = new ArrayList<ViewFilter>();
-
-    /** The model to which the implementation is delegated to. */
-    private DelegatingTreeModel delegate;
+    /**
+     * The model to which the implementation is delegated to.
+     */
+    private final DelegatingTreeModel delegate;
 
     /**
      * Constructs an object by using the given root node.
      *
      * @param root the root node
      */
-    public FilteredTreeModel(final MutableTreeNode root)
+    public FilteredTreeModel( final MutableTreeNode root )
     {
-        super(root);
-        this.delegate = new NodeBasedFilteredTreeModel(root);
+        super( root );
+        this.delegate = new NodeBasedFilteredTreeModel( root );
     }
 
-    public FilteredTreeModel(final NotifiableTreeModel model)
+    public FilteredTreeModel( final NotifiableTreeModel model )
     {
-        super(model.getRoot());
-        this.delegate = new ModelBasedFilteredTreeModel(model);
+        super( model.getRoot() );
+        this.delegate = new ModelBasedFilteredTreeModel( model );
     }
 
     /**
@@ -63,15 +66,15 @@ public class FilteredTreeModel extends AbstractTreeModel
      * @param node the node to check whether it is shown or not
      * @return whether the node is showen or not
      */
-    public boolean isShown(final Object node)
+    public boolean isShown( final Object node )
     {
         final int size = filters.size();
         boolean show = true;
 
-        for (int i = 0; i < size; i++)
+        for ( int i = 0; i < size; i++ )
         {
-            final ViewFilter filter = filters.get(i);
-            show &= filter.isShown(node);
+            final ViewFilter filter = filters.get( i );
+            show &= filter.isShown( node );
         }
 
         return show;
@@ -82,10 +85,10 @@ public class FilteredTreeModel extends AbstractTreeModel
      *
      * @param filter the filter to add
      */
-    public void addViewFilter(final ViewFilter filter)
+    public void addViewFilter( final ViewFilter filter )
     {
-        filters.add(filter);
-        delegate.reload(new TreePath(delegate.getRoot()));
+        filters.add( filter );
+        delegate.reload( new TreePath( delegate.getRoot() ) );
     }
 
     /**
@@ -93,15 +96,15 @@ public class FilteredTreeModel extends AbstractTreeModel
      *
      * @param filter the filter to remove
      */
-    public void removeViewFilter(final ViewFilter filter)
+    public void removeViewFilter( final ViewFilter filter )
     {
-        filters.remove(filter);
-        delegate.reload(new TreePath(delegate.getRoot()));
+        filters.remove( filter );
+        delegate.reload( new TreePath( delegate.getRoot() ) );
     }
 
-    public void reload(final Object node)
+    public void reload( final Object node )
     {
-        delegate.reload(new TreePath(delegate.getPath(node)));
+        delegate.reload( new TreePath( delegate.getPath( node ) ) );
     }
 
     /**
@@ -109,26 +112,25 @@ public class FilteredTreeModel extends AbstractTreeModel
      *
      * @param showEmptyParents whether to show empty parents
      */
-    public void setShowEmptyParents(final boolean showEmptyParents)
+    public void setShowEmptyParents( final boolean showEmptyParents )
     {
-        final boolean showEmptyParents1 = showEmptyParents;
     }
 
     //--- TreeModel implementations
 
-    public int getChildCount(final Object parent)
+    public int getChildCount( final Object parent )
     {
-        return delegate.getChildCount(parent);
+        return delegate.getChildCount( parent );
     }
 
-    public Object getChild(final Object parent, final int index)
+    public Object getChild( final Object parent, final int index )
     {
-        return delegate.getChild(parent, index);
+        return delegate.getChild( parent, index );
     }
 
-    public void valueForPathChanged(final TreePath path, final Object newValue)
+    public void valueForPathChanged( final TreePath path, final Object newValue )
     {
-        delegate.valueForPathChanged(path, newValue);
+        delegate.valueForPathChanged( path, newValue );
     }
 
     //--- AbstractTreeModel overrides
@@ -138,47 +140,48 @@ public class FilteredTreeModel extends AbstractTreeModel
         return delegate.getRoot();
     }
 
-    public boolean isLeaf(final Object node)
+    public boolean isLeaf( final Object node )
     {
-        return delegate.isLeaf(node);
+        return delegate.isLeaf( node );
     }
 
-    public void addTreeModelListener(final TreeModelListener l)
+    public void addTreeModelListener( final TreeModelListener l )
     {
-        delegate.addTreeModelListener(l);
+        delegate.addTreeModelListener( l );
     }
 
-    public void removeTreeModelListener(final TreeModelListener l)
+    public void removeTreeModelListener( final TreeModelListener l )
     {
-        delegate.removeTreeModelListener(l);
+        delegate.removeTreeModelListener( l );
     }
 
-    public int getIndexOfChild(final Object parent, final Object child)
+    public int getIndexOfChild( final Object parent, final Object child )
     {
-        return delegate.getIndexOfChild(parent, child);
+        return delegate.getIndexOfChild( parent, child );
     }
 
-    protected void remove(final Object child, final TreePath parentPath)
+    protected void remove( final Object child, final TreePath parentPath )
     {
-        delegate.removeFromParent(parentPath.pathByAddingChild(child));
+        delegate.removeFromParent( parentPath.pathByAddingChild( child ) );
     }
 
-    protected void insert(final TreePath childPath, final TreePath parentPath, final int pos)
+    protected void insert( final TreePath childPath, final TreePath parentPath, final int pos )
     {
-        delegate.insertInto(childPath, parentPath, pos);
+        delegate.insertInto( childPath, parentPath, pos );
     }
 
     //--- Utilities
 
     private class NodeBasedFilteredTreeModel extends DelegatingTreeModel
     {
+        /**
+         * The root node.
+         */
+        private final MutableTreeNode root;
 
-        /** The root node. */
-        private MutableTreeNode root;
-
-        public NodeBasedFilteredTreeModel(final MutableTreeNode root)
+        public NodeBasedFilteredTreeModel( final MutableTreeNode root )
         {
-            super(root);
+            super( root );
             this.root = root;
         }
 
@@ -189,42 +192,42 @@ public class FilteredTreeModel extends AbstractTreeModel
             return root;
         }
 
-        public Object getChild(final Object parent, final int index)
+        public Object getChild( final Object parent, final int index )
         {
             int count = 0;
             final TreeNode node = (TreeNode) parent;
-            for (int i = 0; i < node.getChildCount(); i++)
+            for ( int i = 0; i < node.getChildCount(); i++ )
             {
-                final TreeNode child = node.getChildAt(i);
-                if (isShown(child))
+                final TreeNode child = node.getChildAt( i );
+                if ( isShown( child ) )
                 {
-                    if (count++ == index)
+                    if ( count++ == index )
                     {
                         return child;
                     }
                 }
                 else
                 {
-                    final Object child2 = getChild(child, index - count);
-                    if (child2 != null)
+                    final Object child2 = getChild( child, index - count );
+                    if ( child2 != null )
                     {
                         return child2;
                     }
-                    count += getChildCount(child);
+                    count += getChildCount( child );
                 }
             }
             return null;
         }
 
-        public int getIndexOfChild(final Object parent, final Object child)
+        public int getIndexOfChild( final Object parent, final Object child )
         {
             final TreeNode node = (TreeNode) parent;
             int j = 0;
-            for (int i = 0; i < node.getChildCount(); i++)
+            for ( int i = 0; i < node.getChildCount(); i++ )
             {
-                if (isShown(child))
+                if ( isShown( child ) )
                 {
-                    if (child.equals(node.getChildAt(i)))
+                    if ( child.equals( node.getChildAt( i ) ) )
                     {
                         return j;
                     }
@@ -234,47 +237,47 @@ public class FilteredTreeModel extends AbstractTreeModel
             return -1;
         }
 
-        public int getChildCount(final Object parent)
+        public int getChildCount( final Object parent )
         {
             int count = 0;
             final TreeNode node = (TreeNode) parent;
-            for (int i = 0; i < node.getChildCount(); i++)
+            for ( int i = 0; i < node.getChildCount(); i++ )
             {
-                final TreeNode child = node.getChildAt(i);
+                final TreeNode child = node.getChildAt( i );
 
-                if (isShown(child))
+                if ( isShown( child ) )
                 {
                     count++;
                 }
                 else
                 {
-                    count += getChildCount(child);
+                    count += getChildCount( child );
                 }
             }
             return count;
         }
 
-        public boolean isLeaf(final Object obj)
+        public boolean isLeaf( final Object obj )
         {
             final TreeNode node = (TreeNode) obj;
             return node.isLeaf();
         }
 
-        public void valueForPathChanged(final TreePath path, final Object newValue)
+        public void valueForPathChanged( final TreePath path, final Object newValue )
         {
             final MutableTreeNode node = (MutableTreeNode) path.getLastPathComponent();
-            node.setUserObject(newValue);
-            nodeChanged(node);
+            node.setUserObject( newValue );
+            nodeChanged( node );
         }
 
         //--- AbstractTreeModel implementation
 
-        protected void remove(final Object child, final TreePath parentPath)
+        protected void remove( final Object child, final TreePath parentPath )
         {
             throw new UnsupportedOperationException();
         }
 
-        protected void insert(final TreePath childPath, final TreePath parentPath, final int pos)
+        protected void insert( final TreePath childPath, final TreePath parentPath, final int pos )
         {
             throw new UnsupportedOperationException();
         }
@@ -287,17 +290,17 @@ public class FilteredTreeModel extends AbstractTreeModel
          * @param object the node to return the path for
          * @return the visible path of the node
          */
-        public Object[] getPath(final Object object)
+        public Object[] getPath( final Object object )
         {
             TreeNode node = (TreeNode) object;
             final ArrayList<TreeNode> path = new ArrayList<TreeNode>();
-            path.add(node);
+            path.add( node );
 
-            while ((node = node.getParent()) != null)
+            while ( ( node = node.getParent() ) != null )
             {
-                if (isShown(node))
+                if ( isShown( node ) )
                 {
-                    path.add(0, node);
+                    path.add( 0, node );
                 }
             }
 
@@ -307,69 +310,70 @@ public class FilteredTreeModel extends AbstractTreeModel
 
     private class ModelBasedFilteredTreeModel extends DelegatingTreeModel
     {
+        /**
+         * Model behind.
+         */
+        private final NotifiableTreeModel model;
 
-        /** Model behind. */
-        private NotifiableTreeModel model;
+        private final Map<Object, Object> parents = new HashMap<Object, Object>();
 
-        private Map<Object, Object> parents = new HashMap<Object, Object>();
-
-        public ModelBasedFilteredTreeModel(final NotifiableTreeModel model)
+        public ModelBasedFilteredTreeModel( final NotifiableTreeModel model )
         {
-            super(model.getRoot());
+            super( model.getRoot() );
             this.model = model;
         }
 
         //--- TreeModel interface
 
-        public int getChildCount(final Object parent)
+        public int getChildCount( final Object parent )
         {
             int count = 0;
-            for (int i = 0; i < model.getChildCount(parent); i++)
+            for ( int i = 0; i < model.getChildCount( parent ); i++ )
             {
-                final Object child = model.getChild(parent, i);
-                if (isShown(child))
+                final Object child = model.getChild( parent, i );
+                if ( isShown( child ) )
                 {
                     count++;
                 }
                 else
                 {
-                    count += getChildCount(child);
+                    count += getChildCount( child );
                 }
             }
             return count;
         }
 
-        public Object getChild(final Object parent, final int index)
+        public Object getChild( final Object parent, final int index )
         {
             int count = 0;
-            for (int i = 0; i < model.getChildCount(parent); i++)
+            for ( int i = 0; i < model.getChildCount( parent ); i++ )
             {
-                final Object child = model.getChild(parent, i);
-                if (isShown(child))
+                final Object child = model.getChild( parent, i );
+                if ( isShown( child ) )
                 {
-                    if (count++ == index)
+                    if ( count++ == index )
                     {
-                        parents.put(child, parent);
+                        parents.put( child, parent );
                         return child;
                     }
                 }
                 else
                 {
-                    final Object child2 = getChild(child, index - count);
-                    if (child2 != null)
+                    final Object child2 = getChild( child, index - count );
+                    if ( child2 != null )
                     {
-                        parents.put(child2, parent);
+                        parents.put( child2, parent );
                         return child2;
                     }
-                    count += getChildCount(child);
+                    count += getChildCount( child );
                 }
             }
             return null;
         }
 
-        public void valueForPathChanged(final TreePath path, final Object newValue)
+        public void valueForPathChanged( final TreePath path, final Object newValue )
         {
-            model.valueForPathChanged(path, newValue);
+            model.valueForPathChanged( path, newValue );
         }
 
         //--- AbstractTreeModel overrides
@@ -379,16 +383,16 @@ public class FilteredTreeModel extends AbstractTreeModel
             return model.getRoot();
         }
 
-        public boolean isLeaf(final Object node)
+        public boolean isLeaf( final Object node )
         {
-            return model.isLeaf(node);
+            return model.isLeaf( node );
         }
 
-        public int getIndexOfChild(final Object parent, final Object child)
+        public int getIndexOfChild( final Object parent, final Object child )
         {
-            for (int i = 0; i < getChildCount(parent); i++)
+            for ( int i = 0; i < getChildCount( parent ); i++ )
             {
-                if (child == getChild(parent, i))
+                if ( child == getChild( parent, i ) )
                 {
                     return i;
                 }
@@ -396,27 +400,27 @@ public class FilteredTreeModel extends AbstractTreeModel
             return -1;
         }
 
-        protected void remove(final Object child, final TreePath parentPath)
+        protected void remove( final Object child, final TreePath parentPath )
         {
             throw new UnsupportedOperationException();
         }
 
-        protected void insert(final TreePath childPath, final TreePath parentPath, final int pos)
+        protected void insert( final TreePath childPath, final TreePath parentPath, final int pos )
         {
             throw new UnsupportedOperationException();
         }
 
         //--- DelegatingTreeModel interface
 
-        public Object[] getPath(final Object object)
+        public Object[] getPath( final Object object )
         {
             final List<Object> result = new ArrayList<Object>();
-            result.add(object);
-            Object parent = parents.get(object);
-            while (parent != null)
+            result.add( object );
+            Object parent = parents.get( object );
+            while ( parent != null )
             {
-                result.add(0, parent);
-                parent = parents.get(parent);
+                result.add( 0, parent );
+                parent = parents.get( parent );
             }
             return result.toArray();
         }
@@ -424,12 +428,11 @@ public class FilteredTreeModel extends AbstractTreeModel
 
     private abstract class DelegatingTreeModel extends AbstractTreeModel
     {
-
-        public DelegatingTreeModel(final Object object)
+        public DelegatingTreeModel( final Object object )
         {
-            super(object);
+            super( object );
         }
 
-        public abstract Object[] getPath(final Object object);
+        public abstract Object[] getPath( final Object object );
     }
 }

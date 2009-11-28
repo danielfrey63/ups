@@ -47,103 +47,128 @@ import org.jdesktop.swingx.treetable.TreeTableModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class InvoiceModel extends Model {
-
+public class InvoiceModel extends Model
+{
     public static final String PROPERTYNAME_INVOICESMODIFIED = "modifyInvoice";
-    private ArrayList invoices = new ArrayList();
+
+    private final ArrayList invoices = new ArrayList();
 
     public static final String PROPERTYNAME_TABLEMODEL = "treeTableModel";
-    private InvoiceTreeTableModel treeTableModel = new InvoiceTreeTableModel("Root");
+
+    private final InvoiceTreeTableModel treeTableModel = new InvoiceTreeTableModel( "Root" );
 
     public static final String PROPERTYNAME_CURRENTINVOICE = "currentInvoice";
+
     private Invoice currentInvoice;
 
-    private ListSelectionModel tableSelectionModel = new DefaultListSelectionModel();
+    private final ListSelectionModel tableSelectionModel = new DefaultListSelectionModel();
 
-    private TreeSelectionModel treeSelectionModel = new DefaultTreeSelectionModel();
-    private ValueModel entry2InvoiceMap;
+    private final TreeSelectionModel treeSelectionModel = new DefaultTreeSelectionModel();
 
-    public InvoiceModel(final ValueModel entry2InvoiceMap) {
+    private final ValueModel entry2InvoiceMap;
+
+    public InvoiceModel( final ValueModel entry2InvoiceMap )
+    {
         this.entry2InvoiceMap = entry2InvoiceMap;
-        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        treeSelectionModel.setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
     }
 
-    public List getInvoices() {
+    public List getInvoices()
+    {
         return invoices;
     }
 
-    public void addInvoice(final Invoice invoice) {
-        invoices.add(invoice);
-        firePropertyChange(PROPERTYNAME_INVOICESMODIFIED, null, invoice);
+    public void addInvoice( final Invoice invoice )
+    {
+        invoices.add( invoice );
+        firePropertyChange( PROPERTYNAME_INVOICESMODIFIED, null, invoice );
     }
 
-    public void deleteInvoice(final int index) {
-        final Object invoice = invoices.remove(index);
-        firePropertyChange(PROPERTYNAME_INVOICESMODIFIED, invoice, null);
+    public void deleteInvoice( final int index )
+    {
+        final Object invoice = invoices.remove( index );
+        firePropertyChange( PROPERTYNAME_INVOICESMODIFIED, invoice, null );
     }
 
-    public int getIndexOfInvoice(final Invoice invoice) {
-        return invoices.indexOf(invoice);
+    public int getIndexOfInvoice( final Invoice invoice )
+    {
+        return invoices.indexOf( invoice );
     }
 
-    public Invoice getInvoice(final int index) {
-        return (Invoice) invoices.get(index);
+    public Invoice getInvoice( final int index )
+    {
+        return (Invoice) invoices.get( index );
     }
 
-    public ListSelectionModel getTableSelectionModel() {
+    public ListSelectionModel getTableSelectionModel()
+    {
         return tableSelectionModel;
     }
 
-    public TreeSelectionModel getTreeSelectionModel() {
+    public TreeSelectionModel getTreeSelectionModel()
+    {
         return treeSelectionModel;
     }
 
-    public InvoiceTreeTableModel getTreeTableModel() {
+    public InvoiceTreeTableModel getTreeTableModel()
+    {
         return treeTableModel;
     }
 
-    public void resetTreeTableModel() {
+    public void resetTreeTableModel()
+    {
         treeTableModel.parent2ChildrenMap = new HashMap();
         treeTableModel.parentsMap = new MultiKeyMap();
     }
 
-    public ValueModel getEntry2InvoiceMap() {
+    public ValueModel getEntry2InvoiceMap()
+    {
         return entry2InvoiceMap;
     }
 
-    public Invoice getCurrentInvoice() {
+    public Invoice getCurrentInvoice()
+    {
         return currentInvoice;
     }
 
-    public void setCurrentInvoice(final Invoice currentInvoice) {
+    public void setCurrentInvoice( final Invoice currentInvoice )
+    {
         final Invoice old = getCurrentInvoice();
         this.currentInvoice = currentInvoice;
-        firePropertyChange(PROPERTYNAME_CURRENTINVOICE, old, currentInvoice);
+        firePropertyChange( PROPERTYNAME_CURRENTINVOICE, old, currentInvoice );
     }
 
-    public class InvoiceTreeTableModel extends AbstractTreeModel implements TreeTableModel {
+    public class InvoiceTreeTableModel extends AbstractTreeModel implements TreeTableModel
+    {
+        private final String[] columnNames = {"Rechungsnummer", "Arbeit", "Datum 1", "Datum 2"};
 
-        private String[] columnNames = {"Rechungsnummer", "Arbeit", "Datum 1", "Datum 2"};
         private MultiKeyMap parentsMap = new MultiKeyMap();
+
         private Map parent2ChildrenMap = new HashMap();
+
         private static final String TIME_DIFFERENCE_PATTERN = "HH:mm:ss";
 
-        public InvoiceTreeTableModel(Object root) {
-            super(root);
+        public InvoiceTreeTableModel( final Object root )
+        {
+            super( root );
         }
 
         // AbstractTreeModel
 
-        protected void remove(Object child, TreePath parentPath) {
+        protected void remove( final Object child, final TreePath parentPath )
+        {
         }
 
-        protected void insert(TreePath childPath, TreePath parentPath, int pos) {
+        protected void insert( final TreePath childPath, final TreePath parentPath, final int pos )
+        {
         }
 
         // TreeTableModel
 
-        public Class getColumnClass(int column) {
-            switch (column) {
+        public Class getColumnClass( final int column )
+        {
+            switch ( column )
+            {
                 case 0:
                     return TreeTableModel.class;
                 case 1:
@@ -156,12 +181,14 @@ public class InvoiceModel extends Model {
             }
         }
 
-        public int getColumnCount() {
+        public int getColumnCount()
+        {
             return 4;
         }
 
-        public String getColumnName(int column) {
-            return columnNames[ column ];
+        public String getColumnName( final int column )
+        {
+            return columnNames[column];
         }
 
         public int getHierarchicalColumn()
@@ -169,20 +196,25 @@ public class InvoiceModel extends Model {
             return 0;
         }
 
-        public Object getValueAt(Object node, int column) {
-            if (node instanceof Invoice) {
+        public Object getValueAt( final Object node, final int column )
+        {
+            if ( node instanceof Invoice )
+            {
                 final Invoice invoice = (Invoice) node;
-                switch (column) {
+                switch ( column )
+                {
                     case 0:
                         return invoice.getNumber();
                     case 1:
                         final Collection entries = invoice.getEntries();
-                        if (entries == null) {
+                        if ( entries == null )
+                        {
                             return "0";
                         }
-                        else {
-                            final IFEntry[] entriesArray = (IFEntry[]) entries.toArray(new IFEntry[0]);
-                            return DateUtils.dateDifference(StatUtils.sumAll(entriesArray, 0), TIME_DIFFERENCE_PATTERN);
+                        else
+                        {
+                            final IFEntry[] entriesArray = (IFEntry[]) entries.toArray( new IFEntry[0] );
+                            return DateUtils.dateDifference( StatUtils.sumAll( entriesArray, 0 ), TIME_DIFFERENCE_PATTERN );
                         }
                     case 2:
                         return invoice.getCharged();
@@ -190,55 +222,67 @@ public class InvoiceModel extends Model {
                         return invoice.getDue();
                 }
             }
-            else {
+            else
+            {
                 final IFEntry entry = (IFEntry) node;
-                switch (column) {
+                switch ( column )
+                {
                     case 0:
                         return entry.getName();
                     case 1:
-                        if (entry.getEnd() != null) {
-                            return DateUtils.dateDifference(entry.getStart().getTime().getTime(), entry.getEnd().getTime().getTime(), TIME_DIFFERENCE_PATTERN);
+                        if ( entry.getEnd() != null )
+                        {
+                            return DateUtils.dateDifference( entry.getStart().getTime().getTime(), entry.getEnd().getTime().getTime(), TIME_DIFFERENCE_PATTERN );
                         }
-                        else {
-                            final ArrayList list = (ArrayList) parent2ChildrenMap.get(entry);
-                            final IFEntry[] children = (IFEntry[]) list.toArray(new IFEntry[0]);
-                            final long sum = StatUtils.sumAll(children, 0);
-                            return DateUtils.dateDifference(sum, TIME_DIFFERENCE_PATTERN);
+                        else
+                        {
+                            final ArrayList list = (ArrayList) parent2ChildrenMap.get( entry );
+                            final IFEntry[] children = (IFEntry[]) list.toArray( new IFEntry[0] );
+                            final long sum = StatUtils.sumAll( children, 0 );
+                            return DateUtils.dateDifference( sum, TIME_DIFFERENCE_PATTERN );
                         }
                     case 2:
-                        if (entry.getStart() != null) {
+                        if ( entry.getStart() != null )
+                        {
                             return entry.getStart();
                         }
-                        else {
-                            final ArrayList children = (ArrayList) parent2ChildrenMap.get(entry);
+                        else
+                        {
+                            final ArrayList children = (ArrayList) parent2ChildrenMap.get( entry );
                             Calendar min = null;
-                            for (int i = 0; i < children.size(); i++) {
-                                final IFEntry child = (IFEntry) children.get(i);
+                            for ( final Object aChildren : children )
+                            {
+                                final IFEntry child = (IFEntry) aChildren;
                                 final Calendar start = child.getStart();
-                                if (min == null || start.compareTo(min) < 0) {
+                                if ( min == null || start.compareTo( min ) < 0 )
+                                {
                                     min = start;
                                 }
                             }
                             final Calendar cal = Calendar.getInstance();
-                            cal.setTime(min.getTime());
+                            cal.setTime( min.getTime() );
                             return cal;
                         }
                     case 3:
-                        if (entry.getEnd() != null) {
+                        if ( entry.getEnd() != null )
+                        {
                             return entry.getEnd();
                         }
-                        else {
-                            final ArrayList children = (ArrayList) parent2ChildrenMap.get(entry);
+                        else
+                        {
+                            final ArrayList children = (ArrayList) parent2ChildrenMap.get( entry );
                             Calendar max = null;
-                            for (int i = 0; i < children.size(); i++) {
-                                final IFEntry child = (IFEntry) children.get(i);
+                            for ( final Object aChildren : children )
+                            {
+                                final IFEntry child = (IFEntry) aChildren;
                                 final Calendar end = child.getEnd();
-                                if (max == null || end.compareTo(max) > 0) {
+                                if ( max == null || end.compareTo( max ) > 0 )
+                                {
                                     max = end;
                                 }
                             }
                             final Calendar cal = Calendar.getInstance();
-                            cal.setTime(max.getTime());
+                            cal.setTime( max.getTime() );
                             return cal;
                         }
                 }
@@ -246,94 +290,116 @@ public class InvoiceModel extends Model {
             return null;
         }
 
-        public boolean isCellEditable(Object node, int column) {
+        public boolean isCellEditable( final Object node, final int column )
+        {
             return node instanceof Invoice && column != 1;
         }
 
-        public void setValueAt(Object value, Object node, int column) {
-            try {
+        public void setValueAt( final Object value, final Object node, final int column )
+        {
+            try
+            {
                 final Invoice invoice = (Invoice) node;
-                if (column == 0) {
+                if ( column == 0 )
+                {
                     final String text = (String) value;
-                    invoice.setNumber(text);
+                    invoice.setNumber( text );
                 }
-                else if (column == 2) {
+                else if ( column == 2 )
+                {
                     final Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(DateFormat.getDateInstance().parse((String) value));
-                    invoice.setCharged(calendar);
+                    calendar.setTime( DateFormat.getDateInstance().parse( (String) value ) );
+                    invoice.setCharged( calendar );
                 }
-                else if (column == 3) {
+                else if ( column == 3 )
+                {
                     final Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(DateFormat.getDateInstance().parse((String) value));
-                    invoice.setDue(calendar);
+                    calendar.setTime( DateFormat.getDateInstance().parse( (String) value ) );
+                    invoice.setDue( calendar );
                 }
             }
-            catch (ParseException e) {
+            catch ( ParseException e )
+            {
                 e.printStackTrace();
             }
         }
 
         // TreeModel
 
-        public Object getChild(Object parent, int index) {
-            if (parent == getRoot()) {
-                return invoices.get(index);
+        public Object getChild( final Object parent, final int index )
+        {
+            if ( parent == getRoot() )
+            {
+                return invoices.get( index );
             }
-            else if (parent instanceof Invoice) {
+            else if ( parent instanceof Invoice )
+            {
                 final Invoice invoice = (Invoice) parent;
-                final ArrayList children = getChildren(invoice);
-                return children.get(index);
+                final ArrayList children = getChildren( invoice );
+                return children.get( index );
             }
-            else if (parent instanceof IFEntry) {
-                final ArrayList children = (ArrayList) parent2ChildrenMap.get(parent);
-                return children.get(index);
+            else if ( parent instanceof IFEntry )
+            {
+                final ArrayList children = (ArrayList) parent2ChildrenMap.get( parent );
+                return children.get( index );
             }
             return null;
         }
 
-        public int getChildCount(Object parent) {
-            if (parent == getRoot()) {
+        public int getChildCount( final Object parent )
+        {
+            if ( parent == getRoot() )
+            {
                 return invoices.size();
             }
-            else if (parent instanceof Invoice) {
+            else if ( parent instanceof Invoice )
+            {
                 final Invoice invoice = (Invoice) parent;
-                final ArrayList children = getChildren(invoice);
+                final ArrayList children = getChildren( invoice );
                 return children.size();
             }
-            else if (parent instanceof IFEntry) {
-                final ArrayList children = (ArrayList) parent2ChildrenMap.get(parent);
-                return (children == null ? 0 : children.size());
+            else if ( parent instanceof IFEntry )
+            {
+                final ArrayList children = (ArrayList) parent2ChildrenMap.get( parent );
+                return ( children == null ? 0 : children.size() );
             }
             return 0;
         }
 
-        public void valueForPathChanged(TreePath path, Object newValue) {
+        public void valueForPathChanged( final TreePath path, final Object newValue )
+        {
         }
 
         // Utils
 
-        private ArrayList getChildren(Invoice invoice) {
-            ArrayList children = (ArrayList) parent2ChildrenMap.get(invoice);
-            if (children == null) {
+        private ArrayList getChildren( final Invoice invoice )
+        {
+            ArrayList children = (ArrayList) parent2ChildrenMap.get( invoice );
+            if ( children == null )
+            {
                 children = new ArrayList();
-                parent2ChildrenMap.put(invoice, children);
+                parent2ChildrenMap.put( invoice, children );
                 final Collection entries = invoice.getEntries();
-                if (entries != null) {
-                    for (final Iterator iterator = entries.iterator(); iterator.hasNext();) {
-                        final IFEntry entry = (IFEntry) iterator.next();
+                if ( entries != null )
+                {
+                    for ( final Object entry1 : entries )
+                    {
+                        final IFEntry entry = (IFEntry) entry1;
                         final IFEntry parent = entry.getParent();
-                        IFEntry shadowParent = (IFEntry) parentsMap.get(invoice, parent);
-                        if (shadowParent == null) {
-                            shadowParent = new DefaultEntry(parent.getName(), parent.getType());
-                            parentsMap.put(invoice, parent, shadowParent);
-                            children.add(shadowParent);
+                        IFEntry shadowParent = (IFEntry) parentsMap.get( invoice, parent );
+                        if ( shadowParent == null )
+                        {
+                            shadowParent = new DefaultEntry( parent.getName(), parent.getType() );
+                            parentsMap.put( invoice, parent, shadowParent );
+                            children.add( shadowParent );
                         }
-                        ArrayList childChildren = (ArrayList) parent2ChildrenMap.get(shadowParent);
-                        if (childChildren == null) {
+                        ArrayList childChildren = (ArrayList) parent2ChildrenMap.get( shadowParent );
+                        if ( childChildren == null )
+                        {
                             childChildren = new ArrayList();
-                            parent2ChildrenMap.put(shadowParent, childChildren);
+                            parent2ChildrenMap.put( shadowParent, childChildren );
                         }
-                        childChildren.add(entry);
+                        childChildren.add( entry );
                     }
                 }
             }

@@ -16,40 +16,43 @@ import javax.swing.ImageIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class StartPanel extends Canvas {
+public class StartPanel extends Canvas
+{
+    private final ImageIcon blume = ImageLocator.getIcon( "catcher_intro.jpg" );
 
-    private ImageIcon blume = ImageLocator.getIcon("catcher_intro.jpg");
-    private Color green;
+    private final Color green;
 
     /**
      * Constructor
      *
      * @param green Color for the background
      */
-    public StartPanel(Color green) {
-        this.setSize(750, 470);
+    public StartPanel( final Color green )
+    {
+        this.setSize( 750, 470 );
         this.green = green;
-        this.setVisible(true);
+        this.setVisible( true );
     }
 
     /**
      * @see java.awt.Component#paint(Graphics)
      */
-    public void paint(Graphics g) {
+    public void paint( final Graphics g )
+    {
         //*
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setPaint(new GradientPaint(0.5f * 72, -1.0f * 72, green,
-                10.4f * 72, -1.0f * 72, new Color(220, 225, 80), false));
-        g2.fillRect(0, 0, 750, 470);
+        final Graphics2D g2 = (Graphics2D) g;
+        g2.setPaint( new GradientPaint( 0.5f * 72, -1.0f * 72, green,
+                10.4f * 72, -1.0f * 72, new Color( 220, 225, 80 ), false ) );
+        g2.fillRect( 0, 0, 750, 470 );
         //
-        g.drawImage(blume.getImage(), 0, 0, this);
-        g.setColor(Color.yellow);
-        g.setFont(new Font("Arial", Font.PLAIN, 14));
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT1"), 40, 40);
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT2"), 40, 60);
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT3"), 40, 80);
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT4"), 40, 100);
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT5"), 40, 120);
-        g.drawString(Strings.getString(Catcher.class, "CATCHER.TITLE.TEXT6"), 40, 140);
+        g.drawImage( blume.getImage(), 0, 0, this );
+        g.setColor( Color.yellow );
+        g.setFont( new Font( "Arial", Font.PLAIN, 14 ) );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT1" ), 40, 40 );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT2" ), 40, 60 );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT3" ), 40, 80 );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT4" ), 40, 100 );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT5" ), 40, 120 );
+        g.drawString( Strings.getString( Catcher.class, "CATCHER.TITLE.TEXT6" ), 40, 140 );
     }
 }

@@ -62,14 +62,14 @@
         <fixed>true</fixed>
     </session>
     <session>
-      <constraintsUid>0041045C-DD2B-3F1E-8D7B-E691D3A8D07F</constraintsUid>
-      <description>Mündliche Prüfung Matthias Baltisberger Sommer 2009</description>
-      <seskz>2009H</seskz>
-      <due>2009-07-11 00:00:00.0 CEST</due>
-      <name>Prüfung Sommer 2009</name>
-      <uid>B34CDE03-6975-BDBC-A883-C7A05F2FFE3B</uid>
-      <modified>2009-03-11 19:04:46.304 CET</modified>
-      <fixed>true</fixed>
+        <constraintsUid>0041045C-DD2B-3F1E-8D7B-E691D3A8D07F</constraintsUid>
+        <description>Mündliche Prüfung Matthias Baltisberger Sommer 2009</description>
+        <seskz>2009H</seskz>
+        <due>2009-07-11 00:00:00.0 CEST</due>
+        <name>Prüfung Sommer 2009</name>
+        <uid>B34CDE03-6975-BDBC-A883-C7A05F2FFE3B</uid>
+        <modified>2009-03-11 19:04:46.304 CET</modified>
+        <fixed>true</fixed>
     </session>
 
     <!--

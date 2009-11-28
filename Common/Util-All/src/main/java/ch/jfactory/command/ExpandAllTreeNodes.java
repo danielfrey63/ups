@@ -29,17 +29,16 @@ import org.pietschy.command.CommandManager;
  */
 public class ExpandAllTreeNodes extends ActionCommand
 {
+    private final JTree tree;
 
-    private JTree tree;
-
-    public ExpandAllTreeNodes(final CommandManager commandManager, final JTree tree)
+    public ExpandAllTreeNodes( final CommandManager commandManager, final JTree tree )
     {
-        super(commandManager, CommonCommands.COMMANDID_TREEEXPANDALLNODES);
+        super( commandManager, CommonCommands.COMMANDID_TREEEXPANDALLNODES );
         this.tree = tree;
     }
 
     protected void handleExecute()
     {
-        TreeUtils.expandAll(tree);
+        TreeUtils.expandAll( tree );
     }
 }

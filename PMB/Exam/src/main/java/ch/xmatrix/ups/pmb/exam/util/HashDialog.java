@@ -29,23 +29,30 @@ import javax.swing.event.CaretListener;
 import org.apache.log4j.Logger;
 import sun.misc.BASE64Encoder;
 
-/** @author Daniel Frey */
-public class HashDialog extends JDialog {
+/**
+ * @author Daniel Frey
+ */
+public class HashDialog extends JDialog
+{
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( HashDialog.class );
 
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(HashDialog.class);
-
-    public HashDialog(final Frame owner) {
-        super(owner);
+    public HashDialog( final Frame owner )
+    {
+        super( owner );
         initComponents();
     }
 
-    public HashDialog(final Dialog owner) {
-        super(owner);
+    public HashDialog( final Dialog owner )
+    {
+        super( owner );
         initComponents();
     }
 
-    private void initComponents() {
+    private void initComponents()
+    {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
         dialogPane = new JPanel();
@@ -55,88 +62,103 @@ public class HashDialog extends JDialog {
         buttonBar = new JPanel();
         okButton = new JButton();
         cancelButton = new JButton();
-        CellConstraints cc = new CellConstraints();
+        final CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setTitle("Compute SHA Hash");
-        setUndecorated(true);
-        Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        setTitle( "Compute SHA Hash" );
+        setUndecorated( true );
+        final Container contentPane = getContentPane();
+        contentPane.setLayout( new BorderLayout() );
 
         //======== dialogPane ========
         {
-            dialogPane.setBorder(Borders.DIALOG_BORDER);
-            dialogPane.setLayout(new BorderLayout());
+            dialogPane.setBorder( Borders.DIALOG_BORDER );
+            dialogPane.setLayout( new BorderLayout() );
 
             //======== contentPanel ========
             {
-                contentPanel.setLayout(new FormLayout(
-                    "default:grow",
-                    "default, $lgap, default"));
-                contentPanel.add(fieldPassword, cc.xy(1, 1));
+                contentPanel.setLayout( new FormLayout(
+                        "default:grow",
+                        "default, $lgap, default" ) );
+                contentPanel.add( fieldPassword, cc.xy( 1, 1 ) );
 
                 //---- fieldHash ----
-                fieldHash.setEditable(false);
-                contentPanel.add(fieldHash, cc.xy(1, 3));
+                fieldHash.setEditable( false );
+                contentPanel.add( fieldHash, cc.xy( 1, 3 ) );
             }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
+            dialogPane.add( contentPanel, BorderLayout.CENTER );
 
             //======== buttonBar ========
             {
-                buttonBar.setBorder(Borders.BUTTON_BAR_GAP_BORDER);
-                buttonBar.setLayout(new FormLayout(
-                    "$glue, $button, $rgap, $button",
-                    "pref"));
+                buttonBar.setBorder( Borders.BUTTON_BAR_GAP_BORDER );
+                buttonBar.setLayout( new FormLayout(
+                        "$glue, $button, $rgap, $button",
+                        "pref" ) );
 
                 //---- okButton ----
-                okButton.setText("Compute");
-                okButton.setEnabled(false);
-                buttonBar.add(okButton, cc.xy(2, 1));
+                okButton.setText( "Compute" );
+                okButton.setEnabled( false );
+                buttonBar.add( okButton, cc.xy( 2, 1 ) );
 
                 //---- cancelButton ----
-                cancelButton.setText("Cancel");
-                buttonBar.add(cancelButton, cc.xy(4, 1));
+                cancelButton.setText( "Cancel" );
+                buttonBar.add( cancelButton, cc.xy( 4, 1 ) );
             }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
+            dialogPane.add( buttonBar, BorderLayout.SOUTH );
         }
-        contentPane.add(dialogPane, BorderLayout.CENTER);
+        contentPane.add( dialogPane, BorderLayout.CENTER );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-        fieldPassword.addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
+        fieldPassword.addCaretListener( new CaretListener()
+        {
+            public void caretUpdate( final CaretEvent e )
+            {
                 final boolean hasPassword = fieldPassword.getPassword().length > 0;
-                okButton.setEnabled(hasPassword);
-                getRootPane().setDefaultButton(hasPassword ? okButton : cancelButton);
+                okButton.setEnabled( hasPassword );
+                getRootPane().setDefaultButton( hasPassword ? okButton : cancelButton );
             }
-        });
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                try {
-                    final byte[] selection = new String(fieldPassword.getPassword()).getBytes();
-                    final MessageDigest md = MessageDigest.getInstance("SHA");
-                    fieldHash.setText(new BASE64Encoder().encode(md.digest(selection)));
-                } catch (NoSuchAlgorithmException x) {
-                    LOG.error("cannot init digest", x);
+        } );
+        okButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                try
+                {
+                    final byte[] selection = new String( fieldPassword.getPassword() ).getBytes();
+                    final MessageDigest md = MessageDigest.getInstance( "SHA" );
+                    fieldHash.setText( new BASE64Encoder().encode( md.digest( selection ) ) );
+                }
+                catch ( NoSuchAlgorithmException x )
+                {
+                    LOG.error( "cannot init digest", x );
                 }
 
             }
-        });
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                System.exit(0);
+        } );
+        cancelButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                System.exit( 0 );
             }
-        });
+        } );
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner non-commercial license
     private JPanel dialogPane;
+
     private JPanel contentPanel;
+
     private JPasswordField fieldPassword;
+
     private JTextField fieldHash;
+
     private JPanel buttonBar;
+
     private JButton okButton;
+
     private JButton cancelButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

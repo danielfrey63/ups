@@ -17,8 +17,8 @@
 package ch.jfactory.projecttime.project;
 
 import ch.jfactory.component.tree.AbstractTreeModel;
-import ch.jfactory.projecttime.domain.api.IFEntry;
 import ch.jfactory.lang.ArrayUtils;
+import ch.jfactory.projecttime.domain.api.IFEntry;
 import javax.swing.tree.TreePath;
 
 /**
@@ -27,39 +27,45 @@ import javax.swing.tree.TreePath;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class ProjectTreeModel extends AbstractTreeModel {
-
-    public ProjectTreeModel(Object root) {
-        super(root);
+public class ProjectTreeModel extends AbstractTreeModel
+{
+    public ProjectTreeModel( final Object root )
+    {
+        super( root );
     }
 
-    protected void remove(Object child, TreePath parentPath) {
+    protected void remove( final Object child, final TreePath parentPath )
+    {
         final IFEntry parent = (IFEntry) parentPath.getLastPathComponent();
         final IFEntry[] children = parent.getChildren();
-        final IFEntry[] newChildren = (IFEntry[]) ArrayUtils.remove(children, child, new IFEntry[0]);
-        parent.setChildren(newChildren);
+        final IFEntry[] newChildren = (IFEntry[]) ArrayUtils.remove( children, child, new IFEntry[0] );
+        parent.setChildren( newChildren );
     }
 
-    protected void insert(TreePath childPath, TreePath parentPath, int pos) {
+    protected void insert( final TreePath childPath, final TreePath parentPath, final int pos )
+    {
         final IFEntry parent = (IFEntry) parentPath.getLastPathComponent();
         final IFEntry child = (IFEntry) childPath.getLastPathComponent();
         final IFEntry[] children = parent.getChildren();
-        final IFEntry[] newChildren = (IFEntry[]) ArrayUtils.insert(children, child, pos, new IFEntry[0]);
-        parent.setChildren(newChildren);
-        child.setParent(parent);
+        final IFEntry[] newChildren = (IFEntry[]) ArrayUtils.insert( children, child, pos, new IFEntry[0] );
+        parent.setChildren( newChildren );
+        child.setParent( parent );
     }
 
-    public int getChildCount(Object parent) {
+    public int getChildCount( final Object parent )
+    {
         final IFEntry parentEntry = (IFEntry) parent;
         final IFEntry[] children = parentEntry.getChildren();
         return children == null ? 0 : children.length;
     }
 
-    public Object getChild(Object parent, int index) {
+    public Object getChild( final Object parent, final int index )
+    {
         final IFEntry parentEntry = (IFEntry) parent;
         return parentEntry.getChildren()[index];
     }
 
-    public void valueForPathChanged(TreePath path, Object newValue) {
+    public void valueForPathChanged( final TreePath path, final Object newValue )
+    {
     }
 }

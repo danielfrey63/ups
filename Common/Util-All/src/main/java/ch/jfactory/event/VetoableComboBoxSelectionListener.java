@@ -8,5 +8,5 @@ package ch.jfactory.event;
  */
 public interface VetoableComboBoxSelectionListener extends java.util.EventListener
 {
-    boolean selectionChanged(VetoableChangeEvent e);
+    boolean selectionChanged( VetoableChangeEvent e );
 }

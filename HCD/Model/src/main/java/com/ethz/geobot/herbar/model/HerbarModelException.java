@@ -8,25 +8,25 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * @author Daniel Frey
  */
-public class HerbarModelException extends Exception {
-
+public class HerbarModelException extends Exception
+{
     /**
      * Creates a new instance of <code>HerbarModelException</code> without detail message.
      */
-    public HerbarModelException() {
+    public HerbarModelException()
+    {
     }
-
 
     /**
      * Constructs an instance of <code>HerbarModelException</code> with the specified detail message.
      *
      * @param msg the detail message.
      */
-    public HerbarModelException(String msg) {
-        super(msg);
+    public HerbarModelException( final String msg )
+    {
+        super( msg );
     }
 }

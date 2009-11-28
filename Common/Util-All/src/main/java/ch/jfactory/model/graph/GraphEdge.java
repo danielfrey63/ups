@@ -6,7 +6,6 @@ package ch.jfactory.model.graph;
  */
 public interface GraphEdge
 {
-
     /**
      * Returns the id.
      *
@@ -14,8 +13,10 @@ public interface GraphEdge
      */
     public int getId();
 
-    /** Returns whether this is of the given role. */
-    public boolean isRole(Class role);
+    /**
+     * Returns whether this is of the given role.
+     */
+    public boolean isRole( Class role );
 
     /**
      * Returns the child.
@@ -57,40 +58,40 @@ public interface GraphEdge
      *
      * @param int the new id to set
      */
-    public void setId(int id);
+    public void setId( int id );
 
     /**
      * Sets the child.
      *
      * @param child The child to set
      */
-    public void setChild(GraphNode child);
+    public void setChild( GraphNode child );
 
     /**
      * Sets the parent.
      *
      * @param parent The parent to set
      */
-    public void setParent(GraphNode parent);
+    public void setParent( GraphNode parent );
 
     /**
      * Sets the role.
      *
      * @param role The role to set
      */
-    public void setRole(Role role);
+    public void setRole( Role role );
 
     /**
      * Sets the text.
      *
      * @param text The text to set
      */
-    public void setRecursive(GraphEdge recursive);
+    public void setRecursive( GraphEdge recursive );
 
     /**
      * Sets the rank.
      *
      * @param rank
      */
-    public void setRank(int rank);
+    public void setRank( int rank );
 }

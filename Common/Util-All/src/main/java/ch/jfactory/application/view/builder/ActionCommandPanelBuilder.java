@@ -57,8 +57,7 @@ import org.pietschy.command.ToggleCommand;
  */
 public abstract class ActionCommandPanelBuilder implements Builder
 {
-
-    private static final Logger LOG = Logger.getLogger(ActionCommandPanelBuilder.class);
+    private static final Logger LOG = Logger.getLogger( ActionCommandPanelBuilder.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -71,9 +70,9 @@ public abstract class ActionCommandPanelBuilder implements Builder
     public JComponent getPanel()
     {
         panelCallCounter++;
-        if (panelCallCounter > 1)
+        if ( panelCallCounter > 1 )
         {
-            throw new IllegalStateException("don't call getPanel twice");
+            throw new IllegalStateException( "don't call getPanel twice" );
         }
         try
         {
@@ -84,7 +83,7 @@ public abstract class ActionCommandPanelBuilder implements Builder
             initComponentListeners();
             initSubpanelCommands();
         }
-        catch (LoadException e)
+        catch ( LoadException e )
         {
             e.printStackTrace();
         }
@@ -94,52 +93,52 @@ public abstract class ActionCommandPanelBuilder implements Builder
     private void initCommandManager() throws LoadException
     {
         final String name = getClass().getPackage().getName();
-        final String base = StringUtils.replace("/" + name, ".", "/");
+        final String base = StringUtils.replace( "/" + name, ".", "/" );
         final String[] locations = {base, base + "/commands"};
         InputStream resource = null;
         String location = "";
-        for (final String l : locations)
+        for ( final String l : locations )
         {
             location = l;
-            resource = getClass().getResourceAsStream(location + "/commands.xml");
-            if (resource != null)
+            resource = getClass().getResourceAsStream( location + "/commands.xml" );
+            if ( resource != null )
             {
                 break;
             }
         }
-        if (resource != null)
+        if ( resource != null )
         {
             commandManager = new CommandManager();
-            final String prefix = System.getProperty("ch.jfactory.iconprefix", "/16x16/fill");
-            final IconFactory iconFactory = new SimpleIconFactory(prefix);
-            commandManager.setIconFactory(iconFactory);
-            final String bundleName = location.substring(1).replace('/', '.') + ".commands";
-            final ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
-            commandManager.setResourceBundle(bundle);
-            if (DEBUG)
+            final String prefix = System.getProperty( "ch.jfactory.iconprefix", "/16x16/fill" );
+            final IconFactory iconFactory = new SimpleIconFactory( prefix );
+            commandManager.setIconFactory( iconFactory );
+            final String bundleName = location.substring( 1 ).replace( '/', '.' ) + ".commands";
+            final ResourceBundle bundle = ResourceBundle.getBundle( bundleName );
+            commandManager.setResourceBundle( bundle );
+            if ( DEBUG )
             {
                 try
                 {
-                    final String content = new String(IOUtils.toByteArray(resource));
-                    LOG.debug(content);
-                    resource = getClass().getResourceAsStream(location + "/commands.xml");
+                    final String content = new String( IOUtils.toByteArray( resource ) );
+                    LOG.debug( content );
+                    resource = getClass().getResourceAsStream( location + "/commands.xml" );
                     assert resource != null : "resource is null";
                 }
-                catch (IOException e)
+                catch ( IOException e )
                 {
-                    LOG.error("could not print content of commands xml file at " + location, e);
+                    LOG.error( "could not print content of commands xml file at " + location, e );
                 }
             }
-            commandManager.load(resource);
+            commandManager.load( resource );
         }
         else
         {
-            final String locs = StringUtils.join(locations, ", ");
+            final String locs = StringUtils.join( locations, ", " );
             final String clazz = getClass().getName();
             final String message = "command.xml for " + clazz + " not found in one of these locations: " + locs;
-            if (DEBUG)
+            if ( DEBUG )
             {
-                LOG.debug(message);
+                LOG.debug( message );
             }
         }
     }
@@ -171,19 +170,23 @@ public abstract class ActionCommandPanelBuilder implements Builder
         return new JPanel();
     }
 
-    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
+    /**
+     * This is an adapter (empty) implementaiton for this method (no need to call super).
+     */
     protected void initModelListeners()
     {
     }
 
-    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
+    /**
+     * This is an adapter (empty) implementaiton for this method (no need to call super).
+     */
     protected void initComponentListeners()
     {
     }
 
-    public ActionCommand getCommand(final String commandId)
+    public ActionCommand getCommand( final String commandId )
     {
-        return commandManager.getCommand(commandId);
+        return commandManager.getCommand( commandId );
     }
 
     public CommandManager getCommandManager()
@@ -197,9 +200,9 @@ public abstract class ActionCommandPanelBuilder implements Builder
      * @param command the command to initialize
      * @return the action command
      */
-    protected ActionCommand initCommand(final ActionCommand command)
+    protected ActionCommand initCommand( final ActionCommand command )
     {
-        return initCommand(command, false);
+        return initCommand( command, false );
     }
 
     /**
@@ -209,16 +212,16 @@ public abstract class ActionCommandPanelBuilder implements Builder
      * @param enabled whether to enable the command
      * @return the action command
      */
-    protected ActionCommand initCommand(final ActionCommand command, final boolean enabled)
+    protected ActionCommand initCommand( final ActionCommand command, final boolean enabled )
     {
         command.export();
-        command.setEnabled(enabled);
+        command.setEnabled( enabled );
         return command;
     }
 
-    protected void initToggleCommand(final ToggleCommand command, final boolean selected)
+    protected void initToggleCommand( final ToggleCommand command, final boolean selected )
     {
-        initCommand(command, true);
-        command.setSelected(selected);
+        initCommand( command, true );
+        command.setSelected( selected );
     }
 }

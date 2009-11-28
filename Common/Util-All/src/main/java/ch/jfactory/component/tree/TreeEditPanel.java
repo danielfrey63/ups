@@ -43,8 +43,7 @@ import javax.swing.tree.TreePath;
  */
 public abstract class TreeEditPanel extends JPanel implements TreeSelectionListener, DocumentListener, ActionListener
 {
-
-    private static boolean enableDebugNode = false;
+    private static final boolean enableDebugNode = false;
 
     private JButton debugButton;
 
@@ -63,22 +62,22 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
      *
      * @param prefix the prefix used to load string resources
      */
-    public TreeEditPanel(final String prefix)
+    public TreeEditPanel( final String prefix )
     {
         // Initialize
         initComponents();
 
         // Layout
         final GridBagLayout gbl = new GridBagLayout();
-        this.setLayout(gbl);
+        this.setLayout( gbl );
         // It's a top panel, so space only at the bottom
-        this.setBorder(BorderFactory.createEmptyBorder(0, 0, Constants.GAP_BETWEEN_REGIONS, 0));
+        this.setBorder( BorderFactory.createEmptyBorder( 0, 0, Constants.GAP_BETWEEN_REGIONS, 0 ) );
         final GridBagConstraints gbc = new GridBagConstraints();
 
-        final Insets insLeftWithin = new Insets(0, 0, Constants.GAP_BORDER_RIGHT_BOTTOM, Constants.GAP_BORDER_LEFT_TOP);
-        final Insets insRightWithin = new Insets(0, 0, Constants.GAP_BORDER_RIGHT_BOTTOM, 0);
+        final Insets insLeftWithin = new Insets( 0, 0, Constants.GAP_BORDER_RIGHT_BOTTOM, Constants.GAP_BORDER_LEFT_TOP );
+        final Insets insRightWithin = new Insets( 0, 0, Constants.GAP_BORDER_RIGHT_BOTTOM, 0 );
 
-        gbc.insets = new Insets(0, 0, Constants.GAP_BETWEEN_GROUP, Constants.GAP_BETWEEN_GROUP);
+        gbc.insets = new Insets( 0, 0, Constants.GAP_BETWEEN_GROUP, Constants.GAP_BETWEEN_GROUP );
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.WEST;
 
@@ -86,7 +85,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         gbc.gridy = 0;
         gbc.weightx = 0.0;
         gbc.insets = insLeftWithin;
-        this.add(new JLabel(Strings.getString(prefix + ".NEWLABEL.NAME")), gbc);
+        this.add( new JLabel( Strings.getString( prefix + ".NEWLABEL.NAME" ) ), gbc );
 
         gbc.gridx = 1; // 1
         gbc.gridy = 0; // 0
@@ -94,37 +93,37 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         gbc.weightx = 1.0;
         gbc.insets = insRightWithin;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(newField, gbc);
+        this.add( newField, gbc );
 
-        if (enababelPopup != null)
+        if ( enababelPopup != null )
         {
             gbc.gridx = 0; // 0
             gbc.gridy += 1; // 1
             gbc.weightx = 0.0;
             gbc.insets = insLeftWithin;
             gbc.fill = GridBagConstraints.NONE;
-            this.add(new JLabel(Strings.getString(prefix + ".NODETYPES.NAME")), gbc);
+            this.add( new JLabel( Strings.getString( prefix + ".NODETYPES.NAME" ) ), gbc );
 
             gbc.gridx += 1; // 1
             gbc.gridy += 0; // 1
             gbc.gridwidth = 2;
             gbc.weightx = 1.0;
             gbc.insets = insRightWithin;
-            this.add(enababelPopup, gbc);
+            this.add( enababelPopup, gbc );
         }
 
         final JPanel buttonsPanel = new JPanel();
-        final FlowLayout fl = new FlowLayout(FlowLayout.RIGHT, 0, 0);
-        buttonsPanel.setLayout(fl);
+        final FlowLayout fl = new FlowLayout( FlowLayout.RIGHT, 0, 0 );
+        buttonsPanel.setLayout( fl );
         // Debug
-        if (enableDebugNode)
+        if ( enableDebugNode )
         {
-            buttonsPanel.add(debugButton);
+            buttonsPanel.add( debugButton );
         }
-        buttonsPanel.add(newButton);
-        buttonsPanel.add(deleteButton);
+        buttonsPanel.add( newButton );
+        buttonsPanel.add( deleteButton );
         final JButton[] buttons;
-        if (enableDebugNode)
+        if ( enableDebugNode )
         {
             buttons = new JButton[]{debugButton, newButton, deleteButton};
         }
@@ -132,42 +131,42 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         {
             buttons = new JButton[]{newButton, deleteButton};
         }
-        WindowUtils.equalizeButtons(buttons);
-        WindowUtils.spaceComponents(buttons);
+        WindowUtils.equalizeButtons( buttons );
+        WindowUtils.spaceComponents( buttons );
 
         gbc.gridx = 1; // 1
         gbc.gridy += 1; // 2
         gbc.insets = insRightWithin;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(buttonsPanel, gbc);
+        this.add( buttonsPanel, gbc );
 
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weighty = 1.0;
-        this.add(new JPanel(), gbc);
+        this.add( new JPanel(), gbc );
 
         // Register for events
-        newField.getDocument().addDocumentListener(this);
-        newButton.addActionListener(this);
-        deleteButton.addActionListener(this);
-        if (enableDebugNode)
+        newField.getDocument().addDocumentListener( this );
+        newButton.addActionListener( this );
+        deleteButton.addActionListener( this );
+        if ( enableDebugNode )
         {
-            debugButton.addActionListener(new ActionListener()
+            debugButton.addActionListener( new ActionListener()
             {
-                public void actionPerformed(final ActionEvent ae)
+                public void actionPerformed( final ActionEvent ae )
                 {
                     final TreePath tp = getTree().getSelectionPath();
-                    if (tp == null)
+                    if ( tp == null )
                     {
                         return;
                     }
                     System.out.println();
                     final MutableTreeNode node = (MutableTreeNode)
                             tp.getLastPathComponent();
-                    debugNode(node);
+                    debugNode( node );
                 }
-            });
+            } );
         }
     }
 
@@ -186,7 +185,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
      *
      * @param tree the <code>JTree</code> to set
      */
-    public void setTree(final JTree tree)
+    public void setTree( final JTree tree )
     {
         this.tree = tree;
     }
@@ -211,60 +210,69 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         return enababelPopup;
     }
 
-    /** @see javax.swing.event.TreeSelectionListener #valueChanged(TreeSelectionEvent) */
-    public void valueChanged(final TreeSelectionEvent tse)
+    /**
+     * @see javax.swing.event.TreeSelectionListener #valueChanged(TreeSelectionEvent)
+     */
+    public void valueChanged( final TreeSelectionEvent tse )
     {
         updateControls();
     }
 
-    /** @see javax.swing.event.DocumentListener#changedUpdate(DocumentEvent) */
-    public void changedUpdate(final DocumentEvent e)
+    /**
+     * @see javax.swing.event.DocumentListener#changedUpdate(DocumentEvent)
+     */
+    public void changedUpdate( final DocumentEvent e )
     {
         updateControls();
     }
 
-    /** @see javax.swing.event.DocumentListener#insertUpdate(DocumentEvent) */
-    public void insertUpdate(final DocumentEvent e)
+    /**
+     * @see javax.swing.event.DocumentListener#insertUpdate(DocumentEvent)
+     */
+    public void insertUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    /** @see javax.swing.event.DocumentListener#removeUpdate(DocumentEvent) */
-    public void removeUpdate(final DocumentEvent e)
+    /**
+     * @see javax.swing.event.DocumentListener#removeUpdate(DocumentEvent)
+     */
+    public void removeUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    /** @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
-    public void actionPerformed(final ActionEvent ae)
+    /**
+     * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
+     */
+    public void actionPerformed( final ActionEvent ae )
     {
-
         // Keep state of expanded nodes in the tree
-        final TreeExpandedRestorer ter = new TreeExpandedRestorer(tree);
+        final TreeExpandedRestorer ter = new TreeExpandedRestorer( tree );
         ter.save();
 
         // Dispatch button event
         final Object source = ae.getSource();
-        if (source == newButton)
+        if ( source == newButton )
         {
             insertNewItem();
         }
-        else if (source == deleteButton)
+        else if ( source == deleteButton )
         {
             final TreePath[] paths = deleteItems();
-            for (TreePath path : paths)
+            for ( final TreePath path : paths )
             {
                 path.getParentPath();
-                ter.remove(path);
+                ter.remove( path );
             }
         }
 
         // Delete contents of edit field
-        newField.setSelectionStart(0);
-        newField.setSelectionEnd(newField.getText().length());
+        newField.setSelectionStart( 0 );
+        newField.setSelectionEnd( newField.getText().length() );
 
         // Reload tree and restore expanded tree nodes
-        ((DefaultTreeModel) tree.getModel()).reload();
+        ( (DefaultTreeModel) tree.getModel() ).reload();
         ter.restore();
     }
 
@@ -282,11 +290,11 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
      * edit field is not empty, and any item is selected in the tree. Overwrite this method if you wish to have another
      * behaviour for the new button.
      */
-    protected boolean isNewAllowed(final boolean isPopupValid, final String newText,
-                                   final TreePath[] selections)
+    protected boolean isNewAllowed( final boolean isPopupValid, final String newText,
+                                    final TreePath[] selections )
     {
         boolean result = isPopupValid;
-        result &= (selections == null || selections.length > 0);
+        result &= ( selections == null || selections.length > 0 );
         result &= newText.length() > 0;
         return result;
     }
@@ -343,50 +351,49 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
      *
      * @param node the <code>MutableTreeNode</code> to debug
      */
-    protected void debugNode(final MutableTreeNode node)
+    protected void debugNode( final MutableTreeNode node )
     {
     }
 
     private void initComponents()
     {
-        newButton = new JButton(Strings.getString("ADD.NAME"));
-        newButton.setEnabled(false);
-        deleteButton = new JButton(Strings.getString("DELETE.NAME"));
-        deleteButton.setEnabled(false);
+        newButton = new JButton( Strings.getString( "ADD.NAME" ) );
+        newButton.setEnabled( false );
+        deleteButton = new JButton( Strings.getString( "DELETE.NAME" ) );
+        deleteButton.setEnabled( false );
         // Debug
-        if (enableDebugNode)
+        if ( enableDebugNode )
         {
-            debugButton = new JButton(Strings.getString("DEBUG.NAME"));
+            debugButton = new JButton( Strings.getString( "DEBUG.NAME" ) );
         }
         newField = new JTextField();
         // Popup
-        final Icon icon = ImageLocator.getIcon("scrollDown.gif");
+        final Icon icon = ImageLocator.getIcon( "scrollDown.gif" );
         final Object[] nodeTypes = getNodeTypes();
-        if (nodeTypes != null && nodeTypes.length > 0)
+        if ( nodeTypes != null && nodeTypes.length > 0 )
         {
-            enababelPopup = new EnabablePopup(nodeTypes, icon);
+            enababelPopup = new EnabablePopup( nodeTypes, icon );
         }
     }
 
     private void updateControls()
     {
-
         // ajust delete button
-        deleteButton.setEnabled(isDeletionAllowed());
+        deleteButton.setEnabled( isDeletionAllowed() );
 
         // ajust popup
         boolean isValid = true;
-        if (enababelPopup != null)
+        if ( enababelPopup != null )
         {
             final Object[] valids = getValidNodeTypes();
-            enababelPopup.setEnabled(valids);
+            enababelPopup.setEnabled( valids );
             isValid = valids.length > 0;
         }
 
         // ajust new button
         final String text = newField.getText();
         final TreePath[] selections = getTree().getSelectionPaths();
-        newButton.setEnabled(isNewAllowed(isValid, text, selections));
+        newButton.setEnabled( isNewAllowed( isValid, text, selections ) );
     }
 }
 

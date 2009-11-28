@@ -24,17 +24,24 @@ import org.apache.log4j.Logger;
  */
 public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderListener
 {
+    /**
+     * category for logging
+     */
+    private static final Logger LOGGER = Logger.getLogger( CachedImageLocator.class );
 
-    /** category for logging */
-    private static final Logger LOGGER = Logger.getLogger(CachedImageLocator.class);
+    /**
+     * map containing a cache for images especially Icons
+     */
+    private static final Map imageCache = new WeakHashMap();
 
-    /** map containing a cache for images especially Icons */
-    private static Map imageCache = new WeakHashMap();
+    /**
+     * cache for pictures
+     */
+    private final PictureCache cache = new PictureCache( this );
 
-    /** cache for pictures */
-    private PictureCache cache = new PictureCache(this);
-
-    /** loader for images */
+    /**
+     * loader for images
+     */
     private AsynchronPictureLoader loader = null;
 
     /**
@@ -43,31 +50,31 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      * @param name name of the image
      * @return reference to the ImageIcon
      */
-    public ImageIcon getImageIcon(final String name)
+    public ImageIcon getImageIcon( final String name )
     {
-        LOGGER.debug("Request for " + name);
-        WeakReference ref = (WeakReference) imageCache.get(name);
-        if ((ref == null) || (ref.get() == null))
+        LOGGER.debug( "Request for " + name );
+        WeakReference ref = (WeakReference) imageCache.get( name );
+        if ( ( ref == null ) || ( ref.get() == null ) )
         {
-            final ImageIcon icon = loadImageIcon(name);
-            imageCache.put(name, ref = new WeakReference(icon));
+            final ImageIcon icon = loadImageIcon( name );
+            imageCache.put( name, ref = new WeakReference( icon ) );
         }
 
         return (ImageIcon) ref.get();
     }
 
-    private ImageIcon loadImageIcon(final String name)
+    private ImageIcon loadImageIcon( final String name )
     {
-        final String fullName = locate(new String(name));
-        final URL url = getClass().getResource(fullName);
+        final String fullName = locate( new String( name ) );
+        final URL url = getClass().getResource( fullName );
         final ImageIcon icon;
-        if (url == null)
+        if ( url == null )
         {
-            icon = new ImageIcon(fullName);
+            icon = new ImageIcon( fullName );
         }
         else
         {
-            icon = new ImageIcon(url);
+            icon = new ImageIcon( url );
         }
         return icon;
     }
@@ -77,12 +84,14 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      *
      * @param name name of the image
      */
-    public void cacheImage(final String name)
+    public void cacheImage( final String name )
     {
-        cache.addCachedImage(locate(name));
+        cache.addCachedImage( locate( name ) );
     }
 
-    /** clear caching list. */
+    /**
+     * clear caching list.
+     */
     public void clearCacheList()
     {
         cache.clearCachingList();
@@ -93,49 +102,51 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      *
      * @param name Description of the Parameter
      */
-    public void loadImage(final String name)
+    public void loadImage( final String name )
     {
-        final String url = locate(name);
+        final String url = locate( name );
 
-        final Image img = cache.addCachedImage(url).getImage(false);
-        if (img == null)
+        final Image img = cache.addCachedImage( url ).getImage( false );
+        if ( img == null )
         {
-            if (loader == null)
+            if ( loader == null )
             {
                 initLoader();
             }
-            loader.loadImage(url);
+            loader.loadImage( url );
         }
         else
         {
-            LOGGER.info("get image " + url + " from cache.");
-            informStarted(name);
-            informFinished(name, img, false);
+            LOGGER.info( "get image " + url + " from cache." );
+            informStarted( name );
+            informFinished( name, img, false );
         }
     }
 
-    /** abort current image loading */
+    /**
+     * abort current image loading
+     */
     public void abort()
     {
-        if (loader != null)
+        if ( loader != null )
         {
             loader.abort();
         }
     }
 
-    public void loadFinished(final String name, final Image img, final boolean thumbNail)
+    public void loadFinished( final String name, final Image img, final boolean thumbNail )
     {
-        informFinished(name, img, thumbNail);
+        informFinished( name, img, thumbNail );
     }
 
-    public void loadAborted(final String name)
+    public void loadAborted( final String name )
     {
-        informAborted(name);
+        informAborted( name );
     }
 
-    public void loadStarted(final String name)
+    public void loadStarted( final String name )
     {
-        informStarted(name);
+        informStarted( name );
     }
 
     /**
@@ -145,13 +156,13 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      */
     protected void finalize() throws java.lang.Throwable
     {
-        LOGGER.info("CachedImageLocator going to be finalize");
+        LOGGER.info( "CachedImageLocator going to be finalize" );
 
         loader.terminate();
         loader.join();
         super.finalize();
 
-        LOGGER.info("CachedImageLocator is finalize & thread stopped");
+        LOGGER.info( "CachedImageLocator is finalize & thread stopped" );
     }
 
     /**
@@ -164,9 +175,9 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     private void initLoader()
     {
         loader = new AsynchronPictureLoader();
-        loader.setPriority(Thread.MIN_PRIORITY);
-        loader.attach(cache);
-        loader.attach(this);
+        loader.setPriority( Thread.MIN_PRIORITY );
+        loader.attach( cache );
+        loader.attach( this );
         loader.start();
     }
 
@@ -176,7 +187,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      * @param image image name
      * @return name full qualified name
      */
-    private String locate(final String image)
+    private String locate( final String image )
     {
         return getPath() + image;
     }

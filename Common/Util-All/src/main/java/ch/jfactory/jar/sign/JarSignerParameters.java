@@ -27,32 +27,32 @@ import java.util.zip.ZipFile;
  */
 class JarSignerParameters implements ContentSignerParameters
 {
+    private final String[] args;
 
-    private String[] args;
+    private final URI tsa;
 
-    private URI tsa;
+    private final X509Certificate tsaCertificate;
 
-    private X509Certificate tsaCertificate;
+    private final byte[] signature;
 
-    private byte[] signature;
+    private final String signatureAlgorithm;
 
-    private String signatureAlgorithm;
+    private final X509Certificate[] signerCertificateChain;
 
-    private X509Certificate[] signerCertificateChain;
+    private final byte[] content;
 
-    private byte[] content;
+    private final ZipFile source;
 
-    private ZipFile source;
-
-    /** Create a new object. */
-    JarSignerParameters(final String[] args, final URI tsa, final X509Certificate tsaCertificate,
-                        final byte[] signature, final String signatureAlgorithm,
-                        final X509Certificate[] signerCertificateChain, final byte[] content,
-                        final ZipFile source)
+    /**
+     * Create a new object.
+     */
+    JarSignerParameters( final String[] args, final URI tsa, final X509Certificate tsaCertificate,
+                         final byte[] signature, final String signatureAlgorithm,
+                         final X509Certificate[] signerCertificateChain, final byte[] content,
+                         final ZipFile source )
     {
-
-        if (signature == null || signatureAlgorithm == null ||
-                signerCertificateChain == null)
+        if ( signature == null || signatureAlgorithm == null ||
+                signerCertificateChain == null )
         {
             throw new NullPointerException();
         }

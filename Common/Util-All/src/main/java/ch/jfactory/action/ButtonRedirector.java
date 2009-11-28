@@ -13,20 +13,20 @@ class ButtonRedirector extends AbstractAction
 {
     protected JButton button;
 
-    public ButtonRedirector(final JButton button)
+    public ButtonRedirector( final JButton button )
     {
-        super.putValue(AbstractAction.NAME, button.getText());
+        super.putValue( AbstractAction.NAME, button.getText() );
         this.button = button;
     }
 
-    public void actionPerformed(final ActionEvent e)
+    public void actionPerformed( final ActionEvent e )
     {
-        if (button.isEnabled())
+        if ( button.isEnabled() )
         {
             final ActionListener[] listeners = button.getActionListeners();
-            for (final ActionListener listener : listeners)
+            for ( final ActionListener listener : listeners )
             {
-                listener.actionPerformed(e);
+                listener.actionPerformed( e );
             }
         }
     }

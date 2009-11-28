@@ -21,74 +21,119 @@ import javax.swing.ImageIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class Galgen extends Canvas implements Runnable {
-
+public class Galgen extends Canvas implements Runnable
+{
     public static final int TOTAL_STEPS = 5;
 
     private static final int STEP_ZERO = 0;
+
     private static final int STEP_BASE = 1;
+
     private static final int STEP_SENKRECHT = 2;
+
     private static final int STEP_WAAGRECHT = 3;
+
     private static final int STEP_SCHLINGE = 4;
+
     private static final int STEP_BIRD = TOTAL_STEPS;
 
     private boolean threadRunning = false;
+
     private Thread motor;
-    private ImageIcon bgBild = ImageLocator.getIcon("bg.jpg");
+
+    private final ImageIcon bgBild = ImageLocator.getIcon( "bg.jpg" );
+
     private int galgenBauStep = 0;
-    private Color colorPBL = new Color(110, 102, 87);
-    private Color colorPBR = new Color(61, 55, 47);
-    private Color colorPBO = new Color(146, 113, 85);
-    private Color colorPSL = new Color(127, 36, 0);
-    private Color colorPSR = new Color(96, 31, 5);
-    private Color colorPSO = new Color(152, 60, 24);
-    private Color colorPWL = new Color(152, 60, 24);
-    private Color colorPWR = new Color(96, 31, 5);
-    private Color bgGalgen = new Color(63, 59, 21);
-    private Color bgGalgenHell = new Color(87, 82, 32);
-    private Color polygonKontur = new Color(80, 25, 4);
-    private Color baseKontur = new Color(53, 49, 11);
+
+    private final Color colorPBL = new Color( 110, 102, 87 );
+
+    private final Color colorPBR = new Color( 61, 55, 47 );
+
+    private final Color colorPBO = new Color( 146, 113, 85 );
+
+    private final Color colorPSL = new Color( 127, 36, 0 );
+
+    private final Color colorPSR = new Color( 96, 31, 5 );
+
+    private final Color colorPSO = new Color( 152, 60, 24 );
+
+    private final Color colorPWL = new Color( 152, 60, 24 );
+
+    private final Color colorPWR = new Color( 96, 31, 5 );
+
+    private final Color bgGalgen = new Color( 63, 59, 21 );
+
+    private final Color bgGalgenHell = new Color( 87, 82, 32 );
+
+    private final Color polygonKontur = new Color( 80, 25, 4 );
+
+    private final Color baseKontur = new Color( 53, 49, 11 );
+
     private Image image;
+
     private Graphics offscreen;
+
     // Coordinates from the Base. begins always in the lower right corner.
-    private double[] pBUx = {250, 201, 167, 208};
-    private double[] pBUy = {462, 473, 473, 462};
-    private double[] pBOx = {250, 199, 164, 208};
-    private double[] pBOy = {444, 457, 457, 446};
+    private final double[] pBUx = {250, 201, 167, 208};
+
+    private final double[] pBUy = {462, 473, 473, 462};
+
+    private final double[] pBOx = {250, 199, 164, 208};
+
+    private final double[] pBOy = {444, 457, 457, 446};
+
     // Coordinates from the vertical bar.
-    private double[] pSUx = {234, 215, 180, 196};
-    private double[] pSUy = {448, 453, 453, 448};
-    private double[] pSOx = {217, 187, 122, 154};
-    private double[] pSOy = {110, 124, 124, 110};
+    private final double[] pSUx = {234, 215, 180, 196};
+
+    private final double[] pSUy = {448, 453, 453, 448};
+
+    private final double[] pSOx = {217, 187, 122, 154};
+
+    private final double[] pSOy = {110, 124, 124, 110};
+
     // Coordinates from the horizontal bar.
-    private double[] pWUx = {219, 217, 154, 157};
-    private double[] pWUy = {152, 110, 110, 152};
-    private double[] pWOx = {435, 446, 376, 374};
-    private double[] pWOy = {66, 14, 14, 66};
+    private final double[] pWUx = {219, 217, 154, 157};
+
+    private final double[] pWUy = {152, 110, 110, 152};
+
+    private final double[] pWOx = {435, 446, 376, 374};
+
+    private final double[] pWOy = {66, 14, 14, 66};
+
     // Coordinates from the galgen seil.
-    private double[] pOx = {376, 380, 380, 376};
-    private double[] pOy = {90, 88, 88, 90};
-    private double[] pUx = {376, 380, 380, 376};
-    private double[] pUy = {173, 175, 173, 175};
-    private GalgenPolygon[] spritesPolygon = new GalgenPolygon[5];
-    private GalgenPolygon spriteBase = new GalgenPolygon(pBUx, pBUy, pBOx, pBOy, colorPBR, colorPBL, colorPBO, baseKontur, true);
-    private GalgenPolygon spriteSenkrecht = new GalgenPolygon(pSUx, pSUy,
-            pSOx, pSOy, colorPSR, colorPSL, colorPSO, polygonKontur, true);
-    private GalgenPolygon spriteWaagrecht = new GalgenPolygon(pWUx, pWUy,
-            pWOx, pWOy, colorPWR, colorPWL, colorPSO, polygonKontur, false);
-    private GalgenPolygon spriteGalgen = new GalgenSchlinge(pOx, pOy, pUx,
-            pUy, bgGalgen, bgGalgen, bgGalgen, bgGalgenHell, false);
-    private GalgenPolygon spriteBird = new GalgenVogel(this);
+    private final double[] pOx = {376, 380, 380, 376};
+
+    private final double[] pOy = {90, 88, 88, 90};
+
+    private final double[] pUx = {376, 380, 380, 376};
+
+    private final double[] pUy = {173, 175, 173, 175};
+
+    private final GalgenPolygon[] spritesPolygon = new GalgenPolygon[5];
+
+    private final GalgenPolygon spriteBase = new GalgenPolygon( pBUx, pBUy, pBOx, pBOy, colorPBR, colorPBL, colorPBO, baseKontur, true );
+
+    private final GalgenPolygon spriteSenkrecht = new GalgenPolygon( pSUx, pSUy,
+            pSOx, pSOy, colorPSR, colorPSL, colorPSO, polygonKontur, true );
+
+    private final GalgenPolygon spriteWaagrecht = new GalgenPolygon( pWUx, pWUy,
+            pWOx, pWOy, colorPWR, colorPWL, colorPSO, polygonKontur, false );
+
+    private final GalgenPolygon spriteGalgen = new GalgenSchlinge( pOx, pOy, pUx,
+            pUy, bgGalgen, bgGalgen, bgGalgen, bgGalgenHell, false );
+
+    private final GalgenPolygon spriteBird = new GalgenVogel( this );
 
     /**
      * Constructor for the Galgen object
      */
-    public Galgen() {
-        spritesPolygon[ 0 ] = spriteGalgen;
-        spritesPolygon[ 1 ] = spriteBase;
-        spritesPolygon[ 2 ] = spriteWaagrecht;
-        spritesPolygon[ 3 ] = spriteSenkrecht;
-        spritesPolygon[ 4 ] = spriteBird;
+    public Galgen()
+    {
+        spritesPolygon[0] = spriteGalgen;
+        spritesPolygon[1] = spriteBase;
+        spritesPolygon[2] = spriteWaagrecht;
+        spritesPolygon[3] = spriteSenkrecht;
+        spritesPolygon[4] = spriteBird;
     }
 
     /**
@@ -96,7 +141,8 @@ public class Galgen extends Canvas implements Runnable {
      *
      * @param count The new galgenBauStep value
      */
-    public void setGalgenBauStep(int count) {
+    public void setGalgenBauStep( final int count )
+    {
         this.galgenBauStep = count;
     }
 
@@ -105,31 +151,39 @@ public class Galgen extends Canvas implements Runnable {
      *
      * @param g Description of the Parameter
      */
-    public void paint(Graphics g) {
-        if (offscreen == null) {
-            image = createImage(this.getSize().width, this.getSize().height);
+    public void paint( final Graphics g )
+    {
+        if ( offscreen == null )
+        {
+            image = createImage( this.getSize().width, this.getSize().height );
             offscreen = image.getGraphics();
         }
-        offscreen.drawImage(bgBild.getImage(), 0, 0, this);
+        offscreen.drawImage( bgBild.getImage(), 0, 0, this );
 
-        for (int i = 0; i < spritesPolygon.length; i++) {
-            spritesPolygon[ i ].paint(offscreen);
+        for ( final GalgenPolygon aSpritesPolygon : spritesPolygon )
+        {
+            aSpritesPolygon.paint( offscreen );
         }
-        g.drawImage(image, 0, 0, this);
+        g.drawImage( image, 0, 0, this );
     }
 
     /**
      * Main processing method for the Galgen object
      */
-    public void run() {
-        while (threadRunning) {
-            try {
-                Thread.sleep(80);
+    public void run()
+    {
+        while ( threadRunning )
+        {
+            try
+            {
+                Thread.sleep( 80 );
             }
-            catch (InterruptedException e) {
+            catch ( InterruptedException e )
+            {
             }
 
-            if (!threadRunning) {
+            if ( !threadRunning )
+            {
                 return;
             }
             repaint();
@@ -139,8 +193,9 @@ public class Galgen extends Canvas implements Runnable {
     /**
      * initializes the Thread
      */
-    public void initThread() {
-        motor = new Thread(this);
+    public void initThread()
+    {
+        motor = new Thread( this );
         motor.start();
         threadRunning = true;
     }
@@ -148,63 +203,75 @@ public class Galgen extends Canvas implements Runnable {
     /**
      * @param g Graphics object
      */
-    public void update(Graphics g) {
-        if (galgenBauStep == STEP_ZERO) {
-            for (int i = 0; i < spritesPolygon.length; i++) {
-                spritesPolygon[ i ].setIsVisible(false);
-                spritesPolygon[ i ].setGrowing(false);
-                spritesPolygon[ i ].init();
+    public void update( final Graphics g )
+    {
+        if ( galgenBauStep == STEP_ZERO )
+        {
+            for ( final GalgenPolygon aSpritesPolygon : spritesPolygon )
+            {
+                aSpritesPolygon.setIsVisible( false );
+                aSpritesPolygon.setGrowing( false );
+                aSpritesPolygon.init();
             }
         }
-        if (galgenBauStep == STEP_BASE) {
-            spriteBase.setGrowing(true);
-            spriteBase.setIsVisible(true);
+        if ( galgenBauStep == STEP_BASE )
+        {
+            spriteBase.setGrowing( true );
+            spriteBase.setIsVisible( true );
         }
-        if (galgenBauStep == STEP_SENKRECHT) {
-            spriteSenkrecht.setGrowing(true);
-            spriteSenkrecht.setIsVisible(true);
-            spriteBase.setGrowing(true);
-            spriteBase.setIsVisible(true);
+        if ( galgenBauStep == STEP_SENKRECHT )
+        {
+            spriteSenkrecht.setGrowing( true );
+            spriteSenkrecht.setIsVisible( true );
+            spriteBase.setGrowing( true );
+            spriteBase.setIsVisible( true );
         }
-        if (galgenBauStep == STEP_WAAGRECHT) {
-            spriteWaagrecht.setGrowing(true);
-            spriteWaagrecht.setIsVisible(true);
-            spriteSenkrecht.setGrowing(true);
-            spriteSenkrecht.setIsVisible(true);
-            spriteBase.setGrowing(true);
-            spriteBase.setIsVisible(true);
+        if ( galgenBauStep == STEP_WAAGRECHT )
+        {
+            spriteWaagrecht.setGrowing( true );
+            spriteWaagrecht.setIsVisible( true );
+            spriteSenkrecht.setGrowing( true );
+            spriteSenkrecht.setIsVisible( true );
+            spriteBase.setGrowing( true );
+            spriteBase.setIsVisible( true );
         }
-        if (galgenBauStep == STEP_SCHLINGE) {
-            spriteGalgen.setGrowing(true);
-            spriteGalgen.setIsVisible(true);
-            spriteWaagrecht.setGrowing(true);
-            spriteWaagrecht.setIsVisible(true);
-            spriteSenkrecht.setGrowing(true);
-            spriteSenkrecht.setIsVisible(true);
-            spriteBase.setGrowing(true);
-            spriteBase.setIsVisible(true);
+        if ( galgenBauStep == STEP_SCHLINGE )
+        {
+            spriteGalgen.setGrowing( true );
+            spriteGalgen.setIsVisible( true );
+            spriteWaagrecht.setGrowing( true );
+            spriteWaagrecht.setIsVisible( true );
+            spriteSenkrecht.setGrowing( true );
+            spriteSenkrecht.setIsVisible( true );
+            spriteBase.setGrowing( true );
+            spriteBase.setIsVisible( true );
         }
-        if (galgenBauStep == STEP_BIRD) {
-            for (int i = 0; i < spritesPolygon.length - 1; i++) {
-                spritesPolygon[ i ].setIsVisible(true);
-                spritesPolygon[ i ].setGrowing(true);
+        if ( galgenBauStep == STEP_BIRD )
+        {
+            for ( int i = 0; i < spritesPolygon.length - 1; i++ )
+            {
+                spritesPolygon[i].setIsVisible( true );
+                spritesPolygon[i].setGrowing( true );
             }
 
-            spriteBird.setIsVisible(true);
+            spriteBird.setIsVisible( true );
         }
 
-        for (int i = 0; i < spritesPolygon.length; i++) {
-            if (spritesPolygon[ i ].isVisible()) {
-                spritesPolygon[ i ].update(g);
+        for ( final GalgenPolygon aSpritesPolygon : spritesPolygon )
+        {
+            if ( aSpritesPolygon.isVisible() )
+            {
+                aSpritesPolygon.update( g );
             }
         }
-        paint(g);
+        paint( g );
     }
 
     /**
      * stops the Thread
      */
-    public void stopThread() {
+    public void stopThread()
+    {
         threadRunning = false;
     }
 }

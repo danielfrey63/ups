@@ -18,28 +18,33 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class OpenCommand extends ActionCommand {
+public class OpenCommand extends ActionCommand
+{
+    private final MainModel model;
 
-    private MainModel model;
-
-    public OpenCommand(final MainModel model, final CommandManager manager) {
-        super(manager, Commands.FILE_OPEN);
+    public OpenCommand( final MainModel model, final CommandManager manager )
+    {
+        super( manager, Commands.FILE_OPEN );
         this.model = model;
     }
 
-    protected void handleExecute() {
-        try {
+    protected void handleExecute()
+    {
+        try
+        {
             final JFileChooser chooser = new JFileChooser();
-            final int ret = chooser.showOpenDialog(null);
-            if (ret == JFileChooser.APPROVE_OPTION) {
+            final int ret = chooser.showOpenDialog( null );
+            if ( ret == JFileChooser.APPROVE_OPTION )
+            {
                 final XStream xstream = Commands.getSerializer();
-                final FileReader reader = new FileReader(chooser.getSelectedFile());
-                final IFEntry root = (IFEntry) xstream.fromXML(reader);
-                model.getProjectModel().setRoot(root);
+                final FileReader reader = new FileReader( chooser.getSelectedFile() );
+                final IFEntry root = (IFEntry) xstream.fromXML( reader );
+                model.getProjectModel().setRoot( root );
                 reader.close();
             }
         }
-        catch (IOException e1) {
+        catch ( IOException e1 )
+        {
             e1.printStackTrace();
         }
     }

@@ -28,30 +28,29 @@ import java.util.List;
  */
 public class MultiAndFilter implements Filter
 {
+    private final List<Filter> filters;
 
-    private List<Filter> filters;
-
-    public MultiAndFilter(final Filter[] filters)
+    public MultiAndFilter( final Filter[] filters )
     {
-        this.filters = new ArrayList<Filter>(Arrays.asList(filters));
+        this.filters = new ArrayList<Filter>( Arrays.asList( filters ) );
     }
 
-    public void addFilter(final Filter filter)
+    public void addFilter( final Filter filter )
     {
-        filters.add(filter);
+        filters.add( filter );
     }
 
-    public void removeFilter(final Filter filter)
+    public void removeFilter( final Filter filter )
     {
-        filters.remove(filter);
+        filters.remove( filter );
     }
 
-    public boolean matches(final Object obj)
+    public boolean matches( final Object obj )
     {
         boolean matches = true;
-        for (final Filter filter : filters)
+        for ( final Filter filter : filters )
         {
-            matches &= filter.matches(obj);
+            matches &= filter.matches( obj );
         }
         return matches;
     }

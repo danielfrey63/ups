@@ -35,75 +35,90 @@ import java.util.TreeSet;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:50 $
  */
-public class SpeciesParser extends Parser {
-
-    public SpeciesParser(final Settings settings) {
-        super(settings);
+public class SpeciesParser extends Parser
+{
+    public SpeciesParser( final Settings settings )
+    {
+        super( settings );
     }
 
     /**
      * Processes the given files species directories into a map of {@link SpeciesEntry}s (for each species directory)
-     * and mapping of hierarchic entries (entry path -> entry object). The hieraric entries are added to the
-     * species entries children list as well.
+     * and mapping of hierarchic entries (entry path -> entry object). The hieraric entries are added to the species
+     * entries children list as well.
      *
      * @param file the directory
      * @return set of species entries
      */
-    public Set<SpeciesEntry> processFile(final File file) {
+    public Set<SpeciesEntry> processFile( final File file )
+    {
         // Map containing the species entry (basically a comparable directory) on the key side, and a map of hierarchic
         // entries (entry path -> entry object).
         final Set<SpeciesEntry> species = new TreeSet<SpeciesEntry>();
         final Set<String> speciesDirs = new TreeSet<String>();
-        findSpeciesDirs(file, speciesDirs);
-        for (final String speciesDir : speciesDirs) {
+        findSpeciesDirs( file, speciesDirs );
+        for ( final String speciesDir : speciesDirs )
+        {
             final Map<String, Entry> map = new TreeMap<String, Entry>();
-            final File[] speciesFiles = new File(speciesDir).listFiles(filter);
-            final SpeciesEntry speciesEntry = new SpeciesEntry(speciesDir, null, settings);
-            for (final File speciesFile : speciesFiles) {
-                addEntry(speciesFile, map);
+            final File[] speciesFiles = new File( speciesDir ).listFiles( filter );
+            final SpeciesEntry speciesEntry = new SpeciesEntry( speciesDir, null, settings );
+            for ( final File speciesFile : speciesFiles )
+            {
+                addEntry( speciesFile, map );
             }
             final Collection<Entry> entries = map.values();
-            for (final Entry entry : entries) {
-                speciesEntry.add(entry);
+            for ( final Entry entry : entries )
+            {
+                speciesEntry.add( entry );
             }
-            species.add(speciesEntry);
+            species.add( speciesEntry );
         }
         return species;
     }
 
-    private void addEntry(final File file, final Map<String, Entry> entries) {
+    private void addEntry( final File file, final Map<String, Entry> entries )
+    {
         final String path = file.getAbsolutePath();
         final String name = file.getName();
-        final List<String> tokens = settings.getHierarchicTokens(name);
+        final List<String> tokens = settings.getHierarchicTokens( name );
         Entry parent = null;
         final List<Entry> defaults = new ArrayList<Entry>();
-        for (final String token : tokens) {
+        for ( final String token : tokens )
+        {
             final Entry entry;
-            if (parent == null) {
-                if (entries.containsKey(token)) {
-                    entry = entries.get(token);
+            if ( parent == null )
+            {
+                if ( entries.containsKey( token ) )
+                {
+                    entry = entries.get( token );
                 }
-                else {
-                    entry = new Entry(token, parent, settings);
-                    entries.put(token, entry);
-                }
-            }
-            else {
-                if (parent.get(token) == null) {
-                    entry = new Entry(token, parent, settings);
-                }
-                else {
-                    entry = parent.get(token);
+                else
+                {
+                    entry = new Entry( token, parent, settings );
+                    entries.put( token, entry );
                 }
             }
-            if (settings.isDefault(name, token)) {
-                defaults.add(entry);
+            else
+            {
+                if ( parent.get( token ) == null )
+                {
+                    entry = new Entry( token, parent, settings );
+                }
+                else
+                {
+                    entry = parent.get( token );
+                }
+            }
+            if ( settings.isDefault( name, token ) )
+            {
+                defaults.add( entry );
             }
             parent = entry;
         }
-        final FileEntry fileEntry = new FileEntry(path, parent, settings);
-        for (final Entry entry : defaults) {
-            entry.setDefault(fileEntry);
+        final FileEntry fileEntry = new FileEntry( path, parent, settings );
+        for ( final Entry entry : defaults )
+        {
+            entry.setDefault( fileEntry );
         }
     }
 
@@ -113,15 +128,20 @@ public class SpeciesParser extends Parser {
      * @param file the file to start
      * @param list the list to add the directories to
      */
-    private void findSpeciesDirs(final File file, final Set<String> list) {
-        if (filter.accept(file.getParentFile(), file.getName())) {
-            if (file.isFile()) {
-                list.add(file.getParent().replaceAll("\\\\", "/"));
+    private void findSpeciesDirs( final File file, final Set<String> list )
+    {
+        if ( filter.accept( file.getParentFile(), file.getName() ) )
+        {
+            if ( file.isFile() )
+            {
+                list.add( file.getParent().replaceAll( "\\\\", "/" ) );
             }
-            else {
+            else
+            {
                 final File[] files = file.listFiles();
-                for (final File file1 : files) {
-                    findSpeciesDirs(file1, list);
+                for ( final File file1 : files )
+                {
+                    findSpeciesDirs( file1, list );
                 }
             }
         }
@@ -133,18 +153,23 @@ public class SpeciesParser extends Parser {
      * @param entry
      * @param mapping
      */
-    public static void findFileEntriesWithin(final Entry entry, final Map<Entry, FileEntry> mapping) {
+    public static void findFileEntriesWithin( final Entry entry, final Map<Entry, FileEntry> mapping )
+    {
         final List<Entry> entries = entry.getList();
-        for (final Entry child : entries) {
-            if (child instanceof FileEntry) {
-                mapping.put(entry, (FileEntry) child);
+        for ( final Entry child : entries )
+        {
+            if ( child instanceof FileEntry )
+            {
+                mapping.put( entry, (FileEntry) child );
             }
-            else {
-                final List<FileEntry> fileEntries = findFileEntriesFor(child);
-                if (fileEntries.size() > 0) {
-                    mapping.put(child, fileEntries.get(0));
+            else
+            {
+                final List<FileEntry> fileEntries = findFileEntriesFor( child );
+                if ( fileEntries.size() > 0 )
+                {
+                    mapping.put( child, fileEntries.get( 0 ) );
                 }
-                findFileEntriesWithin(child, mapping);
+                findFileEntriesWithin( child, mapping );
             }
         }
     }
@@ -155,13 +180,16 @@ public class SpeciesParser extends Parser {
      * @param entry the entry of which the children should be searched for {@link FileEntry}s
      * @return a list of {@link FileEntry}s
      */
-    static List<FileEntry> findFileEntriesFor(final Entry entry) {
+    static List<FileEntry> findFileEntriesFor( final Entry entry )
+    {
         final List<Entry> children = entry.getList();
         final List<FileEntry> fileEntries = new ArrayList<FileEntry>();
-        for (final Entry child : children) {
-            if (child instanceof FileEntry) {
+        for ( final Entry child : children )
+        {
+            if ( child instanceof FileEntry )
+            {
                 final FileEntry fileEntry = (FileEntry) child;
-                fileEntries.add(fileEntry);
+                fileEntries.add( fileEntry );
             }
         }
         return fileEntries;

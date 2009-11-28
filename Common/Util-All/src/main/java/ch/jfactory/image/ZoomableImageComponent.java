@@ -23,7 +23,7 @@ import javax.swing.JViewport;
 
 public class ZoomableImageComponent extends JScrollPane
 {
-    private CachedImageComponent ci;
+    private final CachedImageComponent ci;
 
     private Rectangle zoomRect;
 
@@ -33,19 +33,19 @@ public class ZoomableImageComponent extends JScrollPane
 
     public static final boolean DYNAMICZOOM = false;
 
-    public ZoomableImageComponent(final PictureCache c, final int size)
+    public ZoomableImageComponent( final PictureCache c, final int size )
     {
-        setViewportView(ci = new LocalCachedImageComponent(c, size));
-        setBorder(BorderFactory.createEmptyBorder());
+        setViewportView( ci = new LocalCachedImageComponent( c, size ) );
+        setBorder( BorderFactory.createEmptyBorder() );
 
         final DragZoom dragZoom = new DragZoom();
-        addMouseListener(dragZoom);
-        addMouseMotionListener(dragZoom);
+        addMouseListener( dragZoom );
+        addMouseMotionListener( dragZoom );
     }
 
-    public void setImage(final String s, final boolean b)
+    public void setImage( final String s, final boolean b )
     {
-        ci.setImage(s, false);
+        ci.setImage( s, false );
     }
 
     public String getImage()
@@ -55,8 +55,8 @@ public class ZoomableImageComponent extends JScrollPane
 
     public void resetZoom()
     {
-        ci.setZoomFaktor(1.0);
-        getViewport().setViewSize(ci.getPreferredSize());
+        ci.setZoomFaktor( 1.0 );
+        getViewport().setViewSize( ci.getPreferredSize() );
     }
 
     public boolean isZoomed()
@@ -64,52 +64,52 @@ public class ZoomableImageComponent extends JScrollPane
         return ci.getZoomFaktor() != 1.0;
     }
 
-    public void setZoom(final boolean b)
+    public void setZoom( final boolean b )
     {
-        setZoom(b ? 2.0 : 1.0);
+        setZoom( b ? 2.0 : 1.0 );
     }
 
-    public void setZoom(final double f)
+    public void setZoom( final double f )
     {
-        ci.setZoomFaktor(f);
-        getViewport().setViewSize(ci.getPreferredSize());
+        ci.setZoomFaktor( f );
+        getViewport().setViewSize( ci.getPreferredSize() );
     }
 
-    private void setZoom(Rectangle r)
+    private void setZoom( Rectangle r )
     {
-        if (r != null)
+        if ( r != null )
         {
-            r = adjustRect(r);
+            r = adjustRect( r );
             final Rectangle visi = getVisibleRect();
             visi.width *= ci.getZoomFaktor();
             visi.height *= ci.getZoomFaktor();
             final double oldzoomfaktor = ci.getZoomFaktor();
-            double newzoomfaktor = ((double) visi.width / (double) r.width);
-            if (newzoomfaktor > ((double) visi.height / (double) r.height))
+            double newzoomfaktor = ( (double) visi.width / (double) r.width );
+            if ( newzoomfaktor > ( (double) visi.height / (double) r.height ) )
             {
-                newzoomfaktor = ((double) visi.height / (double) r.height);
+                newzoomfaktor = ( (double) visi.height / (double) r.height );
             }
-            ci.setZoomFaktor(newzoomfaktor);
-            getViewport().setViewSize(ci.getPreferredSize());
+            ci.setZoomFaktor( newzoomfaktor );
+            getViewport().setViewSize( ci.getPreferredSize() );
             final Point p = r.getLocation();
             double x = (double) p.x / oldzoomfaktor;
             double y = (double) p.y / oldzoomfaktor;
             x *= newzoomfaktor;
             y *= newzoomfaktor;
-            getViewport().setViewPosition(new Point((int) x, (int) y));
+            getViewport().setViewPosition( new Point( (int) x, (int) y ) );
         }
         repaint();
     }
 
-    public Rectangle adjustRect(final Rectangle r)
+    public Rectangle adjustRect( final Rectangle r )
     {
-        final Rectangle r1 = new Rectangle(r);
-        if (r.width < 0)
+        final Rectangle r1 = new Rectangle( r );
+        if ( r.width < 0 )
         {
             r1.x = r.x + r.width;
             r1.width = -r.width;
         }
-        if (r.height < 0)
+        if ( r.height < 0 )
         {
             r1.y = r.y + r.height;
             r1.height = -r.height;
@@ -117,10 +117,10 @@ public class ZoomableImageComponent extends JScrollPane
         return r1;
     }
 
-    public void setZoomStarted(final boolean b)
+    public void setZoomStarted( final boolean b )
     {
         zoomStarted = b;
-        if (!zoomStarted)
+        if ( !zoomStarted )
         {
             zoomRect = null;
             zoomStarted = false;
@@ -136,9 +136,9 @@ public class ZoomableImageComponent extends JScrollPane
 
     public void stopZooming()
     {
-        if (isZooming)
+        if ( isZooming )
         {
-            synchronized (zoomRect)
+            synchronized ( zoomRect )
             {
                 isZooming = false;
                 zoomRect = null;
@@ -163,18 +163,18 @@ public class ZoomableImageComponent extends JScrollPane
          *
          * @param e Description of the Parameter
          */
-        public void mousePressed(final MouseEvent e)
+        public void mousePressed( final MouseEvent e )
         {
             m_pntLast = e.getPoint();
-            if (true)
+            if ( true )
             {
                 return;
             }
-            if (zoomStarted)
+            if ( zoomStarted )
             {
-                if (isZooming)
+                if ( isZooming )
                 {
-                    setZoom(zoomRect);
+                    setZoom( zoomRect );
                     zoomRect = null;
                 }
                 isZooming = !isZooming;
@@ -187,47 +187,47 @@ public class ZoomableImageComponent extends JScrollPane
          *
          * @param e Description of the Parameter
          */
-        public void mouseDragged(final MouseEvent e)
+        public void mouseDragged( final MouseEvent e )
         {
-            if (isZooming)
+            if ( isZooming )
             {
                 return;
             }
 
-            m_pntLast.setLocation(m_pntLast.getX() - e.getPoint().getX(),
-                    m_pntLast.y - e.getPoint().getY());
+            m_pntLast.setLocation( m_pntLast.getX() - e.getPoint().getX(),
+                    m_pntLast.y - e.getPoint().getY() );
             final JViewport m_jvp = getViewport();
 
             final Point m_pntOld = m_jvp.getViewPosition();
             double x = m_pntOld.getX();
             double y = m_pntOld.getY();
-            if (m_pntOld.getX() + m_pntLast.getX() >= 0)
+            if ( m_pntOld.getX() + m_pntLast.getX() >= 0 )
             {
                 x = m_pntOld.getX() + m_pntLast.getX();
             }
-            if (m_pntOld.getY() + m_pntLast.getY() >= 0)
+            if ( m_pntOld.getY() + m_pntLast.getY() >= 0 )
             {
                 y = m_pntOld.getY() + m_pntLast.getY();
             }
             Point m_pntNew = new Point();
-            m_pntNew.setLocation(x, y);
+            m_pntNew.setLocation( x, y );
 
             m_pntLast = e.getPoint();
             final Point m_pt = m_pntNew;
             m_pntNew = m_pntOld;
-            m_jvp.setViewPosition(m_pt);
+            m_jvp.setViewPosition( m_pt );
             m_jvp.revalidate();
         }
 
-        public void mouseMoved(final MouseEvent e)
+        public void mouseMoved( final MouseEvent e )
         {
-            if (true)
+            if ( true )
             {
                 return;
             }
-            if (isZooming)
+            if ( isZooming )
             {
-                zoomRect = new Rectangle(start.x, start.y, e.getPoint().x - start.x, e.getPoint().y - start.y);
+                zoomRect = new Rectangle( start.x, start.y, e.getPoint().x - start.x, e.getPoint().y - start.y );
                 repaint();
             }
         }
@@ -235,23 +235,23 @@ public class ZoomableImageComponent extends JScrollPane
 
     class LocalCachedImageComponent extends CachedImageComponent
     {
-        public LocalCachedImageComponent(final PictureCache c, final int size)
+        public LocalCachedImageComponent( final PictureCache c, final int size )
         {
-            super(c, size);
+            super( c, size );
         }
 
-        public void paintComponent(final Graphics g)
+        public void paintComponent( final Graphics g )
         {
-            super.paintComponent(g);
-            if (true)
+            super.paintComponent( g );
+            if ( true )
             {
                 return;
             }
-            if (zoomRect != null)
+            if ( zoomRect != null )
             {
-                g.setColor(Color.BLUE);
-                final Rectangle r = adjustRect(zoomRect);
-                g.drawRect(r.x, r.y, r.width, r.height);
+                g.setColor( Color.BLUE );
+                final Rectangle r = adjustRect( zoomRect );
+                g.drawRect( r.x, r.y, r.width, r.height );
             }
         }
     }

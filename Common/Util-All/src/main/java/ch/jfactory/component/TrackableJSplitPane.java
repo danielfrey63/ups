@@ -24,68 +24,67 @@ import javax.swing.JSplitPane;
  */
 public class TrackableJSplitPane extends NiceSplitPane
 {
-
     private boolean added = false;
 
-    private Set listeners = new HashSet();
+    private final Set listeners = new HashSet();
 
-    public TrackableJSplitPane(final int newOrientation)
+    public TrackableJSplitPane( final int newOrientation )
     {
-        super(newOrientation);
+        super( newOrientation );
     }
 
-    public TrackableJSplitPane(final int newOrientation, final boolean newContinuousLayout)
+    public TrackableJSplitPane( final int newOrientation, final boolean newContinuousLayout )
     {
-        super(newOrientation, newContinuousLayout);
+        super( newOrientation, newContinuousLayout );
     }
 
-    public TrackableJSplitPane(final int newOrientation, final Component newLeftComponent, final Component newRightComponent)
+    public TrackableJSplitPane( final int newOrientation, final Component newLeftComponent, final Component newRightComponent )
     {
-        super(newOrientation, newLeftComponent, newRightComponent);
+        super( newOrientation, newLeftComponent, newRightComponent );
     }
 
-    public TrackableJSplitPane(final int newOrientation, final boolean newContinuousLayout, final Component newLeftComponent,
-                               final Component newRightComponent)
+    public TrackableJSplitPane( final int newOrientation, final boolean newContinuousLayout, final Component newLeftComponent,
+                                final Component newRightComponent )
     {
-        super(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent);
+        super( newOrientation, newContinuousLayout, newLeftComponent, newRightComponent );
     }
 
-    protected void addImpl(final Component comp, final Object constraints, final int index)
+    protected void addImpl( final Component comp, final Object constraints, final int index )
     {
-        super.addImpl(comp, constraints, index);
-        if (!added)
+        super.addImpl( comp, constraints, index );
+        if ( !added )
         {
-            comp.addComponentListener(new ComponentAdapter()
+            comp.addComponentListener( new ComponentAdapter()
             {
-                public void componentResized(final ComponentEvent e)
+                public void componentResized( final ComponentEvent e )
                 {
-                    super.componentResized(e);
-                    fireDividerChangedEvent(new DividerChangeEvent(TrackableJSplitPane.this, getDividerLocation()));
+                    super.componentResized( e );
+                    fireDividerChangedEvent( new DividerChangeEvent( TrackableJSplitPane.this, getDividerLocation() ) );
                 }
-            });
+            } );
             added = true;
         }
     }
 
-    private void fireDividerChangedEvent(final DividerChangeEvent event)
+    private void fireDividerChangedEvent( final DividerChangeEvent event )
     {
-        for (final Object listener1 : listeners)
+        for ( final Object listener1 : listeners )
         {
             final DividerListener listener = (DividerListener) listener1;
-            listener.dividerMoved(event);
+            listener.dividerMoved( event );
         }
     }
 
-    public void addDividerListener(final DividerListener listener)
+    public void addDividerListener( final DividerListener listener )
     {
-        listeners.add(listener);
+        listeners.add( listener );
     }
 
     public class DividerChangeEvent
     {
         private JSplitPane who = null;
 
-        public DividerChangeEvent(final JSplitPane who, final int newPos)
+        public DividerChangeEvent( final JSplitPane who, final int newPos )
         {
             this.who = who;
         }
@@ -98,6 +97,6 @@ public class TrackableJSplitPane extends NiceSplitPane
 
     public interface DividerListener
     {
-        public void dividerMoved(DividerChangeEvent e);
+        public void dividerMoved( DividerChangeEvent e );
     }
 }

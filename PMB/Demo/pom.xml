@@ -7,23 +7,23 @@
         <version>1.0</version>
         <relativePath>../../Common/Build</relativePath>
     </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.xmatrix.ups.pmb</groupId>
-  <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
-  <name>PMB Demo Set</name>
-  <version>2.0</version>
-  <description>Bilder und Set f�r Demo Modus</description>
-  <build>
-    <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <excludes>
-                <exclude>**/Aquilegia vulgaris/*</exclude>
-                <exclude>**/Dryopteris filix-mas/*</exclude>
-                <exclude>**/Neottia nidus-avis/*</exclude>
-                <exclude>**/Rhododendron ferrugineum/*</exclude>
-            </excludes>
-        </resource>
-    </resources>
-  </build>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.ups.pmb</groupId>
+    <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
+    <name>PMB Demo Set</name>
+    <version>2.0</version>
+    <description>Bilder und Set f�r Demo Modus</description>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/Aquilegia vulgaris/*</exclude>
+                    <exclude>**/Dryopteris filix-mas/*</exclude>
+                    <exclude>**/Neottia nidus-avis/*</exclude>
+                    <exclude>**/Rhododendron ferrugineum/*</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
 </project>

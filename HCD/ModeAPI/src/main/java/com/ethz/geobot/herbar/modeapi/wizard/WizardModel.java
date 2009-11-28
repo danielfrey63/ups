@@ -1,6 +1,5 @@
 package com.ethz.geobot.herbar.modeapi.wizard;
 
-
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -13,8 +12,8 @@ import javax.swing.Action;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-public interface WizardModel {
-
+public interface WizardModel
+{
     /**
      * Return the herbar context of this mode.
      *
@@ -34,7 +33,7 @@ public interface WizardModel {
      *
      * @param isNextEnabled new state of the next button
      */
-    void setNextEnabled(boolean isNextEnabled);
+    void setNextEnabled( boolean isNextEnabled );
 
     /**
      * returns all WizardPanes of the model.
@@ -48,7 +47,7 @@ public interface WizardModel {
      *
      * @return the requested pane
      */
-    WizardPane getPane(int index);
+    WizardPane getPane( int index );
 
     /**
      * get the next WizardPane.
@@ -62,14 +61,14 @@ public interface WizardModel {
      *
      * @param isFinishEnabled new state of the finish button
      */
-    void setFinishEnabled(boolean isFinishEnabled);
+    void setFinishEnabled( boolean isFinishEnabled );
 
     /**
      * Set the enable state for the cancel button of the wizard.
      *
      * @param isCancelEnabled new state of the finish button
      */
-    void setCancelEnabled(boolean isCancelEnabled);
+    void setCancelEnabled( boolean isCancelEnabled );
 
     /**
      * Return the enable state for the finish button of the wizard.
@@ -83,7 +82,7 @@ public interface WizardModel {
      *
      * @param listener a listener listens to state changes
      */
-    void addWizardStateListener(WizardStateListener listener);
+    void addWizardStateListener( WizardStateListener listener );
 
     /**
      * Informs the wizard about the present of a next pane.
@@ -125,14 +124,14 @@ public interface WizardModel {
      *
      * @param listener listener to remove from the list
      */
-    void removeWizardStateListener(WizardStateListener listener);
+    void removeWizardStateListener( WizardStateListener listener );
 
     /**
      * set the enable state for the next previous of the wizard.
      *
      * @param isPreviousEnabled new state of the previous button
      */
-    void setPreviousEnabled(boolean isPreviousEnabled);
+    void setPreviousEnabled( boolean isPreviousEnabled );
 
     /**
      * return the index of the current pane.
@@ -154,7 +153,7 @@ public interface WizardModel {
      *
      * @param listener the listener which will be notified
      */
-    void addPropertyChangeListener(PropertyChangeListener listener);
+    void addPropertyChangeListener( PropertyChangeListener listener );
 
     /**
      * add a property change listener for a specific property
@@ -162,14 +161,14 @@ public interface WizardModel {
      * @param propertyName the name of the property
      * @param listener     the listener which will be notified
      */
-    void addPropertyChangeListener(String propertyName, PropertyChangeListener listener);
+    void addPropertyChangeListener( String propertyName, PropertyChangeListener listener );
 
     /**
      * remove a property change listener
      *
      * @param listener the listener which will be notified
      */
-    void removePropertyChangeListener(PropertyChangeListener listener);
+    void removePropertyChangeListener( PropertyChangeListener listener );
 
     /**
      * remove a property change listener for a specific property
@@ -177,7 +176,7 @@ public interface WizardModel {
      * @param propertyName the name of the property
      * @param listener     the listener which will be notified
      */
-    void removePropertyChangeListener(String propertyName, PropertyChangeListener listener);
+    void removePropertyChangeListener( String propertyName, PropertyChangeListener listener );
 
     /**
      * is called inside the constructor before the panes are initialize
@@ -194,7 +193,7 @@ public interface WizardModel {
      *
      * @param finishAction
      */
-    void registerFinishAction(Action finishAction);
+    void registerFinishAction( Action finishAction );
 
     /**
      * return the  dialog title
@@ -208,7 +207,7 @@ public interface WizardModel {
      *
      * @param currentPane pane index to set
      */
-    void setStart(int currentPane);
+    void setStart( int currentPane );
 
     int getStart();
 

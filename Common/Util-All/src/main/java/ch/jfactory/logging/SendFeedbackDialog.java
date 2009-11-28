@@ -28,132 +28,134 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-/** @author Thomas Wegmueller */
+/**
+ * @author Thomas Wegmueller
+ */
 public class SendFeedbackDialog extends JDialog
 {
     private String dump = "---";
 
-    private String title = Strings.getString("error.feedback.title");
+    private final String title = Strings.getString( "error.feedback.title" );
 
     private Icon icon;
 
-    private String description = Strings.getString("error.feedback.info");
+    private final String description = Strings.getString( "error.feedback.info" );
 
-    private String errorMessage = Strings.getString("error.feedback.message");
+    private String errorMessage = Strings.getString( "error.feedback.message" );
 
-    private String feedbackMail = Strings.getString("error.feedback.email");
+    private String feedbackMail = Strings.getString( "error.feedback.email" );
 
     public SendFeedbackDialog()
     {
-        super((JFrame) null, Strings.getString("error.feedback.window"), true);
-        this.setLocation(100, 100);
+        super( (JFrame) null, Strings.getString( "error.feedback.window" ), true );
+        this.setLocation( 100, 100 );
     }
 
-    public void setDump(final String dump)
+    public void setDump( final String dump )
     {
         this.dump = dump;
     }
 
-    public void setErrorMessage(final String errorMessage)
+    public void setErrorMessage( final String errorMessage )
     {
         this.errorMessage = errorMessage;
     }
 
-    public void setFeedbackMail(final String feedbackMail)
+    public void setFeedbackMail( final String feedbackMail )
     {
         this.feedbackMail = feedbackMail;
     }
 
     public Container buildContentPane()
     {
-        final JPanel panel = new JPanel(new BorderLayout(5, 5));
+        final JPanel panel = new JPanel( new BorderLayout( 5, 5 ) );
 
-        panel.add(buildHeader(), BorderLayout.NORTH);
-        panel.add(buildTabbedPane(), BorderLayout.CENTER);
-        panel.add(buildButtonBar(), BorderLayout.SOUTH);
+        panel.add( buildHeader(), BorderLayout.NORTH );
+        panel.add( buildTabbedPane(), BorderLayout.CENTER );
+        panel.add( buildButtonBar(), BorderLayout.SOUTH );
         return panel;
     }
 
     public JComponent createCopyToClipboard()
     {
-        final JButton btn = new JButton(Strings.getString("error.feedback.copy"));
-        btn.addActionListener(new ActionListener()
+        final JButton btn = new JButton( Strings.getString( "error.feedback.copy" ) );
+        btn.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 copyToClipboard();
             }
-        });
+        } );
         return btn;
     }
 
     public JComponent createCloseButton()
     {
-        final JButton btn = new JButton("Close");
-        btn.addActionListener(new ActionListener()
+        final JButton btn = new JButton( "Close" );
+        btn.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 dispose();
             }
-        });
-        getRootPane().setDefaultButton(btn);
+        } );
+        getRootPane().setDefaultButton( btn );
         return btn;
     }
 
     public JComponent buildButtonBar()
     {
-        final JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-        panel.add(createCopyToClipboard());
-        panel.add(createCloseButton());
+        final JPanel panel = new JPanel( new FlowLayout( FlowLayout.RIGHT, 5, 5 ) );
+        panel.add( createCopyToClipboard() );
+        panel.add( createCloseButton() );
         return panel;
     }
 
     public JComponent buildTabbedPane()
     {
         final NiceTabbedPane tab = new NiceTabbedPane();
-        tab.setBorder(null);
-        tab.add(Strings.getString("error.feedback.helptab"), createHelp());
-        tab.add(Strings.getString("error.feedback.contenttab"), createMultiLineLabel(dump));
-        tab.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        tab.setBorder( null );
+        tab.add( Strings.getString( "error.feedback.helptab" ), createHelp() );
+        tab.add( Strings.getString( "error.feedback.contenttab" ), createMultiLineLabel( dump ) );
+        tab.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
         return tab;
     }
 
     private JComponent createHelp()
     {
-        final JComponent lab = createMultiLineLabel(errorMessage + feedbackMail);
-        lab.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        final JComponent lab = createMultiLineLabel( errorMessage + feedbackMail );
+        lab.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
         return lab;
     }
 
     public void open()
     {
-        setContentPane(buildContentPane());
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(500, 500);
+        setContentPane( buildContentPane() );
+        this.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
+        this.setSize( 500, 500 );
         this.requestFocus();
-        this.setVisible(true);
+        this.setVisible( true );
     }
 
     public void copyToClipboard()
     {
-        final StringSelection selection = new StringSelection(dump);
-        getToolkit().getSystemClipboard().setContents(selection, selection);
+        final StringSelection selection = new StringSelection( dump );
+        getToolkit().getSystemClipboard().setContents( selection, selection );
     }
 
-    public JComponent createMultiLineLabel(final String s)
+    public JComponent createMultiLineLabel( final String s )
     {
-        final JTextArea area = new JTextArea(s);
-        area.setLineWrap(true);
-        area.setWrapStyleWord(true);
-        area.setEditable(false);
-        area.setBorder(new EmptyBorder(12, 12, 12, 12));
-        area.setOpaque(false);
-        final JScrollPane pane = new JScrollPane(area);
-        pane.setOpaque(false);
-        pane.getViewport().setOpaque(false);
-        pane.setBorder(null);
-        pane.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 10));
+        final JTextArea area = new JTextArea( s );
+        area.setLineWrap( true );
+        area.setWrapStyleWord( true );
+        area.setEditable( false );
+        area.setBorder( new EmptyBorder( 12, 12, 12, 12 ) );
+        area.setOpaque( false );
+        final JScrollPane pane = new JScrollPane( area );
+        pane.setOpaque( false );
+        pane.getViewport().setOpaque( false );
+        pane.setBorder( null );
+        pane.setBorder( BorderFactory.createEmptyBorder( 0, 12, 0, 10 ) );
         return pane;
     }
 
@@ -165,18 +167,20 @@ public class SendFeedbackDialog extends JDialog
     protected JComponent buildHeaderComponent()
     {
         final JComponent header = buildHeaderPanel();
-        header.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 10));
-        header.setMinimumSize(new Dimension(300, 70));
+        header.setBorder( BorderFactory.createEmptyBorder( 0, 12, 0, 10 ) );
+        header.setMinimumSize( new Dimension( 300, 70 ) );
         return header;
     }
 
-    /** Builds the panel. */
+    /**
+     * Builds the panel.
+     */
     private JComponent buildHeader()
     {
-        final JPanel pan = new JPanel(new BorderLayout(5, 5));
-        pan.add(buildHeaderComponent(), BorderLayout.CENTER);
-        pan.add(new JSeparator(), BorderLayout.SOUTH);
-        pan.setBackground(Color.white);
+        final JPanel pan = new JPanel( new BorderLayout( 5, 5 ) );
+        pan.add( buildHeaderComponent(), BorderLayout.CENTER );
+        pan.add( new JSeparator(), BorderLayout.SOUTH );
+        pan.setBackground( Color.white );
         return pan;
     }
 
@@ -187,13 +191,13 @@ public class SendFeedbackDialog extends JDialog
      */
     private JComponent buildHeaderPanel()
     {
-        final JPanel panel = new JPanel(new GridBagLayout());
-        panel.setOpaque(false);
+        final JPanel panel = new JPanel( new GridBagLayout() );
+        panel.setOpaque( false );
 
-        final JLabel titleLabel = new JLabel(title);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD));
-        final JComponent descriptionArea = createMultiLineLabel(description);
-        final JComponent iconLabel = new JLabel(icon);
+        final JLabel titleLabel = new JLabel( title );
+        titleLabel.setFont( titleLabel.getFont().deriveFont( Font.BOLD ) );
+        final JComponent descriptionArea = createMultiLineLabel( description );
+        final JComponent iconLabel = new JLabel( icon );
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -202,24 +206,24 @@ public class SendFeedbackDialog extends JDialog
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 0.0;
-        gbc.insets = new Insets(4, 4, 0, 0);
-        panel.add(titleLabel, gbc);
+        gbc.insets = new Insets( 4, 4, 0, 0 );
+        panel.add( titleLabel, gbc );
 
-        gbc.insets = new Insets(2, 2, 0, 0);
-        panel.add(descriptionArea, gbc);
+        gbc.insets = new Insets( 2, 2, 0, 0 );
+        panel.add( descriptionArea, gbc );
 
         gbc.weighty = 1.0;
-        gbc.insets = new Insets(0, 0, 3, 0);
-        panel.add(Box.createGlue(), gbc);
+        gbc.insets = new Insets( 0, 0, 3, 0 );
+        panel.add( Box.createGlue(), gbc );
         //
-        final JPanel result = new JPanel(new BorderLayout(4, 0));
-        result.add(panel, BorderLayout.CENTER);
-        result.add(iconLabel, BorderLayout.EAST);
+        final JPanel result = new JPanel( new BorderLayout( 4, 0 ) );
+        result.add( panel, BorderLayout.CENTER );
+        result.add( iconLabel, BorderLayout.EAST );
 
-        final Dimension size = new Dimension(300, 70);
-        result.setMinimumSize(size);
-        result.setPreferredSize(size);
-        result.setOpaque(false);
+        final Dimension size = new Dimension( 300, 70 );
+        result.setMinimumSize( size );
+        result.setPreferredSize( size );
+        result.setOpaque( false );
 
         return result;
     }

@@ -16,9 +16,9 @@
  */
 package ch.jfactory.projecttime.invoice;
 
+import ch.jfactory.projecttime.domain.impl.Invoice;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import ch.jfactory.projecttime.domain.impl.Invoice;
 
 /**
  * TODO: document
@@ -26,16 +26,18 @@ import ch.jfactory.projecttime.domain.impl.Invoice;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class AddEntry extends ActionCommand {
+public class AddEntry extends ActionCommand
+{
+    private final InvoiceModel model;
 
-    private InvoiceModel model;
-
-    public AddEntry(CommandManager commandManager, InvoiceModel model) {
-        super(commandManager, Commands.COMMANDID_ADD);
+    public AddEntry( final CommandManager commandManager, final InvoiceModel model )
+    {
+        super( commandManager, Commands.COMMANDID_ADD );
         this.model = model;
     }
 
-    protected void handleExecute() {
-        model.addInvoice(new Invoice());
+    protected void handleExecute()
+    {
+        model.addInvoice( new Invoice() );
     }
 }

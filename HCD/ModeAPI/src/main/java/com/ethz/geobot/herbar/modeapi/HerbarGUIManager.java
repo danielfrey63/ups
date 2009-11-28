@@ -11,21 +11,21 @@ import javax.swing.JFrame;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public interface HerbarGUIManager {
-
+public interface HerbarGUIManager
+{
     /**
      * Set the reference to the component that represents the mode.
      *
      * @param component reference to the view component
      */
-    void setViewComponent(Component component);
+    void setViewComponent( Component component );
 
     /**
      * Set WizardModel for the mode. This is used by Herbar application to display the wizard.
      *
      * @param wm reference to a WizardModel
      */
-    void setWizardModel(WizardModel wm);
+    void setWizardModel( WizardModel wm );
 
     /**
      * invoke the mode wizard.
@@ -44,7 +44,7 @@ public interface HerbarGUIManager {
      *
      * @param message the error message
      */
-    void showErrorMessage(String message);
+    void showErrorMessage( String message );
 
     /**
      * Returns the status bar of the main frame.

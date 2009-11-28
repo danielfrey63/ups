@@ -10,19 +10,24 @@ import java.util.EventObject;
  */
 public class UpdateChangeEvent extends EventObject
 {
-
-    /** Holds value of property StepsCount. */
+    /**
+     * Holds value of property StepsCount.
+     */
     private int stepsCount;
 
-    /** Holds value of property currentStep. */
+    /**
+     * Holds value of property currentStep.
+     */
     private int currentStep;
 
-    /** Holds value of property stepDescription. */
+    /**
+     * Holds value of property stepDescription.
+     */
     private String stepDescription;
 
-    public UpdateChangeEvent(final Object source)
+    public UpdateChangeEvent( final Object source )
     {
-        super(source);
+        super( source );
     }
 
     /**
@@ -40,7 +45,7 @@ public class UpdateChangeEvent extends EventObject
      *
      * @param stepsCount New value of property steps.
      */
-    void setStepsCount(final int stepsCount)
+    void setStepsCount( final int stepsCount )
     {
         this.stepsCount = stepsCount;
     }
@@ -60,7 +65,7 @@ public class UpdateChangeEvent extends EventObject
      *
      * @param currentStep New value of property currentStep.
      */
-    void setCurrentStep(final int currentStep)
+    void setCurrentStep( final int currentStep )
     {
         this.currentStep = currentStep;
     }
@@ -80,17 +85,17 @@ public class UpdateChangeEvent extends EventObject
      *
      * @param stepDescription New value of property stepDescription.
      */
-    void setStepDescription(final String stepDescription)
+    void setStepDescription( final String stepDescription )
     {
         this.stepDescription = stepDescription;
     }
 
     public String toString()
     {
-        final StringBuffer string = new StringBuffer(super.toString());
-        string.insert(string.length() - 1, ", stepsCount=" + stepsCount);
-        string.insert(string.length() - 1, ", currentStep=" + currentStep);
-        string.insert(string.length() - 1, ", stepDescription=" + stepDescription);
+        final StringBuffer string = new StringBuffer( super.toString() );
+        string.insert( string.length() - 1, ", stepsCount=" + stepsCount );
+        string.insert( string.length() - 1, ", currentStep=" + currentStep );
+        string.insert( string.length() - 1, ", stepDescription=" + stepDescription );
         return string.toString();
     }
 }

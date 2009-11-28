@@ -42,7 +42,6 @@ import javax.swing.tree.TreePath;
  */
 public class TreeFinderPanel extends JPanel implements Observer
 {
-
     private JLabel counter;
 
     private JTextField edit;
@@ -67,14 +66,14 @@ public class TreeFinderPanel extends JPanel implements Observer
      *
      * @param tree the tree to find objects in
      */
-    public TreeFinderPanel(final JTree tree)
+    public TreeFinderPanel( final JTree tree )
     {
-        setTreeFinder(new CenteringTreeFinder(tree));
-        setTree(tree);
+        setTreeFinder( new CenteringTreeFinder( tree ) );
+        setTree( tree );
         init();
     }
 
-    public void setTreeFinder(final TreeFinder finder)
+    public void setTreeFinder( final TreeFinder finder )
     {
         this.treeFinder = finder;
     }
@@ -85,97 +84,99 @@ public class TreeFinderPanel extends JPanel implements Observer
      * @param obs Description of the Parameter
      * @param obj Description of the Parameter
      */
-    public void update(final Observable obs, final Object obj)
+    public void update( final Observable obs, final Object obj )
     {
-        if (!(obs instanceof TreeFinderModel))
+        if ( !( obs instanceof TreeFinderModel ) )
         {
             return;
         }
         final TreeFinderModel fm = (TreeFinderModel) obs;
 
         // Set the node in the tree and make sure it is visilbe.
-        treeFinder.setSelection(fm.get());
+        treeFinder.setSelection( fm.get() );
 
         // Update button
-        prev.setEnabled(fm.hasPrevious());
-        next.setEnabled(fm.hasNext());
+        prev.setEnabled( fm.hasPrevious() );
+        next.setEnabled( fm.hasNext() );
 
         // counter label
-        counter.setText(fm.getIndex() + 1 + "/" + fm.getCount());
+        counter.setText( fm.getIndex() + 1 + "/" + fm.getCount() );
     }
 
-    /** Description of the Method */
+    /**
+     * Description of the Method
+     */
     private void init()
     {
-        defaultTreeFinder = new CenteringTreeFinder(tree);
+        defaultTreeFinder = new CenteringTreeFinder( tree );
 
         ActionListener action;
 
         action = new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                fm.find(edit.getText());
+                fm.find( edit.getText() );
                 edit.selectAll();
             }
         };
-        final JButton findButton = ComponentFactory.createButton("TREEFINDER.FIND", action);
+        final JButton findButton = ComponentFactory.createButton( "TREEFINDER.FIND", action );
 
         edit = new DefaultTextField();
         // this removes the (awt compatible) binding of enter key to actions
         // so that the default button is called on enter
-        edit.getKeymap().removeKeyStrokeBinding(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+        edit.getKeymap().removeKeyStrokeBinding( KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ) );
         // This adapter removes the unwanted replacement of the selected text
         // by a space.
-        edit.addKeyListener(new KeyAdapter()
+        edit.addKeyListener( new KeyAdapter()
         {
-            public void keyTyped(final KeyEvent e)
+            public void keyTyped( final KeyEvent e )
             {
-                if (edit.getSelectedText() != null && edit.getSelectedText().equals(edit.getText()))
+                if ( edit.getSelectedText() != null && edit.getSelectedText().equals( edit.getText() ) )
                 {
-                    if (e.getKeyChar() == KeyEvent.VK_SPACE)
+                    if ( e.getKeyChar() == KeyEvent.VK_SPACE )
                     {
                         e.consume();
                     }
                 }
             }
-        });
-        edit.addFocusListener(new ComponentFocusListener(findButton));
+        } );
+        edit.addFocusListener( new ComponentFocusListener( findButton ) );
 
         KeyStroke keyStroke;
 
         action = new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 fm.next();
             }
         };
-        next = ComponentFactory.createButton("TREEFINDER.NEXT", action);
-        keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.ALT_MASK);
-        ComponentFocusListener.registerComponentFocusListener(edit, next, keyStroke);
+        next = ComponentFactory.createButton( "TREEFINDER.NEXT", action );
+        keyStroke = KeyStroke.getKeyStroke( KeyEvent.VK_DOWN, InputEvent.ALT_MASK );
+        ComponentFocusListener.registerComponentFocusListener( edit, next, keyStroke );
 
         action = new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
                 fm.previous();
             }
         };
-        prev = ComponentFactory.createButton("TREEFINDER.PREV", action);
-        keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.ALT_MASK);
-        ComponentFocusListener.registerComponentFocusListener(edit, prev, keyStroke);
+        prev = ComponentFactory.createButton( "TREEFINDER.PREV", action );
+        keyStroke = KeyStroke.getKeyStroke( KeyEvent.VK_UP, InputEvent.ALT_MASK );
+        ComponentFocusListener.registerComponentFocusListener( edit, prev, keyStroke );
 
         // Make sure that there is at least place for 3 digits without having to ajust the component
         counter = new JLabel();
-        counter.setText("000/000");
-        counter.setPreferredSize(counter.getPreferredSize());
-        counter.setText("0/0");
-        counter.setHorizontalAlignment(JLabel.CENTER);
+        counter.setText( "000/000" );
+        counter.setPreferredSize( counter.getPreferredSize() );
+        counter.setText( "0/0" );
+        counter.setHorizontalAlignment( JLabel.CENTER );
 
-        setLayout(new FormLayout(
+        setLayout( new FormLayout(
                 new ColumnSpec[]{
-                        new ColumnSpec(ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW),
+                        new ColumnSpec( ColumnSpec.FILL, Sizes.DEFAULT, FormSpec.DEFAULT_GROW ),
                         FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
                         FormFactory.DEFAULT_COLSPEC,
                         FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
@@ -185,13 +186,13 @@ public class TreeFinderPanel extends JPanel implements Observer
                         FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
                         FormFactory.DEFAULT_COLSPEC
                 },
-                RowSpec.decodeSpecs("default")));
+                RowSpec.decodeSpecs( "default" ) ) );
         final CellConstraints cc = new CellConstraints();
-        add(edit, cc.xy(1, 1));
-        add(findButton, cc.xy(3, 1));
-        add(prev, cc.xy(5, 1));
-        add(counter, cc.xy(7, 1));
-        add(next, cc.xy(9, 1));
+        add( edit, cc.xy( 1, 1 ) );
+        add( findButton, cc.xy( 3, 1 ) );
+        add( prev, cc.xy( 5, 1 ) );
+        add( counter, cc.xy( 7, 1 ) );
+        add( next, cc.xy( 9, 1 ) );
 
         fm.notifyObservers();
     }
@@ -201,31 +202,33 @@ public class TreeFinderPanel extends JPanel implements Observer
      *
      * @param tree the new tree
      */
-    public void setTree(final JTree tree)
+    public void setTree( final JTree tree )
     {
-        if (fm != null)
+        if ( fm != null )
         {
-            fm.deleteObserver(this);
+            fm.deleteObserver( this );
         }
         this.tree = tree;
-        fm = new TreeFinderModel(this.tree.getModel());
-        fm.addObserver(this);
+        fm = new TreeFinderModel( this.tree.getModel() );
+        fm.addObserver( this );
     }
 
-    /** Just scrolls to the found tree node, making sure that it is visible. */
+    /**
+     * Just scrolls to the found tree node, making sure that it is visible.
+     */
     public class SimpleTreeFinder implements TreeFinder
     {
-        private JTree tree;
+        private final JTree tree;
 
-        public SimpleTreeFinder(final JTree tree)
+        public SimpleTreeFinder( final JTree tree )
         {
             this.tree = tree;
         }
 
-        public void setSelection(final TreePath tp)
+        public void setSelection( final TreePath tp )
         {
-            tree.setSelectionPath(tp);
-            tree.scrollPathToVisible(tp);
+            tree.setSelectionPath( tp );
+            tree.scrollPathToVisible( tp );
         }
     }
 }

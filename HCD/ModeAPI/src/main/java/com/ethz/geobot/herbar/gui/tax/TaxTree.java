@@ -17,7 +17,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Simple JTree that takes a TreeNode and uses a DefaultTreeModel with a Taxon specific CellRenderer. This tree allows
@@ -26,18 +26,20 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class TaxTree extends SearchableTree implements ModelChangeListener {
+public class TaxTree extends SearchableTree implements ModelChangeListener
+{
+    private final static Logger LOG = Logger.getLogger( TaxTree.class );
 
-    private final static Category cat = Category.getInstance(TaxTree.class);
     private final static TreeNode EMPTY_TREE = new DefaultMutableTreeNode();
 
     /**
      * Creates a new instance of TaxTreePanel
      */
-    public TaxTree() {
-        super(EMPTY_TREE);
-        this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        setCellRenderer(new TaxTreeCellRenderer());
+    public TaxTree()
+    {
+        super( EMPTY_TREE );
+        this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        setCellRenderer( new TaxTreeCellRenderer() );
     }
 
     /**
@@ -45,10 +47,11 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param root the root node to display
      */
-    public TaxTree(Taxon root) {
-        super(createTaxonTreeNode(root));
-        this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        setCellRenderer(new TaxTreeCellRenderer());
+    public TaxTree( final Taxon root )
+    {
+        super( createTaxonTreeNode( root ) );
+        this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        setCellRenderer( new TaxTreeCellRenderer() );
     }
 
     /**
@@ -57,10 +60,11 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param model the model to be shown
      */
-    public TaxTree(HerbarModel model) {
-        this(model.getRootTaxon());
-        this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        model.addModelChangeListener(this);
+    public TaxTree( final HerbarModel model )
+    {
+        this( model.getRootTaxon() );
+        this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        model.addModelChangeListener( this );
     }
 
     /**
@@ -69,13 +73,16 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param model the model to be shown or null for an empty model
      */
-    public void setHerbarModel(HerbarModel model) {
-        if (model != null) {
-            setRootTaxon(model.getRootTaxon());
-            model.addModelChangeListener(this);
+    public void setHerbarModel( final HerbarModel model )
+    {
+        if ( model != null )
+        {
+            setRootTaxon( model.getRootTaxon() );
+            model.addModelChangeListener( this );
         }
-        else {
-            setRootTaxon(null);
+        else
+        {
+            setRootTaxon( null );
         }
     }
 
@@ -84,12 +91,15 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param tax Taxon object or null
      */
-    public void setRootTaxon(Taxon tax) {
-        if (tax != null) {
-            setRootTreeNode(createTaxonTreeNode(tax));
+    public void setRootTaxon( final Taxon tax )
+    {
+        if ( tax != null )
+        {
+            setRootTreeNode( createTaxonTreeNode( tax ) );
         }
-        else {
-            setRootTreeNode(EMPTY_TREE);
+        else
+        {
+            setRootTreeNode( EMPTY_TREE );
         }
         revalidate();
         repaint();
@@ -100,7 +110,8 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @return the root TreeNode object
      */
-    public TreeNode getRootAsTreeNode() {
+    public TreeNode getRootAsTreeNode()
+    {
         return (TreeNode) this.getModel().getRoot();
     }
 
@@ -109,8 +120,9 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param tax taxon which should be encapsulate in a TreeNode
      */
-    private static TreeNode createTaxonTreeNode(Taxon tax) {
-        return new DefaultTaxonTreeNode(tax);
+    private static TreeNode createTaxonTreeNode( final Taxon tax )
+    {
+        return new DefaultTaxonTreeNode( tax );
     }
 
     /**
@@ -118,29 +130,36 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @return selected taxon or null if no taxon is selected.
      */
-    public Taxon getSelectedTaxon() {
-        TreePath path = getSelectionPath();
-        if (path != null) {
-            DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+    public Taxon getSelectedTaxon()
+    {
+        final TreePath path = getSelectionPath();
+        if ( path != null )
+        {
+            final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
             return node.getTaxon();
         }
-        else {
+        else
+        {
             return null;
         }
     }
 
-    private TreePath getTreePathForTaxon(TreePath path, Taxon taxon) {
-        DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+    private TreePath getTreePathForTaxon( final TreePath path, final Taxon taxon )
+    {
+        final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
 
-        if (node.getTaxon().equals(taxon)) {
+        if ( node.getTaxon().equals( taxon ) )
+        {
             return path;
         }
 
-        for (Enumeration e = node.children(); e.hasMoreElements();) {
-            DefaultTaxonTreeNode subNode = (DefaultTaxonTreeNode) e.nextElement();
-            TreePath subPath = path.pathByAddingChild(subNode);
-            subPath = getTreePathForTaxon(subPath, taxon);
-            if (subPath != null) {
+        for ( Enumeration e = node.children(); e.hasMoreElements(); )
+        {
+            final DefaultTaxonTreeNode subNode = (DefaultTaxonTreeNode) e.nextElement();
+            TreePath subPath = path.pathByAddingChild( subNode );
+            subPath = getTreePathForTaxon( subPath, taxon );
+            if ( subPath != null )
+            {
                 return subPath;
             }
         }
@@ -153,21 +172,25 @@ public class TaxTree extends SearchableTree implements ModelChangeListener {
      *
      * @param taxon selected taxon
      */
-    public void setSelectedTaxon(Taxon taxon) {
-        if (taxon != null) {
-            TreePath tp = new TreePath(getModel().getRoot());
-            tp = getTreePathForTaxon(tp, taxon);
-            setSelection(tp);
+    public void setSelectedTaxon( final Taxon taxon )
+    {
+        if ( taxon != null )
+        {
+            TreePath tp = new TreePath( getModel().getRoot() );
+            tp = getTreePathForTaxon( tp, taxon );
+            setSelection( tp );
         }
-        else {
+        else
+        {
             clearSelection();
         }
     }
 
-    public void modelChanged(ModelChangeEvent event) {
-        cat.info("HerbarModel change receive");
-        HerbarModel model = (HerbarModel) event.getSource();
-        setRootTaxon(model.getRootTaxon());
+    public void modelChanged( final ModelChangeEvent event )
+    {
+        LOG.info( "HerbarModel change receive" );
+        final HerbarModel model = (HerbarModel) event.getSource();
+        setRootTaxon( model.getRootTaxon() );
     }
 }
 

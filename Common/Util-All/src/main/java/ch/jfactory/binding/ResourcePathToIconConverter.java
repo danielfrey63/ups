@@ -28,26 +28,25 @@ import javax.swing.ImageIcon;
  */
 public class ResourcePathToIconConverter extends AbstractConverter
 {
-
-    public ResourcePathToIconConverter(final BufferedValueModel bufferedModel)
+    public ResourcePathToIconConverter( final BufferedValueModel bufferedModel )
     {
-        super(bufferedModel);
+        super( bufferedModel );
     }
 
-    public Object convertFromSubject(final Object subjectValue)
+    public Object convertFromSubject( final Object subjectValue )
     {
         final String path = (String) subject.getValue();
         ImageIcon icon = null;
-        if (path != null)
+        if ( path != null )
         {
-            icon = new ImageIcon(getClass().getResource(path));
+            icon = new ImageIcon( getClass().getResource( path ) );
         }
         return icon;
     }
 
-    public void setValue(final Object newValue)
+    public void setValue( final Object newValue )
     {
         final ImageIcon icon = (ImageIcon) newValue;
-        subject.setValue(icon.getDescription());
+        subject.setValue( icon.getDescription() );
     }
 }

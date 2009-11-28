@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Manage Mainframe modes.
@@ -34,27 +35,28 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $ $date$
  * @version $Revision: 1.1 $
  */
-public class ModeManager implements ModeRegistrationSupport {
-
+public class ModeManager implements ModeRegistrationSupport
+{
     /**
      * Category object for logging.
      */
-    private static final Category cat = Category.getInstance(ModeManager.class);
+    private static final Logger LOG = Logger.getLogger( ModeManager.class );
 
     private static ModeManager instance = null;
 
     /**
      * Store mode settings from the manifest file.
      */
-    private Map<String, ModeInfo> modeInfos = new HashMap<String, ModeInfo>();
+    private final Map<String, ModeInfo> modeInfos = new HashMap<String, ModeInfo>();
 
     /**
      * HashMap containing all registered modes.
      */
-    private Map<Object, Mode> registeredModes = new HashMap<Object, Mode>();
+    private final Map<Object, Mode> registeredModes = new HashMap<Object, Mode>();
 
-    protected ModeManager() {
-        ModeRegistration.setRegistrationSupport(this);
+    protected ModeManager()
+    {
+        ModeRegistration.setRegistrationSupport( this );
     }
 
     /**
@@ -62,8 +64,10 @@ public class ModeManager implements ModeRegistrationSupport {
      *
      * @return reference to the ModeManager
      */
-    public static ModeManager getInstance() {
-        if (instance == null) {
+    public static ModeManager getInstance()
+    {
+        if ( instance == null )
+        {
             instance = new ModeManager();
             instance.registerAllModes();
         }
@@ -78,12 +82,14 @@ public class ModeManager implements ModeRegistrationSupport {
      * @return reference to the mode
      * @throws ModeNotFoundException if the mode cannot be found
      */
-    public Mode getMode(String name) throws ModeNotFoundException {
-        Mode mode = registeredModes.get(name);
-        if (mode == null) {
-            String errorMessage = "Mode with name " + name + " not found!";
-            cat.info(errorMessage);
-            throw new ModeNotFoundException(errorMessage);
+    public Mode getMode( final String name ) throws ModeNotFoundException
+    {
+        final Mode mode = registeredModes.get( name );
+        if ( mode == null )
+        {
+            final String errorMessage = "Mode with name " + name + " not found!";
+            LOG.info( errorMessage );
+            throw new ModeNotFoundException( errorMessage );
         }
         return mode;
     }
@@ -93,7 +99,8 @@ public class ModeManager implements ModeRegistrationSupport {
      *
      * @return reference to a set containing all modes
      */
-    public Set<? extends Object> getModeNames() {
+    public Set getModeNames()
+    {
         return registeredModes.keySet();
     }
 
@@ -102,79 +109,98 @@ public class ModeManager implements ModeRegistrationSupport {
      *
      * @return reference to a set containing all modes
      */
-    public Collection<? extends Mode> getModes() {
+    public Collection<? extends Mode> getModes()
+    {
         return registeredModes.values();
     }
 
-    public void register(Mode mode) {
+    public void register( final Mode mode )
+    {
         // load settings from manifest
-        ModeInfo info = modeInfos.get(mode.getClass().getName());
-        if (info != null) {
-            String description = info.getDescription();
-            if (description != null) {
-                mode.setProperty(Mode.DESCRIPTION, description);
+        final ModeInfo info = modeInfos.get( mode.getClass().getName() );
+        if ( info != null )
+        {
+            final String description = info.getDescription();
+            if ( description != null )
+            {
+                mode.setProperty( Mode.DESCRIPTION, description );
             }
-            String name = info.getModeName();
-            if (name != null) {
-                mode.setProperty(Mode.NAME, name);
+            final String name = info.getModeName();
+            if ( name != null )
+            {
+                mode.setProperty( Mode.NAME, name );
             }
-            String group = info.getModeGroup();
-            if (group != null) {
-                mode.setProperty(Mode.MODE_GROUP, group);
+            final String group = info.getModeGroup();
+            if ( group != null )
+            {
+                mode.setProperty( Mode.MODE_GROUP, group );
             }
-            String iconName = info.getIcon();
-            if (iconName != null) {
-                mode.setProperty(Mode.ICON, ImageLocator.getIcon(iconName));
+            final String iconName = info.getIcon();
+            if ( iconName != null )
+            {
+                mode.setProperty( Mode.ICON, ImageLocator.getIcon( iconName ) );
             }
-            String disabledIconName = info.getDisabledIcon();
-            if (disabledIconName != null) {
-                mode.setProperty(Mode.DISABLED_ICON, ImageLocator.getIcon(disabledIconName));
+            final String disabledIconName = info.getDisabledIcon();
+            if ( disabledIconName != null )
+            {
+                mode.setProperty( Mode.DISABLED_ICON, ImageLocator.getIcon( disabledIconName ) );
             }
         }
 
-        registeredModes.put(mode.getProperty(Mode.NAME), mode);
-        mode.init(new HerbarContextImpl(mode));
-        cat.info("successfully register mode; classname = " + mode.getClass());
+        registeredModes.put( mode.getProperty( Mode.NAME ), mode );
+        mode.init( new HerbarContextImpl( mode ) );
+        LOG.info( "successfully register mode; classname = " + mode.getClass() );
     }
 
-    public void unregister(Mode mode) {
-        registeredModes.remove(mode.getProperty(Mode.NAME));
+    public void unregister( final Mode mode )
+    {
+        registeredModes.remove( mode.getProperty( Mode.NAME ) );
     }
 
     /**
      * register all jar files in a directory specified by the "herbar.modedir" environment variable.
      */
-    private void registerAllModes() {
-        try {
-            final Enumeration<URL> modes = ModeManager.class.getClassLoader().getResources("META-INF/ModeInfo.xml");
-            if (modes.hasMoreElements()) {
+    private void registerAllModes()
+    {
+        try
+        {
+            final Enumeration<URL> modes = ModeManager.class.getClassLoader().getResources( "META-INF/ModeInfo.xml" );
+            if ( modes.hasMoreElements() )
+            {
                 // at least one mode jar has been found in the classpath (i.e. WebStart)
-                while (modes.hasMoreElements()) {
-                    URL url = modes.nextElement();
-                    loadClass(url.openStream());
+                while ( modes.hasMoreElements() )
+                {
+                    final URL url = modes.nextElement();
+                    loadClass( url.openStream() );
                 }
             }
-            else {
+            else
+            {
                 // try on file system
-                String moddir = System.getProperty("herbar.modedir");
-                if (cat.isInfoEnabled()) {
-                    cat.info("loading modes from directory " + moddir);
+                final String moddir = System.getProperty( "herbar.modedir" );
+                if ( LOG.isInfoEnabled() )
+                {
+                    LOG.info( "loading modes from directory " + moddir );
                 }
-                File file = new File(moddir);
-                File[] files = file.listFiles(new FilenameFilter() {
-                    public boolean accept(File dir, String name) {
-                        return name.toLowerCase().endsWith(".jar");
+                final File file = new File( moddir );
+                final File[] files = file.listFiles( new FilenameFilter()
+                {
+                    public boolean accept( final File dir, final String name )
+                    {
+                        return name.toLowerCase().endsWith( ".jar" );
                     }
-                });
-                int nummodes = files.length;
-                cat.info("try to register " + nummodes + " modes from directory " + moddir);
-                for (int i = 0; i < nummodes; i++) {
-                    registerJarFile(files[ i ]);
+                } );
+                final int nummodes = files.length;
+                LOG.info( "try to register " + nummodes + " modes from directory " + moddir );
+                for ( int i = 0; i < nummodes; i++ )
+                {
+                    registerJarFile( files[i] );
                 }
             }
         }
-        catch (Exception ex) {
-            cat.error("Mode initialization failed", ex);
+        catch ( Exception ex )
+        {
+            LOG.error( "Mode initialization failed", ex );
         }
     }
 
@@ -183,37 +209,45 @@ public class ModeManager implements ModeRegistrationSupport {
      *
      * @param file the reference to the File
      */
-    private void registerJarFile(File file) {
+    private void registerJarFile( final File file )
+    {
         String clazzName = "";
 
-        try {
-            JarFile jarFile = new JarFile(file);
-            ZipEntry entry = jarFile.getEntry("META-INF/ModeInfo.xml");
-            if (entry != null) {
-                InputStream inputStream = jarFile.getInputStream(entry);
-                clazzName = loadClass(inputStream);
+        try
+        {
+            final JarFile jarFile = new JarFile( file );
+            final ZipEntry entry = jarFile.getEntry( "META-INF/ModeInfo.xml" );
+            if ( entry != null )
+            {
+                final InputStream inputStream = jarFile.getInputStream( entry );
+                clazzName = loadClass( inputStream );
             }
         }
-        catch (IOException e) {
-            String msg = "Error during decoding of XML VersionInfo in " + file;
-            cat.error(msg, e);
-            throw new IllegalArgumentException(msg);
+        catch ( IOException e )
+        {
+            final String msg = "Error during decoding of XML VersionInfo in " + file;
+            LOG.error( msg, e );
+            throw new IllegalArgumentException( msg );
         }
-        catch (ClassNotFoundException cnfex) {
-            cat.error("Mode class not found: " + clazzName, cnfex);
+        catch ( ClassNotFoundException cnfex )
+        {
+            LOG.error( "Mode class not found: " + clazzName, cnfex );
         }
-        catch (LinkageError error) {
-            cat.error("Initialization of mode class failed: " + clazzName, error);
+        catch ( LinkageError error )
+        {
+            LOG.error( "Initialization of mode class failed: " + clazzName, error );
         }
     }
 
-    private String loadClass(InputStream inputStream) throws ClassNotFoundException {
-        final XMLDecoder decoder = new XMLDecoder(inputStream);
+    private String loadClass( final InputStream inputStream ) throws ClassNotFoundException
+    {
+        final XMLDecoder decoder = new XMLDecoder( inputStream );
         final ModeInfo info = (ModeInfo) decoder.readObject();
         final String clazzName = info.getModeClass();
-        if (clazzName != null && !"".equals(clazzName)) {
-            modeInfos.put(clazzName, info);
-            Class.forName(clazzName);
+        if ( clazzName != null && !"".equals( clazzName ) )
+        {
+            modeInfos.put( clazzName, info );
+            Class.forName( clazzName );
         }
         return clazzName;
     }

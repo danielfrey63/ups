@@ -17,28 +17,35 @@ package ch.jfactory.math;
  */
 public class LevensteinLevel
 {
+    /**
+     * Only identical results are tolerated.
+     */
+    public final static LevensteinLevel LEVEL_EQUAL = new LevensteinLevel( 1, 1, 1, 0 );
 
-    /** Only identical results are tolerated. */
-    public final static LevensteinLevel LEVEL_EQUAL = new LevensteinLevel(1, 1, 1, 0);
+    /**
+     * Only results with one error are tolerated.
+     */
+    public final static LevensteinLevel LEVEL_RESTRICTIVE = new LevensteinLevel( 1, 1, 1, 1 );
 
-    /** Only results with one error are tolerated. */
-    public final static LevensteinLevel LEVEL_RESTRICTIVE = new LevensteinLevel(1, 1, 1, 1);
+    /**
+     * Only results with two errors are tolerated.
+     */
+    public final static LevensteinLevel LEVEL_TOLERANT = new LevensteinLevel( 1, 1, 1, 2 );
 
-    /** Only results with two errors are tolerated. */
-    public final static LevensteinLevel LEVEL_TOLERANT = new LevensteinLevel(1, 1, 1, 2);
+    /**
+     * Only results with three errors are tolerated.
+     */
+    public final static LevensteinLevel LEVEL_LOUSY = new LevensteinLevel( 1, 1, 1, 3 );
 
-    /** Only results with three errors are tolerated. */
-    public final static LevensteinLevel LEVEL_LOUSY = new LevensteinLevel(1, 1, 1, 3);
+    private final int add;
 
-    private int add;
+    private final int del;
 
-    private int del;
+    private final int change;
 
-    private int change;
+    private final int total;
 
-    private int total;
-
-    private LevensteinLevel(final int add, final int del, final int change, final int total)
+    private LevensteinLevel( final int add, final int del, final int change, final int total )
     {
         this.add = add;
         this.del = del;
@@ -66,8 +73,8 @@ public class LevensteinLevel
         return total;
     }
 
-    public EvaluationResult getEval(final String str1, final String str2)
+    public EvaluationResult getEval( final String str1, final String str2 )
     {
-        return EvaluationResult.eval(LevensteinDistance.getDistance(str1, str2, this) <= total);
+        return EvaluationResult.eval( LevensteinDistance.getDistance( str1, str2, this ) <= total );
     }
 }

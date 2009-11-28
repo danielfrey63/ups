@@ -21,21 +21,20 @@ import javax.swing.border.Border;
  */
 public class ThinBevelBorder implements Serializable, Border
 {
-
-    public static final Insets INSETS = new Insets(1, 1, 1, 1);
+    public static final Insets INSETS = new Insets( 1, 1, 1, 1 );
 
     protected BevelDirection bevelType = BevelDirection.RAISED;
 
-    protected Color highlight = UIManager.getColor("controlHighlight");
+    protected Color highlight = UIManager.getColor( "controlHighlight" );
 
-    protected Color shadow = UIManager.getColor("controlShadow");
+    protected Color shadow = UIManager.getColor( "controlShadow" );
 
-    public ThinBevelBorder(final BevelDirection bevelType)
+    public ThinBevelBorder( final BevelDirection bevelType )
     {
         this.bevelType = bevelType;
     }
 
-    public void setBevelType(final BevelDirection type)
+    public void setBevelType( final BevelDirection type )
     {
         bevelType = type;
     }
@@ -45,7 +44,7 @@ public class ThinBevelBorder implements Serializable, Border
         return bevelType;
     }
 
-    public Insets getBorderInsets(final Component c)
+    public Insets getBorderInsets( final Component c )
     {
         return INSETS;
     }
@@ -55,16 +54,15 @@ public class ThinBevelBorder implements Serializable, Border
         return true;
     }
 
-    public void paintBorder(final Component c,
-                            final Graphics g, final int x, final int y, final int width,
-                            final int height)
+    public void paintBorder( final Component c,
+                             final Graphics g, final int x, final int y, final int width,
+                             final int height )
     {
-
         final Color upperLeft;
 
         final Color lowerRight;
 
-        if (bevelType == BevelDirection.RAISED)
+        if ( bevelType == BevelDirection.RAISED )
         {
             upperLeft = highlight;
             lowerRight = shadow;
@@ -78,13 +76,13 @@ public class ThinBevelBorder implements Serializable, Border
         final int right = width - 1;
         final int bottom = height - 1;
 
-        g.setColor(upperLeft);
-        g.drawLine(x, y, right, y);
-        g.drawLine(x, y, x, bottom);
+        g.setColor( upperLeft );
+        g.drawLine( x, y, right, y );
+        g.drawLine( x, y, x, bottom );
 
-        g.setColor(lowerRight);
-        g.drawLine(right, bottom, x, bottom);
-        g.drawLine(right, bottom, right, y);
+        g.setColor( lowerRight );
+        g.drawLine( right, bottom, x, bottom );
+        g.drawLine( right, bottom, right, y );
     }
 }
 

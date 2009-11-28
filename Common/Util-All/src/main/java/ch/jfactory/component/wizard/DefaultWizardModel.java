@@ -18,23 +18,34 @@ import org.apache.log4j.Logger;
  */
 public class DefaultWizardModel extends AbstractWizardModel
 {
+    /**
+     * Category for logging.
+     */
+    private static final Logger LOGGER = Logger.getLogger( DefaultWizardModel.class );
 
-    /** Category for logging. */
-    private static final Logger LOGGER = Logger.getLogger(DefaultWizardModel.class);
-
-    /** Index of the current pane. */
+    /**
+     * Index of the current pane.
+     */
     private int currentPane = 0;
 
-    /** Index of the pane to start with. */
+    /**
+     * Index of the pane to start with.
+     */
     private int startingPane = 0;
 
-    /** contains information about the current states of buttons in a pane */
+    /**
+     * contains information about the current states of buttons in a pane
+     */
     Map paneButtonStates = new HashMap();
 
-    /** Contains the list of all panes. */
-    private List paneList;
+    /**
+     * Contains the list of all panes.
+     */
+    private final List paneList;
 
-    /** Contains all state listener */
+    /**
+     * Contains all state listener
+     */
     private Vector wizardStateListenerList;
 
     /**
@@ -44,10 +55,10 @@ public class DefaultWizardModel extends AbstractWizardModel
      * @param panes         the panes to display in the wizard. May be null.
      * @param name          the name of the wizard model
      */
-    public DefaultWizardModel(final Properties configuration, final WizardPane[] panes, final String name)
+    public DefaultWizardModel( final Properties configuration, final WizardPane[] panes, final String name )
     {
-        super(configuration, name);
-        paneList = (panes == null ? Collections.EMPTY_LIST : Arrays.asList(panes));
+        super( configuration, name );
+        paneList = ( panes == null ? Collections.EMPTY_LIST : Arrays.asList( panes ) );
         init();
         initPaneList();
     }
@@ -58,61 +69,61 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     private ButtonStates getButtonStates()
     {
-        final String paneName = ((WizardPane) paneList.get(currentPane)).getName();
-        ButtonStates states = (ButtonStates) paneButtonStates.get(paneName);
-        if (states == null)
+        final String paneName = ( (WizardPane) paneList.get( currentPane ) ).getName();
+        ButtonStates states = (ButtonStates) paneButtonStates.get( paneName );
+        if ( states == null )
         {
             states = new ButtonStates();
-            paneButtonStates.put(paneName, states);
+            paneButtonStates.put( paneName, states );
         }
         return states;
     }
 
-    public void setNextEnabled(final boolean isNextEnabled)
+    public void setNextEnabled( final boolean isNextEnabled )
     {
         getButtonStates().isNextEnabled = isNextEnabled;
         fireInternalState();
     }
 
-    public void setPreviousEnabled(final boolean isPreviousEnabled)
+    public void setPreviousEnabled( final boolean isPreviousEnabled )
     {
         getButtonStates().isPreviousEnabled = isPreviousEnabled;
         fireInternalState();
     }
 
-    public void setFinishEnabled(final boolean isFinishEnabled)
+    public void setFinishEnabled( final boolean isFinishEnabled )
     {
         getButtonStates().isFinishEnabled = isFinishEnabled;
         fireInternalState();
     }
 
-    public void setCancelEnabled(final boolean isCancelEnabled)
+    public void setCancelEnabled( final boolean isCancelEnabled )
     {
         getButtonStates().isCancelEnabled = isCancelEnabled;
         fireInternalState();
     }
 
-    public WizardPane getPane(final int index)
+    public WizardPane getPane( final int index )
     {
         currentPane = index;
         fireInternalState();
-        return (WizardPane) paneList.get(currentPane);
+        return (WizardPane) paneList.get( currentPane );
     }
 
     public WizardPane getNextPane()
     {
         currentPane++;
         fireInternalState();
-        LOGGER.debug("next pane index is " + currentPane);
-        return (WizardPane) paneList.get(currentPane);
+        LOGGER.debug( "next pane index is " + currentPane );
+        return (WizardPane) paneList.get( currentPane );
     }
 
     public WizardPane getPreviousPane()
     {
         currentPane--;
         fireInternalState();
-        LOGGER.debug("next pane index is " + currentPane);
-        return (WizardPane) paneList.get(currentPane);
+        LOGGER.debug( "next pane index is " + currentPane );
+        return (WizardPane) paneList.get( currentPane );
     }
 
     public boolean isNextEnabled()
@@ -137,7 +148,7 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     public WizardPane[] getPanes()
     {
-        return (WizardPane[]) paneList.toArray(new WizardPane[paneList.size()]);
+        return (WizardPane[]) paneList.toArray( new WizardPane[paneList.size()] );
     }
 
     public int getCurrentPaneIndex()
@@ -145,20 +156,20 @@ public class DefaultWizardModel extends AbstractWizardModel
         return currentPane;
     }
 
-    public synchronized void addWizardStateListener(final WizardStateListener listener)
+    public synchronized void addWizardStateListener( final WizardStateListener listener )
     {
-        if (wizardStateListenerList == null)
+        if ( wizardStateListenerList == null )
         {
             wizardStateListenerList = new Vector();
         }
-        wizardStateListenerList.add(listener);
+        wizardStateListenerList.add( listener );
     }
 
-    public synchronized void removeWizardStateListener(final WizardStateListener listener)
+    public synchronized void removeWizardStateListener( final WizardStateListener listener )
     {
-        if (wizardStateListenerList != null)
+        if ( wizardStateListenerList != null )
         {
-            wizardStateListenerList.remove(listener);
+            wizardStateListenerList.remove( listener );
         }
     }
 
@@ -169,7 +180,7 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     public String getDialogTitle()
     {
-        return Strings.getString("WIZARD.DEFAULT.TITLE");
+        return Strings.getString( "WIZARD.DEFAULT.TITLE" );
     }
 
     public boolean hasPrevious()
@@ -182,73 +193,84 @@ public class DefaultWizardModel extends AbstractWizardModel
      *
      * @param event event information
      */
-    protected void fireChange(final WizardStateChangeEvent event)
+    protected void fireChange( final WizardStateChangeEvent event )
     {
         final Vector list;
-        synchronized (this)
+        synchronized ( this )
         {
-            if (wizardStateListenerList == null)
+            if ( wizardStateListenerList == null )
             {
                 return;
             }
             list = (Vector) wizardStateListenerList.clone();
         }
-        for (Object aList : list)
+        for ( final Object aList : list )
         {
-            ((WizardStateListener) aList).change(event);
+            ( (WizardStateListener) aList ).change( event );
         }
     }
 
-    /** This method inform all panes about there model. */
+    /**
+     * This method inform all panes about there model.
+     */
     private void initPaneList()
     {
-        for (final Object aPaneList : paneList)
+        for ( final Object aPaneList : paneList )
         {
             final WizardPane pane = (WizardPane) aPaneList;
-            pane.init(this);
+            pane.init( this );
         }
     }
 
-    /** this method fires the internal state */
+    /**
+     * this method fires the internal state
+     */
     final protected void fireInternalState()
     {
-        final WizardStateChangeEvent event = new WizardStateChangeEvent(this, hasNext(),
-                hasPrevious(), isNextEnabled(), isPreviousEnabled(), isFinishEnabled(), isCancelEnabled());
+        final WizardStateChangeEvent event = new WizardStateChangeEvent( this, hasNext(),
+                hasPrevious(), isNextEnabled(), isPreviousEnabled(), isFinishEnabled(), isCancelEnabled() );
 
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("fire internal state change: " + event);
+            LOGGER.debug( "fire internal state change: " + event );
         }
 
-        fireChange(event);
+        fireChange( event );
     }
 
-    public void setStart(final int startingPane)
+    public void setStart( final int startingPane )
     {
-        getConfig().put(getName(), startingPane);
+        getConfig().put( getName(), startingPane );
         this.startingPane = startingPane;
     }
 
     public int getStart()
     {
         final Properties config = getConfig();
-        startingPane = Integer.parseInt(config.getProperty(getName(), "0"));
+        startingPane = Integer.parseInt( config.getProperty( getName(), "0" ) );
         return startingPane;
     }
 
     static class ButtonStates
     {
-
-        /** Enable state indicator of the next button. */
+        /**
+         * Enable state indicator of the next button.
+         */
         boolean isNextEnabled = true;
 
-        /** Enable state indicator of the previous button. */
+        /**
+         * Enable state indicator of the previous button.
+         */
         boolean isPreviousEnabled = true;
 
-        /** Enable state indicator of the finish button. */
+        /**
+         * Enable state indicator of the finish button.
+         */
         boolean isFinishEnabled = true;
 
-        /** Enable state indicator of the finish button. */
+        /**
+         * Enable state indicator of the finish button.
+         */
         boolean isCancelEnabled = true;
     }
 }

@@ -25,11 +25,14 @@ import javax.swing.tree.TreePath;
  */
 public class SimpleTreeExpansionListener implements TreeExpansionListener
 {
+    /**
+     * The expanded tree paths.
+     */
+    private final HashSet expandedTreePaths = new HashSet();
 
-    /** The expanded tree paths. */
-    private HashSet expandedTreePaths = new HashSet();
-
-    /** The tree to expand. */
+    /**
+     * The tree to expand.
+     */
     private JTree tree;
 
     /**
@@ -37,9 +40,9 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
      *
      * @param tree the tree to construct the expansion listener to
      */
-    public SimpleTreeExpansionListener(final JTree tree)
+    public SimpleTreeExpansionListener( final JTree tree )
     {
-        setTree(tree);
+        setTree( tree );
     }
 
     /**
@@ -47,46 +50,51 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
      *
      * @param tree the tree to set
      */
-    private void setTree(final JTree tree)
+    private void setTree( final JTree tree )
     {
         this.tree = tree;
     }
 
-    /** {@inheritDoc} */
-    public void treeExpanded(final TreeExpansionEvent treeExpansionEvent)
+    /**
+     * {@inheritDoc}
+     */
+    public void treeExpanded( final TreeExpansionEvent treeExpansionEvent )
     {
-        expandedTreePaths.add(treeExpansionEvent.getPath());
+        expandedTreePaths.add( treeExpansionEvent.getPath() );
     }
 
-    /** {@inheritDoc} */
-    public void treeCollapsed(final TreeExpansionEvent treeExpansionEvent)
+    /**
+     * {@inheritDoc}
+     */
+    public void treeCollapsed( final TreeExpansionEvent treeExpansionEvent )
     {
         // Remove the path from the cache
         final TreePath treePath = treeExpansionEvent.getPath();
-        expandedTreePaths.remove(treePath);
+        expandedTreePaths.remove( treePath );
 
         // Make sure that child paths are not expanded in the future
         final Iterator iter = expandedTreePaths.iterator();
 
-        while (iter.hasNext())
+        while ( iter.hasNext() )
         {
             final TreePath path = (TreePath) iter.next();
 
-            if (treePath.isDescendant(path))
+            if ( treePath.isDescendant( path ) )
             {
                 iter.remove();
             }
         }
     }
 
-    /** Restores the tree expansion state. */
+    /**
+     * Restores the tree expansion state.
+     */
     public void restore()
     {
-
-        for (final Object o : ((HashSet) expandedTreePaths.clone()))
+        for ( final Object o : ( (HashSet) expandedTreePaths.clone() ) )
         {
             final TreePath path = (TreePath) o;
-            tree.expandPath(path);
+            tree.expandPath( path );
         }
     }
 
@@ -106,8 +114,8 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
      */
     public void translate()
     {
-        final Collection matches = TreeUtils.matchPaths(expandedTreePaths.iterator(), tree.getModel());
+        final Collection matches = TreeUtils.matchPaths( expandedTreePaths.iterator(), tree.getModel() );
         expandedTreePaths.clear();
-        expandedTreePaths.addAll(matches);
+        expandedTreePaths.addAll( matches );
     }
 }

@@ -34,39 +34,61 @@ import org.apache.log4j.Logger;
  */
 class WizardDialogUI extends JDialog implements WizardStateListener
 {
-    /** logging category for class */
-    private static final Logger LOGGER = Logger.getLogger(WizardDialogUI.class);
+    /**
+     * logging category for class
+     */
+    private static final Logger LOGGER = Logger.getLogger( WizardDialogUI.class );
 
     private static final boolean DEBUG = LOGGER.isDebugEnabled();
 
-    /** the navigation panel */
-    private JPanel navigationPanel = new JPanel();
+    /**
+     * the navigation panel
+     */
+    private final JPanel navigationPanel = new JPanel();
 
-    /** back button */
+    /**
+     * back button
+     */
     private JButton back;
 
-    /** next button */
+    /**
+     * next button
+     */
     private JButton next;
 
-    /** finish button */
+    /**
+     * finish button
+     */
     private JButton finish;
 
-    /** cancel button */
+    /**
+     * cancel button
+     */
     private JButton cancel;
 
-    /** the panel where the panes are shown */
-    private JPanel wizardPanePanel = new JPanel();
+    /**
+     * the panel where the panes are shown
+     */
+    private final JPanel wizardPanePanel = new JPanel();
 
-    /** model with information of the panes etc. */
+    /**
+     * model with information of the panes etc.
+     */
     private WizardModel model = null;
 
-    /** current pane */
+    /**
+     * current pane
+     */
     private WizardPane currentPane = null;
 
-    /** this attribute defines if the changes are accepted */
+    /**
+     * this attribute defines if the changes are accepted
+     */
     private boolean accepted = false;
 
-    /** Holds the minimum size for this dialog to show up propertly. */
+    /**
+     * Holds the minimum size for this dialog to show up propertly.
+     */
     private Dimension minimumSize;
 
     private CardLayout cards;
@@ -77,9 +99,9 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      * @param parent parent of the wizard frame
      * @param modal  true = modal wizard dialog, false = modaless
      */
-    public WizardDialogUI(final Frame parent, final String title, final boolean modal)
+    public WizardDialogUI( final Frame parent, final String title, final boolean modal )
     {
-        super(parent, title, modal);
+        super( parent, title, modal );
         initGUI();
     }
 
@@ -89,9 +111,9 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      * @param parent parent of the wizard dialog
      * @param modal  true = modal wizard dialog, false = modaless
      */
-    public WizardDialogUI(final Dialog parent, final String title, final boolean modal)
+    public WizardDialogUI( final Dialog parent, final String title, final boolean modal )
     {
-        super(parent, title, modal);
+        super( parent, title, modal );
         initGUI();
     }
 
@@ -100,21 +122,21 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      *
      * @param model model of type WizardModel
      */
-    public void setModel(final WizardModel model)
+    public void setModel( final WizardModel model )
     {
-        if (model != this.model)
+        if ( model != this.model )
         {
-            LOGGER.debug("set new model");
-            if (this.model != null)
+            LOGGER.debug( "set new model" );
+            if ( this.model != null )
             {
-                model.removeWizardStateListener(this);
+                model.removeWizardStateListener( this );
             }
             this.model = model;
-            model.addWizardStateListener(this);
+            model.addWizardStateListener( this );
 //            model.registerFinishAction(new FinishAction());
             final Dimension minimumPanelSize = getBiggestPaneDimension();
-            setPaneSize(minimumPanelSize);
-            showPane(model.getPane(model.getStart()));
+            setPaneSize( minimumPanelSize );
+            showPane( model.getPane( model.getStart() ) );
         }
     }
 
@@ -123,14 +145,14 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      *
      * @param dim Dimension of the preferred pane size
      */
-    private void setPaneSize(final Dimension dim)
+    private void setPaneSize( final Dimension dim )
     {
-        wizardPanePanel.setPreferredSize(dim);
+        wizardPanePanel.setPreferredSize( dim );
         pack();
         minimumSize = getSize();
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOGGER.debug("wizard size = " + getSize());
+            LOGGER.debug( "wizard size = " + getSize() );
         }
     }
 
@@ -152,48 +174,48 @@ class WizardDialogUI extends JDialog implements WizardStateListener
         int width = 0;
         int height = 0;
 
-        for (WizardPane pane : panes)
+        for ( final WizardPane pane : panes )
         {
             final Dimension paneDimension = pane.getPreferredSize();
-            if (DEBUG)
+            if ( DEBUG )
             {
-                LOGGER.debug("size of pane = " + paneDimension);
+                LOGGER.debug( "size of pane = " + paneDimension );
             }
-            height = Math.max(height, paneDimension.height);
-            width = Math.max(width, paneDimension.width);
+            height = Math.max( height, paneDimension.height );
+            width = Math.max( width, paneDimension.width );
         }
 
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOGGER.debug("larges pane size (" + width + "," + height + ")");
+            LOGGER.debug( "larges pane size (" + width + "," + height + ")" );
         }
-        return new Dimension(width, height);
+        return new Dimension( width, height );
     }
 
-    public void change(final WizardStateChangeEvent event)
+    public void change( final WizardStateChangeEvent event )
     {
-        next.setEnabled(event.isNextEnabled() && event.hasNext());
-        back.setEnabled(event.isPreviousEnabled() && event.hasPrevious());
-        finish.setEnabled(event.isFinishEnabled());
-        cancel.setEnabled(event.isCancelEnabled());
+        next.setEnabled( event.isNextEnabled() && event.hasNext() );
+        back.setEnabled( event.isPreviousEnabled() && event.hasPrevious() );
+        finish.setEnabled( event.isFinishEnabled() );
+        cancel.setEnabled( event.isCancelEnabled() );
 
         // default button handling
         final JRootPane rootPane = getRootPane();
-        if (event.isNextEnabled() && event.hasNext())
+        if ( event.isNextEnabled() && event.hasNext() )
         {
-            rootPane.setDefaultButton(next);
+            rootPane.setDefaultButton( next );
         }
-        else if (event.isFinishEnabled())
+        else if ( event.isFinishEnabled() )
         {
-            rootPane.setDefaultButton(finish);
+            rootPane.setDefaultButton( finish );
         }
-        else if (event.isPreviousEnabled() && event.hasPrevious())
+        else if ( event.isPreviousEnabled() && event.hasPrevious() )
         {
-            rootPane.setDefaultButton(back);
+            rootPane.setDefaultButton( back );
         }
         else
         {
-            rootPane.setDefaultButton(cancel);
+            rootPane.setDefaultButton( cancel );
         }
     }
 
@@ -202,144 +224,148 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      *
      * @param pane to show
      */
-    private void showPane(final WizardPane pane)
+    private void showPane( final WizardPane pane )
     {
-        LOGGER.info("showing pane " + pane);
+        LOGGER.info( "showing pane " + pane );
 
         final String name = pane.getName();
-        wizardPanePanel.add(pane, name);
-        cards.show(wizardPanePanel, name);
+        wizardPanePanel.add( pane, name );
+        cards.show( wizardPanePanel, name );
 
-        if (currentPane != null)
+        if ( currentPane != null )
         {
-            LOGGER.debug("passivate old pane");
+            LOGGER.debug( "passivate old pane" );
             currentPane.passivate();
-            wizardPanePanel.remove(currentPane);
+            wizardPanePanel.remove( currentPane );
         }
         currentPane = pane;
 
-        LOGGER.debug("activate current pane");
+        LOGGER.debug( "activate current pane" );
         wizardPanePanel.revalidate();
         currentPane.activate();
         wizardPanePanel.repaint();
     }
 
-    /** This method is called from within the constructor to initialize the form. */
+    /**
+     * This method is called from within the constructor to initialize the form.
+     */
     private void initGUI()
     {
         // set glass pane
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setCursor( Cursor.getPredefinedCursor( Cursor.WAIT_CURSOR ) );
 
         // set layout
-        back = ComponentFactory.createButton("WIZARD.NAVIGATION.BACK", new ActionListener()
+        back = ComponentFactory.createButton( "WIZARD.NAVIGATION.BACK", new ActionListener()
         {
-            public void actionPerformed(final ActionEvent event)
+            public void actionPerformed( final ActionEvent event )
             {
-                if (currentPane.isPreviousOk())
+                if ( currentPane.isPreviousOk() )
                 {
-                    showPane(model.getPreviousPane());
+                    showPane( model.getPreviousPane() );
                 }
             }
-        });
-        cancel = ComponentFactory.createButton("WIZARD.NAVIGATION.CANCEL", new ActionListener()
+        } );
+        cancel = ComponentFactory.createButton( "WIZARD.NAVIGATION.CANCEL", new ActionListener()
         {
-            public void actionPerformed(final ActionEvent event)
+            public void actionPerformed( final ActionEvent event )
             {
-                if (currentPane.isCancelOk())
+                if ( currentPane.isCancelOk() )
                 {
-                    closeDialog(event);
+                    closeDialog( event );
                 }
             }
-        });
-        finish = ComponentFactory.createButton("WIZARD.NAVIGATION.FINISH", new FinishAction());
-        next = ComponentFactory.createButton("WIZARD.NAVIGATION.NEXT", new ActionListener()
+        } );
+        finish = ComponentFactory.createButton( "WIZARD.NAVIGATION.FINISH", new FinishAction() );
+        next = ComponentFactory.createButton( "WIZARD.NAVIGATION.NEXT", new ActionListener()
         {
-            public void actionPerformed(final ActionEvent event)
+            public void actionPerformed( final ActionEvent event )
             {
-                if (currentPane.isNextOk())
+                if ( currentPane.isNextOk() )
                 {
-                    showPane(model.getNextPane());
+                    showPane( model.getNextPane() );
                 }
             }
-        });
-        next.setHorizontalTextPosition(JButton.LEFT);
-        addWindowListener(new WindowAdapter()
+        } );
+        next.setHorizontalTextPosition( JButton.LEFT );
+        addWindowListener( new WindowAdapter()
         {
-            public void windowClosing(final WindowEvent evt)
+            public void windowClosing( final WindowEvent evt )
             {
-                closeDialog(evt);
+                closeDialog( evt );
             }
-        });
+        } );
 
-        addComponentListener(new ComponentAdapter()
+        addComponentListener( new ComponentAdapter()
         {
-            public void componentResized(final ComponentEvent e)
+            public void componentResized( final ComponentEvent e )
             {
-                if (minimumSize != null)
+                if ( minimumSize != null )
                 {
                     final Dimension size = getSize();
-                    size.width = Math.max(size.width, minimumSize.width);
-                    size.height = Math.max(size.height, minimumSize.height);
-                    setSize(size);
+                    size.width = Math.max( size.width, minimumSize.width );
+                    size.height = Math.max( size.height, minimumSize.height );
+                    setSize( size );
                 }
             }
-        });
+        } );
 
-        navigationPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        navigationPanel.add(back);
-        navigationPanel.add(next);
-        navigationPanel.add(finish);
-        navigationPanel.add(cancel);
+        navigationPanel.setLayout( new FlowLayout( FlowLayout.RIGHT, 0, 0 ) );
+        navigationPanel.add( back );
+        navigationPanel.add( next );
+        navigationPanel.add( finish );
+        navigationPanel.add( cancel );
         final JButton[] buttons = new JButton[]{back, next, finish, cancel};
-        WindowUtils.spaceComponents(buttons);
-        WindowUtils.equalizeButtons(buttons);
-        navigationPanel.setBorder(BorderFactory.createEmptyBorder(Constants.GAP_BETWEEN_GROUP, 0, 0, 0));
+        WindowUtils.spaceComponents( buttons );
+        WindowUtils.equalizeButtons( buttons );
+        navigationPanel.setBorder( BorderFactory.createEmptyBorder( Constants.GAP_BETWEEN_GROUP, 0, 0, 0 ) );
 
-        cards = new CardLayout(0, 0);
-        wizardPanePanel.setLayout(cards);
+        cards = new CardLayout( 0, 0 );
+        wizardPanePanel.setLayout( cards );
 
-        getRootPane().setDefaultButton(finish);
+        getRootPane().setDefaultButton( finish );
 
         // set placeholder for next button
-        final JPanel main = new JPanel(new BorderLayout());
-        main.setLayout(new BorderLayout());
-        main.add(wizardPanePanel, BorderLayout.CENTER);
-        main.add(navigationPanel, BorderLayout.SOUTH);
-        main.setBorder(BorderFactory.createEmptyBorder(Constants.GAP_BORDER_LEFT_TOP, Constants.GAP_BORDER_LEFT_TOP,
-                Constants.GAP_BORDER_RIGHT_BOTTOM, Constants.GAP_BORDER_RIGHT_BOTTOM));
+        final JPanel main = new JPanel( new BorderLayout() );
+        main.setLayout( new BorderLayout() );
+        main.add( wizardPanePanel, BorderLayout.CENTER );
+        main.add( navigationPanel, BorderLayout.SOUTH );
+        main.setBorder( BorderFactory.createEmptyBorder( Constants.GAP_BORDER_LEFT_TOP, Constants.GAP_BORDER_LEFT_TOP,
+                Constants.GAP_BORDER_RIGHT_BOTTOM, Constants.GAP_BORDER_RIGHT_BOTTOM ) );
         final Container contentPane = getContentPane();
-        contentPane.add(main, BorderLayout.CENTER);
+        contentPane.add( main, BorderLayout.CENTER );
     }
 
-    private void closeDialog(final ActionEvent evt)
+    private void closeDialog( final ActionEvent evt )
     {
         closeDialog();
     }
 
-    private void closeDialog(final WindowEvent evt)
+    private void closeDialog( final WindowEvent evt )
     {
         closeDialog();
     }
 
-    /** Passivates the current pane and closes the dialog. */
+    /**
+     * Passivates the current pane and closes the dialog.
+     */
     private void closeDialog()
     {
         currentPane.passivate();
-        setVisible(false);
+        setVisible( false );
         dispose();
     }
 
     class FinishAction extends AbstractAction
     {
-        public void actionPerformed(final ActionEvent e)
+        public void actionPerformed( final ActionEvent e )
         {
             accepted = true;
-            closeDialog(e);
+            closeDialog( e );
         }
 
         public FinishAction()
         {
-            super(Strings.getString("WIZARD.NAVIGATION.FINISH.TEXT"));
+            super( Strings.getString( "WIZARD.NAVIGATION.FINISH.TEXT" ) );
         }
     }
 }

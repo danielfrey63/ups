@@ -61,14 +61,13 @@ import net.infonode.docking.util.ViewMap;
  */
 public class TypeMapperBuilder extends ActionCommandPanelBuilder
 {
-
-    private TypeModel model;
+    private final TypeModel model;
 
     private final JList list = new JList();
 
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
-        Strings.setResourceBundle(new ListResourceBundle()
+        Strings.setResourceBundle( new ListResourceBundle()
         {
             protected Object[][] getContents()
             {
@@ -81,17 +80,17 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder
                         {"type.icons.TEXT2", "Hier sehen Sie eine Darstellung aller Icons aus dem Klassenpfad. Wählen Sie eines aus:"},
                 };
             }
-        });
+        } );
         final JFrame frame = new JFrame();
-        final JComponent panel = new TypeMapperBuilder(new TypeModel()).getPanel();
-        panel.setBorder(new CompoundBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new EtchedBorder()), new EmptyBorder(8, 8, 8, 8)));
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        final JComponent panel = new TypeMapperBuilder( new TypeModel() ).getPanel();
+        panel.setBorder( new CompoundBorder( new CompoundBorder( new EmptyBorder( 8, 8, 8, 8 ), new EtchedBorder() ), new EmptyBorder( 8, 8, 8, 8 ) ) );
+        frame.getContentPane().add( panel, BorderLayout.CENTER );
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setVisible( true );
     }
 
-    public TypeMapperBuilder(final TypeModel model)
+    public TypeMapperBuilder( final TypeModel model )
     {
         this.model = model;
     }
@@ -99,97 +98,97 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder
     protected void initCommands()
     {
         // LIST
-        initCommand(new AddType(getCommandManager(), model), true);
-        initCommand(new DeleteType(getCommandManager(), model));
+        initCommand( new AddType( getCommandManager(), model ), true );
+        initCommand( new DeleteType( getCommandManager(), model ) );
         // EDITOR
-        initCommand(new CommitPresentationModel(getCommandManager(), model.getEditorModel()));
-        initCommand(new ResetPresentationModel(getCommandManager(), model.getEditorModel()));
-        initCommand(new IconsAction(getCommandManager(), model.getEditorModel()));
+        initCommand( new CommitPresentationModel( getCommandManager(), model.getEditorModel() ) );
+        initCommand( new ResetPresentationModel( getCommandManager(), model.getEditorModel() ) );
+        initCommand( new IconsAction( getCommandManager(), model.getEditorModel() ) );
     }
 
     protected JComponent createMainPanel()
     {
         final ViewMap views = new ViewMap();
-        views.addView(1, new View("Editor", null, createEditor()));
-        return DockingWindowsUtils.createParentChildDisplay(createList(), views);
+        views.addView( 1, new View( "Editor", null, createEditor() ) );
+        return DockingWindowsUtils.createParentChildDisplay( createList(), views );
     }
 
     protected void initModelListeners()
     {
         // LIST
-        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener()
+        model.getSelectionInList().addPropertyChangeListener( SelectionInList.PROPERTYNAME_SELECTION, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 final Object selectedItem = evt.getNewValue();
-                model.getEditorModel().setBean(selectedItem);
+                model.getEditorModel().setBean( selectedItem );
             }
-        });
-        model.getSelectionInList().addPropertyChangeListener(SelectionInList.PROPERTYNAME_SELECTION_EMPTY, new PropertyChangeListener()
+        } );
+        model.getSelectionInList().addPropertyChangeListener( SelectionInList.PROPERTYNAME_SELECTION_EMPTY, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 final boolean isEmpty = (Boolean) evt.getNewValue();
-                getCommandManager().getCommand(Commands.COMMANDID_DELETE).setEnabled(!isEmpty);
-                getCommandManager().getCommand(Commands.COMMANDID_EDITICONS).setEnabled(!isEmpty);
+                getCommandManager().getCommand( Commands.COMMANDID_DELETE ).setEnabled( !isEmpty );
+                getCommandManager().getCommand( Commands.COMMANDID_EDITICONS ).setEnabled( !isEmpty );
             }
-        });
-        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
+        } );
+        model.getEditorModel().addPropertyChangeListener( PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 list.repaint();
             }
-        });
+        } );
 
         // EDITOR
-        model.getEditorModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
+        model.getEditorModel().addPropertyChangeListener( PresentationModel.PROPERTYNAME_BUFFERING, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 final boolean isBuffering = (Boolean) evt.getNewValue();
-                getCommandManager().getCommand(CommonCommands.COMMANDID_TRIGGERAPPLY).setEnabled(isBuffering);
-                getCommandManager().getCommand(CommonCommands.COMMANDID_TRIGGERRESET).setEnabled(isBuffering);
+                getCommandManager().getCommand( CommonCommands.COMMANDID_TRIGGERAPPLY ).setEnabled( isBuffering );
+                getCommandManager().getCommand( CommonCommands.COMMANDID_TRIGGERRESET ).setEnabled( isBuffering );
             }
-        });
+        } );
     }
 
     // LIST
 
     private JComponent createList()
     {
-        list.setModel(model.getSelectionInList());
-        Bindings.bind(list, model.getSelectionInList());
-        list.setCellRenderer(new AlternateListCellRenderer()
+        list.setModel( model.getSelectionInList() );
+        Bindings.bind( list, model.getSelectionInList() );
+        list.setCellRenderer( new AlternateListCellRenderer()
         {
-            private final Icon BLANK_ICON = new BlankIcon(new Color(0, 0, 0, 0), 16);
+            private final Icon BLANK_ICON = new BlankIcon( new Color( 0, 0, 0, 0 ), 16 );
 
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+            public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
             {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
                 final TypeMapping mapping = (TypeMapping) value;
-                setIcon(getIcon(mapping));
-                setText(mapping.getText());
+                setIcon( getIcon( mapping ) );
+                setText( mapping.getText() );
                 return this;
             }
 
-            private Icon getIcon(final TypeMapping mapping)
+            private Icon getIcon( final TypeMapping mapping )
             {
                 Icon icon = null;
                 try
                 {
-                    icon = new ImageIcon(TypeMapperBuilder.class.getResource(mapping.getIcon()));
+                    icon = new ImageIcon( TypeMapperBuilder.class.getResource( mapping.getIcon() ) );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
                     icon = BLANK_ICON;
                 }
                 return icon;
             }
-        });
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JScrollPane(list), BorderLayout.CENTER);
-        panel.add(getCommandManager().getGroup(Commands.GROUPID_LISTTOOLBAR).createToolBar(), BorderLayout.NORTH);
+        } );
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( new JScrollPane( list ), BorderLayout.CENTER );
+        panel.add( getCommandManager().getGroup( Commands.GROUPID_LISTTOOLBAR ).createToolBar(), BorderLayout.NORTH );
         return panel;
     }
 
@@ -197,38 +196,38 @@ public class TypeMapperBuilder extends ActionCommandPanelBuilder
 
     private JComponent createEditor()
     {
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(createEditorPanel(), BorderLayout.CENTER);
-        panel.add(getCommandManager().getGroup(Commands.GROUPID_EDITTOOLBAR).createToolBar("toolbar"), BorderLayout.NORTH);
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( createEditorPanel(), BorderLayout.CENTER );
+        panel.add( getCommandManager().getGroup( Commands.GROUPID_EDITTOOLBAR ).createToolBar( "toolbar" ), BorderLayout.NORTH );
         return panel;
     }
 
     private JComponent createEditorPanel()
     {
-        final FormLayout layout = new FormLayout("8dlu, r:p, 4dlu, p:g(1.0), 4dlu, p, 8dlu", "8dlu, p, 8dlu, p, 8dlu");
-        final JPanel panel = new JPanel(layout);
+        final FormLayout layout = new FormLayout( "8dlu, r:p, 4dlu, p:g(1.0), 4dlu, p, 8dlu", "8dlu, p, 8dlu, p, 8dlu" );
+        final JPanel panel = new JPanel( layout );
         final CellConstraints cc = new CellConstraints();
-        panel.add(new JLabel("Kategorie:"), cc.xy(2, 2));
-        panel.add(createAndBindTextField(model.getEditorModel(), "text"), cc.xyw(4, 2, 3));
-        panel.add(new JLabel("Icon:"), cc.xy(2, 4));
-        panel.add(createAndBindLabel(model.getEditorModel(), "icon"), cc.xy(4, 4));
-        panel.add(getCommandManager().getCommand("typeedit.icons").createButton(), cc.xy(6, 4));
+        panel.add( new JLabel( "Kategorie:" ), cc.xy( 2, 2 ) );
+        panel.add( createAndBindTextField( model.getEditorModel(), "text" ), cc.xyw( 4, 2, 3 ) );
+        panel.add( new JLabel( "Icon:" ), cc.xy( 2, 4 ) );
+        panel.add( createAndBindLabel( model.getEditorModel(), "icon" ), cc.xy( 4, 4 ) );
+        panel.add( getCommandManager().getCommand( "typeedit.icons" ).createButton(), cc.xy( 6, 4 ) );
         return panel;
     }
 
-    private static JTextField createAndBindTextField(final PresentationModel model, final String property)
+    private static JTextField createAndBindTextField( final PresentationModel model, final String property )
     {
         final JTextField field = new JTextField();
-        Bindings.bind(field, model.getBufferedModel(property));
+        Bindings.bind( field, model.getBufferedModel( property ) );
         return field;
     }
 
-    private static JLabel createAndBindLabel(final PresentationModel model, final String property)
+    private static JLabel createAndBindLabel( final PresentationModel model, final String property )
     {
         final JLabel label = new JLabel();
-        final BufferedValueModel bufferedModel = model.getBufferedModel(property);
-        final ResourcePathToIconConverter converter = new ResourcePathToIconConverter(bufferedModel);
-        new PropertyConnector(converter, "value", label, "icon").updateProperty2();
+        final BufferedValueModel bufferedModel = model.getBufferedModel( property );
+        final ResourcePathToIconConverter converter = new ResourcePathToIconConverter( bufferedModel );
+        new PropertyConnector( converter, "value", label, "icon" ).updateProperty2();
         return label;
     }
 

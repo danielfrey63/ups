@@ -24,13 +24,12 @@ package ch.jfactory.application.persistence;
  */
 public interface SourceStateListener
 {
-
     /**
      * Notifies for a definite source state change.
      *
      * @param event the source state event
      */
-    void sourceStateChanged(SourceStateEvent event);
+    void sourceStateChanged( SourceStateEvent event );
 
     /**
      * Notifies for an optional source state change. Make sur the implementation fires a sourceStateChanged Event if
@@ -39,5 +38,5 @@ public interface SourceStateListener
      * @param event the source state event
      * @return whether it is ok to fire the source state changed event
      */
-    void sourceStateMayChange(SourceStateEvent event) throws SourceVetoedException;
+    void sourceStateMayChange( SourceStateEvent event ) throws SourceVetoedException;
 }

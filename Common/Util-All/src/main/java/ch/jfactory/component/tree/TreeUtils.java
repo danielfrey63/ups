@@ -29,8 +29,9 @@ import javax.swing.tree.TreePath;
  */
 public final class TreeUtils
 {
-
-    /** Makes sure this class is not instantiated. */
+    /**
+     * Makes sure this class is not instantiated.
+     */
     private TreeUtils()
     {
         // Just to make sure this class is not instantiated.
@@ -42,16 +43,16 @@ public final class TreeUtils
      * @param nodes the nodes array to convert
      * @return the tree paths
      */
-    public static TreePath[] getPathsForNodes(final TreeNode[] nodes)
+    public static TreePath[] getPathsForNodes( final TreeNode[] nodes )
     {
         final int length = nodes.length;
         final ArrayList paths = new ArrayList();
-        for (int i = 0; i < length; i++)
+        for ( int i = 0; i < length; i++ )
         {
             final TreeNode node = nodes[i];
-            paths.add(getPathForNode(node));
+            paths.add( getPathForNode( node ) );
         }
-        return (TreePath[]) paths.toArray(new TreePath[paths.size()]);
+        return (TreePath[]) paths.toArray( new TreePath[paths.size()] );
     }
 
     /**
@@ -60,15 +61,15 @@ public final class TreeUtils
      * @param node the node to translate to a path
      * @return the path constructed
      */
-    public static TreePath getPathForNode(TreeNode node)
+    public static TreePath getPathForNode( TreeNode node )
     {
         final ArrayList path = new ArrayList();
-        path.add(node);
-        while ((node = node.getParent()) != null)
+        path.add( node );
+        while ( ( node = node.getParent() ) != null )
         {
-            path.add(0, node);
+            path.add( 0, node );
         }
-        return new TreePath(path.toArray());
+        return new TreePath( path.toArray() );
     }
 
     /**
@@ -77,9 +78,9 @@ public final class TreeUtils
      * @param paths the tree paths to extract the tree nodes from
      * @return an array of tree nodes or null if paths is null
      */
-    public static Object[] getNodesForPaths(final TreePath[] paths)
+    public static Object[] getNodesForPaths( final TreePath[] paths )
     {
-        return getNodesForPaths(paths, new Object[0]);
+        return getNodesForPaths( paths, new Object[0] );
     }
 
     /**
@@ -89,22 +90,22 @@ public final class TreeUtils
      * @param type  the type of the new array
      * @return an array of tree nodes or null if paths is null
      */
-    public static Object[] getNodesForPaths(final TreePath[] paths, final Object[] type)
+    public static Object[] getNodesForPaths( final TreePath[] paths, final Object[] type )
     {
-        if (paths == null)
+        if ( paths == null )
         {
             return null;
         }
         final int length = paths.length;
         final ArrayList nodes = new ArrayList();
 
-        for (int i = 0; i < length; i++)
+        for ( int i = 0; i < length; i++ )
         {
             final TreePath path = paths[i];
-            nodes.add(path.getLastPathComponent());
+            nodes.add( path.getLastPathComponent() );
         }
 
-        return nodes.toArray(type);
+        return nodes.toArray( type );
     }
 
     /**
@@ -112,23 +113,23 @@ public final class TreeUtils
      *
      * @param tree the tree
      */
-    public static void expandAll(final JTree tree)
+    public static void expandAll( final JTree tree )
     {
-        for (int i = 0; i < tree.getRowCount(); i++)
+        for ( int i = 0; i < tree.getRowCount(); i++ )
         {
-            tree.expandRow(i);
+            tree.expandRow( i );
         }
     }
 
-    public static void collapseAll(final JTree tree)
+    public static void collapseAll( final JTree tree )
     {
-        for (int i = tree.getRowCount() - 1; i >= 0; i--)
+        for ( int i = tree.getRowCount() - 1; i >= 0; i-- )
         {
-            tree.collapseRow(i);
+            tree.collapseRow( i );
         }
-        if (tree.isRootVisible())
+        if ( tree.isRootVisible() )
         {
-            tree.expandPath(tree.getPathForRow(0));
+            tree.expandPath( tree.getPathForRow( 0 ) );
         }
     }
 
@@ -141,21 +142,21 @@ public final class TreeUtils
      * @param model the tree model
      * @return a collection of tree paths matched
      */
-    public static Collection matchPaths(final Iterator keys, final TreeModel model)
+    public static Collection matchPaths( final Iterator keys, final TreeModel model )
     {
         final HashSet matches = new HashSet();
-        while (keys.hasNext())
+        while ( keys.hasNext() )
         {
             boolean isAdoptable = true;
             final TreePath treePath = (TreePath) keys.next();
             final Object[] pathObjects = treePath.getPath();
-            for (int i = 0; i < pathObjects.length && isAdoptable; i++)
+            for ( int i = 0; i < pathObjects.length && isAdoptable; i++ )
             {
                 final Object pathObject = pathObjects[i];
-                if (i == 0)
+                if ( i == 0 )
                 {
                     final Object root = model.getRoot();
-                    if (pathObject.toString().equals(root.toString()))
+                    if ( pathObject.toString().equals( root.toString() ) )
                     {
                         pathObjects[0] = root;
                     }
@@ -168,10 +169,10 @@ public final class TreeUtils
                 {
                     final Object parent = pathObjects[i - 1];
                     isAdoptable = false;
-                    for (int j = 0; j < model.getChildCount(parent); j++)
+                    for ( int j = 0; j < model.getChildCount( parent ); j++ )
                     {
-                        final Object child = model.getChild(parent, j);
-                        if (pathObject.toString().equals(child.toString()))
+                        final Object child = model.getChild( parent, j );
+                        if ( pathObject.toString().equals( child.toString() ) )
                         {
                             pathObjects[i] = child;
                             isAdoptable = true;
@@ -179,9 +180,9 @@ public final class TreeUtils
                     }
                 }
             }
-            if (isAdoptable)
+            if ( isAdoptable )
             {
-                matches.add(new TreePath(pathObjects));
+                matches.add( new TreePath( pathObjects ) );
             }
         }
         return matches;
@@ -194,27 +195,27 @@ public final class TreeUtils
      * @param entry
      * @return the tree path found or null if none
      */
-    public static TreePath findPathInTreeModel(final TreeModel model, final Object entry)
+    public static TreePath findPathInTreeModel( final TreeModel model, final Object entry )
     {
         final Object root = model.getRoot();
-        final TreePath path = new TreePath(root);
-        return findPathInTreeModel(model, path, entry);
+        final TreePath path = new TreePath( root );
+        return findPathInTreeModel( model, path, entry );
     }
 
-    private static TreePath findPathInTreeModel(final TreeModel model, final TreePath path, final Object entry)
+    private static TreePath findPathInTreeModel( final TreeModel model, final TreePath path, final Object entry )
     {
         final Object node = path.getLastPathComponent();
-        if (node == entry)
+        if ( node == entry )
         {
             return path;
         }
         else
         {
-            for (int i = 0; i < model.getChildCount(node); i++)
+            for ( int i = 0; i < model.getChildCount( node ); i++ )
             {
-                final Object child = model.getChild(node, i);
-                final TreePath result = findPathInTreeModel(model, path.pathByAddingChild(child), entry);
-                if (result != null)
+                final Object child = model.getChild( node, i );
+                final TreePath result = findPathInTreeModel( model, path.pathByAddingChild( child ), entry );
+                if ( result != null )
                 {
                     return result;
                 }
@@ -223,34 +224,34 @@ public final class TreeUtils
         return null;
     }
 
-    public static TreeNode findNodeInDefaultMutableTreeModel(final DefaultMutableTreeModel model, final Object entry)
+    public static TreeNode findNodeInDefaultMutableTreeModel( final DefaultMutableTreeModel model, final Object entry )
     {
         final MutableTreeNode node = (MutableTreeNode) model.getRoot();
         final TreeNode foundNode;
-        if (node instanceof DefaultMutableTreeNode)
+        if ( node instanceof DefaultMutableTreeNode )
         {
-            foundNode = findNodeByUserObject((DefaultMutableTreeNode) node, entry);
+            foundNode = findNodeByUserObject( (DefaultMutableTreeNode) node, entry );
         }
         else
         {
-            throw new IllegalArgumentException("you want to search nodes of type " + node.getClass().getName()
-                    + " for an object object of type " + entry.getClass().getName());
+            throw new IllegalArgumentException( "you want to search nodes of type " + node.getClass().getName()
+                    + " for an object object of type " + entry.getClass().getName() );
         }
         return foundNode;
     }
 
-    public static TreeNode findNodeByUserObject(final DefaultMutableTreeNode node, final Object object)
+    public static TreeNode findNodeByUserObject( final DefaultMutableTreeNode node, final Object object )
     {
-        if (node.getUserObject() == object)
+        if ( node.getUserObject() == object )
         {
             return node;
         }
         else
         {
-            for (int i = 0; i < node.getChildCount(); i++)
+            for ( int i = 0; i < node.getChildCount(); i++ )
             {
-                final TreeNode result = findNodeByUserObject((DefaultMutableTreeNode) node.getChildAt(i), object);
-                if (result != null)
+                final TreeNode result = findNodeByUserObject( (DefaultMutableTreeNode) node.getChildAt( i ), object );
+                if ( result != null )
                 {
                     return result;
                 }
@@ -265,33 +266,33 @@ public final class TreeUtils
      * @param tree the tree to center the path
      * @param tp   the tree path to center
      */
-    public static void ensureVisibility(final JTree tree, final TreePath tp)
+    public static void ensureVisibility( final JTree tree, final TreePath tp )
     {
         // Make sure to expand path before making visible, otherwise getRowForPath returns -1
-        tree.makeVisible(tp);
+        tree.makeVisible( tp );
         // Move path towards center
         final int iVis = tree.getVisibleRowCount() / 2;
-        final int iRow = tree.getRowForPath(tp);
-        final int iRowMax = Math.min(iRow + iVis, tree.getRowCount() - 1);
-        final int iRowMin = Math.max(0, iRow - iVis);
-        tree.scrollRowToVisible(iRowMin);
-        tree.scrollRowToVisible(iRowMax);
+        final int iRow = tree.getRowForPath( tp );
+        final int iRowMax = Math.min( iRow + iVis, tree.getRowCount() - 1 );
+        final int iRowMin = Math.max( 0, iRow - iVis );
+        tree.scrollRowToVisible( iRowMin );
+        tree.scrollRowToVisible( iRowMax );
     }
 
-    public static ArrayList<TreePath> getExpandedPaths(final JTree tree, final TreePath path)
+    public static ArrayList<TreePath> getExpandedPaths( final JTree tree, final TreePath path )
     {
         final ArrayList<TreePath> paths = new ArrayList<TreePath>();
-        final Enumeration<TreePath> enumerator = tree.getExpandedDescendants(path);
-        while (enumerator != null && enumerator.hasMoreElements())
+        final Enumeration<TreePath> enumerator = tree.getExpandedDescendants( path );
+        while ( enumerator != null && enumerator.hasMoreElements() )
         {
             final TreePath p = enumerator.nextElement();
-            paths.add(p);
+            paths.add( p );
         }
         return paths;
     }
 
-    public static ArrayList<TreePath> getExpandedPaths(final JTree tree)
+    public static ArrayList<TreePath> getExpandedPaths( final JTree tree )
     {
-        return getExpandedPaths(tree, tree.getPathForRow(0));
+        return getExpandedPaths( tree, tree.getPathForRow( 0 ) );
     }
 }

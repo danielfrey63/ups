@@ -19,12 +19,15 @@ import java.awt.Polygon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:00 $
  */
-public class Prinz extends Canvas {
-
+public class Prinz extends Canvas
+{
     private int i;
-    private int n;
-    private int d;
-    private Polygon polygonPrinz;
+
+    private final int n;
+
+    private final int d;
+
+    private final Polygon polygonPrinz;
 
     /**
      * Constructor
@@ -32,14 +35,15 @@ public class Prinz extends Canvas {
      * @param numOfSqrs number of squares of the maze
      * @param dimOfSqrs width, heitghs resp. of one square
      */
-    public Prinz(int numOfSqrs, int dimOfSqrs) {
+    public Prinz( final int numOfSqrs, final int dimOfSqrs )
+    {
         this.n = numOfSqrs;
         this.d = dimOfSqrs;
-        int[] px = new int[]{d / 10, d / 3, d - d / 3, d - d / 10,
+        final int[] px = new int[]{d / 10, d / 3, d - d / 3, d - d / 10,
                 d - 2 * d / 6, d / 2, d - 4 * d / 6};
-        int[] py = new int[]{d / 10, d - d / 10, d - d / 10, d / 10, 2 * d / 5,
+        final int[] py = new int[]{d / 10, d - d / 10, d - d / 10, d / 10, 2 * d / 5,
                 d / 10, 2 * d / 5};
-        this.polygonPrinz = new Polygon(px, py, 7);
+        this.polygonPrinz = new Polygon( px, py, 7 );
         init();
     }
 
@@ -48,13 +52,14 @@ public class Prinz extends Canvas {
      *
      * @param iNeu array-index of the actual ocupied maze-square
      */
-    public void setIndexArray(int iNeu) {
-        int xOld = i % n * d;
-        int yOld = (int) Math.floor(i / n) * d;
+    public void setIndexArray( final int iNeu )
+    {
+        final int xOld = i % n * d;
+        final int yOld = (int) Math.floor( i / n ) * d;
         this.i += iNeu;
-        int xNew = i % n * d;
-        int yNew = (int) Math.floor(i / n) * d;
-        translatePrinz(xNew - xOld, yNew - yOld);
+        final int xNew = i % n * d;
+        final int yNew = (int) Math.floor( i / n ) * d;
+        translatePrinz( xNew - xOld, yNew - yOld );
     }
 
     /**
@@ -62,23 +67,26 @@ public class Prinz extends Canvas {
      *
      * @return int
      */
-    public int getIndexArray() {
+    public int getIndexArray()
+    {
         return this.i;
     }
 
     /**
      * initializes the pirnce's position
      */
-    public void init() {
-        translatePrinz(-(i % n * d), -((int) Math.floor(i / n) * d));
+    public void init()
+    {
+        translatePrinz( -( i % n * d ), -( (int) Math.floor( i / n ) * d ) );
         this.i = 0;
     }
 
     /**
      * @see java.awt.Component#update(Graphics)
      */
-    public void update(Graphics g) {
-        paint(g);
+    public void update( final Graphics g )
+    {
+        paint( g );
     }
 
     /**
@@ -87,12 +95,14 @@ public class Prinz extends Canvas {
      * @param g     Graphics object
      * @param color color of the prince's crone
      */
-    public void paint(Graphics g, Color color) {
-        g.setColor(color);
-        g.fillPolygon(polygonPrinz);
+    public void paint( final Graphics g, final Color color )
+    {
+        g.setColor( color );
+        g.fillPolygon( polygonPrinz );
     }
 
-    private void translatePrinz(int dx, int dy) {
-        polygonPrinz.translate(dx, dy);
+    private void translatePrinz( final int dx, final int dy )
+    {
+        polygonPrinz.translate( dx, dy );
     }
 }

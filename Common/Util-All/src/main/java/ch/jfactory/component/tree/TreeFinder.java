@@ -17,12 +17,11 @@ import javax.swing.tree.TreePath;
  */
 public interface TreeFinder
 {
-
     /**
      * Sets the path found for the node found. The path may be null.
      *
      * @param tp TreePath found
      */
-    public void setSelection(TreePath tp);
+    public void setSelection( TreePath tp );
 
 }

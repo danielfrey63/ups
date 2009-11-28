@@ -4,7 +4,6 @@
 package ch.jfactory.projecttime.domain.api;
 
 import java.util.Properties;
-import ch.jfactory.projecttime.domain.api.IFEntry;
 
 /**
  * Helper class to chech for rule fulfillment wich convenient save and load methods.
@@ -12,8 +11,8 @@ import ch.jfactory.projecttime.domain.api.IFEntry;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:09 $
  */
-public interface IFEntryHelper {
-
+public interface IFEntryHelper
+{
     /**
      * Factory method to construct a new entry.
      *
@@ -22,7 +21,7 @@ public interface IFEntryHelper {
      * @param type   the type of the new entry
      * @return the newly created entry
      */
-    IFEntry createEntry(IFEntry parent, String name, Object type);
+    IFEntry createEntry( IFEntry parent, String name, Object type );
 
     /**
      * Helper method to set the parent for a given child. Make sure the old parent does not contain the given child
@@ -31,7 +30,7 @@ public interface IFEntryHelper {
      * @param parent the parent to set
      * @param child  the child to add
      */
-    void setParent(IFEntry parent, IFEntry child);
+    void setParent( IFEntry parent, IFEntry child );
 
     /**
      * Saves the given entry array to the persistence layer configures with the given properties.
@@ -39,7 +38,7 @@ public interface IFEntryHelper {
      * @param entries       the entry array to save
      * @param configuration the configuration for the persistence layer
      */
-    void save(IFEntry[] entries, Properties configuration);
+    void save( IFEntry[] entries, Properties configuration );
 
     /**
      * Loads an entry array from the persistence layer with the given configuration.
@@ -47,5 +46,5 @@ public interface IFEntryHelper {
      * @param configuration the configuration for the persistence layer
      * @return the entry array
      */
-    IFEntry[] load(Properties configuration);
+    IFEntry[] load( Properties configuration );
 }

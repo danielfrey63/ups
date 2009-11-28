@@ -28,7 +28,6 @@ import java.awt.Color;
  */
 public class CodedNote implements Note
 {
-
     private String message = null;
 
     private Integer percentage = null;
@@ -43,22 +42,22 @@ public class CodedNote implements Note
      *
      * @param codedNote the encoded note
      */
-    public CodedNote(final String codedNote)
+    public CodedNote( final String codedNote )
     {
-        final String[] tokens = codedNote.split(" *, *");
-        if (tokens.length > 0)
+        final String[] tokens = codedNote.split( " *, *" );
+        if ( tokens.length > 0 )
         {
             message = tokens[0];
         }
-        if (tokens.length > 1)
+        if ( tokens.length > 1 )
         {
-            percentage = Integer.parseInt(tokens[1]);
+            percentage = Integer.parseInt( tokens[1] );
         }
-        if (tokens.length > 2)
+        if ( tokens.length > 2 )
         {
-            color = ColorUtils.parseColor(tokens[2]);
+            color = ColorUtils.parseColor( tokens[2] );
         }
-        if (tokens.length > 3)
+        if ( tokens.length > 3 )
         {
             subject = tokens[3];
         }

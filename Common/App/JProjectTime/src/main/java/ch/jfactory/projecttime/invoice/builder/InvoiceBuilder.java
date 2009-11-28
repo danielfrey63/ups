@@ -26,9 +26,10 @@ import javax.swing.JPanel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class InvoiceBuilder extends ActionCommandPanelBuilder {
-
-    public JComponent createMainPanel() {
+public class InvoiceBuilder extends ActionCommandPanelBuilder
+{
+    public JComponent createMainPanel()
+    {
         return new JPanel();
     }
 }

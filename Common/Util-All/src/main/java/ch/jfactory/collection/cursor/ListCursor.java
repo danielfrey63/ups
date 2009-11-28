@@ -13,15 +13,15 @@ import org.apache.log4j.Logger;
  */
 class ListCursor implements Cursor
 {
-    private static final Logger LOGGER = Logger.getLogger(ListCursor.class);
+    private static final Logger LOGGER = Logger.getLogger( ListCursor.class );
 
-    private List list;
+    private final List list;
 
-    private ListIterator iterator;
+    private final ListIterator iterator;
 
     private Object currentObject = null;
 
-    public ListCursor(final List list)
+    public ListCursor( final List list )
     {
         this.list = list;
         this.iterator = list.listIterator();
@@ -50,7 +50,7 @@ class ListCursor implements Cursor
 
     public boolean hasPrevious()
     {
-        return (iterator.previousIndex() != 0 && iterator.hasPrevious());
+        return ( iterator.previousIndex() != 0 && iterator.hasPrevious() );
     }
 
     public int getCurrentIndex()
@@ -68,24 +68,24 @@ class ListCursor implements Cursor
         return currentObject;
     }
 
-    public void setCurrent(final Object obj)
+    public void setCurrent( final Object obj )
     {
-        final int idx = list.indexOf(obj);
-        if (idx >= 0)
+        final int idx = list.indexOf( obj );
+        if ( idx >= 0 )
         {
             currentObject = obj;
-            while (getCurrentIndex() < idx)
+            while ( getCurrentIndex() < idx )
             {
                 iterator.next();
             }
-            while (getCurrentIndex() > idx)
+            while ( getCurrentIndex() > idx )
             {
                 iterator.previous();
             }
         }
         else
         {
-            LOGGER.error("Error setting Current Object to " + obj);
+            LOGGER.error( "Error setting Current Object to " + obj );
         }
     }
 

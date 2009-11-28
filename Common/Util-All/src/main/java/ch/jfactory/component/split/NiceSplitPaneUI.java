@@ -12,7 +12,7 @@ public class NiceSplitPaneUI extends MetalSplitPaneUI
 {
     public BasicSplitPaneDivider createDefaultDivider()
     {
-        return new NiceSplitPaneDivider(this);
+        return new NiceSplitPaneDivider( this );
     }
 
 }

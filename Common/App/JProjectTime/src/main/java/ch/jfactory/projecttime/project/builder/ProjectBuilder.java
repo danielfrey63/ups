@@ -53,177 +53,213 @@ import javax.swing.tree.TreePath;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class ProjectBuilder extends ActionCommandPanelBuilder {
-
+public class ProjectBuilder extends ActionCommandPanelBuilder
+{
     private JTree tree;
-    private MainModel model;
 
-    public ProjectBuilder(MainModel model) {
+    private final MainModel model;
+
+    public ProjectBuilder( final MainModel model )
+    {
         this.model = model;
     }
 
-    protected JComponent createMainPanel() {
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(createToolbar(), BorderLayout.NORTH);
-        panel.add(createTree(), BorderLayout.CENTER);
+    protected JComponent createMainPanel()
+    {
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( createToolbar(), BorderLayout.NORTH );
+        panel.add( createTree(), BorderLayout.CENTER );
         return panel;
     }
 
-    protected void initCommands() {
-        initCommand(new AddEntry(model.getProjectModel(), getCommandManager()));
-        initCommand(new DeleteEntry(model.getProjectModel(), getCommandManager()));
+    protected void initCommands()
+    {
+        initCommand( new AddEntry( model.getProjectModel(), getCommandManager() ) );
+        initCommand( new DeleteEntry( model.getProjectModel(), getCommandManager() ) );
     }
 
-    protected void initListeners() {
+    protected void initListeners()
+    {
         final ProjectModel projectModel = model.getProjectModel();
-        projectModel.addPropertyChangeListener(ProjectModel.PROPERTYNAME_ROOT, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        projectModel.addPropertyChangeListener( ProjectModel.PROPERTYNAME_ROOT, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final IFEntry root = (IFEntry) evt.getNewValue();
-                final DefaultMutableTreeNode rootNode = wrapNode(root);
-                final DefaultMutableTreeModel treeModel = new DefaultMutableTreeModel(rootNode);
-                tree.setModel(treeModel);
+                final DefaultMutableTreeNode rootNode = wrapNode( root );
+                final DefaultMutableTreeModel treeModel = new DefaultMutableTreeModel( rootNode );
+                tree.setModel( treeModel );
             }
-        });
-        projectModel.addPropertyChangeListener(ProjectModel.PROPERTYNAME_NEWCHILD, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        projectModel.addPropertyChangeListener( ProjectModel.PROPERTYNAME_NEWCHILD, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final IFEntry child = (IFEntry) evt.getNewValue();
                 final TreePath selectionPath = tree.getSelectionPath();
                 final DefaultMutableTreeNode node = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
-                final DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
-                node.add(childNode);
-                final int position = node.getIndex(childNode);
+                final DefaultMutableTreeNode childNode = new DefaultMutableTreeNode( child );
+                node.add( childNode );
+                final int position = node.getIndex( childNode );
                 final DefaultMutableTreeModel treeModel = (DefaultMutableTreeModel) tree.getModel();
-                treeModel.nodesWereInserted(selectionPath, new int[]{position});
-                tree.setSelectionPath(selectionPath.pathByAddingChild(childNode));
+                treeModel.nodesWereInserted( selectionPath, new int[]{position} );
+                tree.setSelectionPath( selectionPath.pathByAddingChild( childNode ) );
             }
-        });
-        projectModel.addPropertyChangeListener(ProjectModel.PROPERTYNAME_DELETEDCHILD, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        projectModel.addPropertyChangeListener( ProjectModel.PROPERTYNAME_DELETEDCHILD, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final TreePath selectionPath = tree.getSelectionPath();
                 final DefaultMutableTreeNode node = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
-                final int position = node.getParent().getIndex(node);
+                final int position = node.getParent().getIndex( node );
                 node.removeFromParent();
                 final DefaultMutableTreeModel treeModel = (DefaultMutableTreeModel) tree.getModel();
-                System.out.println("removing " + node + " at " + position);
-                treeModel.nodesWereRemoved(selectionPath.getParentPath(), new int[]{position}, new Object[]{node});
-                tree.setSelectionPath(selectionPath.getParentPath());
+                System.out.println( "removing " + node + " at " + position );
+                treeModel.nodesWereRemoved( selectionPath.getParentPath(), new int[]{position}, new Object[]{node} );
+                tree.setSelectionPath( selectionPath.getParentPath() );
             }
-        });
-        projectModel.getCurrentBeanModel().getTriggerChannel().addValueChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (Boolean.TRUE.equals((Boolean) evt.getNewValue())) {
+        } );
+        projectModel.getCurrentBeanModel().getTriggerChannel().addValueChangeListener( new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                if ( Boolean.TRUE.equals( evt.getNewValue() ) )
+                {
                     final NotifiableTreeModel treeModel = (NotifiableTreeModel) tree.getModel();
-                    treeModel.nodeChanged(tree.getSelectionPath());
+                    treeModel.nodeChanged( tree.getSelectionPath() );
                 }
             }
-        });
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(TreeSelectionEvent e) {
+        } );
+        tree.addTreeSelectionListener( new TreeSelectionListener()
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
                 final TreePath path = e.getNewLeadSelectionPath();
                 final IFEntry entry;
                 final boolean invalid = path != null;
-                if (invalid) {
+                if ( invalid )
+                {
                     final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                     entry = (IFEntry) node.getUserObject();
                 }
-                else {
+                else
+                {
                     entry = null;
                 }
-                projectModel.getCurrentBeanModel().setBean(entry);
-                getCommandManager().getCommand(Commands.ADD_COMMAND).setEnabled(invalid);
-                getCommandManager().getCommand(Commands.DELETE_COMMAND).setEnabled(invalid && entry.getParent() != null);
+                projectModel.getCurrentBeanModel().setBean( entry );
+                getCommandManager().getCommand( Commands.ADD_COMMAND ).setEnabled( invalid );
+                getCommandManager().getCommand( Commands.DELETE_COMMAND ).setEnabled( invalid && entry.getParent() != null );
             }
-        });
+        } );
     }
 
-    private JComponent createToolbar() {
-        return getCommandManager().getGroup(Commands.POPUP_GROUP).createToolBar("toolbar");
+    private JComponent createToolbar()
+    {
+        return getCommandManager().getGroup( Commands.POPUP_GROUP ).createToolBar( "toolbar" );
     }
 
-    private JComponent createTree() {
-        final DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(model.getProjectModel().getRoot());
+    private JComponent createTree()
+    {
+        final DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode( model.getProjectModel().getRoot() );
         final DnDValidatorUpdater treeValidator = new NopValidatorUpdater();
-        tree = new DnDTree(new DefaultMutableTreeModel(rootNode), treeValidator);
-        tree.setComponentPopupMenu(getCommandManager().getGroup(Commands.POPUP_GROUP).createPopupMenu());
-        tree.setCellRenderer(new ProjectTreeCellRenderer());
-        return new JScrollPane(tree);
+        tree = new DnDTree( new DefaultMutableTreeModel( rootNode ), treeValidator );
+        tree.setComponentPopupMenu( getCommandManager().getGroup( Commands.POPUP_GROUP ).createPopupMenu() );
+        tree.setCellRenderer( new ProjectTreeCellRenderer() );
+        return new JScrollPane( tree );
     }
 
-    private DefaultMutableTreeNode wrapNode(IFEntry entry) {
-        final DefaultMutableTreeNode node = new DefaultMutableTreeNode(entry);
+    private DefaultMutableTreeNode wrapNode( final IFEntry entry )
+    {
+        final DefaultMutableTreeNode node = new DefaultMutableTreeNode( entry );
         final IFEntry[] children = entry.getChildren();
-        for (int i = 0; children != null && i < children.length; i++) {
-            node.add(wrapNode(children[ i ]));
+        for ( int i = 0; children != null && i < children.length; i++ )
+        {
+            node.add( wrapNode( children[i] ) );
         }
         return node;
     }
 
-    private static class ProjectTreeCellRenderer extends DefaultTreeCellRenderer {
-
-        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded,
-                                                      boolean leaf, int row, boolean hasFocus) {
-            final JLabel label = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+    private static class ProjectTreeCellRenderer extends DefaultTreeCellRenderer
+    {
+        public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel, final boolean expanded,
+                                                       final boolean leaf, final int row, final boolean hasFocus )
+        {
+            final JLabel label = (JLabel) super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf, row, hasFocus );
             final DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
             final IFEntry entry = (IFEntry) node.getUserObject();
             final StringBuffer buffer = new StringBuffer();
             final Calendar start = entry.getStart();
             final Calendar end = entry.getEnd();
-            if (!"".equals(entry.getName())) {
-                buffer.append(entry.getName());
+            if ( !"".equals( entry.getName() ) )
+            {
+                buffer.append( entry.getName() );
             }
-            else if (start != null && end != null) {
+            else if ( start != null && end != null )
+            {
                 final SimpleDateFormat startFormat;
-                if (DateUtils.isSameDay(start, end)) {
-                    startFormat = new SimpleDateFormat("HH:mm");
+                if ( DateUtils.isSameDay( start, end ) )
+                {
+                    startFormat = new SimpleDateFormat( "HH:mm" );
                 }
-                else if (DateUtils.isSameMonth(start, end)) {
-                    startFormat = new SimpleDateFormat("HH:mm dd.");
+                else if ( DateUtils.isSameMonth( start, end ) )
+                {
+                    startFormat = new SimpleDateFormat( "HH:mm dd." );
                 }
-                else if (DateUtils.isSameYear(start, end)) {
-                    startFormat = new SimpleDateFormat("HH:mm dd.MM.");
+                else if ( DateUtils.isSameYear( start, end ) )
+                {
+                    startFormat = new SimpleDateFormat( "HH:mm dd.MM." );
                 }
-                else {
-                    startFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+                else
+                {
+                    startFormat = new SimpleDateFormat( "HH:mm dd.MM.yyyy" );
                 }
-                buffer.append(startFormat.format(start.getTime()));
-                buffer.append(" - ");
-                final SimpleDateFormat endFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
-                buffer.append(endFormat.format(end.getTime()));
-                buffer.append(" (");
-                buffer.append(DateUtils.dateDifference(start.getTime().getTime(), end.getTime().getTime(), "HH:mm"));
-                buffer.append(")");
-                label.setIcon(ImageLocator.getIcon("people.gif"));
+                buffer.append( startFormat.format( start.getTime() ) );
+                buffer.append( " - " );
+                final SimpleDateFormat endFormat = new SimpleDateFormat( "HH:mm dd.MM.yyyy" );
+                buffer.append( endFormat.format( end.getTime() ) );
+                buffer.append( " (" );
+                buffer.append( DateUtils.dateDifference( start.getTime().getTime(), end.getTime().getTime(), "HH:mm" ) );
+                buffer.append( ")" );
+                label.setIcon( ImageLocator.getIcon( "people.gif" ) );
             }
-            label.setText(buffer.toString());
+            label.setText( buffer.toString() );
             return label;
         }
     }
 
-    private static class NopValidatorUpdater implements DnDValidatorUpdater {
-
-        public boolean isRightShiftAllowed(TreePath path) {
+    private static class NopValidatorUpdater implements DnDValidatorUpdater
+    {
+        public boolean isRightShiftAllowed( final TreePath path )
+        {
             return false;
         }
 
-        public boolean isLeftShiftAllowed(TreePath path) {
+        public boolean isLeftShiftAllowed( final TreePath path )
+        {
             return false;
         }
 
-        public boolean isMoveAllowed(TreePath from, TreePath to, int index) {
+        public boolean isMoveAllowed( final TreePath from, final TreePath to, final int index )
+        {
             return false;
         }
 
-        public boolean isAnyActionAllowed(TreePath from, TreePath to) {
+        public boolean isAnyActionAllowed( final TreePath from, final TreePath to )
+        {
             return false;
         }
 
-        public void doRightShift(TreePath path) {
+        public void doRightShift( final TreePath path )
+        {
         }
 
-        public void doLeftShift(TreePath path) {
+        public void doLeftShift( final TreePath path )
+        {
         }
 
-        public void setModel(NotifiableTreeModel model) {
+        public void setModel( final NotifiableTreeModel model )
+        {
         }
     }
 }

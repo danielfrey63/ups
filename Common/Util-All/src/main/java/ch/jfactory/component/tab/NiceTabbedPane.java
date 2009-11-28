@@ -9,15 +9,14 @@ import javax.swing.JTabbedPane;
  */
 public class NiceTabbedPane extends JTabbedPane
 {
-
     public NiceTabbedPane()
     {
         init();
     }
 
-    public NiceTabbedPane(final int top)
+    public NiceTabbedPane( final int top )
     {
-        super(top);
+        super( top );
         init();
     }
 

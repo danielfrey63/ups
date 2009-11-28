@@ -9,10 +9,11 @@ import ch.ethz.ssh2.ServerHostKeyVerifier;
  */
 public class DummyServerHostKeyVerifier implements ServerHostKeyVerifier
 {
-
-    /** {@inheritDoc} */
-    public boolean verifyServerHostKey(final String hostname, final int port, final String serverHostKeyAlgorithm,
-                                       final byte[] serverHostKey) throws Exception
+    /**
+     * {@inheritDoc}
+     */
+    public boolean verifyServerHostKey( final String hostname, final int port, final String serverHostKeyAlgorithm,
+                                        final byte[] serverHostKey ) throws Exception
     {
         return true;
     }

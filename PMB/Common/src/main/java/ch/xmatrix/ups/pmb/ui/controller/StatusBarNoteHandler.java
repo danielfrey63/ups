@@ -16,30 +16,35 @@
  */
 package ch.xmatrix.ups.pmb.ui.controller;
 
-import ch.jfactory.application.view.status.StatusBar;
 import ch.jfactory.application.view.status.Message;
+import ch.jfactory.application.view.status.StatusBar;
 import ch.jfactory.binding.Note;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * Dispatches all {@link Note}s with a type of {@link ch.jfactory.application.view.status.Message.Type#WARN} to the status bar warnings, all
- * others to the text.
+ * Dispatches all {@link Note}s with a type of {@link ch.jfactory.application.view.status.Message.Type#WARN} to the
+ * status bar warnings, all others to the text.
  */
-public class StatusBarNoteHandler implements PropertyChangeListener {
+public class StatusBarNoteHandler implements PropertyChangeListener
+{
+    private final StatusBar statusBar;
 
-    private StatusBar statusBar;
-
-    public StatusBarNoteHandler(final StatusBar statusBar) {
+    public StatusBarNoteHandler( final StatusBar statusBar )
+    {
         this.statusBar = statusBar;
     }
 
-    public void propertyChange(final PropertyChangeEvent evt) {
+    public void propertyChange( final PropertyChangeEvent evt )
+    {
         final Note note = (Note) evt.getNewValue();
-        if (note.getType() == Message.Type.INFO) {
-            statusBar.setText(note.getMessage());
-        } else {
-            statusBar.setWarning(note.getMessage());
+        if ( note.getType() == Message.Type.INFO )
+        {
+            statusBar.setText( note.getMessage() );
+        }
+        else
+        {
+            statusBar.setWarning( note.getMessage() );
         }
     }
 }

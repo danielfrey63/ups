@@ -13,33 +13,39 @@ import javax.swing.JComponent;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.3 $ $Date: 2006/11/16 13:25:17 $
  */
-public class MainFrame extends AbstractFrame {
+public class MainFrame extends AbstractFrame
+{
+    private final MainModel model;
 
-    private MainModel model;
     private MainBuilder mainBuilder;
 
-    public MainFrame(MainModel model) {
-        super(Application.getDescription().getWindowTitle());
+    public MainFrame( final MainModel model )
+    {
+        super( Application.getDescription().getWindowTitle() );
         this.model = model;
     }
 
-    public String getWindowID() {
+    public String getWindowID()
+    {
         return "JProjectTimeMainFrame";
     }
 
-    protected void configureCloseOperation() {
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(Application.getApplicationCloseOnWindowClosingHandler());
+    protected void configureCloseOperation()
+    {
+        setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
+        addWindowListener( Application.getApplicationCloseOnWindowClosingHandler() );
     }
 
-    protected JComponent buildContentPane() {
-        mainBuilder = new MainBuilder(model);
+    protected JComponent buildContentPane()
+    {
+        mainBuilder = new MainBuilder( model );
         final JComponent content = mainBuilder.getPanel();
         initMenus();
         return content;
     }
 
-    private void initMenus() {
-        setJMenuBar(mainBuilder.getMenuBar());
+    private void initMenus()
+    {
+        setJMenuBar( mainBuilder.getMenuBar() );
     }
 }

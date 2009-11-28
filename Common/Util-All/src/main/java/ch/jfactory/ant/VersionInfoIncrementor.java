@@ -32,7 +32,6 @@ import org.apache.tools.ant.BuildException;
  */
 public class VersionInfoIncrementor extends Incrementor
 {
-
     /**
      * Replaces the old variable name value with the new one. In this case, it is replacing a version/build string.
      *
@@ -40,112 +39,110 @@ public class VersionInfoIncrementor extends Incrementor
      */
     protected void doExecute() throws BuildException
     {
-
         final java.io.File file = getFile();
 
         VersionInfo info = null;
         try
         {
-            final XMLDecoder decoder = new XMLDecoder(new FileInputStream(file));
+            final XMLDecoder decoder = new XMLDecoder( new FileInputStream( file ) );
             info = (VersionInfo) decoder.readObject();
-            if (info == null)
+            if ( info == null )
             {
-                throw new NullPointerException("VersionInfo object in file " + file + " not deserialized successfully");
+                throw new NullPointerException( "VersionInfo object in file " + file + " not deserialized successfully" );
             }
             decoder.close();
         }
-        catch (FileNotFoundException x)
+        catch ( FileNotFoundException x )
         {
-            throw new BuildException("Manifest file not found. " + x.getMessage());
+            throw new BuildException( "Manifest file not found. " + x.getMessage() );
         }
         final String variable = getVariable();
         final Class viClass = VersionInfo.class;
-        if (viClass == null)
+        if ( viClass == null )
         {
-            throw new BuildException("Class " + viClass + " not found.");
+            throw new BuildException( "Class " + viClass + " not found." );
         }
-        if (new VersionInfo() == null)
+        if ( new VersionInfo() == null )
         {
-            throw new BuildException("Class " + viClass + " not instanciable.");
+            throw new BuildException( "Class " + viClass + " not instanciable." );
         }
 
         String methodName = "get" + variable;
         int ver = 0;
         try
         {
-            final Method method = viClass.getMethod(methodName);
-            if (method == null)
+            final Method method = viClass.getMethod( methodName );
+            if ( method == null )
             {
-                throw new BuildException("Method " + methodName + " not found in VersionInfo class.");
+                throw new BuildException( "Method " + methodName + " not found in VersionInfo class." );
             }
-            System.out.println(method);
-            final Integer integer = (Integer) method.invoke(info);
-            ver = integer;
+            System.out.println( method );
+            ver = (Integer) method.invoke( info );
         }
-        catch (NoSuchMethodException e)
+        catch ( NoSuchMethodException e )
         {
-            throw new BuildException("Method with name " + methodName + " not found. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not found. " + e.getMessage() );
         }
-        catch (SecurityException e)
+        catch ( SecurityException e )
         {
-            throw new BuildException("Method with name " + methodName + " not accessible. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not accessible. " + e.getMessage() );
         }
-        catch (IllegalAccessException e)
+        catch ( IllegalAccessException e )
         {
-            throw new BuildException("Method with name " + methodName + " not accessible. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not accessible. " + e.getMessage() );
         }
-        catch (InvocationTargetException e)
+        catch ( InvocationTargetException e )
         {
-            throw new BuildException("Method with name " + methodName + " not invokable. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not invokable. " + e.getMessage() );
         }
 
-        ver = incrementVersion(ver);
+        ver = incrementVersion( ver );
 
         methodName = "set" + variable;
         try
         {
-            final Method method = viClass.getMethod(methodName, int.class);
-            if (method == null)
+            final Method method = viClass.getMethod( methodName, int.class );
+            if ( method == null )
             {
-                throw new BuildException("Method " + methodName + " not found in VersionInfo class.");
+                throw new BuildException( "Method " + methodName + " not found in VersionInfo class." );
             }
-            method.invoke(info, ver);
+            method.invoke( info, ver );
         }
-        catch (NoSuchMethodException e)
+        catch ( NoSuchMethodException e )
         {
-            throw new BuildException("Method with name " + methodName + " not found. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not found. " + e.getMessage() );
         }
-        catch (SecurityException e)
+        catch ( SecurityException e )
         {
-            throw new BuildException("Method with name " + methodName + " not accessible. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not accessible. " + e.getMessage() );
         }
-        catch (IllegalAccessException e)
+        catch ( IllegalAccessException e )
         {
-            throw new BuildException("Method with name " + methodName + " not accessible. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not accessible. " + e.getMessage() );
         }
-        catch (InvocationTargetException e)
+        catch ( InvocationTargetException e )
         {
-            throw new BuildException("Method with name " + methodName + " not invokable. " + e.getMessage());
+            throw new BuildException( "Method with name " + methodName + " not invokable. " + e.getMessage() );
         }
 
         try
         {
-            final XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file));
-            encoder.writeObject(info);
+            final XMLEncoder encoder = new XMLEncoder( new FileOutputStream( file ) );
+            encoder.writeObject( info );
             encoder.close();
         }
-        catch (IOException x)
+        catch ( IOException x )
         {
-            throw new BuildException("Error during write");
+            throw new BuildException( "Error during write" );
         }
     }
 
     protected String usage()
     {
         final StringBuffer buffer = new StringBuffer();
-        buffer.append("usage: use this ant task like the following:\n");
-        buffer.append("<versioninfo file=\"mainfest.txt\" property=\"Section.Build\"/>\n");
-        buffer.append("optionally you may define the two attributes \"steps\" and \"odd\"\n");
+        buffer.append( "usage: use this ant task like the following:\n" );
+        buffer.append( "<versioninfo file=\"mainfest.txt\" property=\"Section.Build\"/>\n" );
+        buffer.append( "optionally you may define the two attributes \"steps\" and \"odd\"\n" );
         return buffer.toString();
     }
 }

@@ -24,22 +24,21 @@ import org.apache.log4j.Logger;
  */
 public class SearchableTree extends JTree implements TreeFinder
 {
-
-    private static final Logger LOGGER = Logger.getLogger(SearchableTree.class);
+    private static final Logger LOGGER = Logger.getLogger( SearchableTree.class );
 
     /**
      * Creates a new instance of TaxTreePanel
      *
      * @param root the root node to display
      */
-    public SearchableTree(final TreeNode root)
+    public SearchableTree( final TreeNode root )
     {
-        super(root);
+        super( root );
     }
 
-    public SearchableTree(final TreeModel newModel)
+    public SearchableTree( final TreeModel newModel )
     {
-        super(newModel);
+        super( newModel );
     }
 
     /**
@@ -47,17 +46,17 @@ public class SearchableTree extends JTree implements TreeFinder
      *
      * @param root the root TreeNode used for the model
      */
-    public void setRootTreeNode(final TreeNode root)
+    public void setRootTreeNode( final TreeNode root )
     {
-        setModel(new DefaultTreeModel(root));
+        setModel( new DefaultTreeModel( root ) );
     }
 
     // Commented in interface
-    public void setSelection(final TreePath tp)
+    public void setSelection( final TreePath tp )
     {
-        LOGGER.debug("selecting " + tp);
-        setSelectionPath(tp);
-        TreeUtils.ensureVisibility(this, tp);
+        LOGGER.debug( "selecting " + tp );
+        setSelectionPath( tp );
+        TreeUtils.ensureVisibility( this, tp );
     }
 }
 

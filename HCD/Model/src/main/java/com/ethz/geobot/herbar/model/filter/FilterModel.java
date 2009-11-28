@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This class is used to filter the datamodel. It depends on a initial data model and a special filter settings.
@@ -27,12 +27,14 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class FilterModel extends AbstractHerbarModel implements Cloneable {
-
-    private static final Category cat = Category.getInstance(FilterModel.class);
+public class FilterModel extends AbstractHerbarModel implements Cloneable
+{
+    private static final Logger LOG = Logger.getLogger( FilterModel.class );
 
     private HerbarModel dependentModel;
+
     private Map filteredTaxonList = new HashMap();
+
     private List filterDetails = new ArrayList();
 
     /**
@@ -41,56 +43,70 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
      * @param dependentModel the model to be filtered
      * @param name           a name for the model
      */
-    public FilterModel(HerbarModel dependentModel, String name) {
-        super(name);
-        if (cat.isDebugEnabled()) {
-            cat.debug("dependentModel: " + dependentModel.getName());
+    public FilterModel( final HerbarModel dependentModel, final String name )
+    {
+        super( name );
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "dependentModel: " + dependentModel.getName() );
         }
         this.dependentModel = dependentModel;
         addFilterDetail();
     }
 
-    public Level getRootLevel() {
+    public Level getRootLevel()
+    {
         return dependentModel.getRootLevel();
     }
 
-    public Level getLastLevel() {
+    public Level getLastLevel()
+    {
         return dependentModel.getLastLevel();
     }
 
-    public Taxon getRootTaxon() {
-        return createFilterTaxon(dependentModel.getRootTaxon());
+    public Taxon getRootTaxon()
+    {
+        return createFilterTaxon( dependentModel.getRootTaxon() );
     }
 
-    public MorSubject getRootMorSubject() {
+    public MorSubject getRootMorSubject()
+    {
         return dependentModel.getRootMorSubject();
     }
 
-    public EcoSubject getRootEcoSubject() {
+    public EcoSubject getRootEcoSubject()
+    {
         return dependentModel.getRootEcoSubject();
     }
 
-    public MedSubject getRootMedSubject() {
+    public MedSubject getRootMedSubject()
+    {
         return dependentModel.getRootMedSubject();
     }
 
-    public PictureTheme[] getPictureThemes() {
+    public PictureTheme[] getPictureThemes()
+    {
         return dependentModel.getPictureThemes();
     }
 
-    public PictureTheme getPictureTheme(String name) {
-        return dependentModel.getPictureTheme(name);
+    public PictureTheme getPictureTheme( final String name )
+    {
+        return dependentModel.getPictureTheme( name );
     }
 
-    public Level getLevel(String name) {
-        return dependentModel.getLevel(name);
+    public Level getLevel( final String name )
+    {
+        return dependentModel.getLevel( name );
     }
 
-    public void setDependentModel(HerbarModel model) {
-        if (cat.isDebugEnabled()) {
-            cat.debug("dependent model change to: " + model);
+    public void setDependentModel( final HerbarModel model )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "dependent model change to: " + model );
         }
-        if (dependentModel == model) {
+        if ( dependentModel == model )
+        {
             return;
         }
         // Todo: Do not clear the existing filter, but migrate them into the new dependency.
@@ -125,37 +141,44 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
         notifyModelChange();
     }
 
-    public Taxon getTaxon(String taxonName) {
+    public Taxon getTaxon( final String taxonName )
+    {
         Taxon taxon = null;
-        Taxon dependentTaxon = dependentModel.getTaxon(taxonName);
-        if (dependentTaxon != null) {
+        final Taxon dependentTaxon = dependentModel.getTaxon( taxonName );
+        if ( dependentTaxon != null )
+        {
             // search for taxon in cached list otherwise check if taxon is inside this filter
-            taxon = (Taxon) filteredTaxonList.get(dependentTaxon);
-            if (taxon == null && isIn(dependentTaxon)) {
-                taxon = createFilterTaxon(dependentTaxon);
+            taxon = (Taxon) filteredTaxonList.get( dependentTaxon );
+            if ( taxon == null && isIn( dependentTaxon ) )
+            {
+                taxon = createFilterTaxon( dependentTaxon );
             }
         }
         return taxon;
     }
 
-    Taxon createFilterTaxon(Taxon dependentTaxon) {
-        Taxon filteredTaxon = (Taxon) filteredTaxonList.get(dependentTaxon);
-        if (filteredTaxon == null) {
-            filteredTaxon = new FilterTaxon(this, dependentTaxon);
-            filteredTaxonList.put(dependentTaxon, filteredTaxon);
+    Taxon createFilterTaxon( final Taxon dependentTaxon )
+    {
+        Taxon filteredTaxon = (Taxon) filteredTaxonList.get( dependentTaxon );
+        if ( filteredTaxon == null )
+        {
+            filteredTaxon = new FilterTaxon( this, dependentTaxon );
+            filteredTaxonList.put( dependentTaxon, filteredTaxon );
         }
         return filteredTaxon;
     }
 
-    public Level[] getLevels() {
+    public Level[] getLevels()
+    {
 //        return dependentModel.getLevels();
-        Set levelsSet = new HashSet();
-        for (Iterator iterator = filterDetails.iterator(); iterator.hasNext();) {
-            FilterDefinitionDetail detail = (FilterDefinitionDetail) iterator.next();
-            levelsSet.addAll(Arrays.asList(detail.getLevels()));
+        final Set levelsSet = new HashSet();
+        for ( final Object filterDetail : filterDetails )
+        {
+            final FilterDefinitionDetail detail = (FilterDefinitionDetail) filterDetail;
+            levelsSet.addAll( Arrays.asList( detail.getLevels() ) );
         }
-        Level[] levels = (Level[]) levelsSet.toArray(new Level[0]);
-        Arrays.sort(levels, new LevelComparator());
+        final Level[] levels = (Level[]) levelsSet.toArray( new Level[0] );
+        Arrays.sort( levels, new LevelComparator() );
         return levels;
     }
 
@@ -166,52 +189,64 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
      * @param levels array of Level for the detail
      * @return object of type FilterDefinitionDetail
      */
-    public FilterDefinitionDetail createFilterDetail(Taxon scope, Level[] levels) {
-        if (cat.isDebugEnabled()) {
-            cat.debug("create new filter detail for scope: " + scope + " levels: " + levels);
+    public FilterDefinitionDetail createFilterDetail( final Taxon scope, final Level[] levels )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "create new filter detail for scope: " + scope + " levels: " + levels );
         }
-        return new FilterDefinitionDetail(this, scope, levels);
+        return new FilterDefinitionDetail( this, scope, levels );
     }
 
-    public Object clone() {
-        try {
-            FilterModel model = (FilterModel) super.clone();
+    public Object clone()
+    {
+        try
+        {
+            final FilterModel model = (FilterModel) super.clone();
             // prepare FilterModel to be undependend
             model.filteredTaxonList = new HashMap();
-            model.filterDetails = new ArrayList(this.filterDetails.size());
-            for (Iterator iterator = filterDetails.iterator(); iterator.hasNext();) {
-                FilterDefinitionDetail filterDefinitionDetail = (FilterDefinitionDetail) iterator.next();
-                model.filterDetails.add(new FilterDefinitionDetail(model, filterDefinitionDetail.getScope(), filterDefinitionDetail.getLevels()));
+            model.filterDetails = new ArrayList( this.filterDetails.size() );
+            for ( final Object filterDetail : filterDetails )
+            {
+                final FilterDefinitionDetail filterDefinitionDetail = (FilterDefinitionDetail) filterDetail;
+                model.filterDetails.add( new FilterDefinitionDetail( model, filterDefinitionDetail.getScope(), filterDefinitionDetail.getLevels() ) );
             }
             return model;
         }
-        catch (CloneNotSupportedException ex) {
-            cat.fatal("clone isn't supported by cloneable class !?!?!", ex);
-            throw new RuntimeException(ex);
+        catch ( CloneNotSupportedException ex )
+        {
+            LOG.fatal( "clone isn't supported by cloneable class !?!?!", ex );
+            throw new RuntimeException( ex );
         }
     }
 
-    public HerbarModel getDependantModel() {
+    public HerbarModel getDependantModel()
+    {
         return dependentModel;
     }
 
-    public boolean isIn(Taxon taxon) {
-        if (cat.isInfoEnabled()) {
-            cat.info("check, if taxon >" + taxon + "< is in FilterModel.");
+    public boolean isIn( final Taxon taxon )
+    {
+        if ( LOG.isInfoEnabled() )
+        {
+            LOG.info( "check, if taxon >" + taxon + "< is in FilterModel." );
         }
         boolean isIn = false;
-        for (Iterator it = filterDetails.iterator(); it.hasNext() && isIn == false;) {
-            FilterDefinitionDetail detail = (FilterDefinitionDetail) it.next();
-            isIn = detail.isIn(taxon);
+        for ( Iterator it = filterDetails.iterator(); it.hasNext() && !isIn; )
+        {
+            final FilterDefinitionDetail detail = (FilterDefinitionDetail) it.next();
+            isIn = detail.isIn( taxon );
         }
-        if (cat.isDebugEnabled()) {
-            cat.debug("check, if taxon >" + taxon + "< is in FilterModel returns " + isIn);
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "check, if taxon >" + taxon + "< is in FilterModel returns " + isIn );
         }
         return isIn;
     }
 
-    public void addFilterDetail(FilterDefinitionDetail detail) {
-        filterDetails.add(detail);
+    public void addFilterDetail( final FilterDefinitionDetail detail )
+    {
+        filterDetails.add( detail );
         notifyModelChange();
     }
 
@@ -222,9 +257,10 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
      * @param levels Levels of the scope which should be visible
      * @return the FilterDefintionDetail object which is added to the list
      */
-    public FilterDefinitionDetail addFilterDetail(Taxon scope, Level[] levels) {
-        FilterDefinitionDetail detail = createFilterDetail(scope, levels);
-        addFilterDetail(detail);
+    public FilterDefinitionDetail addFilterDetail( final Taxon scope, final Level[] levels )
+    {
+        final FilterDefinitionDetail detail = createFilterDetail( scope, levels );
+        addFilterDetail( detail );
         return detail;
     }
 
@@ -234,21 +270,25 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
      *
      * @return the FilterDefintionDetail object which is added to the list
      */
-    public FilterDefinitionDetail addFilterDetail() {
-        return addFilterDetail(dependentModel.getRootTaxon(), dependentModel.getLevels());
+    public FilterDefinitionDetail addFilterDetail()
+    {
+        return addFilterDetail( dependentModel.getRootTaxon(), dependentModel.getLevels() );
     }
 
-    public void removeFilterDetail(FilterDefinitionDetail detail) {
-        filterDetails.remove(detail);
+    public void removeFilterDetail( final FilterDefinitionDetail detail )
+    {
+        filterDetails.remove( detail );
         notifyModelChange();
     }
 
-    public FilterDefinitionDetail[] getFilterDetails() {
-        return (FilterDefinitionDetail[]) filterDetails.toArray(new FilterDefinitionDetail[0]);
+    public FilterDefinitionDetail[] getFilterDetails()
+    {
+        return (FilterDefinitionDetail[]) filterDetails.toArray( new FilterDefinitionDetail[0] );
     }
 
-    public void clearFilterDetails() {
-        cat.info("clear all filter details");
+    public void clearFilterDetails()
+    {
+        LOG.info( "clear all filter details" );
         filterDetails.clear();
         notifyModelChange();
     }
@@ -256,22 +296,25 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable {
     /**
      * implement behaviour on model change. It destroy the cached FilterTaxon's and notify all listeners
      */
-    void notifyModelChange() {
+    void notifyModelChange()
+    {
         filteredTaxonList.clear();
-        this.fireModelChangeEvent(new ModelChangeEvent(this));
+        this.fireModelChangeEvent( new ModelChangeEvent( this ) );
     }
 
     /**
      * @see com.ethz.geobot.herbar.model.HerbarModel#getValues(String)
      */
-    public MorValue[] getValues(String name) {
-        throw new NoSuchMethodError("getValue(String) not implemented yet");
+    public MorValue[] getValues( final String name )
+    {
+        throw new NoSuchMethodError( "getValue(String) not implemented yet" );
     }
 
     /**
      * @see com.ethz.geobot.herbar.model.HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorValue)
      */
-    public Taxon[] getTaxa(MorValue mor) {
-        throw new NoSuchMethodError("getTaxon(MorValue) not implemented yet");
+    public Taxon[] getTaxa( final MorValue mor )
+    {
+        throw new NoSuchMethodError( "getTaxon(MorValue) not implemented yet" );
     }
 }

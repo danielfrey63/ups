@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><metadata>
-  <groupId>org.swinglabs</groupId>
-  <artifactId>swingx</artifactId>
-  <version>20050602</version>
-  <versioning>
-    <versions>
-      <version>20050602</version>
-    </versions>
-    <lastUpdated>20090922063547</lastUpdated>
-  </versioning>
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <groupId>org.swinglabs</groupId>
+    <artifactId>swingx</artifactId>
+    <version>20050602</version>
+    <versioning>
+        <versions>
+            <version>20050602</version>
+        </versions>
+        <lastUpdated>20090922063547</lastUpdated>
+    </versioning>
 </metadata>

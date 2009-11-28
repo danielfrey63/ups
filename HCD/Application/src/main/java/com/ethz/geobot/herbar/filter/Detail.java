@@ -15,8 +15,8 @@ import com.ethz.geobot.herbar.model.filter.FilterDefinitionDetail;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class Detail {
-
+public class Detail
+{
     /**
      * Holds value of property scope.
      */
@@ -30,15 +30,18 @@ public class Detail {
     /**
      * Creates a new instance of Detail
      */
-    public Detail() {
+    public Detail()
+    {
     }
 
-    public Detail(FilterDefinitionDetail detail) {
+    public Detail( final FilterDefinitionDetail detail )
+    {
         scope = detail.getScope().getName();
-        Level[] detailLevels = detail.getLevels();
+        final Level[] detailLevels = detail.getLevels();
         levels = new String[detailLevels.length];
-        for (int i = 0; i < detailLevels.length; i++) {
-            levels[ i ] = detailLevels[ i ].getName();
+        for ( int i = 0; i < detailLevels.length; i++ )
+        {
+            levels[i] = detailLevels[i].getName();
         }
     }
 
@@ -47,7 +50,8 @@ public class Detail {
      *
      * @return Value of property scope.
      */
-    public String getScope() {
+    public String getScope()
+    {
         return this.scope;
     }
 
@@ -56,7 +60,8 @@ public class Detail {
      *
      * @param scope New value of property scope.
      */
-    public void setScope(String scope) {
+    public void setScope( final String scope )
+    {
         this.scope = scope;
     }
 
@@ -65,7 +70,8 @@ public class Detail {
      *
      * @return Value of property levels.
      */
-    public String[] getLevels() {
+    public String[] getLevels()
+    {
         return this.levels;
     }
 
@@ -74,7 +80,8 @@ public class Detail {
      *
      * @param levels New value of property levels.
      */
-    public void setLevels(String[] levels) {
+    public void setLevels( final String[] levels )
+    {
         this.levels = levels;
     }
 }

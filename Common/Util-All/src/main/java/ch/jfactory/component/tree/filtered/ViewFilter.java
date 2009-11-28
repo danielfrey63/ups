@@ -18,7 +18,6 @@ package ch.jfactory.component.tree.filtered;
  */
 public interface ViewFilter
 {
-
     /**
      * Method to evaluate whether a specific node is shown or not. Implement this method to remove / show nodes in the
      * tree.
@@ -26,5 +25,5 @@ public interface ViewFilter
      * @param node the node to determine whether it is shown or not
      * @return whether the node is shown or not
      */
-    boolean isShown(Object node);
+    boolean isShown( Object node );
 }

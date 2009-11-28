@@ -4,7 +4,7 @@ package ch.jfactory.collection.cursor;
 
 public interface CursorChangeListener
 {
-    void cursorChange(CursorChangeEvent event);
+    void cursorChange( CursorChangeEvent event );
 
     /**
      * @link

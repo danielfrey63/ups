@@ -15,53 +15,68 @@ import java.util.List;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public abstract class DetailResultModel extends ResultModel {
-
+public abstract class DetailResultModel extends ResultModel
+{
     protected Class typeToDisplay;
+
     protected Class halfRight;
+
     protected HerbarModel model;
-    protected ReferencableBool complete = new ReferencableBool(false);
+
+    protected ReferencableBool complete = new ReferencableBool( false );
+
     protected GraphNodeList answerTexts;
+
     protected GraphNodeList answerAttributes;
+
     protected GraphNodeList guesses = new GraphNodeList();
 
-    public DetailResultModel(Class typeToDisplay, Class halfRight, HerbarModel model) {
+    public DetailResultModel( final Class typeToDisplay, final Class halfRight, final HerbarModel model )
+    {
         this.typeToDisplay = typeToDisplay;
         this.halfRight = halfRight;
         this.model = model;
     }
 
-    public HerbarModel getModel() {
+    public HerbarModel getModel()
+    {
         return model;
     }
 
-    public Class getTypeToDisplay() {
+    public Class getTypeToDisplay()
+    {
         return typeToDisplay;
     }
 
-    protected GraphNode getAttribute(GraphNode text) {
-        GraphNodeList attributes = new GraphNodeList();
-        GraphNodeList values = text.getParents();
-        for (int j = 0; j < values.size(); j++) {
-            attributes.addAll(values.get(j).getParents(halfRight));
+    protected GraphNode getAttribute( final GraphNode text )
+    {
+        final GraphNodeList attributes = new GraphNodeList();
+        final GraphNodeList values = text.getParents();
+        for ( int j = 0; j < values.size(); j++ )
+        {
+            attributes.addAll( values.get( j ).getParents( halfRight ) );
         }
-        return attributes.get(0);
+        return attributes.get( 0 );
     }
 
-    public void addGuess(GraphNode guess) {
+    public void addGuess( final GraphNode guess )
+    {
         // Register guess
-        guesses.add(guess);
+        guesses.add( guess );
         // Check whether complete
-        List copy = new ArrayList(Arrays.asList(answerTexts.getAll()));
-        for (Iterator iterator = copy.iterator(); iterator.hasNext();) {
-            if (guesses.contains((GraphNode) iterator.next())) {
+        final List copy = new ArrayList( Arrays.asList( answerTexts.getAll() ) );
+        for ( Iterator iterator = copy.iterator(); iterator.hasNext(); )
+        {
+            if ( guesses.contains( (GraphNode) iterator.next() ) )
+            {
                 iterator.remove();
             }
         }
-        complete.setBool(copy.size() == 0);
+        complete.setBool( copy.size() == 0 );
     }
 
-    public boolean isComplete() {
+    public boolean isComplete()
+    {
         return complete.isTrue();
     }
 
@@ -70,7 +85,8 @@ public abstract class DetailResultModel extends ResultModel {
      *
      * @return a GraphNodeList with all answers
      */
-    public GraphNodeList getGuesses() {
+    public GraphNodeList getGuesses()
+    {
         return guesses;
     }
 
@@ -79,47 +95,54 @@ public abstract class DetailResultModel extends ResultModel {
      *
      * @return a GraphNodeList with the correct answers
      */
-    public GraphNodeList getAnswers() {
+    public GraphNodeList getAnswers()
+    {
         return answerTexts;
     }
 
-    public InterrogatorComplexityFactory.Type[] getSubModels() {
-        Enumeration e = subStateModels();
-        List list = new ArrayList();
-        while (e.hasMoreElements()) {
-            InterrogatorComplexityFactory.Type type = (InterrogatorComplexityFactory.Type) e.nextElement();
-            list.add(type);
+    public InterrogatorComplexityFactory.Type[] getSubModels()
+    {
+        final Enumeration e = subStateModels();
+        final List list = new ArrayList();
+        while ( e.hasMoreElements() )
+        {
+            final InterrogatorComplexityFactory.Type type = (InterrogatorComplexityFactory.Type) e.nextElement();
+            list.add( type );
         }
-        return (InterrogatorComplexityFactory.Type[]) list.toArray(new InterrogatorComplexityFactory.Type[0]);
+        return (InterrogatorComplexityFactory.Type[]) list.toArray( new InterrogatorComplexityFactory.Type[0] );
     }
 
-    public int getCorrectness(GraphNode guess) {
+    public int getCorrectness( final GraphNode guess )
+    {
         // Return whether false, nearby or correct
-        GraphNode attribute = getAttribute(guess);
-        return answerTexts.contains(guess) ?
+        final GraphNode attribute = getAttribute( guess );
+        return answerTexts.contains( guess ) ?
                 MemorizingDetailResultModel.CORRECT :
-                answerAttributes.contains(attribute) ?
+                answerAttributes.contains( attribute ) ?
                         MemorizingDetailResultModel.NEARBY :
                         MemorizingDetailResultModel.FALSE;
     }
 
-    public void setTaxFocus(Taxon focus) {
+    public void setTaxFocus( final Taxon focus )
+    {
         // Retrieve answers and guesses for focus assuming texts and attribues are synchonously null or initialized
-        initModel(focus);
+        initModel( focus );
         // Inform sub models
-        Enumeration e = subStateModels();
-        while (e.hasMoreElements()) {
-            InterrogatorComplexityFactory.Type type = (InterrogatorComplexityFactory.Type) e.nextElement();
-            type.setTaxFocus(focus);
+        final Enumeration e = subStateModels();
+        while ( e.hasMoreElements() )
+        {
+            final InterrogatorComplexityFactory.Type type = (InterrogatorComplexityFactory.Type) e.nextElement();
+            type.setTaxFocus( focus );
         }
     }
 
-    public void reset() {
-        complete = new ReferencableBool(false);
+    public void reset()
+    {
+        complete = new ReferencableBool( false );
         answerTexts = new GraphNodeList();
         answerAttributes = new GraphNodeList();
         guesses = new GraphNodeList();
     }
 
-    protected abstract void initModel(Taxon focus);
+    protected abstract void initModel( Taxon focus );
 }

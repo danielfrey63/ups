@@ -6,17 +6,16 @@ package ch.jfactory.application;
  */
 public class SystemUtil
 {
-
     public static QuitHandler EXIT = new QuitHandler()
     {
-        public void exit(final int i)
+        public void exit( final int i )
         {
-            System.exit(i);
+            System.exit( i );
         }
     };
 
     public interface QuitHandler
     {
-        public void exit(int i);
+        public void exit( int i );
     }
 }

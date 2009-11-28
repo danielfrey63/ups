@@ -25,17 +25,19 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class MedicineDisplayer extends AttributeTreePanel {
-
-    MedicineDisplayer(HerbarModel hModel, Level stopper) {
-        super(hModel, stopper, Strings.getString("PROPERTY.MEDTEXT.TEXT"));
+public class MedicineDisplayer extends AttributeTreePanel
+{
+    MedicineDisplayer( final HerbarModel hModel, final Level stopper )
+    {
+        super( hModel, stopper, Strings.getString( "PROPERTY.MEDTEXT.TEXT" ) );
     }
 
-    public VirtualGraphTreeNodeFilter registerFilter() {
-        return VirtualGraphTreeNodeFilter.getFilter(new Class[]{GraphNode.class, Taxon.class, MedText.class, MedValue.class, MedAttribute.class,
+    public VirtualGraphTreeNodeFilter registerFilter()
+    {
+        return VirtualGraphTreeNodeFilter.getFilter( new Class[]{GraphNode.class, Taxon.class, MedText.class, MedValue.class, MedAttribute.class,
                 MedSubject.class, MedAttribute.class, MedValue.class, MedText.class},
                 new int[][]{{1, 0, 0, 2}, {1, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1},
-                        {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 1, 2}, {1, 0, 1, 2}});
+                        {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 1, 2}, {1, 0, 1, 2}} );
     }
 }
 

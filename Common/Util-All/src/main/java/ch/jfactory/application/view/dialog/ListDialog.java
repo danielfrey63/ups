@@ -31,8 +31,7 @@ import org.apache.log4j.Logger;
  */
 public class ListDialog extends I15nComponentDialog implements ListSelectionListener, DocumentListener
 {
-
-    private static final Logger LOGGER = Logger.getLogger(ListDialog.class);
+    private static final Logger LOGGER = Logger.getLogger( ListDialog.class );
 
     private Object[] selectedData;
 
@@ -54,10 +53,10 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      * @param prefix   the key prefix to use
      * @param listData the data to put into the list
      */
-    public ListDialog(final Dialog parent, final String prefix, final Object[] listData)
+    public ListDialog( final Dialog parent, final String prefix, final Object[] listData )
     {
-        super(parent, prefix);
-        init(listData);
+        super( parent, prefix );
+        init( listData );
     }
 
     /**
@@ -70,16 +69,16 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      * @param prefix   the key prefix to use
      * @param listData the data to put into the list
      */
-    public ListDialog(final Frame parent, final String prefix, final Object[] listData)
+    public ListDialog( final Frame parent, final String prefix, final Object[] listData )
     {
-        super(parent, prefix);
-        init(listData);
+        super( parent, prefix );
+        init( listData );
     }
 
-    private void init(final Object[] listData)
+    private void init( final Object[] listData )
     {
-        allData = new ArrayList(Arrays.asList(listData)).toArray();
-        list.setListData(allData);
+        allData = new ArrayList( Arrays.asList( listData ) ).toArray();
+        list.setListData( allData );
         list.requestFocus();
     }
 
@@ -99,9 +98,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      * @param type the type of the array to which the data should be copied
      * @return the data selected uppon close of the dialog, if the apply butten was pressed, otherwise an empty array.
      */
-    public Object[] getSelectedData(final Object[] type)
+    public Object[] getSelectedData( final Object[] type )
     {
-        return new ArrayList(Arrays.asList(selectedData)).toArray(type);
+        return new ArrayList( Arrays.asList( selectedData ) ).toArray( type );
     }
 
     /**
@@ -109,9 +108,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      *
      * @param renderer the ListCellRenderer
      */
-    public void setListCellRenderer(final ListCellRenderer renderer)
+    public void setListCellRenderer( final ListCellRenderer renderer )
     {
-        list.setCellRenderer(renderer);
+        list.setCellRenderer( renderer );
     }
 
     /**
@@ -121,9 +120,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      *                      javax.swing.ListSelectionModel#SINGLE_SELECTION} or {@link javax.swing.ListSelectionModel#SINGLE_INTERVAL_SELECTION}
      *                      or {@link javax.swing.ListSelectionModel#MULTIPLE_INTERVAL_SELECTION}
      */
-    public void setSelectionMode(final int selectionMode)
+    public void setSelectionMode( final int selectionMode )
     {
-        list.setSelectionMode(selectionMode);
+        list.setSelectionMode( selectionMode );
     }
 
     /**
@@ -131,32 +130,31 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      *
      * @param selected the objects to select in the list
      */
-    public void setSelectedData(final Object[] selected)
+    public void setSelectedData( final Object[] selected )
     {
-        list.setSelectedValues(selected);
+        list.setSelectedValues( selected );
     }
 
     // I15nComponentDialog
     protected JComponent createComponentPanel()
     {
-
         list = new DefaultJList();
-        list.addListSelectionListener(this);
-        list.addMouseListener(new MouseAdapter()
+        list.addListSelectionListener( this );
+        list.addMouseListener( new MouseAdapter()
         {
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked( final MouseEvent e )
             {
-                if (e.getClickCount() == 2)
+                if ( e.getClickCount() == 2 )
                 {
                     apply();
                 }
             }
-        });
-        list.setVisibleRowCount(3);
+        } );
+        list.setVisibleRowCount( 3 );
 
-        SearchableUtils.installSearchable(list);
+        SearchableUtils.installSearchable( list );
 
-        return new JScrollPane(list);
+        return new JScrollPane( list );
     }
 
     protected void onApply() throws ComponentDialogException
@@ -170,72 +168,71 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     }
 
     // ListSelectionListener
-    public void valueChanged(final ListSelectionEvent e)
+    public void valueChanged( final ListSelectionEvent e )
     {
         final JList list = (JList) e.getSource();
         final Object[] selection = list.getSelectedValues();
-        enableApply(selection != null && selection.length > 0);
+        enableApply( selection != null && selection.length > 0 );
     }
 
     // DocumentListener
-    public void insertUpdate(final DocumentEvent e)
+    public void insertUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    public void removeUpdate(final DocumentEvent e)
+    public void removeUpdate( final DocumentEvent e )
     {
-        changedUpdate(e);
+        changedUpdate( e );
     }
 
-    public void changedUpdate(final DocumentEvent e)
+    public void changedUpdate( final DocumentEvent e )
     {
         final Document d = e.getDocument();
         String str = null;
         try
         {
-            str = d.getText(0, d.getLength()).toUpperCase();
+            str = d.getText( 0, d.getLength() ).toUpperCase();
         }
-        catch (Exception x)
+        catch ( Exception x )
         {
-            LOGGER.error("Error getting text", x);
+            LOGGER.error( "Error getting text", x );
         }
         final List<Object> currentObjects = new ArrayList<Object>();
-        for (final Object o : allData)
+        for ( final Object o : allData )
         {
-            if (o.toString().toUpperCase().indexOf(str) > -1)
+            if ( o.toString().toUpperCase().indexOf( str ) > -1 )
             {
-                currentObjects.add(o);
+                currentObjects.add( o );
             }
         }
-        list.setListData(currentObjects.toArray());
+        list.setListData( currentObjects.toArray() );
     }
 
     public static class InListDocument extends AbstractPlainDocument
     {
+        private final Object[] listData;
 
-        private Object[] listData;
-
-        public InListDocument(final Object[] listData)
+        public InListDocument( final Object[] listData )
         {
             this.listData = listData;
         }
 
-        protected boolean validate(String newValue)
+        protected boolean validate( String newValue )
         {
             newValue = newValue.toUpperCase();
             int index = 0;
             boolean found = false;
-            while (index < listData.length && !found)
+            while ( index < listData.length && !found )
             {
                 final String listEntry = listData[index++].toString().toUpperCase();
-                found = listEntry.indexOf(newValue) > -1;
+                found = listEntry.indexOf( newValue ) > -1;
             }
             return found;
         }
     }
 
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
         final java.util.ResourceBundle bundle = new java.util.ListResourceBundle()
         {
@@ -251,16 +248,16 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
                 };
             }
         };
-        ch.jfactory.resource.Strings.setResourceBundle(bundle);
+        ch.jfactory.resource.Strings.setResourceBundle( bundle );
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < 100; i++)
+        for ( int i = 0; i < 100; i++ )
         {
-            list.add("Eintrag " + i);
+            list.add( "Eintrag " + i );
         }
         final Object[] objects = list.toArray();
-        final ListDialog dialog = new ListDialog((javax.swing.JFrame) null, "test", objects);
-        dialog.setSize(400, 700);
-        ch.jfactory.application.presentation.WindowUtils.centerOnScreen(dialog);
-        dialog.setVisible(true);
+        final ListDialog dialog = new ListDialog( (javax.swing.JFrame) null, "test", objects );
+        dialog.setSize( 400, 700 );
+        ch.jfactory.application.presentation.WindowUtils.centerOnScreen( dialog );
+        dialog.setVisible( true );
     }
 }

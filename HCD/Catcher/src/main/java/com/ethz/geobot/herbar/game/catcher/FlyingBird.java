@@ -18,98 +18,108 @@ import javax.swing.ImageIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class FlyingBird extends FlyingFlower {
-
+public class FlyingBird extends FlyingFlower
+{
     private double posX, posY;
-    private double xinc, yinc;
-    private int h = 470;
-    private int w = 750;
-    private Graphics g;
-    private ImageIcon bird = new ImageIcon();
 
+    private double xinc;
+
+    private final double yinc;
+
+    private final int h = 470;
+
+    private final int w = 750;
+
+    private Graphics g;
+
+    private ImageIcon bird = new ImageIcon();
 
     /**
      * Constructor for the FlyingBird object
      */
-    public FlyingBird() {
-        int randomGif = (int) (Math.random() * 2);
-        bird = ImageLocator.getIcon("vogel_" + randomGif + ".gif");
+    public FlyingBird()
+    {
+        final int randomGif = (int) ( Math.random() * 2 );
+        bird = ImageLocator.getIcon( "vogel_" + randomGif + ".gif" );
 
         //random initial coordinates within the panel bounderies
-        posX = (Math.random() * w);
-        posY = (Math.random() * h);
+        posX = ( Math.random() * w );
+        posY = ( Math.random() * h );
 
-        xinc = (Math.random() * 3.5) + 3.0;
-        yinc = (Math.random() * 1.5) + 1.0;
+        xinc = ( Math.random() * 3.5 ) + 3.0;
+        yinc = ( Math.random() * 1.5 ) + 1.0;
     }
-
 
     /**
      * Gets the xPosBird attribute of the FlyingBird object
      *
      * @return The xPosBird value
      */
-    public int getXPosBird() {
-        return (int) (posX + bird.getIconWidth() / 2);
+    public int getXPosBird()
+    {
+        return (int) ( posX + bird.getIconWidth() / 2 );
     }
-
 
     /**
      * Gets the yPosBird attribute of the FlyingBird object
      *
      * @return The yPosBird value
      */
-    public int getYPosBird() {
-        return (int) (posY + bird.getIconHeight() / 2);
+    public int getYPosBird()
+    {
+        return (int) ( posY + bird.getIconHeight() / 2 );
     }
-
 
     /**
      * Description of the Method
      *
      * @param vel Description of the Parameter
      */
-    public void incVelocity(int vel) {
+    public void incVelocity( final int vel )
+    {
         xinc += vel;
     }
 
-
     /**
      * Description of the Method
      *
      * @param vel Description of the Parameter
      */
-    public void decVelocity(int vel) {
-        if (xinc > 1) {
+    public void decVelocity( final int vel )
+    {
+        if ( xinc > 1 )
+        {
             xinc -= vel;
         }
     }
 
-
     /**
      * Description of the Method
      *
      * @param g Description of the Parameter
      */
-    public void update(Graphics g) {
-        if (posX < w + bird.getIconHeight()) {
+    public void update( final Graphics g )
+    {
+        if ( posX < w + bird.getIconHeight() )
+        {
             posX += xinc;
             posY += yinc;
         }
-        else {
-            posY = (Math.random() * h) - 2 * bird.getIconHeight();
-            posX = (Math.random() * w / 4) - 2 * bird.getIconWidth();
+        else
+        {
+            posY = ( Math.random() * h ) - 2 * bird.getIconHeight();
+            posX = ( Math.random() * w / 4 ) - 2 * bird.getIconWidth();
         }
     }
-
 
     /**
      * Description of the Method
      *
      * @param g Description of the Parameter
      */
-    public void paint(Graphics g) {
-        g.drawImage(bird.getImage(), (int) posX, (int) posY, this);
+    public void paint( final Graphics g )
+    {
+        g.drawImage( bird.getImage(), (int) posX, (int) posY, this );
     }
 
     /**
@@ -117,7 +127,8 @@ public class FlyingBird extends FlyingFlower {
      *
      * @return double
      */
-    public double getPosX() {
+    public double getPosX()
+    {
         return posX;
     }
 
@@ -126,7 +137,8 @@ public class FlyingBird extends FlyingFlower {
      *
      * @return double
      */
-    public double getPosY() {
+    public double getPosY()
+    {
         return posY;
     }
 
@@ -135,7 +147,8 @@ public class FlyingBird extends FlyingFlower {
      *
      * @param x The x to set
      */
-    public void setX(double x) {
+    public void setX( final double x )
+    {
         this.posX = x;
     }
 
@@ -144,7 +157,8 @@ public class FlyingBird extends FlyingFlower {
      *
      * @param y The y to set
      */
-    public void setY(double y) {
+    public void setY( final double y )
+    {
         this.posY = y;
     }
 

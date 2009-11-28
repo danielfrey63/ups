@@ -26,14 +26,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class DefaultMutableTreeNodeTaxonTreeVisitor implements TreeVisitor
 {
-
-    public void add(final Object parent, final Object child)
+    public void add( final Object parent, final Object child )
     {
-        ((DefaultMutableTreeNode) parent).add((DefaultMutableTreeNode) child);
+        ( (DefaultMutableTreeNode) parent ).add( (DefaultMutableTreeNode) child );
     }
 
-    public Object handle(final Object object)
+    public Object handle( final Object object )
     {
-        return new DefaultMutableTreeNode(object);
+        return new DefaultMutableTreeNode( object );
     }
 }

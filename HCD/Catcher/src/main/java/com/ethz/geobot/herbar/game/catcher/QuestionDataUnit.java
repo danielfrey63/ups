@@ -16,12 +16,15 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class QuestionDataUnit {
+public class QuestionDataUnit
+{
+    private final Taxon taxon;
 
-    private Taxon taxon;
-    private Taxon parentTaxon;
+    private final Taxon parentTaxon;
+
     private boolean lastQuestion;
-    private long idx;
+
+    private final long idx;
 
     /**
      * Method QuestionDataUnit. Constructor
@@ -30,14 +33,16 @@ public class QuestionDataUnit {
      * @param parentTaxon  sets the parenttaxon of thies questionUnit
      * @param lastQuestion says if there are more questions
      */
-    public QuestionDataUnit(long idx, Taxon taxon, Taxon parentTaxon, boolean lastQuestion) {
+    public QuestionDataUnit( final long idx, final Taxon taxon, final Taxon parentTaxon, final boolean lastQuestion )
+    {
         this.taxon = taxon;
         this.parentTaxon = parentTaxon;
         this.lastQuestion = lastQuestion;
         this.idx = idx;
     }
 
-    public long getID() {
+    public long getID()
+    {
         return idx;
     }
 
@@ -46,7 +51,8 @@ public class QuestionDataUnit {
      *
      * @param last or not last question
      */
-    public void setLastQestion(boolean last) {
+    public void setLastQestion( final boolean last )
+    {
         this.lastQuestion = last;
     }
 
@@ -55,7 +61,8 @@ public class QuestionDataUnit {
      *
      * @return the taxon on art-level
      */
-    public Taxon getTaxon() {
+    public Taxon getTaxon()
+    {
         return this.taxon;
     }
 
@@ -64,7 +71,8 @@ public class QuestionDataUnit {
      *
      * @return the ancestorTaxon of one of the ancestor taxons
      */
-    public Taxon getParentTaxon() {
+    public Taxon getParentTaxon()
+    {
         return this.parentTaxon;
     }
 
@@ -73,7 +81,8 @@ public class QuestionDataUnit {
      *
      * @return last or not last question
      */
-    public boolean getLastQestion() {
+    public boolean getLastQestion()
+    {
         return this.lastQuestion;
     }
 }

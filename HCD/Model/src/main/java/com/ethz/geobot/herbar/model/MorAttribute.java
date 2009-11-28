@@ -9,8 +9,8 @@ package com.ethz.geobot.herbar.model;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface MorAttribute {
-
+public interface MorAttribute
+{
     /**
      * Returns the id of this Taxon object, which should be unique in the current applications data model.
      *
@@ -46,7 +46,7 @@ public interface MorAttribute {
      * @return the MorValue object.
      * @throws IndexOutOfBoundsException ???_Description_of_the_Exception_???
      */
-    public MorValue getValue(int index)
+    public MorValue getValue( int index )
             throws IndexOutOfBoundsException;
 
     /**

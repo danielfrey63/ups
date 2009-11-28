@@ -6,8 +6,7 @@ package ch.jfactory.model.graph;
  */
 public interface RoleFactory
 {
+    public GraphNode getRole( Class role );
 
-    public GraphNode getRole(Class role);
-
-    public GraphNode getRole(String type);
+    public GraphNode getRole( String type );
 }

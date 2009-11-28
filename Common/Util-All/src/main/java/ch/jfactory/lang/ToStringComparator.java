@@ -11,10 +11,11 @@ import java.util.Comparator;
  */
 public class ToStringComparator implements Comparator
 {
-
-    /** @see java.util.Comparator#compare(Object, Object) */
-    public int compare(final Object o1, final Object o2)
+    /**
+     * @see java.util.Comparator#compare(Object, Object)
+     */
+    public int compare( final Object o1, final Object o2 )
     {
-        return Collator.getInstance().compare(o1.toString(), o2.toString());
+        return Collator.getInstance().compare( o1.toString(), o2.toString() );
     }
 }

@@ -51,8 +51,10 @@ import org.apache.log4j.Logger;
  */
 public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 {
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(AbstractMainModel.class);
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( AbstractMainModel.class );
 
     public static final String PROPERTYNAME_CURRENTCARD = "currentCard";
 
@@ -60,39 +62,47 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 
     private String currentCard = CARDS_WELCOME;
 
-    /** Property for a new file that has been opened. */
+    /**
+     * Property for a new file that has been opened.
+     */
     public static final String PROPERTYNAME_CURRENTFILE = "currentFile";
 
     /**
      * I use two default files to trigger events even when the user create another "new file", to distiguish these
      * events. That's also the reason to hide these properties. Instead a method {@link #isDefaultFile()} is provided.
      */
-    private static final File DEFAULT_NEWFILE1 = new File("<unbenannt>");
+    private static final File DEFAULT_NEWFILE1 = new File( "<unbenannt>" );
 
-    private static final File DEFAULT_NEWFILE2 = new File("<unbenannt>");
+    private static final File DEFAULT_NEWFILE2 = new File( "<unbenannt>" );
 
     private File currentFile = DEFAULT_NEWFILE1;
 
-    /** Property that is fired when the main model has been loaded. */
+    /**
+     * Property that is fired when the main model has been loaded.
+     */
     public static final String PROPERTYNAME_MODELLOADED = "modelLoaded";
 
     private boolean modelLoaded = false;
 
-    /** Property for the state when a file is being opened. Used to invoke actions in the view. */
+    /**
+     * Property for the state when a file is being opened. Used to invoke actions in the view.
+     */
     public static final String EVENTNAME_OPENING = "opening";
 
-    /** Property for closing the edit card. */
+    /**
+     * Property for closing the edit card.
+     */
     public static final String EVENTNAME_CLOSING = "closing";
 
     public static final String PROPERTYNAME_ERROR = "error";
 
     private String error;
 
-    private String lastOpenSaveDirectory = System.getProperty("user.dir");
+    private String lastOpenSaveDirectory = System.getProperty( "user.dir" );
 
-    private String lastExportDirectory = System.getProperty("user.dir");
+    private String lastExportDirectory = System.getProperty( "user.dir" );
 
-    private final WorkQueue queue = new WorkQueue(1);
+    private final WorkQueue queue = new WorkQueue( 1 );
 
     protected static final List<SimpleModelList> MODELS = new ArrayList<SimpleModelList>();
 
@@ -102,17 +112,19 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 
     public void setClosing() throws PropertyVetoException
     {
-        if (currentCard != CARDS_WELCOME)
+        if ( currentCard != CARDS_WELCOME )
         {
-            fireVetoableChange(EVENTNAME_CLOSING, false, true);
-            firePropertyChange(EVENTNAME_CLOSING, false, true);
+            fireVetoableChange( EVENTNAME_CLOSING, false, true );
+            firePropertyChange( EVENTNAME_CLOSING, false, true );
         }
     }
 
-    /** Indicates that something will be opened (i.e. a new file). */
+    /**
+     * Indicates that something will be opened (i.e. a new file).
+     */
     public void setOpening()
     {
-        firePropertyChange(EVENTNAME_OPENING, false, true);
+        firePropertyChange( EVENTNAME_OPENING, false, true );
     }
 
     //--- Properties
@@ -122,13 +134,13 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return currentFile == null ? DEFAULT_NEWFILE1 : currentFile;
     }
 
-    public void setCurrentFile(final File newValue)
+    public void setCurrentFile( final File newValue )
     {
         final File oldValue = getCurrentFile();
         currentFile = newValue == null ?
-                (currentFile == DEFAULT_NEWFILE2 || currentFile == null ? DEFAULT_NEWFILE1 :
-                        (currentFile == DEFAULT_NEWFILE1 ? DEFAULT_NEWFILE2 : newValue)) : newValue;
-        firePropertyChange(PROPERTYNAME_CURRENTFILE, oldValue, currentFile, true);
+                ( currentFile == DEFAULT_NEWFILE2 || currentFile == null ? DEFAULT_NEWFILE1 :
+                        ( currentFile == DEFAULT_NEWFILE1 ? DEFAULT_NEWFILE2 : newValue ) ) : newValue;
+        firePropertyChange( PROPERTYNAME_CURRENTFILE, oldValue, currentFile, true );
     }
 
     public boolean isDefaultFile()
@@ -142,11 +154,11 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return modelLoaded;
     }
 
-    public void setModelLoaded(final boolean newLoaded)
+    public void setModelLoaded( final boolean newLoaded )
     {
         final boolean oldLoaded = modelLoaded;
         modelLoaded = newLoaded;
-        firePropertyChange(PROPERTYNAME_MODELLOADED, oldLoaded, newLoaded);
+        firePropertyChange( PROPERTYNAME_MODELLOADED, oldLoaded, newLoaded );
     }
 
     public String getCurrentCard()
@@ -154,11 +166,11 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return currentCard;
     }
 
-    public void setCurrentCard(final String newCard)
+    public void setCurrentCard( final String newCard )
     {
         final String oldCard = getCurrentCard();
         currentCard = newCard;
-        firePropertyChange(PROPERTYNAME_CURRENTCARD, oldCard, currentCard);
+        firePropertyChange( PROPERTYNAME_CURRENTCARD, oldCard, currentCard );
     }
 
     public String getError()
@@ -166,11 +178,11 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return error;
     }
 
-    public void setError(final String error)
+    public void setError( final String error )
     {
         final String old = getError();
         this.error = error;
-        firePropertyChange(PROPERTYNAME_ERROR, old, error);
+        firePropertyChange( PROPERTYNAME_ERROR, old, error );
     }
 
     public String getLastOpenSaveDirectory()
@@ -178,7 +190,7 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return lastOpenSaveDirectory;
     }
 
-    public void setLastOpenSaveDirectory(final String lastOpenSaveDirectory)
+    public void setLastOpenSaveDirectory( final String lastOpenSaveDirectory )
     {
         this.lastOpenSaveDirectory = lastOpenSaveDirectory;
     }
@@ -188,20 +200,20 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         return lastExportDirectory;
     }
 
-    public void setLastExportDirectory(final String lastExportDirectory)
+    public void setLastExportDirectory( final String lastExportDirectory )
     {
         this.lastExportDirectory = lastExportDirectory;
     }
 
-    public void queue(final Runnable runnable)
+    public void queue( final Runnable runnable )
     {
-        queue.execute(runnable);
+        queue.execute( runnable );
     }
 
-    public static void registerModels(final String typeId, final SimpleModelList models)
+    public static void registerModels( final String typeId, final SimpleModelList models )
     {
-        MODELS.add(models);
-        MAP.put(typeId, models);
+        MODELS.add( models );
+        MAP.put( typeId, models );
     }
 
     public static List<SimpleModelList> getModels()
@@ -215,20 +227,20 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
      * @param guid the global unique identifier to search for
      * @return the models IdAware interface or null if none can be found
      */
-    public static IdAware findModel(final String guid)
+    public static IdAware findModel( final String guid )
     {
-        for (final SimpleModelList list : MODELS)
+        for ( final SimpleModelList list : MODELS )
         {
-            for (int j = 0; j < list.getSize(); j++)
+            for ( int j = 0; j < list.getSize(); j++ )
             {
-                final IdAware model = (IdAware) list.getElementAt(j);
-                if (model.getUid().equals(guid))
+                final IdAware model = (IdAware) list.getElementAt( j );
+                if ( model.getUid().equals( guid ) )
                 {
                     return model;
                 }
             }
         }
-        LOG.warn("model for " + guid + " not found");
+        LOG.warn( "model for " + guid + " not found" );
         return null;
     }
 
@@ -238,8 +250,8 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
      * @param typeId the id to search the model types for
      * @return the model found or null if none can be found
      */
-    public static SimpleModelList findModelById(final String typeId)
+    public static SimpleModelList findModelById( final String typeId )
     {
-        return MAP.get(typeId);
+        return MAP.get( typeId );
     }
 }

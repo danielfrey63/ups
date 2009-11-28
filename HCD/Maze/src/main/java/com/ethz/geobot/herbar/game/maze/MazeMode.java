@@ -19,16 +19,18 @@ import com.ethz.geobot.herbar.modeapi.ModeRegistration;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:00 $
  */
-public class MazeMode extends AbstractModeAdapter {
-
+public class MazeMode extends AbstractModeAdapter
+{
     /**
      * Constructor
      */
-    public MazeMode() {
-        super(MazePanel.class);
+    public MazeMode()
+    {
+        super( MazePanel.class );
     }
 
-    static {
-        ModeRegistration.register(new MazeMode());
+    static
+    {
+        ModeRegistration.register( new MazeMode() );
     }
 }

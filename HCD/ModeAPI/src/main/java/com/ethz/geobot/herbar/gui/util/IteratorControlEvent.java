@@ -8,18 +8,18 @@
  */
 package com.ethz.geobot.herbar.gui.util;
 
-
 /**
  * Class containing information about the IteratorControl Event
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class IteratorControlEvent {
+public class IteratorControlEvent
+{
+    private final Object currentObject;
 
-    private Object currentObject;
-
-    IteratorControlEvent(Object currentObject) {
+    IteratorControlEvent( final Object currentObject )
+    {
         this.currentObject = currentObject;
     }
 
@@ -28,7 +28,8 @@ public class IteratorControlEvent {
      *
      * @return ??? The currentObject value ???
      */
-    public Object getCurrentObject() {
+    public Object getCurrentObject()
+    {
         return currentObject;
     }
 }

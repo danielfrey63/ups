@@ -9,8 +9,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbsGraphModel implements GraphModel
 {
-
-    private static final Logger LOGGER = Logger.getLogger(AbsGraphModel.class);
+    private static final Logger LOGGER = Logger.getLogger( AbsGraphModel.class );
 
     protected static final String MODEL = "xmatrix.input.model";
 
@@ -26,25 +25,25 @@ public abstract class AbsGraphModel implements GraphModel
 
     protected static final String DRIVER = "xmatrix.input.driver";
 
-    protected static String mod = System.getProperty(MODEL);
+    protected static String mod = System.getProperty( MODEL );
 
-    protected static String typeFact = System.getProperty(TYPE_FACTORY);
+    protected static String typeFact = System.getProperty( TYPE_FACTORY );
 
-    protected static String roleFact = System.getProperty(ROLE_FACTORY);
+    protected static String roleFact = System.getProperty( ROLE_FACTORY );
 
-    protected static String url = System.getProperty(URL);
+    protected static String url = System.getProperty( URL );
 
-    protected static String user = System.getProperty(USER);
+    protected static String user = System.getProperty( USER );
 
-    protected static String password = System.getProperty(PASSWORD);
+    protected static String password = System.getProperty( PASSWORD );
 
-    protected static String driver = System.getProperty(DRIVER);
+    protected static String driver = System.getProperty( DRIVER );
 
     private static final String[] CHECK = {url, user, password, driver, mod};
 
     private static final String[] CONST = {URL, USER, PASSWORD, DRIVER, MODEL};
 
-    private static ArrayList listeners = new ArrayList();
+    private static final ArrayList listeners = new ArrayList();
 
     private static GraphModel model = null;
 
@@ -58,31 +57,33 @@ public abstract class AbsGraphModel implements GraphModel
 
     static
     {
-        for (int i = 0; i < CHECK.length; i++)
+        for ( int i = 0; i < CHECK.length; i++ )
         {
-            if (CHECK[i] == null)
+            if ( CHECK[i] == null )
             {
-                throw new IllegalStateException("System property \"" + CONST[i] + "\" not specified");
+                throw new IllegalStateException( "System property \"" + CONST[i] + "\" not specified" );
             }
         }
     }
 
-    /** Returns an instance of the configured subclass. */
+    /**
+     * Returns an instance of the configured subclass.
+     */
     public static GraphModel getModel()
     {
-        if (model == null)
+        if ( model == null )
         {
-            LOGGER.debug("Init model by classname " + mod);
+            LOGGER.debug( "Init model by classname " + mod );
             try
             {
-                final Class clazz = Class.forName(mod);
+                final Class clazz = Class.forName( mod );
                 model = (GraphModel) clazz.newInstance();
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 final String message = "Could not initiate model: " + mod;
-                LOGGER.fatal(message, ex);
-                throw new IllegalStateException(message);
+                LOGGER.fatal( message, ex );
+                throw new IllegalStateException( message );
             }
         }
         return model;
@@ -90,19 +91,19 @@ public abstract class AbsGraphModel implements GraphModel
 
     public static TypeFactory getTypeFactory()
     {
-        if (typeFactory == null)
+        if ( typeFactory == null )
         {
-            LOGGER.debug("Init type factory by classname " + typeFact);
+            LOGGER.debug( "Init type factory by classname " + typeFact );
             try
             {
-                final Class clazz = Class.forName(typeFact);
+                final Class clazz = Class.forName( typeFact );
                 typeFactory = (TypeFactory) clazz.newInstance();
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 final String message = "Could not initiate type factory: " + typeFact;
-                LOGGER.fatal(message, ex);
-                throw new IllegalStateException(message);
+                LOGGER.fatal( message, ex );
+                throw new IllegalStateException( message );
             }
         }
         return typeFactory;
@@ -110,73 +111,81 @@ public abstract class AbsGraphModel implements GraphModel
 
     public static RoleFactory getRoleFactory()
     {
-        if (roleFactory == null)
+        if ( roleFactory == null )
         {
-            LOGGER.debug("Init type factory by classname " + roleFact);
+            LOGGER.debug( "Init type factory by classname " + roleFact );
             try
             {
-                final Class clazz = Class.forName(roleFact);
+                final Class clazz = Class.forName( roleFact );
                 roleFactory = (RoleFactory) clazz.newInstance();
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 final String message = "Could not initiate role factory: " + roleFact;
-                LOGGER.fatal(message, ex);
-                throw new IllegalStateException(message);
+                LOGGER.fatal( message, ex );
+                throw new IllegalStateException( message );
             }
         }
         return roleFactory;
     }
 
-    public static GraphNodeList getFiltered(final GraphNodeList list, final Class type)
+    public static GraphNodeList getFiltered( final GraphNodeList list, final Class type )
     {
-        if (type.equals("*"))
+        if ( type.equals( "*" ) )
         {
             return list;
         }
         final GraphNodeList result = new GraphNodeList();
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode node = (GraphNode) list.get(i);
-            if (node.isType(type))
+            final GraphNode node = list.get( i );
+            if ( node.isType( type ) )
             {
-                result.add(node);
+                result.add( node );
             }
         }
         return result;
     }
 
-    /** @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener) */
-    public void addDirtyListener(final DirtyListener listener)
+    /**
+     * @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener)
+     */
+    public void addDirtyListener( final DirtyListener listener )
     {
-        listeners.add(listener);
+        listeners.add( listener );
     }
 
-    /** @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener) */
-    public void removeDirtyListener(final DirtyListener listener)
+    /**
+     * @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener)
+     */
+    public void removeDirtyListener( final DirtyListener listener )
     {
-        listeners.remove(listener);
+        listeners.remove( listener );
     }
 
-    /** @see ch.jfactory.model.graph.GraphModel#setDirty(boolean) */
-    public void setDirty(final boolean dirty)
+    /**
+     * @see ch.jfactory.model.graph.GraphModel#setDirty(boolean)
+     */
+    public void setDirty( final boolean dirty )
     {
         AbsGraphModel.dirty = dirty;
-        fireDirty(dirty);
+        fireDirty( dirty );
     }
 
-    /** @see ch.jfactory.model.graph.GraphModel#getDirty() */
+    /**
+     * @see ch.jfactory.model.graph.GraphModel#getDirty()
+     */
     public boolean getDirty()
     {
         return dirty;
     }
 
-    private void fireDirty(final boolean dirty)
+    private void fireDirty( final boolean dirty )
     {
-        for (final Object listener1 : listeners)
+        for ( final Object listener1 : listeners )
         {
             final DirtyListener listener = (DirtyListener) listener1;
-            listener.dirtyChanged(dirty);
+            listener.dirtyChanged( dirty );
         }
     }
 

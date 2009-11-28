@@ -31,38 +31,45 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class MapInvoiceCommand extends ActionCommand {
+public class MapInvoiceCommand extends ActionCommand
+{
+    private final MainModel model;
 
-    private MainModel model;
-
-    public MapInvoiceCommand(final String id, final CommandManager commandManager, final MainModel model) {
-        super(commandManager, id);
+    public MapInvoiceCommand( final String id, final CommandManager commandManager, final MainModel model )
+    {
+        super( commandManager, id );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final InvoiceModel invoiceModel = model.getInvoiceModel();
         final ProjectModel projectModel = model.getProjectModel();
-        if (Commands.COMMANDID_ADDINVOICE == getId()) {
+        if ( Commands.COMMANDID_ADDINVOICE == getId() )
+        {
             final TreeSelectionModel selectionModel = (TreeSelectionModel) projectModel.getSelectionModel().getValue();
             final TreePath[] paths = selectionModel.getSelectionPaths();
-            for (int i = 0; paths != null && i < paths.length; i++) {
+            for ( int i = 0; paths != null && i < paths.length; i++ )
+            {
                 final TreePath path = paths[i];
                 final IFEntry entry = (IFEntry) path.getLastPathComponent();
                 final Invoice invoice = invoiceModel.getCurrentInvoice();
-                projectModel.addInvoice(entry, invoice);
+                projectModel.addInvoice( entry, invoice );
             }
         }
-        else if (Commands.COMMANDID_REMOVEINVOICE == getId()) {
+        else if ( Commands.COMMANDID_REMOVEINVOICE == getId() )
+        {
             final TreeSelectionModel selectionModel = invoiceModel.getTreeSelectionModel();
             final TreePath[] paths = selectionModel.getSelectionPaths();
-            for (int j = 0; j < paths.length; j++) {
-                final TreePath path = paths[j];
+            for ( final TreePath path : paths )
+            {
                 final Object node = path.getLastPathComponent();
-                if (node instanceof IFEntry) {
+                if ( node instanceof IFEntry )
+                {
                     final IFEntry entry = (IFEntry) node;
-                    if (entry.getEnd() != null) {
-                        projectModel.removeInvoice(entry);
+                    if ( entry.getEnd() != null )
+                    {
+                        projectModel.removeInvoice( entry );
                     }
                 }
             }

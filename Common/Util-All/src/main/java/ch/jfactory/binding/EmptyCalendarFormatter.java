@@ -56,7 +56,6 @@ import javax.swing.text.DateFormatter;
  */
 public class EmptyCalendarFormatter extends DateFormatter
 {
-
     /**
      * Holds the date that is converted to an empty string and that is the result of converting blank strings to a
      * value.
@@ -68,10 +67,12 @@ public class EmptyCalendarFormatter extends DateFormatter
 
     // Instance Creation ****************************************************
 
-    /** Constructs an EmptyDateFormatter that converts <code>null</code> to the empty string and vice versa. */
+    /**
+     * Constructs an EmptyDateFormatter that converts <code>null</code> to the empty string and vice versa.
+     */
     public EmptyCalendarFormatter()
     {
-        this((Date) null);
+        this( (Date) null );
     }
 
     /**
@@ -80,9 +81,9 @@ public class EmptyCalendarFormatter extends DateFormatter
      *
      * @param format Format used to dictate legal values
      */
-    public EmptyCalendarFormatter(final DateFormat format)
+    public EmptyCalendarFormatter( final DateFormat format )
     {
-        this(format, null);
+        this( format, null );
     }
 
     /**
@@ -91,11 +92,11 @@ public class EmptyCalendarFormatter extends DateFormatter
      *
      * @param emptyValue the representation of the empty string
      */
-    public EmptyCalendarFormatter(final Date emptyValue)
+    public EmptyCalendarFormatter( final Date emptyValue )
     {
         this.emptyValue = emptyValue == null
                 ? null
-                : new Date(emptyValue.getTime());
+                : new Date( emptyValue.getTime() );
     }
 
     /**
@@ -105,12 +106,12 @@ public class EmptyCalendarFormatter extends DateFormatter
      * @param format     Format used to dictate legal values
      * @param emptyValue the representation of the empty string
      */
-    public EmptyCalendarFormatter(final DateFormat format, final Date emptyValue)
+    public EmptyCalendarFormatter( final DateFormat format, final Date emptyValue )
     {
-        super(format);
+        super( format );
         this.emptyValue = emptyValue == null
                 ? null
-                : new Date(emptyValue.getTime());
+                : new Date( emptyValue.getTime() );
     }
 
     // Overriding Superclass Behavior *****************************************
@@ -124,11 +125,11 @@ public class EmptyCalendarFormatter extends DateFormatter
      * @return <code>Object</code> representation of text
      * @throws java.text.ParseException if there is an error in the conversion
      */
-    public Object stringToValue(final String text) throws ParseException
+    public Object stringToValue( final String text ) throws ParseException
     {
-        return BindingUtils.isBlank(text)
+        return BindingUtils.isBlank( text )
                 ? emptyValue
-                : super.stringToValue(text);
+                : super.stringToValue( text );
     }
 
     /**
@@ -141,11 +142,11 @@ public class EmptyCalendarFormatter extends DateFormatter
      * @return a String representation of value
      * @throws java.text.ParseException if there is an error in the conversion
      */
-    public String valueToString(final Object value) throws ParseException
+    public String valueToString( final Object value ) throws ParseException
     {
-        return BindingUtils.equals(value, emptyValue)
+        return BindingUtils.equals( value, emptyValue )
                 ? ""
-                : super.valueToString(value);
+                : super.valueToString( value );
     }
 
 }

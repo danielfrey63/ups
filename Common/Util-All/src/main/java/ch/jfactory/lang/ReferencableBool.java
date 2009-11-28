@@ -8,7 +8,7 @@ public class ReferencableBool
 {
     private boolean bool;
 
-    public ReferencableBool(final boolean bool)
+    public ReferencableBool( final boolean bool )
     {
         this.bool = bool;
     }
@@ -18,7 +18,7 @@ public class ReferencableBool
         return bool;
     }
 
-    public void setBool(final boolean bool)
+    public void setBool( final boolean bool )
     {
         this.bool = bool;
     }

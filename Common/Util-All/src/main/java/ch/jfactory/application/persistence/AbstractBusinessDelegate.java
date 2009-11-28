@@ -28,16 +28,16 @@ import java.util.Properties;
  */
 public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
 {
-    private ArrayList listenerList = new ArrayList();
+    private final ArrayList listenerList = new ArrayList();
 
     /**
      * {@inheritDoc}
      *
      * <p>Make sure to call super when overwriding this medthod.</p>
      */
-    public void createNew(final Properties properties) throws SourceVetoedException
+    public void createNew( final Properties properties ) throws SourceVetoedException
     {
-        fireSourceStateMayChange(new SourceStateEvent(this, SourceStateEvent.NEW));
+        fireSourceStateMayChange( new SourceStateEvent( this, SourceStateEvent.NEW ) );
     }
 
     /**
@@ -45,9 +45,9 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * <p>Make sure to call super when overwriding this medthod.</p>
      */
-    public void save(final Properties properties)
+    public void save( final Properties properties )
     {
-        fireSourceStateChanged(new SourceStateEvent(this, SourceStateEvent.SAVED));
+        fireSourceStateChanged( new SourceStateEvent( this, SourceStateEvent.SAVED ) );
     }
 
     /**
@@ -55,9 +55,9 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * <p>Make sure to call super when overwriding this medthod.</p>
      */
-    public void open(final Properties properties) throws SourceVetoedException
+    public void open( final Properties properties ) throws SourceVetoedException
     {
-        fireSourceStateMayChange(new SourceStateEvent(this, SourceStateEvent.NEW));
+        fireSourceStateMayChange( new SourceStateEvent( this, SourceStateEvent.NEW ) );
     }
 
     /**
@@ -65,9 +65,9 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * <p>Make sure to call super when overwriding this medthod.</p>
      */
-    public void cacheToDelete(final Object o)
+    public void cacheToDelete( final Object o )
     {
-        fireSourceStateChanged(new SourceStateEvent(this, SourceStateEvent.DIRTY));
+        fireSourceStateChanged( new SourceStateEvent( this, SourceStateEvent.DIRTY ) );
     }
 
     /**
@@ -75,9 +75,9 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * <p>Make sure to call super when overwriding this medthod.</p>
      */
-    public void cacheToSave(final Object o)
+    public void cacheToSave( final Object o )
     {
-        fireSourceStateChanged(new SourceStateEvent(this, SourceStateEvent.DIRTY));
+        fireSourceStateChanged( new SourceStateEvent( this, SourceStateEvent.DIRTY ) );
     }
 
     /**
@@ -85,9 +85,9 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * @param l the listener to add
      */
-    public void addSourceChangeListener(final SourceStateListener l)
+    public void addSourceChangeListener( final SourceStateListener l )
     {
-        listenerList.add(l);
+        listenerList.add( l );
     }
 
     /**
@@ -95,26 +95,26 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
      *
      * @param l the listener to remove
      */
-    public void removeSourceChangeListener(final SourceStateListener l)
+    public void removeSourceChangeListener( final SourceStateListener l )
     {
-        listenerList.remove(l);
+        listenerList.remove( l );
     }
 
-    protected void fireSourceStateChanged(final SourceStateEvent event)
+    protected void fireSourceStateChanged( final SourceStateEvent event )
     {
         final Iterator i = getListener();
-        while (i.hasNext())
+        while ( i.hasNext() )
         {
-            ((SourceStateListener) i.next()).sourceStateChanged(event);
+            ( (SourceStateListener) i.next() ).sourceStateChanged( event );
         }
     }
 
-    protected void fireSourceStateMayChange(final SourceStateEvent event) throws SourceVetoedException
+    protected void fireSourceStateMayChange( final SourceStateEvent event ) throws SourceVetoedException
     {
         final Iterator i = getListener();
-        while (i.hasNext())
+        while ( i.hasNext() )
         {
-            ((SourceStateListener) i.next()).sourceStateMayChange(event);
+            ( (SourceStateListener) i.next() ).sourceStateMayChange( event );
         }
     }
 
@@ -122,7 +122,7 @@ public abstract class AbstractBusinessDelegate implements IFBusinessDelegate
     {
         final ArrayList l;
 
-        synchronized (this)
+        synchronized ( this )
         {
             l = (ArrayList) listenerList.clone();
         }

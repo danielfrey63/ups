@@ -26,7 +26,6 @@ import junit.framework.TestCase;
  */
 public class LogicUtilsTest extends TestCase
 {
-
     public void testGetFullIndex()
     {
         final boolean[][] cases = {
@@ -40,10 +39,10 @@ public class LogicUtilsTest extends TestCase
                 {true, true, true}
         };
         final int[] result = {0, 1, 2, 3, 4, 5, 6, 7};
-        for (int i = 0; i < cases.length; i++)
+        for ( int i = 0; i < cases.length; i++ )
         {
             final boolean[] caze = cases[i];
-            assertEquals(result[i], LogicUtils.getFullIndex(caze));
+            assertEquals( result[i], LogicUtils.getFullIndex( caze ) );
         }
     }
 }

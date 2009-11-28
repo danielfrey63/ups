@@ -25,17 +25,19 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class DeleteEntry extends ActionCommand {
+public class DeleteEntry extends ActionCommand
+{
+    private final InvoiceModel model;
 
-    private InvoiceModel model;
-
-    public DeleteEntry(CommandManager commandManager, InvoiceModel model) {
-        super(commandManager, Commands.COMMANDID_DELETE);
+    public DeleteEntry( final CommandManager commandManager, final InvoiceModel model )
+    {
+        super( commandManager, Commands.COMMANDID_DELETE );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final int index = model.getTableSelectionModel().getLeadSelectionIndex();
-        model.deleteInvoice(index);
+        model.deleteInvoice( index );
     }
 }

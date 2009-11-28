@@ -17,8 +17,8 @@ import javax.swing.JLabel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public class LevelComponentWrapper extends JLabel {
-
+public class LevelComponentWrapper extends JLabel
+{
     private Level level;
 
     /**
@@ -26,8 +26,9 @@ public class LevelComponentWrapper extends JLabel {
      *
      * @param level the Level object to wrap
      */
-    public LevelComponentWrapper(Level level) {
-        this.setLevel(level);
+    public LevelComponentWrapper( final Level level )
+    {
+        this.setLevel( level );
     }
 
     /**
@@ -35,7 +36,8 @@ public class LevelComponentWrapper extends JLabel {
      *
      * @param level the Level object to set
      */
-    public void setLevel(Level level) {
+    public void setLevel( final Level level )
+    {
         this.level = level;
     }
 
@@ -44,11 +46,13 @@ public class LevelComponentWrapper extends JLabel {
      *
      * @return the Level object
      */
-    public Level getLevel() {
+    public Level getLevel()
+    {
         return this.level;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return level.toString();
     }
 }

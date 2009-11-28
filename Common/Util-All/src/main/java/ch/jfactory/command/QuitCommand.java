@@ -29,12 +29,11 @@ import org.pietschy.command.CommandManager;
  */
 public class QuitCommand extends ActionCommand
 {
+    private final ClosingModel model;
 
-    private ClosingModel model;
-
-    public QuitCommand(final CommandManager commandManager, final ClosingModel model)
+    public QuitCommand( final CommandManager commandManager, final ClosingModel model )
     {
-        super(commandManager, CommonCommands.COMMANDID_QUIT);
+        super( commandManager, CommonCommands.COMMANDID_QUIT );
         this.model = model;
     }
 
@@ -43,9 +42,9 @@ public class QuitCommand extends ActionCommand
         try
         {
             model.setClosing();
-            System.exit(0);
+            System.exit( 0 );
         }
-        catch (PropertyVetoException e)
+        catch ( PropertyVetoException e )
         {
         }
     }

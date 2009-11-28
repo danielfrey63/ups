@@ -15,7 +15,7 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Compiles a list of Taxon objects according to the Version 1.0 Herbar CD-ROM
@@ -23,24 +23,26 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:13 $
  */
-public class DefaultExamList implements ExamList {
-
-    private static final Category CAT = Category.getInstance(DefaultExamList.class);
+public class DefaultExamList implements ExamList
+{
+    private static final Logger LOG = Logger.getLogger( DefaultExamList.class );
 
     private HerbarModel herbarModel;
+
     private Taxon[] examTaxa;
 
-    public void setHerbarModel(HerbarModel herbarModel) {
+    public void setHerbarModel( final HerbarModel herbarModel )
+    {
         this.herbarModel = herbarModel;
     }
 
-    public Taxon[] getExamList(int size) {
-
-        String[] strNiet = new String[]{
+    public Taxon[] getExamList( final int size )
+    {
+        final String[] strNiet = new String[]{
                 "Brassica oleracea", "Helianthus annuus", "Heracleum mantegazzianum", "Beta vulgaris", "Zea mays"
         };
 
-        String[][] strGroups = new String[][]{
+        final String[][] strGroups = new String[][]{
                 {"Pteridophyta", "Gymnospermae"}, // 30
                 {"Ranunculaceae", "Rosaceae", "Papaveraceae"}, // 50
                 {"Poaceae", "Cyperaceae"}, // 80
@@ -56,16 +58,18 @@ public class DefaultExamList implements ExamList {
                 {"Angiospermae"}
         };
 
-        if (size != strGroups.length) {
-            CAT.error("Number of Taxon groups (" + strGroups.length + ") doesn't correspond to the number expected (" +
-                    size + ")");
+        if ( size != strGroups.length )
+        {
+            LOG.error( "Number of Taxon groups (" + strGroups.length + ") doesn't correspond to the number expected (" +
+                    size + ")" );
         }
 
-        int length = strNiet.length;
-        List donts = new ArrayList();
-        for (int i = 0; i < length; i++) {
-            Taxon tax = getTaxon(strNiet[ i ]);
-            donts.add(tax);
+        final int length = strNiet.length;
+        final List donts = new ArrayList();
+        for ( int i = 0; i < length; i++ )
+        {
+            final Taxon tax = getTaxon( strNiet[i] );
+            donts.add( tax );
         }
 
         // build final Taxon list
@@ -73,35 +77,39 @@ public class DefaultExamList implements ExamList {
 
         // get a valid Taxon objects for each string given and add all Taxon objects on the last level for that Taxon
         // object an array
-        Level lastLevel = herbarModel.getLastLevel();
-        List[] vs = new ArrayList[size];
+        final Level lastLevel = herbarModel.getLastLevel();
+        final List[] vs = new ArrayList[size];
         // just to initzialize random generator
-        RandomUtils.randomize(examTaxa);
-        for (int g = 0; g < size; g++) {
-            vs[ g ] = new ArrayList();
-            for (int s = 0; s < strGroups[ g ].length; s++) {
-                String str = strGroups[ g ][ s ];
-                Taxon tax = getTaxon(str);
-                List taxa = Arrays.asList(tax.getAllChildTaxa(lastLevel));
-                vs[ g ].addAll(taxa);
+        RandomUtils.randomize( examTaxa );
+        for ( int g = 0; g < size; g++ )
+        {
+            vs[g] = new ArrayList();
+            for ( int s = 0; s < strGroups[g].length; s++ )
+            {
+                final String str = strGroups[g][s];
+                final Taxon tax = getTaxon( str );
+                final List taxa = Arrays.asList( tax.getAllChildTaxa( lastLevel ) );
+                vs[g].addAll( taxa );
             }
-            vs[ g ].removeAll(donts);
-            vs[ g ].removeAll(Arrays.asList(examTaxa));
+            vs[g].removeAll( donts );
+            vs[g].removeAll( Arrays.asList( examTaxa ) );
             // get randomly a taxon out of it
-            Taxon[] taxa = (Taxon[]) vs[ g ].toArray(new Taxon[0]);
-            RandomUtils.randomizeNext(taxa);
-            examTaxa[ g ] = taxa[ 0 ];
+            final Taxon[] taxa = (Taxon[]) vs[g].toArray( new Taxon[0] );
+            RandomUtils.randomizeNext( taxa );
+            examTaxa[g] = taxa[0];
         }
 
         // randomize list
-        RandomUtils.randomize(examTaxa);
+        RandomUtils.randomize( examTaxa );
         return examTaxa;
     }
 
-    private Taxon getTaxon(String str) {
-        Taxon tax = herbarModel.getTaxon(str);
-        if (tax == null) {
-            CAT.error("Taxon " + str + " not found");
+    private Taxon getTaxon( final String str )
+    {
+        final Taxon tax = herbarModel.getTaxon( str );
+        if ( tax == null )
+        {
+            LOG.error( "Taxon " + str + " not found" );
         }
         return tax;
     }

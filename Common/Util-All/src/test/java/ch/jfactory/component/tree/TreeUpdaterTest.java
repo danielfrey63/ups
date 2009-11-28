@@ -26,33 +26,36 @@ import org.uispec4j.Tree;
  */
 public class TreeUpdaterTest extends TestCase
 {
-
     /**
      * Constructs a named test.
      *
      * @param base the name
      */
-    public TreeUpdaterTest(final String base)
+    public TreeUpdaterTest( final String base )
     {
-        super(base);
+        super( base );
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     protected void setUp()
     {
     }
 
-    /** Reloads the tree model and tests expansion state. */
+    /**
+     * Reloads the tree model and tests expansion state.
+     */
     public void testExpansionOnReload()
     {
         final JTree tree = new JTree();
-        final Tree tester = new Tree(tree);
-        final TreeUpdater updater = new TreeUpdater(tree);
+        final Tree tester = new Tree( tree );
+        final TreeUpdater updater = new TreeUpdater( tree );
         tester.expandAll();
-        final List<TreePath> storedExpandedPaths = TreeUtils.getExpandedPaths(tree);
-        ((DefaultTreeModel) tree.getModel()).reload();
+        final List<TreePath> storedExpandedPaths = TreeUtils.getExpandedPaths( tree );
+        ( (DefaultTreeModel) tree.getModel() ).reload();
         updater.update();
-        compareExpandedStates(tree, storedExpandedPaths);
+        compareExpandedStates( tree, storedExpandedPaths );
     }
 
     /**
@@ -61,55 +64,61 @@ public class TreeUpdaterTest extends TestCase
      * @param tree   the tree to retrieve the current expansion state from
      * @param stored
      */
-    private void compareExpandedStates(final JTree tree, final List<TreePath> stored)
+    private void compareExpandedStates( final JTree tree, final List<TreePath> stored )
     {
-        final List<TreePath> current = TreeUtils.getExpandedPaths(tree);
-        assertTrue("Expansion state not equal as before.", CollectionUtils.isEqualCollection(current, stored));
+        final List<TreePath> current = TreeUtils.getExpandedPaths( tree );
+        assertTrue( "Expansion state not equal as before.", CollectionUtils.isEqualCollection( current, stored ) );
     }
 
-    /** Tests that a different selection really does fail in the test. */
+    /**
+     * Tests that a different selection really does fail in the test.
+     */
     public void testSelectionNotEqual()
     {
         final JTree tree = new JTree();
-        final Tree tester = new Tree(tree);
-        final TreeUpdater updater = new TreeUpdater(tree);
+        final Tree tester = new Tree( tree );
+        final TreeUpdater updater = new TreeUpdater( tree );
         tester.expandAll();
-        tester.select("colors/red");
-        final String storedSelection = getSelection(tree);
-        tester.select("colors/blue");
+        tester.select( "colors/red" );
+        final String storedSelection = getSelection( tree );
+        tester.select( "colors/blue" );
         updater.update();
-        final String actualSelection = getSelection(tree);
-        assertNotSame("Selection equal, but shouldn't.", storedSelection, actualSelection);
+        final String actualSelection = getSelection( tree );
+        assertNotSame( "Selection equal, but shouldn't.", storedSelection, actualSelection );
     }
 
-    /** Reloads a default mutable tree model and tests for the selection state. */
+    /**
+     * Reloads a default mutable tree model and tests for the selection state.
+     */
     public void testSelectionOnReload()
     {
         final JTree tree = new JTree();
-        final Tree tester = new Tree(tree);
-        final TreeUpdater updater = new TreeUpdater(tree);
+        final Tree tester = new Tree( tree );
+        final TreeUpdater updater = new TreeUpdater( tree );
         tester.expandAll();
-        tester.select("colors/red");
-        final String storedSelection = getSelection(tree);
-        ((DefaultTreeModel) tree.getModel()).reload();
+        tester.select( "colors/red" );
+        final String storedSelection = getSelection( tree );
+        ( (DefaultTreeModel) tree.getModel() ).reload();
         updater.update();
-        final String actualSelection = getSelection(tree);
-        assertEquals("Selection not equal.", storedSelection, actualSelection);
+        final String actualSelection = getSelection( tree );
+        assertEquals( "Selection not equal.", storedSelection, actualSelection );
     }
 
-    /** Reloads a default mutable tree model and tests for the selection state. */
+    /**
+     * Reloads a default mutable tree model and tests for the selection state.
+     */
     public void testSelectionOnExchange()
     {
         final JTree tree = new JTree();
-        final Tree tester = new Tree(tree);
-        final TreeUpdater updater = new TreeUpdater(tree);
+        final Tree tester = new Tree( tree );
+        final TreeUpdater updater = new TreeUpdater( tree );
         tester.expandAll();
-        tester.select("colors/red");
-        final String storedSelection = getSelection(tree);
-        tree.setModel(new JTree().getModel());
+        tester.select( "colors/red" );
+        final String storedSelection = getSelection( tree );
+        tree.setModel( new JTree().getModel() );
         updater.update();
-        final String actualSelection = getSelection(tree);
-        assertEquals("Selection not equal.", storedSelection, actualSelection);
+        final String actualSelection = getSelection( tree );
+        assertEquals( "Selection not equal.", storedSelection, actualSelection );
     }
 
     /**
@@ -119,15 +128,15 @@ public class TreeUpdaterTest extends TestCase
     public void testMatchPaths()
     {
         final JTree tree = new JTree();
-        final Tree tester = new Tree(tree);
-        final TreeUpdater updater = new TreeUpdater(tree);
+        final Tree tester = new Tree( tree );
+        final TreeUpdater updater = new TreeUpdater( tree );
         tester.expandAll();
-        tester.select("colors/red");
-        final String storedSelection = getSelection(tree);
-        tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Niet")));
+        tester.select( "colors/red" );
+        final String storedSelection = getSelection( tree );
+        tree.setModel( new DefaultTreeModel( new DefaultMutableTreeNode( "Niet" ) ) );
         updater.update();
-        final String actualSelection = getSelection(tree);
-        assertNotSame("Selection equal, but shouldn't.", storedSelection, actualSelection);
+        final String actualSelection = getSelection( tree );
+        assertNotSame( "Selection equal, but shouldn't.", storedSelection, actualSelection );
     }
 
     /**
@@ -136,11 +145,11 @@ public class TreeUpdaterTest extends TestCase
      * @param tree the tree to look for the single selected node
      * @return the node text as string
      */
-    private String getSelection(final JTree tree)
+    private String getSelection( final JTree tree )
     {
         final String result;
         final TreePath[] selectionPaths = tree.getSelectionPaths();
-        if (selectionPaths == null)
+        if ( selectionPaths == null )
         {
             result = null;
         }

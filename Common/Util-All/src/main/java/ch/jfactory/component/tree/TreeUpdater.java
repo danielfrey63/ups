@@ -44,36 +44,45 @@ import javax.swing.tree.TreeModel;
  */
 public class TreeUpdater implements Runnable
 {
-
-    /** The count of expanded paths that is used to make the expansion asynchronously. */
+    /**
+     * The count of expanded paths that is used to make the expansion asynchronously.
+     */
     private static final int ASYNCHRON_THRESHOLD = 10000;
 
-    /** The expansion listener. */
-    private SimpleTreeExpansionListener expansionListener;
+    /**
+     * The expansion listener.
+     */
+    private final SimpleTreeExpansionListener expansionListener;
 
-    /** The selection listener. */
-    private SimpleTreeSelectionListener selectionListener;
+    /**
+     * The selection listener.
+     */
+    private final SimpleTreeSelectionListener selectionListener;
 
-    /** The tree model listener. Used to refresh the other listener upon model exchanges. */
-    private SimpleTreeModelListener treeModelListener;
+    /**
+     * The tree model listener. Used to refresh the other listener upon model exchanges.
+     */
+    private final SimpleTreeModelListener treeModelListener;
 
     /**
      * Creates new JTreeUpdater.
      *
      * @param tree the tree to observe
      */
-    public TreeUpdater(final JTree tree)
+    public TreeUpdater( final JTree tree )
     {
-        expansionListener = new SimpleTreeExpansionListener(tree);
-        selectionListener = new SimpleTreeSelectionListener(tree);
+        expansionListener = new SimpleTreeExpansionListener( tree );
+        selectionListener = new SimpleTreeSelectionListener( tree );
         treeModelListener = new SimpleTreeModelListener();
-        tree.addTreeExpansionListener(expansionListener);
-        tree.addTreeSelectionListener(selectionListener);
-        tree.addPropertyChangeListener(JTree.TREE_MODEL_PROPERTY, new SimplePropertyChangeListener());
-        tree.getModel().addTreeModelListener(treeModelListener);
+        tree.addTreeExpansionListener( expansionListener );
+        tree.addTreeSelectionListener( selectionListener );
+        tree.addPropertyChangeListener( JTree.TREE_MODEL_PROPERTY, new SimplePropertyChangeListener() );
+        tree.getModel().addTreeModelListener( treeModelListener );
     }
 
-    /** The method to expand the paths. */
+    /**
+     * The method to expand the paths.
+     */
     public synchronized void run()
     {
         expansionListener.restore();
@@ -88,9 +97,9 @@ public class TreeUpdater implements Runnable
      */
     public synchronized void update()
     {
-        if (expansionListener.getNumberOfExpandedPaths() > ASYNCHRON_THRESHOLD)
+        if ( expansionListener.getNumberOfExpandedPaths() > ASYNCHRON_THRESHOLD )
         {
-            SwingUtilities.invokeLater(this);
+            SwingUtilities.invokeLater( this );
         }
         else
         {
@@ -98,26 +107,33 @@ public class TreeUpdater implements Runnable
         }
     }
 
-    /** Listener to inform other listeners about changes in the model. */
+    /**
+     * Listener to inform other listeners about changes in the model.
+     */
     private class SimplePropertyChangeListener implements PropertyChangeListener
     {
-        /** {@inheritDoc} */
-        public void propertyChange(final PropertyChangeEvent evt)
+        /**
+         * {@inheritDoc}
+         */
+        public void propertyChange( final PropertyChangeEvent evt )
         {
-            ((TreeModel) evt.getOldValue()).removeTreeModelListener(treeModelListener);
-            ((TreeModel) evt.getNewValue()).addTreeModelListener(treeModelListener);
+            ( (TreeModel) evt.getOldValue() ).removeTreeModelListener( treeModelListener );
+            ( (TreeModel) evt.getNewValue() ).addTreeModelListener( treeModelListener );
             expansionListener.translate();
             selectionListener.translate();
             update();
         }
     }
 
-    /** Makes sure the updates take place automatically if a tree model has been exchanged. */
+    /**
+     * Makes sure the updates take place automatically if a tree model has been exchanged.
+     */
     private class SimpleTreeModelListener extends TreeModelAdapter
     {
-
-        /** {@inheritDoc} */
-        public void treeStructureChanged(final TreeModelEvent e)
+        /**
+         * {@inheritDoc}
+         */
+        public void treeStructureChanged( final TreeModelEvent e )
         {
             update();
         }

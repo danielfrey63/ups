@@ -14,30 +14,28 @@ import javax.swing.tree.TreeCellEditor;
  */
 public class FixedDefaultTreeCellEditor extends DefaultTreeCellEditor
 {
-
-    public FixedDefaultTreeCellEditor(final JTree tree,
-                                      final DefaultTreeCellRenderer renderer, final TreeCellEditor editor)
+    public FixedDefaultTreeCellEditor( final JTree tree,
+                                       final DefaultTreeCellRenderer renderer, final TreeCellEditor editor )
     {
-        super(tree, renderer, editor);
+        super( tree, renderer, editor );
     }
 
-    public FixedDefaultTreeCellEditor(final JTree tree,
-                                      final DefaultTreeCellRenderer renderer)
+    public FixedDefaultTreeCellEditor( final JTree tree,
+                                       final DefaultTreeCellRenderer renderer )
     {
-        super(tree, renderer);
+        super( tree, renderer );
     }
 
-    protected void determineOffset(final JTree tree, final Object value, final boolean selected,
-                                   final boolean expanded, final boolean leaf, final int row)
+    protected void determineOffset( final JTree tree, final Object value, final boolean selected,
+                                    final boolean expanded, final boolean leaf, final int row )
     {
-
-        if (renderer != null)
+        if ( renderer != null )
         {
             final JLabel l = (JLabel) renderer.getTreeCellRendererComponent
-                    (tree, value, selected, expanded, leaf, row, tree.hasFocus()
-                            && tree.getLeadSelectionRow() == row);
+                    ( tree, value, selected, expanded, leaf, row, tree.hasFocus()
+                            && tree.getLeadSelectionRow() == row );
             editingIcon = l.getIcon();
-            if (editingIcon != null)
+            if ( editingIcon != null )
             {
                 offset = renderer.getIconTextGap() + editingIcon.getIconWidth();
             }

@@ -8,9 +8,8 @@
  */
 package com.ethz.geobot.herbar.gui.tax;
 
-
-public interface RelevanceFilter {
-
+public interface RelevanceFilter
+{
     /**
      * Set a four bits. From lower to higher order bit they stand for normal (<code>n</code>), weak (<code>w</code>),
      * different (<code>d</code>)
@@ -22,5 +21,5 @@ public interface RelevanceFilter {
      *
      * @param bitset set of bits
      */
-    public abstract void setFilter(int bitset);
+    public abstract void setFilter( int bitset );
 }

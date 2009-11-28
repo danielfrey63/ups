@@ -20,8 +20,8 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @created $Date: 2007/09/17 11:07:18 $
  */
 public class MutableCommentedPictureImpl extends MutableGraphNodeImpl
-        implements CommentedPicture {
-
+        implements CommentedPicture
+{
     private String comment;
 
     private Picture picture;
@@ -37,52 +37,63 @@ public class MutableCommentedPictureImpl extends MutableGraphNodeImpl
     /**
      * Creates a new instance of CommentedPicture
      */
-    public MutableCommentedPictureImpl() {
+    public MutableCommentedPictureImpl()
+    {
     }
 
-    public MutableCommentedPictureImpl(Taxon tax, Picture pic, String com) {
-        this.setPicture(pic);
-        this.setComment(com);
-        this.setTaxon(tax);
+    public MutableCommentedPictureImpl( final Taxon tax, final Picture pic, final String com )
+    {
+        this.setPicture( pic );
+        this.setComment( com );
+        this.setTaxon( tax );
     }
 
     //-----------//
     //- Methods -//
     //-----------//
 
-    public void setId(int id) {
+    public void setId( final int id )
+    {
         this.id = id;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture( final Picture picture )
+    {
         this.picture = picture;
     }
 
-    public void setComment(String com) {
+    public void setComment( final String com )
+    {
         this.comment = com;
     }
 
-    public void setTaxon(Taxon tax) {
+    public void setTaxon( final Taxon tax )
+    {
         this.tax = tax;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return this.id;
     }
 
-    public Picture getPicture() {
+    public Picture getPicture()
+    {
         return this.picture;
     }
 
-    public String getComment() {
+    public String getComment()
+    {
         return this.comment;
     }
 
-    public Taxon getTaxon() {
+    public Taxon getTaxon()
+    {
         return this.tax;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return picture.toString();
     }
 }

@@ -32,20 +32,25 @@ import java.util.Map;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class CorrectnessChecker {
+public class CorrectnessChecker
+{
+    public static final Correctness IS_TRUE = new Correctness( 0 );
 
-    public static final Correctness IS_TRUE = new Correctness(0);
-    public static final Correctness IS_NEARLY_TRUE = new Correctness(1);
-    public static final Correctness IS_FALSE = new Correctness(2);
+    public static final Correctness IS_NEARLY_TRUE = new Correctness( 1 );
+
+    public static final Correctness IS_FALSE = new Correctness( 2 );
 
     private static final LevensteinLevel mayBeTolerated = LevensteinLevel.LEVEL_RESTRICTIVE;
+
     private static final LevensteinLevel mustBeEqual = LevensteinLevel.LEVEL_EQUAL;
+
     private static final Map hsh;
 
     private List correctnessText;
 
-    public Correctness getCorrectness(Taxon taxon, String guess) {
-        String correct = taxon.getName();
+    public Correctness getCorrectness( final Taxon taxon, String guess )
+    {
+        final String correct = taxon.getName();
 
         Correctness ret = null;
         correctnessText = null;
@@ -53,136 +58,159 @@ public class CorrectnessChecker {
         // get proposed string and eliminate double spaces
         int iDoubles = -1;
         guess = guess.trim();
-        while ((iDoubles = guess.indexOf("  ")) >= 0) {
-            guess = guess.substring(0, iDoubles) + guess.substring(iDoubles + 1, guess.length());
+        while ( ( iDoubles = guess.indexOf( "  " ) ) >= 0 )
+        {
+            guess = guess.substring( 0, iDoubles ) + guess.substring( iDoubles + 1, guess.length() );
         }
 
         // check whether within the given tolerance for species, endings may be wrong
-        if (correct.indexOf(' ') >= 0) {
-            Correctness[] iG = checkGenus(correct, guess);
-            Correctness[] iS = checkEpithethon(correct, guess);
-            List vA = new ArrayList();
+        if ( correct.indexOf( ' ' ) >= 0 )
+        {
+            final Correctness[] iG = checkGenus( correct, guess );
+            final Correctness[] iS = checkEpithethon( correct, guess );
+            final List vA = new ArrayList();
             // all wrong if body or ending of genus wrong. then check for
             // synonymes
-            if (iG[ 0 ] == IS_FALSE || iG[ 1 ] == IS_FALSE) {
-                return checkSynonyme(taxon, guess);
+            if ( iG[0] == IS_FALSE || iG[1] == IS_FALSE )
+            {
+                return checkSynonyme( taxon, guess );
             }
             // all correct
-            else if (iG[ 0 ] == IS_TRUE && iG[ 1 ] == IS_TRUE && iS[ 0 ] == IS_TRUE && iS[ 1 ] == IS_TRUE) {
+            else if ( iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE )
+            {
                 ret = IS_TRUE;
             }
             // give some hints when near the solution
-            else if ((iG[ 0 ] == IS_NEARLY_TRUE && iG[ 1 ] != IS_FALSE && iS[ 0 ] == IS_TRUE && iS[ 1 ] != IS_FALSE) ||
-                    (iG[ 0 ] == IS_TRUE && iG[ 1 ] != IS_FALSE && iS[ 0 ] == IS_NEARLY_TRUE && iS[ 1 ] != IS_FALSE) ||
-                    (iG[ 0 ] == IS_TRUE && iG[ 1 ] != IS_TRUE && iS[ 0 ] == IS_TRUE && iS[ 1 ] == IS_TRUE) ||
-                    (iG[ 0 ] == IS_TRUE && iG[ 1 ] == IS_TRUE && iS[ 0 ] == IS_TRUE && iS[ 1 ] != IS_TRUE) ||
-                    (iG[ 0 ] == IS_TRUE && iG[ 1 ] == IS_NEARLY_TRUE && iS[ 0 ] == IS_TRUE && iS[ 1 ] == IS_NEARLY_TRUE)) {
-                if (iG[ 0 ] == IS_NEARLY_TRUE) {
-                    vA.add("- Die Gattung ist beinahe richtig");
+            else if ( ( iG[0] == IS_NEARLY_TRUE && iG[1] != IS_FALSE && iS[0] == IS_TRUE && iS[1] != IS_FALSE ) ||
+                    ( iG[0] == IS_TRUE && iG[1] != IS_FALSE && iS[0] == IS_NEARLY_TRUE && iS[1] != IS_FALSE ) ||
+                    ( iG[0] == IS_TRUE && iG[1] != IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE ) ||
+                    ( iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] != IS_TRUE ) ||
+                    ( iG[0] == IS_TRUE && iG[1] == IS_NEARLY_TRUE && iS[0] == IS_TRUE && iS[1] == IS_NEARLY_TRUE ) )
+            {
+                if ( iG[0] == IS_NEARLY_TRUE )
+                {
+                    vA.add( "- Die Gattung ist beinahe richtig" );
                 }
-                if (iG[ 1 ] == IS_NEARLY_TRUE) {
-                    vA.add("- Die Endung der Gattung ist beinahe richtig         ");
+                if ( iG[1] == IS_NEARLY_TRUE )
+                {
+                    vA.add( "- Die Endung der Gattung ist beinahe richtig         " );
                 }
-                if (iS[ 0 ] == IS_NEARLY_TRUE) {
-                    vA.add("- Das Art-Epithethon is beinahe richtig                 ");
+                if ( iS[0] == IS_NEARLY_TRUE )
+                {
+                    vA.add( "- Das Art-Epithethon is beinahe richtig                 " );
                 }
-                if (iS[ 1 ] == IS_NEARLY_TRUE) {
-                    vA.add("- Die Endung des Art-Epithethons ist beinahe richtig      ");
+                if ( iS[1] == IS_NEARLY_TRUE )
+                {
+                    vA.add( "- Die Endung des Art-Epithethons ist beinahe richtig      " );
                 }
-                vA.add(" ");
-                vA.add("Zum Vergleich:");
-                vA.add("- " + correct + " (richtige Lösung)");
-                vA.add("- " + guess + " (Ihr Vorschlag)");
+                vA.add( " " );
+                vA.add( "Zum Vergleich:" );
+                vA.add( "- " + correct + " (richtige Lösung)" );
+                vA.add( "- " + guess + " (Ihr Vorschlag)" );
                 correctnessText = new ArrayList();
-                correctnessText.add(" ");
-                correctnessText.add("Sie sind nahe dran:                         ");
-                correctnessText.addAll(vA);
-                correctnessText.add(" ");
-                correctnessText.add("Versuchen Sie es noch einmal...");
-                correctnessText.add(" ");
+                correctnessText.add( " " );
+                correctnessText.add( "Sie sind nahe dran:                         " );
+                correctnessText.addAll( vA );
+                correctnessText.add( " " );
+                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
-            else {
+            else
+            {
                 ret = IS_FALSE;
             }
         }
-        else { // it's not a species
-            boolean withinTolerance = mayBeTolerated.getEval(correct.toLowerCase(), guess.toLowerCase()).isPassed();
-            boolean equal = mustBeEqual.getEval(correct.toLowerCase(), guess.toLowerCase()).isPassed();
-            if (equal) {
+        else
+        { // it's not a species
+            final boolean withinTolerance = mayBeTolerated.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
+            final boolean equal = mustBeEqual.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
+            if ( equal )
+            {
                 ret = IS_TRUE;
             }
-            else if (withinTolerance) {
+            else if ( withinTolerance )
+            {
                 correctnessText = new ArrayList();
-                correctnessText.add(" ");
-                correctnessText.add("Sie sind nahe dran:                         ");
-                correctnessText.add("- Es befinden sich noch kleine Schreibfehler in  ");
-                correctnessText.add("  Ihrem Vorschlag");
-                correctnessText.add(" ");
-                correctnessText.add("  " + correct + " (richtige Lösung)");
-                correctnessText.add("  " + guess + " (Ihr Vorschlag)");
-                correctnessText.add(" ");
-                correctnessText.add("Versuchen Sie es noch einmal...");
-                correctnessText.add(" ");
+                correctnessText.add( " " );
+                correctnessText.add( "Sie sind nahe dran:                         " );
+                correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in  " );
+                correctnessText.add( "  Ihrem Vorschlag" );
+                correctnessText.add( " " );
+                correctnessText.add( "  " + correct + " (richtige Lösung)" );
+                correctnessText.add( "  " + guess + " (Ihr Vorschlag)" );
+                correctnessText.add( " " );
+                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
-            else {
-                ret = checkSynonyme(taxon, guess);
+            else
+            {
+                ret = checkSynonyme( taxon, guess );
             }
         }
         return ret;
     }
 
-    private Correctness checkSynonyme(Taxon taxon, String synString) {
-        GraphNodeList sil = taxon.getAsGraphNode().getChildren(TaxonSynonym.class);
+    private Correctness checkSynonyme( final Taxon taxon, final String synString )
+    {
+        final GraphNodeList sil = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
         EvaluationResult eval = EvaluationResult.EVAL_FAILED;
-        for (int ix = 0; ix < sil.size() && !eval.isPassed(); ix++) {
-            String strSyn = sil.get(ix).toString().toLowerCase();
-            eval = mustBeEqual.getEval(strSyn, synString.toLowerCase());
+        for ( int ix = 0; ix < sil.size() && !eval.isPassed(); ix++ )
+        {
+            final String strSyn = sil.get( ix ).toString().toLowerCase();
+            eval = mustBeEqual.getEval( strSyn, synString.toLowerCase() );
         }
-        if (eval.isPassed()) {
+        if ( eval.isPassed() )
+        {
             correctnessText = new ArrayList();
-            correctnessText.add("Sie verwenden ein Synonym:      ");
-            correctnessText.add("  " + synString);
-            correctnessText.add(" ");
-            correctnessText.add("Wir verwenden jedoch:  ");
-            correctnessText.add("  " + taxon);
-            correctnessText.add(" ");
+            correctnessText.add( "Sie verwenden ein Synonym:      " );
+            correctnessText.add( "  " + synString );
+            correctnessText.add( " " );
+            correctnessText.add( "Wir verwenden jedoch:  " );
+            correctnessText.add( "  " + taxon );
+            correctnessText.add( " " );
             return IS_NEARLY_TRUE;
         }
         return IS_FALSE;
     }
 
-    private Correctness[] checkGenus(String correct, String guess) {
+    private Correctness[] checkGenus( String correct, String guess )
+    {
         correct = correct.toLowerCase().trim();
         guess = guess.toLowerCase().trim();
-        int iReq = correct.indexOf(" ");
-        int iFnd = guess.indexOf(" ");
+        final int iReq = correct.indexOf( " " );
+        final int iFnd = guess.indexOf( " " );
         String strFound = "";
-        if (iFnd < 0) {
+        if ( iFnd < 0 )
+        {
             strFound = guess;
         }
-        else {
-            strFound = guess.substring(0, iFnd).trim();
+        else
+        {
+            strFound = guess.substring( 0, iFnd ).trim();
         }
-        String strReq = correct.substring(0, iReq).trim();
-        return checkTaxon(strReq, strFound);
+        final String strReq = correct.substring( 0, iReq ).trim();
+        return checkTaxon( strReq, strFound );
     }
 
-    private Correctness[] checkEpithethon(String correct, String guess) {
+    private Correctness[] checkEpithethon( String correct, String guess )
+    {
         correct = correct.toLowerCase().trim();
         guess = guess.toLowerCase().trim();
-        int iReq = correct.indexOf(" ");
-        int iFnd = guess.indexOf(" ");
+        final int iReq = correct.indexOf( " " );
+        final int iFnd = guess.indexOf( " " );
         String strFound = "";
-        if (iFnd < 0) {
+        if ( iFnd < 0 )
+        {
             strFound = guess;
         }
-        else {
-            strFound = guess.substring(iFnd + 1, guess.length()).trim();
+        else
+        {
+            strFound = guess.substring( iFnd + 1, guess.length() ).trim();
         }
-        String strReq = correct.substring(iReq + 1, correct.length()).trim();
-        return checkTaxon(strReq, strFound);
+        final String strReq = correct.substring( iReq + 1, correct.length() ).trim();
+        return checkTaxon( strReq, strFound );
     }
 
     /**
@@ -195,60 +223,74 @@ public class CorrectnessChecker {
      * @param guess   guessfor the taxon name
      * @return an array of length two with correcness for word base and ending
      */
-    private Correctness[] checkTaxon(String correct, String guess) {
+    private Correctness[] checkTaxon( final String correct, final String guess )
+    {
         // accept all species epitheta for taxa with "sp."
-        if (correct.equals("sp.") || guess.equals(correct)) {
+        if ( correct.equals( "sp." ) || guess.equals( correct ) )
+        {
             return new Correctness[]{CorrectnessChecker.IS_TRUE, CorrectnessChecker.IS_TRUE};
         }
         // or check taxanames
-        else {
-            Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
+        else
+        {
+            final Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
             String correctBody = null, guessedBody = null, strKey,
                     guessPostfix = "", correctPostfix = "", toleratedEndings[];
-            Iterator eVals = hsh.values().iterator();
-            Iterator eKeys = hsh.keySet().iterator();
-            while (eKeys.hasNext()) {
+            final Iterator eVals = hsh.values().iterator();
+            final Iterator eKeys = hsh.keySet().iterator();
+            while ( eKeys.hasNext() )
+            {
                 strKey = (String) eKeys.next();
                 toleratedEndings = (String[]) eVals.next();
-                if (guess.endsWith(strKey)) {
-                    if (correct.endsWith(strKey) && guess.length() == correct.length()) {
+                if ( guess.endsWith( strKey ) )
+                {
+                    if ( correct.endsWith( strKey ) && guess.length() == correct.length() )
+                    {
                         // both endings match, but bodies are different
-                        res[ 1 ] = IS_TRUE;
+                        res[1] = IS_TRUE;
                         guessPostfix = strKey;
                         correctPostfix = strKey;
                     }
-                    else {
+                    else
+                    {
                         // bodies are different and endings MAY be tolerated. If endings have been determined for
                         // both strings, there bodies are extracted. Bodies then are compared.
-                        for (int iX = 0; iX < toleratedEndings.length; iX++) {
-                            String alternateEnding = toleratedEndings[ iX ];
-                            if (guess.endsWith(alternateEnding)) {
+                        for ( final String alternateEnding : toleratedEndings )
+                        {
+                            if ( guess.endsWith( alternateEnding ) )
+                            {
                                 guessPostfix = alternateEnding;
                             }
-                            if (correct.endsWith(alternateEnding)) {
+                            if ( correct.endsWith( alternateEnding ) )
+                            {
                                 correctPostfix = alternateEnding;
-                                res[ 1 ] = IS_NEARLY_TRUE;
+                                res[1] = IS_NEARLY_TRUE;
                             }
                         }
                     }
-                    correctBody = correct.substring(0, correct.lastIndexOf(correctPostfix));
-                    guessedBody = guess.substring(0, guess.lastIndexOf(guessPostfix));
-                    if (guessedBody == null) {
+                    correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
+                    guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
+                    if ( guessedBody == null )
+                    {
                         guessedBody = guess;
                     }
-                    if (correctBody == null) {
+                    if ( correctBody == null )
+                    {
                         correctBody = correct;
                     }
-                    EvaluationResult strongEval = mustBeEqual.getEval(guessedBody, correctBody);
-                    EvaluationResult tolerantEval = mayBeTolerated.getEval(guessedBody, correctBody);
-                    if (strongEval.isPassed()) {
-                        res[ 0 ] = IS_TRUE;
+                    final EvaluationResult strongEval = mustBeEqual.getEval( guessedBody, correctBody );
+                    final EvaluationResult tolerantEval = mayBeTolerated.getEval( guessedBody, correctBody );
+                    if ( strongEval.isPassed() )
+                    {
+                        res[0] = IS_TRUE;
                     }
-                    else if (tolerantEval.isPassed()) {
-                        res[ 0 ] = IS_NEARLY_TRUE;
+                    else if ( tolerantEval.isPassed() )
+                    {
+                        res[0] = IS_NEARLY_TRUE;
                     }
-                    else {
-                        res[ 0 ] = IS_FALSE;
+                    else
+                    {
+                        res[0] = IS_FALSE;
                     }
                     return res;
                 }
@@ -257,7 +299,8 @@ public class CorrectnessChecker {
         }
     }
 
-    public List getCorrectnessText() {
+    public List getCorrectnessText()
+    {
         return correctnessText;
     }
 
@@ -323,41 +366,48 @@ public class CorrectnessChecker {
 //        return cCorrect;
 //    }
 
-    static {
+    static
+    {
         hsh = new HashMap();
         // make sure to have the shorter endings at the end...
-        hsh.put("tans", new String[]{"ens", "tans"});
-        hsh.put("ens", new String[]{"ens", "tans"});
-        hsh.put("e", new String[]{"er", "is", "e"});
-        hsh.put("is", new String[]{"er", "is", "e"});
-        hsh.put("er", new String[]{"er", "is", "e"});
-        hsh.put("um", new String[]{"um", "us", "a"});
-        hsh.put("us", new String[]{"um", "us", "a"});
-        hsh.put("a", new String[]{"um", "us", "a"});
-        hsh.put("i", new String[]{"ii", "i"});
-        hsh.put("ii", new String[]{"ii", "i"});
+        hsh.put( "tans", new String[]{"ens", "tans"} );
+        hsh.put( "ens", new String[]{"ens", "tans"} );
+        hsh.put( "e", new String[]{"er", "is", "e"} );
+        hsh.put( "is", new String[]{"er", "is", "e"} );
+        hsh.put( "er", new String[]{"er", "is", "e"} );
+        hsh.put( "um", new String[]{"um", "us", "a"} );
+        hsh.put( "us", new String[]{"um", "us", "a"} );
+        hsh.put( "a", new String[]{"um", "us", "a"} );
+        hsh.put( "i", new String[]{"ii", "i"} );
+        hsh.put( "ii", new String[]{"ii", "i"} );
 
     }
 
-    public static class Correctness {
+    public static class Correctness
+    {
+        private final int id;
 
-        private int id;
-
-        private Correctness(int newId) {
+        private Correctness( final int newId )
+        {
             id = newId;
         }
 
-        public String toString() {
-            if (id == 0) {
+        public String toString()
+        {
+            if ( id == 0 )
+            {
                 return "RIGHT";
             }
-            else if (id == 1) {
+            else if ( id == 1 )
+            {
                 return "NEAR";
             }
-            else if (id == 2) {
+            else if ( id == 2 )
+            {
                 return "WRONG";
             }
-            else {
+            else
+            {
                 return "UNKNOWN";
             }
         }

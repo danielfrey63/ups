@@ -34,12 +34,11 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class EnabablePopup extends JButton implements ActionListener
 {
+    private static final String DEFAULT = Strings.getString( "ROLE_NULL.ENTRY" );
 
-    private static final String DEFAULT = Strings.getString("ROLE_NULL.ENTRY");
+    private final SimpleAction[] actions;
 
-    private SimpleAction[] actions;
-
-    private JPopupMenu popup;
+    private final JPopupMenu popup;
 
     private Object selection;
 
@@ -49,37 +48,37 @@ public class EnabablePopup extends JButton implements ActionListener
      * @param items the items to display in the popup
      * @param icon  thie icon to place on the button
      */
-    public EnabablePopup(final Object[] items, final Icon icon)
+    public EnabablePopup( final Object[] items, final Icon icon )
     {
         JMenuItem jmi = null;
-        this.setIcon(icon);
-        this.setHorizontalTextPosition(JButton.LEFT);
-        this.setHorizontalAlignment(JButton.LEFT);
+        this.setIcon( icon );
+        this.setHorizontalTextPosition( JButton.LEFT );
+        this.setHorizontalAlignment( JButton.LEFT );
         popup = new JPopupMenu();
         actions = new SimpleAction[items.length];
-        this.setText(DEFAULT);
+        this.setText( DEFAULT );
         int maxWidth = (int) this.getPreferredSize().getWidth();
-        for (int i = 0; i < items.length; i++)
+        for ( int i = 0; i < items.length; i++ )
         {
-            jmi = popup.add(new SimpleAction(items[i]));
+            jmi = popup.add( new SimpleAction( items[i] ) );
             actions[i] = (SimpleAction) jmi.getAction();
-            this.setText(items[i].toString());
+            this.setText( items[i].toString() );
             final int pWidth = (int) this.getPreferredSize().getWidth();
-            maxWidth = (pWidth > maxWidth ? pWidth : maxWidth);
+            maxWidth = ( pWidth > maxWidth ? pWidth : maxWidth );
         }
-        if (items.length > 0)
+        if ( items.length > 0 )
         {
-            this.setText(items[0].toString());
+            this.setText( items[0].toString() );
             selection = items[0];
         }
         else
         {
-            this.setText(DEFAULT);
+            this.setText( DEFAULT );
             selection = null;
         }
         final int height = (int) this.getPreferredSize().getHeight();
-        this.setPreferredSize(new Dimension(maxWidth, height));
-        this.addActionListener(this);
+        this.setPreferredSize( new Dimension( maxWidth, height ) );
+        this.addActionListener( this );
     }
 
     /**
@@ -88,21 +87,21 @@ public class EnabablePopup extends JButton implements ActionListener
      * @param toEnable the objects to enable. Make sure not to pass null objects. So toEnable should not contain
      *                 <code>null</code> elements.
      */
-    public void setEnabled(final Object[] toEnable)
+    public void setEnabled( final Object[] toEnable )
     {
-        for (SimpleAction action1 : actions)
+        for ( final SimpleAction action1 : actions )
         {
-            action1.setEnabled(ArrayUtils.contains(toEnable, action1.getObject()));
+            action1.setEnabled( ArrayUtils.contains( toEnable, action1.getObject() ) );
         }
-        if (!ArrayUtils.contains(toEnable, selection) && toEnable.length > 0)
+        if ( !ArrayUtils.contains( toEnable, selection ) && toEnable.length > 0 )
         {
             selection = toEnable[0];
-            this.setText(selection.toString());
+            this.setText( selection.toString() );
         }
-        else if (toEnable.length == 0)
+        else if ( toEnable.length == 0 )
         {
             selection = null;
-            this.setText(DEFAULT);
+            this.setText( DEFAULT );
         }
     }
 
@@ -121,7 +120,7 @@ public class EnabablePopup extends JButton implements ActionListener
      *
      * @param selected The selection to set
      */
-    public void setSelection(final Object selected)
+    public void setSelection( final Object selected )
     {
         this.selection = selected;
     }
@@ -132,7 +131,7 @@ public class EnabablePopup extends JButton implements ActionListener
      *
      * @param actionEvent the event object
      */
-    public void actionPerformed(final ActionEvent actionEvent)
+    public void actionPerformed( final ActionEvent actionEvent )
     {
         // display the popup at the selected object by finding the component
         // selected in the popup. There might be a small difference between
@@ -140,35 +139,34 @@ public class EnabablePopup extends JButton implements ActionListener
         // order to display the popups component in the vertical middle of the
         // button.
         int yPos = 0;
-        for (int i = popup.getComponentCount() - 1; i >= 0; i--)
+        for ( int i = popup.getComponentCount() - 1; i >= 0; i-- )
         {
-            final JMenuItem jmi = (JMenuItem) popup.getComponent(i);
+            final JMenuItem jmi = (JMenuItem) popup.getComponent( i );
             final SimpleAction testaction = (SimpleAction) jmi.getAction();
-            if (selection == testaction.getObject())
+            if ( selection == testaction.getObject() )
             {
                 yPos = jmi.getBounds().y;
-                if (jmi.getHeight() > 0)
+                if ( jmi.getHeight() > 0 )
                 {
-                    yPos += (jmi.getHeight() - getHeight()) / 2;
+                    yPos += ( jmi.getHeight() - getHeight() ) / 2;
                 }
             }
         }
-        popup.show(this, 0, -yPos);
+        popup.show( this, 0, -yPos );
     }
 
     class SimpleAction extends AbstractAction
     {
-
         private Object object;
 
-        public SimpleAction(final Object item)
+        public SimpleAction( final Object item )
         {
-            this(item, null);
+            this( item, null );
         }
 
-        public SimpleAction(final Object item, final Icon icon)
+        public SimpleAction( final Object item, final Icon icon )
         {
-            super(item.toString(), icon);
+            super( item.toString(), icon );
             object = item;
         }
 
@@ -177,10 +175,10 @@ public class EnabablePopup extends JButton implements ActionListener
             return object;
         }
 
-        public void actionPerformed(final ActionEvent ae)
+        public void actionPerformed( final ActionEvent ae )
         {
-            EnabablePopup.this.setSelection(object);
-            EnabablePopup.this.setText(object.toString());
+            EnabablePopup.this.setSelection( object );
+            EnabablePopup.this.setText( object.toString() );
         }
     }
 

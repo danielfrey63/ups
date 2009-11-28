@@ -15,23 +15,22 @@ import junit.framework.TestCase;
  */
 public class StringsTest extends TestCase
 {
-
     protected void setUp() throws Exception
     {
-        Strings.setResourceBundle(ResourceBundle.getBundle("ch.jfactory.resource.Strings"));
+        Strings.setResourceBundle( ResourceBundle.getBundle( "ch.jfactory.resource.Strings" ) );
     }
 
     public void testColor()
     {
-        checkColor("red", Color.red);
-        checkColor("RED", Color.red);
-        checkColor("nop", null);
-        checkColor("orange-red", new Color(178, 154, 17));
+        checkColor( "red", Color.red );
+        checkColor( "RED", Color.red );
+        checkColor( "nop", null );
+        checkColor( "orange-red", new Color( 178, 154, 17 ) );
     }
 
-    private void checkColor(final String key, final Color color)
+    private void checkColor( final String key, final Color color )
     {
-        final Color c = Strings.getColor(key);
-        assertTrue(c != null && c.equals(color) || color != null && color.equals(c) || c == null && color == null);
+        final Color c = Strings.getColor( key );
+        assertTrue( c != null && c.equals( color ) || color != null && color.equals( c ) || c == null && color == null );
     }
 }

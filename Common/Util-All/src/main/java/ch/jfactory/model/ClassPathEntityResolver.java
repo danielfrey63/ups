@@ -25,38 +25,37 @@ import org.xml.sax.SAXException;
  */
 public class ClassPathEntityResolver implements EntityResolver
 {
-
     private final String encoding;
 
     private static final String DEFAULT_ENCODING = "UTF-8";
 
     public ClassPathEntityResolver()
     {
-        this(DEFAULT_ENCODING);
+        this( DEFAULT_ENCODING );
     }
 
-    public ClassPathEntityResolver(final String encoding)
+    public ClassPathEntityResolver( final String encoding )
     {
         this.encoding = encoding;
     }
 
-    public InputSource resolveEntity(final String publicId, final String systemId) throws SAXException, IOException
+    public InputSource resolveEntity( final String publicId, final String systemId ) throws SAXException, IOException
     {
         String resource = null;
-        if (systemId.startsWith("classpath:"))
+        if ( systemId.startsWith( "classpath:" ) )
         {
-            resource = systemId.substring(10);
+            resource = systemId.substring( 10 );
         }
-        else if (systemId.startsWith("jar:"))
+        else if ( systemId.startsWith( "jar:" ) )
         {
-            resource = systemId.substring(4);
+            resource = systemId.substring( 4 );
         }
         final InputSource source;
-        if (resource != null)
+        if ( resource != null )
         {
-            final InputStream stream = DomDriver.class.getResourceAsStream(resource);
-            source = new InputSource(stream);
-            source.setEncoding(encoding);
+            final InputStream stream = DomDriver.class.getResourceAsStream( resource );
+            source = new InputSource( stream );
+            source.setEncoding( encoding );
         }
         else
         {

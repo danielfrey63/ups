@@ -16,16 +16,19 @@ package ch.jfactory.math;
  */
 public class EvaluationResult
 {
+    /**
+     * Evaluation has passed.
+     */
+    public static final EvaluationResult EVAL_PASSED = new EvaluationResult( true );
 
-    /** Evaluation has passed. */
-    public static final EvaluationResult EVAL_PASSED = new EvaluationResult(true);
+    /**
+     * Evaluation has failed.
+     */
+    public static final EvaluationResult EVAL_FAILED = new EvaluationResult( false );
 
-    /** Evaluation has failed. */
-    public static final EvaluationResult EVAL_FAILED = new EvaluationResult(false);
+    private final boolean passed;
 
-    private boolean passed;
-
-    private EvaluationResult(final boolean bool)
+    private EvaluationResult( final boolean bool )
     {
         this.passed = bool;
     }
@@ -35,9 +38,9 @@ public class EvaluationResult
         return passed;
     }
 
-    public static EvaluationResult eval(final boolean bool)
+    public static EvaluationResult eval( final boolean bool )
     {
-        if (bool)
+        if ( bool )
         {
             return EVAL_PASSED;
         }

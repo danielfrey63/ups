@@ -35,47 +35,58 @@ import net.java.jveez.vfs.Picture;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:48 $
  */
-public class PMBModel extends Model {
-
+public class PMBModel extends Model
+{
     private Settings settings = new Settings();
 
     private final Map<Entry, FileEntry> hierarchicalMapping = new HashMap<Entry, FileEntry>();
+
     private final List<Picture> selectedPictures = new ArrayList<Picture>();
+
     private final ArrayList<FileEntry> fileEntries = new ArrayList<FileEntry>();
+
     private final FileEntryThumbnailListModel thumbnailModel = new FileEntryThumbnailListModel();
 
     private final transient InfoModel infoModel = new DefaultInfoModel();
 
-    public PMBModel() {
+    public PMBModel()
+    {
         TaxonModels.loadTaxonTrees();
         settings.loadSettings();
     }
 
-    public Settings getSettings() {
+    public Settings getSettings()
+    {
         return settings;
     }
 
-    public void setSettings(final Settings settings) {
+    public void setSettings( final Settings settings )
+    {
         this.settings = settings;
     }
 
-    public Map<Entry, FileEntry> getHierarchicalMapping() {
+    public Map<Entry, FileEntry> getHierarchicalMapping()
+    {
         return hierarchicalMapping;
     }
 
-    public List<Picture> getSelectedPictures() {
+    public List<Picture> getSelectedPictures()
+    {
         return selectedPictures;
     }
 
-    public InfoModel getInfoModel() {
+    public InfoModel getInfoModel()
+    {
         return infoModel;
     }
 
-    public ArrayList<FileEntry> getFileEntries() {
+    public ArrayList<FileEntry> getFileEntries()
+    {
         return fileEntries;
     }
 
-    public FileEntryThumbnailListModel getThumbnailModel() {
+    public FileEntryThumbnailListModel getThumbnailModel()
+    {
         return thumbnailModel;
     }
 
@@ -86,11 +97,13 @@ public class PMBModel extends Model {
      *
      * @return the array of files
      */
-    public File[] getSelectedPicturesAsFile() {
+    public File[] getSelectedPicturesAsFile()
+    {
         final List<Picture> pictures = getSelectedPictures();
         final File[] files = new File[pictures.size()];
         int i = 0;
-        for (final Picture picture : pictures) {
+        for ( final Picture picture : pictures )
+        {
             files[i++] = picture.getFile();
         }
         return files;

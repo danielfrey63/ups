@@ -8,7 +8,6 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * Should deliver access to a picture ant its comment.
  *
@@ -16,8 +15,8 @@ package com.ethz.geobot.herbar.model;
  * @version $Revision: 1.1 $
  * @created $Date: 2007/09/17 11:07:24 $
  */
-public interface CommentedPicture {
-
+public interface CommentedPicture
+{
     public String getComment();
 
     public Picture getPicture();

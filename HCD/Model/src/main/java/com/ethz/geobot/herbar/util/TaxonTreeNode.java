@@ -13,8 +13,8 @@ import javax.swing.tree.TreeNode;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface TaxonTreeNode extends TreeNode {
-
+public interface TaxonTreeNode extends TreeNode
+{
     /**
      * Returns the wrapped Taxon object.
      *

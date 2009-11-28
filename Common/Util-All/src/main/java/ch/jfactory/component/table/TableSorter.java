@@ -10,86 +10,85 @@ import java.util.Map;
  */
 public class TableSorter
 {
+    private final SortableTableModel model;
 
-    private SortableTableModel model;
-
-    private Map columnComparators = new HashMap();
+    private final Map columnComparators = new HashMap();
 
     public static final Comparator COMPARABLE_COMAPRATOR = new Comparator()
     {
-        public int compare(final Object o1, final Object o2)
+        public int compare( final Object o1, final Object o2 )
         {
-            return ((Comparable) o1).compareTo(o2);
+            return ( (Comparable) o1 ).compareTo( o2 );
         }
     };
 
     public static final Comparator LEXICAL_COMPARATOR = new Comparator()
     {
-        public int compare(final Object o1, final Object o2)
+        public int compare( final Object o1, final Object o2 )
         {
-            return o1.toString().compareTo(o2.toString());
+            return o1.toString().compareTo( o2.toString() );
         }
     };
 
-    public TableSorter(final SortableTableModel model)
+    public TableSorter( final SortableTableModel model )
     {
         this.model = model;
     }
 
     // stable bubble sort
-    public void sort(final int column, final SortState.State state)
+    public void sort( final int column, final SortState.State state )
     {
         final int[] data = model.getIndexes();
         final int n = data.length;
         int temp;
-        for (int i = 0; i < n; i++)
+        for ( int i = 0; i < n; i++ )
         {
             final boolean noSort = state == SortState.SORT_NONE;
-            for (int j = 1; j < n - i && !noSort; j++)
+            for ( int j = 1; j < n - i && !noSort; j++ )
             {
-                final Object o1 = model.getValueAt(j, column);
-                final Object o2 = model.getValueAt(j - 1, column);
-                if (state == SortState.SORT_ASCENDING && getComparator(column).compare(o1, o2) < 0)
+                final Object o1 = model.getValueAt( j, column );
+                final Object o2 = model.getValueAt( j - 1, column );
+                if ( state == SortState.SORT_ASCENDING && getComparator( column ).compare( o1, o2 ) < 0 )
                 {
                     temp = data[j];
                     data[j] = data[j - 1];
                     data[j - 1] = temp;
                 }
-                else if (state == SortState.SORT_DESCENDING && getComparator(column).compare(o1, o2) > 0)
+                else if ( state == SortState.SORT_DESCENDING && getComparator( column ).compare( o1, o2 ) > 0 )
                 {
                     temp = data[j];
                     data[j] = data[j - 1];
                     data[j - 1] = temp;
                 }
             }
-            if (noSort)
+            if ( noSort )
             {
                 data[i] = i;
             }
         }
     }
 
-    public void setColumnComparator(final Class type, final Comparator comparator)
+    public void setColumnComparator( final Class type, final Comparator comparator )
     {
-        if (comparator == null)
+        if ( comparator == null )
         {
-            columnComparators.remove(type);
+            columnComparators.remove( type );
         }
         else
         {
-            columnComparators.put(type, comparator);
+            columnComparators.put( type, comparator );
         }
     }
 
-    private Comparator getComparator(final int column)
+    private Comparator getComparator( final int column )
     {
-        final Class columnType = model.getColumnClass(column);
-        final Comparator comparator = (Comparator) columnComparators.get(columnType);
-        if (comparator != null)
+        final Class columnType = model.getColumnClass( column );
+        final Comparator comparator = (Comparator) columnComparators.get( columnType );
+        if ( comparator != null )
         {
             return comparator;
         }
-        if (Comparable.class.isAssignableFrom(columnType))
+        if ( Comparable.class.isAssignableFrom( columnType ) )
         {
             return COMPARABLE_COMAPRATOR;
         }

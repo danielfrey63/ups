@@ -20,39 +20,39 @@ import org.apache.log4j.Logger;
  */
 public class CachedImage extends ImageReference
 {
-    private static final Logger LOGGER = Logger.getLogger(CachedImage.class);
+    private static final Logger LOGGER = Logger.getLogger( CachedImage.class );
 
-    private String pictureURL;
+    private final String pictureURL;
 
     private AbstractAsynchronPictureLoaderSupport listeners;
 
-    private CachedImageLocator locator;
+    private final CachedImageLocator locator;
 
-    public CachedImage(final CachedImageLocator locator, final String pictureURL)
+    public CachedImage( final CachedImageLocator locator, final String pictureURL )
     {
         this.pictureURL = pictureURL;
         this.locator = locator;
     }
 
-    public void setImage(final Image img, final boolean thumb)
+    public void setImage( final Image img, final boolean thumb )
     {
-        LOGGER.debug("Setting image for " + pictureURL + ", " + thumb);
-        if (img == super.getImage(thumb))
+        LOGGER.debug( "Setting image for " + pictureURL + ", " + thumb );
+        if ( img == super.getImage( thumb ) )
         {
             return;
         }
-        super.setImage(img, thumb);
-        if (listeners == null)
+        super.setImage( img, thumb );
+        if ( listeners == null )
         {
             return;
         }
-        if (img == null)
+        if ( img == null )
         {
-            listeners.informAborted(pictureURL);
+            listeners.informAborted( pictureURL );
         }
         else
         {
-            listeners.informFinished(pictureURL, img, thumb);
+            listeners.informFinished( pictureURL, img, thumb );
         }
     }
 
@@ -64,66 +64,66 @@ public class CachedImage extends ImageReference
     public Dimension getSize()
     {
         Dimension d = super.getSize();
-        if (d == null)
+        if ( d == null )
         {
-            d = PictureLoader.getSize(getPath() + pictureURL);
-            setSize(d);
+            d = PictureLoader.getSize( getPath() + pictureURL );
+            setSize( d );
         }
         return d;
     }
 
-    public Image getImage(final boolean thumb)
+    public Image getImage( final boolean thumb )
     {
-        Image i = super.getImage(thumb);
-        if (i == null)
+        Image i = super.getImage( thumb );
+        if ( i == null )
         {
-            if (thumb)
+            if ( thumb )
             {
-                i = super.getImage(!thumb);
+                i = super.getImage( !thumb );
             }
         }
         return i;
     }
 
-    public void attach(final AsynchronPictureLoaderListener list)
+    public void attach( final AsynchronPictureLoaderListener list )
     {
-        if (listeners == null)
+        if ( listeners == null )
         {
             listeners = new AbstractAsynchronPictureLoaderSupport();
         }
-        listeners.attach(list);
+        listeners.attach( list );
     }
 
-    public void detach(final AsynchronPictureLoaderListener list)
+    public void detach( final AsynchronPictureLoaderListener list )
     {
-        if (listeners == null)
+        if ( listeners == null )
         {
             return;
         }
-        listeners.detach(list);
-        if (listeners.size() < 0)
+        listeners.detach( list );
+        if ( listeners.size() < 0 )
         {
             listeners = null;
         }
     }
 
-    protected boolean loaded(final boolean thumb)
+    protected boolean loaded( final boolean thumb )
     {
-        if (super.getImage(thumb) != null)
+        if ( super.getImage( thumb ) != null )
         {
             return true;
         }
-        if (thumb && (super.getImage(false) != null))
+        if ( thumb && ( super.getImage( false ) != null ) )
         {
             return true;
         }
         return false;
     }
 
-    protected synchronized Image loadImage(final boolean thumb)
+    protected synchronized Image loadImage( final boolean thumb )
     {
-        final Image i = PictureLoader.load(getPath() + pictureURL, thumb);
-        this.setImage(i, thumb);
+        final Image i = PictureLoader.load( getPath() + pictureURL, thumb );
+        this.setImage( i, thumb );
         return i;
     }
 

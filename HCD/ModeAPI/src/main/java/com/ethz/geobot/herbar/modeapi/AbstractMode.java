@@ -11,46 +11,57 @@ import java.util.Set;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-abstract public class AbstractMode implements Mode {
-
+abstract public class AbstractMode implements Mode
+{
     private HerbarContext context;
-    private Map props = new HashMap();
 
-    public void activate() {
+    private final Map props = new HashMap();
+
+    public void activate()
+    {
     }
 
-    public void deactivate() {
+    public void deactivate()
+    {
     }
 
-    public boolean queryDeactivate() {
+    public boolean queryDeactivate()
+    {
         return true;
     }
 
-    final public Object getProperty(String name) {
-        return props.get(name);
+    final public Object getProperty( final String name )
+    {
+        return props.get( name );
     }
 
-    final public Set getPropertyNames() {
+    final public Set getPropertyNames()
+    {
         return props.keySet();
     }
 
-    final public void setProperty(String name, Object value) {
-        props.put(name, value);
+    final public void setProperty( final String name, final Object value )
+    {
+        props.put( name, value );
     }
 
-    public void init(HerbarContext context) {
+    public void init( final HerbarContext context )
+    {
         this.context = context;
         loadState();
     }
 
-    public void destroy() {
+    public void destroy()
+    {
         saveState();
     }
 
-    public void loadState() {
+    public void loadState()
+    {
     }
 
-    public void saveState() {
+    public void saveState()
+    {
     }
 
     /**
@@ -58,13 +69,14 @@ abstract public class AbstractMode implements Mode {
      *
      * @return reference to the HerbarContext object
      */
-    public HerbarContext getHerbarContext() {
+    public HerbarContext getHerbarContext()
+    {
         return context;
     }
 
-
     @Override
-    public String toString() {
-        return getProperty(NAME) + " [" + getProperty(MODE_GROUP) + "]";
+    public String toString()
+    {
+        return getProperty( NAME ) + " [" + getProperty( MODE_GROUP ) + "]";
     }
 }

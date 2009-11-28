@@ -24,95 +24,113 @@ import javax.swing.table.TableColumnModel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class ModuleInfoDialog extends I15nComponentDialog {
+public class ModuleInfoDialog extends I15nComponentDialog
+{
+    private static final int[] columnWidths = new int[]{50, 100, 20};
 
-    private static int[] columnWidths = new int[]{50, 100, 20};
-
-    public ModuleInfoDialog(Frame owner, String prefix) throws HeadlessException {
-        super(owner, prefix);
+    public ModuleInfoDialog( final Frame owner, final String prefix ) throws HeadlessException
+    {
+        super( owner, prefix );
     }
 
-    public ModuleInfoDialog(Dialog owner, String prefix) throws HeadlessException {
-        super(owner, prefix);
+    public ModuleInfoDialog( final Dialog owner, final String prefix ) throws HeadlessException
+    {
+        super( owner, prefix );
     }
 
-    protected JComponent createComponentPanel() {
-
+    protected JComponent createComponentPanel()
+    {
         // display version info of modules in table list
-        List<? extends Object> versions = LocalVersionLocator.locateVersions();
-        BeanTableModel btm = new BeanTableModel(versions,
+        final List<?> versions = LocalVersionLocator.locateVersions();
+        final BeanTableModel btm = new BeanTableModel( versions,
                 new String[]{"name", "description", "version"},
                 new String[]{"Name", "Beschreibung", "Version"},
-                true);
-        SortedTable moduleTable = new SortedTable(btm);
-        moduleTable.setFocusable(false);
+                true );
+        final SortedTable moduleTable = new SortedTable( btm );
+        moduleTable.setFocusable( false );
 
-        TableColumnModel model = moduleTable.getColumnModel();
+        final TableColumnModel model = moduleTable.getColumnModel();
 
-        for (int i = 0; i < 3; i++) {
-            model.getColumn(i).setPreferredWidth(columnWidths[ i ]);
+        for ( int i = 0; i < 3; i++ )
+        {
+            model.getColumn( i ).setPreferredWidth( columnWidths[i] );
         }
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(new JScrollPane(moduleTable), BorderLayout.CENTER);
+        final JPanel panel = new JPanel();
+        panel.setLayout( new BorderLayout() );
+        panel.add( new JScrollPane( moduleTable ), BorderLayout.CENTER );
 
         return panel;
     }
 
-    protected void onApply() throws ComponentDialogException {
+    protected void onApply() throws ComponentDialogException
+    {
     }
 
-    protected void onCancel() {
+    protected void onCancel()
+    {
     }
 
-    protected boolean isCancelShowing() {
+    protected boolean isCancelShowing()
+    {
         return false;
     }
 
-    public static class TableColumnAjuster {
+    public static class TableColumnAjuster
+    {
+        private final TableColumnModel model;
 
-        private TableColumnModel model;
-        private JTable table;
-        private float[] relativeWidths;
+        private final JTable table;
 
-        public TableColumnAjuster(final JTable table, float[] relativeWidths) {
+        private final float[] relativeWidths;
+
+        public TableColumnAjuster( final JTable table, final float[] relativeWidths )
+        {
             this.table = table;
             this.relativeWidths = relativeWidths;
             model = table.getColumnModel();
-            int columnCount = model.getColumnCount();
-            if (columnCount != relativeWidths.length) {
-                throw new IllegalArgumentException("Relative widths given and columns must be same count");
+            final int columnCount = model.getColumnCount();
+            if ( columnCount != relativeWidths.length )
+            {
+                throw new IllegalArgumentException( "Relative widths given and columns must be same count" );
             }
             float total = 0;
-            for (float relativeWidth : relativeWidths) {
+            for ( final float relativeWidth : relativeWidths )
+            {
                 total += relativeWidth;
             }
-            if (total != 1.0) {
-                throw new IllegalArgumentException("Relative widths must sum up to 1.0");
+            if ( total != 1.0 )
+            {
+                throw new IllegalArgumentException( "Relative widths must sum up to 1.0" );
             }
 
-            table.addHierarchyListener(new HierarchyListener() {
-                public void hierarchyChanged(HierarchyEvent e) {
-                    Container top = table.getTopLevelAncestor();
-                    if (top instanceof JDialog || top instanceof JFrame) {
-                        if (top.isVisible() && table.isVisible()) {
+            table.addHierarchyListener( new HierarchyListener()
+            {
+                public void hierarchyChanged( final HierarchyEvent e )
+                {
+                    final Container top = table.getTopLevelAncestor();
+                    if ( top instanceof JDialog || top instanceof JFrame )
+                    {
+                        if ( top.isVisible() && table.isVisible() )
+                        {
                             ajustColumns();
                         }
                     }
                 }
-            });
+            } );
         }
 
-        public void ajustColumns() {
-            int mode = table.getAutoResizeMode();
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            int totalColumnWidth = model.getTotalColumnWidth();
-            int columnCount = model.getColumnCount();
-            for (int i = 0; i < columnCount; i++) {
-                model.getColumn(i).setWidth((int) (totalColumnWidth * relativeWidths[ i ]));
+        public void ajustColumns()
+        {
+            final int mode = table.getAutoResizeMode();
+            table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+            final int totalColumnWidth = model.getTotalColumnWidth();
+            final int columnCount = model.getColumnCount();
+            for ( int i = 0; i < columnCount; i++ )
+            {
+                model.getColumn( i ).setWidth( (int) ( totalColumnWidth * relativeWidths[i] ) );
             }
-            table.setAutoResizeMode(mode);
+            table.setAutoResizeMode( mode );
         }
     }
 }

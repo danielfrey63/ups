@@ -16,22 +16,15 @@
  */
 package ch.jfactory.projecttime.stats;
 
-import ch.jfactory.projecttime.domain.api.IFEntry;
-import ch.jfactory.projecttime.domain.impl.DefaultEntry;
-import ch.jfactory.typemapper.TypeMapping;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.extended.ISO8601DateConverter;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.util.List;
-
 /**
  * Action command ids and serializer accessor.
  *
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String COMMANDID_SUM = "entry.sum";
+
     public static final String GROUPID_TOOLBAR = "toolbar";
 }

@@ -10,22 +10,22 @@ import java.util.EventObject;
  */
 public class WizardStateChangeEvent extends EventObject
 {
-    private boolean hasNext;
+    private final boolean hasNext;
 
-    private boolean hasPrevious;
+    private final boolean hasPrevious;
 
-    private boolean isNextEnabled;
+    private final boolean isNextEnabled;
 
-    private boolean isPreviousEnabled;
+    private final boolean isPreviousEnabled;
 
-    private boolean isFinishEnabled;
+    private final boolean isFinishEnabled;
 
-    private boolean isCancelEnabled;
+    private final boolean isCancelEnabled;
 
-    public WizardStateChangeEvent(final Object source, final boolean hasNext, final boolean hasPrevious, final boolean
-            isNextEnabled, final boolean isPreviousEnabled, final boolean isFinishEnabled, final boolean isCancelEnabled)
+    public WizardStateChangeEvent( final Object source, final boolean hasNext, final boolean hasPrevious, final boolean
+            isNextEnabled, final boolean isPreviousEnabled, final boolean isFinishEnabled, final boolean isCancelEnabled )
     {
-        super(source);
+        super( source );
         this.hasNext = hasNext;
         this.hasPrevious = hasPrevious;
         this.isNextEnabled = isNextEnabled;
@@ -66,14 +66,14 @@ public class WizardStateChangeEvent extends EventObject
 
     public String toString()
     {
-        final StringBuffer textBuffer = new StringBuffer(150);
-        textBuffer.append("WizardStateChangeEvent: [");
-        textBuffer.append(" hasNext = ").append(hasNext());
-        textBuffer.append(" hasPrevious = ").append(hasPrevious());
-        textBuffer.append(" isNextEnabled = ").append(isNextEnabled());
-        textBuffer.append(" isPreviousEnabled = ").append(isPreviousEnabled());
-        textBuffer.append(" isFinishEnabled = ").append(isFinishEnabled());
-        textBuffer.append("]");
+        final StringBuffer textBuffer = new StringBuffer( 150 );
+        textBuffer.append( "WizardStateChangeEvent: [" );
+        textBuffer.append( " hasNext = " ).append( hasNext() );
+        textBuffer.append( " hasPrevious = " ).append( hasPrevious() );
+        textBuffer.append( " isNextEnabled = " ).append( isNextEnabled() );
+        textBuffer.append( " isPreviousEnabled = " ).append( isPreviousEnabled() );
+        textBuffer.append( " isFinishEnabled = " ).append( isFinishEnabled() );
+        textBuffer.append( "]" );
 
         return textBuffer.toString();
     }

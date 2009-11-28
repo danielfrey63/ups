@@ -19,16 +19,18 @@ package ch.jfactory.file;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
-/** Filter to show folders and files with one of the extentions given. */
+/**
+ * Filter to show folders and files with one of the extentions given.
+ */
 public class ExtentionFileFilter extends FileFilter implements java.io.FileFilter
 {
-    private String[] extentions;
+    private final String[] extentions;
 
-    private String description;
+    private final String description;
 
-    private boolean showDirectories;
+    private final boolean showDirectories;
 
-    public ExtentionFileFilter(final String description, final String[] extentions, final boolean showDirectories)
+    public ExtentionFileFilter( final String description, final String[] extentions, final boolean showDirectories )
     {
         this.description = description;
         this.extentions = extentions;
@@ -51,14 +53,14 @@ public class ExtentionFileFilter extends FileFilter implements java.io.FileFilte
      * @param file the file to decide whether it should be accepted.
      * @return whether accept or not
      */
-    public boolean accept(final File file)
+    public boolean accept( final File file )
     {
         boolean result = false;
-        for (String extention : extentions)
+        for ( final String extention : extentions )
         {
-            result |= file.getName().endsWith(extention);
+            result |= file.getName().endsWith( extention );
         }
-        return (showDirectories && file.isDirectory()) || result;
+        return ( showDirectories && file.isDirectory() ) || result;
     }
 
     public String[] getExtentions()

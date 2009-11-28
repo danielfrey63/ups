@@ -16,7 +16,6 @@ package ch.jfactory.math;
  */
 public class LevensteinDistance
 {
-
     /**
      * Returns the evaluation result for the comparison of the two strings under the given
      * <code>LevensteinLevel</code>.
@@ -26,7 +25,7 @@ public class LevensteinDistance
      * @param level LevensteinLevel at whitch evaluation takes place
      * @return EvaluationResult
      */
-    public static int getDistance(final String str1, final String str2, final LevensteinLevel level)
+    public static int getDistance( final String str1, final String str2, final LevensteinLevel level )
     {
         int i;
         int j;
@@ -34,32 +33,32 @@ public class LevensteinDistance
         final int len2;
         len1 = str1.length();
         len2 = str2.length();
-        final int arrSize = Math.max(len1, len2) + 1;
+        final int arrSize = Math.max( len1, len2 ) + 1;
         final int[][] distance = new int[arrSize][arrSize];
         distance[0][0] = 0;
-        for (j = 1; j < arrSize; j++)
+        for ( j = 1; j < arrSize; j++ )
         {
             distance[0][j] = distance[0][j - 1] + level.getAdditionCost();
         }
-        for (j = 1; j < arrSize; j++)
+        for ( j = 1; j < arrSize; j++ )
         {
             distance[j][0] = distance[j - 1][0] + level.getDeletionCost();
         }
-        for (i = 1; i <= len1; i++)
+        for ( i = 1; i <= len1; i++ )
         {
-            for (j = 1; j <= len2; j++)
+            for ( j = 1; j <= len2; j++ )
             {
-                distance[i][j] = smallestOf(distance[i - 1][j - 1] +
-                        ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : level.getChangeCost()),
-                        distance[i][j - 1] + level.getAdditionCost(), distance[i - 1][j] + level.getDeletionCost());
+                distance[i][j] = smallestOf( distance[i - 1][j - 1] +
+                        ( ( str1.charAt( i - 1 ) == str2.charAt( j - 1 ) ) ? 0 : level.getChangeCost() ),
+                        distance[i][j - 1] + level.getAdditionCost(), distance[i - 1][j] + level.getDeletionCost() );
             }
         }
         return distance[len1][len2];
     }
 
-    private static int smallestOf(final int x, final int y, final int z)
+    private static int smallestOf( final int x, final int y, final int z )
     {
-        return ((x < y) ? Math.min(x, z) : Math.min(y, z));
+        return ( ( x < y ) ? Math.min( x, z ) : Math.min( y, z ) );
     }
 }
 

@@ -34,7 +34,7 @@ public interface FileParser
      * @param fileLines a List of lines
      * @return an array of FileLine objects
      */
-    FileLine[] initText(List fileLines);
+    FileLine[] initText( List fileLines );
 
     /**
      * Returns the Formatter objects used for string formatting. May be called in some implementations after {@link
@@ -43,5 +43,5 @@ public interface FileParser
      * @param g the graphics
      * @return an array of Formatter objects
      */
-    Formatter[] getFormatters(Graphics g);
+    Formatter[] getFormatters( Graphics g );
 }

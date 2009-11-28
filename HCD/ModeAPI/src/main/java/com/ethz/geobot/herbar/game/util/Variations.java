@@ -16,12 +16,15 @@ import java.util.Vector;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:06 $
  */
-public class Variations {
-
-    public static int factorial(int n) {
+public class Variations
+{
+    public static int factorial( final int n )
+    {
         int ret = 1;
-        if (n > 1) {
-            for (int i = 1; i <= n; i++) {
+        if ( n > 1 )
+        {
+            for ( int i = 1; i <= n; i++ )
+            {
                 ret *= i;
             }
         }
@@ -37,11 +40,12 @@ public class Variations {
      * @param array the array to get the subsets (k-tuples) from
      * @return a Vector containing all the variations
      */
-    public static Vector subsets(Vector array, int k) {
+    public static Vector subsets( final Vector array, final int k )
+    {
         // the Vector to store the results in
-        Vector results = new Vector();
+        final Vector results = new Vector();
         // initiate recursive call
-        calcVariation(results, new Vector(), array, k);
+        calcVariation( results, new Vector(), array, k );
         return results;
     }
 
@@ -54,25 +58,30 @@ public class Variations {
      * @param k       the tuple size
      * @param results the Vector that is filled with each new subset
      */
-    private static void calcVariation(Vector results, Vector prefix, Vector array, int k) {
-        for (int i = 0; i < array.size() - k + 1; i++) {
-            if (k > 1) {
+    private static void calcVariation( final Vector results, final Vector prefix, final Vector array, final int k )
+    {
+        for ( int i = 0; i < array.size() - k + 1; i++ )
+        {
+            if ( k > 1 )
+            {
                 // it is important to make new Vector objects as subsequent loops
                 // would not have the same prerequisites otherwise.
-                Vector newbase = new Vector(prefix);
-                Vector newobjs = new Vector(array);
+                final Vector newbase = new Vector( prefix );
+                final Vector newobjs = new Vector( array );
                 // need to remove the first i elements of the new object array
-                for (int j = 0; j < i; j++) {
-                    newobjs.remove(0);
+                for ( int j = 0; j < i; j++ )
+                {
+                    newobjs.remove( 0 );
                 }
                 // finally add the new prefix to the existing one
-                newbase.add(newobjs.remove(0));
-                calcVariation(results, newbase, newobjs, k - 1);
+                newbase.add( newobjs.remove( 0 ) );
+                calcVariation( results, newbase, newobjs, k - 1 );
             }
-            else {
-                Vector chunk = new Vector(prefix);
-                chunk.add(array.get(i));
-                results.add(chunk);
+            else
+            {
+                final Vector chunk = new Vector( prefix );
+                chunk.add( array.get( i ) );
+                results.add( chunk );
             }
         }
     }

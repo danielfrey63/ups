@@ -82,7 +82,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * <Comments here>
@@ -90,327 +90,384 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:14 $
  */
-public class ExamPanel extends ModeActivationPanel implements TaxFocusListener {
+public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
+{
+    private static final Logger LOG;
 
-    private static final Category CAT;
     /**
      * Identifier for card layout
      */
     private static final String INTRO = "INTRO";
+
     /**
      * Identifier for card layout
      */
     private static final String EXAM = "EXAM";
+
     /**
      * Identifier for card layout
      */
     private static final String RESULT = "RESULT";
+
     private static final int SIZE = 10;
 
-    private CardLayout cards;
-    private ExamStateModel examStateModel;
-    private HerbarGUIManager guiManager;
-    private HerbarModel herbarModel;
-    private JButton restartButton;
-    private JButton startButton;
-    private JButton stopButton;
-    private JPanel resultPanel;
-    private Level familyLevel;
-    private Level speciesLevel;
-    private PicturePanel picturePanel;
-    private PropertyInterrogator asker;
-    private ResultModel resultModel;
-    private StatusBar statusBar;
-    private StopExamAction stopAction;
-    private TaxonNameInterrogator familyInterrogator;
-    private TaxonNameInterrogator speciesInterrogator;
-    private TaxonNameInterrogator.MemorizingInterrogatorModel familyInterrogatorModel;
-    private TaxonNameInterrogator.MemorizingInterrogatorModel speciesInterrogatorModel;
-    private TimerPanel timer;
-    private boolean finished;
-    private boolean started;
-    private int minutes;
-    private InterrogatorComplexityFactory.Type filter1;
-    private InterrogatorComplexityFactory.Type filter2;
-    private InterrogatorComplexityFactory.Type filter3;
-    private IteratorControlPanel navigator;
-    private HerbarContext herbarContext;
+    private final CardLayout cards;
 
-    public ExamPanel(ExamMode mode) {
-        try {
+    private final ExamStateModel examStateModel;
+
+    private final HerbarGUIManager guiManager;
+
+    private final HerbarModel herbarModel;
+
+    private JButton restartButton;
+
+    private JButton startButton;
+
+    private JButton stopButton;
+
+    private JPanel resultPanel;
+
+    private Level familyLevel;
+
+    private Level speciesLevel;
+
+    private PicturePanel picturePanel;
+
+    private PropertyInterrogator asker;
+
+    private ResultModel resultModel;
+
+    private final StatusBar statusBar;
+
+    private StopExamAction stopAction;
+
+    private TaxonNameInterrogator familyInterrogator;
+
+    private TaxonNameInterrogator speciesInterrogator;
+
+    private TaxonNameInterrogator.MemorizingInterrogatorModel familyInterrogatorModel;
+
+    private TaxonNameInterrogator.MemorizingInterrogatorModel speciesInterrogatorModel;
+
+    private final TimerPanel timer;
+
+    private boolean finished;
+
+    private boolean started;
+
+    private final int minutes;
+
+    private InterrogatorComplexityFactory.Type filter1;
+
+    private InterrogatorComplexityFactory.Type filter2;
+
+    private InterrogatorComplexityFactory.Type filter3;
+
+    private IteratorControlPanel navigator;
+
+    private final HerbarContext herbarContext;
+
+    public ExamPanel( final ExamMode mode )
+    {
+        try
+        {
             // Init model
             herbarContext = mode.getHerbarContext();
             guiManager = herbarContext.getHerbarGUIManager();
             herbarModel = herbarContext.getDataModel();
             statusBar = guiManager.getStatusBar();
-            examStateModel = new ExamStateModel(herbarModel, SIZE);
-            examStateModel.addTaxFocusListener(this);
+            examStateModel = new ExamStateModel( herbarModel, SIZE );
+            examStateModel.addTaxFocusListener( this );
 
-            minutes = Integer.parseInt(Strings.getString(ExamMode.class, "EXAM.DURATION"));
+            minutes = Integer.parseInt( Strings.getString( ExamMode.class, "EXAM.DURATION" ) );
 
             // Init layout
-            cards = new CardLayout(0, 0);
-            setLayout(cards);
+            cards = new CardLayout( 0, 0 );
+            setLayout( cards );
 
             timer = createTimer();
 
-            add(createIntroPanel(), INTRO);
-            add(createExamPanel(), EXAM);
-            add(createStatisticsPanel(), RESULT);
+            add( createIntroPanel(), INTRO );
+            add( createExamPanel(), EXAM );
+            add( createStatisticsPanel(), RESULT );
 
-            statusBar.setText("Prüfung bereit");
+            statusBar.setText( "Prüfung bereit" );
         }
-        catch (RuntimeException e) {
-            CAT.fatal("RuntimeException in ExamPanel constructor", e);
+        catch ( RuntimeException e )
+        {
+            LOG.fatal( "RuntimeException in ExamPanel constructor", e );
             throw e;
         }
-        catch (Error e) {
-            CAT.error("Error in ExamPanel constructor", e);
+        catch ( Error e )
+        {
+            LOG.error( "Error in ExamPanel constructor", e );
             throw e;
         }
     }
 
-    public void activate() {
+    public void activate()
+    {
         super.activate();
-        statusBar.addStatusComponent(timer);
+        statusBar.addStatusComponent( timer );
         startIntro();
-        getRootPane().setDefaultButton(startButton);
+        getRootPane().setDefaultButton( startButton );
     }
 
-    public void deactivate() {
+    public void deactivate()
+    {
         super.deactivate();
-        statusBar.removeStatusComponent(timer);
+        statusBar.removeStatusComponent( timer );
     }
 
-    public boolean queryDeactivate() {
+    public boolean queryDeactivate()
+    {
         return !started || finishExam();
     }
 
-    private void startIntro() {
+    private void startIntro()
+    {
         timer.resetTime();
-        cards.show(this, INTRO);
+        cards.show( this, INTRO );
         finished = false;
-        getRootPane().setDefaultButton(startButton);
+        getRootPane().setDefaultButton( startButton );
     }
 
-    private void startExam() {
+    private void startExam()
+    {
         speciesInterrogatorModel.reset();
         familyInterrogatorModel.reset();
         navigator.reset();
-        examStateModel.reset(SIZE);
+        examStateModel.reset( SIZE );
         finished = false;
         resultModel.reset();
-        Taxon focus = examStateModel.getCurrentTaxon();
-        taxFocusChanged(null, focus);
-        cards.show(this, EXAM);
-        statusBar.addStatusComponent(navigator.getDisplay(), 1);
+        final Taxon focus = examStateModel.getCurrentTaxon();
+        taxFocusChanged( null, focus );
+        cards.show( this, EXAM );
+        statusBar.addStatusComponent( navigator.getDisplay(), 1 );
         started = true;
         timer.resetTime();
         timer.start();
     }
 
-    private boolean finishExam() {
+    private boolean finishExam()
+    {
         // Ask for finishing
-        if (finished || !started) {
+        if ( finished || !started )
+        {
             return finished;
         }
-        String question = Strings.getString(ExamMode.class, "EXAM_CLOSE.QUESTION");
-        String title = Strings.getString(ExamMode.class, "EXAM_CLOSE.TITLE");
-        int ret = Dialogs.showQuestionMessageOk(this, title, question);
-        if (ret == Dialogs.CANCEL) {
+        final String question = Strings.getString( ExamMode.class, "EXAM_CLOSE.QUESTION" );
+        final String title = Strings.getString( ExamMode.class, "EXAM_CLOSE.TITLE" );
+        final int ret = Dialogs.showQuestionMessageOk( this, title, question );
+        if ( ret == Dialogs.CANCEL )
+        {
             return finished;
         }
         return stopExam();
     }
 
-    private boolean stopExam() {
+    private boolean stopExam()
+    {
         // Calculate result
         resultPanel.removeAll();
         fillStatistics();
 
         // Stop and display result
-        examStateModel.reset(SIZE);
+        examStateModel.reset( SIZE );
 
         timer.stop();
-        statusBar.setText(Strings.getString(ExamMode.class, "BUTTON.STOP.TEXT"));
-        statusBar.removeStatusComponent(navigator.getDisplay());
-        cards.show(this, RESULT);
+        statusBar.setText( Strings.getString( ExamMode.class, "BUTTON.STOP.TEXT" ) );
+        statusBar.removeStatusComponent( navigator.getDisplay() );
+        cards.show( this, RESULT );
 
         finished = true;
         started = false;
 
-        getRootPane().setDefaultButton(restartButton);
+        getRootPane().setDefaultButton( restartButton );
 
         return finished;
     }
 
     //==== Intro
-    private JPanel createIntroPanel() {
+    private JPanel createIntroPanel()
+    {
         // start button
-        startButton = new JButton(Strings.getString(ExamMode.class, "EXAM.START.TEXT"));
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        startButton = new JButton( Strings.getString( ExamMode.class, "EXAM.START.TEXT" ) );
+        startButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
                 startExam();
             }
-        });
+        } );
 
-        JPanel startButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 15));
-        startButtonPanel.add(startButton);
+        final JPanel startButtonPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 0, 15 ) );
+        startButtonPanel.add( startButton );
 
-        JPanel introPanel = new JPanel(new GridLayout(2, 1));
-        introPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
-        introPanel.add(createReadOnlyHTMLField(Strings.getString(ExamMode.class, "INTRO.TEXT")));
-        introPanel.add(startButtonPanel, BorderLayout.CENTER);
+        final JPanel introPanel = new JPanel( new GridLayout( 2, 1 ) );
+        introPanel.setBorder( new EmptyBorder( 15, 15, 15, 15 ) );
+        introPanel.add( createReadOnlyHTMLField( Strings.getString( ExamMode.class, "INTRO.TEXT" ) ) );
+        introPanel.add( startButtonPanel, BorderLayout.CENTER );
 
         return introPanel;
     }
 
-    private TimerPanel createTimer() {
-        TimerPanel timer = new TimerPanel(60 * minutes, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String question = Strings.getString(ExamMode.class, "EXAM_STOP.QUESTION");
-                String title = Strings.getString(ExamMode.class, "EXAM_STOP.TITLE");
-                String[] buttons = new String[]{Strings.getString("OK.TEXT")};
-                JFrame frame = guiManager.getParentFrame();
-                int m = JOptionPane.QUESTION_MESSAGE;
-                JOptionPane.showOptionDialog(frame, question, title, 0, m, null, buttons, buttons[ 0 ]);
+    private TimerPanel createTimer()
+    {
+        final TimerPanel timer = new TimerPanel( 60 * minutes, new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                final String question = Strings.getString( ExamMode.class, "EXAM_STOP.QUESTION" );
+                final String title = Strings.getString( ExamMode.class, "EXAM_STOP.TITLE" );
+                final String[] buttons = new String[]{Strings.getString( "OK.TEXT" )};
+                final JFrame frame = guiManager.getParentFrame();
+                final int m = JOptionPane.QUESTION_MESSAGE;
+                JOptionPane.showOptionDialog( frame, question, title, 0, m, null, buttons, buttons[0] );
                 stopExam();
             }
-        });
-        Dimension prefSize = timer.getPreferredSize();
-        timer.setPreferredSize(new Dimension((int) (prefSize.width * 1.5), prefSize.height));
+        } );
+        final Dimension prefSize = timer.getPreferredSize();
+        timer.setPreferredSize( new Dimension( (int) ( prefSize.width * 1.5 ), prefSize.height ) );
         return timer;
     }
 
-    private JPanel createReadOnlyHTMLField(String text) {
-        JTextPane field = new JTextPane();
-        field.setBackground(getBackground());
-        field.setEnabled(false);
-        field.setContentType("text/html");
-        field.setText(text);
-        SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setFontSize(attributes, HerbarTheme.FONTSIZE);
-        StyleConstants.setFontFamily(attributes, HerbarTheme.FONTFACE);
-        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_CENTER);
-        StyledDocument doc = field.getStyledDocument();
-        doc.setParagraphAttributes(0, doc.getLength(), attributes, false);
+    private JPanel createReadOnlyHTMLField( final String text )
+    {
+        final JTextPane field = new JTextPane();
+        field.setBackground( getBackground() );
+        field.setEnabled( false );
+        field.setContentType( "text/html" );
+        field.setText( text );
+        final SimpleAttributeSet attributes = new SimpleAttributeSet();
+        StyleConstants.setFontSize( attributes, HerbarTheme.FONTSIZE );
+        StyleConstants.setFontFamily( attributes, HerbarTheme.FONTFACE );
+        StyleConstants.setAlignment( attributes, StyleConstants.ALIGN_CENTER );
+        final StyledDocument doc = field.getStyledDocument();
+        doc.setParagraphAttributes( 0, doc.getLength(), attributes, false );
 
-        JPanel panel = new JPanel(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(field);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        panel.add(scrollPane, BorderLayout.CENTER);
+        final JPanel panel = new JPanel( new BorderLayout() );
+        final JScrollPane scrollPane = new JScrollPane( field );
+        scrollPane.setBorder( BorderFactory.createEmptyBorder() );
+        panel.add( scrollPane, BorderLayout.CENTER );
         return panel;
     }
 
     //==== Exam
-    private JPanel createExamPanel() {
-        picturePanel = new PicturePanel(herbarModel, herbarModel.getPictureTheme("Herbar"), false);
+    private JPanel createExamPanel()
+    {
+        picturePanel = new PicturePanel( herbarModel, herbarModel.getPictureTheme( "Herbar" ), false );
 
         initFilter();
 
-        ResultModel resultModel = createResultModel();
-        asker = new PropertyInterrogator(herbarContext, resultModel);
+        final ResultModel resultModel = createResultModel();
+        asker = new PropertyInterrogator( herbarContext, resultModel );
 
-        JPanel toolBar = new JPanel(new BorderLayout());
-        toolBar.add(createTopToolbar(), BorderLayout.NORTH);
-        toolBar.add(createInterrogatorToolbar(), BorderLayout.CENTER);
+        final JPanel toolBar = new JPanel( new BorderLayout() );
+        toolBar.add( createTopToolbar(), BorderLayout.NORTH );
+        toolBar.add( createInterrogatorToolbar(), BorderLayout.CENTER );
 
         // Lower main part
-        JSplitPane mainSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        mainSplit.setTopComponent(picturePanel);
-        mainSplit.setBottomComponent(asker);
-        mainSplit.setResizeWeight(1.0);
+        final JSplitPane mainSplit = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
+        mainSplit.setTopComponent( picturePanel );
+        mainSplit.setBottomComponent( asker );
+        mainSplit.setResizeWeight( 1.0 );
 
-        JPanel examPanel = new JPanel(new BorderLayout());
-        examPanel.add(toolBar, BorderLayout.NORTH);
-        examPanel.add(mainSplit, BorderLayout.CENTER);
+        final JPanel examPanel = new JPanel( new BorderLayout() );
+        examPanel.add( toolBar, BorderLayout.NORTH );
+        examPanel.add( mainSplit, BorderLayout.CENTER );
 
         return examPanel;
     }
 
-    private JPanel createInterrogatorToolbar() {
+    private JPanel createInterrogatorToolbar()
+    {
         speciesLevel = herbarModel.getLastLevel();
         speciesInterrogatorModel = new TaxonNameInterrogator.MemorizingInterrogatorModel();
-        speciesInterrogator = new TaxonNameInterrogator(speciesLevel, speciesInterrogatorModel);
-        speciesInterrogator.setBackground(HerbarTheme.getBackground2());
-        speciesInterrogator.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, Constants.GAP_BETWEEN_REGIONS));
+        speciesInterrogator = new TaxonNameInterrogator( speciesLevel, speciesInterrogatorModel );
+        speciesInterrogator.setBackground( HerbarTheme.getBackground2() );
+        speciesInterrogator.setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, Constants.GAP_BETWEEN_REGIONS ) );
 
-        familyLevel = herbarModel.getLevel("Familie");
+        familyLevel = herbarModel.getLevel( "Familie" );
         familyInterrogatorModel = new TaxonNameInterrogator.MemorizingInterrogatorModel();
-        familyInterrogator = new TaxonNameInterrogator(familyLevel, familyInterrogatorModel);
-        familyInterrogator.setBackground(HerbarTheme.getBackground2());
+        familyInterrogator = new TaxonNameInterrogator( familyLevel, familyInterrogatorModel );
+        familyInterrogator.setBackground( HerbarTheme.getBackground2() );
 
-        JPanel secondToolBar = new JPanel(new GridLayout(1, 2));
-        int gap = Constants.GAP_BETWEEN_GROUP;
-        secondToolBar.setBorder(new CompoundBorder(new ThinBevelBorder(BevelDirection.RAISED),
-                new EmptyBorder(gap, gap, gap, gap)));
-        secondToolBar.setBackground(HerbarTheme.getBackground2());
-        secondToolBar.add(speciesInterrogator);
-        secondToolBar.add(familyInterrogator);
+        final JPanel secondToolBar = new JPanel( new GridLayout( 1, 2 ) );
+        final int gap = Constants.GAP_BETWEEN_GROUP;
+        secondToolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ),
+                new EmptyBorder( gap, gap, gap, gap ) ) );
+        secondToolBar.setBackground( HerbarTheme.getBackground2() );
+        secondToolBar.add( speciesInterrogator );
+        secondToolBar.add( familyInterrogator );
         return secondToolBar;
     }
 
-    private JToolBar createTopToolbar() {
+    private JToolBar createTopToolbar()
+    {
         stopAction = new StopExamAction();
         stopButton = new JButton();
-        stopButton.setAction(stopAction);
-        stopButton.setToolTipText(Strings.getString(ExamMode.class, "EXAM.BUTTON.STOPP.HINT"));
-        stopButton.setFocusPainted(false);
-        String prefix = Strings.getString(ExamMode.class, "BUTTON.NAVIGATION.PREFIX");
-        navigator = new IteratorControlPanel(prefix);
-        navigator.setCursor(examStateModel);
-        JToolBar topToolBar = new JToolBar();
-        topToolBar.setFloatable(false);
-        topToolBar.setRollover(true);
-        topToolBar.add(stopButton);
-        topToolBar.add(ComponentFactory.createSeparator());
-        topToolBar.add(navigator.getPrevButton());
-        topToolBar.add(navigator.getNextButton());
-        topToolBar.setBorder(new ThinBevelBorder(BevelDirection.RAISED));
+        stopButton.setAction( stopAction );
+        stopButton.setToolTipText( Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.HINT" ) );
+        stopButton.setFocusPainted( false );
+        final String prefix = Strings.getString( ExamMode.class, "BUTTON.NAVIGATION.PREFIX" );
+        navigator = new IteratorControlPanel( prefix );
+        navigator.setCursor( examStateModel );
+        final JToolBar topToolBar = new JToolBar();
+        topToolBar.setFloatable( false );
+        topToolBar.setRollover( true );
+        topToolBar.add( stopButton );
+        topToolBar.add( ComponentFactory.createSeparator() );
+        topToolBar.add( navigator.getPrevButton() );
+        topToolBar.add( navigator.getNextButton() );
+        topToolBar.setBorder( new ThinBevelBorder( BevelDirection.RAISED ) );
         return topToolBar;
     }
 
-    private ResultModel createResultModel() {
-        resultModel = new DefaultResultModel(herbarModel);
+    private ResultModel createResultModel()
+    {
+        resultModel = new DefaultResultModel( herbarModel );
         MemorizingDetailResultModel detailModel;
 
-        detailModel = new MemorizingDetailResultModel(MorText.class, MorAttribute.class, herbarModel);
-        detailModel.add(filter1);
-        detailModel.add(filter2);
-        detailModel.add(filter3);
-        resultModel.add(detailModel);
+        detailModel = new MemorizingDetailResultModel( MorText.class, MorAttribute.class, herbarModel );
+        detailModel.add( filter1 );
+        detailModel.add( filter2 );
+        detailModel.add( filter3 );
+        resultModel.add( detailModel );
 
-        detailModel = new MemorizingDetailResultModel(EcoText.class, EcoAttribute.class, herbarModel);
-        detailModel.add(InterrogatorComplexityFactory.getFilter(herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(new Class[]{EcoSubject.class, EcoAttribute.class, EcoValue.class, EcoText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}})));
-        resultModel.add(detailModel);
+        detailModel = new MemorizingDetailResultModel( EcoText.class, EcoAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{EcoSubject.class, EcoAttribute.class, EcoValue.class, EcoText.class},
+                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        resultModel.add( detailModel );
 
-        detailModel = new MemorizingDetailResultModel(MedText.class, MedAttribute.class, herbarModel);
-        detailModel.add(InterrogatorComplexityFactory.getFilter(herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(new Class[]{MedSubject.class, MedAttribute.class, MedValue.class, MedText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}})));
-        resultModel.add(detailModel);
+        detailModel = new MemorizingDetailResultModel( MedText.class, MedAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{MedSubject.class, MedAttribute.class, MedValue.class, MedText.class},
+                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        resultModel.add( detailModel );
         return resultModel;
     }
 
-    private void initFilter() {
-        filter1 = InterrogatorComplexityFactory.getFilter(herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(new Class[]{MorSubject.class, MorAttribute.class, MorValue.class, MorText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}}));
-        filter2 = InterrogatorComplexityFactory.getFilter(herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter(new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
+    private void initFilter()
+    {
+        filter1 = InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{MorSubject.class, MorAttribute.class, MorValue.class, MorText.class},
+                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) );
+        filter2 = InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
                 MorAttribute.class, MorValue.class, MorText.class},
                 new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}}));
-        filter3 = InterrogatorComplexityFactory.getFilter(herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter(new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
+                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) );
+        filter3 = InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
                 MorAttribute.class, MorValue.class, MorText.class},
                 new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}}));
+                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) );
     }
 
     //==== Statistics
-    private JPanel createStatisticsPanel() {
-        JPanel statisticsPanel = new JPanel(new GridLayout(3, 1));
-        statisticsPanel.add(createLegendPanel());
-        statisticsPanel.add(createResultPanel());
-        statisticsPanel.add(createRestartPanel());
+    private JPanel createStatisticsPanel()
+    {
+        final JPanel statisticsPanel = new JPanel( new GridLayout( 3, 1 ) );
+        statisticsPanel.add( createLegendPanel() );
+        statisticsPanel.add( createResultPanel() );
+        statisticsPanel.add( createRestartPanel() );
 
         return statisticsPanel;
     }
@@ -420,63 +477,73 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener {
      *
      * @return panel containing intro at the top and the result in the center
      */
-    private JPanel createLegendPanel() {
-        return createReadOnlyHTMLField(Strings.getString(ExamMode.class, "STATS.LEGEND.TEXT"));
+    private JPanel createLegendPanel()
+    {
+        return createReadOnlyHTMLField( Strings.getString( ExamMode.class, "STATS.LEGEND.TEXT" ) );
     }
 
-    private JPanel createResultPanel() {
+    private JPanel createResultPanel()
+    {
         // init result panel
-        CompoundBorder border = new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED), new EmptyBorder(6, 6, 6, 6));
-        resultPanel = new JPanel(new GridBagLayout());
-        resultPanel.setBorder(border);
+        final CompoundBorder border = new CompoundBorder( new EtchedBorder( EtchedBorder.LOWERED ), new EmptyBorder( 6, 6, 6, 6 ) );
+        resultPanel = new JPanel( new GridBagLayout() );
+        resultPanel.setBorder( border );
 
-        JPanel resultFloater = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        resultFloater.add(new JScrollPane(resultPanel));
+        final JPanel resultFloater = new JPanel( new FlowLayout( FlowLayout.CENTER ) );
+        resultFloater.add( new JScrollPane( resultPanel ) );
         return resultFloater;
     }
 
-    private JPanel createRestartPanel() {
-        JPanel restartPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        restartButton = new JButton(Strings.getString(ExamMode.class, "BUTTON.RESTART.TEXT"));
-        restartButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+    private JPanel createRestartPanel()
+    {
+        final JPanel restartPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 5, 5 ) );
+        restartButton = new JButton( Strings.getString( ExamMode.class, "BUTTON.RESTART.TEXT" ) );
+        restartButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
                 startExam();
             }
-        });
-        restartPanel.add(restartButton);
+        } );
+        restartPanel.add( restartButton );
         return restartPanel;
     }
 
-    private void fillStatistics() {
+    private void fillStatistics()
+    {
         int y = -1;
 
-        placeLabel(Strings.getString(ExamMode.class, "STATS.COUNT.PART.TEXT", speciesLevel.toString()), 0, ++y);
-        placeStatisticsValue(getCorrectTaxonAbundance(speciesInterrogatorModel), 1, y);
-        placeStatisticsValue(getCorrectTaxonAccuracy(speciesInterrogatorModel), 2, y);
+        placeLabel( Strings.getString( ExamMode.class, "STATS.COUNT.PART.TEXT", speciesLevel.toString() ), 0, ++y );
+        placeStatisticsValue( getCorrectTaxonAbundance( speciesInterrogatorModel ), 1, y );
+        placeStatisticsValue( getCorrectTaxonAccuracy( speciesInterrogatorModel ), 2, y );
 
-        placeLabel(Strings.getString(ExamMode.class, "STATS.COUNT.PART.TEXT", familyLevel.toString()), 0, ++y);
-        placeStatisticsValue(getCorrectTaxonAbundance(familyInterrogatorModel), 1, y);
-        placeStatisticsValue(getCorrectTaxonAccuracy(familyInterrogatorModel), 2, y);
+        placeLabel( Strings.getString( ExamMode.class, "STATS.COUNT.PART.TEXT", familyLevel.toString() ), 0, ++y );
+        placeStatisticsValue( getCorrectTaxonAbundance( familyInterrogatorModel ), 1, y );
+        placeStatisticsValue( getCorrectTaxonAccuracy( familyInterrogatorModel ), 2, y );
 
-        for (int i = 0; i < asker.getTabCount(); i++) {
-            PropertyInterrogatorPanel panel = (PropertyInterrogatorPanel) asker.getComponentAt(i);
-            MemorizingDetailResultModel detailResultModel = (MemorizingDetailResultModel) panel.getResultModel();
-            String name = asker.getTitleAt(i);
+        for ( int i = 0; i < asker.getTabCount(); i++ )
+        {
+            final PropertyInterrogatorPanel panel = (PropertyInterrogatorPanel) asker.getComponentAt( i );
+            final MemorizingDetailResultModel detailResultModel = (MemorizingDetailResultModel) panel.getResultModel();
+            final String name = asker.getTitleAt( i );
 
-            placeLabel(Strings.getString(ExamMode.class, "STATS.COUNT.PART.TEXT", name), 0, ++y);
-            placeStatisticsValue(getCorrectAttributeAbundance(detailResultModel), 1, y);
-            placeStatisticsValue(getCorrectAttributeAccuracy(detailResultModel), 2, y);
+            placeLabel( Strings.getString( ExamMode.class, "STATS.COUNT.PART.TEXT", name ), 0, ++y );
+            placeStatisticsValue( getCorrectAttributeAbundance( detailResultModel ), 1, y );
+            placeStatisticsValue( getCorrectAttributeAccuracy( detailResultModel ), 2, y );
         }
     }
 
-    private float getCorrectAttributeAbundance(MemorizingDetailResultModel model) {
+    private float getCorrectAttributeAbundance( final MemorizingDetailResultModel model )
+    {
         float iComplete = 0;
         int iTaxa = 0;
-        Iterator iter = examStateModel.getIterator();
-        while (iter.hasNext()) {
-            Taxon taxon = (Taxon) iter.next();
-            model.setTaxFocus(taxon);
-            if (model.isComplete()) {
+        final Iterator iter = examStateModel.getIterator();
+        while ( iter.hasNext() )
+        {
+            final Taxon taxon = (Taxon) iter.next();
+            model.setTaxFocus( taxon );
+            if ( model.isComplete() )
+            {
                 iComplete++;
             }
             iTaxa++;
@@ -484,19 +551,21 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener {
         return iComplete / iTaxa;
     }
 
-    private float getCorrectAttributeAccuracy(MemorizingDetailResultModel model) {
+    private float getCorrectAttributeAccuracy( final MemorizingDetailResultModel model )
+    {
         float iGuesses = 0;
         int iCorrect = 0;
-        Iterator iter = examStateModel.getIterator();
-        while (iter.hasNext()) {
-            Taxon taxon = (Taxon) iter.next();
-            model.setTaxFocus(taxon);
-            GraphNodeList guesses = model.getGuesses();
-            GraphNodeList answers = model.getAnswers();
+        final Iterator iter = examStateModel.getIterator();
+        while ( iter.hasNext() )
+        {
+            final Taxon taxon = (Taxon) iter.next();
+            model.setTaxFocus( taxon );
+            final GraphNodeList guesses = model.getGuesses();
+            final GraphNodeList answers = model.getAnswers();
             iGuesses += guesses.size();
-            iCorrect += ch.jfactory.lang.ArrayUtils.intersect(guesses.getAll(), answers.getAll()).length;
+            iCorrect += ch.jfactory.lang.ArrayUtils.intersect( guesses.getAll(), answers.getAll() ).length;
         }
-        return (iGuesses == 0 ? 0 : iCorrect / iGuesses);
+        return ( iGuesses == 0 ? 0 : iCorrect / iGuesses );
     }
 
     /**
@@ -505,13 +574,16 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener {
      * @param model The model to be investigated
      * @return float betweenn 0.0 (0%) and 1.0 (100%)
      */
-    private float getCorrectTaxonAbundance(TaxonNameInterrogator.MemorizingInterrogatorModel model) {
+    private float getCorrectTaxonAbundance( final TaxonNameInterrogator.MemorizingInterrogatorModel model )
+    {
         float iTotal = 0;
-        Set taxa = model.getTaxa();
-        for (Iterator iterator = taxa.iterator(); iterator.hasNext();) {
-            Taxon taxon = (Taxon) iterator.next();
-            boolean isCorrect = model.getComplete(taxon).isTrue();
-            if (isCorrect) {
+        final Set taxa = model.getTaxa();
+        for ( final Object aTaxa : taxa )
+        {
+            final Taxon taxon = (Taxon) aTaxa;
+            final boolean isCorrect = model.getComplete( taxon ).isTrue();
+            if ( isCorrect )
+            {
                 iTotal++;
             }
         }
@@ -524,75 +596,88 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener {
      * @param model The model to be investigated
      * @return float betweenn 0.0 (0%) and 1.0 (100%)
      */
-    private float getCorrectTaxonAccuracy(TaxonNameInterrogator.MemorizingInterrogatorModel model) {
+    private float getCorrectTaxonAccuracy( final TaxonNameInterrogator.MemorizingInterrogatorModel model )
+    {
         int iTotal = 0;
         float iSuccessful = 0;
-        Set taxa = model.getTaxa();
-        for (Iterator iterator = taxa.iterator(); iterator.hasNext();) {
-            Taxon taxon = (Taxon) iterator.next();
-            List answers = model.getAnswers(taxon);
+        final Set taxa = model.getTaxa();
+        for ( final Object aTaxa : taxa )
+        {
+            final Taxon taxon = (Taxon) aTaxa;
+            final List answers = model.getAnswers( taxon );
             iTotal += answers.size();
-            boolean isCorrect = model.getComplete(taxon).isTrue();
-            if (isCorrect) {
+            final boolean isCorrect = model.getComplete( taxon ).isTrue();
+            if ( isCorrect )
+            {
                 iSuccessful++;
             }
         }
-        return (iTotal == 0 ? 0 : iSuccessful / iTotal);
+        return ( iTotal == 0 ? 0 : iSuccessful / iTotal );
     }
 
-    private void placeLabel(String text, int x, int y) {
-        JLabel label = new JLabel(text);
-        label.setHorizontalAlignment(SwingConstants.RIGHT);
-        addToResult(x, y, label);
+    private void placeLabel( final String text, final int x, final int y )
+    {
+        final JLabel label = new JLabel( text );
+        label.setHorizontalAlignment( SwingConstants.RIGHT );
+        addToResult( x, y, label );
     }
 
-    private void placeStatisticsValue(float lStatistic, int x, int y) {
-        NumberFormat format = NumberFormat.getPercentInstance();
-        JLabel label = new JLabel(format.format(lStatistic).toString());
-        label.setHorizontalAlignment(SwingConstants.RIGHT);
-        Border border = new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED), new EmptyBorder(3, 3, 3, 3));
-        label.setBorder(border);
-        label.setPreferredSize(new Dimension(80, label.getPreferredSize().height));
-        addToResult(x, y, label);
+    private void placeStatisticsValue( final float lStatistic, final int x, final int y )
+    {
+        final NumberFormat format = NumberFormat.getPercentInstance();
+        final JLabel label = new JLabel( format.format( lStatistic ).toString() );
+        label.setHorizontalAlignment( SwingConstants.RIGHT );
+        final Border border = new CompoundBorder( new EtchedBorder( EtchedBorder.LOWERED ), new EmptyBorder( 3, 3, 3, 3 ) );
+        label.setBorder( border );
+        label.setPreferredSize( new Dimension( 80, label.getPreferredSize().height ) );
+        addToResult( x, y, label );
     }
 
-    private void addToResult(int x, int y, JLabel label) {
-        GridBagConstraints gbc = new GridBagConstraints();
+    private void addToResult( final int x, final int y, final JLabel label )
+    {
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = x;
         gbc.gridy = y;
-        resultPanel.add(label, gbc);
+        resultPanel.add( label, gbc );
     }
 
-    public void taxFocusChanged(Taxon oldFocus, Taxon newFocus) {
-        picturePanel.setTaxon(newFocus);
-        speciesInterrogator.setTaxFocus(newFocus);
-        familyInterrogator.setTaxFocus(newFocus);
-        asker.setTaxFocus(newFocus);
+    public void taxFocusChanged( final Taxon oldFocus, final Taxon newFocus )
+    {
+        picturePanel.setTaxon( newFocus );
+        speciesInterrogator.setTaxFocus( newFocus );
+        familyInterrogator.setTaxFocus( newFocus );
+        asker.setTaxFocus( newFocus );
     }
 
-    static {
+    static
+    {
         LogUtils.init();
-        try {
-            Strings.addResourceBundle(ExamMode.class, ResourceBundle.getBundle(ExamPanel.class.getName()));
+        try
+        {
+            Strings.addResourceBundle( ExamMode.class, ResourceBundle.getBundle( ExamPanel.class.getName() ) );
         }
-        catch (Exception e) {
+        catch ( Exception e )
+        {
             e.printStackTrace();
         }
-        CAT = Category.getInstance(ExamPanel.class);
+        LOG = Logger.getLogger( ExamPanel.class );
     }
 
-    class StopExamAction extends AbstractAction {
+    class StopExamAction extends AbstractAction
+    {
+        private final String STOPP_TEXT = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.TEXT" );
 
-        private final String STOPP_TEXT = Strings.getString(ExamMode.class, "EXAM.BUTTON.STOPP.TEXT");
-        private final String STOPP_ICON = Strings.getString(ExamMode.class, "EXAM.BUTTON.STOPP.ICON");
+        private final String STOPP_ICON = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.ICON" );
 
-        public StopExamAction() {
-            putValue(AbstractAction.NAME, STOPP_TEXT);
-            putValue(AbstractAction.SMALL_ICON, ImageLocator.getIcon(STOPP_ICON));
+        public StopExamAction()
+        {
+            putValue( AbstractAction.NAME, STOPP_TEXT );
+            putValue( AbstractAction.SMALL_ICON, ImageLocator.getIcon( STOPP_ICON ) );
         }
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed( final ActionEvent e )
+        {
             finishExam();
         }
     }

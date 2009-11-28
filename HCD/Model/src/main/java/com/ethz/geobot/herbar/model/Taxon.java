@@ -11,13 +11,12 @@ package com.ethz.geobot.herbar.model;
 import ch.jfactory.model.graph.GraphNode;
 import com.ethz.geobot.herbar.model.relevance.AbsRelevance;
 
-
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface Taxon {
-
+public interface Taxon
+{
     /**
      * Returns the id of this Taxon object, which should be unique in the current applications data model.
      *
@@ -67,7 +66,7 @@ public interface Taxon {
      * @return the Taxon retrieved.
      * @throws IndexOutOfBoundsException thrown during an access of an invalid Taxon.
      */
-    public Taxon getChildTaxon(int index) throws IndexOutOfBoundsException;
+    public Taxon getChildTaxon( int index ) throws IndexOutOfBoundsException;
 
     /**
      * Gets an arry of MorValue objects associated, representing all inherited an directly assigned morphological traits
@@ -83,7 +82,7 @@ public interface Taxon {
      * @param index index of MorValue to retrieve.
      * @return the MorValue found.
      */
-    public MorValue getMorValue(int index);
+    public MorValue getMorValue( int index );
 
     public MorAttribute[] getMorAttributes();
 
@@ -171,7 +170,7 @@ public interface Taxon {
     /**
      * Returns the Relevance object for the given value.
      */
-    public AbsRelevance getRelevance(MorValue value);
+    public AbsRelevance getRelevance( MorValue value );
 
     /**
      * Gets the position of the Taxon indicated within the array of Taxons.
@@ -179,7 +178,7 @@ public interface Taxon {
      * @param child child to locate.
      * @return the position within the array of child Taxon objects.
      */
-    public int getChildTaxon(Taxon child);
+    public int getChildTaxon( Taxon child );
 
     /**
      * Returns all taxa on the specified level, which are direct children to this taxon.
@@ -187,7 +186,7 @@ public interface Taxon {
      * @param level the level to collect all Taxon objects from.
      * @return an array of Taxon objects.
      */
-    public Taxon[] getChildTaxa(Level level);
+    public Taxon[] getChildTaxa( Level level );
 
     /**
      * Returns all taxa on the specified level, including all children from this taxon.
@@ -195,7 +194,7 @@ public interface Taxon {
      * @param level the level to collect all Taxon objects from.
      * @return an array of Taxon objects.
      */
-    public Taxon[] getAllChildTaxa(Level level);
+    public Taxon[] getAllChildTaxa( Level level );
 
     /**
      * Returns true if the taxon is in the specified list, else false returns false if list is null
@@ -203,7 +202,7 @@ public interface Taxon {
      * @param list a array of Taxon-Objects to search
      * @return a boolean value
      */
-    public boolean isIn(Taxon[] list);
+    public boolean isIn( Taxon[] list );
 
     /**
      * Returns all Level objects from all Taxon objects belonging to this Taxon, including this Taxon objects level.
@@ -218,7 +217,7 @@ public interface Taxon {
      * @param theme the theme for which the pictures are requested.
      * @return an array of Picture objects.
      */
-    public CommentedPicture[] getCommentedPictures(PictureTheme theme);
+    public CommentedPicture[] getCommentedPictures( PictureTheme theme );
 
     /**
      * Returns the list of available PictureTheme objects for this Taxon.
@@ -247,7 +246,7 @@ public interface Taxon {
      *
      * @param right true, if the answer is correct
      */
-    public void setScore(boolean right);
+    public void setScore( boolean right );
 
     /**
      * Returns this Taxon objects as a GraphNode.

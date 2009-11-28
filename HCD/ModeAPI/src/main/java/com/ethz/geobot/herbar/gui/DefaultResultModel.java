@@ -8,30 +8,36 @@ import java.util.Enumeration;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class DefaultResultModel extends ResultModel {
+public class DefaultResultModel extends ResultModel
+{
+    private final HerbarModel model;
 
-    private HerbarModel model;
-
-    public DefaultResultModel(HerbarModel model) {
+    public DefaultResultModel( final HerbarModel model )
+    {
         this.model = model;
     }
 
-    public HerbarModel getModel() {
+    public HerbarModel getModel()
+    {
         return model;
     }
 
-    public void setTaxFocus(Taxon focus) {
-        Enumeration e = subStateModels();
-        while (e.hasMoreElements()) {
-            DetailResultModel detailResultModel = (DetailResultModel) e.nextElement();
-            detailResultModel.setTaxFocus(focus);
+    public void setTaxFocus( final Taxon focus )
+    {
+        final Enumeration e = subStateModels();
+        while ( e.hasMoreElements() )
+        {
+            final DetailResultModel detailResultModel = (DetailResultModel) e.nextElement();
+            detailResultModel.setTaxFocus( focus );
         }
     }
 
-    public void reset() {
-        Enumeration e = subStateModels();
-        while (e.hasMoreElements()) {
-            DetailResultModel detailResultModel = (DetailResultModel) e.nextElement();
+    public void reset()
+    {
+        final Enumeration e = subStateModels();
+        while ( e.hasMoreElements() )
+        {
+            final DetailResultModel detailResultModel = (DetailResultModel) e.nextElement();
             detailResultModel.reset();
         }
     }

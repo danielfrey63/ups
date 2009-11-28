@@ -8,7 +8,7 @@ package ch.jfactory.collection.cursor;
  */
 public class CursorChangeEvent
 {
-    public CursorChangeEvent(final Cursor cursor)
+    public CursorChangeEvent( final Cursor cursor )
     {
         this.cursor = cursor;
     }
@@ -33,5 +33,5 @@ public class CursorChangeEvent
         return cursor.getCurrent();
     }
 
-    private Cursor cursor;
+    private final Cursor cursor;
 }

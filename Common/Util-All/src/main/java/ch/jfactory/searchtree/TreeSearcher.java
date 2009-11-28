@@ -24,13 +24,13 @@ class TreeSearcher implements ITreeSearcher
 
     private String searchString;
 
-    private JTree tree;
+    private final JTree tree;
 
-    private boolean starting;
+    private final boolean starting;
 
-    private boolean ignoreCase;
+    private final boolean ignoreCase;
 
-    public TreeSearcher(final JTree tree, final boolean staring, final boolean ignoreCase)
+    public TreeSearcher( final JTree tree, final boolean staring, final boolean ignoreCase )
     {
         this.tree = tree;
         this.starting = staring;
@@ -39,31 +39,31 @@ class TreeSearcher implements ITreeSearcher
 
     class MyTreePath extends TreePath
     {
-        private MyTreePath(final TreePath p, final Object o)
+        private MyTreePath( final TreePath p, final Object o )
         {
-            super(p, o);
+            super( p, o );
         }
     }
 
     public TreePath next()
     {
         TreePath last = null;
-        if (treePath != null && found())
+        if ( treePath != null && found() )
         {
             last = treePath;
         }
-        if (treePath == null)
+        if ( treePath == null )
         {
             gotoFirst();
-            if (found())
+            if ( found() )
             {
                 return treePath;
             }
         }
-        while (gotoNext() && !found())
+        while ( gotoNext() && !found() )
         {
         }
-        if (treePath == null)
+        if ( treePath == null )
         {
             treePath = last;
         }
@@ -73,22 +73,22 @@ class TreeSearcher implements ITreeSearcher
     public TreePath prev()
     {
         TreePath last = null;
-        if (treePath != null && found())
+        if ( treePath != null && found() )
         {
             last = treePath;
         }
-        if (treePath == null)
+        if ( treePath == null )
         {
             gotoLast();
-            if (found())
+            if ( found() )
             {
                 return treePath;
             }
         }
-        while (gotoPrev() && !found())
+        while ( gotoPrev() && !found() )
         {
         }
-        if (treePath == null)
+        if ( treePath == null )
         {
             treePath = last;
         }
@@ -99,21 +99,21 @@ class TreeSearcher implements ITreeSearcher
     {
         gotoFirst();
         Object object = treePath.getLastPathComponent();
-        while (tree.getModel().getChildCount(object) > 0)
+        while ( tree.getModel().getChildCount( object ) > 0 )
         {
-            final int index = tree.getModel().getChildCount(object);
-            treePath = new MyTreePath(treePath, tree.getModel().getChild(object, index - 1));
+            final int index = tree.getModel().getChildCount( object );
+            treePath = new MyTreePath( treePath, tree.getModel().getChild( object, index - 1 ) );
             object = treePath.getLastPathComponent();
         }
     }
 
-    private TreePath findLast(TreePath path)
+    private TreePath findLast( TreePath path )
     {
         Object object = path.getLastPathComponent();
-        while (tree.getModel().getChildCount(object) > 0)
+        while ( tree.getModel().getChildCount( object ) > 0 )
         {
-            final int index = tree.getModel().getChildCount(object);
-            path = new MyTreePath(path, tree.getModel().getChild(object, index - 1));
+            final int index = tree.getModel().getChildCount( object );
+            path = new MyTreePath( path, tree.getModel().getChild( object, index - 1 ) );
             object = path.getLastPathComponent();
         }
         return path;
@@ -121,84 +121,84 @@ class TreeSearcher implements ITreeSearcher
 
     private void gotoFirst()
     {
-        treePath = new TreePath(tree.getModel().getRoot());
+        treePath = new TreePath( tree.getModel().getRoot() );
     }
 
     private boolean found()
     {
         String treeItem = treePath.getLastPathComponent().toString();
         String searchItem = searchString;
-        if (ignoreCase)
+        if ( ignoreCase )
         {
             treeItem = treeItem.toUpperCase();
             searchItem = searchItem.toUpperCase();
         }
-        if (starting)
+        if ( starting )
         {
-            return treeItem.startsWith(searchItem);
+            return treeItem.startsWith( searchItem );
         }
         else
         {
-            return treeItem.indexOf(searchItem) >= 0;
+            return treeItem.indexOf( searchItem ) >= 0;
         }
     }
 
     private boolean gotoNext()
     {
-        treePath = searchNext(treePath, null);
+        treePath = searchNext( treePath, null );
         return treePath != null;
     }
 
     private boolean gotoPrev()
     {
-        treePath = searchPrev(treePath);
+        treePath = searchPrev( treePath );
         return treePath != null;
     }
 
-    private TreePath searchNext(final TreePath path, final Object child)
+    private TreePath searchNext( final TreePath path, final Object child )
     {
         final Object object = path.getLastPathComponent();
         int startingChildIndex = 0;
-        if (child != null)
+        if ( child != null )
         {
-            startingChildIndex = tree.getModel().getIndexOfChild(object, child) + 1;
+            startingChildIndex = tree.getModel().getIndexOfChild( object, child ) + 1;
         }
-        if (tree.getModel().getChildCount(object) > startingChildIndex)
+        if ( tree.getModel().getChildCount( object ) > startingChildIndex )
         {
-            return new MyTreePath(path, tree.getModel().getChild(object, 0));
+            return new MyTreePath( path, tree.getModel().getChild( object, 0 ) );
         }
         else
         {
             final TreePath parentPath = path.getParentPath();
-            if (parentPath != null)
+            if ( parentPath != null )
             {
                 final Object parent = parentPath.getLastPathComponent();
-                final int count = tree.getModel().getChildCount(parent);
-                final int index = tree.getModel().getIndexOfChild(parent, object);
-                if (count > (index + 1))
+                final int count = tree.getModel().getChildCount( parent );
+                final int index = tree.getModel().getIndexOfChild( parent, object );
+                if ( count > ( index + 1 ) )
                 {
-                    return new MyTreePath(parentPath, tree.getModel().getChild(parent, index + 1));
+                    return new MyTreePath( parentPath, tree.getModel().getChild( parent, index + 1 ) );
                 }
                 else
                 {
-                    return searchNext(parentPath, object);
+                    return searchNext( parentPath, object );
                 }
             }
         }
         return null;
     }
 
-    private TreePath searchPrev(final TreePath path)
+    private TreePath searchPrev( final TreePath path )
     {
         final Object object = path.getLastPathComponent();
         final TreePath parentPath = path.getParentPath();
-        if (parentPath != null)
+        if ( parentPath != null )
         {
             final Object parent = parentPath.getLastPathComponent();
-            final int index = tree.getModel().getIndexOfChild(parent, object);
-            if (index > 0)
+            final int index = tree.getModel().getIndexOfChild( parent, object );
+            if ( index > 0 )
             {
-                return findLast(new MyTreePath(parentPath, tree.getModel().getChild(parent, index - 1)));
+                return findLast( new MyTreePath( parentPath, tree.getModel().getChild( parent, index - 1 ) ) );
             }
             else
             {
@@ -218,14 +218,14 @@ class TreeSearcher implements ITreeSearcher
         return searchString;
     }
 
-    public TreePath setSearchString(final String searchString)
+    public TreePath setSearchString( final String searchString )
     {
         this.searchString = searchString;
-        if (treePath == null || !found())
+        if ( treePath == null || !found() )
         {
             gotoFirst();
         }
-        if (!found())
+        if ( !found() )
         {
             return next();
         }

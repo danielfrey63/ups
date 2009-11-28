@@ -49,78 +49,81 @@ import sun.security.x509.X509CertInfo;
  */
 class SignatureFile
 {
-
-    /** SignatureFile */
+    /**
+     * SignatureFile
+     */
     Manifest sf;
 
-    /** .SF base name */
+    /**
+     * .SF base name
+     */
     String baseName;
 
-    public SignatureFile(final MessageDigest[] digests,
-                         final Manifest mf,
-                         final ManifestDigester md,
-                         final String baseName,
-                         final boolean signManifest)
+    public SignatureFile( final MessageDigest[] digests,
+                          final Manifest mf,
+                          final ManifestDigester md,
+                          final String baseName,
+                          final boolean signManifest )
 
     {
         this.baseName = baseName;
 
-        final String version = System.getProperty("java.version");
-        final String javaVendor = System.getProperty("java.vendor");
+        final String version = System.getProperty( "java.version" );
+        final String javaVendor = System.getProperty( "java.vendor" );
 
         sf = new Manifest();
         final Attributes mattr = sf.getMainAttributes();
         final BASE64Encoder encoder = new BASE64Encoder();
 
-        mattr.putValue(Attributes.Name.SIGNATURE_VERSION.toString(), "1.0");
-        mattr.putValue("Created-By", version + " (" + javaVendor + ")");
+        mattr.putValue( Attributes.Name.SIGNATURE_VERSION.toString(), "1.0" );
+        mattr.putValue( "Created-By", version + " (" + javaVendor + ")" );
 
-        if (signManifest)
+        if ( signManifest )
         {
             // sign the whole manifest
-            for (MessageDigest digest : digests)
+            for ( final MessageDigest digest : digests )
             {
-                mattr.putValue(digest.getAlgorithm() + "-Digest-Manifest",
-                        encoder.encode(md.manifestDigest(digest)));
+                mattr.putValue( digest.getAlgorithm() + "-Digest-Manifest",
+                        encoder.encode( md.manifestDigest( digest ) ) );
             }
         }
 
         // create digest of the manifest main attributes
         ManifestDigester.Entry mde =
-                md.get(ManifestDigester.MF_MAIN_ATTRS, false);
-        if (mde != null)
+                md.get( ManifestDigester.MF_MAIN_ATTRS, false );
+        if ( mde != null )
         {
-            for (MessageDigest digest : digests)
+            for ( final MessageDigest digest : digests )
             {
-                mattr.putValue(digest.getAlgorithm() +
+                mattr.putValue( digest.getAlgorithm() +
                         "-Digest-" + ManifestDigester.MF_MAIN_ATTRS,
-                        encoder.encode(mde.digest(digest)));
+                        encoder.encode( mde.digest( digest ) ) );
             }
         }
         else
         {
             throw new IllegalStateException
-                    ("ManifestDigester failed to create " +
-                            "Manifest-Main-Attribute entry");
+                    ( "ManifestDigester failed to create " +
+                            "Manifest-Main-Attribute entry" );
         }
 
         /* go through the manifest entries and create the digests */
 
         final Map entries = sf.getEntries();
-        for (final Map.Entry<String, Attributes> stringAttributesEntry : mf.getEntries().entrySet())
+        for ( final Map.Entry<String, Attributes> stringAttributesEntry : mf.getEntries().entrySet() )
         {
-            final Map.Entry e = (Map.Entry) stringAttributesEntry;
+            final Map.Entry e = stringAttributesEntry;
             final String name = (String) e.getKey();
-            mde = md.get(name, false);
-            if (mde != null)
+            mde = md.get( name, false );
+            if ( mde != null )
             {
                 final Attributes attr = new Attributes();
-                for (MessageDigest digest : digests)
+                for ( final MessageDigest digest : digests )
                 {
-                    attr.putValue(digest.getAlgorithm() + "-Digest",
-                            encoder.encode(mde.digest(digest)));
+                    attr.putValue( digest.getAlgorithm() + "-Digest",
+                            encoder.encode( mde.digest( digest ) ) );
                 }
-                entries.put(name, attr);
+                entries.put( name, attr );
             }
         }
     }
@@ -132,18 +135,22 @@ class SignatureFile
      * @throws java.io.IOException if an I/O error has occurred
      */
 
-    public void write(final OutputStream out) throws IOException
+    public void write( final OutputStream out ) throws IOException
     {
-        sf.write(out);
+        sf.write( out );
     }
 
-    /** get .SF file name */
+    /**
+     * get .SF file name
+     */
     public String getMetaName()
     {
         return "META-INF/" + baseName + ".SF";
     }
 
-    /** get base file name */
+    /**
+     * get base file name
+     */
     public String getBaseName()
     {
         return baseName;
@@ -163,66 +170,64 @@ class SignatureFile
      * @param args The command-line arguments to jarsigner.
      * @param zipFile The original source Zip file.
      */
-    public Block generateBlock(final PrivateKey privateKey,
-                               final X509Certificate[] certChain,
-                               final boolean externalSF, final String tsaUrl,
-                               final X509Certificate tsaCert,
-                               final ContentSigner signingMechanism,
-                               final String[] args, final ZipFile zipFile)
+    public Block generateBlock( final PrivateKey privateKey,
+                                final X509Certificate[] certChain,
+                                final boolean externalSF, final String tsaUrl,
+                                final X509Certificate tsaCert,
+                                final ContentSigner signingMechanism,
+                                final String[] args, final ZipFile zipFile )
             throws NoSuchAlgorithmException, InvalidKeyException, IOException,
             SignatureException, CertificateException
     {
-        return new Block(this, privateKey, certChain, externalSF, tsaUrl,
-                tsaCert, signingMechanism, args, zipFile);
+        return new Block( this, privateKey, certChain, externalSF, tsaUrl,
+                tsaCert, signingMechanism, args, zipFile );
     }
 
     public static class Block
     {
+        private final byte[] block;
 
-        private byte[] block;
-
-        private String blockFileName;
+        private final String blockFileName;
 
         /*
        * Construct a new signature block.
        */
-        Block(final SignatureFile sfg, final PrivateKey privateKey,
-              final X509Certificate[] certChain, final boolean externalSF, final String tsaUrl,
-              final X509Certificate tsaCert, ContentSigner signingMechanism,
-              final String[] args, final ZipFile zipFile)
+        Block( final SignatureFile sfg, final PrivateKey privateKey,
+               final X509Certificate[] certChain, final boolean externalSF, final String tsaUrl,
+               final X509Certificate tsaCert, ContentSigner signingMechanism,
+               final String[] args, final ZipFile zipFile )
                 throws NoSuchAlgorithmException, InvalidKeyException, IOException,
                 SignatureException, CertificateException
         {
-
             Principal issuerName = certChain[0].getIssuerDN();
-            if (!(issuerName instanceof X500Name))
+            if ( !( issuerName instanceof X500Name ) )
             {
                 // must extract the original encoded form of DN for subsequent
                 // name comparison checks (converting to a String and back to
                 // an encoded DN could cause the types of String attribute
                 // values to be changed)
                 final X509CertInfo tbsCert = new
-                        X509CertInfo(certChain[0].getTBSCertificate());
+                        X509CertInfo( certChain[0].getTBSCertificate() );
                 issuerName = (Principal)
-                        tbsCert.get(CertificateIssuerName.NAME + "." +
-                                CertificateIssuerName.DN_NAME);
+                        tbsCert.get( CertificateIssuerName.NAME + "." +
+                                CertificateIssuerName.DN_NAME );
             }
             final BigInteger serial = certChain[0].getSerialNumber();
             final String keyAlgorithm = privateKey.getAlgorithm();
 
             final String digestAlgorithm;
-            if (keyAlgorithm.equalsIgnoreCase("DSA"))
+            if ( keyAlgorithm.equalsIgnoreCase( "DSA" ) )
             {
                 digestAlgorithm = "SHA1";
             }
-            else if (keyAlgorithm.equalsIgnoreCase("RSA"))
+            else if ( keyAlgorithm.equalsIgnoreCase( "RSA" ) )
             {
                 digestAlgorithm = "MD5";
             }
             else
             {
-                throw new RuntimeException("private key is not a DSA or "
-                        + "RSA key");
+                throw new RuntimeException( "private key is not a DSA or "
+                        + "RSA key" );
             }
 
             final String signatureAlgorithm = digestAlgorithm + "with" +
@@ -230,49 +235,49 @@ class SignatureFile
 
             blockFileName = "META-INF/" + sfg.getBaseName() + "." + keyAlgorithm;
 
-            final AlgorithmId digestAlg = AlgorithmId.get(digestAlgorithm);
-            final AlgorithmId sigAlg = AlgorithmId.get(signatureAlgorithm);
-            final AlgorithmId digEncrAlg = AlgorithmId.get(keyAlgorithm);
+            final AlgorithmId digestAlg = AlgorithmId.get( digestAlgorithm );
+            final AlgorithmId sigAlg = AlgorithmId.get( signatureAlgorithm );
+            final AlgorithmId digEncrAlg = AlgorithmId.get( keyAlgorithm );
 
-            final Signature sig = Signature.getInstance(signatureAlgorithm);
-            sig.initSign(privateKey);
+            final Signature sig = Signature.getInstance( signatureAlgorithm );
+            sig.initSign( privateKey );
 
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            sfg.write(baos);
+            sfg.write( baos );
 
             final byte[] content = baos.toByteArray();
 
-            sig.update(content);
+            sig.update( content );
             final byte[] signature = sig.sign();
 
             // Timestamp the signature and generate the signature block file
-            if (signingMechanism == null)
+            if ( signingMechanism == null )
             {
                 signingMechanism = new TimestampedSigner();
             }
             URI tsaUri = null;
             try
             {
-                if (tsaUrl != null)
+                if ( tsaUrl != null )
                 {
-                    tsaUri = new URI(tsaUrl);
+                    tsaUri = new URI( tsaUrl );
                 }
             }
-            catch (URISyntaxException e)
+            catch ( URISyntaxException e )
             {
                 final IOException ioe = new IOException();
-                ioe.initCause(e);
+                ioe.initCause( e );
                 throw ioe;
             }
 
             // Assemble parameters for the signing mechanism
             final ContentSignerParameters params =
-                    new JarSignerParameters(args, tsaUri, tsaCert, signature,
-                            signatureAlgorithm, certChain, content, zipFile);
+                    new JarSignerParameters( args, tsaUri, tsaCert, signature,
+                            signatureAlgorithm, certChain, content, zipFile );
 
             // Generate the signature block
             block = signingMechanism.generateSignedData(
-                    params, externalSF, (tsaUrl != null || tsaCert != null));
+                    params, externalSF, ( tsaUrl != null || tsaCert != null ) );
         }
 
         /*
@@ -290,9 +295,9 @@ class SignatureFile
          * @throws java.io.IOException if an I/O error has occurred
          */
 
-        public void write(final OutputStream out) throws IOException
+        public void write( final OutputStream out ) throws IOException
         {
-            out.write(block);
+            out.write( block );
         }
     }
 }

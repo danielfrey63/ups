@@ -12,13 +12,18 @@ import java.util.Calendar;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:56:29 $
  */
-public abstract class IFEntry extends Model {
-
+public abstract class IFEntry extends Model
+{
     public static final String PROPERTYNAME_TYPE = "type";
+
     public static final String PROPERTYNAME_NAME = "name";
+
     public static final String PROPERTYNAME_PARENT = "parent";
+
     public static final String PROPERTYNAME_START = "start";
+
     public static final String PROPERTYNAME_END = "end";
+
     public static final String PROPERTYNAME_CHILDREN = "children";
 
     /**
@@ -26,7 +31,7 @@ public abstract class IFEntry extends Model {
      *
      * @param type the new type
      */
-    public abstract void setType(Object type);
+    public abstract void setType( Object type );
 
     /**
      * Returns the type.
@@ -40,7 +45,7 @@ public abstract class IFEntry extends Model {
      *
      * @param name the name
      */
-    public abstract void setName(String name);
+    public abstract void setName( String name );
 
     /**
      * Returns the name.
@@ -54,7 +59,7 @@ public abstract class IFEntry extends Model {
      *
      * @param parent the new parent
      */
-    public abstract void setParent(IFEntry parent);
+    public abstract void setParent( IFEntry parent );
 
     /**
      * Returns the parent.
@@ -68,7 +73,7 @@ public abstract class IFEntry extends Model {
      *
      * @param start the new start
      */
-    public abstract void setStart(Calendar start);
+    public abstract void setStart( Calendar start );
 
     /**
      * Returns the start time.
@@ -82,7 +87,7 @@ public abstract class IFEntry extends Model {
      *
      * @param end the end time
      */
-    public abstract void setEnd(Calendar end);
+    public abstract void setEnd( Calendar end );
 
     /**
      * Returns the end time.
@@ -96,7 +101,7 @@ public abstract class IFEntry extends Model {
      *
      * @param children the new children array
      */
-    public abstract void setChildren(IFEntry[] children);
+    public abstract void setChildren( IFEntry[] children );
 
     /**
      * Returns the children array.
@@ -110,7 +115,7 @@ public abstract class IFEntry extends Model {
      *
      * @param entry the child to delete
      */
-    public abstract void deleteChild(IFEntry entry);
+    public abstract void deleteChild( IFEntry entry );
 
     /**
      * Factory method to add a new child to this entry.
@@ -119,5 +124,5 @@ public abstract class IFEntry extends Model {
      * @param type the type of the new child to create
      * @return the newly created child entry
      */
-    public abstract IFEntry addChild(String name, Object type);
+    public abstract IFEntry addChild( String name, Object type );
 }

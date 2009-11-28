@@ -33,7 +33,9 @@ import java.util.StringTokenizer;
  */
 public class SimpleFileParser implements FileParser
 {
-    /** The formatters to generate the file lines. */
+    /**
+     * The formatters to generate the file lines.
+     */
     private Formatter[] formatters;
 
     /**
@@ -45,56 +47,56 @@ public class SimpleFileParser implements FileParser
      * @param fileLines a list of lines containing text separated by "|"
      * @return an array of FileLine objects
      */
-    public FileLine[] initText(final List fileLines)
+    public FileLine[] initText( final List fileLines )
     {
         final List lines = new ArrayList();
         final String delim = "|";
         final Iterator iter = fileLines.listIterator();
         final HashMap formatterMap = new HashMap();
 
-        while (iter.hasNext())
+        while ( iter.hasNext() )
         {
             final String line = (String) iter.next();
-            final StringTokenizer tokenizer = new StringTokenizer(line, delim, true);
+            final StringTokenizer tokenizer = new StringTokenizer( line, delim, true );
             int tokenCounter = 0;
             final FileLine fileLine = new FileLine();
-            lines.add(fileLine);
+            lines.add( fileLine );
 
-            while (tokenizer.hasMoreTokens())
+            while ( tokenizer.hasMoreTokens() )
             {
                 String token = tokenizer.nextToken();
 
-                if (token.equals(delim))
+                if ( token.equals( delim ) )
                 {
                     tokenCounter++;
                 }
                 else
                 {
-                    token = ((token == null) ? "" : token);
+                    token = ( ( token == null ) ? "" : token );
 
-                    switch (tokenCounter)
+                    switch ( tokenCounter )
                     {
                         case 0:
 
-                            Formatter formatter = (Formatter) formatterMap.get(token);
+                            Formatter formatter = (Formatter) formatterMap.get( token );
 
-                            if (formatter == null)
+                            if ( formatter == null )
                             {
-                                formatter = Formatter.getFormatter(token);
-                                formatterMap.put(token, formatter);
+                                formatter = Formatter.getFormatter( token );
+                                formatterMap.put( token, formatter );
                             }
 
-                            fileLine.setFormatter(formatter);
+                            fileLine.setFormatter( formatter );
 
                             break;
 
                         case 1:
-                            fileLine.setText(token);
+                            fileLine.setText( token );
 
                             break;
 
                         case 2:
-                            fileLine.setLink(token);
+                            fileLine.setLink( token );
 
                             break;
 
@@ -105,9 +107,9 @@ public class SimpleFileParser implements FileParser
             }
         }
 
-        formatters = (Formatter[]) formatterMap.values().toArray(new Formatter[formatterMap.values().size()]);
+        formatters = (Formatter[]) formatterMap.values().toArray( new Formatter[formatterMap.values().size()] );
 
-        return (FileLine[]) lines.toArray(new FileLine[lines.size()]);
+        return (FileLine[]) lines.toArray( new FileLine[lines.size()] );
     }
 
     /**
@@ -119,13 +121,13 @@ public class SimpleFileParser implements FileParser
      * @param g the graphics object
      * @return an array of formatters
      */
-    public Formatter[] getFormatters(final Graphics g)
+    public Formatter[] getFormatters( final Graphics g )
     {
-        if (formatters != null)
+        if ( formatters != null )
         {
-            for (final Formatter formatter : formatters)
+            for ( final Formatter formatter : formatters )
             {
-                formatter.setFontMetrics(g.getFontMetrics(formatter.getFont()));
+                formatter.setFontMetrics( g.getFontMetrics( formatter.getFont() ) );
             }
         }
 

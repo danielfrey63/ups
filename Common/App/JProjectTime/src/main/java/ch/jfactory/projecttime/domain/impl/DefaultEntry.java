@@ -7,8 +7,8 @@ import ch.jfactory.projecttime.domain.api.IFEntry;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Calendar;
+import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -19,8 +19,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:56:29 $
  */
-public class DefaultEntry extends IFEntry {
-
+public class DefaultEntry extends IFEntry
+{
     /**
      * The children IFEntry objects array.
      */
@@ -54,8 +54,9 @@ public class DefaultEntry extends IFEntry {
     /**
      * Default constructor for sole purpose of serialization.
      */
-    public DefaultEntry() {
-        this("", "");
+    public DefaultEntry()
+    {
+        this( "", "" );
     }
 
     /**
@@ -64,9 +65,10 @@ public class DefaultEntry extends IFEntry {
      * @param name the name for this entry
      * @param type the type of this entry
      */
-    public DefaultEntry(String name, Object type) {
-        setName(name);
-        setType(type);
+    public DefaultEntry( final String name, final Object type )
+    {
+        setName( name );
+        setType( type );
     }
 
     /**
@@ -74,7 +76,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @param children the children
      */
-    public void setChildren(IFEntry[] children) {
+    public void setChildren( final IFEntry[] children )
+    {
         this.children = children;
     }
 
@@ -83,7 +86,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the children
      */
-    public IFEntry[] getChildren() {
+    public IFEntry[] getChildren()
+    {
         return children;
     }
 
@@ -95,17 +99,18 @@ public class DefaultEntry extends IFEntry {
      * @param type the type of the new child
      * @return the new child entry
      */
-    public IFEntry addChild(String name, Object type) {
-
+    public IFEntry addChild( final String name, final Object type )
+    {
         // Create new child
-        final IFEntry child = new DefaultEntry(name, type);
+        final IFEntry child = new DefaultEntry( name, type );
 
         // Make sure to add the child to this children
-        children = (IFEntry[]) add(children, child, IFEntry.class);
+        children = (IFEntry[]) add( children, child, IFEntry.class );
 
         // Make sure to set the childs parent to this entry
-        if (child.getParent() != this) {
-            child.setParent(this);
+        if ( child.getParent() != this )
+        {
+            child.setParent( this );
         }
 
         return child;
@@ -116,10 +121,11 @@ public class DefaultEntry extends IFEntry {
      *
      * @param entry the child to delete
      */
-    public void deleteChild(IFEntry entry) {
-        final List list = new ArrayList(Arrays.asList(children));
-        list.remove(entry);
-        children = (IFEntry[]) list.toArray(new IFEntry[0]);
+    public void deleteChild( final IFEntry entry )
+    {
+        final List list = new ArrayList( Arrays.asList( children ) );
+        list.remove( entry );
+        children = (IFEntry[]) list.toArray( new IFEntry[0] );
     }
 
     /**
@@ -127,7 +133,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the end time
      */
-    public Calendar getEnd() {
+    public Calendar getEnd()
+    {
         return end;
     }
 
@@ -136,7 +143,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -145,7 +153,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the parent
      */
-    public IFEntry getParent() {
+    public IFEntry getParent()
+    {
         return parent;
     }
 
@@ -154,7 +163,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the start time
      */
-    public Calendar getStart() {
+    public Calendar getStart()
+    {
         return start;
     }
 
@@ -163,7 +173,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the type
      */
-    public Object getType() {
+    public Object getType()
+    {
         return type;
     }
 
@@ -172,7 +183,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @param end the end time
      */
-    public void setEnd(Calendar end) {
+    public void setEnd( final Calendar end )
+    {
         this.end = end;
     }
 
@@ -181,7 +193,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @param name the new name
      */
-    public void setName(String name) {
+    public void setName( final String name )
+    {
         this.name = name;
     }
 
@@ -190,22 +203,24 @@ public class DefaultEntry extends IFEntry {
      *
      * @param parent the new parent to set
      */
-    public void setParent(IFEntry parent) {
-
-        if (this.parent != parent) {
-
+    public void setParent( final IFEntry parent )
+    {
+        if ( this.parent != parent )
+        {
             // Set the parent
             final IFEntry oldParent = this.parent;
             this.parent = parent;
 
             // Make sure the old parent does not contain this entry any more
-            if (oldParent != null && ArrayUtils.contains(oldParent.getChildren(), this)) {
-                oldParent.deleteChild(this);
+            if ( oldParent != null && ArrayUtils.contains( oldParent.getChildren(), this ) )
+            {
+                oldParent.deleteChild( this );
             }
 
             // Make sure the parent contains this entry
-            if (parent != null && !ArrayUtils.contains(parent.getChildren(), this)) {
-                parent.setChildren((IFEntry[]) add(parent.getChildren(), this, IFEntry.class));
+            if ( parent != null && !ArrayUtils.contains( parent.getChildren(), this ) )
+            {
+                parent.setChildren( (IFEntry[]) add( parent.getChildren(), this, IFEntry.class ) );
             }
         }
     }
@@ -215,7 +230,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @param start the new start time
      */
-    public void setStart(Calendar start) {
+    public void setStart( final Calendar start )
+    {
         this.start = start;
     }
 
@@ -224,7 +240,8 @@ public class DefaultEntry extends IFEntry {
      *
      * @param type the new type
      */
-    public void setType(Object type) {
+    public void setType( final Object type )
+    {
         this.type = type;
     }
 
@@ -233,8 +250,9 @@ public class DefaultEntry extends IFEntry {
      *
      * @return the string representation
      */
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(name).append(type).append(start).append(end).toString();
+    public String toString()
+    {
+        return new ToStringBuilder( this, ToStringStyle.SIMPLE_STYLE ).append( name ).append( type ).append( start ).append( end ).toString();
     }
 
     /**
@@ -243,12 +261,13 @@ public class DefaultEntry extends IFEntry {
      * @param array      the array to add the object to
      * @param newObject  the object to add
      * @param arrayClass the type of array to use
-     * @return the complete array
-     * //todo Move this method either to a new ArrayUtils class or submit it to Apache commons-lang.
+     * @return the complete array //todo Move this method either to a new ArrayUtils class or submit it to Apache
+     *         commons-lang.
      */
-    private Object[] add(final Object[] array, final Object newObject, final Class arrayClass) {
-        final List list = new ArrayList((array == null ? new ArrayList() : Arrays.asList(array)));
-        list.add(newObject);
-        return list.toArray((Object[]) Array.newInstance(arrayClass, list.size()));
+    private Object[] add( final Object[] array, final Object newObject, final Class arrayClass )
+    {
+        final List list = new ArrayList( ( array == null ? new ArrayList() : Arrays.asList( array ) ) );
+        list.add( newObject );
+        return list.toArray( (Object[]) Array.newInstance( arrayClass, list.size() ) );
     }
 }

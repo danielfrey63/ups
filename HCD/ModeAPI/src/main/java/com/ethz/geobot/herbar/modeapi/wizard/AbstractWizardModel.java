@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.prefs.Preferences;
 import javax.swing.Action;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Base functionallity for WizardModel. Mainly the beans related parts.
@@ -23,12 +23,12 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-abstract public class AbstractWizardModel implements WizardModel {
-
+abstract public class AbstractWizardModel implements WizardModel
+{
     /**
      * logger instance
      */
-    private static final Category cat = Category.getInstance(AbstractWizardModel.class);
+    private static final Logger LOG = Logger.getLogger( AbstractWizardModel.class );
 
     protected PropertyChangeSupport propertySupport;
 
@@ -36,17 +36,20 @@ abstract public class AbstractWizardModel implements WizardModel {
      * cached BeanInfo information
      */
     private BeanInfo cachedBeanInfo = null;
+
     private Action finishAction = null;
+
     /**
      * herbar context
      */
     private HerbarContext context;
+
     /**
      * Used to identify the wizard model per instance.
      */
-    private String name;
+    private final String name;
 
-    private Preferences preferences;
+    private final Preferences preferences;
 
     /**
      * Create a wizard model for modes.
@@ -54,11 +57,12 @@ abstract public class AbstractWizardModel implements WizardModel {
      * @param context the herbar context used in the mode
      * @param name    the name of the model
      */
-    public AbstractWizardModel(HerbarContext context, String name) {
+    public AbstractWizardModel( final HerbarContext context, final String name )
+    {
         this.context = context;
         this.preferences = context.getPreferencesNode();
         this.name = name;
-        propertySupport = new PropertyChangeSupport(this);
+        propertySupport = new PropertyChangeSupport( this );
     }
 
     /**
@@ -67,60 +71,75 @@ abstract public class AbstractWizardModel implements WizardModel {
      * @param preferences the preferences node to store information
      * @param name        the name of the model
      */
-    public AbstractWizardModel(Preferences preferences, String name) {
+    public AbstractWizardModel( final Preferences preferences, final String name )
+    {
         this.preferences = preferences;
         this.name = name;
-        propertySupport = new PropertyChangeSupport(this);
+        propertySupport = new PropertyChangeSupport( this );
     }
 
-    public void finishWizard() {
-        if (finishAction != null) {
-            finishAction.actionPerformed(new ActionEvent(this, 1, "CloseWizard"));
+    public void finishWizard()
+    {
+        if ( finishAction != null )
+        {
+            finishAction.actionPerformed( new ActionEvent( this, 1, "CloseWizard" ) );
         }
-        else {
-            cat.warn("finish wizard request without registered finish wizard handler");
+        else
+        {
+            LOG.warn( "finish wizard request without registered finish wizard handler" );
         }
     }
 
-    public void registerFinishAction(Action finishAction) {
+    public void registerFinishAction( final Action finishAction )
+    {
         this.finishAction = finishAction;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.addPropertyChangeListener(listener);
+    public void addPropertyChangeListener( final PropertyChangeListener listener )
+    {
+        propertySupport.addPropertyChangeListener( listener );
     }
 
-    public void addPropertyChangeListener(String proptertyName, PropertyChangeListener listener) {
-        propertySupport.addPropertyChangeListener(proptertyName, listener);
+    public void addPropertyChangeListener( final String proptertyName, final PropertyChangeListener listener )
+    {
+        propertySupport.addPropertyChangeListener( proptertyName, listener );
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.removePropertyChangeListener(listener);
+    public void removePropertyChangeListener( final PropertyChangeListener listener )
+    {
+        propertySupport.removePropertyChangeListener( listener );
     }
 
-    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        propertySupport.removePropertyChangeListener(propertyName, listener);
+    public void removePropertyChangeListener( final String propertyName, final PropertyChangeListener listener )
+    {
+        propertySupport.removePropertyChangeListener( propertyName, listener );
     }
 
-    public BeanInfo getBeanInfo() throws IntrospectionException {
-        if (cachedBeanInfo == null) {
-            cachedBeanInfo = Introspector.getBeanInfo(this.getClass());
+    public BeanInfo getBeanInfo() throws IntrospectionException
+    {
+        if ( cachedBeanInfo == null )
+        {
+            cachedBeanInfo = Introspector.getBeanInfo( this.getClass() );
         }
         return cachedBeanInfo;
     }
 
-    public HerbarContext getHerbarContext() {
-        if (context == null) {
-            throw new IllegalStateException("wizard model was created for non-mode components. Use getPreferencesNode.");
+    public HerbarContext getHerbarContext()
+    {
+        if ( context == null )
+        {
+            throw new IllegalStateException( "wizard model was created for non-mode components. Use getPreferencesNode." );
         }
         return context;
     }
 
-    public Preferences getPreferencesNode() {
+    public Preferences getPreferencesNode()
+    {
         return preferences;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 }

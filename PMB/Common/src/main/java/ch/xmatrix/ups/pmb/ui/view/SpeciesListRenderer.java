@@ -16,12 +16,12 @@
  */
 package ch.xmatrix.ups.pmb.ui.view;
 
+import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
+import ch.xmatrix.ups.pmb.ui.model.Settings;
 import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import ch.xmatrix.ups.pmb.ui.model.Settings;
-import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
 
 /**
  * TODO: document
@@ -29,19 +29,21 @@ import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class SpeciesListRenderer extends DefaultListCellRenderer {
+public class SpeciesListRenderer extends DefaultListCellRenderer
+{
+    private final Settings settings;
 
-    private Settings settings;
-
-    public SpeciesListRenderer(final Settings settings) {
+    public SpeciesListRenderer( final Settings settings )
+    {
         this.settings = settings;
     }
 
     @Override
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
+    {
+        final JLabel label = (JLabel) super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
         final SpeciesEntry speciesEntry = (SpeciesEntry) value;
-        label.setText(settings.getCleanedSpeciesName(speciesEntry));
+        label.setText( settings.getCleanedSpeciesName( speciesEntry ) );
         return label;
     }
 }

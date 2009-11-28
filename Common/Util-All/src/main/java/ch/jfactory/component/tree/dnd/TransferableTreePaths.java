@@ -18,48 +18,55 @@ import javax.swing.tree.TreePath;
  */
 public class TransferableTreePaths implements Transferable
 {
+    /**
+     * The type of DnD object being dragged...
+     */
+    public static final DataFlavor TREEPATH_FLAVOR = new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType, "TreePath" );
 
-    /** The type of DnD object being dragged... */
-    public static final DataFlavor TREEPATH_FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, "TreePath");
+    private final DataFlavor[] flavors = {TREEPATH_FLAVOR};
 
-    private DataFlavor[] flavors = {TREEPATH_FLAVOR};
-
-    private TreePath[] path;
+    private final TreePath[] path;
 
     /**
      * Constructs a transferrable tree path object for the specified path.
      *
      * @param path the TreePath to wrap
      */
-    public TransferableTreePaths(final TreePath[] path)
+    public TransferableTreePaths( final TreePath[] path )
     {
         this.path = path;
     }
 
-    /** @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor) */
-    public synchronized Object getTransferData(final DataFlavor flavor) throws UnsupportedFlavorException
+    /**
+     * @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor)
+     */
+    public synchronized Object getTransferData( final DataFlavor flavor ) throws UnsupportedFlavorException
     {
-        if (flavor.isMimeTypeEqual(TREEPATH_FLAVOR.getMimeType()))
+        if ( flavor.isMimeTypeEqual( TREEPATH_FLAVOR.getMimeType() ) )
         {
             // DataFlavor.javaJVMLocalObjectMimeType))
             return path;
         }
         else
         {
-            throw new UnsupportedFlavorException(flavor);
+            throw new UnsupportedFlavorException( flavor );
         }
     }
 
-    /** @see java.awt.datatransfer.Transferable#getTransferDataFlavors() */
+    /**
+     * @see java.awt.datatransfer.Transferable#getTransferDataFlavors()
+     */
     public DataFlavor[] getTransferDataFlavors()
     {
         return flavors;
     }
 
-    /** @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.datatransfer.DataFlavor) */
-    public boolean isDataFlavorSupported(final DataFlavor flavor)
+    /**
+     * @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+     */
+    public boolean isDataFlavorSupported( final DataFlavor flavor )
     {
-        return Arrays.asList(flavors).contains(flavor);
+        return Arrays.asList( flavors ).contains( flavor );
     }
 }
 

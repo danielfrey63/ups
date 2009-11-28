@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
  */
 class JarUpdateModule implements UpdateModule
 {
-    private static final Logger LOGGER = Logger.getLogger(JarUpdateModule.class);
+    private static final Logger LOGGER = Logger.getLogger( JarUpdateModule.class );
 
     private VersionInfo localVersion = null;
 
@@ -31,13 +31,15 @@ class JarUpdateModule implements UpdateModule
 
     private File tempLocation = null;
 
-    public JarUpdateModule(final VersionInfo serverVersion, final VersionInfo localVersion)
+    public JarUpdateModule( final VersionInfo serverVersion, final VersionInfo localVersion )
     {
         this.serverVersion = serverVersion;
         this.localVersion = localVersion;
     }
 
-    /** Creates a new instance of JarUpdateModule */
+    /**
+     * Creates a new instance of JarUpdateModule
+     */
     public JarUpdateModule()
     {
     }
@@ -69,7 +71,7 @@ class JarUpdateModule implements UpdateModule
     public void update() throws IOException
     {
         String localLocation = "";
-        if (getLocalVersionInfo() != null)
+        if ( getLocalVersionInfo() != null )
         {
             localLocation = getLocalVersionInfo().getLocation();
         }
@@ -79,7 +81,7 @@ class JarUpdateModule implements UpdateModule
         }
 
         copyFromServer();
-        replaceLocalVersion(localLocation);
+        replaceLocalVersion( localLocation );
     }
 
     private void copyFromServer() throws IOException
@@ -89,75 +91,75 @@ class JarUpdateModule implements UpdateModule
         OutputStream outputStream = null;
         try
         {
-            tempLocation = File.createTempFile("HerbarUpdate", ".jar");
+            tempLocation = File.createTempFile( "HerbarUpdate", ".jar" );
 
-            if (LOGGER.isDebugEnabled())
+            if ( LOGGER.isDebugEnabled() )
             {
-                LOGGER.debug("copy jar file from " + serverLocation + " to temporary location " + tempLocation);
+                LOGGER.debug( "copy jar file from " + serverLocation + " to temporary location " + tempLocation );
             }
 
-            inputStream = new BufferedInputStream(new URL(serverLocation).openStream());
-            outputStream = new BufferedOutputStream(new FileOutputStream(tempLocation));
+            inputStream = new BufferedInputStream( new URL( serverLocation ).openStream() );
+            outputStream = new BufferedOutputStream( new FileOutputStream( tempLocation ) );
             final byte[] buffer = new byte[4096];
             int len;
-            while ((len = inputStream.read(buffer, 0, buffer.length)) != -1)
+            while ( ( len = inputStream.read( buffer, 0, buffer.length ) ) != -1 )
             {
-                outputStream.write(buffer, 0, len);
+                outputStream.write( buffer, 0, len );
             }
         }
         finally
         {
-            closeStream(inputStream);
-            closeStream(outputStream);
+            closeStream( inputStream );
+            closeStream( outputStream );
         }
     }
 
-    private void replaceLocalVersion(final String localLocation)
+    private void replaceLocalVersion( final String localLocation )
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("rename temporary file " + tempLocation + " to original location " + localLocation);
+            LOGGER.debug( "rename temporary file " + tempLocation + " to original location " + localLocation );
         }
-        final File localFile = new File(localLocation);
+        final File localFile = new File( localLocation );
         // renameTo moves platform dependent and only on same volume!
-        if (!tempLocation.renameTo(localFile))
+        if ( !tempLocation.renameTo( localFile ) )
         {
-            FileUtils.copyFile(tempLocation, localFile);
+            FileUtils.copyFile( tempLocation, localFile );
         }
     }
 
-    static private void closeStream(final InputStream inputStream)
+    static private void closeStream( final InputStream inputStream )
     {
         try
         {
-            if (inputStream != null)
+            if ( inputStream != null )
             {
                 inputStream.close();
             }
         }
-        catch (IOException ex)
+        catch ( IOException ex )
         {
-            LOGGER.error("failed to close InputStream", ex);
+            LOGGER.error( "failed to close InputStream", ex );
         }
     }
 
-    static private void closeStream(final OutputStream outputStream)
+    static private void closeStream( final OutputStream outputStream )
     {
         try
         {
-            if (outputStream != null)
+            if ( outputStream != null )
             {
                 outputStream.close();
             }
         }
-        catch (IOException ex)
+        catch ( IOException ex )
         {
-            LOGGER.error("failed to close OutputStream", ex);
+            LOGGER.error( "failed to close OutputStream", ex );
         }
     }
 
     private String getNewModuleFileName()
     {
-        return System.getProperty("user.dir") + getServerVersionInfo().getRelativeName();
+        return System.getProperty( "user.dir" ) + getServerVersionInfo().getRelativeName();
     }
 }

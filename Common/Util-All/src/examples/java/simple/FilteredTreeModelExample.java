@@ -33,7 +33,6 @@ import java.awt.BorderLayout;
  * @version $Revision: 1.1 $ $Date: 2006/08/29 13:10:43 $
  */
 public class FilteredTreeModelExample {
-
     public static void main(final String[] args) {
         final String root = "Root";
         final MapBasedTreeModel ntm = new MapBasedTreeModel(root);

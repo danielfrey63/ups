@@ -36,7 +36,6 @@ import javax.swing.tree.TreePath;
  */
 public class TreeFinderModel extends Observable
 {
-
     private int current;
 
     private TreePath[] found;
@@ -50,15 +49,15 @@ public class TreeFinderModel extends Observable
      *
      * @param model
      */
-    public TreeFinderModel(final TreeModel model)
+    public TreeFinderModel( final TreeModel model )
     {
-        setModel(model);
+        setModel( model );
         // make sure an initial call to notifyObservers will update all
         // Observers
         setChanged();
     }
 
-    public void setModel(final TreeModel model)
+    public void setModel( final TreeModel model )
     {
         this.model = model;
         current = -1;
@@ -72,7 +71,7 @@ public class TreeFinderModel extends Observable
      */
     public TreePath get()
     {
-        if (getCount() == 0)
+        if ( getCount() == 0 )
         {
             return null;
         }
@@ -107,16 +106,16 @@ public class TreeFinderModel extends Observable
      *
      * @param pattern Description of the Parameter
      */
-    public void find(final String pattern)
+    public void find( final String pattern )
     {
-        this.pattern = Pattern.compile(pattern);
+        this.pattern = Pattern.compile( pattern );
         found = new TreePath[0];
         current = -1;
-        if (!pattern.equals(""))
+        if ( !pattern.equals( "" ) )
         {
-            findIt(new TreePath(model.getRoot()));
+            findIt( new TreePath( model.getRoot() ) );
         }
-        if (hasNext())
+        if ( hasNext() )
         {
             // next does notify
             next();
@@ -128,7 +127,9 @@ public class TreeFinderModel extends Observable
         }
     }
 
-    /** @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction. */
+    /**
+     * @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction.
+     */
     public boolean hasNext()
     {
         return current < getCount() - 1;
@@ -151,10 +152,10 @@ public class TreeFinderModel extends Observable
      */
     public TreePath next()
     {
-        final int count = Math.max(0, getCount() - 1);
-        current = Math.min(count, current + 1);
+        final int count = Math.max( 0, getCount() - 1 );
+        current = Math.min( count, current + 1 );
         setChanged();
-        notifyObservers(found[current]);
+        notifyObservers( found[current] );
         return found[current];
     }
 
@@ -165,7 +166,7 @@ public class TreeFinderModel extends Observable
      */
     public TreePath previous()
     {
-        current = Math.max(0, current - 1);
+        current = Math.max( 0, current - 1 );
         setChanged();
         notifyObservers();
         return found[current];
@@ -180,9 +181,9 @@ public class TreeFinderModel extends Observable
     {
         String str = "TreePath[";
         final int iL = found.length;
-        for (int i = 0; i < iL; i++)
+        for ( int i = 0; i < iL; i++ )
         {
-            str = str + found[i] + (i + 1 == iL ? "" : ",");
+            str = str + found[i] + ( i + 1 == iL ? "" : "," );
         }
         return "FinderModel[" + current + "," + str + "]]";
     }
@@ -193,29 +194,29 @@ public class TreeFinderModel extends Observable
      *
      * @param tp Description of the Parameter
      */
-    private void findIt(final TreePath tp)
+    private void findIt( final TreePath tp )
     {
         final Object last = tp.getLastPathComponent();
-        for (int i = 0; i < model.getChildCount(last); i++)
+        for ( int i = 0; i < model.getChildCount( last ); i++ )
         {
-            final Object o = model.getChild(last, i);
-            if (pattern.matcher(o.toString()).matches())
+            final Object o = model.getChild( last, i );
+            if ( pattern.matcher( o.toString() ).matches() )
             {
                 final TreePath[] tpsTemp = new TreePath[found.length + 1];
                 int j = 0;
-                for (j = 0; j < found.length; j++)
+                for ( j = 0; j < found.length; j++ )
                 {
                     tpsTemp[j] = found[j];
                 }
-                tpsTemp[j] = tp.pathByAddingChild(o);
+                tpsTemp[j] = tp.pathByAddingChild( o );
                 found = tpsTemp;
             }
-            if (!model.isLeaf(last))
+            if ( !model.isLeaf( last ) )
             {
-                final TreePath tpNew = tp.pathByAddingChild(o);
-                if (tpNew != null)
+                final TreePath tpNew = tp.pathByAddingChild( o );
+                if ( tpNew != null )
                 {
-                    findIt(tpNew);
+                    findIt( tpNew );
                 }
             }
         }

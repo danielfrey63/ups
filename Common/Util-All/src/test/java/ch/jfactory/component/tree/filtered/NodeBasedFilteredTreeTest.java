@@ -27,15 +27,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class NodeBasedFilteredTreeTest extends ModelBasedFilteredTreeTest
 {
-
-    public NodeBasedFilteredTreeTest(final String base)
+    public NodeBasedFilteredTreeTest( final String base )
     {
-        super(base);
+        super( base );
     }
 
     protected FilteredTreeModel getFilteredTreeModel()
     {
         final DefaultMutableTreeNode root = (DefaultMutableTreeNode) new JTree().getModel().getRoot();
-        return new FilteredTreeModel(root);
+        return new FilteredTreeModel( root );
     }
 }

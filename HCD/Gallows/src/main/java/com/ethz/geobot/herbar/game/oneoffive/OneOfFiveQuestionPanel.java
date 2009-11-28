@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * mainclass of oneoffive-game.
@@ -31,14 +31,18 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class OneOfFiveQuestionPanel extends JPanel implements Question {
+public class OneOfFiveQuestionPanel extends JPanel implements Question
+{
+    private static final Logger LOG = Logger.getLogger( OneOfFiveQuestionPanel.class );
 
-    private static final Category cat = Category.getInstance(OneOfFiveQuestionPanel.class);
-    private static final boolean INFO = cat.isInfoEnabled();
+    private static final boolean INFO = LOG.isInfoEnabled();
+
     private static final int NUMBER_OF_TAXA = 4;
 
-    private JButton[] taxButton = new JButton[NUMBER_OF_TAXA + 1];
-    private HerbarModel model;
+    private final JButton[] taxButton = new JButton[NUMBER_OF_TAXA + 1];
+
+    private final HerbarModel model;
+
     private QuestionDataUnit unit;
 
     /**
@@ -50,9 +54,10 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question {
      * Position of the wrong Taxon within the vector taxItem
      */
     private int randomAdd;
-    private OneOfFiveQuestionModel questionModel;
-    private CountScore countScore;
 
+    private final OneOfFiveQuestionModel questionModel;
+
+    private final CountScore countScore;
 
     /**
      * Constructor
@@ -60,101 +65,117 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question {
      * @param model  instance of the herbarmodel
      * @param counti instance of CountScore
      */
-    public OneOfFiveQuestionPanel(HerbarModel model, CountScore counti) {
+    public OneOfFiveQuestionPanel( final HerbarModel model, final CountScore counti )
+    {
         this.model = model;
         this.countScore = counti;
-        questionModel = new OneOfFiveQuestionModel(model);
+        questionModel = new OneOfFiveQuestionModel( model );
         //  int totalQuestions = questionModel.initializeDataModel();
 
         // ActionListener für Taxon-Buttons: richtige oder falsche Antwort.
-        ActionListener actionListenerTaxa =
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        JButton button = (JButton) (e.getSource());
-                        cat.debug("Source is " + button.getName() + ", wrong is " + randomAdd);
-                        if (((JButton) (e.getSource())).getName().equals("" + randomAdd)) {
-                            countScore.addRightScore(1);
-                            questionModel.setRightAnswers(unit);
+        final ActionListener actionListenerTaxa =
+                new ActionListener()
+                {
+                    public void actionPerformed( final ActionEvent e )
+                    {
+                        final JButton button = (JButton) ( e.getSource() );
+                        LOG.debug( "Source is " + button.getName() + ", wrong is " + randomAdd );
+                        if ( ( (JButton) ( e.getSource() ) ).getName().equals( "" + randomAdd ) )
+                        {
+                            countScore.addRightScore( 1 );
+                            questionModel.setRightAnswers( unit );
                         }
-                        else {
+                        else
+                        {
                             showCorrectAnswer();
-                            countScore.addWrongScore(1);
-                            questionModel.setWrongAnswers(unit);
+                            countScore.addWrongScore( 1 );
+                            questionModel.setWrongAnswers( unit );
                         }
                     }
                 };
 
-        for (int i = 0; i < (taxButton.length); i++) {
-            this.add(taxButton[ i ] = ComponentFactory.createButton(OneOfFive.class, "ONEOFFIVE.BUT." + i, actionListenerTaxa));
-            taxButton[ i ].setEnabled(false);
-            taxButton[ i ].setFocusPainted(true);
+        for ( int i = 0; i < ( taxButton.length ); i++ )
+        {
+            this.add( taxButton[i] = ComponentFactory.createButton( OneOfFive.class, "ONEOFFIVE.BUT." + i, actionListenerTaxa ) );
+            taxButton[i].setEnabled( false );
+            taxButton[i].setFocusPainted( true );
         }
     }
 
     /**
      * @see com.ethz.geobot.herbar.game.util.Question#firstQuestion()
      */
-    public void firstQuestion() {
+    public void firstQuestion()
+    {
     }
 
     /**
      * @see com.ethz.geobot.herbar.game.util.Question#lastQuestion()
      */
-    public void lastQuestion() {
+    public void lastQuestion()
+    {
     }
 
     /**
      * initializes the data to generate all questions out of it.
      */
-    public void init() {
+    public void init()
+    {
         questionModel.initializeDataModel();
     }
 
     /**
      * cleans the text in all buttons and disables them
      */
-    public void reset() {
-        for (int i = 0; i < (taxButton.length); i++) {
-            taxButton[ i ].setText(" ");
-            taxButton[ i ].setEnabled(false);
+    public void reset()
+    {
+        for ( final JButton aTaxButton : taxButton )
+        {
+            aTaxButton.setText( " " );
+            aTaxButton.setEnabled( false );
         }
     }
 
     /**
      * Restarts the game within the given scope.
      */
-    public void restart() {
-        questionModel.fillAllQuestions(countScore.getMaxScore());
+    public void restart()
+    {
+        questionModel.fillAllQuestions( countScore.getMaxScore() );
     }
 
     /**
      * get the QuestionDataUnit for the next question.
      */
-    public void nextQuestion() {
+    public void nextQuestion()
+    {
         unit = questionModel.getTaxon();
         unit.randomize();
         taxItem = unit.getTaxItem();
         randomAdd = unit.getRandomAdd();
-        for (int i = 0; i < (taxButton.length); i++) {
-            taxButton[ i ].setText(((Taxon) (taxItem.get(i))).getName());
-            if (INFO) {
-                cat.info("Taxon: (" + i + ")" + ((Taxon) taxItem.get(i)).getName() +
-                        ", Level: " + ((Taxon) taxItem.get(i)).getLevel().getName() +
-                        ", Parenttaxon: " + ((Taxon) taxItem.get(i)).getParentTaxon().getName() +
-                        ", Parentlevel: " + ((Taxon) taxItem.get(i)).getParentTaxon().getLevel().getName());
+        for ( int i = 0; i < ( taxButton.length ); i++ )
+        {
+            taxButton[i].setText( ( (Taxon) ( taxItem.get( i ) ) ).getName() );
+            if ( INFO )
+            {
+                LOG.info( "Taxon: (" + i + ")" + ( (Taxon) taxItem.get( i ) ).getName() +
+                        ", Level: " + ( (Taxon) taxItem.get( i ) ).getLevel().getName() +
+                        ", Parenttaxon: " + ( (Taxon) taxItem.get( i ) ).getParentTaxon().getName() +
+                        ", Parentlevel: " + ( (Taxon) taxItem.get( i ) ).getParentTaxon().getLevel().getName() );
             }
-            taxButton[ i ].setName(new Integer(i).toString());
-            taxButton[ i ].setEnabled(true);
+            taxButton[i].setName( new Integer( i ).toString() );
+            taxButton[i].setEnabled( true );
         }
     }
 
-    private void showCorrectAnswer() {
-        JOptionPane jop = new JOptionPane();
-        ImageIcon imageWrong = ImageLocator.getIcon("bird_0.gif");
-        String paneTitle = Strings.getString(OneOfFive.class, "ONEOFFIVE.PANE.TITLE");
-        String lineBreak = System.getProperty("line.separator") + System.getProperty("line.separator");
-        String paneQuest = Strings.getString(OneOfFive.class,
-                "ONEOFFIVE.AUSGABE.WRONG", lineBreak, taxButton[ randomAdd ].getText());
-        JOptionPane.showMessageDialog(this.getParent(), paneQuest, paneTitle, JOptionPane.ERROR_MESSAGE, imageWrong);
+    private void showCorrectAnswer()
+    {
+        final JOptionPane jop = new JOptionPane();
+        final ImageIcon imageWrong = ImageLocator.getIcon( "bird_0.gif" );
+        final String paneTitle = Strings.getString( OneOfFive.class, "ONEOFFIVE.PANE.TITLE" );
+        final String lineBreak = System.getProperty( "line.separator" ) + System.getProperty( "line.separator" );
+        final String paneQuest = Strings.getString( OneOfFive.class,
+                "ONEOFFIVE.AUSGABE.WRONG", lineBreak, taxButton[randomAdd].getText() );
+        JOptionPane.showMessageDialog( this.getParent(), paneQuest, paneTitle, JOptionPane.ERROR_MESSAGE, imageWrong );
     }
 }

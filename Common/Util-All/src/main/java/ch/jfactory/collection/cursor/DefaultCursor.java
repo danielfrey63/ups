@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class DefaultCursor implements Cursor
 {
-    private static Cursor emptyCursor = new ListCursor(new java.util.ArrayList());
+    private static final Cursor emptyCursor = new ListCursor( new java.util.ArrayList() );
 
-    private Cursor cursor;
+    private final Cursor cursor;
 
     public DefaultCursor()
     {
@@ -26,15 +26,15 @@ public class DefaultCursor implements Cursor
      *
      * @param list list for the cursor
      */
-    public DefaultCursor(final List list)
+    public DefaultCursor( final List list )
     {
-        if (list == null)
+        if ( list == null )
         {
             cursor = emptyCursor;
         }
         else
         {
-            cursor = new ListCursor(list);
+            cursor = new ListCursor( list );
         }
     }
 
@@ -43,15 +43,15 @@ public class DefaultCursor implements Cursor
      *
      * @param array an array of objects
      */
-    public DefaultCursor(final Object[] array)
+    public DefaultCursor( final Object[] array )
     {
-        if (array == null)
+        if ( array == null )
         {
             cursor = emptyCursor;
         }
         else
         {
-            cursor = new ArrayCursor(array);
+            cursor = new ArrayCursor( array );
         }
     }
 
@@ -90,9 +90,9 @@ public class DefaultCursor implements Cursor
         return cursor.getCurrent();
     }
 
-    public void setCurrent(final Object obj)
+    public void setCurrent( final Object obj )
     {
-        cursor.setCurrent(obj);
+        cursor.setCurrent( obj );
     }
 
     /**

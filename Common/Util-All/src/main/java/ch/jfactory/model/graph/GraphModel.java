@@ -6,7 +6,6 @@ package ch.jfactory.model.graph;
  */
 public interface GraphModel
 {
-
     /**
      * Returns the root data entry for the whole model.
      *
@@ -14,32 +13,34 @@ public interface GraphModel
      */
     public GraphNode getRoot();
 
-    /** Creates a new GraphNode of the given type for the given parent. */
-    public GraphNode createNode(GraphNode parent, Class type);
+    /**
+     * Creates a new GraphNode of the given type for the given parent.
+     */
+    public GraphNode createNode( GraphNode parent, Class type );
 
     /**
      * Returns a {@link GraphEdge} for the given parent and child {@link GraphNode}s. The edge is constructe newly if
      * needed.
      */
-    public GraphEdge createEdge(GraphNode parent, GraphNode child);
+    public GraphEdge createEdge( GraphNode parent, GraphNode child );
 
-    public void addRemoved(GraphNode node);
+    public void addRemoved( GraphNode node );
 
-    public void addRemoved(GraphEdge edge);
+    public void addRemoved( GraphEdge edge );
 
-    public void addChanged(GraphNode node);
+    public void addChanged( GraphNode node );
 
-    public void addChanged(GraphEdge edge);
+    public void addChanged( GraphEdge edge );
 
     public void save();
 
     public void doQuit();
 
-    public void addDirtyListener(DirtyListener listener);
+    public void addDirtyListener( DirtyListener listener );
 
-    public void removeDirtyListener(DirtyListener listener);
+    public void removeDirtyListener( DirtyListener listener );
 
-    public void setDirty(boolean dirty);
+    public void setDirty( boolean dirty );
 
     public boolean getDirty();
 

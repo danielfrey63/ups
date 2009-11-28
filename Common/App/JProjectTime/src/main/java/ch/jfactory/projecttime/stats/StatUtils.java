@@ -17,10 +17,10 @@
 package ch.jfactory.projecttime.stats;
 
 import ch.jfactory.projecttime.domain.api.IFEntry;
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Utility methods for statistics.
@@ -28,36 +28,44 @@ import java.util.Calendar;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class StatUtils {
-
-    public static long sumAll(IFEntry entry, long sum) {
+public class StatUtils
+{
+    public static long sumAll( final IFEntry entry, long sum )
+    {
         final IFEntry[] children = entry.getChildren();
         final Calendar start = entry.getStart();
         final Calendar end = entry.getEnd();
-        if (start != null && end != null) {
-            sum += (end.getTime().getTime() - start.getTime().getTime());
+        if ( start != null && end != null )
+        {
+            sum += ( end.getTime().getTime() - start.getTime().getTime() );
         }
-        for (int i = 0; children != null && i < children.length; i++) {
+        for ( int i = 0; children != null && i < children.length; i++ )
+        {
             final IFEntry child = children[i];
-            sum += sumAll(child, 0);
+            sum += sumAll( child, 0 );
         }
         return sum;
     }
 
-    public static long sumAll(IFEntry[] entries, long sum) {
-        for (int i = 0; i < entries.length; i++) {
-            final IFEntry entry = entries[i];
-            sum += sumAll(entry, 0);
+    public static long sumAll( final IFEntry[] entries, long sum )
+    {
+        for ( final IFEntry entry : entries )
+        {
+            sum += sumAll( entry, 0 );
         }
         return sum;
     }
 
-    public static class StatsValueHolder {
-
+    public static class StatsValueHolder
+    {
         public long duration;
+
         public Date start;
+
         public Date end;
+
         public Map dailySum = new HashMap();
+
         public Map categorySum = new HashMap();
     }
 }

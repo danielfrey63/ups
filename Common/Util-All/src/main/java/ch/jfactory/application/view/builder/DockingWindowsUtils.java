@@ -40,96 +40,89 @@ import net.infonode.tabbedpanel.TabbedPanel;
  */
 public abstract class DockingWindowsUtils
 {
-
-    public static void setRootWindowProps(final RootWindow rootWindow)
+    public static void setRootWindowProps( final RootWindow rootWindow )
     {
-
-        setBasicRootWindowProps(rootWindow);
+        setBasicRootWindowProps( rootWindow );
 
         final Color rootBackgroundColor = rootWindow.getRootWindowProperties().getTabWindowProperties().
                 getTabbedPanelProperties().getContentPanelProperties().getComponentProperties().
                 getBackgroundColor();
-        rootWindow.getRootWindowProperties().getWindowAreaProperties().setBackgroundColor(rootBackgroundColor);
+        rootWindow.getRootWindowProperties().getWindowAreaProperties().setBackgroundColor( rootBackgroundColor );
     }
 
-    public static void setBasicRootWindowProps(final RootWindow rootWindow)
+    public static void setBasicRootWindowProps( final RootWindow rootWindow )
     {
-
         final RootWindowProperties props = rootWindow.getRootWindowProperties();
         props.getDockingWindowProperties().getTabProperties().getHighlightedButtonProperties().
-                getCloseButtonProperties().setVisible(false);
-        props.getTabWindowProperties().getTabbedPanelProperties().setTabSpacing(2);
-        configureProperties(rootWindow, false, false, false, false, false, false);
+                getCloseButtonProperties().setVisible( false );
+        props.getTabWindowProperties().getTabbedPanelProperties().setTabSpacing( 2 );
+        configureProperties( rootWindow, false, false, false, false, false, false );
     }
 
-    protected static void setTabProps(final WindowTabStateProperties tabProps, final boolean closeButtonVisible,
-                                      final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
-                                      final boolean dockButtonVisible, final boolean undockButtonVisible)
+    protected static void setTabProps( final WindowTabStateProperties tabProps, final boolean closeButtonVisible,
+                                       final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
+                                       final boolean dockButtonVisible, final boolean undockButtonVisible )
     {
-
-        tabProps.getCloseButtonProperties().setVisible(closeButtonVisible);
-        tabProps.getMinimizeButtonProperties().setVisible(minimizeButtonVisible);
-        tabProps.getRestoreButtonProperties().setVisible(restoreButtonVisible);
+        tabProps.getCloseButtonProperties().setVisible( closeButtonVisible );
+        tabProps.getMinimizeButtonProperties().setVisible( minimizeButtonVisible );
+        tabProps.getRestoreButtonProperties().setVisible( restoreButtonVisible );
 //        tabProps.getDockButtonProperties().setVisible(dockButtonVisible);
 //        tabProps.getUndockButtonProperties().setVisible(undockButtonVisible);
     }
 
-    public static void configureProperties(final RootWindow rootWindow, final boolean closeButtonVisible,
-                                           final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
-                                           final boolean maximizeButtonVisilbe, final boolean undockButtonVisible,
-                                           final boolean dockButtonVisible)
+    public static void configureProperties( final RootWindow rootWindow, final boolean closeButtonVisible,
+                                            final boolean minimizeButtonVisible, final boolean restoreButtonVisible,
+                                            final boolean maximizeButtonVisilbe, final boolean undockButtonVisible,
+                                            final boolean dockButtonVisible )
     {
-
         final WindowTabProperties tabProps = rootWindow.getRootWindowProperties().getTabWindowProperties().getTabProperties();
-        setTabProps(tabProps.getNormalButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible);
-        setTabProps(tabProps.getHighlightedButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible);
-        setTabProps(tabProps.getFocusedButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible);
-        rootWindow.getRootWindowProperties().getTabWindowProperties().getCloseButtonProperties().setVisible(closeButtonVisible);
-        rootWindow.getRootWindowProperties().getTabWindowProperties().getMaximizeButtonProperties().setVisible(maximizeButtonVisilbe);
-        rootWindow.getRootWindowProperties().getTabWindowProperties().getMinimizeButtonProperties().setVisible(minimizeButtonVisible);
-        rootWindow.getRootWindowProperties().getTabWindowProperties().getRestoreButtonProperties().setVisible(restoreButtonVisible);
+        setTabProps( tabProps.getNormalButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible );
+        setTabProps( tabProps.getHighlightedButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible );
+        setTabProps( tabProps.getFocusedButtonProperties(), closeButtonVisible, minimizeButtonVisible, restoreButtonVisible, dockButtonVisible, undockButtonVisible );
+        rootWindow.getRootWindowProperties().getTabWindowProperties().getCloseButtonProperties().setVisible( closeButtonVisible );
+        rootWindow.getRootWindowProperties().getTabWindowProperties().getMaximizeButtonProperties().setVisible( maximizeButtonVisilbe );
+        rootWindow.getRootWindowProperties().getTabWindowProperties().getMinimizeButtonProperties().setVisible( minimizeButtonVisible );
+        rootWindow.getRootWindowProperties().getTabWindowProperties().getRestoreButtonProperties().setVisible( restoreButtonVisible );
 //        rootWindow.getRootWindowProperties().getTabWindowProperties().getUndockButtonProperties().setVisible(undockButtonVisible);
 //        rootWindow.getRootWindowProperties().getTabWindowProperties().getDockButtonProperties().setVisible(dockButtonVisible);
     }
 
-    public static RootWindow createParentChildDisplay(final JComponent listPanel, final ViewMap views)
+    public static RootWindow createParentChildDisplay( final JComponent listPanel, final ViewMap views )
     {
-
         final TabbedPanel tabbedPanel = new TabbedPanel();
-        tabbedPanel.addTab(new Tab(listPanel));
+        tabbedPanel.addTab( new Tab( listPanel ) );
 
-        final View listView = new View("", null, tabbedPanel);
-        listView.getViewProperties().setAlwaysShowTitle(false);
+        final View listView = new View( "", null, tabbedPanel );
+        listView.getViewProperties().setAlwaysShowTitle( false );
 
-        views.addView(0, listView);
+        views.addView( 0, listView );
 
-        final RootWindow rootWindow = DockingUtil.createRootWindow(views, true);
-        setBasicRootWindowProps(rootWindow);
-        configureProperties(rootWindow, false, false, false, false, false, false);
+        final RootWindow rootWindow = DockingUtil.createRootWindow( views, true );
+        setBasicRootWindowProps( rootWindow );
+        configureProperties( rootWindow, false, false, false, false, false, false );
 
         final RootWindowProperties rootWindowProperties = rootWindow.getRootWindowProperties();
         final TabWindowProperties properties = rootWindowProperties.getTabWindowProperties();
-        tabbedPanel.getProperties().addSuperObject(properties.getTabbedPanelProperties());
+        tabbedPanel.getProperties().addSuperObject( properties.getTabbedPanelProperties() );
 
         // Make sure to create the TabWindow AFTER the RootWindow, otherwise the content will be empty!
-        final View[] windows = (View[]) ArrayUtils.remove(toArray(views), 0, new View[0]);
-        final TabWindow rightTabs = new TabWindow(windows);
-        rightTabs.setSelectedTab(0);
+        final View[] windows = (View[]) ArrayUtils.remove( toArray( views ), 0, new View[0] );
+        final TabWindow rightTabs = new TabWindow( windows );
+        rightTabs.setSelectedTab( 0 );
 
-        rootWindow.setWindow(new SplitWindow(true, listView, rightTabs));
-        rootWindowProperties.getWindowAreaProperties().setBackgroundColor(rootWindowProperties.getComponentProperties().getBackgroundColor());
+        rootWindow.setWindow( new SplitWindow( true, listView, rightTabs ) );
+        rootWindowProperties.getWindowAreaProperties().setBackgroundColor( rootWindowProperties.getComponentProperties().getBackgroundColor() );
 
         return rootWindow;
     }
 
-    public static View[] toArray(final ViewMap views)
+    public static View[] toArray( final ViewMap views )
     {
-
         final int viewCount = views.getViewCount();
         final View[] array = new View[viewCount];
-        for (int i = 0; i < viewCount; i++)
+        for ( int i = 0; i < viewCount; i++ )
         {
-            array[i] = views.getView(i);
+            array[i] = views.getView( i );
         }
         return array;
     }

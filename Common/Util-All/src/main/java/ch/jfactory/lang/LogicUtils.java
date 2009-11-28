@@ -32,8 +32,7 @@ import org.pietschy.command.ActionCommand;
  */
 public class LogicUtils
 {
-
-    private static final Logger LOG = Logger.getLogger(LogicUtils.class);
+    private static final Logger LOG = Logger.getLogger( LogicUtils.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -146,12 +145,12 @@ public class LogicUtils
      * @param flags array of flags to scan.
      * @return the index of the first flag with value <code>false</code>
      */
-    public static int getFirstFalse(final boolean[] flags)
+    public static int getFirstFalse( final boolean[] flags )
     {
-        for (int i = 0; i < flags.length; i++)
+        for ( int i = 0; i < flags.length; i++ )
         {
             final boolean flag = flags[i];
-            if (!flag)
+            if ( !flag )
             {
                 return i;
             }
@@ -159,13 +158,13 @@ public class LogicUtils
         return flags.length;
     }
 
-    public static int getFullIndex(final int[] flags)
+    public static int getFullIndex( final int[] flags )
     {
-        double pos = Math.pow(2, flags.length - 1);
+        double pos = Math.pow( 2, flags.length - 1 );
         int result = 0;
-        for (final int flag : flags)
+        for ( final int flag : flags )
         {
-            if (flag == 1)
+            if ( flag == 1 )
             {
                 result += pos;
             }
@@ -174,13 +173,13 @@ public class LogicUtils
         return result;
     }
 
-    public static int getFullIndex(final boolean[] flags)
+    public static int getFullIndex( final boolean[] flags )
     {
-        double pos = Math.pow(2, flags.length - 1);
+        double pos = Math.pow( 2, flags.length - 1 );
         int result = 0;
-        for (final boolean flag : flags)
+        for ( final boolean flag : flags )
         {
-            if (flag)
+            if ( flag )
             {
                 result += pos;
             }
@@ -189,32 +188,32 @@ public class LogicUtils
         return result;
     }
 
-    public static boolean[] toBoolean(final int[] flags)
+    public static boolean[] toBoolean( final int[] flags )
     {
-        if (flags == null)
+        if ( flags == null )
         {
             return new boolean[0];
         }
         final boolean[] result = new boolean[flags.length];
-        for (int i = 0; i < flags.length; i++)
+        for ( int i = 0; i < flags.length; i++ )
         {
             final int flag = flags[i];
-            result[i] = (flag == 1);
+            result[i] = ( flag == 1 );
         }
         return result;
     }
 
-    public static boolean[][] toBoolean(final int[][] flags)
+    public static boolean[][] toBoolean( final int[][] flags )
     {
-        if (flags == null)
+        if ( flags == null )
         {
             return new boolean[0][];
         }
         final boolean[][] result = new boolean[flags.length][];
-        for (int i = 0; i < flags.length; i++)
+        for ( int i = 0; i < flags.length; i++ )
         {
             final int[] flag = flags[i];
-            result[i] = toBoolean(flag);
+            result[i] = toBoolean( flag );
         }
         return result;
     }
@@ -227,14 +226,14 @@ public class LogicUtils
      * @return the logical AND of the two arrays of boolean
      * @throws IllegalArgumentException if the two arrays are of different size
      */
-    public static boolean[] and(final boolean[] booleansA, final boolean[] booleansB)
+    public static boolean[] and( final boolean[] booleansA, final boolean[] booleansB )
     {
-        if (booleansA.length != booleansB.length)
+        if ( booleansA.length != booleansB.length )
         {
-            throw new IllegalArgumentException("array lengths must be equal");
+            throw new IllegalArgumentException( "array lengths must be equal" );
         }
         final boolean[] result = new boolean[booleansA.length];
-        for (int i = 0; i < booleansA.length; i++)
+        for ( int i = 0; i < booleansA.length; i++ )
         {
             result[i] = booleansA[i] && booleansB[i];
         }
@@ -247,10 +246,10 @@ public class LogicUtils
      * @param booleans
      * @return one boolean with the logical OR of the set of booleans
      */
-    public static boolean or(final boolean[] booleans)
+    public static boolean or( final boolean[] booleans )
     {
         boolean result = false;
-        for (boolean aBoolean : booleans)
+        for ( final boolean aBoolean : booleans )
         {
             result |= aBoolean;
         }
@@ -265,132 +264,132 @@ public class LogicUtils
      * @param componentMapps             the component mappings
      * @param numberOfHierarchicalStates the index where hierarchial mappings end and full matrix mapping starts
      */
-    public static void setEnabledStates(final InfoBit[] bits, final Object[] components, final long[] componentMapps,
-                                        final int numberOfHierarchicalStates)
+    public static void setEnabledStates( final InfoBit[] bits, final Object[] components, final long[] componentMapps,
+                                         final int numberOfHierarchicalStates )
     {
-        final int status = Integer.parseInt(getIntString(bits), 2);
-        final int hierarchicalIndex = findLowestZeroBit(status);
+        final int status = Integer.parseInt( getIntString( bits ), 2 );
+        final int hierarchicalIndex = findLowestZeroBit( status );
 
         StringBuilder debugStringBuffer = null;
         Formatter formatter = null;
-        if (DEBUG)
+        if ( DEBUG )
         {
             debugStringBuffer = new StringBuilder();
-            formatter = new Formatter(debugStringBuffer);
-            final String stat = Integer.toBinaryString(status);
-            formatter.format("%n    status                    %s%s", StringUtils.repeat("0", bits.length - stat.length()), stat);
-            for (int i = bits.length - 1; i >= 0; i--)
+            formatter = new Formatter( debugStringBuffer );
+            final String stat = Integer.toBinaryString( status );
+            formatter.format( "%n    status                    %s%s", StringUtils.repeat( "0", bits.length - stat.length() ), stat );
+            for ( int i = bits.length - 1; i >= 0; i-- )
             {
-                formatter.format("%n    status                  %d %s", bits[i].isBit() ? 1 : 0, bits[i].getInfo());
+                formatter.format( "%n    status                  %d %s", bits[i].isBit() ? 1 : 0, bits[i].getInfo() );
             }
-            formatter.format("%n    lowest hierarchical index %s", hierarchicalIndex);
-            formatter.format("%n    hierarchical states count %s", numberOfHierarchicalStates);
-            formatter.format("%n    hierarchical              %b", hierarchicalIndex < numberOfHierarchicalStates);
+            formatter.format( "%n    lowest hierarchical index %s", hierarchicalIndex );
+            formatter.format( "%n    hierarchical states count %s", numberOfHierarchicalStates );
+            formatter.format( "%n    hierarchical              %b", hierarchicalIndex < numberOfHierarchicalStates );
         }
 
-        for (int i = 0; i < components.length; i++)
+        for ( int i = 0; i < components.length; i++ )
         {
             final Object component = components[i];
             final long componentMapping = componentMapps[i];
             boolean enabled = false;
-            if (DEBUG)
+            if ( DEBUG )
             {
                 final String name = component.getClass().getName();
-                formatter.format("%n%n    component     %s", name.substring(name.lastIndexOf(".") + 1));
-                formatter.format("%n    mapping       %s", Long.toBinaryString(componentMapping));
+                formatter.format( "%n%n    component     %s", name.substring( name.lastIndexOf( "." ) + 1 ) );
+                formatter.format( "%n    mapping       %s", Long.toBinaryString( componentMapping ) );
             }
-            if (hierarchicalIndex < numberOfHierarchicalStates)
+            if ( hierarchicalIndex < numberOfHierarchicalStates )
             {
-                enabled = isBitSet(componentMapping, hierarchicalIndex);
-                if (DEBUG)
+                enabled = isBitSet( componentMapping, hierarchicalIndex );
+                if ( DEBUG )
                 {
-                    final int index = Long.toBinaryString(componentMapping).length() - hierarchicalIndex;
-                    formatter.format("%n    " + (enabled ? "+ enabled " : "- disabled") + " %2d %" + index + "s", hierarchicalIndex, "^");
+                    final int index = Long.toBinaryString( componentMapping ).length() - hierarchicalIndex;
+                    formatter.format( "%n    " + ( enabled ? "+ enabled " : "- disabled" ) + " %2d %" + index + "s", hierarchicalIndex, "^" );
                 }
             }
             else
             {
                 final int tableIndex = status >> numberOfHierarchicalStates;
                 final int shift = tableIndex + numberOfHierarchicalStates;
-                enabled = isBitSet(componentMapping, shift);
-                if (DEBUG)
+                enabled = isBitSet( componentMapping, shift );
+                if ( DEBUG )
                 {
-                    final int index = Long.toBinaryString(componentMapping).length() - tableIndex - numberOfHierarchicalStates;
-                    formatter.format("%n    " + (enabled ? "+ enabled " : "- disabled") + " %2d %" + index + "s", shift, "^");
+                    final int index = Long.toBinaryString( componentMapping ).length() - tableIndex - numberOfHierarchicalStates;
+                    formatter.format( "%n    " + ( enabled ? "+ enabled " : "- disabled" ) + " %2d %" + index + "s", shift, "^" );
                 }
             }
-            if (component instanceof JComponent)
+            if ( component instanceof JComponent )
             {
-                ((JComponent) component).setEnabled(enabled);
+                ( (JComponent) component ).setEnabled( enabled );
             }
-            else if (component instanceof ActionCommand)
+            else if ( component instanceof ActionCommand )
             {
-                ((ActionCommand) component).setEnabled(enabled);
+                ( (ActionCommand) component ).setEnabled( enabled );
             }
             else
             {
-                invokeSetEnabled(component, enabled);
+                invokeSetEnabled( component, enabled );
             }
         }
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOG.debug(debugStringBuffer.toString());
+            LOG.debug( debugStringBuffer.toString() );
         }
     }
 
-    private static void invokeSetEnabled(final Object component, final boolean enabled)
+    private static void invokeSetEnabled( final Object component, final boolean enabled )
     {
         try
         {
             final Class clazz = component.getClass();
-            final Method method = clazz.getMethod("setEnabled", boolean.class);
+            final Method method = clazz.getMethod( "setEnabled", boolean.class );
             try
             {
-                method.invoke(component, enabled);
+                method.invoke( component, enabled );
             }
-            catch (IllegalAccessException e)
+            catch ( IllegalAccessException e )
             {
-                throw new IllegalArgumentException("cannot access method " + method.getName(), e);
+                throw new IllegalArgumentException( "cannot access method " + method.getName(), e );
             }
-            catch (InvocationTargetException e)
+            catch ( InvocationTargetException e )
             {
-                throw new IllegalArgumentException("error during invokation of " + method.getName(), e);
+                throw new IllegalArgumentException( "error during invokation of " + method.getName(), e );
             }
         }
-        catch (NoSuchMethodException e)
+        catch ( NoSuchMethodException e )
         {
-            throw new IllegalArgumentException("component " + component.getClass().getName()
-                    + " is component without setEnabled(boolean) method.", e);
+            throw new IllegalArgumentException( "component " + component.getClass().getName()
+                    + " is component without setEnabled(boolean) method.", e );
         }
     }
 
-    public static String getIntString(final boolean[] flags)
+    public static String getIntString( final boolean[] flags )
     {
         final StringBuffer result = new StringBuffer();
-        for (final boolean flag : flags)
+        for ( final boolean flag : flags )
         {
-            result.append(flag ? "1" : "0");
+            result.append( flag ? "1" : "0" );
         }
         return result.toString();
     }
 
-    public static String getIntString(final InfoBit[] flags)
+    public static String getIntString( final InfoBit[] flags )
     {
         final StringBuffer result = new StringBuffer();
-        for (InfoBit flag1 : flags)
+        for ( final InfoBit flag1 : flags )
         {
             final boolean flag = flag1.isBit();
-            result.append(flag ? "1" : "0");
+            result.append( flag ? "1" : "0" );
         }
         return result.toString();
     }
 
-    public static int findLowestZeroBit(final int integer)
+    public static int findLowestZeroBit( final int integer )
     {
-        for (int i = 0; i < NUMBER_OF_BITS_IN_A_BYTE; i++)
+        for ( int i = 0; i < NUMBER_OF_BITS_IN_A_BYTE; i++ )
         {
-            final int mask = (1 << i);
-            if ((integer & mask) == 0)
+            final int mask = ( 1 << i );
+            if ( ( integer & mask ) == 0 )
             {
                 return i;
             }
@@ -398,20 +397,19 @@ public class LogicUtils
         return NUMBER_OF_BITS_IN_A_BYTE;
     }
 
-    public static boolean isBitSet(final long b, final int i)
+    public static boolean isBitSet( final long b, final int i )
     {
-        final long mask = (long) Math.pow(2, i);
-        return (b & mask) == mask;
+        final long mask = (long) Math.pow( 2, i );
+        return ( b & mask ) == mask;
     }
 
     public static class InfoBit
     {
+        private final boolean bit;
 
-        private boolean bit;
+        private final String info;
 
-        private String info;
-
-        public InfoBit(final boolean bit, final String yes, final String no)
+        public InfoBit( final boolean bit, final String yes, final String no )
         {
             this.bit = bit;
             this.info = bit ? yes : no;

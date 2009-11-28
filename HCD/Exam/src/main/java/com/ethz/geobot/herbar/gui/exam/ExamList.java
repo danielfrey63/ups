@@ -12,9 +12,9 @@ import com.ethz.geobot.herbar.model.Taxon;
  * Created by Daniel
  */
 
-public interface ExamList {
+public interface ExamList
+{
+    public Taxon[] getExamList( int size );
 
-    public Taxon[] getExamList(int size);
-
-    public void setHerbarModel(HerbarModel herbarModel);
+    public void setHerbarModel( HerbarModel herbarModel );
 }

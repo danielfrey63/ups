@@ -43,236 +43,235 @@ public class JSearchTree
 
     private static KeyAdapter keyL;
 
-    private JTree tree;
+    private final JTree tree;
 
     private String prefixText = "";
 
-    public static JSearchTree decorate(final JTree tree, final ITreeSearcher s, final String prefix)
+    public static JSearchTree decorate( final JTree tree, final ITreeSearcher s, final String prefix )
     {
-        final JSearchTree st = new JSearchTree(tree, s);
-        st.setPrefixText(prefix);
+        final JSearchTree st = new JSearchTree( tree, s );
+        st.setPrefixText( prefix );
         return st;
     }
 
-    public static JSearchTree decorate(final JTree tree, final boolean starting, final boolean ignoreCase, final String prefix)
+    public static JSearchTree decorate( final JTree tree, final boolean starting, final boolean ignoreCase, final String prefix )
     {
-        final TreeSearcher s = new TreeSearcher(tree, starting, ignoreCase);
-        final JSearchTree st = new JSearchTree(tree, s);
-        st.setPrefixText(prefix);
+        final TreeSearcher s = new TreeSearcher( tree, starting, ignoreCase );
+        final JSearchTree st = new JSearchTree( tree, s );
+        st.setPrefixText( prefix );
         return st;
     }
 
     public void undecorate()
     {
         hideTip();
-        tree.removeKeyListener(keyL);
+        tree.removeKeyListener( keyL );
     }
 
-    private JSearchTree(final JTree tree, final ITreeSearcher s)
+    private JSearchTree( final JTree tree, final ITreeSearcher s )
     {
         this.tree = tree;
         searcher = s;
-        keyL = (new KeyAdapter()
+        keyL = ( new KeyAdapter()
         {
-            public void keyPressed(final KeyEvent e)
+            public void keyPressed( final KeyEvent e )
             {
-                manageKey(e);
+                manageKey( e );
             }
 
-            public void keyTyped(final KeyEvent e)
+            public void keyTyped( final KeyEvent e )
             {
                 e.consume();
             }
 
-            public void keyReleased(final KeyEvent e)
+            public void keyReleased( final KeyEvent e )
             {
                 e.consume();
             }
-        });
-        tree.addKeyListener(keyL);
+        } );
+        tree.addKeyListener( keyL );
     }
 
-    public void setSearcher(final ITreeSearcher searcher)
+    public void setSearcher( final ITreeSearcher searcher )
     {
         this.searcher = searcher;
     }
 
-    private void setSearchText(final String s)
+    private void setSearchText( final String s )
     {
         tipText = s;
-        if (toolTip != null)
+        if ( toolTip != null )
         {
-            toolTip.setTipText(prefixText + s);
-            SwingUtilities.invokeLater(new Runnable()
+            toolTip.setTipText( prefixText + s );
+            SwingUtilities.invokeLater( new Runnable()
             {
                 public void run()
                 {
-                    toolTip.setSize(toolTip.getPreferredSize());
+                    toolTip.setSize( toolTip.getPreferredSize() );
                     tipWindow.pack();
                 }
-            });
+            } );
         }
 
-        final TreePath selection = searcher.setSearchString(tipText);
-        select(selection);
+        final TreePath selection = searcher.setSearchString( tipText );
+        select( selection );
     }
 
-    private void manageKey(final KeyEvent e)
+    private void manageKey( final KeyEvent e )
     {
-
         final char ch = e.getKeyChar();
         final int keyCode = e.getKeyCode();
-        if (!shown)
+        if ( !shown )
         {
-            if (isPrintableDefined(ch))
+            if ( isPrintableDefined( ch ) )
             {
-                showTip("" + ch);
+                showTip( "" + ch );
                 e.consume();
             }
         }
         else
         {
-            if (keyCode == KeyEvent.VK_ESCAPE)
+            if ( keyCode == KeyEvent.VK_ESCAPE )
             {
                 hideTip();
-                select(preSearchSelection);
+                select( preSearchSelection );
             }
-            else if (keyCode == KeyEvent.VK_ENTER)
+            else if ( keyCode == KeyEvent.VK_ENTER )
             {
                 hideTip();
             }
-            else if (keyCode == KeyEvent.VK_DOWN)
+            else if ( keyCode == KeyEvent.VK_DOWN )
             {
-                select(searcher.next());
+                select( searcher.next() );
             }
-            else if (keyCode == KeyEvent.VK_LEFT)
+            else if ( keyCode == KeyEvent.VK_LEFT )
             {
-                tree.collapsePath(tree.getSelectionPath());
+                tree.collapsePath( tree.getSelectionPath() );
             }
-            else if (keyCode == KeyEvent.VK_RIGHT)
+            else if ( keyCode == KeyEvent.VK_RIGHT )
             {
-                tree.expandPath(tree.getSelectionPath());
+                tree.expandPath( tree.getSelectionPath() );
             }
-            else if (keyCode == KeyEvent.VK_UP)
+            else if ( keyCode == KeyEvent.VK_UP )
             {
-                select(searcher.prev());
+                select( searcher.prev() );
             }
-            else if (keyCode == KeyEvent.VK_PAGE_DOWN)
+            else if ( keyCode == KeyEvent.VK_PAGE_DOWN )
             {
-                select(searcher.next());
+                select( searcher.next() );
             }
-            else if (keyCode == KeyEvent.VK_PAGE_UP)
+            else if ( keyCode == KeyEvent.VK_PAGE_UP )
             {
-                select(searcher.prev());
+                select( searcher.prev() );
             }
-            else if (keyCode == KeyEvent.VK_BACK_SPACE)
+            else if ( keyCode == KeyEvent.VK_BACK_SPACE )
             {
-                if (tipText.length() <= 0)
+                if ( tipText.length() <= 0 )
                 {
                     hideTip();
-                    select(preSearchSelection);
+                    select( preSearchSelection );
                 }
                 else
                 {
-                    setSearchText(tipText.substring(0, tipText.length() - 1));
+                    setSearchText( tipText.substring( 0, tipText.length() - 1 ) );
                 }
             }
-            else if (isPrintableDefined(ch))
+            else if ( isPrintableDefined( ch ) )
             {
-                setSearchText(tipText + e.getKeyChar());
+                setSearchText( tipText + e.getKeyChar() );
             }
             e.consume();
         }
     }
 
-    private boolean isPrintableDefined(final char ch)
+    private boolean isPrintableDefined( final char ch )
     {
-        final int type = Character.getType(ch);
-        if (type == Character.UPPERCASE_LETTER)
+        final int type = Character.getType( ch );
+        if ( type == Character.UPPERCASE_LETTER )
         {
             return true;
         }
-        if (type == Character.OTHER_LETTER)
+        if ( type == Character.OTHER_LETTER )
         {
             return true;
         }
-        if (type == Character.OTHER_NUMBER)
+        if ( type == Character.OTHER_NUMBER )
         {
             return true;
         }
-        if (type == Character.OTHER_PUNCTUATION)
+        if ( type == Character.OTHER_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.OTHER_SYMBOL)
+        if ( type == Character.OTHER_SYMBOL )
         {
             return true;
         }
-        if (type == Character.SPACE_SEPARATOR)
+        if ( type == Character.SPACE_SEPARATOR )
         {
             return true;
         }
-        if (type == Character.START_PUNCTUATION)
+        if ( type == Character.START_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.TITLECASE_LETTER)
+        if ( type == Character.TITLECASE_LETTER )
         {
             return true;
         }
-        if (type == Character.CURRENCY_SYMBOL)
+        if ( type == Character.CURRENCY_SYMBOL )
         {
             return true;
         }
-        if (type == Character.DASH_PUNCTUATION)
+        if ( type == Character.DASH_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.DECIMAL_DIGIT_NUMBER)
+        if ( type == Character.DECIMAL_DIGIT_NUMBER )
         {
             return true;
         }
-        if (type == Character.ENCLOSING_MARK)
+        if ( type == Character.ENCLOSING_MARK )
         {
             return true;
         }
-        if (type == Character.END_PUNCTUATION)
+        if ( type == Character.END_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.FINAL_QUOTE_PUNCTUATION)
+        if ( type == Character.FINAL_QUOTE_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.FORMAT)
+        if ( type == Character.FORMAT )
         {
             return true;
         }
-        if (type == Character.INITIAL_QUOTE_PUNCTUATION)
+        if ( type == Character.INITIAL_QUOTE_PUNCTUATION )
         {
             return true;
         }
-        if (type == Character.LETTER_NUMBER)
+        if ( type == Character.LETTER_NUMBER )
         {
             return true;
         }
-        if (type == Character.LINE_SEPARATOR)
+        if ( type == Character.LINE_SEPARATOR )
         {
             return true;
         }
-        if (type == Character.LOWERCASE_LETTER)
+        if ( type == Character.LOWERCASE_LETTER )
         {
             return true;
         }
-        if (type == Character.MATH_SYMBOL)
+        if ( type == Character.MATH_SYMBOL )
         {
             return true;
         }
-        if (type == Character.MODIFIER_LETTER)
+        if ( type == Character.MODIFIER_LETTER )
         {
             return true;
         }
-        if (type == Character.MODIFIER_SYMBOL)
+        if ( type == Character.MODIFIER_SYMBOL )
         {
             return true;
         }
@@ -290,41 +289,41 @@ public class JSearchTree
         return false;
     }
 
-    public void showTip(final String ch)
+    public void showTip( final String ch )
     {
         shown = true;
         final String tipText = "" + ch;
         preSearchSelection = tree.getSelectionPath();
-        setSearchText(tipText);
+        setSearchText( tipText );
         toolTip = tree.createToolTip();
-        toolTip.setTipText(prefixText + tipText);
-        toolTip.setVisible(true);
-        final Point p = new Point(tree.getVisibleRect().x, tree.getVisibleRect().y);
-        SwingUtilities.convertPointToScreen(p, tree);
-        tipWindow = new SearchPopup(tree, toolTip, p.x, p.y);
+        toolTip.setTipText( prefixText + tipText );
+        toolTip.setVisible( true );
+        final Point p = new Point( tree.getVisibleRect().x, tree.getVisibleRect().y );
+        SwingUtilities.convertPointToScreen( p, tree );
+        tipWindow = new SearchPopup( tree, toolTip, p.x, p.y );
         tipWindow.show();
-        toolTip.addComponentListener(new ComponentAdapter()
+        toolTip.addComponentListener( new ComponentAdapter()
         {
-            public void componentHidden(final ComponentEvent e)
+            public void componentHidden( final ComponentEvent e )
             {
                 hideTip();
             }
-        });
-        toolTip.addFocusListener(new FocusAdapter()
+        } );
+        toolTip.addFocusListener( new FocusAdapter()
         {
-            public void focusLost(final FocusEvent e)
+            public void focusLost( final FocusEvent e )
             {
                 hideTip();
             }
-        });
-        toolTip.requestFocus(true);
-        toolTip.addKeyListener(keyL);
+        } );
+        toolTip.requestFocus( true );
+        toolTip.addKeyListener( keyL );
 
     }
 
     public void hideTip()
     {
-        if (tipWindow != null)
+        if ( tipWindow != null )
         {
             tipWindow.hide();
         }
@@ -333,22 +332,22 @@ public class JSearchTree
 
     }
 
-    private void select(final TreePath path)
+    private void select( final TreePath path )
     {
-        if (path == null)
+        if ( path == null )
         {
             return;
         }
-        SwingUtilities.invokeLater(new Runnable()
+        SwingUtilities.invokeLater( new Runnable()
         {
             public void run()
             {
-                tree.setSelectionPath(path);
+                tree.setSelectionPath( path );
                 //tree.expandPath(path);
-                tree.scrollPathToVisible(path);
+                tree.scrollPathToVisible( path );
                 tree.repaint();
             }
-        });
+        } );
 
     }
 
@@ -357,7 +356,7 @@ public class JSearchTree
         return prefixText;
     }
 
-    public void setPrefixText(final String prefixText)
+    public void setPrefixText( final String prefixText )
     {
         this.prefixText = prefixText;
     }

@@ -2,7 +2,9 @@ package ch.jfactory.reflection;
 
 import java.lang.reflect.Field;
 
-/** Todo: document $Author: daniel_frey $ $Revision: 1.1 $ */
+/**
+ * Todo: document $Author: daniel_frey $ $Revision: 1.1 $
+ */
 public class ReflectionUtils
 {
     /**
@@ -14,28 +16,28 @@ public class ReflectionUtils
      * @param fieldType  Type of field
      * @return
      */
-    public static Object getField(final String name, final Object def, final Class fieldClass, final Class fieldType)
+    public static Object getField( final String name, final Object def, final Class fieldClass, final Class fieldType )
     {
-        if (name == null)
+        if ( name == null )
         {
             return def;
         }
         else
         {
             final Field[] fields = fieldClass.getFields();
-            for (final Field field : fields)
+            for ( final Field field : fields )
             {
-                if (field.getType() == fieldType && field.getName().equalsIgnoreCase(name))
+                if ( field.getType() == fieldType && field.getName().equalsIgnoreCase( name ) )
                 {
                     try
                     {
-                        return field.get(null);
+                        return field.get( null );
                     }
-                    catch (IllegalArgumentException e)
+                    catch ( IllegalArgumentException e )
                     {
                         return def;
                     }
-                    catch (IllegalAccessException e)
+                    catch ( IllegalAccessException e )
                     {
                         return def;
                     }

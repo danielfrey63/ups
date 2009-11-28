@@ -16,9 +16,9 @@
  */
 package ch.xmatrix.ups.pmb.domain;
 
+import ch.xmatrix.ups.pmb.ui.model.Settings;
 import java.util.ArrayList;
 import java.util.List;
-import ch.xmatrix.ups.pmb.ui.model.Settings;
 
 /**
  * TODO: document
@@ -26,79 +26,100 @@ import ch.xmatrix.ups.pmb.ui.model.Settings;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:37 $
  */
-public class Entry implements Comparable<Entry> {
-
+public class Entry implements Comparable<Entry>
+{
     private String path;
-    private Entry parent;
-    private List<Entry> list;
-    private FileEntry def;
-    private Settings settings;
 
-    public Entry(final String name, final Entry parent, final Settings settings) {
-        this.path = name.replaceAll("\\\\", "/");
+    private final Entry parent;
+
+    private final List<Entry> list;
+
+    private FileEntry def;
+
+    private final Settings settings;
+
+    public Entry( final String name, final Entry parent, final Settings settings )
+    {
+        this.path = name.replaceAll( "\\\\", "/" );
         this.settings = settings;
         this.parent = parent;
-        if (parent != null) {
-            parent.list.add(this);
+        if ( parent != null )
+        {
+            parent.list.add( this );
         }
         list = new ArrayList<Entry>();
     }
 
-    public Entry get(final int i) {
-        return list.size() > i ? list.get(i) : null;
+    public Entry get( final int i )
+    {
+        return list.size() > i ? list.get( i ) : null;
     }
 
-    public Entry get(final String name) {
-        for (final Entry entry : list) {
-            if (entry.path.equals(name)) {
+    public Entry get( final String name )
+    {
+        for ( final Entry entry : list )
+        {
+            if ( entry.path.equals( name ) )
+            {
                 return entry;
             }
         }
         return null;
     }
 
-    public List<Entry> getList() {
+    public List<Entry> getList()
+    {
         return list;
     }
 
-    public void add(final Entry e) {
-        list.add(e);
+    public void add( final Entry e )
+    {
+        list.add( e );
     }
 
-    public int size() {
+    public int size()
+    {
         return list.size();
     }
 
-    public Entry getParent() {
+    public Entry getParent()
+    {
         return parent;
     }
 
-    public String getPath() {
+    public String getPath()
+    {
         return path;
     }
 
-    public void setPath(final String path) {
+    public void setPath( final String path )
+    {
         this.path = path;
     }
 
-    public FileEntry getDefault() {
+    public FileEntry getDefault()
+    {
         return def;
     }
 
-    public void setDefault(final FileEntry def) {
+    public void setDefault( final FileEntry def )
+    {
         this.def = def;
     }
 
-    public Settings getSettings() {
+    public Settings getSettings()
+    {
         return settings;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return path;
     }
 
-    public int compareTo(final Entry o) {
-        return path.compareTo(o.path);
+    public int compareTo( final Entry o )
+    {
+        return path.compareTo( o.path );
     }
 }

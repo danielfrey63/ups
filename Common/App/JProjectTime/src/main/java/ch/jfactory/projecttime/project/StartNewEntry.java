@@ -27,22 +27,24 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class StartNewEntry extends ActionCommand {
+public class StartNewEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public StartNewEntry(final CommandManager manager, final ProjectModel model) {
-        super(manager, Commands.COMMANDID_START);
+    public StartNewEntry( final CommandManager manager, final ProjectModel model )
+    {
+        super( manager, Commands.COMMANDID_START );
         this.model = model;
     }
 
-    protected void handleExecute() {
-        getCommandManager().getCommand(Commands.COMMANDID_ADD).execute();
+    protected void handleExecute()
+    {
+        getCommandManager().getCommand( Commands.COMMANDID_ADD ).execute();
         final IFEntry entry = model.getNewChild();
-        entry.setName("Bemerkung zur Arbeit in dieser Zeit");
-        entry.setType("Zeiteintrag");
-        entry.setStart(Calendar.getInstance());
-        model.setRunning(entry);
-        model.getCurrentBeanModel().setBean(entry);
+        entry.setName( "Bemerkung zur Arbeit in dieser Zeit" );
+        entry.setType( "Zeiteintrag" );
+        entry.setStart( Calendar.getInstance() );
+        model.setRunning( entry );
+        model.getCurrentBeanModel().setBean( entry );
     }
 }

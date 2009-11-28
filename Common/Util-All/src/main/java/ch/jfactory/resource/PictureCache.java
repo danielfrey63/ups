@@ -23,10 +23,9 @@ import org.apache.log4j.Logger;
  */
 public class PictureCache implements AsynchronPictureLoaderListener
 {
-
     class CacheListEntry
     {
-        public CacheListEntry(final String image, final boolean t)
+        public CacheListEntry( final String image, final boolean t )
         {
             this.image = image;
             this.thumb = t;
@@ -37,8 +36,10 @@ public class PictureCache implements AsynchronPictureLoaderListener
         public boolean thumb;
     }
 
-    /** category for logging */
-    protected final static Logger LOGGER = Logger.getLogger(PictureCache.class.getName());
+    /**
+     * category for logging
+     */
+    protected final static Logger LOGGER = Logger.getLogger( PictureCache.class.getName() );
 
     protected final static boolean INFO = LOGGER.isInfoEnabled();
 
@@ -46,19 +47,23 @@ public class PictureCache implements AsynchronPictureLoaderListener
 
     protected HashMap cacheListHash = new HashMap();
 
-    private CachedImageLocator locator;
+    private final CachedImageLocator locator;
 
     /**
      * caching thread
      *
      * @see CacheImageThread
      */
-    private CacheImageThread cachingThread = new CacheImageThread();
+    private final CacheImageThread cachingThread = new CacheImageThread();
 
-    /** hashmap storing cached picture */
-    private Map pictureCache = new HashMap();
+    /**
+     * hashmap storing cached picture
+     */
+    private final Map pictureCache = new HashMap();
 
-    /** task list, contains images to be cached */
+    /**
+     * task list, contains images to be cached
+     */
     protected LinkedList cachingList = new LinkedList();
 
     /**
@@ -66,24 +71,26 @@ public class PictureCache implements AsynchronPictureLoaderListener
      *
      * @param locator the images are out of this directory
      */
-    public PictureCache(final CachedImageLocator locator)
+    public PictureCache( final CachedImageLocator locator )
     {
-        cachingThread.setPriority(Thread.MIN_PRIORITY);
+        cachingThread.setPriority( Thread.MIN_PRIORITY );
         cachingThread.start();
         this.locator = locator;
     }
 
-    /** clears all entries from Cache */
+    /**
+     * clears all entries from Cache
+     */
     synchronized public void clearCachingList()
     {
-        synchronized (cachingList)
+        synchronized ( cachingList )
         {
             cachingList.clear();
             cacheListHash.clear();
         }
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOGGER.debug("caching list cleared");
+            LOGGER.debug( "caching list cleared" );
         }
     }
 
@@ -94,17 +101,17 @@ public class PictureCache implements AsynchronPictureLoaderListener
      * @return a CachedImage-Object representing the image
      * @see CachedImage
      */
-    public CachedImage addCachedImage(final String name)
+    public CachedImage addCachedImage( final String name )
     {
-        CachedImage image = (CachedImage) pictureCache.get(name);
-        if (image == null)
+        CachedImage image = (CachedImage) pictureCache.get( name );
+        if ( image == null )
         {
-            if (INFO)
+            if ( INFO )
             {
-                LOGGER.info("adding image " + name + " in " + locator.getPath() + " " + " to cache");
+                LOGGER.info( "adding image " + name + " in " + locator.getPath() + " " + " to cache" );
             }
-            image = new CachedImage(locator, name);
-            pictureCache.put(name, image);
+            image = new CachedImage( locator, name );
+            pictureCache.put( name, image );
         }
         return image;
     }
@@ -114,13 +121,13 @@ public class PictureCache implements AsynchronPictureLoaderListener
      *
      * @param name name of the cache
      */
-    public void removeImage(final String name)
+    public void removeImage( final String name )
     {
-        if (INFO)
+        if ( INFO )
         {
-            LOGGER.info("removing image " + name + " from cache");
+            LOGGER.info( "removing image " + name + " from cache" );
         }
-        pictureCache.remove(name);
+        pictureCache.remove( name );
     }
 
     /**
@@ -128,53 +135,53 @@ public class PictureCache implements AsynchronPictureLoaderListener
      *
      * @param name name of the image
      */
-    public void cacheImage(final String name, final boolean thumb, final boolean first)
+    public void cacheImage( final String name, final boolean thumb, final boolean first )
     {
-        if (!addCachedImage(name).loaded(thumb))
+        if ( !addCachedImage( name ).loaded( thumb ) )
         {
             boolean ok = false;
-            synchronized (cachingList)
+            synchronized ( cachingList )
             {
-                ok = (cachingList.indexOf(name) < 0);
-                if (ok)
+                ok = ( cachingList.indexOf( name ) < 0 );
+                if ( ok )
                 {
-                    if (first)
+                    if ( first )
                     {
-                        cachingList.addFirst(name);
+                        cachingList.addFirst( name );
                     }
                     else
                     {
-                        cachingList.addLast(name);
+                        cachingList.addLast( name );
                     }
                 }
                 else
                 {
-                    if (first)
+                    if ( first )
                     {
-                        if (!cachingList.getFirst().equals(name))
+                        if ( !cachingList.getFirst().equals( name ) )
                         {
-                            cachingList.remove(name);
-                            cachingList.addFirst(name);
+                            cachingList.remove( name );
+                            cachingList.addFirst( name );
                         }
                     }
                 }
-                if (!thumb)
+                if ( !thumb )
                 {
-                    CacheListEntry cle = (CacheListEntry) cacheListHash.get(name);
-                    if (cle == null)
+                    CacheListEntry cle = (CacheListEntry) cacheListHash.get( name );
+                    if ( cle == null )
                     {
-                        cacheListHash.put(name, cle = new CacheListEntry(name, thumb));
+                        cacheListHash.put( name, cle = new CacheListEntry( name, thumb ) );
                     }
                     cle.thumb = thumb;
                 }
             }
-            if (ok)
+            if ( ok )
             {
-                if (DEBUG)
+                if ( DEBUG )
                 {
-                    LOGGER.debug("caching List changed due to " + name);
+                    LOGGER.debug( "caching List changed due to " + name );
                 }
-                synchronized (cachingThread)
+                synchronized ( cachingThread )
                 {
                     cachingThread.notify();
                 }
@@ -182,17 +189,17 @@ public class PictureCache implements AsynchronPictureLoaderListener
         }
     }
 
-    public void loadFinished(final String name, final Image img, final boolean thumb)
+    public void loadFinished( final String name, final Image img, final boolean thumb )
     {
-        addCachedImage(name).setImage(img, thumb);
+        addCachedImage( name ).setImage( img, thumb );
     }
 
-    public void loadAborted(final String name)
+    public void loadAborted( final String name )
     {
-        removeImage(name);
+        removeImage( name );
     }
 
-    public void loadStarted(final String name)
+    public void loadStarted( final String name )
     {
         // nothing
     }
@@ -208,48 +215,48 @@ public class PictureCache implements AsynchronPictureLoaderListener
         {
             try
             {
-                while (true)
+                while ( true )
                 {
                     try
                     {
                         final String name;
                         boolean thumb = false;
-                        synchronized (PictureCache.this.cachingList)
+                        synchronized ( PictureCache.this.cachingList )
                         {
                             name = (String) cachingList.removeFirst();
-                            final CacheListEntry cle = (CacheListEntry) cacheListHash.get(name);
-                            if (cle != null)
+                            final CacheListEntry cle = (CacheListEntry) cacheListHash.get( name );
+                            if ( cle != null )
                             {
                                 thumb = cle.thumb;
                             }
-                            cacheListHash.remove(name);
+                            cacheListHash.remove( name );
                         }
-                        if (INFO)
+                        if ( INFO )
                         {
-                            LOGGER.info("caching image " + name + ", " + thumb);
+                            LOGGER.info( "caching image " + name + ", " + thumb );
                         }
-                        final CachedImage img = addCachedImage(name);
-                        if (!img.loaded(thumb))
+                        final CachedImage img = addCachedImage( name );
+                        if ( !img.loaded( thumb ) )
                         {
-                            addCachedImage(name).loadImage(thumb);
+                            addCachedImage( name ).loadImage( thumb );
                         }
                     }
-                    catch (NoSuchElementException ex)
+                    catch ( NoSuchElementException ex )
                     {
-                        synchronized (this)
+                        synchronized ( this )
                         {
-                            if (INFO)
+                            if ( INFO )
                             {
-                                LOGGER.info("caching thread waiting");
+                                LOGGER.info( "caching thread waiting" );
                             }
                             this.wait();
                         }
                     }
                 }
             }
-            catch (InterruptedException iex)
+            catch ( InterruptedException iex )
             {
-                LOGGER.error("Caching thread interrupted.", iex);
+                LOGGER.error( "Caching thread interrupted.", iex );
             }
         }
     }

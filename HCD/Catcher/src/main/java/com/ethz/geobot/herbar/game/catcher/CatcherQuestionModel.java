@@ -20,38 +20,44 @@ import java.util.Vector;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class CatcherQuestionModel {
-
+public class CatcherQuestionModel
+{
     private int rightAnswers = 0;
-    private Vector allQuestions = new Vector();
-    private Vector selection = new Vector();
-    private HerbarModel model;
-    private int countQuestions = 0;
-    private int amountQuestions;
 
+    private final Vector allQuestions = new Vector();
+
+    private final Vector selection = new Vector();
+
+    private final HerbarModel model;
+
+    private int countQuestions = 0;
+
+    private final int amountQuestions;
 
     /**
      * Method CatcherQuestionModel. Constructor
      *
      * @param model instance of class Herbarmodel
      */
-    public CatcherQuestionModel(HerbarModel model) {
-        amountQuestions = Integer.parseInt(Strings.getString(Catcher.class, "CATCHER.ANZAHLFRAGEN"));
+    public CatcherQuestionModel( final HerbarModel model )
+    {
+        amountQuestions = Integer.parseInt( Strings.getString( Catcher.class, "CATCHER.ANZAHLFRAGEN" ) );
         this.model = model;
     }
 
     /**
      * puts the right answers in a hasmap of all right answers of this game
      */
-    public void setRightAnswers() {
+    public void setRightAnswers()
+    {
         rightAnswers = rightAnswers + 1;
     }
-
 
     /**
      * puts the right answers in a hasmap of all right answers of this game
      */
-    public boolean rightAnswersComplete() {
+    public boolean rightAnswersComplete()
+    {
         return rightAnswers == amountQuestions;
     }
 
@@ -60,62 +66,75 @@ public class CatcherQuestionModel {
      *
      * @return questionObject which serves as basis for the next question.
      */
-    public QuestionDataUnit getQuestion() {
-        if (selection.size() != 0) {
+    public QuestionDataUnit getQuestion()
+    {
+        if ( selection.size() != 0 )
+        {
             QuestionDataUnit questionDataUnit = null;
-            questionDataUnit = ((QuestionDataUnit) selection.elementAt(0));
-            selection.remove(0);
+            questionDataUnit = ( (QuestionDataUnit) selection.elementAt( 0 ) );
+            selection.remove( 0 );
             setCountQuestions();
             return questionDataUnit;
         }
-        else {
+        else
+        {
             return null;
         }
     }
 
-
-    public boolean isFinished() {
+    public boolean isFinished()
+    {
         boolean finished = false;
-        if (getCountQuestions() == amountQuestions) {
+        if ( getCountQuestions() == amountQuestions )
+        {
             finished = true;
         }
-        else if (getCountQuestions() <= amountQuestions) {
+        else if ( getCountQuestions() <= amountQuestions )
+        {
             finished = false;
         }
         return finished;
     }
 
-    private int getCountQuestions() {
+    private int getCountQuestions()
+    {
         return countQuestions;
     }
 
-    private void setCountQuestions() {
+    private void setCountQuestions()
+    {
         countQuestions = countQuestions + 1;
     }
 
-    private void initQuestions() {
-        Taxon tax = model.getRootTaxon();
-        Level lev = model.getLastLevel();
+    private void initQuestions()
+    {
+        final Taxon tax = model.getRootTaxon();
+        final Level lev = model.getLastLevel();
         // fill the array with all taxa on art -level
-        Taxon[] taxPool = tax.getAllChildTaxa(lev);
+        final Taxon[] taxPool = tax.getAllChildTaxa( lev );
         // for each taxon get a vector with all possible ancestor taxons
         // remove the upper two ancestors (abteilung, klasse) from  the vector
         // create an QuestionDataUnit-object with each taxon/ancestroTax-pair
         // fill those objects in a vector
-        for (int i = 0; i < taxPool.length; i++) {
-            Vector vectParentTaxa = getParentTaxon(taxPool[ i ]);
-            for (int iy = 0; iy < vectParentTaxa.size(); iy++) {
-                long idx = allQuestions.size();
-                allQuestions.add(new QuestionDataUnit(idx, taxPool[ i ], ((Taxon) vectParentTaxa.elementAt(iy)), false));
+        for ( final Taxon aTaxPool : taxPool )
+        {
+            final Vector vectParentTaxa = getParentTaxon( aTaxPool );
+            for ( int iy = 0; iy < vectParentTaxa.size(); iy++ )
+            {
+                final long idx = allQuestions.size();
+                allQuestions.add( new QuestionDataUnit( idx, aTaxPool, ( (Taxon) vectParentTaxa.elementAt( iy ) ), false ) );
             }
         }
     }
 
-    private void renewSelection() {
-        if (allQuestions.size() > 0) {
-            for (int r = 0; r < amountQuestions; r++) {
-                int randomSelect = (int) (Math.random() * (double) allQuestions.size());
-                selection.add(allQuestions.elementAt(randomSelect));
+    private void renewSelection()
+    {
+        if ( allQuestions.size() > 0 )
+        {
+            for ( int r = 0; r < amountQuestions; r++ )
+            {
+                final int randomSelect = (int) ( Math.random() * (double) allQuestions.size() );
+                selection.add( allQuestions.elementAt( randomSelect ) );
             }
         }
     }
@@ -126,28 +145,33 @@ public class CatcherQuestionModel {
      * @param taxon selected taxon upon which the next question is generated
      * @return vector which contains all ancestor taxons of taxon
      */
-    public Vector getParentTaxon(Taxon taxon) {
-        Vector vectParentTaxa = new Vector();
-        getParentTaxon(vectParentTaxa, taxon);
+    public Vector getParentTaxon( final Taxon taxon )
+    {
+        final Vector vectParentTaxa = new Vector();
+        getParentTaxon( vectParentTaxa, taxon );
         return vectParentTaxa;
     }
 
-    public void getParentTaxon(Vector vectParentTaxa, Taxon taxon) {
-        if (taxon.getLevel().isLower(model.getLevel("Ordnung"))) {
-            getParentTaxon(vectParentTaxa, taxon.getParentTaxon());
+    public void getParentTaxon( final Vector vectParentTaxa, final Taxon taxon )
+    {
+        if ( taxon.getLevel().isLower( model.getLevel( "Ordnung" ) ) )
+        {
+            getParentTaxon( vectParentTaxa, taxon.getParentTaxon() );
         }
-        vectParentTaxa.add(taxon);
+        vectParentTaxa.add( taxon );
     }
 
     /**
      * fill a vector with objects of all taxon/ancestorTacon-pairs possible
      */
-    public void initializeDataPool() {
+    public void initializeDataPool()
+    {
         allQuestions.removeAllElements();
         initQuestions();
     }
 
-    public void reset() {
+    public void reset()
+    {
         selection.removeAllElements();
         rightAnswers = 0;
         countQuestions = 0;

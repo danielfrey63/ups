@@ -28,7 +28,6 @@ import javax.swing.event.ListDataListener;
  */
 public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
 {
-
     private ArrayList<T> models = new ArrayList<T>();
 
     private Object current;
@@ -40,7 +39,7 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
         super();
     }
 
-    public SimpleModelList(final ArrayList<T> models)
+    public SimpleModelList( final ArrayList<T> models )
     {
         this.models = models;
     }
@@ -50,25 +49,25 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
         return models.size();
     }
 
-    public T getElementAt(final int index)
+    public T getElementAt( final int index )
     {
-        return models.get(index);
+        return models.get( index );
     }
 
-    public void add(final T model)
+    public void add( final T model )
     {
         final int index = models.size();
-        models.add(model);
+        models.add( model );
         modCount++;
-        fireIntervalAdded(this, index, index);
+        fireIntervalAdded( this, index, index );
     }
 
-    public void remove(final T model)
+    public void remove( final T model )
     {
-        final int index = models.indexOf(model);
-        models.remove(model);
+        final int index = models.indexOf( model );
+        models.remove( model );
         modCount++;
-        fireIntervalRemoved(this, index, index);
+        fireIntervalRemoved( this, index, index );
     }
 
     public void clear()
@@ -76,17 +75,17 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
         final int size = models.size();
         models.clear();
         modCount++;
-        fireContentsChanged(this, 0, size - 1);
+        fireContentsChanged( this, 0, size - 1 );
     }
 
-    public void addAll(final ArrayList<T> list)
+    public void addAll( final ArrayList<T> list )
     {
-        models.addAll(list);
+        models.addAll( list );
         modCount++;
-        fireIntervalAdded(this, 0, list.size() - 1);
+        fireIntervalAdded( this, 0, list.size() - 1 );
     }
 
-    public void setCurrent(final Object current)
+    public void setCurrent( final Object current )
     {
         this.current = current;
     }
@@ -98,31 +97,31 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
 
     // I have to initialize the listener list lazyly as loading the data from XML doesn't (and shouldn't) contain
     // listener support data.
-    public void addListDataListener(final ListDataListener l)
+    public void addListDataListener( final ListDataListener l )
     {
-        if (listenerList == null)
+        if ( listenerList == null )
         {
             listenerList = new EventListenerList();
         }
-        super.addListDataListener(l);
+        super.addListDataListener( l );
     }
 
-    public static Object[] toArray(final SimpleModelList modelList)
+    public static Object[] toArray( final SimpleModelList modelList )
     {
         final int size = modelList.getSize();
         final Object[] result = new Object[size];
-        for (int i = 0; i < size; i++)
+        for ( int i = 0; i < size; i++ )
         {
-            result[i] = modelList.getElementAt(i);
+            result[i] = modelList.getElementAt( i );
         }
         return result;
     }
 
     public static XStream getConverter()
     {
-        final XStream converter = new XStream(new DomDriver("windows-1252", new ClassPathEntityResolver("windows-1252")));
-        converter.omitField(AbstractListModel.class, "listenerList");
-        converter.addImplicitCollection(SimpleModelList.class, "models");
+        final XStream converter = new XStream( new DomDriver( "windows-1252", new ClassPathEntityResolver( "windows-1252" ) ) );
+        converter.omitField( AbstractListModel.class, "listenerList" );
+        converter.addImplicitCollection( SimpleModelList.class, "models" );
         return converter;
     }
 
@@ -157,11 +156,11 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
                 checkForComodification();
                 try
                 {
-                    final T next = getElementAt(cursor);
+                    final T next = getElementAt( cursor );
                     lastRet = cursor++;
                     return next;
                 }
-                catch (IndexOutOfBoundsException e)
+                catch ( IndexOutOfBoundsException e )
                 {
                     checkForComodification();
                     throw new NoSuchElementException();
@@ -170,7 +169,7 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
 
             public void remove()
             {
-                if (lastRet == -1)
+                if ( lastRet == -1 )
                 {
                     throw new IllegalStateException();
                 }
@@ -178,15 +177,15 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
 
                 try
                 {
-                    SimpleModelList.this.remove(getElementAt(lastRet));
-                    if (lastRet < cursor)
+                    SimpleModelList.this.remove( getElementAt( lastRet ) );
+                    if ( lastRet < cursor )
                     {
                         cursor--;
                     }
                     lastRet = -1;
                     expectedModCount = modCount;
                 }
-                catch (IndexOutOfBoundsException e)
+                catch ( IndexOutOfBoundsException e )
                 {
                     throw new ConcurrentModificationException();
                 }
@@ -194,7 +193,7 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
 
             final void checkForComodification()
             {
-                if (modCount != expectedModCount)
+                if ( modCount != expectedModCount )
                 {
                     throw new ConcurrentModificationException();
                 }

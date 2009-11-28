@@ -91,14 +91,13 @@ import java.util.Random;
 
 public class RandomGUID
 {
-
     public String valueBeforeMD5 = "";
 
     public String valueAfterMD5 = "";
 
-    private static Random myRand;
+    private static final Random myRand;
 
-    private static SecureRandom mySecureRand;
+    private static final SecureRandom mySecureRand;
 
     private static String s;
 
@@ -114,12 +113,12 @@ public class RandomGUID
     {
         mySecureRand = new SecureRandom();
         final long secureInitializer = mySecureRand.nextLong();
-        myRand = new Random(secureInitializer);
+        myRand = new Random( secureInitializer );
         try
         {
             s = InetAddress.getLocalHost().toString();
         }
-        catch (UnknownHostException e)
+        catch ( UnknownHostException e )
         {
             e.printStackTrace();
         }
@@ -132,7 +131,7 @@ public class RandomGUID
     */
     public RandomGUID()
     {
-        getRandomGUID(false);
+        getRandomGUID( false );
     }
 
     /*
@@ -141,26 +140,26 @@ public class RandomGUID
      * strong.  Secure false defaults to the standard Random function seeded
      * with a single cryptographically strong random number.
      */
-    public RandomGUID(final boolean secure)
+    public RandomGUID( final boolean secure )
     {
-        getRandomGUID(secure);
+        getRandomGUID( secure );
     }
 
     /*
      * Method to generate the random GUID
      */
-    private void getRandomGUID(final boolean secure)
+    private void getRandomGUID( final boolean secure )
     {
         MessageDigest md5 = null;
         final StringBuffer sbValueBeforeMD5 = new StringBuffer();
 
         try
         {
-            md5 = MessageDigest.getInstance("MD5");
+            md5 = MessageDigest.getInstance( "MD5" );
         }
-        catch (NoSuchAlgorithmException e)
+        catch ( NoSuchAlgorithmException e )
         {
-            System.out.println("Error: " + e);
+            System.out.println( "Error: " + e );
         }
 
         try
@@ -168,7 +167,7 @@ public class RandomGUID
             final long time = System.currentTimeMillis();
             long rand = 0;
 
-            if (secure)
+            if ( secure )
             {
                 rand = mySecureRand.nextLong();
             }
@@ -183,33 +182,33 @@ public class RandomGUID
             // You could even stream a file through the MD5 making
             // the odds of guessing it at least as great as that
             // of guessing the contents of the file!
-            sbValueBeforeMD5.append(s);
-            sbValueBeforeMD5.append(":");
-            sbValueBeforeMD5.append(Long.toString(time));
-            sbValueBeforeMD5.append(":");
-            sbValueBeforeMD5.append(Long.toString(rand));
+            sbValueBeforeMD5.append( s );
+            sbValueBeforeMD5.append( ":" );
+            sbValueBeforeMD5.append( Long.toString( time ) );
+            sbValueBeforeMD5.append( ":" );
+            sbValueBeforeMD5.append( Long.toString( rand ) );
 
             valueBeforeMD5 = sbValueBeforeMD5.toString();
-            md5.update(valueBeforeMD5.getBytes());
+            md5.update( valueBeforeMD5.getBytes() );
 
             final byte[] array = md5.digest();
             final StringBuffer sb = new StringBuffer();
-            for (byte anArray : array)
+            for ( final byte anArray : array )
             {
                 final int b = anArray & 0xFF;
-                if (b < 0x10)
+                if ( b < 0x10 )
                 {
-                    sb.append('0');
+                    sb.append( '0' );
                 }
-                sb.append(Integer.toHexString(b));
+                sb.append( Integer.toHexString( b ) );
             }
 
             valueAfterMD5 = sb.toString();
 
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            System.out.println("Error:" + e);
+            System.out.println( "Error:" + e );
         }
     }
 
@@ -222,15 +221,15 @@ public class RandomGUID
     {
         final String raw = valueAfterMD5.toUpperCase();
         final StringBuffer sb = new StringBuffer();
-        sb.append(raw.substring(0, 8));
-        sb.append("-");
-        sb.append(raw.substring(8, 12));
-        sb.append("-");
-        sb.append(raw.substring(12, 16));
-        sb.append("-");
-        sb.append(raw.substring(16, 20));
-        sb.append("-");
-        sb.append(raw.substring(20));
+        sb.append( raw.substring( 0, 8 ) );
+        sb.append( "-" );
+        sb.append( raw.substring( 8, 12 ) );
+        sb.append( "-" );
+        sb.append( raw.substring( 12, 16 ) );
+        sb.append( "-" );
+        sb.append( raw.substring( 16, 20 ) );
+        sb.append( "-" );
+        sb.append( raw.substring( 20 ) );
 
         return sb.toString();
     }
@@ -238,14 +237,14 @@ public class RandomGUID
     /*
      * Demonstraton and self test of class
      */
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
-        for (int i = 0; i < 100; i++)
+        for ( int i = 0; i < 100; i++ )
         {
             final RandomGUID myGUID = new RandomGUID();
-            System.out.println("Seeding String = " + myGUID.valueBeforeMD5);
-            System.out.println("rawGUID = " + myGUID.valueAfterMD5);
-            System.out.println("RandomGUID = " + myGUID.toString());
+            System.out.println( "Seeding String = " + myGUID.valueBeforeMD5 );
+            System.out.println( "rawGUID = " + myGUID.valueAfterMD5 );
+            System.out.println( "RandomGUID = " + myGUID.toString() );
         }
     }
 }

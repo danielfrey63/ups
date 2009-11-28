@@ -14,7 +14,7 @@ import org.apache.log4j.spi.LoggingEvent;
  */
 public class MemoryAppender extends AppenderSkeleton
 {
-    private ArrayList<LoggingEvent> list;
+    private final ArrayList<LoggingEvent> list;
 
     private int pointer = 0;
 
@@ -34,11 +34,13 @@ public class MemoryAppender extends AppenderSkeleton
 
     protected String logLevel = Level.DEBUG.toString();
 
-    /** The default constructor constructs a ArrayList */
+    /**
+     * The default constructor constructs a ArrayList
+     */
     public MemoryAppender()
     {
-        list = new ArrayList<LoggingEvent>(listSize);
-        setLayout(new TTCCLayout());
+        list = new ArrayList<LoggingEvent>( listSize );
+        setLayout( new TTCCLayout() );
     }
 
     public void close()
@@ -47,9 +49,9 @@ public class MemoryAppender extends AppenderSkeleton
 
     public void activateOptions()
     {
-        setAbortLevel(abortLevel);
-        setMessageLevel(messageLevel);
-        setLogLevel(logLevel);
+        setAbortLevel( abortLevel );
+        setMessageLevel( messageLevel );
+        setLogLevel( logLevel );
     }
 
     public boolean requiresLayout()
@@ -60,21 +62,21 @@ public class MemoryAppender extends AppenderSkeleton
     public String dump()
     {
         int start = 0;
-        if (filled)
+        if ( filled )
         {
             start = pointer + 1;
         }
         final StringBuffer sb = new StringBuffer();
-        while (start != (pointer))
+        while ( start != ( pointer ) )
         {
-            final LoggingEvent e = list.get(start);
-            sb.append(getLayout().format(e));
+            final LoggingEvent e = list.get( start );
+            sb.append( getLayout().format( e ) );
             final String[] t = e.getThrowableStrRep();
-            if (t != null)
+            if ( t != null )
             {
-                for (final String aT : t)
+                for ( final String aT : t )
                 {
-                    sb.append(aT).append("\n");
+                    sb.append( aT ).append( "\n" );
                 }
             }
             start++;
@@ -83,39 +85,39 @@ public class MemoryAppender extends AppenderSkeleton
         return sb.toString();
     }
 
-    public void append(final LoggingEvent e)
+    public void append( final LoggingEvent e )
     {
-        if (e.getLevel().isGreaterOrEqual(_logLevel))
+        if ( e.getLevel().isGreaterOrEqual( _logLevel ) )
         {
-            appendToList(e);
+            appendToList( e );
         }
-        if (e.getLevel().isGreaterOrEqual(_messageLevel))
+        if ( e.getLevel().isGreaterOrEqual( _messageLevel ) )
         {
-            System.out.println(dump());
+            System.out.println( dump() );
             final SendFeedbackDialog dialog = new SendFeedbackDialog();
-            dialog.setDump(dump());
+            dialog.setDump( dump() );
             dialog.open();
         }
-        if (e.getLevel().isGreaterOrEqual(_abortLevel))
+        if ( e.getLevel().isGreaterOrEqual( _abortLevel ) )
         {
-            SystemUtil.EXIT.exit(1);
+            SystemUtil.EXIT.exit( 1 );
         }
     }
 
-    private void appendToList(final LoggingEvent e)
+    private void appendToList( final LoggingEvent e )
     {
-        if (pointer >= listSize)
+        if ( pointer >= listSize )
         {
             pointer = 0;
             filled = true;
         }
-        if (filled)
+        if ( filled )
         {
-            list.set(pointer, e);
+            list.set( pointer, e );
         }
         else
         {
-            list.add(e);
+            list.add( e );
         }
         pointer++;
     }
@@ -135,12 +137,12 @@ public class MemoryAppender extends AppenderSkeleton
      *
      * @param ap The abortLevel to set
      */
-    public void setAbortLevel(final String ap)
+    public void setAbortLevel( final String ap )
     {
-        setAbortLevel(Level.toLevel(ap, _abortLevel));
+        setAbortLevel( Level.toLevel( ap, _abortLevel ) );
     }
 
-    public void setAbortLevel(final Level ap)
+    public void setAbortLevel( final Level ap )
     {
         _abortLevel = ap;
         abortLevel = _abortLevel.toString();
@@ -171,12 +173,12 @@ public class MemoryAppender extends AppenderSkeleton
      *
      * @param lp The logLevel to set
      */
-    public void setLogLevel(final String lp)
+    public void setLogLevel( final String lp )
     {
-        setLogLevel(Level.toLevel(lp, _logLevel));
+        setLogLevel( Level.toLevel( lp, _logLevel ) );
     }
 
-    public void setLogLevel(final Level lp)
+    public void setLogLevel( final Level lp )
     {
         _logLevel = lp;
         logLevel = _logLevel.toString();
@@ -187,12 +189,12 @@ public class MemoryAppender extends AppenderSkeleton
      *
      * @param mp The messageLevel to set
      */
-    public void setMessageLevel(final String mp)
+    public void setMessageLevel( final String mp )
     {
-        setMessageLevel(Level.toLevel(mp, _messageLevel));
+        setMessageLevel( Level.toLevel( mp, _messageLevel ) );
     }
 
-    public void setMessageLevel(final Level mp)
+    public void setMessageLevel( final Level mp )
     {
         _messageLevel = mp;
         messageLevel = _messageLevel.toString();
@@ -213,9 +215,9 @@ public class MemoryAppender extends AppenderSkeleton
      *
      * @param listSize The listSize to set
      */
-    public void setListSize(final int listSize)
+    public void setListSize( final int listSize )
     {
         this.listSize = listSize;
-        list.ensureCapacity(listSize);
+        list.ensureCapacity( listSize );
     }
 }

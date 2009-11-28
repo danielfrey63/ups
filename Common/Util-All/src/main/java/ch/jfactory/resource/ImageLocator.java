@@ -24,7 +24,7 @@ public class ImageLocator
 
     public static final CachedImageLocator pictLocator;
 
-    private static final Logger LOGGER = Logger.getLogger(ImageLocator.class);
+    private static final Logger LOGGER = Logger.getLogger( ImageLocator.class );
 
     private static final CachedImageLocator iconLocator;
 
@@ -36,19 +36,19 @@ public class ImageLocator
      * @param name name of the image
      * @return reference to the ImageIcon
      */
-    public static ImageIcon getIcon(final String name)
+    public static ImageIcon getIcon( final String name )
     {
-        if (name == null)
+        if ( name == null )
         {
             return null;
         }
-        LOGGER.debug("icon " + name);
-        return iconLocator.getImageIcon(name);
+        LOGGER.debug( "icon " + name );
+        return iconLocator.getImageIcon( name );
     }
 
-    public static ImageIcon getPicture(final String name)
+    public static ImageIcon getPicture( final String name )
     {
-        return pictLocator.getImageIcon(name);
+        return pictLocator.getImageIcon( name );
     }
 
     //public static void clearCache() {
@@ -57,13 +57,13 @@ public class ImageLocator
 
     static
     {
-        String iconPath = System.getProperty("jfactory.resource.path");
-        if (iconPath == null)
+        String iconPath = System.getProperty( "jfactory.resource.path" );
+        if ( iconPath == null )
         {
-            iconPath = System.getProperty("user.dir");
-            LOGGER.warn("system property \"jfactory.resource.path\" not found, defaulting to \"" + iconPath + "\"");
+            iconPath = System.getProperty( "user.dir" );
+            LOGGER.warn( "system property \"jfactory.resource.path\" not found, defaulting to \"" + iconPath + "\"" );
         }
-        ICON_PATH = (iconPath.endsWith("/") || iconPath.endsWith("\\") ? iconPath : iconPath + "/");
+        ICON_PATH = ( iconPath.endsWith( "/" ) || iconPath.endsWith( "\\" ) ? iconPath : iconPath + "/" );
         iconLocator = new CachedImageLocator()
         {
             public String getPath()
@@ -75,21 +75,21 @@ public class ImageLocator
         {
             public String getPath()
             {
-                final String root = System.getProperty("xmatrix.cd.path", "");
-                final String defaultPicturePath = System.getProperty("xmatrix.picture.path.small", "/");
-                final String picturePath = System.getProperty(PROPERTY_IMAGE_LOCATION, defaultPicturePath);
-                if (root.length() > 0)
+                final String root = System.getProperty( "xmatrix.cd.path", "" );
+                final String defaultPicturePath = System.getProperty( "xmatrix.picture.path.small", "/" );
+                final String picturePath = System.getProperty( PROPERTY_IMAGE_LOCATION, defaultPicturePath );
+                if ( root.length() > 0 )
                 {
-                    return new File(root, picturePath).getPath() + "/";
+                    return new File( root, picturePath ).getPath() + "/";
                 }
                 else
                 {
-                    return new File(picturePath).getPath() + "/";
+                    return new File( picturePath ).getPath() + "/";
                 }
             }
         };
 
-        LOGGER.info("Icon resources at " + iconLocator.getPath());
-        LOGGER.info("Pictures resources at " + pictLocator.getPath());
+        LOGGER.info( "Icon resources at " + iconLocator.getPath() );
+        LOGGER.info( "Pictures resources at " + pictLocator.getPath() );
     }
 }

@@ -8,9 +8,9 @@ package ch.jfactory.collection.cursor;
  */
 public interface NotifiableCursor extends Cursor
 {
-    void addCursorChangeListener(CursorChangeListener listener);
+    void addCursorChangeListener( CursorChangeListener listener );
 
-    void removeCursorChangeListener(CursorChangeListener listener);
+    void removeCursorChangeListener( CursorChangeListener listener );
 
     /**
      * @link

@@ -33,22 +33,23 @@ import javax.swing.JLabel;
  */
 public class SimpleSplash extends JFrame implements SplashProvider
 {
-    /** The label that holds the background image. */
-    private JLabel label = new JLabel();
+    /**
+     * The label that holds the background image.
+     */
+    private final JLabel label = new JLabel();
 
     /**
      * Cerates a new splash window. The image passed will be painted in the background.
      *
      * @param backgroundImage image for the background
      */
-    public SimpleSplash(final ImageIcon backgroundImage)
+    public SimpleSplash( final ImageIcon backgroundImage )
     {
-
         init();
-        setBackgroundImage(backgroundImage);
+        setBackgroundImage( backgroundImage );
 
-        getContentPane().setLayout(null);
-        getContentPane().add(label);
+        getContentPane().setLayout( null );
+        getContentPane().add( label );
 
         start();
     }
@@ -60,44 +61,49 @@ public class SimpleSplash extends JFrame implements SplashProvider
      * @param backgroundImage     image for the background
      * @param foregroundComponent foregroundComponent for the foreground
      */
-    public SimpleSplash(final ImageIcon backgroundImage, final Component foregroundComponent)
+    public SimpleSplash( final ImageIcon backgroundImage, final Component foregroundComponent )
     {
-
         init();
-        setBackgroundImage(backgroundImage);
+        setBackgroundImage( backgroundImage );
 
-        getContentPane().setLayout(null);
-        getContentPane().add(foregroundComponent);
-        getContentPane().add(label);
+        getContentPane().setLayout( null );
+        getContentPane().add( foregroundComponent );
+        getContentPane().add( label );
 
         start();
     }
 
-    /** Init the components listeners and properties. */
+    /**
+     * Init the components listeners and properties.
+     */
     private void init()
     {
-        setUndecorated(true);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addFocusListener(new FocusAdapter()
+        setUndecorated( true );
+        setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+        addFocusListener( new FocusAdapter()
         {
-            public void focusLost(final FocusEvent e)
+            public void focusLost( final FocusEvent e )
             {
                 toFront();
             }
-        });
+        } );
     }
 
     //
     // Interface SplashProvider
     //
 
-    /** Shows the splash screen. */
+    /**
+     * Shows the splash screen.
+     */
     public void start()
     {
-        setVisible(true);
+        setVisible( true );
     }
 
-    /** Destroies the splash screen. */
+    /**
+     * Destroies the splash screen.
+     */
     public void stop()
     {
         dispose();
@@ -109,24 +115,24 @@ public class SimpleSplash extends JFrame implements SplashProvider
      *
      * @param backgroundImageIcon the image to set
      */
-    public void setBackgroundImage(final ImageIcon backgroundImageIcon)
+    public void setBackgroundImage( final ImageIcon backgroundImageIcon )
     {
-        if (backgroundImageIcon == null)
+        if ( backgroundImageIcon == null )
         {
-            label.setText("-= Null-ImageIcon defined =-");
+            label.setText( "-= Null-ImageIcon defined =-" );
         }
-        else if (backgroundImageIcon.getIconHeight() < 0)
+        else if ( backgroundImageIcon.getIconHeight() < 0 )
         {
-            label.setText("-= ImageIcon \"" + backgroundImageIcon + "\" not found =-");
+            label.setText( "-= ImageIcon \"" + backgroundImageIcon + "\" not found =-" );
         }
         else
         {
-            label.setText(null);
-            label.setIcon(backgroundImageIcon);
+            label.setText( null );
+            label.setIcon( backgroundImageIcon );
         }
 
         final Dimension size = label.getPreferredSize();
-        label.setSize(size);
-        setSize(size);
+        label.setSize( size );
+        setSize( size );
     }
 }

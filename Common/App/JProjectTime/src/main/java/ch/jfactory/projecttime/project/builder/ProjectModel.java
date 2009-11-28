@@ -18,9 +18,9 @@ package ch.jfactory.projecttime.project.builder;
 
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import com.jgoodies.binding.PresentationModel;
-import com.jgoodies.binding.value.ValueHolder;
-import com.jgoodies.binding.value.Trigger;
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.binding.value.Trigger;
+import com.jgoodies.binding.value.ValueHolder;
 
 /**
  * TODO: document
@@ -28,56 +28,67 @@ import com.jgoodies.binding.beans.Model;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class ProjectModel extends Model {
-
+public class ProjectModel extends Model
+{
     public static final String PROPERTYNAME_NEWCHILD = "newChild";
+
     private IFEntry newChild;
 
     public static final String PROPERTYNAME_DELETEDCHILD = "deletedChild";
+
     private IFEntry deletedChild;
 
     public static final String PROPERTYNAME_ROOT = "root";
+
     private IFEntry root;
 
-    private PresentationModel currentBeanModel = new PresentationModel(new ValueHolder(null, true), new Trigger());
+    private final PresentationModel currentBeanModel = new PresentationModel( new ValueHolder( null, true ), new Trigger() );
 
-    public ProjectModel(final IFEntry root) {
+    public ProjectModel( final IFEntry root )
+    {
         this.root = root;
     }
 
-    public IFEntry getNewChild() {
+    public IFEntry getNewChild()
+    {
         return newChild;
     }
 
-    public void setNewChild(final IFEntry newChild) {
+    public void setNewChild( final IFEntry newChild )
+    {
         final IFEntry old = getNewChild();
         this.newChild = newChild;
-        firePropertyChange(PROPERTYNAME_NEWCHILD, old, newChild);
+        firePropertyChange( PROPERTYNAME_NEWCHILD, old, newChild );
     }
 
-    public IFEntry getDeletedChild() {
+    public IFEntry getDeletedChild()
+    {
         return deletedChild;
     }
 
-    public void setDeletedChild(IFEntry deletedChild) {
+    public void setDeletedChild( final IFEntry deletedChild )
+    {
         final IFEntry old = getDeletedChild();
         this.deletedChild = deletedChild;
-        firePropertyChange(PROPERTYNAME_DELETEDCHILD, old, deletedChild);
+        firePropertyChange( PROPERTYNAME_DELETEDCHILD, old, deletedChild );
     }
 
-    public IFEntry getRoot() {
+    public IFEntry getRoot()
+    {
         return root;
     }
 
-    public void setRoot(IFEntry root) {
+    public void setRoot( final IFEntry root )
+    {
         final IFEntry old = getRoot();
         this.root = root;
-        firePropertyChange(PROPERTYNAME_ROOT, old, root);
+        firePropertyChange( PROPERTYNAME_ROOT, old, root );
     }
 
     // Submodels
 
-    public PresentationModel getCurrentBeanModel() {
+    public PresentationModel getCurrentBeanModel()
+    {
         return currentBeanModel;
     }
 }

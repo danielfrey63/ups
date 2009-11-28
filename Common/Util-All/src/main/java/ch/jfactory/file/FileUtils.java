@@ -27,8 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class FileUtils
 {
-
-    private static final Logger LOG = Logger.getLogger(FileUtils.class);
+    private static final Logger LOG = Logger.getLogger( FileUtils.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -41,71 +40,71 @@ public class FileUtils
      * @param src  File to copy from
      * @param dest File to copy into
      */
-    public static void copyFile(final File src, final File dest)
+    public static void copyFile( final File src, final File dest )
     {
         BufferedOutputStream myFos = null;
         BufferedInputStream myFis = null;
         try
         {
             // Open a stream to read in bytes from the file FileInputStream myFis = new FileInputStream(src);
-            myFis = new BufferedInputStream(new FileInputStream(src));
+            myFis = new BufferedInputStream( new FileInputStream( src ) );
 
             // Make a destination byte stream to your copy
-            if (!dest.exists())
+            if ( !dest.exists() )
             {
                 dest.createNewFile();
             }
-            myFos = new BufferedOutputStream(new FileOutputStream(dest));
+            myFos = new BufferedOutputStream( new FileOutputStream( dest ) );
 
             final byte[] buffer = new byte[1000];
             int len;
-            while ((len = myFis.read(buffer)) != -1)
+            while ( ( len = myFis.read( buffer ) ) != -1 )
             {
-                myFos.write(buffer, 0, len);
+                myFos.write( buffer, 0, len );
             }
 
             myFis.close();
             myFos.flush();
             myFos.close();
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
             try
             {
-                if (myFis != null)
+                if ( myFis != null )
                 {
                     myFis.close();
                 }
             }
-            catch (IOException ex)
+            catch ( IOException ex )
             {
-                LOG.error("failed to close InputStream", ex);
+                LOG.error( "failed to close InputStream", ex );
             }
             try
             {
-                if (myFos != null)
+                if ( myFos != null )
                 {
                     myFos.close();
                 }
             }
-            catch (IOException ex)
+            catch ( IOException ex )
             {
-                LOG.error("failed to close OutputStream", ex);
+                LOG.error( "failed to close OutputStream", ex );
             }
         }
     }
 
-    public static void extractFileFromUrl(final URL url, final File destinationDirectory) throws IOException
+    public static void extractFileFromUrl( final URL url, final File destinationDirectory ) throws IOException
     {
         final String path = url.getPath();
-        final String pathWithinJar = path.substring(path.indexOf("!") + 1);
-        final File destinationFile = new File(destinationDirectory, pathWithinJar);
+        final String pathWithinJar = path.substring( path.indexOf( "!" ) + 1 );
+        final File destinationFile = new File( destinationDirectory, pathWithinJar );
         destinationFile.getParentFile().mkdirs();
         final InputStream in = url.openStream();
-        final FileOutputStream out = new FileOutputStream(destinationFile);
-        IOUtils.copy(in, out);
-        IOUtils.closeQuietly(out);
-        IOUtils.closeQuietly(in);
+        final FileOutputStream out = new FileOutputStream( destinationFile );
+        IOUtils.copy( in, out );
+        IOUtils.closeQuietly( out );
+        IOUtils.closeQuietly( in );
     }
 
     /**
@@ -116,9 +115,9 @@ public class FileUtils
      * @return the direcotry file
      * @throws IOException passed through
      */
-    public static File createTemporaryDirectory(final String prefix, final String postfix) throws IOException
+    public static File createTemporaryDirectory( final String prefix, final String postfix ) throws IOException
     {
-        final File tempFile = File.createTempFile(prefix, postfix);
+        final File tempFile = File.createTempFile( prefix, postfix );
         tempFile.delete();
         tempFile.mkdirs();
         return tempFile;
@@ -131,10 +130,10 @@ public class FileUtils
      * @param u URL to extract path from
      * @return path String
      */
-    public static String extractPathFromURL(final URL u)
+    public static String extractPathFromURL( final URL u )
     {
         final String eu = u.toExternalForm();
-        return extractPathFromURL(eu);
+        return extractPathFromURL( eu );
     }
 
     /**
@@ -144,24 +143,24 @@ public class FileUtils
      * @param s URL to extract path from
      * @return path String
      */
-    public static String extractPathFromURL(String s)
+    public static String extractPathFromURL( String s )
     {
-        if (s.startsWith("jar:file:"))
+        if ( s.startsWith( "jar:file:" ) )
         {
-            s = s.substring(9);
-            final int n = s.indexOf("!");
-            if (n > -1)
+            s = s.substring( 9 );
+            final int n = s.indexOf( "!" );
+            if ( n > -1 )
             {
-                s = s.substring(0, n);
+                s = s.substring( 0, n );
             }
         }
         try
         {
-            s = URLDecoder.decode(s, "UTF-8");
+            s = URLDecoder.decode( s, "UTF-8" );
         }
-        catch (UnsupportedEncodingException e)
+        catch ( UnsupportedEncodingException e )
         {
-            LOG.error(e, e);
+            LOG.error( e, e );
         }
         return s;
     }
@@ -172,28 +171,28 @@ public class FileUtils
      * @param filter to filter files
      * @return a collection of strings of absolute pathes
      */
-    public static Collection getFilesFromClasspath(final StringFilter filter) throws IOException
+    public static Collection getFilesFromClasspath( final StringFilter filter ) throws IOException
     {
         final ArrayList files = new ArrayList();
-        final String classpath = System.getProperty("java.class.path");
-        final String separator = System.getProperty("path.separator");
-        final String[] paths = classpath.split(separator);
-        for (final String path : paths)
+        final String classpath = System.getProperty( "java.class.path" );
+        final String separator = System.getProperty( "path.separator" );
+        final String[] paths = classpath.split( separator );
+        for ( final String path : paths )
         {
-            if (path.endsWith(".jar") || path.endsWith(".zip"))
+            if ( path.endsWith( ".jar" ) || path.endsWith( ".zip" ) )
             {
-                if (new File(path).exists())
+                if ( new File( path ).exists() )
                 {
-                    files.addAll(getFilesFromJar(path, filter));
+                    files.addAll( getFilesFromJar( path, filter ) );
                 }
                 else
                 {
-                    LOG.warn("file not found: " + path);
+                    LOG.warn( "file not found: " + path );
                 }
             }
             else
             {
-                files.addAll(getFilesFromDirectory(path, filter));
+                files.addAll( getFilesFromDirectory( path, filter ) );
             }
         }
         return files;
@@ -207,19 +206,19 @@ public class FileUtils
      * @return a collection of strings of absolute pathes
      * @throws java.io.IOException
      */
-    public static Collection getFilesFromJar(final String jar, final StringFilter filter) throws IOException
+    public static Collection getFilesFromJar( final String jar, final StringFilter filter ) throws IOException
     {
         final ArrayList files = new ArrayList();
-        final JarFile file = new JarFile(jar);
+        final JarFile file = new JarFile( jar );
         final Enumeration e = file.entries();
-        while (e.hasMoreElements())
+        while ( e.hasMoreElements() )
         {
             final JarEntry entry = (JarEntry) e.nextElement();
             final String name = entry.getName();
-            final String url = "jar:file:/" + jar.replace("\\", "/") + "!/" + name;
-            if (filter.accept(url))
+            final String url = "jar:file:/" + jar.replace( "\\", "/" ) + "!/" + name;
+            if ( filter.accept( url ) )
             {
-                files.add(url);
+                files.add( url );
             }
         }
         return files;
@@ -232,13 +231,13 @@ public class FileUtils
      * @param filter filter to apply
      * @return a collection of string of realtive pathes
      */
-    public static Collection getFilesFromDirectory(final String path, final StringFilter filter)
+    public static Collection getFilesFromDirectory( final String path, final StringFilter filter )
     {
         final ArrayList files = new ArrayList();
-        final File pathFile = new File(path);
-        if (pathFile.exists())
+        final File pathFile = new File( path );
+        if ( pathFile.exists() )
         {
-            files.addAll(getFileFromDirectory(pathFile, pathFile, filter));
+            files.addAll( getFileFromDirectory( pathFile, pathFile, filter ) );
         }
         return files;
     }
@@ -250,31 +249,31 @@ public class FileUtils
      * @param filter    the filter to apply
      * @return a collection of strings of relative pathes
      */
-    private static Collection getFileFromDirectory(final File rootPath, final File directory, final StringFilter filter)
+    private static Collection getFileFromDirectory( final File rootPath, final File directory, final StringFilter filter )
     {
         final ArrayList files = new ArrayList();
         final File[] paths = directory.listFiles();
-        if (paths != null)
+        if ( paths != null )
         {
-            for (final File file : paths)
+            for ( final File file : paths )
             {
-                if (filter.accept(file.getAbsolutePath()))
+                if ( filter.accept( file.getAbsolutePath() ) )
                 {
-                    if (file.isFile())
+                    if ( file.isFile() )
                     {
-                        final String path = file.getAbsolutePath().replace('\\', '/');
-                        if (file.exists())
+                        final String path = file.getAbsolutePath().replace( '\\', '/' );
+                        if ( file.exists() )
                         {
-                            files.add(path.substring((int) rootPath.getAbsolutePath().length()));
+                            files.add( path.substring( rootPath.getAbsolutePath().length() ) );
                         }
                         else
                         {
-                            LOG.warn("file not found: " + path);
+                            LOG.warn( "file not found: " + path );
                         }
                     }
                     else
                     {
-                        files.addAll(getFileFromDirectory(rootPath, file, filter));
+                        files.addAll( getFileFromDirectory( rootPath, file, filter ) );
                     }
                 }
             }
@@ -297,50 +296,49 @@ public class FileUtils
      * @param content  the content to be stored
      * @param resource the resource for which the url is derived from the classloader
      */
-    public static void saveResource(final String content, final String resource)
+    public static void saveResource( final String content, final String resource )
     {
-        final URL url = FileUtils.class.getResource(resource);
-        if (INFO)
+        final URL url = FileUtils.class.getResource( resource );
+        if ( INFO )
         {
-            LOG.info("saving content to " + resource + " at " + url);
+            LOG.info( "saving content to " + resource + " at " + url );
         }
-        if (DEBUG)
+        if ( DEBUG )
         {
-            LOG.debug("content is\n" + content);
+            LOG.debug( "content is\n" + content );
         }
         try
         {
             final String protocol = url.getProtocol();
-            final URI uri = new URI(url.toExternalForm());
-            if (protocol.equals("jar"))
+            final URI uri = new URI( url.toExternalForm() );
+            if ( protocol.equals( "jar" ) )
             {
-                final String[] parts = url.getFile().split("!/");
-                ZipUtils.zip(content.getBytes(), new File(parts[0].substring("file:/".length())), false, true, parts[1]);
+                final String[] parts = url.getFile().split( "!/" );
+                ZipUtils.zip( content.getBytes(), new File( parts[0].substring( "file:/".length() ) ), false, true, parts[1] );
             }
-            else if (protocol.equals("file"))
+            else if ( protocol.equals( "file" ) )
             {
-                final FileWriter file = new FileWriter(new File(uri));
-                file.write(content);
+                final FileWriter file = new FileWriter( new File( uri ) );
+                file.write( content );
                 file.close();
             }
             else
             {
-                throw new IllegalStateException("protocol " + protocol + " not handled");
+                throw new IllegalStateException( "protocol " + protocol + " not handled" );
             }
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
-            LOG.error("error while trying to access " + url, e);
+            LOG.error( "error while trying to access " + url, e );
         }
-        catch (URISyntaxException e)
+        catch ( URISyntaxException e )
         {
-            LOG.error("problem with url " + url, e);
+            LOG.error( "problem with url " + url, e );
         }
     }
 
     public static interface StringFilter
     {
-
-        boolean accept(String filter);
+        boolean accept( String filter );
     }
 }

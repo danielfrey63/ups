@@ -9,7 +9,6 @@
 package com.ethz.geobot.herbar.game.util;
 
 import javax.swing.event.EventListenerList;
-import org.apache.log4j.Category;
 
 /**
  * Counts the score, the correct the false answers respectively.
@@ -17,64 +16,79 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:06 $
  */
-public class CountScore implements Score {
-
-    private final static Category cat = Category.getInstance(CountScore.class);
+public class CountScore implements Score
+{
     private int rightScore;
-    private int wrongScore;
-    private int maxScore;
-    private EventListenerList eventListeners = new EventListenerList();
 
-    public CountScore() {
+    private int wrongScore;
+
+    private int maxScore;
+
+    private final EventListenerList eventListeners = new EventListenerList();
+
+    public CountScore()
+    {
     }
 
-    public int getWrongScore() {
+    public int getWrongScore()
+    {
         return wrongScore;
     }
 
-    public int getRightScore() {
+    public int getRightScore()
+    {
         return rightScore;
     }
 
-    public int getTotalScore() {
-        int total = rightScore - wrongScore;
+    public int getTotalScore()
+    {
+        final int total = rightScore - wrongScore;
         return total;
     }
 
-    public int getMaxScore() {
+    public int getMaxScore()
+    {
         return maxScore;
     }
 
-    public void addWrongScore(int diff) {
+    public void addWrongScore( final int diff )
+    {
         this.wrongScore += diff;
         fireScoreChanged();
     }
 
-    public void addRightScore(int diff) {
+    public void addRightScore( final int diff )
+    {
         this.rightScore += diff;
         fireScoreChanged();
     }
 
-    public void init(int initRightScoreValue, int initWrongScoreValue, int initMaxScore) {
+    public void init( final int initRightScoreValue, final int initWrongScoreValue, final int initMaxScore )
+    {
         this.rightScore = initRightScoreValue;
         this.wrongScore = initWrongScoreValue;
         this.maxScore = initMaxScore;
         fireScoreChanged();
     }
 
-    public void addScoreListener(ScoreListener l) {
-        this.eventListeners.add(ScoreListener.class, l);
+    public void addScoreListener( final ScoreListener l )
+    {
+        this.eventListeners.add( ScoreListener.class, l );
     }
 
-    public void removeScoreListener(ScoreListener l) {
-        this.eventListeners.remove(ScoreListener.class, l);
+    public void removeScoreListener( final ScoreListener l )
+    {
+        this.eventListeners.remove( ScoreListener.class, l );
     }
 
-    protected void fireScoreChanged() {
-        Object[] listeners = eventListeners.getListenerList();
-        for (int i = listeners.length - 2; i >= 0; i -= 2) {
-            if (listeners[ i ] == ScoreListener.class) {
-                ((ScoreListener) listeners[ i + 1 ]).scoreChanged();
+    protected void fireScoreChanged()
+    {
+        final Object[] listeners = eventListeners.getListenerList();
+        for ( int i = listeners.length - 2; i >= 0; i -= 2 )
+        {
+            if ( listeners[i] == ScoreListener.class )
+            {
+                ( (ScoreListener) listeners[i + 1] ).scoreChanged();
             }
         }
     }

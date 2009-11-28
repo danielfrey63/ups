@@ -72,7 +72,7 @@ public interface Cursor
      *
      * @param obj
      */
-    void setCurrent(Object obj);
+    void setCurrent( Object obj );
 
     /**
      * return an iterator for all objects. Iteration over it doesn't change the cursor position.

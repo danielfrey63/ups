@@ -8,23 +8,34 @@ import java.util.Comparator;
  */
 public class VirtualGraphTreeNodeFilter
 {
-
-    /** Makes a node visible. */
+    /**
+     * Makes a node visible.
+     */
     public static final boolean VISIBILITY_VISIBLE = true;
 
-    /** Hides a node. */
+    /**
+     * Hides a node.
+     */
     public static final boolean VISIBILITY_HIDDEN = false;
 
-    /** The next node is a parent of this node. */
+    /**
+     * The next node is a parent of this node.
+     */
     public static final int LINE_ANCESTOR = 1;
 
-    /** The next node is a child of this node. */
+    /**
+     * The next node is a child of this node.
+     */
     public static final int LINE_DESCENDANT = 2;
 
-    /** The next node is either a parent or a child of this node. */
+    /**
+     * The next node is either a parent or a child of this node.
+     */
     public static final int LINE_RELATED = 3;
 
-    /** Types of this node are displayed recursively. Subnodes of the same type will pass also. */
+    /**
+     * Types of this node are displayed recursively. Subnodes of the same type will pass also.
+     */
     public static final boolean SELF_RECURSIVE = true;
 
     /**
@@ -33,20 +44,28 @@ public class VirtualGraphTreeNodeFilter
      */
     public static final boolean SELF_FLAT = false;
 
-    /** Makes node types taking into account prior filters. See {@link #bound} for further explanation. */
+    /**
+     * Makes node types taking into account prior filters. See {@link #bound} for further explanation.
+     */
     public static final boolean CONSTRAINT_BOUND = true;
 
-    /** Makes node types beeing added without taking other filters into account. */
+    /**
+     * Makes node types beeing added without taking other filters into account.
+     */
     public static final boolean CONSTRAINT_FREE = false;
 
     public static final Class CLASSES_ALL = Object.class;
 
     public static final Class ROLES_ALL = Object.class;
 
-    /** The vertices type to filter out */
+    /**
+     * The vertices type to filter out
+     */
     private Class type = CLASSES_ALL;
 
-    /** The edge role to filter out */
+    /**
+     * The edge role to filter out
+     */
     private Class role = ROLES_ALL;
 
     /**
@@ -56,10 +75,14 @@ public class VirtualGraphTreeNodeFilter
      */
     private int direction = LINE_ANCESTOR;
 
-    /** Should the vertice be displayed */
+    /**
+     * Should the vertice be displayed
+     */
     private boolean visible;
 
-    /** Should recursive links in vertices to the same type be resolved? */
+    /**
+     * Should recursive links in vertices to the same type be resolved?
+     */
     private boolean recursive;
 
     /**
@@ -73,33 +96,40 @@ public class VirtualGraphTreeNodeFilter
      * Determines whether the tree for this filter is deep or flat. Only applies to recursive filters, and only for the
      * recursive elements filtered by this filter.
      */
-    private boolean flat = false;
+    private final boolean flat = false;
 
-    /** Parent filter. May be null if root filter */
+    /**
+     * Parent filter. May be null if root filter
+     */
     private VirtualGraphTreeNodeFilter parent;
 
-    /** Subsequent filters that are used as children for this filter */
+    /**
+     * Subsequent filters that are used as children for this filter
+     */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
 
-    /** This comparator is used to sort the children of the associated GraphNode. */
+    /**
+     * This comparator is used to sort the children of the associated GraphNode.
+     */
     private Comparator comparator;
 
-    /** Individual filter for nodes which might be customized by delivering a AbsGraphTreeNodeFilter. */
+    /**
+     * Individual filter for nodes which might be customized by delivering a AbsGraphTreeNodeFilter.
+     */
     private AbsGraphTreeNodeFilter nodeFilter;
 
-    public VirtualGraphTreeNodeFilter(final Class type, final boolean displayed,
-                                      final boolean recursive, final boolean bound,
-                                      final VirtualGraphTreeNodeFilter[] filters, final int direction)
+    public VirtualGraphTreeNodeFilter( final Class type, final boolean displayed,
+                                       final boolean recursive, final boolean bound,
+                                       final VirtualGraphTreeNodeFilter[] filters, final int direction )
     {
-
         this.type = type;
         this.visible = displayed;
         this.recursive = recursive;
         this.bound = bound;
         this.childrenFilters =
-                (filters == null ? new VirtualGraphTreeNodeFilter[0] : filters);
+                ( filters == null ? new VirtualGraphTreeNodeFilter[0] : filters );
         this.direction = direction;
-        for (final VirtualGraphTreeNodeFilter childFilter : this.childrenFilters)
+        for ( final VirtualGraphTreeNodeFilter childFilter : this.childrenFilters )
         {
             childFilter.parent = this;
         }
@@ -118,12 +148,11 @@ public class VirtualGraphTreeNodeFilter
      * @param filters    the children filters
      * @param direction  the direction in which the children are found
      */
-    public VirtualGraphTreeNodeFilter(final Class type, final Class role, final Comparator comp,
-                                      final AbsGraphTreeNodeFilter nodeFilter, final boolean displayed, final boolean recursive,
-                                      final boolean bound, final VirtualGraphTreeNodeFilter[] filters, final int direction)
+    public VirtualGraphTreeNodeFilter( final Class type, final Class role, final Comparator comp,
+                                       final AbsGraphTreeNodeFilter nodeFilter, final boolean displayed, final boolean recursive,
+                                       final boolean bound, final VirtualGraphTreeNodeFilter[] filters, final int direction )
     {
-
-        this(type, displayed, recursive, bound, filters, direction);
+        this( type, displayed, recursive, bound, filters, direction );
         this.role = role;
         this.comparator = comp;
         this.nodeFilter = nodeFilter;
@@ -146,12 +175,12 @@ public class VirtualGraphTreeNodeFilter
      */
     public boolean isDescendant()
     {
-        return (direction & 2) == 2;
+        return ( direction & 2 ) == 2;
     }
 
     public boolean isBothDirections()
     {
-        return (direction & 3) == 3;
+        return ( direction & 3 ) == 3;
     }
 
     /**
@@ -205,18 +234,18 @@ public class VirtualGraphTreeNodeFilter
      * @param type the type to retrieve
      * @return GraphNodeFilter[]
      */
-    public VirtualGraphTreeNodeFilter getChildrenFilter(final Class type)
+    public VirtualGraphTreeNodeFilter getChildrenFilter( final Class type )
     {
         // Check for more specific real children first
-        for (VirtualGraphTreeNodeFilter childrenFilter : childrenFilters)
+        for ( final VirtualGraphTreeNodeFilter childrenFilter : childrenFilters )
         {
-            if (childrenFilter.getType().isAssignableFrom(type))
+            if ( childrenFilter.getType().isAssignableFrom( type ) )
             {
                 return childrenFilter;
             }
         }
         // Check for less specific recursion now
-        if (this.type.isAssignableFrom(type))
+        if ( this.type.isAssignableFrom( type ) )
         {
             return this;
         }
@@ -243,7 +272,9 @@ public class VirtualGraphTreeNodeFilter
         return flat;
     }
 
-    /** @see java.lang.Object#toString() */
+    /**
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return type + " [down=" + direction + ",displayed=" + visible +
@@ -300,33 +331,33 @@ public class VirtualGraphTreeNodeFilter
      *                     Second order length must be 4.
      * @return the top filter defined by the first row, subsequently containing the remaining rows.
      */
-    public static VirtualGraphTreeNodeFilter getFilter(final Class[] classes, final int[][] filterMatrix)
+    public static VirtualGraphTreeNodeFilter getFilter( final Class[] classes, final int[][] filterMatrix )
     {
-        if (filterMatrix.length != classes.length)
+        if ( filterMatrix.length != classes.length )
         {
-            throw new IllegalArgumentException("First order length of classes and matrix must be equal");
+            throw new IllegalArgumentException( "First order length of classes and matrix must be equal" );
         }
-        if (filterMatrix[0].length != 4)
+        if ( filterMatrix[0].length != 4 )
         {
-            throw new IllegalArgumentException("Second order length filterMatrix must be 4");
+            throw new IllegalArgumentException( "Second order length filterMatrix must be 4" );
         }
         VirtualGraphTreeNodeFilter filter = null;
-        for (int r = filterMatrix.length - 1; r >= 0; r--)
+        for ( int r = filterMatrix.length - 1; r >= 0; r-- )
         {
             final int[] filterData = filterMatrix[r];
-            filter = getFilter(classes[r], filterData, filter);
+            filter = getFilter( classes[r], filterData, filter );
         }
         return filter;
     }
 
-    private static VirtualGraphTreeNodeFilter getFilter(final Class type, final int[] data, final VirtualGraphTreeNodeFilter filter)
+    private static VirtualGraphTreeNodeFilter getFilter( final Class type, final int[] data, final VirtualGraphTreeNodeFilter filter )
     {
-        return new VirtualGraphTreeNodeFilter(type,
+        return new VirtualGraphTreeNodeFilter( type,
                 data[0] == 1 ? VISIBILITY_VISIBLE : VISIBILITY_HIDDEN,
                 data[1] == 1 ? SELF_RECURSIVE : SELF_FLAT,
                 data[2] == 1 ? CONSTRAINT_BOUND : CONSTRAINT_FREE,
                 filter == null ? null : new VirtualGraphTreeNodeFilter[]{filter},
-                data[3] == 1 ? LINE_ANCESTOR : data[3] == 2 ? LINE_DESCENDANT : LINE_RELATED);
+                data[3] == 1 ? LINE_ANCESTOR : data[3] == 2 ? LINE_DESCENDANT : LINE_RELATED );
     }
 
 }

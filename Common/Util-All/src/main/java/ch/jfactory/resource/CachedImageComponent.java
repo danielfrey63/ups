@@ -23,9 +23,9 @@ import org.apache.log4j.Logger;
 
 public class CachedImageComponent extends JComponent implements AsynchronPictureLoaderListener
 {
-    private static final Logger LOGGER = Logger.getLogger(CachedImageComponent.class);
+    private static final Logger LOGGER = Logger.getLogger( CachedImageComponent.class );
 
-    private static Dimension minimumSize = new Dimension(50, 50);
+    private static final Dimension minimumSize = new Dimension( 50, 50 );
 
     private PictureCache cache;
 
@@ -37,21 +37,23 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
 
     private double zoomFaktor = 1.0;
 
-    /** Size which represents a zooming factor of 1. */
+    /**
+     * Size which represents a zooming factor of 1.
+     */
     private int defaultSize = 0;
 
     private Dimension size;
 
-    public static Border BORDER = BorderFactory.createEmptyBorder(1, 1, 1, 1);
+    public static Border BORDER = BorderFactory.createEmptyBorder( 1, 1, 1, 1 );
     /*BorderFactory.createCompoundBorder(
          BorderFactory.createLineBorder(Color.red,1),
            BorderFactory.createEmptyBorder(10, 10, 10, 10)
          );*/
 
-    public CachedImageComponent(final PictureCache c, final int size)
+    public CachedImageComponent( final PictureCache c, final int size )
     {
-        this(c);
-        this.setBorder(BORDER);
+        this( c );
+        this.setBorder( BORDER );
         defaultSize = size;
     }
 
@@ -60,40 +62,40 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         return zoomFaktor;
     }
 
-    public CachedImageComponent(final PictureCache c)
+    public CachedImageComponent( final PictureCache c )
     {
         cache = c;
     }
 
-    public synchronized void setImage(final String name, final boolean thumb)
+    public synchronized void setImage( final String name, final boolean thumb )
     {
         CachedImage im = null;
-        if (name != null)
+        if ( name != null )
         {
-            im = cache.addCachedImage(name);
+            im = cache.addCachedImage( name );
         }
         boolean revalidate = false;
-        if (img != null)
+        if ( img != null )
         {
-            img.detach(this);
+            img.detach( this );
             revalidate = true;
         }
         img = im;
         image = null;
         size = null;
-        if (img != null)
+        if ( img != null )
         {
-            img.attach(this);
+            img.attach( this );
         }
         this.thumbNail = thumb;
-        if (revalidate)
+        if ( revalidate )
         {
             this.redoLayout();
         }
         repaint();
     }
 
-    public synchronized void setZoomFaktor(final double d)
+    public synchronized void setZoomFaktor( final double d )
     {
         size = null;
         zoomFaktor = d;
@@ -118,11 +120,11 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
     public synchronized Dimension getPreferredSize()
     {
         super.getPreferredSize();
-        if (img == null)
+        if ( img == null )
         {
             return minimumSize;
         }
-        if (size != null)
+        if ( size != null )
         {
             return size;
         }
@@ -132,33 +134,33 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         final int h = i.top + i.bottom;
         final Dimension s = img.getSize();
         double factor = zoomFaktor;
-        if (defaultSize > 0)
+        if ( defaultSize > 0 )
         {
-            factor *= defaultSize / Math.max(s.getWidth(), s.getHeight());
+            factor *= defaultSize / Math.max( s.getWidth(), s.getHeight() );
         }
-        size.setSize((s.width * factor) + w, (s.height * factor) + h);
+        size.setSize( ( s.width * factor ) + w, ( s.height * factor ) + h );
         return size;
     }
 
     private void loadImage()
     {
-        if (img == null)
+        if ( img == null )
         {
             return;
         }
-        if ((image == null) || (image.get() == null))
+        if ( ( image == null ) || ( image.get() == null ) )
         {
-            if (!img.loaded(thumbNail))
+            if ( !img.loaded( thumbNail ) )
             {
-                if (img.loaded(true))
+                if ( img.loaded( true ) )
                 {
-                    image = new SoftReference(img.getImage(true));
+                    image = new SoftReference( img.getImage( true ) );
                 }
-                cache.cacheImage(img.getName(), thumbNail, true);
+                cache.cacheImage( img.getName(), thumbNail, true );
             }
             else
             {
-                image = new SoftReference(img.getImage(thumbNail));
+                image = new SoftReference( img.getImage( thumbNail ) );
             }
         }
     }
@@ -169,66 +171,66 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         //this.repaint();
     }
 
-    public void paintComponent(final Graphics g)
+    public void paintComponent( final Graphics g )
     {
-        super.paintComponent(g);
+        super.paintComponent( g );
         loadImage();
         final Insets i = getInsets();
         final int w = i.right + i.left;
         final int h = i.top + i.bottom;
-        Image im = (image == null) ? null : (Image) image.get();
-        if (im != null)
+        Image im = ( image == null ) ? null : (Image) image.get();
+        if ( im != null )
         {
             final Dimension p = getPreferredSize();
             final double wi = p.width - w / 2;
             final double he = p.height - h / 2;
-            final int iw = im.getWidth(null);
-            final int ih = im.getHeight(null);
-            final double f = (double) PictureConverter.getFittingFactor((int) (wi), (int) (he), iw, ih);
+            final int iw = im.getWidth( null );
+            final int ih = im.getHeight( null );
+            final double f = (double) PictureConverter.getFittingFactor( (int) ( wi ), (int) ( he ), iw, ih );
             // Use time consuming smooth scaling for small images
-            if (f == 1)
+            if ( f == 1 )
             {
                 // Todo: store scaled image back
             }
-            else if (f < 0.2)
+            else if ( f < 0.2 )
             {
-                im = im.getScaledInstance((int) (iw * f), (int) (ih * f), Image.SCALE_SMOOTH);
-                g.drawImage(im, 0, 0, null);
+                im = im.getScaledInstance( (int) ( iw * f ), (int) ( ih * f ), Image.SCALE_SMOOTH );
+                g.drawImage( im, 0, 0, null );
             }
             else
             {
-                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                ( (Graphics2D) g ).setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
                 final AffineTransform trans = new AffineTransform();
-                trans.scale(f, f);
-                trans.translate(w / 2, h / 2);
-                ((Graphics2D) g).drawImage(im, trans, null);
+                trans.scale( f, f );
+                trans.translate( w / 2, h / 2 );
+                ( (Graphics2D) g ).drawImage( im, trans, null );
             }
         }
     }
 
-    public synchronized void loadFinished(final String name, final Image img, final boolean thumb)
+    public synchronized void loadFinished( final String name, final Image img, final boolean thumb )
     {
-        LOGGER.debug("Picture " + name + " loadFinished");
+        LOGGER.debug( "Picture " + name + " loadFinished" );
         boolean ok = false;
         size = null;
-        ok = (image == null);
-        ok = ok || (image.get() == null);
-        ok = ok || (image.get() != img);
-        if (ok)
+        ok = ( image == null );
+        ok = ok || ( image.get() == null );
+        ok = ok || ( image.get() != img );
+        if ( ok )
         {
             image = null;
             repaint();
         }
     }
 
-    public synchronized void loadAborted(final String name)
+    public synchronized void loadAborted( final String name )
     {
         image = null;
         size = null;
         repaint();
     }
 
-    public void loadStarted(final String name)
+    public void loadStarted( final String name )
     {
     }
 

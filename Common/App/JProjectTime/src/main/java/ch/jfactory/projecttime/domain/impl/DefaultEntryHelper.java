@@ -20,19 +20,20 @@ import java.util.Properties;
  *         Wegm&uuml;ller</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:09 $
  */
-public final class DefaultEntryHelper implements IFEntryHelper {
-
+public final class DefaultEntryHelper implements IFEntryHelper
+{
     /**
      * The rules associated with this entry helper.
      */
-    private DefaultEntryBuildingRules rules;
+    private final DefaultEntryBuildingRules rules;
 
     /**
      * Constructs an entry helper. Only used by the factory method.
      *
      * @param rules the rules associated with this helper
      */
-    private DefaultEntryHelper(final DefaultEntryBuildingRules rules) {
+    private DefaultEntryHelper( final DefaultEntryBuildingRules rules )
+    {
         this.rules = rules;
     }
 
@@ -42,8 +43,9 @@ public final class DefaultEntryHelper implements IFEntryHelper {
      * @param rules the rules associated with the helper
      * @return the newly constructed helper
      */
-    public static IFEntryHelper getInstance(final DefaultEntryBuildingRules rules) {
-        return new DefaultEntryHelper(rules);
+    public static IFEntryHelper getInstance( final DefaultEntryBuildingRules rules )
+    {
+        return new DefaultEntryHelper( rules );
     }
 
     /**
@@ -56,18 +58,22 @@ public final class DefaultEntryHelper implements IFEntryHelper {
      * @throws ch.jfactory.projecttime.domain.impl.DefaultEntryBuildingRules.RuleViolationException
      *
      */
-    public IFEntry createEntry(final IFEntry parent, final String name, final Object type) {
-        if (rules.validate(parent, type)) {
+    public IFEntry createEntry( final IFEntry parent, final String name, final Object type )
+    {
+        if ( rules.validate( parent, type ) )
+        {
             final IFEntry entry;
-            if (parent == null) {
-                entry = new DefaultEntry(name, type);
+            if ( parent == null )
+            {
+                entry = new DefaultEntry( name, type );
             }
-            else {
-                entry = parent.addChild(name, type);
+            else
+            {
+                entry = parent.addChild( name, type );
             }
             return entry;
         }
-        throw new DefaultEntryBuildingRules.RuleViolationException(parent, type);
+        throw new DefaultEntryBuildingRules.RuleViolationException( parent, type );
     }
 
     /**
@@ -76,13 +82,16 @@ public final class DefaultEntryHelper implements IFEntryHelper {
      * @param parent the new parent to set
      * @param child  the child to set the parent for
      */
-    public void setParent(IFEntry parent, IFEntry child) {
+    public void setParent( final IFEntry parent, final IFEntry child )
+    {
         final Object type = child.getType();
-        if (rules.validate(parent, type)) {
-            child.setParent(parent);
+        if ( rules.validate( parent, type ) )
+        {
+            child.setParent( parent );
         }
-        else {
-            throw new DefaultEntryBuildingRules.RuleViolationException(parent, type);
+        else
+        {
+            throw new DefaultEntryBuildingRules.RuleViolationException( parent, type );
         }
     }
 
@@ -92,15 +101,18 @@ public final class DefaultEntryHelper implements IFEntryHelper {
      * @param configuration the configuration properties that must contain a value for "persistence.file"
      * @return the entry array loaded
      */
-    public IFEntry[] load(final Properties configuration) {
-        final String fileName = configuration.getProperty("persistence.file");
+    public IFEntry[] load( final Properties configuration )
+    {
+        final String fileName = configuration.getProperty( "persistence.file" );
         IFEntry[] entries = null;
-        try {
-            final XMLDecoder dec = new XMLDecoder(new FileInputStream(fileName));
+        try
+        {
+            final XMLDecoder dec = new XMLDecoder( new FileInputStream( fileName ) );
             entries = (IFEntry[]) dec.readObject();
             dec.close();
         }
-        catch (FileNotFoundException e) {
+        catch ( FileNotFoundException e )
+        {
             e.printStackTrace();
         }
         return entries;
@@ -112,14 +124,17 @@ public final class DefaultEntryHelper implements IFEntryHelper {
      * @param entries       the entry array to store
      * @param configuration the configuration for saving the array. Must contain a value for "persistence.file"
      */
-    public void save(final IFEntry[] entries, final Properties configuration) {
-        final String fileName = configuration.getProperty("persistence.file");
-        try {
-            final XMLEncoder enc = new XMLEncoder(new FileOutputStream(fileName));
-            enc.writeObject(entries);
+    public void save( final IFEntry[] entries, final Properties configuration )
+    {
+        final String fileName = configuration.getProperty( "persistence.file" );
+        try
+        {
+            final XMLEncoder enc = new XMLEncoder( new FileOutputStream( fileName ) );
+            enc.writeObject( entries );
             enc.close();
         }
-        catch (FileNotFoundException e) {
+        catch ( FileNotFoundException e )
+        {
             e.printStackTrace();
         }
     }

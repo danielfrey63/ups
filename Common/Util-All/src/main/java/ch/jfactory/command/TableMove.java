@@ -30,17 +30,16 @@ import org.pietschy.command.CommandManager;
  */
 public class TableMove extends ActionCommand
 {
+    private final int delta;
 
-    private int delta;
+    private final SortableTableModel tableModel;
 
-    private SortableTableModel tableModel;
+    private final ListSelectionModel selectionModel;
 
-    private ListSelectionModel selectionModel;
-
-    public TableMove(final CommandManager commandManager, final String commandId, final SortableTableModel tableModel,
-                     final ListSelectionModel selectionModel, final int delta)
+    public TableMove( final CommandManager commandManager, final String commandId, final SortableTableModel tableModel,
+                      final ListSelectionModel selectionModel, final int delta )
     {
-        super(commandManager, commandId);
+        super( commandManager, commandId );
         this.delta = delta;
         this.tableModel = tableModel;
         this.selectionModel = selectionModel;
@@ -48,7 +47,7 @@ public class TableMove extends ActionCommand
 
     protected void handleExecute()
     {
-        final int[] indices = tableModel.move(TableUtils.getSelection(selectionModel), delta);
-        TableUtils.setSelection(indices, selectionModel);
+        final int[] indices = tableModel.move( TableUtils.getSelection( selectionModel ), delta );
+        TableUtils.setSelection( indices, selectionModel );
     }
 }

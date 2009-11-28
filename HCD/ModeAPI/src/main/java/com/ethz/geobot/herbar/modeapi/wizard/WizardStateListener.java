@@ -2,7 +2,7 @@
 
 package com.ethz.geobot.herbar.modeapi.wizard;
 
-public interface WizardStateListener {
-
-    void change(WizardStateChangeEvent event);
+public interface WizardStateListener
+{
+    void change( WizardStateChangeEvent event );
 }

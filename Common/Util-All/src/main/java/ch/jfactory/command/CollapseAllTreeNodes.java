@@ -29,17 +29,16 @@ import org.pietschy.command.CommandManager;
  */
 public class CollapseAllTreeNodes extends ActionCommand
 {
+    private final JTree tree;
 
-    private JTree tree;
-
-    public CollapseAllTreeNodes(final CommandManager commandManager, final JTree tree)
+    public CollapseAllTreeNodes( final CommandManager commandManager, final JTree tree )
     {
-        super(commandManager, CommonCommands.COMMANDID_TREECOLLAPSEALLNODES);
+        super( commandManager, CommonCommands.COMMANDID_TREECOLLAPSEALLNODES );
         this.tree = tree;
     }
 
     protected void handleExecute()
     {
-        TreeUtils.collapseAll(tree);
+        TreeUtils.collapseAll( tree );
     }
 }

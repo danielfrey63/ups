@@ -53,8 +53,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class StatusBar extends JPanel
 {
-
-    private static final String LOGO = "\u00A9 " + Calendar.getInstance().get(Calendar.YEAR) + " www.xmatrix.ch";
+    private static final String LOGO = "\u00A9 " + Calendar.getInstance().get( Calendar.YEAR ) + " www.xmatrix.ch";
 
     private final JLabel messageStatusItem;
 
@@ -62,7 +61,7 @@ public class StatusBar extends JPanel
 
     private final JPopupMenu historyPopup = new JPopupMenu();
 
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private final GridBagConstraints gbc = new GridBagConstraints();
 
     private List<JComponent> components = new ArrayList<JComponent>();
 
@@ -70,13 +69,13 @@ public class StatusBar extends JPanel
 
     public StatusBar()
     {
-        setItemBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
-        setLayout(new GridBagLayout());
+        setItemBorder( BorderFactory.createEmptyBorder( 2, 0, 0, 0 ) );
+        setLayout( new GridBagLayout() );
         gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.BOTH;
-        messageStatusItem = new JLabel(LOGO);
-        addStatusComponent(new StatusPanel(messageStatusItem));
+        messageStatusItem = new JLabel( LOGO );
+        addStatusComponent( new StatusPanel( messageStatusItem ) );
         gbc.weightx = 0;
         installHistoryPopup();
     }
@@ -84,65 +83,62 @@ public class StatusBar extends JPanel
     private void installHistoryPopup()
     {
         final JList list = new JList();
-        list.setCellRenderer(new DefaultListCellRenderer()
+        list.setCellRenderer( new DefaultListCellRenderer()
         {
-
             @Override
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+            public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
             {
-                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                final JLabel label = (JLabel) super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
                 final Message message = (Message) value;
-                if (message.getType() == Message.Type.WARN)
+                if ( message.getType() == Message.Type.WARN )
                 {
-                    label.setForeground(Color.red);
+                    label.setForeground( Color.red );
                 }
-                label.setText(message.getText());
+                label.setText( message.getText() );
                 return label;
             }
-        });
-        list.setBorder(new EmptyBorder(0, 0, 0, 0));
-        final JScrollPane scroll = new JScrollPane(list);
-        scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        historyPopup.setLayout(new BorderLayout());
-        historyPopup.add(scroll, BorderLayout.CENTER);
-        historyPopup.addMouseListener(new MouseAdapter()
+        } );
+        list.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+        final JScrollPane scroll = new JScrollPane( list );
+        scroll.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+        scroll.setVerticalScrollBarPolicy( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+        scroll.setHorizontalScrollBarPolicy( ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        historyPopup.setLayout( new BorderLayout() );
+        historyPopup.add( scroll, BorderLayout.CENTER );
+        historyPopup.addMouseListener( new MouseAdapter()
         {
-
             @Override
-            public void mouseExited(final MouseEvent e)
+            public void mouseExited( final MouseEvent e )
             {
-                final Point point = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, null).getPoint();
-                final Rectangle popupRect = SwingUtilities.convertRectangle(historyPopup.getParent(), historyPopup.getBounds(), null);
-                final Rectangle statusRect = SwingUtilities.convertRectangle(getParent(), getBounds(), null);
-                historyPopup.setVisible(statusRect.contains(point) || popupRect.contains(point));
+                final Point point = SwingUtilities.convertMouseEvent( (Component) e.getSource(), e, null ).getPoint();
+                final Rectangle popupRect = SwingUtilities.convertRectangle( historyPopup.getParent(), historyPopup.getBounds(), null );
+                final Rectangle statusRect = SwingUtilities.convertRectangle( getParent(), getBounds(), null );
+                historyPopup.setVisible( statusRect.contains( point ) || popupRect.contains( point ) );
             }
-        });
-        addMouseListener(new MouseAdapter()
+        } );
+        addMouseListener( new MouseAdapter()
         {
-
             @Override
-            public void mouseExited(final MouseEvent e)
+            public void mouseExited( final MouseEvent e )
             {
-                final Point point = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, null).getPoint();
-                final Rectangle popupRect = SwingUtilities.convertRectangle(historyPopup.getParent(), historyPopup.getBounds(), null);
-                final Rectangle statusRect = SwingUtilities.convertRectangle(getParent(), getBounds(), null);
-                historyPopup.setVisible(statusRect.contains(point) || popupRect.contains(point));
+                final Point point = SwingUtilities.convertMouseEvent( (Component) e.getSource(), e, null ).getPoint();
+                final Rectangle popupRect = SwingUtilities.convertRectangle( historyPopup.getParent(), historyPopup.getBounds(), null );
+                final Rectangle statusRect = SwingUtilities.convertRectangle( getParent(), getBounds(), null );
+                historyPopup.setVisible( statusRect.contains( point ) || popupRect.contains( point ) );
             }
 
             @Override
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked( final MouseEvent e )
             {
-                list.setListData(history.toArray());
+                list.setListData( history.toArray() );
                 final Dimension preferredSize = historyPopup.getPreferredSize();
-                historyPopup.setPreferredSize(new Dimension(messageStatusItem.getWidth(), preferredSize.height));
+                historyPopup.setPreferredSize( new Dimension( messageStatusItem.getWidth(), preferredSize.height ) );
                 final Point point = messageStatusItem.getLocation();
-                point.translate(0, -preferredSize.height);
-                historyPopup.setLocation(point);
-                historyPopup.show(StatusBar.this, point.x, point.y);
+                point.translate( 0, -preferredSize.height );
+                historyPopup.setLocation( point );
+                historyPopup.show( StatusBar.this, point.x, point.y );
             }
-        });
+        } );
     }
 
     /**
@@ -150,41 +146,41 @@ public class StatusBar extends JPanel
      *
      * @param component component to add
      */
-    public void addStatusComponent(final JComponent component)
+    public void addStatusComponent( final JComponent component )
     {
         gbc.gridx += 1;
         final StatusPanel statusPanel;
-        if (StatusPanel.class.isAssignableFrom(component.getClass()))
+        if ( StatusPanel.class.isAssignableFrom( component.getClass() ) )
         {
             statusPanel = (StatusPanel) component;
         }
         else
         {
-            statusPanel = new StatusPanel(component);
+            statusPanel = new StatusPanel( component );
         }
-        components.add(component);
-        statusPanels.add(statusPanel);
-        add(statusPanel, gbc);
+        components.add( component );
+        statusPanels.add( statusPanel );
+        add( statusPanel, gbc );
     }
 
-    public void addStatusComponent(final JComponent component, final int index)
+    public void addStatusComponent( final JComponent component, final int index )
     {
-        final List<JComponent> componentsCopy = new ArrayList<JComponent>(components);
-        final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>(statusPanels);
-        for (int i = 1; i < components.size(); i++)
+        final List<JComponent> componentsCopy = new ArrayList<JComponent>( components );
+        final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>( statusPanels );
+        for ( int i = 1; i < components.size(); i++ )
         {
-            remove(statusPanels.get(i));
-            components.remove(i);
-            statusPanels.remove(i);
+            remove( statusPanels.get( i ) );
+            components.remove( i );
+            statusPanels.remove( i );
         }
-        componentsCopy.add(index, component);
-        statusPanelsCopy.add(index, new StatusPanel(component));
+        componentsCopy.add( index, component );
+        statusPanelsCopy.add( index, new StatusPanel( component ) );
         gbc.gridx = 1;
         components = componentsCopy;
         statusPanels = statusPanelsCopy;
-        for (int i = 1; i < components.size(); i++)
+        for ( int i = 1; i < components.size(); i++ )
         {
-            add(statusPanels.get(i), gbc);
+            add( statusPanels.get( i ), gbc );
             gbc.gridx += 1;
         }
     }
@@ -194,40 +190,40 @@ public class StatusBar extends JPanel
      *
      * @param text the new text to display
      */
-    public void setText(final String text)
+    public void setText( final String text )
     {
-        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.INFO))
+        if ( history.size() == 0 || !( history.get( 0 ).getText().equals( text ) && history.get( 0 ).getType() == Message.Type.INFO ) )
         {
-            SwingUtilities.invokeLater(new Runnable()
+            SwingUtilities.invokeLater( new Runnable()
             {
                 public void run()
                 {
-                    messageStatusItem.setForeground(UIManager.getColor("Field.foreground"));
-                    messageStatusItem.setText("".equals(text) ? LOGO : text);
+                    messageStatusItem.setForeground( UIManager.getColor( "Field.foreground" ) );
+                    messageStatusItem.setText( "".equals( text ) ? LOGO : text );
                 }
-            });
-            if (!"".equals(text))
+            } );
+            if ( !"".equals( text ) )
             {
-                history.add(0, new SimpleMessage(text, Message.Type.INFO));
+                history.add( 0, new SimpleMessage( text, Message.Type.INFO ) );
             }
         }
     }
 
-    public void setWarning(final String text)
+    public void setWarning( final String text )
     {
-        if (history.size() == 0 || !(history.get(0).getText().equals(text) && history.get(0).getType() == Message.Type.WARN))
+        if ( history.size() == 0 || !( history.get( 0 ).getText().equals( text ) && history.get( 0 ).getType() == Message.Type.WARN ) )
         {
-            SwingUtilities.invokeLater(new Runnable()
+            SwingUtilities.invokeLater( new Runnable()
             {
                 public void run()
                 {
-                    messageStatusItem.setForeground(Color.red);
-                    messageStatusItem.setText(text);
+                    messageStatusItem.setForeground( Color.red );
+                    messageStatusItem.setText( text );
                 }
-            });
-            if (!"".equals(text))
+            } );
+            if ( !"".equals( text ) )
             {
-                history.add(0, new SimpleMessage(text, Message.Type.WARN));
+                history.add( 0, new SimpleMessage( text, Message.Type.WARN ) );
             }
         }
     }
@@ -237,11 +233,11 @@ public class StatusBar extends JPanel
      *
      * @param border the border to propagate
      */
-    public void setItemBorder(final Border border)
+    public void setItemBorder( final Border border )
     {
-        for (final JComponent component : components)
+        for ( final JComponent component : components )
         {
-            component.setBorder(border);
+            component.setBorder( border );
         }
     }
 
@@ -250,25 +246,25 @@ public class StatusBar extends JPanel
      *
      * @param component the component to be removed
      */
-    public void removeStatusComponent(final JComponent component)
+    public void removeStatusComponent( final JComponent component )
     {
         boolean found = false;
-        final List<JComponent> tempComponents = new ArrayList<JComponent>(components);
-        final List<StatusPanel> tempStatusPanels = new ArrayList<StatusPanel>(statusPanels);
-        for (int i = 0; i < tempComponents.size(); i++)
+        final List<JComponent> tempComponents = new ArrayList<JComponent>( components );
+        final List<StatusPanel> tempStatusPanels = new ArrayList<StatusPanel>( statusPanels );
+        for ( int i = 0; i < tempComponents.size(); i++ )
         {
-            final JComponent comp = tempComponents.get(i);
-            if (found || comp == component)
+            final JComponent comp = tempComponents.get( i );
+            if ( found || comp == component )
             {
-                remove(tempStatusPanels.get(i));
-                if (comp != component)
+                remove( tempStatusPanels.get( i ) );
+                if ( comp != component )
                 {
-                    add(tempStatusPanels.get(i), gbc);
+                    add( tempStatusPanels.get( i ), gbc );
                 }
                 else
                 {
-                    components.remove(i);
-                    statusPanels.remove(i);
+                    components.remove( i );
+                    statusPanels.remove( i );
                     found = true;
                 }
             }
@@ -282,50 +278,50 @@ public class StatusBar extends JPanel
         final int h = super.getPreferredSize().height;
         final Container parent = getTopLevelAncestor();
         final int w = parent.getSize().width;
-        return new Dimension(w, h);
+        return new Dimension( w, h );
     }
 
-    public static void main(final String[] args) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        UIManager.setLookAndFeel(new WindowsLookAndFeel());
-        final javax.swing.JButton remove = new javax.swing.JButton("Remove");
-        final javax.swing.JButton add = new javax.swing.JButton("Add");
-        final javax.swing.JButton message = new javax.swing.JButton("Message");
-        final javax.swing.JPanel panel = new JPanel(new java.awt.FlowLayout());
+        UIManager.setLookAndFeel( new WindowsLookAndFeel() );
+        final javax.swing.JButton remove = new javax.swing.JButton( "Remove" );
+        final javax.swing.JButton add = new javax.swing.JButton( "Add" );
+        final javax.swing.JButton message = new javax.swing.JButton( "Message" );
+        final javax.swing.JPanel panel = new JPanel( new java.awt.FlowLayout() );
 
         final javax.swing.JFrame f = new javax.swing.JFrame();
-        final javax.swing.JTextField text = new javax.swing.JTextField(20);
+        final javax.swing.JTextField text = new javax.swing.JTextField( 20 );
         final StatusBar status = new StatusBar();
         final List<JLabel> list = new ArrayList<JLabel>();
 
         final JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new JMenu("Datei"));
-        f.setJMenuBar(menuBar);
+        menuBar.add( new JMenu( "Datei" ) );
+        f.setJMenuBar( menuBar );
 
         final JSplitPane splitPane = new JSplitPane();
-        splitPane.setRightComponent(panel);
-        f.getContentPane().add(splitPane, java.awt.BorderLayout.CENTER);
-        panel.add(add);
-        panel.add(remove);
-        panel.add(text);
-        panel.add(message);
-        f.getContentPane().add(status, java.awt.BorderLayout.SOUTH);
+        splitPane.setRightComponent( panel );
+        f.getContentPane().add( splitPane, java.awt.BorderLayout.CENTER );
+        panel.add( add );
+        panel.add( remove );
+        panel.add( text );
+        panel.add( message );
+        f.getContentPane().add( status, java.awt.BorderLayout.SOUTH );
 
-        add.addActionListener(new ActionListener()
+        add.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                final JLabel label = new JLabel("label " + (list.size() + 1));
-                status.addStatusComponent(label);
-                list.add(label);
+                final JLabel label = new JLabel( "label " + ( list.size() + 1 ) );
+                status.addStatusComponent( label );
+                list.add( label );
                 f.getContentPane().validate();
                 f.getContentPane().repaint();
             }
-        });
+        } );
 
-        remove.addActionListener(new ActionListener()
+        remove.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
 //                int i = Integer.parseInt(text.getUserObject());
 //                JLabel label = (JLabel) list.remove(i - 1);
@@ -334,16 +330,16 @@ public class StatusBar extends JPanel
                 f.getContentPane().validate();
                 f.getContentPane().repaint();
             }
-        });
-        message.addActionListener(new ActionListener()
+        } );
+        message.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                status.setText(text.getText());
+                status.setText( text.getText() );
             }
-        });
+        } );
 
-        f.setSize(400, 300);
-        f.setVisible(true);
+        f.setSize( 400, 300 );
+        f.setVisible( true );
     }
 }

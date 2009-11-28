@@ -26,18 +26,17 @@ import com.jgoodies.binding.beans.Model;
  */
 public class DefaultInfoModel extends Model implements InfoModel
 {
-
-    private Note note = new SimpleNote("", 0);
+    private Note note = new SimpleNote( "", 0 );
 
     public Note getNote()
     {
         return note;
     }
 
-    public void setNote(final Note note)
+    public void setNote( final Note note )
     {
         final Note old = getNote();
         this.note = note;
-        firePropertyChange(InfoModel.PROPERTYNAME_NOTE, old, note);
+        firePropertyChange( InfoModel.PROPERTYNAME_NOTE, old, note );
     }
 }

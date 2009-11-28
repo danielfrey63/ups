@@ -11,20 +11,22 @@ import javax.swing.JFrame;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-public class Wizard {
+public class Wizard
+{
     /** logging category for class */
-//    private static final Category CAT = Category.getInstance(Wizard.class);
+//    private static final Category LOG = Category.getInstance(Wizard.class);
 
     /**
      * the model of the wizard
      */
-    private WizardModel model;
+    private final WizardModel model;
 
     /**
      * Default constructor, create a Wizard with a DefaultWizardModel
      */
-    public Wizard() {
-        model = new DefaultWizardModel("UnspecifiedModel");
+    public Wizard()
+    {
+        model = new DefaultWizardModel( "UnspecifiedModel" );
     }
 
     /**
@@ -32,8 +34,9 @@ public class Wizard {
      *
      * @param panes an array of WizardPane's
      */
-    public Wizard(WizardPane[] panes) {
-        model = new DefaultWizardModel((HerbarContext) null, panes, "UnspecifiedModel");
+    public Wizard( final WizardPane[] panes )
+    {
+        model = new DefaultWizardModel( (HerbarContext) null, panes, "UnspecifiedModel" );
     }
 
     /**
@@ -41,7 +44,8 @@ public class Wizard {
      *
      * @param model the WizardModel
      */
-    public Wizard(WizardModel model) {
+    public Wizard( final WizardModel model )
+    {
         this.model = model;
     }
 
@@ -51,12 +55,13 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(JFrame parent) {
-        String title = model.getDialogTitle();
-        WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
-        dlg.setModel(model);
-        dlg.setLocationRelativeTo(parent);
-        dlg.setVisible(true);
+    public boolean show( final JFrame parent )
+    {
+        final String title = model.getDialogTitle();
+        final WizardDialogUI dlg = new WizardDialogUI( parent, title, true );
+        dlg.setModel( model );
+        dlg.setLocationRelativeTo( parent );
+        dlg.setVisible( true );
         return dlg.isAccepted();
     }
 
@@ -66,13 +71,14 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(JFrame parent, int width, int height) {
-        String title = model.getDialogTitle();
-        WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
-        dlg.setModel(model);
-        dlg.setSize(width, height);
-        dlg.setLocationRelativeTo(parent);
-        dlg.setVisible(true);
+    public boolean show( final JFrame parent, final int width, final int height )
+    {
+        final String title = model.getDialogTitle();
+        final WizardDialogUI dlg = new WizardDialogUI( parent, title, true );
+        dlg.setModel( model );
+        dlg.setSize( width, height );
+        dlg.setLocationRelativeTo( parent );
+        dlg.setVisible( true );
         return dlg.isAccepted();
     }
 
@@ -82,13 +88,14 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(JDialog parent) {
-        String title = model.getDialogTitle();
-        WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
-        dlg = new WizardDialogUI(parent, title, true);
-        dlg.setModel(model);
-        dlg.setLocationRelativeTo(parent);
-        dlg.setVisible(true);
+    public boolean show( final JDialog parent )
+    {
+        final String title = model.getDialogTitle();
+        WizardDialogUI dlg = new WizardDialogUI( parent, title, true );
+        dlg = new WizardDialogUI( parent, title, true );
+        dlg.setModel( model );
+        dlg.setLocationRelativeTo( parent );
+        dlg.setVisible( true );
         return dlg.isAccepted();
     }
 
@@ -98,14 +105,15 @@ public class Wizard {
      * @param parent the parent frame
      * @return true wizard settings accepted, false wizard canceled
      */
-    public boolean show(JDialog parent, int width, int height) {
-        String title = model.getDialogTitle();
-        WizardDialogUI dlg = new WizardDialogUI(parent, title, true);
-        dlg = new WizardDialogUI(parent, title, true);
-        dlg.setModel(model);
-        dlg.setSize(width, height);
-        dlg.setLocationRelativeTo(parent);
-        dlg.setVisible(true);
+    public boolean show( final JDialog parent, final int width, final int height )
+    {
+        final String title = model.getDialogTitle();
+        WizardDialogUI dlg = new WizardDialogUI( parent, title, true );
+        dlg = new WizardDialogUI( parent, title, true );
+        dlg.setModel( model );
+        dlg.setSize( width, height );
+        dlg.setLocationRelativeTo( parent );
+        dlg.setVisible( true );
         return dlg.isAccepted();
     }
 

@@ -30,8 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class XMLUtils
 {
-
-    private static final Logger LOG = Logger.getLogger(XMLUtils.class);
+    private static final Logger LOG = Logger.getLogger( XMLUtils.class );
 
     /**
      * This method applies the xslFile to inFile but does not write an output. Useful if the xslt script itself
@@ -44,31 +43,30 @@ public class XMLUtils
      *                     uppon error
      * @throws IOException uppon error
      */
-    public static void transformNoOut(final String inFile, final String xslFile, final Properties params)
+    public static void transformNoOut( final String inFile, final String xslFile, final Properties params )
             throws IOException, TransformerException
     {
-
         Reader input = null;
         Writer output = null;
         Reader xslt = null;
         try
         {
-            input = new FileReader(inFile);
-            output = new OutputStreamWriter(new NullOutputStream());
-            xslt = new FileReader(xslFile);
-            transform(input, output, xslt, params);
+            input = new FileReader( inFile );
+            output = new OutputStreamWriter( new NullOutputStream() );
+            xslt = new FileReader( xslFile );
+            transform( input, output, xslt, params );
         }
         finally
         {
-            if (input != null)
+            if ( input != null )
             {
                 input.close();
             }
-            if (output != null)
+            if ( output != null )
             {
                 output.close();
             }
-            if (xslt != null)
+            if ( xslt != null )
             {
                 xslt.close();
             }
@@ -86,19 +84,18 @@ public class XMLUtils
      * @throws javax.xml.transform.TransformerException
      *
      */
-    public static void transformNoIn(final Writer output, final Reader xslt, final Properties params)
+    public static void transformNoIn( final Writer output, final Reader xslt, final Properties params )
             throws IOException, TransformerException
     {
-
         Reader input = null;
         try
         {
-            input = new InputStreamReader(new ByteArrayInputStream("<DummyRoot/>".getBytes()));
-            transform(input, output, xslt, params);
+            input = new InputStreamReader( new ByteArrayInputStream( "<DummyRoot/>".getBytes() ) );
+            transform( input, output, xslt, params );
         }
         finally
         {
-            if (input != null)
+            if ( input != null )
             {
                 input.close();
             }
@@ -116,42 +113,40 @@ public class XMLUtils
      * @throws javax.xml.transform.TransformerException
      *
      */
-    public static void transform(final String in, final String out, final String xsl, final Properties params)
+    public static void transform( final String in, final String out, final String xsl, final Properties params )
             throws IOException, TransformerException
     {
-
         Reader input = null;
         Writer output = null;
         Reader xslt = null;
         try
         {
-            input = new InputStreamReader(XMLUtils.class.getResourceAsStream(in));
-            xslt = new InputStreamReader(XMLUtils.class.getResourceAsStream(xsl));
-            output = new FileWriter(out);
-            transform(input, output, xslt, params);
+            input = new InputStreamReader( XMLUtils.class.getResourceAsStream( in ) );
+            xslt = new InputStreamReader( XMLUtils.class.getResourceAsStream( xsl ) );
+            output = new FileWriter( out );
+            transform( input, output, xslt, params );
         }
         finally
         {
-            if (input != null)
+            if ( input != null )
             {
                 input.close();
             }
-            if (output != null)
+            if ( output != null )
             {
                 output.close();
             }
-            if (xslt != null)
+            if ( xslt != null )
             {
                 xslt.close();
             }
         }
     }
 
-    public static void transform(final Reader input, final Writer output, final Reader xslt,
-                                 final Properties params) throws TransformerException
+    public static void transform( final Reader input, final Writer output, final Reader xslt,
+                                  final Properties params ) throws TransformerException
     {
-
-        transform(input, output, xslt, params, null, TransformerFactory.newInstance());
+        transform( input, output, xslt, params, null, TransformerFactory.newInstance() );
     }
 
     /**
@@ -168,54 +163,53 @@ public class XMLUtils
      * @throws TransformerException
      * @throws NullPointerException if the parameters are null
      */
-    public static void transform(final Reader input, final Writer output, final Reader xslt, final Properties params,
-                                 final URIResolver resolver, final TransformerFactory factory
+    public static void transform( final Reader input, final Writer output, final Reader xslt, final Properties params,
+                                  final URIResolver resolver, final TransformerFactory factory
     ) throws TransformerException
     {
-
         // Use the factory to create a template containing the xsl file
-        final Templates template = factory.newTemplates(new StreamSource(xslt));
+        final Templates template = factory.newTemplates( new StreamSource( xslt ) );
 
         // Use the template to create a transformer
         final Transformer xformer = template.newTransformer();
-        xformer.setErrorListener(new ErrorListener()
+        xformer.setErrorListener( new ErrorListener()
         {
-            public void error(final TransformerException e) throws TransformerException
+            public void error( final TransformerException e ) throws TransformerException
             {
-                LOG.error(e.getMessageAndLocation(), e);
+                LOG.error( e.getMessageAndLocation(), e );
                 throw e;
             }
 
-            public void fatalError(final TransformerException e) throws TransformerException
+            public void fatalError( final TransformerException e ) throws TransformerException
             {
-                LOG.fatal(e.getMessageAndLocation(), e);
+                LOG.fatal( e.getMessageAndLocation(), e );
                 throw e;
             }
 
-            public void warning(final TransformerException e)
+            public void warning( final TransformerException e )
             {
-                LOG.warn(e.getMessage());
+                LOG.warn( e.getMessage() );
             }
-        });
+        } );
 
         // Setup parameters
         final Enumeration keys = params.keys();
-        while (keys.hasMoreElements())
+        while ( keys.hasMoreElements() )
         {
             final String key = (String) keys.nextElement();
-            final String value = (String) params.get(key);
-            xformer.setParameter(key, value);
+            final String value = (String) params.get( key );
+            xformer.setParameter( key, value );
         }
-        if (resolver != null)
+        if ( resolver != null )
         {
-            xformer.setURIResolver(resolver);
+            xformer.setURIResolver( resolver );
         }
 
         // Prepare the input and output files
-        final Source source = new StreamSource(input);
-        final Result result = new StreamResult(output);
+        final Source source = new StreamSource( input );
+        final Result result = new StreamResult( output );
 
         // Apply the xsl file to the source file and write the result to the output file
-        xformer.transform(source, result);
+        xformer.transform( source, result );
     }
 }

@@ -11,37 +11,45 @@ import java.util.prefs.Preferences;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-abstract public class StateCompositeModel implements StateModel {
-
-    final public StateCompositeModel getComposite() {
+abstract public class StateCompositeModel implements StateModel
+{
+    final public StateCompositeModel getComposite()
+    {
         return this;
     }
 
-    final public void loadState(Preferences node) {
-        node = loadCompositeState(node);
-        Enumeration components = subStateModels();
-        while (components.hasMoreElements()) {
-            ((StateModel) components.nextElement()).loadState(node);
+    final public void loadState( Preferences node )
+    {
+        node = loadCompositeState( node );
+        final Enumeration components = subStateModels();
+        while ( components.hasMoreElements() )
+        {
+            ( (StateModel) components.nextElement() ).loadState( node );
         }
     }
 
-    final public void storeState(Preferences node) {
-        node = storeCompositeState(node);
-        Enumeration components = subStateModels();
-        while (components.hasMoreElements()) {
-            ((StateModel) components.nextElement()).loadState(node);
+    final public void storeState( Preferences node )
+    {
+        node = storeCompositeState( node );
+        final Enumeration components = subStateModels();
+        while ( components.hasMoreElements() )
+        {
+            ( (StateModel) components.nextElement() ).loadState( node );
         }
     }
 
-    final public void add(StateModel stateModel) {
-        subStateModelVector.addElement(stateModel);
+    final public void add( final StateModel stateModel )
+    {
+        subStateModelVector.addElement( stateModel );
     }
 
-    final public void remove(StateModel stateModel) {
-        subStateModelVector.removeElement(stateModel);
+    final public void remove( final StateModel stateModel )
+    {
+        subStateModelVector.removeElement( stateModel );
     }
 
-    final public Enumeration subStateModels() {
+    final public Enumeration subStateModels()
+    {
         return subStateModelVector.elements();
     }
 
@@ -52,7 +60,7 @@ abstract public class StateCompositeModel implements StateModel {
      * @param node Preferences node from which the model should load the state
      * @return a node used by the submodels to load there states
      */
-    public abstract Preferences loadCompositeState(Preferences node);
+    public abstract Preferences loadCompositeState( Preferences node );
 
     /**
      * override this method to save the state of the model. This method will return a node from which the submodels
@@ -61,7 +69,7 @@ abstract public class StateCompositeModel implements StateModel {
      * @param node Preferences node from which the model should save the state
      * @return a node used by the submodels to save there states
      */
-    public abstract Preferences storeCompositeState(Preferences node);
+    public abstract Preferences storeCompositeState( Preferences node );
 
-    private Vector subStateModelVector = new java.util.Vector();
+    private final Vector subStateModelVector = new java.util.Vector();
 }

@@ -20,8 +20,9 @@ import javax.swing.tree.TreePath;
  */
 public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
 {
-
-    /** The tree model used for updates */
+    /**
+     * The tree model used for updates
+     */
     private NotifiableTreeModel model;
 
     /**
@@ -30,9 +31,9 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      *
      * @param model the model used for this validator
      */
-    public AbstractDnDValidatorUpdater(final NotifiableTreeModel model)
+    public AbstractDnDValidatorUpdater( final NotifiableTreeModel model )
     {
-        setModel(model);
+        setModel( model );
     }
 
     /**
@@ -58,26 +59,32 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
      *
      * @param model the new model object to set
      */
-    public void setModel(final NotifiableTreeModel model)
+    public void setModel( final NotifiableTreeModel model )
     {
         this.model = model;
     }
 
-    /** @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int) */
-    public void insertInto(final TreePath missile, final TreePath parent, final int pos)
+    /**
+     * @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int)
+     */
+    public void insertInto( final TreePath missile, final TreePath parent, final int pos )
     {
-        getModel().insertInto(missile, parent, pos);
+        getModel().insertInto( missile, parent, pos );
         updateNodesChanged();
     }
 
-    /** @see DnDValidatorUpdater #removeFromParent(TreePath) */
-    public void removeFromParent(final TreePath missile)
+    /**
+     * @see DnDValidatorUpdater #removeFromParent(TreePath)
+     */
+    public void removeFromParent( final TreePath missile )
     {
-        getModel().removeFromParent(missile);
+        getModel().removeFromParent( missile );
         updateNodesChanged();
     }
 
-    /** Informes the subclass of a change in the node structure. */
+    /**
+     * Informes the subclass of a change in the node structure.
+     */
     public abstract void updateNodesChanged();
 }
 

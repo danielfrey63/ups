@@ -19,17 +19,19 @@ import java.awt.Graphics;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:00 $
  */
-public class Prinzessin extends Canvas {
-
+public class Prinzessin extends Canvas
+{
     private SoundList soundList;
+
     private int princessX;
+
     private int princessY;
 
     /**
      * Constructor
-     *
      */
-    public Prinzessin() {
+    public Prinzessin()
+    {
         startLoadingSounds();
     }
 
@@ -39,7 +41,8 @@ public class Prinzessin extends Canvas {
      * @param x x-position
      * @param y y-position
      */
-    public void setPrincessXY(int x, int y) {
+    public void setPrincessXY( final int x, final int y )
+    {
         this.princessX = x;
         this.princessY = y;
     }
@@ -52,28 +55,31 @@ public class Prinzessin extends Canvas {
      * @param x      x-position of the game-over-picture
      * @param y      y-position of the game-over-picture
      */
-    public void paintResult(Graphics g, boolean result, int x, int y) {
-        if (result) {
-            g.drawImage(ImageLocator.getIcon("labyDiplom.gif").getImage(),
-                    x + 20, y, this);
-            soundList.getClip("morning.au").play();
+    public void paintResult( final Graphics g, final boolean result, final int x, final int y )
+    {
+        if ( result )
+        {
+            g.drawImage( ImageLocator.getIcon( "labyDiplom.gif" ).getImage(),
+                    x + 20, y, this );
+            soundList.getClip( "morning.au" ).play();
         }
-        else {
-            g.drawImage(ImageLocator.getIcon("labyFrog.gif").getImage(),
-                    x + 20, y, this);
-            soundList.getClip("frog.au").play();
+        else
+        {
+            g.drawImage( ImageLocator.getIcon( "labyFrog.gif" ).getImage(),
+                    x + 20, y, this );
+            soundList.getClip( "frog.au" ).play();
         }
-        paint(g);
+        paint( g );
     }
 
     /**
      * @see java.awt.Component#paint(Graphics)
      */
-    public void paint(Graphics g) {
-        g.drawImage(ImageLocator.getIcon("labyPrincess.gif").getImage(),
-                princessX, princessY, this);
+    public void paint( final Graphics g )
+    {
+        g.drawImage( ImageLocator.getIcon( "labyPrincess.gif" ).getImage(),
+                princessX, princessY, this );
     }
-
 
     /**
      * Method update.
@@ -81,15 +87,17 @@ public class Prinzessin extends Canvas {
      * @param g      Graphics object
      * @param result result
      */
-    public void update(Graphics g, int result) {
-        paint(g);
+    public void update( final Graphics g, final int result )
+    {
+        paint( g );
     }
 
-    private void startLoadingSounds() {
-        String codeBase = System.getProperty("xmatrix.sound.path") + "/";
-        soundList = new SoundList(codeBase);
-        soundList.startLoading("frog.au");
-        soundList.startLoading("morning.au");
+    private void startLoadingSounds()
+    {
+        final String codeBase = System.getProperty( "xmatrix.sound.path" ) + "/";
+        soundList = new SoundList( codeBase );
+        soundList.startLoading( "frog.au" );
+        soundList.startLoading( "morning.au" );
     }
 
 }

@@ -17,15 +17,16 @@ import java.awt.Component;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-abstract public class TaxPopup extends ObjectPopup {
-
+abstract public class TaxPopup extends ObjectPopup
+{
     /**
      * Construct a TaxPopup with all given taxa.
      *
      * @param taxa all taxa which should be displayed
      */
-    public TaxPopup(Taxon[] taxa) {
-        super(taxa);
+    public TaxPopup( final Taxon[] taxa )
+    {
+        super( taxa );
     }
 
     /**
@@ -33,8 +34,9 @@ abstract public class TaxPopup extends ObjectPopup {
      *
      * @param taxa array of displayed taxa
      */
-    public void setTaxa(Taxon[] taxa) {
-        super.setObjects(taxa);
+    public void setTaxa( final Taxon[] taxa )
+    {
+        super.setObjects( taxa );
     }
 
     /**
@@ -43,7 +45,8 @@ abstract public class TaxPopup extends ObjectPopup {
      * @param jb           parent component
      * @param currentTaxon current selected taxon
      */
-    public void showPopup(Component jb, Taxon currentTaxon) {
-        super.showPopup(jb, currentTaxon);
+    public void showPopup( final Component jb, final Taxon currentTaxon )
+    {
+        super.showPopup( jb, currentTaxon );
     }
 }

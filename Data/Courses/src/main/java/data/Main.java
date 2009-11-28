@@ -37,41 +37,40 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main
 {
-
-    public static void main(final String[] args) throws Exception
+    public static void main( final String[] args ) throws Exception
     {
         final String className = "/data/Main.class";
-        final String path = Main.class.getResource(className).toString();
+        final String path = Main.class.getResource( className ).toString();
         // JAR files have a "!" and classpath files a "/"
-        final String manifestPath = path.substring(0, path.indexOf(className)) + "/META-INF/MANIFEST.MF";
+        final String manifestPath = path.substring( 0, path.indexOf( className ) ) + "/META-INF/MANIFEST.MF";
         final JTabbedPane tabs = new JTabbedPane();
         final JComponent manifestComponent;
-        if (isValid(manifestPath))
+        if ( isValid( manifestPath ) )
         {
-            manifestComponent = new JTable(new DefaultTableModel(appendManifestAttributes(manifestPath), new Object[]{"Property", "Value"}));
+            manifestComponent = new JTable( new DefaultTableModel( appendManifestAttributes( manifestPath ), new Object[]{"Property", "Value"} ) );
         }
         else
         {
-            manifestComponent = new JTextArea("could not find manifest: \n" + manifestPath);
+            manifestComponent = new JTextArea( "could not find manifest: \n" + manifestPath );
         }
-        tabs.add("Manifest", new JScrollPane(manifestComponent));
-        tabs.add("System", new JScrollPane(new JTable(new DefaultTableModel(appendSystemProperties(), new Object[]{"Attribute", "Value"}))));
-        JOptionPane.showMessageDialog(null, tabs, "Versionsinformation", JOptionPane.INFORMATION_MESSAGE);
+        tabs.add( "Manifest", new JScrollPane( manifestComponent ) );
+        tabs.add( "System", new JScrollPane( new JTable( new DefaultTableModel( appendSystemProperties(), new Object[]{"Attribute", "Value"} ) ) ) );
+        JOptionPane.showMessageDialog( null, tabs, "Versionsinformation", JOptionPane.INFORMATION_MESSAGE );
     }
 
-    private static Object[][] appendManifestAttributes(final String manifestPath) throws IOException
+    private static Object[][] appendManifestAttributes( final String manifestPath ) throws IOException
     {
-        final InputStream stream = new URL(manifestPath).openStream();
-        final Manifest manifest = new Manifest(stream);
+        final InputStream stream = new URL( manifestPath ).openStream();
+        final Manifest manifest = new Manifest( stream );
         final Attributes attributes = manifest.getMainAttributes();
         final Object[][] result = new Object[attributes.size()][];
         int counter = 0;
-        for (final Object key : attributes.keySet())
+        for ( final Object key : attributes.keySet() )
         {
-            result[counter++] = new Object[]{key.toString(), attributes.get(key)};
+            result[counter++] = new Object[]{key.toString(), attributes.get( key )};
         }
         stream.close();
-        Arrays.sort(result, new ObjectMatrixComparator());
+        Arrays.sort( result, new ObjectMatrixComparator() );
         return result;
     }
 
@@ -80,25 +79,25 @@ public class Main
         final Properties properties = System.getProperties();
         final Object[][] result = new Object[properties.size()][];
         int counter = 0;
-        for (final Object property : properties.keySet())
+        for ( final Object property : properties.keySet() )
         {
-            result[counter++] = new Object[]{property, properties.get(property)};
+            result[counter++] = new Object[]{property, properties.get( property )};
         }
-        Arrays.sort(result, new ObjectMatrixComparator());
+        Arrays.sort( result, new ObjectMatrixComparator() );
         return result;
     }
 
-    private static boolean isValid(final String file)
+    private static boolean isValid( final String file )
     {
         boolean result;
         try
         {
-            final URL url = new URL(file);
+            final URL url = new URL( file );
             final InputStream stream = url.openStream();
             stream.close();
             result = true;
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
             result = false;
         }
@@ -107,17 +106,17 @@ public class Main
 
     private static class ObjectMatrixComparator implements Comparator<Object[]>
     {
-        public int compare(final Object[] o1, final Object[] o2)
+        public int compare( final Object[] o1, final Object[] o2 )
         {
-            if (o1 == null && o2 == null)
+            if ( o1 == null && o2 == null )
             {
                 return 0;
             }
-            else if (o1 == null)
+            else if ( o1 == null )
             {
                 return -1;
             }
-            else if (o2 == null)
+            else if ( o2 == null )
             {
                 return 1;
             }
@@ -125,7 +124,7 @@ public class Main
             {
                 final String s1 = (String) o1[0];
                 final String s2 = (String) o2[0];
-                return s1.compareTo(s2);
+                return s1.compareTo( s2 );
             }
         }
     }

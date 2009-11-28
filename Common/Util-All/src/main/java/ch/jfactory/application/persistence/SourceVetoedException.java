@@ -29,18 +29,18 @@ public class SourceVetoedException extends Exception
         super();
     }
 
-    public SourceVetoedException(final Throwable cause)
+    public SourceVetoedException( final Throwable cause )
     {
-        super(cause);
+        super( cause );
     }
 
-    public SourceVetoedException(final String message)
+    public SourceVetoedException( final String message )
     {
-        super(message);
+        super( message );
     }
 
-    public SourceVetoedException(final String message, final Throwable cause)
+    public SourceVetoedException( final String message, final Throwable cause )
     {
-        super(message, cause);
+        super( message, cause );
     }
 }

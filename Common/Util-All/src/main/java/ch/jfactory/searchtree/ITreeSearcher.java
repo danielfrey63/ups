@@ -19,7 +19,6 @@ import javax.swing.tree.TreePath;
  */
 public interface ITreeSearcher
 {
-
     /**
      * Get the next TreePath matching the searchCriteria
      *
@@ -53,5 +52,5 @@ public interface ITreeSearcher
      *
      * @return javax.swing.tree.TreePath representing the first entry matching (can be null)
      */
-    TreePath setSearchString(String searchString);
+    TreePath setSearchString( String searchString );
 }

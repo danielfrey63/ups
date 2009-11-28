@@ -26,21 +26,24 @@ import java.util.TreeSet;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2008/01/23 22:18:35 $
  */
-public class MainModel extends PMBModel {
-
+public class MainModel extends PMBModel
+{
     private final TreeSet<FileEntry> selectedImageFiles = new TreeSet<FileEntry>();
 
     private boolean recursiveOverviewList = false;
 
-    public boolean isRecursiveOverviewList() {
+    public boolean isRecursiveOverviewList()
+    {
         return recursiveOverviewList;
     }
 
-    public void setRecursiveOverviewList(final boolean recursiveOverviewList) {
+    public void setRecursiveOverviewList( final boolean recursiveOverviewList )
+    {
         this.recursiveOverviewList = recursiveOverviewList;
     }
 
-    public TreeSet<FileEntry> getSelectedImageFiles() {
+    public TreeSet<FileEntry> getSelectedImageFiles()
+    {
         return selectedImageFiles;
     }
 }

@@ -42,20 +42,20 @@ public class EditItem extends JPanel
      * @param prefix   the prefix string to use to access the different strings used to setup
      * @param listener the ActionListener to use for the button
      */
-    public EditItem(final String prefix, final ActionListener listener)
+    public EditItem( final String prefix, final ActionListener listener )
     {
-        this(prefix);
+        this( prefix );
 
-        button = ComponentFactory.createButton(prefix + ".BUTTON", listener);
+        button = ComponentFactory.createButton( prefix + ".BUTTON", listener );
         final Icon icon = button.getIcon();
-        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+        button.setPreferredSize( new Dimension( icon.getIconWidth(), icon.getIconHeight() ) );
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 0.0;
-        gbc.insets = new Insets(0, Constants.GAP_WITHIN_TOGGLES, 0, 0);
-        add(button, gbc);
+        gbc.insets = new Insets( 0, Constants.GAP_WITHIN_TOGGLES, 0, 0 );
+        add( button, gbc );
     }
 
     /**
@@ -67,29 +67,29 @@ public class EditItem extends JPanel
      *
      * @param prefix the prefix string to use to access the different strings used to setup
      */
-    public EditItem(final String prefix)
+    public EditItem( final String prefix )
     {
-        final JLabel title = new JLabel(Strings.getString(prefix + ".TITLE.TEXT"));
-        title.setFont(title.getFont().deriveFont(Font.BOLD));
+        final JLabel title = new JLabel( Strings.getString( prefix + ".TITLE.TEXT" ) );
+        title.setFont( title.getFont().deriveFont( Font.BOLD ) );
 
         field = new DefaultTextField();
-        field.setEditable(false);
-        field.setFocusable(false);
+        field.setEditable( false );
+        field.setFocusable( false );
 
-        setLayout(new GridBagLayout());
+        setLayout( new GridBagLayout() );
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.gridwidth = 2;
-        gbc.insets = new Insets(Constants.GAP_BETWEEN_GROUP, 0, Constants.GAP_BETWEEN_GROUP, 0);
-        add(title, gbc);
+        gbc.insets = new Insets( Constants.GAP_BETWEEN_GROUP, 0, Constants.GAP_BETWEEN_GROUP, 0 );
+        add( title, gbc );
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 1.0;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        add(field, gbc);
+        gbc.insets = new Insets( 0, 0, 0, 0 );
+        add( field, gbc );
     }
 
     /**
@@ -97,10 +97,10 @@ public class EditItem extends JPanel
      *
      * @param userObject
      */
-    public void setUserObject(final Object userObject)
+    public void setUserObject( final Object userObject )
     {
         this.userObject = userObject;
-        field.setText(userObject.toString());
+        field.setText( userObject.toString() );
     }
 
     public Object getUserObject()
@@ -113,11 +113,11 @@ public class EditItem extends JPanel
      *
      * @param enabled whether to enable
      */
-    public void setEnabled(final boolean enabled)
+    public void setEnabled( final boolean enabled )
     {
-        if (button != null)
+        if ( button != null )
         {
-            button.setEnabled(enabled);
+            button.setEnabled( enabled );
         }
     }
 
@@ -126,10 +126,10 @@ public class EditItem extends JPanel
      *
      * @param editable whether editing should be allowed
      */
-    public void setEditable(final boolean editable)
+    public void setEditable( final boolean editable )
     {
-        field.setEditable(editable);
-        field.setFocusable(true);
+        field.setEditable( editable );
+        field.setFocusable( true );
     }
 
     public JTextField getTextField()

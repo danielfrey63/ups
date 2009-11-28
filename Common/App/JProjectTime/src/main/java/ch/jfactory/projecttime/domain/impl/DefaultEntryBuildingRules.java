@@ -12,20 +12,21 @@ import java.util.ArrayList;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:09 $
  */
-public class DefaultEntryBuildingRules {
-
+public class DefaultEntryBuildingRules
+{
     /**
      * The list of rules.
      */
-    private ArrayList rules = new ArrayList();
+    private final ArrayList rules = new ArrayList();
 
     /**
      * Add a rule to the ruleset.
      *
      * @param rule the rule to add
      */
-    public void addRule(Rule rule) {
-        rules.add(rule);
+    public void addRule( final Rule rule )
+    {
+        rules.add( rule );
     }
 
     /**
@@ -33,8 +34,9 @@ public class DefaultEntryBuildingRules {
      *
      * @param rule the rule to remove
      */
-    public void removeRule(Rule rule) {
-        rules.remove(rule);
+    public void removeRule( final Rule rule )
+    {
+        rules.remove( rule );
     }
 
     /**
@@ -44,11 +46,14 @@ public class DefaultEntryBuildingRules {
      * @param childType the child entry type
      * @return whether the given type of children is allowed
      */
-    public boolean validate(IFEntry parent, Object childType) {
-        for (int i = 0; i < rules.size(); i++) {
-            Rule rule = (Rule) rules.get(i);
-            if (parent == null && rule.parentType == null && rule.childType == childType
-                    || parent != null && rule.parentType == parent.getType() && rule.childType == childType) {
+    public boolean validate( final IFEntry parent, final Object childType )
+    {
+        for ( final Object rule1 : rules )
+        {
+            final Rule rule = (Rule) rule1;
+            if ( parent == null && rule.parentType == null && rule.childType == childType
+                    || parent != null && rule.parentType == parent.getType() && rule.childType == childType )
+            {
                 return true;
             }
         }
@@ -58,17 +63,17 @@ public class DefaultEntryBuildingRules {
     /**
      * A rule consists simply of a parent type and a child type, both represented by Object objects.
      */
-    public static class Rule {
-
+    public static class Rule
+    {
         /**
          * The parent type.
          */
-        private Object parentType;
+        private final Object parentType;
 
         /**
          * The child type.
          */
-        private Object childType;
+        private final Object childType;
 
         /**
          * Craetes a rule with the given parent and child type.
@@ -76,7 +81,8 @@ public class DefaultEntryBuildingRules {
          * @param parentType the parent type
          * @param childType  the child type
          */
-        public Rule(Object parentType, Object childType) {
+        public Rule( final Object parentType, final Object childType )
+        {
             this.parentType = parentType;
             this.childType = childType;
         }
@@ -85,16 +91,17 @@ public class DefaultEntryBuildingRules {
     /**
      * An exception thrown if a ruleset is not able to vaildate a new child type.
      */
-    public static class RuleViolationException extends RuntimeException {
-
+    public static class RuleViolationException extends RuntimeException
+    {
         /**
          * Construct a new excaption.
          *
          * @param parent the parent entry
          * @param type   the type of the child
          */
-        public RuleViolationException(IFEntry parent, Object type) {
-            super("IFEntry " + parent + " may not have children of type " + type);
+        public RuleViolationException( final IFEntry parent, final Object type )
+        {
+            super( "IFEntry " + parent + " may not have children of type " + type );
         }
     }
 }

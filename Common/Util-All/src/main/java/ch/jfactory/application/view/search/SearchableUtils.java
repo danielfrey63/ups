@@ -15,32 +15,31 @@ import javax.swing.JTree;
 
 public class SearchableUtils
 {
-
     public SearchableUtils()
     {
     }
 
-    public static TreeSearchable installSearchable(final JTree jtree)
+    public static TreeSearchable installSearchable( final JTree jtree )
     {
-        return new TreeSearchable(jtree);
+        return new TreeSearchable( jtree );
     }
 
-    public static TableSearchable installSearchable(final JTable jtable)
+    public static TableSearchable installSearchable( final JTable jtable )
     {
-        return new TableSearchable(jtable);
+        return new TableSearchable( jtable );
     }
 
-    public static ListSearchable installSearchable(final JList jlist)
+    public static ListSearchable installSearchable( final JList jlist )
     {
-        return new ListSearchable(jlist);
+        return new ListSearchable( jlist );
     }
 
-    public static ComboBoxSearchable installSearchable(final JComboBox jcombobox)
+    public static ComboBoxSearchable installSearchable( final JComboBox jcombobox )
     {
-        return new ComboBoxSearchable(jcombobox);
+        return new ComboBoxSearchable( jcombobox );
     }
 
-    public static void uninstallSearchable(final Searchable searchable)
+    public static void uninstallSearchable( final Searchable searchable )
     {
         searchable.uninstallListeners();
     }

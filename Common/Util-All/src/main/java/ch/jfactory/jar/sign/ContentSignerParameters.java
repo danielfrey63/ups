@@ -19,7 +19,6 @@ import java.util.zip.ZipFile;
 
 public interface ContentSignerParameters
 {
-
     /**
      * Retrieves the command-line arguments passed to the jarsigner tool.
      *

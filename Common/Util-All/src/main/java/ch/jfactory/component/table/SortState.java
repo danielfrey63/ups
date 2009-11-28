@@ -27,12 +27,11 @@ import com.jgoodies.binding.beans.Model;
  */
 public class SortState extends Model
 {
+    public static final State SORT_ASCENDING = new State( "sortAscending" );
 
-    public static final State SORT_ASCENDING = new State("sortAscending");
+    public static final State SORT_DESCENDING = new State( "sortDescending" );
 
-    public static final State SORT_DESCENDING = new State("sortDescending");
-
-    public static final State SORT_NONE = new State("sortNone");
+    public static final State SORT_NONE = new State( "sortNone" );
 
     private static final State DEFAULT_STATE = SORT_NONE;
 
@@ -40,7 +39,7 @@ public class SortState extends Model
 
     public static final String PROPERTYNAME_DIRECTIVE = "directive";
 
-    public static final Directive DEFAULT_DIRECTIVE = new Directive(DEFAULT_STATE, -1);
+    public static final Directive DEFAULT_DIRECTIVE = new Directive( DEFAULT_STATE, -1 );
 
     private Directive directive = DEFAULT_DIRECTIVE;
 
@@ -49,11 +48,11 @@ public class SortState extends Model
         return directive;
     }
 
-    public void setDirective(final Directive directive)
+    public void setDirective( final Directive directive )
     {
         final Directive old = getDirective();
         this.directive = directive;
-        firePropertyChange(PROPERTYNAME_DIRECTIVE, old, directive);
+        firePropertyChange( PROPERTYNAME_DIRECTIVE, old, directive );
     }
 
     public int getColumn()
@@ -66,20 +65,20 @@ public class SortState extends Model
         return directive.getState();
     }
 
-    public void setIncreasedDirective(final int column)
+    public void setIncreasedDirective( final int column )
     {
-        setDirective(column, 1);
+        setDirective( column, 1 );
     }
 
-    public void setDecreasedDirective(final int column)
+    public void setDecreasedDirective( final int column )
     {
-        setDirective(column, 2);
+        setDirective( column, 2 );
     }
 
-    private void setDirective(final int column, final int delta)
+    private void setDirective( final int column, final int delta )
     {
         final State state;
-        if (column == directive.getColumn())
+        if ( column == directive.getColumn() )
         {
             state = directive.getState();
         }
@@ -87,19 +86,18 @@ public class SortState extends Model
         {
             state = SORT_NONE;
         }
-        final int index = ArrayUtils.indexOf(STATES, state);
-        final int newIndex = (index + delta) % 3;
-        setDirective(new Directive(STATES[newIndex], column));
+        final int index = ArrayUtils.indexOf( STATES, state );
+        final int newIndex = ( index + delta ) % 3;
+        setDirective( new Directive( STATES[newIndex], column ) );
     }
 
     public static class Directive
     {
+        private final State state;
 
-        private State state;
+        private final int column;
 
-        private int column;
-
-        public Directive(final State state, final int column)
+        public Directive( final State state, final int column )
         {
             this.state = state;
             this.column = column;
@@ -115,18 +113,18 @@ public class SortState extends Model
             return column;
         }
 
-        public boolean equals(final Object obj)
+        public boolean equals( final Object obj )
         {
-            if (obj == null)
+            if ( obj == null )
             {
                 return false;
             }
-            if (!(obj instanceof Directive))
+            if ( !( obj instanceof Directive ) )
             {
                 return false;
             }
             final Directive other = (Directive) obj;
-            return (other.column == column && other.state == state);
+            return ( other.column == column && other.state == state );
         }
 
         public int hashCode()
@@ -142,10 +140,9 @@ public class SortState extends Model
 
     public static class State
     {
+        private final String state;
 
-        private String state;
-
-        private State(final String state)
+        private State( final String state )
         {
             this.state = state;
         }

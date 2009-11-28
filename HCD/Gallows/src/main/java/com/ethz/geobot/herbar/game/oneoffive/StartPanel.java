@@ -22,22 +22,24 @@ import javax.swing.ImageIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class StartPanel extends Canvas {
-
-    private ImageIcon bird = ImageLocator.getIcon("hangman_intro.jpg");
+public class StartPanel extends Canvas
+{
+    private final ImageIcon bird = ImageLocator.getIcon( "hangman_intro.jpg" );
 
     /**
      * Constructor
      */
-    public StartPanel() {
-        this.setSize(750, 470);
-        this.setVisible(true);
+    public StartPanel()
+    {
+        this.setSize( 750, 470 );
+        this.setVisible( true );
     }
 
     /**
      * @see java.awt.Component#paint(Graphics)
      */
-    public void paint(Graphics g) {
+    public void paint( final Graphics g )
+    {
         /**
          Graphics2D g2 = (Graphics2D) g;
          g2.setPaint(
@@ -46,13 +48,13 @@ public class StartPanel extends Canvas {
          10.4f * 72, -1.0f * 72, new Color( 100, 215, 230 ), false ) );
          g2.fillRect( 0, 0, 750, 470 );
          */
-        g.drawImage(bird.getImage(), 0, 0, this);
-        g.setColor(Color.ORANGE);
-        g.setFont(new Font("Arial", Font.PLAIN, 14));
-        g.drawString(Strings.getString(OneOfFive.class, "ONEOFFIVE.TITLE1"), 280, 170);
-        g.drawString(Strings.getString(OneOfFive.class, "ONEOFFIVE.TITLE2"), 280, 190);
-        g.drawString(Strings.getString(OneOfFive.class, "ONEOFFIVE.TITLE3"), 280, 210);
-        g.drawString(Strings.getString(OneOfFive.class, "ONEOFFIVE.TITLE4"), 280, 230);
-        g.drawString(Strings.getString(OneOfFive.class, "ONEOFFIVE.TITLE5"), 280, 250);
+        g.drawImage( bird.getImage(), 0, 0, this );
+        g.setColor( Color.ORANGE );
+        g.setFont( new Font( "Arial", Font.PLAIN, 14 ) );
+        g.drawString( Strings.getString( OneOfFive.class, "ONEOFFIVE.TITLE1" ), 280, 170 );
+        g.drawString( Strings.getString( OneOfFive.class, "ONEOFFIVE.TITLE2" ), 280, 190 );
+        g.drawString( Strings.getString( OneOfFive.class, "ONEOFFIVE.TITLE3" ), 280, 210 );
+        g.drawString( Strings.getString( OneOfFive.class, "ONEOFFIVE.TITLE4" ), 280, 230 );
+        g.drawString( Strings.getString( OneOfFive.class, "ONEOFFIVE.TITLE5" ), 280, 250 );
     }
 }

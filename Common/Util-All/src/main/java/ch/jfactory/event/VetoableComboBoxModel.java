@@ -28,52 +28,51 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class VetoableComboBoxModel extends DefaultComboBoxModel
 {
-
-    private ArrayList selectionListeners = new ArrayList();
+    private final ArrayList selectionListeners = new ArrayList();
 
     public VetoableComboBoxModel()
     {
     }
 
-    public VetoableComboBoxModel(final Object[] items)
+    public VetoableComboBoxModel( final Object[] items )
     {
-        super(items);
+        super( items );
     }
 
-    public VetoableComboBoxModel(final Vector v)
+    public VetoableComboBoxModel( final Vector v )
     {
-        super(v);
+        super( v );
     }
 
-    public void addVetoableSelectionListener(final VetoableComboBoxSelectionListener l)
+    public void addVetoableSelectionListener( final VetoableComboBoxSelectionListener l )
     {
-        selectionListeners.add(l);
+        selectionListeners.add( l );
     }
 
-    public void removeVetoableSelectionListener(final VetoableComboBoxSelectionListener l)
+    public void removeVetoableSelectionListener( final VetoableComboBoxSelectionListener l )
     {
-        selectionListeners.remove(l);
+        selectionListeners.remove( l );
     }
 
-    protected boolean fireVetoableSelectionChange(final Object oldValue, final Object newValue)
+    protected boolean fireVetoableSelectionChange( final Object oldValue, final Object newValue )
     {
         boolean result = true;
-        final VetoableChangeEvent event = new VetoableChangeEvent(this, oldValue, newValue);
-        for (final Object selectionListener : selectionListeners)
+        final VetoableChangeEvent event = new VetoableChangeEvent( this, oldValue, newValue );
+        for ( final Object selectionListener : selectionListeners )
         {
             final VetoableComboBoxSelectionListener l = (VetoableComboBoxSelectionListener) selectionListener;
-            result &= l.selectionChanged(event);
+            result &= l.selectionChanged( event );
         }
         return result;
     }
 
-    public void setSelectedItem(final Object newItem)
+    public void setSelectedItem( final Object newItem )
     {
         final Object oldItem = getSelectedItem();
-        super.setSelectedItem(newItem);
-        if (!fireVetoableSelectionChange(oldItem, newItem))
+        super.setSelectedItem( newItem );
+        if ( !fireVetoableSelectionChange( oldItem, newItem ) )
         {
-            super.setSelectedItem(oldItem);
+            super.setSelectedItem( oldItem );
         }
     }
 }

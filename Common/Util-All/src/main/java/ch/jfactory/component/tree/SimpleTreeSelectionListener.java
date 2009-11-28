@@ -24,43 +24,52 @@ import org.apache.commons.collections.IteratorUtils;
  */
 public class SimpleTreeSelectionListener implements TreeSelectionListener
 {
-
-    /** The nodes selected. */
+    /**
+     * The nodes selected.
+     */
     private TreePath[] selectionPaths = new TreePath[0];
 
-    /** The tree to restore the selections on. */
-    private JTree tree;
+    /**
+     * The tree to restore the selections on.
+     */
+    private final JTree tree;
 
     /**
      * Constructs a tree selection listener for the given tree
      *
      * @param tree the tree to make this selection listener for
      */
-    public SimpleTreeSelectionListener(final JTree tree)
+    public SimpleTreeSelectionListener( final JTree tree )
     {
         this.tree = tree;
     }
 
-    /** {@inheritDoc} */
-    public void valueChanged(final TreeSelectionEvent treeSelectionEvent)
+    /**
+     * {@inheritDoc}
+     */
+    public void valueChanged( final TreeSelectionEvent treeSelectionEvent )
     {
         final TreePath[] selectionPaths = tree.getSelectionPaths();
-        if ((selectionPaths != null) && (selectionPaths.length > 0))
+        if ( ( selectionPaths != null ) && ( selectionPaths.length > 0 ) )
         {
             this.selectionPaths = tree.getSelectionModel().getSelectionPaths();
         }
     }
 
-    /** Restore the selection. */
+    /**
+     * Restore the selection.
+     */
     public void restore()
     {
-        tree.getSelectionModel().setSelectionPaths(selectionPaths);
+        tree.getSelectionModel().setSelectionPaths( selectionPaths );
     }
 
-    /** Call this method if the tree model has been exchanged and you want to keep the selected nodes. */
+    /**
+     * Call this method if the tree model has been exchanged and you want to keep the selected nodes.
+     */
     public void translate()
     {
-        final Collection matches = TreeUtils.matchPaths(IteratorUtils.arrayIterator(selectionPaths), tree.getModel());
-        selectionPaths = (TreePath[]) matches.toArray(new TreePath[matches.size()]);
+        final Collection matches = TreeUtils.matchPaths( IteratorUtils.arrayIterator( selectionPaths ), tree.getModel() );
+        selectionPaths = (TreePath[]) matches.toArray( new TreePath[matches.size()] );
     }
 }

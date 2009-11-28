@@ -32,32 +32,44 @@ import java.util.Map;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String COMMANDID_IMPORT = "file.import";
+
     public static final String COMMANDID_OPEN = "file.open";
+
     public static final String COMMANDID_SAVEAS = "file.saveas";
+
     public static final String COMMANDID_EDITTYPES = "edit.types";
+
     public static final String COMMANDID_ADDINVOICE = "invoice.add";
+
     public static final String COMMANDID_REMOVEINVOICE = "invoice.remove";
+
     public static final String GROUPID_MENU = "menu.main";
+
     public static final String GROUPID_INVOICE = "invoice";
 
-    public static XStream getSerializer() {
-        final XStream stream = new XStream(new DomDriver());
-        stream.setMode(XStream.ID_REFERENCES);
-        stream.alias("data", Data.class);
-        stream.alias("entry", DefaultEntry.class);
-        stream.alias("type", TypeMapping.class);
-        stream.alias("invoice", Invoice.class);
-        stream.registerConverter(new ISO8601DateConverter());
+    public static XStream getSerializer()
+    {
+        final XStream stream = new XStream( new DomDriver() );
+        stream.setMode( XStream.ID_REFERENCES );
+        stream.alias( "data", Data.class );
+        stream.alias( "entry", DefaultEntry.class );
+        stream.alias( "type", TypeMapping.class );
+        stream.alias( "invoice", Invoice.class );
+        stream.registerConverter( new ISO8601DateConverter() );
         return stream;
     }
 
-    public static class Data {
+    public static class Data
+    {
         public IFEntry root;
+
         public List types;
+
         public List invoices;
+
         public Map entry2InvoiceMap;
     }
 }

@@ -65,20 +65,23 @@ package ch.jfactory.filter;
  */
 public interface Filter extends java.io.Serializable
 {
-
-    /** Filter that returns always true. */
+    /**
+     * Filter that returns always true.
+     */
     public static final Filter TRUEFILTER = new Filter()
     {
-        public boolean matches(final Object obj)
+        public boolean matches( final Object obj )
         {
             return true;
         }
     };
 
-    /** Filter that returns always false. */
+    /**
+     * Filter that returns always false.
+     */
     public static final Filter FALSEFILTER = new Filter()
     {
-        public boolean matches(final Object obj)
+        public boolean matches( final Object obj )
         {
             return false;
         }
@@ -90,5 +93,5 @@ public interface Filter extends java.io.Serializable
      * @param obj The object to verify.
      * @return <code>true</code> if the object matches a predfined set of rules.
      */
-    public boolean matches(Object obj);
+    public boolean matches( Object obj );
 }

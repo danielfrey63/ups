@@ -10,7 +10,6 @@ import java.util.Properties;
  */
 public interface WizardModel
 {
-
     /**
      * Return the configuration of this mode.
      *
@@ -30,7 +29,7 @@ public interface WizardModel
      *
      * @param isNextEnabled new state of the next button
      */
-    void setNextEnabled(boolean isNextEnabled);
+    void setNextEnabled( boolean isNextEnabled );
 
     /**
      * Returns all WizardPanes of the model.
@@ -44,7 +43,7 @@ public interface WizardModel
      *
      * @return the requested pane
      */
-    WizardPane getPane(int index);
+    WizardPane getPane( int index );
 
     /**
      * Get the next WizardPane.
@@ -58,14 +57,14 @@ public interface WizardModel
      *
      * @param isFinishEnabled new state of the finish button
      */
-    void setFinishEnabled(boolean isFinishEnabled);
+    void setFinishEnabled( boolean isFinishEnabled );
 
     /**
      * Set the enable state for the cancel button of the wizard.
      *
      * @param isCancelEnabled new state of the finish button
      */
-    void setCancelEnabled(boolean isCancelEnabled);
+    void setCancelEnabled( boolean isCancelEnabled );
 
     /**
      * Return the enable state for the finish button of the wizard.
@@ -79,7 +78,7 @@ public interface WizardModel
      *
      * @param listener a listener listens to state changes
      */
-    void addWizardStateListener(WizardStateListener listener);
+    void addWizardStateListener( WizardStateListener listener );
 
     /**
      * Informs the wizard about the present of a next pane.
@@ -121,14 +120,14 @@ public interface WizardModel
      *
      * @param listener listener to remove from the list
      */
-    void removeWizardStateListener(WizardStateListener listener);
+    void removeWizardStateListener( WizardStateListener listener );
 
     /**
      * set the enable state for the next previous of the wizard.
      *
      * @param isPreviousEnabled new state of the previous button
      */
-    void setPreviousEnabled(boolean isPreviousEnabled);
+    void setPreviousEnabled( boolean isPreviousEnabled );
 
     /**
      * return the index of the current pane.
@@ -137,7 +136,9 @@ public interface WizardModel
      */
     int getCurrentPaneIndex();
 
-    /** is called inside the constructor before the panes are initialize */
+    /**
+     * is called inside the constructor before the panes are initialize
+     */
     void init();
 
     /**
@@ -152,7 +153,7 @@ public interface WizardModel
      *
      * @param currentPane pane index to set
      */
-    void setStart(int currentPane);
+    void setStart( int currentPane );
 
     int getStart();
 

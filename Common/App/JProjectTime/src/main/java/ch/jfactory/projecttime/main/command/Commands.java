@@ -16,9 +16,9 @@
  */
 package ch.jfactory.projecttime.main.command;
 
+import ch.jfactory.projecttime.domain.impl.DefaultEntry;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import ch.jfactory.projecttime.domain.impl.DefaultEntry;
 
 /**
  * TODO: document
@@ -26,18 +26,22 @@ import ch.jfactory.projecttime.domain.impl.DefaultEntry;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String MAIN_MENU_GROUP = "menu.main";
+
     public static final String FILE_IMPORT = "file.import";
+
     public static final String FILE_OPEN = "file.open";
+
     public static final String FILE_SAVEAS = "file.saveas";
 
-    public static XStream getSerializer() {
-        final XStream stream = new XStream(new DomDriver());
-        stream.setMode(XStream.ID_REFERENCES);
-        stream.alias("entry", DefaultEntry.class);
-        stream.registerConverter(new ISO8601CalendarConverter());
+    public static XStream getSerializer()
+    {
+        final XStream stream = new XStream( new DomDriver() );
+        stream.setMode( XStream.ID_REFERENCES );
+        stream.alias( "entry", DefaultEntry.class );
+        stream.registerConverter( new ISO8601CalendarConverter() );
         return stream;
     }
 }

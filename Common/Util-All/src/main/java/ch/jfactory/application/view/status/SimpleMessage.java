@@ -24,12 +24,11 @@ package ch.jfactory.application.view.status;
  */
 public class SimpleMessage implements Message
 {
+    private final String text;
 
-    private String text;
+    private final Type type;
 
-    private Type type;
-
-    public SimpleMessage(final String text, final Type type)
+    public SimpleMessage( final String text, final Type type )
     {
         this.text = text;
         this.type = type;

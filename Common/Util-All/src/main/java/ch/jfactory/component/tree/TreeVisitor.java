@@ -8,8 +8,7 @@ package ch.jfactory.component.tree;
  */
 public interface TreeVisitor
 {
+    Object handle( Object object );
 
-    Object handle(Object object);
-
-    void add(Object parent, Object child);
+    void add( Object parent, Object child );
 }

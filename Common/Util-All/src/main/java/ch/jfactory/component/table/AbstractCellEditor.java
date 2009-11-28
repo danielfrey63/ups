@@ -34,22 +34,21 @@ import javax.swing.event.EventListenerList;
 
 public abstract class AbstractCellEditor implements CellEditor, Serializable
 {
-
     protected JTextField editor = new JTextField();
 
     protected EventListenerList listenerList = new EventListenerList();
 
     transient protected ChangeEvent changeEvent = null;
 
-    protected AbstractCellEditor(final Color background)
+    protected AbstractCellEditor( final Color background )
     {
-        editor.setBorder(new EmptyBorder(0, 1, 0, 1));
-        editor.setBackground(background);
+        editor.setBorder( new EmptyBorder( 0, 1, 0, 1 ) );
+        editor.setBackground( background );
     }
 
     protected AbstractCellEditor()
     {
-        this(ColorUtils.fade(Color.red, 0.9));
+        this( ColorUtils.fade( Color.red, 0.9 ) );
     }
 
     /**
@@ -58,7 +57,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      * @param e an event object
      * @return true
      */
-    public boolean isCellEditable(final EventObject e)
+    public boolean isCellEditable( final EventObject e )
     {
         return true;
     }
@@ -69,7 +68,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      * @param anEvent an event object
      * @return true
      */
-    public boolean shouldSelectCell(final EventObject anEvent)
+    public boolean shouldSelectCell( final EventObject anEvent )
     {
         return true;
     }
@@ -85,7 +84,9 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
         return true;
     }
 
-    /** Calls <code>fireEditingCanceled</code>. */
+    /**
+     * Calls <code>fireEditingCanceled</code>.
+     */
     public void cancelCellEditing()
     {
         fireEditingCanceled();
@@ -96,9 +97,9 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      *
      * @param l the new listener to be added
      */
-    public void addCellEditorListener(final CellEditorListener l)
+    public void addCellEditorListener( final CellEditorListener l )
     {
-        listenerList.add(CellEditorListener.class, l);
+        listenerList.add( CellEditorListener.class, l );
     }
 
     /**
@@ -106,9 +107,9 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      *
      * @param l the listener to be removed
      */
-    public void removeCellEditorListener(final CellEditorListener l)
+    public void removeCellEditorListener( final CellEditorListener l )
     {
-        listenerList.remove(CellEditorListener.class, l);
+        listenerList.remove( CellEditorListener.class, l );
     }
 
     /**
@@ -120,8 +121,8 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      */
     public CellEditorListener[] getCellEditorListeners()
     {
-        return (CellEditorListener[]) listenerList.getListeners(
-                CellEditorListener.class);
+        return listenerList.getListeners(
+                CellEditorListener.class );
     }
 
     /**
@@ -136,16 +137,16 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
         final Object[] listeners = listenerList.getListenerList();
         // Process the listeners last to first, notifying
         // those that are interested in this event
-        for (int i = listeners.length - 2; i >= 0; i -= 2)
+        for ( int i = listeners.length - 2; i >= 0; i -= 2 )
         {
-            if (listeners[i] == CellEditorListener.class)
+            if ( listeners[i] == CellEditorListener.class )
             {
                 // Lazily create the event:
-                if (changeEvent == null)
+                if ( changeEvent == null )
                 {
-                    changeEvent = new ChangeEvent(this);
+                    changeEvent = new ChangeEvent( this );
                 }
-                ((CellEditorListener) listeners[i + 1]).editingStopped(changeEvent);
+                ( (CellEditorListener) listeners[i + 1] ).editingStopped( changeEvent );
             }
         }
     }
@@ -162,16 +163,16 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
         final Object[] listeners = listenerList.getListenerList();
         // Process the listeners last to first, notifying
         // those that are interested in this event
-        for (int i = listeners.length - 2; i >= 0; i -= 2)
+        for ( int i = listeners.length - 2; i >= 0; i -= 2 )
         {
-            if (listeners[i] == CellEditorListener.class)
+            if ( listeners[i] == CellEditorListener.class )
             {
                 // Lazily create the event:
-                if (changeEvent == null)
+                if ( changeEvent == null )
                 {
-                    changeEvent = new ChangeEvent(this);
+                    changeEvent = new ChangeEvent( this );
                 }
-                ((CellEditorListener) listeners[i + 1]).editingCanceled(changeEvent);
+                ( (CellEditorListener) listeners[i + 1] ).editingCanceled( changeEvent );
             }
         }
     }

@@ -24,7 +24,6 @@ package ch.jfactory.typemapper;
  */
 public class Commands
 {
-
     public static final String COMMANDID_ADD = "typeedit.add";
 
     public static final String COMMANDID_DELETE = "typeedit.delete";

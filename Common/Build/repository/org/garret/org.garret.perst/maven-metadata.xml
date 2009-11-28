@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><metadata>
-  <groupId>org.garret</groupId>
-  <artifactId>org.garret.perst</artifactId>
-  <version>410</version>
-  <versioning>
-    <versions>
-      <version>410</version>
-    </versions>
-    <lastUpdated>20090824221711</lastUpdated>
-  </versioning>
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <groupId>org.garret</groupId>
+    <artifactId>org.garret.perst</artifactId>
+    <version>410</version>
+    <versioning>
+        <versions>
+            <version>410</version>
+        </versions>
+        <lastUpdated>20090824221711</lastUpdated>
+    </versioning>
 </metadata>

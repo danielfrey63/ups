@@ -41,10 +41,9 @@ import javax.swing.JScrollPane;
  */
 public class ImagesPanel extends JPanel
 {
-
     public static final String PROPERTYNAME_SELECTED = "selected";
 
-    private SelectionModel model = new SelectionModel();
+    private final SelectionModel model = new SelectionModel();
 
     private JScrollPane scroller;
 
@@ -52,81 +51,81 @@ public class ImagesPanel extends JPanel
 
     public ImagesPanel()
     {
-        this(5);
+        this( 5 );
     }
 
-    public ImagesPanel(final int gap)
+    public ImagesPanel( final int gap )
     {
-        this(gap, 22, 22);
+        this( gap, 22, 22 );
     }
 
-    private ImagesPanel(final int gap, final int width, final int height)
+    private ImagesPanel( final int gap, final int width, final int height )
     {
         try
         {
-            initLayout(gap, width, height);
+            initLayout( gap, width, height );
             initListeners();
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
             e.printStackTrace();
         }
     }
 
-    private void initLayout(final int gap, final int width, final int height) throws IOException
+    private void initLayout( final int gap, final int width, final int height ) throws IOException
     {
-        panel = new InnerPanel(new FlowLayout(FlowLayout.LEFT, gap, gap));
-        panel.setBackground(Color.WHITE);
-        scroller = new JScrollPane(panel);
-        scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        setLayout(new BorderLayout());
-        add(scroller, BorderLayout.CENTER);
-        model.setSelected(new SelectableImagePanel(null, width, height));
+        panel = new InnerPanel( new FlowLayout( FlowLayout.LEFT, gap, gap ) );
+        panel.setBackground( Color.WHITE );
+        scroller = new JScrollPane( panel );
+        scroller.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+        setLayout( new BorderLayout() );
+        add( scroller, BorderLayout.CENTER );
+        model.setSelected( new SelectableImagePanel( null, width, height ) );
     }
 
     private void initListeners()
     {
-        panel.addMouseListener(new MouseAdapter()
+        panel.addMouseListener( new MouseAdapter()
         {
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked( final MouseEvent e )
             {
-                final Component c = panel.getComponentAt(e.getX(), e.getY());
-                if (c instanceof SelectableImagePanel)
+                final Component c = panel.getComponentAt( e.getX(), e.getY() );
+                if ( c instanceof SelectableImagePanel )
                 {
-                    model.setSelected((SelectableImagePanel) c);
+                    model.setSelected( (SelectableImagePanel) c );
                 }
             }
-        });
-        model.addPropertyChangeListener(SelectionModel.PROPERTYNAME_SELECTED, new PropertyChangeListener()
+        } );
+        model.addPropertyChangeListener( SelectionModel.PROPERTYNAME_SELECTED, new PropertyChangeListener()
         {
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
                 final SelectableImagePanel oldSelectablePanel = (SelectableImagePanel) evt.getOldValue();
                 oldSelectablePanel.repaint();
                 final SelectableImagePanel newSelectablePanel = (SelectableImagePanel) evt.getNewValue();
                 newSelectablePanel.repaint();
             }
-        });
+        } );
     }
 
-    public Component addImagePanel(final ImagePanel comp)
+    public Component addImagePanel( final ImagePanel comp )
     {
-        return panel.add(comp);
+        return panel.add( comp );
     }
 
     public void removeAllImagePanels()
     {
         final Component[] components = panel.getComponents();
-        for (final Component component : components)
+        for ( final Component component : components )
         {
-            if (component instanceof ImagePanel)
+            if ( component instanceof ImagePanel )
             {
-                remove(component);
+                remove( component );
             }
         }
     }
 
-    public void setScroller(final JScrollPane scroller)
+    public void setScroller( final JScrollPane scroller )
     {
         this.scroller = scroller;
     }
@@ -144,21 +143,21 @@ public class ImagesPanel extends JPanel
      * @param height the height of the icons to display
      * @return an instance of ImagesPanel
      */
-    public static ImagesPanel createImagesPanel(final Collection<String> icons, final int width, final int height)
+    public static ImagesPanel createImagesPanel( final Collection<String> icons, final int width, final int height )
     {
-        final ImagesPanel panel = new ImagesPanel(5, width, height);
-        for (final String path : icons)
+        final ImagesPanel panel = new ImagesPanel( 5, width, height );
+        for ( final String path : icons )
         {
             Image image;
             try
             {
-                image = ImageUtils.createThumbnail(path, width, height);
+                image = ImageUtils.createThumbnail( path, width, height );
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
-                image = new DefaultImage(new Dimension(width, height), "Error");
+                image = new DefaultImage( new Dimension( width, height ), "Error" );
             }
-            panel.addImagePanel(new SelectableImagePanel(image, width, height));
+            panel.addImagePanel( new SelectableImagePanel( image, width, height ) );
         }
         return panel;
     }
@@ -172,54 +171,53 @@ public class ImagesPanel extends JPanel
      * @param fill   whether to fill the image panel with the image
      * @return an instance of ImagesPanel
      */
-    public static ImagesPanel createImagesPanel(final Collection<String> icons, final int width, final int height, final boolean fill)
+    public static ImagesPanel createImagesPanel( final Collection<String> icons, final int width, final int height, final boolean fill )
     {
-        final ImagesPanel panel = new ImagesPanel(5, width, height);
-        for (final String path : icons)
+        final ImagesPanel panel = new ImagesPanel( 5, width, height );
+        for ( final String path : icons )
         {
             Image image;
             try
             {
-                image = ImageUtils.createThumbnail(path, width, height);
+                image = ImageUtils.createThumbnail( path, width, height );
             }
-            catch (IOException e)
+            catch ( IOException e )
             {
-                image = new DefaultImage(new Dimension(width, height), "Error");
+                image = new DefaultImage( new Dimension( width, height ), "Error" );
             }
-            panel.addImagePanel(new SelectableImagePanel(image, fill));
+            panel.addImagePanel( new SelectableImagePanel( image, fill ) );
         }
         return panel;
     }
 
-    public static ImagesPanel createImagesPanel(final Image[] images, final int width, final int height, final boolean fill)
+    public static ImagesPanel createImagesPanel( final Image[] images, final int width, final int height, final boolean fill )
     {
-        final ImagesPanel panel = new ImagesPanel(5, width, height);
-        for (final Image image : images)
+        final ImagesPanel panel = new ImagesPanel( 5, width, height );
+        for ( final Image image : images )
         {
-            panel.addImagePanel(new ImagePanel(image, fill));
+            panel.addImagePanel( new ImagePanel( image, fill ) );
         }
         return panel;
     }
 
     public static class SelectionModel extends Model
     {
-
         public static final String PROPERTYNAME_SELECTED = "selected";
 
         private SelectableImagePanel selected;
 
         public SelectionModel()
         {
-            selected = new SelectableImagePanel(null);
+            selected = new SelectableImagePanel( null );
         }
 
-        public void setSelected(final SelectableImagePanel panelSelectable)
+        public void setSelected( final SelectableImagePanel panelSelectable )
         {
             final SelectableImagePanel old = getSelected();
-            old.setSelected(false);
+            old.setSelected( false );
             selected = panelSelectable;
-            panelSelectable.setSelected(true);
-            firePropertyChange(PROPERTYNAME_SELECTED, old, panelSelectable);
+            panelSelectable.setSelected( true );
+            firePropertyChange( PROPERTYNAME_SELECTED, old, panelSelectable );
         }
 
         public SelectableImagePanel getSelected()
@@ -230,10 +228,9 @@ public class ImagesPanel extends JPanel
 
     private class InnerPanel extends JPanel
     {
-
-        public InnerPanel(final LayoutManager layout)
+        public InnerPanel( final LayoutManager layout )
         {
-            super(layout);
+            super( layout );
         }
 
         public Dimension getPreferredSize()
@@ -243,14 +240,14 @@ public class ImagesPanel extends JPanel
             final int vGap = layout.getVgap();
             int w = scroller.getViewport().getWidth();
             final Dimension dim = model.getSelected().getPreferredSize();
-            if (w == 0)
+            if ( w == 0 )
             {
-                w = (int) (dim.getWidth() * 5);
+                w = (int) ( dim.getWidth() * 5 );
             }
-            final int horizontalCount = (int) ((double) (w) / (hGap + dim.getWidth()));
-            final int verticalCount = (int) Math.ceil(((double) getComponentCount() / (double) horizontalCount));
-            final Dimension dimension = new Dimension(w, (int) (verticalCount * (dim.getHeight() + vGap)));
-            panel.setPreferredSize(dimension);
+            final int horizontalCount = (int) ( (double) ( w ) / ( hGap + dim.getWidth() ) );
+            final int verticalCount = (int) Math.ceil( ( (double) getComponentCount() / (double) horizontalCount ) );
+            final Dimension dimension = new Dimension( w, (int) ( verticalCount * ( dim.getHeight() + vGap ) ) );
+            panel.setPreferredSize( dimension );
             return dimension;
         }
     }

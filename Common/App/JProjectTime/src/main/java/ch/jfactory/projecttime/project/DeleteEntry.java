@@ -18,9 +18,9 @@ package ch.jfactory.projecttime.project;
 
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import com.jgoodies.binding.PresentationModel;
+import javax.swing.tree.TreeSelectionModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import javax.swing.tree.TreeSelectionModel;
 
 /**
  * TODO: document
@@ -28,21 +28,24 @@ import javax.swing.tree.TreeSelectionModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class DeleteEntry extends ActionCommand {
+public class DeleteEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public DeleteEntry(final CommandManager manager, final ProjectModel model) {
-        super(manager, Commands.COMMANDID_DELETE);
+    public DeleteEntry( final CommandManager manager, final ProjectModel model )
+    {
+        super( manager, Commands.COMMANDID_DELETE );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final PresentationModel currentBeanModel = model.getCurrentBeanModel();
         final IFEntry entry = (IFEntry) currentBeanModel.getBean();
-        if (entry != null && entry.getParent() != null) {
+        if ( entry != null && entry.getParent() != null )
+        {
             final TreeSelectionModel selectionModel = (TreeSelectionModel) model.getSelectionModel().getValue();
-            model.getTreeModel().removeFromParent(selectionModel.getSelectionPath());
+            model.getTreeModel().removeFromParent( selectionModel.getSelectionPath() );
         }
     }
 }

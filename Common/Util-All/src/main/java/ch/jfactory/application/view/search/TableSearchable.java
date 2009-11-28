@@ -16,94 +16,93 @@ import javax.swing.table.TableModel;
 public class TableSearchable extends Searchable
         implements TableModelListener
 {
-
     private int _mainIndex;
 
-    public TableSearchable(final JTable jtable)
+    public TableSearchable( final JTable jtable )
     {
-        super(jtable);
+        super( jtable );
         _mainIndex = 0;
-        jtable.getModel().addTableModelListener(this);
+        jtable.getModel().addTableModelListener( this );
     }
 
     public void uninstallListeners()
     {
         super.uninstallListeners();
-        if (component instanceof JTable)
+        if ( component instanceof JTable )
         {
-            ((JTable) component).getModel().removeTableModelListener(this);
+            ( (JTable) component ).getModel().removeTableModelListener( this );
         }
     }
 
-    protected void setSelectedIndex(final int i, final boolean flag)
+    protected void setSelectedIndex( final int i, final boolean flag )
     {
         final JTable jtable = (JTable) component;
         final TableModel tablemodel = jtable.getModel();
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
             final int j = i;
             final int i1 = getMainIndex();
-            if (j != -1)
+            if ( j != -1 )
             {
-                if (!flag)
+                if ( !flag )
                 {
                     jtable.getColumnModel().getSelectionModel().clearSelection();
-                    jtable.getColumnModel().getSelectionModel().setValueIsAdjusting(false);
+                    jtable.getColumnModel().getSelectionModel().setValueIsAdjusting( false );
                 }
                 else
                 {
-                    jtable.getColumnModel().getSelectionModel().setValueIsAdjusting(true);
+                    jtable.getColumnModel().getSelectionModel().setValueIsAdjusting( true );
                 }
-                jtable.getColumnModel().getSelectionModel().addSelectionInterval(j, j);
-                jtable.getSelectionModel().addSelectionInterval(i1, i1);
-                jtable.scrollRectToVisible(jtable.getCellRect(i1, j, true));
+                jtable.getColumnModel().getSelectionModel().addSelectionInterval( j, j );
+                jtable.getSelectionModel().addSelectionInterval( i1, i1 );
+                jtable.scrollRectToVisible( jtable.getCellRect( i1, j, true ) );
             }
         }
-        else if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        else if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
             final int k = i;
             final int j1 = getMainIndex();
-            if (k != -1)
+            if ( k != -1 )
             {
-                if (!flag)
+                if ( !flag )
                 {
                     jtable.getSelectionModel().clearSelection();
-                    jtable.getSelectionModel().setValueIsAdjusting(false);
+                    jtable.getSelectionModel().setValueIsAdjusting( false );
                 }
                 else
                 {
-                    jtable.getSelectionModel().setValueIsAdjusting(true);
+                    jtable.getSelectionModel().setValueIsAdjusting( true );
                 }
-                jtable.getSelectionModel().addSelectionInterval(k, k);
-                jtable.getColumnModel().getSelectionModel().addSelectionInterval(j1, j1);
-                jtable.scrollRectToVisible(jtable.getCellRect(k, j1, true));
+                jtable.getSelectionModel().addSelectionInterval( k, k );
+                jtable.getColumnModel().getSelectionModel().addSelectionInterval( j1, j1 );
+                jtable.scrollRectToVisible( jtable.getCellRect( k, j1, true ) );
             }
         }
         else
         {
             final int l = i / tablemodel.getColumnCount();
             final int k1 = i % tablemodel.getColumnCount();
-            if (!flag)
+            if ( !flag )
             {
                 jtable.getSelectionModel().clearSelection();
                 jtable.getColumnModel().getSelectionModel().clearSelection();
             }
-            jtable.getSelectionModel().setValueIsAdjusting(true);
-            jtable.getSelectionModel().addSelectionInterval(l, l);
-            jtable.getColumnModel().getSelectionModel().addSelectionInterval(k1, k1);
-            jtable.getSelectionModel().setValueIsAdjusting(false);
-            jtable.scrollRectToVisible(jtable.getCellRect(l, k1, true));
+            jtable.getSelectionModel().setValueIsAdjusting( true );
+            jtable.getSelectionModel().addSelectionInterval( l, l );
+            jtable.getColumnModel().getSelectionModel().addSelectionInterval( k1, k1 );
+            jtable.getSelectionModel().setValueIsAdjusting( false );
+            jtable.scrollRectToVisible( jtable.getCellRect( l, k1, true ) );
         }
     }
 
     protected int getSelectedIndex()
     {
         final JTable jtable = (JTable) component;
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
             return jtable.getColumnModel().getSelectionModel().getLeadSelectionIndex();
         }
-        if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
             return jtable.getSelectionModel().getLeadSelectionIndex();
         }
@@ -113,26 +112,26 @@ public class TableSearchable extends Searchable
         }
     }
 
-    protected Object getElementAt(final int i)
+    protected Object getElementAt( final int i )
     {
-        final TableModel tablemodel = ((JTable) component).getModel();
+        final TableModel tablemodel = ( (JTable) component ).getModel();
         final JTable jtable = (JTable) component;
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
-            if (getMainIndex() >= 0 && getMainIndex() < tablemodel.getRowCount())
+            if ( getMainIndex() >= 0 && getMainIndex() < tablemodel.getRowCount() )
             {
-                return tablemodel.getValueAt(getMainIndex(), i);
+                return tablemodel.getValueAt( getMainIndex(), i );
             }
             else
             {
                 return null;
             }
         }
-        if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
-            if (getMainIndex() >= 0 && getMainIndex() < tablemodel.getColumnCount())
+            if ( getMainIndex() >= 0 && getMainIndex() < tablemodel.getColumnCount() )
             {
-                return tablemodel.getValueAt(i, getMainIndex());
+                return tablemodel.getValueAt( i, getMainIndex() );
             }
             else
             {
@@ -141,19 +140,19 @@ public class TableSearchable extends Searchable
         }
         else
         {
-            return tablemodel.getValueAt(i / tablemodel.getColumnCount(), i % tablemodel.getColumnCount());
+            return tablemodel.getValueAt( i / tablemodel.getColumnCount(), i % tablemodel.getColumnCount() );
         }
     }
 
     protected int getElementCount()
     {
-        final TableModel tablemodel = ((JTable) component).getModel();
+        final TableModel tablemodel = ( (JTable) component ).getModel();
         final JTable jtable = (JTable) component;
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
             return tablemodel.getColumnCount();
         }
-        if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
             return tablemodel.getRowCount();
         }
@@ -163,9 +162,9 @@ public class TableSearchable extends Searchable
         }
     }
 
-    protected String convertElementToString(final Object obj)
+    protected String convertElementToString( final Object obj )
     {
-        if (obj != null)
+        if ( obj != null )
         {
             return obj.toString();
         }
@@ -180,20 +179,20 @@ public class TableSearchable extends Searchable
         return _mainIndex;
     }
 
-    public void setMainIndex(final int i)
+    public void setMainIndex( final int i )
     {
         _mainIndex = i;
     }
 
-    protected boolean isFindNextKey(final KeyEvent keyevent)
+    protected boolean isFindNextKey( final KeyEvent keyevent )
     {
         final int i = keyevent.getKeyCode();
         final JTable jtable = (JTable) component;
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
             return i == 39;
         }
-        if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
             return i == 40;
         }
@@ -203,15 +202,15 @@ public class TableSearchable extends Searchable
         }
     }
 
-    protected boolean isFindPreviousKey(final KeyEvent keyevent)
+    protected boolean isFindPreviousKey( final KeyEvent keyevent )
     {
         final int i = keyevent.getKeyCode();
         final JTable jtable = (JTable) component;
-        if (jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed())
+        if ( jtable.getColumnSelectionAllowed() && !jtable.getRowSelectionAllowed() )
         {
             return i == 37;
         }
-        if (!jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed())
+        if ( !jtable.getColumnSelectionAllowed() && jtable.getRowSelectionAllowed() )
         {
             return i == 38;
         }
@@ -221,7 +220,7 @@ public class TableSearchable extends Searchable
         }
     }
 
-    public void tableChanged(final TableModelEvent tablemodelevent)
+    public void tableChanged( final TableModelEvent tablemodelevent )
     {
         hidePopup();
     }

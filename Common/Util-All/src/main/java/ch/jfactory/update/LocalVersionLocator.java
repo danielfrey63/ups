@@ -20,8 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class LocalVersionLocator
 {
-
-    private static final Logger LOGGER = Logger.getLogger(LocalVersionLocator.class);
+    private static final Logger LOGGER = Logger.getLogger( LocalVersionLocator.class );
 
     private static final String NAME = "META-INF/VersionInfo.xml";
 
@@ -38,7 +37,7 @@ public class LocalVersionLocator
     {
         final List<VersionInfo> result = new ArrayList<VersionInfo>();
         final Map<String, VersionInfo> map = locateVersionsAsMap();
-        result.addAll(map.values());
+        result.addAll( map.values() );
         return result;
     }
 
@@ -47,20 +46,20 @@ public class LocalVersionLocator
         final Map<String, VersionInfo> map = new HashMap<String, VersionInfo>();
         try
         {
-            final XStream xStream = new XStream(new DomDriver());
-            xStream.alias("VersionInfo", VersionInfo.class);
-            final Enumeration jarsEnum = Thread.currentThread().getContextClassLoader().getResources(NAME);
-            while (jarsEnum.hasMoreElements())
+            final XStream xStream = new XStream( new DomDriver() );
+            xStream.alias( "VersionInfo", VersionInfo.class );
+            final Enumeration jarsEnum = Thread.currentThread().getContextClassLoader().getResources( NAME );
+            while ( jarsEnum.hasMoreElements() )
             {
                 final URL url = (URL) jarsEnum.nextElement();
                 final InputStream inputStream = url.openStream();
-                final VersionInfo versionInfo = (VersionInfo) xStream.fromXML(inputStream);
-                map.put(versionInfo.getName(), versionInfo);
+                final VersionInfo versionInfo = (VersionInfo) xStream.fromXML( inputStream );
+                map.put( versionInfo.getName(), versionInfo );
             }
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
-            LOGGER.error("could not load versions", e);
+            LOGGER.error( "could not load versions", e );
         }
         return map;
     }

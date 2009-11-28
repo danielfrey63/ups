@@ -8,7 +8,6 @@
  */
 package com.ethz.geobot.herbar.gui.tax;
 
-
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.application.view.search.SearchableUtils;
@@ -24,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Dialog to display a tree of the taxonomie and a search field. After disposing the dialog, the actual value may be
@@ -33,11 +32,11 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionListener {
+public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionListener
+{
+    protected final static Logger LOG = Logger.getLogger( TaxTreeDialog.class );
 
-    protected final static Category CAT = Category.getInstance(TaxTreeDialog.class);
     private TaxTree taxTree;
-
 
     /**
      * Creates a new instance of TaxTreeDialog
@@ -45,10 +44,11 @@ public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionL
      * @param parent    JFrame to be centered on and modal to
      * @param rootTaxon the root taxon for the tree
      */
-    public TaxTreeDialog(JFrame parent, Taxon rootTaxon) {
-        super(parent, "DIALOG.TAX");
-        taxTree.setRootTaxon(rootTaxon);
-        enableApply(taxTree.getSelectionPath() != null);
+    public TaxTreeDialog( final JFrame parent, final Taxon rootTaxon )
+    {
+        super( parent, "DIALOG.TAX" );
+        taxTree.setRootTaxon( rootTaxon );
+        enableApply( taxTree.getSelectionPath() != null );
     }
 
     /**
@@ -57,13 +57,15 @@ public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionL
      * @param parent    JDialog to be centered on and modal to
      * @param rootTaxon the root taxon for the tree
      */
-    public TaxTreeDialog(JDialog parent, Taxon rootTaxon) {
-        super(parent, "DIALOG.TAX");
-        if (CAT.isDebugEnabled()) {
-            CAT.debug("create tax tree dialog with root taxon: " + rootTaxon);
+    public TaxTreeDialog( final JDialog parent, final Taxon rootTaxon )
+    {
+        super( parent, "DIALOG.TAX" );
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "create tax tree dialog with root taxon: " + rootTaxon );
         }
-        taxTree.setRootTaxon(rootTaxon);
-        enableApply(taxTree.getSelectionPath() != null);
+        taxTree.setRootTaxon( rootTaxon );
+        enableApply( taxTree.getSelectionPath() != null );
     }
 
     /**
@@ -71,11 +73,13 @@ public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionL
      *
      * @param taxon selected taxon
      */
-    public void setSelectedTaxon(Taxon taxon) {
-        if (CAT.isDebugEnabled()) {
-            CAT.debug("set selected taxon: " + taxon);
+    public void setSelectedTaxon( final Taxon taxon )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "set selected taxon: " + taxon );
         }
-        taxTree.setSelectedTaxon(taxon);
+        taxTree.setSelectedTaxon( taxon );
     }
 
     /**
@@ -83,46 +87,51 @@ public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionL
      *
      * @return selected taxon
      */
-    public Taxon getSelectedTaxon() {
+    public Taxon getSelectedTaxon()
+    {
         return taxTree.getSelectedTaxon();
     }
 
-    public void valueChanged(TreeSelectionEvent tse) {
-        enableApply(tse.getNewLeadSelectionPath() != null);
+    public void valueChanged( final TreeSelectionEvent tse )
+    {
+        enableApply( tse.getNewLeadSelectionPath() != null );
     }
 
-
-    protected void onApply() throws ComponentDialogException {
-        if (CAT.isDebugEnabled()) {
-            CAT.debug("tax tree dialog return taxon: " + getSelectedTaxon());
+    protected void onApply() throws ComponentDialogException
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "tax tree dialog return taxon: " + getSelectedTaxon() );
         }
     }
 
-    protected void onCancel() {
-        if (CAT.isDebugEnabled()) {
-            CAT.debug("no taxon selected; cancel pressed");
+    protected void onCancel()
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "no taxon selected; cancel pressed" );
         }
-        taxTree.setSelectedTaxon(null);
+        taxTree.setSelectedTaxon( null );
     }
 
-    protected JComponent createComponentPanel() {
-
+    protected JComponent createComponentPanel()
+    {
         // Add tree in center.
         taxTree = new TaxTree();
-        taxTree.addTreeSelectionListener(this);
+        taxTree.addTreeSelectionListener( this );
 
         // Add TreeFindPanel at north.
-        final TreeSearchable treeSearchable = SearchableUtils.installSearchable(taxTree);
-        treeSearchable.setRecursive(true);
+        final TreeSearchable treeSearchable = SearchableUtils.installSearchable( taxTree );
+        treeSearchable.setRecursive( true );
 
-        JPanel treeFinderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        treeFinderPanel.setBorder(new EmptyBorder(0, 0, Constants.GAP_BETWEEN_GROUP, 0));
+        final JPanel treeFinderPanel = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
+        treeFinderPanel.setBorder( new EmptyBorder( 0, 0, Constants.GAP_BETWEEN_GROUP, 0 ) );
 
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JScrollPane(taxTree), BorderLayout.CENTER);
-        panel.add(treeFinderPanel, BorderLayout.NORTH);
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( new JScrollPane( taxTree ), BorderLayout.CENTER );
+        panel.add( treeFinderPanel, BorderLayout.NORTH );
 
-        return new JScrollPane(taxTree);
+        return new JScrollPane( taxTree );
     }
 }
 

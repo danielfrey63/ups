@@ -39,7 +39,7 @@ public interface DnDValidatorUpdater
      * @param path the path on which nodes the right shift wants to be checked
      * @return whether the right shift is allowed
      */
-    public boolean isRightShiftAllowed(TreePath path);
+    public boolean isRightShiftAllowed( TreePath path );
 
     /**
      * Returns whether a drag to the left is appropriate. A drag to the left is detected by the <code>DnDTree</code> and
@@ -48,7 +48,7 @@ public interface DnDValidatorUpdater
      * @param path the path on which nodes the left shift wants to be checked
      * @return whether the left shift is allowed
      */
-    public boolean isLeftShiftAllowed(TreePath path);
+    public boolean isLeftShiftAllowed( TreePath path );
 
     /**
      * Returns whether a move from one not to another is appropriate. A move action is detected by the
@@ -59,7 +59,7 @@ public interface DnDValidatorUpdater
      * @param index
      * @return whether the move shift is allowed
      */
-    public boolean isMoveAllowed(TreePath from, TreePath to, int index);
+    public boolean isMoveAllowed( TreePath from, TreePath to, int index );
 
     /**
      * Returns whether any action (<href="#isRightShiftAllowed(TreePath)"> right shift</href> ,
@@ -71,61 +71,60 @@ public interface DnDValidatorUpdater
      * @return whether any action is allowed Todo remove this interface method as it is not correctly supported by the
      *         DndTree.
      */
-    public boolean isAnyActionAllowed(TreePath from, TreePath to);
+    public boolean isAnyActionAllowed( TreePath from, TreePath to );
 
     /**
      * Performs a right shift on the given <code>TreePath</code>
      *
      * @param path the <code>TreePath</code> to be right shifted
      */
-    public void doRightShift(TreePath path);
+    public void doRightShift( TreePath path );
 
     /**
      * Performs a left shift on the given <code>TreePath</code>
      *
      * @param path the <code>TreePath</code> to be left shifted
      */
-    public void doLeftShift(TreePath path);
+    public void doLeftShift( TreePath path );
 
     /**
      * Sets the tree to update and validate.
      *
      * @param model the new model to set
      */
-    public void setModel(NotifiableTreeModel model);
+    public void setModel( NotifiableTreeModel model );
 
     public static class NopValidatorUpdater implements DnDValidatorUpdater
     {
-
-        public boolean isRightShiftAllowed(final TreePath path)
+        public boolean isRightShiftAllowed( final TreePath path )
         {
             return false;
         }
 
-        public boolean isLeftShiftAllowed(final TreePath path)
+        public boolean isLeftShiftAllowed( final TreePath path )
         {
             return false;
         }
 
-        public boolean isMoveAllowed(final TreePath from, final TreePath to, final int index)
+        public boolean isMoveAllowed( final TreePath from, final TreePath to, final int index )
         {
             return false;
         }
 
-        public boolean isAnyActionAllowed(final TreePath from, final TreePath to)
+        public boolean isAnyActionAllowed( final TreePath from, final TreePath to )
         {
             return false;
         }
 
-        public void doRightShift(final TreePath path)
+        public void doRightShift( final TreePath path )
         {
         }
 
-        public void doLeftShift(final TreePath path)
+        public void doLeftShift( final TreePath path )
         {
         }
 
-        public void setModel(final NotifiableTreeModel model)
+        public void setModel( final NotifiableTreeModel model )
         {
         }
     }

@@ -28,12 +28,11 @@ import org.pietschy.command.CommandManager;
  */
 public class ResetPresentationModel extends ActionCommand
 {
+    private final PresentationModel model;
 
-    private PresentationModel model;
-
-    public ResetPresentationModel(final CommandManager manager, final PresentationModel model)
+    public ResetPresentationModel( final CommandManager manager, final PresentationModel model )
     {
-        super(manager, CommonCommands.COMMANDID_TRIGGERRESET);
+        super( manager, CommonCommands.COMMANDID_TRIGGERRESET );
         this.model = model;
     }
 

@@ -4,7 +4,7 @@
 package ch.jfactory.projecttime.main.command;
 
 import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.converters.basic.AbstractBasicConverter;
+import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -19,73 +19,80 @@ import org.joda.time.format.ISODateTimeFormat;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class ISO8601CalendarConverter extends AbstractBasicConverter {
+public class ISO8601CalendarConverter extends AbstractSingleValueConverter
+{
+    private final DateTimeFormatter[] formatters;
 
-    private DateTimeFormatter[] formatters;
-
-    public ISO8601CalendarConverter() {
+    public ISO8601CalendarConverter()
+    {
         this.formatters = createISOFormatters();
     }
 
-    public boolean canConvert(Class type) {
-        return type.equals(GregorianCalendar.class);
+    public boolean canConvert( final Class type )
+    {
+        return type.equals( GregorianCalendar.class );
     }
 
-    protected Object fromString(String str) {
-        for (int i = 0; i < formatters.length; i++) {
-            DateTimeFormatter formatter = formatters[i];
-            try {
-                DateTime dt = formatter.parseDateTime(str);
-                return dt.toCalendar(Locale.getDefault());
+    public Object fromString( final String str )
+    {
+        for ( final DateTimeFormatter formatter : formatters )
+        {
+            try
+            {
+                final DateTime dt = formatter.parseDateTime( str );
+                return dt.toCalendar( Locale.getDefault() );
             }
-            catch (IllegalArgumentException e) {
+            catch ( IllegalArgumentException e )
+            {
                 // try with next formatter
             }
         }
-        throw new ConversionException("Cannot parse date " + str);
+        throw new ConversionException( "Cannot parse date " + str );
     }
 
-    protected String toString(Object obj) {
-        DateTime dt = new DateTime(obj);
+    public String toString( final Object obj )
+    {
+        final DateTime dt = new DateTime( obj );
         return dt.toString();
     }
 
-    private DateTimeFormatter[] createISOFormatters() {
-        List isoFormatters = new Vector();
-        isoFormatters.add(ISODateTimeFormat.dateTime());
-        isoFormatters.add(ISODateTimeFormat.dateTimeParser());
-        isoFormatters.add(ISODateTimeFormat.dateTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.basicDate());
-        isoFormatters.add(ISODateTimeFormat.basicDateTime());
-        isoFormatters.add(ISODateTimeFormat.basicDateTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.basicTime());
-        isoFormatters.add(ISODateTimeFormat.basicTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.basicTTime());
-        isoFormatters.add(ISODateTimeFormat.basicTTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.basicWeekDate());
-        isoFormatters.add(ISODateTimeFormat.basicWeekDateTime());
-        isoFormatters.add(ISODateTimeFormat.basicWeekDateTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.date());
-        isoFormatters.add(ISODateTimeFormat.dateHour());
-        isoFormatters.add(ISODateTimeFormat.dateHourMinute());
-        isoFormatters.add(ISODateTimeFormat.dateHourMinuteSecond());
-        isoFormatters.add(ISODateTimeFormat.dateHourMinuteSecondFraction());
-        isoFormatters.add(ISODateTimeFormat.dateHourMinuteSecondMillis());
-        isoFormatters.add(ISODateTimeFormat.hour());
-        isoFormatters.add(ISODateTimeFormat.hourMinute());
-        isoFormatters.add(ISODateTimeFormat.hourMinuteSecond());
-        isoFormatters.add(ISODateTimeFormat.hourMinuteSecondFraction());
-        isoFormatters.add(ISODateTimeFormat.hourMinuteSecondMillis());
-        isoFormatters.add(ISODateTimeFormat.time());
-        isoFormatters.add(ISODateTimeFormat.timeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.tTime());
-        isoFormatters.add(ISODateTimeFormat.tTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.weekDate());
-        isoFormatters.add(ISODateTimeFormat.weekDateTime());
-        isoFormatters.add(ISODateTimeFormat.weekDateTimeNoMillis());
-        isoFormatters.add(ISODateTimeFormat.weekyear());
-        isoFormatters.add(ISODateTimeFormat.weekyearWeek());
-        isoFormatters.add(ISODateTimeFormat.weekyearWeekDay());
-        return (DateTimeFormatter[]) isoFormatters.toArray(new DateTimeFormatter[isoFormatters.size()]);
+    private DateTimeFormatter[] createISOFormatters()
+    {
+        final List<DateTimeFormatter> isoFormatters = new Vector<DateTimeFormatter>();
+        isoFormatters.add( ISODateTimeFormat.dateTime() );
+        isoFormatters.add( ISODateTimeFormat.dateTimeParser() );
+        isoFormatters.add( ISODateTimeFormat.dateTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.basicDate() );
+        isoFormatters.add( ISODateTimeFormat.basicDateTime() );
+        isoFormatters.add( ISODateTimeFormat.basicDateTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.basicTime() );
+        isoFormatters.add( ISODateTimeFormat.basicTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.basicTTime() );
+        isoFormatters.add( ISODateTimeFormat.basicTTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.basicWeekDate() );
+        isoFormatters.add( ISODateTimeFormat.basicWeekDateTime() );
+        isoFormatters.add( ISODateTimeFormat.basicWeekDateTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.date() );
+        isoFormatters.add( ISODateTimeFormat.dateHour() );
+        isoFormatters.add( ISODateTimeFormat.dateHourMinute() );
+        isoFormatters.add( ISODateTimeFormat.dateHourMinuteSecond() );
+        isoFormatters.add( ISODateTimeFormat.dateHourMinuteSecondFraction() );
+        isoFormatters.add( ISODateTimeFormat.dateHourMinuteSecondMillis() );
+        isoFormatters.add( ISODateTimeFormat.hour() );
+        isoFormatters.add( ISODateTimeFormat.hourMinute() );
+        isoFormatters.add( ISODateTimeFormat.hourMinuteSecond() );
+        isoFormatters.add( ISODateTimeFormat.hourMinuteSecondFraction() );
+        isoFormatters.add( ISODateTimeFormat.hourMinuteSecondMillis() );
+        isoFormatters.add( ISODateTimeFormat.time() );
+        isoFormatters.add( ISODateTimeFormat.timeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.tTime() );
+        isoFormatters.add( ISODateTimeFormat.tTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.weekDate() );
+        isoFormatters.add( ISODateTimeFormat.weekDateTime() );
+        isoFormatters.add( ISODateTimeFormat.weekDateTimeNoMillis() );
+        isoFormatters.add( ISODateTimeFormat.weekyear() );
+        isoFormatters.add( ISODateTimeFormat.weekyearWeek() );
+        isoFormatters.add( ISODateTimeFormat.weekyearWeekDay() );
+        return isoFormatters.toArray( new DateTimeFormatter[isoFormatters.size()] );
     }
 }

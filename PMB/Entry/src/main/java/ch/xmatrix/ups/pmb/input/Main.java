@@ -16,12 +16,12 @@
  */
 package ch.xmatrix.ups.pmb.input;
 
-import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.application.CheckThreadViolationRepaintManager;
+import ch.jfactory.resource.OperatingSystem;
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
-import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /**
  * TODO: document
@@ -29,20 +29,24 @@ import javax.swing.SwingUtilities;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:29 $
  */
-public class Main {
-
-    public static void main(final String[] args) throws Exception {
-        RepaintManager.setCurrentManager(new CheckThreadViolationRepaintManager());
-        if (OperatingSystem.IS_OS_WINDOWS) {
-            UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
+public class Main
+{
+    public static void main( final String[] args ) throws Exception
+    {
+        RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
+        if ( OperatingSystem.IS_OS_WINDOWS )
+        {
+            UIManager.setLookAndFeel( "com.jgoodies.looks.windows.WindowsLookAndFeel" );
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                final JFrame form = new MainForm(new MainModel());
-                form.setSize(800, 600);
-                form.setLocationRelativeTo(null);
-                form.setVisible(true);
+        SwingUtilities.invokeLater( new Runnable()
+        {
+            public void run()
+            {
+                final JFrame form = new MainForm( new MainModel() );
+                form.setSize( 800, 600 );
+                form.setLocationRelativeTo( null );
+                form.setVisible( true );
             }
-        });
+        } );
     }
 }

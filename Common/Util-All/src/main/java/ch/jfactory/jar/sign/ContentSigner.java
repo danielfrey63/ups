@@ -20,7 +20,6 @@ import java.security.cert.CertificateException;
 
 public abstract class ContentSigner
 {
-
     /**
      * Generates a PKCS #7 signed data message. This method is used when the signature has already been generated. The
      * signature, the signer's details, and optionally a signature timestamp and the content that was signed, are all
@@ -40,6 +39,6 @@ public abstract class ContentSigner
      */
     public abstract byte[] generateSignedData(
             ContentSignerParameters parameters, boolean omitContent,
-            boolean applyTimestamp)
+            boolean applyTimestamp )
             throws NoSuchAlgorithmException, CertificateException, IOException;
 }

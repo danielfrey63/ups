@@ -3,7 +3,7 @@ package com.ethz.geobot.herbar.model.filter;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Arrays;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This class contains a definition detail.
@@ -11,57 +11,71 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class FilterDefinitionDetail implements Cloneable {
-
-    private final static Category cat = Category.getInstance(FilterDefinitionDetail.class);
+public class FilterDefinitionDetail implements Cloneable
+{
+    private final static Logger LOG = Logger.getLogger( FilterDefinitionDetail.class );
 
     private Taxon scope;
+
     private Level[] levels;
+
     private FilterModel model;
 
-    FilterDefinitionDetail(FilterModel model, Taxon scope, Level level) {
-        this(model, scope, new Level[]{level});
+    FilterDefinitionDetail( final FilterModel model, final Taxon scope, final Level level )
+    {
+        this( model, scope, new Level[]{level} );
     }
 
-    FilterDefinitionDetail(FilterModel model, Taxon scope, Level[] levels) {
+    FilterDefinitionDetail( final FilterModel model, final Taxon scope, final Level[] levels )
+    {
         this.model = model;
         this.scope = scope;
         this.levels = levels;
     }
 
-    public Taxon getScope() {
+    public Taxon getScope()
+    {
         return scope;
     }
 
-    public void setScope(Taxon scope) {
+    public void setScope( final Taxon scope )
+    {
         this.scope = scope;
         model.notifyModelChange();
     }
 
-    public Level[] getLevels() {
+    public Level[] getLevels()
+    {
         return levels;
     }
 
-    public void setLevels(Level[] levels) {
+    public void setLevels( final Level[] levels )
+    {
         this.levels = levels;
         model.notifyModelChange();
     }
 
-    public boolean isIn(Taxon taxon) {
-        if (cat.isDebugEnabled()) {
-            cat.debug("check taxon: " + taxon);
-            cat.debug("isChild of scope " + scope + ": " + isChild(taxon));
-            cat.debug("levelcheck " + Arrays.asList(levels) + ": " + taxon.getLevel());
+    public boolean isIn( final Taxon taxon )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "check taxon: " + taxon );
+            LOG.debug( "isChild of scope " + scope + ": " + isChild( taxon ) );
+            LOG.debug( "levelcheck " + Arrays.asList( levels ) + ": " + taxon.getLevel() );
         }
 
         // is scope root ?
-        if (isRootTaxon(taxon)) {
+        if ( isRootTaxon( taxon ) )
+        {
             return true;
         }
 
-        if (scope.equals(taxon) || isChild(taxon)) {
-            for (int i = 0; i < levels.length; i++) {
-                if (taxon.getLevel().equals(levels[ i ])) {
+        if ( scope.equals( taxon ) || isChild( taxon ) )
+        {
+            for ( final Level level : levels )
+            {
+                if ( taxon.getLevel().equals( level ) )
+                {
                     return true;
                 }
             }
@@ -69,10 +83,13 @@ public class FilterDefinitionDetail implements Cloneable {
         return false;
     }
 
-    private boolean isChild(Taxon tax) {
+    private boolean isChild( final Taxon tax )
+    {
         Taxon parent = tax.getParentTaxon();
-        while (parent != null) {
-            if (scope.equals(parent)) {
+        while ( parent != null )
+        {
+            if ( scope.equals( parent ) )
+            {
                 return true;
             }
             parent = parent.getParentTaxon();
@@ -80,26 +97,33 @@ public class FilterDefinitionDetail implements Cloneable {
         return false;
     }
 
-    private boolean isRootTaxon(Taxon tax) {
-        if (tax.getParentTaxon() == null) {
+    private boolean isRootTaxon( final Taxon tax )
+    {
+        if ( tax.getParentTaxon() == null )
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
 
-    public Object clone() {
-        try {
+    public Object clone()
+    {
+        try
+        {
             return super.clone();
         }
-        catch (CloneNotSupportedException ex) {
-            cat.fatal("clone isn't supported by cloneable class !?!?!", ex);
-            throw new RuntimeException(ex);
+        catch ( CloneNotSupportedException ex )
+        {
+            LOG.fatal( "clone isn't supported by cloneable class !?!?!", ex );
+            throw new RuntimeException( ex );
         }
     }
 
-    public String toString() {
-        return scope + " " + Arrays.asList(levels);
+    public String toString()
+    {
+        return scope + " " + Arrays.asList( levels );
     }
 }

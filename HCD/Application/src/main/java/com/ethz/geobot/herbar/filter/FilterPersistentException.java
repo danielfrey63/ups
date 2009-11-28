@@ -12,12 +12,13 @@ package com.ethz.geobot.herbar.filter;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class FilterPersistentException extends java.lang.Exception {
-
+public class FilterPersistentException extends java.lang.Exception
+{
     /**
      * Creates a new instance of <code>FilterPersistentException</code> without detail message.
      */
-    public FilterPersistentException() {
+    public FilterPersistentException()
+    {
     }
 
     /**
@@ -25,8 +26,9 @@ public class FilterPersistentException extends java.lang.Exception {
      *
      * @param msg the detail message.
      */
-    public FilterPersistentException(String msg) {
-        super(msg);
+    public FilterPersistentException( final String msg )
+    {
+        super( msg );
     }
 
     /**
@@ -35,8 +37,9 @@ public class FilterPersistentException extends java.lang.Exception {
      * @param msg   the detail message.
      * @param cause the exception that cause this exception
      */
-    public FilterPersistentException(String msg, Throwable cause) {
-        super(msg, cause);
+    public FilterPersistentException( final String msg, final Throwable cause )
+    {
+        super( msg, cause );
     }
 
     /**
@@ -44,7 +47,8 @@ public class FilterPersistentException extends java.lang.Exception {
      *
      * @param cause the exception that cause this exception
      */
-    public FilterPersistentException(Throwable cause) {
-        super(cause);
+    public FilterPersistentException( final Throwable cause )
+    {
+        super( cause );
     }
 }

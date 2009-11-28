@@ -18,9 +18,9 @@ package ch.jfactory.projecttime.domain.impl;
 
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Collection;
 
 /**
  * TODO: document
@@ -28,51 +28,65 @@ import java.util.Collection;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class Invoice {
-
+public class Invoice
+{
     private String number = "Invoice001";
+
     private Calendar charged = Calendar.getInstance();
+
     private Calendar due = Calendar.getInstance();
+
     private Set entries;
 
-    public String getNumber() {
+    public String getNumber()
+    {
         return number;
     }
 
-    public void setNumber(final String number) {
+    public void setNumber( final String number )
+    {
         this.number = number;
     }
 
-    public Calendar getCharged() {
+    public Calendar getCharged()
+    {
         return charged;
     }
 
-    public void setCharged(final Calendar charged) {
+    public void setCharged( final Calendar charged )
+    {
         this.charged = charged;
     }
 
-    public Calendar getDue() {
+    public Calendar getDue()
+    {
         return due;
     }
 
-    public void setDue(final Calendar due) {
+    public void setDue( final Calendar due )
+    {
         this.due = due;
     }
 
-    public void addEntry(final IFEntry entry) {
-        if (entries == null) {
+    public void addEntry( final IFEntry entry )
+    {
+        if ( entries == null )
+        {
             entries = new HashSet();
         }
-        entries.add(entry);
+        entries.add( entry );
     }
 
-    public Collection getEntries() {
+    public Collection getEntries()
+    {
         return entries;
     }
 
-    public void removeEntry(IFEntry entry) {
-        if (entries != null) {
-            entries.remove(entry);
+    public void removeEntry( final IFEntry entry )
+    {
+        if ( entries != null )
+        {
+            entries.remove( entry );
         }
     }
 }

@@ -12,9 +12,10 @@ import org.apache.commons.io.IOUtils;
  *
  * @author Daniel Frey 07.07.2008 22:07:03
  */
-public class DemoTaxa {
-
-    public static String getDemoPictures() throws IOException {
+public class DemoTaxa
+{
+    public static String getDemoPictures() throws IOException
+    {
         final String[] files = {
                 "/demo/demo.xml",
                 "/demo/Acer pseudoplatanus/Habitus (17 80 4 93).jpg",
@@ -79,19 +80,21 @@ public class DemoTaxa {
                 "/demo/Zea mays/Stengel.Querschnitt.Detail (37 95 14 86).JPG",
                 "/demo/Zea mays/Wurzel (23 93 8 95).JPG"
         };
-        final File directory = FileUtils.createTemporaryDirectory("pmbx", "demo");
+        final File directory = FileUtils.createTemporaryDirectory( "pmbx", "demo" );
         directory.deleteOnExit();
-        for (final String file : files) {
-            final InputStream in = DemoTaxa.class.getResourceAsStream(file);
-            if (in == null) {
-                throw new IllegalStateException("resource not found: " + file);
+        for ( final String file : files )
+        {
+            final InputStream in = DemoTaxa.class.getResourceAsStream( file );
+            if ( in == null )
+            {
+                throw new IllegalStateException( "resource not found: " + file );
             }
-            final File absoluteFile = new File(directory, file);
+            final File absoluteFile = new File( directory, file );
             absoluteFile.getParentFile().mkdirs();
-            final FileOutputStream out = new FileOutputStream(absoluteFile);
-            IOUtils.copy(in, out);
-            IOUtils.closeQuietly(out);
-            IOUtils.closeQuietly(in);
+            final FileOutputStream out = new FileOutputStream( absoluteFile );
+            IOUtils.copy( in, out );
+            IOUtils.closeQuietly( out );
+            IOUtils.closeQuietly( in );
         }
         return directory.getAbsolutePath();
     }

@@ -16,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BeanTableModel extends DefaultTableModel
 {
-
     private List list;
 
     private PropertyDescriptor[] columnDescriptors;
@@ -31,18 +30,18 @@ public class BeanTableModel extends DefaultTableModel
      * @param readOnly         model should be hanlded read only
      * @param columnNames      the names of the columns
      */
-    public BeanTableModel(final List list, final String[] columnProperties, final String[] columnNames, final boolean readOnly)
+    public BeanTableModel( final List list, final String[] columnProperties, final String[] columnNames, final boolean readOnly )
     {
         this.readOnly = readOnly;
 
-        if (list.size() == 0)
+        if ( list.size() == 0 )
         {
-            throw new IllegalArgumentException("Empty bean list not allowed");
+            throw new IllegalArgumentException( "Empty bean list not allowed" );
         }
 
-        if (columnNames.length != columnProperties.length)
+        if ( columnNames.length != columnProperties.length )
         {
-            throw new IllegalArgumentException("Properties and names array must be of same length.");
+            throw new IllegalArgumentException( "Properties and names array must be of same length." );
         }
         this.list = list;
 
@@ -50,22 +49,22 @@ public class BeanTableModel extends DefaultTableModel
         final BeanInfo beanInfo;
         try
         {
-            beanInfo = Introspector.getBeanInfo(list.get(0).getClass());
+            beanInfo = Introspector.getBeanInfo( list.get( 0 ).getClass() );
         }
-        catch (IntrospectionException ex)
+        catch ( IntrospectionException ex )
         {
-            throw new IllegalArgumentException("List contains faulty beans");
+            throw new IllegalArgumentException( "List contains faulty beans" );
         }
 
         // map alle columns
         columnDescriptors = new PropertyDescriptor[columnProperties.length];
         final PropertyDescriptor[] descs = beanInfo.getPropertyDescriptors();
-        for (int i = 0; i < columnProperties.length; i++)
+        for ( int i = 0; i < columnProperties.length; i++ )
         {
             final String name = columnProperties[i];
-            for (PropertyDescriptor desc : descs)
+            for ( final PropertyDescriptor desc : descs )
             {
-                if (desc.getName().equals(name))
+                if ( desc.getName().equals( name ) )
                 {
                     columnDescriptors[i] = desc;
                     break;
@@ -75,57 +74,57 @@ public class BeanTableModel extends DefaultTableModel
 
         final Object[][] infos = new Object[list.size()][columnProperties.length];
         int row = 0;
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); row++)
+        for ( Iterator iterator = list.iterator(); iterator.hasNext(); row++ )
         {
             final Object o = iterator.next();
-            for (int col = 0; col < columnDescriptors.length; col++)
+            for ( int col = 0; col < columnDescriptors.length; col++ )
             {
                 final PropertyDescriptor desc = columnDescriptors[col];
                 try
                 {
-                    infos[row][col] = desc.getReadMethod().invoke(o);
+                    infos[row][col] = desc.getReadMethod().invoke( o );
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     ex.printStackTrace();
                 }
             }
         }
 
-        super.setDataVector(infos, columnNames);
+        super.setDataVector( infos, columnNames );
     }
 
-    public BeanTableModel(final List list, final String[] columnProperties)
+    public BeanTableModel( final List list, final String[] columnProperties )
     {
-        this(list, columnProperties, columnProperties, false);
+        this( list, columnProperties, columnProperties, false );
     }
 
-    public void setValueAt(final Object value, final int row, final int column)
+    public void setValueAt( final Object value, final int row, final int column )
     {
-        final Object o = list.get(row);
+        final Object o = list.get( row );
 
         final PropertyDescriptor desc = columnDescriptors[column];
         try
         {
-            desc.getWriteMethod().invoke(o, value);
+            desc.getWriteMethod().invoke( o, value );
         }
-        catch (Exception ex)
+        catch ( Exception ex )
         {
             ex.printStackTrace();
         }
-        super.setValueAt(value, row, column);
+        super.setValueAt( value, row, column );
     }
 
-    public boolean isCellEditable(final int row, final int column)
+    public boolean isCellEditable( final int row, final int column )
     {
-        if (readOnly)
+        if ( readOnly )
         {
             return false;
         }
         else
         {
             final PropertyDescriptor desc = columnDescriptors[column];
-            return (desc.getWriteMethod() != null);
+            return ( desc.getWriteMethod() != null );
         }
     }
 }

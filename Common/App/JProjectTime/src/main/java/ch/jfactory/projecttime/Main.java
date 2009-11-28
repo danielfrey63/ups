@@ -12,8 +12,8 @@
 package ch.jfactory.projecttime;
 
 import ch.jfactory.application.MainRunner;
-import ch.jfactory.projecttime.main.MainModel;
 import ch.jfactory.projecttime.main.MainFrame;
+import ch.jfactory.projecttime.main.MainModel;
 import com.jgoodies.uif.AbstractFrame;
 
 /**
@@ -22,13 +22,15 @@ import com.jgoodies.uif.AbstractFrame;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.3 $ $Date: 2006/11/16 13:25:17 $
  */
-public final class Main extends MainRunner {
-
-    public static void main(final String[] args) {
+public final class Main extends MainRunner
+{
+    public static void main( final String[] args )
+    {
         new Main();
     }
 
-    public AbstractFrame createMainFrame() {
-        return new MainFrame((MainModel) getMainModel());
+    public AbstractFrame createMainFrame()
+    {
+        return new MainFrame( (MainModel) getMainModel() );
     }
 }

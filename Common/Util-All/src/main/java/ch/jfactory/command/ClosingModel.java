@@ -11,7 +11,6 @@ import java.beans.PropertyVetoException;
  */
 public interface ClosingModel
 {
-
     /**
      * Indicates that currently modfied data is about to be discarded. This method fires a vetoable property change
      * event and a property change event. The closing state is set to false after the last property change listener

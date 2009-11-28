@@ -20,90 +20,108 @@ import javax.swing.JFrame;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.3 $ $Date: 2006/11/16 13:25:17 $
  */
-public class MainModel extends AbstractMainModel {
+public class MainModel extends AbstractMainModel
+{
+    private static final MainModel DEFAULT = new MainModel( null );
 
-    private static final MainModel DEFAULT = new MainModel(null);
-
-    private ValueHolder entry2InvoiceMap = new ValueHolder(new HashMap());
+    private final ValueHolder entry2InvoiceMap = new ValueHolder( new HashMap() );
 
     public static final String PROPERTYNAME_TYPEMODEL = "typeModel";
+
     private TypeModel typeModel = new TypeModel();
 
     public static final String PROPERTYNAME_PROJECTMODEL = "projectModel";
-    private ProjectModel projectModel = new ProjectModel(new DefaultEntry("JProjectTime", "Root"), entry2InvoiceMap);
+
+    private ProjectModel projectModel = new ProjectModel( new DefaultEntry( "JProjectTime", "Root" ), entry2InvoiceMap );
 
     public static final String PROPERTYNAME_ENTRYMODEL = "entryModel";
-    private EntryModel entryModel = new EntryModel(getProjectModel().getCurrentBeanModel());
+
+    private EntryModel entryModel = new EntryModel( getProjectModel().getCurrentBeanModel() );
 
     public static final String PROPERTYNAME_STATSMODEL = "statsModel";
-    private StatsModel statsModel = new StatsModel(projectModel.getSelectionModel(), getProjectModel().getCurrentBeanModel());
+
+    private StatsModel statsModel = new StatsModel( projectModel.getSelectionModel(), getProjectModel().getCurrentBeanModel() );
 
     public static final String PROPERTYNAME_INVOICEMODEL = "invoiceModel";
-    private InvoiceModel invoiceModel = new InvoiceModel(entry2InvoiceMap);
 
-    private JFrame parent;
+    private InvoiceModel invoiceModel = new InvoiceModel( entry2InvoiceMap );
 
-    public MainModel(final JFrame parent) {
+    private final JFrame parent;
+
+    public MainModel( final JFrame parent )
+    {
         this.parent = parent;
     }
 
-    public static MainModel getDefaultModel() {
+    public static MainModel getDefaultModel()
+    {
         return DEFAULT;
     }
 
-    public JFrame getParent() {
+    public JFrame getParent()
+    {
         return parent;
     }
 
     // Submodels
 
-    public ProjectModel getProjectModel() {
+    public ProjectModel getProjectModel()
+    {
         return projectModel;
     }
 
-    public void setProjectModel(final ProjectModel projectModel) {
+    public void setProjectModel( final ProjectModel projectModel )
+    {
         final ProjectModel old = getProjectModel();
         this.projectModel = projectModel;
-        firePropertyChange(PROPERTYNAME_PROJECTMODEL, old, projectModel);
+        firePropertyChange( PROPERTYNAME_PROJECTMODEL, old, projectModel );
     }
 
-    public TypeModel getTypeModel() {
+    public TypeModel getTypeModel()
+    {
         return typeModel;
     }
 
-    public void setTypeModel(final TypeModel typeModel) {
+    public void setTypeModel( final TypeModel typeModel )
+    {
         final TypeModel old = getTypeModel();
         this.typeModel = typeModel;
-        firePropertyChange(PROPERTYNAME_TYPEMODEL, old, typeModel);
+        firePropertyChange( PROPERTYNAME_TYPEMODEL, old, typeModel );
     }
 
-    public EntryModel getEntryModel() {
+    public EntryModel getEntryModel()
+    {
         return entryModel;
     }
 
-    public void setEntryModel(EntryModel entryModel) {
+    public void setEntryModel( final EntryModel entryModel )
+    {
         final EntryModel old = getEntryModel();
         this.entryModel = entryModel;
-        firePropertyChange(PROPERTYNAME_ENTRYMODEL, old, entryModel);
+        firePropertyChange( PROPERTYNAME_ENTRYMODEL, old, entryModel );
     }
 
-    public StatsModel getStatsModel() {
+    public StatsModel getStatsModel()
+    {
         return statsModel;
     }
 
-    public void setStatsModel(StatsModel statsModel) {
+    public void setStatsModel( final StatsModel statsModel )
+    {
         final StatsModel old = getStatsModel();
         this.statsModel = statsModel;
-        firePropertyChange(PROPERTYNAME_STATSMODEL, old, statsModel);
+        firePropertyChange( PROPERTYNAME_STATSMODEL, old, statsModel );
     }
 
-    public InvoiceModel getInvoiceModel() {
+    public InvoiceModel getInvoiceModel()
+    {
         return invoiceModel;
     }
 
-    public void setInvoiceModel(InvoiceModel invoiceModel) {
+    public void setInvoiceModel( final InvoiceModel invoiceModel )
+    {
         final InvoiceModel old = getInvoiceModel();
         this.invoiceModel = invoiceModel;
-        firePropertyChange(PROPERTYNAME_INVOICEMODEL, old, invoiceModel);
+        firePropertyChange( PROPERTYNAME_INVOICEMODEL, old, invoiceModel );
     }
 }

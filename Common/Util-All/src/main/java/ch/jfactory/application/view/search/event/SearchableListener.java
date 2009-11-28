@@ -12,6 +12,5 @@ import java.util.EventListener;
 public interface SearchableListener
         extends EventListener
 {
-
-    public abstract void searchableEventFired(SearchableEvent searchableevent);
+    public abstract void searchableEventFired( SearchableEvent searchableevent );
 }

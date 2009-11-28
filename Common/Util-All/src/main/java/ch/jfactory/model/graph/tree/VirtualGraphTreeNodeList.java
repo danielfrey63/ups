@@ -8,24 +8,23 @@ import ch.jfactory.model.graph.GraphNodeList;
  */
 public class VirtualGraphTreeNodeList extends GraphNodeList
 {
-
     public VirtualGraphTreeNodeList()
     {
     }
 
-    public VirtualGraphTreeNodeList(final VirtualGraphTreeNode element)
+    public VirtualGraphTreeNodeList( final VirtualGraphTreeNode element )
     {
-        add(element);
+        add( element );
     }
 
-    public void add(final VirtualGraphTreeNode element)
+    public void add( final VirtualGraphTreeNode element )
     {
-        super.add(element);
+        super.add( element );
     }
 
-    public void addAll(final VirtualGraphTreeNodeList elements)
+    public void addAll( final VirtualGraphTreeNodeList elements )
     {
-        super.addAll(elements);
+        super.addAll( elements );
     }
 
     public VirtualGraphTreeNode[] getAllTreeNodes()
@@ -33,9 +32,9 @@ public class VirtualGraphTreeNodeList extends GraphNodeList
         return (VirtualGraphTreeNode[]) super.getAll();
     }
 
-    public VirtualGraphTreeNode getTreeNode(final int index)
+    public VirtualGraphTreeNode getTreeNode( final int index )
     {
-        return (VirtualGraphTreeNode) super.get(index);
+        return (VirtualGraphTreeNode) super.get( index );
     }
 
 }

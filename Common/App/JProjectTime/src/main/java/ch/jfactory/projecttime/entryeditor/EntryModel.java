@@ -16,8 +16,8 @@
  */
 package ch.jfactory.projecttime.entryeditor;
 
-import com.jgoodies.binding.beans.Model;
 import com.jgoodies.binding.PresentationModel;
+import com.jgoodies.binding.beans.Model;
 
 /**
  * TODO: document
@@ -25,15 +25,17 @@ import com.jgoodies.binding.PresentationModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class EntryModel extends Model {
+public class EntryModel extends Model
+{
+    private final PresentationModel model;
 
-    private PresentationModel model;
-
-    public EntryModel(PresentationModel model) {
+    public EntryModel( final PresentationModel model )
+    {
         this.model = model;
     }
 
-    public PresentationModel getModel() {
+    public PresentationModel getModel()
+    {
         return model;
     }
 }

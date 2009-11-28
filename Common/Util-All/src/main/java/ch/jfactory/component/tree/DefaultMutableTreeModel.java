@@ -30,64 +30,63 @@ import javax.swing.tree.TreePath;
  */
 public class DefaultMutableTreeModel extends DefaultTreeModel implements NotifiableTreeModel
 {
-
-    public DefaultMutableTreeModel(final MutableTreeNode root)
+    public DefaultMutableTreeModel( final MutableTreeNode root )
     {
-        super(root);
+        super( root );
     }
 
-    public DefaultMutableTreeModel(final MutableTreeNode root, final boolean asksAllowsChildren)
+    public DefaultMutableTreeModel( final MutableTreeNode root, final boolean asksAllowsChildren )
     {
-        super(root, asksAllowsChildren);
+        super( root, asksAllowsChildren );
     }
 
     // Todo: resolve this fake.
-    public DefaultMutableTreeModel(final TreeModel model)
+    public DefaultMutableTreeModel( final TreeModel model )
     {
-        super(null);
+        super( null );
     }
 
     // MutableTreeModel
 
-    public void removeFromParent(final TreePath path)
+    public void removeFromParent( final TreePath path )
     {
-        super.removeNodeFromParent((MutableTreeNode) path.getLastPathComponent());
+        super.removeNodeFromParent( (MutableTreeNode) path.getLastPathComponent() );
     }
 
-    public void insertInto(final TreePath path, final TreePath parent, final int pos)
+    public void insertInto( final TreePath path, final TreePath parent, final int pos )
     {
-        super.insertNodeInto((MutableTreeNode) path.getLastPathComponent(), (MutableTreeNode) parent.getLastPathComponent(), pos);
+        super.insertNodeInto( (MutableTreeNode) path.getLastPathComponent(), (MutableTreeNode) parent.getLastPathComponent(), pos );
     }
 
     // NotifiableTreeModel
 
-    public void reload(final TreePath path)
+    public void reload( final TreePath path )
     {
-        super.reload((TreeNode) path.getLastPathComponent());
+        super.reload( (TreeNode) path.getLastPathComponent() );
     }
 
-    public void nodeChanged(final TreePath path)
+    public void nodeChanged( final TreePath path )
     {
-        super.nodeChanged((TreeNode) path.getLastPathComponent());
+        super.nodeChanged( (TreeNode) path.getLastPathComponent() );
     }
 
-    public void nodesWereInserted(final TreePath path, final int[] childIndices)
+    public void nodesWereInserted( final TreePath path, final int[] childIndices )
     {
-        super.nodesWereInserted((TreeNode) path.getLastPathComponent(), childIndices);
+        super.nodesWereInserted( (TreeNode) path.getLastPathComponent(), childIndices );
     }
 
-    public void nodesWereRemoved(final TreePath path, final int[] childIndices, final Object[] removedChildren)
+    public void nodesWereRemoved( final TreePath path, final int[] childIndices, final Object[] removedChildren )
     {
-        super.nodesWereRemoved((TreeNode) path.getLastPathComponent(), childIndices, removedChildren);
+        super.nodesWereRemoved( (TreeNode) path.getLastPathComponent(), childIndices, removedChildren );
     }
 
-    public void nodesChanged(final TreePath path, final int[] childIndices)
+    public void nodesChanged( final TreePath path, final int[] childIndices )
     {
-        super.nodesChanged((TreeNode) path.getLastPathComponent(), childIndices);
+        super.nodesChanged( (TreeNode) path.getLastPathComponent(), childIndices );
     }
 
-    public void nodesChanged(final TreePath path)
+    public void nodesChanged( final TreePath path )
     {
-        super.nodesChanged((TreeNode) path.getLastPathComponent(), null);
+        super.nodesChanged( (TreeNode) path.getLastPathComponent(), null );
     }
 }

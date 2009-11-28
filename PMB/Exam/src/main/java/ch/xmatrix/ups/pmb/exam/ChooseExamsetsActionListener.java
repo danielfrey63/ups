@@ -13,20 +13,27 @@ import org.apache.log4j.Logger;
  *
  * @author Daniel Frey 18.06.2008 00:16:54
  */
-public class ChooseExamsetsActionListener implements ActionListener {
+public class ChooseExamsetsActionListener implements ActionListener
+{
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( ChooseExamsetsActionListener.class );
 
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(ChooseExamsetsActionListener.class);
+    /**
+     * The text field model to update.
+     */
+    private final Document document;
 
-    /** The text field model to update. */
-    private Document document;
+    /**
+     * The initial directory to open.
+     */
+    private final File initialDirectory;
 
-    /** The initial directory to open. */
-    private File initialDirectory;
-
-    public ChooseExamsetsActionListener(final Document document, final String initialDirectory) {
+    public ChooseExamsetsActionListener( final Document document, final String initialDirectory )
+    {
         this.document = document;
-        this.initialDirectory = new File(initialDirectory);
+        this.initialDirectory = new File( initialDirectory );
     }
 
     /**
@@ -34,10 +41,12 @@ public class ChooseExamsetsActionListener implements ActionListener {
      *
      * @param event not used
      */
-    public void actionPerformed(final ActionEvent event) {
+    public void actionPerformed( final ActionEvent event )
+    {
         final File[] files = getUserSelectedFiles();
-        if (files != null && files.length == 1) {
-            loadFile(files[0]);
+        if ( files != null && files.length == 1 )
+        {
+            loadFile( files[0] );
         }
     }
 
@@ -46,12 +55,16 @@ public class ChooseExamsetsActionListener implements ActionListener {
      *
      * @param file the file to load
      */
-    private void loadFile(final File file) {
-        try {
-            document.remove(0, document.getLength());
-            document.insertString(0, file.getAbsolutePath(), null);
-        } catch (BadLocationException e) {
-            LOG.error("wrong document model updates", e);
+    private void loadFile( final File file )
+    {
+        try
+        {
+            document.remove( 0, document.getLength() );
+            document.insertString( 0, file.getAbsolutePath(), null );
+        }
+        catch ( BadLocationException e )
+        {
+            LOG.error( "wrong document model updates", e );
         }
     }
 
@@ -60,19 +73,23 @@ public class ChooseExamsetsActionListener implements ActionListener {
      *
      * @return the files selected
      */
-    private File[] getUserSelectedFiles() {
+    private File[] getUserSelectedFiles()
+    {
         final ExamsetFileFilter filter = new ExamsetFileFilter();
-        final OpenChooser chooser = new OpenChooser(filter, "pmb.open.examsets", System.getProperty("user.dir"));
-        try {
-            final String text = document.getText(0, document.getLength());
-            LOG.info("settings directory of chooser to " + text);
-            chooser.setDirectory(new File(text));
-        } catch (BadLocationException e) {
-            LOG.warn("could not retrieve documents text [0, " + document.getLength() + "]");
+        final OpenChooser chooser = new OpenChooser( filter, "pmb.open.examsets", System.getProperty( "user.dir" ) );
+        try
+        {
+            final String text = document.getText( 0, document.getLength() );
+            LOG.info( "settings directory of chooser to " + text );
+            chooser.setDirectory( new File( text ) );
         }
-        chooser.setModal(true);
-        chooser.setDirectory(initialDirectory);
-        chooser.getChooser().setMultiSelectionEnabled(false);
+        catch ( BadLocationException e )
+        {
+            LOG.warn( "could not retrieve documents text [0, " + document.getLength() + "]" );
+        }
+        chooser.setModal( true );
+        chooser.setDirectory( initialDirectory );
+        chooser.getChooser().setMultiSelectionEnabled( false );
         chooser.open();
         return chooser.getSelectedFiles();
     }

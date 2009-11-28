@@ -10,11 +10,15 @@ public interface TypeFactory
      * Returns an instance of the given clazz, or an implementation of it if the clazz is an interface and an
      * appropriate implementation exists.
      */
-    public GraphNode getInstance(Class clazz);
+    public GraphNode getInstance( Class clazz );
 
-    /** Returns an instance of the given type. */
-    public GraphNode getInstance(String type);
+    /**
+     * Returns an instance of the given type.
+     */
+    public GraphNode getInstance( String type );
 
-    /** Returns an implementation class for the given GraphNode. */
-    public String getType(GraphNode node);
+    /**
+     * Returns an implementation class for the given GraphNode.
+     */
+    public String getType( GraphNode node );
 }

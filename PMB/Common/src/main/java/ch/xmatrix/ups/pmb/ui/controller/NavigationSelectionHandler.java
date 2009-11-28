@@ -34,9 +34,9 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:48 $
  */
-public class NavigationSelectionHandler implements TreeSelectionListener {
-
-    private static final Logger LOG = Logger.getLogger(NavigationSelectionHandler.class);
+public class NavigationSelectionHandler implements TreeSelectionListener
+{
+    private static final Logger LOG = Logger.getLogger( NavigationSelectionHandler.class );
 
     private final ViewerPanel panel;
 
@@ -44,53 +44,64 @@ public class NavigationSelectionHandler implements TreeSelectionListener {
 
     private final PMBController controller;
 
-    public NavigationSelectionHandler(final ViewerPanel panel, final PMBModel model, final PMBController controller) {
+    public NavigationSelectionHandler( final ViewerPanel panel, final PMBModel model, final PMBController controller )
+    {
         this.panel = panel;
         this.model = model;
         this.controller = controller;
     }
 
-    public void valueChanged(final TreeSelectionEvent e) {
+    public void valueChanged( final TreeSelectionEvent e )
+    {
         final JTree navigation = (JTree) e.getSource();
         final TreePath selectionPath = navigation.getSelectionPath();
-        if (selectionPath != null) {
+        if ( selectionPath != null )
+        {
             final TreePath oldSelection = e.getOldLeadSelectionPath();
             // Make sure old expanded sister path is collapsed
-            PMBController.collapseSisterNode(oldSelection, selectionPath, navigation); // TODO: Move to Utils
+            PMBController.collapseSisterNode( oldSelection, selectionPath, navigation ); // TODO: Move to Utils
             final Entry entry = (Entry) selectionPath.getLastPathComponent();
             final FileEntry def = entry.getDefault();
-            final FileEntry fileEntry = model.getHierarchicalMapping().get(entry);
-            if (fileEntry != null) {
-                controller.setCurrentPicture(fileEntry, panel);
-                controller.showMessage(fileEntry.getPath());
-                if (def != null) {
-                    controller.showError("Kein Default", "Default gesetzt aber nicht verwendet!");
-                    LOG.warn("Unused default picture \"" + def + "\" for \"" + fileEntry + "\"");
+            final FileEntry fileEntry = model.getHierarchicalMapping().get( entry );
+            if ( fileEntry != null )
+            {
+                controller.setCurrentPicture( fileEntry, panel );
+                controller.showMessage( fileEntry.getPath() );
+                if ( def != null )
+                {
+                    controller.showError( "Kein Default", "Default gesetzt aber nicht verwendet!" );
+                    LOG.warn( "Unused default picture \"" + def + "\" for \"" + fileEntry + "\"" );
                 }
-            } else if (def != null) {
-                // Construct a new TreePath for the default
-                final TreePath path = getTreePathForFileEntry(def, navigation);
-                navigation.setSelectionPath(path);
-                controller.setCurrentPicture(def, panel);
-                controller.showMessage("Verwende Default " + def.getPath());
-            } else {
-                controller.setCurrentPicture((FileEntry) null, panel);
-                controller.showMessage("Kein Default gefunden für " + selectionPath);
-                LOG.warn("Default not found for \"" + fileEntry + "\"");
             }
-            PMBController.expandIfNotEmpty(navigation.getSelectionPath(), navigation);
+            else if ( def != null )
+            {
+                // Construct a new TreePath for the default
+                final TreePath path = getTreePathForFileEntry( def, navigation );
+                navigation.setSelectionPath( path );
+                controller.setCurrentPicture( def, panel );
+                controller.showMessage( "Verwende Default " + def.getPath() );
+            }
+            else
+            {
+                controller.setCurrentPicture( (FileEntry) null, panel );
+                controller.showMessage( "Kein Default gefunden für " + selectionPath );
+                LOG.warn( "Default not found for \"" + fileEntry + "\"" );
+            }
+            PMBController.expandIfNotEmpty( navigation.getSelectionPath(), navigation );
         }
     }
 
-    private static TreePath getTreePathForFileEntry(final FileEntry fileEntry, final JTree navigation) {
+    private static TreePath getTreePathForFileEntry( final FileEntry fileEntry, final JTree navigation )
+    {
         final List<Object> pathEntries = new ArrayList<Object>();
         Entry parent = fileEntry.getParent();
-        while (parent != null) {
-            pathEntries.add(0, parent);
+        while ( parent != null )
+        {
+            pathEntries.add( 0, parent );
             parent = parent.getParent();
         }
-        pathEntries.add(0, navigation.getModel().getRoot());
+        pathEntries.add( 0, navigation.getModel().getRoot() );
         final Object[] pathObjects = pathEntries.toArray();
-        return new TreePath(pathObjects);
+        return new TreePath( pathObjects );
     }
 }

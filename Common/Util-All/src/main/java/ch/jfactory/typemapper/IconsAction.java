@@ -42,42 +42,41 @@ import org.pietschy.command.CommandManager;
  */
 public class IconsAction extends ActionCommand
 {
-
     private static final FileUtils.StringFilter FILTER = new Filter();
 
     private I15nComponentDialog dialog;
 
-    private BufferedValueModel model;
+    private final BufferedValueModel model;
 
     private ImagesPanel panel;
 
     private JScrollPane pane;
 
-    private Trigger trigger;
+    private final Trigger trigger;
 
-    public IconsAction(final CommandManager commandManager, final PresentationModel model)
+    public IconsAction( final CommandManager commandManager, final PresentationModel model )
     {
-        super(commandManager, Commands.COMMANDID_EDITICONS);
+        super( commandManager, Commands.COMMANDID_EDITICONS );
         trigger = new Trigger();
-        this.model = new BufferedValueModel(model.getBufferedModel(TypeMapping.PROPERTYNAME_ICON), trigger);
+        this.model = new BufferedValueModel( model.getBufferedModel( TypeMapping.PROPERTYNAME_ICON ), trigger );
     }
 
     protected void handleExecute()
     {
         try
         {
-            if (dialog == null)
+            if ( dialog == null )
             {
-                final Collection icons = FileUtils.getFilesFromClasspath(FILTER);
-                panel = ImagesPanel.createImagesPanel(icons, 30, 30, true);
-                pane = new JScrollPane(panel);
-                pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-                panel.setScroller(pane);
-                dialog = new IconsDialog(panel);
+                final Collection icons = FileUtils.getFilesFromClasspath( FILTER );
+                panel = ImagesPanel.createImagesPanel( icons, 30, 30, true );
+                pane = new JScrollPane( panel );
+                pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+                panel.setScroller( pane );
+                dialog = new IconsDialog( panel );
             }
-            dialog.setVisible(true);
+            dialog.setVisible( true );
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
             e.printStackTrace();
         }
@@ -85,33 +84,31 @@ public class IconsAction extends ActionCommand
 
     private static class Filter implements FileUtils.StringFilter
     {
+        private static final String[] extentions = new String[]{".jpg", ".gif", ".png", ".bmp"};
 
-        private static String[] extentions = new String[]{".jpg", ".gif", ".png", ".bmp"};
-
-        public boolean accept(final String file)
+        public boolean accept( final String file )
         {
-            boolean result = new File(file).isDirectory();
-            for (String extention : extentions)
+            boolean result = new File( file ).isDirectory();
+            for ( final String extention : extentions )
             {
-                result |= file.endsWith(extention);
+                result |= file.endsWith( extention );
             }
-            final ImageIcon icon = new ImageIcon(file);
+            final ImageIcon icon = new ImageIcon( file );
             return result && icon.getIconHeight() == icon.getIconHeight();
         }
     }
 
     private class IconsDialog extends I15nComponentDialog
     {
-
-        public IconsDialog(final ImagesPanel panel)
+        public IconsDialog( final ImagesPanel panel )
         {
-            super((JFrame) null, "type.icons");
-            panel.getModel().addPropertyChangeListener(ImagesPanel.SelectionModel.PROPERTYNAME_SELECTED, new Handler());
+            super( (JFrame) null, "type.icons" );
+            panel.getModel().addPropertyChangeListener( ImagesPanel.SelectionModel.PROPERTYNAME_SELECTED, new Handler() );
         }
 
         protected void onApply() throws ComponentDialogException
         {
-            model.setValue(panel.getModel().getSelected().getIconPath());
+            model.setValue( panel.getModel().getSelected().getIconPath() );
             trigger.triggerCommit();
         }
 
@@ -127,10 +124,9 @@ public class IconsAction extends ActionCommand
 
         private class Handler implements PropertyChangeListener
         {
-
-            public void propertyChange(final PropertyChangeEvent evt)
+            public void propertyChange( final PropertyChangeEvent evt )
             {
-                enableApply(evt.getNewValue() != null);
+                enableApply( evt.getNewValue() != null );
             }
         }
     }

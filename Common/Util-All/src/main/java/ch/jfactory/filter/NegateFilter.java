@@ -64,23 +64,22 @@ package ch.jfactory.filter;
  */
 public final class NegateFilter extends AbstractFilter
 {
-
     // Underlying filter.
-    private Filter filter;
+    private final Filter filter;
 
     /**
      * Match if the supplied filter <b>does not</b> match.
      *
      * @param filter filter to use.
      */
-    public NegateFilter(final Filter filter)
+    public NegateFilter( final Filter filter )
     {
         this.filter = filter;
     }
 
-    public boolean matches(final Object obj)
+    public boolean matches( final Object obj )
     {
-        return !filter.matches(obj);
+        return !filter.matches( obj );
     }
 
     public Filter negate()
@@ -88,16 +87,16 @@ public final class NegateFilter extends AbstractFilter
         return filter;
     }
 
-    public boolean equals(final Object obj)
+    public boolean equals( final Object obj )
     {
-        if (this == obj)
+        if ( this == obj )
         {
             return true;
         }
 
-        if (obj instanceof NegateFilter)
+        if ( obj instanceof NegateFilter )
         {
-            return filter.equals(((NegateFilter) obj).filter);
+            return filter.equals( ( (NegateFilter) obj ).filter );
         }
         return false;
     }
@@ -109,10 +108,10 @@ public final class NegateFilter extends AbstractFilter
 
     public String toString()
     {
-        return new StringBuffer(64)
-                .append("[NegateFilter: ")
-                .append(filter.toString())
-                .append("]")
+        return new StringBuffer( 64 )
+                .append( "[NegateFilter: " )
+                .append( filter.toString() )
+                .append( "]" )
                 .toString();
     }
 }

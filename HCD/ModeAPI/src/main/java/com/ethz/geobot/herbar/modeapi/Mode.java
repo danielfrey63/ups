@@ -10,8 +10,8 @@ import java.util.Set;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public interface Mode {
-
+public interface Mode
+{
     /**
      * property name of the mode
      */
@@ -80,7 +80,7 @@ public interface Mode {
      * @param name the name of the property
      * @return the value of the property
      */
-    Object getProperty(String name);
+    Object getProperty( String name );
 
     /**
      * set a property value
@@ -88,7 +88,7 @@ public interface Mode {
      * @param name  the name of the property
      * @param value the value of the property
      */
-    void setProperty(String name, Object value);
+    void setProperty( String name, Object value );
 
     /**
      * Return a set of all names containing in the property list.
@@ -102,7 +102,7 @@ public interface Mode {
      *
      * @param context reference to the context object
      */
-    void init(HerbarContext context);
+    void init( HerbarContext context );
 
     /**
      * Is called before the application release the mode object.

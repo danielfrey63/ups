@@ -14,8 +14,8 @@ import javax.swing.KeyStroke;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class ActionAppHelp extends AbstractParametrizedAction {
-
+public class ActionAppHelp extends AbstractParametrizedAction
+{
     private static final String HELPSET = "hcdHelpMain/jhelpset.hs";
 
     /**
@@ -23,14 +23,16 @@ public class ActionAppHelp extends AbstractParametrizedAction {
      *
      * @param frame the main frame
      */
-    public ActionAppHelp(JFrame frame) {
-        super("MENU.ITEM.HELP", frame);
+    public ActionAppHelp( final JFrame frame )
+    {
+        super( "MENU.ITEM.HELP", frame );
 
         // overwrite default
-        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        putValue( Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke( KeyEvent.VK_F1, 0 ) );
     }
 
-    public void actionPerformed(ActionEvent parm1) {
-        new HelpViewer(parent.getRootPane(), HELPSET);
+    public void actionPerformed( final ActionEvent parm1 )
+    {
+        new HelpViewer( parent.getRootPane(), HELPSET );
     }
 }

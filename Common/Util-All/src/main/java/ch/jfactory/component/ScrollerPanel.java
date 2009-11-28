@@ -26,11 +26,11 @@ import org.apache.log4j.Logger;
  */
 public class ScrollerPanel extends JPanel
 {
-    private final static Logger LOGGER = Logger.getLogger(ScrollerPanel.class);
+    private final static Logger LOGGER = Logger.getLogger( ScrollerPanel.class );
 
-    protected JButton btnPrev = new BasicArrowButton(BasicArrowButton.WEST);
+    protected JButton btnPrev = new BasicArrowButton( BasicArrowButton.WEST );
 
-    protected JButton btnNext = new BasicArrowButton(BasicArrowButton.EAST);
+    protected JButton btnNext = new BasicArrowButton( BasicArrowButton.EAST );
 
     private ScrollerLayout layout;
 
@@ -41,49 +41,51 @@ public class ScrollerPanel extends JPanel
 
     private void initGUI()
     {
-        this.setLayout(layout = new ScrollerLayout(this));
-        btnPrev.setFocusPainted(false);
-        btnNext.setFocusPainted(false);
+        this.setLayout( layout = new ScrollerLayout( this ) );
+        btnPrev.setFocusPainted( false );
+        btnNext.setFocusPainted( false );
         addButtons();
         addActionListeners();
     }
 
-    public Component add(final Component c)
+    public Component add( final Component c )
     {
-        return super.add(c);
+        return super.add( c );
     }
 
     private void addButtons()
     {
-        LOGGER.debug("addButtons()");
-        add(btnPrev, ScrollerLayout.PREVSCROLLER);
-        add(btnNext, ScrollerLayout.NEXTSCROLLER);
+        LOGGER.debug( "addButtons()" );
+        add( btnPrev, ScrollerLayout.PREVSCROLLER );
+        add( btnNext, ScrollerLayout.NEXTSCROLLER );
     }
 
     private void addActionListeners()
     {
-        btnNext.addActionListener(new ActionListener()
+        btnNext.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                LOGGER.debug("actionPerformed(" + e + ")");
+                LOGGER.debug( "actionPerformed(" + e + ")" );
                 layout.incStart();
             }
-        });
-        btnPrev.addActionListener(new ActionListener()
+        } );
+        btnPrev.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                LOGGER.debug("actionPerformed(" + e + ")");
+                LOGGER.debug( "actionPerformed(" + e + ")" );
                 layout.decStart();
             }
-        });
+        } );
     }
 
-    /** remove all components from the scrollable section of the panel */
+    /**
+     * remove all components from the scrollable section of the panel
+     */
     public void removeAll()
     {
-        LOGGER.debug("removeAll()");
+        LOGGER.debug( "removeAll()" );
         super.removeAll();
         addButtons();
         repaint();

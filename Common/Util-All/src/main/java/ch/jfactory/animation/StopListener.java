@@ -25,6 +25,8 @@ package ch.jfactory.animation;
  */
 public interface StopListener
 {
-    /** Called when paintable stops its animation. */
+    /**
+     * Called when paintable stops its animation.
+     */
     void stopPerformed();
 }

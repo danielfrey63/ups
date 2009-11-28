@@ -27,11 +27,14 @@ import javax.swing.ImageIcon;
  */
 public interface SplashProvider
 {
-
-    /** Start the splash screen. Make sure this method does show the splash window. */
+    /**
+     * Start the splash screen. Make sure this method does show the splash window.
+     */
     void start();
 
-    /** Stop the splash screen. Make sure the window is displosed. */
+    /**
+     * Stop the splash screen. Make sure the window is displosed.
+     */
     void stop();
 
     /**
@@ -39,12 +42,12 @@ public interface SplashProvider
      *
      * @param dim the size to set
      */
-    void setSize(Dimension dim);
+    void setSize( Dimension dim );
 
     /**
      * Sets the backgournd image icon.
      *
      * @param backgroundImageIcon the icon to set
      */
-    void setBackgroundImage(ImageIcon backgroundImageIcon);
+    void setBackgroundImage( ImageIcon backgroundImageIcon );
 }

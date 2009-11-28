@@ -14,7 +14,6 @@ public interface Message
 
     public enum Type
     {
-
         FATAL, ERROR, WARN, INFO, VERBOSE, DEBUG
     }
 }

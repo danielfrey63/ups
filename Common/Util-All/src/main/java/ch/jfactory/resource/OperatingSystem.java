@@ -33,8 +33,7 @@ import org.apache.log4j.Logger;
  */
 public class OperatingSystem extends SystemUtils
 {
-
-    private static final Logger LOGGER = Logger.getLogger(OperatingSystem.class);
+    private static final Logger LOGGER = Logger.getLogger( OperatingSystem.class );
 
     public static Rectangle getScreenBounds()
     {
@@ -45,14 +44,14 @@ public class OperatingSystem extends SystemUtils
         final int w;
         final int h;
 
-        if (IS_OS_MAC_OSX)
+        if ( IS_OS_MAC_OSX )
         {
             x = 0;
             y = 22;
             w = screenX;
             h = screenY - y - 4;//shadow size
         }
-        else if (IS_OS_WINDOWS)
+        else if ( IS_OS_WINDOWS )
         {
             x = -4;
             y = -4;
@@ -67,20 +66,20 @@ public class OperatingSystem extends SystemUtils
             h = screenY;
         }
 
-        return new Rectangle(x, y, w, h);
+        return new Rectangle( x, y, w, h );
     }
 
     public static boolean isWebStartApplication()
     {
-        return System.getProperty("javawebstart.version") != null;
+        return System.getProperty( "javawebstart.version" ) != null;
     }
 
-    public static boolean isMinimalVersionRunning(final String minimal)
+    public static boolean isMinimalVersionRunning( final String minimal )
     {
-        final Version runningVersion = new Version(System.getProperty("java.version"));
-        final Version minimalVersion = new Version(minimal);
-        LOGGER.debug("found version \"" + runningVersion + "\", minimal is \"" + minimalVersion + "\"");
-        return runningVersion.compareTo(minimalVersion) >= 0;
+        final Version runningVersion = new Version( System.getProperty( "java.version" ) );
+        final Version minimalVersion = new Version( minimal );
+        LOGGER.debug( "found version \"" + runningVersion + "\", minimal is \"" + minimalVersion + "\"" );
+        return runningVersion.compareTo( minimalVersion ) >= 0;
 
     }
 }

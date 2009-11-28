@@ -18,36 +18,38 @@ import javax.swing.Timer;
  */
 public class TimerPanel extends JLabel implements ActionListener
 {
-    private Timer endTimer;
+    private final Timer endTimer;
 
-    private Timer countTimer;
+    private final Timer countTimer;
 
     private int count;
 
-    private int seconds;
+    private final int seconds;
 
-    private String zero;
+    private final String zero;
 
-    /** Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer. */
-    public TimerPanel(final int seconds, final ActionListener actionListener)
+    /**
+     * Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer.
+     */
+    public TimerPanel( final int seconds, final ActionListener actionListener )
     {
-        super("", JLabel.CENTER);
+        super( "", JLabel.CENTER );
         this.seconds = seconds;
-        zero = (seconds >= 3600) ? "00:00:00" : "00:00";
-        setText(zero);
-        setPreferredSize(getPreferredSize());
+        zero = ( seconds >= 3600 ) ? "00:00:00" : "00:00";
+        setText( zero );
+        setPreferredSize( getPreferredSize() );
         count = seconds;
-        endTimer = new Timer(1000 * seconds + 1, new ActionListener()
+        endTimer = new Timer( 1000 * seconds + 1, new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                actionListener.actionPerformed(e);
-                setText(zero);
+                actionListener.actionPerformed( e );
+                setText( zero );
                 stop();
             }
-        });
-        setText(getTimeString());
-        countTimer = new Timer(1000, this);
+        } );
+        setText( getTimeString() );
+        countTimer = new Timer( 1000, this );
     }
 
     /**
@@ -55,18 +57,18 @@ public class TimerPanel extends JLabel implements ActionListener
      *
      * @param evt The current event.
      */
-    public void actionPerformed(final ActionEvent evt)
+    public void actionPerformed( final ActionEvent evt )
     {
         count--;
         final String text = getTimeString();
-        setText(text);
+        setText( text );
     }
 
     private String getTimeString()
     {
-        final DecimalFormat f = new DecimalFormat("00");
-        String text = (seconds >= 3600) ? f.format(count / 3600) + ":" : "";
-        text += f.format((count - ((int) (count / 3600)) * 3600) / 60) + ":" + f.format(count % 60);
+        final DecimalFormat f = new DecimalFormat( "00" );
+        String text = ( seconds >= 3600 ) ? f.format( count / 3600 ) + ":" : "";
+        text += f.format( ( count - count / 3600 * 3600 ) / 60 ) + ":" + f.format( count % 60 );
         return text;
     }
 
@@ -85,34 +87,34 @@ public class TimerPanel extends JLabel implements ActionListener
     public void resetTime()
     {
         count = seconds;
-        setText(getTimeString());
+        setText( getTimeString() );
     }
 
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
         final JFrame f = new JFrame();
         final Container contentPane = f.getContentPane();
         final StatusBar statusBar = new StatusBar();
-        contentPane.setLayout(new java.awt.BorderLayout());
-        contentPane.add(statusBar, java.awt.BorderLayout.SOUTH);
-        final TimerPanel counter = new TimerPanel(61, new ActionListener()
+        contentPane.setLayout( new java.awt.BorderLayout() );
+        contentPane.add( statusBar, java.awt.BorderLayout.SOUTH );
+        final TimerPanel counter = new TimerPanel( 61, new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                System.out.println("stop");
+                System.out.println( "stop" );
             }
-        });
-        f.addWindowListener(new java.awt.event.WindowAdapter()
+        } );
+        f.addWindowListener( new java.awt.event.WindowAdapter()
         {
-            public void windowClosed(final WindowEvent e)
+            public void windowClosed( final WindowEvent e )
             {
                 counter.stop();
-                System.exit(0);
+                System.exit( 0 );
             }
-        });
-        statusBar.addStatusComponent(counter);
-        f.setSize(500, 300);
-        f.setVisible(true);
+        } );
+        statusBar.addStatusComponent( counter );
+        f.setSize( 500, 300 );
+        f.setVisible( true );
         counter.start();
     }
 }

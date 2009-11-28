@@ -28,15 +28,14 @@ import org.pietschy.command.ActionCommand;
  */
 public class CommandAction extends AbstractAction
 {
-
     private final ActionCommand command;
 
-    public CommandAction(final ActionCommand command)
+    public CommandAction( final ActionCommand command )
     {
         this.command = command;
     }
 
-    public void actionPerformed(final ActionEvent e)
+    public void actionPerformed( final ActionEvent e )
     {
         command.execute();
     }

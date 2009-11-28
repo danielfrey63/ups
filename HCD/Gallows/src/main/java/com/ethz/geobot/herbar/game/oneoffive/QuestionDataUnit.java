@@ -20,11 +20,13 @@ import java.util.List;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class QuestionDataUnit {
-
+public class QuestionDataUnit
+{
     private List taxItem;
+
     private int wrongTaxIndex;
-    private Taxon wrongTax;
+
+    private final Taxon wrongTax;
 
     /**
      * Constructor
@@ -32,9 +34,10 @@ public class QuestionDataUnit {
      * @param taxItem   contains the Taxa of this question
      * @param randomAdd defines the position of the wrong Taxon
      */
-    public QuestionDataUnit(List taxItem, int randomAdd) {
+    public QuestionDataUnit( final List taxItem, final int randomAdd )
+    {
         this.taxItem = taxItem;
-        wrongTax = (Taxon) taxItem.get(randomAdd);
+        wrongTax = (Taxon) taxItem.get( randomAdd );
     }
 
     /**
@@ -42,7 +45,8 @@ public class QuestionDataUnit {
      *
      * @return vector with 5 taxa
      */
-    public List getTaxItem() {
+    public List getTaxItem()
+    {
         return taxItem;
     }
 
@@ -51,19 +55,23 @@ public class QuestionDataUnit {
      *
      * @return position in vector
      */
-    public int getRandomAdd() {
+    public int getRandomAdd()
+    {
         return wrongTaxIndex;
     }
 
     /**
      * puts the wrong taxon to a new random position within the vector.
      */
-    public void randomize() {
-        Object[] taxArray = taxItem.toArray();
-        RandomUtils.randomize(taxArray);
-        taxItem = new ArrayList(Arrays.asList(taxArray));
-        for (int i = 0; i < taxItem.size(); i++) {
-            if ((Taxon) taxItem.get(i) == wrongTax) {
+    public void randomize()
+    {
+        final Object[] taxArray = taxItem.toArray();
+        RandomUtils.randomize( taxArray );
+        taxItem = new ArrayList( Arrays.asList( taxArray ) );
+        for ( int i = 0; i < taxItem.size(); i++ )
+        {
+            if ( taxItem.get( i ) == wrongTax )
+            {
                 wrongTaxIndex = i;
             }
         }

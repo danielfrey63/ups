@@ -31,71 +31,70 @@ import java.awt.image.Kernel;
  */
 public class DropShadowImage extends BufferedImage
 {
-
     public static int DEFAULT_DISTANCE = 1;
 
     public static int DEFAULT_SHADOW_SIZE = 4;
 
     protected float shadowOpacity = 0.5F;
 
-    protected Color shadowColor = new Color(0);
+    protected Color shadowColor = new Color( 0 );
 
     private int shadowSize = 0;
 
-    public DropShadowImage(final Image image)
+    public DropShadowImage( final Image image )
     {
-        this(image, DEFAULT_SHADOW_SIZE, DEFAULT_DISTANCE, DEFAULT_DISTANCE);
+        this( image, DEFAULT_SHADOW_SIZE, DEFAULT_DISTANCE, DEFAULT_DISTANCE );
     }
 
-    public DropShadowImage(final Image image, final int shadowSize, final int xDistance, final int yDistance)
+    public DropShadowImage( final Image image, final int shadowSize, final int xDistance, final int yDistance )
     {
-        super(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        super( image.getWidth( null ), image.getHeight( null ), BufferedImage.TYPE_INT_ARGB );
         this.shadowSize = shadowSize;
         final Graphics2D g = createGraphics();
-        g.drawImage(createDropShadow(image), xDistance, yDistance, null);
-        g.drawImage(image, 0, 0, null);
+        g.drawImage( createDropShadow( image ), xDistance, yDistance, null );
+        g.drawImage( image, 0, 0, null );
     }
 
-    private BufferedImage prepareImage(final Image image)
+    private BufferedImage prepareImage( final Image image )
     {
-        final BufferedImage subject = new BufferedImage(getWidth() + 2 * shadowSize, getHeight() + 2 * shadowSize, BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage subject = new BufferedImage( getWidth() + 2 * shadowSize, getHeight() + 2 * shadowSize, BufferedImage.TYPE_INT_ARGB );
         final Graphics2D g2 = subject.createGraphics();
-        g2.drawImage(image, shadowSize, shadowSize, null);
+        g2.drawImage( image, shadowSize, shadowSize, null );
         g2.dispose();
         return subject;
     }
 
-    private BufferedImage createDropShadow(final Image image)
+    private BufferedImage createDropShadow( final Image image )
     {
-        final BufferedImage subject = prepareImage(image);
-        final BufferedImage shadow = new BufferedImage(subject.getWidth(), subject.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        final BufferedImage shadowMask = createShadowMask(subject);
-        getLinearBlurOp(shadowSize).filter(shadowMask, shadow);
-        final BufferedImage result = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-        result.getGraphics().drawImage(shadow, -shadowSize, -shadowSize, null);
+        final BufferedImage subject = prepareImage( image );
+        final BufferedImage shadow = new BufferedImage( subject.getWidth(), subject.getHeight(), BufferedImage.TYPE_INT_ARGB );
+        final BufferedImage shadowMask = createShadowMask( subject );
+        getLinearBlurOp( shadowSize ).filter( shadowMask, shadow );
+        final BufferedImage result = new BufferedImage( getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB );
+        result.getGraphics().drawImage( shadow, -shadowSize, -shadowSize, null );
         return result;
     }
 
-    private BufferedImage createShadowMask(final BufferedImage image)
+    private BufferedImage createShadowMask( final BufferedImage image )
     {
-        final BufferedImage mask = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage mask = new BufferedImage( image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB );
         final Graphics2D g2d = mask.createGraphics();
-        g2d.drawImage(image, 0, 0, null);
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, shadowOpacity));
-        g2d.setColor(shadowColor);
-        g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+        g2d.drawImage( image, 0, 0, null );
+        g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC_IN, shadowOpacity ) );
+        g2d.setColor( shadowColor );
+        g2d.fillRect( 0, 0, image.getWidth(), image.getHeight() );
         g2d.dispose();
         return mask;
     }
 
-    private static ConvolveOp getLinearBlurOp(final int size)
+    private static ConvolveOp getLinearBlurOp( final int size )
     {
         final float[] data = new float[size * size];
-        final float value = 1.0F / (float) (size * size);
-        for (int i = 0; i < data.length; i++)
+        final float value = 1.0F / (float) ( size * size );
+        for ( int i = 0; i < data.length; i++ )
         {
             data[i] = value;
         }
-        return new ConvolveOp(new Kernel(size, size, data));
+        return new ConvolveOp( new Kernel( size, size, data ) );
     }
 }

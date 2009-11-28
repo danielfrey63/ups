@@ -12,49 +12,49 @@ import javax.swing.text.BadLocationException;
  */
 public class TreeFinderDocument extends AbstractPlainDocument
 {
-    private TreeFinderModel treeFinderModel;
+    private final TreeFinderModel treeFinderModel;
 
     /**
      * Constructor.
      *
      * @param treeFinderModel model to check for existing tree nodes
      */
-    public TreeFinderDocument(final TreeFinderModel treeFinderModel)
+    public TreeFinderDocument( final TreeFinderModel treeFinderModel )
     {
         this.treeFinderModel = treeFinderModel;
     }
 
-    protected boolean validate(final String newValue)
+    protected boolean validate( final String newValue )
     {
-        treeFinderModel.find(newValue);
+        treeFinderModel.find( newValue );
         return treeFinderModel.get() != null;
     }
 
     // TODO: replace by validate method
-    public void remove(final int offs, final int len) throws BadLocationException
+    public void remove( final int offs, final int len ) throws BadLocationException
     {
         final int length = getLength();
-        if (length == 0)
+        if ( length == 0 )
         {
             return;
         }
-        final String currentContent = getText(0, length);
+        final String currentContent = getText( 0, length );
         final StringBuffer buffer = new StringBuffer();
-        if (offs > 0)
+        if ( offs > 0 )
         {
-            buffer.append(currentContent.substring(0, offs));
+            buffer.append( currentContent.substring( 0, offs ) );
         }
-        if (offs + len < length)
+        if ( offs + len < length )
         {
-            buffer.append(currentContent.substring(offs + len));
+            buffer.append( currentContent.substring( offs + len ) );
         }
         final String newValue = buffer.toString();
-        treeFinderModel.find(newValue);
-        if (treeFinderModel.get() != null || len == length)
+        treeFinderModel.find( newValue );
+        if ( treeFinderModel.get() != null || len == length )
         {
-            super.remove(offs, len);
+            super.remove( offs, len );
         }
-        else if (newValue.length() > 0)
+        else if ( newValue.length() > 0 )
         {
             Toolkit.getDefaultToolkit().beep();
         }

@@ -21,39 +21,38 @@ import java.util.LinkedList;
  */
 public class WorkQueue
 {
-
     private final LinkedList queue;
 
     private boolean run = true;
 
-    public WorkQueue(final int nThreads)
+    public WorkQueue( final int nThreads )
     {
         queue = new LinkedList();
 
         final PoolWorker[] threads = new PoolWorker[nThreads];
 
-        for (int i = 0; i < nThreads; i++)
+        for ( int i = 0; i < nThreads; i++ )
         {
             threads[i] = new PoolWorker();
             threads[i].start();
-            threads[i].setPriority(Thread.MIN_PRIORITY);
+            threads[i].setPriority( Thread.MIN_PRIORITY );
         }
     }
 
-    public void execute(final Runnable r)
+    public void execute( final Runnable r )
     {
-        synchronized (queue)
+        synchronized ( queue )
         {
-            queue.addLast(r);
+            queue.addLast( r );
             queue.notify();
         }
     }
 
-    public void unexecute(final Runnable r)
+    public void unexecute( final Runnable r )
     {
-        synchronized (queue)
+        synchronized ( queue )
         {
-            queue.remove(r);
+            queue.remove( r );
             queue.notify();
         }
     }
@@ -65,22 +64,21 @@ public class WorkQueue
 
     private class PoolWorker extends Thread
     {
-
         public void run()
         {
             Runnable r;
 
-            while (run)
+            while ( run )
             {
-                synchronized (queue)
+                synchronized ( queue )
                 {
-                    while (queue.isEmpty())
+                    while ( queue.isEmpty() )
                     {
                         try
                         {
                             queue.wait();
                         }
-                        catch (InterruptedException ignored)
+                        catch ( InterruptedException ignored )
                         {
                         }
                     }
@@ -93,7 +91,7 @@ public class WorkQueue
                 {
                     r.run();
                 }
-                catch (RuntimeException e)
+                catch ( RuntimeException e )
                 {
                     e.printStackTrace();
                 }

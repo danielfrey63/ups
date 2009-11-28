@@ -13,19 +13,21 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public class DifferentRelevance extends AbsRelevance {
-
-    public DifferentRelevance() {
-        setName("different");
+public class DifferentRelevance extends AbsRelevance
+{
+    public DifferentRelevance()
+    {
+        setName( "different" );
     }
 
     /**
      * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue)
      */
-    public boolean isRelevant(Taxon[] taxa, MorValue val) {
-        int siblingsWithThisVal = getTaxa(taxa, val).length;
-        MorAttribute att = (MorAttribute) val.getParentAttribute();
-        int siblingsWithThisAtt = getTaxa(taxa, att).length;
+    public boolean isRelevant( final Taxon[] taxa, final MorValue val )
+    {
+        final int siblingsWithThisVal = getTaxa( taxa, val ).length;
+        final MorAttribute att = val.getParentAttribute();
+        final int siblingsWithThisAtt = getTaxa( taxa, att ).length;
         return siblingsWithThisVal > 1
                 && siblingsWithThisVal < taxa.length
                 && siblingsWithThisAtt == taxa.length;
@@ -34,8 +36,9 @@ public class DifferentRelevance extends AbsRelevance {
     /**
      * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue, RelevanceMetaData)
      */
-    public boolean isRelevant(Taxon[] taxa, MorValue value,
-                              RelevanceMetaData md) {
+    public boolean isRelevant( final Taxon[] taxa, final MorValue value,
+                               final RelevanceMetaData md )
+    {
         return md.siblingsWithThisValue > 1
                 && md.siblingsWithThisValue < taxa.length
                 && md.siblingsWithThisAttribute == taxa.length;

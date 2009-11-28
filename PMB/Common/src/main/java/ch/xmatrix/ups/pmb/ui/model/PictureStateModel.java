@@ -30,20 +30,25 @@ import static java.lang.Math.round;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:39 $
  */
-public class PictureStateModel {
-
+public class PictureStateModel
+{
     private final String picture;
 
     private Integer x1 = 0;
+
     private Integer x2 = 100;
+
     private Integer y1 = 0;
+
     private Integer y2 = 100;
 
-    public PictureStateModel(final String picture) {
+    public PictureStateModel( final String picture )
+    {
         this.picture = picture;
     }
 
-    public PictureStateModel(final PictureStateModel that) {
+    public PictureStateModel( final PictureStateModel that )
+    {
         this.picture = that.picture;
         this.x1 = that.x1;
         this.x2 = that.x2;
@@ -51,44 +56,54 @@ public class PictureStateModel {
         this.y2 = that.y2;
     }
 
-    public void setX1(final Double x1) {
-        this.x1 = (int) round(100 * x1);
+    public void setX1( final Double x1 )
+    {
+        this.x1 = (int) round( 100 * x1 );
     }
 
-    public Double getX1() {
+    public Double getX1()
+    {
         return x1 / 100d;
     }
 
-    public void setX2(final Double x2) {
-        this.x2 = (int) round(100 * x2);
+    public void setX2( final Double x2 )
+    {
+        this.x2 = (int) round( 100 * x2 );
     }
 
-    public Double getX2() {
+    public Double getX2()
+    {
         return x2 / 100d;
     }
 
-    public void setY1(final Double y1) {
-        this.y1 = (int) round(100 * y1);
+    public void setY1( final Double y1 )
+    {
+        this.y1 = (int) round( 100 * y1 );
     }
 
-    public Double getY1() {
+    public Double getY1()
+    {
         return y1 / 100d;
     }
 
-    public void setY2(final Double y2) {
-        this.y2 = (int) round(100 * y2);
+    public void setY2( final Double y2 )
+    {
+        this.y2 = (int) round( 100 * y2 );
     }
 
-    public Double getY2() {
+    public Double getY2()
+    {
         return y2 / 100d;
     }
 
-    public String getPicture() {
+    public String getPicture()
+    {
         return picture;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return x1 + " " + x2 + " " + y1 + " " + y2;
     }
 }

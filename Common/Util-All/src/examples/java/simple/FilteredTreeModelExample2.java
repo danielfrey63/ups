@@ -29,7 +29,6 @@ import javax.swing.tree.TreeModel;
  * @version $Revision: 1.1 $ $Date: 2006/08/29 13:10:43 $
  */
 public class FilteredTreeModelExample2 {
-
     public static void main(final String[] args) {
         final JTree tree = new JTree();
         tree.setRootVisible(true);

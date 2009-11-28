@@ -31,127 +31,126 @@ import org.pietschy.command.AbstractReflectionIconFactory;
  */
 public class SimpleIconFactory extends AbstractReflectionIconFactory
 {
-
     private String pathPrefix = "";
 
-    public SimpleIconFactory(final String pathPrefix)
+    public SimpleIconFactory( final String pathPrefix )
     {
         this.pathPrefix = pathPrefix;
     }
 
     // Images
 
-    public Image createDropShadowImage(final String iconString)
+    public Image createDropShadowImage( final String iconString )
     {
-        final Image image = getImage(iconString);
-        return new DropShadowImage(image);
+        final Image image = getImage( iconString );
+        return new DropShadowImage( image );
     }
 
-    public Image createDropShadowImage(final String iconString, final String colorString)
+    public Image createDropShadowImage( final String iconString, final String colorString )
     {
-        final Image colorized = createColorizedImage(iconString, colorString);
-        return new DropShadowImage(colorized);
+        final Image colorized = createColorizedImage( iconString, colorString );
+        return new DropShadowImage( colorized );
     }
 
-    public Image createDropShadowImage(final String iconString, final String colorString, final float factor)
+    public Image createDropShadowImage( final String iconString, final String colorString, final float factor )
     {
-        final Image colorized = createColorizedImage(iconString, colorString, factor);
-        return new DropShadowImage(colorized);
+        final Image colorized = createColorizedImage( iconString, colorString, factor );
+        return new DropShadowImage( colorized );
     }
 
-    public Image createPressedImage(final String iconString)
+    public Image createPressedImage( final String iconString )
     {
-        final Image image = getImage(iconString);
-        return new DropShadowImage(image, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1);
+        final Image image = getImage( iconString );
+        return new DropShadowImage( image, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1 );
     }
 
-    public Image createPressedImage(final String iconString, final String colorString)
+    public Image createPressedImage( final String iconString, final String colorString )
     {
-        final Image colorized = createColorizedImage(iconString, colorString);
-        return new DropShadowImage(colorized, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1);
+        final Image colorized = createColorizedImage( iconString, colorString );
+        return new DropShadowImage( colorized, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1 );
     }
 
-    public Image createPressedImage(final String iconString, final String colorString, final float factor)
+    public Image createPressedImage( final String iconString, final String colorString, final float factor )
     {
-        final Image colorized = createColorizedImage(iconString, colorString, factor);
-        return new DropShadowImage(colorized, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1);
+        final Image colorized = createColorizedImage( iconString, colorString, factor );
+        return new DropShadowImage( colorized, DropShadowImage.DEFAULT_SHADOW_SIZE, -1, -1 );
     }
 
-    public Image createColorizedImage(final String iconString, final String colorString)
+    public Image createColorizedImage( final String iconString, final String colorString )
     {
-        final Image image = getImage(iconString);
-        final Color color = ColorUtils.parseColor(colorString);
-        return ImageUtils.createColorizedImage(image, color);
+        final Image image = getImage( iconString );
+        final Color color = ColorUtils.parseColor( colorString );
+        return ImageUtils.createColorizedImage( image, color );
     }
 
-    public Image createColorizedImage(final String iconString, final String colorString, final float factor)
+    public Image createColorizedImage( final String iconString, final String colorString, final float factor )
     {
-        final Image image = getImage(iconString);
-        final Color color = ColorUtils.parseColor(colorString);
-        return ImageUtils.createColorizedImage(image, color, factor);
+        final Image image = getImage( iconString );
+        final Color color = ColorUtils.parseColor( colorString );
+        return ImageUtils.createColorizedImage( image, color, factor );
     }
 
-    public Image createColorizedImage(final String colorString, final int width, final int height)
+    public Image createColorizedImage( final String colorString, final int width, final int height )
     {
-        final Color color = ColorUtils.parseColor(colorString);
-        return ImageUtils.createColorizedImage(color, width, height);
+        final Color color = ColorUtils.parseColor( colorString );
+        return ImageUtils.createColorizedImage( color, width, height );
     }
 
     // Icons
 
-    public ImageIcon createDropShadowIcon(final String iconString)
+    public ImageIcon createDropShadowIcon( final String iconString )
     {
-        final Image drop = createDropShadowImage(iconString);
-        return new ImageIcon(drop);
+        final Image drop = createDropShadowImage( iconString );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createDropShadowIcon(final String iconString, final String colorString)
+    public ImageIcon createDropShadowIcon( final String iconString, final String colorString )
     {
-        final Image drop = createDropShadowImage(iconString, colorString);
-        return new ImageIcon(drop);
+        final Image drop = createDropShadowImage( iconString, colorString );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createDropShadowIcon(final String iconString, final String colorString, final String factor)
+    public ImageIcon createDropShadowIcon( final String iconString, final String colorString, final String factor )
     {
-        final float f = Float.parseFloat(factor);
-        final Image drop = createDropShadowImage(iconString, colorString, f);
-        return new ImageIcon(drop);
+        final float f = Float.parseFloat( factor );
+        final Image drop = createDropShadowImage( iconString, colorString, f );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createPressedIcon(final String iconString)
+    public ImageIcon createPressedIcon( final String iconString )
     {
-        final Image drop = createPressedImage(iconString);
-        return new ImageIcon(drop);
+        final Image drop = createPressedImage( iconString );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createPressedIcon(final String iconString, final String colorString)
+    public ImageIcon createPressedIcon( final String iconString, final String colorString )
     {
-        final Image drop = createPressedImage(iconString, colorString);
-        return new ImageIcon(drop);
+        final Image drop = createPressedImage( iconString, colorString );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createPressedIcon(final String iconString, final String colorString, final String factor)
+    public ImageIcon createPressedIcon( final String iconString, final String colorString, final String factor )
     {
-        final float f = Float.parseFloat(factor);
-        final Image drop = createPressedImage(iconString, colorString, f);
-        return new ImageIcon(drop);
+        final float f = Float.parseFloat( factor );
+        final Image drop = createPressedImage( iconString, colorString, f );
+        return new ImageIcon( drop );
     }
 
-    public ImageIcon createColorizedIcon(final String iconString, final String colorString)
+    public ImageIcon createColorizedIcon( final String iconString, final String colorString )
     {
-        final Image colorized = createColorizedImage(iconString, colorString);
-        return new ImageIcon(colorized);
+        final Image colorized = createColorizedImage( iconString, colorString );
+        return new ImageIcon( colorized );
     }
 
-    public ImageIcon getIcon(final String iconString)
+    public ImageIcon getIcon( final String iconString )
     {
-        return new ImageIcon(getImage(iconString));
+        return new ImageIcon( getImage( iconString ) );
     }
 
-    public Image getImage(final String iconString)
+    public Image getImage( final String iconString )
     {
         final String resourcePath;
-        if (iconString.startsWith("/"))
+        if ( iconString.startsWith( "/" ) )
         {
             resourcePath = iconString;
         }
@@ -159,12 +158,12 @@ public class SimpleIconFactory extends AbstractReflectionIconFactory
         {
             resourcePath = pathPrefix + "/" + iconString;
         }
-        final URL resource = SimpleIconFactory.class.getResource(resourcePath);
-        if (resource == null)
+        final URL resource = SimpleIconFactory.class.getResource( resourcePath );
+        if ( resource == null )
         {
-            throw new NullPointerException("icon could not be found at \"" + resourcePath + "\"");
+            throw new NullPointerException( "icon could not be found at \"" + resourcePath + "\"" );
         }
-        final ImageIcon icon = new ImageIcon(resource);
+        final ImageIcon icon = new ImageIcon( resource );
         return icon.getImage();
     }
 }

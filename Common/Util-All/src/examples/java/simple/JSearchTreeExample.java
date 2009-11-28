@@ -25,7 +25,6 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class JSearchTreeExample extends JFrame {
 
-
     public JSearchTreeExample() {
         DefaultMutableTreeNode rootNode = null;
         try {

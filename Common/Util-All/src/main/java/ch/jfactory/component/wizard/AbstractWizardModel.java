@@ -11,12 +11,15 @@ import java.util.Properties;
  */
 abstract public class AbstractWizardModel extends Model implements WizardModel
 {
+    /**
+     * Configuration.
+     */
+    private final Properties config;
 
-    /** Configuration. */
-    private Properties config;
-
-    /** Used to identify the wizard model per instance. */
-    private String name;
+    /**
+     * Used to identify the wizard model per instance.
+     */
+    private final String name;
 
     /**
      * Create a wizard model for modes.
@@ -24,7 +27,7 @@ abstract public class AbstractWizardModel extends Model implements WizardModel
      * @param config the configuration used in the mode
      * @param name   the name of the model
      */
-    public AbstractWizardModel(final Properties config, final String name)
+    public AbstractWizardModel( final Properties config, final String name )
     {
         this.config = config;
         this.name = name;

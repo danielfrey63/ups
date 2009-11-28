@@ -19,7 +19,7 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -27,155 +27,192 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class PropertyDisplayer extends NiceTabbedPane {
+public class PropertyDisplayer extends NiceTabbedPane
+{
+    private final static String STOP = Strings.getString( "LEVEL.STOPPER" );
 
-    private final static String STOP = Strings.getString("LEVEL.STOPPER");
     private final static int THEME_MORPHOLOGY = 0;
 
-    protected final static Category CAT = Category.getInstance(PropertyDisplayer.class);
+    protected final static Logger LOG = Logger.getLogger( PropertyDisplayer.class );
+
     protected final static DefaultMutableTreeNode ROOT_NODE = new DefaultMutableTreeNode();
 
-    private AttributeDisplayerModel model;
-    private MorphologyDisplayer morDisplayer;
-    private MedicineDisplayer medDisplayer;
-    private EcologyDisplayer ecoDisplayer;
+    private final AttributeDisplayerModel model;
+
+    private final MorphologyDisplayer morDisplayer;
+
+    private final MedicineDisplayer medDisplayer;
+
+    private final EcologyDisplayer ecoDisplayer;
 
     protected HerbarModel herbarModel;
 
     /**
      * Creates a new instance of PropertyDisplayer
      */
-    public PropertyDisplayer(HerbarModel herbarModel) {
+    public PropertyDisplayer( final HerbarModel herbarModel )
+    {
         this.herbarModel = herbarModel;
-        this.setTabPlacement(JTabbedPane.BOTTOM);
-        model = new AttributeDisplayerModel(herbarModel.getLevel(STOP));
-        morDisplayer = new MorphologyDisplayer(herbarModel, herbarModel.getLevel(STOP));
-        ecoDisplayer = new EcologyDisplayer(herbarModel, herbarModel.getLevel(STOP));
-        medDisplayer = new MedicineDisplayer(herbarModel, herbarModel.getLevel(STOP));
-        this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-        this.addTab(Strings.getString("PROPERTY.MORTEXT.TEXT"),
-                ImageLocator.getIcon(Strings.getString("PROPERTY.MORTEXT.ICON")), morDisplayer);
-        this.addTab(Strings.getString("PROPERTY.ECOTEXT.TEXT"),
-                ImageLocator.getIcon(Strings.getString("PROPERTY.ECOTEXT.ICON")), ecoDisplayer);
-        this.addTab(Strings.getString("PROPERTY.MEDTEXT.TEXT"),
-                ImageLocator.getIcon(Strings.getString("PROPERTY.MEDTEXT.ICON")), medDisplayer);
+        this.setTabPlacement( JTabbedPane.BOTTOM );
+        model = new AttributeDisplayerModel( herbarModel.getLevel( STOP ) );
+        morDisplayer = new MorphologyDisplayer( herbarModel, herbarModel.getLevel( STOP ) );
+        ecoDisplayer = new EcologyDisplayer( herbarModel, herbarModel.getLevel( STOP ) );
+        medDisplayer = new MedicineDisplayer( herbarModel, herbarModel.getLevel( STOP ) );
+        this.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
+        this.addTab( Strings.getString( "PROPERTY.MORTEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.MORTEXT.ICON" ) ), morDisplayer );
+        this.addTab( Strings.getString( "PROPERTY.ECOTEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.ECOTEXT.ICON" ) ), ecoDisplayer );
+        this.addTab( Strings.getString( "PROPERTY.MEDTEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.MEDTEXT.ICON" ) ), medDisplayer );
     }
 
-    public void setTaxFocus(Taxon focus) {
-        model.setTaxFocus(focus);
-        morDisplayer.setTaxonFocus(focus);
-        ecoDisplayer.setTaxonFocus(focus);
-        medDisplayer.setTaxonFocus(focus);
+    public void setTaxFocus( final Taxon focus )
+    {
+        model.setTaxFocus( focus );
+        morDisplayer.setTaxonFocus( focus );
+        ecoDisplayer.setTaxonFocus( focus );
+        medDisplayer.setTaxonFocus( focus );
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "" + hashCode();
     }
 
-    public void synchronizeTabs(JTabbedPane othertab) {
-        this.setSelectedIndex(othertab.getSelectedIndex());
+    public void synchronizeTabs( final JTabbedPane othertab )
+    {
+        this.setSelectedIndex( othertab.getSelectedIndex() );
     }
 
-    class AttributeDisplayerModel extends DefaultTreeModel {
-
+    class AttributeDisplayerModel extends DefaultTreeModel
+    {
         private int theme;
-        private List vLevels = new ArrayList();
-        private Level stopper;
 
-        public AttributeDisplayerModel(Level stopper) {
-            super(ROOT_NODE);
-            if (stopper == null) {
-                throw new RuntimeException("Stopper Level object " + STOP + " not found.");
+        private List vLevels = new ArrayList();
+
+        private final Level stopper;
+
+        public AttributeDisplayerModel( final Level stopper )
+        {
+            super( ROOT_NODE );
+            if ( stopper == null )
+            {
+                throw new RuntimeException( "Stopper Level object " + STOP + " not found." );
             }
             this.stopper = stopper;
         }
 
-        public void setAttributeTheme(int index) {
+        public void setAttributeTheme( final int index )
+        {
             this.theme = index;
         }
 
-        public void setTaxFocus(Taxon focus) {
-            CAT.info(this + " setTaxFocus(" + focus + ")");
-            if (theme == THEME_MORPHOLOGY) {
+        public void setTaxFocus( final Taxon focus )
+        {
+            LOG.info( this + " setTaxFocus(" + focus + ")" );
+            if ( theme == THEME_MORPHOLOGY )
+            {
                 Taxon taxon = focus;
                 Level level = focus.getLevel();
                 vLevels = new ArrayList();
-                Level root = herbarModel.getRootLevel();
-                if (stopper != null && stopper.isHigher(level)) {
-                    while (level != stopper && stopper != root && stopper != null && stopper.isHigher(level)) {
-                        vLevels.add(0, level);
+                final Level root = herbarModel.getRootLevel();
+                if ( stopper != null && stopper.isHigher( level ) )
+                {
+                    while ( level != stopper && stopper != root && stopper != null && stopper.isHigher( level ) )
+                    {
+                        vLevels.add( 0, level );
                         taxon = taxon.getParentTaxon();
                         level = taxon.getLevel();
                     }
                 }
-                else {
-                    vLevels.add(level);
+                else
+                {
+                    vLevels.add( level );
                 }
             }
-            fireTreeStructureChanged(this, getPathToRoot(ROOT_NODE), null, null);
+            fireTreeStructureChanged( this, getPathToRoot( ROOT_NODE ), null, null );
         }
 
-        public Object getChild(Object parent, int index) {
-            if (theme == THEME_MORPHOLOGY) {
-                if (parent instanceof Level) {
-                    Level level = (Level) parent;
+        public Object getChild( final Object parent, final int index )
+        {
+            if ( theme == THEME_MORPHOLOGY )
+            {
+                if ( parent instanceof Level )
+                {
+                    final Level level = (Level) parent;
                 }
-                else if (parent == ROOT_NODE) {
-                    return vLevels.get(index);
+                else if ( parent == ROOT_NODE )
+                {
+                    return vLevels.get( index );
                 }
             }
             return null;
         }
 
-        public int getChildCount(Object obj) {
-            if (CAT.isDebugEnabled()) {
-                CAT.debug(this + " getChildCound(" + obj + ")");
+        public int getChildCount( final Object obj )
+        {
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( this + " getChildCound(" + obj + ")" );
             }
             int ret = 0;
-            if (theme == THEME_MORPHOLOGY) {
-                if (obj == ROOT_NODE) {
+            if ( theme == THEME_MORPHOLOGY )
+            {
+                if ( obj == ROOT_NODE )
+                {
                     ret = vLevels.size();
                 }
-                else if (obj instanceof Level) {
+                else if ( obj instanceof Level )
+                {
                     ret = 0;
                 }
             }
-            CAT.debug(this + " return " + ret);
+            LOG.debug( this + " return " + ret );
             return ret;
         }
 
-        public int getIndexOfChild(Object parent, Object child) {
-            if (CAT.isDebugEnabled()) {
-                CAT.debug(this + " getIndexOfChild(" + parent + "," + child + ")");
+        public int getIndexOfChild( final Object parent, final Object child )
+        {
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( this + " getIndexOfChild(" + parent + "," + child + ")" );
             }
             int ret = 0;
-            if (theme == THEME_MORPHOLOGY) {
-                if (parent == ROOT_NODE) {
-                    ret = vLevels.lastIndexOf(child);
+            if ( theme == THEME_MORPHOLOGY )
+            {
+                if ( parent == ROOT_NODE )
+                {
+                    ret = vLevels.lastIndexOf( child );
                 }
-                throw new RuntimeException("Child " + child + " does not exist in parent " + parent);
+                throw new RuntimeException( "Child " + child + " does not exist in parent " + parent );
             }
             return ret;
         }
 
-        public Object getRoot() {
-            CAT.debug(this + " getRoot()");
+        public Object getRoot()
+        {
+            LOG.debug( this + " getRoot()" );
             Object ret = null;
-            if (theme == THEME_MORPHOLOGY) {
+            if ( theme == THEME_MORPHOLOGY )
+            {
                 ret = ROOT_NODE;
             }
             return ret;
         }
 
-        public boolean isLeaf(Object obj) {
-            boolean leaf = (getChildCount(obj) == 0);
-            if (CAT.isDebugEnabled()) {
-                CAT.debug(this + " isLeaf(" + obj + "): " + leaf);
+        public boolean isLeaf( final Object obj )
+        {
+            final boolean leaf = ( getChildCount( obj ) == 0 );
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( this + " isLeaf(" + obj + "): " + leaf );
             }
             return leaf;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return "" + this.hashCode();
         }
     }

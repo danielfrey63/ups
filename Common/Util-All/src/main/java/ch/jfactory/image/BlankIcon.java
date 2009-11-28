@@ -17,10 +17,10 @@ public class BlankIcon implements Icon
 
     public BlankIcon()
     {
-        this(null, 11);
+        this( null, 11 );
     }
 
-    public BlankIcon(final Color color, final int size)
+    public BlankIcon( final Color color, final int size )
     {
         //UIManager.getColor("control")
         //UIManager.getColor("controlShadow")
@@ -29,12 +29,12 @@ public class BlankIcon implements Icon
         this.size = size;
     }
 
-    public void paintIcon(final Component c, final Graphics g, final int x, final int y)
+    public void paintIcon( final Component c, final Graphics g, final int x, final int y )
     {
-        if (fillColor != null)
+        if ( fillColor != null )
         {
-            g.setColor(fillColor);
-            g.drawRect(x, y, size - 1, size - 1);
+            g.setColor( fillColor );
+            g.drawRect( x, y, size - 1, size - 1 );
         }
     }
 

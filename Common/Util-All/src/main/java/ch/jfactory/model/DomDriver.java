@@ -40,17 +40,24 @@ import org.xml.sax.SAXException;
  */
 public class DomDriver implements HierarchicalStreamDriver
 {
-
-    /** The encoding to use for the xml interpretation. */
+    /**
+     * The encoding to use for the xml interpretation.
+     */
     private final String encoding;
 
-    /** The factory to create new dom document. */
+    /**
+     * The factory to create new dom document.
+     */
     private final DocumentBuilderFactory documentBuilderFactory;
 
-    /** The entity resolver. */
+    /**
+     * The entity resolver.
+     */
     private final EntityResolver entityResolver;
 
-    /** The default encoding. */
+    /**
+     * The default encoding.
+     */
     private static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
@@ -58,15 +65,17 @@ public class DomDriver implements HierarchicalStreamDriver
      *
      * @param encoding the encoding
      */
-    public DomDriver(final String encoding)
+    public DomDriver( final String encoding )
     {
-        this(encoding, null);
+        this( encoding, null );
     }
 
-    /** Creates a dom driver with default enconding (UTF-8) and no entity resolver. */
+    /**
+     * Creates a dom driver with default enconding (UTF-8) and no entity resolver.
+     */
     public DomDriver()
     {
-        this(DEFAULT_ENCODING, null);
+        this( DEFAULT_ENCODING, null );
     }
 
     /**
@@ -74,9 +83,9 @@ public class DomDriver implements HierarchicalStreamDriver
      *
      * @param entityResolver the resolver to set
      */
-    public DomDriver(final EntityResolver entityResolver)
+    public DomDriver( final EntityResolver entityResolver )
     {
-        this(DEFAULT_ENCODING, entityResolver);
+        this( DEFAULT_ENCODING, entityResolver );
     }
 
     /**
@@ -85,58 +94,58 @@ public class DomDriver implements HierarchicalStreamDriver
      * @param encoding       the encoding to set
      * @param entityResolver the resolver to set
      */
-    public DomDriver(final String encoding, final EntityResolver entityResolver)
+    public DomDriver( final String encoding, final EntityResolver entityResolver )
     {
         documentBuilderFactory = DocumentBuilderFactory.newInstance();
         this.encoding = encoding;
         this.entityResolver = entityResolver;
     }
 
-    public HierarchicalStreamReader createReader(final Reader xml)
+    public HierarchicalStreamReader createReader( final Reader xml )
     {
-        return createReader(new InputSource(xml));
+        return createReader( new InputSource( xml ) );
     }
 
-    public HierarchicalStreamReader createReader(final InputStream xml)
+    public HierarchicalStreamReader createReader( final InputStream xml )
     {
-        return createReader(new InputSource(xml));
+        return createReader( new InputSource( xml ) );
     }
 
-    private HierarchicalStreamReader createReader(final InputSource source)
+    private HierarchicalStreamReader createReader( final InputSource source )
     {
         try
         {
             final DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            documentBuilder.setEntityResolver(entityResolver);
-            source.setEncoding(encoding);
-            final Document document = documentBuilder.parse(source);
-            return new DomReader(document);
+            documentBuilder.setEntityResolver( entityResolver );
+            source.setEncoding( encoding );
+            final Document document = documentBuilder.parse( source );
+            return new DomReader( document );
         }
-        catch (FactoryConfigurationError e)
+        catch ( FactoryConfigurationError e )
         {
-            throw new StreamException(e);
+            throw new StreamException( e );
         }
-        catch (ParserConfigurationException e)
+        catch ( ParserConfigurationException e )
         {
-            throw new StreamException(e);
+            throw new StreamException( e );
         }
-        catch (SAXException e)
+        catch ( SAXException e )
         {
-            throw new StreamException(e);
+            throw new StreamException( e );
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
-            throw new StreamException(e);
+            throw new StreamException( e );
         }
     }
 
-    public HierarchicalStreamWriter createWriter(final Writer out)
+    public HierarchicalStreamWriter createWriter( final Writer out )
     {
-        return new PrettyPrintWriter(out);
+        return new PrettyPrintWriter( out );
     }
 
-    public HierarchicalStreamWriter createWriter(final OutputStream out)
+    public HierarchicalStreamWriter createWriter( final OutputStream out )
     {
-        return createWriter(new OutputStreamWriter(out));
+        return createWriter( new OutputStreamWriter( out ) );
     }
 }

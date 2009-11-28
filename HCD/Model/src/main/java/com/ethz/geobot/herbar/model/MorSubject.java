@@ -7,13 +7,12 @@ package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.model.graph.GraphNode;
 
-
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface MorSubject {
-
+public interface MorSubject
+{
     /**
      * Returns the id of this Taxon object, which should be unique in the current applications data model.
      *
@@ -50,7 +49,7 @@ public interface MorSubject {
      * @throws IndexOutOfBoundsException if accessing an MorAttribute object outside the MorAttribute objects
      *                                   available.
      */
-    public MorAttribute getAttribute(int index)
+    public MorAttribute getAttribute( int index )
             throws IndexOutOfBoundsException;
 
     /**
@@ -67,7 +66,7 @@ public interface MorSubject {
      * @return an MorSubject object.
      * @throws IndexOutOfBoundsException if accessing an MorSubject object outside the MorSubject objects available.
      */
-    public MorSubject getSubject(int index)
+    public MorSubject getSubject( int index )
             throws IndexOutOfBoundsException;
 
     /**

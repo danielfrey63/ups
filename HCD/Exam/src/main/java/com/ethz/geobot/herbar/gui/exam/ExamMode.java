@@ -18,13 +18,15 @@ import com.ethz.geobot.herbar.modeapi.ModeRegistration;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:13 $
  */
-public class ExamMode extends AbstractModeAdapter {
-
-    static {
-        ModeRegistration.register(new ExamMode());
+public class ExamMode extends AbstractModeAdapter
+{
+    static
+    {
+        ModeRegistration.register( new ExamMode() );
     }
 
-    public ExamMode() {
-        super(ExamPanel.class);
+    public ExamMode()
+    {
+        super( ExamPanel.class );
     }
 }

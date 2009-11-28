@@ -39,56 +39,55 @@ import javax.swing.border.LineBorder;
  */
 public class SelectableImagePanel extends ImagePanel
 {
-
     private String iconPath;
 
     private boolean selected;
 
-    private static final Color BACKGROUND_SELECTED = ColorUtils.fade(Color.ORANGE, 0.8);
+    private static final Color BACKGROUND_SELECTED = ColorUtils.fade( Color.ORANGE, 0.8 );
 
-    private static final Color BACKGROUND_DESELECTED = UIManager.getColor("Panel.background");
+    private static final Color BACKGROUND_DESELECTED = UIManager.getColor( "Panel.background" );
 
     private static final Border BORDER_SELECTED = new CompoundBorder(
-            new LineBorder(new Color(139, 0, 0), 1), new EmptyBorder(1, 1, 1, 1));
+            new LineBorder( new Color( 139, 0, 0 ), 1 ), new EmptyBorder( 1, 1, 1, 1 ) );
 
     private static final Border BORDER_DESELECTED = new CompoundBorder(
-            new LineBorder(new Color(139, 139, 139), 1), new EmptyBorder(1, 1, 1, 1));
+            new LineBorder( new Color( 139, 139, 139 ), 1 ), new EmptyBorder( 1, 1, 1, 1 ) );
 
     public SelectableImagePanel()
     {
-        super(null);
+        super( null );
     }
 
-    public SelectableImagePanel(final Image image)
+    public SelectableImagePanel( final Image image )
     {
-        super(image);
+        super( image );
     }
 
-    public SelectableImagePanel(final Image image, final int width, final int height)
+    public SelectableImagePanel( final Image image, final int width, final int height )
     {
-        super(image, true);
-        setSize(width, height);
-        init(iconPath);
+        super( image, true );
+        setSize( width, height );
+        init( iconPath );
     }
 
-    public SelectableImagePanel(final Image image, final boolean fill)
+    public SelectableImagePanel( final Image image, final boolean fill )
     {
-        super(image, fill);
-        init(iconPath);
+        super( image, fill );
+        init( iconPath );
     }
 
-    private void init(final String iconPath)
+    private void init( final String iconPath )
     {
         this.iconPath = iconPath;
-        this.setPreferredSize(new Dimension(getImage().getWidth(null), getImage().getHeight(null)));
-        setSelected(false);
+        this.setPreferredSize( new Dimension( getImage().getWidth( null ), getImage().getHeight( null ) ) );
+        setSelected( false );
     }
 
-    public void setSelected(final boolean selected)
+    public void setSelected( final boolean selected )
     {
         this.selected = selected;
-        setBorder(selected ? BORDER_SELECTED : BORDER_DESELECTED);
-        setBackground(selected ? BACKGROUND_SELECTED : BACKGROUND_DESELECTED);
+        setBorder( selected ? BORDER_SELECTED : BORDER_DESELECTED );
+        setBackground( selected ? BACKGROUND_SELECTED : BACKGROUND_DESELECTED );
     }
 
     public boolean isSelected()
@@ -112,24 +111,24 @@ public class SelectableImagePanel extends ImagePanel
         return iconPath;
     }
 
-    public static void main(final String[] args) throws IOException
+    public static void main( final String[] args ) throws IOException
     {
         final JFrame f = new JFrame();
         final String path = "E:/Beispiel-gross.jpg";
-        final Image image = ImageUtils.createImage(path);
-        final SelectableImagePanel panelSelectable = new SelectableImagePanel(image, true);
-        panelSelectable.addMouseListener(new MouseAdapter()
+        final Image image = ImageUtils.createImage( path );
+        final SelectableImagePanel panelSelectable = new SelectableImagePanel( image, true );
+        panelSelectable.addMouseListener( new MouseAdapter()
         {
             @Override
-            public void mouseClicked(final MouseEvent e)
+            public void mouseClicked( final MouseEvent e )
             {
-                panelSelectable.setSelected(!panelSelectable.isSelected());
+                panelSelectable.setSelected( !panelSelectable.isSelected() );
             }
-        });
-        f.getRootPane().setBorder(new EmptyBorder(10, 10, 10, 10));
-        f.add(panelSelectable, BorderLayout.CENTER);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(400, 400);
-        f.setVisible(true);
+        } );
+        f.getRootPane().setBorder( new EmptyBorder( 10, 10, 10, 10 ) );
+        f.add( panelSelectable, BorderLayout.CENTER );
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        f.setSize( 400, 400 );
+        f.setVisible( true );
     }
 }

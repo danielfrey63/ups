@@ -16,39 +16,41 @@ import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import org.apache.log4j.Category;
-
+import org.apache.log4j.Logger;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class TaxTreeCellRenderer extends DefaultTreeCellRenderer {
-
-    private static final Category cat = Category.getInstance(TaxTreeCellRenderer.class);
+public class TaxTreeCellRenderer extends DefaultTreeCellRenderer
+{
+    private static final Logger LOG = Logger.getLogger( TaxTreeCellRenderer.class );
 
     /**
      * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(JTree,Object,boolean,boolean,boolean,
-     *int,boolean)
+     *      int,boolean)
      */
-    public Component getTreeCellRendererComponent(JTree jt, Object objValue, boolean bSelected, boolean bExpanded,
-                                                  boolean bLeaf, int iRow, boolean bHasFocus) {
-
-        super.getTreeCellRendererComponent(jt, objValue, bSelected, bExpanded, bLeaf, iRow, bHasFocus);
+    public Component getTreeCellRendererComponent( final JTree jt, final Object objValue, final boolean bSelected, final boolean bExpanded,
+                                                   final boolean bLeaf, final int iRow, final boolean bHasFocus )
+    {
+        super.getTreeCellRendererComponent( jt, objValue, bSelected, bExpanded, bLeaf, iRow, bHasFocus );
         Taxon taxon = null;
-        if (objValue instanceof TaxonTreeNode) {
-            taxon = ((TaxonTreeNode) objValue).getTaxon();
-            setText(taxon.toString());
-            Level level = taxon.getLevel();
-            setIcon(ImageLocator.getIcon("icon" + (level == null ? "" : level.getName()) + ".gif"));
+        if ( objValue instanceof TaxonTreeNode )
+        {
+            taxon = ( (TaxonTreeNode) objValue ).getTaxon();
+            setText( taxon.toString() );
+            final Level level = taxon.getLevel();
+            setIcon( ImageLocator.getIcon( "icon" + ( level == null ? "" : level.getName() ) + ".gif" ) );
         }
-        else if (objValue instanceof DefaultMutableTreeNode) {
-            setText("");
+        else if ( objValue instanceof DefaultMutableTreeNode )
+        {
+            setText( "" );
         }
-        else {
-            cat.fatal("Node " + objValue.getClass().getName() + " not of expected type TaxonTreeNode");
+        else
+        {
+            LOG.fatal( "Node " + objValue.getClass().getName() + " not of expected type TaxonTreeNode" );
         }
-        setBackgroundNonSelectionColor(jt.getBackground());
+        setBackgroundNonSelectionColor( jt.getBackground() );
         revalidate();
         repaint();
         return this;

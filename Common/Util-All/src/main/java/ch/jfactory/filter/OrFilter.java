@@ -64,12 +64,15 @@ package ch.jfactory.filter;
  */
 public final class OrFilter extends AbstractFilter
 {
+    /**
+     * Filter for left side of logical <b>or</b>
+     */
+    private final Filter left;
 
-    /** Filter for left side of logical <b>or</b> */
-    private Filter left;
-
-    /** Filter for right side of logical <b>or</b> */
-    private Filter right;
+    /**
+     * Filter for right side of logical <b>or</b>
+     */
+    private final Filter right;
 
     /**
      * Match if either of the supplied filters.
@@ -78,33 +81,33 @@ public final class OrFilter extends AbstractFilter
      * @param right right side of logical <b>or</b>
      * @throws IllegalArgumentException if either supplied filter is null
      */
-    public OrFilter(final Filter left, final Filter right)
+    public OrFilter( final Filter left, final Filter right )
     {
-        if ((left == null) || (right == null))
+        if ( ( left == null ) || ( right == null ) )
         {
-            throw new IllegalArgumentException("null filter not allowed");
+            throw new IllegalArgumentException( "null filter not allowed" );
         }
         this.left = left;
         this.right = right;
     }
 
-    public boolean matches(final Object obj)
+    public boolean matches( final Object obj )
     {
-        return left.matches(obj) || right.matches(obj);
+        return left.matches( obj ) || right.matches( obj );
     }
 
-    public boolean equals(final Object obj)
+    public boolean equals( final Object obj )
     {
-        if (this == obj)
+        if ( this == obj )
         {
             return true;
         }
 
-        if (obj instanceof OrFilter)
+        if ( obj instanceof OrFilter )
         {
             final OrFilter filter = (OrFilter) obj;
-            if ((left.equals(filter.left) && right.equals(filter.right)) ||
-                    (left.equals(filter.right) && right.equals(filter.left)))
+            if ( ( left.equals( filter.left ) && right.equals( filter.right ) ) ||
+                    ( left.equals( filter.right ) && right.equals( filter.left ) ) )
             {
                 return true;
             }
@@ -114,18 +117,18 @@ public final class OrFilter extends AbstractFilter
 
     public int hashCode()
     {
-        return (31 * left.hashCode()) + right.hashCode();
+        return ( 31 * left.hashCode() ) + right.hashCode();
     }
 
     public String toString()
     {
-        return new StringBuffer(64)
-                .append("[OrFilter: ")
-                .append(left.toString())
-                .append(",\n")
-                .append("           ")
-                .append(right.toString())
-                .append("]")
+        return new StringBuffer( 64 )
+                .append( "[OrFilter: " )
+                .append( left.toString() )
+                .append( ",\n" )
+                .append( "           " )
+                .append( right.toString() )
+                .append( "]" )
                 .toString();
     }
 }

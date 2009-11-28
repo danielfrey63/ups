@@ -35,24 +35,33 @@ import org.apache.log4j.Logger;
  */
 public class Strings
 {
-
     public static final char MISSING_CHAR = '?';
 
-    private static final Logger LOGGER = Logger.getLogger(Strings.class);
+    private static final Logger LOGGER = Logger.getLogger( Strings.class );
 
-    /** Prefix and postfix for missing resource strings */
+    /**
+     * Prefix and postfix for missing resource strings
+     */
     private static final String MISSING = "!";
 
-    /** Used for logging missing Texts */
+    /**
+     * Used for logging missing Texts
+     */
     private static File logWriterFile = null;
 
-    /** Loaded ResourceBundle for default Locale */
-    private static ResourceBundle generalBundle = getRessource(null);
+    /**
+     * Loaded ResourceBundle for default Locale
+     */
+    private static ResourceBundle generalBundle = getRessource( null );
 
-    /** Table of ResourceBunlde's */
-    private static Map bundles = new HashMap();
+    /**
+     * Table of ResourceBunlde's
+     */
+    private static final Map bundles = new HashMap();
 
-    /** Caches Formats, for Messages. Only those are cached */
+    /**
+     * Caches Formats, for Messages. Only those are cached
+     */
     private static HashMap formats = new HashMap();
 
     /**
@@ -60,7 +69,7 @@ public class Strings
      *
      * @param r the ResourceBundle to be installed
      */
-    public static void setResourceBundle(final ResourceBundle r)
+    public static void setResourceBundle( final ResourceBundle r )
     {
         generalBundle = r;
         formats = new HashMap();
@@ -72,31 +81,31 @@ public class Strings
      * @param obj the key used for the bundle
      * @param r   the bundle
      */
-    public static void addResourceBundle(final Object obj, final ResourceBundle r)
+    public static void addResourceBundle( final Object obj, final ResourceBundle r )
     {
-        bundles.put(obj, r);
+        bundles.put( obj, r );
     }
 
-    public static char getChar(final char key)
+    public static char getChar( final char key )
     {
-        return getRessourceChar(generalBundle, "" + key);
+        return getRessourceChar( generalBundle, "" + key );
     }
 
-    public static char getChar(final String key)
+    public static char getChar( final String key )
     {
-        return getRessourceChar(generalBundle, key);
+        return getRessourceChar( generalBundle, key );
     }
 
-    public static char getChar(final Object obj, final char key)
+    public static char getChar( final Object obj, final char key )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getRessourceChar(res, "" + key);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getRessourceChar( res, "" + key );
     }
 
-    public static char getChar(final Object obj, final String key)
+    public static char getChar( final Object obj, final String key )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getRessourceChar(res, key);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getRessourceChar( res, key );
     }
 
     /**
@@ -105,9 +114,9 @@ public class Strings
      * @param key the message key
      * @return the message as a i18n string
      */
-    public static String getString(final String key)
+    public static String getString( final String key )
     {
-        return getString(generalBundle, key);
+        return getString( generalBundle, key );
     }
 
     /**
@@ -118,9 +127,9 @@ public class Strings
      * @param arg       argument for filling into the message
      * @return the message as a i18n string
      */
-    public static String getString(final String formatKey, final String arg)
+    public static String getString( final String formatKey, final String arg )
     {
-        return getString(generalBundle, formatKey, new Object[]{arg});
+        return getString( generalBundle, formatKey, new Object[]{arg} );
     }
 
     /**
@@ -132,10 +141,10 @@ public class Strings
      * @param arg2      argument for filling into the message for second placeholder
      * @return the message as a i18n string
      */
-    public static String getString(final String formatKey, final String arg1, final String arg2)
+    public static String getString( final String formatKey, final String arg1, final String arg2 )
     {
-        return getString(generalBundle, formatKey,
-                new Object[]{arg1, arg2});
+        return getString( generalBundle, formatKey,
+                new Object[]{arg1, arg2} );
     }
 
     /**
@@ -146,9 +155,9 @@ public class Strings
      * @param args      arguments for filling into the message
      * @return the message as a i18n string
      */
-    public static String getString(final String formatKey, final Object[] args)
+    public static String getString( final String formatKey, final Object[] args )
     {
-        return getString(generalBundle, formatKey, args);
+        return getString( generalBundle, formatKey, args );
     }
 
     /**
@@ -158,10 +167,10 @@ public class Strings
      * @param key the message key
      * @return the message as a i18n string
      */
-    public static String getString(final Object obj, final String key)
+    public static String getString( final Object obj, final String key )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getString(res, key);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getString( res, key );
     }
 
     /**
@@ -172,10 +181,10 @@ public class Strings
      * @param arg       argument for filling into the message for first placeholder
      * @return the message as a i18n string
      */
-    public static String getString(final Object obj, final String formatKey, final String arg)
+    public static String getString( final Object obj, final String formatKey, final String arg )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getString(res, formatKey, new Object[]{arg});
+        final ResourceBundle res = getBundleForObject( obj );
+        return getString( res, formatKey, new Object[]{arg} );
     }
 
     /**
@@ -187,10 +196,10 @@ public class Strings
      * @param arg2      argument for filling into the message for second placeholder
      * @return the message as a i18n string
      */
-    public static String getString(final Object obj, final String formatKey, final Object arg1, final Object arg2)
+    public static String getString( final Object obj, final String formatKey, final Object arg1, final Object arg2 )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getString(res, formatKey, new Object[]{arg1, arg2});
+        final ResourceBundle res = getBundleForObject( obj );
+        return getString( res, formatKey, new Object[]{arg1, arg2} );
     }
 
     /**
@@ -202,10 +211,10 @@ public class Strings
      * @param args      arguments for filling into the message
      * @return the message as a i18n string
      */
-    public static String getString(final Object obj, final String formatKey, final Object[] args)
+    public static String getString( final Object obj, final String formatKey, final Object[] args )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getString(res, formatKey, args);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getString( res, formatKey, args );
     }
 
     /**
@@ -214,9 +223,9 @@ public class Strings
      * @param key the message key
      * @return the message as a i18n string
      */
-    public static String getSilentString(final String key)
+    public static String getSilentString( final String key )
     {
-        return getSilentString(generalBundle, key);
+        return getSilentString( generalBundle, key );
     }
 
     /**
@@ -227,9 +236,9 @@ public class Strings
      * @param arg       argument for filling into the message
      * @return the message as a i18n string
      */
-    public static String getSilentString(final String formatKey, final String arg)
+    public static String getSilentString( final String formatKey, final String arg )
     {
-        return getSilentString(generalBundle, formatKey, new Object[]{arg});
+        return getSilentString( generalBundle, formatKey, new Object[]{arg} );
     }
 
     /**
@@ -241,10 +250,10 @@ public class Strings
      * @param arg2      argument for filling into the message for second placeholder
      * @return the message as a i18n string
      */
-    public static String getSilentString(final String formatKey, final String arg1, final String arg2)
+    public static String getSilentString( final String formatKey, final String arg1, final String arg2 )
     {
-        return getSilentString(generalBundle, formatKey,
-                new Object[]{arg1, arg2});
+        return getSilentString( generalBundle, formatKey,
+                new Object[]{arg1, arg2} );
     }
 
     /**
@@ -255,9 +264,9 @@ public class Strings
      * @param args      arguments for filling into the message
      * @return the message as a i18n string
      */
-    public static String getSilentString(final String formatKey, final Object[] args)
+    public static String getSilentString( final String formatKey, final Object[] args )
     {
-        return getSilentString(generalBundle, formatKey, args);
+        return getSilentString( generalBundle, formatKey, args );
     }
 
     /**
@@ -267,10 +276,10 @@ public class Strings
      * @param key the message key
      * @return the message as a i18n string
      */
-    public static String getSilentString(final Object obj, final String key)
+    public static String getSilentString( final Object obj, final String key )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getSilentString(res, key);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getSilentString( res, key );
     }
 
     /**
@@ -282,10 +291,10 @@ public class Strings
      * @param arg2      argument for filling into the message for second placeholder
      * @return the message as a i18n string
      */
-    public static String getSilentString(final Object obj, final String formatKey, final Object arg1, final Object arg2)
+    public static String getSilentString( final Object obj, final String formatKey, final Object arg1, final Object arg2 )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getSilentString(res, formatKey, new Object[]{arg1, arg2});
+        final ResourceBundle res = getBundleForObject( obj );
+        return getSilentString( res, formatKey, new Object[]{arg1, arg2} );
     }
 
     /**
@@ -297,31 +306,31 @@ public class Strings
      * @param args      arguments for filling into the message
      * @return the message as a i18n string
      */
-    public static String getSilentString(final Object obj, final String formatKey, final Object[] args)
+    public static String getSilentString( final Object obj, final String formatKey, final Object[] args )
     {
-        final ResourceBundle res = getBundleForObject(obj);
-        return getSilentString(res, formatKey, args);
+        final ResourceBundle res = getBundleForObject( obj );
+        return getSilentString( res, formatKey, args );
     }
 
-    public static Color getColor(final String key)
+    public static Color getColor( final String key )
     {
-        final String value = getString(generalBundle, key);
-        if (value.startsWith("#"))
+        final String value = getString( generalBundle, key );
+        if ( value.startsWith( "#" ) )
         {
-            return Color.decode(value);
+            return Color.decode( value );
         }
         else
         {
             final Class clazz = Color.class;
             try
             {
-                final Object fieldValue = clazz.getField(value).get(null);
-                if (fieldValue instanceof Color)
+                final Object fieldValue = clazz.getField( value ).get( null );
+                if ( fieldValue instanceof Color )
                 {
                     return (Color) fieldValue;
                 }
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
                 return null;
             }
@@ -329,64 +338,64 @@ public class Strings
         return null;
     }
 
-    private static String getString(final ResourceBundle res, final String key)
+    private static String getString( final ResourceBundle res, final String key )
     {
-        String message = getRessourceString(res, key);
-        if (message == null)
+        String message = getRessourceString( res, key );
+        if ( message == null )
         {
-            message = getMissing(key);
+            message = getMissing( key );
         }
         return message;
     }
 
-    private static String getSilentString(final ResourceBundle res, final String key)
+    private static String getSilentString( final ResourceBundle res, final String key )
     {
-        String message = getSilentRessourceString(res, key);
-        if (message == null)
+        String message = getSilentRessourceString( res, key );
+        if ( message == null )
         {
-            message = getMissing(key);
+            message = getMissing( key );
         }
         return message;
     }
 
-    private static String getString(final ResourceBundle res, final String formatKey, final Object[] args)
+    private static String getString( final ResourceBundle res, final String formatKey, final Object[] args )
     {
         MessageFormat format = null;
-        synchronized (formats)
+        synchronized ( formats )
         {
-            format = (MessageFormat) formats.get(formatKey);
-            if (format == null)
+            format = (MessageFormat) formats.get( formatKey );
+            if ( format == null )
             {
-                String formatString = getRessourceString(res, formatKey);
-                if (formatString == null)
+                String formatString = getRessourceString( res, formatKey );
+                if ( formatString == null )
                 {
-                    formatString = getMissing(formatKey);
+                    formatString = getMissing( formatKey );
                 }
-                format = new MessageFormat(formatString);
-                formats.put(formatKey, format);
+                format = new MessageFormat( formatString );
+                formats.put( formatKey, format );
             }
         }
-        return (format.format(args));
+        return ( format.format( args ) );
     }
 
-    private static String getSilentString(final ResourceBundle res, final String formatKey, final Object[] args)
+    private static String getSilentString( final ResourceBundle res, final String formatKey, final Object[] args )
     {
         MessageFormat format = null;
-        synchronized (formats)
+        synchronized ( formats )
         {
-            format = (MessageFormat) formats.get(formatKey);
-            if (format == null)
+            format = (MessageFormat) formats.get( formatKey );
+            if ( format == null )
             {
-                String formatString = getSilentRessourceString(res, formatKey);
-                if (formatString == null)
+                String formatString = getSilentRessourceString( res, formatKey );
+                if ( formatString == null )
                 {
-                    formatString = getMissing(formatKey);
+                    formatString = getMissing( formatKey );
                 }
-                format = new MessageFormat(formatString);
-                formats.put(formatKey, format);
+                format = new MessageFormat( formatString );
+                formats.put( formatKey, format );
             }
         }
-        return (format.format(args));
+        return ( format.format( args ) );
     }
 
     /**
@@ -395,7 +404,7 @@ public class Strings
      * @param key the key wich is missing
      * @return a String representing the missing key
      */
-    private static String getMissing(final String key)
+    private static String getMissing( final String key )
     {
         return MISSING + key + MISSING;
     }
@@ -406,26 +415,26 @@ public class Strings
      * @param loc locale to get the ResourceBundle for (null = default locale)
      * @return java.util.ResourceBundle
      */
-    private static ResourceBundle getRessource(final Locale loc)
+    private static ResourceBundle getRessource( final Locale loc )
     {
         String resource = null;
         try
         {
-            resource = System.getProperty("jfactory.strings.resource", "com.ethz.geobot.herbar.gui.Strings");
+            resource = System.getProperty( "jfactory.strings.resource", "com.ethz.geobot.herbar.gui.Strings" );
 
-            if (loc == null)
+            if ( loc == null )
             {
-                return ResourceBundle.getBundle(resource);
+                return ResourceBundle.getBundle( resource );
             }
             else
             {
-                return ResourceBundle.getBundle(resource, loc);
+                return ResourceBundle.getBundle( resource, loc );
             }
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            LOGGER.error("trying to debug resource loading directly: " + Strings.class.getResource(resource + ".properties"));
-            LOGGER.error("could not find ressource: " + resource + (resource == null ? "" : ".properties"), e);
+            LOGGER.error( "trying to debug resource loading directly: " + Strings.class.getResource( resource + ".properties" ) );
+            LOGGER.error( "could not find ressource: " + resource + ( resource == null ? "" : ".properties" ), e );
         }
         return null;
     }
@@ -436,15 +445,15 @@ public class Strings
      * @param key the message key
      * @return the i18n-String or message
      */
-    private static String getRessourceString(final ResourceBundle res, final String key)
+    private static String getRessourceString( final ResourceBundle res, final String key )
     {
         try
         {
-            return res.getString(key.replace(' ', '_'));
+            return res.getString( key.replace( ' ', '_' ) );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            logMissing(key);
+            logMissing( key );
         }
         return null;
     }
@@ -455,9 +464,9 @@ public class Strings
      * @param key the message key
      * @return the i18n-String or message
      */
-    private static String getSilentRessourceString(final ResourceBundle res, final String key)
+    private static String getSilentRessourceString( final ResourceBundle res, final String key )
     {
-        return res.getString(key.replace(' ', '_'));
+        return res.getString( key.replace( ' ', '_' ) );
     }
 
     /**
@@ -466,19 +475,19 @@ public class Strings
      * @param key the char-key
      * @return the i18n-char
      */
-    private static char getRessourceChar(final ResourceBundle res, final String key)
+    private static char getRessourceChar( final ResourceBundle res, final String key )
     {
         try
         {
-            final String str = res.getString(key.replace(' ', '_'));
-            if ((str != null) && (str.length() > 0))
+            final String str = res.getString( key.replace( ' ', '_' ) );
+            if ( ( str != null ) && ( str.length() > 0 ) )
             {
-                return str.charAt(0);
+                return str.charAt( 0 );
             }
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            logMissing(key);
+            logMissing( key );
         }
         return MISSING_CHAR;
     }
@@ -489,21 +498,21 @@ public class Strings
      * @param key the key for which the resource was not found
      * @return whether the logging was successful
      */
-    private static boolean logMissing(final String key)
+    private static boolean logMissing( final String key )
     {
-        LOGGER.error("Could not find resource string for " + key);
-        if (getLogWriterFile() != null)
+        LOGGER.error( "Could not find resource string for " + key );
+        if ( getLogWriterFile() != null )
         {
             try
             {
-                final PrintWriter logWriterForMissing = new PrintWriter(new FileOutputStream(logWriterFile, true), true);
-                logWriterForMissing.println(key.replace(' ', '_') + "=" + key);
+                final PrintWriter logWriterForMissing = new PrintWriter( new FileOutputStream( logWriterFile, true ), true );
+                logWriterForMissing.println( key.replace( ' ', '_' ) + "=" + key );
                 logWriterForMissing.close();
                 return true;
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                LOGGER.error("Could not write log entry for missing text ");
+                LOGGER.error( "Could not write log entry for missing text " );
             }
         }
         return false;
@@ -516,37 +525,37 @@ public class Strings
      */
     private static File getLogWriterFile()
     {
-        if (logWriterFile == null)
+        if ( logWriterFile == null )
         {
-            final String fileName = System.getProperty("jfactory.strings.logmissing", null);
-            if (fileName != null)
+            final String fileName = System.getProperty( "jfactory.strings.logmissing", null );
+            if ( fileName != null )
             {
-                logWriterFile = new File(fileName);
+                logWriterFile = new File( fileName );
                 try
                 {
-                    if (logWriterFile.exists())
+                    if ( logWriterFile.exists() )
                     {
                         logWriterFile.delete();
                     }
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
-                    LOGGER.error("Could not delete LogWriterFile " + fileName);
+                    LOGGER.error( "Could not delete LogWriterFile " + fileName );
                 }
             }
         }
         return logWriterFile;
     }
 
-    private static ResourceBundle getBundleForObject(final Object obj)
+    private static ResourceBundle getBundleForObject( final Object obj )
     {
-        ResourceBundle res = (ResourceBundle) bundles.get(obj);
-        if (res == null)
+        ResourceBundle res = (ResourceBundle) bundles.get( obj );
+        if ( res == null )
         {
             res = generalBundle;
-            if (obj != null)
+            if ( obj != null )
             {
-                LOGGER.warn("No resource bundle for object: " + obj);
+                LOGGER.warn( "No resource bundle for object: " + obj );
             }
         }
         return res;

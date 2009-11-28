@@ -17,8 +17,8 @@ import java.awt.Graphics;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $  $Date: 2007/09/17 11:06:18 $
  */
-public class GalgenSchlinge extends GalgenPolygon {
-
+public class GalgenSchlinge extends GalgenPolygon
+{
     /**
      * Constructor for the GalgenSchlinge object
      *
@@ -32,28 +32,32 @@ public class GalgenSchlinge extends GalgenPolygon {
      * @param line       color of outline polygon
      * @param topVisible draw top-polygon
      */
-    public GalgenSchlinge(double[] baseX, double[] baseY, double[] topX,
-                          double[] topY, Color right, Color left, Color top, Color line,
-                          boolean topVisible) {
-        super(baseX, baseY, topX, topY, right, left, top, line, topVisible);
+    public GalgenSchlinge( final double[] baseX, final double[] baseY, final double[] topX,
+                           final double[] topY, final Color right, final Color left, final Color top, final Color line,
+                           final boolean topVisible )
+    {
+        super( baseX, baseY, topX, topY, right, left, top, line, topVisible );
     }
 
     /**
      * @see com.ethz.geobot.herbar.game.oneoffive.GalgenPolygon#paint(Graphics)
      */
-    public void paint(Graphics g) {
-        super.paint(g);
-        if (this.isVisible()) {
-            if (getCounter() == getInterval() + 1) {
-                g.setColor(Color.black);
-                g.drawArc(360, 175, 38, 70, 0, 360);
-                g.drawArc(359, 175, 38, 70, 0, 360);
-                g.setColor(getTop());
-                g.drawArc(358, 175, 38, 70, 0, 360);
-                g.drawArc(358, 174, 38, 70, 0, 360);
-                g.drawArc(357, 174, 38, 70, 0, 360);
-                g.setColor(getLine());
-                g.drawArc(357, 173, 38, 70, 0, 360);
+    public void paint( final Graphics g )
+    {
+        super.paint( g );
+        if ( this.isVisible() )
+        {
+            if ( getCounter() == getInterval() + 1 )
+            {
+                g.setColor( Color.black );
+                g.drawArc( 360, 175, 38, 70, 0, 360 );
+                g.drawArc( 359, 175, 38, 70, 0, 360 );
+                g.setColor( getTop() );
+                g.drawArc( 358, 175, 38, 70, 0, 360 );
+                g.drawArc( 358, 174, 38, 70, 0, 360 );
+                g.drawArc( 357, 174, 38, 70, 0, 360 );
+                g.setColor( getLine() );
+                g.drawArc( 357, 173, 38, 70, 0, 360 );
             }
         }
     }

@@ -14,9 +14,7 @@ package ch.jfactory.jar.sign;
  */
 public class JarSignerResources extends java.util.ListResourceBundle
 {
-
     private static final Object[][] contents = {
-
             // shared (from jarsigner)
             {" ", " "},
             {"  ", "  "},

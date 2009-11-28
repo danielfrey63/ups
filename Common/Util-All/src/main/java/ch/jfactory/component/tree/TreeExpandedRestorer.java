@@ -28,12 +28,15 @@ import javax.swing.tree.TreePath;
  */
 public class TreeExpandedRestorer
 {
+    /**
+     * Selections are stored with path information. If you plan to insert different nodes, you should use this option.
+     */
+    public static final SelectionType SELECTION_BY_PATH = new SelectionType( "SelectionByPath" );
 
-    /** Selections are stored with path information. If you plan to insert different nodes, you should use this option. */
-    public static final SelectionType SELECTION_BY_PATH = new SelectionType("SelectionByPath");
-
-    /** Selections are stored with row information. If you decide to delete nodes, you should select this option. */
-    public static final SelectionType SELECTION_BY_ROW = new SelectionType("SelectionByRow");
+    /**
+     * Selections are stored with row information. If you decide to delete nodes, you should select this option.
+     */
+    public static final SelectionType SELECTION_BY_ROW = new SelectionType( "SelectionByRow" );
 
     private List<TreePath> expandedPaths;
 
@@ -50,9 +53,9 @@ public class TreeExpandedRestorer
      *
      * @param tree the tree for which selection and expanstion state are saved
      */
-    public TreeExpandedRestorer(final JTree tree)
+    public TreeExpandedRestorer( final JTree tree )
     {
-        this(tree, false);
+        this( tree, false );
     }
 
     /**
@@ -61,10 +64,10 @@ public class TreeExpandedRestorer
      * @param tree           the tree for which selection and expanstion state are saved
      * @param clearSelection whether to discard selection
      */
-    public TreeExpandedRestorer(final JTree tree, final boolean clearSelection)
+    public TreeExpandedRestorer( final JTree tree, final boolean clearSelection )
     {
         this.tree = tree;
-        if (clearSelection)
+        if ( clearSelection )
         {
             clearSelection();
         }
@@ -75,20 +78,22 @@ public class TreeExpandedRestorer
      *
      * @param path the path to save the subtree of
      */
-    public void save(final TreePath path)
+    public void save( final TreePath path )
     {
         saveSelection();
-        saveExpandedState(path);
+        saveExpandedState( path );
     }
 
-    /** Saves selected node and all expanded paths. */
+    /**
+     * Saves selected node and all expanded paths.
+     */
     public void save()
     {
         saveSelection();
         final Object root = tree.getModel().getRoot();
-        if (root != null)
+        if ( root != null )
         {
-            saveExpandedState(new TreePath(root));
+            saveExpandedState( new TreePath( root ) );
         }
     }
 
@@ -99,38 +104,40 @@ public class TreeExpandedRestorer
      * @param old    the source tree path where the node was or is attached to
      * @param nw     the destination tree path where the node will be or is attached to
      */
-    public void update(final Object target, final TreePath old, final TreePath nw)
+    public void update( final Object target, final TreePath old, final TreePath nw )
     {
-        final TreePath[] tp = (TreePath[]) expandedPaths.toArray(new TreePath[expandedPaths.size()]);
-        for (int i = 0; i < tp.length; i++)
+        final TreePath[] tp = expandedPaths.toArray( new TreePath[expandedPaths.size()] );
+        for ( int i = 0; i < tp.length; i++ )
         {
             final Object[] objs = tp[i].getPath();
-            for (int j = 0; j < objs.length; j++)
+            for ( int j = 0; j < objs.length; j++ )
             {
-                if (objs[j] == target)
+                if ( objs[j] == target )
                 {
                     final Object[] newPath = new Object[objs.length - old.getPathCount() + nw.getPathCount()];
-                    System.arraycopy(nw.getPath(), 0, newPath, 0, nw.getPathCount());
-                    System.arraycopy(objs, j, newPath, nw.getPathCount(), objs.length - j);
-                    tp[i] = new TreePath(newPath);
+                    System.arraycopy( nw.getPath(), 0, newPath, 0, nw.getPathCount() );
+                    System.arraycopy( objs, j, newPath, nw.getPathCount(), objs.length - j );
+                    tp[i] = new TreePath( newPath );
                 }
             }
         }
     }
 
-    public void remove(final TreePath tp)
+    public void remove( final TreePath tp )
     {
-        for (Iterator<TreePath> iterator = expandedPaths.iterator(); iterator.hasNext();)
+        for ( Iterator<TreePath> iterator = expandedPaths.iterator(); iterator.hasNext(); )
         {
             final TreePath path = iterator.next();
-            if (tp.isDescendant(path))
+            if ( tp.isDescendant( path ) )
             {
                 iterator.remove();
             }
         }
     }
 
-    /** Expands all paths last saved and restores selected node. */
+    /**
+     * Expands all paths last saved and restores selected node.
+     */
     public void restore()
     {
         restoreExpandedState();
@@ -142,12 +149,12 @@ public class TreeExpandedRestorer
         selectionPaths = null;
     }
 
-    public void setSelection(final TreePath path)
+    public void setSelection( final TreePath path )
     {
         selectionPaths = new TreePath[]{path};
     }
 
-    public void addSelection(final TreePath path)
+    public void addSelection( final TreePath path )
     {
         final int length = selectionPaths.length;
         final TreePath[] newSelectionPaths = new TreePath[length + 1];
@@ -158,133 +165,132 @@ public class TreeExpandedRestorer
     public void restoreSelections()
     {
         final List<TreePath> correctedPaths = new ArrayList<TreePath>();
-        if (selectionPaths != null)
+        if ( selectionPaths != null )
         {
-
             // Translate selection paths if necessary
-            for (final TreePath path : selectionPaths)
+            for ( final TreePath path : selectionPaths )
             {
-                if (pathExists(path))
+                if ( pathExists( path ) )
                 {
-                    correctedPaths.add(path);
+                    correctedPaths.add( path );
                 }
-                else if (matchPath(path) != null)
+                else if ( matchPath( path ) != null )
                 {
-                    final TreePath matchedPath = matchPath(path);
-                    correctedPaths.add(matchedPath);
+                    final TreePath matchedPath = matchPath( path );
+                    correctedPaths.add( matchedPath );
                 }
             }
-            final TreePath[] paths = (TreePath[]) correctedPaths.toArray(new TreePath[correctedPaths.size()]);
-            tree.setSelectionPaths(paths);
+            final TreePath[] paths = correctedPaths.toArray( new TreePath[correctedPaths.size()] );
+            tree.setSelectionPaths( paths );
 
             // Mark lead selection path
-            if (pathExists(leadSelectionPath))
+            if ( pathExists( leadSelectionPath ) )
             {
-                tree.setLeadSelectionPath(leadSelectionPath);
+                tree.setLeadSelectionPath( leadSelectionPath );
             }
             else
             {
-                tree.setLeadSelectionPath(matchPath(leadSelectionPath));
+                tree.setLeadSelectionPath( matchPath( leadSelectionPath ) );
             }
 
             // Scroll visible rect so that the selected node is in the same line as before
             final Rectangle visibleRect = tree.getVisibleRect();
-            final Rectangle rect = tree.getPathBounds(tree.getLeadSelectionPath());
-            if (nodeBounds != null && rect != null)
+            final Rectangle rect = tree.getPathBounds( tree.getLeadSelectionPath() );
+            if ( nodeBounds != null && rect != null )
             {
-                visibleRect.translate(0, rect.y - nodeBounds.y);
-                tree.scrollRectToVisible(visibleRect);
+                visibleRect.translate( 0, rect.y - nodeBounds.y );
+                tree.scrollRectToVisible( visibleRect );
             }
         }
     }
 
     public void restoreExpandedState()
     {
-        for (int i = 0; expandedPaths != null && i < expandedPaths.size(); i++)
+        for ( int i = 0; expandedPaths != null && i < expandedPaths.size(); i++ )
         {
-            final TreePath path = expandedPaths.get(i);
+            final TreePath path = expandedPaths.get( i );
             final TreePath pathToExpand;
-            if (pathExists(path))
+            if ( pathExists( path ) )
             {
                 pathToExpand = path;
             }
             else
             {
-                pathToExpand = matchPath(path);
+                pathToExpand = matchPath( path );
             }
-            if (pathToExpand != null)
+            if ( pathToExpand != null )
             {
-                tree.expandPath(pathToExpand);
+                tree.expandPath( pathToExpand );
                 TreePath parent = pathToExpand.getParentPath();
-                while (parent != null && !tree.isExpanded(parent))
+                while ( parent != null && !tree.isExpanded( parent ) )
                 {
-                    tree.expandPath(parent);
+                    tree.expandPath( parent );
                     parent = parent.getParentPath();
                 }
             }
         }
     }
 
-    private TreePath matchPath(final TreePath oldPath)
+    private TreePath matchPath( final TreePath oldPath )
     {
         final Map<Object, TreePath> paths = new HashMap<Object, TreePath>();
         final Object root = tree.getModel().getRoot();
-        if (root != null)
+        if ( root != null )
         {
-            paths.put(root, new TreePath(root));
-            cachePaths(root, paths);
+            paths.put( root, new TreePath( root ) );
+            cachePaths( root, paths );
         }
-        return paths.get(oldPath.getLastPathComponent());
+        return paths.get( oldPath.getLastPathComponent() );
     }
 
-    private void cachePaths(final Object parent, final Map<Object, TreePath> paths)
+    private void cachePaths( final Object parent, final Map<Object, TreePath> paths )
     {
-        final TreePath path = paths.get(parent);
+        final TreePath path = paths.get( parent );
         final TreeModel model = tree.getModel();
-        for (int i = 0; i < model.getChildCount(parent); i++)
+        for ( int i = 0; i < model.getChildCount( parent ); i++ )
         {
-            final Object child = model.getChild(parent, i);
-            final TreePath childPath = path.pathByAddingChild(child);
-            paths.put(child, childPath);
-            cachePaths(child, paths);
+            final Object child = model.getChild( parent, i );
+            final TreePath childPath = path.pathByAddingChild( child );
+            paths.put( child, childPath );
+            cachePaths( child, paths );
         }
     }
 
-    private void saveExpandedState(final TreePath path)
+    private void saveExpandedState( final TreePath path )
     {
-        expandedPaths = TreeUtils.getExpandedPaths(tree, path);
+        expandedPaths = TreeUtils.getExpandedPaths( tree, path );
     }
 
     private void saveSelection()
     {
         selectionPaths = tree.getSelectionPaths();
         leadSelectionPath = tree.getLeadSelectionPath();
-        if (leadSelectionPath == null && selectionPaths != null)
+        if ( leadSelectionPath == null && selectionPaths != null )
         {
-            if (selectionPaths.length > 0)
+            if ( selectionPaths.length > 0 )
             {
                 leadSelectionPath = selectionPaths[0];
             }
         }
-        nodeBounds = tree.getPathBounds(leadSelectionPath);
+        nodeBounds = tree.getPathBounds( leadSelectionPath );
     }
 
-    private boolean pathExists(final TreePath path)
+    private boolean pathExists( final TreePath path )
     {
-        if (path == null)
+        if ( path == null )
         {
             return false;
         }
         final Object[] objects = path.getPath();
         Object node = tree.getModel().getRoot();
-        if (node != objects[0])
+        if ( node != objects[0] )
         {
             return false;
         }
-        for (int i = 1; i < objects.length; i++)
+        for ( int i = 1; i < objects.length; i++ )
         {
             final Object object = objects[i];
-            if (tree.getModel().getIndexOfChild(node, object) == -1)
+            if ( tree.getModel().getIndexOfChild( node, object ) == -1 )
             {
                 return false;
             }
@@ -295,10 +301,9 @@ public class TreeExpandedRestorer
 
     private static class SelectionType
     {
+        private final String type;
 
-        private String type;
-
-        private SelectionType(final String type)
+        private SelectionType( final String type )
         {
             this.type = type;
         }

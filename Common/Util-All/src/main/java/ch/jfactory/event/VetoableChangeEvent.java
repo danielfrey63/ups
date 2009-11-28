@@ -26,14 +26,13 @@ import javax.swing.event.ChangeEvent;
  */
 public class VetoableChangeEvent extends ChangeEvent
 {
+    private final Object newValue;
 
-    private Object newValue;
+    private final Object oldValue;
 
-    private Object oldValue;
-
-    public VetoableChangeEvent(final Object source, final Object oldValue, final Object newValue)
+    public VetoableChangeEvent( final Object source, final Object oldValue, final Object newValue )
     {
-        super(source);
+        super( source );
         this.oldValue = oldValue;
         this.newValue = newValue;
     }

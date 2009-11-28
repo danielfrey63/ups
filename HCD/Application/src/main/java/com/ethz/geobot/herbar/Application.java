@@ -16,7 +16,7 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Application class, defines all application level attributes. Implements the <b>Singleton</b> pattern.
@@ -24,16 +24,20 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class Application {
-
+public class Application
+{
     private static final String ROOT_NAME;
-    private static final Category cat;
+
+    private static final Logger LOG;
+
     private static final Application INSTANCE;
+
     private static final HerbarModel ROOT_MODEL;
 
     private HerbarModel model;
 
-    public static Application getInstance() {
+    public static Application getInstance()
+    {
         return INSTANCE;
     }
 
@@ -42,49 +46,62 @@ public class Application {
      *
      * @return the model
      */
-    public HerbarModel getModel() {
-        if (model == null) {
+    public HerbarModel getModel()
+    {
+        if ( model == null )
+        {
             // access data
-            String implClass = System.getProperty("herbar.model.impl");
-            cat.debug("init herbar model by classname " + implClass);
-            try {
-                Class<?> clazz = Class.forName(implClass);
+            final String implClass = System.getProperty( "herbar.model.impl" );
+            LOG.debug( "init herbar model by classname " + implClass );
+            try
+            {
+                final Class<?> clazz = Class.forName( implClass );
                 model = (HerbarModel) clazz.newInstance();
                 model.setReadOnly();
             }
-            catch (Exception ex) {
-                String message = "could not initiate model: " + implClass;
-                cat.fatal(message, ex);
-                throw new ApplicationRuntimeException(message);
+            catch ( Exception ex )
+            {
+                final String message = "could not initiate model: " + implClass;
+                LOG.fatal( message, ex );
+                throw new ApplicationRuntimeException( message );
             }
         }
         return model;
     }
 
-    public HerbarModel getModel(String name) throws FilterPersistentException {
-        if (ROOT_NAME.equals(name)) {
+    public HerbarModel getModel( final String name ) throws FilterPersistentException
+    {
+        if ( ROOT_NAME.equals( name ) )
+        {
             return getModel();
         }
-        else {
-            return FilterFactory.getInstance().getFilterModel(name);
+        else
+        {
+            return FilterFactory.getInstance().getFilterModel( name );
         }
     }
 
-    public void saveModel(HerbarModel model) throws FilterPersistentException {
-        if (model instanceof FilterModel) {
-            FilterFactory.getInstance().saveFilterModel((FilterModel) model);
+    public void saveModel( final HerbarModel model ) throws FilterPersistentException
+    {
+        if ( model instanceof FilterModel )
+        {
+            FilterFactory.getInstance().saveFilterModel( (FilterModel) model );
         }
-        else {
-            cat.warn("User want to save a model different tham a FilterModel class:" + model.getClass());
+        else
+        {
+            LOG.warn( "User want to save a model different tham a FilterModel class:" + model.getClass() );
         }
     }
 
-    public void removeModel(HerbarModel model) throws FilterPersistentException {
-        if (model instanceof FilterModel) {
-            FilterFactory.getInstance().removeFilterModel((FilterModel) model);
+    public void removeModel( final HerbarModel model ) throws FilterPersistentException
+    {
+        if ( model instanceof FilterModel )
+        {
+            FilterFactory.getInstance().removeFilterModel( (FilterModel) model );
         }
-        else {
-            cat.warn("User want to save a model different tham a FilterModel class:" + model.getClass());
+        else
+        {
+            LOG.warn( "User want to save a model different tham a FilterModel class:" + model.getClass() );
         }
     }
 
@@ -93,43 +110,49 @@ public class Application {
      *
      * @return a set of model names (String)
      */
-    public Set getModelNames() {
-        Set<String> names = new HashSet<String>();
-        names.add(ROOT_MODEL.getName());
-        names.addAll(FilterFactory.getInstance().getFilterNames());
+    public Set getModelNames()
+    {
+        final Set<String> names = new HashSet<String>();
+        names.add( ROOT_MODEL.getName() );
+        names.addAll( FilterFactory.getInstance().getFilterNames() );
         return names;
     }
 
-    public Set<? extends HerbarModel> getModels() {
-        Set<HerbarModel> models = new HashSet<HerbarModel>();
-        models.add(ROOT_MODEL);
-        models.addAll(FilterFactory.getInstance().getFilters());
+    public Set<? extends HerbarModel> getModels()
+    {
+        final Set<HerbarModel> models = new HashSet<HerbarModel>();
+        models.add( ROOT_MODEL );
+        models.addAll( FilterFactory.getInstance().getFilters() );
         return models;
     }
 
-    public Set<? extends String> getChangeableModelNames() {
+    public Set<? extends String> getChangeableModelNames()
+    {
         return FilterFactory.getInstance().getFilterNames();
     }
 
-    public Set getChangeableModels() {
+    public Set getChangeableModels()
+    {
         return FilterFactory.getInstance().getFilters();
     }
 
-    public static class ExceptionHandler {
-
-        public void handle(Throwable t) {
-            cat.fatal("error dispatching event:", t);
+    public static class ExceptionHandler
+    {
+        public void handle( final Throwable t )
+        {
+            LOG.fatal( "error dispatching event:", t );
         }
     }
 
-    static {
-        System.setProperty("sun.awt.exception.handler", ExceptionHandler.class.getName());
-        Strings.setResourceBundle(ResourceBundle.getBundle("com.ethz.geobot.herbar.gui.Strings"));
-        ROOT_NAME = Strings.getString("FILTERNAME.ALLTAXA");
-        cat = Category.getInstance(Application.class);
+    static
+    {
+        System.setProperty( "sun.awt.exception.handler", ExceptionHandler.class.getName() );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "com.ethz.geobot.herbar.gui.Strings" ) );
+        ROOT_NAME = Strings.getString( "FILTERNAME.ALLTAXA" );
+        LOG = Logger.getLogger( Application.class );
         INSTANCE = new Application();
         ROOT_MODEL = INSTANCE.getModel();
-        ROOT_MODEL.setName(ROOT_NAME);
+        ROOT_MODEL.setName( ROOT_NAME );
     }
 }
 

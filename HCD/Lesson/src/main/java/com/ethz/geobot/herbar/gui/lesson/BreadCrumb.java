@@ -19,7 +19,7 @@ import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Displays the whole path of the current Taxon object in focus.
@@ -27,12 +27,16 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class BreadCrumb extends JPanel {
+public class BreadCrumb extends JPanel
+{
+    private final static Logger LOG = Logger.getLogger( BreadCrumb.class );
 
-    private final static Category cat = Category.getInstance(BreadCrumb.class);
     private BreadTaxPopup taxPopup;
-    private TaxStateModel model;
-    private ScrollerPanel panel = new ScrollerPanel();
+
+    private final TaxStateModel model;
+
+    private final ScrollerPanel panel = new ScrollerPanel();
+
     private Level stopperLevel;
 
     /**
@@ -41,67 +45,79 @@ public class BreadCrumb extends JPanel {
      * @param herbarModel  the model to use
      * @param stopperLevel the level to start exclusion
      */
-    public BreadCrumb(TaxStateModel herbarModel, Level stopperLevel) {
-        cat.info(this);
+    public BreadCrumb( final TaxStateModel herbarModel, final Level stopperLevel )
+    {
+        LOG.info( this );
         this.model = herbarModel;
         this.stopperLevel = stopperLevel;
-        this.setLayout(new BorderLayout(0, 0));
-        this.add(panel, BorderLayout.CENTER);
+        this.setLayout( new BorderLayout( 0, 0 ) );
+        this.add( panel, BorderLayout.CENTER );
     }
 
-    public BreadCrumb(TaxStateModel herbarModel) {
-        cat.info(this);
+    public BreadCrumb( final TaxStateModel herbarModel )
+    {
+        LOG.info( this );
         this.model = herbarModel;
-        this.setLayout(new BorderLayout(0, 0));
-        this.add(panel, BorderLayout.CENTER);
+        this.setLayout( new BorderLayout( 0, 0 ) );
+        this.add( panel, BorderLayout.CENTER );
     }
 
-    public void setTaxFocus(Taxon tax) {
-        cat.debug(this + " focus is " + tax);
+    public void setTaxFocus( final Taxon tax )
+    {
+        LOG.debug( this + " focus is " + tax );
         panel.removeAll();
         Taxon parent = tax;
-        while (parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null
-                && (stopperLevel == null || parent.getLevel().isLower(stopperLevel))) {
-            cat.debug(this + " parent is " + parent);
-            ImageIcon ii = ImageLocator.getIcon("icon" + parent.getLevel().getName() + ".gif");
-            JLabel label = new JLabel(parent.getName() + "  ", ii, JLabel.CENTER);
-            panel.add(label);
+        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null
+                && ( stopperLevel == null || parent.getLevel().isLower( stopperLevel ) ) )
+        {
+            LOG.debug( this + " parent is " + parent );
+            final ImageIcon ii = ImageLocator.getIcon( "icon" + parent.getLevel().getName() + ".gif" );
+            final JLabel label = new JLabel( parent.getName() + "  ", ii, JLabel.CENTER );
+            panel.add( label );
             parent = parent.getParentTaxon();
         }
         panel.repaint();
     }
 
-    public BreadTaxPopup getTaxPopup() {
-        if (taxPopup == null) {
+    public BreadTaxPopup getTaxPopup()
+    {
+        if ( taxPopup == null )
+        {
             taxPopup = new BreadTaxPopup();
         }
-        taxPopup.setTaxa(model.getTaxList());
+        taxPopup.setTaxa( model.getTaxList() );
         return taxPopup;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return "" + hashCode();
     }
 
-    public void setBackground(Color background) {
-        super.setBackground(background);
-        if (panel != null) {
-            panel.setBackground(background);
+    public void setBackground( final Color background )
+    {
+        super.setBackground( background );
+        if ( panel != null )
+        {
+            panel.setBackground( background );
         }
     }
 
-    public class BreadTaxPopup extends TaxPopup {
-
-        public BreadTaxPopup() {
-            super(model.getTaxList());
+    public class BreadTaxPopup extends TaxPopup
+    {
+        public BreadTaxPopup()
+        {
+            super( model.getTaxList() );
         }
 
-        public void showPopup(Component jb) {
-            super.showPopup(jb, model.getFocus());
+        public void showPopup( final Component jb )
+        {
+            super.showPopup( jb, model.getFocus() );
         }
 
-        public void itemSelected(Object obj) {
-            model.setFocus((Taxon) obj);
+        public void itemSelected( final Object obj )
+        {
+            model.setFocus( (Taxon) obj );
         }
     }
 

@@ -24,19 +24,22 @@ import ch.xmatrix.ups.pmb.ui.model.Settings;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:37 $
  */
-public class SpeciesEntry extends Entry implements Comparable<Entry> {
-
-    public SpeciesEntry(final String name, final Entry parent, final Settings settings) {
-        super(name, parent, settings);
+public class SpeciesEntry extends Entry implements Comparable<Entry>
+{
+    public SpeciesEntry( final String name, final Entry parent, final Settings settings )
+    {
+        super( name, parent, settings );
     }
 
-    public int compareTo(final Entry o) {
-        if (!(o instanceof SpeciesEntry)) {
+    public int compareTo( final Entry o )
+    {
+        if ( !( o instanceof SpeciesEntry ) )
+        {
             return 0;
         }
         final SpeciesEntry that = (SpeciesEntry) o;
-        final String thisName = getSettings().getCleanedSpeciesName(this);
-        final String thatName = getSettings().getCleanedSpeciesName(that);
-        return thisName.compareTo(thatName);
+        final String thisName = getSettings().getCleanedSpeciesName( this );
+        final String thatName = getSettings().getCleanedSpeciesName( that );
+        return thisName.compareTo( thatName );
     }
 }

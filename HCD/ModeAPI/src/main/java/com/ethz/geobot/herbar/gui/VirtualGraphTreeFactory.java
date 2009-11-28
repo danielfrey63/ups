@@ -27,23 +27,23 @@ import javax.swing.tree.DefaultTreeModel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class VirtualGraphTreeFactory {
-
-    public static JTree getVirtualTree(GraphNode root, VirtualGraphTreeNodeFilter filter) {
-        GraphModel m = AbsGraphModel.getModel();
-        VirtualGraphTreeNodeModel model = new VirtualGraphTreeNodeModel(filter, m, root);
-        VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode(root, model, filter);
-        GraphTreeNode rootNode = GraphTreeNode.getTreeNode(treeRoot);
-        JTree jt = new SearchableTree(rootNode);
-        jt.setRootVisible(false);
-        jt.setCellRenderer(new GraphNodeTreeCellRenderer());
+public class VirtualGraphTreeFactory
+{
+    public static JTree getVirtualTree( final GraphNode root, final VirtualGraphTreeNodeFilter filter )
+    {
+        final GraphModel m = AbsGraphModel.getModel();
+        final VirtualGraphTreeNodeModel model = new VirtualGraphTreeNodeModel( filter, m, root );
+        final VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode( root, model, filter );
+        final GraphTreeNode rootNode = GraphTreeNode.getTreeNode( treeRoot );
+        final JTree jt = new SearchableTree( rootNode );
+        jt.setRootVisible( false );
+        jt.setCellRenderer( new GraphNodeTreeCellRenderer() );
         return jt;
     }
 
-    ;
-
-    public static JTree getVirtualTree(VirtualGraphTreeNodeFilter filter) {
-        return getVirtualTree(new SimpleTransientGraphNode(), filter);
+    public static JTree getVirtualTree( final VirtualGraphTreeNodeFilter filter )
+    {
+        return getVirtualTree( new SimpleTransientGraphNode(), filter );
     }
 
     /**
@@ -53,9 +53,10 @@ public class VirtualGraphTreeFactory {
      * @param filter  the new filter used for the new model
      * @param newRoot the new node used as root
      */
-    public static void updateModel(JTree jt, VirtualGraphTreeNodeFilter filter, GraphNode newRoot) {
-        VirtualGraphTreeNodeModel model = new VirtualGraphTreeNodeModel(filter, AbsGraphModel.getModel(), newRoot);
-        VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode(newRoot, model, filter);
-        jt.setModel(new DefaultTreeModel(GraphTreeNode.getTreeNode(treeRoot)));
+    public static void updateModel( final JTree jt, final VirtualGraphTreeNodeFilter filter, final GraphNode newRoot )
+    {
+        final VirtualGraphTreeNodeModel model = new VirtualGraphTreeNodeModel( filter, AbsGraphModel.getModel(), newRoot );
+        final VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode( newRoot, model, filter );
+        jt.setModel( new DefaultTreeModel( GraphTreeNode.getTreeNode( treeRoot ) ) );
     }
 }

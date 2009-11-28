@@ -1,6 +1,5 @@
 package com.ethz.geobot.herbar.modeapi;
 
-
 /**
  * This interface is used by the AbstractModeAdapter to forward the Mode notification to the given Component. If you
  * implement this interface in the Component (i.e. JPanel) with which the AbstractModeAdapter is initialize, the
@@ -9,8 +8,8 @@ package com.ethz.geobot.herbar.modeapi;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public interface ModeActivation {
-
+public interface ModeActivation
+{
     /**
      * The mode is activated
      */

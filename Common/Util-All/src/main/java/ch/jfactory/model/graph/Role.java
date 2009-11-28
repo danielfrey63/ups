@@ -6,7 +6,7 @@ package ch.jfactory.model.graph;
  */
 public interface Role extends GraphNode
 {
-    public static final Role ROLE_NULL = new RoleNull("NULLROLE");
+    public static final Role ROLE_NULL = new RoleNull( "NULLROLE" );
 
     public static final Object ROLE_ALL = new Object();
 

@@ -26,33 +26,33 @@ interface AsynchronPictureLoaderSupport
      * @param name  name of the image
      * @param image reference to the image
      */
-    void informFinished(String name, Image image, boolean thumb);
+    void informFinished( String name, Image image, boolean thumb );
 
     /**
      * Inform all listeners that the image will be .
      *
      * @param name name of the image
      */
-    void informAborted(String name);
+    void informAborted( String name );
 
     /**
      * Inform all listeners that the image will be loaded.
      *
      * @param name name of the image
      */
-    void informStarted(String name);
+    void informStarted( String name );
 
     /**
      * register a AsynchronPictureLoaderListener
      *
      * @param listener reference to listener
      */
-    void detach(AsynchronPictureLoaderListener listener);
+    void detach( AsynchronPictureLoaderListener listener );
 
     /**
      * unregister a AsynchronPictureLoaderListener
      *
      * @param listener reference to listener
      */
-    void attach(AsynchronPictureLoaderListener listener);
+    void attach( AsynchronPictureLoaderListener listener );
 }

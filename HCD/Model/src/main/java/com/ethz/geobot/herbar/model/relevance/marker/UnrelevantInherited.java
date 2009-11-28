@@ -10,6 +10,6 @@ import com.ethz.geobot.herbar.model.relevance.UnRelevance;
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
 public class UnrelevantInherited extends UnRelevance
-        implements RoleInherited {
-
+        implements RoleInherited
+{
 }

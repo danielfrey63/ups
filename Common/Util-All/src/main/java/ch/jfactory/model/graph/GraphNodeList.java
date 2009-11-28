@@ -12,25 +12,24 @@ import java.util.Comparator;
  */
 public class GraphNodeList
 {
-
     private static final Comparator COMPARATOR = new ToStringComparator();
 
-    private ArrayList list = new ArrayList();
+    private final ArrayList list = new ArrayList();
 
     public GraphNodeList()
     {
     }
 
-    public GraphNodeList(final GraphNode element)
+    public GraphNodeList( final GraphNode element )
     {
-        list.add(element);
+        list.add( element );
     }
 
-    public GraphNode get(final int index)
+    public GraphNode get( final int index )
     {
-        if (list.size() > index && index >= 0)
+        if ( list.size() > index && index >= 0 )
         {
-            return (GraphNode) list.get(index);
+            return (GraphNode) list.get( index );
         }
         else
         {
@@ -38,12 +37,12 @@ public class GraphNodeList
         }
     }
 
-    public int get(final GraphNode node)
+    public int get( final GraphNode node )
     {
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode nd = (GraphNode) list.get(i);
-            if (nd == node)
+            final GraphNode nd = (GraphNode) list.get( i );
+            if ( nd == node )
             {
                 return i;
             }
@@ -53,40 +52,40 @@ public class GraphNodeList
 
     public GraphNode[] getAll()
     {
-        return (GraphNode[]) list.toArray(new GraphNode[list.size()]);
+        return (GraphNode[]) list.toArray( new GraphNode[list.size()] );
     }
 
-    public GraphNode[] getAll(final Object[] arraytype)
+    public GraphNode[] getAll( final Object[] arraytype )
     {
-        return (GraphNode[]) list.toArray(arraytype);
+        return (GraphNode[]) list.toArray( arraytype );
     }
 
-    public void add(final GraphNode node)
+    public void add( final GraphNode node )
     {
-        list.add(node);
+        list.add( node );
     }
 
-    public void add(final int index, final GraphNode node)
+    public void add( final int index, final GraphNode node )
     {
-        list.add(index, node);
+        list.add( index, node );
     }
 
-    public void addAll(final GraphNodeList list)
+    public void addAll( final GraphNodeList list )
     {
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
-            this.list.add(list.get(i));
+            this.list.add( list.get( i ) );
         }
     }
 
-    public boolean remove(final GraphNode toRemove)
+    public boolean remove( final GraphNode toRemove )
     {
-        return list.remove(toRemove);
+        return list.remove( toRemove );
     }
 
-    public void removeAllNodes(final GraphNodeList toRemove)
+    public void removeAllNodes( final GraphNodeList toRemove )
     {
-        list.removeAll(Arrays.asList(toRemove.getAll()));
+        list.removeAll( Arrays.asList( toRemove.getAll() ) );
     }
 
     public int size()
@@ -99,33 +98,35 @@ public class GraphNodeList
         list.clear();
     }
 
-    public GraphNodeList getChildren(final Class type)
+    public GraphNodeList getChildren( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
-        for (final Object aList : list)
+        for ( final Object aList : list )
         {
             final GraphNode node = (GraphNode) aList;
-            result.addAll(node.getChildren(type));
+            result.addAll( node.getChildren( type ) );
         }
         return result;
     }
 
-    public boolean contains(final GraphNode node)
+    public boolean contains( final GraphNode node )
     {
-        return list.contains(node);
+        return list.contains( node );
     }
 
     public void sort()
     {
-        sort(COMPARATOR);
+        sort( COMPARATOR );
     }
 
-    public void sort(final Comparator comparator)
+    public void sort( final Comparator comparator )
     {
-        Collections.sort(list, comparator);
+        Collections.sort( list, comparator );
     }
 
-    /** @see java.lang.Object#toString() */
+    /**
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return list.toString();

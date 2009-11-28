@@ -18,16 +18,18 @@ import com.ethz.geobot.herbar.modeapi.ModeRegistration;
  * @version $Revision: 1.1 $
  * @created $Date: 2007/09/17 11:05:58 $
  */
-public class CatcherMode extends AbstractModeAdapter {
-
+public class CatcherMode extends AbstractModeAdapter
+{
     /**
      * @see java.lang.Object#Object()
      */
-    public CatcherMode() {
-        super(Catcher.class);
+    public CatcherMode()
+    {
+        super( Catcher.class );
     }
 
-    static {
-        ModeRegistration.register(new CatcherMode());
+    static
+    {
+        ModeRegistration.register( new CatcherMode() );
     }
 }

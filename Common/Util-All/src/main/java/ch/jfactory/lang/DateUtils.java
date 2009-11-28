@@ -30,7 +30,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DateUtils extends org.apache.commons.lang.time.DateUtils
 {
-
     /**
      * <p>Checks if two calendar objects are on the same year.</p>
      *
@@ -40,14 +39,14 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils
      * @throws IllegalArgumentException if either calendar is <code>null</code>
      * @since 2.1
      */
-    public static boolean isSameYear(final Calendar cal1, final Calendar cal2)
+    public static boolean isSameYear( final Calendar cal1, final Calendar cal2 )
     {
-        if (cal1 == null || cal2 == null)
+        if ( cal1 == null || cal2 == null )
         {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new IllegalArgumentException( "The date must not be null" );
         }
-        return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
-                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR));
+        return ( cal1.get( Calendar.ERA ) == cal2.get( Calendar.ERA ) &&
+                cal1.get( Calendar.YEAR ) == cal2.get( Calendar.YEAR ) );
     }
 
     /**
@@ -59,15 +58,15 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils
      * @throws IllegalArgumentException if either calendar is <code>null</code>
      * @since 2.1
      */
-    public static boolean isSameMonth(final Calendar cal1, final Calendar cal2)
+    public static boolean isSameMonth( final Calendar cal1, final Calendar cal2 )
     {
-        if (cal1 == null || cal2 == null)
+        if ( cal1 == null || cal2 == null )
         {
-            throw new IllegalArgumentException("The date must not be null");
+            throw new IllegalArgumentException( "The date must not be null" );
         }
-        return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
-                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
-                cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH));
+        return ( cal1.get( Calendar.ERA ) == cal2.get( Calendar.ERA ) &&
+                cal1.get( Calendar.YEAR ) == cal2.get( Calendar.YEAR ) &&
+                cal1.get( Calendar.MONTH ) == cal2.get( Calendar.MONTH ) );
     }
 
     /**
@@ -79,10 +78,10 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils
      * @param pattern the pattern to format the difference
      * @return the result formatted with the given pattern and rounded.
      */
-    public static String dateDifference(final long start, final long end, final String pattern)
+    public static String dateDifference( final long start, final long end, final String pattern )
     {
         final double diff = end - start;
-        return dateDifference(diff, pattern);
+        return dateDifference( diff, pattern );
     }
 
     /**
@@ -93,71 +92,71 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils
      * @param pattern    the pattern to use to format
      * @return a representation of the date time difference
      */
-    public static String dateDifference(final double difference, final String pattern)
+    public static String dateDifference( final double difference, final String pattern )
     {
         double diff = difference;
         final char[] allowedChars = {'d', 'H', 'm', 's'};
-        final String allowedString = new String(allowedChars);
+        final String allowedString = new String( allowedChars );
         final char[] chars = pattern.toCharArray();
-        final char[] foundPatternChars = findPatternChars(pattern, allowedString);
+        final char[] foundPatternChars = findPatternChars( pattern, allowedString );
         final double[] factors = {24 * 1000 * 60 * 60, 1000 * 60 * 60, 1000 * 60, 1000};
         final StringBuffer result = new StringBuffer();
-        final StringBuffer patternBuffer = new StringBuffer(pattern);
+        final StringBuffer patternBuffer = new StringBuffer( pattern );
         final int length = foundPatternChars.length;
-        for (int i = 0; i < length; i++)
+        for ( int i = 0; i < length; i++ )
         {
             final char patternChar = foundPatternChars[i];
-            final int m = StringUtils.countMatches(new String(chars), "" + patternChar);
-            final double factor = factors[allowedString.indexOf(patternChar)];
+            final int m = StringUtils.countMatches( new String( chars ), "" + patternChar );
+            final double factor = factors[allowedString.indexOf( patternChar )];
             final double value = diff / factor;
-            diff -= Math.floor(value) * factor;
-            final DecimalFormat f = new DecimalFormat(StringUtils.repeat("0", m));
-            result.append(f.format(i + 1 < length ? Math.floor(value) : value));
-            patternBuffer.delete(0, m);
-            while (patternBuffer.length() > 0 && allowedString.indexOf(patternBuffer.substring(0, 1)) == -1)
+            diff -= Math.floor( value ) * factor;
+            final DecimalFormat f = new DecimalFormat( StringUtils.repeat( "0", m ) );
+            result.append( f.format( i + 1 < length ? Math.floor( value ) : value ) );
+            patternBuffer.delete( 0, m );
+            while ( patternBuffer.length() > 0 && allowedString.indexOf( patternBuffer.substring( 0, 1 ) ) == -1 )
             {
-                result.append(patternBuffer.substring(0, 1));
-                patternBuffer.deleteCharAt(0);
+                result.append( patternBuffer.substring( 0, 1 ) );
+                patternBuffer.deleteCharAt( 0 );
             }
         }
         return result.toString();
     }
 
-    private static char[] findPatternChars(final String pattern, final String patternChars)
+    private static char[] findPatternChars( final String pattern, final String patternChars )
     {
-        final StringBuffer patternBuffer = new StringBuffer(pattern);
-        final StringBuffer allowedBuffer = new StringBuffer(patternChars);
-        for (int i = patternBuffer.length() - 1; i >= 0; i--)
+        final StringBuffer patternBuffer = new StringBuffer( pattern );
+        final StringBuffer allowedBuffer = new StringBuffer( patternChars );
+        for ( int i = patternBuffer.length() - 1; i >= 0; i-- )
         {
-            final char currentPatternChar = patternBuffer.charAt(i);
-            final int p = allowedBuffer.indexOf("" + currentPatternChar);
-            if (p == -1)
+            final char currentPatternChar = patternBuffer.charAt( i );
+            final int p = allowedBuffer.indexOf( "" + currentPatternChar );
+            if ( p == -1 )
             {
-                patternBuffer.deleteCharAt(i);
+                patternBuffer.deleteCharAt( i );
             }
             else
             {
-                allowedBuffer.deleteCharAt(p);
+                allowedBuffer.deleteCharAt( p );
             }
         }
         return patternBuffer.toString().toCharArray();
     }
 
-    public static boolean isSameMonth(final Date start, final Date end)
+    public static boolean isSameMonth( final Date start, final Date end )
     {
         final Calendar c1 = GregorianCalendar.getInstance();
-        c1.setTime(start);
+        c1.setTime( start );
         final Calendar c2 = GregorianCalendar.getInstance();
-        c2.setTime(end);
-        return isSameMonth(c1, c2);
+        c2.setTime( end );
+        return isSameMonth( c1, c2 );
     }
 
-    public static boolean isSameYear(final Date start, final Date end)
+    public static boolean isSameYear( final Date start, final Date end )
     {
         final Calendar c1 = GregorianCalendar.getInstance();
-        c1.setTime(start);
+        c1.setTime( start );
         final Calendar c2 = GregorianCalendar.getInstance();
-        c2.setTime(end);
-        return isSameYear(c1, c2);
+        c2.setTime( end );
+        return isSameYear( c1, c2 );
     }
 }

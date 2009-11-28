@@ -17,7 +17,7 @@ import java.util.EventListener;
  * @version $Revision: 1.1 $
  * @created $Date: 2007/09/17 11:07:06 $
  */
-public interface ScoreListener extends EventListener {
-
+public interface ScoreListener extends EventListener
+{
     public void scoreChanged();
 }

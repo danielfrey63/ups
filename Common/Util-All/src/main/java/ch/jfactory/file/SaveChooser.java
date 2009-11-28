@@ -19,7 +19,6 @@ package ch.jfactory.file;
 import ch.jfactory.component.Dialogs;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -32,29 +31,36 @@ import javax.swing.filechooser.FileFilter;
  */
 public class SaveChooser extends AbstractChooser
 {
-
-    /** {@inheritDoc} */
-    public SaveChooser(final FileFilter filter, final String base, final File initialDir)
+    /**
+     * {@inheritDoc}
+     */
+    public SaveChooser( final FileFilter filter, final String base, final File initialDir )
     {
-        super((JFrame) null, filter, base, initialDir, JFileChooser.SAVE_DIALOG);
+        super( null, filter, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /** {@inheritDoc} */
-    public SaveChooser(final FileFilter filter, final String base, final String initialDir)
+    /**
+     * {@inheritDoc}
+     */
+    public SaveChooser( final FileFilter filter, final String base, final String initialDir )
     {
-        super((JFrame) null, filter, base, initialDir, JFileChooser.SAVE_DIALOG);
+        super( null, filter, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /** {@inheritDoc} */
-    public SaveChooser(final int selectionMode, final String base, final File initialDir)
+    /**
+     * {@inheritDoc}
+     */
+    public SaveChooser( final int selectionMode, final String base, final File initialDir )
     {
-        super((JFrame) null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG);
+        super( null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /** {@inheritDoc} */
-    public SaveChooser(final int selectionMode, final String base, final String initialDir)
+    /**
+     * {@inheritDoc}
+     */
+    public SaveChooser( final int selectionMode, final String base, final String initialDir )
     {
-        super((JFrame) null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG);
+        super( null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
     /**
@@ -63,13 +69,13 @@ public class SaveChooser extends AbstractChooser
      * @param files the files to check
      * @return whether saving is ok
      */
-    protected boolean checkFiles(final File[] files)
+    protected boolean checkFiles( final File[] files )
     {
-        for (final File file : files)
+        for ( final File file : files )
         {
-            if (file.exists() && !file.isDirectory() && getChooser().getFileSelectionMode() == JFileChooser.FILES_ONLY)
+            if ( file.exists() && !file.isDirectory() && getChooser().getFileSelectionMode() == JFileChooser.FILES_ONLY )
             {
-                return Dialogs.showQuestionMessageOk(getChooser(), getErrorTitle(), getErrorText(file)) == Dialogs.OK;
+                return Dialogs.showQuestionMessageOk( getChooser(), getErrorTitle(), getErrorText( file ) ) == Dialogs.OK;
             }
         }
         return true;
@@ -80,11 +86,11 @@ public class SaveChooser extends AbstractChooser
      *
      * @param files
      */
-    protected void execute(final File[] files)
+    protected void execute( final File[] files )
     {
-        for (final File file : files)
+        for ( final File file : files )
         {
-            save(file);
+            save( file );
         }
     }
 
@@ -95,7 +101,7 @@ public class SaveChooser extends AbstractChooser
      * @param file the original file choosen
      * @return the cleaned up file
      */
-    protected File cleanUpFileName(final File file)
+    protected File cleanUpFileName( final File file )
     {
         return file;
     }
@@ -106,7 +112,7 @@ public class SaveChooser extends AbstractChooser
      *
      * @param file
      */
-    protected void save(final File file)
+    protected void save( final File file )
     {
     }
 }

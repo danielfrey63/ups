@@ -15,18 +15,17 @@ import ch.jfactory.resource.Strings;
  */
 public abstract class AbstractMainController
 {
-
-    public AbstractMainController(final AbstractMainModel model, final InfoModel infoModel)
+    public AbstractMainController( final AbstractMainModel model, final InfoModel infoModel )
     {
-        model.queue(new Runnable()
+        model.queue( new Runnable()
         {
             public void run()
             {
-                infoModel.setNote(new CodedNote(Strings.getString("startup.data")));
+                infoModel.setNote( new CodedNote( Strings.getString( "startup.data" ) ) );
             }
-        });
-        initModel(model);
+        } );
+        initModel( model );
     }
 
-    protected abstract void initModel(AbstractMainModel model);
+    protected abstract void initModel( AbstractMainModel model );
 }

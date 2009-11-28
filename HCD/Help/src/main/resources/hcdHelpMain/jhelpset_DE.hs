@@ -5,7 +5,7 @@
     <title>Herbar CD-ROM Version 2</title>
     <maps>
         <homeID>top</homeID>
-        <mapref location="jhelpmap.jhm"></mapref>
+        <mapref location="jhelpmap.jhm"/>
     </maps>
     <view mergetype="javax.help.UniteAppendMerge">
         <name>TOC</name>
@@ -25,7 +25,7 @@
         <type>javax.help.SearchView</type>
         <data engine="com.sun.java.help.search.DefaultSearchEngine">JavaHelpSearch</data>
     </view>
-    <subhelpset location="../hcdHelpGui/jhelpset.hs"></subhelpset>
-    <subhelpset location="../hcdHelpAttributes/jhelpset.hs"></subhelpset>
-    <subhelpset location="../hcdHelpAppendix/jhelpset.hs"></subhelpset>
+    <subhelpset location="../hcdHelpGui/jhelpset.hs"/>
+    <subhelpset location="../hcdHelpAttributes/jhelpset.hs"/>
+    <subhelpset location="../hcdHelpAppendix/jhelpset.hs"/>
 </helpset>

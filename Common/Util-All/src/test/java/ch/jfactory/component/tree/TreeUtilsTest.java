@@ -25,18 +25,19 @@ import org.apache.commons.collections.IteratorUtils;
  */
 public class TreeUtilsTest extends ComponentTestFixture
 {
-
     /**
      * Constructs a named test.
      *
      * @param base the name
      */
-    public TreeUtilsTest(final String base)
+    public TreeUtilsTest( final String base )
     {
-        super(base);
+        super( base );
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     protected void setUp()
     {
         final ComponentTester tester = new ComponentTester();
@@ -46,6 +47,6 @@ public class TreeUtilsTest extends ComponentTestFixture
     {
         final JTree tree = new JTree();
         final List startList = new ArrayList();
-        CollectionUtils.addAll(startList, IteratorUtils.asIterator(tree.getExpandedDescendants(tree.getPathForRow(0))));
+        CollectionUtils.addAll( startList, IteratorUtils.asIterator( tree.getExpandedDescendants( tree.getPathForRow( 0 ) ) ) );
     }
 }

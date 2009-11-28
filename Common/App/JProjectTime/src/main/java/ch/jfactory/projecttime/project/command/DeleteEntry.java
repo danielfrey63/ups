@@ -16,11 +16,11 @@
  */
 package ch.jfactory.projecttime.project.command;
 
-import org.pietschy.command.ActionCommand;
-import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.PresentationModel;
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import ch.jfactory.projecttime.project.ProjectModel;
+import com.jgoodies.binding.PresentationModel;
+import org.pietschy.command.ActionCommand;
+import org.pietschy.command.CommandManager;
 
 /**
  * TODO: document
@@ -28,21 +28,24 @@ import ch.jfactory.projecttime.project.ProjectModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class DeleteEntry extends ActionCommand {
+public class DeleteEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public DeleteEntry(final ProjectModel model, final CommandManager manager) {
-        super(manager, Commands.DELETE_COMMAND);
+    public DeleteEntry( final ProjectModel model, final CommandManager manager )
+    {
+        super( manager, Commands.DELETE_COMMAND );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final PresentationModel currentBeanModel = model.getCurrentBeanModel();
         final IFEntry entry = (IFEntry) currentBeanModel.getBean();
-        if (entry != null && entry.getParent() != null) {
-            entry.getParent().deleteChild(entry);
-            model.setDeletedChild(entry);
+        if ( entry != null && entry.getParent() != null )
+        {
+            entry.getParent().deleteChild( entry );
+            model.setDeletedChild( entry );
         }
 
     }

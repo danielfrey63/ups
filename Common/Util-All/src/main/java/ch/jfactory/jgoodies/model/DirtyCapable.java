@@ -24,8 +24,7 @@ package ch.jfactory.jgoodies.model;
  */
 public interface DirtyCapable
 {
-
-    void setDirty(boolean dirty);
+    void setDirty( boolean dirty );
 
     boolean isDirty();
 }

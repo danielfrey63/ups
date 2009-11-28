@@ -25,15 +25,21 @@ import sun.misc.BASE64Encoder;
  *
  * @author Daniel Frey 04.08.2008 10:48:43
  */
-public class PasswordDialogController {
+public class PasswordDialogController
+{
+    /**
+     * This class logger.
+     */
+    private static final Logger LOG = Logger.getLogger( PasswordDialogController.class );
 
-    /** This class logger. */
-    private static final Logger LOG = Logger.getLogger(PasswordDialogController.class);
-
-    /** Contains all registered users. */
+    /**
+     * Contains all registered users.
+     */
     private final Properties registry = new Properties();
 
-    /** The dialog to display. */
+    /**
+     * The dialog to display.
+     */
     private final PasswordDialog dialog;
 
     private boolean hasName;
@@ -42,110 +48,143 @@ public class PasswordDialogController {
 
     private boolean passed;
 
-    public PasswordDialogController() {
-        this.dialog = new PasswordDialog((Frame) null);
+    public PasswordDialogController()
+    {
+        this.dialog = new PasswordDialog( (Frame) null );
         initCredentials();
         initComponent();
         initListeners();
     }
 
-    public PasswordDialogController(final Properties properties) {
-        this.dialog = new PasswordDialog((Frame) null);
-        registry.putAll(properties);
+    public PasswordDialogController( final Properties properties )
+    {
+        this.dialog = new PasswordDialog( (Frame) null );
+        registry.putAll( properties );
         initComponent();
         initListeners();
     }
 
-    private void initCredentials () {
+    private void initCredentials()
+    {
         InputStream credentials = null;
-        try {
-            credentials = PasswordDialogController.class.getResourceAsStream("/credentials.properties");
-            if (credentials != null) {
-                registry.load(credentials);
-                LOG.info("using credentials");
-            } else {
-                LOG.info("not using credentials");
+        try
+        {
+            credentials = PasswordDialogController.class.getResourceAsStream( "/credentials.properties" );
+            if ( credentials != null )
+            {
+                registry.load( credentials );
+                LOG.info( "using credentials" );
             }
-        } catch (IOException e) {
-            LOG.error("problems while loading credentials", e);
-        } finally {
-            IOUtils.closeQuietly(credentials);
+            else
+            {
+                LOG.info( "not using credentials" );
+            }
+        }
+        catch ( IOException e )
+        {
+            LOG.error( "problems while loading credentials", e );
+        }
+        finally
+        {
+            IOUtils.closeQuietly( credentials );
         }
     }
 
-    private void initComponent() {
-        dialog.setLocationRelativeTo(null);
+    private void initComponent()
+    {
+        dialog.setLocationRelativeTo( null );
         dialog.pack();
     }
 
-    private void initListeners() {
+    private void initListeners()
+    {
         final JButton okButton = dialog.getOkButton();
         final JButton cancelButton = dialog.getCancelButton();
 
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent event) {
-                try {
+        okButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent event )
+            {
+                try
+                {
                     final String name = dialog.getFieldName().getText();
-                    final Object registeredHash = registry.get(name);
-                    if (registeredHash != null) {
-                        final byte[] selection = new String(dialog.getFieldPassword().getPassword()).getBytes();
-                        final MessageDigest md = MessageDigest.getInstance("SHA");
-                        final String hash = new BASE64Encoder().encode(md.digest(selection));
-                        if (hash.equals(registeredHash)) {
+                    final Object registeredHash = registry.get( name );
+                    if ( registeredHash != null )
+                    {
+                        final byte[] selection = new String( dialog.getFieldPassword().getPassword() ).getBytes();
+                        final MessageDigest md = MessageDigest.getInstance( "SHA" );
+                        final String hash = new BASE64Encoder().encode( md.digest( selection ) );
+                        if ( hash.equals( registeredHash ) )
+                        {
                             passed = true;
-                            setVisible(false);
-                        } else {
+                            setVisible( false );
+                        }
+                        else
+                        {
                             passed = false;
                         }
                     }
-                } catch (NoSuchAlgorithmException e) {
-                    LOG.error("cannot init hash function", e);
+                }
+                catch ( NoSuchAlgorithmException e )
+                {
+                    LOG.error( "cannot init hash function", e );
                 }
             }
-        });
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+        } );
+        cancelButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
                 passed = false;
-                setVisible(false);
+                setVisible( false );
             }
-        });
-        dialog.getFieldName().addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
-                hasName = !dialog.getFieldName().getText().trim().equals("");
+        } );
+        dialog.getFieldName().addCaretListener( new CaretListener()
+        {
+            public void caretUpdate( final CaretEvent e )
+            {
+                hasName = !dialog.getFieldName().getText().trim().equals( "" );
                 checkFlags();
             }
-        });
-        dialog.getFieldPassword().addCaretListener(new CaretListener() {
-            public void caretUpdate(final CaretEvent e) {
+        } );
+        dialog.getFieldPassword().addCaretListener( new CaretListener()
+        {
+            public void caretUpdate( final CaretEvent e )
+            {
                 hasPassword = dialog.getFieldPassword().getPassword().length > 0;
                 checkFlags();
             }
-        });
+        } );
 
     }
 
-    private void checkFlags() {
+    private void checkFlags()
+    {
         final boolean hasAll = hasName && hasPassword;
-        dialog.getOkButton().setEnabled(hasAll);
-        dialog.getRootPane().setDefaultButton(hasAll ? dialog.getOkButton() : dialog.getCancelButton());
+        dialog.getOkButton().setEnabled( hasAll );
+        dialog.getRootPane().setDefaultButton( hasAll ? dialog.getOkButton() : dialog.getCancelButton() );
     }
 
-    private void setVisible(final boolean visible) {
-        if (registry.size() != 0) {
-            WindowUtils.centerOnScreen(dialog);
+    private void setVisible( final boolean visible )
+    {
+        if ( registry.size() != 0 )
+        {
+            WindowUtils.centerOnScreen( dialog );
             dialog.getFieldName().requestFocus();
-            dialog.getFieldName().setText("");
-            dialog.getFieldPassword().setText("");
-            dialog.setVisible(visible);
+            dialog.getFieldName().setText( "" );
+            dialog.getFieldPassword().setText( "" );
+            dialog.setVisible( visible );
         }
     }
 
-    public boolean check() {
-        setVisible(true);
+    public boolean check()
+    {
+        setVisible( true );
         return passed;
     }
 
-    public boolean hasRegistry() {
+    public boolean hasRegistry()
+    {
         return registry.size() > 0;
     }
 }

@@ -25,13 +25,19 @@ package ch.jfactory.animation.scrolltext;
  */
 public class FileLine
 {
-    /** The formatter object associated with this file line. */
+    /**
+     * The formatter object associated with this file line.
+     */
     private Formatter formatter;
 
-    /** The text of this file line. */
+    /**
+     * The text of this file line.
+     */
     private String text;
 
-    /** The link associated with this file line. */
+    /**
+     * The link associated with this file line.
+     */
     private String link;
 
     /**
@@ -49,7 +55,7 @@ public class FileLine
      *
      * @param formatter the formatter object to set
      */
-    public void setFormatter(final Formatter formatter)
+    public void setFormatter( final Formatter formatter )
     {
         this.formatter = formatter;
     }
@@ -69,7 +75,7 @@ public class FileLine
      *
      * @param text the text to set
      */
-    public void setText(final String text)
+    public void setText( final String text )
     {
         this.text = text;
     }
@@ -89,7 +95,7 @@ public class FileLine
      *
      * @param link the link to set
      */
-    public void setLink(final String link)
+    public void setLink( final String link )
     {
         this.link = link;
     }

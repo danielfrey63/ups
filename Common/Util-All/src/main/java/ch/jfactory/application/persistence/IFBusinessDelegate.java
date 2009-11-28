@@ -10,43 +10,42 @@ import java.util.Properties;
  */
 public interface IFBusinessDelegate
 {
-
     public static final String PROPERTY_SOURCE_NAME = "SOURCE_NAME";
 
     Object getRootObject();
 
-    void cacheToSave(Object o);
+    void cacheToSave( Object o );
 
-    void cacheToDelete(Object o);
+    void cacheToDelete( Object o );
 
     /**
      * Saves to the persistent layer.
      *
      * @param properties the properties for the save action or null
      */
-    void save(Properties properties);
+    void save( Properties properties );
 
     /**
      * Opens a new persistence layer.
      *
      * @param properties the properties to open the layer or null
      */
-    void open(Properties properties) throws SourceVetoedException;
+    void open( Properties properties ) throws SourceVetoedException;
 
     /**
      * Creates a new persistence layer.
      *
      * @param properties the properties to create the new layer or null
      */
-    void createNew(Properties properties) throws SourceVetoedException;
+    void createNew( Properties properties ) throws SourceVetoedException;
 
-    Object addParent(Object child, Object parent, int rank);
+    Object addParent( Object child, Object parent, int rank );
 
     Properties getProperties();
 
-    void addSourceChangeListener(SourceStateListener l);
+    void addSourceChangeListener( SourceStateListener l );
 
-    void removeSourceChangeListener(SourceStateListener l);
+    void removeSourceChangeListener( SourceStateListener l );
 
     void init();
 }

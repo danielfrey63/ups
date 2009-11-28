@@ -31,126 +31,154 @@ import javax.swing.tree.DefaultTreeSelectionModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class ProjectModel extends Model {
-
+public class ProjectModel extends Model
+{
     public static final String PROPERTYNAME_NEWCHILD = "newChild";
+
     private IFEntry newChild;
 
     public static final String PROPERTYNAME_DELETEDCHILD = "deletedChild";
+
     private IFEntry deletedChild;
 
     public static final String PROPERTYNAME_ROOT = "root";
+
     private IFEntry root;
 
     public static final String PROPERTYNAME_RUNNING = "running";
+
     private IFEntry running;
 
     public static final String PROPERTYNAME_TREEMODEL = "treeModel";
+
     private ProjectTreeModel treeModel;
 
-    private ValueModel selectionModel = new ValueHolder(new DefaultTreeSelectionModel());
-    private PresentationModel currentBeanModel = new PresentationModel(new ValueHolder(null, true));
+    private final ValueModel selectionModel = new ValueHolder( new DefaultTreeSelectionModel() );
+
+    private final PresentationModel currentBeanModel = new PresentationModel( new ValueHolder( null, true ) );
 
     public static final String PROPERTYNAME_INVOICEADDED = "invoiceAdded";
-    public static final String PROPERTYNAME_INVOICEREMOVED = "invoiceRemoved";
-    private ValueModel entry2InvoiceMap;
 
-    public ProjectModel(final IFEntry root, final ValueModel entry2InvoiceMap) {
+    public static final String PROPERTYNAME_INVOICEREMOVED = "invoiceRemoved";
+
+    private final ValueModel entry2InvoiceMap;
+
+    public ProjectModel( final IFEntry root, final ValueModel entry2InvoiceMap )
+    {
         this.root = root;
         this.entry2InvoiceMap = entry2InvoiceMap;
-        treeModel = new ProjectTreeModel(root);
+        treeModel = new ProjectTreeModel( root );
     }
 
-    public IFEntry getNewChild() {
+    public IFEntry getNewChild()
+    {
         return newChild;
     }
 
-    public void setNewChild(final IFEntry newChild) {
+    public void setNewChild( final IFEntry newChild )
+    {
         final IFEntry old = getNewChild();
         this.newChild = newChild;
-        firePropertyChange(PROPERTYNAME_NEWCHILD, old, newChild);
+        firePropertyChange( PROPERTYNAME_NEWCHILD, old, newChild );
     }
 
-    public IFEntry getDeletedChild() {
+    public IFEntry getDeletedChild()
+    {
         return deletedChild;
     }
 
-    public void setDeletedChild(final IFEntry deletedChild) {
+    public void setDeletedChild( final IFEntry deletedChild )
+    {
         final IFEntry old = getDeletedChild();
         this.deletedChild = deletedChild;
-        firePropertyChange(PROPERTYNAME_DELETEDCHILD, old, deletedChild);
+        firePropertyChange( PROPERTYNAME_DELETEDCHILD, old, deletedChild );
     }
 
-    public IFEntry getRoot() {
+    public IFEntry getRoot()
+    {
         return root;
     }
 
-    public void setRoot(final IFEntry root) {
+    public void setRoot( final IFEntry root )
+    {
         final IFEntry old = getRoot();
         this.root = root;
-        firePropertyChange(PROPERTYNAME_ROOT, old, root);
+        firePropertyChange( PROPERTYNAME_ROOT, old, root );
     }
 
-    public IFEntry getRunning() {
+    public IFEntry getRunning()
+    {
         return running;
     }
 
-    public void setRunning(final IFEntry running) {
+    public void setRunning( final IFEntry running )
+    {
         final IFEntry old = getRunning();
         this.running = running;
-        firePropertyChange(PROPERTYNAME_RUNNING, old, running);
+        firePropertyChange( PROPERTYNAME_RUNNING, old, running );
     }
 
     // Submodels
 
-    public ProjectTreeModel getTreeModel() {
+    public ProjectTreeModel getTreeModel()
+    {
         return treeModel;
     }
 
-    public void setTreeModel(final ProjectTreeModel treeModel) {
+    public void setTreeModel( final ProjectTreeModel treeModel )
+    {
         final ProjectTreeModel old = getTreeModel();
         this.treeModel = treeModel;
-        firePropertyChange(PROPERTYNAME_TREEMODEL, old, treeModel);
+        firePropertyChange( PROPERTYNAME_TREEMODEL, old, treeModel );
     }
 
-    public PresentationModel getCurrentBeanModel() {
+    public PresentationModel getCurrentBeanModel()
+    {
         return currentBeanModel;
     }
 
-    public ValueModel getSelectionModel() {
+    public ValueModel getSelectionModel()
+    {
         return selectionModel;
     }
 
-    public Invoice getInvoice(final IFEntry entry) {
+    public Invoice getInvoice( final IFEntry entry )
+    {
         final Map map = (Map) entry2InvoiceMap.getValue();
-        return (Invoice) map.get(entry);
+        return (Invoice) map.get( entry );
     }
 
-    public void addInvoice(final IFEntry entry, final Invoice invoice) {
+    public void addInvoice( final IFEntry entry, final Invoice invoice )
+    {
         final Map map = (Map) entry2InvoiceMap.getValue();
-        final Invoice old = (Invoice) map.put(entry, invoice);
-        if (invoice == null) {
-            System.err.println("invoice is null");
+        final Invoice old = (Invoice) map.put( entry, invoice );
+        if ( invoice == null )
+        {
+            System.err.println( "invoice is null" );
             return;
         }
-        invoice.addEntry(entry);
-        firePropertyChange(PROPERTYNAME_INVOICEADDED, old, invoice);
+        invoice.addEntry( entry );
+        firePropertyChange( PROPERTYNAME_INVOICEADDED, old, invoice );
     }
 
-    public void removeInvoice(final IFEntry entry) {
+    public void removeInvoice( final IFEntry entry )
+    {
         final Map map = (Map) entry2InvoiceMap.getValue();
-        final Invoice old = (Invoice) map.remove(entry);
-        if (old != null) {
-            old.removeEntry(entry);
+        final Invoice old = (Invoice) map.remove( entry );
+        if ( old != null )
+        {
+            old.removeEntry( entry );
         }
-        firePropertyChange(PROPERTYNAME_INVOICEREMOVED, old, null);
+        firePropertyChange( PROPERTYNAME_INVOICEREMOVED, old, null );
     }
 
-    public ValueModel getEntry2InvoiceMap() {
+    public ValueModel getEntry2InvoiceMap()
+    {
         return entry2InvoiceMap;
     }
 
-    public void setEntry2InvoiceMap(final Map map) {
-        this.entry2InvoiceMap.setValue(map);
+    public void setEntry2InvoiceMap( final Map map )
+    {
+        this.entry2InvoiceMap.setValue( map );
     }
 }

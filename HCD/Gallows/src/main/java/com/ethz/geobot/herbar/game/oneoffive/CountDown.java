@@ -11,7 +11,6 @@ package com.ethz.geobot.herbar.game.oneoffive;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import org.apache.log4j.Category;
 
 /**
  * ScoreBar which represents right and wrong answers of the game.
@@ -19,19 +18,21 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class CountDown extends Canvas {
-
-    private static final Category CAT = Category.getInstance(CountDown.class);
+public class CountDown extends Canvas
+{
     private int answerRight;
+
     private int totalQuestions;
+
     private boolean showScoreBar = false;
 
     /**
      * Cnstructor
      */
-    public CountDown() {
-        this.setSize(102, 15);
-        this.setVisible(true);
+    public CountDown()
+    {
+        this.setSize( 102, 15 );
+        this.setVisible( true );
     }
 
     /**
@@ -39,10 +40,10 @@ public class CountDown extends Canvas {
      *
      * @param show true, if the scorebar is to show
      */
-    public void setShowScoreBar(boolean show) {
+    public void setShowScoreBar( final boolean show )
+    {
         this.showScoreBar = show;
     }
-
 
     /**
      * adjust the answer-values of the bar according score changes
@@ -50,7 +51,8 @@ public class CountDown extends Canvas {
      * @param right total right answers
      * @param max   ??? Description of the Parameter ???
      */
-    public void actualizeScoreBar(int right, int max) {
+    public void actualizeScoreBar( final int right, final int max )
+    {
         this.answerRight = right;
         this.totalQuestions = max;
         repaint();
@@ -59,18 +61,21 @@ public class CountDown extends Canvas {
     /**
      * @see java.awt.Component#paint(Graphics)
      */
-    public void paint(Graphics g) {
-        if (showScoreBar) {
-            int xLeft = 0;
-            int yLeft = 0;
-            g.setColor(new Color(144, 144, 144));
-            g.fillRect(xLeft, yLeft, 100, 10);
-            g.setColor(new Color(250, 220, 70));
-            if (answerRight != totalQuestions) {
-                g.fillRect(xLeft, yLeft, 100 - (answerRight * (100 / totalQuestions)), 10);
+    public void paint( final Graphics g )
+    {
+        if ( showScoreBar )
+        {
+            final int xLeft = 0;
+            final int yLeft = 0;
+            g.setColor( new Color( 144, 144, 144 ) );
+            g.fillRect( xLeft, yLeft, 100, 10 );
+            g.setColor( new Color( 250, 220, 70 ) );
+            if ( answerRight != totalQuestions )
+            {
+                g.fillRect( xLeft, yLeft, 100 - ( answerRight * ( 100 / totalQuestions ) ), 10 );
             }
-            g.setColor(new Color(29, 64, 13));
-            g.drawRect(xLeft, yLeft, 100, 10);
+            g.setColor( new Color( 29, 64, 13 ) );
+            g.drawRect( xLeft, yLeft, 100, 10 );
         }
     }
 }

@@ -29,13 +29,14 @@ import org.pietschy.command.CommandManager;
  */
 public class RunBrowserCommand extends ActionCommand
 {
+    /**
+     * The URL to open.
+     */
+    private final String site;
 
-    /** The URL to open. */
-    private String site;
-
-    public RunBrowserCommand(final CommandManager commandManager, final String commandId, final String site)
+    public RunBrowserCommand( final CommandManager commandManager, final String commandId, final String site )
     {
-        super(commandManager, commandId);
+        super( commandManager, commandId );
         this.site = site;
         Browser.init();
     }
@@ -44,9 +45,9 @@ public class RunBrowserCommand extends ActionCommand
     {
         try
         {
-            Browser.displayURL(site);
+            Browser.displayURL( site );
         }
-        catch (IOException e1)
+        catch ( IOException e1 )
         {
             e1.printStackTrace();
         }

@@ -19,9 +19,9 @@ import org.apache.log4j.Logger;
 
 public class ScrollerLayout implements LayoutManager2, Serializable
 {
-    private static final Logger LOGGER = Logger.getLogger(ScrollerLayout.class);
+    private static final Logger LOGGER = Logger.getLogger( ScrollerLayout.class );
 
-    private Container target;
+    private final Container target;
 
     public static final Object NEXTSCROLLER = new Object();
 
@@ -39,7 +39,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
 
     private int start = 0;
 
-    public ScrollerLayout(final Container target)
+    public ScrollerLayout( final Container target )
     {
         this.target = target;
     }
@@ -47,16 +47,16 @@ public class ScrollerLayout implements LayoutManager2, Serializable
     public void incStart()
     {
         start++;
-        layoutContainer(target);
+        layoutContainer( target );
     }
 
     public void decStart()
     {
-        if (start > 0)
+        if ( start > 0 )
         {
             start--;
         }
-        layoutContainer(target);
+        layoutContainer( target );
     }
 
     public int getStart()
@@ -72,7 +72,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @param target the affected container
      * @throws AWTError if the target isn't the container specified to the BoxLayout constructor
      */
-    public synchronized void invalidateLayout(final Container target)
+    public synchronized void invalidateLayout( final Container target )
     {
         xChildren = null;
         yChildren = null;
@@ -86,9 +86,9 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @param name the name of the component
      * @param comp the component
      */
-    public void addLayoutComponent(final String name, final Component comp)
+    public void addLayoutComponent( final String name, final Component comp )
     {
-        addLayoutComponent(comp, name);
+        addLayoutComponent( comp, name );
     }
 
     /**
@@ -96,14 +96,14 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      *
      * @param comp the component
      */
-    public void removeLayoutComponent(final Component comp)
+    public void removeLayoutComponent( final Component comp )
     {
         start = 0;
-        if (comp == NEXTSCROLLER)
+        if ( comp == NEXTSCROLLER )
         {
             nextscroller = null;
         }
-        if (comp == PREVSCROLLER)
+        if ( comp == PREVSCROLLER )
         {
             prevscroller = null;
         }
@@ -115,14 +115,14 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @param comp        the component
      * @param constraints constraints
      */
-    public void addLayoutComponent(final Component comp, final Object constraints)
+    public void addLayoutComponent( final Component comp, final Object constraints )
     {
         start = 0;
-        if (constraints == NEXTSCROLLER)
+        if ( constraints == NEXTSCROLLER )
         {
             nextscroller = (JComponent) comp;
         }
-        if (constraints == PREVSCROLLER)
+        if ( constraints == PREVSCROLLER )
         {
             prevscroller = (JComponent) comp;
         }
@@ -138,17 +138,17 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @see #minimumLayoutSize
      * @see #maximumLayoutSize
      */
-    public Dimension preferredLayoutSize(final Container target)
+    public Dimension preferredLayoutSize( final Container target )
     {
         final Dimension size;
-        synchronized (this)
+        synchronized ( this )
         {
             checkRequests();
-            size = new Dimension(xTotal.preferred, yTotal.preferred);
+            size = new Dimension( xTotal.preferred, yTotal.preferred );
         }
         final Insets insets = target.getInsets();
-        size.width = (int) Math.min((long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE);
-        size.height = (int) Math.min((long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE);
+        size.width = (int) Math.min( (long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE );
+        size.height = (int) Math.min( (long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE );
         return size;
     }
 
@@ -161,18 +161,18 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @see #preferredLayoutSize
      * @see #maximumLayoutSize
      */
-    public Dimension minimumLayoutSize(final Container target)
+    public Dimension minimumLayoutSize( final Container target )
     {
         final Dimension size;
-        synchronized (this)
+        synchronized ( this )
         {
             checkRequests();
-            size = new Dimension(xTotal.minimum, yTotal.minimum);
+            size = new Dimension( xTotal.minimum, yTotal.minimum );
         }
 
         final Insets insets = target.getInsets();
-        size.width = (int) Math.min((long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE);
-        size.height = (int) Math.min((long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE);
+        size.width = (int) Math.min( (long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE );
+        size.height = (int) Math.min( (long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE );
         return size;
     }
 
@@ -185,18 +185,18 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @see #preferredLayoutSize
      * @see #minimumLayoutSize
      */
-    public Dimension maximumLayoutSize(final Container target)
+    public Dimension maximumLayoutSize( final Container target )
     {
         final Dimension size;
-        synchronized (this)
+        synchronized ( this )
         {
             checkRequests();
-            size = new Dimension(xTotal.maximum, yTotal.maximum);
+            size = new Dimension( xTotal.maximum, yTotal.maximum );
         }
 
         final Insets insets = target.getInsets();
-        size.width = (int) Math.min((long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE);
-        size.height = (int) Math.min((long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE);
+        size.width = (int) Math.min( (long) size.width + (long) insets.left + (long) insets.right, Integer.MAX_VALUE );
+        size.height = (int) Math.min( (long) size.height + (long) insets.top + (long) insets.bottom, Integer.MAX_VALUE );
         return size;
     }
 
@@ -208,7 +208,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @return the alignment >= 0.0f && <= 1.0f
      * @throws AWTError if the target isn't the container specified to the BoxLayout constructor
      */
-    public synchronized float getLayoutAlignmentX(final Container target)
+    public synchronized float getLayoutAlignmentX( final Container target )
     {
         checkRequests();
         return xTotal.alignment;
@@ -223,7 +223,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @return the alignment >= 0.0f && <= 1.0f
      * @throws AWTError if the target isn't the container specified to the BoxLayout constructor
      */
-    public synchronized float getLayoutAlignmentY(final Container target)
+    public synchronized float getLayoutAlignmentY( final Container target )
     {
         checkRequests();
         return yTotal.alignment;
@@ -232,11 +232,11 @@ public class ScrollerLayout implements LayoutManager2, Serializable
     private int getLayoutComponentsCount()
     {
         int nChildren = target.getComponentCount();
-        if (prevscroller != null)
+        if ( prevscroller != null )
         {
             nChildren--;
         }
-        if (nextscroller != null)
+        if ( nextscroller != null )
         {
             nChildren--;
         }
@@ -249,18 +249,18 @@ public class ScrollerLayout implements LayoutManager2, Serializable
      * @param target the container to lay out
      * @throws AWTError if the target isn't the container specified to the BoxLayout constructor
      */
-    public void layoutContainer(final Container target)
+    public void layoutContainer( final Container target )
     {
         try
         {
-            synchronized (this)
+            synchronized ( this )
             {
                 layoutContainer();
             }
         }
-        catch (RuntimeException e)
+        catch ( RuntimeException e )
         {
-            LOGGER.warn("Error layouting", e);
+            LOGGER.warn( "Error layouting", e );
         }
     }
 
@@ -281,159 +281,159 @@ public class ScrollerLayout implements LayoutManager2, Serializable
 
         // determine the child placements
         checkRequests();
-        SizeRequirements.calculateTiledPositions(alloc.width, xTotal, xChildren, xOffsets, xSpans, true);
+        SizeRequirements.calculateTiledPositions( alloc.width, xTotal, xChildren, xOffsets, xSpans, true );
         psw = xTotal.preferred;
 
         // flush changes to the container
         int xofs = 0;
         int layoutCount = 0;
         final int wi = target.getWidth();
-        final boolean hasScroller = (nextscroller != null);
-        boolean needsScroller = hasScroller && ((psw > wi));
+        final boolean hasScroller = ( nextscroller != null );
+        boolean needsScroller = hasScroller && ( ( psw > wi ) );
 
         int scw = 0;
-        if (needsScroller)
+        if ( needsScroller )
         {
             scw += nextscroller.getPreferredSize().width;
         }
-        if (start > 0)
+        if ( start > 0 )
         {
             scw += prevscroller.getPreferredSize().width;
         }
 
-        for (int i = 0; i < nChildren; i++)
+        for ( int i = 0; i < nChildren; i++ )
         {
-            final Component c = target.getComponent(i);
-            if (c == nextscroller)
+            final Component c = target.getComponent( i );
+            if ( c == nextscroller )
             {
                 continue;
             }
-            if (c == prevscroller)
+            if ( c == prevscroller )
             {
                 continue;
             }
-            if (layoutCount >= start)
+            if ( layoutCount >= start )
             {
-                int x = (int) Math.min((long) in.left + (long) xOffsets[layoutCount], Integer.MAX_VALUE) - xofs;
+                int x = (int) Math.min( (long) in.left + (long) xOffsets[layoutCount], Integer.MAX_VALUE ) - xofs;
                 int w = xSpans[layoutCount];
-                if (scw > 0)
+                if ( scw > 0 )
                 {
-                    if (x + w > wi - scw)
+                    if ( x + w > wi - scw )
                     {
                         w = wi - scw - x;
-                        if (w <= 0)
+                        if ( w <= 0 )
                         {
                             x = w = 0;
                         }
-                        positionComponent(c, x, w);
-                        if (i > 0)
+                        positionComponent( c, x, w );
+                        if ( i > 0 )
                         {
                             i -= 1;
                         }
-                        for (int k = i + 1; k < nChildren; k++)
+                        for ( int k = i + 1; k < nChildren; k++ )
                         {
-                            target.getComponent(k).setBounds(0, 0, 0, 0);
+                            target.getComponent( k ).setBounds( 0, 0, 0, 0 );
                         }
                         break;
                     }
                 }
-                positionComponent(c, x, w);
+                positionComponent( c, x, w );
             }
             else
             {
                 xofs += xSpans[layoutCount];
-                c.setBounds(0, 0, 0, 0);
-                needsScroller = hasScroller && ((psw - xofs > wi));
+                c.setBounds( 0, 0, 0, 0 );
+                needsScroller = hasScroller && ( ( psw - xofs > wi ) );
             }
             layoutCount++;
         }
-        if ((start > 0) && (prevscroller != null))
+        if ( ( start > 0 ) && ( prevscroller != null ) )
         {
             int pos = wi - prevscroller.getPreferredSize().width;
-            if (needsScroller)
+            if ( needsScroller )
             {
                 pos -= nextscroller.getPreferredSize().width;
             }
-            positionScroller(prevscroller, pos);
+            positionScroller( prevscroller, pos );
             psw += prevscroller.getWidth();
         }
         else
         {
-            prevscroller.setBounds(0, 0, 0, 0);
+            prevscroller.setBounds( 0, 0, 0, 0 );
         }
-        if (needsScroller)
+        if ( needsScroller )
         {
             final int pos = wi - nextscroller.getPreferredSize().width;
-            positionScroller(nextscroller, pos);
+            positionScroller( nextscroller, pos );
         }
         else
         {
-            nextscroller.setBounds(0, 0, 0, 0);
+            nextscroller.setBounds( 0, 0, 0, 0 );
         }
     }
 
-    private void positionComponent(final Component c, final int x, final int w)
+    private void positionComponent( final Component c, final int x, final int w )
     {
         final int hei = target.getHeight();
         int y = 0;
         final int h = c.getPreferredSize().height;
-        if (h < hei)
+        if ( h < hei )
         {
-            y = (hei - h) / 2;
+            y = ( hei - h ) / 2;
         }
-        c.setBounds(x, y, w, h);
+        c.setBounds( x, y, w, h );
     }
 
-    private void positionScroller(final JComponent scroller, final int x)
+    private void positionScroller( final JComponent scroller, final int x )
     {
         final int h = scroller.getPreferredSize().height;
-        int th = (h + scroller.getInsets().top + scroller.getInsets().bottom);
-        if (th > target.getHeight())
+        int th = ( h + scroller.getInsets().top + scroller.getInsets().bottom );
+        if ( th > target.getHeight() )
         {
             th = target.getHeight();
         }
-        final int y = (target.getHeight() - th) / 2;
+        final int y = ( target.getHeight() - th ) / 2;
         final int w = scroller.getPreferredSize().width;
-        scroller.setBounds(x, y, w, th);
+        scroller.setBounds( x, y, w, th );
     }
 
     void checkRequests()
     {
-        if (xChildren == null || yChildren == null)
+        if ( xChildren == null || yChildren == null )
         {
             final int n = target.getComponentCount();
             final int nLay = getLayoutComponentsCount();
             xChildren = new SizeRequirements[nLay];
             yChildren = new SizeRequirements[nLay];
             int layoutCounter = 0;
-            for (int i = 0; i < n; i++)
+            for ( int i = 0; i < n; i++ )
             {
-                final Component c = target.getComponent(i);
-                if (c == nextscroller)
+                final Component c = target.getComponent( i );
+                if ( c == nextscroller )
                 {
                     continue;
                 }
-                if (c == prevscroller)
+                if ( c == prevscroller )
                 {
                     continue;
                 }
-                if (!c.isVisible())
+                if ( !c.isVisible() )
                 {
-                    xChildren[layoutCounter] = new SizeRequirements(0, 0, 0, c.getAlignmentX());
-                    yChildren[layoutCounter] = new SizeRequirements(0, 0, 0, c.getAlignmentY());
+                    xChildren[layoutCounter] = new SizeRequirements( 0, 0, 0, c.getAlignmentX() );
+                    yChildren[layoutCounter] = new SizeRequirements( 0, 0, 0, c.getAlignmentY() );
                     layoutCounter++;
                     continue;
                 }
                 final Dimension min = c.getMinimumSize();
                 final Dimension typ = c.getPreferredSize();
                 final Dimension max = c.getMaximumSize();
-                xChildren[layoutCounter] = new SizeRequirements(min.width, typ.width, max.width, c.getAlignmentX());
-                yChildren[layoutCounter] = new SizeRequirements(min.height, typ.height, max.height, c.getAlignmentY());
+                xChildren[layoutCounter] = new SizeRequirements( min.width, typ.width, max.width, c.getAlignmentX() );
+                yChildren[layoutCounter] = new SizeRequirements( min.height, typ.height, max.height, c.getAlignmentY() );
                 layoutCounter++;
             }
 
-            xTotal = SizeRequirements.getTiledSizeRequirements(xChildren);
-            yTotal = SizeRequirements.getAlignedSizeRequirements(yChildren);
+            xTotal = SizeRequirements.getTiledSizeRequirements( xChildren );
+            yTotal = SizeRequirements.getAlignedSizeRequirements( yChildren );
         }
     }
 

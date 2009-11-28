@@ -25,10 +25,14 @@ package ch.jfactory.animation.scrolltext;
  */
 public class Section
 {
-    /** The paragraphs in this section. */
-    private Paragraph[] paragraphs;
+    /**
+     * The paragraphs in this section.
+     */
+    private final Paragraph[] paragraphs;
 
-    /** The total height of this section. */
+    /**
+     * The total height of this section.
+     */
     private int height = -1;
 
     /**
@@ -36,7 +40,7 @@ public class Section
      *
      * @param paragraphs an array of paragraphs which build up this section
      */
-    public Section(final Paragraph[] paragraphs)
+    public Section( final Paragraph[] paragraphs )
     {
         this.paragraphs = paragraphs;
     }
@@ -58,9 +62,9 @@ public class Section
      */
     public int getHeight()
     {
-        if (height == -1)
+        if ( height == -1 )
         {
-            for (final Paragraph paragraph : paragraphs)
+            for ( final Paragraph paragraph : paragraphs )
             {
                 height += paragraph.getHeight();
             }

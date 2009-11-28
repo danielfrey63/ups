@@ -43,81 +43,80 @@ public class ManifestUpdate extends Incrementor
      */
     protected void doExecute() throws BuildException
     {
-
         Manifest manifest = null;
         try
         {
-            manifest = new Manifest(new FileReader(getFile()));
+            manifest = new Manifest( new FileReader( getFile() ) );
         }
-        catch (FileNotFoundException x)
+        catch ( FileNotFoundException x )
         {
-            throw new BuildException("Manifest file not found. " + x.getMessage());
+            throw new BuildException( "Manifest file not found. " + x.getMessage() );
         }
-        catch (Exception x)
+        catch ( Exception x )
         {
-            throw new BuildException(x.getMessage());
+            throw new BuildException( x.getMessage() );
         }
 
         final Manifest.Section section;
         String sectionString = "Main";
-        if (getVariable().indexOf(".") > -1)
+        if ( getVariable().indexOf( "." ) > -1 )
         {
-            final int index = getVariable().lastIndexOf(".");
-            sectionString = getVariable().substring(0, index);
-            setVariable(getVariable().substring(index + 1));
-            section = manifest.getSection(sectionString);
+            final int index = getVariable().lastIndexOf( "." );
+            sectionString = getVariable().substring( 0, index );
+            setVariable( getVariable().substring( index + 1 ) );
+            section = manifest.getSection( sectionString );
         }
         else
         {
             section = manifest.getMainSection();
         }
-        if (null == section)
+        if ( null == section )
         {
-            throw new BuildException("The " + sectionString + " section does not exist.");
+            throw new BuildException( "The " + sectionString + " section does not exist." );
         }
 
-        final Manifest.Attribute attribute = section.getAttribute(getVariable());
-        if (null == attribute)
+        final Manifest.Attribute attribute = section.getAttribute( getVariable() );
+        if ( null == attribute )
         {
-            throw new BuildException("The " + getVariable() + " attribute does not exist.");
+            throw new BuildException( "The " + getVariable() + " attribute does not exist." );
         }
 
         final String version = attribute.getValue();
         int ver = 0;
         try
         {
-            ver = Integer.parseInt(version);
+            ver = Integer.parseInt( version );
         }
-        catch (NumberFormatException x)
+        catch ( NumberFormatException x )
         {
-            throw new BuildException("Must be a number: " + version);
+            throw new BuildException( "Must be a number: " + version );
         }
 
-        if (isDebug())
+        if ( isDebug() )
         {
-            System.out.println("Found version number: " + ver);
+            System.out.println( "Found version number: " + ver );
         }
 
-        ver = incrementVersion(ver);
+        ver = incrementVersion( ver );
 
-        attribute.setValue("" + ver);
+        attribute.setValue( "" + ver );
 
         try
         {
-            TaskTools.writeFile(getFile(), manifest.toString().getBytes());
+            TaskTools.writeFile( getFile(), manifest.toString().getBytes() );
         }
-        catch (IOException x)
+        catch ( IOException x )
         {
-            throw new BuildException("Error during write");
+            throw new BuildException( "Error during write" );
         }
     }
 
     protected String usage()
     {
         final StringBuffer buffer = new StringBuffer();
-        buffer.append("usage: use this ant task like the following:\n");
-        buffer.append("<manifest file=\"mainfest.txt\" variable=\"Section.Build\"/>\n");
-        buffer.append("optionally you may define the two attributes \"steps\" and \"odd\"\n");
+        buffer.append( "usage: use this ant task like the following:\n" );
+        buffer.append( "<manifest file=\"mainfest.txt\" variable=\"Section.Build\"/>\n" );
+        buffer.append( "optionally you may define the two attributes \"steps\" and \"odd\"\n" );
         return buffer.toString();
     }
 }

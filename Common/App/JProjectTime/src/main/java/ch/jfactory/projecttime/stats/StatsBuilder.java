@@ -17,9 +17,9 @@
 package ch.jfactory.projecttime.stats;
 
 import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
+import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.binding.PresentationModel;
 import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -34,56 +34,68 @@ import javax.swing.JTextField;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class StatsBuilder extends ActionCommandPanelBuilder {
+public class StatsBuilder extends ActionCommandPanelBuilder
+{
+    private final StatsModel model;
 
-    private StatsModel model;
-    private JTextField durationField;
+    private final JTextField durationField;
 
-    public StatsBuilder(final StatsModel model) {
+    public StatsBuilder( final StatsModel model )
+    {
         this.model = model;
         durationField = createDurationField();
     }
 
-    protected JComponent createMainPanel() {
-        final JPanel main = new JPanel(new BorderLayout());
-        main.add(createFieldsPanel(), BorderLayout.CENTER);
-        main.add(createToolbar(), BorderLayout.NORTH);
+    protected JComponent createMainPanel()
+    {
+        final JPanel main = new JPanel( new BorderLayout() );
+        main.add( createFieldsPanel(), BorderLayout.CENTER );
+        main.add( createToolbar(), BorderLayout.NORTH );
         return main;
     }
 
-    protected void initCommands() {
-        initCommand(new EntrySum(getCommandManager(), model));
+    protected void initCommands()
+    {
+        initCommand( new EntrySum( getCommandManager(), model ) );
     }
 
-    protected void initModelListeners() {
-        model.addPropertyChangeListener(StatsModel.PROPERTYNAME_SUM, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                durationField.setText(model.getSum());
+    protected void initModelListeners()
+    {
+        model.addPropertyChangeListener( StatsModel.PROPERTYNAME_SUM, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                durationField.setText( model.getSum() );
             }
-        });
-        model.getCurrentBeanModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BEAN, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                getCommandManager().getCommand(Commands.COMMANDID_SUM).setEnabled(evt.getNewValue() != null);
+        } );
+        model.getCurrentBeanModel().addPropertyChangeListener( PresentationModel.PROPERTYNAME_BEAN, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                getCommandManager().getCommand( Commands.COMMANDID_SUM ).setEnabled( evt.getNewValue() != null );
             }
-        });
+        } );
     }
 
-    private JComponent createToolbar() {
-        return getCommandManager().getGroup(Commands.GROUPID_TOOLBAR).createToolBar("toolbar");
+    private JComponent createToolbar()
+    {
+        return getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar( "toolbar" );
     }
 
-    private JComponent createFieldsPanel() {
-        final FormLayout layout = new FormLayout("12dlu, r:p, 4dlu, p:g(1.0), 12dlu", "12dlu, p, 8dlu, p, 12dlu:g(1.0)");
+    private JComponent createFieldsPanel()
+    {
+        final FormLayout layout = new FormLayout( "12dlu, r:p, 4dlu, p:g(1.0), 12dlu", "12dlu, p, 8dlu, p, 12dlu:g(1.0)" );
         final CellConstraints cc = new CellConstraints();
-        final JPanel fields = new JPanel(layout);
-        fields.add(new JLabel("Dauer:"), cc.xy(2, 2));
-        fields.add(durationField, cc.xy(4, 2));
+        final JPanel fields = new JPanel( layout );
+        fields.add( new JLabel( "Dauer:" ), cc.xy( 2, 2 ) );
+        fields.add( durationField, cc.xy( 4, 2 ) );
         return fields;
     }
 
-    private static JTextField createDurationField() {
+    private static JTextField createDurationField()
+    {
         final JTextField field = new JTextField();
-        field.setEditable(false);
+        field.setEditable( false );
         return field;
     }
 }

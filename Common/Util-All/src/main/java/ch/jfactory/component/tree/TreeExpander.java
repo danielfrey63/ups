@@ -14,39 +14,42 @@ import javax.swing.tree.TreePath;
  */
 public class TreeExpander implements PropertyChangeListener
 {
+    private final int depth;
 
-    private int depth;
+    private final JTree tree;
 
-    private JTree tree;
-
-    /** Registers members and expands the tree. */
-    public TreeExpander(final JTree tree, final int depth)
+    /**
+     * Registers members and expands the tree.
+     */
+    public TreeExpander( final JTree tree, final int depth )
     {
         this.depth = depth;
         this.tree = tree;
-        tree.addPropertyChangeListener(this);
-        expand(new TreePath(tree.getModel().getRoot()), 0);
+        tree.addPropertyChangeListener( this );
+        expand( new TreePath( tree.getModel().getRoot() ), 0 );
     }
 
-    /** @see java.beans.PropertyChangeListener#propertyChange(PropertyChangeEvent) */
-    public void propertyChange(final PropertyChangeEvent evt)
+    /**
+     * @see java.beans.PropertyChangeListener#propertyChange(PropertyChangeEvent)
+     */
+    public void propertyChange( final PropertyChangeEvent evt )
     {
-        if (evt.getPropertyName().equals("model"))
+        if ( evt.getPropertyName().equals( "model" ) )
         {
-            expand(new TreePath(tree.getModel().getRoot()), 0);
+            expand( new TreePath( tree.getModel().getRoot() ), 0 );
         }
     }
 
-    private void expand(final TreePath path, final int currentDepth)
+    private void expand( final TreePath path, final int currentDepth )
     {
-        tree.expandPath(path);
-        if (currentDepth < depth)
+        tree.expandPath( path );
+        if ( currentDepth < depth )
         {
             final TreeNode node = (TreeNode) path.getLastPathComponent();
-            for (int i = 0; i < node.getChildCount(); i++)
+            for ( int i = 0; i < node.getChildCount(); i++ )
             {
-                final TreePath childPath = path.pathByAddingChild(node.getChildAt(i));
-                expand(childPath, currentDepth + 1);
+                final TreePath childPath = path.pathByAddingChild( node.getChildAt( i ) );
+                expand( childPath, currentDepth + 1 );
             }
         }
     }

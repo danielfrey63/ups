@@ -12,6 +12,6 @@ import com.ethz.geobot.herbar.model.TaxonXBeanInfo;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public class FilterTaxonXBeanInfo extends TaxonXBeanInfo {
-
+public class FilterTaxonXBeanInfo extends TaxonXBeanInfo
+{
 }

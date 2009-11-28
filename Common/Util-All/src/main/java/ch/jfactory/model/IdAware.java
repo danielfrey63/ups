@@ -8,6 +8,5 @@ package ch.jfactory.model;
  */
 public interface IdAware
 {
-
     String getUid();
 }

@@ -24,21 +24,23 @@ import com.ethz.geobot.herbar.model.relevance.marker.WeakInherited;
 import com.ethz.geobot.herbar.model.relevance.marker.WeakUnited;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:20 $
  */
-public class RoleFactoryImpl implements RoleFactory {
+public class RoleFactoryImpl implements RoleFactory
+{
+    private static final Logger LOG = Logger.getLogger( RoleFactoryImpl.class );
 
-    private static final Category CAT = Category.getInstance(RoleFactoryImpl.class);
+    private final Map nameRoleMapping = new HashMap();
 
-    private Map nameRoleMapping = new HashMap();
-    private Map typeNameMapping = new HashMap();
-    private Map typeRoleMapping = new HashMap();
+    private final Map typeNameMapping = new HashMap();
 
-    private Object[][] mapping = {
+    private final Map typeRoleMapping = new HashMap();
+
+    private final Object[][] mapping = {
             {"INHERITED", RoleInheritedImpl.class},
             {"UNITED", RoleUnitedImpl.class},
             {"ASSIGNED", RoleAssignedImpl.class},
@@ -59,16 +61,18 @@ public class RoleFactoryImpl implements RoleFactory {
             {"UNRELEVANT_ASSIGNED", UnrelevantAssigned.class}
     };
 
-    public RoleFactoryImpl() {
-        for (int i = 0; i < mapping.length; i++) {
-            Class clazz = (Class) mapping[ i ][ 1 ];
-            Role role = (Role) AbsGraphModel.getTypeFactory().getInstance(clazz);
-            String name = (String) mapping[ i ][ 0 ];
-            role.setName(name);
-            nameRoleMapping.put(name, role);
-            typeNameMapping.put(clazz, name);
-            typeRoleMapping.put(clazz, role);
-            CAT.info("RoleFactoryImpl role " + role + "[" + role.getId() + "]");
+    public RoleFactoryImpl()
+    {
+        for ( final Object[] aMapping : mapping )
+        {
+            final Class clazz = (Class) aMapping[1];
+            final Role role = (Role) AbsGraphModel.getTypeFactory().getInstance( clazz );
+            final String name = (String) aMapping[0];
+            role.setName( name );
+            nameRoleMapping.put( name, role );
+            typeNameMapping.put( clazz, name );
+            typeRoleMapping.put( clazz, role );
+            LOG.info( "RoleFactoryImpl role " + role + "[" + role.getId() + "]" );
         }
     }
 
@@ -79,45 +83,53 @@ public class RoleFactoryImpl implements RoleFactory {
      *
      * @see ch.jfactory.model.graph.RoleFactory#getRole(String)
      */
-    public GraphNode getRole(Class type) {
-        GraphNode role = (GraphNode) typeRoleMapping.get(type);
-        if (role == null) {
+    public GraphNode getRole( final Class type )
+    {
+        GraphNode role = (GraphNode) typeRoleMapping.get( type );
+        if ( role == null )
+        {
             // This is a new not-configured role.
             // Make sure the role is saved if needed
-            CAT.warn("New role of type " + type.getName() + " created.");
-            role = AbsGraphModel.getModel().createNode(null, type);
-            String cName = (String) typeNameMapping.get(type);
-            String name = cName;
-            if (cName == null || cName.equals("")) {
-                StringBuffer buffer = new StringBuffer();
+            LOG.warn( "New role of type " + type.getName() + " created." );
+            role = AbsGraphModel.getModel().createNode( null, type );
+            String cName = (String) typeNameMapping.get( type );
+            final String name = cName;
+            if ( cName == null || cName.equals( "" ) )
+            {
+                final StringBuffer buffer = new StringBuffer();
                 cName = type.getName();
-                cName = cName.substring(cName.lastIndexOf('.') + 1, cName.length());
-                for (int i = 0; i < cName.length(); i++) {
-                    String c = cName.substring(i, i + 1);
-                    if (c.toUpperCase().equals(c) && i > 0) {
-                        buffer.append("_");
-                        buffer.append(c);
+                cName = cName.substring( cName.lastIndexOf( '.' ) + 1, cName.length() );
+                for ( int i = 0; i < cName.length(); i++ )
+                {
+                    final String c = cName.substring( i, i + 1 );
+                    if ( c.toUpperCase().equals( c ) && i > 0 )
+                    {
+                        buffer.append( "_" );
+                        buffer.append( c );
                     }
-                    else {
-                        buffer.append(c.toUpperCase());
+                    else
+                    {
+                        buffer.append( c.toUpperCase() );
                     }
                 }
-                nameRoleMapping.put(buffer.toString(), role);
-                typeNameMapping.put(cName, buffer.toString());
-                typeRoleMapping.put(cName, role);
-                CAT.warn("New role has generated name " + buffer);
+                nameRoleMapping.put( buffer.toString(), role );
+                typeNameMapping.put( cName, buffer.toString() );
+                typeRoleMapping.put( cName, role );
+                LOG.warn( "New role has generated name " + buffer );
             }
-            role.setName(name);
+            role.setName( name );
         }
         return role;
     }
 
-    public GraphNode getRole(String type) {
-        GraphNode role = (GraphNode) nameRoleMapping.get(type);
-        if (role == null) {
-            String message = "Role for type " + type + " not known";
-            RuntimeException e = new IllegalStateException(message);
-            CAT.fatal(message, e);
+    public GraphNode getRole( final String type )
+    {
+        final GraphNode role = (GraphNode) nameRoleMapping.get( type );
+        if ( role == null )
+        {
+            final String message = "Role for type " + type + " not known";
+            final RuntimeException e = new IllegalStateException( message );
+            LOG.fatal( message, e );
             throw e;
         }
         return role;

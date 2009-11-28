@@ -34,10 +34,11 @@ import java.util.Set;
  */
 public class DirtyCapableModel extends Model implements DirtyCapable
 {
-
     public static final String PROPERTYNAME_DIRTY = DirtyCapableModel.class.getName() + ".dirty";
 
-    /** Dummy value model for initialization. */
+    /**
+     * Dummy value model for initialization.
+     */
     public static final ValueModel DEFAULT_VALUEMODEL = new ValueHolder();
 
     private transient boolean dirty = false;
@@ -46,27 +47,27 @@ public class DirtyCapableModel extends Model implements DirtyCapable
 
     private transient Set superModels = new HashSet();
 
-    public void setDirty(final boolean dirty)
+    public void setDirty( final boolean dirty )
     {
         final boolean old = isDirty();
         this.dirty = dirty;
-        if (dirty)
+        if ( dirty )
         {
-            for (final Object superModel : superModels)
+            for ( final Object superModel : superModels )
             {
                 final DirtyCapable model = (DirtyCapable) superModel;
-                model.setDirty(dirty);
+                model.setDirty( dirty );
             }
         }
         else
         {
-            for (int i = 0; subModels != null && i < subModels.size(); i++)
+            for ( int i = 0; subModels != null && i < subModels.size(); i++ )
             {
-                final DirtyCapable model = (DirtyCapable) subModels.get(i);
-                model.setDirty(dirty);
+                final DirtyCapable model = (DirtyCapable) subModels.get( i );
+                model.setDirty( dirty );
             }
         }
-        firePropertyChange(DirtyCapableModel.PROPERTYNAME_DIRTY, old, dirty);
+        firePropertyChange( DirtyCapableModel.PROPERTYNAME_DIRTY, old, dirty );
     }
 
     public boolean isDirty()
@@ -79,33 +80,35 @@ public class DirtyCapableModel extends Model implements DirtyCapable
      *
      * @param subModel
      */
-    protected void addSubModel(final DirtyCapableModel subModel)
+    protected void addSubModel( final DirtyCapableModel subModel )
     {
-        if (superModels == null)
+        if ( superModels == null )
         {
             superModels = new HashSet();
         }
-        subModels.add(subModel);
-        subModel.addSuperModel(this);
+        subModels.add( subModel );
+        subModel.addSuperModel( this );
     }
 
-    private void addSuperModel(final DirtyCapable superModel)
+    private void addSuperModel( final DirtyCapable superModel )
     {
-        if (superModels == null)
+        if ( superModels == null )
         {
             superModels = new HashSet();
         }
-        superModels.add(superModel);
+        superModels.add( superModel );
     }
 
-    /** @param model  */
-    public void removeSubModel(final DirtyCapableModel model)
+    /**
+     * @param model
+     */
+    public void removeSubModel( final DirtyCapableModel model )
     {
-        if (subModels == null)
+        if ( subModels == null )
         {
             subModels = new ArrayList();
         }
-        subModels.remove(model);
+        subModels.remove( model );
     }
 
     /**
@@ -116,11 +119,10 @@ public class DirtyCapableModel extends Model implements DirtyCapable
      * @param newModel the new DirtyCapableModel
      * @return returns the model set
      */
-    protected DirtyCapable handleSubModel(final DirtyCapableModel oldModel, final DirtyCapableModel newModel)
+    protected DirtyCapable handleSubModel( final DirtyCapableModel oldModel, final DirtyCapableModel newModel )
     {
-
-        removeSubModel(oldModel);
-        addSubModel(newModel);
+        removeSubModel( oldModel );
+        addSubModel( newModel );
 
         return newModel;
     }
@@ -132,35 +134,33 @@ public class DirtyCapableModel extends Model implements DirtyCapable
      * @param oldValue the oldValue value
      * @param newValue the new value
      */
-    protected void fireTouchedPropertyChange(final String property, final Object oldValue, final Object newValue)
+    protected void fireTouchedPropertyChange( final String property, final Object oldValue, final Object newValue )
     {
-        firePropertyChange(property, oldValue, newValue);
+        firePropertyChange( property, oldValue, newValue );
     }
 
-    protected void fireTouchedPropertyChange(final String property, final boolean oldValue, final boolean newValue)
+    protected void fireTouchedPropertyChange( final String property, final boolean oldValue, final boolean newValue )
     {
-        firePropertyChange(property, oldValue, newValue);
+        firePropertyChange( property, oldValue, newValue );
     }
 
     protected class AndingDirtyListener implements PropertyChangeListener
     {
+        private final DirtyCapable[] dirtyCapableModels;
 
-        private DirtyCapable[] dirtyCapableModels;
-
-        public AndingDirtyListener(final DirtyCapable[] dirtyCapableModels)
+        public AndingDirtyListener( final DirtyCapable[] dirtyCapableModels )
         {
             this.dirtyCapableModels = dirtyCapableModels;
         }
 
-        public void propertyChange(final PropertyChangeEvent evt)
+        public void propertyChange( final PropertyChangeEvent evt )
         {
-
             boolean dirty = false;
-            for (final DirtyCapable dirtyCapable : dirtyCapableModels)
+            for ( final DirtyCapable dirtyCapable : dirtyCapableModels )
             {
                 dirty |= dirtyCapable.isDirty();
             }
-            setDirty(dirty);
+            setDirty( dirty );
         }
     }
 }

@@ -28,12 +28,11 @@ import org.pietschy.command.CommandManager;
  */
 public class CommitPresentationModel extends ActionCommand
 {
+    private final PresentationModel model;
 
-    private PresentationModel model;
-
-    public CommitPresentationModel(final CommandManager manager, final PresentationModel model)
+    public CommitPresentationModel( final CommandManager manager, final PresentationModel model )
     {
-        super(manager, CommonCommands.COMMANDID_TRIGGERAPPLY);
+        super( manager, CommonCommands.COMMANDID_TRIGGERAPPLY );
         this.model = model;
     }
 

@@ -32,28 +32,27 @@ import org.pietschy.command.ToggleVetoException;
  */
 public class RemoveFilterFromAndedFilterable extends ToggleCommand
 {
+    private final Filterable filterable;
 
-    private Filterable filterable;
+    private final Filter filter;
 
-    private Filter filter;
+    private final TreeExpandedRestorer expander;
 
-    private TreeExpandedRestorer expander;
-
-    public RemoveFilterFromAndedFilterable(final CommandManager manager, final String id, final Filterable filterable,
-                                           final Filter filter, final TreeExpandedRestorer expander)
+    public RemoveFilterFromAndedFilterable( final CommandManager manager, final String id, final Filterable filterable,
+                                            final Filter filter, final TreeExpandedRestorer expander )
     {
-        super(manager, id);
+        super( manager, id );
         this.filterable = filterable;
         this.filter = filter;
         this.expander = expander;
     }
 
-    protected void handleSelection(final boolean selected) throws ToggleVetoException
+    protected void handleSelection( final boolean selected ) throws ToggleVetoException
     {
-        if (selected)
+        if ( selected )
         {
             expander.save();
-            ((MultiAndFilter) filterable.getFilter()).removeFilter(filter);
+            ( (MultiAndFilter) filterable.getFilter() ).removeFilter( filter );
             filterable.filter();
             expander.restore();
         }

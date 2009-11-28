@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This control is used to display a scrollable Image
@@ -26,32 +26,37 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class ScrollableImage extends JLabel implements Scrollable {
-
+public class ScrollableImage extends JLabel implements Scrollable
+{
     /**
      * category for logging
      */
-    private final static Category cat = Category.getInstance(ScrollableImage.class);
+    private final static Logger LOG = Logger.getLogger( ScrollableImage.class );
+
     /**
      * currently shown image
      */
     private ImageIcon image = null;
+
     /**
      * zoomed instance of currently shown image
      */
     private ImageIcon zoomedImage = null;
+
     /**
      * zoomed state information
      */
     private boolean isZoomed = false;
+
     /**
      * reference to currently shown picture
      */
     private Picture currentPicture;
+
     /**
      * Instance of image locator
      */
-    private CachedImageLocator locator = ImageLocator.pictLocator;
+    private final CachedImageLocator locator = ImageLocator.pictLocator;
 
     /**
      * Listener to asynchron nofication of picture loading private AsynchronPictureLoaderListener finishVisitor = new
@@ -59,7 +64,8 @@ public class ScrollableImage extends JLabel implements Scrollable {
      * new ImageIcon( img ), "" ); } <p/> public void loadAborted( String name ) { setImage( null, "" ); } <p/> public
      * void loadStarted( String name ) { setImage( null, Strings.getString( "PICTURE.LOAD" ) ); } };
      */
-    public ScrollableImage() {
+    public ScrollableImage()
+    {
         super();
         //locator.attach( finishVisitor );
     }
@@ -69,21 +75,26 @@ public class ScrollableImage extends JLabel implements Scrollable {
      *
      * @param p reference to picture instancewhich should be shown
      */
-    public void setPicture(Picture p) {
-        cat.debug("setPicture called with picture: " + p);
+    public void setPicture( final Picture p )
+    {
+        LOG.debug( "setPicture called with picture: " + p );
         this.currentPicture = p;
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeLater( new Runnable()
+        {
+            public void run()
+            {
                 locator.abort();
-                if (currentPicture != null) {
-                    locator.loadImage(currentPicture.getName());
+                if ( currentPicture != null )
+                {
+                    locator.loadImage( currentPicture.getName() );
                 }
-                else {
-                    setImage(null, "");
+                else
+                {
+                    setImage( null, "" );
                 }
             }
-        });
+        } );
     }
 
     /**
@@ -91,67 +102,81 @@ public class ScrollableImage extends JLabel implements Scrollable {
      *
      * @param zoom true zoom enabled; false zoom disabled
      */
-    public void setZoom(boolean zoom) {
-        cat.debug(" setting new Zoom " + zoom);
+    public void setZoom( final boolean zoom )
+    {
+        LOG.debug( " setting new Zoom " + zoom );
 
         isZoomed = zoom;
         showCurrentIcon();
     }
 
-    private void setImage(ImageIcon i, String text) {
-        cat.debug("set image (" + i + ") and statustext: " + text);
-        if (this.image != i) {
-            if (image != i) {
+    private void setImage( final ImageIcon i, final String text )
+    {
+        LOG.debug( "set image (" + i + ") and statustext: " + text );
+        if ( this.image != i )
+        {
+            if ( image != i )
+            {
                 this.image = i;
                 this.zoomedImage = null;
             }
 
             showCurrentIcon();
-            setText(text);
+            setText( text );
         }
     }
 
-    public Dimension getPreferredScrollableViewportSize() {
+    public Dimension getPreferredScrollableViewportSize()
+    {
         return getPreferredSize();
     }
 
-    public int getScrollableUnitIncrement(Rectangle visibleRect,
-                                          int orientation,
-                                          int direction) {
+    public int getScrollableUnitIncrement( final Rectangle visibleRect,
+                                           final int orientation,
+                                           final int direction )
+    {
         return 50;
     }
 
-    public int getScrollableBlockIncrement(Rectangle visibleRect,
-                                           int orientation,
-                                           int direction) {
+    public int getScrollableBlockIncrement( final Rectangle visibleRect,
+                                            final int orientation,
+                                            final int direction )
+    {
         return 50;
     }
 
-    public boolean getScrollableTracksViewportWidth() {
+    public boolean getScrollableTracksViewportWidth()
+    {
         return false;
     }
 
-    public boolean getScrollableTracksViewportHeight() {
+    public boolean getScrollableTracksViewportHeight()
+    {
         return false;
     }
 
-    private void showCurrentIcon() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+    private void showCurrentIcon()
+    {
+        SwingUtilities.invokeLater( new Runnable()
+        {
+            public void run()
+            {
                 ImageIcon showImage = image;
-                if (isZoomed) {
-                    if (zoomedImage == null && image != null) {
-                        cat.debug(" scaling the image ");
-                        Image img = image.getImage();
-                        int width = img.getWidth(null) * 2;
-                        int height = img.getHeight(null) * 2;
-                        Image scaled = img.getScaledInstance(width, height, Image.SCALE_FAST);
-                        showImage = zoomedImage = new ImageIcon(scaled);
+                if ( isZoomed )
+                {
+                    if ( zoomedImage == null && image != null )
+                    {
+                        LOG.debug( " scaling the image " );
+                        final Image img = image.getImage();
+                        final int width = img.getWidth( null ) * 2;
+                        final int height = img.getHeight( null ) * 2;
+                        final Image scaled = img.getScaledInstance( width, height, Image.SCALE_FAST );
+                        showImage = zoomedImage = new ImageIcon( scaled );
                     }
                     showImage = zoomedImage;
                 }
-                setIcon(showImage);
+                setIcon( showImage );
             }
-        });
+        } );
     }
 }

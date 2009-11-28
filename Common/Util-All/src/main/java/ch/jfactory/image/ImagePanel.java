@@ -51,7 +51,6 @@ import javax.swing.border.LineBorder;
  */
 public class ImagePanel extends JPanel
 {
-
     private Image image = DEFAULT_IMAGE;
 
     private Image display = image;
@@ -60,18 +59,17 @@ public class ImagePanel extends JPanel
 
     private Dimension lastComponentSize = getSize();
 
-    private Point startPoint = new Point(0, 0);
+    private Point startPoint = new Point( 0, 0 );
 
-    private Point imageZero = new Point(0, 0);
+    private Point imageZero = new Point( 0, 0 );
 
     private Point lastImageZero;
 
     private final MouseMotionAdapter MOTION_ADAPTER = new MouseMotionAdapter()
     {
         @Override
-        public void mouseDragged(final MouseEvent e)
+        public void mouseDragged( final MouseEvent e )
         {
-
             // Current diff
             final int dx = e.getPoint().x - startPoint.x;
             final int dy = e.getPoint().y - startPoint.y;
@@ -88,44 +86,44 @@ public class ImagePanel extends JPanel
     private final MouseAdapter MOUSE_ADAPTER = new MouseAdapter()
     {
         @Override
-        public void mousePressed(final MouseEvent e)
+        public void mousePressed( final MouseEvent e )
         {
-            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
             startPoint = e.getPoint();
         }
 
         @Override
-        public void mouseReleased(final MouseEvent e)
+        public void mouseReleased( final MouseEvent e )
         {
-            setCursor(Cursor.getDefaultCursor());
-            lastImageZero = new Point(imageZero);
+            setCursor( Cursor.getDefaultCursor() );
+            lastImageZero = new Point( imageZero );
         }
     };
 
     private static final String NO_IMAGE_STRING = "no image";
 
-    private static final DefaultImage DEFAULT_IMAGE = new DefaultImage(new Dimension(500, 500), NO_IMAGE_STRING);
+    private static final DefaultImage DEFAULT_IMAGE = new DefaultImage( new Dimension( 500, 500 ), NO_IMAGE_STRING );
 
-    private static final Dimension DEFAULT_NON_FILLED_PREFERRED_SIZE = new Dimension(100, 100);
+    private static final Dimension DEFAULT_NON_FILLED_PREFERRED_SIZE = new Dimension( 100, 100 );
 
     public ImagePanel()
     {
-        this(null, false);
+        this( null, false );
     }
 
-    public ImagePanel(final Image image)
+    public ImagePanel( final Image image )
     {
-        this(image, false);
+        this( image, false );
     }
 
-    public ImagePanel(final Image image, final boolean fill)
+    public ImagePanel( final Image image, final boolean fill )
     {
         this.fill = fill;
         installListener();
-        setImage(image);
-        addComponentListener(new ComponentAdapter()
+        setImage( image );
+        addComponentListener( new ComponentAdapter()
         {
-            public void componentResized(final ComponentEvent e)
+            public void componentResized( final ComponentEvent e )
             {
                 setDisplayImage();
                 // Just translate by the new size difference.
@@ -133,27 +131,27 @@ public class ImagePanel extends JPanel
                 final int nh = getHeight();
                 final int ow = lastComponentSize.width;
                 final int oh = lastComponentSize.height;
-                imageZero.translate((nw - ow) / 2, (nh - oh) / 2);
-                lastImageZero = new Point(imageZero);
+                imageZero.translate( ( nw - ow ) / 2, ( nh - oh ) / 2 );
+                lastImageZero = new Point( imageZero );
                 lastComponentSize = getSize();
                 assureBounds();
                 repaint();
             }
-        });
+        } );
     }
 
-    public void setImage(final Image image)
+    public void setImage( final Image image )
     {
-        if (image != null)
+        if ( image != null )
         {
             this.image = image;
             this.display = image;
             final int cw = getWidth();
             final int ch = getHeight();
-            final int iw = display.getWidth(null);
-            final int ih = display.getHeight(null);
-            imageZero = new Point((cw - iw) / 2, (ch - ih) / 2);
-            lastImageZero = new Point(imageZero);
+            final int iw = display.getWidth( null );
+            final int ih = display.getHeight( null );
+            imageZero = new Point( ( cw - iw ) / 2, ( ch - ih ) / 2 );
+            lastImageZero = new Point( imageZero );
             assureBounds();
         }
         else
@@ -168,7 +166,7 @@ public class ImagePanel extends JPanel
         return display;
     }
 
-    public void setFill(final boolean fill)
+    public void setFill( final boolean fill )
     {
         this.fill = fill;
         setDisplayImage();
@@ -180,14 +178,14 @@ public class ImagePanel extends JPanel
         return fill;
     }
 
-    public void paint(final Graphics g)
+    public void paint( final Graphics g )
     {
-        super.paint(g);
-        if (display == null)
+        super.paint( g );
+        if ( display == null )
         {
             return;
         }
-        drawImage(g, display);
+        drawImage( g, display );
     }
 
     public Dimension getPreferredSize()
@@ -195,46 +193,45 @@ public class ImagePanel extends JPanel
         return DEFAULT_NON_FILLED_PREFERRED_SIZE;
     }
 
-    private void drawImage(final Graphics g, final Image image)
+    private void drawImage( final Graphics g, final Image image )
     {
-
         final Insets in = getInsets();
         // Display area width and height
         final int dw = getWidth() - in.left - in.right;
         final int dh = getHeight() - in.top - in.bottom;
 
-        g.setClip(in.left, in.top, dw, dh);
-        if (fill || image == DEFAULT_IMAGE)
+        g.setClip( in.left, in.top, dw, dh );
+        if ( fill || image == DEFAULT_IMAGE )
         {
             // Image width and height
-            final int iw = image.getWidth(null);
-            final int ih = image.getHeight(null);
-            g.drawImage(image, in.left + (dw - iw) / 2, in.top + (dh - ih) / 2, iw, ih, null);
+            final int iw = image.getWidth( null );
+            final int ih = image.getHeight( null );
+            g.drawImage( image, in.left + ( dw - iw ) / 2, in.top + ( dh - ih ) / 2, iw, ih, null );
         }
         else
         {
-            g.drawImage(image, imageZero.x, imageZero.y, null);
+            g.drawImage( image, imageZero.x, imageZero.y, null );
         }
     }
 
     private void setDisplayImage()
     {
-        if (fill)
+        if ( fill )
         {
             final Insets in = getInsets();
 
-            final int iw = image.getWidth(null);
-            final int ih = image.getHeight(null);
+            final int iw = image.getWidth( null );
+            final int ih = image.getHeight( null );
             // Display area width and height
             final int dw = getWidth() - in.left - in.right;
             final int dh = getHeight() - in.top - in.bottom;
-            final float fw = ((float) dw) / ((float) iw);
-            final float fh = ((float) dh) / ((float) ih);
-            final float f = Math.min(fw, fh);
-            final BufferedImage bi = ImageUtils.createBufferedImage(image);
-            if (f > 0)
+            final float fw = ( (float) dw ) / ( (float) iw );
+            final float fh = ( (float) dh ) / ( (float) ih );
+            final float f = Math.min( fw, fh );
+            final BufferedImage bi = ImageUtils.createBufferedImage( image );
+            if ( f > 0 )
             {
-                display = ImageUtils.createHeadlessSmoothBufferedImage(bi, (int) (iw * f), (int) (ih * f));
+                display = ImageUtils.createHeadlessSmoothBufferedImage( bi, (int) ( iw * f ), (int) ( ih * f ) );
             }
         }
         else
@@ -245,15 +242,15 @@ public class ImagePanel extends JPanel
 
     private void installListener()
     {
-        if (fill)
+        if ( fill )
         {
-            removeMouseMotionListener(MOTION_ADAPTER);
-            removeMouseListener(MOUSE_ADAPTER);
+            removeMouseMotionListener( MOTION_ADAPTER );
+            removeMouseListener( MOUSE_ADAPTER );
         }
         else
         {
-            addMouseMotionListener(MOTION_ADAPTER);
-            addMouseListener(MOUSE_ADAPTER);
+            addMouseMotionListener( MOTION_ADAPTER );
+            addMouseListener( MOUSE_ADAPTER );
         }
     }
 
@@ -263,52 +260,52 @@ public class ImagePanel extends JPanel
     {
         final int cw = getWidth();
         final int ch = getHeight();
-        final int iw = display.getWidth(null);
-        final int ih = display.getHeight(null);
-        if (cw != 0 && ch != 0)
+        final int iw = display.getWidth( null );
+        final int ih = display.getHeight( null );
+        if ( cw != 0 && ch != 0 )
         {
             final Insets in = getInsets();
-            if (cw >= iw + in.right + in.left)
+            if ( cw >= iw + in.right + in.left )
             {
-                imageZero.x = Math.min(Math.max(imageZero.x, in.left), cw - in.right - iw);
+                imageZero.x = Math.min( Math.max( imageZero.x, in.left ), cw - in.right - iw );
             }
             else
             {
-                imageZero.x = Math.min(Math.max(imageZero.x, cw - in.right - iw), in.left);
+                imageZero.x = Math.min( Math.max( imageZero.x, cw - in.right - iw ), in.left );
             }
-            if (ch >= ih + in.top + in.bottom)
+            if ( ch >= ih + in.top + in.bottom )
             {
-                imageZero.y = Math.min(Math.max(imageZero.y, in.top), ch - in.bottom - ih);
+                imageZero.y = Math.min( Math.max( imageZero.y, in.top ), ch - in.bottom - ih );
             }
             else
             {
-                imageZero.y = Math.min(Math.max(imageZero.y, ch - in.bottom - ih), in.top);
+                imageZero.y = Math.min( Math.max( imageZero.y, ch - in.bottom - ih ), in.top );
             }
         }
     }
 
-    public static void main(final String[] args) throws IOException
+    public static void main( final String[] args ) throws IOException
     {
         final String path = "E:/Beispiel-gross.jpg";
 //        final String path = "E:/Beispiel-klein.jpg";
         final JFrame f = new JFrame();
-        final ImagePanel panel = new ImagePanel(ImageUtils.createImage(path), false);
-        panel.setBorder(new CompoundBorder(new CompoundBorder(new EmptyBorder(1, 1, 1, 1),
-                new LineBorder(Color.GRAY, 1)), new EmptyBorder(1, 1, 1, 1)));
-        f.add(panel, BorderLayout.CENTER);
-        final JCheckBox cb = new JCheckBox("fill");
-        cb.addActionListener(new ActionListener()
+        final ImagePanel panel = new ImagePanel( ImageUtils.createImage( path ), false );
+        panel.setBorder( new CompoundBorder( new CompoundBorder( new EmptyBorder( 1, 1, 1, 1 ),
+                new LineBorder( Color.GRAY, 1 ) ), new EmptyBorder( 1, 1, 1, 1 ) ) );
+        f.add( panel, BorderLayout.CENTER );
+        final JCheckBox cb = new JCheckBox( "fill" );
+        cb.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                panel.setFill(cb.isSelected());
+                panel.setFill( cb.isSelected() );
                 panel.repaint();
             }
-        });
-        f.add(cb, BorderLayout.NORTH);
-        f.setSize(400, 400);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
+        } );
+        f.add( cb, BorderLayout.NORTH );
+        f.setSize( 400, 400 );
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        f.setLocationRelativeTo( null );
+        f.setVisible( true );
     }
 }

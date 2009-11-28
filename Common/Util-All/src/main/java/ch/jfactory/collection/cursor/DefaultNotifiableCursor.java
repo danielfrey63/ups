@@ -15,7 +15,9 @@ public class DefaultNotifiableCursor implements NotifiableCursor
 
     private Vector cursorChangeListenerList;
 
-    /** Construct a empty NotifiableCursor */
+    /**
+     * Construct a empty NotifiableCursor
+     */
     public DefaultNotifiableCursor()
     {
         this.cursor = new DefaultCursor();
@@ -26,7 +28,7 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param cursor existing cursor object
      */
-    public DefaultNotifiableCursor(final Cursor cursor)
+    public DefaultNotifiableCursor( final Cursor cursor )
     {
         this.cursor = cursor;
     }
@@ -36,9 +38,9 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param list reference to a List
      */
-    public DefaultNotifiableCursor(final java.util.List list)
+    public DefaultNotifiableCursor( final java.util.List list )
     {
-        this.cursor = new DefaultCursor(list);
+        this.cursor = new DefaultCursor( list );
     }
 
     /**
@@ -46,17 +48,17 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param array array of objects
      */
-    public DefaultNotifiableCursor(final Object[] array)
+    public DefaultNotifiableCursor( final Object[] array )
     {
-        this.cursor = new DefaultCursor(array);
+        this.cursor = new DefaultCursor( array );
     }
 
-    public void setCurrent(final Object obj)
+    public void setCurrent( final Object obj )
     {
-        if (obj != cursor.getCurrent())
+        if ( obj != cursor.getCurrent() )
         {
-            cursor.setCurrent(obj);
-            fireCursorChange(new CursorChangeEvent(cursor));
+            cursor.setCurrent( obj );
+            fireCursorChange( new CursorChangeEvent( cursor ) );
         }
     }
 
@@ -65,10 +67,10 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param cursor the new cursor
      */
-    public void setCursor(final Cursor cursor)
+    public void setCursor( final Cursor cursor )
     {
         this.cursor = cursor;
-        fireCursorChange(new CursorChangeEvent(cursor));
+        fireCursorChange( new CursorChangeEvent( cursor ) );
     }
 
     /**
@@ -76,10 +78,10 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param list the new list
      */
-    public void setCursor(final java.util.List list)
+    public void setCursor( final java.util.List list )
     {
-        this.cursor = new DefaultCursor(list);
-        fireCursorChange(new CursorChangeEvent(cursor));
+        this.cursor = new DefaultCursor( list );
+        fireCursorChange( new CursorChangeEvent( cursor ) );
     }
 
     /**
@@ -87,10 +89,10 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param objects the new array of objects
      */
-    public void setCursor(final Object[] objects)
+    public void setCursor( final Object[] objects )
     {
-        this.cursor = new DefaultCursor(objects);
-        fireCursorChange(new CursorChangeEvent(cursor));
+        this.cursor = new DefaultCursor( objects );
+        fireCursorChange( new CursorChangeEvent( cursor ) );
     }
 
     public int getCurrentIndex()
@@ -118,37 +120,37 @@ public class DefaultNotifiableCursor implements NotifiableCursor
         return cursor.getIterator();
     }
 
-    public synchronized void addCursorChangeListener(final CursorChangeListener listener)
+    public synchronized void addCursorChangeListener( final CursorChangeListener listener )
     {
-        if (cursorChangeListenerList == null)
+        if ( cursorChangeListenerList == null )
         {
             cursorChangeListenerList = new Vector();
         }
-        cursorChangeListenerList.add(listener);
+        cursorChangeListenerList.add( listener );
 
         // send initial event
-        listener.cursorChange(new CursorChangeEvent(cursor));
+        listener.cursorChange( new CursorChangeEvent( cursor ) );
     }
 
-    public synchronized void removeCursorChangeListener(final CursorChangeListener listener)
+    public synchronized void removeCursorChangeListener( final CursorChangeListener listener )
     {
-        if (cursorChangeListenerList != null)
+        if ( cursorChangeListenerList != null )
         {
-            cursorChangeListenerList.remove(listener);
+            cursorChangeListenerList.remove( listener );
         }
     }
 
     public Object next()
     {
         final Object obj = cursor.next();
-        fireCursorChange(new CursorChangeEvent(cursor));
+        fireCursorChange( new CursorChangeEvent( cursor ) );
         return obj;
     }
 
     public Object previous()
     {
         final Object obj = cursor.previous();
-        fireCursorChange(new CursorChangeEvent(cursor));
+        fireCursorChange( new CursorChangeEvent( cursor ) );
         return obj;
     }
 
@@ -162,20 +164,20 @@ public class DefaultNotifiableCursor implements NotifiableCursor
         return cursor.hasPrevious();
     }
 
-    protected void fireCursorChange(final CursorChangeEvent event)
+    protected void fireCursorChange( final CursorChangeEvent event )
     {
         final Vector list;
-        synchronized (this)
+        synchronized ( this )
         {
-            if (cursorChangeListenerList == null)
+            if ( cursorChangeListenerList == null )
             {
                 return;
             }
             list = (Vector) cursorChangeListenerList.clone();
         }
-        for (Object aList : list)
+        for ( final Object aList : list )
         {
-            ((CursorChangeListener) aList).cursorChange(event);
+            ( (CursorChangeListener) aList ).cursorChange( event );
         }
     }
 }

@@ -1,6 +1,8 @@
 package ch.jfactory.application.presentation;
 
-/** Todo: document $Author: daniel_frey $ $Revision: 1.1 $ */
+/**
+ * Todo: document $Author: daniel_frey $ $Revision: 1.1 $
+ */
 public class Constants
 {
     /**
@@ -15,7 +17,9 @@ public class Constants
      */
     public static final int GAP_BETWEEN_REGIONS = 17;
 
-    /** Space between the first component in a panel and the left or top border. */
+    /**
+     * Space between the first component in a panel and the left or top border.
+     */
     public static final int GAP_BORDER_LEFT_TOP = 12;
 
     /**
@@ -24,9 +28,13 @@ public class Constants
      */
     public static final int GAP_BORDER_RIGHT_BOTTOM = 11;
 
-    /** Space within groups of any kind of buttons or components that belong together. */
+    /**
+     * Space within groups of any kind of buttons or components that belong together.
+     */
     public static final int GAP_WITHIN_GROUP = 5;
 
-    /** Space within groups of toggle buttons or components of toolbars. */
+    /**
+     * Space within groups of toggle buttons or components of toolbars.
+     */
     public static final int GAP_WITHIN_TOGGLES = 2;
 }

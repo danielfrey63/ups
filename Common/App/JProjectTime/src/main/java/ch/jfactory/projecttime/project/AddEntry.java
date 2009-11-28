@@ -16,9 +16,9 @@
  */
 package ch.jfactory.projecttime.project;
 
+import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import ch.jfactory.projecttime.domain.impl.DefaultEntry;
-import ch.jfactory.lang.ArrayUtils;
 import com.jgoodies.binding.PresentationModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -31,35 +31,40 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class AddEntry extends ActionCommand {
+public class AddEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public AddEntry(final CommandManager manager, final ProjectModel model) {
-        super(manager, Commands.COMMANDID_ADD);
+    public AddEntry( final CommandManager manager, final ProjectModel model )
+    {
+        super( manager, Commands.COMMANDID_ADD );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final PresentationModel currentBeanModel = model.getCurrentBeanModel();
         final IFEntry entry = (IFEntry) currentBeanModel.getBean();
-        if (entry != null) {
-            final IFEntry child = new DefaultEntry("Neu", "");
+        if ( entry != null )
+        {
+            final IFEntry child = new DefaultEntry( "Neu", "" );
             final TreeSelectionModel selectionModel = (TreeSelectionModel) model.getSelectionModel().getValue();
             final TreePath selectionPath = selectionModel.getSelectionPath();
             final IFEntry selection = (IFEntry) selectionPath.getLastPathComponent();
             final TreePath path;
             final int pos;
-            if (selection.getStart() == null) {
+            if ( selection.getStart() == null )
+            {
                 path = selectionPath;
                 pos = selection.getChildren().length;
             }
-            else {
+            else
+            {
                 path = selectionPath.getParentPath();
-                pos = ArrayUtils.indexOf(selection.getParent().getChildren(), selection) + 1;
+                pos = ArrayUtils.indexOf( selection.getParent().getChildren(), selection ) + 1;
             }
-            model.getTreeModel().insertInto(child, path, pos);
-            model.setNewChild(child);
+            model.getTreeModel().insertInto( child, path, pos );
+            model.setNewChild( child );
         }
     }
 }

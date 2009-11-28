@@ -12,18 +12,18 @@ import javax.swing.JLabel;
  */
 public class PatchedBasicSearchCellRenderer extends BasicSearchCellRenderer
 {
-    public PatchedBasicSearchCellRenderer(final javax.help.Map map)
+    public PatchedBasicSearchCellRenderer( final javax.help.Map map )
     {
-        super(map);
+        super( map );
     }
 
-    public void setFont(final Font font)
+    public void setFont( final Font font )
     {
         // initialize title variable to avoid NullPointerException in super.setFont
-        if (title == null)
+        if ( title == null )
         {
             title = new JLabel();
         }
-        super.setFont(font);
+        super.setFont( font );
     }
 }

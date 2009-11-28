@@ -16,10 +16,10 @@
  */
 package ch.jfactory.projecttime.main;
 
-import javax.swing.JFrame;
 import ch.jfactory.application.AbstractMainController;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.binding.InfoModel;
+import javax.swing.JFrame;
 
 /**
  * TODO: document
@@ -27,16 +27,19 @@ import ch.jfactory.binding.InfoModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.3 $ $Date: 2006/11/16 13:25:17 $
  */
-public class MainController extends AbstractMainController {
-
+public class MainController extends AbstractMainController
+{
     private JFrame parent;
-    private MainModel model;
 
-    public MainController(MainModel model, InfoModel infoModel) {
-        super(model, infoModel);
+    private final MainModel model;
+
+    public MainController( final MainModel model, final InfoModel infoModel )
+    {
+        super( model, infoModel );
         this.model = model;
     }
 
-    protected void initModel(AbstractMainModel model) {
+    protected void initModel( final AbstractMainModel model )
+    {
     }
 }

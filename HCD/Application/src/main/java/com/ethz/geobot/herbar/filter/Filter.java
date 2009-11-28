@@ -16,8 +16,8 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class Filter {
-
+public class Filter
+{
     /**
      * Holds value of property name.
      */
@@ -36,26 +36,31 @@ public class Filter {
     /**
      * Creates a new instance of Filter
      */
-    public Filter() {
+    public Filter()
+    {
     }
 
-    public Filter(FilterModel model) {
+    public Filter( final FilterModel model )
+    {
         name = model.getName();
-        HerbarModel baseModel = model.getDependantModel();
+        final HerbarModel baseModel = model.getDependantModel();
 
-        if (baseModel instanceof FilterModel) {
-            FilterModel bfm = (FilterModel) baseModel;
+        if ( baseModel instanceof FilterModel )
+        {
+            final FilterModel bfm = (FilterModel) baseModel;
             baseFilterName = bfm.getName();
         }
-        else {
+        else
+        {
             baseFilterName = "";
         }
 
         // copy filter details
-        FilterDefinitionDetail[] defDetails = model.getFilterDetails();
+        final FilterDefinitionDetail[] defDetails = model.getFilterDetails();
         details = new Detail[defDetails.length];
-        for (int i = 0; i < defDetails.length; i++) {
-            details[ i ] = new Detail(defDetails[ i ]);
+        for ( int i = 0; i < defDetails.length; i++ )
+        {
+            details[i] = new Detail( defDetails[i] );
         }
     }
 
@@ -64,7 +69,8 @@ public class Filter {
      *
      * @return Value of property name.
      */
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
@@ -73,7 +79,8 @@ public class Filter {
      *
      * @param name New value of property name.
      */
-    public void setName(String name) {
+    public void setName( final String name )
+    {
         this.name = name;
     }
 
@@ -82,7 +89,8 @@ public class Filter {
      *
      * @return Value of property baseFilterName.
      */
-    public String getBaseFilterName() {
+    public String getBaseFilterName()
+    {
         return this.baseFilterName;
     }
 
@@ -91,7 +99,8 @@ public class Filter {
      *
      * @param baseFilterName New value of property baseFilterName.
      */
-    public void setBaseFilterName(String baseFilterName) {
+    public void setBaseFilterName( final String baseFilterName )
+    {
         this.baseFilterName = baseFilterName;
     }
 
@@ -100,7 +109,8 @@ public class Filter {
      *
      * @return Value of property details.
      */
-    public Detail[] getDetails() {
+    public Detail[] getDetails()
+    {
         return this.details;
     }
 
@@ -109,7 +119,8 @@ public class Filter {
      *
      * @param details New value of property details.
      */
-    public void setDetails(Detail[] details) {
+    public void setDetails( final Detail[] details )
+    {
         this.details = details;
     }
 }

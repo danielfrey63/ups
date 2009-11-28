@@ -30,15 +30,18 @@ import javax.swing.AbstractAction;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class ActionConvertFilterFromUst extends AbstractAction {
-
-    public void actionPerformed(ActionEvent e) {
-        try {
+public class ActionConvertFilterFromUst extends AbstractAction
+{
+    public void actionPerformed( final ActionEvent e )
+    {
+        try
+        {
             final HerbarModel base = Application.getInstance().getModel();
-            final FilterModel model = new FilterModel(base, "Pruefungsliste");
-            FilterFactory.getInstance().saveFilterModel(model);
+            final FilterModel model = new FilterModel( base, "Pruefungsliste" );
+            FilterFactory.getInstance().saveFilterModel( model );
         }
-        catch (FilterPersistentException e1) {
+        catch ( FilterPersistentException e1 )
+        {
             e1.printStackTrace();
         }
     }

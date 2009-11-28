@@ -14,23 +14,23 @@ import javax.swing.JTree;
  */
 public class PatchedBasicSearchNavigatorUI extends BasicSearchNavigatorUI
 {
-    public static javax.swing.plaf.ComponentUI createUI(final JComponent x)
+    public static javax.swing.plaf.ComponentUI createUI( final JComponent x )
     {
-        return new PatchedBasicSearchNavigatorUI((JHelpSearchNavigator) x);
+        return new PatchedBasicSearchNavigatorUI( (JHelpSearchNavigator) x );
     }
 
-    public PatchedBasicSearchNavigatorUI(final JHelpSearchNavigator b)
+    public PatchedBasicSearchNavigatorUI( final JHelpSearchNavigator b )
     {
-        super(b);
+        super( b );
     }
 
-    protected void setCellRenderer(final NavigatorView view, final JTree tree)
+    protected void setCellRenderer( final NavigatorView view, final JTree tree )
     {
-        if (view == null)
+        if ( view == null )
         {
             return;
         }
         final javax.help.Map map = view.getHelpSet().getCombinedMap();
-        tree.setCellRenderer(new PatchedBasicSearchCellRenderer(map));
+        tree.setCellRenderer( new PatchedBasicSearchCellRenderer( map ) );
     }
 }

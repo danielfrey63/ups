@@ -26,28 +26,44 @@ package ch.jfactory.animation.scrolltext;
  */
 public class Paragraph
 {
-    /** The formatter assicitated with this paragraph. */
+    /**
+     * The formatter assicitated with this paragraph.
+     */
     private Formatter formatter = new Formatter();
 
-    /** The lines in this paragraph. */
+    /**
+     * The lines in this paragraph.
+     */
     private String[] lines;
 
-    /** The total height of this paragraph. */
+    /**
+     * The total height of this paragraph.
+     */
     private int height;
 
-    /** The total width of this paragraph. */
-    private int width;
+    /**
+     * The total width of this paragraph.
+     */
+    private final int width;
 
-    /** The The text of the paragraph. */
-    private String text;
+    /**
+     * The The text of the paragraph.
+     */
+    private final String text;
 
-    /** The vertical line coordinates of the base lines in pixels. */
+    /**
+     * The vertical line coordinates of the base lines in pixels.
+     */
     private int[] verticalLineCoords;
 
-    /** The horizontal starts of the first character in pixels. */
+    /**
+     * The horizontal starts of the first character in pixels.
+     */
     private int[] horizontalLineCoords;
 
-    /** The total line lengths in pixels. */
+    /**
+     * The total line lengths in pixels.
+     */
     private int[] lengths;
 
     /**
@@ -57,7 +73,7 @@ public class Paragraph
      * @param text      the text to break into lines
      * @param width     the width of the paragraph
      */
-    public Paragraph(final Formatter formatter, final String text, final int width)
+    public Paragraph( final Formatter formatter, final String text, final int width )
     {
         this.formatter = formatter;
         this.text = text;
@@ -71,7 +87,7 @@ public class Paragraph
      */
     public String[] getLines()
     {
-        if (lines == null)
+        if ( lines == null )
         {
             init();
         }
@@ -86,7 +102,7 @@ public class Paragraph
      */
     public int getHeight()
     {
-        if (lines == null)
+        if ( lines == null )
         {
             init();
         }
@@ -106,7 +122,7 @@ public class Paragraph
      */
     public int[] getVerticalCoords()
     {
-        if (lines == null)
+        if ( lines == null )
         {
             init();
         }
@@ -122,7 +138,7 @@ public class Paragraph
      */
     public int[] getHorizontalCoords()
     {
-        if (lines == null)
+        if ( lines == null )
         {
             init();
         }
@@ -140,13 +156,15 @@ public class Paragraph
         return formatter;
     }
 
-    /** Initializes the properties. */
+    /**
+     * Initializes the properties.
+     */
     private void init()
     {
-        lines = getFormatter().getLines(text, width);
-        lengths = getFormatter().getLength(lines);
-        height = getFormatter().getHeight(lines.length);
-        verticalLineCoords = getFormatter().getVerticalCoordinates(lines);
-        horizontalLineCoords = getFormatter().getHorizontalCoordinates(lines, width);
+        lines = getFormatter().getLines( text, width );
+        lengths = getFormatter().getLength( lines );
+        height = getFormatter().getHeight( lines.length );
+        verticalLineCoords = getFormatter().getVerticalCoordinates( lines );
+        horizontalLineCoords = getFormatter().getHorizontalCoordinates( lines, width );
     }
 }

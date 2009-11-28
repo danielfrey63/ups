@@ -29,30 +29,35 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class EntrySum extends ActionCommand {
+public class EntrySum extends ActionCommand
+{
+    private final EntryModel model;
 
-    private EntryModel model;
-
-    public EntrySum(final EntryModel model, final CommandManager manager) {
-        super(manager, Commands.SUM_COMMAND);
+    public EntrySum( final EntryModel model, final CommandManager manager )
+    {
+        super( manager, Commands.SUM_COMMAND );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final IFEntry entry = (IFEntry) model.getModel().getBean();
-        model.setSum(DateUtils.dateDifference(sumAll(entry, 0), "HH:mm:ss"));
+        model.setSum( DateUtils.dateDifference( sumAll( entry, 0 ), "HH:mm:ss" ) );
     }
 
-    private long sumAll(IFEntry entry, long sum) {
+    private long sumAll( final IFEntry entry, long sum )
+    {
         final IFEntry[] children = entry.getChildren();
         final Calendar start = entry.getStart();
         final Calendar end = entry.getEnd();
-        if (start != null && end != null) {
-            sum += (end.getTime().getTime() - start.getTime().getTime());
+        if ( start != null && end != null )
+        {
+            sum += ( end.getTime().getTime() - start.getTime().getTime() );
         }
-        for (int i = 0; children !=  null && i < children.length; i++) {
+        for ( int i = 0; children != null && i < children.length; i++ )
+        {
             final IFEntry child = children[i];
-            sum += sumAll(child, 0);
+            sum += sumAll( child, 0 );
         }
         return sum;
     }

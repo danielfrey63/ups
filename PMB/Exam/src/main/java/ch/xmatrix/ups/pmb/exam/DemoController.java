@@ -21,64 +21,73 @@ import javax.swing.filechooser.FileFilter;
  *
  * @author Daniel Frey 25.04.2009 13:56:06
  */
-public class DemoController {
-
+public class DemoController
+{
     private final PMBExamModel model;
 
-    public DemoController(final PMBExamModel model) {
+    public DemoController( final PMBExamModel model )
+    {
         this.model = model;
     }
 
-    public void loadDemoDirectory() {
+    public void loadDemoDirectory()
+    {
         final ExamsetFileFilter filter = new ExamsetFileFilter();
-        final OpenChooser chooser = new OpenChooser(filter, "pmb.open.demodir", System.getProperty("user.dir"));
-        chooser.getChooser().setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.getChooser().setFileFilter(new FileFilter() {
-
-            public boolean accept(final File f) {
+        final OpenChooser chooser = new OpenChooser( filter, "pmb.open.demodir", System.getProperty( "user.dir" ) );
+        chooser.getChooser().setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
+        chooser.getChooser().setFileFilter( new FileFilter()
+        {
+            public boolean accept( final File f )
+            {
                 return f.isDirectory();
             }
 
-            public String getDescription() {
+            public String getDescription()
+            {
                 return "Directories";
             }
-        });
-        chooser.setModal(true);
+        } );
+        chooser.setModal( true );
         chooser.open();
         final File[] files = chooser.getSelectedFiles();
-        if (files.length == 1) {
+        if ( files.length == 1 )
+        {
             final String root = files[0].getAbsolutePath();
-            model.setDemo(false);
-            model.getSettings().setActivePicturePath(root);
-            model.setCurrentExamsetModel(getExamsetModel(root));
+            model.setDemo( false );
+            model.getSettings().setActivePicturePath( root );
+            model.setCurrentExamsetModel( getExamsetModel( root ) );
         }
     }
 
-    private ExamsetModel getExamsetModel(final String root) {
-        final Set<SpeciesEntry> entries = new SpeciesParser(model.getSettings()).processFile(new File(root));
+    private ExamsetModel getExamsetModel( final String root )
+    {
+        final Set<SpeciesEntry> entries = new SpeciesParser( model.getSettings() ).processFile( new File( root ) );
         final ExamsetModel set = new ExamsetModel();
-        set.setSetTaxa(getSetTaxa(entries));
-        set.setRegistration(getRegistration(root, set.getSetTaxa().size()));
+        set.setSetTaxa( getSetTaxa( entries ) );
+        set.setRegistration( getRegistration( root, set.getSetTaxa().size() ) );
         return set;
     }
 
-    private List<SetTaxon> getSetTaxa(final Set<SpeciesEntry> entries) {
+    private List<SetTaxon> getSetTaxa( final Set<SpeciesEntry> entries )
+    {
         final List<SetTaxon> taxa = new ArrayList<SetTaxon>();
-        for (final SpeciesEntry entry : entries) {
+        for ( final SpeciesEntry entry : entries )
+        {
             final SpecimenModel specimen = new SpecimenModel();
-            final String path = entry.getPath().replaceAll("\\\\", "/");
-            specimen.setTaxon(path.substring(path.lastIndexOf("/") + 1));
-            taxa.add(new SetTaxon(specimen, true));
+            final String path = entry.getPath().replaceAll( "\\\\", "/" );
+            specimen.setTaxon( path.substring( path.lastIndexOf( "/" ) + 1 ) );
+            taxa.add( new SetTaxon( specimen, true ) );
         }
         return taxa;
     }
 
-    private Registration getRegistration(final String nachname, final int size) {
-        final String path = nachname.replaceAll("\\\\", "/");
+    private Registration getRegistration( final String nachname, final int size )
+    {
+        final String path = nachname.replaceAll( "\\\\", "/" );
         final Anmeldedaten anmeldedaten = new Anmeldedaten();
-        anmeldedaten.setNachname(path.substring(path.lastIndexOf("/") + 1));
-        anmeldedaten.setVorname(size + " Arten");
-        anmeldedaten.setStudentennummer("Demo");
-        return new Registration(anmeldedaten, new PlantList());
+        anmeldedaten.setNachname( path.substring( path.lastIndexOf( "/" ) + 1 ) );
+        anmeldedaten.setVorname( size + " Arten" );
+        anmeldedaten.setStudentennummer( "Demo" );
+        return new Registration( anmeldedaten, new PlantList() );
     }
 }

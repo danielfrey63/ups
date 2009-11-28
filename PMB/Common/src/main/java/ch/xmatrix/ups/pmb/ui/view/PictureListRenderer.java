@@ -30,27 +30,30 @@ import net.java.jveez.vfs.Picture;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class PictureListRenderer extends ThumbnailListCellRenderer {
+public class PictureListRenderer extends ThumbnailListCellRenderer
+{
+    private final JPanel panel = new JPanel( new BorderLayout() );
 
-    private final JPanel panel = new JPanel(new BorderLayout());
     private final JLabel text = new JLabel();
 
-    public PictureListRenderer() {
-        text.setOpaque(true);
-        text.setHorizontalTextPosition(JLabel.CENTER);
-        text.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(text, BorderLayout.SOUTH);
-        panel.setOpaque(false);
+    public PictureListRenderer()
+    {
+        text.setOpaque( true );
+        text.setHorizontalTextPosition( JLabel.CENTER );
+        text.setHorizontalAlignment( JLabel.CENTER );
+        panel.add( text, BorderLayout.SOUTH );
+        panel.setOpaque( false );
     }
 
     @Override
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-        final JLabel image = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        panel.add(image, BorderLayout.CENTER);
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
+    {
+        final JLabel image = (JLabel) super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
+        panel.add( image, BorderLayout.CENTER );
         final Picture entry = (Picture) value;
-        text.setText(entry.getName());
-        text.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
-        text.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+        text.setText( entry.getName() );
+        text.setBackground( isSelected ? list.getSelectionBackground() : list.getBackground() );
+        text.setForeground( isSelected ? list.getSelectionForeground() : list.getForeground() );
         return panel;
     }
 }

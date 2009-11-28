@@ -22,9 +22,11 @@ package ch.jfactory.projecttime.invoice;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String COMMANDID_ADD = "invoice.add";
+
     public static final String COMMANDID_DELETE = "invoice.delete";
+
     public static final String GROUPID_TOOLBAR = "invoice.toolbar";
 }

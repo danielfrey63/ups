@@ -29,38 +29,37 @@ import javax.swing.AbstractAction;
  */
 public class ActionRedirector extends AbstractAction
 {
-
     private Method method;
 
     private Object controller;
 
-    public ActionRedirector(final Object controller, final String methodName)
+    public ActionRedirector( final Object controller, final String methodName )
     {
         try
         {
             this.controller = controller;
-            this.method = controller.getClass().getMethod(methodName);
+            this.method = controller.getClass().getMethod( methodName );
         }
-        catch (NoSuchMethodException e)
+        catch ( NoSuchMethodException e )
         {
             e.printStackTrace();
         }
     }
 
-    public void actionPerformed(final ActionEvent e)
+    public void actionPerformed( final ActionEvent e )
     {
         try
         {
-            method.invoke(controller);
+            method.invoke( controller );
         }
-        catch (IllegalAccessException e1)
+        catch ( IllegalAccessException e1 )
         {
-            System.err.println(method);
+            System.err.println( method );
             e1.printStackTrace();
         }
-        catch (InvocationTargetException e1)
+        catch ( InvocationTargetException e1 )
         {
-            System.err.println(method);
+            System.err.println( method );
             e1.printStackTrace();
         }
     }

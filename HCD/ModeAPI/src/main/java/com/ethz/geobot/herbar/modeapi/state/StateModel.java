@@ -9,11 +9,11 @@ import java.util.prefs.Preferences;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
-public interface StateModel {
-
+public interface StateModel
+{
     StateCompositeModel getComposite();
 
-    void loadState(Preferences node);
+    void loadState( Preferences node );
 
-    void storeState(Preferences node);
+    void storeState( Preferences node );
 }

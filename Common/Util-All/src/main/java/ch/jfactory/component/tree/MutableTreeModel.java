@@ -11,7 +11,6 @@ import javax.swing.tree.TreePath;
  */
 public interface MutableTreeModel extends TreeModel
 {
-
     /**
      * An implementation of this method removes the last object of the given path from the last object of the parent
      * path. It must notify any {@link javax.swing.event.TreeModelListener TreeModelListener}s thereafter with a {@link
@@ -21,7 +20,7 @@ public interface MutableTreeModel extends TreeModel
      *
      * @param path the path to remove
      */
-    void removeFromParent(TreePath path);
+    void removeFromParent( TreePath path );
 
     /**
      * An implementation of this method inserts the last object of the given child path from the last object of the
@@ -34,5 +33,5 @@ public interface MutableTreeModel extends TreeModel
      * @param parent the path to add the child to
      * @param pos    the position of the new child
      */
-    void insertInto(TreePath child, TreePath parent, int pos);
+    void insertInto( TreePath child, TreePath parent, int pos );
 }

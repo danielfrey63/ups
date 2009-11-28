@@ -30,19 +30,21 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class EntrySum extends ActionCommand {
+public class EntrySum extends ActionCommand
+{
+    private final StatsModel model;
 
-    private StatsModel model;
-
-    public EntrySum(final CommandManager manager, final StatsModel model) {
-        super(manager, Commands.COMMANDID_SUM);
+    public EntrySum( final CommandManager manager, final StatsModel model )
+    {
+        super( manager, Commands.COMMANDID_SUM );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final TreeSelectionModel treeSelectionModel = (TreeSelectionModel) model.getSelectionModel().getValue();
         final TreePath[] paths = treeSelectionModel.getSelectionPaths();
-        final IFEntry[] entries = (IFEntry[]) TreeUtils.getNodesForPaths(paths, new IFEntry[0]);
-        model.setSum(DateUtils.dateDifference(StatUtils.sumAll(entries, 0), "HH:mm:ss"));
+        final IFEntry[] entries = (IFEntry[]) TreeUtils.getNodesForPaths( paths, new IFEntry[0] );
+        model.setSum( DateUtils.dateDifference( StatUtils.sumAll( entries, 0 ), "HH:mm:ss" ) );
     }
 }

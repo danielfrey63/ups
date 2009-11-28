@@ -1,6 +1,5 @@
 package com.ethz.geobot.herbar.modeapi;
 
-
 import com.ethz.geobot.herbar.model.HerbarModel;
 import java.util.Set;
 import java.util.prefs.Preferences;
@@ -11,8 +10,8 @@ import java.util.prefs.Preferences;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public interface HerbarContext {
-
+public interface HerbarContext
+{
     /**
      * Return the data model of the application.
      *
@@ -26,21 +25,21 @@ public interface HerbarContext {
      * @param modelName name of the filter
      * @return reference to the data model
      */
-    HerbarModel getModel(String modelName);
+    HerbarModel getModel( String modelName );
 
     /**
      * Save the the definition of the model.
      *
      * @param model definition of the filter
      */
-    void saveModel(HerbarModel model);
+    void saveModel( HerbarModel model );
 
     /**
      * remove the specified filter from the persistent storage.
      *
      * @param model name of the filter
      */
-    void removeModel(HerbarModel model);
+    void removeModel( HerbarModel model );
 
     /**
      * Return a set of all available filters.
@@ -58,7 +57,6 @@ public interface HerbarContext {
      */
     Set getChangeableModelNames();
 
-
     Set getChangeableModels();
 
     /**
@@ -74,7 +72,7 @@ public interface HerbarContext {
      * @param name name of the property
      * @return value of the property
      */
-    String getProperty(String name);
+    String getProperty( String name );
 
     /**
      * Get the root node where the mode should store it persistent data.
@@ -102,5 +100,5 @@ public interface HerbarContext {
      *
      * @param model reference to the model
      */
-    void setCurrentModel(HerbarModel model);
+    void setCurrentModel( HerbarModel model );
 }

@@ -4,60 +4,77 @@ package com.ethz.geobot.herbar.modeapi;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class ModeInfo {
-
+public class ModeInfo
+{
     private String description;
+
     private String modeClass;
+
     private String modeGroup;
+
     private String modeName;
+
     private String icon;
+
     private String disabledIcon;
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription( final String description )
+    {
         this.description = description;
     }
 
-    public String getDisabledIcon() {
+    public String getDisabledIcon()
+    {
         return disabledIcon;
     }
 
-    public void setDisabledIcon(String disabledIcon) {
+    public void setDisabledIcon( final String disabledIcon )
+    {
         this.disabledIcon = disabledIcon;
     }
 
-    public String getIcon() {
+    public String getIcon()
+    {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon( final String icon )
+    {
         this.icon = icon;
     }
 
-    public String getModeClass() {
+    public String getModeClass()
+    {
         return modeClass;
     }
 
-    public void setModeClass(String modeClass) {
+    public void setModeClass( final String modeClass )
+    {
         this.modeClass = modeClass;
     }
 
-    public String getModeGroup() {
+    public String getModeGroup()
+    {
         return modeGroup;
     }
 
-    public void setModeGroup(String modeGroup) {
+    public void setModeGroup( final String modeGroup )
+    {
         this.modeGroup = modeGroup;
     }
 
-    public String getModeName() {
+    public String getModeName()
+    {
         return modeName;
     }
 
-    public void setModeName(String modeName) {
+    public void setModeName( final String modeName )
+    {
         this.modeName = modeName;
     }
 }

@@ -9,7 +9,7 @@ package com.ethz.geobot.herbar.model;
 import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import java.util.Iterator;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Abstract class for implementing HerbarModel, implements the ModelChangeListener behavior.
@@ -17,12 +17,12 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-abstract public class AbstractHerbarModel implements HerbarModel {
-
+abstract public class AbstractHerbarModel implements HerbarModel
+{
     /**
      * log category
      */
-    private static final Category cat = Category.getInstance(AbstractHerbarModel.class);
+    private static final Logger LOG = Logger.getLogger( AbstractHerbarModel.class );
 
     /**
      * Utility field holding list of ModelChangeListeners.
@@ -36,9 +36,11 @@ abstract public class AbstractHerbarModel implements HerbarModel {
 
     protected boolean readOnly;
 
-    public AbstractHerbarModel(String name) {
-        if (cat.isInfoEnabled()) {
-            cat.info("create HerbarModel with name " + name);
+    public AbstractHerbarModel( final String name )
+    {
+        if ( LOG.isInfoEnabled() )
+        {
+            LOG.info( "create HerbarModel with name " + name );
         }
         this.name = name;
     }
@@ -48,11 +50,13 @@ abstract public class AbstractHerbarModel implements HerbarModel {
      *
      * @param listener The listener to register.
      */
-    public synchronized void addModelChangeListener(com.ethz.geobot.herbar.model.event.ModelChangeListener listener) {
-        if (modelChangeListenerList == null) {
+    public synchronized void addModelChangeListener( final com.ethz.geobot.herbar.model.event.ModelChangeListener listener )
+    {
+        if ( modelChangeListenerList == null )
+        {
             modelChangeListenerList = new java.util.ArrayList();
         }
-        modelChangeListenerList.add(listener);
+        modelChangeListenerList.add( listener );
     }
 
     /**
@@ -60,20 +64,26 @@ abstract public class AbstractHerbarModel implements HerbarModel {
      *
      * @param listener The listener to remove.
      */
-    public synchronized void removeModelChangeListener(com.ethz.geobot.herbar.model.event.ModelChangeListener listener) {
-        if (modelChangeListenerList != null) {
-            modelChangeListenerList.remove(listener);
+    public synchronized void removeModelChangeListener( final com.ethz.geobot.herbar.model.event.ModelChangeListener listener )
+    {
+        if ( modelChangeListenerList != null )
+        {
+            modelChangeListenerList.remove( listener );
         }
     }
 
-    public synchronized void fireModelChangeEvent(ModelChangeEvent event) {
-        if (cat.isInfoEnabled()) {
-            cat.info("model >" + name + "< changed: inform all observers");
+    public synchronized void fireModelChangeEvent( final ModelChangeEvent event )
+    {
+        if ( LOG.isInfoEnabled() )
+        {
+            LOG.info( "model >" + name + "< changed: inform all observers" );
         }
-        if (modelChangeListenerList != null) {
-            for (Iterator it = modelChangeListenerList.iterator(); it.hasNext();) {
-                ModelChangeListener listener = (ModelChangeListener) it.next();
-                listener.modelChanged(event);
+        if ( modelChangeListenerList != null )
+        {
+            for ( final Object aModelChangeListenerList : modelChangeListenerList )
+            {
+                final ModelChangeListener listener = (ModelChangeListener) aModelChangeListenerList;
+                listener.modelChanged( event );
             }
         }
     }
@@ -83,7 +93,8 @@ abstract public class AbstractHerbarModel implements HerbarModel {
      *
      * @return Value of property name.
      */
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
@@ -93,18 +104,22 @@ abstract public class AbstractHerbarModel implements HerbarModel {
      *
      * @param name New value of property name.
      */
-    public void setName(String name) {
-        if (cat.isDebugEnabled()) {
-            cat.debug("rename model form >" + this.name + "< to >" + name + "<");
+    public void setName( final String name )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "rename model form >" + this.name + "< to >" + name + "<" );
         }
         this.name = name;
     }
 
-    public void setReadOnly() {
+    public void setReadOnly()
+    {
         this.readOnly = true;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 }

@@ -7,118 +7,148 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Iterator;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class PictureModel {
+public class PictureModel
+{
+    private static final Logger LOG = Logger.getLogger( PictureModel.class );
 
-    private static final Category cat = Category.getInstance(PictureModel.class);
+    private final PictureTheme[] themes;
 
-    private PictureTheme[] themes;
     private Taxon taxon;
+
     private Cursor[] cursors;
+
     private int selected;
+
     private boolean zoomed = false;
 
-    public PictureModel(HerbarModel model) {
+    public PictureModel( final HerbarModel model )
+    {
         this.themes = model.getPictureThemes();
     }
 
-    public boolean isZoomed() {
+    public boolean isZoomed()
+    {
         return zoomed;
     }
 
-    public void setZoomed(boolean b) {
+    public void setZoomed( final boolean b )
+    {
         zoomed = b;
     }
 
-    public void setPicture(String name) {
-        Iterator it = getPictureCursor().getIterator();
-        while (it.hasNext()) {
-            CommentedPicture pic = (CommentedPicture) it.next();
-            if (pic.getPicture().getName().equals(name)) {
-                getPictureCursor().setCurrent(pic);
+    public void setPicture( final String name )
+    {
+        final Iterator it = getPictureCursor().getIterator();
+        while ( it.hasNext() )
+        {
+            final CommentedPicture pic = (CommentedPicture) it.next();
+            if ( pic.getPicture().getName().equals( name ) )
+            {
+                getPictureCursor().setCurrent( pic );
             }
         }
     }
 
-    public CommentedPicture getPicture() {
+    public CommentedPicture getPicture()
+    {
         return (CommentedPicture) getPictureCursor().getCurrent();
     }
 
-    public PictureTheme[] getPictureThemes() {
+    public PictureTheme[] getPictureThemes()
+    {
         return themes;
     }
 
-    public int getSelectedIndex() {
+    public int getSelectedIndex()
+    {
         return selected;
     }
 
-    public PictureTheme getPictureTheme() {
-        return themes[ selected ];
+    public PictureTheme getPictureTheme()
+    {
+        return themes[selected];
     }
 
-    public void setSelectedIndex(int idx) {
+    public void setSelectedIndex( final int idx )
+    {
         selected = idx;
     }
 
-    public int getIndex(PictureTheme t) {
-        for (int i = 0; i < themes.length; i++) {
-            if (themes[ i ] == t) {
+    public int getIndex( final PictureTheme t )
+    {
+        for ( int i = 0; i < themes.length; i++ )
+        {
+            if ( themes[i] == t )
+            {
                 return i;
             }
         }
         return -1;
     }
 
-    public Cursor getPictureCursor() {
-        return getPictureCursor(getPictureTheme());
+    public Cursor getPictureCursor()
+    {
+        return getPictureCursor( getPictureTheme() );
     }
 
-    public Cursor getPictureCursor(PictureTheme t) {
-        int idx = getIndex(t);
-        if (idx >= 0) {
-            return ensureCursor(idx);
+    public Cursor getPictureCursor( final PictureTheme t )
+    {
+        final int idx = getIndex( t );
+        if ( idx >= 0 )
+        {
+            return ensureCursor( idx );
         }
         return null;
     }
 
-    public Taxon getTaxon() {
+    public Taxon getTaxon()
+    {
         return taxon;
     }
 
-    private Cursor ensureCursor(int idx) {
-        if (cursors == null) {
+    private Cursor ensureCursor( final int idx )
+    {
+        if ( cursors == null )
+        {
             cursors = new Cursor[themes.length];
         }
-        if (cursors[ idx ] == null) {
-            cursors[ idx ] = new DefaultCursor(getTaxon().getCommentedPictures(themes[ idx ]));
+        if ( cursors[idx] == null )
+        {
+            cursors[idx] = new DefaultCursor( getTaxon().getCommentedPictures( themes[idx] ) );
         }
-        return cursors[ idx ];
+        return cursors[idx];
     }
 
-    public void setTaxon(Taxon taxon) {
-        cat.debug("setTaxon(" + taxon + ")");
-        try {
+    public void setTaxon( final Taxon taxon )
+    {
+        LOG.debug( "setTaxon(" + taxon + ")" );
+        try
+        {
             this.taxon = taxon;
             cursors = null;
         }
-        catch (Exception e) {
-            cat.error("Error in setTaxon ", e);
+        catch ( Exception e )
+        {
+            LOG.error( "Error in setTaxon ", e );
         }
     }
 
-    public void setPictureTheme(PictureTheme shownTheme) {
-        for (int i = 0; i < themes.length; i++) {
-            if (themes[ i ] == shownTheme) {
-                setSelectedIndex(i);
+    public void setPictureTheme( final PictureTheme shownTheme )
+    {
+        for ( int i = 0; i < themes.length; i++ )
+        {
+            if ( themes[i] == shownTheme )
+            {
+                setSelectedIndex( i );
                 return;
             }
         }
     }
-
 
 }

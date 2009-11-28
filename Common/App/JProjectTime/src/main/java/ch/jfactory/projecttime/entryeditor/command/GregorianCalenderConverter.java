@@ -21,8 +21,8 @@ import com.jgoodies.binding.value.BufferedValueModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * TODO: document
@@ -30,30 +30,36 @@ import java.util.Date;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class GregorianCalenderConverter extends AbstractConverter {
+public class GregorianCalenderConverter extends AbstractConverter
+{
+    private final SimpleDateFormat format;
 
-    private SimpleDateFormat format;
-
-    public GregorianCalenderConverter(final BufferedValueModel model) {
-        super(model);
+    public GregorianCalenderConverter( final BufferedValueModel model )
+    {
+        super( model );
         format = new SimpleDateFormat();
     }
 
-    public Object convertFromSubject(Object subjectValue) {
-        if (subjectValue != null) {
-            return format.format(((Calendar) subjectValue).getTime());
+    public Object convertFromSubject( final Object subjectValue )
+    {
+        if ( subjectValue != null )
+        {
+            return format.format( ( (Calendar) subjectValue ).getTime() );
         }
         return null;
     }
 
-    public void setValue(Object newValue) {
-        try {
+    public void setValue( final Object newValue )
+    {
+        try
+        {
             final GregorianCalendar calendar = new GregorianCalendar();
-            final Date date = format.parse((String) newValue);
-            calendar.setTime(date);
-            subject.setValue(calendar);
+            final Date date = format.parse( (String) newValue );
+            calendar.setTime( date );
+            subject.setValue( calendar );
         }
-        catch (ParseException e) {
+        catch ( ParseException e )
+        {
         }
     }
 }

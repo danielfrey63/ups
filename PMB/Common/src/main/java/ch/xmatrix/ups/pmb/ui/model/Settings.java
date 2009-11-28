@@ -33,144 +33,194 @@ import javax.swing.JTextField;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:48 $
  */
-public class Settings {
-
+public class Settings
+{
     private String fileIncludePatterns;
+
     private String fileExcludePatterns;
+
     private String splitPattern;
+
     private String splitExcludePatterns;
+
     private String splitExclusivePatterns;
+
     private String splitRandomPatterns;
+
     private String defaultPattern;
+
     private String speciesExcludePatterns;
+
     private Boolean showSettingsOnStartup;
+
     private List<NamedValue> movePaths;
+
     private List<NamedValue> orderTokens;
 
     public static final String SEPARATOR = ";";
 
     private static final String PREFS_USER_NODE = "ups/pmb";
+
     private static final String PREFS_FILE_INCLUSIVE_PATTERNS = "fileIncludePatterns";
+
     private static final String PREFS_FILE_EXCLUSIVE_PATTERNS = "fileExcludePatterns";
+
     private static final String PREFS_SPLIT_CHARACTERS = "splitPattern";
+
     private static final String PREFS_SPLIT_RANDOM_PATTERNS = "splitRandomPatterns";
+
     private static final String PREFS_SPLIT_EXCLUSIVE_PATTERNS = "splitExclusivePatterns";
+
     private static final String PREFS_SPLIT_EXCLUDE_PATTERNS = "splitExcludePatterns";
+
     private static final String PREFS_DEFAULT_CHARACTER = "defaultPattern";
+
     private static final String PREFS_SPECIES_EXCLUDE_PATTERNS = "speciesExcludePatterns";
+
     private static final String PREFS_SHOW_SETTINGS_ON_STARTUP = "showSettingsOnStartup";
+
     private static final String PREFS_MOVE_PATHS = "movePaths";
+
     private static final String PREFS_ORDER_TOKENS = "orderTokens";
 
-    public String getFileIncludePatterns() {
+    public String getFileIncludePatterns()
+    {
         return fileIncludePatterns;
     }
 
-    public void setFileIncludePatterns(final String fileIncludePatterns) {
+    public void setFileIncludePatterns( final String fileIncludePatterns )
+    {
         this.fileIncludePatterns = fileIncludePatterns;
     }
 
-    public String getFileExcludePatterns() {
+    public String getFileExcludePatterns()
+    {
         return fileExcludePatterns;
     }
 
-    public void setFileExcludePatterns(final String fileExcludePatterns) {
+    public void setFileExcludePatterns( final String fileExcludePatterns )
+    {
         this.fileExcludePatterns = fileExcludePatterns;
     }
 
-    public String getSplitCharacter() {
+    public String getSplitCharacter()
+    {
         return splitPattern;
     }
 
-    public void setSplitPattern(final String splitPattern) {
+    public void setSplitPattern( final String splitPattern )
+    {
         this.splitPattern = splitPattern;
     }
 
-    public String getSplitExclusivePatterns() {
+    public String getSplitExclusivePatterns()
+    {
         return splitExclusivePatterns;
     }
 
-    public void setSplitExclusivePatterns(final String splitExclusivePatterns) {
+    public void setSplitExclusivePatterns( final String splitExclusivePatterns )
+    {
         this.splitExclusivePatterns = splitExclusivePatterns;
     }
 
-    public String getSplitRandomPatterns() {
+    public String getSplitRandomPatterns()
+    {
         return splitRandomPatterns;
     }
 
-    public void setSplitRandomPatterns(final String splitRandomPatterns) {
+    public void setSplitRandomPatterns( final String splitRandomPatterns )
+    {
         this.splitRandomPatterns = splitRandomPatterns;
     }
 
-    public String getSplitExcludePatterns() {
+    public String getSplitExcludePatterns()
+    {
         return splitExcludePatterns;
     }
 
-    public void setSplitExcludePatterns(final String splitExcludePatterns) {
+    public void setSplitExcludePatterns( final String splitExcludePatterns )
+    {
         this.splitExcludePatterns = splitExcludePatterns;
     }
 
-    public String getDefaultPattern() {
+    public String getDefaultPattern()
+    {
         return defaultPattern;
     }
 
-    public void setDefaultPattern(final String defaultPattern) {
+    public void setDefaultPattern( final String defaultPattern )
+    {
         this.defaultPattern = defaultPattern;
     }
 
-    public String getSpeciesExcludePatterns() {
+    public String getSpeciesExcludePatterns()
+    {
         return speciesExcludePatterns;
     }
 
-    public void setSpeciesExcludePatterns(final String speciesExcludePatterns) {
+    public void setSpeciesExcludePatterns( final String speciesExcludePatterns )
+    {
         this.speciesExcludePatterns = speciesExcludePatterns;
     }
 
-    public Boolean getShowSettingsOnStartup() {
+    public Boolean getShowSettingsOnStartup()
+    {
         return showSettingsOnStartup;
     }
 
-    public void setShowSettingsOnStartup(final Boolean showSettingsOnStartup) {
+    public void setShowSettingsOnStartup( final Boolean showSettingsOnStartup )
+    {
         this.showSettingsOnStartup = showSettingsOnStartup;
     }
 
-    public List<NamedValue> getMovePaths() {
+    public List<NamedValue> getMovePaths()
+    {
         return movePaths;
     }
 
-    public void setMovePaths(final List<NamedValue> movePaths) {
+    public void setMovePaths( final List<NamedValue> movePaths )
+    {
         this.movePaths = movePaths;
     }
 
-    public List<NamedValue> getOrderTokens() {
+    public List<NamedValue> getOrderTokens()
+    {
         return orderTokens;
     }
 
-    public void setOrderTokens(final List<NamedValue> orderTokens) {
+    public void setOrderTokens( final List<NamedValue> orderTokens )
+    {
         this.orderTokens = orderTokens;
     }
 
     //-- Utility methods
 
-    public String getActivePicturePath() {
-        for (final NamedValue movePath : movePaths) {
-            if (movePath.getName().startsWith("+")) {
+    public String getActivePicturePath()
+    {
+        for ( final NamedValue movePath : movePaths )
+        {
+            if ( movePath.getName().startsWith( "+" ) )
+            {
                 return movePath.getValue();
             }
         }
         return "";
     }
 
-    public void setActivePicturePath(final String value) {
+    public void setActivePicturePath( final String value )
+    {
         boolean found = false;
-        for (final NamedValue movePath : movePaths) {
-            if (movePath.getName().startsWith("+")) {
-                movePath.setValue(value);
+        for ( final NamedValue movePath : movePaths )
+        {
+            if ( movePath.getName().startsWith( "+" ) )
+            {
+                movePath.setValue( value );
                 found = true;
             }
         }
-        if (!found) {
-            movePaths.add(new NamedValue("+Default", value));
+        if ( !found )
+        {
+            movePaths.add( new NamedValue( "+Default", value ) );
         }
     }
 
@@ -180,11 +230,13 @@ public class Settings {
      * @param token the token to check
      * @return whether valid
      */
-    public boolean isValidHierarchicToken(final String token) {
-        final String[] tokens = splitExcludePatterns.split(SEPARATOR);
+    public boolean isValidHierarchicToken( final String token )
+    {
+        final String[] tokens = splitExcludePatterns.split( SEPARATOR );
         boolean passed = true;
-        for (final String current : tokens) {
-            passed &= !token.matches(current);
+        for ( final String current : tokens )
+        {
+            passed &= !token.matches( current );
         }
         return passed;
     }
@@ -196,12 +248,14 @@ public class Settings {
      * @param string the string to investigate
      * @return whether default or not
      */
-    public boolean isDefault(final String name, final String string) {
-        final String[] splitters = getSplitCharacter().split("\\|");
+    public boolean isDefault( final String name, final String string )
+    {
+        final String[] splitters = getSplitCharacter().split( "\\|" );
         boolean match = false;
-        for (final String splitter : splitters) {
+        for ( final String splitter : splitters )
+        {
             final String defaultToken = string + defaultPattern + splitter + ".*";
-            match |= name.matches("^" + defaultToken + "|" + ".*" + splitter + defaultToken);
+            match |= name.matches( "^" + defaultToken + "|" + ".*" + splitter + defaultToken );
         }
         return match;
     }
@@ -213,18 +267,22 @@ public class Settings {
      * @param string the string to check
      * @return whether the test passes
      */
-    public boolean isAllowedFileName(final String string) {
-        final String[] inclusivePattern = fileIncludePatterns.split(SEPARATOR);
-        final String[] exclusivePattern = fileExcludePatterns.split(SEPARATOR);
+    public boolean isAllowedFileName( final String string )
+    {
+        final String[] inclusivePattern = fileIncludePatterns.split( SEPARATOR );
+        final String[] exclusivePattern = fileExcludePatterns.split( SEPARATOR );
         boolean matches = false;
-        for (final String s : inclusivePattern) {
-            matches = matches | string.matches(s);
-            if (matches) {
+        for ( final String s : inclusivePattern )
+        {
+            matches = matches | string.matches( s );
+            if ( matches )
+            {
                 break;
             }
         }
-        for (final String s : exclusivePattern) {
-            matches &= !string.matches(s);
+        for ( final String s : exclusivePattern )
+        {
+            matches &= !string.matches( s );
         }
         return matches;
     }
@@ -235,8 +293,9 @@ public class Settings {
      * @param token the string to match
      * @return null if it doesn't or the token without the default character
      */
-    public String getCleanedUpHierarchicToken(final String token) {
-        return token.replaceAll(defaultPattern, "");
+    public String getCleanedUpHierarchicToken( final String token )
+    {
+        return token.replaceAll( defaultPattern, "" );
     }
 
     /**
@@ -245,9 +304,10 @@ public class Settings {
      * @param speciesEntry the species as SpeciesEntry
      * @return the string without the exclude strings
      */
-    public String getCleanedSpeciesName(final SpeciesEntry speciesEntry) {
+    public String getCleanedSpeciesName( final SpeciesEntry speciesEntry )
+    {
         final String path = speciesEntry.getPath();
-        return getCleanedSpeciesName(path.substring(path.lastIndexOf("/") + 1));
+        return getCleanedSpeciesName( path.substring( path.lastIndexOf( "/" ) + 1 ) );
     }
 
     /**
@@ -259,11 +319,14 @@ public class Settings {
      * @param speciesName the name of the species
      * @return the string without the exclude strings
      */
-    public String getCleanedSpeciesName(final String speciesName) {
-        final String[] exludePatterns = speciesExcludePatterns.split(SEPARATOR);
-        for (final String pattern : exludePatterns) {
-            if (Pattern.compile(pattern).matcher(speciesName).find()) {
-                return speciesName.replaceFirst(pattern, "");
+    public String getCleanedSpeciesName( final String speciesName )
+    {
+        final String[] exludePatterns = speciesExcludePatterns.split( SEPARATOR );
+        for ( final String pattern : exludePatterns )
+        {
+            if ( Pattern.compile( pattern ).matcher( speciesName ).find() )
+            {
+                return speciesName.replaceFirst( pattern, "" );
             }
         }
         return speciesName;
@@ -276,137 +339,164 @@ public class Settings {
      * @param name the name to extract the hierarchic tokens from
      * @return the array with the tokens
      */
-    public List<String> getHierarchicTokens(final String name) {
-        final String[] strings = name.split(getSplitCharacter());
+    public List<String> getHierarchicTokens( final String name )
+    {
+        final String[] strings = name.split( getSplitCharacter() );
         final List<String> result = new ArrayList<String>();
-        for (final String string : strings) {
-            if (isValidHierarchicToken(string)) {
-                result.add(getCleanedUpHierarchicToken(string));
+        for ( final String string : strings )
+        {
+            if ( isValidHierarchicToken( string ) )
+            {
+                result.add( getCleanedUpHierarchicToken( string ) );
             }
         }
         return result;
     }
 
-    public int getSortedPosition(final String token) {
+    public int getSortedPosition( final String token )
+    {
         int i = 0;
-        for (final NamedValue orderToken : orderTokens) {
+        for ( final NamedValue orderToken : orderTokens )
+        {
             final String pattern = orderToken.getValue();
-            if (token.matches(pattern)) {
+            if ( token.matches( pattern ) )
+            {
                 return i;
-            } else {
+            }
+            else
+            {
                 i++;
             }
         }
         return i;
     }
 
-    public void loadSettings() {
-        final Preferences prefs = Preferences.userRoot().node(PREFS_USER_NODE);
-        setFileIncludePatterns(prefs.get(PREFS_FILE_INCLUSIVE_PATTERNS, "^.*\\.JPG$;^.*\\.jpg$"));
-        setFileExcludePatterns(prefs.get(PREFS_FILE_EXCLUSIVE_PATTERNS, "^PICT.*"));
-        setSplitPattern(prefs.get(PREFS_SPLIT_CHARACTERS, "\\.| \\("));
-        setSplitRandomPatterns(prefs.get(PREFS_SPLIT_RANDOM_PATTERNS, "^[0-9]+$"));
-        setSplitExclusivePatterns(prefs.get(PREFS_SPLIT_EXCLUSIVE_PATTERNS, "^[a-zA-Z]$"));
-        setSplitExcludePatterns(prefs.get(PREFS_SPLIT_EXCLUDE_PATTERNS, "^[0-9]+$;^jpg$;^JPG$;^$;^.*\\)$;^[a-zA-Z]$"));
-        setDefaultPattern(prefs.get(PREFS_DEFAULT_CHARACTER, "\\+"));
-        setSpeciesExcludePatterns(prefs.get(PREFS_SPECIES_EXCLUDE_PATTERNS, "^x;^xy;^z"));
-        setShowSettingsOnStartup(prefs.getBoolean(PREFS_SHOW_SETTINGS_ON_STARTUP, Boolean.TRUE));
+    public void loadSettings()
+    {
+        final Preferences prefs = Preferences.userRoot().node( PREFS_USER_NODE );
+        setFileIncludePatterns( prefs.get( PREFS_FILE_INCLUSIVE_PATTERNS, "^.*\\.JPG$;^.*\\.jpg$" ) );
+        setFileExcludePatterns( prefs.get( PREFS_FILE_EXCLUSIVE_PATTERNS, "^PICT.*" ) );
+        setSplitPattern( prefs.get( PREFS_SPLIT_CHARACTERS, "\\.| \\(" ) );
+        setSplitRandomPatterns( prefs.get( PREFS_SPLIT_RANDOM_PATTERNS, "^[0-9]+$" ) );
+        setSplitExclusivePatterns( prefs.get( PREFS_SPLIT_EXCLUSIVE_PATTERNS, "^[a-zA-Z]$" ) );
+        setSplitExcludePatterns( prefs.get( PREFS_SPLIT_EXCLUDE_PATTERNS, "^[0-9]+$;^jpg$;^JPG$;^$;^.*\\)$;^[a-zA-Z]$" ) );
+        setDefaultPattern( prefs.get( PREFS_DEFAULT_CHARACTER, "\\+" ) );
+        setSpeciesExcludePatterns( prefs.get( PREFS_SPECIES_EXCLUDE_PATTERNS, "^x;^xy;^z" ) );
+        setShowSettingsOnStartup( prefs.getBoolean( PREFS_SHOW_SETTINGS_ON_STARTUP, Boolean.TRUE ) );
 
-        final String[] movePathStrings = prefs.get(PREFS_MOVE_PATHS, "Löschen|C:/Trash").split("\\|");
-        movePaths = new ArrayList<NamedValue>(movePathStrings.length / 2);
-        for (int i = 0; i < movePathStrings.length; i++) {
+        final String[] movePathStrings = prefs.get( PREFS_MOVE_PATHS, "Löschen|C:/Trash" ).split( "\\|" );
+        movePaths = new ArrayList<NamedValue>( movePathStrings.length / 2 );
+        for ( int i = 0; i < movePathStrings.length; i++ )
+        {
             final String name = movePathStrings[i++];
             final String path = movePathStrings[i];
-            movePaths.add(new NamedValue(name, path));
+            movePaths.add( new NamedValue( name, path ) );
         }
 
-        final String[] orderTokenStrings = prefs.get(PREFS_ORDER_TOKENS, "Unterseite|^Unterseite$|" +
+        final String[] orderTokenStrings = prefs.get( PREFS_ORDER_TOKENS, "Unterseite|^Unterseite$|" +
                 "Oberseite|^Oberseite$|" +
                 "Längsschnitt|^Längsschnitt$|" +
-                "Querschnitt|^Querschnitt$|Rest|^[a-zA-Z0-9]+").split("\\|");
-        orderTokens = new ArrayList<NamedValue>(orderTokenStrings.length / 2);
-        for (int i = 0; i < orderTokenStrings.length; i++) {
+                "Querschnitt|^Querschnitt$|Rest|^[a-zA-Z0-9]+" ).split( "\\|" );
+        orderTokens = new ArrayList<NamedValue>( orderTokenStrings.length / 2 );
+        for ( int i = 0; i < orderTokenStrings.length; i++ )
+        {
             final String name = orderTokenStrings[i++];
             final String pattern = orderTokenStrings[i];
-            orderTokens.add(new NamedValue(name, pattern));
+            orderTokens.add( new NamedValue( name, pattern ) );
         }
     }
 
-    public void storeSettings() {
-        final Preferences prefs = Preferences.userRoot().node(PREFS_USER_NODE);
-        prefs.put(PREFS_FILE_INCLUSIVE_PATTERNS, getFileIncludePatterns());
-        prefs.put(PREFS_FILE_EXCLUSIVE_PATTERNS, getFileExcludePatterns());
-        prefs.put(PREFS_SPLIT_CHARACTERS, getSplitCharacter());
-        prefs.put(PREFS_SPLIT_RANDOM_PATTERNS, getSplitRandomPatterns());
-        prefs.put(PREFS_SPLIT_EXCLUSIVE_PATTERNS, getSplitExclusivePatterns());
-        prefs.put(PREFS_SPLIT_EXCLUDE_PATTERNS, getSplitExcludePatterns());
-        prefs.put(PREFS_DEFAULT_CHARACTER, getDefaultPattern());
-        prefs.put(PREFS_SPECIES_EXCLUDE_PATTERNS, getSpeciesExcludePatterns());
-        prefs.putBoolean(PREFS_SHOW_SETTINGS_ON_STARTUP, getShowSettingsOnStartup());
+    public void storeSettings()
+    {
+        final Preferences prefs = Preferences.userRoot().node( PREFS_USER_NODE );
+        prefs.put( PREFS_FILE_INCLUSIVE_PATTERNS, getFileIncludePatterns() );
+        prefs.put( PREFS_FILE_EXCLUSIVE_PATTERNS, getFileExcludePatterns() );
+        prefs.put( PREFS_SPLIT_CHARACTERS, getSplitCharacter() );
+        prefs.put( PREFS_SPLIT_RANDOM_PATTERNS, getSplitRandomPatterns() );
+        prefs.put( PREFS_SPLIT_EXCLUSIVE_PATTERNS, getSplitExclusivePatterns() );
+        prefs.put( PREFS_SPLIT_EXCLUDE_PATTERNS, getSplitExcludePatterns() );
+        prefs.put( PREFS_DEFAULT_CHARACTER, getDefaultPattern() );
+        prefs.put( PREFS_SPECIES_EXCLUDE_PATTERNS, getSpeciesExcludePatterns() );
+        prefs.putBoolean( PREFS_SHOW_SETTINGS_ON_STARTUP, getShowSettingsOnStartup() );
 
         final StringBuffer movePathStrings = new StringBuffer();
-        for (final NamedValue namedValue : movePaths) {
-            if (movePathStrings.length() > 0) {
-                movePathStrings.append("|");
+        for ( final NamedValue namedValue : movePaths )
+        {
+            if ( movePathStrings.length() > 0 )
+            {
+                movePathStrings.append( "|" );
             }
-            movePathStrings.append(namedValue.name).append("|").append(namedValue.value);
+            movePathStrings.append( namedValue.name ).append( "|" ).append( namedValue.value );
         }
-        prefs.put(PREFS_MOVE_PATHS, movePathStrings.toString());
+        prefs.put( PREFS_MOVE_PATHS, movePathStrings.toString() );
 
         final StringBuffer orderTokenStrings = new StringBuffer();
-        for (final NamedValue orderToken : orderTokens) {
-            if (orderTokenStrings.length() > 0) {
-                orderTokenStrings.append("|");
+        for ( final NamedValue orderToken : orderTokens )
+        {
+            if ( orderTokenStrings.length() > 0 )
+            {
+                orderTokenStrings.append( "|" );
             }
-            orderTokenStrings.append(orderToken.name).append("|").append(orderToken.value);
+            orderTokenStrings.append( orderToken.name ).append( "|" ).append( orderToken.value );
         }
-        prefs.put(PREFS_ORDER_TOKENS, orderTokenStrings.toString());
+        prefs.put( PREFS_ORDER_TOKENS, orderTokenStrings.toString() );
     }
 
-    public static class NamedValue {
+    public static class NamedValue
+    {
         private String name;
+
         private String value;
 
-        public NamedValue(final String name, final String value) {
+        public NamedValue( final String name, final String value )
+        {
             this.name = name;
             this.value = value;
         }
 
-        public String getName() {
+        public String getName()
+        {
             return name;
         }
 
-        public void setName(final String name) {
+        public void setName( final String name )
+        {
             this.name = name;
         }
 
-        public String getValue() {
+        public String getValue()
+        {
             return value;
         }
 
-        public void setValue(final String value) {
+        public void setValue( final String value )
+        {
             this.value = value;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return name + "=" + value;
         }
     }
 
-    public static class NamedValueCellEditor extends AbstractCellEditor implements ListCellEditor {
-
+    public static class NamedValueCellEditor extends AbstractCellEditor implements ListCellEditor
+    {
         private static final String SEPARATOR = "=";
+
         private final JTextField editor = new JTextField();
 
-        public Object getCellEditorValue() {
+        public Object getCellEditorValue()
+        {
             final String text = editor.getText();
-            final String[] parts = text.split(SEPARATOR);
-            return new NamedValue(parts[0], parts[1]);
+            final String[] parts = text.split( SEPARATOR );
+            return new NamedValue( parts[0], parts[1] );
         }
 
-        public Component getListCellEditorComponent(final JList list, final Object value, final boolean isSelected, final int index) {
+        public Component getListCellEditorComponent( final JList list, final Object value, final boolean isSelected, final int index )
+        {
             final NamedValue namedValue = (NamedValue) value;
-            editor.setText(namedValue.getName() + SEPARATOR + namedValue.getValue());
+            editor.setText( namedValue.getName() + SEPARATOR + namedValue.getValue() );
             return editor;
         }
     }

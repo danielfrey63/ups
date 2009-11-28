@@ -13,21 +13,20 @@ import javax.swing.KeyStroke;
  */
 public abstract class AbstractParametrizedAction extends AbstractAction
 {
-
     protected JFrame parent;
 
-    public AbstractParametrizedAction(final String prefix, final JFrame parent)
+    public AbstractParametrizedAction( final String prefix, final JFrame parent )
     {
-        super(Strings.getString(prefix + ".NAME"));
+        super( Strings.getString( prefix + ".NAME" ) );
         this.parent = parent;
 
-        putValue(Action.LONG_DESCRIPTION, Strings.getString(prefix + ".TEXT"));
-        final char code = Strings.getChar(prefix + ".SC");
-        if (code != Strings.MISSING_CHAR)
+        putValue( Action.LONG_DESCRIPTION, Strings.getString( prefix + ".TEXT" ) );
+        final char code = Strings.getChar( prefix + ".SC" );
+        if ( code != Strings.MISSING_CHAR )
         {
-            final KeyStroke keyStroke = KeyStroke.getKeyStroke(code, KeyEvent.ALT_MASK);
-            putValue(Action.ACCELERATOR_KEY, keyStroke);
+            final KeyStroke keyStroke = KeyStroke.getKeyStroke( code, KeyEvent.ALT_MASK );
+            putValue( Action.ACCELERATOR_KEY, keyStroke );
         }
-        putValue(Action.MNEMONIC_KEY, new Integer((int) Strings.getChar(prefix + ".MN")));
+        putValue( Action.MNEMONIC_KEY, new Integer( (int) Strings.getChar( prefix + ".MN" ) ) );
     }
 }

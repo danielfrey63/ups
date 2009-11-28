@@ -44,6 +44,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * Window selects and shows the question of this game.
@@ -51,20 +52,32 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class QuestionWindow extends JDialog implements Question {
+public class QuestionWindow extends JDialog implements Question
+{
+    private static final Logger LOG = Logger.getLogger( Catcher.class );
 
-    private static final Category CAT = Category.getInstance(Catcher.class);
     private ImageIcon plantPict;
-    private JLabel pict = new JLabel();
+
+    private final JLabel pict = new JLabel();
+
     private JButton go;
-    private JTextField answer = new JTextField();
+
+    private final JTextField answer = new JTextField();
+
     private Taxon tax;
+
     private Taxon ancestorTax;
+
     private PictureTheme[] theme;
-    private JLabel frage = new JLabel();
+
+    private final JLabel frage = new JLabel();
+
     private Frame parentFrame;
+
     private HerbarModel model;
+
     private CorrectnessChecker.Correctness correctness;
+
     private final CorrectnessChecker correctnessChecker = new CorrectnessChecker();
 
     /**
@@ -72,14 +85,17 @@ public class QuestionWindow extends JDialog implements Question {
      *
      * @param model instance of the herbarmodel
      */
-    public QuestionWindow(Frame frame, HerbarModel model) {
-        super(frame);
-        try {
+    public QuestionWindow( final Frame frame, final HerbarModel model )
+    {
+        super( frame );
+        try
+        {
             this.model = model;
             parentFrame = frame;
             init();
         }
-        catch (Exception e) {
+        catch ( Exception e )
+        {
             e.printStackTrace();
         }
     }
@@ -90,140 +106,159 @@ public class QuestionWindow extends JDialog implements Question {
      * @param unique correct taxon
      * @param text   The new correctOptionPane value
      */
-    private void setCorrectOptionPane(String text, Taxon unique) {
-        Dialogs.showInfoMessage(this.getRootPane(), "Falsche Antwort", text + " " + unique.getName());
+    private void setCorrectOptionPane( final String text, final Taxon unique )
+    {
+        Dialogs.showInfoMessage( this.getRootPane(), "Falsche Antwort", text + " " + unique.getName() );
     }
 
     /**
      * @see com.ethz.geobot.herbar.game.util.Question#firstQuestion()
      */
-    public void firstQuestion() {
+    public void firstQuestion()
+    {
     }
 
     /**
      * @see com.ethz.geobot.herbar.game.util.Question#lastQuestion()
      */
-    public void lastQuestion() {
+    public void lastQuestion()
+    {
     }
 
     /**
      * demand a questionObject of the datapool to generate the next question.
      */
-    public CorrectnessChecker.Correctness showQuestion(QuestionDataUnit questionDataUnit) {
+    public CorrectnessChecker.Correctness showQuestion( final QuestionDataUnit questionDataUnit )
+    {
         tax = questionDataUnit.getTaxon();
         ancestorTax = questionDataUnit.getParentTaxon();
         // randomly select a pict of all picts of the selected taxon
-        Vector pictureNames = new Vector();
+        final Vector pictureNames = new Vector();
         pictureNames.removeAllElements();
-        for (int i = 0; i < theme.length; i++) {
-            if (theme[ i ].getName().equals("Herbar") | theme[ i ].getName().equals("Portrait")) {
-                CommentedPicture[] picts = tax.getCommentedPictures(theme[ i ]);
-                if (picts != null) {
-                    for (int ia = 0; ia < picts.length; ia++) {
-                        pictureNames.add(picts[ ia ].getPicture().getName());
+        for ( final PictureTheme aTheme : theme )
+        {
+            if ( aTheme.getName().equals( "Herbar" ) | aTheme.getName().equals( "Portrait" ) )
+            {
+                final CommentedPicture[] picts = tax.getCommentedPictures( aTheme );
+                if ( picts != null )
+                {
+                    for ( final CommentedPicture pict1 : picts )
+                    {
+                        pictureNames.add( pict1.getPicture().getName() );
                     }
                 }
             }
         }
-        int randPict = (int) (Math.random() * pictureNames.size());
-        if (pictureNames.size() < 1) {
-            answer.setText("kein Bild vorhanden");
+        final int randPict = (int) ( Math.random() * pictureNames.size() );
+        if ( pictureNames.size() < 1 )
+        {
+            answer.setText( "kein Bild vorhanden" );
             //return showQuestion(questionDataUnit);
         }
-        else {
-            String name = ((String) pictureNames.elementAt(randPict));
-            plantPict = ImageLocator.getPicture(name);
-            Dimension plantPictDim = new Dimension(plantPict.getIconWidth(), plantPict.getIconHeight());
-            Dimension shouldDim = new Dimension(370, 370);
-            Dimension newDim = PictureConverter.getFittingDimension(shouldDim, plantPictDim);
-            Image plantImage = plantPict.getImage().getScaledInstance(newDim.width, newDim.height, Image.SCALE_SMOOTH);
-            answer.setEditable(true);
-            answer.setText("");
-            pict.setIcon(new ImageIcon(plantImage));
-            this.setSize(500, 550);
+        else
+        {
+            final String name = ( (String) pictureNames.elementAt( randPict ) );
+            plantPict = ImageLocator.getPicture( name );
+            final Dimension plantPictDim = new Dimension( plantPict.getIconWidth(), plantPict.getIconHeight() );
+            final Dimension shouldDim = new Dimension( 370, 370 );
+            final Dimension newDim = PictureConverter.getFittingDimension( shouldDim, plantPictDim );
+            final Image plantImage = plantPict.getImage().getScaledInstance( newDim.width, newDim.height, Image.SCALE_SMOOTH );
+            answer.setEditable( true );
+            answer.setText( "" );
+            pict.setIcon( new ImageIcon( plantImage ) );
+            this.setSize( 500, 550 );
             this.repaint();
-            getRootPane().setDefaultButton(go);
-            frage.setText(Strings.getString(Catcher.class, "CATCHER.FRAGE", ancestorTax.getLevel().getName()));
-            CAT.debug("Taxon: " + tax.getName() + ", AncestorTaxon: " + ancestorTax.getName());
+            getRootPane().setDefaultButton( go );
+            frage.setText( Strings.getString( Catcher.class, "CATCHER.FRAGE", ancestorTax.getLevel().getName() ) );
+            LOG.debug( "Taxon: " + tax.getName() + ", AncestorTaxon: " + ancestorTax.getName() );
         }
-        setVisible(true);
+        setVisible( true );
         return correctness;
     }
 
-    public void nextQuestion() {
+    public void nextQuestion()
+    {
     }
 
-    protected void processWindowEvent(WindowEvent e) {
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+    protected void processWindowEvent( final WindowEvent e )
+    {
+        if ( e.getID() == WindowEvent.WINDOW_CLOSING )
+        {
         }
-        super.processWindowEvent(e);
+        super.processWindowEvent( e );
     }
 
     /**
      * initialisation of jwindow and components, containing the answer validation
      */
-    private void init() {
-        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        WindowListener[] listeners = this.getWindowListeners();
-        for (int i = 0; i < listeners.length; i++) {
-            this.removeWindowListener(listeners[ i ]);
+    private void init()
+    {
+        setDefaultCloseOperation( JDialog.DO_NOTHING_ON_CLOSE );
+        final WindowListener[] listeners = this.getWindowListeners();
+        for ( final WindowListener listener : listeners )
+        {
+            this.removeWindowListener( listener );
         }
 
         theme = model.getPictureThemes();
-        Border borderEmpty = BorderFactory.createEmptyBorder(6, 6, 6, 6);
-        Border borderLine = BorderFactory.createLineBorder(new Color(170, 180, 180), 1);
-        CompoundBorder cb = new CompoundBorder(borderEmpty, borderLine);
+        final Border borderEmpty = BorderFactory.createEmptyBorder( 6, 6, 6, 6 );
+        final Border borderLine = BorderFactory.createLineBorder( new Color( 170, 180, 180 ), 1 );
+        final CompoundBorder cb = new CompoundBorder( borderEmpty, borderLine );
         go = createButtonGo();
-        setModal(true);
-        setSize(500, 550);
-        WindowUtils.centerOnComponent(this, parentFrame);
+        setModal( true );
+        setSize( 500, 550 );
+        WindowUtils.centerOnComponent( this, parentFrame );
 
+        answer.getKeymap().removeKeyStrokeBinding( KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ) );
+        final JPanel frageAntwort = new JPanel( new BorderLayout() );
+        final JPanel answerFlow = new JPanel( new FlowLayout() );
+        answerFlow.add( answer, null );
 
-        answer.getKeymap().removeKeyStrokeBinding(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
-        JPanel frageAntwort = new JPanel(new BorderLayout());
-        JPanel answerFlow = new JPanel(new FlowLayout());
-        answerFlow.add(answer, null);
+        answer.setPreferredSize( new Dimension( 200, 20 ) );
 
-        answer.setPreferredSize(new Dimension(200, 20));
+        frage.setFont( UIManager.getFont( "Menu.font" ) );
+        answer.setHorizontalAlignment( JLabel.CENTER );
+        frage.setHorizontalAlignment( JLabel.CENTER );
+        pict.setHorizontalAlignment( JLabel.CENTER );
 
-        frage.setFont(UIManager.getFont("Menu.font"));
-        answer.setHorizontalAlignment(JLabel.CENTER);
-        frage.setHorizontalAlignment(JLabel.CENTER);
-        pict.setHorizontalAlignment(JLabel.CENTER);
+        frageAntwort.add( frage, BorderLayout.NORTH );
+        frageAntwort.add( answerFlow, BorderLayout.CENTER );
 
-        frageAntwort.add(frage, BorderLayout.NORTH);
-        frageAntwort.add(answerFlow, BorderLayout.CENTER);
+        final JPanel goFlow = new JPanel( new FlowLayout() );
+        goFlow.add( go, null );
+        frageAntwort.setBorder( cb );
+        pict.setBorder( cb );
+        goFlow.setBorder( cb );
 
-        JPanel goFlow = new JPanel(new FlowLayout());
-        goFlow.add(go, null);
-        frageAntwort.setBorder(cb);
-        pict.setBorder(cb);
-        goFlow.setBorder(cb);
+        getContentPane().setLayout( new BorderLayout() );
+        getContentPane().add( frageAntwort, BorderLayout.NORTH );
+        getContentPane().add( pict, BorderLayout.CENTER );
+        getContentPane().add( goFlow, BorderLayout.SOUTH );
 
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(frageAntwort, BorderLayout.NORTH);
-        getContentPane().add(pict, BorderLayout.CENTER);
-        getContentPane().add(goFlow, BorderLayout.SOUTH);
-
-        answer.setFocusable(true);
+        answer.setFocusable( true );
     }
 
-    private JButton createButtonGo() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                correctness = correctnessChecker.getCorrectness(ancestorTax, answer.getText());
-                if (correctness == CorrectnessChecker.IS_NEARLY_TRUE) {
-                    setCorrectOptionPane(Strings.getString(Catcher.class, "CATCHER.CORRECT.DISTANCE", "" +
-                            correctness), ancestorTax);
+    private JButton createButtonGo()
+    {
+        final ActionListener action = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                correctness = correctnessChecker.getCorrectness( ancestorTax, answer.getText() );
+                if ( correctness == CorrectnessChecker.IS_NEARLY_TRUE )
+                {
+                    setCorrectOptionPane( Strings.getString( Catcher.class, "CATCHER.CORRECT.DISTANCE", "" +
+                            correctness ), ancestorTax );
                 }
-                else if (correctness == CorrectnessChecker.IS_FALSE) {
-                    setCorrectOptionPane(Strings.getString(Catcher.class, "CATCHER.CORRECT.RIGHT"), ancestorTax);
+                else if ( correctness == CorrectnessChecker.IS_FALSE )
+                {
+                    setCorrectOptionPane( Strings.getString( Catcher.class, "CATCHER.CORRECT.RIGHT" ), ancestorTax );
                 }
-                setVisible(false);
+                setVisible( false );
             }
         };
-        JButton button = ComponentFactory.createButton(Catcher.class, "CATCHER.GO", action);
-        button.setFocusable(true);
+        final JButton button = ComponentFactory.createButton( Catcher.class, "CATCHER.GO", action );
+        button.setFocusable( true );
         return button;
     }
 }

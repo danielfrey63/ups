@@ -5,7 +5,7 @@
     <title>Herbar CD-ROM Version 2</title>
     <maps>
         <homeID>top</homeID>
-        <mapref location="jhelpmap.jhm"></mapref>
+        <mapref location="jhelpmap.jhm"/>
     </maps>
     <view mergetype="javax.help.UniteAppendMerge">
         <name>TOC</name>

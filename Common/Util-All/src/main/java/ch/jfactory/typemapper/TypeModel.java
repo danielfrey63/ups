@@ -31,26 +31,25 @@ import javax.swing.ListModel;
  */
 public class TypeModel extends Model
 {
-
     public static final String PROPERTYNAME_DATAMODEL = "dataModel";
 
     private ArrayListModel dataModel = new ArrayListModel();
 
-    private PresentationModel editorModel = new PresentationModel(new ValueHolder(null, true));
+    private final PresentationModel editorModel = new PresentationModel( new ValueHolder( null, true ) );
 
-    private SelectionInList selectionInList = new SelectionInList((ListModel) dataModel);
+    private SelectionInList selectionInList = new SelectionInList( (ListModel) dataModel );
 
     public ArrayListModel getDataModel()
     {
         return dataModel;
     }
 
-    public void setDataModel(final ArrayListModel dataModel)
+    public void setDataModel( final ArrayListModel dataModel )
     {
         final ArrayListModel old = getDataModel();
         this.dataModel = dataModel;
-        this.selectionInList = new SelectionInList((ListModel) dataModel);
-        firePropertyChange(PROPERTYNAME_DATAMODEL, old, dataModel);
+        this.selectionInList = new SelectionInList( (ListModel) dataModel );
+        firePropertyChange( PROPERTYNAME_DATAMODEL, old, dataModel );
     }
 
     public PresentationModel getEditorModel()

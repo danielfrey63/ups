@@ -17,8 +17,8 @@
 package ch.jfactory.projecttime.invoice;
 
 import ch.jfactory.application.view.builder.ActionCommandPanelBuilder;
-import ch.jfactory.image.SimpleIconFactory;
 import ch.jfactory.component.table.TableUtils;
+import ch.jfactory.image.SimpleIconFactory;
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import ch.jfactory.projecttime.domain.impl.Invoice;
 import ch.jfactory.projecttime.main.ProjectTreeCellRenderer;
@@ -49,104 +49,126 @@ import org.jdesktop.swingx.treetable.TreeTableModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.2 $ $Date: 2006/11/16 13:25:17 $
  */
-public class InvoiceBuilder extends ActionCommandPanelBuilder {
+public class InvoiceBuilder extends ActionCommandPanelBuilder
+{
+    private final InvoiceModel model;
 
-    private InvoiceModel model;
     private JXTreeTable table;
 
-    public InvoiceBuilder(final InvoiceModel model) {
+    public InvoiceBuilder( final InvoiceModel model )
+    {
         this.model = model;
     }
 
-    protected void initCommands() {
-        initCommand(new AddEntry(getCommandManager(), model), true);
-        initCommand(new DeleteEntry(getCommandManager(), model), false);
+    protected void initCommands()
+    {
+        initCommand( new AddEntry( getCommandManager(), model ), true );
+        initCommand( new DeleteEntry( getCommandManager(), model ), false );
     }
 
-    protected void initModelListeners() {
-        model.addPropertyChangeListener(InvoiceModel.PROPERTYNAME_INVOICESMODIFIED, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+    protected void initModelListeners()
+    {
+        model.addPropertyChangeListener( InvoiceModel.PROPERTYNAME_INVOICESMODIFIED, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 table.updateUI();
             }
-        });
-        model.getTableSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                getCommand(Commands.COMMANDID_DELETE).setEnabled(model.getTableSelectionModel().getMinSelectionIndex() > -1);
+        } );
+        model.getTableSelectionModel().addListSelectionListener( new ListSelectionListener()
+        {
+            public void valueChanged( final ListSelectionEvent e )
+            {
+                getCommand( Commands.COMMANDID_DELETE ).setEnabled( model.getTableSelectionModel().getMinSelectionIndex() > -1 );
             }
-        });
+        } );
     }
 
-    public JComponent createMainPanel() {
-
+    public JComponent createMainPanel()
+    {
         final TreeTableModel treeTableModel = model.getTreeTableModel();
-        table = new JXTreeTable(treeTableModel);
-        table.setDefaultRenderer(Calendar.class, new TableUtils.CalendarCellRenderer("dd.MM.yyyy HH:mm"));
-        table.setDefaultEditor(String.class, new TableUtils.StringEditor());
-        table.setDefaultEditor(Calendar.class, new TableUtils.CalendarEditor());
-        table.setSelectionModel(model.getTableSelectionModel());
+        table = new JXTreeTable( treeTableModel );
+        table.setDefaultRenderer( Calendar.class, new TableUtils.CalendarCellRenderer( "dd.MM.yyyy HH:mm" ) );
+        table.setDefaultEditor( String.class, new TableUtils.StringEditor() );
+        table.setDefaultEditor( Calendar.class, new TableUtils.CalendarEditor() );
+        table.setSelectionModel( model.getTableSelectionModel() );
 
-        final JTree tree = (JTree) table.getDefaultRenderer(AbstractTreeTableModel.hierarchicalColumnClass);
-        tree.setCellRenderer(new MixedProjectInvoiceRenderer(model.getEntry2InvoiceMap()));
-        tree.setSelectionModel(model.getTreeSelectionModel());
+        final JTree tree = (JTree) table.getDefaultRenderer( AbstractTreeTableModel.hierarchicalColumnClass );
+        tree.setCellRenderer( new MixedProjectInvoiceRenderer( model.getEntry2InvoiceMap() ) );
+        tree.setSelectionModel( model.getTreeSelectionModel() );
 
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JScrollPane(table), BorderLayout.CENTER);
-        panel.add(getCommandManager().getGroup(Commands.GROUPID_TOOLBAR).createToolBar(), BorderLayout.NORTH);
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( new JScrollPane( table ), BorderLayout.CENTER );
+        panel.add( getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar(), BorderLayout.NORTH );
 
         return panel;
     }
 
-    protected void initComponentListeners() {
-        model.getTreeSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(TreeSelectionEvent e) {
+    protected void initComponentListeners()
+    {
+        model.getTreeSelectionModel().addTreeSelectionListener( new TreeSelectionListener()
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
                 TreePath path = e.getNewLeadSelectionPath();
                 Invoice invoice = null;
-                while (path != null) {
-                    Object last = path.getLastPathComponent();
-                    if (last instanceof Invoice) {
+                while ( path != null )
+                {
+                    final Object last = path.getLastPathComponent();
+                    if ( last instanceof Invoice )
+                    {
                         invoice = (Invoice) last;
                         break;
                     }
-                    else {
+                    else
+                    {
                         path = path.getParentPath();
                     }
                 }
-                model.setCurrentInvoice(invoice);
+                model.setCurrentInvoice( invoice );
             }
-        });
+        } );
     }
 
-    public void updateUI() {
+    public void updateUI()
+    {
         model.resetTreeTableModel();
         table.updateUI();
     }
 
-    private class MixedProjectInvoiceRenderer extends ProjectTreeCellRenderer {
+    private class MixedProjectInvoiceRenderer extends ProjectTreeCellRenderer
+    {
+        private final JLabel label = new JLabel();
 
-        private JLabel label = new JLabel();
-        private Icon invoiceIcon;
+        private final Icon invoiceIcon;
 
-        public MixedProjectInvoiceRenderer(ValueModel entry2InvoiceMap) {
-            super(entry2InvoiceMap);
-            invoiceIcon = new SimpleIconFactory("/16x16/fill").createDropShadowIcon("file_line2.png", "#0000FF");
+        public MixedProjectInvoiceRenderer( final ValueModel entry2InvoiceMap )
+        {
+            super( entry2InvoiceMap );
+            invoiceIcon = new SimpleIconFactory( "/16x16/fill" ).createDropShadowIcon( "file_line2.png", "#0000FF" );
         }
 
-        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+        public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus )
+        {
             final JLabel current;
-            if (value instanceof String) {
-                label.setText((String) value);
+            if ( value instanceof String )
+            {
+                label.setText( (String) value );
                 current = label;
             }
-            else if (value instanceof Invoice) {
+            else if ( value instanceof Invoice )
+            {
                 final Invoice invoice = (Invoice) value;
-                label.setText(invoice.getNumber());
-                label.setIcon(invoiceIcon);
+                label.setText( invoice.getNumber() );
+                label.setIcon( invoiceIcon );
                 current = label;
             }
-            else if (value instanceof IFEntry) {
-                current = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+            else if ( value instanceof IFEntry )
+            {
+                current = (JLabel) super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf, row, hasFocus );
             }
-            else {
+            else
+            {
                 current = label;
             }
             return current;

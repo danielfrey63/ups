@@ -16,24 +16,27 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public class IdentifyingRelevance extends AbsRelevance {
-
-    public IdentifyingRelevance() {
-        setName("identifying");
+public class IdentifyingRelevance extends AbsRelevance
+{
+    public IdentifyingRelevance()
+    {
+        setName( "identifying" );
     }
 
     /**
      * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue)
      */
-    public boolean isRelevant(Taxon[] taxa, MorValue value) {
+    public boolean isRelevant( final Taxon[] taxa, final MorValue value )
+    {
         boolean ret = false;
-        Taxon[] taxaWithValue = getTaxa(taxa, value);
-        int siblingsWithThisVal = taxaWithValue.length;
-        MorAttribute att = (MorAttribute) value.getParentAttribute();
-        int siblingsWithThisAtt = getTaxa(taxa, att).length;
-        if (siblingsWithThisVal == 1) {
-            Taxon taxon = taxaWithValue[ 0 ];
-            int valuesWithinThisAtt = getValues(taxon, att).length;
+        final Taxon[] taxaWithValue = getTaxa( taxa, value );
+        final int siblingsWithThisVal = taxaWithValue.length;
+        final MorAttribute att = value.getParentAttribute();
+        final int siblingsWithThisAtt = getTaxa( taxa, att ).length;
+        if ( siblingsWithThisVal == 1 )
+        {
+            final Taxon taxon = taxaWithValue[0];
+            final int valuesWithinThisAtt = getValues( taxon, att ).length;
             ret = siblingsWithThisVal == 1
                     && siblingsWithThisAtt == taxa.length
                     && taxa.length > 1
@@ -45,12 +48,14 @@ public class IdentifyingRelevance extends AbsRelevance {
     /**
      * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue, RelevanceMetaData)
      */
-    public boolean isRelevant(Taxon[] taxa, MorValue value,
-                              RelevanceMetaData md) {
+    public boolean isRelevant( final Taxon[] taxa, final MorValue value,
+                               final RelevanceMetaData md )
+    {
         boolean ret = false;
-        if (md.siblingsWithThisValue == 1) {
-            Taxon taxon = md.taxaWithThisValue[ 0 ];
-            int valuesWithinThisAtt = getValues(taxon, md.parentAttribute).length;
+        if ( md.siblingsWithThisValue == 1 )
+        {
+            final Taxon taxon = md.taxaWithThisValue[0];
+            final int valuesWithinThisAtt = getValues( taxon, md.parentAttribute ).length;
             ret = md.siblingsWithThisValue == 1
                     && md.siblingsWithThisAttribute == taxa.length
                     && taxa.length > 1

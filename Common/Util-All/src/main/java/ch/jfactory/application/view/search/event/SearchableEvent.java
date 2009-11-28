@@ -9,7 +9,6 @@ import java.awt.AWTEvent;
 
 public class SearchableEvent extends AWTEvent
 {
-
     private String _searchingText;
 
     private String _oldSearchingText;
@@ -32,27 +31,27 @@ public class SearchableEvent extends AWTEvent
 
     public static final int SEARCHABLE_CHANGE = 3004;
 
-    public SearchableEvent(final Searchable searchable, final int i)
+    public SearchableEvent( final Searchable searchable, final int i )
     {
-        super(searchable, i);
+        super( searchable, i );
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s)
+    public SearchableEvent( final Object obj, final int i, final String s )
     {
-        super(obj, i);
+        super( obj, i );
         _searchingText = s;
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s, final String s1)
+    public SearchableEvent( final Object obj, final int i, final String s, final String s1 )
     {
-        super(obj, i);
+        super( obj, i );
         _searchingText = s;
         _oldSearchingText = s1;
     }
 
-    public SearchableEvent(final Object obj, final int i, final String s, final Object obj1, final String s1)
+    public SearchableEvent( final Object obj, final int i, final String s, final Object obj1, final String s1 )
     {
-        super(obj, i);
+        super( obj, i );
         _searchingText = s;
         _matchingObject = obj1;
         _matchingText = s1;
@@ -61,7 +60,7 @@ public class SearchableEvent extends AWTEvent
     public String paramString()
     {
         final String s;
-        switch (id)
+        switch ( id )
         {
             case 2999:
                 s = "SEARCHABLE_START: searchingText = \"" + _searchingText + "\"";
@@ -93,7 +92,7 @@ public class SearchableEvent extends AWTEvent
 
     public Searchable getSearchable()
     {
-        return (source instanceof Searchable) ? (Searchable) source : null;
+        return ( source instanceof Searchable ) ? (Searchable) source : null;
     }
 
     public String getSearchingText()

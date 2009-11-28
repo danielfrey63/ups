@@ -27,17 +27,16 @@ import org.pietschy.command.CommandManager;
  */
 public class DeleteType extends ActionCommand
 {
+    private final TypeModel model;
 
-    private TypeModel model;
-
-    public DeleteType(final CommandManager commandManager, final TypeModel model)
+    public DeleteType( final CommandManager commandManager, final TypeModel model )
     {
-        super(commandManager, Commands.COMMANDID_DELETE);
+        super( commandManager, Commands.COMMANDID_DELETE );
         this.model = model;
     }
 
     protected void handleExecute()
     {
-        System.out.println(model.getSelectionInList().getSelection());
+        System.out.println( model.getSelectionInList().getSelection() );
     }
 }

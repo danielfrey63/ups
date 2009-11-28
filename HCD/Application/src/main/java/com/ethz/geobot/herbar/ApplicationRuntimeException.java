@@ -15,13 +15,14 @@ package com.ethz.geobot.herbar;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class ApplicationRuntimeException extends java.lang.RuntimeException {
-
+public class ApplicationRuntimeException extends java.lang.RuntimeException
+{
     /**
      * Creates a new instance of ApplicationRuntimException.
      */
-    public ApplicationRuntimeException() {
-        super("Critical exception occured.");
+    public ApplicationRuntimeException()
+    {
+        super( "Critical exception occured." );
     }
 
     /**
@@ -29,8 +30,9 @@ public class ApplicationRuntimeException extends java.lang.RuntimeException {
      *
      * @param message the exception message
      */
-    public ApplicationRuntimeException(String message) {
-        super(message);
+    public ApplicationRuntimeException( final String message )
+    {
+        super( message );
     }
 }
 

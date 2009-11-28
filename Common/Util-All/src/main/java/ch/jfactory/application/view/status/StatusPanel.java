@@ -18,25 +18,24 @@ import javax.swing.JPanel;
 
 public class StatusPanel extends JPanel
 {
-
-    private JComponent component;
+    private final JComponent component;
 
     private Dimension maxPreferredSize;
 
-    public StatusPanel(final JComponent component)
+    public StatusPanel( final JComponent component )
     {
         this.component = component;
-        setBorder(BorderFactory.createCompoundBorder(new ThinBevelBorder(BevelDirection.LOWERED),
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
-        setLayout(new BorderLayout());
-        add(component, BorderLayout.CENTER);
+        setBorder( BorderFactory.createCompoundBorder( new ThinBevelBorder( BevelDirection.LOWERED ),
+                BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) ) );
+        setLayout( new BorderLayout() );
+        add( component, BorderLayout.CENTER );
         maxPreferredSize = super.getPreferredSize();
     }
 
     public Dimension getPreferredSize()
     {
         super.getPreferredSize();
-        if (super.getPreferredSize().width > maxPreferredSize.width)
+        if ( super.getPreferredSize().width > maxPreferredSize.width )
         {
             maxPreferredSize = super.getPreferredSize();
         }

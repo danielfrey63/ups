@@ -22,24 +22,23 @@ import java.util.Map;
  */
 public class ArrowImage extends BufferedImage
 {
-
-    public ArrowImage(final ArrowDirection nArrowDirection)
+    public ArrowImage( final ArrowDirection nArrowDirection )
     {
-        this(15, 9, nArrowDirection);
+        this( 15, 9, nArrowDirection );
     }
 
-    public ArrowImage(final int nWidth, final int nHeight, final ArrowDirection nArrowDirect)
+    public ArrowImage( final int nWidth, final int nHeight, final ArrowDirection nArrowDirect )
     {
-        super(nWidth, nHeight, TYPE_INT_ARGB_PRE);
+        super( nWidth, nHeight, TYPE_INT_ARGB_PRE );
         // Set the width, height and image type
 
         // Create a graphics context for this buffered image and set rendering options
         final Map map = new HashMap();
-        map.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        map.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        final RenderingHints hints = new RenderingHints(map);
+        map.put( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+        map.put( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
+        final RenderingHints hints = new RenderingHints( map );
         final Graphics2D g2 = this.createGraphics();
-        g2.setRenderingHints(hints);
+        g2.setRenderingHints( hints );
 
         final float h = getHeight();
         final float w = getWidth();
@@ -53,106 +52,106 @@ public class ArrowImage extends BufferedImage
         final GeneralPath pathArrow = new GeneralPath();
         final Color lightColor = Color.orange;
         final Color darkColor = Color.red;
-        if (nArrowDirect == ArrowDirection.ARROW_UP)
+        if ( nArrowDirect == ArrowDirection.ARROW_UP )
         {
-            pathArrow.moveTo(w12, h12);
-            pathArrow.lineTo(w12, 0);
-            pathArrow.lineTo(w, h - 1);
-            pathArrow.lineTo(0, h - 1);
+            pathArrow.moveTo( w12, h12 );
+            pathArrow.lineTo( w12, 0 );
+            pathArrow.lineTo( w, h - 1 );
+            pathArrow.lineTo( 0, h - 1 );
             pathArrow.closePath();
-            g2.setPaint(new GradientPaint(w13, h13, lightColor, w, h - 1, darkColor));
-            g2.fill(pathArrow);
+            g2.setPaint( new GradientPaint( w13, h13, lightColor, w, h - 1, darkColor ) );
+            g2.fill( pathArrow );
 
-            g2.setColor(SystemColor.controlDkShadow);
-            g2.draw(new java.awt.geom.Line2D.Float(0, h - 1, w, h - 1));
-            g2.setColor(darkColor);
-            g2.draw(new java.awt.geom.Line2D.Float(w12, 0, w, h - 1));
-            g2.setColor(lightColor);
-            g2.draw(new java.awt.geom.Line2D.Float(0, h - 1, w12, 0));
+            g2.setColor( SystemColor.controlDkShadow );
+            g2.draw( new java.awt.geom.Line2D.Float( 0, h - 1, w, h - 1 ) );
+            g2.setColor( darkColor );
+            g2.draw( new java.awt.geom.Line2D.Float( w12, 0, w, h - 1 ) );
+            g2.setColor( lightColor );
+            g2.draw( new java.awt.geom.Line2D.Float( 0, h - 1, w12, 0 ) );
         }
-        else if (nArrowDirect == ArrowDirection.ARROW_DOWN)
+        else if ( nArrowDirect == ArrowDirection.ARROW_DOWN )
         {
-            pathArrow.moveTo(w12, h12);
-            pathArrow.lineTo(w, 0);
-            pathArrow.lineTo(w12, h - 1);
+            pathArrow.moveTo( w12, h12 );
+            pathArrow.lineTo( w, 0 );
+            pathArrow.lineTo( w12, h - 1 );
             pathArrow.closePath();
-            g2.setPaint(new GradientPaint(0, 0, lightColor, w23, h23, darkColor));
-            g2.fill(pathArrow);
+            g2.setPaint( new GradientPaint( 0, 0, lightColor, w23, h23, darkColor ) );
+            g2.fill( pathArrow );
 
-            g2.setColor(SystemColor.controlDkShadow);
-            g2.draw(new java.awt.geom.Line2D.Float(w, 0, w12, h - 1));
-            g2.setColor(darkColor);
-            g2.draw(new java.awt.geom.Line2D.Float(w12, h - 1, 0, 0));
-            g2.setColor(lightColor);
-            g2.draw(new java.awt.geom.Line2D.Float(0, 0, w, 0));
+            g2.setColor( SystemColor.controlDkShadow );
+            g2.draw( new java.awt.geom.Line2D.Float( w, 0, w12, h - 1 ) );
+            g2.setColor( darkColor );
+            g2.draw( new java.awt.geom.Line2D.Float( w12, h - 1, 0, 0 ) );
+            g2.setColor( lightColor );
+            g2.draw( new java.awt.geom.Line2D.Float( 0, 0, w, 0 ) );
         }
-        else if (nArrowDirect == ArrowDirection.ARROW_LEFT)
+        else if ( nArrowDirect == ArrowDirection.ARROW_LEFT )
         {
-            pathArrow.moveTo(w - 1, h13);
-            pathArrow.lineTo(w13, h13);
-            pathArrow.lineTo(w13, 0);
-            pathArrow.lineTo(0, h12);
-            pathArrow.lineTo(w13, h - 1);
-            pathArrow.lineTo(w13, h23);
-            pathArrow.lineTo(w - 1, h23);
+            pathArrow.moveTo( w - 1, h13 );
+            pathArrow.lineTo( w13, h13 );
+            pathArrow.lineTo( w13, 0 );
+            pathArrow.lineTo( 0, h12 );
+            pathArrow.lineTo( w13, h - 1 );
+            pathArrow.lineTo( w13, h23 );
+            pathArrow.lineTo( w - 1, h23 );
             pathArrow.closePath();
-            g2.setPaint(new GradientPaint(0, 0, Color.white, 0, h, darkColor));
-            g2.fill(pathArrow);
+            g2.setPaint( new GradientPaint( 0, 0, Color.white, 0, h, darkColor ) );
+            g2.fill( pathArrow );
 
             pathArrow.reset();
-            pathArrow.moveTo(w13, 0);
-            pathArrow.lineTo(w13, h13);
-            pathArrow.moveTo(w - 1, h13);
-            pathArrow.lineTo(w - 1, h23);
-            pathArrow.lineTo(w13, h23);
-            pathArrow.lineTo(w13, h - 1);
-            g2.setColor(SystemColor.controlDkShadow);
-            g2.draw(pathArrow);
+            pathArrow.moveTo( w13, 0 );
+            pathArrow.lineTo( w13, h13 );
+            pathArrow.moveTo( w - 1, h13 );
+            pathArrow.lineTo( w - 1, h23 );
+            pathArrow.lineTo( w13, h23 );
+            pathArrow.lineTo( w13, h - 1 );
+            g2.setColor( SystemColor.controlDkShadow );
+            g2.draw( pathArrow );
 
-            g2.setColor(darkColor);
-            g2.draw(new java.awt.geom.Line2D.Float(0, h12, w13, h - 1));
+            g2.setColor( darkColor );
+            g2.draw( new java.awt.geom.Line2D.Float( 0, h12, w13, h - 1 ) );
 
             pathArrow.reset();
-            pathArrow.moveTo(0, h12);
-            pathArrow.lineTo(w13, 0);
-            pathArrow.moveTo(w13, h13);
-            pathArrow.lineTo(w - 1, h13);
-            g2.setColor(lightColor);
-            g2.draw(pathArrow);
+            pathArrow.moveTo( 0, h12 );
+            pathArrow.lineTo( w13, 0 );
+            pathArrow.moveTo( w13, h13 );
+            pathArrow.lineTo( w - 1, h13 );
+            g2.setColor( lightColor );
+            g2.draw( pathArrow );
         }
         else
         {
-            pathArrow.moveTo(0, h13);
-            pathArrow.lineTo(w23, h13);
-            pathArrow.lineTo(w23, 0);
-            pathArrow.lineTo(w - 1, h12);
-            pathArrow.lineTo(w23, h - 1);
-            pathArrow.lineTo(w23, h23);
-            pathArrow.lineTo(0, h23);
+            pathArrow.moveTo( 0, h13 );
+            pathArrow.lineTo( w23, h13 );
+            pathArrow.lineTo( w23, 0 );
+            pathArrow.lineTo( w - 1, h12 );
+            pathArrow.lineTo( w23, h - 1 );
+            pathArrow.lineTo( w23, h23 );
+            pathArrow.lineTo( 0, h23 );
             pathArrow.closePath();
-            g2.setPaint(new GradientPaint(0, 0, Color.white, 0, h, darkColor));
-            g2.fill(pathArrow);
+            g2.setPaint( new GradientPaint( 0, 0, Color.white, 0, h, darkColor ) );
+            g2.fill( pathArrow );
 
             pathArrow.reset();
-            pathArrow.moveTo(0, h23);
-            pathArrow.lineTo(w23, h23);
-            pathArrow.moveTo(w23, h - 1);
-            pathArrow.lineTo(w - 1, h12);
-            g2.setColor(SystemColor.controlDkShadow);
-            g2.draw(pathArrow);
+            pathArrow.moveTo( 0, h23 );
+            pathArrow.lineTo( w23, h23 );
+            pathArrow.moveTo( w23, h - 1 );
+            pathArrow.lineTo( w - 1, h12 );
+            g2.setColor( SystemColor.controlDkShadow );
+            g2.draw( pathArrow );
 
-            g2.setColor(darkColor);
-            g2.draw(new java.awt.geom.Line2D.Float(w - 1, h12, w23, 0));
+            g2.setColor( darkColor );
+            g2.draw( new java.awt.geom.Line2D.Float( w - 1, h12, w23, 0 ) );
 
             pathArrow.reset();
-            pathArrow.moveTo(w23, 0);
-            pathArrow.lineTo(w23, h13);
-            pathArrow.lineTo(0, h13);
-            pathArrow.lineTo(0, h23);
-            pathArrow.moveTo(w23, h23);
-            pathArrow.lineTo(w23, h - 1);
-            g2.setColor(lightColor);
-            g2.draw(pathArrow);
+            pathArrow.moveTo( w23, 0 );
+            pathArrow.lineTo( w23, h13 );
+            pathArrow.lineTo( 0, h13 );
+            pathArrow.lineTo( 0, h23 );
+            pathArrow.moveTo( w23, h23 );
+            pathArrow.lineTo( w23, h - 1 );
+            g2.setColor( lightColor );
+            g2.draw( pathArrow );
         }
     }
 

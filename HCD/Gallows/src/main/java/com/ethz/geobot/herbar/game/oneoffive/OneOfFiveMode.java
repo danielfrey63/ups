@@ -19,16 +19,18 @@ import com.ethz.geobot.herbar.modeapi.ModeRegistration;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:18 $
  */
-public class OneOfFiveMode extends AbstractModeAdapter {
-
+public class OneOfFiveMode extends AbstractModeAdapter
+{
     /**
      * Constructor
      */
-    public OneOfFiveMode() {
-        super(OneOfFive.class);
+    public OneOfFiveMode()
+    {
+        super( OneOfFive.class );
     }
 
-    static {
-        ModeRegistration.register(new OneOfFiveMode());
+    static
+    {
+        ModeRegistration.register( new OneOfFiveMode() );
     }
 }

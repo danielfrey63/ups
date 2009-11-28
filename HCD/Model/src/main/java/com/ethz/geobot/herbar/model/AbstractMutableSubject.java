@@ -8,7 +8,6 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * <class description here>
  *
@@ -16,15 +15,15 @@ package com.ethz.geobot.herbar.model;
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
 public abstract class AbstractMutableSubject
-        implements MorSubject, Rankable {
-
+        implements MorSubject, Rankable
+{
     /**
      * Sets the MorAttribute array of this object
      *
      * @param child the new attributes to set
      * @param index the position to insert the new child to
      */
-    public abstract void addChild(MorAttribute child, int index);
+    public abstract void addChild( MorAttribute child, int index );
 //    public abstract void setChildAttributes( MorAttribute[] attributes );
 
     /**
@@ -33,33 +32,33 @@ public abstract class AbstractMutableSubject
      * @param child the new child subjects to set
      * @param index the position to insert the new child to
      */
-    public abstract void addChild(MorSubject child, int index);
+    public abstract void addChild( MorSubject child, int index );
 //    public abstract void setChildSubjects( MorSubject[] subjets );
 
-    public abstract void removeChild(MorSubject child);
+    public abstract void removeChild( MorSubject child );
 
-    public abstract void removeChild(MorAttribute child);
+    public abstract void removeChild( MorAttribute child );
 
     /**
      * Sets the name of this object
      *
      * @param name the new name to set
      */
-    public abstract void setName(String name);
+    public abstract void setName( String name );
 
     /**
      * Sets the parent MorSubject of this object
      *
      * @param parent the new parent MorSubject to set
      */
-    public abstract void setParentSubject(MorSubject parent);
+    public abstract void setParentSubject( MorSubject parent );
 
     /**
      * Sets the rank of this object
      *
      * @param rank the new rank to set
      */
-    public abstract void setRank(int rank);
+    public abstract void setRank( int rank );
 }
 
 // $Log: AbstractMutableSubject.java,v $

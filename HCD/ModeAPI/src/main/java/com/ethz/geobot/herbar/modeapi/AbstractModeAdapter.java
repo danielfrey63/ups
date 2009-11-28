@@ -5,7 +5,7 @@ import java.awt.Component;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import javax.swing.JPanel;
-import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * This class is a Mode Adapter to translate an existing Component based form into a mode class. When extending this
@@ -19,91 +19,112 @@ import org.apache.log4j.Category;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class AbstractModeAdapter extends AbstractMode {
+public class AbstractModeAdapter extends AbstractMode
+{
+    private static final Logger LOG = Logger.getLogger( AbstractModeAdapter.class.getName() );
 
-    private static Category cat = Category.getInstance(AbstractModeAdapter.class.getName());
+    private final Class componentClass;
 
-    private Class componentClass;
-    private WeakReference viewComponent = new WeakReference(null);
+    private WeakReference viewComponent = new WeakReference( null );
 
-    public AbstractModeAdapter(Class componentClass) {
-        if (Component.class.isAssignableFrom(componentClass)) {
+    public AbstractModeAdapter( final Class componentClass )
+    {
+        if ( Component.class.isAssignableFrom( componentClass ) )
+        {
             this.componentClass = componentClass;
         }
-        else {
-            String errorText = "AbstractModeAdapter receive illegal class " + componentClass +
+        else
+        {
+            final String errorText = "AbstractModeAdapter receive illegal class " + componentClass +
                     ", not extended from Component";
-            cat.error(errorText);
-            throw new IllegalArgumentException(errorText);
+            LOG.error( errorText );
+            throw new IllegalArgumentException( errorText );
         }
     }
 
-    public void wizardSettingsFinish() {
+    public void wizardSettingsFinish()
+    {
     }
 
-    public void wizardSettingsInit() {
+    public void wizardSettingsInit()
+    {
     }
 
-    public boolean queryDeactivate() {
-        Component vc = (Component) viewComponent.get();
-        if (vc != null) {
-            if (ModeActivation.class.isAssignableFrom(vc.getClass())) {
-                ModeActivation act = (ModeActivation) vc;
+    public boolean queryDeactivate()
+    {
+        final Component vc = (Component) viewComponent.get();
+        if ( vc != null )
+        {
+            if ( ModeActivation.class.isAssignableFrom( vc.getClass() ) )
+            {
+                final ModeActivation act = (ModeActivation) vc;
                 return act.queryDeactivate();
             }
         }
         return super.queryDeactivate();
     }
 
-    public final Component getComponent() {
+    public final Component getComponent()
+    {
         Component vc = (Component) viewComponent.get();
-        if (vc == null) {
+        if ( vc == null )
+        {
             vc = initiateComponent();
-            viewComponent = new WeakReference(vc);
+            viewComponent = new WeakReference( vc );
         }
         return vc;
     }
 
-    public final void activate() {
+    public final void activate()
+    {
         super.activate();
 
-        Component vc = getComponent();
+        final Component vc = getComponent();
 
-        getHerbarContext().getHerbarGUIManager().setViewComponent(vc);
+        getHerbarContext().getHerbarGUIManager().setViewComponent( vc );
 
-        if (ModeActivation.class.isAssignableFrom(vc.getClass())) {
-            ModeActivation act = (ModeActivation) vc;
+        if ( ModeActivation.class.isAssignableFrom( vc.getClass() ) )
+        {
+            final ModeActivation act = (ModeActivation) vc;
             act.activate();
         }
     }
 
-    public final void deactivate() {
-        Component vc = (Component) viewComponent.get();
-        if (vc != null) {
-            if (ModeActivation.class.isAssignableFrom(vc.getClass())) {
-                ModeActivation act = (ModeActivation) vc;
+    public final void deactivate()
+    {
+        final Component vc = (Component) viewComponent.get();
+        if ( vc != null )
+        {
+            if ( ModeActivation.class.isAssignableFrom( vc.getClass() ) )
+            {
+                final ModeActivation act = (ModeActivation) vc;
                 act.deactivate();
             }
         }
     }
 
-    private Component initiateComponent() {
+    private Component initiateComponent()
+    {
         Component component;
 
-        cat.info("initiateComponent()");
+        LOG.info( "initiateComponent()" );
         // first initiate component via default constructor
-        try {
+        try
+        {
             component = (Component) componentClass.newInstance();
         }
-        catch (Exception ex) {
-            try {
-                Class[] params = {this.getClass()};
-                Constructor cons = componentClass.getConstructor(params);
-                Object[] objects = {this};
-                component = (Component) cons.newInstance(objects);
+        catch ( Exception ex )
+        {
+            try
+            {
+                final Class[] params = {this.getClass()};
+                final Constructor cons = componentClass.getConstructor( params );
+                final Object[] objects = {this};
+                component = (Component) cons.newInstance( objects );
             }
-            catch (Exception ex2) {
-                cat.error("failed to instantiate panel class " + componentClass.getName(), ex);
+            catch ( Exception ex2 )
+            {
+                LOG.error( "failed to instantiate panel class " + componentClass.getName(), ex );
                 component = new JPanel();
                 // return a default panel
             }
@@ -112,16 +133,19 @@ public class AbstractModeAdapter extends AbstractMode {
         return component;
     }
 
-    final public void destroy() {
+    final public void destroy()
+    {
         super.destroy();
     }
 
-    final public void init(HerbarContext context) {
-        super.init(context);
+    final public void init( final HerbarContext context )
+    {
+        super.init( context );
 
-        WizardModel wm = getWizardModel();
-        if (wm != null) {
-            context.getHerbarGUIManager().setWizardModel(wm);
+        final WizardModel wm = getWizardModel();
+        if ( wm != null )
+        {
+            context.getHerbarGUIManager().setWizardModel( wm );
         }
     }
 
@@ -130,7 +154,8 @@ public class AbstractModeAdapter extends AbstractMode {
      *
      * @return the WizardModel
      */
-    public WizardModel getWizardModel() {
+    public WizardModel getWizardModel()
+    {
         return null;
     }
 }

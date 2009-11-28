@@ -21,51 +21,55 @@ import org.apache.log4j.Logger;
  */
 public class UpdateProcessor
 {
-    private static final Logger LOGGER = Logger.getLogger(UpdateProcessor.class);
+    private static final Logger LOGGER = Logger.getLogger( UpdateProcessor.class );
 
-    /** Utility field used by event firing mechanism. */
+    /**
+     * Utility field used by event firing mechanism.
+     */
     private javax.swing.event.EventListenerList listenerList = null;
 
-    /** Creates a new instance of UpdateProcessor */
+    /**
+     * Creates a new instance of UpdateProcessor
+     */
     public UpdateProcessor()
     {
     }
 
-    public void process(final List updates) throws IOException
+    public void process( final List updates ) throws IOException
     {
-        LOGGER.info("starting update process");
-        final String sep = System.getProperty("line.separator");
+        LOGGER.info( "starting update process" );
+        final String sep = System.getProperty( "line.separator" );
 
-        final UpdateChangeEvent event = new UpdateChangeEvent(this);
-        event.setStepsCount(updates.size());
-        event.setStepDescription(Strings.getString("WIZARD.UPDATE.PROCESS.DESCRIPTION.START", sep));
+        final UpdateChangeEvent event = new UpdateChangeEvent( this );
+        event.setStepsCount( updates.size() );
+        event.setStepDescription( Strings.getString( "WIZARD.UPDATE.PROCESS.DESCRIPTION.START", sep ) );
 
-        fireBeginUpdateChangeEvent(event);
+        fireBeginUpdateChangeEvent( event );
 
         int step = 0;
-        for (final Iterator it = updates.iterator(); it.hasNext(); step++)
+        for ( final Iterator it = updates.iterator(); it.hasNext(); step++ )
         {
             final UpdateModule module = (UpdateModule) it.next();
-            if (LOGGER.isDebugEnabled())
+            if ( LOGGER.isDebugEnabled() )
             {
-                LOGGER.debug("update module: " + module.getServerVersionInfo().getName());
+                LOGGER.debug( "update module: " + module.getServerVersionInfo().getName() );
             }
-            event.setCurrentStep(step);
+            event.setCurrentStep( step );
             String description = module.getServerVersionInfo().getDescription();
-            event.setStepDescription(Strings.getString("WIZARD.UPDATE.PROCESS.DESCRIPTION.TEXT1", description));
-            fireProgressUpdateChangeEvent(event);
+            event.setStepDescription( Strings.getString( "WIZARD.UPDATE.PROCESS.DESCRIPTION.TEXT1", description ) );
+            fireProgressUpdateChangeEvent( event );
             module.update();
             description = module.getServerVersionInfo().getDescription();
-            event.setStepDescription(" " + Strings.getString("WIZARD.UPDATE.PROCESS.DESCRIPTION.TEXT2", sep));
-            fireProgressUpdateChangeEvent(event);
+            event.setStepDescription( " " + Strings.getString( "WIZARD.UPDATE.PROCESS.DESCRIPTION.TEXT2", sep ) );
+            fireProgressUpdateChangeEvent( event );
         }
 
         // send complete status
-        event.setCurrentStep(step);
-        event.setStepDescription(Strings.getString("WIZARD.UPDATE.PROCESS.DESCRIPTION.STOP", sep));
-        fireFinishUpdateChangeEvent(event);
+        event.setCurrentStep( step );
+        event.setStepDescription( Strings.getString( "WIZARD.UPDATE.PROCESS.DESCRIPTION.STOP", sep ) );
+        fireFinishUpdateChangeEvent( event );
 
-        LOGGER.info("update process finished");
+        LOGGER.info( "update process finished" );
     }
 
     /**
@@ -73,13 +77,13 @@ public class UpdateProcessor
      *
      * @param listener The listener to register.
      */
-    public synchronized void addUpdateChangeListener(final UpdateChangeListener listener)
+    public synchronized void addUpdateChangeListener( final UpdateChangeListener listener )
     {
-        if (listenerList == null)
+        if ( listenerList == null )
         {
             listenerList = new javax.swing.event.EventListenerList();
         }
-        listenerList.add(ch.jfactory.update.UpdateChangeListener.class, listener);
+        listenerList.add( ch.jfactory.update.UpdateChangeListener.class, listener );
     }
 
     /**
@@ -87,38 +91,38 @@ public class UpdateProcessor
      *
      * @param listener The listener to remove.
      */
-    public synchronized void removeUpdateChangeListener(final UpdateChangeListener listener)
+    public synchronized void removeUpdateChangeListener( final UpdateChangeListener listener )
     {
-        listenerList.remove(ch.jfactory.update.UpdateChangeListener.class, listener);
+        listenerList.remove( ch.jfactory.update.UpdateChangeListener.class, listener );
     }
 
-    protected synchronized void fireProgressUpdateChangeEvent(final UpdateChangeEvent event)
+    protected synchronized void fireProgressUpdateChangeEvent( final UpdateChangeEvent event )
     {
-        final EventListener[] listeners = listenerList.getListeners(UpdateChangeListener.class);
-        for (EventListener listener1 : listeners)
+        final EventListener[] listeners = listenerList.getListeners( UpdateChangeListener.class );
+        for ( final EventListener listener1 : listeners )
         {
             final UpdateChangeListener listener = (UpdateChangeListener) listener1;
-            listener.progressUpdate(event);
+            listener.progressUpdate( event );
         }
     }
 
-    protected synchronized void fireBeginUpdateChangeEvent(final UpdateChangeEvent event)
+    protected synchronized void fireBeginUpdateChangeEvent( final UpdateChangeEvent event )
     {
-        final EventListener[] listeners = listenerList.getListeners(UpdateChangeListener.class);
-        for (EventListener listener1 : listeners)
+        final EventListener[] listeners = listenerList.getListeners( UpdateChangeListener.class );
+        for ( final EventListener listener1 : listeners )
         {
             final UpdateChangeListener listener = (UpdateChangeListener) listener1;
-            listener.beginUpdate(event);
+            listener.beginUpdate( event );
         }
     }
 
-    protected synchronized void fireFinishUpdateChangeEvent(final UpdateChangeEvent event)
+    protected synchronized void fireFinishUpdateChangeEvent( final UpdateChangeEvent event )
     {
-        final EventListener[] listeners = listenerList.getListeners(UpdateChangeListener.class);
-        for (EventListener listener1 : listeners)
+        final EventListener[] listeners = listenerList.getListeners( UpdateChangeListener.class );
+        for ( final EventListener listener1 : listeners )
         {
             final UpdateChangeListener listener = (UpdateChangeListener) listener1;
-            listener.finishUpdate(event);
+            listener.finishUpdate( event );
         }
     }
 }

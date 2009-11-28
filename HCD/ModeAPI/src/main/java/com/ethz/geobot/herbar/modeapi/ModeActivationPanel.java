@@ -16,24 +16,27 @@ import javax.swing.JPanel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public abstract class ModeActivationPanel extends JPanel implements ModeActivation {
-
+public abstract class ModeActivationPanel extends JPanel implements ModeActivation
+{
     /**
      * @see ModeActivation#activate
      */
-    public void activate() {
+    public void activate()
+    {
     }
 
     /**
      * @see ModeActivation#deactivate
      */
-    public void deactivate() {
+    public void deactivate()
+    {
     }
 
     /**
      * @see ModeActivation#queryDeactivate
      */
-    public boolean queryDeactivate() {
+    public boolean queryDeactivate()
+    {
         return true;
     }
 }

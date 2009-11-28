@@ -26,22 +26,26 @@ import java.io.FilenameFilter;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:37 $
  */
-public abstract class Parser {
-
+public abstract class Parser
+{
     protected Settings settings = new Settings();
 
-    public Parser(final Settings settings) {
+    public Parser( final Settings settings )
+    {
         this.settings = settings;
     }
 
-    protected final FilenameFilter filter = new FilenameFilter() {
-        public boolean accept(final File dir, final String name) {
-            final File file = new File(dir, name);
-            return file.isDirectory() || settings.isAllowedFileName(name);
+    protected final FilenameFilter filter = new FilenameFilter()
+    {
+        public boolean accept( final File dir, final String name )
+        {
+            final File file = new File( dir, name );
+            return file.isDirectory() || settings.isAllowedFileName( name );
         }
     };
 
-    public void setSettings(final Settings settings) {
+    public void setSettings( final Settings settings )
+    {
         this.settings = settings;
     }
 }

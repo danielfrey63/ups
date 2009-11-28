@@ -22,10 +22,13 @@ package ch.jfactory.projecttime.entryeditor.command;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String APPLY_COMMAND = "entry.apply";
+
     public static final String RESET_COMMAND = "entry.reset";
+
     public static final String SUM_COMMAND = "entry.sum";
+
     public static final String TOOLBAR_GROUP = "entry.toolbar";
 }

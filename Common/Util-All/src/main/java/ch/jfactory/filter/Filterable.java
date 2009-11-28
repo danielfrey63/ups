@@ -8,11 +8,12 @@ package ch.jfactory.filter;
  */
 public interface Filterable
 {
-
-    /** Propertyname for the filter. */
+    /**
+     * Propertyname for the filter.
+     */
     String PROPERTYNAME_FILTER = "filter";
 
-    void setFilter(Filter filter);
+    void setFilter( Filter filter );
 
     void deleteFilter();
 

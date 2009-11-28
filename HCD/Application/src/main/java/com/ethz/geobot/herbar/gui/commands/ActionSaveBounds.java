@@ -10,19 +10,21 @@ import javax.swing.JFrame;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class ActionSaveBounds extends AbstractParametrizedAction {
+public class ActionSaveBounds extends AbstractParametrizedAction
+{
+    private final Preferences prefNode;
 
-    private Preferences prefNode;
-
-    public ActionSaveBounds(JFrame frame, Preferences prefs) {
-        super("MENU.ITEM.SAVE.BOUNDS", frame);
+    public ActionSaveBounds( final JFrame frame, final Preferences prefs )
+    {
+        super( "MENU.ITEM.SAVE.BOUNDS", frame );
         this.prefNode = prefs;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        prefNode.putInt(MainFrame.PREF_X, parent.getLocation().x);
-        prefNode.putInt(MainFrame.PREF_Y, parent.getLocation().y);
-        prefNode.putInt(MainFrame.PREF_W, parent.getSize().width);
-        prefNode.putInt(MainFrame.PREF_H, parent.getSize().height);
+    public void actionPerformed( final ActionEvent e )
+    {
+        prefNode.putInt( MainFrame.PREF_X, parent.getLocation().x );
+        prefNode.putInt( MainFrame.PREF_Y, parent.getLocation().y );
+        prefNode.putInt( MainFrame.PREF_W, parent.getSize().width );
+        prefNode.putInt( MainFrame.PREF_H, parent.getSize().height );
     }
 }

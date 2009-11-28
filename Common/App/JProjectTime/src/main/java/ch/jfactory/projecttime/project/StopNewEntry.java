@@ -25,16 +25,18 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class StopNewEntry extends ActionCommand {
+public class StopNewEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public StopNewEntry(final CommandManager manager, final ProjectModel model) {
-        super(manager, Commands.COMMANDIT_STOP);
+    public StopNewEntry( final CommandManager manager, final ProjectModel model )
+    {
+        super( manager, Commands.COMMANDIT_STOP );
         this.model = model;
     }
 
-    protected void handleExecute() {
-        model.setRunning(null);
+    protected void handleExecute()
+    {
+        model.setRunning( null );
     }
 }

@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.pmb.exam;
 
-import java.awt.Component;
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTree;
@@ -29,21 +29,23 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class NavigationRenderer extends DefaultTreeCellRenderer {
-
-    public NavigationRenderer() {
+public class NavigationRenderer extends DefaultTreeCellRenderer
+{
+    public NavigationRenderer()
+    {
         super();
         final ImageIcon icon = null; //new ImageIcon(MainForm.class.getResource("/18x18/arrow.png"));
-        setOpenIcon(icon);
-        setClosedIcon(icon);
-        setLeafIcon(icon);
+        setOpenIcon( icon );
+        setClosedIcon( icon );
+        setLeafIcon( icon );
     }
 
     @Override
-    public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean sel, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus) {
-        final JLabel label = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-        label.setOpaque(true);
-        label.setForeground(selected ? Color.orange : tree.getForeground());
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus )
+    {
+        final JLabel label = (JLabel) super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf, row, hasFocus );
+        label.setOpaque( true );
+        label.setForeground( selected ? Color.orange : tree.getForeground() );
         return label;
     }
 }

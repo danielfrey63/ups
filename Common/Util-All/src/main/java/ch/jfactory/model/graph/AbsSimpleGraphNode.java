@@ -9,8 +9,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
 {
-
-    private static final Logger LOGGER = Logger.getLogger(AbsSimpleGraphNode.class);
+    private static final Logger LOGGER = Logger.getLogger( AbsSimpleGraphNode.class );
 
     private static final boolean DEBUG_NODE_NAMES = false;
 
@@ -18,7 +17,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
 
     private GraphEdgeList children;
 
-    private GraphEdgeList parents;
+    private final GraphEdgeList parents;
 
     private String name;
 
@@ -29,11 +28,11 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     public AbsSimpleGraphNode()
     {
         children = new GraphEdgeList();
-        children.setReferer(this);
-        children.setListType(GraphEdgeList.LIST_CHILD);
+        children.setReferer( this );
+        children.setListType( GraphEdgeList.LIST_CHILD );
         parents = new GraphEdgeList();
-        parents.setReferer(this);
-        parents.setListType(GraphEdgeList.LIST_PARENT);
+        parents.setReferer( this );
+        parents.setListType( GraphEdgeList.LIST_PARENT );
     }
 
     /**
@@ -63,15 +62,17 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      *
      * @param children the new children to set
      */
-    public void setChildrenEdges(final GraphEdgeList children)
+    public void setChildrenEdges( final GraphEdgeList children )
     {
         this.children = children;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#isType(Class) */
-    public boolean isType(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#isType(Class)
+     */
+    public boolean isType( final Class type )
     {
-        return type.isAssignableFrom(this.getClass());
+        return type.isAssignableFrom( this.getClass() );
     }
 
     /**
@@ -81,9 +82,9 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public int getId()
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("getId(): " + id);
+            LOGGER.debug( "getId(): " + id );
         }
         return id;
     }
@@ -95,9 +96,9 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public String getName()
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("getName(): " + name);
+            LOGGER.debug( "getName(): " + name );
         }
         return name;
     }
@@ -109,95 +110,113 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public int getRank()
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("getRank(): " + rank);
+            LOGGER.debug( "getRank(): " + rank );
         }
         return rank;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setId(int) */
-    public void setId(final int id)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setId(int)
+     */
+    public void setId( final int id )
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("setId(" + id + ")");
+            LOGGER.debug( "setId(" + id + ")" );
         }
         this.id = id;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setName(String) */
-    public void setName(final String name)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setName(String)
+     */
+    public void setName( final String name )
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("setName(" + name + ")");
+            LOGGER.debug( "setName(" + name + ")" );
         }
         this.name = name;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setRank(int) */
-    public void setRank(final int rank)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setRank(int)
+     */
+    public void setRank( final int rank )
     {
-        if (LOGGER.isDebugEnabled())
+        if ( LOGGER.isDebugEnabled() )
         {
-            LOGGER.debug("setRank(" + rank + ")");
+            LOGGER.debug( "setRank(" + rank + ")" );
         }
         this.rank = rank;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getChildren(Class) */
-    public GraphNodeList getChildren(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class)
+     */
+    public GraphNodeList getChildren( final Class type )
     {
-        return getChildren(type, Role.CLASSES_ALL);
+        return getChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class) */
-    public GraphNodeList getChildren(final Class type, final Class role)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class)
+     */
+    public GraphNodeList getChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList list = AbsGraphModel.getFiltered(getChildren(), type);
-        for (int i = 0; i < list.size(); i++)
+        final GraphNodeList list = AbsGraphModel.getFiltered( getChildren(), type );
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode node = list.get(i);
-            final Role roleToTest = getChildrenEdges().getRole(node);
-            if (role.isAssignableFrom(roleToTest.getClass()))
+            final GraphNode node = list.get( i );
+            final Role roleToTest = getChildrenEdges().getRole( node );
+            if ( role.isAssignableFrom( roleToTest.getClass() ) )
             {
-                result.add(node);
+                result.add( node );
             }
         }
         return result;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class) */
-    public GraphNodeList getAllChildren(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class)
+     */
+    public GraphNodeList getAllChildren( final Class type )
     {
-        return getAllChildren(type, Role.CLASSES_ALL);
+        return getAllChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class) */
-    public GraphNodeList getAllChildren(final Class type, final Class role)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class)
+     */
+    public GraphNodeList getAllChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        result.addAll(getChildren(type, role));
+        result.addAll( getChildren( type, role ) );
         final GraphNodeList children = getChildren();
-        for (int i = 0; i < children.size(); i++)
+        for ( int i = 0; i < children.size(); i++ )
         {
-            result.addAll(children.get(i).getAllChildren(type, role));
+            result.addAll( children.get( i ).getAllChildren( type, role ) );
         }
         return result;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getChildRole(GraphNode) */
-    public Role getChildRole(final GraphNode node)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getChildRole(GraphNode)
+     */
+    public Role getChildRole( final GraphNode node )
     {
-        return getChildrenEdges().getRole(node);
+        return getChildrenEdges().getRole( node );
     }
 
-    /** @see ch.jfactory.model.graph.GraphEdgeList#setRole(GraphNode, Role) */
-    public void setChildRole(final GraphNode node, final Role role)
+    /**
+     * @see ch.jfactory.model.graph.GraphEdgeList#setRole(GraphNode, Role)
+     */
+    public void setChildRole( final GraphNode node, final Role role )
     {
-        getChildrenEdges().setRole(node, role);
+        getChildrenEdges().setRole( node, role );
     }
 
     /**
@@ -205,102 +224,126 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      *
      * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class)
      */
-    public void setChildren(final GraphNodeList children)
+    public void setChildren( final GraphNodeList children )
     {
-        setChildren(children, TYPES_ALL);
+        setChildren( children, TYPES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class) */
-    public void setChildren(final GraphNodeList children, final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class)
+     */
+    public void setChildren( final GraphNodeList children, final Class type )
     {
-        setChildren(children, type, Role.CLASSES_ALL);
+        setChildren( children, type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class) */
-    public void deleteChildren(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class)
+     */
+    public void deleteChildren( final Class type )
     {
-        deleteChildren(type, Role.CLASSES_ALL);
+        deleteChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getParents(Class) */
-    public GraphNodeList getParents(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getParents(Class)
+     */
+    public GraphNodeList getParents( final Class type )
     {
-        return getParents(type, Role.CLASSES_ALL);
+        return getParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class) */
-    public GraphNodeList getParents(final Class type, final Class role)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class)
+     */
+    public GraphNodeList getParents( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList list = AbsGraphModel.getFiltered(getParents(), type);
-        for (int i = 0; i < list.size(); i++)
+        final GraphNodeList list = AbsGraphModel.getFiltered( getParents(), type );
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode node = list.get(i);
-            final Role roleToTest = getParentEdges().getRole(node);
-            if (role.isAssignableFrom(roleToTest.getClass()))
+            final GraphNode node = list.get( i );
+            final Role roleToTest = getParentEdges().getRole( node );
+            if ( role.isAssignableFrom( roleToTest.getClass() ) )
             {
-                result.add(node);
+                result.add( node );
             }
         }
         return result;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getAllParents(Class) */
-    public GraphNodeList getAllParents(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getAllParents(Class)
+     */
+    public GraphNodeList getAllParents( final Class type )
     {
-        return getAllParents(type, Role.CLASSES_ALL);
+        return getAllParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getAllParents(Class, Class) */
-    public GraphNodeList getAllParents(final Class type, final Class role)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getAllParents(Class, Class)
+     */
+    public GraphNodeList getAllParents( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList parents = getParents(type, role);
-        for (int i = 0; i < parents.size(); i++)
+        final GraphNodeList parents = getParents( type, role );
+        for ( int i = 0; i < parents.size(); i++ )
         {
-            result.addAll(parents.get(i).getAllParents(type, role));
+            result.addAll( parents.get( i ).getAllParents( type, role ) );
         }
         return result;
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getParentRole(GraphNode) */
-    public Role getParentRole(final GraphNode node)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getParentRole(GraphNode)
+     */
+    public Role getParentRole( final GraphNode node )
     {
-        return getParentEdges().getRole(node);
+        return getParentEdges().getRole( node );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setParentRole(GraphNode, Role) */
-    public void setParentRole(final GraphNode node, final Role role)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setParentRole(GraphNode, Role)
+     */
+    public void setParentRole( final GraphNode node, final Role role )
     {
-        getParentEdges().setRole(node, role);
+        getParentEdges().setRole( node, role );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList) */
-    public void setParents(final GraphNodeList parents)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList)
+     */
+    public void setParents( final GraphNodeList parents )
     {
-        setParents(parents, TYPES_ALL);
+        setParents( parents, TYPES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class) */
-    public void setParents(final GraphNodeList parents, final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class)
+     */
+    public void setParents( final GraphNodeList parents, final Class type )
     {
-        setParents(parents, type, Role.CLASSES_ALL);
+        setParents( parents, type, Role.CLASSES_ALL );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#deleteParents(Class) */
-    public void deleteParents(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#deleteParents(Class)
+     */
+    public void deleteParents( final Class type )
     {
-        deleteParents(type, Role.CLASSES_ALL);
+        deleteParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see java.lang.Object#toString() */
+    /**
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
-        if (DEBUG_NODE_NAMES)
+        if ( DEBUG_NODE_NAMES )
         {
             final String clazz = this.getClass().getName();
-            final String type = clazz.substring(clazz.lastIndexOf('.', clazz.length()) + 1,
-                    clazz.length());
+            final String type = clazz.substring( clazz.lastIndexOf( '.', clazz.length() ) + 1,
+                    clazz.length() );
             return name + " [type=" + type + ",id=" + id + "]";
         }
         else

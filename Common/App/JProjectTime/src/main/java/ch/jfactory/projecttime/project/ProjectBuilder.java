@@ -45,145 +45,179 @@ import javax.swing.tree.TreeSelectionModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:56:29 $
  */
-public class ProjectBuilder extends ActionCommandPanelBuilder {
-
+public class ProjectBuilder extends ActionCommandPanelBuilder
+{
     private JTree tree;
-    private ProjectModel model;
 
-    public ProjectBuilder(final ProjectModel model) {
+    private final ProjectModel model;
+
+    public ProjectBuilder( final ProjectModel model )
+    {
         this.model = model;
     }
 
-    protected JComponent createMainPanel() {
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(createToolbar(), BorderLayout.NORTH);
-        panel.add(createTree(), BorderLayout.CENTER);
+    protected JComponent createMainPanel()
+    {
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.add( createToolbar(), BorderLayout.NORTH );
+        panel.add( createTree(), BorderLayout.CENTER );
         return panel;
     }
 
-    protected void initCommands() {
-        initCommand(new AddEntry(getCommandManager(), model));
-        initCommand(new DeleteEntry(getCommandManager(), model));
-        initCommand(new StartNewEntry(getCommandManager(), model));
-        initCommand(new StopNewEntry(getCommandManager(), model));
+    protected void initCommands()
+    {
+        initCommand( new AddEntry( getCommandManager(), model ) );
+        initCommand( new DeleteEntry( getCommandManager(), model ) );
+        initCommand( new StartNewEntry( getCommandManager(), model ) );
+        initCommand( new StopNewEntry( getCommandManager(), model ) );
     }
 
-    protected void initModelListeners() {
+    protected void initModelListeners()
+    {
         // Change the tree model in the project model
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_ROOT, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_ROOT, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final IFEntry root = (IFEntry) evt.getNewValue();
-                final ProjectTreeModel treeModel = new ProjectTreeModel(root);
-                model.setTreeModel(treeModel);
+                final ProjectTreeModel treeModel = new ProjectTreeModel( root );
+                model.setTreeModel( treeModel );
             }
-        });
+        } );
         // React upon a change of the tree model in the project model and asign it to the tree.
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_TREEMODEL, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                tree.setModel((TreeModel) evt.getNewValue());
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_TREEMODEL, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                tree.setModel( (TreeModel) evt.getNewValue() );
             }
-        });
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_NEWCHILD, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_NEWCHILD, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final TreeSelectionModel selectionModel = (TreeSelectionModel) model.getSelectionModel().getValue();
-                final TreePath selection = TreeUtils.findPathInTreeModel(model.getTreeModel(), evt.getNewValue());
-                selectionModel.setSelectionPath(selection);
-                TreeUtils.ensureVisibility(tree, selection);
+                final TreePath selection = TreeUtils.findPathInTreeModel( model.getTreeModel(), evt.getNewValue() );
+                selectionModel.setSelectionPath( selection );
+                TreeUtils.ensureVisibility( tree, selection );
             }
-        });
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_DELETEDCHILD, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_DELETEDCHILD, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 final IFEntry child = (IFEntry) evt.getNewValue();
                 final IFEntry parent = child.getParent();
-                final TreePath path = TreeUtils.findPathInTreeModel(model.getTreeModel(), parent);
+                final TreePath path = TreeUtils.findPathInTreeModel( model.getTreeModel(), parent );
                 final TreeSelectionModel selectionModel = (TreeSelectionModel) model.getSelectionModel().getValue();
-                selectionModel.setSelectionPath(path);
+                selectionModel.setSelectionPath( path );
             }
-        });
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_RUNNING, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                final boolean runningEntry = (evt.getNewValue() != null);
-                getCommandManager().getCommand(Commands.COMMANDIT_STOP).setEnabled(runningEntry);
+        } );
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_RUNNING, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                final boolean runningEntry = ( evt.getNewValue() != null );
+                getCommandManager().getCommand( Commands.COMMANDIT_STOP ).setEnabled( runningEntry );
                 final boolean selected = model.getCurrentBeanModel().getBean() != null;
-                getCommandManager().getCommand(Commands.COMMANDID_START).setEnabled(!runningEntry && selected);
-                if (!runningEntry) {
+                getCommandManager().getCommand( Commands.COMMANDID_START ).setEnabled( !runningEntry && selected );
+                if ( !runningEntry )
+                {
                     final IFEntry entry = (IFEntry) evt.getOldValue();
-                    entry.setEnd(Calendar.getInstance());
-                    model.getCurrentBeanModel().setBean(entry);
+                    entry.setEnd( Calendar.getInstance() );
+                    model.getCurrentBeanModel().setBean( entry );
                 }
             }
-        });
+        } );
         // Make sure that nodes sizes are adapted when a new timeentry has been made
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_RUNNING, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                final IFEntry entry = (IFEntry) (evt.getNewValue() == null ? evt.getOldValue() : evt.getNewValue());
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_RUNNING, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                final IFEntry entry = (IFEntry) ( evt.getNewValue() == null ? evt.getOldValue() : evt.getNewValue() );
                 final ProjectTreeModel treeModel = (ProjectTreeModel) tree.getModel();
-                treeModel.nodeChanged(entry);
+                treeModel.nodeChanged( entry );
             }
-        });
+        } );
         // Make sure that nodes sizes are adapted in size when the editor has been commited.
-        model.getCurrentBeanModel().getTriggerChannel().addValueChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (Boolean.TRUE.equals((Boolean) evt.getNewValue())) {
+        model.getCurrentBeanModel().getTriggerChannel().addValueChangeListener( new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                if ( Boolean.TRUE.equals( evt.getNewValue() ) )
+                {
                     final ProjectTreeModel treeModel = (ProjectTreeModel) tree.getModel();
-                    treeModel.nodeChanged(tree.getSelectionPath());
+                    treeModel.nodeChanged( tree.getSelectionPath() );
                 }
             }
-        });
-        model.getCurrentBeanModel().addPropertyChangeListener(PresentationModel.PROPERTYNAME_BEAN, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                final IFEntry entry = (IFEntry) (evt.getNewValue() == null ? evt.getOldValue() : evt.getNewValue());
+        } );
+        model.getCurrentBeanModel().addPropertyChangeListener( PresentationModel.PROPERTYNAME_BEAN, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                final IFEntry entry = (IFEntry) ( evt.getNewValue() == null ? evt.getOldValue() : evt.getNewValue() );
                 final ProjectTreeModel treeModel = (ProjectTreeModel) tree.getModel();
-                treeModel.nodeChanged(entry);
+                treeModel.nodeChanged( entry );
             }
-        });
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_INVOICEADDED, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_INVOICEADDED, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 tree.repaint();
             }
-        });
-        model.addPropertyChangeListener(ProjectModel.PROPERTYNAME_INVOICEREMOVED, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+        } );
+        model.addPropertyChangeListener( ProjectModel.PROPERTYNAME_INVOICEREMOVED, new PropertyChangeListener()
+        {
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
                 tree.repaint();
             }
-        });
+        } );
     }
 
-    protected void initComponentListeners() {
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(TreeSelectionEvent e) {
+    protected void initComponentListeners()
+    {
+        tree.addTreeSelectionListener( new TreeSelectionListener()
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
                 final TreePath path = e.getNewLeadSelectionPath();
                 final IFEntry entry;
                 final boolean selected = path != null;
-                if (selected) {
+                if ( selected )
+                {
                     entry = (IFEntry) path.getLastPathComponent();
                 }
-                else {
+                else
+                {
                     entry = null;
                 }
-                model.getCurrentBeanModel().setBean(entry);
-                getCommandManager().getCommand(Commands.COMMANDID_ADD).setEnabled(selected);
+                model.getCurrentBeanModel().setBean( entry );
+                getCommandManager().getCommand( Commands.COMMANDID_ADD ).setEnabled( selected );
 
                 final boolean notroot = selected && entry.getParent() != null;
-                getCommandManager().getCommand(Commands.COMMANDID_DELETE).setEnabled(notroot);
+                getCommandManager().getCommand( Commands.COMMANDID_DELETE ).setEnabled( notroot );
 
-                final boolean running = (model.getRunning() != null);
-                getCommandManager().getCommand(Commands.COMMANDID_START).setEnabled(selected && !running);
+                final boolean running = ( model.getRunning() != null );
+                getCommandManager().getCommand( Commands.COMMANDID_START ).setEnabled( selected && !running );
             }
-        });
+        } );
     }
 
-    private JComponent createToolbar() {
-        return getCommandManager().getGroup(Commands.GROUPID_POPUP).createToolBar("toolbar");
+    private JComponent createToolbar()
+    {
+        return getCommandManager().getGroup( Commands.GROUPID_POPUP ).createToolBar( "toolbar" );
     }
 
-    private JComponent createTree() {
+    private JComponent createTree()
+    {
         final ProjectTreeModel treeModel = model.getTreeModel();
-        final DnDValidatorUpdater treeValidator = new MovingDnDValidatorUpdater(treeModel);
-        tree = new DnDTree(treeModel, treeValidator);
-        tree.setComponentPopupMenu(getCommandManager().getGroup(Commands.GROUPID_POPUP).createPopupMenu());
-        tree.setCellRenderer(new ProjectTreeCellRenderer(model.getEntry2InvoiceMap()));
-        tree.setSelectionModel((TreeSelectionModel) model.getSelectionModel().getValue());
-        return new JScrollPane(tree);
+        final DnDValidatorUpdater treeValidator = new MovingDnDValidatorUpdater( treeModel );
+        tree = new DnDTree( treeModel, treeValidator );
+        tree.setComponentPopupMenu( getCommandManager().getGroup( Commands.GROUPID_POPUP ).createPopupMenu() );
+        tree.setCellRenderer( new ProjectTreeCellRenderer( model.getEntry2InvoiceMap() ) );
+        tree.setSelectionModel( (TreeSelectionModel) model.getSelectionModel().getValue() );
+        return new JScrollPane( tree );
     }
 }

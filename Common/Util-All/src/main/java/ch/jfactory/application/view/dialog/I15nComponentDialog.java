@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 abstract public class I15nComponentDialog extends JDialog
 {
-    private static Logger LOGGER = Logger.getLogger(I15nComponentDialog.class);
+    private static final Logger LOGGER = Logger.getLogger( I15nComponentDialog.class );
 
     protected JButton apply;
 
@@ -46,56 +46,56 @@ abstract public class I15nComponentDialog extends JDialog
 
     private boolean accepted = false;
 
-    public I15nComponentDialog(final Frame parent, final String prefix)
+    public I15nComponentDialog( final Frame parent, final String prefix )
     {
-        super(parent, Strings.getString(prefix + ".TITLE"), true);
-        dialogInit(prefix);
+        super( parent, Strings.getString( prefix + ".TITLE" ), true );
+        dialogInit( prefix );
     }
 
-    public I15nComponentDialog(final Dialog parent, final String prefix)
+    public I15nComponentDialog( final Dialog parent, final String prefix )
     {
-        super(parent, Strings.getString(prefix + ".TITLE"), true);
-        dialogInit(prefix);
+        super( parent, Strings.getString( prefix + ".TITLE" ), true );
+        dialogInit( prefix );
     }
 
-    protected void dialogInit(final String prefix)
+    protected void dialogInit( final String prefix )
     {
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
 
-        final JPanel titlePanel = new I15nHeaderPanel(prefix);
+        final JPanel titlePanel = new I15nHeaderPanel( prefix );
 
         final JPanel buttonPanel = createDefaultButtonPanel();
 
         // make sure to init button before call to overwritable createComponentPanel, as this may hide them.
         // init component panel
         final JComponent componentPanel = createComponentPanel();
-        componentPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
-                Borders.createEmptyBorder(Sizes.DLUY8, Sizes.DLUX8, Sizes.DLUY8, Sizes.DLUX8)));
+        componentPanel.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createEtchedBorder(),
+                Borders.createEmptyBorder( Sizes.DLUY8, Sizes.DLUX8, Sizes.DLUY8, Sizes.DLUX8 ) ) );
 
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(Borders.createEmptyBorder(Sizes.DLUY8, Sizes.DLUX8, Sizes.DLUY8, Sizes.DLUX8));
-        panel.add(componentPanel, BorderLayout.CENTER);
-        panel.add(buttonPanel, BorderLayout.SOUTH);
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUY8, Sizes.DLUX8, Sizes.DLUY8, Sizes.DLUX8 ) );
+        panel.add( componentPanel, BorderLayout.CENTER );
+        panel.add( buttonPanel, BorderLayout.SOUTH );
 
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(titlePanel, BorderLayout.NORTH);
-        getContentPane().add(panel, BorderLayout.CENTER);
+        getContentPane().setLayout( new BorderLayout() );
+        getContentPane().add( titlePanel, BorderLayout.NORTH );
+        getContentPane().add( panel, BorderLayout.CENTER );
 
-        addWindowListener(new WindowAdapter()
+        addWindowListener( new WindowAdapter()
         {
-            public void windowClosing(final WindowEvent e)
+            public void windowClosing( final WindowEvent e )
             {
                 onCancel();
             }
-        });
+        } );
 
-        if (isApplyShowing())
+        if ( isApplyShowing() )
         {
-            getRootPane().setDefaultButton(apply);
+            getRootPane().setDefaultButton( apply );
         }
-        if (isCancelShowing())
+        if ( isCancelShowing() )
         {
-            ActionUtils.registerEscapeKey(cancel);
+            ActionUtils.registerEscapeKey( cancel );
         }
     }
 
@@ -104,19 +104,19 @@ abstract public class I15nComponentDialog extends JDialog
         apply = createOkButton();
         cancel = createCancelButton();
 
-        final FormLayout layout = new FormLayout("p:g, max(50dlu;p), 8dlu, max(50dlu;p)", "4dlu, p");
-        layout.setColumnGroups(new int[][]{{2, 4}});
-        final JPanel panel = new JPanel(layout);
+        final FormLayout layout = new FormLayout( "p:g, max(50dlu;p), 8dlu, max(50dlu;p)", "4dlu, p" );
+        layout.setColumnGroups( new int[][]{{2, 4}} );
+        final JPanel panel = new JPanel( layout );
 
-        panel.setBorder(BorderFactory.createEmptyBorder(Constants.GAP_BETWEEN_GROUP, 0, 0, 0));
+        panel.setBorder( BorderFactory.createEmptyBorder( Constants.GAP_BETWEEN_GROUP, 0, 0, 0 ) );
         final CellConstraints cc = new CellConstraints();
-        if (isApplyShowing())
+        if ( isApplyShowing() )
         {
-            panel.add(apply, cc.xy(2, 2));
+            panel.add( apply, cc.xy( 2, 2 ) );
         }
-        if (isCancelShowing())
+        if ( isCancelShowing() )
         {
-            panel.add(cancel, cc.xy(4, 2));
+            panel.add( cancel, cc.xy( 4, 2 ) );
         }
 
         return panel;
@@ -126,15 +126,15 @@ abstract public class I15nComponentDialog extends JDialog
     {
         final ActionListener action = new ActionListener()
         {
-            public void actionPerformed(final ActionEvent l)
+            public void actionPerformed( final ActionEvent l )
             {
                 apply();
             }
         };
-        final JButton button = ComponentFactory.createButton("BUTTON.OK", action);
-        if (isCancelShowing())
+        final JButton button = ComponentFactory.createButton( "BUTTON.OK", action );
+        if ( isCancelShowing() )
         {
-            button.setEnabled(false);
+            button.setEnabled( false );
         }
         return button;
     }
@@ -144,31 +144,31 @@ abstract public class I15nComponentDialog extends JDialog
         final Cursor saved = getCursor();
         try
         {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            setCursor( Cursor.getPredefinedCursor( Cursor.WAIT_CURSOR ) );
             accepted = true;
             boolean dispose = true;
             try
             {
                 onApply();
             }
-            catch (ComponentDialogException e)
+            catch ( ComponentDialogException e )
             {
                 dispose = false;
             }
-            if (dispose)
+            if ( dispose )
             {
                 dispose();
             }
         }
-        catch (RuntimeException e)
+        catch ( RuntimeException e )
         {
             dispose();
-            LOGGER.error("error when confirming dialog", e);
+            LOGGER.error( "error when confirming dialog", e );
             throw e;
         }
         finally
         {
-            setCursor(saved);
+            setCursor( saved );
         }
     }
 
@@ -176,13 +176,13 @@ abstract public class I15nComponentDialog extends JDialog
     {
         final ActionListener action = new ActionListener()
         {
-            public void actionPerformed(final ActionEvent l)
+            public void actionPerformed( final ActionEvent l )
             {
                 onCancel();
                 dispose();
             }
         };
-        return ComponentFactory.createButton("BUTTON.CANCEL", action);
+        return ComponentFactory.createButton( "BUTTON.CANCEL", action );
     }
 
     /**
@@ -200,9 +200,9 @@ abstract public class I15nComponentDialog extends JDialog
      *
      * @param value true for apply enabled otherwise false
      */
-    protected void enableApply(final boolean value)
+    protected void enableApply( final boolean value )
     {
-        apply.setEnabled(value);
+        apply.setEnabled( value );
     }
 
     protected boolean isApplyShowing()
@@ -221,7 +221,9 @@ abstract public class I15nComponentDialog extends JDialog
      */
     protected abstract void onApply() throws I15nComponentDialog.ComponentDialogException;
 
-    /** This method should implement the behaviour on cancel. */
+    /**
+     * This method should implement the behaviour on cancel.
+     */
     protected abstract void onCancel();
 
     /**
@@ -230,27 +232,28 @@ abstract public class I15nComponentDialog extends JDialog
      */
     protected abstract JComponent createComponentPanel();
 
-    /** Exception to throw when a component dialog has to stay open uppon apply. */
+    /**
+     * Exception to throw when a component dialog has to stay open uppon apply.
+     */
     public class ComponentDialogException extends Exception
     {
-
         public ComponentDialogException()
         {
         }
 
-        public ComponentDialogException(final String message)
+        public ComponentDialogException( final String message )
         {
-            super(message);
+            super( message );
         }
 
-        public ComponentDialogException(final String message, final Throwable cause)
+        public ComponentDialogException( final String message, final Throwable cause )
         {
-            super(message, cause);
+            super( message, cause );
         }
 
-        public ComponentDialogException(final Throwable cause)
+        public ComponentDialogException( final Throwable cause )
         {
-            super(cause);
+            super( cause );
         }
     }
 }

@@ -22,9 +22,11 @@ package ch.jfactory.projecttime.project.command;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class Commands {
-
+public class Commands
+{
     public static final String ADD_COMMAND = "entry.add";
+
     public static final String DELETE_COMMAND = "entry.delete";
+
     public static final String POPUP_GROUP = "entry.popup.menu";
 }

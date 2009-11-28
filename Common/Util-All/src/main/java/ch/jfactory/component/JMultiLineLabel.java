@@ -21,26 +21,27 @@ import javax.swing.text.StyledDocument;
  */
 public class JMultiLineLabel extends JTextPane
 {
-
-    /** Creates a new instance of JMultiLineLabel */
+    /**
+     * Creates a new instance of JMultiLineLabel
+     */
     public JMultiLineLabel()
     {
         super();
 
-        setFocusable(false);
-        setEditable(false);
-        setOpaque(false);
-        setBorder(null);
+        setFocusable( false );
+        setEditable( false );
+        setOpaque( false );
+        setBorder( null );
 
-        final Font font = UIManager.getFont("Label.font");
+        final Font font = UIManager.getFont( "Label.font" );
 
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setFontSize(attributes, font.getSize());
-        StyleConstants.setFontFamily(attributes, font.getFamily());
-        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
+        StyleConstants.setFontSize( attributes, font.getSize() );
+        StyleConstants.setFontFamily( attributes, font.getFamily() );
+        StyleConstants.setAlignment( attributes, StyleConstants.ALIGN_LEFT );
 
         final StyledDocument doc = getStyledDocument();
-        doc.setParagraphAttributes(0, doc.getLength(), attributes, false);
+        doc.setParagraphAttributes( 0, doc.getLength(), attributes, false );
     }
 
     /**
@@ -48,10 +49,10 @@ public class JMultiLineLabel extends JTextPane
      *
      * @param text the text to display
      */
-    public JMultiLineLabel(final String text)
+    public JMultiLineLabel( final String text )
     {
         this();
-        setText(text);
+        setText( text );
     }
 
     /**
@@ -62,11 +63,11 @@ public class JMultiLineLabel extends JTextPane
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public JMultiLineLabel(final String text, final int alignement)
+    public JMultiLineLabel( final String text, final int alignement )
     {
         this();
-        setText(text);
-        setHorizontalTextAlignment(alignement);
+        setText( text );
+        setHorizontalTextAlignment( alignement );
     }
 
     /**
@@ -75,13 +76,12 @@ public class JMultiLineLabel extends JTextPane
      * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
      *                   <code>StyleConstants.ALIGN_RIGHT</code>
      */
-    public void setHorizontalTextAlignment(final int alignement)
+    public void setHorizontalTextAlignment( final int alignement )
     {
-
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setAlignment(attributes, alignement);
+        StyleConstants.setAlignment( attributes, alignement );
 
         final StyledDocument doc = getStyledDocument();
-        doc.setParagraphAttributes(0, doc.getLength(), attributes, false);
+        doc.setParagraphAttributes( 0, doc.getLength(), attributes, false );
     }
 }

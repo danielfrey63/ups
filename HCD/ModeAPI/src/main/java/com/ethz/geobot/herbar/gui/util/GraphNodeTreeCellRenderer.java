@@ -28,63 +28,71 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer {
+public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
+{
+    private static final HashMap iconMapping = new HashMap();
 
-    private static HashMap iconMapping = new HashMap();
+    static
+    {
+        iconMapping.put( MorSubject.class, "MORSUBJECT" );
+        iconMapping.put( MorAttribute.class, "MORATTRIBUTE" );
+        iconMapping.put( MorValue.class, "MORVALUE" );
+        iconMapping.put( MorText.class, "MORTEXT" );
 
-    static {
-        iconMapping.put(MorSubject.class, "MORSUBJECT");
-        iconMapping.put(MorAttribute.class, "MORATTRIBUTE");
-        iconMapping.put(MorValue.class, "MORVALUE");
-        iconMapping.put(MorText.class, "MORTEXT");
+        iconMapping.put( MedSubject.class, "ADDSUBJECT" );
+        iconMapping.put( MedAttribute.class, "ADDATTRIBUTE" );
+        iconMapping.put( MedValue.class, "ADDVALUE" );
+        iconMapping.put( MedText.class, "ADDTEXT" );
 
-        iconMapping.put(MedSubject.class, "ADDSUBJECT");
-        iconMapping.put(MedAttribute.class, "ADDATTRIBUTE");
-        iconMapping.put(MedValue.class, "ADDVALUE");
-        iconMapping.put(MedText.class, "ADDTEXT");
-
-        iconMapping.put(EcoSubject.class, "ECOSUBJECT");
-        iconMapping.put(EcoAttribute.class, "ECOATTRIBUTE");
-        iconMapping.put(EcoValue.class, "ECOVALUE");
-        iconMapping.put(EcoText.class, "ECOTEXT");
+        iconMapping.put( EcoSubject.class, "ECOSUBJECT" );
+        iconMapping.put( EcoAttribute.class, "ECOATTRIBUTE" );
+        iconMapping.put( EcoValue.class, "ECOVALUE" );
+        iconMapping.put( EcoText.class, "ECOTEXT" );
     }
 
     /**
      * @see javax.swing.tree.TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean,
      *      int, boolean)
      */
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
-                                                  boolean leaf, int row, boolean hasFocus) {
-
-        super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
-        if (!(value instanceof GraphTreeNode)) {
-            throw new IllegalStateException("Renderer only for GraphTreeNodes, not for " + value.getClass().getName());
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected, final boolean expanded,
+                                                   final boolean leaf, final int row, final boolean hasFocus )
+    {
+        super.getTreeCellRendererComponent( tree, value, selected, expanded, leaf, row, hasFocus );
+        if ( !( value instanceof GraphTreeNode ) )
+        {
+            throw new IllegalStateException( "Renderer only for GraphTreeNodes, not for " + value.getClass().getName() );
         }
-        GraphTreeNode tNode = (GraphTreeNode) value;
-        GraphNode node = tNode.getDependent();
-        setText(value.toString());
+        final GraphTreeNode tNode = (GraphTreeNode) value;
+        final GraphNode node = tNode.getDependent();
+        setText( value.toString() );
         String baseName = "";
-        if (tNode.isType(Taxon.class)) {
-            GraphNodeList levels = node.getChildren(Level.class);
-            if (levels.size() == 1) {
-                baseName = levels.get(0).getName();
+        if ( tNode.isType( Taxon.class ) )
+        {
+            final GraphNodeList levels = node.getChildren( Level.class );
+            if ( levels.size() == 1 )
+            {
+                baseName = levels.get( 0 ).getName();
             }
         }
-        else {
-            baseName = getIconBase(tNode).toString();
+        else
+        {
+            baseName = getIconBase( tNode ).toString();
         }
-        setIcon(ImageLocator.getIcon("icon" + baseName + ".gif"));
-        setBackgroundNonSelectionColor(tree.getBackground());
+        setIcon( ImageLocator.getIcon( "icon" + baseName + ".gif" ) );
+        setBackgroundNonSelectionColor( tree.getBackground() );
         revalidate();
         repaint();
         return this;
     }
 
-    private String getIconBase(GraphTreeNode node) {
-        for (Iterator iter = iconMapping.keySet().iterator(); iter.hasNext();) {
-            Class clazz = (Class) iter.next();
-            if (node.isType(clazz)) {
-                return (String) iconMapping.get(clazz);
+    private String getIconBase( final GraphTreeNode node )
+    {
+        for ( final Object o : iconMapping.keySet() )
+        {
+            final Class clazz = (Class) o;
+            if ( node.isType( clazz ) )
+            {
+                return (String) iconMapping.get( clazz );
             }
         }
         return "";

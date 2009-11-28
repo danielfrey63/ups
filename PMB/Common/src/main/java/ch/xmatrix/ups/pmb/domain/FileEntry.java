@@ -16,11 +16,11 @@
  */
 package ch.xmatrix.ups.pmb.domain;
 
+import ch.xmatrix.ups.pmb.ui.model.PictureStateModel;
+import ch.xmatrix.ups.pmb.ui.model.Settings;
 import java.io.File;
 import net.java.jveez.vfs.Picture;
 import net.java.jveez.vfs.impl.PictureImpl;
-import ch.xmatrix.ups.pmb.ui.model.Settings;
-import ch.xmatrix.ups.pmb.ui.model.PictureStateModel;
 
 /**
  * Holds the reference to the file and parses its name into the appropriate parts.
@@ -44,23 +44,27 @@ import ch.xmatrix.ups.pmb.ui.model.PictureStateModel;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:37 $
  */
-public class FileEntry extends Entry {
-
+public class FileEntry extends Entry
+{
     private Picture picture = null;
 
-    public FileEntry(final String path, final Entry parent, final Settings settings) {
-        super(path, parent, settings);
+    public FileEntry( final String path, final Entry parent, final Settings settings )
+    {
+        super( path, parent, settings );
     }
 
-    public Picture getPicture() {
-        if (picture == null) {
-            picture = new PictureImpl(new File(getPath()));
+    public Picture getPicture()
+    {
+        if ( picture == null )
+        {
+            picture = new PictureImpl( new File( getPath() ) );
         }
         return picture;
     }
 
-    public PictureStateModel getPictureStateModel() {
-        return parseIntoPictureStateModel(new File(getPath()));
+    public PictureStateModel getPictureStateModel()
+    {
+        return parseIntoPictureStateModel( new File( getPath() ) );
     }
 
     /**
@@ -69,8 +73,9 @@ public class FileEntry extends Entry {
      * @param path the new path to set.
      */
     @Override
-    public void setPath(final String path) {
-        super.setPath(path);
+    public void setPath( final String path )
+    {
+        super.setPath( path );
         picture = null;
     }
 
@@ -82,32 +87,38 @@ public class FileEntry extends Entry {
      * @param file Full file path. Position information is in paranthesis as space separated x1, x2, y1, y2
      * @return PictureStateModel
      */
-    private static PictureStateModel parseIntoPictureStateModel(final File file) {
+    private static PictureStateModel parseIntoPictureStateModel( final File file )
+    {
         final PictureStateModel model;
         final String name = file.getName();
-        final String position = getPositionAndZoom(name);
-        final String[] parts = position.split(" ");
-        if (parts.length == 4) {
-            model = new PictureStateModel(file.getAbsolutePath());
-            model.setX1(Double.parseDouble(parts[ 0 ]) / 100);
-            model.setX2(Double.parseDouble(parts[ 1 ]) / 100);
-            model.setY1(Double.parseDouble(parts[ 2 ]) / 100);
-            model.setY2(Double.parseDouble(parts[ 3 ]) / 100);
+        final String position = getPositionAndZoom( name );
+        final String[] parts = position.split( " " );
+        if ( parts.length == 4 )
+        {
+            model = new PictureStateModel( file.getAbsolutePath() );
+            model.setX1( Double.parseDouble( parts[0] ) / 100 );
+            model.setX2( Double.parseDouble( parts[1] ) / 100 );
+            model.setY1( Double.parseDouble( parts[2] ) / 100 );
+            model.setY2( Double.parseDouble( parts[3] ) / 100 );
         }
-        else {
+        else
+        {
             model = null;
         }
         return model;
     }
 
-    private static String getPositionAndZoom(final String string) {
-        final int i1 = string.indexOf(" (");
-        final int i2 = string.indexOf(")");
+    private static String getPositionAndZoom( final String string )
+    {
+        final int i1 = string.indexOf( " (" );
+        final int i2 = string.indexOf( ")" );
         final String result;
-        if (i1 < i2) {
-            result = string.substring(i1 + 2, i2);
+        if ( i1 < i2 )
+        {
+            result = string.substring( i1 + 2, i2 );
         }
-        else {
+        else
+        {
             result = "";
         }
         return result;

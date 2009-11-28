@@ -20,7 +20,6 @@ import java.util.Random;
  */
 public class Combinatorial
 {
-
     /**
      * Returns all combinations of elements between the groups. Order does not matter, and repetitions are not
      * calculated.<p> <p/> Given an array of groups <code>{{a1 a2}{b1 b2 b3}}</code> the result will be <code> {{a1
@@ -35,10 +34,10 @@ public class Combinatorial
      * @return an array of all combinations of elements between groups
      * @see #getCrossProduct(Object[][], int) getCrossProduct
      */
-    public static Object[][] getCrossProduct(final Object[][] groups)
+    public static Object[][] getCrossProduct( final Object[][] groups )
     {
-        final int numberOfCombinations = getCrossProductCount(groups);
-        return calculateCrossProducts(groups, numberOfCombinations, 0);
+        final int numberOfCombinations = getCrossProductCount( groups );
+        return calculateCrossProducts( groups, numberOfCombinations, 0 );
     }
 
     /**
@@ -61,10 +60,10 @@ public class Combinatorial
      * @return an array of the given maximum of cross products
      * @see ch.jfactory.math.RandomUtils#randomize(Object[])
      */
-    public static Object[][] getCrossProduct(final Object[][] groups, int size)
+    public static Object[][] getCrossProduct( final Object[][] groups, int size )
     {
-        size = Math.min(size, getCrossProductCount(groups));
-        return calculateCrossProducts(groups, size, 0);
+        size = Math.min( size, getCrossProductCount( groups ) );
+        return calculateCrossProducts( groups, size, 0 );
     }
 
     /**
@@ -77,10 +76,10 @@ public class Combinatorial
      * @return an array of the given maximum of cross products
      * @see ch.jfactory.math.RandomUtils#randomize(Object[])
      */
-    public static Object[][] getCrossProduct(final Object[][] groups, int size, final long seed)
+    public static Object[][] getCrossProduct( final Object[][] groups, int size, final long seed )
     {
-        size = Math.min(size, getCrossProductCount(groups));
-        return calculateCrossProducts(groups, size, seed);
+        size = Math.min( size, getCrossProductCount( groups ) );
+        return calculateCrossProducts( groups, size, seed );
     }
 
     /**
@@ -89,10 +88,10 @@ public class Combinatorial
      * @param sizes the sizes of the groups used for the cross product
      * @return the number of cross products for the given sizes
      */
-    public static int getCrossProductCount(final int[] sizes)
+    public static int getCrossProductCount( final int[] sizes )
     {
         int result = 1;
-        for (final int size : sizes)
+        for ( final int size : sizes )
         {
             result *= size;
         }
@@ -105,28 +104,27 @@ public class Combinatorial
      * @param groups an array of groups of elements
      * @return the number of cross products for the given sizes
      */
-    public static int getCrossProductCount(final Object[][] groups)
+    public static int getCrossProductCount( final Object[][] groups )
     {
         final int numberOfGroups = groups.length;
         // Calculate the size of the resulting array and initialize it
         int numberOfCombinations = 1;
-        for (int i = 0; i < numberOfGroups; i++)
+        for ( int i = 0; i < numberOfGroups; i++ )
         {
             numberOfCombinations *= groups[i].length;
         }
         return numberOfCombinations;
     }
 
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
-        final int[][] res = getSortedCombinationsWithRepetitions(5, 6);
-        printIntMatrix(res);
+        final int[][] res = getSortedCombinationsWithRepetitions( 5, 6 );
+        printIntMatrix( res );
     }
 
-    public static double getSortedCombinationsWithRepetitionsCount(final int n, final int k)
+    public static double getSortedCombinationsWithRepetitionsCount( final int n, final int k )
     {
-
-        return Math.pow(n, k);
+        return Math.pow( n, k );
     }
 
     /**
@@ -134,15 +132,14 @@ public class Combinatorial
      * @param k length of the tuple | number of places
      * @return all combinations
      */
-    public static int[][] getSortedCombinationsWithRepetitions(final int[] t, final int k)
+    public static int[][] getSortedCombinationsWithRepetitions( final int[] t, final int k )
     {
-
-        final int[][] r = getSortedCombinationsWithRepetitions(t.length, k);
+        final int[][] r = getSortedCombinationsWithRepetitions( t.length, k );
         final int[][] result = new int[r.length][k];
-        for (int i = 0; i < r.length; i++)
+        for ( int i = 0; i < r.length; i++ )
         {
             final int[] row = r[i];
-            for (int j = 0; j < row.length; j++)
+            for ( int j = 0; j < row.length; j++ )
             {
                 final int index = row[j];
                 result[i][j] = t[index];
@@ -157,17 +154,16 @@ public class Combinatorial
      * @param k length of the tuple | number of places
      * @return all sorted combinations
      */
-    public static int[][] getSortedCombinationsWithRepetitions(final int n, final int k)
+    public static int[][] getSortedCombinationsWithRepetitions( final int n, final int k )
     {
-
-        final int r = (int) getSortedCombinationsWithRepetitionsCount(n, k);
+        final int r = (int) getSortedCombinationsWithRepetitionsCount( n, k );
         final int[][] result = new int[r][k];
-        for (int i = 0; i < k; i++)
+        for ( int i = 0; i < k; i++ )
         {
             final int pos = k - i - 1;
-            for (int j = 0; j < r; j++)
+            for ( int j = 0; j < r; j++ )
             {
-                final int a = (int) (j / Math.pow(n, pos));
+                final int a = (int) ( j / Math.pow( n, pos ) );
                 result[j][i] = a % n;
             }
         }
@@ -182,17 +178,16 @@ public class Combinatorial
      * @param k the size of the tuples
      * @return the number of combinations
      */
-    public static int getUnsortedCombinationsWithoutRepetitionsCount(final int n, final int k)
+    public static int getUnsortedCombinationsWithoutRepetitionsCount( final int n, final int k )
     {
-
-        final int max = Math.max(k, n - k);
-        final int min = Math.min(k, n - k);
+        final int max = Math.max( k, n - k );
+        final int min = Math.min( k, n - k );
         int result = 1;
-        for (int i = max + 1; i <= n; i++)
+        for ( int i = max + 1; i <= n; i++ )
         {
             result *= i;
         }
-        for (int i = 1; i <= min; i++)
+        for ( int i = 1; i <= min; i++ )
         {
             result /= i;
         }
@@ -230,11 +225,11 @@ public class Combinatorial
      * @param k the set size to choose
      * @return the number of combinations
      */
-    public static long getUnsortedCombinationsWithRepetitionsCount(final int n, final int k)
+    public static long getUnsortedCombinationsWithRepetitionsCount( final int n, final int k )
     {
         long result = 1;
-        int s = n + k;
-        for (int i = 1; i < k + 1; i++)
+        final int s = n + k;
+        for ( int i = 1; i < k + 1; i++ )
         {
             result *= s - i;
             result /= i;
@@ -243,25 +238,24 @@ public class Combinatorial
         return result;
     }
 
-    public static int[][] getUnsortedCombinationsWithRepetitions(final int n, final int k)
+    public static int[][] getUnsortedCombinationsWithRepetitions( final int n, final int k )
     {
-
-        final long r = getUnsortedCombinationsWithRepetitionsCount(n, k);
+        final long r = getUnsortedCombinationsWithRepetitionsCount( n, k );
         final int[][] result = new int[(int) r][k];
-        for (int i = 0; i < k; i++)
+        for ( int i = 0; i < k; i++ )
         {
             result[0][i] = 1;
         }
-        for (int i = 1; i < r; i++)
+        for ( int i = 1; i < r; i++ )
         {
             final int[] row = result[i];
-            for (int j = 0; j < k; j++)
+            for ( int j = 0; j < k; j++ )
             {
                 final int[] lastRow = result[i - 1];
                 final int lastValue = lastRow[j];
-                if (j == k - 1 || lastRow[j + 1] == n)
+                if ( j == k - 1 || lastRow[j + 1] == n )
                 {
-                    if (lastRow[j] == n)
+                    if ( lastRow[j] == n )
                     {
                         row[j] = row[j - 1];
                     }
@@ -288,12 +282,12 @@ public class Combinatorial
      * @param array the array to get the subsets (k-tuples) from
      * @return a List containing all the variations
      */
-    public static <T> List<List<T>> getSubsets(final List<T> array, final int k)
+    public static <T> List<List<T>> getSubsets( final List<T> array, final int k )
     {
         // the List to store the results in
         final List<List<T>> results = new ArrayList<List<T>>();
         // initiate recursive call
-        getSubsets(results, new ArrayList<T>(), array, k);
+        getSubsets( results, new ArrayList<T>(), array, k );
         return results;
     }
 
@@ -303,12 +297,12 @@ public class Combinatorial
      * @param n the integer to get the factorial of
      * @return the factorial of the given integer
      */
-    public static int factorial(final int n)
+    public static int factorial( final int n )
     {
         int ret = 1;
-        if (n > 1)
+        if ( n > 1 )
         {
-            for (int i = 1; i <= n; i++)
+            for ( int i = 1; i <= n; i++ )
             {
                 ret *= i;
             }
@@ -325,30 +319,30 @@ public class Combinatorial
      * @param k       the tuple size
      * @param results the List that is filled with each new subset
      */
-    private static <T> void getSubsets(final List<List<T>> results, final List<T> prefix, final List<T> array, final int k)
+    private static <T> void getSubsets( final List<List<T>> results, final List<T> prefix, final List<T> array, final int k )
     {
-        for (int i = 0; i < array.size() - k + 1; i++)
+        for ( int i = 0; i < array.size() - k + 1; i++ )
         {
-            if (k > 1)
+            if ( k > 1 )
             {
                 // it is important to make new list objects as subsequent loops
                 // would not have the same prerequisites otherwise.
-                final List<T> newbase = new ArrayList<T>(prefix);
-                final List<T> newobjs = new ArrayList<T>(array);
+                final List<T> newbase = new ArrayList<T>( prefix );
+                final List<T> newobjs = new ArrayList<T>( array );
                 // need to remove the first i elements of the new object array
-                for (int j = 0; j < i; j++)
+                for ( int j = 0; j < i; j++ )
                 {
-                    newobjs.remove(0);
+                    newobjs.remove( 0 );
                 }
                 // finally add the new prefix to the existing one
-                newbase.add(newobjs.remove(0));
-                getSubsets(results, newbase, newobjs, k - 1);
+                newbase.add( newobjs.remove( 0 ) );
+                getSubsets( results, newbase, newobjs, k - 1 );
             }
             else
             {
-                final List<T> chunk = new ArrayList<T>(prefix);
-                chunk.add(array.get(i));
-                results.add(chunk);
+                final List<T> chunk = new ArrayList<T>( prefix );
+                chunk.add( array.get( i ) );
+                results.add( chunk );
             }
         }
     }
@@ -361,21 +355,21 @@ public class Combinatorial
      * @param seed   the random seed used for randomization
      * @return an array of the given maximum of cross products
      */
-    private static Object[][] calculateCrossProducts(final Object[][] groups, final int size, final long seed)
+    private static Object[][] calculateCrossProducts( final Object[][] groups, final int size, final long seed )
     {
         final int numberOfGroups = groups.length;
         // Initialize one counter for each group
         final int[] withinGroupCounters = new int[numberOfGroups];
         // Choose randomly some rows
-        final int totalSize = getCrossProductCount(groups);
-        final Random rand = new Random(seed);
+        final int totalSize = getCrossProductCount( groups );
+        final Random rand = new Random( seed );
         final Object[][] result = new Object[size][];
-        for (int i = 0; i < size; i++)
+        for ( int i = 0; i < size; i++ )
         {
-            final int randomRow = (seed == 0 ? i : rand.nextInt(totalSize));
+            final int randomRow = ( seed == 0 ? i : rand.nextInt( totalSize ) );
             int divider = 1;
             final Object[] combination = new Object[numberOfGroups];
-            for (int j = 0; j < numberOfGroups; j++)
+            for ( int j = 0; j < numberOfGroups; j++ )
             {
                 final int groupSize = groups[j].length;
                 // Each counter will be initialized in turn by the given value.
@@ -383,7 +377,7 @@ public class Combinatorial
                 // group size. But for each subsequent group, the index is
                 // corrected by the product of all preceeding group sizes to get
                 // the correct shift.
-                withinGroupCounters[j] = (randomRow / divider) % groupSize;
+                withinGroupCounters[j] = ( randomRow / divider ) % groupSize;
                 divider *= groupSize;
                 // Store the combination
                 combination[j] = groups[j][withinGroupCounters[j]];
@@ -393,23 +387,23 @@ public class Combinatorial
         return result;
     }
 
-    private static void printIntMatrix(final int[][] res)
+    private static void printIntMatrix( final int[][] res )
     {
-        for (final int[] re : res)
+        for ( final int[] re : res )
         {
             int sum = 0;
-            for (final int s : re)
+            for ( final int s : re )
             {
                 sum += s;
-                System.out.print(" " + s);
+                System.out.print( " " + s );
             }
-            if (sum == 8)
+            if ( sum == 8 )
             {
-                System.out.println(" <--");
+                System.out.println( " <--" );
             }
             else
             {
-                System.out.println("");
+                System.out.println( "" );
             }
         }
     }

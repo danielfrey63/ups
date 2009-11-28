@@ -24,7 +24,6 @@ package ch.jfactory.command;
  */
 public class CommonCommands
 {
-
     public static final String COMMANDID_ABOUT = "about";
 
     public static final String COMMANDID_FILTERADDTOMODEL = "addFilter";

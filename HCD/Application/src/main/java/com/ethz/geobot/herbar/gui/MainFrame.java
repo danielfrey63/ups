@@ -39,157 +39,192 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import org.apache.log4j.Category;
+import org.apache.log4j.Logger;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class MainFrame extends JFrame {
-
+public class MainFrame extends JFrame
+{
     public static final String PREF_X = "bounds_x";
+
     public static final String PREF_Y = "bounds_y";
+
     public static final String PREF_W = "bounds_w";
+
     public static final String PREF_H = "bounds_h";
+
     public static final String PREF_CD = "cd";
 
-    private static final Category cat = Category.getInstance(MainFrame.class);
+    private static final Logger LOG = Logger.getLogger( MainFrame.class );
 
-    private BorderLayout borderLayout1 = new BorderLayout();
+    private final BorderLayout borderLayout1 = new BorderLayout();
+
     private JPanel contentPane;
-    private JMenuBar menubar = new JMenuBar();
-    private ModeStateModel modeStateModel = new ModeStateModel();
-    private Preferences prefNode = Preferences.userNodeForPackage(MainFrame.class);
+
+    private final JMenuBar menubar = new JMenuBar();
+
+    private final ModeStateModel modeStateModel = new ModeStateModel();
+
+    private final Preferences prefNode = Preferences.userNodeForPackage( MainFrame.class );
+
     private JMenuItem quitItem;
+
     private StatusBar statusBar;
+
     private Action wizardAction;
 
     //Construct the Mainframe
-    public MainFrame() {
-        enableEvents(AWTEvent.WINDOW_EVENT_MASK);
-        try {
-
+    public MainFrame()
+    {
+        enableEvents( AWTEvent.WINDOW_EVENT_MASK );
+        try
+        {
             init();
-            modeStateModel.addPropertyChangeListener(new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
-                    if (e.getPropertyName().equals("mode")) {
-                        Mode oldMode = (Mode) e.getOldValue();
-                        Mode newMode = (Mode) e.getNewValue();
-                        if (oldMode != null) {
+            modeStateModel.addPropertyChangeListener( new PropertyChangeListener()
+            {
+                public void propertyChange( final PropertyChangeEvent e )
+                {
+                    if ( e.getPropertyName().equals( "mode" ) )
+                    {
+                        final Mode oldMode = (Mode) e.getOldValue();
+                        final Mode newMode = (Mode) e.getNewValue();
+                        if ( oldMode != null )
+                        {
                             oldMode.deactivate();
                         }
-                        if (newMode != null) {
+                        if ( newMode != null )
+                        {
                             newMode.activate();
                         }
-                        if (ModeWizard.getInstance().hasWizard(newMode)) {
-                            wizardAction.setEnabled(true);
+                        if ( ModeWizard.getInstance().hasWizard( newMode ) )
+                        {
+                            wizardAction.setEnabled( true );
                         }
-                        else {
-                            wizardAction.setEnabled(false);
+                        else
+                        {
+                            wizardAction.setEnabled( false );
                         }
                     }
-                    else if (e.getPropertyName().equals("viewComponent")) {
-                        Component oldViewComponent = (Component) e.getOldValue();
-                        Component newViewComponent = (Component) e.getNewValue();
-                        if (oldViewComponent != null) {
-                            contentPane.remove(oldViewComponent);
+                    else if ( e.getPropertyName().equals( "viewComponent" ) )
+                    {
+                        final Component oldViewComponent = (Component) e.getOldValue();
+                        final Component newViewComponent = (Component) e.getNewValue();
+                        if ( oldViewComponent != null )
+                        {
+                            contentPane.remove( oldViewComponent );
                         }
-                        if (newViewComponent != null) {
-                            contentPane.add(newViewComponent, BorderLayout.CENTER);
+                        if ( newViewComponent != null )
+                        {
+                            contentPane.add( newViewComponent, BorderLayout.CENTER );
                             contentPane.repaint();
                         }
                     }
                 }
-            });
+            } );
         }
-        catch (Exception e) {
+        catch ( Exception e )
+        {
             e.printStackTrace();
         }
     }
 
-    public ModeStateModel getModel() {
+    public ModeStateModel getModel()
+    {
         return modeStateModel;
     }
 
-    public void loadSettings() {
-        modeStateModel.loadState(prefNode);
+    public void loadSettings()
+    {
+        modeStateModel.loadState( prefNode );
         loadFrameBounds();
     }
 
-    private void loadFrameBounds() {
+    private void loadFrameBounds()
+    {
         pack();
-        WindowUtils.centerOnScreen(this);
+        WindowUtils.centerOnScreen( this );
 
         // make sure the window does not exceed the screen
-        int x = prefNode.getInt(PREF_X, getLocation().x);
-        int y = prefNode.getInt(PREF_Y, getLocation().y);
-        int h = prefNode.getInt(PREF_H, getSize().height);
-        int w = prefNode.getInt(PREF_W, getSize().width);
-        Rectangle size = new Rectangle(x, y, w, h);
-        Rectangle screen = OperatingSystem.getScreenBounds();
-        setBounds(size.intersection(screen));
+        final int x = prefNode.getInt( PREF_X, getLocation().x );
+        final int y = prefNode.getInt( PREF_Y, getLocation().y );
+        final int h = prefNode.getInt( PREF_H, getSize().height );
+        final int w = prefNode.getInt( PREF_W, getSize().width );
+        final Rectangle size = new Rectangle( x, y, w, h );
+        final Rectangle screen = OperatingSystem.getScreenBounds();
+        setBounds( size.intersection( screen ) );
     }
 
-    public void storeSettings() {
-        modeStateModel.storeState(prefNode);
+    public void storeSettings()
+    {
+        modeStateModel.storeState( prefNode );
 
         // flush preferences
-        try {
+        try
+        {
             prefNode.flush();
         }
-        catch (BackingStoreException ex) {
-            cat.error("Error storing Mode preferences. ", ex);
+        catch ( BackingStoreException ex )
+        {
+            LOG.error( "Error storing Mode preferences. ", ex );
         }
     }
 
     // overridden so we can exit when window is closed
-    protected void processWindowEvent(WindowEvent e) {
-        super.processWindowEvent(e);
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+    protected void processWindowEvent( final WindowEvent e )
+    {
+        super.processWindowEvent( e );
+        if ( e.getID() == WindowEvent.WINDOW_CLOSING )
+        {
             quitItem.doClick();
         }
     }
 
     // create Menus and adds them to the menubar
-    private JMenu createMenu(String prefix) {
-        JMenu sub = menubar.add(new JMenu(Strings.getString(prefix + ".NAME")));
-        sub.setMnemonic(Strings.getChar(prefix + ".MN"));
+    private JMenu createMenu( final String prefix )
+    {
+        final JMenu sub = menubar.add( new JMenu( Strings.getString( prefix + ".NAME" ) ) );
+        sub.setMnemonic( Strings.getChar( prefix + ".MN" ) );
         return sub;
     }
 
-    private JMenuItem createMenuItem(JMenu menu, Action action) {
-        JMenuItem item = menu.add(action);
-        String helpText = (String) action.getValue(Action.LONG_DESCRIPTION);
-        item.addChangeListener(new ActionStatustextAdapter(helpText, statusBar));
+    private JMenuItem createMenuItem( final JMenu menu, final Action action )
+    {
+        final JMenuItem item = menu.add( action );
+        final String helpText = (String) action.getValue( Action.LONG_DESCRIPTION );
+        item.addChangeListener( new ActionStatustextAdapter( helpText, statusBar ) );
         return item;
     }
 
     // Component, Statusbar and Menu initialization
-    private void init() throws Exception {
+    private void init() throws Exception
+    {
         statusBar = new StatusBar();
 
-        setTitle(Strings.getString("APPLICATION.FRAME.TITLE"));
-        setIconImage(ImageLocator.getIcon(Strings.getString("APPLICATION.FRAME.ICON")).getImage());
+        setTitle( Strings.getString( "APPLICATION.FRAME.TITLE" ) );
+        setIconImage( ImageLocator.getIcon( Strings.getString( "APPLICATION.FRAME.ICON" ) ).getImage() );
 
         JMenu sub = null;
-        sub = createMenu("MENU.APPLICATION");
-        createMenuItem(sub, new ActionSaveBounds(this, prefNode));
+        sub = createMenu( "MENU.APPLICATION" );
+        createMenuItem( sub, new ActionSaveBounds( this, prefNode ) );
         sub.addSeparator();
-        quitItem = createMenuItem(sub, new ActionQuit(this));
+        quitItem = createMenuItem( sub, new ActionQuit( this ) );
 
-        sub = createMenu("MENU.SETTINGS");
-        createMenuItem(sub, new ActionModusSelection(this, prefNode));
-        createMenuItem(sub, wizardAction = new ActionWizard(this));
+        sub = createMenu( "MENU.SETTINGS" );
+        createMenuItem( sub, new ActionModusSelection( this, prefNode ) );
+        createMenuItem( sub, wizardAction = new ActionWizard( this ) );
 
-        sub = createMenu("MENU.HERBAR");
-        createMenuItem(sub, new ActionAppHelp(this));
-        createMenuItem(sub, new ActionModuleInfo(this));
-        createMenuItem(sub, new ActionAbout(this));
+        sub = createMenu( "MENU.HERBAR" );
+        createMenuItem( sub, new ActionAppHelp( this ) );
+        createMenuItem( sub, new ActionModuleInfo( this ) );
+        createMenuItem( sub, new ActionAbout( this ) );
 
-        setJMenuBar(menubar);
+        setJMenuBar( menubar );
 
         contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(borderLayout1);
-        contentPane.add(statusBar, BorderLayout.SOUTH);
+        contentPane.setLayout( borderLayout1 );
+        contentPane.add( statusBar, BorderLayout.SOUTH );
     }
 
     /**
@@ -197,7 +232,8 @@ public class MainFrame extends JFrame {
      *
      * @return the status bar object.
      */
-    public StatusBar getStatusBar() {
+    public StatusBar getStatusBar()
+    {
         return statusBar;
     }
 }

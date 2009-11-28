@@ -33,14 +33,20 @@ import javax.swing.SwingConstants;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class IteratorControlPanel extends JPanel implements CursorChangeListener {
+public class IteratorControlPanel extends JPanel implements CursorChangeListener
+{
+    private final DefaultNotifiableCursor cursor = new DefaultNotifiableCursor();
 
-    private DefaultNotifiableCursor cursor = new DefaultNotifiableCursor();
     private JButton previous;
+
     private JButton next;
+
     private JLabel positionInfoText;
+
     private Vector iteratorControlListenerList;
+
     private String labelString;
+
     private FlowLayout layout;
 
     /**
@@ -48,7 +54,8 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
      *
      * @param label a label to place before the numbers null, skips the display of
      */
-    public IteratorControlPanel(String label) {
+    public IteratorControlPanel( final String label )
+    {
         this.labelString = label;
         initGUI();
     }
@@ -56,144 +63,171 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     /**
      * Creates new form IteratorControlPanel
      */
-    public IteratorControlPanel() {
-        this(null);
+    public IteratorControlPanel()
+    {
+        this( null );
     }
 
-    public void setCursor(Cursor cursor) {
-        this.cursor.setCursor(cursor);
+    public void setCursor( final Cursor cursor )
+    {
+        this.cursor.setCursor( cursor );
     }
 
-    public void setCursor(Object[] objects) {
-        cursor.setCursor(objects);
+    public void setCursor( final Object[] objects )
+    {
+        cursor.setCursor( objects );
     }
 
-    public void setCursor(List list) {
-        cursor.setCursor(list);
+    public void setCursor( final List list )
+    {
+        cursor.setCursor( list );
     }
 
-    public DefaultNotifiableCursor getIteratorCursor() {
+    public DefaultNotifiableCursor getIteratorCursor()
+    {
         return cursor;
     }
 
-    public synchronized void addIteratorControlListener(IteratorControlListener listener) {
-
-        if (iteratorControlListenerList == null) {
+    public synchronized void addIteratorControlListener( final IteratorControlListener listener )
+    {
+        if ( iteratorControlListenerList == null )
+        {
             iteratorControlListenerList = new Vector();
         }
-        iteratorControlListenerList.add(listener);
-        listener.itemChange(new IteratorControlEvent(cursor.getCurrent()));
+        iteratorControlListenerList.add( listener );
+        listener.itemChange( new IteratorControlEvent( cursor.getCurrent() ) );
     }
 
-    public synchronized void removeIteratorControlListener(IteratorControlListener listener) {
-
-        if (iteratorControlListenerList != null) {
-            iteratorControlListenerList.remove(listener);
+    public synchronized void removeIteratorControlListener( final IteratorControlListener listener )
+    {
+        if ( iteratorControlListenerList != null )
+        {
+            iteratorControlListenerList.remove( listener );
         }
     }
 
-    public void cursorChange(CursorChangeEvent event) {
+    public void cursorChange( final CursorChangeEvent event )
+    {
         // update control state
-        next.setEnabled(cursor.hasNext());
-        previous.setEnabled(cursor.hasPrevious());
+        next.setEnabled( cursor.hasNext() );
+        previous.setEnabled( cursor.hasPrevious() );
 
-        String prefix = (labelString == null ? "" : labelString + " ");
-        String from = (cursor.isEmpty() ? "0" : "" + (cursor.getCurrentIndex() + 1));
-        String to = (cursor.isEmpty() ? "0" : "" + cursor.getSize());
-        String text = Strings.getString("ITERATOR.TEXT", prefix + from, to);
-        positionInfoText.setText(text);
+        final String prefix = ( labelString == null ? "" : labelString + " " );
+        final String from = ( cursor.isEmpty() ? "0" : "" + ( cursor.getCurrentIndex() + 1 ) );
+        final String to = ( cursor.isEmpty() ? "0" : "" + cursor.getSize() );
+        final String text = Strings.getString( "ITERATOR.TEXT", prefix + from, to );
+        positionInfoText.setText( text );
 
-        fireItemChange(new IteratorControlEvent(event.getCurrentObject()));
+        fireItemChange( new IteratorControlEvent( event.getCurrentObject() ) );
     }
 
-    protected void fireItemChange(IteratorControlEvent event) {
-        Vector list;
-        synchronized (this) {
-            if (iteratorControlListenerList == null) {
+    protected void fireItemChange( final IteratorControlEvent event )
+    {
+        final Vector list;
+        synchronized ( this )
+        {
+            if ( iteratorControlListenerList == null )
+            {
                 return;
             }
             list = (Vector) iteratorControlListenerList.clone();
         }
-        for (int i = 0; i < list.size(); i++) {
-            ((IteratorControlListener) list.get(i)).itemChange(event);
+        for ( final Object aList : list )
+        {
+            ( (IteratorControlListener) aList ).itemChange( event );
         }
     }
 
     /**
      * This method is called from within the constructor to initialize the form.
      */
-    private void initGUI() {
+    private void initGUI()
+    {
         previous = createPrevButton();
         next = createNextButton();
         positionInfoText = createPositionLabel();
 
-        layout = new FlowLayout(FlowLayout.LEFT, 5, 0);
-        setLayout(layout);
-        add(previous);
-        add(positionInfoText);
-        add(next);
+        layout = new FlowLayout( FlowLayout.LEFT, 5, 0 );
+        setLayout( layout );
+        add( previous );
+        add( positionInfoText );
+        add( next );
 
-        cursor.addCursorChangeListener(this);
+        cursor.addCursorChangeListener( this );
     }
 
-    private JLabel createPositionLabel() {
-        JLabel label = new JLabel();
-        String prefix = (labelString == null ? "" : labelString + " ");
-        String max = Strings.getString("ITERATOR.MAX.TEXT");
-        label.setText(Strings.getString("ITERATOR.TEXT", prefix + max, max));
-        label.setPreferredSize(label.getPreferredSize());
-        label.setHorizontalAlignment(SwingConstants.CENTER);
+    private JLabel createPositionLabel()
+    {
+        final JLabel label = new JLabel();
+        final String prefix = ( labelString == null ? "" : labelString + " " );
+        final String max = Strings.getString( "ITERATOR.MAX.TEXT" );
+        label.setText( Strings.getString( "ITERATOR.TEXT", prefix + max, max ) );
+        label.setPreferredSize( label.getPreferredSize() );
+        label.setHorizontalAlignment( SwingConstants.CENTER );
         return label;
     }
 
-    private JButton createNextButton() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                nextActionPerformed(e);
+    private JButton createNextButton()
+    {
+        final ActionListener action = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                nextActionPerformed( e );
             }
         };
-        JButton button = ComponentFactory.createButton("BUTTON.NAVIGATION.NEXT", action);
-        button.setBorder(BorderFactory.createEmptyBorder());
+        final JButton button = ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
+        button.setBorder( BorderFactory.createEmptyBorder() );
         return button;
     }
 
-    private JButton createPrevButton() {
-        ActionListener action = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                previousActionPerformed(e);
+    private JButton createPrevButton()
+    {
+        final ActionListener action = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                previousActionPerformed( e );
             }
         };
-        JButton button = ComponentFactory.createButton("BUTTON.NAVIGATION.PREV", action);
-        button.setBorder(BorderFactory.createEmptyBorder());
+        final JButton button = ComponentFactory.createButton( "BUTTON.NAVIGATION.PREV", action );
+        button.setBorder( BorderFactory.createEmptyBorder() );
         return button;
     }
 
-    protected void previousActionPerformed(ActionEvent e) {
+    protected void previousActionPerformed( final ActionEvent e )
+    {
         cursor.previous();
     }
 
-    protected void nextActionPerformed(ActionEvent e) {
+    protected void nextActionPerformed( final ActionEvent e )
+    {
         cursor.next();
     }
 
-    public void setAlignment(int alignment) {
-        layout.setAlignment(alignment);
+    public void setAlignment( final int alignment )
+    {
+        layout.setAlignment( alignment );
     }
 
-    public JButton getNextButton() {
+    public JButton getNextButton()
+    {
         return next;
     }
 
-    public JButton getPrevButton() {
+    public JButton getPrevButton()
+    {
         return previous;
     }
 
-    public JComponent getDisplay() {
+    public JComponent getDisplay()
+    {
         return positionInfoText;
     }
 
-    public void reset() {
-        cursorChange(new CursorChangeEvent(cursor));
+    public void reset()
+    {
+        cursorChange( new CursorChangeEvent( cursor ) );
     }
 }
 

@@ -8,21 +8,20 @@
  */
 package com.ethz.geobot.herbar.gui.util;
 
-
 /**
  * Listener interface for the Iterator control.
  *
  * @author $Author: daniel_frey $
  * @version $Version$ $Date: 2007/09/17 11:07:08 $
  */
-public interface IteratorControlListener {
-
+public interface IteratorControlListener
+{
     /**
      * This method is invoked to notify the Observer that the item position has changed.
      *
      * @param event information about the event
      */
-    void itemChange(IteratorControlEvent event);
+    void itemChange( IteratorControlEvent event );
 }
 
 // $Log: IteratorControlListener.java,v $

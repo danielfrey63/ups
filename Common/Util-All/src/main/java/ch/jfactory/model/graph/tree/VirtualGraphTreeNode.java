@@ -14,8 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class VirtualGraphTreeNode implements GraphNode
 {
-
-    private static final Logger LOGGER = Logger.getLogger(VirtualGraphTreeNode.class);
+    private static final Logger LOGGER = Logger.getLogger( VirtualGraphTreeNode.class );
 
     /**
      * The ROLE_NULL <code>GraphNode</code> is used because instances of <code> TreePath</code> may not be constructe
@@ -25,19 +24,25 @@ public class VirtualGraphTreeNode implements GraphNode
      */
     public static final GraphNode NULL = new GraphNodeImpl();
 
-    /** In a tree model, the parent is unique. */
-    private VirtualGraphTreeNode parent;
+    /**
+     * In a tree model, the parent is unique.
+     */
+    private final VirtualGraphTreeNode parent;
 
-    /** The wrapped object. */
-    private GraphNode dependent;
+    /**
+     * The wrapped object.
+     */
+    private final GraphNode dependent;
 
     /**
      * The model associated with this node. Primary purpose of the model is a separate cache, so more than one tree may
      * be displayed independently.
      */
-    private VirtualGraphTreeNodeModel model;
+    private final VirtualGraphTreeNodeModel model;
 
-    /** The filter associated with this <code>GraphNode2TreeNode</code> */
+    /**
+     * The filter associated with this <code>GraphNode2TreeNode</code>
+     */
     private VirtualGraphTreeNodeFilter filter;
 
     /**
@@ -45,27 +50,28 @@ public class VirtualGraphTreeNode implements GraphNode
      * identify this object in the cache. The <code>ancestors</code> member is composed of the the (partly hidden)
      * dependent nodes.
      */
-    private TreePath ancestors = new TreePath(NULL);
+    private TreePath ancestors = new TreePath( NULL );
 
     /**
      * If several children nodes are wrappers for the same {@link #dependent}, and they are merged, so that only
      * distinct <code>dependent<code>s are displayed, this member variable is used to keep the cross reference of the
      * merged <code>GraphNode2TreeNode</code> objects.
      */
-    private VirtualGraphTreeNodeList nonDistincts =
-            new VirtualGraphTreeNodeList(this);
+    private final VirtualGraphTreeNodeList nonDistincts =
+            new VirtualGraphTreeNodeList( this );
 
-    /** Constructor is held private for factory method to have better control over construction of objects. */
-    private VirtualGraphTreeNode(final GraphNode dependent,
-                                 final VirtualGraphTreeNodeModel model, final VirtualGraphTreeNodeFilter filter,
-                                 final VirtualGraphTreeNode parent)
+    /**
+     * Constructor is held private for factory method to have better control over construction of objects.
+     */
+    private VirtualGraphTreeNode( final GraphNode dependent,
+                                  final VirtualGraphTreeNodeModel model, final VirtualGraphTreeNodeFilter filter,
+                                  final VirtualGraphTreeNode parent )
     {
-
         this.dependent = dependent;
         this.model = model;
         this.filter = filter;
         this.parent = parent;
-        checkTypeMatching(dependent, filter);
+        checkTypeMatching( dependent, filter );
     }
 
     /**
@@ -76,12 +82,11 @@ public class VirtualGraphTreeNode implements GraphNode
      * @param filter    the {@link VirtualGraphTreeNodeFilter} associated with this node
      * @return either a new <code>GraphNode2TreeNode</code> or an existing one.
      */
-    public static VirtualGraphTreeNode getGraphNode(final GraphNode dependent, final VirtualGraphTreeNodeModel model,
-                                                    final VirtualGraphTreeNodeFilter filter)
+    public static VirtualGraphTreeNode getGraphNode( final GraphNode dependent, final VirtualGraphTreeNodeModel model,
+                                                     final VirtualGraphTreeNodeFilter filter )
     {
-
-        checkTypeMatching(dependent, filter);
-        return createNode(dependent, null, model, filter);
+        checkTypeMatching( dependent, filter );
+        return createNode( dependent, null, model, filter );
     }
 
     /**
@@ -90,15 +95,14 @@ public class VirtualGraphTreeNode implements GraphNode
      * @param parent the parent <code>VirtualGraphTreeNode</code>
      * @return either a new <code>VirtualGraphTreeNode</code> or an existing one.
      */
-    public static VirtualGraphTreeNode getGraphNode(final VirtualGraphTreeNodeFilter filter, final VirtualGraphTreeNode parent)
+    public static VirtualGraphTreeNode getGraphNode( final VirtualGraphTreeNodeFilter filter, final VirtualGraphTreeNode parent )
     {
-
         final VirtualGraphTreeNodeModel model = parent.model;
         final GraphNode depParent = parent.getDependent();
-        final GraphNode dependent = model.createNode(depParent, filter.getType());
-        checkTypeMatching(dependent, filter);
-        final VirtualGraphTreeNode result = createNode(dependent, parent, model, filter);
-        depParent.addChild(dependent);
+        final GraphNode dependent = model.createNode( depParent, filter.getType() );
+        checkTypeMatching( dependent, filter );
+        final VirtualGraphTreeNode result = createNode( dependent, parent, model, filter );
+        depParent.addChild( dependent );
         return result;
     }
 
@@ -108,15 +112,14 @@ public class VirtualGraphTreeNode implements GraphNode
      * @param parent the parent <code>VirtualGraphTreeNode</code>
      * @return either a new <code>VirtualGraphTreeNode</code> or an existing one.
      */
-    public static VirtualGraphTreeNode getGraphNode(final GraphNode dependent, final VirtualGraphTreeNode parent)
+    public static VirtualGraphTreeNode getGraphNode( final GraphNode dependent, final VirtualGraphTreeNode parent )
     {
-
         final VirtualGraphTreeNodeModel model = parent.model;
         final Class type = dependent.getClass();
         final VirtualGraphTreeNodeFilter parentFilter = parent.getFilter();
-        final VirtualGraphTreeNodeFilter filter = parentFilter.getChildrenFilter(type);
-        checkTypeMatching(dependent, filter);
-        return createNode(dependent, parent, model, filter);
+        final VirtualGraphTreeNodeFilter filter = parentFilter.getChildrenFilter( type );
+        checkTypeMatching( dependent, filter );
+        return createNode( dependent, parent, model, filter );
     }
 
     /**
@@ -126,73 +129,72 @@ public class VirtualGraphTreeNode implements GraphNode
      * @param parent the parent <code>VirtualGraphTreeNode</code>
      * @return either a new <code>VirtualGraphTreeNode</code> or an existing one.
      */
-    private static VirtualGraphTreeNode createNode(final GraphNode dependent, final VirtualGraphTreeNode parent,
-                                                   final VirtualGraphTreeNodeModel model, final VirtualGraphTreeNodeFilter filter)
+    private static VirtualGraphTreeNode createNode( final GraphNode dependent, final VirtualGraphTreeNode parent,
+                                                    final VirtualGraphTreeNodeModel model, final VirtualGraphTreeNodeFilter filter )
     {
-
         final TreePath key;
-        if (parent != null)
+        if ( parent != null )
         {
-            key = parent.ancestors.pathByAddingChild(dependent);
+            key = parent.ancestors.pathByAddingChild( dependent );
         }
         else
         {
-            key = new TreePath(NULL);
+            key = new TreePath( NULL );
         }
-        VirtualGraphTreeNode filteredNode = (VirtualGraphTreeNode) model.get(key);
+        VirtualGraphTreeNode filteredNode = (VirtualGraphTreeNode) model.get( key );
 
-        if (filteredNode == null)
+        if ( filteredNode == null )
         {
-            filteredNode = new VirtualGraphTreeNode(dependent, model, filter, parent);
-            model.put(key, filteredNode);
+            filteredNode = new VirtualGraphTreeNode( dependent, model, filter, parent );
+            model.put( key, filteredNode );
             filteredNode.ancestors = key;
         }
 
         return filteredNode;
     }
 
-    private static void checkTypeMatching(final GraphNode node, final VirtualGraphTreeNodeFilter filter)
+    private static void checkTypeMatching( final GraphNode node, final VirtualGraphTreeNodeFilter filter )
     {
-        if (!node.isType(filter.getType()))
+        if ( !node.isType( filter.getType() ) )
         {
-            throw new IllegalStateException("Filters type (" + filter.getType() + ") must match nodes type ("
-                    + node.getClass() + ")");
+            throw new IllegalStateException( "Filters type (" + filter.getType() + ") must match nodes type ("
+                    + node.getClass() + ")" );
         }
     }
 
-    private GraphNodeList getDependents(final GraphNodeList list)
+    private GraphNodeList getDependents( final GraphNodeList list )
     {
         final GraphNodeList result = new GraphNodeList();
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
             // Bad workaround: VirtualGraphTreeNode should only receive lists
             // of itselfs type, not GraphNodeImpl or so.
-            GraphNode node = list.get(i);
-            if (node instanceof VirtualGraphTreeNode)
+            GraphNode node = list.get( i );
+            if ( node instanceof VirtualGraphTreeNode )
             {
-                node = ((VirtualGraphTreeNode) node).getDependent();
-                LOGGER.warn("false type translated: " + node);
+                node = ( (VirtualGraphTreeNode) node ).getDependent();
+                LOGGER.warn( "false type translated: " + node );
             }
-            result.add(node);
+            result.add( node );
         }
         return result;
     }
 
-    private VirtualGraphTreeNodeList getVirtual(final GraphNodeList list)
+    private VirtualGraphTreeNodeList getVirtual( final GraphNodeList list )
     {
         final VirtualGraphTreeNodeList result = new VirtualGraphTreeNodeList();
-        for (int i = 0; i < list.size(); i++)
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final VirtualGraphTreeNode node = (VirtualGraphTreeNode) list.get(i);
-            result.add(get(node));
+            final VirtualGraphTreeNode node = (VirtualGraphTreeNode) list.get( i );
+            result.add( get( node ) );
         }
         return result;
     }
 
-    private VirtualGraphTreeNode get(final VirtualGraphTreeNode node)
+    private VirtualGraphTreeNode get( final VirtualGraphTreeNode node )
     {
-        final TreePath full = node.ancestors.pathByAddingChild(node);
-        return (VirtualGraphTreeNode) model.get(full);
+        final TreePath full = node.ancestors.pathByAddingChild( node );
+        return (VirtualGraphTreeNode) model.get( full );
     }
 
     /*
@@ -236,7 +238,7 @@ public class VirtualGraphTreeNode implements GraphNode
      *
      * @param filter The filter to set
      */
-    public void setFilter(final VirtualGraphTreeNodeFilter filter)
+    public void setFilter( final VirtualGraphTreeNodeFilter filter )
     {
         this.filter = filter;
     }
@@ -251,11 +253,11 @@ public class VirtualGraphTreeNode implements GraphNode
         return dependent;
     }
 
-    public void addNonDistinct(final VirtualGraphTreeNode sibling)
+    public void addNonDistinct( final VirtualGraphTreeNode sibling )
     {
-        if (!nonDistincts.contains(sibling))
+        if ( !nonDistincts.contains( sibling ) )
         {
-            nonDistincts.add(sibling);
+            nonDistincts.add( sibling );
         }
     }
 
@@ -273,87 +275,95 @@ public class VirtualGraphTreeNode implements GraphNode
      * Inserts a child from the trees point of view. If -- from the graphs point of view -- the given node is a
      * child/parent to this node, then the appropriate addChild/addParent method is invoked.
      */
-    public void addTreeChild(final int index, VirtualGraphTreeNode node)
+    public void addTreeChild( final int index, VirtualGraphTreeNode node )
     {
         final GraphNode dep = node.getDependent();
         final Class type = dep.getClass();
-        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter(type);
-        if (node.model != model)
+        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter( type );
+        if ( node.model != model )
         {
             // Insertion from another tree
-            node = createNode(dep, this, model, childFilter);
+            node = createNode( dep, this, model, childFilter );
         }
-        if (childFilter.isDescendant())
+        if ( childFilter.isDescendant() )
         {
-            addChild(index, node);
+            addChild( index, node );
         }
         else
         {
-            addParent(index, node);
+            addParent( index, node );
         }
     }
 
-    public VirtualGraphTreeNode addNewTreeChild(final int index, final String name, final Class type)
+    public VirtualGraphTreeNode addNewTreeChild( final int index, final String name, final Class type )
     {
-        final VirtualGraphTreeNodeFilter filter = this.filter.getChildrenFilter(type);
-        final VirtualGraphTreeNode node = getGraphNode(filter, this);
-        node.setName(name);
-        addTreeChild(index, node);
+        final VirtualGraphTreeNodeFilter filter = this.filter.getChildrenFilter( type );
+        final VirtualGraphTreeNode node = getGraphNode( filter, this );
+        node.setName( name );
+        addTreeChild( index, node );
         return node;
     }
 
-    public void removeTreeChild(final VirtualGraphTreeNode node)
+    public void removeTreeChild( final VirtualGraphTreeNode node )
     {
         final GraphNode dep = node.getDependent();
         final Class type = dep.getClass();
-        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter(type);
-        if (childFilter.isDescendant())
+        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter( type );
+        if ( childFilter.isDescendant() )
         {
-            node.removeFromParent(this);
+            node.removeFromParent( this );
         }
         else
         {
-            node.removeFromChild(this);
+            node.removeFromChild( this );
         }
     }
 
-    public void deleteTreeChild(final VirtualGraphTreeNode node)
+    public void deleteTreeChild( final VirtualGraphTreeNode node )
     {
         final GraphNode dep = node.getDependent();
         final Class type = dep.getClass();
-        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter(type);
-        if (childFilter.isDescendant())
+        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter( type );
+        if ( childFilter.isDescendant() )
         {
-            deleteChild(node);
+            deleteChild( node );
         }
         else
         {
-            deleteParent(node);
+            deleteParent( node );
         }
     }
 
-    /** @see GraphNode#getId() */
+    /**
+     * @see GraphNode#getId()
+     */
     public int getId()
     {
         return dependent.getId();
     }
 
-    /** @see GraphNode#getName() */
+    /**
+     * @see GraphNode#getName()
+     */
     public String getName()
     {
         return dependent.getName();
     }
 
-    /** @see GraphNode#getRank() */
+    /**
+     * @see GraphNode#getRank()
+     */
     public int getRank()
     {
         return dependent.getRank();
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#isType(Class) */
-    public boolean isType(final Class type)
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#isType(Class)
+     */
+    public boolean isType( final Class type )
     {
-        return dependent.isType(type);
+        return dependent.isType( type );
     }
 
     /**
@@ -364,107 +374,133 @@ public class VirtualGraphTreeNode implements GraphNode
     public GraphNodeList getParents()
     {
         final GraphNodeList result = new GraphNodeList();
-        result.add(getParent());
+        result.add( getParent() );
         return result;
     }
 
-    /** @see GraphNode#getParents(Class) */
-    public GraphNodeList getParents(final Class type)
+    /**
+     * @see GraphNode#getParents(Class)
+     */
+    public GraphNodeList getParents( final Class type )
     {
-        return getParents(type, Role.CLASSES_ALL);
+        return getParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#getParents(Class, Class) */
-    public GraphNodeList getParents(final Class type, final Class role)
+    /**
+     * @see GraphNode#getParents(Class, Class)
+     */
+    public GraphNodeList getParents( final Class type, final Class role )
     {
-        return getVirtual(dependent.getParents(type, role));
+        return getVirtual( dependent.getParents( type, role ) );
     }
 
-    /** @see GraphNode#getAllParents(Class) */
-    public GraphNodeList getAllParents(final Class type)
+    /**
+     * @see GraphNode#getAllParents(Class)
+     */
+    public GraphNodeList getAllParents( final Class type )
     {
-        return getAllParents(type, Role.CLASSES_ALL);
+        return getAllParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#getAllParents(Class, Class) */
-    public GraphNodeList getAllParents(final Class type, final Class role)
+    /**
+     * @see GraphNode#getAllParents(Class, Class)
+     */
+    public GraphNodeList getAllParents( final Class type, final Class role )
     {
-        return getVirtual(dependent.getAllParents(type, role));
+        return getVirtual( dependent.getAllParents( type, role ) );
     }
 
-    /** @see GraphNode#getParentRole(GraphNode) */
-    public Role getParentRole(final GraphNode node)
+    /**
+     * @see GraphNode#getParentRole(GraphNode)
+     */
+    public Role getParentRole( final GraphNode node )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) node;
-        return getDependent().getParentRole(vNode.getDependent());
+        return getDependent().getParentRole( vNode.getDependent() );
     }
 
-    /** @see GraphNode#setParentRole(GraphNode, Role) */
-    public void setParentRole(final GraphNode node, final Role role)
+    /**
+     * @see GraphNode#setParentRole(GraphNode, Role)
+     */
+    public void setParentRole( final GraphNode node, final Role role )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) node;
-        dependent.setParentRole(vNode.getDependent(), role);
+        dependent.setParentRole( vNode.getDependent(), role );
     }
 
-    /** @see GraphNode#getChildren() */
+    /**
+     * @see GraphNode#getChildren()
+     */
     public GraphNodeList getChildren()
     {
-        return model.getChildren(this);
+        return model.getChildren( this );
     }
 
-    /** @see GraphNode#getChildren(Class) */
-    public GraphNodeList getChildren(final Class type)
+    /**
+     * @see GraphNode#getChildren(Class)
+     */
+    public GraphNodeList getChildren( final Class type )
     {
-        return getChildren(type, Role.CLASSES_ALL);
+        return getChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#getChildren(Class, Class) */
-    public GraphNodeList getChildren(final Class type, final Class role)
+    /**
+     * @see GraphNode#getChildren(Class, Class)
+     */
+    public GraphNodeList getChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList list = AbsGraphModel.getFiltered(getChildren(), type);
-        for (int i = 0; i < list.size(); i++)
+        final GraphNodeList list = AbsGraphModel.getFiltered( getChildren(), type );
+        for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode node = list.get(i);
-            if (role.isAssignableFrom(getDependent().getChildRole(node).getClass()))
+            final GraphNode node = list.get( i );
+            if ( role.isAssignableFrom( getDependent().getChildRole( node ).getClass() ) )
             {
-                result.add(node);
+                result.add( node );
             }
         }
         return result;
     }
 
-    /** @see GraphNode#getAllChildren(Class) */
-    public GraphNodeList getAllChildren(final Class type)
+    /**
+     * @see GraphNode#getAllChildren(Class)
+     */
+    public GraphNodeList getAllChildren( final Class type )
     {
-        return getAllChildren(type, Role.CLASSES_ALL);
+        return getAllChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#getAllChildren(Class, Class) */
-    public GraphNodeList getAllChildren(final Class type, final Class role)
+    /**
+     * @see GraphNode#getAllChildren(Class, Class)
+     */
+    public GraphNodeList getAllChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList children = getChildren(type, role);
-        for (int i = 0; i < children.size(); i++)
+        final GraphNodeList children = getChildren( type, role );
+        for ( int i = 0; i < children.size(); i++ )
         {
-            result.addAll(children);
-            result.addAll(children.get(i).getAllChildren(type, role));
+            result.addAll( children );
+            result.addAll( children.get( i ).getAllChildren( type, role ) );
         }
         return result;
     }
 
-    /** @see GraphNode#getChildRole(GraphNode) */
-    public Role getChildRole(final GraphNode node)
+    /**
+     * @see GraphNode#getChildRole(GraphNode)
+     */
+    public Role getChildRole( final GraphNode node )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) node;
-        return dependent.getChildRole(vNode.getDependent());
+        return dependent.getChildRole( vNode.getDependent() );
     }
 
-    /** @see GraphNode#setChildRole(GraphNode, Role) */
-    public void setChildRole(final GraphNode node, final Role role)
+    /**
+     * @see GraphNode#setChildRole(GraphNode, Role)
+     */
+    public void setChildRole( final GraphNode node, final Role role )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) node;
-        dependent.setChildRole(vNode.getDependent(), role);
+        dependent.setChildRole( vNode.getDependent(), role );
     }
 
     /**
@@ -472,45 +508,57 @@ public class VirtualGraphTreeNode implements GraphNode
      *
      * @see GraphNode#setId(int)
      */
-    public void setId(final int id)
+    public void setId( final int id )
     {
-        dependent.setId(id);
+        dependent.setId( id );
     }
 
-    /** @see GraphNode#setName(String) */
-    public void setName(final String name)
+    /**
+     * @see GraphNode#setName(String)
+     */
+    public void setName( final String name )
     {
-        dependent.setName(name);
+        dependent.setName( name );
     }
 
-    /** @see GraphNode#setRank(int) */
-    public void setRank(final int rank)
+    /**
+     * @see GraphNode#setRank(int)
+     */
+    public void setRank( final int rank )
     {
-        dependent.setRank(rank);
+        dependent.setRank( rank );
     }
 
-    /** @see GraphNode#setChildren(GraphNodeList) */
-    public void setChildren(final GraphNodeList children)
+    /**
+     * @see GraphNode#setChildren(GraphNodeList)
+     */
+    public void setChildren( final GraphNodeList children )
     {
-        dependent.setChildren(getDependents(children));
+        dependent.setChildren( getDependents( children ) );
     }
 
-    /** @see GraphNode#setChildren(GraphNodeList, Class) */
-    public void setChildren(final GraphNodeList children, final Class type)
+    /**
+     * @see GraphNode#setChildren(GraphNodeList, Class)
+     */
+    public void setChildren( final GraphNodeList children, final Class type )
     {
-        setChildren(children, type, Role.CLASSES_ALL);
+        setChildren( children, type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#setChildren(GraphNodeList, Class, Class) */
-    public void setChildren(final GraphNodeList children, final Class type, final Class role)
+    /**
+     * @see GraphNode#setChildren(GraphNodeList, Class, Class)
+     */
+    public void setChildren( final GraphNodeList children, final Class type, final Class role )
     {
-        dependent.setChildren(getDependents(children), type, role);
+        dependent.setChildren( getDependents( children ), type, role );
     }
 
-    /** @see GraphNode#addChild(GraphNode) */
-    public void addChild(final GraphNode child)
+    /**
+     * @see GraphNode#addChild(GraphNode)
+     */
+    public void addChild( final GraphNode child )
     {
-        addChild(dependent.getChildren().size(), child);
+        addChild( dependent.getChildren().size(), child );
     }
 
     /**
@@ -518,26 +566,30 @@ public class VirtualGraphTreeNode implements GraphNode
      *
      * @see GraphNode#addChild(int, GraphNode)
      */
-    public void addChild(final int index, final GraphNode child)
+    public void addChild( final int index, final GraphNode child )
     {
-        addChild(index, child, Role.ROLE_NULL);
+        addChild( index, child, Role.ROLE_NULL );
     }
 
-    /** @see GraphNode#addChild(GraphNode, Role) */
-    public void addChild(final GraphNode child, final Role role)
+    /**
+     * @see GraphNode#addChild(GraphNode, Role)
+     */
+    public void addChild( final GraphNode child, final Role role )
     {
-        addChild(dependent.getChildren().size(), child, role);
+        addChild( dependent.getChildren().size(), child, role );
     }
 
-    /** @see GraphNode#addChild(int, GraphNode, Role) */
-    public void addChild(final int index, final GraphNode child, final Role role)
+    /**
+     * @see GraphNode#addChild(int, GraphNode, Role)
+     */
+    public void addChild( final int index, final GraphNode child, final Role role )
     {
         // Find index in context of all children
         final GraphNodeList childs = getChildren();
-        final VirtualGraphTreeNode visibleInsert = (VirtualGraphTreeNode) childs.get(index);
+        final VirtualGraphTreeNode visibleInsert = (VirtualGraphTreeNode) childs.get( index );
         final GraphNodeList hidden = dependent.getChildren();
         final int hiddenIndex;
-        if (visibleInsert == null)
+        if ( visibleInsert == null )
         {
             // Is at the end of the list
             hiddenIndex = hidden.size();
@@ -546,82 +598,106 @@ public class VirtualGraphTreeNode implements GraphNode
         {
             // Is before the specified index
             final GraphNode dependentOfVisible = visibleInsert.getDependent();
-            hiddenIndex = hidden.get(dependentOfVisible);
+            hiddenIndex = hidden.get( dependentOfVisible );
         }
         final VirtualGraphTreeNode missile = (VirtualGraphTreeNode) child;
-        dependent.addChild(hiddenIndex, missile.getDependent(), role);
+        dependent.addChild( hiddenIndex, missile.getDependent(), role );
     }
 
-    /** @see GraphNode#addNewChild(int, String, Class) */
-    public GraphNode addNewChild(final int index, final String name, final Class type)
+    /**
+     * @see GraphNode#addNewChild(int, String, Class)
+     */
+    public GraphNode addNewChild( final int index, final String name, final Class type )
     {
-        return getGraphNode(dependent.addNewChild(index, name, type), this);
+        return getGraphNode( dependent.addNewChild( index, name, type ), this );
     }
 
-    /** @see GraphNode#deleteChild(GraphNode) */
-    public boolean deleteChild(final GraphNode child)
+    /**
+     * @see GraphNode#deleteChild(GraphNode)
+     */
+    public boolean deleteChild( final GraphNode child )
     {
         final VirtualGraphTreeNode vChild = (VirtualGraphTreeNode) child;
-        return dependent.deleteChild(vChild.getDependent());
+        return dependent.deleteChild( vChild.getDependent() );
     }
 
-    /** @see GraphNode#deleteChildren(Class) */
-    public void deleteChildren(final Class type)
+    /**
+     * @see GraphNode#deleteChildren(Class)
+     */
+    public void deleteChildren( final Class type )
     {
-        deleteChildren(type, Role.CLASSES_ALL);
+        deleteChildren( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#deleteChildren(Class, Class) */
-    public void deleteChildren(final Class type, final Class role)
+    /**
+     * @see GraphNode#deleteChildren(Class, Class)
+     */
+    public void deleteChildren( final Class type, final Class role )
     {
-        getDependent().deleteChildren(type, role);
+        getDependent().deleteChildren( type, role );
     }
 
-    /** @see GraphNode#removeFromChild(GraphNode) */
-    public boolean removeFromChild(final GraphNode child)
+    /**
+     * @see GraphNode#removeFromChild(GraphNode)
+     */
+    public boolean removeFromChild( final GraphNode child )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) child;
-        return getDependent().removeFromChild(vNode.getDependent());
+        return getDependent().removeFromChild( vNode.getDependent() );
     }
 
-    /** @see GraphNode#setParents(GraphNodeList) */
-    public void setParents(final GraphNodeList parents)
+    /**
+     * @see GraphNode#setParents(GraphNodeList)
+     */
+    public void setParents( final GraphNodeList parents )
     {
-        dependent.setParents(getDependents(parents));
+        dependent.setParents( getDependents( parents ) );
     }
 
-    /** @see GraphNode#setParents(GraphNodeList, Class) */
-    public void setParents(final GraphNodeList parents, final Class type)
+    /**
+     * @see GraphNode#setParents(GraphNodeList, Class)
+     */
+    public void setParents( final GraphNodeList parents, final Class type )
     {
-        setParents(getDependents(parents), type, Role.CLASSES_ALL);
+        setParents( getDependents( parents ), type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#setParents(GraphNodeList, Class, Class) */
-    public void setParents(final GraphNodeList parents, final Class type, final Class role)
+    /**
+     * @see GraphNode#setParents(GraphNodeList, Class, Class)
+     */
+    public void setParents( final GraphNodeList parents, final Class type, final Class role )
     {
-        dependent.setParents(getDependents(parents), type, role);
+        dependent.setParents( getDependents( parents ), type, role );
     }
 
-    /** @see GraphNode#addParent(GraphNode) */
-    public void addParent(final GraphNode parent)
+    /**
+     * @see GraphNode#addParent(GraphNode)
+     */
+    public void addParent( final GraphNode parent )
     {
-        addParent(dependent.getParents().size(), parent);
+        addParent( dependent.getParents().size(), parent );
     }
 
-    /** @see GraphNode#addParent(int, GraphNode) */
-    public void addParent(final int index, final GraphNode parent)
+    /**
+     * @see GraphNode#addParent(int, GraphNode)
+     */
+    public void addParent( final int index, final GraphNode parent )
     {
-        addParent(index, parent, Role.ROLE_NULL);
+        addParent( index, parent, Role.ROLE_NULL );
     }
 
-    /** @see GraphNode#addParent(GraphNode, Role) */
-    public void addParent(final GraphNode parent, final Role role)
+    /**
+     * @see GraphNode#addParent(GraphNode, Role)
+     */
+    public void addParent( final GraphNode parent, final Role role )
     {
-        addParent(dependent.getParents().size(), parent, role);
+        addParent( dependent.getParents().size(), parent, role );
     }
 
-    /** @see GraphNode#addParent(int, GraphNode, Role) */
-    public void addParent(final int index, final GraphNode parent, final Role role)
+    /**
+     * @see GraphNode#addParent(int, GraphNode, Role)
+     */
+    public void addParent( final int index, final GraphNode parent, final Role role )
     {
         // Find index in context of all children. It might be that the parent
         // inserted is not a visible parent of this node, but an invisible one.
@@ -629,14 +705,14 @@ public class VirtualGraphTreeNode implements GraphNode
         final GraphNodeList visibles = getChildren();
         final VirtualGraphTreeNode vParent = (VirtualGraphTreeNode) parent;
         final VirtualGraphTreeNodeFilter pFilter = vParent.getFilter();
-        VirtualGraphTreeNode visibleInsert = (VirtualGraphTreeNode) visibles.get(index);
-        while (visibleInsert != null
-                && visibleInsert.getFilter().getType() != pFilter.getType())
+        VirtualGraphTreeNode visibleInsert = (VirtualGraphTreeNode) visibles.get( index );
+        while ( visibleInsert != null
+                && visibleInsert.getFilter().getType() != pFilter.getType() )
         {
             visibleInsert = visibleInsert.parent;
         }
         final int hiddenIndex;
-        if (visibleInsert == null)
+        if ( visibleInsert == null )
         {
             // Is at the end of the list
             hiddenIndex = visibles.size();
@@ -644,45 +720,57 @@ public class VirtualGraphTreeNode implements GraphNode
         else
         {
             final GraphNode dependentOfVisible = visibleInsert.getDependent();
-            hiddenIndex = dependent.getParents().get(dependentOfVisible);
+            hiddenIndex = dependent.getParents().get( dependentOfVisible );
         }
         final VirtualGraphTreeNode missile = (VirtualGraphTreeNode) parent;
-        dependent.addParent(hiddenIndex, missile.getDependent(), role);
+        dependent.addParent( hiddenIndex, missile.getDependent(), role );
     }
 
-    /** @see GraphNode#addNewParent(int, String, Class) */
-    public GraphNode addNewParent(final int index, final String name, final Class type)
+    /**
+     * @see GraphNode#addNewParent(int, String, Class)
+     */
+    public GraphNode addNewParent( final int index, final String name, final Class type )
     {
-        return getGraphNode(dependent.addNewParent(index, name, type), this);
+        return getGraphNode( dependent.addNewParent( index, name, type ), this );
     }
 
-    /** @see GraphNode#deleteParent(GraphNode) */
-    public boolean deleteParent(final GraphNode parent)
+    /**
+     * @see GraphNode#deleteParent(GraphNode)
+     */
+    public boolean deleteParent( final GraphNode parent )
     {
         final VirtualGraphTreeNode vParent = (VirtualGraphTreeNode) parent;
-        return dependent.deleteParent(vParent.getDependent());
+        return dependent.deleteParent( vParent.getDependent() );
     }
 
-    /** @see GraphNode#deleteParents(Class) */
-    public void deleteParents(final Class type)
+    /**
+     * @see GraphNode#deleteParents(Class)
+     */
+    public void deleteParents( final Class type )
     {
-        deleteParents(type, Role.CLASSES_ALL);
+        deleteParents( type, Role.CLASSES_ALL );
     }
 
-    /** @see GraphNode#deleteParents(Class, Class) */
-    public void deleteParents(final Class type, final Class role)
+    /**
+     * @see GraphNode#deleteParents(Class, Class)
+     */
+    public void deleteParents( final Class type, final Class role )
     {
-        getDependent().deleteParents(type, role);
+        getDependent().deleteParents( type, role );
     }
 
-    /** @see GraphNode#removeFromParent(GraphNode) */
-    public boolean removeFromParent(final GraphNode parent)
+    /**
+     * @see GraphNode#removeFromParent(GraphNode)
+     */
+    public boolean removeFromParent( final GraphNode parent )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) parent;
-        return getDependent().removeFromParent(vNode.getDependent());
+        return getDependent().removeFromParent( vNode.getDependent() );
     }
 
-    /** @see GraphNode#toString() */
+    /**
+     * @see GraphNode#toString()
+     */
     public String toString()
     {
         return dependent.toString();

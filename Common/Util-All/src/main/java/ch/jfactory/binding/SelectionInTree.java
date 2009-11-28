@@ -35,48 +35,49 @@ import javax.swing.tree.TreeSelectionModel;
  */
 public class SelectionInTree extends DefaultTreeSelectionModel implements TreeSelectionModel
 {
-
     public static final String PROPERTYNAME_TREEMODEL = "treeModel";
 
     private TreeModel treeModel;
 
-    /** Refers to the underlying ValueModel that stores the state. */
+    /**
+     * Refers to the underlying ValueModel that stores the state.
+     */
     private ValueModel valueModel;
 
-    private TreeSelectionListener selectionListener = new TreeSelectionHandler();
+    private final TreeSelectionListener selectionListener = new TreeSelectionHandler();
 
-    private PropertyChangeListener subjectChangeListener = new SelectionChangeHandler();
+    private final PropertyChangeListener subjectChangeListener = new SelectionChangeHandler();
 
-    public SelectionInTree(final ValueModel valueModel, final TreeModel treeModel)
+    public SelectionInTree( final ValueModel valueModel, final TreeModel treeModel )
     {
-        setTreeModel(treeModel);
-        setValueModel(valueModel);
-        super.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        addTreeSelectionListener(selectionListener);
-        valueModel.addValueChangeListener(subjectChangeListener);
+        setTreeModel( treeModel );
+        setValueModel( valueModel );
+        super.setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        addTreeSelectionListener( selectionListener );
+        valueModel.addValueChangeListener( subjectChangeListener );
     }
 
-    public void setValueModel(final ValueModel valueModel)
+    public void setValueModel( final ValueModel valueModel )
     {
         this.valueModel = valueModel;
     }
 
-    public void setSelectionMode(final int mode)
+    public void setSelectionMode( final int mode )
     {
     }
 
-    private void updateSubjectSilenty(final TreePath path)
+    private void updateSubjectSilenty( final TreePath path )
     {
-        valueModel.removeValueChangeListener(subjectChangeListener);
-        valueModel.setValue(path == null ? null : path.getLastPathComponent());
-        valueModel.addValueChangeListener(subjectChangeListener);
+        valueModel.removeValueChangeListener( subjectChangeListener );
+        valueModel.setValue( path == null ? null : path.getLastPathComponent() );
+        valueModel.addValueChangeListener( subjectChangeListener );
     }
 
     private void changePathSilenty()
     {
-        removeTreeSelectionListener(selectionListener);
-        setSelectionPath(TreeUtils.findPathInTreeModel(getTreeModel(), valueModel.getValue()));
-        addTreeSelectionListener(selectionListener);
+        removeTreeSelectionListener( selectionListener );
+        setSelectionPath( TreeUtils.findPathInTreeModel( getTreeModel(), valueModel.getValue() ) );
+        addTreeSelectionListener( selectionListener );
     }
 
     public TreeModel getTreeModel()
@@ -84,33 +85,31 @@ public class SelectionInTree extends DefaultTreeSelectionModel implements TreeSe
         return treeModel;
     }
 
-    public void setTreeModel(final TreeModel treeModel)
+    public void setTreeModel( final TreeModel treeModel )
     {
         this.treeModel = treeModel;
     }
 
     private class TreeSelectionHandler implements TreeSelectionListener
     {
-
-        public void valueChanged(final TreeSelectionEvent e)
+        public void valueChanged( final TreeSelectionEvent e )
         {
             final TreePath[] path = getSelectionPaths();
-            if (path == null)
+            if ( path == null )
             {
-                updateSubjectSilenty(null);
+                updateSubjectSilenty( null );
             }
             else
             {
                 final TreePath value = path[path.length - 1];
-                updateSubjectSilenty(value);
+                updateSubjectSilenty( value );
             }
         }
     }
 
     private class SelectionChangeHandler implements PropertyChangeListener
     {
-
-        public void propertyChange(final PropertyChangeEvent evt)
+        public void propertyChange( final PropertyChangeEvent evt )
         {
             changePathSilenty();
         }

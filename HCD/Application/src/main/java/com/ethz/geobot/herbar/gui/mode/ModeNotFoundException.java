@@ -12,12 +12,13 @@ package com.ethz.geobot.herbar.gui.mode;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class ModeNotFoundException extends Exception {
-
+public class ModeNotFoundException extends Exception
+{
     /**
      * Constructs an Exception without a message.
      */
-    public ModeNotFoundException() {
+    public ModeNotFoundException()
+    {
         super();
     }
 
@@ -26,7 +27,8 @@ public class ModeNotFoundException extends Exception {
      *
      * @param message The message associated with the exception.
      */
-    public ModeNotFoundException(String message) {
-        super(message);
+    public ModeNotFoundException( final String message )
+    {
+        super( message );
     }
 }

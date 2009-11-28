@@ -30,19 +30,22 @@ import javax.swing.UIManager;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:33 $
  */
-public class Main {
-
-    public static void main(final String[] args) throws Exception {
-        RepaintManager.setCurrentManager(new CheckThreadViolationRepaintManager());
-        UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
-        Strings.setResourceBundle(ResourceBundle.getBundle("config.Strings"));        
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                final MainForm f = new MainForm("Prüfung mit Bildern");
-                f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                f.setVisible(true);
+public class Main
+{
+    public static void main( final String[] args ) throws Exception
+    {
+        RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
+        UIManager.setLookAndFeel( "com.jgoodies.looks.windows.WindowsLookAndFeel" );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "config.Strings" ) );
+        SwingUtilities.invokeLater( new Runnable()
+        {
+            public void run()
+            {
+                final MainForm f = new MainForm( "Prüfung mit Bildern" );
+                f.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+                f.setExtendedState( JFrame.MAXIMIZED_BOTH );
+                f.setVisible( true );
             }
-        });
+        } );
     }
 }

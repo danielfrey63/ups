@@ -26,30 +26,39 @@ import java.util.EventObject;
  */
 public class SourceStateEvent extends EventObject
 {
+    /**
+     * Indicates an opened persistence source.
+     */
+    public static final SourceStateEventType OPENED = new SourceStateEventType( "OPENED" );
 
-    /** Indicates an opened persistence source. */
-    public static final SourceStateEventType OPENED = new SourceStateEventType("OPENED");
+    /**
+     * Indicates that data has been saved to the persistence layer.
+     */
+    public static final SourceStateEventType SAVED = new SourceStateEventType( "SAVED" );
 
-    /** Indicates that data has been saved to the persistence layer. */
-    public static final SourceStateEventType SAVED = new SourceStateEventType("SAVED");
+    /**
+     * Indicates that the data has been changed but not saved.
+     */
+    public static final SourceStateEventType DIRTY = new SourceStateEventType( "DIRTY" );
 
-    /** Indicates that the data has been changed but not saved. */
-    public static final SourceStateEventType DIRTY = new SourceStateEventType("DIRTY");
+    /**
+     * Indicates that a new data has been created.
+     */
+    public static final SourceStateEventType NEW = new SourceStateEventType( "NEW" );
 
-    /** Indicates that a new data has been created. */
-    public static final SourceStateEventType NEW = new SourceStateEventType("NEW");
-
-    /** The type of this event. */
-    private SourceStateEventType type;
+    /**
+     * The type of this event.
+     */
+    private final SourceStateEventType type;
 
     /**
      * Constructs a source change Event.
      *
      * @param source The object on which the Event initially occurred.
      */
-    public SourceStateEvent(final Object source, final SourceStateEventType type)
+    public SourceStateEvent( final Object source, final SourceStateEventType type )
     {
-        super(source);
+        super( source );
         this.type = type;
     }
 
@@ -65,9 +74,9 @@ public class SourceStateEvent extends EventObject
 
     public static class SourceStateEventType
     {
-        private String key;
+        private final String key;
 
-        private SourceStateEventType(final String key)
+        private SourceStateEventType( final String key )
         {
             this.key = key;
         }

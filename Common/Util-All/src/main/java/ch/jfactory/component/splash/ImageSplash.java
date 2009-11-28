@@ -39,7 +39,6 @@ import java.awt.Window;
 
 public final class ImageSplash extends Window implements com.jgoodies.uif.splash.SplashProvider
 {
-
     private static final int DEFAULT_BAR_WIDTH = 100;
 
     private static final int DEFAULT_BAR_HEIGHT = 10;
@@ -72,9 +71,9 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param image the splash image to display
      */
-    public ImageSplash(final Image image)
+    public ImageSplash( final Image image )
     {
-        this(image, false);
+        this( image, false );
     }
 
     /**
@@ -84,9 +83,9 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param image           the splash image to display
      * @param progressVisible true to show progress, false to hide it
      */
-    public ImageSplash(final Image image, final boolean progressVisible)
+    public ImageSplash( final Image image, final boolean progressVisible )
     {
-        this(new Frame(), image, "Loading\u2026", progressVisible, null);
+        this( new Frame(), image, "Loading\u2026", progressVisible, null );
     }
 
     /**
@@ -97,21 +96,21 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param initialNote     the note that will be displayed first
      * @param progressVisible true to show progress, false to hide it
      */
-    public ImageSplash(final Frame owner, final Image image, final String initialNote, final boolean progressVisible, final String version)
+    public ImageSplash( final Frame owner, final Image image, final String initialNote, final boolean progressVisible, final String version )
     {
-        super(owner);
+        super( owner );
         this.image = image;
         this.note = initialNote;
         this.percent = 0;
         this.progressVisible = progressVisible;
-        this.setVersion(version);
-        setSize(image.getWidth(null), image.getHeight(null));
-        setProgressBarBounds(VPAD);
-        setVersionHeight(2 * VPAD);
-        setForeground(Color.DARK_GRAY);
-        setBackground(Color.LIGHT_GRAY);
+        this.setVersion( version );
+        setSize( image.getWidth( null ), image.getHeight( null ) );
+        setProgressBarBounds( VPAD );
+        setVersionHeight( 2 * VPAD );
+        setForeground( Color.DARK_GRAY );
+        setBackground( Color.LIGHT_GRAY );
         textColor = Color.BLACK;
-        ScreenUtils.locateOnScreenCenter(this);
+        ScreenUtils.locateOnScreenCenter( this );
     }
 
     // Setting Properties ***************************************************
@@ -132,7 +131,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param noteEnabled true if this splash changes the displayed note in {@link #setNote(String)}, false to ignore
      *                    it
      */
-    public void setNoteEnabled(final boolean noteEnabled)
+    public void setNoteEnabled( final boolean noteEnabled )
     {
         this.noteEnabled = noteEnabled;
     }
@@ -152,7 +151,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param progressVisible true to show the progress, false to hide it
      */
-    public void setProgressVisible(final boolean progressVisible)
+    public void setProgressVisible( final boolean progressVisible )
     {
         this.progressVisible = progressVisible;
     }
@@ -174,9 +173,9 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      * @param showingProgress true to show the progress
      * @deprecated Replaced by {@link #setProgressVisible(boolean)}.
      */
-    public void setShowingProgress(final boolean showingProgress)
+    public void setShowingProgress( final boolean showingProgress )
     {
-        setProgressVisible(showingProgress);
+        setProgressVisible( showingProgress );
     }
 
     /**
@@ -194,7 +193,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param newTextColor the new note color
      */
-    public void setTextColor(final Color newTextColor)
+    public void setTextColor( final Color newTextColor )
     {
         textColor = newTextColor;
     }
@@ -204,9 +203,9 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param r the Rectangle that describes the progress bar bounds
      */
-    public void setProgressBarBounds(final Rectangle r)
+    public void setProgressBarBounds( final Rectangle r )
     {
-        progressBarBounds = new Rectangle(r);
+        progressBarBounds = new Rectangle( r );
     }
 
     /**
@@ -214,100 +213,110 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param bottomPad the distance in pixel from the splash's bottom
      */
-    public void setProgressBarBounds(final int bottomPad)
+    public void setProgressBarBounds( final int bottomPad )
     {
-        setProgressBarBounds(defaultProgressBarBounds(bottomPad));
+        setProgressBarBounds( defaultProgressBarBounds( bottomPad ) );
     }
 
-    public void setVersionHeight(final int bottomPad)
+    public void setVersionHeight( final int bottomPad )
     {
         this.versionPad = bottomPad;
     }
 
-    /** Answers the progress bar's default bounds using a pad from the dialog's bottom. */
-    private Rectangle defaultProgressBarBounds(final int bottomPad)
+    /**
+     * Answers the progress bar's default bounds using a pad from the dialog's bottom.
+     */
+    private Rectangle defaultProgressBarBounds( final int bottomPad )
     {
-        final int x = (getWidth() - DEFAULT_BAR_WIDTH) / 2;
+        final int x = ( getWidth() - DEFAULT_BAR_WIDTH ) / 2;
         final int y = getHeight() - DEFAULT_BAR_HEIGHT - bottomPad;
-        return new Rectangle(x, y, DEFAULT_BAR_WIDTH, DEFAULT_BAR_HEIGHT);
+        return new Rectangle( x, y, DEFAULT_BAR_WIDTH, DEFAULT_BAR_HEIGHT );
     }
 
     // Painting *************************************************************
 
-    /** Renders the image and optionally a progress bar with a note. */
-    public void paint(final Graphics graphics)
+    /**
+     * Renders the image and optionally a progress bar with a note.
+     */
+    public void paint( final Graphics graphics )
     {
         final Graphics2D g = (Graphics2D) graphics;
         // Check whether we are about to refresh the progress bar.
         final boolean clipIsProgressRect =
-                progressBarBounds.equals(g.getClipBounds());
+                progressBarBounds.equals( g.getClipBounds() );
 
-        if (image != null && (!progressVisible || !clipIsProgressRect))
+        if ( image != null && ( !progressVisible || !clipIsProgressRect ) )
         {
-            g.drawImage(image, 0, 0, this);
+            g.drawImage( image, 0, 0, this );
         }
-        if (progressVisible)
+        if ( progressVisible )
         {
             final int x = progressBarBounds.x;
             final int y = progressBarBounds.y;
             final int w = progressBarBounds.width;
             final int h = progressBarBounds.height;
-            final int progressWidth = (w - 2) * percent / 100;
+            final int progressWidth = ( w - 2 ) * percent / 100;
             final int progressHeight = h - 2;
 
-            g.translate(x, y);
+            g.translate( x, y );
             // Paint border
-            g.setColor(Color.GRAY);
-            g.drawLine(0, 0, w - 2, 0);
-            g.drawLine(0, 0, 0, h - 1);
-            g.setColor(Color.WHITE);
-            g.drawLine(0, h - 1, w - 1, h - 1);
-            g.drawLine(w - 1, 0, w - 1, h - 1);
+            g.setColor( Color.GRAY );
+            g.drawLine( 0, 0, w - 2, 0 );
+            g.drawLine( 0, 0, 0, h - 1 );
+            g.setColor( Color.WHITE );
+            g.drawLine( 0, h - 1, w - 1, h - 1 );
+            g.drawLine( w - 1, 0, w - 1, h - 1 );
             // Paint background
-            g.setColor(getBackground());
-            g.fillRect(1, 1, w - 2, progressHeight);
+            g.setColor( getBackground() );
+            g.fillRect( 1, 1, w - 2, progressHeight );
             // Paint progress bar
-            g.setColor(getForeground());
-            g.fillRect(1, 1, progressWidth, progressHeight);
-            g.translate(-x, -y);
+            g.setColor( getForeground() );
+            g.fillRect( 1, 1, progressWidth, progressHeight );
+            g.translate( -x, -y );
 
-            if (!clipIsProgressRect)
+            if ( !clipIsProgressRect )
             {
-                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                final FontMetrics fm = getFontMetrics(g.getFont());
-                final int textWidth = fm.stringWidth(note);
-                final int textX = (getWidth() - textWidth) / 2;
-                g.setColor(textColor);
-                g.drawString(note, textX, progressBarBounds.y - VPAD / 2);
+                g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+                final FontMetrics fm = getFontMetrics( g.getFont() );
+                final int textWidth = fm.stringWidth( note );
+                final int textX = ( getWidth() - textWidth ) / 2;
+                g.setColor( textColor );
+                g.drawString( note, textX, progressBarBounds.y - VPAD / 2 );
             }
         }
-        if (getVersion() != null && !"".equals(getVersion()))
+        if ( getVersion() != null && !"".equals( getVersion() ) )
         {
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            final FontMetrics fm = getFontMetrics(g.getFont());
-            final int textWidth = fm.stringWidth(getVersion());
-            final int textX = (getWidth() - textWidth) / 2;
-            g.setColor(textColor);
-            g.drawString(getVersion(), textX, progressBarBounds.y - versionPad);
+            g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+            final FontMetrics fm = getFontMetrics( g.getFont() );
+            final int textWidth = fm.stringWidth( getVersion() );
+            final int textX = ( getWidth() - textWidth ) / 2;
+            g.setColor( textColor );
+            g.drawString( getVersion(), textX, progressBarBounds.y - versionPad );
         }
     }
 
-    /** Opens the splash window. */
+    /**
+     * Opens the splash window.
+     */
     public void openSplash()
     {
-        setVisible(true);
+        setVisible( true );
     }
 
-    /** Closes and disposes the splash window. */
+    /**
+     * Closes and disposes the splash window.
+     */
     public void closeSplash()
     {
         dispose();
     }
 
-    /** Sets a new progress value. */
-    public void setProgress(final int percent)
+    /**
+     * Sets a new progress value.
+     */
+    public void setProgress( final int percent )
     {
-        if (!progressVisible)
+        if ( !progressVisible )
         {
             return;
         }
@@ -316,7 +325,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
                 progressBarBounds.x,
                 progressBarBounds.y,
                 progressBarBounds.width,
-                progressBarBounds.height);
+                progressBarBounds.height );
     }
 
     /**
@@ -324,9 +333,9 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
      *
      * @param newNote the note to set
      */
-    public void setNote(final String newNote)
+    public void setNote( final String newNote )
     {
-        if (isNoteEnabled())
+        if ( isNoteEnabled() )
         {
             note = newNote;
             repaint();
@@ -338,7 +347,7 @@ public final class ImageSplash extends Window implements com.jgoodies.uif.splash
         return version;
     }
 
-    public void setVersion(final String version)
+    public void setVersion( final String version )
     {
         this.version = version;
     }

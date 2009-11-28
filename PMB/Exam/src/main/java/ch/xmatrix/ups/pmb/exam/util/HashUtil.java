@@ -11,11 +11,12 @@ import java.awt.Frame;
  *
  * @author Daniel Frey 04.08.2008 11:01:35
  */
-public class HashUtil {
-
-    public static void main(String[] args) {
-        final HashDialog dialog = new HashDialog((Frame) null);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+public class HashUtil
+{
+    public static void main( final String[] args )
+    {
+        final HashDialog dialog = new HashDialog( (Frame) null );
+        dialog.setLocationRelativeTo( null );
+        dialog.setVisible( true );
     }
 }

@@ -62,7 +62,6 @@
         <!-- Overwrite: Make sure to overwrite that with your projects site link. -->
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/dummy</default-site>
         <max-heap-size>512m</max-heap-size>
-    	<project.parent.relativePath>.</project.parent.relativePath>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -116,6 +115,7 @@
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.icon</artifactId>
+                <scope>runtime</scope>
                 <version>1.0</version>
             </dependency>
             <dependency>
@@ -611,7 +611,10 @@
         <repository>
             <id>local</id>
             <url>file:Common/Build/repository</url>
-            <!-- <url>file:${project.parent.relativePath}/repository</url> -->
+        </repository>
+        <repository>
+            <id>local2</id>
+            <url>file:${project.parent.relativePath}/Common/Build/repository</url>
         </repository>
         <repository>
             <id>maven-repo</id>

@@ -33,15 +33,21 @@ public abstract class Paintable implements Runnable
      * The list of {@link ch.jfactory.animation.StopListener}s that will be notified upon termination of this painting
      * thread.
      */
-    private List stopListeners = new ArrayList();
+    private final List stopListeners = new ArrayList();
 
-    /** The associated {@link AnimationQueue}. */
+    /**
+     * The associated {@link AnimationQueue}.
+     */
     private transient AnimationQueue animation;
 
-    /** The painting thread. */
+    /**
+     * The painting thread.
+     */
     private transient Thread runner;
 
-    /** The state of the painting thread. If set to false, the thread will stop. */
+    /**
+     * The state of the painting thread. If set to false, the thread will stop.
+     */
     private transient boolean run;
 
     /**
@@ -49,30 +55,34 @@ public abstract class Paintable implements Runnable
      *
      * @param animation the queue to register
      */
-    public void setAnimationQueue(final AnimationQueue animation)
+    public void setAnimationQueue( final AnimationQueue animation )
     {
         this.animation = animation;
     }
 
-    /** Start background repainting thread. */
+    /**
+     * Start background repainting thread.
+     */
     public void start()
     {
         run = true;
 
-        if (runner == null)
+        if ( runner == null )
         {
-            runner = new Thread(this);
-            runner.setPriority(Thread.MAX_PRIORITY);
+            runner = new Thread( this );
+            runner.setPriority( Thread.MAX_PRIORITY );
             runner.start();
         }
     }
 
-    /** Stop background repainting thread. */
+    /**
+     * Stop background repainting thread.
+     */
     public void stop()
     {
         run = false;
 
-        for (final Object stopListener1 : stopListeners)
+        for ( final Object stopListener1 : stopListeners )
         {
             final StopListener stopListener = (StopListener) stopListener1;
             stopListener.stopPerformed();
@@ -84,9 +94,9 @@ public abstract class Paintable implements Runnable
      *
      * @param stopListener the listener to notify
      */
-    public void addStopListener(final StopListener stopListener)
+    public void addStopListener( final StopListener stopListener )
     {
-        stopListeners.add(stopListener);
+        stopListeners.add( stopListener );
     }
 
     /**
@@ -94,7 +104,7 @@ public abstract class Paintable implements Runnable
      *
      * @param g the graphics object
      */
-    public abstract void paint(Graphics2D g);
+    public abstract void paint( Graphics2D g );
 
     /**
      * Returns the animation queue associated with this paintable.

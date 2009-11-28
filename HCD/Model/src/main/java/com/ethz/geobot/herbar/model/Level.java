@@ -5,7 +5,6 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * Class to represent taxonomic level.
  *
@@ -13,8 +12,8 @@ package com.ethz.geobot.herbar.model;
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  * @created 2. Mai 2002
  */
-public interface Level {
-
+public interface Level
+{
     /**
      * Returns the name of this Level
      *
@@ -35,7 +34,7 @@ public interface Level {
      * @param level object of type Level which should compare
      * @return true if this level is lower than the compared one
      */
-    public boolean isLower(Level level);
+    public boolean isLower( Level level );
 
     /**
      * Compares this with another level.
@@ -43,7 +42,7 @@ public interface Level {
      * @param level object of type Level which should compare
      * @return true if this level is higher than the compared one
      */
-    public boolean isHigher(Level level);
+    public boolean isHigher( Level level );
 
     /**
      * Delivers the next lower Level object or null, if none exists.

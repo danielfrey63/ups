@@ -11,19 +11,22 @@ import java.io.ObjectOutputStream;
  */
 public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Comparable
 {
-
-    public void printEdges(final Class type)
+    public void printEdges( final Class type )
     {
-        getChildrenEdges().printEdges(type);
+        getChildrenEdges().printEdges( type );
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getChildren() */
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getChildren()
+     */
     public GraphNodeList getChildren()
     {
         return getChildrenEdges().getOthers();
     }
 
-    /** @see ch.jfactory.model.graph.GraphNode#getParents() */
+    /**
+     * @see ch.jfactory.model.graph.GraphNode#getParents()
+     */
     public GraphNodeList getParents()
     {
         return getParentEdges().getOthers();
@@ -34,9 +37,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class, Class)
      */
-    public void setChildren(final GraphNodeList children, final Class type, final Class role)
+    public void setChildren( final GraphNodeList children, final Class type, final Class role )
     {
-        getChildrenEdges().setOthers(children, type, role);
+        getChildrenEdges().setOthers( children, type, role );
     }
 
     /**
@@ -44,9 +47,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode)
      */
-    public void addChild(final GraphNode child)
+    public void addChild( final GraphNode child )
     {
-        addChild(getChildrenEdges().size(), child);
+        addChild( getChildrenEdges().size(), child );
     }
 
     /**
@@ -54,9 +57,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode)
      */
-    public void addChild(final int index, final GraphNode child)
+    public void addChild( final int index, final GraphNode child )
     {
-        addChild(index, child, Role.ROLE_NULL);
+        addChild( index, child, Role.ROLE_NULL );
     }
 
     /**
@@ -64,9 +67,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode, Role)
      */
-    public void addChild(final GraphNode child, final Role role)
+    public void addChild( final GraphNode child, final Role role )
     {
-        addChild(getChildrenEdges().size(), child, role);
+        addChild( getChildrenEdges().size(), child, role );
     }
 
     /**
@@ -74,9 +77,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode, Role)
      */
-    public void addChild(final int index, final GraphNode child, final Role role)
+    public void addChild( final int index, final GraphNode child, final Role role )
     {
-        getChildrenEdges().add(index, child, role);
+        getChildrenEdges().add( index, child, role );
     }
 
     /**
@@ -84,11 +87,11 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addNewChild(int, String, Class)
      */
-    public GraphNode addNewChild(final int index, final String name, final Class type)
+    public GraphNode addNewChild( final int index, final String name, final Class type )
     {
-        final GraphNode instance = AbsGraphModel.getTypeFactory().getInstance(type);
-        instance.setName(name);
-        addChild(index, instance);
+        final GraphNode instance = AbsGraphModel.getTypeFactory().getInstance( type );
+        instance.setName( name );
+        addChild( index, instance );
         return instance;
     }
 
@@ -97,9 +100,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#deleteChild(GraphNode)
      */
-    public boolean deleteChild(final GraphNode child)
+    public boolean deleteChild( final GraphNode child )
     {
-        return getChildrenEdges().delete(child);
+        return getChildrenEdges().delete( child );
     }
 
     /**
@@ -107,12 +110,12 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class, Class)
      */
-    public void deleteChildren(final Class type, final Class role)
+    public void deleteChildren( final Class type, final Class role )
     {
-        final GraphNodeList list = getChildren(type, role);
-        for (int i = 0; i < list.size(); i++)
+        final GraphNodeList list = getChildren( type, role );
+        for ( int i = 0; i < list.size(); i++ )
         {
-            deleteChild(list.get(i));
+            deleteChild( list.get( i ) );
         }
     }
 
@@ -121,9 +124,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#removeFromChild(GraphNode)
      */
-    public boolean removeFromChild(final GraphNode child)
+    public boolean removeFromChild( final GraphNode child )
     {
-        return getChildrenEdges().removeLinkTo(child);
+        return getChildrenEdges().removeLinkTo( child );
     }
 
     /**
@@ -131,9 +134,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class, Class)
      */
-    public void setParents(final GraphNodeList parents, final Class type, final Class role)
+    public void setParents( final GraphNodeList parents, final Class type, final Class role )
     {
-        getParentEdges().setOthers(parents, type, role);
+        getParentEdges().setOthers( parents, type, role );
     }
 
     /**
@@ -141,9 +144,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode)
      */
-    public void addParent(final GraphNode parent)
+    public void addParent( final GraphNode parent )
     {
-        addParent(getParentEdges().size(), parent);
+        addParent( getParentEdges().size(), parent );
     }
 
     /**
@@ -151,9 +154,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode)
      */
-    public void addParent(final int index, final GraphNode parent)
+    public void addParent( final int index, final GraphNode parent )
     {
-        addParent(index, parent, Role.ROLE_NULL);
+        addParent( index, parent, Role.ROLE_NULL );
     }
 
     /**
@@ -161,9 +164,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode, Role)
      */
-    public void addParent(final GraphNode parent, final Role role)
+    public void addParent( final GraphNode parent, final Role role )
     {
-        addParent(getParentEdges().size(), parent, role);
+        addParent( getParentEdges().size(), parent, role );
     }
 
     /**
@@ -171,9 +174,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode, Role)
      */
-    public void addParent(final int index, final GraphNode parent, final Role role)
+    public void addParent( final int index, final GraphNode parent, final Role role )
     {
-        getParentEdges().add(index, parent, role);
+        getParentEdges().add( index, parent, role );
     }
 
     /**
@@ -181,11 +184,11 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#addNewParent(int, String, Class)
      */
-    public GraphNode addNewParent(final int index, final String name, final Class type)
+    public GraphNode addNewParent( final int index, final String name, final Class type )
     {
-        final GraphNode instance = AbsGraphModel.getTypeFactory().getInstance(type);
-        instance.setName(name);
-        addParent(index, instance);
+        final GraphNode instance = AbsGraphModel.getTypeFactory().getInstance( type );
+        instance.setName( name );
+        addParent( index, instance );
         return instance;
     }
 
@@ -194,9 +197,9 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#deleteParent(GraphNode)
      */
-    public boolean deleteParent(final GraphNode parent)
+    public boolean deleteParent( final GraphNode parent )
     {
-        return getParentEdges().delete(parent);
+        return getParentEdges().delete( parent );
     }
 
     /**
@@ -204,12 +207,12 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#deleteParents(Class, Class)
      */
-    public void deleteParents(final Class type, final Class role)
+    public void deleteParents( final Class type, final Class role )
     {
-        final GraphNodeList list = getParents(type, role);
-        for (int i = 0; i < list.size(); i++)
+        final GraphNodeList list = getParents( type, role );
+        for ( int i = 0; i < list.size(); i++ )
         {
-            deleteParent(list.get(i));
+            deleteParent( list.get( i ) );
         }
     }
 
@@ -218,24 +221,26 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
      *
      * @see ch.jfactory.model.graph.GraphNode#removeFromParent(GraphNode)
      */
-    public boolean removeFromParent(final GraphNode parent)
+    public boolean removeFromParent( final GraphNode parent )
     {
-        return getParentEdges().removeLinkTo(parent);
+        return getParentEdges().removeLinkTo( parent );
     }
 
-    /** @see Comparable */
-    public int compareTo(final Object o)
+    /**
+     * @see Comparable
+     */
+    public int compareTo( final Object o )
     {
         final GraphNode node = (GraphNode) o;
         return this.getRank() - node.getRank();
     }
 
-    private void writeObject(final ObjectOutputStream s) throws IOException
+    private void writeObject( final ObjectOutputStream s ) throws IOException
     {
         s.defaultWriteObject();
     }
 
-    private void readObject(final ObjectInputStream s) throws IOException, ClassNotFoundException
+    private void readObject( final ObjectInputStream s ) throws IOException, ClassNotFoundException
     {
         s.defaultReadObject();
     }

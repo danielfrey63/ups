@@ -26,7 +26,6 @@ import com.jgoodies.binding.beans.Model;
  */
 public class TypeMapping extends Model
 {
-
     public static final String PROPERTYNAME_ICON = "icon";
 
     public static final String PROPERTYNAME_TEXT = "text";
@@ -35,7 +34,7 @@ public class TypeMapping extends Model
 
     private String text;
 
-    public TypeMapping(final String text, final String icon)
+    public TypeMapping( final String text, final String icon )
     {
         this.icon = icon;
         this.text = text;
@@ -46,7 +45,7 @@ public class TypeMapping extends Model
         return icon;
     }
 
-    public void setIcon(final String icon)
+    public void setIcon( final String icon )
     {
         this.icon = icon;
     }
@@ -56,7 +55,7 @@ public class TypeMapping extends Model
         return text;
     }
 
-    public void setText(final String text)
+    public void setText( final String text )
     {
         this.text = text;
     }
@@ -71,17 +70,17 @@ public class TypeMapping extends Model
         return text.hashCode();
     }
 
-    public boolean equals(final Object obj)
+    public boolean equals( final Object obj )
     {
-        if (!(obj instanceof TypeMapping))
+        if ( !( obj instanceof TypeMapping ) )
         {
             return false;
         }
-        if (this == obj)
+        if ( this == obj )
         {
             return true;
         }
         final TypeMapping other = (TypeMapping) obj;
-        return getText().equals(other.getText());
+        return getText().equals( other.getText() );
     }
 }

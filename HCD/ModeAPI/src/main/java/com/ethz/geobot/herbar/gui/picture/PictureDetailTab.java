@@ -11,31 +11,38 @@ import com.ethz.geobot.herbar.model.PictureTheme;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class PictureDetailTab extends TabbedPictureDetailPanel {
-
-    public PictureDetailTab(CachedImageLocator cache) {
-        super(cache);
+public class PictureDetailTab extends TabbedPictureDetailPanel
+{
+    public PictureDetailTab( final CachedImageLocator cache )
+    {
+        super( cache );
     }
 
-    public void setEnabled(int t, boolean b) {
-        PictureTheme theme = (PictureTheme) getObjectAt(t);
-        if (b) {
-            this.setTitleAt(t, "<html><body><font color='#000000'>" + theme.getName() + "</font></body></html>");
+    public void setEnabled( final int t, final boolean b )
+    {
+        final PictureTheme theme = (PictureTheme) getObjectAt( t );
+        if ( b )
+        {
+            this.setTitleAt( t, "<html><body><font color='#000000'>" + theme.getName() + "</font></body></html>" );
         }
-        else {
-            this.setTitleAt(t, "<html><body><font color='#999999'>" + theme.getName() + "</font></body></html>");
+        else
+        {
+            this.setTitleAt( t, "<html><body><font color='#999999'>" + theme.getName() + "</font></body></html>" );
         }
     }
 
-    public PictureDetailPanel addTheme(PictureTheme t) {
-        return super.addTab(t, t.getName());
+    public PictureDetailPanel addTheme( final PictureTheme t )
+    {
+        return super.addTab( t, t.getName() );
     }
 
-    public PictureTheme getTheme() {
+    public PictureTheme getTheme()
+    {
         return (PictureTheme) getSelectedObject();
     }
 
-    public PictureDetailPanel getThemePanel(PictureTheme t) {
-        return getDetail(getObjectIndex(t));
+    public PictureDetailPanel getThemePanel( final PictureTheme t )
+    {
+        return getDetail( getObjectIndex( t ) );
     }
 }

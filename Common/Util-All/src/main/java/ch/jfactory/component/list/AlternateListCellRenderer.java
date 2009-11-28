@@ -29,16 +29,15 @@ import javax.swing.JList;
  */
 public class AlternateListCellRenderer extends DefaultListCellRenderer
 {
-    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+    public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
     {
-
-        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
 
         final Color bg1 = list.getSelectionBackground();
-        final Color bg2 = new Color(bg1.getRed(), bg1.getGreen(), bg1.getBlue(), 50);
+        final Color bg2 = new Color( bg1.getRed(), bg1.getGreen(), bg1.getBlue(), 50 );
 
-        setBackground(isSelected ? bg1 : (index % 2 == 0 ? bg2 : list.getBackground()));
-        setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+        setBackground( isSelected ? bg1 : ( index % 2 == 0 ? bg2 : list.getBackground() ) );
+        setForeground( isSelected ? list.getSelectionForeground() : list.getForeground() );
 
         return this;
     }

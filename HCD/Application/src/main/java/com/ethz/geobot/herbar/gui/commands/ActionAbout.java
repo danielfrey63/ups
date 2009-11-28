@@ -12,21 +12,23 @@ import javax.swing.JFrame;
  * @author $Author: daniel_frey $ $Date: 2007/09/17 11:05:50 $
  * @version $Revision: 1.1 $
  */
-public class ActionAbout extends AbstractParametrizedAction {
-
+public class ActionAbout extends AbstractParametrizedAction
+{
     /**
      * Constructor, need a parent frame to set about box on top.
      *
      * @param parent reference to parent frame
      */
-    public ActionAbout(JFrame parent) {
-        super("MENU.ITEM.ABOUT", parent);
+    public ActionAbout( final JFrame parent )
+    {
+        super( "MENU.ITEM.ABOUT", parent );
     }
 
-    public void actionPerformed(ActionEvent parm1) {
-        AboutBox dlg = new AboutBox(parent);
-        WindowUtils.centerOnComponent(dlg, parent);
-        dlg.setVisible(true);
+    public void actionPerformed( final ActionEvent parm1 )
+    {
+        final AboutBox dlg = new AboutBox( parent );
+        WindowUtils.centerOnComponent( dlg, parent );
+        dlg.setVisible( true );
         dlg.toFront();
     }
 }

@@ -6,9 +6,8 @@ package ch.jfactory.model.graph;
  */
 public class RoleNull extends GraphNodeImpl implements Role
 {
-
-    public RoleNull(final String name)
+    public RoleNull( final String name )
     {
-        setName(name);
+        setName( name );
     }
 }

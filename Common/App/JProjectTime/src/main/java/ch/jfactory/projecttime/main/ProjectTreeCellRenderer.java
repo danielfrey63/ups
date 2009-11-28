@@ -36,69 +36,84 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.2 $ $Date: 2006/11/16 13:25:17 $
  */
-public class ProjectTreeCellRenderer extends DefaultTreeCellRenderer {
+public class ProjectTreeCellRenderer extends DefaultTreeCellRenderer
+{
+    private final SimpleIconFactory factory = new SimpleIconFactory( "/16x16/fill" );
 
-    private SimpleIconFactory factory = new SimpleIconFactory("/16x16/fill");
-    private Icon nullIcon = factory.createDropShadowIcon("file_line0.png", "#FF0000");
-    private Icon invoiceIcon = factory.createDropShadowIcon("file_line2.png", "#00FF00");
-    private ValueModel entry2InvoiceMap;
+    private final Icon nullIcon = factory.createDropShadowIcon( "file_line0.png", "#FF0000" );
 
-    public ProjectTreeCellRenderer(final ValueModel entry2InvoiceMap) {
+    private final Icon invoiceIcon = factory.createDropShadowIcon( "file_line2.png", "#00FF00" );
+
+    private final ValueModel entry2InvoiceMap;
+
+    public ProjectTreeCellRenderer( final ValueModel entry2InvoiceMap )
+    {
         this.entry2InvoiceMap = entry2InvoiceMap;
     }
 
-    private Icon getTimeEntryIcon(IFEntry entry) {
+    private Icon getTimeEntryIcon( IFEntry entry )
+    {
         boolean hasInvoice = false;
         final Icon result;
-        while (entry != null && !hasInvoice) {
+        while ( entry != null && !hasInvoice )
+        {
             final Map map = (Map) entry2InvoiceMap.getValue();
-            final Invoice invoice = (Invoice) map.get(entry);
-            hasInvoice |= (invoice != null);
+            final Invoice invoice = (Invoice) map.get( entry );
+            hasInvoice |= ( invoice != null );
             entry = entry.getParent();
         }
-        if (hasInvoice) {
+        if ( hasInvoice )
+        {
             result = invoiceIcon;
         }
-        else {
+        else
+        {
             result = nullIcon;
         }
         return result;
     }
 
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded,
-                                                  boolean leaf, int row, boolean hasFocus) {
-        final JLabel label = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+    public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel, final boolean expanded,
+                                                   final boolean leaf, final int row, final boolean hasFocus )
+    {
+        final JLabel label = (JLabel) super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf, row, hasFocus );
         final IFEntry entry = (IFEntry) value;
         final StringBuffer buffer = new StringBuffer();
         final Calendar start = entry.getStart();
         final Calendar end = entry.getEnd();
-        if (start != null && end != null) {
+        if ( start != null && end != null )
+        {
             final SimpleDateFormat startFormat;
-            if (DateUtils.isSameDay(start, end)) {
-                startFormat = new SimpleDateFormat("HH:mm");
+            if ( DateUtils.isSameDay( start, end ) )
+            {
+                startFormat = new SimpleDateFormat( "HH:mm" );
             }
-            else if (DateUtils.isSameMonth(start, end)) {
-                startFormat = new SimpleDateFormat("HH:mm dd.");
+            else if ( DateUtils.isSameMonth( start, end ) )
+            {
+                startFormat = new SimpleDateFormat( "HH:mm dd." );
             }
-            else if (DateUtils.isSameYear(start, end)) {
-                startFormat = new SimpleDateFormat("HH:mm dd.MM.");
+            else if ( DateUtils.isSameYear( start, end ) )
+            {
+                startFormat = new SimpleDateFormat( "HH:mm dd.MM." );
             }
-            else {
-                startFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+            else
+            {
+                startFormat = new SimpleDateFormat( "HH:mm dd.MM.yyyy" );
             }
-            buffer.append(startFormat.format(start));
-            buffer.append(" - ");
-            final SimpleDateFormat endFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
-            buffer.append(endFormat.format(end));
-            buffer.append(" (");
-            buffer.append(DateUtils.dateDifference(start.getTime().getTime(), end.getTime().getTime(), "HH:mm"));
-            buffer.append(")");
-            label.setIcon(getTimeEntryIcon(entry));
+            buffer.append( startFormat.format( start ) );
+            buffer.append( " - " );
+            final SimpleDateFormat endFormat = new SimpleDateFormat( "HH:mm dd.MM.yyyy" );
+            buffer.append( endFormat.format( end ) );
+            buffer.append( " (" );
+            buffer.append( DateUtils.dateDifference( start.getTime().getTime(), end.getTime().getTime(), "HH:mm" ) );
+            buffer.append( ")" );
+            label.setIcon( getTimeEntryIcon( entry ) );
         }
-        else if (!"".equals(entry.getName())) {
-            buffer.append(entry.getName());
+        else if ( !"".equals( entry.getName() ) )
+        {
+            buffer.append( entry.getName() );
         }
-        label.setText(buffer.toString());
+        label.setText( buffer.toString() );
         return label;
     }
 }

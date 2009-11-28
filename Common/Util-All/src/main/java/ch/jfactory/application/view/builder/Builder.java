@@ -10,6 +10,5 @@ import javax.swing.JComponent;
  */
 public interface Builder
 {
-
     JComponent getPanel();
 }

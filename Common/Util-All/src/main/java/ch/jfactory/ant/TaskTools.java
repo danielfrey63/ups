@@ -10,7 +10,6 @@ import org.apache.tools.ant.util.FileUtils;
  */
 public class TaskTools
 {
-
     /**
      * <p>This class takes the sourcePath file and The classname given to the ant task and figures out the filename of
      * the class.</p> <p/> Ex: <code>com.ryangrier.ant.test.VersionTest</code> becomes
@@ -20,19 +19,19 @@ public class TaskTools
      * @param className       Description of the Parameter
      * @return The filePathFromClassName value
      */
-    public static java.io.File getFilePathFromClassName(final java.io.File sourceDirectory, final String className)
+    public static java.io.File getFilePathFromClassName( final java.io.File sourceDirectory, final String className )
     {
         final StringBuffer sb = new StringBuffer();
-        sb.append(sourceDirectory.getPath());
+        sb.append( sourceDirectory.getPath() );
 
-        final java.util.StringTokenizer st = new java.util.StringTokenizer(className, ".");
-        while (st.hasMoreTokens())
+        final java.util.StringTokenizer st = new java.util.StringTokenizer( className, "." );
+        while ( st.hasMoreTokens() )
         {
-            sb.append(System.getProperty("file.separator", "/"));
-            sb.append(st.nextToken());
+            sb.append( System.getProperty( "file.separator", "/" ) );
+            sb.append( st.nextToken() );
         }
-        sb.append(".java");
-        return new java.io.File(sb.toString());
+        sb.append( ".java" );
+        return new java.io.File( sb.toString() );
     }
 
     /**
@@ -44,24 +43,24 @@ public class TaskTools
      * @throws Exception           Description of the Exception
      * @throws java.lang.Exception An Exception has occurred.
      */
-    public static String findVariableNameValueInClassFile(final String fileContents, final String variableName) throws Exception
+    public static String findVariableNameValueInClassFile( final String fileContents, final String variableName ) throws Exception
     {
         final StringBuffer sb = new StringBuffer();
 
-        final java.util.StringTokenizer st = new java.util.StringTokenizer(fileContents, System.getProperty("line.separator", "\n"));
+        final java.util.StringTokenizer st = new java.util.StringTokenizer( fileContents, System.getProperty( "line.separator", "\n" ) );
 
-        while (st.hasMoreTokens())
+        while ( st.hasMoreTokens() )
         {
             String line = st.nextToken();
-            final int indexOfVariable = line.indexOf(variableName);
-            final int indexOfEquals = line.indexOf("=");
-            if ((indexOfVariable != -1) && (indexOfEquals != -1))
+            final int indexOfVariable = line.indexOf( variableName );
+            final int indexOfEquals = line.indexOf( "=" );
+            if ( ( indexOfVariable != -1 ) && ( indexOfEquals != -1 ) )
             {
-                line = line.substring(indexOfEquals + 1, line.length() - 1).trim();
-                final java.util.StringTokenizer st2 = new java.util.StringTokenizer(line, "\"");
-                while (st2.hasMoreTokens())
+                line = line.substring( indexOfEquals + 1, line.length() - 1 ).trim();
+                final java.util.StringTokenizer st2 = new java.util.StringTokenizer( line, "\"" );
+                while ( st2.hasMoreTokens() )
                 {
-                    sb.append(st2.nextToken());
+                    sb.append( st2.nextToken() );
                 }
 
                 break;
@@ -78,25 +77,24 @@ public class TaskTools
      * @param newString    Replace the old String with this.
      * @return String The file contents with the newString instead of the old.
      */
-    public static String replaceOldVersion(String fileContents, final String oldString, final String newString)
+    public static String replaceOldVersion( String fileContents, final String oldString, final String newString )
     {
-
         final StringBuffer sb = new StringBuffer();
 
-        int index = fileContents.indexOf(oldString);
+        int index = fileContents.indexOf( oldString );
 
-        if (index != -1)
+        if ( index != -1 )
         {
-            sb.append(fileContents.substring(0, index));
-            sb.append(newString);
-            sb.append(fileContents.substring(index + oldString.length()));
+            sb.append( fileContents.substring( 0, index ) );
+            sb.append( newString );
+            sb.append( fileContents.substring( index + oldString.length() ) );
         }
 
         fileContents = sb.toString();
-        index = fileContents.indexOf(oldString);
-        if (index != -1)
+        index = fileContents.indexOf( oldString );
+        if ( index != -1 )
         {
-            fileContents = replaceOldVersion(fileContents, oldString, newString);
+            fileContents = replaceOldVersion( fileContents, oldString, newString );
         }
         return fileContents;
     }
@@ -109,11 +107,11 @@ public class TaskTools
      * @throws java.io.IOException           Something went wrong.
      * @throws java.io.FileNotFoundException Something went wrong.
      */
-    public static String readFile(final java.io.File file) throws java.io.IOException
+    public static String readFile( final java.io.File file ) throws java.io.IOException
     {
         final String returnString;
-        final java.io.FileReader fileReader = new java.io.FileReader(file);
-        returnString = FileUtils.readFully(fileReader);
+        final java.io.FileReader fileReader = new java.io.FileReader( file );
+        returnString = FileUtils.readFully( fileReader );
         fileReader.close();
 
         return returnString;
@@ -127,30 +125,30 @@ public class TaskTools
      * @throws java.io.IOException           Something went wrong.
      * @throws java.io.FileNotFoundException Something went wrong.
      */
-    public static synchronized void writeFile(final java.io.File file, final byte[] contents)
+    public static synchronized void writeFile( final java.io.File file, final byte[] contents )
             throws java.io.IOException
     {
-        final java.io.FileOutputStream theFileOutputStream = new java.io.FileOutputStream(file);
-        theFileOutputStream.write(contents);
+        final java.io.FileOutputStream theFileOutputStream = new java.io.FileOutputStream( file );
+        theFileOutputStream.write( contents );
         theFileOutputStream.close();
     }
 
-    public static int incrementVersion(int ver, final boolean steps, final boolean odd)
+    public static int incrementVersion( int ver, final boolean steps, final boolean odd )
     {
         final int oldVer = ver;
         ver++;
-        if (steps)
+        if ( steps )
         {
-            if (odd)
+            if ( odd )
             {
-                ver += (ver + 1) % 2;
+                ver += ( ver + 1 ) % 2;
             }
             else
             {
                 ver += ver % 2;
             }
         }
-        System.out.println("Incrementing build " + oldVer + " to build " + ver);
+        System.out.println( "Incrementing build " + oldVer + " to build " + ver );
         return ver;
     }
 

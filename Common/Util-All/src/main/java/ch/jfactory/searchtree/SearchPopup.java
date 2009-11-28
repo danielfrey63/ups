@@ -35,50 +35,50 @@ class SearchPopup
 
     private JTree owner;
 
-    private int x;
+    private final int x;
 
-    private int y;
+    private final int y;
 
-    protected SearchPopup(final JTree owner, final Component contents, final int x, final int y)
+    protected SearchPopup( final JTree owner, final Component contents, final int x, final int y )
     {
-        if (contents == null)
+        if ( contents == null )
         {
-            throw new IllegalArgumentException("Contents must be non-null");
+            throw new IllegalArgumentException( "Contents must be non-null" );
         }
-        if (panel == null)
+        if ( panel == null )
         {
-            panel = new JPanel(new BorderLayout(), true);
-            panel.setOpaque(true);
+            panel = new JPanel( new BorderLayout(), true );
+            panel.setOpaque( true );
         }
         this.owner = owner;
         this.x = x;
         this.y = y;
-        panel.add(contents, BorderLayout.CENTER);
+        panel.add( contents, BorderLayout.CENTER );
         contents.invalidate();
         pack();
     }
 
     public void pack()
     {
-        if (panel != null)
+        if ( panel != null )
         {
-            panel.setSize(panel.getPreferredSize());
+            panel.setSize( panel.getPreferredSize() );
         }
     }
 
     public void hide()
     {
-        if (panel != null)
+        if ( panel != null )
         {
             final Container parent = panel.getParent();
 
-            if (parent != null)
+            if ( parent != null )
             {
                 final Rectangle bounds = panel.getBounds();
 
-                parent.remove(panel);
-                parent.repaint(bounds.x, bounds.y, bounds.width,
-                        bounds.height);
+                parent.remove( panel );
+                parent.repaint( bounds.x, bounds.y, bounds.width,
+                        bounds.height );
             }
         }
         owner = null;
@@ -90,33 +90,33 @@ class SearchPopup
     {
         Container parent = null;
 
-        if (owner != null)
+        if ( owner != null )
         {
-            parent = (owner instanceof Container ? (Container) owner : owner.getParent());
+            parent = ( owner instanceof Container ? owner : owner.getParent() );
         }
 
         // Try to find a JLayeredPane and Window to add
-        for (Container p = parent; p != null; p = p.getParent())
+        for ( Container p = parent; p != null; p = p.getParent() )
         {
-            if (p instanceof JRootPane)
+            if ( p instanceof JRootPane )
             {
-                if (p.getParent() instanceof JInternalFrame)
+                if ( p.getParent() instanceof JInternalFrame )
                 {
                     continue;
                 }
-                parent = ((JRootPane) p).getLayeredPane();
+                parent = ( (JRootPane) p ).getLayeredPane();
                 // Continue, so that if there is a higher JRootPane, we'll
                 // pick it up.
             }
-            else if (p instanceof Window)
+            else if ( p instanceof Window )
             {
-                if (parent == null)
+                if ( parent == null )
                 {
                     parent = p;
                 }
                 break;
             }
-            else if (p instanceof JApplet)
+            else if ( p instanceof JApplet )
             {
                 // Painting code stops at Applets, we don't want
                 // to add to a Component above an Applet otherwise
@@ -125,30 +125,30 @@ class SearchPopup
             }
         }
 
-        final Point p = convertScreenLocationToParent(parent, x, y);
-        panel.setLocation(p.x, p.y);
-        if (parent instanceof JLayeredPane)
+        final Point p = convertScreenLocationToParent( parent, x, y );
+        panel.setLocation( p.x, p.y );
+        if ( parent instanceof JLayeredPane )
         {
-            ((JLayeredPane) parent).add(panel, JLayeredPane.POPUP_LAYER, 0);
+            parent.add( panel, JLayeredPane.POPUP_LAYER, 0 );
         }
         else
         {
-            parent.add(panel);
+            parent.add( panel );
         }
     }
 
-    static Point convertScreenLocationToParent(final Container parent, final int x, final int y)
+    static Point convertScreenLocationToParent( final Container parent, final int x, final int y )
     {
-        for (Container p = parent; p != null; p = p.getParent())
+        for ( Container p = parent; p != null; p = p.getParent() )
         {
-            if (p instanceof Window)
+            if ( p instanceof Window )
             {
-                final Point point = new Point(x, y);
-                SwingUtilities.convertPointFromScreen(point, parent);
+                final Point point = new Point( x, y );
+                SwingUtilities.convertPointFromScreen( point, parent );
                 return point;
             }
         }
-        throw new Error("convertScreenLocationToParent: no window ancestor");
+        throw new Error( "convertScreenLocationToParent: no window ancestor" );
     }
 
 }

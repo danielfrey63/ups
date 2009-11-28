@@ -17,7 +17,6 @@
 package ch.jfactory.projecttime.main;
 
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
-import ch.jfactory.projecttime.main.MainModel;
 import ch.jfactory.typemapper.TypeMapperBuilder;
 import ch.jfactory.typemapper.TypeModel;
 import javax.swing.JComponent;
@@ -31,30 +30,36 @@ import org.pietschy.command.CommandManager;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.2 $ $Date: 2006/11/16 13:25:17 $
  */
-public class TypeMappingsCommand extends ActionCommand {
+public class TypeMappingsCommand extends ActionCommand
+{
+    private final MainModel model;
 
-    private MainModel model;
-
-    public TypeMappingsCommand(final CommandManager commandManager, final MainModel model) {
-        super(commandManager, Commands.COMMANDID_EDITTYPES);
+    public TypeMappingsCommand( final CommandManager commandManager, final MainModel model )
+    {
+        super( commandManager, Commands.COMMANDID_EDITTYPES );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final TypeModel typeModel = model.getTypeModel();
-        final TypeMapperBuilder builder = new TypeMapperBuilder(typeModel);
+        final TypeMapperBuilder builder = new TypeMapperBuilder( typeModel );
         final JComponent panel = builder.getPanel();
-        final JDialog dialog = new I15nComponentDialog(model.getParent(), "typeedit") {
-            protected void onApply() throws ComponentDialogException {
+        final JDialog dialog = new I15nComponentDialog( model.getParent(), "typeedit" )
+        {
+            protected void onApply() throws ComponentDialogException
+            {
             }
 
-            protected void onCancel() {
+            protected void onCancel()
+            {
             }
 
-            protected JComponent createComponentPanel() {
+            protected JComponent createComponentPanel()
+            {
                 return panel;
             }
         };
-        dialog.setVisible(true);
+        dialog.setVisible( true );
     }
 }

@@ -18,9 +18,9 @@ package ch.jfactory.projecttime.project.command;
 
 import ch.jfactory.projecttime.domain.api.IFEntry;
 import ch.jfactory.projecttime.project.ProjectModel;
+import com.jgoodies.binding.PresentationModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.PresentationModel;
 
 /**
  * TODO: document
@@ -28,21 +28,24 @@ import com.jgoodies.binding.PresentationModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class AddEntry extends ActionCommand {
+public class AddEntry extends ActionCommand
+{
+    private final ProjectModel model;
 
-    private ProjectModel model;
-
-    public AddEntry(final ProjectModel model, final CommandManager manager) {
-        super(manager, Commands.ADD_COMMAND);
+    public AddEntry( final ProjectModel model, final CommandManager manager )
+    {
+        super( manager, Commands.ADD_COMMAND );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         final PresentationModel currentBeanModel = model.getCurrentBeanModel();
         final IFEntry entry = (IFEntry) currentBeanModel.getBean();
-        if (entry != null) {
-            final IFEntry newChild = entry.addChild("Neu", "");
-            model.setNewChild(newChild);
+        if ( entry != null )
+        {
+            final IFEntry newChild = entry.addChild( "Neu", "" );
+            model.setNewChild( newChild );
         }
     }
 }

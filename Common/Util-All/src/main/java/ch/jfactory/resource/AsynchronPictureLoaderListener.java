@@ -24,19 +24,19 @@ public interface AsynchronPictureLoaderListener
      * @param name name of the image
      * @param img  reference to the image
      */
-    void loadFinished(String name, Image img, boolean thumb);
+    void loadFinished( String name, Image img, boolean thumb );
 
     /**
      * Is called if the loading of a image is aborted.
      *
      * @param name name of the image
      */
-    void loadAborted(String name);
+    void loadAborted( String name );
 
     /**
      * Is called if the image is about to be loaded.
      *
      * @param name name of the image
      */
-    void loadStarted(String name);
+    void loadStarted( String name );
 }

@@ -24,37 +24,37 @@ public class DefaultTextField extends JTextField
 {
     public DefaultTextField()
     {
-        this(null, "", 0);
+        this( null, "", 0 );
     }
 
-    public DefaultTextField(final int columns)
+    public DefaultTextField( final int columns )
     {
-        this(null, "", columns);
+        this( null, "", columns );
     }
 
-    public DefaultTextField(final String text)
+    public DefaultTextField( final String text )
     {
-        this(null, text, 0);
+        this( null, text, 0 );
     }
 
-    public DefaultTextField(final String text, final int columns)
+    public DefaultTextField( final String text, final int columns )
     {
-        this(null, text, columns);
+        this( null, text, columns );
     }
 
-    public DefaultTextField(final Document doc, final String text, final int columns)
+    public DefaultTextField( final Document doc, final String text, final int columns )
     {
-        super(doc, text, columns);
-        this.addFocusListener(new FocusListener()
+        super( doc, text, columns );
+        this.addFocusListener( new FocusListener()
         {
-            public void focusGained(final FocusEvent e)
+            public void focusGained( final FocusEvent e )
             {
                 selectAll();
             }
 
-            public void focusLost(final FocusEvent e)
+            public void focusLost( final FocusEvent e )
             {
             }
-        });
+        } );
     }
 }

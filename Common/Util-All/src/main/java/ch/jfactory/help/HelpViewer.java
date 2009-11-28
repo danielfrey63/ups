@@ -27,90 +27,89 @@ import org.apache.commons.cli.PosixParser;
  */
 public class HelpViewer
 {
-
     private static final String OPTION_SHORT_HELPSET = "h";
 
     private static final String OPTION_LONG_HELPSET = "helpset";
 
-    public HelpViewer(final String helpset)
+    public HelpViewer( final String helpset )
     {
         final JFrame f = new JFrame();
-        f.addWindowListener(new WindowAdapter()
+        f.addWindowListener( new WindowAdapter()
         {
-            public void windowClosing(final WindowEvent e)
+            public void windowClosing( final WindowEvent e )
             {
-                System.exit(0);
+                System.exit( 0 );
             }
-        });
+        } );
 
-        final JButton button = new JButton("Beenden");
-        button.addActionListener(new ActionListener()
+        final JButton button = new JButton( "Beenden" );
+        button.addActionListener( new ActionListener()
         {
-            public void actionPerformed(final ActionEvent e)
+            public void actionPerformed( final ActionEvent e )
             {
-                System.exit(0);
+                System.exit( 0 );
             }
-        });
-        f.getContentPane().setLayout(new FlowLayout());
-        f.getContentPane().add(button);
+        } );
+        f.getContentPane().setLayout( new FlowLayout() );
+        f.getContentPane().add( button );
         f.pack();
-        f.setVisible(true);
-        init(f.getRootPane(), helpset);
+        f.setVisible( true );
+        init( f.getRootPane(), helpset );
     }
 
-    public HelpViewer(final Component component, final String helpset)
+    public HelpViewer( final Component component, final String helpset )
     {
-        init(component, helpset);
+        init( component, helpset );
     }
 
-    private void init(final Component component, final String helpset)
+    private void init( final Component component, final String helpset )
     {
         HelpSet hs = null;
         try
         {
-            URL hsURL = HelpViewer.class.getResource(helpset);
-            if (hsURL == null && helpset.startsWith("/"))
+            URL hsURL = HelpViewer.class.getResource( helpset );
+            if ( hsURL == null && helpset.startsWith( "/" ) )
             {
-                hsURL = HelpViewer.class.getResource(helpset.substring(1));
+                hsURL = HelpViewer.class.getResource( helpset.substring( 1 ) );
             }
-            else if (hsURL == null && !helpset.startsWith(File.separator))
+            else if ( hsURL == null && !helpset.startsWith( File.separator ) )
             {
-                hsURL = HelpViewer.class.getResource("/" + helpset);
+                hsURL = HelpViewer.class.getResource( "/" + helpset );
             }
-            hs = new HelpSet(null, hsURL);
+            hs = new HelpSet( null, hsURL );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            if (e.getMessage() != null)
+            if ( e.getMessage() != null )
             {
-                System.err.println(e.getMessage());
+                System.err.println( e.getMessage() );
             }
-            System.err.println("HelpSet " + helpset + " not found");
-            System.err.println("Basedir is: " + System.getProperty("user.dir"));
+            System.err.println( "HelpSet " + helpset + " not found" );
+            System.err.println( "Basedir is: " + System.getProperty( "user.dir" ) );
             return;
         }
         final HelpBroker helpBroker = hs.createHelpBroker();
-        helpBroker.setLocale(Locale.GERMAN);
-        helpBroker.setFont(UIManager.getFont("Label.font"));
+        helpBroker.setLocale( Locale.GERMAN );
+        helpBroker.setFont( UIManager.getFont( "Label.font" ) );
 
-        final CSH.DisplayHelpFromSource displayer = new CSH.DisplayHelpFromSource(helpBroker);
-        displayer.actionPerformed(new ActionEvent(component, 0, "SHOWHELP"));
+        final CSH.DisplayHelpFromSource displayer = new CSH.DisplayHelpFromSource( helpBroker );
+        displayer.actionPerformed( new ActionEvent( component, 0, "SHOWHELP" ) );
     }
 
-    public static void main(final String[] args)
+    public static void main( final String[] args )
     {
         final Options options = new Options();
-        options.addOption(OPTION_SHORT_HELPSET, OPTION_LONG_HELPSET, true, "Helpset to open");
+        options.addOption( OPTION_SHORT_HELPSET, OPTION_LONG_HELPSET, true, "Helpset to open" );
         final Parser parser = new PosixParser();
         try
         {
-            final CommandLine cl = parser.parse(options, args);
-            final String helpset = cl.getOptionValue(OPTION_SHORT_HELPSET);
-            new HelpViewer(helpset);
+            final CommandLine cl = parser.parse( options, args );
+            final String helpset = cl.getOptionValue( OPTION_SHORT_HELPSET );
+            new HelpViewer( helpset );
         }
-        catch (ParseException e)
+        catch ( ParseException e )
         {
-            System.err.println("Error parsing commandline " + args);
+            System.err.println( "Error parsing commandline " + args );
         }
     }
 }

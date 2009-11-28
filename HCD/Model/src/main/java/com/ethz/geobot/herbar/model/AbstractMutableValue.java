@@ -10,7 +10,6 @@ package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.resource.Strings;
 
-
 /**
  * <class description here>
  *
@@ -18,8 +17,8 @@ import ch.jfactory.resource.Strings;
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
 public abstract class AbstractMutableValue
-        implements MorValue, Rankable {
-
+        implements MorValue, Rankable
+{
     /**
      * @see com.ethz.geobot.herbar.model.Rankable#getId()
      */
@@ -43,7 +42,7 @@ public abstract class AbstractMutableValue
     /**
      * @see com.ethz.geobot.herbar.model.MorValue#getTaxon(int)
      */
-    public abstract Taxon getTaxon(int index);
+    public abstract Taxon getTaxon( int index );
 
     /**
      * @see com.ethz.geobot.herbar.model.MorValue#getText()
@@ -55,12 +54,14 @@ public abstract class AbstractMutableValue
      *
      * @see com.ethz.geobot.herbar.model.MorValue#getText()
      */
-    public String getText() {
-        String[] texts = getTexts();
-        if (texts.length == 0) {
-            return Strings.getString("ERROR.NO_MOR_TEXT_DEFINED");
+    public String getText()
+    {
+        final String[] texts = getTexts();
+        if ( texts.length == 0 )
+        {
+            return Strings.getString( "ERROR.NO_MOR_TEXT_DEFINED" );
         }
-        return getTexts()[ 0 ];
+        return getTexts()[0];
     }
 
     /**
@@ -68,21 +69,21 @@ public abstract class AbstractMutableValue
      *
      * @param name the new name to set
      */
-    public abstract void setName(String name);
+    public abstract void setName( String name );
 
     /**
      * Set rank of object within its siblings.
      *
      * @param rank the rank to set
      */
-    public abstract void setRank(int rank);
+    public abstract void setRank( int rank );
 
     /**
      * Set a new parent {@link com.ethz.geobot.herbar.model.AbstractMutableAttribute}.
      *
      * @param newAtt the new parent to set
      */
-    public abstract void setParentAttribute(MorAttribute newAtt);
+    public abstract void setParentAttribute( MorAttribute newAtt );
 }
 
 // $Log: AbstractMutableValue.java,v $

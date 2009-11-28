@@ -25,20 +25,19 @@ package ch.jfactory.filter;
  */
 public abstract class AbstractFilter implements Filter
 {
-
     public Filter negate()
     {
-        return new NegateFilter(this);
+        return new NegateFilter( this );
     }
 
-    public Filter or(final Filter filter)
+    public Filter or( final Filter filter )
     {
-        return new OrFilter(this, filter);
+        return new OrFilter( this, filter );
     }
 
-    public Filter and(final Filter filter)
+    public Filter and( final Filter filter )
     {
-        return new AndFilter(this, filter);
+        return new AndFilter( this, filter );
     }
 
 }

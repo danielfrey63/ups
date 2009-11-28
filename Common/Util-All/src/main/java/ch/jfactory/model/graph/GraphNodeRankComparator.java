@@ -8,13 +8,14 @@ import java.util.Comparator;
  */
 public class GraphNodeRankComparator implements Comparator
 {
-
-    /** @see java.util.Comparator#compare(Object, Object) */
-    public int compare(final Object o1, final Object o2)
+    /**
+     * @see java.util.Comparator#compare(Object, Object)
+     */
+    public int compare( final Object o1, final Object o2 )
     {
         final GraphNode n1 = (GraphNode) o1;
         final GraphNode n2 = (GraphNode) o2;
-        return new Integer(n1.getRank()).compareTo(n2.getRank());
+        return new Integer( n1.getRank() ).compareTo( n2.getRank() );
     }
 
 }

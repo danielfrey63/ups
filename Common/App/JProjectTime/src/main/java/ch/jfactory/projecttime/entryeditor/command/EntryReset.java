@@ -16,9 +16,9 @@
  */
 package ch.jfactory.projecttime.entryeditor.command;
 
+import com.jgoodies.binding.PresentationModel;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
-import com.jgoodies.binding.PresentationModel;
 
 /**
  * TODO: document
@@ -26,16 +26,18 @@ import com.jgoodies.binding.PresentationModel;
  * @author <a href="daniel.frey@xmatrix.ch">Daniel Frey</a>
  * @version $Revision: 1.1 $ $Date: 2005/09/04 19:54:10 $
  */
-public class EntryReset extends ActionCommand {
+public class EntryReset extends ActionCommand
+{
+    private final PresentationModel model;
 
-    private PresentationModel model;
-
-    public EntryReset(final PresentationModel model, final CommandManager manager) {
-        super(manager, Commands.RESET_COMMAND);
+    public EntryReset( final PresentationModel model, final CommandManager manager )
+    {
+        super( manager, Commands.RESET_COMMAND );
         this.model = model;
     }
 
-    protected void handleExecute() {
+    protected void handleExecute()
+    {
         model.triggerFlush();
     }
 }

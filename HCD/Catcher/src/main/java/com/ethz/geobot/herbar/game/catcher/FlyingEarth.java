@@ -18,48 +18,57 @@ import javax.swing.ImageIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:58 $
  */
-public class FlyingEarth extends FlyingFlower {
+public class FlyingEarth extends FlyingFlower
+{
+    private final int x;
 
-    private int x, y;
-    private int yinc;
-    private int h = 470;
-    private int w = 750;
+    private int y;
+
+    private final int yinc;
+
+    private final int h = 470;
+
+    private final int w = 750;
+
     private Graphics g;
-    private ImageIcon earth = ImageLocator.getIcon("bgCatch.jpg");
 
+    private final ImageIcon earth = ImageLocator.getIcon( "bgCatch.jpg" );
 
     /**
      * Constructor for the FlyingEarth object
      */
-    public FlyingEarth() {
+    public FlyingEarth()
+    {
         x = 0;
         y = 0;
         yinc = 3;
     }
-
 
     /**
      * updates the position of the image of the grass
      *
      * @param g graphicobject
      */
-    public void update(Graphics g) {
-        if (y < h) {
+    public void update( final Graphics g )
+    {
+        if ( y < h )
+        {
             y += yinc;
         }
-        else {
+        else
+        {
             y = 0;
         }
     }
-
 
     /**
      * paints the images of the grass
      *
      * @param g graphicobject
      */
-    public void paint(Graphics g) {
-        g.drawImage(earth.getImage(), x, y, this);
-        g.drawImage(earth.getImage(), x, y - earth.getIconHeight(), this);
+    public void paint( final Graphics g )
+    {
+        g.drawImage( earth.getImage(), x, y, this );
+        g.drawImage( earth.getImage(), x, y - earth.getIconHeight(), this );
     }
 }

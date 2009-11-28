@@ -9,21 +9,21 @@ public interface UpdateChangeListener extends java.util.EventListener
      *
      * @param event information aboud the update state
      */
-    void beginUpdate(UpdateChangeEvent event);
+    void beginUpdate( UpdateChangeEvent event );
 
     /**
      * this method is invoke if the UpdateProcessor begins update.
      *
      * @param event information aboud the update state
      */
-    void progressUpdate(UpdateChangeEvent event);
+    void progressUpdate( UpdateChangeEvent event );
 
     /**
      * this method is invoke if the UpdateProcessor finish update.
      *
      * @param event information aboud the update state
      */
-    void finishUpdate(UpdateChangeEvent event);
+    void finishUpdate( UpdateChangeEvent event );
     /** @link dependency */
     /*# UpdateChangeEvent lnkUpdateChangeEvent; */
 }

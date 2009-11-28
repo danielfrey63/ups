@@ -10,19 +10,19 @@ public class IntSet
 
     private int size = 0;
 
-    public void add(final int i)
+    public void add( final int i )
     {
-        for (int j = 0; j < size; j++)
+        for ( int j = 0; j < size; j++ )
         {
-            if (ints[j] == i)
+            if ( ints[j] == i )
             {
                 return;
             }
         }
-        if (size == ints.length)
+        if ( size == ints.length )
         {
             final int[] newInts = new int[ints.length * 2];
-            System.arraycopy(ints, 0, newInts, 0, ints.length);
+            System.arraycopy( ints, 0, newInts, 0, ints.length );
             ints = newInts;
         }
         ints[size++] = i;
@@ -31,7 +31,7 @@ public class IntSet
     public int[] getArray()
     {
         final int[] result = new int[size];
-        System.arraycopy(ints, 0, result, 0, size);
+        System.arraycopy( ints, 0, result, 0, size );
         return result;
     }
 
@@ -40,22 +40,24 @@ public class IntSet
         return size;
     }
 
-    /** @see java.lang.Object#toString() */
+    /**
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return "" + ints;
     }
 
-    public int get(final int i)
+    public int get( final int i )
     {
         return ints[i];
     }
 
-    public boolean contains(final int pId)
+    public boolean contains( final int pId )
     {
         boolean found = false;
         int i = 0;
-        while (!found && i < size)
+        while ( !found && i < size )
         {
             found = ints[i++] == pId;
         }

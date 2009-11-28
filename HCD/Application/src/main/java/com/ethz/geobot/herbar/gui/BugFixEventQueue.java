@@ -21,40 +21,47 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-public class BugFixEventQueue extends EventQueue {
-
+public class BugFixEventQueue extends EventQueue
+{
     private static final BugFixEventQueue INSTANCE = new BugFixEventQueue();
 
     private boolean altReleased;
 
-    public static void install() {
-        EventQueue current = Toolkit.getDefaultToolkit().getSystemEventQueue();
-        if (current == INSTANCE) {
+    public static void install()
+    {
+        final EventQueue current = Toolkit.getDefaultToolkit().getSystemEventQueue();
+        if ( current == INSTANCE )
+        {
             return;
         }
-        current.push(INSTANCE);
+        current.push( INSTANCE );
     }
 
-    protected void dispatchEvent(AWTEvent event) {
-        if (event instanceof KeyEvent) {
-            KeyEvent evt = (KeyEvent) event;
-            int keyCode = evt.getKeyCode();
-            int evtType = evt.getID();
+    protected void dispatchEvent( final AWTEvent event )
+    {
+        if ( event instanceof KeyEvent )
+        {
+            final KeyEvent evt = (KeyEvent) event;
+            final int keyCode = evt.getKeyCode();
+            final int evtType = evt.getID();
 
-            if (keyCode == KeyEvent.VK_ALT) {
-                altReleased = (evtType == KeyEvent.KEY_RELEASED);
+            if ( keyCode == KeyEvent.VK_ALT )
+            {
+                altReleased = ( evtType == KeyEvent.KEY_RELEASED );
                 return;
             }
-            else if (altReleased && evtType == KeyEvent.KEY_TYPED) {
+            else if ( altReleased && evtType == KeyEvent.KEY_TYPED )
+            {
                 altReleased = false;
                 evt.consume();
                 return;
             }
-            else {
+            else
+            {
                 altReleased = false;
             }
         }
-        super.dispatchEvent(event);
+        super.dispatchEvent( event );
     }
 }
 

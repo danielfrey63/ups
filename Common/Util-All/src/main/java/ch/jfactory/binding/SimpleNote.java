@@ -27,7 +27,6 @@ import java.awt.Color;
  */
 public class SimpleNote implements Note
 {
-
     private final String message;
 
     private final String subject;
@@ -38,39 +37,39 @@ public class SimpleNote implements Note
 
     private final Message.Type type;
 
-    public SimpleNote(final String message)
+    public SimpleNote( final String message )
     {
-        this(message, null, null, null, null);
+        this( message, null, null, null, null );
     }
 
-    public SimpleNote(final String message, final String subject)
+    public SimpleNote( final String message, final String subject )
     {
-        this(message, subject, null, null, null);
+        this( message, subject, null, null, null );
     }
 
-    public SimpleNote(final String message, final Message.Type type)
+    public SimpleNote( final String message, final Message.Type type )
     {
-        this(message, null, null, null, type);
+        this( message, null, null, null, type );
     }
 
-    public SimpleNote(final String message, final String subject, final Message.Type type)
+    public SimpleNote( final String message, final String subject, final Message.Type type )
     {
-        this(message, subject, null, null, type);
+        this( message, subject, null, null, type );
     }
 
-    public SimpleNote(final String message, final int percentage)
+    public SimpleNote( final String message, final int percentage )
     {
-        this(message, null, percentage, null, null);
+        this( message, null, percentage, null, null );
     }
 
-    public SimpleNote(final String message, final Color color)
+    public SimpleNote( final String message, final Color color )
     {
-        this(message, null, null, color, null);
+        this( message, null, null, color, null );
     }
 
-    public SimpleNote(final String message, final Integer percentage, final Color color)
+    public SimpleNote( final String message, final Integer percentage, final Color color )
     {
-        this(message, null, percentage, color, null);
+        this( message, null, percentage, color, null );
     }
 
     /**
@@ -82,7 +81,7 @@ public class SimpleNote implements Note
      * @param color      the color
      * @param type       the {@link ch.jfactory.application.view.status.Message.Type}
      */
-    private SimpleNote(final String message, final String subject, final Integer percentage, final Color color, final Message.Type type)
+    private SimpleNote( final String message, final String subject, final Integer percentage, final Color color, final Message.Type type )
     {
         this.message = message;
         this.subject = subject;
@@ -96,42 +95,54 @@ public class SimpleNote implements Note
      *
      * @param note the note to copy
      */
-    public SimpleNote(final Note note)
+    public SimpleNote( final Note note )
     {
-        this(note.getMessage(), note.getSubject(), note.getPercentage(), note.getColor(), note.getType());
+        this( note.getMessage(), note.getSubject(), note.getPercentage(), note.getColor(), note.getType() );
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public String getMessage()
     {
         return message;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public String getSubject()
     {
         return subject;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public Integer getPercentage()
     {
         return percentage;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public Color getColor()
     {
         return color;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public Message.Type getType()
     {
         return type;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public String toString()
     {
         return "Note[percent=" + percentage + ",color=" + ",subject=" + subject + color + ",message=" + message + "]";

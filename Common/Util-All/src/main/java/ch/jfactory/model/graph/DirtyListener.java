@@ -6,5 +6,5 @@ package ch.jfactory.model.graph;
  */
 public interface DirtyListener
 {
-    public void dirtyChanged(boolean dirty);
+    public void dirtyChanged( boolean dirty );
 }

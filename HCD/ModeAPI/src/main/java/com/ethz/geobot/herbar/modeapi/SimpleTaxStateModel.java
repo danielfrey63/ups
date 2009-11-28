@@ -9,11 +9,14 @@ import java.beans.PropertyChangeSupport;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class SimpleTaxStateModel {
-
+public class SimpleTaxStateModel
+{
     public final static String SCOPE = "scope";
+
     public final static String LEVEL = "level";
+
     public final static String FOCUS = "focus";
+
     public final static String ORDER = "ordered";
 
     /**
@@ -38,7 +41,8 @@ public class SimpleTaxStateModel {
 
     private PropertyChangeSupport propertySupport;
 
-    public SimpleTaxStateModel(PropertyChangeSupport propertyChangeSupport) {
+    public SimpleTaxStateModel( final PropertyChangeSupport propertyChangeSupport )
+    {
         this.propertySupport = propertyChangeSupport;
     }
 
@@ -47,7 +51,8 @@ public class SimpleTaxStateModel {
      *
      * @return the current scope taxon
      */
-    public Taxon getScope() {
+    public Taxon getScope()
+    {
         return this.scope;
     }
 
@@ -56,11 +61,12 @@ public class SimpleTaxStateModel {
      *
      * @param scope the new scope to set
      */
-    public void setScope(Taxon scope) {
-        Taxon oldScope = this.scope;
+    public void setScope( final Taxon scope )
+    {
+        final Taxon oldScope = this.scope;
         this.scope = scope;
         validateLevel();
-        propertySupport.firePropertyChange(SCOPE, oldScope, scope);
+        propertySupport.firePropertyChange( SCOPE, oldScope, scope );
     }
 
     /**
@@ -68,7 +74,8 @@ public class SimpleTaxStateModel {
      *
      * @return the current level.
      */
-    public Level getLevel() {
+    public Level getLevel()
+    {
         return this.level;
     }
 
@@ -77,11 +84,12 @@ public class SimpleTaxStateModel {
      *
      * @param level the new level to set
      */
-    public void setLevel(Level level) {
-        Level oldLevel = this.level;
+    public void setLevel( final Level level )
+    {
+        final Level oldLevel = this.level;
         this.level = level;
         validateFocus();
-        propertySupport.firePropertyChange(LEVEL, oldLevel, level);
+        propertySupport.firePropertyChange( LEVEL, oldLevel, level );
     }
 
     /**
@@ -89,7 +97,8 @@ public class SimpleTaxStateModel {
      *
      * @return the current focus state taxon.
      */
-    public Taxon getFocus() {
+    public Taxon getFocus()
+    {
         return this.focus;
     }
 
@@ -98,10 +107,11 @@ public class SimpleTaxStateModel {
      *
      * @param focus the new focus state to set.
      */
-    public void setFocus(Taxon focus) {
-        Taxon oldFocus = this.focus;
+    public void setFocus( final Taxon focus )
+    {
+        final Taxon oldFocus = this.focus;
         this.focus = focus;
-        propertySupport.firePropertyChange(FOCUS, oldFocus, focus);
+        propertySupport.firePropertyChange( FOCUS, oldFocus, focus );
     }
 
     /**
@@ -109,7 +119,8 @@ public class SimpleTaxStateModel {
      *
      * @return whether the state currently is ordered
      */
-    public boolean isOrdered() {
+    public boolean isOrdered()
+    {
         return this.ordered;
     }
 
@@ -118,29 +129,35 @@ public class SimpleTaxStateModel {
      *
      * @param ordered whether state is ordered.
      */
-    public void setOrdered(boolean ordered) {
-        boolean oldOrdered = this.ordered;
+    public void setOrdered( final boolean ordered )
+    {
+        final boolean oldOrdered = this.ordered;
         this.ordered = ordered;
-        propertySupport.firePropertyChange(ORDER, new Boolean(oldOrdered), new Boolean(ordered));
+        propertySupport.firePropertyChange( ORDER, new Boolean( oldOrdered ), new Boolean( ordered ) );
     }
 
-    private void validateLevel() {
-        Level[] levels = scope.getSubLevels();
-        if (!ArrayUtils.contains(levels, level)) {
-            setLevel(levels[ levels.length - 1 ]);
+    private void validateLevel()
+    {
+        final Level[] levels = scope.getSubLevels();
+        if ( !ArrayUtils.contains( levels, level ) )
+        {
+            setLevel( levels[levels.length - 1] );
         }
         validateFocus();
     }
 
-    private void validateFocus() {
-        Taxon[] taxa = scope.getAllChildTaxa(level);
-        taxa = (Taxon[]) ArrayUtils.insert(taxa, scope, 0, new Taxon[0]);
-        if (!ArrayUtils.contains(taxa, focus)) {
-            setFocus(taxa[ 0 ]);
+    private void validateFocus()
+    {
+        Taxon[] taxa = scope.getAllChildTaxa( level );
+        taxa = (Taxon[]) ArrayUtils.insert( taxa, scope, 0, new Taxon[0] );
+        if ( !ArrayUtils.contains( taxa, focus ) )
+        {
+            setFocus( taxa[0] );
         }
     }
 
-    public void setPropertyChangeSupport(PropertyChangeSupport propertySupport) {
+    public void setPropertyChangeSupport( final PropertyChangeSupport propertySupport )
+    {
         this.propertySupport = propertySupport;
     }
 }

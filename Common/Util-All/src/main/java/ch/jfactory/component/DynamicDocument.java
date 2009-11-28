@@ -13,32 +13,32 @@ import javax.swing.text.PlainDocument;
  */
 public class DynamicDocument extends PlainDocument
 {
-    private String validInput;
+    private final String validInput;
 
     /**
      * Constructor.
      *
      * @param validInput allowed characters for input
      */
-    public DynamicDocument(final String validInput)
+    public DynamicDocument( final String validInput )
     {
         this.validInput = validInput;
     }
 
-    public void insertString(final int offset, final String string, final AttributeSet attributes) throws BadLocationException
+    public void insertString( final int offset, final String string, final AttributeSet attributes ) throws BadLocationException
     {
-        if (string == null)
+        if ( string == null )
         {
             return;
         }
-        for (int i = 0; i < string.length(); i++)
+        for ( int i = 0; i < string.length(); i++ )
         {
-            if (validInput.indexOf(string.charAt(i)) == -1)
+            if ( validInput.indexOf( string.charAt( i ) ) == -1 )
             {
                 Toolkit.getDefaultToolkit().beep();
                 return;
             }
         }
-        super.insertString(offset, string, attributes);
+        super.insertString( offset, string, attributes );
     }
 }

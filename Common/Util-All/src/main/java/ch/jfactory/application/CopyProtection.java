@@ -17,17 +17,17 @@ public class CopyProtection
      * @param file2 second file to read
      * @return whether the content of the two given files in the given directory is identical
      */
-    public static boolean compareFiles(final File file1, final File file2)
+    public static boolean compareFiles( final File file1, final File file2 )
     {
-        if (file1 == null || file2 == null || !file1.exists() || !file2.exists())
+        if ( file1 == null || file2 == null || !file1.exists() || !file2.exists() )
         {
             return false;
         }
         try
         {
-            return FileUtils.contentEquals(file1, file2);
+            return FileUtils.contentEquals( file1, file2 );
         }
-        catch (IOException e)
+        catch ( IOException e )
         {
             return false;
         }

@@ -10,7 +10,7 @@ package com.ethz.geobot.herbar.modeapi.state;
 
 import com.ethz.geobot.herbar.model.Taxon;
 
-public interface TaxFocusListener {
-
-    public void taxFocusChanged(Taxon oldFocus, Taxon newFocus);
+public interface TaxFocusListener
+{
+    public void taxFocusChanged( Taxon oldFocus, Taxon newFocus );
 }

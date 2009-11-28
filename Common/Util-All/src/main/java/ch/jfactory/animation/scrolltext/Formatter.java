@@ -36,34 +36,54 @@ import javax.swing.UIManager;
  */
 public class Formatter
 {
-    /** The default line spacing. */
+    /**
+     * The default line spacing.
+     */
     private static final int DEFAULT_LINE_SPACING = 10;
 
-    /** The default paragraph spacing. */
+    /**
+     * The default paragraph spacing.
+     */
     private static final int DEFAULT_SPACE_BEFORE = 3;
 
-    /** The name of this formatting collection. */
+    /**
+     * The name of this formatting collection.
+     */
     private String name = "Default";
 
-    /** The font for this formatting collection. */
-    private Font font = UIManager.getFont("TextField.font");
+    /**
+     * The font for this formatting collection.
+     */
+    private Font font = UIManager.getFont( "TextField.font" );
 
-    /** The foreground color. */
-    private Color color = UIManager.getColor("TextField.foreground");
+    /**
+     * The foreground color.
+     */
+    private Color color = UIManager.getColor( "TextField.foreground" );
 
-    /** The line spacing in points. */
+    /**
+     * The line spacing in points.
+     */
     private int lineSpace = DEFAULT_LINE_SPACING;
 
-    /** The space before paragraphs in points. */
+    /**
+     * The space before paragraphs in points.
+     */
     private int spaceBefore = DEFAULT_SPACE_BEFORE;
 
-    /** The alignement as defined in the SwingConstants class. */
+    /**
+     * The alignement as defined in the SwingConstants class.
+     */
     private int alignement = SwingConstants.LEFT;
 
-    /** The font metrics associated. */
+    /**
+     * The font metrics associated.
+     */
     private FontMetrics fontMetrics;
 
-    /** Whether to glue paragraphs together. */
+    /**
+     * Whether to glue paragraphs together.
+     */
     private boolean keepWithPrevious;
 
     /**
@@ -72,10 +92,10 @@ public class Formatter
      * @param file the serialized formatter object
      * @return the object
      */
-    public static Formatter getFormatter(final String file)
+    public static Formatter getFormatter( final String file )
     {
-        final InputStream fileStream = Formatter.class.getResourceAsStream(file);
-        final XMLDecoder dec = new XMLDecoder(fileStream);
+        final InputStream fileStream = Formatter.class.getResourceAsStream( file );
+        final XMLDecoder dec = new XMLDecoder( fileStream );
         final Formatter formatter = (Formatter) dec.readObject();
         dec.close();
 
@@ -97,7 +117,7 @@ public class Formatter
      *
      * @param font the font to set
      */
-    public void setFont(final Font font)
+    public void setFont( final Font font )
     {
         this.font = font;
     }
@@ -117,7 +137,7 @@ public class Formatter
      *
      * @param color the foreground color to set
      */
-    public void setColor(final Color color)
+    public void setColor( final Color color )
     {
         this.color = color;
     }
@@ -137,7 +157,7 @@ public class Formatter
      *
      * @param lineSpace the line spacing in pixels
      */
-    public void setLineSpace(final int lineSpace)
+    public void setLineSpace( final int lineSpace )
     {
         this.lineSpace = lineSpace;
     }
@@ -157,7 +177,7 @@ public class Formatter
      *
      * @param spaceBefore the spacing in pixels
      */
-    public void setSpaceBefore(final int spaceBefore)
+    public void setSpaceBefore( final int spaceBefore )
     {
         this.spaceBefore = spaceBefore;
     }
@@ -177,7 +197,7 @@ public class Formatter
      *
      * @param name the new name
      */
-    public void setName(final String name)
+    public void setName( final String name )
     {
         this.name = name;
     }
@@ -197,7 +217,7 @@ public class Formatter
      *
      * @param alignement the new alignement to set
      */
-    public void setAlignement(final int alignement)
+    public void setAlignement( final int alignement )
     {
         this.alignement = alignement;
     }
@@ -217,7 +237,7 @@ public class Formatter
      *
      * @param fontMetrics the new font metrics to set
      */
-    public void setFontMetrics(final FontMetrics fontMetrics)
+    public void setFontMetrics( final FontMetrics fontMetrics )
     {
         this.fontMetrics = fontMetrics;
     }
@@ -228,13 +248,13 @@ public class Formatter
      * @param lines the lines to retrieve the coordinates from
      * @return lines an array of base line y-coordinates in pixels
      */
-    public int[] getVerticalCoordinates(final String[] lines)
+    public int[] getVerticalCoordinates( final String[] lines )
     {
         final int length = lines.length;
         final int[] verticalCoordinates = new int[length];
         int y = getSpaceBefore();
 
-        for (int i = 0; i < length; i++)
+        for ( int i = 0; i < length; i++ )
         {
             y += getLineSpace();
             verticalCoordinates[i] = y;
@@ -250,21 +270,21 @@ public class Formatter
      * @param printSpaceWidth the print space width to wrap lines
      * @return an array of pixels for x-coordinates of the first characters of the lines
      */
-    public int[] getHorizontalCoordinates(final String[] lines, final int printSpaceWidth)
+    public int[] getHorizontalCoordinates( final String[] lines, final int printSpaceWidth )
     {
         final int length = lines.length;
         final int[] horizontalCoordinates = new int[length];
 
-        for (int i = 0; i < length; i++)
+        for ( int i = 0; i < length; i++ )
         {
             final String line = lines[i];
-            final int borderWidth = printSpaceWidth - fontMetrics.stringWidth(line);
+            final int borderWidth = printSpaceWidth - fontMetrics.stringWidth( line );
 
-            if (alignement == SwingConstants.CENTER)
+            if ( alignement == SwingConstants.CENTER )
             {
                 horizontalCoordinates[i] = borderWidth / 2;
             }
-            else if (alignement == SwingConstants.RIGHT)
+            else if ( alignement == SwingConstants.RIGHT )
             {
                 horizontalCoordinates[i] = borderWidth;
             }
@@ -284,9 +304,9 @@ public class Formatter
      * @param lineCount the number of lines in the paragraph
      * @return the height for the given numer of lines
      */
-    public int getHeight(final int lineCount)
+    public int getHeight( final int lineCount )
     {
-        return spaceBefore + (lineCount * lineSpace) + fontMetrics.getMaxDescent();
+        return spaceBefore + ( lineCount * lineSpace ) + fontMetrics.getMaxDescent();
     }
 
     /**
@@ -296,32 +316,32 @@ public class Formatter
      * @param printSpaceWidth the print space width to wrap text in
      * @return an array of lines
      */
-    public String[] getLines(final String string, final int printSpaceWidth)
+    public String[] getLines( final String string, final int printSpaceWidth )
     {
         final List linesList = new ArrayList();
 
-        for (StringTokenizer st1 = new StringTokenizer(string, "#"); st1.hasMoreTokens();)
+        for ( StringTokenizer st1 = new StringTokenizer( string, "#" ); st1.hasMoreTokens(); )
         {
             final String paragraph = st1.nextToken();
             String line = "";
 
-            for (StringTokenizer st2 = new StringTokenizer(paragraph, " "); st2.hasMoreTokens();)
+            for ( StringTokenizer st2 = new StringTokenizer( paragraph, " " ); st2.hasMoreTokens(); )
             {
                 final String word = st2.nextToken();
 
-                if ((fontMetrics.stringWidth(line) + fontMetrics.stringWidth(word)) > printSpaceWidth)
+                if ( ( fontMetrics.stringWidth( line ) + fontMetrics.stringWidth( word ) ) > printSpaceWidth )
                 {
-                    linesList.add(line);
+                    linesList.add( line );
                     line = "";
                 }
 
-                line += (word + " ");
+                line += ( word + " " );
             }
 
-            linesList.add(line);
+            linesList.add( line );
         }
 
-        return (String[]) linesList.toArray(new String[linesList.size()]);
+        return (String[]) linesList.toArray( new String[linesList.size()] );
     }
 
     /**
@@ -330,14 +350,14 @@ public class Formatter
      * @param lines the lines containing the strings
      * @return an array of pixel width of the lines
      */
-    public int[] getLength(final String[] lines)
+    public int[] getLength( final String[] lines )
     {
         final int[] lengths = new int[lines.length];
 
-        for (int i = 0; i < lines.length; i++)
+        for ( int i = 0; i < lines.length; i++ )
         {
             final String line = lines[i];
-            lengths[i] = fontMetrics.stringWidth(line);
+            lengths[i] = fontMetrics.stringWidth( line );
         }
 
         return lengths;
@@ -358,7 +378,7 @@ public class Formatter
      *
      * @param keepWithPrevious the new value
      */
-    public void setKeepWithPrevious(final boolean keepWithPrevious)
+    public void setKeepWithPrevious( final boolean keepWithPrevious )
     {
         this.keepWithPrevious = keepWithPrevious;
     }

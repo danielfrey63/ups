@@ -38,6 +38,7 @@ import ch.xmatrix.ups.pmb.util.SpeciesParser;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
@@ -46,7 +47,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,303 +79,373 @@ import org.apache.log4j.Logger;
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:35 $
  */
-public class MainForm extends EntryForm {
+public class MainForm extends EntryForm
+{
+    private static final Logger LOG = Logger.getLogger( MainForm.class );
 
-    private static final Logger LOG = Logger.getLogger(MainForm.class);
     private static final int TAB_SINGLE_IMAGE = 1;
+
     private static final int TAB_IMAGES_LIST = 0;
 
     private final MainModel model;
+
     private final PMBController controller;
+
     private final FileEntryThumbnailListModel thumbnailModel = new FileEntryThumbnailListModel();
+
     private final ArrayList<FileEntry> fileEntries = new ArrayList<FileEntry>();
 
     private JButton[] moveButtons;
 
     private boolean silently = false;
 
-    public MainForm(final MainModel model) {
+    public MainForm( final MainModel model )
+    {
         this.model = model;
-        controller = new PMBController(model, this);
+        controller = new PMBController( model, this );
         initMyComponents();
         initListeners();
-        setSize(800, 600);
-        if (model.getSettings().getShowSettingsOnStartup()) {
+        setSize( 800, 600 );
+        if ( model.getSettings().getShowSettingsOnStartup() )
+        {
             doShowPrefs();
         }
         initModels();
     }
 
-    private void initMyComponents() {
-        setTreeIcons(treeSpecies);
-        setTreeIcons(treeOverview);
-        imagePanel.setThumnailList(imagesPanel);
-        imagesPanel.setCellRenderer(new PictureListRenderer());
-        new ToolTipManager(listOverview);
-        new ToolTipManager(listSpecies);
-        new ToolTipManager(treeOverview);
-        new ToolTipManager(treeSpecies);
+    private void initMyComponents()
+    {
+        setTreeIcons( treeSpecies );
+        setTreeIcons( treeOverview );
+        imagePanel.setThumnailList( imagesPanel );
+        imagesPanel.setCellRenderer( new PictureListRenderer() );
+        new ToolTipManager( listOverview );
+        new ToolTipManager( listSpecies );
+        new ToolTipManager( treeOverview );
+        new ToolTipManager( treeSpecies );
         final Settings settings = model.getSettings();
         final List<Settings.NamedValue> paths = settings.getMovePaths();
-        for (final Settings.NamedValue path : paths) {
+        for ( final Settings.NamedValue path : paths )
+        {
             final String name = path.getName();
-            if (!name.startsWith("+")) {
-                final JButton button = new JButton(name);
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(final ActionEvent e) {
+            if ( !name.startsWith( "+" ) )
+            {
+                final JButton button = new JButton( name );
+                button.addActionListener( new ActionListener()
+                {
+                    public void actionPerformed( final ActionEvent e )
+                    {
                         final String fromPath = settings.getActivePicturePath();
                         final String toPath = path.getValue();
-                        controller.move(fromPath, toPath);
+                        controller.move( fromPath, toPath );
                         initModels();
                     }
-                });
-                moveButtonsPanel.add(button);
+                } );
+                moveButtonsPanel.add( button );
             }
         }
     }
 
-    private void initModels() {
-
+    private void initModels()
+    {
         model.getSelectedImageFiles().clear();
         model.getSelectedPictures().clear();
 
         listOverview.clearSelection();
         treeOverview.clearSelection();
-        fieldName.setText("");
-        imagesPanel.setModel(thumbnailModel);
+        fieldName.setText( "" );
+        imagesPanel.setModel( thumbnailModel );
         imagesPanel.getThumbnailListModel().clear();
-        controller.setCurrentPicture((FileEntry) null, imagePanel);
+        controller.setCurrentPicture( (FileEntry) null, imagePanel );
 
-        treeOverview.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        treeSpecies.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        treeOverview.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+        treeSpecies.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
 
         final Settings settings = model.getSettings();
         final String activePath = settings.getActivePicturePath();
-        final File rootDir = new File(activePath);
-        final Collection<Entry> entries = new PictureParser(settings).processFile(rootDir);
-        final EntryTreeModel entryModel = new EntryTreeModel(entries);
-        treeOverview.setModel(entryModel);
+        final File rootDir = new File( activePath );
+        final Collection<Entry> entries = new PictureParser( settings ).processFile( rootDir );
+        final EntryTreeModel entryModel = new EntryTreeModel( entries );
+        treeOverview.setModel( entryModel );
 
-        final Set<SpeciesEntry> species = new SpeciesParser(settings).processFile(rootDir);
-        listSpecies.setModel(new AbstractListModel() {
-            public int getSize() {
+        final Set<SpeciesEntry> species = new SpeciesParser( settings ).processFile( rootDir );
+        listSpecies.setModel( new AbstractListModel()
+        {
+            public int getSize()
+            {
                 return species.size();
             }
 
-            public Object getElementAt(final int index) {
+            public Object getElementAt( final int index )
+            {
                 return species.toArray()[index];
             }
-        });
-        listSpecies.setCellRenderer(new SpeciesListRenderer(settings));
+        } );
+        listSpecies.setCellRenderer( new SpeciesListRenderer( settings ) );
     }
 
-    private void initListeners() {
-        addWindowListener(new WindowAdapter() {
+    private void initListeners()
+    {
+        addWindowListener( new WindowAdapter()
+        {
             @Override
-            public void windowClosing(final WindowEvent e) {
+            public void windowClosing( final WindowEvent e )
+            {
                 doQuit();
             }
-        });
-        fieldName.addFocusListener(new FocusListener() {
-
+        } );
+        fieldName.addFocusListener( new FocusListener()
+        {
             private JButton last;
 
-            public void focusGained(final FocusEvent e) {
-                if (model.getSelectedPictures().size() > 0) {
+            public void focusGained( final FocusEvent e )
+            {
+                if ( model.getSelectedPictures().size() > 0 )
+                {
                     last = getRootPane().getDefaultButton();
-                    getRootPane().setDefaultButton(renameButton);
+                    getRootPane().setDefaultButton( renameButton );
                 }
             }
 
-            public void focusLost(final FocusEvent e) {
-                getRootPane().setDefaultButton(last);
+            public void focusLost( final FocusEvent e )
+            {
+                getRootPane().setDefaultButton( last );
             }
-        });
-        fieldName.addCaretListener(new CaretListener() {
-
-            public void caretUpdate(final CaretEvent e) {
+        } );
+        fieldName.addCaretListener( new CaretListener()
+        {
+            public void caretUpdate( final CaretEvent e )
+            {
                 setStates();
             }
-        });
-        treeOverview.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(final TreeSelectionEvent e) {
+        } );
+        treeOverview.addTreeSelectionListener( new TreeSelectionListener()
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
                 final TreePath path = e.getPath();
                 final Entry entry = (Entry) path.getLastPathComponent();
                 fileEntries.clear();
-                if (e.isAddedPath()) {
-                    listFileEntries(entry, fileEntries, model.isRecursiveOverviewList());
+                if ( e.isAddedPath() )
+                {
+                    listFileEntries( entry, fileEntries, model.isRecursiveOverviewList() );
                 }
-                listOverview.setModel(new AbstractListModel() {
-
-                    public int getSize() {
+                listOverview.setModel( new AbstractListModel()
+                {
+                    public int getSize()
+                    {
                         return fileEntries.size();
                     }
 
-                    public Object getElementAt(final int index) {
-                        return fileEntries.get(index);
+                    public Object getElementAt( final int index )
+                    {
+                        return fileEntries.get( index );
                     }
-                });
+                } );
             }
-        });
-        listOverview.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+        } );
+        listOverview.addListSelectionListener( new ListSelectionListener()
+        {
+            public void valueChanged( final ListSelectionEvent e )
+            {
+                if ( !e.getValueIsAdjusting() )
+                {
                     final Object[] selected = listOverview.getSelectedValues();
                     model.getSelectedImageFiles().clear();
-                    for (int i = 0; selected != null && i < selected.length; i++) {
-                        model.getSelectedImageFiles().add((FileEntry) selected[i]);
+                    for ( int i = 0; selected != null && i < selected.length; i++ )
+                    {
+                        model.getSelectedImageFiles().add( (FileEntry) selected[i] );
                     }
                     displayImages();
                 }
             }
-        });
-        listSpecies.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+        } );
+        listSpecies.addListSelectionListener( new ListSelectionListener()
+        {
+            public void valueChanged( final ListSelectionEvent e )
+            {
+                if ( !e.getValueIsAdjusting() )
+                {
                     final SpeciesEntry entry = (SpeciesEntry) listSpecies.getSelectedValue();
-                    if (entry != null) {
-                        treeSpecies.setModel(new EntryTreeModel(entry.getList()));
+                    if ( entry != null )
+                    {
+                        treeSpecies.setModel( new EntryTreeModel( entry.getList() ) );
                         fileEntries.clear();
-                        listFileEntries(entry, fileEntries, true);
+                        listFileEntries( entry, fileEntries, true );
                         model.getSelectedImageFiles().clear();
-                        model.getSelectedImageFiles().addAll(fileEntries);
+                        model.getSelectedImageFiles().addAll( fileEntries );
                         displayImages();
                         doRemix();
                     }
                 }
             }
-        });
-        treeSpecies.addTreeSelectionListener(new NavigationSelectionHandler(imagePanel, model, controller) {
-            public void valueChanged(final TreeSelectionEvent e) {
-                super.valueChanged(e);
-                imagesTab.setSelectedIndex(TAB_SINGLE_IMAGE);
+        } );
+        treeSpecies.addTreeSelectionListener( new NavigationSelectionHandler( imagePanel, model, controller )
+        {
+            public void valueChanged( final TreeSelectionEvent e )
+            {
+                super.valueChanged( e );
+                imagesTab.setSelectedIndex( TAB_SINGLE_IMAGE );
                 setStates();
             }
-        });
-        imagesPanel.addMouseListener(new MouseAdapter() {
-
+        } );
+        imagesPanel.addMouseListener( new MouseAdapter()
+        {
             @Override
-            public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) {
+            public void mouseClicked( final MouseEvent e )
+            {
+                if ( e.getClickCount() == 2 )
+                {
                     final Picture picture = (Picture) imagesPanel.getSelectedValue();
-                    controller.setCurrentPicture(picture, imagePanel);
-                    imagesTab.setSelectedIndex(TAB_SINGLE_IMAGE);
+                    controller.setCurrentPicture( picture, imagePanel );
+                    imagesTab.setSelectedIndex( TAB_SINGLE_IMAGE );
                 }
             }
-        });
-        imagesPanel.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(final ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+        } );
+        imagesPanel.getSelectionModel().addListSelectionListener( new ListSelectionListener()
+        {
+            public void valueChanged( final ListSelectionEvent e )
+            {
+                if ( !e.getValueIsAdjusting() )
+                {
                     final List<Picture> pictures = model.getSelectedPictures();
                     pictures.clear();
                     final Object[] selected = imagesPanel.getSelectedValues();
-                    for (final Object aSelected : selected) {
+                    for ( final Object aSelected : selected )
+                    {
                         final Picture picture = (Picture) aSelected;
-                        pictures.add(picture);
+                        pictures.add( picture );
                     }
-                    if (controller.areNamesOfSelectedFilesEqual(silently, model.getSelectedPicturesAsFile()) && pictures.size() > 0) {
-                        fieldName.setText(pictures.get(0).getName());
-                    } else {
-                        fieldName.setText("");
+                    if ( controller.areNamesOfSelectedFilesEqual( silently, model.getSelectedPicturesAsFile() ) && pictures.size() > 0 )
+                    {
+                        fieldName.setText( pictures.get( 0 ).getName() );
+                    }
+                    else
+                    {
+                        fieldName.setText( "" );
                     }
                     setStates();
                 }
             }
-        });
-        imagesPanel.addKeyListener(new KeyAdapter() {
+        } );
+        imagesPanel.addKeyListener( new KeyAdapter()
+        {
             @Override
-            public void keyTyped(final KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_DELETE) {
-                    final int answer = JOptionPane.showConfirmDialog(MainForm.this, "Selektierte Bilder wirklich löschen?",
-                            "Löschen", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                    if (answer == JOptionPane.YES_OPTION) {
+            public void keyTyped( final KeyEvent e )
+            {
+                if ( e.getKeyChar() == KeyEvent.VK_DELETE )
+                {
+                    final int answer = JOptionPane.showConfirmDialog( MainForm.this, "Selektierte Bilder wirklich löschen?",
+                            "Löschen", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE );
+                    if ( answer == JOptionPane.YES_OPTION )
+                    {
                         doDelete();
                     }
                 }
             }
-        });
+        } );
         final InfoModel infoModel = model.getInfoModel();
-        infoModel.addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, new StatusBarNoteHandler(statusBar));
-        infoModel.addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, new AlertDialogNoteHandler(this, Message.Type.ERROR));
-        infoModel.addPropertyChangeListener(InfoModel.PROPERTYNAME_NOTE, new Log4jNoteHandler(LOG));
+        infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new StatusBarNoteHandler( statusBar ) );
+        infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new AlertDialogNoteHandler( this, Message.Type.ERROR ) );
+        infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new Log4jNoteHandler( LOG ) );
     }
 
-    private void listFileEntries(final Entry entry, final ArrayList<FileEntry> fileEntries, final boolean recursiveList) {
-        for (int i = 0; i < entry.size(); i++) {
-            final Entry child = entry.get(i);
-            if (child instanceof FileEntry) {
-                fileEntries.add((FileEntry) child);
-            } else if (recursiveList) {
-                listFileEntries(child, fileEntries, recursiveList);
+    private void listFileEntries( final Entry entry, final ArrayList<FileEntry> fileEntries, final boolean recursiveList )
+    {
+        for ( int i = 0; i < entry.size(); i++ )
+        {
+            final Entry child = entry.get( i );
+            if ( child instanceof FileEntry )
+            {
+                fileEntries.add( (FileEntry) child );
+            }
+            else if ( recursiveList )
+            {
+                listFileEntries( child, fileEntries, recursiveList );
             }
         }
     }
 
-    private void displayImages() {
+    private void displayImages()
+    {
         final int size = model.getSelectedImageFiles().size();
         imagesPanel.getThumbnailListModel().clear();
-        if (size == 0) {
-            controller.setCurrentPicture((FileEntry) null, imagePanel);
-        } else {
+        if ( size == 0 )
+        {
+            controller.setCurrentPicture( (FileEntry) null, imagePanel );
+        }
+        else
+        {
             final List<FileEntry> list = new ArrayList<FileEntry>();
-            for (final FileEntry entry : model.getSelectedImageFiles()) {
-                list.add(entry);
+            for ( final FileEntry entry : model.getSelectedImageFiles() )
+            {
+                list.add( entry );
             }
-            thumbnailModel.setFileEntries(list);
-            if (size == 1) {
-                controller.setCurrentPicture(list.get(0), imagePanel);
-            } else {
-                imagesTab.setSelectedIndex(TAB_IMAGES_LIST);
+            thumbnailModel.setFileEntries( list );
+            if ( size == 1 )
+            {
+                controller.setCurrentPicture( list.get( 0 ), imagePanel );
+            }
+            else
+            {
+                imagesTab.setSelectedIndex( TAB_IMAGES_LIST );
             }
         }
         imagesPanel.repaint();
         setStates();
     }
 
-    private void setTreeIcons(final JTree tree) {
-        final ImageIcon icon = new ImageIcon(MainForm.class.getResource("/18x18/arrow.png"));
+    private void setTreeIcons( final JTree tree )
+    {
+        final ImageIcon icon = new ImageIcon( MainForm.class.getResource( "/18x18/arrow.png" ) );
         final DefaultTreeCellRenderer speciesRenderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-        speciesRenderer.setOpenIcon(icon);
-        speciesRenderer.setClosedIcon(icon);
-        speciesRenderer.setLeafIcon(icon);
+        speciesRenderer.setOpenIcon( icon );
+        speciesRenderer.setClosedIcon( icon );
+        speciesRenderer.setLeafIcon( icon );
     }
 
-    private void setStates() {
+    private void setStates()
+    {
         final int size = model.getSelectedPictures().size();
         final boolean hasSelection = size > 0;
-        final boolean areEqual = controller.areNamesOfSelectedFilesEqual(true, model.getSelectedPicturesAsFile());
-        final boolean hasText = !"".equals(fieldName.getText().trim());
+        final boolean areEqual = controller.areNamesOfSelectedFilesEqual( true, model.getSelectedPicturesAsFile() );
+        final boolean hasText = !"".equals( fieldName.getText().trim() );
         final boolean shouldEnable = hasSelection && areEqual;
-        renameButton.setEnabled(shouldEnable && hasText);
+        renameButton.setEnabled( shouldEnable && hasText );
 //        deleteButton.setEnabled(hasSelection);
 //        moveButton.setEnabled(hasSelection);
-        fieldName.setEditable(shouldEnable);
-        fieldName.setEnabled(shouldEnable);
-        selectAll.setEnabled(hasSelection && controller.areNamesOfSelectedFilesEqual(true, model.getSelectedPicturesAsFile()));
-        copyToClipboard.setEnabled(size == 1);
+        fieldName.setEditable( shouldEnable );
+        fieldName.setEnabled( shouldEnable );
+        selectAll.setEnabled( hasSelection && controller.areNamesOfSelectedFilesEqual( true, model.getSelectedPicturesAsFile() ) );
+        copyToClipboard.setEnabled( size == 1 );
     }
 
-    protected void doShowPrefs() {
-        final PrefsForm dialog = new PrefsForm(this, model.getSettings());
-        dialog.setVisible(true);
-        if (dialog.isOk()) {
+    protected void doShowPrefs()
+    {
+        final PrefsForm dialog = new PrefsForm( this, model.getSettings() );
+        dialog.setVisible( true );
+        if ( dialog.isOk() )
+        {
             initModels();
         }
     }
 
-    protected void doQuit() {
+    protected void doQuit()
+    {
         controller.save();
-        System.exit(0);
+        System.exit( 0 );
     }
 
-    protected void doRename() {
+    protected void doRename()
+    {
         final File[] files = model.getSelectedPicturesAsFile();
-        controller.renameSelected(fieldName.getText(), files);
-        renameButton.setEnabled(false);
+        controller.renameSelected( fieldName.getText(), files );
+        renameButton.setEnabled( false );
         initModels();
     }
 
-    protected void doToBackup() {
+    protected void doToBackup()
+    {
 //        final Settings settings = model.getSettings();
 //        final String fromPath = settings.getActivePicturePath();
 //        final String toPath = settings.getPassivePicturePath();
@@ -383,74 +453,91 @@ public class MainForm extends EntryForm {
 //        initModels();
     }
 
-    protected void doCollapseSpeciesTree() {
-        TreeUtils.collapseAll(treeOverview);
+    protected void doCollapseSpeciesTree()
+    {
+        TreeUtils.collapseAll( treeOverview );
     }
 
-    protected void doExpandSpeciesTree() {
-        TreeUtils.expandAll(treeOverview);
+    protected void doExpandSpeciesTree()
+    {
+        TreeUtils.expandAll( treeOverview );
     }
 
-    protected void doSelectAll() {
-        if (model.getSelectedPictures().size() > 0) {
-            final Picture picture = model.getSelectedPictures().get(0);
+    protected void doSelectAll()
+    {
+        if ( model.getSelectedPictures().size() > 0 )
+        {
+            final Picture picture = model.getSelectedPictures().get( 0 );
             final String name = picture.getName();
             final ThumbnailListModel model = imagesPanel.getThumbnailListModel();
             final ListSelectionModel selectionModel = imagesPanel.getSelectionModel();
             int count = 0;
             silently = true;
-            for (int i = 0; i < model.getSize(); i++) {
-                final Picture candidate = model.getPicture(i);
-                if (candidate.getName().equals(name)) {
+            for ( int i = 0; i < model.getSize(); i++ )
+            {
+                final Picture candidate = model.getPicture( i );
+                if ( candidate.getName().equals( name ) )
+                {
                     count++;
-                    selectionModel.addSelectionInterval(i, i);
+                    selectionModel.addSelectionInterval( i, i );
                 }
             }
             silently = false;
-            if (count == 1) {
-                controller.showMessage("1 Bild \"" + name + "\" ausgewählt");
-            } else {
-                controller.showMessage(count + " Bilder \"" + name + "\" ausgewählt");
+            if ( count == 1 )
+            {
+                controller.showMessage( "1 Bild \"" + name + "\" ausgewählt" );
+            }
+            else
+            {
+                controller.showMessage( count + " Bilder \"" + name + "\" ausgewählt" );
             }
         }
     }
 
-    protected void doCopyPath() {
-        if (model.getSelectedPictures().size() == 1) {
-            final Picture picture = model.getSelectedPictures().get(0);
-            final StringSelection string = new StringSelection(picture.getFile().getAbsolutePath());
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(string, null);
+    protected void doCopyPath()
+    {
+        if ( model.getSelectedPictures().size() == 1 )
+        {
+            final Picture picture = model.getSelectedPictures().get( 0 );
+            final StringSelection string = new StringSelection( picture.getFile().getAbsolutePath() );
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents( string, null );
         }
     }
 
-    protected void doSwitchRecursiveOverviewList() {
-        model.setRecursiveOverviewList(!model.isRecursiveOverviewList());
+    protected void doSwitchRecursiveOverviewList()
+    {
+        model.setRecursiveOverviewList( !model.isRecursiveOverviewList() );
         final TreePath selection = treeOverview.getSelectionPath();
         treeOverview.clearSelection();
-        treeOverview.setSelectionPath(selection);
+        treeOverview.setSelectionPath( selection );
     }
 
-    protected void doRemix() {
+    protected void doRemix()
+    {
         model.getHierarchicalMapping().clear();
         final Object selected = listSpecies.getSelectedValue();
-        if (selected != null && selected instanceof SpeciesEntry) {
+        if ( selected != null && selected instanceof SpeciesEntry )
+        {
             final SpeciesEntry entry = (SpeciesEntry) selected;
-            SpeciesParser.findFileEntriesWithin(entry, model.getHierarchicalMapping());
+            SpeciesParser.findFileEntriesWithin( entry, model.getHierarchicalMapping() );
         }
     }
 
-    protected void doSetBigger(final ActionEvent e) {
+    protected void doSetBigger( final ActionEvent e )
+    {
         final JCheckBoxMenuItem source = (JCheckBoxMenuItem) e.getSource();
         ThumbnailStore.getInstance().invalidateCache();
         final int pixel = source.isSelected() ? 256 : 128;
-        imagesPanel.setThumbnailSize(pixel);
+        imagesPanel.setThumbnailSize( pixel );
     }
 
-    protected void doClearCache() {
+    protected void doClearCache()
+    {
         ThumbnailStore.getInstance().invalidateCache();
     }
 
-    protected void doDelete() {
+    protected void doDelete()
+    {
 //        final Settings settings = model.getSettings();
 //        final String fromPath = settings.getActivePicturePath();
 //        final String toPath = settings.getTrashPath();
@@ -458,17 +545,20 @@ public class MainForm extends EntryForm {
 //        initModels();
     }
 
-    protected void doSavePositionAndZoom() {
-        final String newPath = controller.savePositionAndZoom(imagePanel);
+    protected void doSavePositionAndZoom()
+    {
+        final String newPath = controller.savePositionAndZoom( imagePanel );
         final int index = imagesPanel.getSelectedIndex();
         final FileEntry fileEntry;
 //        navigation.setModel(new EntryTreeModel(currentSpeciesEntry.getList()));
-        if (index > -1) {
-            fileEntry = fileEntries.get(index);
-            if (newPath != null) {
-                fileEntry.setPath(newPath);
+        if ( index > -1 )
+        {
+            fileEntry = fileEntries.get( index );
+            if ( newPath != null )
+            {
+                fileEntry.setPath( newPath );
             }
-            controller.setCurrentPicture(fileEntry, imagePanel);
+            controller.setCurrentPicture( fileEntry, imagePanel );
         }
     }
 }

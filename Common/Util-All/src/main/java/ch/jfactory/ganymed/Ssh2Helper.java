@@ -11,8 +11,9 @@ import java.io.IOException;
  */
 public final class Ssh2Helper
 {
-
-    /** Hide constructor. */
+    /**
+     * Hide constructor.
+     */
     private Ssh2Helper()
     {
     }
@@ -29,14 +30,14 @@ public final class Ssh2Helper
      * @param mode            the mode to apply to the new file
      * @throws IOException passed through
      */
-    public static void upload(final String localFile, final String server, final String user, final String pass,
-                              final String remoteDirectory, final String mode) throws IOException
+    public static void upload( final String localFile, final String server, final String user, final String pass,
+                               final String remoteDirectory, final String mode ) throws IOException
     {
-        final Connection conn = new Connection(server);
-        conn.connect(new DummyServerHostKeyVerifier());
-        conn.authenticateWithPassword(user, pass);
-        final SCPClient client = new SCPClient(conn);
-        client.put(localFile, remoteDirectory, mode);
+        final Connection conn = new Connection( server );
+        conn.connect( new DummyServerHostKeyVerifier() );
+        conn.authenticateWithPassword( user, pass );
+        final SCPClient client = new SCPClient( conn );
+        client.put( localFile, remoteDirectory, mode );
     }
 
     /**
@@ -50,13 +51,13 @@ public final class Ssh2Helper
      * @param localDirectory the local directory to download to
      * @throws IOException passed through
      */
-    public static void download(final String remoteFile, final String server, final String user, final String pass,
-                                final String localDirectory) throws IOException
+    public static void download( final String remoteFile, final String server, final String user, final String pass,
+                                 final String localDirectory ) throws IOException
     {
-        final Connection conn = new Connection(server);
-        conn.connect(new DummyServerHostKeyVerifier());
-        conn.authenticateWithPassword(user, pass);
-        final SCPClient client = new SCPClient(conn);
-        client.get(remoteFile, localDirectory);
+        final Connection conn = new Connection( server );
+        conn.connect( new DummyServerHostKeyVerifier() );
+        conn.authenticateWithPassword( user, pass );
+        final SCPClient client = new SCPClient( conn );
+        client.get( remoteFile, localDirectory );
     }
 }

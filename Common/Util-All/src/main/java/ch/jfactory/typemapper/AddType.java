@@ -27,19 +27,18 @@ import org.pietschy.command.CommandManager;
  */
 public class AddType extends ActionCommand
 {
+    private final TypeModel model;
 
-    private TypeModel model;
-
-    public AddType(final CommandManager commandManager, final TypeModel model)
+    public AddType( final CommandManager commandManager, final TypeModel model )
     {
-        super(commandManager, Commands.COMMANDID_ADD);
+        super( commandManager, Commands.COMMANDID_ADD );
         this.model = model;
     }
 
     protected void handleExecute()
     {
-        final TypeMapping mapping = new TypeMapping("Neuer Typ", "/16x16/outline/man.png");
-        model.getDataModel().add(mapping);
-        model.getSelectionInList().setSelection(mapping);
+        final TypeMapping mapping = new TypeMapping( "Neuer Typ", "/16x16/outline/man.png" );
+        model.getDataModel().add( mapping );
+        model.getSelectionInList().setSelection( mapping );
     }
 }

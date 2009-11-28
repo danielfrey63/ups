@@ -6,8 +6,8 @@ package com.ethz.geobot.herbar.modeapi;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class ModeRegistration {
-
+public class ModeRegistration
+{
     private static ModeRegistrationSupport registrationSupport;
 
     /**
@@ -15,8 +15,9 @@ public class ModeRegistration {
      *
      * @param mode reference to itself
      */
-    public static void register(Mode mode) {
-        registrationSupport.register(mode);
+    public static void register( final Mode mode )
+    {
+        registrationSupport.register( mode );
     }
 
     /**
@@ -25,7 +26,8 @@ public class ModeRegistration {
      *
      * @param registrationSupport reference to registration object
      */
-    public static void setRegistrationSupport(ModeRegistrationSupport registrationSupport) {
+    public static void setRegistrationSupport( final ModeRegistrationSupport registrationSupport )
+    {
         ModeRegistration.registrationSupport = registrationSupport;
     }
 }

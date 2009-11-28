@@ -8,15 +8,14 @@
  */
 package com.ethz.geobot.herbar.model;
 
-
 /**
  * Defines rank and id.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface Rankable {
-
+public interface Rankable
+{
     /**
      * Returns the id of this Taxon object, which should be unique in the current applications data model.
      *
@@ -36,7 +35,7 @@ public interface Rankable {
      *
      * @param rank the rank to set
      */
-    public abstract void setRank(int rank);
+    public abstract void setRank( int rank );
 }
 
 // $Log: Rankable.java,v $

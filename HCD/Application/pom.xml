@@ -18,12 +18,6 @@
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>
-    	<!--
-        <dependency>
-            <groupId>castor</groupId>
-            <artifactId>castor-xml</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>castor</groupId>
             <artifactId>castor</artifactId>

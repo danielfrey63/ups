@@ -15,6 +15,13 @@
         <default-site>none</default-site>
         <max-heap-size>64m</max-heap-size>
     </properties>
+    <distributionManagement>
+        <site>
+            <id>test-site</id>
+            <name>Test Site</name>
+            <url>scp://admin@geobot1.ethz.ch/var/www/html/test</url>
+        </site>
+    </distributionManagement>
   <scm>
     <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.test-1.0</developerConnection>
     <url>http://www.xmatrix.ch/tags/ch.xmatrix.test-1.0</url>

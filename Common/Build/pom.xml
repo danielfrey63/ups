@@ -33,11 +33,9 @@
         </developer>
     </developers>
     <distributionManagement>
-        <!-- Overwrite: Make sure to overwrite that with your projects release site. -->
         <site>
-            <id>default</id>
-            <name>Default Site</name>
-            <url>${default-site}</url>
+            <id>geobot1</id>
+            <url>scp://geobot1.ethz.ch/var/www/html/site/${project.artifactId}-${project.version}</url>
         </site>
         <repository>
             <id>distribution-repository</id>
@@ -51,8 +49,8 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos</developerConnection>
-        <url>http://geobot1.ethz.ch/</url>
+        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/${project.artefactId}-${project.version}</developerConnection>
+        <url>http://www.xmatrix.ch/tags/${project.artefactId}-${project.version}</url>
     </scm>
 
     <properties>

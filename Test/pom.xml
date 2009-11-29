@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ch.xmatrix.test</artifactId>
     <name>Test Application</name>
-    <version>1.4.275</version>
+    <version>1.5-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -15,9 +15,4 @@
         <default-site>none</default-site>
         <max-heap-size>64m</max-heap-size>
     </properties>
-
-  <scm>
-    <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.test-1.4.275</developerConnection>
-    <url>http://www.xmatrix.ch/tags/ch.xmatrix.test-1.4.275</url>
-  </scm>
 </project>

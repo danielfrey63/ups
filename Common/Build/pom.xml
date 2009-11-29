@@ -33,7 +33,7 @@
         </developer>
     </developers>
     <distributionManagement>
-    	<!-- Overwrite: Make sure to overwrite that with your projects release site. -->
+        <!-- Overwrite: Make sure to overwrite that with your projects release site. -->
         <site>
             <id>default</id>
             <name>Default Site</name>
@@ -54,8 +54,9 @@
         <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos</developerConnection>
         <url>http://geobot1.ethz.ch/</url>
     </scm>
+
     <properties>
-    	<!-- Overwrite: Make sure to overwrite that with your projects main class. -->
+        <!-- Overwrite: Make sure to overwrite that with your projects main class. -->
         <main-class>ch.xmatrix.DummyMain</main-class>
         <!-- Overwrite: Make sure to overwrite that with your projects JNLP code base. -->
         <codebase>http://geobot1.ethz.ch/ups/webstart/dummy</codebase>
@@ -498,6 +499,7 @@
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
+                    <jdkLevel>1.5</jdkLevel>
                 </configuration>
             </plugin>
             <plugin>
@@ -620,11 +622,11 @@
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
-		<repository>
-			<id>java.net</id>
-			<url>http://download.java.net/maven/1</url>
-			<layout>legacy</layout>
-		</repository>
+        <repository>
+            <id>java.net</id>
+            <url>http://download.java.net/maven/1</url>
+            <layout>legacy</layout>
+        </repository>
         <repository>
             <id>sourceforge-repo</id>
             <url>http://vars.sourceforge.net/maven2</url>

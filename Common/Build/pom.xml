@@ -33,9 +33,10 @@
         </developer>
     </developers>
     <distributionManagement>
+        <!-- To deploy the website. The artefact id will be appended automatically, so need revision to distinguish. -->
         <site>
             <id>geobot1</id>
-            <url>scp://geobot1.ethz.ch/var/www/html/site/${project.artifactId}-${project.version}</url>
+            <url>scp://geobot1.ethz.ch/var/www/html/site/${project.version}</url>
         </site>
         <repository>
             <id>distribution-repository</id>

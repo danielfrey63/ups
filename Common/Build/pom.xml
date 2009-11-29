@@ -614,10 +614,6 @@
     </build>
     <repositories>
         <repository>
-            <id>local</id>
-            <url>file:Common/Build/repository</url>
-        </repository>
-        <repository>
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
@@ -635,4 +631,27 @@
             <url>http://download.java.net/maven/2</url>
         </repository>
     </repositories>
+    <profiles>
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>local</id>
+                    <url>file:Common/Build/repository</url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>single</id>
+            <repositories>
+                <repository>
+                    <id>local</id>
+                    <url>file:${project.parent.relativePath}/Common/Build/repository</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>

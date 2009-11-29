@@ -6,7 +6,7 @@
     <artifactId>ch.xmatrix.le.project</artifactId>
     <name>Learning Environment Project</name>
     <packaging>pom</packaging>
-    <version>3.5</version>
+    <version>3.6-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>

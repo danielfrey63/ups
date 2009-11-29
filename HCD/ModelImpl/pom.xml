@@ -5,7 +5,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.modelimpl</artifactId>
     <name>Learning Environment Model Implementation</name>
-    <version>3.5</version>
+    <version>3.6-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>

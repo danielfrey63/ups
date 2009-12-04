@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.common</groupId>
     <artifactId>ch.xmatrix.common.icon</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>ch.xmatrix.common.icon-1.2.288</version>
     <name>JFactory Icons</name>
     <build>
         <resources>
@@ -22,4 +22,9 @@
             </resource>
         </resources>
     </build>
+
+  <scm>
+    <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.common.icon-1.2.288</developerConnection>
+    <url>http://www.xmatrix.ch/tags/ch.xmatrix.common.icon-1.2.288</url>
+  </scm>
 </project>

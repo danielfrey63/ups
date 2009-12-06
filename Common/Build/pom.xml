@@ -541,11 +541,11 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <tagBase>http://geobot1.ethz.ch/svn/repos/tags</tagBase>
+                    <preparationGoals>clean install</preparationGoals>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
-                <!--<version>2.0-beta-5</version>-->
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>

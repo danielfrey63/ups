@@ -648,7 +648,7 @@
             <repositories>
                 <repository>
                     <id>local</id>
-                    <url>file:${project.parent.relativePath}/Common/Build/repository</url>
+                    <url>file:${project.parent.relativePath}/repository</url>
                 </repository>
             </repositories>
         </profile>

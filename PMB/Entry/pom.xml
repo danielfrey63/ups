@@ -12,7 +12,7 @@
     <artifactId>ch.xmatrix.ups.pmb.input</artifactId>
     <name>PMB Entry</name>
     <version>2.0</version>
-    <description>Tool f�r die Vorbereitung von Bilder f�r die Pr�fung.</description>
+    <description>Tool für die Vorbereitung von Bilder für die Pr�fung.</description>
     <properties>
         <main-class>ch.xmatrix.ups.pmb.input.Main</main-class>
         <codebase>http://geobot1.ethz.ch/ups/webstart/pmbe</codebase>

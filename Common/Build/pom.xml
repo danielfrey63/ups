@@ -61,8 +61,6 @@
         <codebase>http://geobot1.ethz.ch/ups/webstart/dummy</codebase>
         <!-- Overwrite: Make sure to overwrite that with your projects site link. -->
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/dummy</default-site>
-        <!-- Version for UPS Learning Environment modules. -->
-        <ch.xmatrix.le.version>3.6-SNAPSHOT</ch.xmatrix.le.version>
         <!-- Heap size used in JNLP projects. -->
         <max-heap-size>512m</max-heap-size>
     </properties>
@@ -100,11 +98,11 @@
                 <artifactId>axis</artifactId>
                 <version>1.2.1</version>
             </dependency>
-            <dependency>
-                <groupId>castor</groupId>
-                <artifactId>castor-xml</artifactId>
-                <version>0.9.3.9</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>castor</groupId>-->
+                <!--<artifactId>castor-xml</artifactId>-->
+                <!--<version>0.9.3.9</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>castor</groupId>
                 <artifactId>castor</artifactId>
@@ -129,62 +127,62 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.application</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.data</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.exam</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.gallows</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.help</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.lesson</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.maze</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.modeapi</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.model</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.modelimpl</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.news</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.project</artifactId>
-                <version>${ch.xmatrix.le.version}</version>
+                <version>3.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.data</groupId>
@@ -214,57 +212,57 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.pmb</groupId>
                 <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.pmb</groupId>
                 <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.client</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.interface</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.ldap</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.lka</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.pdf</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.storage</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.ust</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>
                 <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>
                 <artifactId>ch.xmatrix.ups.tools.uec</artifactId>
-                <version>2.0</version>
+                <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.drew</groupId>

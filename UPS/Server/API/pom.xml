@@ -9,11 +9,6 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.server</groupId>
     <artifactId>ch.xmatrix.ups.server.interface</artifactId>
-    <version>2.0.326</version>
+    <version>2.0-SNAPSHOT</version>
     <name>UPS Server 2 API</name>
-
-  <scm>
-    <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.ups.server.interface-2.0.326</developerConnection>
-    <url>http://www.xmatrix.ch/tags/ch.xmatrix.ups.server.interface-2.0.326</url>
-  </scm>
 </project>

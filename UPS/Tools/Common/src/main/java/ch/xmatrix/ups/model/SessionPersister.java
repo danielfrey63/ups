@@ -11,9 +11,13 @@
  */
 package ch.xmatrix.ups.model;
 
+import ch.jfactory.convert.Converter;
 import ch.jfactory.jgoodies.model.DirtyCapableModel;
 import ch.jfactory.model.SimpleModelList;
-import com.thoughtworks.xstream.XStream;
+import ch.jfactory.xstream.XStreamConverter;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 
 /**
  * Holds constraints.
@@ -23,16 +27,23 @@ import com.thoughtworks.xstream.XStream;
  */
 public class SessionPersister extends DirtyCapableModel
 {
-    private static XStream converter;
+    private static Converter converter;
 
-    public static XStream getConverter()
+    public static Converter getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.setMode( XStream.NO_REFERENCES );
-            converter.alias( "sessions", SimpleModelList.class );
-            converter.alias( "session", SessionModel.class );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "sessions", SimpleModelList.class );
+            aliases.put( "session", SessionModel.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            converter = new XStreamConverter( aliases, implicitCollections, omits);
         }
         return converter;
     }

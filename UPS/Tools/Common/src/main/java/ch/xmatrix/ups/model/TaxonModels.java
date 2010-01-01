@@ -15,11 +15,15 @@ import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.Note;
 import ch.jfactory.binding.SimpleNote;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.controller.Loader;
 import ch.xmatrix.ups.domain.SimpleLevel;
 import ch.xmatrix.ups.domain.SimpleTaxon;
-import com.thoughtworks.xstream.XStream;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 import javax.swing.ListModel;
 import org.apache.log4j.Logger;
 
@@ -32,6 +36,7 @@ import org.apache.log4j.Logger;
 public class TaxonModels
 {
     // Todo: Remove redundant constant in ModelUtils
+
     public static final String RESOURCE_MODEL = "/data/taxa.xml";
 
     private static final Logger LOG = Logger.getLogger( TaxonModels.class );
@@ -83,15 +88,21 @@ public class TaxonModels
         }
     }
 
-    public static XStream getConverter()
+    public static Converter getConverter()
     {
-        final XStream x = SimpleModelList.getConverter();
-        x.setMode( XStream.ID_REFERENCES );
-        x.alias( "taxonTrees", SimpleModelList.class );
-        x.alias( "taxonTree", TaxonTree.class );
-        x.alias( "taxon", SimpleTaxon.class );
-        x.alias( "level", SimpleLevel.class );
-        return x;
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "taxonTrees", SimpleModelList.class );
+        aliases.put( "taxonTree", TaxonTree.class );
+        aliases.put( "taxon", SimpleTaxon.class );
+        aliases.put( "level", SimpleLevel.class );
+
+        final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+        implicitCollections.put( SimpleModelList.class, "models" );
+
+        final Map<Class, String> omits = new HashMap<Class, String>();
+        omits.put( AbstractListModel.class, "listenerList" );
+
+        return new XStreamConverter<TaxonModels>( aliases, implicitCollections, omits );
     }
 
     /**

@@ -11,12 +11,15 @@
  */
 package ch.xmatrix.ups.model;
 
+import ch.jfactory.convert.Converter;
 import ch.jfactory.jgoodies.model.DirtyCapableModel;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
-import com.thoughtworks.xstream.XStream;
-import javax.swing.ListModel;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 
 /**
  * Holds constraints.
@@ -26,22 +29,29 @@ import javax.swing.ListModel;
  */
 public class ConstraintsPersister extends DirtyCapableModel
 {
-    private static XStream converter;
+    private static Converter<SimpleModelList> converter;
 
-    private static ListModel constraints;
-
-    public static XStream getConverter()
+    public static Converter<SimpleModelList> getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.setMode( XStream.ID_REFERENCES );
-            converter.alias( "constraintsModels", SimpleModelList.class );
-            converter.alias( "constraintsModel", Constraints.class );
-            converter.alias( "constraintModel", Constraint.class );
-            converter.aliasField( "index", Constraints.class, "indexToConstraints" );
-            converter.addImplicitCollection( Constraints.class, "constraints" );
-            converter.addImplicitCollection( Constraint.class, "taxa" );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "constraintsModels", SimpleModelList.class );
+            aliases.put( "constraintsModel", Constraints.class );
+            aliases.put( "constraintModel", Constraint.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+            implicitCollections.put( Constraints.class, "constraints" );
+            implicitCollections.put( Constraint.class, "taxa" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            final Map<String, XStreamConverter.NamedAlias> namedFields = new HashMap<String, XStreamConverter.NamedAlias>();
+            namedFields.put( "index", new XStreamConverter.NamedAlias( Constraints.class, "indexToConstraints" ) );
+
+            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, omits, namedFields );
         }
         return converter;
     }

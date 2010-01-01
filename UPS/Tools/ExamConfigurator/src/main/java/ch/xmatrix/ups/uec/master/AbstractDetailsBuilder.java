@@ -23,6 +23,7 @@ import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.SimpleNote;
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.controller.Loader;
 import ch.xmatrix.ups.domain.TaxonBased;
@@ -35,7 +36,6 @@ import com.jformdesigner.runtime.FormLoader;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.application.ApplicationConfiguration;
-import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -75,7 +75,7 @@ import org.apache.log4j.Logger;
  * <li>Call the superconstructor with factory, model resource, forms resource and default space during
  * initialization.</li>
  *
- * <li>Return a correct XStream instance for the model resource in {@link #getConverter()}. As all model collections are
+ * <li>Return a correct Converter instance for the model resource in {@link #getConverter()}. As all model collections are
  * derived from {@link ch.jfactory.model.SimpleModelList}, this class provides a base converter that may be configured
  * further for the detail models (see {@link ch.jfactory.model.SimpleModelList#getConverter() getConverter}).</li>
  *
@@ -392,7 +392,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * @return the de-/serializer
      */
-    protected abstract XStream getConverter();
+    protected abstract Converter getConverter();
 
     /**
      * Return an info string that is displayed to the user during startup.

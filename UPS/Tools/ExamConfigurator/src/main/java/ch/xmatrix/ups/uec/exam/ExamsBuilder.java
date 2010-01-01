@@ -16,16 +16,19 @@
  */
 package ch.xmatrix.ups.uec.exam;
 
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.uec.main.MainModel;
 import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
 import com.jgoodies.binding.list.SelectionInList;
-import com.thoughtworks.xstream.XStream;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -143,12 +146,19 @@ public class ExamsBuilder extends AbstractDetailsBuilder
         } );
     }
 
-    protected XStream getConverter()
+    protected Converter<SimpleModelList> getConverter()
     {
-        final XStream x = SimpleModelList.getConverter();
-        x.alias( "examModels", SimpleModelList.class );
-        x.alias( "examModel", ExamModel.class );
-        return x;
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "examModels", SimpleModelList.class );
+        aliases.put( "examModel", ExamModel.class );
+
+        final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+        implicitCollections.put( SimpleModelList.class, "models" );
+
+        final Map<Class, String> omits = new HashMap<Class, String>();
+        omits.put( AbstractListModel.class, "listenerList" );
+
+        return new XStreamConverter<SimpleModelList>( aliases, implicitCollections, omits);
     }
 
     protected String getInfoString()

@@ -1,9 +1,9 @@
 package ch.jfactory.update;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+import ch.jfactory.xstream.XStreamConverter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -46,14 +46,18 @@ public class LocalVersionLocator
         final Map<String, VersionInfo> map = new HashMap<String, VersionInfo>();
         try
         {
-            final XStream xStream = new XStream( new DomDriver() );
-            xStream.alias( "VersionInfo", VersionInfo.class );
+
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "VersionInfo", VersionInfo.class );
+            final XStreamConverter<VersionInfo> converter = new XStreamConverter<VersionInfo>( aliases );
             final Enumeration jarsEnum = Thread.currentThread().getContextClassLoader().getResources( NAME );
             while ( jarsEnum.hasMoreElements() )
             {
                 final URL url = (URL) jarsEnum.nextElement();
                 final InputStream inputStream = url.openStream();
-                final VersionInfo versionInfo = (VersionInfo) xStream.fromXML( inputStream );
+                final InputStreamReader reader = new InputStreamReader( inputStream );
+                final VersionInfo versionInfo = converter.from( reader );
+                reader.close();
                 map.put( versionInfo.getName(), versionInfo );
             }
         }

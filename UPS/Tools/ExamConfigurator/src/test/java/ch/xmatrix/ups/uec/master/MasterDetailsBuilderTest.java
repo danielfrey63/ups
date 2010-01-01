@@ -61,7 +61,7 @@ public class MasterDetailsBuilderTest extends TestCase
 
     static
     {
-        System.setProperty( Loader.ENVIRONMENT_SIMULATESAVE, "true" );
+        System.setProperty( Loader.ENVIRONMENT_SIMULATE_SAVE, "true" );
         UISpec4J.init();
         Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.Strings" ) );
     }

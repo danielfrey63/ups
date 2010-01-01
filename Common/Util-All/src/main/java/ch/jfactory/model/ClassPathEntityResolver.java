@@ -11,6 +11,7 @@
  */
 package ch.jfactory.model;
 
+import ch.jfactory.xstream.DomDriver;
 import java.io.IOException;
 import java.io.InputStream;
 import org.xml.sax.EntityResolver;

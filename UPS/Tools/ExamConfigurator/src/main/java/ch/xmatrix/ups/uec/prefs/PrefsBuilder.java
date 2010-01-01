@@ -16,11 +16,15 @@
  */
 package ch.xmatrix.ups.uec.prefs;
 
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.uec.main.MainModel;
 import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
-import com.thoughtworks.xstream.XStream;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -58,7 +62,7 @@ public class PrefsBuilder extends AbstractDetailsBuilder
 
     private JSpinner spinnerCycles;
 
-    private XStream converter;
+    private Converter converter;
 
     public PrefsBuilder()
     {
@@ -179,13 +183,21 @@ public class PrefsBuilder extends AbstractDetailsBuilder
 
     //--- AbstractDetailsBuilder implementations
 
-    protected XStream getConverter()
+    protected Converter getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.alias( "prefsModels", SimpleModelList.class );
-            converter.alias( "prefsModel", PrefsModel.class );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "prefsModels", SimpleModelList.class );
+            aliases.put( "prefsModel", PrefsModel.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            converter = new XStreamConverter( aliases, implicitCollections, omits);
         }
         return converter;
     }
@@ -198,15 +210,15 @@ public class PrefsBuilder extends AbstractDetailsBuilder
     protected void initComponents()
     {
         spinnerKnownTotalCount = getCreator().getSpinner( COMPONENT_KNOWNCOUNT );
-        spinnerKnownTotalCount.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerKnownTotalCount.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         spinnerKnownTotalWeight = getCreator().getSpinner( COMPONENT_KNOWNWEIGHT );
-        spinnerKnownTotalWeight.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerKnownTotalWeight.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         spinnerUnknownTotalCount = getCreator().getSpinner( COMPONENT_UNKNOWNCOUNT );
-        spinnerUnknownTotalCount.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerUnknownTotalCount.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         spinnerUnknownTotalWeight = getCreator().getSpinner( COMPONENT_UNKNOWNWEIGHT );
-        spinnerUnknownTotalWeight.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerUnknownTotalWeight.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         spinnerCycles = getCreator().getSpinner( COMPONENT_CYCLES );
-        spinnerCycles.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        spinnerCycles.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
     }
 
     protected String getModelId()

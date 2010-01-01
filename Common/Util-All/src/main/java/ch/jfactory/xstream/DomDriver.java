@@ -9,7 +9,7 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-package ch.jfactory.model;
+package ch.jfactory.xstream;
 
 import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;

@@ -11,10 +11,13 @@
  */
 package ch.jfactory.model;
 
-import com.thoughtworks.xstream.XStream;
+import ch.jfactory.convert.Converter;
+import ch.jfactory.xstream.XStreamConverter;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import javax.swing.AbstractListModel;
 import javax.swing.event.EventListenerList;
@@ -117,12 +120,17 @@ public class SimpleModelList<T> extends AbstractListModel implements Iterable<T>
         return result;
     }
 
-    public static XStream getConverter()
+    public static Converter getConverter()
     {
-        final XStream converter = new XStream( new DomDriver( "windows-1252", new ClassPathEntityResolver( "windows-1252" ) ) );
-        converter.omitField( AbstractListModel.class, "listenerList" );
-        converter.addImplicitCollection( SimpleModelList.class, "models" );
-        return converter;
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+
+        final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+        implicitCollections.put( SimpleModelList.class, "models" );
+
+        final Map<Class, String> omits = new HashMap<Class, String>();
+        omits.put( AbstractListModel.class, "listenerList" );
+
+        return new XStreamConverter( aliases, implicitCollections, omits);
     }
 
     public Iterator<T> iterator()

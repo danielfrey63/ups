@@ -17,6 +17,7 @@
 package ch.xmatrix.ups.ust.main.commands;
 
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.file.ExtentionFileFilter;
 import ch.jfactory.file.OpenChooser;
 import ch.jfactory.math.RandomGUID;
@@ -25,7 +26,6 @@ import ch.xmatrix.ups.domain.PlantList;
 import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.ust.main.MainModel;
 import ch.xmatrix.ups.ust.main.UserModel;
-import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import java.beans.PropertyVetoException;
 import java.beans.XMLDecoder;
@@ -39,6 +39,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+
+import static ch.xmatrix.ups.ust.main.commands.Commands.getConverterVersion1;
+import static ch.xmatrix.ups.ust.main.commands.Commands.getConverterVersion2;
 
 /**
  * TODO: document
@@ -94,22 +97,21 @@ public class OpenCommand extends ActionCommand
                 String examInfoUid = null;
                 if ( file.getName().endsWith( Commands.NEW_FILE_EXTENTION ) )
                 {
-                    final XStream[] decoders = new XStream[]{
-                            Commands.getConverterVersion1(), Commands.getConverterVersion2()};
+                    final Converter[] decoders = new Converter[]{getConverterVersion1(), getConverterVersion2()};
                     boolean done = false;
                     for ( int i = 0; i < decoders.length && !done; i++ )
                     {
                         Reader reader = null;
                         try
                         {
-                            final XStream decoder = decoders[i];
+                            final Converter decoder = decoders[i];
                             reader = new FileReader( file );
-                            final Object decoded = decoder.fromXML( reader );
+                            final Object decoded = decoder.from( reader );
                             if ( decoded instanceof Commands.Encoded )
                             {
                                 final Commands.Encoded encoded = (Commands.Encoded) decoded;
                                 uid = encoded.uid;
-                                list = (List<String>) encoded.list;
+                                list = encoded.list;
                                 if ( list == null )
                                 {
                                     reader.close();
@@ -124,15 +126,16 @@ public class OpenCommand extends ActionCommand
                                 list = plantList.getTaxa();
                                 done = true;
                             }
-                            else if ( decoded instanceof ArrayList )
+                            else if ( decoded instanceof List )
                             {
-                                list = (ArrayList<String>) decoded;
+                                list = (List<String>) decoded;
                                 done = true;
                             }
                             else
                             {
                                 throw new IllegalStateException( "Unknown format in file \"" + file + "\"" );
                             }
+                            LOG.info( "decoder found, loading successful" );
                         }
                         catch ( ConversionException e )
                         {

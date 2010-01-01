@@ -17,6 +17,7 @@
 package ch.xmatrix.ups.uec.sets.commands;
 
 import ch.jfactory.component.WaitOverlay;
+import ch.jfactory.convert.Converter;
 import ch.xmatrix.ups.domain.PlantList;
 import ch.xmatrix.ups.model.CourseModel;
 import ch.xmatrix.ups.model.Registration;
@@ -25,7 +26,6 @@ import ch.xmatrix.ups.uec.main.MainModel;
 import ch.xmatrix.ups.uec.sets.SetBuilder;
 import com.jformdesigner.runtime.FormCreator;
 import com.jformdesigner.runtime.FormLoader;
-import com.thoughtworks.xstream.XStream;
 import com.wegmueller.ups.UPSServerException;
 import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.lka.IAnmeldedaten;
@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
@@ -176,8 +177,8 @@ public class FromInternet extends ActionCommand
                     final PlantList list;
                     if ( bytes != null )
                     {
-                        final XStream converter = Commands.getConverter1();
-                        final ArrayList<String> taxa = (ArrayList<String>) converter.fromXML( new String( bytes ) );
+                        final Converter<ArrayList<String>> converter = Commands.getConverter1();
+                        final ArrayList<String> taxa = converter.from( new StringReader( new String( bytes ) ) );
                         list = new PlantList();
                         list.setTaxa( taxa );
                     }

@@ -17,13 +17,13 @@
 package ch.xmatrix.ups.uec.sets.commands;
 
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.file.OpenChooser;
 import ch.xmatrix.ups.domain.PlantList;
 import ch.xmatrix.ups.model.Registration;
 import ch.xmatrix.ups.uec.sets.SetBuilder;
 import com.jformdesigner.runtime.FormCreator;
 import com.jformdesigner.runtime.FormLoader;
-import com.thoughtworks.xstream.XStream;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.storage.beans.Anmeldedaten;
 import java.io.File;
@@ -206,8 +206,8 @@ public abstract class LoadFilesystem extends ActionCommand
         try
         {
             final String species = IOUtils.toString( new FileReader( file ) );
-            final XStream converter = Commands.getConverter2();
-            final Object converted = converter.fromXML( species );
+            final Converter converter = Commands.getConverter2();
+            final Object converted = converter.from( species );
             if ( converted instanceof Commands.Encoded )
             {
                 final Commands.Encoded encoded = (Commands.Encoded) converted;

@@ -19,8 +19,10 @@ package ch.xmatrix.ups.uec.groups;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.component.SimpleDocumentListener;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
 import ch.jfactory.resource.Strings;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.controller.TreeCheckboxController;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.domain.TaxonBased;
@@ -37,13 +39,14 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.thoughtworks.xstream.XStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JComponent;
@@ -117,7 +120,7 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
     private ActionCommand add;
 
-    private XStream converter;
+    private Converter converter;
 
     private TreeExpandedRestorer restorer;
 
@@ -440,17 +443,23 @@ public class GroupsBuilder extends AbstractDetailsBuilder
         add = getCommandManager().getCommand( Commands.COMMANDID_NEWGROUP );
     }
 
-    protected XStream getConverter()
+    protected Converter getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.setMode( XStream.ID_REFERENCES );
-            converter.alias( "groupsModels", SimpleModelList.class );
-            converter.alias( "groupsModel", GroupsModel.class );
-            converter.alias( "groupModel", GroupModel.class );
-            converter.alias( "taxon", String.class );
-            converter.addImplicitCollection( GroupsModel.class, "groups" );
+            final HashMap<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "groupsModels", SimpleModelList.class );
+            aliases.put( "groupsModel", GroupsModel.class );
+            aliases.put( "groupModel", GroupModel.class );
+            aliases.put( "taxon", String.class );
+
+            final HashMap<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+
+            final HashMap<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, omits);
         }
         return converter;
     }

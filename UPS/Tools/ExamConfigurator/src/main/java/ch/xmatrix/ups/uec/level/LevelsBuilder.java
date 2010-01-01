@@ -18,8 +18,10 @@ package ch.xmatrix.ups.uec.level;
 
 import ch.jfactory.color.ColorUtils;
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
 import ch.jfactory.resource.Strings;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.SimpleLevel;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.TaxonModels;
@@ -29,12 +31,14 @@ import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.thoughtworks.xstream.XStream;
 import java.awt.Color;
 import java.awt.Component;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javax.swing.AbstractListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -67,7 +71,7 @@ public class LevelsBuilder extends AbstractDetailsBuilder
 
     private JTable table;
 
-    private XStream converter;
+    private Converter<SimpleModelList> converter;
 
     private LevelNameTableCellRenderer levelRenderer;
 
@@ -179,15 +183,23 @@ public class LevelsBuilder extends AbstractDetailsBuilder
         Dialogs.showInfoMessage( table, "Migration", "Die Migration war ohne problemantische Fälle erfolgreich." );
     }
 
-    protected XStream getConverter()
+    protected Converter<SimpleModelList> getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.alias( "levelsModels", SimpleModelList.class );
-            converter.alias( "levelsModel", LevelsModel.class );
-            converter.alias( "levelModel", LevelModel.class );
-            converter.addImplicitCollection( LevelsModel.class, "models" );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "levelsModels", SimpleModelList.class );
+            aliases.put( "levelsModel", LevelsModel.class );
+            aliases.put( "levelModel", LevelModel.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+            implicitCollections.put( LevelsModel.class, "models" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, omits );
         }
         return converter;
     }

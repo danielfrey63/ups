@@ -21,7 +21,7 @@ import ch.jfactory.file.ExtentionFileFilter;
 import ch.jfactory.file.SaveChooser;
 import ch.jfactory.math.Combinatorial;
 import ch.jfactory.math.RandomUtils;
-import ch.jfactory.model.DomDriver;
+import ch.jfactory.xstream.DomDriver;
 import ch.jfactory.model.IdAware;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.PlantList;

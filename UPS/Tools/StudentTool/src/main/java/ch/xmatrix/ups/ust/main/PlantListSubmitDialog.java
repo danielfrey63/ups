@@ -12,6 +12,7 @@
 package ch.xmatrix.ups.ust.main;
 
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.file.ExtentionFileFilter;
 import ch.jfactory.file.SaveChooser;
 import ch.jfactory.resource.Strings;
@@ -19,7 +20,6 @@ import ch.xmatrix.ups.domain.Credentials;
 import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.ust.main.commands.Commands;
 import ch.xmatrix.ups.view.CredentialsDialog;
-import com.thoughtworks.xstream.XStream;
 import com.wegmueller.ups.UPSServerException;
 import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.webservice.UPSServerClient2;
@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.xml.rpc.ServiceException;
 import org.apache.log4j.Logger;
@@ -57,8 +58,8 @@ public class PlantListSubmitDialog extends CredentialsDialog
 
     protected void doApply() throws ComponentDialogException
     {
-        final XStream writer = Commands.getConverter();
-        final String plantlist = writer.toXML( userModel.getTaxa() );
+        final Converter<List<String>> writer = Commands.getConverter();
+        final String plantlist = writer.from( userModel.getTaxa() );
         try
         {
             final Credentials credentials = (Credentials) model.getBean();

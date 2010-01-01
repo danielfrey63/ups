@@ -18,7 +18,9 @@ package ch.xmatrix.ups.uec.specimens;
 
 import ch.jfactory.component.SimpleDocumentListener;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.SpecimenModel;
@@ -32,9 +34,11 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.thoughtworks.xstream.XStream;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -86,7 +90,7 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
 
     private JCheckBox unknownDisabled;
 
-    private XStream converter;
+    private Converter converter;
 
     private boolean enabledByMaster;
 
@@ -326,11 +330,11 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
         saver = new TreeExpandedRestorer( tree );
         id = getCreator().getTextField( "fieldId" );
         count = getCreator().getSpinner( "spinnerCount" );
-        count.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        count.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         known = getCreator().getSpinner( "spinnerKnown" );
-        known.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        known.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         unknown = getCreator().getSpinner( "spinnerUnknown" );
-        unknown.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        unknown.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         knownDisabled = getCreator().getCheckBox( "checkKnown" );
         unknownDisabled = getCreator().getCheckBox( "checkUnknown" );
         backup = getCreator().getCheckBox( "checkBackup" );
@@ -339,16 +343,22 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
         getCreator().getPanel( "panelToolbar" ).add( bar, new CellConstraints().xy( 3, 1 ) );
     }
 
-    protected XStream getConverter()
+    protected Converter getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.setMode( XStream.ID_REFERENCES );
-            converter.alias( "specimensModels", SimpleModelList.class );
-            converter.alias( "specimensModel", SpecimensModel.class );
-            converter.alias( "specimenModel", SpecimenModel.class );
-            converter.addImplicitCollection( SpecimensModel.class, "models" );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "specimensModels", SimpleModelList.class );
+            aliases.put( "specimensModel", SpecimensModel.class );
+            aliases.put( "specimenModel", SpecimenModel.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            converter = new XStreamConverter( aliases, implicitCollections, omits);
         }
         return converter;
     }

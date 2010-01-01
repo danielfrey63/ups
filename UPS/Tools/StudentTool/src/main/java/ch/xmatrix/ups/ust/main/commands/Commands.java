@@ -19,7 +19,9 @@ package ch.xmatrix.ups.ust.main.commands;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.dialog.ListDialog;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.PersonData;
 import ch.xmatrix.ups.domain.PlantList;
@@ -28,13 +30,11 @@ import ch.xmatrix.ups.ust.edit.SessionListRenderer;
 import ch.xmatrix.ups.ust.main.MainModel;
 import ch.xmatrix.ups.ust.main.UserModel;
 import com.jgoodies.binding.list.SelectionInList;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.basic.DateConverter;
-import com.thoughtworks.xstream.converters.extended.SqlTimestampConverter;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
@@ -88,33 +88,26 @@ public class Commands
 
     public static final String NEW_FILE_EXTENTION = ".xust";
 
-    public static XStream getConverterVersion1()
+    public static Converter<List<String>> getConverterVersion1()
     {
-        final XStream converter;
-        converter = new XStream( new DomDriver() );
-        converter.setMode( XStream.ID_REFERENCES );
-        converter.alias( "person", PersonData.class );
-        converter.alias( "root", PlantList.class );
-        converter.alias( "species", List.class );
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "person", PersonData.class );
+        aliases.put( "root", PlantList.class );
+        aliases.put( "species", List.class );
 
-        return converter;
+        return new XStreamConverter<List<String>>( aliases );
     }
 
-    public static XStream getConverterVersion2()
+    public static Converter<List<String>> getConverterVersion2()
     {
-        final XStream converter;
-        converter = new XStream( new DomDriver() );
-        converter.setMode( XStream.ID_REFERENCES );
-        converter.registerConverter( new SqlTimestampConverter() );
-        converter.registerConverter( new DateConverter( "yyyyMMddHHmmssSSS", new String[]{
-                "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm"} ) );
-        converter.alias( "person", PersonData.class );
-        converter.alias( "root", Encoded.class );
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "person", PersonData.class );
+        aliases.put( "root", Encoded.class );
 
-        return converter;
+        return new XStreamConverter<List<String>>( aliases );
     }
 
-    public static XStream getConverter()
+    public static Converter<List<String>> getConverter()
     {
         return getConverterVersion2();
     }
@@ -179,7 +172,7 @@ public class Commands
 
     public static class Encoded
     {
-        public List list;
+        public List<String> list;
 
         public String uid;
 

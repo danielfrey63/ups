@@ -16,8 +16,8 @@
  */
 package ch.xmatrix.ups.ust.main.commands;
 
+import ch.jfactory.convert.Converter;
 import ch.xmatrix.ups.ust.main.MainModel;
-import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -58,8 +58,9 @@ public class SaveCommand extends ActionCommand
                 encoded.exam = model.getUserModel().getExamInfoUid();
                 final File file = model.getCurrentFile();
                 final FileWriter out = new FileWriter( file );
-                final XStream encoder = Commands.getConverter();
-                encoder.toXML( encoded, out );
+                final Converter encoder = Commands.getConverter();
+                final String xml = encoder.from( encoded );
+                out.write( xml );
                 out.close();
                 model.setDirty( false );
             }

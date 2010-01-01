@@ -18,9 +18,11 @@ package ch.xmatrix.ups.uec.constraints;
 
 import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.lang.LogicUtils;
 import ch.jfactory.lang.ToStringComparator;
 import ch.jfactory.model.SimpleModelList;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.controller.TreeCheckboxController;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
@@ -42,14 +44,16 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.thoughtworks.xstream.XStream;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import javax.swing.AbstractListModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -134,7 +138,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
 
     private TreeExpandedRestorer restorer;
 
-    private XStream converter;
+    private Converter<SimpleModelList> converter;
 
     private boolean enabledByMaster;
 
@@ -515,7 +519,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
         remove.setList( taxa );
         name = getCreator().getTextField( COMPONENT_FIELD_NAME );
         count = getCreator().getSpinner( COMPONENT_SPINNER_COUNT );
-        count.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        count.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
 
         tree = getCreator().getTree( COMPONENT_TREE_TAXA );
         registerTree( tree );
@@ -525,18 +529,27 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
         restorer = new TreeExpandedRestorer( tree );
     }
 
-    protected XStream getConverter()
+    protected Converter<SimpleModelList> getConverter()
     {
         if ( converter == null )
         {
-            converter = SimpleModelList.getConverter();
-            converter.setMode( XStream.ID_REFERENCES );
-            converter.alias( "constraintsModels", SimpleModelList.class );
-            converter.alias( "constraintsModel", Constraints.class );
-            converter.alias( "constraintModel", Constraint.class );
-            converter.aliasField( "index", Constraints.class, "indexToConstraints" );
-            converter.addImplicitCollection( Constraints.class, "constraints" );
-            converter.addImplicitCollection( Constraint.class, "taxa" );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "constraintsModels", SimpleModelList.class );
+            aliases.put( "constraintsModel", Constraints.class );
+            aliases.put( "constraintModel", Constraint.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( SimpleModelList.class, "models" );
+            implicitCollections.put( Constraints.class, "constraints" );
+            implicitCollections.put( Constraint.class, "taxa" );
+
+            final Map<Class, String> omits = new HashMap<Class, String>();
+            omits.put( AbstractListModel.class, "listenerList" );
+
+            final Map<String, XStreamConverter.NamedAlias> namedAliases = new HashMap<String, XStreamConverter.NamedAlias>();
+            namedAliases.put( "index", new XStreamConverter.NamedAlias( Constraints.class, "indexToConstraints" ) );
+
+            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, new HashMap<Class, String>(), namedAliases);
         }
         return converter;
     }

@@ -16,11 +16,14 @@
  */
 package ch.xmatrix.ups.uec.sets.commands;
 
+import ch.jfactory.convert.Converter;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.domain.PersonData;
 import ch.xmatrix.ups.domain.PlantList;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Action command ids.
@@ -54,24 +57,22 @@ public class Commands
 
     public static final String FACENAME_TOOLBAR = "toolbar";
 
-    public static XStream getConverter1()
+    public static Converter<ArrayList<String>> getConverter1()
     {
-        final XStream converter;
-        converter = new XStream( new DomDriver() );
-        converter.setMode( XStream.ID_REFERENCES );
-        converter.alias( "person", PersonData.class );
-        converter.alias( "root", PlantList.class );
-        converter.alias( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
-        return converter;
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "person", PersonData.class );
+        aliases.put( "root", PlantList.class );
+        aliases.put( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
+        return new XStreamConverter<ArrayList<String>>( aliases );
     }
 
-    public static XStream getConverter2()
+    public static Converter<Encoded> getConverter2()
     {
-        final XStream converter;
-        converter = new XStream( new DomDriver() );
-        converter.setMode( XStream.ID_REFERENCES );
-        converter.alias( "root", Encoded.class );
-        return converter;
+        final Map<String, Class> aliases = new HashMap<String, Class>();
+        aliases.put( "person", PersonData.class );
+        aliases.put( "root", Encoded.class );
+        aliases.put( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
+        return new XStreamConverter<Encoded>( aliases );
     }
 
     public static class Encoded

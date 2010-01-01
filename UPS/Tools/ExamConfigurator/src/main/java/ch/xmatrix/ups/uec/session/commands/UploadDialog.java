@@ -19,6 +19,7 @@ package ch.xmatrix.ups.uec.session.commands;
 import ch.ethz.ssh2.ServerHostKeyVerifier;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.component.WaitOverlay;
+import ch.jfactory.convert.Converter;
 import ch.jfactory.ganymed.DummyServerHostKeyVerifier;
 import ch.jfactory.ganymed.Ssh2Helper;
 import ch.jfactory.jar.JarHelper;
@@ -31,7 +32,6 @@ import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.application.ApplicationConfiguration;
-import com.thoughtworks.xstream.XStream;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
@@ -405,7 +405,7 @@ public class UploadDialog extends Upload
         }
 
         private void createAndUploadJar( final Collection<?> list, final String jarFileName, final String toPackFileName,
-                                         final XStream converter ) throws Exception
+                                         final Converter converter ) throws Exception
         {
             File dir = null;
             try
@@ -437,15 +437,16 @@ public class UploadDialog extends Upload
         }
 
         private File writeTempFile( final SimpleModelList<?> selected, final String filename,
-                                    final XStream converter, final String subdirectory ) throws IOException
+                                    final Converter converter, final String subDirectory ) throws IOException
         {
             final File dir = File.createTempFile( "uec", "" );
             dir.delete();
-            final File subdir = new File( dir, subdirectory );
+            final File subdir = new File( dir, subDirectory );
             subdir.mkdirs();
             final File file = new File( subdir, filename );
             final FileWriter writer = new FileWriter( file );
-            converter.toXML( selected, writer );
+            final String xml = converter.from( selected );
+            writer.write( xml );
             writer.close();
             return dir;
         }

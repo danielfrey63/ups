@@ -19,6 +19,7 @@ package ch.xmatrix.ups.uec.session;
 import ch.jfactory.application.AbstractMainModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.SimpleNote;
+import ch.jfactory.convert.Converter;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.SessionModel;
@@ -30,7 +31,6 @@ import ch.xmatrix.ups.uec.session.commands.UploadCommand;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.value.ValueHolder;
 import com.jgoodies.forms.layout.CellConstraints;
-import com.thoughtworks.xstream.XStream;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -238,7 +238,7 @@ public class SessionBuilder extends AbstractDetailsBuilder
         }
     }
 
-    protected XStream getConverter()
+    protected Converter getConverter()
     {
         return SessionPersister.getConverter();
     }

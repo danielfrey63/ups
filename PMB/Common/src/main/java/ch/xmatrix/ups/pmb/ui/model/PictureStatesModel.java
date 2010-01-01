@@ -16,12 +16,13 @@
  */
 package ch.xmatrix.ups.pmb.ui.model;
 
-import ch.jfactory.model.DomDriver;
+import ch.jfactory.convert.Converter;
+import ch.jfactory.xstream.XStreamConverter;
 import ch.xmatrix.ups.controller.Loader;
-import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javax.swing.AbstractListModel;
+import java.util.Map;
 
 /**
  * TODO: document
@@ -35,7 +36,7 @@ public class PictureStatesModel
 
     private static final String MODEL_PATH = "ups/pmb";
 
-    private transient XStream converter;
+    private transient Converter<List> converter;
 
     private final List<PictureStateModel> models = new ArrayList<PictureStateModel>();
 
@@ -71,15 +72,18 @@ public class PictureStatesModel
         }
     }
 
-    public XStream getConverter()
+    public Converter<List> getConverter()
     {
         if ( converter == null )
         {
-            converter = new XStream( new DomDriver() );
-            converter.omitField( AbstractListModel.class, "listenerList" );
-            converter.alias( "pictureStates", List.class );
-            converter.alias( "pictureState", PictureStateModel.class );
-            converter.addImplicitCollection( PictureStatesModel.class, "models" );
+            final Map<String, Class> aliases = new HashMap<String, Class>();
+            aliases.put( "pictureStates", List.class );
+            aliases.put( "pictureState", PictureStateModel.class );
+
+            final Map<Class, String> implicitCollections = new HashMap<Class, String>();
+            implicitCollections.put( PictureStatesModel.class, "models" );
+
+            return new XStreamConverter<List>( aliases, implicitCollections );
         }
         return converter;
     }

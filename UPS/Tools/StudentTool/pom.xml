@@ -28,6 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
+            <version>2.0.339</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
@@ -40,6 +41,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
+            <version>2.0.335</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>

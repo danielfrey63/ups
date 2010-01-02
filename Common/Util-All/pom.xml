@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.common</groupId>
     <artifactId>ch.xmatrix.common.utils-all</artifactId>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3.393</version>
     <name>JFactory Components</name>
     <description>JFactory Common Components</description>
     <inceptionYear>2006</inceptionYear>
@@ -112,4 +112,9 @@
             <artifactId>uispec4j</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.common.utils-all-2.3.393</developerConnection>
+    <url>http://www.xmatrix.ch/tags/ch.xmatrix.common.utils-all-2.3.393</url>
+  </scm>
 </project>

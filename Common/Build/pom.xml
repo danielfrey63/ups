@@ -611,6 +611,10 @@
     </build>
     <repositories>
         <repository>
+            <id>geobot</id>
+            <url>http://geobot1.ethz.ch/releases</url>
+        </repository>
+        <repository>
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>

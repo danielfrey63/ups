@@ -5,7 +5,7 @@
     <groupId>com.smardec</groupId>
     <artifactId>com.smardec.mousegestures</artifactId>
     <name>Mouse Gestures Library</name>
-    <version>1.2</version>
+    <version>1.2-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>

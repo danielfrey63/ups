@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.server</groupId>
     <artifactId>ch.xmatrix.ups.server.client</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0.385</version>
     <name>UPS Server 2 Client</name>
     <dependencies>
         <dependency>
@@ -30,4 +30,9 @@
             <artifactId>axis</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/ch.xmatrix.ups.server.client-2.0.385</developerConnection>
+    <url>http://www.xmatrix.ch/tags/ch.xmatrix.ups.server.client-2.0.385</url>
+  </scm>
 </project>

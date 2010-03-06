@@ -22,7 +22,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
- * Constructs new <code>JTree</code>s with a {@link ch.jfactory.model.graph.tree.VirtualGraphTreeNodeModel}.
+ * Constructs new <code>JTree</code>s with a {@link VirtualGraphTreeNodeModel}.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $

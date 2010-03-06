@@ -4,7 +4,8 @@ import ch.jfactory.component.list.DefaultJList;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import javax.swing.ListSelectionModel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * list box, to select multiple levels.
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class LevelSelectionList extends DefaultJList
 {
-    private static final Logger LOG = Logger.getLogger( LevelSelectionList.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LevelSelectionList.class );
 
     public LevelSelectionList()
     {

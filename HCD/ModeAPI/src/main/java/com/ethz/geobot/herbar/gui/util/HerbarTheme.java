@@ -14,6 +14,8 @@ import ch.jfactory.resource.Strings;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Enumeration;
 import javax.swing.BorderFactory;
 import javax.swing.UIManager;
@@ -275,7 +277,7 @@ public class HerbarTheme extends DefaultMetalTheme
          */
         protected Font getPrivilegedFont( final int key )
         {
-            return (Font) java.security.AccessController.doPrivileged( new java.security.PrivilegedAction()
+            return (Font) AccessController.doPrivileged( new PrivilegedAction()
             {
                 public Object run()
                 {

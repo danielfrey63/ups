@@ -35,7 +35,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -53,7 +52,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * WizardPane to display Order selection
@@ -63,7 +63,7 @@ import org.apache.log4j.Logger;
  */
 public class WizardFilterDefinitionPane extends WizardPane
 {
-    private static final Logger LOG = Logger.getLogger( WizardFilterDefinitionPane.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WizardFilterDefinitionPane.class );
 
     /**
      * name of the pane

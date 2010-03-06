@@ -2,6 +2,7 @@ package com.ethz.geobot.herbar.modeapi.wizard.filter;
 
 import ch.jfactory.application.view.dialog.ListDialog;
 import ch.jfactory.component.EditItem;
+import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
@@ -84,9 +85,9 @@ public class WizardFilterBasePane extends WizardPane
                 }
                 final JDialog parent = (JDialog) WizardFilterBasePane.this.getTopLevelAncestor();
                 Object[] listContent = getWizardModel().getHerbarContext().getModels().toArray();
-                listContent = ch.jfactory.lang.ArrayUtils.remove( listContent, base.getUserObject(), new Object[0] );
+                listContent = ArrayUtils.remove( listContent, base.getUserObject(), new Object[0] );
                 final Object currentModel = getProperty( FilterWizardModel.FILTER_MODEL );
-                listContent = ch.jfactory.lang.ArrayUtils.remove( listContent, currentModel, new Object[0] );
+                listContent = ArrayUtils.remove( listContent, currentModel, new Object[0] );
                 Arrays.sort( listContent, new ToStringComparator() );
                 final ListDialog dialog = new ListDialog( parent, "DIALOG.BASELISTS", listContent );
                 dialog.setSize( 300, 300 );

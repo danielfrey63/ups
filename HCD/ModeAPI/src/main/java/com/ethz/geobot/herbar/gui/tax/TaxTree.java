@@ -17,7 +17,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple JTree that takes a TreeNode and uses a DefaultTreeModel with a Taxon specific CellRenderer. This tree allows
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public class TaxTree extends SearchableTree implements ModelChangeListener
 {
-    private final static Logger LOG = Logger.getLogger( TaxTree.class );
+    private final static Logger LOG = LoggerFactory.getLogger( TaxTree.class );
 
     private final static TreeNode EMPTY_TREE = new DefaultMutableTreeNode();
 

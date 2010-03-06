@@ -15,7 +15,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.prefs.Preferences;
 import javax.swing.Action;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base functionallity for WizardModel. Mainly the beans related parts.
@@ -28,7 +29,7 @@ abstract public class AbstractWizardModel implements WizardModel
     /**
      * logger instance
      */
-    private static final Logger LOG = Logger.getLogger( AbstractWizardModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractWizardModel.class );
 
     protected PropertyChangeSupport propertySupport;
 

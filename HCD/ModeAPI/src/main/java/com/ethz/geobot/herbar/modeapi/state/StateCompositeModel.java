@@ -71,5 +71,5 @@ abstract public class StateCompositeModel implements StateModel
      */
     public abstract Preferences storeCompositeState( Preferences node );
 
-    private final Vector subStateModelVector = new java.util.Vector();
+    private final Vector subStateModelVector = new Vector();
 }

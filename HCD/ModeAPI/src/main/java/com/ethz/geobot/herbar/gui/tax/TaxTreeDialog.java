@@ -23,7 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Dialog to display a tree of the taxonomie and a search field. After disposing the dialog, the actual value may be
@@ -34,7 +35,7 @@ import org.apache.log4j.Logger;
  */
 public class TaxTreeDialog extends I15nComponentDialog implements TreeSelectionListener
 {
-    protected final static Logger LOG = Logger.getLogger( TaxTreeDialog.class );
+    protected final static Logger LOG = LoggerFactory.getLogger( TaxTreeDialog.class );
 
     private TaxTree taxTree;
 

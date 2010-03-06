@@ -26,7 +26,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.swing.AbstractListModel;
@@ -39,7 +38,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * WizardPane to display Filter selection
@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
  */
 public class WizardFilterPane extends WizardPane
 {
-    private static final Logger LOG = Logger.getLogger( WizardFilterPane.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WizardFilterPane.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

@@ -1,12 +1,13 @@
 package com.ethz.geobot.herbar.game.util;
 
 import java.applet.AudioClip;
+import java.util.Hashtable;
 import javax.swing.JApplet;
 
 /**
  * Loads and holds a bunch of audio files whose locations are specified relative to a fixed base URL.
  */
-public class SoundList extends java.util.Hashtable
+public class SoundList extends Hashtable
 {
     JApplet applet;
 

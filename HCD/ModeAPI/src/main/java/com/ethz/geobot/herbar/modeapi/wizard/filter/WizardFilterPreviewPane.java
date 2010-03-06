@@ -11,7 +11,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * WizardPane to display Order selection
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class WizardFilterPreviewPane extends WizardPane
 {
-    private static final Logger LOG = Logger.getLogger( WizardFilterPreviewPane.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WizardFilterPreviewPane.class );
 
     /**
      * name of the pane

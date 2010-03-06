@@ -22,7 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class represents the UI for the wizard. It use the WizardModel to get information about the panes and data.
@@ -35,7 +36,7 @@ class WizardDialogUI extends JDialog implements WizardStateListener
     /**
      * logging category for class
      */
-    private static final Logger LOG = Logger.getLogger( WizardDialogUI.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WizardDialogUI.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

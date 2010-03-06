@@ -30,7 +30,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This control is used to display the Pictures of the different Picture-Themes.
@@ -40,7 +41,7 @@ import org.apache.log4j.Logger;
  */
 public class PicturePanel extends JPanel
 {
-    private final static Logger LOG = Logger.getLogger( PicturePanel.class );
+    private final static Logger LOG = LoggerFactory.getLogger( PicturePanel.class );
 
     private PictureDetailTab pictureTab;
 

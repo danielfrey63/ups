@@ -16,7 +16,9 @@ import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import org.apache.log4j.Logger;
+import javax.swing.tree.TreeCellRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -24,10 +26,10 @@ import org.apache.log4j.Logger;
  */
 public class TaxTreeCellRenderer extends DefaultTreeCellRenderer
 {
-    private static final Logger LOG = Logger.getLogger( TaxTreeCellRenderer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TaxTreeCellRenderer.class );
 
     /**
-     * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(JTree,Object,boolean,boolean,boolean,
+     * @see TreeCellRenderer#getTreeCellRendererComponent(JTree,Object,boolean,boolean,boolean,
      *      int,boolean)
      */
     public Component getTreeCellRendererComponent( final JTree jt, final Object objValue, final boolean bSelected, final boolean bExpanded,
@@ -48,7 +50,7 @@ public class TaxTreeCellRenderer extends DefaultTreeCellRenderer
         }
         else
         {
-            LOG.fatal( "Node " + objValue.getClass().getName() + " not of expected type TaxonTreeNode" );
+            LOG.error( "Node " + objValue.getClass().getName() + " not of expected type TaxonTreeNode" );
         }
         setBackgroundNonSelectionColor( jt.getBackground() );
         revalidate();

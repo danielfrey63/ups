@@ -7,7 +7,8 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Iterator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class PictureModel
 {
-    private static final Logger LOG = Logger.getLogger( PictureModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PictureModel.class );
 
     private final PictureTheme[] themes;
 

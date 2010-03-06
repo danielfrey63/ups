@@ -10,11 +10,13 @@ package com.ethz.geobot.herbar.gui.tax;
 
 import com.ethz.geobot.herbar.model.MorValue;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.relevance.AbsRelevance;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Holds the actual morphological values to display.
@@ -90,8 +92,8 @@ public class MorphologyListModel extends DefaultListModel
      * Position       1    2    3    4 Rank           0    1    2    3 Bitset         0    1    1    0 MorValue of bit 1
      * 2    4    8 </code> You therefore set the bitset to 6.
      *
-     * @see com.ethz.geobot.herbar.gui.tax.RelevanceFilter#setFilter(int)
-     * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance
+     * @see RelevanceFilter#setFilter(int)
+     * @see AbsRelevance
      */
     public void setFilter( final int bitset )
     {
@@ -139,7 +141,7 @@ public class MorphologyListModel extends DefaultListModel
 
     static
     {
-        LOG = Logger.getLogger( com.ethz.geobot.herbar.gui.tax.MorphologyListModel.class );
+        LOG = LoggerFactory.getLogger( MorphologyListModel.class );
     }
 }
 // $Log: MorphologyListModel.java,v $

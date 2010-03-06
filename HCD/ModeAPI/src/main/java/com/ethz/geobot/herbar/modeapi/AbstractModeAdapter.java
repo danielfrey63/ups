@@ -5,7 +5,8 @@ import java.awt.Component;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a Mode Adapter to translate an existing Component based form into a mode class. When extending this
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class AbstractModeAdapter extends AbstractMode
 {
-    private static final Logger LOG = Logger.getLogger( AbstractModeAdapter.class.getName() );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractModeAdapter.class.getName() );
 
     private final Class componentClass;
 

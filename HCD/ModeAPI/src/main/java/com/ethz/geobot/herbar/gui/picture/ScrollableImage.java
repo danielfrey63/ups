@@ -18,7 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This control is used to display a scrollable Image
@@ -31,7 +32,7 @@ public class ScrollableImage extends JLabel implements Scrollable
     /**
      * category for logging
      */
-    private final static Logger LOG = Logger.getLogger( ScrollableImage.class );
+    private final static Logger LOG = LoggerFactory.getLogger( ScrollableImage.class );
 
     /**
      * currently shown image

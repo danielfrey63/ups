@@ -20,9 +20,9 @@ import com.ethz.geobot.herbar.model.MorValue;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.Component;
 import java.util.HashMap;
-import java.util.Iterator;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreeCellRenderer;
 
 /**
  * @author $Author: daniel_frey $
@@ -51,7 +51,7 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
     }
 
     /**
-     * @see javax.swing.tree.TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean,
+     * @see TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean,
      *      int, boolean)
      */
     public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected, final boolean expanded,

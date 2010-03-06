@@ -5,12 +5,12 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.prefs.Preferences;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a default implementation for the WizardModel interface.
@@ -23,7 +23,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     /**
      * Category for logging.
      */
-    private static final Logger LOG = Logger.getLogger( DefaultWizardModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DefaultWizardModel.class );
 
     /**
      * Index of the current pane.

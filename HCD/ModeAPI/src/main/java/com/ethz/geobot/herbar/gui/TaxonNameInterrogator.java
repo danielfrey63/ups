@@ -27,7 +27,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +35,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays a text field and an enter button to put guesses of the focused species name. The guesses are appended to the
@@ -47,7 +47,7 @@ import org.apache.log4j.Logger;
  */
 public class TaxonNameInterrogator extends JPanel
 {
-    private static final Logger LOG = Logger.getLogger( TaxonNameInterrogator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TaxonNameInterrogator.class );
 
     private static final ImageIcon ICON_CORRECT;
 

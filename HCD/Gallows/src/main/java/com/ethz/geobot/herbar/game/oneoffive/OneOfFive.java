@@ -30,7 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * mainclass of oneoffive-game.
@@ -108,7 +109,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         catch ( RuntimeException e )
         {
             e.printStackTrace();
-            LOG.fatal( "OneOfFive(...)", e );
+            LOG.error( "OneOfFive(...)", e );
             throw e;
         }
         catch ( Error e )
@@ -131,7 +132,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.ScoreListener#scoreChanged()
+     * @see ScoreListener#scoreChanged()
      */
     public void scoreChanged()
     {
@@ -152,7 +153,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#deactivate()
+     * @see ModeActivation#deactivate()
      */
     public void deactivate()
     {
@@ -163,7 +164,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#activate()
+     * @see ModeActivation#activate()
      */
     public void activate()
     {
@@ -176,7 +177,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#queryDeactivate()
+     * @see ModeActivation#queryDeactivate()
      */
     public boolean queryDeactivate()
     {
@@ -209,6 +210,6 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         LogUtils.init();
         Strings.addResourceBundle( OneOfFive.class,
                 ResourceBundle.getBundle( "com.ethz.geobot.herbar.game.oneoffive.OneOfFive" ) );
-        LOG = Logger.getLogger( OneOfFive.class );
+        LOG = LoggerFactory.getLogger( OneOfFive.class );
     }
 }

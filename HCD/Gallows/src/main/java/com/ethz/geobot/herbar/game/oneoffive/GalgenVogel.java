@@ -68,7 +68,7 @@ public class GalgenVogel extends GalgenPolygon
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.oneoffive.GalgenPolygon#paint(Graphics)
+     * @see GalgenPolygon#paint(Graphics)
      */
     public void paint( final Graphics g )
     {
@@ -94,7 +94,7 @@ public class GalgenVogel extends GalgenPolygon
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.oneoffive.GalgenPolygon#update(Graphics)
+     * @see GalgenPolygon#update(Graphics)
      */
     public void update( final Graphics g )
     {

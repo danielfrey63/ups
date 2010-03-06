@@ -18,7 +18,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * mainclass of oneoffive-game.
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public class OneOfFiveQuestionModel
 {
-    private static final Logger LOG = Logger.getLogger( OneOfFiveQuestionModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OneOfFiveQuestionModel.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

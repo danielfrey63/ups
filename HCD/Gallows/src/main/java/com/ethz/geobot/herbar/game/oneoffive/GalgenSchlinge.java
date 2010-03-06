@@ -40,7 +40,7 @@ public class GalgenSchlinge extends GalgenPolygon
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.oneoffive.GalgenPolygon#paint(Graphics)
+     * @see GalgenPolygon#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

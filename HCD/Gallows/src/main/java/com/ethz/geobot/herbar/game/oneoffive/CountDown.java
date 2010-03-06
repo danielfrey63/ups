@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.game.oneoffive;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 
 /**
@@ -59,7 +60,7 @@ public class CountDown extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

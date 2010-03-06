@@ -23,7 +23,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * mainclass of oneoffive-game.
@@ -33,7 +34,7 @@ import org.apache.log4j.Logger;
  */
 public class OneOfFiveQuestionPanel extends JPanel implements Question
 {
-    private static final Logger LOG = Logger.getLogger( OneOfFiveQuestionPanel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OneOfFiveQuestionPanel.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -103,14 +104,14 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#firstQuestion()
+     * @see Question#firstQuestion()
      */
     public void firstQuestion()
     {
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#lastQuestion()
+     * @see Question#lastQuestion()
      */
     public void lastQuestion()
     {

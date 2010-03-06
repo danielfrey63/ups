@@ -9,11 +9,11 @@ import java.util.GregorianCalendar;
  */
 public class PruefungsSession implements IPruefungsSession
 {
-    private java.lang.String sessionsname;
+    private String sessionsname;
 
     private Calendar sessionsende;
 
-    private java.lang.String seskez;
+    private String seskez;
 
     private Calendar planungFreigabe;
 

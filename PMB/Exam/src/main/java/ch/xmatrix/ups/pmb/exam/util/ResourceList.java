@@ -14,7 +14,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * list resources available from the classpath
@@ -26,7 +27,7 @@ public class ResourceList
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( ResourceList.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ResourceList.class );
 
     private static final String PATH_SEPARATOR = System.getProperty( "path.separator" );
 

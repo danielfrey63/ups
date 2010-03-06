@@ -24,9 +24,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Closes the current card, opens the welcome card, resets the dirty flag and the current file.
@@ -39,7 +40,7 @@ public class ExportCommand extends ActionCommand
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( ExportCommand.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExportCommand.class );
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat( "yyyyMMddHHmmss" );
 
@@ -64,7 +65,7 @@ public class ExportCommand extends ActionCommand
         }
         catch ( IOException e )
         {
-            LOG.error( e );
+            LOG.error( e.getMessage(), e );
         }
     }
 }

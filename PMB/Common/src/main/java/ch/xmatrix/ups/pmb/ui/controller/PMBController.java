@@ -29,8 +29,6 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import static java.lang.Math.min;
-import static java.lang.Math.round;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +40,11 @@ import javax.swing.tree.TreePath;
 import net.java.jveez.ui.viewer.ViewerPanel;
 import net.java.jveez.ui.viewer.anim.AnimationState;
 import net.java.jveez.vfs.Picture;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static java.lang.Math.min;
+import static java.lang.Math.round;
 
 /**
  * TODO: document
@@ -52,7 +54,7 @@ import org.apache.log4j.Logger;
  */
 public class PMBController
 {
-    private static final Logger LOG = Logger.getLogger( PMBController.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PMBController.class );
 
     private final PMBModel model;
 

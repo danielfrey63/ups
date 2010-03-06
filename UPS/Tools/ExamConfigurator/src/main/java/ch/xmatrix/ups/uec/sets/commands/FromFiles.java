@@ -23,8 +23,9 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
-import org.apache.log4j.Logger;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loads the registrations and exam-lists from the UPS server.
@@ -34,7 +35,7 @@ import org.pietschy.command.CommandManager;
  */
 public class FromFiles extends LoadFilesystem
 {
-    private static final Logger LOG = Logger.getLogger( FromFiles.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FromFiles.class );
 
     public FromFiles( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {

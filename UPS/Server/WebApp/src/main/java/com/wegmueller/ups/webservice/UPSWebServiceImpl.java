@@ -14,14 +14,15 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Implementation of the Webservice
  */
 public class UPSWebServiceImpl implements IUPSWebService
 {
-    private static final Logger LOG = Logger.getLogger( UPSWebServiceImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UPSWebServiceImpl.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -51,7 +52,7 @@ public class UPSWebServiceImpl implements IUPSWebService
             final ILDAPUserRecord list = service.getLDAP().getUserData( userName, password );
             if ( INFO )
             {
-                LOG.info( list );
+                LOG.info( list.toString() );
             }
             final byte[] pdf = service.getUST().producePDF( userName, password, list, bytes );
             if ( INFO )

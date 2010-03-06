@@ -30,7 +30,7 @@ import javax.swing.JPanel;
  */
 public class PersonPanel extends JPanel
 {
-    private ch.xmatrix.ups.domain.PersonData personData;
+    private PersonData personData;
 
     private final Object[][] fieldData = {
             {"Vorname:", new JLabel()},

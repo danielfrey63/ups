@@ -3,6 +3,8 @@ package com.wegmueller.ups.ldap.util;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -27,16 +29,16 @@ public class CustomSocketFactory extends SocketFactory
         final TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager()
                 {
-                    public java.security.cert.X509Certificate[] getAcceptedIssuers()
+                    public X509Certificate[] getAcceptedIssuers()
                     {
                         return null;
                     }
 
-                    public void checkClientTrusted( final java.security.cert.X509Certificate[] certs, final String authType )
+                    public void checkClientTrusted( final X509Certificate[] certs, final String authType )
                     {
                     }
 
-                    public void checkServerTrusted( final java.security.cert.X509Certificate[] certs, final String authType )
+                    public void checkServerTrusted( final X509Certificate[] certs, final String authType )
                     {
                     }
                 }
@@ -46,7 +48,7 @@ public class CustomSocketFactory extends SocketFactory
         try
         {
             sc = SSLContext.getInstance( "SSL" );
-            sc.init( null, trustAllCerts, new java.security.SecureRandom() );
+            sc.init( null, trustAllCerts, new SecureRandom() );
             //LdapCtxFactory..setDefaultSSLSocketFactory(sc.getSocketFactory());
         }
         catch ( Exception e )

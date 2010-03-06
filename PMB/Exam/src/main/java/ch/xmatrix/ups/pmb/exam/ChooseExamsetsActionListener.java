@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles the user selection and load of a exam sets file.
@@ -18,7 +19,7 @@ public class ChooseExamsetsActionListener implements ActionListener
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( ChooseExamsetsActionListener.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ChooseExamsetsActionListener.class );
 
     /**
      * The text field model to update.

@@ -35,9 +35,10 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JTextField;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -49,7 +50,7 @@ public abstract class LoadFilesystem extends ActionCommand
 {
     protected static final String EXTENTION = ".xust";
 
-    private static final Logger LOG = Logger.getLogger( FromDirectory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FromDirectory.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -175,7 +176,7 @@ public abstract class LoadFilesystem extends ActionCommand
                     final String s = iterator.next();
                     b.append( s ).append( "=" ).append( result.get( s ) );
                 }
-                LOG.debug( b );
+                LOG.debug( b.toString() );
             }
         }
         catch ( Exception e )

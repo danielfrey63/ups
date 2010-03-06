@@ -3,48 +3,49 @@ package com.wegmueller.ups.lka.data;
 import SoapLKAData.WsAnmeldedaten;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.util.Calendar;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by: Thomas Wegmueller Date: 20.09.2005,  12:45:45
  */
 public class LKAAnmeldedaten implements IAnmeldedaten
 {
-    private static final Logger LOG = Logger.getLogger( LKAAnmeldedaten.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LKAAnmeldedaten.class );
 
-    private java.lang.String lkNummer;
+    private String lkNummer;
 
     private int lkForm;
 
-    private java.lang.String lkFormText;
+    private String lkFormText;
 
-    private java.lang.String pruefungsmodeText;
+    private String pruefungsmodeText;
 
-    private java.lang.String fachrichtung;
+    private String fachrichtung;
 
-    private java.lang.String studentennummer;
+    private String studentennummer;
 
-    private java.lang.String vorname;
+    private String vorname;
 
     private boolean repetent;
 
-    private java.lang.String lkEinheitTitel;
+    private String lkEinheitTitel;
 
-    private java.lang.String lkEinheitTyp;
+    private String lkEinheitTyp;
 
-    private java.lang.String pruefungsraum;
+    private String pruefungsraum;
 
-    private java.lang.String lkEinheitNummerzusatz;
+    private String lkEinheitNummerzusatz;
 
-    private java.lang.String nachname;
+    private String nachname;
 
-    private java.lang.String studiengang;
+    private String studiengang;
 
-    private java.lang.String email;
+    private String email;
 
-    private java.lang.String seskez;
+    private String seskez;
 
-    private java.lang.String lkEinheitTypText;
+    private String lkEinheitTypText;
 
     private Calendar pruefungsdatum;
 

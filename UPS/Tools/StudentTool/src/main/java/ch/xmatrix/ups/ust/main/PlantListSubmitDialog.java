@@ -32,7 +32,8 @@ import java.text.MessageFormat;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.xml.rpc.ServiceException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Dialog that asks for credentials and submits the plantlist to the UPS Server. As a result of a successful submission
@@ -43,7 +44,7 @@ import org.apache.log4j.Logger;
  */
 public class PlantListSubmitDialog extends CredentialsDialog
 {
-    private static final Logger LOG = Logger.getLogger( CredentialsDialog.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CredentialsDialog.class );
 
     private final UserModel userModel;
 

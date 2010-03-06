@@ -7,11 +7,15 @@
 
 package com.wegmueller.ups.webservice.impl;
 
-public interface UPSWebService2Service extends javax.xml.rpc.Service
+import java.net.URL;
+import javax.xml.rpc.Service;
+import javax.xml.rpc.ServiceException;
+
+public interface UPSWebService2Service extends Service
 {
-    public java.lang.String getUPSWebService2Address();
+    public String getUPSWebService2Address();
 
-    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2() throws javax.xml.rpc.ServiceException;
+    public UPSWebService2 getUPSWebService2() throws ServiceException;
 
-    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2( java.net.URL portAddress ) throws javax.xml.rpc.ServiceException;
+    public UPSWebService2 getUPSWebService2( URL portAddress ) throws ServiceException;
 }

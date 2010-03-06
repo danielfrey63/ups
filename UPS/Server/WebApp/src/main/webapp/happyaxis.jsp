@@ -1,10 +1,14 @@
 <html>
 <%@ page contentType="text/html; charset=utf-8"
-         import="java.io.IOException,
+         import="java.io.File,
+                 java.io.IOException,
                  java.io.InputStream,
-                 javax.xml.parsers.SAXParser,
-                 javax.xml.parsers.SAXParserFactory"
+                 java.net.JarURLConnection"
          session="false" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.util.Enumeration" %>
+<%@ page import="javax.xml.parsers.SAXParser" %>
+<%@ page import="javax.xml.parsers.SAXParserFactory" %>
 <%
     /*
     * Copyright 2002,2004,2005 The Apache Software Foundation.
@@ -146,17 +150,17 @@
     {
         try
         {
-            java.net.URL url = clazz.getProtectionDomain().getCodeSource().getLocation();
+            URL url = clazz.getProtectionDomain().getCodeSource().getLocation();
             String location = url.toString();
             if ( location.startsWith( "jar" ) )
             {
-                url = ( (java.net.JarURLConnection) url.openConnection() ).getJarFileURL();
+                url = ( (JarURLConnection) url.openConnection() ).getJarFileURL();
                 location = url.toString();
             }
 
             if ( location.startsWith( "file" ) )
             {
-                final java.io.File file = new java.io.File( url.getFile() );
+                final File file = new File( url.getFile() );
                 return file.getAbsolutePath();
             }
             else
@@ -535,7 +539,7 @@
         /**
          * Dump the system properties
          */
-        java.util.Enumeration e = null;
+        Enumeration e = null;
         try
         {
             e = System.getProperties().propertyNames();

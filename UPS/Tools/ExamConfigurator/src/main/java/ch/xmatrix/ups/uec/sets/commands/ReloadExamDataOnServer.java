@@ -35,9 +35,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.xml.rpc.ServiceException;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loads the registrations and exam-lists from the ETH OIS into the UPS Server.
@@ -47,7 +48,7 @@ import org.pietschy.command.CommandManager;
  */
 public class ReloadExamDataOnServer extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( ReloadExamDataOnServer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ReloadExamDataOnServer.class );
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/sets/commands/ReloadServerData.jfd";
 

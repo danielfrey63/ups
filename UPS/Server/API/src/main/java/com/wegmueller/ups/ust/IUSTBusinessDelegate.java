@@ -16,7 +16,7 @@ public interface IUSTBusinessDelegate
      * @param bytes    Eingereichte Prüfungsliste
      * @return
      * @throws USTException
-     * @see com.wegmueller.ups.ldap.ILDAPUserRecord#getAttributes()
+     * @see ILDAPUserRecord#getAttributes()
      */
     byte[] producePDF( String userName, String password, ILDAPUserRecord list, byte[] bytes ) throws USTException;
 }

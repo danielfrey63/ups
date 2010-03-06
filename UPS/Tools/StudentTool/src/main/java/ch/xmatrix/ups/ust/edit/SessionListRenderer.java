@@ -25,7 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -35,7 +36,7 @@ import org.apache.log4j.Logger;
  */
 public class SessionListRenderer implements ListCellRenderer
 {
-    private static final Logger LOG = Logger.getLogger( SessionListRenderer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SessionListRenderer.class );
 
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat( "dd.MM.yyyy" );
 

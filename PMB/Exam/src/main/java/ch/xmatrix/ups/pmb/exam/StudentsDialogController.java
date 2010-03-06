@@ -26,7 +26,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles the display of a students selection list. Queries for the password before displaying it.
@@ -38,7 +39,7 @@ public class StudentsDialogController
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( StudentsDialogController.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StudentsDialogController.class );
 
     /**
      * The studentds dialog component.

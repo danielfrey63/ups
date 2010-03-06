@@ -7,25 +7,34 @@
 
 package SoapLKAData;
 
-public class WsPruefungssession implements java.io.Serializable
+import java.io.Serializable;
+import javax.xml.namespace.QName;
+import org.apache.axis.description.ElementDesc;
+import org.apache.axis.description.TypeDesc;
+import org.apache.axis.encoding.Deserializer;
+import org.apache.axis.encoding.Serializer;
+import org.apache.axis.encoding.ser.BeanDeserializer;
+import org.apache.axis.encoding.ser.BeanSerializer;
+
+public class WsPruefungssession implements Serializable
 {
-    private java.lang.String sessionsname;
+    private String sessionsname;
 
-    private java.lang.String sessionsende;
+    private String sessionsende;
 
-    private java.lang.String seskez;
+    private String seskez;
 
-    private java.lang.String planungFreigabe;
+    private String planungFreigabe;
 
     public WsPruefungssession()
     {
     }
 
     public WsPruefungssession(
-            final java.lang.String planungFreigabe,
-            final java.lang.String seskez,
-            final java.lang.String sessionsende,
-            final java.lang.String sessionsname )
+            final String planungFreigabe,
+            final String seskez,
+            final String sessionsende,
+            final String sessionsname )
     {
         this.sessionsname = sessionsname;
         this.sessionsende = sessionsende;
@@ -38,7 +47,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @return sessionsname
      */
-    public java.lang.String getSessionsname()
+    public String getSessionsname()
     {
         return sessionsname;
     }
@@ -48,7 +57,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param sessionsname
      */
-    public void setSessionsname( final java.lang.String sessionsname )
+    public void setSessionsname( final String sessionsname )
     {
         this.sessionsname = sessionsname;
     }
@@ -58,7 +67,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @return sessionsende
      */
-    public java.lang.String getSessionsende()
+    public String getSessionsende()
     {
         return sessionsende;
     }
@@ -68,7 +77,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param sessionsende
      */
-    public void setSessionsende( final java.lang.String sessionsende )
+    public void setSessionsende( final String sessionsende )
     {
         this.sessionsende = sessionsende;
     }
@@ -78,7 +87,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @return seskez
      */
-    public java.lang.String getSeskez()
+    public String getSeskez()
     {
         return seskez;
     }
@@ -88,7 +97,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param seskez
      */
-    public void setSeskez( final java.lang.String seskez )
+    public void setSeskez( final String seskez )
     {
         this.seskez = seskez;
     }
@@ -98,7 +107,7 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @return planungFreigabe
      */
-    public java.lang.String getPlanungFreigabe()
+    public String getPlanungFreigabe()
     {
         return planungFreigabe;
     }
@@ -108,14 +117,14 @@ public class WsPruefungssession implements java.io.Serializable
      *
      * @param planungFreigabe
      */
-    public void setPlanungFreigabe( final java.lang.String planungFreigabe )
+    public void setPlanungFreigabe( final String planungFreigabe )
     {
         this.planungFreigabe = planungFreigabe;
     }
 
-    private java.lang.Object __equalsCalc = null;
+    private Object __equalsCalc = null;
 
-    public synchronized boolean equals( final java.lang.Object obj )
+    public synchronized boolean equals( final Object obj )
     {
         if ( !( obj instanceof WsPruefungssession ) )
         {
@@ -184,34 +193,34 @@ public class WsPruefungssession implements java.io.Serializable
     }
 
     // Type metadata
-    private static final org.apache.axis.description.TypeDesc typeDesc =
-            new org.apache.axis.description.TypeDesc( WsPruefungssession.class, true );
+    private static final TypeDesc typeDesc =
+            new TypeDesc( WsPruefungssession.class, true );
 
     static
     {
-        typeDesc.setXmlType( new javax.xml.namespace.QName( "urn:SoapLKAData", "WsPruefungssession" ) );
-        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        typeDesc.setXmlType( new QName( "urn:SoapLKAData", "WsPruefungssession" ) );
+        ElementDesc elemField = new ElementDesc();
         elemField.setFieldName( "sessionsname" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "sessionsname" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "sessionsname" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "sessionsende" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "sessionsende" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "sessionsende" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "seskez" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "seskez" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "seskez" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "planungFreigabe" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "planungFreigabe" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "planungFreigabe" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
     }
@@ -219,7 +228,7 @@ public class WsPruefungssession implements java.io.Serializable
     /**
      * Return type metadata object
      */
-    public static org.apache.axis.description.TypeDesc getTypeDesc()
+    public static TypeDesc getTypeDesc()
     {
         return typeDesc;
     }
@@ -227,26 +236,26 @@ public class WsPruefungssession implements java.io.Serializable
     /**
      * Get Custom Serializer
      */
-    public static org.apache.axis.encoding.Serializer getSerializer(
-            final java.lang.String mechType,
-            final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType )
+    public static Serializer getSerializer(
+            final String mechType,
+            final Class _javaType,
+            final QName _xmlType )
     {
         return
-                new org.apache.axis.encoding.ser.BeanSerializer(
+                new BeanSerializer(
                         _javaType, _xmlType, typeDesc );
     }
 
     /**
      * Get Custom Deserializer
      */
-    public static org.apache.axis.encoding.Deserializer getDeserializer(
-            final java.lang.String mechType,
-            final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType )
+    public static Deserializer getDeserializer(
+            final String mechType,
+            final Class _javaType,
+            final QName _xmlType )
     {
         return
-                new org.apache.axis.encoding.ser.BeanDeserializer(
+                new BeanDeserializer(
                         _javaType, _xmlType, typeDesc );
     }
 

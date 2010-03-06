@@ -49,7 +49,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Builds a panel with a name field and a table.
@@ -59,7 +60,7 @@ import org.apache.log4j.Logger;
  */
 public class LevelsBuilder extends AbstractDetailsBuilder
 {
-    private static final Logger LOG = Logger.getLogger( LevelsBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LevelsBuilder.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 

@@ -56,9 +56,10 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.JTextComponent;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.ActionCommandInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides a choice and a taxon tree selection.
@@ -84,7 +85,7 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
 
     public static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat( "d.M.yyyy HH:mm:ss.SSS" );
 
-    private static final Logger LOG = Logger.getLogger( MasterDetailsBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MasterDetailsBuilder.class );
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/master/MasterDetail.jfd";
 

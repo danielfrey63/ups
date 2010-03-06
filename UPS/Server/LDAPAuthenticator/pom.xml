@@ -18,6 +18,10 @@
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.utils-all</artifactId>
+        </dependency>
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>

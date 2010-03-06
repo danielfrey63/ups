@@ -35,7 +35,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.event.DocumentEvent;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -45,7 +46,7 @@ import org.apache.log4j.Logger;
  */
 public class PersonEditBuilder implements Builder
 {
-    private static final Logger LOG = Logger.getLogger( PersonEditBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PersonEditBuilder.class );
 
     private final Trigger trigger = new Trigger();
 

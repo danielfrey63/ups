@@ -45,15 +45,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Logger;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Builds the panel from which taxa can be selected and deselected.
  */
 public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 {
-    private static final Logger LOG = Logger.getLogger( TaxonCheckBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TaxonCheckBuilder.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

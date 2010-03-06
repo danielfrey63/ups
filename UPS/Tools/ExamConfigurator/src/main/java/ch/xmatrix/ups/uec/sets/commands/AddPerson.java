@@ -31,9 +31,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Asks for new person data.
@@ -43,7 +44,7 @@ import org.pietschy.command.CommandManager;
  */
 public class AddPerson extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( AddPerson.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AddPerson.class );
 
     private final SetBuilder.SubmitTableModel model;
 

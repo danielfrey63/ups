@@ -4,7 +4,8 @@ import ch.xmatrix.ups.pdf.PDFGenerator;
 import com.wegmueller.ups.ldap.ILDAPUserRecord;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Todo: Make sure a common password is used instead of the owners one! Created by: Thomas Wegmueller Date: 26.09.2005,
@@ -12,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class USTBusinessDelegate implements IUSTBusinessDelegate
 {
-    private static final Logger LOG = Logger.getLogger( USTBusinessDelegate.class );
+    private static final Logger LOG = LoggerFactory.getLogger( USTBusinessDelegate.class );
 
     /**
      * A Call to PDF-Production

@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.AbstractListModel;
 import javax.swing.ListModel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Holds taxon trees.
@@ -39,7 +40,7 @@ public class TaxonModels
 
     public static final String RESOURCE_MODEL = "/data/taxa.xml";
 
-    private static final Logger LOG = Logger.getLogger( TaxonModels.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TaxonModels.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

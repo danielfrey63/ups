@@ -23,7 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loads models from the file system (user home) or classpath, saves to the file system (user home).
@@ -38,7 +39,7 @@ public class Loader
      */
     public static final String ENVIRONMENT_SIMULATE_SAVE = "ch.jfactory.simulatesave";
 
-    private static final Logger LOG = Logger.getLogger( Loader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Loader.class );
 
     /**
      * Loads the model from the user home by adding a dot, the relative path and the resource to it. If it doesn't exist

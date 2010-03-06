@@ -49,8 +49,8 @@ public interface IUPSWebService
      * @return pdf als byte-Array
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten#getLkNummer()
      */
     byte[] submitPruefungsListe( String seskz, String lknumber, String userName, String password, byte[] bytes ) throws UPSServerException, RemoteException;
 
@@ -65,9 +65,9 @@ public interface IUPSWebService
      * @return Pruefungsliste als byte[] oder null
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten#getStudentennummer()
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten#getLkNummer()
+     * @see IAnmeldedaten#getStudentennummer()
      */
     byte[] getPruefungsListe( String dozent, String passwrd, String seskz, String lk, String studiNumber ) throws UPSServerException, RemoteException;
 
@@ -93,7 +93,7 @@ public interface IUPSWebService
      * @return Pruefungssession's-Daten der neu geladenen Daten
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession
+     * @see IPruefungsSession
      */
     IPruefungsSession reloadPruefungsDaten( String dozent, String passwrd ) throws UPSServerException, RemoteException;
 
@@ -107,8 +107,8 @@ public interface IUPSWebService
      * @return Calendar[] welche die Tage (aufsteigend sortiert) zurückgibt
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten#getLkNummer()
      */
     Calendar[] getPruefungsDaten( String dozent, String passwrd, String seskz, String lkNumber ) throws UPSServerException, RemoteException;
 
@@ -122,8 +122,8 @@ public interface IUPSWebService
      * @return Calendar[] welche die Tage (aufsteigend sortiert) zurückgibt
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten#getLkNummer()
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten#getLkNummer()
      */
     Calendar[] getPruefungsDaten( String dozent, String passwrd, String seskz, String[] lkNumber ) throws UPSServerException, RemoteException;
 
@@ -136,8 +136,8 @@ public interface IUPSWebService
      * @return
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten
      */
     IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz ) throws UPSServerException, RemoteException;
 
@@ -152,8 +152,8 @@ public interface IUPSWebService
      * @return
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten
      */
     IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz, String lkNumber, Calendar cal ) throws UPSServerException, RemoteException;
 
@@ -168,8 +168,8 @@ public interface IUPSWebService
      * @return
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten
      */
     IAnmeldedaten[] getAnmeldungen( String dozent, String passwrd, String seskz, String[] lkNumber, Calendar cal ) throws UPSServerException, RemoteException;
 
@@ -182,8 +182,8 @@ public interface IUPSWebService
      * @return
      * @throws UPSServerException
      * @throws RemoteException
-     * @see com.wegmueller.ups.lka.IPruefungsSession#getSeskez()
-     * @see com.wegmueller.ups.lka.IAnmeldedaten
+     * @see IPruefungsSession#getSeskez()
+     * @see IAnmeldedaten
      */
     IPruefung[] getPruefungen( String dozent, String passwrd, String seskz ) throws UPSServerException, RemoteException;
 }

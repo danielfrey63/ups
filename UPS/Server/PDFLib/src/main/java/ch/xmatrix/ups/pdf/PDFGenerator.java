@@ -50,7 +50,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -60,7 +61,7 @@ import org.apache.log4j.Logger;
  */
 public class PDFGenerator
 {
-    private static final Logger LOG = Logger.getLogger( PDFGenerator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PDFGenerator.class );
 
     private static final ResourceBundle bundle = ResourceBundle.getBundle( "ch.xmatrix.ups.pdf.Strings" );
 

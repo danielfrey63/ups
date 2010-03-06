@@ -23,7 +23,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * Dispatches all {@link Note}s with a type of {@link ch.jfactory.application.view.status.Message.Type#WARN} to the
+ * Dispatches all {@link Note}s with a type of {@link Message.Type#WARN} to the
  * status bar warnings, all others to the text.
  */
 public class StatusBarNoteHandler implements PropertyChangeListener

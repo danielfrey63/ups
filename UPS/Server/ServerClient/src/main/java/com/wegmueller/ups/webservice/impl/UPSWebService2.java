@@ -7,7 +7,10 @@
 
 package com.wegmueller.ups.webservice.impl;
 
-public interface UPSWebService2 extends java.rmi.Remote
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface UPSWebService2 extends Remote
 {
-    public java.lang.String invoke( java.lang.String[] args ) throws java.rmi.RemoteException;
+    public String invoke( String[] args ) throws RemoteException;
 }

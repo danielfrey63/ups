@@ -26,7 +26,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import net.java.jveez.ui.viewer.ViewerPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -36,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public class NavigationSelectionHandler implements TreeSelectionListener
 {
-    private static final Logger LOG = Logger.getLogger( NavigationSelectionHandler.class );
+    private static final Logger LOG = LoggerFactory.getLogger( NavigationSelectionHandler.class );
 
     private final ViewerPanel panel;
 

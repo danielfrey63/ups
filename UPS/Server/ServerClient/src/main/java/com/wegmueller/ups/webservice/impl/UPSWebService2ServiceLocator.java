@@ -7,72 +7,84 @@
 
 package com.wegmueller.ups.webservice.impl;
 
-public class UPSWebService2ServiceLocator extends org.apache.axis.client.Service implements com.wegmueller.ups.webservice.impl.UPSWebService2Service
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.Remote;
+import java.util.HashSet;
+import java.util.Iterator;
+import javax.xml.namespace.QName;
+import javax.xml.rpc.ServiceException;
+import org.apache.axis.AxisFault;
+import org.apache.axis.EngineConfiguration;
+import org.apache.axis.client.Service;
+import org.apache.axis.client.Stub;
+
+public class UPSWebService2ServiceLocator extends Service implements UPSWebService2Service
 {
     public UPSWebService2ServiceLocator()
     {
     }
 
-    public UPSWebService2ServiceLocator( final org.apache.axis.EngineConfiguration config )
+    public UPSWebService2ServiceLocator( final EngineConfiguration config )
     {
         super( config );
     }
 
-    public UPSWebService2ServiceLocator( final java.lang.String wsdlLoc, final javax.xml.namespace.QName sName ) throws javax.xml.rpc.ServiceException
+    public UPSWebService2ServiceLocator( final String wsdlLoc, final QName sName ) throws ServiceException
     {
         super( wsdlLoc, sName );
     }
 
     // Use to get a proxy class for UPSWebService2
-    private java.lang.String UPSWebService2_address = "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws";
+    private String UPSWebService2_address = "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws";
 
-    public java.lang.String getUPSWebService2Address()
+    public String getUPSWebService2Address()
     {
         return UPSWebService2_address;
     }
 
     // The WSDD service name defaults to the port name.
-    private java.lang.String UPSWebService2WSDDServiceName = "UPSWebService2";
+    private String UPSWebService2WSDDServiceName = "UPSWebService2";
 
-    public java.lang.String getUPSWebService2WSDDServiceName()
+    public String getUPSWebService2WSDDServiceName()
     {
         return UPSWebService2WSDDServiceName;
     }
 
-    public void setUPSWebService2WSDDServiceName( final java.lang.String name )
+    public void setUPSWebService2WSDDServiceName( final String name )
     {
         UPSWebService2WSDDServiceName = name;
     }
 
-    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2() throws javax.xml.rpc.ServiceException
+    public UPSWebService2 getUPSWebService2() throws ServiceException
     {
-        final java.net.URL endpoint;
+        final URL endpoint;
         try
         {
-            endpoint = new java.net.URL( UPSWebService2_address );
+            endpoint = new URL( UPSWebService2_address );
         }
-        catch ( java.net.MalformedURLException e )
+        catch ( MalformedURLException e )
         {
-            throw new javax.xml.rpc.ServiceException( e );
+            throw new ServiceException( e );
         }
         return getUPSWebService2( endpoint );
     }
 
-    public com.wegmueller.ups.webservice.impl.UPSWebService2 getUPSWebService2( final java.net.URL portAddress ) throws javax.xml.rpc.ServiceException
+    public UPSWebService2 getUPSWebService2( final URL portAddress ) throws ServiceException
     {
         try
         {
-            final com.wegmueller.ups.webservice.impl.UPSWebService2SoapBindingStub _stub = new com.wegmueller.ups.webservice.impl.UPSWebService2SoapBindingStub( portAddress, this );
+            final UPSWebService2SoapBindingStub _stub = new UPSWebService2SoapBindingStub( portAddress, this );
             _stub.setPortName( getUPSWebService2WSDDServiceName() );
             return _stub;
         }
-        catch ( org.apache.axis.AxisFault e )
+        catch ( AxisFault e )
         {
             return null;
         }
     }
 
-    public void setUPSWebService2EndpointAddress( final java.lang.String address )
+    public void setUPSWebService2EndpointAddress( final String address )
     {
         UPSWebService2_address = address;
     }
@@ -81,60 +93,60 @@ public class UPSWebService2ServiceLocator extends org.apache.axis.client.Service
      * For the given interface, get the stub implementation. If this service has no port for the given interface, then
      * ServiceException is thrown.
      */
-    public java.rmi.Remote getPort( final Class serviceEndpointInterface ) throws javax.xml.rpc.ServiceException
+    public Remote getPort( final Class serviceEndpointInterface ) throws ServiceException
     {
         try
         {
-            if ( com.wegmueller.ups.webservice.impl.UPSWebService2.class.isAssignableFrom( serviceEndpointInterface ) )
+            if ( UPSWebService2.class.isAssignableFrom( serviceEndpointInterface ) )
             {
-                final com.wegmueller.ups.webservice.impl.UPSWebService2SoapBindingStub _stub = new com.wegmueller.ups.webservice.impl.UPSWebService2SoapBindingStub( new java.net.URL( UPSWebService2_address ), this );
+                final UPSWebService2SoapBindingStub _stub = new UPSWebService2SoapBindingStub( new URL( UPSWebService2_address ), this );
                 _stub.setPortName( getUPSWebService2WSDDServiceName() );
                 return _stub;
             }
         }
-        catch ( java.lang.Throwable t )
+        catch ( Throwable t )
         {
-            throw new javax.xml.rpc.ServiceException( t );
+            throw new ServiceException( t );
         }
-        throw new javax.xml.rpc.ServiceException( "There is no stub implementation for the interface:  " + ( serviceEndpointInterface == null ? "null" : serviceEndpointInterface.getName() ) );
+        throw new ServiceException( "There is no stub implementation for the interface:  " + ( serviceEndpointInterface == null ? "null" : serviceEndpointInterface.getName() ) );
     }
 
     /**
      * For the given interface, get the stub implementation. If this service has no port for the given interface, then
      * ServiceException is thrown.
      */
-    public java.rmi.Remote getPort( final javax.xml.namespace.QName portName, final Class serviceEndpointInterface ) throws javax.xml.rpc.ServiceException
+    public Remote getPort( final QName portName, final Class serviceEndpointInterface ) throws ServiceException
     {
         if ( portName == null )
         {
             return getPort( serviceEndpointInterface );
         }
-        final java.lang.String inputPortName = portName.getLocalPart();
+        final String inputPortName = portName.getLocalPart();
         if ( "UPSWebService2".equals( inputPortName ) )
         {
             return getUPSWebService2();
         }
         else
         {
-            final java.rmi.Remote _stub = getPort( serviceEndpointInterface );
-            ( (org.apache.axis.client.Stub) _stub ).setPortName( portName );
+            final Remote _stub = getPort( serviceEndpointInterface );
+            ( (Stub) _stub ).setPortName( portName );
             return _stub;
         }
     }
 
-    public javax.xml.namespace.QName getServiceName()
+    public QName getServiceName()
     {
-        return new javax.xml.namespace.QName( "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "UPSWebService2Service" );
+        return new QName( "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "UPSWebService2Service" );
     }
 
-    private java.util.HashSet ports = null;
+    private HashSet ports = null;
 
-    public java.util.Iterator getPorts()
+    public Iterator getPorts()
     {
         if ( ports == null )
         {
-            ports = new java.util.HashSet();
-            ports.add( new javax.xml.namespace.QName( "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "UPSWebService2" ) );
+            ports = new HashSet();
+            ports.add( new QName( "http://balti.ethz.ch:8080/upsserver2/UPSWebService2.jws", "UPSWebService2" ) );
         }
         return ports.iterator();
     }
@@ -142,7 +154,7 @@ public class UPSWebService2ServiceLocator extends org.apache.axis.client.Service
     /**
      * Set the endpoint address for the specified port name.
      */
-    public void setEndpointAddress( final java.lang.String portName, final java.lang.String address ) throws javax.xml.rpc.ServiceException
+    public void setEndpointAddress( final String portName, final String address ) throws ServiceException
     {
         if ( "UPSWebService2".equals( portName ) )
         {
@@ -150,14 +162,14 @@ public class UPSWebService2ServiceLocator extends org.apache.axis.client.Service
         }
         else
         { // Unknown Port Name
-            throw new javax.xml.rpc.ServiceException( " Cannot set Endpoint Address for Unknown Port" + portName );
+            throw new ServiceException( " Cannot set Endpoint Address for Unknown Port" + portName );
         }
     }
 
     /**
      * Set the endpoint address for the specified port name.
      */
-    public void setEndpointAddress( final javax.xml.namespace.QName portName, final java.lang.String address ) throws javax.xml.rpc.ServiceException
+    public void setEndpointAddress( final QName portName, final String address ) throws ServiceException
     {
         setEndpointAddress( portName.getLocalPart(), address );
     }

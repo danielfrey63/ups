@@ -47,7 +47,8 @@ import mseries.Calendar.MDateChanger;
 import mseries.Calendar.MDefaultPullDownConstraints;
 import mseries.Calendar.MFieldListener;
 import mseries.ui.MDateEntryField;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -65,7 +66,7 @@ public class SessionBuilder extends AbstractDetailsBuilder
 
     private static final String COMPONENT_CONSTRAINTS = "comboConstraints";
 
-    private static final Logger LOG = Logger.getLogger( SessionBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SessionBuilder.class );
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/session/SessionPanel.jfd";
 

@@ -7,11 +7,15 @@
 
 package com.wegmueller.ups.webservice.stub;
 
-public interface UPSWebServiceService extends javax.xml.rpc.Service
+import java.net.URL;
+import javax.xml.rpc.Service;
+import javax.xml.rpc.ServiceException;
+
+public interface UPSWebServiceService extends Service
 {
-    public java.lang.String getUPSWebServiceAddress();
+    public String getUPSWebServiceAddress();
 
-    public com.wegmueller.ups.webservice.stub.UPSWebService getUPSWebService() throws javax.xml.rpc.ServiceException;
+    public UPSWebService getUPSWebService() throws ServiceException;
 
-    public com.wegmueller.ups.webservice.stub.UPSWebService getUPSWebService( java.net.URL portAddress ) throws javax.xml.rpc.ServiceException;
+    public UPSWebService getUPSWebService( URL portAddress ) throws ServiceException;
 }

@@ -5,22 +5,16 @@
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
         <version>1.0</version>
-        <relativePath>Common/Build</relativePath>
+        <relativePath>../Common/Build</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.xmatrix</groupId>
-    <artifactId>ch.xmatrix</artifactId>
-    <name>Projects</name>
-    <packaging>pom</packaging>
+    <groupId>ch.xmatrix.maven</groupId>
+    <artifactId>ch.xmatrix.maven</artifactId>
     <version>1.0</version>
-    <description>Everything from xmatrix</description>
+    <packaging>pom</packaging>
+    <name>xmatrix maven plugins</name>
+    <description>All Maven plugins</description>
     <modules>
-        <module>Data</module>
-        <module>Common</module>
-        <module>HCD</module>
-        <module>UPS</module>
-        <module>PMB</module>
-        <module>Third</module>
-        <module>Maven</module>
+        <module>maven-releasetree-plugin</module>
     </modules>
 </project>

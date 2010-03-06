@@ -9,11 +9,11 @@ import java.util.Calendar;
  */
 public class LKAPruefungssession implements IPruefungsSession
 {
-    private final java.lang.String sessionsname;
+    private final String sessionsname;
 
     private final Calendar sessionsende;
 
-    private final java.lang.String seskez;
+    private final String seskez;
 
     private final Calendar planungFreigabe;
 

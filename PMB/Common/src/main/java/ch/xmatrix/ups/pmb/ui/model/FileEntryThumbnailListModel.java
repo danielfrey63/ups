@@ -29,7 +29,8 @@ import javax.swing.SwingUtilities;
 import net.java.jveez.ui.thumbnails.ThumbnailListModel;
 import net.java.jveez.utils.SortingAlgorithm;
 import net.java.jveez.vfs.Picture;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -39,7 +40,7 @@ import org.apache.log4j.Logger;
  */
 public class FileEntryThumbnailListModel extends AbstractListModel implements ThumbnailListModel<FileEntry>
 {
-    private static final Logger LOG = Logger.getLogger( FileEntryThumbnailListModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileEntryThumbnailListModel.class );
 
     private final List<FileEntry> list = new ArrayList<FileEntry>();
 

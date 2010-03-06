@@ -36,8 +36,6 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import static java.awt.event.KeyEvent.KEY_RELEASED;
-import static java.awt.event.KeyEvent.VK_L;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -64,7 +62,11 @@ import javax.xml.transform.TransformerException;
 import net.java.jveez.cache.ImageStore;
 import net.java.jveez.vfs.Picture;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static java.awt.event.KeyEvent.KEY_RELEASED;
+import static java.awt.event.KeyEvent.VK_L;
 
 /**
  * TODO: document
@@ -74,7 +76,7 @@ import org.apache.log4j.Logger;
  */
 public class MainForm extends ExamForm
 {
-    private static final Logger LOG = Logger.getLogger( MainForm.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MainForm.class );
 
     private final PMBExamModel model;
 

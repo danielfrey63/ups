@@ -47,9 +47,10 @@ import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.xml.rpc.ServiceException;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loads the registrations and exam-lists from the UPS server.
@@ -59,7 +60,7 @@ import org.pietschy.command.CommandManager;
  */
 public class FromInternet extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( FromInternet.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FromInternet.class );
 
     private static final String RESOURCE_FORM = "ch/xmatrix/ups/uec/sets/commands/FromInternet.jfd";
 

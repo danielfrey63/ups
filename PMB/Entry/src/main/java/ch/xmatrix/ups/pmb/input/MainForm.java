@@ -71,7 +71,8 @@ import javax.swing.tree.TreeSelectionModel;
 import net.java.jveez.cache.ThumbnailStore;
 import net.java.jveez.ui.thumbnails.ThumbnailListModel;
 import net.java.jveez.vfs.Picture;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -81,7 +82,7 @@ import org.apache.log4j.Logger;
  */
 public class MainForm extends EntryForm
 {
-    private static final Logger LOG = Logger.getLogger( MainForm.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MainForm.class );
 
     private static final int TAB_SINGLE_IMAGE = 1;
 

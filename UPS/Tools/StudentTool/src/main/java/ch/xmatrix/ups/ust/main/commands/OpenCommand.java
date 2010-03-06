@@ -36,9 +36,10 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static ch.xmatrix.ups.ust.main.commands.Commands.getConverterVersion1;
 import static ch.xmatrix.ups.ust.main.commands.Commands.getConverterVersion2;
@@ -51,7 +52,7 @@ import static ch.xmatrix.ups.ust.main.commands.Commands.getConverterVersion2;
  */
 public class OpenCommand extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( OpenCommand.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OpenCommand.class );
 
     private final MainModel model;
 

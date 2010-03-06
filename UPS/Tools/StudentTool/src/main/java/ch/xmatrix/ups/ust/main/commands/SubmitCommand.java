@@ -24,9 +24,10 @@ import ch.xmatrix.ups.ust.main.PlantListSubmitDialog;
 import ch.xmatrix.ups.view.CredentialsDialog;
 import javax.swing.JFrame;
 import javax.swing.ListModel;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sets the submitting status of the model to true.
@@ -36,7 +37,7 @@ import org.pietschy.command.CommandManager;
  */
 public class SubmitCommand extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( SubmitCommand.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SubmitCommand.class );
 
     private final MainModel model;
 
@@ -77,7 +78,7 @@ public class SubmitCommand extends ActionCommand
         }
         else
         {
-            LOG.fatal( "no course models found" );
+            LOG.error( "no course models found" );
         }
     }
 

@@ -14,9 +14,10 @@ package ch.xmatrix.ups.uec.session.commands;
 import ch.xmatrix.ups.uec.constraints.commands.Commands;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -26,7 +27,7 @@ import org.pietschy.command.CommandManager;
  */
 public class UploadCommand extends ActionCommand
 {
-    private static final Logger LOG = Logger.getLogger( UploadCommand.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UploadCommand.class );
 
     private final ListModel model;
 

@@ -18,7 +18,8 @@ package ch.xmatrix.ups.ust.edit;
 
 import ch.jfactory.filter.Filter;
 import ch.xmatrix.ups.domain.SimpleTaxon;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Returns false for all genus taxa with one child.
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public class HideSingleGenus implements Filter
 {
-    private static final Logger LOGGER = Logger.getLogger( HideSingleGenus.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( HideSingleGenus.class );
 
     private static final boolean DEBUG = LOGGER.isDebugEnabled();
 

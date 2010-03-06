@@ -26,7 +26,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -37,7 +38,7 @@ public class HashDialog extends JDialog
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( HashDialog.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HashDialog.class );
 
     public HashDialog( final Frame owner )
     {

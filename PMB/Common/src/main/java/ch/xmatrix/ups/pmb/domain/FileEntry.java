@@ -35,7 +35,7 @@ import net.java.jveez.vfs.impl.PictureImpl;
  * <li>The multiple choice part. If multiple pictures exist for a defined hierary.</li>
  *
  * <li>The picture state part. Which part of the picture should be shown (see {@link
- * ch.xmatrix.ups.pmb.ui.model.PictureStateModel PictureStateModel})?</li>
+ * PictureStateModel PictureStateModel})?</li>
  *
  * </ul>
  *

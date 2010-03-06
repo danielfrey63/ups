@@ -7,70 +7,79 @@
 
 package SoapLKAData;
 
-public class WsAnmeldedaten implements java.io.Serializable
+import java.io.Serializable;
+import javax.xml.namespace.QName;
+import org.apache.axis.description.ElementDesc;
+import org.apache.axis.description.TypeDesc;
+import org.apache.axis.encoding.Deserializer;
+import org.apache.axis.encoding.Serializer;
+import org.apache.axis.encoding.ser.BeanDeserializer;
+import org.apache.axis.encoding.ser.BeanSerializer;
+
+public class WsAnmeldedaten implements Serializable
 {
-    private java.lang.String lkNummer;
+    private String lkNummer;
 
     private int lkForm;
 
-    private java.lang.String lkFormText;
+    private String lkFormText;
 
-    private java.lang.String pruefungsmodeText;
+    private String pruefungsmodeText;
 
-    private java.lang.String fachrichtung;
+    private String fachrichtung;
 
-    private java.lang.String studentennummer;
+    private String studentennummer;
 
-    private java.lang.String vorname;
+    private String vorname;
 
     private boolean repetent;
 
-    private java.lang.String lkEinheitTitel;
+    private String lkEinheitTitel;
 
-    private java.lang.String lkEinheitTyp;
+    private String lkEinheitTyp;
 
-    private java.lang.String pruefungsraum;
+    private String pruefungsraum;
 
-    private java.lang.String lkEinheitNummerzusatz;
+    private String lkEinheitNummerzusatz;
 
-    private java.lang.String nachname;
+    private String nachname;
 
-    private java.lang.String studiengang;
+    private String studiengang;
 
-    private java.lang.String email;
+    private String email;
 
-    private java.lang.String pruefungszeit;
+    private String pruefungszeit;
 
-    private java.lang.String seskez;
+    private String seskez;
 
-    private java.lang.String pruefungsdatum;
+    private String pruefungsdatum;
 
-    private java.lang.String lkEinheitTypText;
+    private String lkEinheitTypText;
 
     public WsAnmeldedaten()
     {
     }
 
     public WsAnmeldedaten(
-            final java.lang.String email,
-            final java.lang.String fachrichtung,
-            final java.lang.String lkEinheitNummerzusatz,
-            final java.lang.String lkEinheitTitel,
-            final java.lang.String lkEinheitTyp,
-            final java.lang.String lkEinheitTypText,
+            final String email,
+            final String fachrichtung,
+            final String lkEinheitNummerzusatz,
+            final String lkEinheitTitel,
+            final String lkEinheitTyp,
+            final String lkEinheitTypText,
             final int lkForm,
-            final java.lang.String lkFormText,
-            final java.lang.String lkNummer,
-            final java.lang.String nachname,
-            final java.lang.String pruefungsdatum,
-            final java.lang.String pruefungsmodeText,
-            final java.lang.String pruefungsraum,
-            final java.lang.String pruefungszeit,
+            final String lkFormText,
+            final String lkNummer,
+            final String nachname,
+            final String pruefungsdatum,
+            final String pruefungsmodeText,
+            final String pruefungsraum,
+            final String pruefungszeit,
             final boolean repetent,
-            final java.lang.String seskez,
-            final java.lang.String studentennummer,
-            final java.lang.String studiengang,
-            final java.lang.String vorname )
+            final String seskez,
+            final String studentennummer,
+            final String studiengang,
+            final String vorname )
     {
         this.lkNummer = lkNummer;
         this.lkForm = lkForm;
@@ -98,7 +107,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkNummer
      */
-    public java.lang.String getLkNummer()
+    public String getLkNummer()
     {
         return lkNummer;
     }
@@ -108,7 +117,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkNummer
      */
-    public void setLkNummer( final java.lang.String lkNummer )
+    public void setLkNummer( final String lkNummer )
     {
         this.lkNummer = lkNummer;
     }
@@ -138,7 +147,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkFormText
      */
-    public java.lang.String getLkFormText()
+    public String getLkFormText()
     {
         return lkFormText;
     }
@@ -148,7 +157,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkFormText
      */
-    public void setLkFormText( final java.lang.String lkFormText )
+    public void setLkFormText( final String lkFormText )
     {
         this.lkFormText = lkFormText;
     }
@@ -158,7 +167,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return pruefungsmodeText
      */
-    public java.lang.String getPruefungsmodeText()
+    public String getPruefungsmodeText()
     {
         return pruefungsmodeText;
     }
@@ -168,7 +177,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param pruefungsmodeText
      */
-    public void setPruefungsmodeText( final java.lang.String pruefungsmodeText )
+    public void setPruefungsmodeText( final String pruefungsmodeText )
     {
         this.pruefungsmodeText = pruefungsmodeText;
     }
@@ -178,7 +187,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return fachrichtung
      */
-    public java.lang.String getFachrichtung()
+    public String getFachrichtung()
     {
         return fachrichtung;
     }
@@ -188,7 +197,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param fachrichtung
      */
-    public void setFachrichtung( final java.lang.String fachrichtung )
+    public void setFachrichtung( final String fachrichtung )
     {
         this.fachrichtung = fachrichtung;
     }
@@ -198,7 +207,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return studentennummer
      */
-    public java.lang.String getStudentennummer()
+    public String getStudentennummer()
     {
         return studentennummer;
     }
@@ -208,7 +217,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param studentennummer
      */
-    public void setStudentennummer( final java.lang.String studentennummer )
+    public void setStudentennummer( final String studentennummer )
     {
         this.studentennummer = studentennummer;
     }
@@ -218,7 +227,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return vorname
      */
-    public java.lang.String getVorname()
+    public String getVorname()
     {
         return vorname;
     }
@@ -228,7 +237,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param vorname
      */
-    public void setVorname( final java.lang.String vorname )
+    public void setVorname( final String vorname )
     {
         this.vorname = vorname;
     }
@@ -258,7 +267,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkEinheitTitel
      */
-    public java.lang.String getLkEinheitTitel()
+    public String getLkEinheitTitel()
     {
         return lkEinheitTitel;
     }
@@ -268,7 +277,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkEinheitTitel
      */
-    public void setLkEinheitTitel( final java.lang.String lkEinheitTitel )
+    public void setLkEinheitTitel( final String lkEinheitTitel )
     {
         this.lkEinheitTitel = lkEinheitTitel;
     }
@@ -278,7 +287,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkEinheitTyp
      */
-    public java.lang.String getLkEinheitTyp()
+    public String getLkEinheitTyp()
     {
         return lkEinheitTyp;
     }
@@ -288,7 +297,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkEinheitTyp
      */
-    public void setLkEinheitTyp( final java.lang.String lkEinheitTyp )
+    public void setLkEinheitTyp( final String lkEinheitTyp )
     {
         this.lkEinheitTyp = lkEinheitTyp;
     }
@@ -298,7 +307,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return pruefungsraum
      */
-    public java.lang.String getPruefungsraum()
+    public String getPruefungsraum()
     {
         return pruefungsraum;
     }
@@ -308,7 +317,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param pruefungsraum
      */
-    public void setPruefungsraum( final java.lang.String pruefungsraum )
+    public void setPruefungsraum( final String pruefungsraum )
     {
         this.pruefungsraum = pruefungsraum;
     }
@@ -318,7 +327,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkEinheitNummerzusatz
      */
-    public java.lang.String getLkEinheitNummerzusatz()
+    public String getLkEinheitNummerzusatz()
     {
         return lkEinheitNummerzusatz;
     }
@@ -328,7 +337,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkEinheitNummerzusatz
      */
-    public void setLkEinheitNummerzusatz( final java.lang.String lkEinheitNummerzusatz )
+    public void setLkEinheitNummerzusatz( final String lkEinheitNummerzusatz )
     {
         this.lkEinheitNummerzusatz = lkEinheitNummerzusatz;
     }
@@ -338,7 +347,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return nachname
      */
-    public java.lang.String getNachname()
+    public String getNachname()
     {
         return nachname;
     }
@@ -348,7 +357,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param nachname
      */
-    public void setNachname( final java.lang.String nachname )
+    public void setNachname( final String nachname )
     {
         this.nachname = nachname;
     }
@@ -358,7 +367,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return studiengang
      */
-    public java.lang.String getStudiengang()
+    public String getStudiengang()
     {
         return studiengang;
     }
@@ -368,7 +377,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param studiengang
      */
-    public void setStudiengang( final java.lang.String studiengang )
+    public void setStudiengang( final String studiengang )
     {
         this.studiengang = studiengang;
     }
@@ -378,7 +387,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return email
      */
-    public java.lang.String getEmail()
+    public String getEmail()
     {
         return email;
     }
@@ -388,7 +397,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param email
      */
-    public void setEmail( final java.lang.String email )
+    public void setEmail( final String email )
     {
         this.email = email;
     }
@@ -398,7 +407,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return pruefungszeit
      */
-    public java.lang.String getPruefungszeit()
+    public String getPruefungszeit()
     {
         return pruefungszeit;
     }
@@ -408,7 +417,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param pruefungszeit
      */
-    public void setPruefungszeit( final java.lang.String pruefungszeit )
+    public void setPruefungszeit( final String pruefungszeit )
     {
         this.pruefungszeit = pruefungszeit;
     }
@@ -418,7 +427,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return seskez
      */
-    public java.lang.String getSeskez()
+    public String getSeskez()
     {
         return seskez;
     }
@@ -428,7 +437,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param seskez
      */
-    public void setSeskez( final java.lang.String seskez )
+    public void setSeskez( final String seskez )
     {
         this.seskez = seskez;
     }
@@ -438,7 +447,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return pruefungsdatum
      */
-    public java.lang.String getPruefungsdatum()
+    public String getPruefungsdatum()
     {
         return pruefungsdatum;
     }
@@ -448,7 +457,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param pruefungsdatum
      */
-    public void setPruefungsdatum( final java.lang.String pruefungsdatum )
+    public void setPruefungsdatum( final String pruefungsdatum )
     {
         this.pruefungsdatum = pruefungsdatum;
     }
@@ -458,7 +467,7 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @return lkEinheitTypText
      */
-    public java.lang.String getLkEinheitTypText()
+    public String getLkEinheitTypText()
     {
         return lkEinheitTypText;
     }
@@ -468,14 +477,14 @@ public class WsAnmeldedaten implements java.io.Serializable
      *
      * @param lkEinheitTypText
      */
-    public void setLkEinheitTypText( final java.lang.String lkEinheitTypText )
+    public void setLkEinheitTypText( final String lkEinheitTypText )
     {
         this.lkEinheitTypText = lkEinheitTypText;
     }
 
-    private java.lang.Object __equalsCalc = null;
+    private Object __equalsCalc = null;
 
-    public synchronized boolean equals( final java.lang.Object obj )
+    public synchronized boolean equals( final Object obj )
     {
         if ( !( obj instanceof WsAnmeldedaten ) )
         {
@@ -639,122 +648,122 @@ public class WsAnmeldedaten implements java.io.Serializable
     }
 
     // Type metadata
-    private static final org.apache.axis.description.TypeDesc typeDesc =
-            new org.apache.axis.description.TypeDesc( WsAnmeldedaten.class, true );
+    private static final TypeDesc typeDesc =
+            new TypeDesc( WsAnmeldedaten.class, true );
 
     static
     {
-        typeDesc.setXmlType( new javax.xml.namespace.QName( "urn:SoapLKAData", "WsAnmeldedaten" ) );
-        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        typeDesc.setXmlType( new QName( "urn:SoapLKAData", "WsAnmeldedaten" ) );
+        ElementDesc elemField = new ElementDesc();
         elemField.setFieldName( "lkNummer" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkNummer" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkNummer" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkForm" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkForm" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "int" ) );
+        elemField.setXmlName( new QName( "", "lkForm" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "int" ) );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkFormText" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkFormText" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkFormText" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "pruefungsmodeText" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "pruefungsmodeText" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "pruefungsmodeText" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "fachrichtung" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "fachrichtung" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "fachrichtung" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "studentennummer" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "studentennummer" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "studentennummer" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "vorname" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "vorname" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "vorname" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "repetent" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "repetent" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "boolean" ) );
+        elemField.setXmlName( new QName( "", "repetent" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "boolean" ) );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkEinheitTitel" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkEinheitTitel" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkEinheitTitel" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkEinheitTyp" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkEinheitTyp" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkEinheitTyp" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "pruefungsraum" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "pruefungsraum" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "pruefungsraum" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkEinheitNummerzusatz" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkEinheitNummerzusatz" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkEinheitNummerzusatz" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "nachname" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "nachname" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "nachname" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "studiengang" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "studiengang" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "studiengang" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "email" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "email" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "email" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "pruefungszeit" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "pruefungszeit" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "pruefungszeit" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "seskez" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "seskez" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "seskez" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "pruefungsdatum" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "pruefungsdatum" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "pruefungsdatum" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
-        elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new ElementDesc();
         elemField.setFieldName( "lkEinheitTypText" );
-        elemField.setXmlName( new javax.xml.namespace.QName( "", "lkEinheitTypText" ) );
-        elemField.setXmlType( new javax.xml.namespace.QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
+        elemField.setXmlName( new QName( "", "lkEinheitTypText" ) );
+        elemField.setXmlType( new QName( "http://www.w3.org/2001/XMLSchema", "string" ) );
         elemField.setNillable( true );
         typeDesc.addFieldDesc( elemField );
     }
@@ -762,7 +771,7 @@ public class WsAnmeldedaten implements java.io.Serializable
     /**
      * Return type metadata object
      */
-    public static org.apache.axis.description.TypeDesc getTypeDesc()
+    public static TypeDesc getTypeDesc()
     {
         return typeDesc;
     }
@@ -770,26 +779,26 @@ public class WsAnmeldedaten implements java.io.Serializable
     /**
      * Get Custom Serializer
      */
-    public static org.apache.axis.encoding.Serializer getSerializer(
-            final java.lang.String mechType,
-            final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType )
+    public static Serializer getSerializer(
+            final String mechType,
+            final Class _javaType,
+            final QName _xmlType )
     {
         return
-                new org.apache.axis.encoding.ser.BeanSerializer(
+                new BeanSerializer(
                         _javaType, _xmlType, typeDesc );
     }
 
     /**
      * Get Custom Deserializer
      */
-    public static org.apache.axis.encoding.Deserializer getDeserializer(
-            final java.lang.String mechType,
-            final java.lang.Class _javaType,
-            final javax.xml.namespace.QName _xmlType )
+    public static Deserializer getDeserializer(
+            final String mechType,
+            final Class _javaType,
+            final QName _xmlType )
     {
         return
-                new org.apache.axis.encoding.ser.BeanDeserializer(
+                new BeanDeserializer(
                         _javaType, _xmlType, typeDesc );
     }
 

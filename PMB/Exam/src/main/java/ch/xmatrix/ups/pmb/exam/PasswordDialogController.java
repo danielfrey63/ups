@@ -17,7 +17,8 @@ import javax.swing.JButton;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -30,7 +31,7 @@ public class PasswordDialogController
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( PasswordDialogController.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PasswordDialogController.class );
 
     /**
      * Contains all registered users.

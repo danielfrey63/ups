@@ -24,6 +24,7 @@ import ch.jfactory.ganymed.DummyServerHostKeyVerifier;
 import ch.jfactory.ganymed.Ssh2Helper;
 import ch.jfactory.jar.JarHelper;
 import ch.jfactory.model.SimpleModelList;
+import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.model.ConstraintsPersister;
 import ch.xmatrix.ups.model.SessionModel;
@@ -55,7 +56,8 @@ import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -65,7 +67,7 @@ import org.apache.log4j.Logger;
  */
 public class UploadDialog extends Upload
 {
-    private static final Logger LOG = Logger.getLogger( UploadDialog.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UploadDialog.class );
 
     private static final String PREF_ALIAS = "alias";
 
@@ -338,10 +340,10 @@ public class UploadDialog extends Upload
          *
          * <ul>
          *
-         * <li>Each {@link SessionModel exam info model} must have a valid {@link ch.xmatrix.ups.domain.Constraint
+         * <li>Each {@link SessionModel exam info model} must have a valid {@link Constraint
          * constraint} uid</li>
          *
-         * <li>Each {@link ch.xmatrix.ups.domain.Constraint constraint} must have a valid {@link TaxonTree taxon tree}
+         * <li>Each {@link Constraint constraint} must have a valid {@link TaxonTree taxon tree}
          * uid</li>
          *
          * </ul>

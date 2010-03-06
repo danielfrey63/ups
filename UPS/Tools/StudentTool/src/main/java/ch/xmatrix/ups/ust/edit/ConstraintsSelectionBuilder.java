@@ -51,7 +51,7 @@ import javax.swing.tree.TreeSelectionModel;
 import org.pietschy.command.CommandManager;
 
 /**
- * Builds a panel like a list but with a simple flat tree consisting of wrapped {@link ch.xmatrix.ups.domain.Constraint}
+ * Builds a panel like a list but with a simple flat tree consisting of wrapped {@link Constraint}
  * objects.
  *
  * @author Daniel Frey

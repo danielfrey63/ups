@@ -2,14 +2,15 @@ package com.wegmueller.ups.ldap;
 
 import java.util.Properties;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Author: Thomas Wegmüller Author: Daniel Frey
  */
 public class LDAPUserRecord implements ILDAPUserRecord
 {
-    private static final Logger LOG = Logger.getLogger( LDAPUserRecord.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LDAPUserRecord.class );
 
     private final Properties list = new Properties();
 

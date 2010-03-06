@@ -10,39 +10,39 @@ public class Anmeldedaten implements IAnmeldedaten
 {
     private Long id;
 
-    private java.lang.String lkNummer;
+    private String lkNummer;
 
     private int lkForm;
 
-    private java.lang.String lkFormText;
+    private String lkFormText;
 
-    private java.lang.String pruefungsmodeText;
+    private String pruefungsmodeText;
 
-    private java.lang.String fachrichtung;
+    private String fachrichtung;
 
-    private java.lang.String studentennummer;
+    private String studentennummer;
 
-    private java.lang.String vorname;
+    private String vorname;
 
     private boolean repetent;
 
-    private java.lang.String lkEinheitTitel;
+    private String lkEinheitTitel;
 
-    private java.lang.String lkEinheitTyp;
+    private String lkEinheitTyp;
 
-    private java.lang.String pruefungsraum;
+    private String pruefungsraum;
 
-    private java.lang.String lkEinheitNummerzusatz;
+    private String lkEinheitNummerzusatz;
 
-    private java.lang.String nachname;
+    private String nachname;
 
-    private java.lang.String studiengang;
+    private String studiengang;
 
-    private java.lang.String email;
+    private String email;
 
-    private java.lang.String seskez;
+    private String seskez;
 
-    private java.lang.String lkEinheitTypText;
+    private String lkEinheitTypText;
 
     private Calendar pruefungsdatum;
 

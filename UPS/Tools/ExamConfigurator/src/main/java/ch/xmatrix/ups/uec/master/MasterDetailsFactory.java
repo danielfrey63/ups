@@ -18,7 +18,8 @@ package ch.xmatrix.ups.uec.master;
 
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.domain.TaxonBased;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This controller handles the creation of objects.
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class MasterDetailsFactory
 {
-    private static final Logger LOG = Logger.getLogger( MasterDetailsFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MasterDetailsFactory.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 

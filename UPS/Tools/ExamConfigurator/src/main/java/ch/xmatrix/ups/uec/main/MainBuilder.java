@@ -51,7 +51,8 @@ import net.infonode.docking.RootWindow;
 import net.infonode.docking.View;
 import net.infonode.docking.util.DockingUtil;
 import net.infonode.docking.util.ViewMap;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -61,7 +62,7 @@ import org.apache.log4j.Logger;
  */
 public class MainBuilder extends AbstractMainBuilder
 {
-    private static final Logger LOG = Logger.getLogger( MainBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MainBuilder.class );
 
     private static final String TOOL_PREFIX = "jfactory.ups.tool.";
 
@@ -150,7 +151,7 @@ public class MainBuilder extends AbstractMainBuilder
         }
         catch ( Exception e )
         {
-            LOG.fatal( "could not complete panel loading", e );
+            LOG.error( "could not complete panel loading", e );
         }
     }
 

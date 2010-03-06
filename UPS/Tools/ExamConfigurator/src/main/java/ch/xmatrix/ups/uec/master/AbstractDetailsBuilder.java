@@ -26,6 +26,7 @@ import ch.jfactory.component.Dialogs;
 import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.controller.Loader;
+import ch.xmatrix.ups.domain.AbstractTaxonBased;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
@@ -47,7 +48,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * General details embeded in a {@link MasterDetailsBuilder} panel. This class is useful if you use JFormsDesigner forms
@@ -62,7 +64,7 @@ import org.apache.log4j.Logger;
  *
  * <li>It registers the model in the factory. Use {@link #getController()} to access the factory.</li>
  *
- * <li>It registers the model with the {@link ch.xmatrix.ups.uec.main.MainModel MainModel}.</li>
+ * <li>It registers the model with the {@link MainModel MainModel}.</li>
  *
  * <li>And it resets the dirty flag in the dirty listener to <code>flase</code>.</li>
  *
@@ -76,11 +78,11 @@ import org.apache.log4j.Logger;
  * initialization.</li>
  *
  * <li>Return a correct Converter instance for the model resource in {@link #getConverter()}. As all model collections are
- * derived from {@link ch.jfactory.model.SimpleModelList}, this class provides a base converter that may be configured
- * further for the detail models (see {@link ch.jfactory.model.SimpleModelList#getConverter() getConverter}).</li>
+ * derived from {@link SimpleModelList}, this class provides a base converter that may be configured
+ * further for the detail models (see {@link SimpleModelList#getConverter() getConverter}).</li>
  *
  * <li>To use the model with this class, make sure to derive it from {@link TaxonBased} or use the abstract
- * implementaiton for it {@link ch.xmatrix.ups.domain.AbstractTaxonBased AbstractTaxonBased}.</li>
+ * implementaiton for it {@link AbstractTaxonBased AbstractTaxonBased}.</li>
  *
  * </ul>
  *
@@ -108,9 +110,9 @@ import org.apache.log4j.Logger;
  *
  * <ul>
  *
- * <li>{@link ch.jfactory.application.view.builder.ActionCommandPanelBuilder#getPanel()}</li>
+ * <li>{@link ActionCommandPanelBuilder#getPanel()}</li>
  *
- * <li>{@link ch.jfactory.application.view.builder.ActionCommandPanelBuilder#createMainPanel()}</li>
+ * <li>{@link ActionCommandPanelBuilder#createMainPanel()}</li>
  *
  * </ul>
  *
@@ -122,7 +124,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder implements DetailsBuilder
 {
-    private static final Logger LOG = Logger.getLogger( AbstractDetailsBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractDetailsBuilder.class );
 
     protected static final Integer ZERO = new Integer( 0 );
 
@@ -269,9 +271,9 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
      *
      * <li>{@link #findMigrationErrors(String)}</li>
      *
-     * <li>{@link #commitMigrate(java.util.ArrayList)}</li>
+     * <li>{@link #commitMigrate(ArrayList)}</li>
      *
-     * <li>{@link #removeMigrationErrors(java.util.ArrayList)}</li>
+     * <li>{@link #removeMigrationErrors(ArrayList)}</li>
      *
      * </ul>
      *
@@ -312,7 +314,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
 
     /**
      * Important: When overriding call <code>super.setSpecimensModel()</code> in order to handle registered trees (see
-     * {@link #registerTree(javax.swing.JTree)}) correctly.
+     * {@link #registerTree(JTree)}) correctly.
      *
      * @param taxonBased the model
      */
@@ -382,7 +384,7 @@ public abstract class AbstractDetailsBuilder extends ActionCommandPanelBuilder i
     /**
      * Use this method to initialize component variables that you may use in the subclass for later modification and
      * integrate the model into it. A convenient way is given for taxon trees: you simple may register it with {@link
-     * #registerTree(javax.swing.JTree) registerTree}. To access your components of the FormCreator use {@link
+     * #registerTree(JTree) registerTree}. To access your components of the FormCreator use {@link
      * #getCreator()} - do not initialize the FormCreator in the method itself!
      */
     protected abstract void initComponents();

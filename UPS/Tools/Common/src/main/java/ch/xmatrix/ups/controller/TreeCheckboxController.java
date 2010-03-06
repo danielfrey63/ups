@@ -21,7 +21,7 @@ import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
 /**
- * Delegates space key press and mouse clicks to a common handler method {@link #handleSelection(javax.swing.tree.TreePath)
+ * Delegates space key press and mouse clicks to a common handler method {@link #handleSelection(TreePath)
  * handleSelection(TreePath)}.
  *
  * @author Daniel Frey

@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.game.maze;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -77,7 +78,7 @@ public class ScoreBar extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

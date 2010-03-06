@@ -11,6 +11,7 @@ package com.ethz.geobot.herbar.game.maze;
 import com.ethz.geobot.herbar.game.util.CountScore;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -92,7 +93,7 @@ public class RandomMaze extends Canvas implements KeyListener
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyPressed(KeyEvent)
+     * @see KeyListener#keyPressed(KeyEvent)
      */
     public void keyPressed( final KeyEvent e )
     {
@@ -158,21 +159,21 @@ public class RandomMaze extends Canvas implements KeyListener
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyReleased(KeyEvent)
+     * @see KeyListener#keyReleased(KeyEvent)
      */
     public void keyReleased( final KeyEvent e )
     {
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyTyped(KeyEvent)
+     * @see KeyListener#keyTyped(KeyEvent)
      */
     public void keyTyped( final KeyEvent e )
     {
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

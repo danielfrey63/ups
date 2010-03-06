@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.game.maze;
 
 import ch.jfactory.resource.ImageLocator;
 import java.awt.Canvas;
+import java.awt.Component;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
@@ -50,7 +51,7 @@ public class Flower extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

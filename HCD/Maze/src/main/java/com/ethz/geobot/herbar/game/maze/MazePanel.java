@@ -30,7 +30,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * mainpanel containing maze, buttons and panels.
@@ -120,7 +121,7 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
         }
         catch ( RuntimeException x )
         {
-            LOG.fatal( "MazePanel()", x );
+            LOG.error( "MazePanel()", x );
             throw x;
         }
         catch ( Error x )
@@ -167,7 +168,7 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.ScoreListener#scoreChanged()
+     * @see ScoreListener#scoreChanged()
      */
     public void scoreChanged()
     {
@@ -176,7 +177,7 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#deactivate()
+     * @see ModeActivation#deactivate()
      */
     public void deactivate()
     {
@@ -191,7 +192,7 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#activate()
+     * @see ModeActivation#activate()
      */
     public void activate()
     {
@@ -202,7 +203,7 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#queryDeactivate()
+     * @see ModeActivation#queryDeactivate()
      */
     public boolean queryDeactivate()
     {
@@ -245,6 +246,6 @@ public class MazePanel extends JPanel implements ScoreListener, ModeActivation
     {
         LogUtils.init();
         Strings.addResourceBundle( MazePanel.class, ResourceBundle.getBundle( "com.ethz.geobot.herbar.game.maze.MazePanel" ) );
-        LOG = Logger.getLogger( MazePanel.class );
+        LOG = LoggerFactory.getLogger( MazePanel.class );
     }
 }

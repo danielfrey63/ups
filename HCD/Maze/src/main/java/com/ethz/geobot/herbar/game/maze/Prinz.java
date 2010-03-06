@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.game.maze;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
@@ -82,7 +83,7 @@ public class Prinz extends Canvas
     }
 
     /**
-     * @see java.awt.Component#update(Graphics)
+     * @see Component#update(Graphics)
      */
     public void update( final Graphics g )
     {

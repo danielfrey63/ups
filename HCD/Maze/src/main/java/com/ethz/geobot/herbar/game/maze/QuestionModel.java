@@ -13,7 +13,8 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Vector;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * questionModel which serves the questionPanel with taxons upon which new questions are generated.
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class QuestionModel
 {
-    private static final Logger LOG = Logger.getLogger( QuestionModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( QuestionModel.class );
 
     private final Vector taxPool = new Vector();
 

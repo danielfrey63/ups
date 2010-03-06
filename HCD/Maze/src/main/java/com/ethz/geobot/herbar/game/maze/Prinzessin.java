@@ -11,6 +11,7 @@ package com.ethz.geobot.herbar.game.maze;
 import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.game.util.SoundList;
 import java.awt.Canvas;
+import java.awt.Component;
 import java.awt.Graphics;
 
 /**
@@ -73,7 +74,7 @@ public class Prinzessin extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

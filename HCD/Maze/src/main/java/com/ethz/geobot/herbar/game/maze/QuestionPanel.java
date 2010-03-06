@@ -61,7 +61,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * questionpanel modal.
@@ -71,7 +72,7 @@ import org.apache.log4j.Logger;
  */
 public class QuestionPanel extends JDialog implements Question
 {
-    private static final Logger LOG = Logger.getLogger( QuestionPanel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( QuestionPanel.class );
 
     private final JLabel taxLabel;
 
@@ -276,21 +277,21 @@ public class QuestionPanel extends JDialog implements Question
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#firstQuestion()
+     * @see Question#firstQuestion()
      */
     public void firstQuestion()
     {
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#lastQuestion()
+     * @see Question#lastQuestion()
      */
     public void lastQuestion()
     {
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#nextQuestion()
+     * @see Question#nextQuestion()
      */
     public void nextQuestion()
     {

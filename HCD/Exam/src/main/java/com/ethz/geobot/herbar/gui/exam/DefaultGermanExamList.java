@@ -15,7 +15,8 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Compiles a list of Taxon objects according to the Version 1.0 Herbar CD-ROM
@@ -25,7 +26,7 @@ import org.apache.log4j.Logger;
  */
 public class DefaultGermanExamList implements ExamList
 {
-    private static final Logger LOG = Logger.getLogger( DefaultGermanExamList.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DefaultGermanExamList.class );
 
     private HerbarModel herbarModel;
 

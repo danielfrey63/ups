@@ -16,7 +16,8 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Traks Taxon objects and answers of student.
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class ExamStateModel implements Cursor
 {
-    private static final Logger LOG = Logger.getLogger( ExamStateModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExamStateModel.class );
 
     private final List focusListeners = new ArrayList();
 

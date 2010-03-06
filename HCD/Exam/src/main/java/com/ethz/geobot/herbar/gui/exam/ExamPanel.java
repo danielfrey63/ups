@@ -15,6 +15,7 @@ import ch.jfactory.application.view.status.StatusBar;
 import ch.jfactory.application.view.status.TimerPanel;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
@@ -82,7 +83,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <Comments here>
@@ -195,7 +197,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         }
         catch ( RuntimeException e )
         {
-            LOG.fatal( "RuntimeException in ExamPanel constructor", e );
+            LOG.error( "RuntimeException in ExamPanel constructor", e );
             throw e;
         }
         catch ( Error e )
@@ -289,6 +291,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     }
 
     //==== Intro
+
     private JPanel createIntroPanel()
     {
         // start button
@@ -354,6 +357,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     }
 
     //==== Exam
+
     private JPanel createExamPanel()
     {
         picturePanel = new PicturePanel( herbarModel, herbarModel.getPictureTheme( "Herbar" ), false );
@@ -462,6 +466,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     }
 
     //==== Statistics
+
     private JPanel createStatisticsPanel()
     {
         final JPanel statisticsPanel = new JPanel( new GridLayout( 3, 1 ) );
@@ -563,7 +568,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
             final GraphNodeList guesses = model.getGuesses();
             final GraphNodeList answers = model.getAnswers();
             iGuesses += guesses.size();
-            iCorrect += ch.jfactory.lang.ArrayUtils.intersect( guesses.getAll(), answers.getAll() ).length;
+            iCorrect += ArrayUtils.intersect( guesses.getAll(), answers.getAll() ).length;
         }
         return ( iGuesses == 0 ? 0 : iCorrect / iGuesses );
     }
@@ -661,7 +666,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         {
             e.printStackTrace();
         }
-        LOG = Logger.getLogger( ExamPanel.class );
+        LOG = LoggerFactory.getLogger( ExamPanel.class );
     }
 
     class StopExamAction extends AbstractAction

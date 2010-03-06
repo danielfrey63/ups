@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="windows-1252"?>
 <VersionInfo>
     <name>exam.jar</name>
     <author>Daniel Frey</author>
-    <description>PrÃ¼fungs Modus</description>
+    <description>Prüfungs Modus</description>
     <majorVersion>3</majorVersion>
     <minorVersion>0</minorVersion>
     <buildVersion>20070401</buildVersion>

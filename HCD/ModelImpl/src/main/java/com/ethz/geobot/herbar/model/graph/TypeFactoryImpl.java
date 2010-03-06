@@ -26,8 +26,8 @@ import com.ethz.geobot.herbar.model.db.impl.MutableTaxonLevelImpl;
 import com.ethz.geobot.herbar.model.db.impl.MutableTaxonSynonymImpl;
 import com.ethz.geobot.herbar.model.db.impl.MutableTextImpl;
 import java.util.HashMap;
-import java.util.Iterator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
  */
 public class TypeFactoryImpl implements TypeFactory
 {
-    private static final Logger LOG = Logger.getLogger( TypeFactoryImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TypeFactoryImpl.class );
 
     /**
      * Used for the TYPE field in the db.
@@ -78,7 +78,7 @@ public class TypeFactoryImpl implements TypeFactory
         }
         catch ( Exception e )
         {
-            LOG.fatal( "Fatal error during initialization of model", e );
+            LOG.error( "Fatal error during initialization of model", e );
         }
     }
 
@@ -93,7 +93,7 @@ public class TypeFactoryImpl implements TypeFactory
     }
 
     /**
-     * @see ch.jfactory.model.graph.TypeFactory#getInstance(Class)
+     * @see TypeFactory#getInstance(Class)
      */
     public GraphNode getInstance( final Class type )
     {
@@ -121,7 +121,7 @@ public class TypeFactoryImpl implements TypeFactory
                 // Appropriate mapping has not been found.
                 if ( impl == null )
                 {
-                    LOG.fatal( "Mapping for " + type + " not found." );
+                    LOG.error( "Mapping for " + type + " not found." );
                 }
             }
             try
@@ -130,16 +130,16 @@ public class TypeFactoryImpl implements TypeFactory
             }
             catch ( InstantiationException ex )
             {
-                LOG.fatal( "Fatal error during creation of new node of type " + type, e );
+                LOG.error( "Fatal error during creation of new node of type " + type, e );
             }
             catch ( IllegalAccessException ex )
             {
-                LOG.fatal( "Fatal error during creation of new node of type " + type, e );
+                LOG.error( "Fatal error during creation of new node of type " + type, e );
             }
         }
         catch ( IllegalAccessException e )
         {
-            LOG.fatal( "fatal error during creation of new node of type " + type, e );
+            LOG.error( "fatal error during creation of new node of type " + type, e );
         }
         return node;
     }

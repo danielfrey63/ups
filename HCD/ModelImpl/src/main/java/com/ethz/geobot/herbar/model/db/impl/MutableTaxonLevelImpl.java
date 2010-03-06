@@ -11,7 +11,7 @@ import com.ethz.geobot.herbar.model.Taxon;
 public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
 {
     /**
-     * @see com.ethz.geobot.herbar.model.Level#isLower(Level)
+     * @see Level#isLower(Level)
      */
     public boolean isLower( final Level level )
     {
@@ -20,7 +20,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#isHigher(Level)
+     * @see Level#isHigher(Level)
      */
     public boolean isHigher( final Level level )
     {
@@ -29,7 +29,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#getChildLevel()
+     * @see Level#getChildLevel()
      */
     public Level getChildLevel()
     {
@@ -38,7 +38,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#getParentLevel()
+     * @see Level#getParentLevel()
      */
     public Level getParentLevel()
     {
@@ -47,7 +47,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#getTaxa()
+     * @see Level#getTaxa()
      */
     public Taxon[] getTaxa()
     {
@@ -56,7 +56,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#getSubLevels()
+     * @see Level#getSubLevels()
      */
     public Level[] getSubLevels()
     {
@@ -78,7 +78,7 @@ public class MutableTaxonLevelImpl extends MutableGraphNodeImpl implements Level
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Level#getSuperLevels()
+     * @see Level#getSuperLevels()
      */
     public Level[] getSuperLevels()
     {

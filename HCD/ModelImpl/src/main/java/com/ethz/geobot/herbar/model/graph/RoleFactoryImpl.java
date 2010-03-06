@@ -24,7 +24,8 @@ import com.ethz.geobot.herbar.model.relevance.marker.WeakInherited;
 import com.ethz.geobot.herbar.model.relevance.marker.WeakUnited;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -32,7 +33,7 @@ import org.apache.log4j.Logger;
  */
 public class RoleFactoryImpl implements RoleFactory
 {
-    private static final Logger LOG = Logger.getLogger( RoleFactoryImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RoleFactoryImpl.class );
 
     private final Map nameRoleMapping = new HashMap();
 
@@ -81,7 +82,7 @@ public class RoleFactoryImpl implements RoleFactory
      * warning is logged. The name of this unkonwn role is set to the types name converted to uppercase and separated
      * with underscores.<p> Note: The constructor does initialize all known roles.
      *
-     * @see ch.jfactory.model.graph.RoleFactory#getRole(String)
+     * @see RoleFactory#getRole(String)
      */
     public GraphNode getRole( final Class type )
     {
@@ -129,7 +130,7 @@ public class RoleFactoryImpl implements RoleFactory
         {
             final String message = "Role for type " + type + " not known";
             final RuntimeException e = new IllegalStateException( message );
-            LOG.fatal( message, e );
+            LOG.error( message, e );
             throw e;
         }
         return role;

@@ -1,5 +1,7 @@
 package com.ethz.geobot.herbar.model.db.impl;
 
+import com.ethz.geobot.herbar.model.Picture;
+
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:18 $
@@ -7,7 +9,7 @@ package com.ethz.geobot.herbar.model.db.impl;
 public class MutablePicturesImpl extends MutableGraphNodeImpl
 {
     /**
-     * @see com.ethz.geobot.herbar.model.Picture#getRelativURL()
+     * @see Picture#getRelativURL()
      */
     public String getRelativURL()
     {

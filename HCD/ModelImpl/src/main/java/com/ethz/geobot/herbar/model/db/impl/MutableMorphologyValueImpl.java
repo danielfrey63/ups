@@ -14,7 +14,7 @@ import java.util.List;
 public class MutableMorphologyValueImpl extends MutableGraphNodeImpl implements MorValue
 {
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getText()
+     * @see MorValue#getText()
      */
     public String getText()
     {
@@ -29,7 +29,7 @@ public class MutableMorphologyValueImpl extends MutableGraphNodeImpl implements 
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getTaxa()
+     * @see MorValue#getTaxa()
      */
     public Taxon[] getTaxa()
     {
@@ -38,7 +38,7 @@ public class MutableMorphologyValueImpl extends MutableGraphNodeImpl implements 
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getTaxon(int)
+     * @see MorValue#getTaxon(int)
      */
     public Taxon getTaxon( final int index )
     {
@@ -46,7 +46,7 @@ public class MutableMorphologyValueImpl extends MutableGraphNodeImpl implements 
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getParentAttribute()
+     * @see MorValue#getParentAttribute()
      */
     public MorAttribute getParentAttribute()
     {

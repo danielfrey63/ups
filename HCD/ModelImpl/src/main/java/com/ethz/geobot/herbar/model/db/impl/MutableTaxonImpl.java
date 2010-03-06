@@ -28,7 +28,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -36,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTaxon
 {
-    private static final Logger LOG = Logger.getLogger( MutableTaxonImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MutableTaxonImpl.class );
 
     private static final Comparator RANK_COMPARATOR = new GraphNodeRankComparator();
 
@@ -51,7 +52,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getRelevance(MorValue)
+     * @see Taxon#getRelevance(MorValue)
      */
     public AbsRelevance getRelevance( final MorValue value )
     {
@@ -59,7 +60,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MutableTaxon#setChildTaxa(Taxon[])
+     * @see MutableTaxon#setChildTaxa(Taxon[])
      */
     public void setChildTaxa( final Taxon[] children )
     {
@@ -72,7 +73,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MutableTaxon#setLevel(Level)
+     * @see MutableTaxon#setLevel(Level)
      */
     public void setLevel( final Level newLevel )
     {
@@ -82,7 +83,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MutableTaxon#setParentTaxon(Taxon)
+     * @see MutableTaxon#setParentTaxon(Taxon)
      */
     public void setParentTaxon( final Taxon parent )
     {
@@ -90,7 +91,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getLevel()
+     * @see Taxon#getLevel()
      */
     public Level getLevel()
     {
@@ -99,7 +100,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getParentTaxon()
+     * @see Taxon#getParentTaxon()
      */
     public Taxon getParentTaxon()
     {
@@ -115,7 +116,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxa()
+     * @see Taxon#getChildTaxa()
      */
     public Taxon[] getChildTaxa()
     {
@@ -124,7 +125,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxon(int)
+     * @see Taxon#getChildTaxon(int)
      */
     public Taxon getChildTaxon( final int index ) throws IndexOutOfBoundsException
     {
@@ -132,7 +133,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getMorValues()
+     * @see Taxon#getMorValues()
      */
     public MorValue[] getMorValues()
     {
@@ -146,7 +147,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getMorValue(int)
+     * @see Taxon#getMorValue(int)
      */
     public MorValue getMorValue( final int index )
     {
@@ -154,7 +155,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getMorAttributes()
+     * @see Taxon#getMorAttributes()
      */
     public MorAttribute[] getMorAttributes()
     {
@@ -171,7 +172,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxon(Taxon)
+     * @see Taxon#getChildTaxon(Taxon)
      */
     public int getChildTaxon( final Taxon child )
     {
@@ -187,7 +188,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxa(Level)
+     * @see Taxon#getChildTaxa(Level)
      */
     public Taxon[] getChildTaxa( final Level level )
     {
@@ -206,7 +207,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getAllChildTaxa(Level)
+     * @see Taxon#getAllChildTaxa(Level)
      */
     public Taxon[] getAllChildTaxa( final Level level )
     {
@@ -223,7 +224,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#isIn(Taxon[])
+     * @see Taxon#isIn(Taxon[])
      */
     public boolean isIn( final Taxon[] list )
     {
@@ -231,7 +232,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getSubLevels()
+     * @see Taxon#getSubLevels()
      */
     public Level[] getSubLevels()
     {
@@ -258,7 +259,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getCommentedPictures(PictureTheme)
+     * @see Taxon#getCommentedPictures(PictureTheme)
      */
     public CommentedPicture[] getCommentedPictures( final PictureTheme theme )
     {
@@ -278,7 +279,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getPictureThemes()
+     * @see Taxon#getPictureThemes()
      */
     public PictureTheme[] getPictureThemes()
     {
@@ -293,7 +294,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getSiblings()
+     * @see Taxon#getSiblings()
      */
     public Taxon[] getSiblings()
     {
@@ -310,7 +311,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getScore()
+     * @see Taxon#getScore()
      */
     public double getScore()
     {
@@ -318,7 +319,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#setScore(boolean)
+     * @see Taxon#setScore(boolean)
      */
     public void setScore( final boolean right )
     {

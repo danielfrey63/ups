@@ -7,6 +7,7 @@ import ch.jfactory.model.graph.AbsSimplePersistentGraphNode;
 import ch.jfactory.model.graph.GraphEdge;
 import ch.jfactory.model.graph.GraphEdgeImpl;
 import ch.jfactory.model.graph.GraphEdgeList;
+import ch.jfactory.model.graph.GraphModel;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.model.graph.SimpleTransientGraphNode;
@@ -24,7 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -38,7 +40,7 @@ public class GraphModelImpl extends AbsGraphModel
      * uppon next retrieval from (still valid) global cache.
      */
 
-    private static final Logger LOG = Logger.getLogger( GraphModelImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GraphModelImpl.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
@@ -88,7 +90,7 @@ public class GraphModelImpl extends AbsGraphModel
         }
         catch ( Exception e )
         {
-            LOG.fatal( "Fatal error during initialization of model", e );
+            LOG.error( "Fatal error during initialization of model", e );
         }
     }
 
@@ -126,7 +128,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#doQuit()
+     * @see GraphModel#doQuit()
      */
     public void doQuit()
     {
@@ -142,7 +144,7 @@ public class GraphModelImpl extends AbsGraphModel
         }
         catch ( Exception e )
         {
-            LOG.fatal( "Fatal error during quit", e );
+            LOG.error( "Fatal error during quit", e );
         }
     }
 
@@ -341,7 +343,7 @@ public class GraphModelImpl extends AbsGraphModel
     /**
      * Uppon call of this method, the new, update and delete caches are cleared.
      *
-     * @see ch.jfactory.model.graph.GraphModel#getRoot()
+     * @see GraphModel#getRoot()
      */
     public GraphNode getRoot()
     {
@@ -381,7 +383,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#createEdge(GraphNode,GraphNode)
+     * @see GraphModel#createEdge(GraphNode,GraphNode)
      */
     public GraphEdge createEdge( final GraphNode parent, final GraphNode child )
     {
@@ -437,7 +439,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphNode)
+     * @see GraphModel#addRemoved(GraphNode)
      */
     public void addRemoved( final GraphNode node )
     {
@@ -461,7 +463,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphEdge)
+     * @see GraphModel#addRemoved(GraphEdge)
      */
     public void addRemoved( final GraphEdge edge )
     {
@@ -504,7 +506,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphNode)
+     * @see GraphModel#addChanged(GraphNode)
      */
     public void addChanged( final GraphNode node )
     {
@@ -528,7 +530,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphEdge)
+     * @see GraphModel#addChanged(GraphEdge)
      */
     public void addChanged( final GraphEdge edge )
     {
@@ -562,7 +564,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#createNode(GraphNode,Class)
+     * @see GraphModel#createNode(GraphNode,Class)
      */
     public GraphNode createNode( final GraphNode parent, final Class type )
     {
@@ -588,7 +590,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#save()
+     * @see GraphModel#save()
      */
     public void save()
     {
@@ -776,20 +778,20 @@ public class GraphModelImpl extends AbsGraphModel
         }
         catch ( SQLException e )
         {
-            LOG.fatal( "Fatal error during save" );
+            LOG.error( "Fatal error during save" );
             if ( node != null )
             {
-                LOG.fatal( "Node is " + node );
+                LOG.error( "Node is " + node );
             }
             if ( edge != null )
             {
-                LOG.fatal( "Edge is " + edge + "(id=" + edge.getId() + ")" );
-                LOG.fatal( "Parent is " + edge.getParent()
+                LOG.error( "Edge is " + edge + "(id=" + edge.getId() + ")" );
+                LOG.error( "Parent is " + edge.getParent()
                         + "(id=" + edge.getParent().getId() + ")" );
-                LOG.fatal( "Child is " + edge.getChild()
+                LOG.error( "Child is " + edge.getChild()
                         + "(id=" + edge.getChild().getId() + ")" );
             }
-            LOG.fatal( "Unable to recover error", e );
+            LOG.error( "Unable to recover error", e );
             throw new IllegalStateException( "Save failed" );
         }
     }
@@ -909,7 +911,7 @@ class IntArray
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

@@ -11,7 +11,7 @@ import com.ethz.geobot.herbar.model.MorSubject;
 public class MutableMorphologySubjectImpl extends MutableGraphNodeImpl implements MorSubject
 {
     /**
-     * @see com.ethz.geobot.herbar.model.MorSubject#getAttributes()
+     * @see MorSubject#getAttributes()
      */
     public MorAttribute[] getAttributes()
     {
@@ -20,7 +20,7 @@ public class MutableMorphologySubjectImpl extends MutableGraphNodeImpl implement
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorSubject#getAttribute(int)
+     * @see MorSubject#getAttribute(int)
      */
     public MorAttribute getAttribute( final int index ) throws IndexOutOfBoundsException
     {
@@ -28,7 +28,7 @@ public class MutableMorphologySubjectImpl extends MutableGraphNodeImpl implement
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorSubject#getSubjects()
+     * @see MorSubject#getSubjects()
      */
     public MorSubject[] getSubjects()
     {
@@ -37,7 +37,7 @@ public class MutableMorphologySubjectImpl extends MutableGraphNodeImpl implement
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorSubject#getSubject(int)
+     * @see MorSubject#getSubject(int)
      */
     public MorSubject getSubject( final int index ) throws IndexOutOfBoundsException
     {
@@ -45,7 +45,7 @@ public class MutableMorphologySubjectImpl extends MutableGraphNodeImpl implement
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorSubject#getParentSubject()
+     * @see MorSubject#getParentSubject()
      */
     public MorSubject getParentSubject()
     {

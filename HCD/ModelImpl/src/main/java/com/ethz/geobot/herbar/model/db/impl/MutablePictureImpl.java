@@ -9,7 +9,7 @@ import com.ethz.geobot.herbar.model.Picture;
 public class MutablePictureImpl extends MutableGraphNodeImpl implements Picture
 {
     /**
-     * @see com.ethz.geobot.herbar.model.Picture#getRelativURL()
+     * @see Picture#getRelativURL()
      */
     public String getRelativURL()
     {

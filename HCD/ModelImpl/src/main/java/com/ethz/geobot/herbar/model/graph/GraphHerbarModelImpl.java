@@ -30,7 +30,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     private String name;
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getRootLevel()
+     * @see HerbarModel#getRootLevel()
      */
     public Level getRootLevel()
     {
@@ -39,7 +39,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getLastLevel()
+     * @see HerbarModel#getLastLevel()
      */
     public Level getLastLevel()
     {
@@ -50,7 +50,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getRootTaxon()
+     * @see HerbarModel#getRootTaxon()
      */
     public Taxon getRootTaxon()
     {
@@ -59,7 +59,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getRootMorSubject()
+     * @see HerbarModel#getRootMorSubject()
      */
     public MorSubject getRootMorSubject()
     {
@@ -80,7 +80,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getPictureThemes()
+     * @see HerbarModel#getPictureThemes()
      */
     public PictureTheme[] getPictureThemes()
     {
@@ -90,7 +90,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getPictureTheme(String)
+     * @see HerbarModel#getPictureTheme(String)
      */
     public PictureTheme getPictureTheme( final String name )
     {
@@ -108,7 +108,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getValues(String)
+     * @see HerbarModel#getValues(String)
      */
     public MorValue[] getValues( final String name )
     {
@@ -131,7 +131,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getTaxa(MorValue)
+     * @see HerbarModel#getTaxa(MorValue)
      */
     public Taxon[] getTaxa( final MorValue mor )
     {
@@ -148,7 +148,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getTaxon(String)
+     * @see HerbarModel#getTaxon(String)
      */
     public Taxon getTaxon( final String name )
     {
@@ -173,7 +173,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getLevel(String)
+     * @see HerbarModel#getLevel(String)
      */
     public Level getLevel( final String name )
     {
@@ -191,7 +191,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getLevels()
+     * @see HerbarModel#getLevels()
      */
     public Level[] getLevels()
     {
@@ -208,7 +208,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getName()
+     * @see HerbarModel#getName()
      */
     public String getName()
     {
@@ -221,7 +221,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel #addModelChangeListener(ModelChangeListener)
+     * @see HerbarModel #addModelChangeListener(ModelChangeListener)
      */
     public void addModelChangeListener( final ModelChangeListener listener )
     {
@@ -229,7 +229,7 @@ public class GraphHerbarModelImpl implements HerbarModel
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel #removeModelChangeListener(ModelChangeListener)
+     * @see HerbarModel #removeModelChangeListener(ModelChangeListener)
      */
     public void removeModelChangeListener( final ModelChangeListener listener )
     {

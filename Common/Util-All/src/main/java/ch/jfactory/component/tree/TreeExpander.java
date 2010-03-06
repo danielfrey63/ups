@@ -30,7 +30,7 @@ public class TreeExpander implements PropertyChangeListener
     }
 
     /**
-     * @see java.beans.PropertyChangeListener#propertyChange(PropertyChangeEvent)
+     * @see PropertyChangeListener#propertyChange(PropertyChangeEvent)
      */
     public void propertyChange( final PropertyChangeEvent evt )
     {

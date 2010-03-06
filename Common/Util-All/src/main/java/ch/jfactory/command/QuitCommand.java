@@ -17,11 +17,12 @@
 package ch.jfactory.command;
 
 import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 
 /**
- * Closes the application after giving each {@link java.beans.VetoableChangeListener} registered with the model a chance
+ * Closes the application after giving each {@link VetoableChangeListener} registered with the model a chance
  * to cancel closing.
  *
  * @author Daniel Frey

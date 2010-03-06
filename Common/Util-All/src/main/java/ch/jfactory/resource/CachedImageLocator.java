@@ -14,7 +14,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.WeakHashMap;
 import javax.swing.ImageIcon;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Helper class for locating images and support for image caching.
@@ -27,7 +28,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     /**
      * category for logging
      */
-    private static final Logger LOGGER = Logger.getLogger( CachedImageLocator.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageLocator.class );
 
     /**
      * map containing a cache for images especially Icons
@@ -152,9 +153,9 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     /**
      * cleanup... stop loader thread.
      *
-     * @throws java.lang.Throwable Description of the Exception
+     * @throws Throwable Description of the Exception
      */
-    protected void finalize() throws java.lang.Throwable
+    protected void finalize() throws Throwable
     {
         LOGGER.info( "CachedImageLocator going to be finalize" );
 

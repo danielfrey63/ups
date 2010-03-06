@@ -3,11 +3,18 @@ package ch.jfactory.component.tree;
 import ch.jfactory.component.FinderWindow;
 import ch.jfactory.component.SimpleDocumentListener;
 import ch.jfactory.resource.Strings;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.tree.TreePath;
 
@@ -93,22 +100,22 @@ public class TreeFinderWindow implements TreeFinder
 
     public static void main( final String[] args )
     {
-        final javax.swing.JFrame f = new javax.swing.JFrame( "Tree Finder Test" );
-        f.addWindowListener( new java.awt.event.WindowAdapter()
+        final JFrame f = new JFrame( "Tree Finder Test" );
+        f.addWindowListener( new WindowAdapter()
         {
             public void windowClosing( final WindowEvent e )
             {
                 System.exit( 0 );
             }
         } );
-        final java.awt.Container content = f.getContentPane();
-        final javax.swing.JTree tree = new javax.swing.JTree();
+        final Container content = f.getContentPane();
+        final JTree tree = new JTree();
         new TreeFinderWindow( tree );
-        final javax.swing.JPanel panel = new javax.swing.JPanel( new java.awt.BorderLayout() );
-        panel.setBorder( new javax.swing.border.EmptyBorder( 20, 20, 20, 20 ) );
-        panel.add( new javax.swing.JScrollPane( tree ), java.awt.BorderLayout.CENTER );
-        content.setLayout( new java.awt.BorderLayout() );
-        content.add( panel, java.awt.BorderLayout.CENTER );
+        final JPanel panel = new JPanel( new BorderLayout() );
+        panel.setBorder( new EmptyBorder( 20, 20, 20, 20 ) );
+        panel.add( new JScrollPane( tree ), BorderLayout.CENTER );
+        content.setLayout( new BorderLayout() );
+        content.add( panel, BorderLayout.CENTER );
         f.setSize( 200, 200 );
         f.setVisible( true );
     }

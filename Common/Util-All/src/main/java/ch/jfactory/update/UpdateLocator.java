@@ -11,7 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used for update functionallity
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class UpdateLocator
 {
-    private static final Logger LOGGER = Logger.getLogger( UpdateLocator.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( UpdateLocator.class );
 
     private String currentServerLocation = null;
 

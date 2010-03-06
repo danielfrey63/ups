@@ -326,7 +326,7 @@ public class ImageUtils
      *
      * @param path either an absoute path in the classpath or a local file path
      * @return the image laoded
-     * @throws java.io.IOException if a reading error occures
+     * @throws IOException if a reading error occures
      */
     public static Image createImage( final String path ) throws IOException
     {

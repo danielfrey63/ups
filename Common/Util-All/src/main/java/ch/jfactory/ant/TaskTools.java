@@ -1,5 +1,11 @@
 package ch.jfactory.ant;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import org.apache.tools.ant.util.FileUtils;
 
 /**
@@ -19,19 +25,19 @@ public class TaskTools
      * @param className       Description of the Parameter
      * @return The filePathFromClassName value
      */
-    public static java.io.File getFilePathFromClassName( final java.io.File sourceDirectory, final String className )
+    public static File getFilePathFromClassName( final File sourceDirectory, final String className )
     {
         final StringBuffer sb = new StringBuffer();
         sb.append( sourceDirectory.getPath() );
 
-        final java.util.StringTokenizer st = new java.util.StringTokenizer( className, "." );
+        final StringTokenizer st = new StringTokenizer( className, "." );
         while ( st.hasMoreTokens() )
         {
             sb.append( System.getProperty( "file.separator", "/" ) );
             sb.append( st.nextToken() );
         }
         sb.append( ".java" );
-        return new java.io.File( sb.toString() );
+        return new File( sb.toString() );
     }
 
     /**
@@ -41,13 +47,13 @@ public class TaskTools
      * @param variableName The variable name to look for.
      * @return The variable value.
      * @throws Exception           Description of the Exception
-     * @throws java.lang.Exception An Exception has occurred.
+     * @throws Exception An Exception has occurred.
      */
     public static String findVariableNameValueInClassFile( final String fileContents, final String variableName ) throws Exception
     {
         final StringBuffer sb = new StringBuffer();
 
-        final java.util.StringTokenizer st = new java.util.StringTokenizer( fileContents, System.getProperty( "line.separator", "\n" ) );
+        final StringTokenizer st = new StringTokenizer( fileContents, System.getProperty( "line.separator", "\n" ) );
 
         while ( st.hasMoreTokens() )
         {
@@ -57,7 +63,7 @@ public class TaskTools
             if ( ( indexOfVariable != -1 ) && ( indexOfEquals != -1 ) )
             {
                 line = line.substring( indexOfEquals + 1, line.length() - 1 ).trim();
-                final java.util.StringTokenizer st2 = new java.util.StringTokenizer( line, "\"" );
+                final StringTokenizer st2 = new StringTokenizer( line, "\"" );
                 while ( st2.hasMoreTokens() )
                 {
                     sb.append( st2.nextToken() );
@@ -104,13 +110,13 @@ public class TaskTools
      *
      * @param file The file to read.
      * @return The file as a String
-     * @throws java.io.IOException           Something went wrong.
-     * @throws java.io.FileNotFoundException Something went wrong.
+     * @throws IOException           Something went wrong.
+     * @throws FileNotFoundException Something went wrong.
      */
-    public static String readFile( final java.io.File file ) throws java.io.IOException
+    public static String readFile( final File file ) throws IOException
     {
         final String returnString;
-        final java.io.FileReader fileReader = new java.io.FileReader( file );
+        final FileReader fileReader = new FileReader( file );
         returnString = FileUtils.readFully( fileReader );
         fileReader.close();
 
@@ -122,13 +128,13 @@ public class TaskTools
      *
      * @param file     The file to write to.
      * @param contents The content to be written to the file.
-     * @throws java.io.IOException           Something went wrong.
-     * @throws java.io.FileNotFoundException Something went wrong.
+     * @throws IOException           Something went wrong.
+     * @throws FileNotFoundException Something went wrong.
      */
-    public static synchronized void writeFile( final java.io.File file, final byte[] contents )
-            throws java.io.IOException
+    public static synchronized void writeFile( final File file, final byte[] contents )
+            throws IOException
     {
-        final java.io.FileOutputStream theFileOutputStream = new java.io.FileOutputStream( file );
+        final FileOutputStream theFileOutputStream = new FileOutputStream( file );
         theFileOutputStream.write( contents );
         theFileOutputStream.close();
     }

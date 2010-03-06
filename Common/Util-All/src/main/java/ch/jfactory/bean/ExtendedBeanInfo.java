@@ -78,7 +78,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getAdditionalBeanInfo()
+     * @see BeanInfo#getAdditionalBeanInfo()
      */
     public BeanInfo[] getAdditionalBeanInfo()
     {
@@ -86,7 +86,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getBeanDescriptor()
+     * @see BeanInfo#getBeanDescriptor()
      */
     public BeanDescriptor getBeanDescriptor()
     {
@@ -94,7 +94,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getDefaultEventIndex()
+     * @see BeanInfo#getDefaultEventIndex()
      */
     public int getDefaultEventIndex()
     {
@@ -102,7 +102,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getDefaultPropertyIndex()
+     * @see BeanInfo#getDefaultPropertyIndex()
      */
     public int getDefaultPropertyIndex()
     {
@@ -110,7 +110,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getIcon(int)
+     * @see BeanInfo#getIcon(int)
      */
     public Image getIcon( final int iconKind )
     {
@@ -118,7 +118,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getEventSetDescriptors()
+     * @see BeanInfo#getEventSetDescriptors()
      */
     public EventSetDescriptor[] getEventSetDescriptors()
     {
@@ -147,7 +147,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getMethodDescriptors()
+     * @see BeanInfo#getMethodDescriptors()
      */
     public MethodDescriptor[] getMethodDescriptors()
     {
@@ -175,7 +175,7 @@ public class ExtendedBeanInfo implements BeanInfo
     }
 
     /**
-     * @see java.beans.BeanInfo#getPropertyDescriptors()
+     * @see BeanInfo#getPropertyDescriptors()
      */
     public PropertyDescriptor[] getPropertyDescriptors()
     {

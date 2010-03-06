@@ -3,6 +3,7 @@ package ch.jfactory.ant;
 import ch.jfactory.update.VersionInfo;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,16 +13,16 @@ import java.lang.reflect.Method;
 import org.apache.tools.ant.BuildException;
 
 /**
- * <p>This ant task is able to increment any number in a {@link ch.jfactory.update.VersionInfo VersionInfo} getFile().
+ * <p>This ant task is able to increment any number in a {@link VersionInfo VersionInfo} getFile().
  * It is assumed that the getFile() is an xml getFile() like the one produced by the java.bean.XMLEncoder of Sun for a
- * {@link ch.jfactory.update.VersionInfo VersionInfo} instance.</p> <p/> <p>Use the task as follows:</p> <p/>
+ * {@link VersionInfo VersionInfo} instance.</p> <p/> <p>Use the task as follows:</p> <p/>
  * <pre>
  * &lt;versioninfo getFile()="VersionInfo.xml" property="BuildVersion" steps="true" odd="false/&gt;
  * </pre>
  * <p/> <p>The attributes <code>getFile()</code> and <code>property</code> are mandatory, <code>steps</code> and
  * <code>odd</code> are facultative.</p> <p/> <p>The <code>getFile()</code> attribute holds the getFile() on the
  * getFile() system to update and search for the entry to update. The <code>property</code> is the name of the
- * VersionInfo property to be updated. See the documentation of {@link ch.jfactory.update.VersionInfo VersionInfo} for a
+ * VersionInfo property to be updated. See the documentation of {@link VersionInfo VersionInfo} for a
  * list of valid properties.</p> <p/> <p>The <code>steps</code> flag set to true (default is false) enable a mode where
  * numbers are snapped to the next odd or even number. Use <code>odd</code> (defaults to false) to specify whether odd
  * or even numbers should be next. Without <code>steps</code> set to true, the <code>odd</code> attribute has no
@@ -39,7 +40,7 @@ public class VersionInfoIncrementor extends Incrementor
      */
     protected void doExecute() throws BuildException
     {
-        final java.io.File file = getFile();
+        final File file = getFile();
 
         VersionInfo info = null;
         try

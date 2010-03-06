@@ -23,6 +23,7 @@ import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.Note;
 import ch.jfactory.component.splash.ImageSplash;
+import ch.jfactory.logging.LogInterface;
 import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.ResourceHelper;
 import ch.jfactory.resource.Strings;
@@ -59,8 +60,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.DimensionUIResource;
-import org.apache.log4j.Logger;
 import org.apache.log4j.helpers.OptionConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class addresses three purposes:
@@ -147,7 +149,7 @@ import org.apache.log4j.helpers.OptionConverter;
  * </pre>
  *
  * The model class must provide a public field <code>DEFAULT</code> or an accessor <code>getDefaultModel()</code>. The
- * controler hast to implement {@link ch.jfactory.application.AbstractMainController} and the constructor has to accept
+ * controler hast to implement {@link AbstractMainController} and the constructor has to accept
  * as its only argument an instance of the main model.
  *
  * @author Daniel Frey
@@ -292,7 +294,7 @@ public class MainRunner extends DefaultApplicationStarter
         }
         catch ( Exception e )
         {
-            LOG.fatal( "error during initialization of application", e );
+            LOG.error( "error during initialization of application", e );
         }
     }
 
@@ -438,7 +440,7 @@ public class MainRunner extends DefaultApplicationStarter
         }
         catch ( Exception e )
         {
-            LOG.fatal( "error during initialization of actions", e );
+            LOG.error( "error during initialization of actions", e );
         }
     }
 
@@ -478,7 +480,7 @@ public class MainRunner extends DefaultApplicationStarter
             }
         }
 
-        LOG = Logger.getLogger( MainRunner.class );
+        LOG = LoggerFactory.getLogger( MainRunner.class );
     }
 
     private Object createMainModel()
@@ -511,7 +513,7 @@ public class MainRunner extends DefaultApplicationStarter
             }
             catch ( Exception e )
             {
-                LOG.fatal( "error during initialization of model", e );
+                LOG.error( "error during initialization of model", e );
             }
         }
         catch ( ClassNotFoundException e )
@@ -546,7 +548,7 @@ public class MainRunner extends DefaultApplicationStarter
         }
         catch ( ClassNotFoundException e )
         {
-            LOG.fatal( e.getMessage(), e );
+            LOG.error( e.getMessage(), e );
             throw new RuntimeException( e.getMessage(), e );
         }
         Constructor constructor;
@@ -564,38 +566,38 @@ public class MainRunner extends DefaultApplicationStarter
             }
             catch ( NoSuchMethodException e1 )
             {
-                LOG.fatal( e.getMessage(), e );
+                LOG.error( e.getMessage(), e );
                 throw new RuntimeException( e.getMessage(), e );
             }
             catch ( IllegalAccessException e1 )
             {
-                LOG.fatal( e.getMessage(), e );
+                LOG.error( e.getMessage(), e );
                 throw new RuntimeException( e.getMessage(), e );
             }
             catch ( InvocationTargetException e1 )
             {
-                LOG.fatal( e.getMessage(), e );
+                LOG.error( e.getMessage(), e );
                 throw new RuntimeException( e.getMessage(), e );
             }
             catch ( InstantiationException e1 )
             {
-                LOG.fatal( e.getMessage(), e );
+                LOG.error( e.getMessage(), e );
                 throw new RuntimeException( e.getMessage(), e );
             }
         }
         catch ( IllegalAccessException e )
         {
-            LOG.fatal( e.getMessage(), e );
+            LOG.error( e.getMessage(), e );
             throw new RuntimeException( e.getMessage(), e );
         }
         catch ( InvocationTargetException e )
         {
-            LOG.fatal( e.getMessage(), e );
+            LOG.error( e.getMessage(), e );
             throw new RuntimeException( e.getMessage(), e );
         }
         catch ( InstantiationException e )
         {
-            LOG.fatal( e.getMessage(), e );
+            LOG.error( e.getMessage(), e );
             throw new RuntimeException( e.getMessage(), e );
         }
     }

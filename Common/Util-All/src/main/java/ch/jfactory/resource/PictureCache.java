@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used as a cache for images. It stores Images into a HashMap via a soft reference.
@@ -39,7 +40,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
     /**
      * category for logging
      */
-    protected final static Logger LOGGER = Logger.getLogger( PictureCache.class.getName() );
+    protected final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
 
     protected final static boolean INFO = LOGGER.isInfoEnabled();
 

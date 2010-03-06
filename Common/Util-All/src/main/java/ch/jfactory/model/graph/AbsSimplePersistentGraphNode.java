@@ -9,7 +9,7 @@ public abstract class AbsSimplePersistentGraphNode extends AbsSimpleGraphNode
     private static final GraphModel MODEL = AbsGraphModel.getModel();
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setName(String)
+     * @see GraphNode#setName(String)
      */
     public void setName( final String name )
     {
@@ -18,7 +18,7 @@ public abstract class AbsSimplePersistentGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setRank(int)
+     * @see GraphNode#setRank(int)
      */
     public void setRank( final int rank )
     {

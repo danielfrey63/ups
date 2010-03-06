@@ -34,7 +34,7 @@ import org.apache.commons.io.IOUtils;
  * inverse of the velocity) by setting the {@link #setScrollDelay(int) scroll deley}</li> <li>The delay to wait between
  * pages ({@link #setParagraphDelay(int) paragraph delay})</li> <li>A page mode. If set to true scrolls one paragraph
  * per page, otherwise all paragraphs are adjacent ({@link #setPageModus(boolean) page mode})</li> <li>A {@link
- * #setBackgroundColor(java.awt.Color) background color}</li> </ul>
+ * #setBackgroundColor(Color) background color}</li> </ul>
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $

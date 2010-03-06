@@ -10,7 +10,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to find update information on the local disk.
@@ -20,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class LocalVersionLocator
 {
-    private static final Logger LOGGER = Logger.getLogger( LocalVersionLocator.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( LocalVersionLocator.class );
 
     private static final String NAME = "META-INF/VersionInfo.xml";
 

@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.SystemColor;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,11 +64,11 @@ public class ArrowImage extends BufferedImage
             g2.fill( pathArrow );
 
             g2.setColor( SystemColor.controlDkShadow );
-            g2.draw( new java.awt.geom.Line2D.Float( 0, h - 1, w, h - 1 ) );
+            g2.draw( new Line2D.Float( 0, h - 1, w, h - 1 ) );
             g2.setColor( darkColor );
-            g2.draw( new java.awt.geom.Line2D.Float( w12, 0, w, h - 1 ) );
+            g2.draw( new Line2D.Float( w12, 0, w, h - 1 ) );
             g2.setColor( lightColor );
-            g2.draw( new java.awt.geom.Line2D.Float( 0, h - 1, w12, 0 ) );
+            g2.draw( new Line2D.Float( 0, h - 1, w12, 0 ) );
         }
         else if ( nArrowDirect == ArrowDirection.ARROW_DOWN )
         {
@@ -79,11 +80,11 @@ public class ArrowImage extends BufferedImage
             g2.fill( pathArrow );
 
             g2.setColor( SystemColor.controlDkShadow );
-            g2.draw( new java.awt.geom.Line2D.Float( w, 0, w12, h - 1 ) );
+            g2.draw( new Line2D.Float( w, 0, w12, h - 1 ) );
             g2.setColor( darkColor );
-            g2.draw( new java.awt.geom.Line2D.Float( w12, h - 1, 0, 0 ) );
+            g2.draw( new Line2D.Float( w12, h - 1, 0, 0 ) );
             g2.setColor( lightColor );
-            g2.draw( new java.awt.geom.Line2D.Float( 0, 0, w, 0 ) );
+            g2.draw( new Line2D.Float( 0, 0, w, 0 ) );
         }
         else if ( nArrowDirect == ArrowDirection.ARROW_LEFT )
         {
@@ -109,7 +110,7 @@ public class ArrowImage extends BufferedImage
             g2.draw( pathArrow );
 
             g2.setColor( darkColor );
-            g2.draw( new java.awt.geom.Line2D.Float( 0, h12, w13, h - 1 ) );
+            g2.draw( new Line2D.Float( 0, h12, w13, h - 1 ) );
 
             pathArrow.reset();
             pathArrow.moveTo( 0, h12 );
@@ -141,7 +142,7 @@ public class ArrowImage extends BufferedImage
             g2.draw( pathArrow );
 
             g2.setColor( darkColor );
-            g2.draw( new java.awt.geom.Line2D.Float( w - 1, h12, w23, 0 ) );
+            g2.draw( new Line2D.Float( w - 1, h12, w23, 0 ) );
 
             pathArrow.reset();
             pathArrow.moveTo( w23, 0 );

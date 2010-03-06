@@ -26,7 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This model is provided under the assumption, that a view builds its content based on cards. It provides some common
@@ -54,7 +55,7 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( AbstractMainModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractMainModel.class );
 
     public static final String PROPERTYNAME_CURRENTCARD = "currentCard";
 

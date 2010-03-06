@@ -50,7 +50,8 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/${project.artefactId}-${project.version}</developerConnection>
+        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/${project.artefactId}-${project.version}
+        </developerConnection>
         <url>http://www.xmatrix.ch/tags/${project.artefactId}-${project.version}</url>
     </scm>
 
@@ -99,9 +100,9 @@
                 <version>1.2.1</version>
             </dependency>
             <!--<dependency>-->
-                <!--<groupId>castor</groupId>-->
-                <!--<artifactId>castor-xml</artifactId>-->
-                <!--<version>0.9.3.9</version>-->
+            <!--<groupId>castor</groupId>-->
+            <!--<artifactId>castor-xml</artifactId>-->
+            <!--<version>0.9.3.9</version>-->
             <!--</dependency>-->
             <dependency>
                 <groupId>castor</groupId>
@@ -456,6 +457,21 @@
                 <version>1.0-FCS</version>
             </dependency>
             <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.5.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.5.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>1.5.10</version>
+            </dependency>
+            <dependency>
                 <groupId>uispec4j</groupId>
                 <artifactId>uispec4j</artifactId>
                 <version>1.0</version>
@@ -581,7 +597,7 @@
                     <doUpdate>true</doUpdate>
                 </configuration>
             </plugin>
-            <!-- Run with mvn org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
+            <!-- Run with mvn install org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
             <!-- Uses the ${main-class} property to indicate the jnlp main class -->
             <plugin>
                 <groupId>org.codehaus.mojo.webstart</groupId>
@@ -611,27 +627,71 @@
     </build>
     <repositories>
         <repository>
-            <id>geobot</id>
-            <url>http://geobot1.ethz.ch/releases</url>
+            <id>maclocal</id>
+            <url>http://192.168.10.25:8080/archiva/repository/internal/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
         <repository>
-            <id>maven-repo</id>
+            <id>maclocal-snapshots</id>
+            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
-        <repository>
-            <id>java.net</id>
-            <url>http://download.java.net/maven/1</url>
-            <layout>legacy</layout>
-        </repository>
-        <repository>
-            <id>sourceforge-repo</id>
-            <url>http://vars.sourceforge.net/maven2</url>
-        </repository>
-        <repository>
-            <id>swinglabs-repo</id>
-            <url>http://download.java.net/maven/2</url>
-        </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maclocal-plugin</id>
+            <url>http://192.168.10.25:8080/archiva/repository/internal/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maclocal-plugin-snapshots</id>
+            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <!--
     <profiles>
         <profile>
             <id>all</id>
@@ -655,4 +715,5 @@
             </repositories>
         </profile>
     </profiles>
+    -->
 </project>

@@ -10,7 +10,8 @@ package ch.jfactory.resource;
 
 import java.io.File;
 import javax.swing.ImageIcon;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Helper class for locating images and support for image caching.
@@ -24,7 +25,7 @@ public class ImageLocator
 
     public static final CachedImageLocator pictLocator;
 
-    private static final Logger LOGGER = Logger.getLogger( ImageLocator.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ImageLocator.class );
 
     private static final CachedImageLocator iconLocator;
 

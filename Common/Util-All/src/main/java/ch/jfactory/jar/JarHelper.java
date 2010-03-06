@@ -4,7 +4,8 @@ import ch.jfactory.jar.sign.JarSigner;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.tools.jar.Main;
 
 /**
@@ -17,7 +18,7 @@ public final class JarHelper
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( JarHelper.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JarHelper.class );
 
     /**
      * Hide constructor.

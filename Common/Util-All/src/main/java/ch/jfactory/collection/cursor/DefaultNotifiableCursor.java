@@ -1,6 +1,7 @@
 package ch.jfactory.collection.cursor;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -38,7 +39,7 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param list reference to a List
      */
-    public DefaultNotifiableCursor( final java.util.List list )
+    public DefaultNotifiableCursor( final List list )
     {
         this.cursor = new DefaultCursor( list );
     }
@@ -78,7 +79,7 @@ public class DefaultNotifiableCursor implements NotifiableCursor
      *
      * @param list the new list
      */
-    public void setCursor( final java.util.List list )
+    public void setCursor( final List list )
     {
         this.cursor = new DefaultCursor( list );
         fireCursorChange( new CursorChangeEvent( cursor ) );

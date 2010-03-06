@@ -15,11 +15,12 @@ import java.awt.LayoutManager2;
 import java.io.Serializable;
 import javax.swing.JComponent;
 import javax.swing.SizeRequirements;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ScrollerLayout implements LayoutManager2, Serializable
 {
-    private static final Logger LOGGER = Logger.getLogger( ScrollerLayout.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ScrollerLayout.class );
 
     private final Container target;
 

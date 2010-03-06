@@ -21,8 +21,9 @@ import java.lang.reflect.Method;
 import java.util.Formatter;
 import javax.swing.JComponent;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -32,7 +33,7 @@ import org.pietschy.command.ActionCommand;
  */
 public class LogicUtils
 {
-    private static final Logger LOG = Logger.getLogger( LogicUtils.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LogicUtils.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

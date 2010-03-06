@@ -132,7 +132,7 @@ class SignatureFile
      * Writes the SignatureFile to the specified OutputStream.
      *
      * @param out the output stream
-     * @throws java.io.IOException if an I/O error has occurred
+     * @throws IOException if an I/O error has occurred
      */
 
     public void write( final OutputStream out ) throws IOException
@@ -292,7 +292,7 @@ class SignatureFile
          * Writes the block file to the specified OutputStream.
          *
          * @param out the output stream
-         * @throws java.io.IOException if an I/O error has occurred
+         * @throws IOException if an I/O error has occurred
          */
 
         public void write( final OutputStream out ) throws IOException

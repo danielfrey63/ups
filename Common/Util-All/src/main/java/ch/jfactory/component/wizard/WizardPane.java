@@ -27,7 +27,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Superclass for all wizard panes. All wizard panes must be inherit from this class. It enhance JPanel with some wizard
@@ -41,7 +42,7 @@ public abstract class WizardPane extends JPanel
     /**
      * logging
      */
-    private static final Logger LOGGER = Logger.getLogger( WizardPane.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( WizardPane.class );
 
     /**
      * the wizard model should be initialize in init

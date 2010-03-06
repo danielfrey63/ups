@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a default implementation for the WizardModel interface.
@@ -21,7 +22,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     /**
      * Category for logging.
      */
-    private static final Logger LOGGER = Logger.getLogger( DefaultWizardModel.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( DefaultWizardModel.class );
 
     /**
      * Index of the current pane.

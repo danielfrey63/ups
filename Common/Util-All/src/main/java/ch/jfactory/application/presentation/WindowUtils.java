@@ -8,6 +8,7 @@
  */
 package ch.jfactory.application.presentation;
 
+import ch.jfactory.resource.OperatingSystem;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -64,7 +65,7 @@ public class WindowUtils
      */
     public static void centerOnScreen( final Component c )
     {
-        final Point p = getCenterLocation( c, ch.jfactory.resource.OperatingSystem.getScreenBounds().getSize() );
+        final Point p = getCenterLocation( c, OperatingSystem.getScreenBounds().getSize() );
         c.setLocation( p.x, p.y );
     }
 

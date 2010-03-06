@@ -1,7 +1,8 @@
 package ch.jfactory.model.graph;
 
 import java.io.Serializable;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
 {
-    private static final Logger LOGGER = Logger.getLogger( AbsSimpleGraphNode.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( AbsSimpleGraphNode.class );
 
     private static final boolean DEBUG_NODE_NAMES = false;
 
@@ -68,7 +69,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#isType(Class)
+     * @see GraphNode#isType(Class)
      */
     public boolean isType( final Class type )
     {
@@ -78,7 +79,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphNode#getId()
+     * @see GraphNode#getId()
      */
     public int getId()
     {
@@ -92,7 +93,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphNode#getName()
+     * @see GraphNode#getName()
      */
     public String getName()
     {
@@ -106,7 +107,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphNode#getRank()
+     * @see GraphNode#getRank()
      */
     public int getRank()
     {
@@ -118,7 +119,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setId(int)
+     * @see GraphNode#setId(int)
      */
     public void setId( final int id )
     {
@@ -130,7 +131,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setName(String)
+     * @see GraphNode#setName(String)
      */
     public void setName( final String name )
     {
@@ -142,7 +143,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setRank(int)
+     * @see GraphNode#setRank(int)
      */
     public void setRank( final int rank )
     {
@@ -154,7 +155,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class)
+     * @see GraphNode#getChildren(Class)
      */
     public GraphNodeList getChildren( final Class type )
     {
@@ -162,7 +163,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class)
+     * @see GraphNode#getChildren(Class, Class)
      */
     public GraphNodeList getChildren( final Class type, final Class role )
     {
@@ -181,7 +182,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class)
+     * @see GraphNode#getAllChildren(Class)
      */
     public GraphNodeList getAllChildren( final Class type )
     {
@@ -189,7 +190,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getAllChildren(Class)
+     * @see GraphNode#getAllChildren(Class)
      */
     public GraphNodeList getAllChildren( final Class type, final Class role )
     {
@@ -204,7 +205,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildRole(GraphNode)
+     * @see GraphNode#getChildRole(GraphNode)
      */
     public Role getChildRole( final GraphNode node )
     {
@@ -212,7 +213,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdgeList#setRole(GraphNode, Role)
+     * @see GraphEdgeList#setRole(GraphNode, Role)
      */
     public void setChildRole( final GraphNode node, final Role role )
     {
@@ -222,7 +223,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /**
      * This method redirects to {@link #setChildren(GraphNodeList, Class)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class)
+     * @see GraphNode#setChildren(GraphNodeList, Class)
      */
     public void setChildren( final GraphNodeList children )
     {
@@ -230,7 +231,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class)
+     * @see GraphNode#setChildren(GraphNodeList, Class)
      */
     public void setChildren( final GraphNodeList children, final Class type )
     {
@@ -238,7 +239,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class)
+     * @see GraphNode#deleteChildren(Class)
      */
     public void deleteChildren( final Class type )
     {
@@ -246,7 +247,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getParents(Class)
+     * @see GraphNode#getParents(Class)
      */
     public GraphNodeList getParents( final Class type )
     {
@@ -254,7 +255,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class)
+     * @see GraphNode#getChildren(Class, Class)
      */
     public GraphNodeList getParents( final Class type, final Class role )
     {
@@ -273,7 +274,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getAllParents(Class)
+     * @see GraphNode#getAllParents(Class)
      */
     public GraphNodeList getAllParents( final Class type )
     {
@@ -281,7 +282,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getAllParents(Class, Class)
+     * @see GraphNode#getAllParents(Class, Class)
      */
     public GraphNodeList getAllParents( final Class type, final Class role )
     {
@@ -295,7 +296,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getParentRole(GraphNode)
+     * @see GraphNode#getParentRole(GraphNode)
      */
     public Role getParentRole( final GraphNode node )
     {
@@ -303,7 +304,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setParentRole(GraphNode, Role)
+     * @see GraphNode#setParentRole(GraphNode, Role)
      */
     public void setParentRole( final GraphNode node, final Role role )
     {
@@ -311,7 +312,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList)
+     * @see GraphNode#setParents(GraphNodeList)
      */
     public void setParents( final GraphNodeList parents )
     {
@@ -319,7 +320,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class)
+     * @see GraphNode#setParents(GraphNodeList, Class)
      */
     public void setParents( final GraphNodeList parents, final Class type )
     {
@@ -327,7 +328,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteParents(Class)
+     * @see GraphNode#deleteParents(Class)
      */
     public void deleteParents( final Class type )
     {
@@ -335,7 +336,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

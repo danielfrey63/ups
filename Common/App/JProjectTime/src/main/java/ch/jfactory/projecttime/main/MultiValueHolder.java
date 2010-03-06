@@ -30,10 +30,15 @@
 
 package ch.jfactory.projecttime.main;
 
+import com.jgoodies.binding.beans.ExtendedPropertyChangeSupport;
+import com.jgoodies.binding.beans.Model;
 import com.jgoodies.binding.value.AbstractValueModel;
+import com.jgoodies.binding.value.ValueModel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
- * A simple {@link com.jgoodies.binding.value.ValueModel} implementation that holds a generic value. If the value
+ * A simple {@link ValueModel} implementation that holds a generic value. If the value
  * changes, a <code>PropertyChangeEvent</code> is fired that can be observed using a
  * <code>PropertyChangeListener</code>.<p>
  *
@@ -46,10 +51,10 @@ import com.jgoodies.binding.value.AbstractValueModel;
  *
  * @author Karsten Lentzsch
  * @version $Revision: 1.1 $
- * @see com.jgoodies.binding.value.ValueModel
- * @see java.beans.PropertyChangeEvent
- * @see java.beans.PropertyChangeListener
- * @see com.jgoodies.binding.beans.ExtendedPropertyChangeSupport
+ * @see ValueModel
+ * @see PropertyChangeEvent
+ * @see PropertyChangeListener
+ * @see ExtendedPropertyChangeSupport
  */
 public final class MultiValueHolder extends AbstractValueModel
 {
@@ -64,8 +69,8 @@ public final class MultiValueHolder extends AbstractValueModel
      * compared with <code>#equals</code>.
      *
      * @see #setValue(Object[], boolean)
-     * @see com.jgoodies.binding.beans.Model#firePropertyChange(String, Object, Object, boolean)
-     * @see com.jgoodies.binding.beans.ExtendedPropertyChangeSupport
+     * @see Model#firePropertyChange(String, Object, Object, boolean)
+     * @see ExtendedPropertyChangeSupport
      */
     private boolean checkIdentity;
 

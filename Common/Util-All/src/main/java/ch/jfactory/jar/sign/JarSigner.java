@@ -54,7 +54,8 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 import sun.security.util.ManifestDigester;
 import sun.security.util.Password;
@@ -75,7 +76,7 @@ public class JarSigner
 
     private static final Collator COLLATOR = Collator.getInstance();
 
-    private static final Logger LOG = Logger.getLogger( JarSigner.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JarSigner.class );
 
     static
     {
@@ -1403,7 +1404,7 @@ public class JarSigner
             {
                 url = new URL( keyStoreName );
             }
-            catch ( java.net.MalformedURLException e )
+            catch ( MalformedURLException e )
             {
                 // try as file
                 final File kfile = new File( keyStoreName );
@@ -1417,7 +1418,7 @@ public class JarSigner
 
     X509Certificate getTsaCert( final String alias )
     {
-        java.security.cert.Certificate cs = null;
+        Certificate cs = null;
 
         try
         {
@@ -1443,7 +1444,7 @@ public class JarSigner
 
         try
         {
-            java.security.cert.Certificate[] cs = null;
+            Certificate[] cs = null;
 
             try
             {

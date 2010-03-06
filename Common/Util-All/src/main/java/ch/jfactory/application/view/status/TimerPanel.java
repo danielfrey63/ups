@@ -1,8 +1,10 @@
 package ch.jfactory.application.view.status;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
@@ -95,8 +97,8 @@ public class TimerPanel extends JLabel implements ActionListener
         final JFrame f = new JFrame();
         final Container contentPane = f.getContentPane();
         final StatusBar statusBar = new StatusBar();
-        contentPane.setLayout( new java.awt.BorderLayout() );
-        contentPane.add( statusBar, java.awt.BorderLayout.SOUTH );
+        contentPane.setLayout( new BorderLayout() );
+        contentPane.add( statusBar, BorderLayout.SOUTH );
         final TimerPanel counter = new TimerPanel( 61, new ActionListener()
         {
             public void actionPerformed( final ActionEvent e )
@@ -104,7 +106,7 @@ public class TimerPanel extends JLabel implements ActionListener
                 System.out.println( "stop" );
             }
         } );
-        f.addWindowListener( new java.awt.event.WindowAdapter()
+        f.addWindowListener( new WindowAdapter()
         {
             public void windowClosed( final WindowEvent e )
             {

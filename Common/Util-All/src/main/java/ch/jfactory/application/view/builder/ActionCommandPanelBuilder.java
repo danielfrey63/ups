@@ -24,12 +24,13 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 import org.pietschy.command.IconFactory;
 import org.pietschy.command.LoadException;
 import org.pietschy.command.ToggleCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This panel builder handles the instantiation and the configration of a {@link CommandManager CommandManager} object.
@@ -57,7 +58,7 @@ import org.pietschy.command.ToggleCommand;
  */
 public abstract class ActionCommandPanelBuilder implements Builder
 {
-    private static final Logger LOG = Logger.getLogger( ActionCommandPanelBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ActionCommandPanelBuilder.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

@@ -23,7 +23,7 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  * A JFileChooser embeded in a JDialog with a help text in the north. To use this class overwrite the method {@link
- * #save(java.io.File)}. Optionally you may overwrite {@link #cleanUpFileName(java.io.File)} for checks or change a file
+ * #save(File)}. Optionally you may overwrite {@link #cleanUpFileName(File)} for checks or change a file
  * name.
  *
  * @author $Author: daniel_frey $

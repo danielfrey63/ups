@@ -19,11 +19,12 @@ import java.lang.ref.SoftReference;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CachedImageComponent extends JComponent implements AsynchronPictureLoaderListener
 {
-    private static final Logger LOGGER = Logger.getLogger( CachedImageComponent.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageComponent.class );
 
     private static final Dimension minimumSize = new Dimension( 50, 50 );
 

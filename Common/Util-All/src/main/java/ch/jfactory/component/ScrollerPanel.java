@@ -15,7 +15,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This control is used to different Components as a Scrollable List without using ScrollPane, because of sizing
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class ScrollerPanel extends JPanel
 {
-    private final static Logger LOGGER = Logger.getLogger( ScrollerPanel.class );
+    private final static Logger LOGGER = LoggerFactory.getLogger( ScrollerPanel.class );
 
     protected JButton btnPrev = new BasicArrowButton( BasicArrowButton.WEST );
 

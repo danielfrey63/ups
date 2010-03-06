@@ -10,7 +10,8 @@ package ch.jfactory.resource;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a SoftReference to an Image loaded from
@@ -20,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class CachedImage extends ImageReference
 {
-    private static final Logger LOGGER = Logger.getLogger( CachedImage.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( CachedImage.class );
 
     private final String pictureURL;
 

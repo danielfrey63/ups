@@ -2,7 +2,8 @@ package ch.jfactory.model.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This node is used as a temporary GraphNode which is not saved. All its links (GraphEdges) wont be saved neither.
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class SimpleTransientGraphNode extends AbsSimpleGraphNode
 {
-    private static final Logger LOGGER = Logger.getLogger( SimpleTransientGraphNode.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( SimpleTransientGraphNode.class );
 
     /**
      * Mapping between nodes that are used in other <code>SimpleTransientGraphNode</code>s as children and these other
@@ -50,7 +51,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren()
+     * @see GraphNode#getChildren()
      */
     public GraphNodeList getChildren()
     {
@@ -58,7 +59,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren(Class, Class)
+     * @see GraphNode#getChildren(Class, Class)
      */
     public GraphNodeList getChildren( final Class type, final Class role )
     {
@@ -66,7 +67,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList)
+     * @see GraphNode#setChildren(GraphNodeList)
      */
     public void setChildren( final GraphNodeList children )
     {
@@ -74,7 +75,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class)
+     * @see GraphNode#setChildren(GraphNodeList, Class)
      */
     public void setChildren( final GraphNodeList children, final Class type, final Class role )
     {
@@ -83,7 +84,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode)
+     * @see GraphNode#addChild(GraphNode)
      */
     public void addChild( final GraphNode child )
     {
@@ -91,7 +92,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode)
+     * @see GraphNode#addChild(int, GraphNode)
      */
     public void addChild( final int index, final GraphNode child )
     {
@@ -105,7 +106,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode, Role)
+     * @see GraphNode#addChild(GraphNode, Role)
      */
     public void addChild( final GraphNode child, final Role role )
     {
@@ -114,7 +115,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode, Role)
+     * @see GraphNode#addChild(int, GraphNode, Role)
      */
     public void addChild( final int index, final GraphNode child, final Role role )
     {
@@ -123,7 +124,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildRole(GraphNode)
+     * @see GraphNode#getChildRole(GraphNode)
      */
     public Role getChildRole( final GraphNode node )
     {
@@ -131,7 +132,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addNewChild(int, String, Class)
+     * @see GraphNode#addNewChild(int, String, Class)
      */
     public GraphNode addNewChild( final int index, final String name, final Class type )
     {
@@ -142,7 +143,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteChild(GraphNode)
+     * @see GraphNode#deleteChild(GraphNode)
      */
     public boolean deleteChild( final GraphNode child )
     {
@@ -159,7 +160,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class)
+     * @see GraphNode#deleteChildren(Class)
      */
     public void deleteChildren( final Class type, final Class role )
     {
@@ -174,7 +175,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#removeFromChild(GraphNode)
+     * @see GraphNode#removeFromChild(GraphNode)
      */
     public boolean removeFromChild( final GraphNode child )
     {
@@ -190,7 +191,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getParents()
+     * @see GraphNode#getParents()
      */
     public GraphNodeList getParents()
     {
@@ -198,7 +199,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode)
+     * @see GraphNode#addParent(GraphNode)
      */
     public void addParent( final GraphNode parent )
     {
@@ -206,7 +207,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode)
+     * @see GraphNode#addParent(int, GraphNode)
      */
     public void addParent( final int index, final GraphNode parent )
     {
@@ -221,7 +222,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode, Role)
+     * @see GraphNode#addParent(GraphNode, Role)
      */
     public void addParent( final GraphNode parent, final Role role )
     {
@@ -229,7 +230,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode, Role)
+     * @see GraphNode#addParent(int, GraphNode, Role)
      */
     public void addParent( final int index, final GraphNode parent, final Role role )
     {
@@ -237,7 +238,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#addNewChild(int, String, Class)
+     * @see GraphNode#addNewChild(int, String, Class)
      */
     public GraphNode addNewParent( final int index, final String name, final Class type )
     {
@@ -248,7 +249,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteParent(GraphNode)
+     * @see GraphNode#deleteParent(GraphNode)
      */
     public boolean deleteParent( final GraphNode parent )
     {
@@ -265,7 +266,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#deleteParents(Class)
+     * @see GraphNode#deleteParents(Class)
      */
     public void deleteParents( final Class type, final Class role )
     {
@@ -280,7 +281,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#removeFromParent(GraphNode)
+     * @see GraphNode#removeFromParent(GraphNode)
      */
     public boolean removeFromParent( final GraphNode parent )
     {
@@ -296,7 +297,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList)
+     * @see GraphNode#setParents(GraphNodeList)
      */
     public void setParents( final GraphNodeList parents )
     {
@@ -304,7 +305,7 @@ public class SimpleTransientGraphNode extends AbsSimpleGraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class)
+     * @see GraphNode#setParents(GraphNodeList, Class)
      */
     public void setParents( final GraphNodeList parents, final Class type, final Class role )
     {

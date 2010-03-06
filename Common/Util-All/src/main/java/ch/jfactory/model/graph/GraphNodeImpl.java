@@ -17,7 +17,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getChildren()
+     * @see GraphNode#getChildren()
      */
     public GraphNodeList getChildren()
     {
@@ -25,7 +25,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#getParents()
+     * @see GraphNode#getParents()
      */
     public GraphNodeList getParents()
     {
@@ -35,7 +35,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the replacement of children.
      *
-     * @see ch.jfactory.model.graph.GraphNode#setChildren(GraphNodeList, Class, Class)
+     * @see GraphNode#setChildren(GraphNodeList, Class, Class)
      */
     public void setChildren( final GraphNodeList children, final Class type, final Class role )
     {
@@ -45,7 +45,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addChild(int, GraphNode)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode)
+     * @see GraphNode#addChild(GraphNode)
      */
     public void addChild( final GraphNode child )
     {
@@ -55,7 +55,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addChild(int, GraphNode, Role)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode)
+     * @see GraphNode#addChild(int, GraphNode)
      */
     public void addChild( final int index, final GraphNode child )
     {
@@ -65,7 +65,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addChild(int, GraphNode, Role)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addChild(GraphNode, Role)
+     * @see GraphNode#addChild(GraphNode, Role)
      */
     public void addChild( final GraphNode child, final Role role )
     {
@@ -75,7 +75,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the addition of a child.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addChild(int, GraphNode, Role)
+     * @see GraphNode#addChild(int, GraphNode, Role)
      */
     public void addChild( final int index, final GraphNode child, final Role role )
     {
@@ -85,7 +85,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addChild(int, GraphNode, Role)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addNewChild(int, String, Class)
+     * @see GraphNode#addNewChild(int, String, Class)
      */
     public GraphNode addNewChild( final int index, final String name, final Class type )
     {
@@ -98,7 +98,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the deletion of a child.
      *
-     * @see ch.jfactory.model.graph.GraphNode#deleteChild(GraphNode)
+     * @see GraphNode#deleteChild(GraphNode)
      */
     public boolean deleteChild( final GraphNode child )
     {
@@ -108,7 +108,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #deleteChild(GraphNode)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#deleteChildren(Class, Class)
+     * @see GraphNode#deleteChildren(Class, Class)
      */
     public void deleteChildren( final Class type, final Class role )
     {
@@ -122,7 +122,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the removal from a child.
      *
-     * @see ch.jfactory.model.graph.GraphNode#removeFromChild(GraphNode)
+     * @see GraphNode#removeFromChild(GraphNode)
      */
     public boolean removeFromChild( final GraphNode child )
     {
@@ -132,7 +132,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the replacement of parents.
      *
-     * @see ch.jfactory.model.graph.GraphNode#setParents(GraphNodeList, Class, Class)
+     * @see GraphNode#setParents(GraphNodeList, Class, Class)
      */
     public void setParents( final GraphNodeList parents, final Class type, final Class role )
     {
@@ -142,7 +142,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addParent(int, GraphNode)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode)
+     * @see GraphNode#addParent(GraphNode)
      */
     public void addParent( final GraphNode parent )
     {
@@ -152,7 +152,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addParent(int, GraphNode, Role)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode)
+     * @see GraphNode#addParent(int, GraphNode)
      */
     public void addParent( final int index, final GraphNode parent )
     {
@@ -162,7 +162,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addParent(int, GraphNode, Role)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addParent(GraphNode, Role)
+     * @see GraphNode#addParent(GraphNode, Role)
      */
     public void addParent( final GraphNode parent, final Role role )
     {
@@ -172,7 +172,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the addition of a parent.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addParent(int, GraphNode, Role)
+     * @see GraphNode#addParent(int, GraphNode, Role)
      */
     public void addParent( final int index, final GraphNode parent, final Role role )
     {
@@ -182,7 +182,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #addParent(int, GraphNode)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#addNewParent(int, String, Class)
+     * @see GraphNode#addNewParent(int, String, Class)
      */
     public GraphNode addNewParent( final int index, final String name, final Class type )
     {
@@ -195,7 +195,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the deletion of a parent.
      *
-     * @see ch.jfactory.model.graph.GraphNode#deleteParent(GraphNode)
+     * @see GraphNode#deleteParent(GraphNode)
      */
     public boolean deleteParent( final GraphNode parent )
     {
@@ -205,7 +205,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * This method redirects to {@link #deleteParent(GraphNode)}.
      *
-     * @see ch.jfactory.model.graph.GraphNode#deleteParents(Class, Class)
+     * @see GraphNode#deleteParents(Class, Class)
      */
     public void deleteParents( final Class type, final Class role )
     {
@@ -219,7 +219,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
     /**
      * Use this method if you want to overwrite the removal from a parent.
      *
-     * @see ch.jfactory.model.graph.GraphNode#removeFromParent(GraphNode)
+     * @see GraphNode#removeFromParent(GraphNode)
      */
     public boolean removeFromParent( final GraphNode parent )
     {

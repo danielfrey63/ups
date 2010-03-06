@@ -5,20 +5,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
-import org.apache.log4j.Category;
-import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LogUtils
 {
-    protected final static Category LOGGER;
+    protected final static Logger LOGGER;
 
     public static final Calendar STARTTIME;
 
@@ -30,56 +28,6 @@ public class LogUtils
 
     public static void init()
     {
-    }
-
-    static class SystemErrLogger extends PrintStream
-    {
-        SystemErrLogger( final PrintStream ps )
-        {
-            super( ps );
-        }
-
-        /*
-         * Make sure not to call super.write, otherwise a loop is generated
-         */
-        public void write( final int b )
-        {
-            LOGGER.fatal( new String( new byte[]{(byte) b} ) );
-        }
-
-        /*
-         * Make sure not to call super.write, otherwise a loop is generated
-         */
-        public void write( final byte[] buf, final int off, final int len )
-        {
-            final String message = new String( buf, off, len );
-            if ( !message.trim().equals( "" ) )
-            {
-                LOGGER.fatal( message );
-            }
-        }
-
-        public void info( final String message )
-        {
-            LOGGER.info( message );
-        }
-    }
-
-    public static void dumpSystemProperties( final Writer sw )
-    {
-        System.getProperties().list( new PrintWriter( sw ) );
-    }
-
-    public static String getStartTimeString()
-    {
-        return getTimeString( STARTTIME );
-    }
-
-    public static String getTimeString( final Calendar c )
-    {
-        return "" + c.get( Calendar.YEAR ) + ( c.get( Calendar.MONTH ) + 1 ) + ( c.get( Calendar.DAY_OF_MONTH ) )
-                + ( c.get( Calendar.HOUR_OF_DAY ) ) + ( c.get( Calendar.MINUTE ) );
-
     }
 
     /**
@@ -167,8 +115,11 @@ public class LogUtils
             // make sure command line properties overwrite configuration file properties
             props = new Properties();
             props.load( is );
-            props.putAll( System.getProperties() );
-            System.setProperties( props );
+            for ( final Object key : props.keySet() )
+            {
+                final Object value = props.get( key );
+                System.setProperty( (String) key, (String) value );
+            }
         }
         catch ( Exception ex )
         {
@@ -176,16 +127,12 @@ public class LogUtils
             throw new RuntimeException( startupLogBuffer.toString() );
         }
 
-        initLog4j();
-        LOGGER = Logger.getLogger( LogUtils.class );
-        LOGGER.info( startupLogBuffer );
-        startupLogBuffer = new StringBuffer();
-        LOGGER.info( "Logging started" );
+        LOGGER = LoggerFactory.getLogger( LogUtils.class );
 
         // log system properties
-        final java.io.StringWriter sw = new StringWriter();
+        final StringWriter sw = new StringWriter();
         props.list( new PrintWriter( sw ) );
-        LOGGER.info( "System properties are: " + System.getProperty( "line.separator" ) + sw );
+        LOGGER.info( "System properties are:\n" + sw );
     }
 
     private static void initLog4j()

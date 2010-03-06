@@ -7,12 +7,14 @@
 
 package ch.jfactory.jar.sign;
 
+import java.util.ListResourceBundle;
+
 /**
  * <p> This class represents the <code>ResourceBundle</code> for JarSigner.
  *
  * @version 1.13, 04/21/04
  */
-public class JarSignerResources extends java.util.ListResourceBundle
+public class JarSignerResources extends ListResourceBundle
 {
     private static final Object[][] contents = {
             // shared (from jarsigner)

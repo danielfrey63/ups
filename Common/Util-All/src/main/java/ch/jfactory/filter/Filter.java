@@ -56,6 +56,8 @@
 
 package ch.jfactory.filter;
 
+import java.io.Serializable;
+
 /**
  * A generalized filter to restrict visibility or mutability on a list.
  *
@@ -63,7 +65,7 @@ package ch.jfactory.filter;
  * @author Bradley S. Huffman
  * @version $Revision: 1.1 $, $Date: 2005/11/17 11:54:58 $
  */
-public interface Filter extends java.io.Serializable
+public interface Filter extends Serializable
 {
     /**
      * Filter that returns always true.

@@ -1,5 +1,6 @@
 package ch.jfactory.collection.cursor;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class DefaultCursor implements Cursor
 {
-    private static final Cursor emptyCursor = new ListCursor( new java.util.ArrayList() );
+    private static final Cursor emptyCursor = new ListCursor( new ArrayList() );
 
     private final Cursor cursor;
 

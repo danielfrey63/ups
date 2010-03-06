@@ -211,7 +211,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * @see javax.swing.event.TreeSelectionListener #valueChanged(TreeSelectionEvent)
+     * @see TreeSelectionListener #valueChanged(TreeSelectionEvent)
      */
     public void valueChanged( final TreeSelectionEvent tse )
     {
@@ -219,7 +219,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * @see javax.swing.event.DocumentListener#changedUpdate(DocumentEvent)
+     * @see DocumentListener#changedUpdate(DocumentEvent)
      */
     public void changedUpdate( final DocumentEvent e )
     {
@@ -227,7 +227,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * @see javax.swing.event.DocumentListener#insertUpdate(DocumentEvent)
+     * @see DocumentListener#insertUpdate(DocumentEvent)
      */
     public void insertUpdate( final DocumentEvent e )
     {
@@ -235,7 +235,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * @see javax.swing.event.DocumentListener#removeUpdate(DocumentEvent)
+     * @see DocumentListener#removeUpdate(DocumentEvent)
      */
     public void removeUpdate( final DocumentEvent e )
     {
@@ -243,7 +243,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
+     * @see ActionListener#actionPerformed(ActionEvent)
      */
     public void actionPerformed( final ActionEvent ae )
     {

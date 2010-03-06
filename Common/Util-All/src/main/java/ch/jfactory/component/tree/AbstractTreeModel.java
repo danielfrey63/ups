@@ -33,9 +33,9 @@ import javax.swing.tree.TreePath;
  *
  * <ul>
  *
- * <li>{@link TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener) addTreeModelListener(TreeModelListener)}</li>
+ * <li>{@link TreeModel#addTreeModelListener(TreeModelListener) addTreeModelListener(TreeModelListener)}</li>
  *
- * <li>{@link TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
+ * <li>{@link TreeModel#removeTreeModelListener(TreeModelListener)
  * removeTreeModelListener(TreeModelListener)}.</li>
  *
  * <li>{@link TreeModel#isLeaf(Object) isLeaf(Object)}</li>
@@ -50,18 +50,18 @@ import javax.swing.tree.TreePath;
  *
  * <li>{@link NotifiableTreeModel#reload() reload()}</li>
  *
- * <li>{@link NotifiableTreeModel#reload(javax.swing.tree.TreePath) reload(TreePath)}</li>
+ * <li>{@link NotifiableTreeModel#reload(TreePath) reload(TreePath)}</li>
  *
- * <li>{@link NotifiableTreeModel#nodeChanged(javax.swing.tree.TreePath) nodeChanged(TreePath)}</li>
+ * <li>{@link NotifiableTreeModel#nodeChanged(TreePath) nodeChanged(TreePath)}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesChanged(javax.swing.tree.TreePath,int[]) nodesChanged(TreePath[], int[])}</li>
+ * <li>{@link NotifiableTreeModel#nodesChanged(TreePath,int[]) nodesChanged(TreePath[], int[])}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesChanged(javax.swing.tree.TreePath) nodesChanged(TreePath)}</li>
+ * <li>{@link NotifiableTreeModel#nodesChanged(TreePath) nodesChanged(TreePath)}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesWereInserted(javax.swing.tree.TreePath,int[]) nodesWereInserted(TreePath),
+ * <li>{@link NotifiableTreeModel#nodesWereInserted(TreePath,int[]) nodesWereInserted(TreePath),
  * int[])}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesWereRemoved(javax.swing.tree.TreePath,int[],Object[]) nodesWereRemoved(TreePath,
+ * <li>{@link NotifiableTreeModel#nodesWereRemoved(TreePath,int[],Object[]) nodesWereRemoved(TreePath,
  * int[], Object[])}</li>
  *
  * </li></ul>
@@ -74,10 +74,10 @@ import javax.swing.tree.TreePath;
  *
  * <ul>
  *
- * <li>{@link MutableTreeModel#removeFromParent(javax.swing.tree.TreePath) removeFromParent(TreePath)} calls abstract
+ * <li>{@link MutableTreeModel#removeFromParent(TreePath) removeFromParent(TreePath)} calls abstract
  * {@link #remove remove(Object, TreePath)} to do the actual removal.</li>
  *
- * <li>{@link MutableTreeModel#insertInto(javax.swing.tree.TreePath,javax.swing.tree.TreePath,int) insertInto(TreePath,
+ * <li>{@link MutableTreeModel#insertInto(TreePath, TreePath,int) insertInto(TreePath,
  * TreePath, int)} calls abstract {@link #insert insert(TreePath, TreePath, int)} to do the actual insertion.</li>
  *
  * </ul>
@@ -89,9 +89,9 @@ import javax.swing.tree.TreePath;
  *
  * <ul>
  *
- * <li>{@link #removeFromParent(javax.swing.tree.TreePath[]) remove(TreePath[])}</li>
+ * <li>{@link #removeFromParent(TreePath[]) remove(TreePath[])}</li>
  *
- * <li>{@link #insertInto(Object,javax.swing.tree.TreePath,int) insert(Object, TreePath)}</li>
+ * <li>{@link #insertInto(Object, TreePath,int) insert(Object, TreePath)}</li>
  *
  * </li></ul>
  *
@@ -101,7 +101,7 @@ import javax.swing.tree.TreePath;
  * all methods of {@link MutableTreeModel MutableTreeModel}.
  *
  * <p/>To use the model to remove nodes, a client may use the convenience method {@link
- * #removeFromParent(javax.swing.tree.TreePath)}  remove}.
+ * #removeFromParent(TreePath)}  remove}.
  *
  * <pre>
  * TreePath path = getPathToNodeWhereNewChildIsToBeInserted();
@@ -341,7 +341,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     //--- Utilities
 
     /**
-     * Convenience method to remove several nodes from this model. Calls {@link #removeFromParent(javax.swing.tree.TreePath)
+     * Convenience method to remove several nodes from this model. Calls {@link #removeFromParent(TreePath)
      * removeFromParent(TreePath)} for each array element, that in turn notifies listeners.
      *
      * @param childPaths an array of paths to remove
@@ -355,8 +355,8 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     }
 
     /**
-     * Convenience method to insert a new object into this model. Calls {@link #insertInto(javax.swing.tree.TreePath,
-     * javax.swing.tree.TreePath,int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
+     * Convenience method to insert a new object into this model. Calls {@link #insertInto(TreePath,
+     * TreePath,int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
      *
      * @param child  the object to insert
      * @param parent the path to insert it to
@@ -370,7 +370,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
 
     /**
      * Implement this method to do the actual removal of the child from the parent. Do not call any listener
-     * notifications. This is handled for you from the calling method {@link #removeFromParent(javax.swing.tree.TreePath)
+     * notifications. This is handled for you from the calling method {@link #removeFromParent(TreePath)
      * removeFromParent(TreePath)}.
      *
      * @param child      the child to remove
@@ -380,7 +380,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
 
     /**
      * Implement this method to insert a childPath into the parentPath at the given position. Do not notify listeners as
-     * that is done by the calling method {@link #insertInto(javax.swing.tree.TreePath,javax.swing.tree.TreePath,int)
+     * that is done by the calling method {@link #insertInto(TreePath, TreePath,int)
      * insertInto(TreePath, TreePath, int)}.
      *
      * @param childPath  the child to insert

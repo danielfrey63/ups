@@ -13,7 +13,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageReader;
 import javax.imageio.event.IIOReadProgressListener;
 import javax.imageio.event.IIOReadUpdateListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to load Image asynchronously. Use the AsynchronPictureLoaderListener to get notification of the
@@ -27,7 +28,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
     /**
      * category information for logging
      */
-    private static final Logger LOGGER = Logger.getLogger( AsynchronPictureLoader.class.getName() );
+    private static final Logger LOGGER = LoggerFactory.getLogger( AsynchronPictureLoader.class.getName() );
 
     /**
      * if running is set to false, the thread goes down

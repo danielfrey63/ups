@@ -217,8 +217,8 @@ public class ToolTipManager
      * @param comp JTree or JList
      * @param p    Point
      * @return row for given point
-     * @see javax.swing.JTree#getRowForLocation
-     * @see javax.swing.JList#locationToIndex
+     * @see JTree#getRowForLocation
+     * @see JList#locationToIndex
      */
     private int getRow( final JComponent comp, final Point p )
     {
@@ -241,8 +241,8 @@ public class ToolTipManager
      * @param comp JTree or JList
      * @param row  row number
      * @return bounds of given row (Rectangle)
-     * @see javax.swing.JTree#getRowBounds
-     * @see javax.swing.JList#getCellBounds
+     * @see JTree#getRowBounds
+     * @see JList#getCellBounds
      */
     private Rectangle getRowBounds( final JComponent comp, final int row )
     {

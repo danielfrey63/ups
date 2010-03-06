@@ -22,7 +22,8 @@ package ch.jfactory.resource;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Operating system detection routines.
@@ -33,7 +34,7 @@ import org.apache.log4j.Logger;
  */
 public class OperatingSystem extends SystemUtils
 {
-    private static final Logger LOGGER = Logger.getLogger( OperatingSystem.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( OperatingSystem.class );
 
     public static Rectangle getScreenBounds()
     {

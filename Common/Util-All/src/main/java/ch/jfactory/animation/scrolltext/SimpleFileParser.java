@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Simple parser for file lines. See {@link #initText(java.util.List) initText} for a detailed description of the parser
+ * Simple parser for file lines. See {@link #initText(List) initText} for a detailed description of the parser
  * rules.
  *
  * @author Daniel Frey

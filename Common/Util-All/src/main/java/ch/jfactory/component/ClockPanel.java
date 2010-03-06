@@ -20,7 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Totally self-contained visual time component that displays an analogue time string.
@@ -34,7 +35,7 @@ public class ClockPanel extends JPanel implements ActionListener
     /**
      * This class logger.
      */
-    private static final Logger LOG = Logger.getLogger( ClockPanel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ClockPanel.class );
 
     /**
      * The offscreen image.

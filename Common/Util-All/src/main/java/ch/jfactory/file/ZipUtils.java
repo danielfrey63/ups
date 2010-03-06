@@ -16,7 +16,8 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -24,7 +25,7 @@ import org.apache.log4j.Logger;
  */
 public class ZipUtils
 {
-    private static final Logger LOG = Logger.getLogger( ZipUtils.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ZipUtils.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 

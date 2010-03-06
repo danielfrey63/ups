@@ -32,6 +32,7 @@ package ch.jfactory.binding;
 
 import com.jgoodies.binding.BindingUtils;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.text.DateFormatter;
@@ -52,7 +53,7 @@ import javax.swing.text.DateFormatter;
  *
  * @author Karsten Lentzsch
  * @version $Revision: 1.2 $
- * @see java.text.Format
+ * @see Format
  */
 public class EmptyCalendarFormatter extends DateFormatter
 {
@@ -123,7 +124,7 @@ public class EmptyCalendarFormatter extends DateFormatter
      *
      * @param text <code>String</code> to convert
      * @return <code>Object</code> representation of text
-     * @throws java.text.ParseException if there is an error in the conversion
+     * @throws ParseException if there is an error in the conversion
      */
     public Object stringToValue( final String text ) throws ParseException
     {
@@ -140,7 +141,7 @@ public class EmptyCalendarFormatter extends DateFormatter
      *
      * @param value the value to convert
      * @return a String representation of value
-     * @throws java.text.ParseException if there is an error in the conversion
+     * @throws ParseException if there is an error in the conversion
      */
     public String valueToString( final Object value ) throws ParseException
     {

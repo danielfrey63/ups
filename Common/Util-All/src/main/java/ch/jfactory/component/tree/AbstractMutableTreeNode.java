@@ -25,7 +25,7 @@ import javax.swing.tree.TreeNode;
 public abstract class AbstractMutableTreeNode implements MutableTreeNode
 {
     /**
-     * @see javax.swing.tree.MutableTreeNode#remove(int)
+     * @see MutableTreeNode#remove(int)
      */
     public void remove( final int index )
     {
@@ -34,7 +34,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#isLeaf()
+     * @see TreeNode#isLeaf()
      */
     public boolean isLeaf()
     {
@@ -42,7 +42,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.MutableTreeNode#removeFromParent()
+     * @see MutableTreeNode#removeFromParent()
      */
     public void removeFromParent()
     {
@@ -54,7 +54,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getIndex(TreeNode)
+     * @see TreeNode#getIndex(TreeNode)
      */
     public int getIndex( final TreeNode node )
     {
@@ -69,7 +69,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#children()
+     * @see TreeNode#children()
      */
     public Enumeration children()
     {

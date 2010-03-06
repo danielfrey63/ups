@@ -1,10 +1,12 @@
 package ch.jfactory.help;
 
 import javax.help.JHelpSearchNavigator;
+import javax.help.Map;
 import javax.help.NavigatorView;
 import javax.help.plaf.basic.BasicSearchNavigatorUI;
 import javax.swing.JComponent;
 import javax.swing.JTree;
+import javax.swing.plaf.ComponentUI;
 
 /**
  * Resolves Suns bug 4788532
@@ -14,7 +16,7 @@ import javax.swing.JTree;
  */
 public class PatchedBasicSearchNavigatorUI extends BasicSearchNavigatorUI
 {
-    public static javax.swing.plaf.ComponentUI createUI( final JComponent x )
+    public static ComponentUI createUI( final JComponent x )
     {
         return new PatchedBasicSearchNavigatorUI( (JHelpSearchNavigator) x );
     }
@@ -30,7 +32,7 @@ public class PatchedBasicSearchNavigatorUI extends BasicSearchNavigatorUI
         {
             return;
         }
-        final javax.help.Map map = view.getHelpSet().getCombinedMap();
+        final Map map = view.getHelpSet().getCombinedMap();
         tree.setCellRenderer( new PatchedBasicSearchCellRenderer( map ) );
     }
 }

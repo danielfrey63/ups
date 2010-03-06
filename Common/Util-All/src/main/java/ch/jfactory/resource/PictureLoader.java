@@ -11,6 +11,7 @@ package ch.jfactory.resource;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -18,13 +19,14 @@ import javax.imageio.ImageReader;
 import javax.imageio.event.IIOReadProgressListener;
 import javax.imageio.event.IIOReadUpdateListener;
 import javax.imageio.stream.ImageInputStream;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PictureLoader
 {
     private static final Dimension NULLDIMENSION = new Dimension( 0, 0 );
 
-    private static final Logger LOGGER = Logger.getLogger( PictureLoader.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( PictureLoader.class );
 
     public static Image load( final String pictureURL, final boolean thumb )
     {
@@ -37,7 +39,7 @@ public class PictureLoader
         try
         {
             LOGGER.info( "loading of picture " + pictureURL + " initiate." );
-            final java.io.File file = new java.io.File( pictureURL );
+            final File file = new File( pictureURL );
             if ( file.exists() )
             {
                 final ImageInputStream iis = ImageIO.createImageInputStream( file );
@@ -86,7 +88,7 @@ public class PictureLoader
         ImageInputStream iis = null;
         try
         {
-            final java.io.File file = new java.io.File( pictureURL );
+            final File file = new File( pictureURL );
             if ( file.exists() )
             {
                 iis = ImageIO.createImageInputStream( file );

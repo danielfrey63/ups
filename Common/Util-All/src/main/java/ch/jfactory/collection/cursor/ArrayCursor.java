@@ -3,7 +3,8 @@ package ch.jfactory.collection.cursor;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default implementation for array cursor
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 class ArrayCursor implements Cursor
 {
-    private static final Logger LOGGER = Logger.getLogger( ArrayCursor.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ArrayCursor.class );
 
     private final Object[] objects;
 

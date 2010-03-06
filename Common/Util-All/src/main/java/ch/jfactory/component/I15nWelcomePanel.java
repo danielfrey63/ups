@@ -27,6 +27,7 @@ import ch.jfactory.resource.Strings;
 import com.jgoodies.forms.debug.FormDebugPanel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uifextras.panel.GradientBackgroundPanel;
 import com.jgoodies.uifextras.util.ActionLabel;
 import java.awt.BorderLayout;
@@ -58,9 +59,10 @@ import javax.swing.Timer;
 import net.infonode.util.ImageException;
 import net.infonode.util.ImageUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Retrives the texts for the welcome panel from different keys by extending the given key as follows:
@@ -82,7 +84,7 @@ public class I15nWelcomePanel extends GradientBackgroundPanel
 {
     public static final String SEPARATOR = "-";
 
-    private static final Logger LOGGER = Logger.getLogger( I15nWelcomePanel.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( I15nWelcomePanel.class );
 
     private static final boolean DEBUG = LOGGER.isDebugEnabled();
 
@@ -133,8 +135,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel
      *
      * @param resourceKey    the base resourceKey for looking up the strings
      * @param actionKeys     the actions to put into the panel
-     * @param commandManager if the commands are based on {@link org.pietschy.command.ActionCommand} implementations.
-     *                       Otherwise {@link com.jgoodies.uif.action.ActionManager} is used.
+     * @param commandManager if the commands are based on {@link ActionCommand} implementations.
+     *                       Otherwise {@link ActionManager} is used.
      */
     public I15nWelcomePanel( final String resourceKey, final String[] actionKeys, final CommandManager commandManager )
     {

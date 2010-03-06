@@ -30,7 +30,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This control is used to display the Pictures with zooming support
@@ -48,7 +49,7 @@ public class PictureDetailPanel extends JPanel
 
     private static final int END_ZOOM_KEY = KeyEvent.VK_ESCAPE;
 
-    private static final Logger LOGGER = Logger.getLogger( PictureDetailPanel.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( PictureDetailPanel.class );
 
     private static final int MAXSIZE = 370;
 
@@ -64,7 +65,7 @@ public class PictureDetailPanel extends JPanel
      * Constructs a Panel
      *
      * @param locator the <code>PictureCache</code> Object from which the pictures are taken
-     * @see ch.jfactory.resource.PictureCache
+     * @see PictureCache
      */
     public PictureDetailPanel( final CachedImageLocator locator )
     {

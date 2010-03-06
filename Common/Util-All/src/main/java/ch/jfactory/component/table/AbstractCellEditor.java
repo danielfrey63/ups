@@ -9,6 +9,7 @@ package ch.jfactory.component.table;
 
 import ch.jfactory.color.ColorUtils;
 import java.awt.Color;
+import java.beans.XMLEncoder;
 import java.io.Serializable;
 import java.util.EventObject;
 import javax.swing.CellEditor;
@@ -26,7 +27,7 @@ import javax.swing.event.EventListenerList;
  * <p> <strong>Warning:</strong> Serialized objects of this class will not be compatible with future Swing releases. The
  * current serialization support is appropriate for short term storage or RMI between applications running the same
  * version of Swing.  As of 1.4, support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup> has
- * been added to the <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
+ * been added to the <code>java.beans</code> package. Please see {@link XMLEncoder}.
  *
  * @author Philip Milne
  * @version 1.11 12/19/03
@@ -129,7 +130,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      * Notifies all listeners that have registered interest for notification on this event type.  The event instance is
      * created lazily.
      *
-     * @see javax.swing.event.EventListenerList
+     * @see EventListenerList
      */
     protected void fireEditingStopped()
     {
@@ -155,7 +156,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
      * Notifies all listeners that have registered interest for notification on this event type.  The event instance is
      * created lazily.
      *
-     * @see javax.swing.event.EventListenerList
+     * @see EventListenerList
      */
     protected void fireEditingCanceled()
     {

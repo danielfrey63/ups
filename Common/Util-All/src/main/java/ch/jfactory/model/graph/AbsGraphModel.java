@@ -1,7 +1,8 @@
 package ch.jfactory.model.graph;
 
 import java.util.ArrayList;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbsGraphModel implements GraphModel
 {
-    private static final Logger LOGGER = Logger.getLogger( AbsGraphModel.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( AbsGraphModel.class );
 
     protected static final String MODEL = "xmatrix.input.model";
 
@@ -82,7 +83,7 @@ public abstract class AbsGraphModel implements GraphModel
             catch ( Exception ex )
             {
                 final String message = "Could not initiate model: " + mod;
-                LOGGER.fatal( message, ex );
+                LOGGER.error( message, ex );
                 throw new IllegalStateException( message );
             }
         }
@@ -102,7 +103,7 @@ public abstract class AbsGraphModel implements GraphModel
             catch ( Exception ex )
             {
                 final String message = "Could not initiate type factory: " + typeFact;
-                LOGGER.fatal( message, ex );
+                LOGGER.error( message, ex );
                 throw new IllegalStateException( message );
             }
         }
@@ -122,7 +123,7 @@ public abstract class AbsGraphModel implements GraphModel
             catch ( Exception ex )
             {
                 final String message = "Could not initiate role factory: " + roleFact;
-                LOGGER.fatal( message, ex );
+                LOGGER.error( message, ex );
                 throw new IllegalStateException( message );
             }
         }
@@ -148,7 +149,7 @@ public abstract class AbsGraphModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener)
+     * @see GraphModel#addDirtyListener(DirtyListener)
      */
     public void addDirtyListener( final DirtyListener listener )
     {
@@ -156,7 +157,7 @@ public abstract class AbsGraphModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener)
+     * @see GraphModel#removeDirtyListener(DirtyListener)
      */
     public void removeDirtyListener( final DirtyListener listener )
     {
@@ -164,7 +165,7 @@ public abstract class AbsGraphModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#setDirty(boolean)
+     * @see GraphModel#setDirty(boolean)
      */
     public void setDirty( final boolean dirty )
     {
@@ -173,7 +174,7 @@ public abstract class AbsGraphModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#getDirty()
+     * @see GraphModel#getDirty()
      */
     public boolean getDirty()
     {

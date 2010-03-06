@@ -19,12 +19,12 @@ package simple;
 import ch.jfactory.component.tree.MapBasedTreeModel;
 import ch.jfactory.component.tree.filtered.FilteredTreeModel;
 import ch.jfactory.component.tree.filtered.ViewFilter;
-import javax.swing.JTree;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTree;
 
 /**
  * TODO: document

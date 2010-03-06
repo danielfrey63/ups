@@ -21,7 +21,8 @@ import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.io.output.NullOutputStream;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * // TODO: Comment
@@ -30,7 +31,7 @@ import org.apache.log4j.Logger;
  */
 public class XMLUtils
 {
-    private static final Logger LOG = Logger.getLogger( XMLUtils.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XMLUtils.class );
 
     /**
      * This method applies the xslFile to inFile but does not write an output. Useful if the xslt script itself
@@ -39,7 +40,7 @@ public class XMLUtils
      * @param inFile  input file
      * @param xslFile xslt file
      * @param params  the parameters to pass to the xslt file
-     * @throws javax.xml.transform.TransformerException
+     * @throws TransformerException
      *                     uppon error
      * @throws IOException uppon error
      */
@@ -81,7 +82,7 @@ public class XMLUtils
      * @param output
      * @param xslt
      * @param params the parameters to pass to the xslt file
-     * @throws javax.xml.transform.TransformerException
+     * @throws TransformerException
      *
      */
     public static void transformNoIn( final Writer output, final Reader xslt, final Properties params )
@@ -109,8 +110,8 @@ public class XMLUtils
      * @param out    as output file stream
      * @param xsl    string for resource will be loaded using getResourceAsStream
      * @param params the parameters to pass to the xslt script
-     * @throws java.io.IOException
-     * @throws javax.xml.transform.TransformerException
+     * @throws IOException
+     * @throws TransformerException
      *
      */
     public static void transform( final String in, final String out, final String xsl, final Properties params )
@@ -182,7 +183,7 @@ public class XMLUtils
 
             public void fatalError( final TransformerException e ) throws TransformerException
             {
-                LOG.fatal( e.getMessageAndLocation(), e );
+                LOG.error( e.getMessageAndLocation(), e );
                 throw e;
             }
 

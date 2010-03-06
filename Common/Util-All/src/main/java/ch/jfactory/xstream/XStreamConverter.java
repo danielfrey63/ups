@@ -2,7 +2,6 @@ package ch.jfactory.xstream;
 
 import ch.jfactory.convert.Converter;
 import ch.jfactory.model.ClassPathEntityResolver;
-import ch.jfactory.xstream.DomDriver;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.converters.extended.ISO8601DateConverter;

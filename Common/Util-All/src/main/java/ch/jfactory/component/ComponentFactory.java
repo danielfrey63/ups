@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 
 /**
  * Factory class to create different components. All factory methods are based on parametrized properties. The
- * properties are loaded with the {@link ch.jfactory.resource.Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1
+ * properties are loaded with the {@link Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1
  * $
  */
 public class ComponentFactory
@@ -26,7 +26,7 @@ public class ComponentFactory
     /**
      * Creates a button with name, icon and tooltip by extracting the strings/icon name from a resource. If an object
      * not null is given as a discriminator, the resource associated with that object is used, otherwise the global
-     * resource is used. See {@link ch.jfactory.resource.Strings#getString(Object, String)}.<p> To compose the key for
+     * resource is used. See {@link Strings#getString(Object, String)}.<p> To compose the key for
      * the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as
      * an argument:
      *
@@ -108,8 +108,8 @@ public class ComponentFactory
      *
      * The tooltip is automatically completed by the shortcut in paranthesis. This button is not automatically
      * associated with the key stroke, so the SHORT property should be left emtpy. If you want to create an associated
-     * button use {@link #createButton(java.lang.Class, java.lang.String, java.awt.event.ActionListener)} or {@link
-     * #createButton(java.lang.String, java.awt.event.ActionListener)}.
+     * button use {@link #createButton(Class, String, ActionListener)} or {@link
+     * #createButton(String, ActionListener)}.
      *
      * @param obj            The object to search the associated resource bundle
      * @param prefix         The key prefix used to retrieve properties

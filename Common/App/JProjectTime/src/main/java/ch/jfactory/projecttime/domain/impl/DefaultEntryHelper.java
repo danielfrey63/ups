@@ -55,7 +55,7 @@ public final class DefaultEntryHelper implements IFEntryHelper
      * @param name   the name of the new entry
      * @param type   the type of the new entry
      * @return the new entry
-     * @throws ch.jfactory.projecttime.domain.impl.DefaultEntryBuildingRules.RuleViolationException
+     * @throws DefaultEntryBuildingRules.RuleViolationException
      *
      */
     public IFEntry createEntry( final IFEntry parent, final String name, final Object type )

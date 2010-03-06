@@ -25,7 +25,7 @@ public class Combinatorial
      * calculated.<p> <p/> Given an array of groups <code>{{a1 a2}{b1 b2 b3}}</code> the result will be <code> {{a1
      * b1}{a2 b1}{a1 b2} {a2 b2}{a1 b3}{a2 b3}}. </code> The order of the given groups will be maintained in the
      * resulting combinations.<p> <p/> The result is not randomized, so a logical order will be maintained. In order to
-     * randomize it, use i.e. {@link ch.jfactory.math.RandomUtils#randomize(Object[]) ArrayUtils.randomize}.<p> <p/>
+     * randomize it, use i.e. {@link RandomUtils#randomize(Object[]) ArrayUtils.randomize}.<p> <p/>
      * Note: Cross products can reach huge sizes if explicitely enumerated, as done in this method. These huge number
      * are not allways senseful and a subsample may be more appropriate. To get a randomized subsamples of cross
      * products, see {@link #getCrossProduct(Object[][], int) getCrossProduct}.
@@ -48,9 +48,9 @@ public class Combinatorial
      * the size may be limited.<p> <p/> The method delivers all or a subsample of all theoretically possible cross
      * product combinations. The time used for the constitution of the subsample is guaranteed to be less than for all
      * cross product combination. The returned subset will be a random subset of all cross products. The {@link
-     * ch.jfactory.math.RandomUtils#randomize(Object[]) ArrayUtils.randomize} method is used to randomize. Refer to this
+     * RandomUtils#randomize(Object[]) ArrayUtils.randomize} method is used to randomize. Refer to this
      * method if you want to get the seed used for randomization.<p> <p/> To make randomizing reproducable, see {@link
-     * ch.jfactory.math.RandomUtils#randomize(Object[]) ArrayUtils.randomize} for how to get the seed used to randomize.
+     * RandomUtils#randomize(Object[]) ArrayUtils.randomize} for how to get the seed used to randomize.
      * To reproduce a former subset, refer to the appropriate {@link #getCrossProduct(Object[][], int, long)
      * getCrossProduct(groups, size, seed)} method. <p> <p/> Note: As a side effect, the original group elements are
      * randomized within their groups.
@@ -58,7 +58,7 @@ public class Combinatorial
      * @param groups an array of groups of elements
      * @param size   the maximum number of cross products requested
      * @return an array of the given maximum of cross products
-     * @see ch.jfactory.math.RandomUtils#randomize(Object[])
+     * @see RandomUtils#randomize(Object[])
      */
     public static Object[][] getCrossProduct( final Object[][] groups, int size )
     {
@@ -74,7 +74,7 @@ public class Combinatorial
      * @param size   the maximum number of cross products requested
      * @param seed   the seed used to randomize with groups
      * @return an array of the given maximum of cross products
-     * @see ch.jfactory.math.RandomUtils#randomize(Object[])
+     * @see RandomUtils#randomize(Object[])
      */
     public static Object[][] getCrossProduct( final Object[][] groups, int size, final long seed )
     {

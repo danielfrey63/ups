@@ -21,7 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements default behaviour to display a component like TaxTree or LevelSelectionList. The only methods that you
@@ -30,7 +31,7 @@ import org.apache.log4j.Logger;
  * Strings#getString(String)} method. The resource keys you should use are (PREFIX is replaced):
  * <ul><li><code>PREFIX.TITLE</code>: the text in the title of the window</li> <li><code>PREFIX.TEXT1</code>: the text
  * given in the white plase on the top of the dialog</li> <li><code>PREFIX.TEXT2</code>: the text placed immediatly
- * before your component</li> </ul> This component also relies on the {@link ch.jfactory.component.ComponentFactory} to
+ * before your component</li> </ul> This component also relies on the {@link ComponentFactory} to
  * create buttons. See there for additional keys to put into the string resource.
  *
  * @author $Author: daniel_frey $
@@ -38,7 +39,7 @@ import org.apache.log4j.Logger;
  */
 abstract public class I15nComponentDialog extends JDialog
 {
-    private static final Logger LOGGER = Logger.getLogger( I15nComponentDialog.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( I15nComponentDialog.class );
 
     protected JButton apply;
 

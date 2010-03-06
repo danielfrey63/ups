@@ -5,7 +5,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class KeyBindings
 {
-    private static final Logger LOG = Logger.getLogger( KeyBindings.class );
+    private static final Logger LOG = LoggerFactory.getLogger( KeyBindings.class );
 
     private static final String ALT = Strings.getString( "MODIFIER.ALT.TEXT" );
 

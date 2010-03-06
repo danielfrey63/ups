@@ -23,13 +23,14 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ThumbNailPanel extends ScrollerPanel
 {
     private final static int THUMBHEIGHT = 50;
 
-    private static final Logger LOGGER = Logger.getLogger( ThumbNailPanel.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ThumbNailPanel.class );
 
     private final JPanel panel;
 

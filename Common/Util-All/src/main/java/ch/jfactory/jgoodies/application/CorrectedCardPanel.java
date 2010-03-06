@@ -50,7 +50,7 @@ public class CorrectedCardPanel extends JPanel
         /**
          * Set the childs name (if non-null) and and make it visible iff it's the only CardPanel child.
          *
-         * @see java.awt.Component#setName(java.lang.String)
+         * @see Component#setName(String)
          */
         public void addLayoutComponent( final String name, final Component child )
         {
@@ -213,7 +213,7 @@ public class CorrectedCardPanel extends JPanel
     /**
      * Show the card with the specified name.
      *
-     * @see java.awt.Component#getName()
+     * @see Component#getName()
      */
     public void showCard( final String name )
     {

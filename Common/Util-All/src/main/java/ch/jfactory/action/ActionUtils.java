@@ -13,7 +13,7 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <Comments here>
@@ -26,7 +26,7 @@ public class ActionUtils
     /**
      * logger instance
      */
-    private static final Logger cat = Logger.getLogger( ActionUtils.class );
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger( ActionUtils.class );
 
     /**
      * Rigister a button to a given KeyStroke. The method generates a new <code>Action</code> if it hasn't been defined
@@ -45,9 +45,9 @@ public class ActionUtils
             action = new ButtonRedirector( button );
         }
         final String actionKey = keyStroke.toString() + button.hashCode();
-        if ( cat.isDebugEnabled() )
+        if ( LOG.isDebugEnabled() )
         {
-            cat.debug( "register action: " + actionKey );
+            LOG.debug( "register action: " + actionKey );
         }
         button.getRootPane().getInputMap( JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).put( keyStroke, actionKey );
         button.getRootPane().getActionMap().put( actionKey, action );

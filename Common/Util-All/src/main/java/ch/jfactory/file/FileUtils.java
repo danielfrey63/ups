@@ -19,7 +19,8 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -27,7 +28,7 @@ import org.apache.log4j.Logger;
  */
 public class FileUtils
 {
-    private static final Logger LOG = Logger.getLogger( FileUtils.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileUtils.class );
 
     private static final boolean INFO = LOG.isInfoEnabled();
 
@@ -160,7 +161,7 @@ public class FileUtils
         }
         catch ( UnsupportedEncodingException e )
         {
-            LOG.error( e, e );
+            LOG.error( e.getMessage(), e );
         }
         return s;
     }
@@ -204,7 +205,7 @@ public class FileUtils
      * @param jar    the jar to scan
      * @param filter the filter to apply
      * @return a collection of strings of absolute pathes
-     * @throws java.io.IOException
+     * @throws IOException
      */
     public static Collection getFilesFromJar( final String jar, final StringFilter filter ) throws IOException
     {

@@ -18,7 +18,7 @@
 package ch.jfactory.animation;
 
 /**
- * Simple listener for notification of stoped {@link ch.jfactory.animation.Paintable} objects.
+ * Simple listener for notification of stoped {@link Paintable} objects.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $

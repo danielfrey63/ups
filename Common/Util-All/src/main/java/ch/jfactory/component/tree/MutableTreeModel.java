@@ -1,5 +1,7 @@
 package ch.jfactory.component.tree;
 
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
@@ -13,9 +15,9 @@ public interface MutableTreeModel extends TreeModel
 {
     /**
      * An implementation of this method removes the last object of the given path from the last object of the parent
-     * path. It must notify any {@link javax.swing.event.TreeModelListener TreeModelListener}s thereafter with a {@link
-     * javax.swing.event.TreeModelEvent TreeModelEvent} by calling the listeners {@link
-     * javax.swing.event.TreeModelListener#treeNodesRemoved(javax.swing.event.TreeModelEvent)
+     * path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter with a {@link
+     * TreeModelEvent TreeModelEvent} by calling the listeners {@link
+     * TreeModelListener#treeNodesRemoved(TreeModelEvent)
      * treeNodesRemoved(TreeModelEvent)} method.
      *
      * @param path the path to remove
@@ -24,9 +26,9 @@ public interface MutableTreeModel extends TreeModel
 
     /**
      * An implementation of this method inserts the last object of the given child path from the last object of the
-     * given parent path. It must notify any {@link javax.swing.event.TreeModelListener TreeModelListener}s thereafter
-     * with a {@link javax.swing.event.TreeModelEvent TreeModelEvent} by calling the listeners {@link
-     * javax.swing.event.TreeModelListener#treeNodesInserted(javax.swing.event.TreeModelEvent)
+     * given parent path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter
+     * with a {@link TreeModelEvent TreeModelEvent} by calling the listeners {@link
+     * TreeModelListener#treeNodesInserted(TreeModelEvent)
      * treeNodesInserted(TreeModelEvent)} method.
      *
      * @param child  the path to insert

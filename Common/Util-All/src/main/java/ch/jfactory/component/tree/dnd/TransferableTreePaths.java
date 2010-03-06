@@ -38,7 +38,7 @@ public class TransferableTreePaths implements Transferable
     }
 
     /**
-     * @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor)
+     * @see Transferable#getTransferData(DataFlavor)
      */
     public synchronized Object getTransferData( final DataFlavor flavor ) throws UnsupportedFlavorException
     {
@@ -54,7 +54,7 @@ public class TransferableTreePaths implements Transferable
     }
 
     /**
-     * @see java.awt.datatransfer.Transferable#getTransferDataFlavors()
+     * @see Transferable#getTransferDataFlavors()
      */
     public DataFlavor[] getTransferDataFlavors()
     {
@@ -62,7 +62,7 @@ public class TransferableTreePaths implements Transferable
     }
 
     /**
-     * @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+     * @see Transferable#isDataFlavorSupported(DataFlavor)
      */
     public boolean isDataFlavorSupported( final DataFlavor flavor )
     {

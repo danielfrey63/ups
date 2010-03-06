@@ -9,11 +9,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class ObjectPopup extends JPopupMenu implements ActionListener
 {
-    private static final Logger LOGGER = Logger.getLogger( ObjectPopup.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ObjectPopup.class );
 
     public ObjectPopup( final Object[] objects )
     {

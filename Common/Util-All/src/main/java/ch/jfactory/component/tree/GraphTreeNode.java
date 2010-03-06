@@ -104,7 +104,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getChildAt(int)
+     * @see TreeNode#getChildAt(int)
      */
     public TreeNode getChildAt( final int index )
     {
@@ -112,7 +112,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getChildCount()
+     * @see TreeNode#getChildCount()
      */
     public int getChildCount()
     {
@@ -120,7 +120,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getParent()
+     * @see TreeNode#getParent()
      */
     public TreeNode getParent()
     {
@@ -133,7 +133,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getAllowsChildren()
+     * @see TreeNode#getAllowsChildren()
      */
     public boolean getAllowsChildren()
     {
@@ -141,7 +141,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.MutableTreeNode#insert(MutableTreeNode, int)
+     * @see MutableTreeNode#insert(MutableTreeNode, int)
      */
     public void insert( final MutableTreeNode child, final int index )
     {
@@ -150,7 +150,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.MutableTreeNode#remove(MutableTreeNode)
+     * @see MutableTreeNode#remove(MutableTreeNode)
      */
     public void remove( final MutableTreeNode treeNode )
     {
@@ -159,7 +159,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.MutableTreeNode#setParent(MutableTreeNode)
+     * @see MutableTreeNode#setParent(MutableTreeNode)
      */
     public void setParent( final MutableTreeNode newParent )
     {
@@ -167,7 +167,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see javax.swing.tree.MutableTreeNode#setUserObject(Object)
+     * @see MutableTreeNode#setUserObject(Object)
      */
     public void setUserObject( final Object object )
     {
@@ -179,7 +179,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {
@@ -187,7 +187,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
+     * @see Object#equals(Object)
      */
     public boolean equals( final Object obj )
     {
@@ -196,7 +196,7 @@ public class GraphTreeNode extends AbstractMutableTreeNode
     }
 
     /**
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     public int hashCode()
     {

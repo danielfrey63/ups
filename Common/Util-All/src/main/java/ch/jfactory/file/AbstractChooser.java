@@ -48,12 +48,12 @@ public abstract class AbstractChooser extends AbstractDialog
     protected String base;
 
     /**
-     * The frame title of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}.
+     * The frame title of the error dialog displayed when implementing {@link #checkFiles(File[])}.
      */
     protected String keyErrorTitle;
 
     /**
-     * The text of the error dialog displayed when implementing {@link #checkFiles(java.io.File[])}.
+     * The text of the error dialog displayed when implementing {@link #checkFiles(File[])}.
      */
     protected String keyErrorText;
 
@@ -95,7 +95,7 @@ public abstract class AbstractChooser extends AbstractDialog
      *
      * <p/>
      *
-     * See {@link #AbstractChooser(javax.swing.JFrame,javax.swing.filechooser.FileFilter,String,java.io.File,int)}.
+     * See {@link #AbstractChooser(JFrame, FileFilter,String, File,int)}.
      *
      * @param filter     the file filter
      * @param base       the base string to retrieve system properties from

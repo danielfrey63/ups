@@ -1,5 +1,6 @@
 package ch.jfactory.ant;
 
+import java.io.File;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
@@ -12,7 +13,7 @@ public abstract class Incrementor extends Task
     /**
      * The manifest file file.
      */
-    private java.io.File file = null;
+    private File file = null;
 
     /**
      * The variable to replace.
@@ -36,12 +37,12 @@ public abstract class Incrementor extends Task
      *
      * @param file The new file value
      */
-    public void setFile( final java.io.File file )
+    public void setFile( final File file )
     {
         this.file = file;
     }
 
-    public java.io.File getFile()
+    public File getFile()
     {
         return file;
     }

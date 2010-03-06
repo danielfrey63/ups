@@ -18,10 +18,11 @@ package ch.jfactory.command;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import org.pietschy.command.ActionCommand;
 
 /**
- * Wraps an {@link ActionCommand} into an {@link javax.swing.Action}.
+ * Wraps an {@link ActionCommand} into an {@link Action}.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $

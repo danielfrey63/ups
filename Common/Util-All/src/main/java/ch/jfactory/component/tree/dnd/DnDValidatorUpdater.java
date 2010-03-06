@@ -28,7 +28,7 @@ import javax.swing.tree.TreePath;
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2005/11/17 11:54:58 $
- * @see ch.jfactory.component.tree.dnd.DnDTree
+ * @see DnDTree
  */
 public interface DnDValidatorUpdater
 {

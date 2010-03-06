@@ -30,7 +30,7 @@ import java.util.List;
 public abstract class Paintable implements Runnable
 {
     /**
-     * The list of {@link ch.jfactory.animation.StopListener}s that will be notified upon termination of this painting
+     * The list of {@link StopListener}s that will be notified upon termination of this painting
      * thread.
      */
     private final List stopListeners = new ArrayList();

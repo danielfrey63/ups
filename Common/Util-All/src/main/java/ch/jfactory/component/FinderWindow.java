@@ -36,7 +36,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays a small window with the given label and invokes actions uppon up and down keys.
@@ -46,7 +47,7 @@ import org.apache.log4j.Logger;
  */
 public class FinderWindow extends JWindow
 {
-    private static final Logger LOGGER = Logger.getLogger( FinderWindow.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( FinderWindow.class );
 
     private static final String ACTION_KEY_NEXT = "HCD_SEARCH_NEXT";
 
@@ -384,7 +385,7 @@ public class FinderWindow extends JWindow
 
     public static void main( final String[] args )
     {
-        final javax.swing.JFrame parent = new javax.swing.JFrame();
+        final JFrame parent = new JFrame();
         parent.setSize( 200, 200 );
         parent.setVisible( true );
         final FinderWindow window = new FinderWindow( parent.getRootPane(), "Suche: " );

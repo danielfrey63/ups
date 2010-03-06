@@ -1,6 +1,7 @@
 package ch.jfactory.help;
 
 import java.awt.Font;
+import javax.help.Map;
 import javax.help.plaf.basic.BasicSearchCellRenderer;
 import javax.swing.JLabel;
 
@@ -12,7 +13,7 @@ import javax.swing.JLabel;
  */
 public class PatchedBasicSearchCellRenderer extends BasicSearchCellRenderer
 {
-    public PatchedBasicSearchCellRenderer( final javax.help.Map map )
+    public PatchedBasicSearchCellRenderer( final Map map )
     {
         super( map );
     }

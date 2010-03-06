@@ -125,7 +125,7 @@ public class GraphNodeList
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

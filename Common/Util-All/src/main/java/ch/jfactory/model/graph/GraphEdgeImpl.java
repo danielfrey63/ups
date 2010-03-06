@@ -45,7 +45,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#isRole(Class)
+     * @see GraphEdge#isRole(Class)
      */
     public boolean isRole( final Class role )
     {
@@ -55,7 +55,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphEdge#getChild()
+     * @see GraphEdge#getChild()
      */
     public GraphNode getChild()
     {
@@ -65,7 +65,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphEdge#getParent()
+     * @see GraphEdge#getParent()
      */
     public GraphNode getParent()
     {
@@ -75,7 +75,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphEdge#getRole()
+     * @see GraphEdge#getRole()
      */
     public Role getRole()
     {
@@ -90,7 +90,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#getRecursive()
+     * @see GraphEdge#getRecursive()
      */
     public GraphEdge getRecursive()
     {
@@ -100,7 +100,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphEdge#getRank()
+     * @see GraphEdge#getRank()
      */
     public int getRank()
     {
@@ -108,7 +108,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setChild(GraphNode)
+     * @see GraphEdge#setChild(GraphNode)
      */
     public void setChild( final GraphNode child )
     {
@@ -119,7 +119,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setParent(GraphNode)
+     * @see GraphEdge#setParent(GraphNode)
      */
     public void setParent( final GraphNode parent )
     {
@@ -130,7 +130,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setRole(Role)
+     * @see GraphEdge#setRole(Role)
      */
     public void setRole( final Role role )
     {
@@ -138,7 +138,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setRecursive(GraphEdge)
+     * @see GraphEdge#setRecursive(GraphEdge)
      */
     public void setRecursive( final GraphEdge recursive )
     {
@@ -146,7 +146,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setRank(int)
+     * @see GraphEdge#setRank(int)
      */
     public void setRank( final int rank )
     {
@@ -156,7 +156,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     /**
      * @castor.field
      * @castor.field-xml
-     * @see ch.jfactory.model.graph.GraphEdge#getId()
+     * @see GraphEdge#getId()
      */
     public int getId()
     {
@@ -164,7 +164,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphEdge#setId(int)
+     * @see GraphEdge#setId(int)
      */
     public void setId( final int id )
     {
@@ -172,7 +172,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

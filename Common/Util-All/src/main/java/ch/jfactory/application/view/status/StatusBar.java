@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -27,7 +28,9 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -36,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -284,13 +288,13 @@ public class StatusBar extends JPanel
     public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
         UIManager.setLookAndFeel( new WindowsLookAndFeel() );
-        final javax.swing.JButton remove = new javax.swing.JButton( "Remove" );
-        final javax.swing.JButton add = new javax.swing.JButton( "Add" );
-        final javax.swing.JButton message = new javax.swing.JButton( "Message" );
-        final javax.swing.JPanel panel = new JPanel( new java.awt.FlowLayout() );
+        final JButton remove = new JButton( "Remove" );
+        final JButton add = new JButton( "Add" );
+        final JButton message = new JButton( "Message" );
+        final JPanel panel = new JPanel( new FlowLayout() );
 
-        final javax.swing.JFrame f = new javax.swing.JFrame();
-        final javax.swing.JTextField text = new javax.swing.JTextField( 20 );
+        final JFrame f = new JFrame();
+        final JTextField text = new JTextField( 20 );
         final StatusBar status = new StatusBar();
         final List<JLabel> list = new ArrayList<JLabel>();
 
@@ -300,12 +304,12 @@ public class StatusBar extends JPanel
 
         final JSplitPane splitPane = new JSplitPane();
         splitPane.setRightComponent( panel );
-        f.getContentPane().add( splitPane, java.awt.BorderLayout.CENTER );
+        f.getContentPane().add( splitPane, BorderLayout.CENTER );
         panel.add( add );
         panel.add( remove );
         panel.add( text );
         panel.add( message );
-        f.getContentPane().add( status, java.awt.BorderLayout.SOUTH );
+        f.getContentPane().add( status, BorderLayout.SOUTH );
 
         add.addActionListener( new ActionListener()
         {

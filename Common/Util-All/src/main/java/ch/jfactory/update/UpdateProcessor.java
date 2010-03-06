@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
+import javax.swing.event.EventListenerList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class update modules.
@@ -21,12 +23,12 @@ import org.apache.log4j.Logger;
  */
 public class UpdateProcessor
 {
-    private static final Logger LOGGER = Logger.getLogger( UpdateProcessor.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( UpdateProcessor.class );
 
     /**
      * Utility field used by event firing mechanism.
      */
-    private javax.swing.event.EventListenerList listenerList = null;
+    private EventListenerList listenerList = null;
 
     /**
      * Creates a new instance of UpdateProcessor
@@ -81,9 +83,9 @@ public class UpdateProcessor
     {
         if ( listenerList == null )
         {
-            listenerList = new javax.swing.event.EventListenerList();
+            listenerList = new EventListenerList();
         }
-        listenerList.add( ch.jfactory.update.UpdateChangeListener.class, listener );
+        listenerList.add( UpdateChangeListener.class, listener );
     }
 
     /**
@@ -93,7 +95,7 @@ public class UpdateProcessor
      */
     public synchronized void removeUpdateChangeListener( final UpdateChangeListener listener )
     {
-        listenerList.remove( ch.jfactory.update.UpdateChangeListener.class, listener );
+        listenerList.remove( UpdateChangeListener.class, listener );
     }
 
     protected synchronized void fireProgressUpdateChangeEvent( final UpdateChangeEvent event )

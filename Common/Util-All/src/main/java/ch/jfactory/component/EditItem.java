@@ -36,7 +36,7 @@ public class EditItem extends JPanel
      * well as a setup button on the second.<p> The key to retrieve the strings are composed as follows, where
      * <code>PREFIX</code> indicates the prefix given as an argument: <ul> <li>Label:
      * <code>PREFIX.TITLE.TEXT</code></li> <li>Button: <code>PREFIX.BUTTON</code></li> </ul> See documentation of {@link
-     * ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate what
+     * ComponentFactory#createButton(String, ActionListener)} to investigate what
      * extenstions are used to complete the keys of the button.
      *
      * @param prefix   the prefix string to use to access the different strings used to setup
@@ -62,7 +62,7 @@ public class EditItem extends JPanel
      * Build a panel containing a title in boldface on the first line and a edit field displaying the current status on
      * the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the
      * prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> </ul> See documentation of
-     * {@link ch.jfactory.component.ComponentFactory#createButton(String,java.awt.event.ActionListener)} to investigate
+     * {@link ComponentFactory#createButton(String, ActionListener)} to investigate
      * what extenstions are used to complete the keys of the button.
      *
      * @param prefix the prefix string to use to access the different strings used to setup

@@ -9,7 +9,7 @@ import javax.swing.tree.TreePath;
 public class NullDnDValidator extends AbstractDnDValidatorUpdater
 {
     /**
-     * @see DnDValidatorUpdater#isMoveAllowed(javax.swing.tree.TreePath,javax.swing.tree.TreePath,int)
+     * @see DnDValidatorUpdater#isMoveAllowed(TreePath, TreePath,int)
      */
     public boolean isMoveAllowed( final TreePath missile, final TreePath parent, final int index )
     {
@@ -24,7 +24,7 @@ public class NullDnDValidator extends AbstractDnDValidatorUpdater
     }
 
     /**
-     * @see ch.jfactory.component.tree.dnd.DnDValidatorUpdater#isRightShiftAllowed(TreePath)
+     * @see DnDValidatorUpdater#isRightShiftAllowed(TreePath)
      */
     public boolean isRightShiftAllowed( final TreePath path )
     {
@@ -32,7 +32,7 @@ public class NullDnDValidator extends AbstractDnDValidatorUpdater
     }
 
     /**
-     * @see ch.jfactory.component.tree.dnd.DnDValidatorUpdater#isLeftShiftAllowed(TreePath)
+     * @see DnDValidatorUpdater#isLeftShiftAllowed(TreePath)
      */
     public boolean isLeftShiftAllowed( final TreePath path )
     {
@@ -40,7 +40,7 @@ public class NullDnDValidator extends AbstractDnDValidatorUpdater
     }
 
     /**
-     * @see ch.jfactory.component.tree.dnd.DnDValidatorUpdater#isAnyActionAllowed(TreePath, TreePath)
+     * @see DnDValidatorUpdater#isAnyActionAllowed(TreePath, TreePath)
      */
     public boolean isAnyActionAllowed( final TreePath from, final TreePath to )
     {
@@ -48,14 +48,14 @@ public class NullDnDValidator extends AbstractDnDValidatorUpdater
     }
 
     /**
-     * @see ch.jfactory.component.tree.dnd.DnDValidatorUpdater#doRightShift(TreePath)
+     * @see DnDValidatorUpdater#doRightShift(TreePath)
      */
     public void doRightShift( final TreePath path )
     {
     }
 
     /**
-     * @see ch.jfactory.component.tree.dnd.DnDValidatorUpdater#doLeftShift(TreePath)
+     * @see DnDValidatorUpdater#doLeftShift(TreePath)
      */
     public void doLeftShift( final TreePath path )
     {

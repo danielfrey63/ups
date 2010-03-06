@@ -6,7 +6,8 @@ import ch.jfactory.model.graph.GraphNodeImpl;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.model.graph.Role;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class VirtualGraphTreeNode implements GraphNode
 {
-    private static final Logger LOGGER = Logger.getLogger( VirtualGraphTreeNode.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( VirtualGraphTreeNode.class );
 
     /**
      * The ROLE_NULL <code>GraphNode</code> is used because instances of <code> TreePath</code> may not be constructe
@@ -359,7 +360,7 @@ public class VirtualGraphTreeNode implements GraphNode
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphNode#isType(Class)
+     * @see GraphNode#isType(Class)
      */
     public boolean isType( final Class type )
     {

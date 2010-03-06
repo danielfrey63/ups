@@ -2,7 +2,9 @@
 
 package ch.jfactory.update;
 
-public interface UpdateChangeListener extends java.util.EventListener
+import java.util.EventListener;
+
+public interface UpdateChangeListener extends EventListener
 {
     /**
      * this method is invoke if the UpdateProcessor begins update.

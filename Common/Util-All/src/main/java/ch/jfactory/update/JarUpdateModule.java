@@ -15,7 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 class JarUpdateModule implements UpdateModule
 {
-    private static final Logger LOGGER = Logger.getLogger( JarUpdateModule.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( JarUpdateModule.class );
 
     private VersionInfo localVersion = null;
 

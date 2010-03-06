@@ -1,8 +1,10 @@
 package ch.jfactory.application.view.dialog;
 
+import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.AbstractPlainDocument;
 import ch.jfactory.component.list.DefaultJList;
+import ch.jfactory.resource.Strings;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;
@@ -10,18 +12,23 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListResourceBundle;
+import java.util.ResourceBundle;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.Document;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple dialog that displays a text and a list.
@@ -31,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class ListDialog extends I15nComponentDialog implements ListSelectionListener, DocumentListener
 {
-    private static final Logger LOGGER = Logger.getLogger( ListDialog.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ListDialog.class );
 
     private Object[] selectedData;
 
@@ -45,7 +52,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     /**
      * Constructs a new list dialog based as a child of the dialog given. A title is displayed, for which the string is
-     * taken from a string resource {@link ch.jfactory.resource.Strings} with a key like <code>PREFIX.TITLE</code>,
+     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>,
      * where <code>PREFIX</code> is the prefix argument given. A text multiline label is displayed above the list where
      * the text is retrieved by the key <code>PREFIX.TEXT</code>.
      *
@@ -61,7 +68,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     /**
      * Constructs a new list dialog based as a child of the frame given. A title is displayed, for which the string is
-     * taken from a string resource {@link ch.jfactory.resource.Strings} with a key like <code>PREFIX.TITLE</code>,
+     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>,
      * where <code>PREFIX</code> is the prefix argument given. A text multiline label is displayed above the list where
      * the text is retrieved by the key <code>PREFIX.TEXT</code>.
      *
@@ -116,9 +123,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     /**
      * Set which selection mode you want.
      *
-     * @param selectionMode selection mode from {@link javax.swing.ListSelectionModel} might be {@link
-     *                      javax.swing.ListSelectionModel#SINGLE_SELECTION} or {@link javax.swing.ListSelectionModel#SINGLE_INTERVAL_SELECTION}
-     *                      or {@link javax.swing.ListSelectionModel#MULTIPLE_INTERVAL_SELECTION}
+     * @param selectionMode selection mode from {@link ListSelectionModel} might be {@link
+     *                      ListSelectionModel#SINGLE_SELECTION} or {@link ListSelectionModel#SINGLE_INTERVAL_SELECTION}
+     *                      or {@link ListSelectionModel#MULTIPLE_INTERVAL_SELECTION}
      */
     public void setSelectionMode( final int selectionMode )
     {
@@ -234,7 +241,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     public static void main( final String[] args )
     {
-        final java.util.ResourceBundle bundle = new java.util.ListResourceBundle()
+        final ResourceBundle bundle = new ListResourceBundle()
         {
             protected Object[][] getContents()
             {
@@ -248,16 +255,16 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
                 };
             }
         };
-        ch.jfactory.resource.Strings.setResourceBundle( bundle );
+        Strings.setResourceBundle( bundle );
         final ArrayList<String> list = new ArrayList<String>();
         for ( int i = 0; i < 100; i++ )
         {
             list.add( "Eintrag " + i );
         }
         final Object[] objects = list.toArray();
-        final ListDialog dialog = new ListDialog( (javax.swing.JFrame) null, "test", objects );
+        final ListDialog dialog = new ListDialog( (JFrame) null, "test", objects );
         dialog.setSize( 400, 700 );
-        ch.jfactory.application.presentation.WindowUtils.centerOnScreen( dialog );
+        WindowUtils.centerOnScreen( dialog );
         dialog.setVisible( true );
     }
 }

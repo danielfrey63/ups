@@ -16,6 +16,8 @@
  */
 package ch.jfactory.component.splash;
 
+import com.jgoodies.uif.splash.Splash;
+import com.jgoodies.uif.splash.SplashProvider;
 import com.jgoodies.uif.util.ScreenUtils;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -33,11 +35,11 @@ import java.awt.Window;
  * @author Daniel Frey
  * @version $Revision: 1.3 $
  * @see com.jgoodies.uif.splash.ImageSplash
- * @see com.jgoodies.uif.splash.Splash
- * @see com.jgoodies.uif.splash.SplashProvider
+ * @see Splash
+ * @see SplashProvider
  */
 
-public final class ImageSplash extends Window implements com.jgoodies.uif.splash.SplashProvider
+public final class ImageSplash extends Window implements SplashProvider
 {
     private static final int DEFAULT_BAR_WIDTH = 100;
 

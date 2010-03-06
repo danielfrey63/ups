@@ -238,7 +238,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
 //    }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#getRoot()
+     * @see GraphModel#getRoot()
      */
     public GraphNode getRoot()
     {
@@ -254,7 +254,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#createEdge(GraphNode, GraphNode)
+     * @see GraphModel#createEdge(GraphNode, GraphNode)
      */
     public GraphEdge createEdge( final GraphNode parent, final GraphNode child )
     {
@@ -262,7 +262,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphNode)
+     * @see GraphModel#addChanged(GraphNode)
      */
     public void addChanged( final GraphNode node )
     {
@@ -270,7 +270,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addChanged(GraphEdge)
+     * @see GraphModel#addChanged(GraphEdge)
      */
     public void addChanged( final GraphEdge node )
     {
@@ -278,7 +278,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#createNode(GraphNode, Class)
+     * @see GraphModel#createNode(GraphNode, Class)
      */
     public GraphNode createNode( final GraphNode parent, final Class type )
     {
@@ -286,7 +286,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#save()
+     * @see GraphModel#save()
      */
     public void save()
     {
@@ -294,7 +294,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphNode)
+     * @see GraphModel#addRemoved(GraphNode)
      */
     public void addRemoved( final GraphNode node )
     {
@@ -302,7 +302,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addRemoved(GraphEdge)
+     * @see GraphModel#addRemoved(GraphEdge)
      */
     public void addRemoved( final GraphEdge edge )
     {
@@ -310,7 +310,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#doQuit()
+     * @see GraphModel#doQuit()
      */
     public void doQuit()
     {
@@ -318,7 +318,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#addDirtyListener(DirtyListener)
+     * @see GraphModel#addDirtyListener(DirtyListener)
      */
     public void addDirtyListener( final DirtyListener listener )
     {
@@ -326,7 +326,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#removeDirtyListener(DirtyListener)
+     * @see GraphModel#removeDirtyListener(DirtyListener)
      */
     public void removeDirtyListener( final DirtyListener listener )
     {
@@ -334,7 +334,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#setDirty(boolean)
+     * @see GraphModel#setDirty(boolean)
      */
     public void setDirty( final boolean dirty )
     {
@@ -342,7 +342,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     }
 
     /**
-     * @see ch.jfactory.model.graph.GraphModel#getDirty()
+     * @see GraphModel#getDirty()
      */
     public boolean getDirty()
     {

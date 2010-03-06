@@ -11,11 +11,12 @@ package ch.jfactory.resource;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.lang.ref.SoftReference;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ImageReference
 {
-    private final static Logger LOGGER = Logger.getLogger( ImageReference.class );
+    private final static Logger LOGGER = LoggerFactory.getLogger( ImageReference.class );
 
     private Dimension size;
 

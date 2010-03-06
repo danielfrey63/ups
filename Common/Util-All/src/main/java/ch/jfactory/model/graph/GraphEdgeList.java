@@ -352,7 +352,7 @@ public class GraphEdgeList implements Serializable
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

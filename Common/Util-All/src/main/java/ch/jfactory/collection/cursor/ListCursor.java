@@ -3,7 +3,8 @@ package ch.jfactory.collection.cursor;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default implementation for list cursor
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 class ListCursor implements Cursor
 {
-    private static final Logger LOGGER = Logger.getLogger( ListCursor.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( ListCursor.class );
 
     private final List list;
 

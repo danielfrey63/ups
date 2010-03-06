@@ -13,7 +13,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple JTree that takes a TreeNode and uses a DefaultTreeModel. This tree allows for searches by implementing the
@@ -24,7 +25,7 @@ import org.apache.log4j.Logger;
  */
 public class SearchableTree extends JTree implements TreeFinder
 {
-    private static final Logger LOGGER = Logger.getLogger( SearchableTree.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( SearchableTree.class );
 
     /**
      * Creates a new instance of TaxTreePanel

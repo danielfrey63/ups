@@ -23,9 +23,9 @@ import javax.swing.tree.TreePath;
 
 /**
  * Simple implementation of {@link AbstractTreeModel AbstractTreeModel} based on object mappings. The only way for a
- * client to insert/remove children is to call the call {@link #insertInto(javax.swing.tree.TreePath,
- * javax.swing.tree.TreePath, int) insertInto(TreePath, TreePath, int)} or {@link #insertInto(Object,
- * javax.swing.tree.TreePath, int) insertInto(Object, TreePath, int)}.
+ * client to insert/remove children is to call the call {@link #insertInto(TreePath,
+ * TreePath, int) insertInto(TreePath, TreePath, int)} or {@link #insertInto(Object,
+ * TreePath, int) insertInto(Object, TreePath, int)}.
  *
  * <p/>You can insert objects into objects directly by using {@link #insertInto(Object, Object, int) insertInto(Object,
  * Object, int)}. Typically you would use this model like this:
@@ -100,7 +100,7 @@ public class MapBasedTreeModel extends AbstractTreeModel
 
     /**
      * Inserts the child object into the parent object by resolving the parent objects path from the cache and calling
-     * {@link #insertInto(Object, javax.swing.tree.TreePath, int) insertInto(Object, TreePath, int)}.
+     * {@link #insertInto(Object, TreePath, int) insertInto(Object, TreePath, int)}.
      *
      * @param child    the child to insert
      * @param parent   the parent to insert the child to

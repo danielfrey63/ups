@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class for retrieving locale-sensitive messages. It optionally utilizes the <code>MessageFormat</code> class to
@@ -25,7 +26,7 @@ import org.apache.log4j.Logger;
  *
  * Missing entries can be written to a file given by the system property <code>herbar.texte.logmissing</code>.
  * Initialize the class with {@link Strings#setResourceBundle(ResourceBundle)} for a simple application or with {@link
- * Strings#addResourceBundle(java.lang.Object, java.util.ResourceBundle)} if you want to handle different bundles.<p/>
+ * Strings#addResourceBundle(Object, ResourceBundle)} if you want to handle different bundles.<p/>
  *
  * All calls that are not found produce an entry in a file. The file is taken from the system property <code>
  * jfactory.strings.logmissing</code>.
@@ -37,7 +38,7 @@ public class Strings
 {
     public static final char MISSING_CHAR = '?';
 
-    private static final Logger LOGGER = Logger.getLogger( Strings.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( Strings.class );
 
     /**
      * Prefix and postfix for missing resource strings

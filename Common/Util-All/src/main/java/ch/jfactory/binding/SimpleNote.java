@@ -79,7 +79,7 @@ public class SimpleNote implements Note
      * @param subject    the subject
      * @param percentage the percentage
      * @param color      the color
-     * @param type       the {@link ch.jfactory.application.view.status.Message.Type}
+     * @param type       the {@link Message.Type}
      */
     private SimpleNote( final String message, final String subject, final Integer percentage, final Color color, final Message.Type type )
     {

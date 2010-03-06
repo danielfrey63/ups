@@ -19,7 +19,8 @@ import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays the whole path of the current Taxon object in focus.
@@ -29,7 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class BreadCrumb extends JPanel
 {
-    private final static Logger LOG = Logger.getLogger( BreadCrumb.class );
+    private final static Logger LOG = LoggerFactory.getLogger( BreadCrumb.class );
 
     private BreadTaxPopup taxPopup;
 
@@ -47,7 +48,7 @@ public class BreadCrumb extends JPanel
      */
     public BreadCrumb( final TaxStateModel herbarModel, final Level stopperLevel )
     {
-        LOG.info( this );
+        LOG.info( toString() );
         this.model = herbarModel;
         this.stopperLevel = stopperLevel;
         this.setLayout( new BorderLayout( 0, 0 ) );
@@ -56,7 +57,7 @@ public class BreadCrumb extends JPanel
 
     public BreadCrumb( final TaxStateModel herbarModel )
     {
-        LOG.info( this );
+        LOG.info( toString() );
         this.model = herbarModel;
         this.setLayout( new BorderLayout( 0, 0 ) );
         this.add( panel, BorderLayout.CENTER );

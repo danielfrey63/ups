@@ -48,7 +48,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Will be added to the BaseFrame as an own mode.
@@ -153,7 +154,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         }
         catch ( RuntimeException e )
         {
-            LOG.fatal( "LessonPanel(...)", e );
+            LOG.error( "LessonPanel(...)", e );
             throw e;
         }
         catch ( Error e )
@@ -278,6 +279,6 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         {
             e.printStackTrace();
         }
-        LOG = Logger.getLogger( LessonPanel.class );
+        LOG = LoggerFactory.getLogger( LessonPanel.class );
     }
 }

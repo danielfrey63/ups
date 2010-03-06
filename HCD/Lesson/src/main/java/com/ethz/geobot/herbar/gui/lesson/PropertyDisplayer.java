@@ -19,7 +19,8 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -33,7 +34,7 @@ public class PropertyDisplayer extends NiceTabbedPane
 
     private final static int THEME_MORPHOLOGY = 0;
 
-    protected final static Logger LOG = Logger.getLogger( PropertyDisplayer.class );
+    protected final static Logger LOG = LoggerFactory.getLogger( PropertyDisplayer.class );
 
     protected final static DefaultMutableTreeNode ROOT_NODE = new DefaultMutableTreeNode();
 

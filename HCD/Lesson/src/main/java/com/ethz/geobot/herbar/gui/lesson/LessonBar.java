@@ -46,7 +46,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -54,7 +55,7 @@ import org.apache.log4j.Logger;
  */
 public class LessonBar extends JPanel implements ActionListener, IteratorControlListener, PropertyChangeListener
 {
-    private static final Logger LOG = Logger.getLogger( LessonBar.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LessonBar.class );
 
     private static final int POPUP_THRESHOLD = 8;
 
@@ -231,7 +232,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         }
         catch ( Exception x )
         {
-            LOG.fatal( "actionPerformed() throws an exception: ", x );
+            LOG.error( "actionPerformed() throws an exception: ", x );
         }
     }
 
@@ -259,10 +260,13 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     public void changeFocus( final Component component )
     {
         final Taxon[] list = taxStateModel.getTaxList();
-        Arrays.sort( list, new ToStringComparator() );
-        if ( list.length > POPUP_THRESHOLD )
+        final int length = list.length;
+        final Taxon[] copy = new Taxon[length];
+        System.arraycopy( list, 0, copy, 0, length );
+        Arrays.sort( copy, new ToStringComparator() );
+        if ( copy.length > POPUP_THRESHOLD )
         {
-            final ListDialog dialog = new ListDialog( parent, "DIALOG.FOCUS", list );
+            final ListDialog dialog = new ListDialog( parent, "DIALOG.FOCUS", copy );
             dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
             dialog.setSize( 300, 300 );
             dialog.setLocationRelativeTo( getTopLevelAncestor() );

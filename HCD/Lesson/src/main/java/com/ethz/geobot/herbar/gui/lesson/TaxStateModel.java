@@ -9,7 +9,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Arrays;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TaxStateModel
 {
@@ -17,7 +18,7 @@ public class TaxStateModel
 
     public static final String TAXLIST = "TAXLIST";
 
-    private static final Logger LOG = Logger.getLogger( TaxStateModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TaxStateModel.class );
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport( this );
 

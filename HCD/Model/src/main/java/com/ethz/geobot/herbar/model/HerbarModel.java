@@ -5,6 +5,8 @@
  */
 package com.ethz.geobot.herbar.model;
 
+import com.ethz.geobot.herbar.model.event.ModelChangeListener;
+
 /**
  * abstract representation of the Herbar-data-model.
  *
@@ -103,14 +105,14 @@ public interface HerbarModel
      *
      * @param listener the listener object
      */
-    public void addModelChangeListener( com.ethz.geobot.herbar.model.event.ModelChangeListener listener );
+    public void addModelChangeListener( ModelChangeListener listener );
 
     /**
      * remove a ModelChangeListener from the model.
      *
      * @param listener the listener object
      */
-    public void removeModelChangeListener( com.ethz.geobot.herbar.model.event.ModelChangeListener listener );
+    public void removeModelChangeListener( ModelChangeListener listener );
 
     /**
      * Return a Morphology item given by the name.

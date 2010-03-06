@@ -6,13 +6,15 @@
 
 package com.ethz.geobot.herbar.model.event;
 
+import java.util.EventObject;
+
 /**
  * Event object for ModelChangeListener.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public class ModelChangeEvent extends java.util.EventObject
+public class ModelChangeEvent extends EventObject
 {
     /**
      * Creates a new instance of ModelChangeEvent

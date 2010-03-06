@@ -38,7 +38,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see com.ethz.geobot.herbar.util.TaxonTreeNode#getTaxon()
+     * @see TaxonTreeNode#getTaxon()
      */
     public Taxon getTaxon()
     {
@@ -46,7 +46,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getAllowsChildren()
+     * @see TreeNode#getAllowsChildren()
      */
     public boolean getAllowsChildren()
     {
@@ -54,7 +54,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getChildAt(int)
+     * @see TreeNode#getChildAt(int)
      */
     public TreeNode getChildAt( final int param )
     {
@@ -62,7 +62,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getChildCount()
+     * @see TreeNode#getChildCount()
      */
     public int getChildCount()
     {
@@ -70,7 +70,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getIndex(TreeNode)
+     * @see TreeNode#getIndex(TreeNode)
      */
     public int getIndex( final TreeNode treeNode )
     {
@@ -78,7 +78,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#getParent()
+     * @see TreeNode#getParent()
      */
     public TreeNode getParent()
     {
@@ -86,7 +86,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#isLeaf()
+     * @see TreeNode#isLeaf()
      */
     public boolean isLeaf()
     {
@@ -94,7 +94,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see javax.swing.tree.TreeNode#children()
+     * @see TreeNode#children()
      */
     public Enumeration children()
     {
@@ -108,7 +108,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

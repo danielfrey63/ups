@@ -3,6 +3,7 @@ package com.ethz.geobot.herbar.model.origin;
 import ch.jfactory.model.graph.RoleNull;
 import com.ethz.geobot.herbar.model.MorValue;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.relevance.AbsRelevance;
 
 /**
  * @author $Author: daniel_frey $
@@ -21,7 +22,7 @@ public class RoleAssignedImpl extends RoleNull implements RoleAssigned
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue)
+     * @see AbsRelevance #isRelevant(Taxon[], MorValue)
      */
     public boolean isRelevant( final Taxon[] taxa, final MorValue value )
     {

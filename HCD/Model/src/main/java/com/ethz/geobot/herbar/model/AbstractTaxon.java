@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract implementation for Taxon. Implements standard behaviour.
@@ -22,10 +23,10 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractTaxon implements Taxon, Comparable
 {
-    private final static Logger LOG = Logger.getLogger( AbstractTaxon.class );
+    private final static Logger LOG = LoggerFactory.getLogger( AbstractTaxon.class );
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getAllChildTaxa(Level)
+     * @see Taxon#getAllChildTaxa(Level)
      */
     public Taxon[] getAllChildTaxa( final Level level )
     {
@@ -49,7 +50,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxa(Level)
+     * @see Taxon#getChildTaxa(Level)
      */
     public Taxon[] getChildTaxa( final Level level )
     {
@@ -77,7 +78,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxon(int)
+     * @see Taxon#getChildTaxon(int)
      */
     public Taxon getChildTaxon( final int index )
             throws IndexOutOfBoundsException
@@ -87,7 +88,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getChildTaxon(Taxon)
+     * @see Taxon#getChildTaxon(Taxon)
      */
     public int getChildTaxon( final Taxon child )
     {
@@ -104,7 +105,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getMorAttributes()
+     * @see Taxon#getMorAttributes()
      */
     public MorAttribute[] getMorAttributes()
     {
@@ -118,7 +119,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getMorValue(int)
+     * @see Taxon#getMorValue(int)
      */
     public MorValue getMorValue( final int index )
     {
@@ -136,7 +137,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
 //    }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getSiblings()
+     * @see Taxon#getSiblings()
      */
     /**
      * Returns the siblings of this Taxon, including this Taxon.
@@ -164,7 +165,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getSubLevels()
+     * @see Taxon#getSubLevels()
      */
     public Level[] getSubLevels()
     {
@@ -256,7 +257,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
 //    }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#getRelevance(MorValue)
+     * @see Taxon#getRelevance(MorValue)
      */
     public AbsRelevance getRelevance( final MorValue value )
     {
@@ -277,7 +278,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.Taxon#isIn(Taxon[])
+     * @see Taxon#isIn(Taxon[])
      */
     public boolean isIn( final Taxon[] list )
     {
@@ -285,7 +286,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /**
-     * @see java.lang.Comparable#compareTo(Object)
+     * @see Comparable#compareTo(Object)
      */
     public int compareTo( final Object obj )
     {
@@ -313,7 +314,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     public abstract String toDebugString();
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public String toString()
     {

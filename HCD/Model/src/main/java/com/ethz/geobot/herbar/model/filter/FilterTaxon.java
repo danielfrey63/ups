@@ -10,7 +10,8 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Taxon class implementing the filter. This class acts as a Proxy for a dependent Taxon. It add the functionallity to
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 class FilterTaxon extends AbstractTaxon
 {
-    private static final Logger LOG = Logger.getLogger( FilterTaxon.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FilterTaxon.class );
 
     private Taxon dependentTaxon;
 

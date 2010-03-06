@@ -8,8 +8,9 @@ package com.ethz.geobot.herbar.model;
 
 import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
-import java.util.Iterator;
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class for implementing HerbarModel, implements the ModelChangeListener behavior.
@@ -22,12 +23,12 @@ abstract public class AbstractHerbarModel implements HerbarModel
     /**
      * log category
      */
-    private static final Logger LOG = Logger.getLogger( AbstractHerbarModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractHerbarModel.class );
 
     /**
      * Utility field holding list of ModelChangeListeners.
      */
-    private java.util.ArrayList modelChangeListenerList = null;
+    private ArrayList modelChangeListenerList = null;
 
     /**
      * Holds value of property name.
@@ -50,11 +51,11 @@ abstract public class AbstractHerbarModel implements HerbarModel
      *
      * @param listener The listener to register.
      */
-    public synchronized void addModelChangeListener( final com.ethz.geobot.herbar.model.event.ModelChangeListener listener )
+    public synchronized void addModelChangeListener( final ModelChangeListener listener )
     {
         if ( modelChangeListenerList == null )
         {
-            modelChangeListenerList = new java.util.ArrayList();
+            modelChangeListenerList = new ArrayList();
         }
         modelChangeListenerList.add( listener );
     }
@@ -64,7 +65,7 @@ abstract public class AbstractHerbarModel implements HerbarModel
      *
      * @param listener The listener to remove.
      */
-    public synchronized void removeModelChangeListener( final com.ethz.geobot.herbar.model.event.ModelChangeListener listener )
+    public synchronized void removeModelChangeListener( final ModelChangeListener listener )
     {
         if ( modelChangeListenerList != null )
         {

@@ -19,7 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to filter the datamodel. It depends on a initial data model and a special filter settings.
@@ -29,7 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class FilterModel extends AbstractHerbarModel implements Cloneable
 {
-    private static final Logger LOG = Logger.getLogger( FilterModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FilterModel.class );
 
     private HerbarModel dependentModel;
 
@@ -215,7 +216,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         }
         catch ( CloneNotSupportedException ex )
         {
-            LOG.fatal( "clone isn't supported by cloneable class !?!?!", ex );
+            LOG.error( "clone isn't supported by cloneable class !?!?!", ex );
             throw new RuntimeException( ex );
         }
     }
@@ -303,7 +304,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getValues(String)
+     * @see HerbarModel#getValues(String)
      */
     public MorValue[] getValues( final String name )
     {
@@ -311,7 +312,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorValue)
+     * @see HerbarModel#getTaxa(MorValue)
      */
     public Taxon[] getTaxa( final MorValue mor )
     {

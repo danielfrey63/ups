@@ -1,6 +1,7 @@
 package com.ethz.geobot.herbar.model.relevance;
 
 import ch.jfactory.application.SystemUtil;
+import ch.jfactory.model.graph.AbsSimpleGraphNode;
 import ch.jfactory.model.graph.GraphNodeImpl;
 import com.ethz.geobot.herbar.model.MorAttribute;
 import com.ethz.geobot.herbar.model.MorValue;
@@ -31,7 +32,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -41,7 +43,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
 {
     private static final String BASE = "herbar.relevance.";
 
-    private static final Logger LOG = Logger.getLogger( AbsRelevance.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbsRelevance.class );
 
     /**
      * Used to map relevances configured in the properties file to ranks.
@@ -81,7 +83,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
                     }
                     catch ( Exception x )
                     {
-                        LOG.fatal( "Invalid extention \"" + pos + "\" to property " + property );
+                        LOG.error( "Invalid extention \"" + pos + "\" to property " + property );
                         SystemUtil.EXIT.exit( 1 );
                     }
                     map.put( new Integer( index ), property );
@@ -106,7 +108,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
                 {
                     final String message = "Could not initiate relevance class: " + name
                             + " from system property " + prop;
-                    LOG.fatal( message, ex );
+                    LOG.error( message, ex );
                     throw new IllegalStateException( message );
                 }
             }
@@ -139,9 +141,8 @@ public abstract class AbsRelevance extends GraphNodeImpl
         }
         catch ( ExceptionInInitializerError ex )
         {
-            LOG.fatal( "Fatal error during static initalization of "
-                    + AbsRelevance.class );
-            LOG.fatal( "Reason", ex.getCause() );
+            LOG.error( "Fatal error during static initalization of " + AbsRelevance.class );
+            LOG.error( "Reason", ex.getCause() );
         }
     }
 
@@ -173,11 +174,11 @@ public abstract class AbsRelevance extends GraphNodeImpl
     /**
      * Returns one of the configured relevances taking all given MorValue objects into account. Be warned that this is
      * <b>not</b> the same as calling {@link #getRelevance(Taxon[],MorValue)} for each MorValue object. This method the
-     * best relevance for any MorValue object given. <ul> <li>{@link com.ethz.geobot.herbar.model.relevance.IdentifyingRelevance
-     * IdentifyingRelevance}</li> <li>{@link com.ethz.geobot.herbar.model.relevance.UniqueRelevance
-     * UniqueRelevance}</li> <li>{@link com.ethz.geobot.herbar.model.relevance.DifferentRelevance
-     * DifferentRelevance}</li> <li>{@link com.ethz.geobot.herbar.model.relevance.WeakRelevance WeakRelevance}</li>
-     * <li>{@link com.ethz.geobot.herbar.model.relevance.UnRelevance UnRelevance}</li> </ul>
+     * best relevance for any MorValue object given. <ul> <li>{@link IdentifyingRelevance
+     * IdentifyingRelevance}</li> <li>{@link UniqueRelevance
+     * UniqueRelevance}</li> <li>{@link DifferentRelevance
+     * DifferentRelevance}</li> <li>{@link WeakRelevance WeakRelevance}</li>
+     * <li>{@link UnRelevance UnRelevance}</li> </ul>
      */
     public static AbsRelevance getRelevance( final Taxon[] taxa, final MorValue[] values )
     {
@@ -219,7 +220,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
                     + relevance.getClass().getName() + " with role "
                     + role.getClass().getName() + " not found. "
                     + "Available registered relevaces are: " + relevances;
-                LOG.fatal(message);
+                LOG.error(message);
                 throw new IllegalStateException(message);
             }
             newRole.setRank(i.intValue());
@@ -228,7 +229,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
         else {
             String message = "Class for origin " + role.getClass().getName()
                 + " not found.";
-            LOG.fatal(message);
+            LOG.error(message);
             throw new IllegalStateException(message);
         }
     }
@@ -323,7 +324,7 @@ public abstract class AbsRelevance extends GraphNodeImpl
                                         RelevanceMetaData metadata );
 
     /**
-     * @see ch.jfactory.model.graph.AbsSimpleGraphNode#toString()
+     * @see AbsSimpleGraphNode#toString()
      */
     public String toString()
     {

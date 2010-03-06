@@ -5,11 +5,13 @@
  */
 package com.ethz.geobot.herbar.model;
 
+import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.jxpath.JXPathBeanInfo;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -17,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class AttributeXBeanInfo implements JXPathBeanInfo
 {
-    private final static Logger LOG = Logger.getLogger( AttributeXBeanInfo.class );
+    private final static Logger LOG = LoggerFactory.getLogger( AttributeXBeanInfo.class );
 
     private final Map descriptor = new HashMap();
 
@@ -25,16 +27,16 @@ public class AttributeXBeanInfo implements JXPathBeanInfo
     {
         try
         {
-            PropertyDescriptor des = new PropertyDescriptor( "id", com.ethz.geobot.herbar.model.MorAttribute.class, "getId", null );
+            PropertyDescriptor des = new PropertyDescriptor( "id", MorAttribute.class, "getId", null );
             descriptor.put( "id", des );
-            des = new PropertyDescriptor( "name", com.ethz.geobot.herbar.model.MorAttribute.class, "getName", null );
+            des = new PropertyDescriptor( "name", MorAttribute.class, "getName", null );
             descriptor.put( "name", des );
-            des = new PropertyDescriptor( "values", com.ethz.geobot.herbar.model.MorAttribute.class, "getValues", null );
+            des = new PropertyDescriptor( "values", MorAttribute.class, "getValues", null );
             descriptor.put( "values", des );
         }
-        catch ( java.beans.IntrospectionException ex )
+        catch ( IntrospectionException ex )
         {
-            LOG.error( ex );
+            LOG.error( ex.getMessage(), ex );
         }
     }
 

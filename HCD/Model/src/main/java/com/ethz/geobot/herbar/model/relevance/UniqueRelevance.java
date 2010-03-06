@@ -23,7 +23,7 @@ public class UniqueRelevance extends AbsRelevance
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue)
+     * @see AbsRelevance #isRelevant(Taxon[], MorValue)
      */
     public boolean isRelevant( final Taxon[] taxa, final MorValue val )
     {
@@ -36,7 +36,7 @@ public class UniqueRelevance extends AbsRelevance
     }
 
     /**
-     * @see com.ethz.geobot.herbar.model.relevance.AbsRelevance #isRelevant(Taxon[], MorValue, RelevanceMetaData)
+     * @see AbsRelevance #isRelevant(Taxon[], MorValue, RelevanceMetaData)
      */
     public boolean isRelevant( final Taxon[] taxa, final MorValue value,
                                final RelevanceMetaData md )

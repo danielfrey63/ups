@@ -6,11 +6,13 @@
 
 package com.ethz.geobot.herbar.model;
 
+import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.jxpath.JXPathBeanInfo;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -18,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class TaxonXBeanInfo implements JXPathBeanInfo
 {
-    private final static Logger LOG = Logger.getLogger( TaxonXBeanInfo.class );
+    private final static Logger LOG = LoggerFactory.getLogger( TaxonXBeanInfo.class );
 
     private final Map descriptor = new HashMap();
 
@@ -26,22 +28,22 @@ public class TaxonXBeanInfo implements JXPathBeanInfo
     {
         try
         {
-            PropertyDescriptor des = new PropertyDescriptor( "taxon", com.ethz.geobot.herbar.model.Taxon.class, "getChildTaxa", null );
+            PropertyDescriptor des = new PropertyDescriptor( "taxon", Taxon.class, "getChildTaxa", null );
             descriptor.put( "taxon", des );
-            des = new PropertyDescriptor( "id", com.ethz.geobot.herbar.model.Taxon.class, "getId", null );
+            des = new PropertyDescriptor( "id", Taxon.class, "getId", null );
             descriptor.put( "id", des );
-            des = new PropertyDescriptor( "name", com.ethz.geobot.herbar.model.Taxon.class, "getName", null );
+            des = new PropertyDescriptor( "name", Taxon.class, "getName", null );
             descriptor.put( "name", des );
-            des = new PropertyDescriptor( "level", com.ethz.geobot.herbar.model.Taxon.class, "getLevel", null );
+            des = new PropertyDescriptor( "level", Taxon.class, "getLevel", null );
             descriptor.put( "level", des );
-            des = new PropertyDescriptor( "subLevels", com.ethz.geobot.herbar.model.Taxon.class, "getSubLevels", null );
+            des = new PropertyDescriptor( "subLevels", Taxon.class, "getSubLevels", null );
             descriptor.put( "subLevels", des );
-            des = new PropertyDescriptor( "morAttributes", com.ethz.geobot.herbar.model.Taxon.class, "getMorAttributes", null );
+            des = new PropertyDescriptor( "morAttributes", Taxon.class, "getMorAttributes", null );
             descriptor.put( "morAttributes", des );
-            des = new PropertyDescriptor( "morValues", com.ethz.geobot.herbar.model.Taxon.class, "getMorValues", null );
+            des = new PropertyDescriptor( "morValues", Taxon.class, "getMorValues", null );
             descriptor.put( "morValues", des );
         }
-        catch ( java.beans.IntrospectionException ex )
+        catch ( IntrospectionException ex )
         {
             ex.printStackTrace();
         }

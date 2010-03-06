@@ -3,7 +3,8 @@ package com.ethz.geobot.herbar.model.filter;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Arrays;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains a definition detail.
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class FilterDefinitionDetail implements Cloneable
 {
-    private final static Logger LOG = Logger.getLogger( FilterDefinitionDetail.class );
+    private final static Logger LOG = LoggerFactory.getLogger( FilterDefinitionDetail.class );
 
     private Taxon scope;
 
@@ -117,7 +118,7 @@ public class FilterDefinitionDetail implements Cloneable
         }
         catch ( CloneNotSupportedException ex )
         {
-            LOG.fatal( "clone isn't supported by cloneable class !?!?!", ex );
+            LOG.error( "clone isn't supported by cloneable class !?!?!", ex );
             throw new RuntimeException( ex );
         }
     }

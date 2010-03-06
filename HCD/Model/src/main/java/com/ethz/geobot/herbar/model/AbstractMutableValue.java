@@ -20,39 +20,39 @@ public abstract class AbstractMutableValue
         implements MorValue, Rankable
 {
     /**
-     * @see com.ethz.geobot.herbar.model.Rankable#getId()
+     * @see Rankable#getId()
      */
     public abstract int getId();
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getName()
+     * @see MorValue#getName()
      */
     public abstract String getName();
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getParentAttribute()
+     * @see MorValue#getParentAttribute()
      */
     public abstract MorAttribute getParentAttribute();
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getTaxa()
+     * @see MorValue#getTaxa()
      */
     public abstract Taxon[] getTaxa();
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getTaxon(int)
+     * @see MorValue#getTaxon(int)
      */
     public abstract Taxon getTaxon( int index );
 
     /**
-     * @see com.ethz.geobot.herbar.model.MorValue#getText()
+     * @see MorValue#getText()
      */
     public abstract String[] getTexts();
 
     /**
      * TODO: Must be removed after interface MorValue has been updated from getUserObject to getTexts.
      *
-     * @see com.ethz.geobot.herbar.model.MorValue#getText()
+     * @see MorValue#getText()
      */
     public String getText()
     {
@@ -79,7 +79,7 @@ public abstract class AbstractMutableValue
     public abstract void setRank( int rank );
 
     /**
-     * Set a new parent {@link com.ethz.geobot.herbar.model.AbstractMutableAttribute}.
+     * Set a new parent {@link AbstractMutableAttribute}.
      *
      * @param newAtt the new parent to set
      */

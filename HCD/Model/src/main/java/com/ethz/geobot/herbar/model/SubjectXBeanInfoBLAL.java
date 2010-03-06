@@ -5,11 +5,13 @@
  */
 package com.ethz.geobot.herbar.model;
 
+import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.jxpath.JXPathBeanInfo;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -17,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class SubjectXBeanInfoBLAL implements JXPathBeanInfo
 {
-    private final static Logger LOG = Logger.getLogger( SubjectXBeanInfoBLAL.class );
+    private final static Logger LOG = LoggerFactory.getLogger( SubjectXBeanInfoBLAL.class );
 
     private final Map descriptor = new HashMap();
 
@@ -25,18 +27,18 @@ public class SubjectXBeanInfoBLAL implements JXPathBeanInfo
     {
         try
         {
-            PropertyDescriptor des = new PropertyDescriptor( "id", com.ethz.geobot.herbar.model.MorSubject.class, "getId", null );
+            PropertyDescriptor des = new PropertyDescriptor( "id", MorSubject.class, "getId", null );
             descriptor.put( "id", des );
-            des = new PropertyDescriptor( "name", com.ethz.geobot.herbar.model.MorSubject.class, "getName", null );
+            des = new PropertyDescriptor( "name", MorSubject.class, "getName", null );
             descriptor.put( "name", des );
-            des = new PropertyDescriptor( "attributes", com.ethz.geobot.herbar.model.MorSubject.class, "getAttributes", null );
+            des = new PropertyDescriptor( "attributes", MorSubject.class, "getAttributes", null );
             descriptor.put( "attributes", des );
-            des = new PropertyDescriptor( "subjects", com.ethz.geobot.herbar.model.MorSubject.class, "getSubjects", null );
+            des = new PropertyDescriptor( "subjects", MorSubject.class, "getSubjects", null );
             descriptor.put( "subjects", des );
         }
-        catch ( java.beans.IntrospectionException ex )
+        catch ( IntrospectionException ex )
         {
-            LOG.error( ex );
+            LOG.error( ex.getMessage(), ex );
         }
     }
 

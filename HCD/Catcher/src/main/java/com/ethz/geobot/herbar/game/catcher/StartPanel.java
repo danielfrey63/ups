@@ -4,6 +4,7 @@ import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -35,7 +36,7 @@ public class StartPanel extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

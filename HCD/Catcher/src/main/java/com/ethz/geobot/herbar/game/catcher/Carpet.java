@@ -13,7 +13,8 @@ import com.ethz.geobot.herbar.game.util.SoundList;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Animation class with thread of the catcher-game.
@@ -38,7 +39,7 @@ public class Carpet extends Canvas implements Runnable
      */
     public static final int MAXBIRD = 5;
 
-    private static final Logger LOG = Logger.getLogger( Carpet.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Carpet.class );
 
     private boolean threadRunning = false;
 
@@ -224,7 +225,7 @@ public class Carpet extends Canvas implements Runnable
         }
         catch ( Exception x )
         {
-            LOG.fatal( "run()", x );
+            LOG.error( "run()", x );
         }
     }
 

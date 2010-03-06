@@ -21,7 +21,7 @@ import com.ethz.geobot.herbar.modeapi.ModeRegistration;
 public class CatcherMode extends AbstractModeAdapter
 {
     /**
-     * @see java.lang.Object#Object()
+     * @see Object#Object()
      */
     public CatcherMode()
     {

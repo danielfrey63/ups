@@ -11,6 +11,7 @@ package com.ethz.geobot.herbar.game.catcher;
 import com.ethz.geobot.herbar.game.util.CountScore;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import javax.swing.event.EventListenerList;
 
@@ -87,7 +88,7 @@ public class EnergyBar extends Canvas
     }
 
     /**
-     * @see java.awt.Component#paint(Graphics)
+     * @see Component#paint(Graphics)
      */
     public void paint( final Graphics g )
     {

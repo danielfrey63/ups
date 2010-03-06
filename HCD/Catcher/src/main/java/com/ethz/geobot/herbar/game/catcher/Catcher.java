@@ -32,7 +32,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author fre
@@ -158,7 +159,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         catch ( RuntimeException e )
         {
             e.printStackTrace();
-            LOG.fatal( "Catcher(...)", e );
+            LOG.error( "Catcher(...)", e );
             throw e;
         }
         catch ( Error e )
@@ -169,10 +170,10 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#queryDeactivate()
+     * @see ModeActivation#queryDeactivate()
      */
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#queryDeactivate()
+     * @see ModeActivation#queryDeactivate()
      */
     public boolean queryDeactivate()
     {
@@ -195,7 +196,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#deactivate()
+     * @see ModeActivation#deactivate()
      */
     public void deactivate()
     {
@@ -206,7 +207,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     }
 
     /**
-     * @see com.ethz.geobot.herbar.modeapi.ModeActivation#activate()
+     * @see ModeActivation#activate()
      */
     public void activate()
     {
@@ -218,7 +219,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyPressed(KeyEvent)
+     * @see KeyListener#keyPressed(KeyEvent)
      */
     public void keyPressed( final KeyEvent e )
     {
@@ -267,7 +268,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
                 }
                 catch ( Exception x )
                 {
-                    LOG.fatal( "keyPressed()", x );
+                    LOG.error( "keyPressed()", x );
                 }
             }
         }
@@ -291,21 +292,21 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyReleased(KeyEvent)
+     * @see KeyListener#keyReleased(KeyEvent)
      */
     public void keyReleased( final KeyEvent e )
     {
     }
 
     /**
-     * @see java.awt.event.KeyListener#keyTyped(KeyEvent)
+     * @see KeyListener#keyTyped(KeyEvent)
      */
     public void keyTyped( final KeyEvent e )
     {
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.ScoreListener#scoreChanged()
+     * @see ScoreListener#scoreChanged()
      */
     public void scoreChanged()
     {
@@ -342,7 +343,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         }
         catch ( Exception x )
         {
-            LOG.fatal( "scoreChanged()", x );
+            LOG.error( "scoreChanged()", x );
         }
     }
 
@@ -387,6 +388,6 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     {
         LogUtils.init();
         Strings.addResourceBundle( Catcher.class, ResourceBundle.getBundle( "com.ethz.geobot.herbar.game.catcher.Catcher" ) );
-        LOG = Logger.getLogger( Catcher.class );
+        LOG = LoggerFactory.getLogger( Catcher.class );
     }
 }

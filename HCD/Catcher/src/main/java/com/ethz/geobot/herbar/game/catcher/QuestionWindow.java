@@ -43,8 +43,8 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
-import org.apache.log4j.Category;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Window selects and shows the question of this game.
@@ -54,7 +54,7 @@ import org.apache.log4j.Logger;
  */
 public class QuestionWindow extends JDialog implements Question
 {
-    private static final Logger LOG = Logger.getLogger( Catcher.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Catcher.class );
 
     private ImageIcon plantPict;
 
@@ -112,14 +112,14 @@ public class QuestionWindow extends JDialog implements Question
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#firstQuestion()
+     * @see Question#firstQuestion()
      */
     public void firstQuestion()
     {
     }
 
     /**
-     * @see com.ethz.geobot.herbar.game.util.Question#lastQuestion()
+     * @see Question#lastQuestion()
      */
     public void lastQuestion()
     {

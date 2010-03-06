@@ -12,7 +12,8 @@ import com.ethz.geobot.herbar.modeapi.wizard.Wizard;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
 import java.awt.event.ActionEvent;
 import java.util.prefs.Preferences;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Action class to select a different mode.
@@ -22,7 +23,7 @@ import org.apache.log4j.Logger;
  */
 public class ActionModusSelection extends AbstractParametrizedAction
 {
-    private final static Logger LOG = Logger.getLogger( ActionModusSelection.class.getName() );
+    private final static Logger LOG = LoggerFactory.getLogger( ActionModusSelection.class.getName() );
 
     private final Preferences preferences;
 

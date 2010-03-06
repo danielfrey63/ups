@@ -5,7 +5,7 @@
  *
  * Created on 4. April 2002
  */
-package com.ethz.geobot.herbar.gui;
+package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;

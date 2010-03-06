@@ -24,10 +24,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to store and load FilterModel from the persistent storage.
@@ -39,7 +40,7 @@ public class FilterFactory
 {
     private static final String FILTER_LOCATION = System.getProperty( "user.home" ) + "/" + System.getProperty( "herbar.filter.location" );
 
-    private static final Logger LOG = Logger.getLogger( FilterFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FilterFactory.class );
 
     private static FilterFactory instance = null;
 

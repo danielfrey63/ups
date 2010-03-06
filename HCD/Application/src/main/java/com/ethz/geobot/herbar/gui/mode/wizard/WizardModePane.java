@@ -10,6 +10,7 @@ import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -42,7 +43,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * wizard pane for selecting the mode.
@@ -52,7 +54,7 @@ import org.apache.log4j.Logger;
  */
 public class WizardModePane extends WizardPane
 {
-    private static final Logger LOG = Logger.getLogger( WizardModePane.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WizardModePane.class );
 
     /**
      * Name of the pane.
@@ -291,7 +293,7 @@ public class WizardModePane extends WizardPane
             setOpaque( true );
         }
 
-        public java.awt.Component getListCellRendererComponent( final JList jList, final Object value, final int index,
+        public Component getListCellRendererComponent( final JList jList, final Object value, final int index,
                                                                 final boolean isSelected, final boolean cellHasFocus )
         {
             try

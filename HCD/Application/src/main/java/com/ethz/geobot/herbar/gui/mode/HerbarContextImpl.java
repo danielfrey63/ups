@@ -27,7 +27,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * HerbarContext implementation for MainFrame Herbar Application.
@@ -37,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class HerbarContextImpl implements HerbarContext
 {
-    private static final Logger LOG = Logger.getLogger( HerbarContextImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HerbarContextImpl.class );
 
     private static final Properties props = new Properties();
 
@@ -130,7 +131,7 @@ public class HerbarContextImpl implements HerbarContext
         catch ( FilterPersistentException ex )
         {
             final String msg = "failed to save filter : " + model.getName();
-            LOG.fatal( msg, ex );
+            LOG.error( msg, ex );
             Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", Strings.getString( "FILTER_SAVE_FAILED" ) );
             throw new IllegalStateException( msg );
         }
@@ -146,7 +147,7 @@ public class HerbarContextImpl implements HerbarContext
         {
             final String msg = "failed to remove filter : " + model.getName();
             Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", Strings.getString( "FILTER_REMOVE_FAILED" ) );
-            LOG.fatal( msg, ex );
+            LOG.error( msg, ex );
             throw new IllegalStateException( msg );
         }
     }

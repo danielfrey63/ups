@@ -20,7 +20,7 @@ public class ModeStateModel extends StateCompositeModel
 {
     private Mode mode;
 
-    private final PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport( this );
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport( this );
 
     private Component viewComponent;
 

@@ -12,7 +12,7 @@ package com.ethz.geobot.herbar.filter;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class FilterPersistentException extends java.lang.Exception
+public class FilterPersistentException extends Exception
 {
     /**
      * Creates a new instance of <code>FilterPersistentException</code> without detail message.

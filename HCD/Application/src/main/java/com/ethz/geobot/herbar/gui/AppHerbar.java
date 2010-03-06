@@ -50,7 +50,8 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -58,7 +59,7 @@ import org.apache.log4j.Logger;
  */
 public class AppHerbar
 {
-    private static Logger LOG;
+    private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
 
     private static final String DIR_GE = "/ge/";
 
@@ -80,6 +81,7 @@ public class AppHerbar
     private static final Check[] CHECKS_TO_PERFORM = new Check[]{new InitialCheck(), new PrefsCheck(), new UserCheck()};
 
     //Construct the application
+
     public AppHerbar()
     {
         securityCheck();
@@ -196,7 +198,7 @@ public class AppHerbar
         }
         catch ( Throwable e )
         {
-            LOG.fatal( "fatal error occured in Application: " + e.getMessage(), e );
+            LOG.error( "fatal error occured in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
         }
         finally
@@ -256,7 +258,7 @@ public class AppHerbar
         try
         {
             LogUtils.init();
-            LOG = Logger.getLogger( AppHerbar.class );
+            LOG = LoggerFactory.getLogger( AppHerbar.class );
         }
         catch ( Exception e )
         {
@@ -408,7 +410,8 @@ public class AppHerbar
 
         protected void onCancel()
         {
-            LOG.error( new IllegalStateException( "protection check not passed" ) );
+            final String message = "protection check not passed";
+            LOG.error( message, new IllegalStateException( message ) );
             showPicturesNotFound();
         }
 

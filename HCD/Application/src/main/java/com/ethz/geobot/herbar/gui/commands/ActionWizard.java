@@ -8,7 +8,8 @@ import com.ethz.geobot.herbar.modeapi.Mode;
 import com.ethz.geobot.herbar.modeapi.wizard.Wizard;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import java.awt.event.ActionEvent;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays the wizard dialog for the actual mode.
@@ -21,7 +22,7 @@ public class ActionWizard extends AbstractParametrizedAction
     /**
      * logger instance
      */
-    private static final Logger LOG = Logger.getLogger( ActionWizard.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ActionWizard.class );
 
     /**
      * Constructor, need a parent frame to set about box on top.
@@ -49,7 +50,7 @@ public class ActionWizard extends AbstractParametrizedAction
             }
             catch ( Throwable ex )
             {
-                LOG.fatal( "exchange of wizard model for mode: " + mode.getProperty( Mode.NAME ) + " failed.", ex );
+                LOG.error( "exchange of wizard model for mode: " + mode.getProperty( Mode.NAME ) + " failed.", ex );
             }
         }
     }

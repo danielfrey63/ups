@@ -38,8 +38,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import org.apache.log4j.Category;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -57,7 +57,7 @@ public class MainFrame extends JFrame
 
     public static final String PREF_CD = "cd";
 
-    private static final Logger LOG = Logger.getLogger( MainFrame.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MainFrame.class );
 
     private final BorderLayout borderLayout1 = new BorderLayout();
 

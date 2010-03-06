@@ -8,6 +8,7 @@
 
 package com.ethz.geobot.herbar;
 
+import ch.jfactory.logging.LogInterface;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.filter.FilterFactory;
 import com.ethz.geobot.herbar.filter.FilterPersistentException;
@@ -16,7 +17,8 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Application class, defines all application level attributes. Implements the <b>Singleton</b> pattern.
@@ -62,7 +64,7 @@ public class Application
             catch ( Exception ex )
             {
                 final String message = "could not initiate model: " + implClass;
-                LOG.fatal( message, ex );
+                LOG.error( message, ex );
                 throw new ApplicationRuntimeException( message );
             }
         }
@@ -140,7 +142,7 @@ public class Application
     {
         public void handle( final Throwable t )
         {
-            LOG.fatal( "error dispatching event:", t );
+            LOG.error( "error dispatching event:", t );
         }
     }
 
@@ -149,7 +151,7 @@ public class Application
         System.setProperty( "sun.awt.exception.handler", ExceptionHandler.class.getName() );
         Strings.setResourceBundle( ResourceBundle.getBundle( "com.ethz.geobot.herbar.gui.Strings" ) );
         ROOT_NAME = Strings.getString( "FILTERNAME.ALLTAXA" );
-        LOG = Logger.getLogger( Application.class );
+        LOG = LoggerFactory.getLogger( Application.class );
         INSTANCE = new Application();
         ROOT_MODEL = INSTANCE.getModel();
         ROOT_MODEL.setName( ROOT_NAME );

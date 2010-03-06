@@ -5,7 +5,8 @@ import com.ethz.geobot.herbar.modeapi.wizard.DefaultWizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class stores the wizard information about the modes.
@@ -16,7 +17,7 @@ import org.apache.log4j.Logger;
 public class ModeWizard
 {
     /** category object for logging */
-    private static final Logger LOG = Logger.getLogger( ModeWizard.class.getName() );
+    private static final Logger LOG = LoggerFactory.getLogger( ModeWizard.class.getName() );
 
     private static ModeWizard instance = null;
 
@@ -67,7 +68,7 @@ public class ModeWizard
     {
         if ( instance == null )
         {
-            instance = new com.ethz.geobot.herbar.gui.mode.ModeWizard();
+            instance = new ModeWizard();
         }
         return instance;
     }

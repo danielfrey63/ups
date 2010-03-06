@@ -6,7 +6,7 @@
  * Created on 4. April 2002
  */
 
-package com.ethz.geobot.herbar.gui;
+package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
@@ -37,9 +37,6 @@ public class ScrollingAboutBox extends JWindow
     public String[] LEUTE = {
             "Baltisberger Matthias",
             "Frey Daniel",
-            "Hoffmann Dirk",
-            "Meier Lilo",
-            "Wegmüller Thomas",
     };
 
     private final int delay = 20;

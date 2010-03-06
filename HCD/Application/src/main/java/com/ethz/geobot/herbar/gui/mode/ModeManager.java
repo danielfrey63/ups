@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
-import org.apache.log4j.Category;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Manage Mainframe modes.
@@ -40,7 +40,7 @@ public class ModeManager implements ModeRegistrationSupport
     /**
      * Category object for logging.
      */
-    private static final Logger LOG = Logger.getLogger( ModeManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ModeManager.class );
 
     private static ModeManager instance = null;
 
@@ -212,11 +212,11 @@ public class ModeManager implements ModeRegistrationSupport
     private void registerJarFile( final File file )
     {
         String clazzName = "";
-
+        final String resource = "META-INF/ModeInfo.xml";
         try
         {
             final JarFile jarFile = new JarFile( file );
-            final ZipEntry entry = jarFile.getEntry( "META-INF/ModeInfo.xml" );
+            final ZipEntry entry = jarFile.getEntry( resource );
             if ( entry != null )
             {
                 final InputStream inputStream = jarFile.getInputStream( entry );
@@ -225,7 +225,7 @@ public class ModeManager implements ModeRegistrationSupport
         }
         catch ( IOException e )
         {
-            final String msg = "Error during decoding of XML VersionInfo in " + file;
+            final String msg = "Error during decoding of XML mode information (" + resource + ") in " + file;
             LOG.error( msg, e );
             throw new IllegalArgumentException( msg );
         }

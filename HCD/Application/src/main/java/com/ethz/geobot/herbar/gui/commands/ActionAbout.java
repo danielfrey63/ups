@@ -2,7 +2,7 @@ package com.ethz.geobot.herbar.gui.commands;
 
 import ch.jfactory.action.AbstractParametrizedAction;
 import ch.jfactory.application.presentation.WindowUtils;
-import com.ethz.geobot.herbar.gui.AboutBox;
+import com.ethz.geobot.herbar.gui.about.AboutBox;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 

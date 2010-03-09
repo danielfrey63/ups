@@ -10,44 +10,31 @@ import ch.jfactory.resource.Version;
  */
 public class VersionInfo
 {
-    /**
-     * Holds value of property name.
-     */
+    /** Holds value of property name. */
     private String name;
 
-    /**
-     * Holds value of property author.
-     */
+    /** Holds value of property author. */
     private String author;
 
-    /**
-     * Holds value of property description.
-     */
+    /** Holds value of property description. */
     private String description;
 
-    /**
-     * Holds value of property majorVersion.
-     */
+    /** Holds value of property majorVersion. */
     private int majorVersion;
 
-    /**
-     * Holds value of property minorVersion.
-     */
+    /** Holds value of property minorVersion. */
     private int minorVersion;
 
-    /**
-     * Holds the build number.
-     */
+    /** Holds the build number. */
     private int buildVersion;
 
-    /**
-     * Root path for relative file name.
-     */
+    /** Holds the revision number. */
+    private int revision;
+
+    /** Root path for relative file name. */
     private transient String relativeName;
 
-    /**
-     * Holds value of property location.
-     */
+    /** Holds value of property location. */
     private transient String location;
 
     public VersionInfo()
@@ -213,6 +200,8 @@ public class VersionInfo
         buffer.append( minorVersion );
         buffer.append( '.' );
         buffer.append( buildVersion );
+        buffer.append( '.' );
+        buffer.append( revision );
         return buffer.toString();
     }
 
@@ -247,7 +236,18 @@ public class VersionInfo
         buf.append( ", Description: " ).append( description );
         buf.append( ", MajorVersion: " ).append( majorVersion );
         buf.append( ", MinorVersion: " ).append( minorVersion );
-        buf.append( ", BuildVersion: " ).append( buildVersion );
+        buf.append( ", MinorVersion: " ).append( minorVersion );
+        buf.append( ", Revision: " ).append( revision );
         return buf.toString();
+    }
+
+    public int getRevision()
+    {
+        return revision;
+    }
+
+    public void setRevision( final int revision )
+    {
+        this.revision = revision;
     }
 }

@@ -16,5 +16,6 @@
     <description>All Maven plugins</description>
     <modules>
         <module>maven-releasetree-plugin</module>
+        <module>maven-jar-plugin</module>
     </modules>
 </project>

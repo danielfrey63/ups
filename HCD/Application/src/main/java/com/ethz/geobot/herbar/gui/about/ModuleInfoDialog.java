@@ -26,7 +26,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class ModuleInfoDialog extends I15nComponentDialog
 {
-    private static final int[] columnWidths = new int[]{50, 100, 20};
+    private static final int[] columnWidths = new int[]{150, 20};
 
     public ModuleInfoDialog( final Frame owner, final String prefix ) throws HeadlessException
     {
@@ -43,15 +43,15 @@ public class ModuleInfoDialog extends I15nComponentDialog
         // display version info of modules in table list
         final List<?> versions = LocalVersionLocator.locateVersions();
         final BeanTableModel btm = new BeanTableModel( versions,
-                new String[]{"name", "description", "version"},
-                new String[]{"Name", "Beschreibung", "Version"},
+                new String[]{"name", "version"},
+                new String[]{"Name", "Version"},
                 true );
         final SortedTable moduleTable = new SortedTable( btm );
         moduleTable.setFocusable( false );
 
         final TableColumnModel model = moduleTable.getColumnModel();
 
-        for ( int i = 0; i < 3; i++ )
+        for ( int i = 0; i < columnWidths.length; i++ )
         {
             model.getColumn( i ).setPreferredWidth( columnWidths[i] );
         }

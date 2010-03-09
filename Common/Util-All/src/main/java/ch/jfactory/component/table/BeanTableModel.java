@@ -33,64 +33,61 @@ public class BeanTableModel extends DefaultTableModel
     public BeanTableModel( final List list, final String[] columnProperties, final String[] columnNames, final boolean readOnly )
     {
         this.readOnly = readOnly;
-
-        if ( list.size() == 0 )
-        {
-            throw new IllegalArgumentException( "Empty bean list not allowed" );
-        }
-
-        if ( columnNames.length != columnProperties.length )
-        {
-            throw new IllegalArgumentException( "Properties and names array must be of same length." );
-        }
-        this.list = list;
-
-        // hole descriptor für bean
-        final BeanInfo beanInfo;
-        try
-        {
-            beanInfo = Introspector.getBeanInfo( list.get( 0 ).getClass() );
-        }
-        catch ( IntrospectionException ex )
-        {
-            throw new IllegalArgumentException( "List contains faulty beans" );
-        }
-
-        // map alle columns
-        columnDescriptors = new PropertyDescriptor[columnProperties.length];
-        final PropertyDescriptor[] descs = beanInfo.getPropertyDescriptors();
-        for ( int i = 0; i < columnProperties.length; i++ )
-        {
-            final String name = columnProperties[i];
-            for ( final PropertyDescriptor desc : descs )
-            {
-                if ( desc.getName().equals( name ) )
-                {
-                    columnDescriptors[i] = desc;
-                    break;
-                }
-            }
-        }
-
         final Object[][] infos = new Object[list.size()][columnProperties.length];
-        int row = 0;
-        for ( Iterator iterator = list.iterator(); iterator.hasNext(); row++ )
+        if ( list.size() > 0 )
         {
-            final Object o = iterator.next();
-            for ( int col = 0; col < columnDescriptors.length; col++ )
+
+            if ( columnNames.length != columnProperties.length )
             {
-                final PropertyDescriptor desc = columnDescriptors[col];
-                try
+                throw new IllegalArgumentException( "Properties and names array must be of same length." );
+            }
+            this.list = list;
+
+            // hole descriptor für bean
+            final BeanInfo beanInfo;
+            try
+            {
+                beanInfo = Introspector.getBeanInfo( list.get( 0 ).getClass() );
+            }
+            catch ( IntrospectionException ex )
+            {
+                throw new IllegalArgumentException( "List contains faulty beans" );
+            }
+
+            // map alle columns
+            columnDescriptors = new PropertyDescriptor[columnProperties.length];
+            final PropertyDescriptor[] descs = beanInfo.getPropertyDescriptors();
+            for ( int i = 0; i < columnProperties.length; i++ )
+            {
+                final String name = columnProperties[i];
+                for ( final PropertyDescriptor desc : descs )
                 {
-                    infos[row][col] = desc.getReadMethod().invoke( o );
+                    if ( desc.getName().equals( name ) )
+                    {
+                        columnDescriptors[i] = desc;
+                        break;
+                    }
                 }
-                catch ( Exception ex )
+            }
+
+            int row = 0;
+            for ( Iterator iterator = list.iterator(); iterator.hasNext(); row++ )
+            {
+                final Object o = iterator.next();
+                for ( int col = 0; col < columnDescriptors.length; col++ )
                 {
-                    ex.printStackTrace();
+                    final PropertyDescriptor desc = columnDescriptors[col];
+                    try
+                    {
+                        infos[row][col] = desc.getReadMethod().invoke( o );
+                    }
+                    catch ( Exception ex )
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
         }
-
         super.setDataVector( infos, columnNames );
     }
 

@@ -28,9 +28,6 @@ public class VersionInfo
     /** Holds the build number. */
     private int buildVersion;
 
-    /** Holds the revision number. */
-    private int revision;
-
     /** Root path for relative file name. */
     private transient String relativeName;
 
@@ -200,8 +197,6 @@ public class VersionInfo
         buffer.append( minorVersion );
         buffer.append( '.' );
         buffer.append( buildVersion );
-        buffer.append( '.' );
-        buffer.append( revision );
         return buffer.toString();
     }
 
@@ -210,22 +205,6 @@ public class VersionInfo
         final Version thisVersion = new Version( majorVersion, minorVersion, buildVersion );
         final Version otherVersion = new Version( info.majorVersion, info.minorVersion, info.buildVersion );
         return thisVersion.compareTo( otherVersion ) > 0;
-//        if (info == null) {
-//            return true;
-//        }
-//        else {
-//            if (majorVersion > info.majorVersion) {
-//                return true;
-//            }
-//            if (majorVersion == info.majorVersion && minorVersion > info.minorVersion) {
-//                return true;
-//            }
-//            if (majorVersion == info.majorVersion && minorVersion == info.minorVersion
-//                    && buildVersion > info.buildVersion) {
-//                return true;
-//            }
-//        }
-//        return false;
     }
 
     public String toString()
@@ -237,17 +216,6 @@ public class VersionInfo
         buf.append( ", MajorVersion: " ).append( majorVersion );
         buf.append( ", MinorVersion: " ).append( minorVersion );
         buf.append( ", MinorVersion: " ).append( minorVersion );
-        buf.append( ", Revision: " ).append( revision );
         return buf.toString();
-    }
-
-    public int getRevision()
-    {
-        return revision;
-    }
-
-    public void setRevision( final int revision )
-    {
-        this.revision = revision;
     }
 }

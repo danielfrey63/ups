@@ -25,8 +25,6 @@ public class LocalVersionLocator
 
     private static final String META_INF = "META-INF";
 
-    private static final String VERSION_INFO = META_INF + "/VersionInfo.xml";
-
     private static final String MANIFEST = META_INF + "/MANIFEST.MF";
 
     private LocalVersionLocator()
@@ -68,9 +66,8 @@ public class LocalVersionLocator
                     info.setName( attributes.getValue( "Implementation-Title" ) );
                     info.setMajorVersion( getPart( version, 0 ) );
                     info.setMinorVersion( getPart( version, 1 ) );
-                    info.setBuildVersion( getPart( version, 2 ) );
+                    info.setBuildVersion( getPart( version, -1 ) );
                     info.setAuthor( attributes.getValue( "Implementation-Vendor" ) );
-                    info.setRevision( getPart( version, -1 ) );
                     map.put( getDirectory( url ), info );
                 }
                 inputStream.close();

@@ -50,7 +50,7 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:http://geobot1.ethz.ch/svn/repos/tags/${project.artefactId}-${project.version}
+        <developerConnection>scm:svn:http://svn.id.ethz.ch/svn/repos/tags/${project.artefactId}-${project.version}
         </developerConnection>
         <url>http://www.xmatrix.ch/tags/${project.artefactId}-${project.version}</url>
     </scm>
@@ -554,7 +554,7 @@
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <tagBase>http://geobot1.ethz.ch/svn/repos/tags</tagBase>
+                    <tagBase>http://svn.id.ethz.ch/svn/repos/tags</tagBase>
                     <preparationGoals>clean install</preparationGoals>
                 </configuration>
             </plugin>
@@ -626,6 +626,16 @@
         </plugins>
     </build>
     <repositories>
+        <repository>
+            <id>geobot1</id>
+            <url>http://geobot1.ethz.ch/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>maclocal</id>
             <url>http://192.168.10.25:8080/archiva/repository/internal/</url>

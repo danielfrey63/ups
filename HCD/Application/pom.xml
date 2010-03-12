@@ -24,7 +24,6 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>2.3.493</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>

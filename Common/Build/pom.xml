@@ -50,9 +50,8 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:http://svn.id.ethz.ch/ups/tags/${project.artefactId}-${project.version}
-        </developerConnection>
-        <url>http://www.xmatrix.ch/tags/${project.artefactId}-${project.version}</url>
+        <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/${project.artefactId}-${project.version}</developerConnection>
+        <url>https://svn.id.ethz.ch/viewvc/ups/tags/${project.artefactId}-${project.version}</url>
     </scm>
 
     <properties>
@@ -554,7 +553,7 @@
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <tagBase>http://svn.id.ethz.ch/ups/tags</tagBase>
+                    <tagBase>https://svn.id.ethz.ch/ups/tags</tagBase>
                     <preparationGoals>clean install</preparationGoals>
                 </configuration>
             </plugin>

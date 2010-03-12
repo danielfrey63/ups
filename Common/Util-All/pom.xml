@@ -16,8 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.3.292</version>
-            <version>1.3.292</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>

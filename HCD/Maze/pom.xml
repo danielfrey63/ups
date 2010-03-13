@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.maze</artifactId>
     <name>Learning Environment Game Maze</name>
-    <version>3.6.540</version>
+    <version>3.6-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -36,9 +36,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.maze-3.6.540</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.maze-3.6.540</url>
-  </scm>
 </project>

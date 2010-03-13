@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.exam</artifactId>
     <name>Learning Environment Exam</name>
-    <version>3.6.522</version>
+    <version>3.6-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -41,9 +41,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.exam-3.6.522</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.exam-3.6.522</url>
-  </scm>
 </project>

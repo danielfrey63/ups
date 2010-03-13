@@ -10,6 +10,8 @@ import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,8 +119,16 @@ public class LogUtils
             props.load( is );
             for ( final Object key : props.keySet() )
             {
-                final Object value = props.get( key );
-                System.setProperty( (String) key, (String) value );
+                final String value = props.getProperty( (String) key );
+                String parsed = value;
+                final Matcher matcher = Pattern.compile( "\\$\\{.*\\}" ).matcher( value );
+                while ( matcher.find() )
+                {
+                    final String property = parsed.substring( matcher.start() + 2, matcher.end() - 1 );
+                    final String valueToReplace = System.getProperty( property ).replaceAll( "\\\\", "/" );
+                    parsed = parsed.replaceFirst( "\\$\\{.*\\}", valueToReplace );
+                }
+                System.setProperty( (String) key, parsed );
             }
         }
         catch ( Exception ex )

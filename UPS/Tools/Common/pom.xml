@@ -14,12 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>2.3.571</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>2.0.415</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
@@ -28,7 +26,6 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>2.0.584</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>

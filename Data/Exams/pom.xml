@@ -10,6 +10,6 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>ch.xmatrix.ups.data.exams</artifactId>
     <name>Data Exams</name>
-    <version>SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Prüfungen</description>
 </project>

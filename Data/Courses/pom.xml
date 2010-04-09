@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>ch.xmatrix.ups.data</groupId>
         <artifactId>ch.xmatrix.ups.data</artifactId>
@@ -10,6 +9,11 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>ch.xmatrix.ups.data.courses</artifactId>
     <name>Data Courses</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.609</version>
     <description>Vorlesungsdaten</description>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.data.courses-1.0.609</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.data.courses-1.0.609</url>
+  </scm>
 </project>

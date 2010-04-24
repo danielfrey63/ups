@@ -100,7 +100,7 @@ public class MainBuilder extends AbstractMainBuilder
         taxonCheckBuilder = new TaxonCheckBuilder();
     }
 
-    protected void createNonWelcomPanels()
+    protected void createNonWelcomePanels()
     {
         final ViewMap map = new ViewMap();
         map.addView( 1, new View( Strings.getString( "info.exam.title" ), null, examInfoBuilder.getPanel() ) );

@@ -106,7 +106,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
             public void run()
             {
                 getInfoModel().setNote( new CodedNote( Strings.getString( "startup.content" ) ) );
-                createNonWelcomPanels();
+                createNonWelcomePanels();
             }
         } );
         model.queue( new Runnable()
@@ -140,7 +140,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
     /**
      * Here you add the rest of the panels to the cards. Use {@link #getCards()} to access the cards panel.
      */
-    protected abstract void createNonWelcomPanels();
+    protected abstract void createNonWelcomePanels();
 
     protected abstract JMenuBar getMenuBar();
 

@@ -118,7 +118,7 @@ public class MainBuilder extends AbstractMainBuilder
         initCommand( new QuitCommand( getCommandManager(), model ), true );
     }
 
-    protected void createNonWelcomPanels()
+    protected void createNonWelcomePanels()
     {
         try
         {

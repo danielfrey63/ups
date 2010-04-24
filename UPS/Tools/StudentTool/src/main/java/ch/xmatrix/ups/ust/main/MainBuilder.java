@@ -112,7 +112,7 @@ public class MainBuilder extends AbstractMainBuilder
         rootWindow.setWindow( new SplitWindow( true, 0.8f, map.getView( 0 ), new SplitWindow( false, 0.2f,
                 new TabWindow( new View[]{map.getView( 1 ), map.getView( 2 )} ),
                 new TabWindow( new View[]{map.getView( 3 ), map.getView( 4 )} ) ) ) );
-        getCards().add( MainModel.CARDS_EDIT.toString(), rootWindow );
+        getCards().add( MainModel.CARDS_EDIT, rootWindow );
 
         taxonCheckBuilder.addComponentsToRepaint( balanceBuilder.getComponentsToRepaint() );
         taxonCheckBuilder.addComponentToRepaint( constraintsSelectionBuilder.getRepaintComponent() );

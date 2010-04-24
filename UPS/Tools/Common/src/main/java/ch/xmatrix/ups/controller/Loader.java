@@ -101,7 +101,7 @@ public class Loader
             }
             final Reader reader = new InputStreamReader( in );
             list = (T) converter.from( reader );
-            logSimpleModelListDetails( modelResource, list );
+            logSimpleModelListDetails( feedback, list );
         }
         catch ( Exception e )
         {
@@ -120,7 +120,7 @@ public class Loader
             for ( final Object o : sml )
             {
                 final IdAware ia = (IdAware) o;
-                LOG.info( "model " + modelResource + ": " + ia.getUid() );
+                LOG.info( modelResource + ": " + ia.getUid() );
                 if ( ia instanceof SessionModel )
                 {
                     LOG.info( "    constraints: " + ( (SessionModel) ia ).getConstraintsUid() );

@@ -87,7 +87,8 @@ public class MainBuilder extends AbstractMainBuilder
     public MainBuilder( final MainModel model, final InfoModel infoModel )
     {
         super( model, infoModel,
-                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM,
+                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM, I15nWelcomePanel.SEPARATOR,
+                        Commands.COMMANDID_EXPORT, I15nWelcomePanel.SEPARATOR,
                         Commands.COMMANDID_QUIT, I15nWelcomePanel.SEPARATOR},
                 new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM} );
         TaxonModels.setInfoModel( infoModel );

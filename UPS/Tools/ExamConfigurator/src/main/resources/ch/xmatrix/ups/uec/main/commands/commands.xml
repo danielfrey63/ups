@@ -17,7 +17,6 @@
             <member command-id="opencommon"/>
             <member command-id="openust"/>
             <member command-id="openexam"/>
-            <member command-id="export"/>
             <member command-id="close"/>
             <separator/>
             <member command-id="quit"/>

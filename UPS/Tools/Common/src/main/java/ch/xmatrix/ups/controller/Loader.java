@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * Loads models from the file system (user home) or classpath, saves to the file system (user home).
  *
  * @author Daniel Frey
- * @version $Revision: 1.4 $ $Date: 2008/01/06 10:16:20 $
+ * @version $Id$
  */
 public class Loader
 {
@@ -60,12 +60,6 @@ public class Loader
      * @param converter the converter to transform the content to an object
      * @return a SimpleModelList object containing the model
      */
-    public static <T> T loadModel( final String resource, final String path, final XStream converter )
-    {
-        final File file = getSettingsFile( resource, path );
-        return Loader.<T>loadModel( file, resource, converter );
-    }
-
     public static <T> T loadModel( final String resource, final String path, final Converter converter )
     {
         final File file = getSettingsFile( resource, path );
@@ -90,37 +84,6 @@ public class Loader
     {
         final File file = getSettingsFile( resource, path );
         saveModel( converter, model, file );
-    }
-
-    @SuppressWarnings( "unchecked" )
-    private static <T> T loadModel( final File file, final String modelResource, final XStream converter )
-    {
-        final T list;
-        String feedback = null;
-        try
-        {
-            final InputStream in;
-            if ( file.exists() )
-            {
-                feedback = "file " + file.getAbsolutePath();
-                in = new FileInputStream( file );
-            }
-            else
-            {
-                feedback = "resource " + modelResource;
-                in = Loader.class.getResourceAsStream( modelResource );
-            }
-            final Reader reader = new InputStreamReader( in );
-            list = (T) converter.fromXML( reader );
-            logSimpleModelListDetails( modelResource, list );
-        }
-        catch ( Exception e )
-        {
-            final String message = "problems loading model from " + feedback;
-            LOG.error( message, e );
-            throw new IllegalStateException( message, e );
-        }
-        return list;
     }
 
     @SuppressWarnings( "unchecked" )

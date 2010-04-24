@@ -75,11 +75,6 @@ public class Loader
      * @param converter the resource converter
      * @param model     the model to save
      */
-    public static <T> void saveModel( final String resource, final String path, final XStream converter, final T model )
-    {
-        final File file = getSettingsFile( resource, path );
-        saveModel( converter, model, file );
-    }
     public static <T> void saveModel( final String resource, final String path, final Converter converter, final T model )
     {
         final File file = getSettingsFile( resource, path );
@@ -132,30 +127,6 @@ public class Loader
                 }
             }
         }
-    }
-
-    private static <T> void saveModel( final XStream converter, final T model, final File file )
-    {
-        final String content = converter.toXML( model );
-        if ( !Boolean.parseBoolean( System.getProperty( ENVIRONMENT_SIMULATE_SAVE, "false" ) ) )
-        {
-            try
-            {
-                file.getParentFile().mkdirs();
-                final FileWriter writer = new FileWriter( file );
-                writer.write( content );
-                writer.close();
-            }
-            catch ( IOException e )
-            {
-                LOG.error( "save to file " + file + " failed", e );
-            }
-        }
-        else
-        {
-            LOG.warn( "save is in simulation mode" );
-        }
-        LOG.info( "saved to " + file );
     }
 
     private static <T> void saveModel( final Converter converter, final T model, final File file )

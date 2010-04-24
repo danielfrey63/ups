@@ -42,6 +42,10 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>ch.xmatrix.ups.data.exams</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.data</groupId>
             <artifactId>ch.xmatrix.ups.data.courses</artifactId>
         </dependency>
         <dependency>

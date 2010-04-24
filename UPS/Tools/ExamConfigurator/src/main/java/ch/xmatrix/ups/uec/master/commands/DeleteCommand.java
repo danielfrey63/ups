@@ -37,7 +37,7 @@ public class DeleteCommand extends ActionCommand
     public DeleteCommand( final CommandManager manager, final SelectionInList models,
                           final MasterDetailsFactory factory )
     {
-        super( manager, Commands.COMMANDID_DELETE );
+        super( manager, Commands.COMMAND_ID_DELETE );
         this.models = models;
         this.factory = factory;
     }

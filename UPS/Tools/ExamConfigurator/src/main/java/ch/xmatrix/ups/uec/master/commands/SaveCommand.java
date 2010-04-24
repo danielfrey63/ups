@@ -32,7 +32,7 @@ public class SaveCommand extends ActionCommand
 
     public SaveCommand( final CommandManager manager, final DetailsBuilder detailsBuilder )
     {
-        super( manager, Commands.COMMANDID_SAVE );
+        super( manager, Commands.COMMAND_ID_SAVE );
         this.detailsBuilder = detailsBuilder;
     }
 

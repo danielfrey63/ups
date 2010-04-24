@@ -36,7 +36,7 @@ public class AddCommand extends ActionCommand
     public AddCommand( final CommandManager manager, final SelectionInList models,
                        final MasterDetailsFactory factory )
     {
-        super( manager, Commands.COMMANDID_ADD );
+        super( manager, Commands.COMMAND_ID_ADD );
         this.models = models;
         this.factory = factory;
     }

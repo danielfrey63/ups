@@ -37,7 +37,7 @@ public class CopyCommand extends ActionCommand
     public CopyCommand( final CommandManager manager, final SelectionInList models,
                         final MasterDetailsFactory factory )
     {
-        super( manager, Commands.COMMANDID_COPY );
+        super( manager, Commands.COMMAND_ID_COPY );
         this.models = models;
         this.factory = factory;
     }

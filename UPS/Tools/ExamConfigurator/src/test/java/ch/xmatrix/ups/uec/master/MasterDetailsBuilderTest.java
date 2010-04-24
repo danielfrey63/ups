@@ -89,7 +89,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test012AddButton()
     {
         final Calendar date1 = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_ADD ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_ADD ) ).click();
         final Calendar date2 = Calendar.getInstance();
         UISpecAssert.assertTrue( PANEL.getComboBox( MasterDetailsBuilder.COMPONENT_COMBO_MODELS ).selectionEquals( MODELNAME_NEW ) );
         UISpecAssert.assertFalse( PANEL.getComboBox( MasterDetailsBuilder.COMPONENT_COMBO_MODELS ).selectionEquals( MODELNAME_NEW + "_" ) );
@@ -103,7 +103,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test013SaveButton()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_SAVE ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_SAVE ) ).click();
         checkButtons( true, true, true, false, false, false );
         checkComponents( true, true, false, true, false, false, false, true );
         checkModificationBefore( date );
@@ -123,7 +123,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test015SaveButton()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_SAVE ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_SAVE ) ).click();
         checkButtons( true, true, true, true, false, false );
         checkComponents( true, true, false, true, false, false, false, false );
         checkModificationBefore( date );
@@ -146,7 +146,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test017SaveButton()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_SAVE ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_SAVE ) ).click();
         checkButtons( true, true, true, true, false, false );
         checkComponents( true, true, false, true, false, false, false, false );
         checkModificationBefore( date );
@@ -155,7 +155,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test018FixButton()
     {
         final Calendar date1 = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_FIX ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_FIX ) ).click();
         final Calendar date2 = Calendar.getInstance();
         checkButtons( true, true, true, false, true, true );
         checkComponents( true, false, false, false, false, false, false, false );
@@ -165,7 +165,7 @@ public class MasterDetailsBuilderTest extends TestCase
     public void test019SaveButton()
     {
         final Calendar date = Calendar.getInstance();
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_SAVE ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_SAVE ) ).click();
         checkButtons( true, true, true, false, false, false );
         checkComponents( true, false, false, false, false, false, false, false );
         checkModificationBefore( date );
@@ -173,7 +173,7 @@ public class MasterDetailsBuilderTest extends TestCase
 
     public void test020DeleteButton()
     {
-        final Button button = PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_DELETE ) );
+        final Button button = PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_DELETE ) );
         while ( button.isEnabled().isTrue() )
         {
             button.click();
@@ -184,7 +184,7 @@ public class MasterDetailsBuilderTest extends TestCase
 
     public void test021SaveButton()
     {
-        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMANDID_SAVE ) ).click();
+        PANEL.getButton( new ActionCommandComponentMatcher( Commands.COMMAND_ID_SAVE ) ).click();
         checkButtons( true, false, false, false, false, false );
         checkComponents( true, false, false, false, true, true, true, true );
     }
@@ -245,8 +245,8 @@ public class MasterDetailsBuilderTest extends TestCase
     protected static void checkButtons( final boolean addEnabled, final boolean copyEnabled, final boolean deleteEnabled,
                                         final boolean fixEnabled, final boolean loadEnabled, final boolean saveEnabled )
     {
-        final String[] buttons = {Commands.COMMANDID_ADD, Commands.COMMANDID_COPY, Commands.COMMANDID_DELETE,
-                Commands.COMMANDID_FIX, Commands.COMMANDID_LOAD, Commands.COMMANDID_SAVE};
+        final String[] buttons = {Commands.COMMAND_ID_ADD, Commands.COMMAND_ID_COPY, Commands.COMMAND_ID_DELETE,
+                Commands.COMMAND_ID_FIX, Commands.COMMAND_ID_LOAD, Commands.COMMAND_ID_SAVE};
         final boolean[] enableds = new boolean[]{addEnabled, copyEnabled, deleteEnabled, fixEnabled, loadEnabled, saveEnabled};
         for ( int i = 0; i < buttons.length; i++ )
         {

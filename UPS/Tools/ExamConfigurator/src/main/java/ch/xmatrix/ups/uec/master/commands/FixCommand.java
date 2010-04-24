@@ -32,7 +32,7 @@ public class FixCommand extends ActionCommand
 
     public FixCommand( final CommandManager manager, final DetailsBuilder detailsBulider )
     {
-        super( manager, Commands.COMMANDID_FIX );
+        super( manager, Commands.COMMAND_ID_FIX );
         this.detailsBuilder = detailsBulider;
     }
 

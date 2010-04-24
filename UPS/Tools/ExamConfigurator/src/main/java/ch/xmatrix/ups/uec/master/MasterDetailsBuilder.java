@@ -185,7 +185,7 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
             creator.createAll();
             main = new JPanel( new BorderLayout() );
             master = creator.getPanel( COMPONENT_PANEL_COMBO );
-            final JToolBar toolbar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar( Commands.TOOLBARID );
+            final JToolBar toolbar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar( Commands.TOOLBAR_ID );
             master.add( toolbar, new CellConstraints().xy( 6, 1 ) );
             choice = creator.getComboBox( COMPONENT_COMBO_MODELS );
             choice.setModel( new ComboBoxAdapter( models ) );

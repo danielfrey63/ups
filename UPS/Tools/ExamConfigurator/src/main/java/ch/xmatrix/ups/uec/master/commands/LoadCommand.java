@@ -32,7 +32,7 @@ public class LoadCommand extends ActionCommand
 
     public LoadCommand( final CommandManager manager, final DetailsBuilder detailsBulider )
     {
-        super( manager, Commands.COMMANDID_LOAD );
+        super( manager, Commands.COMMAND_ID_LOAD );
         this.detailsBuilder = detailsBulider;
     }
 

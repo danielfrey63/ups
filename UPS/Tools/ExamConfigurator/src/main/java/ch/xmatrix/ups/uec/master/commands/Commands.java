@@ -17,26 +17,26 @@
 package ch.xmatrix.ups.uec.master.commands;
 
 /**
- * TODO: document
+ * Collection of constants for commands.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/17 23:29:42 $
  */
 public class Commands
 {
-    public static final String COMMANDID_COPY = "master.copy";
+    public static final String COMMAND_ID_COPY = "master.copy";
 
-    public static final String COMMANDID_DELETE = "master.delete";
+    public static final String COMMAND_ID_DELETE = "master.delete";
 
-    public static final String COMMANDID_ADD = "master.add";
+    public static final String COMMAND_ID_ADD = "master.add";
 
-    public static final String COMMANDID_LOAD = "master.load";
+    public static final String COMMAND_ID_LOAD = "master.load";
 
-    public static final String COMMANDID_SAVE = "master.save";
+    public static final String COMMAND_ID_SAVE = "master.save";
 
-    public static final String COMMANDID_FIX = "master.fix";
+    public static final String COMMAND_ID_FIX = "master.fix";
 
-    public static final String GROUPID_TOOLBAR = "toolbar";
+    public static final String GROUP_ID_TOOLBAR = "toolbar";
 
-    public static final String TOOLBARID = "toolbar";
+    public static final String TOOLBAR_ID = "toolbar";
 }

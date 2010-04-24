@@ -24,15 +24,15 @@ package ch.xmatrix.ups.uec.constraints.commands;
  */
 public class Commands
 {
-    public static final String COMMANDID_DELETECONSTRAINT = "delete";
+    public static final String COMMAND_ID_DELETE_CONSTRAINT = "delete";
 
-    public static final String COMMANDID_NEWCONSTRAINT = "new";
+    public static final String COMMAND_ID_NEW_CONSTRAINT = "new";
 
-    public static final String COMMANDID_ADDTAXA = "add";
+    public static final String COMMAND_ID_ADD_TAXA = "add";
 
-    public static final String COMMANDID_REMOVETAXA = "remove";
+    public static final String COMMAND_ID_REMOVE_TAXA = "remove";
 
-    public static final String COMMANDID_UPLOAD = "upload";
+    public static final String COMMAND_ID_UPLOAD = "upload";
 
-    public static final String GROUPID_TOOLBAR = "toolbar";
+    public static final String GROUP_ID_TOOLBAR = "toolbar";
 }

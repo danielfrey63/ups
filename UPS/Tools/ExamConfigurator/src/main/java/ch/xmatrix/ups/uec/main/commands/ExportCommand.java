@@ -45,7 +45,7 @@ public class ExportCommand extends ActionCommand
 
     public ExportCommand( final CommandManager commandManager )
     {
-        super( commandManager, Commands.COMMANDID_EXPORT );
+        super( commandManager, Commands.COMMAND_ID_EXPORT );
     }
 
     protected void handleExecute()

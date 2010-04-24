@@ -24,17 +24,15 @@ package ch.xmatrix.ups.uec.main.commands;
  */
 public class Commands
 {
-    public static final String COMMANDID_OPENUST = "openust";
+    public static final String COMMAND_ID_OPENUST = "openust";
 
-    public static final String COMMANDID_OPENEXAM = "openexam";
+    public static final String COMMAND_ID_OPENEXAM = "openexam";
 
-    public static final String COMMANDID_CARDEDIT = "cards.edit";
+    public static final String COMMAND_ID_CLOSE = "close";
 
-    public static final String COMMANDID_CLOSE = "close";
+    public static final String COMMAND_ID_QUIT = "quit";
 
-    public static final String COMMANDID_QUIT = "quit";
+    public static final String COMMAND_ID_EXPORT = "export";
 
-    public static final String COMMANDID_EXPORT = "export";
-
-    public static final String GROUPID_MENU = "menu";
+    public static final String GROUP_ID_MENU = "menu";
 }

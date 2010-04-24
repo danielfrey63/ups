@@ -33,29 +33,29 @@ import java.util.Map;
  */
 public class Commands
 {
-    public static final String COMMANDID_OPENFROMINTERNET = "fromInternet";
+    public static final String COMMAND_ID_OPEN_FROM_INTERNET = "fromInternet";
 
-    public static final String COMMANDID_REFRESH = "refresh";
+    public static final String COMMAND_ID_REFRESH = "refresh";
 
-    public static final String COMMANDID_LOADFILES = "fromFiles";
+    public static final String COMMAND_ID_LOAD_FILES = "fromFiles";
 
-    public static final String COMMANDID_LOADDIRECTORY = "fromDirectory";
+    public static final String COMMAND_ID_LOAD_DIRECTORY = "fromDirectory";
 
-    public static final String COMMANDID_ADDPERSION = "newPerson";
+    public static final String COMMAND_ID_ADD_PERSON = "newPerson";
 
-    public static final String COMMANDID_MOVEUP = "moveUp";
+    public static final String COMMAND_ID_MOVE_UP = "moveUp";
 
-    public static final String COMMANDID_MOVEDOWN = "moveDown";
+    public static final String COMMAND_ID_MOVE_DOWN = "moveDown";
 
-    public static final String COMMANDID_REMOVE = "remove";
+    public static final String COMMAND_ID_REMOVE = "remove";
 
-    public static final String COMMANDID_CALCULATE = "calculate";
+    public static final String COMMAND_ID_CALCULATE = "calculate";
 
-    public static final String COMMANDID_RELOADSERVERDATA = "reloadServerData";
+    public static final String COMMAND_ID_RELOAD_SERVER_DATA = "reloadServerData";
 
-    public static final String GROUPID_TOOLBAR = "toolbar";
+    public static final String GROUP_ID_TOOLBAR = "toolbar";
 
-    public static final String FACENAME_TOOLBAR = "toolbar";
+    public static final String FACE_NAME_TOOLBAR = "toolbar";
 
     public static Converter<ArrayList<String>> getConverter1()
     {

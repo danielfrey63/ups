@@ -33,7 +33,7 @@ public class CloseCommand extends ActionCommand
 
     public CloseCommand( final CommandManager commandManager, final MainModel model )
     {
-        super( commandManager, Commands.COMMANDID_CLOSE );
+        super( commandManager, Commands.COMMAND_ID_CLOSE );
         this.model = model;
     }
 

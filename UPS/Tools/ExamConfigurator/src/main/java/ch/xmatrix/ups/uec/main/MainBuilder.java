@@ -87,10 +87,10 @@ public class MainBuilder extends AbstractMainBuilder
     public MainBuilder( final MainModel model, final InfoModel infoModel )
     {
         super( model, infoModel,
-                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM, I15nWelcomePanel.SEPARATOR,
-                        Commands.COMMANDID_EXPORT, I15nWelcomePanel.SEPARATOR,
-                        Commands.COMMANDID_QUIT, I15nWelcomePanel.SEPARATOR},
-                new String[]{Commands.COMMANDID_OPENUST, Commands.COMMANDID_OPENEXAM} );
+                new String[]{Commands.COMMAND_ID_OPENUST, Commands.COMMAND_ID_OPENEXAM, I15nWelcomePanel.SEPARATOR,
+                        Commands.COMMAND_ID_EXPORT, I15nWelcomePanel.SEPARATOR,
+                        Commands.COMMAND_ID_QUIT, I15nWelcomePanel.SEPARATOR},
+                new String[]{Commands.COMMAND_ID_OPENUST, Commands.COMMAND_ID_OPENEXAM} );
         TaxonModels.setInfoModel( infoModel );
         TaxonModels.loadTaxonTrees();
         prefsBuilder.setInfoModel( infoModel );
@@ -112,8 +112,8 @@ public class MainBuilder extends AbstractMainBuilder
     protected void initCommands()
     {
         super.initCommands();
-        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMANDID_OPENUST, MainModel.CARDS_UST ), false );
-        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMANDID_OPENEXAM, MainModel.CARDS_EXAM ), false );
+        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMAND_ID_OPENUST, MainModel.CARDS_UST ), false );
+        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMAND_ID_OPENEXAM, MainModel.CARDS_EXAM ), false );
         initCommand( new CloseCommand( getCommandManager(), model ), true );
         initCommand( new ExportCommand( getCommandManager() ), true );
         initCommand( new QuitCommand( getCommandManager(), model ), true );
@@ -158,7 +158,7 @@ public class MainBuilder extends AbstractMainBuilder
 
     protected JMenuBar getMenuBar()
     {
-        return getCommandManager().getGroup( Commands.GROUPID_MENU ).createMenuBar();
+        return getCommandManager().getGroup( Commands.GROUP_ID_MENU ).createMenuBar();
     }
 
     private static JComponent wrapPanel( final JComponent panel )

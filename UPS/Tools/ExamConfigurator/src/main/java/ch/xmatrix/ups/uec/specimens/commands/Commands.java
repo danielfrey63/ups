@@ -24,9 +24,9 @@ package ch.xmatrix.ups.uec.specimens.commands;
  */
 public class Commands
 {
-    public static final String COMMANDID_NEWSPECIMEN = "newSpecimen";
+    public static final String COMMAND_ID_NEW_SPECIMEN = "newSpecimen";
 
-    public static final String COMMANDID_DELETESPECIMEN = "deleteSpecimen";
+    public static final String COMMAND_ID_DELETE_SPECIMEN = "deleteSpecimen";
 
-    public static final String GROUPID_TOOLBAR = "toolbar";
+    public static final String GROUP_ID_TOOLBAR = "toolbar";
 }

@@ -41,7 +41,7 @@ public class RemoveFromTable extends ActionCommand
     public RemoveFromTable( final CommandManager commandManager, final SetBuilder.SubmitTableModel tableModel,
                             final ListSelectionModel selectionModel, final SortableTableModel sortableModel )
     {
-        super( commandManager, Commands.COMMANDID_REMOVE );
+        super( commandManager, Commands.COMMAND_ID_REMOVE );
         this.tableModel = tableModel;
         this.selectionModel = selectionModel;
         this.sortableModel = sortableModel;

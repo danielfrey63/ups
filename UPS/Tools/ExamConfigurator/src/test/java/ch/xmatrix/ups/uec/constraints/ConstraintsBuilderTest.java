@@ -134,7 +134,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test120NewConstraintButton()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_NEWCONSTRAINT ).click();
+        getButton( Commands.COMMAND_ID_NEW_CONSTRAINT ).click();
         final Calendar date2 = new GregorianCalendar();
         checkModificationUpdate( date1, date2 );
         checkButtons( true, true, true, true, true, true );
@@ -192,7 +192,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test126AddTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_ADDTAXA ).click();
+        getButton( Commands.COMMAND_ID_ADD_TAXA ).click();
         final Calendar date2 = new GregorianCalendar();
         checkModificationUpdate( date1, date2 );
         checkButtons( true, true, true, true, true, true );
@@ -211,7 +211,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test130RemoveConstraintButton()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_DELETECONSTRAINT ).click();
+        getButton( Commands.COMMAND_ID_DELETE_CONSTRAINT ).click();
         final Calendar date2 = new GregorianCalendar();
         checkModificationUpdate( date1, date2 );
         checkButtons( true, true, true, true, true, true );
@@ -242,7 +242,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     {
         PANEL.getTree( ConstraintsBuilder.COMPONENT_TREE_TAXA ).getJTree().setSelectionRow( 2 );
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_ADDTAXA ).click();
+        getButton( Commands.COMMAND_ID_ADD_TAXA ).click();
         final Calendar date2 = new GregorianCalendar();
         assertEquals( "taxa list should have 2 entries,", 2, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
         checkModificationUpdate( date1, date2 );
@@ -271,7 +271,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test135RemoveTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_REMOVETAXA ).click();
+        getButton( Commands.COMMAND_ID_REMOVE_TAXA ).click();
         final Calendar date2 = new GregorianCalendar();
         assertEquals( "taxa list should have 1 entries,", 1, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
         checkModificationUpdate( date1, date2 );
@@ -283,7 +283,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     public void test136RemoveTaxon()
     {
         final Calendar date1 = new GregorianCalendar();
-        getButton( Commands.COMMANDID_REMOVETAXA ).click();
+        getButton( Commands.COMMAND_ID_REMOVE_TAXA ).click();
         final Calendar date2 = new GregorianCalendar();
         assertEquals( "taxa list should have 0 entries,", 0, PANEL.getListBox( ConstraintsBuilder.COMPONENT_LIST_TAXA ).getSize() );
         checkModificationUpdate( date1, date2 );
@@ -307,7 +307,7 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
             tree.expandRow( i );
         }
         tree.setSelectionRow( 4 );
-        getButton( Commands.COMMANDID_ADDTAXA ).click();
+        getButton( Commands.COMMAND_ID_ADD_TAXA ).click();
         checkButtons( true, true, true, true, true, true );
         checkButtons( true, true, false, false );
         checkComponents( true, false, false, true );
@@ -333,8 +333,8 @@ public class ConstraintsBuilderTest extends MasterDetailsBuilderTest
     private static void checkButtons( final boolean newEnabled, final boolean deleteEnabled,
                                       final boolean addEnabled, final boolean removeEnabled )
     {
-        final String[] buttons = {Commands.COMMANDID_NEWCONSTRAINT, Commands.COMMANDID_DELETECONSTRAINT,
-                Commands.COMMANDID_ADDTAXA, Commands.COMMANDID_REMOVETAXA};
+        final String[] buttons = {Commands.COMMAND_ID_NEW_CONSTRAINT, Commands.COMMAND_ID_DELETE_CONSTRAINT,
+                Commands.COMMAND_ID_ADD_TAXA, Commands.COMMAND_ID_REMOVE_TAXA};
         final boolean[] enableds = new boolean[]{newEnabled, deleteEnabled, addEnabled, removeEnabled};
         for ( int i = 0; i < buttons.length; i++ )
         {

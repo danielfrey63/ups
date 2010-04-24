@@ -37,7 +37,7 @@ public class NewGroup extends ActionCommand
 
     public NewGroup( final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel )
     {
-        super( commandManager, Commands.COMMANDID_NEWGROUP );
+        super( commandManager, Commands.COMMAND_ID_NEW_GROUP );
         assert model != null : "model must not be null";
         assert listModel != null : "list model must not be null";
         this.model = model;

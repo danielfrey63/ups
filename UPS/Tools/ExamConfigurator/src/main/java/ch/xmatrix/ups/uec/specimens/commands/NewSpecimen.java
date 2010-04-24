@@ -39,7 +39,7 @@ public class NewSpecimen extends ActionCommand
     public NewSpecimen( final CommandManager commandManager, final SelectionInList model,
                         final TreeSelectionModel selection )
     {
-        super( commandManager, Commands.COMMANDID_NEWSPECIMEN );
+        super( commandManager, Commands.COMMAND_ID_NEW_SPECIMEN );
         assert model != null : "model must not be null";
         this.model = model;
         this.selection = selection;

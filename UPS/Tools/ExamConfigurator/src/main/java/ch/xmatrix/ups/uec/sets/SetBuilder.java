@@ -131,8 +131,8 @@ public class SetBuilder extends ActionCommandPanelBuilder
         fromFiles = initCommand( new FromFiles( getCommandManager(), submitTableModel ) );
         fromDirectory = initCommand( new FromDirectory( getCommandManager(), submitTableModel ) );
         newPerson = initCommand( new AddPerson( getCommandManager(), submitTableModel ) );
-        moveUp = initCommand( new TableMove( getCommandManager(), Commands.COMMANDID_MOVEUP, sortableTableModel, selectionModel, -1 ) );
-        moveDown = initCommand( new TableMove( getCommandManager(), Commands.COMMANDID_MOVEDOWN, sortableTableModel, selectionModel, 1 ) );
+        moveUp = initCommand( new TableMove( getCommandManager(), Commands.COMMAND_ID_MOVE_UP, sortableTableModel, selectionModel, -1 ) );
+        moveDown = initCommand( new TableMove( getCommandManager(), Commands.COMMAND_ID_MOVE_DOWN, sortableTableModel, selectionModel, 1 ) );
         remove = initCommand( new RemoveFromTable( getCommandManager(), submitTableModel, selectionModel, sortableTableModel ) );
     }
 
@@ -163,7 +163,7 @@ public class SetBuilder extends ActionCommandPanelBuilder
             table.setSelectionModel( selectionModel );
 
             final JPanel toolbar = creator.getPanel( "panelToolbar" );
-            final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar( Commands.FACENAME_TOOLBAR );
+            final JToolBar bar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar( Commands.FACE_NAME_TOOLBAR );
             toolbar.add( bar, new CellConstraints().xy( 3, 1 ) );
 
             return creator.getPanel( "panel" );

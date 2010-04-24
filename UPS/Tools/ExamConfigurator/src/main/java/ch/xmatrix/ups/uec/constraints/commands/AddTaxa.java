@@ -39,7 +39,7 @@ public class AddTaxa extends ActionCommand
 
     public AddTaxa( final CommandManager manager, final SelectionInList models, final TreeSelectionModel selection )
     {
-        super( manager, Commands.COMMANDID_ADDTAXA );
+        super( manager, Commands.COMMAND_ID_ADD_TAXA );
         this.models = models;
         this.selection = selection;
     }

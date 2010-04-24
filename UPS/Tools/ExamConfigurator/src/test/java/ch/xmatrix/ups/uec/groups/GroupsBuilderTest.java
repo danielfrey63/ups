@@ -134,7 +134,7 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
     public void test110AddButton()
     {
         final Calendar date1 = Calendar.getInstance();
-        getButton( Commands.COMMANDID_NEWGROUP ).click();
+        getButton( Commands.COMMAND_ID_NEW_GROUP ).click();
         final Calendar date2 = Calendar.getInstance();
         checkModificationUpdate( date1, date2 );
         assertEquals( "list doesn't have 1 entry,", 1, PANEL.getListBox( GroupsBuilder.COMPONENT_LISTGROUPS ).getSize() );
@@ -230,7 +230,7 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
 
     public void test121DeleteGroup()
     {
-        getButton( Commands.COMMANDID_DELETEGROUP ).click();
+        getButton( Commands.COMMAND_ID_DELETE_GROUP ).click();
     }
 
     public void test199DeleteAll()
@@ -242,8 +242,8 @@ public class GroupsBuilderTest extends MasterDetailsBuilderTest
 
     private static void checkButtons( final boolean addEnabled, final boolean removeEnabled )
     {
-        checkButtonEnabled( addEnabled, Commands.COMMANDID_NEWGROUP );
-        checkButtonEnabled( removeEnabled, Commands.COMMANDID_DELETEGROUP );
+        checkButtonEnabled( addEnabled, Commands.COMMAND_ID_NEW_GROUP );
+        checkButtonEnabled( removeEnabled, Commands.COMMAND_ID_DELETE_GROUP );
     }
 
     private static void checkComponents( final boolean listEnabled, final boolean nameEnabled, final boolean minimumEnabled,

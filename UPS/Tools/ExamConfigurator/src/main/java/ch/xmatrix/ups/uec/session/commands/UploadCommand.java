@@ -33,7 +33,7 @@ public class UploadCommand extends ActionCommand
 
     public UploadCommand( final CommandManager commandManager, final ListModel model )
     {
-        super( commandManager, Commands.COMMANDID_UPLOAD );
+        super( commandManager, Commands.COMMAND_ID_UPLOAD );
         this.model = model;
     }
 

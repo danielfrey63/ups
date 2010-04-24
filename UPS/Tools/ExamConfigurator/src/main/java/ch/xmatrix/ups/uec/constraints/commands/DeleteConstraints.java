@@ -36,7 +36,7 @@ public class DeleteConstraints extends ActionCommand
 
     public DeleteConstraints( final CommandManager manager, final SelectionInList constraintsModels )
     {
-        super( manager, Commands.COMMANDID_DELETECONSTRAINT );
+        super( manager, Commands.COMMAND_ID_DELETE_CONSTRAINT );
         this.constraintsModels = constraintsModels;
     }
 

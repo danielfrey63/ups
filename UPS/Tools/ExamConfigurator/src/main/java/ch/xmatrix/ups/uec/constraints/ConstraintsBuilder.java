@@ -499,7 +499,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
         add = initCommand( new AddTaxa( getCommandManager(), getModels(), treeSelection ), false );
         remove = (RemoveTaxa) initCommand( new RemoveTaxa( getCommandManager(), getModels() ), false );
 
-        final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar();
+        final JToolBar bar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar();
         final JPanel separator = getCreator().getPanel( "panelSeparator" );
         separator.add( bar, new CellConstraints().xy( 3, 1 ) );
 

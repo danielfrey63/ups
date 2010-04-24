@@ -339,7 +339,7 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
         unknownDisabled = getCreator().getCheckBox( "checkUnknown" );
         backup = getCreator().getCheckBox( "checkBackup" );
         edit = getCreator().getPanel( "panelEdit" );
-        final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar( Commands.GROUPID_TOOLBAR );
+        final JToolBar bar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar( Commands.GROUP_ID_TOOLBAR );
         getCreator().getPanel( "panelToolbar" ).add( bar, new CellConstraints().xy( 3, 1 ) );
     }
 

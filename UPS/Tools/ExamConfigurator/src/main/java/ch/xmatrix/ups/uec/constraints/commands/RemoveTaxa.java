@@ -37,7 +37,7 @@ public class RemoveTaxa extends ActionCommand
 
     public RemoveTaxa( final CommandManager manager, final SelectionInList constraintsModels )
     {
-        super( manager, Commands.COMMANDID_REMOVETAXA );
+        super( manager, Commands.COMMAND_ID_REMOVE_TAXA );
         this.constraintsModels = constraintsModels;
     }
 

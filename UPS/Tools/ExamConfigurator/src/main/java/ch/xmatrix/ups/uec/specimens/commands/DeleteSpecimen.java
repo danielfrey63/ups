@@ -34,7 +34,7 @@ public class DeleteSpecimen extends ActionCommand
 
     public DeleteSpecimen( final CommandManager commandManager, final SelectionInList model )
     {
-        super( commandManager, Commands.COMMANDID_DELETESPECIMEN );
+        super( commandManager, Commands.COMMAND_ID_DELETE_SPECIMEN );
         assert model != null : "SelectionInList must not be null";
         this.model = model;
     }

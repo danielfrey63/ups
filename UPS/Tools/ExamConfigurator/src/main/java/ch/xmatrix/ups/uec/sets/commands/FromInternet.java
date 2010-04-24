@@ -78,7 +78,7 @@ public class FromInternet extends ActionCommand
 
     public FromInternet( final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel )
     {
-        super( commandManager, Commands.COMMANDID_OPENFROMINTERNET );
+        super( commandManager, Commands.COMMAND_ID_OPEN_FROM_INTERNET );
         this.submitModel = submitModel;
     }
 

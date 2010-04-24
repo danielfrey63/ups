@@ -54,7 +54,7 @@ public class AddPerson extends ActionCommand
 
     public AddPerson( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super( commandManager, Commands.COMMANDID_ADDPERSION );
+        super( commandManager, Commands.COMMAND_ID_ADD_PERSON );
         this.model = model;
         person = new PersonData();
         dialog = new Dialog();

@@ -42,7 +42,7 @@ public class FromDirectory extends LoadFilesystem
 
     public FromDirectory( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super( commandManager, Commands.COMMANDID_LOADDIRECTORY, model );
+        super( commandManager, Commands.COMMAND_ID_LOAD_DIRECTORY, model );
     }
 
     protected OpenChooser getChooser()

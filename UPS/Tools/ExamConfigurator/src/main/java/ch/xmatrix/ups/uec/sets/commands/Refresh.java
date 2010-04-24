@@ -45,7 +45,7 @@ public class Refresh extends ActionCommand
 
     public Refresh( final CommandManager commandManager, final SetBuilder.SubmitTableModel submitModel )
     {
-        super( commandManager, Commands.COMMANDID_REFRESH );
+        super( commandManager, Commands.COMMAND_ID_REFRESH );
         this.submitModel = submitModel;
     }
 

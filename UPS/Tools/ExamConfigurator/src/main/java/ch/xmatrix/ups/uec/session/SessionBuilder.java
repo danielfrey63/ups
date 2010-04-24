@@ -215,7 +215,7 @@ public class SessionBuilder extends AbstractDetailsBuilder
 
             initCommand( new UploadCommand( getCommandManager(), getModels().getListModel() ), true );
 
-            final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar();
+            final JToolBar bar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar();
             final JPanel separator = getCreator().getPanel( "panelSeparator" );
             separator.add( bar, new CellConstraints().xy( 3, 1 ) );
 

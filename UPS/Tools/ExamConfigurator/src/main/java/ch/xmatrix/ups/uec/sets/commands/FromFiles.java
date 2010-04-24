@@ -39,7 +39,7 @@ public class FromFiles extends LoadFilesystem
 
     public FromFiles( final CommandManager commandManager, final SetBuilder.SubmitTableModel model )
     {
-        super( commandManager, Commands.COMMANDID_LOADFILES, model );
+        super( commandManager, Commands.COMMAND_ID_LOAD_FILES, model );
         getChooser();
     }
 

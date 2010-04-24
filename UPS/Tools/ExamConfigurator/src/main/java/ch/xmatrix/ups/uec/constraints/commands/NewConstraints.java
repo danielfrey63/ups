@@ -34,7 +34,7 @@ public class NewConstraints extends ActionCommand
 
     public NewConstraints( final CommandManager manager, final SelectionInList models )
     {
-        super( manager, Commands.COMMANDID_NEWCONSTRAINT );
+        super( manager, Commands.COMMAND_ID_NEW_CONSTRAINT );
         this.models = models;
     }
 

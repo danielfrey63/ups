@@ -58,7 +58,7 @@ public class ReloadExamDataOnServer extends ActionCommand
 
     public ReloadExamDataOnServer( final CommandManager commandManager )
     {
-        super( commandManager, Commands.COMMANDID_RELOADSERVERDATA );
+        super( commandManager, Commands.COMMAND_ID_RELOAD_SERVER_DATA );
     }
 
     protected void handleExecute()

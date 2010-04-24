@@ -55,7 +55,7 @@ public class CalculateExams extends ActionCommand
                            final JTextField seed, final SortableTableModel sortableTableModel,
                            final SetBuilder.SubmitTableModel submitTableModel )
     {
-        super( commandManager, Commands.COMMANDID_CALCULATE );
+        super( commandManager, Commands.COMMAND_ID_CALCULATE );
         this.sortableTableModel = sortableTableModel;
         this.submitTableModel = submitTableModel;
         this.comboModel = comboModel;

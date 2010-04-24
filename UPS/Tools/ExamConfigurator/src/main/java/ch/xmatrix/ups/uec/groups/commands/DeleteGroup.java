@@ -37,7 +37,7 @@ public class DeleteGroup extends ActionCommand
 
     public DeleteGroup( final CommandManager commandManager, final SelectionInList model, final DefaultListModel listModel )
     {
-        super( commandManager, Commands.COMMANDID_DELETEGROUP );
+        super( commandManager, Commands.COMMAND_ID_DELETE_GROUP );
         assert model != null : "model must not be null";
         assert listModel != null : "list model must not be null";
         this.model = model;

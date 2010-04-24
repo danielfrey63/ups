@@ -373,7 +373,7 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
     protected void initComponents()
     {
-        final JToolBar bar = getCommandManager().getGroup( Commands.GROUPID_TOOLBAR ).createToolBar();
+        final JToolBar bar = getCommandManager().getGroup( Commands.GROUP_ID_TOOLBAR ).createToolBar();
         getCreator().getPanel( "panelToolbarSeparator" ).add( bar, new CellConstraints().xy( 3, 1 ) );
 
         initCommand( new DeleteGroup( getCommandManager(), getModels(), listModel ), false );
@@ -439,8 +439,8 @@ public class GroupsBuilder extends AbstractDetailsBuilder
         maximum = getCreator().getSpinner( COMPONENT_MAXIMUM );
         maximum.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
 
-        delete = getCommandManager().getCommand( Commands.COMMANDID_DELETEGROUP );
-        add = getCommandManager().getCommand( Commands.COMMANDID_NEWGROUP );
+        delete = getCommandManager().getCommand( Commands.COMMAND_ID_DELETE_GROUP );
+        add = getCommandManager().getCommand( Commands.COMMAND_ID_NEW_GROUP );
     }
 
     protected Converter getConverter()

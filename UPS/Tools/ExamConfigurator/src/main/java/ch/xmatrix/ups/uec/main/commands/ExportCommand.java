@@ -59,11 +59,18 @@ public class ExportCommand extends ActionCommand
             if ( prefsFile.exists() )
             {
                 final File dir = DirectoryChooser.chooseDirectory( null );
-                final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
+                if ( dir != null )
+                {
+                    final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
 
-                ZipUtils.zipDirectory( prefsFile, backupFile );
-                LOG.info( "exported existing settings to " + backupFile );
-                feedback = "Exported to " + backupFile;
+                    ZipUtils.zipDirectory( prefsFile, backupFile );
+                    LOG.info( "exported existing settings to " + backupFile );
+                    feedback = "Exported to " + backupFile;
+                }
+                else
+                {
+                    feedback = "User canceled export";
+                }
             }
             else
             {

@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 import org.slf4j.Logger;
@@ -37,9 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ExportCommand extends ActionCommand
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( ExportCommand.class );
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat( "yyyyMMddHHmmss" );
@@ -56,12 +55,22 @@ public class ExportCommand extends ActionCommand
             final String prefsNode = Application.getConfiguration().getPreferencesRootName();
             final String prefsPath = ( System.getProperty( "user.home" ) + "/." + prefsNode ).replace( "\\", "/" );
             final File prefsFile = new File( prefsPath + "/" + UploadDialog.FILE_DATA );
+            final String feedback;
+            if ( prefsFile.exists() )
+            {
+                final File dir = DirectoryChooser.chooseDirectory( null );
+                final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
 
-            final File dir = DirectoryChooser.chooseDirectory( null );
-            final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
-
-            ZipUtils.zipDirectory( prefsFile, backupFile );
-            LOG.info( "exported existing settings to " + backupFile );
+                ZipUtils.zipDirectory( prefsFile, backupFile );
+                LOG.info( "exported existing settings to " + backupFile );
+                feedback = "Exported to " + backupFile;
+            }
+            else
+            {
+                feedback = prefsFile + " does not exist";
+                LOG.warn( feedback );
+            }
+            JOptionPane.showMessageDialog( null, feedback );
         }
         catch ( IOException e )
         {

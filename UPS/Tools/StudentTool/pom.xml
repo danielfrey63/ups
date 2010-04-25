@@ -27,6 +27,10 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.icon</artifactId>
+        </dependency>
+        <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>

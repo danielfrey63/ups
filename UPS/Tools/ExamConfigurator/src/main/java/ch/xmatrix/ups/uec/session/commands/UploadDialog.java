@@ -83,11 +83,11 @@ public class UploadDialog extends Upload
 
     private static final String PREF_DIRECTORY = "directory";
 
-    private static final String JAR_CONSTRAINTS = "ch.xmatrix.ups.data.constraints-SNAPSHOT.jar";
+    private static final String JAR_CONSTRAINTS = "ch.xmatrix.ups.data.constraints-1.0-SNAPSHOT.jar";
 
-    private static final String JAR_TAXA = "ch.xmatrix.ups.data.taxa-SNAPSHOT.jar";
+    private static final String JAR_TAXA = "ch.xmatrix.ups.data.taxa-1.0-SNAPSHOT.jar";
 
-    private static final String JAR_SESSIONS = "ch.xmatrix.ups.data.sessions-SNAPSHOT.jar";
+    private static final String JAR_SESSIONS = "ch.xmatrix.ups.data.sessions-1.0-SNAPSHOT.jar";
 
     private static final String FILE_EXAMINFO = "sessions.xml";
 
@@ -196,7 +196,7 @@ public class UploadDialog extends Upload
                 list.add( sessionModel );
             }
         }
-        return list.toArray( new SessionModel[0] );
+        return list.toArray( new SessionModel[list.size()] );
     }
 
     /**

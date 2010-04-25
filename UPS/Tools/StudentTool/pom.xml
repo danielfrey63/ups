@@ -27,33 +27,23 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>ch.xmatrix.common</groupId>
-            <version>2.3.646</version>
-            <artifactId>ch.xmatrix.common.utils-all</artifactId>
-        </dependency>
-        <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
-            <version>2.1.651</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.612</version>
             <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.606</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.609</version>
             <artifactId>ch.xmatrix.ups.data.courses</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>2.0.584</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>

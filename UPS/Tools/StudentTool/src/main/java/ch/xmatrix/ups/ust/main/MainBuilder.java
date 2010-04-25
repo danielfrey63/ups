@@ -146,7 +146,6 @@ public class MainBuilder extends AbstractMainBuilder
         initCommand( new RunBrowserCommand( manager, Commands.COMMANDID_USTEXAM, "http://balti.ethz.ch/ups/site/ust/help/exam.html" ), true );
         initCommand( new RunBrowserCommand( manager, Commands.COMMANDID_USTHELP, "http://balti.ethz.ch/ups/site/ust/help/help.html" ), true );
         initCommand( new RunBrowserCommand( manager, Commands.COMMANDID_USTFAQ, "http://balti.ethz.ch/ups/site/ust/faq.html" ), true );
-        initCommand( new RunBrowserCommand( manager, Commands.COMMANDID_USTBUGS, "http://www.xmatrix.ch/jira" ), true );
         initCommand( new AboutCommand( manager, ImageLocator.getIcon( "ust-logo.png" ), Application.getDescription().getFullVersion() ), true );
     }
 

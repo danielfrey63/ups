@@ -113,13 +113,14 @@
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.icon</artifactId>
-                <scope>runtime</scope>
+                <!-- seems that webstart doesn't copy runtime dependencies -->
+                <!--<scope>runtime</scope>-->
                 <version>1.4-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.utils-all</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -194,7 +195,7 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.data</groupId>
                 <artifactId>ch.xmatrix.ups.data.exams</artifactId>
-                <version>SNAPSHOT</version>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.data</groupId>
@@ -254,7 +255,7 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>
                 <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-                <version>2.1-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>
@@ -594,7 +595,8 @@
                 </configuration>
             </plugin>
             <!-- Run with mvn install org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
-            <!-- Uses the ${main-class} property to indicate the jnlp main class -->
+            <!-- Uses the ${main-class} property to indicate the JNLP main class -->
+            <!-- Note: Seems that this plugin doesn't copy runtime dependencies -->
             <plugin>
                 <groupId>org.codehaus.mojo.webstart</groupId>
                 <artifactId>webstart-maven-plugin</artifactId>
@@ -628,9 +630,6 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </repository>
         <repository>
             <id>maclocal</id>
@@ -638,30 +637,26 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </repository>
         <repository>
             <id>maclocal-snapshots</id>
             <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
             <releases>
                 <enabled>false</enabled>
             </releases>
         </repository>
         <repository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <!-- Overwrite default maven repository -->
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -671,30 +666,26 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </pluginRepository>
         <pluginRepository>
             <id>maclocal-plugin-snapshots</id>
             <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
             <releases>
                 <enabled>false</enabled>
             </releases>
         </pluginRepository>
         <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <!-- Overwrite default maven repository -->
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
     <!--

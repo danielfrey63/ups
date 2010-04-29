@@ -9,11 +9,6 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>ch.xmatrix.ups.data.exams</artifactId>
     <name>Data Exams</name>
-    <version>1.0.724</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Prüfungen</description>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.data.exams-1.0.724</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.data.exams-1.0.724</url>
-  </scm>
 </project>

@@ -23,7 +23,6 @@ import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.binding.Note;
 import ch.jfactory.component.splash.ImageSplash;
-import ch.jfactory.logging.LogInterface;
 import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.ResourceHelper;
 import ch.jfactory.resource.Strings;
@@ -618,9 +617,14 @@ public class MainRunner extends DefaultApplicationStarter
 
     public static void main( final String[] args )
     {
+        setVersion( MainRunner.class );
+        new MainRunner();
+    }
+
+    public static void setVersion( final Class<? extends MainRunner> clazz )
+    {
         try
         {
-            final Class<MainRunner> clazz = MainRunner.class;
             final String classContainer = clazz.getProtectionDomain().getCodeSource().getLocation().toString();
             final URL manifestUrl = new URL( "jar:" + classContainer + "!/META-INF/MANIFEST.MF" );
             final Manifest manifest = new Manifest( manifestUrl.openStream() );
@@ -631,6 +635,5 @@ public class MainRunner extends DefaultApplicationStarter
         {
             System.setProperty( MainRunner.PROPERTYNAME_VERSION_FULL, "Test Version" );
         }
-        new MainRunner();
     }
 }

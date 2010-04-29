@@ -532,7 +532,7 @@
                         </manifest>
                         <manifestEntries>
                             <Main-Class>${main-class}</Main-Class>
-                            <Implementation-Version>${project.version}.${buildNumber}</Implementation-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>

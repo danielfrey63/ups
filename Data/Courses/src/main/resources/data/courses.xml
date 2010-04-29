@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <courses>
     <course>
-        <lknr>551-0004-01</lknr>
-        <type>V</type>
-        <title>Systematische Biologie: Pflanzen II (2003)</title>
-    </course>
-    <course>
         <lknr>551-0004-06</lknr>
         <type>V</type>
-        <title>Systematische Biologie: Pflanzen II (2006)</title>
+        <title>Systematische Biologie: Pflanzen II</title>
     </course>
+    <!--<course>-->
+    <!--<lknr>551-0004-01</lknr>-->
+    <!--<type>V</type>-->
+    <!--<title>Systematische Biologie: Pflanzen II (2003)</title>-->
+    <!--</course>-->
     <!--<course>-->
     <!--<lknr>551-0301-01</lknr>-->
     <!--<type>V</type>-->

@@ -14,7 +14,7 @@ package ch.xmatrix.ups.ust;
 import ch.jfactory.application.MainRunner;
 
 /**
- * Local main runner subclass to put entrypoint into this module.
+ * Local main runner subclass to put entry point into this module.
  *
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2007/05/16 17:00:19 $
@@ -23,6 +23,7 @@ public class Main extends MainRunner
 {
     public static void main( final String[] args )
     {
-        MainRunner.main( args );
+        Main.setVersion( Main.class );
+        new Main();
     }
 }

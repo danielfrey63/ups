@@ -72,7 +72,7 @@ public class ImportCommand extends ActionCommand
                     getCommandManager().getCommand( COMMAND_ID_QUIT ).execute();
                 }
                 else
-                { 
+                {
                     LOG.info( "user canceled export or no files chosen" );
                 }
             }
@@ -113,7 +113,7 @@ public class ImportCommand extends ActionCommand
         @Override
         public boolean accept( final File f )
         {
-            return f.getName().endsWith( ".zip" );
+            return f.getName().endsWith( ".zip" ) || f.isDirectory();
         }
 
         @Override

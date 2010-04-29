@@ -621,7 +621,6 @@ public class MainRunner extends DefaultApplicationStarter
         try
         {
             final Class<MainRunner> clazz = MainRunner.class;
-            System.out.println( clazz.getPackage().getImplementationVersion() );
             final String classContainer = clazz.getProtectionDomain().getCodeSource().getLocation().toString();
             final URL manifestUrl = new URL( "jar:" + classContainer + "!/META-INF/MANIFEST.MF" );
             final Manifest manifest = new Manifest( manifestUrl.openStream() );

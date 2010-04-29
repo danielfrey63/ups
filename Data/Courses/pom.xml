@@ -9,11 +9,6 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>ch.xmatrix.ups.data.courses</artifactId>
     <name>Data Courses</name>
-    <version>1.0.776</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Vorlesungsdaten</description>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.data.courses-1.0.776</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.data.courses-1.0.776</url>
-  </scm>
 </project>

@@ -15,14 +15,15 @@ import ch.jfactory.convert.Converter;
 import ch.jfactory.model.IdAware;
 import ch.jfactory.model.SimpleModelList;
 import ch.xmatrix.ups.model.SessionModel;
-import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.Writer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +35,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Loader
 {
-    /**
-     * Set this system property to <code>true</code> if the model should not be saved really, but printed to the log.
-     */
+    /** Set this system property to <code>true</code> if the model should not be saved really, but printed to the log. */
     public static final String ENVIRONMENT_SIMULATE_SAVE = "ch.jfactory.simulatesave";
 
     private static final Logger LOG = LoggerFactory.getLogger( Loader.class );
@@ -99,7 +98,7 @@ public class Loader
                 feedback = "resource " + modelResource;
                 in = Loader.class.getResourceAsStream( modelResource );
             }
-            final Reader reader = new InputStreamReader( in );
+            final Reader reader = new InputStreamReader( in, "UTF-8" );
             list = (T) converter.from( reader );
             logSimpleModelListDetails( feedback, list );
         }
@@ -137,7 +136,7 @@ public class Loader
             try
             {
                 file.getParentFile().mkdirs();
-                final FileWriter writer = new FileWriter( file );
+                final Writer writer = new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" );
                 writer.write( content );
                 writer.close();
             }

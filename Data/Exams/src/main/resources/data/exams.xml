@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1252"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ ====================================================================
   ~  Copyright 2004-2006 www.xmatrix.ch
@@ -12,7 +12,7 @@
   -->
 <examModels>
     <examModel>
-        <name>Matthias Baltisberger Frühling 2003</name>
+        <name>Matthias Baltisberger FrÃ¼hling 2003</name>
         <uid>C58AF48A-A820-9307-54FD-D8EB8CF6BF6C</uid>
         <modified>2003-05-25 19:04:43.717 CEST</modified>
         <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>

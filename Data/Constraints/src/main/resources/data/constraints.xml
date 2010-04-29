@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="windows-1252"?>
 <constraintsModels id="1">
     <constraintsModel id="3">
-        <description>Vorgaben von Matthias Baltisberger vom Frühling 2003</description>
+        <description>Vorgaben von Matthias Baltisberger vom FrÃ¼hling 2003</description>
         <constraintModel id="5">
-            <name>Ähre</name>
+            <name>Ã„hre</name>
             <minimalCount>2</minimalCount>
             <string>Agropyron repens</string>
             <string>Brachypodium</string>
@@ -655,7 +654,7 @@
             <constraints reference="3"/>
         </constraintModel>
         <constraintModel id="215">
-            <name>Rispe mit einblütigen Ärchen</name>
+            <name>Rispe mit einblÃ¼tigen Ã„rchen</name>
             <minimalCount>1</minimalCount>
             <string>Agrostis stolonifera</string>
             <string>Apera spica-venti</string>
@@ -1761,7 +1760,7 @@
                 <constraintModel reference="101"/>
             </entry>
         </index>
-        <name>Vorgaben Frühling 2003</name>
+        <name>Vorgaben FrÃ¼hling 2003</name>
         <uid>7E0ED9AD-A950-7861-8B1D-DF0031E2FFDA</uid>
         <taxaUid>67DEBDA1-3CC2-5AEA-C75B-A25B08B6ECB0</taxaUid>
         <modified id="271">2005-08-24 00:13:16.478 CEST</modified>
@@ -1770,7 +1769,7 @@
     <constraintsModel id="272">
         <description>Vorgaben von Matthias Baltisberger ab Herbst 2007</description>
         <constraintModel id="274">
-            <name>3 Teilblätter</name>
+            <name>3 TeilblÃ¤tter</name>
             <minimalCount>1</minimalCount>
             <string>Medicago</string>
             <string>Melilotus</string>
@@ -1783,7 +1782,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="278">
-            <name>Ähre</name>
+            <name>Ã„hre</name>
             <minimalCount>2</minimalCount>
             <string>Agropyron repens</string>
             <string>Brachypodium</string>
@@ -1855,7 +1854,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="300">
-            <name>Blätter fein geteilt</name>
+            <name>BlÃ¤tter fein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Carum carvi</string>
             <string>Daucus carota</string>
@@ -1863,7 +1862,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="302">
-            <name>Blätter grob geteilt</name>
+            <name>BlÃ¤tter grob geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Aegopodium podagraria</string>
             <string>Astrantia major</string>
@@ -1873,7 +1872,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="304">
-            <name>Blätter mittelfein geteilt</name>
+            <name>BlÃ¤tter mittelfein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Chaerophyllum villarsii</string>
             <string>Anthriscus sylvestris</string>
@@ -2176,7 +2175,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="396">
-            <name>mit Honigblättern</name>
+            <name>mit HonigblÃ¤ttern</name>
             <minimalCount>1</minimalCount>
             <string>Aconitum</string>
             <string>Aquilegia vulgaris</string>
@@ -2193,7 +2192,7 @@
             <constraints reference="272"/>
         </constraintModel>
         <constraintModel id="400">
-            <name>ohne Honigblätter</name>
+            <name>ohne HonigblÃ¤tter</name>
             <minimalCount>1</minimalCount>
             <string>Caltha palustris</string>
             <string>Clematis vitalba</string>
@@ -3292,7 +3291,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1276">
-            <name>3 Teilblätter</name>
+            <name>3 TeilblÃ¤tter</name>
             <minimalCount>1</minimalCount>
             <string>Medicago</string>
             <string>Melilotus</string>
@@ -3305,7 +3304,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1280">
-            <name>Ähre</name>
+            <name>Ã„hre</name>
             <minimalCount>2</minimalCount>
             <string>Agropyron repens</string>
             <string>Brachypodium</string>
@@ -3371,7 +3370,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1300">
-            <name>Blätter fein geteilt</name>
+            <name>BlÃ¤tter fein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Carum carvi</string>
             <string>Daucus carota</string>
@@ -3379,7 +3378,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1302">
-            <name>Blätter grob geteilt</name>
+            <name>BlÃ¤tter grob geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Aegopodium podagraria</string>
             <string>Astrantia major</string>
@@ -3389,7 +3388,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1304">
-            <name>Blättermittelfein geteilt</name>
+            <name>BlÃ¤ttermittelfein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Chaerophyllum villarsii</string>
             <string>Anthriscus sylvestris</string>
@@ -3659,7 +3658,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1386">
-            <name>mit Honigblättern</name>
+            <name>mit HonigblÃ¤ttern</name>
             <minimalCount>1</minimalCount>
             <string>Aconitum</string>
             <string>Aquilegia vulgaris</string>
@@ -3676,7 +3675,7 @@
             <constraints reference="1272"/>
         </constraintModel>
         <constraintModel id="1390">
-            <name>ohne Honigblätter</name>
+            <name>ohne HonigblÃ¤tter</name>
             <minimalCount>1</minimalCount>
             <string>Caltha palustris</string>
             <string>Clematis vitalba</string>
@@ -4716,7 +4715,7 @@
     <constraintsModel id="670">
         <description>Vorgaben von Matthias Baltisberger ab Herbst 2009</description>
         <constraintModel id="672">
-            <name>3 Teilblätter</name>
+            <name>3 TeilblÃ¤tter</name>
             <minimalCount>1</minimalCount>
             <string>Medicago</string>
             <string>Melilotus</string>
@@ -4729,7 +4728,7 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="676">
-            <name>Ähre</name>
+            <name>Ã„hre</name>
             <minimalCount>2</minimalCount>
             <string>Agropyron repens</string>
             <string>Brachypodium</string>
@@ -4801,7 +4800,7 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="698">
-            <name>Blätter fein geteilt</name>
+            <name>BlÃ¤tter fein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Carum carvi</string>
             <string>Daucus carota</string>
@@ -4809,7 +4808,7 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="700">
-            <name>Blätter grob geteilt</name>
+            <name>BlÃ¤tter grob geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Aegopodium podagraria</string>
             <string>Astrantia major</string>
@@ -4819,14 +4818,14 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="702">
-            <name>Blätter mittelfein geteilt</name>
+            <name>BlÃ¤tter mittelfein geteilt</name>
             <minimalCount>1</minimalCount>
             <string>Chaerophyllum villarsii</string>
             <string>Anthriscus sylvestris</string>
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="704">
-            <name>Blätter paarig gefiedert</name>
+            <name>BlÃ¤tter paarig gefiedert</name>
             <minimalCount>1</minimalCount>
             <string>Vicia</string>
             <string>Lathyrus</string>
@@ -5044,7 +5043,7 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="770">
-            <name>Honigblätter fehlend</name>
+            <name>HonigblÃ¤tter fehlend</name>
             <minimalCount>1</minimalCount>
             <string>Caltha palustris</string>
             <string>Clematis vitalba</string>
@@ -5053,7 +5052,7 @@
             <constraints reference="670"/>
         </constraintModel>
         <constraintModel id="772">
-            <name>Honigblättern vorhanden</name>
+            <name>HonigblÃ¤ttern vorhanden</name>
             <minimalCount>1</minimalCount>
             <string>Aconitum</string>
             <string>Aquilegia vulgaris</string>

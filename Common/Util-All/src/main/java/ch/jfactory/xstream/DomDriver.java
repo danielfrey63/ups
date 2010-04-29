@@ -40,25 +40,17 @@ import org.xml.sax.SAXException;
  */
 public class DomDriver implements HierarchicalStreamDriver
 {
-    /**
-     * The encoding to use for the xml interpretation.
-     */
+    /** The default encoding. */
+    public static final String DEFAULT_ENCODING = "UTF-8";
+
+    /** The encoding to use for the xml interpretation. */
     private final String encoding;
 
-    /**
-     * The factory to create new dom document.
-     */
+    /** The factory to create new dom document. */
     private final DocumentBuilderFactory documentBuilderFactory;
 
-    /**
-     * The entity resolver.
-     */
+    /** The entity resolver. */
     private final EntityResolver entityResolver;
-
-    /**
-     * The default encoding.
-     */
-    private static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * Creates a dom driver without resolver.
@@ -89,7 +81,7 @@ public class DomDriver implements HierarchicalStreamDriver
     }
 
     /**
-     * Creates a dom driver with an entity resolver and an encoding.
+     * Creates a DOM driver with an entity resolver and an encoding.
      *
      * @param encoding       the encoding to set
      * @param entityResolver the resolver to set

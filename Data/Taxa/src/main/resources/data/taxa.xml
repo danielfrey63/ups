@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1252"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ ====================================================================
   ~  Copyright 2004-2006 www.xmatrix.ch
@@ -2176,7 +2176,7 @@
                                                 <taxon id="653">
                                                     <parent reference="651"/>
                                                     <level reference="14"/>
-                                                    <name>Hippophaë rhamnoides</name>
+                                                    <name>HippophaÃ« rhamnoides</name>
                                                     <rank>3065</rank>
                                                 </taxon>
                                             </children>
@@ -5803,7 +5803,7 @@
                 <taxon reference="117"/>
             </entry>
             <entry>
-                <string>Hippophaë rhamnoides</string>
+                <string>HippophaÃ« rhamnoides</string>
                 <taxon reference="653"/>
             </entry>
             <entry>
@@ -8591,7 +8591,7 @@
     <taxonTree id="1624">
         <uid>5F4FFD5A-EED8-E28B-733E-2325E9AE9109</uid>
         <name>Testtaxa</name>
-        <description>Taxonomiebaum für Testzwecke</description>
+        <description>Taxonomiebaum fÃ¼r Testzwecke</description>
         <lastModified>13.3.2006 20:07</lastModified>
         <rootLevel id="1626">
             <name>Abteilung</name>
@@ -10753,7 +10753,7 @@
                                                 <taxon id="2274">
                                                     <parent reference="2272"/>
                                                     <level reference="1635"/>
-                                                    <name>Hippophaë rhamnoides___</name>
+                                                    <name>HippophaÃ« rhamnoides___</name>
                                                     <rank>3065</rank>
                                                 </taxon>
                                             </children>
@@ -14512,7 +14512,7 @@
                 <taxon reference="2016"/>
             </entry>
             <entry>
-                <string>Hippophaë rhamnoides___</string>
+                <string>HippophaÃ« rhamnoides___</string>
                 <taxon reference="2274"/>
             </entry>
             <entry>

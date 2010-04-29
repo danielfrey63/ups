@@ -435,9 +435,9 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
         name = getCreator().getTextField( COMPONENT_NAME );
         minimum = getCreator().getSpinner( COMPONENT_MINIMUM );
-        minimum.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        minimum.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
         maximum = getCreator().getSpinner( COMPONENT_MAXIMUM );
-        maximum.setModel( new SpinnerNumberModel( new Integer( 0 ), new Integer( 0 ), null, new Integer( 1 ) ) );
+        maximum.setModel( new SpinnerNumberModel( 0, 0, null, 1 ) );
 
         delete = getCommandManager().getCommand( Commands.COMMAND_ID_DELETE_GROUP );
         add = getCommandManager().getCommand( Commands.COMMAND_ID_NEW_GROUP );
@@ -455,6 +455,7 @@ public class GroupsBuilder extends AbstractDetailsBuilder
 
             final HashMap<Class, String> implicitCollections = new HashMap<Class, String>();
             implicitCollections.put( SimpleModelList.class, "models" );
+            implicitCollections.put( GroupsModel.class, "groups" );
 
             final HashMap<Class, String> omits = new HashMap<Class, String>();
             omits.put( AbstractListModel.class, "listenerList" );

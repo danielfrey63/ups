@@ -1,7 +1,6 @@
 package ch.jfactory.xstream;
 
 import ch.jfactory.convert.Converter;
-import ch.jfactory.model.ClassPathEntityResolver;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.converters.extended.ISO8601DateConverter;
@@ -17,7 +16,7 @@ import java.util.Map;
  */
 public class XStreamConverter<T> implements Converter<T>
 {
-    private final XStream xstream = new XStream( new DomDriver( "windows-1252", new ClassPathEntityResolver( "windows-1252" ) ) );
+    private final XStream xstream = new XStream();
 
     public XStreamConverter( final Map<String, Class> aliases )
     {

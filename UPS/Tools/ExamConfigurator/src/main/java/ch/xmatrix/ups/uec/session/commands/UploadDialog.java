@@ -36,8 +36,12 @@ import com.jgoodies.uif.application.ApplicationConfiguration;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,11 +87,11 @@ public class UploadDialog extends Upload
 
     private static final String PREF_DIRECTORY = "directory";
 
-    private static final String JAR_CONSTRAINTS = "ch.xmatrix.ups.data.constraints-1.0-SNAPSHOT.jar";
+    private static final String JAR_CONSTRAINTS = "ch.xmatrix.ups.data.constraints.jar";
 
-    private static final String JAR_TAXA = "ch.xmatrix.ups.data.taxa-1.0-SNAPSHOT.jar";
+    private static final String JAR_TAXA = "ch.xmatrix.ups.data.taxa.jar";
 
-    private static final String JAR_SESSIONS = "ch.xmatrix.ups.data.sessions-1.0-SNAPSHOT.jar";
+    private static final String JAR_SESSIONS = "ch.xmatrix.ups.data.sessions.jar";
 
     private static final String FILE_EXAMINFO = "sessions.xml";
 
@@ -446,10 +450,12 @@ public class UploadDialog extends Upload
             final File subdir = new File( dir, subDirectory );
             subdir.mkdirs();
             final File file = new File( subdir, filename );
-            final FileWriter writer = new FileWriter( file );
+            final OutputStream stream = new FileOutputStream( file );
+            final Writer writer = new OutputStreamWriter( stream, "UTF-8" );
             final String xml = converter.from( selected );
             writer.write( xml );
             writer.close();
+            stream.close();
             return dir;
         }
     }

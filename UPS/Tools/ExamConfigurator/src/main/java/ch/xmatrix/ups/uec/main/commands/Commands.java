@@ -34,5 +34,7 @@ public class Commands
 
     public static final String COMMAND_ID_EXPORT = "export";
 
+    public static final String COMMAND_ID_IMPORT = "import";
+
     public static final String GROUP_ID_MENU = "menu";
 }

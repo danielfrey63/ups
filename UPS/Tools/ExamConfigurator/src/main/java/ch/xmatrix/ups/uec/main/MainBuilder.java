@@ -21,7 +21,6 @@ import ch.jfactory.application.view.builder.DockingWindowsUtils;
 import ch.jfactory.binding.DefaultInfoModel;
 import ch.jfactory.binding.InfoModel;
 import ch.jfactory.command.QuitCommand;
-import ch.jfactory.component.I15nWelcomePanel;
 import ch.jfactory.resource.Strings;
 import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.uec.constraints.ConstraintsBuilder;
@@ -29,8 +28,8 @@ import ch.xmatrix.ups.uec.exam.ExamsBuilder;
 import ch.xmatrix.ups.uec.groups.GroupsBuilder;
 import ch.xmatrix.ups.uec.level.LevelsBuilder;
 import ch.xmatrix.ups.uec.main.commands.CloseCommand;
-import ch.xmatrix.ups.uec.main.commands.Commands;
 import ch.xmatrix.ups.uec.main.commands.ExportCommand;
+import ch.xmatrix.ups.uec.main.commands.ImportCommand;
 import ch.xmatrix.ups.uec.main.commands.OpenCommand;
 import ch.xmatrix.ups.uec.master.AbstractDetailsBuilder;
 import ch.xmatrix.ups.uec.prefs.PrefsBuilder;
@@ -38,7 +37,6 @@ import ch.xmatrix.ups.uec.session.SessionBuilder;
 import ch.xmatrix.ups.uec.sets.SetBuilder;
 import ch.xmatrix.ups.uec.specimens.SpecimensBuilder;
 import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
@@ -54,6 +52,20 @@ import net.infonode.docking.util.ViewMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static ch.jfactory.component.I15nWelcomePanel.SEPARATOR;
+import static ch.xmatrix.ups.uec.main.MainModel.CARDS_EXAM;
+import static ch.xmatrix.ups.uec.main.MainModel.CARDS_UST;
+import static ch.xmatrix.ups.uec.main.commands.Commands.COMMAND_ID_EXPORT;
+import static ch.xmatrix.ups.uec.main.commands.Commands.COMMAND_ID_IMPORT;
+import static ch.xmatrix.ups.uec.main.commands.Commands.COMMAND_ID_OPENEXAM;
+import static ch.xmatrix.ups.uec.main.commands.Commands.COMMAND_ID_OPENUST;
+import static ch.xmatrix.ups.uec.main.commands.Commands.COMMAND_ID_QUIT;
+import static ch.xmatrix.ups.uec.main.commands.Commands.GROUP_ID_MENU;
+import static com.jgoodies.forms.layout.Sizes.DLUX2;
+import static com.jgoodies.forms.layout.Sizes.DLUX4;
+import static com.jgoodies.forms.layout.Sizes.DLUX8;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
 /**
  * TODO: document
  *
@@ -63,8 +75,6 @@ import org.slf4j.LoggerFactory;
 public class MainBuilder extends AbstractMainBuilder
 {
     private static final Logger LOG = LoggerFactory.getLogger( MainBuilder.class );
-
-    private static final String TOOL_PREFIX = "jfactory.ups.tool.";
 
     private final AbstractDetailsBuilder prefsBuilder = new PrefsBuilder();
 
@@ -87,10 +97,8 @@ public class MainBuilder extends AbstractMainBuilder
     public MainBuilder( final MainModel model, final InfoModel infoModel )
     {
         super( model, infoModel,
-                new String[]{Commands.COMMAND_ID_OPENUST, Commands.COMMAND_ID_OPENEXAM, I15nWelcomePanel.SEPARATOR,
-                        Commands.COMMAND_ID_EXPORT, I15nWelcomePanel.SEPARATOR,
-                        Commands.COMMAND_ID_QUIT, I15nWelcomePanel.SEPARATOR},
-                new String[]{Commands.COMMAND_ID_OPENUST, Commands.COMMAND_ID_OPENEXAM} );
+                new String[]{COMMAND_ID_OPENUST, COMMAND_ID_OPENEXAM, SEPARATOR, COMMAND_ID_EXPORT, COMMAND_ID_IMPORT, SEPARATOR, COMMAND_ID_QUIT, SEPARATOR},
+                new String[]{COMMAND_ID_OPENUST, COMMAND_ID_OPENEXAM} );
         TaxonModels.setInfoModel( infoModel );
         TaxonModels.loadTaxonTrees();
         prefsBuilder.setInfoModel( infoModel );
@@ -112,10 +120,11 @@ public class MainBuilder extends AbstractMainBuilder
     protected void initCommands()
     {
         super.initCommands();
-        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMAND_ID_OPENUST, MainModel.CARDS_UST ), false );
-        initCommand( new OpenCommand( getCommandManager(), model, Commands.COMMAND_ID_OPENEXAM, MainModel.CARDS_EXAM ), false );
+        initCommand( new OpenCommand( getCommandManager(), model, COMMAND_ID_OPENUST, CARDS_UST ), false );
+        initCommand( new OpenCommand( getCommandManager(), model, COMMAND_ID_OPENEXAM, CARDS_EXAM ), false );
         initCommand( new CloseCommand( getCommandManager(), model ), true );
         initCommand( new ExportCommand( getCommandManager() ), true );
+        initCommand( new ImportCommand( getCommandManager() ), true );
         initCommand( new QuitCommand( getCommandManager(), model ), true );
     }
 
@@ -136,7 +145,7 @@ public class MainBuilder extends AbstractMainBuilder
             rootWindow = DockingUtil.createRootWindow( views, true );
             DockingWindowsUtils.setBasicRootWindowProps( rootWindow );
             DockingWindowsUtils.configureProperties( rootWindow, false, false, false, false, false, false );
-            getCards().add( MainModel.CARDS_UST, rootWindow );
+            getCards().add( CARDS_UST, rootWindow );
 
             views = new ViewMap();
             views.addView( 0, new View( Strings.getString( "examinfo.title" ), null, wrapPanel( examInfoBuilder.getPanel() ) ) );
@@ -148,7 +157,7 @@ public class MainBuilder extends AbstractMainBuilder
             rootWindow = DockingUtil.createRootWindow( views, true );
             DockingWindowsUtils.setBasicRootWindowProps( rootWindow );
             DockingWindowsUtils.configureProperties( rootWindow, false, false, false, false, false, false );
-            getCards().add( MainModel.CARDS_EXAM, rootWindow );
+            getCards().add( CARDS_EXAM, rootWindow );
         }
         catch ( Exception e )
         {
@@ -158,12 +167,12 @@ public class MainBuilder extends AbstractMainBuilder
 
     protected JMenuBar getMenuBar()
     {
-        return getCommandManager().getGroup( Commands.GROUP_ID_MENU ).createMenuBar();
+        return getCommandManager().getGroup( GROUP_ID_MENU ).createMenuBar();
     }
 
     private static JComponent wrapPanel( final JComponent panel )
     {
-        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX2, Sizes.DLUX4, Sizes.DLUX4, Sizes.DLUX4 ) );
+        panel.setBorder( Borders.createEmptyBorder( DLUX2, DLUX4, DLUX4, DLUX4 ) );
         return panel;
     }
 
@@ -174,9 +183,9 @@ public class MainBuilder extends AbstractMainBuilder
         System.setProperty( "jfactory.resource.path", "/icon" );
         Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.view.Strings" ) );
         final JFrame f = new JFrame();
-        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        f.setDefaultCloseOperation( EXIT_ON_CLOSE );
         final JComponent panel = new MainBuilder( new MainModel(), new DefaultInfoModel() ).examsBuilder.getPanel();
-        panel.setBorder( Borders.createEmptyBorder( Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8, Sizes.DLUX8 ) );
+        panel.setBorder( Borders.createEmptyBorder( DLUX8, DLUX8, DLUX8, DLUX8 ) );
         f.getContentPane().add( panel );
         f.setSize( 650, 500 );
         f.setVisible( true );

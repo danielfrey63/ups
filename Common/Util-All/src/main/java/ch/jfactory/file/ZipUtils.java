@@ -31,12 +31,13 @@ public class ZipUtils
 
     /**
      * Unzips the given archive into the given directory, reconstructing the directory structure in the zip file. If the
-     * archive file name is null, nothing happens. If the destinatin directory does not exist, it will be created.
+     * archive file name is null, nothing happens. If the destination directory does not exist, it will be created.
      *
      * @param archiveFileName The name of the file to unzip
      * @param destinationDir  The name of the destination directory
+     * @throws IOException see {@link ZipFile#ZipFile(String)} for exception cases
      */
-    public static void unZip( final String archiveFileName, String destinationDir )
+    public static void unZip( final String archiveFileName, String destinationDir ) throws IOException
     {
         // take no action if archive file is null
         if ( archiveFileName == null )
@@ -61,15 +62,8 @@ public class ZipUtils
         }
 
         // open zip and extract
-        try
-        {
-            final ZipFile zip = new ZipFile( archiveFileName );
-            unZip( zip, destinationDir );
-        }
-        catch ( IOException e )
-        {
-            LOG.error( "Error occured while decompressing file " + archiveFileName, e );
-        }
+        final ZipFile zip = new ZipFile( archiveFileName );
+        unZip( zip, destinationDir );
     }
 
     public static void unZip( final ZipFile zip, final String destinationDir )
@@ -279,7 +273,7 @@ public class ZipUtils
         }
     }
 
-    public static void main( final String[] args ) throws ZipException
+    public static void main( final String[] args ) throws IOException
     {
         final File zip = new File( "C:/Dokumente und Einstellungen/Daniel Frey/Desktop/db.jar" );
         unZip( zip.getAbsolutePath(), "C:/Dokumente und Einstellungen/Daniel Frey/Desktop/Temp" );

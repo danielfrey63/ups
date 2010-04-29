@@ -67,6 +67,21 @@
             <text i18n="action.export.longdescription"/>
         </face>
     </command>
+    <command id="import">
+        <face>
+            <text i18n="action.import.text"/>
+            <icon type="icon-factory">createDropShadowIcon(floppy_open.png, #FFFF00)</icon>
+            <selected-icon type="icon-factory">createPressedIcon(floppy_save.png, #FFFF00)</selected-icon>
+            <description i18n="action.import.description"/>
+            <accelerator key="i18n:action.import.accelerator" useDefaultModifier="true"/>
+        </face>
+        <face name="toolbar" extends="[default]">
+            <text/>
+        </face>
+        <face name="label" extends="[default]">
+            <text i18n="action.import.longdescription"/>
+        </face>
+    </command>
     <command id="close">
         <face>
             <text i18n="action.close.text"/>

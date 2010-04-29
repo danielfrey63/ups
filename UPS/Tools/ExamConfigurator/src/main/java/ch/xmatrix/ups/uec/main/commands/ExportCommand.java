@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Closes the current card, opens the welcome card, resets the dirty flag and the current file.
+ * Exports the settings to a file of name <code>uec-settings-<yyyyMMddHHmmss></code>.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:15 $
@@ -41,7 +41,10 @@ public class ExportCommand extends ActionCommand
     /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( ExportCommand.class );
 
-    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat( "yyyyMMddHHmmss" );
+    /** The format to use for the export file name. */
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat( "yyyyMMddHHmmss" );
+
+    private File exportDirectory;
 
     public ExportCommand( final CommandManager commandManager )
     {
@@ -52,29 +55,29 @@ public class ExportCommand extends ActionCommand
     {
         try
         {
-            final String prefsNode = Application.getConfiguration().getPreferencesRootName();
-            final String prefsPath = ( System.getProperty( "user.home" ) + "/." + prefsNode ).replace( "\\", "/" );
-            final File prefsFile = new File( prefsPath + "/" + UploadDialog.FILE_DATA );
+            final File settingsDirectory = getSettingsDirectory();
             final String feedback;
-            if ( prefsFile.exists() )
+            if ( settingsDirectory.exists() )
             {
-                final File dir = DirectoryChooser.chooseDirectory( null );
-                if ( dir != null )
+                if ( exportDirectory == null )
                 {
-                    final File backupFile = new File( dir + "/uec-settings-" + FORMATTER.format( new Date() ) + ".zip" );
-
-                    ZipUtils.zipDirectory( prefsFile, backupFile );
-                    LOG.info( "exported existing settings to " + backupFile );
-                    feedback = "Exported to " + backupFile;
+                    exportDirectory = DirectoryChooser.chooseDirectory( null );
+                }
+                if ( exportDirectory != null )
+                {
+                    final File backupFile = new File( exportDirectory + "/uec-settings-" + FORMAT.format( new Date() ) + ".zip" );
+                    ZipUtils.zipDirectory( settingsDirectory, backupFile );
+                    feedback = "exported settings to " + backupFile;
                 }
                 else
                 {
                     feedback = "User canceled export";
                 }
+                LOG.info( feedback );
             }
             else
             {
-                feedback = prefsFile + " does not exist";
+                feedback = settingsDirectory + " does not exist";
                 LOG.warn( feedback );
             }
             JOptionPane.showMessageDialog( null, feedback );
@@ -83,5 +86,17 @@ public class ExportCommand extends ActionCommand
         {
             LOG.error( e.getMessage(), e );
         }
+    }
+
+    private File getSettingsDirectory()
+    {
+        final String preferencesNode = Application.getConfiguration().getPreferencesRootName();
+        final String preferencesPath = ( System.getProperty( "user.home" ) + "/." + preferencesNode ).replace( "\\", "/" );
+        return new File( preferencesPath + "/" + UploadDialog.FILE_DATA );
+    }
+
+    public void setExportDirectory( final File directory )
+    {
+        this.exportDirectory = directory;
     }
 }

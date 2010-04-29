@@ -9,11 +9,6 @@
     <groupId>ch.xmatrix.ups.data</groupId>
     <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
     <name>Data Exam Sessions</name>
-    <version>1.0.727</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Pr�fungsinformationen</description>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.data.sessions-1.0.727</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.data.sessions-1.0.727</url>
-  </scm>
 </project>

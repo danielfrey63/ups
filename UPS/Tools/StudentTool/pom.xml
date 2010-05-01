@@ -10,7 +10,7 @@
     <groupId>ch.xmatrix.ups.tools</groupId>
     <artifactId>ch.xmatrix.ups.tools.ust</artifactId>
     <name>UPS Studenten-Tool</name>
-    <version>3.0.840</version>
+    <version>3.0-SNAPSHOT</version>
     <description>Mit dem UPS Studenten-Tool können individuelle Pflanzenlisten erstellt werden. Das Werkzeug stellt die
         Vorgaben bezüglich der Wahl von Pflanzen dar und zeigt deren Erfüllungsgrad in einer Statistik an.
     </description>
@@ -172,9 +172,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.tools.ust-3.0.840</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.tools.ust-3.0.840</url>
-  </scm>
 </project>

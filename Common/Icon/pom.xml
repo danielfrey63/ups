@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.common</groupId>
     <artifactId>ch.xmatrix.common.icon</artifactId>
-    <version>1.4.823</version>
+    <version>1.4-SNAPSHOT</version>
     <name>JFactory Icons</name>
     <build>
         <resources>
@@ -22,9 +22,4 @@
             </resource>
         </resources>
     </build>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.icon-1.4.823</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.common.icon-1.4.823</url>
-  </scm>
 </project>

@@ -1,12 +1,10 @@
 #!/bin/perl
 
-# TODO: Check for transitive dependencies to derive order correctly
-# TODO: Add module interdependecy order
+# Checks for transitive dependencies to derive order correctly
+# The release version is in sync with the revision
+# Release-script artifact moved to target directory
+# Removed duplicates in a reactor build
 # TODO: Move release stuff to branch
-# TODO: Make sure the release version is in sync with the revision
-# TODO: Correct paths for keystore and JNLP template in checkout build
-# TODO: Move release-script artifact to target directory
-# TODO: Remove duplicates in a reactor build
 
 #use strict;
 use warnings;
@@ -20,9 +18,21 @@ $repository = "https://svn.id.ethz.ch/ups";
 $pwd = `pwd`;
 chomp ($pwd);
 
+# Simulate SVN and MVN results by loading them from a previous build
 $dev = 0;
+
+# Print debug messages
 $debug = 1;
+
+# Print trace messages
 $trace = 0;
+
+# Make a release of the main module although no changes can be detected
+$force = 1;
+
+# Accept automatically default values for release params.
+$silent = 1;
+
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
 $reloadAllPomLocations = 0;
@@ -35,6 +45,9 @@ print ($trace == 1 ? "  TRACE is on\n" : "  TRACE is off\n");
 checkForWorkingDirectoryOrQuit(".");
 checkForUpdateOrQuit(".");
 checkForReleaseScriptDirectoryOrQuit();
+
+$thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
+print {  "Release script running for $thisArtifact\n"};
 
 persistTags();
 %tags = getYoungestTags();
@@ -273,7 +286,7 @@ foreach (sort { $a <=> $b } keys (%orders)) {
             }
         }
     }
-    if (!$taggedRevision || $validRevision) {
+    if (!$taggedRevision || $validRevision || $force) {
         $debug and !$taggedRevision and print "    [DEBUG] No tag found\n";
         $artifactsToReleaseDueToChanges{$artifact} = 1;
         my $x = $versions{$artifact};
@@ -296,12 +309,16 @@ for my $artifact ( keys %artifactsToReleaseDueToChanges ) {
     $trace and print "    [TRACE] current revision is $currentVersion\n";
     my $major = getMajorSnapshot($currentVersion);
     my $minor = getMinorSnapshot($currentVersion);
-    print "  What version do you want for artifact $artifact\n";
-    print "    1) Keeping version $currentVersion\n";
-    print "    2) Increment minor $minor\n";
-    print "    3) Increment major $major\n";
-    print "    Which version would you like? [1] ";
-    chomp (my $in = <STDIN>);
+    my $in = "1";
+    if (!$silent)
+    {
+        print "  What version do you want for artifact $artifact\n";
+        print "    1) Keeping version $currentVersion\n";
+        print "    2) Increment minor $minor\n";
+        print "    3) Increment major $major\n";
+        print "    Which version would you like? [1] ";
+        chomp ($in = <STDIN>);
+    }
     my $newDevVersion = ($in eq "3") ? $major : ($in eq "2") ? $minor : $currentVersion;
     $newDevVersions{$artifact} = $newDevVersion;
     print "    Setting $newDevVersion\n";

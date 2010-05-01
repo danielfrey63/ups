@@ -47,7 +47,7 @@ checkForUpdateOrQuit(".");
 checkForReleaseScriptDirectoryOrQuit();
 
 $thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
-print {  "Release script running for $thisArtifact\n"};
+print ("Release script running for $thisArtifact\n");
 
 persistTags();
 %tags = getYoungestTags();

@@ -2,7 +2,6 @@ package ch.jfactory.xstream;
 
 import ch.jfactory.convert.Converter;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.converters.extended.ISO8601DateConverter;
 import com.thoughtworks.xstream.converters.extended.SqlTimestampConverter;
 import java.io.Reader;
@@ -36,10 +35,12 @@ public class XStreamConverter<T> implements Converter<T>
     public XStreamConverter( final Map<String, Class> aliases, final Map<Class, String> implicitCollections,
                              final Map<Class, String> omits, final Map<String, NamedAlias> aliasesWithNames )
     {
-        xstream.registerConverter( new ISO8601DateConverter() );
         xstream.registerConverter( new SqlTimestampConverter() );
-        xstream.registerConverter( new DateConverter( "yyyyMMddHHmmssSSS", new String[]{
-                "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm"} ) );
+        xstream.registerConverter( new ValidatingDateConverter(
+                "yyyyMMddHHmmssSSS", "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm",
+                "yyyy-MM-dd HH:mm:ss.S z", "yyyy-MM-dd HH:mm:ss.S a",
+                "yyyy-MM-dd HH:mm:ssz", "yyyy-MM-dd HH:mm:ss z", // JDK 1.3 needs both versions
+                "yyyy-MM-dd HH:mm:ssa") );
         xstream.setMode( XStream.ID_REFERENCES );
         for ( final String alias : aliases.keySet() )
         {
@@ -71,8 +72,10 @@ public class XStreamConverter<T> implements Converter<T>
         return xstream.toXML( object );
     }
 
-    public static class NamedAlias {
+    public static class NamedAlias
+    {
         private final Class clazz;
+
         private final String name;
 
         public NamedAlias( final Class clazz, final String name )

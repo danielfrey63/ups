@@ -9,9 +9,8 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-package ch.jfactory.model;
+package ch.jfactory.xml;
 
-import ch.jfactory.xstream.DomDriver;
 import java.io.IOException;
 import java.io.InputStream;
 import org.xml.sax.EntityResolver;
@@ -54,7 +53,7 @@ public class ClassPathEntityResolver implements EntityResolver
         final InputSource source;
         if ( resource != null )
         {
-            final InputStream stream = DomDriver.class.getResourceAsStream( resource );
+            final InputStream stream = ClassPathEntityResolver.class.getResourceAsStream( resource );
             source = new InputSource( stream );
             source.setEncoding( encoding );
         }

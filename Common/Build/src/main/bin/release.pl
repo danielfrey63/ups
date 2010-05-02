@@ -47,7 +47,7 @@ checkForUpdateOrQuit(".");
 checkForReleaseScriptDirectoryOrQuit();
 
 $thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
-print ("Release script running for $thisArtifact\n");
+print ("\nRelease script running for\n  $thisArtifact\n");
 
 persistTags();
 %tags = getYoungestTags();
@@ -286,7 +286,7 @@ foreach (sort { $a <=> $b } keys (%orders)) {
             }
         }
     }
-    if (!$taggedRevision || $validRevision || $force) {
+    if (!$taggedRevision || $validRevision || ($force && $thisArtifact eq $artifact)) {
         $debug and !$taggedRevision and print "    [DEBUG] No tag found\n";
         $artifactsToReleaseDueToChanges{$artifact} = 1;
         my $x = $versions{$artifact};

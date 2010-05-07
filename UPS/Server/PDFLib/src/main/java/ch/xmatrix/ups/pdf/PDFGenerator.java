@@ -16,24 +16,27 @@
  */
 package ch.xmatrix.ups.pdf;
 
+import ch.jfactory.xstream.ValidatingDateConverter;
 import ch.xmatrix.ups.domain.PersonData;
 import ch.xmatrix.ups.domain.PlantList;
-import com.lowagie.text.Chunk;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.Table;
-import com.lowagie.text.pdf.BaseFont;
-import com.lowagie.text.pdf.MultiColumnText;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.MultiColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.converters.extended.SqlTimestampConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.ByteArrayOutputStream;
@@ -41,8 +44,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,8 +53,14 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.itextpdf.text.Element.ALIGN_LEFT;
+import static com.itextpdf.text.Element.ALIGN_RIGHT;
+import static com.itextpdf.text.pdf.PdfWriter.ALLOW_PRINTING;
+import static com.itextpdf.text.pdf.PdfWriter.ENCRYPTION_AES_128;
 
 /**
  * TODO: document
@@ -73,41 +82,36 @@ public class PDFGenerator
 
     public static final String KEY_FAMILYNAME = "familyname";
 
-    /**
-     * The course of the student.
-     */
+    /** The course of the student. */
     public static final String KEY_DEPARTMENT = "department";
 
-    /**
-     * The identification number of the student.
-     */
+    /** The identification number of the student. */
     public static final String KEY_ID = "id";
 
-    /**
-     * Subject field in the generated pdf file.
-     */
+    /** Subject field in the generated pdf file. */
     public static final String KEY_SUBJECT = "subject";
 
-    /**
-     * Author field in the generated pdf file.
-     */
+    /** Author field in the generated pdf file. */
     public static final String KEY_AUTHOR = "author";
 
-    /**
-     * Title field in the generated pdf file.
-     */
+    /** Title field in the generated pdf file. */
     public static final String KEY_TITLE = "title";
 
-    /**
-     * Put here a byte array with the xstream-encoded ArrayList of species strings.
-     */
+    /** Put here a byte array with the xstream-encoded ArrayList of species strings. */
     public static final String KEY_SPECIES = "species";
+
+    private static final byte[] PROTECTION_PASSWORD = "ups".getBytes();
+
+    private static final byte[] USER_PASSWORD = null;
 
     public static byte[] createPdf( final Properties context ) throws DocumentException, IOException
     {
         byte[] byteArray = null;
         try
         {
+            final SimpleDateFormat date = new SimpleDateFormat( "d. MMMM yyyy, HH:mm:ss" );
+            final String timeStamp = date.format( new Date() );
+
             if ( LOG.isDebugEnabled() )
             {
                 final Properties copy = new Properties();
@@ -129,13 +133,32 @@ public class PDFGenerator
             final BaseFont base3 = BaseFont.createFont( base3name, BaseFont.CP1252, BaseFont.EMBEDDED );
 
             final ByteArrayOutputStream result = new ByteArrayOutputStream();
-            final PdfWriter byteWriter = PdfWriter.getInstance( document, result );
-            byteWriter.setEncryption( true, null, null, PdfWriter.AllowPrinting | PdfWriter.AllowDegradedPrinting );
+            final PdfWriter writer = PdfWriter.getInstance( document, result );
+            writer.setEncryption( USER_PASSWORD, PROTECTION_PASSWORD, ALLOW_PRINTING, ENCRYPTION_AES_128 );
 
             final Font font0 = new Font( base1, 10 );
             final Font font1 = new Font( base3, 10 );
             final Font font2 = new Font( base3, 10 );
             final Font font3 = new Font( base1, 8 );
+
+            writer.setPageEvent( new PdfPageEventHelper()
+            {
+                public void onEndPage( final PdfWriter writer, final Document document )
+                {
+                    final PdfContentByte content = writer.getDirectContent();
+                    final int number = document.getPageNumber();
+                    final Phrase page = new Phrase( "Seite " + number, font3 );
+                    final Phrase stamp = new Phrase( timeStamp, font3 );
+                    final float y = document.bottom() - 20;
+                    final boolean even = ( number % 2 ) == 0;
+                    final int inner = even ? ALIGN_RIGHT : ALIGN_LEFT;
+                    final int outer = even ? ALIGN_LEFT : ALIGN_RIGHT;
+                    final float innerAlign = even ? document.right() : document.left();
+                    final float outerAlign = even ? document.left() : document.right();
+                    ColumnText.showTextAligned( content, inner, stamp, innerAlign, y, 0 );
+                    ColumnText.showTextAligned( content, outer, page, outerAlign, y, 0 );
+                }
+            } );
 
             document.addAuthor( context.getProperty( KEY_AUTHOR ) );
             document.addSubject( context.getProperty( KEY_SUBJECT ) );
@@ -152,21 +175,21 @@ public class PDFGenerator
             document.add( Chunk.NEWLINE );
             document.add( new Paragraph( " " ) );
 
-            final Table table = new Table( 2, 5 );
-            table.setBorder( Rectangle.NO_BORDER );
-            table.setDefaultCellBorder( 0 );
-            table.setWidth( 100 );
+            final PdfPTable table = new PdfPTable( 2 );
+            table.setWidthPercentage( 100 );
+            table.getDefaultCell().setBorder( Rectangle.NO_BORDER );
+            table.getDefaultCell().setPadding( 0 );
 
             table.addCell( new Phrase( "Einreich-Datum und -Zeit: ", font1 ) );
-            final SimpleDateFormat date = new SimpleDateFormat( "d. MMMM yyyy, HH:mm:ss" );
-            table.addCell( new Paragraph( date.format( new Date() ), font2 ) );
+            table.addCell( new Paragraph( timeStamp, font2 ) );
             table.addCell( new Paragraph( bundle.getString( "pdfgeneration.firstname" ), font1 ) );
             table.addCell( new Paragraph( context.getProperty( KEY_FIRSTNAME ), font2 ) );
             table.addCell( new Paragraph( bundle.getString( "pdfgeneration.lastname" ), font1 ) );
             table.addCell( new Paragraph( context.getProperty( KEY_FAMILYNAME ), font2 ) );
             table.addCell( new Paragraph( bundle.getString( "pdfgeneration.id" ), font1 ) );
             final String id = context.getProperty( KEY_ID );
-            table.addCell( new Paragraph( id.substring( 0, 2 ) + "-" + id.substring( 2, 5 ) + "-" + id.substring( 5 ), font2 ) );
+            final String idString = id != null && id.length() > 5 ? id.substring( 0, 2 ) + "-" + id.substring( 2, 5 ) + "-" + id.substring( 5 ) : "missing";
+            table.addCell( new Paragraph( idString, font2 ) );
             table.addCell( new Paragraph( bundle.getString( "pdfgeneration.field" ), font1 ) );
             table.addCell( new Paragraph( context.getProperty( KEY_DEPARTMENT ), font2 ) );
 
@@ -230,47 +253,22 @@ public class PDFGenerator
         converter = new XStream( new DomDriver() );
         converter.setMode( XStream.ID_REFERENCES );
         converter.registerConverter( new SqlTimestampConverter() );
-        converter.registerConverter( new DateConverter( "yyyyMMddHHmmssSSS", new String[]{"d.M.yyyy HH:mm", "yyyyMMddHHmm"} ) );
+        converter.registerConverter( new ValidatingDateConverter( "yyyyMMddHHmmssSSS", "d.M.yyyy HH:mm", "yyyyMMddHHmm" ) );
         converter.alias( "person", PersonData.class );
         converter.alias( "root", PlantList.class );
 
-        final FileInputStream reader = new FileInputStream( "E:/Daten/Prüfungen/Prüfungen 2005 Herbst/Zwischenprüfung/00-907-071.xust" );
-        final InputStreamReader streamReader = new InputStreamReader( reader, "UTF-8" );
-        final PlantList plantList = (PlantList) converter.fromXML( streamReader );
-        reader.close();
+        final FileInputStream inputStream = new FileInputStream( "daniel.xust" );
+        final InputStreamReader streamReader = new InputStreamReader( inputStream, "UTF-8" );
+        final StringWriter stringWriter = new StringWriter();
+        IOUtils.copy( streamReader, stringWriter );
+        context.put( PDFGenerator.KEY_SPECIES, stringWriter.toString().getBytes() );
+        inputStream.close();
         streamReader.close();
+        stringWriter.close();
 
-        final XStream w = new XStream();
-        final String s = w.toXML( plantList.getTaxa() );
-
-        context.put( PDFGenerator.KEY_SPECIES, s.getBytes() );
-        final byte[] pdf = PDFGenerator.createPdf( context );
-        final FileOutputStream out = new FileOutputStream( "C:/test2.pdf" );
-        out.write( pdf );
+        final FileOutputStream out = new FileOutputStream( "confirmation.pdf" );
+        out.write( PDFGenerator.createPdf( context ) );
         out.close();
-
-        final Document doc = new Document( PageSize.A4 );
-        final OutputStream stream1 = new FileOutputStream( "C:/Temp/Test1.pdf" );
-        final PdfWriter writer1 = PdfWriter.getInstance( doc, stream1 );
-        final ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-        final PdfWriter writer2 = PdfWriter.getInstance( doc, stream2 );
-        doc.open();
-        doc.add( new Paragraph( "Hallo" ) );
-        final MultiColumnText cols = new MultiColumnText();
-        cols.addRegularColumns( doc.left(), doc.right(), 10f, 3 );
-        for ( int i = 0; i < 100; i++ )
-        {
-            cols.addElement( new Paragraph( "Hallo" ) );
-        }
-        doc.add( cols );
-        doc.add( new Paragraph( " " ) );
-        final FileOutputStream fileStream = new FileOutputStream( "C:/Temp/Test2.pdf" );
-        fileStream.write( stream2.toByteArray() );
-        fileStream.close();
-        doc.close();
-        stream1.close();
-        stream2.close();
-        writer1.close();
-        writer2.close();
     }
+
 }

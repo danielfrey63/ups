@@ -12,10 +12,9 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.log4j.Logger;
 
 /*
- * A custom socket factory used to override the default socket factory.
- * It prints out debugging information before using default Socket creation
- * methods. This class is required as we don't want to deal with
- * SSL-Certificate of LDAP-Servier's
+ * A custom socket factory used to override the default socket factory. It prints out debugging information before
+ * using default Socket creation methods. This class is required as we don't want to deal with SSL-Certificate of
+ * LDAP servers
  */
 public class CustomSocketFactory extends SocketFactory
 {
@@ -25,7 +24,7 @@ public class CustomSocketFactory extends SocketFactory
 
     public CustomSocketFactory()
     {
-        log.debug( "[creating a custom socket factory]" );
+        log.debug( "creating a custom socket factory" );
         final TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager()
                 {
@@ -53,40 +52,40 @@ public class CustomSocketFactory extends SocketFactory
         }
         catch ( Exception e )
         {
-            log.error( "Error getting SSLContext.instance", e );
+            log.error( "error getting SSLContext.instance", e );
         }
     }
 
     public static SocketFactory getDefault()
     {
-        log.debug( "[acquiring the default socket factory]" );
+        log.debug( "acquiring the default socket factory" );
         return new CustomSocketFactory();
     }
 
     public Socket createSocket( final String host, final int port )
             throws IOException
     {
-        log.debug( "[creating a custom socket (method 1)]" );
+        log.debug( "creating a custom socket (method 1)" );
         return sc.getSocketFactory().createSocket( host, port );
     }
 
     public Socket createSocket( final String host, final int port, final InetAddress localHost,
                                 final int localPort ) throws IOException
     {
-        log.debug( "[creating a custom socket (method 2)]" );
+        log.debug( "creating a custom socket (method 2)" );
         return sc.getSocketFactory().createSocket( host, port, localHost, localPort );
     }
 
     public Socket createSocket( final InetAddress host, final int port ) throws IOException
     {
-        log.debug( "[creating a custom socket (method 3)]" );
+        log.debug( "creating a custom socket (method 3)" );
         return sc.getSocketFactory().createSocket( host, port );
     }
 
     public Socket createSocket( final InetAddress address, final int port,
                                 final InetAddress localAddress, final int localPort ) throws IOException
     {
-        log.debug( "[creating a custom socket (method 4)]" );
+        log.debug( "creating a custom socket (method 4)" );
         return sc.getSocketFactory().createSocket( address, port, localAddress, localPort );
     }
 }

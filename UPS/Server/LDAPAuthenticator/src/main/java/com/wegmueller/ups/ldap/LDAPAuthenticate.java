@@ -1,6 +1,7 @@
 package com.wegmueller.ups.ldap;
 
 import com.wegmueller.ups.ldap.util.CustomSocketFactory;
+import java.security.Security;
 import java.util.Hashtable;
 import java.util.Map;
 import javax.naming.AuthenticationException;
@@ -13,21 +14,27 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import org.apache.log4j.Logger;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
- * Module for Authenticating to ETH Zürich's LDAP-Servers
+ * Module for Authenticating to ETH Zürich's LDAP-Servers.
  *
- * Only possible Method is getUserData which has two possible outcomes:
+ * Method getUserData has two outcomes:
  *
- * 1.) Everything was fine --> a <see>UserData</see>-Object is returned 2.) There was an Error --> a
- * <see>AuthException</see> is thrown
+ * <ol>
  *
- * NOTE: if the user can authenticate, but there is an error in retrieving the User's Data from LDAP, a UserData-Object
+ * <li>Everything was fine --> a <see>UserData</see>-Object is returned</li>
+ *
+ * <li>There was an Error --> a <see>AuthException</see> is thrown</li>
+ *
+ * </ol>
+ *
+ * NOTE: if the user can authenticate, but there is an error in retrieving the user's data from LDAP, a UserData-Object
  * with no attributes is returned
  */
 public class LDAPAuthenticate implements ILDAPAuth
 {
-    private static final Logger log = Logger.getLogger( LDAPAuthenticate.class );
+    private static final Logger LOG = Logger.getLogger( LDAPAuthenticate.class );
 
     public static String[] DEFAULT_HOSTS = {
             "ldaps01.ethz.ch",
@@ -59,6 +66,7 @@ public class LDAPAuthenticate implements ILDAPAuth
 
     public static void main( final String[] args ) throws LDAPAuthException
     {
+        Security.addProvider( new BouncyCastleProvider() );
         final LDAPAuthenticate d = new LDAPAuthenticate();
         final ILDAPUserRecord rec = d.getUserData( "dfrey", "leni1234" );
         final Map att = rec.getAttributes();
@@ -78,9 +86,9 @@ public class LDAPAuthenticate implements ILDAPAuth
     {
         LDAPAuthException lastException = null;
         Throwable lastThrowable = null;
-        if ( log.isDebugEnabled() )
+        if ( LOG.isDebugEnabled() )
         {
-            log.debug( "Trying to get userData for " + userName );
+            LOG.debug( "Trying to get userData for " + userName );
         }
         for ( final String host : HOSTS )
         {
@@ -90,9 +98,9 @@ public class LDAPAuthenticate implements ILDAPAuth
             }
             catch ( LDAPAuthException e )
             {
-                if ( log.isDebugEnabled() )
+                if ( LOG.isDebugEnabled() )
                 {
-                    log.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
+                    LOG.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
                 }
                 if ( e.getName().equals( LDAPAuthException.INVALID_CREDENTIALS ) )
                 {
@@ -102,14 +110,14 @@ public class LDAPAuthenticate implements ILDAPAuth
             }
             catch ( Throwable e )
             {
-                if ( log.isDebugEnabled() )
+                if ( LOG.isDebugEnabled() )
                 {
-                    log.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
+                    LOG.debug( "LDAPAuthenticate.getUserDetails(...) failed for " + host, e );
                 }
                 lastThrowable = e;
             }
         }
-        log.error( "No host can answer the question" );
+        LOG.error( "No host can answer the question" );
         if ( lastException != null )
         {
             throw lastException;
@@ -118,38 +126,38 @@ public class LDAPAuthenticate implements ILDAPAuth
         {
             throw new LDAPAuthException( lastThrowable );
         }
-        throw new LDAPAuthException( "Unknown reason Exception" );
+        throw new LDAPAuthException( "unknown reason exception" );
     }
 
     public static LDAPUserRecord getUserDetails( final String host, final String userName ) throws LDAPAuthException
     {
-        if ( log.isDebugEnabled() )
+        if ( LOG.isDebugEnabled() )
         {
-            log.debug( "trying LDAP host " + host + " for " + userName );
+            LOG.debug( "trying LDAP host " + host + " for " + userName );
         }
         DirContext dirctx = null;
         try
         {
             dirctx = getContext( host );
-            if ( log.isDebugEnabled() )
+            if ( LOG.isDebugEnabled() )
             {
-                log.debug( "context successfully created" );
+                LOG.debug( "context successfully created" );
             }
             final LDAPUserRecord list = new LDAPUserRecord( userName );
             try
             {
                 final String filter = UID_SEARCH_STRING + userName;
-                if ( log.isDebugEnabled() )
+                if ( LOG.isDebugEnabled() )
                 {
-                    log.debug( "search with base: \"" + BASEDN + "\", filter: \"" + filter + "\", controls: \"" + SEARCH_CONTROLS + "\"" );
+                    LOG.debug( "search with base: \"" + BASEDN + "\", filter: \"" + filter + "\", controls: \"" + SEARCH_CONTROLS + "\"" );
                 }
                 final NamingEnumeration<SearchResult> m = dirctx.search( BASEDN, filter, SEARCH_CONTROLS );
                 while ( m.hasMore() )
                 {
                     final SearchResult res = m.next();
-                    if ( log.isDebugEnabled() )
+                    if ( LOG.isDebugEnabled() )
                     {
-                        log.debug( "search result: \"" + res + "\"" );
+                        LOG.debug( "search result: \"" + res + "\"" );
                     }
                     final NamingEnumeration<? extends Attribute> en = res.getAttributes().getAll();
                     while ( en.hasMore() )
@@ -164,14 +172,14 @@ public class LDAPAuthenticate implements ILDAPAuth
                         }
                     }
                 }
-                if ( log.isDebugEnabled() )
+                if ( LOG.isDebugEnabled() )
                 {
-                    log.debug( "search finished" );
+                    LOG.debug( "search finished" );
                 }
             }
             catch ( Throwable e )
             {
-                log.error( "Authentication was successful, but an error occured retrieving the data of the user: " + userName );
+                LOG.error( "authentication was successful, but an error occured retrieving the data of the user: " + userName );
             }
             return list;
         }
@@ -193,7 +201,7 @@ public class LDAPAuthenticate implements ILDAPAuth
                 }
                 catch ( NamingException e )
                 {
-                    log.warn( "could not close context" );
+                    LOG.warn( "could not close context" );
                 }
             }
         }

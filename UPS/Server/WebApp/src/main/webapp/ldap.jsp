@@ -1,5 +1,8 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.wegmueller.ups.ldap.ILDAPUserRecord" %>
+<%@ page import="com.wegmueller.ups.ldap.LDAPAuthenticate" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head><title>LDAP Query</title></head>
@@ -7,9 +10,6 @@
 <%
     final PrintWriter writer = response.getWriter();
     final String user = getParameter( request, "user", "dfrey" );
-    final String pass = getParameter( request, "pw", "d178.ftx.3xf.w2e" );
-    final String bind = getParameter( request, "bind", "cn=upsserver4_proxy,ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch" );
-    final String base = getParameter( request, "base", "ou=admins,ou=nethz,ou=id,ou=auth,o=ethz,c=ch" );
     final String host = getParameter( request, "server", "ldaps01.ethz.ch" );
     try
     {
@@ -17,9 +17,9 @@
         final Map att = rec.getAttributes();
         writer.write( "<h2>LDAP Response</h2>" );
         writer.write( "<table>" );
-        for ( final Object o : att.keySet() )
+        for ( final Iterator iterator = att.keySet().iterator(); iterator.hasNext(); )
         {
-            final String key = (String) o;
+            final String key = (String) iterator.next();
             writer.write( "<tr><td>" );
             writer.write( key );
             writer.write( "</td><td>" );

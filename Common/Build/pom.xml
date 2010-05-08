@@ -436,6 +436,11 @@
                 <version>1.77-SNAPSHOT</version>
             </dependency>
             <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>3.1.14</version>
+            </dependency>
+            <dependency>
                 <groupId>org.garret</groupId>
                 <artifactId>org.garret.perst</artifactId>
                 <version>410</version>

@@ -1,12 +1,9 @@
 package com.wegmueller.ups.lka.data;
 
-import SoapLKAData.WsPruefungssession;
+import ch.ethz.id.bi.soaplka.web.soap.data.xsd.WsPruefungssession;
 import com.wegmueller.ups.lka.IPruefungsSession;
 import java.util.Calendar;
 
-/**
- * Created by: Thomas Wegmueller Date: 20.09.2005,  12:40:04
- */
 public class LKAPruefungssession implements IPruefungsSession
 {
     private final String sessionsname;

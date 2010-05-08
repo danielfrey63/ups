@@ -1,8 +1,8 @@
 package com.wegmueller.ups.lka;
 
-import SoapLKAData.WsAnmeldedaten;
-import SoapLKAService.WsSoapLKA;
-import SoapLKAService.WsSoapLKAServiceLocator;
+import ch.ethz.id.bi.soaplka.web.soap.data.xsd.WsAnmeldedaten;
+import ch.ethz.id.bi.soaplka.web.soap.service.LkaLocator;
+import ch.ethz.id.bi.soaplka.web.soap.service.LkaPortType;
 import com.wegmueller.ups.lka.data.LKAAnmeldedaten;
 import com.wegmueller.ups.lka.data.LKAData;
 import com.wegmueller.ups.lka.data.LKAPruefungssession;
@@ -12,15 +12,14 @@ import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 import org.apache.log4j.Logger;
 
-/**
- * Created by: Thomas Wegmueller Date: 08.09.2005,  12:38:05
- */
+/** Created by: Thomas Wegmueller Date: 08.09.2005,  12:38:05 */
 public class LKABusinessDelegate implements ILKABusinessDelegate
 {
     private static final Logger log = Logger.getLogger( LKABusinessDelegate.class );
 
-    //private static String SOAP_URL = "http://zo-bi-webtst1.ethz.ch:8080/soaplkanmeldung/services/LKA";
-    public static final String SOAP_URL = "https://www.bi.id.ethz.ch/lka/v-1-0/services/v-1-0";
+//    public static final String SOAP_URL = "https://www.bi.id.ethz.ch/lka/v-1-0/services/v-1-0";
+
+    public static final String SOAP_URL = "https://www.bi.id.ethz.ch/soapLka-2010-1";
 
     public ILKAData reload( final String username, final String password ) throws LKABusinessDelegateException
     {
@@ -32,8 +31,8 @@ public class LKABusinessDelegate implements ILKABusinessDelegate
             }
 
             final String property = "username=" + username + ";password=" + password + ";simulation=false";
-            final WsSoapLKAServiceLocator serviceLocator = new WsSoapLKAServiceLocator();
-            final WsSoapLKA s = serviceLocator.getV10( new URL( SOAP_URL ) );
+            final LkaLocator serviceLocator = new LkaLocator();
+            final LkaPortType s = serviceLocator.getlkaSOAP12port_http( new URL( SOAP_URL ) );
 
             final LKAPruefungssession ses = new LKAPruefungssession( s.retrieveAktuellePruefungssession( property ) );
 

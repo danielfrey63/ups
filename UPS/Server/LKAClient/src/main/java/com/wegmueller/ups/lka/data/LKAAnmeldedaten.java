@@ -1,14 +1,12 @@
 package com.wegmueller.ups.lka.data;
 
-import SoapLKAData.WsAnmeldedaten;
+import ch.ethz.id.bi.soaplka.web.soap.data.xsd.WsAnmeldedaten;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.util.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by: Thomas Wegmueller Date: 20.09.2005,  12:45:45
- */
+/** Created by: Thomas Wegmueller Date: 20.09.2005,  12:45:45 */
 public class LKAAnmeldedaten implements IAnmeldedaten
 {
     private static final Logger LOG = LoggerFactory.getLogger( LKAAnmeldedaten.class );
@@ -62,7 +60,7 @@ public class LKAAnmeldedaten implements IAnmeldedaten
         setFachrichtung( orig.getFachrichtung() );
         setStudentennummer( orig.getStudentennummer() );
         setVorname( orig.getVorname() );
-        setRepetent( orig.isRepetent() );
+        setRepetent( orig.getRepetent() );
         setLkEinheitTitel( orig.getLkEinheitTitel() );
         setLkEinheitTyp( orig.getLkEinheitTyp() );
         setPruefungsraum( orig.getPruefungsraum() );

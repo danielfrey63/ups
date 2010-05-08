@@ -38,4 +38,25 @@
             <artifactId>log4j</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>axistools-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <urls>
+                        <url>https://www.lb-prodtest.ethz.ch/soapLka-2010-1/services/lka?wsdl</url>
+                    </urls>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

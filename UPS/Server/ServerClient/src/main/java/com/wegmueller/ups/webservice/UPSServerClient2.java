@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import javax.xml.rpc.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to call the UPS Server remotly
@@ -23,19 +25,21 @@ import javax.xml.rpc.ServiceException;
  */
 public class UPSServerClient2 implements IUPSWebService
 {
+    /** This class logger. */
+    private static final Logger LOG = LoggerFactory.getLogger( UPSServerClient2.class );
+
     private final UPSWebService2 webService;
 
-    private final XStream x;
+    private final XStream xstream = new XStream();
+
+    private static final String UPS_WEB_SERVICE = "ch.xmatrix.ups.webservice";
 
     public UPSServerClient2() throws ServiceException, MalformedURLException
     {
         final UPSWebService2ServiceLocator l = new UPSWebService2ServiceLocator();
-//        webService = l.getUPSWebService2(new URL("http://balti.ethz.ch:8080/upsserver4/UPSWebService2.jws"));
-        final String ws = System.getProperty( "ch.xmatrix.ups.webservice", "http://balti.ethz.ch:8080/upsserver4/UPSWebService2.jws" );
-//        final String ws = "http://localhost:8080/UPSWebService2.jws";
+        final String ws = System.getProperty( UPS_WEB_SERVICE, "http://balti.ethz.ch:8080/upsserver4/UPSWebService2.jws" );
+        LOG.info( "using web service at " + ws );
         webService = l.getUPSWebService2( new URL( ws ) );
-//        webService = l.getUPSWebService2();
-        x = new XStream();
     }
 
     public Boolean isClientVersionOk( final String application, final String version ) throws UPSServerException, RemoteException
@@ -139,11 +143,11 @@ public class UPSServerClient2 implements IUPSWebService
         args[0] = s;
         for ( int i = 1; i < args.length; i++ )
         {
-            args[i] = x.toXML( s1[i - 1] );
+            args[i] = xstream.toXML( s1[i - 1] );
         }
         final String r = webService.invoke( args );
         //System.out.println(r);
-        final Object result = x.fromXML( r );
+        final Object result = xstream.fromXML( r );
         if ( result instanceof Throwable )
         {
             final Throwable t = (Throwable) result;

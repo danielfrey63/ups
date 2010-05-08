@@ -24,9 +24,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- * The implementation of the Storage System for the User's Data
- */
+/** The implementation of the Storage System for the User's Data */
 public class StorageSystem implements IStorage
 {
     private Session session;
@@ -139,7 +137,7 @@ public class StorageSystem implements IStorage
         }
         final byte[] pruL = getFileBytes( pruefungsListe );
         final byte[] pdfB = getFileBytes( pdfFile );
-        String studiNummer = prop.getProperty( "carLicense", null );
+        String studiNummer = prop.getProperty( "swissEduPersonMatriculationNumber", null );
         if ( studiNummer == null )
         {
             throw new IOException( "Studinummer ist null" );
@@ -156,9 +154,7 @@ public class StorageSystem implements IStorage
             throw new IOException( "studiNummer in wrong format" );
         }
 
-        storePruefungsListe( "2005H", "551-0004-01", uid, studiNummer,
-                pruL,
-                prop, pdfB );
+        storePruefungsListe( "2005H", "551-0004-01", uid, studiNummer, pruL, prop, pdfB );
     }
 
     /**

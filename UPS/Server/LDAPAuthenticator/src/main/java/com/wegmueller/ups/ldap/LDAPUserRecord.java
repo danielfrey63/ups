@@ -5,9 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Author: Thomas Wegmüller Author: Daniel Frey
- */
+/** Author: Thomas Wegmüller Author: Daniel Frey */
 public class LDAPUserRecord implements ILDAPUserRecord
 {
     private static final Logger LOG = LoggerFactory.getLogger( LDAPUserRecord.class );
@@ -36,7 +34,7 @@ public class LDAPUserRecord implements ILDAPUserRecord
 
     public String getStudentenNummer()
     {
-        final Object obj = list.get( KEY_CARLICENSE );
+        final Object obj = list.get( KEY_MATRICULATION_NUMBER );
         if ( obj == null )
         {
             return null;
@@ -52,15 +50,15 @@ public class LDAPUserRecord implements ILDAPUserRecord
             }
             else
             {
-                // my carLicense is entered by hand for test purposes and often hasn't the correct length, so accept it
-                // anyway.
-                LOG.warn( "KEY_CARLICENSE longer than 8 characters, no formatting is applied" );
+                // my swissEduPersonMatriculationNumber is entered by hand for test purposes and often hasn't the
+                // correct length, so accept it anyway.
+                LOG.warn( KEY_MATRICULATION_NUMBER + " longer than 8 characters, no formatting is applied" );
                 return s;
             }
         }
         else
         {
-            LOG.warn( "KEY_CARLICENSE not of type String" );
+            LOG.warn( KEY_MATRICULATION_NUMBER + " not of type String" );
         }
         return null;
     }
@@ -91,7 +89,7 @@ public class LDAPUserRecord implements ILDAPUserRecord
         b.append( "KEY_USERNAME: " ).append( list.getProperty( KEY_USERNAME ) ).append( ", " );
         b.append( "KEY_FIRSTNAME: " ).append( list.getProperty( KEY_FIRSTNAME ) ).append( ", " );
         b.append( "KEY_FAMILYNAME: " ).append( list.getProperty( KEY_FAMILYNAME ) ).append( ", " );
-        b.append( "KEY_CARLICENSE: " ).append( list.getProperty( KEY_CARLICENSE ) ).append( ", " );
+        b.append( "KEY_MATRICULATION_NUMBER: " ).append( list.getProperty( KEY_MATRICULATION_NUMBER ) ).append( ", " );
         b.append( "KEY_DEPARTMENT: " ).append( list.getProperty( KEY_DEPARTMENT ) );
         return b.toString();
     }

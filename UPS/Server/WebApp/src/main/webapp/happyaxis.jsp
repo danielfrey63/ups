@@ -7,6 +7,7 @@
          session="false" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.util.Enumeration" %>
+<%@ page import="javax.servlet.jsp.JspWriter" %>
 <%@ page import="javax.xml.parsers.SAXParser" %>
 <%@ page import="javax.xml.parsers.SAXParserFactory" %>
 <%
@@ -26,7 +27,6 @@
     * limitations under the License.
     */
 %>
-
 <%!
     /*
      * Happiness tests for axis. These look at the classpath and warn if things
@@ -307,8 +307,9 @@
         final Class[] interfaces = clazz.getInterfaces();
         if ( interfaces.length != 0 )
         {
-            for ( final Class anInterface : interfaces )
+            for ( int i = 0, interfacesLength = interfaces.length; i < interfacesLength; i++ )
             {
+                final Class anInterface = interfaces[i];
                 if ( anInterface.getName().equals( interfaceName ) )
                 {
                     return true;

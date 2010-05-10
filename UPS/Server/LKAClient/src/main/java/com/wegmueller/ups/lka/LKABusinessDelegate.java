@@ -15,29 +15,35 @@ import org.apache.log4j.Logger;
 /** Created by: Thomas Wegmueller Date: 08.09.2005,  12:38:05 */
 public class LKABusinessDelegate implements ILKABusinessDelegate
 {
-    private static final Logger log = Logger.getLogger( LKABusinessDelegate.class );
+    private static final Logger LOG = Logger.getLogger( LKABusinessDelegate.class );
 
-//    public static final String SOAP_URL = "https://www.bi.id.ethz.ch/lka/v-1-0/services/v-1-0";
+    public static final String SOAP_URL_PROPERTY = "ch.xmatrix.ups.server.lka.soap.url";
 
-    public static final String SOAP_URL = "https://www.bi.id.ethz.ch/soapLka-2010-1";
+    public static final String SOAP_URL = System.getProperty( SOAP_URL_PROPERTY, "https://www.bi.id.ethz.ch/soapLka-2010-1" );
+//    public static final String SOAP_URL = System.getProperty( SOAP_URL_PROPERTY, "http://ois-prd-red3:7080/soapLka-2010-1" );
+
+    public LKABusinessDelegate()
+    {
+        final String axisSecureFactory = "axis.socketSecureFactory";
+        System.setProperty( axisSecureFactory, "org.apache.axis.components.net.SunFakeTrustSocketFactory" );
+        LOG.info( "using axis socket factory " + System.getProperty( axisSecureFactory ) );
+        LOG.info( "using SOAP URL " + SOAP_URL );
+    }
 
     public ILKAData reload( final String username, final String password ) throws LKABusinessDelegateException
     {
         try
         {
-            if ( log.isDebugEnabled() )
+            if ( LOG.isDebugEnabled() )
             {
-                log.debug( "LKABusinessDelegate.reload(...) for user " + username );
+                LOG.debug( "reload OIS data for user " + username );
             }
 
             final String property = "username=" + username + ";password=" + password + ";simulation=false";
             final LkaLocator serviceLocator = new LkaLocator();
             final LkaPortType s = serviceLocator.getlkaSOAP12port_http( new URL( SOAP_URL ) );
-
             final LKAPruefungssession ses = new LKAPruefungssession( s.retrieveAktuellePruefungssession( property ) );
-
             final WsAnmeldedaten[] a = s.retrieveAnmeldedaten( property, "*" );
-
             final LKAAnmeldedaten[] amd = new LKAAnmeldedaten[a.length];
             for ( int i = 0; i < a.length; i++ )
             {
@@ -45,7 +51,6 @@ public class LKABusinessDelegate implements ILKABusinessDelegate
             }
 
             return new LKAData( ses, amd );
-
         }
         catch ( ServiceException e )
         {

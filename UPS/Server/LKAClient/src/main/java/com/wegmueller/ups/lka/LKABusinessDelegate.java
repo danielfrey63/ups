@@ -19,8 +19,7 @@ public class LKABusinessDelegate implements ILKABusinessDelegate
 
     public static final String SOAP_URL_PROPERTY = "ch.xmatrix.ups.server.lka.soap.url";
 
-    public static final String SOAP_URL = System.getProperty( SOAP_URL_PROPERTY, "https://www.bi.id.ethz.ch/soapLka-2010-1" );
-//    public static final String SOAP_URL = System.getProperty( SOAP_URL_PROPERTY, "http://ois-prd-red3:7080/soapLka-2010-1" );
+    public static final String SOAP_URL = System.getProperty( SOAP_URL_PROPERTY, "https://www.bi.id.ethz.ch/soapLka-2010-1/services/lka" );
 
     public LKABusinessDelegate()
     {
@@ -41,7 +40,7 @@ public class LKABusinessDelegate implements ILKABusinessDelegate
 
             final String property = "username=" + username + ";password=" + password + ";simulation=false";
             final LkaLocator serviceLocator = new LkaLocator();
-            final LkaPortType s = serviceLocator.getlkaSOAP12port_http( new URL( SOAP_URL ) );
+            final LkaPortType s = serviceLocator.getlkaSOAP11port_http( new URL( SOAP_URL ) );
             final LKAPruefungssession ses = new LKAPruefungssession( s.retrieveAktuellePruefungssession( property ) );
             final WsAnmeldedaten[] a = s.retrieveAnmeldedaten( property, "*" );
             final LKAAnmeldedaten[] amd = new LKAAnmeldedaten[a.length];

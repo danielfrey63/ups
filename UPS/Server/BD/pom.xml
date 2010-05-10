@@ -14,17 +14,14 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>2.1.873</version>
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>2.0.884</version>
             <artifactId>ch.xmatrix.ups.server.ldap</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>2.0.894</version>
             <artifactId>ch.xmatrix.ups.server.pdf</artifactId>
         </dependency>
         <dependency>

@@ -227,32 +227,32 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.interface</artifactId>
-                <version>2.1-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.ldap</artifactId>
-                <version>2.0-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.lka</artifactId>
-                <version>2.0-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.pdf</artifactId>
-                <version>2.0-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.storage</artifactId>
-                <version>2.0-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.server</groupId>
                 <artifactId>ch.xmatrix.ups.server.ust</artifactId>
-                <version>2.0-SNAPSHOT</version>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.tools</groupId>

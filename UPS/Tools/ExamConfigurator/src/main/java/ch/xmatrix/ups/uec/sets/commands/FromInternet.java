@@ -27,7 +27,6 @@ import ch.xmatrix.ups.uec.sets.SetBuilder;
 import com.jformdesigner.runtime.FormCreator;
 import com.jformdesigner.runtime.FormLoader;
 import com.wegmueller.ups.UPSServerException;
-import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.webservice.UPSServerClient2;
 import java.awt.Color;
@@ -36,17 +35,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.xml.rpc.ServiceException;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 import org.slf4j.Logger;
@@ -198,67 +192,8 @@ public class FromInternet extends ActionCommand
         }
         catch ( UPSServerException e )
         {
-            final Throwable cause1 = e.getCause();
-            if ( cause1 != null )
-            {
-                final Throwable cause2 = e.getCause();
-                if ( cause2 instanceof InvocationTargetException )
-                {
-                    final InvocationTargetException inner2 = (InvocationTargetException) cause2;
-                    final Throwable cause3 = inner2.getTargetException();
-                    if ( cause3 instanceof LDAPAuthException )
-                    {
-                        LOG.error( "unknown user or password: " + cause2.getMessage(), cause2 );
-                        JOptionPane.showMessageDialog( null, "Name oder Passwort sind unbekannt", "Fehler", JOptionPane.ERROR_MESSAGE );
-                    }
-                    else if ( cause3 instanceof UPSServerException )
-                    {
-                        final UPSServerException inner3 = (UPSServerException) cause3;
-                        if ( UPSServerException.MISSING_DATA.equals( inner3.getName() ) )
-                        {
-                            LOG.warn( "no data for \"" + sessionName + "\" and \"" + courseName + "\"", cause2 );
-                            JOptionPane.showMessageDialog( null, "Keine Daten vorhanden", "Fehler", JOptionPane.ERROR_MESSAGE );
-                        }
-                        else
-                        {
-                            throw new IllegalStateException( e );
-                        }
-                    }
-                    else
-                    {
-                        throw new IllegalStateException( e );
-                    }
-                }
-                else
-                {
-                    throw new IllegalStateException( e );
-                }
-            }
-            else
-            {
-                throw new IllegalStateException( e );
-            }
-        }
-        catch ( MalformedURLException e )
-        {
-            e.printStackTrace();
-        }
-        catch ( RemoteException e )
-        {
-            final Throwable cause = e.getCause();
-            if ( cause instanceof UnknownHostException )
-            {
-                LOG.error( "server not contactable", cause );
-                JOptionPane.showMessageDialog( null, "Der Server konnte nicht erreicht werden", "Fehler", JOptionPane.ERROR_MESSAGE );
-            }
-            else
-            {
-                LOG.error( "unknown remote exception", e );
-            }
-        }
-        catch ( ServiceException e )
-        {
-            e.printStackTrace();
+            LOG.error( e.getLogMessage(), e.getLogThrowable() );
+            JOptionPane.showMessageDialog( null, e.getFeedbackMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
         }
         catch ( Exception e )
         {

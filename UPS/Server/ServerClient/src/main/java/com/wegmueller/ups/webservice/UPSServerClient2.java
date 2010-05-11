@@ -34,60 +34,71 @@ public class UPSServerClient2 implements IUPSWebService
 
     private static final String UPS_WEB_SERVICE = "ch.xmatrix.ups.webservice";
 
-    public UPSServerClient2() throws ServiceException, MalformedURLException
+    public UPSServerClient2() throws UPSServerException
     {
-        final UPSWebService2ServiceLocator l = new UPSWebService2ServiceLocator();
-        final String ws = System.getProperty( UPS_WEB_SERVICE, "http://balti.ethz.ch:8080/upsserver4/UPSWebService2.jws" );
-        LOG.info( "using web service at " + ws );
-        webService = l.getUPSWebService2( new URL( ws ) );
+        try
+        {
+            final UPSWebService2ServiceLocator l = new UPSWebService2ServiceLocator();
+            final String ws = System.getProperty( UPS_WEB_SERVICE, "http://balti.ethz.ch:8080/upsserver4/UPSWebService2.jws" );
+            LOG.info( "using web service at " + ws );
+            webService = l.getUPSWebService2( new URL( ws ) );
+        }
+        catch ( ServiceException e )
+        {
+            throw new UPSServerException( "cannot instantiate UPSServerClient2", e );
+        }
+        catch ( MalformedURLException e )
+        {
+            throw new UPSServerException( "cannot instantiate UPSServerClient2", e );
+        }
     }
 
-    public Boolean isClientVersionOk( final String application, final String version ) throws UPSServerException, RemoteException
+    public Boolean isClientVersionOk( final String application, final String version ) throws UPSServerException
     {
         return (Boolean) this.invoke( "isClientVersionOk", application, version );
     }
 
-    public IPruefungsSession[] getPruefungsSessionen( final String userName, final String passWord ) throws UPSServerException, RemoteException
+    public IPruefungsSession[] getPruefungsSessionen( final String userName, final String passWord ) throws UPSServerException
     {
         return (IPruefungsSession[]) this.invoke( "getPruefungsSessionen", userName, passWord );
     }
 
-    public byte[] submitPruefungsListe( final String seskz, final String lknumber, final String userName, final String password, final byte[] bytes ) throws UPSServerException, RemoteException
+    public byte[] submitPruefungsListe( final String seskz, final String lknumber, final String userName, final String password, final byte[] bytes ) throws UPSServerException
     {
         return (byte[]) this.invoke( "submitPruefungsListe", seskz, lknumber, userName, password, bytes );
     }
 
-    public byte[] getPruefungsListe( final String dozent, final String passwrd, final String seskz, final String lk, final String studiNumber ) throws UPSServerException, RemoteException
+    public byte[] getPruefungsListe( final String dozent, final String passwrd, final String seskz, final String lk, final String studiNumber ) throws UPSServerException
     {
         return (byte[]) invoke( "getPruefungsListe", dozent, passwrd, seskz, lk, studiNumber );
     }
 
-    public String addMapping( final String userName, final String password, final String ldapUser, final String oisUser, final String oisPassword ) throws UPSServerException, RemoteException
+    public String addMapping( final String userName, final String password, final String ldapUser, final String oisUser, final String oisPassword ) throws UPSServerException
     {
         return (String) invoke( userName, password, ldapUser, oisUser, oisPassword );
     }
 
-    public IPruefungsSession reloadPruefungsDaten( final String dozent, final String passwrd ) throws UPSServerException, RemoteException
+    public IPruefungsSession reloadPruefungsDaten( final String dozent, final String passwrd ) throws UPSServerException
     {
         return (IPruefungsSession) invoke( "reloadPruefungsDaten", dozent, passwrd );
     }
 
-    public Calendar[] getPruefungsDaten( final String dozent, final String passwrd, final String seskz, final String lkNumber ) throws UPSServerException, RemoteException
+    public Calendar[] getPruefungsDaten( final String dozent, final String passwrd, final String seskz, final String lkNumber ) throws UPSServerException
     {
         return (Calendar[]) invoke( "getPruefungsDaten", dozent, passwrd, seskz, lkNumber );
     }
 
-    public Calendar[] getPruefungsDaten( final String dozent, final String passwrd, final String seskz, final String[] lkNumber ) throws UPSServerException, RemoteException
+    public Calendar[] getPruefungsDaten( final String dozent, final String passwrd, final String seskz, final String[] lkNumber ) throws UPSServerException
     {
         return (Calendar[]) invoke( "getPruefungsDaten", dozent, passwrd, seskz, lkNumber );
     }
 
-    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz, final String lkNumber, final Calendar cal ) throws UPSServerException, RemoteException
+    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz, final String lkNumber, final Calendar cal ) throws UPSServerException
     {
         return (IAnmeldedaten[]) invoke( "getAnmeldungen", dozent, passwrd, seskz, lkNumber, cal );
     }
 
-    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz, final String[] lkNumber, final Calendar cal ) throws UPSServerException, RemoteException
+    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz, final String[] lkNumber, final Calendar cal ) throws UPSServerException
     {
         Object o = lkNumber;
         if ( lkNumber == null )
@@ -97,64 +108,91 @@ public class UPSServerClient2 implements IUPSWebService
         return (IAnmeldedaten[]) invoke( "getAnmeldungen", dozent, passwrd, seskz, o, cal );
     }
 
-    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz ) throws UPSServerException, RemoteException
+    public IAnmeldedaten[] getAnmeldungen( final String dozent, final String passwrd, final String seskz ) throws UPSServerException
     {
         return (IAnmeldedaten[]) invoke( "getAnmeldungen", dozent, passwrd, seskz, String[].class, Calendar.class );
     }
 
-    public IPruefung[] getPruefungen( final String dozent, final String passwrd, final String seskz ) throws UPSServerException, RemoteException
+    public IPruefung[] getPruefungen( final String dozent, final String passwrd, final String seskz ) throws UPSServerException
     {
         return (IPruefung[]) invoke( "getPruefungen", dozent, passwrd, seskz );
     }
 
-    public String[] getStudisMitPruefunsliste( final String dozent, final String passwrd, final String seskz, final String lkNummer ) throws RemoteException, UPSServerException
+    public String[] getStudisMitPruefunsliste( final String dozent, final String passwrd, final String seskz, final String lkNummer ) throws UPSServerException
     {
         return (String[]) invoke( "getStudisMitPruefunsliste", dozent, passwrd, seskz, lkNummer );
     }
 
-    public Object invoke( final String s, final Object s1, final Object s2, final Object s3, final Object s4, final Object s5 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object s1, final Object s2, final Object s3, final Object s4, final Object s5 ) throws UPSServerException
     {
         return invoke( s, new Object[]{s1, s2, s3, s4, s5} );
     }
 
-    public Object invoke( final String s, final Object s1, final Object s2, final Object s3, final Object s4 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object s1, final Object s2, final Object s3, final Object s4 ) throws UPSServerException
     {
         return invoke( s, new Object[]{s1, s2, s3, s4} );
     }
 
-    public Object invoke( final String s, final Object s1, final Object s2, final Object s3 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object s1, final Object s2, final Object s3 ) throws UPSServerException
     {
         return invoke( s, new Object[]{s1, s2, s3} );
     }
 
-    public Object invoke( final String s, final Object s1, final Object s2 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object s1, final Object s2 ) throws UPSServerException
     {
         return invoke( s, new Object[]{s1, s2} );
     }
 
-    public Object invoke( final String s, final Object s1 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object s1 ) throws UPSServerException
     {
         return invoke( s, new Object[]{s1} );
     }
 
-    public Object invoke( final String s, final Object[] s1 ) throws UPSServerException, RemoteException
+    public Object invoke( final String s, final Object[] s1 ) throws UPSServerException
     {
-        final String[] args = new String[s1 == null ? 1 : ( s1.length + 1 )];
-        args[0] = s;
-        for ( int i = 1; i < args.length; i++ )
+        try
         {
-            args[i] = xstream.toXML( s1[i - 1] );
+            final String[] args = new String[s1 == null ? 1 : ( s1.length + 1 )];
+            args[0] = s;
+            for ( int i = 1; i < args.length; i++ )
+            {
+                args[i] = xstream.toXML( s1[i - 1] );
+            }
+            final String r = webService.invoke( args );
+            //System.out.println(r);
+            final Object result = xstream.fromXML( r );
+            if ( result instanceof Throwable )
+            {
+                final Throwable t = (Throwable) result;
+                t.printStackTrace();
+                throw new UPSServerException( t );
+            }
+            return result;
         }
-        final String r = webService.invoke( args );
-        //System.out.println(r);
-        final Object result = xstream.fromXML( r );
-        if ( result instanceof Throwable )
+        catch ( RemoteException e )
         {
-            final Throwable t = (Throwable) result;
-            t.printStackTrace();
-            throw new UPSServerException( t );
+            throw new UPSServerException( "cannot invoke " + s, e );
         }
-        return result;
+        catch ( UPSServerException e )
+        {
+            throw new UPSServerException( "cannot invoke " + s, e );
+        }
+    }
+
+    private static boolean isIn( final Object[] array, final Object element )
+    {
+        if ( array == null || element == null )
+        {
+            return false;
+        }
+        for ( final Object o : array )
+        {
+            if ( o.equals( element ) )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void main( final String[] args ) throws UPSServerException, ServiceException, RemoteException, MalformedURLException
@@ -162,23 +200,9 @@ public class UPSServerClient2 implements IUPSWebService
         final UPSServerClient2 s = new UPSServerClient2();
         final String user = "dfrey";
         final String pass = "leni1234";
-//        s.reloadPruefungsDaten(user, pass);
-//        System.exit(0);
 
         final SimpleDateFormat tf = new SimpleDateFormat( "HH:mm" );
         final SimpleDateFormat df = new SimpleDateFormat( "dd.MM.yyyy" );
-//        s.submitPruefungsListe("2006H", "551-0004-01", "dfrey", "leni1234", ("<list>\n" +
-//                "  <string>Lycopodium annotinum</string>\n" +
-//                "  <string>Equisetum arvense</string>\n" +
-//                "  <string>Asplenium ruta-muraria</string>\n" +
-//                "  <string>Asplenium trichomanes</string>\n" +
-//                "  <string>Asplenium viride</string>\n" +
-//                "</list>").getBytes());
-//        final IPruefung[] p = s.getPruefungen(user, pass, "2006H");
-//        final IAnmeldedaten[] a = s.getAnmeldungen(user, pass, "2006H");
-//        System.exit(0);
-
-        final IAnmeldedaten[] anmeldngen = (IAnmeldedaten[]) s.invoke( "getAnmeldungen", user, pass, "2007F", "551-0004-01", Calendar.class );
 
         final IPruefungsSession[] sessionen = s.getPruefungsSessionen( user, pass );
         for ( final IPruefungsSession session : sessionen )
@@ -228,39 +252,5 @@ public class UPSServerClient2 implements IUPSWebService
                 }
             }
         }
-        //System.out.println(s.isClientVersionOk("",""));
-        //System.out.println( s.getPruefungsSessionen("baltisberger","baltisberger")[0].getSessionsname() );
-
-        /*
-        UPSWebServiceUtil.dumpAnmeldungen(s.getAnmeldungen("dfrey","leni1234","2005H"));
-        UPSWebServiceUtil.dumpAnmeldungen(s.getAnmeldungen("dfrey", "leni1234","2005H", (String[])null, new GregorianCalendar(2005, 9, 7, 0, 0)));
-        //System.out.println("");
-        UPSWebServiceUtil.dumpAnmeldungen(s.getAnmeldungen("dfrey","leni1234","2005H", "551-0004-01",new GregorianCalendar(2005,9,7,0,0)));
-        //System.out.println("");
-        UPSWebServiceUtil.dumpAnmeldungen(s.getAnmeldungen("dfrey","leni1234","2005H",new String[]{"551-0004-01","80-404"},new GregorianCalendar(2005,9,7,0,0)));
-        System.out.println("");
-        */
-//        final IPruefungsSession[] sessionen = s.getPruefungsSessionen("dfrey", "leni1234");
-//        final Calendar[] daten = s.getPruefungsDaten("dfrey", "leni1234", "2006H", "551-0004-01");
-//        final IPruefung[] pruefungen = s.getPruefungen("dfrey", "leni1234", "2006H");
-//        System.out.println(sessionen.length);
-//        byte[] b = s.getPruefungsListe("dfrey", "leni1234", "2005H", "79-880", "02-925-139");
-//        System.out.println(b == null ? "null" : "" + b.length);
-    }
-
-    private static boolean isIn( final Object[] array, final Object element )
-    {
-        if ( array == null || element == null )
-        {
-            return false;
-        }
-        for ( final Object o : array )
-        {
-            if ( o.equals( element ) )
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }

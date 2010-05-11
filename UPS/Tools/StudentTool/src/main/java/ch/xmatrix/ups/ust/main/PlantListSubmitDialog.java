@@ -21,17 +21,14 @@ import ch.xmatrix.ups.model.SessionModel;
 import ch.xmatrix.ups.ust.main.commands.Commands;
 import ch.xmatrix.ups.view.CredentialsDialog;
 import com.wegmueller.ups.UPSServerException;
-import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.webservice.UPSServerClient2;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.xml.rpc.ServiceException;
+import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,46 +70,10 @@ public class PlantListSubmitDialog extends CredentialsDialog
             final byte[] pdf = client.submitPruefungsListe( seskz, lknr, username, password, list );
             new PdfSaveChooser( pdf ).open();
         }
-        catch ( MalformedURLException e )
-        {
-            final String message = MessageFormat.format( Strings.getString( "error.net.connection" ), e.getLocalizedMessage() );
-            LOG.warn( message, e );
-            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
-        }
-        catch ( RemoteException e )
-        {
-            final String message = MessageFormat.format( Strings.getString( "error.net.connection" ), e.getLocalizedMessage() );
-            LOG.warn( message, e );
-            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
-        }
-        catch ( ServiceException e )
-        {
-            final String message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
-            LOG.warn( message, e );
-            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
-        }
         catch ( UPSServerException e )
         {
-            final Throwable cause = e.getCause();
-            final String message;
-            if ( cause != null )
-            {
-                final Throwable inner = cause.getCause();
-                if ( inner instanceof LDAPAuthException )
-                {
-                    message = MessageFormat.format( Strings.getString( "error.net.credentials" ), inner.getLocalizedMessage() );
-                }
-                else
-                {
-                    message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
-                }
-            }
-            else
-            {
-                message = MessageFormat.format( Strings.getString( "error.net.service" ), e.getLocalizedMessage() );
-            }
-            LOG.warn( message, e );
-            Dialogs.showErrorMessage( PlantListSubmitDialog.this.getRootPane(), "Fehler", message );
+            LOG.error( e.getLogMessage(), e.getLogThrowable() );
+            JOptionPane.showMessageDialog( null, e.getFeedbackMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
         }
         catch ( Throwable e )
         {

@@ -28,10 +28,10 @@ $debug = 1;
 $trace = 0;
 
 # Make a release of the main module although no changes can be detected
-$force = 1;
+$force = 0;
 
 # Accept automatically default values for release params.
-$silent = 1;
+$silent = 0;
 
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
@@ -318,6 +318,7 @@ for my $artifact ( keys %artifactsToReleaseDueToChanges ) {
         print "    3) Increment major $major\n";
         print "    Which version would you like? [1] ";
         chomp ($in = <STDIN>);
+        $versions{$artifact} = $in;
     }
     my $newDevVersion = ($in eq "3") ? $major : ($in eq "2") ? $minor : $currentVersion;
     $newDevVersions{$artifact} = $newDevVersion;

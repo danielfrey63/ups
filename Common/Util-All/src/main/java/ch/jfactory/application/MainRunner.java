@@ -68,12 +68,12 @@ import org.slf4j.LoggerFactory;
  *
  * <ol>
  *
- * <li><b>Configuration:</b>It wraps configuration for JGoodies <code>DefaultApplicationStarter</code> application
+ * <li><b>Configuration:</b> It wraps configuration for JGoodies <code>DefaultApplicationStarter</code> application
  * properties into system properties.</li>
  *
- * <li><b>Version Check:</b>It handles java version checks.</li>
+ * <li><b>Version Check:</b> It handles java version checks.</li>
  *
- * <li><b>Model-View-Control:</b>It implements the row structure for a model-view-control concept.</li>
+ * <li><b>Model-View-Control:</b> It implements the row structure for a model-view-control concept.</li>
  *
  * </ol>
  *
@@ -148,8 +148,8 @@ import org.slf4j.LoggerFactory;
  * </pre>
  *
  * The model class must provide a public field <code>DEFAULT</code> or an accessor <code>getDefaultModel()</code>. The
- * controler hast to implement {@link AbstractMainController} and the constructor has to accept
- * as its only argument an instance of the main model.
+ * controler hast to implement {@link AbstractMainController} and the constructor has to accept as its only argument an
+ * instance of the main model.
  *
  * @author Daniel Frey
  * @version $Revision: 1.6 $ $Date: 2007/09/27 10:41:22 $
@@ -245,6 +245,7 @@ public class MainRunner extends DefaultApplicationStarter
                         "\" or default log property file \"/log4j.property\"" );
             }
         }
+
         catch ( Exception e )
         {
             System.err.println( "Make sure to supply system property \"" + KEY_APP_CONFIG +
@@ -454,13 +455,47 @@ public class MainRunner extends DefaultApplicationStarter
     }
 
     /**
-     * Loads the properties from the hardcoded properties file. Makes sure that these properties are overwriting the
-     * properties loaded by the system or commandline.
+     * Loads the properties from the hardcoded properties file. Makes sure that these properties are overwritten from
+     * the properties loaded by the system or command line.
      */
     private static void initProperties( final String properties ) throws IOException
     {
-        final Properties p = System.getProperties();
-        p.load( MainRunner.class.getResourceAsStream( properties ) );
+        final Properties configProperties = new Properties();
+        configProperties.load( MainRunner.class.getResourceAsStream( properties ) );
+        final Properties systemProperties = System.getProperties();
+        final Properties allProperties = new Properties();
+        allProperties.putAll( configProperties );
+        allProperties.putAll( systemProperties );
+        System.setProperties( allProperties );
+        System.out.println( "properties loaded from the configuration file " + properties + " are: " + listProperties( configProperties ) );
+        System.out.println( "system properties are: " + listProperties( systemProperties ) );
+        System.out.println( "final properties to set are: " + listProperties( allProperties ) );
+        System.out.println( "system properties set are: " + listProperties( System.getProperties() ) );
+    }
+
+    /**
+     * Concatenats properties in the form <code>{{key1=value1}, {key2=value2}}.
+     *
+     * @param properties the properties to concatenate
+     * @return the concatenated string
+     */
+    private static String listProperties( final Properties properties )
+    {
+        final StringBuilder buffer = new StringBuilder( "{" );
+        boolean first = true;
+        for ( final Object key : properties.keySet() )
+        {
+            final Object value = properties.get( key );
+            if ( !first )
+            {
+                buffer.append( ", " );
+            }
+            buffer.append( "{" ).append( key ).append( "=" );
+            buffer.append( value.toString().replace( "\r\n", "\\n\\r" ).replace( "\r", "\\n" ).replace( "\n", "\\r" ) );
+            buffer.append( "}" );
+            first = false;
+        }
+        return buffer.toString();
     }
 
     private static void initLogging( final String properties ) throws IOException
@@ -629,11 +664,11 @@ public class MainRunner extends DefaultApplicationStarter
             final URL manifestUrl = new URL( "jar:" + classContainer + "!/META-INF/MANIFEST.MF" );
             final Manifest manifest = new Manifest( manifestUrl.openStream() );
             final String version = manifest.getMainAttributes().getValue( Attributes.Name.IMPLEMENTATION_VERSION );
-            System.setProperty( MainRunner.PROPERTYNAME_VERSION_FULL, version );
+            System.setProperty( PROPERTYNAME_VERSION_FULL, version );
         }
         catch ( IOException e )
         {
-            System.setProperty( MainRunner.PROPERTYNAME_VERSION_FULL, "Test Version" );
+            System.setProperty( PROPERTYNAME_VERSION_FULL, "Test Version" );
         }
     }
 }

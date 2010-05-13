@@ -16,7 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.4.823</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
@@ -118,8 +117,9 @@
             <artifactId>uispec4j</artifactId>
         </dependency>
     </dependencies>
-    <scm>
-        <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.utils-all-3.0.827</developerConnection>
-        <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.common.utils-all-3.0.827</url>
-    </scm>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.utils-all-3.0.827</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.common.utils-all-3.0.827</url>
+  </scm>
 </project>

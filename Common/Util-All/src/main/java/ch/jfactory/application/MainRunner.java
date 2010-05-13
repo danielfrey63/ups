@@ -462,14 +462,12 @@ public class MainRunner extends DefaultApplicationStarter
     {
         final Properties configProperties = new Properties();
         configProperties.load( MainRunner.class.getResourceAsStream( properties ) );
-        final Properties systemProperties = System.getProperties();
-        final Properties allProperties = new Properties();
-        allProperties.putAll( configProperties );
-        allProperties.putAll( systemProperties );
-        System.setProperties( allProperties );
+        for ( final Object o : configProperties.keySet() )
+        {
+            final String key = (String) o;
+            System.setProperty( key, (String) configProperties.get( key ) );
+        }
         System.out.println( "properties loaded from the configuration file " + properties + " are: " + listProperties( configProperties ) );
-        System.out.println( "system properties are: " + listProperties( systemProperties ) );
-        System.out.println( "final properties to set are: " + listProperties( allProperties ) );
         System.out.println( "system properties set are: " + listProperties( System.getProperties() ) );
     }
 

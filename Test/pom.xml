@@ -1,5 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>ch.xmatrix.common</groupId>
+        <artifactId>ch.xmatrix.common.build</artifactId>
+        <version>1.0</version>
+        <relativePath>../Common/Build</relativePath>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
     <artifactId>ch.xmatrix.test</artifactId>
@@ -7,11 +13,13 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
     </dependencies>
+    <properties>
+        <main-class>ch.xmatrix.test.JNLPTest</main-class>
+    </properties>
     <build>
         <pluginManagement>
             <plugins>
@@ -22,12 +30,39 @@
                             <manifest>
                                 <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                                 <addClasspath>true</addClasspath>
-                                <classpathPrefix>dependency/</classpathPrefix>                                
+                                <classpathPrefix>dependency/</classpathPrefix>
                             </manifest>
                             <manifestEntries>
-                                <Main-Class>ch.xmatrix.test.HalloTest</Main-Class>
+                                <Main-Class>ch.xmatrix.test.JNLPTest</Main-Class>
                             </manifestEntries>
                         </archive>
+                    </configuration>
+                </plugin>
+                <!-- Run with mvn install org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
+                <!-- Uses the ${main-class} property to indicate the JNLP main class -->
+                <!-- Note: Seems that this plugin doesn't copy runtime dependencies -->
+                <plugin>
+                    <groupId>org.codehaus.mojo.webstart</groupId>
+                    <artifactId>webstart-maven-plugin</artifactId>
+                    <version>1.0-alpha-2</version>
+                    <configuration>
+                        <jnlp>
+                            <mainClass>${main-class}</mainClass>
+                            <outputFile>${artifactId}.jnlp</outputFile>
+                            <!-- A bug in the plugin makes it necessary to indicate the resource path non-default -->
+                            <inputTemplateResourcePath>${project.parent.relativePath}</inputTemplateResourcePath>
+                            <inputTemplate>src/main/jnlp/template.vm</inputTemplate>
+                        </jnlp>
+                        <sign>
+                            <!-- Note: Path are relative to the target/jnlp directory -->
+                            <keystore>${project.parent.relativePath}/keystore/keystore.jks</keystore>
+                            <keypass>upsups</keypass>
+                            <storepass>upsups</storepass>
+                            <alias>ups</alias>
+                        </sign>
+                        <outputJarVersions>false</outputJarVersions>
+                        <verbose>false</verbose>
+                        <unsign>true</unsign>
                     </configuration>
                 </plugin>
             </plugins>

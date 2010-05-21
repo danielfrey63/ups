@@ -318,7 +318,7 @@ for my $artifact ( keys %artifactsToReleaseDueToChanges ) {
         print "    3) Increment major $major\n";
         print "    Which version would you like? [1] ";
         chomp ($in = <STDIN>);
-        $versions{$artifact} = $in;
+#        $versions{$artifact} = $in;
     }
     my $newDevVersion = ($in eq "3") ? $major : ($in eq "2") ? $minor : $currentVersion;
     $newDevVersions{$artifact} = $newDevVersion;

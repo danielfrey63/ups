@@ -465,7 +465,7 @@ public class MainRunner extends DefaultApplicationStarter
         for ( final Object o : configProperties.keySet() )
         {
             final String key = (String) o;
-            System.setProperty( key, (String) configProperties.get( key ) );
+            System.setProperty( key, System.getProperty( key, (String) configProperties.get( key ) ) );
         }
         System.out.println( "properties loaded from the configuration file " + properties + " are: " + listProperties( configProperties ) );
         System.out.println( "system properties set are: " + listProperties( System.getProperties() ) );

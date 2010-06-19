@@ -17,8 +17,10 @@ import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
 import com.thoughtworks.xstream.XStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,16 +41,18 @@ public class Converter
 {
     private static final Map<String, ArrayList<String>> MAP = new HashMap<String, ArrayList<String>>();
 
+    private static final ArrayList<String> ERR = new ArrayList<String>();
+
     public static void main( final String[] args )
     {
         try
         {
             // Introduction
-            final int ret = JOptionPane.showConfirmDialog( null, "Im Folgenden wird Ihnen eine Möglichkeit geboten, eine mit dem UPS Studenten-Tool (Version 2.0-20060724)\n" +
-                    "erstellten Pflanzenliste in Stofflisten für die Herbar CD-ROM Version 2 zu konvertieren. Bitte geben Sie im folgenden \n" +
+            final int ret = JOptionPane.showConfirmDialog( null, "Im Folgenden wird Ihnen eine Möglichkeit geboten, eine mit dem UPS Studenten-Tool (Version 3.0)\n" +
+                    "erstellten Pflanzenliste in eine Stoffliste für die Herbar CD-ROM Version 3.5 zu konvertieren. Bitte geben Sie im folgenden \n" +
                     "Dialog die Pflanzenliste an, die Sie konvertieren möchten. Wichtig ist, dass Sie die Liste mit dem UPS Studenten-Tool \n" +
-                    "Version 2.0-20060724 gesichert haben, damit es einwandfrei funktioniert. Falls dies nicht der Fall ist, öffnen \n" +
-                    "Sie ihre Pflanzenliste zuerst im UPS Studenten-Tool Version 2.0-20060724 und speichern Sie sie in der neuen Version ab.",
+                    "Version 3.0 gesichert haben, damit es einwandfrei funktioniert. Falls dies nicht der Fall ist, öffnen \n" +
+                    "Sie ihre Pflanzenliste zuerst im UPS Studenten-Tool Version 3.0 und speichern Sie sie in mit einem neuen Namen ab.",
                     "Hinweis", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE );
             if ( ret == JOptionPane.CANCEL_OPTION )
             {
@@ -75,7 +79,7 @@ public class Converter
                 System.exit( 0 );
             }
             final File file = chooser.getSelectedFile();
-            final FileReader reader = new FileReader( file );
+            final Reader reader = new InputStreamReader( new FileInputStream( file ), "UTF-8" );
 
             final XStream x = new XStream();
             x.alias( "root", Root.class );
@@ -120,7 +124,14 @@ public class Converter
                 {
                     final String taxon = (String) l;
                     final SimpleTaxon simpleTaxon = taxa.findTaxonByName( taxon );
-                    mapTaxon( simpleTaxon );
+                    if ( simpleTaxon == null )
+                    {
+                        ERR.add( taxon );
+                    }
+                    else
+                    {
+                        mapTaxon( simpleTaxon );
+                    }
                 }
 
                 // Print lists
@@ -146,10 +157,22 @@ public class Converter
                 }
                 writer.write( "</filter>" );
                 writer.close();
-                JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich. Die Stoffliste mit dem Namen \"" +
-                        name + "\" \n" +
-                        "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung.",
-                        "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE );
+                if ( ERR.size() == 0 )
+                {
+                    JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich. Die Stoffliste mit dem Namen \"" +
+                            name + "\" \n" +
+                            "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung.",
+                            "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE );
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich aber nicht vollständig. " +
+                            "Folgende Arten wurden nicht konvertiert: " + ERR + ". Die " +
+                            "Stoffliste mit dem Namen \"" + name + "\" \n" +
+                            "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung. Bitte fügen Sie die " +
+                            "fehlende(n) Art(en) manuell in der Herbar CD-ROM hinzu.",
+                            "Konvertierung mit Warnungen.", JOptionPane.INFORMATION_MESSAGE );
+                }
             }
             catch ( Throwable e )
             {

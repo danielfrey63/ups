@@ -23,27 +23,22 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>3.0.956</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
-            <version>3.0.937</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.724</version>
             <artifactId>ch.xmatrix.ups.data.exams</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.718</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>2.0.730</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>

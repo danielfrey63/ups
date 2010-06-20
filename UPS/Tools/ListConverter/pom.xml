@@ -10,7 +10,7 @@
     <groupId>ch.xmatrix.ups.tools</groupId>
     <artifactId>ch.xmatrix.ups.tools.ulc</artifactId>
     <name>UPS List-Converter</name>
-    <version>2.0.961</version>
+    <version>3.0-SNAPSHOT</version>
     <description>Mit diesem Tool lassen sich Pflanzenlisten aus dem UPS Studenten-Tool in Sofflisten für die Herbar
         CD-ROM Version 2 konvertieren. Das Tool übernimmt auch das platzieren der Listen am richtigen Ort, so dass beim
         nächsten Start der HCD die Stofflisten zur Verfügung stehen. Insgesamt werden sieben Stofflisten erzeugt: je
@@ -67,9 +67,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.tools.ulc-2.0.961</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.tools.ulc-2.0.961</url>
-  </scm>
 </project>

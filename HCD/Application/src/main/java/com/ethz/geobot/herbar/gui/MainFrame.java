@@ -14,6 +14,7 @@ import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
+import com.ethz.geobot.herbar.gui.commands.ActionConvertFilterFromUst;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionModusSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
@@ -76,6 +77,7 @@ public class MainFrame extends JFrame
     private Action wizardAction;
 
     //Construct the Mainframe
+
     public MainFrame()
     {
         enableEvents( AWTEvent.WINDOW_EVENT_MASK );
@@ -172,6 +174,7 @@ public class MainFrame extends JFrame
     }
 
     // overridden so we can exit when window is closed
+
     protected void processWindowEvent( final WindowEvent e )
     {
         super.processWindowEvent( e );
@@ -182,6 +185,7 @@ public class MainFrame extends JFrame
     }
 
     // create Menus and adds them to the menubar
+
     private JMenu createMenu( final String prefix )
     {
         final JMenu sub = menubar.add( new JMenu( Strings.getString( prefix + ".NAME" ) ) );
@@ -198,6 +202,7 @@ public class MainFrame extends JFrame
     }
 
     // Component, Statusbar and Menu initialization
+
     private void init() throws Exception
     {
         statusBar = new StatusBar();
@@ -208,6 +213,7 @@ public class MainFrame extends JFrame
         JMenu sub = null;
         sub = createMenu( "MENU.APPLICATION" );
         createMenuItem( sub, new ActionSaveBounds( this, prefNode ) );
+        createMenuItem( sub, new ActionConvertFilterFromUst( this ) );
         sub.addSeparator();
         quitItem = createMenuItem( sub, new ActionQuit( this ) );
 

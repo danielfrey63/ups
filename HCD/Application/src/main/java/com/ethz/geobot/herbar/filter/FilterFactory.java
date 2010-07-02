@@ -50,9 +50,7 @@ public class FilterFactory
 
     private final Map<String, FilterModel> cachedFilterModels = new HashMap<String, FilterModel>();
 
-    /**
-     * Creates a new instance of FilterFactory
-     */
+    /** Creates a new instance of FilterFactory */
     protected FilterFactory()
     {
         try
@@ -154,7 +152,7 @@ public class FilterFactory
             for ( Iterator<String> it = getFilterNames().iterator(); it.hasNext() && !baseFilterFound; )
             {
                 final String filterNameToCompare = it.next();
-                baseFilterFound |= base.equals( filterNameToCompare );
+                baseFilterFound = base.equals( filterNameToCompare );
             }
             if ( !baseFilterFound || base.equals( name ) )
             {
@@ -169,7 +167,7 @@ public class FilterFactory
     }
 
     /**
-     * This mehod stores the FilterModel to the persistent storage.
+     * This method stores the FilterModel to the persistent storage.
      *
      * @param filterModel the FilerDefinition which should be stored
      * @throws FilterPersistentException is thrown if filter couldn't be stored

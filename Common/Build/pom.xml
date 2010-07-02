@@ -62,6 +62,8 @@
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/dummy</default-site>
         <!-- Heap size used in JNLP projects. -->
         <max-heap-size>512m</max-heap-size>
+        <!-- The Archiva URL. -->
+        <archiva>http://192.168.10.26:8080</archiva>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -650,14 +652,14 @@
         </repository>
         <repository>
             <id>maclocal</id>
-            <url>http://192.168.10.25:8080/archiva/repository/internal/</url>
+            <url>${archiva}/archiva/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>maclocal-snapshots</id>
-            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <url>${archiva}/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -667,7 +669,7 @@
             <name>Maven Plugin Repository</name>
             <!-- Overwrite default maven repository -->
             <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <url>${archiva}/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -679,14 +681,14 @@
     <pluginRepositories>
         <pluginRepository>
             <id>maclocal-plugin</id>
-            <url>http://192.168.10.25:8080/archiva/repository/internal/</url>
+            <url>${archiva}/archiva/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>maclocal-plugin-snapshots</id>
-            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <url>${archiva}/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -696,7 +698,7 @@
             <name>Maven Plugin Repository</name>
             <!-- Overwrite default maven repository -->
             <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>http://192.168.10.25:8080/archiva/repository/snapshots/</url>
+            <url>${archiva}/archiva/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>

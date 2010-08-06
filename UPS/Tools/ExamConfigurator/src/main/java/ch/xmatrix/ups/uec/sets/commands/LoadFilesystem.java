@@ -28,13 +28,13 @@ import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.storage.beans.Anmeldedaten;
 import java.io.File;
 import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JTextField;
-import org.apache.commons.io.IOUtils;
 import org.pietschy.command.ActionCommand;
 import org.pietschy.command.CommandManager;
 import org.slf4j.Logger;
@@ -201,14 +201,16 @@ public abstract class LoadFilesystem extends ActionCommand
     }
 
     // Todo: Make this working with new file format from UST.
+
     private static PlantList loadPlantList( final File file )
     {
         PlantList list = null;
         try
         {
-            final String species = IOUtils.toString( new FileReader( file ) );
+            final Reader reader = new FileReader( file );
             final Converter converter = Commands.getConverter2();
-            final Object converted = converter.from( species );
+            final Object converted = converter.from( reader );
+            reader.close();
             if ( converted instanceof Commands.Encoded )
             {
                 final Commands.Encoded encoded = (Commands.Encoded) converted;
@@ -223,7 +225,7 @@ public abstract class LoadFilesystem extends ActionCommand
             }
             else
             {
-                Dialogs.showErrorMessage( null, "Fehler", "Unbekanntest (altes) Dateiformat" );
+                Dialogs.showErrorMessage( null, "Fehler", "Unbekanntes (altes) Dateiformat" );
                 LOG.error( "unknown file format" );
             }
         }

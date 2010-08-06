@@ -14,18 +14,18 @@ package ch.jfactory.math;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class LevensteinDistance
+public class LevenshteinDistance
 {
     /**
      * Returns the evaluation result for the comparison of the two strings under the given
-     * <code>LevensteinLevel</code>.
+     * <code>LevenshteinLevel</code>.
      *
      * @param str1  first string to compare with second one
      * @param str2  second string to compare with first one
-     * @param level LevensteinLevel at whitch evaluation takes place
+     * @param level LevenshteinLevel at whitch evaluation takes place
      * @return EvaluationResult
      */
-    public static int getDistance( final String str1, final String str2, final LevensteinLevel level )
+    public static int getDistance( final String str1, final String str2, final LevenshteinLevel level )
     {
         int i;
         int j;
@@ -62,7 +62,7 @@ public class LevensteinDistance
     }
 }
 
-// $Log: LevensteinDistance.java,v $
+// $Log: LevenshteinDistance.java,v $
 // Revision 1.1  2005/06/16 06:28:58  daniel_frey
 // Completely merged and finished for UST version 2.0-20050616
 //

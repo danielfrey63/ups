@@ -9,22 +9,18 @@
 package ch.jfactory.math;
 
 /**
- * Enumeration used for evalutations.
+ * Enumeration used for evaluations.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
 public class EvaluationResult
 {
-    /**
-     * Evaluation has passed.
-     */
-    public static final EvaluationResult EVAL_PASSED = new EvaluationResult( true );
+    /** Evaluation has passed. */
+    public static final EvaluationResult EVALUATION_PASSED = new EvaluationResult( true );
 
-    /**
-     * Evaluation has failed.
-     */
-    public static final EvaluationResult EVAL_FAILED = new EvaluationResult( false );
+    /** Evaluation has failed. */
+    public static final EvaluationResult EVALUATION_FAILED = new EvaluationResult( false );
 
     private final boolean passed;
 
@@ -42,11 +38,11 @@ public class EvaluationResult
     {
         if ( bool )
         {
-            return EVAL_PASSED;
+            return EVALUATION_PASSED;
         }
         else
         {
-            return EVAL_FAILED;
+            return EVALUATION_FAILED;
         }
     }
 }

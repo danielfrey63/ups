@@ -101,19 +101,14 @@ public class FilterFactory
     private FilterModel generateFilterModel( final Filter filter ) throws FilterPersistentException
     {
         final String baseModelName = filter.getBaseFilterName();
-        HerbarModel baseModel = Application.getInstance().getModel();
-
-        if ( !"".equals( filter.getBaseFilterName() ) )
-        {
-            baseModel = getFilterModel( baseModelName );
-        }
-
+        final HerbarModel baseModel = getBaseFilterModel( filter, baseModelName );
         final FilterModel model = new FilterModel( baseModel, filter.getName() );
         model.clearFilterDetails();
 
         final Detail[] details = filter.getDetails();
-        for ( final Detail detail : details )
+        for ( int i = 0; details != null && i < details.length; i++ )
         {
+            final Detail detail = details[i];
             final Taxon scope = baseModel.getTaxon( detail.getScope() );
             final Level[] levels = collectLevels( detail.getLevels() );
             if ( scope != null )
@@ -127,6 +122,20 @@ public class FilterFactory
             }
         }
         return model;
+    }
+
+    private HerbarModel getBaseFilterModel( final Filter filter, final String baseModelName ) throws FilterPersistentException
+    {
+        final HerbarModel baseModel;
+        if ( !"".equals( filter.getBaseFilterName() ) )
+        {
+            baseModel = getFilterModel( baseModelName );
+        }
+        else
+        {
+            baseModel = Application.getInstance().getModel();
+        }
+        return baseModel;
     }
 
     /**

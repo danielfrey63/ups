@@ -16,9 +16,11 @@ import ch.jfactory.resource.Version;
 import ch.xmatrix.ups.domain.SimpleLevel;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -138,6 +140,18 @@ public class TaxonTree implements IdAware
         return new ToStringBuilder( this ).toString();
     }
 
+    public SimpleTaxon[] toArray()
+    {
+        final Collection<SimpleTaxon> values = index.values();
+        return (SimpleTaxon[]) values.toArray( new SimpleTaxon[values.size()] );
+    }
+
+    public String[] toStringArray()
+    {
+        final Set keys = index.keySet();
+        return (String[]) keys.toArray( new String[keys.size()] );
+    }
+
     //--- Utilities
 
     /**
@@ -169,7 +183,7 @@ public class TaxonTree implements IdAware
      * @param taxa the taxa to sort
      * @return a new list with the sorted taxa
      */
-    public ArrayList<SimpleTaxon> sortSimpleTaxa( final ArrayList<SimpleTaxon> taxa )
+    public static ArrayList<SimpleTaxon> sortSimpleTaxa( final ArrayList<SimpleTaxon> taxa )
     {
         final Comparator<SimpleTaxon> taxonComparator = new Comparator<SimpleTaxon>()
         {
@@ -190,7 +204,7 @@ public class TaxonTree implements IdAware
         return taxa;
     }
 
-    private ArrayList<SimpleTaxon> getPathToRoot( final SimpleTaxon taxon )
+    private static ArrayList<SimpleTaxon> getPathToRoot( final SimpleTaxon taxon )
     {
         final ArrayList<SimpleTaxon> taxons = new ArrayList<SimpleTaxon>();
         SimpleTaxon current = taxon;

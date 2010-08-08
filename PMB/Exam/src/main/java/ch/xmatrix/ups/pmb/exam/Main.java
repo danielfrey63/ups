@@ -36,7 +36,7 @@ public class Main
     {
         RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
         UIManager.setLookAndFeel( "com.jgoodies.looks.windows.WindowsLookAndFeel" );
-        Strings.setResourceBundle( ResourceBundle.getBundle( "config.Strings" ) );
+        Strings.setResourceBundle( ResourceBundle.getBundle( "Strings" ) );
         SwingUtilities.invokeLater( new Runnable()
         {
             public void run()

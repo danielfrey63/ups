@@ -34,17 +34,17 @@ public class TaxonomicComparator implements Comparator<String>
         this.taxa = taxa;
     }
 
-    public int compare( final String o1, final String o2 )
+    public int compare( final String o1, final String o2 ) throws TaxonNotFoundException
     {
         final SimpleTaxon t1 = taxa.findTaxonByName( o1 );
         final SimpleTaxon t2 = taxa.findTaxonByName( o2 );
         if ( t1 == null )
         {
-            throw new NullPointerException( "Cannot find taxon for " + o1 );
+            throw new TaxonNotFoundException( "Cannot find taxon for " + o1, o1 );
         }
         if ( t2 == null )
         {
-            throw new NullPointerException( "Cannot find taxon for " + o2 );
+            throw new TaxonNotFoundException( "Cannot find taxon for " + o2, o2 );
         }
         final int r1 = t1.getRank();
         final int r2 = t2.getRank();

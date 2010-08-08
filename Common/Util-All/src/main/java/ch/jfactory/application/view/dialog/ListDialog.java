@@ -2,7 +2,6 @@ package ch.jfactory.application.view.dialog;
 
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.search.SearchableUtils;
-import ch.jfactory.component.AbstractPlainDocument;
 import ch.jfactory.component.list.DefaultJList;
 import ch.jfactory.resource.Strings;
 import java.awt.Dialog;
@@ -17,9 +16,7 @@ import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
@@ -46,15 +43,11 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     private DefaultJList list;
 
-    private JTextField search;
-
-    private JPanel listPanel;
-
     /**
      * Constructs a new list dialog based as a child of the dialog given. A title is displayed, for which the string is
-     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>,
-     * where <code>PREFIX</code> is the prefix argument given. A text multiline label is displayed above the list where
-     * the text is retrieved by the key <code>PREFIX.TEXT</code>.
+     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
+     * is the prefix argument given. A text multiline label is displayed above the list where the text is retrieved by
+     * the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
@@ -68,9 +61,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     /**
      * Constructs a new list dialog based as a child of the frame given. A title is displayed, for which the string is
-     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>,
-     * where <code>PREFIX</code> is the prefix argument given. A text multiline label is displayed above the list where
-     * the text is retrieved by the key <code>PREFIX.TEXT</code>.
+     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
+     * is the prefix argument given. A text multiline label is displayed above the list where the text is retrieved by
+     * the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
@@ -84,7 +77,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     private void init( final Object[] listData )
     {
-        allData = new ArrayList( Arrays.asList( listData ) ).toArray();
+        allData = new ArrayList<Object>( Arrays.asList( listData ) ).toArray();
         list.setListData( allData );
         list.requestFocus();
     }
@@ -107,7 +100,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      */
     public Object[] getSelectedData( final Object[] type )
     {
-        return new ArrayList( Arrays.asList( selectedData ) ).toArray( type );
+        return new ArrayList<Object>( Arrays.asList( selectedData ) ).toArray( type );
     }
 
     /**
@@ -140,9 +133,14 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     public void setSelectedData( final Object[] selected )
     {
         list.setSelectedValues( selected );
+        if ( selected != null && selected.length > 0 )
+        {
+            list.ensureIndexIsVisible( Arrays.binarySearch( allData, selected[0] ) );
+        }
     }
 
     // I15nComponentDialog
+
     protected JComponent createComponentPanel()
     {
         list = new DefaultJList();
@@ -175,6 +173,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     }
 
     // ListSelectionListener
+
     public void valueChanged( final ListSelectionEvent e )
     {
         final JList list = (JList) e.getSource();
@@ -183,6 +182,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     }
 
     // DocumentListener
+
     public void insertUpdate( final DocumentEvent e )
     {
         changedUpdate( e );
@@ -214,29 +214,6 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
             }
         }
         list.setListData( currentObjects.toArray() );
-    }
-
-    public static class InListDocument extends AbstractPlainDocument
-    {
-        private final Object[] listData;
-
-        public InListDocument( final Object[] listData )
-        {
-            this.listData = listData;
-        }
-
-        protected boolean validate( String newValue )
-        {
-            newValue = newValue.toUpperCase();
-            int index = 0;
-            boolean found = false;
-            while ( index < listData.length && !found )
-            {
-                final String listEntry = listData[index++].toString().toUpperCase();
-                found = listEntry.indexOf( newValue ) > -1;
-            }
-            return found;
-        }
     }
 
     public static void main( final String[] args )

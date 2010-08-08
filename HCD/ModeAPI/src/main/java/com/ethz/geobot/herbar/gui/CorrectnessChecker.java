@@ -9,7 +9,7 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.math.EvaluationResult;
-import ch.jfactory.math.LevensteinLevel;
+import ch.jfactory.math.LevenshteinLevel;
 import ch.jfactory.model.graph.GraphNodeList;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.TaxonSynonym;
@@ -40,9 +40,9 @@ public class CorrectnessChecker
 
     public static final Correctness IS_FALSE = new Correctness( 2 );
 
-    private static final LevensteinLevel mayBeTolerated = LevensteinLevel.LEVEL_RESTRICTIVE;
+    private static final LevenshteinLevel mayBeTolerated = LevenshteinLevel.LEVEL_RESTRICTIVE;
 
-    private static final LevensteinLevel mustBeEqual = LevensteinLevel.LEVEL_EQUAL;
+    private static final LevenshteinLevel mustBeEqual = LevenshteinLevel.LEVEL_EQUAL;
 
     private static final Map hsh;
 
@@ -155,7 +155,7 @@ public class CorrectnessChecker
     private Correctness checkSynonyme( final Taxon taxon, final String synString )
     {
         final GraphNodeList sil = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
-        EvaluationResult eval = EvaluationResult.EVAL_FAILED;
+        EvaluationResult eval = EvaluationResult.EVALUATION_FAILED;
         for ( int ix = 0; ix < sil.size() && !eval.isPassed(); ix++ )
         {
             final String strSyn = sil.get( ix ).toString().toLowerCase();

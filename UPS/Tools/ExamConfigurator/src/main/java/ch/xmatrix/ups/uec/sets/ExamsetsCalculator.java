@@ -16,10 +16,13 @@
  */
 package ch.xmatrix.ups.uec.sets;
 
+import ch.jfactory.application.view.dialog.ListDialog;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.file.ExtentionFileFilter;
 import ch.jfactory.file.SaveChooser;
 import ch.jfactory.math.Combinatorial;
+import ch.jfactory.math.LevenshteinDistance;
+import ch.jfactory.math.LevenshteinLevel;
 import ch.jfactory.math.RandomUtils;
 import ch.jfactory.model.IdAware;
 import ch.jfactory.xstream.DomDriver;
@@ -33,6 +36,7 @@ import ch.xmatrix.ups.model.Registration;
 import ch.xmatrix.ups.model.SetTaxon;
 import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.model.SpecimensModel;
+import ch.xmatrix.ups.model.TaxonNotFoundException;
 import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.model.TaxonomicComparator;
 import ch.xmatrix.ups.uec.groups.GroupModel;
@@ -56,6 +60,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TreeMap;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -240,23 +248,6 @@ public class ExamsetsCalculator
     {
         final String abundance = getAbundanceStatsString( "", getWeightIfKnownStats( speciesTaxaMap.values() ) );
 
-        debugBuffer.append( "-----------------------------------" ).append( ret );
-        debugBuffer.append( "taxa tree                 : " ).append( taxa ).append( ret );
-        debugBuffer.append( "general settings          : " ).append( prefs ).append( ret );
-        debugBuffer.append( "groups settings           : " ).append( groups ).append( ret );
-        debugBuffer.append( "specimens settings        : " ).append( specimens ).append( ret );
-        debugBuffer.append( "levels settings           : " ).append( levels ).append( ret );
-        debugBuffer.append( "-----------------------------------" ).append( ret );
-        debugBuffer.append( "number of known species   : " ).append( prefs.getKnownTotalCount() ).append( ret );
-        debugBuffer.append( "number of known weight    : " ).append( prefs.getKnownTotalWeight() ).append( ret );
-        debugBuffer.append( "number of unknown species : " ).append( prefs.getUnknownTotalCount() ).append( ret );
-        debugBuffer.append( "number of unknown weight  : " ).append( prefs.getUnknownTotalWeight() ).append( ret );
-        debugBuffer.append( "-----------------------------------" ).append( ret );
-        debugBuffer.append( "total available species   : " ).append( speciesTaxaMap.size() ).append( ret );
-        debugBuffer.append( "weight min                : " ).append( weightMin ).append( ret );
-        debugBuffer.append( "weight max                : " ).append( weightMax ).append( ret );
-        debugBuffer.append( "abundances                : " ).append( abundance ).append( ret );
-
         class IdWrapper implements IdAware
         {
             public IdAware inner;
@@ -292,8 +283,25 @@ public class ExamsetsCalculator
         props.put( "weightMin", weightMin );
         props.put( "weightMax", weightMax );
         props.put( "abundance", abundance );
-        models.setSettings( props );
 
+        debugBuffer.append( "-----------------------------------" ).append( ret );
+        debugBuffer.append( "taxa tree                 : " ).append( props.get( "taxaTree" ) ).append( ret );
+        debugBuffer.append( "general settings          : " ).append( props.get( "generalSettings" ) ).append( ret );
+        debugBuffer.append( "groups settings           : " ).append( props.get( "groupsSettings" ) ).append( ret );
+        debugBuffer.append( "specimens settings        : " ).append( props.get( "specimensSettings" ) ).append( ret );
+        debugBuffer.append( "levels settings           : " ).append( props.get( "levelSettings" ) ).append( ret );
+        debugBuffer.append( "-----------------------------------" ).append( ret );
+        debugBuffer.append( "number of known species   : " ).append( prefs.getKnownTotalCount() ).append( ret );
+        debugBuffer.append( "number of known weight    : " ).append( prefs.getKnownTotalWeight() ).append( ret );
+        debugBuffer.append( "number of unknown species : " ).append( prefs.getUnknownTotalCount() ).append( ret );
+        debugBuffer.append( "number of unknown weight  : " ).append( prefs.getUnknownTotalWeight() ).append( ret );
+        debugBuffer.append( "-----------------------------------" ).append( ret );
+        debugBuffer.append( "total available species   : " ).append( speciesTaxaMap.size() ).append( ret );
+        debugBuffer.append( "weight min                : " ).append( weightMin ).append( ret );
+        debugBuffer.append( "weight max                : " ).append( weightMax ).append( ret );
+        debugBuffer.append( "abundances                : " ).append( abundance ).append( ret );
+
+        models.setSettings( props );
         models.getConfigurations().add( prefs );
         models.getConfigurations().add( groups );
         models.getConfigurations().add( specimens );
@@ -310,9 +318,7 @@ public class ExamsetsCalculator
         this.seed = seed;
     }
 
-    /**
-     * Iterate over all examlists.
-     */
+    /** Iterate over all examlists. */
     public void execute()
     {
         if ( seed == 0 )
@@ -353,7 +359,7 @@ public class ExamsetsCalculator
                 registration.setPlantList( plantList );
                 registration.setDefaultList( true );
             }
-            calculateExamset( registration );
+            calculateExamSet( registration );
         }
 
         saver.open();
@@ -364,7 +370,7 @@ public class ExamsetsCalculator
      *
      * @param registration registration data
      */
-    private void calculateExamset( final Registration registration )
+    private void calculateExamSet( final Registration registration )
     {
         final String studentString = getStudentString( registration );
         debugBuffer.append( studentString );
@@ -442,7 +448,7 @@ public class ExamsetsCalculator
         }
         catch ( IllegalArgumentException e )
         {
-            debugBuffer.append( "Error              : " ).append( e.getMessage().replaceAll( "\n", ", " ) );
+            debugBuffer.append( "Error              : " ).append( e.getMessage().replaceAll( "\n", ", " ) ).append( ret );
             final IAnmeldedaten person = registration.getAnmeldedaten();
             Dialogs.showErrorMessage( null, "Fehler", e.getMessage() + "\nset for student " + person.getVorname() + " " +
                     person.getNachname() + " not valid" );
@@ -459,7 +465,7 @@ public class ExamsetsCalculator
             {
                 taxa.add( taxon.getSpecimenModel().getTaxon() );
             }
-            Collections.sort( taxa, new TaxonomicComparator( ExamsetsCalculator.this.taxa ) );
+            sortWithChecks( taxa );
             examlistBuffer.append( studentString );
             for ( final String taxon : taxa )
             {
@@ -500,6 +506,76 @@ public class ExamsetsCalculator
         {
             debugBuffer.append( "Error              : " ).append( e.getMessage().replaceAll( "\n", ", " ) );
             Dialogs.showErrorMessage( null, "Fehler", e.getMessage() );
+        }
+    }
+
+    private void sortWithChecks( final ArrayList<String> taxa )
+    {
+        boolean ok = false;
+        while ( !ok )
+        {
+            try
+            {
+                Collections.sort( taxa, new TaxonomicComparator( ExamsetsCalculator.this.taxa ) );
+                ok = true;
+            }
+            catch ( TaxonNotFoundException e )
+            {
+                final Map<Integer, Integer> counts = new TreeMap<Integer, Integer>();
+                final String[] allTaxa = ExamsetsCalculator.this.taxa.toStringArray();
+                Arrays.sort( allTaxa );
+                int min = Integer.MAX_VALUE;
+                String selection = null;
+                for ( final String taxon : allTaxa )
+                {
+                    final int distance = LevenshteinDistance.getDistance( taxon, e.getTaxon(), LevenshteinLevel.LEVEL_RESTRICTIVE );
+                    if ( counts.get( distance ) == null )
+                    {
+                        counts.put( distance, 1 );
+                    }
+                    else
+                    {
+                        counts.put( distance, counts.get( distance ) + 1 );
+                    }
+                    if ( distance < min )
+                    {
+                        selection = taxon;
+                        min = distance;
+                    }
+                }
+                if ( counts.get( min ) == 1 )
+                {
+                    debugBuffer.append( "Warning            : Automatically replaced \"" ).append( e.getTaxon() ).append( "\" with \"" ).append( selection ).append( "\"\n" );
+                    taxa.remove( e.getTaxon() );
+                    taxa.add( selection );
+                }
+                else
+                {
+                    final int result = JOptionPane.showOptionDialog( null,
+                            "Das Taxon \"" + e.getTaxon() + "\" konnte nicht erkannt werden. Möchten Sie es ignorieren oder mappen", "Fehler",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{"Ignorieren", "Mappen"}, "Mappen" );
+                    if ( result == 1 )
+                    {
+                        final ListDialog dialog = new ListDialog( (JFrame) null, "taxonchooser", allTaxa );
+                        dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+                        dialog.setSize( 400, 600 );
+                        dialog.setLocationRelativeTo( null );
+                        dialog.setTitle( e.getTaxon() + " Mappen" );
+                        dialog.setSelectedData( new Object[]{selection} );
+                        dialog.setVisible( true );
+                        final Object[] data = dialog.getSelectedData();
+                        if ( data != null && data.length == 1 )
+                        {
+                            taxa.remove( e.getTaxon() );
+                            taxa.add( (String) data[0] );
+                        }
+                    }
+                    else
+                    {
+                        taxa.remove( e.getTaxon() );
+                    }
+                }
+            }
         }
     }
 
@@ -646,7 +722,7 @@ public class ExamsetsCalculator
                 if ( candidates.size() == 0 )
                 {
                     throw new IllegalArgumentException( "All taxa have been removed by restrictions, nothing left for groups\n" +
-                            "remaining taxa in exam list: " + unknownPersonalList.size() + "\n" );
+                            "remaining taxa in exam list: " + unknownPersonalList.size() );
                 }
                 final SetTaxon selection = new SetTaxon( chosenTaxon, true );
                 debugBuffer.append( "selected by group  : " ).append( selection ).append( ret );

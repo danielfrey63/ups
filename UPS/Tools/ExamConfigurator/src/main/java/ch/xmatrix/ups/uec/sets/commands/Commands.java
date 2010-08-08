@@ -63,6 +63,7 @@ public class Commands
         aliases.put( "person", PersonData.class );
         aliases.put( "root", PlantList.class );
         aliases.put( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
+        aliases.put( "org.hibernate.exception.GenericJDBCException", Exception.class );
         return new XStreamConverter<ArrayList<String>>( aliases );
     }
 
@@ -72,6 +73,7 @@ public class Commands
         aliases.put( "person", PersonData.class );
         aliases.put( "root", Encoded.class );
         aliases.put( "ch.xmatrix.ups.ust.main.commands.Commands-Encoded", Encoded.class );
+        aliases.put( "org.hibernate.exception.GenericJDBCException", Exception.class );
         return new XStreamConverter<Encoded>( aliases );
     }
 

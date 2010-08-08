@@ -1,7 +1,11 @@
 #!/bin/perl
 
 `mvn help:effective-pom >eff.xml`;
+`grep "^\\[WARN" eff.xml`;
+`grep "^\\[ERRO" eff.xml`;
 `sed -i "s/^\\[INFO.*//g" eff.xml`;
+`sed -i "s/^\\[WARN.*//g" eff.xml`;
+`sed -i "s/^\\[ERRO.*//g" eff.xml`;
 `sed -i "s/^Effective.*//g" eff.xml`;
 `sed -i "s/<keystore>/<keystore>..\\/..\\//g" eff.xml`;
 `sed -i "s/<inputTemplateResourcePath>/<inputTemplateResourcePath>..\\/..\\//g" eff.xml`;

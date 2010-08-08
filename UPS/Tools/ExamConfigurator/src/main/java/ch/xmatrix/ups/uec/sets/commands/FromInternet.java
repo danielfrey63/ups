@@ -168,7 +168,21 @@ public class FromInternet extends ActionCommand
                     final IAnmeldedaten anmeldedatum = anmeldedaten[i];
                     final String lk = anmeldedatum.getLkNummer();
                     final String id1 = anmeldedatum.getStudentennummer();
-                    final byte[] bytes = ws.getPruefungsListe( user, pass, session.getSeskz(), lk, id1 );
+                    byte[] bytes = null;
+                    int retryCount = 10;
+                    boolean ok = false;
+                    while ( retryCount-- >= 0 && !ok )
+                    {
+                        try
+                        {
+                            bytes = ws.getPruefungsListe( user, pass, session.getSeskz(), lk, id1 );
+                            ok = true;
+                        }
+                        catch ( UPSServerException e )
+                        {
+                            LOG.warn( "connection not successfull. retrying (count = " + retryCount + ")" );
+                        }
+                    }
                     final PlantList list;
                     if ( bytes != null )
                     {
@@ -198,6 +212,7 @@ public class FromInternet extends ActionCommand
         catch ( Exception e )
         {
             e.printStackTrace();
+            JOptionPane.showMessageDialog( null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
         }
     }
 }

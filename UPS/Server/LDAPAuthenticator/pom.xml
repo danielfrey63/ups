@@ -14,10 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
+            <version>3.0.1006</version>
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>3.0.1002</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>

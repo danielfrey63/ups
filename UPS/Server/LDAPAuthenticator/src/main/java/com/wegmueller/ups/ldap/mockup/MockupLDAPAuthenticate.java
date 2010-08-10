@@ -6,9 +6,7 @@ import com.wegmueller.ups.ldap.LDAPAuthException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-/**
- * Created by: Thomas Wegmueller Date: 27.09.2005,  00:18:03
- */
+/** Created by: Thomas Wegmueller Date: 27.09.2005,  00:18:03 */
 public class MockupLDAPAuthenticate implements ILDAPAuth
 {
     ArrayList<DummyUser> storage = new ArrayList<DummyUser>();
@@ -123,11 +121,11 @@ public class MockupLDAPAuthenticate implements ILDAPAuth
 
     }
 
-    public ILDAPUserRecord getUserData( final String userName, final String password ) throws LDAPAuthException
+    public ILDAPUserRecord getUserData( final String userName ) throws LDAPAuthException
     {
         for ( final DummyUser o : storage )
         {
-            if ( o.getName().equals( userName ) && o.getPw().equals( password ) )
+            if ( o.getName().equals( userName ) && o.getPw().equals( "thePassword" ) )
             {
                 return o;
             }
@@ -135,4 +133,8 @@ public class MockupLDAPAuthenticate implements ILDAPAuth
         throw new LDAPAuthException( LDAPAuthException.INVALID_CREDENTIALS );
     }
 
+    public void getUserAuthentication( final String userName, final String password ) throws LDAPAuthException
+    {
+
+    }
 }

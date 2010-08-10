@@ -1,10 +1,11 @@
 package com.wegmueller.ups.ldap;
 
+import com.wegmueller.ups.UPSServerException;
 import com.wegmueller.ups.ldap.util.CustomSocketFactory;
 import java.security.Security;
 import java.util.Hashtable;
-import java.util.Map;
 import javax.naming.AuthenticationException;
+import javax.naming.CommunicationException;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -58,22 +59,61 @@ public class LDAPAuthenticate implements ILDAPAuth
 
     public static final String LDAP_FACTORY_SOCKET_PROPERTY = "java.naming.ldap.factory.socket";
 
-    public static final String UID_SEARCH_STRING = "uid=";
-
     public static final String INITIAL_CONTEXT_FACTORY = "com.sun.jndi.ldap.LdapCtxFactory";
 
     private static final SearchControls SEARCH_CONTROLS = new SearchControls( SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false );
 
-    public static void main( final String[] args ) throws LDAPAuthException
+    public static void main( final String[] args ) throws UPSServerException
     {
         Security.addProvider( new BouncyCastleProvider() );
         final LDAPAuthenticate d = new LDAPAuthenticate();
-        final ILDAPUserRecord rec = d.getUserData( "dfrey", "leni1234" );
-        final Map att = rec.getAttributes();
-        for ( final Object o : att.keySet() )
+        d.getUserAuthentication( "dfrey", "leni1234" );
+        d.getUserData( "dfrey" );
+    }
+
+    /**
+     * Validates the users credentials.
+     *
+     * @param userName the user name
+     * @param password the user password
+     * @throws LDAPAuthException in case of an unsuccessful validation
+     */
+    public void getUserAuthentication( final String userName, final String password ) throws LDAPAuthException
+    {
+        int index = 0;
+        boolean goon = true;
+        while ( index < HOSTS.length && goon )
         {
-            final String key = (String) o;
-            System.out.println( key + "=" + att.get( key ) );
+            final String host = HOSTS[index];
+            try
+            {
+                final Hashtable<String, String> env = new Hashtable<String, String>();
+                env.put( Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY );
+                env.put( LDAP_FACTORY_SOCKET_PROPERTY, CustomSocketFactory.class.getName() );
+                env.put( Context.PROVIDER_URL, LDAP_PROCOTCOL + host );
+                env.put( Context.SECURITY_AUTHENTICATION, SECURITY_AUTHENTICATION );
+                env.put( Context.SECURITY_PRINCIPAL, "cn=" + userName + "," + BASEDN );
+                env.put( Context.SECURITY_CREDENTIALS, password );
+                new InitialDirContext( env );
+                LOG.info( "authentication for " + userName + " successful" );
+                goon = false;
+            }
+            catch ( AuthenticationException e )
+            {
+                throw new LDAPAuthException( e );
+            }
+            catch ( CommunicationException e )
+            {
+                LOG.warn( "connection to " + host + " failed", e );
+                goon = true;
+                index++;
+            }
+            catch ( NamingException e )
+            {
+                LOG.error( "cannot create initial context", e );
+                goon = true;
+                index++;
+            }
         }
     }
 
@@ -82,7 +122,7 @@ public class LDAPAuthenticate implements ILDAPAuth
      *
      * @throws LDAPAuthException
      */
-    public ILDAPUserRecord getUserData( final String userName, final String password ) throws LDAPAuthException
+    public ILDAPUserRecord getUserData( final String userName ) throws UPSServerException
     {
         LDAPAuthException lastException = null;
         Throwable lastThrowable = null;
@@ -129,7 +169,7 @@ public class LDAPAuthenticate implements ILDAPAuth
         throw new LDAPAuthException( "unknown reason exception" );
     }
 
-    public static LDAPUserRecord getUserDetails( final String host, final String userName ) throws LDAPAuthException
+    public static LDAPUserRecord getUserDetails( final String host, final String userName ) throws UPSServerException
     {
         if ( LOG.isDebugEnabled() )
         {
@@ -146,7 +186,7 @@ public class LDAPAuthenticate implements ILDAPAuth
             final LDAPUserRecord list = new LDAPUserRecord( userName );
             try
             {
-                final String filter = UID_SEARCH_STRING + userName;
+                final String filter = "uid=" + userName;
                 if ( LOG.isDebugEnabled() )
                 {
                     LOG.debug( "search with base: \"" + BASEDN + "\", filter: \"" + filter + "\", controls: \"" + SEARCH_CONTROLS + "\"" );
@@ -183,13 +223,9 @@ public class LDAPAuthenticate implements ILDAPAuth
             }
             return list;
         }
-        catch ( AuthenticationException e )
-        {
-            throw new LDAPAuthException( e );
-        }
         catch ( NamingException e )
         {
-            throw new LDAPAuthException( e );
+            throw new UPSServerException( e );
         }
         finally
         {

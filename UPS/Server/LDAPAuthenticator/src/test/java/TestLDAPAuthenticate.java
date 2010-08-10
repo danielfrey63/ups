@@ -3,9 +3,7 @@ import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.ldap.LDAPAuthenticate;
 import junit.framework.TestCase;
 
-/**
- * Test Class for LDAPAuthenticate
- */
+/** Test Class for LDAPAuthenticate */
 public class TestLDAPAuthenticate extends TestCase
 {
     private ILDAPUserRecord record = null;
@@ -25,9 +23,7 @@ public class TestLDAPAuthenticate extends TestCase
         throwable = null;
     }
 
-    /**
-     * testing with the right infrastructure and a correct user name and password
-     */
+    /** testing with the right infrastructure and a correct user name and password */
     public void testOKUseCase()
     {
         call( "dfrey", "leni1234" );
@@ -38,9 +34,7 @@ public class TestLDAPAuthenticate extends TestCase
         assertTrue( record.getAttributes().size() > 0 );
     }
 
-    /**
-     * Testing if one of the ldap hosts is missing
-     */
+    /** Testing if one of the ldap hosts is missing */
     public void testOneMissingHost()
     {
         LDAPAuthenticate.HOSTS = new String[]{"www.wegmueller.com", "ldaps01.ups.ch"};
@@ -53,9 +47,7 @@ public class TestLDAPAuthenticate extends TestCase
         assertTrue( record.getAttributes().size() > 0 );
     }
 
-    /**
-     * test if none of the hosts can answer
-     */
+    /** test if none of the hosts can answer */
     public void testAllMissing()
     {
         LDAPAuthenticate.HOSTS = new String[]{"www.wegmueller.com", "www.sternenberg.ch"};
@@ -67,9 +59,7 @@ public class TestLDAPAuthenticate extends TestCase
         assertEquals( error.getName(), LDAPAuthException.INFRASTRUCTURE_EXCEPTION );
     }
 
-    /**
-     * test what happens if a user miss-spells username and/or password
-     */
+    /** test what happens if a user miss-spells username and/or password */
     public void testInvalidCredentials()
     {
         call( "dfrey", "sakdfjlasjfdadsf" );
@@ -89,7 +79,7 @@ public class TestLDAPAuthenticate extends TestCase
     {
         try
         {
-            record = auth.getUserData( name, pw );
+            record = auth.getUserData( name );
         }
         catch ( LDAPAuthException e )
         {

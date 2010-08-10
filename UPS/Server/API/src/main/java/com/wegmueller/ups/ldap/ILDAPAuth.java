@@ -1,8 +1,8 @@
 package com.wegmueller.ups.ldap;
 
-/**
- * Schnittstelle zu LDAP
- */
+import com.wegmueller.ups.UPSServerException;
+
+/** Schnittstelle zu LDAP */
 public interface ILDAPAuth
 {
     /**
@@ -12,6 +12,7 @@ public interface ILDAPAuth
      * @return
      * @throws LDAPAuthException
      */
-    ILDAPUserRecord getUserData( String userName ) throws LDAPAuthException;
+    ILDAPUserRecord getUserData( String userName ) throws UPSServerException;
 
+    void getUserAuthentication( String userName, String password ) throws LDAPAuthException;
 }

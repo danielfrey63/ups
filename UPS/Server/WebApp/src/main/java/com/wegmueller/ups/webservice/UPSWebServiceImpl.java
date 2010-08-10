@@ -3,6 +3,7 @@ package com.wegmueller.ups.webservice;
 import com.wegmueller.ups.IUPSServerService;
 import com.wegmueller.ups.UPSServerException;
 import com.wegmueller.ups.ldap.ILDAPUserRecord;
+import com.wegmueller.ups.ldap.LDAPAuthException;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import com.wegmueller.ups.lka.ILKAData;
 import com.wegmueller.ups.lka.IPruefung;
@@ -17,9 +18,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * The Implementation of the Webservice
- */
+/** The Implementation of the Webservice */
 public class UPSWebServiceImpl implements IUPSWebService
 {
     private static final Logger LOG = LoggerFactory.getLogger( UPSWebServiceImpl.class );
@@ -49,23 +48,19 @@ public class UPSWebServiceImpl implements IUPSWebService
         LOG.debug( userName );
         try
         {
-            final ILDAPUserRecord list = service.getLDAP().getUserData( userName, password );
-            if ( INFO )
-            {
-                LOG.info( list.toString() );
-            }
+            service.getLDAP().getUserAuthentication( userName, password );
+            final ILDAPUserRecord list = service.getLDAP().getUserData( userName );
+            LOG.info( list.toString() );
             final byte[] pdf = service.getUST().producePDF( userName, password, list, bytes );
-            if ( INFO )
-            {
-                LOG.info( "produced pdf of length " + pdf.length );
-            }
+            LOG.info( "produced pdf of length " + pdf.length );
             final Properties attributes = list.getAttributes();
             service.getStorage().storePruefungsListe( seskz, lknumber, userName, list.getStudentenNummer(), bytes, attributes, pdf );
-            if ( INFO )
-            {
-                LOG.info( "storage of data for " + userName + " ok" );
-            }
+            LOG.info( "storage of data for " + userName + " ok" );
             return pdf;
+        }
+        catch ( LDAPAuthException e )
+        {
+            throw new UPSServerException( UPSServerException.SERVER_ERROR, e );
         }
         catch ( UPSServerException e )
         {
@@ -81,7 +76,7 @@ public class UPSWebServiceImpl implements IUPSWebService
 
     public void checkDataForDozent( final String dozent, final String passwrd ) throws UPSServerException
     {
-        if ( service.getLDAP().getUserData( dozent, passwrd ) != null )
+        if ( service.getLDAP().getUserData( dozent ) != null )
         {
             final String[] mapping = getOISCredentials( dozent, passwrd );
             if ( !service.getStorage().isStored( mapping[0] ) )
@@ -93,7 +88,7 @@ public class UPSWebServiceImpl implements IUPSWebService
 
     private void checkSessionOfDozenz( final String dozent, final String passwrd, final String seskz ) throws UPSServerException
     {
-        if ( service.getLDAP().getUserData( dozent, passwrd ) != null )
+        if ( service.getLDAP().getUserData( dozent ) != null )
         {
             final String[] mapping = getOISCredentials( dozent, passwrd );
             if ( !service.getStorage().isStored( seskz, mapping[0] ) )
@@ -155,7 +150,7 @@ public class UPSWebServiceImpl implements IUPSWebService
         {
             throw new UPSServerException( UPSServerException.INVALID_CREDENTIALS );
         }
-        if ( service.getLDAP().getUserData( userName, password ) != null )
+        if ( service.getLDAP().getUserData( userName ) != null )
         {
             service.getStorage().mapOIS2LDAP( ldapUser, oisUser, oisPassword );
         }
@@ -169,7 +164,7 @@ public class UPSWebServiceImpl implements IUPSWebService
 
     public IPruefungsSession reloadPruefungsDaten( final String dozent, final String passwrd ) throws UPSServerException, RemoteException
     {
-        if ( service.getLDAP().getUserData( dozent, passwrd ) != null )
+        if ( service.getLDAP().getUserData( dozent ) != null )
         {
             final String[] mapping = getOISCredentials( dozent, passwrd );
             return reloadOIS( mapping[0], mapping[1] );

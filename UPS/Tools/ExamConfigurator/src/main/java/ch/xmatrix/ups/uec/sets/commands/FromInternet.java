@@ -166,36 +166,39 @@ public class FromInternet extends ActionCommand
                 for ( int i = 0; i < length && goon; i++ )
                 {
                     final IAnmeldedaten anmeldedatum = anmeldedaten[i];
-                    final String lk = anmeldedatum.getLkNummer();
-                    final String id1 = anmeldedatum.getStudentennummer();
-                    byte[] bytes = null;
-                    int retryCount = 10;
-                    boolean ok = false;
-                    while ( retryCount-- >= 0 && !ok )
+                    if ( "mündlich".equals( anmeldedatum.getPruefungsmodeText() ) )
                     {
-                        try
+                        final String lk = anmeldedatum.getLkNummer();
+                        final String id1 = anmeldedatum.getStudentennummer();
+                        byte[] bytes = null;
+                        int retryCount = 10;
+                        boolean ok = false;
+                        while ( retryCount-- >= 0 && !ok )
                         {
-                            bytes = ws.getPruefungsListe( user, pass, session.getSeskz(), lk, id1 );
-                            ok = true;
+                            try
+                            {
+                                bytes = ws.getPruefungsListe( user, pass, session.getSeskz(), lk, id1 );
+                                ok = true;
+                            }
+                            catch ( UPSServerException e )
+                            {
+                                LOG.warn( "connection not successfull. retrying (count = " + retryCount + ")" );
+                            }
                         }
-                        catch ( UPSServerException e )
+                        final PlantList list;
+                        if ( bytes != null )
                         {
-                            LOG.warn( "connection not successfull. retrying (count = " + retryCount + ")" );
+                            final Converter<ArrayList<String>> converter = Commands.getConverter1();
+                            final ArrayList<String> taxa = converter.from( new StringReader( new String( bytes ) ) );
+                            list = new PlantList();
+                            list.setTaxa( taxa );
                         }
+                        else
+                        {
+                            list = null;
+                        }
+                        submitModel.add( new Registration( anmeldedatum, list ) );
                     }
-                    final PlantList list;
-                    if ( bytes != null )
-                    {
-                        final Converter<ArrayList<String>> converter = Commands.getConverter1();
-                        final ArrayList<String> taxa = converter.from( new StringReader( new String( bytes ) ) );
-                        list = new PlantList();
-                        list.setTaxa( taxa );
-                    }
-                    else
-                    {
-                        list = null;
-                    }
-                    submitModel.add( new Registration( anmeldedatum, list ) );
                 }
             }
             else

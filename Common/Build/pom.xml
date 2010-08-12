@@ -522,6 +522,7 @@
                 <excludes>
                     <exclude>**/*.psd</exclude>
                     <exclude>**/*.ai</exclude>
+                    <exclude>log4j.properties</exclude>
                 </excludes>
             </resource>
         </resources>

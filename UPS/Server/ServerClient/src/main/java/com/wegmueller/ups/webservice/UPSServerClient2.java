@@ -159,21 +159,22 @@ public class UPSServerClient2 implements IUPSWebService
                 args[i] = xstream.toXML( s1[i - 1] );
             }
             final String r = webService.invoke( args );
-            //System.out.println(r);
             final Object result = xstream.fromXML( r );
             if ( result instanceof Throwable )
             {
                 final Throwable t = (Throwable) result;
-                t.printStackTrace();
-                throw new UPSServerException( t );
+                if ( t.getCause() instanceof UPSServerException )
+                {
+                    throw (UPSServerException) t.getCause();
+                }
+                else
+                {
+                    throw new UPSServerException( t );
+                }
             }
             return result;
         }
         catch ( RemoteException e )
-        {
-            throw new UPSServerException( "cannot invoke " + s, e );
-        }
-        catch ( UPSServerException e )
         {
             throw new UPSServerException( "cannot invoke " + s, e );
         }

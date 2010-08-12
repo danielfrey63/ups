@@ -34,9 +34,9 @@ public class MemoryAppender extends AppenderSkeleton
 
     protected String logLevel = Level.DEBUG.toString();
 
-    /**
-     * The default constructor constructs a ArrayList
-     */
+    private Throwable caughtException;
+
+    /** The default constructor constructs a ArrayList */
     public MemoryAppender()
     {
         list = new ArrayList<LoggingEvent>( listSize );
@@ -67,7 +67,7 @@ public class MemoryAppender extends AppenderSkeleton
             start = pointer + 1;
         }
         final StringBuffer sb = new StringBuffer();
-        while ( start != ( pointer ) )
+        while ( start != pointer )
         {
             final LoggingEvent e = list.get( start );
             sb.append( getLayout().format( e ) );
@@ -91,9 +91,18 @@ public class MemoryAppender extends AppenderSkeleton
         {
             appendToList( e );
         }
-        if ( e.getLevel().isGreaterOrEqual( _messageLevel ) )
+        final Throwable t;
+        if ( e.getThrowableInformation() == null )
         {
-            System.out.println( dump() );
+            t = null;
+        }
+        else
+        {
+            t = e.getThrowableInformation().getThrowable();
+        }
+        if ( e.getLevel().isGreaterOrEqual( _messageLevel ) && ( t == null || t.equals( caughtException ) ) )
+        {
+            System.err.println( dump() );
             final SendFeedbackDialog dialog = new SendFeedbackDialog();
             dialog.setDump( dump() );
             dialog.open();
@@ -166,6 +175,16 @@ public class MemoryAppender extends AppenderSkeleton
     public Level getMessageLevel()
     {
         return _messageLevel;
+    }
+
+    public void setCaughtException( final Throwable caughtException )
+    {
+        this.caughtException = caughtException;
+    }
+
+    public Throwable getCaughtException()
+    {
+        return caughtException;
     }
 
     /**

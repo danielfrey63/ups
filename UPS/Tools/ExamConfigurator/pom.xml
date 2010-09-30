@@ -163,10 +163,11 @@
             <groupId>org.pietschy</groupId>
             <artifactId>gui-commands</artifactId>
         </dependency>
-        <dependency>
-            <groupId>uispec4j</groupId>
-            <artifactId>uispec4j</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>uispec4j</groupId>-->
+            <!--<artifactId>uispec4j</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>xpp3</groupId>
             <artifactId>xpp3</artifactId>

@@ -102,7 +102,7 @@ public class CachedImage extends ImageReference
             return;
         }
         listeners.detach( list );
-        if ( listeners.size() < 0 )
+        if ( listeners.size() <= 0 )
         {
             listeners = null;
         }
@@ -110,15 +110,7 @@ public class CachedImage extends ImageReference
 
     protected boolean loaded( final boolean thumb )
     {
-        if ( super.getImage( thumb ) != null )
-        {
-            return true;
-        }
-        if ( thumb && ( super.getImage( false ) != null ) )
-        {
-            return true;
-        }
-        return false;
+        return super.getImage( thumb ) != null || thumb && ( super.getImage( false ) != null );
     }
 
     protected synchronized Image loadImage( final boolean thumb )

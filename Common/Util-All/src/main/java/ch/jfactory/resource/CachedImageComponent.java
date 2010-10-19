@@ -38,9 +38,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
 
     private double zoomFaktor = 1.0;
 
-    /**
-     * Size which represents a zooming factor of 1.
-     */
+    /** Size which represents a zooming factor of 1. */
     private int defaultSize = 0;
 
     private Dimension size;
@@ -73,7 +71,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         CachedImage im = null;
         if ( name != null )
         {
-            im = cache.addCachedImage( name );
+            im = cache.addOrGetCachedImage( name );
         }
         boolean revalidate = false;
         if ( img != null )

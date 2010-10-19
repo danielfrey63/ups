@@ -25,28 +25,20 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderListener
 {
-    /**
-     * category for logging
-     */
+    /** This class' logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageLocator.class );
 
-    /**
-     * map containing a cache for images especially Icons
-     */
-    private static final Map imageCache = new WeakHashMap();
+    /** Map containing a cache for images especially icons. */
+    private static final Map<String, WeakReference<ImageIcon>> imageCache = new WeakHashMap<String, WeakReference<ImageIcon>>();
 
-    /**
-     * cache for pictures
-     */
+    /** Cache for pictures. */
     private final PictureCache cache = new PictureCache( this );
 
-    /**
-     * loader for images
-     */
+    /** Loader for images. */
     private AsynchronPictureLoader loader = null;
 
     /**
-     * get an ImageIcon from Cache or reloads it into the cache.
+     * Get an ImageIcon from Cache or reloads it into the cache.
      *
      * @param name name of the image
      * @return reference to the ImageIcon
@@ -54,30 +46,21 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     public ImageIcon getImageIcon( final String name )
     {
         LOGGER.debug( "Request for " + name );
-        WeakReference ref = (WeakReference) imageCache.get( name );
+        WeakReference<ImageIcon> ref = imageCache.get( name );
         if ( ( ref == null ) || ( ref.get() == null ) )
         {
             final ImageIcon icon = loadImageIcon( name );
-            imageCache.put( name, ref = new WeakReference( icon ) );
+            imageCache.put( name, ref = new WeakReference<ImageIcon>( icon ) );
         }
 
-        return (ImageIcon) ref.get();
+        return ref.get();
     }
 
     private ImageIcon loadImageIcon( final String name )
     {
-        final String fullName = locate( new String( name ) );
+        final String fullName = locate( name );
         final URL url = getClass().getResource( fullName );
-        final ImageIcon icon;
-        if ( url == null )
-        {
-            icon = new ImageIcon( fullName );
-        }
-        else
-        {
-            icon = new ImageIcon( url );
-        }
-        return icon;
+        return url == null ? new ImageIcon( fullName ) : new ImageIcon( url );
     }
 
     /**
@@ -87,12 +70,10 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
      */
     public void cacheImage( final String name )
     {
-        cache.addCachedImage( locate( name ) );
+        cache.addOrGetCachedImage( locate( name ) );
     }
 
-    /**
-     * clear caching list.
-     */
+    /** clear caching list. */
     public void clearCacheList()
     {
         cache.clearCachingList();
@@ -107,7 +88,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     {
         final String url = locate( name );
 
-        final Image img = cache.addCachedImage( url ).getImage( false );
+        final Image img = cache.addOrGetCachedImage( url ).getImage( false );
         if ( img == null )
         {
             if ( loader == null )
@@ -124,9 +105,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
         }
     }
 
-    /**
-     * abort current image loading
-     */
+    /** abort current image loading */
     public void abort()
     {
         if ( loader != null )

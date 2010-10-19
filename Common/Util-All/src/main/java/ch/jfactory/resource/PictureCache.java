@@ -37,16 +37,14 @@ public class PictureCache implements AsynchronPictureLoaderListener
         public boolean thumb;
     }
 
-    /**
-     * category for logging
-     */
+    /** category for logging */
     protected final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
 
     protected final static boolean INFO = LOGGER.isInfoEnabled();
 
     protected final static boolean DEBUG = LOGGER.isDebugEnabled();
 
-    protected HashMap cacheListHash = new HashMap();
+    protected HashMap<String, CacheListEntry> cacheListHash = new HashMap<String, CacheListEntry>();
 
     private final CachedImageLocator locator;
 
@@ -57,15 +55,11 @@ public class PictureCache implements AsynchronPictureLoaderListener
      */
     private final CacheImageThread cachingThread = new CacheImageThread();
 
-    /**
-     * hashmap storing cached picture
-     */
-    private final Map pictureCache = new HashMap();
+    /** hashmap storing cached picture */
+    private final Map<String, CachedImage> pictureCache = new HashMap<String, CachedImage>();
 
-    /**
-     * task list, contains images to be cached
-     */
-    protected LinkedList cachingList = new LinkedList();
+    /** task list, contains images to be cached */
+    protected final LinkedList<String> cachingList = new LinkedList<String>();
 
     /**
      * PictureCache taking images from directory
@@ -79,9 +73,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
         this.locator = locator;
     }
 
-    /**
-     * clears all entries from Cache
-     */
+    /** clears all entries from Cache */
     synchronized public void clearCachingList()
     {
         synchronized ( cachingList )
@@ -96,15 +88,15 @@ public class PictureCache implements AsynchronPictureLoaderListener
     }
 
     /**
-     * Puts an Image into the cache
+     * Puts an Image into the cache.
      *
      * @param name name of the image
      * @return a CachedImage-Object representing the image
      * @see CachedImage
      */
-    public CachedImage addCachedImage( final String name )
+    public CachedImage addOrGetCachedImage( final String name )
     {
-        CachedImage image = (CachedImage) pictureCache.get( name );
+        CachedImage image = pictureCache.get( name );
         if ( image == null )
         {
             if ( INFO )
@@ -118,7 +110,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
     }
 
     /**
-     * remove a image from the cache.
+     * Removes an image from the cache.
      *
      * @param name name of the cache
      */
@@ -138,7 +130,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
      */
     public void cacheImage( final String name, final boolean thumb, final boolean first )
     {
-        if ( !addCachedImage( name ).loaded( thumb ) )
+        if ( !addOrGetCachedImage( name ).loaded( thumb ) )
         {
             boolean ok = false;
             synchronized ( cachingList )
@@ -168,7 +160,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
                 }
                 if ( !thumb )
                 {
-                    CacheListEntry cle = (CacheListEntry) cacheListHash.get( name );
+                    CacheListEntry cle = cacheListHash.get( name );
                     if ( cle == null )
                     {
                         cacheListHash.put( name, cle = new CacheListEntry( name, thumb ) );
@@ -192,7 +184,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
 
     public void loadFinished( final String name, final Image img, final boolean thumb )
     {
-        addCachedImage( name ).setImage( img, thumb );
+        addOrGetCachedImage( name ).setImage( img, thumb );
     }
 
     public void loadAborted( final String name )
@@ -224,8 +216,8 @@ public class PictureCache implements AsynchronPictureLoaderListener
                         boolean thumb = false;
                         synchronized ( PictureCache.this.cachingList )
                         {
-                            name = (String) cachingList.removeFirst();
-                            final CacheListEntry cle = (CacheListEntry) cacheListHash.get( name );
+                            name = cachingList.removeFirst();
+                            final CacheListEntry cle = cacheListHash.get( name );
                             if ( cle != null )
                             {
                                 thumb = cle.thumb;
@@ -234,12 +226,12 @@ public class PictureCache implements AsynchronPictureLoaderListener
                         }
                         if ( INFO )
                         {
-                            LOGGER.info( "caching image " + name + ", " + thumb );
+                            LOGGER.info( "caching image " + name + ", thum = " + thumb );
                         }
-                        final CachedImage img = addCachedImage( name );
+                        final CachedImage img = addOrGetCachedImage( name );
                         if ( !img.loaded( thumb ) )
                         {
-                            addCachedImage( name ).loadImage( thumb );
+                            addOrGetCachedImage( name ).loadImage( thumb );
                         }
                     }
                     catch ( NoSuchElementException ex )

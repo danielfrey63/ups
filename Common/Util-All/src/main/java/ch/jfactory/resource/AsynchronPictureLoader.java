@@ -25,34 +25,24 @@ import org.slf4j.LoggerFactory;
  */
 class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, IIOReadProgressListener, AsynchronPictureLoaderSupport
 {
-    /**
-     * category information for logging
-     */
+    /** Category information for logging. */
     private static final Logger LOGGER = LoggerFactory.getLogger( AsynchronPictureLoader.class.getName() );
 
-    /**
-     * if running is set to false, the thread goes down
-     */
+    /** If running is set to false, the thread goes down. */
     private boolean running = true;
 
-    /**
-     * url to the image which should be loaded
-     */
-    private String pictureURL = ""; //$NON-NLS-1$
+    /** URL to the image which should be loaded. */
+    private String pictureURL = "";
 
-    /**
-     * image reader
-     */
+    /** Image reader. */
     private final ImageReader reader = null;
 
-    private final AbstractAsynchronPictureLoaderSupport
-            asynchronPictureLoaderSupport =
-            new AbstractAsynchronPictureLoaderSupport();
+    private final AbstractAsynchronPictureLoaderSupport asynchronPictureLoaderSupport = new AbstractAsynchronPictureLoaderSupport();
 
     /**
-     * loads a image from the given url.
+     * Loads a image from the given URL.
      *
-     * @param name url to the picture
+     * @param name URL to the picture
      */
     public synchronized void loadImage( final String name )
     {
@@ -61,9 +51,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         Thread.yield();
     }
 
-    /**
-     * abort asynchron image loading
-     */
+    /** Abort asynchron image loading. */
     public void abort()
     {
         if ( reader != null )
@@ -73,9 +61,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         }
     }
 
-    /**
-     * terminate image loader thread
-     */
+    /** Terminate image loader thread. */
     public synchronized void terminate()
     {
         abort();
@@ -83,9 +69,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         notify();
     }
 
-    /**
-     * asynchron loader...
-     */
+    /** Asynchron loader... */
     public void run()
     {
         LOGGER.info( "AsynchronPictureLoader thread started" );
@@ -216,23 +200,3 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         asynchronPictureLoaderSupport.attach( listener );
     }
 }
-
-// $Log: AsynchronPictureLoader.java,v $
-// Revision 1.2  2006/03/14 21:27:55  daniel_frey
-// *** empty log message ***
-//
-// Revision 1.1  2005/06/16 06:28:58  daniel_frey
-// Completely merged and finished for UST version 2.0-20050616
-//
-// Revision 1.1  2004/07/22 13:00:09  daniel_frey
-// *** empty log message ***
-//
-// Revision 1.1  2004/04/19 10:31:21  daniel_frey
-// Replaced top level package com by ch
-//
-// Revision 1.3  2002/08/02 00:42:20  Dani
-// Optimized import statements
-//
-// Revision 1.2  2002/05/28 10:01:21  Dani
-// Adapted headers and footers
-//

@@ -32,25 +32,25 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
         return newArray;
     }
 
-    public static Object[] remove( final Object[] array, final Object objectToRemove, final Object[] type )
+    public static <T> T[] remove( final T[] array, final T objectToRemove, final T[] type )
     {
-        final List list = new ArrayList( Arrays.asList( array ) );
+        final List<T> list = new ArrayList<T>( Arrays.asList( array ) );
         list.remove( objectToRemove );
         return list.toArray( type );
     }
 
-    public static Object[] remove( final Object[] array, final int index, final Object[] type )
+    public static <T> T[] remove( final T[] array, final int index, final T[] type )
     {
-        final List list = new ArrayList( Arrays.asList( array ) );
+        final List<T> list = new ArrayList<T>( Arrays.asList( array ) );
         list.remove( index );
         return list.toArray( type );
     }
 
-    public static Object[] remove( final Object[] array, final int[] indices, final Object[] type )
+    public static <T> T[] remove( final T[] array, final int[] indexes, final T[] type )
     {
-        final List list = new ArrayList( Arrays.asList( array ) );
-        final List copy = new ArrayList( list );
-        for ( final int index : indices )
+        final List<T> list = new ArrayList<T>( Arrays.asList( array ) );
+        final List<T> copy = new ArrayList<T>( list );
+        for ( final int index : indexes )
         {
             list.remove( copy.get( index ) );
         }
@@ -77,15 +77,15 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
      *
      * @param group1 first group
      * @param group2 second group
-     * @param type   the type to convert the result to
+     * @param type   the type of the resulting array
      * @return the elements of group1 (and in its order) which occur in group2
      */
-    public static Object[] intersect( final Object[] group1, final Object[] group2, final Object[] type )
+    public static <T> T[] intersect( final T[] group1, final T[] group2, final T[] type )
     {
-        final List list = new ArrayList();
-        for ( final Object o1 : group1 )
+        final List<T> list = new ArrayList<T>();
+        for ( final T o1 : group1 )
         {
-            for ( final Object o2 : group2 )
+            for ( final T o2 : group2 )
             {
                 if ( o1 == o2 )
                 {
@@ -96,22 +96,10 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
         return list.toArray( type );
     }
 
-    /**
-     * Makes an intersection between the two groups.
-     *
-     * @param group1 first group
-     * @param group2 second group
-     * @return the elements of group1 (and in its order) which occur in group2
-     */
-    public static Object[] intersect( final Object[] group1, final Object[] group2 )
-    {
-        return intersect( group1, group2, new Object[0] );
-    }
-
     public static int[] insert( final int[] array, final int newInt, final int pos )
     {
         final int length = array.length;
-        final int[] newInts = new int[length + 1];
+        final int[] newIntegers = new int[length + 1];
         int diff = 0;
         for ( int i = 0; i < length; i++ )
         {
@@ -119,14 +107,14 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
             {
                 diff = 1;
             }
-            newInts[i + diff] = array[i];
+            newIntegers[i + diff] = array[i];
         }
-        newInts[pos] = newInt;
-        return newInts;
+        newIntegers[pos] = newInt;
+        return newIntegers;
     }
 
     /**
-     * Inserts the given object at the given position. If the position is negativ, the insertion point index is
+     * Inserts the given object at the given position. If the position is negative, the insertion point index is
      * calculated from the end of the array. I.e. an insertion position of -1 will insert the object at the end of the
      * array.
      *
@@ -134,31 +122,31 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
      * @param object the object to insert
      * @param pos    the position to insert at
      * @param type   an instance of the array type to return
-     * @return
+     * @return the inserted array
      */
-    public static Object[] insert( final Object[] array, final Object object, final int pos, final Object[] type )
+    public static <T> T[] insert( final T[] array, final T object, final int pos, final T[] type )
     {
         final int index = ( pos < 0 ? array.length + 1 + pos : pos );
-        final List list = new ArrayList( Arrays.asList( array ) );
+        final List<T> list = new ArrayList<T>( Arrays.asList( array ) );
         list.add( index, object );
         return list.toArray( type );
     }
 
-    public static Object[] removeAll( final Object[] all, final Object[] toRemove, final Object[] type )
+    public static <T> T[] removeAll( final T[] all, final T[] toRemove, final T[] type )
     {
-        final List list = new ArrayList( Arrays.asList( all ) );
-        for ( final Object remove : toRemove )
+        final List<T> list = new ArrayList<T>( Arrays.asList( all ) );
+        for ( final T remove : toRemove )
         {
             list.remove( remove );
         }
         return list.toArray( type );
     }
 
-    public static Object[] unite( final Object[] group1, final Object[] group2, final Object[] type, final Comparator comparator )
+    public static <T> T[] unite( final T[] group1, final T[] group2, final T[] type, final Comparator<T> comparator )
     {
-        final Set set = new HashSet( Arrays.asList( group1 ) );
+        final Set<T> set = new HashSet<T>( Arrays.asList( group1 ) );
         set.addAll( Arrays.asList( group2 ) );
-        final Object[] result = set.toArray( type );
+        final T[] result = set.toArray( type );
         Arrays.sort( result, comparator );
         return result;
     }
@@ -166,17 +154,17 @@ public class ArrayUtils extends org.apache.commons.lang.ArrayUtils
     /**
      * Adds the given diff to each int value in the array
      *
-     * @param ints the array of ints
-     * @param diff the difference to add
+     * @param integers the array of integers
+     * @param diff     the difference to add
      * @return the same array with changed content
      */
-    public static int[] shift( final int[] ints, final int diff )
+    public static int[] shift( final int[] integers, final int diff )
     {
-        for ( int i = 0; i < ints.length; i++ )
+        for ( int i = 0; i < integers.length; i++ )
         {
-            ints[i] += diff;
+            integers[i] += diff;
         }
-        return ints;
+        return integers;
     }
 
     public static boolean isIn( final Object[] list, final Object key )

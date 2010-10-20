@@ -65,9 +65,7 @@ public class WizardFilterDefinitionPane extends WizardPane
 {
     private static final Logger LOG = LoggerFactory.getLogger( WizardFilterDefinitionPane.class );
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public static final String NAME = "filter.define";
 
     private final String filterPropertyName;
@@ -279,7 +277,7 @@ public class WizardFilterDefinitionPane extends WizardPane
                     return;
                 }
                 final Level[] levels = getValidNewLevels( tree.getSelectionPath() );
-                Arrays.sort( levels, new ToStringComparator() );
+                Arrays.sort( levels, new ToStringComparator<Level>() );
                 final JDialog parent = (JDialog) WizardFilterDefinitionPane.this.getTopLevelAncestor();
                 final ListDialog dialog = new ListDialog( parent, "DIALOG.LEVELS", levels );
                 dialog.setSize( 300, 300 );
@@ -338,7 +336,7 @@ public class WizardFilterDefinitionPane extends WizardPane
                 if ( ok )
                 {
                     final Level[] validNewLevels = getValidNewLevels( parentPath );
-                    ok &= ( validNewLevels.length > 0 );
+                    ok = ( validNewLevels.length > 0 );
                 }
                 button.setEnabled( ok );
             }
@@ -374,21 +372,21 @@ public class WizardFilterDefinitionPane extends WizardPane
     private Level[] getValidNewLevels( final FilterModel filterModel, final FilterDefinitionDetail detail )
     {
         // make sure to display only valid levels. valid levels are all levels of the base list which occur
-        // also in the scopes sublevels, but are not already chosen.
+        // also in the scopes sub levels, but are not already chosen.
         final Taxon scope = detail.getScope();
-        final Level[] proto = new Level[0];
+        final Level[] empty = new Level[0];
         Level[] levels = scope.getSubLevels();
         final boolean top1 = scope.equals( filterModel.getRootTaxon() );
         final boolean top2 = filterModel.getRootTaxon().equals( scope );
         if ( top1 || top2 )
         {
-            levels = (Level[]) ArrayUtils.unite( levels, filterModel.getDependantModel().getLevels(), proto, new LevelComparator() );
-            levels = (Level[]) ArrayUtils.removeAll( levels, detail.getLevels(), proto );
+            levels = ArrayUtils.unite( levels, filterModel.getDependantModel().getLevels(), empty, new LevelComparator() );
+            levels = ArrayUtils.removeAll( levels, detail.getLevels(), empty );
         }
         else
         {
-            levels = (Level[]) ArrayUtils.removeAll( levels, detail.getLevels(), proto );
-            levels = (Level[]) ArrayUtils.intersect( levels, filterModel.getDependantModel().getLevels(), proto );
+            levels = ArrayUtils.removeAll( levels, detail.getLevels(), empty );
+            levels = ArrayUtils.intersect( levels, filterModel.getDependantModel().getLevels(), empty );
         }
         Arrays.sort( levels, new LevelComparator() );
 
@@ -604,7 +602,7 @@ public class WizardFilterDefinitionPane extends WizardPane
         {
             // collect levels to remove
             final FilterDefinitionDetail detail = (FilterDefinitionDetail) userObject;
-            final List toRemove = new ArrayList();
+            final List<FilterTreeNode> toRemove = new ArrayList<FilterTreeNode>();
             for ( int i = 0; i < node.getChildCount(); i++ )
             {
                 final FilterTreeNode child = (FilterTreeNode) node.getChildAt( i );
@@ -641,7 +639,7 @@ public class WizardFilterDefinitionPane extends WizardPane
     }
 
     /**
-     * Checks whether the level given is being contained in the sublevels of the scope.
+     * Checks whether the level given is being contained in the sub levels of the scope.
      *
      * @param detail       the FilterDefinitionDetail of the level to evaluate
      * @param levelToCheck the level to validate
@@ -655,7 +653,7 @@ public class WizardFilterDefinitionPane extends WizardPane
     }
 
     /**
-     * Checks whether the given scope is consistent with the other scopes in the model. Expecially it is checked whether
+     * Checks whether the given scope is consistent with the other scopes in the model. Especially it is checked whether
      * the given scope is: <ul> <li>not the same any other one in the model</li> <li>is not a child of any scope in the
      * model</li> <li>is not a parent of any scope in the model</li> </ul>
      *
@@ -667,7 +665,7 @@ public class WizardFilterDefinitionPane extends WizardPane
         final FilterModel filterModel = (FilterModel) getProperty( filterPropertyName );
         FilterDefinitionDetail[] details = filterModel.getFilterDetails();
         // make sure two same scopes are properly recognized
-        details = (FilterDefinitionDetail[]) ArrayUtils.remove( details, detailToCheck, new FilterDefinitionDetail[0] );
+        details = ArrayUtils.remove( details, detailToCheck, new FilterDefinitionDetail[0] );
         final Taxon checkScope = detailToCheck.getScope();
         final Level checkLevel = checkScope.getLevel();
         boolean consistent = true;
@@ -751,16 +749,16 @@ public class WizardFilterDefinitionPane extends WizardPane
                 }
                 final FilterDefinitionDetail detail = (FilterDefinitionDetail) userObject;
                 final Level level = (Level) childNode.getUserObject();
-                final List levels = new ArrayList( Arrays.asList( detail.getLevels() ) );
+                final List<Level> levels = new ArrayList<Level>( Arrays.asList( detail.getLevels() ) );
                 levels.add( index, level );
-                detail.setLevels( (Level[]) levels.toArray( new Level[0] ) );
+                detail.setLevels( levels.toArray( new Level[levels.size()] ) );
             }
             // update cache
-            final List childrenList = new ArrayList( Arrays.asList( children ) );
+            final List<FilterTreeNode> childrenList = new ArrayList<FilterTreeNode>( Arrays.asList( children ) );
             childrenList.add( index, childNode );
             childNode.parent = this;
             childNode.children = new FilterTreeNode[childNode.getChildCount()];
-            children = (FilterTreeNode[]) childrenList.toArray( new FilterTreeNode[0] );
+            children = childrenList.toArray( new FilterTreeNode[childrenList.size()] );
         }
 
         public void remove( final MutableTreeNode child )
@@ -820,7 +818,10 @@ public class WizardFilterDefinitionPane extends WizardPane
                     final Level level = detail.getLevels()[childIndex];
                     result = new FilterTreeNode( level );
                 }
-                result.parent = this;
+                if ( result != null )
+                {
+                    result.parent = this;
+                }
                 children[childIndex] = result;
                 return result;
             }
@@ -951,7 +952,7 @@ public class WizardFilterDefinitionPane extends WizardPane
         {
             super( 32 + sizeOfPrefix, 16, TYPE_INT_ARGB_PRE );
 
-            final Map map = new HashMap();
+            final Map<RenderingHints.Key, Object> map = new HashMap<RenderingHints.Key, Object>();
             map.put( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
             map.put( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
             final RenderingHints hints = new RenderingHints( map );

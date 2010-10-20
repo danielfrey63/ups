@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.gui.picture;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.image.PictureDetailPanel;
+import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -54,20 +55,22 @@ public class PicturePanel extends JPanel
     private PictureTheme[] themes;
 
     /**
-     * Creates new form PicturePanel.
+     * Creates new picture panel showing the text with all themes in the model.
      *
      * @param herbarModel the main model
      */
     public PicturePanel( final HerbarModel herbarModel )
     {
-        this( herbarModel, true );
+        this( herbarModel, true, herbarModel.getPictureThemes() );
     }
 
-    public PicturePanel( final HerbarModel herbarModel, final boolean showText )
-    {
-        this( herbarModel, showText, herbarModel.getPictureThemes() );
-    }
-
+    /**
+     * Creates the picture panel with the given themes and allows to hide the text.
+     *
+     * @param herbarModel the main model
+     * @param showText    whether to show the text
+     * @param themes      the themes to show
+     */
     public PicturePanel( final HerbarModel herbarModel, final boolean showText, final PictureTheme... themes )
     {
         model = new PictureModel( herbarModel );
@@ -92,18 +95,6 @@ public class PicturePanel extends JPanel
     {
         model.setZoomed( b );
         setImage();
-    }
-
-    private boolean isThemeVisible( final PictureTheme theme )
-    {
-        for ( final PictureTheme theTheme : themes )
-        {
-            if ( theTheme == theme )
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void createDetailPanelListener( final PictureDetailPanel detailPanel )
@@ -137,17 +128,15 @@ public class PicturePanel extends JPanel
         {
             return;
         }
-        for ( int i = 0; i < taxon.getPictureThemes().length; i++ )
+        final PictureTheme[] modelThemes = taxon.getPictureThemes();
+        final PictureTheme[] themes = ArrayUtils.intersect( modelThemes, this.themes, new PictureTheme[0] );
+        for ( final PictureTheme theme : themes )
         {
-            final PictureTheme theme = taxon.getPictureThemes()[i];
-            if ( model.getPictureTheme() == theme )
+            final CommentedPicture[] pics = taxon.getCommentedPictures( theme );
+            for ( final CommentedPicture pic : pics )
             {
-                final CommentedPicture[] pics = taxon.getCommentedPictures( theme );
-                for ( final CommentedPicture pic : pics )
-                {
-                    final String picture = pic.getPicture().getRelativURL();
-                    getDetail( theme ).cacheImage( picture, true );
-                }
+                final String picture = pic.getPicture().getRelativURL();
+                getDetail( theme ).cacheImage( picture, true );
             }
         }
     }
@@ -163,7 +152,6 @@ public class PicturePanel extends JPanel
         model.setTaxon( taxon );
         pictureTab.clearCachingList();
         pictureTab.clearAll();
-        final PictureTheme[] themes = model.getPictureThemes();
         for ( final PictureTheme theme : themes )
         {
             fillTheme( theme );
@@ -198,10 +186,6 @@ public class PicturePanel extends JPanel
 
     private void fillTheme( final PictureTheme theme )
     {
-        if ( !isThemeVisible( theme ) )
-        {
-            return;
-        }
         final PictureDetailPanel detail = pictureTab.getThemePanel( theme );
         final int counter = fillDetailPanel( detail, theme );
         pictureTab.setEnabled( model.getIndex( theme ), counter != 0 );
@@ -257,15 +241,10 @@ public class PicturePanel extends JPanel
 
     private void createTabs()
     {
-        final PictureTheme[] themes = model.getPictureThemes();
-        for ( int i = 0; i < themes.length; i++ )
+        for ( final PictureTheme theme : themes )
         {
-            final PictureDetailPanel detailPanel = pictureTab.addTab( themes[i], themes[i].getName() );
-            pictureTab.setEnabledAt( i, isThemeVisible( themes[i] ) );
-            if ( isThemeVisible( themes[i] ) )
-            {
-                createDetailPanelListener( detailPanel );
-            }
+            final PictureDetailPanel detailPanel = pictureTab.addTab( theme, theme.getName() );
+            createDetailPanelListener( detailPanel );
         }
     }
 

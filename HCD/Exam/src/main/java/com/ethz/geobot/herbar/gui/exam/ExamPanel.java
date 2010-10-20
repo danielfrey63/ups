@@ -119,8 +119,6 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private JButton startButton;
 
-    private JButton stopButton;
-
     private JPanel resultPanel;
 
     private Level familyLevel;
@@ -134,8 +132,6 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     private ResultModel resultModel;
 
     private final StatusBar statusBar;
-
-    private StopExamAction stopAction;
 
     private TaxonNameInterrogator familyInterrogator;
 
@@ -161,14 +157,12 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private IteratorControlPanel navigator;
 
-    private final HerbarContext herbarContext;
-
     public ExamPanel( final ExamMode mode )
     {
         try
         {
             // Init model
-            herbarContext = mode.getHerbarContext();
+            final HerbarContext herbarContext = mode.getHerbarContext();
             guiManager = herbarContext.getHerbarGUIManager();
             herbarModel = herbarContext.getDataModel();
             statusBar = guiManager.getStatusBar();
@@ -403,8 +397,8 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private JToolBar createTopToolbar()
     {
-        stopAction = new StopExamAction();
-        stopButton = new JButton();
+        final StopExamAction stopAction = new StopExamAction();
+        final JButton stopButton = new JButton();
         stopButton.setAction( stopAction );
         stopButton.setToolTipText( Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.HINT" ) );
         stopButton.setFocusPainted( false );
@@ -472,7 +466,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     }
 
     /**
-     * Inits result panel and creates a intro to it
+     * Initializes result panel and creates a intro to it
      *
      * @return panel containing intro at the top and the result in the center
      */
@@ -536,10 +530,10 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     {
         float iComplete = 0;
         int iTaxa = 0;
-        final Iterator iter = examStateModel.getIterator();
-        while ( iter.hasNext() )
+        final Iterator iterator = examStateModel.getIterator();
+        while ( iterator.hasNext() )
         {
-            final Taxon taxon = (Taxon) iter.next();
+            final Taxon taxon = (Taxon) iterator.next();
             model.setTaxFocus( taxon );
             if ( model.isComplete() )
             {
@@ -554,15 +548,15 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     {
         float iGuesses = 0;
         int iCorrect = 0;
-        final Iterator iter = examStateModel.getIterator();
-        while ( iter.hasNext() )
+        final Iterator iterator = examStateModel.getIterator();
+        while ( iterator.hasNext() )
         {
-            final Taxon taxon = (Taxon) iter.next();
+            final Taxon taxon = (Taxon) iterator.next();
             model.setTaxFocus( taxon );
             final GraphNodeList guesses = model.getGuesses();
             final GraphNodeList answers = model.getAnswers();
             iGuesses += guesses.size();
-            iCorrect += ArrayUtils.intersect( guesses.getAll(), answers.getAll() ).length;
+            iCorrect += ArrayUtils.intersect( guesses.getAll(), answers.getAll(), new GraphNodeList[0] ).length;
         }
         return ( iGuesses == 0 ? 0 : iCorrect / iGuesses );
     }
@@ -571,7 +565,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
      * Returns the amount of taxa, for which a correct answer has been found, divided by the taxa searched for.
      *
      * @param model The model to be investigated
-     * @return float betweenn 0.0 (0%) and 1.0 (100%)
+     * @return float between 0.0 (0%) and 1.0 (100%)
      */
     private float getCorrectTaxonAbundance( final TaxonNameInterrogator.MemorizingInterrogatorModel model )
     {
@@ -593,7 +587,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
      * Returns the amount of guesses divided by the amount of successful guesses.
      *
      * @param model The model to be investigated
-     * @return float betweenn 0.0 (0%) and 1.0 (100%)
+     * @return float between 0.0 (0%) and 1.0 (100%)
      */
     private float getCorrectTaxonAccuracy( final TaxonNameInterrogator.MemorizingInterrogatorModel model )
     {
@@ -624,7 +618,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     private void placeStatisticsValue( final float lStatistic, final int x, final int y )
     {
         final NumberFormat format = NumberFormat.getPercentInstance();
-        final JLabel label = new JLabel( format.format( lStatistic ).toString() );
+        final JLabel label = new JLabel( format.format( lStatistic ) );
         label.setHorizontalAlignment( SwingConstants.RIGHT );
         final Border border = new CompoundBorder( new EtchedBorder( EtchedBorder.LOWERED ), new EmptyBorder( 3, 3, 3, 3 ) );
         label.setBorder( border );

@@ -8,10 +8,8 @@
  */
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
-import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Enumeration;
 import javax.swing.BorderFactory;
@@ -23,17 +21,17 @@ import javax.swing.JTabbedPane;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class PropertyInterrogator extends NiceTabbedPane
+public class PropertyInterrogator extends JTabbedPane
 {
     private final ResultModel resultModel;
 
-    public PropertyInterrogator( final HerbarContext herbarContext, final ResultModel resultModel )
+    public PropertyInterrogator( final ResultModel resultModel )
     {
         this.resultModel = resultModel;
 
         setTabPlacement( JTabbedPane.BOTTOM );
         final Enumeration subModels = resultModel.subStateModels();
-        PropertyInterrogatorPanel tab = null;
+        PropertyInterrogatorPanel tab;
         while ( subModels.hasMoreElements() )
         {
             final DetailResultModel stateModel = (DetailResultModel) subModels.nextElement();
@@ -46,9 +44,9 @@ public class PropertyInterrogator extends NiceTabbedPane
         setBorder( BorderFactory.createEmptyBorder() );
     }
 
-    public void synchronizeTabs( final JTabbedPane othertab )
+    public void synchronizeTabs( final JTabbedPane otherTab )
     {
-        this.setSelectedIndex( othertab.getSelectedIndex() );
+        this.setSelectedIndex( otherTab.getSelectedIndex() );
     }
 
     public void setTaxFocus( final Taxon focus )

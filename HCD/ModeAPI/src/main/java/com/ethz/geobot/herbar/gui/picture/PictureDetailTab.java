@@ -21,19 +21,8 @@ public class PictureDetailTab extends TabbedPictureDetailPanel
     public void setEnabled( final int t, final boolean b )
     {
         final PictureTheme theme = (PictureTheme) getObjectAt( t );
-        if ( b )
-        {
-            this.setTitleAt( t, "<html><body><font color='#000000'>" + theme.getName() + "</font></body></html>" );
-        }
-        else
-        {
-            this.setTitleAt( t, "<html><body><font color='#999999'>" + theme.getName() + "</font></body></html>" );
-        }
-    }
-
-    public PictureDetailPanel addTheme( final PictureTheme t )
-    {
-        return super.addTab( t, t.getName() );
+        final String color = b ? "000000" : "999999";
+        this.setTitleAt( t, "<html><body><font color='#" + color + "'>" + theme.getName() + "</font></body></html>" );
     }
 
     public PictureTheme getTheme()

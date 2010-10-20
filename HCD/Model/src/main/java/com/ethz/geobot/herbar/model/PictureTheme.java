@@ -15,7 +15,4 @@ public interface PictureTheme
     public String getName();
 
     public int getId();
-
-    // Transfered to Taxon objects.
-    //public Picture[] getPictures();
 }

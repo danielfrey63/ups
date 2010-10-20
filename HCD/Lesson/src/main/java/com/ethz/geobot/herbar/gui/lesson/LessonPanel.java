@@ -9,7 +9,6 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.component.split.NiceSplitPane;
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import ch.jfactory.resource.Strings;
@@ -74,7 +73,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
     private final JTabbedPane lessonSwitcher;
 
     /**
-     * Creates new form LessonPanel. This panel will be instanciated by reflection.
+     * Creates new form LessonPanel. This panel will be instantiated by reflection.
      *
      * @param mode the mode of this panel
      */
@@ -84,7 +83,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         /*
          * The constructor is called by reflection, so any exceptions occurring
          * during construction would be visible as a simple InvocationException.
-         * To keep the relevant excception, make sure to catch and rethrow
+         * To keep the relevant exception, make sure to catch and re-throw
          * the exceptions in the constructor.
          */
         try
@@ -97,10 +96,10 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             taxStateModel = new TaxStateModel( herbarModel );
 
             lessonPanel = new PropertyDisplayer( herbarModel );
-            askPanel = new PropertyInterrogator( context, initResultModel( herbarModel ) );
+            askPanel = new PropertyInterrogator( initResultModel( herbarModel ) );
             askPanel.setTaxFocus( taxStateModel.getFocus() );
 
-            lessonSwitcher = new NiceTabbedPane( JTabbedPane.TOP );
+            lessonSwitcher = new JTabbedPane( JTabbedPane.TOP );
             lessonSwitcher.add( "Lehrgang", lessonPanel );
             lessonSwitcher.add( "Abfrage", askPanel );
             lessonSwitcher.addChangeListener( new ChangeListener()

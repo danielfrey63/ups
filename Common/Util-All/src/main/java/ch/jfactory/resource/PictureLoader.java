@@ -10,7 +10,6 @@ package ch.jfactory.resource;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -24,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 public class PictureLoader
 {
-    private static final Dimension NULLDIMENSION = new Dimension( 0, 0 );
+    private static final Dimension NULL_DIMENSION = new Dimension( 0, 0 );
 
     private static final Logger LOGGER = LoggerFactory.getLogger( PictureLoader.class );
 
@@ -43,7 +42,7 @@ public class PictureLoader
             if ( file.exists() )
             {
                 final ImageInputStream iis = ImageIO.createImageInputStream( file );
-                ImageReader reader = ImageIO.getImageReaders( iis ).next();
+                final ImageReader reader = ImageIO.getImageReaders( iis ).next();
                 reader.setInput( iis );
                 if ( read != null )
                 {
@@ -53,19 +52,18 @@ public class PictureLoader
                 {
                     reader.addIIOReadUpdateListener( update );
                 }
-                Image image = null;
+                final Image image;
                 if ( thumb )
                 {
-                    final ImageReadParam param = new ImageReadParam();
-                    param.setSourceSubsampling( 2, 2, 0, 0 );
-                    image = reader.read( 0, param );
+                    final ImageReadParam parameter = new ImageReadParam();
+                    parameter.setSourceSubsampling( 2, 2, 0, 0 );
+                    image = reader.read( 0, parameter );
                 }
                 else
                 {
                     image = reader.read( 0 );
                 }
                 reader.dispose();
-                reader = null;
                 iis.close();
                 return image;
             }
@@ -84,15 +82,13 @@ public class PictureLoader
 
     public static Dimension getSize( final String pictureURL )
     {
-        ImageReader reader = null;
-        ImageInputStream iis = null;
         try
         {
             final File file = new File( pictureURL );
             if ( file.exists() )
             {
-                iis = ImageIO.createImageInputStream( file );
-                reader = ImageIO.getImageReaders( iis ).next();
+                final ImageInputStream iis = ImageIO.createImageInputStream( file );
+                final ImageReader reader = ImageIO.getImageReaders( iis ).next();
                 reader.setInput( iis );
                 final Dimension dim = new Dimension();
                 dim.width = reader.getWidth( 0 );
@@ -111,114 +107,13 @@ public class PictureLoader
         }
         catch ( IOException e )
         {
+            LOGGER.warn( "Exception occurred: " + e.getMessage(), e );
         }
         catch ( RuntimeException ex )
         {
             LOGGER.error( "Error while processing image " + pictureURL );
             throw ex;
         }
-        finally
-        {
-            reader = null;
-            iis = null;
-        }
-        return NULLDIMENSION;
+        return NULL_DIMENSION;
     }
-
-    static class IOImageListener implements IIOReadUpdateListener, IIOReadProgressListener
-    {
-        private final AsynchronPictureLoaderListener listener;
-
-        private final String pictureURL;
-
-        private final boolean thumb;
-
-        public IOImageListener( final AsynchronPictureLoaderListener listener, final String pictureURL, final boolean thumb )
-        {
-            this.listener = listener;
-            this.pictureURL = pictureURL;
-            this.thumb = thumb;
-        }
-
-        public void imageUpdate( final ImageReader imageReader, final BufferedImage bufferedImage, final int param, final int param3, final int param4,
-                                 final int param5, final int param6, final int param7, final int[] values )
-        {
-        }
-
-        public void passComplete( final ImageReader imageReader, final BufferedImage bufferedImage )
-        {
-            LOGGER.info( "loading of picture " + pictureURL + " finished." );
-            if ( listener != null )
-            {
-                listener.loadFinished( pictureURL, bufferedImage, thumb );
-            }
-        }
-
-        public void passStarted( final ImageReader imageReader, final BufferedImage bufferedImage, final int param, final int param3, final int param4,
-                                 final int param5, final int param6, final int param7, final int param8, final int[] values )
-        {
-        }
-
-        public void thumbnailPassComplete( final ImageReader imageReader, final BufferedImage bufferedImage )
-        {
-        }
-
-        public void thumbnailPassStarted( final ImageReader imageReader, final BufferedImage bufferedImage, final int param, final int param3,
-                                          final int param4, final int param5, final int param6, final int param7, final int param8, final int[] values )
-        {
-        }
-
-        public void thumbnailUpdate( final ImageReader imageReader, final BufferedImage bufferedImage, final int param, final int param3,
-                                     final int param4, final int param5, final int param6, final int param7, final int[] values )
-        {
-        }
-
-        public void imageComplete( final ImageReader imageReader )
-        {
-        }
-
-        public void imageProgress( final ImageReader imageReader, final float param )
-        {
-        }
-
-        public void imageStarted( final ImageReader imageReader, final int param )
-        {
-            LOGGER.info( "loading of picture " + pictureURL + " started." );
-            if ( listener != null )
-            {
-                listener.loadStarted( pictureURL );
-            }
-        }
-
-        public void readAborted( final ImageReader imageReader )
-        {
-            LOGGER.info( "loading of picture " + pictureURL + " aborted." );
-            if ( listener != null )
-            {
-                listener.loadAborted( pictureURL );
-            }
-        }
-
-        public void sequenceComplete( final ImageReader imageReader )
-        {
-        }
-
-        public void sequenceStarted( final ImageReader imageReader, final int param )
-        {
-        }
-
-        public void thumbnailComplete( final ImageReader imageReader )
-        {
-        }
-
-        public void thumbnailProgress( final ImageReader imageReader, final float param )
-        {
-        }
-
-        public void thumbnailStarted( final ImageReader imageReader, final int param, final int param2 )
-        {
-        }
-
-    }
-
 }

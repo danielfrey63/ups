@@ -9,35 +9,35 @@
 package ch.jfactory.resource;
 
 import java.awt.Image;
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * This class is an abstract implementation of the AsynchronPictureLoaderSupport.
+ * This class is an abstract implementation of the AsyncPictureLoaderSupport.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public class AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderSupport
+public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupport
 {
-    private final Vector listeners = new Vector();
+    private final List<AsyncPictureLoaderListener> listeners = new ArrayList<AsyncPictureLoaderListener>();
 
     public int size()
     {
         return listeners.size();
     }
 
-    public void attach( final AsynchronPictureLoaderListener listener )
+    public void attach( final AsyncPictureLoaderListener listener )
     {
         if ( listeners.indexOf( listener ) < 0 )
         {
-            listeners.addElement( listener );
+            listeners.add( listener );
         }
     }
 
-    public void detach( final AsynchronPictureLoaderListener listener )
+    public void detach( final AsyncPictureLoaderListener listener )
     {
-        listeners.removeElement( listener );
+        listeners.remove( listener );
     }
 
     /**
@@ -47,10 +47,8 @@ public class AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLo
      */
     public void informStarted( final String name )
     {
-        final Enumeration e = listeners.elements();
-        while ( e.hasMoreElements() )
+        for ( final AsyncPictureLoaderListener listener : listeners )
         {
-            final AsynchronPictureLoaderListener listener = (AsynchronPictureLoaderListener) e.nextElement();
             listener.loadStarted( name );
         }
     }
@@ -64,10 +62,8 @@ public class AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLo
      */
     public void informFinished( final String name, final Image image, final boolean thumb )
     {
-        final Enumeration e = listeners.elements();
-        while ( e.hasMoreElements() )
+        for ( final AsyncPictureLoaderListener listener : listeners )
         {
-            final AsynchronPictureLoaderListener listener = (AsynchronPictureLoaderListener) e.nextElement();
             listener.loadFinished( name, image, thumb );
         }
     }
@@ -79,10 +75,8 @@ public class AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLo
      */
     public void informAborted( final String name )
     {
-        final Enumeration e = listeners.elements();
-        while ( e.hasMoreElements() )
+        for ( final AsyncPictureLoaderListener listener : listeners )
         {
-            final AsynchronPictureLoaderListener listener = (AsynchronPictureLoaderListener) e.nextElement();
             listener.loadAborted( name );
         }
     }

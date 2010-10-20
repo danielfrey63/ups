@@ -66,11 +66,6 @@ public class PictureModel
         return themes;
     }
 
-    public int getSelectedIndex()
-    {
-        return selected;
-    }
-
     public PictureTheme getPictureTheme()
     {
         return themes[selected];
@@ -151,5 +146,4 @@ public class PictureModel
             }
         }
     }
-
 }

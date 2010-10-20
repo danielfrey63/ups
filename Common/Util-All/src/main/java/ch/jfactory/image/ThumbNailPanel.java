@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 public class ThumbNailPanel extends ScrollerPanel
 {
-    private final static int THUMBHEIGHT = 50;
+    private final static int THUMB_HEIGHT = 50;
 
     private static final Logger LOGGER = LoggerFactory.getLogger( ThumbNailPanel.class );
 
@@ -36,22 +36,18 @@ public class ThumbNailPanel extends ScrollerPanel
 
     private final PictureCache cache;
 
-    private int size = 0;
-
-    private ArrayList listener;
+    private ArrayList<ActionListener> listener;
 
     public ThumbNailPanel( final PictureCache cache )
     {
-        //this.setVerticalScrollBarPolicy(this.VERTICAL_SCROLLBAR_NEVER);
         panel = this;
         this.cache = cache;
-        initGUI();
     }
 
     public Dimension getPreferredSize()
     {
-        int w = panel.getComponentCount() * THUMBHEIGHT;
-        int h = THUMBHEIGHT;
+        int w = panel.getComponentCount() * THUMB_HEIGHT;
+        int h = THUMB_HEIGHT;
         Insets i = getInsets();
         w += i.right + i.left;
         h += i.top + i.top;
@@ -63,8 +59,8 @@ public class ThumbNailPanel extends ScrollerPanel
 
     public Dimension getMinimumSize()
     {
-        int w = THUMBHEIGHT + btnNext.getPreferredSize().width + btnPrev.getPreferredSize().width;
-        int h = THUMBHEIGHT;
+        int w = THUMB_HEIGHT + btnNext.getPreferredSize().width + btnPrev.getPreferredSize().width;
+        int h = THUMB_HEIGHT;
         Insets i = getInsets();
         w += i.right + i.left;
         h += i.top + i.top;
@@ -74,29 +70,7 @@ public class ThumbNailPanel extends ScrollerPanel
         return new Dimension( w, h );
     }
 
-    public void initGUI()
-    {
-        //panel = new JPanel(new FlowLayout());
-        //this.setViewportView(panel);
-    }
-
-    public int imageCount()
-    {
-        return panel.getComponentCount();
-    }
-
-    public CachedImageComponent getComponentAt( final int i )
-    {
-        return (CachedImageComponent) panel.getComponent( i );
-    }
-
-    public CachedImage getImageAt( final int i )
-    {
-        final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( i );
-        return ci.getImage();
-    }
-
-    public void addImage( final String c, final String tooltip, final boolean revalidate )
+    public void addImage( final String c, final String toolTip, final boolean reValidate )
     {
         for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
@@ -105,15 +79,15 @@ public class ThumbNailPanel extends ScrollerPanel
                 final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( i );
                 ci.setImage( c, true );
                 ci.setVisible( true );
-                ci.setToolTipText( tooltip );
-                if ( revalidate )
+                ci.setToolTipText( toolTip );
+                if ( reValidate )
                 {
                     revalidate();
                 }
                 return;
             }
         }
-        final CachedImageComponent ci = new CachedImageComponent( cache, THUMBHEIGHT );
+        final CachedImageComponent ci = new CachedImageComponent( cache, THUMB_HEIGHT );
         ci.addMouseListener( new MouseAdapter()
         {
             public void mouseReleased( final MouseEvent e )
@@ -124,8 +98,8 @@ public class ThumbNailPanel extends ScrollerPanel
         } );
         panel.add( ci );
         ci.setImage( c, true );
-        ci.setToolTipText( tooltip );
-        if ( revalidate )
+        ci.setToolTipText( toolTip );
+        if ( reValidate )
         {
             revalidate();
         }
@@ -135,14 +109,9 @@ public class ThumbNailPanel extends ScrollerPanel
     {
         if ( listener == null )
         {
-            listener = new ArrayList();
+            listener = new ArrayList<ActionListener>();
         }
         listener.add( l );
-    }
-
-    public void removeActionListener( final ActionListener l )
-    {
-        listener.remove( l );
     }
 
     public void fireActionEvent( final CachedImageComponent ci )
@@ -182,21 +151,6 @@ public class ThumbNailPanel extends ScrollerPanel
         revalidate();
     }
 
-    public void removeImage( final String c )
-    {
-        for ( int i = 0; i < panel.getComponentCount(); i++ )
-        {
-            final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( size++ );
-            if ( ci.getName().equals( c ) )
-            {
-                ci.setImage( null, true );
-                ci.setVisible( false );
-                revalidate();
-                return;
-            }
-        }
-    }
-
     public void removeAll()
     {
         for ( int i = 0; i < panel.getComponentCount(); i++ )
@@ -211,5 +165,4 @@ public class ThumbNailPanel extends ScrollerPanel
         }
         revalidate();
     }
-
 }

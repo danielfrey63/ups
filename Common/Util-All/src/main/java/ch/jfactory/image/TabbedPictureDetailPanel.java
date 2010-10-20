@@ -8,16 +8,16 @@
  */
 package ch.jfactory.image;
 
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.CachedImageLocator;
 import ch.jfactory.resource.PictureCache;
 import java.util.ArrayList;
+import javax.swing.JTabbedPane;
 
-public class TabbedPictureDetailPanel extends NiceTabbedPane
+public class TabbedPictureDetailPanel extends JTabbedPane
 {
     private final PictureCache cache;
 
-    private final ArrayList list = new ArrayList();
+    private final ArrayList<Object> list = new ArrayList<Object>();
 
     public TabbedPictureDetailPanel( final CachedImageLocator locator )
     {
@@ -29,26 +29,9 @@ public class TabbedPictureDetailPanel extends NiceTabbedPane
         cache.clearCachingList();
     }
 
-    public void cacheImage( final String name, final boolean thumb )
-    {
-        cache.cacheImage( name, thumb, false );
-    }
-
     public PictureDetailPanel getDetail( final int i )
     {
         return (PictureDetailPanel) getComponentAt( i );
-    }
-
-    public PictureDetailPanel getDetail( final String str )
-    {
-        for ( int i = 0; i < list.size(); i++ )
-        {
-            if ( getTitleAt( i ).equals( str ) )
-            {
-                return getDetail( i );
-            }
-        }
-        return null;
     }
 
     public PictureDetailPanel addTab( final Object o, final String s )
@@ -79,11 +62,6 @@ public class TabbedPictureDetailPanel extends NiceTabbedPane
             }
         }
         return -1;
-    }
-
-    public int countTabs()
-    {
-        return getComponentCount();
     }
 
     public void clearAll()

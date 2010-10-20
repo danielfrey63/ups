@@ -55,13 +55,13 @@ public class ZoomableImageComponent extends JScrollPane
 
     public void resetZoom()
     {
-        ci.setZoomFaktor( 1.0 );
+        ci.setZoomFactor( 1.0 );
         getViewport().setViewSize( ci.getPreferredSize() );
     }
 
     public boolean isZoomed()
     {
-        return ci.getZoomFaktor() != 1.0;
+        return ci.getZoomFactor() != 1.0;
     }
 
     public void setZoom( final boolean b )
@@ -71,7 +71,7 @@ public class ZoomableImageComponent extends JScrollPane
 
     public void setZoom( final double f )
     {
-        ci.setZoomFaktor( f );
+        ci.setZoomFactor( f );
         getViewport().setViewSize( ci.getPreferredSize() );
     }
 
@@ -81,15 +81,15 @@ public class ZoomableImageComponent extends JScrollPane
         {
             r = adjustRect( r );
             final Rectangle visi = getVisibleRect();
-            visi.width *= ci.getZoomFaktor();
-            visi.height *= ci.getZoomFaktor();
-            final double oldzoomfaktor = ci.getZoomFaktor();
+            visi.width *= ci.getZoomFactor();
+            visi.height *= ci.getZoomFactor();
+            final double oldzoomfaktor = ci.getZoomFactor();
             double newzoomfaktor = ( (double) visi.width / (double) r.width );
             if ( newzoomfaktor > ( (double) visi.height / (double) r.height ) )
             {
                 newzoomfaktor = ( (double) visi.height / (double) r.height );
             }
-            ci.setZoomFaktor( newzoomfaktor );
+            ci.setZoomFactor( newzoomfaktor );
             getViewport().setViewSize( ci.getPreferredSize() );
             final Point p = r.getLocation();
             double x = (double) p.x / oldzoomfaktor;

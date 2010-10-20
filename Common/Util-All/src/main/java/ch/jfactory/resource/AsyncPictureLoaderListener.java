@@ -11,18 +11,19 @@ package ch.jfactory.resource;
 import java.awt.Image;
 
 /**
- * This is the listener Interface for the Asynchron Picture Loader.
+ * This is the listener Interface for the AsyncPictureLoader.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public interface AsynchronPictureLoaderListener
+public interface AsyncPictureLoaderListener
 {
     /**
      * Is called if the loading of the image is finished.
      *
-     * @param name name of the image
-     * @param img  reference to the image
+     * @param name  name of the image
+     * @param img   reference to the image
+     * @param thumb is it a thumbnail?
      */
     void loadFinished( String name, Image img, boolean thumb );
 

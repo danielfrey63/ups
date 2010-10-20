@@ -2,7 +2,6 @@ package com.ethz.geobot.herbar.gui.mode.wizard;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.component.Dialogs;
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.util.HerbarTheme;
 import com.ethz.geobot.herbar.modeapi.Mode;
@@ -38,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
@@ -56,12 +56,10 @@ public class WizardModePane extends WizardPane
 {
     private static final Logger LOG = LoggerFactory.getLogger( WizardModePane.class );
 
-    /**
-     * Name of the pane.
-     */
+    /** Name of the pane. */
     public final static String NAME = "mode.select";
 
-    private NiceTabbedPane modeGroupTab;
+    private JTabbedPane modeGroupTab;
 
     private final Map<String, JList> groupLists = new HashMap<String, JList>();
 
@@ -131,7 +129,7 @@ public class WizardModePane extends WizardPane
         final JPanel textPanel = createTextPanel( prefix );
         final JPanel titlePanel = createDefaultTitlePanel( prefix );
 
-        modeGroupTab = new NiceTabbedPane();
+        modeGroupTab = new JTabbedPane();
         modeGroupTab.setPreferredSize( new Dimension( 350, 150 ) );
 
         note = new JLabel( Strings.getString( prefix + ".NOTE.TEXT" ) );
@@ -216,7 +214,7 @@ public class WizardModePane extends WizardPane
                     list.getSelectionModel().clearSelection();
                 }
                 model.setFinishEnabled( current != mode && mode != null );
-                // Todo: little bit of an antipattern. did not look for who is enabling it. should be disabled as
+                // Todo: little bit of an anti pattern. did not look for who is enabling it. should be disabled as
                 // model is not yet consistent.
                 model.setNextEnabled( false );
                 note.setVisible( ( current == mode || mode == null ) );
@@ -260,9 +258,9 @@ public class WizardModePane extends WizardPane
     /**
      * is invoked by the wizard to register change listener. This method is invoked by the init method.
      *
-     * @param model refernce to the model
+     * @param model reference to the model
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings( "unchecked" )
     public void registerPropertyChangeListener( final WizardModel model )
     {
         model.addPropertyChangeListener( modePropertyName, new PropertyChangeListener()
@@ -294,7 +292,7 @@ public class WizardModePane extends WizardPane
         }
 
         public Component getListCellRendererComponent( final JList jList, final Object value, final int index,
-                                                                final boolean isSelected, final boolean cellHasFocus )
+                                                       final boolean isSelected, final boolean cellHasFocus )
         {
             try
             {

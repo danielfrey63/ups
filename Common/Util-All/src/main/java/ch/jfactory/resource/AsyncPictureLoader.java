@@ -17,16 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is used to load Image asynchronously. Use the AsynchronPictureLoaderListener to get notification of the
+ * This class is used to load Image asynchronously. Use the AsyncPictureLoaderListener to get notification of the
  * loading process.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
-class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, IIOReadProgressListener, AsynchronPictureLoaderSupport
+class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIOReadProgressListener, AsyncPictureLoaderSupport
 {
     /** Category information for logging. */
-    private static final Logger LOGGER = LoggerFactory.getLogger( AsynchronPictureLoader.class.getName() );
+    private static final Logger LOGGER = LoggerFactory.getLogger( AsyncPictureLoader.class.getName() );
 
     /** If running is set to false, the thread goes down. */
     private boolean running = true;
@@ -37,7 +37,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
     /** Image reader. */
     private final ImageReader reader = null;
 
-    private final AbstractAsynchronPictureLoaderSupport asynchronPictureLoaderSupport = new AbstractAsynchronPictureLoaderSupport();
+    private final AbstractAsyncPictureLoaderSupport asyncPictureLoaderSupport = new AbstractAsyncPictureLoaderSupport();
 
     /**
      * Loads a image from the given URL.
@@ -51,7 +51,7 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         Thread.yield();
     }
 
-    /** Abort asynchron image loading. */
+    /** Abort async image loading. */
     public void abort()
     {
         if ( reader != null )
@@ -69,10 +69,10 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
         notify();
     }
 
-    /** Asynchron loader... */
+    /** Async loader... */
     public void run()
     {
-        LOGGER.info( "AsynchronPictureLoader thread started" );
+        LOGGER.info( "AsyncPictureLoader thread started" );
         synchronized ( this )
         {
             while ( running )
@@ -95,25 +95,23 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
                 }
             }
         }
-        LOGGER.info( "AsynchronPictureLoader thread stopped" );
+        LOGGER.info( "AsyncPictureLoader thread stopped" );
     }
 
-    public void imageUpdate( final ImageReader imageReader, final BufferedImage
-            bufferedImage, final int param, final int param3, final int param4,
-                             final int param5, final int param6, final int param7, final int[] values )
+    public void imageUpdate( final ImageReader source, final BufferedImage theImage, final int minX, final int minY,
+                             final int width, final int height, final int periodX, final int periodY, final int[] bands )
     {
     }
 
-    public void passComplete( final ImageReader imageReader,
-                              final BufferedImage bufferedImage )
+    public void passComplete( final ImageReader source, final BufferedImage bufferedImage )
     {
         LOGGER.info( "loading of picture " + pictureURL + " finished." );
         informFinished( pictureURL, bufferedImage, false );
     }
 
-    public void passStarted( final ImageReader imageReader,
-                             final BufferedImage bufferedImage, final int param, final int param3, final int param4,
-                             final int param5, final int param6, final int param7, final int param8, final int[] values )
+    public void passStarted( final ImageReader source, final BufferedImage theImage, final int pass, final int minPass,
+                             final int maxPass, final int minX, final int minY, final int periodX, final int periodY,
+                             final int[] bands )
     {
     }
 
@@ -122,81 +120,80 @@ class AsynchronPictureLoader extends Thread implements IIOReadUpdateListener, II
     {
     }
 
-    public void thumbnailPassStarted( final ImageReader imageReader,
-                                      final BufferedImage bufferedImage, final int param, final int param3, final int param4,
-                                      final int param5, final int param6, final int param7, final int param8, final int[] values )
+    public void thumbnailPassStarted( final ImageReader source, final BufferedImage theThumbnail, final int pass,
+                                      final int minPass, final int maxPass, final int minX, final int minY,
+                                      final int periodX, final int periodY, final int[] bands )
     {
     }
 
-    public void thumbnailUpdate( final ImageReader imageReader,
-                                 final BufferedImage bufferedImage, final int param, final int param3, final int param4,
-                                 final int param5, final int param6, final int param7, final int[] values )
+    public void thumbnailUpdate( final ImageReader source, final BufferedImage theThumbnail, final int minX,
+                                 final int minY, final int width, final int height, final int periodX,
+                                 final int periodY, final int[] bands )
     {
     }
 
-    public void imageComplete( final ImageReader imageReader )
+    public void imageComplete( final ImageReader source )
     {
     }
 
-    public void imageProgress( final ImageReader imageReader, final float param )
+    public void imageProgress( final ImageReader source, final float percentageDone )
     {
     }
 
-    public void imageStarted( final ImageReader imageReader, final int param )
+    public void imageStarted( final ImageReader source, final int imageIndex )
     {
         LOGGER.info( "loading of picture " + pictureURL + " started." );
         informStarted( pictureURL );
     }
 
-    public void readAborted( final ImageReader imageReader )
+    public void readAborted( final ImageReader source )
     {
         LOGGER.info( "loading of picture " + pictureURL + " aborted." );
         informAborted( pictureURL );
     }
 
-    public void sequenceComplete( final ImageReader imageReader )
+    public void sequenceComplete( final ImageReader source )
     {
     }
 
-    public void sequenceStarted( final ImageReader imageReader, final int param )
+    public void sequenceStarted( final ImageReader source, final int minIndex )
     {
     }
 
-    public void thumbnailComplete( final ImageReader imageReader )
+    public void thumbnailComplete( final ImageReader source )
     {
     }
 
-    public void thumbnailProgress( final ImageReader imageReader, final float param )
+    public void thumbnailProgress( final ImageReader source, final float percentageDone )
     {
     }
 
-    public void thumbnailStarted( final ImageReader imageReader, final int param,
-                                  final int param2 )
+    public void thumbnailStarted( final ImageReader source, final int imageIndex, final int thumbnailIndex )
     {
     }
 
     public void informFinished( final String name, final Image image, final boolean thumb )
     {
-        asynchronPictureLoaderSupport.informFinished( name, image, thumb );
+        asyncPictureLoaderSupport.informFinished( name, image, thumb );
     }
 
     public void informAborted( final String name )
     {
-        asynchronPictureLoaderSupport.informAborted( name );
+        asyncPictureLoaderSupport.informAborted( name );
     }
 
     public void informStarted( final String name )
     {
-        asynchronPictureLoaderSupport.informStarted( name );
+        asyncPictureLoaderSupport.informStarted( name );
     }
 
-    public void detach( final AsynchronPictureLoaderListener listener )
+    public void detach( final AsyncPictureLoaderListener listener )
     {
-        asynchronPictureLoaderSupport.detach( listener );
+        asyncPictureLoaderSupport.detach( listener );
     }
 
-    public void attach( final AsynchronPictureLoaderListener listener )
+    public void attach( final AsyncPictureLoaderListener listener )
     {
-        asynchronPictureLoaderSupport.attach( listener );
+        asyncPictureLoaderSupport.attach( listener );
     }
 }

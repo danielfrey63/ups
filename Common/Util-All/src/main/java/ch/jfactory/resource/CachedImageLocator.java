@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderSupport implements AsynchronPictureLoaderListener
+public abstract class CachedImageLocator extends AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderListener
 {
     /** This class' logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageLocator.class );
@@ -35,7 +35,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
     private final PictureCache cache = new PictureCache( this );
 
     /** Loader for images. */
-    private AsynchronPictureLoader loader = null;
+    private AsyncPictureLoader loader = null;
 
     /**
      * Get an ImageIcon from Cache or reloads it into the cache.
@@ -154,7 +154,7 @@ public abstract class CachedImageLocator extends AbstractAsynchronPictureLoaderS
 
     private void initLoader()
     {
-        loader = new AsynchronPictureLoader();
+        loader = new AsyncPictureLoader();
         loader.setPriority( Thread.MIN_PRIORITY );
         loader.attach( cache );
         loader.attach( this );

@@ -25,7 +25,7 @@ public class CachedImage extends ImageReference
 
     private final String pictureURL;
 
-    private AbstractAsynchronPictureLoaderSupport listeners;
+    private AbstractAsyncPictureLoaderSupport listeners;
 
     private final CachedImageLocator locator;
 
@@ -86,16 +86,16 @@ public class CachedImage extends ImageReference
         return i;
     }
 
-    public void attach( final AsynchronPictureLoaderListener list )
+    public void attach( final AsyncPictureLoaderListener list )
     {
         if ( listeners == null )
         {
-            listeners = new AbstractAsynchronPictureLoaderSupport();
+            listeners = new AbstractAsyncPictureLoaderSupport();
         }
         listeners.attach( list );
     }
 
-    public void detach( final AsynchronPictureLoaderListener list )
+    public void detach( final AsyncPictureLoaderListener list )
     {
         if ( listeners == null )
         {

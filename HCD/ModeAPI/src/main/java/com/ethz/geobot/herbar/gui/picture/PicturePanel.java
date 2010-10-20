@@ -45,8 +45,6 @@ public class PicturePanel extends JPanel
 
     private PictureDetailTab pictureTab;
 
-    private PictureDetailPanel pictureDetailPanel;
-
     private PictureModel model;
 
     private JTextComponent textArea;
@@ -56,9 +54,9 @@ public class PicturePanel extends JPanel
     private PictureTheme[] shownThemes;
 
     /**
-     * Creates new form PicturePanel
+     * Creates new form PicturePanel.
      *
-     * @param herbarModel Description of the Parameter
+     * @param herbarModel the main model
      */
     public PicturePanel( final HerbarModel herbarModel )
     {
@@ -122,7 +120,7 @@ public class PicturePanel extends JPanel
         final PictureTheme[] themes = model.getPictureThemes();
         for ( int i = 0; i < themes.length; i++ )
         {
-            final PictureDetailPanel detailPanel = pictureTab.addTheme( themes[i] );
+            final PictureDetailPanel detailPanel = pictureTab.addTab( themes[i], themes[i].getName() );
             pictureTab.setEnabledAt( i, isThemeVisible( themes[i] ) );
             if ( isThemeVisible( themes[i] ) )
             {
@@ -144,7 +142,7 @@ public class PicturePanel extends JPanel
                 }
                 else
                 {
-                    zoomChanged( ( (Boolean) e.getNewValue() ).booleanValue() );
+                    zoomChanged( (Boolean) e.getNewValue() );
                 }
             }
         } );
@@ -152,14 +150,7 @@ public class PicturePanel extends JPanel
 
     private PictureDetailPanel getDetail( final PictureTheme theme )
     {
-        if ( pictureTab == null )
-        {
-            return pictureDetailPanel;
-        }
-        else
-        {
-            return pictureTab.getThemePanel( theme );
-        }
+        return pictureTab.getThemePanel( theme );
     }
 
     public void cacheTaxon( final Taxon taxon )
@@ -197,18 +188,8 @@ public class PicturePanel extends JPanel
     {
         LOG.info( "setTaxon( " + taxon + ")" );
         model.setTaxon( taxon );
-
-        if ( pictureTab != null )
-        {
-            pictureTab.clearCachingList();
-            pictureTab.clearAll();
-        }
-        else
-        {
-            pictureDetailPanel.clearCachingList();
-            pictureDetailPanel.clear();
-
-        }
+        pictureTab.clearCachingList();
+        pictureTab.clearAll();
         final PictureTheme[] themes = model.getPictureThemes();
         for ( final PictureTheme theme : themes )
         {
@@ -264,30 +245,19 @@ public class PicturePanel extends JPanel
         {
             return;
         }
-        if ( pictureTab != null )
-        {
-            final PictureDetailPanel detail = pictureTab.getThemePanel( theme );
-            final int counter = fillDetailPanel( detail, theme );
-            pictureTab.setEnabled( model.getIndex( theme ), counter != 0 );
-        }
-        else
-        {
-            fillDetailPanel( pictureDetailPanel, theme );
-        }
+        final PictureDetailPanel detail = pictureTab.getThemePanel( theme );
+        final int counter = fillDetailPanel( detail, theme );
+        pictureTab.setEnabled( model.getIndex( theme ), counter != 0 );
     }
 
     private void setImage()
     {
-        PictureDetailPanel panel = pictureDetailPanel;
-        if ( pictureTab != null )
+        final PictureTheme theme = model.getPictureTheme();
+        if ( !isThemeVisible( theme ) )
         {
-            final PictureTheme theme = model.getPictureTheme();
-            if ( !isThemeVisible( theme ) )
-            {
-                model.setPictureTheme( pictureTab.getTheme() );
-            }
-            panel = pictureTab.getThemePanel( model.getPictureTheme() );
+            model.setPictureTheme( pictureTab.getTheme() );
         }
+        final PictureDetailPanel panel = pictureTab.getThemePanel( model.getPictureTheme() );
         final CommentedPicture pic = model.getPicture();
         final boolean isPicture = pic != null;
         final boolean isShowing = showText && !( isPicture && "".equals( getComment( pic ) ) );
@@ -299,20 +269,11 @@ public class PicturePanel extends JPanel
         panel.setZoomed( model.isZoomed() );
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     */
+    /** This method is called from within the constructor to initialize the form. */
     private void initGUI()
     {
         setLayout( new BorderLayout() );
-        if ( true )
-        {
-            add( buildSplitter(), BorderLayout.CENTER );
-        }
-        else
-        {
-            add( buildTab() );
-        }
+        add( buildSplitter(), BorderLayout.CENTER );
     }
 
     private JComponent buildSplitter()
@@ -321,34 +282,25 @@ public class PicturePanel extends JPanel
         final JPanel panel = new JPanel( new GridBagLayout() );
         panel.add( buildTab(), new GridBagConstraints( 0, y++, 1, 1, 1, 1, GridBagConstraints.NORTH,
                 GridBagConstraints.BOTH, new Insets( 0, 0, 0, 0 ), 0, 0 ) );
-        panel.add( buildTextArea(), new GridBagConstraints( 0, y++, 1, 1, 1, 0, GridBagConstraints.SOUTH,
+        panel.add( buildTextArea(), new GridBagConstraints( 0, y, 1, 1, 1, 0, GridBagConstraints.SOUTH,
                 GridBagConstraints.BOTH, new Insets( 0, 0, 0, 0 ), 0, 0 ) );
         return panel;
     }
 
     private JComponent buildTab()
     {
-        if ( true )
+        pictureTab = new PictureDetailTab( ImageLocator.pictLocator );
+        pictureTab.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
+        createTabs();
+        pictureTab.addChangeListener( new ChangeListener()
         {
-            pictureTab = new PictureDetailTab( ImageLocator.pictLocator );
-            pictureTab.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
-            createTabs();
-            pictureTab.addChangeListener( new ChangeListener()
+            public void stateChanged( final ChangeEvent e )
             {
-                public void stateChanged( final ChangeEvent e )
-                {
-                    LOG.info( "stateChanged(" + e + ")" );
-                    tabChanged();
-                }
-            } );
-            return pictureTab;
-        }
-        else
-        {
-            pictureDetailPanel = new PictureDetailPanel( ImageLocator.pictLocator );
-            createDetailPanelListener( pictureDetailPanel );
-            return pictureDetailPanel;
-        }
+                LOG.info( "stateChanged(" + e + ")" );
+                tabChanged();
+            }
+        } );
+        return pictureTab;
     }
 
     private JComponent buildTextArea()
@@ -362,68 +314,3 @@ public class PicturePanel extends JPanel
         return textArea;
     }
 }
-
-// $Log: PicturePanel.java,v $
-// Revision 1.1  2007/09/17 11:07:08  daniel_frey
-// - Version 3.0.20070401
-//
-// Revision 1.22  2005/06/17 06:39:58  daniel_frey
-// New ActionButton icons and some corrections on documentation
-//
-// Revision 1.21  2004/08/31 22:10:16  daniel_frey
-// Examlist loading working
-//
-// Revision 1.20  2004/04/25 13:56:42  daniel_frey
-// Moved Dialogs from Herbars modeapi to xmatrix
-//
-// Revision 1.19  2004/03/04 23:39:28  daniel_frey
-// - Build with News on Splash
-//
-// Revision 1.18  2003/05/01 20:48:52  daniel_frey
-// - Added switching of imgage resolution
-//
-// Revision 1.17  2003/04/13 21:51:15  daniel_frey
-// - Separated status actions and display into toolbar and status bar
-//
-// Revision 1.16  2003/04/11 08:27:52  daniel_frey
-// - Made sure that thumbnails do not show tooltip text when appropriate
-//
-// Revision 1.15  2003/04/02 14:49:03  daniel_frey
-// - Revised wizards
-//
-// Revision 1.14  2003/03/14 09:51:00  thomas_wegmueller
-// *** empty log message ***
-//
-// Revision 1.13  2003/03/13 15:05:12  thomas_wegmueller
-// *** empty log message ***
-//
-// Revision 1.12  2003/03/03 12:27:02  thomas_wegmueller
-// PicturePanel's update
-//
-// Revision 1.11  2003/02/13 11:08:43  thomas_wegmueller
-// *** empty log message ***
-//
-// Revision 1.10  2003/01/22 14:44:31  daniel_frey
-// - Removed unused code
-//
-// Revision 1.9  2002/11/05 11:21:58  daniel_frey
-// - Level with tree from GraphNode
-//
-// Revision 1.8  2002/09/23 13:29:37  thomas_wegmueller
-// Images update from Waegi
-//
-// Revision 1.7  2002/08/05 11:27:12  Dani
-// - Moved to ch.xmatrix
-//
-// Revision 1.6  2002/08/02 00:42:20  Dani
-// Optimized import statements
-//
-// Revision 1.5  2002/08/01 15:49:06  Dani
-// Removed ambigous references claimed by jikes
-//
-// Revision 1.4  2002/05/30 16:01:57  Thomas
-// ScrollerPanel updates
-//
-// Revision 1.3  2002/05/28 14:08:21  Thomas
-// first shot of desired screendesign
-//

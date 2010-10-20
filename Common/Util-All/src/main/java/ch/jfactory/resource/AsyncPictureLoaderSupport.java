@@ -11,25 +11,24 @@ package ch.jfactory.resource;
 import java.awt.Image;
 
 /**
- * AsynchronPictureLoaderSupport should be implemented by all classes which delegate listeners to
- * AsynchronPictureLoader
+ * AsyncPictureLoaderSupport should be implemented by all classes which delegate listeners to AsyncPictureLoader
  *
  * @author $Author: daniel_frey $
- * @version $Revision: 1.1 $
- * @created 23. Mai 2002
+ * @version $Revision: 1.1 $ created: 23. Mai 2002
  */
-interface AsynchronPictureLoaderSupport
+interface AsyncPictureLoaderSupport
 {
     /**
      * Inform all listeners that the image loading is finished.
      *
      * @param name  name of the image
      * @param image reference to the image
+     * @param thumb is it a thumbnail?
      */
     void informFinished( String name, Image image, boolean thumb );
 
     /**
-     * Inform all listeners that the image will be .
+     * Inform all listeners that the image will be.
      *
      * @param name name of the image
      */
@@ -43,16 +42,16 @@ interface AsynchronPictureLoaderSupport
     void informStarted( String name );
 
     /**
-     * register a AsynchronPictureLoaderListener
+     * Register a AsyncPictureLoaderListener.
      *
      * @param listener reference to listener
      */
-    void detach( AsynchronPictureLoaderListener listener );
+    void detach( AsyncPictureLoaderListener listener );
 
     /**
-     * unregister a AsynchronPictureLoaderListener
+     * Un-register a AsyncPictureLoaderListener.
      *
      * @param listener reference to listener
      */
-    void attach( AsynchronPictureLoaderListener listener );
+    void attach( AsyncPictureLoaderListener listener );
 }

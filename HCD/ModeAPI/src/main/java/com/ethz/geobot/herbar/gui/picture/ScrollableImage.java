@@ -29,41 +29,29 @@ import org.slf4j.LoggerFactory;
  */
 public class ScrollableImage extends JLabel implements Scrollable
 {
-    /**
-     * category for logging
-     */
+    /** category for logging */
     private final static Logger LOG = LoggerFactory.getLogger( ScrollableImage.class );
 
-    /**
-     * currently shown image
-     */
+    /** currently shown image */
     private ImageIcon image = null;
 
-    /**
-     * zoomed instance of currently shown image
-     */
+    /** zoomed instance of currently shown image */
     private ImageIcon zoomedImage = null;
 
-    /**
-     * zoomed state information
-     */
+    /** zoomed state information */
     private boolean isZoomed = false;
 
-    /**
-     * reference to currently shown picture
-     */
+    /** reference to currently shown picture */
     private Picture currentPicture;
 
-    /**
-     * Instance of image locator
-     */
+    /** Instance of image locator */
     private final CachedImageLocator locator = ImageLocator.pictLocator;
 
     /**
-     * Listener to asynchron nofication of picture loading private AsynchronPictureLoaderListener finishVisitor = new
-     * AsynchronPictureLoaderListener() { public void loadFinished( String name, Image img, boolean bool ) { setImage(
-     * new ImageIcon( img ), "" ); } <p/> public void loadAborted( String name ) { setImage( null, "" ); } <p/> public
-     * void loadStarted( String name ) { setImage( null, Strings.getString( "PICTURE.LOAD" ) ); } };
+     * Listener to asynchron nofication of picture loading private AsyncPictureLoaderListener finishVisitor = new
+     * AsyncPictureLoaderListener() { public void loadFinished( String name, Image img, boolean bool ) { setImage( new
+     * ImageIcon( img ), "" ); } <p/> public void loadAborted( String name ) { setImage( null, "" ); } <p/> public void
+     * loadStarted( String name ) { setImage( null, Strings.getString( "PICTURE.LOAD" ) ); } };
      */
     public ScrollableImage()
     {

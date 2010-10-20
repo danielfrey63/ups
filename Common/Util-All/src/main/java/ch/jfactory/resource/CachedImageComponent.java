@@ -22,7 +22,7 @@ import javax.swing.border.Border;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CachedImageComponent extends JComponent implements AsynchronPictureLoaderListener
+public class CachedImageComponent extends JComponent implements AsyncPictureLoaderListener
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageComponent.class );
 
@@ -34,9 +34,9 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
 
     private boolean thumbNail;
 
-    private SoftReference image;
+    private SoftReference<Image> image;
 
-    private double zoomFaktor = 1.0;
+    private double zoomFactor = 1.0;
 
     /** Size which represents a zooming factor of 1. */
     private int defaultSize = 0;
@@ -44,10 +44,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
     private Dimension size;
 
     public static Border BORDER = BorderFactory.createEmptyBorder( 1, 1, 1, 1 );
-    /*BorderFactory.createCompoundBorder(
-         BorderFactory.createLineBorder(Color.red,1),
-           BorderFactory.createEmptyBorder(10, 10, 10, 10)
-         );*/
+    // BorderFactory.createCompoundBorder( BorderFactory.createLineBorder(Color.red,1), BorderFactory.createEmptyBorder(10, 10, 10, 10) );
 
     public CachedImageComponent( final PictureCache c, final int size )
     {
@@ -56,9 +53,9 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         defaultSize = size;
     }
 
-    public double getZoomFaktor()
+    public double getZoomFactor()
     {
-        return zoomFaktor;
+        return zoomFactor;
     }
 
     public CachedImageComponent( final PictureCache c )
@@ -73,11 +70,11 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         {
             im = cache.addOrGetCachedImage( name );
         }
-        boolean revalidate = false;
+        boolean reValidate = false;
         if ( img != null )
         {
             img.detach( this );
-            revalidate = true;
+            reValidate = true;
         }
         img = im;
         image = null;
@@ -87,17 +84,17 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
             img.attach( this );
         }
         this.thumbNail = thumb;
-        if ( revalidate )
+        if ( reValidate )
         {
             this.redoLayout();
         }
         repaint();
     }
 
-    public synchronized void setZoomFaktor( final double d )
+    public synchronized void setZoomFactor( final double d )
     {
         size = null;
-        zoomFaktor = d;
+        zoomFactor = d;
         redoLayout();
     }
 
@@ -132,7 +129,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         final int w = i.right + i.left;
         final int h = i.top + i.bottom;
         final Dimension s = img.getSize();
-        double factor = zoomFaktor;
+        double factor = zoomFactor;
         if ( defaultSize > 0 )
         {
             factor *= defaultSize / Math.max( s.getWidth(), s.getHeight() );
@@ -153,13 +150,13 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
             {
                 if ( img.loaded( true ) )
                 {
-                    image = new SoftReference( img.getImage( true ) );
+                    image = new SoftReference<Image>( img.getImage( true ) );
                 }
                 cache.cacheImage( img.getName(), thumbNail, true );
             }
             else
             {
-                image = new SoftReference( img.getImage( thumbNail ) );
+                image = new SoftReference<Image>( img.getImage( thumbNail ) );
             }
         }
     }
@@ -177,7 +174,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
         final Insets i = getInsets();
         final int w = i.right + i.left;
         final int h = i.top + i.bottom;
-        Image im = ( image == null ) ? null : (Image) image.get();
+        Image im = ( image == null ) ? null : image.get();
         if ( im != null )
         {
             final Dimension p = getPreferredSize();
@@ -210,7 +207,7 @@ public class CachedImageComponent extends JComponent implements AsynchronPicture
     public synchronized void loadFinished( final String name, final Image img, final boolean thumb )
     {
         LOGGER.debug( "Picture " + name + " loadFinished" );
-        boolean ok = false;
+        boolean ok;
         size = null;
         ok = ( image == null );
         ok = ok || ( image.get() == null );

@@ -1,6 +1,5 @@
 package ch.jfactory.logging;
 
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.Strings;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -25,19 +23,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-/**
- * @author Thomas Wegmueller
- */
+/** @author Thomas Wegmueller */
 public class SendFeedbackDialog extends JDialog
 {
     private String dump = "---";
 
     private final String title = Strings.getString( "error.feedback.title" );
-
-    private Icon icon;
 
     private final String description = Strings.getString( "error.feedback.info" );
 
@@ -54,16 +49,6 @@ public class SendFeedbackDialog extends JDialog
     public void setDump( final String dump )
     {
         this.dump = dump;
-    }
-
-    public void setErrorMessage( final String errorMessage )
-    {
-        this.errorMessage = errorMessage;
-    }
-
-    public void setFeedbackMail( final String feedbackMail )
-    {
-        this.feedbackMail = feedbackMail;
     }
 
     public Container buildContentPane()
@@ -113,7 +98,7 @@ public class SendFeedbackDialog extends JDialog
 
     public JComponent buildTabbedPane()
     {
-        final NiceTabbedPane tab = new NiceTabbedPane();
+        final JTabbedPane tab = new JTabbedPane();
         tab.setBorder( null );
         tab.add( Strings.getString( "error.feedback.helptab" ), createHelp() );
         tab.add( Strings.getString( "error.feedback.contenttab" ), createMultiLineLabel( dump ) );
@@ -174,6 +159,8 @@ public class SendFeedbackDialog extends JDialog
 
     /**
      * Builds the panel.
+     *
+     * @return the header component
      */
     private JComponent buildHeader()
     {
@@ -197,7 +184,6 @@ public class SendFeedbackDialog extends JDialog
         final JLabel titleLabel = new JLabel( title );
         titleLabel.setFont( titleLabel.getFont().deriveFont( Font.BOLD ) );
         final JComponent descriptionArea = createMultiLineLabel( description );
-        final JComponent iconLabel = new JLabel( icon );
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -218,7 +204,6 @@ public class SendFeedbackDialog extends JDialog
         //
         final JPanel result = new JPanel( new BorderLayout( 4, 0 ) );
         result.add( panel, BorderLayout.CENTER );
-        result.add( iconLabel, BorderLayout.EAST );
 
         final Dimension size = new Dimension( 300, 70 );
         result.setMinimumSize( size );

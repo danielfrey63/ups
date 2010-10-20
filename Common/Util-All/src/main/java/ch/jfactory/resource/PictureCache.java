@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class PictureCache implements AsynchronPictureLoaderListener
+public class PictureCache implements AsyncPictureLoaderListener
 {
     class CacheListEntry
     {
@@ -55,10 +55,10 @@ public class PictureCache implements AsynchronPictureLoaderListener
      */
     private final CacheImageThread cachingThread = new CacheImageThread();
 
-    /** hashmap storing cached picture */
+    /** Hash map storing cached picture. */
     private final Map<String, CachedImage> pictureCache = new HashMap<String, CachedImage>();
 
-    /** task list, contains images to be cached */
+    /** Task list, contains images to be cached. */
     protected final LinkedList<String> cachingList = new LinkedList<String>();
 
     /**
@@ -73,7 +73,7 @@ public class PictureCache implements AsynchronPictureLoaderListener
         this.locator = locator;
     }
 
-    /** clears all entries from Cache */
+    /** Clears all entries from cache. */
     synchronized public void clearCachingList()
     {
         synchronized ( cachingList )
@@ -124,19 +124,22 @@ public class PictureCache implements AsynchronPictureLoaderListener
     }
 
     /**
-     * The image define by the name will be inserted into the cache.
+     * The image define by the name will be inserted into the cache. It is inserted only if it is not there already. If
+     * it is there and should be inserted at the first position, it is moved to the first position.
      *
-     * @param name name of the image
+     * @param name  name of the image
+     * @param thumb whether it is a thumbnail
+     * @param first insert at the start of the list
      */
     public void cacheImage( final String name, final boolean thumb, final boolean first )
     {
         if ( !addOrGetCachedImage( name ).loaded( thumb ) )
         {
-            boolean ok = false;
+            final boolean isNew;
             synchronized ( cachingList )
             {
-                ok = ( cachingList.indexOf( name ) < 0 );
-                if ( ok )
+                isNew = !cachingList.contains( name );
+                if ( isNew )
                 {
                     if ( first )
                     {
@@ -147,28 +150,23 @@ public class PictureCache implements AsynchronPictureLoaderListener
                         cachingList.addLast( name );
                     }
                 }
-                else
+                else if ( first && !cachingList.getFirst().equals( name ) )
                 {
-                    if ( first )
-                    {
-                        if ( !cachingList.getFirst().equals( name ) )
-                        {
-                            cachingList.remove( name );
-                            cachingList.addFirst( name );
-                        }
-                    }
+                    cachingList.remove( name );
+                    cachingList.addFirst( name );
                 }
                 if ( !thumb )
                 {
                     CacheListEntry cle = cacheListHash.get( name );
                     if ( cle == null )
                     {
-                        cacheListHash.put( name, cle = new CacheListEntry( name, thumb ) );
+                        cle = new CacheListEntry( name, thumb );
+                        cacheListHash.put( name, cle );
                     }
                     cle.thumb = thumb;
                 }
             }
-            if ( ok )
+            if ( isNew )
             {
                 if ( DEBUG )
                 {
@@ -206,50 +204,49 @@ public class PictureCache implements AsynchronPictureLoaderListener
     {
         public void run()
         {
-            try
+            boolean loop = true;
+            while ( loop )
             {
-                while ( true )
+                try
                 {
-                    try
+                    final String name;
+                    boolean thumb = false;
+                    synchronized ( PictureCache.this.cachingList )
                     {
-                        final String name;
-                        boolean thumb = false;
-                        synchronized ( PictureCache.this.cachingList )
+                        name = cachingList.removeFirst();
+                        final CacheListEntry cle = cacheListHash.get( name );
+                        if ( cle != null )
                         {
-                            name = cachingList.removeFirst();
-                            final CacheListEntry cle = cacheListHash.get( name );
-                            if ( cle != null )
-                            {
-                                thumb = cle.thumb;
-                            }
-                            cacheListHash.remove( name );
+                            thumb = cle.thumb;
                         }
+                        cacheListHash.remove( name );
+                    }
+                    LOGGER.info( "caching image " + name + ", thumb = " + thumb );
+                    final CachedImage img = addOrGetCachedImage( name );
+                    if ( !img.loaded( thumb ) )
+                    {
+                        addOrGetCachedImage( name ).loadImage( thumb );
+                    }
+                }
+                catch ( NoSuchElementException ex )
+                {
+                    synchronized ( this )
+                    {
                         if ( INFO )
                         {
-                            LOGGER.info( "caching image " + name + ", thum = " + thumb );
+                            LOGGER.info( "caching thread waiting" );
                         }
-                        final CachedImage img = addOrGetCachedImage( name );
-                        if ( !img.loaded( thumb ) )
+                        try
                         {
-                            addOrGetCachedImage( name ).loadImage( thumb );
-                        }
-                    }
-                    catch ( NoSuchElementException ex )
-                    {
-                        synchronized ( this )
-                        {
-                            if ( INFO )
-                            {
-                                LOGGER.info( "caching thread waiting" );
-                            }
                             this.wait();
+                        }
+                        catch ( InterruptedException iex )
+                        {
+                            loop = false;
+                            LOGGER.error( "Caching thread interrupted.", iex );
                         }
                     }
                 }
-            }
-            catch ( InterruptedException iex )
-            {
-                LOGGER.error( "Caching thread interrupted.", iex );
             }
         }
     }

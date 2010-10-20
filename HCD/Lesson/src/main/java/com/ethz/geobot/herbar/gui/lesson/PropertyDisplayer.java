@@ -8,7 +8,6 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
-import ch.jfactory.component.tab.NiceTabbedPane;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -28,7 +27,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class PropertyDisplayer extends NiceTabbedPane
+public class PropertyDisplayer extends JTabbedPane
 {
     private final static String STOP = Strings.getString( "LEVEL.STOPPER" );
 
@@ -48,9 +47,7 @@ public class PropertyDisplayer extends NiceTabbedPane
 
     protected HerbarModel herbarModel;
 
-    /**
-     * Creates a new instance of PropertyDisplayer
-     */
+    /** Creates a new instance of PropertyDisplayer */
     public PropertyDisplayer( final HerbarModel herbarModel )
     {
         this.herbarModel = herbarModel;

@@ -43,7 +43,7 @@ public class PicturePanel extends JPanel
 {
     private final static Logger LOG = LoggerFactory.getLogger( PicturePanel.class );
 
-    private PictureDetailTab pictureTab;
+    private TabbedPictureDetailPanel pictureTab;
 
     private PictureModel model;
 
@@ -255,7 +255,7 @@ public class PicturePanel extends JPanel
         final PictureTheme theme = model.getPictureTheme();
         if ( !isThemeVisible( theme ) )
         {
-            model.setPictureTheme( pictureTab.getTheme() );
+            model.setPictureTheme( (PictureTheme) pictureTab.getObjectAt( pictureTab.getSelectedIndex() ) );
         }
         final PictureDetailPanel panel = pictureTab.getThemePanel( model.getPictureTheme() );
         final CommentedPicture pic = model.getPicture();
@@ -289,7 +289,7 @@ public class PicturePanel extends JPanel
 
     private JComponent buildTab()
     {
-        pictureTab = new PictureDetailTab( ImageLocator.pictLocator );
+        pictureTab = new TabbedPictureDetailPanel( ImageLocator.pictLocator );
         pictureTab.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
         createTabs();
         pictureTab.addChangeListener( new ChangeListener()

@@ -354,7 +354,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private JPanel createExamPanel()
     {
-        picturePanel = new PicturePanel( herbarModel, herbarModel.getPictureTheme( "Herbar" ), false );
+        picturePanel = new PicturePanel( herbarModel, false, herbarModel.getPictureTheme( "Herbar" ) );
 
         initFilter();
 

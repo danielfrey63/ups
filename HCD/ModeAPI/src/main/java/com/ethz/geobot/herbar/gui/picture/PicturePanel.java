@@ -65,15 +65,10 @@ public class PicturePanel extends JPanel
 
     public PicturePanel( final HerbarModel herbarModel, final boolean showText )
     {
-        this( herbarModel, herbarModel.getPictureThemes(), showText );
+        this( herbarModel, showText, herbarModel.getPictureThemes() );
     }
 
-    public PicturePanel( final HerbarModel herbarModel, final PictureTheme pictureTheme, final boolean showText )
-    {
-        this( herbarModel, new PictureTheme[]{pictureTheme}, showText );
-    }
-
-    public PicturePanel( final HerbarModel herbarModel, final PictureTheme[] themes, final boolean showText )
+    public PicturePanel( final HerbarModel herbarModel, final boolean showText, final PictureTheme... themes )
     {
         model = new PictureModel( herbarModel );
         this.themes = themes;
@@ -109,20 +104,6 @@ public class PicturePanel extends JPanel
             }
         }
         return false;
-    }
-
-    private void createTabs()
-    {
-        final PictureTheme[] themes = model.getPictureThemes();
-        for ( int i = 0; i < themes.length; i++ )
-        {
-            final PictureDetailPanel detailPanel = pictureTab.addTab( themes[i], themes[i].getName() );
-            pictureTab.setEnabledAt( i, isThemeVisible( themes[i] ) );
-            if ( isThemeVisible( themes[i] ) )
-            {
-                createDetailPanelListener( detailPanel );
-            }
-        }
     }
 
     private void createDetailPanelListener( final PictureDetailPanel detailPanel )
@@ -228,7 +209,6 @@ public class PicturePanel extends JPanel
 
     private void setImage()
     {
-        final PictureTheme theme = model.getPictureTheme();
         final PictureDetailPanel panel = pictureTab.getThemePanel( model.getPictureTheme() );
         final CommentedPicture pic = model.getPicture();
         final boolean isPicture = pic != null;
@@ -273,6 +253,20 @@ public class PicturePanel extends JPanel
             }
         } );
         return pictureTab;
+    }
+
+    private void createTabs()
+    {
+        final PictureTheme[] themes = model.getPictureThemes();
+        for ( int i = 0; i < themes.length; i++ )
+        {
+            final PictureDetailPanel detailPanel = pictureTab.addTab( themes[i], themes[i].getName() );
+            pictureTab.setEnabledAt( i, isThemeVisible( themes[i] ) );
+            if ( isThemeVisible( themes[i] ) )
+            {
+                createDetailPanelListener( detailPanel );
+            }
+        }
     }
 
     private JComponent buildTextArea()

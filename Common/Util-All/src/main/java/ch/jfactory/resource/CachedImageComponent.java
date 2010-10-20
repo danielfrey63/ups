@@ -28,7 +28,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     private static final Dimension minimumSize = new Dimension( 50, 50 );
 
-    private PictureCache cache;
+    private final PictureCache cache;
 
     private CachedImage img;
 
@@ -38,7 +38,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     private double zoomFactor = 1.0;
 
-    /** Size which represents a zooming factor of 1. */
+    /** Size of the picture with a zooming factor of 1. */
     private int defaultSize = 0;
 
     private Dimension size;
@@ -46,9 +46,9 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     public static Border BORDER = BorderFactory.createEmptyBorder( 1, 1, 1, 1 );
     // BorderFactory.createCompoundBorder( BorderFactory.createLineBorder(Color.red,1), BorderFactory.createEmptyBorder(10, 10, 10, 10) );
 
-    public CachedImageComponent( final PictureCache c, final int size )
+    public CachedImageComponent( final PictureCache cache, final int size )
     {
-        this( c );
+        this.cache = cache;
         this.setBorder( BORDER );
         defaultSize = size;
     }
@@ -56,11 +56,6 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     public double getZoomFactor()
     {
         return zoomFactor;
-    }
-
-    public CachedImageComponent( final PictureCache c )
-    {
-        cache = c;
     }
 
     public synchronized void setImage( final String name, final boolean thumb )

@@ -51,7 +51,7 @@ public class PicturePanel extends JPanel
 
     private boolean showText = true;
 
-    private PictureTheme[] shownThemes;
+    private PictureTheme[] themes;
 
     /**
      * Creates new form PicturePanel.
@@ -76,11 +76,7 @@ public class PicturePanel extends JPanel
     public PicturePanel( final HerbarModel herbarModel, final PictureTheme[] themes, final boolean showText )
     {
         model = new PictureModel( herbarModel );
-        shownThemes = themes;
-        if ( !isThemeVisible( model.getPictureTheme() ) )
-        {
-            model.setPictureTheme( shownThemes[0] );
-        }
+        this.themes = themes;
         initGUI();
         setShowText( showText );
     }
@@ -105,9 +101,9 @@ public class PicturePanel extends JPanel
 
     private boolean isThemeVisible( final PictureTheme theme )
     {
-        for ( final PictureTheme shownTheme : shownThemes )
+        for ( final PictureTheme theTheme : themes )
         {
-            if ( shownTheme == theme )
+            if ( theTheme == theme )
             {
                 return true;
             }
@@ -163,10 +159,6 @@ public class PicturePanel extends JPanel
         for ( int i = 0; i < taxon.getPictureThemes().length; i++ )
         {
             final PictureTheme theme = taxon.getPictureThemes()[i];
-            if ( !isThemeVisible( theme ) )
-            {
-                continue;
-            }
             if ( model.getPictureTheme() == theme )
             {
                 final CommentedPicture[] pics = taxon.getCommentedPictures( theme );
@@ -209,22 +201,6 @@ public class PicturePanel extends JPanel
         }
     }
 
-    private String getComment( final CommentedPicture pic )
-    {
-        if ( pic == null )
-        {
-            return "";
-        }
-        if ( showText )
-        {
-            return pic.getComment();
-        }
-        else
-        {
-            return "";
-        }
-    }
-
     private int fillDetailPanel( final PictureDetailPanel detail, final PictureTheme theme )
     {
         int counter = 0;
@@ -232,7 +208,7 @@ public class PicturePanel extends JPanel
         {
             final CommentedPicture pic = (CommentedPicture) j.next();
             final String picture = pic.getPicture().getRelativURL();
-            detail.addImage( picture, ( showText ? getComment( pic ) : "" ) );
+            detail.addImage( picture, ( showText ? pic.getComment() : "" ) );
             detail.cacheImage( picture, theme != model.getPictureTheme() );
             counter++;
         }
@@ -253,15 +229,11 @@ public class PicturePanel extends JPanel
     private void setImage()
     {
         final PictureTheme theme = model.getPictureTheme();
-        if ( !isThemeVisible( theme ) )
-        {
-            model.setPictureTheme( (PictureTheme) pictureTab.getObjectAt( pictureTab.getSelectedIndex() ) );
-        }
         final PictureDetailPanel panel = pictureTab.getThemePanel( model.getPictureTheme() );
         final CommentedPicture pic = model.getPicture();
         final boolean isPicture = pic != null;
-        final boolean isShowing = showText && !( isPicture && "".equals( getComment( pic ) ) );
-        final String comment = ( isShowing ? getComment( pic ) : "" );
+        final boolean isShowing = showText && !( isPicture && "".equals( pic.getComment() ) );
+        final String comment = ( isShowing && pic != null ? pic.getComment() : "" );
         textArea.setVisible( isShowing );
         textArea.setText( comment );
         panel.setToolTipText( comment );

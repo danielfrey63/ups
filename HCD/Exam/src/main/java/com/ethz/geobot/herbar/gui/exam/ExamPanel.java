@@ -96,19 +96,13 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 {
     private static final Logger LOG;
 
-    /**
-     * Identifier for card layout
-     */
+    /** Identifier for card layout */
     private static final String INTRO = "INTRO";
 
-    /**
-     * Identifier for card layout
-     */
+    /** Identifier for card layout */
     private static final String EXAM = "EXAM";
 
-    /**
-     * Identifier for card layout
-     */
+    /** Identifier for card layout */
     private static final String RESULT = "RESULT";
 
     private static final int SIZE = 10;
@@ -365,7 +359,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         initFilter();
 
         final ResultModel resultModel = createResultModel();
-        asker = new PropertyInterrogator( herbarContext, resultModel );
+        asker = new PropertyInterrogator( resultModel );
 
         final JPanel toolBar = new JPanel( new BorderLayout() );
         toolBar.add( createTopToolbar(), BorderLayout.NORTH );

@@ -8,7 +8,6 @@
  */
 package ch.jfactory.resource;
 
-import java.awt.Image;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -17,49 +16,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is used as a cache for images. It stores Images into a HashMap via a soft reference.
+ * This class is used as a cache for images. It maintains a queue for pictures to cache and stores them in a HashMap
+ * with soft references.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class PictureCache implements AsyncPictureLoaderListener
+public class PictureCache
 {
-    class CacheListEntry
-    {
-        public CacheListEntry( final String image, final boolean t )
-        {
-            this.image = image;
-            this.thumb = t;
-        }
+    /** This class' logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
 
-        public String image;
-
-        public boolean thumb;
-    }
-
-    /** category for logging */
-    protected final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
-
-    protected final static boolean INFO = LOGGER.isInfoEnabled();
-
-    protected final static boolean DEBUG = LOGGER.isDebugEnabled();
-
-    protected HashMap<String, CacheListEntry> cacheListHash = new HashMap<String, CacheListEntry>();
-
+    /** Locator for images. */
     private final CachedImageLocator locator;
 
-    /**
-     * caching thread
-     *
-     * @see CacheImageThread
-     */
+    /** Caching thread. */
     private final CacheImageThread cachingThread = new CacheImageThread();
 
     /** Hash map storing cached picture. */
-    private final Map<String, CachedImage> pictureCache = new HashMap<String, CachedImage>();
+    private final Map<String, CachedImage> cache = new HashMap<String, CachedImage>();
 
-    /** Task list, contains images to be cached. */
-    protected final LinkedList<String> cachingList = new LinkedList<String>();
+    /** Task queue, contains images to be cached. */
+    private final LinkedList<String> queue = new LinkedList<String>();
 
     /**
      * PictureCache taking images from directory
@@ -68,27 +46,24 @@ public class PictureCache implements AsyncPictureLoaderListener
      */
     public PictureCache( final CachedImageLocator locator )
     {
+        this.locator = locator;
         cachingThread.setPriority( Thread.MIN_PRIORITY );
         cachingThread.start();
-        this.locator = locator;
     }
 
     /** Clears all entries from cache. */
     synchronized public void clearCachingList()
     {
-        synchronized ( cachingList )
+        synchronized ( queue )
         {
-            cachingList.clear();
-            cacheListHash.clear();
+            queue.clear();
+            cache.clear();
         }
-        if ( DEBUG )
-        {
-            LOGGER.debug( "caching list cleared" );
-        }
+        LOGGER.debug( "caching list cleared" );
     }
 
     /**
-     * Puts an Image into the cache.
+     * Puts an image into the cache.
      *
      * @param name name of the image
      * @return a CachedImage-Object representing the image
@@ -96,31 +71,14 @@ public class PictureCache implements AsyncPictureLoaderListener
      */
     public CachedImage addOrGetCachedImage( final String name )
     {
-        CachedImage image = pictureCache.get( name );
+        CachedImage image = cache.get( name );
         if ( image == null )
         {
-            if ( INFO )
-            {
-                LOGGER.info( "adding image " + name + " in " + locator.getPath() + " " + " to cache" );
-            }
+            LOGGER.info( "adding image " + name + " in " + locator.getPath() + " " + " to cache" );
             image = new CachedImage( locator, name );
-            pictureCache.put( name, image );
+            cache.put( name, image );
         }
         return image;
-    }
-
-    /**
-     * Removes an image from the cache.
-     *
-     * @param name name of the cache
-     */
-    public void removeImage( final String name )
-    {
-        if ( INFO )
-        {
-            LOGGER.info( "removing image " + name + " from cache" );
-        }
-        pictureCache.remove( name );
     }
 
     /**
@@ -136,42 +94,29 @@ public class PictureCache implements AsyncPictureLoaderListener
         if ( !addOrGetCachedImage( name ).loaded( thumb ) )
         {
             final boolean isNew;
-            synchronized ( cachingList )
+            synchronized ( queue )
             {
-                isNew = !cachingList.contains( name );
+                isNew = !queue.contains( name );
                 if ( isNew )
                 {
                     if ( first )
                     {
-                        cachingList.addFirst( name );
+                        queue.addFirst( name );
                     }
                     else
                     {
-                        cachingList.addLast( name );
+                        queue.addLast( name );
                     }
                 }
-                else if ( first && !cachingList.getFirst().equals( name ) )
+                else if ( first && !queue.getFirst().equals( name ) )
                 {
-                    cachingList.remove( name );
-                    cachingList.addFirst( name );
-                }
-                if ( !thumb )
-                {
-                    CacheListEntry cle = cacheListHash.get( name );
-                    if ( cle == null )
-                    {
-                        cle = new CacheListEntry( name, thumb );
-                        cacheListHash.put( name, cle );
-                    }
-                    cle.thumb = thumb;
+                    queue.remove( name );
+                    queue.addFirst( name );
                 }
             }
             if ( isNew )
             {
-                if ( DEBUG )
-                {
-                    LOGGER.debug( "caching List changed due to " + name );
-                }
+                LOGGER.debug( "caching List changed due to " + name );
                 synchronized ( cachingThread )
                 {
                     cachingThread.notify();
@@ -180,27 +125,8 @@ public class PictureCache implements AsyncPictureLoaderListener
         }
     }
 
-    public void loadFinished( final String name, final Image img, final boolean thumb )
-    {
-        addOrGetCachedImage( name ).setImage( img, thumb );
-    }
-
-    public void loadAborted( final String name )
-    {
-        removeImage( name );
-    }
-
-    public void loadStarted( final String name )
-    {
-        // nothing
-    }
-
-    /**
-     * Internal class used to processing the caching image list.
-     *
-     * @author Dirk
-     */
-    class CacheImageThread extends Thread
+    /** Internal class used to processing the caching image list. */
+    private class CacheImageThread extends Thread
     {
         public void run()
         {
@@ -210,18 +136,12 @@ public class PictureCache implements AsyncPictureLoaderListener
                 try
                 {
                     final String name;
-                    boolean thumb = false;
-                    synchronized ( PictureCache.this.cachingList )
+                    final boolean thumb = false;
+                    synchronized ( PictureCache.this.queue )
                     {
-                        name = cachingList.removeFirst();
-                        final CacheListEntry cle = cacheListHash.get( name );
-                        if ( cle != null )
-                        {
-                            thumb = cle.thumb;
-                        }
-                        cacheListHash.remove( name );
+                        name = queue.removeFirst();
                     }
-                    LOGGER.info( "caching image " + name + ", thumb = " + thumb );
+                    LOGGER.info( "caching image (not thumb) " + name );
                     final CachedImage img = addOrGetCachedImage( name );
                     if ( !img.loaded( thumb ) )
                     {
@@ -232,10 +152,7 @@ public class PictureCache implements AsyncPictureLoaderListener
                 {
                     synchronized ( this )
                     {
-                        if ( INFO )
-                        {
-                            LOGGER.info( "caching thread waiting" );
-                        }
+                        LOGGER.info( "caching thread waiting" );
                         try
                         {
                             this.wait();

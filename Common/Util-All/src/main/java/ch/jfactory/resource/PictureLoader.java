@@ -32,12 +32,12 @@ public class PictureLoader
         return load( pictureURL, null, null, thumb );
     }
 
-    public static Image load( final String pictureURL, final IIOReadProgressListener read, final IIOReadUpdateListener update,
-                              final boolean thumb )
+    public static Image load( final String pictureURL, final IIOReadProgressListener read,
+                              final IIOReadUpdateListener update, final boolean thumb )
     {
         try
         {
-            LOGGER.info( "loading of picture " + pictureURL + " initiate." );
+            LOGGER.info( "loading of image " + pictureURL + " initiate." );
             final File file = new File( pictureURL );
             if ( file.exists() )
             {
@@ -65,17 +65,18 @@ public class PictureLoader
                 }
                 reader.dispose();
                 iis.close();
+                LOGGER.info( "loading of image " + pictureURL + " finished" );
                 return image;
             }
             else
             {
-                LOGGER.warn( "No Image at " + pictureURL );
+                LOGGER.warn( "no image at " + pictureURL );
             }
         }
         catch ( Exception ex )
         {
             ex.printStackTrace();
-            LOGGER.warn( "Loading of image " + pictureURL + " failed.", ex );
+            LOGGER.warn( "loading of image " + pictureURL + " failed.", ex );
         }
         return null;
     }

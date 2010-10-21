@@ -36,7 +36,7 @@ public class ThumbNailPanel extends ScrollerPanel
 
     private final PictureCache cache;
 
-    private ArrayList<ActionListener> listener;
+    private final ArrayList<ActionListener> listeners = new ArrayList<ActionListener>();
 
     public ThumbNailPanel( final PictureCache cache )
     {
@@ -107,30 +107,19 @@ public class ThumbNailPanel extends ScrollerPanel
 
     public void addActionListener( final ActionListener l )
     {
-        if ( listener == null )
-        {
-            listener = new ArrayList<ActionListener>();
-        }
-        listener.add( l );
+        listeners.add( l );
     }
 
     public void fireActionEvent( final CachedImageComponent ci )
     {
-        if ( listener == null )
+        final ActionEvent e = new ActionEvent( this, 0, ci.getImage().getName() );
+        if ( listeners != null && listeners.size() > 0 )
         {
-            return;
+            LOGGER.info( "fireActionEvent " + ci.getImage().getName() );
         }
-        ActionEvent e = null;
-        for ( final Object aListener : listener )
+        for ( final ActionListener listener : listeners )
         {
-            final ActionListener l = (ActionListener) aListener;
-            if ( e == null )
-            {
-                LOGGER.info( "fireActionEvent " + ci.getImage().getName() );
-                e = new ActionEvent( this, 0, ci.getImage().getName() );
-
-            }
-            l.actionPerformed( e );
+            listener.actionPerformed( e );
         }
     }
 

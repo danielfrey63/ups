@@ -156,7 +156,7 @@ public abstract class CachedImageLocator extends AbstractAsyncPictureLoaderSuppo
     {
         loader = new AsyncPictureLoader();
         loader.setPriority( Thread.MIN_PRIORITY );
-        loader.attach( cache );
+//        loader.attach( cache );
         loader.attach( this );
         loader.start();
     }

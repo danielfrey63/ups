@@ -48,7 +48,7 @@ public class ScrollableImage extends JLabel implements Scrollable
     private final CachedImageLocator locator = ImageLocator.pictLocator;
 
     /**
-     * Listener to asynchron nofication of picture loading private AsyncPictureLoaderListener finishVisitor = new
+     * Listener to asynchronous notification of picture loading private AsyncPictureLoaderListener finishVisitor = new
      * AsyncPictureLoaderListener() { public void loadFinished( String name, Image img, boolean bool ) { setImage( new
      * ImageIcon( img ), "" ); } <p/> public void loadAborted( String name ) { setImage( null, "" ); } <p/> public void
      * loadStarted( String name ) { setImage( null, Strings.getString( "PICTURE.LOAD" ) ); } };

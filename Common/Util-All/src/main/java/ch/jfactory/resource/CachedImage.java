@@ -10,6 +10,7 @@ package ch.jfactory.resource;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.lang.ref.SoftReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,15 +20,25 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class CachedImage extends ImageReference
+public class CachedImage
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImage.class );
 
     private final String pictureURL;
 
-    private AbstractAsyncPictureLoaderSupport listeners;
+    private final AbstractAsyncPictureLoaderSupport listeners = new AbstractAsyncPictureLoaderSupport();
 
     private final CachedImageLocator locator;
+
+    private Dimension size;
+
+    private boolean imageLoaded = false;
+
+    private boolean thumbNailLoaded = false;
+
+    private SoftReference<Image> image;
+
+    private SoftReference<Image> thumbNail;
 
     public CachedImage( final CachedImageLocator locator, final String pictureURL )
     {
@@ -35,26 +46,11 @@ public class CachedImage extends ImageReference
         this.locator = locator;
     }
 
-    public void setImage( final Image img, final boolean thumb )
+    public synchronized Image loadImage( final boolean thumb )
     {
-        LOGGER.debug( "Setting image for " + pictureURL + ", " + thumb );
-        if ( img == super.getImage( thumb ) )
-        {
-            return;
-        }
-        super.setImage( img, thumb );
-        if ( listeners == null )
-        {
-            return;
-        }
-        if ( img == null )
-        {
-            listeners.informAborted( pictureURL );
-        }
-        else
-        {
-            listeners.informFinished( pictureURL, img, thumb );
-        }
+        final Image i = PictureLoader.load( locator.getPath() + pictureURL, thumb );
+        setImage( i, thumb );
+        return i;
     }
 
     public String getName()
@@ -64,64 +60,115 @@ public class CachedImage extends ImageReference
 
     public Dimension getSize()
     {
-        Dimension d = super.getSize();
+        Dimension d = size;
         if ( d == null )
         {
-            d = PictureLoader.getSize( getPath() + pictureURL );
+            d = PictureLoader.getSize( locator.getPath() + pictureURL );
             setSize( d );
         }
         return d;
     }
 
-    public Image getImage( final boolean thumb )
+    /**
+     * Looking for a thumbnail, returns whether the thumb or image has been loaded. Looking for an image, returns
+     * whether the image has been loaded.
+     *
+     * @param thumb whether to look for a thumbnail
+     * @return whether the thumb or image is loaded
+     */
+    public boolean loaded( final boolean thumb )
     {
-        Image i = super.getImage( thumb );
-        if ( i == null )
-        {
-            if ( thumb )
-            {
-                i = super.getImage( !thumb );
-            }
-        }
-        return i;
+        return getImage( thumb ) != null || thumb && ( getImage( false ) != null );
     }
 
     public void attach( final AsyncPictureLoaderListener list )
     {
-        if ( listeners == null )
-        {
-            listeners = new AbstractAsyncPictureLoaderSupport();
-        }
         listeners.attach( list );
     }
 
     public void detach( final AsyncPictureLoaderListener list )
     {
-        if ( listeners == null )
+        listeners.detach( list );
+    }
+
+    public Image getImage( final boolean thumb )
+    {
+        Image image;
+        if ( thumb )
+        {
+            image = getThumbnail();
+            if ( image == null )
+            {
+                image = getFullImage();
+            }
+        }
+        else
+        {
+            image = getFullImage();
+        }
+        return image;
+    }
+
+    private void setImage( final Image image, final boolean thumb )
+    {
+        LOGGER.debug( "Setting image for " + pictureURL + ", " + thumb );
+        if ( image == getImage( thumb ) )
         {
             return;
         }
-        listeners.detach( list );
-        if ( listeners.size() <= 0 )
+        synchronized ( this )
         {
-            listeners = null;
+            if ( thumb )
+            {
+                final Image img = ( this.image == null ) ? null : this.image.get();
+                if ( img == null )
+                {
+                    thumbNailLoaded = true;
+                    thumbNail = new SoftReference<Image>( image );
+                }
+            }
+            else
+            {
+                imageLoaded = true;
+                thumbNailLoaded = false;
+                thumbNail = null;
+                this.image = new SoftReference<Image>( image );
+            }
+        }
+        if ( image == null )
+        {
+            listeners.informAborted( pictureURL );
+        }
+        else
+        {
+            listeners.informFinished( pictureURL, image, thumb );
         }
     }
 
-    protected boolean loaded( final boolean thumb )
+    private void setSize( final Dimension d )
     {
-        return super.getImage( thumb ) != null || thumb && ( super.getImage( false ) != null );
+        size = d;
     }
 
-    protected synchronized Image loadImage( final boolean thumb )
+    private Image getFullImage()
     {
-        final Image i = PictureLoader.load( getPath() + pictureURL, thumb );
-        this.setImage( i, thumb );
-        return i;
+        final Image image = this.image == null ? null : this.image.get();
+        if ( imageLoaded && image == null )
+        {
+            LOGGER.debug( "soft reference lost" );
+            imageLoaded = false;
+        }
+        return image;
     }
 
-    private String getPath()
+    private Image getThumbnail()
     {
-        return locator.getPath();
+        final Image image = thumbNail == null ? null : thumbNail.get();
+        if ( thumbNailLoaded && image == null )
+        {
+            LOGGER.debug( "soft reference lost" );
+            thumbNailLoaded = false;
+        }
+        return image;
     }
 }

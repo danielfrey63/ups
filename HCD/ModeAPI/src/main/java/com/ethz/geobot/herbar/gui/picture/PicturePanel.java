@@ -103,7 +103,7 @@ public class PicturePanel extends JPanel
         {
             public void propertyChange( final PropertyChangeEvent e )
             {
-                LOG.info( "propertyChange(" + e + ")" );
+                LOG.info( "propertyChange(" + e.getPropertyName() + ")" );
                 if ( e.getPropertyName().equalsIgnoreCase( PictureDetailPanel.IMAGE ) )
                 {
                     imageChanged( e.getNewValue().toString() );
@@ -232,7 +232,7 @@ public class PicturePanel extends JPanel
         {
             public void stateChanged( final ChangeEvent e )
             {
-                LOG.info( "stateChanged(" + e + ")" );
+                LOG.info( "tab changed)" );
                 tabChanged();
             }
         } );

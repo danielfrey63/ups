@@ -33,9 +33,7 @@ public class OneOfFiveQuestionModel
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
-    /**
-     * Amount of taxa displayed to select one which doesnt fit
-     */
+    /** Amount of taxa displayed to select one which doesnt fit */
     private static final int NUMBER_OF_RIGHT_TAXA = 4;
 
     private static final int NUMBER_OF_WRONG_TAXA = 1;
@@ -49,6 +47,7 @@ public class OneOfFiveQuestionModel
     private final List allCombis = new ArrayList();
 
     // vectors which control and evaluate the wrong, false, and total questions
+
     private final List<QuestionDataUnit> wrongAnswers = new ArrayList<QuestionDataUnit>();
 
     private final List<QuestionDataUnit> rightAnswers = new ArrayList<QuestionDataUnit>();
@@ -163,7 +162,7 @@ public class OneOfFiveQuestionModel
                                     final Taxon wrongOrRightTaxon = (Taxon) aWrongAndRightTaxa;
                                     if ( DEBUG )
                                     {
-                                        LOG.debug( "tax: " + wrongOrRightTaxon + ", Wparent: " + wrongParent +
+                                        LOG.trace( "tax: " + wrongOrRightTaxon + ", Wparent: " + wrongParent +
                                                 ", Rparent: " + rightParent );
                                     }
                                     newUnit.add( wrongOrRightTaxon );

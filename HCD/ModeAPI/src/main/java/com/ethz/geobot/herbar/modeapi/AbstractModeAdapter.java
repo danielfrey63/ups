@@ -28,19 +28,9 @@ public class AbstractModeAdapter extends AbstractMode
 
     private WeakReference<Component> viewComponent = new WeakReference<Component>( null );
 
-    public AbstractModeAdapter( final Class componentClass )
+    public AbstractModeAdapter( final Class<? extends Component> componentClass )
     {
-        if ( Component.class.isAssignableFrom( componentClass ) )
-        {
-            this.componentClass = componentClass;
-        }
-        else
-        {
-            final String errorText = "AbstractModeAdapter receive illegal class " + componentClass +
-                    ", not extended from Component";
-            LOG.error( errorText );
-            throw new IllegalArgumentException( errorText );
-        }
+        this.componentClass = componentClass;
     }
 
     public void wizardSettingsFinish()

@@ -57,7 +57,6 @@ public class PictureCache
         synchronized ( queue )
         {
             queue.clear();
-            cache.clear();
         }
         LOGGER.debug( "caching list cleared" );
     }

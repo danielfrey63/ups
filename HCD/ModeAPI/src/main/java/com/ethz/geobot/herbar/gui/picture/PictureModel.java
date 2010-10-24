@@ -61,11 +61,6 @@ public class PictureModel
         return (CommentedPicture) getPictureCursor().getCurrent();
     }
 
-    public PictureTheme[] getPictureThemes()
-    {
-        return themes;
-    }
-
     public PictureTheme getPictureTheme()
     {
         return themes[selected];
@@ -132,18 +127,6 @@ public class PictureModel
         catch ( Exception e )
         {
             LOG.error( "Error in setTaxon ", e );
-        }
-    }
-
-    public void setPictureTheme( final PictureTheme shownTheme )
-    {
-        for ( int i = 0; i < themes.length; i++ )
-        {
-            if ( themes[i] == shownTheme )
-            {
-                setSelectedIndex( i );
-                return;
-            }
         }
     }
 }

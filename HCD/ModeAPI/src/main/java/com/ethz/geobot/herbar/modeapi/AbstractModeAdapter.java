@@ -26,7 +26,7 @@ public class AbstractModeAdapter extends AbstractMode
 
     private final Class componentClass;
 
-    private WeakReference viewComponent = new WeakReference( null );
+    private WeakReference<Component> viewComponent = new WeakReference<Component>( null );
 
     public AbstractModeAdapter( final Class componentClass )
     {
@@ -53,7 +53,7 @@ public class AbstractModeAdapter extends AbstractMode
 
     public boolean queryDeactivate()
     {
-        final Component vc = (Component) viewComponent.get();
+        final Component vc = viewComponent.get();
         if ( vc != null )
         {
             if ( ModeActivation.class.isAssignableFrom( vc.getClass() ) )
@@ -67,11 +67,11 @@ public class AbstractModeAdapter extends AbstractMode
 
     public final Component getComponent()
     {
-        Component vc = (Component) viewComponent.get();
+        Component vc = viewComponent.get();
         if ( vc == null )
         {
             vc = initiateComponent();
-            viewComponent = new WeakReference( vc );
+            viewComponent = new WeakReference<Component>( vc );
         }
         return vc;
     }
@@ -93,7 +93,7 @@ public class AbstractModeAdapter extends AbstractMode
 
     public final void deactivate()
     {
-        final Component vc = (Component) viewComponent.get();
+        final Component vc = viewComponent.get();
         if ( vc != null )
         {
             if ( ModeActivation.class.isAssignableFrom( vc.getClass() ) )
@@ -108,7 +108,7 @@ public class AbstractModeAdapter extends AbstractMode
     {
         Component component;
 
-        LOG.info( "initiateComponent()" );
+        LOG.info( "initializing component" );
         // first initiate component via default constructor
         try
         {

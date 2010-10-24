@@ -19,25 +19,17 @@ public class SimpleTaxStateModel
 
     public final static String ORDER = "ordered";
 
-    /**
-     * Holds value of property scope.
-     */
+    /** Holds value of property scope. */
     private Taxon scope;
 
-    /**
-     * Holds value of property level.
-     */
+    /** Holds value of property level. */
     private Level level;
 
-    /**
-     * Holds value of property focus.
-     */
+    /** Holds value of property focus. */
     private Taxon focus;
 
-    /**
-     * Holds value of property ordered.
-     */
-    private boolean ordered;
+    /** Holds value of property ordered. */
+    private boolean ordered = true;
 
     private PropertyChangeSupport propertySupport;
 
@@ -133,7 +125,7 @@ public class SimpleTaxStateModel
     {
         final boolean oldOrdered = this.ordered;
         this.ordered = ordered;
-        propertySupport.firePropertyChange( ORDER, new Boolean( oldOrdered ), new Boolean( ordered ) );
+        propertySupport.firePropertyChange( ORDER, Boolean.valueOf( oldOrdered ), Boolean.valueOf( ordered ) );
     }
 
     private void validateLevel()
@@ -149,16 +141,11 @@ public class SimpleTaxStateModel
     private void validateFocus()
     {
         Taxon[] taxa = scope.getAllChildTaxa( level );
-        taxa = (Taxon[]) ArrayUtils.insert( taxa, scope, 0, new Taxon[0] );
+        taxa = ArrayUtils.insert( taxa, scope, 0, new Taxon[0] );
         if ( !ArrayUtils.contains( taxa, focus ) )
         {
             setFocus( taxa[0] );
         }
-    }
-
-    public void setPropertyChangeSupport( final PropertyChangeSupport propertySupport )
-    {
-        this.propertySupport = propertySupport;
     }
 }
 

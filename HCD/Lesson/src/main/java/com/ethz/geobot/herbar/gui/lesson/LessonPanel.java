@@ -62,7 +62,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
     private final TaxStateModel taxStateModel;
 
-    private final PropertyDisplayer lessonPanel;
+    private final PropertyDisplay lessonPanel;
 
     private final PropertyInterrogator askPanel;
 
@@ -79,7 +79,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
      */
     public LessonPanel( final LessonMode mode )
     {
-        LOG.info( this + " initiate mode panel" );
+        LOG.info( "initiate mode panel" );
         /*
          * The constructor is called by reflection, so any exceptions occurring
          * during construction would be visible as a simple InvocationException.
@@ -95,7 +95,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
             taxStateModel = new TaxStateModel( herbarModel );
 
-            lessonPanel = new PropertyDisplayer( herbarModel );
+            lessonPanel = new PropertyDisplay( herbarModel );
             askPanel = new PropertyInterrogator( initResultModel( herbarModel ) );
             askPanel.setTaxFocus( taxStateModel.getFocus() );
 
@@ -195,7 +195,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
     public void propertyChange( final PropertyChangeEvent e )
     {
-        LOG.info( "set focus to " + e );
+        LOG.info( "setting focus to \"" + e.getNewValue() + "\"" );
         final Taxon focus = (Taxon) e.getNewValue();
         lessonPanel.setTaxFocus( focus );
         askPanel.setTaxFocus( focus );

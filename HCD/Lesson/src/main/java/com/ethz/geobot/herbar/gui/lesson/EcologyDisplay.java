@@ -22,9 +22,9 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class EcologyDisplayer extends AttributeTreePanel
+public class EcologyDisplay extends AttributeTreePanel
 {
-    EcologyDisplayer( final HerbarModel hModel, final Level stopper )
+    EcologyDisplay( final HerbarModel hModel, final Level stopper )
     {
         super( hModel, stopper, Strings.getString( "PROPERTY.ECOTEXT.TEXT" ) );
     }

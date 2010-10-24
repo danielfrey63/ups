@@ -64,6 +64,7 @@ public class CachedImage
         if ( d == null )
         {
             d = PictureLoader.getSize( locator.getPath() + pictureURL );
+            LOGGER.info( "reading size for image \"" + pictureURL + "\" with width " + d.width + ", height " + d.height );
             setSize( d );
         }
         return d;
@@ -111,7 +112,7 @@ public class CachedImage
 
     private void setImage( final Image image, final boolean thumb )
     {
-        LOGGER.debug( "Setting image for " + pictureURL + ", " + thumb );
+        LOGGER.debug( "setting " + ( thumb ? "thumb" : "image" ) + " for \"" + pictureURL + "\"" );
         if ( image == getImage( thumb ) )
         {
             return;

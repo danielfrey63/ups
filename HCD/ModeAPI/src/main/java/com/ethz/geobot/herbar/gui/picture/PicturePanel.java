@@ -123,7 +123,7 @@ public class PicturePanel extends JPanel
 
     public void cacheTaxon( final Taxon taxon )
     {
-        LOG.debug( "cacheTaxon(" + taxon + ")" );
+        LOG.debug( "caching taxon \"" + taxon + "\"" );
         if ( taxon == null )
         {
             return;
@@ -148,7 +148,7 @@ public class PicturePanel extends JPanel
      */
     public void setTaxon( final Taxon taxon )
     {
-        LOG.info( "setTaxon( " + taxon + ")" );
+        LOG.info( "setting taxon to \"" + taxon + "\"" );
         model.setTaxon( taxon );
         pictureTab.clearCachingList();
         pictureTab.clearAll();
@@ -232,7 +232,7 @@ public class PicturePanel extends JPanel
         {
             public void stateChanged( final ChangeEvent e )
             {
-                LOG.info( "tab changed)" );
+                LOG.info( "tab changed" );
                 tabChanged();
             }
         } );

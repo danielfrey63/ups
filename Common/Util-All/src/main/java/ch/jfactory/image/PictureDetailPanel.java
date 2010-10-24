@@ -55,7 +55,7 @@ public class PictureDetailPanel extends JPanel
 
     public PictureDetailPanel( final PictureCache cache )
     {
-        LOGGER.debug( "PictureDetailPanel(" + cache + ")" );
+        LOGGER.debug( "initializing picture details panel with cache " + cache );
         this.cache = cache;
         initGUI();
     }
@@ -68,7 +68,7 @@ public class PictureDetailPanel extends JPanel
      */
     public void setImage( final String name )
     {
-        LOGGER.debug( "setImage(" + name + ")" );
+        LOGGER.debug( "setting image to \"" + name + "\"" );
         image.setImage( name, false );
     }
 
@@ -100,7 +100,7 @@ public class PictureDetailPanel extends JPanel
 
     public void addImage( final String s, final String toolTip )
     {
-        LOGGER.debug( "addImage(" + s + ")" );
+        LOGGER.debug( "adding image \"" + s + "\"" );
         thumbPanel.addImage( s, toolTip, false );
     }
 

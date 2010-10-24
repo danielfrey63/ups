@@ -56,7 +56,7 @@ public class ScrollerPanel extends JPanel
 
     private void addButtons()
     {
-        LOGGER.debug( "addButtons()" );
+        LOGGER.trace( "adding buttons" );
         add( btnPrev, ScrollerLayout.PREVSCROLLER );
         add( btnNext, ScrollerLayout.NEXTSCROLLER );
     }
@@ -81,12 +81,10 @@ public class ScrollerPanel extends JPanel
         } );
     }
 
-    /**
-     * remove all components from the scrollable section of the panel
-     */
+    /** remove all components from the scrollable section of the panel */
     public void removeAll()
     {
-        LOGGER.debug( "removeAll()" );
+        LOGGER.trace( "removing all components and re-adding buttons" );
         super.removeAll();
         addButtons();
         repaint();

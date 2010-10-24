@@ -39,7 +39,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
 {
     private static final Logger LOG = LoggerFactory.getLogger( MutableTaxonImpl.class );
 
-    private static final Comparator RANK_COMPARATOR = new GraphNodeRankComparator();
+    private static final Comparator<GraphNode> RANK_COMPARATOR = new GraphNodeRankComparator();
 
     public static GraphNodeList getNodes( final Taxon[] list )
     {
@@ -51,17 +51,11 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         return result;
     }
 
-    /**
-     * @see Taxon#getRelevance(MorValue)
-     */
     public AbsRelevance getRelevance( final MorValue value )
     {
         return AbsRelevance.getRelevance( getSiblings(), value );
     }
 
-    /**
-     * @see MutableTaxon#setChildTaxa(Taxon[])
-     */
     public void setChildTaxa( final Taxon[] children )
     {
         final GraphNodeList newChildren = new GraphNodeList();
@@ -72,9 +66,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         setChildren( newChildren, MutableTaxonImpl.class );
     }
 
-    /**
-     * @see MutableTaxon#setLevel(Level)
-     */
+    /** @see MutableTaxon#setLevel(Level) */
     public void setLevel( final Level newLevel )
     {
         // Replace all level type children by the new one
@@ -82,26 +74,17 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
                 MutableTaxonLevelImpl.class );
     }
 
-    /**
-     * @see MutableTaxon#setParentTaxon(Taxon)
-     */
     public void setParentTaxon( final Taxon parent )
     {
         setParents( new GraphNodeList( (MutableTaxonImpl) parent ), MutableTaxonImpl.class );
     }
 
-    /**
-     * @see Taxon#getLevel()
-     */
     public Level getLevel()
     {
         final GraphNodeList list = getChildren( MutableTaxonLevelImpl.class );
         return (MutableTaxonLevelImpl) list.get( 0 );
     }
 
-    /**
-     * @see Taxon#getParentTaxon()
-     */
     public Taxon getParentTaxon()
     {
         final GraphNode parent = super.getParents( MutableTaxonImpl.class ).get( 0 );
@@ -115,26 +98,17 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         }
     }
 
-    /**
-     * @see Taxon#getChildTaxa()
-     */
     public Taxon[] getChildTaxa()
     {
         final GraphNodeList childTaxa = getChildren( MutableTaxonImpl.class );
         return (Taxon[]) childTaxa.getAll( new MutableTaxonImpl[0] );
     }
 
-    /**
-     * @see Taxon#getChildTaxon(int)
-     */
     public Taxon getChildTaxon( final int index ) throws IndexOutOfBoundsException
     {
         return getChildTaxa()[index];
     }
 
-    /**
-     * @see Taxon#getMorValues()
-     */
     public MorValue[] getMorValues()
     {
         final GraphNodeList texts = getChildren( MorText.class );
@@ -146,17 +120,11 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         return (MorValue[]) values.getAll( new MutableMorphologyValueImpl[0] );
     }
 
-    /**
-     * @see Taxon#getMorValue(int)
-     */
     public MorValue getMorValue( final int index )
     {
         return getMorValues()[index];
     }
 
-    /**
-     * @see Taxon#getMorAttributes()
-     */
     public MorAttribute[] getMorAttributes()
     {
         final MutableMorphologyValueImpl[] values = (MutableMorphologyValueImpl[]) getMorValues();
@@ -171,9 +139,6 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         return (MorAttribute[]) attributes.getAll( new MutableMorphologyAttributeImpl[0] );
     }
 
-    /**
-     * @see Taxon#getChildTaxon(Taxon)
-     */
     public int getChildTaxon( final Taxon child )
     {
         final Taxon[] taxa = getChildTaxa();
@@ -187,9 +152,6 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         return -1;
     }
 
-    /**
-     * @see Taxon#getChildTaxa(Level)
-     */
     public Taxon[] getChildTaxa( final Level level )
     {
         final GraphNodeList all = getChildren( MutableTaxonImpl.class );
@@ -202,13 +164,10 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
                 result.add( all.get( i ) );
             }
         }
-        final List list = Arrays.asList( result.getAll() );
-        return (MutableTaxonImpl[]) list.toArray( new MutableTaxonImpl[0] );
+        final List<GraphNode> list = Arrays.asList( result.getAll() );
+        return list.toArray( new MutableTaxonImpl[list.size()] );
     }
 
-    /**
-     * @see Taxon#getAllChildTaxa(Level)
-     */
     public Taxon[] getAllChildTaxa( final Level level )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -217,53 +176,46 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         for ( int i = 0; i < children.size(); i++ )
         {
             final MutableTaxonImpl child = (MutableTaxonImpl) children.get( i );
-            final Taxon[] subchilds = child.getAllChildTaxa( level );
-            result.addAll( getNodes( subchilds ) );
+            final Taxon[] subChildren = child.getAllChildTaxa( level );
+            result.addAll( getNodes( subChildren ) );
         }
         return (Taxon[]) result.getAll( new MutableTaxonImpl[0] );
     }
 
-    /**
-     * @see Taxon#isIn(Taxon[])
-     */
     public boolean isIn( final Taxon[] list )
     {
         return ArrayUtils.contains( list, this );
     }
 
-    /**
-     * @see Taxon#getSubLevels()
-     */
     public Level[] getSubLevels()
     {
         final GraphNodeList children = getChildren( MutableTaxonImpl.class );
-        final Set result = new HashSet();
+        final Set<GraphNode> result = new HashSet<GraphNode>();
 
         // add this level
         final GraphNodeList levels = getChildren( MutableTaxonLevelImpl.class );
         result.addAll( Arrays.asList( levels.getAll() ) );
 
-        // add all direct childrens levels first
-        final GraphNodeList sublevels = children.getChildren( MutableTaxonLevelImpl.class );
-        result.addAll( Arrays.asList( sublevels.getAll() ) );
+        // add all direct children levels first
+        {
+            final GraphNodeList subLevels = children.getChildren( MutableTaxonLevelImpl.class );
+            result.addAll( Arrays.asList( subLevels.getAll() ) );
+        }
 
         // add subsequently descendants
         for ( int i = 0; i < children.size(); i++ )
         {
             final MutableTaxonImpl tax = (MutableTaxonImpl) children.get( i );
-            result.addAll( Arrays.asList( tax.getSubLevels() ) );
+            result.addAll( Arrays.asList( (MutableTaxonLevelImpl[]) tax.getSubLevels() ) );
         }
-        final List list = new ArrayList( result );
+        final List<GraphNode> list = new ArrayList<GraphNode>( result );
         Collections.sort( list, RANK_COMPARATOR );
-        return (Level[]) list.toArray( new MutableTaxonLevelImpl[0] );
+        return list.toArray( new MutableTaxonLevelImpl[list.size()] );
     }
 
-    /**
-     * @see Taxon#getCommentedPictures(PictureTheme)
-     */
     public CommentedPicture[] getCommentedPictures( final PictureTheme theme )
     {
-        final List result = new ArrayList();
+        final List<MutableCommentedPictureImpl> result = new ArrayList<MutableCommentedPictureImpl>();
         final GraphNodeList texts = getChildren( PictureText.class );
         for ( int i = 0; i < texts.size(); i++ )
         {
@@ -274,28 +226,22 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
                 result.add( new MutableCommentedPictureImpl( this, (Picture) pic, text.getName() ) );
             }
         }
-        LOG.debug( "Pictures for " + this + " and " + theme + " are " + result );
-        return (CommentedPicture[]) result.toArray( new MutableCommentedPictureImpl[0] );
+        LOG.debug( "pictures for \"" + this + "\" and theme \"" + theme + "\" are " + result );
+        return result.toArray( new MutableCommentedPictureImpl[result.size()] );
     }
 
-    /**
-     * @see Taxon#getPictureThemes()
-     */
     public PictureTheme[] getPictureThemes()
     {
-        final List result = new ArrayList();
+        final List<GraphNode> result = new ArrayList<GraphNode>();
         final GraphNodeList texts = getChildren( PictureText.class );
         for ( int i = 0; i < texts.size(); i++ )
         {
             final GraphNode text = texts.get( i );
             result.add( text.getChildren( PictureTheme.class ).get( 0 ) );
         }
-        return (PictureTheme[]) result.toArray( new MutablePictureThemeImpl[0] );
+        return result.toArray( new MutablePictureThemeImpl[result.size()] );
     }
 
-    /**
-     * @see Taxon#getSiblings()
-     */
     public Taxon[] getSiblings()
     {
         final GraphNode parent = getParents( MutableTaxonImpl.class ).get( 0 );
@@ -310,17 +256,11 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         }
     }
 
-    /**
-     * @see Taxon#getScore()
-     */
     public double getScore()
     {
         throw new NoSuchMethodError( "getScore not implemented yet" );
     }
 
-    /**
-     * @see Taxon#setScore(boolean)
-     */
     public void setScore( final boolean right )
     {
         throw new NoSuchMethodError( "setScore not implemented yet" );

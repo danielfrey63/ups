@@ -25,9 +25,9 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class MedicineDisplayer extends AttributeTreePanel
+public class MedicineDisplay extends AttributeTreePanel
 {
-    MedicineDisplayer( final HerbarModel hModel, final Level stopper )
+    MedicineDisplay( final HerbarModel hModel, final Level stopper )
     {
         super( hModel, stopper, Strings.getString( "PROPERTY.MEDTEXT.TEXT" ) );
     }

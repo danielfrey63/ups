@@ -15,8 +15,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
-import javax.imageio.event.IIOReadProgressListener;
-import javax.imageio.event.IIOReadUpdateListener;
 import javax.imageio.stream.ImageInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,29 +27,16 @@ public class PictureLoader
 
     public static Image load( final String pictureURL, final boolean thumb )
     {
-        return load( pictureURL, null, null, thumb );
-    }
-
-    public static Image load( final String pictureURL, final IIOReadProgressListener read,
-                              final IIOReadUpdateListener update, final boolean thumb )
-    {
         try
         {
-            LOGGER.info( "loading of image " + pictureURL + " initiate." );
             final File file = new File( pictureURL );
+            LOGGER.info( "loading of " + ( thumb ? "thumbnail \"" : "image \"" ) + file.getName() + "\" initiated" );
             if ( file.exists() )
             {
+                Thread.sleep( 1000 );
                 final ImageInputStream iis = ImageIO.createImageInputStream( file );
                 final ImageReader reader = ImageIO.getImageReaders( iis ).next();
                 reader.setInput( iis );
-                if ( read != null )
-                {
-                    reader.addIIOReadProgressListener( read );
-                }
-                if ( update != null )
-                {
-                    reader.addIIOReadUpdateListener( update );
-                }
                 final Image image;
                 if ( thumb )
                 {
@@ -65,12 +50,12 @@ public class PictureLoader
                 }
                 reader.dispose();
                 iis.close();
-                LOGGER.info( "loading of image " + pictureURL + " finished" );
+                LOGGER.info( "loading of image \"" + file.getName() + "\" finished" );
                 return image;
             }
             else
             {
-                LOGGER.warn( "no image at " + pictureURL );
+                LOGGER.warn( "no image file at \"" + file + "\"" );
             }
         }
         catch ( Exception ex )

@@ -74,7 +74,7 @@ public class PictureCache
         CachedImage image = cache.get( name );
         if ( image == null )
         {
-            LOGGER.info( "adding image " + name + " in " + locator.getPath() + " " + " to cache" );
+            LOGGER.info( "adding image \"" + name + "\" to cache" );
             image = new CachedImage( locator, name );
             cache.put( name, image );
         }
@@ -116,12 +116,16 @@ public class PictureCache
             }
             if ( isNew )
             {
-                LOGGER.debug( "caching List changed due to " + name );
+                LOGGER.debug( "caching list changed due to \"" + name + "\" and is now " + queue );
                 synchronized ( cachingThread )
                 {
                     cachingThread.notify();
                 }
             }
+        }
+        else
+        {
+            LOGGER.info( "image " + name + " found in cache" );
         }
     }
 
@@ -137,16 +141,18 @@ public class PictureCache
                 {
                     final String name;
                     final boolean thumb = false;
-                    synchronized ( PictureCache.this.queue )
+                    synchronized ( queue )
                     {
                         name = queue.removeFirst();
+                        LOGGER.debug( "popped \"" + name + "\" from queue " + queue.toString() );
                     }
-                    LOGGER.info( "caching image (not thumb) " + name );
+                    LOGGER.info( "caching image \"" + name + "\"" );
                     final CachedImage img = addOrGetCachedImage( name );
                     if ( !img.loaded( thumb ) )
                     {
                         addOrGetCachedImage( name ).loadImage( thumb );
                     }
+                    LOGGER.info( "cached image \"" + name + "\"" );
                 }
                 catch ( NoSuchElementException ex )
                 {
@@ -160,11 +166,17 @@ public class PictureCache
                         catch ( InterruptedException iex )
                         {
                             loop = false;
-                            LOGGER.error( "Caching thread interrupted.", iex );
+                            LOGGER.error( "caching thread interrupted", iex );
                         }
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "PictureCache[" + locator + "]";
     }
 }

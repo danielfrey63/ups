@@ -30,6 +30,7 @@ public interface GraphNode
      * Collects all children of the given type in level-order.
      *
      * @param type the type to use as a filter
+     * @return the class of the children
      */
     public GraphNodeList getAllChildren( Class type );
 
@@ -51,6 +52,9 @@ public interface GraphNode
 
     /**
      * Adds the given child to this <code>GraphNode</code> and assigns to this relation the given role.
+     *
+     * @param child the child node
+     * @param role  the role of a child
      */
     public void addChild( GraphNode child, Role role );
 
@@ -65,7 +69,7 @@ public interface GraphNode
     /**
      * Remove the given <code>GraphNode<(code> from list of children of this <code>GraphNode</code>.
      *
-     * @param parent the child to remove from this
+     * @param child the child to remove from this
      * @return whether the child was removed
      */
     public boolean deleteChild( GraphNode child );
@@ -82,6 +86,7 @@ public interface GraphNode
      * Collects all parents of the given type in level-order.
      *
      * @param type the type to use as a filter
+     * @return the list of graph nodes
      */
     public GraphNodeList getAllParents( Class type );
 
@@ -103,6 +108,9 @@ public interface GraphNode
 
     /**
      * Adds the given parent to this <code>GraphNode</code> and assigns to this relation the given role.
+     *
+     * @param parent the graph node
+     * @param role   the role
      */
     public void addParent( GraphNode parent, Role role );
 

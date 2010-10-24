@@ -26,7 +26,7 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener
         setCursor( new DefaultCursor( objects ) );
     }
 
-    public void showPopup( final Component jb )
+    public void showPopUp( final Component jb )
     {
         showPopup( jb, null, null );
     }

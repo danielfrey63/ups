@@ -22,9 +22,9 @@ import com.ethz.geobot.herbar.model.Taxon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class MorphologyDisplayer extends AttributeTreePanel
+public class MorphologyDisplay extends AttributeTreePanel
 {
-    MorphologyDisplayer( final HerbarModel herbarModel, final Level stopper )
+    MorphologyDisplay( final HerbarModel herbarModel, final Level stopper )
     {
         super( herbarModel, stopper, Strings.getString( "PROPERTY.MORTEXT.TEXT" ) );
     }

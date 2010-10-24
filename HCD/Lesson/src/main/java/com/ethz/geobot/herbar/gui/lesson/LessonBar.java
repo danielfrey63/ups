@@ -141,7 +141,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     private JPanel createBreadCrumb( final TaxStateModel model )
     {
         // Bread crumb and species name interrogation
-        bread = new BreadCrumb( model );
+        bread = new BreadCrumb();
         bread.setBackground( HerbarTheme.getBackground2() );
 
         asker = new TaxonNameInterrogator( new TaxonNameInterrogator.TransientInterrogatorModel() );
@@ -219,7 +219,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             }
             else if ( source == levelButton || source == levelLabel )
             {
-                getLevelPopup().showPopup( (Component) source );
+                getLevelPopup().showPopUp( (Component) source );
             }
             else if ( source == orderButton || source == orderLabel )
             {
@@ -238,7 +238,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private void changeList( final Component component )
     {
-        getListPopup().showPopup( component );
+        getListPopup().showPopUp( component );
     }
 
     public void changeScope()
@@ -278,7 +278,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         }
         else
         {
-            getFocusPopup().showPopup( component );
+            getFocusPopup().showPopUp( component );
         }
     }
 
@@ -392,7 +392,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             super( taxStateModel.getTaxList() );
         }
 
-        public void showPopup( final Component component )
+        public void showPopUp( final Component component )
         {
             showPopup( component, taxStateModel.getFocus() );
         }
@@ -410,7 +410,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             super( taxStateModel.getModel().getRootTaxon().getSubLevels() );
         }
 
-        public void showPopup( final Component component )
+        public void showPopUp( final Component component )
         {
             showPopup( component, taxStateModel.getScope().getSubLevels(), taxStateModel.getLevel() );
         }
@@ -428,7 +428,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             super( herbarContext.getModels().toArray() );
         }
 
-        public void showPopup( final Component component )
+        public void showPopUp( final Component component )
         {
             showPopup( component, taxStateModel.getModel() );
         }

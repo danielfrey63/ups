@@ -42,8 +42,6 @@ public class GraphModelImpl extends AbsGraphModel
 
     private static final Logger LOG = LoggerFactory.getLogger( GraphModelImpl.class );
 
-    private static final boolean DEBUG = LOG.isDebugEnabled();
-
     private static final GraphModelImpl INSTANCE = new GraphModelImpl();
 
     private static Statement stmt;
@@ -52,23 +50,23 @@ public class GraphModelImpl extends AbsGraphModel
 
     private static final HashMap nodeCache = new HashMap();
 
-    private static final ArrayList newEdges = new ArrayList();
+    private static final ArrayList<GraphEdge> newEdges = new ArrayList<GraphEdge>();
 
-    private static final ArrayList newNodes = new ArrayList();
+    private static final ArrayList<GraphNode> newNodes = new ArrayList<GraphNode>();
 
-    private static final ArrayList removedEdges = new ArrayList();
+    private static final ArrayList<GraphEdge> removedEdges = new ArrayList<GraphEdge>();
 
-    private static final ArrayList removedNodes = new ArrayList();
+    private static final ArrayList<GraphNode> removedNodes = new ArrayList<GraphNode>();
 
-    private static final HashSet changedNodes = new HashSet();
+    private static final HashSet<GraphNode> changedNodes = new HashSet<GraphNode>();
 
-    private static final HashSet changedEdges = new HashSet();
+    private static final HashSet<GraphEdge> changedEdges = new HashSet<GraphEdge>();
 
-    private static final HashMap edgeIdCache = new HashMap();
+    private static final HashMap<Integer, GraphEdge> edgeIdCache = new HashMap<Integer, GraphEdge>();
 
-    private static final HashMap edgeBuildCache = new HashMap();
+    private static final HashMap<Integer, GraphEdge> edgeBuildCache = new HashMap<Integer, GraphEdge>();
 
-    private static final HashMap edgeCache = new HashMap();
+    private static final HashMap<Long, GraphEdge> edgeCache = new HashMap<Long, GraphEdge>();
 
     private static int maxNewEdgeId = -1;
 
@@ -81,6 +79,8 @@ public class GraphModelImpl extends AbsGraphModel
     private static PreparedStatement selectParents;
 
     private static PreparedStatement selectEdges;
+
+    private GraphNode root;
 
     static
     {
@@ -105,17 +105,14 @@ public class GraphModelImpl extends AbsGraphModel
             user = System.getProperty( USER );
             password = System.getProperty( PASSWORD );
             driver = System.getProperty( DRIVER );
-            if ( DEBUG )
-            {
-                LOG.debug( "getting model (xmatrix.input.model): " + mod );
-                LOG.debug( "getting type factory (xmatrix.input.model.typefactory): " + typeFact );
-                LOG.debug( "getting role factory (xmatrix.input.model.rolefactory): " + roleFact );
-                LOG.debug( "getting original url (xmatrix.input.db): " + System.getProperty( URL ) );
-                LOG.debug( "getting url (xmatrix.input.db corrected): " + url );
-                LOG.debug( "getting user (xmatrix.input.user): " + user );
-                LOG.debug( "getting password (xmatrix.input.pw): " + password );
-                LOG.debug( "getting driver (xmatrix.input.driver): " + driver );
-            }
+            LOG.trace( "getting model (xmatrix.input.model): " + mod );
+            LOG.trace( "getting type factory (xmatrix.input.model.typefactory): " + typeFact );
+            LOG.trace( "getting role factory (xmatrix.input.model.rolefactory): " + roleFact );
+            LOG.trace( "getting original url (xmatrix.input.db): " + System.getProperty( URL ) );
+            LOG.trace( "getting url (xmatrix.input.db corrected): " + url );
+            LOG.trace( "getting user (xmatrix.input.user): " + user );
+            LOG.trace( "getting password (xmatrix.input.pw): " + password );
+            LOG.trace( "getting driver (xmatrix.input.driver): " + driver );
             conn = DriverManager.getConnection( url, user, password );
             stmt = conn.createStatement();
             selectVertices = conn.prepareStatement( "SELECT name, rank, type FROM vertices WHERE id = ?" );
@@ -127,9 +124,7 @@ public class GraphModelImpl extends AbsGraphModel
         }
     }
 
-    /**
-     * @see GraphModel#doQuit()
-     */
+    /** @see GraphModel#doQuit() */
     public void doQuit()
     {
 //        ResultSet rs = null;
@@ -163,8 +158,7 @@ public class GraphModelImpl extends AbsGraphModel
 
         // Check for cached node. This must be a AbsSimplePersistentGraphNode
         // as we need access to the edges children.
-        final Integer bigId = new Integer( id );
-        AbsSimplePersistentGraphNode gn = (AbsSimplePersistentGraphNode) nodeCache.get( bigId );
+        AbsSimplePersistentGraphNode gn = (AbsSimplePersistentGraphNode) nodeCache.get( id );
         if ( gn != null )
         {
             removedNodes.remove( gn );
@@ -187,7 +181,7 @@ public class GraphModelImpl extends AbsGraphModel
 
             // Important to put the new node into the cache before any
             // recursions take place
-            nodeCache.put( bigId, gn );
+            nodeCache.put( id, gn );
 
             // Collect child ids
             selectChildren.setInt( 1, id );
@@ -230,12 +224,11 @@ public class GraphModelImpl extends AbsGraphModel
 
     private GraphEdge getEdge( final int id )
     {
-        final Integer bigId = new Integer( id );
-        GraphEdge edge = (GraphEdge) edgeIdCache.get( bigId );
+        GraphEdge edge = edgeIdCache.get( id );
         if ( edge == null )
         {
             // Temporary cache while building the objects
-            edge = (GraphEdge) edgeBuildCache.get( bigId );
+            edge = edgeBuildCache.get( id );
         }
         if ( edge != null )
         {
@@ -252,12 +245,12 @@ public class GraphModelImpl extends AbsGraphModel
             rs.close();
 
             edge = new GraphEdgeImpl( id );
-            edgeBuildCache.put( bigId, edge );
+            edgeBuildCache.put( id, edge );
 
             final GraphNode parent = getNode( parentId );
             final GraphNode child = getNode( childId );
 
-            edgeBuildCache.remove( bigId );
+            edgeBuildCache.remove( id );
             edge.setParent( parent );
             edge.setChild( child );
             putCombinedEdge( edge );
@@ -282,16 +275,14 @@ public class GraphModelImpl extends AbsGraphModel
         return null;
     }
 
-    /**
-     * To speed up this bottleneck a combined id is used.
-     */
+    /** To speed up this bottleneck a combined id is used. */
     public void putCombinedEdge( final GraphEdge edge )
     {
         final GraphNode parent = edge.getParent();
         final GraphNode child = edge.getChild();
         final long newId = getCombinedId( parent, child );
-        edgeCache.put( new Long( newId ), edge );
-        edgeIdCache.put( new Integer( edge.getId() ), edge );
+        edgeCache.put( newId, edge );
+        edgeIdCache.put( edge.getId(), edge );
     }
 
     public Object removeCombinedEdge( final GraphEdge edge )
@@ -305,11 +296,11 @@ public class GraphModelImpl extends AbsGraphModel
 
     private GraphEdge getCombinedEdge( final GraphNode parent, final GraphNode child )
     {
-        final Collection values = edgeIdCache.values();
+        final Collection<GraphEdge> values = edgeIdCache.values();
         if ( isReadOnly() )
         {
             final long newId = getCombinedId( parent, child );
-            return (GraphEdge) edgeCache.get( new Long( newId ) );
+            return edgeCache.get( new Long( newId ) );
         }
         else
         {
@@ -347,53 +338,52 @@ public class GraphModelImpl extends AbsGraphModel
      */
     public GraphNode getRoot()
     {
-        GraphNode result = null;
-        ResultSet rs = null;
-        try
+        if ( root == null )
         {
-            getConnection();
-            // Load root
-            rs = stmt.executeQuery( "SELECT id FROM vertices WHERE type = \'ROOT\'" );
-            rs.next();
-            final int id = rs.getInt( 1 );
-            rs.close();
-            result = getNode( id );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-            if ( rs != null )
+            LOG.info( "model reading from DB starting" );
+            ResultSet rs = null;
+            try
             {
-                try
+                getConnection();
+                // Load root
+                rs = stmt.executeQuery( "SELECT id FROM vertices WHERE type = \'ROOT\'" );
+                rs.next();
+                final int id = rs.getInt( 1 );
+                rs.close();
+                root = getNode( id );
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+                if ( rs != null )
                 {
-                    rs.close();
-                }
-                catch ( Exception ex )
-                {
-                    ex.printStackTrace();
+                    try
+                    {
+                        rs.close();
+                    }
+                    catch ( Exception ex )
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
+            changedNodes.clear();
+            changedEdges.clear();
+            LOG.info( "model reading from DB finished" );
         }
-        changedNodes.clear();
-        changedEdges.clear();
-        LOG.debug( "cleard changed/node" );
-        LOG.debug( "cleard changed/edge" );
-        LOG.info( "Model loaded" );
-        return result;
+        return root;
     }
 
-    /**
-     * @see GraphModel#createEdge(GraphNode,GraphNode)
-     */
+    /** @see GraphModel#createEdge(GraphNode,GraphNode) */
     public GraphEdge createEdge( final GraphNode parent, final GraphNode child )
     {
         GraphEdge edge = getCombinedEdge( parent, child );
         if ( edge == null )
         {
             // Resurect
-            for ( Iterator iter = removedEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iter = removedEdges.iterator(); iter.hasNext(); )
             {
-                final GraphEdge e = (GraphEdge) iter.next();
+                final GraphEdge e = iter.next();
                 if ( getCombinedId( parent, child ) ==
                         getCombinedId( e.getParent(), e.getChild() ) )
                 {
@@ -425,46 +415,30 @@ public class GraphModelImpl extends AbsGraphModel
         {
             newNodes.add( child );
         }
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "added to new/edge cache " + edge );
-        }
+        LOG.trace( "added to new/edge cache " + edge );
         putCombinedEdge( edge );
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "added to global/edge cache " + edge );
-        }
+        LOG.trace( "added to global/edge cache " + edge );
         maxNewEdgeId--;
         return edge;
     }
 
-    /**
-     * @see GraphModel#addRemoved(GraphNode)
-     */
+    /** @see GraphModel#addRemoved(GraphNode) */
     public void addRemoved( final GraphNode node )
     {
         if ( newNodes.contains( node ) )
         {
             newNodes.remove( node );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "removed from new/node cache " + node );
-            }
+            LOG.trace( "removed from new/node cache " + node );
         }
         else
         {
             removedNodes.add( node );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "added to remove/node cache " + node );
-            }
+            LOG.trace( "added to remove/node cache " + node );
         }
         setDirty( true );
     }
 
-    /**
-     * @see GraphModel#addRemoved(GraphEdge)
-     */
+    /** @see GraphModel#addRemoved(GraphEdge) */
     public void addRemoved( final GraphEdge edge )
     {
         final Object obj;
@@ -472,10 +446,7 @@ public class GraphModelImpl extends AbsGraphModel
         if ( newEdges.contains( edge ) )
         {
             newEdges.remove( edge );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "removed from new/edge cache " + edge );
-            }
+            LOG.trace( "removed from new/edge cache " + edge );
         }
         // Edge is already persistent
         else
@@ -483,55 +454,36 @@ public class GraphModelImpl extends AbsGraphModel
             if ( changedEdges.contains( edge ) )
             {
                 changedEdges.remove( edge );
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from changed/edge cache " + edge );
-                }
+                LOG.trace( "removed from changed/edge cache " + edge );
             }
             if ( !removedEdges.contains( edge ) )
             {
                 removedEdges.add( edge );
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "added to remove/edge cache " + edge );
-                }
+                LOG.trace( "added to remove/edge cache " + edge );
             }
         }
         obj = removeCombinedEdge( edge );
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "removed from global/edge cache " + obj );
-        }
+        LOG.trace( "removed from global/edge cache " + obj );
         setDirty( true );
     }
 
-    /**
-     * @see GraphModel#addChanged(GraphNode)
-     */
+    /** @see GraphModel#addChanged(GraphNode) */
     public void addChanged( final GraphNode node )
     {
         if ( !newNodes.contains( node ) )
         {
             changedNodes.add( node );
             setDirty( true );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "added to changed/node cache " + node );
-            }
+            LOG.trace( "added to changed/node cache " + node );
         }
         else
         {
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "node already in new/node cache " + node );
-            }
+            LOG.trace( "node already in new/node cache " + node );
         }
         setDirty( true );
     }
 
-    /**
-     * @see GraphModel#addChanged(GraphEdge)
-     */
+    /** @see GraphModel#addChanged(GraphEdge) */
     public void addChanged( final GraphEdge edge )
     {
         if ( !newEdges.contains( edge ) )
@@ -548,24 +500,16 @@ public class GraphModelImpl extends AbsGraphModel
                 changedEdges.add( edge );
             }
             setDirty( true );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "added to changed/edge cache " + edge );
-            }
+            LOG.trace( "added to changed/edge cache " + edge );
         }
         else
         {
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "edge already in new/edge cache " + edge );
-            }
+            LOG.trace( "edge already in new/edge cache " + edge );
         }
         setDirty( true );
     }
 
-    /**
-     * @see GraphModel#createNode(GraphNode,Class)
-     */
+    /** @see GraphModel#createNode(GraphNode,Class) */
     public GraphNode createNode( final GraphNode parent, final Class type )
     {
         final GraphNode node = getTypeFactory().getInstance( type );
@@ -576,22 +520,14 @@ public class GraphModelImpl extends AbsGraphModel
         {
             node.addParent( parent );
         }
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "added to new/node cache " + node );
-        }
+        LOG.trace( "added to new/node cache " + node );
         nodeCache.put( new Integer( maxNewNodeId ), node );
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "added to global/node cache " + node );
-        }
+        LOG.trace( "added to global/node cache " + node );
         maxNewNodeId--;
         return node;
     }
 
-    /**
-     * @see GraphModel#save()
-     */
+    /** @see GraphModel#save() */
     public void save()
     {
         GraphNode node = null;
@@ -599,18 +535,15 @@ public class GraphModelImpl extends AbsGraphModel
         try
         {
             getConnection();
-            for ( Iterator iter = changedNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iter = changedNodes.iterator(); iter.hasNext(); )
             {
-                node = (GraphNode) iter.next();
+                node = iter.next();
                 stmt.executeUpdate( "UPDATE vertices "
                         + "SET name = \'" + node.getName() + "\'"
                         + ", rank = " + node.getRank()
                         + "WHERE id = " + node.getId() );
                 iter.remove();
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from changed/node cache " + node );
-                }
+                LOG.trace( "removed from changed/node cache " + node );
             }
             // Save new nodes before new or changed edges, as this alters the id
             // of the new nodes, and therefore the references to it. Like this
@@ -618,16 +551,16 @@ public class GraphModelImpl extends AbsGraphModel
             // Make sure that the edge cache is updated, as it depends from the
             // node ids.
             edge = null;
-            for ( Iterator iter = newNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iter = newNodes.iterator(); iter.hasNext(); )
             {
-                node = (GraphNode) iter.next();
+                node = iter.next();
                 // Remove from N cache as this would be with wrong id
                 final int oldId = node.getId(); // Before calling IDENTITY()
                 nodeCache.remove( new Integer( oldId ) );
                 // Update edges cache before saving. Remove all edges
                 // corresponding to this node in order to change the ids of the
                 // nodes later, and readding the edges then.
-                final List tEdges = new ArrayList();
+                final List<Object> tEdges = new ArrayList<Object>();
                 GraphNodeList list = node.getChildren();
                 Object rem = null;
                 for ( int i = 0; i < list.size(); i++ )
@@ -684,59 +617,47 @@ public class GraphModelImpl extends AbsGraphModel
                 }
                 // Update n cache
                 iter.remove();
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from new/node cache " + node );
-                }
+                LOG.trace( "removed from new/node cache " + node );
             }
 
             node = null;
-            for ( Iterator iter = changedEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iter = changedEdges.iterator(); iter.hasNext(); )
             {
-                edge = (GraphEdge) iter.next();
+                edge = iter.next();
                 stmt.executeUpdate( "UPDATE edges "
                         + "SET parent_id = " + edge.getParent().getId()
                         + ", child_id = " + edge.getChild().getId()
                         + ", rank = " + edge.getRank()
                         + "WHERE id = " + edge.getId() );
                 iter.remove();
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from changed/edge cache " + edge );
-                }
+                LOG.trace( "removed from changed/edge cache " + edge );
             }
             edge = null;
-            for ( Iterator iter = removedEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iter = removedEdges.iterator(); iter.hasNext(); )
             {
-                edge = (GraphEdge) iter.next();
+                edge = iter.next();
                 stmt.executeUpdate( "DELETE FROM edges WHERE id = " + edge.getId() );
                 stmt.close();
                 iter.remove();
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from removed/edge cache " + edge );
-                }
+                LOG.trace( "removed from removed/edge cache " + edge );
             }
             node = null;
-            for ( Iterator iter = removedNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iter = removedNodes.iterator(); iter.hasNext(); )
             {
-                node = (GraphNode) iter.next();
+                node = iter.next();
                 final int id = node.getId();
                 stmt.executeUpdate( "DELETE FROM edges WHERE parent_id = " + id
                         + " OR child_id = " + id );
                 stmt.executeUpdate( "DELETE FROM vertices WHERE id = " + id );
                 stmt.close();
                 iter.remove();
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from remvoed/node cache " + node );
-                }
+                LOG.trace( "removed from remvoed/node cache " + node );
             }
 
             node = null;
-            for ( Iterator iter = newEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iter = newEdges.iterator(); iter.hasNext(); )
             {
-                edge = (GraphEdge) iter.next();
+                edge = iter.next();
                 removeCombinedEdge( edge );
                 final int parentId = edge.getParent().getId();
                 final int childId = edge.getChild().getId();
@@ -758,10 +679,7 @@ public class GraphModelImpl extends AbsGraphModel
                 }
 
                 putCombinedEdge( edge );
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "removed from new/edge cache " + edge );
-                }
+                LOG.trace( "removed from new/edge cache " + edge );
             }
             // Clean up zombie records
 //            stmt.executeUpdate("DELETE FROM vertices WHERE id NOT IN "
@@ -910,9 +828,7 @@ class IntArray
         return result;
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         return "" + ints;

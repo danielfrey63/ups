@@ -123,7 +123,7 @@ public class PictureModel
 
     public void setTaxon( final Taxon taxon )
     {
-        LOG.debug( "setTaxon(" + taxon + ")" );
+        LOG.debug( "setting taxon to \"" + taxon + "\"" );
         try
         {
             this.taxon = taxon;

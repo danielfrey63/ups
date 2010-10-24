@@ -193,11 +193,6 @@ public class TaxStateModel
         propertyChangeSupport.addPropertyChangeListener( listener );
     }
 
-    public synchronized void removePropertyChangeListener( final String property, final PropertyChangeListener listener )
-    {
-        propertyChangeSupport.removePropertyChangeListener( property, listener );
-    }
-
     public synchronized void removePropertyChangeListener( final PropertyChangeListener listener )
     {
         propertyChangeSupport.removePropertyChangeListener( listener );

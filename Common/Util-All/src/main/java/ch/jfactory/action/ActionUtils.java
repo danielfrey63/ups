@@ -23,9 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ActionUtils
 {
-    /**
-     * logger instance
-     */
+    /** logger instance */
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger( ActionUtils.class );
 
     /**
@@ -47,7 +45,7 @@ public class ActionUtils
         final String actionKey = keyStroke.toString() + button.hashCode();
         if ( LOG.isDebugEnabled() )
         {
-            LOG.debug( "register action: " + actionKey );
+            LOG.trace( "register action: " + actionKey );
         }
         button.getRootPane().getInputMap( JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT ).put( keyStroke, actionKey );
         button.getRootPane().getActionMap().put( actionKey, action );

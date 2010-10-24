@@ -68,9 +68,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         this.children = children;
     }
 
-    /**
-     * @see GraphNode#isType(Class)
-     */
+    /** @see GraphNode#isType(Class) */
     public boolean isType( final Class type )
     {
         return type.isAssignableFrom( this.getClass() );
@@ -83,10 +81,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public int getId()
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "getId(): " + id );
-        }
+        LOGGER.trace( "getId(): " + id );
         return id;
     }
 
@@ -97,10 +92,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public String getName()
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "getName(): " + name );
-        }
+        LOGGER.trace( "getName(): " + name );
         return name;
     }
 
@@ -111,60 +103,38 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      */
     public int getRank()
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "getRank(): " + rank );
-        }
+        LOGGER.trace( "getRank(): " + rank );
         return rank;
     }
 
-    /**
-     * @see GraphNode#setId(int)
-     */
+    /** @see GraphNode#setId(int) */
     public void setId( final int id )
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "setId(" + id + ")" );
-        }
+        LOGGER.trace( "setId(" + id + ")" );
         this.id = id;
     }
 
-    /**
-     * @see GraphNode#setName(String)
-     */
+    /** @see GraphNode#setName(String) */
     public void setName( final String name )
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "setName(" + name + ")" );
-        }
+        LOGGER.trace( "setName(" + name + ")" );
         this.name = name;
     }
 
-    /**
-     * @see GraphNode#setRank(int)
-     */
+    /** @see GraphNode#setRank(int) */
     public void setRank( final int rank )
     {
-        if ( LOGGER.isDebugEnabled() )
-        {
-            LOGGER.debug( "setRank(" + rank + ")" );
-        }
+        LOGGER.trace( "setRank(" + rank + ")" );
         this.rank = rank;
     }
 
-    /**
-     * @see GraphNode#getChildren(Class)
-     */
+    /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getChildren( final Class type )
     {
         return getChildren( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#getChildren(Class, Class)
-     */
+    /** @see GraphNode#getChildren(Class, Class) */
     public GraphNodeList getChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -181,17 +151,13 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /**
-     * @see GraphNode#getAllChildren(Class)
-     */
+    /** @see GraphNode#getAllChildren(Class) */
     public GraphNodeList getAllChildren( final Class type )
     {
         return getAllChildren( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#getAllChildren(Class)
-     */
+    /** @see GraphNode#getAllChildren(Class) */
     public GraphNodeList getAllChildren( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -204,17 +170,13 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /**
-     * @see GraphNode#getChildRole(GraphNode)
-     */
+    /** @see GraphNode#getChildRole(GraphNode) */
     public Role getChildRole( final GraphNode node )
     {
         return getChildrenEdges().getRole( node );
     }
 
-    /**
-     * @see GraphEdgeList#setRole(GraphNode, Role)
-     */
+    /** @see GraphEdgeList#setRole(GraphNode, Role) */
     public void setChildRole( final GraphNode node, final Role role )
     {
         getChildrenEdges().setRole( node, role );
@@ -230,33 +192,25 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         setChildren( children, TYPES_ALL );
     }
 
-    /**
-     * @see GraphNode#setChildren(GraphNodeList, Class)
-     */
+    /** @see GraphNode#setChildren(GraphNodeList, Class) */
     public void setChildren( final GraphNodeList children, final Class type )
     {
         setChildren( children, type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#deleteChildren(Class)
-     */
+    /** @see GraphNode#deleteChildren(Class) */
     public void deleteChildren( final Class type )
     {
         deleteChildren( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#getParents(Class)
-     */
+    /** @see GraphNode#getParents(Class) */
     public GraphNodeList getParents( final Class type )
     {
         return getParents( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#getChildren(Class, Class)
-     */
+    /** @see GraphNode#getChildren(Class, Class) */
     public GraphNodeList getParents( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -273,17 +227,13 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /**
-     * @see GraphNode#getAllParents(Class)
-     */
+    /** @see GraphNode#getAllParents(Class) */
     public GraphNodeList getAllParents( final Class type )
     {
         return getAllParents( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#getAllParents(Class, Class)
-     */
+    /** @see GraphNode#getAllParents(Class, Class) */
     public GraphNodeList getAllParents( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -295,49 +245,37 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /**
-     * @see GraphNode#getParentRole(GraphNode)
-     */
+    /** @see GraphNode#getParentRole(GraphNode) */
     public Role getParentRole( final GraphNode node )
     {
         return getParentEdges().getRole( node );
     }
 
-    /**
-     * @see GraphNode#setParentRole(GraphNode, Role)
-     */
+    /** @see GraphNode#setParentRole(GraphNode, Role) */
     public void setParentRole( final GraphNode node, final Role role )
     {
         getParentEdges().setRole( node, role );
     }
 
-    /**
-     * @see GraphNode#setParents(GraphNodeList)
-     */
+    /** @see GraphNode#setParents(GraphNodeList) */
     public void setParents( final GraphNodeList parents )
     {
         setParents( parents, TYPES_ALL );
     }
 
-    /**
-     * @see GraphNode#setParents(GraphNodeList, Class)
-     */
+    /** @see GraphNode#setParents(GraphNodeList, Class) */
     public void setParents( final GraphNodeList parents, final Class type )
     {
         setParents( parents, type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see GraphNode#deleteParents(Class)
-     */
+    /** @see GraphNode#deleteParents(Class) */
     public void deleteParents( final Class type )
     {
         deleteParents( type, Role.CLASSES_ALL );
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         if ( DEBUG_NODE_NAMES )

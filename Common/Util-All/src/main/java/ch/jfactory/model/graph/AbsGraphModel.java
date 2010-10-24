@@ -67,14 +67,12 @@ public abstract class AbsGraphModel implements GraphModel
         }
     }
 
-    /**
-     * Returns an instance of the configured subclass.
-     */
+    /** Returns an instance of the configured subclass. */
     public static GraphModel getModel()
     {
         if ( model == null )
         {
-            LOGGER.debug( "Init model by classname " + mod );
+            LOGGER.trace( "init model by classname " + mod );
             try
             {
                 final Class clazz = Class.forName( mod );
@@ -94,7 +92,7 @@ public abstract class AbsGraphModel implements GraphModel
     {
         if ( typeFactory == null )
         {
-            LOGGER.debug( "Init type factory by classname " + typeFact );
+            LOGGER.trace( "init type factory by classname " + typeFact );
             try
             {
                 final Class clazz = Class.forName( typeFact );
@@ -148,34 +146,26 @@ public abstract class AbsGraphModel implements GraphModel
         return result;
     }
 
-    /**
-     * @see GraphModel#addDirtyListener(DirtyListener)
-     */
+    /** @see GraphModel#addDirtyListener(DirtyListener) */
     public void addDirtyListener( final DirtyListener listener )
     {
         listeners.add( listener );
     }
 
-    /**
-     * @see GraphModel#removeDirtyListener(DirtyListener)
-     */
+    /** @see GraphModel#removeDirtyListener(DirtyListener) */
     public void removeDirtyListener( final DirtyListener listener )
     {
         listeners.remove( listener );
     }
 
-    /**
-     * @see GraphModel#setDirty(boolean)
-     */
+    /** @see GraphModel#setDirty(boolean) */
     public void setDirty( final boolean dirty )
     {
         AbsGraphModel.dirty = dirty;
         fireDirty( dirty );
     }
 
-    /**
-     * @see GraphModel#getDirty()
-     */
+    /** @see GraphModel#getDirty() */
     public boolean getDirty()
     {
         return dirty;

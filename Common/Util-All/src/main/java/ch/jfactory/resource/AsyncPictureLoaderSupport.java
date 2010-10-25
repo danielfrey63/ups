@@ -23,9 +23,8 @@ interface AsyncPictureLoaderSupport
      *
      * @param name  name of the image
      * @param image reference to the image
-     * @param thumb is it a thumbnail?
      */
-    void informFinished( String name, Image image, boolean thumb );
+    void informFinished( String name, Image image );
 
     /**
      * Inform all listeners that the image will be.

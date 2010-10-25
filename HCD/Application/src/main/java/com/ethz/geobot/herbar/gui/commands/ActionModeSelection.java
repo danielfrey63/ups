@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class ActionModusSelection extends AbstractParametrizedAction
+public class ActionModeSelection extends AbstractParametrizedAction
 {
-    private final static Logger LOG = LoggerFactory.getLogger( ActionModusSelection.class.getName() );
+    private final static Logger LOG = LoggerFactory.getLogger( ActionModeSelection.class.getName() );
 
     private final Preferences preferences;
 
@@ -33,9 +33,9 @@ public class ActionModusSelection extends AbstractParametrizedAction
      * @param parent      reference to mainframe
      * @param preferences the settings to use
      */
-    public ActionModusSelection( final MainFrame parent, final Preferences preferences )
+    public ActionModeSelection( final MainFrame parent, final Preferences preferences )
     {
-        super( "MENU.ITEM.MODUS_SELECTION", parent );
+        super( "MENU.ITEM.MODE_SELECTION", parent );
         this.preferences = preferences;
     }
 
@@ -49,7 +49,7 @@ public class ActionModusSelection extends AbstractParametrizedAction
             if ( oldMode == null || oldMode.queryDeactivate() )
             {
                 final WizardPane[] panes = new WizardPane[]{
-                        new WizardModePane( ModeWizardModel.SELECTEDMODE, ModeWizardModel.MODELIST )};
+                        new WizardModePane( ModeWizardModel.SELECTED_MODE, ModeWizardModel.MODE_LIST )};
                 final ModeWizardModel model = new ModeWizardModel( preferences, panes, oldMode );
                 final Wizard dlg = new Wizard( model );
                 final boolean accepted = dlg.show( AppHerbar.getMainFrame(), 600, 400 );
@@ -63,7 +63,7 @@ public class ActionModusSelection extends AbstractParametrizedAction
         catch ( Exception ex )
         {
             LOG.error( "Error during creation of mode " + selectedMode, ex );
-            Dialogs.showErrorMessage( parent.getRootPane(), "Fehler", Strings.getString( "APPLICATION.ERROR.MODUSCREATION.TEXT", "" + selectedMode ) );
+            Dialogs.showErrorMessage( parent.getRootPane(), "Error", Strings.getString( "APPLICATION.ERROR.MODE_CREATION.TEXT", "" + selectedMode ) );
         }
     }
 }

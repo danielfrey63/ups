@@ -1,5 +1,5 @@
 /*
- * HebarSelectionWizardModel.java
+ * FilterWizardModel.java
  *
  * Created on 10. Juli 2002, 16:36
  */
@@ -10,7 +10,6 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.wizard.DefaultWizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.NameValidator;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
-import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 
 /**
@@ -29,14 +28,7 @@ public class FilterWizardModel extends DefaultWizardModel
 
     private static final String NAME = "FilterWizardModel";
 
-    /**
-     * Holds value of property base.
-     */
-    private HerbarModel base;
-
-    /**
-     * Holds value of property filterModel.
-     */
+    /** Holds value of property filterModel. */
     private FilterModel filterModel;
 
     private final NameValidator nameValidator;
@@ -50,55 +42,12 @@ public class FilterWizardModel extends DefaultWizardModel
         this.title = title;
         this.nameValidator = nameValidator;
         setFilterModel( filterModel );
+        initPaneList();
     }
 
     public String getDialogTitle()
     {
         return title;
-    }
-
-    /**
-     * Getter for property filterName.
-     *
-     * @return Value of property filterName.
-     */
-    public String getFilterName()
-    {
-        return filterModel.getName();
-    }
-
-    /**
-     * Setter for property filterName.
-     *
-     * @param filterName New value of property filterName.
-     */
-    public void setFilterName( final String filterName )
-    {
-        final String oldFilterName = filterModel.getName();
-        filterModel.setName( filterName );
-        propertySupport.firePropertyChange( FILTER_NAME, oldFilterName, filterName );
-    }
-
-    /**
-     * Getter for property base.
-     *
-     * @return Value of property base.
-     */
-    public HerbarModel getBaseModel()
-    {
-        return filterModel.getDependantModel();
-    }
-
-    /**
-     * Setter for property base.
-     *
-     * @param baseModel New value of property base.
-     */
-    public void setBaseModel( final HerbarModel baseModel )
-    {
-        final HerbarModel oldBase = filterModel.getDependantModel();
-        filterModel.setDependentModel( baseModel );
-        propertySupport.firePropertyChange( FILTER_BASE, oldBase, baseModel );
     }
 
     /**
@@ -120,7 +69,6 @@ public class FilterWizardModel extends DefaultWizardModel
     {
         final FilterModel oldFilterModel = this.filterModel;
         this.filterModel = filterModel;
-        this.base = filterModel.getDependantModel();
         propertySupport.firePropertyChange( FILTER_MODEL, oldFilterModel, filterModel );
     }
 

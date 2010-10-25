@@ -16,7 +16,7 @@ public class TaxStateModel
 {
     public static final String MODEL = "MODEL";
 
-    public static final String TAXLIST = "TAXLIST";
+    public static final String TAX_LIST = "TAXON_LIST";
 
     private static final Logger LOG = LoggerFactory.getLogger( TaxStateModel.class );
 
@@ -132,16 +132,6 @@ public class TaxStateModel
         return taxModel.getFocus();
     }
 
-    public Level getRootLevel()
-    {
-        return herbarModel.getRootLevel();
-    }
-
-    public Taxon getRootTaxon()
-    {
-        return herbarModel.getRootTaxon();
-    }
-
     public Taxon[] getTaxList()
     {
         return taxList;
@@ -149,7 +139,7 @@ public class TaxStateModel
 
     private void changeTaxList()
     {
-        final Taxon[] oldlist = taxList;
+        final Taxon[] oldList = taxList;
         final Taxon scope = getScope();
         final Level level = getLevel();
         taxList = scope.getAllChildTaxa( level );
@@ -166,7 +156,7 @@ public class TaxStateModel
         {
             Arrays.sort( taxList );
         }
-        propertyChangeSupport.firePropertyChange( TAXLIST, oldlist, taxList );
+        propertyChangeSupport.firePropertyChange( TAX_LIST, oldList, taxList );
     }
 
     private void init( final HerbarModel model )
@@ -182,7 +172,7 @@ public class TaxStateModel
     public synchronized void addPropertyChangeListener( final String property, final PropertyChangeListener listener )
     {
         propertyChangeSupport.addPropertyChangeListener( property, listener );
-        if ( SimpleTaxStateModel.FOCUS == property )
+        if ( SimpleTaxStateModel.FOCUS.equals( property ) )
         {
             listener.propertyChange( new PropertyChangeEvent( this, property, getFocus(), getFocus() ) );
         }
@@ -191,10 +181,5 @@ public class TaxStateModel
     public synchronized void addPropertyChangeListener( final PropertyChangeListener listener )
     {
         propertyChangeSupport.addPropertyChangeListener( listener );
-    }
-
-    public synchronized void removePropertyChangeListener( final PropertyChangeListener listener )
-    {
-        propertyChangeSupport.removePropertyChangeListener( listener );
     }
 }

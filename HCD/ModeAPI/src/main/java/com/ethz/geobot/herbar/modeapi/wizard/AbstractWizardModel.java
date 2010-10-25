@@ -19,35 +19,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Base functionallity for WizardModel. Mainly the beans related parts.
+ * Base functionality for WizardModel. Mainly the beans related parts.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
 abstract public class AbstractWizardModel implements WizardModel
 {
-    /**
-     * logger instance
-     */
+    /** logger instance */
     private static final Logger LOG = LoggerFactory.getLogger( AbstractWizardModel.class );
 
     protected PropertyChangeSupport propertySupport;
 
-    /**
-     * cached BeanInfo information
-     */
+    /** cached BeanInfo information */
     private BeanInfo cachedBeanInfo = null;
 
     private Action finishAction = null;
 
-    /**
-     * herbar context
-     */
+    /** herbar context */
     private HerbarContext context;
 
-    /**
-     * Used to identify the wizard model per instance.
-     */
+    /** Used to identify the wizard model per instance. */
     private final String name;
 
     private final Preferences preferences;
@@ -101,9 +93,9 @@ abstract public class AbstractWizardModel implements WizardModel
         propertySupport.addPropertyChangeListener( listener );
     }
 
-    public void addPropertyChangeListener( final String proptertyName, final PropertyChangeListener listener )
+    public void addPropertyChangeListener( final String propertyName, final PropertyChangeListener listener )
     {
-        propertySupport.addPropertyChangeListener( proptertyName, listener );
+        propertySupport.addPropertyChangeListener( propertyName, listener );
     }
 
     public void removePropertyChangeListener( final PropertyChangeListener listener )

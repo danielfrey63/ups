@@ -2,8 +2,8 @@ package com.ethz.geobot.herbar.modeapi.wizard;
 
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,42 +13,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is a default implementation for the WizardModel interface.
+ * This class is a default implementation for the WizardModel interface. Call {@link #initPaneList()} after you have
+ * constructed the object in subclasses.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:11 $
  */
 public class DefaultWizardModel extends AbstractWizardModel
 {
-    /**
-     * Category for logging.
-     */
+    /** Category for logging. */
     private static final Logger LOG = LoggerFactory.getLogger( DefaultWizardModel.class );
 
-    /**
-     * Index of the current pane.
-     */
+    /** Index of the current pane. */
     private int currentPane = 0;
 
-    /**
-     * Index of the pane to start with.
-     */
+    /** Index of the pane to start with. */
     private int startingPane = 0;
 
-    /**
-     * contains information about the current states of buttons in a pane
-     */
-    Map paneButtonStates = new HashMap();
+    /** contains information about the current states of buttons in a pane */
+    Map<String, ButtonStates> paneButtonStates = new HashMap<String, ButtonStates>();
 
-    /**
-     * Contains the list of all panes.
-     */
-    private List paneList;
+    /** Contains the list of all panes. */
+    private List<WizardPane> paneList;
 
-    /**
-     * Contains all state listener
-     */
-    private Vector wizardStateListenerList;
+    /** Contains all state listener */
+    private Vector<WizardStateListener> wizardStateListenerList;
 
     /**
      * Creates a default wizard model.
@@ -61,7 +50,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     }
 
     /**
-     * Creates a default wizard model for a spceific mode.
+     * Creates a default wizard model for a specific mode.
      *
      * @param context the modes context. May not be null.
      * @param panes   the panes to display in the wizard. May be null.
@@ -70,9 +59,8 @@ public class DefaultWizardModel extends AbstractWizardModel
     public DefaultWizardModel( final HerbarContext context, final WizardPane[] panes, final String name )
     {
         super( context, name );
-        paneList = ( panes == null ? Collections.EMPTY_LIST : Arrays.asList( panes ) );
+        paneList = ( panes == null ? new ArrayList<WizardPane>() : Arrays.asList( panes ) );
         init();
-        initPaneList();
     }
 
     /**
@@ -85,7 +73,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     public DefaultWizardModel( final Preferences preferences, final WizardPane[] panes, final String name )
     {
         super( preferences, name );
-        paneList = ( panes == null ? Collections.EMPTY_LIST : Arrays.asList( panes ) );
+        paneList = ( panes == null ? new ArrayList<WizardPane>() : Arrays.asList( panes ) );
         init();
         initPaneList();
     }
@@ -96,8 +84,8 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     private ButtonStates getButtonStates()
     {
-        final String paneName = ( (WizardPane) paneList.get( currentPane ) ).getName();
-        ButtonStates states = (ButtonStates) paneButtonStates.get( paneName );
+        final String paneName = paneList.get( currentPane ).getName();
+        ButtonStates states = paneButtonStates.get( paneName );
         if ( states == null )
         {
             states = new ButtonStates();
@@ -134,7 +122,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     {
         currentPane = index;
         fireInternalState();
-        return (WizardPane) paneList.get( currentPane );
+        return paneList.get( currentPane );
     }
 
     public WizardPane getNextPane()
@@ -142,7 +130,7 @@ public class DefaultWizardModel extends AbstractWizardModel
         currentPane++;
         fireInternalState();
         LOG.debug( "next pane index is " + currentPane );
-        return (WizardPane) paneList.get( currentPane );
+        return paneList.get( currentPane );
     }
 
     public WizardPane getPreviousPane()
@@ -150,7 +138,7 @@ public class DefaultWizardModel extends AbstractWizardModel
         currentPane--;
         fireInternalState();
         LOG.debug( "next pane index is " + currentPane );
-        return (WizardPane) paneList.get( currentPane );
+        return paneList.get( currentPane );
     }
 
     public boolean isNextEnabled()
@@ -175,7 +163,7 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     public WizardPane[] getPanes()
     {
-        return (WizardPane[]) paneList.toArray( new WizardPane[0] );
+        return paneList.toArray( new WizardPane[paneList.size()] );
     }
 
     public int getCurrentPaneIndex()
@@ -187,7 +175,7 @@ public class DefaultWizardModel extends AbstractWizardModel
     {
         if ( wizardStateListenerList == null )
         {
-            wizardStateListenerList = new Vector();
+            wizardStateListenerList = new Vector<WizardStateListener>();
         }
         wizardStateListenerList.add( listener );
     }
@@ -237,10 +225,8 @@ public class DefaultWizardModel extends AbstractWizardModel
         }
     }
 
-    /**
-     * This method inform all panes about there model.
-     */
-    private void initPaneList()
+    /** This method inform all panes about there model. */
+    protected void initPaneList()
     {
         for ( final Object aPaneList : paneList )
         {
@@ -249,9 +235,7 @@ public class DefaultWizardModel extends AbstractWizardModel
         }
     }
 
-    /**
-     * this method fires the internal state
-     */
+    /** this method fires the internal state */
     final protected void fireInternalState()
     {
         final WizardStateChangeEvent event = new WizardStateChangeEvent( this, hasNext(),
@@ -267,38 +251,30 @@ public class DefaultWizardModel extends AbstractWizardModel
 
     public void setStart( final int startingPane )
     {
-        final Preferences prefs = getPreferencesNode();
-        prefs.putInt( getName(), startingPane );
+        final Preferences preferences = getPreferencesNode();
+        preferences.putInt( getName(), startingPane );
         this.startingPane = startingPane;
     }
 
     public int getStart()
     {
-        final Preferences prefs = getPreferencesNode();
-        startingPane = prefs.getInt( getName(), 0 );
+        final Preferences preferences = getPreferencesNode();
+        startingPane = preferences.getInt( getName(), 0 );
         return startingPane;
     }
 
     static class ButtonStates
     {
-        /**
-         * Enable state indicator of the next button.
-         */
+        /** Enable state indicator of the next button. */
         boolean isNextEnabled = true;
 
-        /**
-         * Enable state indicator of the previous button.
-         */
+        /** Enable state indicator of the previous button. */
         boolean isPreviousEnabled = true;
 
-        /**
-         * Enable state indicator of the finish button.
-         */
+        /** Enable state indicator of the finish button. */
         boolean isFinishEnabled = true;
 
-        /**
-         * Enable state indicator of the finish button.
-         */
+        /** Enable state indicator of the finish button. */
         boolean isCancelEnabled = true;
     }
 }

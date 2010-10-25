@@ -33,62 +33,37 @@ import org.slf4j.LoggerFactory;
  */
 class WizardDialogUI extends JDialog implements WizardStateListener
 {
-    /**
-     * logging category for class
-     */
+    /** Logging category for class. */
     private static final Logger LOG = LoggerFactory.getLogger( WizardDialogUI.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
-    /**
-     * the navigation panel
-     */
+    /** The navigation panel. */
     private final JPanel navigationPanel = new JPanel();
 
-    /**
-     * back button
-     */
+    /** Back button. */
     private JButton back;
 
-    /**
-     * next button
-     */
+    /** Next button. */
     private JButton next;
 
-    /**
-     * finish button
-     */
+    /** Finish button. */
     private JButton finish;
 
-    /**
-     * cancel button
-     */
+    /** Cancel button. */
     private JButton cancel;
 
-    /**
-     * the panel where the panes are shown
-     */
+    /** The panel where the panes are shown. */
     private final JPanel wizardPanePanel = new JPanel();
 
-    /**
-     * model with information of the panes etc.
-     */
+    /** Model with information of the panes etc. */
     private WizardModel model = null;
 
-    /**
-     * current pane
-     */
+    /** Current pane. */
     private WizardPane currentPane = null;
 
-    /**
-     * this attribute defines if the changes are accepted
-     */
+    /** This attribute defines if the changes are accepted. */
     private boolean accepted = false;
-
-    /**
-     * Holds the minimum size for this dialog to show up propertly.
-     */
-    private Dimension minimumSize;
 
     private CardLayout cards;
 
@@ -96,7 +71,8 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      * Creates new WizardDialogUI
      *
      * @param parent parent of the wizard frame
-     * @param modal  true = modal wizard dialog, false = modaless
+     * @param title  the title
+     * @param modal  true = modal wizard dialog, false = modal
      */
     public WizardDialogUI( final Frame parent, final String title, final boolean modal )
     {
@@ -108,7 +84,8 @@ class WizardDialogUI extends JDialog implements WizardStateListener
      * Creates new WizardDialogUI
      *
      * @param parent parent of the wizard dialog
-     * @param modal  true = modal wizard dialog, false = modaless
+     * @param title  the title
+     * @param modal  true = modal wizard dialog, false = modal
      */
     public WizardDialogUI( final Dialog parent, final String title, final boolean modal )
     {
@@ -148,7 +125,6 @@ class WizardDialogUI extends JDialog implements WizardStateListener
     {
         wizardPanePanel.setPreferredSize( dim );
         pack();
-        minimumSize = getSize();
         if ( DEBUG )
         {
             LOG.debug( "wizard size = " + getSize() );
@@ -158,7 +134,7 @@ class WizardDialogUI extends JDialog implements WizardStateListener
     /**
      * Returns if the wizard is accepted.
      *
-     * @return true finsished pressed, false cancel pressed
+     * @return true finished pressed, false cancel pressed
      */
     public boolean isAccepted()
     {
@@ -233,8 +209,8 @@ class WizardDialogUI extends JDialog implements WizardStateListener
 
         if ( currentPane != null )
         {
-            LOG.debug( "passivate old pane" );
-            currentPane.passivate();
+            LOG.debug( "deactivate old pane" );
+            currentPane.deactivate();
             wizardPanePanel.remove( currentPane );
         }
         currentPane = pane;
@@ -245,9 +221,7 @@ class WizardDialogUI extends JDialog implements WizardStateListener
         wizardPanePanel.repaint();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     */
+    /** This method is called from within the constructor to initialize the form. */
     private void initGUI()
     {
         // set glass pane
@@ -270,7 +244,7 @@ class WizardDialogUI extends JDialog implements WizardStateListener
             {
                 if ( currentPane.isCancelOk() )
                 {
-                    closeDialog( event );
+                    closeDialog();
                 }
             }
         } );
@@ -290,21 +264,10 @@ class WizardDialogUI extends JDialog implements WizardStateListener
         {
             public void windowClosing( final WindowEvent evt )
             {
-                closeDialog( evt );
+                closeDialog();
             }
         } );
 
-//        addComponentListener(new ComponentAdapter() {
-//            public void componentResized(ComponentEvent e) {
-//                if (minimumSize != null) {
-//                    Dimension size = getSize();
-//                    size.width = Math.max(size.width, minimumSize.width);
-//                    size.height = Math.max(size.height, minimumSize.height);
-//                    setSize(size);
-//                }
-//            }
-//        });
-//
         navigationPanel.setLayout( new FlowLayout( FlowLayout.RIGHT, 0, 0 ) );
         navigationPanel.add( back );
         navigationPanel.add( next );
@@ -331,22 +294,10 @@ class WizardDialogUI extends JDialog implements WizardStateListener
         contentPane.add( main, BorderLayout.CENTER );
     }
 
-    private void closeDialog( final ActionEvent evt )
-    {
-        closeDialog();
-    }
-
-    private void closeDialog( final WindowEvent evt )
-    {
-        closeDialog();
-    }
-
-    /**
-     * Passivates the current pane and closes the dialog.
-     */
+    /** Deactivates the current pane and closes the dialog. */
     private void closeDialog()
     {
-        currentPane.passivate();
+        currentPane.deactivate();
         setVisible( false );
         dispose();
     }
@@ -356,7 +307,7 @@ class WizardDialogUI extends JDialog implements WizardStateListener
         public void actionPerformed( final ActionEvent e )
         {
             accepted = true;
-            closeDialog( e );
+            closeDialog();
         }
 
         public FinishAction()

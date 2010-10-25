@@ -28,46 +28,10 @@ class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIORea
     /** Category information for logging. */
     private static final Logger LOGGER = LoggerFactory.getLogger( AsyncPictureLoader.class.getName() );
 
-    /** If running is set to false, the thread goes down. */
-    private boolean running = true;
-
     /** URL to the image which should be loaded. */
     private String pictureURL = "";
 
-    /** Image reader. */
-    private final ImageReader reader = null;
-
     private final AbstractAsyncPictureLoaderSupport asyncPictureLoaderSupport = new AbstractAsyncPictureLoaderSupport();
-
-    /**
-     * Loads a image from the given URL.
-     *
-     * @param name URL to the picture
-     */
-    public synchronized void loadImage( final String name )
-    {
-        this.pictureURL = name;
-        notify();
-        Thread.yield();
-    }
-
-    /** Abort async image loading. */
-    public void abort()
-    {
-        if ( reader != null )
-        {
-            LOGGER.info( "abort() image loading aborted" );
-            reader.abort();
-        }
-    }
-
-    /** Terminate image loader thread. */
-    public synchronized void terminate()
-    {
-        abort();
-        running = false;
-        notify();
-    }
 
     /** Async loader... */
     public void run()
@@ -75,6 +39,7 @@ class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIORea
         LOGGER.info( "AsyncPictureLoader thread started" );
         synchronized ( this )
         {
+            final boolean running = true;
             while ( running )
             {
                 try
@@ -95,7 +60,6 @@ class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIORea
                 }
             }
         }
-        LOGGER.info( "AsyncPictureLoader thread stopped" );
     }
 
     public void imageUpdate( final ImageReader source, final BufferedImage theImage, final int minX, final int minY,
@@ -106,7 +70,7 @@ class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIORea
     public void passComplete( final ImageReader source, final BufferedImage bufferedImage )
     {
         LOGGER.info( "loading of picture " + pictureURL + " finished." );
-        informFinished( pictureURL, bufferedImage, false );
+        informFinished( pictureURL, bufferedImage );
     }
 
     public void passStarted( final ImageReader source, final BufferedImage theImage, final int pass, final int minPass,
@@ -172,9 +136,9 @@ class AsyncPictureLoader extends Thread implements IIOReadUpdateListener, IIORea
     {
     }
 
-    public void informFinished( final String name, final Image image, final boolean thumb )
+    public void informFinished( final String name, final Image image )
     {
-        asyncPictureLoaderSupport.informFinished( name, image, thumb );
+        asyncPictureLoaderSupport.informFinished( name, image );
     }
 
     public void informAborted( final String name )

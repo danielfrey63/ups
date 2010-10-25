@@ -58,13 +58,12 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
      *
      * @param name  name of the image
      * @param image reference to the image
-     * @param thumb Description of the Parameter
      */
-    public void informFinished( final String name, final Image image, final boolean thumb )
+    public void informFinished( final String name, final Image image )
     {
         for ( final AsyncPictureLoaderListener listener : listeners )
         {
-            listener.loadFinished( name, image, thumb );
+            listener.loadFinished( name, image, false );
         }
     }
 

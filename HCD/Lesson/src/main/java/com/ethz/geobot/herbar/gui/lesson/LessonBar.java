@@ -57,9 +57,9 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 {
     private static final Logger LOG = LoggerFactory.getLogger( LessonBar.class );
 
-    private static final int POPUP_THRESHOLD = 8;
+    private static final int POP_UP_THRESHOLD = 8;
 
-    private static final String ASKER = "asker";
+    private static final String ASKING_PANEL = "askingPanel";
 
     private static final String BREAD = "bread";
 
@@ -89,13 +89,13 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private final JFrame parent;
 
-    private FocusPopup focusPopup;
+    private FocusPopUp focusPopUp;
 
-    private LevelPopup levelPopup;
+    private LevelPopUp levelPopUp;
 
     private IteratorControlPanel taxonControl;
 
-    protected TaxonNameInterrogator asker;
+    protected TaxonNameInterrogator askingPanel;
 
     protected CardLayout cards;
 
@@ -103,7 +103,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private final HerbarContext herbarContext;
 
-    private ListPopup listPopup;
+    private ListPopUp listPopUp;
 
     private final StatusBar statusBar;
 
@@ -116,7 +116,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         this.statusBar = herbarModel.getHerbarGUIManager().getStatusBar();
 
         final JToolBar toolBar = createToolBar();
-        final JPanel breadCrumb = createBreadCrumb( taxStateModel );
+        final JPanel breadCrumb = createBreadCrumb();
 
         createStatusComponents();
 
@@ -124,10 +124,10 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         add( toolBar, BorderLayout.NORTH );
         add( breadCrumb, BorderLayout.CENTER );
 
-        // Datadriven
+        // Data driven
         final Taxon focusTaxon = taxStateModel.getFocus();
         bread.setTaxFocus( focusTaxon );
-        asker.setTaxFocus( focusTaxon );
+        askingPanel.setTaxFocus( focusTaxon );
         scopeLabel.setText( taxStateModel.getScope().getName() );
         levelLabel.setText( taxStateModel.getLevel().getName() );
         taxonControl.setCursor( taxStateModel.getTaxList() );
@@ -138,19 +138,19 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         taxonControl.addIteratorControlListener( this );
     }
 
-    private JPanel createBreadCrumb( final TaxStateModel model )
+    private JPanel createBreadCrumb()
     {
         // Bread crumb and species name interrogation
         bread = new BreadCrumb();
         bread.setBackground( HerbarTheme.getBackground2() );
 
-        asker = new TaxonNameInterrogator( new TaxonNameInterrogator.TransientInterrogatorModel() );
-        asker.setBackground( HerbarTheme.getBackground2() );
+        askingPanel = new TaxonNameInterrogator( new TaxonNameInterrogator.TransientInterrogatorModel() );
+        askingPanel.setBackground( HerbarTheme.getBackground2() );
 
         cards = new CardLayout();
         switcher = new JPanel( cards );
         switcher.add( bread, BREAD );
-        switcher.add( asker, ASKER );
+        switcher.add( askingPanel, ASKING_PANEL );
         switcher.setBackground( HerbarTheme.getBackground2() );
         switcher.setBorder( new EmptyBorder( 0, Constants.GAP_WITHIN_GROUP, 0, Constants.GAP_WITHIN_GROUP ) );
 
@@ -219,7 +219,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             }
             else if ( source == levelButton || source == levelLabel )
             {
-                getLevelPopup().showPopUp( (Component) source );
+                getLevelPopUp().showPopUp( (Component) source );
             }
             else if ( source == orderButton || source == orderLabel )
             {
@@ -238,7 +238,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private void changeList( final Component component )
     {
-        getListPopup().showPopUp( component );
+        getListPopUp().showPopUp( component );
     }
 
     public void changeScope()
@@ -263,8 +263,8 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         final int length = list.length;
         final Taxon[] copy = new Taxon[length];
         System.arraycopy( list, 0, copy, 0, length );
-        Arrays.sort( copy, new ToStringComparator() );
-        if ( copy.length > POPUP_THRESHOLD )
+        Arrays.sort( copy, new ToStringComparator<Taxon>() );
+        if ( copy.length > POP_UP_THRESHOLD )
         {
             final ListDialog dialog = new ListDialog( parent, "DIALOG.FOCUS", copy );
             dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
@@ -278,40 +278,40 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         }
         else
         {
-            getFocusPopup().showPopUp( component );
+            getFocusPopUp().showPopUp( component );
         }
     }
 
-    public FocusPopup getFocusPopup()
+    public FocusPopUp getFocusPopUp()
     {
-        if ( focusPopup == null )
+        if ( focusPopUp == null )
         {
-            focusPopup = new FocusPopup();
+            focusPopUp = new FocusPopUp();
         }
-        focusPopup.setObjects( taxStateModel.getTaxList() );
-        return focusPopup;
+        focusPopUp.setObjects( taxStateModel.getTaxList() );
+        return focusPopUp;
     }
 
-    public LevelPopup getLevelPopup()
+    public LevelPopUp getLevelPopUp()
     {
-        if ( levelPopup == null )
+        if ( levelPopUp == null )
         {
-            levelPopup = new LevelPopup();
+            levelPopUp = new LevelPopUp();
         }
-        levelPopup.setObjects( taxStateModel.getModel().getRootTaxon().getSubLevels() );
-        return levelPopup;
+        levelPopUp.setObjects( taxStateModel.getModel().getRootTaxon().getSubLevels() );
+        return levelPopUp;
     }
 
-    public ListPopup getListPopup()
+    public ListPopUp getListPopUp()
     {
-        if ( listPopup == null )
+        if ( listPopUp == null )
         {
-            listPopup = new ListPopup();
+            listPopUp = new ListPopUp();
         }
         final Object[] models = herbarContext.getModels().toArray();
-        Arrays.sort( models, new ToStringComparator() );
-        listPopup.setObjects( models );
-        return listPopup;
+        Arrays.sort( models, new ToStringComparator<Object>() );
+        listPopUp.setObjects( models );
+        return listPopUp;
     }
 
     public void itemChange( final IteratorControlEvent evt )
@@ -323,14 +323,14 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     {
         final Taxon focus = taxStateModel.getFocus();
         bread.setTaxFocus( focus );
-        asker.setTaxFocus( focus );
-        if ( evt.getPropertyName() == TaxStateModel.TAXLIST )
+        askingPanel.setTaxFocus( focus );
+        if ( evt.getPropertyName().equals( TaxStateModel.TAX_LIST ) )
         {
             taxonControl.setCursor( taxStateModel.getTaxList() );
         }
         scopeLabel.setText( taxStateModel.getScope().getName() );
         levelLabel.setText( taxStateModel.getLevel().getName() );
-        if ( evt.getPropertyName() == SimpleTaxStateModel.FOCUS )
+        if ( evt.getPropertyName().equals( SimpleTaxStateModel.FOCUS ) )
         {
             taxonControl.getIteratorCursor().setCurrent( focus );
         }
@@ -355,7 +355,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     public void switchToAskMode()
     {
-        cards.show( switcher, ASKER );
+        cards.show( switcher, ASKING_PANEL );
         statusBar.removeStatusComponent( focusLabel );
     }
 
@@ -385,9 +385,9 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         statusBar.removeStatusComponent( listLabel );
     }
 
-    public class FocusPopup extends ObjectPopup
+    public class FocusPopUp extends ObjectPopup
     {
-        public FocusPopup()
+        public FocusPopUp()
         {
             super( taxStateModel.getTaxList() );
         }
@@ -403,9 +403,9 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         }
     }
 
-    public class LevelPopup extends ObjectPopup
+    public class LevelPopUp extends ObjectPopup
     {
-        public LevelPopup()
+        public LevelPopUp()
         {
             super( taxStateModel.getModel().getRootTaxon().getSubLevels() );
         }
@@ -421,9 +421,9 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         }
     }
 
-    public class ListPopup extends ObjectPopup
+    public class ListPopUp extends ObjectPopup
     {
-        public ListPopup()
+        public ListPopUp()
         {
             super( herbarContext.getModels().toArray() );
         }

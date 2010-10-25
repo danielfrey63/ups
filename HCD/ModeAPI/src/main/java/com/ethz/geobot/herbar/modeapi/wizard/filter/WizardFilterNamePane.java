@@ -26,9 +26,7 @@ import javax.swing.text.Document;
  */
 public class WizardFilterNamePane extends WizardPane
 {
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public static final String NAME = "filter.name";
 
     private final String namePropertyName;
@@ -53,7 +51,7 @@ public class WizardFilterNamePane extends WizardPane
         getWizardModel().setPreviousEnabled( valid );
     }
 
-    public void passivate()
+    public void deactivate()
     {
         setProperty( namePropertyName, name.getText() );
     }

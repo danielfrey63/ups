@@ -4,6 +4,7 @@ import ch.jfactory.model.graph.GraphNode;
 import com.ethz.geobot.herbar.model.AbstractTaxon;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Level;
+import com.ethz.geobot.herbar.model.LevelComparator;
 import com.ethz.geobot.herbar.model.MorValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -14,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Taxon class implementing the filter. This class acts as a Proxy for a dependent Taxon. It add the functionallity to
+ * Taxon class implementing the filter. This class acts as a Proxy for a dependent Taxon. It add the functionality to
  * filter its siblings and levels.
  *
  * @author $Author: daniel_frey $
@@ -28,9 +29,9 @@ class FilterTaxon extends AbstractTaxon
 
     private final FilterModel filterModel;
 
-    private List cachedChilds = null;
+    private List<Taxon> cachedChildren = null;
 
-    private List cachedSubLevels = null;
+    private List<Level> cachedSubLevels = null;
 
     private Taxon cachedParent = null;
 
@@ -49,16 +50,6 @@ class FilterTaxon extends AbstractTaxon
     public void setScore( final boolean right )
     {
         dependentTaxon.setScore( right );
-    }
-
-    /**
-     * set the dependent taxon reference
-     *
-     * @param dependentTaxon reference to the dependent taxon
-     */
-    public void setDependentTaxon( final Taxon dependentTaxon )
-    {
-        this.dependentTaxon = dependentTaxon;
     }
 
     public int getId()
@@ -86,7 +77,7 @@ class FilterTaxon extends AbstractTaxon
             {
                 parent = parent.getParentTaxon();
             }
-            // TODO: something more intelegent requeired
+            // TODO: something more intelligent required
             if ( parent != null )
             {
                 cachedParent = filterModel.createFilterTaxon( parent );
@@ -97,12 +88,12 @@ class FilterTaxon extends AbstractTaxon
 
     public Taxon[] getChildTaxa()
     {
-        if ( cachedChilds == null )
+        if ( cachedChildren == null )
         {
-            cachedChilds = new ArrayList();
-            collectChilds( dependentTaxon, cachedChilds );
+            cachedChildren = new ArrayList<Taxon>();
+            collectChildren( dependentTaxon, cachedChildren );
         }
-        return (Taxon[]) cachedChilds.toArray( new Taxon[0] );
+        return cachedChildren.toArray( new Taxon[cachedChildren.size()] );
     }
 
     public MorValue[] getMorValues()
@@ -114,20 +105,13 @@ class FilterTaxon extends AbstractTaxon
     {
         if ( cachedSubLevels == null )
         {
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "create sublevellist for taxon: " + this );
-            }
-            cachedSubLevels = new ArrayList();
+            LOG.trace( "create sub-level list for taxon \"" + this + "\"" );
+            cachedSubLevels = new ArrayList<Level>();
             final Level level = getLevel();
             final Level[] levels = dependentTaxon.getSubLevels();
             for ( final Level level1 : levels )
             {
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "check level: " + level1 );
-                }
-
+                LOG.trace( "check level: " + level1 );
                 final Taxon[] taxList = dependentTaxon.getAllChildTaxa( level1 );
                 boolean found = false;
                 for ( int t = 0; t < taxList.length && !found; t++ )
@@ -140,18 +124,15 @@ class FilterTaxon extends AbstractTaxon
 
                 if ( found || level == level1 )
                 {
-                    if ( LOG.isDebugEnabled() )
-                    {
-                        LOG.debug( "add level " + level1 + " as sublevel" );
-                    }
+                    LOG.trace( "add level \"" + level1 + "\" as sub-level" );
                     cachedSubLevels.add( level1 );
                 }
             }
             // sort levels
-            Collections.sort( cachedSubLevels );
+            Collections.sort( cachedSubLevels, new LevelComparator() );
         }
 
-        return (Level[]) cachedSubLevels.toArray( new Level[0] );
+        return cachedSubLevels.toArray( new Level[cachedSubLevels.size()] );
     }
 
     public CommentedPicture[] getCommentedPictures( final PictureTheme theme )
@@ -174,42 +155,23 @@ class FilterTaxon extends AbstractTaxon
         return dependentTaxon.getRank();
     }
 
-    /**
-     * get a reference to the dependent taxon object.
-     *
-     * @return reference to dependent taxon
-     */
-    public Taxon getDependentTaxon()
+    private void collectChildren( final Taxon tax, final List<Taxon> childList )
     {
-        return dependentTaxon;
-    }
+        LOG.trace( "collect children for \"" + tax + "\"" );
+        final Taxon[] children = tax.getChildTaxa();
 
-    private void collectChilds( final Taxon tax, final List childList )
-    {
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "collect childs for: " + tax );
-        }
-        final Taxon[] childs = tax.getChildTaxa();
-
-        for ( final Taxon child : childs )
+        for ( final Taxon child : children )
         {
             if ( filterModel.isIn( child ) )
             {
                 // ok, this element is a child
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "add child to filtered list: " + child );
-                }
+                LOG.trace( "add child to filtered list \"" + child + "\"" );
                 childList.add( filterModel.createFilterTaxon( child ) );
             }
             else
             {
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "collect childs for taxon: " + child );
-                }
-                collectChilds( child, childList );
+                LOG.trace( "collect children for taxon \"" + child + "\"" );
+                collectChildren( child, childList );
             }
         }
     }
@@ -222,9 +184,5 @@ class FilterTaxon extends AbstractTaxon
     public GraphNode getAsGraphNode()
     {
         return dependentTaxon.getAsGraphNode();
-    }
-
-    public void clearCachedSubLevels()
-    {
     }
 }

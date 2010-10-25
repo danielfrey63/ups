@@ -1,13 +1,12 @@
 package com.ethz.geobot.herbar.modeapi.wizard;
 
-import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
 
 /**
- * This WizardModel is used to has two models one is a static model and the cascade one which is dependend from the
+ * This WizardModel is used to has two models one is a static model and the cascade one which is dependent from the
  * first one. The User should extends this class and use the setCascadeWizardModel method to set the cascaded
  * WizardModel.
  *
@@ -27,11 +26,7 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
     public CascadeWizardModel( final Preferences preferences, final WizardPane[] panes )
     {
         super( preferences, panes, NAME );
-    }
-
-    public CascadeWizardModel( final HerbarContext context, final WizardPane[] panes )
-    {
-        super( context, panes, NAME );
+        initPaneList();
     }
 
     public void setNextEnabled( final boolean isNextEnabled )
@@ -82,17 +77,6 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
         }
     }
 
-    public void setCascadeWizardModel( final WizardModel newCascadeModel )
-    {
-        if ( cascadeWizardModel != null )
-        {
-            cascadeWizardModel.removeWizardStateListener( this );
-        }
-        cascadeWizardModel = newCascadeModel;
-        cascadeWizardModel.addWizardStateListener( this );
-        fireInternalState();
-    }
-
     public boolean isNextEnabled()
     {
         if ( inCascadeWizard() )
@@ -107,26 +91,12 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
 
     public WizardPane[] getPanes()
     {
-        final List list = new ArrayList();
+        final List<WizardPane> list = new ArrayList<WizardPane>();
 
         list.addAll( Arrays.asList( super.getPanes() ) );
         list.addAll( Arrays.asList( cascadeWizardModel.getPanes() ) );
 
-        return (WizardPane[]) list.toArray( new WizardPane[0] );
-    }
-
-    public WizardPane getPane()
-    {
-        final int index = super.getCurrentPaneIndex();
-        final int panesCount = super.getPanes().length;
-        if ( index > panesCount )
-        {
-            return cascadeWizardModel.getPane( index - panesCount );
-        }
-        else
-        {
-            return super.getPane( index );
-        }
+        return list.toArray( new WizardPane[list.size()] );
     }
 
     public WizardPane getNextPane()
@@ -194,8 +164,7 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
 
     public WizardPane getPreviousPane()
     {
-        WizardPane pane = null;
-
+        final WizardPane pane;
         if ( inCascadeWizard() )
         {
             if ( cascadeWizardModel.getCurrentPaneIndex() > 0 )
@@ -256,15 +225,7 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
 
     public boolean hasPrevious()
     {
-        if ( inCascadeWizard() )
-        {
-            // there is every time a previous pane
-            return true;
-        }
-        else
-        {
-            return super.hasPrevious();
-        }
+        return inCascadeWizard() || super.hasPrevious();
     }
 
     public void change( final WizardStateChangeEvent event )

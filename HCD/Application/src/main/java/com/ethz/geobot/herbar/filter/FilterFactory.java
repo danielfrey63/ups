@@ -139,7 +139,7 @@ public class FilterFactory
     }
 
     /**
-     * Return a filter definition from the persistent storage. It also load its dependend filters.<p> This method makes
+     * Return a filter definition from the persistent storage. It also load its dependent filters.<p> This method makes
      * sure the base model exists, otherwise it is reset to the default. It guarantees also that the name of the model
      * is equal to the name of the file.
      *
@@ -201,7 +201,11 @@ public class FilterFactory
         cachedFilterModels.remove( modelName );
         final String filename = generateFilterFileName( modelName );
         final File file = new File( filename );
-        file.delete();
+        final boolean success = file.delete();
+        if ( !success )
+        {
+            LOG.error( "could not delete \"" + file + "\"" );
+        }
         // save
         final Filter filter = new Filter( filterModel );
         saveFilter( filter );
@@ -274,7 +278,7 @@ public class FilterFactory
         }
         else
         {
-            throw new FilterPersistentException( "filer persistents not initialized." );
+            throw new FilterPersistentException( "filer persistence not initialized." );
         }
     }
 
@@ -300,7 +304,7 @@ public class FilterFactory
         }
         else
         {
-            throw new FilterPersistentException( "filer persistents not initialized." );
+            throw new FilterPersistentException( "filer persistence not initialized." );
         }
     }
 
@@ -320,17 +324,18 @@ public class FilterFactory
                 final File[] files = file.listFiles();
                 for ( final File file1 : files )
                 {
-                    if ( LOG.isDebugEnabled() )
-                    {
-                        LOG.debug( "filter with name " + file1.getName() + " found." );
-                    }
+                    LOG.trace( "filter with name " + file1.getName() + " found." );
                     list.add( generateFilterName( file1.getName() ) );
                 }
             }
             else
             {
                 LOG.info( "create filter path (" + FILTER_LOCATION + ")" );
-                file.mkdirs();
+                final boolean success = file.mkdirs();
+                if ( !success )
+                {
+                    LOG.error( "could not create directory \"" + file + "\"" );
+                }
             }
         }
         else
@@ -352,7 +357,7 @@ public class FilterFactory
             }
             catch ( FilterPersistentException e )
             {
-                LOG.error( "failed to laod filter " + name, e );
+                LOG.error( "failed to load filter " + name, e );
             }
         }
         return result;

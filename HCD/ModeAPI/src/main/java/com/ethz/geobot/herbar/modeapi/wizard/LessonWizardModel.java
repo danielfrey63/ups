@@ -22,16 +22,14 @@ public class LessonWizardModel extends DefaultWizardModel
 {
     public final static String MODEL = "model";
 
-    public final static String TAXLIST = "taxList";
+    public final static String TAXON_LIST = "taxList";
 
     public static final String NAME = "LessonWizardModel";
 
-    /**
-     * Holds value of property model.
-     */
+    /** Holds value of property model. */
     private HerbarModel model;
 
-    private final SimpleTaxStateModel taxModel;
+    private final SimpleTaxStateModel taxModel = new SimpleTaxStateModel( propertySupport );
 
     private final String title;
 
@@ -39,7 +37,7 @@ public class LessonWizardModel extends DefaultWizardModel
     {
         super( context, panes, NAME );
         this.title = title;
-        taxModel = new SimpleTaxStateModel( propertySupport );
+        initPaneList();
     }
 
     public String getDialogTitle()
@@ -88,65 +86,41 @@ public class LessonWizardModel extends DefaultWizardModel
         return getScope().getAllChildTaxa( getLevel() );
     }
 
-    /**
-     * @see SimpleTaxStateModel#getScope()
-     */
     public Taxon getScope()
     {
         return ( taxModel == null ? null : taxModel.getScope() );
     }
 
-    /**
-     * @see SimpleTaxStateModel#setScope(Taxon)
-     */
     public void setScope( final Taxon scope )
     {
         taxModel.setScope( scope );
     }
 
-    /**
-     * @see SimpleTaxStateModel#getLevel()
-     */
     public Level getLevel()
     {
         return ( taxModel == null ? null : taxModel.getLevel() );
     }
 
-    /**
-     * @see SimpleTaxStateModel#setLevel(Level)
-     */
     public void setLevel( final Level level )
     {
         taxModel.setLevel( level );
     }
 
-    /**
-     * @see SimpleTaxStateModel#getFocus()
-     */
     public Taxon getFocus()
     {
         return ( taxModel == null ? null : taxModel.getFocus() );
     }
 
-    /**
-     * @see SimpleTaxStateModel#setFocus(Taxon)
-     */
     public void setFocus( final Taxon focus )
     {
         taxModel.setFocus( focus );
     }
 
-    /**
-     * @see SimpleTaxStateModel#isOrdered()
-     */
     public boolean isOrdered()
     {
         return ( taxModel != null && taxModel.isOrdered() );
     }
 
-    /**
-     * @see SimpleTaxStateModel#setOrdered(boolean)
-     */
     public void setOrdered( final boolean ordered )
     {
         taxModel.setOrdered( ordered );

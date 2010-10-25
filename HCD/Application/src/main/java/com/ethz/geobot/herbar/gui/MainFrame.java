@@ -15,8 +15,8 @@ import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
 import com.ethz.geobot.herbar.gui.commands.ActionConvertFilterFromUst;
+import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
-import com.ethz.geobot.herbar.gui.commands.ActionModusSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
 import com.ethz.geobot.herbar.gui.commands.ActionSaveBounds;
 import com.ethz.geobot.herbar.gui.commands.ActionStatustextAdapter;
@@ -218,7 +218,7 @@ public class MainFrame extends JFrame
         quitItem = createMenuItem( sub, new ActionQuit( this ) );
 
         sub = createMenu( "MENU.SETTINGS" );
-        createMenuItem( sub, new ActionModusSelection( this, prefNode ) );
+        createMenuItem( sub, new ActionModeSelection( this, prefNode ) );
         createMenuItem( sub, wizardAction = new ActionWizard( this ) );
 
         sub = createMenu( "MENU.HERBAR" );

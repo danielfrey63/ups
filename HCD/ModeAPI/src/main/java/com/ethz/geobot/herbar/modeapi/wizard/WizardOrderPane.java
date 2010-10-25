@@ -22,9 +22,7 @@ public class WizardOrderPane extends WizardPane
 
     private static final String UNORDERED = Strings.getString( "WIZARD.LESSON.ORDER.STATE.UNORDERED.TEXT" );
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     private final String orderedPropertyName;
 
     private EditItem edit;
@@ -66,12 +64,12 @@ public class WizardOrderPane extends WizardPane
 
     private boolean getOrdered()
     {
-        return ( (Boolean) getProperty( orderedPropertyName ) ).booleanValue();
+        return (Boolean) getProperty( orderedPropertyName );
     }
 
     private void setOrdered( final boolean ordered )
     {
-        setProperty( orderedPropertyName, Boolean.valueOf( ordered ) );
+        setProperty( orderedPropertyName, ordered );
     }
 
     public void registerPropertyChangeListener( final WizardModel model )
@@ -80,15 +78,13 @@ public class WizardOrderPane extends WizardPane
         {
             public void propertyChange( final PropertyChangeEvent event )
             {
-                final boolean ordered = ( (Boolean) event.getNewValue() ).booleanValue();
+                final boolean ordered = (Boolean) event.getNewValue();
                 edit.setUserObject( getOrderedText( ordered ) );
             }
         } );
     }
 
-    /**
-     * This method should be overwritten to set the standard values.
-     */
+    /** This method should be overwritten to set the standard values. */
     public void initDefaultValues()
     {
         // try to set actual scope

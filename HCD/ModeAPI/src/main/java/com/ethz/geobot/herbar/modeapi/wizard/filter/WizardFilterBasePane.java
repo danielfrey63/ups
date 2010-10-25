@@ -25,9 +25,7 @@ import javax.swing.ListSelectionModel;
  */
 public class WizardFilterBasePane extends WizardPane
 {
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public static final String NAME = "filter.base";
 
     private final String basePropertyName;
@@ -46,7 +44,7 @@ public class WizardFilterBasePane extends WizardPane
         base.setEnabled( getWizardModel().getHerbarContext().getModels().size() > 1 );
     }
 
-    public void passivate()
+    public void deactivate()
     {
         setProperty( basePropertyName, base.getUserObject() );
     }

@@ -20,19 +20,13 @@ import org.slf4j.LoggerFactory;
  */
 abstract public class AbstractHerbarModel implements HerbarModel
 {
-    /**
-     * log category
-     */
+    /** log category */
     private static final Logger LOG = LoggerFactory.getLogger( AbstractHerbarModel.class );
 
-    /**
-     * Utility field holding list of ModelChangeListeners.
-     */
-    private ArrayList modelChangeListenerList = null;
+    /** Utility field holding list of ModelChangeListeners. */
+    private ArrayList<ModelChangeListener> modelChangeListenerList = null;
 
-    /**
-     * Holds value of property name.
-     */
+    /** Holds value of property name. */
     private String name;
 
     protected boolean readOnly;
@@ -55,7 +49,7 @@ abstract public class AbstractHerbarModel implements HerbarModel
     {
         if ( modelChangeListenerList == null )
         {
-            modelChangeListenerList = new ArrayList();
+            modelChangeListenerList = new ArrayList<ModelChangeListener>();
         }
         modelChangeListenerList.add( listener );
     }
@@ -77,7 +71,7 @@ abstract public class AbstractHerbarModel implements HerbarModel
     {
         if ( LOG.isInfoEnabled() )
         {
-            LOG.info( "model >" + name + "< changed: inform all observers" );
+            LOG.trace( "model >" + name + "< changed: inform all observers" );
         }
         if ( modelChangeListenerList != null )
         {

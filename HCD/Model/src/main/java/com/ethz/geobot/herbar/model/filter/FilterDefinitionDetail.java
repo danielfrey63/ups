@@ -22,11 +22,6 @@ public class FilterDefinitionDetail implements Cloneable
 
     private FilterModel model;
 
-    FilterDefinitionDetail( final FilterModel model, final Taxon scope, final Level level )
-    {
-        this( model, scope, new Level[]{level} );
-    }
-
     FilterDefinitionDetail( final FilterModel model, final Taxon scope, final Level[] levels )
     {
         this.model = model;
@@ -58,12 +53,9 @@ public class FilterDefinitionDetail implements Cloneable
 
     public boolean isIn( final Taxon taxon )
     {
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "check taxon: " + taxon );
-            LOG.debug( "isChild of scope " + scope + ": " + isChild( taxon ) );
-            LOG.debug( "levelcheck " + Arrays.asList( levels ) + ": " + taxon.getLevel() );
-        }
+        LOG.trace( "check taxon: " + taxon );
+        LOG.trace( "isChild of scope " + scope + ": " + isChild( taxon ) );
+        LOG.trace( "level check " + Arrays.asList( levels ) + ": " + taxon.getLevel() );
 
         // is scope root ?
         if ( isRootTaxon( taxon ) )
@@ -100,17 +92,10 @@ public class FilterDefinitionDetail implements Cloneable
 
     private boolean isRootTaxon( final Taxon tax )
     {
-        if ( tax.getParentTaxon() == null )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return tax.getParentTaxon() == null;
     }
 
-    public Object clone()
+    public Object clone() throws CloneNotSupportedException
     {
         try
         {
@@ -118,7 +103,7 @@ public class FilterDefinitionDetail implements Cloneable
         }
         catch ( CloneNotSupportedException ex )
         {
-            LOG.error( "clone isn't supported by cloneable class !?!?!", ex );
+            LOG.error( "clone isn't supported", ex );
             throw new RuntimeException( ex );
         }
     }

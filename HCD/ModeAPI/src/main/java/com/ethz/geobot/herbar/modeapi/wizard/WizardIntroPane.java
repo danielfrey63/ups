@@ -21,10 +21,10 @@ public class WizardIntroPane extends WizardPane
 
     public void activate()
     {
-        check.setSelected( ( getWizardModel().getStart() == 0 ? true : false ) );
+        check.setSelected( ( getWizardModel().getStart() == 0 ) );
     }
 
-    public void passivate()
+    public void deactivate()
     {
         getWizardModel().setStart( ( check.isSelected() ? 0 : 1 ) );
     }

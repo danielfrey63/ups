@@ -49,7 +49,7 @@ public class CachedImage
     public synchronized Image loadImage( final boolean thumb )
     {
         final Image i = PictureLoader.load( locator.getPath() + pictureURL, thumb );
-        setImage( i, thumb );
+        setImage( i );
         return i;
     }
 
@@ -110,31 +110,19 @@ public class CachedImage
         return image;
     }
 
-    private void setImage( final Image image, final boolean thumb )
+    private void setImage( final Image image )
     {
-        LOGGER.debug( "setting " + ( thumb ? "thumb" : "image" ) + " for \"" + pictureURL + "\"" );
-        if ( image == getImage( thumb ) )
+        LOGGER.debug( "setting image for \"" + pictureURL + "\"" );
+        if ( image == getImage( false ) )
         {
             return;
         }
         synchronized ( this )
         {
-            if ( thumb )
-            {
-                final Image img = ( this.image == null ) ? null : this.image.get();
-                if ( img == null )
-                {
-                    thumbNailLoaded = true;
-                    thumbNail = new SoftReference<Image>( image );
-                }
-            }
-            else
-            {
-                imageLoaded = true;
-                thumbNailLoaded = false;
-                thumbNail = null;
-                this.image = new SoftReference<Image>( image );
-            }
+            imageLoaded = true;
+            thumbNailLoaded = false;
+            thumbNail = null;
+            this.image = new SoftReference<Image>( image );
         }
         if ( image == null )
         {
@@ -142,7 +130,7 @@ public class CachedImage
         }
         else
         {
-            listeners.informFinished( pictureURL, image, thumb );
+            listeners.informFinished( pictureURL, image );
         }
     }
 

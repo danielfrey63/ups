@@ -1,7 +1,7 @@
 /*
  * AbstractTaxon.java
  *
- * Created on 20. Juni 2002, 18:15
+ * Created on 20. June 2002, 18:15
  */
 package com.ethz.geobot.herbar.model;
 
@@ -25,13 +25,11 @@ public abstract class AbstractTaxon implements Taxon, Comparable
 {
     private final static Logger LOG = LoggerFactory.getLogger( AbstractTaxon.class );
 
-    /**
-     * @see Taxon#getAllChildTaxa(Level)
-     */
+    /** @see Taxon#getAllChildTaxa(Level) */
     public Taxon[] getAllChildTaxa( final Level level )
     {
-        final List taxa = new ArrayList();
-        Taxon child = null;
+        final List<Taxon> taxa = new ArrayList<Taxon>();
+        Taxon child;
         for ( int i = 0; i < getChildTaxa().length; i++ )
         {
             child = getChildTaxon( i );
@@ -42,20 +40,18 @@ public abstract class AbstractTaxon implements Taxon, Comparable
             }
             else
             {
-                final Taxon[] fromchild = child.getAllChildTaxa( level );
-                taxa.addAll( Arrays.asList( fromchild ) );
+                final Taxon[] fromChild = child.getAllChildTaxa( level );
+                taxa.addAll( Arrays.asList( fromChild ) );
             }
         }
-        return (Taxon[]) taxa.toArray( new Taxon[0] );
+        return taxa.toArray( new Taxon[taxa.size()] );
     }
 
-    /**
-     * @see Taxon#getChildTaxa(Level)
-     */
+    /** @see Taxon#getChildTaxa(Level) */
     public Taxon[] getChildTaxa( final Level level )
     {
-        final List taxa = new ArrayList();
-        Taxon curr = null;
+        final List<Taxon> taxa = new ArrayList<Taxon>();
+        Taxon curr;
         for ( int i = 0; i < getChildTaxa().length; i++ )
         {
             curr = getChildTaxon( i );
@@ -67,7 +63,7 @@ public abstract class AbstractTaxon implements Taxon, Comparable
         final Taxon[] ret = new Taxon[taxa.size()];
         for ( int i = 0; i < taxa.size(); i++ )
         {
-            ret[i] = (Taxon) taxa.get( i );
+            ret[i] = taxa.get( i );
         }
         if ( LOG.isDebugEnabled() )
         {
@@ -77,22 +73,18 @@ public abstract class AbstractTaxon implements Taxon, Comparable
         return ret;
     }
 
-    /**
-     * @see Taxon#getChildTaxon(int)
-     */
+    /** @see Taxon#getChildTaxon(int) */
     public Taxon getChildTaxon( final int index )
             throws IndexOutOfBoundsException
     {
-        LOG.debug( this.toDebugString() + " getChildTaxon(" + index + ")" );
+        LOG.trace( this.toDebugString() + " getChildTaxon(" + index + ")" );
         return getChildTaxa()[index];
     }
 
-    /**
-     * @see Taxon#getChildTaxon(Taxon)
-     */
+    /** @see Taxon#getChildTaxon(Taxon) */
     public int getChildTaxon( final Taxon child )
     {
-        int i = 0;
+        int i;
         for ( i = 0; i < getChildTaxa().length; i++ )
         {
             if ( getChildTaxon( i ) == child )
@@ -104,37 +96,24 @@ public abstract class AbstractTaxon implements Taxon, Comparable
         return -1;
     }
 
-    /**
-     * @see Taxon#getMorAttributes()
-     */
+    /** @see Taxon#getMorAttributes() */
     public MorAttribute[] getMorAttributes()
     {
-        final MorValue[] vals = getMorValues();
-        final Set hs = new HashSet();
-        for ( final MorValue val : vals )
+        final MorValue[] values = getMorValues();
+        final Set<MorAttribute> hs = new HashSet<MorAttribute>();
+        for ( final MorValue val : values )
         {
             hs.add( val.getParentAttribute() );
         }
-        return (MorAttribute[]) hs.toArray( new MorAttribute[0] );
+        return hs.toArray( new MorAttribute[hs.size()] );
     }
 
-    /**
-     * @see Taxon#getMorValue(int)
-     */
+    /** @see Taxon#getMorValue(int) */
     public MorValue getMorValue( final int index )
     {
         LOG.debug( this.toDebugString() + " getMorValue(" + index + ") " + this.getMorValues()[index] );
         return getMorValues()[index];
     }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getRelMorValue(int)
-//     */
-//    public MorValue getRelMorValue( int index ) {
-//        LOG.debug( this.toDebugString() + " getRelMorValue(" + index + ") " +
-//            getRelMorValues()[index] );
-//        return getRelMorValues()[index];
-//    }
 
     /**
      * @see Taxon#getSiblings()
@@ -157,137 +136,25 @@ public abstract class AbstractTaxon implements Taxon, Comparable
         }
     }
 
-    public Level getSubLevel( final int index )
-            throws IndexOutOfBoundsException
-    {
-        LOG.debug( this.toDebugString() + " getSubLevel(" + index + ") " + getSubLevels()[index] );
-        return getSubLevels()[index];
-    }
-
-    /**
-     * @see Taxon#getSubLevels()
-     */
+    /** @see Taxon#getSubLevels() */
     public Level[] getSubLevels()
     {
-        return (Level[]) getSubLevels( this ).toArray( new Level[0] );
+        return getSubLevels( this ).toArray( new Level[getSubLevels( this ).size()] );
     }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getEquivalentMorValues()
-//     */
-//    public MorValue[] getEquivalentMorValues() {
-//        return getEquivalentMorValues( this.getSiblings() );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getEquivalentMorValues(Taxon[])
-//     */
-//    public MorValue[] getEquivalentMorValues(Taxon[] siblings) {
-//        List list = new ArrayList();
-//        MorValue[] myVals = this.getMorValues();
-//        for ( int i = 0; i < myVals.length; i++ ) {
-//            if ( ModelUtils.isEquivalent( siblings, myVals[i] ) ) {
-//                list.add( myVals[i] );
-//            }
-//        }
-//        return (MorValue[])list.toArray( new MorValue[0] );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getUniqueMorValues()
-//     */
-//    public MorValue[] getUniqueMorValues() {
-//        return getUniqueMorValues( this.getSiblings() );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getUniqueMorValues(Taxon[])
-//     */
-//    public MorValue[] getUniqueMorValues( Taxon[] siblings ) {
-//        List vUnique = new ArrayList();
-//        MorValue[] myVals = this.getMorValues();
-//        for ( int i = 0; i < myVals.length; i++ ) {
-//            if ( ModelUtils.isUnique( siblings, myVals[i] ) ) {
-//                vUnique.add( myVals[i] );
-//            }
-//        }
-//        return (MorValue[])vUnique.toArray( new MorValue[0] );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getDifferentMorValues()
-//     */
-//    public MorValue[] getDifferentMorValues() {
-//        return getDifferentMorValues( this.getSiblings() );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getDifferentMorValues(Taxon[])
-//     */
-//    public MorValue[] getDifferentMorValues( Taxon[] siblings ) {
-//        List vDifferent = new ArrayList();
-//        MorValue[] myVals = (MorValue[])this.getMorValues();
-//        for ( int i = 0; i < myVals.length; i++ ) {
-//            if ( ModelUtils.isDifferent( siblings, myVals[i] ) ) {
-//                vDifferent.add( myVals[i] );
-//            }
-//        }
-//        return (MorValue[])vDifferent.toArray( new MorValue[0] );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getWeakMorValues()
-//     */
-//    public MorValue[] getWeakMorValues() {
-//        return getWeakMorValues( this.getSiblings() );
-//    }
-//
-//    /**
-//     * @see com.ethz.geobot.herbar.model.Taxon#getWeakMorValues(Taxon[])
-//     */
-//    public MorValue[] getWeakMorValues( Taxon[] siblings ) {
-//        List vWeak = new ArrayList();
-//        MorValue[] myVals = this.getMorValues();
-//        for ( int i = 0; i < myVals.length; i++ ) {
-//            if ( ModelUtils.isWeak( siblings, myVals[i] ) ) {
-//                vWeak.add( myVals[i] );
-//            }
-//        }
-//        return (MorValue[])vWeak.toArray( new MorValue[0] );
-//    }
 
-    /**
-     * @see Taxon#getRelevance(MorValue)
-     */
+    /** @see Taxon#getRelevance(MorValue) */
     public AbsRelevance getRelevance( final MorValue value )
     {
         return AbsRelevance.getRelevance( getSiblings(), value );
     }
 
-    public boolean isAncestorOf( Taxon descendant )
-    {
-        while ( descendant != null )
-        {
-            if ( descendant == this )
-            {
-                return true;
-            }
-            descendant = descendant.getParentTaxon();
-        }
-        return false;
-    }
-
-    /**
-     * @see Taxon#isIn(Taxon[])
-     */
+    /** @see Taxon#isIn(Taxon[]) */
     public boolean isIn( final Taxon[] list )
     {
         return ArrayUtils.contains( list, this );
     }
 
-    /**
-     * @see Comparable#compareTo(Object)
-     */
+    /** @see Comparable#compareTo(Object) */
     public int compareTo( final Object obj )
     {
         final Taxon taxon = (Taxon) obj;
@@ -296,13 +163,12 @@ public abstract class AbstractTaxon implements Taxon, Comparable
 
     public boolean equals( final Object compare )
     {
-        final Taxon taxon = (Taxon) compare;
-        if ( taxon == this )
+        if ( !( compare instanceof Taxon ) )
         {
-            // refrence compare
-            return true;
+            throw new IllegalArgumentException( "cannot compare object to taxon" );
         }
-        return getId() == taxon.getId();
+        final Taxon taxon = (Taxon) compare;
+        return taxon == this || getId() == taxon.getId();
     }
 
     public int hashCode()
@@ -313,17 +179,15 @@ public abstract class AbstractTaxon implements Taxon, Comparable
 
     public abstract String toDebugString();
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         return this.getName();
     }
 
-    private Set getSubLevels( final Taxon tax )
+    private Set<Level> getSubLevels( final Taxon tax )
     {
-        final Set levels = new HashSet();
+        final Set<Level> levels = new HashSet<Level>();
         levels.add( this.getLevel() );
         final Taxon[] children = tax.getChildTaxa();
         for ( final Taxon aChildren : children )

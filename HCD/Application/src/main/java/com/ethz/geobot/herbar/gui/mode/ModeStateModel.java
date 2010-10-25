@@ -1,7 +1,7 @@
 package com.ethz.geobot.herbar.gui.mode;
 
 import com.ethz.geobot.herbar.gui.AppHerbar;
-import com.ethz.geobot.herbar.gui.commands.ActionModusSelection;
+import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import com.ethz.geobot.herbar.modeapi.state.StateCompositeModel;
 import java.awt.Component;
@@ -68,7 +68,7 @@ public class ModeStateModel extends StateCompositeModel
         }
         catch ( Exception ex )
         {
-            new ActionModusSelection( AppHerbar.getMainFrame(), node ).actionPerformed( null );
+            new ActionModeSelection( AppHerbar.getMainFrame(), node ).actionPerformed( null );
         }
 
         return node.node( "submodels" );

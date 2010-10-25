@@ -1,7 +1,5 @@
 /*
  * LessonMode.java
- *
- * Created on xx.xx.xxxx
  */
 
 package com.ethz.geobot.herbar.gui.lesson;
@@ -51,7 +49,7 @@ public class LessonMode extends AbstractModeAdapter
                     new WizardScopePane( LessonWizardModel.MODEL, SimpleTaxStateModel.SCOPE ),
                     new WizardLevelPane( LessonWizardModel.MODEL, SimpleTaxStateModel.SCOPE, SimpleTaxStateModel.LEVEL ),
                     new WizardOrderPane( SimpleTaxStateModel.ORDER ),
-                    new WizardFocusPane( LessonWizardModel.TAXLIST, SimpleTaxStateModel.FOCUS )
+                    new WizardFocusPane( LessonWizardModel.TAXON_LIST, SimpleTaxStateModel.FOCUS )
             };
             wm = new LessonWizardModel( this.getHerbarContext(), panes, title );
         }

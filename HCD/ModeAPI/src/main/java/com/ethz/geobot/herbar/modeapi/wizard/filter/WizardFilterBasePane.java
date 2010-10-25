@@ -49,7 +49,7 @@ public class WizardFilterBasePane extends WizardPane
         setProperty( basePropertyName, base.getUserObject() );
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         base = createBasePanel( prefix );
 

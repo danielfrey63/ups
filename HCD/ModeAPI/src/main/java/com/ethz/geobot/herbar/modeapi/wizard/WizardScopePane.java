@@ -19,14 +19,10 @@ import javax.swing.JPanel;
  */
 public class WizardScopePane extends WizardPane
 {
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public final static String NAME = "lesson.scope";
 
-    /**
-     * display field for the selected scope
-     */
+    /** display field for the selected scope */
     private final String modelPropertyName;
 
     private final String scopePropertyName;
@@ -40,7 +36,7 @@ public class WizardScopePane extends WizardPane
         this.scopePropertyName = scopePropertyName;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final ActionListener actionListener = new ActionListener()
         {
@@ -82,9 +78,7 @@ public class WizardScopePane extends WizardPane
         } );
     }
 
-    /**
-     * This method should be overwritten to set the standard values.
-     */
+    /** This method should be overwritten to set the standard values. */
     public void initDefaultValues()
     {
         // try to set actual scope

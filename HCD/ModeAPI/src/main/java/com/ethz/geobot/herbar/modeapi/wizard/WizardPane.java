@@ -100,39 +100,7 @@ public abstract class WizardPane extends JPanel
      * @param prefix the prefix to the key to search for the text, icons, tooltips
      * @return panel containing the right hand side of the wizard pane
      */
-    protected JPanel createDisplayPanel( final String prefix )
-    {
-        final JPanel text = createTextPanel( prefix );
-        final JPanel edit = createEditPanel( prefix );
-
-        final JPanel panel = new JPanel( new GridBagLayout() );
-        final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = -1;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1.0;
-
-        if ( text != null )
-        {
-            gbc.gridy += 1;
-            gbc.weighty = 0.0;
-            panel.add( text, gbc );
-        }
-
-        if ( edit != null )
-        {
-            gbc.gridy += 1;
-            gbc.weighty = 0.0;
-            panel.add( edit, gbc );
-        }
-
-        gbc.gridy += 1;
-        gbc.weighty = 1.0;
-        panel.add( new JPanel(), gbc );
-
-        return panel;
-    }
+    public abstract JPanel createDisplayPanel( final String prefix );
 
     /**
      * The default text display is a simple text block component which is taking its text from the global string

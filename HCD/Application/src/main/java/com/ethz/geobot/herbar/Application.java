@@ -8,7 +8,6 @@
 
 package com.ethz.geobot.herbar;
 
-import ch.jfactory.logging.LogInterface;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.filter.FilterFactory;
 import com.ethz.geobot.herbar.filter.FilterPersistentException;
@@ -150,7 +149,7 @@ public class Application
     {
         System.setProperty( "sun.awt.exception.handler", ExceptionHandler.class.getName() );
         Strings.setResourceBundle( ResourceBundle.getBundle( "com.ethz.geobot.herbar.gui.Strings" ) );
-        ROOT_NAME = Strings.getString( "FILTERNAME.ALLTAXA" );
+        ROOT_NAME = Strings.getString( "FILTER_NAME.ALL_TAXA" );
         LOG = LoggerFactory.getLogger( Application.class );
         INSTANCE = new Application();
         ROOT_MODEL = INSTANCE.getModel();

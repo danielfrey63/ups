@@ -95,7 +95,7 @@ public class WizardFilterDefinitionPane extends WizardPane
         checkLevels( (FilterTreeNode) model.getRoot() );
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         this.addComponentListener( new ComponentAdapter()
         {

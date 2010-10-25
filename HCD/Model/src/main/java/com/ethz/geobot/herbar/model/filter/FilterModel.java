@@ -100,6 +100,48 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return dependentModel.getLevel( name );
     }
 
+    public void setDependentModel( final HerbarModel model )
+    {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "dependent model change to: " + model );
+        }
+        if ( dependentModel == model )
+        {
+            return;
+        }
+        // Todo: Do not clear the existing filter, but migrate them into the new dependency.
+        // One approach could be to set all scope for unknown taxa to the root taxon, and to reestablish the
+        // consistency with respect to cached levels, children, references to base models etc (see commented code
+        // below). Another approach could be to recreate each scope with respect to the correct dependent taxon, which
+        // might also has to be recreated, to reflect the new dependency, as dependency model is stored also in the
+        // dependent filter taxon.
+        this.dependentModel = model;
+        filterDetails.clear();
+        addFilterDetail();
+//        for (Iterator iterator = filterDetails.iterator(); iterator.hasNext();) {
+//            FilterDefinitionDetail detail = (FilterDefinitionDetail) iterator.next();
+//
+//            Taxon scope = detail.getScope();
+//            if (dependentModel instanceof FilterModel && !((FilterModel)dependentModel).isIn(scope)) {
+//                scope = getRootTaxon();
+//            }
+//            FilterTaxon filterTaxon = (FilterTaxon) scope;
+//            filterTaxon.clearCachedSubLevels();
+//            Taxon dependent = filterTaxon.getDependentTaxon();
+//            if (dependent instanceof FilterTaxon) {
+//                FilterTaxon dependentTaxon = (FilterTaxon) dependent;
+//                dependentTaxon.setFilterModel((FilterModel)model);
+//            }
+//            detail.setScope(scope);
+//
+//            Level[] levels = detail.getLevels();
+//            levels = (Level[]) ArrayUtils.intersect(levels, dependentModel.getLevels(), new Level[0]);
+//            detail.setLevels(levels);
+//        }
+        notifyModelChange();
+    }
+
     public Taxon getTaxon( final String taxonName )
     {
         Taxon taxon = null;

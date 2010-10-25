@@ -48,7 +48,7 @@ public interface HerbarContext
      */
     Set getModelNames();
 
-    Set getModels();
+    Set<HerbarModel> getModels();
 
     /**
      * Return a set of all available filters.

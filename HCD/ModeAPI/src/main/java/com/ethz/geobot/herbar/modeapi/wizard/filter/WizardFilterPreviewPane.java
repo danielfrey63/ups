@@ -24,9 +24,7 @@ public class WizardFilterPreviewPane extends WizardPane
 {
     private static final Logger LOG = LoggerFactory.getLogger( WizardFilterPreviewPane.class );
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public static final String NAME = "filter.preview";
 
     private final String filterPropertyName;
@@ -44,7 +42,7 @@ public class WizardFilterPreviewPane extends WizardPane
         preview.setHerbarModel( getFilter() );
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final JPanel text = createTextPanel( prefix );
         final JPanel title = createDefaultTitlePanel( prefix );

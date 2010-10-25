@@ -1,7 +1,7 @@
 package com.ethz.geobot.herbar.modeapi.wizard;
 
 import ch.jfactory.component.EditItem;
-import com.ethz.geobot.herbar.gui.tax.LevelPopup;
+import com.ethz.geobot.herbar.gui.tax.LevelPopUp;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -19,9 +19,7 @@ import javax.swing.JPanel;
  */
 public class WizardLevelPane extends WizardPane
 {
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public final static String NAME = "lesson.level";
 
     private final String levelPropertyName;
@@ -40,7 +38,7 @@ public class WizardLevelPane extends WizardPane
         this.levelPropertyName = levelPropertyName;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final ActionListener actionListener = new ActionListener()
         {
@@ -51,14 +49,14 @@ public class WizardLevelPane extends WizardPane
                     return;
                 }
                 final Level[] allLevels = getAllLevels();
-                final LevelPopup popup = new LevelPopup( allLevels )
+                final LevelPopUp popUp = new LevelPopUp( allLevels )
                 {
                     public void itemSelected( final Object obj )
                     {
                         setLevel( (Level) obj );
                     }
                 };
-                popup.showPopup( edit, getSubLevels(), getLevel() );
+                popUp.showPopup( edit, getSubLevels(), getLevel() );
             }
         };
         edit = createDefaultEdit( prefix, actionListener );
@@ -97,9 +95,7 @@ public class WizardLevelPane extends WizardPane
         } );
     }
 
-    /**
-     * This method should be overwritten to set the standard values.
-     */
+    /** This method should be overwritten to set the standard values. */
     public void initDefaultValues()
     {
         // try to set actual scope

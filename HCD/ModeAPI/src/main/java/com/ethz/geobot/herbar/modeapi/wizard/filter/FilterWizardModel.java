@@ -10,6 +10,7 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.wizard.DefaultWizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.NameValidator;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
+import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 
 /**
@@ -48,6 +49,50 @@ public class FilterWizardModel extends DefaultWizardModel
     public String getDialogTitle()
     {
         return title;
+    }
+
+    /**
+     * Getter for property filterName.
+     *
+     * @return Value of property filterName.
+     */
+    public String getFilterName()
+    {
+        return filterModel.getName();
+    }
+
+    /**
+     * Setter for property filterName.
+     *
+     * @param filterName New value of property filterName.
+     */
+    public void setFilterName( final String filterName )
+    {
+        final String oldFilterName = filterModel.getName();
+        filterModel.setName( filterName );
+        propertySupport.firePropertyChange( FILTER_NAME, oldFilterName, filterName );
+    }
+
+    /**
+     * Getter for property base.
+     *
+     * @return Value of property base.
+     */
+    public HerbarModel getBaseModel()
+    {
+        return filterModel.getDependantModel();
+    }
+
+    /**
+     * Setter for property base.
+     *
+     * @param baseModel New value of property base.
+     */
+    public void setBaseModel( final HerbarModel baseModel )
+    {
+        final HerbarModel oldBase = filterModel.getDependantModel();
+        filterModel.setDependentModel( baseModel );
+        propertySupport.firePropertyChange( FILTER_BASE, oldBase, baseModel );
     }
 
     /**

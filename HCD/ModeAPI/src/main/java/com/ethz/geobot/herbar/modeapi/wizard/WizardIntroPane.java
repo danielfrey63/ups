@@ -29,7 +29,7 @@ public class WizardIntroPane extends WizardPane
         getWizardModel().setStart( ( check.isSelected() ? 0 : 1 ) );
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final JPanel panel = new JPanel( new BorderLayout() );
         final JScrollPane scrollPane = createIntroArea( prefix );

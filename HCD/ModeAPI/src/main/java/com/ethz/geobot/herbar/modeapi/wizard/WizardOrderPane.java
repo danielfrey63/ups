@@ -33,7 +33,7 @@ public class WizardOrderPane extends WizardPane
         this.orderedPropertyName = orderedPropertyName;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final ActionListener actionListener = new ActionListener()
         {

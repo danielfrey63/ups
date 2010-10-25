@@ -23,9 +23,7 @@ public class WizardFocusPane extends WizardPane
 {
     public static final String NAME = "lesson.focus";
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     EditItem edit;
 
     private final String taxListPropertyName;
@@ -39,7 +37,7 @@ public class WizardFocusPane extends WizardPane
         this.focusPropertyName = focusPropertyName;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final ActionListener actionListener = new ActionListener()
         {
@@ -50,7 +48,7 @@ public class WizardFocusPane extends WizardPane
                     return;
                 }
                 final Taxon[] list = getTaxList();
-                Arrays.sort( list, new ToStringComparator() );
+                Arrays.sort( list, new ToStringComparator<Taxon>() );
                 final ListDialog dialog = new ListDialog( (JDialog) getTopLevelAncestor(), "DIALOG.FOCUS", list );
                 dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
                 dialog.setSize( 300, 300 );
@@ -94,9 +92,7 @@ public class WizardFocusPane extends WizardPane
                 } );
     }
 
-    /**
-     * This method should be overwritten to set the standard values.
-     */
+    /** This method should be overwritten to set the standard values. */
     public void initDefaultValues()
     {
         // try to set actual scope

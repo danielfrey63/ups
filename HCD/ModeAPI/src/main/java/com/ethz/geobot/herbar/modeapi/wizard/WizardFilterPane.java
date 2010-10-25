@@ -53,9 +53,7 @@ public class WizardFilterPane extends WizardPane
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
-    /**
-     * name of the pane
-     */
+    /** name of the pane */
     public static final String NAME = "lesson.filter";
 
     private static final String INTRO_NAME = "filter.intro";
@@ -74,7 +72,7 @@ public class WizardFilterPane extends WizardPane
         this.modelPropertyName = modelPropertyName;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final JPanel text = createTextPanel( prefix );
 
@@ -151,10 +149,6 @@ public class WizardFilterPane extends WizardPane
         {
             public void actionPerformed( final ActionEvent event )
             {
-                if ( !isVisible() )
-                {
-                    return;
-                }
                 final HerbarModel model = (HerbarModel) list.getSelectedValue();
                 setModel( model );
                 activate();
@@ -179,11 +173,7 @@ public class WizardFilterPane extends WizardPane
         {
             public void actionPerformed( final ActionEvent event )
             {
-                if ( !isVisible() )
-                {
-                    return;
-                }
-                invokeEditFilterWizrad();
+                invokeEditFilterWizard();
             }
         };
         final JButton button = createListEditButton( prefix + ".EDIT.BUTTON", action );
@@ -218,7 +208,7 @@ public class WizardFilterPane extends WizardPane
                     final HerbarContext herbarContext = getWizardModel().getHerbarContext();
                     if ( herbarContext.getCurrentModel() == model )
                     {
-                        final String defaultModel = Strings.getString( "FILTERNAME.ALLTAXA" );
+                        final String defaultModel = Strings.getString( "FILTER_NAME.ALL_TAXA" );
                         setModel( herbarContext.getModel( defaultModel ) );
                     }
                 }
@@ -263,7 +253,7 @@ public class WizardFilterPane extends WizardPane
                 new WizardFilterPreviewPane( FilterWizardModel.FILTER_MODEL )
         };
         final HerbarContext herbarContext = getWizardModel().getHerbarContext();
-        final NameValidator validator = new FilterModelNameValidater( herbarContext );
+        final NameValidator validator = new FilterModelNameValidator( herbarContext );
         final String filterName = validator.getInitialName();
         final HerbarModel base = herbarContext.getCurrentModel();
         final FilterModel model = new FilterModel( base, filterName );
@@ -283,7 +273,7 @@ public class WizardFilterPane extends WizardPane
         }
     }
 
-    private void invokeEditFilterWizrad()
+    private void invokeEditFilterWizard()
     {
         final WizardPane[] panes = new WizardPane[]{
                 new WizardIntroPane( INTRO_NAME ),
@@ -293,7 +283,7 @@ public class WizardFilterPane extends WizardPane
                 new WizardFilterPreviewPane( FilterWizardModel.FILTER_MODEL )
         };
         final HerbarContext herbarContext = getWizardModel().getHerbarContext();
-        final NameValidator validator = new FilterModelNameValidater( herbarContext );
+        final NameValidator validator = new FilterModelNameValidator( herbarContext );
         final FilterModel model = (FilterModel) list.getSelectedValue();
         validator.setInitialName( model.getName() );
         final String title = Strings.getString( "WIZARD.FILTER.TITLE" );
@@ -326,16 +316,12 @@ public class WizardFilterPane extends WizardPane
         current.setUserObject( ( (LessonWizardModel) getWizardModel() ).getModel() );
     }
 
-    private void setModel( final HerbarModel fmodel )
+    private void setModel( final HerbarModel model )
     {
-        setProperty( modelPropertyName, fmodel );
+        setProperty( modelPropertyName, model );
     }
 
     public void initDefaultValues()
-    {
-    }
-
-    public void fillModelSelection()
     {
     }
 
@@ -356,18 +342,18 @@ public class WizardFilterPane extends WizardPane
 
         public Object getElementAt( final int i )
         {
-            final Set models = wizardModel.getHerbarContext().getModels();
-            final HerbarModel[] listData = (HerbarModel[]) models.toArray( new HerbarModel[0] );
-            Arrays.sort( listData, new ToStringComparator() );
+            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
+            Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
             return listData[i];
         }
 
         public void deleteElement( final HerbarModel model )
         {
-            final Set models = wizardModel.getHerbarContext().getModels();
-            final HerbarModel[] listData = (HerbarModel[]) models.toArray( new HerbarModel[0] );
-            Arrays.sort( listData, new ToStringComparator() );
-            final List list = new ArrayList( Arrays.asList( listData ) );
+            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
+            Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
+            final List<HerbarModel> list = new ArrayList<HerbarModel>( Arrays.asList( listData ) );
 
             wizardModel.getHerbarContext().removeModel( model );
             final int index = list.indexOf( model );
@@ -378,22 +364,22 @@ public class WizardFilterPane extends WizardPane
         {
             wizardModel.getHerbarContext().saveModel( model );
 
-            final Set models = wizardModel.getHerbarContext().getModels();
-            final HerbarModel[] listData = (HerbarModel[]) models.toArray( new HerbarModel[0] );
-            Arrays.sort( listData, new ToStringComparator() );
-            final List list = new ArrayList( Arrays.asList( listData ) );
+            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
+            Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
+            final List<HerbarModel> list = new ArrayList<HerbarModel>( Arrays.asList( listData ) );
             final int index = list.indexOf( model );
             fireIntervalAdded( this, index, index );
         }
     }
 
-    public static class FilterModelNameValidater implements NameValidator
+    public static class FilterModelNameValidator implements NameValidator
     {
         private final HerbarContext context;
 
         private String initialName;
 
-        public FilterModelNameValidater( final HerbarContext context )
+        public FilterModelNameValidator( final HerbarContext context )
         {
             this.context = context;
             this.initialName = getValidName();
@@ -403,14 +389,14 @@ public class WizardFilterPane extends WizardPane
         {
             String prefix = Strings.getString( "WIZARD.FILTER.NAME.DEFAULT.PREFIX" );
             prefix = ( prefix.equals( "" ) ? "New" : prefix );
-            String pattern = Strings.getString( "WIZARD.FILTER.NAME.DEFAULT.POSTFIX" );
+            String pattern = Strings.getString( "WIZARD.FILTER.NAME.DEFAULT.POST_FIX" );
             pattern = ( pattern.equals( "" ) ? "000" : pattern );
-            int postfix = 1;
+            int postFix = 1;
             String newName;
             final NumberFormat format = new DecimalFormat( pattern );
-            while ( !isValidName( newName = prefix + format.format( postfix ) ) )
+            while ( !isValidName( newName = prefix + format.format( postFix ) ) )
             {
-                postfix++;
+                postFix++;
             }
             return newName;
         }

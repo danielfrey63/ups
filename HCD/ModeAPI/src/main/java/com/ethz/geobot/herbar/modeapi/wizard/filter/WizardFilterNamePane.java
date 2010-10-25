@@ -56,7 +56,7 @@ public class WizardFilterNamePane extends WizardPane
         setProperty( namePropertyName, name.getText() );
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         name = createNamePanel( prefix );
         warn = createWarnLabel( prefix );

@@ -124,7 +124,7 @@ public class WizardModePane extends WizardPane
         return ret;
     }
 
-    protected JPanel createDisplayPanel( final String prefix )
+    public JPanel createDisplayPanel( final String prefix )
     {
         final JPanel textPanel = createTextPanel( prefix );
         final JPanel titlePanel = createDefaultTitlePanel( prefix );

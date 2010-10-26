@@ -19,7 +19,7 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 {
     private final PictureCache cache;
 
-    private final ArrayList<Object> list = new ArrayList<Object>();
+    private final ArrayList<PictureTheme> list = new ArrayList<PictureTheme>();
 
     public TabbedPictureDetailPanel( final CachedImageLocator locator )
     {
@@ -36,24 +36,24 @@ public class TabbedPictureDetailPanel extends JTabbedPane
         return (PictureDetailPanel) getComponentAt( i );
     }
 
-    public PictureDetailPanel addTab( final Object o, final String s )
+    public PictureDetailPanel addTab( final PictureTheme theme )
     {
         final PictureDetailPanel panel = new PictureDetailPanel( cache );
-        this.add( panel, s );
-        list.add( o );
+        this.add( panel, theme.getName() );
+        list.add( theme );
         return panel;
     }
 
-    public Object getObjectAt( final int i )
+    private PictureTheme getObjectAt( final int i )
     {
         return list.get( i );
     }
 
-    public int getObjectIndex( final Object o )
+    private int getObjectIndex( final PictureTheme theme )
     {
         for ( int i = 0; i < list.size(); i++ )
         {
-            if ( o.equals( getObjectAt( i ) ) )
+            if ( theme.equals( getObjectAt( i ) ) )
             {
                 return i;
             }
@@ -72,7 +72,7 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
     public void setEnabled( final int t, final boolean b )
     {
-        final PictureTheme theme = (PictureTheme) getObjectAt( t );
+        final PictureTheme theme = getObjectAt( t );
         final String color = b ? "000000" : "999999";
         this.setTitleAt( t, "<html><body><font color='#" + color + "'>" + theme.getName() + "</font></body></html>" );
     }

@@ -243,7 +243,7 @@ public class PicturePanel extends JPanel
     {
         for ( final PictureTheme theme : themes )
         {
-            final PictureDetailPanel detailPanel = pictureTab.addTab( theme, theme.getName() );
+            final PictureDetailPanel detailPanel = pictureTab.addTab( theme );
             createDetailPanelListener( detailPanel );
         }
     }

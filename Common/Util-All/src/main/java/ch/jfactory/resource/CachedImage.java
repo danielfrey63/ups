@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is a SoftReference to an Image loaded from
+ * This is a SoftReference to an Image loaded from.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
@@ -46,9 +46,9 @@ public class CachedImage
         this.locator = locator;
     }
 
-    public synchronized Image loadImage( final boolean thumb )
+    public synchronized Image loadImage()
     {
-        final Image i = PictureLoader.load( locator.getPath() + pictureURL, thumb );
+        final Image i = PictureLoader.load( locator.getPath() + pictureURL );
         setImage( i );
         return i;
     }

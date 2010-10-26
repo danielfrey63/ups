@@ -22,9 +22,9 @@ public class ZoomingImageComponent extends JScrollPane
 {
     private final CachedImageComponent ci;
 
-    public ZoomingImageComponent( final PictureCache c, final int size )
+    public ZoomingImageComponent( final PictureCache cache, final int size )
     {
-        ci = new CachedImageComponent( c, size );
+        ci = new CachedImageComponent( cache, size );
         setViewportView( ci );
         setBorder( BorderFactory.createEmptyBorder() );
 

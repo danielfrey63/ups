@@ -60,10 +60,11 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     public synchronized void setImage( final String name, final boolean thumb )
     {
+        LOGGER.debug( "setting " + ( thumb ? "thumbnail" : "image" ) + " \"" + name + "\"" );
         CachedImage im = null;
         if ( name != null )
         {
-            im = cache.addOrGetCachedImage( name );
+            im = cache.getCachedImage( name );
         }
         boolean reValidate = false;
         if ( img != null )
@@ -202,12 +203,8 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     public synchronized void loadFinished( final String name, final Image img, final boolean thumb )
     {
         LOGGER.debug( "loading of image \"" + name + "\" finished" );
-        boolean ok;
         size = null;
-        ok = ( image == null );
-        ok = ok || ( image.get() == null );
-        ok = ok || ( image.get() != img );
-        if ( ok )
+        if ( ( image == null ) || ( image.get() == null ) || ( image.get() != img ) )
         {
             image = null;
             repaint();
@@ -216,6 +213,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     public synchronized void loadAborted( final String name )
     {
+        LOGGER.debug( "loading of image \"" + name + "\" aborted" );
         image = null;
         size = null;
         repaint();
@@ -223,6 +221,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     public void loadStarted( final String name )
     {
+        LOGGER.debug( "loading of image \"" + name + "\" started" );
     }
 
 }

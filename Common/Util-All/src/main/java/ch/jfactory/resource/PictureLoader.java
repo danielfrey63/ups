@@ -13,7 +13,6 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import org.slf4j.Logger;
@@ -25,28 +24,20 @@ public class PictureLoader
 
     private static final Logger LOGGER = LoggerFactory.getLogger( PictureLoader.class );
 
-    public static Image load( final String pictureURL, final boolean thumb )
+    public static Image load( final String pictureURL )
     {
         try
         {
             final File file = new File( pictureURL );
-            LOGGER.info( "loading of " + ( thumb ? "thumbnail \"" : "image \"" ) + file.getName() + "\" initiated" );
+            LOGGER.info( "loading of image \"" + file.getName() + "\" initiated" );
             if ( file.exists() )
             {
+                Thread.sleep( 1000 );
                 final ImageInputStream iis = ImageIO.createImageInputStream( file );
                 final ImageReader reader = ImageIO.getImageReaders( iis ).next();
                 reader.setInput( iis );
                 final Image image;
-                if ( thumb )
-                {
-                    final ImageReadParam parameter = new ImageReadParam();
-                    parameter.setSourceSubsampling( 2, 2, 0, 0 );
-                    image = reader.read( 0, parameter );
-                }
-                else
-                {
-                    image = reader.read( 0 );
-                }
+                image = reader.read( 0 );
                 reader.dispose();
                 iis.close();
                 LOGGER.info( "loading of image \"" + file.getName() + "\" finished" );

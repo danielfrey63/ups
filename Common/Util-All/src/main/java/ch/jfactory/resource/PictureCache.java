@@ -68,12 +68,12 @@ public class PictureCache
      * @return a CachedImage-Object representing the image
      * @see CachedImage
      */
-    public CachedImage addOrGetCachedImage( final String name )
+    public CachedImage getCachedImage( final String name )
     {
         CachedImage image = cache.get( name );
         if ( image == null )
         {
-            LOGGER.info( "adding image \"" + name + "\" to cache" );
+            LOGGER.info( "adding cached image \"" + name + "\" to cache" );
             image = new CachedImage( locator, name );
             cache.put( name, image );
         }
@@ -81,8 +81,8 @@ public class PictureCache
     }
 
     /**
-     * The image define by the name will be inserted into the cache. It is inserted only if it is not there already. If
-     * it is there and should be inserted at the first position, it is moved to the first position.
+     * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the
+     * image has to be put at the first position.
      *
      * @param name  name of the image
      * @param thumb whether it is a thumbnail
@@ -90,7 +90,7 @@ public class PictureCache
      */
     public void cacheImage( final String name, final boolean thumb, final boolean first )
     {
-        if ( !addOrGetCachedImage( name ).loaded( thumb ) )
+        if ( !getCachedImage( name ).loaded( thumb ) )
         {
             final boolean isNew;
             synchronized ( queue )
@@ -139,19 +139,22 @@ public class PictureCache
                 try
                 {
                     final String name;
-                    final boolean thumb = false;
                     synchronized ( queue )
                     {
                         name = queue.removeFirst();
                         LOGGER.debug( "popped \"" + name + "\" from queue " + queue.toString() );
                     }
-                    LOGGER.info( "caching image \"" + name + "\"" );
-                    final CachedImage img = addOrGetCachedImage( name );
-                    if ( !img.loaded( thumb ) )
+                    final CachedImage img = getCachedImage( name );
+                    if ( !img.loaded( false ) )
                     {
-                        addOrGetCachedImage( name ).loadImage( thumb );
+                        LOGGER.info( "loading cached image \"" + name + "\"" );
+                        img.loadImage();
+                        LOGGER.info( "loaded cached image \"" + name + "\"" );
                     }
-                    LOGGER.info( "cached image \"" + name + "\"" );
+                    else
+                    {
+                        LOGGER.info( "cached image \"" + name + "\" loaded already" );
+                    }
                 }
                 catch ( NoSuchElementException ex )
                 {

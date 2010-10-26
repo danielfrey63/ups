@@ -549,7 +549,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
             final Map<String, XStreamConverter.NamedAlias> namedAliases = new HashMap<String, XStreamConverter.NamedAlias>();
             namedAliases.put( "index", new XStreamConverter.NamedAlias( Constraints.class, "indexToConstraints" ) );
 
-            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, new HashMap<Class, String>(), namedAliases);
+            converter = new XStreamConverter<SimpleModelList>( aliases, implicitCollections, new HashMap<Class, String>(), namedAliases );
         }
         return converter;
     }
@@ -839,7 +839,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
         UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
         UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
         System.setProperty( "log4j.configuration", "/log4j.properties" );
-        System.setProperty( "jfactory.resource.path", "/icon" );
+        System.setProperty( "xmatrix.resource.path", "/icon" );
         System.setProperty( "jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings" );
         final JFrame f = new JFrame();
         f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

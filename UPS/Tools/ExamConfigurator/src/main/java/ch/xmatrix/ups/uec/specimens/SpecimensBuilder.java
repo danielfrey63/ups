@@ -358,7 +358,7 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
             final Map<Class, String> omits = new HashMap<Class, String>();
             omits.put( AbstractListModel.class, "listenerList" );
 
-            converter = new XStreamConverter( aliases, implicitCollections, omits);
+            converter = new XStreamConverter( aliases, implicitCollections, omits );
         }
         return converter;
     }
@@ -493,7 +493,7 @@ public class SpecimensBuilder extends AbstractDetailsBuilder
     {
         UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
         UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
-        System.setProperty( "jfactory.resource.path", "/icon" );
+        System.setProperty( "xmatrix.resource.path", "/icon" );
         System.setProperty( "jfactory.strings.resource", "ch.xmatrix.ups.uec.Strings" );
         final JFrame f = new JFrame();
         f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

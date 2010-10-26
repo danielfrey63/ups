@@ -22,5 +22,6 @@
         <module>PMB</module>
         <module>Third</module>
         <module>Maven</module>
+        <module>Kata</module>
     </modules>
 </project>

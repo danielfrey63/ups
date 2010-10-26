@@ -180,7 +180,7 @@ public class MainBuilder extends AbstractMainBuilder
     {
         UIManager.setLookAndFeel( new Plastic3DLookAndFeel() );
         UIManager.put( "ToolBar.border", new EmptyBorder( 0, 0, 0, 0 ) );
-        System.setProperty( "jfactory.resource.path", "/icon" );
+        System.setProperty( "xmatrix.resource.path", "/icon" );
         Strings.setResourceBundle( ResourceBundle.getBundle( "ch.xmatrix.ups.uec.view.Strings" ) );
         final JFrame f = new JFrame();
         f.setDefaultCloseOperation( EXIT_ON_CLOSE );

@@ -56,21 +56,21 @@ public class ImageLocator
 
     static
     {
-        String iconPath = System.getProperty( "jfactory.resource.path" );
-        if ( iconPath == null )
-        {
-            iconPath = System.getProperty( "user.dir" );
-            LOGGER.warn( "system property \"jfactory.resource.path\" not found, defaulting to \"" + iconPath + "\"" );
-        }
-        iconLocator = new CachedImageLocator( getIconPath( iconPath ) );
+        iconLocator = new CachedImageLocator( getIconPath() );
         pictLocator = new CachedImageLocator( getSourcePath() );
 
         LOGGER.info( "icon resources at " + iconLocator );
         LOGGER.info( "pictures resources at " + pictLocator );
     }
 
-    private static String getIconPath( final String iconPath )
+    private static String getIconPath()
     {
+        String iconPath = System.getProperty( "xmatrix.resource.path" );
+        if ( iconPath == null )
+        {
+            iconPath = System.getProperty( "user.dir" );
+            LOGGER.warn( "system property \"xmatrix.resource.path\" not found, defaulting to \"" + iconPath + "\"" );
+        }
         return iconPath.endsWith( "/" ) || iconPath.endsWith( "\\" ) ? iconPath : iconPath + "/";
     }
 

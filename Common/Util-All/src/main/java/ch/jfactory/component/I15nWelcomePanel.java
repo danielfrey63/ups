@@ -135,8 +135,8 @@ public class I15nWelcomePanel extends GradientBackgroundPanel
      *
      * @param resourceKey    the base resourceKey for looking up the strings
      * @param actionKeys     the actions to put into the panel
-     * @param commandManager if the commands are based on {@link ActionCommand} implementations.
-     *                       Otherwise {@link ActionManager} is used.
+     * @param commandManager if the commands are based on {@link ActionCommand} implementations. Otherwise {@link
+     *                       ActionManager} is used.
      */
     public I15nWelcomePanel( final String resourceKey, final String[] actionKeys, final CommandManager commandManager )
     {
@@ -345,7 +345,7 @@ public class I15nWelcomePanel extends GradientBackgroundPanel
             }
             final float opacity = Float.parseFloat( opacityString );
             // Load image from specified resource path
-            final String resourceName = System.getProperty( "jfactory.resource.path" ) + "/" + imageName;
+            final String resourceName = System.getProperty( "xmatrix.resource.path" ) + "/" + imageName;
             URL resource = I15nWelcomePanel.class.getResource( resourceName );
             // Or load it from the classpath
             if ( resource == null )

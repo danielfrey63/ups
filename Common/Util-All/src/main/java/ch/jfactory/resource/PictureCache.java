@@ -51,7 +51,7 @@ public class PictureCache
         cachingThread.start();
     }
 
-    /** Clears all entries from cache. */
+    /** Clears all entries from caching queue. */
     synchronized public void clearCachingList()
     {
         synchronized ( queue )

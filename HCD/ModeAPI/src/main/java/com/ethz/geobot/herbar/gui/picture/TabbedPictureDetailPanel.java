@@ -9,7 +9,7 @@
 package com.ethz.geobot.herbar.gui.picture;
 
 import ch.jfactory.image.PictureDetailPanel;
-import ch.jfactory.resource.CachedImageLocator;
+import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.PictureCache;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import java.util.ArrayList;
@@ -21,14 +21,9 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
     private final ArrayList<PictureTheme> list = new ArrayList<PictureTheme>();
 
-    public TabbedPictureDetailPanel( final CachedImageLocator locator )
+    public TabbedPictureDetailPanel()
     {
-        this.cache = new PictureCache( locator );
-    }
-
-    public void clearCachingList()
-    {
-        cache.clearCachingList();
+        this.cache = new PictureCache( ImageLocator.pictLocator );
     }
 
     public PictureDetailPanel getDetail( final int i )
@@ -63,7 +58,6 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
     public void clearAll()
     {
-        cache.clearCachingList();
         for ( int i = 0; i < list.size(); i++ )
         {
             getDetail( i ).clear();

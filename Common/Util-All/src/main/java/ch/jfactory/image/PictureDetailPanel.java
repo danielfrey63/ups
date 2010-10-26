@@ -45,7 +45,7 @@ public class PictureDetailPanel extends JPanel
 
     private static final int MAXSIZE = 370;
 
-    private ZoomingImageComponent image;
+    private ZoomingImageComponent imagePanel;
 
     private final PictureCache cache;
 
@@ -66,10 +66,10 @@ public class PictureDetailPanel extends JPanel
      * @param name name of the image (taken from <see>PictureCache</see>)
      * @see PictureCache
      */
-    public void setImage( final String name )
+    public void setImagePanel( final String name )
     {
         LOGGER.debug( "setting image to \"" + name + "\"" );
-        image.setImage( name, false );
+        imagePanel.setImage( name, false );
     }
 
     /**
@@ -94,8 +94,9 @@ public class PictureDetailPanel extends JPanel
 
     public void clear()
     {
-        image.setImage( null, false );
+        imagePanel.setImage( null, false );
         thumbPanel.removeAll();
+        cache.clearCachingList();
     }
 
     public void addImage( final String s, final String toolTip )
@@ -108,7 +109,7 @@ public class PictureDetailPanel extends JPanel
     {
         final int gap = Constants.GAP_WITHIN_TOGGLES;
 
-        image = createImageComponent();
+        imagePanel = createImageComponent();
         final JButton zoomIn = createZoomButton();
         thumbPanel = createThumbPanel();
 
@@ -127,7 +128,7 @@ public class PictureDetailPanel extends JPanel
 
         setLayout( new BorderLayout() );
         add( controlPanel, BorderLayout.NORTH );
-        add( image, BorderLayout.CENTER );
+        add( imagePanel, BorderLayout.CENTER );
     }
 
     private ZoomingImageComponent createImageComponent()
@@ -147,8 +148,8 @@ public class PictureDetailPanel extends JPanel
         {
             public void actionPerformed( final ActionEvent e )
             {
-                final String img = image.getImage();
-                image.setImage( e.getActionCommand(), false );
+                final String img = imagePanel.getImage();
+                imagePanel.setImage( e.getActionCommand(), false );
                 propertySupport.firePropertyChange( IMAGE, img, e.getActionCommand() );
             }
         } );
@@ -173,12 +174,12 @@ public class PictureDetailPanel extends JPanel
 
     public void setZoomed( final boolean b )
     {
-        final boolean old = image.isZoomed();
+        final boolean old = imagePanel.isZoomed();
         if ( b == old )
         {
             return;
         }
-        image.setZoom( b );
+        imagePanel.setZoom( b );
         propertySupport.firePropertyChange( ZOOM, Boolean.valueOf( old ), Boolean.valueOf( b ) );
     }
 
@@ -225,7 +226,7 @@ public class PictureDetailPanel extends JPanel
 
         public boolean isSelected()
         {
-            return image.isZoomed();
+            return imagePanel.isZoomed();
         }
     }
 

@@ -11,7 +11,6 @@ package com.ethz.geobot.herbar.gui.picture;
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.image.PictureDetailPanel;
 import ch.jfactory.lang.ArrayUtils;
-import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.PictureTheme;
@@ -121,7 +120,7 @@ public class PicturePanel extends JPanel
         return pictureTab.getThemePanel( theme );
     }
 
-    public void cacheTaxon( final Taxon taxon )
+    private void cacheTaxon( final Taxon taxon )
     {
         LOG.debug( "caching taxon \"" + taxon + "\"" );
         if ( taxon == null )
@@ -142,19 +141,23 @@ public class PicturePanel extends JPanel
     }
 
     /**
-     * Changes the Taxon to be displayed in the PicturePanel
+     * Changes the Taxon to be displayed in the PicturePanel and optionally caches the taxa given.
      *
-     * @param taxon taxon to be displayed
+     * @param taxon   taxon to be displayed
+     * @param toCache taxa that should be cached
      */
-    public void setTaxon( final Taxon taxon )
+    public void setTaxon( final Taxon taxon, final Taxon... toCache )
     {
         LOG.info( "setting taxon to \"" + taxon + "\"" );
         model.setTaxon( taxon );
-        pictureTab.clearCachingList();
         pictureTab.clearAll();
         for ( final PictureTheme theme : themes )
         {
             fillTheme( theme );
+        }
+        for ( final Taxon taxonToCache : toCache )
+        {
+            cacheTaxon( taxonToCache );
         }
         setImage();
     }
@@ -201,7 +204,7 @@ public class PicturePanel extends JPanel
         textArea.setVisible( isShowing );
         textArea.setText( comment );
         panel.setToolTipText( comment );
-        panel.setImage( ( isPicture ? pic.getPicture().getName() : null ) );
+        panel.setImagePanel( ( isPicture ? pic.getPicture().getName() : null ) );
         panel.setZoomed( model.isZoomed() );
     }
 
@@ -225,7 +228,7 @@ public class PicturePanel extends JPanel
 
     private JComponent buildTab()
     {
-        pictureTab = new TabbedPictureDetailPanel( ImageLocator.pictLocator );
+        pictureTab = new TabbedPictureDetailPanel();
         pictureTab.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
         createTabs();
         pictureTab.addChangeListener( new ChangeListener()

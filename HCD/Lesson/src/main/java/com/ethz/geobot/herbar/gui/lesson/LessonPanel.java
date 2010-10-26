@@ -199,9 +199,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         final Taxon focus = (Taxon) e.getNewValue();
         lessonPanel.setTaxFocus( focus );
         askPanel.setTaxFocus( focus );
-        picturePanel.setTaxon( focus );
-        picturePanel.cacheTaxon( taxStateModel.getNext( focus ) );
-        picturePanel.cacheTaxon( taxStateModel.getPrev( focus ) );
+        picturePanel.setTaxon( focus, taxStateModel.getNext( focus ), taxStateModel.getPrev( focus ) );
     }
 
     public void setModel( final HerbarModel newModel )

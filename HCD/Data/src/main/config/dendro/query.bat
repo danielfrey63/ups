@@ -1,0 +1,1 @@
+java -cp "C:\Dokumente und Einstellungen\Daniel Frey\.m2\repository\hsqldb\hsqldb\1.7.1\hsqldb-1.7.1.jar" org.hsqldb.util.QueryTool -url jdbc:hsqldb:D:\Daten\All\Sources\HCD\Data\src\main\config\dendro\ -driver org.hsqldb.jdbcDriver -database dendro -user sa

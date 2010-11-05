@@ -23,5 +23,6 @@
         <module>Third</module>
         <module>Maven</module>
         <module>Kata</module>
+        <module>Test</module>
     </modules>
 </project>

@@ -32,7 +32,6 @@ public class PictureLoader
             LOGGER.info( "loading of image \"" + file.getName() + "\" initiated" );
             if ( file.exists() )
             {
-                Thread.sleep( 1000 );
                 final ImageInputStream iis = ImageIO.createImageInputStream( file );
                 final ImageReader reader = ImageIO.getImageReaders( iis ).next();
                 reader.setInput( iis );

@@ -39,14 +39,10 @@ public class PictureCache
     /** Task queue, contains images to be cached. */
     private final LinkedList<String> queue = new LinkedList<String>();
 
-    /**
-     * PictureCache taking images from directory
-     *
-     * @param locator the images are out of this directory
-     */
-    public PictureCache( final CachedImageLocator locator )
+    /** PictureCache taking images from directory */
+    public PictureCache()
     {
-        this.locator = locator;
+        this.locator = ImageLocator.pictLocator;
         cachingThread.setPriority( Thread.MIN_PRIORITY );
         cachingThread.start();
     }
@@ -90,7 +86,7 @@ public class PictureCache
      */
     public void cacheImage( final String name, final boolean thumb, final boolean first )
     {
-        if ( !getCachedImage( name ).loaded( thumb ) )
+        if ( !getCachedImage( name ).isLoaded( thumb ) )
         {
             final boolean isNew;
             synchronized ( queue )
@@ -145,7 +141,7 @@ public class PictureCache
                         LOGGER.debug( "popped \"" + name + "\" from queue " + queue.toString() );
                     }
                     final CachedImage img = getCachedImage( name );
-                    if ( !img.loaded( false ) )
+                    if ( !img.isLoaded( false ) )
                     {
                         LOGGER.info( "loading cached image \"" + name + "\"" );
                         img.loadImage();

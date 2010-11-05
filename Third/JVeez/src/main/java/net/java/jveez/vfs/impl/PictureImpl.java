@@ -98,7 +98,7 @@ public class PictureImpl implements ExifPicture
         {
             length = file.length();
         }
-        return length.longValue();
+        return length;
     }
 
     public long getLastModifiedDate()
@@ -233,12 +233,7 @@ public class PictureImpl implements ExifPicture
 
         final PictureImpl picture = (PictureImpl) o;
 
-        if ( !getAbsolutePath().equals( picture.getAbsolutePath() ) )
-        {
-            return false;
-        }
-
-        return true;
+        return getAbsolutePath().equals( picture.getAbsolutePath() );
     }
 
     public int hashCode()

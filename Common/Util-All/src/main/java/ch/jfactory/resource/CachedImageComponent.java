@@ -142,9 +142,9 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
         }
         if ( ( image == null ) || ( image.get() == null ) )
         {
-            if ( !img.loaded( thumbNail ) )
+            if ( !img.isLoaded( thumbNail ) )
             {
-                if ( img.loaded( true ) )
+                if ( img.isLoaded( true ) )
                 {
                     image = new SoftReference<Image>( img.getImage( true ) );
                 }

@@ -72,7 +72,7 @@ public class OptimizedAnimationImageRenderer implements AnimationRenderer
 
             do
             {
-                final int returnCode = imagePortion.validate( ImageUtils.getGraphicsconfiguration() );
+                final int returnCode = imagePortion.validate( ImageUtils.getGraphicsConfiguration() );
                 if ( returnCode == VolatileImage.IMAGE_RESTORED )
                 {
                     // Contents need to be restored

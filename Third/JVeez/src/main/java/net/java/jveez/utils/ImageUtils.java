@@ -59,7 +59,7 @@ public class ImageUtils
 
     private static final IIOReadProgressListener iioReadProgressListener = new CancellableIIOReadProgressListener();
 
-    public static GraphicsConfiguration getGraphicsconfiguration()
+    public static GraphicsConfiguration getGraphicsConfiguration()
     {
         return graphicsConfiguration;
     }
@@ -67,7 +67,6 @@ public class ImageUtils
     public static BufferedImage loadImage( final Picture picture )
     {
         DebugUtils.ensureIsNotDispatchThread();
-
         int retryCounter = 2;
         while ( retryCounter > 0 )
         {
@@ -99,9 +98,6 @@ public class ImageUtils
 
     private static BufferedImage _loadImage( final Picture picture ) throws IOException
     {
-        BufferedImage bufferedImage = null;
-
-        // detect image format ...
         final ImageInputStream imageInputStream = ImageIO.createImageInputStream( picture.getFile() );
         final Iterator<ImageReader> iterator = ImageIO.getImageReaders( imageInputStream );
         final ImageReader reader = ( iterator.hasNext() ? iterator.next() : null );
@@ -112,10 +108,8 @@ public class ImageUtils
         }
         reader.addIIOReadProgressListener( iioReadProgressListener );
         reader.setInput( imageInputStream );
-        bufferedImage = reader.read( 0 );
-
+        final BufferedImage bufferedImage = reader.read( 0 );
         imageInputStream.close();
-
         return bufferedImage;
     }
 
@@ -274,20 +268,14 @@ public class ImageUtils
     {
         if ( picture == null )
         {
-            if ( DEBUG )
-            {
-                LOG.debug( "No EXIF thumbnail for null picture" );
-            }
+            LOG.debug( "No EXIF thumbnail for null picture" );
             return null;
         }
 
         final File file = picture.getFile();
         if ( !Utils.isSupportedExifImage( file ) )
         {
-            if ( DEBUG )
-            {
-                LOG.debug( "EXIF thumbnail not supported by \"" + file + "\"" );
-            }
+            LOG.debug( "EXIF thumbnail not supported by \"" + file + "\"" );
             return null;
         }
 
@@ -300,10 +288,7 @@ public class ImageUtils
             // some broken pictures have the thumbnail data EXIF tag but no data
             if ( thumbnailBytes == null || thumbnailBytes.length == 0 )
             {
-                if ( DEBUG )
-                {
-                    LOG.debug( "EXIF tag for thumbnail but no data for \"" + file + "\"" );
-                }
+                LOG.debug( "EXIF tag for thumbnail but no data for \"" + file + "\"" );
                 return null;
             }
 
@@ -387,7 +372,7 @@ public class ImageUtils
      * @param hint         one of the rendering hints that corresponds to {@code RenderingHints.KEY_INTERPOLATION} (e.g.
      *                     {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code
      *                     RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
-     * @return a scaled version of the original {@codey BufferedImage}
+     * @return a scaled version of the original {@code BufferedImage}
      */
     public static BufferedImage createScaledImage( final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint )
     {

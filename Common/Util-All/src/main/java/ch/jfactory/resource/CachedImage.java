@@ -77,7 +77,7 @@ public class CachedImage
      * @param thumb whether to look for a thumbnail
      * @return whether the thumb or image is loaded
      */
-    public boolean loaded( final boolean thumb )
+    public boolean isLoaded( final boolean thumb )
     {
         return getImage( thumb ) != null || thumb && ( getImage( false ) != null );
     }

@@ -24,7 +24,7 @@ public class CachedImage
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImage.class );
 
-    private final String pictureURL;
+    private final String name;
 
     private final AbstractAsyncPictureLoaderSupport listeners = new AbstractAsyncPictureLoaderSupport();
 
@@ -40,22 +40,22 @@ public class CachedImage
 
     private SoftReference<Image> thumbNail;
 
-    public CachedImage( final CachedImageLocator locator, final String pictureURL )
+    public CachedImage( final CachedImageLocator locator, final String name )
     {
-        this.pictureURL = pictureURL;
+        this.name = name;
         this.locator = locator;
     }
 
     public synchronized Image loadImage()
     {
-        final Image i = PictureLoader.load( locator.getPath() + pictureURL );
+        final Image i = PictureLoader.load( locator.locate( name ) );
         setImage( i );
         return i;
     }
 
     public String getName()
     {
-        return pictureURL;
+        return name;
     }
 
     public Dimension getSize()
@@ -63,8 +63,8 @@ public class CachedImage
         Dimension d = size;
         if ( d == null )
         {
-            d = PictureLoader.getSize( locator.getPath() + pictureURL );
-            LOGGER.info( "reading size for image \"" + pictureURL + "\" with width " + d.width + ", height " + d.height );
+            d = PictureLoader.getSize( locator.locate( name ) );
+            LOGGER.info( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
             setSize( d );
         }
         return d;
@@ -112,7 +112,7 @@ public class CachedImage
 
     private void setImage( final Image image )
     {
-        LOGGER.debug( "setting image for \"" + pictureURL + "\"" );
+        LOGGER.debug( "setting image for \"" + name + "\"" );
         if ( image == getImage( false ) )
         {
             return;
@@ -126,11 +126,11 @@ public class CachedImage
         }
         if ( image == null )
         {
-            listeners.informAborted( pictureURL );
+            listeners.informAborted( name );
         }
         else
         {
-            listeners.informFinished( pictureURL, image );
+            listeners.informFinished( name, image );
         }
     }
 

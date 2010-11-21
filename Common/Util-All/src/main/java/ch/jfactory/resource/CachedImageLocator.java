@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class CachedImageLocator extends AbstractAsyncPictureLoaderSupport
+public class CachedImageLocator
 {
     /** This class' logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger( CachedImageLocator.class );
@@ -64,19 +64,14 @@ public class CachedImageLocator extends AbstractAsyncPictureLoaderSupport
      * @param image image name
      * @return name full qualified name
      */
-    private String locate( final String image )
+    public String locate( final String image )
     {
-        return getPath() + image;
+        return path + image;
     }
 
     @Override
     public String toString()
     {
-        return "CachedImageLocator[" + getPath() + "]";
-    }
-
-    public String getPath()
-    {
-        return path;
+        return "CachedImageLocator[" + path + "]";
     }
 }

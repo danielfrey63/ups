@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Insets;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
@@ -69,7 +70,7 @@ public class Splash extends JWindow
         scrollingComponent.addPaintable( fader );
 
         final int printSpaceWidth = scrollingComponent.getSize().width - insets.left - insets.right;
-        final FileInputStream textFile = new FileInputStream( "config/News.txt" );
+        final InputStream textFile = Splash.class.getResourceAsStream( "/News.txt" );
         final ScrollingTextPaintable scroller = new ScrollingTextPaintable( textFile, printSpaceWidth, true );
         scroller.setBackgroundColor( fadeColor );
         scroller.setScrollDelay( 5 );

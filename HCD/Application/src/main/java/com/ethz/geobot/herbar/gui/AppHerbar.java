@@ -11,44 +11,30 @@ import ch.jfactory.animation.AnimationQueue;
 import ch.jfactory.animation.Paintable;
 import ch.jfactory.animation.fading.FadingPaintable;
 import ch.jfactory.animation.scrolltext.ScrollingTextPaintable;
-import ch.jfactory.application.CopyProtection;
 import ch.jfactory.application.SystemUtil;
 import ch.jfactory.application.presentation.WindowUtils;
-import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.component.Dialogs;
-import ch.jfactory.component.EditItem;
-import ch.jfactory.component.SimpleDocumentListener;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
 import com.ethz.geobot.herbar.gui.util.HerbarTheme;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.event.DocumentEvent;
 import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,18 +59,11 @@ public class AppHerbar
 
     private static Splash splash;
 
-    /**
-     * reference to the one and only mainframe
-     */
+    /** reference to the one and only mainframe */
     private static MainFrame mainFrame = null;
-
-    private static final Check[] CHECKS_TO_PERFORM = new Check[]{new InitialCheck(), new PrefsCheck(), new UserCheck()};
-
-    //Construct the application
 
     public AppHerbar()
     {
-        securityCheck();
         switchDatabase();
         initSplash();
         decompressDatabase();
@@ -108,23 +87,6 @@ public class AppHerbar
                 mainFrame.setVisible( true );
             }
         } );
-    }
-
-    /**
-     * Blaböla
-     */
-    private void securityCheck()
-    {
-        boolean atLeastOneCheckPassed = false;
-        for ( int index = 0; !atLeastOneCheckPassed; index++ )
-        {
-            final Check check = CHECKS_TO_PERFORM[index];
-            atLeastOneCheckPassed |= check.performCheck();
-        }
-        if ( !atLeastOneCheckPassed )
-        {
-            throw new IllegalStateException( "CD-ROM/images not found." );
-        }
     }
 
     public static MainFrame getMainFrame()
@@ -263,161 +225,6 @@ public class AppHerbar
         catch ( Exception e )
         {
             e.printStackTrace();
-        }
-    }
-
-    private static abstract class Check
-    {
-        private static final String file1 = "images/\u0007Lizenz.txt";
-
-        private static final String file2 = "images/\u0008Lizenz.txt";
-
-        public boolean performCheck()
-        {
-            final String dir = getDirectory();
-            final boolean checkPassed = check( dir );
-            if ( checkPassed )
-            {
-                System.setProperty( "xmatrix.cd.path", dir );
-            }
-            return checkPassed;
-        }
-
-        private boolean check( final String dir )
-        {
-            final File f2 = new File( dir, file2 );
-            final File f1 = new File( dir, file1 );
-            return CopyProtection.compareFiles( f1, f2 );
-        }
-
-        abstract String getDirectory();
-    }
-
-    private static class InitialCheck extends Check
-    {
-        public String getDirectory()
-        {
-            return System.getProperty( "xmatrix.cd.path", "D:" );
-        }
-    }
-
-    private static class PrefsCheck extends Check
-    {
-        public String getDirectory()
-        {
-            // ... the file setup.properties contains the path the the cdrom property (xmatrix.cd.path)
-            final InputStream is = LogUtils.locateResourceAsStream( "setup.properties" );
-            final Properties props = new Properties();
-            if ( is != null )
-            {
-                try
-                {
-                    props.load( is );
-                }
-                catch ( Exception e )
-                {
-                    return "";
-                }
-            }
-            return props.getProperty( "xmatrix.cd.path" );
-        }
-    }
-
-    private static class UserCheck extends Check
-    {
-        public String getDirectory()
-        {
-            final CDDriveDialog dialog = new CDDriveDialog( this );
-            dialog.setSize( 400, 250 );
-            WindowUtils.centerOnScreen( dialog );
-            dialog.setVisible( true );
-            // a cancel of the user will throw an IllegalStateException
-            return dialog.getDirectory();
-        }
-    }
-
-    private static class CDDriveDialog extends I15nComponentDialog
-    {
-        private EditItem editItem;
-
-        private String directory;
-
-        private final Check checker;
-
-        public CDDriveDialog( final Check checker )
-        {
-            super( mainFrame, "DIALOG.SETUP" );
-            this.checker = checker;
-        }
-
-        protected JComponent createComponentPanel()
-        {
-            final ActionListener action = new ActionListener()
-            {
-                public void actionPerformed( final ActionEvent e )
-                {
-                    final JFileChooser chooser = new JFileChooser();
-                    chooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
-                    chooser.showOpenDialog( null );
-                    final File file = chooser.getSelectedFile();
-                    if ( file != null )
-                    {
-                        editItem.setUserObject( file );
-                    }
-                }
-            };
-            editItem = new EditItem( "DIALOG.SETUP", action );
-            editItem.setEditable( true );
-            editItem.getTextField().getDocument().addDocumentListener( new SimpleDocumentListener()
-            {
-                // if the two files are found, enable ok button
-                public void changedUpdate( final DocumentEvent e )
-                {
-                    final Document doc = e.getDocument();
-                    try
-                    {
-                        directory = new File( doc.getText( 0, doc.getLength() ) ).toString();
-                        enableApply( checker.check( directory ) );
-                    }
-                    catch ( BadLocationException e1 )
-                    {
-                        e1.printStackTrace();
-                    }
-                }
-            } );
-            final JPanel panel = new JPanel( new BorderLayout() );
-            panel.add( editItem, BorderLayout.NORTH );
-            return panel;
-        }
-
-        protected void onApply() throws ComponentDialogException
-        {
-            try
-            {
-                // save settings for next time
-                final FileWriter fw = new FileWriter( homeDir + "setup.properties" );
-                final String text = editItem.getTextField().getText();
-                fw.write( "xmatrix.cd.path=" + text );
-                fw.close();
-                // store in env for runtime
-                System.getProperties().setProperty( "xmatrix.cd.path", text );
-            }
-            catch ( IOException e )
-            {
-                e.printStackTrace();
-            }
-        }
-
-        protected void onCancel()
-        {
-            final String message = "protection check not passed";
-            LOG.error( message, new IllegalStateException( message ) );
-            showPicturesNotFound();
-        }
-
-        public String getDirectory()
-        {
-            return directory;
         }
     }
 }

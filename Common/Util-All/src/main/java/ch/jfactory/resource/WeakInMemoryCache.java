@@ -14,8 +14,6 @@ import java.awt.image.BufferedImage;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Helper class for locating images and support for image caching. Weak references are used to hold the image, which is
@@ -26,9 +24,6 @@ import org.slf4j.LoggerFactory;
  */
 public class WeakInMemoryCache extends AbstractImageLoader
 {
-    /** This class' logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger( WeakInMemoryCache.class );
-
     /** Map containing a cache for images especially icons. */
     private static final Map<String, WeakReference<BufferedImage>> imageCache = new WeakHashMap<String, WeakReference<BufferedImage>>();
 

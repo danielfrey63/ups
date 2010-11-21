@@ -1,25 +1,21 @@
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.AbstractImageLoader;
 import ch.jfactory.cache.ImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Loads files from the file system.
+ * Caches file system images.
  *
- * @author Daniel Frey 21.11.2010 14:12:19
+ * @author Daniel Frey 21.11.2010 18:17:53
  */
-public class FileImageCache extends AbstractImageLoader
+public class FileImageCache extends AbstractImageCache
 {
     /** This class' logger. */
     private static final Logger LOG = LoggerFactory.getLogger( FileImageCache.class );
@@ -27,60 +23,26 @@ public class FileImageCache extends AbstractImageLoader
     /** The absolute path to search for images. */
     private final String path;
 
-    public FileImageCache( final ImageLoader delegateImageLoader, final String path )
+    private final String formatName;
+
+    public FileImageCache( final ImageLoader delegateImageLoader, final String path, final String formatName )
     {
         super( delegateImageLoader );
         this.path = path;
+        this.formatName = formatName;
+        ensureDirectoryCreated( path );
     }
 
-    @Override
-    public boolean internalIsCached( final String imageName )
+    private void ensureDirectoryCreated( final String path )
     {
-        return new File( imageName ).exists();
-    }
-
-    @Override
-    public BufferedImage internalGetImage( final String name )
-    {
-        try
+        final File file = new File( path );
+        if ( !file.exists() )
         {
-            final InputStream stream = new FileInputStream( path + name );
-            final ImageInputStream imageInputStream = ImageIO.createImageInputStream( stream );
-            if ( imageInputStream == null )
+            final boolean success = file.mkdirs();
+            if ( !success )
             {
-                LOG.error( "image not found at " + path + name );
-                return null;
+                LOG.warn( "could not create directory at " + path );
             }
-            final Iterator<ImageReader> iterator = ImageIO.getImageReaders( imageInputStream );
-            final ImageReader reader = ( iterator.hasNext() ? iterator.next() : null );
-            if ( reader == null )
-            {
-                LOG.error( "no image reader found for " + path + name );
-                return null;
-            }
-            reader.setInput( imageInputStream );
-            final BufferedImage image = reader.read( 0 );
-            imageInputStream.close();
-            stream.close();
-            return image;
-        }
-        catch ( IOException e )
-        {
-            LOG.error( "could not load image " + path + name );
-        }
-        return null;
-    }
-
-    @Override
-    public void internalFetchIntoCache( final String name, final BufferedImage image )
-    {
-        try
-        {
-            ImageIO.write( image, "jpg", new File( locate( name ) ) );
-        }
-        catch ( IOException e )
-        {
-            LOG.error( "could not save image " + locate( name ) );
         }
     }
 
@@ -95,16 +57,38 @@ public class FileImageCache extends AbstractImageLoader
         return path + image;
     }
 
-    @Override
-    public void internalInvalidateCache()
+    protected BufferedImage loadImage( final String name )
     {
-        // Do nothing, especially not deleting files.
+        final String path = locate( name );
+        try
+        {
+            final InputStream stream = new FileInputStream( path );
+            return ImageIO.read( stream );
+        }
+        catch ( IOException e )
+        {
+            LOG.info( "could not load image " + path + " from file system" );
+        }
+        return null;
+    }
+
+    protected void writeImage( final String name, final BufferedImage image )
+    {
+        try
+        {
+            final File file = new File( locate( name ) );
+            ImageIO.write( image, formatName, file );
+        }
+        catch ( IOException e )
+        {
+            LOG.info( "could not write " + locate( name ) + " to file system" );
+        }
     }
 
     @Override
-    public void internalClose()
+    public boolean internalIsCached( final String imageName )
     {
-        // Do nothing
+        return new File( imageName ).exists();
     }
 
     @Override

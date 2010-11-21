@@ -11,6 +11,7 @@ package ch.jfactory.resource;
 import ch.jfactory.cache.ImageLoader;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,8 +65,16 @@ public class CachedImage
         Dimension d = size;
         if ( d == null )
         {
-            d = new Dimension( locator.getImage( name ).getWidth(), locator.getImage( name ).getHeight() );
-            LOGGER.info( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
+            final BufferedImage image = locator.getImage( name );
+            if ( image != null )
+            {
+                d = new Dimension( image.getWidth(), image.getHeight() );
+                LOGGER.info( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
+            }
+            else
+            {
+                d = new Dimension( -1, -1 );
+            }
             setSize( d );
         }
         return d;

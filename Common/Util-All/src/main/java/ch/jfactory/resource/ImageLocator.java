@@ -39,7 +39,7 @@ public class ImageLocator
      */
     public static ImageIcon getIcon( final String name )
     {
-        if ( name == null )
+        if ( name == null || "".equals( name ) )
         {
             return null;
         }
@@ -57,7 +57,7 @@ public class ImageLocator
     static
     {
         iconLocator = new WeakInMemoryCache( new ResourceImageCache( null, getIconPath() ) );
-        pictLocator = new WeakInMemoryCache( new FileImageCache( null, getPicturePath() ) );
+        pictLocator = new WeakInMemoryCache( new FileImageCache( new UrlImageCache( null, getImageURL() ), getPicturePath(), "jpg" ) );
 
         LOGGER.info( "icon resources at " + iconLocator );
         LOGGER.info( "pictures resources at " + pictLocator );
@@ -76,16 +76,13 @@ public class ImageLocator
 
     public static String getPicturePath()
     {
-        final String root = System.getProperty( "xmatrix.cd.path", "" );
-        final String defaultPicturePath = System.getProperty( "xmatrix.picture.path.small", "/" );
-        final String picturePath = System.getProperty( PROPERTY_IMAGE_LOCATION, defaultPicturePath );
-        if ( root.length() > 0 )
-        {
-            return new File( root, picturePath ).getPath() + "/";
-        }
-        else
-        {
-            return new File( picturePath ).getPath() + "/";
-        }
+        return new File( System.getProperty( "xmatrix.cd.path", "" ) ).getPath() + "/";
+    }
+
+    public static String getImageURL()
+    {
+        final String url = System.getProperty( "xmatrix.url.path", "<no image URL defined>" );
+        LOGGER.info( "image URL is " + url );
+        return url;
     }
 }

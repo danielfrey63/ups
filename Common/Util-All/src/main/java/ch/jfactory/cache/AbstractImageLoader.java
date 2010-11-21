@@ -30,10 +30,6 @@ public abstract class AbstractImageLoader implements ImageLoader
             {
                 internalFetchIntoCache( imageName, image );
             }
-            else
-            {
-                LOG.warn( "Could not get image for \"" + imageName + "\"" );
-            }
         }
         return image;
     }
@@ -56,14 +52,14 @@ public abstract class AbstractImageLoader implements ImageLoader
         internalClose();
     }
 
-    private BufferedImage getImageAndHandleMemory( final String imageName )
+    private BufferedImage getImageAndHandleMemory( final String name )
     {
         int retryCounter = 2;
         while ( retryCounter > 0 )
         {
             try
             {
-                return internalGetImage( imageName );
+                return internalGetImage( name );
             }
             catch ( OutOfMemoryError e )
             {
@@ -73,7 +69,7 @@ public abstract class AbstractImageLoader implements ImageLoader
             }
             catch ( Throwable t )
             {
-                LOG.error( "could not load the image", t );
+                LOG.error( "could not load image " + name, t );
                 return null;
             }
         }

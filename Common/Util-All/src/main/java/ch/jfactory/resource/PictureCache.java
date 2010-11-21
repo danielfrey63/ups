@@ -8,6 +8,7 @@
  */
 package ch.jfactory.resource;
 
+import ch.jfactory.cache.ImageLoader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class PictureCache
     private final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
 
     /** Locator for images. */
-    private final CachedImageLocator locator;
+    private final ImageLoader locator;
 
     /** Caching thread. */
     private final CacheImageThread cachingThread = new CacheImageThread();

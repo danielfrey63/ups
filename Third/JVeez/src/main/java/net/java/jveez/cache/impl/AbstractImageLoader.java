@@ -65,12 +65,8 @@ public abstract class AbstractImageLoader implements ImageLoader
             {
                 LOG.warn( "Could not get image for \"" + picture.getFile() + "\"" );
             }
-            return image;
         }
-        else
-        {
-            return image;
-        }
+        return image;
     }
 
     public final void invalidateCache()

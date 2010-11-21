@@ -8,6 +8,8 @@
  */
 package ch.jfactory.resource;
 
+import ch.jfactory.cache.ImageLoader;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.ImageIcon;
 import org.slf4j.Logger;
@@ -23,11 +25,11 @@ public class ImageLocator
 {
     public static final String PROPERTY_IMAGE_LOCATION = "xmatrix.picture.path";
 
-    public static final CachedImageLocator pictLocator;
+    public static final ImageLoader pictLocator;
 
     private static final Logger LOGGER = LoggerFactory.getLogger( ImageLocator.class );
 
-    private static final CachedImageLocator iconLocator;
+    private static final ImageLoader iconLocator;
 
     /**
      * get an ImageIcon from Cache or reloads it into the cache.
@@ -42,28 +44,26 @@ public class ImageLocator
             return null;
         }
         LOGGER.trace( "icon " + name );
-        return iconLocator.getImageIcon( name );
+        final BufferedImage image = iconLocator.getImage( name );
+        return image == null ? new ImageIcon( name ) : new ImageIcon( image );
     }
 
     public static ImageIcon getPicture( final String name )
     {
-        return pictLocator.getImageIcon( name );
+        final BufferedImage image = pictLocator.getImage( name );
+        return image == null ? new ImageIcon( name ) : new ImageIcon( image );
     }
-
-    //public static void clearCache() {
-    //    pictLocator.clearCacheList();
-    //}
 
     static
     {
-        iconLocator = new CachedImageLocator( getIconPath() );
-        pictLocator = new CachedImageLocator( getSourcePath() );
+        iconLocator = new WeakInMemoryCache( new ResourceImageCache( null, getIconPath() ) );
+        pictLocator = new WeakInMemoryCache( new FileImageCache( null, getPicturePath() ) );
 
         LOGGER.info( "icon resources at " + iconLocator );
         LOGGER.info( "pictures resources at " + pictLocator );
     }
 
-    private static String getIconPath()
+    public static String getIconPath()
     {
         String iconPath = System.getProperty( "xmatrix.resource.path" );
         if ( iconPath == null )
@@ -74,7 +74,7 @@ public class ImageLocator
         return iconPath.endsWith( "/" ) || iconPath.endsWith( "\\" ) ? iconPath : iconPath + "/";
     }
 
-    private static String getSourcePath()
+    public static String getPicturePath()
     {
         final String root = System.getProperty( "xmatrix.cd.path", "" );
         final String defaultPicturePath = System.getProperty( "xmatrix.picture.path.small", "/" );

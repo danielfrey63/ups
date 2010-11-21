@@ -588,6 +588,7 @@ public class ImageUtils
     }
 
     // From InfoNode ImageUtils
+
     public static Image create( final URL url ) throws ImageException
     {
         final Image image = Toolkit.getDefaultToolkit().createImage( url );

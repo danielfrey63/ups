@@ -8,6 +8,7 @@
  */
 package ch.jfactory.resource;
 
+import ch.jfactory.cache.ImageLoader;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.lang.ref.SoftReference;
@@ -28,7 +29,7 @@ public class CachedImage
 
     private final AbstractAsyncPictureLoaderSupport listeners = new AbstractAsyncPictureLoaderSupport();
 
-    private final CachedImageLocator locator;
+    private final ImageLoader locator;
 
     private Dimension size;
 
@@ -40,7 +41,7 @@ public class CachedImage
 
     private SoftReference<Image> thumbNail;
 
-    public CachedImage( final CachedImageLocator locator, final String name )
+    public CachedImage( final ImageLoader locator, final String name )
     {
         this.name = name;
         this.locator = locator;
@@ -48,7 +49,7 @@ public class CachedImage
 
     public synchronized Image loadImage()
     {
-        final Image i = PictureLoader.load( locator.locate( name ) );
+        final Image i = locator.getImage( name );
         setImage( i );
         return i;
     }
@@ -63,7 +64,7 @@ public class CachedImage
         Dimension d = size;
         if ( d == null )
         {
-            d = PictureLoader.getSize( locator.locate( name ) );
+            d = new Dimension( locator.getImage( name ).getWidth(), locator.getImage( name ).getHeight() );
             LOGGER.info( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
             setSize( d );
         }

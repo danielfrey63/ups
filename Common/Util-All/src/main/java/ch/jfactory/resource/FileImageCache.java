@@ -28,7 +28,7 @@ public class FileImageCache extends AbstractImageCache
     public FileImageCache( final ImageLoader delegateImageLoader, final String path, final String formatName )
     {
         super( delegateImageLoader );
-        this.path = path;
+        this.path = ( path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path ) + "/";
         this.formatName = formatName;
         ensureDirectoryCreated( path );
     }
@@ -63,7 +63,9 @@ public class FileImageCache extends AbstractImageCache
         try
         {
             final InputStream stream = new FileInputStream( path );
-            return ImageIO.read( stream );
+            final BufferedImage image = ImageIO.read( stream );
+            LOG.info( "successfully loaded image " + path + " from file system" );
+            return image;
         }
         catch ( IOException e )
         {

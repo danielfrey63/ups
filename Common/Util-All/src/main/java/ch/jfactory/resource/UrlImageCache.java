@@ -50,14 +50,16 @@ public class UrlImageCache extends AbstractImageCache
 
     protected BufferedImage loadImage( final String name )
     {
+        final URL url = locate( name );
         try
         {
-
-            return ImageIO.read( locate( name ) );
+            final BufferedImage image = ImageIO.read( url );
+            LOG.info( "successfully locaded image " + url + " from URL" );
+            return image;
         }
         catch ( IOException e )
         {
-            LOG.info( "could not load image " + locate( name ) + " from URL" );
+            LOG.info( "could not load image " + url + " from URL" );
         }
         return null;
     }

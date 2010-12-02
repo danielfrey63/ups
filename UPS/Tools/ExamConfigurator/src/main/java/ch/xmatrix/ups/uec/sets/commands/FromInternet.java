@@ -209,8 +209,20 @@ public class FromInternet extends ActionCommand
         }
         catch ( UPSServerException e )
         {
-            LOG.error( e.getLogMessage(), e.getLogThrowable() );
-            JOptionPane.showMessageDialog( null, e.getFeedbackMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
+            final String message;
+            final Throwable throwable;
+            if ( !"".equals( e.getLogMessage() ) && e.getLogMessage() != null )
+            {
+                message = e.getLogMessage();
+                throwable = e.getLogThrowable();
+            }
+            else
+            {
+                message = e.getMessage();
+                throwable = e;
+            }
+            LOG.error( message, throwable );
+            JOptionPane.showMessageDialog( null, message, "Fehler", JOptionPane.ERROR_MESSAGE );
         }
         catch ( Exception e )
         {
@@ -219,4 +231,3 @@ public class FromInternet extends ActionCommand
         }
     }
 }
-

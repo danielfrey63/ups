@@ -1083,40 +1083,33 @@ public class ExamsetsCalculator
      */
     private void fillExamTaxonMapAndCalculateExamMinMaxWeights( final SimpleTaxon taxon )
     {
-        final SpecimenModel specimen = specimens.find( taxon.getName() );
-        if ( specimens != null )
+        final String name = taxon.getName();
+        final ArrayList<SimpleTaxon> children = taxon.getChildTaxa();
+        if ( children == null || children.size() == 0 )
         {
-            final ArrayList<SimpleTaxon> children = taxon.getChildTaxa();
-            if ( children == null || children.size() == 0 )
+            final SpecimenModel specimen = specimens.find( name );
+            final boolean specimensAvailable = specimen != null && specimen.getNumberOfSpecimens() != 0;
+            final boolean activated = specimen != null && ( !specimen.isDeactivatedIfKnown() || !specimen.isDeactivatedIfUnknown() );
+            if ( specimensAvailable && activated )
             {
-                final boolean specimensAvailable = specimen.getNumberOfSpecimens() != 0;
-                final boolean activated = !specimen.isDeactivatedIfKnown() || !specimen.isDeactivatedIfUnknown();
-                final String name = taxon.getName();
-                if ( specimensAvailable && activated )
-                {
-                    speciesTaxaMap.put( name, specimen );
-                    weightMin = Math.min( specimen.getWeightIfKnown(), weightMin );
-                    weightMax = Math.max( specimen.getWeightIfKnown(), weightMax );
-                }
-                else if ( !specimensAvailable )
-                {
-                    debugBuffer.append( "excluded (no specimens): " ).append( name ).append( ret );
-                }
-                else if ( !activated )
-                {
-                    debugBuffer.append( "excluded (deactivated) : " ).append( name ).append( ret );
-                }
+                speciesTaxaMap.put( name, specimen );
+                weightMin = Math.min( specimen.getWeightIfKnown(), weightMin );
+                weightMax = Math.max( specimen.getWeightIfKnown(), weightMax );
             }
-
-            for ( int i = 0; children != null && i < children.size(); i++ )
+            else if ( !specimensAvailable )
             {
-                final SimpleTaxon child = children.get( i );
-                fillExamTaxonMapAndCalculateExamMinMaxWeights( child );
+                debugBuffer.append( "excluded (no specimens): " ).append( name ).append( ret );
+            }
+            else
+            {
+                debugBuffer.append( "excluded (deactivated) : " ).append( name ).append( ret );
             }
         }
-        else
+
+        for ( int i = 0; children != null && i < children.size(); i++ )
         {
-            debugBuffer.append( "---> specimen not found: " ).append( taxon );
+            final SimpleTaxon child = children.get( i );
+            fillExamTaxonMapAndCalculateExamMinMaxWeights( child );
         }
     }
 

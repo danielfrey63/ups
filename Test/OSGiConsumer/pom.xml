@@ -38,7 +38,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>ch.xmatrix.test.consumer.Activator</Bundle-Activator>
+                        <Bundle-Activator>ch.xmatrix.test.osgi.consumer.Activator</Bundle-Activator>
                         <Export-Package/>
                         <Import-Package>
                             org.osgi.framework,

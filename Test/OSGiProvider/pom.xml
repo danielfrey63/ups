@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix</groupId>
     <artifactId>ch.xmatrix.test.osgi.provider</artifactId>
     <name>OSGi Version Test Provider</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>

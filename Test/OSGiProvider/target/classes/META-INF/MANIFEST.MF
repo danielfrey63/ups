@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Built-By: Daniel Frey
+Created-By: Apache Maven Bundle Plugin
+Bundle-Activator: ch.xmatrix.test.osgi.version.OSGiVersionActivator
+Import-Package: org.osgi.framework;version="1.5"
+Bnd-LastModified: 1293368045046
+Export-Package: ch.xmatrix.test.osgi.version;uses:="org.osgi.framework
+ ";version="1.0.1"
+Bundle-Version: 1.0.1
+Bundle-Name: OSGi Version Test Application
+Build-Jdk: 1.5.0_21
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: ch.xmatrix.test.osgi.version
+Tool: Bnd-0.0.357
+

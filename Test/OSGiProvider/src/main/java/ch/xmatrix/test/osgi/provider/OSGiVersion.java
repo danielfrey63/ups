@@ -9,6 +9,6 @@ public class OSGiVersion implements OSGiVersionInterface
 {
     public void service()
     {
-        System.out.println( "version 1.0.1" );
+        System.out.println( "version 1.0.0" );
     }
 }

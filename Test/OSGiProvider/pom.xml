@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix</groupId>
-    <artifactId>ch.xmatrix.test.osgi.version</artifactId>
-    <name>OSGi Version Test Application</name>
-    <version>1.0.1</version>
+    <artifactId>ch.xmatrix.test.osgi.provider</artifactId>
+    <name>OSGi Version Test Provider</name>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
@@ -25,7 +25,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
                         <Bundle-Activator>ch.xmatrix.test.osgi.provider.OSGiVersionActivator</Bundle-Activator>
-                        <Export-Package>ch.xmatrix.test.osgi.version;version="${pom.version}"</Export-Package>
+                        <Export-Package>ch.xmatrix.test.osgi.provider;version="${pom.version}"</Export-Package>
                         <Import-Package>org.osgi.framework</Import-Package>
                         <!--<Private-Package/>-->
                         <!--<Embed-Dependency/>-->

@@ -11,14 +11,14 @@ import java.awt.Component;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-abstract public class LevelPopup extends ObjectPopup
+abstract public class LevelPopUp extends ObjectPopup
 {
     /**
      * Construct a LevelPopup with all given levels.
      *
      * @param levels all levels which should be displayed
      */
-    public LevelPopup( final Level[] levels )
+    public LevelPopUp( final Level[] levels )
     {
         super( levels );
     }
@@ -30,7 +30,7 @@ abstract public class LevelPopup extends ObjectPopup
      * @param scopeLevels  all levels available for this scope
      * @param currentLevel current selected level
      */
-    public void showPopup( final Component jb, final Level[] scopeLevels, final Level currentLevel )
+    public void showPopUp( final Component jb, final Level[] scopeLevels, final Level currentLevel )
     {
         super.showPopup( jb, scopeLevels, currentLevel );
     }

@@ -453,6 +453,11 @@
                 <version>3.0.5</version>
             </dependency>
             <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.2.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.ostermiller</groupId>
                 <artifactId>utils</artifactId>
                 <version>1.07.00</version>
@@ -468,11 +473,6 @@
                 <version>20050602</version>
             </dependency>
             <dependency>
-                <groupId>saxpath</groupId>
-                <artifactId>saxpath</artifactId>
-                <version>1.0-FCS</version>
-            </dependency>
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>1.5.10</version>
@@ -486,6 +486,11 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>1.5.10</version>
+            </dependency>
+            <dependency>
+                <groupId>saxpath</groupId>
+                <artifactId>saxpath</artifactId>
+                <version>1.0-FCS</version>
             </dependency>
             <dependency>
                 <groupId>uispec4j</groupId>

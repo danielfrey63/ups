@@ -1,3 +1,5 @@
+DROP TABLE edges IF EXISTS;
+
 DROP TABLE vertices IF EXISTS;
 
 CREATE TABLE vertices (
@@ -7,8 +9,6 @@ CREATE TABLE vertices (
     type VARCHAR NOT NULL
 );
 CREATE INDEX IDX_V_TYPE ON VERTICES(type);
-
-DROP TABLE edges IF EXISTS;
 
 CREATE TABLE edges (
     id IDENTITY,

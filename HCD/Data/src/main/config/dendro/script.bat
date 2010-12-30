@@ -2,7 +2,7 @@
 if "%1x" == "x" goto usage
 goto doit
 
-:usage  
+:usage
 echo Missing argument
 echo Usage: %0 ^<script to run^>
 goto end

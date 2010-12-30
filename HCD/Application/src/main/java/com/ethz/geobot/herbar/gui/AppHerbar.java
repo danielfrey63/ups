@@ -51,9 +51,13 @@ public class AppHerbar
 
     private static final String DIR_SC = "/sc/";
 
+    private static final String DIR_DE = "/de/";
+
     private static final String EXT_GE = "ge";
 
     private static final String EXT_SC = "sc";
+
+    private static final String EXT_DE = "de";
 
     private static final String homeDir = System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/";
 
@@ -97,20 +101,28 @@ public class AppHerbar
     private void switchDatabase()
     {
         // Todo: Implement this as a case of specialized resource bundles
-        final String[] options = new String[]{"Deutsch", "Wissenschaftlich"};
+        final String[] options = new String[]{"Deutsch", "Wissenschaftlich", "Dendro"};
         final String message = Strings.getString( "SWITCH.MESSAGE" );
         final String title = Strings.getString( "SWITCH.TITLE" );
-        if ( Dialogs.showOptionsQuestion( null, title, message, options, options[1] ) != 1 )
+        final int selection = Dialogs.showOptionsQuestion( null, title, message, options, options[1] );
+        switch ( selection )
         {
-            System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
-            System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
-            System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.ge" ) );
-        }
-        else
-        {
-            System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
-            System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
-            System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.sc" ) );
+            case 0:
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
+                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.ge" ) );
+                break;
+            case 1:
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
+                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.sc" ) );
+                break;
+            case 2:
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
+                break;
+            default:
+                break;
         }
         LOG.info( "setting database to (xmatrix.input.db): " + System.getProperty( "xmatrix.input.db" ) );
         LOG.info( "setting filter directory to (herbar.filter.location): " + System.getProperty( "herbar.filter.location" ) );
@@ -122,15 +134,17 @@ public class AppHerbar
         final String destinationDir = homeDir + "data/";
         new File( destinationDir ).mkdirs();
         final String[] files = new String[]{
-                "sc.properties", "sc.backup", "sc.data", "sc.script", "ge.properties", "ge.backup", "ge.data", "ge.script"
+                "hcdsqlsc.properties", "hcdsqlsc.backup", "hcdsqlsc.data", "hcdsqlsc.script",
+                "hcdsqlge.properties", "hcdsqlge.backup", "hcdsqlge.data", "hcdsqlge.script",
+                "hcdsqlde.properties", "hcdsqlde.script"
         };
         try
         {
             for ( final String file : files )
             {
-                final String base = "/hcdsql" + file;
-                final InputStream is = AppHerbar.class.getResourceAsStream( base );
-                final OutputStream os = new FileOutputStream( destinationDir + base );
+                LOG.info( "decompressing DB from " + AppHerbar.class.getResource( "/" + file ) );
+                final InputStream is = AppHerbar.class.getResourceAsStream( "/" + file );
+                final OutputStream os = new FileOutputStream( destinationDir + file );
                 IOUtils.copy( is, os );
                 os.close();
             }

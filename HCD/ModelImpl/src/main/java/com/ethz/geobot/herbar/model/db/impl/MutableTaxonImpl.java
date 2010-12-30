@@ -66,12 +66,10 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
         setChildren( newChildren, MutableTaxonImpl.class );
     }
 
-    /** @see MutableTaxon#setLevel(Level) */
     public void setLevel( final Level newLevel )
     {
         // Replace all level type children by the new one
-        setChildren( new GraphNodeList( (MutableTaxonLevelImpl) newLevel ),
-                MutableTaxonLevelImpl.class );
+        setChildren( new GraphNodeList( (MutableTaxonLevelImpl) newLevel ), MutableTaxonLevelImpl.class );
     }
 
     public void setParentTaxon( final Taxon parent )
@@ -87,15 +85,7 @@ public class MutableTaxonImpl extends MutableGraphNodeImpl implements MutableTax
 
     public Taxon getParentTaxon()
     {
-        final GraphNode parent = super.getParents( MutableTaxonImpl.class ).get( 0 );
-        if ( parent == null )
-        {
-            return null;
-        }
-        else
-        {
-            return (MutableTaxonImpl) parent;
-        }
+        return (Taxon) super.getParents( MutableTaxonImpl.class ).get( 0 );
     }
 
     public Taxon[] getChildTaxa()

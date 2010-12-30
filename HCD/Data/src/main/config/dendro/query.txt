@@ -1,0 +1,4 @@
+SELECT p.id, p.name, c.id, c.name, c.type
+FROM vertices p, edges e, vertices c
+WHERE p.id = e.parent_id AND c.id = e.child_id
+AND p.id = 1

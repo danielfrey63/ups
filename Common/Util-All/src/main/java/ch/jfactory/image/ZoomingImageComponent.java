@@ -96,5 +96,14 @@ public class ZoomingImageComponent extends JScrollPane
             viewPort.setViewPosition( newPoint );
             viewPort.revalidate();
         }
+
+        // When switching to JDK 1.6.0_23 this pseudo overwrite was needed to successfully compile the class.
+        // - super.mouseMoved doesn't work as the super class seems not to have the method.
+        // - without it a MouseMotionListener implementations are missed
+        // - removing the MouseMotionListener as it is already implemented by the MouseAdapter fails as the interface
+        //   is not recognized anymore
+        public void mouseMoved( final MouseEvent e )
+        {
+        }
     }
 }

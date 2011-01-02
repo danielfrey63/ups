@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.gallows</artifactId>
     <name>Learning Environment Game Gallows</name>
-    <version>3.6-SNAPSHOT</version>
+    <version>3.6.1115</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -36,4 +36,9 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.gallows-3.6.1115</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.gallows-3.6.1115</url>
+  </scm>
 </project>

@@ -1,9 +1,7 @@
 package ch.jfactory.resource;
 
 import ch.jfactory.cache.AbstractImageLoader;
-import ch.jfactory.cache.ImageLoader;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 /**
  * Loads files from the file system.
@@ -12,7 +10,7 @@ import java.io.File;
  */
 public abstract class AbstractImageCache extends AbstractImageLoader
 {
-    public AbstractImageCache( final ImageLoader delegateImageLoader )
+    public AbstractImageCache( final AbstractImageLoader delegateImageLoader )
     {
         super( delegateImageLoader );
     }

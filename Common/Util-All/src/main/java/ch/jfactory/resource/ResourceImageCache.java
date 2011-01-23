@@ -1,6 +1,6 @@
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.ImageLoader;
+import ch.jfactory.cache.AbstractImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ public class ResourceImageCache extends AbstractImageCache
     /** The classpath prefix to search for images. */
     private final String path;
 
-    public ResourceImageCache( final ImageLoader delegateImageLoader, final String path )
+    public ResourceImageCache( final AbstractImageLoader delegateImageLoader, final String path )
     {
         super( delegateImageLoader );
         this.path = path;

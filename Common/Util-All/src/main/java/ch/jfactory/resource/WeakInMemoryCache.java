@@ -9,7 +9,6 @@
 package ch.jfactory.resource;
 
 import ch.jfactory.cache.AbstractImageLoader;
-import ch.jfactory.cache.ImageLoader;
 import java.awt.image.BufferedImage;
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class WeakInMemoryCache extends AbstractImageLoader
     /** Map containing a cache for images especially icons. */
     private static final Map<String, WeakReference<BufferedImage>> imageCache = new WeakHashMap<String, WeakReference<BufferedImage>>();
 
-    public WeakInMemoryCache( final ImageLoader delegateImageLoader )
+    public WeakInMemoryCache( final AbstractImageLoader delegateImageLoader )
     {
         super( delegateImageLoader );
     }

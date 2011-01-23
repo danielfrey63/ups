@@ -11,4 +11,8 @@ public interface ImageLoader
     public void invalidateCache();
 
     public void close();
+
+    void handleLoaderError( Throwable e );
+
+    void registerLoaderErrorHandler( AbstractImageLoader.LoaderErrorHandler handler );
 }

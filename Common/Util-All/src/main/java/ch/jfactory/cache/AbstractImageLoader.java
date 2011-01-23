@@ -9,9 +9,17 @@ public abstract class AbstractImageLoader implements ImageLoader
 
     protected final ImageLoader delegateImageLoader;
 
-    protected AbstractImageLoader( final ImageLoader delegateImageLoader )
+    protected ImageLoader referringImageLoader;
+
+    private LoaderErrorHandler handler;
+
+    protected AbstractImageLoader( final AbstractImageLoader delegateImageLoader )
     {
         this.delegateImageLoader = delegateImageLoader;
+        if ( delegateImageLoader != null )
+        {
+            delegateImageLoader.referringImageLoader = this;
+        }
     }
 
     public final boolean isCached( final String imageName )
@@ -28,7 +36,15 @@ public abstract class AbstractImageLoader implements ImageLoader
             image = delegateImageLoader.getImage( imageName );
             if ( image != null )
             {
-                internalFetchIntoCache( imageName, image );
+                try
+                {
+                    internalFetchIntoCache( imageName, image );
+                }
+                catch ( Throwable e )
+                {
+                    LOG.error( "error during caching", e );
+//                    handleLoaderError( e );
+                }
             }
         }
         return image;
@@ -97,4 +113,26 @@ public abstract class AbstractImageLoader implements ImageLoader
     protected abstract void internalInvalidateCache();
 
     protected abstract void internalClose();
+
+    public void registerLoaderErrorHandler( final LoaderErrorHandler handler )
+    {
+        this.handler = handler;
+    }
+
+    public void handleLoaderError( final Throwable e )
+    {
+        if ( handler != null )
+        {
+            handler.handleLoaderError( e );
+        }
+        else if ( referringImageLoader != null )
+        {
+            referringImageLoader.handleLoaderError( e );
+        }
+    }
+
+    public interface LoaderErrorHandler
+    {
+        void handleLoaderError( Throwable e );
+    }
 }

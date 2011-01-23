@@ -8,6 +8,7 @@
  */
 package ch.jfactory.resource;
 
+import ch.jfactory.cache.AbstractImageLoader;
 import ch.jfactory.cache.ImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,6 +31,8 @@ public class ImageLocator
     private static final Logger LOGGER = LoggerFactory.getLogger( ImageLocator.class );
 
     private static final ImageLoader iconLocator;
+
+    private static ErrorHandler errorHandler;
 
     /**
      * get an ImageIcon from Cache or reloads it into the cache.
@@ -57,7 +60,18 @@ public class ImageLocator
     static
     {
         iconLocator = new WeakInMemoryCache( new ResourceImageCache( null, getIconPath() ) );
-        pictLocator = new WeakInMemoryCache( new FileImageCache( new UrlImageCache( null, getImageURL() ), getPicturePath(), "jpg" ) );
+        pictLocator = new WeakInMemoryCache( new FileImageCache( new UrlImageCache( null, getImageURL(), "jpg" ), getPicturePath(), "jpg" ) );
+
+        pictLocator.registerLoaderErrorHandler( new AbstractImageLoader.LoaderErrorHandler()
+        {
+            public void handleLoaderError( final Throwable e )
+            {
+                if ( errorHandler != null )
+                {
+                    errorHandler.handleError( e );
+                }
+            }
+        } );
 
         LOGGER.info( "icon resources at " + iconLocator );
         LOGGER.info( "pictures resources at " + pictLocator );
@@ -76,13 +90,24 @@ public class ImageLocator
 
     public static String getPicturePath()
     {
-        return new File( System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/", "HcdPictureCache/" ).getAbsolutePath();
+        final String url = System.getProperty( "xmatrix.cache.local.path", System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/" );
+        return new File( url, "HcdPictureCache/" ).getAbsolutePath();
     }
 
     public static String getImageURL()
     {
-        final String url = System.getProperty( "xmatrix.url.path", "<no image URL defined>" );
+        final String url = System.getProperty( "xmatrix.cache.net.path", "<no image URL defined>" );
         LOGGER.info( "image URL is " + url );
         return url;
+    }
+
+    public static void registerErrorHandler( ErrorHandler errorHandler )
+    {
+        ImageLocator.errorHandler = errorHandler;
+    }
+
+    public static interface ErrorHandler
+    {
+        void handleError( Throwable e );
     }
 }

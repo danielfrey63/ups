@@ -1,6 +1,6 @@
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.ImageLoader;
+import ch.jfactory.cache.AbstractImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +25,7 @@ public class FileImageCache extends AbstractImageCache
 
     private final String formatName;
 
-    public FileImageCache( final ImageLoader delegateImageLoader, final String path, final String formatName )
+    public FileImageCache( final AbstractImageLoader delegateImageLoader, final String path, final String formatName )
     {
         super( delegateImageLoader );
         this.path = ( path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path ) + "/";
@@ -83,7 +83,8 @@ public class FileImageCache extends AbstractImageCache
         }
         catch ( IOException e )
         {
-            LOG.info( "could not write " + locate( name ) + " to file system" );
+            LOG.error( "could not write " + new File( locate( name ) ).getAbsolutePath() + " to file system" );
+            handleLoaderError( e );
         }
     }
 

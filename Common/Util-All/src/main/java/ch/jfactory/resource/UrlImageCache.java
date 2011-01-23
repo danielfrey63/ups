@@ -1,6 +1,6 @@
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.ImageLoader;
+import ch.jfactory.cache.AbstractImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -23,10 +23,14 @@ public class UrlImageCache extends AbstractImageCache
     /** The absolute path to search for images. */
     private final String url;
 
-    public UrlImageCache( final ImageLoader delegateImageLoader, final String url )
+    /** Write format string. */
+    private final String format;
+
+    public UrlImageCache( final AbstractImageLoader delegateImageLoader, final String url, final String format )
     {
         super( delegateImageLoader );
         this.url = url;
+        this.format = format;
     }
 
     /**
@@ -54,7 +58,7 @@ public class UrlImageCache extends AbstractImageCache
         try
         {
             final BufferedImage image = ImageIO.read( url );
-            LOG.info( "successfully locaded image " + url + " from URL" );
+            LOG.info( "successfully located image " + url + " from URL" );
             return image;
         }
         catch ( IOException e )
@@ -66,7 +70,15 @@ public class UrlImageCache extends AbstractImageCache
 
     protected void writeImage( final String name, final BufferedImage image )
     {
-        throw new UnsupportedOperationException( "file upload not supported" );
+        final URL url = locate( name );
+        try
+        {
+            ImageIO.write( image, format, ImageIO.createImageOutputStream( url ) );
+        }
+        catch ( IOException e )
+        {
+            LOG.error( "could not write to " + url );
+        }
     }
 
     @Override

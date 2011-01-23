@@ -56,7 +56,7 @@ public class WizardLevelPane extends WizardPane
                         setLevel( (Level) obj );
                     }
                 };
-                popUp.showPopup( edit, getSubLevels(), getLevel() );
+                popUp.showPopUp( edit, getSubLevels(), getLevel() );
             }
         };
         edit = createDefaultEdit( prefix, actionListener );

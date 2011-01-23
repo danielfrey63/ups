@@ -11,7 +11,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import ch.jfactory.resource.Strings;
-import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.MedAttribute;
 import com.ethz.geobot.herbar.model.MedSubject;
@@ -27,9 +27,9 @@ import com.ethz.geobot.herbar.model.Taxon;
  */
 public class MedicineDisplay extends AttributeTreePanel
 {
-    MedicineDisplay( final HerbarModel hModel, final Level stopper )
+    MedicineDisplay( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel )
     {
-        super( hModel, stopper, Strings.getString( "PROPERTY.MEDTEXT.TEXT" ) );
+        super( herbarContext, stopper, taxStateModel, Strings.getString( "PROPERTY.MEDTEXT.TEXT" ) );
     }
 
     public VirtualGraphTreeNodeFilter registerFilter()

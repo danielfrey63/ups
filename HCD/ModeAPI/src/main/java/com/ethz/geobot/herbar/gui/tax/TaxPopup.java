@@ -47,6 +47,6 @@ abstract public class TaxPopup extends ObjectPopup
      */
     public void showPopup( final Component jb, final Taxon currentTaxon )
     {
-        super.showPopup( jb, currentTaxon );
+        super.showPopUp( jb, currentTaxon );
     }
 }

@@ -32,6 +32,6 @@ abstract public class LevelPopUp extends ObjectPopup
      */
     public void showPopUp( final Component jb, final Level[] scopeLevels, final Level currentLevel )
     {
-        super.showPopup( jb, scopeLevels, currentLevel );
+        super.showPopUp( jb, scopeLevels, currentLevel );
     }
 }

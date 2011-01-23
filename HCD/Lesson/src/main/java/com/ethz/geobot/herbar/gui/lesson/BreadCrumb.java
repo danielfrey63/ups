@@ -38,7 +38,7 @@ public class BreadCrumb extends JPanel
 
     public void setTaxFocus( final Taxon tax )
     {
-        LOG.debug( "setting focus to \"" + tax + "\"" );
+        LOG.debug( "adjusting bread crumb to new focus \"" + tax + "\"" );
         panel.removeAll();
         Taxon parent = tax;
         while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null )

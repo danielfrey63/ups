@@ -60,7 +60,7 @@ public class ModeStateModel extends StateCompositeModel
 
     public Preferences loadCompositeState( final Preferences node )
     {
-        final String modeName = node.get( "mode", System.getProperty( "herbar.default.mode.name" ) );
+        final String modeName = node.get( "mode", "LessonMode" );
 
         try
         {

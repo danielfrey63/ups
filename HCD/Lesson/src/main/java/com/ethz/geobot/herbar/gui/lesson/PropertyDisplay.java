@@ -10,6 +10,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
+import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -50,16 +51,17 @@ public class PropertyDisplay extends JTabbedPane
     /**
      * Creates a new instance of PropertyDisplay.
      *
-     * @param herbarModel the main model
+     * @param herbarContext the main context
+     * @param taxStateModel
      */
-    public PropertyDisplay( final HerbarModel herbarModel )
+    public PropertyDisplay( final HerbarContext herbarContext, final TaxStateModel taxStateModel )
     {
-        this.herbarModel = herbarModel;
+        herbarModel = herbarContext.getDataModel();
         this.setTabPlacement( JTabbedPane.BOTTOM );
         model = new AttributeDisplayModel( herbarModel.getLevel( STOP ) );
-        morDisplay = new MorphologyDisplay( herbarModel, herbarModel.getLevel( STOP ) );
-        ecoDisplay = new EcologyDisplay( herbarModel, herbarModel.getLevel( STOP ) );
-        medDisplay = new MedicineDisplay( herbarModel, herbarModel.getLevel( STOP ) );
+        morDisplay = new MorphologyDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
+        ecoDisplay = new EcologyDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
+        medDisplay = new MedicineDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
         this.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
         this.addTab( Strings.getString( "PROPERTY.MORTEXT.TEXT" ),
                 ImageLocator.getIcon( Strings.getString( "PROPERTY.MORTEXT.ICON" ) ), morDisplay );

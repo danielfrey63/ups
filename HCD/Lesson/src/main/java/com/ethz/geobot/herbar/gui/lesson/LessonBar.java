@@ -286,7 +286,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     {
         if ( focusPopUp == null )
         {
-            focusPopUp = new FocusPopUp();
+            focusPopUp = new FocusPopUp( taxStateModel );
         }
         focusPopUp.setObjects( taxStateModel.getTaxList() );
         return focusPopUp;
@@ -385,16 +385,19 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         statusBar.removeStatusComponent( listLabel );
     }
 
-    public class FocusPopUp extends ObjectPopup
+    public static class FocusPopUp extends ObjectPopup
     {
-        public FocusPopUp()
+        final TaxStateModel taxStateModel;
+
+        public FocusPopUp( final TaxStateModel taxStateModel )
         {
             super( taxStateModel.getTaxList() );
+            this.taxStateModel = taxStateModel;
         }
 
         public void showPopUp( final Component component )
         {
-            showPopup( component, taxStateModel.getFocus() );
+            showPopUp( component, taxStateModel.getFocus() );
         }
 
         public void itemSelected( final Object obj )
@@ -412,7 +415,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
         public void showPopUp( final Component component )
         {
-            showPopup( component, taxStateModel.getScope().getSubLevels(), taxStateModel.getLevel() );
+            showPopUp( component, taxStateModel.getScope().getSubLevels(), taxStateModel.getLevel() );
         }
 
         public void itemSelected( final Object obj )
@@ -430,7 +433,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
         public void showPopUp( final Component component )
         {
-            showPopup( component, taxStateModel.getModel() );
+            showPopUp( component, taxStateModel.getModel() );
         }
 
         public void itemSelected( final Object obj )

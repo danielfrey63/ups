@@ -95,7 +95,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
             taxStateModel = new TaxStateModel( herbarModel );
 
-            lessonPanel = new PropertyDisplay( herbarModel );
+            lessonPanel = new PropertyDisplay( context, taxStateModel );
             askPanel = new PropertyInterrogator( initResultModel( herbarModel ) );
             askPanel.setTaxFocus( taxStateModel.getFocus() );
 

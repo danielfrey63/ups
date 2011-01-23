@@ -32,6 +32,7 @@ import java.io.OutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -189,8 +190,14 @@ public class AppHerbar
 
     private void initSplash()
     {
+        ImageLocator.registerErrorHandler( new ImageLocator.ErrorHandler()
+        {
+            public void handleError( final Throwable e )
+            {
+                JOptionPane.showMessageDialog( mainFrame, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
+            }
+        } );
         final ImageIcon imageIcon = ImageLocator.getIcon( "splash.jpg" );
-        final AnimationQueue scroller = getScroller();
         SwingUtilities.invokeLater( new Runnable()
         {
             public void run()

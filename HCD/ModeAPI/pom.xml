@@ -18,6 +18,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>

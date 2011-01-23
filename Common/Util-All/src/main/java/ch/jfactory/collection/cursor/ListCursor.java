@@ -12,30 +12,30 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-class ListCursor implements Cursor
+class ListCursor<T> implements Cursor<T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( ListCursor.class );
 
-    private final List list;
+    private final List<T> list;
 
-    private final ListIterator iterator;
+    private final ListIterator<T> iterator;
 
-    private Object currentObject = null;
+    private T currentObject = null;
 
-    public ListCursor( final List list )
+    public ListCursor( final List<T> list )
     {
         this.list = list;
         this.iterator = list.listIterator();
         this.currentObject = iterator.hasNext() ? iterator.next() : null;
     }
 
-    public Object next()
+    public T next()
     {
         currentObject = iterator.next();
         return currentObject;
     }
 
-    public Object previous()
+    public T previous()
     {
         iterator.previous();
         currentObject = iterator.previous();
@@ -64,12 +64,12 @@ class ListCursor implements Cursor
         return list.size();
     }
 
-    public Object getCurrent()
+    public T getCurrent()
     {
         return currentObject;
     }
 
-    public void setCurrent( final Object obj )
+    public void setCurrent( final T obj )
     {
         final int idx = list.indexOf( obj );
         if ( idx >= 0 )
@@ -100,7 +100,7 @@ class ListCursor implements Cursor
         return list.isEmpty();
     }
 
-    public Iterator getIterator()
+    public Iterator<T> getIterator()
     {
         return list.iterator();
     }

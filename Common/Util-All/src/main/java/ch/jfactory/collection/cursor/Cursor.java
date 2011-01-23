@@ -9,21 +9,21 @@ import java.util.Iterator;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-public interface Cursor
+public interface Cursor<T>
 {
     /**
      * get the next object and move the cursor forward.
      *
      * @return next object
      */
-    Object next();
+    T next();
 
     /**
      * get the previous object and move the cursor backward.
      *
      * @return next object
      */
-    Object previous();
+    T previous();
 
     /**
      * Check if a following object exists.
@@ -58,7 +58,7 @@ public interface Cursor
      *
      * @return the current object or null if cursor is empty
      */
-    Object getCurrent();
+    T getCurrent();
 
     /**
      * check if the cursor is empty.
@@ -70,14 +70,14 @@ public interface Cursor
     /**
      * set the current Item
      *
-     * @param obj
+     * @param obj the object to set
      */
-    void setCurrent( Object obj );
+    void setCurrent( T obj );
 
     /**
      * return an iterator for all objects. Iteration over it doesn't change the cursor position.
      *
      * @return an iterator over all objects
      */
-    Iterator getIterator();
+    Iterator<T> getIterator();
 }

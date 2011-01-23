@@ -12,26 +12,26 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-class ArrayCursor implements Cursor
+class ArrayCursor<T> implements Cursor<T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( ArrayCursor.class );
 
-    private final Object[] objects;
+    private final T[] objects;
 
     private int currentIndex = 0;
 
-    public ArrayCursor( final Object[] array )
+    public ArrayCursor( final T[] array )
     {
         this.objects = array;
     }
 
-    public Object next()
+    public T next()
     {
         currentIndex = ( currentIndex < getSize() ) ? ++currentIndex : getSize();
         return objects[currentIndex];
     }
 
-    public Object previous()
+    public T previous()
     {
         currentIndex = ( currentIndex == 0 ) ? 0 : --currentIndex;
         return objects[currentIndex];
@@ -57,7 +57,7 @@ class ArrayCursor implements Cursor
         return objects == null ? 0 : objects.length;
     }
 
-    public Object getCurrent()
+    public T getCurrent()
     {
         if ( objects == null )
         {
@@ -74,7 +74,7 @@ class ArrayCursor implements Cursor
         return objects[currentIndex];
     }
 
-    public void setCurrent( final Object obj )
+    public void setCurrent( final T obj )
     {
         for ( int i = 0; i < getSize(); i++ )
         {
@@ -97,9 +97,9 @@ class ArrayCursor implements Cursor
         return ( getSize() == 0 );
     }
 
-    public Iterator getIterator()
+    public Iterator<T> getIterator()
     {
-        final List list = Arrays.asList( objects );
+        final List<T> list = Arrays.asList( objects );
         return list.iterator();
     }
 }

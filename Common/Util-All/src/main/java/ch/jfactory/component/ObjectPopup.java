@@ -6,37 +6,43 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class ObjectPopup extends JPopupMenu implements ActionListener
+public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListener
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( ObjectPopup.class );
 
-    public ObjectPopup( final Object[] objects )
+    public ObjectPopup( final String title, final T[] objects )
     {
-        setCursor( new DefaultCursor( objects ) );
+        super( title );
+        setCursor( new DefaultCursor<T>( objects ) );
     }
 
-    public void setObjects( final Object[] objects )
+    public ObjectPopup( final T[] objects )
     {
-        setCursor( new DefaultCursor( objects ) );
+        this( null, objects );
+    }
+
+    public void setObjects( final T[] objects )
+    {
+        setCursor( new DefaultCursor<T>( objects ) );
     }
 
     public void showPopUp( final Component jb )
     {
-        showPopup( jb, null, null );
+        showPopUp( jb, null, null );
     }
 
-    public void showPopup( final Component jb, final Object selected )
+    public void showPopUp( final Component jb, final T selected )
     {
-        showPopup( jb, null, selected );
+        showPopUp( jb, null, selected );
     }
 
-    public void showPopup( final Component jb, final Object[] enabled, final Object selected )
+    @SuppressWarnings( "unchecked" )
+    public void showPopUp( final Component jb, final T[] enabled, final T selected )
     {
         try
         {
@@ -55,8 +61,8 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener
             int iLevel = -1;
             for ( int i = getComponentCount() - 1; i >= 0; i-- )
             {
-                final ObjectMenuItem jmi = (ObjectMenuItem) getComponent( i );
-                final Object object = jmi.getObject();
+                final ObjectMenuItem<T> jmi = (ObjectMenuItem<T>) getComponent( i );
+                final T object = jmi.getObject();
                 if ( enabled != null )
                 {
                     jmi.setEnabled( ArrayUtils.contains( enabled, object ) && object != selected );
@@ -88,17 +94,18 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener
         }
         catch ( Exception p_ex )
         {
-            LOGGER.error( "error in object popup", p_ex );
+            LOGGER.error( "error in object pop-up", p_ex );
         }
     }
 
+    @SuppressWarnings( "unchecked" )
     public void actionPerformed( final ActionEvent e )
     {
-        final ObjectMenuItem jmi = (ObjectMenuItem) e.getSource();
+        final ObjectMenuItem<T> jmi = (ObjectMenuItem<T>) e.getSource();
         itemSelected( jmi.getObject() );
     }
 
-    private void setCursor( final Cursor cursor )
+    private void setCursor( final Cursor<T> cursor )
     {
         this.removeAll();
         if ( !cursor.isEmpty() )
@@ -111,30 +118,14 @@ public abstract class ObjectPopup extends JPopupMenu implements ActionListener
         }
     }
 
-    private void addItem( final Object obj )
+    private void addItem( final T obj )
     {
-        final ObjectMenuItem jmi = new ObjectMenuItem( obj );
+        final ObjectMenuItem<T> jmi = new ObjectMenuItem<T>( obj );
         jmi.addActionListener( this );
         super.add( jmi );
     }
 
-    abstract public void itemSelected( Object obj );
-
-    class ObjectMenuItem extends JMenuItem
-    {
-        private final Object object;
-
-        public ObjectMenuItem( final Object object )
-        {
-            super( object.toString() );
-            this.object = object;
-        }
-
-        public Object getObject()
-        {
-            return object;
-        }
-    }
+    abstract public void itemSelected( T obj );
 }
 
 

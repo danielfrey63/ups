@@ -12,19 +12,19 @@ import javax.swing.ListModel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class DefaultJList extends JList
+public class DefaultJList<T> extends JList
 {
     public DefaultJList( final ListModel dataModel )
     {
         super( dataModel );
     }
 
-    public DefaultJList( final Object[] listData )
+    public DefaultJList( final T[] listData )
     {
         super( listData );
     }
 
-    public DefaultJList( final Vector listData )
+    public DefaultJList( final Vector<T> listData )
     {
         super( listData );
     }
@@ -33,7 +33,7 @@ public class DefaultJList extends JList
     {
     }
 
-    public void setSelectedValues( final Object[] selectedObjects )
+    public void setSelectedValues( final T[] selectedObjects )
     {
         final ListModel model = getModel();
         clearSelection();

@@ -12,12 +12,17 @@ import java.util.Comparator;
  */
 public class GraphNodeList
 {
-    private static final Comparator COMPARATOR = new ToStringComparator();
+    private static final Comparator<GraphNode> COMPARATOR = new ToStringComparator<GraphNode>();
 
-    private final ArrayList list = new ArrayList();
+    private final ArrayList<GraphNode> list = new ArrayList<GraphNode>();
 
     public GraphNodeList()
     {
+    }
+
+    public GraphNodeList( final ArrayList<GraphNode> list )
+    {
+        this.list.addAll( list );
     }
 
     public GraphNodeList( final GraphNode element )
@@ -29,7 +34,7 @@ public class GraphNodeList
     {
         if ( list.size() > index && index >= 0 )
         {
-            return (GraphNode) list.get( index );
+            return list.get( index );
         }
         else
         {
@@ -41,7 +46,7 @@ public class GraphNodeList
     {
         for ( int i = 0; i < list.size(); i++ )
         {
-            final GraphNode nd = (GraphNode) list.get( i );
+            final GraphNode nd = list.get( i );
             if ( nd == node )
             {
                 return i;
@@ -52,7 +57,7 @@ public class GraphNodeList
 
     public GraphNode[] getAll()
     {
-        return (GraphNode[]) list.toArray( new GraphNode[list.size()] );
+        return list.toArray( new GraphNode[list.size()] );
     }
 
     public GraphNode[] getAll( final Object[] arraytype )
@@ -114,19 +119,24 @@ public class GraphNodeList
         return list.contains( node );
     }
 
+    public GraphNodeList intersect( final GraphNodeList other )
+    {
+        final ArrayList<GraphNode> copy = new ArrayList<GraphNode>( list );
+        copy.retainAll( other.list );
+        return new GraphNodeList( copy );
+    }
+
     public void sort()
     {
         sort( COMPARATOR );
     }
 
-    public void sort( final Comparator comparator )
+    public void sort( final Comparator<GraphNode> comparator )
     {
         Collections.sort( list, comparator );
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         return list.toString();

@@ -11,11 +11,11 @@ import java.util.List;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $
  */
-public class DefaultCursor implements Cursor
+public class DefaultCursor<T> implements Cursor<T>
 {
-    private static final Cursor emptyCursor = new ListCursor( new ArrayList() );
+    private final Cursor<T> emptyCursor = new ListCursor<T>( new ArrayList<T>() );
 
-    private final Cursor cursor;
+    private final Cursor<T> cursor;
 
     public DefaultCursor()
     {
@@ -27,7 +27,7 @@ public class DefaultCursor implements Cursor
      *
      * @param list list for the cursor
      */
-    public DefaultCursor( final List list )
+    public DefaultCursor( final List<T> list )
     {
         if ( list == null )
         {
@@ -35,7 +35,7 @@ public class DefaultCursor implements Cursor
         }
         else
         {
-            cursor = new ListCursor( list );
+            cursor = new ListCursor<T>( list );
         }
     }
 
@@ -44,7 +44,7 @@ public class DefaultCursor implements Cursor
      *
      * @param array an array of objects
      */
-    public DefaultCursor( final Object[] array )
+    public DefaultCursor( final T[] array )
     {
         if ( array == null )
         {
@@ -52,16 +52,16 @@ public class DefaultCursor implements Cursor
         }
         else
         {
-            cursor = new ArrayCursor( array );
+            cursor = new ArrayCursor<T>( array );
         }
     }
 
-    public Object next()
+    public T next()
     {
         return cursor.next();
     }
 
-    public Object previous()
+    public T previous()
     {
         return cursor.previous();
     }
@@ -86,12 +86,12 @@ public class DefaultCursor implements Cursor
         return cursor.getSize();
     }
 
-    public Object getCurrent()
+    public T getCurrent()
     {
         return cursor.getCurrent();
     }
 
-    public void setCurrent( final Object obj )
+    public void setCurrent( final T obj )
     {
         cursor.setCurrent( obj );
     }
@@ -106,7 +106,7 @@ public class DefaultCursor implements Cursor
         return cursor.isEmpty();
     }
 
-    public Iterator getIterator()
+    public Iterator<T> getIterator()
     {
         return cursor.getIterator();
     }

@@ -8,6 +8,7 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,27 +34,27 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.11 $ $Date: 2007/09/27 10:41:35 $
  */
-public class ListDialog extends I15nComponentDialog implements ListSelectionListener, DocumentListener
+public class ListDialog<T> extends I15nComponentDialog implements ListSelectionListener, DocumentListener
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( ListDialog.class );
 
-    private Object[] selectedData;
+    private T[] selectedData;
 
-    private Object[] allData;
+    private T[] allData;
 
-    private DefaultJList list;
+    private DefaultJList<T> list;
 
     /**
      * Constructs a new list dialog based as a child of the dialog given. A title is displayed, for which the string is
      * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
-     * is the prefix argument given. A text multiline label is displayed above the list where the text is retrieved by
+     * is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by
      * the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
      * @param listData the data to put into the list
      */
-    public ListDialog( final Dialog parent, final String prefix, final Object[] listData )
+    public ListDialog( final Dialog parent, final String prefix, final T[] listData )
     {
         super( parent, prefix );
         init( listData );
@@ -62,22 +63,24 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     /**
      * Constructs a new list dialog based as a child of the frame given. A title is displayed, for which the string is
      * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
-     * is the prefix argument given. A text multiline label is displayed above the list where the text is retrieved by
+     * is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by
      * the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
      * @param listData the data to put into the list
      */
-    public ListDialog( final Frame parent, final String prefix, final Object[] listData )
+    public ListDialog( final Frame parent, final String prefix, final T[] listData )
     {
         super( parent, prefix );
         init( listData );
     }
 
-    private void init( final Object[] listData )
+    @SuppressWarnings( "unchecked" )
+    private void init( final T[] listData )
     {
-        allData = new ArrayList<Object>( Arrays.asList( listData ) ).toArray();
+        final List<T> temp = Arrays.asList( listData );
+        allData = new ArrayList<T>( temp ).toArray( (T[]) Array.newInstance( temp.iterator().next().getClass(), temp.size() ) );
         list.setListData( allData );
         list.requestFocus();
     }
@@ -85,9 +88,9 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
     /**
      * Returns the data selected. The type of the object array is <code>Object[]</code>.
      *
-     * @return the data selected uppon close of the dialog, if the apply butten was pressed, otherwise an empty array.
+     * @return the data selected upon close of the dialog, if the apply button was pressed, otherwise an empty array.
      */
-    public Object[] getSelectedData()
+    public T[] getSelectedData()
     {
         return selectedData;
     }
@@ -96,11 +99,11 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      * Returns the data selected. The type of the object array is the type given.
      *
      * @param type the type of the array to which the data should be copied
-     * @return the data selected uppon close of the dialog, if the apply butten was pressed, otherwise an empty array.
+     * @return the data selected upon close of the dialog, if the apply button was pressed, otherwise an empty array.
      */
-    public Object[] getSelectedData( final Object[] type )
+    public T[] getSelectedData( final T[] type )
     {
-        return new ArrayList<Object>( Arrays.asList( selectedData ) ).toArray( type );
+        return new ArrayList<T>( Arrays.asList( selectedData ) ).toArray( type );
     }
 
     /**
@@ -130,7 +133,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
      *
      * @param selected the objects to select in the list
      */
-    public void setSelectedData( final Object[] selected )
+    public void setSelectedData( final T[] selected )
     {
         list.setSelectedValues( selected );
         if ( selected != null && selected.length > 0 )
@@ -143,7 +146,7 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
 
     protected JComponent createComponentPanel()
     {
-        list = new DefaultJList();
+        list = new DefaultJList<T>();
         list.addListSelectionListener( this );
         list.addMouseListener( new MouseAdapter()
         {
@@ -162,14 +165,17 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
         return new JScrollPane( list );
     }
 
+    @SuppressWarnings( "unchecked" )
     protected void onApply() throws ComponentDialogException
     {
-        selectedData = list.getSelectedValues();
+        selectedData = (T[]) list.getSelectedValues();
     }
 
+    @SuppressWarnings( "unchecked" )
     protected void onCancel()
     {
-        selectedData = new Object[0];
+        final List<T> temp = Arrays.asList( allData );
+        selectedData = (T[]) Array.newInstance( temp.iterator().next().getClass(), temp.size() );
     }
 
     // ListSelectionListener
@@ -238,8 +244,8 @@ public class ListDialog extends I15nComponentDialog implements ListSelectionList
         {
             list.add( "Eintrag " + i );
         }
-        final Object[] objects = list.toArray();
-        final ListDialog dialog = new ListDialog( (JFrame) null, "test", objects );
+        final String[] objects = list.toArray( new String[list.size()] );
+        final ListDialog<String> dialog = new ListDialog<String>( (JFrame) null, "test", objects );
         dialog.setSize( 400, 700 );
         WindowUtils.centerOnScreen( dialog );
         dialog.setVisible( true );

@@ -98,58 +98,77 @@ public abstract class AttributeTreePanel extends JPanel
         if ( e.isPopupTrigger() && paths != null && paths.length > 0 )
         {
             final GraphNodeList intersection = getSimilarTaxa( paths );
-            final Object[] list = intersection.getAll();
-            final int length = list.length;
-            final Taxon[] copy = new Taxon[length];
-            System.arraycopy( list, 0, copy, 0, length );
-            Arrays.sort( copy, new ToStringComparator<Object>() );
+            final Taxon[] taxa = sortTaxa( intersection );
             final JPopupMenu menu = new JPopupMenu();
             if ( intersection.size() > THRESHOLD )
             {
-                final JMenuItem item = new JMenuItem( SIMILAR_TAXA + "..." );
-                item.addActionListener( new ActionListener()
-                {
-                    public void actionPerformed( final ActionEvent e )
-                    {
-                        final ListDialog<Taxon> dialog = new ListDialog<Taxon>( herbarContext.getHerbarGUIManager().getParentFrame(), "DIALOG.SIMILAR", copy );
-                        dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-                        dialog.setSize( 300, 300 );
-                        dialog.setLocationRelativeTo( getTopLevelAncestor() );
-                        dialog.setVisible( true );
-                        if ( dialog.isAccepted() )
-                        {
-                            final Taxon taxon = dialog.getSelectedData( new Taxon[0] )[0];
-                            taxStateModel.setLevel( taxon.getLevel() );
-                            taxStateModel.setFocus( taxon );
-                        }
-                    }
-                } );
-                menu.add( item );
+                menu.add( getListDialog( taxa ) );
             }
             else
             {
-                final JMenu subMenu = new JMenu( SIMILAR_TAXA );
-                for ( final Taxon taxon : copy )
-                {
-                    final ObjectMenuItem<Taxon> item = new ObjectMenuItem<Taxon>( taxon );
-                    item.setEnabled( taxon != null && !taxon.equals( taxStateModel.getFocus() ) );
-                    item.addActionListener( new ActionListener()
-                    {
-                        public void actionPerformed( final ActionEvent e )
-                        {
-                            if ( taxon != null )
-                            {
-                                taxStateModel.setLevel( taxon.getLevel() );
-                                taxStateModel.setFocus( taxon );
-                            }
-                        }
-                    } );
-                    subMenu.add( item );
-                }
-                menu.add( subMenu );
+                menu.add( getPopUp( taxa ) );
             }
             menu.show( AttributeTreePanel.this, e.getX(), e.getY() );
         }
+    }
+
+    private JMenu getPopUp( final Taxon[] copy )
+    {
+        final JMenu subMenu = new JMenu( SIMILAR_TAXA );
+        for ( final Taxon taxon : copy )
+        {
+            final ObjectMenuItem<Taxon> item = new ObjectMenuItem<Taxon>( taxon );
+            item.setEnabled( taxon != null && !taxon.equals( taxStateModel.getFocus() ) );
+            item.addActionListener( new ActionListener()
+            {
+                public void actionPerformed( final ActionEvent e )
+                {
+                    if ( taxon != null )
+                    {
+                        setNewFocus( taxon );
+                    }
+                }
+            } );
+            subMenu.add( item );
+        }
+        return subMenu;
+    }
+
+    private void setNewFocus( final Taxon taxon )
+    {
+        taxStateModel.setLevel( taxon.getLevel() );
+        taxStateModel.setFocus( taxon );
+    }
+
+    private JMenuItem getListDialog( final Taxon[] copy )
+    {
+        final JMenuItem item = new JMenuItem( SIMILAR_TAXA + "..." );
+        item.addActionListener( new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                final ListDialog<Taxon> dialog = new ListDialog<Taxon>( herbarContext.getHerbarGUIManager().getParentFrame(), "DIALOG.SIMILAR", copy );
+                dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+                dialog.setSize( 300, 300 );
+                dialog.setLocationRelativeTo( getTopLevelAncestor() );
+                dialog.setVisible( true );
+                if ( dialog.isAccepted() )
+                {
+                    setNewFocus( dialog.getSelectedData( new Taxon[0] )[0] );
+                }
+            }
+        } );
+        return item;
+    }
+
+    private Taxon[] sortTaxa( final GraphNodeList intersection )
+    {
+        final Object[] list = intersection.getAll();
+        final int length = list.length;
+        final Taxon[] copy = new Taxon[length];
+        System.arraycopy( list, 0, copy, 0, length );
+        Arrays.sort( copy, new ToStringComparator<Object>() );
+        return copy;
     }
 
     private GraphNodeList getSimilarTaxa( final TreePath[] paths )

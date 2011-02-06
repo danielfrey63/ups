@@ -28,7 +28,7 @@ import net.java.jveez.cache.impl.MemoryImageLoader;
 import net.java.jveez.cache.impl.PersistentThumbnailLoader;
 import net.java.jveez.vfs.Picture;
 
-public class ThumbnailStore implements ImageLoader
+public class ThumbnailStore implements ImageLoader<Picture>
 {
     private static final int MEMORY_CACHE_CAPACITY = 100;
 

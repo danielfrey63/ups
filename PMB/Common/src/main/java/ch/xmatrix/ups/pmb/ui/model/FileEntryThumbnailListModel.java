@@ -49,9 +49,9 @@ public class FileEntryThumbnailListModel extends AbstractListModel implements Th
         return list.size();
     }
 
-    public Picture getPicture( final int index )
+    public FileEntry getPicture( final int index )
     {
-        return list.get( index ).getPicture();
+        return list.get( index );
     }
 
     public Picture getElementAt( final int index )
@@ -93,12 +93,12 @@ public class FileEntryThumbnailListModel extends AbstractListModel implements Th
         }
     }
 
-    public void setPictureAt( final int index, final Picture picture )
+    public void setPictureAt( final int index, final FileEntry picture )
     {
         throw new IllegalArgumentException( "use setFileEntryAt(int) instead" );
     }
 
-    public void setPictures( final Collection<? extends Picture> pictures )
+    public void setPictures( final Collection<? extends FileEntry> pictures )
     {
         throw new IllegalArgumentException( "use setFileEntries(Collciton) instead" );
     }

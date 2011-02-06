@@ -8,9 +8,13 @@
  */
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.AbstractImageLoader;
-import ch.jfactory.cache.ImageLoader;
-import java.awt.image.BufferedImage;
+import ch.jfactory.cache.FileImageCache;
+import ch.jfactory.cache.ImageCache;
+import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.cache.NestedImageCache;
+import ch.jfactory.cache.ResourceImageCache;
+import ch.jfactory.cache.UrlImageCache;
+import ch.jfactory.cache.WeakInMemoryCache;
 import java.io.File;
 import javax.swing.ImageIcon;
 import org.slf4j.Logger;
@@ -26,13 +30,11 @@ public class ImageLocator
 {
     public static final String PROPERTY_IMAGE_LOCATION = "xmatrix.picture.path";
 
-    public static final ImageLoader pictLocator;
+    public static final ImageCache PICT_LOCATOR;
 
     private static final Logger LOGGER = LoggerFactory.getLogger( ImageLocator.class );
 
-    private static final ImageLoader iconLocator;
-
-    private static ErrorHandler errorHandler;
+    private static final ImageCache ICON_LOCATOR;
 
     /**
      * get an ImageIcon from Cache or reloads it into the cache.
@@ -47,34 +49,40 @@ public class ImageLocator
             return null;
         }
         LOGGER.trace( "icon " + name );
-        final BufferedImage image = iconLocator.getImage( name );
-        return image == null ? new ImageIcon( name ) : new ImageIcon( image );
+        try
+        {
+            return new ImageIcon( ICON_LOCATOR.getImage( name ) );
+        }
+        catch ( ImageCacheException e )
+        {
+            LOGGER.error( "cannot retrieve icon for " + name, e );
+            return new ImageIcon( name );
+        }
     }
 
     public static ImageIcon getPicture( final String name )
     {
-        final BufferedImage image = pictLocator.getImage( name );
-        return image == null ? new ImageIcon( name ) : new ImageIcon( image );
+        try
+        {
+            return new ImageIcon( PICT_LOCATOR.getImage( name ) );
+        }
+        catch ( ImageCacheException e )
+        {
+            LOGGER.error( "cannot retrieve picture for " + name, e );
+            return new ImageIcon( name );
+        }
     }
 
     static
     {
-        iconLocator = new WeakInMemoryCache( new ResourceImageCache( null, getIconPath() ) );
-        pictLocator = new WeakInMemoryCache( new FileImageCache( new UrlImageCache( null, getImageURL(), "jpg" ), getPicturePath(), "jpg" ) );
+        ICON_LOCATOR = new ResourceImageCache( getIconPath() );
+        final ImageCache fileSystemCache = new FileImageCache( getPicturePath(), "jpg" );
+        final ImageCache weakInMemoryCache = new WeakInMemoryCache();
+        final ImageCache urlImageCache = new UrlImageCache( getImageURL(), "jpg" );
+        PICT_LOCATOR = new NestedImageCache( weakInMemoryCache, fileSystemCache, urlImageCache );
 
-        pictLocator.registerLoaderErrorHandler( new AbstractImageLoader.LoaderErrorHandler()
-        {
-            public void handleLoaderError( final Throwable e )
-            {
-                if ( errorHandler != null )
-                {
-                    errorHandler.handleError( e );
-                }
-            }
-        } );
-
-        LOGGER.info( "icon resources at " + iconLocator );
-        LOGGER.info( "pictures resources at " + pictLocator );
+        LOGGER.info( "icon resources at " + ICON_LOCATOR );
+        LOGGER.info( "pictures resources at " + PICT_LOCATOR );
     }
 
     public static String getIconPath()
@@ -99,15 +107,5 @@ public class ImageLocator
         final String url = System.getProperty( "xmatrix.cache.net.path", "<no image URL defined>" );
         LOGGER.info( "image URL is " + url );
         return url;
-    }
-
-    public static void registerErrorHandler( ErrorHandler errorHandler )
-    {
-        ImageLocator.errorHandler = errorHandler;
-    }
-
-    public static interface ErrorHandler
-    {
-        void handleError( Throwable e );
     }
 }

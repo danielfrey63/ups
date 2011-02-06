@@ -22,9 +22,9 @@ public class ZoomingImageComponent extends JScrollPane
 {
     private final CachedImageComponent ci;
 
-    public ZoomingImageComponent( final PictureCache cache, final int size )
+    public ZoomingImageComponent( final PictureCache cache )
     {
-        ci = new CachedImageComponent( cache, size );
+        ci = new CachedImageComponent( cache );
         setViewportView( ci );
         setBorder( BorderFactory.createEmptyBorder() );
 
@@ -33,14 +33,14 @@ public class ZoomingImageComponent extends JScrollPane
         addMouseMotionListener( dragZoom );
     }
 
-    public void setImage( final String name, final boolean isThumb )
+    public void setImage( final String name )
     {
-        ci.setImage( name, isThumb );
+        ci.setImage( name );
     }
 
     public String getImage()
     {
-        return ci.getImage().getName();
+        return ci == null || ci.getImage() == null ? null : ci.getImage().getName();
     }
 
     public boolean isZoomed()

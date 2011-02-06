@@ -16,7 +16,7 @@ import net.java.jveez.vfs.Picture;
  *
  * @author Daniel Frey 27.06.2008 17:09:18
  */
-public class AdjustSizeLoadedListener implements ViewerPanel.LoadedListener
+public class AdjustSizeLoadedListener implements ViewerPanel.LoadedListener<Picture>
 {
     private final InfoModel infoModel;
 
@@ -25,10 +25,8 @@ public class AdjustSizeLoadedListener implements ViewerPanel.LoadedListener
         this.infoModel = infoModel;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void imageLoaded( final ViewerPanel panel )
+    /** {@inheritDoc} */
+    public void imageLoaded( final ViewerPanel<Picture> panel )
     {
         final Picture picture = panel.getCurrentPicture();
         if ( picture != null )

@@ -40,6 +40,11 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
         listeners.remove( listener );
     }
 
+    public void detachAll()
+    {
+        listeners.clear();
+    }
+
     /**
      * Inform all listeners that the image will be loaded.
      *
@@ -78,5 +83,11 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
         {
             listener.loadAborted( name );
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName() + "[" + listeners + "]";
     }
 }

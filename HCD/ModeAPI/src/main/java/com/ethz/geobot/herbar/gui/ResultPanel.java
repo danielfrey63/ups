@@ -102,8 +102,6 @@ public class ResultPanel extends JPanel
 
         private final ImageIcon ICON_WRONG;
 
-        private final ImageIcon ICON_VALUE;
-
         private final ImageIcon ICON_COMPLETE;
 
         private final ImageIcon ICON_INCOMPLETE;
@@ -114,7 +112,6 @@ public class ResultPanel extends JPanel
             ICON_CORRECT = ImageLocator.getIcon( "abfrageRichtig.gif" );
             ICON_NEAR = ImageLocator.getIcon( "abfrageFast.gif" );
             ICON_WRONG = ImageLocator.getIcon( "abfrageFalsch.gif" );
-            ICON_VALUE = ImageLocator.getIcon( "iconValue.gif" );
             ICON_COMPLETE = ImageLocator.getIcon( "abfrageVollstaendig.gif" );
             ICON_INCOMPLETE = ImageLocator.getIcon( "abfrageUnvollstaendig.gif" );
         }
@@ -165,7 +162,7 @@ public class ResultPanel extends JPanel
                 }
                 else
                 {
-                    setIcon( ICON_VALUE );
+                    setIcon( ICON_WRONG );
                 }
             }
             setBackgroundNonSelectionColor( tree.getBackground() );

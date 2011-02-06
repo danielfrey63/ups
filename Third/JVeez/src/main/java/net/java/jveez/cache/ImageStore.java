@@ -25,9 +25,8 @@ package net.java.jveez.cache;
 import java.awt.image.BufferedImage;
 import net.java.jveez.cache.impl.FileImageLoader;
 import net.java.jveez.cache.impl.MemoryImageLoader;
-import net.java.jveez.vfs.Picture;
 
-public class ImageStore implements ImageLoader
+public class ImageStore<T> implements ImageLoader<T>
 {
     private static int initialMemoryCacheSize = 40;
 
@@ -59,12 +58,12 @@ public class ImageStore implements ImageLoader
         }
     }
 
-    public boolean isCached( final Picture picture )
+    public boolean isCached( final T picture )
     {
         return delegateLoader.isCached( picture );
     }
 
-    public BufferedImage getImage( final Picture picture )
+    public BufferedImage getImage( final T picture )
     {
         return delegateLoader.getImage( picture );
     }

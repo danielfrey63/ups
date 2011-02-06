@@ -40,23 +40,24 @@ import javax.swing.tree.TreeSelectionModel;
 import net.java.jveez.config.ConfigurationManager;
 import net.java.jveez.ui.fstree.FileSystemTree;
 import net.java.jveez.ui.fstree.LazyDirectoryNode;
+import net.java.jveez.ui.thumbnails.DefaultThumbnailListModel;
 import net.java.jveez.ui.thumbnails.ThumbnailList;
 import net.java.jveez.ui.thumbnails.ThumbnailPanel;
 import net.java.jveez.ui.viewer.ViewerPanel;
 import net.java.jveez.utils.BuildInfo;
+import net.java.jveez.utils.PictureSortingAlgorithm;
+import net.java.jveez.vfs.Picture;
 
 public class MainFrame extends JFrame
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3257572814801547829L;
 
     private final FileSystemTree fileSystemTree = new FileSystemTree();
 
     private final JFrame viewerFrame = new JFrame( "ViewerFrame" );
 
-    private final ThumbnailList thumbnailList = new ThumbnailList();
+    private final ThumbnailList<Picture> thumbnailList = new ThumbnailList<Picture>( new DefaultThumbnailListModel(), PictureSortingAlgorithm.ByName );
 
     private final ViewerPanel viewerPanel = new ViewerPanel( thumbnailList );
 

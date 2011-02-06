@@ -1,6 +1,5 @@
-package ch.jfactory.resource;
+package ch.jfactory.cache;
 
-import ch.jfactory.cache.AbstractImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -15,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Daniel Frey 21.11.2010 18:17:53
  */
-public class UrlImageCache extends AbstractImageCache
+public class UrlImageCache implements ImageCache
 {
     /** This class' logger. */
     private static final Logger LOG = LoggerFactory.getLogger( UrlImageCache.class );
@@ -26,9 +25,8 @@ public class UrlImageCache extends AbstractImageCache
     /** Write format string. */
     private final String format;
 
-    public UrlImageCache( final AbstractImageLoader delegateImageLoader, final String url, final String format )
+    public UrlImageCache( final String url, final String format )
     {
-        super( delegateImageLoader );
         this.url = url;
         this.format = format;
     }
@@ -52,37 +50,36 @@ public class UrlImageCache extends AbstractImageCache
         return null;
     }
 
-    protected BufferedImage loadImage( final String name )
+    public BufferedImage getImage( final String name ) throws ImageCacheException
     {
         final URL url = locate( name );
         try
         {
             final BufferedImage image = ImageIO.read( url );
-            LOG.info( "successfully located image " + url + " from URL" );
+            LOG.debug( "successfully retrieved image " + name + " from " + url );
             return image;
         }
-        catch ( IOException e )
+        catch ( Throwable e )
         {
-            LOG.info( "could not load image " + url + " from URL" );
+            throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", this, e );
         }
-        return null;
     }
 
-    protected void writeImage( final String name, final BufferedImage image )
+    public void setImage( final String name, final BufferedImage image ) throws ImageCacheException
     {
         final URL url = locate( name );
         try
         {
             ImageIO.write( image, format, ImageIO.createImageOutputStream( url ) );
+            LOG.debug( "successfully cached image " + name + " to " + url );
         }
-        catch ( IOException e )
+        catch ( Throwable e )
         {
-            LOG.error( "could not write to " + url );
+            throw new ImageCacheException( "could not cache image " + name + " to " + url, this, e );
         }
     }
 
-    @Override
-    protected boolean internalIsCached( final String name )
+    public boolean isCached( final String name )
     {
         try
         {
@@ -109,9 +106,28 @@ public class UrlImageCache extends AbstractImageCache
         return false;
     }
 
+    public void invalidateCache() throws ImageCacheException
+    {
+        try
+        {
+            final URL url = new URL( this.url );
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput( true );
+            connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
+            connection.setRequestMethod( "DELETE" );
+            connection.connect();
+            connection.getInputStream().close();
+            connection.disconnect();
+        }
+        catch ( IOException e )
+        {
+            throw new ImageCacheException( "could not invalidate the cache at " + url, this, e );
+        }
+    }
+
     @Override
     public String toString()
     {
-        return "UrlImageCache[" + url + "," + delegateImageLoader + "]";
+        return "UrlImageCache[url=" + url + ",format=" + format + "]";
     }
 }

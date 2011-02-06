@@ -39,11 +39,10 @@ import javax.swing.border.EtchedBorder;
 import net.java.jveez.ui.widgets.BlurPanel;
 import net.java.jveez.ui.widgets.StarRating;
 import net.java.jveez.vfs.ExifPicture;
-import net.java.jveez.vfs.Picture;
 
-public class ViewerInfoPanel extends BlurPanel
+public class ViewerInfoPanel<T> extends BlurPanel
 {
-    private Picture currentPicture;
+    private T currentPicture;
 
     private int currentImageWidth;
 
@@ -149,7 +148,7 @@ public class ViewerInfoPanel extends BlurPanel
         container.add( Box.createVerticalStrut( 5 ), c );
     }
 
-    public void updateContent( final Picture picture, final BufferedImage image )
+    public void updateContent( final T picture, final BufferedImage image )
     {
         currentPicture = picture;
         currentImageWidth = ( image != null ? image.getWidth() : 0 );
@@ -191,8 +190,8 @@ public class ViewerInfoPanel extends BlurPanel
         {
             if ( currentImageWidth != 0 && currentImageHeight != 0 )
             {
-                nameLabel.setText( currentPicture.getFile().getName() );
-                sizeLabel.setText( currentPicture.getLength() + " bytes" );
+//                nameLabel.setText( currentPicture.getFile().getName() );
+//                sizeLabel.setText( currentPicture.getLength() + " bytes" );
                 resolutionLabel.setText( String.format( "%d x %d", currentImageWidth, currentImageHeight ) );
             }
 

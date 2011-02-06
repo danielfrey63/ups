@@ -88,9 +88,7 @@ public class MainForm extends ExamForm
 
     private List<SpeciesEntry> examsetModelSpeciesEntries;
 
-    /**
-     * Controller to activate the students dialog for selecting another student. Does handle the password query.
-     */
+    /** Controller to activate the students dialog for selecting another student. Does handle the password query. */
     private StudentsDialogController studentsController;
 
     private long cacheSize;
@@ -149,7 +147,7 @@ public class MainForm extends ExamForm
         thumbnailList.setThumbnailSize( 128 );
         thumbnailList.setFixedCellHeight( 136 );
         thumbnailList.setFixedCellWidth( 136 );
-        thumbnailList.setCellRenderer( new ExamThumbnailListCellRenderer() );
+        thumbnailList.setCellRenderer( new ExamPictureListCellRenderer() );
         navigationScroller.getViewport().setOpaque( false );
         navigation.setCellRenderer( new NavigationRenderer() );
         navigation.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
@@ -288,9 +286,7 @@ public class MainForm extends ExamForm
         initCache();
     }
 
-    /**
-     * Inits the model by collecting the "Habitus" file for each species.
-     */
+    /** Inits the model by collecting the "Habitus" file for each species. */
     private void initHabitusFileEntries()
     {
         model.getFileEntries().clear();
@@ -379,9 +375,7 @@ public class MainForm extends ExamForm
         }
     }
 
-    /**
-     * Precaches the habitus pictures.
-     */
+    /** Precaches the habitus pictures. */
     private void initCache()
     {
         try

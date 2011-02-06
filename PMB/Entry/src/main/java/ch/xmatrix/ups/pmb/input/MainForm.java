@@ -470,7 +470,7 @@ public class MainForm extends EntryForm
         {
             final Picture picture = model.getSelectedPictures().get( 0 );
             final String name = picture.getName();
-            final ThumbnailListModel model = imagesPanel.getThumbnailListModel();
+            final ThumbnailListModel<Picture> model = imagesPanel.getThumbnailListModel();
             final ListSelectionModel selectionModel = imagesPanel.getSelectionModel();
             int count = 0;
             silently = true;

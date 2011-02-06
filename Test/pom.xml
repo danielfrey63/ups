@@ -18,5 +18,6 @@
         <module>JNLP</module>
         <module>OSGiConsumer</module>
         <module>OSGiProvider</module>
+        <module>Test</module>
     </modules>
 </project>

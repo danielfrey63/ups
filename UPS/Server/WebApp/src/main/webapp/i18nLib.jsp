@@ -52,10 +52,10 @@
     }
 
     /**
-     * Set a resouce base name to a private variable.
-     * @param resouce The resouce base name
+     * Set a resource base name to a private variable.
+     * @param resource The resource base name
      */
-    void setResouceBase( final String resource )
+    void setResourceBase( final String resource )
     {
         _strResourceName = resource;
     }
@@ -64,7 +64,7 @@
      * Get the private variable of the resouce base name.
      * @return resouce The resouce base name
      */
-    String getResouceBase()
+    String getResourceBase()
     {
         return _strResourceName;
     }
@@ -89,7 +89,7 @@
         }
 
         Locale.setDefault( objLcl );
-        objRb = ResourceBundle.getBundle( getResouceBase(), objLcl );
+        objRb = ResourceBundle.getBundle( getResourceBase(), objLcl );
 
         return objRb;
     }
@@ -112,7 +112,7 @@
         while ( st.hasMoreTokens() )
         {
             locale = st.nextToken();
-            buf.append( "[<a href=\"?locale=" + locale + "\">" + locale + "</a>] " );
+            buf.append( "[<a href=\"?locale=" ).append( locale ).append( "\">" ).append( locale ).append( "</a>] " );
         }
         buf.append( "\n</div>\n" );
 

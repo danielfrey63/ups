@@ -32,15 +32,15 @@ import javax.swing.border.EtchedBorder;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class ThumbnailListCellRenderer extends DefaultListCellRenderer
+public class PictureListCellRenderer extends DefaultListCellRenderer
 {
-    private static final Logger LOG = Logger.getLogger( ThumbnailListCellRenderer.class );
+    private static final Logger LOG = Logger.getLogger( PictureListCellRenderer.class );
 
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     private static final long serialVersionUID = 4049921558426170167L;
 
-    public ThumbnailListCellRenderer()
+    public PictureListCellRenderer()
     {
         super();
     }
@@ -64,5 +64,4 @@ public class ThumbnailListCellRenderer extends DefaultListCellRenderer
 
         return label;
     }
-
 }

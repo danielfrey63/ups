@@ -403,7 +403,7 @@ public class PMBController
         infoModel.setNote( new SimpleNote( message, title, Message.Type.WARN ) );
     }
 
-    public String savePositionAndZoom( final ViewerPanel panel )
+    public String savePositionAndZoom( final ViewerPanel<Picture> panel )
     {
         final PictureStateModel state = calculatePositionAndZoom( panel );
         final String newPath;
@@ -434,12 +434,12 @@ public class PMBController
         model.getSettings().storeSettings();
     }
 
-    public void setCurrentPicture( final FileEntry fileEntry, final ViewerPanel panel )
+    public void setCurrentPicture( final FileEntry fileEntry, final ViewerPanel<Picture> panel )
     {
         setCurrentPicture( fileEntry == null ? null : fileEntry.getPicture(), panel );
     }
 
-    public void setCurrentPicture( final Picture picture, final ViewerPanel panel )
+    public void setCurrentPicture( final Picture picture, final ViewerPanel<Picture> panel )
     {
         panel.setCurrentPicture( picture );
     }
@@ -474,7 +474,7 @@ public class PMBController
         return fileEntry;
     }
 
-    private static PictureStateModel calculatePositionAndZoom( final ViewerPanel panel )
+    private static PictureStateModel calculatePositionAndZoom( final ViewerPanel<Picture> panel )
     {
         final BufferedImage image = panel.getImage();
         final Picture picture = panel.getCurrentPicture();
@@ -540,35 +540,21 @@ public class PMBController
         return model;
     }
 
-    /**
-     * Enomeration to indicate the different options for a rename conflict dialog.
-     */
+    /** Enomeration to indicate the different options for a rename conflict dialog. */
     enum Options
     {
-        /**
-         * Overwrite this file.
-         */
+        /** Overwrite this file. */
         OVERWRITE( "Überschreiben" ),
-        /**
-         * Skip this file.
-         */
+        /** Skip this file. */
         SKIP( "Überspringen" ),
-        /**
-         * Overwrite this file and all following files.
-         */
+        /** Overwrite this file and all following files. */
         OVERWRITE_ALL( "Alle Überschreiben" ),
-        /**
-         * Skip this file and all following files.
-         */
+        /** Skip this file and all following files. */
         SKIP_ALL( "Alle Überspringen" ),
-        /**
-         * Cancel the process.
-         */
+        /** Cancel the process. */
         CANCEL( "Abbrechen" );
 
-        /**
-         * The description of the options.
-         */
+        /** The description of the options. */
         private final String description;
 
         /**

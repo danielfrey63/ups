@@ -27,7 +27,7 @@ import net.java.jveez.cache.ImageLoader;
 import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public abstract class AbstractImageLoader implements ImageLoader
+public abstract class AbstractImageLoader implements ImageLoader<Picture>
 {
     private static final Logger LOG = Logger.getLogger( AbstractImageLoader.class );
 

@@ -19,6 +19,7 @@ package ch.xmatrix.ups.pmb.domain;
 import ch.xmatrix.ups.pmb.ui.model.PictureStateModel;
 import ch.xmatrix.ups.pmb.ui.model.Settings;
 import java.io.File;
+import javax.swing.Icon;
 import net.java.jveez.vfs.Picture;
 import net.java.jveez.vfs.impl.PictureImpl;
 
@@ -27,15 +28,15 @@ import net.java.jveez.vfs.impl.PictureImpl;
  *
  * <ul>
  *
- * <li>The hieraric part.</li>
+ * <li>The hierarchic part.</li>
  *
  * <li>The alternative mode part. If a picture belong to an alternative part A, it is never displayed with another
  * picture of another alternative part B of the same species.</li>
  *
- * <li>The multiple choice part. If multiple pictures exist for a defined hierary.</li>
+ * <li>The multiple choice part. If multiple pictures exist for a defined hierarchy.</li>
  *
- * <li>The picture state part. Which part of the picture should be shown (see {@link
- * PictureStateModel PictureStateModel})?</li>
+ * <li>The picture state part. Which part of the picture should be shown (see {@link PictureStateModel
+ * PictureStateModel})?</li>
  *
  * </ul>
  *
@@ -44,31 +45,61 @@ import net.java.jveez.vfs.impl.PictureImpl;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:37 $
  */
-public class FileEntry extends Entry
+public class FileEntry extends Entry implements Picture
 {
-    private Picture picture = null;
+    private File file;
+
+    private Picture picture;
 
     public FileEntry( final String path, final Entry parent, final Settings settings )
     {
         super( path, parent, settings );
+        file = new File( path );
+        picture = new PictureImpl( file );
+    }
+
+    public File getFile()
+    {
+        return file;
+    }
+
+    public String getAbsolutePath()
+    {
+        return file.getAbsolutePath();
+    }
+
+    public String getDescription()
+    {
+        return file.getName();
+    }
+
+    public Icon getIcon()
+    {
+        return null;
+    }
+
+    public long getLength()
+    {
+        return 0;
+    }
+
+    public long getLastModifiedDate()
+    {
+        return 0;
+    }
+
+    public String getName()
+    {
+        return file.getName();
     }
 
     public Picture getPicture()
     {
-        if ( picture == null )
-        {
-            picture = new PictureImpl( new File( getPath() ) );
-        }
         return picture;
     }
 
-    public PictureStateModel getPictureStateModel()
-    {
-        return parseIntoPictureStateModel( new File( getPath() ) );
-    }
-
     /**
-     * Resets the picture in addition to the superclass method.
+     * Resets the picture in addition to the super class method.
      *
      * @param path the new path to set.
      */
@@ -76,52 +107,7 @@ public class FileEntry extends Entry
     public void setPath( final String path )
     {
         super.setPath( path );
-        picture = null;
+        file = new File( path );
+        picture = new PictureImpl( file );
     }
-
-    // Utilities
-
-    /**
-     * Parses the string into a PictureStateModel. If parsing ist not successful, returns null.
-     *
-     * @param file Full file path. Position information is in paranthesis as space separated x1, x2, y1, y2
-     * @return PictureStateModel
-     */
-    private static PictureStateModel parseIntoPictureStateModel( final File file )
-    {
-        final PictureStateModel model;
-        final String name = file.getName();
-        final String position = getPositionAndZoom( name );
-        final String[] parts = position.split( " " );
-        if ( parts.length == 4 )
-        {
-            model = new PictureStateModel( file.getAbsolutePath() );
-            model.setX1( Double.parseDouble( parts[0] ) / 100 );
-            model.setX2( Double.parseDouble( parts[1] ) / 100 );
-            model.setY1( Double.parseDouble( parts[2] ) / 100 );
-            model.setY2( Double.parseDouble( parts[3] ) / 100 );
-        }
-        else
-        {
-            model = null;
-        }
-        return model;
-    }
-
-    private static String getPositionAndZoom( final String string )
-    {
-        final int i1 = string.indexOf( " (" );
-        final int i2 = string.indexOf( ")" );
-        final String result;
-        if ( i1 < i2 )
-        {
-            result = string.substring( i1 + 2, i2 );
-        }
-        else
-        {
-            result = "";
-        }
-        return result;
-    }
-
 }

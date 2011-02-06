@@ -15,7 +15,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
-import java.lang.ref.SoftReference;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
@@ -30,27 +29,32 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     private final PictureCache cache;
 
-    private CachedImage img;
-
-    private boolean thumbNail;
-
-    private SoftReference<Image> image;
+    private CachedImage cachedImage;
 
     private double zoomFactor = 1.0;
 
     /** Size of the picture with a zooming factor of 1. */
-    private int defaultSize = 0;
+    private int fixedSize;
 
     private Dimension size;
 
     public static Border BORDER = BorderFactory.createEmptyBorder( 1, 1, 1, 1 );
-    // BorderFactory.createCompoundBorder( BorderFactory.createLineBorder(Color.red,1), BorderFactory.createEmptyBorder(10, 10, 10, 10) );
+//    public static Border BORDER = BorderFactory.createCompoundBorder( BorderFactory.createLineBorder( Color.red, 1 ), BorderFactory.createEmptyBorder( 10, 10, 10, 10 ) );
 
-    public CachedImageComponent( final PictureCache cache, final int size )
+    public CachedImageComponent( final PictureCache cache, final int fixedSize )
     {
         this.cache = cache;
         this.setBorder( BORDER );
-        defaultSize = size;
+        this.fixedSize = fixedSize;
+        this.size = new Dimension( fixedSize, fixedSize );
+    }
+
+    public CachedImageComponent( final PictureCache cache )
+    {
+        this.cache = cache;
+        this.setBorder( BORDER );
+        this.fixedSize = -1;
+        this.size = null;
     }
 
     public double getZoomFactor()
@@ -58,31 +62,26 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
         return zoomFactor;
     }
 
-    public synchronized void setImage( final String name, final boolean thumb )
+    public synchronized void setImage( final String name )
     {
-        LOGGER.debug( "setting " + ( thumb ? "thumbnail" : "image" ) + " \"" + name + "\"" );
-        CachedImage im = null;
-        if ( name != null )
-        {
-            im = cache.getCachedImage( name );
-        }
+        LOGGER.debug( "setting image" + " \"" + name + "\"" );
         boolean reValidate = false;
-        if ( img != null )
+        if ( cachedImage != null )
         {
-            img.detach( this );
+            cachedImage.detachAll();
             reValidate = true;
         }
-        img = im;
-        image = null;
+        cachedImage = name == null ? null : cache.getCachedImage( name );
+        loadImage();
         size = null;
-        if ( img != null )
+        if ( cachedImage != null )
         {
-            img.attach( this );
+            cachedImage.attach( this );
+            reValidate = true;
         }
-        this.thumbNail = thumb;
         if ( reValidate )
         {
-            this.redoLayout();
+            revalidate();
         }
         repaint();
     }
@@ -91,12 +90,12 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     {
         size = null;
         zoomFactor = d;
-        redoLayout();
+        revalidate();
     }
 
     public CachedImage getImage()
     {
-        return img;
+        return cachedImage;
     }
 
     public Dimension getMaximumSize()
@@ -112,7 +111,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     public synchronized Dimension getPreferredSize()
     {
         super.getPreferredSize();
-        if ( img == null )
+        if ( cachedImage == null || cachedImage.getSize() == null )
         {
             return minimumSize;
         }
@@ -124,11 +123,11 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
         final Insets i = getInsets();
         final int w = i.right + i.left;
         final int h = i.top + i.bottom;
-        final Dimension s = img.getSize();
+        final Dimension s = cachedImage.getSize();
         double factor = zoomFactor;
-        if ( defaultSize > 0 )
+        if ( fixedSize > 0 )
         {
-            factor *= defaultSize / Math.max( s.getWidth(), s.getHeight() );
+            factor *= fixedSize / Math.max( s.getWidth(), s.getHeight() );
         }
         size.setSize( ( s.width * factor ) + w, ( s.height * factor ) + h );
         return size;
@@ -136,41 +135,20 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
 
     private void loadImage()
     {
-        if ( img == null )
+        if ( cachedImage != null )
         {
-            return;
+            LOGGER.debug( "loading image " + cachedImage.getName() );
+            cache.cacheImage( cachedImage.getName(), false, true );
         }
-        if ( ( image == null ) || ( image.get() == null ) )
-        {
-            if ( !img.isLoaded( thumbNail ) )
-            {
-                if ( img.isLoaded( true ) )
-                {
-                    image = new SoftReference<Image>( img.getImage( true ) );
-                }
-                cache.cacheImage( img.getName(), thumbNail, true );
-            }
-            else
-            {
-                image = new SoftReference<Image>( img.getImage( thumbNail ) );
-            }
-        }
-    }
-
-    public void redoLayout()
-    {
-        this.revalidate();
-        //this.repaint();
     }
 
     public void paintComponent( final Graphics g )
     {
         super.paintComponent( g );
-        loadImage();
         final Insets i = getInsets();
         final int w = i.right + i.left;
         final int h = i.top + i.bottom;
-        Image im = ( image == null ) ? null : image.get();
+        Image im = ( cachedImage == null ) ? null : cachedImage.getImage( false );
         if ( im != null )
         {
             final Dimension p = getPreferredSize();
@@ -179,17 +157,13 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
             final int iw = im.getWidth( null );
             final int ih = im.getHeight( null );
             final double f = (double) PictureConverter.getFittingFactor( (int) ( wi ), (int) ( he ), iw, ih );
-            // Use time consuming smooth scaling for small images
-            if ( f == 1 )
-            {
-                // Todo: store scaled image back
-            }
-            else if ( f < 0.2 )
+            // Use time saving smooth scaling for smaller images
+            if ( f < 0.2 )
             {
                 im = im.getScaledInstance( (int) ( iw * f ), (int) ( ih * f ), Image.SCALE_SMOOTH );
                 g.drawImage( im, 0, 0, null );
             }
-            else
+            else if ( f != 1.0 )
             {
                 ( (Graphics2D) g ).setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
                 final AffineTransform trans = new AffineTransform();
@@ -204,18 +178,12 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     {
         LOGGER.debug( "loading of image \"" + name + "\" finished" );
         size = null;
-        if ( ( image == null ) || ( image.get() == null ) || ( image.get() != img ) )
-        {
-            image = null;
-            repaint();
-        }
+        repaint();
     }
 
     public synchronized void loadAborted( final String name )
     {
         LOGGER.debug( "loading of image \"" + name + "\" aborted" );
-        image = null;
-        size = null;
         repaint();
     }
 
@@ -223,5 +191,4 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     {
         LOGGER.debug( "loading of image \"" + name + "\" started" );
     }
-
 }

@@ -46,10 +46,10 @@ import net.java.jveez.ui.thumbnails.ThumbnailList;
 import net.java.jveez.ui.viewer.anim.AnimationState;
 import net.java.jveez.utils.HidingMouseListener;
 import net.java.jveez.utils.Utils;
-import net.java.jveez.vfs.Picture;
+import net.java.jveez.vfs.SimplePicture;
 import org.apache.log4j.Logger;
 
-public class ViewerPanel extends JPanel
+public class ViewerPanel<T extends SimplePicture> extends JPanel
 {
     private static final long serialVersionUID = 3688782553385809462L;
 
@@ -71,7 +71,7 @@ public class ViewerPanel extends JPanel
 
     private BufferedImage noImage = new DefaultImage( new Dimension( 640, 480 ), "No Image" );
 
-    private ThumbnailList thumbnailList;
+    private ThumbnailList<T> thumbnailList;
 
     private ViewerActions viewerActions;
 
@@ -87,7 +87,7 @@ public class ViewerPanel extends JPanel
 
     private BufferedImage image;
 
-    private Picture currentPicture;
+    private T currentPicture;
 
     private boolean toolbarVisible;
 
@@ -96,7 +96,7 @@ public class ViewerPanel extends JPanel
         this( null );
     }
 
-    public ViewerPanel( final ThumbnailList thumbnailList )
+    public ViewerPanel( final ThumbnailList<T> thumbnailList )
     {
         setThumnailList( thumbnailList );
 
@@ -233,12 +233,12 @@ public class ViewerPanel extends JPanel
         thumbnailClicked( nextIndex );
     }
 
-    public Picture getCurrentPicture()
+    public T getCurrentPicture()
     {
         return currentPicture;
     }
 
-    public void setCurrentPicture( final Picture picture )
+    public void setCurrentPicture( final T picture )
     {
         setCurrentPicture( picture, null, null, null );
     }
@@ -253,7 +253,7 @@ public class ViewerPanel extends JPanel
         noImage = new DefaultImage( new Dimension( 640, 480 ), text );
     }
 
-    public void setCurrentPicture( final Picture picture, final Picture previousPicture, final Picture nextPicture,
+    public void setCurrentPicture( final T picture, final T previousPicture, final T nextPicture,
                                    final AnimationState state )
     {
         // cancel any pending loading job
@@ -387,9 +387,9 @@ public class ViewerPanel extends JPanel
             return;
         }
 
-        final Picture picture = thumbnailList.getPictureAt( imageIndex );
-        Picture nextPicture = null;
-        Picture previousPicture = null;
+        final T picture = thumbnailList.getPictureAt( imageIndex );
+        T nextPicture = null;
+        T previousPicture = null;
 
         // put in cache the image before the selected one (if needed)
         final int previousIndex = thumbnailList.getIndexBefore( imageIndex );
@@ -418,7 +418,7 @@ public class ViewerPanel extends JPanel
         loadedListeners.remove( listener );
     }
 
-    private void prefetchNextPicture( final Picture nextPicture )
+    private void prefetchNextPicture( final T nextPicture )
     {
         if ( nextPicture != null )
         {
@@ -437,7 +437,7 @@ public class ViewerPanel extends JPanel
         }
     }
 
-    private void prefetchPreviousPicture( final Picture nextPicture )
+    private void prefetchPreviousPicture( final T nextPicture )
     {
         if ( nextPicture != null )
         {
@@ -478,8 +478,8 @@ public class ViewerPanel extends JPanel
         }
     }
 
-    public interface LoadedListener
+    public interface LoadedListener<T extends SimplePicture>
     {
-        void imageLoaded( ViewerPanel panel );
+        void imageLoaded( ViewerPanel<T> panel );
     }
 }

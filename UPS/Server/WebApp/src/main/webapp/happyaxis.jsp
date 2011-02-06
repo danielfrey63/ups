@@ -327,7 +327,7 @@
     setRequest( request );
 
     // set a resouce base
-    setResouceBase( "i18n" );
+    setResourceBase( "i18n" );
 %>
 
 <head>

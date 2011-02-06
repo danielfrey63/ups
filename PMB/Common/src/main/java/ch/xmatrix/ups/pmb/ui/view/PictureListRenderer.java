@@ -21,7 +21,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import net.java.jveez.ui.thumbnails.ThumbnailListCellRenderer;
+import net.java.jveez.ui.thumbnails.PictureListCellRenderer;
 import net.java.jveez.vfs.Picture;
 
 /**
@@ -30,7 +30,7 @@ import net.java.jveez.vfs.Picture;
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2007/05/16 17:00:16 $
  */
-public class PictureListRenderer extends ThumbnailListCellRenderer
+public class PictureListRenderer extends PictureListCellRenderer
 {
     private final JPanel panel = new JPanel( new BorderLayout() );
 

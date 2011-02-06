@@ -8,9 +8,9 @@
  */
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.ImageLoader;
+import ch.jfactory.cache.ImageCache;
+import ch.jfactory.cache.ImageCacheException;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class CachedImage
 
     private final AbstractAsyncPictureLoaderSupport listeners = new AbstractAsyncPictureLoaderSupport();
 
-    private final ImageLoader locator;
+    private final ImageCache locator;
 
     private Dimension size;
 
@@ -38,21 +38,30 @@ public class CachedImage
 
     private boolean thumbNailLoaded = false;
 
-    private SoftReference<Image> image;
+    private SoftReference<BufferedImage> softImageReference;
 
-    private SoftReference<Image> thumbNail;
+    private SoftReference<BufferedImage> thumbNail;
 
-    public CachedImage( final ImageLoader locator, final String name )
+    public CachedImage( final ImageCache locator, final String name )
     {
         this.name = name;
         this.locator = locator;
     }
 
-    public synchronized Image loadImage()
+    public synchronized BufferedImage loadImage() throws ImageCacheException
     {
-        final Image i = locator.getImage( name );
-        setImage( i );
-        return i;
+        final BufferedImage i;
+        try
+        {
+            i = locator.getImage( name );
+            setImage( i );
+            return i;
+        }
+        catch ( ImageCacheException e )
+        {
+            LOGGER.error( "cannot retrieve image " + name, e );
+            throw e;
+        }
     }
 
     public String getName()
@@ -63,9 +72,9 @@ public class CachedImage
     public Dimension getSize()
     {
         Dimension d = size;
-        if ( d == null )
+        if ( d == null && softImageReference != null && softImageReference.get() != null )
         {
-            final BufferedImage image = locator.getImage( name );
+            final BufferedImage image = this.softImageReference.get();
             if ( image != null )
             {
                 d = new Dimension( image.getWidth(), image.getHeight() );
@@ -92,19 +101,24 @@ public class CachedImage
         return getImage( thumb ) != null || thumb && ( getImage( false ) != null );
     }
 
-    public void attach( final AsyncPictureLoaderListener list )
+    public void attach( final AsyncPictureLoaderListener listener )
     {
-        listeners.attach( list );
+        listeners.attach( listener );
     }
 
-    public void detach( final AsyncPictureLoaderListener list )
+    public void detach( final AsyncPictureLoaderListener listener )
     {
-        listeners.detach( list );
+        listeners.detach( listener );
     }
 
-    public Image getImage( final boolean thumb )
+    public void detachAll()
     {
-        Image image;
+        listeners.detachAll();
+    }
+
+    public BufferedImage getImage( final boolean thumb )
+    {
+        BufferedImage image;
         if ( thumb )
         {
             image = getThumbnail();
@@ -120,7 +134,7 @@ public class CachedImage
         return image;
     }
 
-    private void setImage( final Image image )
+    private void setImage( final BufferedImage image )
     {
         LOGGER.debug( "setting image for \"" + name + "\"" );
         if ( image == getImage( false ) )
@@ -131,8 +145,8 @@ public class CachedImage
         {
             imageLoaded = true;
             thumbNailLoaded = false;
-            thumbNail = null;
-            this.image = new SoftReference<Image>( image );
+            thumbNail = new SoftReference<BufferedImage>( image );
+            softImageReference = new SoftReference<BufferedImage>( image );
         }
         if ( image == null )
         {
@@ -149,9 +163,9 @@ public class CachedImage
         size = d;
     }
 
-    private Image getFullImage()
+    private BufferedImage getFullImage()
     {
-        final Image image = this.image == null ? null : this.image.get();
+        final BufferedImage image = softImageReference == null ? null : softImageReference.get();
         if ( imageLoaded && image == null )
         {
             LOGGER.debug( "soft reference lost" );
@@ -160,9 +174,9 @@ public class CachedImage
         return image;
     }
 
-    private Image getThumbnail()
+    private BufferedImage getThumbnail()
     {
-        final Image image = thumbNail == null ? null : thumbNail.get();
+        final BufferedImage image = thumbNail == null ? null : thumbNail.get();
         if ( thumbNailLoaded && image == null )
         {
             LOGGER.debug( "soft reference lost" );

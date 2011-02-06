@@ -27,36 +27,33 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import net.java.jveez.utils.SortingAlgorithm;
-import net.java.jveez.vfs.Picture;
 import org.apache.log4j.Logger;
 
-public class DefaultThumbnailListModel extends AbstractListModel implements ThumbnailListModel<Picture>
+public class DefaultThumbnailListModel<T> extends AbstractListModel implements ThumbnailListModel<T>
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3258131345149407289L;
 
     private static final Logger LOG = Logger.getLogger( DefaultThumbnailListModel.class );
 
-    private final List<Picture> list = new ArrayList<Picture>();
+    private final List<T> list = new ArrayList<T>();
 
     public int getSize()
     {
         return list.size();
     }
 
-    public Picture getPicture( final int index )
+    public T getPicture( final int index )
     {
         return list.get( index );
     }
 
-    public Picture getElementAt( final int index )
+    public T getElementAt( final int index )
     {
         return list.get( index );
     }
 
-    public int getIndexOf( final Picture picture )
+    public int getIndexOf( final T picture )
     {
         return list.indexOf( picture );
     }
@@ -72,20 +69,20 @@ public class DefaultThumbnailListModel extends AbstractListModel implements Thum
         }
     }
 
-    public void setPictures( final Collection<? extends Picture> pictures )
+    public void setPictures( final Collection<? extends T> pictures )
     {
         list.clear();
         list.addAll( pictures );
         fireContentsChanged( this, 0, list.size() - 1 );
     }
 
-    public void setPictureAt( final int index, final Picture picture )
+    public void setPictureAt( final int index, final T picture )
     {
         list.set( index, picture );
         fireContentsChanged( this, index, index );
     }
 
-    public void sort( final SortingAlgorithm<Picture> algorithm )
+    public void sort( final SortingAlgorithm<T> algorithm )
     {
         algorithm.sort( list );
         fireContentsChanged( this, 0, list.size() - 1 );

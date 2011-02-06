@@ -45,12 +45,27 @@ public class SpecimensModel extends AbstractTaxonBased
     {
         super( orig );
         models = new ArrayList<SpecimenModel>();
-        for ( int i = 0; orig.models != null && i < orig.models.size(); i++ )
+        // There is a bug in the model XML that sometimes only the index map is populated, models being empty
+        if ( orig.models != null && orig.index != null && orig.models.size() != orig.index.size() && orig.models.size() == 0 )
         {
-            final SpecimenModel model = orig.models.get( i );
-            final SpecimenModel copy = new SpecimenModel( model );
-            models.add( copy );
-            index.put( copy.getTaxon(), copy );
+            for ( final String key : orig.index.keySet() )
+            {
+                final SpecimenModel model = orig.index.get( key );
+                orig.models.add( model );
+                final SpecimenModel copy = new SpecimenModel( model );
+                models.add( copy );
+                index.put( copy.getTaxon(), copy );
+            }
+        }
+        else
+        {
+            for ( int i = 0; orig.models != null && i < orig.models.size(); i++ )
+            {
+                final SpecimenModel model = orig.models.get( i );
+                final SpecimenModel copy = new SpecimenModel( model );
+                models.add( copy );
+                index.put( copy.getTaxon(), copy );
+            }
         }
     }
 

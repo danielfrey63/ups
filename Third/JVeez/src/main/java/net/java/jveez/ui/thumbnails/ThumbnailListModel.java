@@ -3,7 +3,6 @@ package net.java.jveez.ui.thumbnails;
 import java.util.Collection;
 import javax.swing.ListModel;
 import net.java.jveez.utils.SortingAlgorithm;
-import net.java.jveez.vfs.Picture;
 
 /**
  * TODO: document
@@ -12,13 +11,13 @@ import net.java.jveez.vfs.Picture;
  */
 public interface ThumbnailListModel<T> extends ListModel
 {
-    Picture getPicture( int index );
+    T getPicture( int index );
 
-    void setPictures( Collection<? extends Picture> pictures );
+    void setPictures( Collection<? extends T> pictures );
 
-    void setPictureAt( int index, Picture picture );
+    void setPictureAt( int index, T picture );
 
-    int getIndexOf( Picture picture );
+    int getIndexOf( T picture );
 
     void clear();
 

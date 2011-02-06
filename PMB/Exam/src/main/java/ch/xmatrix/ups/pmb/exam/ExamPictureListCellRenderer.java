@@ -10,14 +10,14 @@ import javax.swing.OverlayLayout;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
-import net.java.jveez.ui.thumbnails.ThumbnailListCellRenderer;
+import net.java.jveez.ui.thumbnails.PictureListCellRenderer;
 
 /**
  * Renders the exam thumbnail list.
  *
  * @author Daniel Frey 17.06.2008 17:31:20
  */
-public class ExamThumbnailListCellRenderer extends ThumbnailListCellRenderer
+public class ExamPictureListCellRenderer extends PictureListCellRenderer
 {
     private final int thickness = 2;
 
@@ -37,7 +37,7 @@ public class ExamThumbnailListCellRenderer extends ThumbnailListCellRenderer
 
     private final Border unselectedBorder = new LineBorder( bg, 1 + thickness );
 
-    public ExamThumbnailListCellRenderer()
+    public ExamPictureListCellRenderer()
     {
         setBackground( Color.gray );
         setAlignmentX( 0.5f );
@@ -51,9 +51,7 @@ public class ExamThumbnailListCellRenderer extends ThumbnailListCellRenderer
         number.setAlignmentY( 0.5f );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public Component getListCellRendererComponent( final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus )
     {
         final JLabel label = (JLabel) super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );

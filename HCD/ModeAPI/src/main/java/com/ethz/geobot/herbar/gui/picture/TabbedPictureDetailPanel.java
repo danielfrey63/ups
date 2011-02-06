@@ -8,21 +8,46 @@
  */
 package com.ethz.geobot.herbar.gui.picture;
 
+import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.component.Dialogs;
 import ch.jfactory.image.PictureDetailPanel;
 import ch.jfactory.resource.PictureCache;
 import com.ethz.geobot.herbar.model.PictureTheme;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
+import org.apache.log4j.Logger;
 
 public class TabbedPictureDetailPanel extends JTabbedPane
 {
+    /** This class logger. */
+    private static final Logger LOG = Logger.getLogger( TabbedPictureDetailPanel.class );
+
     private final PictureCache cache;
 
     private final ArrayList<PictureTheme> list = new ArrayList<PictureTheme>();
 
     public TabbedPictureDetailPanel()
     {
-        this.cache = new PictureCache();
+        this.cache = new PictureCache( new PictureCache.CachingExceptionHandler()
+        {
+            public void handleCachingException( final Throwable e )
+            {
+                if ( e instanceof ImageCacheException )
+                {
+                    final String message;
+                    if ( e.getCause() instanceof IOException )
+                    {
+                        message = e.getCause().getMessage();
+                    }
+                    else
+                    {
+                        message = e.getMessage();
+                    }
+                    Dialogs.showErrorMessage( TabbedPictureDetailPanel.this, "Fehler beim Zwischenspeichern von Bildern", message );
+                }
+            }
+        } );
     }
 
     public PictureDetailPanel getDetail( final int i )
@@ -32,6 +57,7 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
     public PictureDetailPanel addTab( final PictureTheme theme )
     {
+        LOG.debug( "initializing picture details panel for " + theme + " with cache " + cache );
         final PictureDetailPanel panel = new PictureDetailPanel( cache );
         this.add( panel, theme.getName() );
         list.add( theme );

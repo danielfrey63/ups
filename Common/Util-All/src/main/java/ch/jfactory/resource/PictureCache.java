@@ -8,7 +8,7 @@
  */
 package ch.jfactory.resource;
 
-import ch.jfactory.cache.ImageLoader;
+import ch.jfactory.cache.ImageCache;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -26,13 +26,13 @@ import org.slf4j.LoggerFactory;
 public class PictureCache
 {
     /** This class' logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger( PictureCache.class.getName() );
+    private final static Logger LOG = LoggerFactory.getLogger( PictureCache.class.getName() );
 
     /** Locator for images. */
-    private final ImageLoader locator;
+    private final ImageCache locator;
 
     /** Caching thread. */
-    private final CacheImageThread cachingThread = new CacheImageThread();
+    private final CacheImageThread cachingThread;
 
     /** Hash map storing cached picture. */
     private final Map<String, CachedImage> cache = new HashMap<String, CachedImage>();
@@ -41,9 +41,10 @@ public class PictureCache
     private final LinkedList<String> queue = new LinkedList<String>();
 
     /** PictureCache taking images from directory */
-    public PictureCache()
+    public PictureCache( final CachingExceptionHandler handler )
     {
-        this.locator = ImageLocator.pictLocator;
+        this.locator = ImageLocator.PICT_LOCATOR;
+        cachingThread = new CacheImageThread( handler );
         cachingThread.setPriority( Thread.MIN_PRIORITY );
         cachingThread.start();
     }
@@ -55,7 +56,7 @@ public class PictureCache
         {
             queue.clear();
         }
-        LOGGER.debug( "caching list cleared" );
+        LOG.debug( "caching list cleared" );
     }
 
     /**
@@ -70,7 +71,7 @@ public class PictureCache
         CachedImage image = cache.get( name );
         if ( image == null )
         {
-            LOGGER.info( "adding cached image \"" + name + "\" to cache" );
+            LOG.info( "adding cached image \"" + name + "\" to cache" );
             image = new CachedImage( locator, name );
             cache.put( name, image );
         }
@@ -89,6 +90,7 @@ public class PictureCache
     {
         if ( !getCachedImage( name ).isLoaded( thumb ) )
         {
+            LOG.trace( "cached image " + name + " not loaded yet" );
             final boolean isNew;
             synchronized ( queue )
             {
@@ -98,21 +100,23 @@ public class PictureCache
                     if ( first )
                     {
                         queue.addFirst( name );
+                        LOG.debug( "added cached image " + name + " to first position in the queue " + queue );
                     }
                     else
                     {
                         queue.addLast( name );
+                        LOG.debug( "added cached image " + name + " to last position in the queue " + queue );
                     }
                 }
                 else if ( first && !queue.getFirst().equals( name ) )
                 {
                     queue.remove( name );
                     queue.addFirst( name );
+                    LOG.debug( "moved cached image " + name + " to first position in the queue " + queue );
                 }
             }
             if ( isNew )
             {
-                LOGGER.debug( "caching list changed due to \"" + name + "\" and is now " + queue );
                 synchronized ( cachingThread )
                 {
                     cachingThread.notify();
@@ -121,43 +125,59 @@ public class PictureCache
         }
         else
         {
-            LOGGER.info( "image " + name + " found in cache" );
+            LOG.trace( "image " + name + " loaded already" );
         }
+    }
+
+    public interface CachingExceptionHandler
+    {
+        void handleCachingException( final Throwable e );
     }
 
     /** Internal class used to processing the caching image list. */
     private class CacheImageThread extends Thread
     {
+        private final CachingExceptionHandler handler;
+
+        public CacheImageThread( final CachingExceptionHandler handler )
+        {
+            this.handler = handler;
+        }
+
         public void run()
         {
             boolean loop = true;
             while ( loop )
             {
+                String name = null;
                 try
                 {
-                    final String name;
-                    synchronized ( queue )
+                    // Peek does not throw NSEE on itself
+                    name = queue.peek();
+                    if ( name == null )
                     {
-                        name = queue.removeFirst();
-                        LOGGER.debug( "popped \"" + name + "\" from queue " + queue.toString() );
+                        throw new NoSuchElementException( "peeking on null" );
                     }
+                    LOG.debug( "peeking on \"" + name + "\" in queue " + queue );
                     final CachedImage img = getCachedImage( name );
                     if ( !img.isLoaded( false ) )
                     {
-                        LOGGER.info( "loading cached image \"" + name + "\"" );
+                        LOG.debug( "loading cached image \"" + name + "\"" );
                         img.loadImage();
-                        LOGGER.info( "loaded cached image \"" + name + "\"" );
+                        LOG.debug( "loaded cached image \"" + name + "\"" );
                     }
                     else
                     {
-                        LOGGER.info( "cached image \"" + name + "\" loaded already" );
+                        LOG.debug( "cached image \"" + name + "\" loading or loaded already" );
                     }
+                    // Important to remove the image from the queue also in loaded and exception case
+                    removeFromQueue( name );
                 }
                 catch ( NoSuchElementException ex )
                 {
                     synchronized ( this )
                     {
-                        LOGGER.info( "caching thread waiting" );
+                        LOG.debug( "caching thread waiting" );
                         try
                         {
                             this.wait();
@@ -165,9 +185,34 @@ public class PictureCache
                         catch ( InterruptedException iex )
                         {
                             loop = false;
-                            LOGGER.error( "caching thread interrupted", iex );
+                            LOG.error( "caching thread interrupted", iex );
                         }
                     }
+                }
+                catch ( Throwable e )
+                {
+                    // Important to remove the image from the queue also in loaded and exception case
+                    removeFromQueue( name );
+                    if ( handler != null )
+                    {
+                        handler.handleCachingException( e );
+                    }
+                }
+            }
+        }
+
+        private void removeFromQueue( final String name )
+        {
+            synchronized ( queue )
+            {
+                try
+                {
+                    queue.remove( name );
+                    LOG.debug( "popped image " + name + " after successful loading from queue " + queue );
+                }
+                catch ( Exception e )
+                {
+                    // Ignore
                 }
             }
         }

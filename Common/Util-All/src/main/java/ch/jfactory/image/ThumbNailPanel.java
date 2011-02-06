@@ -70,20 +70,16 @@ public class ThumbNailPanel extends ScrollerPanel
         return new Dimension( w, h );
     }
 
-    public void addImage( final String c, final String toolTip, final boolean reValidate )
+    public void addImage( final String c, final String toolTip )
     {
         for ( int i = 0; i < panel.getComponentCount(); i++ )
         {
             if ( !panel.getComponent( i ).isVisible() )
             {
                 final CachedImageComponent ci = (CachedImageComponent) panel.getComponent( i );
-                ci.setImage( c, true );
+                ci.setImage( c );
                 ci.setVisible( true );
                 ci.setToolTipText( toolTip );
-                if ( reValidate )
-                {
-                    revalidate();
-                }
                 return;
             }
         }
@@ -97,12 +93,8 @@ public class ThumbNailPanel extends ScrollerPanel
             }
         } );
         panel.add( ci );
-        ci.setImage( c, true );
+        ci.setImage( c );
         ci.setToolTipText( toolTip );
-        if ( reValidate )
-        {
-            revalidate();
-        }
     }
 
     public void addActionListener( final ActionListener l )
@@ -116,10 +108,10 @@ public class ThumbNailPanel extends ScrollerPanel
         if ( listeners != null && listeners.size() > 0 )
         {
             LOGGER.info( "fireActionEvent " + ci.getImage().getName() );
-        }
-        for ( final ActionListener listener : listeners )
-        {
-            listener.actionPerformed( e );
+            for ( final ActionListener listener : listeners )
+            {
+                listener.actionPerformed( e );
+            }
         }
     }
 
@@ -148,7 +140,7 @@ public class ThumbNailPanel extends ScrollerPanel
             if ( c instanceof CachedImageComponent )
             {
                 final CachedImageComponent ci = (CachedImageComponent) c;
-                ci.setImage( null, true );
+                ci.setImage( null );
                 ci.setVisible( false );
             }
         }

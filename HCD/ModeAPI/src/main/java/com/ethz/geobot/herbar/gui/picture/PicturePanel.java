@@ -105,7 +105,7 @@ public class PicturePanel extends JPanel
                 LOG.info( "propertyChange(" + e.getPropertyName() + ")" );
                 if ( e.getPropertyName().equalsIgnoreCase( PictureDetailPanel.IMAGE ) )
                 {
-                    imageChanged( e.getNewValue().toString() );
+                    imageChanged( e.getNewValue() == null ? null : e.getNewValue().toString() );
                 }
                 else
                 {
@@ -157,7 +157,10 @@ public class PicturePanel extends JPanel
         }
         for ( final Taxon taxonToCache : toCache )
         {
-            cacheTaxon( taxonToCache );
+            if ( taxonToCache != null )
+            {
+                cacheTaxon( taxonToCache );
+            }
         }
         setImage();
     }
@@ -178,10 +181,10 @@ public class PicturePanel extends JPanel
         int counter = 0;
         for ( Iterator j = model.getPictureCursor( theme ).getIterator(); j.hasNext(); )
         {
-            final CommentedPicture pic = (CommentedPicture) j.next();
-            final String picture = pic.getPicture().getRelativURL();
-            detail.addImage( picture, ( showText ? pic.getComment() : "" ) );
-            detail.cacheImage( picture, theme != model.getPictureTheme() );
+            final CommentedPicture picture = (CommentedPicture) j.next();
+            final String name = picture.getPicture().getRelativURL();
+            detail.addImage( name, ( showText ? picture.getComment() : "" ) );
+            detail.cacheImage( name, theme != model.getPictureTheme() );
             counter++;
         }
         return counter;

@@ -23,13 +23,12 @@
 package net.java.jveez.cache;
 
 import java.awt.image.BufferedImage;
-import net.java.jveez.vfs.Picture;
 
-public interface ImageLoader
+public interface ImageLoader<T>
 {
-    public boolean isCached( Picture picture );
+    public boolean isCached( T picture );
 
-    public BufferedImage getImage( Picture picture );
+    public BufferedImage getImage( T picture );
 
     public void invalidateCache();
 

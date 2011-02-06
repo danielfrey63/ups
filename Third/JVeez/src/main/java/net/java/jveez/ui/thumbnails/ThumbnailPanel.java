@@ -25,12 +25,15 @@ package net.java.jveez.ui.thumbnails;
 import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Collection;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.java.jveez.ui.ThumbnailSortingBox;
 import net.java.jveez.ui.directory.DirectoryBrowser;
 import net.java.jveez.utils.PictureSortingAlgorithm;
+import net.java.jveez.utils.Utils;
 import net.java.jveez.vfs.Directory;
+import net.java.jveez.vfs.Picture;
 import net.java.jveez.vfs.Vfs;
 import net.java.jveez.vfs.VfsEvent;
 import net.java.jveez.vfs.VfsEventListener;
@@ -86,7 +89,32 @@ public class ThumbnailPanel extends JPanel implements VfsEventListener
     public void setCurrentDirectory( final Directory directory )
     {
         directoryBrowser.setCurrentDirectory( directory );
-        thumbnailList.setCurrentDirectory( directory );
+        final ThumbnailListModel model = thumbnailList.getThumbnailListModel();
+        Utils.executeAsyncIfDisptachThread( new Runnable()
+        {
+            public void run()
+            {
+                model.clear();
+                thumbnailList.repaint();
+
+                if ( directory != null )
+                {
+                    try
+                    {
+                        thumbnailList.setLoading( true );
+
+                        final Collection<? extends Picture> pictures = Vfs.getInstance().getPictures( directory );
+                        model.setPictures( pictures );
+                        model.sort( PictureSortingAlgorithm.ByName );
+
+                    }
+                    finally
+                    {
+                        thumbnailList.setLoading( false );
+                    }
+                }
+            }
+        } );
     }
 
     public void setSortingAlgorithm( final PictureSortingAlgorithm value )

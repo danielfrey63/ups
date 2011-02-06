@@ -28,16 +28,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Collection;
 import javax.swing.JList;
-import net.java.jveez.utils.PictureSortingAlgorithm;
+import net.java.jveez.utils.SortingAlgorithm;
 import net.java.jveez.utils.Utils;
-import net.java.jveez.vfs.Directory;
-import net.java.jveez.vfs.Picture;
-import net.java.jveez.vfs.Vfs;
 import org.apache.log4j.Logger;
 
-public class ThumbnailList extends JList
+public class ThumbnailList<T> extends JList
 {
     public static final Dimension MAXIMUM_THUMBNAIL_SIZE = new Dimension( 128, 128 );
 
@@ -47,35 +43,28 @@ public class ThumbnailList extends JList
 
     private static final Font loadingFont = new Font( "Sans Serif", 12, Font.BOLD );
 
-    private ThumbnailListModel model = new DefaultThumbnailListModel();
+    private ThumbnailListModel<T> model;
 
-    private PictureSortingAlgorithm sortingAlgorithm;
+    private SortingAlgorithm<T> sortingAlgorithm;
 
     private boolean loading = false;
 
-    /**
-     * Whether to show a number on each thumbnail.
-     */
+    /** Whether to show a number on each thumbnail. */
     private boolean showNumber;
 
-    public ThumbnailList()
-    {
-        this( PictureSortingAlgorithm.ByName );
-    }
-
-    public ThumbnailList( final PictureSortingAlgorithm sortingAlgorithm )
+    public ThumbnailList( final ThumbnailListModel<T> model, final SortingAlgorithm<T> sortingAlgorithm )
     {
         super();
-        this.sortingAlgorithm = sortingAlgorithm;
         setModel( model );
-        setCellRenderer( new ThumbnailListCellRenderer() );
+        setSortingAlgorithm( sortingAlgorithm );
+        setCellRenderer( new PictureListCellRenderer() );
         setFixedCellHeight( MAXIMUM_THUMBNAIL_SIZE.width + 4 );
         setFixedCellWidth( MAXIMUM_THUMBNAIL_SIZE.height + 4 );
         setLayoutOrientation( JList.HORIZONTAL_WRAP );
         setVisibleRowCount( 0 );
     }
 
-    public void setModel( final ThumbnailListModel model )
+    public void setModel( final ThumbnailListModel<T> model )
     {
         super.setModel( model );
         this.model = model;
@@ -102,7 +91,7 @@ public class ThumbnailList extends JList
         }
     }
 
-    public ThumbnailListModel getThumbnailListModel()
+    public ThumbnailListModel<T> getThumbnailListModel()
     {
         return model;
     }
@@ -115,41 +104,12 @@ public class ThumbnailList extends JList
         repaint();
     }
 
-    public Picture getPictureAt( final int index )
+    public T getPictureAt( final int index )
     {
-        return getThumbnailListModel().getPicture( index );
+        return model.getPicture( index );
     }
 
-    public void setCurrentDirectory( final Directory directory )
-    {
-        Utils.executeAsyncIfDisptachThread( new Runnable()
-        {
-            public void run()
-            {
-                model.clear();
-                repaint();
-
-                if ( directory != null )
-                {
-                    try
-                    {
-                        setLoading( true );
-
-                        final Collection<? extends Picture> pictures = Vfs.getInstance().getPictures( directory );
-                        model.setPictures( pictures );
-                        model.sort( sortingAlgorithm );
-
-                    }
-                    finally
-                    {
-                        setLoading( false );
-                    }
-                }
-            }
-        } );
-    }
-
-    public void setSortingAlgorithm( final PictureSortingAlgorithm value )
+    public void setSortingAlgorithm( final SortingAlgorithm<T> value )
     {
         this.sortingAlgorithm = value;
 
@@ -160,7 +120,7 @@ public class ThumbnailList extends JList
                 setEnabled( false );
 
                 // retrieve last object selected
-                Picture previousSelection = null;
+                T previousSelection = null;
                 int index = getSelectionModel().getAnchorSelectionIndex();
                 if ( index != -1 )
                 {
@@ -225,7 +185,7 @@ public class ThumbnailList extends JList
         return getThumbnailListModel().getSize();
     }
 
-    private void setLoading( final boolean loading )
+    public void setLoading( final boolean loading )
     {
         if ( this.loading != loading )
         {

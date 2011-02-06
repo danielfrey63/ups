@@ -31,12 +31,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import net.java.jveez.ui.thumbnails.DefaultThumbnailListModel;
 import net.java.jveez.ui.thumbnails.ThumbnailList;
 import net.java.jveez.ui.viewer.ViewerPanel;
+import net.java.jveez.utils.PictureSortingAlgorithm;
+import net.java.jveez.vfs.Picture;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public abstract class ExamForm extends JFrame
 {
     public ExamForm() throws HeadlessException
@@ -62,7 +63,7 @@ public abstract class ExamForm extends JFrame
         final JPanel panel1 = new JPanel();
         listPanel = new JPanel();
         thumbnailScroller = new JScrollPane();
-        thumbnailList = new ThumbnailList();
+        thumbnailList = new ThumbnailList( new DefaultThumbnailListModel(), PictureSortingAlgorithm.ByName );
         fieldDateTime = new JPanel();
         fieldStudi = new JLabel();
         time = new ClockPanel();
@@ -255,13 +256,13 @@ public abstract class ExamForm extends JFrame
 
     protected ClockPanel time;
 
-    protected ViewerPanel imageLeft;
+    protected ViewerPanel<Picture> imageLeft;
 
     protected JScrollPane navigationScroller;
 
     protected JTree navigation;
 
-    protected ViewerPanel imageRight;
+    protected ViewerPanel<Picture> imageRight;
 
     protected StatusBar statusBar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

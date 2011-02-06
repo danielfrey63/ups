@@ -46,12 +46,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import net.java.jveez.ui.thumbnails.DefaultThumbnailListModel;
 import net.java.jveez.ui.thumbnails.ThumbnailList;
 import net.java.jveez.ui.viewer.ViewerPanel;
+import net.java.jveez.utils.PictureSortingAlgorithm;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public abstract class EntryForm extends JFrame
 {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -163,7 +163,7 @@ public abstract class EntryForm extends JFrame
         renameButton = new JButton();
         moveButtonsPanel = new JPanel();
         final JScrollPane imagesScroll = new JScrollPane();
-        imagesPanel = new ThumbnailList();
+        imagesPanel = new ThumbnailList( new DefaultThumbnailListModel(), PictureSortingAlgorithm.ByName );
         final JPanel panel2 = new JPanel();
         panel4 = new JPanel();
         button2 = new JButton();

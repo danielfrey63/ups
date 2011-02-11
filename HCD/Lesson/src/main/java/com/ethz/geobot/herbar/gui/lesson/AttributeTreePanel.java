@@ -106,7 +106,9 @@ public abstract class AttributeTreePanel extends JPanel
             }
             else
             {
-                menu.add( getPopUp( taxa ) );
+                final JMenu item = getPopUp( taxa );
+                menu.add( item );
+                item.setEnabled( taxa.length > 0 );
             }
             menu.show( AttributeTreePanel.this, e.getX(), e.getY() );
         }
@@ -114,7 +116,7 @@ public abstract class AttributeTreePanel extends JPanel
 
     private JMenu getPopUp( final Taxon[] copy )
     {
-        final JMenu subMenu = new JMenu( SIMILAR_TAXA );
+        final JMenu subMenu = new JMenu( SIMILAR_TAXA + " (" + copy.length + ")" );
         for ( final Taxon taxon : copy )
         {
             final ObjectMenuItem<Taxon> item = new ObjectMenuItem<Taxon>( taxon );

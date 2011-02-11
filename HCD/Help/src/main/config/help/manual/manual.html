@@ -1,0 +1,719 @@
+<body>
+<h1>Allgemeines</h1>
+<h2>Starten der Herbar CD-ROM Version 2</h2>
+	<p>Stellen Sie vor einem Start der <b>Herbar CD-ROM Version 2</b> sicher, dass die originale CD-ROM in Ihrem Computer eingelegt ist und dem Betriebssystem zur Verf&uuml;gung steht. Wenn die CD-ROM nicht eingelegt ist und die Bilder nicht gefunden werden, wird das Programm mit einer entsprechenden Fehlermeldung beendet.</p>
+	<p>Wenn Sie die <b>Herbar CD-ROM Version 2</b> zum ersten Mal benutzen, erscheint der Assistent zur Modus-Auswahl.</p>
+	<p></p>
+	<img src="images/wizard.modus.start.png">
+	<p></p>
+	<p>Hier w&auml;hlen Sie, mit welchem Modus die <b>Herbar CD-ROM Version 2</b> beginnen soll. Wenn Sie hier den Dialog abbrechen oder das Fenster schliessen, wird die Applikation nach einer Best&auml;tigung beendet.</p>
+<h2>Swing Bedienungselemente</h2>
+	<p>Die <b>Herbar CD-ROM Version 2</b> ist in Java geschrieben und verwendet die Swing Bibliothek zur Darstellung von Bedienungselementen. Im Allgemeinen sehen die Swing Bedienungselemente den &uuml;blichen Elementen (beispielsweise unter Windows) ziemlich &auml;hnlich. Eine Ausnahme bilden jedoch die Schaltfl&auml;chen, weshalb diese hier am folgenden Beispiel kurz erl&auml;utert werden sollen.</p>
+	<p></p>
+	<img src="images/widget.png">
+	<p></p>
+	<p>In diesem Ausschnitt sehen Sie einige Schaltfl&auml;chen in der obersten Reihe (Symbolleiste) sowie zuunterst drei Register und rechts daneben zwei Schaltfl&auml;chen. (Zwischen der oberen und der unteren Reihe von Schaltfl&auml;chen ist der Ausschnitt der Taxonomie dargestellt.) Die Schaltfl&auml;chen oben widerspiegeln die Standard-Darstellung einer Schaltfl&auml;che in Swing mit einem Icon. Hier wird, wie in allen Symbolleisten, der Rand der Schaltfl&auml;che erst beim &Uuml;berfahren mit der Maus dargestellt. Die zwei Schaltfl&auml;chen mit den Pfeilen unten rechts sehen &uuml;blichen Schaltfl&auml;chen etwas &auml;hnlicher, sind aber eher untypisch f&uuml;r Swing Schaltfl&auml;chen. Beide linken Schaltfl&auml;chen der Pfeilpaare sind &uuml;brigens hier jetzt nicht anw&auml;hlbar. Unten links sind die drei Register dargestellt, die ebenfalls Schaltfl&auml;chenfunktion haben, da ein Klick darauf die entsprechende Seite in den Vordergrund holt.</p>
+
+<h2>Tastaturk&uuml;rzel</h2>
+	<p>Das Arbeiten mit der Tastatur ist nach kurzer Gew&ouml;hnungszeit meist effizienter als das Arbeiten mit der Maus. Deshalb lassen sich in der <b>Herbar CD-ROM Version 2</b> die meisten Aktionen auch mit der Tastatur ausf&uuml;hren. Nach kurzem Verweilen mit der Maus &uuml;ber einer Schaltfl&auml;che erscheint ein Hinweisfeld, worin neben einer kurzen Erkl&auml;rung zur Aufgabe der Schaltfl&auml;che die Tastenkombination des entsprechenden Tastaturk&uuml;rzels in Klammern angezeigt wird. F&uuml;r die Bezeichnung der Tastenkombination werden die &uuml;blichen englischen Ausdr&uuml;cke verwendet.</p>
+	<p></p>
+	<img src="images/tooltip.png">
+	<p></p>
+	<p>In dieser Benutzeranleitung finden Sie Hinweise auf Tastaturk&uuml;rzel in derselben Form.</p>
+	<p>F&uuml;r die Aktivierungstasten in den Tastenkombinationen werden folgende Abk&uuml;rzungen verwendet:</p>
+	<table summary="" border="1">
+		<colgroup>
+			<col align="left">
+			<col align="left">
+		</colgroup>
+		<tbody>
+		<tr>
+			<td align="left"><p><b>Abk&uuml;rzung</b></p></td>
+			<td align="left"><p><b>Windows</b></p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Alt</p></td>
+			<td align="left"><p>Alt-Taste</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Ctrl</p></td>
+			<td align="left"><p>Control-, Ctrl-, Strg-Taste</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Shift</p></td>
+			<td align="left"><p>Umschalt-Taste</p></td>
+		</tr>
+		</tbody>
+	</table>
+	<p>Neben den genannten Hinweisen zu Tastaturkombinationen stehen eine grosse Anzahl von Standard Tastaturkombinationen zur Verf&uuml;gung. Diese sind in der Swing Bibliothek Java festgelegt und im folgenden kurz zusammengefasst:</p>
+	<table summary="" border="1">
+		<colgroup>
+			<col align="left">
+			<col align="left">
+		</colgroup>
+		<tbody>
+		<tr>
+			<td align="left"><p><b>Navigieren</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Vorw&auml;rts zwischen verschiedenen Benutzerelementen</p></td>
+			<td align="left"><p>TAB</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>R&uuml;ckw&auml;rts zwischen verschiedenen Benutzerelementen</p></td>
+			<td align="left"><p>Shift+TAB</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Innerhalb einer Gruppe</p></td>
+			<td align="left"><p>UP, DOWN, LEFT, RIGHT</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Seitenweise</p></td>
+			<td align="left"><p>PGUP, PGDN</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>An den Anfang, ans Ende</p></td>
+			<td align="left"><p>HOME, END</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Innerhalb einer Gruppe navigieren ohne L&ouml;schen der Auswahl</p></td>
+			<td align="left"><p>Ctrl+Navigationstaste (siehe Navigieren)</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Auswahl</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Alles ausw&auml;hlen</p></td>
+			<td align="left"><p>Ctrl+A</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Aktivieren/Anw&auml;hlen/Deaktivieren/Abw&auml;hlen</p></td>
+			<td align="left"><p>SPACE</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Auswahlbereich bis zum aktiven Element erweitern</p></td>
+			<td align="left"><p>Shift+SPACE</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Innerhalb einer Gruppe navigieren und Auswahl erweitern</p></td>
+			<td align="left"><p>Shift+Navigationstaste (siehe Navigieren)</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Schaltfl&auml;che</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Standard aktivieren</p></td>
+			<td align="left"><p>RETURN</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Baumansicht</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Knoten aufklappen</p></td>
+			<td align="left"><p>RIGHT</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Knoten zusammenklappen</p></td>
+			<td align="left"><p>LEFT</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Men&uuml;balken</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Men&uuml;balken aktivieren</p></td>
+			<td align="left"><p>Alt+unterstrichener Men&uuml; Buchstabe</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Men&uuml;balken deaktivieren</p></td>
+			<td align="left"><p>Esc</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Erstes Men&uuml; anw&auml;hlen</p></td>
+			<td align="left"><p>F10</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Textfeld</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>Eingabe best&auml;tigen</p></td>
+			<td align="left"><p>RETURN</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Kopieren</p></td>
+			<td align="left"><p>Ctrl+C</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Ausschneiden</p></td>
+			<td align="left"><p>Ctrl+X</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Einf&uuml;gen</p></td>
+			<td align="left"><p>Ctrl+V</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>N&auml;chster Buchstabe l&ouml;schen</p></td>
+			<td align="left"><p>Delete</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p>Letzter Buchstabe l&ouml;schen</p></td>
+			<td align="left"><p>Backspace</p></td>
+		</tr>
+		<tr>
+			<td align="left"><p><b>Fenster</b></p></td>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left"><p>In den Hintergrund</p></td>
+			<td align="left"><p>Alt+Esc</p></td>
+		</tr>
+		</tbody>
+	</table>
+<h2>Men&uuml;balken</h2>
+	<p>Der Men&uuml;balken enth&auml;lt die modus&uuml;bergreifenden Befehle. Generell lassen sich Men&uuml;s und Befehle im Men&uuml; mit Hilfe der Alt-Taste und dem unterstrichenen Buchstaben aktivieren. Beim Anw&auml;hlen eines Befehls wird in der Statusleiste ein kurzer Hinweistext eingeblendet.</p>
+	<p>Im Men&uuml; <em>Programm</em> k&ouml;nnen Sie &uuml;ber den Befehl <em>Fenster speichern</em> die aktuelle Position und Gr&ouml;sse des Hauptfensters &uuml;ber verschiedene Starts der <b>Herbar CD-ROM Version 2</b> speichern lassen. Das Programm beenden Sie mit Hilfe des Befehls <em>Beenden</em> (Alt+F4).</p>
+	<p>Im Men&uuml; <em>Einstellungen</em> lassen sich verschiedene Assistenten anw&auml;hlen. Mit <em>Modus ausw&auml;hlen...</em> (Alt+M) rufen Sie den <em>Assistenten zur Modusauswahl</em> auf. Mit <em>Assistent zum Modus...</em> (Alt+W) wird der Assistent zum Modus ge&ouml;ffnet. Der Befehl ist nur aktiv, wenn ein solcher Assistent vom Modus zur Verf&uuml;gung gestellt wird. Mit <em>Bildaufl&ouml;sung...</em> (Alt+A) erhalten Sie die M&ouml;glichkeit, zwischen zwei verschiedenen Aufl&ouml;sungen der Bilder zu w&auml;hlen; mit den kleineren Bildern k&ouml;nnen Sie die Ladezeit bei langsamen Computern verk&uuml;rzen. Mit <em>Updates...</em> (Alt+U) wird der <em>Assistent f&uuml;r die Aktualisierung</em> eingeblendet.</p>
+	<p>Im Men&uuml; <em>Herbar</em> <em>CD</em> sind die allgemeinen Befehle der <b>Herbar CD-ROM Version 2</b> zu finden. Mit <em>Hilfe</em> (F1) erscheint dieses Hilfefenster. Mit <em>Modul Information...</em> (Alt+O) wird Ihnen ein Dialogfenster mit den Namen, Beschreibungen und Versionsnummern der installierten Module angezeigt, und mit <em>&Uuml;ber die Herbar CD-ROM...</em> (Alt+I) erhalten Sie das Startfenster.</p>
+<h2>Assistent zur Modus-Auswahl</h2>
+	<p>&Uuml;ber das Men&uuml; <em>Einstellungen: Modus ausw&auml;hlen...</em> (Alt+M) k&ouml;nnen Sie das Fenster <em>Assistent zur Modus-Auswahl</em> &ouml;ffnen.</p>
+	<p>Der Assistent erscheint in einem neuen Dialogfenster. Er stellt alle bei Programmstart verf&uuml;gbaren Modi in zwei Kategorien dar: <em>Lernen</em> und <em>Spiele</em>. W&auml;hlen Sie die Kategorie <em>Lernen</em> , um sich den Lernstoff eingehend und ausf&uuml;hrlich anzueignen. Hier stehen Ihnen der Modus <em>Lehrgang und Abfrage</em> sowie der Modus <em>Pr&uuml;fung</em> zur Verf&uuml;gung. W&auml;hlen Sie die Kategorie
+ <em>Spiele</em> , um mit einem der Spielmodi vergn&uuml;glich zu lernen.</p>
+	<p></p>
+	<img src="images/wizard.modus.lesson.png">
+	<p></p>
+	<p>Der aktive Modus wird grau dargestellt und kann nicht angew&auml;hlt werden. Beachten Sie, dass ein orangefarbener Hinweis eingeblendet wird, wenn noch kein neuer Modus angew&auml;hlt worden ist, die OK Schaltfl&auml;che ist dann auch noch nicht aktiv.</p>
+	<p></p>
+	<img src="images/wizard.modus.png">
+	<p></p>
+<h1>Lernen</h1>
+<h2>Modus Lehrgang und Abfrage</h2>
+<h3>Aktivieren des Modus Lehrgang und Abfrage</h3>
+	<p>So aktivieren Sie den Modus <em>Lehrgang und Abfrage</em> :</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>&Ouml;ffnen Sie das Dialogfenster <em>Assistent zur Modus-Auswahl</em>.</p></li>
+			<li><p>Selektieren Sie das Register <em>Lernen</em>.</p></li>
+			<li><p>W&auml;hlen Sie <em>Lehrgang und Abfrage</em>.</p></li>
+			<li><p>Klicken Sie doppelt auf den gew&auml;hlten Eintrag, oder klicken Sie einmal auf OK (Alt+U).</p></li>
+		</ol>
+	<p>Der Modus <em>Lehrgang und Abfrage</em> wird im Hauptfenster ge&ouml;ffnet.</p>
+	<p></p>
+	<img src="images/wizard.modus.lesson.png">
+	<p></p>
+<h3>Hauptfenster</h3>
+	<p>Das Hauptfenster des Modus <em>Lehrgang und Abfrage</em> ist in sechs verschiedene Bereiche gegliedert (von oben nach unten, links nach rechts).</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Der Men&uuml;balkenganz oben.</p></li>
+			<li><p>Die Symbolleistef&uuml;r Einstellung und Navigation unterhalb des Men&uuml;balkens.</p></li>
+			<li><p>Der Balken mit einem Ausschnitt der Taxonomie, beginnend mit dem aktuellen Taxon.</p></li>
+			<li><p>Der Bilderbereichlinks unterhalb des Ausschnittes der Taxonomie.</p></li>
+			<li><p>Der Informationsbereich des Lehrgangsresp. Eingabebereich der Abfragerechts unterhalb des Ausschnittes der Taxonomie.</p></li>
+			<li><p>Zuunterst die Statusleistemit den aktuellen Einstellungen.</p></li>
+		</ol>
+	<p></p>
+	<img src="images/window.main.png">
+	<p></p>
+	<p>Der <em>Men&uuml;balken</em> ist f&uuml;r allgemeine Aktionen gedacht, die das Hauptfenster betreffen und in den meisten Modi verwendet werden k&ouml;nnen. Die <em>Symbolleiste</em> erm&ouml;glicht die Einstellung des Lernstoffs. Der <em>Ausschnitt der Taxonomie</em> zeigt alle &uuml;bergeordneten Taxa des aktuell ausgew&auml;hlten Taxons in aufsteigender, hierarchischer Reihenfolge. Der <em>Bilderbereich</em> dient zur Auswahl und Darstellung von Bildern zum gew&auml;hlten Taxon. Der <em>Informationsbereich</em> zeigt die Eigenschaften des gew&auml;hlten Taxons resp. erm&ouml;glicht eine Abfrage der Eigenschaften. Die <em>Statusleiste</em> stellt die aktuellen Einstellungen dar.</p>
+<h4>Symbolleiste und Statusleiste</h4>
+	<p>Unterhalb des Hauptmen&uuml;s befindet sich eine Symbolleiste, mit der die aktuellen Einstellungen ge&auml;ndert werden k&ouml;nnen. Am unteren Ende des Hauptfensters befindet sich die Statusleiste, auf der die aktuellen Einstellungen ersichtlich sind. Im folgenden werden die Schaltfl&auml;chen der Symbolleiste und die Texte in der Statusleiste vorgestellt und ihre Funktion erl&auml;utert (eine genaue Beschreibung der Funktion finden Sie im Kapitel Assistent zum Lehrgang und Abfragemodus):</p>
+	<p></p>
+	<img src="images/toolbar.upper.png">
+	<p></p>
+	<p>Jedes Symbol auf der Symbolleiste hat einen entsprechenden Text an derselben Position in der Statusleiste.</p>
+	<p></p>
+	<img src="images/toolbar.lower.png">
+	<p></p>
+	<p><img src="images/button.lists.png"> Die erste Schaltfl&auml;che erlaubt es, aus den definierten Stofflisteneine als aktuelle Stoffliste auszuw&auml;hlen. Die im folgenden beschriebenen drei Schaltfl&auml;chen beziehen sich alle auf diese aktuelle Stoffliste <em></em> und erlauben es, den <em>Lernstoff</em> einzuschr&auml;nken.</p>
+	<p><img src="images/button.scope.png"> Diese Schaltfl&auml;che dient zur &Auml;nderung der <em>Stoffspitze</em> festlegen.</p>
+	<p><img src="images/button.level.png"> Mit Hilfe dieser Schaltfl&auml;che l&auml;sst sich die <em>taxonomische Stufe</em> &auml;ndern.</p>
+	<p><img src="images/button.order.png"> Diese Schaltfl&auml;che dient zur &Auml;nderung der <em>Reihenfolge</em>.</p>
+	<p><img src="images/button.focus.png"> Das <em>aktuell ausgew&auml;hlte Taxon</em> kann mit Hilfe dieser Schaltfl&auml;che festgelegt werden.</p>
+	<p><img src="images/button.navigation.png"> Mit den beiden Symbolen am Ende der Symbolleiste wird die Position des aktuellen Taxons im <em>Lernstoff</em> ge&auml;ndert.</p>
+<h4>Ausschnitt der Taxonomie</h4>
+	<p></p>
+	<img src="images/toolbar.bread.png">
+	<p></p>
+	<p>Das aktuelle Taxon (hier als Beispiel <em>Medicago sativa</em> ) und all seine &uuml;bergeordneten Taxa werden als <em>Ausschnitt der Taxonomie</em> unterhalb der Symbolleisteangezeigt. Sollte zu wenig Platz vorhanden sein, um die ganze Taxonreihe darzustellen, wird am rechten Ende eine zus&auml;tzliche Schaltfl&auml;che angezeigt, mit der die nicht sichtbaren Taxa eingeblendet werden k&ouml;nnen.</p>
+	<p>Beachten Sie, dass der Ausschnitt der Taxonomie nicht nur vom aktuellen Taxon abh&auml;ngig ist, sondern ebenfalls von der aktuellen Stoffliste beeinflusst wird. Es werden nur jene taxonomischen Stufen angezeigt, die in der Stoffliste enthalten sind.</p>
+<h4>Bilderbereich</h4>
+	<p>Der <em>Bilderbereich</em> links im Hauptfensters unterhalb des Ausschnitts der Taxonomie stellt die Bilder des aktuellen Taxons dar. Die Bilder werden in vier verschiedenen Kategorien als Register dargestellt: <em>Herbar, Portrait, Detail</em> und <em>Standort</em>. Die Kategorie <em>Herbar</em> enth&auml;lt Bilder von Herbarpflanzen (gepresste Pflanzen). Hier gilt es zu beachten, dass sich die Farben bei einigen Arten ver&auml;ndert haben. Die Kategorie <em>Portrait</em> zeigt die Pflanzen in einer Freilandaufnahme. In der Kategorie <em>Detail</em> werden wichtige Einzelheiten des Taxon vergr&ouml;ssert dargestellt. Die Kategorie <em>Standort</em> zeigt den Standort, an dem dieses Taxon (meist) vorkommt, daraus k&ouml;nnen oft die &ouml;kologischen Anspr&uuml;che des Taxons abgeleitet werden. Bei einem Wechsel des aktuellen Taxons wird das angew&auml;hlte Register beibehalten.</p>
+	<p>Beachten Sie, dass nicht alle Taxa in allen vier Kategorien Bilder enthalten. Entsprechende, leere Register werden grau dargestellt. Es ist dennoch m&ouml;glich, ein Register ohne Bilder anzuw&auml;hlen. Das erm&ouml;glicht, dass Sie sich beim Vor- und Zur&uuml;ckbl&auml;ttern durch die Taxa des Lernstoffs auf eine Bildkategorie konzentrieren k&ouml;nnen.</p>
+	<p>Im oberen Teil der Bildfl&auml;che, unterhalb der Register, werden s&auml;mtliche Bilder einer Kategorie als Miniaturen dargestellt. Falls nicht alle Platz haben sollten, werden ein oder zwei Schaltfl&auml;chen mit Bildlaufpfeilen dargestellt (im Bild ein Rechtspfeil). Ein Klick auf eine solche Schaltfl&auml;che verschiebt die Reihe der Miniaturen in die entsprechende Richtung. Ein Klick auf eine Miniatur &uuml;bernimmt das Bild als aktuelles Bild.</p>
+	<p>Unterhalb der Miniaturen wird das aktuelle Bild gross dargestellt. Die Schaltfl&auml;che mit dem Lupensymbol links neben den Miniaturen dient zur Vergr&ouml;sserung resp. Verkleinerung des aktuellen Bildes. Mit dem ersten Klick, solange das Lupensymbol ein Plus enth&auml;lt, wird die Bildgr&ouml;sse verdoppelt, mit einem erneuten Klick (Lupensymbol mit Minus) wieder verkleinert.</p>
+	<p>Unterhalb des aktuellen Bildes befindet sich die zum aktuellen Bild und zum aktuellen Taxon geh&ouml;rende Legende. Die Legenden sind auch f&uuml;r die Miniaturen sichtbar. Wenn Sie einen Moment mit der Maus &uuml;ber einer Miniatur verweilen, wird die entsprechende Legende in einem Hinweisfeld dargestellt.</p>
+	<p>Bitte beachten Sie, dass Legende und Hinweisfelder nicht sichtbar sind, wenn im Informationsbereich die Abfrage aktiv ist.</p>
+	<p></p>
+	<img src="images/window.picture.png">
+	<p></p>
+<h4>Informationsbereich des Lehrgangs</h4>
+	<p>Der <em>Informationsbereich des Lehrgangs</em> ist im rechts im Hauptfensterunterhalb des Ausschnitts der Taxonomie dargestellt. Mit einem Klick auf das Register <em>Abfrage</em> am oberen Rand des Informationsbereichs aktivieren Sie den Eingabebereich der Abfrage und verdecken damit den Informationsbereich des Lehrgangs. Sie k&ouml;nnen aber den Informationsbereich des Lehrgangs wieder aktivieren, indem Sie auf das Register <em>Lehrgang</em> klicken.</p>
+	<p>Beachten Sie, dass der Informationsbereich des Lehrgangs standardm&auml;ssig eingeblendet ist, wenn Sie die <b>Herbar CD-ROM Version 2</b> aufstarten.</p>
+	<p>Der <em>Informationsbereich des Lehrgangs</em> enth&auml;lt drei Kategorien von Informationen zum aktuellen Taxon: <em>Morphologie, &Ouml;kologie</em> und <em>Weiteres</em>. Klicken Sie auf das Register der gew&uuml;nschten Kategorie am unteren Rand des Informationsbereichs, dann werden die Informationen dieser Kategorie sichtbar.</p>
+	<p>Die Kategorie <em>Morphologie</em> stellt die relevanten Merkmale der einzelnen Taxa dar (die relevanten Merkmale eines Taxons sind jene Merkmale, die Sie brauchen, um das Taxon innerhalb der Gesamtliste zu charakterisieren; zur Abgrenzung gegen&uuml;ber Taxa, die auf der CD nicht enthalten sind, braucht es meist weitere Merkmale). Merkmale werden i.d.R. von &uuml;bergeordneten Taxa auf untergeordnete Taxa vererbt. Damit Sie sehen, auf welcher taxonomischen Stufe die Merkmale zugeordnet sind, werden alle relevanten Merkmale vom aktuellen Taxon hinauf bis zur Unterklasse dargestellt. Dies hilft Ihnen, die Merkmale in Verbindung mit der taxonomischen Stufe zu erlernen.</p>
+	<p>Interessante andere Aspekte des aktuellen Taxons sind in den Kategorien <em>&Ouml;kologie</em> und <em>Weiteres</em> (z.B. Verwendung, Giftpflanzen, Medizin) ersichtlich.</p>
+	<p></p>
+	<img src="images/window.info.png">
+	<p></p>
+<h4>Eingabebereich der Abfrage</h4>
+	<p>Durch einen Klick auf das Register <em>Abfrage</em> am oberen Rand des Informationsbereichs aktivieren Sie den <em>Eingabebereich der Abfrage</em>.</p>
+	<p>Mit der <em></em> Abfrage k&ouml;nnen Sie sich testen, ob Sie die Eigenschaften des aktuellen Taxons kennen. Dazu werden im Bezug auf den Lehrgang folgende Komponenten anders dargestellt:</p>
+	<div class="itemizedlist">
+		<ul type="bullet">
+			<li style="list-style-type: disc"><p>Der Ausschnitt aus der Taxonomie wird durch ein Eingabefeld f&uuml;r das Taxon ersetzt.</p></li>
+			<li style="list-style-type: disc"><p>Die Darstellung der Eigenschaften wird durch eine Eingabemaske ersetzt.</p></li>
+		</ul>
+	<p></p>
+	<img src="images/window.ask.png">
+	<p></p>
+<h5>&Uuml;berpr&uuml;fung des Namens</h5>
+	<p>So geben Sie einen Namen ein und testen, ob der Name richtig ist und Sie somit das Taxon erkannt haben:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie in das Eingabefeld f&uuml;r das Taxon unterhalb der Symbolleiste.</p></li>
+			<li><p>Geben Sie den Namen ein.</p></li>
+			<li><p>Best&auml;tigen Sie die Eingabe mit RETURN.</p></li>
+		</ol>
+	<p>Beachten Sie, dass der Name der verlangten taxonomischen Stufe entspricht. Der eingegebene Name erscheint rechts neben dem Eingabefeld mit einer Bewertung. F&uuml;r die Bewertung werden Symbole verwendet, die wie folgt, hier am Beispiel von <em>Rhododendron hirsutum</em> , erl&auml;utert werden:</p>
+	<table summary="" border="1">
+			<colgroup>
+				<col align="left">
+				<col align="left">
+			</colgroup>
+			<tbody>
+			<tr>
+				<td align="left"><p></p>
+					<img src="images/ask.taxon.wrong.png">
+					<p></p></td>
+				<td align="left"><p>Dieser Name ist nicht richtig.</p></td>
+			</tr>
+			<tr>
+				<td align="left"><p></p>
+					<img src="images/ask.taxon.near.png">
+					<p></p></td>
+				<td align="left"><p>Dieser Name ist beinahe richtig, er enth&auml;lt aber einen Tippfehler oder die Endung stimmt nicht. Sie bekommen einen entsprechenden Hinweis. Geben Sie den Namen danach richtig ein.</p></td>
+			</tr>
+			<tr>
+				<td align="left"><p></p>
+					<img src="images/ask.taxon.right.png">
+					<p></p></td>
+				<td align="left"><p>Der Name ist richtig.</p></td>
+			</tr>
+			</tbody>
+		</table>
+	<p>Sobald der Name richtig eingegeben worden ist, wird das Eingabefeld gesperrt.</p>
+<h5>Eingabe von Eigenschaften</h5>
+	<p>Der <em>Eingabebereich der Eigenschaften</em> wird anstelle des <em>Informationsbereichs des Lehrgangs</em> angezeigt. Die Eingabefl&auml;che ist dabei in einen Auswahlbaum im oberen und einen Resultatbaum im unteren Bereich aufgeteilt. Hier k&ouml;nnen Sie Ihr Wissen testen. Dabei gehen Sie folgendermassen vor:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie die gew&uuml;nschte <em>Kategorie</em> (z.B. Morphologie) am unteren Rand des Eingabebereichs aus.</p></li>
+			<li><p>W&auml;hlen Sie einen <em>Schwierigkeitsgrad</em> aus dem Men&uuml; am oberen Rand des Eingabebereichs.</p></li>
+			<li><p>W&auml;hlen Sie eine <em>Eigenschaft</em> aus dem Auswahlbaum oder suchen Sie diese mit Hilfe des Suchfeldes. Nur die Bl&auml;tter (Endknoten) des Auswahlbaumes lassen sich &uuml;berpr&uuml;fen.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che <em>Hinzuf&uuml;gen</em>(RETURN).</p></li>
+		</ol>
+	<p>Die ausgew&auml;hlte Eigenschaft wird mit einem Bewertungssymbol in den Resultatbaum eingetragen. F&uuml;r die Bewertung werden die folgenden Symbole verwendet:</p>
+	<p>&#8226; <img src="images/ask.result.wrong.png"> Diese Eigenschaft ist nicht relevant f&uuml;r das aktuelle Taxon. Beachten Sie, dass dies nicht zwingend heisst, dass diese Eigenschaft falsch ist. Sie kann auch richtig sein, aber eben nicht relevant. M&ouml;glicherweise ist das Merkmal auf einer h&ouml;heren hierarchischen Stufe zugeordnet (und trifft dann i.d.R. auch f&uuml;r das aktuelle Taxon zu).</p>
+	<p>&#8226; <img src="images/ask.result.near.png"> Diese Eigenschaft ist beinahe relevant. Hier k&ouml;nnen Sie davon ausgehen, dass eine benachbarte Eigenschaft derselben Gruppe zutrifft.</p>
+	<p>&#8226; <img src="images/ask.result.right.png"> Diese Eigenschaft ist richtig.</p>
+	<p>Beachten Sie, dass die Anzahl erwarteter Eigenschaften im Resultatbaum angegeben wird. Sobald alle Eigenschaften gefunden worden sind, wird ein gr&uuml;nes volles Trinkglas, bei fehlenden Eigenschaften ein rotes halbvolles Trinkglas im Resultatbaum angezeigt.</p>
+	<p>F&uuml;r den Auswahlbaum stehen im Register <em>Morphologie</em> drei verschiedene Schwierigkeitsstufen zur Verf&uuml;gung. Sie lassen sich &uuml;ber das Men&uuml; oberhalb der Baumdarstellung anw&auml;hlen. Die Schwierigkeitsstufen sind:</p>
+	<p>Naheliegende: Hier werden nur jene Gruppen von Eigenschaften angezeigt, in denen mindestens eines der Merkmale zutrifft. Diese Schwierigkeitsstufe ist f&uuml;r Einsteiger geeignet.</p>
+	<p></p>
+	<img src="images/ask.minimal.png">
+	<p></p>
+	<p>Fernliegende: Hier werden jene Gruppen von Eigenschaften zur Auswahl angeboten, die &uuml;ber zwei Stufen mit der gesuchten Eigenschaft verwandt sind. Hier ist es sehr wahrscheinlich, dass nicht aus allen Gruppen eine Eigenschaft zutrifft.</p>
+	<p></p>
+	<img src="images/ask.medium.png">
+	<p></p>
+	<p>Alle: Es werden s&auml;mtliche Eigenschaften zur Auswahl angeboten. Dies ist die schwierigste Stufe, denn es gilt hier aus vielen Hunderten von Eigenschaften genau die relevanten auszuw&auml;hlen. Wer das beherrscht, ist sattelfest.</p>
+	<p></p>
+	<img src="images/ask.all.png">
+	<p></p>
+<h3>Einstellungen zum Lernstoff</h3>
+	<p>Die Einstellungen des Modus Lehrgang und Abfragen dienen dazu, den Lernstoff festzulegen. Sie haben zwei verschiedene M&ouml;glichkeiten, den Lernstoff zu bestimmen.</p>
+	<div class="itemizedlist">
+		<ul type="bullet">
+			<li style="list-style-type: disc"><p>Ein Assistent steht zur Verf&uuml;gung, um die verschiedenen Einstellungen zum Lernstoff kurz zu erkl&auml;ren und die Eingabe zu unterst&uuml;tzen (Alt+W).</p>
+			</li>
+			<li style="list-style-type: disc"><p>Mit Hilfe der Symbolleistedes Hauptfensters sind s&auml;mtliche Funktionen erreichbar.</p></li>
+		</ul>
+	<p>F&uuml;r Neulinge empfehlen wir den Assistenten. Sobald bekannt ist, welche Einstellungen wof&uuml;r gedacht sind, ist das Benutzen der Symbolleiste effizienter.</p>
+	<p>Im folgenden wird das Konzept zur Einstellung des Lernstoffs kurz erl&auml;utert, danach wird in die Benutzung des Assistenten eingef&uuml;hrt, und schliesslich wird die Symbolleiste erkl&auml;rt.</p>
+<h4>Lernstoff zusammenstellen</h4>
+	<p>Die Zusammenstellung Ihres <em>Lernstoffes</em> beginnt damit, dass Sie eine Stoffliste ausw&auml;hlen. Die <b>Herbar CD-ROM Version 2</b> enth&auml;lt eine integrierte Stoffliste, genannt <em>Gesamtliste</em>. Es lassen sich jedoch beliebige Stofflisten nach Ihrem Bed&uuml;rfnissen definieren. Vergleichen Sie dazu das Kapitel Assistent zum Zusammenstellen von Stofflisten.</p>
+	<p>Die Gesamtliste enth&auml;lt alle Taxa, die auf der <b>Herbar CD-ROM Version 2</b> integriert sind. Da Sie effizienter sind, wenn Sie nicht alle Taxa aufs Mal lernen, k&ouml;nnen Sie Ihren Lernstoff einschr&auml;nken. Dazu stehen Ihnen folgende Einstellungen zur Verf&uuml;gung:</p>
+	<div class="itemizedlist">
+		<ul type="bullet">
+			<li style="list-style-type: disc"><p>Sie w&auml;hlen mit einem bestimmten Taxon eine ganze Gruppe von untergeordneten Taxa aus. Das &uuml;bergeordnete Taxon wird <em>Stoffspitze</em> 
+ <b></b> genannt.</p></li>
+			<li style="list-style-type: disc"><p>Sie w&auml;hlen eine <em>taxonomische Stufe</em> aus.</p></li>
+		</ul>
+	<p>Alle Taxa der Stoffliste, die zur Stoffspitze und zur taxonomischen Stufe geh&ouml;ren, bilden Ihren Lernstoff.</p>
+	<p>Beispiele: Sie wollen die Familie der <em>Rosaceae</em> kennen lernen. Dazu w&auml;hlen Sie die Familie Rosaceae aus, diese wird somit Ihre aktuelle Stoffspitze. Alle Taxa innerhalb der Familie geh&ouml;ren zu Ihrem jetzigen Lernstoff. Zuerst wollen Sie die Unterfamilien lernen, Sie legen deshalb als taxonomische Stufe die Unterfamilie fest; nun k&ouml;nnen Sie die drei Unterfamilien der Familie der Rosaceae lernen. Wenn Sie diese bearbeitet haben, wechseln Sie die taxonomische Stufe auf Gattung und nachher auf Art. Durch dieses Vorgehen lernen Sie den Stoff der Familie der Rosaceae und ordnen die Merkmale den verschiedenen Taxa (inkl. ihren taxonomischen Stufen) zu. Selbstverst&auml;ndlich k&ouml;nnen Sie auch umgekehrt vorgehen und zuerst die Arten lernen.</p>
+	<p>Sie haben ausserdem die M&ouml;glichkeit, die Reihenfolge der Taxa zu w&auml;hlen. Wenn Sie den Lernstoff in systematischer Reihenfolge (d.h. in der Reihenfolge des Buches zur Vorlesung) lernen wollen, w&auml;hlen Sie geordnet, Sie k&ouml;nnen die Taxa aber auch in zuf&auml;llig gemischter Reihenfolge erlernen und bei einem beliebigen Taxon beginnen.</p>
+<h4>Assistent zum Lehrgang und Abfragemodus</h4>
+	<p>Um das Einstellen von Stoffspitze, taxonomischer Stufe, Reihenfolge und aktuellem Taxon verst&auml;ndlicher zu machen, steht Ihnen ein Assistent zur Verf&uuml;gung. Der Assistent f&uuml;hrt Sie durch die verschiedenen Schritte und erkl&auml;rt diese.</p>
+	<p>Der Assistent wird &uuml;ber das Men&uuml; <em>Einstellungen: Assistent zum Modus...</em> aufgerufen (Alt+W).</p>
+<h5>Schritt 1: Einf&uuml;hrung</h5>
+	<p>Der erste Schritt enth&auml;lt eine Einleitung mit Erl&auml;uterungen zu den folgenden Schritten. Die Einleitung kann bei Bedarf mit Hilfe des Kontrollk&auml;stchens <em>Assistent jeweils mit Einf&uuml;hrung beginnen</em> 
+ <b></b> deaktiviert werden. Das n&auml;chste Mal, wenn Sie den Assistenten aufrufen, wird dann mit dem folgenden Schritt begonnen.</p>
+	<p></p>
+	<img src="images/wizard.lesson.intro.png">
+	<p></p>
+<h5>Schritt 2: Stoffliste festlegen</h5>
+	<p>Als erstes legen Sie die aktuelle <em>Stoffliste</em> fest. Wenn Sie die <b>Herbar CD-ROM Version 2</b> zum ersten Mal benutzen, dann ist nur die <em>Gesamtliste</em> als Stoffliste definiert. Sie wird sowohl als einzige Auswahl in der <em>Auswahl aller Stofflisten</em> als auch als <em>aktuelle Stoffliste</em> angezeigt. Gleichzeitig bietet Schritt 2 die M&ouml;glichkeit zum Verwalten der Stofflisten. Hier k&ouml;nnen folgende Aufgaben ausgef&uuml;hrt werden:</p>
+	<div class="itemizedlist">
+		<ul type="bullet">
+			<li style="list-style-type: disc"><p>Ein Klick auf die Schaltfl&auml;che<img src="images/utilPlus.png"> erlaubt Ihnen das Erstellen einer neuen Stoffliste (Alt+L).</p></li>
+			<li style="list-style-type: disc"><p>Ein Klick auf die Schaltfl&auml;che<img src="images/utilMinus.png"> l&ouml;scht eine angew&auml;hlte Stoffliste (DELETE). Die Gesamtliste kann nicht gel&ouml;scht werden.</p></li>
+			<li style="list-style-type: disc"><p>Ein Klick auf die Schaltfl&auml;che<img src="images/utilUsw.png"> ruft den Assistent zum Zusammenstellen von Stofflisten
+ <em></em> auf (Alt+E).</p></li>
+		</ul>
+	<p>So w&auml;hlen Sie eine Stoffliste als aktuelle Stoffliste aus:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie die gew&uuml;nschte Stoffliste aus der <em>Auswahl aller Stofflisten</em> aus; die bereits als <em>aktuelle Stoffliste</em> eingetragene Liste kann nicht nochmals ausgew&auml;hlt werden.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che <em>&Uuml;bernehmen</em> 
+ <img src="images/utilUp.png">(Alt+UP).</p></li>
+		</ol>
+	<p>Die aktuelle Stoffliste erscheint nun im Feld <em>aktuelle Stoffliste</em>.</p>
+	<p></p>
+	<img src="images/wizard.lesson.list.png">
+	<p></p>
+<h5>Schritt 3: Stoffspitze festlegen</h5>
+	<p>Innerhalb einer Stoffliste haben Sie die M&ouml;glichkeit, genau eine Stoffspitze festzulegen. Sie grenzen damit Ihren Lernstoff auf die zur Stoffspitze geh&ouml;renden Taxa ein.</p>
+	<p>So legen Sie die Stoffspitze fest:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png"> 
+				. Ein Dialogfenster erscheint, in dem alle Taxa der aktuellen Stoffliste darstellt werden, hierarchisch gegliedert in Form eines Baums.</p></li>
+			<li><p>W&auml;hlen Sie aus dem Baum das gew&uuml;nschte Taxon aus oder suchen Sie es mit Hilfe des Suchfeldes.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Wahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>Das Taxon wird in das Feld <em>aktuelle Stoffspitze</em> &uuml;bernommen.</p>
+	<p>Beachten Sie: Die Auswahl an Taxa im Dialogfenster h&auml;ngt von der gew&auml;hlten Stoffliste ab. Wenn sich das gew&uuml;nschte Taxon nicht im Angebot an Taxa befindet, w&auml;hlen Sie eine andere Stoffliste aus.</p>
+	<p></p>
+	<img src="images/wizard.lesson.scope.png">
+	<p></p>
+<h5>Schritt 4: Taxonomische Stufe festlegen</h5>
+	<p>Innerhalb einer Stoffliste k&ouml;nnen Sie genau eine taxonomische Stufe ausw&auml;hlen. Damit grenzen Sie Ihren Lernstoff auf die Taxa dieser <em>taxonomischen Stufe</em> ein.</p>
+	<p>So legen Sie die aktuelle taxonomische Stufe fest:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png"> 
+				. Ein Men&uuml; mit den m&ouml;glichen taxonomischen Stufen erscheint.</p></li>
+			<li><p>W&auml;hlen Sie aus dem Men&uuml; die gew&uuml;nschte taxonomische Stufe aus.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Wahl mit einem Klick (RETURN).</p></li>
+		</ol>
+	<p>Die taxonomische Stufe wird in das Feld <em>aktuelle taxonomische Stufe</em> &uuml;bernommen.</p>
+	<p>Beachten Sie, dass die Auswahl an taxonomischen Stufen im Men&uuml; von der gew&auml;hlten <em>Stoffspitze</em> und der gew&auml;hlten <em>Stoffliste</em> abh&auml;ngt. Wenn sich die gew&uuml;nschte taxonomische Stufe nicht im Men&uuml; befindet, w&auml;hlen Sie eine andere Stoffspitze oder ggf. eine andere Stoffliste aus.</p>
+	<p>Beachten Sie ferner, dass die taxonomischen Stufen, die keine der Stoffspitze untergeordneten Taxa besitzen, grau dargestellt werden und nicht anw&auml;hlbar sind.</p>
+	<p></p>
+	<img src="images/wizard.lesson.level.png">
+	<p></p>
+<h5>Schritt 5: Reihenfolge festlegen</h5>
+	<p>Es stehen Ihnen zwei Reihenfolgen zur Verf&uuml;gung:</p>
+	<div class="itemizedlist">
+		<ul type="bullet">
+			<li style="list-style-type: disc"><p>Die Taxa des Lernstoffs werden systematisch <em>geordnet</em> dargestellt.</p></li>
+			<li style="list-style-type: disc"><p>Die Taxa des Lernstoffs werden <em>zuf&auml;llig</em> gemischt.</p></li>
+		</ul>
+	<p>So legen Sie die aktuelle Reihenfolge fest:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png"> 
+				.</p></li>
+		</ol>
+	<p>Es wird automatisch die andere Reihenfolge ins Feld <em>aktuelle Reihenfolge</em> eingetragen.</p>
+	<p></p>
+	<img src="images/wizard.lesson.order.png">
+	<p></p>
+<h5>Schritt 6: Aktuell ausgew&auml;hltes Taxon festlegen</h5>
+	<p>Sie haben die M&ouml;glichkeit, ein Taxon im aktuellen Lernstoff anzuw&auml;hlen und so als aktuell ausgew&auml;hltes Taxon zu bestimmen.</p>
+	<p>So legen Sie das <em>aktuell ausgew&auml;hlte Taxon</em> fest:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png"> 
+				. Ein Dialogfenster mit einer Liste der Taxa erscheint.</p></li>
+			<li><p>Suchen Sie das gew&uuml;nschte Taxon im Suchfeld oder direkt im Listenfeld.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Auswahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>Das Taxon wird ins Feld <em>aktuell ausgew&auml;hltes Taxon</em> &uuml;bernommen.</p>
+	<p>Beachten Sie, dass dieser Schritt Ihnen erlaubt, an eine beliebige Stelle im Lernstoff zu springen, ohne dass die Reihenfolge beeinflusst wird.</p>
+	<p>Beachten Sie ferner, dass die Auswahl an Taxa von der aktuellen <em>Stoffliste</em> , der aktuellen <em>Stoffspitze</em> und der gew&auml;hlten <em>taxonomische Stufe</em> abh&auml;ngt. &Auml;ndern Sie ggf. diese Einstellungen, falls das gew&uuml;nschte Taxon nicht in der Liste erscheint.</p>
+	<p></p>
+	<img src="images/wizard.lesson.focus.png">
+	<p></p>
+<h3>Stofflisten</h3>
+	<p>Eine Stoffliste ist f&uuml;r die <b>Herbar CD-ROM Version 2</b> nichts anderes als eine Liste von Taxa. Das Zusammenstellen einer solchen Liste kann heissen, dass Sie jedes einzelne Taxon Ihrer Wahl aus den &uuml;ber 800 zur Verf&uuml;gung stehenden Taxa selbst ausw&auml;hlen und in die Liste einf&uuml;gen. Damit dies etwas &ouml;konomischer ausgef&uuml;hrt werden kann, haben wir ein Hilfsmittel geschaffen, mit dem der Lernstoff effizienter zusammengestellt werden kann. Trotzdem ist es von grossem Vorteil, wenn Sie sich mit der CD vertraut machen, bevor Sie selber Stofflisten zusammenstellen. Der Assistent zum Zusammenstellen von Stofflisten
+ <em></em> unterst&uuml;tzt Sie dabei.</p>
+	<p>Im Folgenden wird zuerst die Idee der Stofflisten erl&auml;utert, anschliessend wird der Assistent zum Zusammenstellen von Stofflisten erkl&auml;rt.</p>
+<h4>Die Idee der Stofflisten</h4>
+	<p><em>Stofflisten: </em> Eine Stoffliste ist eine Sammlung beliebiger Taxa auf beliebigen taxonomischen Stufen. Sie k&ouml;nnen beliebig viele Stofflisten zusammenstellen. In der <b>Herbar CD-ROM Version 2</b> ist eine unver&auml;nderbare Stoffliste mit dem Namen
+ <em>Gesamtliste</em> definiert, die s&auml;mtliche Taxa umfasst.</p>
+	<p><em>Basisliste: </em> Jede Stofflisten basieren auf einer anderen Stoffliste, der
+ <em>Basisliste</em>. Die aktuelle Stoffliste kann immer nur diejenigen Taxa enthalten, die auch in ihrer Basisliste vorkommen. F&uuml;r die aktuelle Stoffliste ist ihr Umfang an Taxa jeweils auf ihre Basisliste beschr&auml;nkt. Das heisst, wenn Sie ein Taxon vermissen, dann ist es entweder nicht in der Basisliste zur aktuellen Stoffliste oder nicht in der Basisliste aller Basislisten, der <em>Gesamtliste</em> , enthalten.</p>
+	<p><em>Filter: </em> Um das Zusammenstellen von Stofflisten zu verstehen, muss der Begriff des Filters erl&auml;utert werden. Sie definieren einen <em>Filter</em> , indem Sie eine einzige Stoffspitze und eine beliebige Anzahl von taxonomischen Stufen hinzuf&uuml;gen.</p>
+	<p>Um die Taxa in der Basisliste einzuschr&auml;nken oder auch vollumf&auml;nglich zu &uuml;bernehmen, wird einer neuen Stoffliste eine beliebige Anzahl von selbst definierten Filtern zugeordnet. Ein Filter definiert also eine Teilmenge der Basisliste. Die Filter werden zusammengef&uuml;gt und bilden die Stoffliste. Die Taxa der definierten Filter werden so zu den Taxa der neuen Stoffliste vereinigt.</p>
+	<p><em>Ablage:</em> Stofflisten werden im Dateisystem in einer Datei mit dem Namen der Stoffliste und der Erweiterung <em>.xml</em> abgespeichert. Das erlaubt es, interessante Stofflisten zu kopieren und auszutauschen. Die Dateien befinden sich im Ihrem Benutzerverzeichnis
+		(Home Directory) im Verzeichnis. <em>hcd2/filter/ge</em> f&uuml;r die deutschen Filter oder <em>.hcd2/filter/sc</em> f&uuml;r die wissenschaftlichen. Wenn Sie neue Stofflisten einspielen m&ouml;chten, gen&uuml;gt es, diese in dieses Verzeichnis zu legen. Am besten starten Sie die Applikation danach neu.</p>
+<h4>Assistent zum Zusammenstellen von Stofflisten</h4>
+	<p>So &ouml;ffnen Sie den <em>Assistenten zum Zusammenstellen von Stofflisten</em> :</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>&Ouml;ffnen Sie den <em>Assistenten zum Lehrgang und Abfragemodus</em>(Alt+W).</p></li>
+			<li><p>Wechseln Sie zum Schritt 2, in dem die aktuelle Stoffliste festgelegt wird.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilPlus.png">(Alt+L).</p></li>
+		</ol>
+	<p>Der Assistent wird ge&ouml;ffnet. Beachten Sie, dass der Assistent je nach Ihren Einstellungen bei Schritt eins oder zwei startet.</p>
+<h5>Schritt 1: Einf&uuml;hrung</h5>
+	<p>Der erste Schritt enth&auml;lt eine Einleitung mit Erl&auml;uterungen zu den folgenden Schritten. Die Einleitung kann bei Bedarf mit Hilfe des Kontrollk&auml;stchens <em>Assistent jeweils mit Einf&uuml;hrung beginnen</em> 
+ <b></b> deaktiviert werden. Das n&auml;chste Mal, wenn Sie den Assistenten aufrufen, wird dann mit dem folgenden Schritt begonnen.</p>
+	<p></p>
+	<img src="images/wizard.filter.intro.png">
+	<p></p>
+<h5>Schritt 2: Name der Stoffliste</h5>
+	<p>So legen sie den Namen der Stoffliste fest:</p>
+	<p>Schreiben Sie einen g&uuml;ltigen Namen in das Eingabefeld.</p>
+	<p>Der Name muss eindeutig sein und darf nur alphanumerische Zeichen sowie Unterstrich und Bindestrich enthalten.</p>
+	<p>Es wird beim Erstellen einer neuen Stoffliste ein g&uuml;ltiger Name vorgeschlagen, der aber auch ge&auml;ndert werden kann. Wenn der Name bereits vergeben oder das Eingabefeld leer ist, wird unterhalb des Eingabefeldes eine Fehlermeldung angezeigt und das Weiterfahren verunm&ouml;glicht, bis ein g&uuml;ltiger Name eingetragen ist.</p>
+	<p></p>
+	<img src="images/wizard.filter.name.png">
+	<p></p>
+<h5>Schritt 3: Basisliste</h5>
+	<p>So legen Sie die Basisliste fest:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png">(Alt+L). Ein Dialogfenster mit den Stofflisten erscheint.</p></li>
+			<li><p>Suchen Sie die gew&uuml;nschte Stoffliste im Suchfeld oder direkt im Listenfeld.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Auswahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>Die neue Basisliste wird als <em>aktuelle Basisliste</em> eingetragen.</p>
+	<p>Beachten Sie, dass die Basisliste nicht ver&auml;ndert werden kann, wenn es nur die Gesamtliste im System hat.</p>
+	<p></p>
+	<img src="images/wizard.filter.base.png">
+	<p></p>
+<h5>Schritt 4: Filter bearbeiten</h5>
+	<p>Die Filter werden in Form eines <em>Baumes</em> mit Knoten und Bl&auml;ttern dargestellt. In der linken H&auml;lfte des Baumes befinden sich die <em>Stoffspitzen</em>  (Knoten), auf der rechten die einer Stoffspitze zugeordneten <em>taxonomischen Stufen</em> (Bl&auml;tter). Eine einzelne Stoffspitze mit ihren zugeordneten taxonomischen Stufen bildet dabei einen <em>Filter</em>. F&uuml;r neue Stofflisten enth&auml;lt der Baum einen Standardfilter, der alle Taxa und alle taxonomischen Stufen der Basisliste umfasst. Dieser Standardfilter wird auch verwendet, wenn die Basisliste ver&auml;ndert wird. Wir empfehlen deshalb, zuerst die Basisliste definitiv festzulegen, bevor mit der Filterdefinition angefangen wird.</p>
+	<p>Bevor ein neuer Filter hinzugef&uuml;gt wird, empfehlen wir, die Stoffspitze des vorhandenen (Standard) Filters den W&uuml;nschen an die Stoffliste anzupassen.</p>
+	<p></p>
+	<img src="images/wizard.filter.filter.png">
+	<p></p>
+	<p>So &auml;ndern Sie die Stoffspitze eines bestehenden Filters:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie eine Stoffspitze an.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilUsw.png">(Alt+E). Ein Dialogfenster erscheint, das alle Taxa der Basisliste darstellt, hierarchisch gegliedert in Form eines Baums.</p></li>
+			<li><p>W&auml;hlen Sie aus dem Baum das gew&uuml;nschte Taxon aus oder suchen Sie es mit Hilfe des Suchfeldes.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Wahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>Die angew&auml;hlte Stoffspitze wird durch das gew&uuml;nschte Taxon ersetzt. Falls die neue Stoffspitze nicht alle taxonomischen Stufen der alten Stoffspitze umfasst, werden die nicht vorhandenen taxonomischen Stufen entfernt. Dabei werden Sie darauf hingewiesen, dass die taxonomischen Stufen angepasst worden sind..</p>
+	<p>Es steht Ihnen frei, beliebige zus&auml;tzliche Filter hinzuzuf&uuml;gen und so Ihre Stoffliste zu erweitern. Ein Filter wird durch das Hinzuf&uuml;gen einer Stoffspitze erstellt.</p>
+	<p>So f&uuml;gen Sie einen neuen Filter hinzu:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilPlus.png"> in der Kolonne der Stoffspitze <em>n</em> (Alt+S). Ein Dialogfenster erscheint, das alle Taxa der Basisliste darstellt, hierarchisch gegliedert in Form eines Baums.</p></li>
+			<li><p>W&auml;hlen Sie aus dem Baum das gew&uuml;nschte Taxon aus oder suchen Sie es mit Hilfe des Suchfeldes.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Wahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>Eine neue Stoffspitze mit allen zu ihr geh&ouml;renden taxonomischen Stufen wird dem Baum hinzugef&uuml;gt. Klappen Sie die neue Stoffspitze auf, um die taxonomischen Stufen sichtbar zu machen.</p>
+	<p>Beachten Sie, dass sich mehrere Stoffspitzen nach dem Editieren oder Hinzuf&uuml;gen eines Filters <em>rot</em> einf&auml;rben k&ouml;nnen, wenn sie mindestens ein gemeinsames Taxon enthalten. Eine solche Stoffliste ist immer noch konsistent, es macht aber normalerweise keinen Sinn, zwei oder mehr Filter f&uuml;r dasselbe Taxon zu definieren. &Uuml;berdenken Sie in diesem Fall nochmals Ihre Strategie zum Zusammenstellen von Filtern f&uuml;r die Stoffliste. Es stehen prinzipiell drei Ans&auml;tze zur Verf&uuml;gung, eine Doppeldefinition zu beseitigen: L&ouml;schen Sie gemeinsame taxonomische Stufen aus mindestens einem der fraglichen Filter, &auml;ndern Sie die Stoffspitze eines der fraglichen Filter, oder entfernen Sie einen ganzen Filter.</p>
+	<p>So l&ouml;schen Sie einen bestehenden Filter:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie eine Stoffspitze an.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilMinus.png">(Shift+DELETE).</p></li>
+		</ol>
+	<p>Der Filter, d.h. die Stoffspitze und ihre taxonomischen Stufen, wird aus dem Baum entfernt.</p>
+	<p>Beachten Sie, dass der letzte Filter nicht gel&ouml;scht werden kann, da die Stoffliste damit keine Taxa mehr enthalten w&uuml;rde.</p>
+	<p>Durch das Hinzuf&uuml;gen oder Entfernen von taxonomischen Stufen kann ein Filter gezielt den W&uuml;nschen an die Stoffliste angepasst werden.</p>
+	<p>So f&uuml;gen Sie einem Filter taxonomische Stufen hinzu:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilPlus.png"> in der Kolonne der taxonomischen Stufen (Alt+T). Ein Dialogfenster mit den taxonomischen Stufen erscheint.</p></li>
+			<li><p>W&auml;hlen Sie die gew&uuml;nschten taxonomischen Stufen im Listenfeld oder suchen Sie eine einzelne im Suchfeld.</p></li>
+			<li><p>Best&auml;tigen Sie Ihre Auswahl mit einem Klick auf die Schaltfl&auml;che OK (RETURN).</p></li>
+		</ol>
+	<p>So l&ouml;schen Sie taxonomische Stufe eines Filters:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie eine oder mehrere taxonomische Stufen eines Filters an.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che<img src="images/utilMinus.png"> in der Kolonne der taxonomischen Stufen (DELETE).</p></li>
+		</ol>
+	<p>Die taxonomischen Stufen werden aus dem Filter entfernt.</p>
+	<p>Beachten Sie, dass die letzte taxonomische Stufe nicht gel&ouml;scht werden kann, da der Filter damit keine Taxa mehr enthalten w&uuml;rde. Wenn Sie den Filter l&ouml;schen wollen, l&ouml;schen Sie die dazugeh&ouml;rende Stoffspitze.</p>
+<h5>Schritt 5: Ergebnis betrachten</h5>
+	<p>Im letzten Schritt k&ouml;nnen Sie die neue Stoffliste betrachten, durchsuchen und &uuml;berpr&uuml;fen, ob sie Ihren W&uuml;nschen entspricht. Falls noch &Auml;nderungen gew&uuml;nscht werden, k&ouml;nnen Sie im Assistenten zum betreffenden Schritt zur&uuml;ckkehren.</p>
+	<p></p>
+	<img src="images/wizard.filter.preview.png">
+	<p></p>
+<h2>Modus Pr&uuml;fung</h2>
+<h3>Allgemeines</h3>
+	<p>Der Modus Pr&uuml;fung ist speziell auf die Pr&uuml;fung in Systematischer Botanik an der ETH Z&uuml;rich ausgerichtet. Im Modus <em>Pr&uuml;fung</em> haben Sie die M&ouml;glichkeit, Ihr Wissen zu testen. Eine Pr&uuml;fung besteht aus zehn Arten, die zuf&auml;llig aus der Gesamtliste ausgew&auml;hlt werden. Die Auswahl erfolgt nach den gleichen Kriterien, die auch den Pr&uuml;fungsordnern (Ordner mit den Herbarbelegen) zugrunde liegen. Wie zur Zeit in der echten Pr&uuml;fung stehen Ihnen auch im Modus Pr&uuml;fung nur die Herbarbilder zur Verf&uuml;gung. Da die Arten aus der Gesamtliste ausgew&auml;hlt werden, ist zu erwarten, dass nicht alle Arten in Ihrem individuellen Pr&uuml;fungsstoff enthalten sind, Sie werden deshalb wahrscheinlich nicht alle Arten kennen. Lassen Sie sich aber dadurch nicht entmutigen! Wir sind im Moment noch nicht so weit, die Arten f&uuml;r eine Pr&uuml;fung aus Ihrem individuellen Pr&uuml;fungsstoff auszuw&auml;hlen. Zudem m&uuml;ssen Sie auch in der wirklichen Pr&uuml;fung mit unbekannten Arten umgehen, dies ist aber in der Pr&uuml;fung hier am Computer nicht vorgesehen. Wie in der Abfrage m&uuml;ssen auch in der Pr&uuml;fung die Namen und die Eigenschaften der Arten eingetragen resp. ausgew&auml;hlt werden, zus&auml;tzlich m&uuml;ssen Sie f&uuml;r alle Arten auch noch die Familie eintragen. Die Anzahl erwarteter Eigenschaften wird auch in der Pr&uuml;fung angegeben, eine Bewertung Ihrer Eingaben erfolgt aber hier noch nicht. Sie k&ouml;nnen wie in der Abfrage auch in der Pr&uuml;fung den Schwierigkeitsgrad selber w&auml;hlen. Wenn Sie eine Pr&uuml;fung gestartet haben, stehen Ihnen 20 Minuten f&uuml;r die L&ouml;sung der Aufgaben zur Verf&uuml;gung. W&auml;hrend einer Pr&uuml;fung kann der Modus nicht gewechselt und das Programm nicht beendet werden, solange die Pr&uuml;fung nicht beendet wird. Nach Beendigung (oder Abbruch) der Pr&uuml;fung erhalten Sie eine Gesamtbewertung Ihrer Pr&uuml;fung.</p>
+	<p>Seien Sie sich bewusst, dass eine Pr&uuml;fung am Computer schwieriger ist als eine wirkliche Pr&uuml;fung! Viele Merkmale der Arten sind quantitativ, und die Merkmale stehen in jenen Einheiten zur Verf&uuml;gung, wie sie f&uuml;r die Arten der Gesamtliste ben&ouml;tigt werden. Eine Zuordnung ist f&uuml;r den Computer immer eindeutig (d.h. nur richtig oder falsch), in einer wirklichen Pr&uuml;fung hingegen gibt es mehr Spielraum. Beispiel: Die Bl&uuml;tenfarbe ist f&uuml;r viele Arten wichtig, die Zuordnung zu einer Farbe aber oft subjektiv und deshalb nicht eindeutig. Im Computer ist aber eine eindeutige Zuordnung enthalten. Der &Uuml;bergang von <em>Bl&uuml;ten weiss bis gelblich</em> zu <em>Bl&uuml;ten gelb bis weisslich</em> ist fliessend, in einer wirklichen Pr&uuml;fung wird bei kritischen Arten auch beides als richtig gez&auml;hlt, f&uuml;r den Computer sind dies jedoch zwei verschiedene Merkmale und nur eines ist richtig. &Auml;hnliches l&auml;sst sich auch &uuml;ber andere Merkmalskomplexe sagen, z.B. &uuml;ber Blattformen oder Pflanzengr&ouml;ssen.</p>
+<h3>Aktivieren des Modus Pr&uuml;fung</h3>
+	<p>So aktivieren Sie den Modus <em>Pr&uuml;fung</em> :</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>&Ouml;ffnen Sie das Dialogfenster <em>Assistent zur Modus-Auswahl</em>.</p></li>
+			<li><p>Selektieren Sie das Register <em>Lernen</em>.</p></li>
+			<li><p>W&auml;hlen Sie <em>Pr&uuml;fung</em>.</p></li>
+			<li><p>Klicken Sie doppelt auf den gew&auml;hlten Eintrag, oder klicken Sie einmal auf OK (Alt+U).</p></li>
+		</ol>
+	<p>Der Pr&uuml;fungsmodus wird im Hauptfenster ge&ouml;ffnet. Mit einem Klick auf den Start-Knopf beginnen Sie mit der Pr&uuml;fung. Zuunterst rechts sehen Sie die Ihnen noch verbleibende Pr&uuml;fungszeit.</p>
+	<p></p>
+	<img src="images/exam.intro.png">
+	<p></p>
+<h3>Pr&uuml;fungsfenster</h3>
+	<p>Das Pr&uuml;fungsfenster ist in sechs verschiedene Bereiche gegliedert (von oben nach unten, links nach rechts).</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Der Men&uuml;balkenganz oben.</p></li>
+			<li><p>Die Symbolleistef&uuml;r die Navigation unterhalb des Men&uuml;balkens.</p></li>
+			<li><p>Der Eingabebereich f&uuml;r die Namen(Art und Familie).</p>
+			</li>
+			<li><p>Der Bilderbereichlinks unterhalb des Eingabebereiches f&uuml;r die Namen.</p></li>
+			<li><p>Der Eingabebereich der Eigenschaftenrechts unterhalb des Eingabebereiches f&uuml;r die Namen.</p></li>
+			<li><p>Zuunterst die Statusleistemit der aktuellen Einstellung und der laufenden Uhr.</p></li>
+		</ol>
+	<p></p>
+	<img src="images/exam.exam.png">
+	<p></p>
+	<p>Der <em>Men&uuml;balken</em> ist f&uuml;r allgemeine Aktionen gedacht, die das Hauptfenster betreffen und in den meisten Modi verwendet werden k&ouml;nnen, w&auml;hrend einer Pr&uuml;fung sollten Sie hier aber nichts ver&auml;ndern. Die <em>Symbolleiste</em> erm&ouml;glicht das Navigieren innerhalb der Pr&uuml;fung. Im Eingabebereich f&uuml;r die Namen k&ouml;nnen Sie den Namen des gezeigten Taxons und dessen Familie eintragen. Der <em>Bilderbereich</em> dient zur Auswahl und Darstellung der Herbarbilder. Der <em>Eingabebereich der Eigenschaften</em> erm&ouml;glicht die Zuordnung der Eigenschaften zu den einzelnen Taxa der Pr&uuml;fung. Die <em>Statusleiste</em> stellt die aktuelle Einstellung dar.</p>
+<h4>Symbolleiste und Statusleiste</h4>
+	<p>Mit der Symbolleiste k&ouml;nnen Sie innerhalb der Pr&uuml;fung navigieren. Dabei stehen Ihnen drei Aktionen zur Verf&uuml;gung: Mit den zwei Pfeilen k&ouml;nnen Sie innerhalb der zehn Arten Ihrer Pr&uuml;fung vorw&auml;rts resp. r&uuml;ckw&auml;rts navigieren. Dabei bleiben die von Ihnen bereits gemachten Eintr&auml;ge erhalten. Achtung: Einmal gemachte Eintr&auml;ge k&ouml;nnen Sie nicht mehr l&ouml;schen, bis die Pr&uuml;fung vorbei ist. &Uuml;berlegen Sie also gut, was Sie eintragen. Die Schaltfl&auml;che mit dem Stop-Symbol dient zum Beenden der Pr&uuml;fung. Danach erfolgt eine Bewertung Ihrer Leistung.</p>
+	<p>Die Statusleiste zuunterst zeigt Ihnen Ihre aktuelle Position innerhalb der Pr&uuml;fung an, d.h. welche der zehn Arten gerade im Fenster sichtbar ist. Ganz rechts sehen Sie die Ihnen noch verbleibende Pr&uuml;fungszeit. Nach Ablauf dieser Zeit wird die Pr&uuml;fung automatisch beendet.</p>
+<h4>Eingabebereich f&uuml;r die Namen</h4>
+	<p>So geben Sie einen Namen ein:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>Klicken Sie in das Eingabefeld f&uuml;r die Art.</p></li>
+			<li><p>Geben Sie den Namen ein.</p></li>
+			<li><p>Best&auml;tigen Sie die Eingabe mit RETURN.</p></li>
+		</ol>
+	<p>Der eingegebene Name erscheint rechts neben dem Eingabefeld. Wenn Sie Ihre Meinung &auml;ndern, geben Sie einen anderen Namen im Eingabefeld ein, dieser Name wird nach RETURN ebenfalls neben dem Eingabefeld erscheinen. F&uuml;r die Eingabe des Familiennamens gehen Sie gleich vor.</p>
+	<p>Achtung: In der Pr&uuml;fung werden keine Synonyme akzeptiert und keine Tippfehler toleriert.</p>
+<h4>Bilderbereich</h4>
+	<p>Der <em>Bilderbereich</em> links stellt die Herbarbilder des aktuellen Taxons dar. Alle anderen Bilder sind deaktiviert. Im oberen Teil der Bildfl&auml;che, unterhalb der Register, werden auch die Herbarbilder als Miniaturen dargestellt. Ein Klick auf eine Miniatur &uuml;bernimmt das Bild als aktuelles Bild.</p>
+	<p>Unterhalb der Miniaturen wird das aktuelle Bild gross dargestellt. Die Schaltfl&auml;che mit dem Lupensymbol links neben den Miniaturen dient zur Vergr&ouml;sserung resp. Verkleinerung des aktuellen Bildes. Mit dem ersten Klick, solange das Lupensymbol ein Plus enth&auml;lt, wird die Bildgr&ouml;sse verdoppelt, mit einem erneuten Klick (Lupensymbol mit Minus) wieder verkleinert.</p>
+<h4>Eingabebereich der Eigenschaften</h4>
+	<p>Der <em>Eingabebereich der Eigenschaften</em> erm&ouml;glicht die Zuordnung der Eigenschaften zu den einzelnen Taxa der Pr&uuml;fung. Die Eingabefl&auml;che ist dabei &auml;hnlich wie in der Abfrage in einen Auswahlbaum im oberen und einen Resultatbereich im unteren Teil aufgeteilt. F&uuml;r die Eingabe gehen Sie folgendermassen vor:</p>
+	<div class="orderedlist">
+		<ol type="1">
+			<li><p>W&auml;hlen Sie die gew&uuml;nschte Kategorie (z.B. Morphologie) am unteren Rand des Eingabebereichs aus.</p></li>
+			<li><p>W&auml;hlen Sie einen Schwierigkeitsgrad aus dem Men&uuml; am oberen Rand des Eingabebereichs.</p>
+			</li>
+			<li><p>W&auml;hlen Sie eine Eigenschaft aus dem Auswahlbaum oder suchen Sie diese mit Hilfe des Suchfeldes. Nur die Bl&auml;tter (Endknoten) des Auswahlbaumes lassen sich eintragen.</p></li>
+			<li><p>Klicken Sie auf die Schaltfl&auml;che <em>Hinzuf&uuml;gen</em>(RETURN).</p></li>
+		</ol>
+	<p>Die ausgew&auml;hlte Eigenschaft wird im Resultatbereich notiert.</p>
+	<p>Beachten Sie, dass die Anzahl erwarteter Eigenschaften im Resultatbereich angegeben wird. Wenn Sie nach einer Eingabe Ihre Meinung &auml;ndern, w&auml;hlen Sie eine andere Eigenschaft im Auswahlbaum aus, dieses wird nach RETURN ebenfalls im Resultatbereich notiert. Achtung: Einmal gemachte Eintr&auml;ge k&ouml;nnen Sie nicht mehr l&ouml;schen, bis die Pr&uuml;fung beendet ist. &Uuml;berlegen Sie also gut, was Sie eintragen, denn jeder Eintrag wird f&uuml;r die Bewertung am Schluss ber&uuml;cksichtigt.</p>
+	<p>F&uuml;r den Auswahlbaum stehen im Register <em>Morphologie</em> wie in der Abfrage drei verschiedene Schwierigkeitsstufen zur Verf&uuml;gung. Sie lassen sich &uuml;ber das Men&uuml; oberhalb der Baumdarstellung anw&auml;hlen. Die Schwierigkeitsstufen sind:</p>
+	<p><em>Naheliegende:</em> Hier werden nur jene Gruppen von Eigenschaften angezeigt, in denen mindestens eine der Eigenschaften zutrifft. Diese Schwierigkeitsstufe ist f&uuml;r Einsteiger geeignet.</p>
+	<p><em>Fernliegende:</em> Hier werden jene Gruppen von Eigenschaften zur Auswahl angeboten, die &uuml;ber zwei Stufen mit der gesuchten Eigenschaft verwandt sind. Hier ist es sehr wahrscheinlich, dass nicht aus allen Gruppen eine Eigenschaft zutrifft.</p>
+	<p><em>Alle:</em> Es werden s&auml;mtliche Eigenschaften zur Auswahl angeboten. Dies ist die schwierigste Stufe, denn es gilt hier aus vielen Hunderten von Eigenschaften genau die relevanten auszuw&auml;hlen.</p>
+<h3>Pr&uuml;fungsresultat</h3>
+	<p>Wenn die Pr&uuml;fung beendet ist (Ablauf der Zeit oder aktive Beendigung) erhalten Sie eine Bewertung Ihrer Leistung. Beachten Sie, dass unter "Weiteres" 100% meist gar nicht erreichbar ist, da viele Arten hier keine Eigenschaften zugeordnet haben und deshalb gar nichts gewusst werden k&ouml;nnen; falls hingegen pharmazeutisch wichtige Arten dabei sind, ist die Zahl der zugeordneten Eigenschaften oft sehr hoch (Substanzen, Indikationen, etc.).</p>
+	<p>Aus dem Pr&uuml;fungsresultat heraus k&ouml;nnen sie eine neue Pr&uuml;fung mit einer neuen Serie von Pr&uuml;fungsarten starten oder den Modus wechseln.</p>
+<h1>Spiele</h1>
+<h2>Allgemeines</h2>
+	<p>In den Spielen soll das angeeignete Wissen in spielerischer, zuf&auml;lliger und neuer Umgebung ge&uuml;bt und getestet werden k&ouml;nnen. Der Stoff wird aus ungewohntem Blickwinkel abgefragt, wodurch neue Verkn&uuml;pfungen und Betrachtungsweisen gef&ouml;rdert werden.</p>
+	<p>Nach der Auswahl eines Spieles mit dem Modus-Assistenten erscheint zuerst ein illustratives Startbild mit einer Kurzanleitung zum jeweiligen Spiel.</p>
+	<p></p>
+	<img src="images/helpGamesStartbild.jpg">
+	<p></p>
+<h3>Tastaturk&uuml;rzel</h3>
+	<p>Alle Schaltfl&auml;chenfunktionen k&ouml;nnen auch &uuml;ber ein Tastaturk&uuml;rzel aufgerufen werden. Gleiche Funktionen erhalten jeweils in allen Spielen das gleiche Tastaturk&uuml;rzel. Befindet sich die Maus &uuml;ber einer Schaltfl&auml;che, erscheint nach kurzer Zeit das Hinweisfeld mit dem Tastaturk&uuml;rzel.</p>
+	<table summary="" border="1">
+			<colgroup>
+				<col align="left">
+				<col align="left">
+			</colgroup>
+			<tbody>
+			<tr>
+				<td align="left"><p><b>Tastaturk&uuml;rzel</b></p></td>
+				<td align="left"><p><b>Funktion</b></p></td>
+			</tr>
+			<tr>
+				<td align="left"><p>Alt+N</p></td>
+				<td align="left"><p>Beginnen eines neuen Spieles</p></td>
+			</tr>
+			<tr>
+				<td align="left"><p>Alt+O</p></td>
+				<td align="left"><p>OK-Schaltfl&auml;che bet&auml;tigen</p></td>
+			</tr>
+			</tbody>
+		</table>
+	<p>In allen Spielen (<em>Labyrinth, Hang Man</em> und <em>Catcher)</em> kann mit den Pfeiltasten navigiert werden.</p>
+<h2>Catcher</h2>
+<h3>Spielidee</h3>
+	<p><em>Catcher</em> kombiniert <em>spielerische Geschicklichkeit</em> und <em>Reaktion</em> mit <em>Fachfragen</em>. Damit man letztere beantworten kann, muss immer zuerst die Geschicklichkeit unter Beweis gestellt werden. Die
+ <em>Biene</em> &uuml;berfliegt ein Blumenfeld. Sobald sie auf einer <em>Bl&uuml;te</em> gelandet ist, erscheint die n&auml;chste <em>Frage</em>. Die <em>V&ouml;gel</em> sind ihre <em>Fressfeinde</em> , denen sie ausweichen muss. Sie startet mit vollen <em>Energiereserven</em> , verliert davon allerdings bei <em>falschen Antworten</em> eine Einheit und bei <em>Kollisionen</em> mit V&ouml;geln f&uuml;nf Einheiten.</p>
+	<p></p>
+	<img src="images/helpCatcherElements.jpg">
+	<p></p>
+	<p>Das Spiel ist gewonnen, wenn alle 15 Fragen beantwortet sind und nicht alle Energie aufgebraucht ist. Das Spiel ist verloren, wenn alle Energie aufgebraucht ist.</p>
+<h3>Fragen</h3>
+	<p>Aufgrund eines Pflanzenbildes aus <em>Herbar</em> oder <em>Portrait</em> muss jeweils der Name des Taxons auf der gefragten taxonomischen Stufe angegeben werden. M&ouml;glich sind die taxonomischen Stufen von <em>Art</em> bis <em>Klasse</em>. Ein Bild kann im Laufe eines Spieles mehrmals erscheinen, jedes Mal ist aber eine andere taxonomische Stufe gefragt.</p>
+<h3>Spielanleitung</h3>
+	<p>Das Spiel kann mit einem Klick auf <em>Start</em> begonnen werden. Sobald sich das Blumenfeld unter der Biene bewegt, kann diese mit allen vier <em>Pfeiltasten</em> auf dem ganzen Blumenfeld man&ouml;vriert werden. Versuchen Sie jetzt, sobald Sie mit der Biene &uuml;ber eine Bl&uuml;te sind, mit der <em>Leerschlagtaste</em> auf dieser zu landen. Wenn Sie getroffen haben, bleibt das Blumenfeld stehen und der Fragedialog mit der n&auml;chsten Frage erscheint.</p>
+	<p></p>
+	<img src="images/helpCatcherQuestionpanel.jpg">
+	<p></p>
+	<p>Geben Sie im Textfeld den Namen des gefragten Taxons ein. Wenn die Antwort korrekt ist, geht der Bienenflug unmittelbar weiter und die Energiereserven sind um eine Einheit aufgef&uuml;llt worden. Bei falscher Antwort wird zuerst die richtige Antwort angezeigt. Dr&uuml;cken Sie "OK", um weiterzufliegen. Den Energiereserven wird eine Einheit abgezogen. W&auml;hrend des Bienenfluges muss den vorbeifliegenden V&ouml;geln ausgewichen werden. Bei Kollisionen &#8211; diese sind h&ouml;rbar, sofern der Ton an Ihrem Computer nicht ausgeschaltet ist &#8211; verlieren Sie f&uuml;nf Energie-Einheiten. Der Status der Energiereserven ist am Energie-Balken links oben im Blumenfeld erkennbar.</p>
+	<p></p>
+	<img src="images/helpCatcherEnergy.gif">
+	<p></p>
+	<p>Je gr&uuml;ner, umso voller, je roter umso leerer sind die Reserven. Wenn die letzte Energie verpufft ist, st&uuml;rzt die Biene ab.</p>
+<h2>Labyrinth</h2>
+<h3>Spielidee</h3>
+	<p><em>Labyrinth</em> kombiniert <em>visuelles Vorstellungsverm&ouml;gen</em> mit <em>Fachwissen</em>. Einerseits muss der Weg durch das <em>Labyrinth</em> gefunden werden, anderseits m&uuml;ssen auf dem Weg <em>Fragen</em> beantwortet werden. Der <em>Prinz</em> muss die <em>Prinzessin</em> am Ausgang des Labyrinths finden, bekommt sie und das Botanikdiplom aber nur, wenn er alle Fragen richtig beantwortet hat, ansonsten er auf der Stelle und vor den Augen der Prinzessin in einen Frosch verwandelt wird.</p>
+	<p></p>
+	<img src="images/helpMazeFrosch.gif">
+	<p></p>
+<h3>Fragen</h3>
+	<p>Aus der <em>Gesamtliste</em> werden zuf&auml;llig 10 Pflanzen ausgew&auml;hlt. Aufgrund eines Pflanzenbildes aus <em>Herbar</em> oder <em>Portrait</em> muss <em>eine</em> zutreffende morphologische Eigenschaft auf Art-Stufe aus der Auswahl angew&auml;hlt werden.</p>
+	<p></p>
+	<img src="images/helpMazeQuestionpanel.jpg">
+	<p></p>
+<h3>Spielanleitung</h3>
+	<p>Das Spiel kann mit einem Klick auf <em>Start</em> begonnen werden. Es wird in jedem Spiel ein neues Labyrinth generiert. Der <em>Prinz</em> &#8211; mit einer Krone dargestellt &#8211; steht zu Beginn des Spieles immer links am <em>Eingang des Spielfeldes</em> , die <em>Prinzessin</em> immer rechts neben dem <em>Labyrinthausgang</em>.</p>
+	<p></p>
+	<img src="images/helpMazeElements.jpg">
+	<p></p>
+	<p>Mit den <em>Pfeiltasten</em> kann nun der Prinz durch das Labyrinth man&ouml;vriert werden. Es gibt jeweils nur einen m&ouml;glichen Weg, der zur Prinzessin f&uuml;hrt.</p>
+	<p>Im Labyrinth wachsen viele Blumen, nur zehn davon sind <em>Zauberblumen</em> , die dem Prinzen eine Frage ins Ohr hauchen, sprich einen Fragedialog auf den Bildschirm zaubern. Diese Zauberblumen wachsen nur auf dem richtigen Weg, sind also ein Indiz f&uuml;r den Weg zur Prinzessin.</p>
+	<p></p>
+	<img src="images/helpMazePrinzessin.gif">
+	<p></p>
+	<p>Im Fragedialog muss nur eines von mehreren m&ouml;glichen zutreffenden morphologischen Eigenschaften im Baum angew&auml;hlt und danach mit der <em>OK-Schaltfl&auml;che</em> (Alt+O) best&auml;tigt werden. Ist die Antwort richtig, verschwindet der Dialog. Die Punkte-Anzeige links oben im Spielrasen zeigt dies mit einem um eine Einheit aufw&auml;rts gewachsenen gr&uuml;nen Balken an. Im Fall einer falschen Antwort, wird zuerst die richtige pr&auml;sentiert und nach Best&auml;tigung (Enter) in der Punkte-Anzeige mit wachsendem roten Balken nach unten vermerkt.</p>
+	<p></p>
+	<img src="images/helpMazePunktebalken.gif">
+	<p></p>
+	<p>Das Spiel ist gewonnen, wenn alle zehn Fragen richtig beantwortet sind und die Prinzessin am Ende des Labyrinths erreicht wurde. Zum Frosch wird, wer nur schon eine der Zauberblumen mit einer falschen Antwort beleidigt. Wenn der Prinz aber trotz falschen Antworten die Prinzessin erreicht, darf er immerhin zum Trostpreis als Frosch im Schlossteich in ihrer N&auml;he weilen. Wenn alle Stricke reissen und sich der Prinz hoffnungslos verirrt, kann das Spiel mittels <em>L&ouml;sung-Schaltfl&auml;che</em> abgebrochen werden, wonach der richtige Weg im Labyrinth dunkel markiert wird.</p>
+	<p></p>
+	<img src="images/helpMazeButtons.gif">
+	<p></p>
+<h2>Hang Man</h2>
+<h3>Spielidee</h3>
+	<p>Der gute alte <em>Hang Man</em> schenkt dem Spielenden <em>f&uuml;nf Chancen</em> , mit dem Leben und ohne Galgen davonzukommen. 15 Fragen m&uuml;ssen richtig beantwortet werden, um das Spiel zu gewinnen &#8211; aber Achtung, die Steppe ist finster, und die fiesen Blaugeier hocken bereits seit Stunden auf der Lauer &#8211; es ist schon vorgekommen, dass die Viecher ihre Nerven verloren haben...</p>
+	<p></p>
+	<img src="images/helpHangGeier.jpg">
+	<p></p>
+<h3>Frage</h3>
+	<p>Als Frage werden jeweils f&uuml;nf Taxa pr&auml;sentiert. Eines davon geh&ouml;rt nicht zur Gruppe, d.h. es hat nicht das gleiche &uuml;bergeordnete Taxon wie die andern vier. Dieses muss als Aussenseiter erkannt werden.</p>
+	<p></p>
+	<img src="images/helpHangQuestion.gif">
+	<p></p>
+<h3>Spielanleitung</h3>
+	<p>Das Spiel kann mit einem Klick auf <em>Start</em> begonnen werden. Sofort erscheint die erste Gruppe von <em>f&uuml;nf Taxa zur Auswahl</em>. Mit der Tabulator-Taste kann der Fokus auf das n&auml;chste Taxon verschoben werden. Das Taxon mit dem Fokus (leicht dunkleres Viereck auf der Schaltfl&auml;che) kann mittels Leerschlagtaste ausgew&auml;hlt werden. Mit shift+Tabulator kann r&uuml;ckw&auml;rts gesprungen werden. Die Schaltfl&auml;chen k&ouml;nnen nat&uuml;rlich auch per Maus-Klick angew&auml;hlt werden. Der <em>Aussenseiter</em> muss nun angeklickt, bzw. per Leerschlagtaste angew&auml;hlt werden. Ist die Antwort korrekt, geht der gelbe Balken um eine Einheit zur&uuml;ck und die n&auml;chste F&uuml;nfergruppe erscheint in den Schaltfl&auml;chen. Ist die Antwort falsch, wird die korrekte Antwort angezeigt, welche best&auml;tigt werden muss (RETURN). Daraufhin w&auml;chst der Galgen um ein St&uuml;ck weiter. Nach der f&uuml;nften Falschantwort ist das Spiel aus; die Blaugeier kommen...</p>
+	<p></p>
+	<img src="images/helpHangFalsch.gif">
+	<p></p>
+</body>
+</html>

@@ -57,11 +57,11 @@ public class LocalVersionLocator
                 final URL url = (URL) jarsEnum.nextElement();
                 final InputStream inputStream = url.openStream();
                 final Manifest manifest = new Manifest( inputStream );
-                final VersionInfo info = new VersionInfo();
                 final Attributes attributes = manifest.getMainAttributes();
                 final String name = attributes.getValue( "Implementation-Vendor-Id" );
                 if ( name != null && name.contains( "ch.xmatrix" ) )
                 {
+                    final VersionInfo info = new VersionInfo();
                     final String version = attributes.getValue( "Implementation-Version" );
                     info.setName( attributes.getValue( "Implementation-Title" ) );
                     info.setMajorVersion( getPart( version, 0 ) );
@@ -72,7 +72,6 @@ public class LocalVersionLocator
                 }
                 inputStream.close();
             }
-
         }
         catch ( IOException e )
         {

@@ -554,11 +554,12 @@
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addClasspath>true</addClasspath>
+                            <!--<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>-->
+                            <mainClass>${main-class}</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <Main-Class>${main-class}</Main-Class>
-                            <Implementation-Version>${project.version}</Implementation-Version>
-                        </manifestEntries>
+                        <!--<manifestEntries>-->
+                        <!--<Implementation-Version>${pom.version}</Implementation-Version>-->
+                        <!--</manifestEntries>-->
                     </archive>
                 </configuration>
             </plugin>

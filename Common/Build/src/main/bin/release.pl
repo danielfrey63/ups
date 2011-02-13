@@ -19,7 +19,7 @@ $pwd = `pwd`;
 chomp ($pwd);
 
 # Simulate SVN and MVN results by loading them from a previous build
-$dev = 0;
+$dev = 1;
 
 # Print debug messages
 $debug = 1;
@@ -44,7 +44,12 @@ print ($trace == 1 ? "  TRACE is on\n" : "  TRACE is off\n");
 
 checkForWorkingDirectoryOrQuit(".");
 checkForUpdateOrQuit(".");
-checkForReleaseScriptDirectoryOrQuit();
+
+if (-d "target/release-script/dependencies" and !$dev) { `rm -r "target/release-script/dependencies"` };
+if (-d "target/release-script/revisions" and !$dev) { `rm -r "target/release-script/revisions"` };
+
+checkForReleaseScriptDirectoryOrQuit("target/release-script/dependencies");
+checkForReleaseScriptDirectoryOrQuit("target/release-script/revisions");
 
 $thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
 print ("\nRelease script running for\n  $thisArtifact\n");
@@ -57,15 +62,13 @@ $reloadAllPomLocations && persistPomLocations();
 %poms = getPomLocations();
 print map { "  $_ => $poms{$_}\n" } sort keys %poms;
 
-persistDependencies();
+@orders = ();
+persistDependency($thisArtifact);
 %versions = getVersions();
 print map { "  $_ => $versions{$_}\n" } sort keys %versions;
-%orders = getOrders();
-print map { "  $_ => $orders{$_}\n" } sort keys %orders;
-
-persistTransientDependencies();
 %pairs = getDependencyPairs();
 print map { "  $_\n"} sort keys %pairs;
+checkForCyclicDependencies();
 
 sub persistTags
 {
@@ -95,28 +98,35 @@ sub persistPomLocations
     }
 }
 
-sub persistDependencies
+sub persistDependency
 {
-    print ("\nPersisting dependencies\n");
-    my $file = "target/release-script/dependencies.txt";
-    my $command = "mvn -o dependency:tree | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort";
-    executeOrLoad($file, $command);
-}
-
-sub persistTransientDependencies
-{
-    print ("\nPersisting transient dependencies\n");
-    my %poms = (split(/ /, `cat $allDirectories | tr "\t" " " | tr "\n" " "`));
-    my %versions = getVersions();
-    foreach my $artifact (sort keys %poms)
+    my $artifactId = $_[0];
+    print ("\nPersisting dependencies for \"$artifactId\"\n");
+    my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
+    my $file = "target/release-script/dependencies/$artifactId.txt";
+    my $pom = $poms{$artifactId};
+    if ($pom)
     {
-        if ($versions{$artifact})
+        $debug and print "  [DEBUG] checking against $pom\n";
+        $debug and print "  [DEBUG] persisting dependencies for $artifactId into $file\n";
+        my $command = "mvn -o dependency:tree -f $pom | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort | cut -d: -f2,4 | tr \":\" \" \"";
+        executeOrLoad($file, $command);
+        my @array = split( /\n/, `cut -d" " -f1 $file` );
+        foreach (@array)
         {
-            my $pom = $poms{$artifact};
-            my $file = "target/release-script/dependencies-$artifact.txt";
-            my $command = "mvn -o dependency:tree -f $pom | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort";
-            executeOrLoad($file, $command);
+            if (-e "target/release-script/dependencies/$_.txt")
+            {
+                $debug and print "  [DEBUG] skipping $_\n";
+            }
+            else
+            {
+                persistDependency($_);
+            }
         }
+    }
+    else
+    {
+        $debug and print "  [DEBUG] no POM\n";
     }
 }
 
@@ -150,26 +160,11 @@ sub getYoungestTags
     return %tags;
 }
 
-sub getOrders
-{
-    print "\nRetrieving dependencies\n";
-    my $file = "target/release-script/dependencies.txt";
-    my @temp = (`cat $file | cut -d: -f2`);
-    chomp(@temp);
-    my %orders;
-    my $i = 0;
-    for my $ord (@temp)
-    {
-        $orders{$i++} = $ord;
-    }
-    return %orders;
-}
-
 sub getVersions
 {
     print ("\nRetrieving versions of dependencies\n");
-    my $file = "target/release-script/dependencies.txt";
-    my %versions = (split (/ /, `cat $file | cut -d: -f2,4 | tr ":\n" " "`));
+    my $file = "target/release-script/dependencies/*.txt";
+    my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
     return %versions;
 }
 
@@ -186,47 +181,103 @@ sub getDependencyPairs
     print ("\nChecking for dependency pairs\n");
     my $artifactIdXPath = "/x:project/x:artifactId";
     my $rootArtifactId = `$xml sel -T -N x="$pomNs" -t -v "$artifactIdXPath" pom.xml`;
-    my $rootDependenciesFile = "target/release-script/dependencies-$rootArtifactId.txt";
-    my @rootDependencies = (`cat $rootDependenciesFile | cut -d: -f2`);
-    my %pairs;
-    foreach my $rootDependency (@rootDependencies) {
-        my $rootDependency = trim($rootDependency);
-        if (-e "target/release-script/dependencies-$rootDependency.txt") {
-            my $rootDependents = trim(`grep -H $rootDependency target/release-script/dependencies-*.txt | cut -d: -f1 | sed "s/\\.txt//" | sed "s/^.*dependencies-//" | /bin/sort -u | tr "\n" " " | sed "s/$rootDependency//"`);
+    my $allDependencyFiles = "target/release-script/dependencies/*.txt";
+    my @allDependencies = (`cat $allDependencyFiles | tr "\r" "\n" | sed "/^\$/d" | cut -d" " -f1 | /bin/sort -u`);
+    $debug and print "  [DEBUG] root artifact is $rootArtifactId\n";
+    my @pairs;
+    %fromTo = ();
+    %toFrom = ();
+    foreach my $dependency (@allDependencies)
+    {
+        my $dependency = trim($dependency);
+        $debug and print "  [DEBUG] root dependency is $dependency\n";
+        if (-e "target/release-script/dependencies/$dependency.txt")
+        {
+            my $rootDependents = trim(`grep -H $dependency target/release-script/dependencies/*.txt | cut -d" " -d: -f1 | sed "s/^.*dependencies\\///" | sed "s/\\.txt//" | /bin/sort -u | tr "\n" " "`);
             my @lines = split(/ /, $rootDependents);
-            foreach my $line (@lines) {
-                $pairs{$line . " - " . $rootDependency} = 1;
+            foreach my $line (@lines)
+            {
+                if ($line ne $dependency)
+                {
+                    push(@pairs, $line . " " . $dependency);
+                    push(@{$fromTo{$line}}, $dependency);
+                    push(@{$toFrom{$dependency}}, $line);
+                }
             }
         } else {
-            print "  [WARN ] Dependency file for $rootDependency (expecting target/release-script/dependencies-$rootDependency.txt) does not exist!\n";
+            print "  [WARN ] Dependency file for $dependency (expecting target/release-script/dependencies/$dependency.txt) does not exist!\n";
         }
     }
+    print "Dependencies from => to\n";
+    print map { "  $_ => [@{$fromTo{$_}}]\n" } sort keys %fromTo;
+    print "Dependencies to => from\n";
+    print map { "  $_ => [@{$toFrom{$_}}]\n" } sort keys %toFrom;
     return %pairs;
 }
 
-# Swap all inter-dependent artifacts
-for (my $i = 0; $i < keys(%orders); $i++){
-    my $artifact = $orders{$i};
-    my $swapped = 0;
-    for (my $j = $i; $j < keys(%orders); $j++) {
-        my $partner = $orders{$j};
-        if ($pairs{"$artifact - $partner"}) {
-            $orders{$i} = $partner;
-            $orders{$j} = $artifact;
-            $debug and print "  [DEBUG] Swapping $artifact ($i) and $partner ($j)\n";
-            $swapped = 1;
-            for (my $index = 0; $index < keys(%orders); $index++){
-                $trace && print "    [TRACE] $index - $orders{$index}\n";
-            }
-            $artifact = $orders{$i};
-        }
+sub checkForCyclicDependencies
+{
+    print "Checking for cyclic dependencies\n";
+    foreach my $element (@pairs)
+    {
+        my @parts = split(/ /, $element);
+        if ($parts[1] . " " . $parts[0]) { die "[ERROR] Cyclic dependency found between $element!\n" }
     }
-    $swapped and $i--;
+    print "  No cycles found\n\n";
 }
 
-print "\nFinal order is:\n";
-for (my $index = 0; $index < keys(%orders); $index++){
-    print "  $index - $orders{$index}\n";
+sub getDependencyTo
+{
+    print "Searching for leaf in dependency tree\n";
+    foreach my $to (keys %toFrom)
+    {
+        $debug and print "  [DEBUG] Checking for $to\n";
+        if (!$fromTo{$to})
+        {
+            $debug and print "  [DEBUG] Found $to as a leaf\n";
+            return $to;
+        }
+        else
+        {
+            $debug and print "  [DEBUG] Is not a leaf\n";
+        }
+    }
+}
+
+while (my $leaf = getDependencyTo())
+{
+    push (@orders, $leaf);
+    print "  Dependency $leaf has position " . (scalar(@orders) - 1) . "\n";
+    foreach my $dependency (@{$toFrom{$leaf}})
+    {
+        $debug and print "  [DEBUG] Removing $leaf from $dependency\n";
+        my @array = @{$fromTo{$dependency}};
+        my ( $index ) = grep { $array[$_] eq $leaf } 0..$#array;
+        $debug and print "  [DEBUG] Deleting element $index from [@array]\n";
+        if ($index > -1) { splice(@array, $index, 1); }
+        $debug and print "  [DEBUG] Array is now [@array] and of size $#array\n";
+        if ($#array > -1)
+        {
+            delete $fromTo{$dependency};
+            $fromTo{$dependency} = \@array;
+        }
+        else
+        {
+            delete $fromTo{$dependency};
+        }
+        $trace and print "  [TRACE] Dependencies from => to\n";
+        $trace and print map { "  [TRACE]   $_ => @{$fromTo{$_}}\n" } sort keys %fromTo;
+    }
+    delete $toFrom{$leaf};
+    $trace and print "  [TRACE] Dependencies to => from\n";
+    $trace and print map { "  [TRACE]   $_ => @{$toFrom{$_}}\n" } sort keys %toFrom;
+}
+
+push (@orders, $thisArtifact);
+{
+    my $index;
+    print "\nFinal order is:\n";
+    print map { "  " . $index++ . " => $_\n" } @orders;
 }
 
 # Builds a file with the current revision number
@@ -243,8 +294,7 @@ chomp($currentRevision);
 print ("  Current revision is $currentRevision\n");
 
 print ("\nGathering data for all releases\n");
-foreach (sort { $a <=> $b } keys (%orders)) {
-    my $artifact = $orders{$_};
+foreach my $artifact (@orders) {
     my $pom = $poms{$artifact};
     print "  Artifact $artifact in $pom\n";
     checkForUpdateOrQuit ($pom);
@@ -261,7 +311,7 @@ foreach (sort { $a <=> $b } keys (%orders)) {
         $dir =~ s/pom\.xml//g;
         $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
         my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
-        open FILE, ">target/release-script/revision-$artifact.txt";
+        open FILE, ">target/release-script/revisions/$artifact.txt";
         for my $revision (@revisions) {
             print FILE "$revision\n";
         }
@@ -330,8 +380,7 @@ while (($key, $value) = each(%newDevVersions)){
 }
 
 %newDevVersions && print "\nStarting release processes\n";
-foreach (sort { $a <=> $b } keys (%orders)) {
-    my $artifact = $orders{$_};
+foreach $artifact (@orders) {
     my $devVersion = $newDevVersions{$artifact};
     my $pom = $poms{$artifact};
     my $dir = $pom;
@@ -494,11 +543,12 @@ sub checkForUpdateOrQuit
 }
 
 sub checkForReleaseScriptDirectoryOrQuit {
-    if (! -e "target/release-script") {
-        `mkdir -p target/release-script`
+    $dir = $_[0];
+    if (! -e $dir) {
+        `/bin/mkdir -p $dir`;
     };
-    if (! -e "target/release-script") {
-        print "ERROR: Target directory (target/release-script) for release script meta data cannot be created." and exit;
+    if (! -e $dir) {
+        print "ERROR: Directory ($dir) cannot be created." and exit;
     }
 }
 

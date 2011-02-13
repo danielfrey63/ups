@@ -14,10 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>3.0.1188</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
@@ -26,6 +28,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.77.1180</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>

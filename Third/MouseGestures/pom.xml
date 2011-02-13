@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.smardec</groupId>
     <artifactId>com.smardec.mousegestures</artifactId>
     <name>Mouse Gestures Library</name>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2.1176</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -23,4 +22,9 @@
             </plugin>
         </plugins>
     </build>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/com.smardec.mousegestures-1.2.1176</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/com.smardec.mousegestures-1.2.1176</url>
+  </scm>
 </project>

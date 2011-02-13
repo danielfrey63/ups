@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
@@ -24,68 +25,54 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>3.0.1188</version>
-            <version>3.0.1188</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1091</version>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1110</version>
             <artifactId>ch.xmatrix.le.exam</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1115</version>
             <artifactId>ch.xmatrix.le.gallows</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1184</version>
             <artifactId>ch.xmatrix.le.help</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1202</version>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.540</version>
             <artifactId>ch.xmatrix.le.maze</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1197</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1197</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.1120</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>3.6.544</version>
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <dependency>

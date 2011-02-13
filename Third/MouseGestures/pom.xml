@@ -6,6 +6,12 @@
     <artifactId>com.smardec.mousegestures</artifactId>
     <name>Mouse Gestures Library</name>
     <version>1.2-SNAPSHOT</version>
+    <parent>
+        <groupId>ch.xmatrix.common</groupId>
+        <artifactId>ch.xmatrix.common.build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../Common/Build</relativePath>
+    </parent>
     <build>
         <plugins>
             <plugin>

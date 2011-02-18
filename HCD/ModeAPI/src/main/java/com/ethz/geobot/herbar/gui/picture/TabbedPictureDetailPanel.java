@@ -8,6 +8,7 @@
  */
 package com.ethz.geobot.herbar.gui.picture;
 
+import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.ImageCacheException;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.image.PictureDetailPanel;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 import org.apache.log4j.Logger;
+
+import static ch.jfactory.resource.ImageLocator.PICT_LOCATOR;
+import static java.lang.System.currentTimeMillis;
 
 public class TabbedPictureDetailPanel extends JTabbedPane
 {
@@ -31,19 +35,82 @@ public class TabbedPictureDetailPanel extends JTabbedPane
     {
         this.cache = new PictureCache( new PictureCache.CachingExceptionHandler()
         {
+            private long lastSameCause = 0;
+
+            private ImageCacheException last;
+
             public void handleCachingException( final Throwable e )
             {
                 if ( e instanceof ImageCacheException )
                 {
+                    final ImageCacheException imageCacheException = (ImageCacheException) e;
                     final String message;
-                    if ( e.getCause() instanceof IOException )
+                    final Throwable cause = e.getCause();
+                    if ( cause instanceof IOException )
                     {
-                        message = e.getCause().getMessage();
+                        message = cause.getMessage();
                     }
                     else
                     {
                         message = e.getMessage();
                     }
+                    if ( e.equals( last ) )
+                    {
+                        final long delta = currentTimeMillis() - lastSameCause;
+                        if ( delta < 2000 )
+                        {
+                            LOG.warn( "skipped exception feedback as last same exception occurred only " + delta + "ms before" );
+                        }
+                        else
+                        {
+                            displayDialog( message, imageCacheException.getFreeSpace(), imageCacheException.getImageCache() );
+                        }
+                        lastSameCause = currentTimeMillis();
+                    }
+                    else
+                    {
+                        displayDialog( message, imageCacheException.getFreeSpace(), imageCacheException.getImageCache() );
+                        last = imageCacheException;
+                    }
+                }
+                else
+                {
+                    Dialogs.showErrorMessage( TabbedPictureDetailPanel.this, "Ein unerwarteter Fehler ist beim Zwischenspeichern von Bildern aufgetreten", e.getMessage() );
+                    LOG.error( "unexpected exception", e );
+                }
+            }
+
+            private void displayDialog( final String message, final long freeSpace, final ImageCache cache )
+            {
+                if ( freeSpace < 1024 * 100 )
+                {
+                    final ErrorHandlingDialog dialog = new ErrorHandlingDialog();
+                    dialog.setLocationRelativeTo( null );
+                    dialog.setVisible( true );
+                    if ( dialog.getDoNothing().isSelected() )
+                    {
+                        LOG.info( "user has chosen to do nothing" );
+                    }
+                    else if ( dialog.getDeletePercentageCheckBox().isSelected() )
+                    {
+                        LOG.info( "user has chosen to invalidate the cache" );
+                        try
+                        {
+                            PICT_LOCATOR.invalidateCache( cache );
+                        }
+                        catch ( final ImageCacheException e )
+                        {
+                            LOG.error( "can not invalidate caches", e );
+                        }
+                    }
+                    else if ( dialog.getRunInMemoryCheckBox().isSelected() )
+                    {
+                        LOG.info( "user has chosen to run in memory only" );
+                        PICT_LOCATOR.disableCache( cache );
+                    }
+                }
+                else
+                {
                     Dialogs.showErrorMessage( TabbedPictureDetailPanel.this, "Fehler beim Zwischenspeichern von Bildern", message );
                 }
             }

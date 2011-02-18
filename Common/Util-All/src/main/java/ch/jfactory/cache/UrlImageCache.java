@@ -61,7 +61,7 @@ public class UrlImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", this, e );
+            throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", e, -1, this );
         }
     }
 
@@ -75,7 +75,7 @@ public class UrlImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not cache image " + name + " to " + url, this, e );
+            throw new ImageCacheException( "could not cache image " + name + " to " + url, e, -1, this );
         }
     }
 
@@ -121,7 +121,7 @@ public class UrlImageCache implements ImageCache
         }
         catch ( IOException e )
         {
-            throw new ImageCacheException( "could not invalidate the cache at " + url, this, e );
+            throw new ImageCacheException( "could not invalidate the cache at " + url, e, -1, this );
         }
     }
 

@@ -2,7 +2,9 @@ package ch.jfactory.cache;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.apache.log4j.Logger;
 
 public class NestedImageCache implements ImageCache
@@ -13,7 +15,15 @@ public class NestedImageCache implements ImageCache
 
     private final ImageCache[] caches;
 
-    public NestedImageCache( final ImageCache... caches )
+    private final ImageCache[] cachesToInvalidate;
+
+    private Set<ImageCache> disabled = new HashSet<ImageCache>();
+
+    /**
+     * @param cachesToInvalidate the caches to invalidate when {@link #invalidateCache} is called
+     * @param caches             the caches to search for images in the order of priority
+     */
+    public NestedImageCache( final ImageCache[] cachesToInvalidate, final ImageCache... caches )
     {
         assertNotNull( caches );
         for ( final ImageCache cache : caches )
@@ -21,6 +31,17 @@ public class NestedImageCache implements ImageCache
             assertNotNull( cache );
         }
         this.caches = caches;
+        this.cachesToInvalidate = cachesToInvalidate == null ? new ImageCache[0] : cachesToInvalidate;
+    }
+
+    public void disableCache( final ImageCache cache )
+    {
+        disabled.add( cache );
+    }
+
+    public void invalidateCache( final ImageCache cache ) throws ImageCacheException
+    {
+        cache.invalidateCache();
     }
 
     public BufferedImage getImage( final String name ) throws ImageCacheException
@@ -32,26 +53,29 @@ public class NestedImageCache implements ImageCache
             for ( int i = 0; image == null && i < caches.length; i++ )
             {
                 final ImageCache currentCache = caches[i];
-                try
+                if ( !disabled.contains( currentCache ) )
                 {
-                    image = currentCache.getImage( name );
-                }
-                catch ( final ImageCacheException e )
-                {
-                    if ( e.getCause() instanceof OutOfMemoryError )
+                    try
                     {
-                        LOG.warn( "trying to free memory for the " + ( MAX_RETRY_COUNT - retryCount ) + ". time" );
-                        System.runFinalization();
-                        System.gc();
+                        image = currentCache.getImage( name );
                     }
-                    else
+                    catch ( final ImageCacheException e )
                     {
-                        throw e;
+                        if ( e.getCause() instanceof OutOfMemoryError )
+                        {
+                            LOG.warn( "trying to free memory for the " + ( MAX_RETRY_COUNT - retryCount ) + ". time" );
+                            System.runFinalization();
+                            System.gc();
+                        }
+                        else
+                        {
+                            throw e;
+                        }
                     }
-                }
-                if ( image != null )
-                {
-                    setImage( name, image, i );
+                    if ( image != null )
+                    {
+                        setImage( name, image, i );
+                    }
                 }
             }
         }
@@ -78,11 +102,14 @@ public class NestedImageCache implements ImageCache
         return allHaveIt;
     }
 
-    public final void invalidateCache() throws ImageCacheException
+    public void invalidateCache() throws ImageCacheException
     {
-        for ( final ImageCache cache : caches )
+        for ( final ImageCache cache : cachesToInvalidate )
         {
-            cache.invalidateCache();
+            if ( !disabled.contains( cache ) )
+            {
+                cache.invalidateCache();
+            }
         }
     }
 
@@ -90,7 +117,11 @@ public class NestedImageCache implements ImageCache
     {
         for ( int i = max; i > 0; i-- )
         {
-            caches[i - 1].setImage( name, image );
+            final ImageCache cache = caches[i - 1];
+            if ( !disabled.contains( cache ) )
+            {
+                cache.setImage( name, image );
+            }
         }
     }
 

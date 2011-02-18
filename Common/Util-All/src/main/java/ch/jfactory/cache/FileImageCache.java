@@ -72,7 +72,7 @@ public class FileImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not retrieve image " + name + " from " + path, this, e );
+            throw new ImageCacheException( "could not retrieve image " + name + " from " + path, e, -1, this );
         }
     }
 
@@ -89,11 +89,15 @@ public class FileImageCache implements ImageCache
         catch ( Throwable e )
         {
             final File file = new File( path );
+            final long freeSpace = file.getFreeSpace();
             if ( file.exists() )
             {
-                file.delete();
+                if ( !file.delete() )
+                {
+                    LOG.warn( "could not delete file " + file.getAbsolutePath() );
+                }
             }
-            throw new ImageCacheException( "could not cache image " + name + " to " + path, this, e );
+            throw new ImageCacheException( "could not cache image " + name + " to " + path, e, freeSpace, this );
         }
     }
 
@@ -126,7 +130,7 @@ public class FileImageCache implements ImageCache
             if ( !file.delete() )
             {
                 final String message = "could not remove " + ( isDirectory ? "directory" : "file" ) + " " + file + " from cache";
-                throw new ImageCacheException( message, this, new IOException( message ) );
+                throw new ImageCacheException( message, new IOException( message ), -1, this );
             }
         }
     }

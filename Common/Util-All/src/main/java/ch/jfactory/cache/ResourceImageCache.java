@@ -32,7 +32,7 @@ public class ResourceImageCache implements ImageCache
             final InputStream stream = getClass().getResourceAsStream( path );
             if ( stream == null )
             {
-                throw new ImageCacheException( "could not retrieve image " + name + " from " + path, this, new NullPointerException( "resource at path " + path + " not found" ) );
+                throw new ImageCacheException( "could not retrieve image " + name + " from " + path, new NullPointerException( "resource at path " + path + " not found" ), -1, this );
             }
             final BufferedImage image = ImageIO.read( stream );
             stream.close();
@@ -40,7 +40,7 @@ public class ResourceImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not load resource " + path, this, e );
+            throw new ImageCacheException( "could not load resource " + path, e, -1, this );
         }
     }
 

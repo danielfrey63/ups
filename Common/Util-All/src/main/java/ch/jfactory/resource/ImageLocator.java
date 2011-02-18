@@ -30,7 +30,7 @@ public class ImageLocator
 {
     public static final String PROPERTY_IMAGE_LOCATION = "xmatrix.picture.path";
 
-    public static final ImageCache PICT_LOCATOR;
+    public static final NestedImageCache PICT_LOCATOR;
 
     private static final Logger LOGGER = LoggerFactory.getLogger( ImageLocator.class );
 
@@ -79,7 +79,7 @@ public class ImageLocator
         final ImageCache fileSystemCache = new FileImageCache( getPicturePath(), "jpg" );
         final ImageCache weakInMemoryCache = new WeakInMemoryCache();
         final ImageCache urlImageCache = new UrlImageCache( getImageURL(), "jpg" );
-        PICT_LOCATOR = new NestedImageCache( weakInMemoryCache, fileSystemCache, urlImageCache );
+        PICT_LOCATOR = new NestedImageCache( new ImageCache[]{weakInMemoryCache, fileSystemCache}, weakInMemoryCache, fileSystemCache, urlImageCache );
 
         LOGGER.info( "icon resources at " + ICON_LOCATOR );
         LOGGER.info( "pictures resources at " + PICT_LOCATOR );

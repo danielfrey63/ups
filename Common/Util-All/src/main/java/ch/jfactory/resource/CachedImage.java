@@ -36,11 +36,7 @@ public class CachedImage
 
     private boolean imageLoaded = false;
 
-    private boolean thumbNailLoaded = false;
-
     private SoftReference<BufferedImage> softImageReference;
-
-    private SoftReference<BufferedImage> thumbNail;
 
     public CachedImage( final ImageCache locator, final String name )
     {
@@ -118,18 +114,11 @@ public class CachedImage
 
     public BufferedImage getImage( final boolean thumb )
     {
-        BufferedImage image;
-        if ( thumb )
+        final BufferedImage image = softImageReference == null ? null : softImageReference.get();
+        if ( imageLoaded && image == null )
         {
-            image = getThumbnail();
-            if ( image == null )
-            {
-                image = getFullImage();
-            }
-        }
-        else
-        {
-            image = getFullImage();
+            LOGGER.debug( "soft reference lost" );
+            imageLoaded = false;
         }
         return image;
     }
@@ -144,8 +133,6 @@ public class CachedImage
         synchronized ( this )
         {
             imageLoaded = true;
-            thumbNailLoaded = false;
-            thumbNail = new SoftReference<BufferedImage>( image );
             softImageReference = new SoftReference<BufferedImage>( image );
         }
         if ( image == null )
@@ -161,27 +148,5 @@ public class CachedImage
     private void setSize( final Dimension d )
     {
         size = d;
-    }
-
-    private BufferedImage getFullImage()
-    {
-        final BufferedImage image = softImageReference == null ? null : softImageReference.get();
-        if ( imageLoaded && image == null )
-        {
-            LOGGER.debug( "soft reference lost" );
-            imageLoaded = false;
-        }
-        return image;
-    }
-
-    private BufferedImage getThumbnail()
-    {
-        final BufferedImage image = thumbNail == null ? null : thumbNail.get();
-        if ( thumbNailLoaded && image == null )
-        {
-            LOGGER.debug( "soft reference lost" );
-            thumbNailLoaded = false;
-        }
-        return image;
     }
 }

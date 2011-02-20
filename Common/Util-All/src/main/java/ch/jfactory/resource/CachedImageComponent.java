@@ -66,11 +66,11 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     {
         LOGGER.debug( "setting image" + " \"" + name + "\"" );
         boolean reValidate = false;
-        if ( cachedImage != null )
-        {
-            cachedImage.detachAll();
-            reValidate = true;
-        }
+//        if ( cachedImage != null )
+//        {
+//            cachedImage.detachAll();
+//            reValidate = true;
+//        }
         cachedImage = name == null ? null : cache.getCachedImage( name );
         loadImage();
         size = null;
@@ -177,6 +177,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     public synchronized void loadFinished( final String name, final Image img, final boolean thumb )
     {
         LOGGER.debug( "loading of image \"" + name + "\" finished" );
+        cachedImage.detach( this );
         size = null;
         repaint();
     }

@@ -109,7 +109,7 @@ public class PictureDetailPanel extends JPanel
         cache.clearCachingList();
     }
 
-    public void addImage( final String name, final String toolTip )
+    public void addImage( final String name, final int counter, final String toolTip )
     {
         LOGGER.debug( "adding image \"" + name + "\" to picture details panel" );
         final CachedImagePicture picture = new CachedImagePicture( cache.getCachedImage( name ), name );
@@ -118,7 +118,8 @@ public class PictureDetailPanel extends JPanel
         {
             public void loadFinished( final String name, final Image img, final boolean thumb )
             {
-                thumbList.getThumbnailListModel().setPictureAt( size, picture );
+                thumbList.getThumbnailListModel().setPictureAt( counter, picture );
+                picture.detach( this );
             }
 
             public void loadAborted( final String name )

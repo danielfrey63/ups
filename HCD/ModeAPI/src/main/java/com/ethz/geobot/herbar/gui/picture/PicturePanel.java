@@ -183,7 +183,7 @@ public class PicturePanel extends JPanel
         {
             final CommentedPicture picture = (CommentedPicture) j.next();
             final String name = picture.getPicture().getRelativURL();
-            detail.addImage( name, ( showText ? picture.getComment() : "" ) );
+            detail.addImage( name, counter, ( showText ? picture.getComment() : "" ) );
             detail.cacheImage( name, theme != model.getPictureTheme() );
             counter++;
         }

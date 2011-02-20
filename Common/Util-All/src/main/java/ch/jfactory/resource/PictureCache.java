@@ -158,7 +158,7 @@ public class PictureCache
                     {
                         throw new NoSuchElementException( "peeking on null" );
                     }
-                    LOG.debug( "peeking on \"" + name + "\" in queue " + queue );
+                    LOG.debug( "peeking on \"" + name + "\" in queue " + new LinkedList<String>( queue ) );
                     final CachedImage img = getCachedImage( name );
                     if ( !img.isLoaded( false ) )
                     {

@@ -52,7 +52,8 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
      */
     public void informStarted( final String name )
     {
-        for ( final AsyncPictureLoaderListener listener : listeners )
+        final ArrayList<AsyncPictureLoaderListener> copy = new ArrayList<AsyncPictureLoaderListener>( listeners );
+        for ( final AsyncPictureLoaderListener listener : copy )
         {
             listener.loadStarted( name );
         }
@@ -66,7 +67,8 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
      */
     public void informFinished( final String name, final Image image )
     {
-        for ( final AsyncPictureLoaderListener listener : listeners )
+        final ArrayList<AsyncPictureLoaderListener> copy = new ArrayList<AsyncPictureLoaderListener>( listeners );
+        for ( final AsyncPictureLoaderListener listener : copy )
         {
             listener.loadFinished( name, image, false );
         }
@@ -79,7 +81,8 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
      */
     public void informAborted( final String name )
     {
-        for ( final AsyncPictureLoaderListener listener : listeners )
+        final ArrayList<AsyncPictureLoaderListener> copy = new ArrayList<AsyncPictureLoaderListener>( listeners );
+        for ( final AsyncPictureLoaderListener listener : copy )
         {
             listener.loadAborted( name );
         }
@@ -88,6 +91,6 @@ public class AbstractAsyncPictureLoaderSupport implements AsyncPictureLoaderSupp
     @Override
     public String toString()
     {
-        return getClass().getSimpleName() + "[" + listeners + "]";
+        return getClass().getSimpleName() + "[" + hashCode() + "," + listeners.size() + "]";
     }
 }

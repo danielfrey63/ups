@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.catcher</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>

@@ -8,7 +8,6 @@ import ch.jfactory.component.JMultiLineLabel;
 import ch.jfactory.component.TextEditItem;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
-import com.ethz.geobot.herbar.gui.util.HerbarTheme;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -121,7 +120,7 @@ public abstract class WizardPane extends JPanel
     }
 
     /**
-     * The default edit area just returns the edit constructed by {@link #createDefaultEdit(String,ActionListener)}.<p>
+     * The default edit area just returns the edit constructed by {@link #createDefaultEdit(String, ActionListener)}.<p>
      * Overwrite this method to setup a customized edit area. If you return null, this area will be excluded properly.
      *
      * @param prefix for string replacement
@@ -137,7 +136,7 @@ public abstract class WizardPane extends JPanel
      * invoke an action to edit the current status. The string key is composed by the prefix <code>WIZARD</code>, the
      * name of the wizard in uppercase, i.e. <code>NAME</code> and post-fix <code>CHOOSE</code>, each part separated by
      * a dot: <code>WIZARD.NAME.CHOOSE</code>.<p> If you overwrite this method, you will exchange all edit items for the
-     * default behaviour of the wizard.<p> See documentation of {@link EditItem#EditItem(String,ActionListener)} to see
+     * default behaviour of the wizard.<p> See documentation of {@link EditItem#EditItem(String, ActionListener)} to see
      * what further extensions are appended to this key to get the final strings.
      *
      * @param prefix     for string replacement
@@ -354,7 +353,6 @@ public abstract class WizardPane extends JPanel
     {
         final String text = Strings.getString( prefix + ".TEXT" );
         final JTextPane textDisplay = new JTextPane();
-        textDisplay.setBackground( HerbarTheme.getBackground2() );
         textDisplay.setContentType( "text/html" );
         textDisplay.setText( text );
         textDisplay.setEditable( false );
@@ -362,8 +360,6 @@ public abstract class WizardPane extends JPanel
         textDisplay.setFocusable( false );
 
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setFontSize( attributes, HerbarTheme.FONTSIZE );
-        StyleConstants.setFontFamily( attributes, HerbarTheme.FONTFACE );
         StyleConstants.setAlignment( attributes, StyleConstants.ALIGN_LEFT );
         final StyledDocument doc = textDisplay.getStyledDocument();
         doc.setParagraphAttributes( 0, doc.getLength(), attributes, false );

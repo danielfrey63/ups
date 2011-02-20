@@ -3,7 +3,6 @@ package com.ethz.geobot.herbar.gui.mode.wizard;
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.resource.Strings;
-import com.ethz.geobot.herbar.gui.util.HerbarTheme;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardPane;
@@ -197,7 +196,6 @@ public class WizardModePane extends WizardPane
     private JList createList( final String group )
     {
         final JList list = new JList( new DefaultListModel() );
-        list.setBackground( HerbarTheme.getBackground2() );
         list.setCellRenderer( new ModeListCellRenderer() );
         list.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
         list.addListSelectionListener( new ListSelectionListener()

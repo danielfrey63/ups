@@ -19,7 +19,7 @@ import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
-import com.ethz.geobot.herbar.gui.util.HerbarTheme;
+import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -34,7 +34,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,14 +156,11 @@ public class AppHerbar
 
     public static void main( final String[] args )
     {
-//        RepaintManager.setCurrentManager(new CheckThreadViolationRepaintManager());
-
         LOG.debug( "Starting main-Application" );
 
         try
         {
-            MetalLookAndFeel.setCurrentTheme( HerbarTheme.THEME );
-            UIManager.setLookAndFeel( UIManager.getLookAndFeel() );
+            UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
             new AppHerbar();
         }
         catch ( IllegalStateException e )

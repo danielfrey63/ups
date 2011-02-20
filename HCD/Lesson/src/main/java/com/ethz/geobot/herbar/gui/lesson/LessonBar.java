@@ -20,7 +20,6 @@ import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.TaxonNameInterrogator;
 import com.ethz.geobot.herbar.gui.tax.TaxTreeDialog;
-import com.ethz.geobot.herbar.gui.util.HerbarTheme;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
@@ -142,21 +141,17 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     {
         // Bread crumb and species name interrogation
         bread = new BreadCrumb();
-        bread.setBackground( HerbarTheme.getBackground2() );
 
         askingPanel = new TaxonNameInterrogator( new TaxonNameInterrogator.TransientInterrogatorModel() );
-        askingPanel.setBackground( HerbarTheme.getBackground2() );
 
         cards = new CardLayout();
         switcher = new JPanel( cards );
         switcher.add( bread, BREAD );
         switcher.add( askingPanel, ASKING_PANEL );
-        switcher.setBackground( HerbarTheme.getBackground2() );
         switcher.setBorder( new EmptyBorder( 0, Constants.GAP_WITHIN_GROUP, 0, Constants.GAP_WITHIN_GROUP ) );
 
         // Panel common to focus button and breadcrumb/interrogation
         final JPanel lower = new JPanel( new BorderLayout() );
-        lower.setBackground( HerbarTheme.getBackground2() );
         final int gap = Constants.GAP_BETWEEN_GROUP;
         switcher.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ), new EmptyBorder( gap, gap, gap, gap ) ) );
         lower.add( switcher, BorderLayout.CENTER );

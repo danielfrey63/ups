@@ -29,7 +29,6 @@ import com.ethz.geobot.herbar.gui.PropertyInterrogatorPanel;
 import com.ethz.geobot.herbar.gui.ResultModel;
 import com.ethz.geobot.herbar.gui.TaxonNameInterrogator;
 import com.ethz.geobot.herbar.gui.picture.PicturePanel;
-import com.ethz.geobot.herbar.gui.util.HerbarTheme;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
@@ -331,8 +330,6 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         field.setContentType( "text/html" );
         field.setText( text );
         final SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setFontSize( attributes, HerbarTheme.FONTSIZE );
-        StyleConstants.setFontFamily( attributes, HerbarTheme.FONTFACE );
         StyleConstants.setAlignment( attributes, StyleConstants.ALIGN_CENTER );
         final StyledDocument doc = field.getStyledDocument();
         doc.setParagraphAttributes( 0, doc.getLength(), attributes, false );
@@ -377,19 +374,16 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         speciesLevel = herbarModel.getLastLevel();
         speciesInterrogatorModel = new TaxonNameInterrogator.MemorizingInterrogatorModel();
         speciesInterrogator = new TaxonNameInterrogator( speciesLevel, speciesInterrogatorModel );
-        speciesInterrogator.setBackground( HerbarTheme.getBackground2() );
         speciesInterrogator.setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, Constants.GAP_BETWEEN_REGIONS ) );
 
         familyLevel = herbarModel.getLevel( "Familie" );
         familyInterrogatorModel = new TaxonNameInterrogator.MemorizingInterrogatorModel();
         familyInterrogator = new TaxonNameInterrogator( familyLevel, familyInterrogatorModel );
-        familyInterrogator.setBackground( HerbarTheme.getBackground2() );
 
         final JPanel secondToolBar = new JPanel( new GridLayout( 1, 2 ) );
         final int gap = Constants.GAP_BETWEEN_GROUP;
         secondToolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ),
                 new EmptyBorder( gap, gap, gap, gap ) ) );
-        secondToolBar.setBackground( HerbarTheme.getBackground2() );
         secondToolBar.add( speciesInterrogator );
         secondToolBar.add( familyInterrogator );
         return secondToolBar;

@@ -26,7 +26,6 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
     public CascadeWizardModel( final Preferences preferences, final WizardPane[] panes )
     {
         super( preferences, panes, NAME );
-        initPaneList();
     }
 
     public void setNextEnabled( final boolean isNextEnabled )
@@ -75,6 +74,17 @@ abstract public class CascadeWizardModel extends DefaultWizardModel implements W
         {
             super.setCancelEnabled( isCancelEnabled );
         }
+    }
+
+    public void setCascadeWizardModel( final WizardModel newCascadeModel )
+    {
+        if ( cascadeWizardModel != null )
+        {
+            cascadeWizardModel.removeWizardStateListener( this );
+        }
+        cascadeWizardModel = newCascadeModel;
+        cascadeWizardModel.addWizardStateListener( this );
+        fireInternalState();
     }
 
     public boolean isNextEnabled()

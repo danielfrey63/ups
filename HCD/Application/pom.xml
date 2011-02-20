@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
@@ -25,10 +24,12 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.1232</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1242</version>
             <artifactId>ch.xmatrix.le.catcher</artifactId>
         </dependency>
         <dependency>
@@ -45,6 +46,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1184</version>
             <artifactId>ch.xmatrix.le.help</artifactId>
         </dependency>
         <dependency>
@@ -53,22 +55,27 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1247</version>
             <artifactId>ch.xmatrix.le.maze</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1237</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1237</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1095</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
@@ -77,6 +84,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1226</version>
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <dependency>

@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.server</groupId>
     <artifactId>ch.xmatrix.ups.server.client</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0.1281</version>
     <name>UPS Server 2 Client</name>
     <dependencies>
         <dependency>
@@ -38,4 +38,9 @@
             <artifactId>hibernate</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.server.client-3.0.1281</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.server.client-3.0.1281</url>
+  </scm>
 </project>

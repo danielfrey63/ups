@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
- * @castor.class
  */
 public class GraphEdgeImpl implements GraphEdge, Serializable
 {
@@ -44,39 +43,25 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
         setId( id );
     }
 
-    /**
-     * @see GraphEdge#isRole(Class)
-     */
+    /** @see GraphEdge#isRole(Class) */
     public boolean isRole( final Class role )
     {
         return role.isAssignableFrom( role.getClass() );
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphEdge#getChild()
-     */
+    /** @see GraphEdge#getChild() */
     public GraphNode getChild()
     {
         return child;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphEdge#getParent()
-     */
+    /** @see GraphEdge#getParent() */
     public GraphNode getParent()
     {
         return parent;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphEdge#getRole()
-     */
+    /** @see GraphEdge#getRole() */
     public Role getRole()
     {
         if ( role == null )
@@ -89,27 +74,19 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
         }
     }
 
-    /**
-     * @see GraphEdge#getRecursive()
-     */
+    /** @see GraphEdge#getRecursive() */
     public GraphEdge getRecursive()
     {
         return recursive;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphEdge#getRank()
-     */
+    /** @see GraphEdge#getRank() */
     public int getRank()
     {
         return rank;
     }
 
-    /**
-     * @see GraphEdge#setChild(GraphNode)
-     */
+    /** @see GraphEdge#setChild(GraphNode) */
     public void setChild( final GraphNode child )
     {
         final GraphModel model = AbsGraphModel.getModel();
@@ -118,9 +95,7 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
         model.addChanged( this );
     }
 
-    /**
-     * @see GraphEdge#setParent(GraphNode)
-     */
+    /** @see GraphEdge#setParent(GraphNode) */
     public void setParent( final GraphNode parent )
     {
         final GraphModel model = AbsGraphModel.getModel();
@@ -129,51 +104,37 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
         model.addChanged( this );
     }
 
-    /**
-     * @see GraphEdge#setRole(Role)
-     */
+    /** @see GraphEdge#setRole(Role) */
     public void setRole( final Role role )
     {
         this.role = ( role == Role.ROLE_NULL ? null : role );
     }
 
-    /**
-     * @see GraphEdge#setRecursive(GraphEdge)
-     */
+    /** @see GraphEdge#setRecursive(GraphEdge) */
     public void setRecursive( final GraphEdge recursive )
     {
         this.recursive = recursive;
     }
 
-    /**
-     * @see GraphEdge#setRank(int)
-     */
+    /** @see GraphEdge#setRank(int) */
     public void setRank( final int rank )
     {
         this.rank = rank;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphEdge#getId()
-     */
+    /** @see GraphEdge#getId() */
     public int getId()
     {
         return id;
     }
 
-    /**
-     * @see GraphEdge#setId(int)
-     */
+    /** @see GraphEdge#setId(int) */
     public void setId( final int id )
     {
         this.id = id;
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         String pId = "null node (NN)";

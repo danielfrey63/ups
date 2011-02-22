@@ -7,7 +7,6 @@ import java.io.ObjectOutputStream;
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
- * @castor.class
  */
 public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Comparable
 {
@@ -16,17 +15,13 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
         getChildrenEdges().printEdges( type );
     }
 
-    /**
-     * @see GraphNode#getChildren()
-     */
+    /** @see GraphNode#getChildren() */
     public GraphNodeList getChildren()
     {
         return getChildrenEdges().getOthers();
     }
 
-    /**
-     * @see GraphNode#getParents()
-     */
+    /** @see GraphNode#getParents() */
     public GraphNodeList getParents()
     {
         return getParentEdges().getOthers();
@@ -226,9 +221,7 @@ public class GraphNodeImpl extends AbsSimplePersistentGraphNode implements Compa
         return getParentEdges().removeLinkTo( parent );
     }
 
-    /**
-     * @see Comparable
-     */
+    /** @see Comparable */
     public int compareTo( final Object o )
     {
         final GraphNode node = (GraphNode) o;

@@ -40,8 +40,6 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
      * Returns the children.
      *
      * @return GraphEdgeList
-     * @castor.field
-     * @castor.field-xml
      */
     public GraphEdgeList getChildrenEdges()
     {
@@ -74,33 +72,21 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return type.isAssignableFrom( this.getClass() );
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphNode#getId()
-     */
+    /** @see GraphNode#getId() */
     public int getId()
     {
         LOGGER.trace( "getId(): " + id );
         return id;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphNode#getName()
-     */
+    /** @see GraphNode#getName() */
     public String getName()
     {
         LOGGER.trace( "getName(): " + name );
         return name;
     }
 
-    /**
-     * @castor.field
-     * @castor.field-xml
-     * @see GraphNode#getRank()
-     */
+    /** @see GraphNode#getRank() */
     public int getRank()
     {
         LOGGER.trace( "getRank(): " + rank );

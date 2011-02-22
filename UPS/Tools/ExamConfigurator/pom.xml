@@ -21,52 +21,42 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.4.823</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.1232</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.727</version>
             <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.718</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>2.0.730</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.724</version>
             <artifactId>ch.xmatrix.ups.data.exams</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.776</version>
             <artifactId>ch.xmatrix.ups.data.courses</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>3.0.1281</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>3.0.1006</version>
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
-            <version>3.0.1286</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>

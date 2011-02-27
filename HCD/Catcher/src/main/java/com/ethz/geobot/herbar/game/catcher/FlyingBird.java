@@ -39,7 +39,7 @@ public class FlyingBird extends FlyingFlower
      */
     public FlyingBird()
     {
-        final int randomGif = (int) ( Math.random() * 2 );
+        final int randomGif = (int) ( Math.random() * 1 );
         bird = ImageLocator.getIcon( "vogel_" + randomGif + ".gif" );
 
         //random initial coordinates within the panel bounderies

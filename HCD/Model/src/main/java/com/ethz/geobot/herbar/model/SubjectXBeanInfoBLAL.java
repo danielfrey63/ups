@@ -21,19 +21,19 @@ public class SubjectXBeanInfoBLAL implements JXPathBeanInfo
 {
     private final static Logger LOG = LoggerFactory.getLogger( SubjectXBeanInfoBLAL.class );
 
-    private final Map descriptor = new HashMap();
+    private final Map<String, PropertyDescriptor> descriptor = new HashMap<String, PropertyDescriptor>();
 
     public SubjectXBeanInfoBLAL()
     {
         try
         {
-            PropertyDescriptor des = new PropertyDescriptor( "id", MorSubject.class, "getId", null );
+            PropertyDescriptor des = new PropertyDescriptor( "id", MorphologySubject.class, "getId", null );
             descriptor.put( "id", des );
-            des = new PropertyDescriptor( "name", MorSubject.class, "getName", null );
+            des = new PropertyDescriptor( "name", MorphologySubject.class, "getName", null );
             descriptor.put( "name", des );
-            des = new PropertyDescriptor( "attributes", MorSubject.class, "getAttributes", null );
+            des = new PropertyDescriptor( "attributes", MorphologySubject.class, "getAttributes", null );
             descriptor.put( "attributes", des );
-            des = new PropertyDescriptor( "subjects", MorSubject.class, "getSubjects", null );
+            des = new PropertyDescriptor( "subjects", MorphologySubject.class, "getSubjects", null );
             descriptor.put( "subjects", des );
         }
         catch ( IntrospectionException ex )
@@ -49,12 +49,12 @@ public class SubjectXBeanInfoBLAL implements JXPathBeanInfo
 
     public PropertyDescriptor getPropertyDescriptor( final String str )
     {
-        return (PropertyDescriptor) descriptor.get( str );
+        return descriptor.get( str );
     }
 
     public PropertyDescriptor[] getPropertyDescriptors()
     {
-        return (PropertyDescriptor[]) descriptor.values().toArray( new PropertyDescriptor[0] );
+        return descriptor.values().toArray( new PropertyDescriptor[descriptor.values().size()] );
     }
 
     public boolean isAtomic()

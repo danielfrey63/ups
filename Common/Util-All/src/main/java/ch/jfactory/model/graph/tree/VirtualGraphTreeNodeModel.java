@@ -110,16 +110,16 @@ public class VirtualGraphTreeNodeModel implements GraphModel
             // descendant flag and filtering
             if ( filter.isBothDirections() )
             {
-                graphNodeChildren = dependent.getChildren( type, role );
-                graphNodeChildren.addAll( dependent.getParents( type, role ) );
+                graphNodeChildren = dependent.getChildren( type );
+                graphNodeChildren.addAll( dependent.getParents( type ) );
             }
             else if ( filter.isDescendant() )
             {
-                graphNodeChildren = dependent.getChildren( type, role );
+                graphNodeChildren = dependent.getChildren( type );
             }
             else
             {
-                graphNodeChildren = dependent.getParents( type, role );
+                graphNodeChildren = dependent.getParents( type );
             }
 
             // bound flag

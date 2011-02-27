@@ -22,20 +22,23 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.modeapi.SimpleTaxStateModel;
-import com.ethz.geobot.herbar.model.EcoAttribute;
-import com.ethz.geobot.herbar.model.EcoSubject;
-import com.ethz.geobot.herbar.model.EcoText;
-import com.ethz.geobot.herbar.model.EcoValue;
+import com.ethz.geobot.herbar.model.Ecology;
+import com.ethz.geobot.herbar.model.EcologyAttribute;
+import com.ethz.geobot.herbar.model.EcologySubject;
+import com.ethz.geobot.herbar.model.EcologyText;
+import com.ethz.geobot.herbar.model.EcologyValue;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.MedAttribute;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MedText;
-import com.ethz.geobot.herbar.model.MedValue;
-import com.ethz.geobot.herbar.model.MorAttribute;
-import com.ethz.geobot.herbar.model.MorSubject;
-import com.ethz.geobot.herbar.model.MorText;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.Medicine;
+import com.ethz.geobot.herbar.model.MedicineSubject;
+import com.ethz.geobot.herbar.model.MedicineText;
+import com.ethz.geobot.herbar.model.MedicineValue;
+import com.ethz.geobot.herbar.model.Morphology;
+import com.ethz.geobot.herbar.model.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.MorphologySubject;
+import com.ethz.geobot.herbar.model.MorphologyText;
+import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -168,28 +171,30 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         final DefaultResultModel resultModel = new DefaultResultModel( herbarModel );
         DetailResultModel detailModel;
 
-        detailModel = new TransientDetailResultModel( MorText.class, MorAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{MorSubject.class, MorAttribute.class, MorValue.class, MorText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
-                MorAttribute.class, MorValue.class, MorText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
-                MorAttribute.class, MorValue.class, MorText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+        detailModel = new TransientDetailResultModel( MorphologyText.class, MorphologyAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( EcoText.class, EcoAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{EcoSubject.class, EcoAttribute.class, EcoValue.class, EcoText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        detailModel = new TransientDetailResultModel( EcologyText.class, EcologyAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( MedText.class, MedAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{MedSubject.class, MedAttribute.class, MedValue.class, MedText.class},
-                new int[][]{{1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        detailModel = new TransientDetailResultModel( MedicineText.class, MedAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Medicine.class, MedicineSubject.class, MedAttribute.class, MedicineValue.class, MedicineText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
+
         return resultModel;
     }
 

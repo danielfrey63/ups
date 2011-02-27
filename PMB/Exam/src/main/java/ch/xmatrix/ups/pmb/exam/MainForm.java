@@ -27,7 +27,6 @@ import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
 import ch.xmatrix.ups.pmb.ui.controller.AdjustSizeLoadedListener;
 import ch.xmatrix.ups.pmb.ui.controller.NavigationSelectionHandler;
 import ch.xmatrix.ups.pmb.ui.controller.PMBController;
-import ch.xmatrix.ups.pmb.ui.controller.StatusBarNoteHandler;
 import ch.xmatrix.ups.pmb.ui.model.EntryTreeModel;
 import ch.xmatrix.ups.pmb.ui.model.FileEntryThumbnailListModel;
 import ch.xmatrix.ups.pmb.ui.model.Settings;
@@ -246,7 +245,6 @@ public class MainForm extends ExamForm
                 }
             }
         } );
-        model.getInfoModel().addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new StatusBarNoteHandler( statusBar ) );
         model.addPropertyChangeListener( PMBExamModel.PROPERTY_CURRENT_EXAMSET, new PropertyChangeListener()
         {
             public void propertyChange( final PropertyChangeEvent evt )

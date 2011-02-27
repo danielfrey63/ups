@@ -59,19 +59,19 @@ public class AnimationTest extends ComponentTestFixture
     private static final String SPLASH = "/splash.jpg";
 
     /**
-     * Testseries parameter for page modi.
+     * Test series parameter for page modes.
      */
-    private static final boolean[] pageModi = {false, true};
+    private static final boolean[] pageModes = {false, true};
 
     /**
-     * Testseries for paragraph delays.
+     * Test series for paragraph delays.
      */
     private static final int[] paragraphDelays = {10, 1000};
 
     /**
      * Constructs a new test.
      *
-     * @param name
+     * @param name the animation test
      */
     public AnimationTest( final String name )
     {
@@ -139,9 +139,9 @@ public class AnimationTest extends ComponentTestFixture
         final Dimension size = new Dimension( 300, 200 );
 
         // Make sure that the frame is disposed and tests can go on when animation is finished
-        final FadingPaintable fader = new FadingPaintable( Color.ORANGE );
+        final FadingPaintable paintable = new FadingPaintable( Color.ORANGE );
         final Thread sleeper = Thread.currentThread();
-        fader.addStopListener( new StopListener()
+        paintable.addStopListener( new StopListener()
         {
             public void stopPerformed()
             {
@@ -152,7 +152,7 @@ public class AnimationTest extends ComponentTestFixture
 
         final AnimationQueue animation = new AnimationQueue();
         animation.setSize( size );
-        animation.addPaintable( fader );
+        animation.addPaintable( paintable );
 
         frame.getContentPane().setLayout( null );
         frame.getContentPane().add( animation );
@@ -185,7 +185,7 @@ public class AnimationTest extends ComponentTestFixture
 
         final String fileName = "/News.txt";
         final InputStream textFile = AnimationTest.class.getResourceAsStream( fileName );
-        assertNotNull( "Textfile " + fileName + " not found.", textFile );
+        assertNotNull( "Text file " + fileName + " not found.", textFile );
 
         final ScrollingTextPaintable scroller = new ScrollingTextPaintable( textFile, printSpaceWidth, true );
         scroller.setBackgroundColor( fadeColor );
@@ -201,7 +201,7 @@ public class AnimationTest extends ComponentTestFixture
 
     public void testSplashWithScroller() throws ComponentNotFoundException, MultipleComponentsFoundException
     {
-        for ( final boolean b : pageModi )
+        for ( final boolean b : pageModes )
         {
             for ( final int d : paragraphDelays )
             {

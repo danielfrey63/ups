@@ -5,7 +5,7 @@ import com.ethz.geobot.herbar.model.AbstractTaxon;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.LevelComparator;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ class FilterTaxon extends AbstractTaxon
         return cachedChildren.toArray( new Taxon[cachedChildren.size()] );
     }
 
-    public MorValue[] getMorValues()
+    public MorphologyValue[] getMorValues()
     {
         return dependentTaxon.getMorValues();
     }

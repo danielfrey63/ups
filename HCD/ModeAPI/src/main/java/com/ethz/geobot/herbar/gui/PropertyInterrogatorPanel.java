@@ -63,14 +63,12 @@ import javax.swing.tree.TreePath;
  */
 public class PropertyInterrogatorPanel extends JPanel
 {
-    /**
-     * Used to keep track of all panels which need to have syncronized split panes.
-     */
+    /** Used to keep track of all panels which need to have synchronized split panes. */
     private static PropertyInterrogatorPanel[] members = new PropertyInterrogatorPanel[0];
 
     /**
-     * A split pane which sends events uppon change of the splitter position. Has to member as one instance will access
-     * the other ones to ajust position.
+     * A split pane which sends events upon change of the splitter position. Has to member as one instance will access
+     * the other ones to adjust position.
      */
     private final JSplitPane split;
 
@@ -124,9 +122,7 @@ public class PropertyInterrogatorPanel extends JPanel
         } );
     }
 
-    /**
-     * Register this new panel to make its split pane synchronizable with the other instances' one.
-     */
+    /** Register this new panel to make its split pane synchronizeable with the other instances' one. */
     private void registerInstance()
     {
         final int len = members.length;

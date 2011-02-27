@@ -78,6 +78,9 @@ public class AbstractModeAdapter extends AbstractMode
         {
             final ModeActivation act = (ModeActivation) vc;
             act.activate();
+            vc.invalidate();
+            vc.validate();
+            vc.repaint();
         }
     }
 

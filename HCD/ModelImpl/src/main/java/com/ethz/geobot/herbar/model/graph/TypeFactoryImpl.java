@@ -2,29 +2,29 @@ package com.ethz.geobot.herbar.model.graph;
 
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.TypeFactory;
-import com.ethz.geobot.herbar.model.db.impl.MutableEcologyAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableEcologyImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableEcologySubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableEcologyTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableEcologyValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMedicineAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMedicineImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMedicineSubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMedicineTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMedicineValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMorphologyAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMorphologyImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMorphologySubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableMorphologyValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutablePictureImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutablePictureTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutablePictureThemeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutablePicturesImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableRootImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableTaxonImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableTaxonLevelImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableTaxonSynonymImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableTextImpl;
+import com.ethz.geobot.herbar.model.db.impl.EcologyAttributeImpl;
+import com.ethz.geobot.herbar.model.db.impl.EcologyImpl;
+import com.ethz.geobot.herbar.model.db.impl.EcologySubjectImpl;
+import com.ethz.geobot.herbar.model.db.impl.EcologyTextImpl;
+import com.ethz.geobot.herbar.model.db.impl.EcologyValueImpl;
+import com.ethz.geobot.herbar.model.db.impl.LevelImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineAttributeImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineSubjectImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologySubjectImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyValueImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineTextImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineValueImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyAttributeImpl;
+import com.ethz.geobot.herbar.model.db.impl.PictureImpl;
+import com.ethz.geobot.herbar.model.db.impl.PictureTextImpl;
+import com.ethz.geobot.herbar.model.db.impl.PictureThemeImpl;
+import com.ethz.geobot.herbar.model.db.impl.PicturesImpl;
+import com.ethz.geobot.herbar.model.db.impl.RootImpl;
+import com.ethz.geobot.herbar.model.db.impl.TaxonImpl;
+import com.ethz.geobot.herbar.model.db.impl.TaxonSynonymImpl;
+import com.ethz.geobot.herbar.model.db.impl.TextImpl;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,33 +48,33 @@ public class TypeFactoryImpl implements TypeFactory
     {
         try
         {
-            typeMapping.put( "ROOT", MutableRootImpl.class );
-            typeMapping.put( "TAXON", MutableTaxonImpl.class );
-            typeMapping.put( "TAXONLEVEL", MutableTaxonLevelImpl.class );
-            typeMapping.put( "TAXONSYNONYM", MutableTaxonSynonymImpl.class );
+            typeMapping.put( "ROOT", RootImpl.class );
+            typeMapping.put( "TAXON", TaxonImpl.class );
+            typeMapping.put( "TAXONLEVEL", LevelImpl.class );
+            typeMapping.put( "TAXONSYNONYM", TaxonSynonymImpl.class );
 
-            typeMapping.put( "MORPHOLOGY", MutableMorphologyImpl.class );
-            typeMapping.put( "MORSUBJECT", MutableMorphologySubjectImpl.class );
-            typeMapping.put( "MORATTRIBUTE", MutableMorphologyAttributeImpl.class );
-            typeMapping.put( "MORVALUE", MutableMorphologyValueImpl.class );
-            typeMapping.put( "MORTEXT", MutableTextImpl.class );
+            typeMapping.put( "MORPHOLOGY", MorphologyImpl.class );
+            typeMapping.put( "MORSUBJECT", MorphologySubjectImpl.class );
+            typeMapping.put( "MORATTRIBUTE", MorphologyAttributeImpl.class );
+            typeMapping.put( "MORVALUE", MorphologyValueImpl.class );
+            typeMapping.put( "MORTEXT", TextImpl.class );
 
-            typeMapping.put( "MEDICINE", MutableMedicineImpl.class );
-            typeMapping.put( "MEDSUBJECT", MutableMedicineSubjectImpl.class );
-            typeMapping.put( "MEDATTRIBUTE", MutableMedicineAttributeImpl.class );
-            typeMapping.put( "MEDVALUE", MutableMedicineValueImpl.class );
-            typeMapping.put( "MEDTEXT", MutableMedicineTextImpl.class );
+            typeMapping.put( "MEDICINE", MedicineImpl.class );
+            typeMapping.put( "MEDSUBJECT", MedicineSubjectImpl.class );
+            typeMapping.put( "MEDATTRIBUTE", MedicineAttributeImpl.class );
+            typeMapping.put( "MEDVALUE", MedicineValueImpl.class );
+            typeMapping.put( "MEDTEXT", MedicineTextImpl.class );
 
-            typeMapping.put( "ECOLOGY", MutableEcologyImpl.class );
-            typeMapping.put( "ECOSUBJECT", MutableEcologySubjectImpl.class );
-            typeMapping.put( "ECOATTRIBUTE", MutableEcologyAttributeImpl.class );
-            typeMapping.put( "ECOVALUE", MutableEcologyValueImpl.class );
-            typeMapping.put( "ECOTEXT", MutableEcologyTextImpl.class );
+            typeMapping.put( "ECOLOGY", EcologyImpl.class );
+            typeMapping.put( "ECOSUBJECT", EcologySubjectImpl.class );
+            typeMapping.put( "ECOATTRIBUTE", EcologyAttributeImpl.class );
+            typeMapping.put( "ECOVALUE", EcologyValueImpl.class );
+            typeMapping.put( "ECOTEXT", EcologyTextImpl.class );
 
-            typeMapping.put( "PICTURE", MutablePictureImpl.class );
-            typeMapping.put( "PICTURES", MutablePicturesImpl.class );
-            typeMapping.put( "PICTURETEXT", MutablePictureTextImpl.class );
-            typeMapping.put( "PICTURETHEME", MutablePictureThemeImpl.class );
+            typeMapping.put( "PICTURE", PictureImpl.class );
+            typeMapping.put( "PICTURES", PicturesImpl.class );
+            typeMapping.put( "PICTURETEXT", PictureTextImpl.class );
+            typeMapping.put( "PICTURETHEME", PictureThemeImpl.class );
         }
         catch ( Exception e )
         {

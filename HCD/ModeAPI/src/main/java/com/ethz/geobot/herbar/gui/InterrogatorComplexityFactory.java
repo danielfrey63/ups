@@ -4,12 +4,17 @@ import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import com.ethz.geobot.herbar.modeapi.state.StateCompositeModel;
 import com.ethz.geobot.herbar.modeapi.state.StateModel;
-import com.ethz.geobot.herbar.model.EcoSubject;
+import com.ethz.geobot.herbar.model.Ecology;
+import com.ethz.geobot.herbar.model.EcologySubject;
 import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MorSubject;
+import com.ethz.geobot.herbar.model.Medicine;
+import com.ethz.geobot.herbar.model.MedicineSubject;
+import com.ethz.geobot.herbar.model.Morphology;
+import com.ethz.geobot.herbar.model.MorphologySubject;
 import com.ethz.geobot.herbar.model.Taxon;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -17,6 +22,9 @@ import java.util.prefs.Preferences;
  */
 public class InterrogatorComplexityFactory
 {
+    /** This class logger. */
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger( InterrogatorComplexityFactory.class );
+
     public static Type getFilter( final HerbarModel model, final String name, final VirtualGraphTreeNodeFilter filter )
     {
         return new Type( model, name, filter );
@@ -42,17 +50,21 @@ public class InterrogatorComplexityFactory
             {
                 root = model.getRootTaxon().getAsGraphNode();
             }
-            else if ( type.isAssignableFrom( MorSubject.class ) )
+            else if ( type.isAssignableFrom( Morphology.class ) )
             {
-                root = model.getRootMorSubject().getAsGraphNode();
+                root = model.getMorphology().getAsGraphNode();
             }
-            else if ( type.isAssignableFrom( EcoSubject.class ) )
+            else if ( type.isAssignableFrom( Ecology.class ) )
             {
-                root = model.getRootEcoSubject().getAsGraphNode();
+                root = model.getEcology().getAsGraphNode();
             }
-            else if ( type.isAssignableFrom( MedSubject.class ) )
+            else if ( type.isAssignableFrom( Medicine.class ) )
             {
-                root = model.getRootMedSubject().getAsGraphNode();
+                root = model.getMedicine().getAsGraphNode();
+            }
+            else
+            {
+                LOG.error("cannot find root for " + type, new Exception("Type not found"));
             }
         }
 

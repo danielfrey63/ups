@@ -20,7 +20,7 @@ public class FilterDefinitionDetail implements Cloneable
 
     private Level[] levels;
 
-    private FilterModel model;
+    private final FilterModel model;
 
     FilterDefinitionDetail( final FilterModel model, final Taxon scope, final Level[] levels )
     {

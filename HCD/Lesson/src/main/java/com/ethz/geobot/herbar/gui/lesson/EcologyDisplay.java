@@ -12,7 +12,7 @@ import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
-import com.ethz.geobot.herbar.model.EcoText;
+import com.ethz.geobot.herbar.model.EcologyText;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 
@@ -26,12 +26,12 @@ public class EcologyDisplay extends AttributeTreePanel
 {
     EcologyDisplay( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel )
     {
-        super( herbarContext, stopper, taxStateModel, Strings.getString( "PROPERTY.ECOTEXT.TEXT" ) );
+        super( herbarContext, stopper, taxStateModel, Strings.getString( "PROPERTY.ECOLOGYTEXT.TEXT" ) );
     }
 
     public VirtualGraphTreeNodeFilter registerFilter()
     {
-        VirtualGraphTreeNodeFilter filter = new VirtualGraphTreeNodeFilter( EcoText.class,
+        VirtualGraphTreeNodeFilter filter = new VirtualGraphTreeNodeFilter( EcologyText.class,
                 VirtualGraphTreeNodeFilter.VISIBILITY_VISIBLE,
                 VirtualGraphTreeNodeFilter.SELF_FLAT,
                 VirtualGraphTreeNodeFilter.CONSTRAINT_FREE,

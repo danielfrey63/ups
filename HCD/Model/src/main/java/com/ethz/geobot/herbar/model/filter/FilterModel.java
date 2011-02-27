@@ -1,13 +1,13 @@
 package com.ethz.geobot.herbar.model.filter;
 
 import com.ethz.geobot.herbar.model.AbstractHerbarModel;
-import com.ethz.geobot.herbar.model.EcoSubject;
+import com.ethz.geobot.herbar.model.Ecology;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.LevelComparator;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MorSubject;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.Medicine;
+import com.ethz.geobot.herbar.model.Morphology;
+import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
@@ -70,19 +70,19 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return createFilterTaxon( dependentModel.getRootTaxon() );
     }
 
-    public MorSubject getRootMorSubject()
+    public Morphology getMorphology()
     {
-        return dependentModel.getRootMorSubject();
+        return dependentModel.getMorphology();
     }
 
-    public EcoSubject getRootEcoSubject()
+    public Ecology getEcology()
     {
-        return dependentModel.getRootEcoSubject();
+        return dependentModel.getEcology();
     }
 
-    public MedSubject getRootMedSubject()
+    public Medicine getMedicine()
     {
-        return dependentModel.getRootMedSubject();
+        return dependentModel.getMedicine();
     }
 
     public PictureTheme[] getPictureThemes()
@@ -293,14 +293,14 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     }
 
     /** @see HerbarModel#getValues(String) */
-    public MorValue[] getValues( final String name )
+    public MorphologyValue[] getValues( final String name )
     {
         throw new NoSuchMethodError( "getValue(String) not implemented yet" );
     }
 
-    /** @see HerbarModel#getTaxa(MorValue) */
-    public Taxon[] getTaxa( final MorValue mor )
+    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorphologyValue) */
+    public Taxon[] getTaxa( final MorphologyValue morphologyValue )
     {
-        throw new NoSuchMethodError( "getTaxon(MorValue) not implemented yet" );
+        throw new NoSuchMethodError( "getTaxon(MorphologyValue) not implemented yet" );
     }
 }

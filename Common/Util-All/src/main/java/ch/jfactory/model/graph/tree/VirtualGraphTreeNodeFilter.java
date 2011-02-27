@@ -8,34 +8,22 @@ import java.util.Comparator;
  */
 public class VirtualGraphTreeNodeFilter
 {
-    /**
-     * Makes a node visible.
-     */
+    /** Makes a node visible. */
     public static final boolean VISIBILITY_VISIBLE = true;
 
-    /**
-     * Hides a node.
-     */
+    /** Hides a node. */
     public static final boolean VISIBILITY_HIDDEN = false;
 
-    /**
-     * The next node is a parent of this node.
-     */
+    /** The next node is a parent of this node. */
     public static final int LINE_ANCESTOR = 1;
 
-    /**
-     * The next node is a child of this node.
-     */
+    /** The next node is a child of this node. */
     public static final int LINE_DESCENDANT = 2;
 
-    /**
-     * The next node is either a parent or a child of this node.
-     */
+    /** The next node is either a parent or a child of this node. */
     public static final int LINE_RELATED = 3;
 
-    /**
-     * Types of this node are displayed recursively. Subnodes of the same type will pass also.
-     */
+    /** Types of this node are displayed recursively. Sub nodes of the same type will pass also. */
     public static final boolean SELF_RECURSIVE = true;
 
     /**
@@ -44,50 +32,38 @@ public class VirtualGraphTreeNodeFilter
      */
     public static final boolean SELF_FLAT = false;
 
-    /**
-     * Makes node types taking into account prior filters. See {@link #bound} for further explanation.
-     */
+    /** Makes node types taking into account prior filters. See {@link #bound} for further explanation. */
     public static final boolean CONSTRAINT_BOUND = true;
 
-    /**
-     * Makes node types beeing added without taking other filters into account.
-     */
+    /** Makes node types being added without taking other filters into account. */
     public static final boolean CONSTRAINT_FREE = false;
 
     public static final Class CLASSES_ALL = Object.class;
 
     public static final Class ROLES_ALL = Object.class;
 
-    /**
-     * The vertices type to filter out
-     */
+    /** The vertices type to filter out */
     private Class type = CLASSES_ALL;
 
-    /**
-     * The edge role to filter out
-     */
+    /** The edge role to filter out */
     private Class role = ROLES_ALL;
 
     /**
-     * Is this vertice a child of its parent? A parent of its child would be LINE_DESCENDANT. Note: Taking the default,
-     * the filter has not to be indicated on the parent side, but on the childs side, as potentially more than one child
-     * may occur, but are not obliguet to be childs.
+     * Is this vertex a child of its parent? A parent of its child would be LINE_DESCENDANT. Note: Taking the default,
+     * the filter has not to be indicated on the parent side, but on the children side, as potentially more than one child
+     * may occur, but have not to be children.
      */
     private int direction = LINE_ANCESTOR;
 
-    /**
-     * Should the vertice be displayed
-     */
+    /** Should the vertex be displayed */
     private boolean visible;
 
-    /**
-     * Should recursive links in vertices to the same type be resolved?
-     */
+    /** Should recursive links in vertices to the same type be resolved? */
     private boolean recursive;
 
     /**
      * This attribute specifies the behaviour of this filter when used in a filter array. It allows to filter objects
-     * not only by type, but -- if set to <code>true</code> (the default) -- consideres the toString() of a previously
+     * not only by type, but -- if set to <code>true</code> (the default) -- considers the toString() of a previously
      * found object and only delivers children matching this string.<p>
      */
     private boolean bound = true;
@@ -98,24 +74,16 @@ public class VirtualGraphTreeNodeFilter
      */
     private final boolean flat = false;
 
-    /**
-     * Parent filter. May be null if root filter
-     */
+    /** Parent filter. May be null if root filter */
     private VirtualGraphTreeNodeFilter parent;
 
-    /**
-     * Subsequent filters that are used as children for this filter
-     */
+    /** Subsequent filters that are used as children for this filter */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
 
-    /**
-     * This comparator is used to sort the children of the associated GraphNode.
-     */
+    /** This comparator is used to sort the children of the associated GraphNode. */
     private Comparator comparator;
 
-    /**
-     * Individual filter for nodes which might be customized by delivering a AbsGraphTreeNodeFilter.
-     */
+    /** Individual filter for nodes which might be customized by delivering a AbsGraphTreeNodeFilter. */
     private AbsGraphTreeNodeFilter nodeFilter;
 
     public VirtualGraphTreeNodeFilter( final Class type, final boolean displayed,
@@ -199,7 +167,7 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Returns the recusive.
+     * Returns the recursive.
      *
      * @return boolean
      */
@@ -272,13 +240,10 @@ public class VirtualGraphTreeNodeFilter
         return flat;
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
-        return type + " [down=" + direction + ",displayed=" + visible +
-                ",recursive=" + recursive + ",bound=" + bound + "]";
+        return type + " [down=" + direction + ",displayed=" + visible + ",recursive=" + recursive + ",bound=" + bound + "]";
     }
 
     /**
@@ -302,7 +267,7 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Fectory method to generate a simple nested linear filter. I.e. to have i.e. the following types displayed
+     * Factory method to generate a simple nested linear filter. I.e. to have i.e. the following types displayed
      * (top-down):
      * <pre>
      * -+ File
@@ -361,35 +326,6 @@ public class VirtualGraphTreeNodeFilter
     }
 
 }
-
-//    public static void main(String[] args) {
-//        ch.jfactory.logging.LogUtils.init();
-//
-//        javax.swing.JFrame f = new javax.swing.JFrame();
-//        java.awt.Container contentPane = f.getContentPane();
-//        contentPane.setLayout(new java.awt.BorderLayout());
-//        f.setSize(400, 600);
-//        f.setVisible(true);
-//        System.out.println(System.currentTimeMillis() + " Started ...");
-//        com.ethz.geobot.herbar.model.HerbarModel model = com.ethz.geobot.herbar.Application.getInstance().getModel();
-//        ch.jfactory.model.graph.GraphNode root = model.getTaxon("Ranunculaceae").getAsGraphNode();
-//        System.out.println(System.currentTimeMillis() + " Model loaded ...");
-//        VirtualGraphTreeNodeFilter filter = getFilter(
-//                new Class[] { com.ethz.geobot.herbar.model.Taxon.class, com.ethz.geobot.herbar.model.MorText.class,
-//                    com.ethz.geobot.herbar.model.MorValue.class, com.ethz.geobot.herbar.model.MorAttribute.class,
-//                    com.ethz.geobot.herbar.model.MorSubject.class, com.ethz.geobot.herbar.model.MorAttribute.class,
-//                    com.ethz.geobot.herbar.model.MorValue.class, com.ethz.geobot.herbar.model.MorText.class },
-//                new int[][] { {1, 0, 0, 2}, {1, 0, 0, 2}, {1, 0, 0, 1}, {1, 0, 0, 1},
-//                              {1, 0, 1, 1}, {1, 0, 0, 2}, {1, 0, 0, 2}, {1, 0, 0, 2} });
-//        System.out.println(System.currentTimeMillis() + " Filter created ...");
-//        javax.swing.JTree tree = com.ethz.geobot.herbar.gui.VirtualGraphTreeFactory.getVirtualTree(root, filter);
-//        tree.setShowsRootHandles(true);
-//        tree.setRootVisible(true);
-//        System.out.println(System.currentTimeMillis() + " Tree made ...");
-//        contentPane.add(new javax.swing.JScrollPane(tree), java.awt.BorderLayout.CENTER);
-//        f.validate();
-//        f.repaint();
-//    }
 
 
 

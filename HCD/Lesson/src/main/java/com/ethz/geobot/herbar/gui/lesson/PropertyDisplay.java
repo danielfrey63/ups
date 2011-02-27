@@ -63,12 +63,12 @@ public class PropertyDisplay extends JTabbedPane
         ecoDisplay = new EcologyDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
         medDisplay = new MedicineDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
         this.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
-        this.addTab( Strings.getString( "PROPERTY.MORTEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.MORTEXT.ICON" ) ), morDisplay );
-        this.addTab( Strings.getString( "PROPERTY.ECOTEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.ECOTEXT.ICON" ) ), ecoDisplay );
-        this.addTab( Strings.getString( "PROPERTY.MEDTEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.MEDTEXT.ICON" ) ), medDisplay );
+        this.addTab( Strings.getString( "PROPERTY.MORPHOLOGYTEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.MORPHOLOGYTEXT.ICON" ) ), morDisplay );
+        this.addTab( Strings.getString( "PROPERTY.ECOLOGYTEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.ECOLOGYTEXT.ICON" ) ), ecoDisplay );
+        this.addTab( Strings.getString( "PROPERTY.MEDICINETEXT.TEXT" ),
+                ImageLocator.getIcon( Strings.getString( "PROPERTY.MEDICINETEXT.ICON" ) ), medDisplay );
     }
 
     public void setTaxFocus( final Taxon focus )

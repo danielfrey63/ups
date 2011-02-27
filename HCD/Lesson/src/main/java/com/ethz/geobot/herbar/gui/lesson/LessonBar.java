@@ -127,8 +127,10 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         final Taxon focusTaxon = taxStateModel.getFocus();
         bread.setTaxFocus( focusTaxon );
         askingPanel.setTaxFocus( focusTaxon );
+        listLabel.setText( taxStateModel.getModel().toString() );
         scopeLabel.setText( taxStateModel.getScope().getName() );
         levelLabel.setText( taxStateModel.getLevel().getName() );
+        focusLabel.setText( taxStateModel.getFocus().getName() );
         taxonControl.setCursor( taxStateModel.getTaxList() );
         setOrder();
 
@@ -261,14 +263,14 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         Arrays.sort( copy, new ToStringComparator<Taxon>() );
         if ( copy.length > POP_UP_THRESHOLD )
         {
-            final ListDialog dialog = new ListDialog( parent, "DIALOG.FOCUS", copy );
+            final ListDialog<Taxon> dialog = new ListDialog<Taxon>( parent, "DIALOG.FOCUS", copy );
             dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
             dialog.setSize( 300, 300 );
             dialog.setLocationRelativeTo( getTopLevelAncestor() );
             dialog.setVisible( true );
             if ( dialog.isAccepted() )
             {
-                taxStateModel.setFocus( (Taxon) dialog.getSelectedData()[0] );
+                taxStateModel.setFocus( dialog.getSelectedData()[0] );
             }
         }
         else
@@ -303,7 +305,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         {
             listPopUp = new ListPopUp();
         }
-        final Object[] models = herbarContext.getModels().toArray();
+        final HerbarModel[] models = herbarContext.getModels().toArray( new HerbarModel[herbarContext.getModels().size()] );
         Arrays.sort( models, new ToStringComparator<Object>() );
         listPopUp.setObjects( models );
         return listPopUp;
@@ -380,7 +382,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         statusBar.removeStatusComponent( listLabel );
     }
 
-    public static class FocusPopUp extends ObjectPopup
+    public static class FocusPopUp extends ObjectPopup<Taxon>
     {
         final TaxStateModel taxStateModel;
 
@@ -395,13 +397,13 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             showPopUp( component, taxStateModel.getFocus() );
         }
 
-        public void itemSelected( final Object obj )
+        public void itemSelected( final Taxon obj )
         {
-            taxStateModel.setFocus( (Taxon) obj );
+            taxStateModel.setFocus( obj );
         }
     }
 
-    public class LevelPopUp extends ObjectPopup
+    public class LevelPopUp extends ObjectPopup<Level>
     {
         public LevelPopUp()
         {
@@ -413,17 +415,17 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             showPopUp( component, taxStateModel.getScope().getSubLevels(), taxStateModel.getLevel() );
         }
 
-        public void itemSelected( final Object obj )
+        public void itemSelected( final Level obj )
         {
-            taxStateModel.setLevel( (Level) obj );
+            taxStateModel.setLevel( obj );
         }
     }
 
-    public class ListPopUp extends ObjectPopup
+    public class ListPopUp extends ObjectPopup<HerbarModel>
     {
         public ListPopUp()
         {
-            super( herbarContext.getModels().toArray() );
+            super( herbarContext.getModels().toArray( new HerbarModel[herbarContext.getModels().size()] ) );
         }
 
         public void showPopUp( final Component component )
@@ -431,10 +433,10 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
             showPopUp( component, taxStateModel.getModel() );
         }
 
-        public void itemSelected( final Object obj )
+        public void itemSelected( final HerbarModel obj )
         {
-            herbarContext.setCurrentModel( (HerbarModel) obj );
-            taxStateModel.setModel( (HerbarModel) obj );
+            herbarContext.setCurrentModel( obj );
+            taxStateModel.setModel( obj );
         }
     }
 }

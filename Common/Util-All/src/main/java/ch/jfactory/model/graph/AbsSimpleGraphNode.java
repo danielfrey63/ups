@@ -29,10 +29,10 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     public AbsSimpleGraphNode()
     {
         children = new GraphEdgeList();
-        children.setReferer( this );
+        children.setReferrer( this );
         children.setListType( GraphEdgeList.LIST_CHILD );
         parents = new GraphEdgeList();
-        parents.setReferer( this );
+        parents.setReferrer( this );
         parents.setListType( GraphEdgeList.LIST_PARENT );
     }
 
@@ -54,16 +54,6 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     public GraphEdgeList getParentEdges()
     {
         return parents;
-    }
-
-    /**
-     * Sets the children {@link GraphEdgeList} directly. Used by the model to construct the objects.
-     *
-     * @param children the new children to set
-     */
-    public void setChildrenEdges( final GraphEdgeList children )
-    {
-        this.children = children;
     }
 
     /** @see GraphNode#isType(Class) */
@@ -117,22 +107,12 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getChildren( final Class type )
     {
-        return getChildren( type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#getChildren(Class, Class) */
-    public GraphNodeList getChildren( final Class type, final Class role )
-    {
         final GraphNodeList result = new GraphNodeList();
         final GraphNodeList list = AbsGraphModel.getFiltered( getChildren(), type );
         for ( int i = 0; i < list.size(); i++ )
         {
             final GraphNode node = list.get( i );
-            final Role roleToTest = getChildrenEdges().getRole( node );
-            if ( role.isAssignableFrom( roleToTest.getClass() ) )
-            {
-                result.add( node );
-            }
+            result.add( node );
         }
         return result;
     }
@@ -140,32 +120,14 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /** @see GraphNode#getAllChildren(Class) */
     public GraphNodeList getAllChildren( final Class type )
     {
-        return getAllChildren( type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#getAllChildren(Class) */
-    public GraphNodeList getAllChildren( final Class type, final Class role )
-    {
         final GraphNodeList result = new GraphNodeList();
-        result.addAll( getChildren( type, role ) );
+        result.addAll( getChildren( type ) );
         final GraphNodeList children = getChildren();
         for ( int i = 0; i < children.size(); i++ )
         {
-            result.addAll( children.get( i ).getAllChildren( type, role ) );
+            result.addAll( children.get( i ).getAllChildren( type ) );
         }
         return result;
-    }
-
-    /** @see GraphNode#getChildRole(GraphNode) */
-    public Role getChildRole( final GraphNode node )
-    {
-        return getChildrenEdges().getRole( node );
-    }
-
-    /** @see GraphEdgeList#setRole(GraphNode, Role) */
-    public void setChildRole( final GraphNode node, final Role role )
-    {
-        getChildrenEdges().setRole( node, role );
     }
 
     /**
@@ -178,37 +140,15 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         setChildren( children, TYPES_ALL );
     }
 
-    /** @see GraphNode#setChildren(GraphNodeList, Class) */
-    public void setChildren( final GraphNodeList children, final Class type )
-    {
-        setChildren( children, type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#deleteChildren(Class) */
-    public void deleteChildren( final Class type )
-    {
-        deleteChildren( type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#getParents(Class) */
+    /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getParents( final Class type )
-    {
-        return getParents( type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#getChildren(Class, Class) */
-    public GraphNodeList getParents( final Class type, final Class role )
     {
         final GraphNodeList result = new GraphNodeList();
         final GraphNodeList list = AbsGraphModel.getFiltered( getParents(), type );
         for ( int i = 0; i < list.size(); i++ )
         {
             final GraphNode node = list.get( i );
-            final Role roleToTest = getParentEdges().getRole( node );
-            if ( role.isAssignableFrom( roleToTest.getClass() ) )
-            {
-                result.add( node );
-            }
+            result.add( node );
         }
         return result;
     }
@@ -216,49 +156,19 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
     /** @see GraphNode#getAllParents(Class) */
     public GraphNodeList getAllParents( final Class type )
     {
-        return getAllParents( type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#getAllParents(Class, Class) */
-    public GraphNodeList getAllParents( final Class type, final Class role )
-    {
         final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList parents = getParents( type, role );
+        final GraphNodeList parents = getParents( type );
         for ( int i = 0; i < parents.size(); i++ )
         {
-            result.addAll( parents.get( i ).getAllParents( type, role ) );
+            result.addAll( parents.get( i ).getAllParents( type ) );
         }
         return result;
-    }
-
-    /** @see GraphNode#getParentRole(GraphNode) */
-    public Role getParentRole( final GraphNode node )
-    {
-        return getParentEdges().getRole( node );
-    }
-
-    /** @see GraphNode#setParentRole(GraphNode, Role) */
-    public void setParentRole( final GraphNode node, final Role role )
-    {
-        getParentEdges().setRole( node, role );
     }
 
     /** @see GraphNode#setParents(GraphNodeList) */
     public void setParents( final GraphNodeList parents )
     {
         setParents( parents, TYPES_ALL );
-    }
-
-    /** @see GraphNode#setParents(GraphNodeList, Class) */
-    public void setParents( final GraphNodeList parents, final Class type )
-    {
-        setParents( parents, type, Role.CLASSES_ALL );
-    }
-
-    /** @see GraphNode#deleteParents(Class) */
-    public void deleteParents( final Class type )
-    {
-        deleteParents( type, Role.CLASSES_ALL );
     }
 
     /** @see Object#toString() */

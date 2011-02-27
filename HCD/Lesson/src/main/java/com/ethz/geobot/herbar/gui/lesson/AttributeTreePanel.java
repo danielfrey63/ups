@@ -20,7 +20,6 @@ import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import com.ethz.geobot.herbar.gui.VirtualGraphTreeFactory;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.MutableTaxon;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -179,7 +178,7 @@ public abstract class AttributeTreePanel extends JPanel
         for ( final TreePath path : paths )
         {
             final GraphTreeNode graphTreeNode = (GraphTreeNode) path.getLastPathComponent();
-            final GraphNodeList parents = graphTreeNode.getDependent().getParents( MutableTaxon.class );
+            final GraphNodeList parents = graphTreeNode.getDependent().getParents( Taxon.class );
             if ( intersection == null )
             {
                 intersection = parents;

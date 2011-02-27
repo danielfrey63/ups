@@ -154,6 +154,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         };
         final JButton button = ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
         button.setBorder( BorderFactory.createEmptyBorder() );
+        button.setName( "next" );
         return button;
     }
 

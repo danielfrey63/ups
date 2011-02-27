@@ -89,24 +89,24 @@ public class Strings
 
     public static char getChar( final char key )
     {
-        return getRessourceChar( generalBundle, "" + key );
+        return getResourceChar( generalBundle, "" + key );
     }
 
     public static char getChar( final String key )
     {
-        return getRessourceChar( generalBundle, key );
+        return getResourceChar( generalBundle, key );
     }
 
     public static char getChar( final Object obj, final char key )
     {
         final ResourceBundle res = getBundleForObject( obj );
-        return getRessourceChar( res, "" + key );
+        return getResourceChar( res, "" + key );
     }
 
     public static char getChar( final Object obj, final String key )
     {
         final ResourceBundle res = getBundleForObject( obj );
-        return getRessourceChar( res, key );
+        return getResourceChar( res, key );
     }
 
     /**
@@ -476,7 +476,7 @@ public class Strings
      * @param key the char-key
      * @return the i18n-char
      */
-    private static char getRessourceChar( final ResourceBundle res, final String key )
+    private static char getResourceChar( final ResourceBundle res, final String key )
     {
         try
         {
@@ -501,7 +501,7 @@ public class Strings
      */
     private static boolean logMissing( final String key )
     {
-        LOGGER.error( "Could not find resource string for " + key );
+        LOGGER.error( "Could not find resource string for " + key, new Exception("Resource not found") );
         if ( getLogWriterFile() != null )
         {
             try

@@ -3,17 +3,17 @@ package com.ethz.geobot.herbar.model.graph;
 import ch.jfactory.model.graph.AbsGraphModel;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
-import com.ethz.geobot.herbar.model.EcoSubject;
+import com.ethz.geobot.herbar.model.Ecology;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MorSubject;
-import com.ethz.geobot.herbar.model.MorText;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.Medicine;
+import com.ethz.geobot.herbar.model.MorphologyText;
+import com.ethz.geobot.herbar.model.MorphologyValue;
+import com.ethz.geobot.herbar.model.Morphology;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.db.impl.MutablePictureThemeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MutableTaxonLevelImpl;
+import com.ethz.geobot.herbar.model.db.impl.LevelImpl;
+import com.ethz.geobot.herbar.model.db.impl.PictureThemeImpl;
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,22 +25,16 @@ import java.util.List;
  */
 public class GraphHerbarModelImpl implements HerbarModel
 {
-    private boolean readOnly;
-
     private String name;
 
-    /**
-     * @see HerbarModel#getRootLevel()
-     */
+    /** @see HerbarModel#getRootLevel() */
     public Level getRootLevel()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
         return (Level) root.getChildren( Level.class ).get( 0 );
     }
 
-    /**
-     * @see HerbarModel#getLastLevel()
-     */
+    /** @see HerbarModel#getLastLevel() */
     public Level getLastLevel()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
@@ -49,49 +43,41 @@ public class GraphHerbarModelImpl implements HerbarModel
         return levels[levels.length - 1];
     }
 
-    /**
-     * @see HerbarModel#getRootTaxon()
-     */
+    /** @see HerbarModel#getRootTaxon() */
     public Taxon getRootTaxon()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
         return (Taxon) root.getChildren( Taxon.class ).get( 0 );
     }
 
-    /**
-     * @see HerbarModel#getRootMorSubject()
-     */
-    public MorSubject getRootMorSubject()
+    /** @see HerbarModel#getMorphology() */
+    public Morphology getMorphology()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
-        return (MorSubject) root.getChildren( MorSubject.class ).get( 0 );
+        return (Morphology) root.getChildren( Morphology.class ).get( 0 );
     }
 
-    public EcoSubject getRootEcoSubject()
+    public Ecology getEcology()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
-        return (EcoSubject) root.getChildren( EcoSubject.class ).get( 0 );
+        return (Ecology) root.getChildren( Ecology.class ).get( 0 );
     }
 
-    public MedSubject getRootMedSubject()
+    public Medicine getMedicine()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
-        return (MedSubject) root.getChildren( MedSubject.class ).get( 0 );
+        return (Medicine) root.getChildren( Medicine.class ).get( 0 );
     }
 
-    /**
-     * @see HerbarModel#getPictureThemes()
-     */
+    /** @see HerbarModel#getPictureThemes() */
     public PictureTheme[] getPictureThemes()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
         final GraphNodeList list = root.getChildren( PictureTheme.class );
-        return (PictureTheme[]) list.getAll( new MutablePictureThemeImpl[0] );
+        return (PictureTheme[]) list.getAll( new PictureThemeImpl[0] );
     }
 
-    /**
-     * @see HerbarModel#getPictureTheme(String)
-     */
+    /** @see HerbarModel#getPictureTheme(String) */
     public PictureTheme getPictureTheme( final String name )
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
@@ -107,18 +93,16 @@ public class GraphHerbarModelImpl implements HerbarModel
         return null;
     }
 
-    /**
-     * @see HerbarModel#getValues(String)
-     */
-    public MorValue[] getValues( final String name )
+    /** @see HerbarModel#getValues(String) */
+    public MorphologyValue[] getValues( final String name )
     {
         return getValues( AbsGraphModel.getModel().getRoot(), name );
     }
 
-    private MorValue[] getValues( final GraphNode sub, final String name )
+    private MorphologyValue[] getValues( final GraphNode sub, final String name )
     {
-        final List result = new ArrayList();
-        final GraphNodeList children = sub.getAllChildren( MorValue.class );
+        final List<GraphNode> result = new ArrayList<GraphNode>();
+        final GraphNodeList children = sub.getAllChildren( MorphologyValue.class );
         for ( int i = 0; i < children.size(); i++ )
         {
             final GraphNode child = children.get( i );
@@ -127,29 +111,25 @@ public class GraphHerbarModelImpl implements HerbarModel
                 result.add( child );
             }
         }
-        return (MorValue[]) result.toArray( new MorValue[0] );
+        return result.toArray( new MorphologyValue[0] );
     }
 
-    /**
-     * @see HerbarModel#getTaxa(MorValue)
-     */
-    public Taxon[] getTaxa( final MorValue mor )
+    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorphologyValue) */
+    public Taxon[] getTaxa( final MorphologyValue morphologyValue )
     {
-        final List taxa = new ArrayList();
-        final GraphNode morNode = (GraphNode) mor;
-        final GraphNodeList texts = morNode.getChildren( MorText.class );
+        final List<GraphNode> taxa = new ArrayList<GraphNode>();
+        final GraphNode morNode = (GraphNode) morphologyValue;
+        final GraphNodeList texts = morNode.getChildren( MorphologyText.class );
         for ( int i = 0; i < texts.size(); i++ )
         {
             final GraphNode text = texts.get( i );
             final GraphNodeList values = text.getParents( Taxon.class );
             taxa.addAll( Arrays.asList( values.getAll() ) );
         }
-        return (Taxon[]) taxa.toArray( new Taxon[0] );
+        return taxa.toArray( new Taxon[0] );
     }
 
-    /**
-     * @see HerbarModel#getTaxon(String)
-     */
+    /** @see HerbarModel#getTaxon(String) */
     public Taxon getTaxon( final String name )
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
@@ -172,9 +152,7 @@ public class GraphHerbarModelImpl implements HerbarModel
         return taxon;
     }
 
-    /**
-     * @see HerbarModel#getLevel(String)
-     */
+    /** @see HerbarModel#getLevel(String) */
     public Level getLevel( final String name )
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
@@ -190,9 +168,7 @@ public class GraphHerbarModelImpl implements HerbarModel
         return null;
     }
 
-    /**
-     * @see HerbarModel#getLevels()
-     */
+    /** @see HerbarModel#getLevels() */
     public Level[] getLevels()
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
@@ -204,12 +180,10 @@ public class GraphHerbarModelImpl implements HerbarModel
             ret.add( node );
             list = node.getChildren( Level.class );
         }
-        return (Level[]) ret.getAll( new MutableTaxonLevelImpl[0] );
+        return (Level[]) ret.getAll( new LevelImpl[0] );
     }
 
-    /**
-     * @see HerbarModel#getName()
-     */
+    /** @see HerbarModel#getName() */
     public String getName()
     {
         return "GraphHerbarModel";
@@ -220,17 +194,13 @@ public class GraphHerbarModelImpl implements HerbarModel
         this.name = name;
     }
 
-    /**
-     * @see HerbarModel #addModelChangeListener(ModelChangeListener)
-     */
+    /** @see HerbarModel #addModelChangeListener(ModelChangeListener) */
     public void addModelChangeListener( final ModelChangeListener listener )
     {
         throw new NoSuchMethodError( "ModelChangeListener not supported yet." );
     }
 
-    /**
-     * @see HerbarModel #removeModelChangeListener(ModelChangeListener)
-     */
+    /** @see HerbarModel #removeModelChangeListener(ModelChangeListener) */
     public void removeModelChangeListener( final ModelChangeListener listener )
     {
         throw new NoSuchMethodError( "ModelChangeListener not supported yet." );

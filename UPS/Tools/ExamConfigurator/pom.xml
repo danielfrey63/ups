@@ -164,9 +164,9 @@
             <artifactId>gui-commands</artifactId>
         </dependency>
         <dependency>
-            <groupId>uispec4j</groupId>
+            <groupId>org.uispec4j</groupId>
             <artifactId>uispec4j</artifactId>
-            <scope>test</scope>
+            <classifier>jdk16</classifier>
         </dependency>
         <dependency>
             <groupId>xpp3</groupId>

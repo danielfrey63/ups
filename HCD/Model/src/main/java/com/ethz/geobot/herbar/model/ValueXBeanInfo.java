@@ -27,11 +27,11 @@ public class ValueXBeanInfo implements JXPathBeanInfo
     {
         try
         {
-            PropertyDescriptor des = new PropertyDescriptor( "id", MorValue.class, "getId", null );
+            PropertyDescriptor des = new PropertyDescriptor( "id", MorphologyValue.class, "getId", null );
             descriptor.put( "id", des );
-            des = new PropertyDescriptor( "name", MorValue.class, "getName", null );
+            des = new PropertyDescriptor( "name", MorphologyValue.class, "getName", null );
             descriptor.put( "name", des );
-            des = new PropertyDescriptor( "text", MorValue.class, "getUserObject", null );
+            des = new PropertyDescriptor( "text", MorphologyValue.class, "getUserObject", null );
             descriptor.put( "text", des );
         }
         catch ( IntrospectionException ex )

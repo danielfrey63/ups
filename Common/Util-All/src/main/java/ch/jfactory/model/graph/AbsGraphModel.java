@@ -14,9 +14,7 @@ public abstract class AbsGraphModel implements GraphModel
 
     protected static final String MODEL = "xmatrix.input.model";
 
-    protected static final String TYPE_FACTORY = "xmatrix.input.model.typefactory";
-
-    protected static final String ROLE_FACTORY = "xmatrix.input.model.rolefactory";
+    protected static final String TYPE_FACTORY = "xmatrix.input.model.factory.type";
 
     protected static final String URL = "xmatrix.input.db";
 
@@ -26,11 +24,9 @@ public abstract class AbsGraphModel implements GraphModel
 
     protected static final String DRIVER = "xmatrix.input.driver";
 
-    protected static String mod = System.getProperty( MODEL );
+    protected static String MODEL_CLASS = System.getProperty( MODEL );
 
-    protected static String typeFact = System.getProperty( TYPE_FACTORY );
-
-    protected static String roleFact = System.getProperty( ROLE_FACTORY );
+    protected static String TYPE_FACTORY_CLASS = System.getProperty( TYPE_FACTORY );
 
     protected static String url = System.getProperty( URL );
 
@@ -40,17 +36,15 @@ public abstract class AbsGraphModel implements GraphModel
 
     protected static String driver = System.getProperty( DRIVER );
 
-    private static final String[] CHECK = {url, user, password, driver, mod};
+    private static final String[] CHECK = {url, user, password, driver, MODEL_CLASS};
 
     private static final String[] CONST = {URL, USER, PASSWORD, DRIVER, MODEL};
 
-    private static final ArrayList listeners = new ArrayList();
+    private static final ArrayList<DirtyListener> listeners = new ArrayList<DirtyListener>();
 
     private static GraphModel model = null;
 
     private static TypeFactory typeFactory = null;
-
-    private static RoleFactory roleFactory = null;
 
     private static boolean dirty;
 
@@ -67,20 +61,24 @@ public abstract class AbsGraphModel implements GraphModel
         }
     }
 
-    /** Returns an instance of the configured subclass. */
+    /**
+     * Returns an instance of the configured subclass.
+     *
+     * @return the graph model
+     */
     public static GraphModel getModel()
     {
         if ( model == null )
         {
-            LOGGER.trace( "init model by classname " + mod );
+            LOGGER.trace( "init model by class name " + MODEL_CLASS );
             try
             {
-                final Class clazz = Class.forName( mod );
+                final Class clazz = Class.forName( MODEL_CLASS );
                 model = (GraphModel) clazz.newInstance();
             }
             catch ( Exception ex )
             {
-                final String message = "Could not initiate model: " + mod;
+                final String message = "Could not initiate model: " + MODEL_CLASS;
                 LOGGER.error( message, ex );
                 throw new IllegalStateException( message );
             }
@@ -92,15 +90,15 @@ public abstract class AbsGraphModel implements GraphModel
     {
         if ( typeFactory == null )
         {
-            LOGGER.trace( "init type factory by classname " + typeFact );
+            LOGGER.trace( "init type factory by class name " + TYPE_FACTORY_CLASS );
             try
             {
-                final Class clazz = Class.forName( typeFact );
+                final Class clazz = Class.forName( TYPE_FACTORY_CLASS );
                 typeFactory = (TypeFactory) clazz.newInstance();
             }
             catch ( Exception ex )
             {
-                final String message = "Could not initiate type factory: " + typeFact;
+                final String message = "Could not initiate type factory: " + TYPE_FACTORY_CLASS;
                 LOGGER.error( message, ex );
                 throw new IllegalStateException( message );
             }
@@ -108,32 +106,8 @@ public abstract class AbsGraphModel implements GraphModel
         return typeFactory;
     }
 
-    public static RoleFactory getRoleFactory()
-    {
-        if ( roleFactory == null )
-        {
-            LOGGER.debug( "Init type factory by classname " + roleFact );
-            try
-            {
-                final Class clazz = Class.forName( roleFact );
-                roleFactory = (RoleFactory) clazz.newInstance();
-            }
-            catch ( Exception ex )
-            {
-                final String message = "Could not initiate role factory: " + roleFact;
-                LOGGER.error( message, ex );
-                throw new IllegalStateException( message );
-            }
-        }
-        return roleFactory;
-    }
-
     public static GraphNodeList getFiltered( final GraphNodeList list, final Class type )
     {
-        if ( type.equals( "*" ) )
-        {
-            return list;
-        }
         final GraphNodeList result = new GraphNodeList();
         for ( int i = 0; i < list.size(); i++ )
         {

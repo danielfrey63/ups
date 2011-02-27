@@ -115,8 +115,9 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
         <dependency>
-            <groupId>uispec4j</groupId>
+            <groupId>org.uispec4j</groupId>
             <artifactId>uispec4j</artifactId>
+            <classifier>jdk16</classifier>
         </dependency>
     </dependencies>
     <scm>

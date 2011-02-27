@@ -15,6 +15,9 @@ public interface GraphEdge
 
     /**
      * Returns whether this is of the given role.
+     *
+     * @param role the class the check for
+     * @return whether role matches
      */
     public boolean isRole( Class role );
 
@@ -33,13 +36,6 @@ public interface GraphEdge
     public GraphNode getParent();
 
     /**
-     * Returns the role.
-     *
-     * @return Role
-     */
-    public Role getRole();
-
-    /**
      * Returns the text.
      *
      * @return String
@@ -56,7 +52,7 @@ public interface GraphEdge
     /**
      * Sets the id.
      *
-     * @param int the new id to set
+     * @param id the new id to set
      */
     public void setId( int id );
 
@@ -75,23 +71,16 @@ public interface GraphEdge
     public void setParent( GraphNode parent );
 
     /**
-     * Sets the role.
-     *
-     * @param role The role to set
-     */
-    public void setRole( Role role );
-
-    /**
      * Sets the text.
      *
-     * @param text The text to set
+     * @param recursive The text to set
      */
     public void setRecursive( GraphEdge recursive );
 
     /**
      * Sets the rank.
      *
-     * @param rank
+     * @param rank the rank
      */
     public void setRank( int rank );
 }

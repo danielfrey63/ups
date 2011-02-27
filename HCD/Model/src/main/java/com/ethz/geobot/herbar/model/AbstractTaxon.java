@@ -6,7 +6,6 @@
 package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.lang.ArrayUtils;
-import com.ethz.geobot.herbar.model.relevance.AbsRelevance;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -97,19 +96,19 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     }
 
     /** @see Taxon#getMorAttributes() */
-    public MorAttribute[] getMorAttributes()
+    public MorphologyAttribute[] getMorAttributes()
     {
-        final MorValue[] values = getMorValues();
-        final Set<MorAttribute> hs = new HashSet<MorAttribute>();
-        for ( final MorValue val : values )
+        final MorphologyValue[] values = getMorValues();
+        final Set<MorphologyAttribute> hs = new HashSet<MorphologyAttribute>();
+        for ( final MorphologyValue val : values )
         {
             hs.add( val.getParentAttribute() );
         }
-        return hs.toArray( new MorAttribute[hs.size()] );
+        return hs.toArray( new MorphologyAttribute[hs.size()] );
     }
 
     /** @see Taxon#getMorValue(int) */
-    public MorValue getMorValue( final int index )
+    public MorphologyValue getMorValue( final int index )
     {
         LOG.debug( this.toDebugString() + " getMorValue(" + index + ") " + this.getMorValues()[index] );
         return getMorValues()[index];
@@ -140,12 +139,6 @@ public abstract class AbstractTaxon implements Taxon, Comparable
     public Level[] getSubLevels()
     {
         return getSubLevels( this ).toArray( new Level[getSubLevels( this ).size()] );
-    }
-
-    /** @see Taxon#getRelevance(MorValue) */
-    public AbsRelevance getRelevance( final MorValue value )
-    {
-        return AbsRelevance.getRelevance( getSiblings(), value );
     }
 
     /** @see Taxon#isIn(Taxon[]) */

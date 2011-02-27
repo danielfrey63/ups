@@ -4,19 +4,19 @@ import ch.jfactory.component.tree.GraphTreeNode;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
-import com.ethz.geobot.herbar.model.EcoAttribute;
-import com.ethz.geobot.herbar.model.EcoSubject;
-import com.ethz.geobot.herbar.model.EcoText;
-import com.ethz.geobot.herbar.model.EcoValue;
+import com.ethz.geobot.herbar.model.EcologyAttribute;
+import com.ethz.geobot.herbar.model.EcologySubject;
+import com.ethz.geobot.herbar.model.EcologyText;
+import com.ethz.geobot.herbar.model.EcologyValue;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.MedAttribute;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MedText;
-import com.ethz.geobot.herbar.model.MedValue;
-import com.ethz.geobot.herbar.model.MorAttribute;
-import com.ethz.geobot.herbar.model.MorSubject;
-import com.ethz.geobot.herbar.model.MorText;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.MedicineSubject;
+import com.ethz.geobot.herbar.model.MedicineText;
+import com.ethz.geobot.herbar.model.MedicineValue;
+import com.ethz.geobot.herbar.model.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.MorphologySubject;
+import com.ethz.geobot.herbar.model.MorphologyText;
+import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.Component;
 import java.util.HashMap;
@@ -34,20 +34,20 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
 
     static
     {
-        iconMapping.put( MorSubject.class, "MORSUBJECT" );
-        iconMapping.put( MorAttribute.class, "MORATTRIBUTE" );
-        iconMapping.put( MorValue.class, "MORVALUE" );
-        iconMapping.put( MorText.class, "MORTEXT" );
+        iconMapping.put( MorphologySubject.class, "MORSUBJECT" );
+        iconMapping.put( MorphologyAttribute.class, "MORATTRIBUTE" );
+        iconMapping.put( MorphologyValue.class, "MORVALUE" );
+        iconMapping.put( MorphologyText.class, "MORTEXT" );
 
-        iconMapping.put( MedSubject.class, "ADDSUBJECT" );
+        iconMapping.put( MedicineSubject.class, "ADDSUBJECT" );
         iconMapping.put( MedAttribute.class, "ADDATTRIBUTE" );
-        iconMapping.put( MedValue.class, "ADDVALUE" );
-        iconMapping.put( MedText.class, "ADDTEXT" );
+        iconMapping.put( MedicineValue.class, "ADDVALUE" );
+        iconMapping.put( MedicineText.class, "ADDTEXT" );
 
-        iconMapping.put( EcoSubject.class, "ECOSUBJECT" );
-        iconMapping.put( EcoAttribute.class, "ECOATTRIBUTE" );
-        iconMapping.put( EcoValue.class, "ECOVALUE" );
-        iconMapping.put( EcoText.class, "ECOTEXT" );
+        iconMapping.put( EcologySubject.class, "ECOSUBJECT" );
+        iconMapping.put( EcologyAttribute.class, "ECOATTRIBUTE" );
+        iconMapping.put( EcologyValue.class, "ECOVALUE" );
+        iconMapping.put( EcologyText.class, "ECOTEXT" );
     }
 
     /**

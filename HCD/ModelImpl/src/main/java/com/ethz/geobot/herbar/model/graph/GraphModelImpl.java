@@ -37,7 +37,7 @@ public class GraphModelImpl extends AbsGraphModel
     /*
      * Caching:
      * - Make sure that nodes already in the removed cache are eliminated
-     * uppon next retrieval from (still valid) global cache.
+     * upon next retrieval from (still valid) global cache.
      */
 
     private static final Logger LOG = LoggerFactory.getLogger( GraphModelImpl.class );
@@ -48,7 +48,7 @@ public class GraphModelImpl extends AbsGraphModel
 
     private static Connection conn;
 
-    private static final HashMap nodeCache = new HashMap();
+    private static final HashMap<Integer, GraphNode> nodeCache = new HashMap<Integer, GraphNode>();
 
     private static final ArrayList<GraphEdge> newEdges = new ArrayList<GraphEdge>();
 
@@ -76,8 +76,6 @@ public class GraphModelImpl extends AbsGraphModel
 
     private static PreparedStatement selectChildren;
 
-    private static PreparedStatement selectParents;
-
     private static PreparedStatement selectEdges;
 
     private GraphNode root;
@@ -98,16 +96,14 @@ public class GraphModelImpl extends AbsGraphModel
     {
         if ( conn == null || conn.isClosed() )
         {
-            mod = System.getProperty( MODEL );
-            typeFact = System.getProperty( TYPE_FACTORY );
-            roleFact = System.getProperty( ROLE_FACTORY );
+            MODEL_CLASS = System.getProperty( MODEL );
+            TYPE_FACTORY_CLASS = System.getProperty( TYPE_FACTORY );
             url = System.getProperty( URL ).replaceFirst( "\\$\\{user\\.home\\}", System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2" );
             user = System.getProperty( USER );
             password = System.getProperty( PASSWORD );
             driver = System.getProperty( DRIVER );
-            LOG.trace( "getting model (xmatrix.input.model): " + mod );
-            LOG.trace( "getting type factory (xmatrix.input.model.typefactory): " + typeFact );
-            LOG.trace( "getting role factory (xmatrix.input.model.rolefactory): " + roleFact );
+            LOG.trace( "getting model (xmatrix.input.model): " + MODEL_CLASS );
+            LOG.trace( "getting type factory (xmatrix.input.model.factory.type): " + TYPE_FACTORY_CLASS );
             LOG.trace( "getting original url (xmatrix.input.db): " + System.getProperty( URL ) );
             LOG.trace( "getting url (xmatrix.input.db corrected): " + url );
             LOG.trace( "getting user (xmatrix.input.user): " + user );
@@ -119,8 +115,6 @@ public class GraphModelImpl extends AbsGraphModel
             selectEdges = conn.prepareStatement( "SELECT e.parent_id, e.child_id FROM edges e WHERE e.id = ?" );
             selectChildren = conn.prepareStatement( "SELECT e.id FROM edges e, vertices c WHERE c.id = e.child_id "
                     + " AND e.parent_id = ? ORDER BY e.rank, c.rank, c.id" );
-            selectParents = conn.prepareStatement( "SELECT e.id, e.parent_id FROM edges e, vertices p "
-                    + " WHERE p.id = e.parent_id AND e.child_id = ? ORDER BY e.rank, p.rank, p.id" );
         }
     }
 
@@ -275,7 +269,11 @@ public class GraphModelImpl extends AbsGraphModel
         return null;
     }
 
-    /** To speed up this bottleneck a combined id is used. */
+    /**
+     * To speed up this bottleneck a combined id is used.
+     *
+     * @param edge the edge to combine
+     */
     public void putCombinedEdge( final GraphEdge edge )
     {
         final GraphNode parent = edge.getParent();
@@ -332,7 +330,7 @@ public class GraphModelImpl extends AbsGraphModel
     }
 
     /**
-     * Uppon call of this method, the new, update and delete caches are cleared.
+     * Upon call of this method, the new, update and delete caches are cleared.
      *
      * @see GraphModel#getRoot()
      */
@@ -374,21 +372,21 @@ public class GraphModelImpl extends AbsGraphModel
         return root;
     }
 
-    /** @see GraphModel#createEdge(GraphNode,GraphNode) */
+    /** @see GraphModel#createEdge(GraphNode, GraphNode) */
     public GraphEdge createEdge( final GraphNode parent, final GraphNode child )
     {
         GraphEdge edge = getCombinedEdge( parent, child );
         if ( edge == null )
         {
-            // Resurect
-            for ( Iterator<GraphEdge> iter = removedEdges.iterator(); iter.hasNext(); )
+            // Resurrect
+            for ( Iterator<GraphEdge> iterator = removedEdges.iterator(); iterator.hasNext(); )
             {
-                final GraphEdge e = iter.next();
+                final GraphEdge e = iterator.next();
                 if ( getCombinedId( parent, child ) ==
                         getCombinedId( e.getParent(), e.getChild() ) )
                 {
                     edge = e;
-                    iter.remove();
+                    iterator.remove();
                 }
             }
         }
@@ -401,12 +399,12 @@ public class GraphModelImpl extends AbsGraphModel
                 newEdges.add( edge );
             }
         }
-        // Resurect eventually removed egdes / nodes
+        // Resurrect eventually removed egdes / nodes
         removedEdges.remove( edge );
         removedNodes.remove( parent );
         removedNodes.remove( child );
         // Make sure new nodes that have been removed before from the cache
-        // are resurected. I.e. during dnd.
+        // are resurrected. I.e. during dnd.
         if ( parent.getId() < 0 && !newNodes.contains( parent ) )
         {
             newNodes.add( parent );
@@ -509,7 +507,7 @@ public class GraphModelImpl extends AbsGraphModel
         setDirty( true );
     }
 
-    /** @see GraphModel#createNode(GraphNode,Class) */
+    /** @see GraphModel#createNode(GraphNode, Class) */
     public GraphNode createNode( final GraphNode parent, final Class type )
     {
         final GraphNode node = getTypeFactory().getInstance( type );
@@ -521,7 +519,7 @@ public class GraphModelImpl extends AbsGraphModel
             node.addParent( parent );
         }
         LOG.trace( "added to new/node cache " + node );
-        nodeCache.put( new Integer( maxNewNodeId ), node );
+        nodeCache.put( maxNewNodeId, node );
         LOG.trace( "added to global/node cache " + node );
         maxNewNodeId--;
         return node;
@@ -535,14 +533,14 @@ public class GraphModelImpl extends AbsGraphModel
         try
         {
             getConnection();
-            for ( Iterator<GraphNode> iter = changedNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iterator = changedNodes.iterator(); iterator.hasNext(); )
             {
-                node = iter.next();
+                node = iterator.next();
                 stmt.executeUpdate( "UPDATE vertices "
                         + "SET name = \'" + node.getName() + "\'"
                         + ", rank = " + node.getRank()
                         + "WHERE id = " + node.getId() );
-                iter.remove();
+                iterator.remove();
                 LOG.trace( "removed from changed/node cache " + node );
             }
             // Save new nodes before new or changed edges, as this alters the id
@@ -551,18 +549,18 @@ public class GraphModelImpl extends AbsGraphModel
             // Make sure that the edge cache is updated, as it depends from the
             // node ids.
             edge = null;
-            for ( Iterator<GraphNode> iter = newNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iterator = newNodes.iterator(); iterator.hasNext(); )
             {
-                node = iter.next();
+                node = iterator.next();
                 // Remove from N cache as this would be with wrong id
                 final int oldId = node.getId(); // Before calling IDENTITY()
                 nodeCache.remove( new Integer( oldId ) );
                 // Update edges cache before saving. Remove all edges
                 // corresponding to this node in order to change the ids of the
-                // nodes later, and readding the edges then.
+                // nodes later, and reading the edges then.
                 final List<Object> tEdges = new ArrayList<Object>();
                 GraphNodeList list = node.getChildren();
-                Object rem = null;
+                Object rem;
                 for ( int i = 0; i < list.size(); i++ )
                 {
                     final GraphNode child = list.get( i );
@@ -609,55 +607,55 @@ public class GraphModelImpl extends AbsGraphModel
                 rs.close();
                 node.setId( id );
                 // Update permanent caches
-                nodeCache.put( new Integer( id ), node );
+                nodeCache.put( id, node );
                 for ( final Object tEdge1 : tEdges )
                 {
                     final GraphEdge tEdge = (GraphEdge) tEdge1;
                     putCombinedEdge( tEdge );
                 }
                 // Update n cache
-                iter.remove();
+                iterator.remove();
                 LOG.trace( "removed from new/node cache " + node );
             }
 
             node = null;
-            for ( Iterator<GraphEdge> iter = changedEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iterator = changedEdges.iterator(); iterator.hasNext(); )
             {
-                edge = iter.next();
+                edge = iterator.next();
                 stmt.executeUpdate( "UPDATE edges "
                         + "SET parent_id = " + edge.getParent().getId()
                         + ", child_id = " + edge.getChild().getId()
                         + ", rank = " + edge.getRank()
                         + "WHERE id = " + edge.getId() );
-                iter.remove();
+                iterator.remove();
                 LOG.trace( "removed from changed/edge cache " + edge );
             }
             edge = null;
-            for ( Iterator<GraphEdge> iter = removedEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iterator = removedEdges.iterator(); iterator.hasNext(); )
             {
-                edge = iter.next();
+                edge = iterator.next();
                 stmt.executeUpdate( "DELETE FROM edges WHERE id = " + edge.getId() );
                 stmt.close();
-                iter.remove();
+                iterator.remove();
                 LOG.trace( "removed from removed/edge cache " + edge );
             }
             node = null;
-            for ( Iterator<GraphNode> iter = removedNodes.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphNode> iterator = removedNodes.iterator(); iterator.hasNext(); )
             {
-                node = iter.next();
+                node = iterator.next();
                 final int id = node.getId();
                 stmt.executeUpdate( "DELETE FROM edges WHERE parent_id = " + id
                         + " OR child_id = " + id );
                 stmt.executeUpdate( "DELETE FROM vertices WHERE id = " + id );
                 stmt.close();
-                iter.remove();
-                LOG.trace( "removed from remvoed/node cache " + node );
+                iterator.remove();
+                LOG.trace( "removed from removed/node cache " + node );
             }
 
             node = null;
-            for ( Iterator<GraphEdge> iter = newEdges.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iterator = newEdges.iterator(); iterator.hasNext(); )
             {
-                edge = iter.next();
+                edge = iterator.next();
                 removeCombinedEdge( edge );
                 final int parentId = edge.getParent().getId();
                 final int childId = edge.getChild().getId();
@@ -671,7 +669,7 @@ public class GraphModelImpl extends AbsGraphModel
                     final int id = rs.getInt( 1 );
                     rs.close();
                     edge.setId( id );
-                    iter.remove();
+                    iterator.remove();
                 }
                 else
                 {
@@ -732,18 +730,7 @@ public class GraphModelImpl extends AbsGraphModel
                 final boolean b = m.matches();
                 if ( b )
                 {
-                    if ( GraphNode.class.isAssignableFrom( o.getClass() ) )
-                    {
-                        buffer.append( o + "[" + ( (GraphNode) o ).getId() + "]"
-                                + o.hashCode()
-                                + System.getProperty( "line.separator" ) );
-                    }
-                    else
-                    {
-                        buffer.append( o + "[" + ( (GraphEdge) o ).getId() + "]"
-                                + o.hashCode()
-                                + System.getProperty( "line.separator" ) );
-                    }
+                    buffer.append( String.format( "%s[%d]%d%s", o, ( (GraphEdge) o ).getId(), o.hashCode(), System.getProperty( "line.separator" ) ) );
                     count++;
                 }
             }
@@ -751,86 +738,55 @@ public class GraphModelImpl extends AbsGraphModel
             System.out.println( buffer );
         }
     }
-
-    public void printAllCacheSizes( final String search )
-    {
-        final Collection[] lists = new Collection[]{newNodes, changedNodes, removedNodes, newEdges, changedEdges,
-                removedEdges, edgeIdCache.values(), nodeCache.values()};
-        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
-                "edges new", "edges changed", "edges removed", "edge cache",
-                "edge id cache", "node cache"};
-        for ( int i = 0; i < titles.length; i++ )
-        {
-            int count = 0;
-            for ( final Object o : lists[i] )
-            {
-                final Pattern p = Pattern.compile( search );
-                final Matcher m = p.matcher( o.toString() );
-                final boolean b = m.matches();
-                if ( b )
-                {
-                    count++;
-                }
-            }
-            System.out.println( "+++ " + titles[i] + " total " + count );
-        }
-    }
-
-    public void printDynamicCaches( final String search )
-    {
-        final Collection[] lists = new Collection[]{newNodes, changedNodes,
-                removedNodes, newEdges, changedEdges, removedEdges};
-        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
-                "edges new", "edges changed", "edges removed"};
-        for ( int i = 0; i < titles.length; i++ )
-        {
-            int count = 0;
-            final StringBuffer buffer = new StringBuffer();
-            for ( final Object o : lists[i] )
-            {
-                final Pattern p = Pattern.compile( search );
-                final Matcher m = p.matcher( o.toString() );
-                final boolean b = m.matches();
-                if ( b )
-                {
-                    buffer.append( o + " " + o.hashCode()
-                            + System.getProperty( "line.separator" ) );
-                    count++;
-                }
-            }
-            System.out.println( "+++ " + titles[i] + " total " + count );
-            System.out.println( buffer );
-        }
-    }
-}
-
-class IntArray
-{
-    private int[] ints = new int[1];
-
-    private int size = 0;
-
-    public void add( final int i )
-    {
-        if ( size == ints.length )
-        {
-            final int[] newInts = new int[ints.length * 2];
-            System.arraycopy( ints, 0, newInts, 0, ints.length );
-            ints = newInts;
-        }
-        ints[size++] = i;
-    }
-
-    public int[] getArray()
-    {
-        final int[] result = new int[size];
-        System.arraycopy( ints, 0, result, 0, size );
-        return result;
-    }
-
-    /** @see Object#toString() */
-    public String toString()
-    {
-        return "" + ints;
-    }
+//
+//    public void printAllCacheSizes( final String search )
+//    {
+//        final Collection[] lists = new Collection[]{newNodes, changedNodes, removedNodes, newEdges, changedEdges,
+//                removedEdges, edgeIdCache.values(), nodeCache.values()};
+//        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
+//                "edges new", "edges changed", "edges removed", "edge cache",
+//                "edge id cache", "node cache"};
+//        for ( int i = 0; i < titles.length; i++ )
+//        {
+//            int count = 0;
+//            for ( final Object o : lists[i] )
+//            {
+//                final Pattern p = Pattern.compile( search );
+//                final Matcher m = p.matcher( o.toString() );
+//                final boolean b = m.matches();
+//                if ( b )
+//                {
+//                    count++;
+//                }
+//            }
+//            System.out.println( "+++ " + titles[i] + " total " + count );
+//        }
+//    }
+//
+//    public void printDynamicCaches( final String search )
+//    {
+//        final Collection[] lists = new Collection[]{newNodes, changedNodes,
+//                removedNodes, newEdges, changedEdges, removedEdges};
+//        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
+//                "edges new", "edges changed", "edges removed"};
+//        for ( int i = 0; i < titles.length; i++ )
+//        {
+//            int count = 0;
+//            final StringBuffer buffer = new StringBuffer();
+//            for ( final Object o : lists[i] )
+//            {
+//                final Pattern p = Pattern.compile( search );
+//                final Matcher m = p.matcher( o.toString() );
+//                final boolean b = m.matches();
+//                if ( b )
+//                {
+//                    buffer.append( o + " " + o.hashCode()
+//                            + System.getProperty( "line.separator" ) );
+//                    count++;
+//                }
+//            }
+//            System.out.println( "+++ " + titles[i] + " total " + count );
+//            System.out.println( buffer );
+//        }
+//    }
 }

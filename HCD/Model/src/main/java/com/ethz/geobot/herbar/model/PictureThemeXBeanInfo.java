@@ -22,7 +22,7 @@ public class PictureThemeXBeanInfo implements JXPathBeanInfo
 {
     private final static Logger LOG = LoggerFactory.getLogger( PictureThemeXBeanInfo.class );
 
-    private final Map descriptor = new HashMap();
+    private final Map<String, PropertyDescriptor> descriptor = new HashMap<String, PropertyDescriptor>();
 
     public PictureThemeXBeanInfo()
     {
@@ -47,12 +47,12 @@ public class PictureThemeXBeanInfo implements JXPathBeanInfo
 
     public PropertyDescriptor getPropertyDescriptor( final String str )
     {
-        return (PropertyDescriptor) descriptor.get( str );
+        return descriptor.get( str );
     }
 
     public PropertyDescriptor[] getPropertyDescriptors()
     {
-        return (PropertyDescriptor[]) descriptor.values().toArray( new PropertyDescriptor[0] );
+        return descriptor.values().toArray( new PropertyDescriptor[descriptor.values().size()] );
     }
 
     public boolean isAtomic()

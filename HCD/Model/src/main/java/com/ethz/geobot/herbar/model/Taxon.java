@@ -9,7 +9,6 @@
 package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.model.graph.GraphNode;
-import com.ethz.geobot.herbar.model.relevance.AbsRelevance;
 
 /**
  * @author $Author: daniel_frey $
@@ -69,108 +68,22 @@ public interface Taxon
     public Taxon getChildTaxon( int index ) throws IndexOutOfBoundsException;
 
     /**
-     * Gets an arry of MorValue objects associated, representing all inherited an directly assigned morphological traits
+     * Gets an arry of MorphologyValue objects associated, representing all inherited an directly assigned morphological traits
      * of this taxon.
      *
-     * @return the array of MorValue.
+     * @return the array of MorphologyValue.
      */
-    public MorValue[] getMorValues();
+    public MorphologyValue[] getMorValues();
 
     /**
      * Gets the morphological trait at index.
      *
-     * @param index index of MorValue to retrieve.
-     * @return the MorValue found.
+     * @param index index of MorphologyValue to retrieve.
+     * @return the MorphologyValue found.
      */
-    public MorValue getMorValue( int index );
+    public MorphologyValue getMorValue( int index );
 
-    public MorAttribute[] getMorAttributes();
-
-//    /**
-//     * Gets an arry of MorValue objects associated, representing the relevant
-//     * morphological traits of this taxon. All relevance level are included,
-//     * uniques, weaks and differents.
-//     *
-//     * @return   the array of MorValue.
-//     */
-//    public MorValue[] getRelMorValues();
-//
-//    /**
-//     * Returns the default unique MorValue objects for this Taxon.
-//     *
-//     * @return   an array of MorValue object unique to this Taxon
-//     */
-//    public MorValue[] getEquivalentMorValues();
-//
-//    /**
-//     * Returns the unique MorValue objects when comparing it to the siblings
-//     * given. Make sure that the siblings contain this Taxon.
-//     *
-//     * @param siblings  the siblings to compare the morphological traits with
-//     * @return          an array of MorValue object unique to this Taxon
-//     */
-//    public MorValue[] getEquivalentMorValues( Taxon[] siblings );
-//
-//    /**
-//     * Returns the default unique MorValue objects for this Taxon.
-//     *
-//     * @return   an array of MorValue object unique to this Taxon
-//     */
-//    public MorValue[] getUniqueMorValues();
-//
-//    /**
-//     * Returns the unique MorValue objects when comparing it to the siblings
-//     * given. Make sure that the siblings contain this Taxon.
-//     *
-//     * @param siblings  the siblings to compare the morphological traits with
-//     * @return          an array of MorValue object unique to this Taxon
-//     */
-//    public MorValue[] getUniqueMorValues( Taxon[] siblings );
-//
-//    /**
-//     * Returns the default different MorValue objects for this Taxon.
-//     *
-//     * @return   an array of MorValue object different to this Taxon
-//     */
-//    public MorValue[] getDifferentMorValues();
-//
-//    /**
-//     * Returns the different MorValue objects when comparing it to the siblings
-//     * given. Make sure that the siblings contain this Taxon.
-//     *
-//     * @param siblings  the siblings to compare the morphological traits with
-//     * @return          an array of MorValue object different to this Taxon
-//     */
-//    public MorValue[] getDifferentMorValues( Taxon[] siblings );
-//
-//    /**
-//     * Returns the default weak MorValue objects for this Taxon.
-//     *
-//     * @return   an array of MorValue object weak to this Taxon
-//     */
-//    public MorValue[] getWeakMorValues();
-//
-//    /**
-//     * Returns the weak MorValue objects when comparing it to the siblings
-//     * given. Make sure that the siblings contain this Taxon.
-//     *
-//     * @param siblings  the siblings to compare the morphological traits with
-//     * @return          an array of MorValue object weak to this Taxon
-//     */
-//    public MorValue[] getWeakMorValues( Taxon[] siblings );
-//
-//    /**
-//     * Gets the relevant morphological trait at position index of this Taxon.
-//     *
-//     * @param index  index of MorValue to retrive.
-//     * @return       the MorValue found.
-//     */
-//    public MorValue getRelMorValue( int index );
-
-    /**
-     * Returns the Relevance object for the given value.
-     */
-    public AbsRelevance getRelevance( MorValue value );
+    public MorphologyAttribute[] getMorAttributes();
 
     /**
      * Gets the position of the Taxon indicated within the array of Taxons.

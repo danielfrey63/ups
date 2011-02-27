@@ -19,7 +19,6 @@ import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
 import com.ethz.geobot.herbar.gui.commands.ActionSaveBounds;
-import com.ethz.geobot.herbar.gui.commands.ActionStatustextAdapter;
 import com.ethz.geobot.herbar.gui.commands.ActionWizard;
 import com.ethz.geobot.herbar.gui.mode.ModeStateModel;
 import com.ethz.geobot.herbar.gui.mode.ModeWizard;
@@ -56,15 +55,13 @@ public class MainFrame extends JFrame
 
     public static final String PREF_H = "bounds_h";
 
-    public static final String PREF_CD = "cd";
-
     private static final Logger LOG = LoggerFactory.getLogger( MainFrame.class );
 
     private final BorderLayout borderLayout1 = new BorderLayout();
 
     private JPanel contentPane;
 
-    private final JMenuBar menubar = new JMenuBar();
+    private final JMenuBar menuBar = new JMenuBar();
 
     private final ModeStateModel modeStateModel = new ModeStateModel();
 
@@ -184,24 +181,16 @@ public class MainFrame extends JFrame
         }
     }
 
-    // create Menus and adds them to the menubar
+    // create Menus and adds them to the menu bar
 
     private JMenu createMenu( final String prefix )
     {
-        final JMenu sub = menubar.add( new JMenu( Strings.getString( prefix + ".NAME" ) ) );
+        final JMenu sub = menuBar.add( new JMenu( Strings.getString( prefix + ".NAME" ) ) );
         sub.setMnemonic( Strings.getChar( prefix + ".MN" ) );
         return sub;
     }
 
-    private JMenuItem createMenuItem( final JMenu menu, final Action action )
-    {
-        final JMenuItem item = menu.add( action );
-        final String helpText = (String) action.getValue( Action.LONG_DESCRIPTION );
-        item.addChangeListener( new ActionStatustextAdapter( helpText, statusBar ) );
-        return item;
-    }
-
-    // Component, Statusbar and Menu initialization
+    // Component, status bar and menu initialization
 
     private void init() throws Exception
     {
@@ -210,23 +199,24 @@ public class MainFrame extends JFrame
         setTitle( Strings.getString( "APPLICATION.FRAME.TITLE" ) );
         setIconImage( ImageLocator.getIcon( Strings.getString( "APPLICATION.FRAME.ICON" ) ).getImage() );
 
-        JMenu sub = null;
+        JMenu sub;
         sub = createMenu( "MENU.APPLICATION" );
-        createMenuItem( sub, new ActionSaveBounds( this, prefNode ) );
-        createMenuItem( sub, new ActionConvertFilterFromUst( this ) );
+        sub.add( new ActionSaveBounds( this, prefNode ) );
+        sub.add( new ActionConvertFilterFromUst( this ) );
         sub.addSeparator();
-        quitItem = createMenuItem( sub, new ActionQuit( this ) );
+        quitItem = sub.add( new ActionQuit( this ) );
 
         sub = createMenu( "MENU.SETTINGS" );
-        createMenuItem( sub, new ActionModeSelection( this, prefNode ) );
-        createMenuItem( sub, wizardAction = new ActionWizard( this ) );
+        sub.add( new ActionModeSelection( this, prefNode ) );
+        final Action action = wizardAction = new ActionWizard( this );
+        sub.add( action );
 
         sub = createMenu( "MENU.HERBAR" );
-        createMenuItem( sub, new ActionAppHelp( this ) );
-        createMenuItem( sub, new ActionModuleInfo( this ) );
-        createMenuItem( sub, new ActionAbout( this ) );
+        sub.add( new ActionAppHelp( this ) );
+        sub.add( new ActionModuleInfo( this ) );
+        sub.add( new ActionAbout( this ) );
 
-        setJMenuBar( menubar );
+        setJMenuBar( menuBar );
 
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout( borderLayout1 );

@@ -76,23 +76,22 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
 
     private final String[] welcomePanelCommands;
 
-    protected static final String TITLE_DIRTYMARKER = " *";
+    protected static final String TITLE_DIRTY_MARKER = " *";
 
     private static final String TITLE_SEPARATOR = " - ";
 
     protected AbstractMainBuilder( final AbstractMainModel model, final InfoModel infoModel,
-                                   final String[] welcomPanelCommands, final String[] modelLoadedCommands )
+                                   final String[] welcomePanelCommands, final String[] modelLoadedCommands )
     {
         this.model = model;
         this.infoModel = infoModel;
-        this.welcomePanelCommands = welcomPanelCommands;
+        this.welcomePanelCommands = welcomePanelCommands;
         this.modelLoadedCommands = modelLoadedCommands;
     }
 
     protected JComponent createMainPanel()
     {
         final JComponent welcomePanel = createWelcomePanel();
-//        infoModel.setNote(new SimpleNote(infoModel.getNote()));
         cards.add( AbstractMainModel.CARDS_WELCOME, welcomePanel );
         model.queue( new Runnable()
         {
@@ -126,7 +125,6 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
     {
         statusBar = new StatusBar();
         statusBar.setBorder( new EmptyBorder( GuiConstants.NO_GAP, GuiConstants.SMALL_GAP, GuiConstants.NO_GAP, GuiConstants.SMALL_GAP ) );
-        statusBar.setItemBorder( new EmptyBorder( GuiConstants.NO_GAP, GuiConstants.NO_GAP, GuiConstants.NO_GAP, GuiConstants.NO_GAP ) );
         return statusBar;
     }
 
@@ -145,7 +143,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
     protected abstract JMenuBar getMenuBar();
 
     /**
-     * Inits model listeners. Make sure to call the super method in order to init the common ones.
+     * Initializes model listeners. Make sure to call the super method in order to init the common ones.
      */
     protected void initModelListeners()
     {
@@ -189,7 +187,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                     }
                 } );
                 // Change page to display
-                // Switch menubar and statusbar
+                // Switch menu bar and status bar
                 model.addPropertyChangeListener( AbstractMainModel.PROPERTYNAME_CURRENTCARD, new PropertyChangeListener()
                 {
                     public void propertyChange( final PropertyChangeEvent evt )
@@ -201,7 +199,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                             frame.setJMenuBar( null );
                             main.remove( getStatusBar() );
                             getCards().showCard( AbstractMainModel.CARDS_WELCOME );
-                            String title = removeChunk( frame.getTitle(), TITLE_DIRTYMARKER );
+                            String title = removeChunk( frame.getTitle(), TITLE_DIRTY_MARKER );
                             title = removeChunk( title, model.getCurrentFile().toString() );
                             title = removeChunk( title, TITLE_SEPARATOR );
                             frame.setTitle( title );
@@ -214,8 +212,8 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                             if ( evt.getOldValue() == AbstractMainModel.CARDS_WELCOME )
                             {
                                 String title = frame.getTitle();
-                                title = removeChunk( title, TITLE_DIRTYMARKER );
-                                title += ( model.isDirty() ? TITLE_DIRTYMARKER : "" );
+                                title = removeChunk( title, TITLE_DIRTY_MARKER );
+                                title += ( model.isDirty() ? TITLE_DIRTY_MARKER : "" );
                                 frame.setTitle( title );
                             }
                         }
@@ -232,7 +230,7 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                         }
                     }
                 } );
-                // Ajust title.
+                // Adjust title.
                 model.addPropertyChangeListener( AbstractMainModel.PROPERTYNAME_DIRTY, new PropertyChangeListener()
                 {
                     public void propertyChange( final PropertyChangeEvent evt )
@@ -246,16 +244,16 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                             final String title = top.getTitle();
                             if ( dirty )
                             {
-                                top.setTitle( title + TITLE_DIRTYMARKER );
+                                top.setTitle( title + TITLE_DIRTY_MARKER );
                             }
                             else
                             {
-                                top.setTitle( title.substring( 0, title.length() - TITLE_DIRTYMARKER.length() ) );
+                                top.setTitle( title.substring( 0, title.length() - TITLE_DIRTY_MARKER.length() ) );
                             }
                         }
                     }
                 } );
-                // Ajust title.
+                // Adjust title.
                 model.addPropertyChangeListener( AbstractMainModel.PROPERTYNAME_CURRENTFILE, new PropertyChangeListener()
                 {
                     public void propertyChange( final PropertyChangeEvent evt )
@@ -268,10 +266,10 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
                         {
                             final Frame top = (Frame) c;
                             String title = top.getTitle();
-                            title = removeChunk( title, TITLE_DIRTYMARKER );
+                            title = removeChunk( title, TITLE_DIRTY_MARKER );
                             title = removeChunk( title, oldFileName );
                             title = removeChunk( title, TITLE_SEPARATOR );
-                            top.setTitle( title + TITLE_SEPARATOR + newValue + ( model.isDirty() ? TITLE_DIRTYMARKER : "" ) );
+                            top.setTitle( title + TITLE_SEPARATOR + newValue + ( model.isDirty() ? TITLE_DIRTY_MARKER : "" ) );
                         }
                     }
                 } );
@@ -340,13 +338,5 @@ public abstract class AbstractMainBuilder extends ActionCommandPanelBuilder
     public void setModel( final AbstractMainModel model )
     {
         this.model = model;
-    }
-
-    public String[] getCommandMembers( final String groupId )
-    {
-//        final MemberList groupMembers = getCommandManager().getGroup(groupId).getCount();
-//        for (int i = 0; i < count; i++) {
-//        }
-        return null;
     }
 }

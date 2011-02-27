@@ -16,26 +16,13 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
 
     private GraphNode parent;
 
-    private Role role;
-
     private GraphEdge recursive;
-
-    public GraphEdgeImpl()
-    {
-    }
 
     public GraphEdgeImpl( final int id, final GraphNode parent, final GraphNode child )
     {
         this( id );
         this.parent = parent;
         this.child = child;
-    }
-
-    public GraphEdgeImpl( final int id, final GraphNode parent, final GraphNode child, final Role role, final GraphEdge recursive )
-    {
-        this( id, parent, child );
-        setRole( role );
-        setRecursive( recursive );
     }
 
     public GraphEdgeImpl( final int id )
@@ -59,19 +46,6 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
     public GraphNode getParent()
     {
         return parent;
-    }
-
-    /** @see GraphEdge#getRole() */
-    public Role getRole()
-    {
-        if ( role == null )
-        {
-            return Role.ROLE_NULL;
-        }
-        else
-        {
-            return role;
-        }
     }
 
     /** @see GraphEdge#getRecursive() */
@@ -102,12 +76,6 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
         model.addRemoved( this );
         this.parent = parent;
         model.addChanged( this );
-    }
-
-    /** @see GraphEdge#setRole(Role) */
-    public void setRole( final Role role )
-    {
-        this.role = ( role == Role.ROLE_NULL ? null : role );
     }
 
     /** @see GraphEdge#setRecursive(GraphEdge) */
@@ -148,17 +116,8 @@ public class GraphEdgeImpl implements GraphEdge, Serializable
             cId = child + "(" + child.hashCode() + ")";
         }
         return "[p=" + pId + ",c=" + cId
-                + ",rank=" + rank + ",role=" + role +
-                ( role == null ? "" : "(" + role.hashCode() + ")" )
+                + ",rank=" + rank
                 + ",rec=" + recursive + "]";
     }
 
 }
-
-// $Log: GraphEdgeImpl.java,v $
-// Revision 1.1  2005/06/16 06:28:58  daniel_frey
-// Completely merged and finished for UST version 2.0-20050616
-//
-// Revision 1.1  2004/04/19 10:31:21  daniel_frey
-// Replaced top level package com by ch
-//

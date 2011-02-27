@@ -14,9 +14,9 @@ import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.MedAttribute;
-import com.ethz.geobot.herbar.model.MedSubject;
-import com.ethz.geobot.herbar.model.MedText;
-import com.ethz.geobot.herbar.model.MedValue;
+import com.ethz.geobot.herbar.model.MedicineSubject;
+import com.ethz.geobot.herbar.model.MedicineText;
+import com.ethz.geobot.herbar.model.MedicineValue;
 import com.ethz.geobot.herbar.model.Taxon;
 
 /**
@@ -29,13 +29,13 @@ public class MedicineDisplay extends AttributeTreePanel
 {
     MedicineDisplay( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel )
     {
-        super( herbarContext, stopper, taxStateModel, Strings.getString( "PROPERTY.MEDTEXT.TEXT" ) );
+        super( herbarContext, stopper, taxStateModel, Strings.getString( "PROPERTY.MEDICINETEXT.TEXT" ) );
     }
 
     public VirtualGraphTreeNodeFilter registerFilter()
     {
-        return VirtualGraphTreeNodeFilter.getFilter( new Class[]{GraphNode.class, Taxon.class, MedText.class, MedValue.class, MedAttribute.class,
-                MedSubject.class, MedAttribute.class, MedValue.class, MedText.class},
+        return VirtualGraphTreeNodeFilter.getFilter( new Class[]{GraphNode.class, Taxon.class, MedicineText.class, MedicineValue.class, MedAttribute.class,
+                MedicineSubject.class, MedAttribute.class, MedicineValue.class, MedicineText.class},
                 new int[][]{{1, 0, 0, 2}, {1, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1},
                         {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 1, 2}, {1, 0, 1, 2}} );
     }

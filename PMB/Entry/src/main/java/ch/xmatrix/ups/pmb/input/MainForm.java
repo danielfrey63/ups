@@ -27,7 +27,6 @@ import ch.xmatrix.ups.pmb.ui.controller.AlertDialogNoteHandler;
 import ch.xmatrix.ups.pmb.ui.controller.Log4jNoteHandler;
 import ch.xmatrix.ups.pmb.ui.controller.NavigationSelectionHandler;
 import ch.xmatrix.ups.pmb.ui.controller.PMBController;
-import ch.xmatrix.ups.pmb.ui.controller.StatusBarNoteHandler;
 import ch.xmatrix.ups.pmb.ui.model.EntryTreeModel;
 import ch.xmatrix.ups.pmb.ui.model.FileEntryThumbnailListModel;
 import ch.xmatrix.ups.pmb.ui.model.Settings;
@@ -346,7 +345,6 @@ public class MainForm extends EntryForm
             }
         } );
         final InfoModel infoModel = model.getInfoModel();
-        infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new StatusBarNoteHandler( statusBar ) );
         infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new AlertDialogNoteHandler( this, Message.Type.ERROR ) );
         infoModel.addPropertyChangeListener( InfoModel.PROPERTYNAME_NOTE, new Log4jNoteHandler( LOG ) );
     }

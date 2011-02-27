@@ -16,27 +16,15 @@ public class GraphEdgeList implements Serializable
 
     private static final GraphModel MODEL = AbsGraphModel.getModel();
 
-    private final ArrayList list = new ArrayList();
+    private final ArrayList<GraphEdge> list = new ArrayList<GraphEdge>();
 
-    private GraphNode referer;
+    private GraphNode referrer;
 
     private int listType;
 
-    public void printEdges( final Class type )
+    public void setReferrer( final GraphNode referrer )
     {
-        for ( final Object aList : list )
-        {
-            final GraphEdge edge = (GraphEdge) aList;
-            if ( getOther( edge ).isType( type ) )
-            {
-                System.out.println( edge );
-            }
-        }
-    }
-
-    public void setReferer( final GraphNode referer )
-    {
-        this.referer = referer;
+        this.referrer = referrer;
     }
 
     public void setListType( final int listType )
@@ -58,8 +46,11 @@ public class GraphEdgeList implements Serializable
 
     /**
      * Returns the node for which children/parents are stored in this list.
+     *
+     * @param edge the edge to which the referrer is searched for
+     * @return the referring node
      */
-    private GraphNode getReferer( final GraphEdge edge )
+    private GraphNode getReferrer( final GraphEdge edge )
     {
         if ( listType == LIST_PARENT )
         {
@@ -71,12 +62,12 @@ public class GraphEdgeList implements Serializable
         }
     }
 
-    private void ajustRanks()
+    private void adjustRanks()
     {
         GraphEdge edge;
         for ( int i = 0; i < list.size(); i++ )
         {
-            edge = (GraphEdge) list.get( i );
+            edge = list.get( i );
             final int old = edge.getRank();
             if ( old != i )
             {
@@ -96,8 +87,7 @@ public class GraphEdgeList implements Serializable
         final GraphNodeList result = new GraphNodeList();
         for ( final Object aList : list )
         {
-            final GraphEdge edge = (GraphEdge) aList;
-            result.add( getOther( edge ) );
+            result.add( getOther( (GraphEdge) aList ) );
         }
         return result;
     }
@@ -105,16 +95,17 @@ public class GraphEdgeList implements Serializable
     /**
      * Returns a collection of all parent {@link GraphNode}s in this edge list.
      *
+     * @param type the class type to filter by
      * @return GraphNodeList of all parent {@link GraphNode}s
      */
-    public GraphNodeList getOthers( final Class type, final Class role )
+    public GraphNodeList getOthers( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
         for ( final Object aList : list )
         {
             final GraphEdge edge = (GraphEdge) aList;
             final GraphNode node = getOther( edge );
-            if ( node.isType( type ) && edge.isRole( role ) )
+            if ( node.isType( type ) )
             {
                 result.add( node );
             }
@@ -122,51 +113,9 @@ public class GraphEdgeList implements Serializable
         return result;
     }
 
-    public Role getRole( final GraphNode node )
+    public void setOthers( final GraphNodeList others, final Class type )
     {
-        final GraphEdge edge = getEdge( node );
-        if ( edge == null )
-        {
-            return Role.ROLE_NULL;
-        }
-        else
-        {
-            return edge.getRole();
-        }
-    }
-
-    public void setRole( final GraphNode node, final Role role )
-    {
-        final GraphEdge edge = getEdge( node );
-        if ( edge != null )
-        {
-            edge.setRole( role );
-        }
-    }
-
-    private GraphEdge getEdge( final GraphNode node )
-    {
-        for ( final Object aList : list )
-        {
-            final GraphEdge edge = (GraphEdge) aList;
-            final GraphNode other = getOther( edge );
-            if ( other == node )
-            {
-                return edge;
-            }
-        }
-        return null;
-    }
-
-    public void setOthers( final GraphNodeList others )
-    {
-        list.clear();
-        addAll( others );
-    }
-
-    public void setOthers( final GraphNodeList others, final Class type, final Class role )
-    {
-        if ( getOthers( type, role ).size() == others.size() )
+        if ( getOthers( type ).size() == others.size() )
         {
             // Update existing edges instead of removing/creating
             int i = 0;
@@ -174,7 +123,7 @@ public class GraphEdgeList implements Serializable
             {
                 final GraphEdge edge = (GraphEdge) aList;
                 final GraphNode node = getOther( edge );
-                if ( node.isType( type ) && edge.isRole( role ) )
+                if ( node.isType( type ) )
                 {
                     if ( listType == LIST_CHILD )
                     {
@@ -190,13 +139,13 @@ public class GraphEdgeList implements Serializable
         }
         else
         {
-            for ( Iterator iter = list.iterator(); iter.hasNext(); )
+            for ( Iterator<GraphEdge> iterator = list.iterator(); iterator.hasNext(); )
             {
-                final GraphEdge edge = (GraphEdge) iter.next();
+                final GraphEdge edge = iterator.next();
                 final GraphNode node = getOther( edge );
-                if ( node.isType( type ) && edge.isRole( role ) )
+                if ( node.isType( type ) )
                 {
-                    iter.remove();
+                    iterator.remove();
                     MODEL.addRemoved( edge );
                 }
             }
@@ -211,11 +160,11 @@ public class GraphEdgeList implements Serializable
 
     public boolean add( final int index, final GraphEdge edge )
     {
-        if ( referer != getReferer( edge ) )
+        if ( referrer != getReferrer( edge ) )
         {
-            getReferer( edge );
-            throw new IllegalStateException( "Referer is not in edges member: " + referer + "(" +
-                    referer.hashCode() + ")" + " <-> " + edge );
+            getReferrer( edge );
+            throw new IllegalStateException( "Referrer is not in edges member: " + referrer + "(" +
+                    referrer.hashCode() + ")" + " <-> " + edge );
         }
 
         if ( list.contains( edge ) )
@@ -231,7 +180,7 @@ public class GraphEdgeList implements Serializable
             wasAdded = ( oldSize != list.size() );
         }
 
-        ajustRanks();
+        adjustRanks();
 
         // Try counterpart
         if ( wasAdded )
@@ -239,11 +188,11 @@ public class GraphEdgeList implements Serializable
             final GraphNode other = getOther( edge );
             if ( listType == LIST_CHILD )
             {
-                other.addParent( referer, edge.getRole() );
+                other.addParent( referrer );
             }
             else
             {
-                other.addChild( referer, edge.getRole() );
+                other.addChild( referrer );
             }
         }
         return wasAdded;
@@ -256,32 +205,17 @@ public class GraphEdgeList implements Serializable
 
     public boolean add( final int index, final GraphNode node )
     {
-        final GraphEdge edge;
-        if ( listType == LIST_CHILD )
-        {
-            edge = MODEL.createEdge( referer, node );
-        }
-        else
-        {
-            edge = MODEL.createEdge( node, referer );
-        }
-        return add( index, edge );
-    }
-
-    public boolean add( final int index, final GraphNode node, final Role role )
-    {
         // Note: Role not used any more
-        // Todo: Remove role definively
         final GraphEdge edge;
         if ( listType == LIST_CHILD )
         {
-            edge = MODEL.createEdge( referer, node );
+            edge = MODEL.createEdge( referrer, node );
         }
         else
         {
-            edge = MODEL.createEdge( node, referer );
+            edge = MODEL.createEdge( node, referrer );
         }
-        ajustRanks();
+//        adjustRanks();
         return add( index, edge );
     }
 
@@ -295,21 +229,21 @@ public class GraphEdgeList implements Serializable
 
     public boolean removeLinkTo( final GraphNode node )
     {
-        for ( Iterator iter = list.iterator(); iter.hasNext(); )
+        for ( Iterator<GraphEdge> iterator = list.iterator(); iterator.hasNext(); )
         {
-            final GraphEdge edge = (GraphEdge) iter.next();
+            final GraphEdge edge = iterator.next();
             final GraphNode other = getOther( edge );
             if ( other == node )
             {
-                iter.remove();
+                iterator.remove();
                 MODEL.addRemoved( edge );
                 if ( listType == LIST_CHILD )
                 {
-                    other.removeFromParent( referer );
+                    other.removeFromParent( referrer );
                 }
                 else
                 {
-                    other.removeFromChild( referer );
+                    other.removeFromChild( referrer );
                 }
                 return true;
             }
@@ -319,22 +253,22 @@ public class GraphEdgeList implements Serializable
 
     public boolean delete( final GraphNode node )
     {
-        for ( Iterator iter = list.iterator(); iter.hasNext(); )
+        for ( Iterator<GraphEdge> iterator = list.iterator(); iterator.hasNext(); )
         {
-            final GraphEdge edge = (GraphEdge) iter.next();
+            final GraphEdge edge = iterator.next();
             final GraphNode other = getOther( edge );
             if ( other == node )
             {
-                iter.remove();
+                iterator.remove();
                 MODEL.addRemoved( edge );
-                boolean wasRemoved = false;
+                final boolean wasRemoved;
                 if ( listType == LIST_CHILD )
                 {
-                    wasRemoved = other.deleteParent( referer );
+                    wasRemoved = other.deleteParent( referrer );
                 }
                 else
                 {
-                    wasRemoved = other.deleteChild( referer );
+                    wasRemoved = other.deleteChild( referrer );
                 }
                 if ( wasRemoved )
                 {
@@ -351,12 +285,10 @@ public class GraphEdgeList implements Serializable
         return list.size();
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
-        return referer + ", " + ( listType == 0 ? "CHILD" : "PARENT" ) +
+        return referrer + ", " + ( listType == 0 ? "CHILD" : "PARENT" ) +
                 " " + list.toString();
     }
 }

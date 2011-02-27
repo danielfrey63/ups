@@ -22,10 +22,10 @@ import com.ethz.geobot.herbar.game.util.Question;
 import com.ethz.geobot.herbar.gui.VirtualGraphTreeFactory;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.MorAttribute;
-import com.ethz.geobot.herbar.model.MorSubject;
-import com.ethz.geobot.herbar.model.MorText;
-import com.ethz.geobot.herbar.model.MorValue;
+import com.ethz.geobot.herbar.model.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.MorphologySubject;
+import com.ethz.geobot.herbar.model.MorphologyText;
+import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
@@ -147,8 +147,8 @@ public class QuestionPanel extends JDialog implements Question
         theme = this.model.getPictureThemes();
 
         // bottom
-        treeFilter = VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorText.class, MorValue.class, MorAttribute.class, MorSubject.class,
-                MorAttribute.class, MorValue.class, MorText.class},
+        treeFilter = VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class,
+                MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
                 new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1},
                         {0, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} );
         tree = VirtualGraphTreeFactory.getVirtualTree( model.getRootTaxon().getAsGraphNode(), treeFilter );
@@ -212,7 +212,7 @@ public class QuestionPanel extends JDialog implements Question
                 {
                     final GraphTreeNode lastPathComponent = (GraphTreeNode) selectionPath.getLastPathComponent();
                     final GraphNode morText = lastPathComponent.getDependent();
-                    final GraphNodeList correctTexts = actualTaxon.getAsGraphNode().getChildren( MorText.class );
+                    final GraphNodeList correctTexts = actualTaxon.getAsGraphNode().getChildren( MorphologyText.class );
                     if ( correctTexts.contains( morText ) )
                     {
                         countScore.addRightScore( 1 );
@@ -223,19 +223,19 @@ public class QuestionPanel extends JDialog implements Question
                         countScore.addWrongScore( 1 );
                         questionModel.setWrongAnswers( actualTaxon );
                         // collect attributes of the guess text
-                        final GraphNodeList values = morText.getParents( MorValue.class );
+                        final GraphNodeList values = morText.getParents( MorphologyValue.class );
                         final GraphNodeList attributes = new GraphNodeList();
                         for ( int i = 0; i < values.size(); i++ )
                         {
-                            attributes.addAll( values.get( i ).getParents( MorAttribute.class ) );
+                            attributes.addAll( values.get( i ).getParents( MorphologyAttribute.class ) );
                         }
                         // collect correct text for attributes of the text guess
                         final GraphNode attribute = attributes.get( 0 );
-                        final GraphNodeList allValues = attribute.getChildren( MorValue.class );
+                        final GraphNodeList allValues = attribute.getChildren( MorphologyValue.class );
                         GraphNode correctText = null;
                         for ( int i = 0; correctText == null && i < allValues.size(); i++ )
                         {
-                            final GraphNodeList allTexts = allValues.get( i ).getChildren( MorText.class );
+                            final GraphNodeList allTexts = allValues.get( i ).getChildren( MorphologyText.class );
                             for ( int j = 0; correctText == null && j < allTexts.size(); j++ )
                             {
                                 if ( correctTexts.contains( allTexts.get( j ) ) )

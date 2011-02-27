@@ -41,11 +41,11 @@ public interface HerbarModel
      *
      * @return root subject object
      */
-    public MorSubject getRootMorSubject();
+    public Morphology getMorphology();
 
-    public EcoSubject getRootEcoSubject();
+    public Ecology getEcology();
 
-    public MedSubject getRootMedSubject();
+    public Medicine getMedicine();
 
     /**
      * Return a list of picture themes.
@@ -73,10 +73,10 @@ public interface HerbarModel
     /**
      * Returns all Taxon objects which contain the given Morphology item.
      *
-     * @param mor Morphology item to search for
+     * @param morphologyValue Morphology item to search for
      * @return Array of Taxon objects
      */
-    public Taxon[] getTaxa( MorValue mor );
+    public Taxon[] getTaxa( MorphologyValue morphologyValue );
 
     /**
      * Returns the Level with the given name or null if not found.
@@ -119,7 +119,7 @@ public interface HerbarModel
      *
      * @param name of the item
      */
-    public MorValue[] getValues( String name );
+    public MorphologyValue[] getValues( String name );
 
     public void setName( String name );
 

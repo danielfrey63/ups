@@ -54,20 +54,20 @@ abstract public class StateCompositeModel implements StateModel
     }
 
     /**
-     * override this method to load the state of the model. This method will return a node from which the submodels
+     * override this method to load the state of the model. This method will return a node from which the sub models
      * should be loaded.
      *
      * @param node Preferences node from which the model should load the state
-     * @return a node used by the submodels to load there states
+     * @return a node used by the sub models to load there states
      */
     public abstract Preferences loadCompositeState( Preferences node );
 
     /**
-     * override this method to save the state of the model. This method will return a node from which the submodels
+     * override this method to save the state of the model. This method will return a node from which the sub models
      * should be saved.
      *
      * @param node Preferences node from which the model should save the state
-     * @return a node used by the submodels to save there states
+     * @return a node used by the sub models to save there states
      */
     public abstract Preferences storeCompositeState( Preferences node );
 

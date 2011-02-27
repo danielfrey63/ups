@@ -23,7 +23,10 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,6 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import junit.extensions.jfcunit.tools.ComponentBrowser;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -156,6 +160,18 @@ public class AppHerbar
 
     public static void main( final String[] args )
     {
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventPostProcessor( new KeyEventPostProcessor()
+        {
+            public boolean postProcessKeyEvent( final KeyEvent e )
+            {
+                if ( e.getID() == KeyEvent.KEY_PRESSED && e.isAltDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D )
+                {
+                    final ComponentBrowser browser = new ComponentBrowser();
+                    browser.setVisible( true );
+                }
+                return false;
+            }
+        } );
         LOG.debug( "Starting main-Application" );
 
         try

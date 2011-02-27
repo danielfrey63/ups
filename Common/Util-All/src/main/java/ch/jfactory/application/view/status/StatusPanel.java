@@ -25,8 +25,7 @@ public class StatusPanel extends JPanel
     public StatusPanel( final JComponent component )
     {
         this.component = component;
-        setBorder( BorderFactory.createCompoundBorder( new ThinBevelBorder( BevelDirection.LOWERED ),
-                BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) ) );
+        setBorder( BorderFactory.createCompoundBorder( new ThinBevelBorder( BevelDirection.LOWERED ), BorderFactory.createEmptyBorder( 2, 8, 2, 8 ) ) );
         setLayout( new BorderLayout() );
         add( component, BorderLayout.CENTER );
         maxPreferredSize = super.getPreferredSize();

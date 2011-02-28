@@ -16,8 +16,8 @@
     <description>All Common Components</description>
     <modules>
         <module>JNLP</module>
-        <module>OSGiConsumer</module>
-        <module>OSGiProvider</module>
+        <!--<module>OSGiConsumer</module>-->
+        <!--<module>OSGiProvider</module>-->
         <module>Test</module>
     </modules>
 </project>

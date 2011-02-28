@@ -1,14 +1,13 @@
 package com.ethz.geobot.herbar.model.filter;
 
 import ch.jfactory.model.graph.GraphNode;
-import com.ethz.geobot.herbar.model.AbstractTaxon;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.LevelComparator;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-class FilterTaxon extends AbstractTaxon
+class FilterTaxon implements Taxon, Comparable
 {
     private static final Logger LOG = LoggerFactory.getLogger( FilterTaxon.class );
 
@@ -45,11 +44,6 @@ class FilterTaxon extends AbstractTaxon
     {
         this.filterModel = filterModel;
         this.dependentTaxon = dependentTaxon;
-    }
-
-    public void setScore( final boolean right )
-    {
-        dependentTaxon.setScore( right );
     }
 
     public int getId()
@@ -96,11 +90,6 @@ class FilterTaxon extends AbstractTaxon
         return cachedChildren.toArray( new Taxon[cachedChildren.size()] );
     }
 
-    public MorphologyValue[] getMorValues()
-    {
-        return dependentTaxon.getMorValues();
-    }
-
     public Level[] getSubLevels()
     {
         if ( cachedSubLevels == null )
@@ -145,11 +134,6 @@ class FilterTaxon extends AbstractTaxon
         return dependentTaxon.getPictureThemes();
     }
 
-    public double getScore()
-    {
-        return dependentTaxon.getScore();
-    }
-
     public int getRank()
     {
         return dependentTaxon.getRank();
@@ -184,5 +168,98 @@ class FilterTaxon extends AbstractTaxon
     public GraphNode getAsGraphNode()
     {
         return dependentTaxon.getAsGraphNode();
+    }
+
+    public Taxon[] getAllChildTaxa( final Level level )
+    {
+        final List<Taxon> taxa = new ArrayList<Taxon>();
+        Taxon child;
+        for ( int i = 0; i < getChildTaxa().length; i++ )
+        {
+            child = getChildTaxon( i );
+            final Level childLevel = child.getLevel();
+            if ( childLevel == level )
+            {
+                taxa.add( child );
+            }
+            else
+            {
+                final Taxon[] fromChild = child.getAllChildTaxa( level );
+                taxa.addAll( Arrays.asList( fromChild ) );
+            }
+        }
+        return taxa.toArray( new Taxon[taxa.size()] );
+    }
+
+    public Taxon[] getChildTaxa( final Level level )
+    {
+        final List<Taxon> taxa = new ArrayList<Taxon>();
+        Taxon curr;
+        for ( int i = 0; i < getChildTaxa().length; i++ )
+        {
+            curr = getChildTaxon( i );
+            if ( curr.getLevel() == level )
+            {
+                taxa.add( curr );
+            }
+        }
+        final Taxon[] ret = new Taxon[taxa.size()];
+        for ( int i = 0; i < taxa.size(); i++ )
+        {
+            ret[i] = taxa.get( i );
+        }
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( this.toDebugString() + " getChildTaxa(" + level + ") " +
+                    Arrays.asList( ret ) );
+        }
+        return ret;
+    }
+
+    public Taxon getChildTaxon( final int index )
+            throws IndexOutOfBoundsException
+    {
+        LOG.trace( this.toDebugString() + " getChildTaxon(" + index + ")" );
+        return getChildTaxa()[index];
+    }
+
+    public int getChildTaxon( final Taxon child )
+    {
+        for ( int i = 0; i < getChildTaxa().length; i++ )
+        {
+            if ( getChildTaxon( i ) == child )
+            {
+                LOG.debug( this.toDebugString() + " getChildTaxon(" + child + ")" + i );
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int compareTo( final Object obj )
+    {
+        final Taxon taxon = (Taxon) obj;
+        return this.getRank() - taxon.getRank();
+    }
+
+    public boolean equals( final Object compare )
+    {
+        if ( !( compare instanceof Taxon ) )
+        {
+            throw new IllegalArgumentException( "cannot compare object to taxon" );
+        }
+        final Taxon taxon = (Taxon) compare;
+        return taxon == this || getId() == taxon.getId();
+    }
+
+    public int hashCode()
+    {
+        final String id = "" + getId();
+        return id.hashCode();
+    }
+
+    public String toString()
+    {
+        return this.getName();
     }
 }

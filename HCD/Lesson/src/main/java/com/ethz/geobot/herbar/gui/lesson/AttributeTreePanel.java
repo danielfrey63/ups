@@ -219,4 +219,3 @@ public abstract class AttributeTreePanel extends JPanel
         VirtualGraphTreeFactory.updateModel( tree, filter, vRoot );
     }
 }
-

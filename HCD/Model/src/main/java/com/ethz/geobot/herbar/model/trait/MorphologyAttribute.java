@@ -31,28 +31,4 @@ public interface MorphologyAttribute
      * @return the name of this MorphologyAttribute.
      */
     public String getName();
-
-    /**
-     * Get an array of MorphologyValue objects from this MorphologyAttribute.
-     *
-     * @return an array of MorphologyValue objects.
-     */
-    public MorphologyValue[] getValues();
-
-    /**
-     * Get a MorphologyValue object indicated by index.
-     *
-     * @param index ???_Description_of_the_Parameter_???
-     * @return the MorphologyValue object.
-     * @throws IndexOutOfBoundsException ???_Description_of_the_Exception_???
-     */
-    public MorphologyValue getValue( int index )
-            throws IndexOutOfBoundsException;
-
-    /**
-     * Returns the MorphologySubject object this belongs to.
-     *
-     * @return the parent MorphologySubject
-     */
-    public MorphologySubject getParentSubject();
 }

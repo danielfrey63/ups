@@ -11,33 +11,28 @@ import com.ethz.geobot.herbar.model.trait.MorphologySubject;
  */
 public class MorphologySubjectImpl extends GraphNodeImpl implements MorphologySubject
 {
-    /** @see com.ethz.geobot.herbar.model.trait.MorphologySubject#getAttributes() */
     public MorphologyAttribute[] getAttributes()
     {
         final GraphNodeList list = getChildren( MorphologyAttributeImpl.class );
         return (MorphologyAttributeImpl[]) list.getAll();
     }
 
-    /** @see com.ethz.geobot.herbar.model.trait.MorphologySubject#getAttribute(int) */
     public MorphologyAttribute getAttribute( final int index ) throws IndexOutOfBoundsException
     {
         return getAttributes()[index];
     }
 
-    /** @see com.ethz.geobot.herbar.model.trait.MorphologySubject#getSubjects() */
     public MorphologySubject[] getSubjects()
     {
         final GraphNodeList list = getChildren( MorphologySubjectImpl.class );
         return (MorphologySubjectImpl[]) list.getAll();
     }
 
-    /** @see com.ethz.geobot.herbar.model.trait.MorphologySubject#getSubject(int) */
     public MorphologySubject getSubject( final int index ) throws IndexOutOfBoundsException
     {
         return getSubjects()[index];
     }
 
-    /** @see com.ethz.geobot.herbar.model.trait.MorphologySubject#getParentSubject() */
     public MorphologySubject getParentSubject()
     {
         final GraphNodeList parents = getParents( MorphologySubjectImpl.class );

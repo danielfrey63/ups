@@ -1,7 +1,5 @@
 package ch.jfactory.model.graph.tree;
 
-import java.util.Comparator;
-
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
@@ -40,18 +38,13 @@ public class VirtualGraphTreeNodeFilter
 
     public static final Class CLASSES_ALL = Object.class;
 
-    public static final Class ROLES_ALL = Object.class;
-
     /** The vertices type to filter out */
     private Class type = CLASSES_ALL;
 
-    /** The edge role to filter out */
-    private Class role = ROLES_ALL;
-
     /**
      * Is this vertex a child of its parent? A parent of its child would be LINE_DESCENDANT. Note: Taking the default,
-     * the filter has not to be indicated on the parent side, but on the children side, as potentially more than one child
-     * may occur, but have not to be children.
+     * the filter has not to be indicated on the parent side, but on the children side, as potentially more than one
+     * child may occur, but have not to be children.
      */
     private int direction = LINE_ANCESTOR;
 
@@ -68,23 +61,11 @@ public class VirtualGraphTreeNodeFilter
      */
     private boolean bound = true;
 
-    /**
-     * Determines whether the tree for this filter is deep or flat. Only applies to recursive filters, and only for the
-     * recursive elements filtered by this filter.
-     */
-    private final boolean flat = false;
-
     /** Parent filter. May be null if root filter */
     private VirtualGraphTreeNodeFilter parent;
 
     /** Subsequent filters that are used as children for this filter */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
-
-    /** This comparator is used to sort the children of the associated GraphNode. */
-    private Comparator comparator;
-
-    /** Individual filter for nodes which might be customized by delivering a AbsGraphTreeNodeFilter. */
-    private AbsGraphTreeNodeFilter nodeFilter;
 
     public VirtualGraphTreeNodeFilter( final Class type, final boolean displayed,
                                        final boolean recursive, final boolean bound,
@@ -101,29 +82,6 @@ public class VirtualGraphTreeNodeFilter
         {
             childFilter.parent = this;
         }
-    }
-
-    /**
-     * Method VirtualGraphTreeNodeFilter.
-     *
-     * @param type       the Class type to filter
-     * @param role       the Class role to filter
-     * @param comp       the Comparator to sort the children
-     * @param nodeFilter the AbsGraphTreeNodeFilter to filter
-     * @param displayed  whether nodes of this filter is displayed
-     * @param recursive  whether this filter is applied recursively
-     * @param bound      whether this filter is bound to a matching parent filter
-     * @param filters    the children filters
-     * @param direction  the direction in which the children are found
-     */
-    public VirtualGraphTreeNodeFilter( final Class type, final Class role, final Comparator comp,
-                                       final AbsGraphTreeNodeFilter nodeFilter, final boolean displayed, final boolean recursive,
-                                       final boolean bound, final VirtualGraphTreeNodeFilter[] filters, final int direction )
-    {
-        this( type, displayed, recursive, bound, filters, direction );
-        this.role = role;
-        this.comparator = comp;
-        this.nodeFilter = nodeFilter;
     }
 
     /**
@@ -159,11 +117,6 @@ public class VirtualGraphTreeNodeFilter
     public Class getType()
     {
         return type;
-    }
-
-    public Class getRole()
-    {
-        return role;
     }
 
     /**
@@ -230,40 +183,10 @@ public class VirtualGraphTreeNodeFilter
         return parent;
     }
 
-    /**
-     * Returns the flat.
-     *
-     * @return boolean
-     */
-    public boolean isFlat()
-    {
-        return flat;
-    }
-
     /** @see Object#toString() */
     public String toString()
     {
         return type + " [down=" + direction + ",displayed=" + visible + ",recursive=" + recursive + ",bound=" + bound + "]";
-    }
-
-    /**
-     * Returns the comparator.
-     *
-     * @return Comparator
-     */
-    public Comparator getComparator()
-    {
-        return comparator;
-    }
-
-    /**
-     * Returns the nodeFilter.
-     *
-     * @return AbsGraphTreeNodeFilter
-     */
-    public AbsGraphTreeNodeFilter getNodeFilter()
-    {
-        return nodeFilter;
     }
 
     /**

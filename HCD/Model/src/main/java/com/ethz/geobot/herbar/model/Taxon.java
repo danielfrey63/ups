@@ -9,8 +9,6 @@
 package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.model.graph.GraphNode;
-import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * @author $Author: daniel_frey $
@@ -70,24 +68,6 @@ public interface Taxon
     public Taxon getChildTaxon( int index ) throws IndexOutOfBoundsException;
 
     /**
-     * Gets an arry of MorphologyValue objects associated, representing all inherited an directly assigned morphological
-     * traits of this taxon.
-     *
-     * @return the array of MorphologyValue.
-     */
-    public MorphologyValue[] getMorValues();
-
-    /**
-     * Gets the morphological trait at index.
-     *
-     * @param index index of MorphologyValue to retrieve.
-     * @return the MorphologyValue found.
-     */
-    public MorphologyValue getMorValue( int index );
-
-    public MorphologyAttribute[] getMorAttributes();
-
-    /**
      * Gets the position of the Taxon indicated within the array of Taxons.
      *
      * @param child child to locate.
@@ -112,14 +92,6 @@ public interface Taxon
     public Taxon[] getAllChildTaxa( Level level );
 
     /**
-     * Returns true if the taxon is in the specified list, else false returns false if list is null
-     *
-     * @param list a array of Taxon-Objects to search
-     * @return a boolean value
-     */
-    public boolean isIn( Taxon[] list );
-
-    /**
      * Returns all Level objects from all Taxon objects belonging to this Taxon, including this Taxon objects level.
      *
      * @return an array of Level objects.
@@ -142,112 +114,9 @@ public interface Taxon
     public PictureTheme[] getPictureThemes();
 
     /**
-     * Returns the siblings of this Taxon including itself.
-     *
-     * @return an array of Taxon objects including this Taxon
-     */
-    public Taxon[] getSiblings();
-
-    /**
-     * Returns the score for this Taxon, which is the amount of correctly answered questions divided by the amount of
-     * all questions in total.
-     *
-     * @return a double for the score
-     */
-    public double getScore();
-
-    /**
-     * Increases the score by one. If the answer was correct, the counter is incresed as well, otherwise not.
-     *
-     * @param right true, if the answer is correct
-     */
-    public void setScore( boolean right );
-
-    /**
      * Returns this Taxon objects as a GraphNode.
      *
      * @return graph node
      */
     public GraphNode getAsGraphNode();
 }
-
-// $Log: Taxon.java,v $
-// Revision 1.1  2007/09/17 11:07:24  daniel_frey
-// - Version 3.0.20070401
-//
-// Revision 1.16  2005/06/17 06:39:58  daniel_frey
-// New ActionButton icons and some corrections on documentation
-//
-// Revision 1.15  2004/08/31 22:10:17  daniel_frey
-// Examlist loading working
-//
-// Revision 1.14  2004/04/25 13:56:42  daniel_frey
-// Moved Dialogs from Herbars modeapi to xmatrix
-//
-// Revision 1.13  2003/04/24 23:12:51  daniel_frey
-// - Integrated complete db
-//
-// Revision 1.12  2003/02/21 15:43:00  daniel_frey
-// - Added getAsGraphNode decorator
-//
-// Revision 1.11  2002/11/05 11:21:58  daniel_frey
-// - Level with tree from GraphNode
-//
-// Revision 1.10  2002/09/25 14:41:35  daniel_frey
-// - Introduced dynamic relevance object model
-// - Replaced roles with relevances  by class types for each comination
-// - Removed some caching issues
-//
-// Revision 1.9  2002/08/27 15:07:39  Dani
-// - Converted id from string to integer
-//
-// Revision 1.8  2002/07/11 18:53:49  Dani
-// Removed interface Rankable
-//
-// Revision 1.7  2002/07/10 14:32:44  Dani
-// Derived from Rankable
-//
-// Revision 1.6  2002/06/20 17:43:05  dirk
-// add AbstractTaxon
-//
-// Revision 1.5  2002/06/11 17:17:56  Dani
-// Added $Log: Taxon.java,v $
-// Added Revision 1.1  2007/09/17 11:07:24  daniel_frey
-// Added - Version 3.0.20070401
-// Added
-// Added Revision 1.16  2005/06/17 06:39:58  daniel_frey
-// Added New ActionButton icons and some corrections on documentation
-// Added
-// Added Revision 1.15  2004/08/31 22:10:17  daniel_frey
-// Added Examlist loading working
-// Added
-// Added Revision 1.14  2004/04/25 13:56:42  daniel_frey
-// Added Moved Dialogs from Herbars modeapi to xmatrix
-// Added
-// Added Revision 1.13  2003/04/24 23:12:51  daniel_frey
-// Added - Integrated complete db
-// Added
-// Added Revision 1.12  2003/02/21 15:43:00  daniel_frey
-// Added - Added getAsGraphNode decorator
-// Added
-// Added Revision 1.11  2002/11/05 11:21:58  daniel_frey
-// Added - Level with tree from GraphNode
-// Added
-// Added Revision 1.10  2002/09/25 14:41:35  daniel_frey
-// Added - Introduced dynamic relevance object model
-// Added - Replaced roles with relevances  by class types for each comination
-// Added - Removed some caching issues
-// Added
-// Added Revision 1.9  2002/08/27 15:07:39  Dani
-// Added - Converted id from string to integer
-// Added
-// Added Revision 1.8  2002/07/11 18:53:49  Dani
-// Added Removed interface Rankable
-// Added
-// Added Revision 1.7  2002/07/10 14:32:44  Dani
-// Added Derived from Rankable
-// Added
-// Added Revision 1.6  2002/06/20 17:43:05  dirk
-// Added add AbstractTaxon
-// Added entry to end
-//

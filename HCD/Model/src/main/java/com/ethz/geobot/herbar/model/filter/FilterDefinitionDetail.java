@@ -95,19 +95,6 @@ public class FilterDefinitionDetail implements Cloneable
         return tax.getParentTaxon() == null;
     }
 
-    public Object clone() throws CloneNotSupportedException
-    {
-        try
-        {
-            return super.clone();
-        }
-        catch ( CloneNotSupportedException ex )
-        {
-            LOG.error( "clone isn't supported", ex );
-            throw new RuntimeException( ex );
-        }
-    }
-
     public String toString()
     {
         return scope + " " + Arrays.asList( levels );

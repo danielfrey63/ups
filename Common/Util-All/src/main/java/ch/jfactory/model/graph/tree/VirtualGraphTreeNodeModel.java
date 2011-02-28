@@ -124,15 +124,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
                 final VirtualGraphTreeNode node = VirtualGraphTreeNode.getGraphNode( child, parent );
                 if ( filter.isVisible() )
                 {
-                    final AbsGraphTreeNodeFilter nodeFilter = filter.getNodeFilter();
-                    if ( nodeFilter == null || nodeFilter.isVisible( node ) )
-                    {
-                        result.add( node );
-                    }
-                    else
-                    {
-                        result.addAll( getChildren( node ) );
-                    }
+                    result.add( node );
                 }
                 else
                 {

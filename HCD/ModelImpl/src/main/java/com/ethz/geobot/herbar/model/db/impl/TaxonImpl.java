@@ -6,7 +6,6 @@
 
 package com.ethz.geobot.herbar.model.db.impl;
 
-import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeImpl;
 import ch.jfactory.model.graph.GraphNodeList;
@@ -16,9 +15,6 @@ import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureText;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.trait.MorphologyText;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,36 +53,6 @@ public class TaxonImpl extends GraphNodeImpl implements Taxon
     public Taxon getChildTaxon( final int index ) throws IndexOutOfBoundsException
     {
         return getChildTaxa()[index];
-    }
-
-    public MorphologyValue[] getMorValues()
-    {
-        final GraphNodeList texts = getChildren( MorphologyText.class );
-        final GraphNodeList values = new GraphNodeList();
-        for ( int i = 0; i < texts.size(); i++ )
-        {
-            values.addAll( texts.get( i ).getParents( MorphologyValue.class ) );
-        }
-        return (MorphologyValue[]) values.getAll( new MorphologyValueImpl[0] );
-    }
-
-    public MorphologyValue getMorValue( final int index )
-    {
-        return getMorValues()[index];
-    }
-
-    public MorphologyAttribute[] getMorAttributes()
-    {
-        final MorphologyValueImpl[] values = (MorphologyValueImpl[]) getMorValues();
-        final GraphNodeList attributes = new GraphNodeList();
-        for ( final MorphologyValueImpl value : values )
-        {
-            if ( !attributes.contains( value ) )
-            {
-                attributes.add( (MorphologyAttributeImpl) value.getParentAttribute() );
-            }
-        }
-        return (MorphologyAttribute[]) attributes.getAll( new MorphologyAttributeImpl[0] );
     }
 
     public int getChildTaxon( final Taxon child )
@@ -129,11 +95,6 @@ public class TaxonImpl extends GraphNodeImpl implements Taxon
             result.addAll( Arrays.asList( subChildren ) );
         }
         return result.toArray( new Taxon[result.size()] );
-    }
-
-    public boolean isIn( final Taxon[] list )
-    {
-        return ArrayUtils.contains( list, this );
     }
 
     public Level[] getSubLevels()
@@ -193,29 +154,5 @@ public class TaxonImpl extends GraphNodeImpl implements Taxon
             result.add( (PictureTheme) text.getChildren( PictureTheme.class ).get( 0 ) );
         }
         return result.toArray( new PictureTheme[result.size()] );
-    }
-
-    public Taxon[] getSiblings()
-    {
-        final GraphNode parent = getParents( TaxonImpl.class ).get( 0 );
-        if ( parent == null )
-        {
-            return new Taxon[0];
-        }
-        else
-        {
-            final GraphNodeList children = parent.getChildren( TaxonImpl.class );
-            return (TaxonImpl[]) children.getAll( new TaxonImpl[0] );
-        }
-    }
-
-    public double getScore()
-    {
-        throw new NoSuchMethodError( "getScore not implemented yet" );
-    }
-
-    public void setScore( final boolean right )
-    {
-        throw new NoSuchMethodError( "setScore not implemented yet" );
     }
 }

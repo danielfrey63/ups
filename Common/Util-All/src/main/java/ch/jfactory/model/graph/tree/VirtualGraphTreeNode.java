@@ -200,23 +200,6 @@ public class VirtualGraphTreeNode implements GraphNode
         return (VirtualGraphTreeNode) model.get( full );
     }
 
-    /*
-        private VirtualGraphTreeNodeList getFiltered(VirtualGraphTreeNodeList list,
-        Class type) {
-            if (type.equals("*")) {
-                return list;
-            }
-            VirtualGraphTreeNodeList result = new VirtualGraphTreeNodeList();
-            for (int i = 0; i < list.size(); i++) {
-                VirtualGraphTreeNode node = (VirtualGraphTreeNode)list.getTreeNode(i);
-                if (node.isType(type)) {
-                    result.add(node);
-                }
-            }
-            return result;
-        }
-    */
-
     /**
      * Method typical for the tree behaviour of a <code>TreeNode</code>
      *
@@ -367,25 +350,21 @@ public class VirtualGraphTreeNode implements GraphNode
         return result;
     }
 
-    /** @see GraphNode#getParents(Class) */
     public GraphNodeList getParents( final Class type )
     {
         return getVirtual( dependent.getParents( type ) );
     }
 
-    /** @see GraphNode#getAllParents(Class) */
     public GraphNodeList getAllParents( final Class type )
     {
         return getVirtual( dependent.getAllParents( type ) );
     }
 
-    /** @see GraphNode#getChildren() */
     public GraphNodeList getChildren()
     {
         return model.getChildren( this );
     }
 
-    /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getChildren( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -398,7 +377,6 @@ public class VirtualGraphTreeNode implements GraphNode
         return result;
     }
 
-    /** @see GraphNode#getAllChildren(Class) */
     public GraphNodeList getAllChildren( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -421,37 +399,31 @@ public class VirtualGraphTreeNode implements GraphNode
         dependent.setId( id );
     }
 
-    /** @see GraphNode#setName(String) */
     public void setName( final String name )
     {
         dependent.setName( name );
     }
 
-    /** @see GraphNode#setRank(int) */
     public void setRank( final int rank )
     {
         dependent.setRank( rank );
     }
 
-    /** @see GraphNode#setChildren(GraphNodeList) */
     public void setChildren( final GraphNodeList children )
     {
         dependent.setChildren( getDependents( children ) );
     }
 
-    /** @see GraphNode#setChildren(ch.jfactory.model.graph.GraphNodeList, Class) */
     public void setChildren( final GraphNodeList children, final Class type )
     {
         dependent.setChildren( getDependents( children ), type );
     }
 
-    /** @see GraphNode#addChild(GraphNode) */
     public void addChild( final GraphNode child )
     {
         addChild( dependent.getChildren().size(), child );
     }
 
-    /** @see GraphNode#addChild(int, ch.jfactory.model.graph.GraphNode) */
     public void addChild( final int index, final GraphNode child )
     {
         // Find index in context of all children
@@ -474,51 +446,43 @@ public class VirtualGraphTreeNode implements GraphNode
         dependent.addChild( hiddenIndex, missile.getDependent() );
     }
 
-    /** @see GraphNode#addNewChild(int, String, Class) */
     public GraphNode addNewChild( final int index, final String name, final Class type )
     {
         return getGraphNode( dependent.addNewChild( index, name, type ), this );
     }
 
-    /** @see GraphNode#deleteChild(GraphNode) */
     public boolean deleteChild( final GraphNode child )
     {
         final VirtualGraphTreeNode vChild = (VirtualGraphTreeNode) child;
         return dependent.deleteChild( vChild.getDependent() );
     }
 
-    /** @see GraphNode#deleteChildren(Class) */
     public void deleteChildren( final Class type )
     {
         getDependent().deleteChildren( type );
     }
 
-    /** @see GraphNode#removeFromChild(GraphNode) */
     public boolean removeFromChild( final GraphNode child )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) child;
         return getDependent().removeFromChild( vNode.getDependent() );
     }
 
-    /** @see GraphNode#setParents(GraphNodeList) */
     public void setParents( final GraphNodeList parents )
     {
         dependent.setParents( getDependents( parents ) );
     }
 
-    /** @see GraphNode#setParents(ch.jfactory.model.graph.GraphNodeList, Class) */
     public void setParents( final GraphNodeList parents, final Class type )
     {
         dependent.setParents( getDependents( parents ), type );
     }
 
-    /** @see GraphNode#addParent(ch.jfactory.model.graph.GraphNode) */
     public void addParent( final GraphNode parent )
     {
         addParent( dependent.getParents().size(), parent );
     }
 
-    /** @see GraphNode#addParent(int, ch.jfactory.model.graph.GraphNode) */
     public void addParent( final int index, final GraphNode parent )
     {
         // Find index in context of all children. It might be that the parent
@@ -548,43 +512,30 @@ public class VirtualGraphTreeNode implements GraphNode
         dependent.addParent( hiddenIndex, missile.getDependent() );
     }
 
-    /** @see GraphNode#addNewParent(int, String, Class) */
     public GraphNode addNewParent( final int index, final String name, final Class type )
     {
         return getGraphNode( dependent.addNewParent( index, name, type ), this );
     }
 
-    /** @see GraphNode#deleteParent(GraphNode) */
     public boolean deleteParent( final GraphNode parent )
     {
         final VirtualGraphTreeNode vParent = (VirtualGraphTreeNode) parent;
         return dependent.deleteParent( vParent.getDependent() );
     }
 
-    /** @see GraphNode#deleteParents(Class) */
     public void deleteParents( final Class type )
     {
         getDependent().deleteParents( type );
     }
 
-    /** @see GraphNode#removeFromParent(GraphNode) */
     public boolean removeFromParent( final GraphNode parent )
     {
         final VirtualGraphTreeNode vNode = (VirtualGraphTreeNode) parent;
         return getDependent().removeFromParent( vNode.getDependent() );
     }
 
-    /** @see GraphNode#toString() */
     public String toString()
     {
         return dependent.toString();
     }
 }
-
-// $Log: VirtualGraphTreeNode.java,v $
-// Revision 1.1  2005/06/16 06:28:58  daniel_frey
-// Completely merged and finished for UST version 2.0-20050616
-//
-// Revision 1.1  2004/04/19 10:31:21  daniel_frey
-// Replaced top level package com by ch
-//

@@ -10,7 +10,6 @@ import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -119,26 +118,6 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         this.dependentModel = model;
         filterDetails.clear();
         addFilterDetail();
-//        for (Iterator iterator = filterDetails.iterator(); iterator.hasNext();) {
-//            FilterDefinitionDetail detail = (FilterDefinitionDetail) iterator.next();
-//
-//            Taxon scope = detail.getScope();
-//            if (dependentModel instanceof FilterModel && !((FilterModel)dependentModel).isIn(scope)) {
-//                scope = getRootTaxon();
-//            }
-//            FilterTaxon filterTaxon = (FilterTaxon) scope;
-//            filterTaxon.clearCachedSubLevels();
-//            Taxon dependent = filterTaxon.getDependentTaxon();
-//            if (dependent instanceof FilterTaxon) {
-//                FilterTaxon dependentTaxon = (FilterTaxon) dependent;
-//                dependentTaxon.setFilterModel((FilterModel)model);
-//            }
-//            detail.setScope(scope);
-//
-//            Level[] levels = detail.getLevels();
-//            levels = (Level[]) ArrayUtils.intersect(levels, dependentModel.getLevels(), new Level[0]);
-//            detail.setLevels(levels);
-//        }
         notifyModelChange();
     }
 
@@ -194,28 +173,6 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     {
         LOG.trace( "create new filter detail for scope: " + scope + " levels: " + Arrays.toString( levels ) );
         return new FilterDefinitionDetail( this, scope, levels );
-    }
-
-    public Object clone() throws CloneNotSupportedException
-    {
-        try
-        {
-            final FilterModel model = (FilterModel) super.clone();
-            // prepare FilterModel to be independent
-            model.filteredTaxonList = new HashMap<Taxon, Taxon>();
-            model.filterDetails = new ArrayList<FilterDefinitionDetail>( this.filterDetails.size() );
-            for ( final Object filterDetail : filterDetails )
-            {
-                final FilterDefinitionDetail filterDefinitionDetail = (FilterDefinitionDetail) filterDetail;
-                model.filterDetails.add( new FilterDefinitionDetail( model, filterDefinitionDetail.getScope(), filterDefinitionDetail.getLevels() ) );
-            }
-            return model;
-        }
-        catch ( CloneNotSupportedException ex )
-        {
-            LOG.error( "clone isn't supported", ex );
-            throw new RuntimeException( ex );
-        }
     }
 
     public HerbarModel getDependantModel()
@@ -290,17 +247,5 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     {
         filteredTaxonList.clear();
         this.fireModelChangeEvent( new ModelChangeEvent( this ) );
-    }
-
-    /** @see HerbarModel#getValues(String) */
-    public MorphologyValue[] getValues( final String name )
-    {
-        throw new NoSuchMethodError( "getValue(String) not implemented yet" );
-    }
-
-    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.trait.MorphologyValue) */
-    public Taxon[] getTaxa( final MorphologyValue morphologyValue )
-    {
-        throw new NoSuchMethodError( "getTaxon(MorphologyValue) not implemented yet" );
     }
 }

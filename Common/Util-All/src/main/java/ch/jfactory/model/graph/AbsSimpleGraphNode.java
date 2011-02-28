@@ -56,55 +56,47 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return parents;
     }
 
-    /** @see GraphNode#isType(Class) */
     public boolean isType( final Class type )
     {
         return type.isAssignableFrom( this.getClass() );
     }
 
-    /** @see GraphNode#getId() */
     public int getId()
     {
         LOGGER.trace( "getId(): " + id );
         return id;
     }
 
-    /** @see GraphNode#getName() */
     public String getName()
     {
         LOGGER.trace( "getName(): " + name );
         return name;
     }
 
-    /** @see GraphNode#getRank() */
     public int getRank()
     {
         LOGGER.trace( "getRank(): " + rank );
         return rank;
     }
 
-    /** @see GraphNode#setId(int) */
     public void setId( final int id )
     {
         LOGGER.trace( "setId(" + id + ")" );
         this.id = id;
     }
 
-    /** @see GraphNode#setName(String) */
     public void setName( final String name )
     {
         LOGGER.trace( "setName(" + name + ")" );
         this.name = name;
     }
 
-    /** @see GraphNode#setRank(int) */
     public void setRank( final int rank )
     {
         LOGGER.trace( "setRank(" + rank + ")" );
         this.rank = rank;
     }
 
-    /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getChildren( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -117,7 +109,6 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /** @see GraphNode#getAllChildren(Class) */
     public GraphNodeList getAllChildren( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -140,7 +131,6 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         setChildren( children, TYPES_ALL );
     }
 
-    /** @see GraphNode#getChildren(Class) */
     public GraphNodeList getParents( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -153,7 +143,6 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /** @see GraphNode#getAllParents(Class) */
     public GraphNodeList getAllParents( final Class type )
     {
         final GraphNodeList result = new GraphNodeList();
@@ -165,13 +154,11 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
         return result;
     }
 
-    /** @see GraphNode#setParents(GraphNodeList) */
     public void setParents( final GraphNodeList parents )
     {
         setParents( parents, TYPES_ALL );
     }
 
-    /** @see Object#toString() */
     public String toString()
     {
         if ( DEBUG_NODE_NAMES )

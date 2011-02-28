@@ -13,11 +13,6 @@ import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
-import com.ethz.geobot.herbar.model.trait.MorphologyText;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author $Author: daniel_frey $
@@ -85,40 +80,6 @@ public class GraphHerbarModelImpl implements HerbarModel
             }
         }
         return null;
-    }
-
-    public MorphologyValue[] getValues( final String name )
-    {
-        return getValues( AbsGraphModel.getModel().getRoot(), name );
-    }
-
-    private MorphologyValue[] getValues( final GraphNode sub, final String name )
-    {
-        final List<MorphologyValue> result = new ArrayList<MorphologyValue>();
-        final GraphNodeList children = sub.getAllChildren( MorphologyValue.class );
-        for ( int i = 0; i < children.size(); i++ )
-        {
-            final GraphNode child = children.get( i );
-            if ( child.toString().equals( name ) )
-            {
-                result.add( (MorphologyValue) child );
-            }
-        }
-        return result.toArray( new MorphologyValue[result.size()] );
-    }
-
-    public Taxon[] getTaxa( final MorphologyValue morphologyValue )
-    {
-        final List<GraphNode> taxa = new ArrayList<GraphNode>();
-        final GraphNode morNode = (GraphNode) morphologyValue;
-        final GraphNodeList texts = morNode.getChildren( MorphologyText.class );
-        for ( int i = 0; i < texts.size(); i++ )
-        {
-            final GraphNode text = texts.get( i );
-            final GraphNodeList values = text.getParents( Taxon.class );
-            taxa.addAll( Arrays.asList( values.getAll() ) );
-        }
-        return taxa.toArray( new Taxon[taxa.size()] );
     }
 
     public Taxon getTaxon( final String name )

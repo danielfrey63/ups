@@ -13,8 +13,7 @@ import javax.swing.tree.TreeNode;
 
 /**
  * Wraps a <code>Taxon</code> into a non-mutable <code>TreeNode</code>. The <code>DefaultTaxonTreeNode</code> may be
- * used in a tree to display the <code>Taxon</code> objects. For a editable <code>DefaultTaxonTreeNode</code> see
- * <code>MutuableTaxonTreeNode</code>.
+ * used in a tree to display the <code>Taxon</code> objects..
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
@@ -22,9 +21,7 @@ import javax.swing.tree.TreeNode;
  */
 public class DefaultTaxonTreeNode implements TaxonTreeNode
 {
-    /**
-     * The <code>Taxon</code> object to be wrapped.
-     */
+    /** The <code>Taxon</code> object to be wrapped. */
     private final Taxon tax;
 
     /**
@@ -37,65 +34,49 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
         this.tax = tax;
     }
 
-    /**
-     * @see TaxonTreeNode#getTaxon()
-     */
+    /** @see TaxonTreeNode#getTaxon() */
     public Taxon getTaxon()
     {
         return tax;
     }
 
-    /**
-     * @see TreeNode#getAllowsChildren()
-     */
+    /** @see TreeNode#getAllowsChildren() */
     public boolean getAllowsChildren()
     {
         return tax.getLevel().getChildLevel() == null;
     }
 
-    /**
-     * @see TreeNode#getChildAt(int)
-     */
+    /** @see TreeNode#getChildAt(int) */
     public TreeNode getChildAt( final int param )
     {
         return new DefaultTaxonTreeNode( tax.getChildTaxon( param ) );
     }
 
-    /**
-     * @see TreeNode#getChildCount()
-     */
+    /** @see TreeNode#getChildCount() */
     public int getChildCount()
     {
         return tax.getChildTaxa().length;
     }
 
-    /**
-     * @see TreeNode#getIndex(TreeNode)
-     */
+    /** @see TreeNode#getIndex(TreeNode) */
     public int getIndex( final TreeNode treeNode )
     {
         return tax.getChildTaxon( ( (DefaultTaxonTreeNode) treeNode ).getTaxon() );
     }
 
-    /**
-     * @see TreeNode#getParent()
-     */
+    /** @see TreeNode#getParent() */
     public TreeNode getParent()
     {
         return new DefaultTaxonTreeNode( tax.getParentTaxon() );
     }
 
-    /**
-     * @see TreeNode#isLeaf()
-     */
+    /** @see TreeNode#isLeaf() */
     public boolean isLeaf()
     {
         return getChildCount() == 0;
     }
 
-    /**
-     * @see TreeNode#children()
-     */
+    /** @see TreeNode#children() */
     public Enumeration children()
     {
         final Taxon[] taxa = tax.getChildTaxa();
@@ -107,9 +88,7 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
         return v.elements();
     }
 
-    /**
-     * @see Object#toString()
-     */
+    /** @see Object#toString() */
     public String toString()
     {
         return tax.toString();

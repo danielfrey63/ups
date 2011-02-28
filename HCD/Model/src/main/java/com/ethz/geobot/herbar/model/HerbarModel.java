@@ -9,7 +9,6 @@ import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
-import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * abstract representation of the Herbar-data-model.
@@ -75,14 +74,6 @@ public interface HerbarModel
     public Taxon getTaxon( String name );
 
     /**
-     * Returns all Taxon objects which contain the given Morphology item.
-     *
-     * @param morphologyValue Morphology item to search for
-     * @return Array of Taxon objects
-     */
-    public Taxon[] getTaxa( MorphologyValue morphologyValue );
-
-    /**
      * Returns the Level with the given name or null if not found.
      *
      * @param name the name of the Level object to be found
@@ -110,14 +101,6 @@ public interface HerbarModel
      * @param listener the listener object
      */
     public void addModelChangeListener( ModelChangeListener listener );
-
-    /**
-     * Return a Morphology item given by the name.
-     *
-     * @param name of the item
-     * @return the value
-     */
-    public MorphologyValue[] getValues( String name );
 
     public void setName( String name );
 }

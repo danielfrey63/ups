@@ -2,7 +2,6 @@ package ch.jfactory.component.list;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.ListModel;
 
@@ -14,21 +13,6 @@ import javax.swing.ListModel;
  */
 public class DefaultJList<T> extends JList
 {
-    public DefaultJList( final ListModel dataModel )
-    {
-        super( dataModel );
-    }
-
-    public DefaultJList( final T[] listData )
-    {
-        super( listData );
-    }
-
-    public DefaultJList( final Vector<T> listData )
-    {
-        super( listData );
-    }
-
     public DefaultJList()
     {
     }
@@ -64,7 +48,6 @@ public class DefaultJList<T> extends JList
             if ( start >= 0 )
             {
                 this.addSelectionInterval( start, model.getSize() - 1 );
-                start = -1;
             }
         }
     }

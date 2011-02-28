@@ -44,19 +44,19 @@ public class CorrectnessChecker
 
     private static final LevenshteinLevel mustBeEqual = LevenshteinLevel.LEVEL_EQUAL;
 
-    private static final Map hsh;
+    private static final Map<String, String[]> hsh;
 
-    private List correctnessText;
+    private List<String> correctnessText;
 
     public Correctness getCorrectness( final Taxon taxon, String guess )
     {
         final String correct = taxon.getName();
 
-        Correctness ret = null;
+        Correctness ret;
         correctnessText = null;
 
         // get proposed string and eliminate double spaces
-        int iDoubles = -1;
+        int iDoubles;
         guess = guess.trim();
         while ( ( iDoubles = guess.indexOf( "  " ) ) >= 0 )
         {
@@ -68,12 +68,11 @@ public class CorrectnessChecker
         {
             final Correctness[] iG = checkGenus( correct, guess );
             final Correctness[] iS = checkEpithethon( correct, guess );
-            final List vA = new ArrayList();
-            // all wrong if body or ending of genus wrong. then check for
-            // synonymes
+            final List<String> vA = new ArrayList<String>();
+            // all wrong if body or ending of genus wrong. then check for synonyms
             if ( iG[0] == IS_FALSE || iG[1] == IS_FALSE )
             {
-                return checkSynonyme( taxon, guess );
+                ret = checkSynonym( taxon, guess );
             }
             // all correct
             else if ( iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE )
@@ -107,7 +106,7 @@ public class CorrectnessChecker
                 vA.add( "Zum Vergleich:" );
                 vA.add( "- " + correct + " (richtige Lösung)" );
                 vA.add( "- " + guess + " (Ihr Vorschlag)" );
-                correctnessText = new ArrayList();
+                correctnessText = new ArrayList<String>();
                 correctnessText.add( " " );
                 correctnessText.add( "Sie sind nahe dran:                         " );
                 correctnessText.addAll( vA );
@@ -131,7 +130,7 @@ public class CorrectnessChecker
             }
             else if ( withinTolerance )
             {
-                correctnessText = new ArrayList();
+                correctnessText = new ArrayList<String>();
                 correctnessText.add( " " );
                 correctnessText.add( "Sie sind nahe dran:                         " );
                 correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in  " );
@@ -146,13 +145,13 @@ public class CorrectnessChecker
             }
             else
             {
-                ret = checkSynonyme( taxon, guess );
+                ret = checkSynonym( taxon, guess );
             }
         }
         return ret;
     }
 
-    private Correctness checkSynonyme( final Taxon taxon, final String synString )
+    private Correctness checkSynonym( final Taxon taxon, final String synString )
     {
         final GraphNodeList sil = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
         EvaluationResult eval = EvaluationResult.EVALUATION_FAILED;
@@ -163,7 +162,7 @@ public class CorrectnessChecker
         }
         if ( eval.isPassed() )
         {
-            correctnessText = new ArrayList();
+            correctnessText = new ArrayList<String>();
             correctnessText.add( "Sie verwenden ein Synonym:      " );
             correctnessText.add( "  " + synString );
             correctnessText.add( " " );
@@ -234,22 +233,20 @@ public class CorrectnessChecker
         else
         {
             final Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
-            String correctBody = null, guessedBody = null, strKey,
+            String correctBody = null, guessedBody = null,
                     guessPostfix = "", correctPostfix = "", toleratedEndings[];
-            final Iterator eVals = hsh.values().iterator();
-            final Iterator eKeys = hsh.keySet().iterator();
-            while ( eKeys.hasNext() )
+            final Iterator<String[]> eVals = hsh.values().iterator();
+            for ( final String s : hsh.keySet() )
             {
-                strKey = (String) eKeys.next();
-                toleratedEndings = (String[]) eVals.next();
-                if ( guess.endsWith( strKey ) )
+                toleratedEndings = eVals.next();
+                if ( guess.endsWith( s ) )
                 {
-                    if ( correct.endsWith( strKey ) && guess.length() == correct.length() )
+                    if ( correct.endsWith( s ) && guess.length() == correct.length() )
                     {
                         // both endings match, but bodies are different
                         res[1] = IS_TRUE;
-                        guessPostfix = strKey;
-                        correctPostfix = strKey;
+                        guessPostfix = s;
+                        correctPostfix = s;
                     }
                     else
                     {
@@ -299,76 +296,14 @@ public class CorrectnessChecker
         }
     }
 
-    public List getCorrectnessText()
+    public List<String> getCorrectnessText()
     {
         return correctnessText;
     }
 
-//    /**
-//     * Tests each associated element of the current taxon. All morphological
-//     * ecological and use associations are compared to the given item. This
-//     * method calls <a href="#getCorrectness(com.ethz.geobot.herbarCD.model.TaxItem,
-//     * com.ethz.geobot.herbarCD.model.ExtendedItem)"><code>getCorrectness()</code></a>
-//     * with the current taxon (focus).
-//     * @param  p_ei item searched for
-//     * @return type of correctness
-//     * @see    #getCorrectness(String, String)
-//     * getCorrectness(TaxItem, ExtendedItem)
-//     */
-//    public Correctness getCorrectness(ExtendedItem p_ei) {
-//        /* Syslog.info(this, "getCorrectness(" + p_ei + ")"); */
-//        return getCorrectness(m_ms.getTaxFocus(), p_ei);
-//    }
-//
-//    /**
-//     * Tests each associated element of the given taxon. All morphological
-//     * ecological and use associations are compared to the given item.
-//     * @param  p_ei item searched for
-//     * @param  p_tiFocus base to derive all associations to compare
-//     * @return type of correctness
-//     * @see    #getCorrectness(com.ethz.geobot.herbarCD.model.ExtendedItem)
-//     * getCorrectness(ExtendedItem)
-//     */
-//    public Correctness getCorrectness(TaxItem p_tiFocus, ExtendedItem p_ei) {
-//        /* Syslog.info(this, "getCorrectness(" + p_tiFocus + "," + p_ei + ")"); */
-//        int i = 0;
-//        Correctness cCorrect = IS_FALSE;
-//        MorItemList mil = p_tiFocus.getMor();
-//        for (i = 0; cCorrect != IS_TRUE && i < mil.count(); i++) {
-//            if (mil.getMor(i) == p_ei) {
-//                cCorrect = IS_TRUE;
-//                break;
-//            }
-//            if (mil.getMor(i).getParent() == p_ei.getParent()) {
-//                cCorrect = IS_NEARLY_TRUE;
-//            }
-//        }
-//        AttItemList ail = p_tiFocus.getOek();
-//        for (i = 0; cCorrect != IS_TRUE && i < ail.count(); i++) {
-//            if (ail.getAtt(i) == p_ei) {
-//                cCorrect = IS_TRUE;
-//                break;
-//            }
-//            if (ail.getAtt(i).getParent() == p_ei.getParent()) {
-//                cCorrect = IS_NEARLY_TRUE;
-//            }
-//        }
-//        ail = p_tiFocus.getVerw();
-//        for (i = 0; cCorrect != IS_TRUE && i < ail.count(); i++) {
-//            if (ail.getAtt(i) == p_ei) {
-//                cCorrect = IS_TRUE;
-//                break;
-//            }
-//            if (ail.getAtt(i).getParent() == p_ei.getParent()) {
-//                cCorrect = IS_NEARLY_TRUE;
-//            }
-//        }
-//        return cCorrect;
-//    }
-
     static
     {
-        hsh = new HashMap();
+        hsh = new HashMap<String, String[]>();
         // make sure to have the shorter endings at the end...
         hsh.put( "tans", new String[]{"ens", "tans"} );
         hsh.put( "ens", new String[]{"ens", "tans"} );

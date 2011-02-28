@@ -15,7 +15,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,13 +26,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Makes a simple status bar to display i.e. at the bottom of a frame.
@@ -43,6 +41,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class StatusBar extends JPanel
 {
+    /** This class logger. */
+    private static final Logger LOG = LoggerFactory.getLogger( StatusBar.class );
+
     private static final String LOGO = "\u00A9 " + Calendar.getInstance().get( Calendar.YEAR ) + " www.xmatrix.ch";
 
     private final GridBagConstraints constraints = new GridBagConstraints();
@@ -70,6 +71,7 @@ public class StatusBar extends JPanel
      */
     public synchronized void addStatusComponent( final JComponent component )
     {
+        LOG.debug( "adding component " + component.hashCode() );
         final StatusPanel statusPanel;
         statusPanel = StatusPanel.class.isAssignableFrom( component.getClass() ) ? (StatusPanel) component : new StatusPanel( component );
         components.add( component );
@@ -82,6 +84,7 @@ public class StatusBar extends JPanel
 
     public synchronized void addStatusComponent( final JComponent component, final int index )
     {
+        LOG.debug( "adding at " + index + " component " + component.hashCode() );
         final List<JComponent> componentsCopy = new ArrayList<JComponent>( components );
         final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>( statusPanels );
         for ( int i = 1; i < components.size(); i++ )
@@ -111,6 +114,7 @@ public class StatusBar extends JPanel
      */
     public synchronized void removeStatusComponent( final JComponent component )
     {
+        LOG.debug( "removing " + component.hashCode() );
         boolean found = false;
         final List<JComponent> componentsCopy = new ArrayList<JComponent>( components );
         final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>( statusPanels );

@@ -111,23 +111,17 @@ public class QuestionWindow extends JDialog implements Question
         Dialogs.showInfoMessage( this.getRootPane(), "Falsche Antwort", text + " " + unique.getName() );
     }
 
-    /**
-     * @see Question#firstQuestion()
-     */
+    /** @see Question#firstQuestion() */
     public void firstQuestion()
     {
     }
 
-    /**
-     * @see Question#lastQuestion()
-     */
+    /** @see Question#lastQuestion() */
     public void lastQuestion()
     {
     }
 
-    /**
-     * demand a questionObject of the datapool to generate the next question.
-     */
+    /** demand a questionObject of the datapool to generate the next question. */
     public CorrectnessChecker.Correctness showQuestion( final QuestionDataUnit questionDataUnit )
     {
         tax = questionDataUnit.getTaxon();
@@ -188,9 +182,7 @@ public class QuestionWindow extends JDialog implements Question
         super.processWindowEvent( e );
     }
 
-    /**
-     * initialisation of jwindow and components, containing the answer validation
-     */
+    /** initialisation of jwindow and components, containing the answer validation */
     private void init()
     {
         setDefaultCloseOperation( JDialog.DO_NOTHING_ON_CLOSE );
@@ -247,8 +239,7 @@ public class QuestionWindow extends JDialog implements Question
                 correctness = correctnessChecker.getCorrectness( ancestorTax, answer.getText() );
                 if ( correctness == CorrectnessChecker.IS_NEARLY_TRUE )
                 {
-                    setCorrectOptionPane( Strings.getString( Catcher.class, "CATCHER.CORRECT.DISTANCE", "" +
-                            correctness ), ancestorTax );
+                    setCorrectOptionPane( Strings.getString( Catcher.class, "CATCHER.CORRECT.DISTANCE" ), ancestorTax );
                 }
                 else if ( correctness == CorrectnessChecker.IS_FALSE )
                 {

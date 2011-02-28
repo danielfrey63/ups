@@ -48,8 +48,6 @@ public abstract class AbsGraphModel implements GraphModel
 
     private static boolean dirty;
 
-    private boolean readOnly;
-
     static
     {
         for ( int i = 0; i < CHECK.length; i++ )
@@ -152,15 +150,5 @@ public abstract class AbsGraphModel implements GraphModel
             final DirtyListener listener = (DirtyListener) listener1;
             listener.dirtyChanged( dirty );
         }
-    }
-
-    public void setReadOnly()
-    {
-        this.readOnly = true;
-    }
-
-    public boolean isReadOnly()
-    {
-        return readOnly;
     }
 }

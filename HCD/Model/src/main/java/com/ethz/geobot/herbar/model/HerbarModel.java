@@ -112,20 +112,12 @@ public interface HerbarModel
     public void addModelChangeListener( ModelChangeListener listener );
 
     /**
-     * remove a ModelChangeListener from the model.
-     *
-     * @param listener the listener object
-     */
-    public void removeModelChangeListener( ModelChangeListener listener );
-
-    /**
      * Return a Morphology item given by the name.
      *
      * @param name of the item
+     * @return the value
      */
     public MorphologyValue[] getValues( String name );
 
     public void setName( String name );
-
-    public void setReadOnly();
 }

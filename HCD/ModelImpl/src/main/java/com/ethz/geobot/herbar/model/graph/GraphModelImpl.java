@@ -118,15 +118,10 @@ public class GraphModelImpl extends AbsGraphModel
         }
     }
 
-    /** @see GraphModel#doQuit() */
     public void doQuit()
     {
-//        ResultSet rs = null;
         try
         {
-            //stmt.executeUpdate("SELECT * FROM vertices v LEFT OUTER JOIN "
-            //    + "edges e ON e.child_id = v.id WHERE child_id IS ROLE_NULL");
-
             stmt.executeUpdate( "SHUTDOWN COMPACT" );
             stmt.close();
             conn.close();
@@ -278,8 +273,7 @@ public class GraphModelImpl extends AbsGraphModel
     {
         final GraphNode parent = edge.getParent();
         final GraphNode child = edge.getChild();
-        final long newId = getCombinedId( parent, child );
-        edgeCache.put( newId, edge );
+        edgeCache.put( getCombinedId( parent, child ), edge );
         edgeIdCache.put( edge.getId(), edge );
     }
 
@@ -292,26 +286,17 @@ public class GraphModelImpl extends AbsGraphModel
         return edgeIdCache.remove( new Integer( edge.getId() ) );
     }
 
+    /**
+     * Returns the edge for the two nodes. If in read only mode, the edge is
+     *
+     * @param parent the parent node
+     * @param child  the child node
+     * @return the matching edge
+     */
     private GraphEdge getCombinedEdge( final GraphNode parent, final GraphNode child )
     {
-        final Collection<GraphEdge> values = edgeIdCache.values();
-        if ( isReadOnly() )
-        {
-            final long newId = getCombinedId( parent, child );
-            return edgeCache.get( new Long( newId ) );
-        }
-        else
-        {
-            for ( final Object value : values )
-            {
-                final GraphEdge e = (GraphEdge) value;
-                if ( e.getParent() == parent && e.getChild() == child )
-                {
-                    return e;
-                }
-            }
-            return null;
-        }
+        final long newId = getCombinedId( parent, child );
+        return edgeCache.get( new Long( newId ) );
     }
 
     private long getCombinedId( final GraphNode parent, final GraphNode child )
@@ -399,7 +384,7 @@ public class GraphModelImpl extends AbsGraphModel
                 newEdges.add( edge );
             }
         }
-        // Resurrect eventually removed egdes / nodes
+        // Resurrect eventually removed edges / nodes
         removedEdges.remove( edge );
         removedNodes.remove( parent );
         removedNodes.remove( child );
@@ -738,55 +723,4 @@ public class GraphModelImpl extends AbsGraphModel
             System.out.println( buffer );
         }
     }
-//
-//    public void printAllCacheSizes( final String search )
-//    {
-//        final Collection[] lists = new Collection[]{newNodes, changedNodes, removedNodes, newEdges, changedEdges,
-//                removedEdges, edgeIdCache.values(), nodeCache.values()};
-//        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
-//                "edges new", "edges changed", "edges removed", "edge cache",
-//                "edge id cache", "node cache"};
-//        for ( int i = 0; i < titles.length; i++ )
-//        {
-//            int count = 0;
-//            for ( final Object o : lists[i] )
-//            {
-//                final Pattern p = Pattern.compile( search );
-//                final Matcher m = p.matcher( o.toString() );
-//                final boolean b = m.matches();
-//                if ( b )
-//                {
-//                    count++;
-//                }
-//            }
-//            System.out.println( "+++ " + titles[i] + " total " + count );
-//        }
-//    }
-//
-//    public void printDynamicCaches( final String search )
-//    {
-//        final Collection[] lists = new Collection[]{newNodes, changedNodes,
-//                removedNodes, newEdges, changedEdges, removedEdges};
-//        final String[] titles = {"nodes new", "nodes changed", "nodes removed",
-//                "edges new", "edges changed", "edges removed"};
-//        for ( int i = 0; i < titles.length; i++ )
-//        {
-//            int count = 0;
-//            final StringBuffer buffer = new StringBuffer();
-//            for ( final Object o : lists[i] )
-//            {
-//                final Pattern p = Pattern.compile( search );
-//                final Matcher m = p.matcher( o.toString() );
-//                final boolean b = m.matches();
-//                if ( b )
-//                {
-//                    buffer.append( o + " " + o.hashCode()
-//                            + System.getProperty( "line.separator" ) );
-//                    count++;
-//                }
-//            }
-//            System.out.println( "+++ " + titles[i] + " total " + count );
-//            System.out.println( buffer );
-//        }
-//    }
 }

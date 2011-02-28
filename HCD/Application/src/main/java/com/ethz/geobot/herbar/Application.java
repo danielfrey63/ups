@@ -3,7 +3,7 @@
  *
  * Application.java
  *
- * Created on 7. März 2002 17:42:20
+ * Created on 7. March 2002 17:42:20
  */
 
 package com.ethz.geobot.herbar;
@@ -53,12 +53,11 @@ public class Application
         {
             // access data
             final String implClass = System.getProperty( "herbar.model.impl" );
-            LOG.debug( "init herbar model by classname " + implClass );
+            LOG.debug( "init herbar model by class name " + implClass );
             try
             {
                 final Class<?> clazz = Class.forName( implClass );
                 model = (HerbarModel) clazz.newInstance();
-                model.setReadOnly();
             }
             catch ( Exception ex )
             {
@@ -90,7 +89,7 @@ public class Application
         }
         else
         {
-            LOG.warn( "User want to save a model different tham a FilterModel class:" + model.getClass() );
+            LOG.warn( "User want to save a model different than a FilterModel class:" + model.getClass() );
         }
     }
 
@@ -102,7 +101,7 @@ public class Application
         }
         else
         {
-            LOG.warn( "User want to save a model different tham a FilterModel class:" + model.getClass() );
+            LOG.warn( "User want to save a model different than a FilterModel class:" + model.getClass() );
         }
     }
 
@@ -139,10 +138,6 @@ public class Application
 
     public static class ExceptionHandler
     {
-        public void handle( final Throwable t )
-        {
-            LOG.error( "error dispatching event:", t );
-        }
     }
 
     static
@@ -156,66 +151,3 @@ public class Application
         ROOT_MODEL.setName( ROOT_NAME );
     }
 }
-
-// $Log: Application.java,v $
-// Revision 1.1  2007/09/17 11:05:50  daniel_frey
-// - Version 3.0.20070401
-//
-// Revision 1.22  2004/08/31 22:10:15  daniel_frey
-// Examlist loading working
-//
-// Revision 1.21  2004/04/25 13:56:41  daniel_frey
-// Moved Dialogs from Herbars modeapi to xmatrix
-//
-// Revision 1.20  2003/05/04 16:23:42  daniel_frey
-// - More ready for fc1
-//
-// Revision 1.19  2003/05/03 13:25:54  daniel_frey
-// - Fixed zoom of big pictures
-//
-// Revision 1.18  2003/05/03 12:32:10  daniel_frey
-// - Added german exam list
-//
-// Revision 1.17  2003/05/02 14:41:11  daniel_frey
-// - List dialog search field now searching also for parts of strings behind the beginning
-//
-// Revision 1.16  2003/04/30 12:52:41  daniel_frey
-// - Introduced dialog questions that default to either ok and cancel
-//
-// Revision 1.15  2003/04/02 14:49:01  daniel_frey
-// - Revised wizards
-//
-// Revision 1.14  2003/03/19 12:27:30  daniel_frey
-// - Move some initialization stuff to static initializer
-// - Unzipping db.jar now into data directory
-//
-// Revision 1.13  2003/02/25 22:25:57  dirk_hoffmann
-// all Throwables of EventDispatchThread caught; fix edit bug in FilterDefinitionTable
-//
-// Revision 1.12  2003/02/25 18:01:43  daniel_frey
-// - Made faster through read-only model
-//
-// Revision 1.11  2003/02/18 02:30:51  dirk_hoffmann
-// correct wizard problems
-//
-// Revision 1.10  2003/01/23 10:54:27  daniel_frey
-// - Optimized imports
-//
-// Revision 1.9  2002/09/20 13:50:53  dirk
-// dummy update implementation
-//
-// Revision 1.8  2002/09/10 15:28:21  dirk
-// export filter operations to HerbarContext
-//
-// Revision 1.7  2002/09/10 09:50:20  dirk
-// init general bundle
-//
-// Revision 1.6  2002/08/21 16:26:45  dirk
-// add filter
-//
-// Revision 1.5  2002/08/02 00:42:21  Dani
-// Optimized import statements
-//
-// Revision 1.4  2002/08/01 15:46:15  Dani
-// Exception with mor explaining message
-//

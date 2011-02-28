@@ -29,8 +29,6 @@ abstract public class AbstractHerbarModel implements HerbarModel
     /** Holds value of property name. */
     private String name;
 
-    protected boolean readOnly;
-
     public AbstractHerbarModel( final String name )
     {
         if ( LOG.isInfoEnabled() )
@@ -52,19 +50,6 @@ abstract public class AbstractHerbarModel implements HerbarModel
             modelChangeListenerList = new ArrayList<ModelChangeListener>();
         }
         modelChangeListenerList.add( listener );
-    }
-
-    /**
-     * Removes ModelChangeListener from the list of listeners.
-     *
-     * @param listener The listener to remove.
-     */
-    public synchronized void removeModelChangeListener( final ModelChangeListener listener )
-    {
-        if ( modelChangeListenerList != null )
-        {
-            modelChangeListenerList.remove( listener );
-        }
     }
 
     public synchronized void fireModelChangeEvent( final ModelChangeEvent event )
@@ -106,11 +91,6 @@ abstract public class AbstractHerbarModel implements HerbarModel
             LOG.debug( "rename model form >" + this.name + "< to >" + name + "<" );
         }
         this.name = name;
-    }
-
-    public void setReadOnly()
-    {
-        this.readOnly = true;
     }
 
     public String toString()

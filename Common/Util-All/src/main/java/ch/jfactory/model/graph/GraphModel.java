@@ -15,12 +15,20 @@ public interface GraphModel
 
     /**
      * Creates a new GraphNode of the given type for the given parent.
+     *
+     * @param parent the parent
+     * @param type   the type
+     * @return the new node
      */
     public GraphNode createNode( GraphNode parent, Class type );
 
     /**
-     * Returns a {@link GraphEdge} for the given parent and child {@link GraphNode}s. The edge is constructe newly if
+     * Returns a {@link GraphEdge} for the given parent and child {@link GraphNode}s. The edge is constructed newly if
      * needed.
+     *
+     * @param parent the parent node
+     * @param child  the child node
+     * @return the matching edge
      */
     public GraphEdge createEdge( GraphNode parent, GraphNode child );
 
@@ -43,6 +51,4 @@ public interface GraphModel
     public void setDirty( boolean dirty );
 
     public boolean getDirty();
-
-    public void setReadOnly();
 }

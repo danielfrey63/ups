@@ -352,12 +352,14 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     public void switchToAskMode()
     {
+        LOG.info( "switching to ask sub mode" );
         cards.show( switcher, ASKING_PANEL );
         statusBar.removeStatusComponent( focusLabel );
     }
 
     public void switchToLessonMode()
     {
+        LOG.info( "switching to lesson sub mode" );
         cards.show( switcher, BREAD );
         statusBar.addStatusComponent( focusLabel, 5 );
     }

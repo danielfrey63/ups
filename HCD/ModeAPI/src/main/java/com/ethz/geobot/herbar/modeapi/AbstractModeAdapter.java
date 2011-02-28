@@ -70,6 +70,8 @@ public class AbstractModeAdapter extends AbstractMode
     {
         super.activate();
 
+        LOG.info( "activating mode " + this );
+
         final Component vc = getComponent();
 
         getHerbarContext().getHerbarGUIManager().setViewComponent( vc );
@@ -78,14 +80,13 @@ public class AbstractModeAdapter extends AbstractMode
         {
             final ModeActivation act = (ModeActivation) vc;
             act.activate();
-            vc.invalidate();
-            vc.validate();
-            vc.repaint();
         }
     }
 
     public final void deactivate()
     {
+        LOG.info( "de-activating mode " + this );
+
         final Component vc = viewComponent.get();
         if ( vc != null )
         {

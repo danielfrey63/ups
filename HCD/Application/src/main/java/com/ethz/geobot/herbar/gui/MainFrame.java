@@ -117,6 +117,8 @@ public class MainFrame extends JFrame
                         if ( newViewComponent != null )
                         {
                             contentPane.add( newViewComponent, BorderLayout.CENTER );
+                            contentPane.revalidate();
+                            contentPane.validate();
                             contentPane.repaint();
                         }
                     }

@@ -2,9 +2,9 @@ package com.ethz.geobot.herbar.model.db.impl;
 
 import ch.jfactory.model.graph.GraphNodeImpl;
 import ch.jfactory.model.graph.GraphNodeList;
-import com.ethz.geobot.herbar.model.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.MorphologySubject;
-import com.ethz.geobot.herbar.model.MorphologyValue;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologySubject;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * @author $Author: daniel_frey $
@@ -12,26 +12,20 @@ import com.ethz.geobot.herbar.model.MorphologyValue;
  */
 public class MorphologyAttributeImpl extends GraphNodeImpl implements MorphologyAttribute
 {
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyAttribute#getParentSubject()
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyAttribute#getParentSubject() */
     public MorphologySubject getParentSubject()
     {
         final GraphNodeList parents = getParents( MorphologySubjectImpl.class );
         return (MorphologySubjectImpl) parents.get( 0 );
     }
 
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyAttribute#getValue(int)
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyAttribute#getValue(int) */
     public MorphologyValue getValue( final int index ) throws IndexOutOfBoundsException
     {
         return getValues()[index];
     }
 
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyAttribute#getValues()
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyAttribute#getValues() */
     public MorphologyValue[] getValues()
     {
         final GraphNodeList list = getChildren( MorphologyValueImpl.class );

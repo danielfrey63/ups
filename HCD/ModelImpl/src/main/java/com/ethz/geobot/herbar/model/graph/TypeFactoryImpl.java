@@ -9,14 +9,15 @@ import com.ethz.geobot.herbar.model.db.impl.EcologyTextImpl;
 import com.ethz.geobot.herbar.model.db.impl.EcologyValueImpl;
 import com.ethz.geobot.herbar.model.db.impl.LevelImpl;
 import com.ethz.geobot.herbar.model.db.impl.MedicineAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineSubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologySubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyValueImpl;
 import com.ethz.geobot.herbar.model.db.impl.MedicineImpl;
+import com.ethz.geobot.herbar.model.db.impl.MedicineSubjectImpl;
 import com.ethz.geobot.herbar.model.db.impl.MedicineTextImpl;
 import com.ethz.geobot.herbar.model.db.impl.MedicineValueImpl;
 import com.ethz.geobot.herbar.model.db.impl.MorphologyAttributeImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologySubjectImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyTextImpl;
+import com.ethz.geobot.herbar.model.db.impl.MorphologyValueImpl;
 import com.ethz.geobot.herbar.model.db.impl.PictureImpl;
 import com.ethz.geobot.herbar.model.db.impl.PictureTextImpl;
 import com.ethz.geobot.herbar.model.db.impl.PictureThemeImpl;
@@ -24,7 +25,6 @@ import com.ethz.geobot.herbar.model.db.impl.PicturesImpl;
 import com.ethz.geobot.herbar.model.db.impl.RootImpl;
 import com.ethz.geobot.herbar.model.db.impl.TaxonImpl;
 import com.ethz.geobot.herbar.model.db.impl.TaxonSynonymImpl;
-import com.ethz.geobot.herbar.model.db.impl.TextImpl;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +37,7 @@ public class TypeFactoryImpl implements TypeFactory
 {
     private static final Logger LOG = LoggerFactory.getLogger( TypeFactoryImpl.class );
 
-    /**
-     * Used for the TYPE field in the db.
-     */
+    /** Used for the TYPE field in the db. */
     private static final HashMap typeMapping = new HashMap();
 
     private static final HashMap implMapping = new HashMap();
@@ -57,7 +55,7 @@ public class TypeFactoryImpl implements TypeFactory
             typeMapping.put( "MORSUBJECT", MorphologySubjectImpl.class );
             typeMapping.put( "MORATTRIBUTE", MorphologyAttributeImpl.class );
             typeMapping.put( "MORVALUE", MorphologyValueImpl.class );
-            typeMapping.put( "MORTEXT", TextImpl.class );
+            typeMapping.put( "MORTEXT", MorphologyTextImpl.class );
 
             typeMapping.put( "MEDICINE", MedicineImpl.class );
             typeMapping.put( "MEDSUBJECT", MedicineSubjectImpl.class );
@@ -92,9 +90,7 @@ public class TypeFactoryImpl implements TypeFactory
         return getInstance( clazz );
     }
 
-    /**
-     * @see TypeFactory#getInstance(Class)
-     */
+    /** @see TypeFactory#getInstance(Class) */
     public GraphNode getInstance( final Class type )
     {
         GraphNode node = null;

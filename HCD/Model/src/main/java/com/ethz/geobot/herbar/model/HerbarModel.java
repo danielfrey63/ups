@@ -6,6 +6,10 @@
 package com.ethz.geobot.herbar.model;
 
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
+import com.ethz.geobot.herbar.model.trait.Ecology;
+import com.ethz.geobot.herbar.model.trait.Medicine;
+import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * abstract representation of the Herbar-data-model.

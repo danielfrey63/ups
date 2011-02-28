@@ -4,20 +4,20 @@ import ch.jfactory.component.tree.GraphTreeNode;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
-import com.ethz.geobot.herbar.model.EcologyAttribute;
-import com.ethz.geobot.herbar.model.EcologySubject;
-import com.ethz.geobot.herbar.model.EcologyText;
-import com.ethz.geobot.herbar.model.EcologyValue;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.MedAttribute;
-import com.ethz.geobot.herbar.model.MedicineSubject;
-import com.ethz.geobot.herbar.model.MedicineText;
-import com.ethz.geobot.herbar.model.MedicineValue;
-import com.ethz.geobot.herbar.model.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.MorphologySubject;
-import com.ethz.geobot.herbar.model.MorphologyText;
-import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.trait.EcologyAttribute;
+import com.ethz.geobot.herbar.model.trait.EcologySubject;
+import com.ethz.geobot.herbar.model.trait.EcologyText;
+import com.ethz.geobot.herbar.model.trait.EcologyValue;
+import com.ethz.geobot.herbar.model.trait.MedicineAttribute;
+import com.ethz.geobot.herbar.model.trait.MedicineSubject;
+import com.ethz.geobot.herbar.model.trait.MedicineText;
+import com.ethz.geobot.herbar.model.trait.MedicineValue;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologySubject;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.awt.Component;
 import java.util.HashMap;
 import javax.swing.JTree;
@@ -40,7 +40,7 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
         iconMapping.put( MorphologyText.class, "MORTEXT" );
 
         iconMapping.put( MedicineSubject.class, "ADDSUBJECT" );
-        iconMapping.put( MedAttribute.class, "ADDATTRIBUTE" );
+        iconMapping.put( MedicineAttribute.class, "ADDATTRIBUTE" );
         iconMapping.put( MedicineValue.class, "ADDVALUE" );
         iconMapping.put( MedicineText.class, "ADDTEXT" );
 
@@ -50,10 +50,7 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
         iconMapping.put( EcologyText.class, "ECOTEXT" );
     }
 
-    /**
-     * @see TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean,
-     *      int, boolean)
-     */
+    /** @see TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean) */
     public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected, final boolean expanded,
                                                    final boolean leaf, final int row, final boolean hasFocus )
     {

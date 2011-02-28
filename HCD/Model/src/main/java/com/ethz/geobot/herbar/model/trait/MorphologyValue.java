@@ -4,7 +4,9 @@
  * Created on 23.5.2002
  * Created by Dirk Hoffmann
  */
-package com.ethz.geobot.herbar.model;
+package com.ethz.geobot.herbar.model.trait;
+
+import com.ethz.geobot.herbar.model.Taxon;
 
 /**
  * @author $Author: daniel_frey $

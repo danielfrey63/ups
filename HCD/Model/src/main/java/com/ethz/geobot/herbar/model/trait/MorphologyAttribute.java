@@ -3,7 +3,7 @@
  *
  * Created on 28.3.2002
  */
-package com.ethz.geobot.herbar.model;
+package com.ethz.geobot.herbar.model.trait;
 
 /**
  * @author $Author: daniel_frey $

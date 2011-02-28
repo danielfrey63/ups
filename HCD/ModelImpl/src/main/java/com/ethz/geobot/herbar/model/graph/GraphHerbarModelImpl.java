@@ -3,18 +3,18 @@ package com.ethz.geobot.herbar.model.graph;
 import ch.jfactory.model.graph.AbsGraphModel;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
-import com.ethz.geobot.herbar.model.Ecology;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.Medicine;
-import com.ethz.geobot.herbar.model.MorphologyText;
-import com.ethz.geobot.herbar.model.MorphologyValue;
-import com.ethz.geobot.herbar.model.Morphology;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.db.impl.LevelImpl;
 import com.ethz.geobot.herbar.model.db.impl.PictureThemeImpl;
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
+import com.ethz.geobot.herbar.model.trait.Ecology;
+import com.ethz.geobot.herbar.model.trait.Medicine;
+import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,7 +114,7 @@ public class GraphHerbarModelImpl implements HerbarModel
         return result.toArray( new MorphologyValue[0] );
     }
 
-    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorphologyValue) */
+    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.trait.MorphologyValue) */
     public Taxon[] getTaxa( final MorphologyValue morphologyValue )
     {
         final List<GraphNode> taxa = new ArrayList<GraphNode>();

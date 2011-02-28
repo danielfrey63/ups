@@ -1,7 +1,7 @@
 package com.ethz.geobot.herbar.model.db.impl;
 
 import ch.jfactory.model.graph.GraphNodeImpl;
-import com.ethz.geobot.herbar.model.MedicineText;
+import com.ethz.geobot.herbar.model.trait.MedicineText;
 
 /**
  * @author $Author: daniel_frey $

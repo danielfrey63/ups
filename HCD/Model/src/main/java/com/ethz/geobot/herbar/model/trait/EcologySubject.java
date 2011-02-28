@@ -1,4 +1,4 @@
-package com.ethz.geobot.herbar.model;
+package com.ethz.geobot.herbar.model.trait;
 
 import ch.jfactory.model.graph.GraphNode;
 
@@ -6,7 +6,8 @@ import ch.jfactory.model.graph.GraphNode;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:24 $
  */
-public interface MedicineText
+public interface EcologySubject
 {
     public GraphNode getAsGraphNode();
+
 }

@@ -13,8 +13,8 @@ import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.MorphologyText;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
 
 /**
  * <Comments here>

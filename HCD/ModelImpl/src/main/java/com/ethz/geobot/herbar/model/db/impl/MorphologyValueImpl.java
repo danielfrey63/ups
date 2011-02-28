@@ -2,9 +2,9 @@ package com.ethz.geobot.herbar.model.db.impl;
 
 import ch.jfactory.model.graph.GraphNodeImpl;
 import ch.jfactory.model.graph.GraphNodeList;
-import com.ethz.geobot.herbar.model.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * @author $Author: daniel_frey $
@@ -12,34 +12,26 @@ import com.ethz.geobot.herbar.model.Taxon;
  */
 public class MorphologyValueImpl extends GraphNodeImpl implements MorphologyValue
 {
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyValue#getText()
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyValue#getText() */
     public String getText()
     {
         throw new NoSuchMethodError( "getUserObject is deprecated" );
     }
 
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyValue#getTaxa()
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyValue#getTaxa() */
     public Taxon[] getTaxa()
     {
         final GraphNodeList parents = getParents( TaxonImpl.class );
         return (TaxonImpl[]) parents.getAll();
     }
 
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyValue#getTaxon(int)
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyValue#getTaxon(int) */
     public Taxon getTaxon( final int index )
     {
         return getTaxa()[index];
     }
 
-    /**
-     * @see com.ethz.geobot.herbar.model.MorphologyValue#getParentAttribute()
-     */
+    /** @see com.ethz.geobot.herbar.model.trait.MorphologyValue#getParentAttribute() */
     public MorphologyAttribute getParentAttribute()
     {
         final GraphNodeList list = getParents( MorphologyAttributeImpl.class );

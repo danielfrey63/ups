@@ -22,24 +22,24 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.modeapi.SimpleTaxStateModel;
-import com.ethz.geobot.herbar.model.Ecology;
-import com.ethz.geobot.herbar.model.EcologyAttribute;
-import com.ethz.geobot.herbar.model.EcologySubject;
-import com.ethz.geobot.herbar.model.EcologyText;
-import com.ethz.geobot.herbar.model.EcologyValue;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
-import com.ethz.geobot.herbar.model.MedAttribute;
-import com.ethz.geobot.herbar.model.Medicine;
-import com.ethz.geobot.herbar.model.MedicineSubject;
-import com.ethz.geobot.herbar.model.MedicineText;
-import com.ethz.geobot.herbar.model.MedicineValue;
-import com.ethz.geobot.herbar.model.Morphology;
-import com.ethz.geobot.herbar.model.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.MorphologySubject;
-import com.ethz.geobot.herbar.model.MorphologyText;
-import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.trait.Ecology;
+import com.ethz.geobot.herbar.model.trait.EcologyAttribute;
+import com.ethz.geobot.herbar.model.trait.EcologySubject;
+import com.ethz.geobot.herbar.model.trait.EcologyText;
+import com.ethz.geobot.herbar.model.trait.EcologyValue;
+import com.ethz.geobot.herbar.model.trait.Medicine;
+import com.ethz.geobot.herbar.model.trait.MedicineAttribute;
+import com.ethz.geobot.herbar.model.trait.MedicineSubject;
+import com.ethz.geobot.herbar.model.trait.MedicineText;
+import com.ethz.geobot.herbar.model.trait.MedicineValue;
+import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologySubject;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -189,9 +189,9 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( MedicineText.class, MedAttribute.class, herbarModel );
+        detailModel = new TransientDetailResultModel( MedicineText.class, MedicineAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Medicine.class, MedicineSubject.class, MedAttribute.class, MedicineValue.class, MedicineText.class},
+                new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 

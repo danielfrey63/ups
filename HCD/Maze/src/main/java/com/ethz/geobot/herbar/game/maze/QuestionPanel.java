@@ -22,12 +22,12 @@ import com.ethz.geobot.herbar.game.util.Question;
 import com.ethz.geobot.herbar.gui.VirtualGraphTreeFactory;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.MorphologyAttribute;
-import com.ethz.geobot.herbar.model.MorphologySubject;
-import com.ethz.geobot.herbar.model.MorphologyText;
-import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologySubject;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -262,9 +262,7 @@ public class QuestionPanel extends JDialog implements Question
         return button;
     }
 
-    /**
-     * initializes the data for the questionpool
-     */
+    /** initializes the data for the questionpool */
     public void init()
     {
         questionModel.init();
@@ -276,23 +274,17 @@ public class QuestionPanel extends JDialog implements Question
         }
     }
 
-    /**
-     * @see Question#firstQuestion()
-     */
+    /** @see Question#firstQuestion() */
     public void firstQuestion()
     {
     }
 
-    /**
-     * @see Question#lastQuestion()
-     */
+    /** @see Question#lastQuestion() */
     public void lastQuestion()
     {
     }
 
-    /**
-     * @see Question#nextQuestion()
-     */
+    /** @see Question#nextQuestion() */
     public void nextQuestion()
     {
         actualTaxon = questionModel.getTaxon();

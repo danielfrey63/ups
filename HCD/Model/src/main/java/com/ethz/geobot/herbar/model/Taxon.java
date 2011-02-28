@@ -9,6 +9,8 @@
 package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.model.graph.GraphNode;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 
 /**
  * @author $Author: daniel_frey $
@@ -68,8 +70,8 @@ public interface Taxon
     public Taxon getChildTaxon( int index ) throws IndexOutOfBoundsException;
 
     /**
-     * Gets an arry of MorphologyValue objects associated, representing all inherited an directly assigned morphological traits
-     * of this taxon.
+     * Gets an arry of MorphologyValue objects associated, representing all inherited an directly assigned morphological
+     * traits of this taxon.
      *
      * @return the array of MorphologyValue.
      */

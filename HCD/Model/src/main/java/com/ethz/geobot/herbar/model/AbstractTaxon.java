@@ -6,6 +6,8 @@
 package com.ethz.geobot.herbar.model;
 
 import ch.jfactory.lang.ArrayUtils;
+import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;

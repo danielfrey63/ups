@@ -3,7 +3,7 @@
  *
  * Created on
  */
-package com.ethz.geobot.herbar.model;
+package com.ethz.geobot.herbar.model.trait;
 
 import ch.jfactory.model.graph.GraphNode;
 
@@ -46,8 +46,8 @@ public interface MorphologySubject
      *
      * @param index the index of the MorphologyAttribute to get
      * @return an MorphologyAttribute object.
-     * @throws IndexOutOfBoundsException if accessing an MorphologyAttribute object outside the MorphologyAttribute objects
-     *                                   available.
+     * @throws IndexOutOfBoundsException if accessing an MorphologyAttribute object outside the MorphologyAttribute
+     *                                   objects available.
      */
     public MorphologyAttribute getAttribute( int index )
             throws IndexOutOfBoundsException;
@@ -64,7 +64,8 @@ public interface MorphologySubject
      *
      * @param index the index of the MorphologySubject to get
      * @return an MorphologySubject object.
-     * @throws IndexOutOfBoundsException if accessing an MorphologySubject object outside the MorphologySubject objects available.
+     * @throws IndexOutOfBoundsException if accessing an MorphologySubject object outside the MorphologySubject objects
+     *                                   available.
      */
     public MorphologySubject getSubject( int index )
             throws IndexOutOfBoundsException;

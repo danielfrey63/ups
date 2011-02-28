@@ -4,15 +4,11 @@ import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import com.ethz.geobot.herbar.modeapi.state.StateCompositeModel;
 import com.ethz.geobot.herbar.modeapi.state.StateModel;
-import com.ethz.geobot.herbar.model.Ecology;
-import com.ethz.geobot.herbar.model.EcologySubject;
 import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.Medicine;
-import com.ethz.geobot.herbar.model.MedicineSubject;
-import com.ethz.geobot.herbar.model.Morphology;
-import com.ethz.geobot.herbar.model.MorphologySubject;
 import com.ethz.geobot.herbar.model.Taxon;
-import java.util.logging.Logger;
+import com.ethz.geobot.herbar.model.trait.Ecology;
+import com.ethz.geobot.herbar.model.trait.Medicine;
+import com.ethz.geobot.herbar.model.trait.Morphology;
 import java.util.prefs.Preferences;
 import org.slf4j.LoggerFactory;
 
@@ -64,7 +60,7 @@ public class InterrogatorComplexityFactory
             }
             else
             {
-                LOG.error("cannot find root for " + type, new Exception("Type not found"));
+                LOG.error( "cannot find root for " + type, new Exception( "Type not found" ) );
             }
         }
 

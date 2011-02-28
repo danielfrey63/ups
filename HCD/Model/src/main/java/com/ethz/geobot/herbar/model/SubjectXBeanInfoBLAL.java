@@ -5,6 +5,7 @@
  */
 package com.ethz.geobot.herbar.model;
 
+import com.ethz.geobot.herbar.model.trait.MorphologySubject;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;

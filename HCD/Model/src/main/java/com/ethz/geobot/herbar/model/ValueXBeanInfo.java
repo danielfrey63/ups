@@ -6,6 +6,7 @@
 
 package com.ethz.geobot.herbar.model;
 
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;
@@ -14,9 +15,7 @@ import org.apache.commons.jxpath.JXPathBeanInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author Dirk
- */
+/** @author Dirk */
 public class ValueXBeanInfo implements JXPathBeanInfo
 {
     private final static Logger LOG = LoggerFactory.getLogger( ValueXBeanInfo.class );

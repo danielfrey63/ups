@@ -1,16 +1,16 @@
 package com.ethz.geobot.herbar.model.filter;
 
 import com.ethz.geobot.herbar.model.AbstractHerbarModel;
-import com.ethz.geobot.herbar.model.Ecology;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.LevelComparator;
-import com.ethz.geobot.herbar.model.Medicine;
-import com.ethz.geobot.herbar.model.Morphology;
-import com.ethz.geobot.herbar.model.MorphologyValue;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
+import com.ethz.geobot.herbar.model.trait.Ecology;
+import com.ethz.geobot.herbar.model.trait.Medicine;
+import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -298,7 +298,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         throw new NoSuchMethodError( "getValue(String) not implemented yet" );
     }
 
-    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.MorphologyValue) */
+    /** @see HerbarModel#getTaxa(com.ethz.geobot.herbar.model.trait.MorphologyValue) */
     public Taxon[] getTaxa( final MorphologyValue morphologyValue )
     {
         throw new NoSuchMethodError( "getTaxon(MorphologyValue) not implemented yet" );

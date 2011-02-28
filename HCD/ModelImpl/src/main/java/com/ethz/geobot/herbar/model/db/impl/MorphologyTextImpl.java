@@ -1,12 +1,12 @@
 package com.ethz.geobot.herbar.model.db.impl;
 
 import ch.jfactory.model.graph.GraphNodeImpl;
-import com.ethz.geobot.herbar.model.MorphologyText;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:18 $
  */
-public class TextImpl extends GraphNodeImpl implements MorphologyText
+public class MorphologyTextImpl extends GraphNodeImpl implements MorphologyText
 {
 }

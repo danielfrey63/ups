@@ -1,12 +1,13 @@
 package com.ethz.geobot.herbar;
 
-import ch.jfactory.typemapper.Commands;
 import com.ethz.geobot.herbar.gui.AppHerbar;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTabbedPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.uispec4j.Key;
 import org.uispec4j.ListBox;
 import org.uispec4j.TabGroup;
@@ -27,16 +28,18 @@ import org.uispec4j.interception.WindowInterceptor;
  */
 public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
 {
+    /** This class logger. */
+    private static final Logger LOG = LoggerFactory.getLogger( TestCodeCoverageOnAppHerbar.class );
+
+    private Window window;
+
     static
     {
         UISpec4J.init();
     }
 
-    private Window window;
-
-    protected void setUp() throws Exception
+    public void setUp()
     {
-        super.setUp();
         // Startup with (1) selection of DB, (2) splash screen, and (3) main window
         WindowInterceptor
                 .init( new Trigger()
@@ -65,36 +68,25 @@ public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
                     }
                 } )
                 .run();
-        // Make sure lesson mode is active
-        selectMode( "Lernen", 0 );
     }
 
-    public void testMainWindow()
+    public void testAll()
     {
+        selectMode( "Lernen", 0 );
+        // Check title
+        LOG.info( "--- Checking title" );
         assertTrue( window != null );
         assertTrue( window.getTitle().startsWith( "Herbar CD-ROM" ) );
-    }
-
-    public void testLesson()
-    {
+        LOG.info( "--- Checking for Cetraria islandica" );
         assertTrue( window.getUIComponents( new LabelChecker( "Cetraria islandica" ) ).length >= 1 );
-    }
-
-    public void testNext()
-    {
+        LOG.info( "--- Checking for Cladonia rangiferina" );
         window.getButton( "next" ).click();
         assertTrue( window.getUIComponents( new LabelChecker( "Cladonia rangiferina" ) ).length >= 1 );
-    }
-
-    public void testSwitchToQuestions()
-    {
+        LOG.info( "--- Switching to ask sub mode" );
         final TabGroup tabs = window.getTabGroup( new NamedTabGroup( "Lehrgang", "Abfrage" ) );
         tabs.selectTab( "Abfrage" );
         tabs.selectedTabEquals( "Abfrage" );
-    }
-
-    public void testEnterSpecies()
-    {
+        LOG.info( "--- Enter result" );
         final TextBox field = window.getTextBox( "Art:" );
         field.setText( "Cladonia rangiferina" );
         field.typeKey( Key.ENTER );

@@ -76,13 +76,19 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
         init( listData );
     }
 
-    @SuppressWarnings( "unchecked" )
     private void init( final T[] listData )
     {
-        final List<T> temp = Arrays.asList( listData );
-        allData = new ArrayList<T>( temp ).toArray( (T[]) Array.newInstance( temp.iterator().next().getClass(), temp.size() ) );
+        // Make sure to work on a copy of the original data
+        allData = copyIntoNewArray( listData, listData.length );
         list.setListData( allData );
         list.requestFocus();
+    }
+
+    @SuppressWarnings( "unchecked" )
+    private T[] copyIntoNewArray( final T[] listData, final int length )
+    {
+        final List<T> temp = Arrays.asList( listData );
+        return new ArrayList<T>( temp ).toArray( (T[]) Array.newInstance( temp.iterator().next().getClass(), length ) );
     }
 
     /**
@@ -168,14 +174,15 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
     @SuppressWarnings( "unchecked" )
     protected void onApply() throws ComponentDialogException
     {
-        selectedData = (T[]) list.getSelectedValues();
+        final Object[] objects = list.getSelectedValues();
+        selectedData = copyIntoNewArray( (T[]) objects, objects.length );
     }
 
     @SuppressWarnings( "unchecked" )
     protected void onCancel()
     {
         final List<T> temp = Arrays.asList( allData );
-        selectedData = (T[]) Array.newInstance( temp.iterator().next().getClass(), temp.size() );
+        selectedData = (T[]) Array.newInstance( temp.iterator().next().getClass(), 0 );
     }
 
     // ListSelectionListener

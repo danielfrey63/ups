@@ -25,9 +25,9 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
-public class ScrollerPanel extends JPanel
+public class ScrollPanel extends JPanel
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger( ScrollerPanel.class );
+    private final static Logger LOGGER = LoggerFactory.getLogger( ScrollPanel.class );
 
     protected JButton btnPrev = new BasicArrowButton( BasicArrowButton.WEST );
 
@@ -35,7 +35,7 @@ public class ScrollerPanel extends JPanel
 
     private ScrollerLayout layout;
 
-    public ScrollerPanel()
+    public ScrollPanel()
     {
         initGUI();
     }

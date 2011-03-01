@@ -43,7 +43,7 @@ import javax.swing.tree.TreePath;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public abstract class AttributeTreePanel extends JPanel
+public class AttributeTreePanel extends JPanel
 {
     private static final String SIMILAR_TAXA = "Ähnliche Taxa";
 
@@ -61,12 +61,12 @@ public abstract class AttributeTreePanel extends JPanel
 
     private final TaxStateModel taxStateModel;
 
-    AttributeTreePanel( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel, final String rootNodeName )
+    AttributeTreePanel( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel, final String rootNodeName, final VirtualGraphTreeNodeFilter filter )
     {
         this.herbarContext = herbarContext;
         this.stopperLevel = stopper;
         this.rootNodeName = rootNodeName;
-        this.filter = registerFilter();
+        this.filter = filter;
         this.taxStateModel = taxStateModel;
 
         setBorder( new EmptyBorder( 2, 2, 2, 2 ) );
@@ -190,13 +190,6 @@ public abstract class AttributeTreePanel extends JPanel
         }
         return intersection;
     }
-
-    /**
-     * Use this method to instantiate the correct filter set. This method is called from within the super constructor.
-     *
-     * @return the filter used for displaying the tree.
-     */
-    public abstract VirtualGraphTreeNodeFilter registerFilter();
 
     public void setTaxonFocus( Taxon taxon )
     {

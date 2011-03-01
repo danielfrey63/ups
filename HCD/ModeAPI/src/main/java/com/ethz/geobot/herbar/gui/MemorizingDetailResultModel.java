@@ -1,6 +1,6 @@
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.lang.ReferencableBool;
+import ch.jfactory.lang.BooleanReference;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -20,13 +20,13 @@ public class MemorizingDetailResultModel extends DetailResultModel
 
     public static final int CORRECT = 2;
 
-    private Map answerTextsMap;
+    private Map<Taxon, GraphNodeList> answerTextsMap;
 
-    private Map answerAttributesMap;
+    private Map<Taxon, GraphNodeList> answerAttributesMap;
 
-    private Map guessMap;
+    private Map<Taxon, GraphNodeList> guessMap;
 
-    private Map completes;
+    private Map<Taxon, BooleanReference> completes;
 
     public MemorizingDetailResultModel( final Class typeToDisplay, final Class halfRight, final HerbarModel model )
     {
@@ -36,14 +36,14 @@ public class MemorizingDetailResultModel extends DetailResultModel
 
     protected void initModel( final Taxon focus )
     {
-        answerTexts = (GraphNodeList) answerTextsMap.get( focus );
-        answerAttributes = (GraphNodeList) answerAttributesMap.get( focus );
-        guesses = (GraphNodeList) guessMap.get( focus );
-        complete = (ReferencableBool) completes.get( focus );
+        answerTexts = answerTextsMap.get( focus );
+        answerAttributes = answerAttributesMap.get( focus );
+        guesses = guessMap.get( focus );
+        complete = completes.get( focus );
         if ( answerTexts == null )
         {
             final GraphNode focusNode = focus.getAsGraphNode();
-            complete = new ReferencableBool( false );
+            complete = new BooleanReference( false );
             guesses = new GraphNodeList();
             answerAttributes = new GraphNodeList();
             answerTexts = focusNode.getChildren( typeToDisplay );
@@ -62,29 +62,9 @@ public class MemorizingDetailResultModel extends DetailResultModel
     {
         super.reset();
         complete.setBool( false );
-        answerTextsMap = new HashMap();
-        answerAttributesMap = new HashMap();
-        guessMap = new HashMap();
-        completes = new HashMap();
-    }
-
-    public Map getAnswerTextsMap()
-    {
-        return answerTextsMap;
-    }
-
-    public Map getAnswerAttributesMap()
-    {
-        return answerAttributesMap;
-    }
-
-    public Map getGuessMap()
-    {
-        return guessMap;
-    }
-
-    public Map getCompletes()
-    {
-        return completes;
+        answerTextsMap = new HashMap<Taxon, GraphNodeList>();
+        answerAttributesMap = new HashMap<Taxon, GraphNodeList>();
+        guessMap = new HashMap<Taxon, GraphNodeList>();
+        completes = new HashMap<Taxon, BooleanReference>();
     }
 }

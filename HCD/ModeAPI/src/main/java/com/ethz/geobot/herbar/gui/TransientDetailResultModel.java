@@ -1,6 +1,6 @@
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.lang.ReferencableBool;
+import ch.jfactory.lang.BooleanReference;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -20,7 +20,7 @@ public class TransientDetailResultModel extends DetailResultModel
     protected void initModel( final Taxon focus )
     {
         final GraphNode focusNode = focus.getAsGraphNode();
-        complete = new ReferencableBool( false );
+        complete = new BooleanReference( false );
         guesses = new GraphNodeList();
         answerAttributes = new GraphNodeList();
         answerTexts = focusNode.getChildren( typeToDisplay );

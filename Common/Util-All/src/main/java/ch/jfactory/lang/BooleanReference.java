@@ -4,11 +4,11 @@ package ch.jfactory.lang;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
-public class ReferencableBool
+public class BooleanReference
 {
     private boolean bool;
 
-    public ReferencableBool( final boolean bool )
+    public BooleanReference( final boolean bool )
     {
         this.bool = bool;
     }

@@ -1,6 +1,6 @@
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.lang.ReferencableBool;
+import ch.jfactory.lang.BooleanReference;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -23,7 +23,7 @@ public abstract class DetailResultModel extends ResultModel
 
     protected HerbarModel model;
 
-    protected ReferencableBool complete = new ReferencableBool( false );
+    protected BooleanReference complete = new BooleanReference( false );
 
     protected GraphNodeList answerTexts;
 
@@ -64,10 +64,10 @@ public abstract class DetailResultModel extends ResultModel
         // Register guess
         guesses.add( guess );
         // Check whether complete
-        final List copy = new ArrayList( Arrays.asList( answerTexts.getAll() ) );
-        for ( Iterator iterator = copy.iterator(); iterator.hasNext(); )
+        final List<GraphNode> copy = new ArrayList<GraphNode>( Arrays.asList( answerTexts.getAll() ) );
+        for ( Iterator<GraphNode> iterator = copy.iterator(); iterator.hasNext(); )
         {
-            if ( guesses.contains( (GraphNode) iterator.next() ) )
+            if ( guesses.contains( iterator.next() ) )
             {
                 iterator.remove();
             }
@@ -103,13 +103,13 @@ public abstract class DetailResultModel extends ResultModel
     public InterrogatorComplexityFactory.Type[] getSubModels()
     {
         final Enumeration e = subStateModels();
-        final List list = new ArrayList();
+        final List<InterrogatorComplexityFactory.Type> list = new ArrayList<InterrogatorComplexityFactory.Type>();
         while ( e.hasMoreElements() )
         {
             final InterrogatorComplexityFactory.Type type = (InterrogatorComplexityFactory.Type) e.nextElement();
             list.add( type );
         }
-        return (InterrogatorComplexityFactory.Type[]) list.toArray( new InterrogatorComplexityFactory.Type[0] );
+        return list.toArray( new InterrogatorComplexityFactory.Type[list.size()] );
     }
 
     public int getCorrectness( final GraphNode guess )
@@ -125,7 +125,7 @@ public abstract class DetailResultModel extends ResultModel
 
     public void setTaxFocus( final Taxon focus )
     {
-        // Retrieve answers and guesses for focus assuming texts and attribues are synchonously null or initialized
+        // Retrieve answers and guesses for focus assuming texts and attributes are synchronously null or initialized
         initModel( focus );
         // Inform sub models
         final Enumeration e = subStateModels();
@@ -138,7 +138,7 @@ public abstract class DetailResultModel extends ResultModel
 
     public void reset()
     {
-        complete = new ReferencableBool( false );
+        complete = new BooleanReference( false );
         answerTexts = new GraphNodeList();
         answerAttributes = new GraphNodeList();
         guesses = new GraphNodeList();

@@ -10,8 +10,8 @@ package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.component.DefaultTextField;
-import ch.jfactory.component.ScrollerPanel;
-import ch.jfactory.lang.ReferencableBool;
+import ch.jfactory.component.ScrollPanel;
+import ch.jfactory.lang.BooleanReference;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.model.Level;
@@ -59,28 +59,28 @@ public class TaxonNameInterrogator extends JPanel
 
     private JPanel innerPanel;
 
-    private ScrollerPanel scroller;
+    private ScrollPanel scroll;
 
-    private final CorrectnessChecker correctnesChecker = new CorrectnessChecker();
+    private final CorrectnessChecker correctnessChecker = new CorrectnessChecker();
 
     private DefaultTextField edit;
 
     private Taxon taxon;
 
-    private List answers = new ArrayList();
+    private List<JLabel> answers = new ArrayList<JLabel>();
 
     private Level level;
 
     private InterrogatorModel interrogatorModel;
 
-    private ReferencableBool complete;
+    private BooleanReference complete;
 
     private JLabel label;
 
     /**
      * Asks for a taxon on any level.
      *
-     * @param interrogatorModel
+     * @param interrogatorModel the model
      */
     public TaxonNameInterrogator( final InterrogatorModel interrogatorModel )
     {
@@ -92,7 +92,7 @@ public class TaxonNameInterrogator extends JPanel
      * the parent taxon at the given level is used. If the taxon is from a higher level than the specified one, the
      * entry is disabled.
      *
-     * @param level             The taxons level
+     * @param level             The level of the taxon
      * @param interrogatorModel The model implementation to use
      */
     public TaxonNameInterrogator( final Level level, final InterrogatorModel interrogatorModel )
@@ -102,22 +102,19 @@ public class TaxonNameInterrogator extends JPanel
 
         edit = createTextField();
         innerPanel = createEditPanel();
-        scroller = new ScrollerPanel();
+        scroll = new ScrollPanel();
 
         setLayout( new BorderLayout() );
         add( innerPanel, BorderLayout.WEST );
-        add( scroller, BorderLayout.CENTER );
+        add( scroll, BorderLayout.CENTER );
     }
 
     private JPanel createEditPanel()
     {
-        int x = 0;
         final JPanel panel = new JPanel( new GridBagLayout() );
         label = new JLabel();
-        panel.add( label, new GridBagConstraints( x++, 0, 1, 1, 0, 1, GridBagConstraints.WEST,
-                GridBagConstraints.HORIZONTAL, new Insets( 0, 0, 0, Constants.GAP_WITHIN_GROUP ), 0, 0 ) );
-        panel.add( edit, new GridBagConstraints( x++, 0, 1, 1, 1, 1, GridBagConstraints.WEST,
-                GridBagConstraints.HORIZONTAL, new Insets( 0, 0, 0, Constants.GAP_WITHIN_GROUP ), 0, 0 ) );
+        panel.add( label, new GridBagConstraints( 0, 0, 1, 1, 0, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets( 0, 0, 0, Constants.GAP_WITHIN_GROUP ), 0, 0 ) );
+        panel.add( edit, new GridBagConstraints( 1, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets( 0, 0, 0, Constants.GAP_WITHIN_GROUP ), 0, 0 ) );
 
         final Dimension preferredSize = panel.getPreferredSize();
         panel.setPreferredSize( preferredSize );
@@ -149,9 +146,9 @@ public class TaxonNameInterrogator extends JPanel
         {
             innerPanel.setBackground( bg );
         }
-        if ( scroller != null )
+        if ( scroll != null )
         {
-            scroller.setBackground( bg );
+            scroll.setBackground( bg );
         }
     }
 
@@ -160,7 +157,7 @@ public class TaxonNameInterrogator extends JPanel
         this.taxon = getTaxonOnLevel( focus, level );
         answers = interrogatorModel.getAnswers( focus );
         complete = interrogatorModel.getComplete( focus );
-        updateScroller();
+        updateScroll();
         updateDataEntry();
         final Level focusLevel = focus.getLevel();
         final String newLevel = ( focusLevel == null ? "No Level" : ( level == null ? focusLevel.toString() : level.toString() ) );
@@ -173,7 +170,7 @@ public class TaxonNameInterrogator extends JPanel
         final boolean enableByLevel = updateForLevel( taxon );
         if ( answers.size() > 0 )
         {
-            final JLabel label = ( (JLabel) answers.get( 0 ) );
+            final JLabel label = ( answers.get( 0 ) );
             edit.setText( label.getText() );
             edit.selectAll();
         }
@@ -181,8 +178,8 @@ public class TaxonNameInterrogator extends JPanel
         {
             edit.setText( "" );
         }
-        final boolean enableByCompletedness = !complete.isTrue();
-        edit.setEnabled( enableByCompletedness && enableByLevel || interrogatorModel instanceof MemorizingInterrogatorModel );
+        final boolean enableByCompleteness = !complete.isTrue();
+        edit.setEnabled( enableByCompleteness && enableByLevel || interrogatorModel instanceof MemorizingInterrogatorModel );
     }
 
     public void addGuess( final String guess )
@@ -190,7 +187,7 @@ public class TaxonNameInterrogator extends JPanel
         final CorrectnessChecker.Correctness correctness = handleCorrectness( guess, taxon );
         answers.add( 0, createLabel( guess, taxon, correctness ) );
         updateDataEntry();
-        updateScroller();
+        updateScroll();
     }
 
     /**
@@ -202,8 +199,8 @@ public class TaxonNameInterrogator extends JPanel
      */
     private CorrectnessChecker.Correctness handleCorrectness( final String guess, final Taxon taxon )
     {
-        final CorrectnessChecker.Correctness correctness = correctnesChecker.getCorrectness( taxon, guess );
-        final List answer = correctnesChecker.getCorrectnessText();
+        final CorrectnessChecker.Correctness correctness = correctnessChecker.getCorrectness( taxon, guess );
+        final List<String> answer = correctnessChecker.getCorrectnessText();
         if ( answer != null && !( interrogatorModel instanceof MemorizingInterrogatorModel ) )
         {
             final Object[] buttons = new Object[]{Strings.getString( "BUTTON.OK.TEXT" )};
@@ -219,7 +216,7 @@ public class TaxonNameInterrogator extends JPanel
      * Moves up the taxonomic tree until the taxon on the given level is found.
      *
      * @param taxon The taxon to start with
-     * @param level The level to find the supertaxon on
+     * @param level The level to find the super taxon on
      * @return The taxon found on the given level
      */
     private Taxon getTaxonOnLevel( Taxon taxon, final Level level )
@@ -242,8 +239,9 @@ public class TaxonNameInterrogator extends JPanel
      * Evaluates the given text and compares it to the current taxon. Constructs out of the result an appropriate label
      * to display in the guesses list.
      *
-     * @param guess The text to evaluate
-     * @param taxon The taxon to compare to
+     * @param guess       The text to evaluate
+     * @param taxon       The taxon to compare to
+     * @param correctness the correctness used
      * @return A label with the given text and an appropriate icon
      */
     private JLabel createLabel( final String guess, final Taxon taxon, final CorrectnessChecker.Correctness correctness )
@@ -280,31 +278,39 @@ public class TaxonNameInterrogator extends JPanel
                 LOG.error( "unknown correctness for guess \"" + guess + "\" and correct \"" + taxon + "\": " + correctness );
             }
         }
-        label.setBackground( super.getBackground() );
-        label.setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, 5 ) );
-        return label;
+        if ( label != null )
+        {
+            label.setBackground( super.getBackground() );
+            label.setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, 5 ) );
+            return label;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /**
      * Returns whether the entry field and button should be enabled by considering the level of this interrogator and
-     * the currenct focus taxon.
+     * the current focus taxon.
      *
      * @param taxon the new focus to set
+     * @return enabled state
      */
     private boolean updateForLevel( final Taxon taxon )
     {
         return taxon != null && ( taxon.getLevel() == level || level == null );
     }
 
-    private void updateScroller()
+    private void updateScroll()
     {
-        scroller.removeAll();
+        scroll.removeAll();
         for ( final Object answer : answers )
         {
             final Component component = (Component) answer;
-            scroller.add( component );
+            scroll.add( component );
         }
-        scroller.doLayout();
+        scroll.doLayout();
     }
 
     static
@@ -321,70 +327,62 @@ public class TaxonNameInterrogator extends JPanel
          * Restore answers from cache or create new ones if the given taxon appears for the first time.
          *
          * @param taxon The new taxon to set.
+         * @return the list of answers
          */
-        public List getAnswers( Taxon taxon );
+        public List<JLabel> getAnswers( Taxon taxon );
 
         /**
          * Returns whether the task has completed or not.
          *
-         * @param taxon The taxon the tasks completedness is interrogated
-         * @return A referencable boolean containing the flag
+         * @param taxon The taxon the tasks completeness is interrogated
+         * @return A reference to boolean containing the flag
          */
-        public ReferencableBool getComplete( Taxon taxon );
+        public BooleanReference getComplete( Taxon taxon );
     }
 
-    /**
-     * For learning purpose.
-     */
+    /** For learning purpose. */
     public static class TransientInterrogatorModel implements InterrogatorModel
     {
-        public List getAnswers( final Taxon taxon )
+        public List<JLabel> getAnswers( final Taxon taxon )
         {
-            return new ArrayList();
+            return new ArrayList<JLabel>();
         }
 
-        public ReferencableBool getComplete( final Taxon taxon )
+        public BooleanReference getComplete( final Taxon taxon )
         {
-            return new ReferencableBool( false );
+            return new BooleanReference( false );
         }
     }
 
-    /**
-     * For exam purpose.
-     */
+    /** For exam purpose. */
     public static class MemorizingInterrogatorModel implements InterrogatorModel
     {
-        private Map answersCache = new HashMap();
+        private Map<Taxon, List<JLabel>> answersCache = new HashMap<Taxon, List<JLabel>>();
 
-        private Map completeCache = new HashMap();
+        private Map<Taxon, BooleanReference> completeCache = new HashMap<Taxon, BooleanReference>();
 
-        public Map getAnswersMap()
+        public List<JLabel> getAnswers( final Taxon focus )
         {
-            return answersCache;
-        }
-
-        public List getAnswers( final Taxon focus )
-        {
-            List answers = (List) answersCache.get( focus );
+            List<JLabel> answers = answersCache.get( focus );
             if ( answers == null )
             {
-                answers = new ArrayList();
+                answers = new ArrayList<JLabel>();
                 answersCache.put( focus, answers );
             }
             return answers;
         }
 
-        public Set getTaxa()
+        public Set<Taxon> getTaxa()
         {
             return answersCache.keySet();
         }
 
-        public ReferencableBool getComplete( final Taxon focus )
+        public BooleanReference getComplete( final Taxon focus )
         {
-            ReferencableBool complete = (ReferencableBool) completeCache.get( focus );
+            BooleanReference complete = completeCache.get( focus );
             if ( complete == null )
             {
-                complete = new ReferencableBool( false );
+                complete = new BooleanReference( false );
                 completeCache.put( focus, complete );
             }
             return complete;
@@ -392,8 +390,8 @@ public class TaxonNameInterrogator extends JPanel
 
         public void reset()
         {
-            answersCache = new HashMap();
-            completeCache = new HashMap();
+            answersCache = new HashMap<Taxon, List<JLabel>>();
+            completeCache = new HashMap<Taxon, BooleanReference>();
         }
     }
 }

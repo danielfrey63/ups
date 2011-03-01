@@ -1,26 +1,40 @@
 /*
  * Herbar CD-ROM version 2
  *
- * PropertyDisplayer.java
+ * PropertyDisplay.java
  *
  * Created on 17. Mai 2002, 14:33
  * Created by dani
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
-import ch.jfactory.resource.ImageLocator;
-import ch.jfactory.resource.Strings;
+import ch.jfactory.model.graph.GraphNode;
+import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
-import java.util.ArrayList;
-import java.util.List;
+import com.ethz.geobot.herbar.model.trait.EcologyText;
+import com.ethz.geobot.herbar.model.trait.MedicineAttribute;
+import com.ethz.geobot.herbar.model.trait.MedicineSubject;
+import com.ethz.geobot.herbar.model.trait.MedicineText;
+import com.ethz.geobot.herbar.model.trait.MedicineValue;
+import com.ethz.geobot.herbar.model.trait.MorphologyText;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Constraint.BOUND;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Constraint.FREE;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Lineage.ANCESTOR;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Lineage.DESCENDANT;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Lineage.RELATED;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Self.FLAT;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Visibility.HIDDEN;
+import static ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter.Visibility.VISIBLE;
+import static ch.jfactory.resource.ImageLocator.getIcon;
+import static ch.jfactory.resource.Strings.getString;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -30,7 +44,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PropertyDisplay extends JTabbedPane
 {
-    private final static String STOP = Strings.getString( "LEVEL.STOPPER" );
+    private final static String STOP = getString( "LEVEL.STOPPER" );
 
     private final static int THEME_MORPHOLOGY = 0;
 
@@ -38,13 +52,13 @@ public class PropertyDisplay extends JTabbedPane
 
     protected final static DefaultMutableTreeNode ROOT_NODE = new DefaultMutableTreeNode();
 
-    private final AttributeDisplayModel model;
+//    private final AttributeDisplayModel model;
 
-    private final MorphologyDisplay morDisplay;
+    private final AttributeTreePanel morDisplay;
 
-    private final MedicineDisplay medDisplay;
+    private final AttributeTreePanel medDisplay;
 
-    private final EcologyDisplay ecoDisplay;
+    private final AttributeTreePanel ecoDisplay;
 
     protected HerbarModel herbarModel;
 
@@ -52,28 +66,29 @@ public class PropertyDisplay extends JTabbedPane
      * Creates a new instance of PropertyDisplay.
      *
      * @param herbarContext the main context
-     * @param taxStateModel
+     * @param taxStateModel the model
      */
     public PropertyDisplay( final HerbarContext herbarContext, final TaxStateModel taxStateModel )
     {
         herbarModel = herbarContext.getDataModel();
-        this.setTabPlacement( JTabbedPane.BOTTOM );
-        model = new AttributeDisplayModel( herbarModel.getLevel( STOP ) );
-        morDisplay = new MorphologyDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
-        ecoDisplay = new EcologyDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
-        medDisplay = new MedicineDisplay( herbarContext, herbarModel.getLevel( STOP ), taxStateModel );
-        this.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
-        this.addTab( Strings.getString( "PROPERTY.MORPHOLOGYTEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.MORPHOLOGYTEXT.ICON" ) ), morDisplay );
-        this.addTab( Strings.getString( "PROPERTY.ECOLOGYTEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.ECOLOGYTEXT.ICON" ) ), ecoDisplay );
-        this.addTab( Strings.getString( "PROPERTY.MEDICINETEXT.TEXT" ),
-                ImageLocator.getIcon( Strings.getString( "PROPERTY.MEDICINETEXT.ICON" ) ), medDisplay );
+        final Level stopLevel = herbarModel.getLevel( STOP );
+        final String morTitle = getString( "PROPERTY.MORPHOLOGY.TEXT" );
+        final String ecoTitle = getString( "PROPERTY.ECOLOGY.TEXT" );
+        final String medTitle = getString( "PROPERTY.MEDICINE.TEXT" );
+//        model = new AttributeDisplayModel( stopLevel );
+        morDisplay = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, morTitle, getMorphologyFilter() );
+        ecoDisplay = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, ecoTitle, getEcologyFilter() );
+        medDisplay = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, medTitle, getMedicineFilter() );
+        this.setTabPlacement( BOTTOM );
+        this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
+        this.addTab( morTitle, getIcon( getString( "PROPERTY.MORPHOLOGY.ICON" ) ), morDisplay );
+        this.addTab( ecoTitle, getIcon( getString( "PROPERTY.ECOLOGY.ICON" ) ), ecoDisplay );
+        this.addTab( medTitle, getIcon( getString( "PROPERTY.MEDICINE.ICON" ) ), medDisplay );
     }
 
     public void setTaxFocus( final Taxon focus )
     {
-        model.setTaxFocus( focus );
+//        model.setTaxFocus( focus );
         morDisplay.setTaxonFocus( focus );
         ecoDisplay.setTaxonFocus( focus );
         medDisplay.setTaxonFocus( focus );
@@ -89,123 +104,36 @@ public class PropertyDisplay extends JTabbedPane
         this.setSelectedIndex( otherTab.getSelectedIndex() );
     }
 
-    class AttributeDisplayModel extends DefaultTreeModel
+    public VirtualGraphTreeNodeFilter getMorphologyFilter()
     {
-        private int theme;
+        VirtualGraphTreeNodeFilter filter;
+        filter = new VirtualGraphTreeNodeFilter( MorphologyText.class, VISIBLE, FLAT, FREE, DESCENDANT, null );
+        filter = new VirtualGraphTreeNodeFilter( Taxon.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( GraphNode.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        return filter;
+    }
 
-        private List<Level> vLevels = new ArrayList<Level>();
+    public VirtualGraphTreeNodeFilter getEcologyFilter()
+    {
+        VirtualGraphTreeNodeFilter filter;
+        filter = new VirtualGraphTreeNodeFilter( EcologyText.class, VISIBLE, FLAT, FREE, RELATED, null );
+        filter = new VirtualGraphTreeNodeFilter( Taxon.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( GraphNode.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        return filter;
+    }
 
-        private final Level stopper;
-
-        public AttributeDisplayModel( final Level stopper )
-        {
-            super( ROOT_NODE );
-            if ( stopper == null )
-            {
-                throw new RuntimeException( "stopper level object " + STOP + " not found." );
-            }
-            this.stopper = stopper;
-        }
-
-        public void setTaxFocus( final Taxon focus )
-        {
-            LOG.info( "setting focus to \"" + focus + "\"" );
-            if ( theme == THEME_MORPHOLOGY )
-            {
-                Taxon taxon = focus;
-                Level level = focus.getLevel();
-                vLevels = new ArrayList<Level>();
-                final Level root = herbarModel.getRootLevel();
-                if ( stopper != null && stopper.isHigher( level ) )
-                {
-                    while ( level != stopper && stopper != root && stopper.isHigher( level ) )
-                    {
-                        vLevels.add( 0, level );
-                        taxon = taxon.getParentTaxon();
-                        level = taxon.getLevel();
-                    }
-                }
-                else
-                {
-                    vLevels.add( level );
-                }
-            }
-            fireTreeStructureChanged( this, getPathToRoot( ROOT_NODE ), null, null );
-        }
-
-        public Object getChild( final Object parent, final int index )
-        {
-            if ( theme == THEME_MORPHOLOGY )
-            {
-                if ( parent instanceof Level )
-                {
-                    final Level level = (Level) parent;
-                }
-                else if ( parent == ROOT_NODE )
-                {
-                    return vLevels.get( index );
-                }
-            }
-            return null;
-        }
-
-        public int getChildCount( final Object obj )
-        {
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( "counting children of " + obj );
-            }
-            int ret = 0;
-            if ( theme == THEME_MORPHOLOGY )
-            {
-                if ( obj == ROOT_NODE )
-                {
-                    ret = vLevels.size();
-                }
-                else if ( obj instanceof Level )
-                {
-                    ret = 0;
-                }
-            }
-            LOG.debug( this + " return " + ret );
-            return ret;
-        }
-
-        public int getIndexOfChild( final Object parent, final Object child )
-        {
-            LOG.debug( "getting index of " + child + " within " + parent );
-            int ret = 0;
-            if ( theme == THEME_MORPHOLOGY )
-            {
-                if ( parent == ROOT_NODE )
-                {
-                    ret = vLevels.lastIndexOf( child );
-                }
-                throw new RuntimeException( "child " + child + " does not exist in parent " + parent );
-            }
-            LOG.debug( "index of " + child + " within " + parent + " is " + ret );
-            return ret;
-        }
-
-        public Object getRoot()
-        {
-            LOG.debug( this + " getRoot()" );
-            Object ret = null;
-            if ( theme == THEME_MORPHOLOGY )
-            {
-                ret = ROOT_NODE;
-            }
-            return ret;
-        }
-
-        public boolean isLeaf( final Object obj )
-        {
-            final boolean leaf = ( getChildCount( obj ) == 0 );
-            if ( LOG.isDebugEnabled() )
-            {
-                LOG.debug( this + " isLeaf(" + obj + "): " + leaf );
-            }
-            return leaf;
-        }
+    public VirtualGraphTreeNodeFilter getMedicineFilter()
+    {
+        VirtualGraphTreeNodeFilter filter;
+        filter = new VirtualGraphTreeNodeFilter( MedicineText.class, VISIBLE, FLAT, BOUND, DESCENDANT, null );
+        filter = new VirtualGraphTreeNodeFilter( MedicineValue.class, HIDDEN, FLAT, BOUND, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( MedicineAttribute.class, VISIBLE, FLAT, BOUND, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( MedicineSubject.class, VISIBLE, FLAT, FREE, ANCESTOR, filter );
+        filter = new VirtualGraphTreeNodeFilter( MedicineAttribute.class, HIDDEN, FLAT, FREE, ANCESTOR, filter );
+        filter = new VirtualGraphTreeNodeFilter( MedicineValue.class, HIDDEN, FLAT, FREE, ANCESTOR, filter );
+        filter = new VirtualGraphTreeNodeFilter( MedicineText.class, HIDDEN, FLAT, FREE, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( Taxon.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        filter = new VirtualGraphTreeNodeFilter( GraphNode.class, VISIBLE, FLAT, FREE, DESCENDANT, filter );
+        return filter;
     }
 }

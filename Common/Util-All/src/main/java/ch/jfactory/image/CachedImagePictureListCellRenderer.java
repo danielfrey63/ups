@@ -19,7 +19,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Daniel Frey 06.02.11 17:20
  */
-class CachedImagePictureListCellRenderer extends DefaultListCellRenderer
+public class CachedImagePictureListCellRenderer extends DefaultListCellRenderer
 {
     private final Border selectedBorder = new CompoundBorder(
             new CompoundBorder(

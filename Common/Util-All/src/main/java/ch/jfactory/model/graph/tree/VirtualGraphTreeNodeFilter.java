@@ -8,35 +8,46 @@ package ch.jfactory.model.graph.tree;
  */
 public class VirtualGraphTreeNodeFilter
 {
-    /** Makes a node visible. */
-    public static final boolean VISIBILITY_VISIBLE = true;
+    /** The visibility of a node. */
+    public enum Visibility
+    {
+        /** Hides a node. */
+        VISIBLE,
+        /** Makes a node visible. */
+        HIDDEN
+    }
 
-    /** Hides a node. */
-    public static final boolean VISIBILITY_HIDDEN = false;
+    /** The relation between this filters and the next node. */
+    public enum Lineage
+    {
+        /** The next node is a parent of this node. */
+        ANCESTOR,
+        /** The next node is a child of this node. */
+        DESCENDANT,
+        /** The next node is either a parent or a child of this node. */
+        RELATED
+    }
 
-    /** The next node is a parent of this node. */
-    public static final int LINE_ANCESTOR = 1;
+    /** Applies to nodes of same type and filters whether to show them. */
+    public enum Self
+    {
+        /** Types of this node are displayed recursively. Sub nodes of the same type will pass also. */
+        RECURSIVE,
+        /**
+         * Types of this node pass, but children/parents - depending on LINE_ANCESTOR, LINE_DESCENDANT and RELATED - of
+         * the same type don't.
+         */
+        FLAT
+    }
 
-    /** The next node is a child of this node. */
-    public static final int LINE_DESCENDANT = 2;
-
-    /** The next node is either a parent or a child of this node. */
-    public static final int LINE_RELATED = 3;
-
-    /** Types of this node are displayed recursively. Sub nodes of the same type will pass also. */
-    public static final boolean SELF_RECURSIVE = true;
-
-    /**
-     * Types of this node pass, but children/parents - depending on LINE_ANCESTOR, LINE_DESCENDANT and LINE_RELATED - of
-     * the same type don't.
-     */
-    public static final boolean SELF_FLAT = false;
-
-    /** Makes node types taking into account prior filters. See {@link #bound} for further explanation. */
-    public static final boolean CONSTRAINT_BOUND = true;
-
-    /** Makes node types being added without taking other filters into account. */
-    public static final boolean CONSTRAINT_FREE = false;
+    /** Taking prior filters into account. */
+    public enum Constraint
+    {
+        /** Makes node types taking into account prior filters. See {@link #constraint} for further explanation. */
+        BOUND,
+        /** Makes node types being added without taking other filters into account. */
+        FREE
+    }
 
     /** Matching all classes. */
     public static final Class CLASSES_ALL = Object.class;
@@ -49,20 +60,20 @@ public class VirtualGraphTreeNodeFilter
      * the filter has not to be indicated on the parent side, but on the children side, as potentially more than one
      * child may occur, but have not to be children.
      */
-    private int direction = LINE_ANCESTOR;
+    private Lineage direction = Lineage.ANCESTOR;
 
     /** Should the vertex be displayed */
-    private boolean visible;
+    private Visibility visible;
 
     /** Should recursive links in vertices to the same type be resolved? */
-    private boolean recursive;
+    private Self self;
 
     /**
      * This attribute specifies the behaviour of this filter when used in a filter array. It allows to filter objects
      * not only by type, but -- if set to <code>true</code> (the default) -- considers the toString() of a previously
      * found object and only delivers children matching this string.<p>
      */
-    private boolean bound = true;
+    private Constraint constraint = Constraint.BOUND;
 
     /** Parent filter. May be null if root filter */
     private VirtualGraphTreeNodeFilter parent;
@@ -70,14 +81,14 @@ public class VirtualGraphTreeNodeFilter
     /** Subsequent filters that are used as children for this filter */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
 
-    public VirtualGraphTreeNodeFilter( final Class type, final boolean visible,
-                                       final boolean recursive, final boolean bound,
-                                       final VirtualGraphTreeNodeFilter[] childrenFilters, final int direction )
+    public VirtualGraphTreeNodeFilter( final Class type, final Visibility visible,
+                                       final Self self, final Constraint constraint,
+                                       final Lineage direction, final VirtualGraphTreeNodeFilter... childrenFilters )
     {
         this.type = type;
         this.visible = visible;
-        this.recursive = recursive;
-        this.bound = bound;
+        this.self = self;
+        this.constraint = constraint;
         this.childrenFilters = ( childrenFilters == null ? new VirtualGraphTreeNodeFilter[0] : childrenFilters );
         this.direction = direction;
         for ( final VirtualGraphTreeNodeFilter childFilter : this.childrenFilters )
@@ -93,7 +104,7 @@ public class VirtualGraphTreeNodeFilter
      */
     public boolean isVisible()
     {
-        return visible;
+        return visible == Visibility.VISIBLE;
     }
 
     /**
@@ -103,12 +114,12 @@ public class VirtualGraphTreeNodeFilter
      */
     public boolean isDescendant()
     {
-        return ( direction & 2 ) == 2;
+        return direction == Lineage.DESCENDANT;
     }
 
     public boolean isBothDirections()
     {
-        return ( direction & 3 ) == 3;
+        return direction == Lineage.RELATED;
     }
 
     /**
@@ -122,23 +133,23 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Returns the recursive.
+     * Returns whether recursive.
      *
      * @return boolean
      */
     public boolean isRecursive()
     {
-        return recursive;
+        return self == Self.RECURSIVE;
     }
 
     /**
-     * Returns the bound.
+     * Returns whether bound.
      *
      * @return boolean
      */
-    public boolean isBound()
+    public boolean getConstraint()
     {
-        return bound;
+        return constraint == Constraint.BOUND;
     }
 
     /**
@@ -189,7 +200,7 @@ public class VirtualGraphTreeNodeFilter
     /** @see Object#toString() */
     public String toString()
     {
-        return type + " [down=" + direction + ",displayed=" + visible + ",recursive=" + recursive + ",bound=" + bound + "]";
+        return type + " [down=" + direction + ",displayed=" + visible + ",self=" + self + ",constraint=" + constraint + "]";
     }
 
     /**
@@ -205,10 +216,11 @@ public class VirtualGraphTreeNodeFilter
      *
      * The attributes details for displaying the filter are ordered and valued as follows:
      *
-     * <ul> <li>Visibility may be 1 ({@link #VISIBILITY_VISIBLE}) or 0 ({@link #VISIBILITY_HIDDEN})</li> <li>Containing
-     * instances of it self may be 1 ({@link #SELF_RECURSIVE}) or 0 ({@link #SELF_FLAT})</li> <li>Constraint may be 1
-     * ({@link #CONSTRAINT_BOUND}) or 0 ({@link #CONSTRAINT_FREE})</li> <li>Line may be 1 ({@link #LINE_ANCESTOR}), 2
-     * ({@link #LINE_DESCENDANT}) or 3 ({@link #LINE_RELATED})</li> </ul>
+     * <ul> <li>Visibility may be 1 ({@link Visibility#VISIBLE Visibility.VISIBLE}) or 0 ({@link Visibility#HIDDEN
+     * Visibility.HIDDEN})</li> <li>Containing instances of it self may be 1 ({@link Self#RECURSIVE Self.RECURSIVE}) or
+     * 0 ({@link Self#FLAT Self.FLAT})</li> <li>Constraint may be 1 ({@link Constraint#BOUND Constraint.BOUND}) or 0
+     * ({@link Constraint#FREE Constraint.FREE})</li> <li>Lineage may be 1 ({@link Lineage#ANCESTOR Lineage.ANCESTOR}),
+     * 2 ({@link Lineage#DESCENDANT Lineage.DESCENDANT}) or 3 ({@link Lineage#RELATED Lineage.RELATED})</li> </ul>
      *
      * While supported by the VirtualGraphTreeNodeFilter, with this factory method it is not possible to have several
      * children filters nested into one parent filter. Only one child is allowed for a parent. I.e. the following is not
@@ -252,11 +264,11 @@ public class VirtualGraphTreeNodeFilter
     private static VirtualGraphTreeNodeFilter getFilter( final Class type, final int[] data, final VirtualGraphTreeNodeFilter filter )
     {
         return new VirtualGraphTreeNodeFilter( type,
-                data[0] == 1 ? VISIBILITY_VISIBLE : VISIBILITY_HIDDEN,
-                data[1] == 1 ? SELF_RECURSIVE : SELF_FLAT,
-                data[2] == 1 ? CONSTRAINT_BOUND : CONSTRAINT_FREE,
-                filter == null ? null : new VirtualGraphTreeNodeFilter[]{filter},
-                data[3] == 1 ? LINE_ANCESTOR : data[3] == 2 ? LINE_DESCENDANT : LINE_RELATED );
+                data[0] == 1 ? Visibility.VISIBLE : Visibility.HIDDEN,
+                data[1] == 1 ? Self.RECURSIVE : Self.FLAT,
+                data[2] == 1 ? Constraint.BOUND : Constraint.FREE,
+                data[3] == 1 ? Lineage.ANCESTOR : data[3] == 2 ? Lineage.DESCENDANT : Lineage.RELATED, filter == null ? null : new VirtualGraphTreeNodeFilter[]{filter}
+        );
     }
 
 }

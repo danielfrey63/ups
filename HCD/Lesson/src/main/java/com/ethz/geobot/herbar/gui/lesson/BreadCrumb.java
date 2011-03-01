@@ -6,7 +6,7 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
-import ch.jfactory.component.ScrollerPanel;
+import ch.jfactory.component.ScrollPanel;
 import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
@@ -27,7 +27,7 @@ public class BreadCrumb extends JPanel
 {
     private final static Logger LOG = LoggerFactory.getLogger( BreadCrumb.class );
 
-    private final ScrollerPanel panel = new ScrollerPanel();
+    private final ScrollPanel panel = new ScrollPanel();
 
     /** Displays a series of taxa up to and excluding the given stopper level. */
     public BreadCrumb()

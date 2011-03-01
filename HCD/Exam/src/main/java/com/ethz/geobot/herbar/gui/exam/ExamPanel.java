@@ -129,7 +129,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private PicturePanel picturePanel;
 
-    private PropertyInterrogator asker;
+    private PropertyInterrogator interrogator;
 
     private ResultModel resultModel;
 
@@ -150,12 +150,6 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     private boolean started;
 
     private final int minutes;
-
-    private InterrogatorComplexityFactory.Type filter1;
-
-    private InterrogatorComplexityFactory.Type filter2;
-
-    private InterrogatorComplexityFactory.Type filter3;
 
     private IteratorControlPanel navigator;
 
@@ -347,10 +341,8 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
     {
         picturePanel = new PicturePanel( herbarModel, false, herbarModel.getPictureTheme( "Herbar" ) );
 
-        initFilter();
-
         final ResultModel resultModel = createResultModel();
-        asker = new PropertyInterrogator( resultModel );
+        interrogator = new PropertyInterrogator( resultModel );
 
         final JPanel toolBar = new JPanel( new BorderLayout() );
         toolBar.add( createTopToolbar(), BorderLayout.NORTH );
@@ -359,7 +351,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         // Lower main part
         final JSplitPane mainSplit = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
         mainSplit.setTopComponent( picturePanel );
-        mainSplit.setBottomComponent( asker );
+        mainSplit.setBottomComponent( interrogator );
         mainSplit.setResizeWeight( 1.0 );
 
         final JPanel examPanel = new JPanel( new BorderLayout() );
@@ -382,8 +374,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
         final JPanel secondToolBar = new JPanel( new GridLayout( 1, 2 ) );
         final int gap = Constants.GAP_BETWEEN_GROUP;
-        secondToolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ),
-                new EmptyBorder( gap, gap, gap, gap ) ) );
+        secondToolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ), new EmptyBorder( gap, gap, gap, gap ) ) );
         secondToolBar.add( speciesInterrogator );
         secondToolBar.add( familyInterrogator );
         return secondToolBar;
@@ -394,7 +385,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         final StopExamAction stopAction = new StopExamAction();
         final JButton stopButton = new JButton();
         stopButton.setAction( stopAction );
-        stopButton.setToolTipText( Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.HINT" ) );
+        stopButton.setToolTipText( Strings.getString( ExamMode.class, "EXAM.BUTTON.STOP.HINT" ) );
         stopButton.setFocusPainted( false );
         final String prefix = Strings.getString( ExamMode.class, "BUTTON.NAVIGATION.PREFIX" );
         navigator = new IteratorControlPanel( prefix );
@@ -415,36 +406,30 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         resultModel = new DefaultResultModel( herbarModel );
         MemorizingDetailResultModel detailModel;
 
-        detailModel = new MemorizingDetailResultModel( MorphologyText.class, MorphologyAttribute.class, herbarModel );
-        detailModel.add( filter1 );
-        detailModel.add( filter2 );
-        detailModel.add( filter3 );
+        detailModel = new MemorizingDetailResultModel( Morphology.class, MorphologyAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new MemorizingDetailResultModel( EcologyText.class, EcologyAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
+        detailModel = new MemorizingDetailResultModel( Ecology.class, EcologyAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new MemorizingDetailResultModel( MedicineText.class, MedicineAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
+        detailModel = new MemorizingDetailResultModel( Medicine.class, MedicineAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
         return resultModel;
-    }
-
-    private void initFilter()
-    {
-        filter1 = InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) );
-        filter2 = InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class,
-                MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) );
-        filter3 = InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter( new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class,
-                MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2},
-                        {0, 0, 0, 2}, {1, 0, 0, 2}} ) );
     }
 
     //==== Statistics
@@ -508,11 +493,11 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         placeStatisticsValue( getCorrectTaxonAbundance( familyInterrogatorModel ), 1, y );
         placeStatisticsValue( getCorrectTaxonAccuracy( familyInterrogatorModel ), 2, y );
 
-        for ( int i = 0; i < asker.getTabCount(); i++ )
+        for ( int i = 0; i < interrogator.getTabCount(); i++ )
         {
-            final PropertyInterrogatorPanel panel = (PropertyInterrogatorPanel) asker.getComponentAt( i );
+            final PropertyInterrogatorPanel panel = (PropertyInterrogatorPanel) interrogator.getComponentAt( i );
             final MemorizingDetailResultModel detailResultModel = (MemorizingDetailResultModel) panel.getResultModel();
-            final String name = asker.getTitleAt( i );
+            final String name = interrogator.getTitleAt( i );
 
             placeLabel( Strings.getString( ExamMode.class, "STATS.COUNT.PART.TEXT", name ), 0, ++y );
             placeStatisticsValue( getCorrectAttributeAbundance( detailResultModel ), 1, y );
@@ -634,7 +619,7 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
         picturePanel.setTaxon( newFocus );
         speciesInterrogator.setTaxFocus( newFocus );
         familyInterrogator.setTaxFocus( newFocus );
-        asker.setTaxFocus( newFocus );
+        interrogator.setTaxFocus( newFocus );
     }
 
     static
@@ -653,14 +638,14 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     class StopExamAction extends AbstractAction
     {
-        private final String STOPP_TEXT = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.TEXT" );
+        private final String STOP_TEXT = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOP.TEXT" );
 
-        private final String STOPP_ICON = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOPP.ICON" );
+        private final String STOP_ICON = Strings.getString( ExamMode.class, "EXAM.BUTTON.STOP.ICON" );
 
         public StopExamAction()
         {
-            putValue( AbstractAction.NAME, STOPP_TEXT );
-            putValue( AbstractAction.SMALL_ICON, ImageLocator.getIcon( STOPP_ICON ) );
+            putValue( AbstractAction.NAME, STOP_TEXT );
+            putValue( AbstractAction.SMALL_ICON, ImageLocator.getIcon( STOP_ICON ) );
         }
 
         public void actionPerformed( final ActionEvent e )

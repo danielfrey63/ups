@@ -147,7 +147,7 @@ public class VirtualGraphTreeNodeModel implements GraphModel
     private GraphNodeList getBoundChildren( final GraphNodeList graphNodes,
                                             final VirtualGraphTreeNodeFilter filter, VirtualGraphTreeNode parent )
     {
-        if ( !filter.isBound() )
+        if ( !filter.getConstraint() )
         {
             return graphNodes;
         }

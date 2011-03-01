@@ -1,6 +1,8 @@
 package ch.jfactory.model.graph.tree;
 
 /**
+ * Class for a tree like structure to support filtering nodes of a graph for a tree.
+ *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
@@ -36,6 +38,7 @@ public class VirtualGraphTreeNodeFilter
     /** Makes node types being added without taking other filters into account. */
     public static final boolean CONSTRAINT_FREE = false;
 
+    /** Matching all classes. */
     public static final Class CLASSES_ALL = Object.class;
 
     /** The vertices type to filter out */
@@ -67,16 +70,15 @@ public class VirtualGraphTreeNodeFilter
     /** Subsequent filters that are used as children for this filter */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
 
-    public VirtualGraphTreeNodeFilter( final Class type, final boolean displayed,
+    public VirtualGraphTreeNodeFilter( final Class type, final boolean visible,
                                        final boolean recursive, final boolean bound,
-                                       final VirtualGraphTreeNodeFilter[] filters, final int direction )
+                                       final VirtualGraphTreeNodeFilter[] childrenFilters, final int direction )
     {
         this.type = type;
-        this.visible = displayed;
+        this.visible = visible;
         this.recursive = recursive;
         this.bound = bound;
-        this.childrenFilters =
-                ( filters == null ? new VirtualGraphTreeNodeFilter[0] : filters );
+        this.childrenFilters = ( childrenFilters == null ? new VirtualGraphTreeNodeFilter[0] : childrenFilters );
         this.direction = direction;
         for ( final VirtualGraphTreeNodeFilter childFilter : this.childrenFilters )
         {
@@ -140,7 +142,7 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Returns the childrenFilters.
+     * Returns all the children filters.
      *
      * @return GraphNodeFilter[]
      */
@@ -150,7 +152,8 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Returns the childrenFilters of the given type.
+     * Returns the first children filters of the given type and if not present, returns this instance if the types are
+     * matching.
      *
      * @param type the type to retrieve
      * @return GraphNodeFilter[]
@@ -190,20 +193,27 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Factory method to generate a simple nested linear filter. I.e. to have i.e. the following types displayed
-     * (top-down):
+     * Factory method to generate a simple nested linear filter. I.e. to have the following types displayed (top-down):
      * <pre>
      * -+ File
      *  +--+ URL
      *     +--+ String
      * </pre>
-     * you need to specify the classes array as <code>new Class[] {File.class, URL.class, String.class}</code>.<p> The
-     * attributes details for displaying the filter are ordered and valued as follows: <ul> <li>Visibility may be 1
-     * ({@link #VISIBILITY_VISIBLE}) or 0 ({@link #VISIBILITY_HIDDEN})</li> <li>Containing instances of it self may be 1
-     * ({@link #SELF_RECURSIVE}) or 0 ({@link #SELF_FLAT})</li> <li>Constraint may be 1 ({@link #CONSTRAINT_BOUND}) or 0
-     * ({@link #CONSTRAINT_FREE})</li> <li>Line may be 1 ({@link #LINE_ANCESTOR}), 2 ({@link #LINE_DESCENDANT}) or 3
-     * ({@link #LINE_RELATED})</li> </ul> It is not possible to have several children filters nested into one parent
-     * filter. Only one child is allowed for a parent. I.e. the following is not achievable with this method:
+     *
+     * for which you need to specify the classes array as <code>new Class[] {File.class, URL.class,
+     * String.class}</code>.<p>
+     *
+     * The attributes details for displaying the filter are ordered and valued as follows:
+     *
+     * <ul> <li>Visibility may be 1 ({@link #VISIBILITY_VISIBLE}) or 0 ({@link #VISIBILITY_HIDDEN})</li> <li>Containing
+     * instances of it self may be 1 ({@link #SELF_RECURSIVE}) or 0 ({@link #SELF_FLAT})</li> <li>Constraint may be 1
+     * ({@link #CONSTRAINT_BOUND}) or 0 ({@link #CONSTRAINT_FREE})</li> <li>Line may be 1 ({@link #LINE_ANCESTOR}), 2
+     * ({@link #LINE_DESCENDANT}) or 3 ({@link #LINE_RELATED})</li> </ul>
+     *
+     * While supported by the VirtualGraphTreeNodeFilter, with this factory method it is not possible to have several
+     * children filters nested into one parent filter. Only one child is allowed for a parent. I.e. the following is not
+     * achievable:
+     *
      * <pre>
      * -+ File
      *  +--+ URL
@@ -212,6 +222,7 @@ public class VirtualGraphTreeNodeFilter
      *  +--+ StringBuffer
      *     +--+ Long
      * </pre>
+     *
      * <code>File</code> and <code>URL</code> each contain two children filter and therefore are not suitable here.<p>
      *
      * @param classes      the types to filter. Length must be equal to first order length of filterMatrix.

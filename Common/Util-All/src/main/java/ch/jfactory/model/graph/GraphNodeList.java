@@ -2,7 +2,6 @@ package ch.jfactory.model.graph;
 
 import ch.jfactory.lang.ToStringComparator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -60,9 +59,9 @@ public class GraphNodeList
         return list.toArray( new GraphNode[list.size()] );
     }
 
-    public GraphNode[] getAll( final Object[] arraytype )
+    public GraphNode[] getAll( final Object[] arrayType )
     {
-        return (GraphNode[]) list.toArray( arraytype );
+        return (GraphNode[]) list.toArray( arrayType );
     }
 
     public void add( final GraphNode node )
@@ -86,11 +85,6 @@ public class GraphNodeList
     public boolean remove( final GraphNode toRemove )
     {
         return list.remove( toRemove );
-    }
-
-    public void removeAllNodes( final GraphNodeList toRemove )
-    {
-        list.removeAll( Arrays.asList( toRemove.getAll() ) );
     }
 
     public int size()

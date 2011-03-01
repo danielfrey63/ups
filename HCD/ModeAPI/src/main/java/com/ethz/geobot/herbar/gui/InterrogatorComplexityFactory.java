@@ -34,13 +34,10 @@ public class InterrogatorComplexityFactory
 
         private GraphNode root;
 
-        private final HerbarModel model;
-
         protected Type( final HerbarModel model, final String name, final VirtualGraphTreeNodeFilter filter )
         {
             this.type = name;
             this.filter = filter;
-            this.model = model;
             final Class type = filter.getType();
             if ( type.isAssignableFrom( Taxon.class ) )
             {

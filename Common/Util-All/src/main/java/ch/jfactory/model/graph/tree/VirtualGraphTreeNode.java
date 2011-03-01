@@ -88,24 +88,6 @@ public class VirtualGraphTreeNode implements GraphNode
     }
 
     /**
-     * Factory method to create new {@link VirtualGraphTreeNode} objects with the model of a given parent.
-     *
-     * @param filter the filter
-     * @param parent the parent <code>VirtualGraphTreeNode</code>
-     * @return either a new <code>VirtualGraphTreeNode</code> or an existing one.
-     */
-    public static VirtualGraphTreeNode getGraphNode( final VirtualGraphTreeNodeFilter filter, final VirtualGraphTreeNode parent )
-    {
-        final VirtualGraphTreeNodeModel model = parent.model;
-        final GraphNode depParent = parent.getDependent();
-        final GraphNode dependent = model.createNode( depParent, filter.getType() );
-        checkTypeMatching( dependent, filter );
-        final VirtualGraphTreeNode result = createNode( dependent, parent, model, filter );
-        depParent.addChild( dependent );
-        return result;
-    }
-
-    /**
      * Factory method to add a {@link VirtualGraphTreeNode} object to a given parent.
      *
      * @param dependent the dependent node
@@ -275,15 +257,6 @@ public class VirtualGraphTreeNode implements GraphNode
         }
     }
 
-    public VirtualGraphTreeNode addNewTreeChild( final int index, final String name, final Class type )
-    {
-        final VirtualGraphTreeNodeFilter filter = this.filter.getChildrenFilter( type );
-        final VirtualGraphTreeNode node = getGraphNode( filter, this );
-        node.setName( name );
-        addTreeChild( index, node );
-        return node;
-    }
-
     public void removeTreeChild( final VirtualGraphTreeNode node )
     {
         final GraphNode dep = node.getDependent();
@@ -296,21 +269,6 @@ public class VirtualGraphTreeNode implements GraphNode
         else
         {
             node.removeFromChild( this );
-        }
-    }
-
-    public void deleteTreeChild( final VirtualGraphTreeNode node )
-    {
-        final GraphNode dep = node.getDependent();
-        final Class type = dep.getClass();
-        final VirtualGraphTreeNodeFilter childFilter = filter.getChildrenFilter( type );
-        if ( childFilter.isDescendant() )
-        {
-            deleteChild( node );
-        }
-        else
-        {
-            deleteParent( node );
         }
     }
 
@@ -489,11 +447,10 @@ public class VirtualGraphTreeNode implements GraphNode
         // inserted is not a visible parent of this node, but an invisible one.
         // We have to search for it.
         final GraphNodeList visible = getChildren();
-        final VirtualGraphTreeNode vParent = (VirtualGraphTreeNode) parent;
-        final VirtualGraphTreeNodeFilter pFilter = vParent.getFilter();
+        final VirtualGraphTreeNode pNode = (VirtualGraphTreeNode) parent;
+        final VirtualGraphTreeNodeFilter pFilter = pNode.getFilter();
         VirtualGraphTreeNode visibleInsert = (VirtualGraphTreeNode) visible.get( index );
-        while ( visibleInsert != null
-                && visibleInsert.getFilter().getType() != pFilter.getType() )
+        while ( visibleInsert != null && visibleInsert.getFilter().getType() != pFilter.getType() )
         {
             visibleInsert = visibleInsert.parent;
         }
@@ -508,8 +465,7 @@ public class VirtualGraphTreeNode implements GraphNode
             final GraphNode dependentOfVisible = visibleInsert.getDependent();
             hiddenIndex = dependent.getParents().get( dependentOfVisible );
         }
-        final VirtualGraphTreeNode missile = (VirtualGraphTreeNode) parent;
-        dependent.addParent( hiddenIndex, missile.getDependent() );
+        dependent.addParent( hiddenIndex, pNode.getDependent() );
     }
 
     public GraphNode addNewParent( final int index, final String name, final Class type )

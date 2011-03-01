@@ -34,10 +34,9 @@ public class MedicineDisplay extends AttributeTreePanel
 
     public VirtualGraphTreeNodeFilter registerFilter()
     {
-        return VirtualGraphTreeNodeFilter.getFilter( new Class[]{GraphNode.class, Taxon.class, MedicineText.class, MedicineValue.class, MedicineAttribute.class,
-                MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
-                new int[][]{{1, 0, 0, 2}, {1, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1},
-                        {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 1, 2}, {1, 0, 1, 2}} );
+        return VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{GraphNode.class, Taxon.class, MedicineText.class, MedicineValue.class, MedicineAttribute.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
+                new int[][]{{1, 0, 0, 2}, {1, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 1, 2}, {1, 0, 1, 2}} );
     }
 }
 

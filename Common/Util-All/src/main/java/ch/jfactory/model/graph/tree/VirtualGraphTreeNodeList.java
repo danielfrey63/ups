@@ -27,11 +27,6 @@ public class VirtualGraphTreeNodeList extends GraphNodeList
         super.addAll( elements );
     }
 
-    public VirtualGraphTreeNode[] getAllTreeNodes()
-    {
-        return (VirtualGraphTreeNode[]) super.getAll();
-    }
-
     public VirtualGraphTreeNode getTreeNode( final int index )
     {
         return (VirtualGraphTreeNode) super.get( index );

@@ -441,12 +441,6 @@
               <void property="name"> 
                <string>okButton</string> 
               </void> 
-              <void method="auxiliary"> 
-               <void method="setProperty"> 
-                <string>JavaCodeGenerator.variableLocal</string> 
-                <boolean>true</boolean> 
-               </void> 
-              </void> 
               <void method="addEvent"> 
                <object class="com.jformdesigner.model.FormEvent"> 
                 <string>java.awt.event.ActionListener</string> 

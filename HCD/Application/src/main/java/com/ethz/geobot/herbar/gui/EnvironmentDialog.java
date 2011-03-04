@@ -10,7 +10,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,12 +28,7 @@ public class EnvironmentDialog extends JDialog
     {
         super( owner );
         initComponents();
-    }
-
-    public EnvironmentDialog( Dialog owner )
-    {
-        super( owner );
-        initComponents();
+        getRootPane().setDefaultButton( okButton );
     }
 
     private void setChoice1()
@@ -67,7 +61,7 @@ public class EnvironmentDialog extends JDialog
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
         JPanel buttonBar = new JPanel();
-        JButton okButton = new JButton();
+        okButton = new JButton();
         CellConstraints cc = new CellConstraints();
 
         //======== this ========
@@ -213,5 +207,7 @@ public class EnvironmentDialog extends JDialog
     public JRadioButton germanRadio;
 
     public JRadioButton dendroRadio;
+
+    private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

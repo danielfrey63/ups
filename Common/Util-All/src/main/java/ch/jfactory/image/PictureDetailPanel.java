@@ -22,6 +22,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultButtonModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -144,7 +145,7 @@ public class PictureDetailPanel extends JPanel
         thumbList = createThumbPanel();
 
         setLayout( new BorderLayout() );
-        add( thumbList, BorderLayout.NORTH );
+        add( new JScrollPane( thumbList ), BorderLayout.NORTH );
         add( imagePanel, BorderLayout.CENTER );
     }
 

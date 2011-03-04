@@ -23,10 +23,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
-import java.awt.KeyEventPostProcessor;
-import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,7 +34,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import junit.extensions.jfcunit.tools.ComponentBrowser;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,10 +65,19 @@ public class AppHerbar
     /** reference to the one and only mainframe */
     private static MainFrame mainFrame = null;
 
+    /** Started in the "german" environment. */
+    public static final String ENV_GERMAN = "german";
+
+    /** Started in the "scientific" environment. */
+    public static final String ENV_SCIENTIFIC = "scientific";
+
+    /** Started in the "dendrology" environment. */
+    public static final String ENV_DENDRO = "dendro";
+
     public AppHerbar()
     {
-        switchDatabase();
         initSplash();
+        switchDatabase();
         decompressDatabase();
         Application.getInstance().getModel();
         System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
@@ -92,6 +97,8 @@ public class AppHerbar
                 // load old user settings
                 mainFrame.loadSettings();
                 mainFrame.setVisible( true );
+
+                splash.finish();
             }
         } );
     }
@@ -104,25 +111,36 @@ public class AppHerbar
     private void switchDatabase()
     {
         // Todo: Implement this as a case of specialized resource bundles
-        final String[] options = new String[]{"Deutsch", "Wissenschaftlich", "Dendro"};
-        final String message = Strings.getString( "SWITCH.MESSAGE" );
-        final String title = Strings.getString( "SWITCH.TITLE" );
-        final int selection = Dialogs.showOptionsQuestion( null, title, message, options, options[1] );
+        final EnvironmentDialog dialog = new EnvironmentDialog( (JFrame) null );
+        dialog.setVisible( true );
+        int selection = -1;
+        if ( dialog.ok )
+        {
+            selection = dialog.systematicRadio.isSelected() ? dialog.scientificRadio.isSelected() ? 0 : 1 : 2;
+        }
+        else
+        {
+            LOG.info( "user canceled choice dialog. exiting application now." );
+            System.exit( 1 );
+        }
         switch ( selection )
         {
             case 0:
-                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
-                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
-                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.ge" ) );
-                break;
-            case 1:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
                 System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.sc" ) );
+                System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
+                break;
+            case 1:
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
+                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.ge" ) );
+                System.setProperty( "xmatrix.subject", ENV_GERMAN );
                 break;
             case 2:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
+                System.setProperty( "xmatrix.subject", ENV_DENDRO );
                 break;
             default:
                 break;
@@ -160,18 +178,6 @@ public class AppHerbar
 
     public static void main( final String[] args )
     {
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventPostProcessor( new KeyEventPostProcessor()
-        {
-            public boolean postProcessKeyEvent( final KeyEvent e )
-            {
-                if ( e.getID() == KeyEvent.KEY_PRESSED && e.isAltDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D )
-                {
-                    final ComponentBrowser browser = new ComponentBrowser();
-                    browser.setVisible( true );
-                }
-                return false;
-            }
-        } );
         LOG.debug( "Starting main-Application" );
 
         try
@@ -189,25 +195,10 @@ public class AppHerbar
             LOG.error( "fatal error occured in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
         }
-        finally
-        {
-            if ( splash != null )
-            {
-                splash.finish();
-            }
-        }
-
     }
 
     private void initSplash()
     {
-//        ImageLocator.setErrorHandler( new ImageLocator.ErrorHandler()
-//        {
-//            public void handleError( final Throwable e )
-//            {
-//                JOptionPane.showMessageDialog( mainFrame, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE );
-//            }
-//        } );
         final ImageIcon imageIcon = ImageLocator.getIcon( "splash.jpg" );
         SwingUtilities.invokeLater( new Runnable()
         {

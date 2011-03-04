@@ -8,16 +8,13 @@ import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.logging.LogUtils;
 import java.awt.Color;
 import java.awt.Insets;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-/**
- * don't use any vml access here!
- */
+/** don't use any vml access here! */
 public class Splash extends JWindow
 {
     public Splash( final ImageIcon imageIcon )
@@ -48,6 +45,7 @@ public class Splash extends JWindow
         getContentPane().add( label );
 
         WindowUtils.centerOnScreen( this );
+        setAlwaysOnTop( true );
         setVisible( true );
     }
 

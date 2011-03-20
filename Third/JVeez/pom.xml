@@ -18,6 +18,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1176</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>

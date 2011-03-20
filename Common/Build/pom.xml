@@ -76,7 +76,7 @@
             <dependency>
                 <groupId>ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.6</version>
+                <version>1.6.5</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -117,19 +117,22 @@
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.icon</artifactId>
-                <!-- seems that webstart doesn't copy runtime dependencies -->
-                <!--<scope>runtime</scope>-->
                 <version>1.4-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.common</groupId>
                 <artifactId>ch.xmatrix.common.utils-all</artifactId>
-                <version>3.0-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.application</artifactId>
-                <version>3.6-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.xmatrix.le</groupId>
+                <artifactId>ch.xmatrix.le.catcher</artifactId>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -149,7 +152,7 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.help</artifactId>
-                <version>3.6-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -159,7 +162,7 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.maze</artifactId>
-                <version>3.6-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -179,12 +182,12 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.news</artifactId>
-                <version>3.6-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.project</artifactId>
-                <version>3.6-SNAPSHOT</version>
+                <version>4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.ups.data</groupId>
@@ -364,7 +367,7 @@
             <dependency>
                 <groupId>commons-jxpath</groupId>
                 <artifactId>commons-jxpath</artifactId>
-                <version>1.1</version>
+                <version>1.3</version>
             </dependency>
             <dependency>
                 <groupId>commons-lang</groupId>
@@ -435,7 +438,13 @@
             <dependency>
                 <groupId>net.java.jveez</groupId>
                 <artifactId>net.java.jveez</artifactId>
-                <version>1.77-SNAPSHOT</version>
+                <version>1.78-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.jfcunit</groupId>
+                <artifactId>jfcunit</artifactId>
+                <version>2.08</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -481,22 +490,34 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.5.10</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>1.5.10</version>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>3.0.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>3.0.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>3.0.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.uispec4j</groupId>
+                <artifactId>uispec4j</artifactId>
+                <version>2.4</version>
+                <classifier>jdk16</classifier>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>saxpath</groupId>
                 <artifactId>saxpath</artifactId>
                 <version>1.0-FCS</version>
-            </dependency>
-            <dependency>
-                <groupId>uispec4j</groupId>
-                <artifactId>uispec4j</artifactId>
-                <version>1.0</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>xalan</groupId>

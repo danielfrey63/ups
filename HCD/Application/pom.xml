@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
@@ -25,62 +24,77 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>1.4.823</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.1346</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1391</version>
             <artifactId>ch.xmatrix.le.catcher</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1359</version>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1376</version>
             <artifactId>ch.xmatrix.le.exam</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>3.6.1115</version>
             <artifactId>ch.xmatrix.le.gallows</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1334</version>
             <artifactId>ch.xmatrix.le.help</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1381</version>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1386</version>
             <artifactId>ch.xmatrix.le.maze</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1371</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1371</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1355</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1355</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1366</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.1226</version>
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <dependency>
@@ -101,6 +115,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1176</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>
@@ -137,6 +152,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.1325</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>

@@ -128,7 +128,6 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             lessonBar = new LessonBar( parent, context, taxStateModel );
 
             final JSplitPane splitPane = new NiceSplitPane();
-            splitPane.setResizeWeight( 0 );
             splitPane.add( picturePanel, JSplitPane.LEFT );
             splitPane.add( lessonSwitcher, JSplitPane.RIGHT );
 
@@ -152,7 +151,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
                 }
             } );
 
-            splitPane.setDividerLocation( 400 );
+            splitPane.setDividerLocation( 740 );
         }
         catch ( RuntimeException e )
         {

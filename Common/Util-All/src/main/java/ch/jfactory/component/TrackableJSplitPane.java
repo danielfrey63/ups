@@ -26,27 +26,11 @@ public class TrackableJSplitPane extends NiceSplitPane
 {
     private boolean added = false;
 
-    private final Set listeners = new HashSet();
-
-    public TrackableJSplitPane( final int newOrientation )
-    {
-        super( newOrientation );
-    }
-
-    public TrackableJSplitPane( final int newOrientation, final boolean newContinuousLayout )
-    {
-        super( newOrientation, newContinuousLayout );
-    }
+    private final Set<DividerListener> listeners = new HashSet<DividerListener>();
 
     public TrackableJSplitPane( final int newOrientation, final Component newLeftComponent, final Component newRightComponent )
     {
         super( newOrientation, newLeftComponent, newRightComponent );
-    }
-
-    public TrackableJSplitPane( final int newOrientation, final boolean newContinuousLayout, final Component newLeftComponent,
-                                final Component newRightComponent )
-    {
-        super( newOrientation, newContinuousLayout, newLeftComponent, newRightComponent );
     }
 
     protected void addImpl( final Component comp, final Object constraints, final int index )
@@ -59,7 +43,7 @@ public class TrackableJSplitPane extends NiceSplitPane
                 public void componentResized( final ComponentEvent e )
                 {
                     super.componentResized( e );
-                    fireDividerChangedEvent( new DividerChangeEvent( TrackableJSplitPane.this, getDividerLocation() ) );
+                    fireDividerChangedEvent( new DividerChangeEvent( TrackableJSplitPane.this ) );
                 }
             } );
             added = true;
@@ -84,7 +68,7 @@ public class TrackableJSplitPane extends NiceSplitPane
     {
         private JSplitPane who = null;
 
-        public DividerChangeEvent( final JSplitPane who, final int newPos )
+        public DividerChangeEvent( final JSplitPane who )
         {
             this.who = who;
         }

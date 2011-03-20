@@ -86,6 +86,6 @@ public class CommentedPictureImpl extends GraphNodeImpl implements CommentedPict
 
     public String toString()
     {
-        return picture.toString();
+        return picture == null ? "null" : picture.toString();
     }
 }

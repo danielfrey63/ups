@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.neo4j.graphdb.RelationshipType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,8 +114,7 @@ public class GraphModelImpl extends AbsGraphModel
             stmt = conn.createStatement();
             selectVertices = conn.prepareStatement( "SELECT name, rank, type FROM vertices WHERE id = ?" );
             selectEdges = conn.prepareStatement( "SELECT e.parent_id, e.child_id FROM edges e WHERE e.id = ?" );
-            selectChildren = conn.prepareStatement( "SELECT e.id FROM edges e, vertices c WHERE c.id = e.child_id "
-                    + " AND e.parent_id = ? ORDER BY e.rank, c.rank, c.id" );
+            selectChildren = conn.prepareStatement( "SELECT e.id FROM edges e, vertices c WHERE c.id = e.child_id AND e.parent_id = ? ORDER BY e.rank, c.rank, c.id" );
         }
     }
 
@@ -353,9 +353,31 @@ public class GraphModelImpl extends AbsGraphModel
             changedNodes.clear();
             changedEdges.clear();
             LOG.info( "model reading from DB finished" );
+//
+//            final EmbeddedGraphDatabase db = new EmbeddedGraphDatabase( "target/neo4j/sc" );
+//            final Transaction transaction = db.beginTx();
+//            writeNeo4JNode( db, root );
+//            transaction.finish();
+//            db.shutdown();
         }
         return root;
     }
+
+//    private Node writeNeo4JNode( final EmbeddedGraphDatabase db, final GraphNode graphNode )
+//    {
+//        final Node neo4jNode = db.createNode();
+//        neo4jNode.setProperty( "name", graphNode.getName() );
+//        neo4jNode.setProperty( "type", getTypeFactory().getType( graphNode ) );
+//        neo4jNode.setProperty( "rank", graphNode.getRank() );
+//        final GraphNode[] children = graphNode.getChildren().getAll();
+//        for ( final GraphNode child : children )
+//        {
+//            final Node other = writeNeo4JNode( db, child );
+//            neo4jNode.createRelationshipTo( other, DefaultRelationshipType.IS_PARENT_OF );
+//        }
+//        return neo4jNode;
+//    }
+//
 
     /** @see GraphModel#createEdge(GraphNode, GraphNode) */
     public GraphEdge createEdge( final GraphNode parent, final GraphNode child )
@@ -722,5 +744,10 @@ public class GraphModelImpl extends AbsGraphModel
             System.out.println( "+++ " + titles[i] + " total " + count );
             System.out.println( buffer );
         }
+    }
+
+    private static enum DefaultRelationshipType implements RelationshipType
+    {
+        IS_PARENT_OF
     }
 }

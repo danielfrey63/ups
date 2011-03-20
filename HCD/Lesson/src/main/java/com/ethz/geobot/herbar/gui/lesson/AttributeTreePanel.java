@@ -198,7 +198,7 @@ public class AttributeTreePanel extends JPanel
         Level level = taxon.getLevel();
         if ( stopperLevel == null || stopperLevel.isHigher( level ) )
         {
-            while ( level != null && stopperLevel != null && stopperLevel.isHigher( level ) )
+            while ( level != null && ( stopperLevel != null && stopperLevel.isHigher( level ) || stopperLevel == null ) )
             {
                 vRoot.addChild( 0, taxon.getAsGraphNode() );
                 taxon = taxon.getParentTaxon();

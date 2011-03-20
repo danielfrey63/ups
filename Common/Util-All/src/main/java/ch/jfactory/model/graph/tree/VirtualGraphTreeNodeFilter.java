@@ -33,10 +33,7 @@ public class VirtualGraphTreeNodeFilter
     {
         /** Types of this node are displayed recursively. Sub nodes of the same type will pass also. */
         RECURSIVE,
-        /**
-         * Types of this node pass, but children/parents - depending on LINE_ANCESTOR, LINE_DESCENDANT and RELATED - of
-         * the same type don't.
-         */
+        /** Types of this node pass, but children/parents - depending on LINE_ANCESTOR, LINE_DESCENDANT and RELATED - of the same type don't. */
         FLAT
     }
 
@@ -55,11 +52,7 @@ public class VirtualGraphTreeNodeFilter
     /** The vertices type to filter out */
     private Class type = CLASSES_ALL;
 
-    /**
-     * Is this vertex a child of its parent? A parent of its child would be LINE_DESCENDANT. Note: Taking the default,
-     * the filter has not to be indicated on the parent side, but on the children side, as potentially more than one
-     * child may occur, but have not to be children.
-     */
+    /** Is this vertex a child of its parent? A parent of its child would be LINE_DESCENDANT. Note: Taking the default, the filter has not to be indicated on the parent side, but on the children side, as potentially more than one child may occur, but have not to be children. */
     private Lineage direction = Lineage.ANCESTOR;
 
     /** Should the vertex be displayed */
@@ -68,11 +61,7 @@ public class VirtualGraphTreeNodeFilter
     /** Should recursive links in vertices to the same type be resolved? */
     private Self self;
 
-    /**
-     * This attribute specifies the behaviour of this filter when used in a filter array. It allows to filter objects
-     * not only by type, but -- if set to <code>true</code> (the default) -- considers the toString() of a previously
-     * found object and only delivers children matching this string.<p>
-     */
+    /** This attribute specifies the behaviour of this filter when used in a filter array. It allows to filter objects not only by type, but -- if set to <code>true</code> (the default) -- considers the toString() of a previously found object and only delivers children matching this string.<p> */
     private Constraint constraint = Constraint.BOUND;
 
     /** Parent filter. May be null if root filter */
@@ -81,9 +70,7 @@ public class VirtualGraphTreeNodeFilter
     /** Subsequent filters that are used as children for this filter */
     private VirtualGraphTreeNodeFilter[] childrenFilters;
 
-    public VirtualGraphTreeNodeFilter( final Class type, final Visibility visible,
-                                       final Self self, final Constraint constraint,
-                                       final Lineage direction, final VirtualGraphTreeNodeFilter... childrenFilters )
+    public VirtualGraphTreeNodeFilter( final Class type, final Visibility visible, final Self self, final Constraint constraint, final Lineage direction, final VirtualGraphTreeNodeFilter... childrenFilters )
     {
         this.type = type;
         this.visible = visible;
@@ -95,6 +82,11 @@ public class VirtualGraphTreeNodeFilter
         {
             childFilter.parent = this;
         }
+    }
+
+    public VirtualGraphTreeNodeFilter( final Class type, final Visibility visible, final Self self, final Constraint constraint, final Lineage direction )
+    {
+        this( type, visible, self, constraint, direction, new VirtualGraphTreeNodeFilter[0] );
     }
 
     /**
@@ -163,8 +155,7 @@ public class VirtualGraphTreeNodeFilter
     }
 
     /**
-     * Returns the first children filters of the given type and if not present, returns this instance if the types are
-     * matching.
+     * Returns the first children filters of the given type and if not present, returns this instance if the types are matching.
      *
      * @param type the type to retrieve
      * @return GraphNodeFilter[]
@@ -211,20 +202,13 @@ public class VirtualGraphTreeNodeFilter
      *     +--+ String
      * </pre>
      *
-     * for which you need to specify the classes array as <code>new Class[] {File.class, URL.class,
-     * String.class}</code>.<p>
+     * for which you need to specify the classes array as <code>new Class[] {File.class, URL.class, String.class}</code>.<p>
      *
      * The attributes details for displaying the filter are ordered and valued as follows:
      *
-     * <ul> <li>Visibility may be 1 ({@link Visibility#VISIBLE Visibility.VISIBLE}) or 0 ({@link Visibility#HIDDEN
-     * Visibility.HIDDEN})</li> <li>Containing instances of it self may be 1 ({@link Self#RECURSIVE Self.RECURSIVE}) or
-     * 0 ({@link Self#FLAT Self.FLAT})</li> <li>Constraint may be 1 ({@link Constraint#BOUND Constraint.BOUND}) or 0
-     * ({@link Constraint#FREE Constraint.FREE})</li> <li>Lineage may be 1 ({@link Lineage#ANCESTOR Lineage.ANCESTOR}),
-     * 2 ({@link Lineage#DESCENDANT Lineage.DESCENDANT}) or 3 ({@link Lineage#RELATED Lineage.RELATED})</li> </ul>
+     * <ul> <li>Visibility may be 1 ({@link Visibility#VISIBLE Visibility.VISIBLE}) or 0 ({@link Visibility#HIDDEN Visibility.HIDDEN})</li> <li>Containing instances of it self may be 1 ({@link Self#RECURSIVE Self.RECURSIVE}) or 0 ({@link Self#FLAT Self.FLAT})</li> <li>Constraint may be 1 ({@link Constraint#BOUND Constraint.BOUND}) or 0 ({@link Constraint#FREE Constraint.FREE})</li> <li>Lineage may be 1 ({@link Lineage#ANCESTOR Lineage.ANCESTOR}), 2 ({@link Lineage#DESCENDANT Lineage.DESCENDANT}) or 3 ({@link Lineage#RELATED Lineage.RELATED})</li> </ul>
      *
-     * While supported by the VirtualGraphTreeNodeFilter, with this factory method it is not possible to have several
-     * children filters nested into one parent filter. Only one child is allowed for a parent. I.e. the following is not
-     * achievable:
+     * While supported by the VirtualGraphTreeNodeFilter, with this factory method it is not possible to have several children filters nested into one parent filter. Only one child is allowed for a parent. I.e. the following is not achievable:
      *
      * <pre>
      * -+ File
@@ -238,8 +222,7 @@ public class VirtualGraphTreeNodeFilter
      * <code>File</code> and <code>URL</code> each contain two children filter and therefore are not suitable here.<p>
      *
      * @param classes      the types to filter. Length must be equal to first order length of filterMatrix.
-     * @param filterMatrix the attributes for each type to filter. First order length must be equal to classes' length.
-     *                     Second order length must be 4.
+     * @param filterMatrix the attributes for each type to filter. First order length must be equal to classes' length. Second order length must be 4.
      * @return the top filter defined by the first row, subsequently containing the remaining rows.
      */
     public static VirtualGraphTreeNodeFilter getFilter( final Class[] classes, final int[][] filterMatrix )

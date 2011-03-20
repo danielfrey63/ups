@@ -13,6 +13,7 @@ import ch.jfactory.image.PictureDetailPanel;
 import ch.jfactory.lang.ArrayUtils;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
@@ -134,8 +135,16 @@ public class PicturePanel extends JPanel
             final CommentedPicture[] pics = taxon.getCommentedPictures( theme );
             for ( final CommentedPicture pic : pics )
             {
-                final String picture = pic.getPicture().getRelativURL();
-                getDetail( theme ).cacheImage( picture, true );
+                final Picture inner = pic.getPicture();
+                if ( inner != null )
+                {
+                    final String picture = inner.getRelativURL();
+                    getDetail( theme ).cacheImage( picture, true );
+                }
+                else
+                {
+                    LOG.error( "picture for " + pic + " is null" );
+                }
             }
         }
     }
@@ -182,10 +191,18 @@ public class PicturePanel extends JPanel
         for ( Iterator j = model.getPictureCursor( theme ).getIterator(); j.hasNext(); )
         {
             final CommentedPicture picture = (CommentedPicture) j.next();
-            final String name = picture.getPicture().getRelativURL();
-            detail.addImage( name, counter, ( showText ? picture.getComment() : "" ) );
-            detail.cacheImage( name, theme != model.getPictureTheme() );
-            counter++;
+            final Picture inner = picture.getPicture();
+            if ( inner != null )
+            {
+                final String name = inner.getRelativURL();
+                detail.addImage( name, counter, ( showText ? picture.getComment() : "" ) );
+                detail.cacheImage( name, theme != model.getPictureTheme() );
+                counter++;
+            }
+            else
+            {
+                LOG.error( "picture for " + picture + " is null" );
+            }
         }
         return counter;
     }
@@ -207,7 +224,7 @@ public class PicturePanel extends JPanel
         textArea.setVisible( isShowing );
         textArea.setText( comment );
         panel.setToolTipText( comment );
-        panel.setImagePanel( ( isPicture ? pic.getPicture().getName() : null ) );
+        panel.setImagePanel( ( isPicture ? ( pic.getPicture() == null ? null : pic.getPicture().getName() ) : null ) );
         panel.setZoomed( model.isZoomed() );
     }
 

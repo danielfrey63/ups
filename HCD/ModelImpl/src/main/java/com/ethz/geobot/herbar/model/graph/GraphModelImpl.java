@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.neo4j.graphdb.RelationshipType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -746,8 +745,8 @@ public class GraphModelImpl extends AbsGraphModel
         }
     }
 
-    private static enum DefaultRelationshipType implements RelationshipType
-    {
-        IS_PARENT_OF
-    }
+//    private static enum DefaultRelationshipType implements RelationshipType
+//    {
+//        IS_PARENT_OF
+//    }
 }

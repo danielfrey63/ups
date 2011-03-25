@@ -110,7 +110,7 @@ public class AppHerbar
 
     private void switchDatabase()
     {
-        // Todo: Implement this as a case of specialized resource bundles
+        // Todo: Implements as a case of specialized resource bundles
         final EnvironmentDialog dialog = new EnvironmentDialog( (JFrame) null );
         dialog.setVisible( true );
         int selection = -1;

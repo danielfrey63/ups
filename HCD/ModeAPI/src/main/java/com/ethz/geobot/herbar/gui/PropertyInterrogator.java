@@ -9,11 +9,11 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.resource.ImageLocator;
-import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Enumeration;
 import javax.swing.BorderFactory;
 import javax.swing.JTabbedPane;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Displays three tabs which contain the interrogation panels.
@@ -28,17 +28,17 @@ public class PropertyInterrogator extends JTabbedPane
     public PropertyInterrogator( final ResultModel resultModel )
     {
         this.resultModel = resultModel;
-
+        final String subject = System.getProperty( "xmatrix.subject" );
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "spring/lesson-" + subject + ".xml" );
         setTabPlacement( JTabbedPane.BOTTOM );
         final Enumeration subModels = resultModel.subStateModels();
-        PropertyInterrogatorPanel tab;
         while ( subModels.hasMoreElements() )
         {
             final DetailResultModel stateModel = (DetailResultModel) subModels.nextElement();
-            tab = new PropertyInterrogatorPanel( stateModel );
+            final PropertyInterrogatorPanel tab = new PropertyInterrogatorPanel( stateModel );
             final String base = tab.getBase();
-            final String label = Strings.getString( "PROPERTY." + base + ".TEXT" );
-            final String icon = Strings.getString( "PROPERTY." + base + ".ICON" );
+            final String label = (String) context.getBean( "title" + base );
+            final String icon = (String) context.getBean( "icon" + base );
             addTab( label, ImageLocator.getIcon( icon ), tab );
         }
         setBorder( BorderFactory.createEmptyBorder() );

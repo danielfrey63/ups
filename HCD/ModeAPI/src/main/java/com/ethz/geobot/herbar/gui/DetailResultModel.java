@@ -17,7 +17,7 @@ import java.util.List;
  */
 public abstract class DetailResultModel extends ResultModel
 {
-    protected Class typeToDisplay;
+    private String typeToDisplay;
 
     protected Class halfRight;
 
@@ -31,7 +31,7 @@ public abstract class DetailResultModel extends ResultModel
 
     protected GraphNodeList guesses = new GraphNodeList();
 
-    public DetailResultModel( final Class typeToDisplay, final Class halfRight, final HerbarModel model )
+    public DetailResultModel( final String typeToDisplay, final Class halfRight, final HerbarModel model )
     {
         this.typeToDisplay = typeToDisplay;
         this.halfRight = halfRight;
@@ -43,7 +43,7 @@ public abstract class DetailResultModel extends ResultModel
         return model;
     }
 
-    public Class getTypeToDisplay()
+    public String getTypeToDisplay()
     {
         return typeToDisplay;
     }

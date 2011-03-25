@@ -28,9 +28,12 @@ public class MemorizingDetailResultModel extends DetailResultModel
 
     private Map<Taxon, BooleanReference> completes;
 
-    public MemorizingDetailResultModel( final Class typeToDisplay, final Class halfRight, final HerbarModel model )
+    private final Class typeToDisplay;
+
+    public MemorizingDetailResultModel( final Class typeToDisplay, final String base, final Class halfRight, final HerbarModel model )
     {
-        super( typeToDisplay, halfRight, model );
+        super( base, halfRight, model );
+        this.typeToDisplay = typeToDisplay;
         reset();
     }
 

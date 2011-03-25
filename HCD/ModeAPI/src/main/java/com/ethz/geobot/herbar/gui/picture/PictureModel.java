@@ -4,6 +4,7 @@ import ch.jfactory.collection.cursor.Cursor;
 import ch.jfactory.collection.cursor.DefaultCursor;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Iterator;
@@ -49,9 +50,17 @@ public class PictureModel
         while ( it.hasNext() )
         {
             final CommentedPicture pic = (CommentedPicture) it.next();
-            if ( pic.getPicture().getName().equals( name ) )
+            final Picture picture = pic.getPicture();
+            if ( picture != null )
             {
-                getPictureCursor().setCurrent( pic );
+                if ( picture.getName().equals( name ) )
+                {
+                    getPictureCursor().setCurrent( pic );
+                }
+            }
+            else
+            {
+                LOG.error( "picture for " + pic + " is null" );
             }
         }
     }

@@ -54,9 +54,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
- * Each choice for attributes (i.e. medicine, morphology, ecology) is displayed in one of these panels. It has an upper
- * and a lower region. Upper displays the results chosen by the student, lower offers the possible choices to select
- * from.
+ * Each choice for attributes (i.e. medicine, morphology, ecology) is displayed in one of these panels. It has an upper and a lower region. Upper displays the results chosen by the student, lower offers the possible choices to select from.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
@@ -66,10 +64,7 @@ public class PropertyInterrogatorPanel extends JPanel
     /** Used to keep track of all panels which need to have synchronized split panes. */
     private static PropertyInterrogatorPanel[] members = new PropertyInterrogatorPanel[0];
 
-    /**
-     * A split pane which sends events upon change of the splitter position. Has to member as one instance will access
-     * the other ones to adjust position.
-     */
+    /** A split pane which sends events upon change of the splitter position. Has to member as one instance will access the other ones to adjust position. */
     private final JSplitPane split;
 
     private JPanel cardsPanel;
@@ -166,16 +161,14 @@ public class PropertyInterrogatorPanel extends JPanel
         // Inform lower part (choice panels)
         for ( final ChooserTree chooserTree : treeList )
         {
-            chooserTree.setTaxFocus( focus );
+            chooserTree.setTaxFocus();
         }
         cardsPanel.validate();
     }
 
     public String getBase()
     {
-        String name = resultModel.getTypeToDisplay().getName();
-        name = name.substring( name.lastIndexOf( "." ) + 1 ).toUpperCase();
-        return name;
+        return resultModel.getTypeToDisplay();
     }
 
     /**
@@ -202,7 +195,7 @@ public class PropertyInterrogatorPanel extends JPanel
 
     private JPanel createChooserPanel()
     {
-        // Be aware that the combo box and the cards are expected to have snychonized indexes.
+        // Be aware that the combo box and the cards are expected to have synchonized indexes.
         final JPanel chooserPanel = new JPanel( new BorderLayout() );
         chooserPanel.add( createSelectionPanel(), BorderLayout.NORTH );
         chooserPanel.add( createTreeCardsPanel(), BorderLayout.CENTER );
@@ -229,7 +222,7 @@ public class PropertyInterrogatorPanel extends JPanel
         } );
 
         // Make sure the add button is only enabled when a leaf is selected in the choice tree for the new tree now
-        // chosen by the complexty type.
+        // chosen by the complexity type.
         combo.addItemListener( new ItemListener()
         {
             public void itemStateChanged( final ItemEvent e )
@@ -267,7 +260,7 @@ public class PropertyInterrogatorPanel extends JPanel
 
     private void createTreeListeners()
     {
-        // Make sure that the button is also initally adapted to the trees selection
+        // Make sure that the button is also initially adapted to the trees selection
         final JTree theTree = ( treeList.get( complexityChooser.getSelectedIndex() ) ).getTree();
         theTree.addTreeSelectionListener( new TreeSelectionListener()
         {
@@ -382,7 +375,7 @@ public class PropertyInterrogatorPanel extends JPanel
             add( new JScrollPane( tree ), BorderLayout.CENTER );
         }
 
-        public void setTaxFocus( final Taxon focus )
+        public void setTaxFocus()
         {
             // Keep state of the whole tree, so user expansions/collapsions are not discared
             root = type.getRoot();

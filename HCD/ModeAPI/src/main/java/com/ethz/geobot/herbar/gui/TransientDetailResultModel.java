@@ -12,9 +12,12 @@ import com.ethz.geobot.herbar.model.Taxon;
  */
 public class TransientDetailResultModel extends DetailResultModel
 {
-    public TransientDetailResultModel( final Class typeToDisplay, final Class halfRight, final HerbarModel model )
+    private final Class typeToDisplay;
+
+    public TransientDetailResultModel( final Class typeToDisplay, final String base, final Class halfRight, final HerbarModel model )
     {
-        super( typeToDisplay, halfRight, model );
+        super( base, halfRight, model );
+        this.typeToDisplay = typeToDisplay;
     }
 
     protected void initModel( final Taxon focus )

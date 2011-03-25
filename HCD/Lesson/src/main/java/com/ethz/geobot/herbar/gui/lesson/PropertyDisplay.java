@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static ch.jfactory.resource.ImageLocator.getIcon;
-import static ch.jfactory.resource.Strings.getString;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -51,17 +50,17 @@ public class PropertyDisplay extends JTabbedPane
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "spring/lesson-" + subject + ".xml" );
         herbarModel = herbarContext.getDataModel();
         final Level stopLevel = herbarModel.getLevel( (String) context.getBean( "stopper" ) );
-        final String morTitle = getString( "PROPERTY.MORPHOLOGY.TEXT" );
-        final String ecoTitle = getString( "PROPERTY.ECOLOGY.TEXT" );
-        final String medTitle = getString( "PROPERTY.MEDICINE.TEXT" );
+        final String morTitle = (String) context.getBean( "title1" );
+        final String ecoTitle = (String) context.getBean( "title2" );
+        final String medTitle = (String) context.getBean( "title3" );
         display1 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, morTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter1" ) );
         display2 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, ecoTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter2" ) );
         display3 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, medTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter3" ) );
         this.setTabPlacement( BOTTOM );
         this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
-        this.addTab( morTitle, getIcon( getString( "PROPERTY.MORPHOLOGY.ICON" ) ), display1 );
-        this.addTab( ecoTitle, getIcon( getString( "PROPERTY.ECOLOGY.ICON" ) ), display2 );
-        this.addTab( medTitle, getIcon( getString( "PROPERTY.MEDICINE.ICON" ) ), display3 );
+        this.addTab( morTitle, getIcon( (String) context.getBean( "icon1" ) ), display1 );
+        this.addTab( ecoTitle, getIcon( (String) context.getBean( "icon2" ) ), display2 );
+        this.addTab( medTitle, getIcon( (String) context.getBean( "icon3" ) ), display3 );
     }
 
     public void setTaxFocus( final Taxon focus )

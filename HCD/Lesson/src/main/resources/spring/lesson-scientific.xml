@@ -6,6 +6,31 @@
     <bean id="stopper" class="java.lang.String">
         <constructor-arg value="Klasse"/>
     </bean>
+
+    <bean id="title1" class="java.lang.String">
+        <constructor-arg value="Morphology"/>
+    </bean>
+
+    <bean id="title2" class="java.lang.String">
+        <constructor-arg value="Ökologie"/>
+    </bean>
+
+    <bean id="title3" class="java.lang.String">
+        <constructor-arg value="Weiteres"/>
+    </bean>
+
+    <bean id="icon1" class="java.lang.String">
+        <constructor-arg value="iconMOR.gif"/>
+    </bean>
+
+    <bean id="icon2" class="java.lang.String">
+        <constructor-arg value="iconECO.gif"/>
+    </bean>
+
+    <bean id="icon3" class="java.lang.String">
+        <constructor-arg value="iconADD.gif"/>
+    </bean>
+
     <bean id="filter1" class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">
         <constructor-arg index="0" value="ch.jfactory.model.graph.GraphNode"/>
         <constructor-arg index="1" value="VISIBLE"/>

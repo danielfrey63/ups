@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.file;
 
 import java.io.ByteArrayInputStream;
@@ -30,8 +39,7 @@ public class ZipUtils
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     /**
-     * Unzips the given archive into the given directory, reconstructing the directory structure in the zip file. If the
-     * archive file name is null, nothing happens. If the destination directory does not exist, it will be created.
+     * Unzips the given archive into the given directory, reconstructing the directory structure in the zip file. If the archive file name is null, nothing happens. If the destination directory does not exist, it will be created.
      *
      * @param archiveFileName The name of the file to unzip
      * @param destinationDir  The name of the destination directory
@@ -123,10 +131,8 @@ public class ZipUtils
      *
      * @param file           the file to add to the zip.
      * @param zip            the zip file to add the file to.
-     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the
-     *                       content will be added to the existing zip file.
-     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a
-     *                       ZipException will be thrown if the entry exists.
+     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the content will be added to the existing zip file.
+     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a ZipException will be thrown if the entry exists.
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */
     public static void zip( final File file, final File zip, final boolean overwriteZip, final boolean overwriteEntry )
@@ -140,10 +146,8 @@ public class ZipUtils
      *
      * @param file           the file to add to the zip.
      * @param zip            the zip file to add the file to.
-     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the
-     *                       content will be added to the existing zip file.
-     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a
-     *                       ZipException will be thrown if the entry exists.
+     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the content will be added to the existing zip file.
+     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a ZipException will be thrown if the entry exists.
      * @param relativePath   the zip entries relative path (including file name)
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */
@@ -176,10 +180,8 @@ public class ZipUtils
      *
      * @param input          the data to add to the zip.
      * @param zip            the zip file to add the data to.
-     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the
-     *                       content will be added to the existing zip file.
-     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a
-     *                       ZipException will be thrown if the entry exists.
+     * @param overwriteZip   if set to <code>true</code> overwrite existing zip file. If set to <code>false</code> the content will be added to the existing zip file.
+     * @param overwriteEntry if set to <code>true</code> overwrite existing zip entries. If set to <cdoe>false</code> a ZipException will be thrown if the entry exists.
      * @param relativePath   the zip entries relative path (including file name)
      * @throws ZipException if the zip entry exists and <code>overwriteEntry</code> is set to false.
      */

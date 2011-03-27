@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * PicturePanel.java
- *
- * Created on 30. April 2002
- * Created by dirk
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.resource;
 
@@ -17,8 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is used as a cache for images. It maintains a queue for pictures to cache and stores them in a HashMap
- * with soft references.
+ * This class is used as a cache for images. It maintains a queue for pictures to cache and stores them in a HashMap with soft references.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
@@ -79,8 +79,7 @@ public class PictureCache
     }
 
     /**
-     * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the
-     * image has to be put at the first position.
+     * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the image has to be put at the first position.
      *
      * @param name  name of the image
      * @param thumb whether it is a thumbnail

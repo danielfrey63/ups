@@ -1,9 +1,18 @@
 /*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
+/*
  * UpdateProcessor.java
  *
  * Created on 26. September 2002, 12:37
  */
-
 package ch.jfactory.update;
 
 import ch.jfactory.resource.Strings;
@@ -25,14 +34,10 @@ public class UpdateProcessor
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( UpdateProcessor.class );
 
-    /**
-     * Utility field used by event firing mechanism.
-     */
+    /** Utility field used by event firing mechanism. */
     private EventListenerList listenerList = null;
 
-    /**
-     * Creates a new instance of UpdateProcessor
-     */
+    /** Creates a new instance of UpdateProcessor */
     public UpdateProcessor()
     {
     }

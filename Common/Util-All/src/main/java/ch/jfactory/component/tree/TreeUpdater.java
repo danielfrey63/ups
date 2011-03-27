@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -44,24 +44,16 @@ import javax.swing.tree.TreeModel;
  */
 public class TreeUpdater implements Runnable
 {
-    /**
-     * The count of expanded paths that is used to make the expansion asynchronously.
-     */
+    /** The count of expanded paths that is used to make the expansion asynchronously. */
     private static final int ASYNCHRON_THRESHOLD = 10000;
 
-    /**
-     * The expansion listener.
-     */
+    /** The expansion listener. */
     private final SimpleTreeExpansionListener expansionListener;
 
-    /**
-     * The selection listener.
-     */
+    /** The selection listener. */
     private final SimpleTreeSelectionListener selectionListener;
 
-    /**
-     * The tree model listener. Used to refresh the other listener upon model exchanges.
-     */
+    /** The tree model listener. Used to refresh the other listener upon model exchanges. */
     private final SimpleTreeModelListener treeModelListener;
 
     /**
@@ -80,21 +72,14 @@ public class TreeUpdater implements Runnable
         tree.getModel().addTreeModelListener( treeModelListener );
     }
 
-    /**
-     * The method to expand the paths.
-     */
+    /** The method to expand the paths. */
     public synchronized void run()
     {
         expansionListener.restore();
         selectionListener.restore();
     }
 
-    /**
-     * Call this method to translate the expanded paths to the ones stored. A call to this method only is necessary if
-     * the underlying tree model doesn't call their model listener in a FIFO order. This is the case with the
-     * DefaultTreeModel. If the underlying model does call the listeners in the same order as they are registered, an
-     * translate should be invoked automatically by the build in tree model listener.
-     */
+    /** Call this method to translate the expanded paths to the ones stored. A call to this method only is necessary if the underlying tree model doesn't call their model listener in a FIFO order. This is the case with the DefaultTreeModel. If the underlying model does call the listeners in the same order as they are registered, an translate should be invoked automatically by the build in tree model listener. */
     public synchronized void update()
     {
         if ( expansionListener.getNumberOfExpandedPaths() > ASYNCHRON_THRESHOLD )
@@ -107,14 +92,10 @@ public class TreeUpdater implements Runnable
         }
     }
 
-    /**
-     * Listener to inform other listeners about changes in the model.
-     */
+    /** Listener to inform other listeners about changes in the model. */
     private class SimplePropertyChangeListener implements PropertyChangeListener
     {
-        /**
-         * {@inheritDoc}
-         */
+        /** {@inheritDoc} */
         public void propertyChange( final PropertyChangeEvent evt )
         {
             ( (TreeModel) evt.getOldValue() ).removeTreeModelListener( treeModelListener );
@@ -125,14 +106,10 @@ public class TreeUpdater implements Runnable
         }
     }
 
-    /**
-     * Makes sure the updates take place automatically if a tree model has been exchanged.
-     */
+    /** Makes sure the updates take place automatically if a tree model has been exchanged. */
     private class SimpleTreeModelListener extends TreeModelAdapter
     {
-        /**
-         * {@inheritDoc}
-         */
+        /** {@inheritDoc} */
         public void treeStructureChanged( final TreeModelEvent e )
         {
             update();

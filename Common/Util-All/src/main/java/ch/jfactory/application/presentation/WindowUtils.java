@@ -1,10 +1,11 @@
 /*
- * Copyright 2002 by x-matrix Switzerland
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * WindowUtils.java
- *
- * Created on 14. Mai 2002, 23:45
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.application.presentation;
 
@@ -58,8 +59,7 @@ public class WindowUtils
     }
 
     /**
-     * Centers the given Component approximatly on the screen. In the vertical the Component is placed in the upper
-     * third.
+     * Centers the given Component approximatly on the screen. In the vertical the Component is placed in the upper third.
      *
      * @param c the Component to place
      */
@@ -70,10 +70,7 @@ public class WindowUtils
     }
 
     /**
-     * Adds space between the components. Make sure to place them in the wished component before calling this method, in
-     * order to get the right layout. The components have to be in the same parent component for this method to work
-     * properly. The components have to be added to the parent component subsequently for this method to work. By
-     * default a space of {@link Constants#GAP_WITHIN_GROUP} is used.
+     * Adds space between the components. Make sure to place them in the wished component before calling this method, in order to get the right layout. The components have to be in the same parent component for this method to work properly. The components have to be added to the parent component subsequently for this method to work. By default a space of {@link Constants#GAP_WITHIN_GROUP} is used.
      *
      * @param components an array of JButtons layout
      */
@@ -83,10 +80,7 @@ public class WindowUtils
     }
 
     /**
-     * Adds space between the components of a FlowLayout. Make sure to place them in the wished component before calling
-     * this method, in order to get the right layout. The components have to be in the same parent component for this
-     * method to work properly. The components have to be added to the parent component subsequently for this method to
-     * work.
+     * Adds space between the components of a FlowLayout. Make sure to place them in the wished component before calling this method, in order to get the right layout. The components have to be in the same parent component for this method to work properly. The components have to be added to the parent component subsequently for this method to work.
      *
      * @param components an array of JButtons layout
      * @param space      the space in pixels to add between the components

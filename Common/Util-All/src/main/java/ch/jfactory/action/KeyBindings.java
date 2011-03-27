@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.action;
 
 import ch.jfactory.resource.Strings;
@@ -31,8 +40,7 @@ public class KeyBindings
     private static final String STRING_KEYSTROKE_GLUE = "-";
 
     /**
-     * Changes the mapping between symbolic modifier key names (<code>C</code>, <code>A</code>, <code>M</code>,
-     * <code>S</code>) and Java modifier flags.
+     * Changes the mapping between symbolic modifier key names (<code>C</code>, <code>A</code>, <code>M</code>, <code>S</code>) and Java modifier flags.
      *
      * @param c The modifier to map the <code>C</code> modifier to
      * @param a The modifier to map the <code>A</code> modifier to
@@ -49,10 +57,7 @@ public class KeyBindings
     }
 
     /**
-     * Converts a string to a keystroke. The string should be of the form <i>modifiers</i>+<i>shortcut</i> where
-     * <i>modifiers</i> is any combination of A for Alt, C for Control, S for Shift or M for Meta, and <i>shortcut</i>
-     * is either a single character, or a keycode name from the <code>KeyEvent</code> class, without the
-     * <code>VK_</code> prefix.
+     * Converts a string to a keystroke. The string should be of the form <i>modifiers</i>+<i>shortcut</i> where <i>modifiers</i> is any combination of A for Alt, C for Control, S for Shift or M for Meta, and <i>shortcut</i> is either a single character, or a keycode name from the <code>KeyEvent</code> class, without the <code>VK_</code> prefix.
      *
      * @param keyStroke A string description of the key stroke
      * @return the key sroke object

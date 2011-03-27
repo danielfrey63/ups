@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.application;
 
@@ -30,8 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This model is provided under the assumption, that a view builds its content based on cards. It provides some common
- * tasks for main models:
+ * This model is provided under the assumption, that a view builds its content based on cards. It provides some common tasks for main models:
  *
  * <ul>
  *
@@ -52,9 +44,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( AbstractMainModel.class );
 
     public static final String PROPERTYNAME_CURRENTCARD = "currentCard";
@@ -63,36 +53,25 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
 
     private String currentCard = CARDS_WELCOME;
 
-    /**
-     * Property for a new file that has been opened.
-     */
+    /** Property for a new file that has been opened. */
     public static final String PROPERTYNAME_CURRENTFILE = "currentFile";
 
-    /**
-     * I use two default files to trigger events even when the user create another "new file", to distiguish these
-     * events. That's also the reason to hide these properties. Instead a method {@link #isDefaultFile()} is provided.
-     */
+    /** I use two default files to trigger events even when the user create another "new file", to distiguish these events. That's also the reason to hide these properties. Instead a method {@link #isDefaultFile()} is provided. */
     private static final File DEFAULT_NEWFILE1 = new File( "<unbenannt>" );
 
     private static final File DEFAULT_NEWFILE2 = new File( "<unbenannt>" );
 
     private File currentFile = DEFAULT_NEWFILE1;
 
-    /**
-     * Property that is fired when the main model has been loaded.
-     */
+    /** Property that is fired when the main model has been loaded. */
     public static final String PROPERTYNAME_MODELLOADED = "modelLoaded";
 
     private boolean modelLoaded = false;
 
-    /**
-     * Property for the state when a file is being opened. Used to invoke actions in the view.
-     */
+    /** Property for the state when a file is being opened. Used to invoke actions in the view. */
     public static final String EVENTNAME_OPENING = "opening";
 
-    /**
-     * Property for closing the edit card.
-     */
+    /** Property for closing the edit card. */
     public static final String EVENTNAME_CLOSING = "closing";
 
     public static final String PROPERTYNAME_ERROR = "error";
@@ -120,9 +99,7 @@ public class AbstractMainModel extends DirtyCapableModel implements ClosingModel
         }
     }
 
-    /**
-     * Indicates that something will be opened (i.e. a new file).
-     */
+    /** Indicates that something will be opened (i.e. a new file). */
     public void setOpening()
     {
         firePropertyChange( EVENTNAME_OPENING, false, true );

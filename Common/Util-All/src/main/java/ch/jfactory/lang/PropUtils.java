@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.lang;
 
@@ -30,14 +23,12 @@ import java.util.TreeMap;
 public final class PropUtils
 {
     /**
-     * Filters properties according to the given prefix. The prefix is removed from the resulting property keys. Keys
-     * equaling to the prefix given are stored with the given default as key.
+     * Filters properties according to the given prefix. The prefix is removed from the resulting property keys. Keys equaling to the prefix given are stored with the given default as key.
      *
      * @param properties the properties to filter
      * @param keyPrefix  the prefix to use for the keys
      * @param defaultKey
-     * @return a new Properties object containing the found mappings or null if none could be found or input properties
-     *         are null.
+     * @return a new Properties object containing the found mappings or null if none could be found or input properties are null.
      */
     public static Properties filterProperties( final Properties properties, final String keyPrefix, final String defaultKey )
     {

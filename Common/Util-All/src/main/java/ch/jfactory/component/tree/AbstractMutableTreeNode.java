@@ -1,10 +1,11 @@
 /*
- * Copyright xmatrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * AbstractMutableTreeNode.java
- *
- * Created on 2. August 2002, 19:51
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -15,35 +16,27 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 /**
- * Holds some of the commen implementations of a <code>MutableTreeNode</code>. The following methods are implemented:
- * <ul> <li>{@link #remove(int)}</li> <li>{@link #isLeaf()}</li> <li>{@link #removeFromParent()}</li> <li>{@link
- * #getIndex(TreeNode)}</li> </ul>
+ * Holds some of the commen implementations of a <code>MutableTreeNode</code>. The following methods are implemented: <ul> <li>{@link #remove(int)}</li> <li>{@link #isLeaf()}</li> <li>{@link #removeFromParent()}</li> <li>{@link #getIndex(TreeNode)}</li> </ul>
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
 public abstract class AbstractMutableTreeNode implements MutableTreeNode
 {
-    /**
-     * @see MutableTreeNode#remove(int)
-     */
+    /** @see MutableTreeNode#remove(int) */
     public void remove( final int index )
     {
         final MutableTreeNode child = (MutableTreeNode) getChildAt( index );
         remove( child );
     }
 
-    /**
-     * @see TreeNode#isLeaf()
-     */
+    /** @see TreeNode#isLeaf() */
     public boolean isLeaf()
     {
         return getChildCount() == 0;
     }
 
-    /**
-     * @see MutableTreeNode#removeFromParent()
-     */
+    /** @see MutableTreeNode#removeFromParent() */
     public void removeFromParent()
     {
         final MutableTreeNode parent = (MutableTreeNode) getParent();
@@ -53,9 +46,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
         }
     }
 
-    /**
-     * @see TreeNode#getIndex(TreeNode)
-     */
+    /** @see TreeNode#getIndex(TreeNode) */
     public int getIndex( final TreeNode node )
     {
         for ( int i = 0; i < getChildCount(); i++ )
@@ -68,9 +59,7 @@ public abstract class AbstractMutableTreeNode implements MutableTreeNode
         return -1;
     }
 
-    /**
-     * @see TreeNode#children()
-     */
+    /** @see TreeNode#children() */
     public Enumeration children()
     {
         final int count = getChildCount();

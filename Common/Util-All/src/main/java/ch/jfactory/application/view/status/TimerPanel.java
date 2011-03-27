@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.application.view.status;
 
 import java.awt.BorderLayout;
@@ -12,8 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
- * Panel to display a stop watch. The format of the stop watch is 00:00:00 for durations greater or equal than one hour
- * and 00:00 for less. Register an ActionListener if you want to be notified uppon reach of zero.
+ * Panel to display a stop watch. The format of the stop watch is 00:00:00 for durations greater or equal than one hour and 00:00 for less. Register an ActionListener if you want to be notified uppon reach of zero.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
@@ -30,9 +38,7 @@ public class TimerPanel extends JLabel implements ActionListener
 
     private final String zero;
 
-    /**
-     * Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer.
-     */
+    /** Returns an instance for the given delay. The given ActionListener will be called uppon conclusion of the timer. */
     public TimerPanel( final int seconds, final ActionListener actionListener )
     {
         super( "", JLabel.CENTER );

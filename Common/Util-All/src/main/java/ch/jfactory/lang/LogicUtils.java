@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.lang;
 
@@ -40,9 +33,7 @@ public class LogicUtils
     public static final int NUMBER_OF_BITS_IN_A_BYTE = 8;
 
     /**
-     * Returns the index of the first flag with value <code>false</code>. Useful to get the decision in a hierarchical
-     * decision tree. I.e. you want to derive a list of distinct warnings when you write into a directory that will
-     * contain some data for your application. The warnings may look like this:
+     * Returns the index of the first flag with value <code>false</code>. Useful to get the decision in a hierarchical decision tree. I.e. you want to derive a list of distinct warnings when you write into a directory that will contain some data for your application. The warnings may look like this:
      *
      * <ol>
      *
@@ -52,19 +43,15 @@ public class LogicUtils
      *
      * <li>If an empty directory exists: <code>CAUTION: There is an empty directory at this location!</code></li>
      *
-     * <li>If there is some unknown content in the directory: <code>CAUTION: There is a directory with content at this
-     * location!</code></li>
+     * <li>If there is some unknown content in the directory: <code>CAUTION: There is a directory with content at this location!</code></li>
      *
-     * <li>If the directory contains some application data, but it is not valid in any sense: <code>CAUTION: The
-     * directory contains an invalid version!</code></li>
+     * <li>If the directory contains some application data, but it is not valid in any sense: <code>CAUTION: The directory contains an invalid version!</code></li>
      *
-     * <li>If the directory contains some valid application data: <code>CAUTION: The directory contains a valid
-     * version!</code></li>
+     * <li>If the directory contains some valid application data: <code>CAUTION: The directory contains a valid version!</code></li>
      *
      * </ol>
      *
-     * You could nest some if-else statements to pass to the right warning, or you simply use this method with an array
-     * of flags for the following states:
+     * You could nest some if-else statements to pass to the right warning, or you simply use this method with an array of flags for the following states:
      *
      * <ol>
      *
@@ -80,16 +67,11 @@ public class LogicUtils
      *
      * </ol>
      *
-     * To derive the correct warning, just pass an array of the above decisions to this method and apply the resulting
-     * index to the array of warnings. Note that for a number of warnings <code>N</code> you need <code>N-1</code>
-     * boolean states. Hierarchical in this example means that subsequent decisions are dependent of previous ones.<p/>
+     * To derive the correct warning, just pass an array of the above decisions to this method and apply the resulting index to the array of warnings. Note that for a number of warnings <code>N</code> you need <code>N-1</code> boolean states. Hierarchical in this example means that subsequent decisions are dependent of previous ones.<p/>
      *
-     * So if i.e. you find some data in a directory that is not recognizable as application data, pass an array of
-     * <code>{true, true, true, false, false}</code> and you get index <code>3</code> out of it. The fourth warning
-     * results then as <code>CAUTION: There is a directory with content at this location!</code>.<p/>
+     * So if i.e. you find some data in a directory that is not recognizable as application data, pass an array of <code>{true, true, true, false, false}</code> and you get index <code>3</code> out of it. The fourth warning results then as <code>CAUTION: There is a directory with content at this location!</code>.<p/>
      *
-     * The full decision table is given below. Flags in paranthesis are results of an illegal state, that means, you
-     * cannot have a directory if the file with that directory name does not exist (lines 1-16) :
+     * The full decision table is given below. Flags in paranthesis are results of an illegal state, that means, you cannot have a directory if the file with that directory name does not exist (lines 1-16) :
      *
      * <pre>
      * ex  di  fi  va  pr | warning

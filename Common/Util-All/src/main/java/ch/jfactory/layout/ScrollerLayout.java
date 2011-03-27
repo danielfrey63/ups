@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.layout;
 
 /**
@@ -66,9 +75,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
     }
 
     /**
-     * Indicates that a child has changed its layout related information, and thus any cached calculations should be
-     * flushed. <p/> This method is called by AWT when the invalidate method is called on the Container.  Since the
-     * invalidate method may be called asynchronously to the event thread, this method may be called asynchronously.
+     * Indicates that a child has changed its layout related information, and thus any cached calculations should be flushed. <p/> This method is called by AWT when the invalidate method is called on the Container.  Since the invalidate method may be called asynchronously to the event thread, this method may be called asynchronously.
      *
      * @param target the affected container
      * @throws AWTError if the target isn't the container specified to the BoxLayout constructor
@@ -202,8 +209,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
     }
 
     /**
-     * Returns the alignment along the X axis for the container. If the box is horizontal, the default alignment will be
-     * returned. Otherwise, the alignment needed to place the children along the X axis will be returned.
+     * Returns the alignment along the X axis for the container. If the box is horizontal, the default alignment will be returned. Otherwise, the alignment needed to place the children along the X axis will be returned.
      *
      * @param target the container
      * @return the alignment >= 0.0f && <= 1.0f
@@ -216,9 +222,7 @@ public class ScrollerLayout implements LayoutManager2, Serializable
     }
 
     /**
-     * Returns the alignment along the currentY axis for the container. If the box is vertical, the default alignment
-     * will be returned. Otherwise, the alignment needed to place the children along the currentY axis will be
-     * returned.
+     * Returns the alignment along the currentY axis for the container. If the box is vertical, the default alignment will be returned. Otherwise, the alignment needed to place the children along the currentY axis will be returned.
      *
      * @param target the container
      * @return the alignment >= 0.0f && <= 1.0f

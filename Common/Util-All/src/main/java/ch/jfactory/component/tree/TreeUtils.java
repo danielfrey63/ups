@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -29,9 +29,7 @@ import javax.swing.tree.TreePath;
  */
 public final class TreeUtils
 {
-    /**
-     * Makes sure this class is not instantiated.
-     */
+    /** Makes sure this class is not instantiated. */
     private TreeUtils()
     {
         // Just to make sure this class is not instantiated.
@@ -134,9 +132,7 @@ public final class TreeUtils
     }
 
     /**
-     * Matches the paths given in the iterator to the models nodes and returns them in a collection. Unmached paths are
-     * not returned. Warning: Make sure the children of one parent contain only distinct names, as maching occures based
-     * on the toString() result of each tree paths and models object.
+     * Matches the paths given in the iterator to the models nodes and returns them in a collection. Unmached paths are not returned. Warning: Make sure the children of one parent contain only distinct names, as maching occures based on the toString() result of each tree paths and models object.
      *
      * @param keys  the itereator containing tree path objects
      * @param model the tree model

@@ -1,10 +1,11 @@
 /*
- * Copyright 2002 by x-matrix Switzerland
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * Strings.java
- *
- * Created on ??. ??? 2002, ??:??
- * Created by Thomas Wegmüller
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.resource;
 
@@ -21,15 +22,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Class for retrieving locale-sensitive messages. It optionally utilizes the <code>MessageFormat</code> class to
- * produce internationalized messages with parametric replacement. <p/>
+ * Class for retrieving locale-sensitive messages. It optionally utilizes the <code>MessageFormat</code> class to produce internationalized messages with parametric replacement. <p/>
  *
- * Missing entries can be written to a file given by the system property <code>herbar.texte.logmissing</code>.
- * Initialize the class with {@link Strings#setResourceBundle(ResourceBundle)} for a simple application or with {@link
- * Strings#addResourceBundle(Object, ResourceBundle)} if you want to handle different bundles.<p/>
+ * Missing entries can be written to a file given by the system property <code>herbar.texte.logmissing</code>. Initialize the class with {@link Strings#setResourceBundle(ResourceBundle)} for a simple application or with {@link Strings#addResourceBundle(Object, ResourceBundle)} if you want to handle different bundles.<p/>
  *
- * All calls that are not found produce an entry in a file. The file is taken from the system property <code>
- * jfactory.strings.logmissing</code>.
+ * All calls that are not found produce an entry in a file. The file is taken from the system property <code> jfactory.strings.logmissing</code>.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2006/03/22 15:05:10 $
@@ -40,29 +37,19 @@ public class Strings
 
     private static final Logger LOGGER = LoggerFactory.getLogger( Strings.class );
 
-    /**
-     * Prefix and postfix for missing resource strings
-     */
+    /** Prefix and postfix for missing resource strings */
     private static final String MISSING = "!";
 
-    /**
-     * Used for logging missing Texts
-     */
+    /** Used for logging missing Texts */
     private static File logWriterFile = null;
 
-    /**
-     * Loaded ResourceBundle for default Locale
-     */
+    /** Loaded ResourceBundle for default Locale */
     private static ResourceBundle generalBundle = getRessource( null );
 
-    /**
-     * Table of ResourceBunlde's
-     */
+    /** Table of ResourceBunlde's */
     private static final Map bundles = new HashMap();
 
-    /**
-     * Caches Formats, for Messages. Only those are cached
-     */
+    /** Caches Formats, for Messages. Only those are cached */
     private static HashMap formats = new HashMap();
 
     /**
@@ -121,8 +108,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with one placeholders
      * @param arg       argument for filling into the message
@@ -134,8 +120,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with two placeholders
      * @param arg1      argument for filling into the message for first placeholder
@@ -149,8 +134,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with placeholders for any number of placeholders
      * @param args      arguments for filling into the message
@@ -162,8 +146,7 @@ public class Strings
     }
 
     /**
-     * Gets a text from the ressource associated with the given object. Empty spaces in the key are converted to
-     * '_'-characters. If the given object is null, the global resource is used.
+     * Gets a text from the ressource associated with the given object. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used.
      *
      * @param key the message key
      * @return the message as a i18n string
@@ -175,8 +158,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters. If the given object is null, the global resource is used.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used.
      *
      * @param formatKey the message key with one placeholders
      * @param arg       argument for filling into the message for first placeholder
@@ -189,8 +171,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters. If the given object is null, the global resource is used.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used.
      *
      * @param formatKey the message key with one placeholders
      * @param arg1      argument for filling into the message for first placeholder
@@ -204,9 +185,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters. If the given object is null, the global resource is used. Errors not finding strings are
-     * logged.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used. Errors not finding strings are logged.
      *
      * @param formatKey the message key with any number of placeholders
      * @param args      arguments for filling into the message
@@ -230,8 +209,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with one placeholders
      * @param arg       argument for filling into the message
@@ -243,8 +221,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with two placeholders
      * @param arg1      argument for filling into the message for first placeholder
@@ -258,8 +235,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters.
      *
      * @param formatKey the message key with placeholders for any number of placeholders
      * @param args      arguments for filling into the message
@@ -271,8 +247,7 @@ public class Strings
     }
 
     /**
-     * Gets a text from the ressource associated with the given object. Empty spaces in the key are converted to
-     * '_'-characters. If the given object is null, the global resource is used.
+     * Gets a text from the ressource associated with the given object. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used.
      *
      * @param key the message key
      * @return the message as a i18n string
@@ -284,8 +259,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters. If the given object is null, the global resource is used.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used.
      *
      * @param formatKey the message key with one placeholders
      * @param arg1      argument for filling into the message for first placeholder
@@ -299,9 +273,7 @@ public class Strings
     }
 
     /**
-     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted
-     * to '_'-characters. If the given object is null, the global resource is used. An exception is thrown when a string
-     * cannot be found.
+     * Formats a localized text with the given arguments from the global resource. Empty spaces in the key are converted to '_'-characters. If the given object is null, the global resource is used. An exception is thrown when a string cannot be found.
      *
      * @param formatKey the message key with any number of placeholders
      * @param args      arguments for filling into the message
@@ -501,7 +473,7 @@ public class Strings
      */
     private static boolean logMissing( final String key )
     {
-        LOGGER.error( "Could not find resource string for " + key, new Exception("Resource not found") );
+        LOGGER.error( "Could not find resource string for " + key, new Exception( "Resource not found" ) );
         if ( getLogWriterFile() != null )
         {
             try

@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * RandomArrayUtils.java
- *
- * Created on 5. Juli 2002, 10:41
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.math;
 
@@ -20,9 +21,7 @@ import java.util.Random;
  */
 public class RandomUtils
 {
-    /**
-     * Last random seed used
-     */
+    /** Last random seed used */
     private static long seed;
 
     private static Random r;

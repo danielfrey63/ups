@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.ganymed;
 
 import ch.ethz.ssh2.Connection;
@@ -11,16 +20,13 @@ import java.io.IOException;
  */
 public final class Ssh2Helper
 {
-    /**
-     * Hide constructor.
-     */
+    /** Hide constructor. */
     private Ssh2Helper()
     {
     }
 
     /**
-     * Uploads the given file to the given server. Locally, a {@link DummyServerHostKeyVerifier} is used for server key
-     * verification.
+     * Uploads the given file to the given server. Locally, a {@link DummyServerHostKeyVerifier} is used for server key verification.
      *
      * @param localFile       the file to upload
      * @param server          the server to upload to
@@ -41,8 +47,7 @@ public final class Ssh2Helper
     }
 
     /**
-     * Downloads the given file from the given server. Locally, a {@link DummyServerHostKeyVerifier} is used for server
-     * key verification.
+     * Downloads the given file from the given server. Locally, a {@link DummyServerHostKeyVerifier} is used for server key verification.
      *
      * @param remoteFile     the file to download, including absolute path and name
      * @param server         the server to download it from

@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * LevensteinDistance.java
- *
- * Created on 15. Mai 2002, 11:51
- * Created by lilo
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.math;
 
@@ -17,8 +18,7 @@ package ch.jfactory.math;
 public class LevenshteinDistance
 {
     /**
-     * Returns the evaluation result for the comparison of the two strings under the given
-     * <code>LevenshteinLevel</code>.
+     * Returns the evaluation result for the comparison of the two strings under the given <code>LevenshteinLevel</code>.
      *
      * @param str1  first string to compare with second one
      * @param str2  second string to compare with first one

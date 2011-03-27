@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
 package ch.jfactory.jar.sign;/*
  * @(#)JarSigner.java	1.64 04/04/21
  *
@@ -1317,10 +1327,7 @@ public class JarSigner
         }
     }
 
-    /**
-     * signature-related files include: . META-INF/MANIFEST.MF . META-INF/SIG-* . META-INF/*.SF . META-INF/*.DSA .
-     * META-INF/*.RSA
-     */
+    /** signature-related files include: . META-INF/MANIFEST.MF . META-INF/SIG-* . META-INF/*.SF . META-INF/*.DSA . META-INF/*.RSA */
     private boolean signatureRelated( final String name )
     {
         final String ucName = name.toUpperCase();

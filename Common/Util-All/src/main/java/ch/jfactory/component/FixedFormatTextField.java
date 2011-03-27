@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -17,10 +17,7 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 /**
- * <p>The FixedFormatTextField is useful for fields that have a static appearance. Examples: You want to display a
- * number in a fixed format, say 12-345-677, or 123.45, or 01.05.2004. Dashes and dots do not belong to the characters a
- * user should influence (formatting characters). This class can take a pattern in a form containing any characters,
- * where the following characters have a special meaning:</p>
+ * <p>The FixedFormatTextField is useful for fields that have a static appearance. Examples: You want to display a number in a fixed format, say 12-345-677, or 123.45, or 01.05.2004. Dashes and dots do not belong to the characters a user should influence (formatting characters). This class can take a pattern in a form containing any characters, where the following characters have a special meaning:</p>
  *
  * <ul>
  *
@@ -32,27 +29,19 @@ import javax.swing.text.PlainDocument;
  *
  * </ul>
  *
- * <p>In the above example, you would initialize an instance of this class with <code>NN-NNN-NNN</code>,
- * <code>NNN.NN</code> or <code>NN.NN.NNNN</code>. Another example: A serial number like 2653-6SG would be of the form
- * <code>NNNN-AAA</code>, if the first block is purely numeric or <code>AAAA-AAA</code> if it is alphanumeric.</p>
+ * <p>In the above example, you would initialize an instance of this class with <code>NN-NNN-NNN</code>, <code>NNN.NN</code> or <code>NN.NN.NNNN</code>. Another example: A serial number like 2653-6SG would be of the form <code>NNNN-AAA</code>, if the first block is purely numeric or <code>AAAA-AAA</code> if it is alphanumeric.</p>
  *
  * <p>This class of text field allows you to: </p>
  *
  * <ul>
  *
- * <li>Type in one character at the time. The cursor advances and overwrites the existing value. Formatting characters
- * have not to be typed in. Instead, the cursor jumps over them so that typing is not interrupted.</li>
+ * <li>Type in one character at the time. The cursor advances and overwrites the existing value. Formatting characters have not to be typed in. Instead, the cursor jumps over them so that typing is not interrupted.</li>
  *
- * <li>Delete one character at the time. The deleted part is replaced by the corresponding default. Formatting
- * characters are not deleted but are jumped over.</li>
+ * <li>Delete one character at the time. The deleted part is replaced by the corresponding default. Formatting characters are not deleted but are jumped over.</li>
  *
- * <li>Paste a chunk of characters. The chunk must fit into the place defined by the pattern. Formatting characters are
- * inserted as needed. If the pasted chunk contains formatting characters, these have to be at the right position.
- * Otherwise the chunk cannot be inserted. If the chunk will exceed the end of the pattern, it is truncated and a system
- * beep will warn you that something has been discarded.</li>
+ * <li>Paste a chunk of characters. The chunk must fit into the place defined by the pattern. Formatting characters are inserted as needed. If the pasted chunk contains formatting characters, these have to be at the right position. Otherwise the chunk cannot be inserted. If the chunk will exceed the end of the pattern, it is truncated and a system beep will warn you that something has been discarded.</li>
  *
- * <li>Deletion of a chunk of text. Here the selection is important and marks the text to delete. The deleted text is
- * replaced by the corresponding default part.</li>
+ * <li>Deletion of a chunk of text. Here the selection is important and marks the text to delete. The deleted text is replaced by the corresponding default part.</li>
  *
  * </ul>
  *
@@ -175,44 +164,29 @@ public class FixedFormatTextField extends JTextField
         return defaultText;
     }
 
-    /**
-     * Initializes the field.
-     */
+    /** Initializes the field. */
     private void init()
     {
         setDocument( new FixedFormatDocument( pattern, defaultText ) );
         setText( defaultText );
     }
 
-    /**
-     * Document class for the FixedFormatTextField. See {@link FixedFormatTextField} for a description of the
-     * behaviour.
-     */
+    /** Document class for the FixedFormatTextField. See {@link FixedFormatTextField} for a description of the behaviour. */
     private final class FixedFormatDocument extends PlainDocument
     {
-        /**
-         * The default string.
-         */
+        /** The default string. */
         private final String def;
 
-        /**
-         * The format pattern.
-         */
+        /** The format pattern. */
         private final String pattern;
 
-        /**
-         * The positions of formatting characters.
-         */
+        /** The positions of formatting characters. */
         private final int[] jumpers;
 
-        /**
-         * The possible formatting symbols.
-         */
+        /** The possible formatting symbols. */
         private final String keys = "NAC";
 
-        /**
-         * Defaults for the pattern symbols.
-         */
+        /** Defaults for the pattern symbols. */
         private final String defaultCharacters = "0  ";
 
         /**

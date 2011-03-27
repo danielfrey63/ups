@@ -1,69 +1,44 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation.scrolltext;
 
 /**
- * Represents a paragraph object. A paragraph consists of one to many lines of text, an associated formatting and a
- * total height and width.
+ * Represents a paragraph object. A paragraph consists of one to many lines of text, an associated formatting and a total height and width.
  *
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
  */
 public class Paragraph
 {
-    /**
-     * The formatter assicitated with this paragraph.
-     */
+    /** The formatter assicitated with this paragraph. */
     private Formatter formatter = new Formatter();
 
-    /**
-     * The lines in this paragraph.
-     */
+    /** The lines in this paragraph. */
     private String[] lines;
 
-    /**
-     * The total height of this paragraph.
-     */
+    /** The total height of this paragraph. */
     private int height;
 
-    /**
-     * The total width of this paragraph.
-     */
+    /** The total width of this paragraph. */
     private final int width;
 
-    /**
-     * The The text of the paragraph.
-     */
+    /** The The text of the paragraph. */
     private final String text;
 
-    /**
-     * The vertical line coordinates of the base lines in pixels.
-     */
+    /** The vertical line coordinates of the base lines in pixels. */
     private int[] verticalLineCoords;
 
-    /**
-     * The horizontal starts of the first character in pixels.
-     */
+    /** The horizontal starts of the first character in pixels. */
     private int[] horizontalLineCoords;
 
-    /**
-     * The total line lengths in pixels.
-     */
+    /** The total line lengths in pixels. */
     private int[] lengths;
 
     /**
@@ -131,8 +106,7 @@ public class Paragraph
     }
 
     /**
-     * Returns the horizontal coordinates of the first characters. For left aligned text, each value is the same. It may
-     * be different for center or right alligned text.
+     * Returns the horizontal coordinates of the first characters. For left aligned text, each value is the same. It may be different for center or right alligned text.
      *
      * @return an array of horizontal coordinates in pixels.
      */
@@ -156,9 +130,7 @@ public class Paragraph
         return formatter;
     }
 
-    /**
-     * Initializes the properties.
-     */
+    /** Initializes the properties. */
     private void init()
     {
         lines = getFormatter().getLines( text, width );

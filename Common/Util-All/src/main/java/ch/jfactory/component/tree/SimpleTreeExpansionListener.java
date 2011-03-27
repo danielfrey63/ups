@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -25,14 +25,10 @@ import javax.swing.tree.TreePath;
  */
 public class SimpleTreeExpansionListener implements TreeExpansionListener
 {
-    /**
-     * The expanded tree paths.
-     */
+    /** The expanded tree paths. */
     private final HashSet expandedTreePaths = new HashSet();
 
-    /**
-     * The tree to expand.
-     */
+    /** The tree to expand. */
     private JTree tree;
 
     /**
@@ -55,17 +51,13 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
         this.tree = tree;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void treeExpanded( final TreeExpansionEvent treeExpansionEvent )
     {
         expandedTreePaths.add( treeExpansionEvent.getPath() );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void treeCollapsed( final TreeExpansionEvent treeExpansionEvent )
     {
         // Remove the path from the cache
@@ -86,9 +78,7 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
         }
     }
 
-    /**
-     * Restores the tree expansion state.
-     */
+    /** Restores the tree expansion state. */
     public void restore()
     {
         for ( final Object o : ( (HashSet) expandedTreePaths.clone() ) )
@@ -108,10 +98,7 @@ public class SimpleTreeExpansionListener implements TreeExpansionListener
         return expandedTreePaths.size();
     }
 
-    /**
-     * To call when the model has changed and the tree paths have to be restored to the new model. Translates
-     * successfully by matching the names of the nodes only if the names are unique within a parent node.
-     */
+    /** To call when the model has changed and the tree paths have to be restored to the new model. Translates successfully by matching the names of the nodes only if the names are unique within a parent node. */
     public void translate()
     {
         final Collection matches = TreeUtils.matchPaths( expandedTreePaths.iterator(), tree.getModel() );

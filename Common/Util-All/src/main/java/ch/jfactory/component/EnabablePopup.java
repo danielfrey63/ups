@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * EnabablePopup.java
- *
- * Created on 8. July 2002, 12:44
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -20,13 +21,7 @@ import javax.swing.JPopupMenu;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
- * This combination of a JPopupMenu and a JButton adds enabability to the items in the popup menu. The popup is
- * displayed at the correct item over the button, so selection is made easier/shorter. <p> <p/> To construct the
- * component, you need to deliver some objects which are displayed in the popup by using their toString() method. An
- * additional icon may be delivered to display on the button. <p> <p/> The items in the popup are en-/disabable. To
- * enable a set of objects, use the <code>setEnabled()</code> method. <p> <p/> The following options are on the todo
- * list: <ul> <li> Pass an array of icons to display with the popup items</li> <li> Choose whether checkboxes are used
- * for the popup items</li> </ul>
+ * This combination of a JPopupMenu and a JButton adds enabability to the items in the popup menu. The popup is displayed at the correct item over the button, so selection is made easier/shorter. <p> <p/> To construct the component, you need to deliver some objects which are displayed in the popup by using their toString() method. An additional icon may be delivered to display on the button. <p> <p/> The items in the popup are en-/disabable. To enable a set of objects, use the <code>setEnabled()</code> method. <p> <p/> The following options are on the todo list: <ul> <li> Pass an array of icons to display with the popup items</li> <li> Choose whether checkboxes are used for the popup items</li> </ul>
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
@@ -84,8 +79,7 @@ public class EnabablePopup extends JButton implements ActionListener
     /**
      * Enables all popup item objects in the array, disables all popup item objects not in the array.
      *
-     * @param toEnable the objects to enable. Make sure not to pass null objects. So toEnable should not contain
-     *                 <code>null</code> elements.
+     * @param toEnable the objects to enable. Make sure not to pass null objects. So toEnable should not contain <code>null</code> elements.
      */
     public void setEnabled( final Object[] toEnable )
     {
@@ -126,8 +120,7 @@ public class EnabablePopup extends JButton implements ActionListener
     }
 
     /**
-     * Sets the width of the popup and displays the popup at the selection item. The size of the popup is set to the
-     * width of the button. The size is ajusted each time, so changes of the layout manager are taken into account.
+     * Sets the width of the popup and displays the popup at the selection item. The size of the popup is set to the width of the button. The size is ajusted each time, so changes of the layout manager are taken into account.
      *
      * @param actionEvent the event object
      */

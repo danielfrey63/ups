@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -22,13 +15,9 @@ import java.util.Map;
 import javax.swing.tree.TreePath;
 
 /**
- * Simple implementation of {@link AbstractTreeModel AbstractTreeModel} based on object mappings. The only way for a
- * client to insert/remove children is to call the call {@link #insertInto(TreePath,
- * TreePath, int) insertInto(TreePath, TreePath, int)} or {@link #insertInto(Object,
- * TreePath, int) insertInto(Object, TreePath, int)}.
+ * Simple implementation of {@link AbstractTreeModel AbstractTreeModel} based on object mappings. The only way for a client to insert/remove children is to call the call {@link #insertInto(TreePath, TreePath, int) insertInto(TreePath, TreePath, int)} or {@link #insertInto(Object, TreePath, int) insertInto(Object, TreePath, int)}.
  *
- * <p/>You can insert objects into objects directly by using {@link #insertInto(Object, Object, int) insertInto(Object,
- * Object, int)}. Typically you would use this model like this:
+ * <p/>You can insert objects into objects directly by using {@link #insertInto(Object, Object, int) insertInto(Object, Object, int)}. Typically you would use this model like this:
  *
  * <pre>
  * final MyObject root = new MyObject("Root");
@@ -41,8 +30,7 @@ import javax.swing.tree.TreePath;
  * model.insertInto(new MyObject("Sub2"), child1, 1);
  * </pre>
  *
- * <p/><strong>Warning:</strong> As this implementation is map-based, make sure the tree objects are different in the
- * sense of {@link #equals}. In particular, <code>String</code> objects are not suitable in this sense.
+ * <p/><strong>Warning:</strong> As this implementation is map-based, make sure the tree objects are different in the sense of {@link #equals}. In particular, <code>String</code> objects are not suitable in this sense.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $
@@ -99,8 +87,7 @@ public class MapBasedTreeModel extends AbstractTreeModel
     }
 
     /**
-     * Inserts the child object into the parent object by resolving the parent objects path from the cache and calling
-     * {@link #insertInto(Object, TreePath, int) insertInto(Object, TreePath, int)}.
+     * Inserts the child object into the parent object by resolving the parent objects path from the cache and calling {@link #insertInto(Object, TreePath, int) insertInto(Object, TreePath, int)}.
      *
      * @param child    the child to insert
      * @param parent   the parent to insert the child to

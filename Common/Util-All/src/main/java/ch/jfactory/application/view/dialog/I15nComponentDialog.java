@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.application.view.dialog;
 
 import ch.jfactory.action.ActionUtils;
@@ -25,14 +34,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Implements default behaviour to display a component like TaxTree or LevelSelectionList. The only methods that you
- * have to implement are {@link I15nComponentDialog#onApply()}, {@link I15nComponentDialog#onCancel()} and {@link
- * I15nComponentDialog#createComponentPanel()}. The prefix is used to get the text from resources by calling the {@link
- * Strings#getString(String)} method. The resource keys you should use are (PREFIX is replaced):
- * <ul><li><code>PREFIX.TITLE</code>: the text in the title of the window</li> <li><code>PREFIX.TEXT1</code>: the text
- * given in the white plase on the top of the dialog</li> <li><code>PREFIX.TEXT2</code>: the text placed immediatly
- * before your component</li> </ul> This component also relies on the {@link ComponentFactory} to
- * create buttons. See there for additional keys to put into the string resource.
+ * Implements default behaviour to display a component like TaxTree or LevelSelectionList. The only methods that you have to implement are {@link I15nComponentDialog#onApply()}, {@link I15nComponentDialog#onCancel()} and {@link I15nComponentDialog#createComponentPanel()}. The prefix is used to get the text from resources by calling the {@link Strings#getString(String)} method. The resource keys you should use are (PREFIX is replaced): <ul><li><code>PREFIX.TITLE</code>: the text in the title of the window</li> <li><code>PREFIX.TEXT1</code>: the text given in the white plase on the top of the dialog</li> <li><code>PREFIX.TEXT2</code>: the text placed immediatly before your component</li> </ul> This component also relies on the {@link ComponentFactory} to create buttons. See there for
+ * additional keys to put into the string resource.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.5 $ $Date: 2006/03/22 15:05:10 $
@@ -216,26 +219,16 @@ abstract public class I15nComponentDialog extends JDialog
         return true;
     }
 
-    /**
-     * This method should implement the behaviour on apply. Throw a {@link I15nComponentDialog.ComponentDialogException}
-     * if you want to let the dialog stay open.
-     */
+    /** This method should implement the behaviour on apply. Throw a {@link I15nComponentDialog.ComponentDialogException} if you want to let the dialog stay open. */
     protected abstract void onApply() throws I15nComponentDialog.ComponentDialogException;
 
-    /**
-     * This method should implement the behaviour on cancel.
-     */
+    /** This method should implement the behaviour on cancel. */
     protected abstract void onCancel();
 
-    /**
-     * This method should implement the presentation of the component. This method is called after the Button-Panel is
-     * initialized.
-     */
+    /** This method should implement the presentation of the component. This method is called after the Button-Panel is initialized. */
     protected abstract JComponent createComponentPanel();
 
-    /**
-     * Exception to throw when a component dialog has to stay open uppon apply.
-     */
+    /** Exception to throw when a component dialog has to stay open uppon apply. */
     public class ComponentDialogException extends Exception
     {
         public ComponentDialogException()

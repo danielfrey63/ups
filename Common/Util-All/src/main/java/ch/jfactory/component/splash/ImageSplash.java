@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.splash;
 
@@ -68,8 +61,7 @@ public final class ImageSplash extends Window implements SplashProvider
     // Instance Creation ****************************************************
 
     /**
-     * Constructs an AWT based splash for the given <code>image</code> using a default <code>Frame</code>. Progress is
-     * invisible and note changes will be ignored.
+     * Constructs an AWT based splash for the given <code>image</code> using a default <code>Frame</code>. Progress is invisible and note changes will be ignored.
      *
      * @param image the splash image to display
      */
@@ -79,8 +71,7 @@ public final class ImageSplash extends Window implements SplashProvider
     }
 
     /**
-     * Constructs an AWT based splash for the given <code>image</code> using a default <code>Frame</code> that has an
-     * optional progress bar. The initial note is 'Loading...'.
+     * Constructs an AWT based splash for the given <code>image</code> using a default <code>Frame</code> that has an optional progress bar. The initial note is 'Loading...'.
      *
      * @param image           the splash image to display
      * @param progressVisible true to show progress, false to hide it
@@ -130,8 +121,7 @@ public final class ImageSplash extends Window implements SplashProvider
     /**
      * Sets whether this splash shall honor or ignore note changes.
      *
-     * @param noteEnabled true if this splash changes the displayed note in {@link #setNote(String)}, false to ignore
-     *                    it
+     * @param noteEnabled true if this splash changes the displayed note in {@link #setNote(String)}, false to ignore it
      */
     public void setNoteEnabled( final boolean noteEnabled )
     {
@@ -225,9 +215,7 @@ public final class ImageSplash extends Window implements SplashProvider
         this.versionPad = bottomPad;
     }
 
-    /**
-     * Answers the progress bar's default bounds using a pad from the dialog's bottom.
-     */
+    /** Answers the progress bar's default bounds using a pad from the dialog's bottom. */
     private Rectangle defaultProgressBarBounds( final int bottomPad )
     {
         final int x = ( getWidth() - DEFAULT_BAR_WIDTH ) / 2;
@@ -237,9 +225,7 @@ public final class ImageSplash extends Window implements SplashProvider
 
     // Painting *************************************************************
 
-    /**
-     * Renders the image and optionally a progress bar with a note.
-     */
+    /** Renders the image and optionally a progress bar with a note. */
     public void paint( final Graphics graphics )
     {
         final Graphics2D g = (Graphics2D) graphics;
@@ -297,25 +283,19 @@ public final class ImageSplash extends Window implements SplashProvider
         }
     }
 
-    /**
-     * Opens the splash window.
-     */
+    /** Opens the splash window. */
     public void openSplash()
     {
         setVisible( true );
     }
 
-    /**
-     * Closes and disposes the splash window.
-     */
+    /** Closes and disposes the splash window. */
     public void closeSplash()
     {
         dispose();
     }
 
-    /**
-     * Sets a new progress value.
-     */
+    /** Sets a new progress value. */
     public void setProgress( final int percent )
     {
         if ( !progressVisible )

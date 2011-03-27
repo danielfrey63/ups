@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -163,9 +156,7 @@ public class ToolTipManager
         return this.window;
     }
 
-    /**
-     * TipWindow. Used for showing tooltip.
-     */
+    /** TipWindow. Used for showing tooltip. */
     static class TipWindow extends JWindow
     {
         BufferedImage bi;
@@ -234,9 +225,7 @@ public class ToolTipManager
     }
 
     /**
-     * Get bounds for given row.<br> If comp is instance of JTree then bounds are determined by call to
-     * JTree#getRowBounds.<br> If comp is instance of JList then bounds are determined by call to
-     * JList#getCellBounds<br>
+     * Get bounds for given row.<br> If comp is instance of JTree then bounds are determined by call to JTree#getRowBounds.<br> If comp is instance of JList then bounds are determined by call to JList#getCellBounds<br>
      *
      * @param comp JTree or JList
      * @param row  row number
@@ -273,9 +262,7 @@ public class ToolTipManager
         return 0;
     }
 
-    /**
-     * MouseHandler.<br> MouseListener for TLToolTipManager.
-     */
+    /** MouseHandler.<br> MouseListener for TLToolTipManager. */
     class MouseHandler extends MouseInputAdapter
     {
         public void mousePressed( final MouseEvent e )
@@ -451,17 +438,13 @@ public class ToolTipManager
         return visibleRect;
     }
 
-    /**
-     * hide TipWindow
-     */
+    /** hide TipWindow */
     void hideTipWindow()
     {
         getTipWindow().setVisible( false );
     }
 
-    /**
-     * MouseListener for TLToolTipManager
-     */
+    /** MouseListener for TLToolTipManager */
     protected class TipMouseHandler extends MouseInputAdapter
     {
         public void mouseExited( final MouseEvent e )
@@ -509,9 +492,7 @@ public class ToolTipManager
         }
     }
 
-    /**
-     * OwnerListener hides TipWindow if Component is resized, moved or made invisible.
-     */
+    /** OwnerListener hides TipWindow if Component is resized, moved or made invisible. */
     private class OwnerListener extends ComponentAdapter
     {
         public void componentResized( final ComponentEvent e )

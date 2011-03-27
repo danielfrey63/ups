@@ -1,10 +1,11 @@
 /*
- * Copyright 2002 by x-matrix Switzerland
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * ExtendedBeanInfo.java
- *
- * Created on 11. Juli 2002, 17:31
- * Created by Dirk Hoffmann
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.bean;
 
@@ -20,8 +21,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
- * This class adds some method to get the EventSetDescriptor, MethodDescriptor and PropertyDescriptor by name. It is a
- * decorator for a BeanInfo object.
+ * This class adds some method to get the EventSetDescriptor, MethodDescriptor and PropertyDescriptor by name. It is a decorator for a BeanInfo object.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
@@ -77,57 +77,44 @@ public class ExtendedBeanInfo implements BeanInfo
         }
     }
 
-    /**
-     * @see BeanInfo#getAdditionalBeanInfo()
-     */
+    /** @see BeanInfo#getAdditionalBeanInfo() */
     public BeanInfo[] getAdditionalBeanInfo()
     {
         return beanInfo.getAdditionalBeanInfo();
     }
 
-    /**
-     * @see BeanInfo#getBeanDescriptor()
-     */
+    /** @see BeanInfo#getBeanDescriptor() */
     public BeanDescriptor getBeanDescriptor()
     {
         return beanInfo.getBeanDescriptor();
     }
 
-    /**
-     * @see BeanInfo#getDefaultEventIndex()
-     */
+    /** @see BeanInfo#getDefaultEventIndex() */
     public int getDefaultEventIndex()
     {
         return beanInfo.getDefaultEventIndex();
     }
 
-    /**
-     * @see BeanInfo#getDefaultPropertyIndex()
-     */
+    /** @see BeanInfo#getDefaultPropertyIndex() */
     public int getDefaultPropertyIndex()
     {
         return beanInfo.getDefaultPropertyIndex();
     }
 
-    /**
-     * @see BeanInfo#getIcon(int)
-     */
+    /** @see BeanInfo#getIcon(int) */
     public Image getIcon( final int iconKind )
     {
         return beanInfo.getIcon( iconKind );
     }
 
-    /**
-     * @see BeanInfo#getEventSetDescriptors()
-     */
+    /** @see BeanInfo#getEventSetDescriptors() */
     public EventSetDescriptor[] getEventSetDescriptors()
     {
         return beanInfo.getEventSetDescriptors();
     }
 
     /**
-     * Return the requested EventSetDescriptor. If the EventSetDescriptor is not found a NoSuchElementException is
-     * thrown.
+     * Return the requested EventSetDescriptor. If the EventSetDescriptor is not found a NoSuchElementException is thrown.
      *
      * @param name name of the EventSetDescriptor
      * @return requested EventSetDescriptor
@@ -146,9 +133,7 @@ public class ExtendedBeanInfo implements BeanInfo
         return desc;
     }
 
-    /**
-     * @see BeanInfo#getMethodDescriptors()
-     */
+    /** @see BeanInfo#getMethodDescriptors() */
     public MethodDescriptor[] getMethodDescriptors()
     {
         return beanInfo.getMethodDescriptors();
@@ -174,17 +159,14 @@ public class ExtendedBeanInfo implements BeanInfo
         return desc;
     }
 
-    /**
-     * @see BeanInfo#getPropertyDescriptors()
-     */
+    /** @see BeanInfo#getPropertyDescriptors() */
     public PropertyDescriptor[] getPropertyDescriptors()
     {
         return beanInfo.getPropertyDescriptors();
     }
 
     /**
-     * Return the requested PropertyDescriptor. If the PropertyDescriptor is not found a NoSuchElementException is
-     * thrown.
+     * Return the requested PropertyDescriptor. If the PropertyDescriptor is not found a NoSuchElementException is thrown.
      *
      * @param name name of the PropertyDescriptor
      * @return requested PropertyDescriptor

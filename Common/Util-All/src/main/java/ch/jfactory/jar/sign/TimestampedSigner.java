@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
 package ch.jfactory.jar.sign;/*
  * @(#)TimestampedSigner.java	1.2 03/12/19
  *
@@ -37,9 +47,7 @@ import sun.security.x509.X500Name;
 import sun.security.x509.X509CertInfo;
 
 /**
- * This class implements a content signing service. It generates a timestamped signature for a given content according
- * to <a href="http://www.ietf.org/rfc/rfc3161.txt">RFC 3161</a>. The signature along with a trusted timestamp and the
- * signer's certificate are all packaged into a standard PKCS #7 Signed Data message.
+ * This class implements a content signing service. It generates a timestamped signature for a given content according to <a href="http://www.ietf.org/rfc/rfc3161.txt">RFC 3161</a>. The signature along with a trusted timestamp and the signer's certificate are all packaged into a standard PKCS #7 Signed Data message.
  *
  * @author Vincent Ryan
  * @version 1.2, 12/19/03
@@ -111,28 +119,21 @@ public final class TimestampedSigner extends ContentSigner
      */
     private final boolean tsRequestCertificate = true;
 
-    /**
-     * Instantiates a content signer that supports timestamped signatures.
-     */
+    /** Instantiates a content signer that supports timestamped signatures. */
     public TimestampedSigner()
     {
     }
 
     /**
-     * Generates a PKCS #7 signed data message that includes a signature timestamp. This method is used when a signature
-     * has already been generated. The signature, a signature timestamp, the signer's certificate chain, and optionally
-     * the content that was signed, are packaged into a PKCS #7 signed data message.
+     * Generates a PKCS #7 signed data message that includes a signature timestamp. This method is used when a signature has already been generated. The signature, a signature timestamp, the signer's certificate chain, and optionally the content that was signed, are packaged into a PKCS #7 signed data message.
      *
      * @param parameters     The non-null input parameters.
-     * @param omitContent    true if the content should be omitted from the signed data message. Otherwise the content
-     *                       is included.
+     * @param omitContent    true if the content should be omitted from the signed data message. Otherwise the content is included.
      * @param applyTimestamp true if the signature should be timestamped. Otherwise timestamping is not performed.
      * @return A PKCS #7 signed data message including a signature timestamp.
      * @throws NoSuchAlgorithmException The exception is thrown if the signature algorithm is unrecognised.
-     * @throws CertificateException     The exception is thrown if an error occurs while processing the signer's
-     *                                  certificate or the TSA's certificate.
-     * @throws IOException              The exception is thrown if an error occurs while generating the signature
-     *                                  timestamp or while generating the signed data message.
+     * @throws CertificateException     The exception is thrown if an error occurs while processing the signer's certificate or the TSA's certificate.
+     * @throws IOException              The exception is thrown if an error occurs while generating the signature timestamp or while generating the signed data message.
      * @throws NullPointerException     The exception is thrown if parameters is null.
      */
     public byte[] generateSignedData( final ContentSignerParameters parameters,
@@ -254,9 +255,7 @@ public final class TimestampedSigner extends ContentSigner
     }
 
     /**
-     * Examine the certificate for a Subject Information Access extension (<a href="http://www.ietf.org/rfc/rfc3280.txt">RFC
-     * 3280</a>). The extension's <tt>accessMethod</tt> field should contain the object identifier defined for
-     * timestamping: 1.3.6.1.5.5.7.48.3 and its <tt>accessLocation</tt> field should contain an HTTP URL.
+     * Examine the certificate for a Subject Information Access extension (<a href="http://www.ietf.org/rfc/rfc3280.txt">RFC 3280</a>). The extension's <tt>accessMethod</tt> field should contain the object identifier defined for timestamping: 1.3.6.1.5.5.7.48.3 and its <tt>accessLocation</tt> field should contain an HTTP URL.
      *
      * @param tsaCertificate An X.509 certificate for the TSA.
      * @return An HTTP URL or null if none was found.

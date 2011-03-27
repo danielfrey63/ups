@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * StatusPanel.java
- *
- * Created on 10. Juli 2002 17:13
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.application.view.status;
 

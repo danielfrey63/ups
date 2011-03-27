@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.application;
 
@@ -63,97 +56,6 @@ import org.apache.log4j.helpers.OptionConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * This class addresses three purposes:
- *
- * <ol>
- *
- * <li><b>Configuration:</b> It wraps configuration for JGoodies <code>DefaultApplicationStarter</code> application
- * properties into system properties.</li>
- *
- * <li><b>Version Check:</b> It handles java version checks.</li>
- *
- * <li><b>Model-View-Control:</b> It implements the row structure for a model-view-control concept.</li>
- *
- * </ol>
- *
- * <b>Configuration</b><p/>
- *
- * Configuration takes place as a properties file. The default name of the properties file is
- * <code>xmatrix.properties</code> and is tried to be loaded in one of the classpath root directories (more precise
- * <code>/xmatrix.properties</code> is loaded like a resource). A reference to the file may also be passed by the usual
- * mechanisms for configuring a system property with the key <code>app.configuration</code> or during extention of this
- * superclass by overwriding the constructor. For example:
- *
- * <pre>
- * public class Main extends MainRunner {
- *     public static void main(String[] args) {
- *         // Pass the absolute reference to a configuration file
- *         new Main("/myapp.properties");
- *     }
- *     public Main(String properties) {
- *         super(properties);
- *     }
- * }
- * </pre>
- *
- * Properties that should be located in this file which are used by JGoodies AbstractApplicationStarter:
- * <pre>
- * jfactory.main.about.name.long = Long application description
- * jfactory.main.about.name.short = Short application description
- * jfactory.main.product.name = Name of the product
- * jfactory.main.product.description = Long description of the product
- * jfactory.main.prefs.node.name = Path to the preferences node, i.e. mydomain/myapp
- * jfactory.main.version.major = Version number
- * jfactory.main.version.full = Version number
- * jfactory.main.copyright = ©
- * jfactory.main.vendor.name = Company name
- * jfactory.main.vendor.url = Company URL
- * jfactory.main.vendor.mail = Company e-mail
- * jfactory.main.path.tool = Path to the resources, i.e. resources/
- * jfactory.main.path.helpset = Path to the help resources
- * jfactory.main.path.tipindex = Path to the tipindex files
- * </pre>
- *
- * Mandatory properties used by JFactory:
- * <pre>
- * // Log4j configuration file.
- * jfactory.log4j.configuration = /log4j.configuration
- * </pre>
- *
- * <b>Version Check</b><p/>
- *
- * Version check (2) is done by the following optional properties:
- * <pre>
- * // Indicate the minimal version needed to run this application. Defaults to 1.0.
- * jfactory.version.minimal = 1.4.2
- *
- * // Indicate the error message title when a required java version is not used to run the
- * // application. Optional. Defaults to the text given here.
- * jfactory.version.error.title = Conflicting Java Versions
- *
- * // Indicate the text of the error message when a required java version is not used to run the
- * // application. Optional. Defaults to the text given here.
- * jfactory.version.error.text = You are using Java {1}. However, to run this application you need {0}.
- * </pre>
- *
- * <b>Model-View-Control</b><p/>
- *
- * To configure model and controler specify the following two properties:
- *
- * <pre>
- * jfactory.main.model = Main model class
- * jfactory.main.controler = Main controler class
- * jfactory.main.frame = Main frame class
- * </pre>
- *
- * The model class must provide a public field <code>DEFAULT</code> or an accessor <code>getDefaultModel()</code>. The
- * controler hast to implement {@link AbstractMainController} and the constructor has to accept as its only argument an
- * instance of the main model.
- *
- * @author Daniel Frey
- * @version $Revision: 1.6 $ $Date: 2007/09/27 10:41:22 $
- */
 public class MainRunner extends DefaultApplicationStarter
 {
     private static Logger LOG;
@@ -454,10 +356,7 @@ public class MainRunner extends DefaultApplicationStarter
         return false;
     }
 
-    /**
-     * Loads the properties from the hardcoded properties file. Makes sure that these properties are overwritten from
-     * the properties loaded by the system or command line.
-     */
+    /** Loads the properties from the hardcoded properties file. Makes sure that these properties are overwritten from the properties loaded by the system or command line. */
     private static void initProperties( final String properties ) throws IOException
     {
         final Properties configProperties = new Properties();

@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.logging;
 
 import java.io.FileWriter;
@@ -19,7 +28,7 @@ public class FileLogger implements LogInterface
 {
     private final String channel;
 
-    private static final Format FORMAT = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS");
+    private static final Format FORMAT = new SimpleDateFormat( "yyyy.MM.dd HH:mm:ss.SSS" );
 
     public FileLogger( final String channel )
     {
@@ -117,6 +126,6 @@ public class FileLogger implements LogInterface
 
     private String getMessage( final Object message, final String level )
     {
-        return FORMAT.format(new Date()) + "  " + channel + "  " + rightPad( "[" + level + "]", 8 ) + message;
+        return FORMAT.format( new Date() ) + "  " + channel + "  " + rightPad( "[" + level + "]", 8 ) + message;
     }
 }

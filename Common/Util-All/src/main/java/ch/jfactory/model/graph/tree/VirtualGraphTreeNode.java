@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.model.graph.tree;
 
 import ch.jfactory.model.graph.AbsGraphModel;
@@ -16,12 +25,7 @@ public class VirtualGraphTreeNode implements GraphNode
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( VirtualGraphTreeNode.class );
 
-    /**
-     * The ROLE_NULL <code>GraphNode</code> is used because instances of <code> TreePath</code> may not be constructed
-     * without an object. I use <code>TreePath</code>s in the {@link VirtualGraphTreeNodeModel}'s cache as a key to the
-     * <code>GraphNode2TreeNode</code> objects. The ROLE_NULL object is also used when composing the key to interrogate
-     * the cache.
-     */
+    /** The ROLE_NULL <code>GraphNode</code> is used because instances of <code> TreePath</code> may not be constructed without an object. I use <code>TreePath</code>s in the {@link VirtualGraphTreeNodeModel}'s cache as a key to the <code>GraphNode2TreeNode</code> objects. The ROLE_NULL object is also used when composing the key to interrogate the cache. */
     public static final GraphNode NULL = new GraphNodeImpl();
 
     /** In a tree model, the parent is unique. */
@@ -30,27 +34,16 @@ public class VirtualGraphTreeNode implements GraphNode
     /** The wrapped object. */
     private final GraphNode dependent;
 
-    /**
-     * The model associated with this node. Primary purpose of the model is a separate cache, so more than one tree may
-     * be displayed independently.
-     */
+    /** The model associated with this node. Primary purpose of the model is a separate cache, so more than one tree may be displayed independently. */
     private final VirtualGraphTreeNodeModel model;
 
     /** The filter associated with this <code>GraphNode2TreeNode</code> */
     private VirtualGraphTreeNodeFilter filter;
 
-    /**
-     * Internal member to hold the unique key to this <code>GraphNode2TreeNode </code> object. It is used as key to
-     * identify this object in the cache. The <code>ancestors</code> member is composed of the the (partly hidden)
-     * dependent nodes.
-     */
+    /** Internal member to hold the unique key to this <code>GraphNode2TreeNode </code> object. It is used as key to identify this object in the cache. The <code>ancestors</code> member is composed of the the (partly hidden) dependent nodes. */
     private TreePath ancestors = new TreePath( NULL );
 
-    /**
-     * If several children nodes are wrappers for the same {@link #dependent}, and they are merged, so that only
-     * distinct <code>dependent<code>s are displayed, this member variable is used to keep the cross reference of the
-     * merged <code>GraphNode2TreeNode</code> objects.
-     */
+    /** If several children nodes are wrappers for the same {@link #dependent}, and they are merged, so that only distinct <code>dependent<code>s are displayed, this member variable is used to keep the cross reference of the merged <code>GraphNode2TreeNode</code> objects. */
     private final VirtualGraphTreeNodeList nonDistincts = new VirtualGraphTreeNodeList( this );
 
     /**
@@ -105,8 +98,7 @@ public class VirtualGraphTreeNode implements GraphNode
     }
 
     /**
-     * Each new object has its unique tree path (that is, the path formed by visible and invisible nodes as declared by
-     * the root {@link VirtualGraphTreeNodeFilter}).
+     * Each new object has its unique tree path (that is, the path formed by visible and invisible nodes as declared by the root {@link VirtualGraphTreeNodeFilter}).
      *
      * @param dependent the dependent node
      * @param parent    the parent <code>VirtualGraphTreeNode</code>
@@ -231,8 +223,7 @@ public class VirtualGraphTreeNode implements GraphNode
     }
 
     /**
-     * Inserts a child from the trees point of view. If -- from the graphs point of view -- the given node is a
-     * child/parent to this node, then the appropriate addChild/addParent method is invoked.
+     * Inserts a child from the trees point of view. If -- from the graphs point of view -- the given node is a child/parent to this node, then the appropriate addChild/addParent method is invoked.
      *
      * @param index the index to add it to
      * @param node  the node to add

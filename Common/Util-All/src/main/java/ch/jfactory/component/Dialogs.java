@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.component;
 
 import ch.jfactory.resource.Strings;
@@ -56,8 +65,7 @@ public class Dialogs
     }
 
     /**
-     * Asks the user a question which may be answered with yes or no. Default is cancel. Escape triggers cancel as
-     * well.
+     * Asks the user a question which may be answered with yes or no. Default is cancel. Escape triggers cancel as well.
      *
      * @param caller  the component to infer the root window from
      * @param title   the title to use

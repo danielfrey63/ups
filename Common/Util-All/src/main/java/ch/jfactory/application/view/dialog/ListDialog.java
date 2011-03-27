@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.application.view.dialog;
 
 import ch.jfactory.application.presentation.WindowUtils;
@@ -45,10 +54,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
     private DefaultJList<T> list;
 
     /**
-     * Constructs a new list dialog based as a child of the dialog given. A title is displayed, for which the string is
-     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
-     * is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by
-     * the key <code>PREFIX.TEXT</code>.
+     * Constructs a new list dialog based as a child of the dialog given. A title is displayed, for which the string is taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code> is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
@@ -61,10 +67,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
     }
 
     /**
-     * Constructs a new list dialog based as a child of the frame given. A title is displayed, for which the string is
-     * taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code>
-     * is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by
-     * the key <code>PREFIX.TEXT</code>.
+     * Constructs a new list dialog based as a child of the frame given. A title is displayed, for which the string is taken from a string resource {@link Strings} with a key like <code>PREFIX.TITLE</code>, where <code>PREFIX</code> is the prefix argument given. A text multi-line label is displayed above the list where the text is retrieved by the key <code>PREFIX.TEXT</code>.
      *
      * @param parent   the parent dialog to center this dialog on
      * @param prefix   the key prefix to use
@@ -125,9 +128,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
     /**
      * Set which selection mode you want.
      *
-     * @param selectionMode selection mode from {@link ListSelectionModel} might be {@link
-     *                      ListSelectionModel#SINGLE_SELECTION} or {@link ListSelectionModel#SINGLE_INTERVAL_SELECTION}
-     *                      or {@link ListSelectionModel#MULTIPLE_INTERVAL_SELECTION}
+     * @param selectionMode selection mode from {@link ListSelectionModel} might be {@link ListSelectionModel#SINGLE_SELECTION} or {@link ListSelectionModel#SINGLE_INTERVAL_SELECTION} or {@link ListSelectionModel#MULTIPLE_INTERVAL_SELECTION}
      */
     public void setSelectionMode( final int selectionMode )
     {

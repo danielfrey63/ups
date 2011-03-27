@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation.fading;
 
 import ch.jfactory.animation.Paintable;
@@ -25,38 +17,26 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 
 /**
- * An animation that fades into a given color. The animation starts with a totally transparent color, fading it towards
- * the given final color by in-/decrementing the alpha channel by one per cycle.
+ * An animation that fades into a given color. The animation starts with a totally transparent color, fading it towards the given final color by in-/decrementing the alpha channel by one per cycle.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
 public class FadingPaintable extends Paintable
 {
-    /**
-     * The default deleay to wait between scroll steps.
-     */
+    /** The default deleay to wait between scroll steps. */
     private static final int DEFAULT_SCROLL_DELAY = 10;
 
-    /**
-     * The actual scroll delay. Defaults to {@link #DEFAULT_SCROLL_DELAY}.
-     */
+    /** The actual scroll delay. Defaults to {@link #DEFAULT_SCROLL_DELAY}. */
     private final int scrollDelay = DEFAULT_SCROLL_DELAY;
 
-    /**
-     * The final color that will be approached stepwise by setting the alpha channel one bit towards the alpha channel
-     * of the final color
-     */
+    /** The final color that will be approached stepwise by setting the alpha channel one bit towards the alpha channel of the final color */
     private final Color finalColor;
 
-    /**
-     * The shape to draw the fading area.
-     */
+    /** The shape to draw the fading area. */
     private Shape shape;
 
-    /**
-     * The actual color.
-     */
+    /** The actual color. */
     private transient Color color;
 
     /**
@@ -69,9 +49,7 @@ public class FadingPaintable extends Paintable
         this.finalColor = finalColor;
     }
 
-    /**
-     * Runs until the final color is reached.
-     */
+    /** Runs until the final color is reached. */
     public void run()
     {
         final Dimension size = getAnimation().getSize();

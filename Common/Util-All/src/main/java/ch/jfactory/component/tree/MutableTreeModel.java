@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.component.tree;
 
 import javax.swing.event.TreeModelEvent;
@@ -14,22 +23,14 @@ import javax.swing.tree.TreePath;
 public interface MutableTreeModel extends TreeModel
 {
     /**
-     * An implementation of this method removes the last object of the given path from the last object of the parent
-     * path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter with a {@link
-     * TreeModelEvent TreeModelEvent} by calling the listeners {@link
-     * TreeModelListener#treeNodesRemoved(TreeModelEvent)
-     * treeNodesRemoved(TreeModelEvent)} method.
+     * An implementation of this method removes the last object of the given path from the last object of the parent path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter with a {@link TreeModelEvent TreeModelEvent} by calling the listeners {@link TreeModelListener#treeNodesRemoved(TreeModelEvent) treeNodesRemoved(TreeModelEvent)} method.
      *
      * @param path the path to remove
      */
     void removeFromParent( TreePath path );
 
     /**
-     * An implementation of this method inserts the last object of the given child path from the last object of the
-     * given parent path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter
-     * with a {@link TreeModelEvent TreeModelEvent} by calling the listeners {@link
-     * TreeModelListener#treeNodesInserted(TreeModelEvent)
-     * treeNodesInserted(TreeModelEvent)} method.
+     * An implementation of this method inserts the last object of the given child path from the last object of the given parent path. It must notify any {@link TreeModelListener TreeModelListener}s thereafter with a {@link TreeModelEvent TreeModelEvent} by calling the listeners {@link TreeModelListener#treeNodesInserted(TreeModelEvent) treeNodesInserted(TreeModelEvent)} method.
      *
      * @param child  the path to insert
      * @param parent the path to add the child to

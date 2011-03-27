@@ -1,5 +1,11 @@
 /*
- * Copyright (c) 2005 Your Corporation. All Rights Reserved.
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.resource;
 
@@ -15,8 +21,7 @@ import org.apache.commons.beanutils.MethodUtils;
 public class ResourceHelper
 {
     /**
-     * Decodes a string given. The string might be a hexadecimal representation of a color (starting with '#') or a name
-     * of a color as specified in the Color class constants.
+     * Decodes a string given. The string might be a hexadecimal representation of a color (starting with '#') or a name of a color as specified in the Color class constants.
      *
      * @param value the string to translate
      * @return the color representing the string or null, if none can be found

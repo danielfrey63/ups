@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
 package ch.jfactory.ant;
 
 import java.io.File;
@@ -17,9 +27,7 @@ import org.apache.tools.ant.util.FileUtils;
 public class TaskTools
 {
     /**
-     * <p>This class takes the sourcePath file and The classname given to the ant task and figures out the filename of
-     * the class.</p> <p/> Ex: <code>com.ryangrier.ant.test.VersionTest</code> becomes
-     * <code>com/ryangrier/ant/test/VersionTest.java</code>
+     * <p>This class takes the sourcePath file and The classname given to the ant task and figures out the filename of the class.</p> <p/> Ex: <code>com.ryangrier.ant.test.VersionTest</code> becomes <code>com/ryangrier/ant/test/VersionTest.java</code>
      *
      * @param sourceDirectory Description of the Parameter
      * @param className       Description of the Parameter
@@ -46,7 +54,7 @@ public class TaskTools
      * @param fileContents The file to look for.
      * @param variableName The variable name to look for.
      * @return The variable value.
-     * @throws Exception           Description of the Exception
+     * @throws Exception Description of the Exception
      * @throws Exception An Exception has occurred.
      */
     public static String findVariableNameValueInClassFile( final String fileContents, final String variableName ) throws Exception

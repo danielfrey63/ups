@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.component.splash;
 
 import java.awt.Component;
@@ -33,9 +25,7 @@ import javax.swing.JLabel;
  */
 public class SimpleSplash extends JFrame implements SplashProvider
 {
-    /**
-     * The label that holds the background image.
-     */
+    /** The label that holds the background image. */
     private final JLabel label = new JLabel();
 
     /**
@@ -55,8 +45,7 @@ public class SimpleSplash extends JFrame implements SplashProvider
     }
 
     /**
-     * Creates a new splash window. The image passed will be painted in the background. The component is displayed in
-     * the foreground according to its bounds.
+     * Creates a new splash window. The image passed will be painted in the background. The component is displayed in the foreground according to its bounds.
      *
      * @param backgroundImage     image for the background
      * @param foregroundComponent foregroundComponent for the foreground
@@ -73,9 +62,7 @@ public class SimpleSplash extends JFrame implements SplashProvider
         start();
     }
 
-    /**
-     * Init the components listeners and properties.
-     */
+    /** Init the components listeners and properties. */
     private void init()
     {
         setUndecorated( true );
@@ -93,25 +80,20 @@ public class SimpleSplash extends JFrame implements SplashProvider
     // Interface SplashProvider
     //
 
-    /**
-     * Shows the splash screen.
-     */
+    /** Shows the splash screen. */
     public void start()
     {
         setVisible( true );
     }
 
-    /**
-     * Destroies the splash screen.
-     */
+    /** Destroies the splash screen. */
     public void stop()
     {
         dispose();
     }
 
     /**
-     * Sets the image on the splash window. The size of the window will be adopted to the images size. The old image is
-     * discarded.
+     * Sets the image on the splash window. The size of the window will be adopted to the images size. The old image is discarded.
      *
      * @param backgroundImageIcon the image to set
      */

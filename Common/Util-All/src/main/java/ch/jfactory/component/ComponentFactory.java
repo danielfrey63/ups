@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.component;
 
 import ch.jfactory.action.ActionUtils;
@@ -16,19 +25,11 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-/**
- * Factory class to create different components. All factory methods are based on parametrized properties. The
- * properties are loaded with the {@link Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1
- * $
- */
+/** Factory class to create different components. All factory methods are based on parametrized properties. The properties are loaded with the {@link Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1 $ */
 public class ComponentFactory
 {
     /**
-     * Creates a button with name, icon and tooltip by extracting the strings/icon name from a resource. If an object
-     * not null is given as a discriminator, the resource associated with that object is used, otherwise the global
-     * resource is used. See {@link Strings#getString(Object, String)}.<p> To compose the key for
-     * the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as
-     * an argument:
+     * Creates a button with name, icon and tooltip by extracting the strings/icon name from a resource. If an object not null is given as a discriminator, the resource associated with that object is used, otherwise the global resource is used. See {@link Strings#getString(Object, String)}.<p> To compose the key for the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as an argument:
      *
      * <ul>
      *
@@ -42,8 +43,7 @@ public class ComponentFactory
      *
      * <li>Shortcut: <code>PREFIX.SHORT</code></li>
      *
-     * </ul> This button does -- in addition to the one created by {@link #createSimpleButton(Class, String,
-     * ActionListener)} -- a key stroke on the top level component.
+     * </ul> This button does -- in addition to the one created by {@link #createSimpleButton(Class, String, ActionListener)} -- a key stroke on the top level component.
      *
      * @param obj            the object to search the associated resource bundle
      * @param prefix         the prefix used to search properties
@@ -89,8 +89,7 @@ public class ComponentFactory
     }
 
     /**
-     * Creates a button based on a resource bundle. The resource bundle is used to retrieve different properties of the
-     * new button:
+     * Creates a button based on a resource bundle. The resource bundle is used to retrieve different properties of the new button:
      *
      * <ul>
      *
@@ -106,10 +105,7 @@ public class ComponentFactory
      *
      * </ul>
      *
-     * The tooltip is automatically completed by the shortcut in paranthesis. This button is not automatically
-     * associated with the key stroke, so the SHORT property should be left emtpy. If you want to create an associated
-     * button use {@link #createButton(Class, String, ActionListener)} or {@link
-     * #createButton(String, ActionListener)}.
+     * The tooltip is automatically completed by the shortcut in paranthesis. This button is not automatically associated with the key stroke, so the SHORT property should be left emtpy. If you want to create an associated button use {@link #createButton(Class, String, ActionListener)} or {@link #createButton(String, ActionListener)}.
      *
      * @param obj            The object to search the associated resource bundle
      * @param prefix         The key prefix used to retrieve properties
@@ -134,9 +130,7 @@ public class ComponentFactory
     }
 
     /**
-     * Creates a button with name, icon and tooltip by extracting the strings/icon name from the global resource.<p> To
-     * compose the key for the strings resource, the following conventions are used, where <code>PREFIX</code> indicates
-     * the prefix given as an argument:
+     * Creates a button with name, icon and tooltip by extracting the strings/icon name from the global resource.<p> To compose the key for the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as an argument:
      *
      * <ul>
      *

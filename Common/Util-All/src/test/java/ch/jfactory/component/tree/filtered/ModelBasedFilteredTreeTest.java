@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree.filtered;
 
@@ -84,17 +84,13 @@ public class ModelBasedFilteredTreeTest extends TestCase
     {
     }
 
-    /**
-     * Test the basic structure of the tree.
-     */
+    /** Test the basic structure of the tree. */
     public void test001SimpleTree()
     {
         doTest( nodes, "1111111111111110" );
     }
 
-    /**
-     * Tests a simple filter removing one node.
-     */
+    /** Tests a simple filter removing one node. */
     public void test002SimpleFilter()
     {
         model.addViewFilter( new ViewFilter()
@@ -107,9 +103,7 @@ public class ModelBasedFilteredTreeTest extends TestCase
         doTest( nodes, "1110111111111100" );
     }
 
-    /**
-     * Tests the application of two filters removing two separate nodes.
-     */
+    /** Tests the application of two filters removing two separate nodes. */
     public void test003DoubleFilter()
     {
         model.addViewFilter( new ViewFilter()

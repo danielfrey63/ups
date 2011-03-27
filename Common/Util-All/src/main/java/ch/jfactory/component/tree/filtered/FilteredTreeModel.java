@@ -1,13 +1,12 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.component.tree.filtered;
 
 import ch.jfactory.component.tree.AbstractTreeModel;
@@ -24,23 +23,17 @@ import javax.swing.tree.TreePath;
 /**
  * A TreeModel implementation that has the ability to filter nodes. This model works on DefaultMutableTreeNode objects.
  *
- * <p/> The Method isShown is used to determine whether a specific node is shown or not. It works by ANDing the
- * different filters together. So to make a node disappear, it is enough to remove it in one filter. To make a specific
- * node appear, make sure to not filter it out in any set filter.
+ * <p/> The Method isShown is used to determine whether a specific node is shown or not. It works by ANDing the different filters together. So to make a node disappear, it is enough to remove it in one filter. To make a specific node appear, make sure to not filter it out in any set filter.
  *
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2006/08/29 13:10:43 $
  */
 public class FilteredTreeModel extends AbstractTreeModel
 {
-    /**
-     * The list of filters.
-     */
+    /** The list of filters. */
     private final ArrayList<ViewFilter> filters = new ArrayList<ViewFilter>();
 
-    /**
-     * The model to which the implementation is delegated to.
-     */
+    /** The model to which the implementation is delegated to. */
     private final DelegatingTreeModel delegate;
 
     /**
@@ -174,9 +167,7 @@ public class FilteredTreeModel extends AbstractTreeModel
 
     private class NodeBasedFilteredTreeModel extends DelegatingTreeModel
     {
-        /**
-         * The root node.
-         */
+        /** The root node. */
         private final MutableTreeNode root;
 
         public NodeBasedFilteredTreeModel( final MutableTreeNode root )
@@ -310,9 +301,7 @@ public class FilteredTreeModel extends AbstractTreeModel
 
     private class ModelBasedFilteredTreeModel extends DelegatingTreeModel
     {
-        /**
-         * Model behind.
-         */
+        /** Model behind. */
         private final NotifiableTreeModel model;
 
         private final Map<Object, Object> parents = new HashMap<Object, Object>();

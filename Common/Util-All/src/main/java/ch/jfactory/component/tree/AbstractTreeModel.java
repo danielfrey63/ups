@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -35,12 +28,11 @@ import javax.swing.tree.TreePath;
  *
  * <li>{@link TreeModel#addTreeModelListener(TreeModelListener) addTreeModelListener(TreeModelListener)}</li>
  *
- * <li>{@link TreeModel#removeTreeModelListener(TreeModelListener)
- * removeTreeModelListener(TreeModelListener)}.</li>
+ * <li>{@link TreeModel#removeTreeModelListener(TreeModelListener) removeTreeModelListener(TreeModelListener)}.</li>
  *
  * <li>{@link TreeModel#isLeaf(Object) isLeaf(Object)}</li>
  *
- * <li>{@link TreeModel#getIndexOfChild(Object,Object) getIndexOfChild(Object, Object)}</li>
+ * <li>{@link TreeModel#getIndexOfChild(Object, Object) getIndexOfChild(Object, Object)}</li>
  *
  * </li></ul>
  *
@@ -54,54 +46,45 @@ import javax.swing.tree.TreePath;
  *
  * <li>{@link NotifiableTreeModel#nodeChanged(TreePath) nodeChanged(TreePath)}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesChanged(TreePath,int[]) nodesChanged(TreePath[], int[])}</li>
+ * <li>{@link NotifiableTreeModel#nodesChanged(TreePath, int[]) nodesChanged(TreePath[], int[])}</li>
  *
  * <li>{@link NotifiableTreeModel#nodesChanged(TreePath) nodesChanged(TreePath)}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesWereInserted(TreePath,int[]) nodesWereInserted(TreePath),
- * int[])}</li>
+ * <li>{@link NotifiableTreeModel#nodesWereInserted(TreePath, int[]) nodesWereInserted(TreePath), int[])}</li>
  *
- * <li>{@link NotifiableTreeModel#nodesWereRemoved(TreePath,int[],Object[]) nodesWereRemoved(TreePath,
- * int[], Object[])}</li>
+ * <li>{@link NotifiableTreeModel#nodesWereRemoved(TreePath, int[], Object[]) nodesWereRemoved(TreePath, int[], Object[])}</li>
  *
  * </li></ul>
  *
  * <ul>
  *
- * <li>It provides a <em>basic</em> implementation for all {@link MutableTreeModel MutableTreeModels} methods.
- * <em>Basic</em> means that it handles all the notification stuff, but leafes the actual insetion/removal to the
- * implementeation by providing an abstract method to implement:
+ * <li>It provides a <em>basic</em> implementation for all {@link MutableTreeModel MutableTreeModels} methods. <em>Basic</em> means that it handles all the notification stuff, but leafes the actual insetion/removal to the implementeation by providing an abstract method to implement:
  *
  * <ul>
  *
- * <li>{@link MutableTreeModel#removeFromParent(TreePath) removeFromParent(TreePath)} calls abstract
- * {@link #remove remove(Object, TreePath)} to do the actual removal.</li>
+ * <li>{@link MutableTreeModel#removeFromParent(TreePath) removeFromParent(TreePath)} calls abstract {@link #remove remove(Object, TreePath)} to do the actual removal.</li>
  *
- * <li>{@link MutableTreeModel#insertInto(TreePath, TreePath,int) insertInto(TreePath,
- * TreePath, int)} calls abstract {@link #insert insert(TreePath, TreePath, int)} to do the actual insertion.</li>
+ * <li>{@link MutableTreeModel#insertInto(TreePath, TreePath, int) insertInto(TreePath, TreePath, int)} calls abstract {@link #insert insert(TreePath, TreePath, int)} to do the actual insertion.</li>
  *
  * </ul>
  *
  * </ul>
  *
- * <li>It provides some convenience methods for clients that want to manipulate the tree. They do the automatic
- * notification of listeners:
+ * <li>It provides some convenience methods for clients that want to manipulate the tree. They do the automatic notification of listeners:
  *
  * <ul>
  *
  * <li>{@link #removeFromParent(TreePath[]) remove(TreePath[])}</li>
  *
- * <li>{@link #insertInto(Object, TreePath,int) insert(Object, TreePath)}</li>
+ * <li>{@link #insertInto(Object, TreePath, int) insert(Object, TreePath)}</li>
  *
  * </li></ul>
  *
  * </ul>
  *
- * It remains to the implementation of this class to provide the remaining methods of {@link TreeModel TreeModel} and
- * all methods of {@link MutableTreeModel MutableTreeModel}.
+ * It remains to the implementation of this class to provide the remaining methods of {@link TreeModel TreeModel} and all methods of {@link MutableTreeModel MutableTreeModel}.
  *
- * <p/>To use the model to remove nodes, a client may use the convenience method {@link
- * #removeFromParent(TreePath)}  remove}.
+ * <p/>To use the model to remove nodes, a client may use the convenience method {@link #removeFromParent(TreePath)}  remove}.
  *
  * <pre>
  * TreePath path = getPathToNodeWhereNewChildIsToBeInserted();
@@ -180,10 +163,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
 
     // NotifiableTreeModel
 
-    /**
-     * Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of
-     * its listeners that the model has changed.
-     */
+    /** Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of its listeners that the model has changed. */
     public void reload()
     {
         final Object root = getRoot();
@@ -197,10 +177,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of
-     * its listeners that the model has changed below the path <code>path</code> (PENDING).
-     */
+    /** Invoke this method if you've modified the TreeNodes upon which this model depends.  The model will notify all of its listeners that the model has changed below the path <code>path</code> (PENDING). */
     public void reload( final TreePath path )
     {
         if ( path != null )
@@ -209,9 +186,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method after you've changed how path is to be represented in the tree.
-     */
+    /** Invoke this method after you've changed how path is to be represented in the tree. */
     public void nodeChanged( final TreePath path )
     {
         if ( listenerList != null && path != null )
@@ -233,18 +208,13 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method after you've changed how path is to be represented in the tree.
-     */
+    /** Invoke this method after you've changed how path is to be represented in the tree. */
     public void nodeChanged( final Object node )
     {
         nodeChanged( TreeUtils.findPathInTreeModel( this, node ) );
     }
 
-    /**
-     * Invoke this method after you've changed how the children identified by childIndicies are to be represented in the
-     * tree.
-     */
+    /** Invoke this method after you've changed how the children identified by childIndicies are to be represented in the tree. */
     public void nodesChanged( final TreePath parentPath, final int[] childIndices )
     {
         if ( childIndices == null )
@@ -267,9 +237,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method if you've totally changed the children of path and its childrens children.
-     */
+    /** Invoke this method if you've totally changed the children of path and its childrens children. */
     public void nodesChanged( final TreePath path )
     {
         if ( path != null )
@@ -278,10 +246,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method after you've inserted some TreeNodes into path.  childIndices should be the index of the new
-     * elements and must be sorted in ascending order.
-     */
+    /** Invoke this method after you've inserted some TreeNodes into path.  childIndices should be the index of the new elements and must be sorted in ascending order. */
     public void nodesWereInserted( final TreePath parentPath, final int[] childIndices )
     {
         if ( listenerList != null && parentPath != null && childIndices != null && childIndices.length > 0 )
@@ -297,11 +262,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
         }
     }
 
-    /**
-     * Invoke this method after you've removed some TreeNodes from path.  childIndices should be the index of the
-     * removed elements and must be sorted in ascending order. And removedChildren should be the array of the children
-     * objects that were removed.
-     */
+    /** Invoke this method after you've removed some TreeNodes from path.  childIndices should be the index of the removed elements and must be sorted in ascending order. And removedChildren should be the array of the children objects that were removed. */
     public void nodesWereRemoved( final TreePath parentPath, final int[] childIndices, final Object[] removedChildren )
     {
         if ( parentPath != null && childIndices != null )
@@ -311,8 +272,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     }
 
     /**
-     * Call this method to remove nodes. Handles proparation of a TreeModelEvent and calls {@link #remove remove(Object,
-     * TreePath)}. Notifies listeners.
+     * Call this method to remove nodes. Handles proparation of a TreeModelEvent and calls {@link #remove remove(Object, TreePath)}. Notifies listeners.
      *
      * @param path the child to remove
      */
@@ -341,8 +301,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     //--- Utilities
 
     /**
-     * Convenience method to remove several nodes from this model. Calls {@link #removeFromParent(TreePath)
-     * removeFromParent(TreePath)} for each array element, that in turn notifies listeners.
+     * Convenience method to remove several nodes from this model. Calls {@link #removeFromParent(TreePath) removeFromParent(TreePath)} for each array element, that in turn notifies listeners.
      *
      * @param childPaths an array of paths to remove
      */
@@ -355,8 +314,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     }
 
     /**
-     * Convenience method to insert a new object into this model. Calls {@link #insertInto(TreePath,
-     * TreePath,int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
+     * Convenience method to insert a new object into this model. Calls {@link #insertInto(TreePath, TreePath, int) insertInto(TreePath, TreePath, int)} that in turn notifies listeners.
      *
      * @param child  the object to insert
      * @param parent the path to insert it to
@@ -369,9 +327,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     //--- This interface
 
     /**
-     * Implement this method to do the actual removal of the child from the parent. Do not call any listener
-     * notifications. This is handled for you from the calling method {@link #removeFromParent(TreePath)
-     * removeFromParent(TreePath)}.
+     * Implement this method to do the actual removal of the child from the parent. Do not call any listener notifications. This is handled for you from the calling method {@link #removeFromParent(TreePath) removeFromParent(TreePath)}.
      *
      * @param child      the child to remove
      * @param parentPath the parent to remove it from
@@ -379,9 +335,7 @@ public abstract class AbstractTreeModel extends Model implements NotifiableTreeM
     protected abstract void remove( Object child, TreePath parentPath );
 
     /**
-     * Implement this method to insert a childPath into the parentPath at the given position. Do not notify listeners as
-     * that is done by the calling method {@link #insertInto(TreePath, TreePath,int)
-     * insertInto(TreePath, TreePath, int)}.
+     * Implement this method to insert a childPath into the parentPath at the given position. Do not notify listeners as that is done by the calling method {@link #insertInto(TreePath, TreePath, int) insertInto(TreePath, TreePath, int)}.
      *
      * @param childPath  the child to insert
      * @param parentPath the parent to insert it to

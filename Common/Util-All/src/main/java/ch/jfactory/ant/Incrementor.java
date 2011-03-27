@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.ant;
 
 import java.io.File;
@@ -10,26 +19,18 @@ import org.apache.tools.ant.Task;
  */
 public abstract class Incrementor extends Task
 {
-    /**
-     * The manifest file file.
-     */
+    /** The manifest file file. */
     private File file = null;
 
-    /**
-     * The variable to replace.
-     */
+    /** The variable to replace. */
     private String variable = null;
 
     private boolean debug = false;
 
-    /**
-     * If set to true, ncrements to the next odd number. Default is false.
-     */
+    /** If set to true, ncrements to the next odd number. Default is false. */
     private boolean odd = false;
 
-    /**
-     * Enables the incrementation into odd or even numbers.
-     */
+    /** Enables the incrementation into odd or even numbers. */
     private boolean steps = false;
 
     /**
@@ -48,8 +49,7 @@ public abstract class Incrementor extends Task
     }
 
     /**
-     * Sets the variable attribute of the ManifestFile object. The vairable parameter supports sections. To identify a
-     * section of the manifest file, use the dot separator. I.e given the following Manifest file:
+     * Sets the variable attribute of the ManifestFile object. The vairable parameter supports sections. To identify a section of the manifest file, use the dot separator. I.e given the following Manifest file:
      * <pre>
      * Manifest-Version: 1.0
      * <p/>
@@ -60,8 +60,7 @@ public abstract class Incrementor extends Task
      * MinorVersion: 0
      * BuildVersion: 73
      * </pre>
-     * The variable <code>UpdateableJar.BuildVersion</code> is the line <code>BuildVersion</code> in section
-     * <code>UpdateableJar</code> that will be updated.
+     * The variable <code>UpdateableJar.BuildVersion</code> is the line <code>BuildVersion</code> in section <code>UpdateableJar</code> that will be updated.
      *
      * @param variable The new variable value
      */

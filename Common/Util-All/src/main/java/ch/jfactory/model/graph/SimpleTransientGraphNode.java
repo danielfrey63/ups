@@ -1,28 +1,29 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.model.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * This node is used as a temporary GraphNode which is not saved. All its links (GraphEdges) wont be saved neither.
- * Associated GraphNodes wont have any role or rank. Trying to filter associated GraphNodes will return the full set of
- * associated GraphNodes.
+ * This node is used as a temporary GraphNode which is not saved. All its links (GraphEdges) wont be saved neither. Associated GraphNodes wont have any role or rank. Trying to filter associated GraphNodes will return the full set of associated GraphNodes.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:58 $
  */
 public class SimpleTransientGraphNode extends AbsSimpleGraphNode
 {
-    /**
-     * Mapping between nodes that are used in other <code>SimpleTransientGraphNode</code>s as children and these other
-     * instances.
-     */
+    /** Mapping between nodes that are used in other <code>SimpleTransientGraphNode</code>s as children and these other instances. */
     private static final HashMap<GraphNode, ArrayList<GraphNode>> childrenReferences = new HashMap<GraphNode, ArrayList<GraphNode>>();
 
-    /**
-     * Mapping between nodes that are used in other <code>SimpleTransientGraphNode</code>s as parents and these other
-     * instances.
-     */
+    /** Mapping between nodes that are used in other <code>SimpleTransientGraphNode</code>s as parents and these other instances. */
     private static final HashMap<GraphNode, ArrayList<GraphNode>> parentsReferences = new HashMap<GraphNode, ArrayList<GraphNode>>();
 
     /** References to children <code>SimpleTransientGraphNode</code>s. */

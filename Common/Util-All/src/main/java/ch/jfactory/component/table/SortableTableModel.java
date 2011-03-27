@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.component.table;
 
 import ch.jfactory.lang.ArrayUtils;
@@ -133,8 +142,7 @@ public class SortableTableModel extends AbstractTableModel
     }
 
     /**
-     * Moves the values at the given positions by one position up. No action is taken if the positions contain already
-     * the topmost index (0).
+     * Moves the values at the given positions by one position up. No action is taken if the positions contain already the topmost index (0).
      *
      * @param indices the positions array
      * @return the same array but with the new positions
@@ -149,8 +157,7 @@ public class SortableTableModel extends AbstractTableModel
     }
 
     /**
-     * Moves the values at the given positions by one position down. No action is taken if the positions contain already
-     * the last index (length of the internal index table).
+     * Moves the values at the given positions by one position down. No action is taken if the positions contain already the last index (length of the internal index table).
      *
      * @param indices the positions array
      * @return the same array but with the new positions
@@ -165,8 +172,7 @@ public class SortableTableModel extends AbstractTableModel
     }
 
     /**
-     * Shifts the given indices by the given delta. Swaps each value at each index with the value at each index plus
-     * delta.
+     * Shifts the given indices by the given delta. Swaps each value at each index with the value at each index plus delta.
      *
      * @param indices the indices to shift
      * @param delta   the offset to shift

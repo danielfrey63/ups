@@ -1,7 +1,12 @@
 /*
- * Copyright (c) 2008, Your Corporation. All Rights Reserved.
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.component;
 
 import java.awt.Color;
@@ -32,39 +37,25 @@ import org.slf4j.LoggerFactory;
  */
 public class ClockPanel extends JPanel implements ActionListener
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( ClockPanel.class );
 
-    /**
-     * The offscreen image.
-     */
+    /** The offscreen image. */
     private Image offScreenImage;
 
-    /**
-     * The offscreen graphics.
-     */
+    /** The offscreen graphics. */
     private Graphics2D offScreenGraphics;
 
-    /**
-     * The date string.
-     */
+    /** The date string. */
     private String date;
 
-    /**
-     * The background timer.
-     */
+    /** The background timer. */
     private Timer timer;
 
-    /**
-     * The date format. Parametrize if necessary...
-     */
+    /** The date format. Parametrize if necessary... */
     private static final DateFormat formatter = new SimpleDateFormat( "EEEE d.M.yyyy HH:mm:ss" );
 
-    /**
-     * Inits the clock object.
-     */
+    /** Inits the clock object. */
     public ClockPanel()
     {
         init();
@@ -78,9 +69,7 @@ public class ClockPanel extends JPanel implements ActionListener
         initOffscreenImage();
     }
 
-    /**
-     * Start the timer.
-     */
+    /** Start the timer. */
     public void start()
     {
         if ( timer == null )
@@ -91,9 +80,7 @@ public class ClockPanel extends JPanel implements ActionListener
         }
     }
 
-    /**
-     * Stop the timer.
-     */
+    /** Stop the timer. */
     public void stop()
     {
         if ( timer != null )
@@ -104,9 +91,7 @@ public class ClockPanel extends JPanel implements ActionListener
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void actionPerformed( final ActionEvent actionEvent )
     {
         date = formatter.format( new Date() );
@@ -116,9 +101,7 @@ public class ClockPanel extends JPanel implements ActionListener
         repaint();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void paint( final Graphics graphics )
     {
         initOffscreenImage();

@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.file;
 
@@ -22,42 +15,32 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
 /**
- * A JFileChooser embeded in a JDialog with a help text in the north. To use this class overwrite the method {@link
- * #save(File)}. Optionally you may overwrite {@link #cleanUpFileName(File)} for checks or change a file
- * name.
+ * A JFileChooser embeded in a JDialog with a help text in the north. To use this class overwrite the method {@link #save(File)}. Optionally you may overwrite {@link #cleanUpFileName(File)} for checks or change a file name.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.4 $
  */
 public class SaveChooser extends AbstractChooser
 {
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public SaveChooser( final FileFilter filter, final String base, final File initialDir )
     {
         super( null, filter, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public SaveChooser( final FileFilter filter, final String base, final String initialDir )
     {
         super( null, filter, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public SaveChooser( final int selectionMode, final String base, final File initialDir )
     {
         super( null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public SaveChooser( final int selectionMode, final String base, final String initialDir )
     {
         super( null, selectionMode, base, initialDir, JFileChooser.SAVE_DIALOG );
@@ -95,8 +78,7 @@ public class SaveChooser extends AbstractChooser
     }
 
     /**
-     * Overwrite this method if you want to doublecheck or even change the file name before any checking for overwriting
-     * is done.
+     * Overwrite this method if you want to doublecheck or even change the file name before any checking for overwriting is done.
      *
      * @param file the original file choosen
      * @return the cleaned up file
@@ -107,8 +89,7 @@ public class SaveChooser extends AbstractChooser
     }
 
     /**
-     * Overwrite this method to invoke an action to save the file after it has been checked for overwriting and name
-     * cleanup.
+     * Overwrite this method to invoke an action to save the file after it has been checked for overwriting and name cleanup.
      *
      * @param file
      */

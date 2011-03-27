@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * TreeFinderModel.java
- *
- * Created on 11. Juli 2002, 13:56
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -20,8 +21,7 @@ import javax.swing.tree.TreePath;
  * myTreeFinder.find(myString);
  * final TreePath pathFound = myTreeFinder.get();
  * </pre>
- * If no node is found, <code>get()</code> returns <code>null</code>. If you want to select the corresponding node in a
- * tree, one option is to use {@link SearchableTree} which implements the {@link TreeFinder} interface.
+ * If no node is found, <code>get()</code> returns <code>null</code>. If you want to select the corresponding node in a tree, one option is to use {@link SearchableTree} which implements the {@link TreeFinder} interface.
  * <pre>
  * final SearchableTree myTree = new SearchableTree(myTreeModel);
  * final TreeFinderModel myTreeFinder = new TreeFinderModel(myTreeModel);
@@ -127,9 +127,7 @@ public class TreeFinderModel extends Observable
         }
     }
 
-    /**
-     * @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction.
-     */
+    /** @return <tt>true</tt> if the list iterator has more elements when traversing the list in the forward direction. */
     public boolean hasNext()
     {
         return current < getCount() - 1;
@@ -189,8 +187,7 @@ public class TreeFinderModel extends Observable
     }
 
     /**
-     * A recursive method that loops through all children of a given TreePath and searches in each node for the
-     * specified search string.
+     * A recursive method that loops through all children of a given TreePath and searches in each node for the specified search string.
      *
      * @param tp Description of the Parameter
      */

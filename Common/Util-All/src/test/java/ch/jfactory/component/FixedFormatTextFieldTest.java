@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -25,9 +25,7 @@ import junit.extensions.abbot.ComponentTestFixture;
  */
 public class FixedFormatTextFieldTest extends ComponentTestFixture
 {
-    /**
-     * The abbot tester.
-     */
+    /** The abbot tester. */
     private ComponentTester tester;
 
     /**
@@ -40,17 +38,13 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture
         super( base );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     protected void setUp()
     {
         tester = new ComponentTester();
     }
 
-    /**
-     * Tests the creation of a field.
-     */
+    /** Tests the creation of a field. */
     public void testDefaultPatterns()
     {
         doTestDefault( "NN-NNN", "12-345" );
@@ -98,9 +92,7 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture
         assertTrue( "Expected exception not thrown for pattern " + pattern + " and string " + def, exceptionOccured );
     }
 
-    /**
-     * Tests for simple inserts.
-     */
+    /** Tests for simple inserts. */
     public void testSimpleTyping()
     {
         doSimpleInsert( "NN.NNN", "11.111", 0, "99999", "99.999" );
@@ -108,9 +100,7 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture
         doSimpleInsert( "N x-.N", "1 x-.1", 0, "99", "9 x-.9" );
     }
 
-    /**
-     * Tests simple inserts but with overlength chunks. A beep should be posted.
-     */
+    /** Tests simple inserts but with overlength chunks. A beep should be posted. */
     public void testOverlengthTyping()
     {
         doSimpleInsert( "NN.NNN", "11.111", 0, "999999", "99.999" );
@@ -118,9 +108,7 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture
         doSimpleInsert( "NN.NNN", "11.111", 4, "999", "11.199" );
     }
 
-    /**
-     * Test chopped inserts that produce a system beep.
-     */
+    /** Test chopped inserts that produce a system beep. */
     public void testChoppedInserts()
     {
         // Point is not inserted
@@ -150,9 +138,7 @@ public class FixedFormatTextFieldTest extends ComponentTestFixture
         assertEquals( "The expected result " + result + " does not match " + text, text, result );
     }
 
-    /**
-     * Tests a simple paste of a string.
-     */
+    /** Tests a simple paste of a string. */
     public void testPaste()
     {
         doPaste( "NN-NNN", "11-111", 1, "99", "11-111" );

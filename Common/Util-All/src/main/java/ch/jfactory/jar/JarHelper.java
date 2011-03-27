@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.jar;
 
 import ch.jfactory.jar.sign.JarSigner;
@@ -15,14 +24,10 @@ import sun.tools.jar.Main;
  */
 public final class JarHelper
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( JarHelper.class );
 
-    /**
-     * Hide constructor.
-     */
+    /** Hide constructor. */
     private JarHelper()
     {
     }
@@ -31,8 +36,7 @@ public final class JarHelper
      * Builds a jar file.
      *
      * @param jar      the full path and name of the JAR file to build
-     * @param dir      the directory to which to change in order to pack the files. They will be packed relatively to
-     *                 that directory
+     * @param dir      the directory to which to change in order to pack the files. They will be packed relatively to that directory
      * @param filename the name of the file within the JAR
      * @throws Exception passed through
      */

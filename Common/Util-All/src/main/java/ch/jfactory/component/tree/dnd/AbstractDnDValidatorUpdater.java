@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree.dnd;
 
@@ -20,14 +20,11 @@ import javax.swing.tree.TreePath;
  */
 public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
 {
-    /**
-     * The tree model used for updates
-     */
+    /** The tree model used for updates */
     private NotifiableTreeModel model;
 
     /**
-     * If the tree can be given upon creation, this is the better way. See {@link NotifiableTreeModel} for further
-     * infos.
+     * If the tree can be given upon creation, this is the better way. See {@link NotifiableTreeModel} for further infos.
      *
      * @param model the model used for this validator
      */
@@ -36,10 +33,7 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
         setModel( model );
     }
 
-    /**
-     * A cyclic dependency between this and the calling object might make it impossible to allocate the JTree before
-     * constructing this object. Use {@link #setModel(NotifiableTreeModel)} to register the model later.
-     */
+    /** A cyclic dependency between this and the calling object might make it impossible to allocate the JTree before constructing this object. Use {@link #setModel(NotifiableTreeModel)} to register the model later. */
     public AbstractDnDValidatorUpdater()
     {
     }
@@ -64,27 +58,21 @@ public abstract class AbstractDnDValidatorUpdater implements DnDValidatorUpdater
         this.model = model;
     }
 
-    /**
-     * @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int)
-     */
+    /** @see DnDValidatorUpdater #insertInto(TreePath, TreePath, int) */
     public void insertInto( final TreePath missile, final TreePath parent, final int pos )
     {
         getModel().insertInto( missile, parent, pos );
         updateNodesChanged();
     }
 
-    /**
-     * @see DnDValidatorUpdater #removeFromParent(TreePath)
-     */
+    /** @see DnDValidatorUpdater #removeFromParent(TreePath) */
     public void removeFromParent( final TreePath missile )
     {
         getModel().removeFromParent( missile );
         updateNodesChanged();
     }
 
-    /**
-     * Informes the subclass of a change in the node structure.
-     */
+    /** Informes the subclass of a change in the node structure. */
     public abstract void updateNodesChanged();
 }
 

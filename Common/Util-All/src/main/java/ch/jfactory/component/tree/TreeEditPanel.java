@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * TreeAwarePanel.java
- *
- * Created on 8.7.2002 17:19
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -35,8 +36,7 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 /**
- * A panel that implements the TreeSelectionListener to be able to pass it to the {@link
- * com.ethz.geobot.herbar.entry.common.TreeMutator}. This panel allows insertion and deletion of nodes into a tree.
+ * A panel that implements the TreeSelectionListener to be able to pass it to the {@link com.ethz.geobot.herbar.entry.common.TreeMutator}. This panel allows insertion and deletion of nodes into a tree.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.4 $ $Date: 2006/03/22 15:05:10 $
@@ -210,41 +210,31 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         return enababelPopup;
     }
 
-    /**
-     * @see TreeSelectionListener #valueChanged(TreeSelectionEvent)
-     */
+    /** @see TreeSelectionListener #valueChanged(TreeSelectionEvent) */
     public void valueChanged( final TreeSelectionEvent tse )
     {
         updateControls();
     }
 
-    /**
-     * @see DocumentListener#changedUpdate(DocumentEvent)
-     */
+    /** @see DocumentListener#changedUpdate(DocumentEvent) */
     public void changedUpdate( final DocumentEvent e )
     {
         updateControls();
     }
 
-    /**
-     * @see DocumentListener#insertUpdate(DocumentEvent)
-     */
+    /** @see DocumentListener#insertUpdate(DocumentEvent) */
     public void insertUpdate( final DocumentEvent e )
     {
         changedUpdate( e );
     }
 
-    /**
-     * @see DocumentListener#removeUpdate(DocumentEvent)
-     */
+    /** @see DocumentListener#removeUpdate(DocumentEvent) */
     public void removeUpdate( final DocumentEvent e )
     {
         changedUpdate( e );
     }
 
-    /**
-     * @see ActionListener#actionPerformed(ActionEvent)
-     */
+    /** @see ActionListener#actionPerformed(ActionEvent) */
     public void actionPerformed( final ActionEvent ae )
     {
         // Keep state of expanded nodes in the tree
@@ -276,20 +266,13 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         ter.restore();
     }
 
-    /**
-     * Default behaviour of the delete button is to be enabled as soon as any item is selected in the tree. Overwrite
-     * this method if you wish to have another behaviour for the delete button.
-     */
+    /** Default behaviour of the delete button is to be enabled as soon as any item is selected in the tree. Overwrite this method if you wish to have another behaviour for the delete button. */
     protected boolean isDeletionAllowed()
     {
         return getTree().getSelectionCount() > 0;
     }
 
-    /**
-     * Default behaviour of the new button is to be enabled as soon as any valid item is selected from the popup, the
-     * edit field is not empty, and any item is selected in the tree. Overwrite this method if you wish to have another
-     * behaviour for the new button.
-     */
+    /** Default behaviour of the new button is to be enabled as soon as any valid item is selected from the popup, the edit field is not empty, and any item is selected in the tree. Overwrite this method if you wish to have another behaviour for the new button. */
     protected boolean isNewAllowed( final boolean isPopupValid, final String newText,
                                     final TreePath[] selections )
     {
@@ -299,10 +282,7 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
         return result;
     }
 
-    /**
-     * Returns whether the root node is selected. May be used in addition to isNewAllowed and isDeletionAllowed to
-     * determine state of buttons.
-     */
+    /** Returns whether the root node is selected. May be used in addition to isNewAllowed and isDeletionAllowed to determine state of buttons. */
     protected boolean isRootSelected()
     {
         final JTree tree = getTree();
@@ -311,36 +291,28 @@ public abstract class TreeEditPanel extends JPanel implements TreeSelectionListe
     }
 
     /**
-     * The <code>TreeEditPanel</code> uses a popup to represent different types of nodes that may be constructed. This
-     * method should return which types are enabled at a given state. <p/> To determine the valid node types, the usual
-     * method is to access the tree and get the selected node. Dependent on this node, the valid ones may be
-     * determined.<p> <p/> Note: Reference identity is used to enable/disable the popup entries. So make sure to deliver
-     * the same objects as delivered by {@link #getNodeTypes()}.
+     * The <code>TreeEditPanel</code> uses a popup to represent different types of nodes that may be constructed. This method should return which types are enabled at a given state. <p/> To determine the valid node types, the usual method is to access the tree and get the selected node. Dependent on this node, the valid ones may be determined.<p> <p/> Note: Reference identity is used to enable/disable the popup entries. So make sure to deliver the same objects as delivered by {@link #getNodeTypes()}.
      *
      * @return the valid Objects
      */
     protected abstract Object[] getValidNodeTypes();
 
     /**
-     * The <code>TreeEditPanel</code> uses a popup to represent different types of nodes that may be constructed. All
-     * node types that are available should be returned by this method. A new node will be of one of these types.
+     * The <code>TreeEditPanel</code> uses a popup to represent different types of nodes that may be constructed. All node types that are available should be returned by this method. A new node will be of one of these types.
      *
      * @return all Objects used as a option
      */
     protected abstract Object[] getNodeTypes();
 
     /**
-     * If this method is called, the tree has in any case a selected path. The purpose of this method is to update the
-     * data model (model side). The tree side of the task is acomplished by the superclass (i.e. restoring of the
-     * expanded nodes).
+     * If this method is called, the tree has in any case a selected path. The purpose of this method is to update the data model (model side). The tree side of the task is acomplished by the superclass (i.e. restoring of the expanded nodes).
      *
      * @return the TreePath for the new inserted node
      */
     protected abstract TreePath insertNewItem();
 
     /**
-     * This method should delete all items selected in the tree from the data model and return <code>TreePath</code>s of
-     * the deleted nodes.
+     * This method should delete all items selected in the tree from the data model and return <code>TreePath</code>s of the deleted nodes.
      *
      * @return an array of <code>TreePath</code>s representing the deleted nodes
      */

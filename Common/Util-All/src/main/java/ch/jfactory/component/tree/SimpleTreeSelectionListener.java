@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -24,14 +24,10 @@ import org.apache.commons.collections.IteratorUtils;
  */
 public class SimpleTreeSelectionListener implements TreeSelectionListener
 {
-    /**
-     * The nodes selected.
-     */
+    /** The nodes selected. */
     private TreePath[] selectionPaths = new TreePath[0];
 
-    /**
-     * The tree to restore the selections on.
-     */
+    /** The tree to restore the selections on. */
     private final JTree tree;
 
     /**
@@ -44,9 +40,7 @@ public class SimpleTreeSelectionListener implements TreeSelectionListener
         this.tree = tree;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void valueChanged( final TreeSelectionEvent treeSelectionEvent )
     {
         final TreePath[] selectionPaths = tree.getSelectionPaths();
@@ -56,17 +50,13 @@ public class SimpleTreeSelectionListener implements TreeSelectionListener
         }
     }
 
-    /**
-     * Restore the selection.
-     */
+    /** Restore the selection. */
     public void restore()
     {
         tree.getSelectionModel().setSelectionPaths( selectionPaths );
     }
 
-    /**
-     * Call this method if the tree model has been exchanged and you want to keep the selected nodes.
-     */
+    /** Call this method if the tree model has been exchanged and you want to keep the selected nodes. */
     public void translate()
     {
         final Collection matches = TreeUtils.matchPaths( IteratorUtils.arrayIterator( selectionPaths ), tree.getModel() );

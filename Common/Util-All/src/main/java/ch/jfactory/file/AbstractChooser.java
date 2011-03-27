@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.file;
 
@@ -42,34 +35,22 @@ import javax.swing.filechooser.FileFilter;
  */
 public abstract class AbstractChooser extends AbstractDialog
 {
-    /**
-     * The key base string to access resource strings.
-     */
+    /** The key base string to access resource strings. */
     protected String base;
 
-    /**
-     * The frame title of the error dialog displayed when implementing {@link #checkFiles(File[])}.
-     */
+    /** The frame title of the error dialog displayed when implementing {@link #checkFiles(File[])}. */
     protected String keyErrorTitle;
 
-    /**
-     * The text of the error dialog displayed when implementing {@link #checkFiles(File[])}.
-     */
+    /** The text of the error dialog displayed when implementing {@link #checkFiles(File[])}. */
     protected String keyErrorText;
 
-    /**
-     * The panel displaying the help text.
-     */
+    /** The panel displaying the help text. */
     private I15nHeaderPanel headerPanel;
 
-    /**
-     * The file chooser.
-     */
+    /** The file chooser. */
     private JFileChooser chooser;
 
-    /**
-     * The base key for retrieving the resource strings.
-     */
+    /** The base key for retrieving the resource strings. */
 
     private FileFilter filter;
 
@@ -95,7 +76,7 @@ public abstract class AbstractChooser extends AbstractDialog
      *
      * <p/>
      *
-     * See {@link #AbstractChooser(JFrame, FileFilter,String, File,int)}.
+     * See {@link #AbstractChooser(JFrame, FileFilter, String, File, int)}.
      *
      * @param filter     the file filter
      * @param base       the base string to retrieve system properties from
@@ -108,8 +89,7 @@ public abstract class AbstractChooser extends AbstractDialog
     }
 
     /**
-     * Creates a new SaveChooser. The strings used in the chooser are composed using based on resource strings. The base
-     * resource key is extended for the required strings as follows:
+     * Creates a new SaveChooser. The strings used in the chooser are composed using based on resource strings. The base resource key is extended for the required strings as follows:
      *
      * <ul>
      *
@@ -125,8 +105,7 @@ public abstract class AbstractChooser extends AbstractDialog
      *
      * </ul>
      *
-     * If you pass in a ExtentionFileFilter for the filter argument, then matching and completing of file names is done
-     * automatically.
+     * If you pass in a ExtentionFileFilter for the filter argument, then matching and completing of file names is done automatically.
      *
      * @param owner      the parent frame
      * @param filter     the file filter
@@ -188,9 +167,7 @@ public abstract class AbstractChooser extends AbstractDialog
         return files;
     }
 
-    /**
-     * Inits the common stuff.
-     */
+    /** Inits the common stuff. */
     protected void initLayout()
     {
         chooser = new JFileChooser( directory );
@@ -297,9 +274,7 @@ public abstract class AbstractChooser extends AbstractDialog
 
     protected abstract void execute( File[] files );
 
-    /**
-     * Called when all files have been processed. Dummy implementation.
-     */
+    /** Called when all files have been processed. Dummy implementation. */
     protected void doEnd()
     {
     }
@@ -333,9 +308,7 @@ public abstract class AbstractChooser extends AbstractDialog
         return file;
     }
 
-    /**
-     * Wrapper to add an action listener
-     */
+    /** Wrapper to add an action listener */
     private void addListener()
     {
         getChooser().addActionListener( new ActionListener()

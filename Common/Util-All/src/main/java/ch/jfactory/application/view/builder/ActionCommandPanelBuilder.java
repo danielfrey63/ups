@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.application.view.builder;
 
@@ -33,15 +26,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This panel builder handles the instantiation and the configration of a {@link CommandManager CommandManager} object.
- * If you want to use it, make sure to have a <code>command.xml</code> and a set of properties in a file
- * <code>command.properties</code> in the same package as the subclass you build. This abstract class implements the
- * {@link Builder#getPanel()} method and calls subsequently:
+ * This panel builder handles the instantiation and the configration of a {@link CommandManager CommandManager} object. If you want to use it, make sure to have a <code>command.xml</code> and a set of properties in a file <code>command.properties</code> in the same package as the subclass you build. This abstract class implements the {@link Builder#getPanel()} method and calls subsequently:
  *
  * <ol>
  *
- * <li>{@link #initCommands()}: overwrite this method to init the {@link ActionCommand ActionCommand}s for the command
- * manager.</li>
+ * <li>{@link #initCommands()}: overwrite this method to init the {@link ActionCommand ActionCommand}s for the command manager.</li>
  *
  * <li>{@link #createMainPanel()}: overwrite this method to build the content panel.</li>
  *
@@ -144,19 +133,12 @@ public abstract class ActionCommandPanelBuilder implements Builder
         }
     }
 
-    /**
-     * Init action commands in this implementation. This is an adapter (empty) implementaiton for this method (no need
-     * to call super).
-     */
+    /** Init action commands in this implementation. This is an adapter (empty) implementaiton for this method (no need to call super). */
     protected void initCommands()
     {
     }
 
-    /**
-     * If you want to insert commands to subpanels, these have to be inserted <em>after</em> the subpanels have been
-     * built. Override this method to init commands which rely on a subpanels command manager. This is an adapter
-     * (empty) implementaiton for this method (no need to call super).
-     */
+    /** If you want to insert commands to subpanels, these have to be inserted <em>after</em> the subpanels have been built. Override this method to init commands which rely on a subpanels command manager. This is an adapter (empty) implementaiton for this method (no need to call super). */
     protected void initSubpanelCommands()
     {
     }
@@ -171,16 +153,12 @@ public abstract class ActionCommandPanelBuilder implements Builder
         return new JPanel();
     }
 
-    /**
-     * This is an adapter (empty) implementaiton for this method (no need to call super).
-     */
+    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
     protected void initModelListeners()
     {
     }
 
-    /**
-     * This is an adapter (empty) implementaiton for this method (no need to call super).
-     */
+    /** This is an adapter (empty) implementaiton for this method (no need to call super). */
     protected void initComponentListeners()
     {
     }

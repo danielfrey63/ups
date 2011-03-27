@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * ComponentFocusListener.java
- *
- * Created on Feb 6, 2003 4:57:56 PM
- * Created by Daniel
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.action;
 
@@ -22,8 +23,7 @@ import javax.swing.KeyStroke;
 import javax.swing.text.JTextComponent;
 
 /**
- * Transfers the default button to the given one uppon gain of focus in the component where this is registered, and
- * reasignes the default button to the former one uppon lose of focus.
+ * Transfers the default button to the given one uppon gain of focus in the component where this is registered, and reasignes the default button to the former one uppon lose of focus.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
@@ -35,8 +35,7 @@ public class ComponentFocusListener implements FocusListener
     private final JButton buttonToFocus;
 
     /**
-     * Register a handler to change the default button if the component has the focus. The return key is used to
-     * activate the button within the given component.
+     * Register a handler to change the default button if the component has the focus. The return key is used to activate the button within the given component.
      *
      * @param component JComponent which should trigger the default button change
      * @param button    default button of the component

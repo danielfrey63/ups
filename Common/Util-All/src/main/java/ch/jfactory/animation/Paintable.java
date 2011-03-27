@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation;
 
 import java.awt.Graphics2D;
@@ -29,25 +21,16 @@ import java.util.List;
  */
 public abstract class Paintable implements Runnable
 {
-    /**
-     * The list of {@link StopListener}s that will be notified upon termination of this painting
-     * thread.
-     */
+    /** The list of {@link StopListener}s that will be notified upon termination of this painting thread. */
     private final List stopListeners = new ArrayList();
 
-    /**
-     * The associated {@link AnimationQueue}.
-     */
+    /** The associated {@link AnimationQueue}. */
     private transient AnimationQueue animation;
 
-    /**
-     * The painting thread.
-     */
+    /** The painting thread. */
     private transient Thread runner;
 
-    /**
-     * The state of the painting thread. If set to false, the thread will stop.
-     */
+    /** The state of the painting thread. If set to false, the thread will stop. */
     private transient boolean run;
 
     /**
@@ -60,9 +43,7 @@ public abstract class Paintable implements Runnable
         this.animation = animation;
     }
 
-    /**
-     * Start background repainting thread.
-     */
+    /** Start background repainting thread. */
     public void start()
     {
         run = true;
@@ -75,9 +56,7 @@ public abstract class Paintable implements Runnable
         }
     }
 
-    /**
-     * Stop background repainting thread.
-     */
+    /** Stop background repainting thread. */
     public void stop()
     {
         run = false;
@@ -127,8 +106,7 @@ public abstract class Paintable implements Runnable
     }
 
     /**
-     * <p>Returns the running state of the paining thread. If false, the thread will die or has died.</p> <p>To set the
-     * running state to false, use {@link #stop}, to set it to true {@link #start}.
+     * <p>Returns the running state of the paining thread. If false, the thread will die or has died.</p> <p>To set the running state to false, use {@link #stop}, to set it to true {@link #start}.
      *
      * @return the running state
      */

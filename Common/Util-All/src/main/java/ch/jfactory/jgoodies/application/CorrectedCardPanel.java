@@ -1,10 +1,12 @@
 /*
- * Copyright (c) Sun Microsystems.
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * JGoodies Note: I've added this copyright to make clear                that
- * this class has been developed and published by Sun.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.jgoodies.application;
 
 import java.awt.Component;
@@ -16,29 +18,21 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 /**
- * A simpler alternative to a JPanel with a CardLayout.  The AWT CardLayout layout manager can be inconvenient to use
- * because the special "stack of cards" operations it supports require a cast to use.  For example to show the card
- * named "myCard" given a JPanel with a CardLayout one would write:
+ * A simpler alternative to a JPanel with a CardLayout.  The AWT CardLayout layout manager can be inconvenient to use because the special "stack of cards" operations it supports require a cast to use.  For example to show the card named "myCard" given a JPanel with a CardLayout one would write:
  * <pre>
  * ((CardLayout)(myJPanel.getLayout())).show(myJPanel, "myCard");
  * </pre>
- * This doesn't work well with Swing - all of the CardLayout display operations, like <code>show</code> call validate
- * directly.  Swing supports automatic validation (see JComponent.revalidate()); this direct call to validate is
- * inefficient. <p> The CardPane JPanel subclass is intended to support a layout with a modest number of cards, on the
- * order of 100 or less.  A cards name is it's component name, as in java.awt.Component.getName(), which is set when the
- * component is added to the CardPanel:
+ * This doesn't work well with Swing - all of the CardLayout display operations, like <code>show</code> call validate directly.  Swing supports automatic validation (see JComponent.revalidate()); this direct call to validate is inefficient. <p> The CardPane JPanel subclass is intended to support a layout with a modest number of cards, on the order of 100 or less.  A cards name is it's component name, as in java.awt.Component.getName(), which is set when the component is added to the CardPanel:
  * <pre>
  * myCardPanel.add(myChild, "MyChildName");
  * myChild.getName() <i>=> "MyChildName"</i>
  * </pre>
- * As with CardLayout, the first child added to a CardPanel is made visible and there's only one child visible at a
- * time.  The <code>showCard</code> method accepts either a childs name or the child itself:
+ * As with CardLayout, the first child added to a CardPanel is made visible and there's only one child visible at a time.  The <code>showCard</code> method accepts either a childs name or the child itself:
  * <pre>
  * myCardPanel.show("MyChildName");
  * myCardPanel.show(myChild);
  * </pre>
- * <p> The CardPanel class doesn't support the vgap/hgap CardLayout properties since one can add a Border, see
- * JComponent.setBorder().
+ * <p> The CardPanel class doesn't support the vgap/hgap CardLayout properties since one can add a Border, see JComponent.setBorder().
  *
  * @author Sun Microsystems
  */
@@ -61,9 +55,7 @@ public class CorrectedCardPanel extends JPanel
             child.setVisible( child.getParent().getComponentCount() == 1 );
         }
 
-        /**
-         * If this child was visible, then make the first remaining child visible.
-         */
+        /** If this child was visible, then make the first remaining child visible. */
         public void removeLayoutComponent( final Component child )
         {
             if ( child.isVisible() )
@@ -76,9 +68,7 @@ public class CorrectedCardPanel extends JPanel
             }
         }
 
-        /**
-         * @return the maximum preferred width/height + the parents insets
-         */
+        /** @return the maximum preferred width/height + the parents insets */
         public Dimension preferredLayoutSize( final Container parent )
         {
             final int nChildren = parent.getComponentCount();
@@ -100,9 +90,7 @@ public class CorrectedCardPanel extends JPanel
             return new Dimension( width, height );
         }
 
-        /**
-         * @return the maximum minimum width/height + the parents insets
-         */
+        /** @return the maximum minimum width/height + the parents insets */
         public Dimension minimumLayoutSize( final Container parent )
         {
             final int nChildren = parent.getComponentCount();
@@ -143,29 +131,20 @@ public class CorrectedCardPanel extends JPanel
         }
     }
 
-    /**
-     * Creates a CardPanel.  Children, called "cards" in this API, should be added with add().  The first child we be
-     * made visible, subsequent children will be hidden.  To show a card, use one of the show*Card methods.
-     */
+    /** Creates a CardPanel.  Children, called "cards" in this API, should be added with add().  The first child we be made visible, subsequent children will be hidden.  To show a card, use one of the show*Card methods. */
     public CorrectedCardPanel()
     {
         super( new Layout() );
     }
 
-    /**
-     * Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the
-     * CardPanel then we add it here.
-     */
+    /** Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the CardPanel then we add it here. */
     public Component getVisibleCard()
     {
         final int index = getVisibleChildIndex();
         return index != -1 ? getComponent( index ) : null;
     }
 
-    /**
-     * Return the index of the first (and one would hope - only) visible child.  If a visible child can't be found,
-     * perhaps the caller has inexlicably hidden all of the children, then return -1.
-     */
+    /** Return the index of the first (and one would hope - only) visible child.  If a visible child can't be found, perhaps the caller has inexlicably hidden all of the children, then return -1. */
     public int getVisibleChildIndex()
     {
         final int nChildren = getComponentCount();
@@ -180,19 +159,14 @@ public class CorrectedCardPanel extends JPanel
         return -1;
     }
 
-    /**
-     * Return the name of the visible child.
-     */
+    /** Return the name of the visible child. */
     public String getVisibleChildName()
     {
         final int i = getVisibleChildIndex();
         return -1 == i ? null : getComponent( i ).getName();
     }
 
-    /**
-     * Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the
-     * CardPanel then we add it here.
-     */
+    /** Hide the currently visible child  "card" and show the specified card.  If the specified card isn't a child of the CardPanel then we add it here. */
     public void showCard( final Component card )
     {
         if ( card.getParent() != this )
@@ -229,9 +203,7 @@ public class CorrectedCardPanel extends JPanel
         }
     }
 
-    /**
-     * Show the first card that was added to this CardPanel.
-     */
+    /** Show the first card that was added to this CardPanel. */
     public void showFirstCard()
     {
         if ( getComponentCount() <= 0 )
@@ -241,9 +213,7 @@ public class CorrectedCardPanel extends JPanel
         showCard( getComponent( 0 ) );
     }
 
-    /**
-     * Show the last card that was added to this CardPanel.
-     */
+    /** Show the last card that was added to this CardPanel. */
     public void showLastCard()
     {
         if ( getComponentCount() <= 0 )
@@ -253,10 +223,7 @@ public class CorrectedCardPanel extends JPanel
         showCard( getComponent( getComponentCount() - 1 ) );
     }
 
-    /**
-     * Show the card that was added to this CardPanel after the currently visible card.  If the currently visible card
-     * was added last, then show the first card.
-     */
+    /** Show the card that was added to this CardPanel after the currently visible card.  If the currently visible card was added last, then show the first card. */
     public void showNextCard()
     {
         if ( getComponentCount() <= 0 )
@@ -278,10 +245,7 @@ public class CorrectedCardPanel extends JPanel
         }
     }
 
-    /**
-     * Show the card that was added to this CardPanel before the currently visible card.  If the currently visible card
-     * was added first, then show the last card.
-     */
+    /** Show the card that was added to this CardPanel before the currently visible card.  If the currently visible card was added first, then show the last card. */
     public void showPreviousCard()
     {
         if ( getComponentCount() <= 0 )

@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * TreeFinderPanel.java
- *
- * Created on 8. April 2002
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -34,8 +35,7 @@ import javax.swing.KeyStroke;
 import javax.swing.tree.TreePath;
 
 /**
- * This class provides a panel that enables a serach in a tree. To link the panel with the tree, simply pass in a JTree
- * in the constructor. The panel will update the tree to display found items automatically.
+ * This class provides a panel that enables a serach in a tree. To link the panel with the tree, simply pass in a JTree in the constructor. The panel will update the tree to display found items automatically.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.3 $ $Date: 2007/09/27 10:41:47 $
@@ -61,8 +61,7 @@ public class TreeFinderPanel extends JPanel implements Observer
     private TreeFinder treeFinder = defaultTreeFinder;
 
     /**
-     * Constructor for the TreeFinderPanel object. This constructor takes two additional arguments for the icons placed
-     * on the navigation buttons.
+     * Constructor for the TreeFinderPanel object. This constructor takes two additional arguments for the icons placed on the navigation buttons.
      *
      * @param tree the tree to find objects in
      */
@@ -103,9 +102,7 @@ public class TreeFinderPanel extends JPanel implements Observer
         counter.setText( fm.getIndex() + 1 + "/" + fm.getCount() );
     }
 
-    /**
-     * Description of the Method
-     */
+    /** Description of the Method */
     private void init()
     {
         defaultTreeFinder = new CenteringTreeFinder( tree );
@@ -213,9 +210,7 @@ public class TreeFinderPanel extends JPanel implements Observer
         fm.addObserver( this );
     }
 
-    /**
-     * Just scrolls to the found tree node, making sure that it is visible.
-     */
+    /** Just scrolls to the found tree node, making sure that it is visible. */
     public class SimpleTreeFinder implements TreeFinder
     {
         private final JTree tree;

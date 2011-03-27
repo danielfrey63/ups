@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree.dnd;
 
@@ -55,15 +55,11 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 /**
- * Implementation for a basic drag and drop tree. The tree supports dragging within itself. It doesn't support copying
- * of nodes.
+ * Implementation for a basic drag and drop tree. The tree supports dragging within itself. It doesn't support copying of nodes.
  *
- * <p/>The implementation is based on an article of Andrew J. Armstrong published in <a
- * href="http://www.javaworld.com/javaworld/javatips/jw-javatip114.html">JavaWorld</a>. However, different aspects have
- * been improved and the code has been refactored. Find the original comment at the end of this documentation.
+ * <p/>The implementation is based on an article of Andrew J. Armstrong published in <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip114.html">JavaWorld</a>. However, different aspects have been improved and the code has been refactored. Find the original comment at the end of this documentation.
  *
- * <p/>This implementation of a drag and drop tree is based on five drag use cases. All cases are based on a virtual
- * subdivision of a node into three different areas:
+ * <p/>This implementation of a drag and drop tree is based on five drag use cases. All cases are based on a virtual subdivision of a node into three different areas:
  *
  * <p/><img src="DnDTree-0.png"/>
  *
@@ -73,52 +69,35 @@ import javax.swing.tree.TreePath;
  *
  * <p/><img src="DnDTree-1.png"/>
  *
- * <p/>The node (X) is dragged to another node (A). If the drag position is over the middle half of the node, then the
- * whole node is marked to indicate that the dragged node (X) will be droped into the marked one (A).
+ * <p/>The node (X) is dragged to another node (A). If the drag position is over the middle half of the node, then the whole node is marked to indicate that the dragged node (X) will be droped into the marked one (A).
  *
  * <p/><code>2:</code>
  *
  * <p/><img src="DnDTree-2.png"/>
  *
- * <p/>The node (X) is dragged between two sister nodes (A and B). The drag position may be in the lower quart of the
- * upper (A) or the upper quart of the lower sister node (B). In this case, the node is inserted between the two sister
- * nodes.
+ * <p/>The node (X) is dragged between two sister nodes (A and B). The drag position may be in the lower quart of the upper (A) or the upper quart of the lower sister node (B). In this case, the node is inserted between the two sister nodes.
  *
  * <p/><code>3:</code>
  *
  * <p/><img src="DnDTree-3.png"/>
  *
- * <p/>The node (X) is dragged to the end of a series of children (A). If the drag posistion is located in the upper
- * nodes (A) lower quart, the node is inserted as last child of these childrens parent. The arrow indicates at what
- * level it will be inserted.
+ * <p/>The node (X) is dragged to the end of a series of children (A). If the drag posistion is located in the upper nodes (A) lower quart, the node is inserted as last child of these childrens parent. The arrow indicates at what level it will be inserted.
  *
  * <p/><code>4:</code>
  *
  * <p/><img src="DnDTree-4.png"/>
  *
- * <p/>The node (X) is dragged to the end of a series of children (A). If the drag position is located in the lower
- * nodes (B) upper quart, the node is inserted as an adjacent sister to the childrens (A) parent. That's the same as to
- * insert it as a preceding sister to the node at the drag position. Note that the arrow is located at the begining of
- * node at the drag position, not at the childrens begining to indicate at what level it will be inserted. If node B is
- * the root node, pointing to the upper quart has no effect. Instead the tree reacts as if the mouse were over the
- * middle half of the node. If node A is the last node in the tree, make sure to have some white space left to be able
- * to drag beyound node A.
+ * <p/>The node (X) is dragged to the end of a series of children (A). If the drag position is located in the lower nodes (B) upper quart, the node is inserted as an adjacent sister to the childrens (A) parent. That's the same as to insert it as a preceding sister to the node at the drag position. Note that the arrow is located at the begining of node at the drag position, not at the childrens begining to indicate at what level it will be inserted. If node B is the root node, pointing to the upper quart has no effect. Instead the tree reacts as if the mouse were over the middle half of the node. If node A is the last node in the tree, make sure to have some white space left to be able to drag beyound node A.
  *
  * <p/><code>5:</code>
  *
  * <p/><img src="DnDTree-5.png"/>
  *
- * <p/>The node (X) is dragged to the first position of a series of children and inserted at this position. The drag
- * position may be located in the upper quart of the first child (B) or lower quart of the parent node (A).
+ * <p/>The node (X) is dragged to the first position of a series of children and inserted at this position. The drag position may be located in the upper quart of the first child (B) or lower quart of the parent node (A).
  *
- * <p/>Todo: There are still some detail use cases that do not work 100 percent correctly: (a) if a node is at the last
- * position with a parent, draging down does not always allow a hierarchial 'stepping up'.
+ * <p/>Todo: There are still some detail use cases that do not work 100 percent correctly: (a) if a node is at the last position with a parent, draging down does not always allow a hierarchial 'stepping up'.
  *
- * <p/>Original comment of Andrew J. Armstrong: "Demonstrates how to display a 'drag image' when using drag and drop on
- * those platforms whose JVMs do not support it natively (eg Win32). Some of the code was borrowed by the original
- * author from the book: Java Swing, by Robert Eckstein, Marc Loy & Dave Wood, Paperback - 1221 pages 1 Ed edition
- * (September 1998), O'Reilly & Associates, ISBN 156592455X. The <a href="http://www.oreilly.com/catalog/jswing/chapter/dnd.beta.pdf">
- * relevant chapter</a> can be found online."
+ * <p/>Original comment of Andrew J. Armstrong: "Demonstrates how to display a 'drag image' when using drag and drop on those platforms whose JVMs do not support it natively (eg Win32). Some of the code was borrowed by the original author from the book: Java Swing, by Robert Eckstein, Marc Loy & Dave Wood, Paperback - 1221 pages 1 Ed edition (September 1998), O'Reilly & Associates, ISBN 156592455X. The <a href="http://www.oreilly.com/catalog/jswing/chapter/dnd.beta.pdf"> relevant chapter</a> can be found online."
  *
  * @author Daniel Frey
  */
@@ -126,39 +105,25 @@ public class DnDTree extends JTree implements Autoscroll
 {
     private static final boolean DEBUG = false;
 
-    /**
-     * The margin at which the scrolling starts.
-     */
+    /** The margin at which the scrolling starts. */
     private static final int AUTOSCROLL_MARGIN = 30;
 
-    /**
-     * The 'drag image'
-     */
+    /** The 'drag image' */
     protected BufferedImage ghost;
 
-    /**
-     * The path being dragged
-     */
+    /** The path being dragged */
     protected TreePath sourcePath;
 
-    /**
-     * Where, in the drag image, the mouse was clicked
-     */
+    /** Where, in the drag image, the mouse was clicked */
     protected Point offset = new Point();
 
-    /**
-     * The notfiable tree model to use.
-     */
+    /** The notfiable tree model to use. */
     private MutableTreeModel mutable;
 
-    /**
-     * The drag source handler.
-     */
+    /** The drag source handler. */
     private final DragSourceHandler dragSourceHandler = new DragSourceHandler();
 
-    /**
-     * The drag gesture recognizer.
-     */
+    /** The drag gesture recognizer. */
     private final DragGestureHandler dragGestureHandler = new DragGestureHandler();
 
     /**
@@ -216,9 +181,7 @@ public class DnDTree extends JTree implements Autoscroll
 
     // Autoscroll interface
 
-    /**
-     * Calculate the insets for the JTree, not the viewport the tree is in. This makes it a bit messy.
-     */
+    /** Calculate the insets for the JTree, not the viewport the tree is in. This makes it a bit messy. */
     public Insets getAutoscrollInsets()
     {
         final Rectangle raOuter = getBounds();
@@ -229,9 +192,7 @@ public class DnDTree extends JTree implements Autoscroll
                 raOuter.width - raInner.width - raInner.x + raOuter.x + AUTOSCROLL_MARGIN );
     }
 
-    /**
-     * Ok, we’ve been told to scroll because the mouse cursor is in our scroll zone.
-     */
+    /** Ok, we’ve been told to scroll because the mouse cursor is in our scroll zone. */
     public void autoscroll( final Point pt )
     {
         // Figure out which row we’re on.
@@ -261,10 +222,7 @@ public class DnDTree extends JTree implements Autoscroll
     }
 
     /**
-     * Checks for the different conditions for which transfers are allowed. The ghost image is drawn here, and a cue
-     * line is drawn between nodes to indicate the drop location. Movements to the left or right are catched to display
-     * an appropriate icon and trigger scaling down and up of the nodes Level. <p> <p/> A timer is used to automatically
-     * open and close nodes.
+     * Checks for the different conditions for which transfers are allowed. The ghost image is drawn here, and a cue line is drawn between nodes to indicate the drop location. Movements to the left or right are catched to display an appropriate icon and trigger scaling down and up of the nodes Level. <p> <p/> A timer is used to automatically open and close nodes.
      *
      * @author $Author: daniel_frey $
      * @version $Revision: 1.6 $ $Date: 2006/04/15 23:03:21 $
@@ -292,9 +250,7 @@ public class DnDTree extends JTree implements Autoscroll
 
         private final DnDValidatorUpdater tm;
 
-        /**
-         * Cumulative left/right mouse movement
-         */
+        /** Cumulative left/right mouse movement */
         protected Point ptLast = new Point();
 
         protected int nLeftRight = 0;
@@ -552,11 +508,7 @@ public class DnDTree extends JTree implements Autoscroll
             }
         }
 
-        /**
-         * Note: Make sure the tree is using each TreeNode only once. Generation of arbitrary TreeNodes may lead to
-         * insertions at wrong position or IndexOutOfBoundsException with an index of -1, as evaluation of the insertion
-         * point is based on reference equality.
-         */
+        /** Note: Make sure the tree is using each TreeNode only once. Generation of arbitrary TreeNodes may lead to insertions at wrong position or IndexOutOfBoundsException with an index of -1, as evaluation of the insertion point is based on reference equality. */
         public void drop( final DropTargetDropEvent e )
         {
             // Prevent hover timer from doing an unwanted expandPath or collapsePath

@@ -1,13 +1,11 @@
 /*
- * ====================================================================
- *  Copyright 2004-2006 www.xmatrix.ch
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.xstream;
 
@@ -62,9 +60,7 @@ public class DomDriver implements HierarchicalStreamDriver
         this( encoding, null );
     }
 
-    /**
-     * Creates a dom driver with default enconding (UTF-8) and no entity resolver.
-     */
+    /** Creates a dom driver with default enconding (UTF-8) and no entity resolver. */
     public DomDriver()
     {
         this( DEFAULT_ENCODING, null );

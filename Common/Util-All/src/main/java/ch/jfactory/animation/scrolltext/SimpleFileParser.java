@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation.scrolltext;
 
 import java.awt.Graphics;
@@ -25,24 +17,18 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Simple parser for file lines. See {@link #initText(List) initText} for a detailed description of the parser
- * rules.
+ * Simple parser for file lines. See {@link #initText(List) initText} for a detailed description of the parser rules.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
 public class SimpleFileParser implements FileParser
 {
-    /**
-     * The formatters to generate the file lines.
-     */
+    /** The formatters to generate the file lines. */
     private Formatter[] formatters;
 
     /**
-     * Parses a list of text lines. Each line consists of several tokens separated by "|". The tokens are interpreted as
-     * follows: <ol><li>The first token is the path and name of a serialized {@link Formatter} object. The file must be
-     * in the classpath.</li> <li>The second token is the text for the paragraph.</li> <li>The third token is optinal
-     * and may contain a URL link.</li> </ol> <p>Todo: Make links work</p>
+     * Parses a list of text lines. Each line consists of several tokens separated by "|". The tokens are interpreted as follows: <ol><li>The first token is the path and name of a serialized {@link Formatter} object. The file must be in the classpath.</li> <li>The second token is the text for the paragraph.</li> <li>The third token is optinal and may contain a URL link.</li> </ol> <p>Todo: Make links work</p>
      *
      * @param fileLines a list of lines containing text separated by "|"
      * @return an array of FileLine objects
@@ -113,10 +99,7 @@ public class SimpleFileParser implements FileParser
     }
 
     /**
-     * Returns an array of formatter objects. Formatting of the text is dependent of the graphics object present. As at
-     * build time this object usually does not exist, this method is used to return the formatters in exchange with the
-     * graphics object. This guarantees to return formatters with -- in respect to the given graphics object -- valid
-     * formatting numbers.
+     * Returns an array of formatter objects. Formatting of the text is dependent of the graphics object present. As at build time this object usually does not exist, this method is used to return the formatters in exchange with the graphics object. This guarantees to return formatters with -- in respect to the given graphics object -- valid formatting numbers.
      *
      * @param g the graphics object
      * @return an array of formatters

@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation.scrolltext;
 
 import ch.jfactory.animation.Paintable;
@@ -30,65 +22,41 @@ import java.util.StringTokenizer;
 import org.apache.commons.io.IOUtils;
 
 /**
- * A paintable that displays scrolling text. The behaviour may be influenced by setting: <ul><li>The velocity (actually
- * inverse of the velocity) by setting the {@link #setScrollDelay(int) scroll deley}</li> <li>The delay to wait between
- * pages ({@link #setParagraphDelay(int) paragraph delay})</li> <li>A page mode. If set to true scrolls one paragraph
- * per page, otherwise all paragraphs are adjacent ({@link #setPageModus(boolean) page mode})</li> <li>A {@link
- * #setBackgroundColor(Color) background color}</li> </ul>
+ * A paintable that displays scrolling text. The behaviour may be influenced by setting: <ul><li>The velocity (actually inverse of the velocity) by setting the {@link #setScrollDelay(int) scroll deley}</li> <li>The delay to wait between pages ({@link #setParagraphDelay(int) paragraph delay})</li> <li>A page mode. If set to true scrolls one paragraph per page, otherwise all paragraphs are adjacent ({@link #setPageModus(boolean) page mode})</li> <li>A {@link #setBackgroundColor(Color) background color}</li> </ul>
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $
  */
 public class ScrollingTextPaintable extends Paintable
 {
-    /**
-     * The default scroll delay.
-     */
+    /** The default scroll delay. */
     private static final int DEFAULT_SCROLL_DELAY = 10;
 
-    /**
-     * The default paragraph delay.
-     */
+    /** The default paragraph delay. */
     private static final int DEFAULT_PARAGRAPH_DELAY = 2000;
 
-    /**
-     * The delay between steps during scrolling.
-     */
+    /** The delay between steps during scrolling. */
     private int scrollDelay = DEFAULT_SCROLL_DELAY;
 
-    /**
-     * The pause in millis until the next paragraph is shown.
-     */
+    /** The pause in millis until the next paragraph is shown. */
     private int paragraphDelay = DEFAULT_PARAGRAPH_DELAY;
 
-    /**
-     * Whether to display each paragraph on its own page.
-     */
+    /** Whether to display each paragraph on its own page. */
     private boolean pageModus = true;
 
-    /**
-     * The background color.
-     */
+    /** The background color. */
     private Color backgroundColor = Color.white;
 
-    /**
-     * The file parser to parse lines.
-     */
+    /** The file parser to parse lines. */
     private final FileParser fileParser = new SimpleFileParser();
 
-    /**
-     * The array of sections to display.
-     */
+    /** The array of sections to display. */
     private transient Section[] sections;
 
-    /**
-     * The current y position.
-     */
+    /** The current y position. */
     private transient int currentY;
 
-    /**
-     * Whether the paragraph has reached the top position.
-     */
+    /** Whether the paragraph has reached the top position. */
     private transient boolean isOnTop;
 
     /**
@@ -124,10 +92,7 @@ public class ScrollingTextPaintable extends Paintable
         this.pageModus = pageModus;
     }
 
-    /**
-     * Sets the delays to sleep. It is dependent of whether a page is at the top of the display area and other
-     * configurations.
-     */
+    /** Sets the delays to sleep. It is dependent of whether a page is at the top of the display area and other configurations. */
     public void run()
     {
         initMouseListener();
@@ -243,8 +208,7 @@ public class ScrollingTextPaintable extends Paintable
     }
 
     /**
-     * Whether one paragraph should be displayed per page. If set to false, all paragraphs are subsequently appended and
-     * displayed. Defaults to true.
+     * Whether one paragraph should be displayed per page. If set to false, all paragraphs are subsequently appended and displayed. Defaults to true.
      *
      * @param pageModus whether to display one paragraph per page
      */
@@ -307,9 +271,7 @@ public class ScrollingTextPaintable extends Paintable
         return SectionFactory.initSections( fileLines, printSpaceWidth );
     }
 
-    /**
-     * Init mouse listener.
-     */
+    /** Init mouse listener. */
     private void initMouseListener()
     {
         getAnimation().addMouseListener( new MouseAdapter()

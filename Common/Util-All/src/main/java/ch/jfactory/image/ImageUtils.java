@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.image;
 
@@ -177,8 +170,7 @@ public class ImageUtils
     }
 
     /**
-     * Creates an image by resizing the given image with the given factor. By default, a smooth rescaling algorithm is
-     * used.
+     * Creates an image by resizing the given image with the given factor. By default, a smooth rescaling algorithm is used.
      *
      * @param image  the image to resize
      * @param color  the color to apply
@@ -281,8 +273,7 @@ public class ImageUtils
     }
 
     /**
-     * Creates a new pixel buffer with all grays replaced by the given color. The brightness of the original gray is
-     * copied to the new color pixel. Alpha channel is preserved.
+     * Creates a new pixel buffer with all grays replaced by the given color. The brightness of the original gray is copied to the new color pixel. Alpha channel is preserved.
      *
      * @param pixels the pixels to translate
      * @param color  the replacment color
@@ -465,8 +456,7 @@ public class ImageUtils
     }
 
     /**
-     * Calculates a buffered ghost like image from the component given. Make sure the component has already the correct
-     * bounding size.
+     * Calculates a buffered ghost like image from the component given. Make sure the component has already the correct bounding size.
      *
      * @param comp the component to derive the image from
      * @return a buffered ghost like image of the component
@@ -670,15 +660,9 @@ public class ImageUtils
      * @param img           the original image to be scaled
      * @param targetWidth   the desired width of the scaled instance, in pixels
      * @param targetHeight  the desired height of the scaled instance, in pixels
-     * @param hint          one of the rendering hints that corresponds to {@code RenderingHints.KEY_INTERPOLATION}
-     *                      (e.g. {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code
-     *                      RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
-     * @param higherQuality if true, this method will use a multi-step scaling technique that provides higher quality
-     *                      than the usual one-step technique (only useful in downscaling cases, where {@code
-     *                      targetWidth} or {@code targetHeight} is smaller than the original dimensions, and generally
-     *                      only when the {@code BILINEAR} hint is specified)
-     * @return a scaled version of the original {@code BufferedImage} <p/><p/> Origin: Chris Campbell
-     *         http://today.java.net/pub/a/today/2007/04/03/perils-of-image-getscaledinstance.html
+     * @param hint          one of the rendering hints that corresponds to {@code RenderingHints.KEY_INTERPOLATION} (e.g. {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
+     * @param higherQuality if true, this method will use a multi-step scaling technique that provides higher quality than the usual one-step technique (only useful in downscaling cases, where {@code targetWidth} or {@code targetHeight} is smaller than the original dimensions, and generally only when the {@code BILINEAR} hint is specified)
+     * @return a scaled version of the original {@code BufferedImage} <p/><p/> Origin: Chris Campbell http://today.java.net/pub/a/today/2007/04/03/perils-of-image-getscaledinstance.html
      */
     public BufferedImage getScaledInstance( final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint,
                                             final boolean higherQuality )

@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.table;
 
@@ -100,8 +93,7 @@ public class TableUtils
     }
 
     /**
-     * Returns an identifiable collection of selections for later reuse to restore selection using {@link
-     * #setSelection(Map, JTable)}.
+     * Returns an identifiable collection of selections for later reuse to restore selection using {@link #setSelection(Map, JTable)}.
      *
      * @param table
      * @return a map for
@@ -153,9 +145,7 @@ public class TableUtils
         return new MultiKey( keys );
     }
 
-    /**
-     * Note: Make sure to override TableModel#getColumnClass to use the renderers.
-     */
+    /** Note: Make sure to override TableModel#getColumnClass to use the renderers. */
     public static class CalendarCellRenderer extends DefaultTableCellRenderer
     {
         private final String pattern;
@@ -190,9 +180,7 @@ public class TableUtils
         }
     }
 
-    /**
-     * Note: Make sure to override TableModel#getColumnClass to use the renderers.
-     */
+    /** Note: Make sure to override TableModel#getColumnClass to use the renderers. */
     public static class BooleanCellRenderer extends DefaultTableCellRenderer
     {
         private final Icon trueIcon;

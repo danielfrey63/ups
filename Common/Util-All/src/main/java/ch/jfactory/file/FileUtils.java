@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.file;
 
 import java.io.BufferedInputStream;
@@ -35,8 +44,7 @@ public class FileUtils
     private static final boolean DEBUG = LOG.isDebugEnabled();
 
     /**
-     * Copies one file into another one. The method also works across volumes. The destination file exists, the new
-     * content will be added to it.
+     * Copies one file into another one. The method also works across volumes. The destination file exists, the new content will be added to it.
      *
      * @param src  File to copy from
      * @param dest File to copy into
@@ -125,8 +133,7 @@ public class FileUtils
     }
 
     /**
-     * Extracts the file path information from a given URL. URL encoded paths will be decoded, i.e. a <code>%20</code>
-     * will be replaced by a space.
+     * Extracts the file path information from a given URL. URL encoded paths will be decoded, i.e. a <code>%20</code> will be replaced by a space.
      *
      * @param u URL to extract path from
      * @return path String
@@ -138,8 +145,7 @@ public class FileUtils
     }
 
     /**
-     * Extracts the file path information from a given URL String. Strings with URL encoded paths will be decoded, i.e.
-     * a <code>%20</code>  will be replaced by a space.
+     * Extracts the file path information from a given URL String. Strings with URL encoded paths will be decoded, i.e. a <code>%20</code>  will be replaced by a space.
      *
      * @param s URL to extract path from
      * @return path String
@@ -283,8 +289,7 @@ public class FileUtils
     }
 
     /**
-     * Saves the given content to the system by locating it throu the classloder. There are two supported ways. In both
-     * ways the location of the destination is derived from the resource given, loaded by the classloader:
+     * Saves the given content to the system by locating it throu the classloder. There are two supported ways. In both ways the location of the destination is derived from the resource given, loaded by the classloader:
      *
      * <ul>
      *

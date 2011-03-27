@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2002
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * $Source: /repository/HerbarCD/Version2.1/xmatrix/src/java/ch/jfactory/math/Combinatorial.java,v $
- *
- * Created on 1. Juli 2002, 15:26
- * Created by Daniel Frey
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.math;
 
@@ -21,14 +22,8 @@ import java.util.Random;
 public class Combinatorial
 {
     /**
-     * Returns all combinations of elements between the groups. Order does not matter, and repetitions are not
-     * calculated.<p> <p/> Given an array of groups <code>{{a1 a2}{b1 b2 b3}}</code> the result will be <code> {{a1
-     * b1}{a2 b1}{a1 b2} {a2 b2}{a1 b3}{a2 b3}}. </code> The order of the given groups will be maintained in the
-     * resulting combinations.<p> <p/> The result is not randomized, so a logical order will be maintained. In order to
-     * randomize it, use i.e. {@link RandomUtils#randomize(Object[]) ArrayUtils.randomize}.<p> <p/>
-     * Note: Cross products can reach huge sizes if explicitely enumerated, as done in this method. These huge number
-     * are not allways senseful and a subsample may be more appropriate. To get a randomized subsamples of cross
-     * products, see {@link #getCrossProduct(Object[][], int) getCrossProduct}.
+     * Returns all combinations of elements between the groups. Order does not matter, and repetitions are not calculated.<p> <p/> Given an array of groups <code>{{a1 a2}{b1 b2 b3}}</code> the result will be <code> {{a1 b1}{a2 b1}{a1 b2} {a2 b2}{a1 b3}{a2 b3}}. </code> The order of the given groups will be maintained in the resulting combinations.<p> <p/> The result is not randomized, so a logical order will be maintained. In order to randomize it, use i.e. {@link RandomUtils#randomize(Object[]) ArrayUtils.randomize}.<p> <p/> Note: Cross products can reach huge sizes if explicitely enumerated, as done in this method. These huge number are not allways senseful and a subsample may be more appropriate. To get a randomized subsamples of cross products, see {@link #getCrossProduct(Object[][],
+     * int) getCrossProduct}.
      *
      * @param groups an array of groups of elements
      * @return an array of all combinations of elements between groups
@@ -41,19 +36,8 @@ public class Combinatorial
     }
 
     /**
-     * Returns all cross products, or a subsample if the sample size is exceeded. Order does not matter, and repetitions
-     * are not calculated. The order of the given groups will be maintained in the resulting combinations. For a short
-     * example see {@link #getCrossProduct(Object[][])}.<p> <p/> Cross products can reach huge sizes if explicitely
-     * enumerated. These huge number are not allways senseful and a subsample may be more appropriate. With this method,
-     * the size may be limited.<p> <p/> The method delivers all or a subsample of all theoretically possible cross
-     * product combinations. The time used for the constitution of the subsample is guaranteed to be less than for all
-     * cross product combination. The returned subset will be a random subset of all cross products. The {@link
-     * RandomUtils#randomize(Object[]) ArrayUtils.randomize} method is used to randomize. Refer to this
-     * method if you want to get the seed used for randomization.<p> <p/> To make randomizing reproducable, see {@link
-     * RandomUtils#randomize(Object[]) ArrayUtils.randomize} for how to get the seed used to randomize.
-     * To reproduce a former subset, refer to the appropriate {@link #getCrossProduct(Object[][], int, long)
-     * getCrossProduct(groups, size, seed)} method. <p> <p/> Note: As a side effect, the original group elements are
-     * randomized within their groups.
+     * Returns all cross products, or a subsample if the sample size is exceeded. Order does not matter, and repetitions are not calculated. The order of the given groups will be maintained in the resulting combinations. For a short example see {@link #getCrossProduct(Object[][])}.<p> <p/> Cross products can reach huge sizes if explicitely enumerated. These huge number are not allways senseful and a subsample may be more appropriate. With this method, the size may be limited.<p> <p/> The method delivers all or a subsample of all theoretically possible cross product combinations. The time used for the constitution of the subsample is guaranteed to be less than for all cross product combination. The returned subset will be a random subset of all cross products. The {@link
+     * RandomUtils#randomize(Object[]) ArrayUtils.randomize} method is used to randomize. Refer to this method if you want to get the seed used for randomization.<p> <p/> To make randomizing reproducable, see {@link RandomUtils#randomize(Object[]) ArrayUtils.randomize} for how to get the seed used to randomize. To reproduce a former subset, refer to the appropriate {@link #getCrossProduct(Object[][], int, long) getCrossProduct(groups, size, seed)} method. <p> <p/> Note: As a side effect, the original group elements are randomized within their groups.
      *
      * @param groups an array of groups of elements
      * @param size   the maximum number of cross products requested
@@ -67,8 +51,7 @@ public class Combinatorial
     }
 
     /**
-     * Does the same as {@link #getCrossProduct(Object[][], int) getCrossProduct(groups, size)}, but allows to use the
-     * given seed for reproducable randomization.
+     * Does the same as {@link #getCrossProduct(Object[][], int) getCrossProduct(groups, size)}, but allows to use the given seed for reproducable randomization.
      *
      * @param groups an array of groups of elements
      * @param size   the maximum number of cross products requested
@@ -196,8 +179,7 @@ public class Combinatorial
     }
 
     /**
-     * Calculates the number of combinations to take k elements out of a set of n elements. Repetitions are allowed and
-     * the order is not important.
+     * Calculates the number of combinations to take k elements out of a set of n elements. Repetitions are allowed and the order is not important.
      *
      * <pre>
      * / n + k - 1 \   / n + k - 1 \
@@ -275,8 +257,7 @@ public class Combinatorial
     }
 
     /**
-     * Calculate all given k-tuples of a given array. Order does not matter and repetitions are not allowed
-     * (combinatorial subset).
+     * Calculate all given k-tuples of a given array. Order does not matter and repetitions are not allowed (combinatorial subset).
      *
      * @param k     the subset (tuple) size
      * @param array the array to get the subsets (k-tuples) from
@@ -311,8 +292,7 @@ public class Combinatorial
     }
 
     /**
-     * Recursive chunk of code, which takes the result List, a prefix holder, the original array and the tuple size as
-     * its parameters. The result List is filled subsequently with one List for each new subset.
+     * Recursive chunk of code, which takes the result List, a prefix holder, the original array and the tuple size as its parameters. The result List is filled subsequently with one List for each new subset.
      *
      * @param prefix  holds a chunk of the array to prefix subsequent calls with
      * @param array   the array containing the data to subset from

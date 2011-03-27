@@ -1,10 +1,11 @@
 /*
- * Copyright x-matrix Switzerland (c) 2003
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * DefaultTextField.java
- *
- * Created on Feb 6, 2003 4:32:27 PM
- * Created by Daniel
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -14,8 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.text.Document;
 
 /**
- * Initial text will be take as a default for greyed display until the first click or focus gained occurs which does
- * empty the field.
+ * Initial text will be take as a default for greyed display until the first click or focus gained occurs which does empty the field.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $

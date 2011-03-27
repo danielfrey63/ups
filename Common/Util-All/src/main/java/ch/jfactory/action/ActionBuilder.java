@@ -1,14 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.action;
 
 import ch.jfactory.resource.ImageLocator;
@@ -42,64 +40,40 @@ import javax.swing.KeyStroke;
  */
 public final class ActionBuilder
 {
-    /**
-     * The postfix to lookup the actions list.
-     */
+    /** The postfix to lookup the actions list. */
     private static final String POSTFIX_ACTIONS = ".actions";
 
-    /**
-     * The postfix to lookup the long description.
-     */
+    /** The postfix to lookup the long description. */
     private static final String POSTFIX_DESCRIPTION_LONG = ".description.long";
 
-    /**
-     * The postfix to lookup the enabeld icon.
-     */
+    /** The postfix to lookup the enabeld icon. */
     private static final String POSTFIX_ICON_ENABLED = ".icon.enabled";
 
-    /**
-     * The postfix to lookup the disabled icon.
-     */
+    /** The postfix to lookup the disabled icon. */
     private static final String POSTFIX_ICON_DISABLED = ".icon.disabled";
 
-    /**
-     * The postfix to lookup the short description which is used as a tooltip text.
-     */
+    /** The postfix to lookup the short description which is used as a tooltip text. */
     private static final String POSTFIX_DESCRIPTION_SHORT = ".description.short";
 
-    /**
-     * The postfix to lookup the shortcut.
-     */
+    /** The postfix to lookup the shortcut. */
     private static final String POSTFIX_SHORTCUT = ".short";
 
-    /**
-     * The postfix to lookup the label of the action.
-     */
+    /** The postfix to lookup the label of the action. */
     private static final String POSTFIX_LABEL = ".label";
 
-    /**
-     * The character prepending the mnemonic character within the label.
-     */
+    /** The character prepending the mnemonic character within the label. */
     private static final char SYMBOL_MNEMONIC = '&';
 
-    /**
-     * The string used to identify a separator.
-     */
+    /** The string used to identify a separator. */
     private static final String SYMBOL_SEPARATOR = "-";
 
-    /**
-     * The string used to identify a simple gap.
-     */
+    /** The string used to identify a simple gap. */
     private static final String SYMBOL_GAP = "_";
 
-    /**
-     * The map to store the actions.
-     */
+    /** The map to store the actions. */
     private static final Map<String, Action> actions = new HashMap<String, Action>();
 
-    /**
-     * The properties associated with this instance. They are used to lookup the different action properties.
-     */
+    /** The properties associated with this instance. They are used to lookup the different action properties. */
     private static final Properties properties = new Properties();
 
     /**
@@ -241,8 +215,7 @@ public final class ActionBuilder
     /**
      * Constructs the menu. for a key build up from the given base concatenated with a {@link #POSTFIX_ACTIONS}.
      *
-     * @param base the base to construct a key by appending {@link #POSTFIX_ACTIONS} and looking up the actions, a list
-     *             of action identifiers separated by space.
+     * @param base the base to construct a key by appending {@link #POSTFIX_ACTIONS} and looking up the actions, a list of action identifiers separated by space.
      * @return the menu
      */
     private static JComponent createMenu( final String base )
@@ -286,10 +259,7 @@ public final class ActionBuilder
      * Puts the different property values into the action by getting them from the property file.
      *
      * @param action the action to add the properties to
-     * @param base   the base to concatenate with a postfix and lookup the property values in the property file. The
-     *               method uses {@link #POSTFIX_DESCRIPTION_LONG} for the long description, {@link
-     *               #POSTFIX_ICON_ENABLED} for the icon, {@link #POSTFIX_ICON_DISABLED} for a disabled icon. The rest
-     *               is generated using helper methods.
+     * @param base   the base to concatenate with a postfix and lookup the property values in the property file. The method uses {@link #POSTFIX_DESCRIPTION_LONG} for the long description, {@link #POSTFIX_ICON_ENABLED} for the icon, {@link #POSTFIX_ICON_DISABLED} for a disabled icon. The rest is generated using helper methods.
      */
     private static void configureAction( final Action action, final String base )
     {
@@ -305,12 +275,9 @@ public final class ActionBuilder
     }
 
     /**
-     * Creates a tooltip text by reading the short description from the properties and adding a symbolic name for the
-     * shortcut in paranthesis.
+     * Creates a tooltip text by reading the short description from the properties and adding a symbolic name for the shortcut in paranthesis.
      *
-     * @param base the base to build the key for looking up the short description and the shortcut in the property file.
-     *             The short descriptions key is concatenated from base and {@link #POSTFIX_DESCRIPTION_SHORT}, the
-     *             short cut key from base and {@link #POSTFIX_SHORTCUT}.
+     * @param base the base to build the key for looking up the short description and the shortcut in the property file. The short descriptions key is concatenated from base and {@link #POSTFIX_DESCRIPTION_SHORT}, the short cut key from base and {@link #POSTFIX_SHORTCUT}.
      * @return the complete text
      */
     private static Object createShortDescription( final String base )
@@ -328,8 +295,7 @@ public final class ActionBuilder
     }
 
     /**
-     * Creates a key stroke by using the given base plus {@link #POSTFIX_SHORTCUT} as the lookup key for the
-     * properties.
+     * Creates a key stroke by using the given base plus {@link #POSTFIX_SHORTCUT} as the lookup key for the properties.
      *
      * @param base the base string
      * @return the key stroke build from the properties
@@ -341,8 +307,7 @@ public final class ActionBuilder
     }
 
     /**
-     * Extracts a {@link ActionBuilder.Mnemonics} object consisting of a label and the mnemonic char from the
-     * properties. The lookup key is composed by adding {@link #POSTFIX_LABEL} to the base.
+     * Extracts a {@link ActionBuilder.Mnemonics} object consisting of a label and the mnemonic char from the properties. The lookup key is composed by adding {@link #POSTFIX_LABEL} to the base.
      *
      * @param base the base to construct the lookup key
      * @return a Mnemonic object
@@ -382,19 +347,13 @@ public final class ActionBuilder
         return properties;
     }
 
-    /**
-     * Helper data class to wrap a label and a mnemonic char.
-     */
+    /** Helper data class to wrap a label and a mnemonic char. */
     private static final class Mnemonics
     {
-        /**
-         * The label, defaults to an empty string.
-         */
+        /** The label, defaults to an empty string. */
         private String label = "";
 
-        /**
-         * The mnemonic, defaults to the zero character.
-         */
+        /** The mnemonic, defaults to the zero character. */
         private int mnemonic = '\0';
     }
 }

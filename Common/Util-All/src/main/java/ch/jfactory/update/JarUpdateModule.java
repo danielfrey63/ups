@@ -1,9 +1,18 @@
 /*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
+/*
  * JarUpdateModule.java
  *
  * Created on 24. September 2002, 16:26
  */
-
 package ch.jfactory.update;
 
 import ch.jfactory.file.FileUtils;
@@ -38,9 +47,7 @@ class JarUpdateModule implements UpdateModule
         this.localVersion = localVersion;
     }
 
-    /**
-     * Creates a new instance of JarUpdateModule
-     */
+    /** Creates a new instance of JarUpdateModule */
     public JarUpdateModule()
     {
     }
@@ -65,10 +72,7 @@ class JarUpdateModule implements UpdateModule
         return serverVersion;
     }
 
-    /**
-     * This method should be overwritten to implement the update behavior. Maybe download the jar file and overwrite the
-     * local version.
-     */
+    /** This method should be overwritten to implement the update behavior. Maybe download the jar file and overwrite the local version. */
     public void update() throws IOException
     {
         String localLocation = "";

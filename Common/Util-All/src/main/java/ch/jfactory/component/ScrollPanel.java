@@ -1,10 +1,11 @@
 /*
- * Copyright xmatrix Switzerland (c) 2002-2003
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * PicturePanel.java
- *
- * Created on 28.5.2002
- * Created by thomas
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component;
 
@@ -19,8 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This control is used to different Components as a Scrollable List without using ScrollPane, because of sizing
- * Problems
+ * This control is used to different Components as a Scrollable List without using ScrollPane, because of sizing Problems
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/06/16 06:28:57 $

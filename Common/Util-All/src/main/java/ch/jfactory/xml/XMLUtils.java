@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.xml;
 
 import java.io.ByteArrayInputStream;
@@ -34,15 +43,13 @@ public class XMLUtils
     private static final Logger LOG = LoggerFactory.getLogger( XMLUtils.class );
 
     /**
-     * This method applies the xslFile to inFile but does not write an output. Useful if the xslt script itself
-     * generates the output files. In addition it passes the given properties to the xslt file.
+     * This method applies the xslFile to inFile but does not write an output. Useful if the xslt script itself generates the output files. In addition it passes the given properties to the xslt file.
      *
      * @param inFile  input file
      * @param xslFile xslt file
      * @param params  the parameters to pass to the xslt file
-     * @throws TransformerException
-     *                     uppon error
-     * @throws IOException uppon error
+     * @throws TransformerException uppon error
+     * @throws IOException          uppon error
      */
     public static void transformNoOut( final String inFile, final String xslFile, final Properties params )
             throws IOException, TransformerException
@@ -75,15 +82,12 @@ public class XMLUtils
     }
 
     /**
-     * This method applies the xslFilename to a null input file and writes the output the the given output file. Useful
-     * if the xslt script itself reades directly from (different) intput files. In addition it passes the given
-     * properties to the xslt file.
+     * This method applies the xslFilename to a null input file and writes the output the the given output file. Useful if the xslt script itself reades directly from (different) intput files. In addition it passes the given properties to the xslt file.
      *
      * @param output
      * @param xslt
      * @param params the parameters to pass to the xslt file
      * @throws TransformerException
-     *
      */
     public static void transformNoIn( final Writer output, final Reader xslt, final Properties params )
             throws IOException, TransformerException
@@ -112,7 +116,6 @@ public class XMLUtils
      * @param params the parameters to pass to the xslt script
      * @throws IOException
      * @throws TransformerException
-     *
      */
     public static void transform( final String in, final String out, final String xsl, final Properties params )
             throws IOException, TransformerException
@@ -151,14 +154,12 @@ public class XMLUtils
     }
 
     /**
-     * Transforms the given input Reader with the given xslt Reader and writes the result to the Writer. The
-     * transformation factory is configured using the properties and the uri resolver given.
+     * Transforms the given input Reader with the given xslt Reader and writes the result to the Writer. The transformation factory is configured using the properties and the uri resolver given.
      *
      * @param input    the source xml document reader.
      * @param output   the destination document writer.
      * @param xslt     the xslt stylesheet to perform the transformation.
-     * @param params   the parameters to configure transformation. if no parameters are given, pass empty properties,
-     *                 otherwise a NullPointerException will be thrown.
+     * @param params   the parameters to configure transformation. if no parameters are given, pass empty properties, otherwise a NullPointerException will be thrown.
      * @param resolver the uri resolver or null.
      * @param factory  the tranformer factory, may not be null.
      * @throws TransformerException

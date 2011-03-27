@@ -1,9 +1,18 @@
 /*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
+
+/*
  * JMultiLineLabel.java
  *
  * Created on 10. September 2002, 13:39
  */
-
 package ch.jfactory.component;
 
 import java.awt.Font;
@@ -21,9 +30,7 @@ import javax.swing.text.StyledDocument;
  */
 public class JMultiLineLabel extends JTextPane
 {
-    /**
-     * Creates a new instance of JMultiLineLabel
-     */
+    /** Creates a new instance of JMultiLineLabel */
     public JMultiLineLabel()
     {
         super();
@@ -56,12 +63,10 @@ public class JMultiLineLabel extends JTextPane
     }
 
     /**
-     * Create a new instance of JMultiLineLabel and initialize it with the given text. Sets the horizontal text
-     * alignment.
+     * Create a new instance of JMultiLineLabel and initialize it with the given text. Sets the horizontal text alignment.
      *
      * @param text       the text to display
-     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
-     *                   <code>StyleConstants.ALIGN_RIGHT</code>
+     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>, <code>StyleConstants.ALIGN_RIGHT</code>
      */
     public JMultiLineLabel( final String text, final int alignement )
     {
@@ -73,8 +78,7 @@ public class JMultiLineLabel extends JTextPane
     /**
      * Sets the horizontal text alignment.
      *
-     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
-     *                   <code>StyleConstants.ALIGN_RIGHT</code>
+     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>, <code>StyleConstants.ALIGN_RIGHT</code>
      */
     public void setHorizontalTextAlignment( final int alignement )
     {

@@ -1,10 +1,12 @@
 /*
- * @(#)AbstractCellEditor.java	1.11 03/12/19
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * Copyright 2004 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.component.table;
 
 import ch.jfactory.color.ColorUtils;
@@ -20,14 +22,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.EventListenerList;
 
 /**
- * A base class for <code>CellEditors</code>, providing default implementations for the methods in the
- * <code>CellEditor</code> interface except <code>getCellEditorValue()</code>. Like the other abstract implementations
- * in Swing, also manages a list of listeners.
+ * A base class for <code>CellEditors</code>, providing default implementations for the methods in the <code>CellEditor</code> interface except <code>getCellEditorValue()</code>. Like the other abstract implementations in Swing, also manages a list of listeners.
  *
- * <p> <strong>Warning:</strong> Serialized objects of this class will not be compatible with future Swing releases. The
- * current serialization support is appropriate for short term storage or RMI between applications running the same
- * version of Swing.  As of 1.4, support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup> has
- * been added to the <code>java.beans</code> package. Please see {@link XMLEncoder}.
+ * <p> <strong>Warning:</strong> Serialized objects of this class will not be compatible with future Swing releases. The current serialization support is appropriate for short term storage or RMI between applications running the same version of Swing.  As of 1.4, support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup> has been added to the <code>java.beans</code> package. Please see {@link XMLEncoder}.
  *
  * @author Philip Milne
  * @version 1.11 12/19/03
@@ -85,9 +82,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
         return true;
     }
 
-    /**
-     * Calls <code>fireEditingCanceled</code>.
-     */
+    /** Calls <code>fireEditingCanceled</code>. */
     public void cancelCellEditing()
     {
         fireEditingCanceled();
@@ -114,8 +109,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
     }
 
     /**
-     * Returns an array of all the <code>CellEditorListener</code>s added to this AbstractCellEditor with
-     * addCellEditorListener().
+     * Returns an array of all the <code>CellEditorListener</code>s added to this AbstractCellEditor with addCellEditorListener().
      *
      * @return all of the <code>CellEditorListener</code>s added or an empty array if no listeners have been added
      * @since 1.4
@@ -127,8 +121,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
     }
 
     /**
-     * Notifies all listeners that have registered interest for notification on this event type.  The event instance is
-     * created lazily.
+     * Notifies all listeners that have registered interest for notification on this event type.  The event instance is created lazily.
      *
      * @see EventListenerList
      */
@@ -153,8 +146,7 @@ public abstract class AbstractCellEditor implements CellEditor, Serializable
     }
 
     /**
-     * Notifies all listeners that have registered interest for notification on this event type.  The event instance is
-     * created lazily.
+     * Notifies all listeners that have registered interest for notification on this event type.  The event instance is created lazily.
      *
      * @see EventListenerList
      */

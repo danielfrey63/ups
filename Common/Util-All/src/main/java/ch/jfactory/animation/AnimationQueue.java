@@ -1,20 +1,12 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
-
 package ch.jfactory.animation;
 
 import java.awt.Graphics;
@@ -33,34 +25,22 @@ import javax.swing.JComponent;
  */
 public class AnimationQueue extends JComponent implements StopListener
 {
-    /**
-     * The image to use for the background.
-     */
+    /** The image to use for the background. */
     private Image backgroundImage;
 
-    /**
-     * The border to set within the component.
-     */
+    /** The border to set within the component. */
     private Insets insets = new Insets( 0, 0, 0, 0 );
 
-    /**
-     * An array of paintables to subsequently paint.
-     */
+    /** An array of paintables to subsequently paint. */
     private Paintable[] paintables = new Paintable[0];
 
-    /**
-     * The actual painters index within {@link #paintables}.
-     */
+    /** The actual painters index within {@link #paintables}. */
     private transient int currentIndex = 0;
 
-    /**
-     * The current Paintable.
-     */
+    /** The current Paintable. */
     private Paintable currentPainter;
 
-    /**
-     * Create an animation without background image.
-     */
+    /** Create an animation without background image. */
     public AnimationQueue()
     {
         this( null );
@@ -91,9 +71,7 @@ public class AnimationQueue extends JComponent implements StopListener
         } );
     }
 
-    /**
-     * Starts the next paintable.
-     */
+    /** Starts the next paintable. */
     public void start()
     {
         if ( currentIndex < paintables.length )
@@ -140,9 +118,7 @@ public class AnimationQueue extends JComponent implements StopListener
         currentPainter.paint( (Graphics2D) g );
     }
 
-    /**
-     * Receives notification of a finished paintable. Start the next one.
-     */
+    /** Receives notification of a finished paintable. Start the next one. */
     public void stopPerformed()
     {
         start();

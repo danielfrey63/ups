@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -20,22 +20,17 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 /**
- * This class proviedes methodes to save and restore expansion and selection states of a tree. Make sure to save the
- * state on the <b>same nodes</b> as restore takes place on.
+ * This class proviedes methodes to save and restore expansion and selection states of a tree. Make sure to save the state on the <b>same nodes</b> as restore takes place on.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.9 $ $Date: 2007/09/27 10:41:47 $
  */
 public class TreeExpandedRestorer
 {
-    /**
-     * Selections are stored with path information. If you plan to insert different nodes, you should use this option.
-     */
+    /** Selections are stored with path information. If you plan to insert different nodes, you should use this option. */
     public static final SelectionType SELECTION_BY_PATH = new SelectionType( "SelectionByPath" );
 
-    /**
-     * Selections are stored with row information. If you decide to delete nodes, you should select this option.
-     */
+    /** Selections are stored with row information. If you decide to delete nodes, you should select this option. */
     public static final SelectionType SELECTION_BY_ROW = new SelectionType( "SelectionByRow" );
 
     private List<TreePath> expandedPaths;
@@ -84,9 +79,7 @@ public class TreeExpandedRestorer
         saveExpandedState( path );
     }
 
-    /**
-     * Saves selected node and all expanded paths.
-     */
+    /** Saves selected node and all expanded paths. */
     public void save()
     {
         saveSelection();
@@ -135,9 +128,7 @@ public class TreeExpandedRestorer
         }
     }
 
-    /**
-     * Expands all paths last saved and restores selected node.
-     */
+    /** Expands all paths last saved and restores selected node. */
     public void restore()
     {
         restoreExpandedState();

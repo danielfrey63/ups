@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.update;
 
 import java.util.EventObject;
@@ -10,19 +19,13 @@ import java.util.EventObject;
  */
 public class UpdateChangeEvent extends EventObject
 {
-    /**
-     * Holds value of property StepsCount.
-     */
+    /** Holds value of property StepsCount. */
     private int stepsCount;
 
-    /**
-     * Holds value of property currentStep.
-     */
+    /** Holds value of property currentStep. */
     private int currentStep;
 
-    /**
-     * Holds value of property stepDescription.
-     */
+    /** Holds value of property stepDescription. */
     private String stepDescription;
 
     public UpdateChangeEvent( final Object source )

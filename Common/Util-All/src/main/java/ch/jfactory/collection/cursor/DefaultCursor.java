@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.collection.cursor;
 
 import java.util.ArrayList;
@@ -5,8 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Default Implementation of the Cursor Interface. The implementation is capable to provide cursor implementation by
- * initialize with an array or a list.
+ * Default Implementation of the Cursor Interface. The implementation is capable to provide cursor implementation by initialize with an array or a list.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $

@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.component;
 
 import ch.jfactory.application.presentation.Constants;
@@ -13,8 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * A panel containing a label in boldface on the first line and an edit field displaying the current status on the
- * second.
+ * A panel containing a label in boldface on the first line and an edit field displaying the current status on the second.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.2 $ $Date: 2006/03/14 21:27:55 $
@@ -24,12 +32,7 @@ public class TextEditItem extends JPanel
     private JTextField field;
 
     /**
-     * Build a panel containing a title in boldface on the first line and a edit field displaying the current status as
-     * well as a setup button on the second.<p> The key to retrieve the strings are composed as follows, where
-     * <code>PREFIX</code> indicates the prefix given as an argument: <ul> <li>Label:
-     * <code>PREFIX.TITLE.TEXT</code></li> <li>Button: <code>PREFIX.BUTTON</code></li> </ul> See documentation of {@link
-     * ComponentFactory#createButton(String, ActionListener)} to investigate what
-     * extenstions are used to complete the keys of the button.
+     * Build a panel containing a title in boldface on the first line and a edit field displaying the current status as well as a setup button on the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> <li>Button: <code>PREFIX.BUTTON</code></li> </ul> See documentation of {@link ComponentFactory#createButton(String, ActionListener)} to investigate what extenstions are used to complete the keys of the button.
      *
      * @param prefix   the prefix string to use to access the different strings used to setup
      * @param listener the ActionListener to use for the button
@@ -42,11 +45,7 @@ public class TextEditItem extends JPanel
     }
 
     /**
-     * Build a panel containing a title in boldface on the first line and a edit field displaying the current status on
-     * the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the
-     * prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> </ul> See documentation of
-     * {@link ComponentFactory#createButton(String, ActionListener)} to investigate
-     * what extenstions are used to complete the keys of the button.
+     * Build a panel containing a title in boldface on the first line and a edit field displaying the current status on the second.<p> The key to retrieve the strings are composed as follows, where <code>PREFIX</code> indicates the prefix given as an argument: <ul> <li>Label: <code>PREFIX.TITLE.TEXT</code></li> </ul> See documentation of {@link ComponentFactory#createButton(String, ActionListener)} to investigate what extenstions are used to complete the keys of the button.
      *
      * @param prefix the prefix string to use to access the different strings used to setup
      */

@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree.dnd;
 
@@ -13,8 +13,7 @@ import ch.jfactory.component.tree.NotifiableTreeModel;
 import javax.swing.tree.TreePath;
 
 /**
- * This interface provides an abstraction for the <code>DnDTree</code>. It delibarates the <code>DnDTree</code> from
- * being concerned about the following aspects of the concrete tree implmenetation:
+ * This interface provides an abstraction for the <code>DnDTree</code>. It delibarates the <code>DnDTree</code> from being concerned about the following aspects of the concrete tree implmenetation:
  *
  * <ul>
  *
@@ -33,8 +32,7 @@ import javax.swing.tree.TreePath;
 public interface DnDValidatorUpdater
 {
     /**
-     * Returns whether a drag to the right is appropriate. A drag to the right is detected by the <code>DnDTree</code>
-     * and may be validated by this interfaces implementation.
+     * Returns whether a drag to the right is appropriate. A drag to the right is detected by the <code>DnDTree</code> and may be validated by this interfaces implementation.
      *
      * @param path the path on which nodes the right shift wants to be checked
      * @return whether the right shift is allowed
@@ -42,8 +40,7 @@ public interface DnDValidatorUpdater
     public boolean isRightShiftAllowed( TreePath path );
 
     /**
-     * Returns whether a drag to the left is appropriate. A drag to the left is detected by the <code>DnDTree</code> and
-     * may be validated by this interfaces implementation.
+     * Returns whether a drag to the left is appropriate. A drag to the left is detected by the <code>DnDTree</code> and may be validated by this interfaces implementation.
      *
      * @param path the path on which nodes the left shift wants to be checked
      * @return whether the left shift is allowed
@@ -51,8 +48,7 @@ public interface DnDValidatorUpdater
     public boolean isLeftShiftAllowed( TreePath path );
 
     /**
-     * Returns whether a move from one not to another is appropriate. A move action is detected by the
-     * <code>DnDTree</code> and may be validated by this interfaces implementation.
+     * Returns whether a move from one not to another is appropriate. A move action is detected by the <code>DnDTree</code> and may be validated by this interfaces implementation.
      *
      * @param from  the TreePath being moved, including the node moved
      * @param to    the TreePath <code>from</code> is moved to
@@ -62,14 +58,11 @@ public interface DnDValidatorUpdater
     public boolean isMoveAllowed( TreePath from, TreePath to, int index );
 
     /**
-     * Returns whether any action (<href="#isRightShiftAllowed(TreePath)"> right shift</href> ,
-     * <href="#isLeftShiftAllowed(TreePath)">left shift </href>, <href="#isMoveAllowed(TreePath,
-     * TreePath)">moving</href> ) is allowed.
+     * Returns whether any action (<href="#isRightShiftAllowed(TreePath)"> right shift</href> , <href="#isLeftShiftAllowed(TreePath)">left shift </href>, <href="#isMoveAllowed(TreePath, TreePath)">moving</href> ) is allowed.
      *
      * @param from the TreePath being moved, including the node moved
      * @param to   the TreePath <code>from</code> is moved to
-     * @return whether any action is allowed Todo remove this interface method as it is not correctly supported by the
-     *         DndTree.
+     * @return whether any action is allowed Todo remove this interface method as it is not correctly supported by the DndTree.
      */
     public boolean isAnyActionAllowed( TreePath from, TreePath to );
 

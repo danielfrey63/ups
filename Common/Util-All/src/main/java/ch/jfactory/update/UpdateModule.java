@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.update;
 
 import java.io.IOException;
@@ -11,8 +20,7 @@ import java.io.IOException;
 public interface UpdateModule
 {
     /**
-     * This method should be overwritten to implement the update behavior. Maybe download the jar file and overwrite the
-     * local version.
+     * This method should be overwritten to implement the update behavior. Maybe download the jar file and overwrite the local version.
      *
      * @throws IOException an exception which occurs during update
      */

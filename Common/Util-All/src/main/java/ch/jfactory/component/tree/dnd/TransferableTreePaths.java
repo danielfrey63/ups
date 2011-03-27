@@ -1,5 +1,11 @@
 /*
- * Copyright 2002 by x-matrix Switzerland
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree.dnd;
 
@@ -18,9 +24,7 @@ import javax.swing.tree.TreePath;
  */
 public class TransferableTreePaths implements Transferable
 {
-    /**
-     * The type of DnD object being dragged...
-     */
+    /** The type of DnD object being dragged... */
     public static final DataFlavor TREEPATH_FLAVOR = new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType, "TreePath" );
 
     private final DataFlavor[] flavors = {TREEPATH_FLAVOR};
@@ -37,9 +41,7 @@ public class TransferableTreePaths implements Transferable
         this.path = path;
     }
 
-    /**
-     * @see Transferable#getTransferData(DataFlavor)
-     */
+    /** @see Transferable#getTransferData(DataFlavor) */
     public synchronized Object getTransferData( final DataFlavor flavor ) throws UnsupportedFlavorException
     {
         if ( flavor.isMimeTypeEqual( TREEPATH_FLAVOR.getMimeType() ) )
@@ -53,17 +55,13 @@ public class TransferableTreePaths implements Transferable
         }
     }
 
-    /**
-     * @see Transferable#getTransferDataFlavors()
-     */
+    /** @see Transferable#getTransferDataFlavors() */
     public DataFlavor[] getTransferDataFlavors()
     {
         return flavors;
     }
 
-    /**
-     * @see Transferable#isDataFlavorSupported(DataFlavor)
-     */
+    /** @see Transferable#isDataFlavorSupported(DataFlavor) */
     public boolean isDataFlavorSupported( final DataFlavor flavor )
     {
         return Arrays.asList( flavors ).contains( flavor );

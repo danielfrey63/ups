@@ -1,18 +1,11 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.color;
 
@@ -29,8 +22,7 @@ import net.infonode.util.ImageUtils;
 public class ColorUtils
 {
     /**
-     * Fades the given color by the given percentage towards white. The higher the percentage, the more it is faded
-     * faded towards white.
+     * Fades the given color by the given percentage towards white. The higher the percentage, the more it is faded faded towards white.
      *
      * @param color      the original color
      * @param percentage the percentage to fade
@@ -81,9 +73,7 @@ public class ColorUtils
     }
 
     /**
-     * Returns the Color object assigned by the name. The name might be a hexadecimal number preceeded by a "#" or a
-     * color name as defined in the java.awt.Color class. Passing in a null or non-existing Color does return the
-     * default color.
+     * Returns the Color object assigned by the name. The name might be a hexadecimal number preceeded by a "#" or a color name as defined in the java.awt.Color class. Passing in a null or non-existing Color does return the default color.
      *
      * @param name of the color
      * @return Color object
@@ -94,9 +84,7 @@ public class ColorUtils
     }
 
     /**
-     * Returns the Color object assigned by the name. The name might be a hexadecimal number preceeded by a "#" or a
-     * color name as defined in the java.awt.Color class. Passing in a null or non-existing Color does return the
-     * default color.
+     * Returns the Color object assigned by the name. The name might be a hexadecimal number preceeded by a "#" or a color name as defined in the java.awt.Color class. Passing in a null or non-existing Color does return the default color.
      *
      * @param name         of the color
      * @param defaultColor the default color in case no matching color is found

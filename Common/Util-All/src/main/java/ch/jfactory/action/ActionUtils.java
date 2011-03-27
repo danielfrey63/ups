@@ -1,10 +1,11 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- * ActionUtils.java
- *
- * Created on Feb 7, 2003 1:38:31 PM
- * Created by Daniel
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.action;
 
@@ -27,10 +28,7 @@ public class ActionUtils
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger( ActionUtils.class );
 
     /**
-     * Rigister a button to a given KeyStroke. The method generates a new <code>Action</code> if it hasn't been defined
-     * one, which redirects to all registered <code>ActionListener</code>s. Otherwise it just registers the key for the
-     * registered <code>Action</code>.<p> Note: Make sure to have added the button to the root pane when calling this
-     * method.
+     * Rigister a button to a given KeyStroke. The method generates a new <code>Action</code> if it hasn't been defined one, which redirects to all registered <code>ActionListener</code>s. Otherwise it just registers the key for the registered <code>Action</code>.<p> Note: Make sure to have added the button to the root pane when calling this method.
      *
      * @param keyStroke given KeyStroke on which the action should occur
      * @param button    button which action will executed
@@ -52,10 +50,7 @@ public class ActionUtils
     }
 
     /**
-     * Registers an escape key for the given panel and button. Make sure you place the button and to register actions
-     * before using this method.<p> The method generates a new <code>Action</code> if it hasn't been defined one, which
-     * redirects to all registered <code>ActionListener</code>s. Otherwise it just registers the key for the registered
-     * <code>Action</code>.
+     * Registers an escape key for the given panel and button. Make sure you place the button and to register actions before using this method.<p> The method generates a new <code>Action</code> if it hasn't been defined one, which redirects to all registered <code>ActionListener</code>s. Otherwise it just registers the key for the registered <code>Action</code>.
      *
      * @param button The button to register the key with
      */

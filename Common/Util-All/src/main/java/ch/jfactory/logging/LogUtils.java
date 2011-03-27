@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
+ */
 package ch.jfactory.logging;
 
 import java.io.File;
@@ -33,9 +42,7 @@ public class LogUtils
     }
 
     /**
-     * Opens a stream for the given file. Looks for the file at the following locations: <ol> <li>in any JAR file given
-     * in the class path. Relative file names are prepended with a slash.</li> <li>in the start directory</li> <li>in
-     * the default directory</li> </ol>
+     * Opens a stream for the given file. Looks for the file at the following locations: <ol> <li>in any JAR file given in the class path. Relative file names are prepended with a slash.</li> <li>in the start directory</li> <li>in the default directory</li> </ol>
      *
      * @param propFile the file name, may be preceeded by relative or absolute path
      * @return

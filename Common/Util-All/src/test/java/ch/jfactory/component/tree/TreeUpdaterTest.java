@@ -1,11 +1,11 @@
-/* ====================================================================
- *  Copyright 2004 www.jfactory.ch
+/*
+ * Copyright (c) 2004-2011, Daniel Frey, www.xmatrix.ch
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied.
- * ====================================================================
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed  under this License is distributed on an "AS IS" BASIS,
+ * WITHOUT  WARRANTIES OR CONDITIONS OF  ANY  KIND, either  express or
+ * implied.  See  the  License  for  the  specific  language governing
+ * permissions and limitations under the License.
  */
 package ch.jfactory.component.tree;
 
@@ -36,16 +36,12 @@ public class TreeUpdaterTest extends TestCase
         super( base );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     protected void setUp()
     {
     }
 
-    /**
-     * Reloads the tree model and tests expansion state.
-     */
+    /** Reloads the tree model and tests expansion state. */
     public void testExpansionOnReload()
     {
         final JTree tree = new JTree();
@@ -70,9 +66,7 @@ public class TreeUpdaterTest extends TestCase
         assertTrue( "Expansion state not equal as before.", CollectionUtils.isEqualCollection( current, stored ) );
     }
 
-    /**
-     * Tests that a different selection really does fail in the test.
-     */
+    /** Tests that a different selection really does fail in the test. */
     public void testSelectionNotEqual()
     {
         final JTree tree = new JTree();
@@ -87,9 +81,7 @@ public class TreeUpdaterTest extends TestCase
         assertNotSame( "Selection equal, but shouldn't.", storedSelection, actualSelection );
     }
 
-    /**
-     * Reloads a default mutable tree model and tests for the selection state.
-     */
+    /** Reloads a default mutable tree model and tests for the selection state. */
     public void testSelectionOnReload()
     {
         final JTree tree = new JTree();
@@ -104,9 +96,7 @@ public class TreeUpdaterTest extends TestCase
         assertEquals( "Selection not equal.", storedSelection, actualSelection );
     }
 
-    /**
-     * Reloads a default mutable tree model and tests for the selection state.
-     */
+    /** Reloads a default mutable tree model and tests for the selection state. */
     public void testSelectionOnExchange()
     {
         final JTree tree = new JTree();
@@ -121,10 +111,7 @@ public class TreeUpdaterTest extends TestCase
         assertEquals( "Selection not equal.", storedSelection, actualSelection );
     }
 
-    /**
-     * Sets a new tree model that does not contain the selected node any more and tests for the selection state which
-     * should be non-equal.
-     */
+    /** Sets a new tree model that does not contain the selected node any more and tests for the selection state which should be non-equal. */
     public void testMatchPaths()
     {
         final JTree tree = new JTree();

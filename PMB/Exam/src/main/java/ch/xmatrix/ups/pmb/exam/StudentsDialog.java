@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Tue Jun 17 17:18:19 CEST 2008
  */
-
 package ch.xmatrix.ups.pmb.exam;
 
 import com.jgoodies.forms.factories.Borders;
@@ -23,9 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class StudentsDialog extends JDialog
 {
     public StudentsDialog( final Frame owner )

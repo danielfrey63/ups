@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Sat Jun 27 07:45:18 CEST 2009
  */
-
 package ch.xmatrix.ups.uec.constraints;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -20,9 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class ConstraintsPanel
 {
     private void initComponents()

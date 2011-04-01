@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 import java.util.LinkedHashMap;
@@ -27,9 +26,7 @@ import java.util.Map;
 
 public class LRUMap<K, V> extends LinkedHashMap<K, V>
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3834024740896716600L;
 
     private final int maxCapacity;

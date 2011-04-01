@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.vfs.impl;
 
 import java.io.File;
@@ -237,9 +236,7 @@ public class VfsImpl extends Vfs
         }
     }
 
-    /**
-     * In this method, we will scan the directory hierarchy under the root path and create the corresponding pages.
-     */
+    /** In this method, we will scan the directory hierarchy under the root path and create the corresponding pages. */
     public synchronized void synchronize()
     {
         LOG.debug( "synchronize()" );

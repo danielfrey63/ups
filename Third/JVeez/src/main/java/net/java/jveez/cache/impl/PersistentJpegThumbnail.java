@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.cache.impl;
 
 import java.awt.image.BufferedImage;
@@ -32,9 +31,7 @@ import org.garret.perst.Storage;
 
 public class PersistentJpegThumbnail extends PersistentThumbnail
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3257853160218310455L;
 
     private byte[] bytes;

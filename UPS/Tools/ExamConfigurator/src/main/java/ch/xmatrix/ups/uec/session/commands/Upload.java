@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Fri May 04 00:11:18 CEST 2007
  */
-
 package ch.xmatrix.ups.uec.session.commands;
 
 import com.jgoodies.forms.factories.Borders;
@@ -28,9 +27,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public abstract class Upload extends JDialog
 {
     protected Upload() throws HeadlessException

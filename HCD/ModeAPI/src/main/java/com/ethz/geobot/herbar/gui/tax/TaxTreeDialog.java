@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * TaxTreeDialog.java
+ * Nutzung und Rechte
  *
- * Created on 14. Mai 2002, 17:13
- * Created by Daniel Frey
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui.tax;
 
@@ -27,8 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Dialog to display a tree of the taxonomie and a search field. After disposing the dialog, the actual value may be
- * gotten by calling {@link #getSelectedTaxon()}.
+ * Dialog to display a tree of the taxonomie and a search field. After disposing the dialog, the actual value may be gotten by calling {@link #getSelectedTaxon()}.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $

@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * AppHerbar.java
+ * Nutzung und Rechte
  *
- * Created on ??. ??? 2002
- * Created by ???
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui.mode;
 
@@ -37,21 +51,15 @@ import org.slf4j.LoggerFactory;
  */
 public class ModeManager implements ModeRegistrationSupport
 {
-    /**
-     * Category object for logging.
-     */
+    /** Category object for logging. */
     private static final Logger LOG = LoggerFactory.getLogger( ModeManager.class );
 
     private static ModeManager instance = null;
 
-    /**
-     * Store mode settings from the manifest file.
-     */
+    /** Store mode settings from the manifest file. */
     private final Map<String, ModeInfo> modeInfos = new HashMap<String, ModeInfo>();
 
-    /**
-     * HashMap containing all registered modes.
-     */
+    /** HashMap containing all registered modes. */
     private final Map<Object, Mode> registeredModes = new HashMap<Object, Mode>();
 
     protected ModeManager()
@@ -157,9 +165,7 @@ public class ModeManager implements ModeRegistrationSupport
         registeredModes.remove( mode.getProperty( Mode.NAME ) );
     }
 
-    /**
-     * register all jar files in a directory specified by the "herbar.modedir" environment variable.
-     */
+    /** register all jar files in a directory specified by the "herbar.modedir" environment variable. */
     private void registerAllModes()
     {
         try

@@ -4,7 +4,6 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.2.1 Jun 14, 2005 (09:15:57 EDT) WSDL2Java emitter.
  */
-
 package com.wegmueller.ups.webservice.impl;
 
 import java.net.MalformedURLException;
@@ -89,10 +88,7 @@ public class UPSWebService2ServiceLocator extends Service implements UPSWebServi
         UPSWebService2_address = address;
     }
 
-    /**
-     * For the given interface, get the stub implementation. If this service has no port for the given interface, then
-     * ServiceException is thrown.
-     */
+    /** For the given interface, get the stub implementation. If this service has no port for the given interface, then ServiceException is thrown. */
     public Remote getPort( final Class serviceEndpointInterface ) throws ServiceException
     {
         try
@@ -111,10 +107,7 @@ public class UPSWebService2ServiceLocator extends Service implements UPSWebServi
         throw new ServiceException( "There is no stub implementation for the interface:  " + ( serviceEndpointInterface == null ? "null" : serviceEndpointInterface.getName() ) );
     }
 
-    /**
-     * For the given interface, get the stub implementation. If this service has no port for the given interface, then
-     * ServiceException is thrown.
-     */
+    /** For the given interface, get the stub implementation. If this service has no port for the given interface, then ServiceException is thrown. */
     public Remote getPort( final QName portName, final Class serviceEndpointInterface ) throws ServiceException
     {
         if ( portName == null )
@@ -151,9 +144,7 @@ public class UPSWebService2ServiceLocator extends Service implements UPSWebServi
         return ports.iterator();
     }
 
-    /**
-     * Set the endpoint address for the specified port name.
-     */
+    /** Set the endpoint address for the specified port name. */
     public void setEndpointAddress( final String portName, final String address ) throws ServiceException
     {
         if ( "UPSWebService2".equals( portName ) )
@@ -166,9 +157,7 @@ public class UPSWebService2ServiceLocator extends Service implements UPSWebServi
         }
     }
 
-    /**
-     * Set the endpoint address for the specified port name.
-     */
+    /** Set the endpoint address for the specified port name. */
     public void setEndpointAddress( final QName portName, final String address ) throws ServiceException
     {
         setEndpointAddress( portName.getLocalPart(), address );

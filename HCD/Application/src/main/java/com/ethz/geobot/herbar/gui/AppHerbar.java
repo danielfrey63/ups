@@ -1,28 +1,35 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * AppHerbar.java
+ * Nutzung und Rechte
  *
- * Created on 2. April 2002
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.animation.AnimationQueue;
-import ch.jfactory.animation.Paintable;
-import ch.jfactory.animation.fading.FadingPaintable;
-import ch.jfactory.animation.scrolltext.ScrollingTextPaintable;
 import ch.jfactory.application.SystemUtil;
 import ch.jfactory.application.presentation.WindowUtils;
-import ch.jfactory.component.Dialogs;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
-import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +37,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -72,7 +78,7 @@ public class AppHerbar
     public static final String ENV_SCIENTIFIC = "scientific";
 
     /** Started in the "dendrology" environment. */
-    public static final String ENV_DENDRO = "dendro";
+    public static final String ENV_DENDROLOGY = "dendrology";
 
     public AppHerbar()
     {
@@ -111,7 +117,7 @@ public class AppHerbar
     private void switchDatabase()
     {
         // Todo: Implements as a case of specialized resource bundles
-        final EnvironmentDialog dialog = new EnvironmentDialog( (JFrame) null );
+        final EnvironmentDialog dialog = new EnvironmentDialog( null );
         dialog.setVisible( true );
         int selection = -1;
         if ( dialog.ok )
@@ -128,32 +134,35 @@ public class AppHerbar
             case 0:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
-                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.sc" ) );
+                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
                 System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
                 break;
             case 1:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
-                System.setProperty( "herbar.exam.defaultlist", System.getProperty( "herbar.exam.defaultlist.ge" ) );
+                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.ge" ) );
                 System.setProperty( "xmatrix.subject", ENV_GERMAN );
                 break;
             case 2:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
-                System.setProperty( "xmatrix.subject", ENV_DENDRO );
+                System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
                 break;
             default:
                 break;
         }
         LOG.info( "setting database to (xmatrix.input.db): " + System.getProperty( "xmatrix.input.db" ) );
         LOG.info( "setting filter directory to (herbar.filter.location): " + System.getProperty( "herbar.filter.location" ) );
-        LOG.info( "setting exam list to (herbar.exam.defaultlist): " + System.getProperty( "herbar.exam.defaultlist" ) );
+        LOG.info( "setting exam list to (herbar.exam.default_list): " + System.getProperty( "herbar.exam.default_list" ) );
     }
 
     private void decompressDatabase()
     {
         final String destinationDir = homeDir + "data/";
-        new File( destinationDir ).mkdirs();
+        if ( !new File( destinationDir ).mkdirs() )
+        {
+            LOG.error( "cannot create destination directory at \"" + destinationDir + "\"" );
+        }
         final String[] files = new String[]{
                 "hcdsqlsc.properties", "hcdsqlsc.backup", "hcdsqlsc.data", "hcdsqlsc.script",
                 "hcdsqlge.properties", "hcdsqlge.backup", "hcdsqlge.data", "hcdsqlge.script",
@@ -188,11 +197,10 @@ public class AppHerbar
         catch ( IllegalStateException e )
         {
             LOG.error( "security check failed", e );
-            showPicturesNotFound();
         }
         catch ( Throwable e )
         {
-            LOG.error( "fatal error occured in Application: " + e.getMessage(), e );
+            LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
         }
     }
@@ -207,35 +215,6 @@ public class AppHerbar
                 splash = new Splash( imageIcon );
             }
         } );
-    }
-
-    private static void showPicturesNotFound()
-    {
-        final JComponent pane = ( mainFrame == null ? null : mainFrame.getRootPane() );
-        Dialogs.showErrorMessage( pane, "Fehler", Strings.getString( "ERROR.IMAGES_NOT_FOUND" ) );
-        SystemUtil.EXIT.exit( 1 );
-    }
-
-    private static AnimationQueue getScroller()
-    {
-        final AnimationQueue scrollingComponent = new AnimationQueue();
-        scrollingComponent.setBounds( 100, 68, 200, 167 );
-        final Insets insets = new Insets( 0, 10, 0, 10 );
-        scrollingComponent.setInsets( insets );
-
-        final Color fadeColor = new Color( 255, 255, 255, 150 );
-        final Paintable fader = new FadingPaintable( fadeColor );
-        scrollingComponent.addPaintable( fader );
-
-        final int printSpaceWidth = scrollingComponent.getSize().width - insets.left - insets.right;
-        final InputStream textFileInputStream = AppHerbar.class.getResourceAsStream( "/News.txt" );
-        final ScrollingTextPaintable scroller = new ScrollingTextPaintable( textFileInputStream, printSpaceWidth, true );
-        scroller.setBackgroundColor( fadeColor );
-        scroller.setScrollDelay( 5 );
-        scroller.setParagraphDelay( 12000 );
-        scrollingComponent.addPaintable( scroller );
-
-        return scrollingComponent;
     }
 
     static

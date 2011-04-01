@@ -14,7 +14,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.ust.edit;
 
 import ch.jfactory.application.AbstractMainModel;
@@ -49,9 +48,7 @@ import org.pietschy.command.CommandManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Builds the panel from which taxa can be selected and deselected.
- */
+/** Builds the panel from which taxa can be selected and deselected. */
 public class TaxonCheckBuilder extends ActionCommandPanelBuilder
 {
     private static final Logger LOG = LoggerFactory.getLogger( TaxonCheckBuilder.class );

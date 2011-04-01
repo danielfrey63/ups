@@ -5,7 +5,6 @@
 /*
  * Created by JFormDesigner on Tue Jun 17 14:55:14 CEST 2008
  */
-
 package ch.xmatrix.ups.uec.specimens;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -28,9 +27,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class SpecimensPanel
 {
     private void initComponents()

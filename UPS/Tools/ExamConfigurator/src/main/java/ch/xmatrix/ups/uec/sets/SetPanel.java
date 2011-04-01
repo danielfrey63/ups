@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Tue May 15 19:02:52 CEST 2007
  */
-
 package ch.xmatrix.ups.uec.sets;
 
 import ch.jfactory.component.table.SortedTable;
@@ -20,9 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class SetPanel
 {
     private void initComponents()

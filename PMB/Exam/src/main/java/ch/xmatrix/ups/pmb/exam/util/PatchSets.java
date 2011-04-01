@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2008, Your Corporation. All Rights Reserved.
  */
-
 package ch.xmatrix.ups.pmb.exam.util;
 
 import java.io.BufferedReader;

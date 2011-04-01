@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 import com.drew.imaging.jpeg.JpegMetadataReader;
@@ -261,8 +260,7 @@ public class ImageUtils
 
     /**
      * @param picture the image picture to extract Exif metadata.
-     * @return an <code>javax.swing.ImageIcon</code> that's represent a thumbnail from Exif metadata, and rotate it if
-     *         necessary. null if the image don't support full Exif.
+     * @return an <code>javax.swing.ImageIcon</code> that's represent a thumbnail from Exif metadata, and rotate it if necessary. null if the image don't support full Exif.
      */
     public static BufferedImage loadThumbnailFromEXIF( final Picture picture )
     {
@@ -361,17 +359,12 @@ public class ImageUtils
     }
 
     /**
-     * Convenience method that returns a scaled instance of the provided {@code BufferedImage}. This method will use a
-     * multi-step scaling technique that provides higher quality than the usual one-step technique (only useful in
-     * down-scaling cases, where {@code targetWidth} or {@code targetHeight} is smaller than the original dimensions,
-     * and generally only when the {@code BILINEAR} hint is specified)
+     * Convenience method that returns a scaled instance of the provided {@code BufferedImage}. This method will use a multi-step scaling technique that provides higher quality than the usual one-step technique (only useful in down-scaling cases, where {@code targetWidth} or {@code targetHeight} is smaller than the original dimensions, and generally only when the {@code BILINEAR} hint is specified)
      *
      * @param img          the original image to be scaled
      * @param targetWidth  the desired width of the scaled instance, in pixels
      * @param targetHeight the desired height of the scaled instance, in pixels
-     * @param hint         one of the rendering hints that corresponds to {@code RenderingHints.KEY_INTERPOLATION} (e.g.
-     *                     {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code
-     *                     RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
+     * @param hint         one of the rendering hints that corresponds to {@code RenderingHints.KEY_INTERPOLATION} (e.g. {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
      * @return a scaled version of the original {@code BufferedImage}
      */
     public static BufferedImage createScaledImage( final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint )

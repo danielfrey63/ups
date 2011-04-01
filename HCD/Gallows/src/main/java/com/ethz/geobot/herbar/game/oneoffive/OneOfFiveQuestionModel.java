@@ -1,10 +1,47 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * OneOfFive.java
+ * Nutzung und Rechte
  *
- * Created on 11. April 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
+
+/*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.oneoffive;
 
@@ -40,10 +77,7 @@ public class OneOfFiveQuestionModel
 
     private final HerbarModel model;
 
-    /**
-     * Contains all possible combinations of taxa in all valid levels, that are suitable for the game with a fixed
-     * number of taxa.
-     */
+    /** Contains all possible combinations of taxa in all valid levels, that are suitable for the game with a fixed number of taxa. */
     private final List allCombis = new ArrayList();
 
     // vectors which control and evaluate the wrong, false, and total questions
@@ -115,10 +149,7 @@ public class OneOfFiveQuestionModel
     }
 
     /**
-     * build the crossproducts between the right and the wrong subparent taxa. then build the crossproduct of the taxa
-     * on childLevel under these subparents. finally pack all combinations of right and wrong taxa in form of
-     * QuestionDataUnit-objects in allCombis. dependent of the actual game scope the cominatoric deepness is set to get
-     * always around 100 questions.
+     * build the crossproducts between the right and the wrong subparent taxa. then build the crossproduct of the taxa on childLevel under these subparents. finally pack all combinations of right and wrong taxa in form of QuestionDataUnit-objects in allCombis. dependent of the actual game scope the cominatoric deepness is set to get always around 100 questions.
      *
      * @param childLevel child level
      */
@@ -233,8 +264,7 @@ public class OneOfFiveQuestionModel
     }
 
     /**
-     * The datamodel (5 dataPools in HashMaps) is filled in. a parentTax is a valid parent if it has at least one child
-     * at the childLevel and at least NUMBER_OF_RIGHT_TAXA subparent taxa.
+     * The datamodel (5 dataPools in HashMaps) is filled in. a parentTax is a valid parent if it has at least one child at the childLevel and at least NUMBER_OF_RIGHT_TAXA subparent taxa.
      *
      * @param parentTax  parent taxon
      * @param childLevel child level

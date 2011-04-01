@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Fri May 04 15:20:35 CEST 2007
  */
-
 package ch.xmatrix.ups.uec.session.commands;
 
 import java.awt.BorderLayout;
@@ -16,9 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class Uplod extends JDialog
 {
     public Uplod( final Frame owner )

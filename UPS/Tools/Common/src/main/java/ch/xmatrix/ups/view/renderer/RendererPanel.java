@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.view.renderer;
 
 import ch.jfactory.color.ColorUtils;
@@ -30,17 +29,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 /**
- * Panel with four fields to be displayed in a tree or list. The first field contains an optional icon, the second an
- * optional prefix component (i.e. a checkbox), the third the object text and the fourth a textual extention to
- * display.<p/>
+ * Panel with four fields to be displayed in a tree or list. The first field contains an optional icon, the second an optional prefix component (i.e. a checkbox), the third the object text and the fourth a textual extention to display.<p/>
  *
- * To understand the detailed color changes in this panel, look at the decision tables for colors dependent of the three
- * states <code>enabled</code> (En), <code>ok</code> (Ok) and <code>selected</code> (Se). States in paranthesis are not
- * occuring states, mentioned only to complete the decision table.<p/>
+ * To understand the detailed color changes in this panel, look at the decision tables for colors dependent of the three states <code>enabled</code> (En), <code>ok</code> (Ok) and <code>selected</code> (Se). States in paranthesis are not occuring states, mentioned only to complete the decision table.<p/>
  *
- * Ok-state dependent text forground color (OkDependent). The four colors are <code>OK_FULL</code> (full ok color),
- * <code>OK_FADE</code> (faded ok color), <code>NOK_FULL</code> (full nok color) and <code>NOK_FADE</code> (faded nok
- * color):
+ * Ok-state dependent text forground color (OkDependent). The four colors are <code>OK_FULL</code> (full ok color), <code>OK_FADE</code> (faded ok color), <code>NOK_FULL</code> (full nok color) and <code>NOK_FADE</code> (faded nok color):
  *
  * <pre>Decision table
  * En Ok Se |  OkDependent
@@ -55,9 +48,7 @@ import javax.swing.border.LineBorder;
  * 1  1  1  |  COLOR_OK_FADE
  * </pre>
  *
- * Ok-independent text foreground color (IndependentText) are <code>COLOR_FOREGROUND_DISABLED</code> (default disbled
- * color), <code>COLOR_FOREGROUND_SELECTED</code> (selected foreground) and <code>COLOR_FOREGROUND_DESELECTED</code>
- * (deselected foreground):
+ * Ok-independent text foreground color (IndependentText) are <code>COLOR_FOREGROUND_DISABLED</code> (default disbled color), <code>COLOR_FOREGROUND_SELECTED</code> (selected foreground) and <code>COLOR_FOREGROUND_DESELECTED</code> (deselected foreground):
  *
  * <pre>Decision tree
  * En Se |  IndependentText
@@ -67,8 +58,7 @@ import javax.swing.border.LineBorder;
  * 1  1  |  COLOR_FOREGROUND_SELECTED
  * </pre>
  *
- * Background colors (BackgroundColor) are <code>COLOR_BACKGROUND_DESELECTED</code> (i.e. transparent) and
- * <code>COLOR_BACKGROUND_SELECTED</code> (dark background):
+ * Background colors (BackgroundColor) are <code>COLOR_BACKGROUND_DESELECTED</code> (i.e. transparent) and <code>COLOR_BACKGROUND_SELECTED</code> (dark background):
  *
  * <pre>Decision tree
  * Se |  BackgroundColor
@@ -82,83 +72,53 @@ import javax.swing.border.LineBorder;
  */
 public class RendererPanel extends JPanel
 {
-    /**
-     * Used to display ok-independent selected background.
-     */
+    /** Used to display ok-independent selected background. */
     private static final Color COLOR_BACKGROUND_SELECTED = UIManager.getColor( "Tree.selectionBackground" );
 
-    /**
-     * Used to display ok-independent deselected background.
-     */
+    /** Used to display ok-independent deselected background. */
     private static final Color COLOR_BACKGROUND_DESELECTED = UIManager.getColor( "Tree.background" );
 
-    /**
-     * Array of background colors.
-     */
+    /** Array of background colors. */
     private static final Color[] COLOR_BACKGROUND = {COLOR_BACKGROUND_DESELECTED, COLOR_BACKGROUND_SELECTED};
 
-    /**
-     * Used to display disabled text.
-     */
+    /** Used to display disabled text. */
     private static final Color COLOR_FOREGROUND_DISABLED = UIManager.getColor( "Label.disabledForeground" );
 
-    /**
-     * Used to display ok-independent selected text.
-     */
+    /** Used to display ok-independent selected text. */
     private static final Color COLOR_FOREGROUND_SELECTED = UIManager.getColor( "Tree.selectionForeground" );
 
-    /**
-     * Used to display ok-independent deselected text.
-     */
+    /** Used to display ok-independent deselected text. */
     private static final Color COLOR_FOREGROUND_DESELECTED = UIManager.getColor( "Tree.foreground" );
 
-    /**
-     * Array of foreground colors.
-     */
+    /** Array of foreground colors. */
     private static final Color[] COLOR_FOREGROUND = {
             COLOR_FOREGROUND_DISABLED, COLOR_FOREGROUND_DESELECTED, COLOR_FOREGROUND_SELECTED};
 
-    /**
-     * Base color for ok state.
-     */
+    /** Base color for ok state. */
     private static final Color COLOR_OK_FULL = new Color( 0, 200, 0 );
 
-    /**
-     * Base color for nok state.
-     */
+    /** Base color for nok state. */
     private static final Color COLOR_NOK_FULL = Color.red;
 
-    /**
-     * Used to display selected text in ok state.
-     */
+    /** Used to display selected text in ok state. */
     private static final Color COLOR_OK_FADE = ColorUtils.fade( COLOR_OK_FULL, 0.5 );
 
-    /**
-     * Used to display selected text in nok state.
-     */
+    /** Used to display selected text in nok state. */
     private static final Color COLOR_NOK_FADE = ColorUtils.fade( COLOR_NOK_FULL, 0.5 );
 
-    /**
-     * Array of colors for decision table.
-     */
+    /** Array of colors for decision table. */
     private static final Color[] COLOR_OKDEPENDENT = {
             COLOR_NOK_FADE, COLOR_NOK_FADE, COLOR_OK_FADE, COLOR_OK_FADE,
             COLOR_NOK_FULL, COLOR_NOK_FADE, COLOR_OK_FULL, COLOR_OK_FADE
     };
 
-    /**
-     * Color of selected border.
-     */
+    /** Color of selected border. */
     private static final Color COLOR_BORDER_SELECTED = UIManager.getColor( "Button.focus" );
 
-    /**
-     * Selected border.
-     */
+    /** Selected border. */
     public static final LineBorder BORDER_SELECTED = new LineBorder( COLOR_BORDER_SELECTED );
 
-    /**
-     * Deselected border.
-     */
+    /** Deselected border. */
     public static final EmptyBorder BORDER_DESELECTED = new EmptyBorder( 1, 1, 1, 1 );
 
     public static final Border[] BORDERS = new Border[]{BORDER_DESELECTED, BORDER_SELECTED};
@@ -188,9 +148,7 @@ public class RendererPanel extends JPanel
 
     private FormLayout layout;
 
-    /**
-     * Whether the prefix component (i.e. a checkbox) is enabled or not.
-     */
+    /** Whether the prefix component (i.e. a checkbox) is enabled or not. */
     private boolean prefixEnabled;
 
     public RendererPanel()
@@ -257,8 +215,7 @@ public class RendererPanel extends JPanel
     }
 
     /**
-     * Set this to the text you want to display at the end of the panel. If set to null, the place is freed and nothing
-     * is displayed
+     * Set this to the text you want to display at the end of the panel. If set to null, the place is freed and nothing is displayed
      *
      * @param extention the text to set, or null
      */
@@ -287,8 +244,7 @@ public class RendererPanel extends JPanel
     }
 
     /**
-     * Removes or adds the prefix component according to the argument given. Make sure to set the prefix component
-     * before calling this method.
+     * Removes or adds the prefix component according to the argument given. Make sure to set the prefix component before calling this method.
      *
      * @param showPrefix whether to show it
      */
@@ -375,8 +331,7 @@ public class RendererPanel extends JPanel
     }
 
     /**
-     * Call this method to update the subcomponents states to reflect the actual state. The prefix component is enabled
-     * if prefix-enabled is set to true AND the panel itself is enabled.
+     * Call this method to update the subcomponents states to reflect the actual state. The prefix component is enabled if prefix-enabled is set to true AND the panel itself is enabled.
      *
      * @see #setPrefixEnabled(boolean)
      * @see #setEnabled(boolean)
@@ -396,17 +351,13 @@ public class RendererPanel extends JPanel
 
     //--- Utilities
 
-    /**
-     * Adds the extention to the panel.
-     */
+    /** Adds the extention to the panel. */
     private void addExtention()
     {
         textPanel.add( extention, cc.xy( 3, 1 ) );
     }
 
-    /**
-     * Removes the extention from the panel.
-     */
+    /** Removes the extention from the panel. */
     private void removeExtention()
     {
         textPanel.remove( extention );

@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.viewer;
 
 import java.awt.Cursor;
@@ -47,9 +46,7 @@ import org.apache.log4j.Logger;
 
 public class ViewerImagePanel extends JComponent
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3617292324544132916L;
 
     private static final Logger LOG = Logger.getLogger( ViewerImagePanel.class );

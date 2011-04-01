@@ -8,7 +8,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.jfactory.projecttime;
 
 import ch.jfactory.application.MainRunner;

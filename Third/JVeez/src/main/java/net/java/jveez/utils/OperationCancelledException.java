@@ -19,14 +19,11 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 public class OperationCancelledException extends RuntimeException
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3978983271487191088L;
 
     public OperationCancelledException()

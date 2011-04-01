@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * CatcherQuestionModel.java
+ * Nutzung und Rechte
  *
- * Created on 17. Juni 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.catcher;
 
@@ -45,17 +59,13 @@ public class CatcherQuestionModel
         this.model = model;
     }
 
-    /**
-     * puts the right answers in a hasmap of all right answers of this game
-     */
+    /** puts the right answers in a hasmap of all right answers of this game */
     public void setRightAnswers()
     {
         rightAnswers = rightAnswers + 1;
     }
 
-    /**
-     * puts the right answers in a hasmap of all right answers of this game
-     */
+    /** puts the right answers in a hasmap of all right answers of this game */
     public boolean rightAnswersComplete()
     {
         return rightAnswers == amountQuestions;
@@ -161,9 +171,7 @@ public class CatcherQuestionModel
         vectParentTaxa.add( taxon );
     }
 
-    /**
-     * fill a vector with objects of all taxon/ancestorTacon-pairs possible
-     */
+    /** fill a vector with objects of all taxon/ancestorTacon-pairs possible */
     public void initializeDataPool()
     {
         allQuestions.removeAllElements();

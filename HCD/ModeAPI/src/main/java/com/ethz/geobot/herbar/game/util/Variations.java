@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * Variations.java
+ * Nutzung und Rechte
  *
- * Created on 1. Juli 2002, 15:26
- * Created by Daniel Frey
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.util;
 
@@ -32,9 +46,7 @@ public class Variations
     }
 
     /**
-     * Calculate all given k-tuples of the objs array. Order does not matter and repetitions are not allowed
-     * (combinatorial subset). (Note: Implementation appears a little bit hacky, but I did not find a shorter/better way
-     * to calculate it.)
+     * Calculate all given k-tuples of the objs array. Order does not matter and repetitions are not allowed (combinatorial subset). (Note: Implementation appears a little bit hacky, but I did not find a shorter/better way to calculate it.)
      *
      * @param k     the subset (tuple) size
      * @param array the array to get the subsets (k-tuples) from
@@ -50,8 +62,7 @@ public class Variations
     }
 
     /**
-     * Recursive chunk of code, which takes the result Vector, a prefix holder, the original array and the tuple size as
-     * its parameters. The result Vector is filled subsequently with one Vector for each new subset.
+     * Recursive chunk of code, which takes the result Vector, a prefix holder, the original array and the tuple size as its parameters. The result Vector is filled subsequently with one Vector for each new subset.
      *
      * @param prefix  holds a chunk of the array to prefix subsequent calls with
      * @param array   the array containing the data to subset from

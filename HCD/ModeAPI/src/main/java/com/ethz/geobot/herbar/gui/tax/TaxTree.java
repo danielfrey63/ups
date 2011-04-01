@@ -1,4 +1,27 @@
 /*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
+
+/*
  * TaxTreePanel.java
  *
  * Created on 4. April 2002, 16:15
@@ -21,8 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Simple JTree that takes a TreeNode and uses a DefaultTreeModel with a Taxon specific CellRenderer. This tree allows
- * for searches by implementing the #TreeFinder interface.
+ * Simple JTree that takes a TreeNode and uses a DefaultTreeModel with a Taxon specific CellRenderer. This tree allows for searches by implementing the #TreeFinder interface.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
@@ -33,9 +55,7 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
 
     private final static TreeNode EMPTY_TREE = new DefaultMutableTreeNode();
 
-    /**
-     * Creates a new instance of TaxTreePanel
-     */
+    /** Creates a new instance of TaxTreePanel */
     public TaxTree()
     {
         super( EMPTY_TREE );
@@ -56,8 +76,7 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
     }
 
     /**
-     * initialize a tax tree which displays all taxa in a {@link HerbarModel} Add itself as a {@link
-     * ModelChangeListener} to the given {@link HerbarModel}
+     * initialize a tax tree which displays all taxa in a {@link HerbarModel} Add itself as a {@link ModelChangeListener} to the given {@link HerbarModel}
      *
      * @param model the model to be shown
      */
@@ -69,8 +88,7 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
     }
 
     /**
-     * initialize a tax tree with a new {@link HerbarModel} Add itself as a {@link ModelChangeListener} to the given
-     * {@link HerbarModel}
+     * initialize a tax tree with a new {@link HerbarModel} Add itself as a {@link ModelChangeListener} to the given {@link HerbarModel}
      *
      * @param model the model to be shown or null for an empty model
      */

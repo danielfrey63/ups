@@ -1,18 +1,24 @@
-/* ====================================================================
- *  Copyright 2004-2005 www.xmatrix.ch
+/*
+ * Copyright (c) 2011.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Nutzung und Rechte
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  permissions and limitations under the License.
- * ====================================================================
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui.commands;
 
@@ -138,7 +144,7 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
             {
                 JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich. Die Stoffliste mit dem Namen \"" +
                         name + "\" \n" +
-                        "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung.",
+                        "steht beim nächsten Start eBot zur Verfügung.",
                         "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE );
             }
             else
@@ -146,8 +152,8 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
                 JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich aber nicht vollständig. " +
                         "Folgende Arten wurden nicht konvertiert: " + ERR + ". Die " +
                         "Stoffliste mit dem Namen \"" + name + "\" \n" +
-                        "steht beim nächsten Start der Herbar CD-ROM Version 2 zur Verfügung. Bitte fügen Sie die " +
-                        "fehlende(n) Art(en) manuell in der Herbar CD-ROM hinzu.",
+                        "steht beim nächsten Start von eBot zur Verfügung. Bitte fügen Sie die " +
+                        "fehlende(n) Art(en) manuell in eBot hinzu.",
                         "Konvertierung mit Warnungen.", JOptionPane.INFORMATION_MESSAGE );
             }
 

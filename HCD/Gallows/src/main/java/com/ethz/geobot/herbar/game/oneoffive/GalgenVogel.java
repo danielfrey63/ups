@@ -1,10 +1,47 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * GalgenVogel.java
+ * Nutzung und Rechte
  *
- * Created on 26. April 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
+
+/*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.oneoffive;
 
@@ -55,9 +92,7 @@ public class GalgenVogel extends GalgenPolygon
         init();
     }
 
-    /**
-     * sets initial values of birdposition, sound-stati, animation-stati
-     */
+    /** sets initial values of birdposition, sound-stati, animation-stati */
     public void init()
     {
         this.birdX = 750;
@@ -67,9 +102,7 @@ public class GalgenVogel extends GalgenPolygon
         this.setIsVisible( false );
     }
 
-    /**
-     * @see GalgenPolygon#paint(Graphics)
-     */
+    /** @see GalgenPolygon#paint(Graphics) */
     public void paint( final Graphics g )
     {
         if ( this.isVisible() )
@@ -93,9 +126,7 @@ public class GalgenVogel extends GalgenPolygon
         }
     }
 
-    /**
-     * @see GalgenPolygon#update(Graphics)
-     */
+    /** @see GalgenPolygon#update(Graphics) */
     public void update( final Graphics g )
     {
         if ( isVisible() && isGrowing() )
@@ -129,9 +160,7 @@ public class GalgenVogel extends GalgenPolygon
         }
     }
 
-    /**
-     * Sounds prelouding
-     */
+    /** Sounds prelouding */
     void startLoadingSounds()
     {
         final String codeBase = System.getProperty( "xmatrix.sound.path" ) + "/";

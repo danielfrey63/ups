@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2008, Your Corporation. All Rights Reserved.
  */
-
 package ch.xmatrix.ups.pmb.exam;
 
 import ch.jfactory.application.presentation.WindowUtils;
@@ -28,19 +27,13 @@ import sun.misc.BASE64Encoder;
  */
 public class PasswordDialogController
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( PasswordDialogController.class );
 
-    /**
-     * Contains all registered users.
-     */
+    /** Contains all registered users. */
     private final Properties registry = new Properties();
 
-    /**
-     * The dialog to display.
-     */
+    /** The dialog to display. */
     private final PasswordDialog dialog;
 
     private boolean hasName;

@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * Catcher.java
+ * Nutzung und Rechte
  *
- * Created on 01. Mai 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.catcher;
 
@@ -172,9 +186,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
     /**
      * @see ModeActivation#queryDeactivate()
      */
-    /**
-     * @see ModeActivation#queryDeactivate()
-     */
+    /** @see ModeActivation#queryDeactivate() */
     public boolean queryDeactivate()
     {
         if ( !gameButton.getText().equals( Strings.getString( Catcher.class, "CATCHER.START" ) ) )
@@ -195,9 +207,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         return true;
     }
 
-    /**
-     * @see ModeActivation#deactivate()
-     */
+    /** @see ModeActivation#deactivate() */
     public void deactivate()
     {
         naviPanel.remove( carpet );
@@ -206,9 +216,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         bee.stopAllSounds();
     }
 
-    /**
-     * @see ModeActivation#activate()
-     */
+    /** @see ModeActivation#activate() */
     public void activate()
     {
         gameButton.setText( Strings.getString( Catcher.class, "CATCHER.START" ) );
@@ -218,9 +226,7 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         catcherQuestionModel.initializeDataPool();
     }
 
-    /**
-     * @see KeyListener#keyPressed(KeyEvent)
-     */
+    /** @see KeyListener#keyPressed(KeyEvent) */
     public void keyPressed( final KeyEvent e )
     {
         if ( occupied == 0 )
@@ -291,23 +297,17 @@ public class Catcher extends JPanel implements ScoreListener, KeyListener, ModeA
         }
     }
 
-    /**
-     * @see KeyListener#keyReleased(KeyEvent)
-     */
+    /** @see KeyListener#keyReleased(KeyEvent) */
     public void keyReleased( final KeyEvent e )
     {
     }
 
-    /**
-     * @see KeyListener#keyTyped(KeyEvent)
-     */
+    /** @see KeyListener#keyTyped(KeyEvent) */
     public void keyTyped( final KeyEvent e )
     {
     }
 
-    /**
-     * @see ScoreListener#scoreChanged()
-     */
+    /** @see ScoreListener#scoreChanged() */
     public void scoreChanged()
     {
         final int count = countScore.getTotalScore();

@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * CorrectnessChecker.java
+ * Nutzung und Rechte
  *
- * Created on Feb 8, 2003 7:38:59 PM
- * Created by Daniel
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui;
 
@@ -20,14 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Calculates the distance of genus and species and prepares an answer.<p> Some mistakes may pass as
- * <code>IS_NEARLY_TRUE</code> if they occur in the follwoing context: <ul> <li>The ending of any name is a commonly
- * mixed up ending</li> <li>Any one addition, deletion or change of a character may occur</li> </ul> So the following
- * guess samples for Cladonia rangiferina should pass: <ul> <li>Cladonia rangiferin<b>um</b></li> <li>Cladoni<b>um</b>
- * rangiferina</li> <li>Cladoni<b>um</b> rangiferin<b>um</b></li> <li>Cl<b>o</b>donia rangiferina</li> <li>Cladonia
- * rang<b>o</b>ferina</li> <li>Cl<b>o</b>doni<b>um</b> rangiferin<b>um</b></li> <li>Cladoni<b>um</b>
- * rang<b>o</b>ferin<b>um</b></li> </ul> Whereas the following shouldn't: <ul> <li>Cl<b>o</b>doni<b>um</b>
- * rang<b>o</b>ferin<b>um</b></li> </ul>
+ * Calculates the distance of genus and species and prepares an answer.<p> Some mistakes may pass as <code>IS_NEARLY_TRUE</code> if they occur in the follwoing context: <ul> <li>The ending of any name is a commonly mixed up ending</li> <li>Any one addition, deletion or change of a character may occur</li> </ul> So the following guess samples for Cladonia rangiferina should pass: <ul> <li>Cladonia rangiferin<b>um</b></li> <li>Cladoni<b>um</b> rangiferina</li> <li>Cladoni<b>um</b> rangiferin<b>um</b></li> <li>Cl<b>o</b>donia rangiferina</li> <li>Cladonia rang<b>o</b>ferina</li> <li>Cl<b>o</b>doni<b>um</b> rangiferin<b>um</b></li> <li>Cladoni<b>um</b> rang<b>o</b>ferin<b>um</b></li> </ul> Whereas the following shouldn't: <ul> <li>Cl<b>o</b>doni<b>um</b> rang<b>o</b>ferin<b>um</b></li> </ul>
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
@@ -213,10 +220,7 @@ public class CorrectnessChecker
     }
 
     /**
-     * This method checks the name taking it as a Taxon.<p> The first <code>Correctness</code> returned indicates the
-     * Levenstein distance of the two strings.<p> The second <code>Correctness</code> gives a mesure for the endings.
-     * Certain endings may be tolerated, which is indicated with {@link #IS_NEARLY_TRUE}, others may be definively wrong
-     * ({@link #IS_FALSE}) or correct ({@link #IS_TRUE}).
+     * This method checks the name taking it as a Taxon.<p> The first <code>Correctness</code> returned indicates the Levenstein distance of the two strings.<p> The second <code>Correctness</code> gives a mesure for the endings. Certain endings may be tolerated, which is indicated with {@link #IS_NEARLY_TRUE}, others may be definively wrong ({@link #IS_FALSE}) or correct ({@link #IS_TRUE}).
      *
      * @param correct the correct taxon name
      * @param guess   guessfor the taxon name

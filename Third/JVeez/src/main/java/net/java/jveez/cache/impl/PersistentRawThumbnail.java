@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.cache.impl;
 
 import java.awt.Image;
@@ -35,9 +34,7 @@ import org.garret.perst.Storage;
 
 public class PersistentRawThumbnail extends PersistentThumbnail
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 4120849941255368752L;
 
     public static transient final ColorModel COLOR_MODEL = ColorModel.getRGBdefault();

@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Tue Apr 10 10:02:30 CEST 2007
  */
-
 package ch.xmatrix.ups.pmb.input;
 
 import ch.jfactory.application.view.status.StatusBar;

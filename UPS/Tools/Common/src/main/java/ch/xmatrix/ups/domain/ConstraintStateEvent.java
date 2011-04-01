@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.domain;
 
 import java.util.EventObject;

@@ -16,7 +16,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-
 package com.smardec.mousegestures;
 
 import java.awt.Component;
@@ -32,44 +31,28 @@ import javax.swing.SwingUtilities;
  */
 class MouseGesturesRecognizer
 {
-    /**
-     * String representation of left movement.
-     */
+    /** String representation of left movement. */
     private static final String LEFT_MOVE = "L";
 
-    /**
-     * String representation of right movement.
-     */
+    /** String representation of right movement. */
     private static final String RIGHT_MOVE = "R";
 
-    /**
-     * String representation of up movement.
-     */
+    /** String representation of up movement. */
     private static final String UP_MOVE = "U";
 
-    /**
-     * String representation of down movement.
-     */
+    /** String representation of down movement. */
     private static final String DOWN_MOVE = "D";
 
-    /**
-     * Grid size. Default is 30.
-     */
+    /** Grid size. Default is 30. */
     private int gridSize = 30;
 
-    /**
-     * Reference to {@link MouseGestures}.
-     */
+    /** Reference to {@link MouseGestures}. */
     private final MouseGestures mouseGestures;
 
-    /**
-     * Start point for current movement.
-     */
+    /** Start point for current movement. */
     private Point startPoint = null;
 
-    /**
-     * String representation of gesture.
-     */
+    /** String representation of gesture. */
     private final StringBuffer gesture = new StringBuffer();
 
     /**
@@ -184,8 +167,7 @@ class MouseGesturesRecognizer
     /**
      * Returns string representation of mouse gesture.
      *
-     * @return String representation of mouse gesture. "L" for left, "R" for right, "U" for up, "D" for down movements.
-     *         For example: "ULD".
+     * @return String representation of mouse gesture. "L" for left, "R" for right, "U" for up, "D" for down movements. For example: "ULD".
      */
     String getGesture()
     {
@@ -202,9 +184,7 @@ class MouseGesturesRecognizer
         return gesture.length() > 0;
     }
 
-    /**
-     * Clears temporary info about previous gesture.
-     */
+    /** Clears temporary info about previous gesture. */
     void clearTemporaryInfo()
     {
         startPoint = null;

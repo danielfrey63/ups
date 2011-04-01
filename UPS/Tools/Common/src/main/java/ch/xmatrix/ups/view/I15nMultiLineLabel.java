@@ -15,7 +15,6 @@
  *
  * Created on 10. September 2002, 13:39
  */
-
 package ch.xmatrix.ups.view;
 
 import ch.jfactory.resource.Strings;
@@ -34,9 +33,7 @@ import javax.swing.text.StyledDocument;
  */
 public class I15nMultiLineLabel extends JTextPane
 {
-    /**
-     * Creates a new instance of JMultiLineLabel
-     */
+    /** Creates a new instance of JMultiLineLabel */
     public I15nMultiLineLabel()
     {
         super();
@@ -69,12 +66,10 @@ public class I15nMultiLineLabel extends JTextPane
     }
 
     /**
-     * Create a new instance of JMultiLineLabel and initialize it with the given text. Sets the horizontal text
-     * alignment.
+     * Create a new instance of JMultiLineLabel and initialize it with the given text. Sets the horizontal text alignment.
      *
      * @param key        the key to search for the text
-     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
-     *                   <code>StyleConstants.ALIGN_RIGHT</code>
+     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>, <code>StyleConstants.ALIGN_RIGHT</code>
      */
     public I15nMultiLineLabel( final String key, final int alignement )
     {
@@ -86,8 +81,7 @@ public class I15nMultiLineLabel extends JTextPane
     /**
      * Sets the horizontal text alignment.
      *
-     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>,
-     *                   <code>StyleConstants.ALIGN_RIGHT</code>
+     * @param alignement on of <code>StyleConstants.ALIGN_LEFT</code>, <code>StyleConstants.ALIGN_CENTER</code>, <code>StyleConstants.ALIGN_RIGHT</code>
      */
     public void setHorizontalTextAlignment( final int alignement )
     {

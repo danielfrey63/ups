@@ -5,7 +5,6 @@
 /*
  * Created by JFormDesigner on Mon Aug 04 10:43:51 CEST 2008
  */
-
 package ch.xmatrix.ups.pmb.exam;
 
 import com.jgoodies.forms.factories.Borders;
@@ -23,9 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class PasswordDialog extends JDialog
 {
     public PasswordDialog( final Frame owner )

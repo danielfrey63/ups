@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.fstree;
 
 import java.awt.Color;
@@ -31,9 +30,7 @@ import net.java.jveez.vfs.Directory;
 
 public class FileSystemTree extends JTree
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3257572789031286832L;
 
     public FileSystemTree()
@@ -46,9 +43,7 @@ public class FileSystemTree extends JTree
 
     private class DirectoryNodeRenderer extends DefaultTreeCellRenderer
     {
-        /**
-         * Comment for <code>serialVersionUID</code>
-         */
+        /** Comment for <code>serialVersionUID</code> */
         private static final long serialVersionUID = 3256999952080188472L;
 
         private final Color normalColor;

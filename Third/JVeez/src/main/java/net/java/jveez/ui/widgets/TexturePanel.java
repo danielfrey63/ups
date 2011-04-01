@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.widgets;
 
 import java.awt.Graphics;
@@ -33,9 +32,7 @@ import javax.swing.JPanel;
 
 public class TexturePanel extends JPanel
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3258413911131763766L;
 
     private TexturePaint texturePaint;

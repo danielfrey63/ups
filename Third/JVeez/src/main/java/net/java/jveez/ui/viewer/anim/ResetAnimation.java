@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.viewer.anim;
 
 public class ResetAnimation implements Animation

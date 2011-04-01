@@ -5,7 +5,6 @@
 /*
  * Created by JFormDesigner on Mon Aug 04 11:02:23 CEST 2008
  */
-
 package ch.xmatrix.ups.pmb.exam.util;
 
 import com.jgoodies.forms.factories.Borders;
@@ -30,14 +29,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class HashDialog extends JDialog
 {
-    /**
-     * This class logger.
-     */
+    /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( HashDialog.class );
 
     public HashDialog( final Frame owner )

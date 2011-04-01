@@ -4,7 +4,6 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.2.1 Jun 14, 2005 (09:15:57 EDT) WSDL2Java emitter.
  */
-
 package com.wegmueller.ups.webservice.impl;
 
 public class UPSWebService2SoapBindingStub extends org.apache.axis.client.Stub implements com.wegmueller.ups.webservice.impl.UPSWebService2

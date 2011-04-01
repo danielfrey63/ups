@@ -1,20 +1,55 @@
 <?xml version="1.0"?>
 <!--
-/*
- * Copyright 2001-2004 The Apache Software Foundation.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
- -->
-<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
-        "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+  ~ Copyright (c) 2011.
+  ~
+  ~ Nutzung und Rechte
+  ~
+  ~ Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+  ~ allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+  ~ (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+  ~ kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+  ~ ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+  ~ nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+  ~
+  ~ Postkonto
+  ~
+  ~ Unterricht, 85-761469-0, Vermerk "eBot"
+  ~ IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+  ~
+  ~ Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+  ~ Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+  ~ Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+  ~ Nutzungsansprüchen zur Verfügung gestellt.
+  -->
+
 <!--
-  Checkstyle checks configured for Maven.
--->
+  ~ Copyright (c) 2011.
+  ~
+  ~ Nutzung und Rechte
+  ~
+  ~ Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+  ~ allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+  ~ (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+  ~ kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+  ~ ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+  ~ nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+  ~
+  ~ Postkonto
+  ~
+  ~ Unterricht, 85-761469-0, Vermerk "eBot"
+  ~ IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+  ~
+  ~ Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+  ~ Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+  ~ Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+  ~ Nutzungsansprüchen zur Verfügung gestellt.
+  -->
+
+        !DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+        <!--
+          Checkstyle checks configured for Maven.
+        -->
 <module name="Checker">
 
     <!-- Checks that a package.html file exists for each package.     -->

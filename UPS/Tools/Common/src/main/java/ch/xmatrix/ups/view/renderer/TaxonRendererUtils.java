@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.view.renderer;
 
 import ch.jfactory.resource.ImageLocator;
@@ -36,19 +35,13 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  */
 public class TaxonRendererUtils
 {
-    /**
-     * The cell constraints for the form layout manager.
-     */
+    /** The cell constraints for the form layout manager. */
     public static final CellConstraints CC = new CellConstraints();
 
-    /**
-     * The component to use for a node.
-     */
+    /** The component to use for a node. */
     public static final RendererPanel PANEL = new RendererPanel();
 
-    /**
-     * Disable construction of utility class.
-     */
+    /** Disable construction of utility class. */
     private TaxonRendererUtils()
     {
         super();
@@ -166,8 +159,7 @@ public class TaxonRendererUtils
     }
 
     /**
-     * Sets the icon, text, selected and enabled state of the renderer panel. The icon is set to selected only if the
-     * states for selected and enabled are both set to true.
+     * Sets the icon, text, selected and enabled state of the renderer panel. The icon is set to selected only if the states for selected and enabled are both set to true.
      *
      * @param object   the user object to display
      * @param selected whether to display it selected
@@ -184,9 +176,7 @@ public class TaxonRendererUtils
         return PANEL;
     }
 
-    /**
-     * Tree cell renderer implementation delegating to enclosing class.
-     */
+    /** Tree cell renderer implementation delegating to enclosing class. */
     public static class DefaultConstraintsTreeCellRenderer extends DefaultTreeCellRenderer
     {
         public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean sel,
@@ -197,9 +187,7 @@ public class TaxonRendererUtils
         }
     }
 
-    /**
-     * List cell renderer implementation delegating to enclosing class.
-     */
+    /** List cell renderer implementation delegating to enclosing class. */
     public static class DefaultConstraintsListCellRenderer extends DefaultListCellRenderer
     {
         public Component getListCellRendererComponent( final JList list, final Object value, final int index,

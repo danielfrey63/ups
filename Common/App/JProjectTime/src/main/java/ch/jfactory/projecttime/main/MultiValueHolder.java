@@ -27,7 +27,6 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package ch.jfactory.projecttime.main;
 
 import com.jgoodies.binding.beans.ExtendedPropertyChangeSupport;
@@ -38,14 +37,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * A simple {@link ValueModel} implementation that holds a generic value. If the value
- * changes, a <code>PropertyChangeEvent</code> is fired that can be observed using a
- * <code>PropertyChangeListener</code>.<p>
+ * A simple {@link ValueModel} implementation that holds a generic value. If the value changes, a <code>PropertyChangeEvent</code> is fired that can be observed using a <code>PropertyChangeListener</code>.<p>
  *
- * Differences in the old and new value can be checked either using <code>==</code> or <code>#equals</code>. The unbound
- * property <em>identityCheckEnabled</em> determines which mechanism is used to check for changes in
- * <code>#setValue(Object)</code>. This check can be overriden for individual changes by the boolean parameter in
- * <code>#setValue(Object, boolean)</code>.<p>
+ * Differences in the old and new value can be checked either using <code>==</code> or <code>#equals</code>. The unbound property <em>identityCheckEnabled</em> determines which mechanism is used to check for changes in <code>#setValue(Object)</code>. This check can be overriden for individual changes by the boolean parameter in <code>#setValue(Object, boolean)</code>.<p>
  *
  * <strong>Constraints:</strong> The value is of type <code>Object</code>.
  *
@@ -58,15 +52,11 @@ import java.beans.PropertyChangeListener;
  */
 public final class MultiValueHolder extends AbstractValueModel
 {
-    /**
-     * Holds a value of type <code>Object</code> that is to be observed.
-     */
+    /** Holds a value of type <code>Object</code> that is to be observed. */
     private Object[] value;
 
     /**
-     * Describes whether a value change event shall be fired if the old and new value are different. If
-     * <code>true</code> the old and new value are compared with <code>==</code>. If <code>false</code> the values are
-     * compared with <code>#equals</code>.
+     * Describes whether a value change event shall be fired if the old and new value are different. If <code>true</code> the old and new value are compared with <code>==</code>. If <code>false</code> the values are compared with <code>#equals</code>.
      *
      * @see #setValue(Object[], boolean)
      * @see Model#firePropertyChange(String, Object, Object, boolean)
@@ -76,17 +66,14 @@ public final class MultiValueHolder extends AbstractValueModel
 
     // Instance Creation ****************************************************
 
-    /**
-     * Constructs a <code>ValueHolder</code> with <code>null</code> as initial value.
-     */
+    /** Constructs a <code>ValueHolder</code> with <code>null</code> as initial value. */
     public MultiValueHolder()
     {
         this( null );
     }
 
     /**
-     * Constructs a <code>ValueHolder</code> with the given initial value. By default the old and new value are compared
-     * using <code>#equals</code> when firing value change events.
+     * Constructs a <code>ValueHolder</code> with the given initial value. By default the old and new value are compared using <code>#equals</code> when firing value change events.
      *
      * @param initialValues the initial value
      */
@@ -99,8 +86,7 @@ public final class MultiValueHolder extends AbstractValueModel
      * Constructs a <code>ValueHolder</code> with the given initial value.
      *
      * @param initialValues the initial value
-     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use
-     *                      <code>#equals</code>
+     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use <code>#equals</code>
      */
     public MultiValueHolder( final Object[] initialValues, final boolean checkIdentity )
     {
@@ -121,9 +107,7 @@ public final class MultiValueHolder extends AbstractValueModel
     }
 
     /**
-     * Sets a new value. Fires a value change event if the old and new value differ. The difference is tested with
-     * <code>==</code> if <code>isIdentityCheckEnabled</code> answers <code>true</code>. The values are compared with
-     * <code>#equals</code> if the identity check is disabled.
+     * Sets a new value. Fires a value change event if the old and new value differ. The difference is tested with <code>==</code> if <code>isIdentityCheckEnabled</code> answers <code>true</code>. The values are compared with <code>#equals</code> if the identity check is disabled.
      *
      * @param newValue the new value
      */
@@ -139,11 +123,9 @@ public final class MultiValueHolder extends AbstractValueModel
     // Optional Support for Firing Events on Identity Change ***************
 
     /**
-     * Answers whether this ValueHolder fires value change events if and only if the old and new value are not the
-     * same.
+     * Answers whether this ValueHolder fires value change events if and only if the old and new value are not the same.
      *
-     * @return <code>true</code> if the old and new value are compared using <code>==</code>, <code>false</code> if the
-     *         values are compared using <code>#equals</code>
+     * @return <code>true</code> if the old and new value are compared using <code>==</code>, <code>false</code> if the values are compared using <code>#equals</code>
      */
     public boolean isIdentityCheckEnabled()
     {
@@ -151,12 +133,9 @@ public final class MultiValueHolder extends AbstractValueModel
     }
 
     /**
-     * Sets the comparison that is used to check differences between the old and new value when firing value change
-     * events. This is the default setting that is used when changing the value via <code>#setValue(Object)</code>. You
-     * can override this default setting by changing a value via <code>#setValue(Object, boolean)</code>.
+     * Sets the comparison that is used to check differences between the old and new value when firing value change events. This is the default setting that is used when changing the value via <code>#setValue(Object)</code>. You can override this default setting by changing a value via <code>#setValue(Object, boolean)</code>.
      *
-     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use
-     *                      <code>#equals</code>
+     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use <code>#equals</code>
      */
     public void setIdentityCheckEnabled( final boolean checkIdentity )
     {
@@ -164,16 +143,12 @@ public final class MultiValueHolder extends AbstractValueModel
     }
 
     /**
-     * Sets a new value. Fires a value change event if the old and new value differ. The difference is tested with
-     * <code>==</code> if <code>checkIdentity</code> is <code>true</code>. The values are compared with
-     * <code>#equals</code> if the <code>checkIdentiy</code> parameter is set to <code>false</code>.<p>
+     * Sets a new value. Fires a value change event if the old and new value differ. The difference is tested with <code>==</code> if <code>checkIdentity</code> is <code>true</code>. The values are compared with <code>#equals</code> if the <code>checkIdentiy</code> parameter is set to <code>false</code>.<p>
      *
-     * Unlike general bean property setters, this method does not fire an event if the old and new value are
-     * <code>null</code>.
+     * Unlike general bean property setters, this method does not fire an event if the old and new value are <code>null</code>.
      *
      * @param newValue      the new value
-     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use
-     *                      <code>#equals</code>
+     * @param checkIdentity true to compare the old and new value using <code>==</code>, false to use <code>#equals</code>
      */
     public void setValue( final Object[] newValue, final boolean checkIdentity )
     {

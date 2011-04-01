@@ -19,19 +19,14 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 import java.awt.Component;
 
-/**
- * Borrowed from the Spin project : http://spin.sourceforge.net
- */
+/** Borrowed from the Spin project : http://spin.sourceforge.net */
 public class EDTRuleViolation extends RuntimeException
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3833460721496633652L;
 
     private final Component component;

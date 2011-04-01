@@ -19,16 +19,13 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.config;
 
 import org.garret.perst.Persistent;
 
 class ConfigurationRoot extends Persistent
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 4121135852798686774L;
 
     public SystemConfiguration systemConfiguration;

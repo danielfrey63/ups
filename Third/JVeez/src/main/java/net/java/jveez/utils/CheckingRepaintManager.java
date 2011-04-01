@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 import java.awt.Component;
@@ -28,16 +27,12 @@ import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 import org.apache.log4j.Logger;
 
-/**
- * Borrowed from the Spin project : http://spin.sourceforge.net
- */
+/** Borrowed from the Spin project : http://spin.sourceforge.net */
 public class CheckingRepaintManager extends RepaintManager
 {
     private static final Logger LOG = Logger.getLogger( CheckingRepaintManager.class );
 
-    /**
-     * Overriden to check EDT rule.
-     */
+    /** Overriden to check EDT rule. */
     public synchronized void addInvalidComponent( final JComponent component )
     {
         checkEDTRule( component );
@@ -45,9 +40,7 @@ public class CheckingRepaintManager extends RepaintManager
         super.addInvalidComponent( component );
     }
 
-    /**
-     * Overriden to check EDT rule.
-     */
+    /** Overriden to check EDT rule. */
     public synchronized void addDirtyRegion( final JComponent component,
                                              final int x, final int y, final int w, final int h )
     {
@@ -105,8 +98,7 @@ public class CheckingRepaintManager extends RepaintManager
      * Is the given stackTraceElement liable to the EDT rule.
      *
      * @param element element
-     * @return <code>true</code> if the className of the given element denotes a subclass of
-     *         <code>java.awt.Component</code>
+     * @return <code>true</code> if the className of the given element denotes a subclass of <code>java.awt.Component</code>
      */
     protected boolean isLiableToEDTRule( final StackTraceElement element ) throws Exception
     {
@@ -114,8 +106,7 @@ public class CheckingRepaintManager extends RepaintManager
     }
 
     /**
-     * Indicate a violation of the EDT rule. This default implementation throws the given exception, subclasses may want
-     * to log the exception instead.
+     * Indicate a violation of the EDT rule. This default implementation throws the given exception, subclasses may want to log the exception instead.
      *
      * @param violation violation of EDT rule
      */

@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * FlyingBee.java
+ * Nutzung und Rechte
  *
- * Created on 1. Mai 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.catcher;
 
@@ -97,9 +111,7 @@ public class FlyingBee extends FlyingFlower
         return this.y + bee.getIconHeight() / 2;
     }
 
-    /**
-     * resets all the values concerning the bee-position and its environment
-     */
+    /** resets all the values concerning the bee-position and its environment */
     public void init()
     {
         this.x = w / 2;
@@ -112,9 +124,7 @@ public class FlyingBee extends FlyingFlower
         soundPlayed = false;
     }
 
-    /**
-     * stops all sounds when changing the modus
-     */
+    /** stops all sounds when changing the modus */
     public void stopAllSounds()
     {
         if ( firstClip != null )
@@ -179,17 +189,13 @@ public class FlyingBee extends FlyingFlower
         }
     }
 
-    /**
-     * starts playing the background-sound when start-button is pressed
-     */
+    /** starts playing the background-sound when start-button is pressed */
     public void startSoundLoop()
     {
         playSound( 2 );
     }
 
-    /**
-     * @see Component#paint(Graphics)
-     */
+    /** @see Component#paint(Graphics) */
     public void paint( final Graphics g )
     {
         g.drawImage( bee.getImage(), x, y, this );
@@ -314,9 +320,7 @@ public class FlyingBee extends FlyingFlower
         }
     }
 
-    /**
-     * preload sound
-     */
+    /** preload sound */
     void startLoadingSounds()
     {
         final String codeBase = System.getProperty( "xmatrix.sound.path" ) + "/";

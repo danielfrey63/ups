@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * TaxonNameInterrogator.java
+ * Nutzung und Rechte
  *
- * Created on Feb 12, 2003 5:44:06 PM
- * Created by Daniel
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.gui;
 
@@ -39,8 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Displays a text field and an enter button to put guesses of the focused species name. The guesses are appended to the
- * end of this panel.
+ * Displays a text field and an enter button to put guesses of the focused species name. The guesses are appended to the end of this panel.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
@@ -88,9 +101,7 @@ public class TaxonNameInterrogator extends JPanel
     }
 
     /**
-     * Asks for the taxon on the specified level. If the taxon is not from the specified level, but from a lower level,
-     * the parent taxon at the given level is used. If the taxon is from a higher level than the specified one, the
-     * entry is disabled.
+     * Asks for the taxon on the specified level. If the taxon is not from the specified level, but from a lower level, the parent taxon at the given level is used. If the taxon is from a higher level than the specified one, the entry is disabled.
      *
      * @param level             The level of the taxon
      * @param interrogatorModel The model implementation to use
@@ -236,8 +247,7 @@ public class TaxonNameInterrogator extends JPanel
     }
 
     /**
-     * Evaluates the given text and compares it to the current taxon. Constructs out of the result an appropriate label
-     * to display in the guesses list.
+     * Evaluates the given text and compares it to the current taxon. Constructs out of the result an appropriate label to display in the guesses list.
      *
      * @param guess       The text to evaluate
      * @param taxon       The taxon to compare to
@@ -291,8 +301,7 @@ public class TaxonNameInterrogator extends JPanel
     }
 
     /**
-     * Returns whether the entry field and button should be enabled by considering the level of this interrogator and
-     * the current focus taxon.
+     * Returns whether the entry field and button should be enabled by considering the level of this interrogator and the current focus taxon.
      *
      * @param taxon the new focus to set
      * @return enabled state

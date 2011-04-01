@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.widgets;
 
 import java.awt.Graphics;
@@ -32,9 +31,7 @@ import javax.swing.JButton;
 
 public class AutoHideIconButton extends JButton
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 4049640087845220402L;
 
     private static final MouseListener AUTO_HIDE_LISTENER = new MouseAdapter()

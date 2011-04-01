@@ -4,7 +4,6 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.2.1 Jun 14, 2005 (09:15:57 EDT) WSDL2Java emitter.
  */
-
 package ch.ethz.id.bi.soaplka.web.soap.service;
 
 public interface Lka extends javax.xml.rpc.Service

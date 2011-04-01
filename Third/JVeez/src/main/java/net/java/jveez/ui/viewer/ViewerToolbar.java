@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.viewer;
 
 import java.awt.BorderLayout;
@@ -32,9 +31,7 @@ import javax.swing.border.EtchedBorder;
 
 public class ViewerToolbar extends JPanel
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3258407348405219889L;
 
     private final JLabel imageIndexLabel = new JLabel( "", JLabel.HORIZONTAL );

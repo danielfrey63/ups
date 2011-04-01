@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui;
 
 import java.awt.Dimension;
@@ -31,9 +30,7 @@ import net.java.jveez.utils.Utils;
 
 public class ActivityNotifier extends JLabel
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3760564174300067634L;
 
     private static final Icon activeIcon = Utils.loadIcon( "net/java/jveez/icons/loading.gif" );

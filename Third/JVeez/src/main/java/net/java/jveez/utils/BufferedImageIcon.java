@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.utils;
 
 import java.awt.Component;
@@ -27,12 +26,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 
-/**
- * This class can be used intead of <code>javax.swing.ImageIcon</code> when the the source image is a buffered
- * image.<br> <br> As a buffered image is already loaded, this implementation avoids the use of the MediaTracker that
- * can be seen in the implementation of <code>javax.swing.ImageIcon</code>. Note that this simplification probably
- * offers only a pretty small performance gain.
- */
+/** This class can be used intead of <code>javax.swing.ImageIcon</code> when the the source image is a buffered image.<br> <br> As a buffered image is already loaded, this implementation avoids the use of the MediaTracker that can be seen in the implementation of <code>javax.swing.ImageIcon</code>. Note that this simplification probably offers only a pretty small performance gain. */
 public class BufferedImageIcon implements Icon
 {
     private final BufferedImage image;

@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.domain;
 
 import com.jgoodies.binding.beans.Model;
@@ -48,9 +47,7 @@ public class PersonData extends Model
         copy( person );
     }
 
-    /**
-     * Init object with defaults.
-     */
+    /** Init object with defaults. */
     public PersonData()
     {
         // Do nothing.

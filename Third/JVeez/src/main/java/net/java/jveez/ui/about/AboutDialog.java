@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.about;
 
 import java.awt.BorderLayout;
@@ -36,9 +35,7 @@ import net.java.jveez.utils.Utils;
 
 public class AboutDialog extends JDialog
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3617857486338994993L;
 
     private JLabel logo;

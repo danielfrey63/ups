@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.view.renderer;
 
 import ch.xmatrix.ups.domain.Constraint;
@@ -22,8 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * {@link RendererPanel} based renderer aware of constraints (all constraints and constraints in focus) and default
- * taxa.
+ * {@link RendererPanel} based renderer aware of constraints (all constraints and constraints in focus) and default taxa.
  *
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/04/06 11:01:11 $
@@ -58,10 +56,7 @@ public class ConstraintsRendererUtils
     }
 
     /**
-     * Configures a RendererPanel to display the constraints state as an extention. The extention has the form <code>
-     * name (count/minimum)</code> where the <code>name</code> is optinally displayed in case it has not to be hidden,
-     * <code>count</code> is the actual number of selected species and <code>minimum</code> is the minimal requirement
-     * of species selected.
+     * Configures a RendererPanel to display the constraints state as an extention. The extention has the form <code> name (count/minimum)</code> where the <code>name</code> is optinally displayed in case it has not to be hidden, <code>count</code> is the actual number of selected species and <code>minimum</code> is the minimal requirement of species selected.
      *
      * @param panel       the RendererPanel
      * @param constraints the constraints
@@ -95,8 +90,7 @@ public class ConstraintsRendererUtils
     }
 
     /**
-     * Returns the total count of selected taxa that are part of the constraint (that is: lie in the hierarchical system
-     * in the scope of the constraints taxa).
+     * Returns the total count of selected taxa that are part of the constraint (that is: lie in the hierarchical system in the scope of the constraints taxa).
      *
      * @param constraint  the constraint (the scope)
      * @param constraints the constraints context

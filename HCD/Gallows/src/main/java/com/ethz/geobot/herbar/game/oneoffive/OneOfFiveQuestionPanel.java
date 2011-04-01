@@ -1,10 +1,47 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * OneOfFive.java
+ * Nutzung und Rechte
  *
- * Created on 11. April 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
+
+/*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.oneoffive;
 
@@ -46,14 +83,10 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question
 
     private QuestionDataUnit unit;
 
-    /**
-     * Contains the five taxa for the next question
-     */
+    /** Contains the five taxa for the next question */
     private List taxItem = new ArrayList();
 
-    /**
-     * Position of the wrong Taxon within the vector taxItem
-     */
+    /** Position of the wrong Taxon within the vector taxItem */
     private int randomAdd;
 
     private final OneOfFiveQuestionModel questionModel;
@@ -103,31 +136,23 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question
         }
     }
 
-    /**
-     * @see Question#firstQuestion()
-     */
+    /** @see Question#firstQuestion() */
     public void firstQuestion()
     {
     }
 
-    /**
-     * @see Question#lastQuestion()
-     */
+    /** @see Question#lastQuestion() */
     public void lastQuestion()
     {
     }
 
-    /**
-     * initializes the data to generate all questions out of it.
-     */
+    /** initializes the data to generate all questions out of it. */
     public void init()
     {
         questionModel.initializeDataModel();
     }
 
-    /**
-     * cleans the text in all buttons and disables them
-     */
+    /** cleans the text in all buttons and disables them */
     public void reset()
     {
         for ( final JButton aTaxButton : taxButton )
@@ -137,17 +162,13 @@ public class OneOfFiveQuestionPanel extends JPanel implements Question
         }
     }
 
-    /**
-     * Restarts the game within the given scope.
-     */
+    /** Restarts the game within the given scope. */
     public void restart()
     {
         questionModel.fillAllQuestions( countScore.getMaxScore() );
     }
 
-    /**
-     * get the QuestionDataUnit for the next question.
-     */
+    /** get the QuestionDataUnit for the next question. */
     public void nextQuestion()
     {
         unit = questionModel.getTaxon();

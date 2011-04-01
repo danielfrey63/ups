@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
 package com.ethz.geobot.herbar.modeapi.wizard.filter;
 
 import ch.jfactory.application.presentation.Constants;
@@ -588,8 +610,7 @@ public class WizardFilterDefinitionPane extends WizardPane
     }
 
     /**
-     * Checks for levels not consistent with the scope and removes them. Makes sure that at least one level is in the
-     * scope.
+     * Checks for levels not consistent with the scope and removes them. Makes sure that at least one level is in the scope.
      *
      * @param node the FilterTreeNode containing the FilterDefinitionDetail to check
      * @return <code>true</code> if no changes were made
@@ -653,9 +674,7 @@ public class WizardFilterDefinitionPane extends WizardPane
     }
 
     /**
-     * Checks whether the given scope is consistent with the other scopes in the model. Especially it is checked whether
-     * the given scope is: <ul> <li>not the same any other one in the model</li> <li>is not a child of any scope in the
-     * model</li> <li>is not a parent of any scope in the model</li> </ul>
+     * Checks whether the given scope is consistent with the other scopes in the model. Especially it is checked whether the given scope is: <ul> <li>not the same any other one in the model</li> <li>is not a child of any scope in the model</li> <li>is not a parent of any scope in the model</li> </ul>
      *
      * @param detailToCheck the FilterDefinitionDetail containing the scope under investigation
      * @return <code>true</code> if all conditions evaluate to <code>true</code>

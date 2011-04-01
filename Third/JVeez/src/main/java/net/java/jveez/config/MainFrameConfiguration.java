@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.config;
 
 import java.awt.Dimension;
@@ -29,9 +28,7 @@ import org.garret.perst.Storage;
 
 public class MainFrameConfiguration extends ConfigurationItem
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3618419311145203252L;
 
     private int x;

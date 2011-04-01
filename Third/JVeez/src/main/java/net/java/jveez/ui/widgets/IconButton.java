@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.widgets;
 
 import java.awt.AlphaComposite;
@@ -35,9 +34,7 @@ import net.java.jveez.utils.Utils;
 
 public class IconButton extends JButton
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3258409538721166389L;
 
     private static final BufferedImage mouseOverIcon = Utils.loadImage( "net/java/jveez/icons/mouse-over.png" );

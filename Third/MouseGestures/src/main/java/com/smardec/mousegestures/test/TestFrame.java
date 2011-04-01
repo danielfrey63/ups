@@ -16,7 +16,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-
 package com.smardec.mousegestures.test;
 
 import com.smardec.mousegestures.MouseGestures;
@@ -37,9 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * Simple test frame.
- */
+/** Simple test frame. */
 public class TestFrame extends JFrame
 {
     private MouseGestures mouseGestures = new MouseGestures();

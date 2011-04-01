@@ -1,10 +1,24 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * Carpet.java
+ * Nutzung und Rechte
  *
- * Created on 09. Mai 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.catcher;
 
@@ -24,19 +38,13 @@ import org.slf4j.LoggerFactory;
  */
 public class Carpet extends Canvas implements Runnable
 {
-    /**
-     * number of flying flowers
-     */
+    /** number of flying flowers */
     public static final int MAX = 10;
 
-    /**
-     * number of flying gras
-     */
+    /** number of flying gras */
     public static final int MAXGRAS = 20;
 
-    /**
-     * number of flying birds
-     */
+    /** number of flying birds */
     public static final int MAXBIRD = 5;
 
     private static final Logger LOG = LoggerFactory.getLogger( Carpet.class );
@@ -117,9 +125,7 @@ public class Carpet extends Canvas implements Runnable
         flyingBird = flyB;
     }
 
-    /**
-     * preload sound of collision between bird and bee
-     */
+    /** preload sound of collision between bird and bee */
     void startLoadingSounds()
     {
         final String codeBase = System.getProperty( "xmatrix.sound.path" ) + "/";
@@ -127,9 +133,7 @@ public class Carpet extends Canvas implements Runnable
         soundList.startLoading( "kollision.au" );
     }
 
-    /**
-     * plays the sound when crash between bird and bee
-     */
+    /** plays the sound when crash between bird and bee */
     public void playSound()
     {
         soundList.getClip( "kollision.au" ).play();
@@ -199,9 +203,7 @@ public class Carpet extends Canvas implements Runnable
         g.drawImage( image, 0, 0, this );
     }
 
-    /**
-     * Main processing method for the carpet object
-     */
+    /** Main processing method for the carpet object */
     public void run()
     {
         try
@@ -229,9 +231,7 @@ public class Carpet extends Canvas implements Runnable
         }
     }
 
-    /**
-     * initializes the Thread
-     */
+    /** initializes the Thread */
     public void init()
     {
         threadRunning = true;
@@ -288,9 +288,7 @@ public class Carpet extends Canvas implements Runnable
         paint( g );
     }
 
-    /**
-     * stops the Thread
-     */
+    /** stops the Thread */
     public void stop()
     {
         threadRunning = false;

@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.thumbnails;
 
 import java.awt.AlphaComposite;
@@ -32,7 +31,6 @@ import javax.swing.JList;
 import net.java.jveez.utils.SortingAlgorithm;
 import net.java.jveez.utils.Utils;
 import org.apache.log4j.Logger;
-import sun.nio.cs.ext.MacArabic;
 
 public class ThumbnailList<T> extends JList
 {

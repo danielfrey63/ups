@@ -16,7 +16,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-
 package com.smardec.mousegestures;
 
 import java.awt.AWTEvent;
@@ -38,31 +37,19 @@ import java.util.Vector;
  */
 public class MouseGestures
 {
-    /**
-     * Responsible for monitoring mouse gestures.
-     */
+    /** Responsible for monitoring mouse gestures. */
     private AWTEventListener mouseGesturesEventListener = null;
 
-    /**
-     * Responsible for processing mouse events.
-     */
+    /** Responsible for processing mouse events. */
     private final MouseGesturesRecognizer mouseGesturesRecognizer = new MouseGesturesRecognizer( this );
 
-    /**
-     * Vector of listeners.
-     */
+    /** Vector of listeners. */
     private final Vector<MouseGesturesListener> listeners = new Vector<MouseGesturesListener>();
 
-    /**
-     * Specifies mouse button for gestures handling. Can be <code>MouseEvent.BUTTON1_MASK</code>,
-     * <code>MouseEvent.BUTTON2_MASK</code> or <code>MouseEvent.BUTTON3_MASK</code>. The default is
-     * <code>MouseEvent.BUTTON3_MASK</code> (right mouse button).
-     */
+    /** Specifies mouse button for gestures handling. Can be <code>MouseEvent.BUTTON1_MASK</code>, <code>MouseEvent.BUTTON2_MASK</code> or <code>MouseEvent.BUTTON3_MASK</code>. The default is <code>MouseEvent.BUTTON3_MASK</code> (right mouse button). */
     private int mouseButton = MouseEvent.BUTTON3_MASK;
 
-    /**
-     * Starts monitoring mouse gestures.
-     */
+    /** Starts monitoring mouse gestures. */
     public void start()
     {
         if ( mouseGesturesEventListener == null )
@@ -103,9 +90,7 @@ public class MouseGestures
         Toolkit.getDefaultToolkit().addAWTEventListener( mouseGesturesEventListener, AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK );
     }
 
-    /**
-     * Stops monitoring mouse gestures.
-     */
+    /** Stops monitoring mouse gestures. */
     public void stop()
     {
         if ( mouseGesturesEventListener != null )
@@ -135,8 +120,7 @@ public class MouseGestures
     /**
      * Returns mouse button used for gestures handling.
      *
-     * @return <code>MouseEvent.BUTTON1_MASK</code>, <code>MouseEvent.BUTTON2_MASK</code> or
-     *         <code>MouseEvent.BUTTON3_MASK</code>
+     * @return <code>MouseEvent.BUTTON1_MASK</code>, <code>MouseEvent.BUTTON2_MASK</code> or <code>MouseEvent.BUTTON3_MASK</code>
      */
     public int getMouseButton()
     {
@@ -146,8 +130,7 @@ public class MouseGestures
     /**
      * Sets mouse button used for gestures handling.
      *
-     * @param mouseButton <code>MouseEvent.BUTTON1_MASK</code>, <code>MouseEvent.BUTTON2_MASK</code> or
-     *                    <code>MouseEvent.BUTTON3_MASK</code>
+     * @param mouseButton <code>MouseEvent.BUTTON1_MASK</code>, <code>MouseEvent.BUTTON2_MASK</code> or <code>MouseEvent.BUTTON3_MASK</code>
      */
     public void setMouseButton( final int mouseButton )
     {
@@ -181,8 +164,7 @@ public class MouseGestures
     /**
      * Fires event when full mouse gesture is recogized (mouse button is released).
      *
-     * @param gesture String representation of mouse gesture. "L" for left, "R" for right, "U" for up, "D" for down
-     *                movements. For example: "ULD".
+     * @param gesture String representation of mouse gesture. "L" for left, "R" for right, "U" for up, "D" for down movements. For example: "ULD".
      */
     private void fireProcessMouseGesture( final String gesture )
     {
@@ -193,8 +175,7 @@ public class MouseGestures
     /**
      * Fires event when new mouse movement is recognized but mouse gesture is not yet completed.
      *
-     * @param gesture String representation of recognized movements. "L" for left, "R" for right, "U" for up, "D" for
-     *                down movements. For example: "ULD".
+     * @param gesture String representation of recognized movements. "L" for left, "R" for right, "U" for up, "D" for down movements. For example: "ULD".
      */
     void fireGestureMovementRecognized( final String gesture )
     {

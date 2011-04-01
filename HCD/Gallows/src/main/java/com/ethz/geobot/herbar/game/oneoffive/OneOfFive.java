@@ -1,10 +1,47 @@
 /*
- * Herbar CD-ROM version 2
+ * Copyright (c) 2011.
  *
- * OneOfFive.java
+ * Nutzung und Rechte
  *
- * Created on 11. April 2002, 11:51
- * Created by lilo
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
+ */
+
+/*
+ * Copyright (c) 2011.
+ *
+ * Nutzung und Rechte
+ *
+ * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
+ * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ *
+ * Postkonto
+ *
+ * Unterricht, 85-761469-0, Vermerk "eBot"
+ * IBAN 59 0900 0000 8576  1469 0; BIC POFICHBEXXX
+ *
+ * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
+ * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
+ * Nutzungsansprüchen zur Verfügung gestellt.
  */
 package com.ethz.geobot.herbar.game.oneoffive;
 
@@ -131,9 +168,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         return ComponentFactory.createButton( OneOfFive.class, "ONEOFFIVE.START", action );
     }
 
-    /**
-     * @see ScoreListener#scoreChanged()
-     */
+    /** @see ScoreListener#scoreChanged() */
     public void scoreChanged()
     {
         final int rights = countScore.getRightScore();
@@ -152,9 +187,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         }
     }
 
-    /**
-     * @see ModeActivation#deactivate()
-     */
+    /** @see ModeActivation#deactivate() */
     public void deactivate()
     {
         galgi.stopThread();
@@ -163,9 +196,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         countDown.setShowScoreBar( false );
     }
 
-    /**
-     * @see ModeActivation#activate()
-     */
+    /** @see ModeActivation#activate() */
     public void activate()
     {
         buttonMischen.setEnabled( true );
@@ -176,9 +207,7 @@ public class OneOfFive extends JPanel implements ModeActivation, ScoreListener
         galgi.initThread();
     }
 
-    /**
-     * @see ModeActivation#queryDeactivate()
-     */
+    /** @see ModeActivation#queryDeactivate() */
     public boolean queryDeactivate()
     {
         if ( !buttonMischen.isEnabled() )

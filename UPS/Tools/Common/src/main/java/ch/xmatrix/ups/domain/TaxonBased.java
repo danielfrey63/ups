@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.domain;
 
 import ch.jfactory.model.IdAware;
@@ -79,10 +78,7 @@ public interface TaxonBased extends IdAware
      */
     boolean isFixed();
 
-    /**
-     * Set the fixed status to true. There is no way to reverse this status. Instaed a copy of this data object has to
-     * be made and may be altered.
-     */
+    /** Set the fixed status to true. There is no way to reverse this status. Instaed a copy of this data object has to be made and may be altered. */
     void setFixed();
 
     /**

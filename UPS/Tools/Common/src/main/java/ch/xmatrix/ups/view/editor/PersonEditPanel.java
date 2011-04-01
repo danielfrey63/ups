@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.view.editor;
 
 import ch.jfactory.component.AbstractPlainDocument;

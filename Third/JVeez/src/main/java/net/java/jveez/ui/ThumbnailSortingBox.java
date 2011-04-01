@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui;
 
 import java.awt.event.ActionEvent;
@@ -30,9 +29,7 @@ import net.java.jveez.utils.PictureSortingAlgorithm;
 
 public class ThumbnailSortingBox extends JComboBox
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3258411724859324210L;
 
     public ThumbnailSortingBox( final ThumbnailPanel thumbnailPanel, final PictureSortingAlgorithm algorithm )

@@ -9,7 +9,6 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-
 package ch.xmatrix.ups.controller;
 
 import java.awt.event.KeyAdapter;
@@ -21,22 +20,17 @@ import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
 /**
- * Delegates space key press and mouse clicks to a common handler method {@link #handleSelection(TreePath)
- * handleSelection(TreePath)}.
+ * Delegates space key press and mouse clicks to a common handler method {@link #handleSelection(TreePath) handleSelection(TreePath)}.
  *
  * @author Daniel Frey
  * @version $Revision: 1.1 $ $Date: 2006/04/25 11:08:11 $
  */
 public abstract class TreeCheckboxController extends MouseAdapter implements KeyListener
 {
-    /**
-     * The tree to hand the events for.
-     */
+    /** The tree to hand the events for. */
     private final JTree tree;
 
-    /**
-     * The delegate to implement a key listener.
-     */
+    /** The delegate to implement a key listener. */
     private final KeyListener keyDelegate = new CheckBoxKeyController();
 
     /**
@@ -73,8 +67,7 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
     //--- Implementation
 
     /**
-     * Handles the selection of tree nodes by simple translating the klick point to a tree path and delegating to
-     * handleSelection(TreePath).
+     * Handles the selection of tree nodes by simple translating the klick point to a tree path and delegating to handleSelection(TreePath).
      *
      * @param e the mouse event
      */
@@ -114,9 +107,7 @@ public abstract class TreeCheckboxController extends MouseAdapter implements Key
         keyDelegate.keyTyped( e );
     }
 
-    /**
-     * Key adapter to handle key pressed events and filter spaces.
-     */
+    /** Key adapter to handle key pressed events and filter spaces. */
     private final class CheckBoxKeyController extends KeyAdapter
     {
         /**

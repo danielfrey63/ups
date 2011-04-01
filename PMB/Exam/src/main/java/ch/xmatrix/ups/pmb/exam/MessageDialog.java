@@ -5,7 +5,6 @@
 /*
  * Created by JFormDesigner on Fri Aug 08 16:16:53 CEST 2008
  */
-
 package ch.xmatrix.ups.pmb.exam;
 
 import com.jgoodies.forms.factories.Borders;
@@ -19,9 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class MessageDialog extends JDialog
 {
     public MessageDialog( final Frame owner )

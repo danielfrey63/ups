@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui;
 
 import java.awt.BorderLayout;
@@ -37,9 +36,7 @@ import net.java.jveez.utils.Utils;
 
 public class StatusBar extends JPanel
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3257288019714192697L;
 
     private final ActivityNotifier activityNotifier = new ActivityNotifier();

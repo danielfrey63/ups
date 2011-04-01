@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2008, Your Corporation. All Rights Reserved.
  */
-
 package ch.xmatrix.ups.pmb.exam.filter;
 
 import javax.swing.AbstractListModel;
@@ -34,7 +33,7 @@ public class FilteredListModel<T> extends AbstractListModel
         return delegate.getElementAt( indexes[index] );
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings( "unchecked" )
     public void setFilter( final Validator<T> validator )
     {
         final int oldSize = indexes.length;

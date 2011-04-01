@@ -1,7 +1,6 @@
 /*
  * Created by JFormDesigner on Tue Apr 10 10:28:07 CEST 2007
  */
-
 package ch.xmatrix.ups.pmb.input;
 
 import ch.jfactory.component.list.AlternateListCellRenderer;
@@ -40,9 +39,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-/**
- * @author Daniel Frey
- */
+/** @author Daniel Frey */
 public class PrefsForm extends JDialog
 {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

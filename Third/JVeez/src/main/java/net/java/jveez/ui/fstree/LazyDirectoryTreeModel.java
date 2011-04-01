@@ -19,7 +19,6 @@
  * Copyright (c) 2004, The JVeez Project Team.
  * All rights reserved.
  */
-
 package net.java.jveez.ui.fstree;
 
 import javax.swing.tree.DefaultTreeModel;
@@ -27,9 +26,7 @@ import org.apache.log4j.Logger;
 
 class LazyDirectoryTreeModel extends DefaultTreeModel
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
+    /** Comment for <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3257852090771649328L;
 
     private static final Logger LOG = Logger.getLogger( LazyDirectoryTreeModel.class );

@@ -110,10 +110,10 @@ public class AttributeTreePanel extends JPanel
         final TreePath[] paths = tree.getSelectionPaths();
         if ( e.isPopupTrigger() && paths != null && paths.length > 0 )
         {
-            final GraphNodeList intersection = getSimilarTaxa( paths );
-            final Taxon[] taxa = sortTaxa( intersection );
+            final GraphNodeList intersectionInCurrentList = getIntersectionInCurrentList( getSimilarTaxa( paths ) );
+            final Taxon[] taxa = sortTaxa( intersectionInCurrentList );
             final JPopupMenu menu = new JPopupMenu();
-            if ( intersection.size() > THRESHOLD )
+            if ( intersectionInCurrentList.size() > THRESHOLD )
             {
                 menu.add( getListDialog( taxa ) );
             }
@@ -125,6 +125,19 @@ public class AttributeTreePanel extends JPanel
             }
             menu.show( AttributeTreePanel.this, e.getX(), e.getY() );
         }
+    }
+
+    private GraphNodeList getIntersectionInCurrentList( final GraphNodeList intersection )
+    {
+        for ( int i = 0; i < intersection.size(); i++ )
+        {
+            final GraphNode taxon = intersection.get( i );
+            if ( taxStateModel.getModel().getTaxon( taxon.getName() ) == null )
+            {
+                intersection.remove( taxon );
+            }
+        }
+        return intersection;
     }
 
     private JMenu getPopUp( final Taxon[] copy )

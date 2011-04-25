@@ -184,7 +184,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         final DefaultResultModel resultModel = new DefaultResultModel( herbarModel );
         DetailResultModel detailModel;
 
-        detailModel = new TransientDetailResultModel( Morphology.class, "1", MorphologyAttribute.class, herbarModel );
+        detailModel = new TransientDetailResultModel( MorphologyText.class, "1", MorphologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
                 new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
@@ -196,13 +196,13 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
                 new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( Ecology.class, "2", EcologyAttribute.class, herbarModel );
+        detailModel = new TransientDetailResultModel( EcologyText.class, "2", EcologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
                 new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( Medicine.class, "3", MedicineAttribute.class, herbarModel );
+        detailModel = new TransientDetailResultModel( MedicineText.class, "3", MedicineAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
                 new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );

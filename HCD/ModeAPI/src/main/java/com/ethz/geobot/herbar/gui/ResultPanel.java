@@ -71,7 +71,7 @@ public class ResultPanel extends JPanel
 
     public void addGuess( final DefaultMutableTreeNode guess )
     {
-        // Add guess to gueses
+        // Add guess to guesses
         resultModel.addGuess( (GraphNode) guess.getUserObject() );
         // Add to tree and update tree
         root.insert( guess, root.getChildCount() );
@@ -82,7 +82,7 @@ public class ResultPanel extends JPanel
     /**
      * Are all answers given?
      *
-     * @return wether all anwers are give
+     * @return whether all answers are give
      */
     public boolean isComplete()
     {

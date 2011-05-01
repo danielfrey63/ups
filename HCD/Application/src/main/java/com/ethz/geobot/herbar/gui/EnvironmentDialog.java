@@ -66,6 +66,7 @@ public class EnvironmentDialog extends JDialog
     {
         final boolean accepted = getPreferences().getBoolean( PREFS_KEY, false );
         tabbedPane1.setEnabledAt( 1, accepted );
+        okButton.setEnabled( accepted );
         acceptButton.setEnabled( !accepted );
     }
 

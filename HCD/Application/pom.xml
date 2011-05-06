@@ -48,10 +48,6 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <artifactId>ch.xmatrix.le.help</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>

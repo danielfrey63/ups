@@ -82,8 +82,8 @@ public class AppHerbar
 
     public AppHerbar()
     {
-        initSplash();
         switchDatabase();
+        initSplash();
         decompressDatabase();
         Application.getInstance().getModel();
         System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
@@ -136,17 +136,20 @@ public class AppHerbar
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
                 System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
+                System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
                 break;
             case 1:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.ge" ) );
                 System.setProperty( "xmatrix.subject", ENV_GERMAN );
+                System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
                 break;
             case 2:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
                 System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
+                System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
                 break;
             default:
                 break;

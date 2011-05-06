@@ -68,6 +68,10 @@ public class UrlImageCache implements ImageCache
             LOG.debug( "successfully retrieved image " + name + " from " + url );
             return image;
         }
+        catch ( IOException e )
+        {
+            throw new ImageRetrieveException( "could not retrieve image " + name + " from " + url + " due to problem with the URL", e, -1, this );
+        }
         catch ( Throwable e )
         {
             throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", e, -1, this );

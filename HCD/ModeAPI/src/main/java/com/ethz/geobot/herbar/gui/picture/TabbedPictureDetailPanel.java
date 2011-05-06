@@ -24,6 +24,7 @@ package com.ethz.geobot.herbar.gui.picture;
 
 import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.cache.ImageRetrieveException;
 import ch.jfactory.component.Dialogs;
 import ch.jfactory.image.PictureDetailPanel;
 import ch.jfactory.resource.PictureCache;
@@ -55,7 +56,7 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
             public void handleCachingException( final Throwable e )
             {
-                if ( e instanceof ImageCacheException )
+                if ( e instanceof ImageCacheException && !( e instanceof ImageRetrieveException ) )
                 {
                     final ImageCacheException imageCacheException = (ImageCacheException) e;
                     final String message;

@@ -145,7 +145,9 @@ public class QuestionWindow extends JDialog implements Question
         pictureNames.removeAllElements();
         for ( final PictureTheme aTheme : theme )
         {
-            if ( aTheme.getName().equals( "Herbar" ) | aTheme.getName().equals( "Portrait" ) )
+            if ( aTheme.getName().equals( "Herbar" ) || aTheme.getName().equals( "Portrait" )
+                    || aTheme.getName().equals( "Wachstum" ) || aTheme.getName().equals( "Stamm" ) || aTheme.getName().equals( "Winterzweig" )
+                    || aTheme.getName().equals( "Blatt" ) || aTheme.getName().equals( "Blüte/Frucht" ) )
             {
                 final CommentedPicture[] picts = tax.getCommentedPictures( aTheme );
                 if ( picts != null )

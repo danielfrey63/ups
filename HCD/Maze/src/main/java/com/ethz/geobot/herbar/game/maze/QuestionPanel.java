@@ -308,7 +308,9 @@ public class QuestionPanel extends JDialog implements Question
         final List pictureNames = new ArrayList();
         for ( final PictureTheme aTheme : theme )
         {
-            if ( aTheme.getName().equals( "Herbar" ) | aTheme.getName().equals( "Portrait" ) )
+            if ( aTheme.getName().equals( "Herbar" ) || aTheme.getName().equals( "Portrait" )
+                    || aTheme.getName().equals( "Wachstum" ) || aTheme.getName().equals( "Stamm" ) || aTheme.getName().equals( "Winterzweig" )
+                    || aTheme.getName().equals( "Blatt" ) || aTheme.getName().equals( "Blüte/Frucht" ) )
             {
                 final CommentedPicture[] picts = actualTaxon.getCommentedPictures( aTheme );
                 if ( picts != null )

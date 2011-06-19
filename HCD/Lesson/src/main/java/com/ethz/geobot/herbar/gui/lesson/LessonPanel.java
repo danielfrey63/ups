@@ -165,7 +165,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
                 }
             } );
 
-            splitPane.setDividerLocation( 740 );
+            splitPane.setDividerLocation( 760 );
         }
         catch ( RuntimeException e )
         {

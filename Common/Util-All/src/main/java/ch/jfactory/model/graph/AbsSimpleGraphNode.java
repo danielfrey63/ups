@@ -175,7 +175,7 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
             final String clazz = this.getClass().getName();
             final String type = clazz.substring( clazz.lastIndexOf( '.', clazz.length() ) + 1,
                     clazz.length() );
-            return name + " [type=" + type + ",id=" + id + "]";
+            return name + " [type=" + type + ",id=" + id + ",rank=" + rank + "]";
         }
         else
         {

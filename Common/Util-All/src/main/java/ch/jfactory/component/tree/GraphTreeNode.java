@@ -14,6 +14,8 @@ import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNode;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.tree.MutableTreeNode;
@@ -47,6 +49,13 @@ public class GraphTreeNode extends AbstractMutableTreeNode
             final VirtualGraphTreeNode element = (VirtualGraphTreeNode) childs.get( i );
             children.add( getTreeNode( element ) );
         }
+        Collections.sort( children, new Comparator<GraphTreeNode>()
+        {
+            public int compare( final GraphTreeNode o1, final GraphTreeNode o2 )
+            {
+                return o1.getDependent().getRank() - o2.getDependent().getRank();
+            }
+        } );
         return children;
     }
 

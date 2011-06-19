@@ -177,7 +177,7 @@ public class AttributeTreePanel extends JPanel
             {
                 final ListDialog<Taxon> dialog = new ListDialog<Taxon>( herbarContext.getHerbarGUIManager().getParentFrame(), "DIALOG.SIMILAR", copy );
                 dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-                dialog.setSize( 300, 300 );
+                dialog.setSize( 300, 600 );
                 dialog.setLocationRelativeTo( getTopLevelAncestor() );
                 dialog.setVisible( true );
                 if ( dialog.isAccepted() )

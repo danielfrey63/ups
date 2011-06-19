@@ -170,7 +170,7 @@ public class AttributeTreePanel extends JPanel
 
     private JMenuItem getListDialog( final Taxon[] copy )
     {
-        final JMenuItem item = new JMenuItem( SIMILAR_TAXA + "..." );
+        final JMenuItem item = new JMenuItem( SIMILAR_TAXA + " (" + copy.length + ")..." );
         item.addActionListener( new ActionListener()
         {
             public void actionPerformed( final ActionEvent e )

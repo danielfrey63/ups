@@ -24,9 +24,6 @@ package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
-import com.jgoodies.animation.old.AnimatedPanel;
-import com.jgoodies.animation.old.Animation;
-import com.jgoodies.animation.old.OverlayedAnimation;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -46,22 +43,12 @@ public class AboutBox extends JWindow
 
     private final JButton buttonSplash = new JButton();
 
-    private final AnimatedPanel animator;
-
     public AboutBox( final JFrame parent )
     {
         super( parent );
-        animator = createAnimatedPanel();
         build();
         addWindowListener();
         addMouseListener();
-    }
-
-    private AnimatedPanel createAnimatedPanel()
-    {
-        final AnimatedPanel animatedPanel = new AnimatedPanel( createAnimation(), true );
-        animatedPanel.setBounds( 0, 50, 400, 50 );
-        return animatedPanel;
     }
 
     private void addMouseListener()
@@ -93,19 +80,6 @@ public class AboutBox extends JWindow
         dispose();
     }
 
-    private Animation createAnimation()
-    {
-        final String size = "14";
-        return OverlayedAnimation.createDefault( new String[][]{
-                {"Matthias Baltisberger", size, "3000", "1500", "default", "default", "none", "center", "fill"},
-                {"Christine Biber", size, "3000", "1500", "default", "default", "none", "center", "fill"},
-                {"Daniel Frey", size, "3000", "1500", "default", "default", "none", "center", "fill"},
-                {"Dirk Hoffmann", size, "3000", "1500", "default", "default", "none", "center", "fill"},
-                {"Lilo Meier", size, "3000", "1500", "default", "default", "none", "center", "fill"},
-                {"Thomas Wegmüller", size, "3000", "1500", "default", "default", "none", "center", "fill"}
-        } );
-    }
-
     public void setVisible( final boolean b )
     {
         if ( b != this.isVisible() )
@@ -114,11 +88,6 @@ public class AboutBox extends JWindow
             if ( b )
             {
                 this.toFront();
-                animator.start();
-            }
-            else
-            {
-                animator.stop();
             }
         }
     }
@@ -127,13 +96,12 @@ public class AboutBox extends JWindow
     {
         buttonSplash.setBorder( null );
         buttonSplash.setIcon( about );
-        buttonSplash.setBounds( 0, 0, 400, 300 );
+        buttonSplash.setBounds( 0, 0, 480, 272 );
 
         final Container contentPane = getContentPane();
         contentPane.setLayout( null );
-        contentPane.add( animator );
         contentPane.add( buttonSplash );
-        setSize( 400, 300 );
+        setSize( 480, 272 );
     }
 
     public static void main( final String[] args )

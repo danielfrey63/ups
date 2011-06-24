@@ -134,7 +134,7 @@ public class DefaultGermanExamList implements ExamList
 //        java.awt.Container c = f.getContentPane();
 //        l.setBackground(c.getBackground());
 //        HerbarModel model = com.ethz.geobot.herbar.Application.getInstance().getModel();
-//        final DefaultExamList defaultExamList = new DefaultExamList(model);
+//        final DefaultGermanExamList defaultExamList = new DefaultGermanExamList(model);
 //
 //        c.setLayout(new java.awt.BorderLayout());
 //        b.addActionListener(new java.awt.event.ActionListener() {

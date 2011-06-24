@@ -50,6 +50,7 @@ import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.modeapi.state.TaxFocusListener;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
+import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.EcologyAttribute;
@@ -353,7 +354,8 @@ public class ExamPanel extends ModeActivationPanel implements TaxFocusListener
 
     private JPanel createExamPanel()
     {
-        picturePanel = new PicturePanel( herbarModel, false, herbarModel.getPictureTheme( "Herbar" ) );
+        final PictureTheme herbarTheme = herbarModel.getPictureTheme( "Herbar" );
+        picturePanel = new PicturePanel( herbarModel, false, ( herbarTheme == null ? herbarModel.getPictureThemes() : new PictureTheme[]{herbarTheme} ) );
 
         final ResultModel resultModel = createResultModel();
         interrogator = new PropertyInterrogator( resultModel );

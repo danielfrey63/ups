@@ -32,9 +32,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DefaultExamList implements ExamList
+public class DefaultScientificExamList implements ExamList
 {
-    private static final Logger LOG = LoggerFactory.getLogger( DefaultExamList.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DefaultScientificExamList.class );
 
     private HerbarModel herbarModel;
 

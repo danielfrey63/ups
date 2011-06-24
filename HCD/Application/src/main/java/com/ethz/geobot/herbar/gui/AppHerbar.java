@@ -148,6 +148,7 @@ public class AppHerbar
             case 2:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
+                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.de" ) );
                 System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
                 break;

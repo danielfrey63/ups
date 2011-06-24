@@ -186,26 +186,26 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
         detailModel = new TransientDetailResultModel( MorphologyText.class, "1", MorphologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {1, 0, 0, 2}} ) ) );
+                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
+                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
         detailModel = new TransientDetailResultModel( EcologyText.class, "2", EcologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
         detailModel = new TransientDetailResultModel( MedicineText.class, "3", MedicineAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 
         return resultModel;

@@ -173,7 +173,7 @@ public class ResultPanel extends JPanel
                 }
                 else
                 {
-                    setIcon( ICON_WRONG );
+                    setIcon( null );
                 }
             }
             setBackgroundNonSelectionColor( tree.getBackground() );

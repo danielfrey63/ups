@@ -85,7 +85,7 @@ public class PicturePanel extends JPanel
      * @param showText    whether to show the text
      * @param themes      the themes to show
      */
-    public PicturePanel( final HerbarModel herbarModel, final boolean showText, final PictureTheme... themes )
+    public PicturePanel( final HerbarModel herbarModel, final boolean showText, final PictureTheme[] themes )
     {
         model = new PictureModel( herbarModel );
         this.themes = themes;

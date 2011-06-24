@@ -12,6 +12,10 @@
         #if($offlineAllowed)
         <offline-allowed/>
         #end
+        <shortcut online="true">
+            <desktop/>
+            <menu submenu="eBot"/>
+        </shortcut>
     </information>
     #if($allPermissions)
     <security>
@@ -20,7 +24,7 @@
     #end
     <resources>
         <j2se
-        #if($max-heap-size)max-heap-size="$max-heap-size"
+        #if($max-heap-size) max-heap-size="$max-heap-size"
         #end version="$j2seVersion"/>
         $dependencies
         <property name="file.encoding" value="windows-1252"/>

@@ -190,8 +190,6 @@ public class PDFGenerator
             final String id = context.getProperty( KEY_ID );
             final String idString = id != null && id.length() > 5 ? id.substring( 0, 2 ) + "-" + id.substring( 2, 5 ) + "-" + id.substring( 5 ) : "missing";
             table.addCell( new Paragraph( idString, font2 ) );
-            table.addCell( new Paragraph( bundle.getString( "pdfgeneration.field" ), font1 ) );
-            table.addCell( new Paragraph( context.getProperty( KEY_DEPARTMENT ), font2 ) );
 
             document.add( table );
 

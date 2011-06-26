@@ -57,7 +57,7 @@ public class LKABusinessDelegate implements ILKABusinessDelegate
         }
         catch ( RemoteException e )
         {
-            if ( e.getMessage().startsWith( "BusinessException-5529" ) )
+            if ( e.getMessage().startsWith( "BusinessException-MSG_5529" ) )
             {
                 throw new LKABusinessDelegateException( LKABusinessDelegateException.INVALID_CREDENTIALS, e );
             }

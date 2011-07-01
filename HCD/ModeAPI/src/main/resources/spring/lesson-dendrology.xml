@@ -155,7 +155,7 @@
                                                 <constructor-arg index="5">
                                                     <bean class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">
                                                         <constructor-arg index="0" value="com.ethz.geobot.herbar.model.trait.EcologyAttribute"/>
-                                                        <constructor-arg index="1" value="HIDDEN"/>
+                                                        <constructor-arg index="1" value="VISIBLE"/>
                                                         <constructor-arg index="2" value="FLAT"/>
                                                         <constructor-arg index="3" value="BOUND"/>
                                                         <constructor-arg index="4" value="DESCENDANT"/>

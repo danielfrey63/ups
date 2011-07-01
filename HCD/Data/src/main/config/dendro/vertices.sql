@@ -118,7 +118,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4105, 'Rhamnaceae', 1, 'TAXO
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4106, 'Frangula', 1, 'TAXON');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4107, 'Frangula alnus', 1, 'TAXON');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4108, 'Rhamnus', 2, 'TAXON');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4109, 'Rhamnus catharticus', 1, 'TAXON');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4109, 'Rhamnus cathartica', 1, 'TAXON');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4110, 'Thymelaeales', 20, 'TAXON');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4111, 'Thymelaeaceae', 1, 'TAXON');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (4112, 'Daphne', 1, 'TAXON');
@@ -4630,8 +4630,8 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501021, 'Daphne_mezereum_670
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501022, 'Daphne_mezereum_670b_1__.jpg', 1022, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501023, 'Daphne_mezereum_710a_1__.jpg', 1023, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501024, 'Daphne_mezereum_720a_1__.jpg', 1024, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501025, 'Euonymus_europaea_710a_1__.jpg', 1025, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501026, 'Euonymus_europaea_720a_1__.jpg', 1026, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501025, 'Euonymus_europaeus_710a_1__.jpg', 1025, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501026, 'Euonymus_europaeus_720a_1__.jpg', 1026, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501027, 'Euonymus_europaeus_210a_1__.jpg', 1027, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501028, 'Euonymus_europaeus_210b_1__.jpg', 1028, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501029, 'Euonymus_europaeus_210d_1__.jpg', 1029, 'PICTURE');
@@ -5279,7 +5279,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501670, 'Laburnum_anagyroide
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501671, 'Laburnum_anagyroides_670c_1__.jpg', 1671, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501672, 'Laburnum_anagyroides_670d_1__.jpg', 1672, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501673, 'Laburnum_anagyroides_710a_1__.jpg', 1673, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501674, 'Laburnus_anagyroides_720a_1__.jpg', 1674, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501674, 'Laburnum_anagyroides_720a_1__.jpg', 1674, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501675, 'Larix_decidua_210a_1__.jpg', 1675, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501676, 'Larix_decidua_210b_1__.jpg', 1676, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (501677, 'Larix_decidua_210c_1__.jpg', 1677, 'PICTURE');
@@ -5718,7 +5718,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502109, 'Pinus_mugo_670f_1__
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502110, 'Pinus_mugo_670g_1__.jpg', 2110, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502111, 'Pinus_mugo_710a_1__.jpg', 2111, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502112, 'Pinus_mugo_720a_1__.jpg', 2112, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502113, 'Pinus_sylvestris__830a_1__.jpg', 2113, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502113, 'Pinus_sylvestris_830a_1__.jpg', 2113, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502114, 'Pinus_sylvestris_210a_1__.jpg', 2114, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502115, 'Pinus_sylvestris_210b_1__.jpg', 2115, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502116, 'Pinus_sylvestris_210c_1__.jpg', 2116, 'PICTURE');
@@ -6449,7 +6449,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502840, 'Rhamnus_cathartica_
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502841, 'Rhamnus_cathartica_670d_1__.jpg', 2841, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502842, 'Rhamnus_cathartica_670e_1__.jpg', 2842, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502843, 'Rhamnus_cathartica_710a_1__.jpg', 2843, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502844, 'Rhamnus_catharticus_720a_1__.jpg', 2844, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502844, 'Rhamnus_cathartica_720a_1__.jpg', 2844, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502845, 'Robinia_pseudoacacia_210a_1__.jpg', 2845, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502846, 'Robinia_pseudoacacia_210b_1__.jpg', 2846, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (502847, 'Robinia_pseudoacacia_210c_1__.jpg', 2847, 'PICTURE');
@@ -7018,7 +7018,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503409, 'Sorbus_torminalis_6
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503410, 'Sorbus_torminalis_670c_1__.jpg', 3410, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503411, 'Sorbus_torminalis_720a_1__.jpg', 3411, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503412, 'Sorbus_torminalis_830a_1__.jpg', 3412, 'PICTURE');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503413, 'Sorbus_tormnialis_710a_1__.jpg', 3413, 'PICTURE');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503413, 'Sorbus_torminalis_710a_1__.jpg', 3413, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503414, 'Taxus_baccata_210a_1__.jpg', 3414, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503415, 'Taxus_baccata_210b_1__.jpg', 3415, 'PICTURE');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (503416, 'Taxus_baccata_210c_1__.jpg', 3416, 'PICTURE');
@@ -7433,7 +7433,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600053, 'Fruchtstand von Abi
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600054, 'Rest des abgesamten Fruchtstands von Abies alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600055, 'Rest des abgesamten Fruchtstand von Abies alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600056, 'Gesamtverbreitung von Abies alba', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600057, 'Schweizer Verbreitung von Abies alba', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600057, 'Schweizer Verbreitung von Abies alba (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600058, 'Ökogramm von Abies alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600059, 'Wuchsform/Habitus von Acer campestre (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600060, 'Wuchsform/Habitus von Acer campestre', 1, 'PICTURETEXT');
@@ -7489,7 +7489,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600109, 'Frucht von Acer cam
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600110, 'Frucht von Acer campestre', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600111, 'Frucht von Acer campestre (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600112, 'Gesamtverbreitung von Acer campestre', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600113, 'Schweizer Verbreitung von Acer campestre', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600113, 'Schweizer Verbreitung von Acer campestre (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600114, 'Ökogramm von Acer campestre', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600115, 'Wuchsform/Habitus von Acer opalus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600116, 'Wuchsform/Habitus von Acer opalus', 1, 'PICTURETEXT');
@@ -7537,7 +7537,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600157, 'Frucht von Acer opa
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600158, 'Frucht von Acer opalus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600159, 'Frucht von Acer opalus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600160, 'Gesamtverbreitung von Acer opalus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600161, 'Schweizer Verbreitung von Acer opalus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600161, 'Schweizer Verbreitung von Acer opalus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600162, 'Ökogramm von Acer opalus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600163, 'Wuchsform/Habitus von Acer platanoides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600164, 'Wuchsform/Habitus von Acer platanoides', 1, 'PICTURETEXT');
@@ -7598,7 +7598,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600218, 'Frucht von Acer pla
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600219, 'Frucht von Acer platanoides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600220, 'Frucht von Acer platanoides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600221, 'Gesamtverbreitung von Acer platanoides', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600222, 'Schweizer Verbreitung von Acer platanoides', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600222, 'Schweizer Verbreitung von Acer platanoides (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600223, 'Ökogramm von Acer platanoides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600224, 'Wuchsform/Habitus von Acer pseudoplatanus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600225, 'Wuchsform/Habitus von Acer pseudoplatanus (© pro arbore)', 1, 'PICTURETEXT');
@@ -7660,7 +7660,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600280, 'Frucht von Acer pse
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600281, 'Frucht von Acer pseudoplatanus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600282, 'Frucht von Acer pseudoplatanus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600283, 'Gesamtverbreitung von Acer pseudoplatanus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600284, 'Schweizer Verbreitung von Acer pseudoplatanus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600284, 'Schweizer Verbreitung von Acer pseudoplatanus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600285, 'Ökogramm von Acer pseudoplatanus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600286, 'Wuchsform/Habitus von Alnus glutinosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600287, 'Wuchsform/Habitus von Alnus glutinosa (© Schneider Uni Basel)', 1, 'PICTURETEXT');
@@ -7727,7 +7727,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600347, 'Vorjähriger Fruchts
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600348, 'Vorjähriger Fruchtstand von Alnus glutinosa (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600349, 'Vorjähriger Fruchtstand von Alnus glutinosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600350, 'Gesamtverbreitung von Alnus glutinosa', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600351, 'Schweizer Verbreitung von Alnus glutinosa', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600351, 'Schweizer Verbreitung von Alnus glutinosa (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600352, 'Ökogramm von Alnus glutinosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600353, 'Typischer Standort von Alnus glutinosa: Schwarzerlenbruchwald', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600354, 'Wuchsform/Habitus von Alnus incana (© CODOC)', 1, 'PICTURETEXT');
@@ -7777,7 +7777,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600397, 'Vorjähriger Fruchts
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600398, 'Vorjähriger Fruchtstand von Alnus incana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600399, 'Vorjähriger Fruchtstand von Alnus incana (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600400, 'Gesamtverbreitung von Alnus incana', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600401, 'Schweizer Verbreitung von Alnus incana', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600401, 'Schweizer Verbreitung von Alnus incana (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600402, 'Ökogramm von Alnus incana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600403, 'Wuchsform/Habitus von Alnus viridis (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600404, 'Wuchsform/Habitus von Alnus viridis', 1, 'PICTURETEXT');
@@ -7813,7 +7813,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600433, 'Fruchtstand von Aln
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600434, 'Fruchtstand von Alnus viridis (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600435, 'Fruchtstand von Alnus viridis links und Alnus incana rechts', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600436, 'Gesamtverbreitung von Alnus viridis', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600437, 'Schweizer Verbreitung von Alnus viridis', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600437, 'Schweizer Verbreitung von Alnus viridis (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600438, 'Wuchsform/Habitus von Amelanchier ovalis (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600439, 'Wuchsform/Habitus von Amelanchier ovalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600440, 'Wuchsform/Habitus von Amelanchier ovalis', 1, 'PICTURETEXT');
@@ -7849,7 +7849,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600469, 'Fruchtstand von Ame
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600470, 'Frucht von Amelanchier ovalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600471, 'Frucht von Amelanchier ovalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600472, 'Gesamtverbreitung von Amelanchier ovalis', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600473, 'Schweizer Verbreitung von Amelanchier ovalis', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600473, 'Schweizer Verbreitung von Amelanchier ovalis (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600474, 'Wuchsform/Habitus von Berberis vulgaris (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600475, 'Wuchsform/Habitus von Berberis vulgaris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600476, 'Wuchsform/Habitus von Berberis vulgaris', 1, 'PICTURETEXT');
@@ -7884,7 +7884,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600504, 'Frucht von Berberis
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600505, 'Frucht von Berberis vulgaris (© imagines-plantarum)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600506, 'Besonderheit Blüte/Frucht von Berberis vulgaris: orange Nektarien an Kronblattbasis (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600507, 'Gesamtverbreitung von Berberis vulgaris', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600508, 'Schweizer Verbreitung von Berberis vulgaris', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600508, 'Schweizer Verbreitung von Berberis vulgaris (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600509, 'Wuchsform/Habitus von Betula pendula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600510, 'Wuchsform/Habitus von Betula pendula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600511, 'Wuchsform/Habitus von Betula pendula', 1, 'PICTURETEXT');
@@ -7941,7 +7941,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600561, 'Fruchtstand von Bet
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600562, 'Frucht von Betula pendula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600563, 'Frucht von Betula pendula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600564, 'Gesamtverbreitung von Betula pendula', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600565, 'Schweizer Verbreitung von Betula pendula', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600565, 'Schweizer Verbreitung von Betula pendula (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600566, 'Ökogramm von Betula pendula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600567, 'Wuchsform/Habitus von Betula pubescens', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600568, 'Wuchsform/Habitus von Betula pubescens (© WikiCommons)', 1, 'PICTURETEXT');
@@ -7971,7 +7971,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600591, 'Männlicher Blütenst
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600592, 'Fruchtstand von Betula pubescens (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600593, 'Frucht von Betula pubescens (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600594, 'Gesamtverbreitung von Betula pubescens', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600595, 'Schweizer Verbreitung von Betula pubescens', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600595, 'Schweizer Verbreitung von Betula pubescens (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600596, 'Ökogramm von Betula pubescens', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600597, 'Wuchsform/Habitus von Carpinus betulus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600598, 'Wuchsform/Habitus von Carpinus betulus', 1, 'PICTURETEXT');
@@ -8043,7 +8043,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600663, 'Frucht von Carpinus
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600664, 'Frucht von Carpinus betulus (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600665, 'Frucht von Carpinus betulus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600666, 'Gesamtverbreitung von Carpinus betulus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600667, 'Schweizer Verbreitung von Carpinus betulus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600667, 'Schweizer Verbreitung von Carpinus betulus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600668, 'Ökogramm von Carpinus betulus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600669, 'Wuchsform/Habitus von Castanea sativa: Mächtiges Exemplar auf der Alpennordseite im Kanton St. Gallen', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600670, 'Wuchsform/Habitus von Castanea sativa', 1, 'PICTURETEXT');
@@ -8115,7 +8115,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600735, 'Frucht von Castanea
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600736, 'Frucht von Castanea sativa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600737, 'Frucht von Castanea sativa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600738, 'Gesamtverbreitung von Castanea sativa', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600739, 'Schweizer Verbreitung von Castanea sativa', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600739, 'Schweizer Verbreitung von Castanea sativa (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600740, 'Ökogramm von Castanea sativa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600741, 'Wuchsform/Habitus von Clematis vitalba (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600742, 'Wuchsform/Habitus von Clematis vitalba (© CODOC)', 1, 'PICTURETEXT');
@@ -8161,7 +8161,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600781, 'Frucht von Clematis
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600782, 'Frucht von Clematis vitalba (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600783, 'Frucht von Clematis vitalba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600784, 'Gesamtverbreitung von Clematis vitalba', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600785, 'Schweizer Verbreitung von Clematis vitalba', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600785, 'Schweizer Verbreitung von Clematis vitalba (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600786, 'Wuchsform/Habitus von Cornus sanguinea (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600787, 'Periderm von Cornus sanguinea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600788, 'Periderm von Cornus sanguinea', 1, 'PICTURETEXT');
@@ -8209,7 +8209,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600829, 'Frucht von Cornus s
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600830, 'Frucht von Cornus sanguinea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600831, 'Frucht von Cornus sanguinea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600832, 'Gesamtverbreitung von Cornus sanguinea', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600833, 'Schweizer Verbreitung von Cornus sanguinea', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600833, 'Schweizer Verbreitung von Cornus sanguinea (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600834, 'Wuchsform/Habitus von Corylus avellana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600835, 'Wuchsform/Habitus von Corylus avellana (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600836, 'Wuchsform/Habitus von Corylus avellana (© Schneider Uni Basel)', 1, 'PICTURETEXT');
@@ -8271,7 +8271,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600891, 'Frucht von Corylus 
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600892, 'Frucht von Corylus avellana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600893, 'Frucht von Corylus avellana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600894, 'Gesamtverbreitung von Corylus avellana', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600895, 'Schweizer Verbreitung von Corylus avellana', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600895, 'Schweizer Verbreitung von Corylus avellana (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600896, 'Wuchsform/Habitus von Crataegus laevigata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600897, 'Wuchsform/Habitus von Crataegus laevigata (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600898, 'Wuchsform/Habitus von Crataegus laevigata (© CODOC)', 1, 'PICTURETEXT');
@@ -8310,7 +8310,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600930, 'Frucht von Crataegu
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600931, 'Frucht von Crataegus laevigata (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600932, 'Frucht von Crataegus laevigata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600933, 'Gesamtverbreitung von Crataegus laevigata', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600934, 'Schweizer Verbreitung von Crataegus laevigata', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600934, 'Schweizer Verbreitung von Crataegus laevigata (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600935, 'Wuchsform/Habitus von Crataegus monogyna', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600936, 'Wuchsform/Habitus von Crataegus monogyna (© pro arbore)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600937, 'Wuchsform/Habitus von Crataegus monogyna', 1, 'PICTURETEXT');
@@ -8365,7 +8365,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600985, 'Frucht von Crataegu
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600986, 'Frucht von Crataegus monogyna', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600987, 'Frucht von Crataegus monogyna', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600988, 'Gesamtverbreitung von Crataegus monogyna', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600989, 'Schweizer Verbreitung von Crataegus monogyna', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600989, 'Schweizer Verbreitung von Crataegus monogyna (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600990, 'Wuchsform/Habitus von Daphne mezereum (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600991, 'Wuchsform/Habitus von Daphne mezereum (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (600992, 'Wuchsform/Habitus von Daphne mezereum (© WikiCommons)', 1, 'PICTURETEXT');
@@ -8400,9 +8400,9 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601020, 'Fruchtstand von Dap
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601021, 'Frucht von Daphne mezereum (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601022, 'Frucht von Daphne mezereum (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601023, 'Gesamtverbreitung von Daphne mezereum', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601024, 'Schweizer Verbreitung von Daphne mezereum', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601024, 'Schweizer Verbreitung von Daphne mezereum (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601025, 'Gesamtverbreitung von Euonymus europaea', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601026, 'Schweizer Verbreitung von Euonymus europaea', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601026, 'Schweizer Verbreitung von Euonymus europaeus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601027, 'Wuchsform/Habitus von Euonymus europaeus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601028, 'Wuchsform/Habitus von Euonymus europaeus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601029, 'Wuchsform/Habitus von Euonymus europaeus', 1, 'PICTURETEXT');
@@ -8455,7 +8455,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601075, 'Frucht von Euonymus
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601076, 'Frucht von Euonymus europaeus (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601077, 'Frucht von Euonymus europaeus (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601078, 'Frucht von Euonymus europaeus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601079, 'Schweizer Verbreitung von Fagur sylvatica', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601079, 'Schweizer Verbreitung von Fagus sylvatica (© swiss web flora)', 2, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601080, 'Wuchsform/Habitus von Fagus sylvatica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601081, 'Wuchsform/Habitus von Fagus sylvatica (© pro arbore)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601082, 'Wuchsform/Habitus von Fagus sylvatica', 1, 'PICTURETEXT');
@@ -8561,7 +8561,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601181, 'Frucht von Frangula
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601182, 'Frucht von Frangula alnus (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601183, 'Frucht von Frangula alnus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601184, 'Gesamtverbreitung von Frangula alnus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601185, 'Schweizer Verbreitung von Frangula alnus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601185, 'Schweizer Verbreitung von Frangula alnus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601186, 'Wuchsform/Habitus von Fraxinus excelsior', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601187, 'Wuchsform/Habitus von Fraxinus excelsior', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601188, 'Wuchsform/Habitus von Fraxinus excelsior', 1, 'PICTURETEXT');
@@ -8639,7 +8639,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601259, 'Frucht von Fraxinus
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601260, 'Frucht von Fraxinus excelsior', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601261, 'Frucht von Fraxinus excelsior', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601262, 'Gesamtverbreitung von Fraxinus excelsior', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601263, 'Schweizer Verbreitung von Fraxinus excelsior', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601263, 'Schweizer Verbreitung von Fraxinus excelsior (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601264, 'Ökogramm von Fraxinus excelsior', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601265, 'Wuchsform/Habitus von Fraxinus ornus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601266, 'Wuchsform/Habitus von Fraxinus ornus (© WikiCommons)', 1, 'PICTURETEXT');
@@ -8704,7 +8704,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601324, 'Frucht von Fraxinus
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601325, 'Frucht von Fraxinus ornus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601326, 'Frucht von Fraxinus ornus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601327, 'Gesamtverbreitung von Fraxinus ornus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601328, 'Schweizer Verbreitung von Fraxinus ornus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601328, 'Schweizer Verbreitung von Fraxinus ornus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601329, 'Ökogramm von Fraxinus ornus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601330, 'Wuchsform/Habitus von Hedera helix', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601331, 'Wuchsform/Habitus von Hedera helix', 1, 'PICTURETEXT');
@@ -8754,7 +8754,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601374, 'Fruchtstand von Hed
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601375, 'Frucht von Hedera helix (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601376, 'Frucht von Hedera helix (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601377, 'Gesamtverbreitung von Hedera helix', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601378, 'Schweizer Verbreitung von Hedera helix', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601378, 'Schweizer Verbreitung von Hedera helix (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601379, 'Wuchsform/Habitus von Hippophae rhamnoides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601380, 'Wuchsform/Habitus von Hippophae rhamnoides (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601381, 'Wuchsform/Habitus von Hippophae rhamnoides (© WikiCommons)', 1, 'PICTURETEXT');
@@ -8809,7 +8809,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601429, 'Frucht von Hippopha
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601430, 'Frucht von Hippophae rhamnoides (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601431, 'Frucht von Hippophae rhamnoides (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601432, 'Gesamtverbreitung von Hippophae rhamnoides', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601433, 'Schweizer Verbreitung von Hippophae rhamnoides', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601433, 'Schweizer Verbreitung von Hippophae rhamnoides (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601434, 'Wuchsform/Habitus von Ilex aquifolium (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601435, 'Wuchsform/Habitus von Ilex aquifolium', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601436, 'Wuchsform/Habitus von Ilex aquifolium', 1, 'PICTURETEXT');
@@ -8868,7 +8868,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601488, 'Frucht von Ilex aqu
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601489, 'Frucht von Ilex aquifolium', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601490, 'Frucht von Ilex aquifolium', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601491, 'Gesamtverbreitung von Ilex aquifolium', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601492, 'Schweizer Verbreitung von Ilex aquifolium', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601492, 'Schweizer Verbreitung von Ilex aquifolium (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601493, 'Wuchsform/Habitus von Juglans regia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601494, 'Wuchsform/Habitus von Juglans regia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601495, 'Wuchsform/Habitus von Juglans regia', 1, 'PICTURETEXT');
@@ -8940,7 +8940,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601560, 'Frucht von Juglans 
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601561, 'Frucht von Juglans regia (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601562, 'Frucht von Juglans regia (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601563, 'Gesamtverbreitung von Juglans regia', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601564, 'Schweizer Verbreitung von Juglans regia', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601564, 'Schweizer Verbreitung von Juglans regia (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601565, 'Ökogramm von Juglans regia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601566, 'Wuchsform/Habitus von Juniperus communis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601567, 'Wuchsform/Habitus von Juniperus communis', 1, 'PICTURETEXT');
@@ -8999,7 +8999,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601619, 'Frucht von Juniperu
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601620, 'Frucht von Juniperus communis (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601621, 'Frucht von Juniperus communis (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601622, 'Gesamtverbreitung von Juniperus communis', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601623, 'Schweizer Verbreitung von Juniperus communis', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601623, 'Schweizer Verbreitung von Juniperus communis (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601624, 'Wuchsform/Habitus von Laburnum anagyroides (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601625, 'Wuchsform/Habitus von Laburnum anagyroides (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601626, 'Wuchsform/Habitus von Laburnum anagyroides', 1, 'PICTURETEXT');
@@ -9050,7 +9050,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601670, 'Frucht von Laburnum
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601671, 'Frucht von Laburnum anagyroides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601672, 'Frucht von Laburnum anagyroides', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601673, 'Gesamtverbreitung von Laburnum anagyroides', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601674, 'Schweizer Verbreitung von Laburnus anagyroides', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601674, 'Schweizer Verbreitung von Laburnum anagyroides (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601675, 'Wuchsform/Habitus von Larix decidua', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601676, 'Wuchsform/Habitus von Larix decidua', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601677, 'Wuchsform/Habitus von Larix decidua', 1, 'PICTURETEXT');
@@ -9118,7 +9118,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601738, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601739, 'Frucht (Zapfen) von Larix decidua', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601740, 'Frucht (Zapfen) von Larix decidua', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601741, 'Gesamtverbreitung von Larix decidua', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601742, 'Schweizer Verbreitung von Larix decidua', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601742, 'Schweizer Verbreitung von Larix decidua (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601743, 'Ökogramm von Larix decidua', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601744, 'Wuchsform/Habitus von Ligustrum vulgare (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601745, 'Wuchsform/Habitus von Ligustrum vulgare (© Schneider Uni Basel)', 1, 'PICTURETEXT');
@@ -9165,7 +9165,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601785, 'Frucht von Ligustru
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601786, 'Frucht von Ligustrum vulgare (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601787, 'Frucht von Ligustrum vulgare (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601788, 'Gesamtverbreitung von Ligustrum vulgare', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601789, 'Schweizer Verbreitung von Ligustrum vulgare', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601789, 'Schweizer Verbreitung von Ligustrum vulgare (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601790, 'Wuchsform/Habitus von Lonicera alpigena', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601791, 'Wuchsform/Habitus von Lonicera alpigena', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601792, 'Borke von Lonicera alpigena', 1, 'PICTURETEXT');
@@ -9182,7 +9182,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601802, 'Frucht von Lonicera
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601803, 'Frucht von Lonicera alpigena', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601804, 'Frucht von Lonicera alpigena', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601805, 'Gesamtverbreitung von Lonicera alpigena', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601806, 'Schweizer Verbreitung von Lonicera alpigena', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601806, 'Schweizer Verbreitung von Lonicera alpigena (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601807, 'Wuchsform/Habitus von Lonicera xylosteum', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601808, 'Wuchsform/Habitus von Lonicera xylosteum', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601809, 'Wuchsform/Habitus von Lonicera xylosteum (© Schneider Uni Basel)', 1, 'PICTURETEXT');
@@ -9233,7 +9233,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601853, 'Fruchtstand von Lon
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601854, 'Frucht von Lonicera xylosteum', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601855, 'Frucht von Lonicera xylosteum (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601856, 'Gesamtverbreitung von Lonicera xylosteum', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601857, 'Schweizer Verbreitung von Lonicera xylosteum', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601857, 'Schweizer Verbreitung von Lonicera xylosteum (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601858, 'Wuchsform/Habitus von Malus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601859, 'Wuchsform/Habitus von Malus sylvestris (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601860, 'Wuchsform/Habitus von Malus sylvestris', 1, 'PICTURETEXT');
@@ -9280,7 +9280,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601900, 'Frucht von Malus sy
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601901, 'Frucht von Malus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601902, 'Frucht von Malus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601903, 'Gesamtverbreitung von Malus sylvestris', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601904, 'Schweizer Verbreitung von Malus sylvestris', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601904, 'Schweizer Verbreitung von Malus sylvestris (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601905, 'Ökogramm von Malus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601906, 'Wuchsform/Habitus von Ostrya carpinifolia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601907, 'Wuchsform/Habitus von Ostrya carpinifolia', 1, 'PICTURETEXT');
@@ -9338,7 +9338,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601958, 'Fruchtstand von Ost
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601959, 'Frucht von Ostrya carpinifolia (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601960, 'Frucht von Ostrya carpinifolia (© Godet ARBORIS)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601961, 'Gesamtverbreitung von Ostrya carpinifolia', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601962, 'Schweizer Verbreitung von Ostrya carpinifolia', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601962, 'Schweizer Verbreitung von Ostrya carpinifolia (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601963, 'Ökogramm von Ostrya carpinifolia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601964, 'Wuchsform/Habitus von Picea abies (© pro arbore)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (601965, 'Wuchsform/Habitus von Picea abies', 1, 'PICTURETEXT');
@@ -9401,7 +9401,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602021, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602022, 'Frucht (Zapfen) von Picea abies (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602023, 'Frucht (Zapfen) von Picea abies (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602024, 'Gesamtverbreitung von Picea abies', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602025, 'Schweizer Verbreitung von Picea abies', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602025, 'Schweizer Verbreitung von Picea abies (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602026, 'Ökogramm von Picea abies', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602027, 'Wuchsform/Habitus von Pinus cembra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602028, 'Wuchsform/Habitus von Pinus cembra', 1, 'PICTURETEXT');
@@ -9449,7 +9449,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602069, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602070, 'Frucht (Zapfen) von Pinus cembra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602071, 'Frucht (Zapfen) von Pinus cembra (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602072, 'Gesamtverbreitung von Pinus cembra', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602073, 'Schweizer Verbreitung von Pinus cembra', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602073, 'Schweizer Verbreitung von Pinus cembra (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602074, 'Ökogramm von Pinus cembra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602075, 'Wuchsform/Habitus von Pinus mugo (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602076, 'Wuchsform/Habitus von Pinus mugo', 1, 'PICTURETEXT');
@@ -9488,7 +9488,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602108, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602109, 'Frucht (Zapfen) von Pinus mugo (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602110, 'Frucht (Zapfen) von Pinus mugo (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602111, 'Gesamtverbreitung von Pinus mugo', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602112, 'Schweizer Verbreitung von Pinus mugo', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602112, 'Schweizer Verbreitung von Pinus mugo (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602113, 'Ökogramm von Pinus sylvestris ', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602114, 'Wuchsform/Habitus von Pinus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602115, 'Wuchsform/Habitus von Pinus sylvestris', 1, 'PICTURETEXT');
@@ -9562,7 +9562,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602182, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602183, 'Frucht (Zapfen) von Pinus sylvestris', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602184, 'Frucht (Zapfen) von Pinus sylvestris (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602185, 'Gesamtverbreitung von Pinus sylvestris', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602186, 'Schweizer Verbreitung von Pinus sylvestris', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602186, 'Schweizer Verbreitung von Pinus sylvestris (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602187, 'Wuchsform/Habitus von Pinus uncinata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602188, 'Wuchsform/Habitus von Pinus uncinata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602189, 'Wuchsform/Habitus von Pinus uncinata (© WikiCommons)', 1, 'PICTURETEXT');
@@ -9592,7 +9592,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602212, 'Frucht (Zapfen) von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602213, 'Frucht (Zapfen) von Pinus uncinata (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602214, 'Frucht (Zapfen) von Pinus uncinata (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602215, 'Gesamtverbreitung von Pinus uncinata', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602216, 'Schweizer Verbreitung von Pinus uncinata', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602216, 'Schweizer Verbreitung von Pinus uncinata (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602217, 'Ökogramm von Pinus uncinata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602218, 'Wuchsform/Habitus von Populus alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602219, 'Wuchsform/Habitus von Populus alba', 1, 'PICTURETEXT');
@@ -9639,7 +9639,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602259, 'Weiblicher Blütenst
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602260, 'Weibliche Blüte von Populus alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602261, 'Männliche Blüte von Populus alba (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602262, 'Gesamtverbreitung von Populus alba', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602263, 'Schweizer Verbreitung von Populus alba', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602263, 'Schweizer Verbreitung von Populus alba (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602264, 'Ökogramm von Populus alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602265, 'Wuchsform/Habitus von Populus nigra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602266, 'Wuchsform/Habitus von Populus nigra', 1, 'PICTURETEXT');
@@ -9694,7 +9694,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602314, 'Männliche Blüte von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602315, 'Männliche Blüte von Populus nigra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602316, 'Männliche Blüte von Populus nigra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602317, 'Gesamtverbreitung von Populus nigra', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602318, 'Schweizer Verbreitung von Populus nigra', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602318, 'Schweizer Verbreitung von Populus nigra (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602319, 'Ökogramm von Populus nigra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602320, 'Wuchsform/Habitus von Populus tremula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602321, 'Wuchsform/Habitus von Populus tremula', 1, 'PICTURETEXT');
@@ -9761,7 +9761,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602381, 'Männliche Blüte von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602382, 'Männliche Blüte von Populus tremula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602383, 'Männliche Blüte von Populus tremula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602384, 'Gesamtverbreitung von Populus tremula', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602385, 'Schweizer Verbreitung von Populus tremula', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602385, 'Schweizer Verbreitung von Populus tremula (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602386, 'Ökogramm von Populus tremula', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602387, 'Wuchsform/Habitus von Prunus avium (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602388, 'Wuchsform/Habitus von Prunus avium', 1, 'PICTURETEXT');
@@ -9829,7 +9829,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602449, 'Blüte von Prunus av
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602450, 'Blüte von Prunus avium (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602451, 'Frucht von Prunus avium (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602452, 'Gesamtverbreitung von Prunus avium', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602453, 'Schweizer Verbreitung von Prunus avium', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602453, 'Schweizer Verbreitung von Prunus avium (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602454, 'Ökogramm von Prunus avium', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602455, 'Wuchsform/Habitus von Prunus mahaleb', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602456, 'Wuchsform/Habitus von Prunus mahaleb', 1, 'PICTURETEXT');
@@ -9865,7 +9865,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602485, 'Blüte von Prunus ma
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602486, 'Blüte von Prunus mahaleb', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602487, 'Frucht von Prunus mahaleb (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602488, 'Gesamtverbreitung von Prunus mahaleb', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602489, 'Schweizer Verbreitung von Prunus mahaleb', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602489, 'Schweizer Verbreitung von Prunus mahaleb (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602490, 'Ökogramm von Prunus mahaleb', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602491, 'Wuchsform/Habitus von Prunus padus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602492, 'Wuchsform/Habitus von Prunus padus', 1, 'PICTURETEXT');
@@ -9907,7 +9907,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602527, 'Blüte von Prunus pa
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602528, 'Blüte von Prunus padus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602529, 'Fruchtstand von Prunus padus (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602530, 'Gesamtverbreitung von Prunus padus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602531, 'Schweizer Verbreitung von Prunus padus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602531, 'Schweizer Verbreitung von Prunus padus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602532, 'Ökogramm von Prunus padus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602533, 'Wuchsform/Habitus von Prunus spinosa (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602534, 'Wuchsform/Habitus von Prunus spinosa', 1, 'PICTURETEXT');
@@ -9967,7 +9967,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602587, 'Frucht von Prunus s
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602588, 'Frucht von Prunus spinosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602589, 'Frucht von Prunus spinosa (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602590, 'Gesamtverbreitung von Prunus spinosa', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602591, 'Schweizer Verbreitung von Prunus spinosa', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602591, 'Schweizer Verbreitung von Prunus spinosa (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602592, 'Wuchsform/Habitus von Pyrus pyraster', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602593, 'Wuchsform/Habitus von Pyrus pyraster (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602594, 'Wuchsform/Habitus von Pyrus pyraster', 1, 'PICTURETEXT');
@@ -10023,9 +10023,9 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602643, 'Frucht von Pyrus py
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602644, 'Frucht von Pyrus pyraster', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602645, 'Frucht von Pyrus pyraster', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602646, 'Gesamtverbreitung von Pyrus pyraster', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602647, 'Schweizer Verbreitung von Pyrus pyraster', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602647, 'Schweizer Verbreitung von Pyrus pyraster (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602648, 'Ökogramm von Pyrus pyraster', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602649, 'Schweizer Verbreitung von Pyrus pyraster aggr', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602649, 'Schweizer Verbreitung von Pyrus pyraster aggr (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602650, 'Wuchsform/Habitus von Quercus petraea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602651, 'Wuchsform/Habitus von Quercus petraea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602652, 'Wuchsform/Habitus von Quercus petraea (© CODOC)', 1, 'PICTURETEXT');
@@ -10067,7 +10067,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602687, 'Fruchtstand von Que
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602688, 'Frucht von Quercus petraea (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602689, 'Frucht von Quercus petraea (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602690, 'Gesamtverbreitung von Quercus petraea', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602691, 'Schweizer Verbreitung von Quercus petraea', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602691, 'Schweizer Verbreitung von Quercus petraea (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602692, 'Ökogramm von Quercus petraea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602693, 'Wuchsform/Habitus von Quercus pubescens', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602694, 'Wuchsform/Habitus von Quercus pubescens', 1, 'PICTURETEXT');
@@ -10100,7 +10100,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602720, 'Männlicher Blütenst
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602721, 'Fruchtstand von Quercus pubescens (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602722, 'Frucht von Quercus pubescens (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602723, 'Gesamtverbreitung von Quercus pubescens', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602724, 'Schweizer Verbreitung von Quercus pubescens', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602724, 'Schweizer Verbreitung von Quercus pubescens (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602725, 'Ökogramm von Quercus pubescens', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602726, 'Wuchsform/Habitus von Quercus robur', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602727, 'Wuchsform/Habitus von Quercus robur', 1, 'PICTURETEXT');
@@ -10168,7 +10168,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602788, 'Frucht von Quercus 
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602789, 'Frucht von Quercus robur', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602790, 'Frucht von Quercus robur', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602791, 'Gesamtverbreitung von Quercus robur', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602792, 'Schweizer Verbreitung von Quercus robur', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602792, 'Schweizer Verbreitung von Quercus robur (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602793, 'Ökogramm von Quercus robur', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602794, 'Wuchsform/Habitus von Rhamnus cathartica (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602795, 'Wuchsform/Habitus von Rhamnus cathartica', 1, 'PICTURETEXT');
@@ -10220,7 +10220,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602840, 'Frucht von Rhamnus 
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602841, 'Frucht von Rhamnus cathartica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602842, 'Frucht von Rhamnus cathartica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602843, 'Gesamtverbreitung von Rhamnus cathartica', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602844, 'Schweizer Verbreitung von Rhamnus catharticus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602844, 'Schweizer Verbreitung von Rhamnus catharticus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602845, 'Wuchsform/Habitus von Robinia pseudoacacia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602846, 'Wuchsform/Habitus von Robinia pseudoacacia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602847, 'Wuchsform/Habitus von Robinia pseudoacacia (© CODOC)', 1, 'PICTURETEXT');
@@ -10275,7 +10275,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602895, 'Frucht von Robinia 
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602896, 'Frucht von Robinia pseudoacacia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602897, 'Frucht von Robinia pseudoacacia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602898, 'Gesamtverbreitung von Robinia pseudoacacia', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602899, 'Schweizer Verbreitung von Robinia pseudoacacia', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602899, 'Schweizer Verbreitung von Robinia pseudoacacia (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602900, 'Ökogramm von Robinia pseudoacacia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602901, 'Wuchsform/Habitus von Salix alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602902, 'Wuchsform/Habitus von Salix alba', 1, 'PICTURETEXT');
@@ -10340,7 +10340,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602960, 'Männliche Blüte von
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602961, 'Männliche Blüte von Salix alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602962, 'Männliche Blüte von Salix alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602963, 'Gesamtverbreitung von Salix alba', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602964, 'Schweizer Verbreitung von Salix alba', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602964, 'Schweizer Verbreitung von Salix alba (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602965, 'Ökogramm von Salix alba', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602966, 'Typischer Standort von Salix alba: Weichholzauenwald im Uferbereich von Flüssen', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (602967, 'Typischer Standort von Salix alba: Verjüngung auf Kiesbank im Überschwemmungsbereich von Flüssen', 1, 'PICTURETEXT');
@@ -10407,7 +10407,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603027, 'Frucht von Salix ca
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603028, 'Frucht von Salix caprea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603029, 'Frucht von Salix caprea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603030, 'Gesamtverbreitung von Salix caprea', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603031, 'Schweizer Verbreitung von Salix caprea', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603031, 'Schweizer Verbreitung von Salix caprea (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603032, 'Ökogramm von Salix caprea', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603033, 'Wuchsform/Habitus von Salix eleagnos (©fungiitaliani AMINT)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603034, 'Wuchsform/Habitus von Salix eleagnos (© WikiCommons)', 1, 'PICTURETEXT');
@@ -10423,7 +10423,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603043, 'Männlicher Blütenst
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603044, 'Männlicher Blütenstand von Salix eleagnos (©fungiitaliani AMINT)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603045, 'Fruchtstand von Salix eleagnos (©fungiitaliani AMINT)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603046, 'Gesamtverbreitung von Salix eleagnos', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603047, 'Schweizer Verbreitung von Salix eleagnos', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603047, 'Schweizer Verbreitung von Salix eleagnos (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603048, 'Wuchsform/Habitus von Salix purpurea (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603049, 'Wuchsform/Habitus von Salix purpurea (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603050, 'Wuchsform/Habitus von Salix purpurea', 1, 'PICTURETEXT');
@@ -10456,7 +10456,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603076, 'Männlicher Blütenst
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603077, 'Männlicher und weiblicher (kleines Bild) Blütenstand von Salix purpurea (© Godet ARBORIS)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603078, 'Fruchtstand von Salix purpurea (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603079, 'Gesamtverbreitung von Salix purpurea', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603080, 'Schweizer Verbreitung von Salix purpurea', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603080, 'Schweizer Verbreitung von Salix purpurea (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603081, 'Wuchsform/Habitus von Sambucus nigra (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603082, 'Wuchsform/Habitus von Sambucus nigra (© pro arbore)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603083, 'Wuchsform/Habitus von Sambucus nigra: Grosses Exemplar im Kanton Graubünden mit Brusthöhendurchmesser von 0.84 m und geschätztem Alter von 100 Jahren (© pro arbore)', 1, 'PICTURETEXT');
@@ -10509,7 +10509,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603129, 'Fruchtstand von Sam
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603130, 'Frucht von Sambucus nigra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603131, 'Frucht von Sambucus nigra (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603132, 'Gesamtverbreitung von Sambucus nigra', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603133, 'Schweizer Verbreitung von Sambucus nigra', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603133, 'Schweizer Verbreitung von Sambucus nigra (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603134, 'Wuchsform/Habitus von Sambucus racemosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603135, 'Wuchsform/Habitus von Sambucus racemosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603136, 'Wuchsform/Habitus von Sambucus racemosa', 1, 'PICTURETEXT');
@@ -10560,7 +10560,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603180, 'Fruchtstand von Sam
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603181, 'Frucht von Sambucus racemosa (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603182, 'Frucht von Sambucus racemosa', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603183, 'Gesamtverbreitung von Sambucus racemosa', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603184, 'Schweizer Verbreitung von Sambucus racemosa', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603184, 'Schweizer Verbreitung von Sambucus racemosa (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603185, 'Wuchsform/Habitus von Sorbus aria', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603186, 'Wuchsform/Habitus von Sorbus aria', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603187, 'Wuchsform/Habitus von Sorbus aria', 1, 'PICTURETEXT');
@@ -10619,7 +10619,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603239, 'Frucht von Sorbus a
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603240, 'Frucht von Sorbus aria', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603241, 'Frucht von Sorbus aria', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603242, 'Gesamtverbreitung von Sorbus aria', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603243, 'Schweizer Verbreitung von Sorbus aria', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603243, 'Schweizer Verbreitung von Sorbus aria (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603244, 'Ökogramm von Sorbus aria', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603245, 'Wuchsform/Habitus von Sorbus aucuparia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603246, 'Wuchsform/Habitus von Sorbus aucuparia', 1, 'PICTURETEXT');
@@ -10667,7 +10667,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603287, 'Frucht von Sorbus a
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603288, 'Frucht von Sorbus aucuparia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603289, 'Frucht von Sorbus aucuparia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603290, 'Gesamtverbreitung von Sorbus aucuparia', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603291, 'Schweizer Verbreitung von Sorbus aucuparia', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603291, 'Schweizer Verbreitung von Sorbus aucuparia (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603292, 'Ökogramm von Sorbus aucuparia', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603293, 'Wuchsform/Habitus von Sorbus domestica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603294, 'Wuchsform/Habitus von Sorbus domestica', 1, 'PICTURETEXT');
@@ -10722,7 +10722,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603342, 'Frucht von Sorbus d
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603343, 'Frucht von Sorbus domestica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603344, 'Frucht von Sorbus domestica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603345, 'Gesamtverbreitung von Sorbus domestica', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603346, 'Schweizer Verbreitung von Sorbus domestica', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603346, 'Schweizer Verbreitung von Sorbus domestica (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603347, 'Ökogramm von Sorbus domestica', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603348, 'Wuchsform/Habitus von Sorbus torminalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603349, 'Wuchsform/Habitus von Sorbus torminalis', 1, 'PICTURETEXT');
@@ -10787,7 +10787,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603407, 'Fruchtstand von Sor
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603408, 'Frucht von Sorbus torminalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603409, 'Frucht von Sorbus torminalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603410, 'Frucht von Sorbus torminalis', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603411, 'Schweizer Verbreitung von Sorbus torminalis', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603411, 'Schweizer Verbreitung von Sorbus torminalis (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603412, 'Ökogramm von Sorbus torminalis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603413, 'Gesamtverbreitung von Sorbus tormnialis', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603414, 'Wuchsform/Habitus von Taxus baccata', 1, 'PICTURETEXT');
@@ -10840,7 +10840,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603460, 'Frucht (Scheinfruch
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603461, 'Frucht (Scheinfrucht) von Taxus baccata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603462, 'Frucht (Scheinfrucht) von Taxus baccata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603463, 'Gesamtverbreitung von Taxus baccata', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603464, 'Schweizer Verbreitung von Taxus baccata', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603464, 'Schweizer Verbreitung von Taxus baccata (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603465, 'Ökogramm von Taxus baccata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603466, 'Wuchsform/Habitus von Tilia cordata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603467, 'Wuchsform/Habitus von Tilia cordata', 1, 'PICTURETEXT');
@@ -10889,7 +10889,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603509, 'Frucht von Tilia co
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603510, 'Frucht von Tilia cordata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603511, 'Frucht von Tilia cordata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603512, 'Gesamtverbreitung von Tilia cordata', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603513, 'Schweizer Verbreitung von Tilia cordata', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603513, 'Schweizer Verbreitung von Tilia cordata (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603514, 'Ökogramm von Tilia cordata', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603515, 'Wuchsform/Habitus von Tilia platyphyllos', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603516, 'Wuchsform/Habitus von Tilia platyphyllos', 1, 'PICTURETEXT');
@@ -10935,7 +10935,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603555, 'Frucht von Tilia pl
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603556, 'Frucht von Tilia platyphyllos', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603557, 'Frucht von Tilia platyphyllos', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603558, 'Gesamtverbreitung von Tilia platyphyllos', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603559, 'Schweizer Verbreitung von Tilia platyphyllos', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603559, 'Schweizer Verbreitung von Tilia platyphyllos (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603560, 'Ökogramm von Tilia platyphyllos', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603561, 'Wuchsform/Habitus von Ulmus glabra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603562, 'Wuchsform/Habitus von Ulmus glabra', 1, 'PICTURETEXT');
@@ -10981,7 +10981,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603601, 'Frucht von Ulmus gl
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603602, 'Frucht von Ulmus glabra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603603, 'Frucht von Ulmus glabra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603604, 'Gesamtverbreitung von Ulmus glabra', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603605, 'Schweizer Verbreitung von Ulmus glabra', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603605, 'Schweizer Verbreitung von Ulmus glabra (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603606, 'Ökogramm von Ulmus glabra', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603607, 'Wuchsform/Habitus von Ulmus minor (© pro arbore)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603608, 'Wuchsform/Habitus von Ulmus minor (© CODOC)', 1, 'PICTURETEXT');
@@ -11038,7 +11038,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603658, 'Frucht von Ulmus mi
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603659, 'Frucht von Ulmus minor (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603660, 'Frucht von Ulmus minor', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603661, 'Gesamtverbreitung von Ulmus minor', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603662, 'Schweizer Verbreitung von Ulmus minor', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603662, 'Schweizer Verbreitung von Ulmus minor (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603663, 'Ökogramm von Ulmus minor', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603664, 'Wuchsform/Habitus von Viburnum lantana', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603665, 'Wuchsform/Habitus von Viburnum lantana', 1, 'PICTURETEXT');
@@ -11091,7 +11091,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603711, 'Frucht von Viburnum
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603712, 'Frucht von Viburnum lantana (© Schneider Uni Basel)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603713, 'Frucht von Viburnum lantana (© CODOC)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603714, 'Gesamtverbreitung von Viburnum lantana', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603715, 'Schweizer Verbreitung von Viburnum lantana', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603715, 'Schweizer Verbreitung von Viburnum lantana (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603716, 'Wuchsform/Habitus von Viburnum opulus', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603717, 'Wuchsform/Habitus von Viburnum opulus (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603718, 'Wuchsform/Habitus von Viburnum opulus', 1, 'PICTURETEXT');
@@ -11147,7 +11147,7 @@ INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603767, 'Frucht von Viburnum
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603768, 'Frucht von Viburnum opulus (© Rudow ETHZ)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603769, 'Frucht von Viburnum opulus (© WikiCommons)', 1, 'PICTURETEXT');
 INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603770, 'Gesamtverbreitung von Viburnum opulus', 1, 'PICTURETEXT');
-INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603771, 'Schweizer Verbreitung von Viburnum opulus', 1, 'PICTURETEXT');
+INSERT INTO vertices (ID, NAME, RANK, TYPE) VALUES (603771, 'Schweizer Verbreitung von Viburnum opulus (© swiss web flora)', 1, 'PICTURETEXT');
 INSERT INTO edges (ID, PARENT_ID, CHILD_ID) VALUES (1, 1, 400);
 INSERT INTO edges (ID, PARENT_ID, CHILD_ID) VALUES (2, 1, 4000);
 INSERT INTO edges (ID, PARENT_ID, CHILD_ID) VALUES (3, 1, 1000);

@@ -42,20 +42,20 @@ abstract public class StateCompositeModel implements StateModel
     final public void loadState( Preferences node )
     {
         node = loadCompositeState( node );
-        final Enumeration components = subStateModels();
+        final Enumeration<StateModel> components = subStateModels();
         while ( components.hasMoreElements() )
         {
-            ( (StateModel) components.nextElement() ).loadState( node );
+            components.nextElement().loadState( node );
         }
     }
 
     final public void storeState( Preferences node )
     {
         node = storeCompositeState( node );
-        final Enumeration components = subStateModels();
+        final Enumeration<StateModel> components = subStateModels();
         while ( components.hasMoreElements() )
         {
-            ( (StateModel) components.nextElement() ).loadState( node );
+            components.nextElement().loadState( node );
         }
     }
 
@@ -69,7 +69,7 @@ abstract public class StateCompositeModel implements StateModel
         subStateModelVector.removeElement( stateModel );
     }
 
-    final public Enumeration subStateModels()
+    final public Enumeration<StateModel> subStateModels()
     {
         return subStateModelVector.elements();
     }
@@ -90,5 +90,5 @@ abstract public class StateCompositeModel implements StateModel
      */
     public abstract Preferences storeCompositeState( Preferences node );
 
-    private final Vector subStateModelVector = new Vector();
+    private final Vector<StateModel> subStateModelVector = new Vector<StateModel>();
 }

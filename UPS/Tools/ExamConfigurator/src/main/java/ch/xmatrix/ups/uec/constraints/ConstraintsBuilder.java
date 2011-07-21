@@ -595,8 +595,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
      *
      * <li>tr: at least one taxon is selected in the taxon tree (1) or non is selected (0).</li>
      *
-     * <li>hi: the single taxon of the currently selected constraint is of higer taxonomic level than a species (1) or
-     * not (0).</li>
+     * <li>hi: the single taxon of the currently selected constraint is of higer taxonomic level than a species (1) or not (0).</li>
      *
      * </ul>
      *
@@ -669,7 +668,7 @@ public class ConstraintsBuilder extends AbstractDetailsBuilder
         final boolean hi = taxons != null && taxons.size() == 1 && !SimpleTaxon.isSpecies( taxonTree.findTaxonByName( taxons.get( 0 ) ) );
         final boolean si = listConstraints.getSelectedIndices().length == 1;
         final boolean co = listConstraints.getSelectedValues().length >= 1;
-        final boolean hc = constraints != null && constraints.getConstraints().size() > 0;
+        final boolean hc = constraints != null && constraints.getConstraints() != null && constraints.getConstraints().size() > 0;
         final boolean fr = constraints != null && !constraints.isFixed();
         final boolean eb = enabledByMaster;
 

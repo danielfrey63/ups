@@ -49,7 +49,7 @@ public class Constraints extends AbstractTaxonBased
     {
         super( original );
         description = original.description;
-        defaultList = original.defaultList.clone();
+        defaultList = original.defaultList == null ? null : original.defaultList.clone();
         indexToConstraints = new HashMap<String, Constraint>();
 
         for ( int i = 0; i < original.constraints.size(); i++ )

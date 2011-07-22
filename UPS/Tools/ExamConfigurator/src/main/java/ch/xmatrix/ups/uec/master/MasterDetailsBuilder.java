@@ -23,6 +23,7 @@ import ch.jfactory.event.VetoableChangeEvent;
 import ch.jfactory.event.VetoableComboBoxModel;
 import ch.jfactory.event.VetoableComboBoxSelectionListener;
 import ch.jfactory.lang.LogicUtils;
+import ch.jfactory.lang.LogicUtils.InfoBit;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
@@ -63,10 +64,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Provides a choice and a taxon tree selection.
- *
- * Todo: Disable fix button if no tree is selected, or the tree is not found
- *
- * Todo: Change icon in fix button if fixed to distinguish it from disabled
  *
  * @author Daniel Frey
  * @version $Revision: 1.5 $ $Date: 2008/01/06 10:16:20 $
@@ -140,7 +137,7 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
     public void addDetails( final JComponent details, final int size )
     {
         final FormLayout layout = (FormLayout) master.getLayout();
-        layout.setColumnSpec( 2, new ColumnSpec( "max(min;" + size + "dlu)" ) );
+        layout.setColumnSpec( 2, ColumnSpec.decode( "max(min;" + size + "dlu)" ) );
         main.add( details, BorderLayout.CENTER );
     }
 
@@ -450,7 +447,7 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         final TaxonBased model = (TaxonBased) models.getSelection();
         if ( model != null )
         {
-            final TaxonTree tree = model == null ? null : TaxonModels.find( model.getTaxaUid() );
+            final TaxonTree tree = TaxonModels.find( model.getTaxaUid() );
             if ( source != modified )
             {
                 modified.setText( DATEFORMAT.format( model.getModified() ) );
@@ -527,12 +524,12 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
      * +----+---------+--------+--------+--------+--------+--------------------+
      * | di | 0 0 0 0  0 0 0 0  1 1 1 1  1 1 1 1 | high   |                di |
      * | fr | 0 0 0 0  1 1 1 1  0 0 0 0  1 1 1 1 |        |           fr      |
-     * | ta | 0 0 1 1  0 0 1 1  0 0 1 1  0 0 1 1 |        |       ta          |
-     * | mo | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | low    |  mo               |
+     * | ta | 0 0 1 1  0 0 1 1  0 0 1 1  0 0 1 1 |        |      ta           |
+     * | mo | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | low    | mo                |
      * +----+---------+--------+--------+--------+--------+-------------------+
-     * | ad | 1 1 1 1  1 1 1 1  1 1 1 1  1 1 1 1 | 0xFFFF |                   |
-     * | cp | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | 0xAAAA | mo | ta | fr      |
-     * | de | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | 0xAAAA | mo | ta | fr      |
+     * | ad | 1 1 1 1  1 1 1 1  1 1 1 1  1 1 1 1 | 0xFFFF | always enabled    |
+     * | cp | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | 0xAAAA | mo                |
+     * | de | 0 1 0 1  0 1 0 1  0 1 0 1  0 1 0 1 | 0xAAAA | mo                |
      * | fi | 0 0 0 0  0 0 1 1  0 0 0 0  0 0 1 1 | 0xC0C0 |           fr      |
      * | ta | 0 0 0 0  0 1 0 1  0 0 0 0  0 1 0 1 | 0xA0A0 | mo                |
      * | pa | 0 0 0 0  0 0 0 1  0 0 0 0  0 0 0 1 | 0x8080 | mo & ta & fr      |
@@ -554,10 +551,10 @@ public class MasterDetailsBuilder extends ActionCommandPanelBuilder implements D
         final boolean di = dirty;
 
         final LogicUtils.InfoBit[] bits = new LogicUtils.InfoBit[4];
-        bits[0] = new LogicUtils.InfoBit( di, "data has been changed (dirty)", "data is not changed" );
-        bits[1] = new LogicUtils.InfoBit( fr, "model is editable (free)", "model is fixed" );
-        bits[2] = new LogicUtils.InfoBit( ta, "taxa tree has been defined", "taxa tree is not defined" );
-        bits[3] = new LogicUtils.InfoBit( mo, "model selected", "no model selected" );
+        bits[0] = new InfoBit( di, "data has been changed (dirty)", "data is not changed" );
+        bits[1] = new InfoBit( fr, "model is editable (free)", "model is fixed" );
+        bits[2] = new InfoBit( ta, "taxa tree has been defined", "taxa tree is not defined" );
+        bits[3] = new InfoBit( mo, "model selected", "no model selected" );
 
         final Object[] components = new Object[]{add, copy, delete, fix, taxa, details, load, save};
         LogicUtils.setEnabledStates( bits, components, new long[]{

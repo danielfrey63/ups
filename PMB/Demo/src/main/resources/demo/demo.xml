@@ -4,7 +4,7 @@
     <examsetModels>
         <examsetModel>
             <registration defaultList="false">
-                <anmeldedaten id="11839" lkNummer="007-0007-07" lkForm="1" lkFormText="Demopr�fung"
+                <anmeldedaten id="11839" lkNummer="007-0007-07" lkForm="1" lkFormText="Demoprüfung"
                               pruefungsmodeText="demo" fachrichtung="ELC-NET" studentennummer="01-234-567" vorname="Max"
                               repetent="false" lkEinheitTitel="Systematische Biologie: Pflanzen" lkEinheitTyp="1"
                               pruefungsraum="HG" nachname="Muster" studiengang="Bio" email="balit@ethz.ch"
@@ -27,44 +27,102 @@
                 </plantList>
             </registration>
             <setTaxa>
-                <!--<setTaxon known="true">-->
-                <!--<specimenModel taxon="Rhododendron ferrugineum" id="022011-151117" weightIfKnown="1" weightIfUnknown="1" deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1" backup="false"/>-->
-                <!--</setTaxon>-->
                 <setTaxon known="false">
-                    <specimenModel taxon="Galanthus nivalis" id="060909-161608" weightIfKnown="1" weightIfUnknown="1"
+                    <specimenModel taxon="Alge klein" id="060909-161608" weightIfKnown="1" weightIfUnknown="1"
                                    deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
                                    backup="false"/>
                 </setTaxon>
-                <!--<setTaxon known="true">-->
-                <!--<specimenModel taxon="Dryopteris filix-mas" id="140808-080814" weightIfKnown="2" weightIfUnknown="2" deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1" backup="false"/>-->
-                <!--</setTaxon>-->
                 <setTaxon known="true">
-                    <specimenModel taxon="Helianthus annuus" weightIfKnown="1" weightIfUnknown="1"
+                    <specimenModel taxon="Ananas communis" weightIfKnown="1" weightIfUnknown="1"
                                    deactivatedIfKnown="true" deactivatedIfUnknown="true" numberOfSpecimens="0"
                                    backup="false"/>
                 </setTaxon>
-                <!--<setTaxon known="true">-->
-                <!--<specimenModel taxon="Neottia nidus-avis" id="070511-161915" weightIfKnown="2" weightIfUnknown="2" deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1" backup="false"/>-->
-                <!--</setTaxon>-->
                 <setTaxon known="true">
-                    <specimenModel taxon="Viola calcarata" id="190625-081615" weightIfKnown="1" weightIfUnknown="1"
+                    <specimenModel taxon="Assis Regen" id="190625-081615" weightIfKnown="1" weightIfUnknown="1"
                                    deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
                                    backup="false"/>
                 </setTaxon>
                 <setTaxon known="true">
-                    <specimenModel taxon="Gentiana acaulis" id="171905-060802" weightIfKnown="2" weightIfUnknown="2"
+                    <specimenModel taxon="Capparis spinosa" id="171905-060802" weightIfKnown="2" weightIfUnknown="2"
                                    deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
                                    backup="false"/>
                 </setTaxon>
                 <setTaxon known="true">
-                    <specimenModel taxon="Zea mays" weightIfKnown="1" weightIfUnknown="1" deactivatedIfKnown="true"
+                    <specimenModel taxon="Cocos nuccifera" weightIfKnown="1" weightIfUnknown="1" deactivatedIfKnown="true"
                                    deactivatedIfUnknown="true" numberOfSpecimens="0" backup="false"/>
                 </setTaxon>
-                <!--<setTaxon known="false">-->
-                <!--<specimenModel taxon="Aquilegia vulgaris" id="041323-121203" weightIfKnown="1" weightIfUnknown="2" deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1" backup="false"/>-->
-                <!--</setTaxon>-->
                 <setTaxon known="true">
-                    <specimenModel taxon="Acer pseudoplatanus" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                    <specimenModel taxon="Fee verte" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Frau Kind" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Helianthus annuus" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Knoellchen bact" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Krusten flechte" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Kuh braun" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Moos pleurocarp" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Opuntia compressa" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Orchidee orange" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Physoplexis comosa" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Pilz weiss" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Walliser Schafe" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Yucca filamentosa" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Zantedeschia aethiopica" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
+                                   deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
+                                   backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Zea mays" id="191414-071016" weightIfKnown="1" weightIfUnknown="2"
                                    deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1"
                                    backup="false"/>
                 </setTaxon>

@@ -29,7 +29,7 @@ import javax.swing.tree.TreeCellRenderer;
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/04/06 11:01:11 $
  */
-public class ConstraintsTreeRenderer implements TreeCellRenderer
+public class ConstraintsTreeRenderer implements TreeCellRenderer, Enablable
 {
     private static final ArrayList<String> DUMMY_LIST = new ArrayList<String>();
 

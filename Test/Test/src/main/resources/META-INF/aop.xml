@@ -1,0 +1,5 @@
+<aspectj>
+    <aspects>
+        <aspect name="ch.xmatrix.test.aop.Echo"/>
+    </aspects>
+</aspectj>

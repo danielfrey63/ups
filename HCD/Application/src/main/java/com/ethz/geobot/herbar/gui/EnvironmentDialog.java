@@ -124,6 +124,8 @@ public class EnvironmentDialog extends JDialog
         JTextArea textField2 = new JTextArea();
         scientificRadio = new JRadioButton();
         germanRadio = new JRadioButton();
+        demoRadio = new JRadioButton();
+        JTextArea textField5 = new JTextArea();
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
         JPanel buttonBar2 = new JPanel();
@@ -131,208 +133,207 @@ public class EnvironmentDialog extends JDialog
         CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setTitle( "Auswahl des Themenbereiches" );
-        setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
-        setAlwaysOnTop( true );
-        setModal( true );
+        setTitle("Auswahl des Themenbereiches");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setModal(true);
         Container contentPane = getContentPane();
-        contentPane.setLayout( new BorderLayout() );
+        contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
-            dialogPane.setLayout( new BorderLayout() );
+            dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
             {
-                contentPanel.setLayout( new FormLayout(
-                        "7dlu, default:grow, 7dlu",
-                        "default, 7dlu, fill:default:grow, 7dlu" ) );
+                contentPanel.setLayout(new FormLayout(
+                    "7dlu, default:grow, 7dlu",
+                    "default, 7dlu, fill:default:grow, 7dlu"));
 
                 //======== panel1 ========
                 {
-                    panel1.setBackground( Color.white );
-                    panel1.setBorder( Borders.DIALOG_BORDER );
-                    panel1.setLayout( new FormLayout(
-                            "default:grow",
-                            "default" ) );
+                    panel1.setBackground(Color.white);
+                    panel1.setBorder(Borders.DIALOG_BORDER);
+                    panel1.setLayout(new FormLayout(
+                        "default:grow",
+                        "default"));
 
                     //---- textField4 ----
-                    textField4.setText( "Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themebereich" );
-                    textField4.setLineWrap( true );
-                    textField4.setWrapStyleWord( true );
-                    textField4.setOpaque( false );
-                    textField4.setEditable( false );
-                    panel1.add( textField4, cc.xy( 1, 1 ) );
+                    textField4.setText("Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themebereich");
+                    textField4.setLineWrap(true);
+                    textField4.setWrapStyleWord(true);
+                    textField4.setOpaque(false);
+                    textField4.setEditable(false);
+                    panel1.add(textField4, cc.xy(1, 1));
                 }
-                contentPanel.add( panel1, cc.xywh( 1, 1, 3, 1 ) );
+                contentPanel.add(panel1, cc.xywh(1, 1, 3, 1));
 
                 //======== tabbedPane1 ========
                 {
 
                     //======== panel3 ========
                     {
-                        panel3.setBorder( Borders.DIALOG_BORDER );
-                        panel3.setLayout( new FormLayout(
-                                "default:grow",
-                                "fill:default:grow, $lgap, default" ) );
+                        panel3.setBorder(Borders.DIALOG_BORDER);
+                        panel3.setLayout(new FormLayout(
+                            "default:grow",
+                            "fill:default:grow, $lgap, default"));
 
                         //---- textPane ----
-                        textPane.setOpaque( false );
-                        textPane.setEditable( false );
-                        panel3.add( textPane, cc.xy( 1, 1 ) );
+                        textPane.setOpaque(false);
+                        textPane.setEditable(false);
+                        panel3.add(textPane, cc.xy(1, 1));
 
                         //======== buttonBar ========
                         {
-                            buttonBar.setBorder( Borders.createEmptyBorder( "0dlu, 0dlu, 0dlu, 0dlu" ) );
-                            buttonBar.setLayout( new FormLayout(
-                                    "$glue, $button",
-                                    "pref" ) );
+                            buttonBar.setBorder(Borders.createEmptyBorder("0dlu, 0dlu, 0dlu, 0dlu"));
+                            buttonBar.setLayout(new FormLayout(
+                                "$glue, $button",
+                                "pref"));
 
                             //---- acceptButton ----
-                            acceptButton.setText( "Akzeptieren" );
-                            acceptButton.addActionListener( new ActionListener()
-                            {
-                                public void actionPerformed( ActionEvent e )
-                                {
+                            acceptButton.setText("Akzeptieren");
+                            acceptButton.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
                                     acceptButtonActionPerformed();
                                 }
-                            } );
-                            buttonBar.add( acceptButton, cc.xy( 2, 1 ) );
+                            });
+                            buttonBar.add(acceptButton, cc.xy(2, 1));
                         }
-                        panel3.add( buttonBar, cc.xy( 1, 3 ) );
+                        panel3.add(buttonBar, cc.xy(1, 3));
                     }
-                    tabbedPane1.addTab( "Copyright", panel3 );
+                    tabbedPane1.addTab("Copyright", panel3);
+
 
                     //======== panel2 ========
                     {
-                        panel2.setBorder( Borders.DIALOG_BORDER );
-                        panel2.setLayout( new FormLayout(
-                                "10dlu, $lcgap, default:grow",
-                                "3*(default, $lgap), default, $ugap, default, $lgap, fill:default:grow, $lgap, default" ) );
+                        panel2.setBorder(Borders.DIALOG_BORDER);
+                        panel2.setLayout(new FormLayout(
+                            "10dlu, $lcgap, default:grow",
+                            "3*(default, $lgap), default, $ugap, 2*(default, $lgap), fill:default:grow, $lgap, default"));
 
                         //---- textField1 ----
-                        textField1.setText( "Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus und pr\u00e4zisieren Sie gegebenenfalls die Details (Wissenschaftlich oder Deutsch)." );
-                        textField1.setLineWrap( true );
-                        textField1.setWrapStyleWord( true );
-                        textField1.setOpaque( false );
-                        textField1.setEditable( false );
-                        panel2.add( textField1, cc.xywh( 1, 1, 3, 1 ) );
+                        textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus und pr\u00e4zisieren Sie gegebenenfalls die Details (Wissenschaftlich oder Deutsch).");
+                        textField1.setLineWrap(true);
+                        textField1.setWrapStyleWord(true);
+                        textField1.setOpaque(false);
+                        textField1.setEditable(false);
+                        panel2.add(textField1, cc.xywh(1, 1, 3, 1));
 
                         //---- systematicRadio ----
-                        systematicRadio.setSelected( true );
-                        systematicRadio.addActionListener( new ActionListener()
-                        {
-                            public void actionPerformed( ActionEvent e )
-                            {
+                        systematicRadio.setSelected(true);
+                        systematicRadio.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
-                        } );
-                        panel2.add( systematicRadio, cc.xy( 1, 3 ) );
+                        });
+                        panel2.add(systematicRadio, cc.xy(1, 3));
 
                         //---- textField2 ----
-                        textField2.setText( "Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen. Sie haben zwei M\u00f6glichkeiten, wie die Taxonnamen gehandhabt werden:" );
-                        textField2.setLineWrap( true );
-                        textField2.setWrapStyleWord( true );
-                        textField2.setOpaque( false );
-                        textField2.setEditable( false );
-                        panel2.add( textField2, cc.xy( 3, 3 ) );
+                        textField2.setText("Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen. Sie haben zwei M\u00f6glichkeiten, wie die Taxonnamen gehandhabt werden:");
+                        textField2.setLineWrap(true);
+                        textField2.setWrapStyleWord(true);
+                        textField2.setOpaque(false);
+                        textField2.setEditable(false);
+                        panel2.add(textField2, cc.xy(3, 3));
 
                         //---- scientificRadio ----
-                        scientificRadio.setText( "Wissenschaftliche Namen" );
-                        scientificRadio.setSelected( true );
-                        panel2.add( scientificRadio, cc.xy( 3, 5 ) );
+                        scientificRadio.setText("Wissenschaftliche Namen");
+                        scientificRadio.setSelected(true);
+                        panel2.add(scientificRadio, cc.xy(3, 5));
 
                         //---- germanRadio ----
-                        germanRadio.setText( "Deutsche Namen" );
-                        panel2.add( germanRadio, cc.xy( 3, 7 ) );
+                        germanRadio.setText("Deutsche Namen");
+                        panel2.add(germanRadio, cc.xy(3, 7));
 
-                        //---- dendroRadio ----
-                        dendroRadio.addActionListener( new ActionListener()
-                        {
-                            public void actionPerformed( ActionEvent e )
-                            {
+                        //---- demoRadio ----
+                        demoRadio.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
-                        } );
-                        panel2.add( dendroRadio, cc.xy( 1, 9 ) );
+                        });
+                        panel2.add(demoRadio, cc.xy(1, 9));
+
+                        //---- textField5 ----
+                        textField5.setText("Pr\u00fcfungs Demo");
+                        textField5.setLineWrap(true);
+                        textField5.setWrapStyleWord(true);
+                        textField5.setOpaque(false);
+                        textField5.setEditable(false);
+                        panel2.add(textField5, cc.xy(3, 9));
+
+                        //---- dendroRadio ----
+                        dendroRadio.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                setChoice1();
+                            }
+                        });
+                        panel2.add(dendroRadio, cc.xy(1, 11));
 
                         //---- textField3 ----
-                        textField3.setText( "Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis." );
-                        textField3.setLineWrap( true );
-                        textField3.setWrapStyleWord( true );
-                        textField3.setOpaque( false );
-                        textField3.setEditable( false );
-                        panel2.add( textField3, cc.xy( 3, 9 ) );
+                        textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
+                        textField3.setLineWrap(true);
+                        textField3.setWrapStyleWord(true);
+                        textField3.setOpaque(false);
+                        textField3.setEditable(false);
+                        panel2.add(textField3, cc.xy(3, 11));
 
                         //======== buttonBar2 ========
                         {
-                            buttonBar2.setBorder( Borders.createEmptyBorder( "0dlu, 0dlu, 0dlu, 0dlu" ) );
-                            buttonBar2.setLayout( new FormLayout(
-                                    "$glue, $button",
-                                    "pref" ) );
+                            buttonBar2.setBorder(Borders.createEmptyBorder("0dlu, 0dlu, 0dlu, 0dlu"));
+                            buttonBar2.setLayout(new FormLayout(
+                                "$glue, $button",
+                                "pref"));
 
                             //---- okButton ----
-                            okButton.setText( "OK" );
-                            okButton.addActionListener( new ActionListener()
-                            {
-                                public void actionPerformed( ActionEvent e )
-                                {
+                            okButton.setText("OK");
+                            okButton.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
                                     okButtonActionPerformed();
                                 }
-                            } );
-                            buttonBar2.add( okButton, cc.xy( 2, 1 ) );
+                            });
+                            buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add( buttonBar2, cc.xywh( 1, 13, 3, 1 ) );
+                        panel2.add(buttonBar2, cc.xywh(1, 15, 3, 1));
                     }
-                    tabbedPane1.addTab( "Auswahl", panel2 );
+                    tabbedPane1.addTab("Auswahl", panel2);
 
                 }
-                contentPanel.add( tabbedPane1, cc.xy( 2, 3 ) );
+                contentPanel.add(tabbedPane1, cc.xy(2, 3));
             }
-            dialogPane.add( contentPanel, BorderLayout.CENTER );
+            dialogPane.add(contentPanel, BorderLayout.CENTER);
         }
-        contentPane.add( dialogPane, BorderLayout.CENTER );
-        setSize( 565, 615 );
-        setLocationRelativeTo( null );
+        contentPane.add(dialogPane, BorderLayout.CENTER);
+        setSize(565, 615);
+        setLocationRelativeTo(null);
 
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
-        buttonGroup1.add( systematicRadio );
-        buttonGroup1.add( dendroRadio );
+        buttonGroup1.add(systematicRadio);
+        buttonGroup1.add(demoRadio);
+        buttonGroup1.add(dendroRadio);
 
         //---- buttonGroup2 ----
         ButtonGroup buttonGroup2 = new ButtonGroup();
-        buttonGroup2.add( scientificRadio );
-        buttonGroup2.add( germanRadio );
+        buttonGroup2.add(scientificRadio);
+        buttonGroup2.add(germanRadio);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner non-commercial license
     private JPanel dialogPane;
-
     private JPanel contentPanel;
-
     private JTextArea textField4;
-
     private JTabbedPane tabbedPane1;
-
     private JPanel panel3;
-
     private JTextPane textPane;
-
     private JButton acceptButton;
-
     private JTextArea textField1;
-
     public JRadioButton systematicRadio;
-
     public JRadioButton scientificRadio;
-
     public JRadioButton germanRadio;
-
+    public JRadioButton demoRadio;
     public JRadioButton dendroRadio;
-
     private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

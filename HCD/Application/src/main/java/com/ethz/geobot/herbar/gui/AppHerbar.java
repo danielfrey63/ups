@@ -26,6 +26,7 @@ import ch.jfactory.application.SystemUtil;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
+import ch.xmatrix.ups.pmb.exam.Main;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
@@ -80,9 +81,9 @@ public class AppHerbar
     /** Started in the "dendrology" environment. */
     public static final String ENV_DENDROLOGY = "dendrology";
 
-    public AppHerbar()
+    public AppHerbar( final int selection )
     {
-        switchDatabase();
+        switchDatabase( selection );
         initSplash();
         decompressDatabase();
         Application.getInstance().getModel();
@@ -114,21 +115,8 @@ public class AppHerbar
         return mainFrame;
     }
 
-    private void switchDatabase()
+    private void switchDatabase( final int selection )
     {
-        // Todo: Implements as a case of specialized resource bundles
-        final EnvironmentDialog dialog = new EnvironmentDialog( null );
-        dialog.setVisible( true );
-        int selection = -1;
-        if ( dialog.ok )
-        {
-            selection = dialog.systematicRadio.isSelected() ? dialog.scientificRadio.isSelected() ? 0 : 1 : 2;
-        }
-        else
-        {
-            LOG.info( "user canceled choice dialog. exiting application now." );
-            System.exit( 1 );
-        }
         switch ( selection )
         {
             case 0:
@@ -152,6 +140,15 @@ public class AppHerbar
                 System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
                 break;
+            case 3:
+                try
+                {
+                    Main.main( null );
+                }
+                catch ( Exception e )
+                {
+                    LOG.error( "Error during initialization of exam demo", e );
+                }
             default:
                 break;
         }
@@ -196,7 +193,27 @@ public class AppHerbar
         try
         {
             UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
-            new AppHerbar();
+            // Todo: Implements as a case of specialized resource bundles
+            final EnvironmentDialog dialog = new EnvironmentDialog( null );
+            dialog.setVisible( true );
+            int selection = -1;
+            if ( dialog.ok )
+            {
+                selection = dialog.systematicRadio.isSelected() ? dialog.scientificRadio.isSelected() ? 0 : 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+            }
+            else
+            {
+                LOG.info( "user canceled choice dialog. exiting application now." );
+                System.exit( 1 );
+            }
+            if ( selection == 3 )
+            {
+                Main.main( null );
+            }
+            else
+            {
+                new AppHerbar( selection );
+            }
         }
         catch ( IllegalStateException e )
         {

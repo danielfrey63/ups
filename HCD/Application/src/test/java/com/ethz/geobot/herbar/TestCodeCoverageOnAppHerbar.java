@@ -68,7 +68,7 @@ public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
                 {
                     public void run() throws Exception
                     {
-                        new AppHerbar();
+                        new AppHerbar( 1 );
                     }
                 } )
                 .process( new WindowHandler()

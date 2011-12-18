@@ -79,6 +79,10 @@
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <dependency>
+            <groupId>ch.xmatrix.ups.pmb.exam</groupId>
+            <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.jgoodies</groupId>
             <artifactId>animation</artifactId>
         </dependency>

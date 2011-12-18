@@ -10,7 +10,7 @@
     <groupId>ch.xmatrix.ups.pmb</groupId>
     <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
     <name>PMB Demo Set</name>
-    <version>2.0.1652</version>
+    <version>2.0-SNAPSHOT</version>
     <description>Bilder und Set f�r Demo Modus</description>
     <build>
         <resources>
@@ -25,9 +25,4 @@
             </resource>
         </resources>
     </build>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.pmb.demo-2.0.1652</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.pmb.demo-2.0.1652</url>
-  </scm>
 </project>

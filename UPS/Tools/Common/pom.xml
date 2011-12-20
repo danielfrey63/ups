@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.ups.tools</groupId>
     <artifactId>ch.xmatrix.ups.tools.common</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0.1709</version>
     <name>UPS Common</name>
     <dependencies>
         <dependency>
@@ -81,4 +81,9 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.tools.common-3.0.1709</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.tools.common-3.0.1709</url>
+  </scm>
 </project>

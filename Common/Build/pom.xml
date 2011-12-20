@@ -63,7 +63,7 @@
         <!-- Heap size used in JNLP projects. -->
         <max-heap-size>512m</max-heap-size>
         <!-- The Archiva URL. -->
-        <archiva>http://192.168.10.26:8080</archiva>
+        <archiva>http://192.168.10.28:8080</archiva>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -222,6 +222,11 @@
             <dependency>
                 <groupId>ch.xmatrix.ups.pmb</groupId>
                 <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
+                <version>2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.xmatrix.ups.pmb.exam</groupId>
+                <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
                 <version>2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -495,7 +500,6 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.5.10</version>
-                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>

@@ -11,7 +11,13 @@
     <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
     <name>PMB Demo Set</name>
     <version>2.0-SNAPSHOT</version>
-    <description>Bilder und Set f�r Demo Modus</description>
+    <description>Bilder und Set für Demo Modus</description>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.utils-all</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>

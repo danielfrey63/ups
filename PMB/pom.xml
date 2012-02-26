@@ -20,5 +20,6 @@
         <module>Entry</module>
         <module>Demo</module>
         <module>Exam</module>
+        <module>Test</module>
     </modules>
 </project>

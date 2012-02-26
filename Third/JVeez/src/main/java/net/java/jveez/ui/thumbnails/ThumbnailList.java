@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JList;
+import net.java.jveez.utils.PictureSortingAlgorithm;
 import net.java.jveez.utils.SortingAlgorithm;
 import net.java.jveez.utils.Utils;
 import org.apache.log4j.Logger;
@@ -51,6 +52,11 @@ public class ThumbnailList<T> extends JList
     /** Whether to show a number on each thumbnail. */
     private boolean showNumber;
 
+    @SuppressWarnings( "unchecked" )
+    public ThumbnailList()
+    {
+        this( new DefaultThumbnailListModel(), (SortingAlgorithm<T>) PictureSortingAlgorithm.ByName );
+    }
     public ThumbnailList( final ThumbnailListModel<T> model, final SortingAlgorithm<T> sortingAlgorithm )
     {
         super();

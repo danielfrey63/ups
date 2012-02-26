@@ -9,6 +9,8 @@
  */
 package ch.jfactory.component;
 
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,9 +22,12 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import org.slf4j.Logger;
@@ -40,10 +45,10 @@ public class ClockPanel extends JPanel implements ActionListener
     /** This class logger. */
     private static final Logger LOG = LoggerFactory.getLogger( ClockPanel.class );
 
-    /** The offscreen image. */
+    /** The off-screen image. */
     private Image offScreenImage;
 
-    /** The offscreen graphics. */
+    /** The off-screen graphics. */
     private Graphics2D offScreenGraphics;
 
     /** The date string. */
@@ -53,20 +58,40 @@ public class ClockPanel extends JPanel implements ActionListener
     private Timer timer;
 
     /** The date format. Parametrize if necessary... */
-    private static final DateFormat formatter = new SimpleDateFormat( "EEEE d.M.yyyy HH:mm:ss" );
+    private final Format formatter;
 
-    /** Inits the clock object. */
+    /** The target to format. */
+    private final TargetProvider target;
+
+    /** The timely resolution after which an update takes place. */
+    private final int resolution;
+
+    /** Instantiates a ClockPanel with a date format pattern of "d.M.yyy HH:mm:ss" and a 1 sec refresh rate. */
     public ClockPanel()
     {
+        this( new SimpleDateFormat( "d.M.yyy HH:mm:ss" ), new DateTargetProvider(), 1000 );
+    }
+
+    /**
+     * Initializes the clock object. Example: <code>new ClockPanel( new SimpleDateFormat( "d.M.yyy HH:mm:ss" ), new DateTargetProvider(), 1000 )</code>.
+     *
+     * @param formatter  the formatter formatter for the date
+     * @param target     the target to format in each cycle
+     * @param resolution the timely resolution after which an update takes place
+     */
+    public ClockPanel( final Format formatter, final TargetProvider target, final int resolution )
+    {
+        this.target = target;
+        this.formatter = formatter;
+        this.resolution = resolution;
         init();
-        start();
     }
 
     private void init()
     {
         setLayout( null );
         addNotify();
-        initOffscreenImage();
+        initOffScreenImage();
     }
 
     /** Start the timer. */
@@ -74,7 +99,7 @@ public class ClockPanel extends JPanel implements ActionListener
     {
         if ( timer == null )
         {
-            timer = new Timer( 1000, this );
+            timer = new Timer( resolution, this );
             LOG.info( "starting timer" );
             timer.start();
         }
@@ -94,9 +119,10 @@ public class ClockPanel extends JPanel implements ActionListener
     /** {@inheritDoc} */
     public void actionPerformed( final ActionEvent actionEvent )
     {
-        date = formatter.format( new Date() );
+        date = formatter.format( target.getTarget() );
         final Font font = getFont();
-        setPreferredSize( new Dimension( getStringWidth( date ), getStringHeigth( font ) ) );
+        final Dimension size = new Dimension( getStringWidth( date ), getStringHeight( font ) );
+        setPreferredSize( size );
         invalidate();
         repaint();
     }
@@ -104,11 +130,12 @@ public class ClockPanel extends JPanel implements ActionListener
     /** {@inheritDoc} */
     public void paint( final Graphics graphics )
     {
-        initOffscreenImage();
+        initOffScreenImage();
         if ( offScreenGraphics != null && date != null )
         {
             offScreenGraphics.setColor( isOpaque() ? getBackground() : new Color( 0, 0, 0, 0 ) );
             offScreenGraphics.fillRect( 0, 0, getWidth(), getHeight() );
+            System.out.println( getWidth() + " " + getHeight() );
             offScreenGraphics.setColor( getForeground() );
             offScreenGraphics.setFont( getFont() );
             offScreenGraphics.drawString( date, getXLoc( date ), getYLoc() );
@@ -116,7 +143,7 @@ public class ClockPanel extends JPanel implements ActionListener
         }
     }
 
-    private void initOffscreenImage()
+    private void initOffScreenImage()
     {
         if ( offScreenImage == null && getWidth() > 0 && getHeight() > 0 )
         {
@@ -127,23 +154,10 @@ public class ClockPanel extends JPanel implements ActionListener
         }
     }
 
-    public void setPreferredSize( final Dimension size )
+    @Override
+    public Dimension getPreferredSize()
     {
-        super.setPreferredSize( size );
-        resetOffScreenImage( size );
-    }
-
-    private void resetOffScreenImage( final Dimension size )
-    {
-        if ( offScreenImage != null )
-        {
-            final int imageWidth = offScreenImage.getWidth( null );
-            final int imageHeight = offScreenImage.getHeight( null );
-            if ( offScreenImage != null && ( imageWidth != size.getWidth() || imageHeight != size.getHeight() ) )
-            {
-                offScreenImage = null;
-            }
-        }
+        return new Dimension( date == null ? 0 : getStringWidth( date ), getStringHeight( getFont() ) );
     }
 
     private int getXLoc( final String text )
@@ -165,9 +179,122 @@ public class ClockPanel extends JPanel implements ActionListener
         return fontMetrics.stringWidth( text );
     }
 
-    private int getStringHeigth( final Font font )
+    private int getStringHeight( final Font font )
     {
         final FontMetrics fontMetrics = getFontMetrics( font );
         return fontMetrics.getHeight();
+    }
+
+    public static interface TargetProvider<T>
+    {
+        public T getTarget();
+    }
+
+    public static class DateTargetProvider implements TargetProvider<Date>
+    {
+        public Date getTarget()
+        {
+            return new Date();
+        }
+    }
+
+    public static class CountDownProvider implements TargetProvider<Number>
+    {
+        private final long duration;
+
+        private final ActionListener feedBacker;
+
+        private Date end;
+
+        public CountDownProvider( final long duration, final ActionListener feedbackListener )
+        {
+            this.duration = duration;
+            this.feedBacker = feedbackListener;
+        }
+
+        public void reset()
+        {
+            end = null;
+        }
+
+        public Number getTarget()
+        {
+            if ( end == null )
+            {
+                end = new Date( new Date().getTime() + duration );
+            }
+            final long remainingTime = end.getTime() - new Date().getTime();
+            if ( feedBacker != null && remainingTime <= 0 )
+            {
+                feedBacker.actionPerformed( new ActionEvent( this, -1, null ) );
+            }
+            return remainingTime;
+        }
+    }
+
+    public static class CombinedFormatter extends Format
+    {
+        private final Format formatMinutes = new SimpleDateFormat( "m 'min'" );
+
+        private final Format formatSeconds = new SimpleDateFormat( "m:ss 'min'" );
+
+        private final int anInt;
+
+        public CombinedFormatter( final int threshold )
+        {
+            anInt = threshold;
+        }
+
+        @Override
+        public StringBuffer format( final Object obj, final StringBuffer toAppendTo, final FieldPosition pos )
+        {
+            if ( obj instanceof Number )
+            {
+                final long number = ( (Number) obj ).longValue();
+                pos.setBeginIndex( 0 );
+                pos.setEndIndex( 0 );
+                if ( number > anInt )
+                {
+                    toAppendTo.append( formatMinutes.format( number ) );
+                }
+                else
+                {
+                    toAppendTo.append( formatSeconds.format( number ) );
+                }
+            }
+            return toAppendTo;
+        }
+
+        @Override
+        public Object parseObject( final String source, final ParsePosition pos )
+        {
+            return null;
+        }
+    }
+
+    public static void main( String[] args )
+    {
+        final ClockPanel watch = new ClockPanel();
+        watch.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
+        watch.setForeground( Color.ORANGE );
+        watch.setBackground( Color.lightGray );
+        watch.start();
+
+        final int delay = 1000;
+        final ClockPanel stopper = new ClockPanel( new ClockPanel.CombinedFormatter( 12 * delay ), new ClockPanel.CountDownProvider( 15 * delay, null ), delay );
+        stopper.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
+        stopper.setForeground( Color.ORANGE );
+        stopper.setBackground( Color.darkGray );
+        stopper.start();
+
+        final JFrame frame = new JFrame();
+        frame.getContentPane().setBackground( Color.orange );
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setLayout( new FormLayout( "f:p:g", "c:p:g, c:p:g" ) );
+        frame.add( watch, new CellConstraints( 1, 1 ) );
+        frame.add( stopper, new CellConstraints( 1, 2 ) );
+        frame.setSize( 600, 400 );
+        frame.setLocationRelativeTo( null );
+        frame.setVisible( true );
     }
 }

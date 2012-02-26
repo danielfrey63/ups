@@ -16,7 +16,6 @@
  */
 package ch.xmatrix.ups.pmb.exam;
 
-import ch.jfactory.binding.InfoModel;
 import ch.jfactory.file.OpenChooser;
 import ch.jfactory.math.RandomUtils;
 import ch.xmatrix.ups.model.ExamsetModel;
@@ -24,6 +23,7 @@ import ch.xmatrix.ups.model.SetTaxon;
 import ch.xmatrix.ups.pmb.domain.Entry;
 import ch.xmatrix.ups.pmb.domain.FileEntry;
 import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
+import ch.xmatrix.ups.pmb.test.TestTaxa;
 import ch.xmatrix.ups.pmb.ui.controller.AdjustSizeLoadedListener;
 import ch.xmatrix.ups.pmb.ui.controller.NavigationSelectionHandler;
 import ch.xmatrix.ups.pmb.ui.controller.PMBController;
@@ -34,6 +34,7 @@ import ch.xmatrix.ups.pmb.util.SpeciesParser;
 import com.wegmueller.ups.lka.IAnmeldedaten;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -60,10 +61,12 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.xml.transform.TransformerException;
 import net.java.jveez.cache.ImageStore;
 import net.java.jveez.vfs.Picture;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static java.awt.event.KeyEvent.KEY_PRESSED;
 import static java.awt.event.KeyEvent.KEY_RELEASED;
 import static java.awt.event.KeyEvent.VK_L;
 
@@ -154,16 +157,17 @@ public class MainForm extends ExamForm
 
     private void initListeners()
     {
+        setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
         imageLeft.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
         imageRight.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher( new KeyEventDispatcher()
         {
             public boolean dispatchKeyEvent( final KeyEvent e )
             {
+                final int modifier = e.getModifiers();
+                final int code = e.getKeyCode();
                 if ( e.getID() == KEY_RELEASED )
                 {
-                    final int modifier = e.getModifiers();
-                    final int code = e.getKeyCode();
                     // ALT-L displays the configuration options
                     if ( modifier == KeyEvent.ALT_MASK && code == VK_L && passwordController != null )
                     {
@@ -177,7 +181,7 @@ public class MainForm extends ExamForm
                     {
                         initEditMode( false );
                     }
-                    // ALT-S shows the students dialog or inits the credentials
+                    // ALT-O shows the students dialog or inits the credentials
                     else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O )
                     {
                         if ( studentsController == null )
@@ -194,6 +198,30 @@ public class MainForm extends ExamForm
                     {
                         new DemoController( model ).loadDemoDirectory();
                     }
+                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_P )
+                    {
+
+                    }
+                }
+                else if ( e.getID() == KEY_PRESSED )
+                {
+                    // ALT-F4 to quit
+                    if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_F4 && exam )
+                    {
+                        time.stop();
+                        final QuitDialog dialog = new QuitDialog( MainForm.this );
+                        dialog.setVisible( true );
+                        if ( dialog.hit )
+                        {
+                            doQuit();
+                        }
+                        else
+                        {
+                            time.start();
+                            Toolkit.getDefaultToolkit().beep();
+                        }
+                        return true;
+                    }
                 }
 
                 return false;
@@ -202,7 +230,7 @@ public class MainForm extends ExamForm
             private void initEditMode( final boolean enable )
             {
                 imageRight.setToolbarVisible( enable );
-                controller.setCurrentPicture( imageRight.getCurrentPicture(), imageRight );
+                //controller.setCurrentPicture( imageRight.getCurrentPicture(), imageRight );
                 imageLeft.setToolbarVisible( enable );
                 statusBar.setVisible( enable );
                 menuBar.setVisible( enable );
@@ -269,7 +297,9 @@ public class MainForm extends ExamForm
 
     private void initModel() throws TransformerException, IOException
     {
-        final InputStream resource = MainForm.class.getResourceAsStream( "/demo/demo.xml" );
+        final String resourceFile;
+        resourceFile = exam ? "/test/test.xml" : "/demo/demo.xml";
+        final InputStream resource = MainForm.class.getResourceAsStream( resourceFile );
         final InputStreamReader reader = new InputStreamReader( resource );
         model.setDemo( true );
         model.setCurrentExamsetModel( StudentDataLoader.getExamsetModels( reader ).getExamsetModels().get( 0 ) );
@@ -293,7 +323,7 @@ public class MainForm extends ExamForm
             final FileEntry fileEntry = getHabitusFileEntries( examsetModelSpeciesEntry );
             if ( fileEntry == null )
             {
-                LOG.error( "no \"Habitus\" file found in \"" + examsetModelSpeciesEntry + "\"" );
+                LOG.error( "no \"Herbar\" file found in \"" + examsetModelSpeciesEntry + "\"" );
             }
             else
             {
@@ -408,8 +438,7 @@ public class MainForm extends ExamForm
     }
 
     /**
-     * Searches recursively for a file entry starting with "Habitus" and returns it. If none is found, returns {@code
-     * null}.
+     * Searches recursively for a file entry starting with "Habitus" and returns it. If none is found, returns {@code null}.
      *
      * @param entry the top entry to start search
      * @return the "Habitus" file entry or null
@@ -419,7 +448,7 @@ public class MainForm extends ExamForm
         for ( int i = 0; i < entry.size(); i++ )
         {
             final Entry child = entry.get( i );
-            if ( child instanceof FileEntry && new File( child.getPath() ).getName().startsWith( "Habitus" ) )
+            if ( child instanceof FileEntry && new File( child.getPath() ).getName().startsWith( "Herbar" ) )
             {
                 return (FileEntry) child;
             }
@@ -436,8 +465,7 @@ public class MainForm extends ExamForm
     }
 
     /**
-     * Reads all directories from the active picture path and keeps those matching the species criteria. The result is
-     * stored in {@link PMBExamModel#getSpeciesEntries()}.
+     * Reads all directories from the active picture path and keeps those matching the species criteria. The result is stored in {@link PMBExamModel#getSpeciesEntries()}.
      *
      * @throws ConfigurationException passed through
      */
@@ -449,7 +477,14 @@ public class MainForm extends ExamForm
         {
             try
             {
-                directory = DemoTaxa.getDemoPictures();
+                if ( exam )
+                {
+                    directory = TestTaxa.getTestPictures();
+                }
+                else
+                {
+                    directory = DemoTaxa.getDemoPictures();
+                }
                 settings.setActivePicturePath( directory );
             }
             catch ( IOException e )
@@ -465,17 +500,12 @@ public class MainForm extends ExamForm
         model.setSpeciesEntries( new SpeciesParser( settings ).processFile( new File( directory ) ) );
     }
 
-    /**
-     * Collects all {@link SpeciesEntry} objects for the current {@link ExamsetModel}. If not all {@link SetTaxon}
-     * objects of {@code ExamsetModel} can be mapped to a {@code SpeciesEntry} object, a warning is issued. The result
-     * is stored in {@link #examsetModelSpeciesEntries}.
-     */
+    /** Collects all {@link SpeciesEntry} objects for the current {@link ExamsetModel}. If not all {@link SetTaxon} objects of {@code ExamsetModel} can be mapped to a {@code SpeciesEntry} object, a warning is issued. The result is stored in {@link #examsetModelSpeciesEntries}. */
     private void initAllExamsetModelSpeciesEntries()
     {
         final Settings settings = model.getSettings();
         final ExamsetModel currentExamsSetModel = model.getCurrentExamsetModel();
         final IAnmeldedaten anmeldedaten = currentExamsSetModel.getRegistration().getAnmeldedaten();
-        fieldStudi.setText( anmeldedaten.getNachname() + ", " + anmeldedaten.getVorname() + " (" + anmeldedaten.getStudentennummer() + ")" );
         final List<SetTaxon> currentSetTaxa = currentExamsSetModel.getSetTaxa();
         examsetModelSpeciesEntries = new ArrayList<SpeciesEntry>( currentSetTaxa.size() );
         final StringBuffer missing = new StringBuffer();
@@ -530,6 +560,14 @@ public class MainForm extends ExamForm
         final PasswordDialogController passwordChecker = new PasswordDialogController();
         if ( passwordController == null || ( !passwordChecker.hasRegistry() || passwordChecker.check() ) )
         {
+            try
+            {
+                FileUtils.deleteDirectory( new File( model.getSettings().getActivePicturePath() ) );
+            }
+            catch ( IOException e )
+            {
+                LOG.error( "could not delete temporary directory" );
+            }
             System.exit( 0 );
         }
     }

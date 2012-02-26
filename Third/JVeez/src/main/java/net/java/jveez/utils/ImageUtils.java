@@ -87,7 +87,7 @@ public class ImageUtils
             }
             catch ( Throwable t )
             {
-                LOG.error( "Could not load the image", t );
+                LOG.error( "Could not load the picture \"" + picture + "\"", t );
                 return null;
             }
         }

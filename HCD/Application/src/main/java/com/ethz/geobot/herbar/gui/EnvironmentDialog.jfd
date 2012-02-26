@@ -525,7 +525,7 @@
                 <string>javax.swing.JTextArea</string>
                 <void method="setProperty">
                  <string>text</string>
-                 <string>Prüfungs Demo</string>
+                 <string>Prüfungs-Demo (nur auf Windows)</string>
                 </void>
                 <void method="setProperty">
                  <string>lineWrap</string>
@@ -544,13 +544,7 @@
                  <boolean>false</boolean>
                 </void>
                 <void property="name">
-                 <string>textField5</string>
-                </void>
-                <void method="auxiliary">
-                 <void method="setProperty">
-                  <string>JavaCodeGenerator.variableLocal</string>
-                  <boolean>true</boolean>
-                 </void>
+                 <string>demoText</string>
                 </void>
                </object>
                <object class="com.jformdesigner.model.FormLayoutConstraints">

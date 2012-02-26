@@ -33,7 +33,7 @@ public class Main
 {
     public static void main( final String[] args ) throws Exception
     {
-        RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
+//        RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
         if ( OperatingSystem.IS_OS_WINDOWS )
         {
             UIManager.setLookAndFeel( "com.jgoodies.looks.windows.WindowsLookAndFeel" );

@@ -29,6 +29,7 @@ package com.ethz.geobot.herbar.gui;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.uif.util.SystemUtils;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -54,7 +55,7 @@ public class EnvironmentDialog extends JDialog
 {
     private static final String PREFS_KEY = "accepted";
 
-    public EnvironmentDialog( Frame owner )
+    public EnvironmentDialog( final Frame owner )
     {
         super( owner );
         initComponents();
@@ -78,6 +79,8 @@ public class EnvironmentDialog extends JDialog
         final String bodyRule = "body { font-family: " + font.getFamily() + "; font-size: " + font.getSize() + "pt; }";
         ( (HTMLDocument) textPane.getDocument() ).getStyleSheet().addRule( bodyRule );
         textPane.setText( "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Zürich) für nichtkommerzielle Zwecke im Studium kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer persönlichen Weiterbildung nutzen möchten, werden gebeten, für die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.</p><p><b>Postkonto: Unterricht, 85-761469-0, Vermerk \"eBot\"<br>IBAN: 59 0900 0000 8576 1469 0<br>BIC: POFICHBEXXX<br></b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bezüglich Nutzungsansprüchen zur Verfügung gestellt." );
+        demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
+        demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
     }
 
     private Preferences getPreferences()
@@ -125,7 +128,7 @@ public class EnvironmentDialog extends JDialog
         scientificRadio = new JRadioButton();
         germanRadio = new JRadioButton();
         demoRadio = new JRadioButton();
-        JTextArea textField5 = new JTextArea();
+        demoText = new JTextArea();
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
         JPanel buttonBar2 = new JPanel();
@@ -253,13 +256,13 @@ public class EnvironmentDialog extends JDialog
                         });
                         panel2.add(demoRadio, cc.xy(1, 9));
 
-                        //---- textField5 ----
-                        textField5.setText("Pr\u00fcfungs Demo");
-                        textField5.setLineWrap(true);
-                        textField5.setWrapStyleWord(true);
-                        textField5.setOpaque(false);
-                        textField5.setEditable(false);
-                        panel2.add(textField5, cc.xy(3, 9));
+                        //---- demoText ----
+                        demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
+                        demoText.setLineWrap(true);
+                        demoText.setWrapStyleWord(true);
+                        demoText.setOpaque(false);
+                        demoText.setEditable(false);
+                        panel2.add(demoText, cc.xy(3, 9));
 
                         //---- dendroRadio ----
                         dendroRadio.addActionListener(new ActionListener() {
@@ -333,6 +336,7 @@ public class EnvironmentDialog extends JDialog
     public JRadioButton scientificRadio;
     public JRadioButton germanRadio;
     public JRadioButton demoRadio;
+    private JTextArea demoText;
     public JRadioButton dendroRadio;
     private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

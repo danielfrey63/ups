@@ -37,6 +37,10 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <artifactId>ch.xmatrix.ups.pmb.test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.pmb</groupId>
             <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
         </dependency>
         <dependency>

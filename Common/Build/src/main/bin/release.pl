@@ -19,7 +19,7 @@ $pwd = `pwd`;
 chomp ($pwd);
 
 # Simulate SVN and MVN results by loading them from a previous build
-$dev = 1;
+$dev = 0;
 
 # Print debug messages
 $debug = 1;
@@ -28,7 +28,7 @@ $debug = 1;
 $trace = 0;
 
 # Make a release of the main module although no changes can be detected
-$force = 0;
+$force = 1;
 
 # Accept automatically default values for release params.
 $silent = 0;
@@ -417,7 +417,7 @@ foreach $artifact (@orders) {
 
                     my $dependentVersion = $newDevVersions{$dependentArtifact};
                     if ($dependentVersion && $originalVersion ne $dependentVersion) {
-                        $trace and print "      [TRACE] $xml ed -S -N x=\"$pomNs\" -u \"$artifactXPath\" -v $dependentVersion $parentPom > $parentPom\n";
+                        $trace and print "      [TRACE] $xml ed -S -N x=\"$pomNs\" -u \"$artifactXPath\" -v $dependentVersion $parentPom > $parentPom.tmp\n";
                         `$xml ed -S -N x="$pomNs" -u "$artifactXPath" -v $dependentVersion $parentPom > $parentPom.tmp`;
                         $trace and print "      [TRACE] $xml fo -s 4 $parentPom.tmp > $parentPom\n";
                         `$xml fo -s 4 $parentPom.tmp > $parentPom`;

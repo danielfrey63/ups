@@ -465,7 +465,7 @@ public class PMBController
         for ( final Entry key : keys )
         {
             final String keyName = key.getPath();
-            if ( keyName.startsWith( "Habitus" ) )
+            if ( keyName.startsWith( "Herbar" ) )
             {
                 fileEntry = hierarchy.get( key );
                 break;

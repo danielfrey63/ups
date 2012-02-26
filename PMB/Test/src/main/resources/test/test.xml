@@ -1,0 +1,39 @@
+<examsetsModel>
+    <randomSeed>1201126590078</randomSeed>
+    <startDate>2008-01-23 23:16:30.78 CET</startDate>
+    <examsetModels>
+        <examsetModel>
+            <registration defaultList="false">
+                <anmeldedaten id="11839" lkNummer="007-0007-07" lkForm="1" lkFormText="Demoprüfung"
+                              pruefungsmodeText="demo" fachrichtung="ELC-NET" studentennummer="01-234-567" vorname="Max"
+                              repetent="false" lkEinheitTitel="Systematische Biologie: Pflanzen" lkEinheitTyp="1"
+                              pruefungsraum="HG" nachname="Muster" studiengang="Bio" email="balit@ethz.ch"
+                              seskez="2008F" lkEinheitTypText="Semesterkurs" dozentUserName="baltisberger">
+                    <pruefungsdatum>
+                        <time>1202770800000</time>
+                        <timezone>Europe/Zurich</timezone>
+                    </pruefungsdatum>
+                    <pruefungsdatumVon>
+                        <time>1202799600000</time>
+                        <timezone>Europe/Zurich</timezone>
+                    </pruefungsdatumVon>
+                    <pruefungsdatumBis>
+                        <time>1202803200000</time>
+                        <timezone>Europe/Zurich</timezone>
+                    </pruefungsdatumBis>
+                </anmeldedaten>
+                <plantList>
+                    <string>Arum maculatum</string>
+                </plantList>
+            </registration>
+            <setTaxa>
+                <setTaxon known="false">
+                    <specimenModel taxon="Helianthus annuus" id="060909-161608" weightIfKnown="1" weightIfUnknown="1" deactivatedIfKnown="false" deactivatedIfUnknown="false" numberOfSpecimens="1" backup="false"/>
+                </setTaxon>
+                <setTaxon known="true">
+                    <specimenModel taxon="Zea mays" weightIfKnown="1" weightIfUnknown="1" deactivatedIfKnown="true" deactivatedIfUnknown="true" numberOfSpecimens="0" backup="false"/>
+                </setTaxon>
+            </setTaxa>
+        </examsetModel>
+    </examsetModels>
+</examsetsModel>

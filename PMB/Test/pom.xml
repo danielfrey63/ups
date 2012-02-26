@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>ch.xmatrix.common</groupId>
+        <artifactId>ch.xmatrix.common.build</artifactId>
+        <version>1.0</version>
+        <relativePath>../../Common/Build</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.xmatrix.ups.pmb</groupId>
+    <artifactId>ch.xmatrix.ups.pmb.test</artifactId>
+    <name>PMB Test Set</name>
+    <version>1.0-SNAPSHOT</version>
+    <description>Bilder und Set für Test Modus</description>
+    <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.utils-all</artifactId>
+        </dependency>
+    </dependencies>
+    <!--<build>-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<excludes>-->
+                    <!--<exclude>**/Aquilegia vulgaris/*</exclude>-->
+                    <!--<exclude>**/Dryopteris filix-mas/*</exclude>-->
+                    <!--<exclude>**/Neottia nidus-avis/*</exclude>-->
+                    <!--<exclude>**/Rhododendron ferrugineum/*</exclude>-->
+                <!--</excludes>-->
+            <!--</resource>-->
+        <!--</resources>-->
+    <!--</build>-->
+</project>

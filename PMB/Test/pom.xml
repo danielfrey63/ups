@@ -15,7 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.1757</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
     </dependencies>
@@ -24,10 +23,10 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <!--<excludes>-->
-                <!--<exclude>**/Aquilegia vulgaris/*</exclude>-->
-                <!--<exclude>**/Dryopteris filix-mas/*</exclude>-->
-                <!--<exclude>**/Neottia nidus-avis/*</exclude>-->
-                <!--<exclude>**/Rhododendron ferrugineum/*</exclude>-->
+                    <!--<exclude>**/Aquilegia vulgaris/*</exclude>-->
+                    <!--<exclude>**/Dryopteris filix-mas/*</exclude>-->
+                    <!--<exclude>**/Neottia nidus-avis/*</exclude>-->
+                    <!--<exclude>**/Rhododendron ferrugineum/*</exclude>-->
                 <!--</excludes>-->
             </resource>
         </resources>

@@ -21,42 +21,52 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>1.4.823</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.1757</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
+            <version>3.0.1709</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>2.0.1806</version>
             <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>1.0.1792</version>
             <artifactId>ch.xmatrix.ups.pmb.test</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>2.0.1767</version>
             <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
+            <version>2.0.730</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
+            <version>1.0.1684</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
+            <version>3.0.1648</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
+            <version>3.0.1681</version>
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
@@ -93,6 +103,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.1752</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>
@@ -101,6 +112,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1461</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>

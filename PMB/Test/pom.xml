@@ -10,7 +10,7 @@
     <groupId>ch.xmatrix.ups.pmb</groupId>
     <artifactId>ch.xmatrix.ups.pmb.test</artifactId>
     <name>PMB Test Set</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1792</version>
     <description>Bilder und Set für Test Modus</description>
     <dependencies>
         <dependency>
@@ -32,4 +32,9 @@
             </resource>
         </resources>
     </build>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.ups.pmb.test-1.0.1792</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.ups.pmb.test-1.0.1792</url>
+  </scm>
 </project>

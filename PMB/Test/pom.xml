@@ -18,17 +18,17 @@
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
     </dependencies>
-    <!--<build>-->
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
                 <!--<excludes>-->
                     <!--<exclude>**/Aquilegia vulgaris/*</exclude>-->
                     <!--<exclude>**/Dryopteris filix-mas/*</exclude>-->
                     <!--<exclude>**/Neottia nidus-avis/*</exclude>-->
                     <!--<exclude>**/Rhododendron ferrugineum/*</exclude>-->
                 <!--</excludes>-->
-            <!--</resource>-->
-        <!--</resources>-->
-    <!--</build>-->
+            </resource>
+        </resources>
+    </build>
 </project>

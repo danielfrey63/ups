@@ -3,12 +3,12 @@
  *
  * Nutzung und Rechte
  *
- * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * Die Applikation eBot wurde fÃ¼r Studierende der ETH ZÃ¼rich entwickelt. Sie  steht
  * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
- * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
- * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
- * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
- * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ * (auch  ausserhalb  der  ETH  ZÃ¼rich)  fÃ¼r  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur VerfÃ¼gung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  persÃ¼nlichen  Weiterbildung  nutzen  mÃ¼chten,  werden  gebeten,  fÃ¼r  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.Ã¼ zu bezahlen.
  *
  * Postkonto
  *
@@ -17,8 +17,8 @@
  *
  * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
  * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
- * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
- * Nutzungsansprüchen zur Verfügung gestellt.
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezÃ¼glich
+ * NutzungsansprÃ¼chen zur VerfÃ¼gung gestellt.
  */
 
 /*
@@ -78,7 +78,7 @@ public class EnvironmentDialog extends JDialog
         final Font font = UIManager.getFont( "Label.font" );
         final String bodyRule = "body { font-family: " + font.getFamily() + "; font-size: " + font.getSize() + "pt; }";
         ( (HTMLDocument) textPane.getDocument() ).getStyleSheet().addRule( bodyRule );
-        textPane.setText( "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Zürich) für nichtkommerzielle Zwecke im Studium kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer persönlichen Weiterbildung nutzen möchten, werden gebeten, für die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.</p><p><b>Postkonto: Unterricht, 85-761469-0, Vermerk \"eBot\"<br>IBAN: 59 0900 0000 8576 1469 0<br>BIC: POFICHBEXXX<br></b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bezüglich Nutzungsansprüchen zur Verfügung gestellt." );
+        textPane.setText( "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde fÃ¼r Studierende der ETH ZÃ¼rich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH ZÃ¼rich) fÃ¼r nichtkommerzielle Zwecke im Studium kostenlos zur VerfÃ¼gung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer persÃ¶nlichen Weiterbildung nutzen mÃ¶chten, werden gebeten, fÃ¼r die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Unterricht, 85-761469-0, Vermerk \"eBot\"<br>IBAN: 59 0900 0000 8576 1469 0<br>BIC: POFICHBEXXX<br></b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bezÃ¼glich NutzungsansprÃ¼chen zur VerfÃ¼gung gestellt." );
         demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
         demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
     }
@@ -306,7 +306,7 @@ public class EnvironmentDialog extends JDialog
             dialogPane.add(contentPanel, BorderLayout.CENTER);
         }
         contentPane.add(dialogPane, BorderLayout.CENTER);
-        setSize(565, 615);
+        setSize(615, 695);
         setLocationRelativeTo(null);
 
         //---- buttonGroup1 ----

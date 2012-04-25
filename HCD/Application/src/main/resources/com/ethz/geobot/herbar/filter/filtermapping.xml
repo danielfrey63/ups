@@ -23,9 +23,8 @@
   ~ Nutzungsansprüchen zur Verfügung gestellt.
   -->
 
-<!--<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
                          "http://castor.exolab.org/mapping.dtd">
-    -->
 <mapping>
     <description>Description of the mapping</description>
 
@@ -34,6 +33,9 @@
 
         <field name="baseFilterName" type="string">
             <bind-xml name="baseFilterName" node="attribute"/>
+        </field>
+        <field name="fixed" type="boolean" required="false">
+            <bind-xml name="fixed" node="attribute"/>
         </field>
         <field name="name" type="string">
             <bind-xml name="name" node="attribute"/>

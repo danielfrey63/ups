@@ -59,15 +59,19 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     private List<FilterDefinitionDetail> filterDetails = new ArrayList<FilterDefinitionDetail>();
 
+    private final boolean fixed;
+
     /**
      * Construct a filtered data model.
      *
      * @param dependentModel the model to be filtered
      * @param name           a name for the model
+     * @param fixed
      */
-    public FilterModel( final HerbarModel dependentModel, final String name )
+    public FilterModel(final HerbarModel dependentModel, final String name, boolean fixed)
     {
         super( name );
+        this.fixed = fixed;
         if ( LOG.isDebugEnabled() )
         {
             LOG.debug( "dependentModel: " + dependentModel.getName() );
@@ -268,5 +272,9 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     {
         filteredTaxonList.clear();
         this.fireModelChangeEvent( new ModelChangeEvent( this ) );
+    }
+
+    public boolean isFixed() {
+        return fixed;
     }
 }

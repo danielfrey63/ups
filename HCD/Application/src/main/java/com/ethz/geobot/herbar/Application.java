@@ -147,7 +147,17 @@ public class Application
 
     public Set getChangeableModels()
     {
-        return FilterFactory.getInstance().getFilters();
+        final Set<? extends HerbarModel> filters = FilterFactory.getInstance().getFilters();
+        final Set<HerbarModel> result = new HashSet<HerbarModel>();
+        for ( final HerbarModel filter : filters )
+        {
+            final FilterModel filterModel = (FilterModel) filter;
+            if ( !filterModel.isFixed() )
+            {
+                result.add( filter );
+            }
+        }
+        return result;
     }
 
     public static class ExceptionHandler

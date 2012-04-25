@@ -278,7 +278,7 @@ public class WizardFilterPane extends WizardPane
         final NameValidator validator = new FilterModelNameValidator( herbarContext );
         final String filterName = validator.getInitialName();
         final HerbarModel base = herbarContext.getCurrentModel();
-        final FilterModel model = new FilterModel( base, filterName );
+        final FilterModel model = new FilterModel( base, filterName, false);
         final String title = Strings.getString( "WIZARD.FILTER.TITLE" );
         final FilterWizardModel wizardModel = new FilterWizardModel( herbarContext, panes, model, validator, title );
         final Wizard dlg = new Wizard( wizardModel );

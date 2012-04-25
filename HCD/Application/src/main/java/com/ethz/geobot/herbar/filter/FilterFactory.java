@@ -124,7 +124,8 @@ public class FilterFactory
     {
         final String baseModelName = filter.getBaseFilterName();
         final HerbarModel baseModel = getBaseFilterModel( filter, baseModelName );
-        final FilterModel model = new FilterModel( baseModel, filter.getName() );
+        final boolean fixed = filter.getFixed();
+        final FilterModel model = new FilterModel( baseModel, filter.getName(), fixed );
         model.clearFilterDetails();
 
         final Detail[] details = filter.getDetails();

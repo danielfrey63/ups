@@ -49,6 +49,9 @@ public class Filter
     /** Holds value of property details. */
     private Detail[] details;
 
+    /** Sets whether the filter is modifiable or not. */
+    private boolean fixed;
+
     /** Creates a new instance of Filter */
     public Filter()
     {
@@ -136,5 +139,13 @@ public class Filter
     public void setDetails( final Detail[] details )
     {
         this.details = details;
+    }
+
+    public boolean getFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 }

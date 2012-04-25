@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<filter baseFilterName="" fixed="true" name="Prüfungsliste">
+    <detail scope="Equisetum arvense">
+        <level>Art</level>
+    </detail>
+    <detail scope="Equisetum hyemale">
+        <level>Art</level>
+    </detail>
+    <detail scope="Equisetum telmateia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Asplenium ruta-muraria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Asplenium trichomanes">
+        <level>Art</level>
+    </detail>
+    <detail scope="Athyrium filix-femina">
+        <level>Art</level>
+    </detail>
+    <detail scope="Dryopteris filix-mas">
+        <level>Art</level>
+    </detail>
+    <detail scope="Abies alba">
+        <level>Art</level>
+    </detail>
+    <detail scope="Larix decidua">
+        <level>Art</level>
+    </detail>
+    <detail scope="Picea abies">
+        <level>Art</level>
+    </detail>
+    <detail scope="Pinus sylvestris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Juniperus communis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Taxus baccata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Trollius europaeus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Aquilegia vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ranunculus bulbosus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ranunculus ficaria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ranunculus friesianus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ranunculus repens">
+        <level>Art</level>
+    </detail>
+    <detail scope="Caltha palustris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Clematis vitalba">
+        <level>Art</level>
+    </detail>
+    <detail scope="Anemone nemorosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Chelidonium majus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Papaver rhoeas">
+        <level>Art</level>
+    </detail>
+    <detail scope="Cerastium holosteoides">
+        <level>Art</level>
+    </detail>
+    <detail scope="Stellaria media">
+        <level>Art</level>
+    </detail>
+    <detail scope="Stellaria nemorum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Silene nutans">
+        <level>Art</level>
+    </detail>
+    <detail scope="Silene vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Silene dioica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Polygonum aviculare">
+        <level>Art</level>
+    </detail>
+    <detail scope="Reynoutria japonica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Rumex acetosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Rumex obtusifolius">
+        <level>Art</level>
+    </detail>
+    <detail scope="Alnus glutinosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Betula pendula">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carpinus betulus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Corylus avellana">
+        <level>Art</level>
+    </detail>
+    <detail scope="Fagus sylvatica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Quercus petraea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Quercus robur">
+        <level>Art</level>
+    </detail>
+    <detail scope="Juglans regia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Humulus lupulus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ulmus glabra">
+        <level>Art</level>
+    </detail>
+    <detail scope="Urtica dioica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geum rivale">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geum urbanum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Potentilla anserina">
+        <level>Art</level>
+    </detail>
+    <detail scope="Potentilla erecta">
+        <level>Art</level>
+    </detail>
+    <detail scope="Potentilla reptans">
+        <level>Art</level>
+    </detail>
+    <detail scope="Potentilla sterilis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Alchemilla vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Sanguisorba minor">
+        <level>Art</level>
+    </detail>
+    <detail scope="Fragaria vesca">
+        <level>Art</level>
+    </detail>
+    <detail scope="Rubus fruticosus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Crataegus monogyna">
+        <level>Art</level>
+    </detail>
+    <detail scope="Sorbus aria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Sorbus aucuparia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Prunus avium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Prunus spinosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Medicago lupulina">
+        <level>Art</level>
+    </detail>
+    <detail scope="Medicago sativa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Trifolium pratense">
+        <level>Art</level>
+    </detail>
+    <detail scope="Trifolium dubium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Trifolium repens">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lotus corniculatus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lathyrus pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Vicia sepium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Anthyllis vulneraria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Hippocrepis comosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Onobrychis viciifolia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Robinia pseudoacacia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Acer campestre">
+        <level>Art</level>
+    </detail>
+    <detail scope="Acer platanoides">
+        <level>Art</level>
+    </detail>
+    <detail scope="Acer pseudoplatanus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geranium pyrenaicum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geranium robertianum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geranium sanguineum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Geranium sylvaticum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Oxalis acetosella">
+        <level>Art</level>
+    </detail>
+    <detail scope="Euonymus europaea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Euphorbia amygdaloides">
+        <level>Art</level>
+    </detail>
+    <detail scope="Euphorbia cyparissias">
+        <level>Art</level>
+    </detail>
+    <detail scope="Mercurialis perennis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Hedera helix">
+        <level>Art</level>
+    </detail>
+    <detail scope="Daucus carota">
+        <level>Art</level>
+    </detail>
+    <detail scope="Anthriscus sylvestris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Chaerophyllum villarsii">
+        <level>Art</level>
+    </detail>
+    <detail scope="Aegopodium podagraria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Heracleum sphondylium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Viola reichenbachiana">
+        <level>Art</level>
+    </detail>
+    <detail scope="Alliaria petiolata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Arabidopsis thaliana">
+        <level>Art</level>
+    </detail>
+    <detail scope="Cardamine hirsuta">
+        <level>Art</level>
+    </detail>
+    <detail scope="Cardamine pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Capsella bursa-pastoris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Populus tremula">
+        <level>Art</level>
+    </detail>
+    <detail scope="Salix alba">
+        <level>Art</level>
+    </detail>
+    <detail scope="Salix caprea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Tilia cordata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Tilia platyphyllos">
+        <level>Art</level>
+    </detail>
+    <detail scope="Primula elatior">
+        <level>Art</level>
+    </detail>
+    <detail scope="Primula veris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ilex aquifolium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Cornus sanguinea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lonicera xylosteum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Sambucus nigra">
+        <level>Art</level>
+    </detail>
+    <detail scope="Viburnum lantana">
+        <level>Art</level>
+    </detail>
+    <detail scope="Viburnum opulus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Knautia arvensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Scabiosa columbaria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Valerianella locusta">
+        <level>Art</level>
+    </detail>
+    <detail scope="Fraxinus excelsior">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ligustrum vulgare">
+        <level>Art</level>
+    </detail>
+    <detail scope="Vinca minor">
+        <level>Art</level>
+    </detail>
+    <detail scope="Vincetoxicum hirundinaria">
+        <level>Art</level>
+    </detail>
+    <detail scope="Galium album">
+        <level>Art</level>
+    </detail>
+    <detail scope="Galium aparine">
+        <level>Art</level>
+    </detail>
+    <detail scope="Galium odoratum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Calystegia sepium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Convolvulus arvensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Pulmonaria obscura">
+        <level>Art</level>
+    </detail>
+    <detail scope="Plantago lanceolata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Plantago major">
+        <level>Art</level>
+    </detail>
+    <detail scope="Plantago media">
+        <level>Art</level>
+    </detail>
+    <detail scope="Veronica beccabunga">
+        <level>Art</level>
+    </detail>
+    <detail scope="Veronica chamaedrys">
+        <level>Art</level>
+    </detail>
+    <detail scope="Veronica filiformis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Veronica hederifolia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Veronica persica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Rhinanthus alectorolophus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Rhinanthus minor">
+        <level>Art</level>
+    </detail>
+    <detail scope="Ajuga reptans">
+        <level>Art</level>
+    </detail>
+    <detail scope="Glechoma hederacea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lamium maculatum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lamium montanum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lamium purpureum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Prunella vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Salvia pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Origanum vulgare">
+        <level>Art</level>
+    </detail>
+    <detail scope="Thymus serpyllum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Campanula rotundifolia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Phyteuma spicatum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Tussilago farfara">
+        <level>Art</level>
+    </detail>
+    <detail scope="Artemisia vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Centaurea jacea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Centaurea scabiosa">
+        <level>Art</level>
+    </detail>
+    <detail scope="Senecio vulgaris">
+        <level>Art</level>
+    </detail>
+    <detail scope="Achillea millefolium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Bellis perennis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Erigeron annuus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Leucanthemum vulgare">
+        <level>Art</level>
+    </detail>
+    <detail scope="Matricaria discoidea">
+        <level>Art</level>
+    </detail>
+    <detail scope="Crepis biennis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Hieracium murorum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Hieracium pilosella">
+        <level>Art</level>
+    </detail>
+    <detail scope="Taraxacum officinale">
+        <level>Art</level>
+    </detail>
+    <detail scope="Leontodon hispidus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Tragopogon orientalis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Allium ursinum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Paris quadrifolia">
+        <level>Art</level>
+    </detail>
+    <detail scope="Colchicum autumnale">
+        <level>Art</level>
+    </detail>
+    <detail scope="Convallaria majalis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Polygonatum multiflorum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Polygonatum odoratum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Dactylorhiza maculata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Neottia nidus-avis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Juncus effusus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Juncus inflexus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Luzula sylvatica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Eriophorum angustifolium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Eriophorum latifolium">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carex elata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carex nigra">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carex hirta">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carex flacca">
+        <level>Art</level>
+    </detail>
+    <detail scope="Carex sylvatica">
+        <level>Art</level>
+    </detail>
+    <detail scope="Arrhenatherum elatius">
+        <level>Art</level>
+    </detail>
+    <detail scope="Briza media">
+        <level>Art</level>
+    </detail>
+    <detail scope="Bromus erectus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Bromus hordeaceus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Bromus sterilis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Dactylis glomerata">
+        <level>Art</level>
+    </detail>
+    <detail scope="Festuca pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Helictotrichon pubescens">
+        <level>Art</level>
+    </detail>
+    <detail scope="Holcus lanatus">
+        <level>Art</level>
+    </detail>
+    <detail scope="Phragmites australis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Poa annua">
+        <level>Art</level>
+    </detail>
+    <detail scope="Poa pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Poa trivialis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Trisetum flavescens">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lolium perenne">
+        <level>Art</level>
+    </detail>
+    <detail scope="Lolium multiflorum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Alopecurus pratensis">
+        <level>Art</level>
+    </detail>
+    <detail scope="Anthoxantum odoratum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Melica nutans">
+        <level>Art</level>
+    </detail>
+    <detail scope="Phleum pratense">
+        <level>Art</level>
+    </detail>
+    <detail scope="Arum maculatum">
+        <level>Art</level>
+    </detail>
+</filter>

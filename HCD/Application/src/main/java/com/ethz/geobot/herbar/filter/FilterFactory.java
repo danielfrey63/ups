@@ -33,19 +33,15 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.io.IOUtils;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
@@ -72,7 +68,9 @@ public class FilterFactory
 
     private final Map<String, FilterModel> cachedFilterModels = new HashMap<String, FilterModel>();
 
-    /** Creates a new instance of FilterFactory */
+    /**
+     * Creates a new instance of FilterFactory.
+     */
     protected FilterFactory()
     {
         try
@@ -80,6 +78,11 @@ public class FilterFactory
             LOG.info( "reading mapping file for filter definition." );
             filterMapping = new Mapping();
             filterMapping.loadMapping( this.getClass().getResource( "filtermapping.xml" ) );
+
+            final String name = "Prüfungsliste";
+            final FileWriter writer = new FileWriter( generateFilterFileName( name ) );
+            IOUtils.copy( getClass().getResourceAsStream( name ), writer );
+            writer.close();
         }
         catch ( Exception ex )
         {
@@ -162,7 +165,10 @@ public class FilterFactory
     }
 
     /**
-     * Return a filter definition from the persistent storage. It also load its dependent filters.<p> This method makes sure the base model exists, otherwise it is reset to the default. It guarantees also that the name of the model is equal to the name of the file.
+     * Return a filter definition from the persistent storage. It also load its dependent filters.
+     * <p/>
+     * This method makes sure the base model exists, otherwise it is reset to the default. It guarantees also that the
+     * name of the model is equal to the name of the file.
      *
      * @param name the name of the filer
      * @return the loaded FilterModel
@@ -218,7 +224,7 @@ public class FilterFactory
                 break;
             }
         }
-        modelName = ( modelName == null ? filterModel.getName() : modelName );
+        modelName = (modelName == null ? filterModel.getName() : modelName);
         cachedFilterModels.remove( modelName );
         final String filename = generateFilterFileName( modelName );
         final File file = new File( filename );
@@ -256,7 +262,7 @@ public class FilterFactory
                 break;
             }
         }
-        modelName = ( modelName == null ? filterModel.getName() : modelName );
+        modelName = (modelName == null ? filterModel.getName() : modelName);
         final String filename = generateFilterFileName( modelName );
         final File file = new File( filename );
         if ( !file.delete() )
@@ -313,6 +319,7 @@ public class FilterFactory
                 final Writer out = new BufferedWriter( new FileWriter( filename ) );
                 final Marshaller marshaller = new Marshaller( out );
                 marshaller.setMapping( filterMapping );
+
                 marshaller.marshal( filter );
                 out.close();
             }

@@ -71,6 +71,7 @@ public class Filter
         {
             baseFilterName = "";
         }
+        fixed = model.isFixed();
 
         // copy filter details
         final FilterDefinitionDetail[] defDetails = model.getFilterDetails();

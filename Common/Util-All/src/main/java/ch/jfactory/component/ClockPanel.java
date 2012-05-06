@@ -81,8 +81,8 @@ public class ClockPanel extends JPanel implements ActionListener
      */
     public ClockPanel( final Format formatter, final TargetProvider target, final int resolution )
     {
-        this.target = target;
         this.formatter = formatter;
+        this.target = target;
         this.resolution = resolution;
         init();
     }
@@ -135,7 +135,6 @@ public class ClockPanel extends JPanel implements ActionListener
         {
             offScreenGraphics.setColor( isOpaque() ? getBackground() : new Color( 0, 0, 0, 0 ) );
             offScreenGraphics.fillRect( 0, 0, getWidth(), getHeight() );
-            System.out.println( getWidth() + " " + getHeight() );
             offScreenGraphics.setColor( getForeground() );
             offScreenGraphics.setFont( getFont() );
             offScreenGraphics.drawString( date, getXLoc( date ), getYLoc() );
@@ -169,20 +168,17 @@ public class ClockPanel extends JPanel implements ActionListener
 
     private int getYLoc()
     {
-        final FontMetrics fontMetrics = getFontMetrics( getFont() );
-        return getHeight() - fontMetrics.getDescent();
+        return getHeight() - getFontMetrics( getFont() ).getDescent();
     }
 
     private int getStringWidth( final String text )
     {
-        final FontMetrics fontMetrics = getFontMetrics( getFont() );
-        return fontMetrics.stringWidth( text );
+        return getFontMetrics( getFont() ).stringWidth( text );
     }
 
     private int getStringHeight( final Font font )
     {
-        final FontMetrics fontMetrics = getFontMetrics( font );
-        return fontMetrics.getHeight();
+        return getFontMetrics( font ).getHeight();
     }
 
     public static interface TargetProvider<T>

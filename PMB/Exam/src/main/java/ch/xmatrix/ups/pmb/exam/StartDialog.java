@@ -7,6 +7,8 @@ package ch.xmatrix.ups.pmb.exam;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import com.jgoodies.forms.factories.*;
@@ -17,9 +19,14 @@ import javax.swing.event.CaretListener;
 /**
  * @author Daniel Frey
  */
-public class StartDialog extends JDialog {
-    public StartDialog(Frame owner) {
-        super(owner);
+public class StartDialog extends JDialog
+{
+
+    private boolean success = false;
+
+    public StartDialog( Frame owner )
+    {
+        super( owner );
         initComponents();
         initCustomization();
     }
@@ -27,7 +34,7 @@ public class StartDialog extends JDialog {
     private void initCustomization()
     {
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
-        getRootPane().setDefaultButton( okButton );
+        //getRootPane().setDefaultButton( okButton );
         textField2.requestFocus();
         textField2.addCaretListener( new CaretListener()
         {
@@ -42,7 +49,9 @@ public class StartDialog extends JDialog {
             {
                 if ( new String( textField2.getPassword() ).equals( "F2012" ) )
                 {
+                    success = true;
                     setVisible( false );
+                    dispose();
                 }
                 else
                 {
@@ -50,9 +59,21 @@ public class StartDialog extends JDialog {
                 }
             }
         } );
+        addWindowListener( new WindowAdapter()
+        {
+            @Override
+            public void windowClosing( WindowEvent e )
+            {
+                if ( !success )
+                {
+                   System.exit( 0 );
+                }
+            }
+        } );
     }
 
-    private void initComponents() {
+    private void initComponents()
+    {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
         dialogPane = new JPanel();
@@ -64,64 +85,64 @@ public class StartDialog extends JDialog {
         CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setModal(true);
-        setResizable(false);
-        setBackground(Color.black);
-        setTitle("Starten dieses Pr\u00fcfungsteils");
-        setUndecorated(true);
+        setModal( true );
+        setResizable( false );
+        setBackground( Color.black );
+        setTitle( "Starten dieses Pr\u00fcfungsteils" );
+        setUndecorated( true );
         Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        contentPane.setLayout( new BorderLayout() );
 
         //======== dialogPane ========
         {
-            dialogPane.setBorder(new CompoundBorder(
-                new LineBorder(Color.green, 2),
-                Borders.DIALOG_BORDER));
-            dialogPane.setBackground(new Color(51, 51, 51));
-            dialogPane.setPreferredSize(new Dimension(300, 200));
-            dialogPane.setLayout(new BorderLayout());
+            dialogPane.setBorder( new CompoundBorder(
+                    new LineBorder( Color.green, 2 ),
+                    Borders.DIALOG_BORDER ) );
+            dialogPane.setBackground( new Color( 51, 51, 51 ) );
+            dialogPane.setPreferredSize( new Dimension( 300, 200 ) );
+            dialogPane.setLayout( new BorderLayout() );
 
             //======== contentPanel ========
             {
-                contentPanel.setOpaque(false);
-                contentPanel.setLayout(new FormLayout(
-                    "default:grow",
-                    "fill:default:grow"));
+                contentPanel.setOpaque( false );
+                contentPanel.setLayout( new FormLayout(
+                        "default:grow",
+                        "fill:default:grow" ) );
 
                 //---- textField1 ----
-                textField1.setEditable(false);
-                textField1.setText("Bitte geben Sie das Passwort zum Starten der Pr\u00fcfung ein:");
-                textField1.setWrapStyleWord(true);
-                textField1.setFont(new Font("SansSerif", Font.BOLD, 12));
-                textField1.setForeground(Color.orange);
-                textField1.setOpaque(false);
-                textField1.setBackground(Color.black);
-                textField1.setLineWrap(true);
-                contentPanel.add(textField1, cc.xy(1, 1));
+                textField1.setEditable( false );
+                textField1.setText( "Bitte geben Sie das Passwort zum Starten der Pr\u00fcfung ein:" );
+                textField1.setWrapStyleWord( true );
+                textField1.setFont( new Font( "SansSerif", Font.BOLD, 12 ) );
+                textField1.setForeground( Color.orange );
+                textField1.setOpaque( false );
+                textField1.setBackground( Color.black );
+                textField1.setLineWrap( true );
+                contentPanel.add( textField1, cc.xy( 1, 1 ) );
             }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
+            dialogPane.add( contentPanel, BorderLayout.CENTER );
 
             //======== buttonBar ========
             {
-                buttonBar.setBorder(Borders.BUTTON_BAR_GAP_BORDER);
-                buttonBar.setOpaque(false);
-                buttonBar.setLayout(new FormLayout(
-                    "$lcgap, default:grow, $ugap, $button",
-                    "pref"));
-                buttonBar.add(textField2, cc.xy(2, 1));
+                buttonBar.setBorder( Borders.BUTTON_BAR_GAP_BORDER );
+                buttonBar.setOpaque( false );
+                buttonBar.setLayout( new FormLayout(
+                        "$lcgap, default:grow, $ugap, $button",
+                        "pref" ) );
+                buttonBar.add( textField2, cc.xy( 2, 1 ) );
 
                 //---- okButton ----
-                okButton.setText("OK");
-                okButton.setForeground(Color.orange);
-                okButton.setBackground(new Color(51, 51, 51));
-                okButton.setEnabled(false);
-                buttonBar.add(okButton, cc.xy(4, 1));
+                okButton.setText( "OK" );
+                okButton.setForeground( Color.orange );
+                okButton.setBackground( new Color( 51, 51, 51 ) );
+                okButton.setEnabled( false );
+                buttonBar.add( okButton, cc.xy( 4, 1 ) );
             }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
+            dialogPane.add( buttonBar, BorderLayout.SOUTH );
         }
-        contentPane.add(dialogPane, BorderLayout.CENTER);
+        contentPane.add( dialogPane, BorderLayout.CENTER );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

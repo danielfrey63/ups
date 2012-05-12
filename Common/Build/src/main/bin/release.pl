@@ -456,7 +456,7 @@ foreach $artifact (@orders) {
             $debug and print "    [DEBUG] Commit $pom with fixed dependency versions\n";
         }
         $trace = 1;
-        my $revision = (`svn info . | grep -i Revision | sed "s/[^0-9]//g"` + 2);
+        my $revision = (`svn update . | grep -i Revision | sed "s/[^0-9]//g"` + 2);
         my $version = $versions{$artifact};
         my $releaseVersion = getReleaseVersion($version, $revision);
         $releaseVersions{$artifact} = $releaseVersion;

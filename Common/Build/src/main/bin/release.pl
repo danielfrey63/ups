@@ -6,14 +6,27 @@
 # Removed duplicates in a reactor build
 # TODO: Move release stuff to branch
 
+# Prerequisites:
+# - xmlstarlet 1.0.1 installed and its bin directory in the path.
+
 #use strict;
 use warnings;
 
-$root = "D:/Daten/All/Sources";
+print "Variables are:\n";
+$root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
+print "  Root directory is         : $root\n";
+$root = trim(`cygpath -m $root`);
+print "  Root directory is         : $root\n";
 $allDirectories = "$root/Common/Build/src/main/config/directories.txt";
-$xml = "C:/Programme/xmlstarlet-1.0.1/xml.exe";
+print "  All directories file is   : $allDirectories\n";
+$xml = "\"" . trim(`which xml`) . "\"";
+print "  Programm xmlstarlet xml is: $xml\n";
+$repository = trim(`svn info | grep "Repository Root" | sed "s/Repository Root: //g"`);
+print "  Repository root is        : $repository\n";
+$find = trim(`which find`);
+print "  Programm for find is      : $find\n";
 $pomNs = "http://maven.apache.org/POM/4.0.0";
-$repository = "https://svn.id.ethz.ch/ups";
+print "\n";
 
 $pwd = `pwd`;
 chomp ($pwd);
@@ -35,14 +48,14 @@ $silent = 0;
 
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
-$reloadAllPomLocations = 0;
+$reloadAllPomLocations = 1;
 
-print ("Settings are:\n");
+print "Settings are:\n";
 print ($dev == 1 ? "  DEV is on\n" : "  DEV is off\n");
 print ($debug == 1 ? "  DEBUG is on\n" : "  DEBUG is off\n");
 print ($trace == 1 ? "  TRACE is on\n" : "  TRACE is off\n");
 
-checkForWorkingDirectoryOrQuit(".");
+checkForWorkingDirectoryOrQuit();
 checkForUpdateOrQuit(".");
 
 if (-d "target/release-script/dependencies" and !$dev) { `rm -r "target/release-script/dependencies"` };
@@ -52,7 +65,7 @@ checkForReleaseScriptDirectoryOrQuit("target/release-script/dependencies");
 checkForReleaseScriptDirectoryOrQuit("target/release-script/revisions");
 
 $thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
-print ("\nRelease script running for\n  $thisArtifact\n");
+print "\nRelease script running for\n  $thisArtifact\n";
 
 persistTags();
 %tags = getYoungestTags();
@@ -72,7 +85,7 @@ checkForCyclicDependencies();
 
 sub persistTags
 {
-    print ("\nPersisting list of all tags from repository\n");
+    print "\nPersisting list of all tags from repository\n";
     my $file = "target/release-script/tags.txt";
     # Remove trailing slashes, split between artifact and version and sort by artifacts
     my $command = "svn list $repository/tags | sed \"s/\\///g\" | sed \"s/-\\([0-9]\\)/ \\1/g\" | /bin/sort";
@@ -82,16 +95,21 @@ sub persistTags
 sub persistPomLocations
 {
     # Searches for all pom.xml in the root directory and creates a list of artifact - directory mappings.
-    print ("\nPersisting all POM locations\n");
-    my $command = "/bin/find $root -name pom.xml -print | grep -v \"\\/target\\/\"";
+    print "\nPersisting all POM locations\n";
+    my $command = "$find $root -name pom.xml -print | grep -v \"\\/target\\/\"";
+    $trace and print "  [TRACE] $command\n";
     my @poms = (`$command`);
+    $trace and print " @poms";
     if ( -e $allDirectories)
     {
+        $trace and print "  [TRACE] clearing $allDirectories\n";
         `rm $allDirectories`;
     }
     for my $pom (@poms)
     {
-        my $artifact = `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" $pom`;
+        my $f = "\"" . trim(`cygpath -w $pom`) . "\"";
+        my $artifact = `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" $f`;
+        $trace and print "  [TRACE] $artifact\n";
         chomp($pom);
         chomp($artifact);
         $artifact && `echo "$artifact\t$pom" >> $allDirectories`;
@@ -101,15 +119,16 @@ sub persistPomLocations
 sub persistDependency
 {
     my $artifactId = $_[0];
-    print ("\nPersisting dependencies for \"$artifactId\"\n");
+    print "\nPersisting dependencies for \"$artifactId\"\n";
     my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
     my $file = "target/release-script/dependencies/$artifactId.txt";
     my $pom = $poms{$artifactId};
     if ($pom)
     {
-        $debug and print "  [DEBUG] checking against $pom\n";
+        my $f = "\"" . trim(`cygpath -w $pom`) . "\"";
+        $debug and print "  [DEBUG] checking against $f\n";
         $debug and print "  [DEBUG] persisting dependencies for $artifactId into $file\n";
-        my $command = "mvn -o dependency:tree -f $pom | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort | cut -d: -f2,4 | tr \":\" \" \"";
+        my $command = "mvn -o dependency:tree -f $f | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort | cut -d: -f2,4 | tr \":\" \" \"";
         executeOrLoad($file, $command);
         my @array = split( /\n/, `cut -d" " -f1 $file` );
         foreach (@array)
@@ -132,7 +151,7 @@ sub persistDependency
 
 sub getYoungestTags
 {
-    print ("\nRetrieving youngest tags\n");
+    print "\nRetrieving youngest tags\n";
     # Build a list of SVN tags and keep the most recent ones in the tag hash map.
     my $file = "target/release-script/tags.txt";
     my @temp = `cat $file`;
@@ -162,7 +181,7 @@ sub getYoungestTags
 
 sub getVersions
 {
-    print ("\nRetrieving versions of dependencies\n");
+    print "\nRetrieving versions of dependencies\n";
     my $file = "target/release-script/dependencies/*.txt";
     my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
     return %versions;
@@ -170,7 +189,7 @@ sub getVersions
 
 sub getPomLocations
 {
-    print ("\nRetrieving POM locations\n");
+    print "\nRetrieving POM locations\n";
     my %hash = (split(/ /, `cat $allDirectories | tr "\t" " " | tr "\n" " "`));
     return %hash;
 }
@@ -178,7 +197,7 @@ sub getPomLocations
 sub getDependencyPairs
 {
     # Collects a list of modules which are dependent of a specific module.
-    print ("\nChecking for dependency pairs\n");
+    print "\nChecking for dependency pairs\n";
     my $artifactIdXPath = "/x:project/x:artifactId";
     my $rootArtifactId = `$xml sel -T -N x="$pomNs" -t -v "$artifactIdXPath" pom.xml`;
     my $allDependencyFiles = "target/release-script/dependencies/*.txt";
@@ -281,19 +300,20 @@ push (@orders, $thisArtifact);
 }
 
 # Builds a file with the current revision number
-print ("\nChecking for current revision\n");
+print "\nChecking for current revision\n";
 if (!$dev || ! -e "target/release-script/updates.txt") {
     $debug and print "  [DEBUG] Creating target/release-script/updates.txt\n";
-    `svn update $root | grep Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
+    `svn update $root | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
+    `svn update C:/Daten/Daten/All/Workspace | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }
 $currentRevision = `cat target/release-script/updates.txt`;
 chomp($currentRevision);
 !$currentRevision and die "There is no current revision\n";
-print ("  Current revision is $currentRevision\n");
+print "  Current revision is $currentRevision\n";
 
-print ("\nGathering data for all releases\n");
+print "\nGathering data for all releases\n";
 foreach my $artifact (@orders) {
     my $pom = $poms{$artifact};
     print "  Artifact $artifact in $pom\n";
@@ -436,7 +456,7 @@ foreach $artifact (@orders) {
             $debug and print "    [DEBUG] Commit $pom with fixed dependency versions\n";
         }
         $trace = 1;
-        my $revision = (`svn update . | grep Revision | sed "s/[^0-9]//g"` + 2);
+        my $revision = (`svn info . | grep -i Revision | sed "s/[^0-9]//g"` + 2);
         my $version = $versions{$artifact};
         my $releaseVersion = getReleaseVersion($version, $revision);
         $releaseVersions{$artifact} = $releaseVersion;
@@ -523,13 +543,13 @@ sub getMinorSnapshot {
 }
 
 sub checkForWorkingDirectoryOrQuit {
-    my $currentDir = `pwd`;
-    my $currentUppercaseDir = uc `cygpath -m $currentDir`;
-    chomp($currentUppercaseDir);
-    my $upperRoot = uc $root;
-    my $missing = `echo $currentUppercaseDir | grep $upperRoot`;
-    $missing or print "ERROR: The current working directory is not part of the root folder $root.";
+    print "\nChecking current directory is in SVN root\n";
+    my $currentDir = trim(`pwd`);
+    $currentDir = trim(`cygpath -m $currentDir`);
+    my $missing = `echo $currentDir | grep $root`;
+    $missing or print "  [ERROR] The current working directory is not part of the root folder $root.";
     $missing or exit;
+    print "  [DEBUG] The current working directory is part of the root folder\n";
 }
 
 sub checkForUpdateOrQuit
@@ -553,7 +573,7 @@ sub checkForReleaseScriptDirectoryOrQuit {
 }
 
 sub checkForBuildFailures {
-    $trace and print ("    [TRACE] Checking for build failures\n");
+    $trace and print "    [TRACE] Checking for build failures\n";
     my $log = $_[0];
     my @lines = `cat $_[0]`;
     $start = `grep -n "^\\[ERROR\\]" $log | cut -d ":" -f 1`;

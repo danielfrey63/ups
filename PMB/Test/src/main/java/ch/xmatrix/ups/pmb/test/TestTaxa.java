@@ -201,6 +201,7 @@ public class TestTaxa
                 "/test/Ligustrum vulgare/Habitus (0 100 0 100).jpg",
                 "/test/Ligustrum vulgare/Herbar+.Frühling (0 100 0 100).jpg",
                 "/test/Ligustrum vulgare/Herbar.Herbst (0 100 0 100).jpg",
+                "/test/Ligustrum vulgare/Herbar (0 100 0 100).jpg",
                 "/test/Ligustrum vulgare/Standort (0 100 0 100).jpg",
                 "/test/Ligustrum vulgare/Standort.Detail (0 100 0 100).jpg",
                 "/test/Ligustrum vulgare/Zweig (0 100 0 100).jpg",
@@ -422,7 +423,7 @@ public class TestTaxa
                 "/test/Vincetoxicum hirundinaria/Stengel.Detail (0 100 0 100).jpg",
                 "/test/Vincetoxicum hirundinaria/Wurzel (0 100 0 100).jpg"
         };
-        final File directory = FileUtils.createTemporaryDirectory( "pmbx", "demo" );
+        final File directory = FileUtils.createTemporaryDirectory( "pmbx", "" );
         directory.deleteOnExit();
         for ( final String file : files )
         {

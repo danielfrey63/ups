@@ -10,5 +10,5 @@
     <artifactId>ch.xmatrix.ups.data.sessions</artifactId>
     <name>Data Exam Sessions</name>
     <version>1.0-SNAPSHOT</version>
-    <description>Pr�fungsinformationen</description>
+    <description>Prüfungsinformationen</description>
 </project>

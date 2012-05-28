@@ -1,5 +1,1601 @@
 <?xml version="1.0"?>
 <filter baseFilterName="" fixed="true" name="Prüfungsliste">
+    <detail scope="Equisetaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Equisetaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Equisetaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aspleniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aspleniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Dryopteridaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Dryopteridaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Pinaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Pinaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Pinaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Pinaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cupressaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Taxaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ranunculaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Papaveraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Papaveraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caryophyllaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Polygonaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Polygonaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Polygonaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Polygonaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Betulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Betulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Betulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Betulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fagaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fagaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fagaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Juglandaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cannabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Ulmaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Urticaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rosaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Fabaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aceraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aceraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aceraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Geraniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Geraniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Geraniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Geraniaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Oxalidaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Celastraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Euphorbiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Euphorbiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Euphorbiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Araliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Violaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Brassicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Brassicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Brassicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Brassicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Brassicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Salicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Salicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Salicaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Tiliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Tiliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Primulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Primulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Aquifoliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cornaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caprifoliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caprifoliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caprifoliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Caprifoliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Dipsacaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Dipsacaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Valerianaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Oleaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Oleaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Apocynaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asclepiadaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rubiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rubiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Rubiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Convolvulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Convolvulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Boraginaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Plantaginaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Plantaginaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Plantaginaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Scrophulariaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Lamiaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Campanulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Campanulaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Asteraceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Liliaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Orchidaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Orchidaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Juncaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Juncaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Juncaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Cyperaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Poaceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Araceae">
+        <level>Familie</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Tubiflorae">
+        <level>Ordnungsgruppe</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Gymnospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Angiospermae">
+        <level>Unterabteilung</level>
+    </detail>
+    <detail scope="Asplenium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Asplenium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Pinus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Juniperus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Ranunculus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Ranunculus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Ranunculus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Ranunculus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Anemone">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Cerastium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Stellaria">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Stellaria">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Silene">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Silene">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Silene">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Polygonum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Rumex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Rumex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Alnus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Betula">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Quercus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Quercus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Potentilla">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Potentilla">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Potentilla">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Potentilla">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Alchemilla">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Fragaria">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Rubus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Sorbus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Sorbus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Prunus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Prunus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Medicago">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Medicago">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Trifolium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Trifolium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Trifolium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lathyrus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Vicia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geranium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geranium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geranium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Geranium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Euphorbia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Euphorbia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Heracleum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Cardamine">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Cardamine">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Populus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Salix">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Salix">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Tilia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Tilia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Primula">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Primula">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Cornus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lonicera">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Sambucus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Viburnum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Viburnum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Knautia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Scabiosa">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Fraxinus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Galium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Galium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Galium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Plantago">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Plantago">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Plantago">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Veronica">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Veronica">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Veronica">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Veronica">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Veronica">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Rhinanthus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Rhinanthus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Ajuga">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lamium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lamium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lamium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Salvia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Campanula">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Phyteuma">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Artemisia">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Centaurea">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Centaurea">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Senecio">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Achillea">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Erigeron">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Matricaria">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Crepis">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Hieracium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Hieracium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Leontodon">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Allium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Polygonatum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Polygonatum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Dactylorhiza">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Juncus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Juncus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Luzula">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Eriophorum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Eriophorum">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Carex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Carex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Carex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Carex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Carex">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Bromus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Bromus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Bromus">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Festuca">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Poa">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Poa">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Poa">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lolium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Lolium">
+        <level>Gattung</level>
+    </detail>
+    <detail scope="Melica">
+        <level>Gattung</level>
+    </detail>
     <detail scope="Equisetum arvense">
         <level>Art</level>
     </detail>
@@ -593,5 +2189,1562 @@
     </detail>
     <detail scope="Arum maculatum">
         <level>Art</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pteridophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Spermatophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Pterididae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Pterididae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Pterididae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Pterididae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Asteridae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Alsinoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Alsinoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Alsinoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Silenoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Silenoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Silenoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Rosoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Maloideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Maloideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Maloideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Prunoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Prunoideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Asteroideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Cichorioideae">
+        <level>Unterfamilie</level>
+    </detail>
+    <detail scope="Filicatae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Filicatae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Filicatae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Filicatae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Dicotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Monocotyledoneae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fagales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Urticales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Urticales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Urticales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Fabales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Geraniales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Geraniales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Geraniales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Geraniales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Geraniales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Araliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Dipsacales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Gentianales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Gentianales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Gentianales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Gentianales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Gentianales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Solanales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Solanales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Scrophulariales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Lamiales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Liliales">
+        <level>Ordnung</level>
+    </detail>
+    <detail scope="Arales">
+        <level>Ordnung</level>
     </detail>
 </filter>

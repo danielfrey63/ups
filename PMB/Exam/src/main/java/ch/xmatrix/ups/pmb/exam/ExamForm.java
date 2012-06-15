@@ -53,9 +53,8 @@ public abstract class ExamForm extends JFrame
                     time.stop();
                     setVisible( false );
                     targetProvider.reset();
-                    new StartDialog( ExamForm.this ).setVisible( true );
-                    setVisible( true );
-                    time.start();
+                    new EndDialog( ExamForm.this ).setVisible( true );
+                    doQuit();
                 }
             } );
 

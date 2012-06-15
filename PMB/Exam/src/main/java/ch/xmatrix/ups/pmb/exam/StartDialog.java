@@ -47,7 +47,7 @@ public class StartDialog extends JDialog
         {
             public void actionPerformed( final ActionEvent e )
             {
-                if ( new String( textField2.getPassword() ).equals( "F2012" ) )
+                if ( new String( textField2.getPassword() ).equals( "PMBX_OnP12" ) )
                 {
                     success = true;
                     setVisible( false );

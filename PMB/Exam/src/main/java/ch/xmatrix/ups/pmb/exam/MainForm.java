@@ -182,7 +182,8 @@ public class MainForm extends ExamForm
                         initEditMode( false );
                     }
                     // ALT-O shows the students dialog or inits the credentials
-                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O )
+                    // only active if not started in exam mode
+                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O && MainForm.class.getResource("/test/test.xml") == null )
                     {
                         if ( studentsController == null )
                         {
@@ -562,7 +563,10 @@ public class MainForm extends ExamForm
         {
             try
             {
-                FileUtils.deleteDirectory( new File( model.getSettings().getActivePicturePath() ) );
+                if ( ExamForm.class.getResource( "/test/test.xml" ) != null )
+                {
+                    FileUtils.deleteDirectory( new File( model.getSettings().getActivePicturePath() ) );
+                }
             }
             catch ( IOException e )
             {

@@ -1,6 +1,6 @@
 <examsetsModel>
-    <randomSeed>1281168285515</randomSeed>
-    <startDate>2010-08-07 10:04:45.515 CEST</startDate>
+    <randomSeed>1</randomSeed>
+    <startDate>2013-01-08 15:45:00.000 CEST</startDate>
     <examsetModels>
         <examsetModel>
             <registration defaultList="false">
@@ -8,26 +8,26 @@
                 <plantList/>
             </registration>
             <setTaxa>
-                <setTaxon known="true"><specimenModel taxon="Capsella bursa-pastoris"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Robinia pseudoacacia"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Athyrium filix-femina"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Vincetoxicum hirundinaria"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Quercus petraea"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Lemna minor"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Eriophorum angustifolium"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Abies alba"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Phyteuma orbiculare"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Erigeron annuus"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Poa pratensis"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Ranunculus repens"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Potentilla reptans"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Polygonatum odoratum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Bromus tectorum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Ligustrum vulgare"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Neottia nidus-avis"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Asplenium viride"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Silene dioica M"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Acer platanoides"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Urtica dioica"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Tilia cordata"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Centaurea jacea"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Alnus incana"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Veronica persica"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Asplenium trichomanes"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Helictotrichon pubescens"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Arrhenatherum elatius"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Juniperus sabina"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Luzula sylvatica"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Euonymus europaea"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Carex hirta"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Crataegus monogyna"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Galium aparine"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Reynoutria japonica"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Prunella vulgaris"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Lonicera xylosteum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Peucedanum ostruthium"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Oxalis acetosella"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Allium ursinum"/></setTaxon>
             </setTaxa>
         </examsetModel>
     </examsetModels>

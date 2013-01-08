@@ -42,7 +42,7 @@ public class QuitDialog extends JDialog {
         {
             public void actionPerformed( final ActionEvent e )
             {
-                if ( new String( textField2.getPassword() ).equals( "F2012" ) )
+                if ( new String( textField2.getPassword() ).equals( "F2013" ) )
                 {
                     hit = true;
                     setVisible( false );

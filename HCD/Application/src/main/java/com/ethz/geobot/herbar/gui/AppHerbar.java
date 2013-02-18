@@ -59,11 +59,11 @@ public class AppHerbar
 
     private static final String DIR_DE = "/de/";
 
-    private static final String EXT_GE = "ge";
+    private static final String EXT_GE = "ge-2.2.9";
 
-    private static final String EXT_SC = "sc";
+    private static final String EXT_SC = "sc-2.2.9";
 
-    private static final String EXT_DE = "de";
+    private static final String EXT_DE = "de-2.2.9";
 
     private static final String homeDir = System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/";
 
@@ -162,12 +162,12 @@ public class AppHerbar
         final String destinationDir = homeDir + "data/";
         if ( !new File( destinationDir ).mkdirs() )
         {
-            LOG.error( "cannot create destination directory at \"" + destinationDir + "\"" );
+            LOG.info( "cannot create destination directory at \"" + destinationDir + "\"" );
         }
         final String[] files = new String[]{
-                "hcdsqlsc.properties", "hcdsqlsc.backup", "hcdsqlsc.data", "hcdsqlsc.script",
-                "hcdsqlge.properties", "hcdsqlge.backup", "hcdsqlge.data", "hcdsqlge.script",
-                "hcdsqlde.properties", "hcdsqlde.script"
+                "sc-2.2.9.properties", "sc-2.2.9.data", "sc-2.2.9.script",
+                "ge-2.2.9.properties", "ge-2.2.9.script",
+                "de-2.2.9.properties", "de-2.2.9.data", "de-2.2.9.script"
         };
         try
         {

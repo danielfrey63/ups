@@ -394,9 +394,9 @@
                 <version>1.0.4</version>
             </dependency>
             <dependency>
-                <groupId>hsqldb</groupId>
+                <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
-                <version>1.7.1</version>
+                <version>2.2.9</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -693,14 +693,14 @@
         </repository>
         <repository>
             <id>maclocal</id>
-            <url>${archiva}/archiva/repository/internal/</url>
+            <url>${archiva}/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>maclocal-snapshots</id>
-            <url>${archiva}/archiva/repository/snapshots/</url>
+            <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -710,7 +710,7 @@
             <name>Maven Plugin Repository</name>
             <!-- Overwrite default maven repository -->
             <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/archiva/repository/snapshots/</url>
+            <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -722,14 +722,14 @@
     <pluginRepositories>
         <pluginRepository>
             <id>maclocal-plugin</id>
-            <url>${archiva}/archiva/repository/internal/</url>
+            <url>${archiva}/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>maclocal-plugin-snapshots</id>
-            <url>${archiva}/archiva/repository/snapshots/</url>
+            <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -739,7 +739,7 @@
             <name>Maven Plugin Repository</name>
             <!-- Overwrite default maven repository -->
             <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/archiva/repository/snapshots/</url>
+            <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>

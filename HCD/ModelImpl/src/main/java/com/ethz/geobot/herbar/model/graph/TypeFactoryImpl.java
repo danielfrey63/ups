@@ -24,29 +24,7 @@ package com.ethz.geobot.herbar.model.graph;
 
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.TypeFactory;
-import com.ethz.geobot.herbar.model.db.impl.EcologyAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.EcologyImpl;
-import com.ethz.geobot.herbar.model.db.impl.EcologySubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.EcologyTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.EcologyValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.LevelImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineSubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.MedicineValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyAttributeImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologySubjectImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.MorphologyValueImpl;
-import com.ethz.geobot.herbar.model.db.impl.PictureImpl;
-import com.ethz.geobot.herbar.model.db.impl.PictureTextImpl;
-import com.ethz.geobot.herbar.model.db.impl.PictureThemeImpl;
-import com.ethz.geobot.herbar.model.db.impl.PicturesImpl;
-import com.ethz.geobot.herbar.model.db.impl.RootImpl;
-import com.ethz.geobot.herbar.model.db.impl.TaxonImpl;
-import com.ethz.geobot.herbar.model.db.impl.TaxonSynonymImpl;
+import com.ethz.geobot.herbar.model.db.impl.*;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,6 +68,12 @@ public class TypeFactoryImpl implements TypeFactory
             typeMapping.put( "ECOATTRIBUTE", EcologyAttributeImpl.class );
             typeMapping.put( "ECOVALUE", EcologyValueImpl.class );
             typeMapping.put( "ECOTEXT", EcologyTextImpl.class );
+
+            typeMapping.put( "NAME", NameImpl.class );
+            typeMapping.put( "NAMSUBJECT", NameSubjectImpl.class );
+            typeMapping.put( "NAMATTRIBUTE", NameAttributeImpl.class );
+            typeMapping.put( "NAMVALUE", NameValueImpl.class );
+            typeMapping.put( "NAMTEXT", NameTextImpl.class );
 
             typeMapping.put( "PICTURE", PictureImpl.class );
             typeMapping.put( "PICTURES", PicturesImpl.class );

@@ -53,13 +53,9 @@ public class AppHerbar
 {
     private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
 
-    private static final String DIR_GE = "/ge/";
-
     private static final String DIR_SC = "/sc/";
 
     private static final String DIR_DE = "/de/";
-
-    private static final String EXT_GE = "ge-2.2.9";
 
     private static final String EXT_SC = "sc-2.2.9";
 
@@ -71,9 +67,6 @@ public class AppHerbar
 
     /** reference to the one and only mainframe */
     private static MainFrame mainFrame = null;
-
-    /** Started in the "german" environment. */
-    public static final String ENV_GERMAN = "german";
 
     /** Started in the "scientific" environment. */
     public static final String ENV_SCIENTIFIC = "scientific";
@@ -119,18 +112,11 @@ public class AppHerbar
     {
         switch ( selection )
         {
-            case 0:
+            case 1:
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
                 System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
-                System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
-                break;
-            case 1:
-                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_GE );
-                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_GE );
-                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.ge" ) );
-                System.setProperty( "xmatrix.subject", ENV_GERMAN );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
                 break;
             case 2:
@@ -166,7 +152,6 @@ public class AppHerbar
         }
         final String[] files = new String[]{
                 "sc-2.2.9.properties", "sc-2.2.9.data", "sc-2.2.9.script",
-                "ge-2.2.9.properties", "ge-2.2.9.script",
                 "de-2.2.9.properties", "de-2.2.9.data", "de-2.2.9.script"
         };
         try
@@ -199,7 +184,7 @@ public class AppHerbar
             int selection = -1;
             if ( dialog.ok )
             {
-                selection = dialog.systematicRadio.isSelected() ? dialog.scientificRadio.isSelected() ? 0 : 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+                selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
             }
             else
             {

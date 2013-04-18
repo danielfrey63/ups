@@ -276,7 +276,7 @@
                </void> 
                <void method="setProperty"> 
                 <string>$rowSpecs</string> 
-                <string>default, linegap, default, linegap, default, linegap, default, unrelgap, default, linegap, default, linegap, fill:default:grow, linegap, default</string> 
+                <string>default, linegap, default, linegap, default, linegap, default, linegap, fill:default:grow, linegap, default</string> 
                </void> 
               </object> 
               <void method="setProperty"> 
@@ -297,7 +297,7 @@
                 <string>javax.swing.JTextArea</string> 
                 <void method="setProperty"> 
                  <string>text</string> 
-                 <string>Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten können. Bitte wählen Sie den gewünschten Bereich aus und präzisieren Sie gegebenenfalls die Details (Wissenschaftlich oder Deutsch).</string> 
+                 <string>Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten können. Bitte wählen Sie den gewünschten Bereich aus.</string> 
                 </void> 
                 <void method="setProperty"> 
                  <string>lineWrap</string> 
@@ -371,7 +371,7 @@
                 <string>javax.swing.JTextArea</string> 
                 <void method="setProperty"> 
                  <string>text</string> 
-                 <string>Systematik: Wählen Sie diese Option, falls Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen. Sie haben zwei Möglichkeiten, wie die Taxonnamen gehandhabt werden:</string> 
+                 <string>Systematik: Wählen Sie diese Option, falls Sie Ihre wissenschaftlichen Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen.</string> 
                 </void> 
                 <void method="setProperty"> 
                  <string>lineWrap</string> 
@@ -415,80 +415,6 @@
                <object class="com.jformdesigner.model.FormComponent"> 
                 <string>javax.swing.JRadioButton</string> 
                 <void method="setProperty"> 
-                 <string>text</string> 
-                 <string>Wissenschaftliche Namen</string> 
-                </void> 
-                <void method="setProperty"> 
-                 <string>selected</string> 
-                 <boolean>true</boolean> 
-                </void> 
-                <void method="setProperty"> 
-                 <string>$buttonGroup</string> 
-                 <object class="com.jformdesigner.model.FormReference"> 
-                  <string>buttonGroup2</string> 
-                 </object> 
-                </void> 
-                <void property="name"> 
-                 <string>scientificRadio</string> 
-                </void> 
-                <void method="auxiliary"> 
-                 <void method="setProperty"> 
-                  <string>JavaCodeGenerator.variableModifiers</string> 
-                  <int>1</int> 
-                 </void> 
-                </void> 
-               </object> 
-               <object class="com.jformdesigner.model.FormLayoutConstraints"> 
-                <class>com.jgoodies.forms.layout.CellConstraints</class> 
-                <void method="setProperty"> 
-                 <string>gridY</string> 
-                 <int>5</int> 
-                </void> 
-                <void method="setProperty"> 
-                 <string>gridX</string> 
-                 <int>3</int> 
-                </void> 
-               </object> 
-              </void> 
-              <void method="add"> 
-               <object class="com.jformdesigner.model.FormComponent"> 
-                <string>javax.swing.JRadioButton</string> 
-                <void method="setProperty"> 
-                 <string>text</string> 
-                 <string>Deutsche Namen</string> 
-                </void> 
-                <void method="setProperty"> 
-                 <string>$buttonGroup</string> 
-                 <object class="com.jformdesigner.model.FormReference"> 
-                  <string>buttonGroup2</string> 
-                 </object> 
-                </void> 
-                <void property="name"> 
-                 <string>germanRadio</string> 
-                </void> 
-                <void method="auxiliary"> 
-                 <void method="setProperty"> 
-                  <string>JavaCodeGenerator.variableModifiers</string> 
-                  <int>1</int> 
-                 </void> 
-                </void> 
-               </object> 
-               <object class="com.jformdesigner.model.FormLayoutConstraints"> 
-                <class>com.jgoodies.forms.layout.CellConstraints</class> 
-                <void method="setProperty"> 
-                 <string>gridY</string> 
-                 <int>7</int> 
-                </void> 
-                <void method="setProperty"> 
-                 <string>gridX</string> 
-                 <int>3</int> 
-                </void> 
-               </object> 
-              </void> 
-              <void method="add"> 
-               <object class="com.jformdesigner.model.FormComponent"> 
-                <string>javax.swing.JRadioButton</string> 
-                <void method="setProperty"> 
                  <string>$buttonGroup</string> 
                  <object id="FormReference0" class="com.jformdesigner.model.FormReference"> 
                   <string>buttonGroup1</string> 
@@ -516,7 +442,7 @@
                 <class>com.jgoodies.forms.layout.CellConstraints</class> 
                 <void method="setProperty"> 
                  <string>gridY</string> 
-                 <int>9</int> 
+                 <int>5</int> 
                 </void> 
                </object> 
               </void> 
@@ -555,7 +481,7 @@
                 </void> 
                 <void method="setProperty"> 
                  <string>gridY</string> 
-                 <int>9</int> 
+                 <int>5</int> 
                 </void> 
                </object> 
               </void> 
@@ -588,7 +514,7 @@
                 <class>com.jgoodies.forms.layout.CellConstraints</class> 
                 <void method="setProperty"> 
                  <string>gridY</string> 
-                 <int>11</int> 
+                 <int>7</int> 
                 </void> 
                </object> 
               </void> 
@@ -633,7 +559,7 @@
                 </void> 
                 <void method="setProperty"> 
                  <string>gridY</string> 
-                 <int>11</int> 
+                 <int>7</int> 
                 </void> 
                </object> 
               </void> 
@@ -700,7 +626,7 @@
                 <class>com.jgoodies.forms.layout.CellConstraints</class> 
                 <void method="setProperty"> 
                  <string>gridY</string> 
-                 <int>15</int> 
+                 <int>11</int> 
                 </void> 
                 <void method="setProperty"> 
                  <string>gridWidth</string> 
@@ -784,24 +710,6 @@
        <object class="java.awt.Point"> 
         <int>655</int> 
         <int>0</int> 
-       </object> 
-      </void> 
-     </object> 
-    </void> 
-    <void method="add"> 
-     <object class="com.jformdesigner.model.FormNonVisual"> 
-      <string>javax.swing.ButtonGroup</string> 
-      <void property="name"> 
-       <string>buttonGroup2</string> 
-      </void> 
-     </object> 
-     <object class="com.jformdesigner.model.FormLayoutConstraints"> 
-      <null/> 
-      <void method="setProperty"> 
-       <string>location</string> 
-       <object class="java.awt.Point"> 
-        <int>655</int> 
-        <int>55</int> 
        </object> 
       </void> 
      </object> 

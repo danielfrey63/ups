@@ -127,7 +127,7 @@ public class GraphModelImpl extends AbsGraphModel
             LOG.trace( "getting model (xmatrix.input.model): " + MODEL_CLASS );
             LOG.trace( "getting type factory (xmatrix.input.model.factory.type): " + TYPE_FACTORY_CLASS );
             LOG.trace( "getting original url (xmatrix.input.db): " + System.getProperty( URL ) );
-            LOG.trace( "getting url (xmatrix.input.db corrected): " + url );
+            LOG.trace( "getting corrected url (xmatrix.input.db): " + url );
             LOG.trace( "getting user (xmatrix.input.user): " + user );
             LOG.trace( "getting password (xmatrix.input.pw): " + password );
             LOG.trace( "getting driver (xmatrix.input.driver): " + driver );

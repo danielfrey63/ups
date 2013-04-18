@@ -88,12 +88,6 @@ public class EnvironmentDialog extends JDialog
         return Preferences.userNodeForPackage( getClass() ).node( "copyright" );
     }
 
-    private void setChoice1()
-    {
-        scientificRadio.setEnabled( systematicRadio.isSelected() );
-        germanRadio.setEnabled( systematicRadio.isSelected() );
-    }
-
     public boolean ok = false;
 
     private void okButtonActionPerformed()
@@ -125,8 +119,6 @@ public class EnvironmentDialog extends JDialog
         textField1 = new JTextArea();
         systematicRadio = new JRadioButton();
         JTextArea textField2 = new JTextArea();
-        scientificRadio = new JRadioButton();
-        germanRadio = new JRadioButton();
         demoRadio = new JRadioButton();
         demoText = new JTextArea();
         dendroRadio = new JRadioButton();
@@ -212,10 +204,10 @@ public class EnvironmentDialog extends JDialog
                         panel2.setBorder(Borders.DIALOG_BORDER);
                         panel2.setLayout(new FormLayout(
                             "10dlu, $lcgap, default:grow",
-                            "3*(default, $lgap), default, $ugap, 2*(default, $lgap), fill:default:grow, $lgap, default"));
+                            "4*(default, $lgap), fill:default:grow, $lgap, default"));
 
                         //---- textField1 ----
-                        textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus und pr\u00e4zisieren Sie gegebenenfalls die Details (Wissenschaftlich oder Deutsch).");
+                        textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus.");
                         textField1.setLineWrap(true);
                         textField1.setWrapStyleWord(true);
                         textField1.setOpaque(false);
@@ -224,37 +216,18 @@ public class EnvironmentDialog extends JDialog
 
                         //---- systematicRadio ----
                         systematicRadio.setSelected(true);
-                        systematicRadio.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                setChoice1();
-                            }
-                        });
                         panel2.add(systematicRadio, cc.xy(1, 3));
 
                         //---- textField2 ----
-                        textField2.setText("Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen. Sie haben zwei M\u00f6glichkeiten, wie die Taxonnamen gehandhabt werden:");
+                        textField2.setText("Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre wissenschaftlichen Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen.");
                         textField2.setLineWrap(true);
                         textField2.setWrapStyleWord(true);
                         textField2.setOpaque(false);
                         textField2.setEditable(false);
                         panel2.add(textField2, cc.xy(3, 3));
 
-                        //---- scientificRadio ----
-                        scientificRadio.setText("Wissenschaftliche Namen");
-                        scientificRadio.setSelected(true);
-                        panel2.add(scientificRadio, cc.xy(3, 5));
-
-                        //---- germanRadio ----
-                        germanRadio.setText("Deutsche Namen");
-                        panel2.add(germanRadio, cc.xy(3, 7));
-
                         //---- demoRadio ----
-                        demoRadio.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                setChoice1();
-                            }
-                        });
-                        panel2.add(demoRadio, cc.xy(1, 9));
+                        panel2.add(demoRadio, cc.xy(1, 5));
 
                         //---- demoText ----
                         demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
@@ -262,15 +235,10 @@ public class EnvironmentDialog extends JDialog
                         demoText.setWrapStyleWord(true);
                         demoText.setOpaque(false);
                         demoText.setEditable(false);
-                        panel2.add(demoText, cc.xy(3, 9));
+                        panel2.add(demoText, cc.xy(3, 5));
 
                         //---- dendroRadio ----
-                        dendroRadio.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                setChoice1();
-                            }
-                        });
-                        panel2.add(dendroRadio, cc.xy(1, 11));
+                        panel2.add(dendroRadio, cc.xy(1, 7));
 
                         //---- textField3 ----
                         textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
@@ -278,7 +246,7 @@ public class EnvironmentDialog extends JDialog
                         textField3.setWrapStyleWord(true);
                         textField3.setOpaque(false);
                         textField3.setEditable(false);
-                        panel2.add(textField3, cc.xy(3, 11));
+                        panel2.add(textField3, cc.xy(3, 7));
 
                         //======== buttonBar2 ========
                         {
@@ -296,7 +264,7 @@ public class EnvironmentDialog extends JDialog
                             });
                             buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add(buttonBar2, cc.xywh(1, 15, 3, 1));
+                        panel2.add(buttonBar2, cc.xywh(1, 11, 3, 1));
                     }
                     tabbedPane1.addTab("Auswahl", panel2);
 
@@ -314,11 +282,6 @@ public class EnvironmentDialog extends JDialog
         buttonGroup1.add(systematicRadio);
         buttonGroup1.add(demoRadio);
         buttonGroup1.add(dendroRadio);
-
-        //---- buttonGroup2 ----
-        ButtonGroup buttonGroup2 = new ButtonGroup();
-        buttonGroup2.add(scientificRadio);
-        buttonGroup2.add(germanRadio);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -333,8 +296,6 @@ public class EnvironmentDialog extends JDialog
     private JButton acceptButton;
     private JTextArea textField1;
     public JRadioButton systematicRadio;
-    public JRadioButton scientificRadio;
-    public JRadioButton germanRadio;
     public JRadioButton demoRadio;
     private JTextArea demoText;
     public JRadioButton dendroRadio;

@@ -127,7 +127,6 @@ public class Application
     public Set getModelNames()
     {
         final Set<String> names = new HashSet<String>();
-        names.add( ROOT_MODEL.getName() );
         names.addAll( FilterFactory.getInstance().getFilterNames() );
         return names;
     }
@@ -135,7 +134,6 @@ public class Application
     public Set<? extends HerbarModel> getModels()
     {
         final Set<HerbarModel> models = new HashSet<HerbarModel>();
-        models.add( ROOT_MODEL );
         models.addAll( FilterFactory.getInstance().getFilters() );
         return models;
     }

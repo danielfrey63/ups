@@ -108,7 +108,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             final HerbarContext context = mode.getHerbarContext();
             final HerbarGUIManager guiManager = context.getHerbarGUIManager();
             final JFrame parent = guiManager.getParentFrame();
-            final HerbarModel herbarModel = context.getDataModel();
+            final HerbarModel herbarModel = context.getModel("Level 600");
 
             taxStateModel = new TaxStateModel( herbarModel );
 

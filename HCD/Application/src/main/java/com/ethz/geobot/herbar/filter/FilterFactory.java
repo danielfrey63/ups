@@ -79,9 +79,12 @@ public class FilterFactory
             filterMapping = new Mapping();
             filterMapping.loadMapping( this.getClass().getResource( "filtermapping.xml" ) );
 
-            final FileWriter writer = new FileWriter( generateFilterFileName( "Prüfungsliste" ) );
-            IOUtils.copy( getClass().getResourceAsStream( "Prüfungsliste.xml" ), writer );
-            writer.close();
+            for ( final String list : new String[]{ "Level 200", "Level 400", "Level 600" } )
+            {
+                final FileWriter writer = new FileWriter( generateFilterFileName( list ) );
+                IOUtils.copy( getClass().getResourceAsStream( list + ".xml" ), writer );
+                writer.close();
+            }
         }
         catch ( Exception ex )
         {

@@ -136,7 +136,7 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.data</artifactId>
-                <version>4.0-SNAPSHOT</version>
+                <version>5.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -156,7 +156,7 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.lesson</artifactId>
-                <version>4.0-SNAPSHOT</version>
+                <version>5.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
@@ -171,12 +171,12 @@
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.model</artifactId>
-                <version>4.0-SNAPSHOT</version>
+                <version>5.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>
                 <artifactId>ch.xmatrix.le.modelimpl</artifactId>
-                <version>4.0-SNAPSHOT</version>
+                <version>5.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.xmatrix.le</groupId>

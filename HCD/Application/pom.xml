@@ -24,10 +24,12 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>1.4.823</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.1982</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
@@ -36,6 +38,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.2053</version>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>
@@ -48,6 +51,7 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.2067</version>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>
@@ -64,14 +68,17 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.2057</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.2057</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>4.0.2062</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
@@ -129,6 +136,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1461</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>
@@ -165,6 +173,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.1752</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>

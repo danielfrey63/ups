@@ -62,7 +62,7 @@
         <!-- Heap size used in JNLP projects. -->
         <max-heap-size>512m</max-heap-size>
         <!-- The Archiva URL. -->
-        <archiva>http://192.168.10.28:8080</archiva>
+        <archiva>http://localhost:8080</archiva>
     </properties>
     <dependencyManagement>
         <dependencies>

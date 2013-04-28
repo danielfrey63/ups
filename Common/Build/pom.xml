@@ -685,67 +685,34 @@
     </build>
     <repositories>
         <repository>
-            <id>geobot1</id>
-            <url>http://geobot1.ethz.ch/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>maclocal</id>
+            <id>local</id>
             <url>${archiva}/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
-            <id>maclocal-snapshots</id>
+            <id>local-snapshots</id>
             <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <!-- Overwrite default maven repository -->
-            <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>maclocal-plugin</id>
+            <id>local-plugin</id>
             <url>${archiva}/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>maclocal-plugin-snapshots</id>
+            <id>local-plugin-snapshots</id>
             <url>${archiva}/repository/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <!-- Overwrite default maven repository -->
-            <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </pluginRepository>
     </pluginRepositories>
     <!--

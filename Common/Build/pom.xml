@@ -685,7 +685,11 @@
     </build>
     <repositories>
         <repository>
-            <id>local</id>
+            <id>geobot1</id>
+            <url>http://geobot1.ethz.ch/releases</url>
+        </repository>
+        <repository>
+            <id>maclocal</id>
             <url>${archiva}/repository/internal/</url>
             <snapshots>
                 <enabled>false</enabled>
@@ -697,6 +701,19 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <!-- Overwrite default maven repository -->
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+            <url>${archiva}/repository/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -713,6 +730,19 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <!-- Overwrite default maven repository -->
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+            <url>${archiva}/repository/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
     <!--

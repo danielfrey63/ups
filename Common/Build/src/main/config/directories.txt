@@ -32,6 +32,7 @@ ch.xmatrix.ups.pmb.exam	C:/Daten/Daten/All/Workspace/PMB/Exam/pom.xml
 ch.xmatrix.pmb.pom	C:/Daten/Daten/All/Workspace/PMB/pom.xml
 ch.xmatrix.ups.pmb.test	C:/Daten/Daten/All/Workspace/PMB/Test/pom.xml
 ch.xmatrix	C:/Daten/Daten/All/Workspace/pom.xml
+ch.xmatrix.test.helloworld	C:/Daten/Daten/All/Workspace/Test/HelloWorld/pom.xml
 ch.xmatrix.test.jnlp	C:/Daten/Daten/All/Workspace/Test/JNLP/pom.xml
 ch.xmatrix.test.osgi.consumer	C:/Daten/Daten/All/Workspace/Test/OSGiConsumer/pom.xml
 ch.xmatrix.test.osgi.provider	C:/Daten/Daten/All/Workspace/Test/OSGiProvider/pom.xml

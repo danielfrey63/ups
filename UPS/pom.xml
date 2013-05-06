@@ -16,6 +16,5 @@
     <description>All UPS Tools and Server Components</description>
     <modules>
         <module>Tools</module>
-        <module>Server</module>
     </modules>
 </project>

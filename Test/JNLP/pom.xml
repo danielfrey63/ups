@@ -9,7 +9,7 @@
     <groupId>ch.xmatrix</groupId>
     <artifactId>ch.xmatrix.test.jnlp</artifactId>
     <name>Test Application</name>
-    <version>1.0.2109</version>
+    <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
@@ -67,9 +67,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.test.jnlp-1.0.2109</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.test.jnlp-1.0.2109</url>
-  </scm>
 </project>

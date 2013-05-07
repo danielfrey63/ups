@@ -29,12 +29,18 @@
 package com.ethz.geobot.herbar.filter;
 
 import com.ethz.geobot.herbar.Application;
+import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
-import java.io.*;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,7 +62,7 @@ import org.slf4j.LoggerFactory;
  */
 public class FilterFactory
 {
-    private static final String FILTER_LOCATION = System.getProperty( "user.home" ) + "/" + System.getProperty( "herbar.filter.location" );
+    private static final String FILTER_LOCATION = System.getProperty( "herbar.filter.location" );
 
     private static final Logger LOG = LoggerFactory.getLogger( FilterFactory.class );
 
@@ -79,7 +85,19 @@ public class FilterFactory
             filterMapping = new Mapping();
             filterMapping.loadMapping( this.getClass().getResource( "filtermapping.xml" ) );
 
-            for ( final String list : new String[]{ "Level 200", "Level 400", "Level 600" } )
+            final String[] lists;
+            if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
+            {
+                lists = new String[]{ "Level 200", "Level 400", "Level 600" };
+            }
+            else
+            {
+                lists = new String[]{ };
+            }
+
+            new File( System.getProperty( "herbar.filter.location" ) ).mkdirs();
+
+            for ( final String list : lists )
             {
                 final FileWriter writer = new FileWriter( generateFilterFileName( list ) );
                 IOUtils.copy( getClass().getResourceAsStream( list + ".xml" ), writer );
@@ -352,7 +370,7 @@ public class FilterFactory
             if ( file.exists() )
             {
                 final File[] files = file.listFiles();
-                for ( final File file1 : files )
+                for ( final File file1 : files != null ? files : new File[0] )
                 {
                     LOG.trace( "filter with name " + file1.getName() + " found." );
                     list.add( generateFilterName( file1.getName() ) );

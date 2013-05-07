@@ -203,6 +203,8 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         toolBar.add( taxonControl.getNextButton() );
         toolBar.add( ComponentFactory.createSeparator() );
 
+        listButton.setEnabled( herbarContext.getModels().size() != 0 );
+
         return toolBar;
     }
 
@@ -318,10 +320,10 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         if ( listPopUp == null )
         {
             listPopUp = new ListPopUp();
+            final HerbarModel[] models = herbarContext.getModels().toArray( new HerbarModel[herbarContext.getModels().size()] );
+            Arrays.sort( models, new ToStringComparator<Object>() );
+            listPopUp.setObjects( models );
         }
-        final HerbarModel[] models = herbarContext.getModels().toArray( new HerbarModel[herbarContext.getModels().size()] );
-        Arrays.sort( models, new ToStringComparator<Object>() );
-        listPopUp.setObjects( models );
         return listPopUp;
     }
 

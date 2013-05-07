@@ -100,7 +100,7 @@ public class ImageLocator
     public static String getPicturePath()
     {
         final String url = System.getProperty( "xmatrix.cache.local.path", System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/" );
-        return new File( url, "HcdPictureCache/" ).getAbsolutePath();
+        return new File( url ).getAbsolutePath();
     }
 
     public static String getImageURL()

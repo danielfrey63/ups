@@ -38,9 +38,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,13 +53,9 @@ public class AppHerbar
 {
     private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
 
-    private static final String DIR_SC = "/sc/";
+    private static final String DIR_SC = "sc";
 
-    private static final String DIR_DE = "/de/";
-
-    private static final String EXT_SC = "sc-2.2.9";
-
-    private static final String EXT_DE = "de-2.2.9";
+    private static final String DIR_DE = "de";
 
     private static final String homeDir = System.getProperty( "user.home" ).replace( '\\', '/' ) + "/.hcd2/";
 
@@ -76,9 +72,9 @@ public class AppHerbar
 
     public AppHerbar( final int selection )
     {
-        switchDatabase( selection );
+        setupDirectories( selection );
         initSplash();
-        decompressDatabase();
+        decompressDatabase( selection );
         Application.getInstance().getModel();
         System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
 
@@ -87,7 +83,7 @@ public class AppHerbar
             public void run()
             {
                 mainFrame = new MainFrame();
-                mainFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+                mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 
                 // set frame position
                 final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -108,34 +104,25 @@ public class AppHerbar
         return mainFrame;
     }
 
-    private void switchDatabase( final int selection )
+    private void setupDirectories(final int selection)
     {
         switch ( selection )
         {
             case 1:
-                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_SC );
-                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_SC );
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_SC ) );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ).replace( "${hcd.mode}", DIR_SC ) );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
                 System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
+                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_SC ));
                 break;
-            case 2:
-                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ) + EXT_DE );
-                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ) + DIR_DE );
-                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.de" ) );
+            default: // case 2
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_DE) );
+                System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ).replace( "${hcd.mode}", DIR_DE ) );
+                System.setProperty( "herbar.exam.default_list", System.getProperty("herbar.exam.default_list.de") );
                 System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
-                break;
-            case 3:
-                try
-                {
-                    Main.main( null );
-                }
-                catch ( Exception e )
-                {
-                    LOG.error( "Error during initialization of exam demo", e );
-                }
-            default:
+                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_DE ));
                 break;
         }
         LOG.info( "setting database to (xmatrix.input.db): " + System.getProperty( "xmatrix.input.db" ) );
@@ -143,24 +130,30 @@ public class AppHerbar
         LOG.info( "setting exam list to (herbar.exam.default_list): " + System.getProperty( "herbar.exam.default_list" ) );
     }
 
-    private void decompressDatabase()
+    private void decompressDatabase( int selection )
     {
-        final String destinationDir = homeDir + "data/";
-        if ( !new File( destinationDir ).mkdirs() )
+        if ( !new File( homeDir ).mkdirs() )
         {
-            LOG.info( "cannot create destination directory at \"" + destinationDir + "\"" );
+            LOG.info( "cannot create destination directory at \"" + homeDir + "\"" );
         }
-        final String[] files = new String[]{
-                "sc-2.2.9.properties", "sc-2.2.9.data", "sc-2.2.9.script",
-                "de-2.2.9.properties", "de-2.2.9.data", "de-2.2.9.script"
-        };
+        final String[] files;
+        switch ( selection )
+        {
+            case 1:
+                files = new String[]{ "sc/data/2.2.9.properties", "sc/data/2.2.9.data", "sc/data/2.2.9.script" };
+                break;
+            default: // case 2
+                files = new String[]{ "de/data/2.2.9.properties", "de/data/2.2.9.data", "de/data/2.2.9.script" };
+        }
         try
         {
             for ( final String file : files )
             {
                 LOG.info( "decompressing DB from " + AppHerbar.class.getResource( "/" + file ) );
                 final InputStream is = AppHerbar.class.getResourceAsStream( "/" + file );
-                final OutputStream os = new FileOutputStream( destinationDir + file );
+                File destinationFile = new File( homeDir + file );
+                destinationFile.getParentFile().mkdirs();
+                final OutputStream os = new FileOutputStream( destinationFile );
                 IOUtils.copy( is, os );
                 os.close();
             }

@@ -12,7 +12,6 @@ package ch.jfactory.logging;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -21,7 +20,6 @@ import java.util.GregorianCalendar;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +43,7 @@ public class LogUtils
      * Opens a stream for the given file. Looks for the file at the following locations: <ol> <li>in any JAR file given in the class path. Relative file names are prepended with a slash.</li> <li>in the start directory</li> <li>in the default directory</li> </ol>
      *
      * @param propFile the file name, may be preceeded by relative or absolute path
-     * @return
+     * @return stream to the file
      */
     public static InputStream locateResourceAsStream( final String propFile )
     {
@@ -128,12 +126,16 @@ public class LogUtils
             {
                 final String value = props.getProperty( (String) key );
                 String parsed = value;
-                final Matcher matcher = Pattern.compile( "\\$\\{.*\\}" ).matcher( value );
+                String variable = "\\$\\{.*?\\}";
+                final Matcher matcher = Pattern.compile(variable).matcher( value );
+
                 while ( matcher.find() )
                 {
-                    final String property = parsed.substring( matcher.start() + 2, matcher.end() - 1 );
-                    final String valueToReplace = System.getProperty( property ).replaceAll( "\\\\", "/" );
-                    parsed = parsed.replaceFirst( "\\$\\{.*\\}", valueToReplace );
+                    final String property = value.substring( matcher.start() + 2, matcher.end() - 1 );
+                    final String valueToReplace = System.getProperty( property );
+                    if (valueToReplace != null) {
+                        parsed = parsed.replaceFirst(variable, valueToReplace.replaceAll( "\\\\", "/" ) );
+                    }
                 }
                 System.setProperty( (String) key, parsed );
             }
@@ -150,31 +152,5 @@ public class LogUtils
         final StringWriter sw = new StringWriter();
         props.list( new PrintWriter( sw ) );
         LOGGER.info( "System properties are:\n" + sw );
-    }
-
-    private static void initLog4j()
-    {
-        final InputStream is;
-        // init logging
-        final String log4jPropertiesFileName = System.getProperty( "log4j.configuration" );
-        is = LogUtils.class.getResourceAsStream( "/" + log4jPropertiesFileName );
-        if ( is != null )
-        {
-            final Properties log4jProperties = new Properties();
-            try
-            {
-                log4jProperties.load( is );
-            }
-            catch ( IOException e )
-            {
-                System.err.println( "Error loading log4j properties from jar file" );
-                e.printStackTrace();
-            }
-            PropertyConfigurator.configure( log4jProperties );
-        }
-        else
-        {
-            PropertyConfigurator.configure( log4jPropertiesFileName );
-        }
     }
 }

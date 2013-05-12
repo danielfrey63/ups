@@ -68,7 +68,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
      * @param name           a name for the model
      * @param fixed
      */
-    public FilterModel(final HerbarModel dependentModel, final String name, boolean fixed)
+    public FilterModel( final HerbarModel dependentModel, final String name, boolean fixed )
     {
         super( name );
         this.fixed = fixed;
@@ -260,6 +260,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return filterDetails.toArray( new FilterDefinitionDetail[filterDetails.size()] );
     }
 
+    /** Removes the content of the filter. */
     public void clearFilterDetails()
     {
         LOG.info( "clear all filter details" );
@@ -274,7 +275,8 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         this.fireModelChangeEvent( new ModelChangeEvent( this ) );
     }
 
-    public boolean isFixed() {
+    public boolean isFixed()
+    {
         return fixed;
     }
 }

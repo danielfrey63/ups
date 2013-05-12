@@ -12,6 +12,9 @@
         <version>1.0</version>
         <relativePath>../../../Common/Build</relativePath>
     </parent>
+    <properties>
+        <main-class>ch.xmatrix.upload.client.UploadManager</main-class>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -28,6 +31,10 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
     </dependencies>
     <build>

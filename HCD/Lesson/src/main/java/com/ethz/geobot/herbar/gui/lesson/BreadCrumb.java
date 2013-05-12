@@ -27,6 +27,8 @@ import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,14 +58,19 @@ public class BreadCrumb extends JPanel
     {
         LOG.debug( "adjusting bread crumb to new focus \"" + tax + "\"" );
         panel.removeAll();
+        final List<JLabel> list = new ArrayList<JLabel>();
         Taxon parent = tax;
         while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null )
         {
             LOG.trace( "iterating up to " + parent );
             final ImageIcon ii = ImageLocator.getIcon( "icon" + parent.getLevel().getName() + ".gif" );
             final JLabel label = new JLabel( parent.getName() + "  ", ii, JLabel.CENTER );
-            panel.add( label );
+            list.add( 0, label );
             parent = parent.getParentTaxon();
+        }
+        for ( final JLabel label : list )
+        {
+            panel.add( label );
         }
         panel.repaint();
     }

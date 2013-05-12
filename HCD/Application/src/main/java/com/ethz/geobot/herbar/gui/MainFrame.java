@@ -34,9 +34,7 @@ import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
 import com.ethz.geobot.herbar.gui.commands.ActionSaveBounds;
-import com.ethz.geobot.herbar.gui.commands.ActionWizard;
 import com.ethz.geobot.herbar.gui.mode.ModeStateModel;
-import com.ethz.geobot.herbar.gui.mode.ModeWizard;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
@@ -47,7 +45,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -86,8 +83,6 @@ public class MainFrame extends JFrame
 
     private StatusBar statusBar;
 
-    private Action wizardAction;
-
     //Construct the Mainframe
 
     public MainFrame()
@@ -111,14 +106,6 @@ public class MainFrame extends JFrame
                         if ( newMode != null )
                         {
                             newMode.activate();
-                        }
-                        if ( ModeWizard.getInstance().hasWizard( newMode ) )
-                        {
-                            wizardAction.setEnabled( true );
-                        }
-                        else
-                        {
-                            wizardAction.setEnabled( false );
                         }
                     }
                     else if ( e.getPropertyName().equals( "viewComponent" ) )
@@ -225,8 +212,6 @@ public class MainFrame extends JFrame
 
         sub = createMenu( "MENU.SETTINGS" );
         sub.add( new ActionModeSelection( this, prefNode ) );
-        final Action action = wizardAction = new ActionWizard( this );
-        sub.add( action );
 
         sub = createMenu( "MENU.HERBAR" );
         sub.add( new ActionAppHelp( this ) );

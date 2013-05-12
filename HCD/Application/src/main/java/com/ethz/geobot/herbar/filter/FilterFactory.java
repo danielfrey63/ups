@@ -156,7 +156,7 @@ public class FilterFactory
         {
             final Detail detail = details[i];
             final Taxon scope = baseModel.getTaxon( detail.getScope() );
-            final Level[] levels = collectLevels( detail.getLevels() );
+            final Level[] levels = model.getLevels(); //collectLevels( detail.getLevels() );
             if ( scope != null )
             {
                 model.addFilterDetail( scope, levels );

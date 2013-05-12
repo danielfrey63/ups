@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.model</artifactId>
     <name>Learning Environment Model</name>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0.2144</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -38,4 +38,9 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.model-5.0.2144</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.model-5.0.2144</url>
+  </scm>
 </project>

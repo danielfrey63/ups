@@ -19,6 +19,10 @@
         <constructor-arg value="Weiteres"/>
     </bean>
 
+    <bean id="title4" class="java.lang.String">
+        <constructor-arg value="Namen"/>
+    </bean>
+
     <bean id="icon1" class="java.lang.String">
         <constructor-arg value="iconMOR.gif"/>
     </bean>
@@ -28,6 +32,10 @@
     </bean>
 
     <bean id="icon3" class="java.lang.String">
+        <constructor-arg value="iconADD.gif"/>
+    </bean>
+
+    <bean id="icon4" class="java.lang.String">
         <constructor-arg value="iconADD.gif"/>
     </bean>
 
@@ -157,6 +165,32 @@
                                 </constructor-arg>
                             </bean>
                         </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="filter4" class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">
+        <constructor-arg index="0" value="ch.jfactory.model.graph.GraphNode"/>
+        <constructor-arg index="1" value="VISIBLE"/>
+        <constructor-arg index="2" value="FLAT"/>
+        <constructor-arg index="3" value="FREE"/>
+        <constructor-arg index="4" value="DESCENDANT"/>
+        <constructor-arg index="5">
+            <bean class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">
+                <constructor-arg index="0" value="com.ethz.geobot.herbar.model.Taxon"/>
+                <constructor-arg index="1" value="VISIBLE"/>
+                <constructor-arg index="2" value="FLAT"/>
+                <constructor-arg index="3" value="FREE"/>
+                <constructor-arg index="4" value="DESCENDANT"/>
+                <constructor-arg index="5">
+                    <bean class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">
+                        <constructor-arg index="0" value="com.ethz.geobot.herbar.model.trait.NameText"/>
+                        <constructor-arg index="1" value="VISIBLE"/>
+                        <constructor-arg index="2" value="FLAT"/>
+                        <constructor-arg index="3" value="FREE"/>
+                        <constructor-arg index="4" value="DESCENDANT"/>
                     </bean>
                 </constructor-arg>
             </bean>

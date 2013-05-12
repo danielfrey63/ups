@@ -31,7 +31,6 @@ import javax.swing.JTabbedPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import static ch.jfactory.resource.ImageLocator.getIcon;
 
 /**
@@ -46,9 +45,11 @@ public class PropertyDisplay extends JTabbedPane
 
     private final AttributeTreePanel display1;
 
+    private final AttributeTreePanel display2;
+
     private final AttributeTreePanel display3;
 
-    private final AttributeTreePanel display2;
+    private final AttributeTreePanel display4;
 
     protected HerbarModel herbarModel;
 
@@ -67,14 +68,17 @@ public class PropertyDisplay extends JTabbedPane
         final String morTitle = (String) context.getBean( "title1" );
         final String ecoTitle = (String) context.getBean( "title2" );
         final String medTitle = (String) context.getBean( "title3" );
+        final String namTitle = (String) context.getBean( "title4" );
         display1 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, morTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter1" ) );
         display2 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, ecoTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter2" ) );
         display3 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, medTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter3" ) );
+        display4 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, namTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter4" ) );
         this.setTabPlacement( BOTTOM );
         this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
         this.addTab( morTitle, getIcon( (String) context.getBean( "icon1" ) ), display1 );
         this.addTab( ecoTitle, getIcon( (String) context.getBean( "icon2" ) ), display2 );
         this.addTab( medTitle, getIcon( (String) context.getBean( "icon3" ) ), display3 );
+        this.addTab( namTitle, getIcon( (String) context.getBean( "icon4" ) ), display4 );
     }
 
     public void setTaxFocus( final Taxon focus )
@@ -82,6 +86,7 @@ public class PropertyDisplay extends JTabbedPane
         display1.setTaxonFocus( focus );
         display2.setTaxonFocus( focus );
         display3.setTaxonFocus( focus );
+        display4.setTaxonFocus( focus );
     }
 
     public String toString()

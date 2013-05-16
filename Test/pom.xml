@@ -20,5 +20,6 @@
         <!--<module>OSGiProvider</module>-->
         <module>Test</module>
         <module>HelloWorld</module>
+        <module>Upload</module>
     </modules>
 </project>

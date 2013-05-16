@@ -34,12 +34,11 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
-import java.io.BufferedReader;
+import com.thoughtworks.xstream.XStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.Reader;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
@@ -48,14 +47,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.IOUtils;
-import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.xml.Marshaller;
-import org.exolab.castor.xml.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to store and load FilterModel from the persistent storage.
+ *
+ * Todo: Refactoring: Load built-in filter models directly into memory instead of persisting on HD.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
@@ -68,34 +66,31 @@ public class FilterFactory
 
     private static FilterFactory instance = null;
 
-    private Mapping filterMapping = null;
-
     private final HerbarModel model = Application.getInstance().getModel();
 
     private final Map<String, FilterModel> cachedFilterModels = new HashMap<String, FilterModel>();
 
-    /**
-     * Creates a new instance of FilterFactory.
-     */
+    /** Creates a new instance of FilterFactory. */
     protected FilterFactory()
     {
         try
         {
             LOG.info( "reading mapping file for filter definition." );
-            filterMapping = new Mapping();
-            filterMapping.loadMapping( this.getClass().getResource( "filtermapping.xml" ) );
 
             final String[] lists;
             if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "Level 200", "Level 400", "Level 600" };
+                lists = new String[]{ "Liste 60", "Liste 200", "Liste 400", "Liste 600", "All" };
             }
             else
             {
                 lists = new String[]{ };
             }
 
-            new File( System.getProperty( "herbar.filter.location" ) ).mkdirs();
+            if ( new File( System.getProperty( "herbar.filter.location" ) ).mkdirs() )
+            {
+                LOG.info( "created directory for filters" );
+            }
 
             for ( final String list : lists )
             {
@@ -106,7 +101,6 @@ public class FilterFactory
         }
         catch ( Exception ex )
         {
-            filterMapping = null;
             LOG.error( "failed to load mapping file for filter definition.", ex );
         }
     }
@@ -156,7 +150,7 @@ public class FilterFactory
         {
             final Detail detail = details[i];
             final Taxon scope = baseModel.getTaxon( detail.getScope() );
-            final Level[] levels = model.getLevels(); //collectLevels( detail.getLevels() );
+            final Level[] levels = collectLevels( detail.getLevels() );
             if ( scope != null )
             {
                 model.addFilterDetail( scope, levels );
@@ -216,7 +210,6 @@ public class FilterFactory
             }
             // finally load model
             model = generateFilterModel( filter );
-            saveFilterModel( model );
             cachedFilterModels.put( name, model );
         }
         return model;
@@ -307,52 +300,49 @@ public class FilterFactory
 
     private Filter loadFilter( final String name ) throws FilterPersistentException
     {
-        if ( filterMapping != null )
+        final XStream x = getSerializer();
+        final String resource = "/com/ethz/geobot/herbar/filter/" + name + ".xml";
+        final InputStream input = getClass().getResourceAsStream( resource );
+        if ( input == null )
         {
-            final String filename = generateFilterFileName( name );
-            try
-            {
-                final Reader in = new BufferedReader( new FileReader( filename ) );
-                final Unmarshaller unmarshaller = new Unmarshaller( filterMapping );
-                return (Filter) unmarshaller.unmarshal( in );
-            }
-            catch ( Exception ex )
-            {
-                final String msg = "failed to load filter " + name + " (" + filename + ").";
-                LOG.error( msg, ex );
-                throw new FilterPersistentException( msg, ex );
-            }
+            LOG.error( "\"" + resource + "\" not found in classpath" );
         }
-        else
+        final Filter filter = (Filter) x.fromXML( input );
+        if ( filter.getBaseFilterName() == null )
         {
-            throw new FilterPersistentException( "filer persistence not initialized." );
+            filter.setBaseFilterName( "" );
         }
+        return filter;
+    }
+
+    private XStream getSerializer()
+    {
+        final XStream x = new XStream();
+        x.alias( "filter", Filter.class );
+        x.alias( "detail", Detail.class );
+        x.addImplicitCollection( Filter.class, "details" );
+        x.addImplicitArray( Detail.class, "levels" );
+        x.alias( "level", String.class );
+        x.useAttributeFor( Filter.class, "fixed" );
+        x.useAttributeFor( Filter.class, "name" );
+        x.useAttributeFor( Detail.class, "scope" );
+        return x;
     }
 
     private void saveFilter( final Filter filter ) throws FilterPersistentException
     {
-        if ( filterMapping != null )
+        final String filename = generateFilterFileName( filter.getName() );
+        try
         {
-            final String filename = generateFilterFileName( filter.getName() );
-            try
-            {
-                final Writer out = new BufferedWriter( new FileWriter( filename ) );
-                final Marshaller marshaller = new Marshaller( out );
-                marshaller.setMapping( filterMapping );
-
-                marshaller.marshal( filter );
-                out.close();
-            }
-            catch ( Exception ex )
-            {
-                final String msg = "Failed to save filter " + filter.getName() + " (" + filename + ").";
-                LOG.error( msg, ex );
-                throw new FilterPersistentException( msg, ex );
-            }
+            final Writer out = new BufferedWriter( new FileWriter( filename ) );
+            getSerializer().toXML( filter, out );
+            out.close();
         }
-        else
+        catch ( Exception ex )
         {
-            throw new FilterPersistentException( "filer persistence not initialized." );
+            final String msg = "Failed to save filter " + filter.getName() + " (" + filename + ").";
+            LOG.error( msg, ex );
+            throw new FilterPersistentException( msg, ex );
         }
     }
 

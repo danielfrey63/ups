@@ -15,12 +15,14 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.io.xml.DomReader;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -97,6 +99,18 @@ public class DomDriver implements HierarchicalStreamDriver
     public HierarchicalStreamReader createReader( final InputStream xml )
     {
         return createReader( new InputSource( xml ) );
+    }
+
+    @Override
+    public HierarchicalStreamReader createReader( URL in )
+    {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public HierarchicalStreamReader createReader( File in )
+    {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     private HierarchicalStreamReader createReader( final InputSource source )

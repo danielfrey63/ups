@@ -115,12 +115,8 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
             }
 
             final String r = System.getProperty( "line.separator" );
-            boolean accept = false;
-            while ( accept )
-            {
-            }
             final String name = JOptionPane.showInputDialog( "Wie soll die Prüfungsliste heissen?" );
-            final String dirName = System.getProperty( "user.home" ) + "/.hcd2/filter/sc/";
+            final String dirName = System.getProperty( "user.home" ) + "/.hcd2/sc/filter/";
             final File dir = new File( dirName );
             dir.mkdirs();
             final String f = new File( dir, name + ".xml" ).getAbsolutePath();

@@ -15,6 +15,7 @@ import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 import com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * // TODO: Comment
@@ -37,7 +38,7 @@ public class ValidatingDateConverter extends AbstractSingleValueConverter
         this.formats = new ThreadSafeSimpleDateFormat[formats.length];
         for ( int i = 0; i < formats.length; i++ )
         {
-            this.formats[i] = new ThreadSafeSimpleDateFormat( formats[i], 1, 20 );
+            this.formats[i] = new ThreadSafeSimpleDateFormat( formats[i], TimeZone.getDefault(), 1, 20, false );
         }
     }
 

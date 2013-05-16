@@ -50,7 +50,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
         showPopUp( jb, null, selected );
     }
 
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings("unchecked")
     public void showPopUp( final Component jb, final T[] enabled, final T selected )
     {
         try
@@ -76,10 +76,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
                 {
                     jmi.setEnabled( ArrayUtils.contains( enabled, object ) && object != selected );
                 }
-                if ( object == selected )
-                {
-                    jmi.setEnabled( false );
-                }
+                jmi.setEnabled( object != selected );
                 if ( selected == object )
                 {
                     iLevel = i;
@@ -99,7 +96,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
             final int iMin = Math.min( iLevel, iJbOnScreen / iCHeight );
             c = getComponent( iMin );
             iCHeight = c.getPreferredSize().height;
-            show( jb, 0, ( iBHeight - iCHeight ) / 2 - c.getBounds().y );
+            show( jb, 0, (iBHeight - iCHeight) / 2 - c.getBounds().y );
         }
         catch ( Exception p_ex )
         {
@@ -107,7 +104,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
         }
     }
 
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings("unchecked")
     public void actionPerformed( final ActionEvent e )
     {
         final ObjectMenuItem<T> jmi = (ObjectMenuItem<T>) e.getSource();

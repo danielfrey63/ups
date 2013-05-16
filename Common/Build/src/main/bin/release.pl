@@ -35,7 +35,7 @@ chomp ($pwd);
 $dev = 0;
 
 # Print debug messages
-$debug = 1;
+$debug = 0;
 
 # Print trace messages
 $trace = 0;
@@ -48,7 +48,7 @@ $silent = 0;
 
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
-$reloadAllPomLocations = 1;
+$reloadAllPomLocations = 0;
 
 print "Settings are:\n";
 print ($dev == 1 ? "  DEV is on\n" : "  DEV is off\n");

@@ -14,7 +14,7 @@
         #end
         <shortcut online="true">
             <desktop/>
-            <menu submenu="eBot"/>
+            <menu submenu="eBot 5"/>
         </shortcut>
     </information>
     #if($allPermissions)
@@ -25,7 +25,7 @@
     <resources>
         <j2se
         #if($max-heap-size) max-heap-size="$max-heap-size"
-        #end version="$j2seVersion"/>
+        #end version="1.6+"/>
         $dependencies
         <property name="file.encoding" value="windows-1252"/>
     </resources>

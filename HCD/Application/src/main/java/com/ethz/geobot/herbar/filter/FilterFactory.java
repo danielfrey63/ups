@@ -37,8 +37,12 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
@@ -52,7 +56,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to store and load FilterModel from the persistent storage.
- *
+ * <p/>
  * Todo: Refactoring: Load built-in filter models directly into memory instead of persisting on HD.
  *
  * @author $Author: daniel_frey $
@@ -300,33 +304,28 @@ public class FilterFactory
 
     private Filter loadFilter( final String name ) throws FilterPersistentException
     {
-        final XStream x = getSerializer();
-        final String resource = "/com/ethz/geobot/herbar/filter/" + name + ".xml";
-        final InputStream input = getClass().getResourceAsStream( resource );
-        if ( input == null )
+        final String filter = generateFilterFileName( name );
+        try
         {
-            LOG.error( "\"" + resource + "\" not found in classpath" );
+            return loadFilter( new FileInputStream( filter ) );
         }
+        catch ( FileNotFoundException e )
+        {
+            final String msg = "cannot read \"" + filter + "\"";
+            LOG.error( msg );
+            throw new FilterPersistentException( msg, e );
+        }
+    }
+
+    private Filter loadFilter( final InputStream input )
+    {
+        final XStream x = getSerializer();
         final Filter filter = (Filter) x.fromXML( input );
         if ( filter.getBaseFilterName() == null )
         {
             filter.setBaseFilterName( "" );
         }
         return filter;
-    }
-
-    private XStream getSerializer()
-    {
-        final XStream x = new XStream();
-        x.alias( "filter", Filter.class );
-        x.alias( "detail", Detail.class );
-        x.addImplicitCollection( Filter.class, "details" );
-        x.addImplicitArray( Detail.class, "levels" );
-        x.alias( "level", String.class );
-        x.useAttributeFor( Filter.class, "fixed" );
-        x.useAttributeFor( Filter.class, "name" );
-        x.useAttributeFor( Detail.class, "scope" );
-        return x;
     }
 
     private void saveFilter( final Filter filter ) throws FilterPersistentException
@@ -344,6 +343,20 @@ public class FilterFactory
             LOG.error( msg, ex );
             throw new FilterPersistentException( msg, ex );
         }
+    }
+
+    private XStream getSerializer()
+    {
+        final XStream x = new XStream();
+        x.alias( "filter", Filter.class );
+        x.alias( "detail", Detail.class );
+        x.addImplicitCollection( Filter.class, "details" );
+        x.addImplicitArray( Detail.class, "levels" );
+        x.alias( "level", String.class );
+        x.useAttributeFor( Filter.class, "fixed" );
+        x.useAttributeFor( Filter.class, "name" );
+        x.useAttributeFor( Detail.class, "scope" );
+        return x;
     }
 
     /**

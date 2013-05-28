@@ -48,6 +48,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import javax.swing.AbstractListModel;
@@ -203,7 +204,7 @@ public class WizardFilterPane extends WizardPane
         {
             public void valueChanged( final ListSelectionEvent e )
             {
-                final Set mutableModels = getWizardModel().getHerbarContext().getChangeableModels();
+                final Collection mutableModels = getWizardModel().getHerbarContext().getChangeableModels();
                 button.setEnabled( ArrayUtils.contains( mutableModels.toArray(), list.getSelectedValue() ) );
             }
         } );
@@ -241,7 +242,7 @@ public class WizardFilterPane extends WizardPane
         {
             public void valueChanged( final ListSelectionEvent e )
             {
-                final Set mutableModels = getWizardModel().getHerbarContext().getChangeableModels();
+                final Collection mutableModels = getWizardModel().getHerbarContext().getChangeableModels();
                 button.setEnabled( ArrayUtils.contains( mutableModels.toArray(), list.getSelectedValue() ) );
             }
         } );
@@ -358,13 +359,12 @@ public class WizardFilterPane extends WizardPane
 
         public int getSize()
         {
-            final Set listData = wizardModel.getHerbarContext().getModels();
-            return listData.size();
+            return wizardModel.getHerbarContext().getModels().size();
         }
 
         public Object getElementAt( final int i )
         {
-            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final Collection<HerbarModel> models = wizardModel.getHerbarContext().getModels();
             final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
             Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
             return listData[i];
@@ -372,7 +372,7 @@ public class WizardFilterPane extends WizardPane
 
         public void deleteElement( final HerbarModel model )
         {
-            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final Collection<HerbarModel> models = wizardModel.getHerbarContext().getModels();
             final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
             Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
             final List<HerbarModel> list = new ArrayList<HerbarModel>( Arrays.asList( listData ) );
@@ -386,7 +386,7 @@ public class WizardFilterPane extends WizardPane
         {
             wizardModel.getHerbarContext().saveModel( model );
 
-            final Set<HerbarModel> models = wizardModel.getHerbarContext().getModels();
+            final Collection<HerbarModel> models = wizardModel.getHerbarContext().getModels();
             final HerbarModel[] listData = models.toArray( new HerbarModel[models.size()] );
             Arrays.sort( listData, new ToStringComparator<HerbarModel>() );
             final List<HerbarModel> list = new ArrayList<HerbarModel>( Arrays.asList( listData ) );

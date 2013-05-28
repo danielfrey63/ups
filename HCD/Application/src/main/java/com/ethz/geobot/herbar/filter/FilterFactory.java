@@ -28,6 +28,7 @@
  */
 package com.ethz.geobot.herbar.filter;
 
+import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -42,12 +43,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +84,7 @@ public class FilterFactory
             final String[] lists;
             if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "Liste 60", "Liste 200", "Liste 400", "Liste 600", "All" };
+                lists = new String[]{ "1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 All" };
             }
             else
             {
@@ -361,26 +363,26 @@ public class FilterFactory
      */
     public Set<String> getFilterNames()
     {
-        final Set<String> list = new HashSet<String>();
+        final Set<String> list = new TreeSet<String>( new ToStringComparator<String>() );
         if ( FILTER_LOCATION != null )
         {
-            final File file = new File( FILTER_LOCATION );
-            if ( file.exists() )
+            final File dir = new File( FILTER_LOCATION );
+            if ( dir.exists() )
             {
-                final File[] files = file.listFiles();
-                for ( final File file1 : files != null ? files : new File[0] )
+                final File[] files = dir.listFiles();
+                for ( final File file : files != null ? files : new File[0] )
                 {
-                    LOG.trace( "filter with name " + file1.getName() + " found." );
-                    list.add( generateFilterName( file1.getName() ) );
+                    LOG.trace( "filter with name " + file.getName() + " found." );
+                    list.add( generateFilterName( file.getName() ) );
                 }
             }
             else
             {
                 LOG.info( "create filter path (" + FILTER_LOCATION + ")" );
-                final boolean success = file.mkdirs();
+                final boolean success = dir.mkdirs();
                 if ( !success )
                 {
-                    LOG.error( "could not create directory \"" + file + "\"" );
+                    LOG.error( "could not create directory \"" + dir + "\"" );
                 }
             }
         }
@@ -391,10 +393,10 @@ public class FilterFactory
         return list;
     }
 
-    public Set<? extends HerbarModel> getFilters()
+    public Collection<? extends HerbarModel> getFilters()
     {
-        final Set<FilterModel> result = new HashSet<FilterModel>();
-        final Set<String> names = getFilterNames();
+        final Collection<FilterModel> result = new ArrayList<FilterModel>();
+        final Collection<String> names = getFilterNames();
         for ( final String name : names )
         {
             try

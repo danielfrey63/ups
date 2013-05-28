@@ -35,6 +35,7 @@ import com.ethz.geobot.herbar.modeapi.wizard.Wizard;
 import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import java.awt.Component;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -121,17 +122,17 @@ public class HerbarContextImpl implements HerbarContext
         return Application.getInstance().getModelNames();
     }
 
-    public Set getModels()
+    public Collection getModels()
     {
         return Application.getInstance().getModels();
     }
 
-    public Set getChangeableModelNames()
+    public Collection getChangeableModelNames()
     {
         return Application.getInstance().getChangeableModelNames();
     }
 
-    public Set getChangeableModels()
+    public Collection getChangeableModels()
     {
         return Application.getInstance().getChangeableModels();
     }

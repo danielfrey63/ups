@@ -23,6 +23,7 @@
 package com.ethz.geobot.herbar.modeapi;
 
 import com.ethz.geobot.herbar.model.HerbarModel;
+import java.util.Collection;
 import java.util.Set;
 import java.util.prefs.Preferences;
 
@@ -70,16 +71,16 @@ public interface HerbarContext
      */
     Set getModelNames();
 
-    Set<HerbarModel> getModels();
+    Collection<HerbarModel> getModels();
 
     /**
      * Return a set of all available filters.
      *
      * @return set of String objects
      */
-    Set getChangeableModelNames();
+    Collection getChangeableModelNames();
 
-    Set getChangeableModels();
+    Collection getChangeableModels();
 
     /**
      * Return the GUIManager for the application

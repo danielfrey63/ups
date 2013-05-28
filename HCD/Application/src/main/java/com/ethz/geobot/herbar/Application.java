@@ -27,6 +27,8 @@ import com.ethz.geobot.herbar.filter.FilterFactory;
 import com.ethz.geobot.herbar.filter.FilterPersistentException;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -131,9 +133,9 @@ public class Application
         return names;
     }
 
-    public Set<? extends HerbarModel> getModels()
+    public Collection<? extends HerbarModel> getModels()
     {
-        final Set<HerbarModel> models = new HashSet<HerbarModel>();
+        final Collection<HerbarModel> models = new ArrayList<HerbarModel>( );
         models.addAll( FilterFactory.getInstance().getFilters() );
         return models;
     }
@@ -143,10 +145,10 @@ public class Application
         return FilterFactory.getInstance().getFilterNames();
     }
 
-    public Set getChangeableModels()
+    public Collection getChangeableModels()
     {
-        final Set<? extends HerbarModel> filters = FilterFactory.getInstance().getFilters();
-        final Set<HerbarModel> result = new HashSet<HerbarModel>();
+        final Collection<? extends HerbarModel> filters = FilterFactory.getInstance().getFilters();
+        final Collection<HerbarModel> result = new HashSet<HerbarModel>();
         for ( final HerbarModel filter : filters )
         {
             final FilterModel filterModel = (FilterModel) filter;

@@ -421,7 +421,7 @@
                  </object>
                 </void>
                 <void property="name">
-                 <string>demoRadio</string>
+                 <string>dendroRadio</string>
                 </void>
                 <void method="auxiliary">
                  <void method="setProperty">
@@ -451,7 +451,7 @@
                 <string>javax.swing.JTextArea</string>
                 <void method="setProperty">
                  <string>text</string>
-                 <string>Prüfungs-Demo (nur auf Windows)</string>
+                 <string>Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.</string>
                 </void>
                 <void method="setProperty">
                  <string>lineWrap</string>
@@ -470,7 +470,13 @@
                  <boolean>false</boolean>
                 </void>
                 <void property="name">
-                 <string>demoText</string>
+                 <string>textField3</string>
+                </void>
+                <void method="auxiliary">
+                 <void method="setProperty">
+                  <string>JavaCodeGenerator.variableLocal</string>
+                  <boolean>true</boolean>
+                 </void>
                 </void>
                </object>
                <object class="com.jformdesigner.model.FormLayoutConstraints">
@@ -532,7 +538,7 @@
                  <object idref="FormReference0"/>
                 </void>
                 <void property="name">
-                 <string>dendroRadio</string>
+                 <string>demoRadio</string>
                 </void>
                 <void method="auxiliary">
                  <void method="setProperty">
@@ -562,7 +568,7 @@
                 <string>javax.swing.JTextArea</string>
                 <void method="setProperty">
                  <string>text</string>
-                 <string>Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.</string>
+                 <string>Prüfungs-Demo (nur auf Windows)</string>
                 </void>
                 <void method="setProperty">
                  <string>lineWrap</string>
@@ -581,13 +587,7 @@
                  <boolean>false</boolean>
                 </void>
                 <void property="name">
-                 <string>textField3</string>
-                </void>
-                <void method="auxiliary">
-                 <void method="setProperty">
-                  <string>JavaCodeGenerator.variableLocal</string>
-                  <boolean>true</boolean>
-                 </void>
+                 <string>demoText</string>
                 </void>
                </object>
                <object class="com.jformdesigner.model.FormLayoutConstraints">

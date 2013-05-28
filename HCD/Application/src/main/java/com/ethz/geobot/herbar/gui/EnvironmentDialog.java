@@ -136,11 +136,11 @@ public class EnvironmentDialog extends JDialog
         textField1 = new JTextArea();
         systematicRadio = new JRadioButton();
         JTextArea textField2 = new JTextArea();
-        demoRadio = new JRadioButton();
-        demoText = new JTextArea();
-        textField5 = new JTextArea();
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
+        textField5 = new JTextArea();
+        demoRadio = new JRadioButton();
+        demoText = new JTextArea();
         textPane2 = new JTextPane();
         label1 = new JLabel();
         textPane3 = new JTextPane();
@@ -261,22 +261,22 @@ public class EnvironmentDialog extends JDialog
                         textField2.setEditable(false);
                         panel2.add(textField2, cc.xy(3, 3));
 
-                        //---- demoRadio ----
-                        demoRadio.addActionListener(new ActionListener() {
+                        //---- dendroRadio ----
+                        dendroRadio.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
                         });
-                        panel2.add(demoRadio, cc.xy(1, 5));
+                        panel2.add(dendroRadio, cc.xy(1, 5));
 
-                        //---- demoText ----
-                        demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
-                        demoText.setLineWrap(true);
-                        demoText.setWrapStyleWord(true);
-                        demoText.setOpaque(false);
-                        demoText.setEditable(false);
-                        panel2.add(demoText, cc.xy(3, 5));
+                        //---- textField3 ----
+                        textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
+                        textField3.setLineWrap(true);
+                        textField3.setWrapStyleWord(true);
+                        textField3.setOpaque(false);
+                        textField3.setEditable(false);
+                        panel2.add(textField3, cc.xy(3, 5));
 
                         //---- textField5 ----
                         textField5.setText("Zudem kann man sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMB vertraut machen (Pr\u00fcfungs-Demo).");
@@ -286,22 +286,22 @@ public class EnvironmentDialog extends JDialog
                         textField5.setEditable(false);
                         panel2.add(textField5, cc.xywh(1, 7, 3, 1));
 
-                        //---- dendroRadio ----
-                        dendroRadio.addActionListener(new ActionListener() {
+                        //---- demoRadio ----
+                        demoRadio.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
                         });
-                        panel2.add(dendroRadio, cc.xy(1, 9));
+                        panel2.add(demoRadio, cc.xy(1, 9));
 
-                        //---- textField3 ----
-                        textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
-                        textField3.setLineWrap(true);
-                        textField3.setWrapStyleWord(true);
-                        textField3.setOpaque(false);
-                        textField3.setEditable(false);
-                        panel2.add(textField3, cc.xy(3, 9));
+                        //---- demoText ----
+                        demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
+                        demoText.setLineWrap(true);
+                        demoText.setWrapStyleWord(true);
+                        demoText.setOpaque(false);
+                        demoText.setEditable(false);
+                        panel2.add(demoText, cc.xy(3, 9));
 
                         //---- textPane2 ----
                         textPane2.setOpaque(false);
@@ -309,38 +309,38 @@ public class EnvironmentDialog extends JDialog
                         panel2.add(textPane2, cc.xywh(1, 11, 3, 1));
 
                         //---- label1 ----
-                        label1.setText( "-" );
-                        label1.setHorizontalAlignment( SwingConstants.RIGHT );
+                        label1.setText("-");
+                        label1.setHorizontalAlignment(SwingConstants.RIGHT);
                         panel2.add(label1, cc.xy(1, 13));
 
                         //---- textPane3 ----
-                        textPane3.setOpaque( false );
-                        textPane3.setEditable( false );
+                        textPane3.setOpaque(false);
+                        textPane3.setEditable(false);
                         panel2.add(textPane3, cc.xy(3, 13));
 
                         //---- label2 ----
-                        label2.setText( "-" );
+                        label2.setText("-");
                         label2.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add( label2, cc.xy( 1, 15 ) );
+                        panel2.add(label2, cc.xy(1, 15));
 
                         //---- textPane4 ----
-                        textPane4.setOpaque( false );
+                        textPane4.setOpaque(false);
                         textPane4.setEditable(false);
-                        panel2.add( textPane4, cc.xy( 3, 15 ) );
+                        panel2.add(textPane4, cc.xy(3, 15));
 
                         //---- label3 ----
                         label3.setText("-");
-                        label3.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label3, cc.xy( 1, 17 ) );
+                        label3.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label3, cc.xy(1, 17));
 
                         //---- textPane5 ----
                         textPane5.setOpaque(false);
-                        textPane5.setEditable( false );
-                        panel2.add( textPane5, cc.xy( 3, 17 ) );
+                        textPane5.setEditable(false);
+                        panel2.add(textPane5, cc.xy(3, 17));
 
                         //---- label4 ----
-                        label4.setText( "-" );
-                        label4.setHorizontalAlignment( SwingConstants.RIGHT );
+                        label4.setText("-");
+                        label4.setHorizontalAlignment(SwingConstants.RIGHT);
                         panel2.add(label4, cc.xy(1, 19));
 
                         //---- textPane6 ----
@@ -350,13 +350,13 @@ public class EnvironmentDialog extends JDialog
 
                         //---- label5 ----
                         label5.setText("-");
-                        label5.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label5, cc.xy( 1, 21 ) );
+                        label5.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label5, cc.xy(1, 21));
 
                         //---- textPane7 ----
                         textPane7.setOpaque(false);
-                        textPane7.setEditable( false );
-                        panel2.add(textPane7, cc.xy( 3, 21 ));
+                        textPane7.setEditable(false);
+                        panel2.add(textPane7, cc.xy(3, 21));
 
                         //======== buttonBar2 ========
                         {
@@ -390,8 +390,8 @@ public class EnvironmentDialog extends JDialog
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(systematicRadio);
-        buttonGroup1.add(demoRadio);
         buttonGroup1.add(dendroRadio);
+        buttonGroup1.add(demoRadio);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -406,10 +406,10 @@ public class EnvironmentDialog extends JDialog
     private JButton acceptButton;
     private JTextArea textField1;
     public JRadioButton systematicRadio;
+    public JRadioButton dendroRadio;
+    private JTextArea textField5;
     public JRadioButton demoRadio;
     private JTextArea demoText;
-    private JTextArea textField5;
-    public JRadioButton dendroRadio;
     private JTextPane textPane2;
     private JLabel label1;
     private JTextPane textPane3;

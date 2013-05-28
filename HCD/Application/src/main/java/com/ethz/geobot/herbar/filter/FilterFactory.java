@@ -82,7 +82,7 @@ public class FilterFactory
             final String[] lists;
             if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "Liste  60", "Liste 200", "Liste 400", "Liste 600", "All" };
+                lists = new String[]{ "Liste 60", "Liste 200", "Liste 400", "Liste 600", "All" };
             }
             else
             {

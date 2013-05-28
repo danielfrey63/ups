@@ -8,7 +8,7 @@
     </bean>
 
     <bean id="title1" class="java.lang.String">
-        <constructor-arg value="Morphology"/>
+        <constructor-arg value="Morphologie"/>
     </bean>
 
     <bean id="title2" class="java.lang.String">

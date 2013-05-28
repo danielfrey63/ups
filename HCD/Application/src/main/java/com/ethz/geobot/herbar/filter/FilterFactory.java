@@ -196,9 +196,6 @@ public class FilterFactory
         if ( model == null )
         {
             final Filter filter = loadFilter( name );
-            // make sure renamed filter files are still consistent
-            filter.setName( name );
-            // make sure the base name exists
             final String base = filter.getBaseFilterName();
             boolean baseFilterFound = false;
             for ( Iterator<String> it = getFilterNames().iterator(); it.hasNext() && !baseFilterFound; )

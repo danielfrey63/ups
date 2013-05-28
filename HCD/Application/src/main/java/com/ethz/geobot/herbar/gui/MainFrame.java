@@ -29,21 +29,26 @@ import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
-import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
 import com.ethz.geobot.herbar.gui.commands.ActionSaveBounds;
+import com.ethz.geobot.herbar.gui.mode.ModeManager;
+import com.ethz.geobot.herbar.gui.mode.ModeNotFoundException;
 import com.ethz.geobot.herbar.gui.mode.ModeStateModel;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -81,6 +86,8 @@ public class MainFrame extends JFrame
     private JMenuItem quitItem;
 
     private StatusBar statusBar;
+
+    private ArrayList<Action> modeActions;
 
     //Construct the Mainframe
 
@@ -211,7 +218,15 @@ public class MainFrame extends JFrame
         quitItem = sub.add( new ActionQuit( this ) );
 
         sub = createMenu( "MENU.SETTINGS" );
-        sub.add( new ActionModeSelection( this, prefNode ) );
+        modeActions = new ArrayList<Action>();
+        final AbstractAction lesson = getModeMenu( "Lernen", "LessonMode" );
+        sub.add( lesson );
+        final JMenu game = new JMenu( "Spiele" );
+        final AbstractAction hangman = getModeMenu( "Hang Man", "Hangman" );
+        game.add( hangman );
+        game.add( getModeMenu( "Hasch Mich", "Catcher" ) );
+        game.add( getModeMenu( "Labyrinth", "Labyrinth" ) );
+        sub.add( game );
 
         sub = createMenu( "MENU.HERBAR" );
         sub.add( new ActionAppHelp( this ) );
@@ -225,6 +240,13 @@ public class MainFrame extends JFrame
         contentPane.add( statusBar, BorderLayout.SOUTH );
     }
 
+    private AbstractAction getModeMenu( final String name, final String mode )
+    {
+        final ActionMode action = new ActionMode( name, mode );
+        modeActions.add( action );
+        return action;
+    }
+
     /**
      * Returns the status bar object used in this frame.
      *
@@ -233,5 +255,34 @@ public class MainFrame extends JFrame
     public StatusBar getStatusBar()
     {
         return statusBar;
+    }
+
+    private class ActionMode extends AbstractAction
+    {
+        private final String mode;
+
+        public ActionMode( String name, String mode )
+        {
+            super( name );
+            this.mode = mode;
+        }
+
+        @Override
+        public void actionPerformed( ActionEvent event )
+        {
+            try
+            {
+                getModel().setMode( ModeManager.getInstance().getMode( mode ) );
+                for ( final Action action : modeActions )
+                {
+                    action.setEnabled( true );
+                }
+                this.setEnabled( false );
+            }
+            catch ( ModeNotFoundException e )
+            {
+                LOG.error( "Mode not found", e );
+            }
+        }
     }
 }

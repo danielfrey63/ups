@@ -39,10 +39,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.Reader;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
@@ -84,7 +82,7 @@ public class FilterFactory
             final String[] lists;
             if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "Liste 60", "Liste 200", "Liste 400", "Liste 600", "All" };
+                lists = new String[]{ "Liste  60", "Liste 200", "Liste 400", "Liste 600", "All" };
             }
             else
             {

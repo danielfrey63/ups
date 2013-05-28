@@ -109,10 +109,10 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             final HerbarGUIManager guiManager = context.getHerbarGUIManager();
             final JFrame parent = guiManager.getParentFrame();
             final HerbarModel herbarModel;
-            // Todo: Before Release: distinguish between sc and de mode
+            // Todo: Release 5.0: distinguish between sc and de mode
             if ( true )
             {
-                // Todo: Before Release: change back when final release is done
+                // Todo: Release 5.0: change back when final release is done
                 herbarModel = context.getDataModel();
 //                herbarModel = context.getModel("Level 600");
             }

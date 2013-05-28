@@ -29,7 +29,6 @@ import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
-import com.ethz.geobot.herbar.gui.commands.ActionConvertFilterFromUst;
 import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
@@ -206,7 +205,8 @@ public class MainFrame extends JFrame
         JMenu sub;
         sub = createMenu( "MENU.APPLICATION" );
         sub.add( new ActionSaveBounds( this, prefNode ) );
-        sub.add( new ActionConvertFilterFromUst( this ) );
+        // Todo: Release 5.1: Enable import command again
+        //sub.add( new ActionConvertFilterFromUst( this ) );
         sub.addSeparator();
         quitItem = sub.add( new ActionQuit( this ) );
 

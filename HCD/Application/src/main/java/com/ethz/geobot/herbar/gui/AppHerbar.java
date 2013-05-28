@@ -87,7 +87,7 @@ public class AppHerbar
 
                 // set frame position
                 final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
+                mainFrame.setSize( (int) (screenSize.width / 1.2), (int) (screenSize.height / 1.2) );
                 WindowUtils.centerOnScreen( mainFrame );
 
                 // load old user settings
@@ -104,7 +104,7 @@ public class AppHerbar
         return mainFrame;
     }
 
-    private void setupDirectories(final int selection)
+    private void setupDirectories( final int selection )
     {
         switch ( selection )
         {
@@ -114,15 +114,15 @@ public class AppHerbar
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
                 System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
-                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_SC ));
+                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_SC ) );
                 break;
             default: // case 2
-                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_DE) );
+                System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_DE ) );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ).replace( "${hcd.mode}", DIR_DE ) );
-                System.setProperty( "herbar.exam.default_list", System.getProperty("herbar.exam.default_list.de") );
+                System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.de" ) );
                 System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
-                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_DE ));
+                System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_DE ) );
                 break;
         }
         LOG.info( "setting database to (xmatrix.input.db): " + System.getProperty( "xmatrix.input.db" ) );

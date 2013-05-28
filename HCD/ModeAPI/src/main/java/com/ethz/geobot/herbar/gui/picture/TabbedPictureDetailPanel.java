@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 import org.apache.log4j.Logger;
-
 import static ch.jfactory.resource.ImageLocator.PICT_LOCATOR;
 import static java.lang.System.currentTimeMillis;
 
@@ -56,7 +55,7 @@ public class TabbedPictureDetailPanel extends JTabbedPane
 
             public void handleCachingException( final Throwable e )
             {
-                if ( e instanceof ImageCacheException && !( e instanceof ImageRetrieveException ) )
+                if ( e instanceof ImageCacheException && !(e instanceof ImageRetrieveException) )
                 {
                     final ImageCacheException imageCacheException = (ImageCacheException) e;
                     final String message;

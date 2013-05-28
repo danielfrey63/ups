@@ -257,7 +257,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     public void changeScope()
     {
         final TaxTreeDialog fd = new TaxTreeDialog( parent, taxStateModel.getModel().getRootTaxon() );
-        fd.setSize( 400, 400 );
+        fd.setSize( 600, 800 );
         fd.setLocationRelativeTo( getTopLevelAncestor() );
         fd.setVisible( true );
         if ( fd.isAccepted() )
@@ -281,7 +281,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         {
             final ListDialog<Taxon> dialog = new ListDialog<Taxon>( parent, "DIALOG.FOCUS", copy );
             dialog.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-            dialog.setSize( 300, 300 );
+            dialog.setSize( 400, 800 );
             dialog.setLocationRelativeTo( getTopLevelAncestor() );
             dialog.setVisible( true );
             if ( dialog.isAccepted() )

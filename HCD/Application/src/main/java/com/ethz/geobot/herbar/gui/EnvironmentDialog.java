@@ -41,11 +41,13 @@ import java.util.prefs.Preferences;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.text.html.HTMLDocument;
@@ -74,13 +76,24 @@ public class EnvironmentDialog extends JDialog
     private void initCustomize()
     {
         getRootPane().setDefaultButton( okButton );
-        textPane.setContentType( "text/html" );
-        final Font font = UIManager.getFont( "Label.font" );
-        final String bodyRule = "body { font-family: " + font.getFamily() + "; font-size: " + font.getSize() + "pt; }";
-        ( (HTMLDocument) textPane.getDocument() ).getStyleSheet().addRule( bodyRule );
-        textPane.setText( "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Z\u00fcrich) f\u00fcr nichtkommerzielle Zwecke im Studium kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer pers\u00f6nlichen Weiterbildung nutzen m\u00f6chten, werden gebeten, f\u00fcr die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Unterricht, 85-761469-0, Vermerk \"eBot\"<br>IBAN: 59 0900 0000 8576 1469 0<br>BIC: POFICHBEXXX<br></b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bez\u00fcglich Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt." );
+        setText( textPane, "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Z\u00fcrich) f\u00fcr nichtkommerzielle Zwecke im Studium kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer pers\u00f6nlichen Weiterbildung nutzen m\u00f6chten, werden gebeten, f\u00fcr die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Unterricht, 8044 Z\u00fcrich, 85-761469-0, Vermerk \"eBot\"<br>IBAN: 59 0900 0000 8576 1469 0<br>BIC: POFICHBEXXX<br></b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bez\u00fcglich Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt." );
+        setText( textPane2, "Im <b>Themenbereich Systematik</b> stehen insgesamt 609 Taxa auf dem Art-Level zur Verf\u00fcgung (4 Flechten, 5 Moose, 18 Farne, 12 Gymnospermen und 570 Angiospermen). Dieser Gesamtstoff kann je nach Lernziel \u00fcber verschiedene Stofflisten eingeschr\u00e4nkt werden:");
+        setText( textPane3, "Liste 60 enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann).");
+        setText( textPane4, "Liste 200 enth\u00e4lt 200 Arten; diese sind Pr\u00fcfungsstoff (Teil Artenkenntnis) f\u00fcr Studierende der Biologie und Pharmazie an der ETH Z\u00fcrich. Die Liste 200 ist auch identisch mit der Z\u00fcrcher Liste f\u00fcr die Zertifizierungsstufe 200.");
+        setText( textPane5, "Liste 400 enth\u00e4lt die f\u00fcr die Zertifizierungsstufe 400 verlangten Arten.");
+        setText( textPane6, "Liste 600 enth\u00e4lt die f\u00fcr die Zertifizierungsstufe 600 verlangten Arten.");
+        setText( textPane7, "Alle Taxa ist die vollst\u00e4ndige Liste mit allen 609 Taxa in eBot." );
         demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
         demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
+    }
+
+    private void setText( final JTextPane field, final String text )
+    {
+        field.setContentType( "text/html" );
+        final Font font = UIManager.getFont( "Label.font" );
+        final String bodyRule = "body { font-family: " + font.getFamily() + "; font-size: " + font.getSize() + "pt; }";
+        ( (HTMLDocument) field.getDocument() ).getStyleSheet().addRule( bodyRule );
+        field.setText( text );
     }
 
     private Preferences getPreferences()
@@ -102,6 +115,10 @@ public class EnvironmentDialog extends JDialog
         initCopyright();
     }
 
+    private void setChoice1() {
+        // TODO add your code here
+    }
+
     private void initComponents()
     {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -121,8 +138,20 @@ public class EnvironmentDialog extends JDialog
         JTextArea textField2 = new JTextArea();
         demoRadio = new JRadioButton();
         demoText = new JTextArea();
+        textField5 = new JTextArea();
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
+        textPane2 = new JTextPane();
+        label1 = new JLabel();
+        textPane3 = new JTextPane();
+        label2 = new JLabel();
+        textPane4 = new JTextPane();
+        label3 = new JLabel();
+        textPane5 = new JTextPane();
+        label4 = new JLabel();
+        textPane6 = new JTextPane();
+        label5 = new JLabel();
+        textPane7 = new JTextPane();
         JPanel buttonBar2 = new JPanel();
         okButton = new JButton();
         CellConstraints cc = new CellConstraints();
@@ -154,7 +183,7 @@ public class EnvironmentDialog extends JDialog
                         "default"));
 
                     //---- textField4 ----
-                    textField4.setText("Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themebereich");
+                    textField4.setText("Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themenbereich");
                     textField4.setLineWrap(true);
                     textField4.setWrapStyleWord(true);
                     textField4.setOpaque(false);
@@ -188,6 +217,7 @@ public class EnvironmentDialog extends JDialog
                             //---- acceptButton ----
                             acceptButton.setText("Akzeptieren");
                             acceptButton.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent e) {
                                     acceptButtonActionPerformed();
                                 }
@@ -198,13 +228,12 @@ public class EnvironmentDialog extends JDialog
                     }
                     tabbedPane1.addTab("Copyright", panel3);
 
-
                     //======== panel2 ========
                     {
                         panel2.setBorder(Borders.DIALOG_BORDER);
                         panel2.setLayout(new FormLayout(
                             "10dlu, $lcgap, default:grow",
-                            "4*(default, $lgap), fill:default:grow, $lgap, default"));
+                            "6*(default, $lgap), 5*(top:default, $lgap), fill:default:grow, 2*($lgap, default)"));
 
                         //---- textField1 ----
                         textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus.");
@@ -216,6 +245,12 @@ public class EnvironmentDialog extends JDialog
 
                         //---- systematicRadio ----
                         systematicRadio.setSelected(true);
+                        systematicRadio.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setChoice1();
+                            }
+                        });
                         panel2.add(systematicRadio, cc.xy(1, 3));
 
                         //---- textField2 ----
@@ -227,6 +262,12 @@ public class EnvironmentDialog extends JDialog
                         panel2.add(textField2, cc.xy(3, 3));
 
                         //---- demoRadio ----
+                        demoRadio.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setChoice1();
+                            }
+                        });
                         panel2.add(demoRadio, cc.xy(1, 5));
 
                         //---- demoText ----
@@ -237,8 +278,22 @@ public class EnvironmentDialog extends JDialog
                         demoText.setEditable(false);
                         panel2.add(demoText, cc.xy(3, 5));
 
+                        //---- textField5 ----
+                        textField5.setText("Zudem kann man sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMB vertraut machen (Pr\u00fcfungs-Demo).");
+                        textField5.setLineWrap(true);
+                        textField5.setWrapStyleWord(true);
+                        textField5.setOpaque(false);
+                        textField5.setEditable(false);
+                        panel2.add(textField5, cc.xywh(1, 7, 3, 1));
+
                         //---- dendroRadio ----
-                        panel2.add(dendroRadio, cc.xy(1, 7));
+                        dendroRadio.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setChoice1();
+                            }
+                        });
+                        panel2.add(dendroRadio, cc.xy(1, 9));
 
                         //---- textField3 ----
                         textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
@@ -246,7 +301,62 @@ public class EnvironmentDialog extends JDialog
                         textField3.setWrapStyleWord(true);
                         textField3.setOpaque(false);
                         textField3.setEditable(false);
-                        panel2.add(textField3, cc.xy(3, 7));
+                        panel2.add(textField3, cc.xy(3, 9));
+
+                        //---- textPane2 ----
+                        textPane2.setOpaque(false);
+                        textPane2.setEditable(false);
+                        panel2.add(textPane2, cc.xywh(1, 11, 3, 1));
+
+                        //---- label1 ----
+                        label1.setText( "-" );
+                        label1.setHorizontalAlignment( SwingConstants.RIGHT );
+                        panel2.add(label1, cc.xy(1, 13));
+
+                        //---- textPane3 ----
+                        textPane3.setOpaque( false );
+                        textPane3.setEditable( false );
+                        panel2.add(textPane3, cc.xy(3, 13));
+
+                        //---- label2 ----
+                        label2.setText( "-" );
+                        label2.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add( label2, cc.xy( 1, 15 ) );
+
+                        //---- textPane4 ----
+                        textPane4.setOpaque( false );
+                        textPane4.setEditable(false);
+                        panel2.add( textPane4, cc.xy( 3, 15 ) );
+
+                        //---- label3 ----
+                        label3.setText("-");
+                        label3.setHorizontalAlignment( SwingConstants.RIGHT );
+                        panel2.add( label3, cc.xy( 1, 17 ) );
+
+                        //---- textPane5 ----
+                        textPane5.setOpaque(false);
+                        textPane5.setEditable( false );
+                        panel2.add( textPane5, cc.xy( 3, 17 ) );
+
+                        //---- label4 ----
+                        label4.setText( "-" );
+                        label4.setHorizontalAlignment( SwingConstants.RIGHT );
+                        panel2.add(label4, cc.xy(1, 19));
+
+                        //---- textPane6 ----
+                        textPane6.setOpaque(false);
+                        textPane6.setEditable(false);
+                        panel2.add(textPane6, cc.xy(3, 19));
+
+                        //---- label5 ----
+                        label5.setText("-");
+                        label5.setHorizontalAlignment( SwingConstants.RIGHT );
+                        panel2.add( label5, cc.xy( 1, 21 ) );
+
+                        //---- textPane7 ----
+                        textPane7.setOpaque(false);
+                        textPane7.setEditable( false );
+                        panel2.add(textPane7, cc.xy( 3, 21 ));
 
                         //======== buttonBar2 ========
                         {
@@ -258,16 +368,16 @@ public class EnvironmentDialog extends JDialog
                             //---- okButton ----
                             okButton.setText("OK");
                             okButton.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent e) {
                                     okButtonActionPerformed();
                                 }
                             });
                             buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add(buttonBar2, cc.xywh(1, 11, 3, 1));
+                        panel2.add(buttonBar2, cc.xywh(1, 25, 3, 1));
                     }
                     tabbedPane1.addTab("Auswahl", panel2);
-
                 }
                 contentPanel.add(tabbedPane1, cc.xy(2, 3));
             }
@@ -298,7 +408,19 @@ public class EnvironmentDialog extends JDialog
     public JRadioButton systematicRadio;
     public JRadioButton demoRadio;
     private JTextArea demoText;
+    private JTextArea textField5;
     public JRadioButton dendroRadio;
+    private JTextPane textPane2;
+    private JLabel label1;
+    private JTextPane textPane3;
+    private JLabel label2;
+    private JTextPane textPane4;
+    private JLabel label3;
+    private JTextPane textPane5;
+    private JLabel label4;
+    private JTextPane textPane6;
+    private JLabel label5;
+    private JTextPane textPane7;
     private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

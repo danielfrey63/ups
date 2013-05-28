@@ -32,6 +32,7 @@ import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.Name;
 
 /**
  * abstract representation of the Herbar-data-model.
@@ -72,6 +73,8 @@ public interface HerbarModel
     public Ecology getEcology();
 
     public Medicine getMedicine();
+
+    public Name getSynonyms();
 
     /**
      * Return a list of picture themes.

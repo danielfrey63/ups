@@ -35,6 +35,7 @@ import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.Name;
 
 /**
  * @author $Author: daniel_frey $
@@ -80,6 +81,12 @@ public class GraphHerbarModelImpl implements HerbarModel
     {
         final GraphNode root = AbsGraphModel.getModel().getRoot();
         return (Medicine) root.getChildren( Medicine.class ).get( 0 );
+    }
+
+    public Name getSynonyms()
+    {
+        final GraphNode root = AbsGraphModel.getModel().getRoot();
+        return (Name) root.getChildren( Name.class ).get( 0 );
     }
 
     public PictureTheme[] getPictureThemes()

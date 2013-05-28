@@ -31,6 +31,7 @@ import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.Name;
 import java.util.prefs.Preferences;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +77,10 @@ public class InterrogatorComplexityFactory
             else if ( type.isAssignableFrom( Medicine.class ) )
             {
                 root = model.getMedicine().getAsGraphNode();
+            }
+            else if ( type.isAssignableFrom( Name.class ) )
+            {
+                root = model.getSynonyms().getAsGraphNode();
             }
             else
             {

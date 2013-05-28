@@ -54,6 +54,11 @@ import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
 import com.ethz.geobot.herbar.model.trait.MorphologySubject;
 import com.ethz.geobot.herbar.model.trait.MorphologyText;
 import com.ethz.geobot.herbar.model.trait.MorphologyValue;
+import com.ethz.geobot.herbar.model.trait.Name;
+import com.ethz.geobot.herbar.model.trait.NameAttribute;
+import com.ethz.geobot.herbar.model.trait.NameSubject;
+import com.ethz.geobot.herbar.model.trait.NameText;
+import com.ethz.geobot.herbar.model.trait.NameValue;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -216,6 +221,12 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
         detailModel = new TransientDetailResultModel( MedicineText.class, "3", MedicineAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
                 new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
+                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+        resultModel.add( detailModel );
+
+        detailModel = new TransientDetailResultModel( NameText.class, "4", NameAttribute.class, herbarModel );
+        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                new Class[]{Name.class, NameSubject.class, NameAttribute.class, NameValue.class, NameText.class},
                 new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
         resultModel.add( detailModel );
 

@@ -32,6 +32,7 @@ import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
 import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
+import com.ethz.geobot.herbar.model.trait.Name;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -108,6 +109,10 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     public Medicine getMedicine()
     {
         return dependentModel.getMedicine();
+    }
+    public Name getSynonyms()
+    {
+        return dependentModel.getSynonyms();
     }
 
     public PictureTheme[] getPictureThemes()

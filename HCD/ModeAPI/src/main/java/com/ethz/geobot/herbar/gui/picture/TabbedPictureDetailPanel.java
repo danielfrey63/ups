@@ -140,8 +140,8 @@ public class TabbedPictureDetailPanel extends JTabbedPane
     {
         LOG.debug( "initializing picture details panel for " + theme + " with cache " + cache );
         final PictureDetailPanel panel = new PictureDetailPanel( cache );
-        this.add( panel, theme.getName() );
         list.add( theme );
+        this.add( panel, theme.getName() );
         return panel;
     }
 
@@ -170,15 +170,53 @@ public class TabbedPictureDetailPanel extends JTabbedPane
         }
     }
 
-    public void setEnabled( final int t, final boolean b )
+    public void setEnabled( final int index, final boolean b )
     {
-        final PictureTheme theme = getObjectAt( t );
+        final PictureTheme theme = getObjectAt( index );
         final String color = b ? "000000" : "999999";
-        this.setTitleAt( t, "<html><body><font color='#" + color + "'>" + theme.getName() + "</font></body></html>" );
+        final String title;
+        if ( index == 0 )
+        {
+            title = "<html><body><font color='#" + color + "'><b>" + theme.getName() + "</b></font></body></html>";
+        }
+        else
+        {
+            title = "<html><body><font color='#" + color + "'>" + theme.getName() + "</font></body></html>";
+        }
+        setTitleAt( index, title );
     }
 
     public PictureDetailPanel getThemePanel( final PictureTheme t )
     {
         return getDetail( getObjectIndex( t ) );
+    }
+
+    @Override
+    public void setSelectedIndex( int newIndex )
+    {
+        final int oldIndex = getSelectedIndex();
+        if ( oldIndex >= 0 && oldIndex < list.size() )
+        {
+            final String oldName = getObjectAt( oldIndex ).getName();
+            final String oldTitle = getTitleAt( oldIndex );
+            final String oldDeselectedTitle = oldTitle.replace( "<b>" + oldName + "</b>", oldName );
+            setTitleAt( oldIndex, oldDeselectedTitle );
+        }
+        super.setSelectedIndex( newIndex );
+        if ( newIndex >= 0 && newIndex < list.size() )
+        {
+            final String newName = getObjectAt( newIndex ).getName();
+            final String newTitle = getTitleAt( newIndex );
+            final String newSelectedTitle;
+            if ( newName != null && newName.equals( newTitle ) )
+            {
+                newSelectedTitle = "<html><body><font color='#000000'><b>" + newName + "</b></font></body></html>";
+            }
+            else
+            {
+                newSelectedTitle = newTitle.replace( newName, "<b>" + newName + "</b>" );
+            }
+            setTitleAt( newIndex, newSelectedTitle );
+        }
     }
 }

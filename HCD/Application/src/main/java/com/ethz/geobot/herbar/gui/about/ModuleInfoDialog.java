@@ -24,22 +24,16 @@ package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.component.table.BeanTableModel;
+import ch.jfactory.component.table.SortState;
 import ch.jfactory.component.table.SortedTable;
 import ch.jfactory.update.LocalVersionLocator;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
 import java.util.List;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -55,11 +49,6 @@ public class ModuleInfoDialog extends I15nComponentDialog
         super( owner, prefix );
     }
 
-    public ModuleInfoDialog( final Dialog owner, final String prefix ) throws HeadlessException
-    {
-        super( owner, prefix );
-    }
-
     protected JComponent createComponentPanel()
     {
         // display version info of modules in table list
@@ -70,6 +59,9 @@ public class ModuleInfoDialog extends I15nComponentDialog
                 true );
         final SortedTable moduleTable = new SortedTable( btm );
         moduleTable.setFocusable( false );
+        final SortState sortState = new SortState();
+        sortState.setDirective( new SortState.Directive( SortState.SORT_DESCENDING, 0 ) );
+        moduleTable.getSortableModel().setSortState( sortState );
 
         final TableColumnModel model = moduleTable.getColumnModel();
 
@@ -96,63 +88,5 @@ public class ModuleInfoDialog extends I15nComponentDialog
     protected boolean isCancelShowing()
     {
         return false;
-    }
-
-    public static class TableColumnAjuster
-    {
-        private final TableColumnModel model;
-
-        private final JTable table;
-
-        private final float[] relativeWidths;
-
-        public TableColumnAjuster( final JTable table, final float[] relativeWidths )
-        {
-            this.table = table;
-            this.relativeWidths = relativeWidths;
-            model = table.getColumnModel();
-            final int columnCount = model.getColumnCount();
-            if ( columnCount != relativeWidths.length )
-            {
-                throw new IllegalArgumentException( "Relative widths given and columns must be same count" );
-            }
-            float total = 0;
-            for ( final float relativeWidth : relativeWidths )
-            {
-                total += relativeWidth;
-            }
-            if ( total != 1.0 )
-            {
-                throw new IllegalArgumentException( "Relative widths must sum up to 1.0" );
-            }
-
-            table.addHierarchyListener( new HierarchyListener()
-            {
-                public void hierarchyChanged( final HierarchyEvent e )
-                {
-                    final Container top = table.getTopLevelAncestor();
-                    if ( top instanceof JDialog || top instanceof JFrame )
-                    {
-                        if ( top.isVisible() && table.isVisible() )
-                        {
-                            ajustColumns();
-                        }
-                    }
-                }
-            } );
-        }
-
-        public void ajustColumns()
-        {
-            final int mode = table.getAutoResizeMode();
-            table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
-            final int totalColumnWidth = model.getTotalColumnWidth();
-            final int columnCount = model.getColumnCount();
-            for ( int i = 0; i < columnCount; i++ )
-            {
-                model.getColumn( i ).setWidth( (int) ( totalColumnWidth * relativeWidths[i] ) );
-            }
-            table.setAutoResizeMode( mode );
-        }
     }
 }

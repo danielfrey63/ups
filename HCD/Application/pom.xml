@@ -24,113 +24,91 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.4.2088</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.2168</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1987</version>
             <artifactId>ch.xmatrix.le.catcher</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2235</version>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1997</version>
             <artifactId>ch.xmatrix.le.exam</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.2002</version>
             <artifactId>ch.xmatrix.le.gallows</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2254</version>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1992</version>
             <artifactId>ch.xmatrix.le.maze</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2249</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2249</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2239</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2239</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2244</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>4.0.1226</version>
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
         <!-- transient dependencies to be resolved properly for versions -->
         <dependency>
             <groupId>ch.xmatrix.ups.pmb.exam</groupId>
-            <version>2.0.2039</version>
             <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
-            <version>3.0.1709</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>2.0.730</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
-            <version>1.0.1684</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>3.0.1648</version>
             <artifactId>ch.xmatrix.ups.server.client</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.server</groupId>
-            <version>3.0.1681</version>
             <artifactId>ch.xmatrix.ups.server.interface</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
-            <version>2.0.1909</version>
             <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
-            <version>2.0.2007</version>
             <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
         </dependency>
         <dependency>
@@ -151,7 +129,6 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
-            <version>1.2.1461</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>
@@ -188,7 +165,6 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
-            <version>1.78.1752</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>

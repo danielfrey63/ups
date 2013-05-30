@@ -29,6 +29,7 @@ import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.pmb.exam.Main;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
+import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -63,12 +64,6 @@ public class AppHerbar
 
     /** reference to the one and only mainframe */
     private static MainFrame mainFrame = null;
-
-    /** Started in the "scientific" environment. */
-    public static final String ENV_SCIENTIFIC = "scientific";
-
-    /** Started in the "dendrology" environment. */
-    public static final String ENV_DENDROLOGY = "dendrology";
 
     public AppHerbar( final int selection )
     {
@@ -112,7 +107,7 @@ public class AppHerbar
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_SC ) );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ).replace( "${hcd.mode}", DIR_SC ) );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.sc" ) );
-                System.setProperty( "xmatrix.subject", ENV_SCIENTIFIC );
+                System.setProperty( "xmatrix.subject", HerbarContext.ENV_SCIENTIFIC );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/systematic/" );
                 System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_SC ) );
                 break;
@@ -120,7 +115,7 @@ public class AppHerbar
                 System.setProperty( "xmatrix.input.db", System.getProperty( "xmatrix.input.db" ).replace( "${hcd.mode}", DIR_DE ) );
                 System.setProperty( "herbar.filter.location", System.getProperty( "herbar.filter.location" ).replace( "${hcd.mode}", DIR_DE ) );
                 System.setProperty( "herbar.exam.default_list", System.getProperty( "herbar.exam.default_list.de" ) );
-                System.setProperty( "xmatrix.subject", ENV_DENDROLOGY );
+                System.setProperty( "xmatrix.subject", HerbarContext.ENV_DENDROLOGY );
                 System.setProperty( "xmatrix.cache.net.path", System.getProperty( "xmatrix.cache.net.path" ) + "/dendro/" );
                 System.setProperty( "xmatrix.cache.local.path", System.getProperty( "xmatrix.cache.local.path" ).replace( "${hcd.mode}", DIR_DE ) );
                 break;

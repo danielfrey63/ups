@@ -30,7 +30,7 @@ package com.ethz.geobot.herbar.filter;
 
 import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
-import com.ethz.geobot.herbar.gui.AppHerbar;
+import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -82,7 +82,7 @@ public class FilterFactory
             LOG.info( "reading mapping file for filter definition." );
 
             final String[] lists;
-            if ( AppHerbar.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
+            if ( HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
                 lists = new String[]{ "1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 All" };
             }

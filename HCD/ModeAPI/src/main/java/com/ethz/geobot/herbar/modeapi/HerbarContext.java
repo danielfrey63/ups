@@ -35,6 +35,12 @@ import java.util.prefs.Preferences;
  */
 public interface HerbarContext
 {
+    /** Started in the "scientific" environment. */
+    String ENV_SCIENTIFIC = "scientific";
+
+    /** Started in the "dendrology" environment. */
+    String ENV_DENDROLOGY = "dendrology";
+
     /**
      * Return the data model of the application.
      *

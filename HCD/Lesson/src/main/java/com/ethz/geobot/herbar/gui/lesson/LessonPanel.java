@@ -114,18 +114,8 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             final HerbarGUIManager guiManager = context.getHerbarGUIManager();
             final JFrame parent = guiManager.getParentFrame();
             final HerbarModel herbarModel;
-            // Todo: Release 5.0: distinguish between sc and de mode
-            if ( true )
-            {
-                // Todo: Release 5.0: change back when final release is done
-                herbarModel = context.getDataModel();
-//                herbarModel = context.getModel("Level 600");
-            }
-            else
-            {
-                herbarModel = context.getDataModel();
-            }
 
+            herbarModel = context.getDataModel();
             taxStateModel = new TaxStateModel( herbarModel );
 
             lessonPanel = new PropertyDisplay( context, taxStateModel );
@@ -182,6 +172,12 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
             } );
 
             splitPane.setDividerLocation( 760 );
+
+            if ( System.getProperty( "xmatrix.subject", "" ).equals( HerbarContext.ENV_SCIENTIFIC ) )
+            {
+                // Todo: Release 5.0: uncomment when final release is done
+//                taxStateModel.setModel(context.getModel("4 Liste 600"));
+            }
         }
         catch ( RuntimeException e )
         {
@@ -202,32 +198,32 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
         detailModel = new TransientDetailResultModel( MorphologyText.class, "1", MorphologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{ Morphology.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Fernliegende", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 1, 1}, {1, 0, 0, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+                new Class[]{ Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 0, 0, 0, 2 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, { 1, 0, 1, 1 }, { 1, 0, 0, 2 }, { 0, 0, 0, 2 }, { 1, 0, 0, 2 } } ) ) );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Naheliegende", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class},
-                new int[][]{{0, 0, 0, 2}, {0, 0, 0, 2}, {0, 0, 0, 1}, {0, 0, 0, 1}, {1, 0, 0, 1}, {1, 0, 1, 2}, {0, 0, 0, 2}, {1, 0, 0, 2}} ) ) );
+                new Class[]{ Taxon.class, MorphologyText.class, MorphologyValue.class, MorphologyAttribute.class, MorphologySubject.class, MorphologyAttribute.class, MorphologyValue.class, MorphologyText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 0, 0, 0, 2 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, { 1, 0, 0, 1 }, { 1, 0, 1, 2 }, { 0, 0, 0, 2 }, { 1, 0, 0, 2 } } ) ) );
         resultModel.add( detailModel );
 
         detailModel = new TransientDetailResultModel( EcologyText.class, "2", EcologyAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{ Ecology.class, EcologySubject.class, EcologyAttribute.class, EcologyValue.class, EcologyText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
         resultModel.add( detailModel );
 
         detailModel = new TransientDetailResultModel( MedicineText.class, "3", MedicineAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{ Medicine.class, MedicineSubject.class, MedicineAttribute.class, MedicineValue.class, MedicineText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
         resultModel.add( detailModel );
 
         detailModel = new TransientDetailResultModel( NameText.class, "4", NameAttribute.class, herbarModel );
         detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{Name.class, NameSubject.class, NameAttribute.class, NameValue.class, NameText.class},
-                new int[][]{{0, 0, 0, 2}, {1, 1, 0, 2}, {1, 1, 0, 2}, {0, 1, 0, 2}, {1, 1, 0, 2}} ) ) );
+                new Class[]{ Name.class, NameSubject.class, NameAttribute.class, NameValue.class, NameText.class },
+                new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
         resultModel.add( detailModel );
 
         return resultModel;

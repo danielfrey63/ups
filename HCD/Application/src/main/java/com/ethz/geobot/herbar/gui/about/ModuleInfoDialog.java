@@ -24,7 +24,7 @@ package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.component.table.BeanTableModel;
-import ch.jfactory.component.table.SortState;
+import ch.jfactory.component.table.SortableTableModel;
 import ch.jfactory.component.table.SortedTable;
 import ch.jfactory.update.LocalVersionLocator;
 import java.awt.BorderLayout;
@@ -57,11 +57,10 @@ public class ModuleInfoDialog extends I15nComponentDialog
                 new String[]{"name", "version"},
                 new String[]{"Name", "Version"},
                 true );
-        final SortedTable moduleTable = new SortedTable( btm );
+        final SortableTableModel tm = new SortableTableModel( btm );
+        tm.getSortState().setDecreasedDirective( 0 );
+        final SortedTable moduleTable = new SortedTable( tm );
         moduleTable.setFocusable( false );
-        final SortState sortState = new SortState();
-        sortState.setDirective( new SortState.Directive( SortState.SORT_DESCENDING, 0 ) );
-        moduleTable.getSortableModel().setSortState( sortState );
 
         final TableColumnModel model = moduleTable.getColumnModel();
 

@@ -40,6 +40,7 @@ import com.ethz.geobot.herbar.model.trait.MorphologyAttribute;
 import com.ethz.geobot.herbar.model.trait.MorphologySubject;
 import com.ethz.geobot.herbar.model.trait.MorphologyText;
 import com.ethz.geobot.herbar.model.trait.MorphologyValue;
+import com.ethz.geobot.herbar.model.trait.NameText;
 import java.awt.Component;
 import java.util.HashMap;
 import javax.swing.JTree;
@@ -70,6 +71,8 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
         iconMapping.put( EcologyAttribute.class, "ECOATTRIBUTE" );
         iconMapping.put( EcologyValue.class, "ECOVALUE" );
         iconMapping.put( EcologyText.class, "ECOTEXT" );
+
+        iconMapping.put( NameText.class, "SYNTEXT" );
     }
 
     /** @see TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean) */

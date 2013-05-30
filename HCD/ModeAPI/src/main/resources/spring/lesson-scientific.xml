@@ -40,7 +40,7 @@
     </bean>
 
     <bean id="icon4" class="java.lang.String">
-        <constructor-arg value="iconADD.gif"/>
+        <constructor-arg value="iconSYN.gif"/>
     </bean>
 
     <bean id="filter1" class="ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter">

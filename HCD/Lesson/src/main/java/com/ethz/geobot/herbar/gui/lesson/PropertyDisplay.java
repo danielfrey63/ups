@@ -72,7 +72,7 @@ public class PropertyDisplay extends JTabbedPane
         display1 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, morTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter1" ) );
         display2 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, ecoTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter2" ) );
         display3 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, medTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter3" ) );
-        display4 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, namTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter4" ) );
+        display4 = new AttributeTreePanel( herbarContext, herbarModel.getLevel( "Art" ), taxStateModel, namTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter4" ) );
         this.setTabPlacement( BOTTOM );
         this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
         this.addTab( morTitle, getIcon( (String) context.getBean( "icon1" ) ), display1 );

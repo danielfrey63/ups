@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="stopperClass" class="java.lang.String">
+    <bean id="stopper" class="java.lang.String">
         <constructor-arg value="Klasse"/>
     </bean>
 
-    <bean id="stopperSpecies" class="java.lang.String">
+    <bean id="stopperSyn" class="java.lang.String">
         <constructor-arg value="Art"/>
     </bean>
 

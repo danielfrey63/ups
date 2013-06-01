@@ -61,24 +61,34 @@ public class PropertyDisplay extends JTabbedPane
      */
     public PropertyDisplay( final HerbarContext herbarContext, final TaxStateModel taxStateModel )
     {
-        final String subject = System.getProperty( "xmatrix.subject" );
-        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "spring/lesson-" + subject + ".xml" );
-        herbarModel = herbarContext.getDataModel();
-        final Level stopLevel = herbarModel.getLevel( (String) context.getBean( "stopperClass" ) );
-        final String morTitle = (String) context.getBean( "title1" );
-        final String ecoTitle = (String) context.getBean( "title2" );
-        final String medTitle = (String) context.getBean( "title3" );
-        final String namTitle = (String) context.getBean( "title4" );
-        display1 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, morTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter1" ) );
-        display2 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, ecoTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter2" ) );
-        display3 = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, medTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter3" ) );
-        display4 = new AttributeTreePanel( herbarContext, herbarModel.getLevel( (String) context.getBean( "stopperSpecies" ) ), taxStateModel, namTitle, (VirtualGraphTreeNodeFilter) context.getBean( "filter4" ) );
         this.setTabPlacement( BOTTOM );
         this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
-        this.addTab( morTitle, getIcon( (String) context.getBean( "icon1" ) ), display1 );
-        this.addTab( ecoTitle, getIcon( (String) context.getBean( "icon2" ) ), display2 );
-        this.addTab( medTitle, getIcon( (String) context.getBean( "icon3" ) ), display3 );
-        this.addTab( namTitle, getIcon( (String) context.getBean( "icon4" ) ), display4 );
+
+        final String subject = System.getProperty( "xmatrix.subject" );
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "spring/lesson-" + subject + ".xml" );
+        display1 = getTab( herbarContext, taxStateModel, context, "stopper", "title1", "filter1", "icon1" );
+        display2 = getTab( herbarContext, taxStateModel, context, "stopper", "title2", "filter2", "icon2" );
+        display3 = getTab( herbarContext, taxStateModel, context, "stopper", "title3", "filter3", "icon3" );
+        display4 = getTab( herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4", "icon4" );
+    }
+
+    private AttributeTreePanel getTab( final HerbarContext herbarContext, final TaxStateModel taxStateModel, final ClassPathXmlApplicationContext context,
+                                       final String stopperLevel, final String title, final String filter, final String icon )
+    {
+        if ( context.containsBean( title ) )
+        {
+            herbarModel = herbarContext.getDataModel();
+            final Level stopLevel = herbarModel.getLevel( (String) context.getBean( stopperLevel ) );
+            final String titleString = (String) context.getBean( title );
+            final AttributeTreePanel display = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, titleString,
+                    (VirtualGraphTreeNodeFilter) context.getBean( filter ) );
+            this.addTab( titleString, getIcon( (String) context.getBean( icon ) ), display );
+            return display;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void setTaxFocus( final Taxon focus )
@@ -86,7 +96,10 @@ public class PropertyDisplay extends JTabbedPane
         display1.setTaxonFocus( focus );
         display2.setTaxonFocus( focus );
         display3.setTaxonFocus( focus );
-        display4.setTaxonFocus( focus );
+        if ( display4 != null )
+        {
+            display4.setTaxonFocus( focus );
+        }
     }
 
     public String toString()

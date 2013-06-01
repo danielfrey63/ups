@@ -220,12 +220,14 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
                 new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
         resultModel.add( detailModel );
 
-        detailModel = new TransientDetailResultModel( NameText.class, "4", NameAttribute.class, herbarModel );
-        detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
-                new Class[]{ Name.class, NameSubject.class, NameAttribute.class, NameValue.class, NameText.class },
-                new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
-        resultModel.add( detailModel );
-
+        if ( System.getProperty( "xmatrix.subject", "" ).equals( HerbarContext.ENV_SCIENTIFIC ) )
+        {
+            detailModel = new TransientDetailResultModel( NameText.class, "4", NameAttribute.class, herbarModel );
+            detailModel.add( InterrogatorComplexityFactory.getFilter( herbarModel, "Alle", VirtualGraphTreeNodeFilter.getFilter(
+                    new Class[]{ Name.class, NameSubject.class, NameAttribute.class, NameValue.class, NameText.class },
+                    new int[][]{ { 0, 0, 0, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 2 }, { 0, 1, 0, 2 }, { 1, 1, 0, 2 } } ) ) );
+            resultModel.add( detailModel );
+        }
         return resultModel;
     }
 

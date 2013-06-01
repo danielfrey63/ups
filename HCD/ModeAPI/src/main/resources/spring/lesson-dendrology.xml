@@ -7,6 +7,10 @@
         <constructor-arg value="Gattung"/>
     </bean>
 
+    <bean id="stopperSyn" class="java.lang.String">
+        <constructor-arg value="Gattung"/>
+    </bean>
+
     <bean id="title1" class="java.lang.String">
         <constructor-arg value="Morphology"/>
     </bean>

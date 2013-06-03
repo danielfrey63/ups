@@ -21,34 +21,42 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>1.4.2088</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.2168</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.tools</groupId>
+            <version>3.0.1709</version>
             <artifactId>ch.xmatrix.ups.tools.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>2.0.1909</version>
             <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>1.0.2182</version>
             <artifactId>ch.xmatrix.ups.pmb.test</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.pmb</groupId>
+            <version>2.0.2007</version>
             <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
+            <version>2.0.730</version>
             <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.ups.data</groupId>
+            <version>1.0.1684</version>
             <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
         </dependency>
         <dependency>
@@ -85,6 +93,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.1752</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>
@@ -93,6 +102,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1461</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>

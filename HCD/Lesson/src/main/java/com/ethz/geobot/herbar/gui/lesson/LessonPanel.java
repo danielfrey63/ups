@@ -175,8 +175,7 @@ public class LessonPanel extends ModeActivationPanel implements PropertyChangeLi
 
             if ( System.getProperty( "xmatrix.subject", "" ).equals( HerbarContext.ENV_SCIENTIFIC ) )
             {
-                // Todo: Release 5.0: uncomment when final release is done
-//                taxStateModel.setModel(context.getModel("4 Liste 600"));
+                taxStateModel.setModel( context.getModel( "4 Liste 600" ) );
             }
         }
         catch ( RuntimeException e )

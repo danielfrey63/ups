@@ -53,7 +53,7 @@ public class EndDialog extends JDialog
         {
             public void actionPerformed( final ActionEvent e )
             {
-                if ( new String( textField2.getPassword() ).equals( "F2013" ) )
+                if ( new String( textField2.getPassword() ).equals( "H2013" ) )
                 {
                     setVisible( false );
                 }

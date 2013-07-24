@@ -46,7 +46,7 @@ public abstract class ExamForm extends JFrame
 
         if ( exam )
         {
-            targetProvider = new ClockPanel.CountDownProvider( 39 * 60 * 1000, new ActionListener()
+            targetProvider = new ClockPanel.CountDownProvider( 30 * 60 * 1000, new ActionListener()
             {
                 public void actionPerformed( final ActionEvent e )
                 {

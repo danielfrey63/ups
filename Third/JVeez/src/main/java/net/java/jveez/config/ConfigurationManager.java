@@ -22,6 +22,7 @@
 package net.java.jveez.config;
 
 import java.io.File;
+import java.io.IOException;
 import net.java.jveez.cache.impl.PersistentThumbnailLoader;
 import org.apache.log4j.Logger;
 import org.garret.perst.Storage;
@@ -35,7 +36,7 @@ public class ConfigurationManager
 
     private static final ConfigurationManager instance = new ConfigurationManager();
 
-    private final File jveezHome;
+    private File jveezHome = null;
 
     private Storage storage;
 
@@ -50,10 +51,7 @@ public class ConfigurationManager
     {
         super();
 
-        jveezHome = new File( System.getProperty( "user.home" ), ".jveez" );
-        jveezHome.mkdirs();
-
-        final File configFile = new File( jveezHome, "config.db" );
+        final File configFile = new File( getJveezHome(), "config.db" );
 
         storage = StorageFactory.getInstance().createStorage();
         storage.setProperty( "perst.object.cache.kind", "weak" );
@@ -87,6 +85,28 @@ public class ConfigurationManager
 
     public File getJveezHome()
     {
+        if ( jveezHome == null )
+        {
+            if ( System.getProperty( "userUserHome" ) != null )
+            {
+                jveezHome = new File( System.getProperty( "user.home" ), ".jveez" );
+                jveezHome.mkdirs();
+            }
+            else
+            {
+                try
+                {
+                    jveezHome = File.createTempFile( "jveez", "" );
+                    jveezHome.delete();
+                    jveezHome.mkdirs();
+                    jveezHome.deleteOnExit();
+                }
+                catch ( IOException e )
+                {
+                    LOG.error( "cannot create temporary directory", e );
+                }
+            }
+        }
         return jveezHome;
     }
 

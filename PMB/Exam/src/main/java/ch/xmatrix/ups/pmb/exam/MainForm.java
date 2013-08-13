@@ -65,7 +65,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import static java.awt.event.KeyEvent.KEY_PRESSED;
 import static java.awt.event.KeyEvent.KEY_RELEASED;
 import static java.awt.event.KeyEvent.VK_L;
@@ -130,7 +129,7 @@ public class MainForm extends ExamForm
         final long free = runtime.freeMemory();
         final long total = runtime.totalMemory();
         final int memoryPerPicture = 1024 * 1024 * 25;
-        cacheSize = ( max - total + free ) / memoryPerPicture;
+        cacheSize = (max - total + free) / memoryPerPicture;
         ImageStore.setInitialMemoryCacheSize( (int) cacheSize );
         LOG.info( "initialized cache size to " + cacheSize );
     }
@@ -177,13 +176,13 @@ public class MainForm extends ExamForm
                         }
                     }
                     // ESC hides the configuration options
-                    else if ( ( code == KeyEvent.VK_ESCAPE ) && ( passwordController != null ) )
+                    else if ( (code == KeyEvent.VK_ESCAPE) && (passwordController != null) )
                     {
                         initEditMode( false );
                     }
-                    // ALT-O shows the students dialog or inits the credentials
+                    // ALT-O shows the students dialog or initializes the credentials
                     // only active if not started in exam mode
-                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O && MainForm.class.getResource("/test/test.xml") == null )
+                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O && MainForm.class.getResource( "/test/test.xml" ) == null )
                     {
                         if ( studentsController == null )
                         {
@@ -210,16 +209,24 @@ public class MainForm extends ExamForm
                     if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_F4 && exam )
                     {
                         time.stop();
-                        final QuitDialog dialog = new QuitDialog( MainForm.this );
-                        dialog.setVisible( true );
-                        if ( dialog.hit )
+                        final QuitDialog dialog;
+                        if ( System.getProperty( "noPassword" ) == null )
                         {
-                            doQuit();
+                            dialog = new QuitDialog( MainForm.this );
+                            dialog.setVisible( true );
+                            if ( dialog.hit )
+                            {
+                                doQuit();
+                            }
+                            else
+                            {
+                                time.start();
+                                Toolkit.getDefaultToolkit().beep();
+                            }
                         }
                         else
                         {
-                            time.start();
-                            Toolkit.getDefaultToolkit().beep();
+                            doQuit();
                         }
                         return true;
                     }
@@ -424,7 +431,7 @@ public class MainForm extends ExamForm
                             ImageStore.getInstance().getImage( fileEntry.getPicture() );
                         }
                     }
-                    final double delta = ( System.currentTimeMillis() - start ) / 1000.0;
+                    final double delta = (System.currentTimeMillis() - start) / 1000.0;
                     LOG.debug( "finished caching " + count + " images in " + delta + "secs" );
                 }
             };
@@ -559,7 +566,7 @@ public class MainForm extends ExamForm
     protected void doQuit()
     {
         final PasswordDialogController passwordChecker = new PasswordDialogController();
-        if ( passwordController == null || ( !passwordChecker.hasRegistry() || passwordChecker.check() ) )
+        if ( passwordController == null || (!passwordChecker.hasRegistry() || passwordChecker.check()) )
         {
             try
             {

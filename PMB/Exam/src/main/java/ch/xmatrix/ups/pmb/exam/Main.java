@@ -40,7 +40,7 @@ public class Main
         {
             public void run()
             {
-                if ( ExamForm.class.getResource( "/test/test.xml" ) != null )
+                if ( ExamForm.class.getResource( "/test/test.xml" ) != null && System.getProperty( "noPassword" ) == null )
                 {
                     final StartDialog startDialog = new StartDialog( null );
                     startDialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );

@@ -7,7 +7,7 @@
         </layout>
     </appender>
     <appender name="file" class="org.apache.log4j.FileAppender">
-        <param name="File" value="${java.io.tmpdir}/pmbx.log"/>
+        <param name="File" value="${user.home}/pmbx.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d [%5p] %30C:%4L %m%n"/>
         </layout>

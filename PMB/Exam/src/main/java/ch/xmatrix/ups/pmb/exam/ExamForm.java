@@ -46,14 +46,18 @@ public abstract class ExamForm extends JFrame
 
         if ( exam )
         {
-            targetProvider = new ClockPanel.CountDownProvider( 30 * 60 * 1000, new ActionListener()
+            final int duration = Integer.parseInt( System.getProperty( "duration", "30" ) );
+            targetProvider = new ClockPanel.CountDownProvider( duration * 60 * 1000, new ActionListener()
             {
                 public void actionPerformed( final ActionEvent e )
                 {
                     time.stop();
                     setVisible( false );
                     targetProvider.reset();
-                    new EndDialog( ExamForm.this ).setVisible( true );
+                    if ( System.getProperty( "noPassword" ) == null )
+                    {
+                        new EndDialog( ExamForm.this ).setVisible( true );
+                    }
                     doQuit();
                 }
             } );
@@ -111,142 +115,150 @@ public abstract class ExamForm extends JFrame
         CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setResizable(false);
-        setUndecorated(true);
-        addWindowListener(new WindowAdapter() {
+        setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
+        setResizable( false );
+        setUndecorated( true );
+        addWindowListener( new WindowAdapter()
+        {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing( WindowEvent e )
+            {
                 doQuit();
             }
-        });
+        } );
         Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        contentPane.setLayout( new BorderLayout() );
 
         //======== menuBar ========
         {
-            menuBar.setVisible(false);
+            menuBar.setVisible( false );
 
             //======== menu1 ========
             {
-                menu1.setText("Datei");
-                menu1.setMnemonic('D');
+                menu1.setText( "Datei" );
+                menu1.setMnemonic( 'D' );
 
                 //---- menuItem1 ----
-                menuItem1.setText("Habitus Bildposition speichern");
-                menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_MASK));
-                menuItem1.setMnemonic('H');
-                menuItem1.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
+                menuItem1.setText( "Habitus Bildposition speichern" );
+                menuItem1.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_H, KeyEvent.CTRL_MASK ) );
+                menuItem1.setMnemonic( 'H' );
+                menuItem1.addActionListener( new ActionListener()
+                {
+                    public void actionPerformed( ActionEvent e )
+                    {
                         doSaveHabitusPosition();
                     }
-                });
-                menu1.add(menuItem1);
+                } );
+                menu1.add( menuItem1 );
 
                 //---- menuItem3 ----
-                menuItem3.setText("Andere Bildposition speichern");
-                menuItem3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
-                menuItem3.setMnemonic('A');
-                menuItem3.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
+                menuItem3.setText( "Andere Bildposition speichern" );
+                menuItem3.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_S, KeyEvent.CTRL_MASK ) );
+                menuItem3.setMnemonic( 'A' );
+                menuItem3.addActionListener( new ActionListener()
+                {
+                    public void actionPerformed( ActionEvent e )
+                    {
                         doSaveOtherPosition();
                     }
-                });
-                menu1.add(menuItem3);
+                } );
+                menu1.add( menuItem3 );
                 menu1.addSeparator();
 
                 //---- menuItem4 ----
-                menuItem4.setText("Beenden");
-                menuItem4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, KeyEvent.ALT_MASK));
-                menuItem4.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
+                menuItem4.setText( "Beenden" );
+                menuItem4.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_F4, KeyEvent.ALT_MASK ) );
+                menuItem4.addActionListener( new ActionListener()
+                {
+                    public void actionPerformed( ActionEvent e )
+                    {
                         doQuit();
                     }
-                });
-                menu1.add(menuItem4);
+                } );
+                menu1.add( menuItem4 );
             }
-            menuBar.add(menu1);
+            menuBar.add( menu1 );
         }
-        setJMenuBar(menuBar);
+        setJMenuBar( menuBar );
 
         //======== panel1 ========
         {
-            panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
-            panel1.setBackground(new Color(51, 51, 51));
-            panel1.setLayout(new FormLayout(
-                "default:grow, $lcgap, [100dlu,default], $lcgap, default:grow",
-                "fill:136px, $lgap, fill:default:grow, $lgap, default"));
-            ((FormLayout)panel1.getLayout()).setColumnGroups(new int[][] {{1, 5}});
+            panel1.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
+            panel1.setBackground( new Color( 51, 51, 51 ) );
+            panel1.setLayout( new FormLayout(
+                    "default:grow, $lcgap, [100dlu,default], $lcgap, default:grow",
+                    "fill:136px, $lgap, fill:default:grow, $lgap, default" ) );
+            ((FormLayout) panel1.getLayout()).setColumnGroups( new int[][]{ { 1, 5 } } );
 
             //======== listPanel ========
             {
-                listPanel.setBackground(Color.gray);
-                listPanel.setLayout(new FormLayout(
-                    "pref:grow, default:grow",
-                    "default:grow"));
+                listPanel.setBackground( Color.gray );
+                listPanel.setLayout( new FormLayout(
+                        "pref:grow, default:grow",
+                        "default:grow" ) );
 
                 //======== thumbnailScroller ========
                 {
-                    thumbnailScroller.setOpaque(false);
-                    thumbnailScroller.setBorder(null);
-                    thumbnailScroller.setBackground(Color.gray);
+                    thumbnailScroller.setOpaque( false );
+                    thumbnailScroller.setBorder( null );
+                    thumbnailScroller.setBackground( Color.gray );
 
                     //---- thumbnailList ----
-                    thumbnailList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    thumbnailList.setBackground(Color.gray);
-                    thumbnailList.setOpaque(false);
-                    thumbnailScroller.setViewportView(thumbnailList);
+                    thumbnailList.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+                    thumbnailList.setBackground( Color.gray );
+                    thumbnailList.setOpaque( false );
+                    thumbnailScroller.setViewportView( thumbnailList );
                 }
-                listPanel.add(thumbnailScroller, cc.xy(1, 1));
+                listPanel.add( thumbnailScroller, cc.xy( 1, 1 ) );
 
                 //---- time ----
-                time.setForeground(Color.orange);
-                time.setBackground(Color.gray);
-                time.setFont(new Font("SansSerif", Font.BOLD, 20));
-                time.setFocusable(false);
-                listPanel.add(time, cc.xy(2, 1));
+                time.setForeground( Color.orange );
+                time.setBackground( Color.gray );
+                time.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
+                time.setFocusable( false );
+                listPanel.add( time, cc.xy( 2, 1 ) );
             }
-            panel1.add(listPanel, cc.xywh(1, 1, 5, 1));
+            panel1.add( listPanel, cc.xywh( 1, 1, 5, 1 ) );
 
             //---- imageLeft ----
-            imageLeft.setOpaque(false);
-            imageLeft.setBackground(Color.gray);
-            panel1.add(imageLeft, cc.xy(1, 3));
+            imageLeft.setOpaque( false );
+            imageLeft.setBackground( Color.gray );
+            panel1.add( imageLeft, cc.xy( 1, 3 ) );
 
             //======== panel2 ========
             {
-                panel2.setOpaque(false);
-                panel2.setBackground(new Color(51, 51, 51));
-                panel2.setLayout(new FormLayout(
-                    "default:grow",
-                    "default"));
+                panel2.setOpaque( false );
+                panel2.setBackground( new Color( 51, 51, 51 ) );
+                panel2.setLayout( new FormLayout(
+                        "default:grow",
+                        "default" ) );
 
                 //======== navigationScroller ========
                 {
-                    navigationScroller.setOpaque(false);
-                    navigationScroller.setBorder(null);
+                    navigationScroller.setOpaque( false );
+                    navigationScroller.setBorder( null );
 
                     //---- navigation ----
-                    navigation.setBackground(new Color(51, 51, 51));
-                    navigation.setForeground(new Color(204, 204, 204));
-                    navigation.setRootVisible(false);
-                    navigation.setShowsRootHandles(true);
-                    navigation.setOpaque(false);
-                    navigationScroller.setViewportView(navigation);
+                    navigation.setBackground( new Color( 51, 51, 51 ) );
+                    navigation.setForeground( new Color( 204, 204, 204 ) );
+                    navigation.setRootVisible( false );
+                    navigation.setShowsRootHandles( true );
+                    navigation.setOpaque( false );
+                    navigationScroller.setViewportView( navigation );
                 }
-                panel2.add(navigationScroller, cc.xy(1, 1));
+                panel2.add( navigationScroller, cc.xy( 1, 1 ) );
             }
-            panel1.add(panel2, cc.xy(3, 3));
+            panel1.add( panel2, cc.xy( 3, 3 ) );
 
             //---- imageRight ----
-            imageRight.setOpaque(false);
-            imageRight.setBackground(Color.gray);
-            panel1.add(imageRight, cc.xy(5, 3));
-            panel1.add(statusBar, cc.xywh(1, 5, 5, 1));
+            imageRight.setOpaque( false );
+            imageRight.setBackground( Color.gray );
+            panel1.add( imageRight, cc.xy( 5, 3 ) );
+            panel1.add( statusBar, cc.xywh( 1, 5, 5, 1 ) );
         }
-        contentPane.add(panel1, BorderLayout.CENTER);
+        contentPane.add( panel1, BorderLayout.CENTER );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

@@ -85,6 +85,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.2351</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>
@@ -93,6 +94,7 @@
         </dependency>
         <dependency>
             <groupId>com.smardec</groupId>
+            <version>1.2.1461</version>
             <artifactId>com.smardec.mousegestures</artifactId>
         </dependency>
         <dependency>

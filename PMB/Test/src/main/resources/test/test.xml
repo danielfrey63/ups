@@ -8,26 +8,26 @@
                 <plantList/>
             </registration>
             <setTaxa>
-                <setTaxon known="true"><specimenModel taxon="Tilia platyphyllos"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Papaver rhoeas"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Lolium multiflorum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Gymnadenia conopsea"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Acer platanoides"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Polygonum aviculare"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Lamium maculatum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Humulus lupulus"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Carex elata"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Cerastium fontanum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Quercus robur"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Ligusticum mutellina"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Capsella bursa-pastoris"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Abies alba"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Polygonatum odoratum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Bromus tectorum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Vincetoxicum hirundinaria"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Robinia pseudoacacia"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Galium aparine"/></setTaxon>
                 <setTaxon known="true"><specimenModel taxon="Alopecurus pratensis"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Centaurea scabiosa"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Dryopteris filix-mas"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Phyteuma spicatum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Polygonatum multiflorum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Primula elatior"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Eriophorum latifolium"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Carex elata"/></setTaxon>
                 <setTaxon known="true"><specimenModel taxon="Sorbus aucuparia"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Poa pratensis"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Peucedanum ostruthium"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Helictotrichon pubescens"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Centaurea jacea"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Dryopteris filix-mas"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Lonicera xylosteum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Alnus incana"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Prunella vulgaris"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Hippocrepis comosa"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Erigeron annuus"/></setTaxon>
             </setTaxa>
         </examsetModel>
     </examsetModels>

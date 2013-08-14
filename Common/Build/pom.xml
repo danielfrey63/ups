@@ -462,7 +462,7 @@
             <dependency>
                 <groupId>net.java.jveez</groupId>
                 <artifactId>net.java.jveez</artifactId>
-                <version>1.78-SNAPSHOT</version>
+                <version>1.79-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.sf.jfcunit</groupId>

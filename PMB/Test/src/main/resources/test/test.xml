@@ -8,26 +8,26 @@
                 <plantList/>
             </registration>
             <setTaxa>
-                <setTaxon known="true"><specimenModel taxon="Arrhenatherum elatius"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Tilia cordata"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Phyteuma orbiculare"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Carex hirta"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Juniperus sabina"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Humulus lupulus"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Eriophorum angustifolium"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Primula elatior"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Quercus petraea"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Potentilla reptans"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Ligustrum vulgare"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Asplenium viride"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Neottia nidus-avis"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Cerastium fontanum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Athyrium filix-femina"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Luzula sylvatica"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Lolium multiflorum"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Centaurea scabiosa"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Acer pseudoplatanus"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Geranium sanguineum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Lolium perenne"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Viola calcarata"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Fraxinus excelsior"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Matricaria discoidea"/></setTaxon>
                 <setTaxon known="true"><specimenModel taxon="Reynoutria japonica"/></setTaxon>
-                <setTaxon known="true"><specimenModel taxon="Crataegus monogyna"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Euonymus europaeus"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Carex pallescens"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Stellaria media"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Fagus sylvatica"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Cirsium arvense"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Anthoxanthum odoratum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Hieracium murorum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Asplenium trichomanes"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Viburnum lantana"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Allium ursinum"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Primula veris"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Carex nigra"/></setTaxon>
+                <setTaxon known="true"><specimenModel taxon="Prunus spinosa"/></setTaxon>
             </setTaxa>
         </examsetModel>
     </examsetModels>

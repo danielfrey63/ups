@@ -21,5 +21,6 @@
         <module>Test</module>
         <module>HelloWorld</module>
         <module>Upload</module>
+        <module>Pentaho</module>
     </modules>
 </project>

@@ -594,13 +594,13 @@
                     <jdkLevel>1.6</jdkLevel>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-idea-plugin</artifactId>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>false</downloadJavadocs>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-idea-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<downloadSources>true</downloadSources>-->
+                    <!--<downloadJavadocs>false</downloadJavadocs>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -703,68 +703,6 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>geobot1</id>
-            <url>http://geobot1.ethz.ch/releases</url>
-        </repository>
-        <repository>
-            <id>maclocal</id>
-            <url>${archiva}/repository/internal/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>local-snapshots</id>
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <!-- Overwrite default maven repository -->
-            <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>local-plugin</id>
-            <url>${archiva}/repository/internal/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>local-plugin-snapshots</id>
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <!-- Overwrite default maven repository -->
-            <!--<url>http://repo1.maven.org/maven2</url>-->
-            <url>${archiva}/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
     <!--
     <profiles>
         <profile>

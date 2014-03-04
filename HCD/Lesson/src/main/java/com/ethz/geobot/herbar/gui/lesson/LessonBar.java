@@ -22,28 +22,23 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
-import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.application.view.border.BevelDirection;
 import ch.jfactory.application.view.border.ThinBevelBorder;
 import ch.jfactory.application.view.dialog.ListDialog;
-import ch.jfactory.application.view.status.StatusBar;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.ObjectPopup;
 import ch.jfactory.lang.ToStringComparator;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
-import com.ethz.geobot.herbar.gui.TaxonNameInterrogator;
 import com.ethz.geobot.herbar.gui.tax.TaxTreeDialog;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
-import com.ethz.geobot.herbar.modeapi.SimpleTaxStateModel;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,25 +51,32 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Level;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Scope;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.WEST;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class LessonBar extends JPanel implements ActionListener, IteratorControlListener, PropertyChangeListener
+public class LessonBar extends JPanel implements ActionListener, IteratorControlListener
 {
     private static final Logger LOG = LoggerFactory.getLogger( LessonBar.class );
 
     private static final int POP_UP_THRESHOLD = 8;
-
-    private static final String ASKING_PANEL = "askingPanel";
-
-    private static final String BREAD = "bread";
 
     private JButton listButton;
 
@@ -86,18 +88,6 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private JButton focusButton;
 
-    private JButton listLabel;
-
-    private JButton scopeLabel;
-
-    private JButton levelLabel;
-
-    private JButton orderLabel;
-
-    private JButton focusLabel;
-
-    private BreadCrumb bread;
-
     private final TaxStateModel taxStateModel;
 
     private final JFrame parent;
@@ -108,78 +98,39 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private IteratorControlPanel taxonControl;
 
-    protected TaxonNameInterrogator askingPanel;
-
-    protected CardLayout cards;
-
-    protected JPanel switcher;
+    protected TaxonNameInterrogatorBuilder breadCrumbBuilder;
 
     private final HerbarContext herbarContext;
 
     private ListPopUp listPopUp;
 
-    private final StatusBar statusBar;
-
     public LessonBar( final JFrame parent, final HerbarContext herbarModel, final TaxStateModel taxStateModel )
     {
-        // init object-vars
         this.parent = parent;
         this.taxStateModel = taxStateModel;
         this.herbarContext = herbarModel;
-        this.statusBar = herbarModel.getHerbarGUIManager().getStatusBar();
 
-        final JToolBar toolBar = createToolBar();
-        final JPanel breadCrumb = createBreadCrumb();
+        breadCrumbBuilder = new TaxonNameInterrogatorBuilder( parent, taxStateModel );
 
-        createStatusComponents();
-
-        setLayout( new BorderLayout( 0, 0 ) );
-        add( toolBar, BorderLayout.NORTH );
-        add( breadCrumb, BorderLayout.CENTER );
+        setLayout( new BorderLayout() );
+        add( createToolBar(), WEST );
+        add( breadCrumbBuilder.getPanel(), CENTER );
 
         // Data driven
         final Taxon focusTaxon = taxStateModel.getFocus();
-        bread.setTaxFocus( focusTaxon );
-        askingPanel.setTaxFocus( focusTaxon );
-        listLabel.setText( taxStateModel.getModel().toString() );
-        scopeLabel.setText( taxStateModel.getScope().getName() );
-        levelLabel.setText( taxStateModel.getLevel().getName() );
-        focusLabel.setText( taxStateModel.getFocus().getName() );
+        breadCrumbBuilder.setTaxFocus( focusTaxon );
         taxonControl.setCursor( taxStateModel.getTaxList() );
         setOrder();
+        levelButton.setText( taxStateModel.getLevel().getName() );
 
         // Register Listener
-        taxStateModel.addPropertyChangeListener( this );
         taxonControl.addIteratorControlListener( this );
-    }
-
-    private JPanel createBreadCrumb()
-    {
-        // Bread crumb and species name interrogation
-        bread = new BreadCrumb();
-
-        askingPanel = new TaxonNameInterrogator( new TaxonNameInterrogator.TransientInterrogatorModel() );
-
-        cards = new CardLayout();
-        switcher = new JPanel( cards );
-        switcher.add( bread, BREAD );
-        switcher.add( askingPanel, ASKING_PANEL );
-        switcher.setBorder( new EmptyBorder( 0, Constants.GAP_WITHIN_GROUP, 0, Constants.GAP_WITHIN_GROUP ) );
-
-        // Panel common to focus button and breadcrumb/interrogation
-        final JPanel lower = new JPanel( new BorderLayout() );
-        final int gap = Constants.GAP_BETWEEN_GROUP;
-        switcher.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ), new EmptyBorder( gap, gap, gap, gap ) ) );
-        lower.add( switcher, BorderLayout.CENTER );
-
-        return switcher;
     }
 
     private JToolBar createToolBar()
     {
         final String taxonCursorPrefix = Strings.getString( LessonMode.class, "BUTTON.NAVIGATION.PREFIX" );
         taxonControl = new IteratorControlPanel( taxonCursorPrefix );
-        taxonControl.setAlignment( SwingConstants.RIGHT );
 
         listButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.LIST", this );
         scopeButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.SCOPE", this );
@@ -188,57 +139,136 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         focusButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.FOCUS", this );
 
         final JToolBar toolBar = new JToolBar();
-        toolBar.setBorder( new ThinBevelBorder( BevelDirection.RAISED ) );
+        toolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ), new EmptyBorder( 0, 0, 1, 0 ) ) );
         toolBar.setFloatable( false );
         toolBar.setRollover( true );
         toolBar.setFocusable( false );
         toolBar.add( listButton );
-        toolBar.add( ComponentFactory.createSeparator() );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( scopeButton );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( levelButton );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( orderButton );
-        toolBar.add( focusButton );
-        toolBar.add( ComponentFactory.createSeparator() );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( taxonControl.getPrevButton() );
+        toolBar.add( taxonControl.getDisplay() );
         toolBar.add( taxonControl.getNextButton() );
-        toolBar.add( ComponentFactory.createSeparator() );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
+        toolBar.add( focusButton );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 12 ) );
+        toolBar.add( createSubModusSwitcher() );
 
         listButton.setEnabled( herbarContext.getModels().size() != 0 );
 
         return toolBar;
     }
 
-    private void createStatusComponents()
+    private JButton createSubModusSwitcher()
     {
-        listLabel = ComponentFactory.createLabelButton( LessonMode.class, "LABEL.LIST", this );
-        scopeLabel = ComponentFactory.createLabelButton( LessonMode.class, "LABEL.SCOPE", this );
-        levelLabel = ComponentFactory.createLabelButton( LessonMode.class, "LABEL.LEVEL", this );
-        orderLabel = ComponentFactory.createLabelButton( LessonMode.class, "LABEL.ORDER", this );
-        focusLabel = ComponentFactory.createLabelButton( LessonMode.class, "LABEL.FOCUS", this );
+        final SubMode[] subModi = SubMode.values();
+        final JButton subModesToggle = new JButton( subModi[0].name() );
+        subModesToggle.setFocusPainted( false );
+        subModesToggle.setText( Abfragen.name() );
+        subModesToggle.setPreferredSize( subModesToggle.getPreferredSize() );
+        subModesToggle.setText( Lernen.name() );
+        subModesToggle.setSize( subModesToggle.getPreferredSize() );
+        taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                listButton.setText( taxStateModel.getModel().toString() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( List.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                taxonControl.setCursor( taxStateModel.getTaxList() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Scope.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                scopeButton.setText( taxStateModel.getScope().getName() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Level.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                levelButton.setText( taxStateModel.getLevel().getName() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                final Taxon focus = (Taxon) evt.getNewValue();
+                taxonControl.getIteratorCursor().setCurrent( focus );
+                breadCrumbBuilder.setTaxFocus( focus );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( final PropertyChangeEvent evt )
+            {
+                //breadCrumbBuilder.setGlobalSubMode( (SubMode) evt.getNewValue() );
+                subModesToggle.setText( taxStateModel.getGlobalSubMode().name() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Ordered.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                setOrder();
+            }
+        } );
+        subModesToggle.addActionListener( new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                final int currentPos = Arrays.binarySearch( subModi, SubMode.valueOf( subModesToggle.getText() ) );
+                final SubMode newSubMode = subModi[( ( currentPos + 1 ) % 2 )];
+                breadCrumbBuilder.setGlobalSubMode( newSubMode );
+                taxStateModel.setGlobalSubMode( newSubMode );
+            }
+        } );
+        return subModesToggle;
     }
+
 
     public void actionPerformed( final ActionEvent e )
     {
         try
         {
             final Object source = e.getSource();
-            if ( source == listButton || source == listLabel )
+            if ( source == listButton )
             {
                 changeList( (Component) source );
             }
-            else if ( source == scopeButton || source == scopeLabel )
+            else if ( source == scopeButton )
             {
                 changeScope();
             }
-            else if ( source == levelButton || source == levelLabel )
+            else if ( source == levelButton )
             {
                 getLevelPopUp().showPopUp( (Component) source );
             }
-            else if ( source == orderButton || source == orderLabel )
+            else if ( source == orderButton )
             {
-                taxStateModel.setSortedList( !taxStateModel.isSortedList() );
+                taxStateModel.setOrdered( !taxStateModel.isOrdered() );
             }
-            else if ( source == focusButton || source == focusLabel )
+            else if ( source == focusButton )
             {
                 changeFocus( (Component) source );
             }
@@ -329,30 +359,9 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         taxStateModel.setFocus( (Taxon) evt.getCurrentObject() );
     }
 
-    public void propertyChange( final PropertyChangeEvent evt )
-    {
-        final Taxon focus = taxStateModel.getFocus();
-        bread.setTaxFocus( focus );
-        askingPanel.setTaxFocus( focus );
-        if ( evt.getPropertyName().equals( TaxStateModel.TAX_LIST ) )
-        {
-            taxonControl.setCursor( taxStateModel.getTaxList() );
-        }
-        scopeLabel.setText( taxStateModel.getScope().getName() );
-        levelLabel.setText( taxStateModel.getLevel().getName() );
-        if ( evt.getPropertyName().equals( SimpleTaxStateModel.FOCUS ) )
-        {
-            taxonControl.getIteratorCursor().setCurrent( focus );
-        }
-        final HerbarModel model = taxStateModel.getModel();
-        listLabel.setText( model.toString() );
-        focusLabel.setText( taxStateModel.getFocus().getName() );
-        setOrder();
-    }
-
     private void setOrder()
     {
-        final boolean isSorted = taxStateModel.isSortedList();
+        final boolean isSorted = taxStateModel.isOrdered();
 
         String orderIcon = "" + isSorted;
         orderIcon = Strings.getString( LessonMode.class, "BUTTON.ORDER.STATE.ICON", orderIcon );
@@ -360,41 +369,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         orderButton.setIcon( icon );
 
         final String orderText = ( isSorted ? "BUTTON.ORDER.STATE.SORTED.TEXT" : "BUTTON.ORDER.STATE.RANDOM.TEXT" );
-        orderLabel.setText( Strings.getString( LessonMode.class, orderText ) );
-    }
-
-    public void switchToAskMode()
-    {
-        LOG.info( "switching to ask sub mode" );
-        cards.show( switcher, ASKING_PANEL );
-        statusBar.removeStatusComponent( focusLabel );
-    }
-
-    public void switchToLessonMode()
-    {
-        LOG.info( "switching to lesson sub mode" );
-        cards.show( switcher, BREAD );
-        statusBar.addStatusComponent( focusLabel, 5 );
-    }
-
-    public void activate()
-    {
-        statusBar.addStatusComponent( listLabel );
-        statusBar.addStatusComponent( scopeLabel );
-        statusBar.addStatusComponent( levelLabel );
-        statusBar.addStatusComponent( orderLabel );
-        statusBar.addStatusComponent( focusLabel );
-        statusBar.addStatusComponent( taxonControl.getDisplay() );
-    }
-
-    public void deactivate()
-    {
-        statusBar.removeStatusComponent( taxonControl.getDisplay() );
-        statusBar.removeStatusComponent( focusLabel );
-        statusBar.removeStatusComponent( orderLabel );
-        statusBar.removeStatusComponent( levelLabel );
-        statusBar.removeStatusComponent( scopeLabel );
-        statusBar.removeStatusComponent( listLabel );
+        orderButton.setText( Strings.getString( LessonMode.class, orderText ) );
     }
 
     public static class FocusPopUp extends ObjectPopup<Taxon>

@@ -62,7 +62,9 @@ public class AppHerbar
 
     private static Splash splash;
 
-    /** reference to the one and only mainframe */
+    /**
+     * reference to the one and only mainframe
+     */
     private static MainFrame mainFrame = null;
 
     public AppHerbar( final int selection )
@@ -82,7 +84,7 @@ public class AppHerbar
 
                 // set frame position
                 final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                mainFrame.setSize( (int) (screenSize.width / 1.2), (int) (screenSize.height / 1.2) );
+                mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
                 WindowUtils.centerOnScreen( mainFrame );
 
                 // load old user settings
@@ -129,16 +131,16 @@ public class AppHerbar
     {
         if ( !new File( homeDir ).mkdirs() )
         {
-            LOG.info( "cannot create destination directory at \"" + homeDir + "\"" );
+            LOG.info( "didn't create destination directory at \"" + homeDir + "\"" );
         }
         final String[] files;
         switch ( selection )
         {
             case 1:
-                files = new String[]{ "sc/data/2.2.9.properties", "sc/data/2.2.9.data", "sc/data/2.2.9.script" };
+                files = new String[]{"sc/data/2.2.9.properties", "sc/data/2.2.9.data", "sc/data/2.2.9.script"};
                 break;
             default: // case 2
-                files = new String[]{ "de/data/2.2.9.properties", "de/data/2.2.9.data", "de/data/2.2.9.script" };
+                files = new String[]{"de/data/2.2.9.properties", "de/data/2.2.9.data", "de/data/2.2.9.script"};
         }
         try
         {
@@ -152,8 +154,7 @@ public class AppHerbar
                 IOUtils.copy( is, os );
                 os.close();
             }
-        }
-        catch ( IOException e )
+        } catch ( IOException e )
         {
             e.printStackTrace();
         }
@@ -166,33 +167,32 @@ public class AppHerbar
         try
         {
             UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
-            // Todo: Implements as a case of specialized resource bundles
-            final EnvironmentDialog dialog = new EnvironmentDialog( null );
-            dialog.setVisible( true );
-            int selection = -1;
-            if ( dialog.ok )
+            final int selection;
+            if ( args.length == 0 )
             {
-                selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+                // Todo: Implements as a case of specialized resource bundles
+                final EnvironmentDialog dialog = new EnvironmentDialog( null );
+                dialog.setVisible( true );
+                if ( dialog.ok )
+                {
+                    selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+                }
+                else
+                {
+                    LOG.info( "user canceled choice dialog. exiting application now." );
+                    selection = -1;
+                    System.exit( 1 );
+                }
             }
             else
             {
-                LOG.info( "user canceled choice dialog. exiting application now." );
-                System.exit( 1 );
+                selection = Integer.parseInt( args[0] );
             }
-            if ( selection == 3 )
-            {
-                Main.main( null );
-            }
-            else
-            {
-                new AppHerbar( selection );
-            }
-        }
-        catch ( IllegalStateException e )
+            new AppHerbar( selection );
+        } catch ( IllegalStateException e )
         {
             LOG.error( "security check failed", e );
-        }
-        catch ( Throwable e )
+        } catch ( Throwable e )
         {
             LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
@@ -217,8 +217,7 @@ public class AppHerbar
         {
             LogUtils.init();
             LOG = LoggerFactory.getLogger( AppHerbar.class );
-        }
-        catch ( Exception e )
+        } catch ( Exception e )
         {
             e.printStackTrace();
         }

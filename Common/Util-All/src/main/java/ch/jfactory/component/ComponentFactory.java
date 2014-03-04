@@ -13,36 +13,39 @@ import ch.jfactory.action.ActionUtils;
 import ch.jfactory.action.KeyBindings;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-/** Factory class to create different components. All factory methods are based on parametrized properties. The properties are loaded with the {@link Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1 $ */
+/**
+ * Factory class to create different components. All factory methods are based on parametrized properties. The properties are loaded with the {@link Strings} class.<p> $Author: daniel_frey $ $Revision: 1.1 $
+ */
 public class ComponentFactory
 {
     /**
      * Creates a button with name, icon and tooltip by extracting the strings/icon name from a resource. If an object not null is given as a discriminator, the resource associated with that object is used, otherwise the global resource is used. See {@link Strings#getString(Object, String)}.<p> To compose the key for the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as an argument:
-     *
+     * <p/>
      * <ul>
-     *
+     * <p/>
      * <li>Text: <code>PREFIX.TEXT</code></li>
-     *
+     * <p/>
      * <li>Icon name: <code>PREFIX.ICON</code></li>
-     *
+     * <p/>
      * <li>Disabled icon name: <code>PREFIX.ICON2</code></li>
-     *
+     * <p/>
      * <li>Tooltip: <code>PREFIX.HINT</code></li>
-     *
+     * <p/>
      * <li>Shortcut: <code>PREFIX.SHORT</code></li>
-     *
+     * <p/>
      * </ul> This button does -- in addition to the one created by {@link #createSimpleButton(Class, String, ActionListener)} -- a key stroke on the top level component.
      *
      * @param obj            the object to search the associated resource bundle
@@ -90,21 +93,21 @@ public class ComponentFactory
 
     /**
      * Creates a button based on a resource bundle. The resource bundle is used to retrieve different properties of the new button:
-     *
+     * <p/>
      * <ul>
-     *
+     * <p/>
      * <li>Text: <code>PREFIX.TEXT</code></li>
-     *
+     * <p/>
      * <li>Icon name: <code>PREFIX.ICON</code></li>
-     *
+     * <p/>
      * <li>Disabled icon name: <code>PREFIX.ICON2</code></li>
-     *
+     * <p/>
      * <li>Tooltip: <code>PREFIX.HINT</code></li>
-     *
+     * <p/>
      * <li>Shortcut: <code>PREFIX.SHORT</code> (should be an empty string)</li>
-     *
+     * <p/>
      * </ul>
-     *
+     * <p/>
      * The tooltip is automatically completed by the shortcut in paranthesis. This button is not automatically associated with the key stroke, so the SHORT property should be left emtpy. If you want to create an associated button use {@link #createButton(Class, String, ActionListener)} or {@link #createButton(String, ActionListener)}.
      *
      * @param obj            The object to search the associated resource bundle
@@ -131,15 +134,15 @@ public class ComponentFactory
 
     /**
      * Creates a button with name, icon and tooltip by extracting the strings/icon name from the global resource.<p> To compose the key for the strings resource, the following conventions are used, where <code>PREFIX</code> indicates the prefix given as an argument:
-     *
+     * <p/>
      * <ul>
-     *
+     * <p/>
      * <li>Text: <code>PREFIX.TEXT</code></li>
-     *
+     * <p/>
      * <li>Icon: <code>PREFIX.ICON</code></li>
-     *
+     * <p/>
      * <li>Tooltip: <code>PREFIX.HINT</code></li>
-     *
+     * <p/>
      * </ul>
      *
      * @param prefix         The prefix used to search properties
@@ -169,10 +172,32 @@ public class ComponentFactory
         return button;
     }
 
-    public static Component createSeparator()
+    public static JComponent createBarSeparator( final int top, final int left, final int bottom, final int right )
     {
-        final JLabel label = new JLabel( ImageLocator.getIcon( "separator.png" ) );
-        label.setBorder( BorderFactory.createEmptyBorder() );
+        return createSeparator( "separator.png", top, left, bottom, right );
+    }
+
+    public static JComponent createBarSeparator()
+    {
+        return createSeparator( "separator.png", 0, 0, 0, 0 );
+    }
+
+    public static JComponent createArrowSeparator( final int top, final int left, final int bottom, final int right )
+    {
+        return createSeparator( "separator_arrow.png", top, left, bottom, right );
+    }
+
+    public static JComponent createSeparator( final String imageName, final int top, final int left, final int bottom, final int right )
+    {
+        final JLabel label = new JLabel( ImageLocator.getIcon( imageName ) );
+        label.setBorder( BorderFactory.createEmptyBorder( top, left, bottom, right ) );
         return label;
+    }
+
+    public static JComponent createSeparator( final int top, final int left, final int bottom, final int right )
+    {
+        final JPanel panel = new JPanel();
+        panel.setBorder( BorderFactory.createEmptyBorder( top, left, bottom, right ) );
+        return panel;
     }
 }

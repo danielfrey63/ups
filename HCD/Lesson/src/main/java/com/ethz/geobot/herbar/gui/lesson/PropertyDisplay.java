@@ -27,11 +27,20 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import static ch.jfactory.resource.ImageLocator.getIcon;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT;
+import static javax.swing.SwingConstants.TOP;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -39,17 +48,14 @@ import static ch.jfactory.resource.ImageLocator.getIcon;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:06:56 $
  */
-public class PropertyDisplay extends JTabbedPane
+public class PropertyDisplay extends JPanel
 {
     protected final static Logger LOG = LoggerFactory.getLogger( PropertyDisplay.class );
 
-    private final AttributeTreePanel display1;
+    private final ArrayList<AttributeTreePanel> displayPanels = new ArrayList<AttributeTreePanel>();
 
-    private final AttributeTreePanel display2;
-
-    private final AttributeTreePanel display3;
-
-    private final AttributeTreePanel display4;
+    private final ArrayList<AttributeTreePanel> guessPanels = new ArrayList<AttributeTreePanel>();
+    private final CardLayout cardLayout;
 
     protected HerbarModel herbarModel;
 
@@ -61,18 +67,40 @@ public class PropertyDisplay extends JTabbedPane
      */
     public PropertyDisplay( final HerbarContext herbarContext, final TaxStateModel taxStateModel )
     {
-        this.setTabPlacement( BOTTOM );
-        this.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
+        cardLayout = new CardLayout();
+        setLayout( cardLayout );
 
         final String subject = System.getProperty( "xmatrix.subject" );
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "spring/lesson-" + subject + ".xml" );
-        display1 = getTab( herbarContext, taxStateModel, context, "stopper", "title1", "filter1", "icon1" );
-        display2 = getTab( herbarContext, taxStateModel, context, "stopper", "title2", "filter2", "icon2" );
-        display3 = getTab( herbarContext, taxStateModel, context, "stopper", "title3", "filter3", "icon3" );
-        display4 = getTab( herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4", "icon4" );
+
+        final JTabbedPane displayTabs = new JTabbedPane( TOP );
+        final JTabbedPane guessTabs = new JTabbedPane( TOP );
+
+        displayTabs.setTabPlacement( TOP );
+        displayTabs.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
+
+        displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopper", "title1", "filter1a", "icon1" ) );
+        displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopper", "title2", "filter2a", "icon2" ) );
+        displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopper", "title3", "filter3a", "icon3" ) );
+        displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4a", "icon4" ) );
+
+        add( displayTabs, Lernen.name() );
+
+        guessTabs.setTabPlacement( TOP );
+        guessTabs.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
+
+        guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopper", "title1", "filter1b", "icon1" ) );
+        guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopper", "title2", "filter2b", "icon2" ) );
+        guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopper", "title3", "filter3b", "icon3" ) );
+        guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4b", "icon4" ) );
+
+        add( guessTabs, Abfragen.name() );
+
+        displayTabs.addChangeListener( new TabSyncListener( guessTabs ) );
+        guessTabs.addChangeListener( new TabSyncListener( displayTabs ) );
     }
 
-    private AttributeTreePanel getTab( final HerbarContext herbarContext, final TaxStateModel taxStateModel, final ClassPathXmlApplicationContext context,
+    private AttributeTreePanel getTab( JTabbedPane tabbedPane, final HerbarContext herbarContext, final TaxStateModel taxStateModel, final ClassPathXmlApplicationContext context,
                                        final String stopperLevel, final String title, final String filter, final String icon )
     {
         if ( context.containsBean( title ) )
@@ -80,9 +108,8 @@ public class PropertyDisplay extends JTabbedPane
             herbarModel = herbarContext.getDataModel();
             final Level stopLevel = herbarModel.getLevel( (String) context.getBean( stopperLevel ) );
             final String titleString = (String) context.getBean( title );
-            final AttributeTreePanel display = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, titleString,
-                    (VirtualGraphTreeNodeFilter) context.getBean( filter ) );
-            this.addTab( titleString, getIcon( (String) context.getBean( icon ) ), display );
+            final AttributeTreePanel display = new AttributeTreePanel( herbarContext, stopLevel, taxStateModel, titleString, (VirtualGraphTreeNodeFilter) context.getBean( filter ) );
+            tabbedPane.addTab( titleString, getIcon( (String) context.getBean( icon ) ), display );
             return display;
         }
         else
@@ -93,12 +120,19 @@ public class PropertyDisplay extends JTabbedPane
 
     public void setTaxFocus( final Taxon focus )
     {
-        display1.setTaxonFocus( focus );
-        display2.setTaxonFocus( focus );
-        display3.setTaxonFocus( focus );
-        if ( display4 != null )
+        for ( final AttributeTreePanel display : displayPanels )
         {
-            display4.setTaxonFocus( focus );
+            if ( display != null )
+            {
+                display.setTaxonFocus( focus );
+            }
+        }
+        for ( final AttributeTreePanel display : guessPanels )
+        {
+            if ( display != null )
+            {
+                display.setTaxonFocus( focus );
+            }
         }
     }
 
@@ -107,8 +141,24 @@ public class PropertyDisplay extends JTabbedPane
         return "" + hashCode();
     }
 
-    public void synchronizeTabs( final JTabbedPane otherTab )
+    public void setSubMode( final TaxStateModel.SubMode subMode )
     {
-        this.setSelectedIndex( otherTab.getSelectedIndex() );
+        cardLayout.show( this, subMode.name() );
+    }
+
+    private static class TabSyncListener implements ChangeListener
+    {
+        private final JTabbedPane tabs;
+
+        public TabSyncListener( JTabbedPane tabs )
+        {
+            this.tabs = tabs;
+        }
+
+        @Override
+        public void stateChanged( ChangeEvent e )
+        {
+            tabs.setSelectedIndex( ( (JTabbedPane) e.getSource() ).getSelectedIndex() );
+        }
     }
 }

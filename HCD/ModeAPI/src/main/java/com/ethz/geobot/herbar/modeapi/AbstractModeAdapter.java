@@ -22,7 +22,6 @@
  */
 package com.ethz.geobot.herbar.modeapi;
 
-import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import java.awt.Component;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
@@ -152,21 +151,5 @@ public class AbstractModeAdapter extends AbstractMode
     final public void init( final HerbarContext context )
     {
         super.init( context );
-
-        final WizardModel wm = getWizardModel();
-        if ( wm != null )
-        {
-            context.getHerbarGUIManager().setWizardModel( wm );
-        }
-    }
-
-    /**
-     * Override this method to add a wizard to the mode.
-     *
-     * @return the WizardModel
-     */
-    public WizardModel getWizardModel()
-    {
-        return null;
     }
 }

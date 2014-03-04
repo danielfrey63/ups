@@ -22,14 +22,14 @@
  */
 package com.ethz.geobot.herbar.gui.mode;
 
-import com.ethz.geobot.herbar.gui.AppHerbar;
-import com.ethz.geobot.herbar.gui.commands.ActionModeSelection;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import com.ethz.geobot.herbar.modeapi.state.StateCompositeModel;
 import java.awt.Component;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.prefs.Preferences;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is the model for the mainframe. It implements StateCompositeModel, so it is able to store its own state ( selected Mode ). It also fires PropertyChangeEvents if a property has changed.
@@ -39,6 +39,8 @@ import java.util.prefs.Preferences;
  */
 public class ModeStateModel extends StateCompositeModel
 {
+    public static final Logger LOG = LoggerFactory.getLogger( ModeStateModel.class.getName() );
+
     private Mode mode;
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport( this );
@@ -89,7 +91,7 @@ public class ModeStateModel extends StateCompositeModel
         }
         catch ( Exception ex )
         {
-            new ActionModeSelection( AppHerbar.getMainFrame(), node ).actionPerformed( null );
+            LOG.error( "could not load Lesson Mode" );
         }
 
         return node.node( "submodels" );

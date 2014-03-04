@@ -96,6 +96,10 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
                 baseName = levels.get( 0 ).getName();
             }
         }
+        else if ( tNode.isType( Level.class ) )
+        {
+            baseName = tNode.toString();
+        }
         else
         {
             baseName = getIconBase( tNode ).toString();

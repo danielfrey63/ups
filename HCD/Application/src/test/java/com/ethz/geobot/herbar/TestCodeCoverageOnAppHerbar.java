@@ -68,19 +68,20 @@ public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
                 {
                     public void run() throws Exception
                     {
-                        new AppHerbar( 1 );
+                        new AppHerbar(1);
                     }
                 } )
+                .processTransientWindow()
                 .process( new WindowHandler()
                 {
                     @Override
                     public Trigger process( final Window window ) throws Exception
                     {
-                        assertEquals( "Sprache", window.getTitle() );
-                        return window.getButton( "Wissenschaftlich" ).triggerClick();
+                        assertEquals( "Auswahl des Themenbereiches", window.getTitle() );
+                        window.getTabGroup().selectTab("Auswahl");
+                        return window.getTabGroup().getSelectedTab().getButton( "OK" ).triggerClick();
                     }
                 } )
-                .processTransientWindow()
                 .process( new WindowHandler()
                 {
                     public Trigger process( final Window window ) throws Exception
@@ -94,11 +95,6 @@ public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
 
     public void testAll()
     {
-        selectMode( "Lernen", 0 );
-        // Check title
-        LOG.info( "--- Checking title" );
-        assertTrue( window != null );
-        assertTrue( window.getTitle().startsWith( "eBot" ) );
         LOG.info( "--- Checking for Cetraria islandica" );
         assertTrue( window.getUIComponents( new LabelChecker( "Cetraria islandica" ) ).length >= 1 );
         LOG.info( "--- Checking for Cladonia rangiferina" );
@@ -115,14 +111,6 @@ public class TestCodeCoverageOnAppHerbar extends UISpecTestCase
     }
 
     // -- Utilities
-
-    private void selectMode( final String group, final int mode )
-    {
-        WindowInterceptor
-                .init( window.getMenuBar().getMenu( "Einstellungen" ).getSubMenu( "Modus auswählen..." ).triggerClick() )
-                .process( new SelectMode( group, mode ) )
-                .run();
-    }
 
     private static class ListInTabbedPaneComponentMatcher implements ComponentMatcher
     {

@@ -124,6 +124,10 @@ public class CorrectnessChecker
             }
             else
             {
+                correctnessText = new ArrayList<String>();
+                correctnessText.add( "Der Vorschlag ist falsch." );
+                correctnessText.add( " " );
+                correctnessText.add( "Versuchen Sie es noch einmal..." );
                 ret = IS_FALSE;
             }
         }
@@ -131,6 +135,7 @@ public class CorrectnessChecker
         { // it's not a species
             final boolean withinTolerance = mayBeTolerated.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
             final boolean equal = mustBeEqual.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
+            final boolean isSynonym = checkSynonym( taxon, guess ) == IS_NEARLY_TRUE;
             if ( equal )
             {
                 ret = IS_TRUE;
@@ -150,9 +155,24 @@ public class CorrectnessChecker
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
+            else if (isSynonym)
+            {
+                correctnessText = new ArrayList<String>();
+                correctnessText.add( "Sie verwenden ein Synonym:      " );
+                correctnessText.add( "  " + guess );
+                correctnessText.add( " " );
+                correctnessText.add( "Wir verwenden jedoch:  " );
+                correctnessText.add( "  " + taxon );
+                correctnessText.add( " " );
+                ret = IS_NEARLY_TRUE;
+            }
             else
             {
-                ret = checkSynonym( taxon, guess );
+                correctnessText = new ArrayList<String>();
+                correctnessText.add( "Der Vorschlag ist falsch." );
+                correctnessText.add( " " );
+                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                ret = IS_FALSE;
             }
         }
         return ret;
@@ -169,13 +189,6 @@ public class CorrectnessChecker
         }
         if ( eval.isPassed() )
         {
-            correctnessText = new ArrayList<String>();
-            correctnessText.add( "Sie verwenden ein Synonym:      " );
-            correctnessText.add( "  " + synString );
-            correctnessText.add( " " );
-            correctnessText.add( "Wir verwenden jedoch:  " );
-            correctnessText.add( "  " + taxon );
-            correctnessText.add( " " );
             return IS_NEARLY_TRUE;
         }
         return IS_FALSE;
@@ -187,7 +200,7 @@ public class CorrectnessChecker
         guess = guess.toLowerCase().trim();
         final int iReq = correct.indexOf( " " );
         final int iFnd = guess.indexOf( " " );
-        String strFound = "";
+        String strFound;
         if ( iFnd < 0 )
         {
             strFound = guess;
@@ -206,21 +219,20 @@ public class CorrectnessChecker
         guess = guess.toLowerCase().trim();
         final int iReq = correct.indexOf( " " );
         final int iFnd = guess.indexOf( " " );
-        String strFound = "";
-        if ( iFnd < 0 )
-        {
-            strFound = guess;
-        }
-        else
-        {
-            strFound = guess.substring( iFnd + 1, guess.length() ).trim();
-        }
+        String strFound;
+        strFound = iFnd < 0 ? guess : guess.substring( iFnd + 1, guess.length() ).trim();
         final String strReq = correct.substring( iReq + 1, correct.length() ).trim();
         return checkTaxon( strReq, strFound );
     }
 
     /**
-     * This method checks the name taking it as a Taxon.<p> The first <code>Correctness</code> returned indicates the Levenstein distance of the two strings.<p> The second <code>Correctness</code> gives a mesure for the endings. Certain endings may be tolerated, which is indicated with {@link #IS_NEARLY_TRUE}, others may be definively wrong ({@link #IS_FALSE}) or correct ({@link #IS_TRUE}).
+     * This method checks the name taking it as a Taxon.
+     * <p>
+     * The first <code>Correctness</code> returned indicates the Levenstein distance of the two strings.
+     * <p>
+     * The second <code>Correctness</code> gives a measure for the endings. Certain endings may be tolerated, which is
+     * indicated with {@link #IS_NEARLY_TRUE}, others may be definively wrong ({@link #IS_FALSE}) or correct
+     * ({@link #IS_TRUE}).
      *
      * @param correct the correct taxon name
      * @param guess   guessfor the taxon name
@@ -237,8 +249,7 @@ public class CorrectnessChecker
         else
         {
             final Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
-            String correctBody = null, guessedBody = null,
-                    guessPostfix = "", correctPostfix = "", toleratedEndings[];
+            String correctBody, guessedBody, guessPostfix = "", correctPostfix = "", toleratedEndings[];
             final Iterator<String[]> eVals = hsh.values().iterator();
             for ( final String s : hsh.keySet() )
             {
@@ -271,14 +282,6 @@ public class CorrectnessChecker
                     }
                     correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
                     guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
-                    if ( guessedBody == null )
-                    {
-                        guessedBody = guess;
-                    }
-                    if ( correctBody == null )
-                    {
-                        correctBody = correct;
-                    }
                     final EvaluationResult strongEval = mustBeEqual.getEval( guessedBody, correctBody );
                     final EvaluationResult tolerantEval = mayBeTolerated.getEval( guessedBody, correctBody );
                     if ( strongEval.isPassed() )

@@ -211,20 +211,6 @@ public class HerbarContextImpl implements HerbarContext
             return AppHerbar.getMainFrame();
         }
 
-        public void setWizardModel( final WizardModel wm )
-        {
-            modeWizard.setWizardModel( mode, wm );
-        }
-
-        /** invoke the mode wizard. */
-        public void invokeWizard()
-        {
-            final WizardModel model = modeWizard.getWizardModel( mode );
-            final Wizard dlg = new Wizard( model );
-            /*boolean accepted =*/
-            dlg.show( AppHerbar.getMainFrame() );
-        }
-
         /**
          * shows an error message
          *

@@ -23,7 +23,6 @@
 package com.ethz.geobot.herbar.modeapi;
 
 import ch.jfactory.application.view.status.StatusBar;
-import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import java.awt.Component;
 import javax.swing.JFrame;
 
@@ -41,16 +40,6 @@ public interface HerbarGUIManager
      * @param component reference to the view component
      */
     void setViewComponent( Component component );
-
-    /**
-     * Set WizardModel for the mode. This is used by Herbar application to display the wizard.
-     *
-     * @param wm reference to a WizardModel
-     */
-    void setWizardModel( WizardModel wm );
-
-    /** invoke the mode wizard. */
-    void invokeWizard();
 
     /**
      * return the parent frame

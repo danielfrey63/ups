@@ -47,6 +47,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static ch.jfactory.image.PictureDetailPanel.IMAGE;
 
 /**
  * This control is used to display the Pictures of the different Picture-Themes.
@@ -117,8 +118,7 @@ public class PicturePanel extends JPanel
         {
             public void propertyChange( final PropertyChangeEvent e )
             {
-                LOG.info( "propertyChange(" + e.getPropertyName() + ")" );
-                if ( e.getPropertyName().equalsIgnoreCase( PictureDetailPanel.IMAGE ) )
+                if ( e.getPropertyName().equalsIgnoreCase( IMAGE ) )
                 {
                     imageChanged( e.getNewValue() == null ? null : e.getNewValue().toString() );
                 }

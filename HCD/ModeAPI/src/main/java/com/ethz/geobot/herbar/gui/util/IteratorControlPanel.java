@@ -22,13 +22,11 @@
  */
 package com.ethz.geobot.herbar.gui.util;
 
-import ch.jfactory.collection.cursor.Cursor;
 import ch.jfactory.collection.cursor.CursorChangeEvent;
 import ch.jfactory.collection.cursor.CursorChangeListener;
 import ch.jfactory.collection.cursor.DefaultNotifiableCursor;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.resource.Strings;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -59,8 +57,6 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
 
     private String labelString;
 
-    private FlowLayout layout;
-
     /**
      * Creates new form IteratorControlPanel
      *
@@ -69,12 +65,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     public IteratorControlPanel( final String label )
     {
         this.labelString = label;
-        initGUI();
-    }
-
-    public void setCursor( final Cursor cursor )
-    {
-        this.cursor.setCursor( cursor );
+        initComponents();
     }
 
     public void setCursor( final Object[] objects )
@@ -94,7 +85,6 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
             iteratorControlListenerList = new Vector<IteratorControlListener>();
         }
         iteratorControlListenerList.add( listener );
-        listener.itemChange( new IteratorControlEvent( cursor.getCurrent() ) );
     }
 
     public void cursorChange( final CursorChangeEvent event )
@@ -129,19 +119,14 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         }
     }
 
-    /** This method is called from within the constructor to initialize the form. */
-    private void initGUI()
+    /**
+     * This method is called from within the constructor to initialize the form.
+     */
+    private void initComponents()
     {
         previous = createPrevButton();
         next = createNextButton();
         positionInfoText = createPositionLabel();
-
-        layout = new FlowLayout( FlowLayout.LEFT, 5, 0 );
-        setLayout( layout );
-        add( previous );
-        add( positionInfoText );
-        add( next );
-
         cursor.addCursorChangeListener( this );
     }
 
@@ -165,10 +150,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
                 nextActionPerformed();
             }
         };
-        final JButton button = ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
-        button.setBorder( BorderFactory.createEmptyBorder() );
-        button.setName( "next" );
-        return button;
+        return ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
     }
 
     private JButton createPrevButton()
@@ -180,9 +162,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
                 previousActionPerformed();
             }
         };
-        final JButton button = ComponentFactory.createButton( "BUTTON.NAVIGATION.PREV", action );
-        button.setBorder( BorderFactory.createEmptyBorder() );
-        return button;
+        return ComponentFactory.createButton( "BUTTON.NAVIGATION.PREV", action );
     }
 
     protected void previousActionPerformed()
@@ -193,11 +173,6 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     protected void nextActionPerformed()
     {
         cursor.next();
-    }
-
-    public void setAlignment( final int alignment )
-    {
-        layout.setAlignment( alignment );
     }
 
     public JButton getNextButton()

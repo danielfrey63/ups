@@ -9,10 +9,7 @@
  */
 package ch.jfactory.model.graph;
 
-import ch.jfactory.lang.ToStringComparator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * @author $Author: daniel_frey $
@@ -20,8 +17,6 @@ import java.util.Comparator;
  */
 public class GraphNodeList
 {
-    private static final Comparator<GraphNode> COMPARATOR = new ToStringComparator<GraphNode>();
-
     private final ArrayList<GraphNode> list = new ArrayList<GraphNode>();
 
     public GraphNodeList()
@@ -127,16 +122,6 @@ public class GraphNodeList
         final ArrayList<GraphNode> copy = new ArrayList<GraphNode>( list );
         copy.retainAll( other.list );
         return new GraphNodeList( copy );
-    }
-
-    public void sort()
-    {
-        sort( COMPARATOR );
-    }
-
-    public void sort( final Comparator<GraphNode> comparator )
-    {
-        Collections.sort( list, comparator );
     }
 
     /** @see Object#toString() */

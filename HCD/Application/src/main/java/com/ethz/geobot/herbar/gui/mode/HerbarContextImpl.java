@@ -31,8 +31,6 @@ import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.Mode;
-import com.ethz.geobot.herbar.modeapi.wizard.Wizard;
-import com.ethz.geobot.herbar.modeapi.wizard.WizardModel;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import java.awt.Component;
 import java.util.Collection;
@@ -58,8 +56,6 @@ public class HerbarContextImpl implements HerbarContext
     private static final Properties props = new Properties();
 
     private static HerbarModel currentModel = null;
-
-    private static final ModeWizard modeWizard = ModeWizard.getInstance();
 
     private static final Map<Mode, HerbarGUIManager> modeGUIManagers = new HashMap<Mode, HerbarGUIManager>();
 

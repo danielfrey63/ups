@@ -55,7 +55,7 @@ public class TaxStateModel
 
     private final TaxStateValues vals;
 
-    private final HashMap<TaxonNamePanel, SubMode> subModes = new HashMap<TaxonNamePanel, SubMode>();
+    private final HashMap<String, SubMode> subModes = new HashMap<String, SubMode>();
 
     public TaxStateModel( final HerbarModel model )
     {
@@ -250,21 +250,11 @@ public class TaxStateModel
      */
     private void setInternalFocus( final ArrayList<FireArray> fire, final Taxon focus )
     {
-        // Todo: Remove workaround
-        // If called from the attribute tree panel, focus contains a TaxonImpl not a FilterTaxon, so it is important to
-        // retrieve the taxon from the active list
-        boolean found = false;
-        Taxon taxon = null;
-        for ( int t = 0; t < taxList.length && !found; t++ )
+        if ( focus != null && !focus.equals( vals.focus ) )
         {
-            taxon = taxList[t];
-            found = taxon.getName().equals( focus.getName() );
-        }
-        // --End
-        if ( taxon != null && taxon != vals.focus )
-        {
-            fire.add( new FireArray( Focus.name(), vals.focus, taxon ) );
-            vals.focus = taxon;
+
+            fire.add( new FireArray( Focus.name(), vals.focus, focus ) );
+            vals.focus = focus;
         }
     }
 
@@ -330,28 +320,28 @@ public class TaxStateModel
         {
             fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, subMode ) );
         }
-        for ( TaxonNamePanel taxonNamePanel : subModes.keySet() )
+        for ( String taxon : subModes.keySet() )
         {
-            addSubMode( taxonNamePanel, subMode );
+            addSubMode( taxon, subMode );
         }
     }
 
-    public void addSubMode( final TaxonNamePanel key, final SubMode subMode )
+    public void addSubMode( final String taxon, final SubMode subMode )
     {
-        subModes.put( key, subMode );
+        subModes.put( taxon, subMode );
     }
 
-    public void setSubMode( final TaxonNamePanel key, final SubMode subMode )
+    public void setSubMode( final String taxon, final SubMode subMode )
     {
         final SubMode oldGlobalSubMode = getGlobalSubMode();
-        subModes.put( key, subMode );
+        subModes.put( taxon, subMode );
         final SubMode newGlobalSubMode = getGlobalSubMode();
         propertyChangeSupport.firePropertyChange( SubModus.name(), oldGlobalSubMode, newGlobalSubMode );
     }
 
-    public SubMode getSubMode( final TaxonNamePanel key )
+    public SubMode getSubMode( final String taxon )
     {
-        return subModes.get( key );
+        return subModes.get( taxon );
     }
 
     public SubMode getGlobalSubMode()

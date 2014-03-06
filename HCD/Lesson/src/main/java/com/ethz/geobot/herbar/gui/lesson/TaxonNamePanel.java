@@ -43,6 +43,7 @@ import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -100,10 +101,13 @@ public class TaxonNamePanel extends JPanel
      *
      * @param taxStateModel the state model
      * @param taxon         the taxon to display and handle
+     * @param subMode       the initial sub mode to use
      */
-    public TaxonNamePanel( final JFrame parent, TaxStateModel taxStateModel, final Taxon taxon )
+    public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final SubMode subMode )
     {
         setName( taxon.getName() ); // Easier debugging
+        taxStateModel.addSubMode( getName(), subMode );
+
         this.parent = parent;
         this.taxStateModel = taxStateModel;
 
@@ -144,16 +148,17 @@ public class TaxonNamePanel extends JPanel
                 }
             }
         } );
+        setSubMode( subMode );
     }
 
     private void swapSubModes()
     {
-        final TaxStateModel.SubMode newSubMode = taxStateModel.getSubMode( this ).equals( Abfragen ) ? Lernen : Abfragen;
-        taxStateModel.setSubMode( this, newSubMode );
+        final SubMode newSubMode = taxStateModel.getSubMode( getName() ).equals( Abfragen ) ? Lernen : Abfragen;
+        taxStateModel.setSubMode( getName(), newSubMode );
         setSubMode( newSubMode );
     }
 
-    public void setSubMode( final TaxStateModel.SubMode subMode )
+    public void setSubMode( final SubMode subMode )
     {
         layout.show( panel, subMode.name() );
         if ( subMode == Lernen )

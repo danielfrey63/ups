@@ -38,6 +38,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.WEST;
@@ -103,7 +104,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
         return panel;
     }
 
-    public void setGlobalSubMode( final TaxStateModel.SubMode subMode )
+    public void setGlobalSubMode( final SubMode subMode )
     {
         for ( final TaxonNamePanel taxonNamePanel : taxonNamePanels )
         {
@@ -132,6 +133,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
 
     private List<TaxonNamePanel> getTaxonNamePanels( Taxon focus )
     {
+        final SubMode subMode = taxStateModel.getGlobalSubMode();
         taxStateModel.clearSubModes();
 
         final List<TaxonNamePanel> list = new ArrayList<TaxonNamePanel>();
@@ -139,9 +141,8 @@ public class TaxonNameInterrogatorBuilder implements Builder
         while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null )
         {
             LOG.trace( "iterating up to " + parent );
-            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent );
+            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
             list.add( taxonNamePanel );
-            taxStateModel.addSubMode( taxonNamePanel, Lernen );
             parent = parent.getParentTaxon();
         }
         return list;

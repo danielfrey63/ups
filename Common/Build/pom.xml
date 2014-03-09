@@ -658,9 +658,9 @@
             <!-- Uses the ${main-class} property to indicate the JNLP main class -->
             <!-- Note: Seems that this plugin doesn't copy runtime dependencies -->
             <plugin>
-                <groupId>org.codehaus.mojo.webstart</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>webstart-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
+                <version>1.0-beta-6</version>
                 <configuration>
                     <jnlp>
                         <mainClass>${main-class}</mainClass>
@@ -679,6 +679,13 @@
                     <outputJarVersions>false</outputJarVersions>
                     <verbose>false</verbose>
                     <unsign>true</unsign>
+                    <updateManifestEntries>
+                        <Application-Name>${project.name}</Application-Name>
+                        <Trusted-Library>true</Trusted-Library>
+                        <Permissions>all-permissions</Permissions>
+                        <Codebase>*</Codebase>
+                        <Trusted-Only>true</Trusted-Only>
+                    </updateManifestEntries>
                 </configuration>
             </plugin>
         </plugins>

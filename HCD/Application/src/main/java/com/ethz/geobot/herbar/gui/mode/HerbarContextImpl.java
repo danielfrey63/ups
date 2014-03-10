@@ -53,8 +53,6 @@ public class HerbarContextImpl implements HerbarContext
 {
     private static final Logger LOG = LoggerFactory.getLogger( HerbarContextImpl.class );
 
-    private static final Properties props = new Properties();
-
     private static HerbarModel currentModel = null;
 
     private static final Map<Mode, HerbarGUIManager> modeGUIManagers = new HashMap<Mode, HerbarGUIManager>();
@@ -83,19 +81,9 @@ public class HerbarContextImpl implements HerbarContext
         return manager;
     }
 
-    public String getProperty( final String name )
-    {
-        return props.getProperty( name );
-    }
-
     public Preferences getPreferencesNode()
     {
         return Preferences.userNodeForPackage( ModeManager.class ).node( (String) mode.getProperty( Mode.NAME ) );
-    }
-
-    public Set getPropertyNames()
-    {
-        return props.keySet();
     }
 
     public HerbarModel getModel( final String modelName )

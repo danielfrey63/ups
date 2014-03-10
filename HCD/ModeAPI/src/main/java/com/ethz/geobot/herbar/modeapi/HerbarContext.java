@@ -96,26 +96,11 @@ public interface HerbarContext
     HerbarGUIManager getHerbarGUIManager();
 
     /**
-     * Return a property of the application.
-     *
-     * @param name name of the property
-     * @return value of the property
-     */
-    String getProperty( String name );
-
-    /**
      * Get the root node where the mode should store it persistent data.
      *
      * @return Perferences node to store information
      */
     Preferences getPreferencesNode();
-
-    /**
-     * Return a set of all names of available properties.
-     *
-     * @return set of names
-     */
-    Set getPropertyNames();
 
     /**
      * Return current selected model.

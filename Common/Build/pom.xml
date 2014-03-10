@@ -654,7 +654,7 @@
                     <doUpdate>true</doUpdate>
                 </configuration>
             </plugin>
-            <!-- Run with mvn install org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
+            <!-- Run with mvn install org.codehaus.mojo:webstart-maven-plugin:jnlp -->
             <!-- Uses the ${main-class} property to indicate the JNLP main class -->
             <!-- Note: Seems that this plugin doesn't copy runtime dependencies -->
             <plugin>

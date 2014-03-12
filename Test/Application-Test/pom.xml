@@ -24,26 +24,6 @@
         </dependency>
     </dependencies>
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>dependency/</classpathPrefix>
-                        </manifest>
-                        <manifestEntries>
-                            <Main-Class>ch.xmatrix.test.JNLPTest</Main-Class>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!-- Run with mvn install org.codehaus.mojo.webstart:webstart-maven-plugin:jnlp -->
-            <!-- Uses the ${main-class} property to indicate the JNLP main class -->
-            <!-- Note: Seems that this plugin doesn't copy runtime dependencies -->
-        </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

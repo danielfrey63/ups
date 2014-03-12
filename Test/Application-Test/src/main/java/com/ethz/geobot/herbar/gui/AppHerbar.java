@@ -22,10 +22,13 @@
  */
 package com.ethz.geobot.herbar.gui;
 
+import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 /**
@@ -42,8 +45,10 @@ public class AppHerbar extends JFrame
         add( label, BorderLayout.CENTER );
     }
 
-    public static void main( final String[] args )
+    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
+        UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
+
         final AppHerbar app = new AppHerbar();
         app.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         app.setSize( 600, 400 );

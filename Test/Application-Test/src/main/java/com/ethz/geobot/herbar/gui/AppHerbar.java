@@ -30,6 +30,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -37,6 +40,8 @@ import javax.swing.WindowConstants;
  */
 public class AppHerbar extends JFrame
 {
+    private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
+
     public AppHerbar()
     {
         final JLabel label = new JLabel( "Hallo Weld!" );
@@ -47,12 +52,16 @@ public class AppHerbar extends JFrame
 
     public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
+        LOG.info( "starting" );
+
         UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
+        LOG.info( "L&F set" );
 
         final AppHerbar app = new AppHerbar();
         app.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         app.setSize( 600, 400 );
         app.setLocationRelativeTo( null );
         app.setVisible( true );
+        LOG.info( "frame shown" );
     }
 }

@@ -22,6 +22,8 @@
  */
 package com.ethz.geobot.herbar.gui;
 
+import ch.jfactory.application.SystemUtil;
+import ch.jfactory.logging.LogUtils;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
@@ -29,8 +31,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
-import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,11 +38,11 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class AppHerbar extends JFrame
+public class AppHerbarTest extends JFrame
 {
-    private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
+    private static Logger LOG = LoggerFactory.getLogger( AppHerbarTest.class );
 
-    public AppHerbar()
+    public AppHerbarTest()
     {
         final JLabel label = new JLabel( "Hallo Weld!" );
         label.setHorizontalAlignment( SwingConstants.CENTER );
@@ -52,16 +52,42 @@ public class AppHerbar extends JFrame
 
     public static void main( final String[] args ) throws UnsupportedLookAndFeelException
     {
-        LOG.info( "starting" );
+        LogUtils.init();
 
-        UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
-        LOG.info( "L&F set" );
+        LOG.debug( "Starting main-Application" );
 
-        final AppHerbar app = new AppHerbar();
-        app.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-        app.setSize( 600, 400 );
-        app.setLocationRelativeTo( null );
-        app.setVisible( true );
-        LOG.info( "frame shown" );
+        try
+        {
+            UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
+            final int selection;
+            if ( args.length == 0 )
+            {
+                // Todo: Implements as a case of specialized resource bundles
+                final EnvironmentDialog dialog = new EnvironmentDialog( null );
+                dialog.setVisible( true );
+                if ( dialog.ok )
+                {
+                    selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+                }
+                else
+                {
+                    LOG.info( "user canceled choice dialog. exiting application now." );
+                    selection = -1;
+                    System.exit( 1 );
+                }
+            }
+            else
+            {
+                selection = Integer.parseInt( args[0] );
+            }
+            new AppHerbar( selection );
+        } catch ( IllegalStateException e )
+        {
+            LOG.error( "security check failed", e );
+        } catch ( Throwable e )
+        {
+            LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
+            SystemUtil.EXIT.exit( 1 );
+        }
     }
 }

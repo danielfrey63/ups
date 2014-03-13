@@ -12,12 +12,21 @@
         <relativePath>../../Common/Build</relativePath>
     </parent>
     <properties>
-        <main-class>com.ethz.geobot.herbar.gui.AppHerbar</main-class>
+        <main-class>com.ethz.geobot.herbar.gui.AppHerbarTest</main-class>
         <codebase>http://geobot1.ethz.ch/hcd/webstart-${project.version}</codebase>
         <default-site>scp://geobot1.ethz.ch/hcd/site</default-site>
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.application</artifactId>
+            <version>5.0.2481</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.utils-all</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
             <artifactId>looks</artifactId>

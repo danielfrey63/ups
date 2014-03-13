@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2513</version>
+            <version>5.0.2511</version>
             <artifactId>ch.xmatrix.le.application</artifactId>
         </dependency>
         <dependency>

@@ -20,13 +20,10 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>5.0.2529</version>
             <artifactId>ch.xmatrix.le.application</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.2412</version>
-            <version>4.0.2412</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>

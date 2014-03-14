@@ -7,7 +7,7 @@
 `sed -i "s/^\\[WARN.*//g" eff.xml`;
 `sed -i "s/^\\[ERRO.*//g" eff.xml`;
 `sed -i "s/^Effective.*//g" eff.xml`;
-`sed -i "s/<keystore>/<keystore>..\\/..\\/..\\/..\\//g" eff.xml`;
+`sed -i "s/<keystore>/<keystore>..\\/..\\//g" eff.xml`;
 `sed -i "s/<inputTemplateResourcePath>/<inputTemplateResourcePath>..\\/..\\//g" eff.xml`;
 `sed -i "/^\$/d" eff.xml`;
 print ("[INFO] Logging to log.txt");

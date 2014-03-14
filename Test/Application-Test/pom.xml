@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application-test</artifactId>
@@ -24,7 +25,80 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <artifactId>ch.xmatrix.common.icon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.common</groupId>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.catcher</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.gallows</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.lesson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.maze</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modeapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modeapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modelimpl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.news</artifactId>
+        </dependency>
+        <!-- transient dependencies to be resolved properly for versions -->
+        <dependency>
+            <groupId>ch.xmatrix.ups.pmb.exam</groupId>
+            <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.tools</groupId>
+            <artifactId>ch.xmatrix.ups.tools.common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>ch.xmatrix.ups.data.taxa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.data</groupId>
+            <artifactId>ch.xmatrix.ups.data.constraints</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.pmb</groupId>
+            <artifactId>ch.xmatrix.ups.pmb.demo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.xmatrix.ups.pmb</groupId>
+            <artifactId>ch.xmatrix.ups.pmb.common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>

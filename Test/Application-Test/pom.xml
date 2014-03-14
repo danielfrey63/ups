@@ -57,14 +57,6 @@
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <artifactId>ch.xmatrix.le.modeapi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.le</groupId>
-            <artifactId>ch.xmatrix.le.model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>

@@ -23,9 +23,7 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.application.SystemUtil;
-import ch.jfactory.resource.ImageLocator;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import org.slf4j.Logger;
@@ -43,17 +41,11 @@ public class AppHerbarTest
 
     public AppHerbarTest()
     {
-        SwingUtilities.invokeLater( new Runnable()
-        {
-            public void run()
-            {
-                mainFrame = new MainFrame();
-                mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-                mainFrame.setSize( 600, 400 );
-                mainFrame.setLocationRelativeTo( null );
-                mainFrame.setVisible( true );
-            }
-        } );
+        mainFrame = new MainFrame();
+        mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+        mainFrame.setSize( 600, 400 );
+        mainFrame.setLocationRelativeTo( null );
+        mainFrame.setVisible( true );
     }
 
     public static void main( final String[] args )

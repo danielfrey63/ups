@@ -23,14 +23,16 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.application.SystemUtil;
+import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.logging.LogUtils;
+import ch.jfactory.resource.ImageLocator;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,56 +40,62 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
  */
-public class AppHerbarTest extends JFrame
+public class AppHerbarTest
 {
     private static Logger LOG = LoggerFactory.getLogger( AppHerbarTest.class );
 
+    private static MainFrame mainFrame = null;
+
     public AppHerbarTest()
     {
-        final JLabel label = new JLabel( "Hallo Weld!" );
-        label.setHorizontalAlignment( SwingConstants.CENTER );
-        setLayout( new BorderLayout() );
-        add( label, BorderLayout.CENTER );
+        System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
+
+        SwingUtilities.invokeLater( new Runnable()
+        {
+            public void run()
+            {
+                mainFrame = new MainFrame();
+                mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+
+                final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
+                WindowUtils.centerOnScreen( mainFrame );
+
+                mainFrame.setVisible( true );
+            }
+        } );
     }
 
-    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args )
     {
-        LogUtils.init();
-
         LOG.debug( "Starting main-Application" );
 
         try
         {
             UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
-            final int selection;
-            if ( args.length == 0 )
-            {
-                // Todo: Implements as a case of specialized resource bundles
-                final EnvironmentDialog dialog = new EnvironmentDialog( null );
-                dialog.setVisible( true );
-                if ( dialog.ok )
-                {
-                    selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
-                }
-                else
-                {
-                    LOG.info( "user canceled choice dialog. exiting application now." );
-                    selection = -1;
-                    System.exit( 1 );
-                }
-            }
-            else
-            {
-                selection = Integer.parseInt( args[0] );
-            }
-            new AppHerbar( selection );
-        } catch ( IllegalStateException e )
+            new AppHerbarTest();
+        }
+        catch ( IllegalStateException e )
         {
             LOG.error( "security check failed", e );
-        } catch ( Throwable e )
+        }
+        catch ( Throwable e )
         {
             LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
+        }
+    }
+
+    static
+    {
+        try
+        {
+            LogUtils.init();
+            LOG = LoggerFactory.getLogger( AppHerbarTest.class );
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
         }
     }
 }

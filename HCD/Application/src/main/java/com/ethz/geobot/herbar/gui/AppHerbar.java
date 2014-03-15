@@ -26,7 +26,6 @@ import ch.jfactory.application.SystemUtil;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
-import ch.xmatrix.ups.pmb.exam.Main;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
@@ -75,25 +74,19 @@ public class AppHerbar
         Application.getInstance().getModel();
         System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
 
-        SwingUtilities.invokeLater( new Runnable()
-        {
-            public void run()
-            {
-                mainFrame = new MainFrame();
-                mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+        mainFrame = new MainFrame();
+        mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 
-                // set frame position
-                final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
-                WindowUtils.centerOnScreen( mainFrame );
+        // set frame position
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
+        WindowUtils.centerOnScreen( mainFrame );
 
-                // load old user settings
-                mainFrame.loadSettings();
-                mainFrame.setVisible( true );
+        // load old user settings
+        mainFrame.loadSettings();
+        mainFrame.setVisible( true );
 
-                splash.finish();
-            }
-        } );
+        splash.finish();
     }
 
     public static MainFrame getMainFrame()
@@ -154,7 +147,8 @@ public class AppHerbar
                 IOUtils.copy( is, os );
                 os.close();
             }
-        } catch ( IOException e )
+        }
+        catch ( IOException e )
         {
             e.printStackTrace();
         }
@@ -189,10 +183,12 @@ public class AppHerbar
                 selection = Integer.parseInt( args[0] );
             }
             new AppHerbar( selection );
-        } catch ( IllegalStateException e )
+        }
+        catch ( IllegalStateException e )
         {
             LOG.error( "security check failed", e );
-        } catch ( Throwable e )
+        }
+        catch ( Throwable e )
         {
             LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
@@ -217,7 +213,8 @@ public class AppHerbar
         {
             LogUtils.init();
             LOG = LoggerFactory.getLogger( AppHerbar.class );
-        } catch ( Exception e )
+        }
+        catch ( Exception e )
         {
             e.printStackTrace();
         }

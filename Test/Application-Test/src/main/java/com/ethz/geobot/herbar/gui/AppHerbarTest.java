@@ -23,13 +23,8 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.application.SystemUtil;
-import ch.jfactory.application.presentation.WindowUtils;
-import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -48,19 +43,14 @@ public class AppHerbarTest
 
     public AppHerbarTest()
     {
-        System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
-
         SwingUtilities.invokeLater( new Runnable()
         {
             public void run()
             {
                 mainFrame = new MainFrame();
                 mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-
-                final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
-                WindowUtils.centerOnScreen( mainFrame );
-
+                mainFrame.setSize( 600, 400 );
+                mainFrame.setLocationRelativeTo( null );
                 mainFrame.setVisible( true );
             }
         } );
@@ -69,7 +59,6 @@ public class AppHerbarTest
     public static void main( final String[] args )
     {
         LOG.debug( "Starting main-Application" );
-
         try
         {
             UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
@@ -83,19 +72,6 @@ public class AppHerbarTest
         {
             LOG.error( "fatal error occurred in Application: " + e.getMessage(), e );
             SystemUtil.EXIT.exit( 1 );
-        }
-    }
-
-    static
-    {
-        try
-        {
-            LogUtils.init();
-            LOG = LoggerFactory.getLogger( AppHerbarTest.class );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
         }
     }
 }

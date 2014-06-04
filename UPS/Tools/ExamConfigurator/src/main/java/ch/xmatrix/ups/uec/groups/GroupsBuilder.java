@@ -23,7 +23,7 @@ import ch.jfactory.convert.Converter;
 import ch.jfactory.model.SimpleModelList;
 import ch.jfactory.resource.Strings;
 import ch.jfactory.xstream.XStreamConverter;
-import ch.xmatrix.ups.controller.TreeCheckboxController;
+import ch.jfactory.component.TreeCheckboxController;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.domain.TaxonBased;
 import ch.xmatrix.ups.model.TaxonModels;

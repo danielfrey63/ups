@@ -11,6 +11,7 @@
  */
 package ch.xmatrix.ups.view.renderer;
 
+import ch.jfactory.component.RendererPanel;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.SimpleTaxon;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * {@link RendererPanel} based renderer aware of constraints (all constraints and constraints in focus) and default taxa.
+ * {@link ch.jfactory.component.RendererPanel} based renderer aware of constraints (all constraints and constraints in focus) and default taxa.
  *
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/04/06 11:01:11 $
@@ -80,12 +81,12 @@ public class ConstraintsRendererUtils
             builder.append( "/" );
             builder.append( minimalCount );
             builder.append( ")" );
-            panel.setExtentionText( builder.toString() );
+            panel.setExtensionText( builder.toString() );
             panel.setOk( actualCount >= minimalCount );
         }
         else
         {
-            panel.setExtentionText( null );
+            panel.setExtensionText( null );
         }
     }
 

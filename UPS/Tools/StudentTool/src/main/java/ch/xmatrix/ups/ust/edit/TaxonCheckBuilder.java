@@ -27,7 +27,7 @@ import ch.jfactory.component.tree.TreeExpandedRestorer;
 import ch.jfactory.component.tree.filtered.ModelBasedFilteredTreeModel;
 import ch.jfactory.filter.Filter;
 import ch.jfactory.filter.MultiAndFilter;
-import ch.xmatrix.ups.controller.TreeCheckboxController;
+import ch.jfactory.component.TreeCheckboxController;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;
 import ch.xmatrix.ups.domain.SimpleTaxon;

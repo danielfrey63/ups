@@ -23,7 +23,7 @@ import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.view.renderer.ConstraintsRendererUtils;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.jfactory.component.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import java.awt.Component;
 import java.util.ArrayList;

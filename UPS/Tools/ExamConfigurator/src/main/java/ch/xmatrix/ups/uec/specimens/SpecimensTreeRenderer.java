@@ -20,7 +20,7 @@ import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.SimpleTaxon;
 import ch.xmatrix.ups.model.SpecimenModel;
 import ch.xmatrix.ups.model.SpecimensModel;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.jfactory.component.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import java.awt.Component;
 import javax.swing.JTree;
@@ -53,7 +53,7 @@ public class SpecimensTreeRenderer implements TreeCellRenderer
         final SpecimenModel model = models == null ? null : models.find( taxon.getName() );
         panel.setEnabled( enabled );
         panel.setSelected( selected );
-        panel.setExtentionText( model == null ? null : model.toString() );
+        panel.setExtensionText( model == null ? null : model.toString() );
         panel.setOk( model != null && model.getId() != null && !model.isDeactivatedIfKnown() );
         panel.setText( taxon.getName() );
         panel.setEnabled( models != null && !models.isFixed() );

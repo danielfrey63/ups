@@ -18,7 +18,7 @@ package ch.xmatrix.ups.uec.groups;
 
 import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.SimpleTaxon;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.jfactory.component.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import java.awt.Component;
 import javax.swing.JCheckBox;
@@ -63,7 +63,7 @@ public class GroupsTreeRenderer implements TreeCellRenderer
         panel.setPrefixComponent( checkbox );
         panel.setShowPrefixComponent( taxon instanceof SimpleTaxon && SimpleTaxon.isSpecies( taxon ) );
         panel.setPrefixEnabled( isEnabled() && tree.isEnabled() && ( model1 == current || model1 == null ) );
-        panel.setExtentionText( model == null ? null : " (" + model.getName() + ")" );
+        panel.setExtensionText( model == null ? null : " (" + model.getName() + ")" );
         panel.setOk( true );
         panel.update();
         return panel;

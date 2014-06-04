@@ -11,6 +11,7 @@
  */
 package ch.xmatrix.ups.view.renderer;
 
+import ch.jfactory.component.RendererPanel;
 import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.domain.Constraint;
 import ch.xmatrix.ups.domain.Constraints;

@@ -12,7 +12,7 @@
 package ch.xmatrix.ups.uec.groups;
 
 import ch.jfactory.resource.ImageLocator;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.jfactory.component.RendererPanel;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;

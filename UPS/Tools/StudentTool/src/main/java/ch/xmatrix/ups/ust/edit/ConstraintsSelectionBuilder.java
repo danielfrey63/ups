@@ -32,7 +32,7 @@ import ch.xmatrix.ups.model.TaxonModels;
 import ch.xmatrix.ups.model.TaxonTree;
 import ch.xmatrix.ups.ust.main.UserModel;
 import ch.xmatrix.ups.view.renderer.ConstraintsRendererUtils;
-import ch.xmatrix.ups.view.renderer.RendererPanel;
+import ch.jfactory.component.RendererPanel;
 import ch.xmatrix.ups.view.renderer.TaxonRendererUtils;
 import java.awt.BorderLayout;
 import java.awt.Component;

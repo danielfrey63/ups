@@ -27,10 +27,10 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
 
 /**
  * @author $Author: daniel_frey $
@@ -53,14 +53,12 @@ public class MainFrame extends JFrame
                     System.out.println( "Hello Action" );
                 }
             } );
-
             setJMenuBar( menuBar );
 
             final Container contentPane = this.getContentPane();
             contentPane.setLayout( new BorderLayout() );
-            final JLabel shown = new JLabel( "Shown" );
-            shown.setHorizontalTextPosition( SwingConstants.CENTER );
-            contentPane.add( shown, BorderLayout.CENTER );
+            final JTree tree = new JTree();
+            contentPane.add( new JScrollPane( tree ), BorderLayout.CENTER );
         }
         catch ( Exception e )
         {

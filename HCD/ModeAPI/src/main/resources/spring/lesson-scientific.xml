@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="title3" class="java.lang.String">
-        <constructor-arg value="Weiteres"/>
+        <constructor-arg value="Interessantes"/>
     </bean>
 
     <bean id="title4" class="java.lang.String">

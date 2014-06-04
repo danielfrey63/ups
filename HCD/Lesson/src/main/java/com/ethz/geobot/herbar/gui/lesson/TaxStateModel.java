@@ -216,6 +216,11 @@ public class TaxStateModel
     private void setInternalTaxList( ArrayList<FireArray> fire )
     {
         Taxon[] newTaxList = vals.scope.getAllChildTaxa( vals.level );
+        // Todo: silly workaround b/c the child getter doesn't retrive the scope.
+        if ( vals.scope.getLevel() == vals.level )
+        {
+            newTaxList = new Taxon[] {vals.scope};
+        }
         fire.add( new FireArray( List.name(), taxList, newTaxList ) );
         taxList = newTaxList;
     }

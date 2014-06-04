@@ -160,7 +160,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         {
             // search for taxon in cached list otherwise check if taxon is inside this filter
             taxon = filteredTaxonList.get( dependentTaxon );
-            if ( taxon == null && isIn( dependentTaxon ) )
+            if ( taxon == null && contains( dependentTaxon ) )
             {
                 taxon = createFilterTaxon( dependentTaxon );
             }
@@ -211,7 +211,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return dependentModel;
     }
 
-    public boolean isIn( final Taxon taxon )
+    public boolean contains( final Taxon taxon )
     {
         LOG.trace( "check if taxon \"" + taxon + "\" is in model." );
         boolean isIn = false;

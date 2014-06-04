@@ -84,7 +84,7 @@ public class FilterFactory
             final String[] lists;
             if ( HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 All" };
+                lists = new String[]{ "1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All" };
             }
             else
             {

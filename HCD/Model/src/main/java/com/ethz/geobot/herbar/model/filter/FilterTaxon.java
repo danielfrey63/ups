@@ -88,7 +88,7 @@ class FilterTaxon implements Taxon, Comparable
         {
             Taxon parent = dependentTaxon.getParentTaxon();
 
-            while ( parent != null && !filterModel.isIn( parent ) )
+            while ( parent != null && !filterModel.contains( parent ) )
             {
                 parent = parent.getParentTaxon();
             }
@@ -126,7 +126,7 @@ class FilterTaxon implements Taxon, Comparable
                 boolean found = false;
                 for ( int t = 0; t < taxList.length && !found; t++ )
                 {
-                    if ( filterModel.isIn( taxList[t] ) )
+                    if ( filterModel.contains( taxList[t] ) )
                     {
                         found = true;
                     }
@@ -167,7 +167,7 @@ class FilterTaxon implements Taxon, Comparable
 
         for ( final Taxon child : children )
         {
-            if ( filterModel.isIn( child ) )
+            if ( filterModel.contains( child ) )
             {
                 // ok, this element is a child
                 LOG.trace( "add child to filtered list \"" + child + "\"" );

@@ -92,10 +92,15 @@ public class LessonPanel extends ModeActivationPanel
             splitPane.add( picturePanel = new PicturePanel( herbarModel ), LEFT );
             splitPane.add( lessonPanel = new PropertyDisplay( context, taxStateModel ), RIGHT );
 
-            final LessonBar bar = new LessonBar( parent, context, taxStateModel );
+            final JSplitPane navigationEtAll = new NiceSplitPane();
+            navigationEtAll.add( new NavigationBuilder( context, taxStateModel ).getPanel(), LEFT );
+            navigationEtAll.add( splitPane, RIGHT );
+            navigationEtAll.setDividerLocation( 300 );
+
+            final LessonBar bar = new LessonBar( context, taxStateModel );
             setLayout( new BorderLayout() );
             add( bar, NORTH );
-            add( splitPane, CENTER );
+            add( navigationEtAll, CENTER );
 
             taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
             {

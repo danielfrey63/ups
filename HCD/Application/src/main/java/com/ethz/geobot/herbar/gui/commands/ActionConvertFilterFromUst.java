@@ -29,17 +29,20 @@ import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.thoughtworks.xstream.XStream;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,27 +59,30 @@ import javax.swing.filechooser.FileFilter;
  */
 public class ActionConvertFilterFromUst extends AbstractParametrizedAction
 {
-    private static final Map<String, ArrayList<String>> MAP = new HashMap<String, ArrayList<String>>();
-
-    private static final ArrayList<String> ERR = new ArrayList<String>();
-
     public ActionConvertFilterFromUst( final JFrame parent )
     {
         super( "MENU.ITEM.IMPORT", parent );
     }
 
+    private static String lastDirectory = null;
+
     public void actionPerformed( final ActionEvent e )
     {
         try
         {
-            final JFileChooser chooser = new JFileChooser();
+            final JFileChooser chooser = new JFileChooser( lastDirectory );
             chooser.setFileFilter( new UstFileFilter() );
             chooser.setMultiSelectionEnabled( false );
             if ( JFileChooser.CANCEL_OPTION == chooser.showOpenDialog( null ) )
             {
                 return;
             }
+            final Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+
+            final ArrayList<String> err = new ArrayList<String>();
+
             final File file = chooser.getSelectedFile();
+            lastDirectory = file.getParent();
             final Reader reader = new InputStreamReader( new FileInputStream( file ), "UTF-8" );
 
             final XStream x = new XStream();
@@ -106,11 +112,11 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
                 final Taxon foundTaxon = model.getTaxon( taxon );
                 if ( foundTaxon == null )
                 {
-                    ERR.add( taxon );
+                    err.add( taxon );
                 }
                 else
                 {
-                    mapTaxon( foundTaxon );
+                    mapTaxon( foundTaxon, map );
                 }
             }
 
@@ -120,13 +126,13 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
             final File dir = new File( dirName );
             dir.mkdirs();
             final String f = new File( dir, name + ".xml" ).getAbsolutePath();
-            final Writer writer = new FileWriter( f );
+            final Writer writer = new BufferedWriter( new OutputStreamWriter( new FileOutputStream( f ), "UTF-8" ) );
             writer.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + r );
-            writer.write( "<filter baseFilterName=\"\" name=\"Pruefungsliste\">" + r );
-            final Set<String> levels = MAP.keySet();
+            writer.write( "<filter baseFilterName=\"\" name=\"" + name + "\">" + r );
+            final Set<String> levels = map.keySet();
             for ( final String level : levels )
             {
-                final ArrayList<String> taxaOnLevel = MAP.get( level );
+                final Set<String> taxaOnLevel = map.get( level );
                 for ( final String taxon : taxaOnLevel )
                 {
                     writer.write( "    <detail scope=\"" + taxon + "\">" + r );
@@ -136,21 +142,23 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
             }
             writer.write( "</filter>" );
             writer.close();
-            if ( ERR.size() == 0 )
+            if ( err.size() == 0 )
             {
                 JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich. Die Stoffliste mit dem Namen \"" +
-                        name + "\" \n" +
-                        "steht beim nächsten Start eBot zur Verfügung.",
-                        "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE );
+                                name + "\" \n" +
+                                "steht beim nächsten Start eBot zur Verfügung.",
+                        "Konvertierung erfolgreich", JOptionPane.INFORMATION_MESSAGE
+                );
             }
             else
             {
                 JOptionPane.showMessageDialog( null, "Konvertierung erfolgreich aber nicht vollständig. " +
-                        "Folgende Arten wurden nicht konvertiert: " + ERR + ". Die " +
-                        "Stoffliste mit dem Namen \"" + name + "\" \n" +
-                        "steht beim nächsten Start von eBot zur Verfügung. Bitte fügen Sie die " +
-                        "fehlende(n) Art(en) manuell in eBot hinzu.",
-                        "Konvertierung mit Warnungen.", JOptionPane.INFORMATION_MESSAGE );
+                                "Folgende Arten wurden nicht konvertiert: " + err + ". Die " +
+                                "Stoffliste mit dem Namen \"" + name + "\" \n" +
+                                "steht beim nächsten Start von eBot zur Verfügung. Bitte fügen Sie die " +
+                                "fehlende(n) Art(en) manuell in eBot hinzu.",
+                        "Konvertierung mit Warnungen.", JOptionPane.INFORMATION_MESSAGE
+                );
             }
 
 //            final HerbarModel base = Application.getInstance().getModel();
@@ -179,23 +187,23 @@ public class ActionConvertFilterFromUst extends AbstractParametrizedAction
         }
     }
 
-    private static void mapTaxon( final Taxon taxon )
+    private static void mapTaxon( final Taxon taxon, Map<String, Set<String>> map )
     {
         final Level level = taxon.getLevel();
         if ( level != null )
         {
             final String levelString = level.getName();
-            ArrayList<String> taxaInLevel = MAP.get( levelString );
+            Set<String> taxaInLevel = map.get( levelString );
             if ( taxaInLevel == null )
             {
-                taxaInLevel = new ArrayList<String>();
-                MAP.put( levelString, taxaInLevel );
+                taxaInLevel = new HashSet<String>();
+                map.put( levelString, taxaInLevel );
             }
             taxaInLevel.add( taxon.getName() );
             final Taxon parent = taxon.getParentTaxon();
             if ( parent != null )
             {
-                mapTaxon( parent );
+                mapTaxon( parent, map );
             }
         }
     }

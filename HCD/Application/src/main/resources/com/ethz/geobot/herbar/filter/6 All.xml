@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<filter baseFilterName="" name="Liste 60">
+<filter baseFilterName="" name="Alle Taxa">
     <detail scope="Rutaceae">
         <level>Familie</level>
     </detail>
@@ -114,10 +114,10 @@
     <detail scope="Dennstaedtiaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Orchidaceae">
+    <detail scope="Juglandaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Juglandaceae">
+    <detail scope="Orchidaceae">
         <level>Familie</level>
     </detail>
     <detail scope="Onagraceae">
@@ -279,10 +279,10 @@
     <detail scope="Equisetaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Taxaceae">
+    <detail scope="Euphorbiaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Euphorbiaceae">
+    <detail scope="Taxaceae">
         <level>Familie</level>
     </detail>
     <detail scope="Lamiiden">
@@ -327,10 +327,10 @@
     <detail scope="Carlina">
         <level>Gattung</level>
     </detail>
-    <detail scope="Hamamelis">
+    <detail scope="Sambucus">
         <level>Gattung</level>
     </detail>
-    <detail scope="Sambucus">
+    <detail scope="Hamamelis">
         <level>Gattung</level>
     </detail>
     <detail scope="Stachys">
@@ -663,10 +663,10 @@
     <detail scope="Primula">
         <level>Gattung</level>
     </detail>
-    <detail scope="Mentha">
+    <detail scope="Adenostyles">
         <level>Gattung</level>
     </detail>
-    <detail scope="Adenostyles">
+    <detail scope="Mentha">
         <level>Gattung</level>
     </detail>
     <detail scope="Cruciata">
@@ -795,19 +795,10 @@
     <detail scope="Luzula lutea">
         <level>Art</level>
     </detail>
-    <detail scope="Anthyllis vulneraria">
-        <level>Art</level>
-    </detail>
     <detail scope="Holcus lanatus">
         <level>Art</level>
     </detail>
     <detail scope="Lotus corniculatus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea scabiosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Taraxacum officinale">
         <level>Art</level>
     </detail>
     <detail scope="Achillea millefolium agg.">
@@ -852,16 +843,7 @@
     <detail scope="Cynosurus cristatus">
         <level>Art</level>
     </detail>
-    <detail scope="Festuca valesiaca">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dactylorhiza maculata">
-        <level>Art</level>
-    </detail>
     <detail scope="Rosa canina agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alchemilla alpina">
         <level>Art</level>
     </detail>
     <detail scope="Centaurea scabiosa i.w.S.">
@@ -984,16 +966,10 @@
     <detail scope="Petasites albus">
         <level>Art</level>
     </detail>
-    <detail scope="Achillea millefolium">
-        <level>Art</level>
-    </detail>
     <detail scope="Polygonum bistorta">
         <level>Art</level>
     </detail>
     <detail scope="Trifolium pratense i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunus padus">
         <level>Art</level>
     </detail>
     <detail scope="Alnus glutinosa">
@@ -1011,16 +987,13 @@
     <detail scope="Verbascum lychnitis">
         <level>Art</level>
     </detail>
-    <detail scope="Luzula sylvatica">
+    <detail scope="Malva neglecta">
         <level>Art</level>
     </detail>
     <detail scope="Pulsatilla apiifolia">
         <level>Art</level>
     </detail>
     <detail scope="Avenella flexuosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Malva neglecta">
         <level>Art</level>
     </detail>
     <detail scope="Centaurea cyanus">
@@ -1047,9 +1020,6 @@
     <detail scope="Potentilla reptans">
         <level>Art</level>
     </detail>
-    <detail scope="Vicia cracca">
-        <level>Art</level>
-    </detail>
     <detail scope="Spergularia rubra">
         <level>Art</level>
     </detail>
@@ -1057,18 +1027,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Viola tricolor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vaccinium uliginosum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa pratensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vicia sativa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lotus corniculatus">
         <level>Art</level>
     </detail>
     <detail scope="Chaenorrhinum minus">
@@ -1093,9 +1051,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Globularia nudicaulis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygala vulgaris">
         <level>Art</level>
     </detail>
     <detail scope="Botrychium lunaria">
@@ -1134,9 +1089,6 @@
     <detail scope="Malva sylvestris">
         <level>Art</level>
     </detail>
-    <detail scope="Carex flava">
-        <level>Art</level>
-    </detail>
     <detail scope="Veronica chamaedrys">
         <level>Art</level>
     </detail>
@@ -1158,13 +1110,7 @@
     <detail scope="Ficaria verna">
         <level>Art</level>
     </detail>
-    <detail scope="Tulipa sylvestris">
-        <level>Art</level>
-    </detail>
     <detail scope="Scirpus sylvaticus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stipa pennata">
         <level>Art</level>
     </detail>
     <detail scope="Silene latifolia">
@@ -1212,9 +1158,6 @@
     <detail scope="Prunus padus i.w.S.">
         <level>Art</level>
     </detail>
-    <detail scope="Sanguisorba minor">
-        <level>Art</level>
-    </detail>
     <detail scope="Primula hirsuta">
         <level>Art</level>
     </detail>
@@ -1230,13 +1173,7 @@
     <detail scope="Maianthemum bifolium">
         <level>Art</level>
     </detail>
-    <detail scope="Geranium robertianum">
-        <level>Art</level>
-    </detail>
     <detail scope="Carex firma">
-        <level>Art</level>
-    </detail>
-    <detail scope="Solidago virgaurea">
         <level>Art</level>
     </detail>
     <detail scope="Hamamelis virginiana">
@@ -1254,10 +1191,10 @@
     <detail scope="Datura stramonium">
         <level>Art</level>
     </detail>
-    <detail scope="Asplenium ruta-muraria">
+    <detail scope="Larix decidua">
         <level>Art</level>
     </detail>
-    <detail scope="Larix decidua">
+    <detail scope="Asplenium ruta-muraria">
         <level>Art</level>
     </detail>
     <detail scope="Selaginella selaginoides">
@@ -1266,13 +1203,10 @@
     <detail scope="Thymus vulgaris">
         <level>Art</level>
     </detail>
-    <detail scope="Saponaria ocymoides">
-        <level>Art</level>
-    </detail>
     <detail scope="Cornus sanguinea">
         <level>Art</level>
     </detail>
-    <detail scope="Hieracium murorum">
+    <detail scope="Saponaria ocymoides">
         <level>Art</level>
     </detail>
     <detail scope="Blechnum spicant">
@@ -1284,16 +1218,10 @@
     <detail scope="Carex atrata i.w.S.">
         <level>Art</level>
     </detail>
-    <detail scope="Silene nutans">
-        <level>Art</level>
-    </detail>
     <detail scope="Salix elaeagnos">
         <level>Art</level>
     </detail>
     <detail scope="Epilobium montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene vulgaris">
         <level>Art</level>
     </detail>
     <detail scope="Galium anisophyllon">
@@ -1318,12 +1246,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Rubus fruticosus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea jacea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dianthus carthusianorum">
         <level>Art</level>
     </detail>
     <detail scope="Vaccinium vitis-idaea">
@@ -1422,9 +1344,6 @@
     <detail scope="Arctostaphylos uva-ursi">
         <level>Art</level>
     </detail>
-    <detail scope="Tragopogon pratensis">
-        <level>Art</level>
-    </detail>
     <detail scope="Traunsteinera globosa">
         <level>Art</level>
     </detail>
@@ -1446,25 +1365,16 @@
     <detail scope="Rosmarinus officinalis">
         <level>Art</level>
     </detail>
-    <detail scope="Aconitum napellus">
-        <level>Art</level>
-    </detail>
     <detail scope="Pimpinella saxifraga">
         <level>Art</level>
     </detail>
     <detail scope="Carpinus betulus">
         <level>Art</level>
     </detail>
-    <detail scope="Alchemilla vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Glechoma hederacea">
+    <detail scope="Laserpitium siler">
         <level>Art</level>
     </detail>
     <detail scope="Mentha piperita">
-        <level>Art</level>
-    </detail>
-    <detail scope="Laserpitium siler">
         <level>Art</level>
     </detail>
     <detail scope="Trisetum flavescens">
@@ -1497,13 +1407,7 @@
     <detail scope="Cornus mas">
         <level>Art</level>
     </detail>
-    <detail scope="Valeriana officinalis">
-        <level>Art</level>
-    </detail>
     <detail scope="Cicerbita alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium pratense">
         <level>Art</level>
     </detail>
     <detail scope="Linaria vulgaris">
@@ -1572,12 +1476,6 @@
     <detail scope="Salix purpurea i.w.S.">
         <level>Art</level>
     </detail>
-    <detail scope="Chaerophyllum hirsutum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rosa canina">
-        <level>Art</level>
-    </detail>
     <detail scope="Cnicus benedictus">
         <level>Art</level>
     </detail>
@@ -1609,9 +1507,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Plantago media">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca rubra">
         <level>Art</level>
     </detail>
     <detail scope="Melilotus officinalis">
@@ -1650,10 +1545,10 @@
     <detail scope="Trifolium badium">
         <level>Art</level>
     </detail>
-    <detail scope="Poa trivialis i.w.S.">
+    <detail scope="Daphne mezereum">
         <level>Art</level>
     </detail>
-    <detail scope="Daphne mezereum">
+    <detail scope="Poa trivialis i.w.S.">
         <level>Art</level>
     </detail>
     <detail scope="Ligusticum mutellina">
@@ -1681,9 +1576,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Prenanthes purpurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cetraria islandica">
         <level>Art</level>
     </detail>
     <detail scope="Cerastium latifolium">
@@ -1740,16 +1632,16 @@
     <detail scope="Silene acaulis">
         <level>Art</level>
     </detail>
+    <detail scope="Rentierflechte">
+        <level>Art</level>
+    </detail>
     <detail scope="Euphrasia rostkoviana">
         <level>Art</level>
     </detail>
-    <detail scope="Heracleum sphondylium">
+    <detail scope="Daphne striata">
         <level>Art</level>
     </detail>
     <detail scope="Quercus robur">
-        <level>Art</level>
-    </detail>
-    <detail scope="Daphne striata">
         <level>Art</level>
     </detail>
     <detail scope="Iris sibirica">
@@ -1773,9 +1665,6 @@
     <detail scope="Fraxinus excelsior">
         <level>Art</level>
     </detail>
-    <detail scope="Cerastium fontanum">
-        <level>Art</level>
-    </detail>
     <detail scope="Hedysarum hedysaroides">
         <level>Art</level>
     </detail>
@@ -1791,10 +1680,10 @@
     <detail scope="Rhinanthus minor">
         <level>Art</level>
     </detail>
-    <detail scope="Juniperus communis">
+    <detail scope="Juniperus nana">
         <level>Art</level>
     </detail>
-    <detail scope="Juniperus nana">
+    <detail scope="Juniperus communis">
         <level>Art</level>
     </detail>
     <detail scope="Lycopodium annotinum">
@@ -1803,10 +1692,10 @@
     <detail scope="Orobanche alba">
         <level>Art</level>
     </detail>
-    <detail scope="Potentilla sterilis">
+    <detail scope="Acer pseudoplatanus">
         <level>Art</level>
     </detail>
-    <detail scope="Acer pseudoplatanus">
+    <detail scope="Potentilla sterilis">
         <level>Art</level>
     </detail>
     <detail scope="Nymphaea alba">
@@ -1866,9 +1755,6 @@
     <detail scope="Plantago atrata">
         <level>Art</level>
     </detail>
-    <detail scope="Oenothera biennis">
-        <level>Art</level>
-    </detail>
     <detail scope="Secale cereale">
         <level>Art</level>
     </detail>
@@ -1878,16 +1764,10 @@
     <detail scope="Euonymus europaeus">
         <level>Art</level>
     </detail>
-    <detail scope="Galium verum">
-        <level>Art</level>
-    </detail>
     <detail scope="Juniperus sabina">
         <level>Art</level>
     </detail>
     <detail scope="Heracleum sphondylium i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phleum pratense">
         <level>Art</level>
     </detail>
     <detail scope="Androsace vandellii">
@@ -1911,13 +1791,7 @@
     <detail scope="Carex elata">
         <level>Art</level>
     </detail>
-    <detail scope="Leontodon hispidus">
-        <level>Art</level>
-    </detail>
     <detail scope="Geum montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix purpurea">
         <level>Art</level>
     </detail>
     <detail scope="Pteridium aquilinum">
@@ -1995,19 +1869,16 @@
     <detail scope="Vicia sativa i.w.S.">
         <level>Art</level>
     </detail>
-    <detail scope="Cardamine pratensis">
-        <level>Art</level>
-    </detail>
     <detail scope="Oxytropis campestris i.w.S.">
         <level>Art</level>
     </detail>
     <detail scope="Salix caprea">
         <level>Art</level>
     </detail>
-    <detail scope="Dianthus carthusianorum i.w.S.">
+    <detail scope="Consolida regalis">
         <level>Art</level>
     </detail>
-    <detail scope="Consolida regalis">
+    <detail scope="Dianthus carthusianorum i.w.S.">
         <level>Art</level>
     </detail>
     <detail scope="Sanguisorba minor i.w.S.">
@@ -2017,6 +1888,9 @@
         <level>Art</level>
     </detail>
     <detail scope="Sempervivum arachnoideum">
+        <level>Art</level>
+    </detail>
+    <detail scope="Isländisch Moos">
         <level>Art</level>
     </detail>
     <detail scope="Phyteuma spicatum">
@@ -2046,13 +1920,16 @@
     <detail scope="Senecio doronicum">
         <level>Art</level>
     </detail>
+    <detail scope="Landkartenflechte">
+        <level>Art</level>
+    </detail>
     <detail scope="Hippophae rhamnoides">
         <level>Art</level>
     </detail>
-    <detail scope="Huperzia selago">
+    <detail scope="Eriophorum scheuchzeri">
         <level>Art</level>
     </detail>
-    <detail scope="Eriophorum scheuchzeri">
+    <detail scope="Huperzia selago">
         <level>Art</level>
     </detail>
     <detail scope="Ranunculus alpestris">
@@ -2082,9 +1959,6 @@
     <detail scope="Onobrychis montana">
         <level>Art</level>
     </detail>
-    <detail scope="Poa trivialis">
-        <level>Art</level>
-    </detail>
     <detail scope="Senecio alpinus">
         <level>Art</level>
     </detail>
@@ -2104,9 +1978,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Phleum pratense agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hieracium pilosella">
         <level>Art</level>
     </detail>
     <detail scope="Ranunculus platanifolius">
@@ -2139,13 +2010,10 @@
     <detail scope="Viola calcarata">
         <level>Art</level>
     </detail>
-    <detail scope="Cannabis sativa">
-        <level>Art</level>
-    </detail>
     <detail scope="Acer platanoides">
         <level>Art</level>
     </detail>
-    <detail scope="Stellaria media">
+    <detail scope="Cannabis sativa">
         <level>Art</level>
     </detail>
     <detail scope="Alchemilla alpina agg.">
@@ -2167,9 +2035,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Teucrium montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stellaria nemorum">
         <level>Art</level>
     </detail>
     <detail scope="Carlina acaulis i.w.S.">
@@ -2277,6 +2142,9 @@
     <detail scope="Saxifraga oppositifolia">
         <level>Art</level>
     </detail>
+    <detail scope="Gipfelmoos (= akrokarp)">
+        <level>Art</level>
+    </detail>
     <detail scope="Medicago lupulina">
         <level>Art</level>
     </detail>
@@ -2284,9 +2152,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Veronica bellidioides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lamium galeobdolon">
         <level>Art</level>
     </detail>
     <detail scope="Narcissus poëticus">
@@ -2394,6 +2259,9 @@
     <detail scope="Carex curvula i.w.S.">
         <level>Art</level>
     </detail>
+    <detail scope="Beblättertes Lebermoos">
+        <level>Art</level>
+    </detail>
     <detail scope="Buddleja davidii">
         <level>Art</level>
     </detail>
@@ -2403,7 +2271,7 @@
     <detail scope="Juglans regia">
         <level>Art</level>
     </detail>
-    <detail scope="Crataegus monogyna">
+    <detail scope="Bartflechte">
         <level>Art</level>
     </detail>
     <detail scope="Carex pendula">
@@ -2425,12 +2293,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Eupatorium cannabinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helianthemum nummularium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium mollugo">
         <level>Art</level>
     </detail>
     <detail scope="Dactylis glomerata">
@@ -2467,12 +2329,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Malus sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aconitum vulparia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crataegus laevigata">
         <level>Art</level>
     </detail>
     <detail scope="Euphorbia amygdaloides">
@@ -2610,13 +2466,7 @@
     <detail scope="Festuca valesiaca agg.">
         <level>Art</level>
     </detail>
-    <detail scope="Molinia caerulea">
-        <level>Art</level>
-    </detail>
     <detail scope="Althaea officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca pratensis">
         <level>Art</level>
     </detail>
     <detail scope="Soldanella alpina">
@@ -2670,9 +2520,6 @@
     <detail scope="Ranunculus acris i.w.S.">
         <level>Art</level>
     </detail>
-    <detail scope="Primula veris">
-        <level>Art</level>
-    </detail>
     <detail scope="Rhododendron hirsutum">
         <level>Art</level>
     </detail>
@@ -2692,9 +2539,6 @@
         <level>Art</level>
     </detail>
     <detail scope="Artemisia absinthium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rubus fruticosus">
         <level>Art</level>
     </detail>
     <detail scope="Cardamine hirsuta">
@@ -2727,10 +2571,10 @@
     <detail scope="Bartsia alpina">
         <level>Art</level>
     </detail>
-    <detail scope="Berberis vulgaris">
+    <detail scope="Tilia cordata">
         <level>Art</level>
     </detail>
-    <detail scope="Tilia cordata">
+    <detail scope="Berberis vulgaris">
         <level>Art</level>
     </detail>
     <detail scope="Gentianella germanica i.w.S.">
@@ -2778,7 +2622,7 @@
     <detail scope="Melittis melissophyllum">
         <level>Art</level>
     </detail>
-    <detail scope="Ranunculus acris">
+    <detail scope="Astmoos (= pleurokarp)">
         <level>Art</level>
     </detail>
     <detail scope="Digitalis grandiflora">
@@ -2799,6 +2643,9 @@
     <detail scope="Luzula campestris">
         <level>Art</level>
     </detail>
+    <detail scope="Torfmoos">
+        <level>Art</level>
+    </detail>
     <detail scope="Solanum dulcamara">
         <level>Art</level>
     </detail>
@@ -2808,7 +2655,7 @@
     <detail scope="Pulmonaria obscura">
         <level>Art</level>
     </detail>
-    <detail scope="Thymus serpyllum">
+    <detail scope="Thalloses Lebermoos">
         <level>Art</level>
     </detail>
     <detail scope="Pyrus pyraster">
@@ -2844,7 +2691,22 @@
     <detail scope="Pteridophyta">
         <level>Abteilung</level>
     </detail>
+    <detail scope="Bryophyta">
+        <level>Abteilung</level>
+    </detail>
+    <detail scope="Sphagnidae">
+        <level>Unterklasse</level>
+    </detail>
     <detail scope="Polypodiidae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Bryidae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Jungermanniidae">
+        <level>Unterklasse</level>
+    </detail>
+    <detail scope="Marchantiidae">
         <level>Unterklasse</level>
     </detail>
     <detail scope="Asteranae">
@@ -2901,10 +2763,16 @@
     <detail scope="Amaryllidoideae">
         <level>Unterfamilie</level>
     </detail>
+    <detail scope="Bryopsida">
+        <level>Klasse</level>
+    </detail>
     <detail scope="Gymnospermae">
         <level>Klasse</level>
     </detail>
     <detail scope="Angiospermae">
+        <level>Klasse</level>
+    </detail>
+    <detail scope="Marchantiopsida">
         <level>Klasse</level>
     </detail>
     <detail scope="Dipsacales">

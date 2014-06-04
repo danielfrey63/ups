@@ -28,6 +28,8 @@ import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.component.ComponentFactory;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
@@ -39,7 +41,8 @@ import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.WEST;
 import static javax.swing.SwingConstants.HORIZONTAL;
@@ -97,6 +100,8 @@ public class TaxonNameInterrogatorBuilder implements Builder
         panel = new JPanel( new BorderLayout() );
         panel.add( toolBar, WEST );
         panel.add( new JToolBar(), CENTER );
+
+        setListeners();
     }
 
     public JComponent getPanel()
@@ -104,12 +109,28 @@ public class TaxonNameInterrogatorBuilder implements Builder
         return panel;
     }
 
-    public void setGlobalSubMode( final SubMode subMode )
+    public void setListeners()
     {
-        for ( final TaxonNamePanel taxonNamePanel : taxonNamePanels )
+        taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
         {
-            taxonNamePanel.setSubMode( subMode );
-        }
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                setTaxFocus( (Taxon) evt.getNewValue() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                final SubMode subMode = (SubMode) evt.getNewValue();
+                for ( final TaxonNamePanel taxonNamePanel : taxonNamePanels )
+                {
+                    taxonNamePanel.setSubMode( subMode );
+                }
+            }
+        } );
     }
 
     public void setTaxFocus( final Taxon focus )

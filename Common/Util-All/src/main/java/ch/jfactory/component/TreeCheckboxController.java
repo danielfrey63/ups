@@ -9,7 +9,7 @@
  *  permissions and limitations under the License.
  * ====================================================================
  */
-package ch.xmatrix.ups.controller;
+package ch.jfactory.component;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

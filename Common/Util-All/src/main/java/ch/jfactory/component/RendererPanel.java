@@ -30,11 +30,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 /**
- * Panel with four fields to be displayed in a tree or list. The first field contains an optional icon, the second an optional prefix component (i.e. a checkbox), the third the object text and the fourth a textual extension to display.<p/>
+ * Panel with four fields to be displayed in a tree or list. The first field contains an optional icon, the second an
+ * optional prefix component (i.e. a checkbox), the third the objects fixed text and the fourth a textual extension to
+ * display results (OK, NOK).
  * <p/>
- * To understand the detailed color changes in this panel, look at the decision tables for colors dependent of the three states <code>enabled</code> (En), <code>ok</code> (Ok) and <code>selected</code> (Se). States in parenthesis are not occurring states, mentioned only to complete the decision table.<p/>
+ * The Panel as a whole can be de-/selected and dis-/enabled. The result extension can additionally have the states
+ * OK/NOK.
  * <p/>
- * Ok-state dependent text foreground color (OkDependent). The four colors are <code>OK_FULL</code> (full ok color), <code>OK_FADE</code> (faded ok color), <code>NOK_FULL</code> (full nok color) and <code>NOK_FADE</code> (faded nok color):
+ * To understand the detailed color changes in this panel, look at the decision tables for colors dependent of the three
+ * states <code>enabled</code> (En), <code>ok</code> (Ok) and <code>selected</code> (Se). States in parenthesis are not
+ * occurring states, mentioned only to complete the decision table.
+ * <p/>
+ * Ok-state dependent text foreground color (OkDependent). The four colors are <code>OK_FULL</code> (full ok color),
+ * <code>OK_FADE</code> (faded ok color), <code>NOK_FULL</code> (full nok color) and <code>NOK_FADE</code> (faded nok
+ * color):
  * <p/>
  * <pre>Decision table
  * En Ok Se |  OkDependent
@@ -49,7 +58,9 @@ import javax.swing.border.LineBorder;
  * 1  1  1  |  COLOR_OK_FADE
  * </pre>
  * <p/>
- * Ok-independent text foreground color (IndependentText) are <code>COLOR_FOREGROUND_DISABLED</code> (default disbled color), <code>COLOR_FOREGROUND_SELECTED</code> (selected foreground) and <code>COLOR_FOREGROUND_DESELECTED</code> (deselected foreground):
+ * Ok-independent text foreground color (IndependentText) are <code>COLOR_FOREGROUND_DISABLED</code> (default disabled
+ * color), <code>COLOR_FOREGROUND_SELECTED</code> (selected foreground) and <code>COLOR_FOREGROUND_DESELECTED</code>
+ * (deselected foreground):
  * <p/>
  * <pre>Decision tree
  * En Se |  IndependentText
@@ -317,6 +328,20 @@ public class RendererPanel extends JPanel
         // Extension must always be enabled, so that the foreground color can be set correctly.
         extension.setEnabled( true );
         text.setEnabled( enabled );
+    }
+
+    @Override
+    public void setBackground( Color bg )
+    {
+        super.setBackground( bg );
+        if ( extension != null )
+        {
+            extension.setBackground( bg );
+        }
+        if ( text != null )
+        {
+            text.setBackground( bg );
+        }
     }
 
     /**

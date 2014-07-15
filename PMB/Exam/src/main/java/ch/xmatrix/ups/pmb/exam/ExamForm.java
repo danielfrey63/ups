@@ -40,21 +40,21 @@ public abstract class ExamForm extends JFrame
 
     protected boolean exam = false;
 
-    public ExamForm() throws HeadlessException
+    public ExamForm( final boolean exam ) throws HeadlessException
     {
-        exam = ExamForm.class.getResource( "/test/test.xml" ) != null;
+        this.exam = exam;
 
         if ( exam )
         {
-            final int duration = Integer.parseInt( System.getProperty( "duration", "30" ) );
-            targetProvider = new ClockPanel.CountDownProvider( duration * 60 * 1000, new ActionListener()
+            final double duration = Double.parseDouble( System.getProperty( "duration", "30" ) );
+            targetProvider = new ClockPanel.CountDownProvider( (int) (duration * 60 * 1000), new ActionListener()
             {
                 public void actionPerformed( final ActionEvent e )
                 {
                     time.stop();
                     setVisible( false );
                     targetProvider.reset();
-                    if ( System.getProperty( "noPassword" ) == null )
+                    if ( !"".equals( System.getProperty( "password" ) ) )
                     {
                         new EndDialog( ExamForm.this ).setVisible( true );
                     }

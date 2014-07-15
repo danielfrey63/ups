@@ -18,34 +18,40 @@ package ch.xmatrix.ups.pmb.exam;
 
 import ch.jfactory.resource.Strings;
 import java.util.ResourceBundle;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
- * TODO: document
+ * Examination application.
  *
  * @author Daniel Frey
  * @version $Revision: 1.2 $ $Date: 2007/09/27 10:47:33 $
  */
 public class Main
 {
+    /**
+     * Pass in the following arguments as system properties:
+     *
+     * <ul>
+     * <li>The directory of the top picture directory</li>
+     * <li>The directory containing the XML files containing the list of taxa</li>
+     * <li>The name of the XML file for this session</li>
+     * <li>The time to run the examination</li>
+     * </ul>
+     *
+     * @param args not used
+     * @throws Exception
+     */
     public static void main( final String[] args ) throws Exception
     {
-//        RepaintManager.setCurrentManager( new CheckThreadViolationRepaintManager() );
         UIManager.setLookAndFeel( "com.jgoodies.looks.windows.WindowsLookAndFeel" );
         Strings.setResourceBundle( ResourceBundle.getBundle( "Strings" ) );
+
         SwingUtilities.invokeLater( new Runnable()
         {
             public void run()
             {
-                if ( ExamForm.class.getResource( "/test/test.xml" ) != null && System.getProperty( "noPassword" ) == null )
-                {
-                    final StartDialog startDialog = new StartDialog( null );
-                    startDialog.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-                    startDialog.setVisible( true );
-                }
                 final MainForm f = new MainForm( "Prüfung mit Bildern" );
                 f.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
                 f.setExtendedState( JFrame.MAXIMIZED_BOTH );

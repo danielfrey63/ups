@@ -1,0 +1,13 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Leucojum vernum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Euphorbia amygdaloides"/></setTaxon>
+        <setTaxon><specimenModel taxon="Ranunculus platanifolius"/></setTaxon>
+        <setTaxon><specimenModel taxon="Cerastium fontanum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Crataegus laevigata"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

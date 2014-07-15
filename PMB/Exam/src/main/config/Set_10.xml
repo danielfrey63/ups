@@ -1,0 +1,18 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Holcus lanatus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Carex sempervirens"/></setTaxon>
+        <setTaxon><specimenModel taxon="Teucrium montanum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Trichophorum caespitosum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Agrostis stolonifera"/></setTaxon>
+        <setTaxon><specimenModel taxon="Viburnum opulus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Chaerophyllum villarsii"/></setTaxon>
+        <setTaxon><specimenModel taxon="Eupatorium cannabinum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Onobrychis montana"/></setTaxon>
+        <setTaxon><specimenModel taxon="Juncus inflexus"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

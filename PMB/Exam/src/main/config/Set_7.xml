@@ -1,0 +1,15 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Asarum europaeum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Carex pallescens"/></setTaxon>
+        <setTaxon><specimenModel taxon="Juncus trifidus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Sedum acre"/></setTaxon>
+        <setTaxon><specimenModel taxon="Minuartia verna"/></setTaxon>
+        <setTaxon><specimenModel taxon="Viola hirta"/></setTaxon>
+        <setTaxon><specimenModel taxon="Androsace vandellii"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

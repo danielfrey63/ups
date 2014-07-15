@@ -1,0 +1,20 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Leontodon helveticus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Alopecurus pratensis"/></setTaxon>
+        <setTaxon><specimenModel taxon="Pulmonaria obscura"/></setTaxon>
+        <setTaxon><specimenModel taxon="Chelidonium majus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Carex echinata"/></setTaxon>
+        <setTaxon><specimenModel taxon="Rhododendron hirsutum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Ranunculus bulbosus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Cerastium latifolium"/></setTaxon>
+        <setTaxon><specimenModel taxon="Ranunculus alpestris"/></setTaxon>
+        <setTaxon><specimenModel taxon="Valeriana officinalis"/></setTaxon>
+        <setTaxon><specimenModel taxon="Papaver rhoeas"/></setTaxon>
+        <setTaxon><specimenModel taxon="Quercus petraea"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

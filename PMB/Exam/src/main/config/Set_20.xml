@@ -1,0 +1,28 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Tilia cordata"/></setTaxon>
+        <setTaxon><specimenModel taxon="Oxalis acetosella"/></setTaxon>
+        <setTaxon><specimenModel taxon="Bromus erectus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Orchis ustulata"/></setTaxon>
+        <setTaxon><specimenModel taxon="Euonymus europaea"/></setTaxon>
+        <setTaxon><specimenModel taxon="Salvia pratensis"/></setTaxon>
+        <setTaxon><specimenModel taxon="Rumex obtusifolius"/></setTaxon>
+        <setTaxon><specimenModel taxon="Chelidonium majus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Carex sylvatica"/></setTaxon>
+        <setTaxon><specimenModel taxon="Stellaria media"/></setTaxon>
+        <setTaxon><specimenModel taxon="Quercus petraea"/></setTaxon>
+        <setTaxon><specimenModel taxon="Athamanta cretensis"/></setTaxon>
+        <setTaxon><specimenModel taxon="Phleum pratense"/></setTaxon>
+        <setTaxon><specimenModel taxon="Hieracium murorum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Athyrium filix-femina"/></setTaxon>
+        <setTaxon><specimenModel taxon="Phyteuma spicatum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Polygonatum odoratum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Reynoutria japonica"/></setTaxon>
+        <setTaxon><specimenModel taxon="Eriophorum angustifolium"/></setTaxon>
+        <setTaxon><specimenModel taxon="Crataegus monogyna"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

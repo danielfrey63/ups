@@ -16,14 +16,12 @@
  */
 package ch.xmatrix.ups.pmb.exam;
 
-import ch.jfactory.file.OpenChooser;
 import ch.jfactory.math.RandomUtils;
 import ch.xmatrix.ups.model.ExamsetModel;
 import ch.xmatrix.ups.model.SetTaxon;
 import ch.xmatrix.ups.pmb.domain.Entry;
 import ch.xmatrix.ups.pmb.domain.FileEntry;
 import ch.xmatrix.ups.pmb.domain.SpeciesEntry;
-import ch.xmatrix.ups.pmb.test.TestTaxa;
 import ch.xmatrix.ups.pmb.ui.controller.AdjustSizeLoadedListener;
 import ch.xmatrix.ups.pmb.ui.controller.NavigationSelectionHandler;
 import ch.xmatrix.ups.pmb.ui.controller.PMBController;
@@ -31,24 +29,16 @@ import ch.xmatrix.ups.pmb.ui.model.EntryTreeModel;
 import ch.xmatrix.ups.pmb.ui.model.FileEntryThumbnailListModel;
 import ch.xmatrix.ups.pmb.ui.model.Settings;
 import ch.xmatrix.ups.pmb.util.SpeciesParser;
-import com.wegmueller.ups.lka.IAnmeldedaten;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -56,21 +46,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeSelectionModel;
 import javax.xml.transform.TransformerException;
 import net.java.jveez.cache.ImageStore;
 import net.java.jveez.vfs.Picture;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static java.awt.event.KeyEvent.KEY_PRESSED;
-import static java.awt.event.KeyEvent.KEY_RELEASED;
-import static java.awt.event.KeyEvent.VK_L;
 
 /**
- * TODO: document
+ * Exam main form. Uses the following system properties:
+ * <ul>
+ * <li><code>speciesDirectory</code>: The directory containing the species XML files (used in {@link ch.xmatrix.ups.pmb.exam.MainForm#initModel()})</li>
+ * <li><code>species</code>: The name of the XML file for this session (used in {@link ch.xmatrix.ups.pmb.exam.MainForm#initModel()})</li>
+ * <li><code>imageDirectory</code>: The directory of the top picture directory</li>
+ * <li><code>duration</code>: The time to run the examination</li>
+ * </ul>
  *
  * @author Daniel Frey
  * @version $Revision: 1.3 $ $Date: 2008/01/23 22:18:44 $
@@ -89,15 +80,11 @@ public class MainForm extends ExamForm
 
     private List<SpeciesEntry> examsetModelSpeciesEntries;
 
-    /** Controller to activate the students dialog for selecting another student. Does handle the password query. */
-    private StudentsDialogController studentsController;
-
     private long cacheSize;
-
-    private PasswordDialogController passwordController;
 
     public MainForm( final String s )
     {
+        super( true );
         initCacheSize();
         setTitle( s );
         model = new PMBExamModel();
@@ -119,6 +106,12 @@ public class MainForm extends ExamForm
         catch ( IOException e )
         {
             e.printStackTrace();
+        }
+        if ( !"".equals( System.getProperty( "password" ) ) )
+        {
+            final StartDialog startDialog = new StartDialog( this );
+            startDialog.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
+            startDialog.setVisible( true );
         }
     }
 
@@ -159,92 +152,6 @@ public class MainForm extends ExamForm
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
         imageLeft.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
         imageRight.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher( new KeyEventDispatcher()
-        {
-            public boolean dispatchKeyEvent( final KeyEvent e )
-            {
-                final int modifier = e.getModifiers();
-                final int code = e.getKeyCode();
-                if ( e.getID() == KEY_RELEASED )
-                {
-                    // ALT-L displays the configuration options
-                    if ( modifier == KeyEvent.ALT_MASK && code == VK_L && passwordController != null )
-                    {
-                        if ( passwordController.check() )
-                        {
-                            initEditMode( true );
-                        }
-                    }
-                    // ESC hides the configuration options
-                    else if ( (code == KeyEvent.VK_ESCAPE) && (passwordController != null) )
-                    {
-                        initEditMode( false );
-                    }
-                    // ALT-O shows the students dialog or initializes the credentials
-                    // only active if not started in exam mode
-                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_O && MainForm.class.getResource( "/test/test.xml" ) == null )
-                    {
-                        if ( studentsController == null )
-                        {
-                            initCredentials();
-                        }
-                        else
-                        {
-                            studentsController.setVisible( true );
-                        }
-                    }
-                    // ALT-D shows the demo open screen
-                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_D )
-                    {
-                        new DemoController( model ).loadDemoDirectory();
-                    }
-                    else if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_P )
-                    {
-
-                    }
-                }
-                else if ( e.getID() == KEY_PRESSED )
-                {
-                    // ALT-F4 to quit
-                    if ( modifier == KeyEvent.ALT_MASK && code == KeyEvent.VK_F4 && exam )
-                    {
-                        time.stop();
-                        final QuitDialog dialog;
-                        if ( System.getProperty( "noPassword" ) == null )
-                        {
-                            dialog = new QuitDialog( MainForm.this );
-                            dialog.setVisible( true );
-                            if ( dialog.hit )
-                            {
-                                doQuit();
-                            }
-                            else
-                            {
-                                time.start();
-                                Toolkit.getDefaultToolkit().beep();
-                            }
-                        }
-                        else
-                        {
-                            doQuit();
-                        }
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            private void initEditMode( final boolean enable )
-            {
-                imageRight.setToolbarVisible( enable );
-                //controller.setCurrentPicture( imageRight.getCurrentPicture(), imageRight );
-                imageLeft.setToolbarVisible( enable );
-                statusBar.setVisible( enable );
-                menuBar.setVisible( enable );
-            }
-        } );
-        // Is called when a student gets selected from the students list
         thumbnailList.addListSelectionListener( new ListSelectionListener()
         {
             public void valueChanged( final ListSelectionEvent e )
@@ -305,11 +212,12 @@ public class MainForm extends ExamForm
 
     private void initModel() throws TransformerException, IOException
     {
-        final String resourceFile;
-        resourceFile = exam ? "/test/test.xml" : "/demo/demo.xml";
-        final InputStream resource = MainForm.class.getResourceAsStream( resourceFile );
-        final InputStreamReader reader = new InputStreamReader( resource );
-        model.setDemo( true );
+        model.getSettings().setActivePicturePath( System.getProperty( "imagesDirectory" ) );
+
+        final String speciesDirectory = System.getProperty( "speciesDirectory" );
+        final String species = System.getProperty( "species" );
+        final InputStreamReader reader = new FileReader( new File( speciesDirectory, species ) );
+        model.setDemo( false );
         model.setCurrentExamsetModel( StudentDataLoader.getExamsetModels( reader ).getExamsetModels().get( 0 ) );
         IOUtils.closeQuietly( reader );
     }
@@ -360,55 +268,6 @@ public class MainForm extends ExamForm
         hierarchicalMapping.clear();
         SpeciesParser.findFileEntriesWithin( currentSpeciesEntry, hierarchicalMapping );
         controller.setCurrentPicture( controller.findHabitus(), imageLeft );
-    }
-
-    private void initCredentials()
-    {
-        final ExamsetFileFilter filter = new ExamsetFileFilter();
-        final OpenChooser chooser = new OpenChooser( filter, "pmb.open.password", System.getProperty( "user.dir" ) );
-        chooser.getChooser().setFileFilter( new FileFilter()
-        {
-            public boolean accept( final File f )
-            {
-                return f.isDirectory() || f.getName().endsWith( ".properties" );
-            }
-
-            public String getDescription()
-            {
-                return "Properties";
-            }
-        } );
-        chooser.setModal( true );
-        chooser.open();
-        final File[] files = chooser.getSelectedFiles();
-        if ( files.length == 1 )
-        {
-            FileInputStream stream = null;
-            try
-            {
-                final File file = files[0];
-                stream = new FileInputStream( file );
-                final Properties registry = new Properties();
-                registry.load( stream );
-                passwordController = new PasswordDialogController( registry );
-                if ( passwordController.check() )
-                {
-                    studentsController = new StudentsDialogController( new StudentsDialog( MainForm.this ), model, passwordController );
-                }
-            }
-            catch ( FileNotFoundException x )
-            {
-                LOG.error( "problem during load of password file", x );
-            }
-            catch ( IOException x )
-            {
-                LOG.error( "problem during load of credentials", x );
-            }
-            finally
-            {
-                IOUtils.closeQuietly( stream );
-            }
-        }
     }
 
     /** Precaches the habitus pictures. */
@@ -480,31 +339,7 @@ public class MainForm extends ExamForm
     private void initAllSpeciesEntries() throws ConfigurationException
     {
         final Settings settings = model.getSettings();
-        final String directory;
-        if ( model.isDemo() )
-        {
-            try
-            {
-                if ( exam )
-                {
-                    directory = TestTaxa.getTestPictures();
-                }
-                else
-                {
-                    directory = DemoTaxa.getDemoPictures();
-                }
-                settings.setActivePicturePath( directory );
-            }
-            catch ( IOException e )
-            {
-                LOG.error( "could not create temporary directory", e );
-                throw new ConfigurationException();
-            }
-        }
-        else
-        {
-            directory = settings.getActivePicturePath();
-        }
+        final String directory = settings.getActivePicturePath();
         model.setSpeciesEntries( new SpeciesParser( settings ).processFile( new File( directory ) ) );
     }
 
@@ -512,12 +347,11 @@ public class MainForm extends ExamForm
     private void initAllExamsetModelSpeciesEntries()
     {
         final Settings settings = model.getSettings();
-        final ExamsetModel currentExamsSetModel = model.getCurrentExamsetModel();
-        final IAnmeldedaten anmeldedaten = currentExamsSetModel.getRegistration().getAnmeldedaten();
-        final List<SetTaxon> currentSetTaxa = currentExamsSetModel.getSetTaxa();
-        examsetModelSpeciesEntries = new ArrayList<SpeciesEntry>( currentSetTaxa.size() );
+        final ExamsetModel examModel = model.getCurrentExamsetModel();
+        final List<SetTaxon> examTaxa = examModel.getSetTaxa();
+        examsetModelSpeciesEntries = new ArrayList<SpeciesEntry>( examTaxa.size() );
         final StringBuffer missing = new StringBuffer();
-        for ( final SetTaxon setTaxon : currentSetTaxa )
+        for ( final SetTaxon setTaxon : examTaxa )
         {
             final List<SpeciesEntry> aspects = new ArrayList<SpeciesEntry>();
             for ( final SpeciesEntry entry : model.getSpeciesEntries() )
@@ -565,22 +399,7 @@ public class MainForm extends ExamForm
 
     protected void doQuit()
     {
-        final PasswordDialogController passwordChecker = new PasswordDialogController();
-        if ( passwordController == null || (!passwordChecker.hasRegistry() || passwordChecker.check()) )
-        {
-            try
-            {
-                if ( ExamForm.class.getResource( "/test/test.xml" ) != null )
-                {
-                    FileUtils.deleteDirectory( new File( model.getSettings().getActivePicturePath() ) );
-                }
-            }
-            catch ( IOException e )
-            {
-                LOG.error( "could not delete temporary directory" );
-            }
-            System.exit( 0 );
-        }
+        System.exit( 0 );
     }
 
     protected void doSaveHabitusPosition()

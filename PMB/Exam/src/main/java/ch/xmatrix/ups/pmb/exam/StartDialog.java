@@ -4,15 +4,27 @@
 
 package ch.xmatrix.ups.pmb.exam;
 
-import java.awt.*;
+import com.jgoodies.forms.factories.Borders;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.*;
-import javax.swing.border.*;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
@@ -47,7 +59,7 @@ public class StartDialog extends JDialog
         {
             public void actionPerformed( final ActionEvent e )
             {
-                if ( new String( textField2.getPassword() ).equals( "PMBX_OnP13" ) )
+                if ( new String( textField2.getPassword() ).equals( System.getProperty( "password" ) ) )
                 {
                     success = true;
                     setVisible( false );
@@ -66,7 +78,7 @@ public class StartDialog extends JDialog
             {
                 if ( !success )
                 {
-                   System.exit( 0 );
+                    System.exit( 0 );
                 }
             }
         } );

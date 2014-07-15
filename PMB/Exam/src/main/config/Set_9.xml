@@ -1,0 +1,17 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Cerastium holosteoides"/></setTaxon>
+        <setTaxon><specimenModel taxon="Alopecurus pratensis"/></setTaxon>
+        <setTaxon><specimenModel taxon="Pulmonaria obscura"/></setTaxon>
+        <setTaxon><specimenModel taxon="Chelidonium majus"/></setTaxon>
+        <setTaxon><specimenModel taxon="Quercus robur"/></setTaxon>
+        <setTaxon><specimenModel taxon="Quercus pubescens"/></setTaxon>
+        <setTaxon><specimenModel taxon="Cerastium strictum"/></setTaxon>
+        <setTaxon><specimenModel taxon="Papaver rhoeas"/></setTaxon>
+        <setTaxon><specimenModel taxon="Quercus petraea"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

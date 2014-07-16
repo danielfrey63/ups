@@ -1,0 +1,9 @@
+<examsetsModel>
+  <examsetModels>
+    <examsetModel>
+      <setTaxa>
+        <setTaxon><specimenModel taxon="Ligustrum vulgare"/></setTaxon>
+      </setTaxa>
+    </examsetModel>
+  </examsetModels>
+</examsetsModel>

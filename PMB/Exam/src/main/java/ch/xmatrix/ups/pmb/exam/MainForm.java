@@ -107,12 +107,6 @@ public class MainForm extends ExamForm
         {
             e.printStackTrace();
         }
-        if ( !"".equals( System.getProperty( "password" ) ) )
-        {
-            final StartDialog startDialog = new StartDialog( this );
-            startDialog.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
-            startDialog.setVisible( true );
-        }
     }
 
     private void initCacheSize()
@@ -152,6 +146,7 @@ public class MainForm extends ExamForm
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
         imageLeft.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
         imageRight.addLoadedListener( new AdjustSizeLoadedListener( model.getInfoModel() ) );
+        // Is called when a student gets selected from the students list
         thumbnailList.addListSelectionListener( new ListSelectionListener()
         {
             public void valueChanged( final ListSelectionEvent e )

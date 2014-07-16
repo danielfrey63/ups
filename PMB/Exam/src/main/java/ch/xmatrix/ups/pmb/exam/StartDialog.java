@@ -46,6 +46,7 @@ public class StartDialog extends JDialog
     private void initCustomization()
     {
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
+        // seems to work but disrupts the repaint on the clock somehow
         //getRootPane().setDefaultButton( okButton );
         textField2.requestFocus();
         textField2.addCaretListener( new CaretListener()
@@ -63,7 +64,7 @@ public class StartDialog extends JDialog
                 {
                     success = true;
                     setVisible( false );
-                    dispose();
+                    //dispose();
                 }
                 else
                 {

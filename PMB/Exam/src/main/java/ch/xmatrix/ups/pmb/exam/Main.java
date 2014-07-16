@@ -21,6 +21,10 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 /**
  * Examination application.
@@ -52,9 +56,15 @@ public class Main
         {
             public void run()
             {
+                if ( !"".equals( System.getProperty( "password" ) ) )
+                {
+                    final StartDialog startDialog = new StartDialog( null );
+                    startDialog.setDefaultCloseOperation( DISPOSE_ON_CLOSE );
+                    startDialog.setVisible( true );
+                }
                 final MainForm f = new MainForm( "Prüfung mit Bildern" );
-                f.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
-                f.setExtendedState( JFrame.MAXIMIZED_BOTH );
+                f.setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
+                f.setExtendedState( MAXIMIZED_BOTH );
                 f.setVisible( true );
             }
         } );

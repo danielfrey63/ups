@@ -55,7 +55,7 @@ public class Settings
 
     private List<NamedValue> movePaths;
 
-    private List<NamedValue> orderTokens;
+    private List<OrderedNamedValue> orderTokens;
 
     public static final String SEPARATOR = ";";
 
@@ -183,12 +183,12 @@ public class Settings
         this.movePaths = movePaths;
     }
 
-    public List<NamedValue> getOrderTokens()
+    public List<OrderedNamedValue> getOrderTokens()
     {
         return orderTokens;
     }
 
-    public void setOrderTokens( final List<NamedValue> orderTokens )
+    public void setOrderTokens( final List<OrderedNamedValue> orderTokens )
     {
         this.orderTokens = orderTokens;
     }
@@ -274,7 +274,7 @@ public class Settings
         boolean matches = false;
         for ( final String s : inclusivePattern )
         {
-            matches = matches | string.matches( s );
+            matches = string.matches( s );
             if ( matches )
             {
                 break;
@@ -356,12 +356,12 @@ public class Settings
     public int getSortedPosition( final String token )
     {
         int i = 0;
-        for ( final NamedValue orderToken : orderTokens )
+        for ( final OrderedNamedValue orderToken : orderTokens )
         {
-            final String pattern = orderToken.getValue();
+            final String pattern = orderToken.getNamedValue().getValue();
             if ( token.matches( pattern ) )
             {
-                return i;
+                return orderToken.getOrder();
             }
             else
             {
@@ -393,16 +393,21 @@ public class Settings
             movePaths.add( new NamedValue( name, path ) );
         }
 
-        final String[] orderTokenStrings = prefs.get( PREFS_ORDER_TOKENS, "Unterseite|^Unterseite$|" +
-                "Oberseite|^Oberseite$|" +
-                "Längsschnitt|^Längsschnitt$|" +
-                "Querschnitt|^Querschnitt$|Rest|^[a-zA-Z0-9]+" ).split( "\\|" );
-        orderTokens = new ArrayList<NamedValue>( orderTokenStrings.length / 2 );
+        final String[] orderTokenStrings = prefs.get( PREFS_ORDER_TOKENS, "Habitus|^Habitus$|1|" +
+                "Oberseite|^Oberseite$|2|" +
+                "Unterseite|^Unterseite$|3|" +
+                "Längsschnitt|^Längsschnitt$|4|" +
+                "Querschnitt|^Querschnitt$|5|" +
+                "Herbar|^Herbar$|7|" +
+                "Rest|^.+|6" ).split( "\\|" );
+        orderTokens = new ArrayList<OrderedNamedValue>( orderTokenStrings.length / 3 );
         for ( int i = 0; i < orderTokenStrings.length; i++ )
         {
             final String name = orderTokenStrings[i++];
-            final String pattern = orderTokenStrings[i];
-            orderTokens.add( new NamedValue( name, pattern ) );
+            final String pattern = orderTokenStrings[i++];
+            orderTokens.add( new OrderedNamedValue(
+                    new NamedValue( name, pattern ),
+                    Integer.parseInt( orderTokenStrings[i] ) ) );
         }
     }
 
@@ -419,7 +424,7 @@ public class Settings
         prefs.put( PREFS_SPECIES_EXCLUDE_PATTERNS, getSpeciesExcludePatterns() );
         prefs.putBoolean( PREFS_SHOW_SETTINGS_ON_STARTUP, getShowSettingsOnStartup() );
 
-        final StringBuffer movePathStrings = new StringBuffer();
+        final StringBuilder movePathStrings = new StringBuilder();
         for ( final NamedValue namedValue : movePaths )
         {
             if ( movePathStrings.length() > 0 )
@@ -430,14 +435,14 @@ public class Settings
         }
         prefs.put( PREFS_MOVE_PATHS, movePathStrings.toString() );
 
-        final StringBuffer orderTokenStrings = new StringBuffer();
-        for ( final NamedValue orderToken : orderTokens )
+        final StringBuilder orderTokenStrings = new StringBuilder();
+        for ( final OrderedNamedValue orderToken : orderTokens )
         {
             if ( orderTokenStrings.length() > 0 )
             {
                 orderTokenStrings.append( "|" );
             }
-            orderTokenStrings.append( orderToken.name ).append( "|" ).append( orderToken.value );
+            orderTokenStrings.append( orderToken.getNamedValue().name ).append( "|" ).append( orderToken.getNamedValue().value );
         }
         prefs.put( PREFS_ORDER_TOKENS, orderTokenStrings.toString() );
     }
@@ -498,6 +503,28 @@ public class Settings
             final NamedValue namedValue = (NamedValue) value;
             editor.setText( namedValue.getName() + SEPARATOR + namedValue.getValue() );
             return editor;
+        }
+    }
+
+    public static class OrderedNamedValue
+    {
+        private final NamedValue namedValue;
+        private final int order;
+
+        public OrderedNamedValue( final NamedValue namedValue, final int order )
+        {
+            this.namedValue = namedValue;
+            this.order = order;
+        }
+
+        public NamedValue getNamedValue()
+        {
+            return namedValue;
+        }
+
+        public int getOrder()
+        {
+            return order;
         }
     }
 }

@@ -19,12 +19,7 @@ package ch.xmatrix.ups.pmb.ui.model;
 import ch.jfactory.component.tree.AbstractTreeModel;
 import ch.xmatrix.ups.pmb.domain.Entry;
 import ch.xmatrix.ups.pmb.domain.FileEntry;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import javax.swing.tree.TreePath;
 
 /**
@@ -37,12 +32,12 @@ public class EntryTreeModel extends AbstractTreeModel
 {
     private final Comparator<Entry> sorter;
 
-    private final Collection<Entry> entries;
+    private final List<Entry> entries;
 
     public EntryTreeModel( final Collection<Entry> entries )
     {
         super( new Entry( "root", null, null ) );
-        this.entries = entries;
+        this.entries = new ArrayList( entries );
         sorter = new Comparator<Entry>()
         {
             public int compare( final Entry e1, final Entry e2 )
@@ -52,6 +47,7 @@ public class EntryTreeModel extends AbstractTreeModel
                 return p1 - p2;
             }
         };
+        Collections.sort( this.entries, sorter );
     }
 
     protected void remove( final Object child, final TreePath parentPath )
@@ -66,9 +62,7 @@ public class EntryTreeModel extends AbstractTreeModel
     {
         if ( parent == root )
         {
-            final Entry[] strings = entries.toArray( new Entry[entries.size()] );
-            Arrays.sort( strings );
-            return strings[index];
+            return entries.get( index );
         }
         else
         {
@@ -107,7 +101,7 @@ public class EntryTreeModel extends AbstractTreeModel
         final List<Entry> children = new ArrayList<Entry>();
         for ( final Entry child : list )
         {
-            if ( !( child instanceof FileEntry ) )
+            if ( !(child instanceof FileEntry) )
             {
                 children.add( child );
             }

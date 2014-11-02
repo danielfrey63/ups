@@ -7,6 +7,8 @@ import ch.jfactory.component.list.AlternateListCellRenderer;
 import ch.xmatrix.ups.pmb.list.DefaultMutableListModel;
 import ch.xmatrix.ups.pmb.list.JMutableList;
 import ch.xmatrix.ups.pmb.ui.model.Settings;
+import static ch.xmatrix.ups.pmb.ui.model.Settings.NamedValue;
+import static ch.xmatrix.ups.pmb.ui.model.Settings.OrderedNamedValue;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.jgoodies.forms.factories.FormFactory;
@@ -96,7 +98,7 @@ public class PrefsForm extends JDialog
                                                            final boolean isSelected, final boolean cellHasFocus )
             {
                 final JLabel label = (JLabel) super.getListCellRendererComponent( list, object, index, isSelected, cellHasFocus );
-                final Settings.NamedValue namedValue = (Settings.NamedValue) object;
+                final NamedValue namedValue = (NamedValue) object;
                 final String name = namedValue.getName();
                 final String value = namedValue.getValue();
                 final String text = name + "=" + value;
@@ -111,7 +113,7 @@ public class PrefsForm extends JDialog
                                                            final boolean isSelected, final boolean cellHasFocus )
             {
                 final JLabel label = (JLabel) super.getListCellRendererComponent( list, object, index, isSelected, cellHasFocus );
-                final Settings.NamedValue namedValue = (Settings.NamedValue) object;
+                final NamedValue namedValue = (NamedValue) object;
                 final String name = namedValue.getName();
                 final String value = namedValue.getValue();
                 final String text;
@@ -147,16 +149,16 @@ public class PrefsForm extends JDialog
         speciesExcludePatterns.setText( settings.getSpeciesExcludePatterns() );
         showSettingsCheckBox.setSelected( settings.getShowSettingsOnStartup() );
         orderListModel = new DefaultMutableListModel();
-        final List<Settings.NamedValue> orderTokens = settings.getOrderTokens();
-        for ( final Settings.NamedValue orderToken : orderTokens )
+        final List<OrderedNamedValue> orderTokens = settings.getOrderTokens();
+        for ( final OrderedNamedValue orderToken : orderTokens )
         {
             orderListModel.addElement( orderToken );
         }
         orderList.setModel( orderListModel );
 
         movePathModel = new DefaultMutableListModel();
-        final List<Settings.NamedValue> movePaths = settings.getMovePaths();
-        for ( final Settings.NamedValue movePath : movePaths )
+        final List<NamedValue> movePaths = settings.getMovePaths();
+        for ( final NamedValue movePath : movePaths )
         {
             movePathModel.addElement( movePath );
         }
@@ -189,20 +191,21 @@ public class PrefsForm extends JDialog
         settings.setShowSettingsOnStartup( showSettingsCheckBox.isSelected() );
 
         final int movePathsSize = movePathModel.getSize();
-        final List<Settings.NamedValue> movePathList = new ArrayList<Settings.NamedValue>( movePathsSize );
+        final List<NamedValue> movePathList = new ArrayList<NamedValue>( movePathsSize );
         for ( int i = 0; i < movePathsSize; i++ )
         {
-            final Settings.NamedValue item = (Settings.NamedValue) movePathModel.getElementAt( i );
+            final NamedValue item = (NamedValue) movePathModel.getElementAt( i );
             movePathList.add( item );
         }
         settings.setMovePaths( movePathList );
 
         final int orderListSize = orderListModel.getSize();
-        final List<Settings.NamedValue> orderList = new ArrayList<Settings.NamedValue>( orderListSize );
+        final List<OrderedNamedValue> orderList = new ArrayList<OrderedNamedValue>( orderListSize );
         for ( int i = 0; i < orderListSize; i++ )
         {
-            final Settings.NamedValue item = (Settings.NamedValue) orderListModel.getElementAt( i );
-            orderList.add( item );
+            final NamedValue item = (NamedValue) orderListModel.getElementAt( i );
+            final OrderedNamedValue orderItem = new OrderedNamedValue( item, i );
+            orderList.add( orderItem );
         }
         settings.setOrderTokens( orderList );
 
@@ -281,7 +284,7 @@ public class PrefsForm extends JDialog
         {
             newIndex = model.getSize();
         }
-        model.add( newIndex, new Settings.NamedValue( "Neuer Name", "Neuer Wert" ) );
+        model.add( newIndex, new NamedValue( "Neuer Name", "Neuer Wert" ) );
         list.setSelectedIndex( newIndex );
     }
 

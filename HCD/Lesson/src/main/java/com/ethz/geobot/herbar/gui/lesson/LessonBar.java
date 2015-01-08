@@ -26,8 +26,11 @@ import ch.jfactory.application.view.border.BevelDirection;
 import ch.jfactory.application.view.border.ThinBevelBorder;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.ObjectPopup;
-import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
@@ -35,13 +38,14 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.WEST;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -50,16 +54,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.WEST;
 
 /**
  * @author $Author: daniel_frey $
@@ -133,25 +127,39 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private JButton createSubModusSwitcher()
     {
-        final SubMode[] subModi = SubMode.values();
-        final JButton subModesToggle = new JButton( subModi[0].name() );
-        subModesToggle.setFocusPainted( false );
-        subModesToggle.setText( Abfragen.name() );
-        subModesToggle.setPreferredSize( subModesToggle.getPreferredSize() );
-        subModesToggle.setText( Lernen.name() );
+        final String[] subModi = new String[2];
+        for ( int i = 0; i < SubMode.values().length; i++ )
+        {
+            SubMode s = SubMode.values()[i];
+            subModi[i] = Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", s.name() );
+        }
+        final JButton subModesToggle = ComponentFactory.createButton( LessonMode.class, "BUTTON.SUBMODUS", new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                final String text = ((JButton) e.getSource()).getText();
+                final int currentPos = Arrays.binarySearch( subModi, text );
+                final SubMode newSubMode = SubMode.values()[((currentPos + 1) % 2)];
+                taxStateModel.setGlobalSubMode( newSubMode );
+            }
+        } );
+        subModesToggle.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", Abfragen.name() ) );
         subModesToggle.setSize( subModesToggle.getPreferredSize() );
+        subModesToggle.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", Lernen.name() ) );
+
         taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                listButton.setText( taxStateModel.getModel().toString() );
+                listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
             }
         } );
         taxStateModel.addPropertyChangeListener( List.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
                 taxonControl.setCursor( taxStateModel.getTaxList() );
             }
@@ -159,45 +167,34 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
-                final Taxon focus = (Taxon) evt.getNewValue();
+                final Taxon focus = (Taxon) e.getNewValue();
                 taxonControl.getIteratorCursor().setCurrent( focus );
             }
         } );
         taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( final PropertyChangeEvent evt )
+            public void propertyChange( final PropertyChangeEvent e )
             {
-                //breadCrumbBuilder.setGlobalSubMode( (SubMode) evt.getNewValue() );
-                subModesToggle.setText( taxStateModel.getGlobalSubMode().name() );
+                subModesToggle.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", e.getNewValue().toString() ) );
             }
         } );
         taxStateModel.addPropertyChangeListener( Ordered.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
                 setOrder();
-            }
-        } );
-        subModesToggle.addActionListener( new ActionListener()
-        {
-            @Override
-            public void actionPerformed( ActionEvent e )
-            {
-                final int currentPos = Arrays.binarySearch( subModi, SubMode.valueOf( subModesToggle.getText() ) );
-                final SubMode newSubMode = subModi[( ( currentPos + 1 ) % 2 )];
-                taxStateModel.setGlobalSubMode( newSubMode );
             }
         } );
         taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
-                final boolean isQuery = evt.getNewValue() == Abfragen;
+                final boolean isQuery = e.getNewValue() == Abfragen;
                 final SubMode subMode = taxStateModel.getSubMode( taxStateModel.getFocus().getName() );
                 final JComponent queryPanel = queryBuilder.getPanel();
                 if ( isQuery && subMode != null )
@@ -255,14 +252,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private void setOrder()
     {
-        final boolean isSorted = taxStateModel.isOrdered();
-
-        String orderIcon = "" + isSorted;
-        orderIcon = Strings.getString( LessonMode.class, "BUTTON.ORDER.STATE.ICON", orderIcon );
-        final ImageIcon icon = ImageLocator.getIcon( orderIcon );
-        orderButton.setIcon( icon );
-
-        final String orderText = ( isSorted ? "BUTTON.ORDER.STATE.SORTED.TEXT" : "BUTTON.ORDER.STATE.RANDOM.TEXT" );
+        final String orderText = (taxStateModel.isOrdered() ? "BUTTON.ORDER.STATE.SORTED.TEXT" : "BUTTON.ORDER.STATE.RANDOM.TEXT");
         orderButton.setText( Strings.getString( LessonMode.class, orderText ) );
     }
 

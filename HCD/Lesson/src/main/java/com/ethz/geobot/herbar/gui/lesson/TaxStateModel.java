@@ -24,6 +24,9 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -34,14 +37,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Scope;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 
 public class TaxStateModel
 {
@@ -219,7 +214,7 @@ public class TaxStateModel
         // Todo: silly workaround b/c the child getter doesn't retrive the scope.
         if ( vals.scope.getLevel() == vals.level )
         {
-            newTaxList = new Taxon[] {vals.scope};
+            newTaxList = new Taxon[]{vals.scope};
         }
         fire.add( new FireArray( List.name(), taxList, newTaxList ) );
         taxList = newTaxList;

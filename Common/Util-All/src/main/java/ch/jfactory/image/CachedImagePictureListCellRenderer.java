@@ -68,7 +68,7 @@ public class CachedImagePictureListCellRenderer extends DefaultListCellRenderer
             setIcon( null );
         }
         setBorder( isSelected ? selectedBorder : unselectedBorder );
-        setToolTipText( picture.getName() );
+        //setToolTipText( picture.getName() );
         return this;
     }
 }

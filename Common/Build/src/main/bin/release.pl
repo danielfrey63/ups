@@ -304,7 +304,6 @@ print "\nChecking for current revision\n";
 if (!$dev || ! -e "target/release-script/updates.txt") {
     $debug and print "  [DEBUG] Creating target/release-script/updates.txt\n";
     `svn update $root | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
-    `svn update C:/Daten/Daten/All/Workspace | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }

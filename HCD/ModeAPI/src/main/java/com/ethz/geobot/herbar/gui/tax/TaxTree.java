@@ -141,7 +141,7 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
      */
     private static TreeNode createTaxonTreeNode( final Taxon tax )
     {
-        return new DefaultTaxonTreeNode( tax );
+        return DefaultTaxonTreeNode.createOrGetTreeNode( tax );
     }
 
     /**

@@ -5,6 +5,8 @@ import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.ObjectPopup;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.resource.ImageLocator;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.gui.tax.TaxTree;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -13,33 +15,21 @@ import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.Timer;
+import java.util.Enumeration;
+import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
-import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.lang.ArrayUtils.contains;
 
 public class NavigationBuilder implements Builder
@@ -92,22 +82,21 @@ public class NavigationBuilder implements Builder
             @Override
             public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
             {
-                final Taxon taxon = ( (TaxonTreeNode) value ).getTaxon();
+                final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
                 final boolean query = taxStateModel.getSubMode( taxon.getName() ) == Abfragen;
                 final Taxon filterTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
                 final Level level = taxon.getLevel();
                 final Taxon[] taxList = taxStateModel.getTaxList();
-                panel.setIcon( ImageLocator.getIcon( "icon" + ( level == null ? "" : level.getName() ) + ".gif" ) );
+                panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
                 panel.setText( query ? "Welches Taxon ist das?" : taxon.toString() );
                 final boolean containsFilterTaxon = contains( taxList, filterTaxon );
                 final boolean containsTaxon = contains( taxList, taxon );
                 final boolean listHasTaxon = filterTaxon != null;
                 final boolean sameLevels = taxStateModel.getLevel() == taxon.getLevel();
-                panel.setEnabled( listHasTaxon && sameLevels && ( containsFilterTaxon || containsTaxon ) );
+                panel.setEnabled( listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
                 panel.setSelected( taxStateModel.getFocus().equals( taxon ) );
-                radio.setEnabled( listHasTaxon );
-                radio.setSelected( taxStateModel.getScope().equals( taxon ) );
                 radio.setEnabled( true );
+                radio.setSelected( taxStateModel.getScope().equals( taxon ) );
                 panel.update();
                 return panel;
             }
@@ -126,16 +115,15 @@ public class NavigationBuilder implements Builder
         taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
-                taxTree.setSelectedTaxon( (Taxon) evt.getNewValue() );
-                taxTree.repaint();
+                taxTree.setSelectedTaxon( (Taxon) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
                 taxTree.setRootTaxon( taxStateModel.getModel().getRootTaxon() );
             }
@@ -143,26 +131,58 @@ public class NavigationBuilder implements Builder
         taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent evt )
+            public void propertyChange( PropertyChangeEvent e )
             {
-                refreshTaxTree( taxTree );
+                final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
+                TreePath path = taxTree.getSelectionPath();
+                Object node;
+                do
+                {
+                    node = path.getLastPathComponent();
+                    model.nodeChanged( (TreeNode) node );
+                    path = path.getParentPath();
+                }
+                while ( path != null && path.getPathCount() > 0 );
             }
         } );
-        taxTree.addHierarchyListener( new HierarchyListener()
+        taxTree.addAncestorListener( new AncestorListener()
         {
             @Override
-            public void hierarchyChanged( HierarchyEvent e )
+            public void ancestorAdded( AncestorEvent event )
             {
-                refreshTaxTree( taxTree );
+                final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
+                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) model.getRoot();
+                final TreePath path = new TreePath( node );
+                ensureVisibleNodes( taxTree, model, path );
+            }
+
+            @Override
+            public void ancestorRemoved( AncestorEvent event )
+            {
+            }
+
+            @Override
+            public void ancestorMoved( AncestorEvent e )
+            {
             }
         } );
+        ;
     }
 
-    private void refreshTaxTree( final TaxTree taxTree )
+    private void ensureVisibleNodes( final JTree tree, final DefaultTreeModel model, final TreePath path )
     {
-        final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
-        model.reload();
-        taxTree.setSelectedTaxon( taxStateModel.getFocus() );
+        final Enumeration<TreePath> descendants = tree.getExpandedDescendants( path );
+        final TreeNode node = (TreeNode) path.getLastPathComponent();
+        model.nodeChanged( node );
+        while ( descendants != null && descendants.hasMoreElements() )
+        {
+            final TreePath childPath = descendants.nextElement();
+            ensureVisibleNodes( tree, model, childPath );
+        }
+        for ( int i = 0; i < node.getChildCount(); i++ )
+        {
+            model.nodeChanged( node.getChildAt( i ) );
+        }
     }
 
     private class Controller extends MouseAdapter implements KeyListener, ActionListener

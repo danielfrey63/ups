@@ -25,6 +25,10 @@
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
+            <groupId>ch.xmatrix.le</groupId>
+            <artifactId>ch.xmatrix.le.modelimpl</artifactId>
+        </dependency>
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>

@@ -31,6 +31,8 @@ package com.ethz.geobot.herbar.util;
 
 import com.ethz.geobot.herbar.model.Taxon;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.tree.TreeNode;
 
@@ -43,74 +45,124 @@ import javax.swing.tree.TreeNode;
  */
 public class DefaultTaxonTreeNode implements TaxonTreeNode
 {
-    /** The <code>Taxon</code> object to be wrapped. */
+    /**
+     * The <code>Taxon</code> object to be wrapped.
+     */
     private final Taxon tax;
+
+    /**
+     * Collect all created Nodes.
+     */
+    private static final Map<Taxon, DefaultTaxonTreeNode> MAP = new HashMap<Taxon, DefaultTaxonTreeNode>();
+
+    /**
+     * Factory method ensuring every TreeNode is created once only.
+     *
+     * @param taxon the Taxon to wrap into the Node
+     * @return the node, either preexisting else freshly created
+     */
+    public static DefaultTaxonTreeNode createOrGetTreeNode( final Taxon taxon )
+    {
+        if ( taxon == null )
+        {
+            return null;
+        }
+        final DefaultTaxonTreeNode node;
+        if ( MAP.get( taxon ) == null )
+        {
+            node = new DefaultTaxonTreeNode( taxon );
+            MAP.put( taxon, node );
+        }
+        else
+        {
+            node = MAP.get( taxon );
+        }
+        return node;
+    }
 
     /**
      * Wrappes a Taxon into a TreeNode.
      *
      * @param tax The Taxon to be wrapped
      */
-    public DefaultTaxonTreeNode( final Taxon tax )
+    private DefaultTaxonTreeNode( final Taxon tax )
     {
         this.tax = tax;
     }
 
-    /** @see TaxonTreeNode#getTaxon() */
+    /**
+     * @see TaxonTreeNode#getTaxon()
+     */
     public Taxon getTaxon()
     {
         return tax;
     }
 
-    /** @see TreeNode#getAllowsChildren() */
+    /**
+     * @see TreeNode#getAllowsChildren()
+     */
     public boolean getAllowsChildren()
     {
         return tax.getLevel().getChildLevel() == null;
     }
 
-    /** @see TreeNode#getChildAt(int) */
+    /**
+     * @see TreeNode#getChildAt(int)
+     */
     public TreeNode getChildAt( final int param )
     {
-        return new DefaultTaxonTreeNode( tax.getChildTaxon( param ) );
+        return createOrGetTreeNode( tax.getChildTaxon( param ) );
     }
 
-    /** @see TreeNode#getChildCount() */
+    /**
+     * @see TreeNode#getChildCount()
+     */
     public int getChildCount()
     {
         return tax.getChildTaxa().length;
     }
 
-    /** @see TreeNode#getIndex(TreeNode) */
+    /**
+     * @see TreeNode#getIndex(TreeNode)
+     */
     public int getIndex( final TreeNode treeNode )
     {
-        return tax.getChildTaxon( ( (DefaultTaxonTreeNode) treeNode ).getTaxon() );
+        return tax.getChildTaxon( ((DefaultTaxonTreeNode) treeNode).getTaxon() );
     }
 
-    /** @see TreeNode#getParent() */
+    /**
+     * @see TreeNode#getParent()
+     */
     public TreeNode getParent()
     {
-        return new DefaultTaxonTreeNode( tax.getParentTaxon() );
+        return createOrGetTreeNode( tax.getParentTaxon() );
     }
 
-    /** @see TreeNode#isLeaf() */
+    /**
+     * @see TreeNode#isLeaf()
+     */
     public boolean isLeaf()
     {
         return getChildCount() == 0;
     }
 
-    /** @see TreeNode#children() */
+    /**
+     * @see TreeNode#children()
+     */
     public Enumeration children()
     {
         final Taxon[] taxa = tax.getChildTaxa();
         final Vector v = new Vector( taxa.length );
         for ( final Taxon aTaxa : taxa )
         {
-            v.addElement( new DefaultTaxonTreeNode( aTaxa ) );
+            v.addElement( createOrGetTreeNode( aTaxa ) );
         }
         return v.elements();
     }
 
-    /** @see Object#toString() */
+    /**
+     * @see Object#toString()
+     */
     public String toString()
     {
         return tax.toString();

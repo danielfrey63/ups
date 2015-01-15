@@ -81,11 +81,8 @@ public class LessonPanel extends ModeActivationPanel
         try
         {
             final HerbarContext context = mode.getHerbarContext();
-            final HerbarGUIManager guiManager = context.getHerbarGUIManager();
-            final JFrame parent = guiManager.getParentFrame();
-            final HerbarModel herbarModel;
 
-            herbarModel = context.getDataModel();
+            final HerbarModel herbarModel = context.getDataModel();
             taxStateModel = new TaxStateModel( herbarModel );
 
             final JSplitPane splitPane = new NiceSplitPane();

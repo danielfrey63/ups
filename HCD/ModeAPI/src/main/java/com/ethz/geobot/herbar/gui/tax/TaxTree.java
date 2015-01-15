@@ -114,6 +114,7 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
     {
         if ( tax != null )
         {
+            DefaultTaxonTreeNode.clearCache();
             setRootTreeNode( createTaxonTreeNode( tax ) );
         }
         else

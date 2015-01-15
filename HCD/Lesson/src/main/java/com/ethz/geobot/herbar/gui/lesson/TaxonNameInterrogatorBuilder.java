@@ -140,8 +140,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
         toolBar.add( ComponentFactory.createSeparator( 0, 3, 0, 0 ) );
         for ( int i = 0; i < taxonNamePanels.size(); i++ )
         {
-            final TaxonNamePanel panel = taxonNamePanels.get( taxonNamePanels.size() - 1 - i );
-            toolBar.add( panel );
+            toolBar.add( taxonNamePanels.get( taxonNamePanels.size() - 1 - i ) );
             if ( i < taxonNamePanels.size() - 1 )
             {
                 toolBar.add( ComponentFactory.createArrowSeparator( 0, 7, 0, 7 ) );
@@ -155,16 +154,23 @@ public class TaxonNameInterrogatorBuilder implements Builder
     private List<TaxonNamePanel> getTaxonNamePanels( Taxon focus )
     {
         final SubMode subMode = taxStateModel.getGlobalSubMode();
-        taxStateModel.clearSubModes();
 
         final List<TaxonNamePanel> list = new ArrayList<TaxonNamePanel>();
         Taxon parent = focus;
         while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null )
         {
-            LOG.trace( "iterating up to " + parent );
-            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
-            list.add( taxonNamePanel );
-            parent = parent.getParentTaxon();
+            // Todo: Total hack, generalize or abstract the retrieval of a literal level object.
+            //if ( !(parent.getLevel().getName().equals( "Gattung" ) && taxStateModel.getLevel().getName().equals( "Art" )) )
+            {
+                LOG.trace( "iterating up to " + parent );
+                final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
+                list.add( taxonNamePanel );
+                parent = parent.getParentTaxon();
+            }
+            //else
+            {
+                //    LOG.trace( "skipping addition of " + parent );
+            }
         }
         return list;
     }

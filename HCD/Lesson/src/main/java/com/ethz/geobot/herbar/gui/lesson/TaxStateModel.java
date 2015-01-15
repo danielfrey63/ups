@@ -24,9 +24,6 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -37,6 +34,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Level;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Scope;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 
 public class TaxStateModel
 {
@@ -133,7 +139,12 @@ public class TaxStateModel
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalOrdered( fire, ordered );
+            // Bit hacky: In order to get a focus change event thrown despite the fact that the focus taxon remains the
+            // same, we change the focus first to another taxon.
+            final Taxon focus = getFocus();
             setInternalFocus( fire, taxList[0] );
+            setInternalFocus( fire, taxList[ArrayUtils.indexOf( taxList, focus )] );
+            setInternalGlobalSubMode( fire, getGlobalSubMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -144,8 +155,26 @@ public class TaxStateModel
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalFocus( fire, focus );
+            setInternalGlobalSubMode( fire, getGlobalSubMode() );
             fireAllPropertyChangeEvents( fire );
         }
+    }
+
+    public void setGlobalSubMode( final SubMode subMode )
+    {
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        setInternalGlobalSubMode( fire, subMode );
+        fireAllPropertyChangeEvents( fire );
+    }
+
+    public void setSubMode( final String taxon, final SubMode subMode )
+    {
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        final SubMode oldGlobalSubMode = getGlobalSubMode();
+        subModes.put( taxon, subMode );
+        final SubMode newGlobalSubMode = getGlobalSubMode();
+        fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, newGlobalSubMode ) );
+        fireAllPropertyChangeEvents( fire );
     }
 
     /**
@@ -165,7 +194,7 @@ public class TaxStateModel
 
     /**
      * Sets the scope if needed, registers a notification if needed and adjusts the level if needed. Make sure the
-     * model is set correctly before.
+     * model is set correctly before. Handles also the case where a new scope doesn't match the current level.
      *
      * @param fire  the notifications list
      * @param scope the new scope
@@ -181,7 +210,7 @@ public class TaxStateModel
             if ( !ArrayUtils.contains( levels, vals.level ) )
             {
                 final Level level = levels[levels.length - 1];
-                fire.add( new FireArray( TaxState.Level.name(), vals.level, level ) );
+                fire.add( new FireArray( Level.name(), vals.level, level ) );
                 vals.level = level;
             }
         }
@@ -198,20 +227,21 @@ public class TaxStateModel
     {
         if ( level != null && level != vals.level )
         {
-            fire.add( new FireArray( TaxState.Level.name(), vals.level, level ) );
+            fire.add( new FireArray( Level.name(), vals.level, level ) );
             vals.level = level;
         }
     }
 
     /**
-     * Recreates the taxon list. Make sure the model, scope and level have been set correctly before.
+     * Recreates the taxon list. Make sure the model, scope and level have been set correctly before. Handles the case
+     * where the scope equals to the focus.
      *
      * @param fire
      */
     private void setInternalTaxList( ArrayList<FireArray> fire )
     {
         Taxon[] newTaxList = vals.scope.getAllChildTaxa( vals.level );
-        // Todo: silly workaround b/c the child getter doesn't retrive the scope.
+        // Todo: silly workaround b/c the child getter doesn't retrieve the scope.
         if ( vals.scope.getLevel() == vals.level )
         {
             newTaxList = new Taxon[]{vals.scope};
@@ -252,22 +282,26 @@ public class TaxStateModel
     {
         if ( focus != null && !focus.equals( vals.focus ) )
         {
-
             fire.add( new FireArray( Focus.name(), vals.focus, focus ) );
             vals.focus = focus;
         }
     }
 
-    /**
-     * Notifies all the registered events.
-     *
-     * @param fire the notifications list
-     */
-    private void fireAllPropertyChangeEvents( final ArrayList<FireArray> fire )
+    private void setInternalGlobalSubMode( ArrayList<FireArray> fire, SubMode subMode )
     {
-        for ( final FireArray f : fire )
+        final SubMode oldGlobalSubMode = getGlobalSubMode();
+        if ( subMode != null && subMode != oldGlobalSubMode )
         {
-            propertyChangeSupport.firePropertyChange( f.name, f.oldVal, f.newVal );
+            fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, subMode ) );
+        }
+        subModes.clear();
+        Taxon taxon = getFocus();
+        // Make sure the root taxon is not included
+        while ( taxon.getParentTaxon() != null )
+        {
+            //fire.add( new FireArray( SubModus.name(), , subMode ) );
+            subModes.put( taxon.getName(), subMode );
+            taxon = taxon.getParentTaxon();
         }
     }
 
@@ -301,44 +335,6 @@ public class TaxStateModel
         return vals.ordered;
     }
 
-    public void clearSubModes()
-    {
-        subModes.clear();
-    }
-
-    public void setGlobalSubMode( final SubMode subMode )
-    {
-        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalGlobalSubMode( fire, subMode );
-        fireAllPropertyChangeEvents( fire );
-    }
-
-    private void setInternalGlobalSubMode( ArrayList<FireArray> fire, SubMode subMode )
-    {
-        final SubMode oldGlobalSubMode = getGlobalSubMode();
-        if ( subMode != null && subMode != oldGlobalSubMode )
-        {
-            fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, subMode ) );
-        }
-        for ( String taxon : subModes.keySet() )
-        {
-            addSubMode( taxon, subMode );
-        }
-    }
-
-    public void addSubMode( final String taxon, final SubMode subMode )
-    {
-        subModes.put( taxon, subMode );
-    }
-
-    public void setSubMode( final String taxon, final SubMode subMode )
-    {
-        final SubMode oldGlobalSubMode = getGlobalSubMode();
-        subModes.put( taxon, subMode );
-        final SubMode newGlobalSubMode = getGlobalSubMode();
-        propertyChangeSupport.firePropertyChange( SubModus.name(), oldGlobalSubMode, newGlobalSubMode );
-    }
-
     public SubMode getSubMode( final String taxon )
     {
         return subModes.get( taxon );
@@ -366,9 +362,17 @@ public class TaxStateModel
         propertyChangeSupport.addPropertyChangeListener( property, listener );
     }
 
-    public synchronized void addPropertyChangeListener( final PropertyChangeListener listener )
+    /**
+     * Notifies all the registered events.
+     *
+     * @param fire the notifications list
+     */
+    private void fireAllPropertyChangeEvents( final ArrayList<FireArray> fire )
     {
-        propertyChangeSupport.addPropertyChangeListener( listener );
+        for ( final FireArray f : fire )
+        {
+            propertyChangeSupport.firePropertyChange( f.name, f.oldVal, f.newVal );
+        }
     }
 
     class TaxStateValues
@@ -377,11 +381,6 @@ public class TaxStateModel
          * Holds the value for the property model.
          */
         public HerbarModel model;
-
-        /**
-         * Holds the value for the property list.
-         */
-        public boolean list;
 
         /**
          * Holds value of property scope.
@@ -417,12 +416,20 @@ public class TaxStateModel
         Lernen, Abfragen
     }
 
+    /**
+     * Keeps track of generals TaxStateModel changes.
+     */
     class FireArray
     {
         public final String name;
         public final Object oldVal;
         public final Object newVal;
 
+        /**
+         * @param name   type of the event
+         * @param oldVal old state value or Taxon object (for type {@link SubMode SubMode} only)
+         * @param newVal new state value
+         */
         FireArray( final String name, final Object oldVal, final Object newVal )
         {
             this.name = name;

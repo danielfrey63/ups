@@ -15,7 +15,6 @@ import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
 import static java.awt.Toolkit.getDefaultToolkit;
@@ -118,6 +117,7 @@ public class NavigationBuilder implements Builder
             public void propertyChange( PropertyChangeEvent e )
             {
                 taxTree.setSelectedTaxon( (Taxon) e.getNewValue() );
+                ensureVisibility( taxTree );
             }
         } );
         taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
@@ -126,6 +126,7 @@ public class NavigationBuilder implements Builder
             public void propertyChange( PropertyChangeEvent e )
             {
                 taxTree.setRootTaxon( taxStateModel.getModel().getRootTaxon() );
+                ensureVisibility( taxTree );
             }
         } );
         taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
@@ -133,22 +134,21 @@ public class NavigationBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
-                TreePath path = taxTree.getSelectionPath();
-                Object node;
-                do
-                {
-                    node = path.getLastPathComponent();
-                    model.nodeChanged( (TreeNode) node );
-                    path = path.getParentPath();
-                }
-                while ( path != null && path.getPathCount() > 0 );
+                ensureVisibility( taxTree );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Ordered.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                ensureVisibility( taxTree );
             }
         } );
         taxTree.addAncestorListener( new AncestorListener()
         {
             @Override
-            public void ancestorAdded( AncestorEvent event )
+            public void ancestorAdded( final AncestorEvent e )
             {
                 final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
                 final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) model.getRoot();
@@ -157,18 +157,43 @@ public class NavigationBuilder implements Builder
             }
 
             @Override
-            public void ancestorRemoved( AncestorEvent event )
+            public void ancestorRemoved( final AncestorEvent e )
             {
             }
 
             @Override
-            public void ancestorMoved( AncestorEvent e )
+            public void ancestorMoved( final AncestorEvent e )
             {
             }
         } );
-        ;
     }
 
+    /**
+     * Ensures the visibility of the selected node and its parents.
+     *
+     * @param taxTree the tree with the selected node
+     */
+    private void ensureVisibility( final TaxTree taxTree )
+    {
+        final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
+        TreePath path = taxTree.getSelectionPath();
+        if ( path != null )
+        {
+            while ( path != null && path.getPathCount() > 0 )
+            {
+                model.nodeChanged( (TreeNode) path.getLastPathComponent() );
+                path = path.getParentPath();
+            }
+        }
+    }
+
+    /**
+     * Ensures the visibility of all visible of the node passed and all of its children.
+     *
+     * @param tree  the tree with the visible nodes
+     * @param model the tree model
+     * @param path  the path of the node to ensure visibility
+     */
     private void ensureVisibleNodes( final JTree tree, final DefaultTreeModel model, final TreePath path )
     {
         final Enumeration<TreePath> descendants = tree.getExpandedDescendants( path );

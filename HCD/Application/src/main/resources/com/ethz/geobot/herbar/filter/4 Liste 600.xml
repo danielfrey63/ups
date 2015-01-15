@@ -39,10 +39,10 @@
     <detail scope="Cupressaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Tofieldiaceae">
+    <detail scope="Amaryllidaceae">
         <level>Familie</level>
     </detail>
-    <detail scope="Amaryllidaceae">
+    <detail scope="Tofieldiaceae">
         <level>Familie</level>
     </detail>
     <detail scope="Selaginellaceae">
@@ -372,10 +372,10 @@
     <detail scope="Laburnum">
         <level>Gattung</level>
     </detail>
-    <detail scope="Gentiana">
+    <detail scope="Minuartia">
         <level>Gattung</level>
     </detail>
-    <detail scope="Minuartia">
+    <detail scope="Gentiana">
         <level>Gattung</level>
     </detail>
     <detail scope="Cerastium">

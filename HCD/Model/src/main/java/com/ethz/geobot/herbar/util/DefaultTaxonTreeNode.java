@@ -80,6 +80,11 @@ public class DefaultTaxonTreeNode implements TaxonTreeNode
         return node;
     }
 
+    public static void clearCache()
+    {
+        MAP.clear();
+    }
+
     /**
      * Wrappes a Taxon into a TreeNode.
      *

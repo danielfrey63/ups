@@ -97,6 +97,11 @@ public class TaxonNamePanel extends JPanel
     private final TaxStateModel taxStateModel;
 
     /**
+     * The taxon behind this panel
+     */
+    private final Taxon taxon;
+
+    /**
      * Displays an icon for the taxon level, a entry field or taxon name and a correctness or question mark.
      *
      * @param taxStateModel the state model
@@ -106,8 +111,8 @@ public class TaxonNamePanel extends JPanel
     public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final SubMode subMode )
     {
         setName( taxon.getName() ); // Easier debugging
-        taxStateModel.addSubMode( getName(), subMode );
 
+        this.taxon = taxon;
         this.parent = parent;
         this.taxStateModel = taxStateModel;
 
@@ -153,7 +158,7 @@ public class TaxonNamePanel extends JPanel
 
     private void swapSubModes()
     {
-        final SubMode newSubMode = taxStateModel.getSubMode( getName() ).equals( Abfragen ) ? Lernen : Abfragen;
+        final SubMode newSubMode = taxStateModel.getSubMode( taxon.getName() ).equals( Abfragen ) ? Lernen : Abfragen;
         taxStateModel.setSubMode( getName(), newSubMode );
         setSubMode( newSubMode );
     }

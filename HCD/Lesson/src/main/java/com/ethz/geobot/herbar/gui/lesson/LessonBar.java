@@ -30,7 +30,11 @@ import ch.jfactory.resource.Strings;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
@@ -119,6 +123,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         toolBar.add( taxonControl.getNextButton() );
         toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( createSubModusSwitcher() );
+        toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
 
         listButton.setEnabled( herbarContext.getModels().size() != 0 );
 
@@ -144,8 +149,6 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
                 taxStateModel.setGlobalSubMode( newSubMode );
             }
         } );
-        subModesToggle.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", Abfragen.name() ) );
-        subModesToggle.setSize( subModesToggle.getPreferredSize() );
         subModesToggle.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", Lernen.name() ) );
 
         taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()

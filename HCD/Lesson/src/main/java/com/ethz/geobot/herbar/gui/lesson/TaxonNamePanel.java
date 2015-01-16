@@ -22,10 +22,12 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
+import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.CorrectnessChecker;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.TaxonSynonym;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.CardLayout;
@@ -182,7 +184,7 @@ public class TaxonNamePanel extends JPanel
      */
     private CorrectnessChecker.Correctness handleCorrectness( final String guess, final Taxon taxon )
     {
-        final CorrectnessChecker.Correctness correctness = correctnessChecker.getCorrectness( taxon, guess );
+        final CorrectnessChecker.Correctness correctness = correctnessChecker.getCorrectness( taxon.getName(), guess, extractSynonymTexts( taxon ) );
         final List<String> answer = correctnessChecker.getCorrectnessText();
         if ( answer != null )
         {
@@ -192,4 +194,16 @@ public class TaxonNamePanel extends JPanel
         // some new evaluations take place AFTER the correct taxon has been passed, so keep complete state
         return correctness;
     }
+
+    private String[] extractSynonymTexts( Taxon taxon )
+    {
+        final GraphNodeList syns = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
+        final String[] synonyms = new String[syns.getAll().length];
+        for ( int ix = 0; ix < syns.size(); ix++ )
+        {
+            synonyms[ix] = syns.get( ix ).toString().toLowerCase();
+        }
+        return synonyms;
+    }
+
 }

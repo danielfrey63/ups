@@ -25,6 +25,7 @@ package com.ethz.geobot.herbar.game.catcher;
 import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.Dialogs;
+import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.PictureConverter;
 import ch.jfactory.resource.Strings;
@@ -34,6 +35,7 @@ import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.TaxonSynonym;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -192,9 +194,6 @@ public class QuestionWindow extends JDialog implements Question
 
     protected void processWindowEvent( final WindowEvent e )
     {
-        if ( e.getID() == WindowEvent.WINDOW_CLOSING )
-        {
-        }
         super.processWindowEvent( e );
     }
 
@@ -252,7 +251,7 @@ public class QuestionWindow extends JDialog implements Question
         {
             public void actionPerformed( final ActionEvent e )
             {
-                correctness = correctnessChecker.getCorrectness( ancestorTax, answer.getText() );
+                correctness = correctnessChecker.getCorrectness( ancestorTax.getName(), answer.getText(), extractSynonymTexts( ancestorTax ) );
                 if ( correctness == CorrectnessChecker.IS_NEARLY_TRUE )
                 {
                     setCorrectOptionPane( Strings.getString( Catcher.class, "CATCHER.CORRECT.DISTANCE" ), ancestorTax );
@@ -267,5 +266,16 @@ public class QuestionWindow extends JDialog implements Question
         final JButton button = ComponentFactory.createButton( Catcher.class, "CATCHER.GO", action );
         button.setFocusable( true );
         return button;
+    }
+
+    private String[] extractSynonymTexts( Taxon taxon )
+    {
+        final GraphNodeList syns = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
+        final String[] synonyms = new String[syns.getAll().length];
+        for ( int ix = 0; ix < syns.size(); ix++ )
+        {
+            synonyms[ix] = syns.get( ix ).toString().toLowerCase();
+        }
+        return synonyms;
     }
 }

@@ -24,11 +24,9 @@ package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.math.EvaluationResult;
 import ch.jfactory.math.LevenshteinLevel;
-import ch.jfactory.model.graph.GraphNodeList;
-import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.TaxonSynonym;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,47 +53,45 @@ public class CorrectnessChecker
 
     private List<String> correctnessText;
 
-    public Correctness getCorrectness( final Taxon taxon, String guess )
+    public Correctness getCorrectness( final String taxon, String guess, String[] synonyms )
     {
-        final String correct = taxon.getName();
-
         Correctness ret;
         correctnessText = null;
 
         // get proposed string and eliminate double spaces
         int iDoubles;
         guess = guess.trim();
-        while ( ( iDoubles = guess.indexOf( "  " ) ) >= 0 )
+        while ( (iDoubles = guess.indexOf( "  " )) >= 0 )
         {
             guess = guess.substring( 0, iDoubles ) + guess.substring( iDoubles + 1, guess.length() );
         }
 
         // check whether within the given tolerance for species, endings may be wrong
-        if ( correct.indexOf( ' ' ) >= 0 )
+        if ( taxon.indexOf( ' ' ) >= 0 )
         {
-            final Correctness[] iG = checkGenus( correct, guess );
-            final Correctness[] iS = checkEpithethon( correct, guess );
+            final Correctness[] iG = checkGenus( taxon, guess );
+            final Correctness[] iS = checkEpithethon( taxon, guess );
             final List<String> vA = new ArrayList<String>();
             // all wrong if body or ending of genus wrong. then check for synonyms
-            if ( iG[0] == IS_FALSE || iG[1] == IS_FALSE )
+            if ( iG[0] == IS_FALSE || iS[0] == IS_FALSE )
             {
-                ret = checkSynonym( taxon, guess );
+                ret = checkSynonym( guess, synonyms );
             }
-            // all correct
+            // all taxon
             else if ( iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE )
             {
                 ret = IS_TRUE;
             }
             // give some hints when near the solution
-            else if ( ( iG[0] == IS_NEARLY_TRUE && iG[1] != IS_FALSE && iS[0] == IS_TRUE && iS[1] != IS_FALSE ) ||
-                    ( iG[0] == IS_TRUE && iG[1] != IS_FALSE && iS[0] == IS_NEARLY_TRUE && iS[1] != IS_FALSE ) ||
-                    ( iG[0] == IS_TRUE && iG[1] != IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE ) ||
-                    ( iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] != IS_TRUE ) ||
-                    ( iG[0] == IS_TRUE && iG[1] == IS_NEARLY_TRUE && iS[0] == IS_TRUE && iS[1] == IS_NEARLY_TRUE ) )
+            else if ( (iG[0] == IS_NEARLY_TRUE && iG[1] != IS_FALSE && iS[0] == IS_TRUE && iS[1] != IS_FALSE) ||
+                    (iG[0] == IS_TRUE && iG[1] != IS_FALSE && iS[0] == IS_NEARLY_TRUE && iS[1] != IS_FALSE) ||
+                    (iG[0] == IS_TRUE && iG[1] != IS_TRUE && iS[0] == IS_TRUE && iS[1] == IS_TRUE) ||
+                    (iG[0] == IS_TRUE && iG[1] == IS_TRUE && iS[0] == IS_TRUE && iS[1] != IS_TRUE) ||
+                    (iG[0] == IS_TRUE && iG[1] == IS_NEARLY_TRUE && iS[0] == IS_TRUE && iS[1] == IS_NEARLY_TRUE) )
             {
                 if ( iG[0] == IS_NEARLY_TRUE )
                 {
-                    vA.add( "- Die Gattung ist beinahe richtig" );
+                    vA.add( "- Die Gattung ist beinahe richtig                    " );
                 }
                 if ( iG[1] == IS_NEARLY_TRUE )
                 {
@@ -103,22 +99,22 @@ public class CorrectnessChecker
                 }
                 if ( iS[0] == IS_NEARLY_TRUE )
                 {
-                    vA.add( "- Das Art-Epithethon is beinahe richtig                 " );
+                    vA.add( "- Das Art-Epithethon is beinahe richtig              " );
                 }
                 if ( iS[1] == IS_NEARLY_TRUE )
                 {
-                    vA.add( "- Die Endung des Art-Epithethons ist beinahe richtig      " );
+                    vA.add( "- Die Endung des Art-Epithethons ist beinahe richtig " );
                 }
                 vA.add( " " );
                 vA.add( "Zum Vergleich:" );
-                vA.add( "- " + correct + " (richtige Lösung)" );
+                vA.add( "- " + taxon + " (richtige Lösung)" );
                 vA.add( "- " + guess + " (Ihr Vorschlag)" );
                 correctnessText = new ArrayList<String>();
                 correctnessText.add( " " );
                 correctnessText.add( "Sie sind nahe dran:                         " );
                 correctnessText.addAll( vA );
                 correctnessText.add( " " );
-                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( "Versuchen Sie es noch einmal...             " );
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
@@ -133,9 +129,9 @@ public class CorrectnessChecker
         }
         else
         { // it's not a species
-            final boolean withinTolerance = mayBeTolerated.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
-            final boolean equal = mustBeEqual.getEval( correct.toLowerCase(), guess.toLowerCase() ).isPassed();
-            final boolean isSynonym = checkSynonym( taxon, guess ) == IS_NEARLY_TRUE;
+            final boolean withinTolerance = mayBeTolerated.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
+            final boolean equal = mustBeEqual.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
+            final boolean isSynonym = checkSynonym( guess, synonyms ) == IS_NEARLY_TRUE;
             if ( equal )
             {
                 ret = IS_TRUE;
@@ -148,14 +144,14 @@ public class CorrectnessChecker
                 correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in  " );
                 correctnessText.add( "  Ihrem Vorschlag" );
                 correctnessText.add( " " );
-                correctnessText.add( "  " + correct + " (richtige Lösung)" );
+                correctnessText.add( "  " + taxon + " (richtige Lösung)" );
                 correctnessText.add( "  " + guess + " (Ihr Vorschlag)" );
                 correctnessText.add( " " );
                 correctnessText.add( "Versuchen Sie es noch einmal..." );
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
-            else if (isSynonym)
+            else if ( isSynonym )
             {
                 correctnessText = new ArrayList<String>();
                 correctnessText.add( "Sie verwenden ein Synonym:      " );
@@ -178,14 +174,13 @@ public class CorrectnessChecker
         return ret;
     }
 
-    private Correctness checkSynonym( final Taxon taxon, final String synString )
+    private Correctness checkSynonym( final String synString, String[] synonyms )
     {
-        final GraphNodeList sil = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
         EvaluationResult eval = EvaluationResult.EVALUATION_FAILED;
-        for ( int ix = 0; ix < sil.size() && !eval.isPassed(); ix++ )
+        for ( int ix = 0; ix < synonyms.length && !eval.isPassed(); ix++ )
         {
-            final String strSyn = sil.get( ix ).toString().toLowerCase();
-            eval = mustBeEqual.getEval( strSyn, synString.toLowerCase() );
+            final String strSyn = synonyms[ix];
+            eval = mustBeEqual.getEval( strSyn.toLowerCase(), synString.toLowerCase() );
         }
         if ( eval.isPassed() )
         {
@@ -198,38 +193,27 @@ public class CorrectnessChecker
     {
         correct = correct.toLowerCase().trim();
         guess = guess.toLowerCase().trim();
-        final int iReq = correct.indexOf( " " );
-        final int iFnd = guess.indexOf( " " );
-        String strFound;
-        if ( iFnd < 0 )
-        {
-            strFound = guess;
-        }
-        else
-        {
-            strFound = guess.substring( 0, iFnd ).trim();
-        }
-        final String strReq = correct.substring( 0, iReq ).trim();
-        return checkTaxon( strReq, strFound );
+        final int iCorrect = correct.indexOf( " " );
+        final String geniusGuess = guess.contains( " " ) ? guess.substring( 0, guess.indexOf( " " ) ).trim() : guess;
+        final String speciesCorrect = correct.substring( 0, iCorrect ).trim();
+        return checkTaxon( speciesCorrect, geniusGuess );
     }
 
     private Correctness[] checkEpithethon( String correct, String guess )
     {
         correct = correct.toLowerCase().trim();
         guess = guess.toLowerCase().trim();
-        final int iReq = correct.indexOf( " " );
-        final int iFnd = guess.indexOf( " " );
-        String strFound;
-        strFound = iFnd < 0 ? guess : guess.substring( iFnd + 1, guess.length() ).trim();
-        final String strReq = correct.substring( iReq + 1, correct.length() ).trim();
-        return checkTaxon( strReq, strFound );
+        final int iCorrect = correct.indexOf( " " );
+        final String speciesGuess = guess.contains( " " ) ? guess.substring( guess.indexOf( " " ) + 1, guess.length() ).trim() : guess;
+        final String speciesCorrect = correct.substring( iCorrect + 1, correct.length() ).trim();
+        return checkTaxon( speciesCorrect, speciesGuess );
     }
 
     /**
      * This method checks the name taking it as a Taxon.
-     * <p>
+     * <p/>
      * The first <code>Correctness</code> returned indicates the Levenstein distance of the two strings.
-     * <p>
+     * <p/>
      * The second <code>Correctness</code> gives a measure for the endings. Certain endings may be tolerated, which is
      * indicated with {@link #IS_NEARLY_TRUE}, others may be definively wrong ({@link #IS_FALSE}) or correct
      * ({@link #IS_TRUE}).
@@ -243,19 +227,17 @@ public class CorrectnessChecker
         // accept all species epitheta for taxa with "sp."
         if ( correct.equals( "sp." ) || guess.equals( correct ) )
         {
-            return new Correctness[]{CorrectnessChecker.IS_TRUE, CorrectnessChecker.IS_TRUE};
+            return new Correctness[]{IS_TRUE, IS_TRUE};
         }
-        // or check taxanames
+        // or check taxa names
         else
         {
             final Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
-            String correctBody, guessedBody, guessPostfix = "", correctPostfix = "", toleratedEndings[];
-            final Iterator<String[]> eVals = hsh.values().iterator();
             for ( final String s : hsh.keySet() )
             {
-                toleratedEndings = eVals.next();
                 if ( guess.endsWith( s ) )
                 {
+                    String guessPostfix = "", correctPostfix = "";
                     if ( correct.endsWith( s ) && guess.length() == correct.length() )
                     {
                         // both endings match, but bodies are different
@@ -267,6 +249,7 @@ public class CorrectnessChecker
                     {
                         // bodies are different and endings MAY be tolerated. If endings have been determined for
                         // both strings, there bodies are extracted. Bodies then are compared.
+                        final String[] toleratedEndings = hsh.get(s);
                         for ( final String alternateEnding : toleratedEndings )
                         {
                             if ( guess.endsWith( alternateEnding ) )
@@ -280,8 +263,8 @@ public class CorrectnessChecker
                             }
                         }
                     }
-                    correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
-                    guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
+                    final String correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
+                    final String guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
                     final EvaluationResult strongEval = mustBeEqual.getEval( guessedBody, correctBody );
                     final EvaluationResult tolerantEval = mayBeTolerated.getEval( guessedBody, correctBody );
                     if ( strongEval.isPassed() )
@@ -355,4 +338,27 @@ public class CorrectnessChecker
         }
     }
 
+    public static void main( String[] args )
+    {
+        final Map<String[], Correctness> data = new HashMap<String[], Correctness>();
+        data.put( new String[]{"Abies", "Abies"}, IS_TRUE );
+        data.put( new String[]{"asdf", "Abies alba"}, IS_FALSE );
+        data.put( new String[]{"Abies alba", "Abies alba"}, IS_TRUE );
+        data.put( new String[]{"Abies album", "Abies alba"}, IS_NEARLY_TRUE );
+        data.put( new String[]{"Einblättriges Lebermoos", "Einblättriges Lebermoos"}, IS_TRUE );
+        data.put( new String[]{"Abies alba", "Abies alba i.w.S."}, IS_TRUE );
+        data.put( new String[]{"Abies alba", "Abies alba agg."}, IS_TRUE );
+        for ( final String[] string : data.keySet() )
+        {
+            check( data.get( string ), string[0], string[1] );
+        }
+    }
+
+    static void check( final Correctness expected, final String guess, final String taxon )
+    {
+        final CorrectnessChecker checker = new CorrectnessChecker();
+        final boolean testPassed = expected == checker.getCorrectness( taxon, guess, new String[]{"Abies alba"} );
+        if (!testPassed) System.out.println( "- checking \"" + taxon + "\" against \"" + guess + "\" expecting " +
+                expected + " - test " + (testPassed ? "passed" : ">> FAILED <<") );
+    }
 }

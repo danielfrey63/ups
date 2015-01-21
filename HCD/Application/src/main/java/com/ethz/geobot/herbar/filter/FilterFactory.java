@@ -32,7 +32,6 @@ import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.thoughtworks.xstream.XStream;
@@ -70,11 +69,11 @@ public class FilterFactory
 
     private static FilterFactory instance = null;
 
-    private final HerbarModel model = Application.getInstance().getModel();
-
     private final Map<String, FilterModel> cachedFilterModels = new HashMap<String, FilterModel>();
 
-    /** Creates a new instance of FilterFactory. */
+    /**
+     * Creates a new instance of FilterFactory.
+     */
     protected FilterFactory()
     {
         try
@@ -84,11 +83,11 @@ public class FilterFactory
             final String[] lists;
             if ( HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
             {
-                lists = new String[]{ "1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All" };
+                lists = new String[]{"1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All"};
             }
             else
             {
-                lists = new String[]{ };
+                lists = new String[]{};
             }
 
             if ( new File( System.getProperty( "herbar.filter.location" ) ).mkdirs() )
@@ -123,63 +122,27 @@ public class FilterFactory
         return instance;
     }
 
-    private Level[] collectLevels( final String[] levelNames )
-    {
-        Level[] levels = new Level[0];
-        if ( levelNames != null )
-        {
-            levels = new Level[levelNames.length];
-            for ( int i = 0; i < levelNames.length; i++ )
-            {
-                levels[i] = model.getLevel( levelNames[i] );
-            }
-        }
-        else
-        {
-            LOG.warn( "filter has no levels" );
-        }
-        return levels;
-    }
-
     private FilterModel generateFilterModel( final Filter filter ) throws FilterPersistentException
     {
-        final String baseModelName = filter.getBaseFilterName();
-        final HerbarModel baseModel = getBaseFilterModel( filter, baseModelName );
+        final HerbarModel baseModel = Application.getInstance().getModel();
         final boolean fixed = filter.getFixed();
         final FilterModel model = new FilterModel( baseModel, filter.getName(), fixed );
-        model.clearFilterDetails();
-
         final Detail[] details = filter.getDetails();
         for ( int i = 0; details != null && i < details.length; i++ )
         {
             final Detail detail = details[i];
             final Taxon scope = baseModel.getTaxon( detail.getScope() );
-            final Level[] levels = collectLevels( detail.getLevels() );
             if ( scope != null )
             {
-                model.addFilterDetail( scope, levels );
+                model.addFilterTaxon( scope );
             }
             else
             {
-                LOG.warn( "cannot find scope: " + detail.getScope() + " in dependent model: " + baseModelName +
+                LOG.warn( "cannot find scope: " + detail.getScope() +
                         " for model: " + filter.getName() + " skip detail" );
             }
         }
         return model;
-    }
-
-    private HerbarModel getBaseFilterModel( final Filter filter, final String baseModelName ) throws FilterPersistentException
-    {
-        final HerbarModel baseModel;
-        if ( !"".equals( filter.getBaseFilterName() ) )
-        {
-            baseModel = getFilterModel( baseModelName );
-        }
-        else
-        {
-            baseModel = Application.getInstance().getModel();
-        }
-        return baseModel;
     }
 
     /**
@@ -197,20 +160,7 @@ public class FilterFactory
         FilterModel model = cachedFilterModels.get( name );
         if ( model == null )
         {
-            final Filter filter = loadFilter( name );
-            final String base = filter.getBaseFilterName();
-            boolean baseFilterFound = false;
-            for ( Iterator<String> it = getFilterNames().iterator(); it.hasNext() && !baseFilterFound; )
-            {
-                final String filterNameToCompare = it.next();
-                baseFilterFound = base.equals( filterNameToCompare );
-            }
-            if ( !baseFilterFound || base.equals( name ) )
-            {
-                filter.setBaseFilterName( "" );
-            }
-            // finally load model
-            model = generateFilterModel( filter );
+            model = generateFilterModel( loadFilter( name ) );
             cachedFilterModels.put( name, model );
         }
         return model;
@@ -219,7 +169,7 @@ public class FilterFactory
     /**
      * This method stores the FilterModel to the persistent storage.
      *
-     * @param filterModel the FilerDefinition which should be stored
+     * @param filterModel the FilterDefinition which should be stored
      * @throws FilterPersistentException is thrown if filter couldn't be stored
      */
     public void saveFilterModel( final FilterModel filterModel ) throws FilterPersistentException
@@ -248,7 +198,9 @@ public class FilterFactory
             LOG.error( "could not delete \"" + file + "\"" );
         }
         // save
-        final Filter filter = new Filter( filterModel );
+        final Filter filter = new Filter();
+        filter.setName( filterModel.getName() );
+        filter.setFixed( filterModel.isFixed() );
         saveFilter( filter );
         // save FilterModel to cached list, could be new one or is overwritten
         cachedFilterModels.put( filterModel.getName(), filterModel );
@@ -316,13 +268,7 @@ public class FilterFactory
 
     private Filter loadFilter( final InputStream input )
     {
-        final XStream x = getSerializer();
-        final Filter filter = (Filter) x.fromXML( input );
-        if ( filter.getBaseFilterName() == null )
-        {
-            filter.setBaseFilterName( "" );
-        }
-        return filter;
+        return (Filter) getSerializer().fromXML( input );
     }
 
     private void saveFilter( final Filter filter ) throws FilterPersistentException
@@ -347,9 +293,7 @@ public class FilterFactory
         final XStream x = new XStream();
         x.alias( "filter", Filter.class );
         x.alias( "detail", Detail.class );
-        x.addImplicitCollection( Filter.class, "details" );
-        x.addImplicitArray( Detail.class, "levels" );
-        x.alias( "level", String.class );
+        x.addImplicitCollection( Filter.class, "details", Detail.class );
         x.useAttributeFor( Filter.class, "fixed" );
         x.useAttributeFor( Filter.class, "name" );
         x.useAttributeFor( Detail.class, "scope" );

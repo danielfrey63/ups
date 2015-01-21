@@ -33,14 +33,9 @@ import com.ethz.geobot.herbar.model.trait.Ecology;
 import com.ethz.geobot.herbar.model.trait.Medicine;
 import com.ethz.geobot.herbar.model.trait.Morphology;
 import com.ethz.geobot.herbar.model.trait.Name;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,29 +51,29 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     private HerbarModel dependentModel;
 
-    private Map<Taxon, Taxon> filteredTaxonList = new HashMap<Taxon, Taxon>();
+    /**
+     * Map between dependent and filtered taxon.
+     */
+    private Map<Taxon, FilterTaxon> dependentFilteredTaxonList = new HashMap<Taxon, FilterTaxon>();
 
-    private List<FilterDefinitionDetail> filterDetails = new ArrayList<FilterDefinitionDetail>();
+    /**
+     * Map between filtered and dependent taxon.
+     */
+    private Map<FilterTaxon, Taxon> filteredDependentTaxonList = new HashMap<FilterTaxon, Taxon>();
 
     private final boolean fixed;
 
     /**
      * Construct a filtered data model.
-     *
-     * @param dependentModel the model to be filtered
+     * @param dependentModel the model that this model wraps
      * @param name           a name for the model
-     * @param fixed
+     * @param fixed          whether the list ist fixed and cannot be altered
      */
     public FilterModel( final HerbarModel dependentModel, final String name, boolean fixed )
     {
         super( name );
-        this.fixed = fixed;
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "dependentModel: " + dependentModel.getName() );
-        }
         this.dependentModel = dependentModel;
-        addFilterDetail();
+        this.fixed = fixed;
     }
 
     public Level getRootLevel()
@@ -93,7 +88,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public Taxon getRootTaxon()
     {
-        return createFilterTaxon( dependentModel.getRootTaxon() );
+        return addFilterTaxon( dependentModel.getRootTaxon() );
     }
 
     public Morphology getMorphology()
@@ -110,6 +105,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     {
         return dependentModel.getMedicine();
     }
+
     public Name getSynonyms()
     {
         return dependentModel.getSynonyms();
@@ -130,154 +126,66 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return dependentModel.getLevel( name );
     }
 
-    public void setDependentModel( final HerbarModel model )
+    public FilterTaxon getTaxon( final String taxonName )
     {
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "dependent model change to: " + model );
-        }
-        if ( dependentModel == model )
-        {
-            return;
-        }
-        // Todo: Do not clear the existing filter, but migrate them into the new dependency.
-        // One approach could be to set all scope for unknown taxa to the root taxon, and to reestablish the
-        // consistency with respect to cached levels, children, references to base models etc (see commented code
-        // below). Another approach could be to recreate each scope with respect to the correct dependent taxon, which
-        // might also has to be recreated, to reflect the new dependency, as dependency model is stored also in the
-        // dependent filter taxon.
-        this.dependentModel = model;
-        filterDetails.clear();
-        addFilterDetail();
-        notifyModelChange();
-    }
-
-    public Taxon getTaxon( final String taxonName )
-    {
-        Taxon taxon = null;
+        FilterTaxon filterTaxon = null;
         final Taxon dependentTaxon = dependentModel.getTaxon( taxonName );
         if ( dependentTaxon != null )
         {
+            // Todo: Check whether the taxon needs to be created here
             // search for taxon in cached list otherwise check if taxon is inside this filter
-            taxon = filteredTaxonList.get( dependentTaxon );
-            if ( taxon == null && contains( dependentTaxon ) )
+            filterTaxon = dependentFilteredTaxonList.get( dependentTaxon );
+            if ( filterTaxon == null && contains( dependentTaxon ) )
             {
-                taxon = createFilterTaxon( dependentTaxon );
+                filterTaxon = addFilterTaxon( dependentTaxon );
             }
         }
-        return taxon;
+        return filterTaxon;
     }
 
-    Taxon createFilterTaxon( final Taxon dependentTaxon )
+    public FilterTaxon addFilterTaxon( final Taxon dependentTaxon )
     {
-        Taxon filteredTaxon = filteredTaxonList.get( dependentTaxon );
+        FilterTaxon filteredTaxon = dependentFilteredTaxonList.get( dependentTaxon );
         if ( filteredTaxon == null )
         {
             filteredTaxon = new FilterTaxon( this, dependentTaxon );
-            filteredTaxonList.put( dependentTaxon, filteredTaxon );
+            dependentFilteredTaxonList.put( dependentTaxon, filteredTaxon );
+            filteredDependentTaxonList.put( filteredTaxon, dependentTaxon );
         }
         return filteredTaxon;
     }
 
     public Level[] getLevels()
     {
-//        return dependentModel.getLevels();
-        final Set<Level> levelsSet = new HashSet<Level>();
-        for ( final Object filterDetail : filterDetails )
+        final TreeSet<Level> result = new TreeSet<Level>( new LevelComparator() );
+        for ( final Taxon filteredTaxon : filteredDependentTaxonList.keySet() )
         {
-            final FilterDefinitionDetail detail = (FilterDefinitionDetail) filterDetail;
-            levelsSet.addAll( Arrays.asList( detail.getLevels() ) );
+            result.add( filteredTaxon.getLevel() );
         }
-        final Level[] levels = levelsSet.toArray( new Level[levelsSet.size()] );
-        Arrays.sort( levels, new LevelComparator() );
-        return levels;
+        return result.toArray( new Level[result.size()] );
     }
 
-    /**
-     * This method generate a FilterDefinitionDetail for the current model.
-     *
-     * @param scope  scope Taxon of the detail
-     * @param levels array of Level for the detail
-     * @return object of type FilterDefinitionDetail
-     */
-    public FilterDefinitionDetail createFilterDetail( final Taxon scope, final Level[] levels )
+    public boolean contains( final Taxon dependentTaxon )
     {
-        LOG.trace( "create new filter detail for scope: " + scope + " levels: " + Arrays.toString( levels ) );
-        return new FilterDefinitionDetail( this, scope, levels );
+        LOG.trace( "check if dependent taxon \"" + dependentTaxon + "\" is in model \"" + getName() + "\"" );
+        return dependentFilteredTaxonList.get( dependentTaxon ) != null;
     }
 
-    public HerbarModel getDependantModel()
+    public void removeFilterTaxon( final FilterTaxon taxon )
     {
-        return dependentModel;
-    }
-
-    public boolean contains( final Taxon taxon )
-    {
-        LOG.trace( "check if taxon \"" + taxon + "\" is in model." );
-        boolean isIn = false;
-        for ( Iterator<FilterDefinitionDetail> it = filterDetails.iterator(); it.hasNext() && !isIn; )
-        {
-            final FilterDefinitionDetail detail = it.next();
-            isIn = detail.isIn( taxon );
-        }
-        LOG.trace( "check, if taxon >" + taxon + "< is in FilterModel returns " + isIn );
-        return isIn;
-    }
-
-    public void addFilterDetail( final FilterDefinitionDetail detail )
-    {
-        filterDetails.add( detail );
+        final Taxon dependentTaxon = (taxon instanceof FilterTaxon ? ((FilterTaxon) taxon).getDependentTaxon() : taxon);
+        final Taxon filterTaxon = (taxon instanceof FilterTaxon ? taxon : dependentFilteredTaxonList.get( taxon ));
+        dependentFilteredTaxonList.remove( dependentTaxon );
+        filteredDependentTaxonList.remove( filterTaxon );
         notifyModelChange();
     }
 
     /**
-     * insert a specified FilterDefinitionDetail
-     *
-     * @param scope  Taxon which is the scope
-     * @param levels Levels of the scope which should be visible
-     * @return the FilterDefinitionDetail object which is added to the list
+     * Implement behaviour on model change.
      */
-    public FilterDefinitionDetail addFilterDetail( final Taxon scope, final Level[] levels )
-    {
-        final FilterDefinitionDetail detail = createFilterDetail( scope, levels );
-        addFilterDetail( detail );
-        return detail;
-    }
-
-    /**
-     * insert a default FilterDefinitionDetail to the list. It depends on the root taxon of the dependent model and all levels.
-     *
-     * @return the FilterDefinitionDetail object which is added to the list
-     */
-    public FilterDefinitionDetail addFilterDetail()
-    {
-        return addFilterDetail( dependentModel.getRootTaxon(), dependentModel.getLevels() );
-    }
-
-    public void removeFilterDetail( final FilterDefinitionDetail detail )
-    {
-        filterDetails.remove( detail );
-        notifyModelChange();
-    }
-
-    public FilterDefinitionDetail[] getFilterDetails()
-    {
-        return filterDetails.toArray( new FilterDefinitionDetail[filterDetails.size()] );
-    }
-
-    /** Removes the content of the filter. */
-    public void clearFilterDetails()
-    {
-        LOG.info( "clear all filter details" );
-        filterDetails.clear();
-        notifyModelChange();
-    }
-
-    /** implement behaviour on model change. It destroy the cached collection of FilterTaxon and notify all listeners */
     void notifyModelChange()
     {
-        filteredTaxonList.clear();
-        this.fireModelChangeEvent( new ModelChangeEvent( this ) );
+        fireModelChangeEvent( new ModelChangeEvent( this ) );
     }
 
     public boolean isFixed()

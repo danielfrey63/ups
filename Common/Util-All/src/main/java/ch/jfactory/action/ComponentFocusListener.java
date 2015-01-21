@@ -108,9 +108,9 @@ public class ComponentFocusListener implements FocusListener
             super.actionPerformed( e );
             // reset focus if component is the same
             final Component compFocusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-            if ( compFocusOwner == component )
+            if ( compFocusOwner == component && button instanceof JButton )
             {
-                button.getRootPane().setDefaultButton( button );
+                button.getRootPane().setDefaultButton( (JButton) button );
             }
         }
     }

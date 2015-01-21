@@ -289,6 +289,7 @@ public class RendererPanel extends JPanel
      */
     public void setPrefixComponent( final JComponent prefixComponent )
     {
+        if ( prefix != null ) remove( prefix );
         prefix = prefixComponent;
         prefix.setOpaque( false );
     }

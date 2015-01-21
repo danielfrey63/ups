@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-class FilterTaxon implements Taxon, Comparable
+public class FilterTaxon implements Taxon, Comparable
 {
     private static final Logger LOG = LoggerFactory.getLogger( FilterTaxon.class );
 
@@ -95,7 +95,7 @@ class FilterTaxon implements Taxon, Comparable
             // TODO: something more intelligent required
             if ( parent != null )
             {
-                cachedParent = filterModel.createFilterTaxon( parent );
+                cachedParent = filterModel.addFilterTaxon( parent );
             }
         }
         return cachedParent;
@@ -158,32 +158,6 @@ class FilterTaxon implements Taxon, Comparable
     public int getRank()
     {
         return dependentTaxon.getRank();
-    }
-
-    private void collectChildren( final Taxon tax, final List<Taxon> childList )
-    {
-        LOG.trace( "collect children for \"" + tax + "\"" );
-        final Taxon[] children = tax.getChildTaxa();
-
-        for ( final Taxon child : children )
-        {
-            if ( filterModel.contains( child ) )
-            {
-                // ok, this element is a child
-                LOG.trace( "add child to filtered list \"" + child + "\"" );
-                childList.add( filterModel.createFilterTaxon( child ) );
-            }
-            else
-            {
-                LOG.trace( "collect children for taxon \"" + child + "\"" );
-                collectChildren( child, childList );
-            }
-        }
-    }
-
-    public String toDebugString()
-    {
-        return dependentTaxon.getName() + "[" + dependentTaxon.getId() + "]";
     }
 
     public GraphNode getAsGraphNode()
@@ -257,6 +231,32 @@ class FilterTaxon implements Taxon, Comparable
         return -1;
     }
 
+    public Taxon getDependentTaxon()
+    {
+        return dependentTaxon;
+    }
+
+    private void collectChildren( final Taxon tax, final List<Taxon> childList )
+    {
+        LOG.trace( "collect children for \"" + tax + "\"" );
+        final Taxon[] children = tax.getChildTaxa();
+
+        for ( final Taxon child : children )
+        {
+            if ( filterModel.contains( child ) )
+            {
+                // ok, this element is a child
+                LOG.trace( "add child to filtered list \"" + child + "\"" );
+                childList.add( filterModel.addFilterTaxon( child ) );
+            }
+            else
+            {
+                LOG.trace( "collect children for taxon \"" + child + "\"" );
+                collectChildren( child, childList );
+            }
+        }
+    }
+
     public int compareTo( final Object obj )
     {
         final Taxon taxon = (Taxon) obj;
@@ -277,6 +277,11 @@ class FilterTaxon implements Taxon, Comparable
     {
         final String id = "" + getId();
         return id.hashCode();
+    }
+
+    public String toDebugString()
+    {
+        return dependentTaxon.getName() + "[" + dependentTaxon.getId() + "]";
     }
 
     public String toString()

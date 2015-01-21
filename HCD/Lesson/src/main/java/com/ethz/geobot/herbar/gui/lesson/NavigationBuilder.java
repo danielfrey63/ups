@@ -2,33 +2,50 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.application.view.search.SearchableUtils;
-import ch.jfactory.component.ObjectPopup;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.resource.ImageLocator;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.gui.tax.TaxTree;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.filter.FilterModel;
+import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Rectangle;
-import static java.awt.Toolkit.getDefaultToolkit;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Enumeration;
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.EDIT;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
+import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.lang.ArrayUtils.contains;
 
 public class NavigationBuilder implements Builder
@@ -37,7 +54,13 @@ public class NavigationBuilder implements Builder
     private final TaxStateModel taxStateModel;
     private final RendererPanel panel = new RendererPanel();
     private final JRadioButton radio = new JRadioButton();
+    private final JCheckBox check = new JCheckBox();
     private final JPanel navigation = new JPanel( new BorderLayout() );
+    private final TreeCellRenderer useRenderer = new LearnAndQueryTreeCellRenderer();
+    private final TreeCellRenderer editRenderer = new EditTreeCellRenderer();
+
+    private UseController useController;
+    private EditController editController;
 
     public NavigationBuilder( final HerbarContext context, final TaxStateModel taxStateModel )
     {
@@ -76,37 +99,16 @@ public class NavigationBuilder implements Builder
 
     public void setRenderer( final TaxTree taxTree )
     {
-        taxTree.setCellRenderer( new TreeCellRenderer()
-        {
-            @Override
-            public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
-            {
-                final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
-                final boolean query = taxStateModel.getSubMode( taxon.getName() ) == Abfragen;
-                final Taxon filterTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
-                final Level level = taxon.getLevel();
-                final Taxon[] taxList = taxStateModel.getTaxList();
-                panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
-                panel.setText( query ? "Welches Taxon ist das?" : taxon.toString() );
-                final boolean containsFilterTaxon = contains( taxList, filterTaxon );
-                final boolean containsTaxon = contains( taxList, taxon );
-                final boolean listHasTaxon = filterTaxon != null;
-                final boolean sameLevels = taxStateModel.getLevel() == taxon.getLevel();
-                panel.setEnabled( listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
-                panel.setSelected( taxStateModel.getFocus().equals( taxon ) );
-                radio.setEnabled( true );
-                radio.setSelected( taxStateModel.getScope().equals( taxon ) );
-                panel.update();
-                return panel;
-            }
-        } );
+        taxTree.setCellRenderer( useRenderer );
     }
 
     private void setController( final TaxTree taxTree )
     {
-        final Controller controller = new Controller( taxTree );
-        taxTree.addKeyListener( controller );
-        taxTree.addMouseListener( controller );
+        useController = new UseController( taxTree );
+        taxTree.addKeyListener( useController );
+        taxTree.addMouseListener( useController );
+
+        editController = new EditController( taxTree );
     }
 
     private void setListeners( final TaxTree taxTree )
@@ -143,6 +145,22 @@ public class NavigationBuilder implements Builder
             public void propertyChange( PropertyChangeEvent e )
             {
                 ensureVisibility( taxTree );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Edit.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                final boolean isEdit = e.getNewValue() == EDIT;
+                panel.setPrefixComponent( isEdit ? check : radio );
+                panel.setShowPrefixComponent( true );
+                taxTree.setRootTaxon( isEdit ? context.getDataModel().getRootTaxon() : taxStateModel.getModel().getRootTaxon() );
+                taxTree.setCellRenderer( isEdit ? editRenderer : useRenderer );
+                taxTree.removeKeyListener( isEdit ? useController : editController );
+                taxTree.removeMouseListener( isEdit ? useController : editController );
+                taxTree.addKeyListener( isEdit ? editController : useController );
+                taxTree.addMouseListener( isEdit ? editController : useController );
             }
         } );
         taxTree.addAncestorListener( new AncestorListener()
@@ -210,24 +228,15 @@ public class NavigationBuilder implements Builder
         }
     }
 
-    private class Controller extends MouseAdapter implements KeyListener, ActionListener
+    public abstract class AbstractController extends MouseAdapter implements KeyListener, ActionListener
     {
-
-        private final TaxTree taxTree;
+        protected final TaxTree taxTree;
         private final Timer timer = new Timer( (Integer) getDefaultToolkit().getDesktopProperty( "awt.multiClickInterval" ), this );
-
-        private final RendererPanel panel = new RendererPanel();
         private MouseEvent lastEvent = null;
 
-        public Controller( final TaxTree taxTree )
+        public AbstractController( final TaxTree taxTree )
         {
             this.taxTree = taxTree;
-            panel.setIcon( ImageLocator.getIcon( "iconArt.gif" ) );
-            panel.setText( "Placeholder" );
-            panel.setPrefixComponent( new JRadioButton() );
-            panel.setShowPrefixComponent( true );
-            panel.update();
-            panel.doLayout();
         }
 
         @Override
@@ -235,7 +244,13 @@ public class NavigationBuilder implements Builder
         {
             // handle single click
             timer.stop();
-            handleFocus( taxTree.getPathForLocation( lastEvent.getX(), lastEvent.getY() ) );
+            final TreePath path = taxTree.getPathForLocation( lastEvent.getX(), lastEvent.getY() );
+            if ( path != null )
+            {
+                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+                final Taxon taxon = node.getTaxon();
+                handleLabelClick( taxon );
+            }
         }
 
         public void mouseClicked( final MouseEvent e )
@@ -247,30 +262,35 @@ public class NavigationBuilder implements Builder
             }
 
             final TreePath path = taxTree.getPathForLocation( e.getX(), e.getY() );
-            final Rectangle bounds = taxTree.getPathBounds( path );
-            lastEvent = e;
-            if ( bounds != null && path != null )
+            if ( path != null )
             {
-                final Rectangle scopeRegion = panel.getComponent( 2 ).getBounds();
-                final Rectangle levelRegion = panel.getComponent( 1 ).getBounds();
-                final int x = e.getX() - bounds.x;
-                final int y = e.getY() - bounds.y;
-                if ( scopeRegion.contains( x, y ) )
+                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+                final Taxon taxon = node.getTaxon();
+                final Rectangle bounds = taxTree.getPathBounds( path );
+                lastEvent = e;
+                if ( bounds != null && taxon != null )
                 {
-                    handleScope( path );
-                }
-                else if ( levelRegion.contains( x, y ) )
-                {
-                    handleLevel( path );
-                }
-                else if ( timer.isRunning() )
-                {
-                    timer.stop();
-                    handleDoubleClick( path );
-                }
-                else
-                {
-                    timer.restart();
+                    final Rectangle boxRegion = panel.getComponent( 2 ).getBounds();
+                    final Rectangle iconRegion = panel.getComponent( 1 ).getBounds();
+                    final int x = e.getX() - bounds.x;
+                    final int y = e.getY() - bounds.y;
+                    if ( boxRegion.contains( x, y ) )
+                    {
+                        handleComponentClick( taxon );
+                    }
+                    else if ( iconRegion.contains( x, y ) )
+                    {
+                        handleIconClick( taxon );
+                    }
+                    else if ( timer.isRunning() )
+                    {
+                        timer.stop();
+                        handleDoubleClick( taxon );
+                    }
+                    else
+                    {
+                        timer.restart();
+                    }
                 }
             }
         }
@@ -295,77 +315,180 @@ public class NavigationBuilder implements Builder
 
         private void handleKey( final KeyEvent e )
         {
+            final TreePath path = taxTree.getSelectionPath();
+            final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+            final Taxon taxon = node.getTaxon();
             if ( e.getKeyChar() == ' ' )
             {
-                handleScope( taxTree.getSelectionPath() );
+                handleComponentClick( taxon );
                 e.consume();
             }
         }
 
-        private void handleDoubleClick( final TreePath path )
+        protected abstract void handleDoubleClick( Taxon taxon );
+
+        protected abstract void handleComponentClick( Taxon taxon );
+
+        protected abstract void handleIconClick( Taxon taxon );
+
+        protected abstract void handleLabelClick( Taxon taxon );
+    }
+
+    private class UseController extends AbstractController
+    {
+
+        public UseController( final TaxTree taxTree )
         {
-            System.out.println( "handling double click at " + path );
+            super( taxTree );
         }
 
-        private void handleScope( final TreePath path )
+        @Override
+        protected void handleDoubleClick( final Taxon taxon )
         {
-            if ( path != null )
+            System.out.println( "handling double click at " + taxon );
+        }
+
+        @Override
+        protected void handleComponentClick( final Taxon taxon )
+        {
+            if ( !taxStateModel.getScope().equals( taxon ) )
             {
-                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
-                final Taxon taxon = node.getTaxon();
-                if ( !taxStateModel.getScope().equals( taxon ) )
-                {
-                    taxStateModel.setScope( taxon );
-                    taxTree.repaint();
-                }
+                taxStateModel.setScope( taxon );
+                taxTree.repaint();
             }
         }
 
-        private void handleLevel( final TreePath path )
+        @Override
+        protected void handleIconClick( final Taxon taxon )
         {
-            if ( path != null )
+            if ( !taxStateModel.getLevel().equals( taxon.getLevel() ) )
             {
-                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
-                final Taxon taxon = node.getTaxon();
-                if ( !taxStateModel.getLevel().equals( taxon.getLevel() ) )
-                {
-                    taxStateModel.setLevel( taxon.getLevel() );
-                    taxTree.repaint();
-                }
+                taxStateModel.setLevel( taxon.getLevel() );
+                taxTree.repaint();
             }
         }
 
-        private void handleFocus( final TreePath path )
+        @Override
+        protected void handleLabelClick( final Taxon taxon )
         {
-            if ( path != null )
+            if ( !taxStateModel.getFocus().equals( taxon ) && contains( taxStateModel.getTaxList(), taxon ) )
             {
-                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
-                final Taxon taxon = node.getTaxon();
-                if ( !taxStateModel.getFocus().equals( taxon ) && contains( taxStateModel.getTaxList(), taxon ) )
-                {
-                    taxStateModel.setFocus( taxon );
-                    taxTree.repaint();
-                }
+                taxStateModel.setFocus( taxon );
+                taxTree.repaint();
             }
         }
     }
 
-    public class ListPopUp extends ObjectPopup<HerbarModel>
+    private class EditController extends AbstractController
     {
-        public ListPopUp()
+        public EditController( final TaxTree taxTree )
         {
-            super( context.getModels().toArray( new HerbarModel[context.getModels().size()] ) );
+            super( taxTree );
         }
 
-        public void showPopUp( final Component component )
+        @Override
+        protected void handleDoubleClick( final Taxon taxon )
         {
-            showPopUp( component, taxStateModel.getModel() );
+            handleClick( taxon );
         }
 
-        public void itemSelected( final HerbarModel obj )
+        @Override
+        protected void handleComponentClick( final Taxon taxon )
         {
-            context.setCurrentModel( obj );
-            taxStateModel.setModel( obj );
+            handleClick( taxon );
+        }
+
+        @Override
+        protected void handleIconClick( final Taxon taxon )
+        {
+            handleClick( taxon );
+        }
+
+        @Override
+        protected void handleLabelClick( final Taxon taxon )
+        {
+            handleClick( taxon );
+        }
+
+        private void handleClick( final Taxon taxon )
+        {
+            final HerbarModel model = taxStateModel.getModel();
+            if ( model instanceof FilterModel )
+            {
+                final FilterModel filterModel = (FilterModel) model;
+                final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
+                if ( filterTaxon == null )
+                {
+                    filterModel.addFilterTaxon( taxon );
+                }
+                else
+                {
+                    filterModel.removeFilterTaxon( filterTaxon );
+                }
+            }
+            taxTree.repaint();
+        }
+    }
+//
+//    public class ListPopUp extends ObjectPopup<HerbarModel>
+//    {
+//        public ListPopUp()
+//        {
+//            super( context.getModels().toArray( new HerbarModel[context.getModels().size()] ) );
+//        }
+//
+//        public void showPopUp( final Component component )
+//        {
+//            showPopUp( component, taxStateModel.getModel() );
+//        }
+//
+//        public void itemSelected( final HerbarModel obj )
+//        {
+//            context.setCurrentModel( obj );
+//            taxStateModel.setModel( obj );
+//        }
+//    }
+
+    private class LearnAndQueryTreeCellRenderer implements TreeCellRenderer
+    {
+        @Override
+        public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
+        {
+            final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
+            final boolean query = taxStateModel.getSubMode( taxon.getName() ) == Abfragen;
+            final Taxon filterTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
+            final Level level = taxon.getLevel();
+            final Taxon[] taxList = taxStateModel.getTaxList();
+            panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
+            panel.setText( query ? "Welches Taxon ist das?" : taxon.toString() );
+            final boolean containsFilterTaxon = contains( taxList, filterTaxon );
+            final boolean containsTaxon = contains( taxList, taxon );
+            final boolean listHasTaxon = filterTaxon != null;
+            final boolean sameLevels = taxStateModel.getLevel() == taxon.getLevel();
+            panel.setEnabled( listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
+            panel.setSelected( taxStateModel.getFocus().equals( taxon ) );
+            radio.setEnabled( true );
+            radio.setSelected( taxStateModel.getScope().equals( taxon ) );
+            panel.update();
+            return panel;
+        }
+    }
+
+    private class EditTreeCellRenderer implements TreeCellRenderer
+    {
+        @Override
+        public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
+        {
+            final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
+            final Level level = taxon.getLevel();
+            panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
+            panel.setText( taxon.toString() );
+            panel.setEnabled( true );
+            panel.setSelected( false );
+            check.setEnabled( false );
+            check.setSelected( taxStateModel.getModel().getTaxon( taxon.getName() ) != null );
+            panel.update();
+            return panel;
         }
     }
 }

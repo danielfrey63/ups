@@ -12,6 +12,7 @@ package ch.jfactory.action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 
 /**
@@ -20,9 +21,9 @@ import javax.swing.JButton;
  */
 class ButtonRedirector extends AbstractAction
 {
-    protected JButton button;
+    protected AbstractButton button;
 
-    public ButtonRedirector( final JButton button )
+    public ButtonRedirector( final AbstractButton button )
     {
         super.putValue( AbstractAction.NAME, button.getText() );
         this.button = button;

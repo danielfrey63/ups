@@ -10,9 +10,11 @@
 package ch.jfactory.action;
 
 import java.awt.event.KeyEvent;
+import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +35,7 @@ public class ActionUtils
      * @param keyStroke given KeyStroke on which the action should occur
      * @param button    button which action will executed
      */
-    public static void registerKeyStrokeAction( final KeyStroke keyStroke, final JButton button )
+    public static void registerKeyStrokeAction( final KeyStroke keyStroke, final AbstractButton button )
     {
         Action action = button.getAction();
         if ( action == null )

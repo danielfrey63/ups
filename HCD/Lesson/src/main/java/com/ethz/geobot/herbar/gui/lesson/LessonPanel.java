@@ -27,7 +27,6 @@ import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.picture.PicturePanel;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
-import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -35,7 +34,7 @@ import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
-import javax.swing.JFrame;
+import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +59,7 @@ public class LessonPanel extends ModeActivationPanel
 
     private final TaxStateModel taxStateModel;
 
-    private final PropertyDisplay lessonPanel;
+    private final PropertyDisplay propertyDisplay;
 
     private final PicturePanel picturePanel;
 
@@ -83,11 +82,11 @@ public class LessonPanel extends ModeActivationPanel
             final HerbarContext context = mode.getHerbarContext();
 
             final HerbarModel herbarModel = context.getDataModel();
-            taxStateModel = new TaxStateModel( herbarModel );
+            taxStateModel = new TaxStateModel( context, herbarModel );
 
             final JSplitPane splitPane = new NiceSplitPane();
             splitPane.add( picturePanel = new PicturePanel( herbarModel ), LEFT );
-            splitPane.add( lessonPanel = new PropertyDisplay( context, taxStateModel ), RIGHT );
+            splitPane.add( propertyDisplay = new PropertyDisplay( context, taxStateModel ), RIGHT );
 
             final JSplitPane navigationEtAll = new NiceSplitPane();
             navigationEtAll.add( new NavigationBuilder( context, taxStateModel ).getPanel(), LEFT );
@@ -105,7 +104,7 @@ public class LessonPanel extends ModeActivationPanel
                 public void propertyChange( PropertyChangeEvent e )
                 {
                     final Taxon focus = (Taxon) e.getNewValue();
-                    lessonPanel.setTaxFocus( focus );
+                    propertyDisplay.setTaxFocus( focus );
                     picturePanel.setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
                 }
             } );
@@ -115,7 +114,7 @@ public class LessonPanel extends ModeActivationPanel
                 public void propertyChange( PropertyChangeEvent e )
                 {
                     final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
-                    lessonPanel.setSubMode( subMode );
+                    propertyDisplay.setSubMode( subMode );
                     picturePanel.setShowText( subMode == Lernen );
                 }
             } );

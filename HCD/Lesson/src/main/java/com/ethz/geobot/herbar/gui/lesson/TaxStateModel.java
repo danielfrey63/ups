@@ -24,6 +24,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
+import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -32,10 +33,11 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.EDIT;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Level;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
@@ -46,9 +48,9 @@ import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 
 public class TaxStateModel
 {
-    private static final Logger LOG = LoggerFactory.getLogger( TaxStateModel.class );
-
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport( this );
+
+    private final HerbarContext context;
 
     private Taxon[] taxList;
 
@@ -56,12 +58,15 @@ public class TaxStateModel
 
     private final TaxStateValues vals;
 
+    private EditState listState = USE;
+
     private final HashMap<String, SubMode> subModes = new HashMap<String, SubMode>();
 
-    public TaxStateModel( final HerbarModel model )
+    public TaxStateModel( HerbarContext context, final HerbarModel herbarModel )
     {
         vals = new TaxStateValues();
-        setModel( model );
+        this.context = context;
+        setModel( herbarModel );
     }
 
     /**
@@ -175,6 +180,21 @@ public class TaxStateModel
         final SubMode newGlobalSubMode = getGlobalSubMode();
         fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, newGlobalSubMode ) );
         fireAllPropertyChangeEvents( fire );
+    }
+
+    public void setEditMode( final EditState mode )
+    {
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        setInternalGlobalSubMode( fire, Lernen );
+        setInternalEditMode( fire, mode );
+        fireAllPropertyChangeEvents( fire );
+    }
+
+    private void setInternalEditMode( ArrayList<FireArray> fire, EditState mode )
+    {
+        EditState oldMode = listState;
+        listState = mode;
+        fire.add( new FireArray( Edit.name(), oldMode, mode ) );
     }
 
     /**
@@ -353,6 +373,11 @@ public class TaxStateModel
         return overallSubMode;
     }
 
+    public EditState getEditMode()
+    {
+        return listState;
+    }
+
     //
     //** Helpers
     //
@@ -405,7 +430,7 @@ public class TaxStateModel
 
     public enum TaxState
     {
-        List, Scope, Level, Focus, Ordered, SubModus, Model
+        List, Scope, Level, Focus, Ordered, SubModus, Model, Edit
     }
 
     /**
@@ -414,6 +439,14 @@ public class TaxStateModel
     public enum SubMode
     {
         Lernen, Abfragen
+    }
+
+    /**
+     * Keeps track of list states which either are in edit mode or in use/read mode.
+     */
+    public enum EditState
+    {
+        EDIT, USE
     }
 
     /**

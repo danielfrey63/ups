@@ -1,2808 +1,938 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<filter baseFilterName="" name="Alle">
-    <detail scope="Rutaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Dipsacaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Campanulaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Celastraceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Linaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Scrophulariaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Ranunculaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Colchicaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Crassulaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cyperaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Boraginaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Fagaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Melanthiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cupressaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Tofieldiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Amaryllidaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Selaginellaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Araliaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Rhamnaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Iridaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Papaveraceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Convolvulaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Lycopodiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Betulaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Brassicaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Ginkgoaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Rosaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Adoxaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Sapindaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Asparagaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Hypericaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Orobanchaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Nymphaeaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Polygalaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cystopteridaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Poaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Pinaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Dennstaedtiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Juglandaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Orchidaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Onagraceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Aristolochiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Oxalidaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Geraniaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Liliaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Malvaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Lentibulariaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Caryophyllaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Hamamelidaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Caprifoliaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Salicaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Berberidaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Amaranthaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Clavicipitaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Apocynaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Aquifoliaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Oleaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Balsaminaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Juncaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Araceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Dryopteridaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Rubiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Ulmaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Valerianaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cistaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cannabaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Plantaginaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Thymelaeaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Solanaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Polygonaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Ericaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Santalaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Lamiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Athyriaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Parnassiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Polypodiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Blechnaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Ophioglossaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Gentianaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Verbenaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Aspleniaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Droseraceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Asteraceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Cornaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Primulaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Fabaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Elaeagnaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Violaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Saxifragaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Urticaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Typhaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Apiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Equisetaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Euphorbiaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Taxaceae">
-        <level>Familie</level>
-    </detail>
-    <detail scope="Lamiiden">
-        <level>Gruppe B</level>
-    </detail>
-    <detail scope="Campanuliden">
-        <level>Gruppe B</level>
-    </detail>
-    <detail scope="Carduus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Juniperus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Linaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Populus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Phyteuma">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Onobrychis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Luzula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Thlaspi">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pimpinella">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Equisetum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Scabiosa">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Carlina">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Sambucus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Hamamelis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Stachys">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Prunella">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Fraxinus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Centaurea">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Saponaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Stellaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Polygonum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Tragopogon">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Narcissus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Rumex">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Ophrys">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pulmonaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Thalictrum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Bromus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Festuca">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Alchemilla">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Melampyrum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Laburnum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Gentiana">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Minuartia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Cerastium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Ulmus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Alnus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Fragaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Valeriana">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Allium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Schoenus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Androsace">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Crataegus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Calendula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Teucrium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pulsatilla">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Laserpitium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Trifolium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Dactylorhiza">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Hieracium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Arenaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Acer">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Euphorbia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Senecio">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Gentianella">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Botrychium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Campanula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Ranunculus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Matricaria">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Verbascum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Aquilegia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Symphytum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Dianthus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Crepis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Iris">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Petasites">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Helleborus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Veronica">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Globularia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Euphrasia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Typha">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Astrantia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Drosera">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Valerianella">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Lathyrus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Clematis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Erigeron">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Medicago">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Plantago">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Papaver">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Artemisia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Cardamine">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Solanum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Hordeum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Cornus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Aster">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Aconitum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Lolium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Geum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Chenopodium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pinus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Phleum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Impatiens">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Leucanthemum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Salvia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Soldanella">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Oxytropis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Rosa">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Ajuga">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Erodium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Knautia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Solidago">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Betula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Anthriscus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Lamium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Astragalus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Viburnum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Juncus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Malva">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Brachypodium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Vicia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Sedum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Lonicera">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Sempervivum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Carex">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Leontodon">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Galium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Cirsium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Doronicum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pedicularis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Polygonatum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Helianthemum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Epilobium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Primula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Adenostyles">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Mentha">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Cruciata">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Gnaphalium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Rubus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Tilia">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Geranium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Rhododendron">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Orchis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Vaccinium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Achillea">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Prunus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Saxifraga">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Eriophorum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Potentilla">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Pinguicula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Anemone">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Melica">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Rhinanthus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Quercus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Salix">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Echium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Digitalis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Orobanche">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Poa">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Galeopsis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Daphne">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Myosotis">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Sorbus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Asperula">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Asplenium">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Consolida">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Acinos">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Heracleum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Chaerophyllum">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Melilotus">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Silene">
-        <level>Gattung</level>
-    </detail>
-    <detail scope="Carex parviflora">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crepis biennis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Digitalis purpurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca pratensis i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Valerianella locusta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crataegus monogyna agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Luzula lutea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Holcus lanatus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lotus corniculatus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Achillea millefolium agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Laburnum anagyroides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonum aviculare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex spicata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Valeriana officinalis agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chenopodium bonus-henricus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Picea abies">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ajuga reptans">
-        <level>Art</level>
-    </detail>
-    <detail scope="Asarum europaeum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Symphytum officinale">
-        <level>Art</level>
-    </detail>
-    <detail scope="Brachypodium sylvaticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thlaspi arvense">
-        <level>Art</level>
-    </detail>
-    <detail scope="Erigeron uniflorus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cynosurus cristatus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rosa canina agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea scabiosa i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Matricaria discoidea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Athamanta cretensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lamium album">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca arundinacea i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Amelanchier ovalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Equisetum telmateia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Fragaria vesca">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tulipa sylvestris i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helianthus annuus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aconitum napellus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sibbaldia procumbens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex davalliana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex echinata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rumex obtusifolius">
-        <level>Art</level>
-    </detail>
-    <detail scope="Reynoutria japonica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Narcissus pseudonarcissus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex digitata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga paniculata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tussilago farfara">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leontodon hispidus i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Calamagrostis varia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Iris pseudacorus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gymnadenia conopsea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium verum i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crataegus laevigata agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex flava agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Eriophorum latifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bellis perennis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex nigra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana clusii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Minuartia sedoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alliaria petiolata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chrysosplenium alternifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gypsophila repens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leucanthemopsis alpina agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Erigeron annuus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Plantago alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vicia cracca i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Petasites albus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonum bistorta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium pratense i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alnus glutinosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Origanum vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ruta graveolens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana acaulis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Verbascum lychnitis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Malva neglecta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pulsatilla apiifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Avenella flexuosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea cyanus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pedicularis tuberosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Milium effusum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium dubium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Agrostis stolonifera">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rhamnus cathartica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leucanthemum adustum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla reptans">
-        <level>Art</level>
-    </detail>
-    <detail scope="Spergularia rubra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga aizoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola tricolor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chaenorrhinum minus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euphorbia helioscopia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Populus nigra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chenopodium album">
-        <level>Art</level>
-    </detail>
-    <detail scope="Convolvulus arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phyteuma betonicifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hordeum vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Globularia nudicaulis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Botrychium lunaria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Knautia arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Laserpitium latifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Taxus baccata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leontodon helveticus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus repens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Eriophorum vaginatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stellaria media agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola biflora">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lilium martagon">
-        <level>Art</level>
-    </detail>
-    <detail scope="Malva sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica chamaedrys">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonatum verticillatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium repens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix retusa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Oxalis acetosella">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alchemilla vulgaris agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ficaria verna">
-        <level>Art</level>
-    </detail>
-    <detail scope="Scirpus sylvaticus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene latifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phleum alpinum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Equisetum sylvaticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Linum catharticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Astragalus alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Doronicum clusii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa pratensis agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Asplenium viride">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rubus idaeus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geranium rotundifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunus mahaleb">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hedera helix">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lemna minor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Frangula alnus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunus padus i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Primula hirsuta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Oxyria digyna">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hippocrepis comosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula rotundifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Maianthemum bifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex firma">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hamamelis virginiana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anthericum liliago">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cichorium intybus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arabidopsis thaliana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Datura stramonium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Larix decidua">
-        <level>Art</level>
-    </detail>
-    <detail scope="Asplenium ruta-muraria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Selaginella selaginoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thymus vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cornus sanguinea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saponaria ocymoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Blechnum spicant">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rosa pendulina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex atrata i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix elaeagnos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Epilobium montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium anisophyllon">
-        <level>Art</level>
-    </detail>
-    <detail scope="Impatiens glandulifera">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sorbus domestica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Nigritella nigra agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinus uncinata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ginkgo biloba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Echium vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rubus fruticosus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vaccinium vitis-idaea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygala chamaebuxus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Androsace obtusifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rumex scutatus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chaerophyllum hirsutum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cirsium arvense">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix reticulata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Senecio incanus i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Abies alba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Biscutella laevigata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Brachypodium pinnatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga caesia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lamium purpureum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Astragalus frigidus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Luzula sylvatica i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Nardus stricta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex ferruginea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ulmus glabra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dactylorhiza maculata agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dryas octopetala">
-        <level>Art</level>
-    </detail>
-    <detail scope="Scabiosa columbaria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carduus defloratus i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa annua">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sambucus racemosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rumex alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geranium sylvaticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex sempervirens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Achillea macrophylla">
-        <level>Art</level>
-    </detail>
-    <detail scope="Peucedanum ostruthium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix helvetica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Oenothera biennis agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arctostaphylos uva-ursi">
-        <level>Art</level>
-    </detail>
-    <detail scope="Traunsteinera globosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Mercurialis perennis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crepis aurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Solidago canadensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Achillea moschata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alnus viridis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rosmarinus officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pimpinella saxifraga">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carpinus betulus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Laserpitium siler">
-        <level>Art</level>
-    </detail>
-    <detail scope="Mentha piperita">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trisetum flavescens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Primula veris i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vaccinium uliginosum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene dioica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Populus alba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Urtica dioica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga stellaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Erigeron alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cornus mas">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cicerbita alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Linaria vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Adenostyles glabra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lolium perenne">
-        <level>Art</level>
-    </detail>
-    <detail scope="Kernera saxatilis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Robinia pseudoacacia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Chelidonium majus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus aconitifolius">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sorbus aria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Listera ovata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Digitalis lutea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crepis capillaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anthoxanthum odoratum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bromus erectus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Atropa bella-donna">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cypripedium calceolus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex caryophyllea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hyoscyamus niger">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viscum album">
-        <level>Art</level>
-    </detail>
-    <detail scope="Senecio vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helianthemum nummularium agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sambucus nigra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix purpurea i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cnicus benedictus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Daucus carota">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dryopteris filix-mas">
-        <level>Art</level>
-    </detail>
-    <detail scope="Myosotis alpestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dianthus superbus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vincetoxicum hirundinaria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cruciata laevipes">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stachys sylvatica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aquilegia vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Typha latifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Plantago media">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melilotus officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Glechoma hederacea i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carduus personata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lamium galeobdolon i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alnus incana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geranium sanguineum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana verna agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pedicularis verticillata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Astrantia major">
-        <level>Art</level>
-    </detail>
-    <detail scope="Androsace helvetica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stellaria nemorum i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium badium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Daphne mezereum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa trivialis i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ligusticum mutellina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentianella campestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Triticum aestivum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aster alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Empetrum hermaphroditum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Corylus avellana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula trachelium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Betula pubescens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prenanthes purpurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cerastium latifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sedum atratum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Neottia nidus-avis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Caltha palustris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polypodium vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arabis alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sorbus aucuparia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Homogyne alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Quercus petraea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Paris quadrifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euphorbia cyparissias">
-        <level>Art</level>
-    </detail>
-    <detail scope="Calluna vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sinapis arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonatum multiflorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene rupestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rhododendron ferrugineum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ajuga pyramidalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene acaulis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rentierflechte">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euphrasia rostkoviana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Daphne striata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Quercus robur">
-        <level>Art</level>
-    </detail>
-    <detail scope="Iris sibirica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Epilobium angustifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cerastium strictum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana lutea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vinca minor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ligustrum vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Fraxinus excelsior">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hedysarum hedysaroides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juncus effusus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Drosera rotundifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salvia pratensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rhinanthus minor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juniperus nana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juniperus communis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lycopodium annotinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Orobanche alba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Acer pseudoplatanus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla sterilis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Nymphaea alba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Calendula officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Loiseleuria procumbens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lloydia serotina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex sylvatica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix herbacea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla anserina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene vulgaris i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Poa bulbosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Medicago falcata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Erodium cicutarium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trollius europaeus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica persica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sempervivum montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phyteuma hemisphaericum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juncus inflexus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Taraxacum officinale agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pimpinella major">
-        <level>Art</level>
-    </detail>
-    <detail scope="Plantago atrata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Secale cereale">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vaccinium myrtillus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euonymus europaeus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juniperus sabina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Heracleum sphondylium i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Androsace vandellii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Soldanella pusilla">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salvia officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola reichenbachiana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lathyrus vernus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Molinia caerulea agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex elata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geum montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pteridium aquilinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salvia glutinosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula scheuchzeri">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cirsium spinosissimum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rumex acetosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga rotundifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla erecta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Onobrychis viciifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hieracium murorum i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lysimachia nemorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunus avium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica urticifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex hirta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Impatiens noli-tangere">
-        <level>Art</level>
-    </detail>
-    <detail scope="Orchis ustulata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea montana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Digitalis lanata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rhinanthus alectorolophus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ophrys insectifera">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lonicera alpigena">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sonchus oleraceus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Asperula cynanchica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinus mugo">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonum persicaria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vicia sativa i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Oxytropis campestris i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix caprea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Consolida regalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dianthus carthusianorum i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sanguisorba minor i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lunaria annua">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sempervivum arachnoideum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Isländisch Moos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phyteuma spicatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anagallis arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sorbus torminalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Salix alba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euphrasia minima">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cerastium fontanum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aconitum vulparia agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lolium multiflorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Senecio doronicum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Landkartenflechte">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hippophae rhamnoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Eriophorum scheuchzeri">
-        <level>Art</level>
-    </detail>
-    <detail scope="Huperzia selago">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus alpestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene flos-cuculi">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lathyrus pratensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula cochleariifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Verbena officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juncus trifidus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Colchicum autumnale">
-        <level>Art</level>
-    </detail>
-    <detail scope="Globularia cordifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Onobrychis montana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Senecio alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lamium maculatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Nuphar lutea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Populus tremula">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla aurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Artemisia campestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phleum pratense agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus platanifolius">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hordeum murinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veratrum album i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galanthus nivalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Oxytropis jacquinii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Adenostyles alliariae">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anthyllis vulneraria i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygala vulgaris agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lonicera nigra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola calcarata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Acer platanoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cannabis sativa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alchemilla alpina agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Alopecurus pratensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Vicia sepium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helleborus foetidus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arrhenatherum elatius">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gnaphalium supinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Teucrium montanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carlina acaulis i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Artemisia vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tilia platyphyllos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bromus tectorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leucanthemum vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonatum odoratum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galeopsis tetrahit">
-        <level>Art</level>
-    </detail>
-    <detail scope="Filipendula ulmaria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phyllitis scolopendrium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pulsatilla vernalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Plantago lanceolata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melissa officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Antennaria dioica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Allium ursinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Primula elatior">
-        <level>Art</level>
-    </detail>
-    <detail scope="Luzula pilosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Fagus sylvatica">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga bryoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Quercus pubescens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Equisetum arvense">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga androsacea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Acer campestre">
-        <level>Art</level>
-    </detail>
-    <detail scope="Petasites hybridus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stipa pennata agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium mollugo agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saponaria officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica filiformis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Primula farinosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helictotrichon pubescens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Elymus repens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Capsella bursa-pastoris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aesculus hippocastanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica hederifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Saxifraga oppositifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gipfelmoos (= akrokarp)">
-        <level>Art</level>
-    </detail>
-    <detail scope="Medicago lupulina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geum urbanum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica bellidioides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Narcissus poëticus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus kuepferi">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sesleria caerulea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sedum album">
-        <level>Art</level>
-    </detail>
-    <detail scope="Linaria alpina i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bromus sterilis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex flacca">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pedicularis foliosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola hirta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Acinos alpinus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thlaspi rotundifolium i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carum carvi">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana punctata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Myosotis arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Solidago gigantea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trichophorum caespitosum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sanicula europaea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Castanea sativa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Linum usitatissimum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Foeniculum vulgare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex pallescens">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arum maculatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hieracium villosum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Orchis mascula">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ostrya carpinifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Achillea atrata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Draba aizoides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Humulus lupulus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melilotus albus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thymus serpyllum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anemone nemorosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ilex aquifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex panicea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Betula pendula">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex curvula i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Beblättertes Lebermoos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Buddleja davidii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Plantago major">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juglans regia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bartflechte">
-        <level>Art</level>
-    </detail>
-    <detail scope="Carex pendula">
-        <level>Art</level>
-    </detail>
-    <detail scope="Clematis vitalba">
-        <level>Art</level>
-    </detail>
-    <detail scope="Coeloglossum viride">
-        <level>Art</level>
-    </detail>
-    <detail scope="Teucrium chamaedrys">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cardamine resedifolia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Minuartia verna">
-        <level>Art</level>
-    </detail>
-    <detail scope="Eupatorium cannabinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dactylis glomerata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hypericum perforatum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Fraxinus ornus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Doronicum grandiflorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Stachys recta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Androsace chamaejasme">
-        <level>Art</level>
-    </detail>
-    <detail scope="Hieracium pilosella i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentiana purpurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gnaphalium sylvaticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica fruticans">
-        <level>Art</level>
-    </detail>
-    <detail scope="Herniaria glabra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Malus sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Euphorbia amygdaloides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Claviceps purpurea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Valeriana tripteris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Convallaria majalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arenaria biflora">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca rubra agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Dianthus sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinguicula alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cystopteris fragilis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Parnassia palustris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Acer opalus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Silene nutans i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunus spinosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tofieldia calyculata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ulmus minor">
-        <level>Art</level>
-    </detail>
-    <detail scope="Zea mays">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melampyrum sylvaticum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinus sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Deschampsia caespitosa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aegopodium podagraria">
-        <level>Art</level>
-    </detail>
-    <detail scope="Juncus alpinoarticulatus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pritzelago alpina i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viburnum opulus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cotoneaster integerrimus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Solidago virgaurea i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geranium pyrenaicum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Androsace alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Aster bellidiastrum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Papaver rhoeas">
-        <level>Art</level>
-    </detail>
-    <detail scope="Erica carnea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bromus hordeaceus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melampyrum pratense">
-        <level>Art</level>
-    </detail>
-    <detail scope="Potentilla crantzii">
-        <level>Art</level>
-    </detail>
-    <detail scope="Frangula purshiana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geranium robertianum agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viola arvensis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tragopogon pratensis i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Asplenium trichomanes">
-        <level>Art</level>
-    </detail>
-    <detail scope="Brassica napus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arnica montana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Briza media">
-        <level>Art</level>
-    </detail>
-    <detail scope="Crocus albiflorus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cardamine pratensis agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Valeriana montana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Festuca valesiaca agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Althaea officinalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Soldanella alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Prunella vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Centaurea jacea i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thalictrum aquilegiifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pulsatilla alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Avena sativa i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Eriophorum angustifolium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Primula auricula">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leucojum vernum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phyteuma orbiculare">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melica nutans">
-        <level>Art</level>
-    </detail>
-    <detail scope="Elyna myosuroides">
-        <level>Art</level>
-    </detail>
-    <detail scope="Helianthemum alpestre">
-        <level>Art</level>
-    </detail>
-    <detail scope="Calystegia sepium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Geum rivale">
-        <level>Art</level>
-    </detail>
-    <detail scope="Securigera varia">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus acris i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Rhododendron hirsutum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Leontopodium alpinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Trifolium alpinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Veronica beccabunga">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus montanus agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cuscuta epithymum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Artemisia absinthium">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cardamine hirsuta">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinus cembra">
-        <level>Art</level>
-    </detail>
-    <detail scope="Phragmites australis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus glacialis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula rhomboidalis">
-        <level>Art</level>
-    </detail>
-    <detail scope="Matricaria chamomilla">
-        <level>Art</level>
-    </detail>
-    <detail scope="Athyrium filix-femina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cirsium oleraceum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Viburnum lantana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Bartsia alpina">
-        <level>Art</level>
-    </detail>
-    <detail scope="Tilia cordata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Berberis vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Gentianella germanica i.w.S.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Impatiens parviflora">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ruscus aculeatus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lonicera xylosteum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Lonicera caerulea">
-        <level>Art</level>
-    </detail>
-    <detail scope="Allium schoenoprasum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Circaea lutetiana">
-        <level>Art</level>
-    </detail>
-    <detail scope="Equisetum palustre">
-        <level>Art</level>
-    </detail>
-    <detail scope="Schoenus nigricans">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium aparine">
-        <level>Art</level>
-    </detail>
-    <detail scope="Arenaria serpyllifolia agg.">
-        <level>Art</level>
-    </detail>
-    <detail scope="Equisetum hyemale">
-        <level>Art</level>
-    </detail>
-    <detail scope="Galium odoratum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pinguicula vulgaris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Melittis melissophyllum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Astmoos (= pleurokarp)">
-        <level>Art</level>
-    </detail>
-    <detail scope="Digitalis grandiflora">
-        <level>Art</level>
-    </detail>
-    <detail scope="Polygonum viviparum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Sedum acre">
-        <level>Art</level>
-    </detail>
-    <detail scope="Ranunculus bulbosus">
-        <level>Art</level>
-    </detail>
-    <detail scope="Anthriscus sylvestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Luzula campestris">
-        <level>Art</level>
-    </detail>
-    <detail scope="Torfmoos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Solanum dulcamara">
-        <level>Art</level>
-    </detail>
-    <detail scope="Campanula barbata">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pulmonaria obscura">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thalloses Lebermoos">
-        <level>Art</level>
-    </detail>
-    <detail scope="Pyrus pyraster">
-        <level>Art</level>
-    </detail>
-    <detail scope="Thesium alpinum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Cerastium uniflorum">
-        <level>Art</level>
-    </detail>
-    <detail scope="Medicago sativa">
-        <level>Art</level>
-    </detail>
-    <detail scope="Basale Angiospermae">
-        <level>Gruppe A</level>
-    </detail>
-    <detail scope="Eudicotyledonae">
-        <level>Gruppe A</level>
-    </detail>
-    <detail scope="Monocotyledonae">
-        <level>Gruppe A</level>
-    </detail>
-    <detail scope="Spermatophyta">
-        <level>Abteilung</level>
-    </detail>
-    <detail scope="Flechten">
-        <level>Abteilung</level>
-    </detail>
-    <detail scope="Ascomycota">
-        <level>Abteilung</level>
-    </detail>
-    <detail scope="Pteridophyta">
-        <level>Abteilung</level>
-    </detail>
-    <detail scope="Bryophyta">
-        <level>Abteilung</level>
-    </detail>
-    <detail scope="Sphagnidae">
-        <level>Unterklasse</level>
-    </detail>
-    <detail scope="Polypodiidae">
-        <level>Unterklasse</level>
-    </detail>
-    <detail scope="Bryidae">
-        <level>Unterklasse</level>
-    </detail>
-    <detail scope="Jungermanniidae">
-        <level>Unterklasse</level>
-    </detail>
-    <detail scope="Marchantiidae">
-        <level>Unterklasse</level>
-    </detail>
-    <detail scope="Asteranae">
-        <level>Überordnung</level>
-    </detail>
-    <detail scope="Rosanae">
-        <level>Überordnung</level>
-    </detail>
-    <detail scope="Asclepiadoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Prunoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Malvoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Silenoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Tilioideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Maloideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Cichorioideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Alsinoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Asteroideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Allioideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Paronychioideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Apocynoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Rosoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Carduoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Faboideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Amaryllidoideae">
-        <level>Unterfamilie</level>
-    </detail>
-    <detail scope="Bryopsida">
-        <level>Klasse</level>
-    </detail>
-    <detail scope="Gymnospermae">
-        <level>Klasse</level>
-    </detail>
-    <detail scope="Angiospermae">
-        <level>Klasse</level>
-    </detail>
-    <detail scope="Marchantiopsida">
-        <level>Klasse</level>
-    </detail>
-    <detail scope="Dipsacales">
-        <level>Ordnung</level>
-    </detail>
-    <detail scope="Poales">
-        <level>Ordnung</level>
-    </detail>
-    <detail scope="Fagales">
-        <level>Ordnung</level>
-    </detail>
-    <detail scope="Gentianales">
-        <level>Ordnung</level>
-    </detail>
-    <detail scope="Nebenschlüssel A">
-        <level>Nebenschlüssel</level>
-    </detail>
-    <detail scope="Nebenschlüssel B">
-        <level>Nebenschlüssel</level>
-    </detail>
-    <detail scope="Nebenschlüssel C">
-        <level>Nebenschlüssel</level>
-    </detail>
-    <detail scope="Nebenschlüssel D">
-        <level>Nebenschlüssel</level>
-    </detail>
-    <detail scope="Nebenschlüssel F">
-        <level>Nebenschlüssel</level>
-    </detail>
-    <detail scope="Nebenschlüssel E">
-        <level>Nebenschlüssel</level>
-    </detail>
+<filter name="Alle" fixed="true">
+    <detail scope="Rutaceae"/>
+    <detail scope="Dipsacaceae"/>
+    <detail scope="Campanulaceae"/>
+    <detail scope="Celastraceae"/>
+    <detail scope="Linaceae"/>
+    <detail scope="Scrophulariaceae"/>
+    <detail scope="Ranunculaceae"/>
+    <detail scope="Colchicaceae"/>
+    <detail scope="Crassulaceae"/>
+    <detail scope="Cyperaceae"/>
+    <detail scope="Boraginaceae"/>
+    <detail scope="Fagaceae"/>
+    <detail scope="Melanthiaceae"/>
+    <detail scope="Cupressaceae"/>
+    <detail scope="Tofieldiaceae"/>
+    <detail scope="Amaryllidaceae"/>
+    <detail scope="Selaginellaceae"/>
+    <detail scope="Araliaceae"/>
+    <detail scope="Rhamnaceae"/>
+    <detail scope="Iridaceae"/>
+    <detail scope="Papaveraceae"/>
+    <detail scope="Convolvulaceae"/>
+    <detail scope="Lycopodiaceae"/>
+    <detail scope="Betulaceae"/>
+    <detail scope="Brassicaceae"/>
+    <detail scope="Ginkgoaceae"/>
+    <detail scope="Rosaceae"/>
+    <detail scope="Adoxaceae"/>
+    <detail scope="Sapindaceae"/>
+    <detail scope="Asparagaceae"/>
+    <detail scope="Hypericaceae"/>
+    <detail scope="Orobanchaceae"/>
+    <detail scope="Nymphaeaceae"/>
+    <detail scope="Polygalaceae"/>
+    <detail scope="Cystopteridaceae"/>
+    <detail scope="Poaceae"/>
+    <detail scope="Pinaceae"/>
+    <detail scope="Dennstaedtiaceae"/>
+    <detail scope="Juglandaceae"/>
+    <detail scope="Orchidaceae"/>
+    <detail scope="Onagraceae"/>
+    <detail scope="Aristolochiaceae"/>
+    <detail scope="Oxalidaceae"/>
+    <detail scope="Geraniaceae"/>
+    <detail scope="Liliaceae"/>
+    <detail scope="Malvaceae"/>
+    <detail scope="Lentibulariaceae"/>
+    <detail scope="Caryophyllaceae"/>
+    <detail scope="Hamamelidaceae"/>
+    <detail scope="Caprifoliaceae"/>
+    <detail scope="Salicaceae"/>
+    <detail scope="Berberidaceae"/>
+    <detail scope="Amaranthaceae"/>
+    <detail scope="Clavicipitaceae"/>
+    <detail scope="Apocynaceae"/>
+    <detail scope="Aquifoliaceae"/>
+    <detail scope="Oleaceae"/>
+    <detail scope="Balsaminaceae"/>
+    <detail scope="Juncaceae"/>
+    <detail scope="Araceae"/>
+    <detail scope="Dryopteridaceae"/>
+    <detail scope="Rubiaceae"/>
+    <detail scope="Ulmaceae"/>
+    <detail scope="Valerianaceae"/>
+    <detail scope="Cistaceae"/>
+    <detail scope="Cannabaceae"/>
+    <detail scope="Plantaginaceae"/>
+    <detail scope="Thymelaeaceae"/>
+    <detail scope="Solanaceae"/>
+    <detail scope="Polygonaceae"/>
+    <detail scope="Ericaceae"/>
+    <detail scope="Santalaceae"/>
+    <detail scope="Lamiaceae"/>
+    <detail scope="Athyriaceae"/>
+    <detail scope="Parnassiaceae"/>
+    <detail scope="Polypodiaceae"/>
+    <detail scope="Blechnaceae"/>
+    <detail scope="Ophioglossaceae"/>
+    <detail scope="Gentianaceae"/>
+    <detail scope="Verbenaceae"/>
+    <detail scope="Aspleniaceae"/>
+    <detail scope="Droseraceae"/>
+    <detail scope="Asteraceae"/>
+    <detail scope="Cornaceae"/>
+    <detail scope="Primulaceae"/>
+    <detail scope="Fabaceae"/>
+    <detail scope="Elaeagnaceae"/>
+    <detail scope="Violaceae"/>
+    <detail scope="Saxifragaceae"/>
+    <detail scope="Urticaceae"/>
+    <detail scope="Typhaceae"/>
+    <detail scope="Apiaceae"/>
+    <detail scope="Equisetaceae"/>
+    <detail scope="Euphorbiaceae"/>
+    <detail scope="Taxaceae"/>
+    <detail scope="Lamiiden"/>
+    <detail scope="Campanuliden"/>
+    <detail scope="Carduus"/>
+    <detail scope="Juniperus"/>
+    <detail scope="Linaria"/>
+    <detail scope="Populus"/>
+    <detail scope="Phyteuma"/>
+    <detail scope="Onobrychis"/>
+    <detail scope="Luzula"/>
+    <detail scope="Thlaspi"/>
+    <detail scope="Pimpinella"/>
+    <detail scope="Equisetum"/>
+    <detail scope="Scabiosa"/>
+    <detail scope="Carlina"/>
+    <detail scope="Sambucus"/>
+    <detail scope="Hamamelis"/>
+    <detail scope="Stachys"/>
+    <detail scope="Prunella"/>
+    <detail scope="Fraxinus"/>
+    <detail scope="Centaurea"/>
+    <detail scope="Saponaria"/>
+    <detail scope="Stellaria"/>
+    <detail scope="Polygonum"/>
+    <detail scope="Tragopogon"/>
+    <detail scope="Narcissus"/>
+    <detail scope="Rumex"/>
+    <detail scope="Ophrys"/>
+    <detail scope="Pulmonaria"/>
+    <detail scope="Thalictrum"/>
+    <detail scope="Bromus"/>
+    <detail scope="Festuca"/>
+    <detail scope="Alchemilla"/>
+    <detail scope="Melampyrum"/>
+    <detail scope="Laburnum"/>
+    <detail scope="Gentiana"/>
+    <detail scope="Minuartia"/>
+    <detail scope="Cerastium"/>
+    <detail scope="Ulmus"/>
+    <detail scope="Alnus"/>
+    <detail scope="Fragaria"/>
+    <detail scope="Valeriana"/>
+    <detail scope="Allium"/>
+    <detail scope="Schoenus"/>
+    <detail scope="Androsace"/>
+    <detail scope="Crataegus"/>
+    <detail scope="Calendula"/>
+    <detail scope="Teucrium"/>
+    <detail scope="Pulsatilla"/>
+    <detail scope="Laserpitium"/>
+    <detail scope="Trifolium"/>
+    <detail scope="Dactylorhiza"/>
+    <detail scope="Hieracium"/>
+    <detail scope="Arenaria"/>
+    <detail scope="Acer"/>
+    <detail scope="Euphorbia"/>
+    <detail scope="Senecio"/>
+    <detail scope="Gentianella"/>
+    <detail scope="Botrychium"/>
+    <detail scope="Campanula"/>
+    <detail scope="Ranunculus"/>
+    <detail scope="Matricaria"/>
+    <detail scope="Verbascum"/>
+    <detail scope="Aquilegia"/>
+    <detail scope="Symphytum"/>
+    <detail scope="Dianthus"/>
+    <detail scope="Crepis"/>
+    <detail scope="Iris"/>
+    <detail scope="Petasites"/>
+    <detail scope="Helleborus"/>
+    <detail scope="Veronica"/>
+    <detail scope="Globularia"/>
+    <detail scope="Euphrasia"/>
+    <detail scope="Typha"/>
+    <detail scope="Astrantia"/>
+    <detail scope="Drosera"/>
+    <detail scope="Valerianella"/>
+    <detail scope="Lathyrus"/>
+    <detail scope="Clematis"/>
+    <detail scope="Erigeron"/>
+    <detail scope="Medicago"/>
+    <detail scope="Plantago"/>
+    <detail scope="Papaver"/>
+    <detail scope="Artemisia"/>
+    <detail scope="Cardamine"/>
+    <detail scope="Solanum"/>
+    <detail scope="Hordeum"/>
+    <detail scope="Cornus"/>
+    <detail scope="Aster"/>
+    <detail scope="Aconitum"/>
+    <detail scope="Lolium"/>
+    <detail scope="Geum"/>
+    <detail scope="Chenopodium"/>
+    <detail scope="Pinus"/>
+    <detail scope="Phleum"/>
+    <detail scope="Impatiens"/>
+    <detail scope="Leucanthemum"/>
+    <detail scope="Salvia"/>
+    <detail scope="Soldanella"/>
+    <detail scope="Oxytropis"/>
+    <detail scope="Rosa"/>
+    <detail scope="Ajuga"/>
+    <detail scope="Erodium"/>
+    <detail scope="Knautia"/>
+    <detail scope="Solidago"/>
+    <detail scope="Betula"/>
+    <detail scope="Anthriscus"/>
+    <detail scope="Lamium"/>
+    <detail scope="Astragalus"/>
+    <detail scope="Viburnum"/>
+    <detail scope="Juncus"/>
+    <detail scope="Malva"/>
+    <detail scope="Brachypodium"/>
+    <detail scope="Vicia"/>
+    <detail scope="Sedum"/>
+    <detail scope="Lonicera"/>
+    <detail scope="Sempervivum"/>
+    <detail scope="Carex"/>
+    <detail scope="Leontodon"/>
+    <detail scope="Galium"/>
+    <detail scope="Cirsium"/>
+    <detail scope="Doronicum"/>
+    <detail scope="Pedicularis"/>
+    <detail scope="Polygonatum"/>
+    <detail scope="Helianthemum"/>
+    <detail scope="Epilobium"/>
+    <detail scope="Primula"/>
+    <detail scope="Adenostyles"/>
+    <detail scope="Mentha"/>
+    <detail scope="Cruciata"/>
+    <detail scope="Gnaphalium"/>
+    <detail scope="Rubus"/>
+    <detail scope="Tilia"/>
+    <detail scope="Geranium"/>
+    <detail scope="Rhododendron"/>
+    <detail scope="Orchis"/>
+    <detail scope="Vaccinium"/>
+    <detail scope="Achillea"/>
+    <detail scope="Prunus"/>
+    <detail scope="Saxifraga"/>
+    <detail scope="Eriophorum"/>
+    <detail scope="Potentilla"/>
+    <detail scope="Pinguicula"/>
+    <detail scope="Anemone"/>
+    <detail scope="Melica"/>
+    <detail scope="Rhinanthus"/>
+    <detail scope="Quercus"/>
+    <detail scope="Salix"/>
+    <detail scope="Echium"/>
+    <detail scope="Digitalis"/>
+    <detail scope="Orobanche"/>
+    <detail scope="Poa"/>
+    <detail scope="Galeopsis"/>
+    <detail scope="Daphne"/>
+    <detail scope="Myosotis"/>
+    <detail scope="Sorbus"/>
+    <detail scope="Asperula"/>
+    <detail scope="Asplenium"/>
+    <detail scope="Consolida"/>
+    <detail scope="Acinos"/>
+    <detail scope="Heracleum"/>
+    <detail scope="Chaerophyllum"/>
+    <detail scope="Melilotus"/>
+    <detail scope="Silene"/>
+    <detail scope="Carex parviflora"/>
+    <detail scope="Crepis biennis"/>
+    <detail scope="Digitalis purpurea"/>
+    <detail scope="Festuca pratensis i.w.S."/>
+    <detail scope="Valerianella locusta"/>
+    <detail scope="Crataegus monogyna agg."/>
+    <detail scope="Luzula lutea"/>
+    <detail scope="Holcus lanatus"/>
+    <detail scope="Lotus corniculatus agg."/>
+    <detail scope="Achillea millefolium agg."/>
+    <detail scope="Laburnum anagyroides"/>
+    <detail scope="Polygonum aviculare"/>
+    <detail scope="Carex spicata"/>
+    <detail scope="Valeriana officinalis agg."/>
+    <detail scope="Chenopodium bonus-henricus"/>
+    <detail scope="Picea abies"/>
+    <detail scope="Ajuga reptans"/>
+    <detail scope="Asarum europaeum"/>
+    <detail scope="Symphytum officinale"/>
+    <detail scope="Brachypodium sylvaticum"/>
+    <detail scope="Thlaspi arvense"/>
+    <detail scope="Erigeron uniflorus"/>
+    <detail scope="Cynosurus cristatus"/>
+    <detail scope="Rosa canina agg."/>
+    <detail scope="Centaurea scabiosa i.w.S."/>
+    <detail scope="Matricaria discoidea"/>
+    <detail scope="Athamanta cretensis"/>
+    <detail scope="Lamium album"/>
+    <detail scope="Festuca arundinacea i.w.S."/>
+    <detail scope="Amelanchier ovalis"/>
+    <detail scope="Equisetum telmateia"/>
+    <detail scope="Fragaria vesca"/>
+    <detail scope="Tulipa sylvestris i.w.S."/>
+    <detail scope="Helianthus annuus"/>
+    <detail scope="Aconitum napellus agg."/>
+    <detail scope="Sibbaldia procumbens"/>
+    <detail scope="Carex davalliana"/>
+    <detail scope="Carex echinata"/>
+    <detail scope="Rumex obtusifolius"/>
+    <detail scope="Reynoutria japonica"/>
+    <detail scope="Narcissus pseudonarcissus"/>
+    <detail scope="Carex digitata"/>
+    <detail scope="Saxifraga paniculata"/>
+    <detail scope="Tussilago farfara"/>
+    <detail scope="Leontodon hispidus i.w.S."/>
+    <detail scope="Calamagrostis varia"/>
+    <detail scope="Iris pseudacorus"/>
+    <detail scope="Gymnadenia conopsea"/>
+    <detail scope="Galium verum i.w.S."/>
+    <detail scope="Crataegus laevigata agg."/>
+    <detail scope="Carex flava agg."/>
+    <detail scope="Eriophorum latifolium"/>
+    <detail scope="Bellis perennis"/>
+    <detail scope="Carex nigra"/>
+    <detail scope="Gentiana clusii"/>
+    <detail scope="Minuartia sedoides"/>
+    <detail scope="Alliaria petiolata"/>
+    <detail scope="Chrysosplenium alternifolium"/>
+    <detail scope="Gypsophila repens"/>
+    <detail scope="Leucanthemopsis alpina agg."/>
+    <detail scope="Erigeron annuus"/>
+    <detail scope="Plantago alpina"/>
+    <detail scope="Vicia cracca i.w.S."/>
+    <detail scope="Petasites albus"/>
+    <detail scope="Polygonum bistorta"/>
+    <detail scope="Trifolium pratense i.w.S."/>
+    <detail scope="Alnus glutinosa"/>
+    <detail scope="Origanum vulgare"/>
+    <detail scope="Ruta graveolens"/>
+    <detail scope="Gentiana acaulis"/>
+    <detail scope="Verbascum lychnitis"/>
+    <detail scope="Malva neglecta"/>
+    <detail scope="Pulsatilla apiifolia"/>
+    <detail scope="Avenella flexuosa"/>
+    <detail scope="Centaurea cyanus"/>
+    <detail scope="Pedicularis tuberosa"/>
+    <detail scope="Milium effusum"/>
+    <detail scope="Trifolium dubium"/>
+    <detail scope="Agrostis stolonifera"/>
+    <detail scope="Rhamnus cathartica"/>
+    <detail scope="Leucanthemum adustum"/>
+    <detail scope="Potentilla reptans"/>
+    <detail scope="Spergularia rubra"/>
+    <detail scope="Saxifraga aizoides"/>
+    <detail scope="Viola tricolor"/>
+    <detail scope="Chaenorrhinum minus"/>
+    <detail scope="Euphorbia helioscopia"/>
+    <detail scope="Populus nigra"/>
+    <detail scope="Chenopodium album"/>
+    <detail scope="Convolvulus arvensis"/>
+    <detail scope="Phyteuma betonicifolium"/>
+    <detail scope="Hordeum vulgare"/>
+    <detail scope="Globularia nudicaulis"/>
+    <detail scope="Botrychium lunaria"/>
+    <detail scope="Knautia arvensis"/>
+    <detail scope="Laserpitium latifolium"/>
+    <detail scope="Taxus baccata"/>
+    <detail scope="Leontodon helveticus"/>
+    <detail scope="Ranunculus repens"/>
+    <detail scope="Eriophorum vaginatum"/>
+    <detail scope="Stellaria media agg."/>
+    <detail scope="Viola biflora"/>
+    <detail scope="Poa alpina"/>
+    <detail scope="Lilium martagon"/>
+    <detail scope="Malva sylvestris"/>
+    <detail scope="Veronica chamaedrys"/>
+    <detail scope="Polygonatum verticillatum"/>
+    <detail scope="Trifolium repens"/>
+    <detail scope="Salix retusa"/>
+    <detail scope="Oxalis acetosella"/>
+    <detail scope="Alchemilla vulgaris agg."/>
+    <detail scope="Ficaria verna"/>
+    <detail scope="Scirpus sylvaticus"/>
+    <detail scope="Silene latifolia"/>
+    <detail scope="Phleum alpinum agg."/>
+    <detail scope="Equisetum sylvaticum"/>
+    <detail scope="Linum catharticum"/>
+    <detail scope="Astragalus alpinus"/>
+    <detail scope="Doronicum clusii"/>
+    <detail scope="Poa pratensis agg."/>
+    <detail scope="Asplenium viride"/>
+    <detail scope="Rubus idaeus"/>
+    <detail scope="Geranium rotundifolium"/>
+    <detail scope="Prunus mahaleb"/>
+    <detail scope="Hedera helix"/>
+    <detail scope="Lemna minor"/>
+    <detail scope="Frangula alnus"/>
+    <detail scope="Prunus padus i.w.S."/>
+    <detail scope="Primula hirsuta"/>
+    <detail scope="Oxyria digyna"/>
+    <detail scope="Hippocrepis comosa"/>
+    <detail scope="Campanula rotundifolia"/>
+    <detail scope="Maianthemum bifolium"/>
+    <detail scope="Carex firma"/>
+    <detail scope="Hamamelis virginiana"/>
+    <detail scope="Anthericum liliago"/>
+    <detail scope="Cichorium intybus"/>
+    <detail scope="Arabidopsis thaliana"/>
+    <detail scope="Datura stramonium"/>
+    <detail scope="Larix decidua"/>
+    <detail scope="Asplenium ruta-muraria"/>
+    <detail scope="Selaginella selaginoides"/>
+    <detail scope="Thymus vulgaris"/>
+    <detail scope="Cornus sanguinea"/>
+    <detail scope="Saponaria ocymoides"/>
+    <detail scope="Blechnum spicant"/>
+    <detail scope="Rosa pendulina"/>
+    <detail scope="Carex atrata i.w.S."/>
+    <detail scope="Salix elaeagnos"/>
+    <detail scope="Epilobium montanum"/>
+    <detail scope="Galium anisophyllon"/>
+    <detail scope="Impatiens glandulifera"/>
+    <detail scope="Sorbus domestica"/>
+    <detail scope="Nigritella nigra agg."/>
+    <detail scope="Pinus uncinata"/>
+    <detail scope="Ginkgo biloba"/>
+    <detail scope="Echium vulgare"/>
+    <detail scope="Rubus fruticosus agg."/>
+    <detail scope="Vaccinium vitis-idaea"/>
+    <detail scope="Polygala chamaebuxus"/>
+    <detail scope="Androsace obtusifolia"/>
+    <detail scope="Rumex scutatus"/>
+    <detail scope="Chaerophyllum hirsutum agg."/>
+    <detail scope="Cirsium arvense"/>
+    <detail scope="Salix reticulata"/>
+    <detail scope="Senecio incanus i.w.S."/>
+    <detail scope="Abies alba"/>
+    <detail scope="Biscutella laevigata"/>
+    <detail scope="Brachypodium pinnatum"/>
+    <detail scope="Saxifraga caesia"/>
+    <detail scope="Lamium purpureum"/>
+    <detail scope="Astragalus frigidus"/>
+    <detail scope="Luzula sylvatica i.w.S."/>
+    <detail scope="Nardus stricta"/>
+    <detail scope="Carex ferruginea"/>
+    <detail scope="Ulmus glabra"/>
+    <detail scope="Dactylorhiza maculata agg."/>
+    <detail scope="Dryas octopetala"/>
+    <detail scope="Scabiosa columbaria"/>
+    <detail scope="Carduus defloratus i.w.S."/>
+    <detail scope="Poa annua"/>
+    <detail scope="Sambucus racemosa"/>
+    <detail scope="Rumex alpinus"/>
+    <detail scope="Geranium sylvaticum"/>
+    <detail scope="Carex sempervirens"/>
+    <detail scope="Achillea macrophylla"/>
+    <detail scope="Peucedanum ostruthium"/>
+    <detail scope="Salix helvetica"/>
+    <detail scope="Oenothera biennis agg."/>
+    <detail scope="Arctostaphylos uva-ursi"/>
+    <detail scope="Traunsteinera globosa"/>
+    <detail scope="Mercurialis perennis"/>
+    <detail scope="Crepis aurea"/>
+    <detail scope="Solidago canadensis"/>
+    <detail scope="Achillea moschata"/>
+    <detail scope="Alnus viridis"/>
+    <detail scope="Rosmarinus officinalis"/>
+    <detail scope="Pimpinella saxifraga"/>
+    <detail scope="Carpinus betulus"/>
+    <detail scope="Laserpitium siler"/>
+    <detail scope="Mentha piperita"/>
+    <detail scope="Trisetum flavescens"/>
+    <detail scope="Trifolium montanum"/>
+    <detail scope="Primula veris i.w.S."/>
+    <detail scope="Vaccinium uliginosum agg."/>
+    <detail scope="Silene dioica"/>
+    <detail scope="Populus alba"/>
+    <detail scope="Urtica dioica"/>
+    <detail scope="Saxifraga stellaris"/>
+    <detail scope="Erigeron alpinus"/>
+    <detail scope="Cornus mas"/>
+    <detail scope="Cicerbita alpina"/>
+    <detail scope="Linaria vulgaris"/>
+    <detail scope="Adenostyles glabra"/>
+    <detail scope="Lolium perenne"/>
+    <detail scope="Kernera saxatilis"/>
+    <detail scope="Robinia pseudoacacia"/>
+    <detail scope="Chelidonium majus"/>
+    <detail scope="Ranunculus aconitifolius"/>
+    <detail scope="Sorbus aria"/>
+    <detail scope="Listera ovata"/>
+    <detail scope="Digitalis lutea"/>
+    <detail scope="Crepis capillaris"/>
+    <detail scope="Anthoxanthum odoratum"/>
+    <detail scope="Bromus erectus"/>
+    <detail scope="Atropa bella-donna"/>
+    <detail scope="Cypripedium calceolus"/>
+    <detail scope="Carex caryophyllea"/>
+    <detail scope="Hyoscyamus niger"/>
+    <detail scope="Viscum album"/>
+    <detail scope="Senecio vulgaris"/>
+    <detail scope="Helianthemum nummularium agg."/>
+    <detail scope="Sambucus nigra"/>
+    <detail scope="Salix purpurea i.w.S."/>
+    <detail scope="Cnicus benedictus"/>
+    <detail scope="Daucus carota"/>
+    <detail scope="Dryopteris filix-mas"/>
+    <detail scope="Myosotis alpestris"/>
+    <detail scope="Dianthus superbus"/>
+    <detail scope="Vincetoxicum hirundinaria"/>
+    <detail scope="Cruciata laevipes"/>
+    <detail scope="Stachys sylvatica"/>
+    <detail scope="Aquilegia vulgaris"/>
+    <detail scope="Typha latifolia"/>
+    <detail scope="Plantago media"/>
+    <detail scope="Melilotus officinalis"/>
+    <detail scope="Glechoma hederacea i.w.S."/>
+    <detail scope="Carduus personata"/>
+    <detail scope="Lamium galeobdolon i.w.S."/>
+    <detail scope="Alnus incana"/>
+    <detail scope="Geranium sanguineum"/>
+    <detail scope="Gentiana verna agg."/>
+    <detail scope="Pedicularis verticillata"/>
+    <detail scope="Astrantia major"/>
+    <detail scope="Androsace helvetica"/>
+    <detail scope="Stellaria nemorum i.w.S."/>
+    <detail scope="Trifolium badium"/>
+    <detail scope="Daphne mezereum"/>
+    <detail scope="Poa trivialis i.w.S."/>
+    <detail scope="Ligusticum mutellina"/>
+    <detail scope="Gentianella campestris"/>
+    <detail scope="Triticum aestivum"/>
+    <detail scope="Aster alpinus"/>
+    <detail scope="Empetrum hermaphroditum"/>
+    <detail scope="Corylus avellana"/>
+    <detail scope="Campanula trachelium"/>
+    <detail scope="Betula pubescens"/>
+    <detail scope="Prenanthes purpurea"/>
+    <detail scope="Cerastium latifolium"/>
+    <detail scope="Sedum atratum"/>
+    <detail scope="Neottia nidus-avis"/>
+    <detail scope="Caltha palustris"/>
+    <detail scope="Polypodium vulgare"/>
+    <detail scope="Arabis alpina"/>
+    <detail scope="Sorbus aucuparia"/>
+    <detail scope="Homogyne alpina"/>
+    <detail scope="Quercus petraea"/>
+    <detail scope="Paris quadrifolia"/>
+    <detail scope="Euphorbia cyparissias"/>
+    <detail scope="Calluna vulgaris"/>
+    <detail scope="Sinapis arvensis"/>
+    <detail scope="Polygonatum multiflorum"/>
+    <detail scope="Silene rupestris"/>
+    <detail scope="Rhododendron ferrugineum"/>
+    <detail scope="Ajuga pyramidalis"/>
+    <detail scope="Silene acaulis"/>
+    <detail scope="Rentierflechte"/>
+    <detail scope="Euphrasia rostkoviana"/>
+    <detail scope="Daphne striata"/>
+    <detail scope="Quercus robur"/>
+    <detail scope="Iris sibirica"/>
+    <detail scope="Epilobium angustifolium"/>
+    <detail scope="Cerastium strictum"/>
+    <detail scope="Gentiana lutea"/>
+    <detail scope="Vinca minor"/>
+    <detail scope="Ligustrum vulgare"/>
+    <detail scope="Fraxinus excelsior"/>
+    <detail scope="Hedysarum hedysaroides"/>
+    <detail scope="Juncus effusus"/>
+    <detail scope="Drosera rotundifolia"/>
+    <detail scope="Salvia pratensis"/>
+    <detail scope="Rhinanthus minor"/>
+    <detail scope="Juniperus nana"/>
+    <detail scope="Juniperus communis"/>
+    <detail scope="Lycopodium annotinum"/>
+    <detail scope="Orobanche alba"/>
+    <detail scope="Acer pseudoplatanus"/>
+    <detail scope="Potentilla sterilis"/>
+    <detail scope="Nymphaea alba"/>
+    <detail scope="Calendula officinalis"/>
+    <detail scope="Loiseleuria procumbens"/>
+    <detail scope="Lloydia serotina"/>
+    <detail scope="Carex sylvatica"/>
+    <detail scope="Salix herbacea"/>
+    <detail scope="Potentilla anserina"/>
+    <detail scope="Silene vulgaris i.w.S."/>
+    <detail scope="Poa bulbosa"/>
+    <detail scope="Medicago falcata"/>
+    <detail scope="Erodium cicutarium"/>
+    <detail scope="Trollius europaeus"/>
+    <detail scope="Veronica persica"/>
+    <detail scope="Sempervivum montanum"/>
+    <detail scope="Phyteuma hemisphaericum"/>
+    <detail scope="Juncus inflexus"/>
+    <detail scope="Taraxacum officinale agg."/>
+    <detail scope="Pimpinella major"/>
+    <detail scope="Plantago atrata"/>
+    <detail scope="Secale cereale"/>
+    <detail scope="Vaccinium myrtillus"/>
+    <detail scope="Euonymus europaeus"/>
+    <detail scope="Juniperus sabina"/>
+    <detail scope="Heracleum sphondylium i.w.S."/>
+    <detail scope="Androsace vandellii"/>
+    <detail scope="Soldanella pusilla"/>
+    <detail scope="Salvia officinalis"/>
+    <detail scope="Viola reichenbachiana"/>
+    <detail scope="Lathyrus vernus"/>
+    <detail scope="Molinia caerulea agg."/>
+    <detail scope="Carex elata"/>
+    <detail scope="Geum montanum"/>
+    <detail scope="Pteridium aquilinum"/>
+    <detail scope="Salvia glutinosa"/>
+    <detail scope="Campanula scheuchzeri"/>
+    <detail scope="Cirsium spinosissimum"/>
+    <detail scope="Rumex acetosa"/>
+    <detail scope="Saxifraga rotundifolia"/>
+    <detail scope="Potentilla erecta"/>
+    <detail scope="Onobrychis viciifolia"/>
+    <detail scope="Hieracium murorum i.w.S."/>
+    <detail scope="Lysimachia nemorum"/>
+    <detail scope="Prunus avium"/>
+    <detail scope="Veronica urticifolia"/>
+    <detail scope="Carex hirta"/>
+    <detail scope="Impatiens noli-tangere"/>
+    <detail scope="Orchis ustulata"/>
+    <detail scope="Centaurea montana"/>
+    <detail scope="Digitalis lanata"/>
+    <detail scope="Rhinanthus alectorolophus"/>
+    <detail scope="Ophrys insectifera"/>
+    <detail scope="Lonicera alpigena"/>
+    <detail scope="Sonchus oleraceus"/>
+    <detail scope="Asperula cynanchica"/>
+    <detail scope="Pinus mugo"/>
+    <detail scope="Polygonum persicaria"/>
+    <detail scope="Vicia sativa i.w.S."/>
+    <detail scope="Oxytropis campestris i.w.S."/>
+    <detail scope="Salix caprea"/>
+    <detail scope="Consolida regalis"/>
+    <detail scope="Dianthus carthusianorum i.w.S."/>
+    <detail scope="Sanguisorba minor i.w.S."/>
+    <detail scope="Lunaria annua"/>
+    <detail scope="Sempervivum arachnoideum"/>
+    <detail scope="Isländisch Moos"/>
+    <detail scope="Phyteuma spicatum"/>
+    <detail scope="Anagallis arvensis"/>
+    <detail scope="Sorbus torminalis"/>
+    <detail scope="Salix alba"/>
+    <detail scope="Euphrasia minima"/>
+    <detail scope="Cerastium fontanum agg."/>
+    <detail scope="Aconitum vulparia agg."/>
+    <detail scope="Lolium multiflorum"/>
+    <detail scope="Senecio doronicum"/>
+    <detail scope="Landkartenflechte"/>
+    <detail scope="Hippophae rhamnoides"/>
+    <detail scope="Eriophorum scheuchzeri"/>
+    <detail scope="Huperzia selago"/>
+    <detail scope="Ranunculus alpestris"/>
+    <detail scope="Silene flos-cuculi"/>
+    <detail scope="Lathyrus pratensis"/>
+    <detail scope="Campanula cochleariifolia"/>
+    <detail scope="Verbena officinalis"/>
+    <detail scope="Juncus trifidus"/>
+    <detail scope="Colchicum autumnale"/>
+    <detail scope="Globularia cordifolia"/>
+    <detail scope="Onobrychis montana"/>
+    <detail scope="Senecio alpinus"/>
+    <detail scope="Lamium maculatum"/>
+    <detail scope="Nuphar lutea"/>
+    <detail scope="Populus tremula"/>
+    <detail scope="Potentilla aurea"/>
+    <detail scope="Artemisia campestris"/>
+    <detail scope="Phleum pratense agg."/>
+    <detail scope="Ranunculus platanifolius"/>
+    <detail scope="Hordeum murinum"/>
+    <detail scope="Veratrum album i.w.S."/>
+    <detail scope="Galanthus nivalis"/>
+    <detail scope="Oxytropis jacquinii"/>
+    <detail scope="Adenostyles alliariae"/>
+    <detail scope="Anthyllis vulneraria i.w.S."/>
+    <detail scope="Polygala vulgaris agg."/>
+    <detail scope="Lonicera nigra"/>
+    <detail scope="Viola calcarata"/>
+    <detail scope="Acer platanoides"/>
+    <detail scope="Cannabis sativa"/>
+    <detail scope="Alchemilla alpina agg."/>
+    <detail scope="Alopecurus pratensis"/>
+    <detail scope="Vicia sepium"/>
+    <detail scope="Helleborus foetidus"/>
+    <detail scope="Arrhenatherum elatius"/>
+    <detail scope="Gnaphalium supinum"/>
+    <detail scope="Teucrium montanum"/>
+    <detail scope="Carlina acaulis i.w.S."/>
+    <detail scope="Artemisia vulgaris"/>
+    <detail scope="Tilia platyphyllos"/>
+    <detail scope="Bromus tectorum"/>
+    <detail scope="Leucanthemum vulgare"/>
+    <detail scope="Polygonatum odoratum"/>
+    <detail scope="Galeopsis tetrahit"/>
+    <detail scope="Filipendula ulmaria"/>
+    <detail scope="Phyllitis scolopendrium"/>
+    <detail scope="Pulsatilla vernalis"/>
+    <detail scope="Plantago lanceolata"/>
+    <detail scope="Melissa officinalis"/>
+    <detail scope="Antennaria dioica"/>
+    <detail scope="Veronica arvensis"/>
+    <detail scope="Allium ursinum"/>
+    <detail scope="Primula elatior"/>
+    <detail scope="Luzula pilosa"/>
+    <detail scope="Fagus sylvatica"/>
+    <detail scope="Saxifraga bryoides"/>
+    <detail scope="Quercus pubescens"/>
+    <detail scope="Equisetum arvense"/>
+    <detail scope="Saxifraga androsacea"/>
+    <detail scope="Acer campestre"/>
+    <detail scope="Petasites hybridus"/>
+    <detail scope="Stipa pennata agg."/>
+    <detail scope="Galium mollugo agg."/>
+    <detail scope="Saponaria officinalis"/>
+    <detail scope="Veronica filiformis"/>
+    <detail scope="Primula farinosa"/>
+    <detail scope="Helictotrichon pubescens"/>
+    <detail scope="Elymus repens"/>
+    <detail scope="Capsella bursa-pastoris"/>
+    <detail scope="Aesculus hippocastanum"/>
+    <detail scope="Veronica hederifolia"/>
+    <detail scope="Saxifraga oppositifolia"/>
+    <detail scope="Gipfelmoos (= akrokarp)"/>
+    <detail scope="Medicago lupulina"/>
+    <detail scope="Geum urbanum"/>
+    <detail scope="Veronica bellidioides"/>
+    <detail scope="Narcissus poëticus"/>
+    <detail scope="Ranunculus kuepferi"/>
+    <detail scope="Sesleria caerulea"/>
+    <detail scope="Sedum album"/>
+    <detail scope="Linaria alpina i.w.S."/>
+    <detail scope="Bromus sterilis"/>
+    <detail scope="Carex flacca"/>
+    <detail scope="Pedicularis foliosa"/>
+    <detail scope="Viola hirta"/>
+    <detail scope="Acinos alpinus"/>
+    <detail scope="Thlaspi rotundifolium i.w.S."/>
+    <detail scope="Carum carvi"/>
+    <detail scope="Gentiana punctata"/>
+    <detail scope="Myosotis arvensis"/>
+    <detail scope="Solidago gigantea"/>
+    <detail scope="Trichophorum caespitosum"/>
+    <detail scope="Sanicula europaea"/>
+    <detail scope="Castanea sativa"/>
+    <detail scope="Linum usitatissimum"/>
+    <detail scope="Foeniculum vulgare"/>
+    <detail scope="Carex pallescens"/>
+    <detail scope="Arum maculatum"/>
+    <detail scope="Hieracium villosum"/>
+    <detail scope="Orchis mascula"/>
+    <detail scope="Ostrya carpinifolia"/>
+    <detail scope="Achillea atrata"/>
+    <detail scope="Draba aizoides"/>
+    <detail scope="Humulus lupulus"/>
+    <detail scope="Melilotus albus"/>
+    <detail scope="Thymus serpyllum agg."/>
+    <detail scope="Anemone nemorosa"/>
+    <detail scope="Ilex aquifolium"/>
+    <detail scope="Carex panicea"/>
+    <detail scope="Betula pendula"/>
+    <detail scope="Carex curvula i.w.S."/>
+    <detail scope="Beblättertes Lebermoos"/>
+    <detail scope="Buddleja davidii"/>
+    <detail scope="Plantago major"/>
+    <detail scope="Juglans regia"/>
+    <detail scope="Bartflechte"/>
+    <detail scope="Carex pendula"/>
+    <detail scope="Clematis vitalba"/>
+    <detail scope="Coeloglossum viride"/>
+    <detail scope="Teucrium chamaedrys"/>
+    <detail scope="Cardamine resedifolia"/>
+    <detail scope="Minuartia verna"/>
+    <detail scope="Eupatorium cannabinum"/>
+    <detail scope="Dactylis glomerata"/>
+    <detail scope="Hypericum perforatum"/>
+    <detail scope="Fraxinus ornus"/>
+    <detail scope="Doronicum grandiflorum"/>
+    <detail scope="Stachys recta"/>
+    <detail scope="Androsace chamaejasme"/>
+    <detail scope="Hieracium pilosella i.w.S."/>
+    <detail scope="Gentiana purpurea"/>
+    <detail scope="Gnaphalium sylvaticum"/>
+    <detail scope="Veronica fruticans"/>
+    <detail scope="Herniaria glabra"/>
+    <detail scope="Malus sylvestris"/>
+    <detail scope="Euphorbia amygdaloides"/>
+    <detail scope="Claviceps purpurea"/>
+    <detail scope="Valeriana tripteris"/>
+    <detail scope="Convallaria majalis"/>
+    <detail scope="Arenaria biflora"/>
+    <detail scope="Festuca rubra agg."/>
+    <detail scope="Dianthus sylvestris"/>
+    <detail scope="Pinguicula alpina"/>
+    <detail scope="Cystopteris fragilis"/>
+    <detail scope="Parnassia palustris"/>
+    <detail scope="Acer opalus"/>
+    <detail scope="Silene nutans i.w.S."/>
+    <detail scope="Prunus spinosa"/>
+    <detail scope="Tofieldia calyculata"/>
+    <detail scope="Ulmus minor"/>
+    <detail scope="Zea mays"/>
+    <detail scope="Melampyrum sylvaticum"/>
+    <detail scope="Pinus sylvestris"/>
+    <detail scope="Deschampsia caespitosa"/>
+    <detail scope="Aegopodium podagraria"/>
+    <detail scope="Juncus alpinoarticulatus"/>
+    <detail scope="Pritzelago alpina i.w.S."/>
+    <detail scope="Viburnum opulus"/>
+    <detail scope="Cotoneaster integerrimus"/>
+    <detail scope="Solidago virgaurea i.w.S."/>
+    <detail scope="Geranium pyrenaicum"/>
+    <detail scope="Androsace alpina"/>
+    <detail scope="Aster bellidiastrum"/>
+    <detail scope="Papaver rhoeas"/>
+    <detail scope="Erica carnea"/>
+    <detail scope="Bromus hordeaceus"/>
+    <detail scope="Melampyrum pratense"/>
+    <detail scope="Potentilla crantzii"/>
+    <detail scope="Frangula purshiana"/>
+    <detail scope="Geranium robertianum agg."/>
+    <detail scope="Viola arvensis"/>
+    <detail scope="Tragopogon pratensis i.w.S."/>
+    <detail scope="Asplenium trichomanes"/>
+    <detail scope="Brassica napus"/>
+    <detail scope="Arnica montana"/>
+    <detail scope="Briza media"/>
+    <detail scope="Crocus albiflorus"/>
+    <detail scope="Cardamine pratensis agg."/>
+    <detail scope="Valeriana montana"/>
+    <detail scope="Festuca valesiaca agg."/>
+    <detail scope="Althaea officinalis"/>
+    <detail scope="Soldanella alpina"/>
+    <detail scope="Prunella vulgaris"/>
+    <detail scope="Centaurea jacea i.w.S."/>
+    <detail scope="Thalictrum aquilegiifolium"/>
+    <detail scope="Pulsatilla alpina"/>
+    <detail scope="Avena sativa i.w.S."/>
+    <detail scope="Eriophorum angustifolium"/>
+    <detail scope="Primula auricula"/>
+    <detail scope="Leucojum vernum"/>
+    <detail scope="Phyteuma orbiculare"/>
+    <detail scope="Melica nutans"/>
+    <detail scope="Elyna myosuroides"/>
+    <detail scope="Helianthemum alpestre"/>
+    <detail scope="Calystegia sepium"/>
+    <detail scope="Geum rivale"/>
+    <detail scope="Securigera varia"/>
+    <detail scope="Ranunculus acris i.w.S."/>
+    <detail scope="Rhododendron hirsutum"/>
+    <detail scope="Leontopodium alpinum"/>
+    <detail scope="Trifolium alpinum"/>
+    <detail scope="Veronica beccabunga"/>
+    <detail scope="Ranunculus montanus agg."/>
+    <detail scope="Cuscuta epithymum"/>
+    <detail scope="Artemisia absinthium"/>
+    <detail scope="Cardamine hirsuta"/>
+    <detail scope="Pinus cembra"/>
+    <detail scope="Phragmites australis"/>
+    <detail scope="Ranunculus glacialis"/>
+    <detail scope="Campanula rhomboidalis"/>
+    <detail scope="Matricaria chamomilla"/>
+    <detail scope="Athyrium filix-femina"/>
+    <detail scope="Cirsium oleraceum"/>
+    <detail scope="Viburnum lantana"/>
+    <detail scope="Bartsia alpina"/>
+    <detail scope="Tilia cordata"/>
+    <detail scope="Berberis vulgaris"/>
+    <detail scope="Gentianella germanica i.w.S."/>
+    <detail scope="Impatiens parviflora"/>
+    <detail scope="Ruscus aculeatus"/>
+    <detail scope="Lonicera xylosteum"/>
+    <detail scope="Lonicera caerulea"/>
+    <detail scope="Allium schoenoprasum"/>
+    <detail scope="Circaea lutetiana"/>
+    <detail scope="Equisetum palustre"/>
+    <detail scope="Schoenus nigricans"/>
+    <detail scope="Galium aparine"/>
+    <detail scope="Arenaria serpyllifolia agg."/>
+    <detail scope="Equisetum hyemale"/>
+    <detail scope="Galium odoratum"/>
+    <detail scope="Pinguicula vulgaris"/>
+    <detail scope="Melittis melissophyllum"/>
+    <detail scope="Astmoos (= pleurokarp)"/>
+    <detail scope="Digitalis grandiflora"/>
+    <detail scope="Polygonum viviparum"/>
+    <detail scope="Sedum acre"/>
+    <detail scope="Ranunculus bulbosus"/>
+    <detail scope="Anthriscus sylvestris"/>
+    <detail scope="Luzula campestris"/>
+    <detail scope="Torfmoos"/>
+    <detail scope="Solanum dulcamara"/>
+    <detail scope="Campanula barbata"/>
+    <detail scope="Pulmonaria obscura"/>
+    <detail scope="Thalloses Lebermoos"/>
+    <detail scope="Pyrus pyraster"/>
+    <detail scope="Thesium alpinum"/>
+    <detail scope="Cerastium uniflorum"/>
+    <detail scope="Medicago sativa"/>
+    <detail scope="Basale Angiospermae"/>
+    <detail scope="Eudicotyledonae"/>
+    <detail scope="Monocotyledonae"/>
+    <detail scope="Spermatophyta"/>
+    <detail scope="Flechten"/>
+    <detail scope="Ascomycota"/>
+    <detail scope="Pteridophyta"/>
+    <detail scope="Bryophyta"/>
+    <detail scope="Sphagnidae"/>
+    <detail scope="Polypodiidae"/>
+    <detail scope="Bryidae"/>
+    <detail scope="Jungermanniidae"/>
+    <detail scope="Marchantiidae"/>
+    <detail scope="Asteranae"/>
+    <detail scope="Rosanae"/>
+    <detail scope="Asclepiadoideae"/>
+    <detail scope="Prunoideae"/>
+    <detail scope="Malvoideae"/>
+    <detail scope="Silenoideae"/>
+    <detail scope="Tilioideae"/>
+    <detail scope="Maloideae"/>
+    <detail scope="Cichorioideae"/>
+    <detail scope="Alsinoideae"/>
+    <detail scope="Asteroideae"/>
+    <detail scope="Allioideae"/>
+    <detail scope="Paronychioideae"/>
+    <detail scope="Apocynoideae"/>
+    <detail scope="Rosoideae"/>
+    <detail scope="Carduoideae"/>
+    <detail scope="Faboideae"/>
+    <detail scope="Amaryllidoideae"/>
+    <detail scope="Bryopsida"/>
+    <detail scope="Gymnospermae"/>
+    <detail scope="Angiospermae"/>
+    <detail scope="Marchantiopsida"/>
+    <detail scope="Dipsacales"/>
+    <detail scope="Poales"/>
+    <detail scope="Fagales"/>
+    <detail scope="Gentianales"/>
+    <detail scope="Nebenschlüssel A"/>
+    <detail scope="Nebenschlüssel B"/>
+    <detail scope="Nebenschlüssel C"/>
+    <detail scope="Nebenschlüssel D"/>
+    <detail scope="Nebenschlüssel F"/>
+    <detail scope="Nebenschlüssel E"/>
 </filter>

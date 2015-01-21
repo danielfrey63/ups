@@ -28,10 +28,6 @@
  */
 package com.ethz.geobot.herbar.filter;
 
-import com.ethz.geobot.herbar.model.HerbarModel;
-import com.ethz.geobot.herbar.model.filter.FilterDefinitionDetail;
-import com.ethz.geobot.herbar.model.filter.FilterModel;
-
 /**
  * Bean class to load filter definition.
  *
@@ -40,47 +36,20 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
  */
 public class Filter
 {
-    /** Holds value of property name. */
+    /**
+     * Holds value of property name.
+     */
     private String name;
 
-    /** Holds value of property baseFilterName. */
-    private String baseFilterName;
-
-    /** Holds value of property details. */
+    /**
+     * Holds value of property details.
+     */
     private Detail[] details;
 
-    /** Sets whether the filter is modifiable or not. */
+    /**
+     * Sets whether the filter is modifiable or not.
+     */
     private boolean fixed;
-
-    /** Creates a new instance of Filter */
-    public Filter()
-    {
-    }
-
-    public Filter( final FilterModel model )
-    {
-        name = model.getName();
-        final HerbarModel baseModel = model.getDependantModel();
-
-        if ( baseModel instanceof FilterModel )
-        {
-            final FilterModel bfm = (FilterModel) baseModel;
-            baseFilterName = bfm.getName();
-        }
-        else
-        {
-            baseFilterName = "";
-        }
-        fixed = model.isFixed();
-
-        // copy filter details
-        final FilterDefinitionDetail[] defDetails = model.getFilterDetails();
-        details = new Detail[defDetails.length];
-        for ( int i = 0; i < defDetails.length; i++ )
-        {
-            details[i] = new Detail( defDetails[i] );
-        }
-    }
 
     /**
      * Getter for property name.
@@ -103,26 +72,6 @@ public class Filter
     }
 
     /**
-     * Getter for property baseFilterName.
-     *
-     * @return Value of property baseFilterName.
-     */
-    public String getBaseFilterName()
-    {
-        return this.baseFilterName;
-    }
-
-    /**
-     * Setter for property baseFilterName.
-     *
-     * @param baseFilterName New value of property baseFilterName.
-     */
-    public void setBaseFilterName( final String baseFilterName )
-    {
-        this.baseFilterName = baseFilterName;
-    }
-
-    /**
      * Getter for property details.
      *
      * @return Value of property details.
@@ -142,11 +91,13 @@ public class Filter
         this.details = details;
     }
 
-    public boolean getFixed() {
+    public boolean getFixed()
+    {
         return fixed;
     }
 
-    public void setFixed(boolean fixed) {
+    public void setFixed( final boolean fixed )
+    {
         this.fixed = fixed;
     }
 }

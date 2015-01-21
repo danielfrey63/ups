@@ -43,6 +43,7 @@ import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.SOUTH;
 import static java.awt.BorderLayout.WEST;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -71,6 +72,8 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
     private JButton orderButton;
 
+    private JPanel editAndQueryPanel;
+
     private final TaxStateModel taxStateModel;
 
     private IteratorControlPanel taxonControl;
@@ -85,6 +88,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
     {
         this.taxStateModel = taxStateModel;
         this.herbarContext = herbarModel;
+
         queryBuilder = new TaxonNameInterrogatorBuilder( herbarContext.getHerbarGUIManager().getParentFrame(), taxStateModel );
 
         final JPanel filler = new JPanel();
@@ -92,6 +96,10 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         setLayout( new BorderLayout() );
         add( createToolBar(), WEST );
         add( filler, CENTER );
+
+        editAndQueryPanel = new JPanel( new BorderLayout() );
+        editAndQueryPanel.add( new EditBarBuilder( taxStateModel ).getPanel(), WEST );
+        add( editAndQueryPanel, SOUTH );
 
         // Data driven
         taxonControl.setCursor( taxStateModel.getTaxList() );
@@ -202,11 +210,15 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
                 final JComponent queryPanel = queryBuilder.getPanel();
                 if ( isQuery && subMode != null )
                 {
-                    add( queryPanel, BorderLayout.SOUTH );
+                    editAndQueryPanel.add( queryPanel, CENTER );
+                    editAndQueryPanel.validate();
+                    editAndQueryPanel.repaint();
                 }
                 else
                 {
-                    remove( queryPanel );
+                    editAndQueryPanel.remove( queryPanel );
+                    editAndQueryPanel.validate();
+                    editAndQueryPanel.repaint();
                 }
             }
         } );

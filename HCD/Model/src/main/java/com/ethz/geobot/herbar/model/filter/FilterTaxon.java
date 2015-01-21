@@ -56,6 +56,13 @@ public class FilterTaxon implements Taxon, Comparable
     private Taxon cachedParent = null;
 
     /**
+     * Do active caching of expensive data (parents, levels, children).
+     *
+     * Todo: If this should be set to true, implement appropriate cache-clear strategy
+     */
+    private boolean cache = false;
+
+    /**
      * Construct a FilterTaxon
      *
      * @param filterModel    the model with the filter information
@@ -84,7 +91,7 @@ public class FilterTaxon implements Taxon, Comparable
 
     public Taxon getParentTaxon()
     {
-        if ( cachedParent == null )
+        if ( !cache || cachedParent == null )
         {
             Taxon parent = dependentTaxon.getParentTaxon();
 
@@ -103,7 +110,7 @@ public class FilterTaxon implements Taxon, Comparable
 
     public Taxon[] getChildTaxa()
     {
-        if ( cachedChildren == null )
+        if ( !cache || cachedChildren == null )
         {
             cachedChildren = new ArrayList<Taxon>();
             collectChildren( dependentTaxon, cachedChildren );
@@ -113,7 +120,7 @@ public class FilterTaxon implements Taxon, Comparable
 
     public Level[] getSubLevels()
     {
-        if ( cachedSubLevels == null )
+        if ( !cache || cachedSubLevels == null )
         {
             LOG.trace( "create sub-level list for taxon \"" + this + "\"" );
             cachedSubLevels = new ArrayList<Level>();

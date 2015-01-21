@@ -187,6 +187,8 @@ public class TaxStateModel
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         setInternalGlobalSubMode( fire, Lernen );
         setInternalEditMode( fire, mode );
+        setInternalTaxList( fire );
+        setInternalFocus( fire, taxList[0] );
         fireAllPropertyChangeEvents( fire );
     }
 

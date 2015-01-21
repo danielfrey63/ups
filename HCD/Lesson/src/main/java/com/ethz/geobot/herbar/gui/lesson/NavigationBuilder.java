@@ -361,7 +361,7 @@ public class NavigationBuilder implements Builder
         @Override
         protected void handleIconClick( final Taxon taxon )
         {
-            if ( !taxStateModel.getLevel().equals( taxon.getLevel() ) )
+            if ( taxStateModel.getLevel() == null || !taxStateModel.getLevel().equals( taxon.getLevel() ) )
             {
                 taxStateModel.setLevel( taxon.getLevel() );
                 taxTree.repaint();
@@ -413,7 +413,8 @@ public class NavigationBuilder implements Builder
         private void handleClick( final Taxon taxon )
         {
             final HerbarModel model = taxStateModel.getModel();
-            if ( model instanceof FilterModel )
+            // Root taxon has no level and should not be removed
+            if ( model instanceof FilterModel && taxon.getLevel() != null )
             {
                 final FilterModel filterModel = (FilterModel) model;
                 final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
@@ -425,29 +426,11 @@ public class NavigationBuilder implements Builder
                 {
                     filterModel.removeFilterTaxon( filterTaxon );
                 }
+                context.saveModel( filterModel );
             }
             taxTree.repaint();
         }
     }
-//
-//    public class ListPopUp extends ObjectPopup<HerbarModel>
-//    {
-//        public ListPopUp()
-//        {
-//            super( context.getModels().toArray( new HerbarModel[context.getModels().size()] ) );
-//        }
-//
-//        public void showPopUp( final Component component )
-//        {
-//            showPopUp( component, taxStateModel.getModel() );
-//        }
-//
-//        public void itemSelected( final HerbarModel obj )
-//        {
-//            context.setCurrentModel( obj );
-//            taxStateModel.setModel( obj );
-//        }
-//    }
 
     private class LearnAndQueryTreeCellRenderer implements TreeCellRenderer
     {
@@ -485,7 +468,7 @@ public class NavigationBuilder implements Builder
             panel.setText( taxon.toString() );
             panel.setEnabled( true );
             panel.setSelected( false );
-            check.setEnabled( false );
+            check.setEnabled( taxon.getLevel() != null );
             check.setSelected( taxStateModel.getModel().getTaxon( taxon.getName() ) != null );
             panel.update();
             return panel;

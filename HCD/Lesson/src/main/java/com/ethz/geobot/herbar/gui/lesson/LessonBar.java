@@ -27,14 +27,6 @@ import ch.jfactory.application.view.border.ThinBevelBorder;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.ObjectPopup;
 import ch.jfactory.resource.Strings;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
@@ -42,9 +34,6 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.SOUTH;
-import static java.awt.BorderLayout.WEST;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +48,20 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Rename;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.SOUTH;
+import static java.awt.BorderLayout.WEST;
 
 /**
  * @author $Author: daniel_frey $
@@ -98,7 +101,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
         add( filler, CENTER );
 
         editAndQueryPanel = new JPanel( new BorderLayout() );
-        editAndQueryPanel.add( new EditBarBuilder( taxStateModel ).getPanel(), WEST );
+        editAndQueryPanel.add( new EditBarBuilder( herbarContext, taxStateModel ).getPanel(), WEST );
         add( editAndQueryPanel, SOUTH );
 
         // Data driven
@@ -167,6 +170,14 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
                 listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
             }
         } );
+        taxStateModel.addPropertyChangeListener( Rename.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
+            }
+        } );
         taxStateModel.addPropertyChangeListener( List.name(), new PropertyChangeListener()
         {
             @Override
@@ -220,6 +231,17 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
                     editAndQueryPanel.validate();
                     editAndQueryPanel.repaint();
                 }
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( Edit.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                final boolean enable = e.getNewValue() == USE;
+                orderButton.setEnabled( enable );
+                taxonControl.setEnabled( enable );
+                subModesToggle.setEnabled( enable );
             }
         } );
         return subModesToggle;
@@ -280,6 +302,7 @@ public class LessonBar extends JPanel implements ActionListener, IteratorControl
 
         public void showPopUp( final Component component )
         {
+            setObjects( herbarContext.getModels().toArray( new HerbarModel[herbarContext.getModels().size()] ) );
             showPopUp( component, taxStateModel.getModel() );
         }
 

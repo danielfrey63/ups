@@ -33,7 +33,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.EDIT;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
@@ -108,6 +107,7 @@ public class TaxStateModel
             setInternalOrdered( fire, true );
             setInternalFocus( fire, taxList[0] );
             setInternalGlobalSubMode( fire, Lernen );
+            setInternalEditMode( fire, USE );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -187,16 +187,18 @@ public class TaxStateModel
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         setInternalGlobalSubMode( fire, Lernen );
         setInternalEditMode( fire, mode );
+        final Level[] levels = getModel().getLevels();
+        setInternalLevel( fire, ArrayUtils.contains( levels, vals.level ) ? vals.level : levels[levels.length - 1] );
         setInternalTaxList( fire );
         setInternalFocus( fire, taxList[0] );
         fireAllPropertyChangeEvents( fire );
     }
 
-    private void setInternalEditMode( ArrayList<FireArray> fire, EditState mode )
+    public void setName( final String name )
     {
-        EditState oldMode = listState;
-        listState = mode;
-        fire.add( new FireArray( Edit.name(), oldMode, mode ) );
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        setInternalName( fire, name );
+        fireAllPropertyChangeEvents( fire );
     }
 
     /**
@@ -231,7 +233,7 @@ public class TaxStateModel
             final Level[] levels = vals.scope.getSubLevels();
             if ( !ArrayUtils.contains( levels, vals.level ) )
             {
-                final Level level = levels[levels.length - 1];
+                final Level level = levels.length == 0 ? scope.getLevel() : levels[levels.length - 1];
                 fire.add( new FireArray( Level.name(), vals.level, level ) );
                 vals.level = level;
             }
@@ -245,7 +247,7 @@ public class TaxStateModel
      * @param fire  the notifications list
      * @param level
      */
-    private void setInternalLevel( ArrayList<FireArray> fire, Level level )
+    private void setInternalLevel( final ArrayList<FireArray> fire, final Level level )
     {
         if ( level != null && level != vals.level )
         {
@@ -260,7 +262,7 @@ public class TaxStateModel
      *
      * @param fire
      */
-    private void setInternalTaxList( ArrayList<FireArray> fire )
+    private void setInternalTaxList( final ArrayList<FireArray> fire )
     {
         Taxon[] newTaxList = vals.scope.getAllChildTaxa( vals.level );
         // Todo: silly workaround b/c the child getter doesn't retrieve the scope.
@@ -279,7 +281,7 @@ public class TaxStateModel
      * @param fire    the notifications list
      * @param ordered whether the taxon list should be ordered
      */
-    private void setInternalOrdered( ArrayList<FireArray> fire, boolean ordered )
+    private void setInternalOrdered( final ArrayList<FireArray> fire, final boolean ordered )
     {
         fire.add( new FireArray( Ordered.name(), vals.ordered, ordered ) );
         if ( ordered )
@@ -309,7 +311,7 @@ public class TaxStateModel
         }
     }
 
-    private void setInternalGlobalSubMode( ArrayList<FireArray> fire, SubMode subMode )
+    private void setInternalGlobalSubMode( final ArrayList<FireArray> fire, final SubMode subMode )
     {
         final SubMode oldGlobalSubMode = getGlobalSubMode();
         if ( subMode != null && subMode != oldGlobalSubMode )
@@ -325,6 +327,22 @@ public class TaxStateModel
             subModes.put( taxon.getName(), subMode );
             taxon = taxon.getParentTaxon();
         }
+    }
+
+    private void setInternalEditMode( final ArrayList<FireArray> fire, final EditState mode )
+    {
+        EditState oldMode = listState;
+        listState = mode;
+        fire.add( new FireArray( Edit.name(), oldMode, mode ) );
+    }
+
+    private void setInternalName( final ArrayList<FireArray> fire, final String name )
+    {
+        final String oldName = getModel().getName();
+        getModel().setName( name );
+        context.saveModel( getModel() );
+        fire.add( new FireArray( TaxState.Rename.name(), oldName, name ) );
+
     }
 
     public HerbarModel getModel()
@@ -405,11 +423,6 @@ public class TaxStateModel
     class TaxStateValues
     {
         /**
-         * Holds the value for the property model.
-         */
-        public HerbarModel model;
-
-        /**
          * Holds value of property scope.
          */
         public Taxon scope;
@@ -432,7 +445,7 @@ public class TaxStateModel
 
     public enum TaxState
     {
-        List, Scope, Level, Focus, Ordered, SubModus, Model, Edit
+        List, Scope, Level, Focus, Ordered, SubModus, Model, Edit, Rename
     }
 
     /**
@@ -444,7 +457,7 @@ public class TaxStateModel
     }
 
     /**
-     * Keeps track of list states which either are in edit mode or in use/read mode.
+     * Keeps track of list states which either are in edit mode or in use (=read) mode.
      */
     public enum EditState
     {

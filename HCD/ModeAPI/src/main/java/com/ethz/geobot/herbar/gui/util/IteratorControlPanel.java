@@ -30,7 +30,6 @@ import ch.jfactory.resource.Strings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -57,6 +56,8 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
 
     private String labelString;
 
+    private boolean isEnabled = true;
+
     /**
      * Creates new form IteratorControlPanel
      *
@@ -66,6 +67,16 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     {
         this.labelString = label;
         initComponents();
+    }
+
+    @Override
+    public void setEnabled( boolean enabled )
+    {
+        isEnabled = enabled;
+        super.setEnabled( isEnabled );
+        previous.setEnabled( isEnabled && cursor.hasPrevious() );
+        next.setEnabled( isEnabled && cursor.hasNext() );
+        positionInfoText.setEnabled( isEnabled );
     }
 
     public void setCursor( final Object[] objects )
@@ -90,12 +101,12 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     public void cursorChange( final CursorChangeEvent event )
     {
         // update control state
-        next.setEnabled( cursor.hasNext() );
-        previous.setEnabled( cursor.hasPrevious() );
+        next.setEnabled( isEnabled && cursor.hasNext() );
+        previous.setEnabled( isEnabled && cursor.hasPrevious() );
 
-        final String prefix = ( labelString == null ? "" : labelString + " " );
-        final String from = ( cursor.isEmpty() ? "0" : "" + ( cursor.getCurrentIndex() + 1 ) );
-        final String to = ( cursor.isEmpty() ? "0" : "" + cursor.getSize() );
+        final String prefix = (labelString == null ? "" : labelString + " ");
+        final String from = (cursor.isEmpty() ? "0" : "" + (cursor.getCurrentIndex() + 1));
+        final String to = (cursor.isEmpty() ? "0" : "" + cursor.getSize());
         final String text = Strings.getString( "ITERATOR.TEXT", prefix + from, to );
         positionInfoText.setText( text );
 
@@ -115,7 +126,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         }
         for ( final Object aList : list )
         {
-            ( (IteratorControlListener) aList ).itemChange( event );
+            ((IteratorControlListener) aList).itemChange( event );
         }
     }
 
@@ -133,7 +144,7 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     private JLabel createPositionLabel()
     {
         final JLabel label = new JLabel();
-        final String prefix = ( labelString == null ? "" : labelString + " " );
+        final String prefix = (labelString == null ? "" : labelString + " ");
         final String max = Strings.getString( "ITERATOR.MAX.TEXT" );
         label.setText( Strings.getString( "ITERATOR.TEXT", prefix + max, max ) );
         label.setPreferredSize( label.getPreferredSize() );

@@ -32,6 +32,7 @@ import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.thoughtworks.xstream.XStream;
@@ -45,10 +46,12 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +72,9 @@ public class FilterFactory
 
     private static FilterFactory instance = null;
 
-    private final Map<String, FilterModel> cachedFilterModels = new HashMap<String, FilterModel>();
+    private final Map<String, FilterModel> nameModelCache = new HashMap<String, FilterModel>();
+
+    private final Map<FilterModel, String> modelNameCache = new HashMap<FilterModel, String>();
 
     /**
      * Creates a new instance of FilterFactory.
@@ -157,11 +162,12 @@ public class FilterFactory
      */
     public FilterModel getFilterModel( final String name ) throws FilterPersistentException
     {
-        FilterModel model = cachedFilterModels.get( name );
+        FilterModel model = nameModelCache.get( name );
         if ( model == null )
         {
             model = generateFilterModel( loadFilter( name ) );
-            cachedFilterModels.put( name, model );
+            nameModelCache.put( name, model );
+            modelNameCache.put( model, name );
         }
         return model;
     }
@@ -174,36 +180,36 @@ public class FilterFactory
      */
     public void saveFilterModel( final FilterModel filterModel ) throws FilterPersistentException
     {
-        // saving to a new file includes removing the old
-        final Collection<FilterModel> values = cachedFilterModels.values();
-        final Collection<String> keys = cachedFilterModels.keySet();
-        final Iterator<String> keyIterator = keys.iterator();
-        String modelName = null;
-        for ( final FilterModel model : values )
-        {
-            final String name = keyIterator.next();
-            if ( model == filterModel )
-            {
-                modelName = name;
-                break;
-            }
-        }
-        modelName = (modelName == null ? filterModel.getName() : modelName);
-        cachedFilterModels.remove( modelName );
+        // cleanup old model
+        final String tempName = modelNameCache.get( filterModel );
+        final String modelName = tempName == null ? filterModel.getName() : tempName;
+        nameModelCache.remove( modelName );
+        modelNameCache.remove( filterModel );
         final String filename = generateFilterFileName( modelName );
-        final File file = new File( filename );
-        final boolean success = file.delete();
-        if ( !success )
-        {
-            LOG.error( "could not delete \"" + file + "\"" );
-        }
-        // save
+        new File( filename ).delete();
+
+        // dump model to data object
         final Filter filter = new Filter();
         filter.setName( filterModel.getName() );
         filter.setFixed( filterModel.isFixed() );
+        final Set<Detail> details = new HashSet<Detail>();
+        final Level[] levels = filterModel.getRootTaxon().getSubLevels();
+        for ( final Level level : levels )
+        {
+            final Taxon[] taxa = filterModel.getRootTaxon().getAllChildTaxa( level );
+            for ( final Taxon taxon : taxa )
+            {
+                final Detail detail = new Detail();
+                detail.setScope( taxon.getName() );
+                details.add( detail );
+            }
+        }
+        filter.setDetails( details.toArray( new Detail[details.size()] ) );
+
+        // save new model
         saveFilter( filter );
-        // save FilterModel to cached list, could be new one or is overwritten
-        cachedFilterModels.put( filterModel.getName(), filterModel );
+        nameModelCache.put( filterModel.getName(), filterModel );
+        modelNameCache.put( filterModel, filterModel.getName() );
     }
 
     /**
@@ -215,20 +221,8 @@ public class FilterFactory
     public void removeFilterModel( final FilterModel filterModel ) throws FilterPersistentException
     {
         // make sure the right model is handled even if the name has changed.
-        final Collection<FilterModel> values = cachedFilterModels.values();
-        final Collection<String> keys = cachedFilterModels.keySet();
-        final Iterator<String> keyIterator = keys.iterator();
-        String modelName = null;
-        for ( final FilterModel model : values )
-        {
-            final String name = keyIterator.next();
-            if ( model == filterModel )
-            {
-                modelName = name;
-                break;
-            }
-        }
-        modelName = (modelName == null ? filterModel.getName() : modelName);
+        final String tempName = modelNameCache.get( filterModel );
+        final String modelName = tempName == null ? filterModel.getName() : tempName;
         final String filename = generateFilterFileName( modelName );
         final File file = new File( filename );
         if ( !file.delete() )
@@ -237,7 +231,8 @@ public class FilterFactory
         }
         else
         {
-            cachedFilterModels.remove( modelName );
+            nameModelCache.remove( modelName );
+            modelNameCache.remove( filterModel );
         }
     }
 

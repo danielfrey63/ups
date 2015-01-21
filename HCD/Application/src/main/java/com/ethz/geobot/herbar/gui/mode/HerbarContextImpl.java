@@ -36,7 +36,6 @@ import java.awt.Component;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
@@ -88,15 +87,22 @@ public class HerbarContextImpl implements HerbarContext
 
     public HerbarModel getModel( final String modelName )
     {
-        HerbarModel model = null;
-        try
+        HerbarModel model;
+        if ( "".equals( modelName ) || modelName == null )
         {
-            model = Application.getInstance().getModel( modelName );
-        }
-        catch ( FilterPersistentException ex )
-        {
-            Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "ERROR.FILTERLOAD" );
             model = getDataModel();
+        }
+        else
+        {
+            try
+            {
+                model = Application.getInstance().getModel( modelName );
+            }
+            catch ( FilterPersistentException ex )
+            {
+                Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "ERROR.FILTERLOAD" );
+                model = getDataModel();
+            }
         }
         return model;
     }

@@ -123,7 +123,7 @@ public class LessonPanel extends ModeActivationPanel
 
             if ( System.getProperty( "xmatrix.subject", "" ).equals( ENV_SCIENTIFIC ) )
             {
-                taxStateModel.setModel( context.getModel( "4 Liste 600" ) );
+                taxStateModel.setModel( context.getModel( System.getProperty( "herbar.model.default", "" ) ) );
             }
         }
         catch ( RuntimeException e )

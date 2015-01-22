@@ -16,6 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>1.4.2088</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
@@ -96,6 +97,7 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
+            <version>1.78.2351</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>

@@ -108,14 +108,14 @@ public class FilterTaxon implements Taxon, Comparable
         return cachedParent;
     }
 
-    public Taxon[] getChildTaxa()
+    public FilterTaxon[] getChildTaxa()
     {
         if ( !cache || cachedChildren == null )
         {
             cachedChildren = new ArrayList<Taxon>();
             collectChildren( dependentTaxon, cachedChildren );
         }
-        return cachedChildren.toArray( new Taxon[cachedChildren.size()] );
+        return cachedChildren.toArray( new FilterTaxon[cachedChildren.size()] );
     }
 
     public Level[] getSubLevels()
@@ -172,10 +172,10 @@ public class FilterTaxon implements Taxon, Comparable
         return dependentTaxon.getAsGraphNode();
     }
 
-    public Taxon[] getAllChildTaxa( final Level level )
+    public FilterTaxon[] getAllChildTaxa( final Level level )
     {
-        final List<Taxon> taxa = new ArrayList<Taxon>();
-        Taxon child;
+        final List<FilterTaxon> taxa = new ArrayList<FilterTaxon>();
+        FilterTaxon child;
         for ( int i = 0; i < getChildTaxa().length; i++ )
         {
             child = getChildTaxon( i );
@@ -186,17 +186,17 @@ public class FilterTaxon implements Taxon, Comparable
             }
             else
             {
-                final Taxon[] fromChild = child.getAllChildTaxa( level );
+                final FilterTaxon[] fromChild = child.getAllChildTaxa( level );
                 taxa.addAll( Arrays.asList( fromChild ) );
             }
         }
-        return taxa.toArray( new Taxon[taxa.size()] );
+        return taxa.toArray( new FilterTaxon[taxa.size()] );
     }
 
-    public Taxon[] getChildTaxa( final Level level )
+    public FilterTaxon[] getChildTaxa( final Level level )
     {
-        final List<Taxon> taxa = new ArrayList<Taxon>();
-        Taxon curr;
+        final List<FilterTaxon> taxa = new ArrayList<FilterTaxon>();
+        FilterTaxon curr;
         for ( int i = 0; i < getChildTaxa().length; i++ )
         {
             curr = getChildTaxon( i );
@@ -205,7 +205,7 @@ public class FilterTaxon implements Taxon, Comparable
                 taxa.add( curr );
             }
         }
-        final Taxon[] ret = new Taxon[taxa.size()];
+        final FilterTaxon[] ret = new FilterTaxon[taxa.size()];
         for ( int i = 0; i < taxa.size(); i++ )
         {
             ret[i] = taxa.get( i );
@@ -218,7 +218,7 @@ public class FilterTaxon implements Taxon, Comparable
         return ret;
     }
 
-    public Taxon getChildTaxon( final int index )
+    public FilterTaxon getChildTaxon( final int index )
             throws IndexOutOfBoundsException
     {
         LOG.trace( this.toDebugString() + " getChildTaxon(" + index + ")" );

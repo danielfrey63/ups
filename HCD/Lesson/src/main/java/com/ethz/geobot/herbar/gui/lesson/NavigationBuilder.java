@@ -25,9 +25,11 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Enumeration;
+import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -253,6 +255,33 @@ public class NavigationBuilder implements Builder
             }
         }
 
+        public void mousePressed( final MouseEvent e )
+        {
+            handleInternalPopupEvent( e );
+        }
+
+        public void mouseReleased( final MouseEvent e )
+        {
+            handleInternalPopupEvent( e );
+        }
+
+        private void handleInternalPopupEvent( MouseEvent e )
+        {
+            if ( e.isPopupTrigger() )
+            {
+                final TreePath path = taxTree.getPathForLocation( e.getX(), e.getY() );
+                if ( path != null )
+                {
+                    final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+                    final Taxon taxon = node.getTaxon();
+                    if ( taxon != null )
+                    {
+                        handlePopup( taxon, e.getPoint().x, e.getPoint().y );
+                    }
+                }
+            }
+        }
+
         public void mouseClicked( final MouseEvent e )
         {
             // region and double click
@@ -316,12 +345,15 @@ public class NavigationBuilder implements Builder
         private void handleKey( final KeyEvent e )
         {
             final TreePath path = taxTree.getSelectionPath();
-            final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
-            final Taxon taxon = node.getTaxon();
-            if ( e.getKeyChar() == ' ' )
+            if ( path != null )
             {
-                handleComponentClick( taxon );
-                e.consume();
+                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) path.getLastPathComponent();
+                final Taxon taxon = node.getTaxon();
+                if ( e.getKeyChar() == ' ' )
+                {
+                    handleComponentClick( taxon );
+                    e.consume();
+                }
             }
         }
 
@@ -332,6 +364,8 @@ public class NavigationBuilder implements Builder
         protected abstract void handleIconClick( Taxon taxon );
 
         protected abstract void handleLabelClick( Taxon taxon );
+
+        protected abstract void handlePopup( Taxon taxon, int x, int y );
     }
 
     private class UseController extends AbstractController
@@ -376,6 +410,12 @@ public class NavigationBuilder implements Builder
                 taxStateModel.setFocus( taxon );
                 taxTree.repaint();
             }
+        }
+
+        @Override
+        protected void handlePopup( Taxon taxon, int x, int y )
+        {
+
         }
     }
 
@@ -429,6 +469,66 @@ public class NavigationBuilder implements Builder
                 context.saveModel( filterModel );
             }
             taxTree.repaint();
+        }
+
+        @Override
+        protected void handlePopup( final Taxon taxon, final int x, final int y )
+        {
+            final JPopupMenu menu = new JPopupMenu();
+            menu.add( new AbstractAction( "Alle anwählen" )
+            {
+                @Override
+                public void actionPerformed( ActionEvent e )
+                {
+                    final HerbarModel model = taxStateModel.getModel();
+                    if ( model instanceof FilterModel )
+                    {
+                        final FilterModel filterModel = (FilterModel) model;
+                        filterModel.addFilterTaxon( taxon );
+                        final Level[] levels = taxon.getSubLevels();
+                        for ( final Level level : levels )
+                        {
+                            final Taxon[] children = taxon.getAllChildTaxa( level );
+                            for ( final Taxon child : children )
+                            {
+                                if ( child.getLevel() != null )
+                                {
+                                    filterModel.addFilterTaxon( child );
+                                }
+                            }
+                        }
+                        taxTree.repaint();
+                    }
+                }
+            } );
+            menu.add( new AbstractAction( "Alle abwählen" )
+            {
+                @Override
+                public void actionPerformed( ActionEvent e )
+                {
+                    final HerbarModel model = taxStateModel.getModel();
+                    if ( model instanceof FilterModel )
+                    {
+                        final FilterModel filterModel = (FilterModel) model;
+                        final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
+                        filterModel.removeFilterTaxon( filterTaxon );
+                        final Level[] levels = filterTaxon.getSubLevels();
+                        for ( final Level level : levels )
+                        {
+                            final FilterTaxon[] children = filterTaxon.getAllChildTaxa( level );
+                            for ( final FilterTaxon child : children )
+                            {
+                                if ( child.getLevel() != null )
+                                {
+                                    filterModel.removeFilterTaxon( child );
+                                }
+                            }
+                        }
+                        taxTree.repaint();
+                    }
+                }
+            } );
+            menu.show( taxTree, x, y );
         }
     }
 

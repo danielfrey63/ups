@@ -37,8 +37,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import static ch.jfactory.resource.ImageLocator.getIcon;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
 import static javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT;
 import static javax.swing.SwingConstants.TOP;
 
@@ -84,7 +84,7 @@ public class PropertyDisplay extends JPanel
         displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopper", "title3", "filter3a", "icon3" ) );
         displayPanels.add( getTab( displayTabs, herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4a", "icon4" ) );
 
-        add( displayTabs, Lernen.name() );
+        add( displayTabs, LERNEN.name() );
 
         guessTabs.setTabPlacement( TOP );
         guessTabs.setTabLayoutPolicy( SCROLL_TAB_LAYOUT );
@@ -94,7 +94,7 @@ public class PropertyDisplay extends JPanel
         guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopper", "title3", "filter3b", "icon3" ) );
         guessPanels.add( getTab( guessTabs, herbarContext, taxStateModel, context, "stopperSyn", "title4", "filter4b", "icon4" ) );
 
-        add( guessTabs, Abfragen.name() );
+        add( guessTabs, ABFRAGEN.name() );
 
         displayTabs.addChangeListener( new TabSyncListener( guessTabs ) );
         guessTabs.addChangeListener( new TabSyncListener( displayTabs ) );

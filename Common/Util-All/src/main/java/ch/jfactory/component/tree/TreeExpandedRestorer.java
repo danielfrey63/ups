@@ -33,9 +33,9 @@ public class TreeExpandedRestorer
     /** Selections are stored with row information. If you decide to delete nodes, you should select this option. */
     public static final SelectionType SELECTION_BY_ROW = new SelectionType( "SelectionByRow" );
 
-    private List<TreePath> expandedPaths;
-
     private JTree tree;
+
+    private List<TreePath> expandedPaths;
 
     private TreePath[] selectionPaths;
 
@@ -91,9 +91,9 @@ public class TreeExpandedRestorer
     }
 
     /**
-     * Use this method if you want to transfer a node with a tree, and you want to have the selection transfered too.
+     * Use this method if you want to transfer a node with a tree, and you want to have the selection transferred too.
      *
-     * @param target the node being transfered
+     * @param target the node being transferred
      * @param old    the source tree path where the node was or is attached to
      * @param nw     the destination tree path where the node will be or is attached to
      */
@@ -126,6 +126,11 @@ public class TreeExpandedRestorer
                 iterator.remove();
             }
         }
+    }
+
+    public TreePath[] getExpandedPaths()
+    {
+        return expandedPaths.toArray(new TreePath[expandedPaths.size()]);
     }
 
     /** Expands all paths last saved and restores selected node. */

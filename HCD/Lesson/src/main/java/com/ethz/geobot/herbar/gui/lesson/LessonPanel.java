@@ -34,13 +34,12 @@ import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
-import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
@@ -98,7 +97,7 @@ public class LessonPanel extends ModeActivationPanel
             add( bar, NORTH );
             add( navigationEtAll, CENTER );
 
-            taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
+            taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
             {
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
@@ -108,14 +107,14 @@ public class LessonPanel extends ModeActivationPanel
                     picturePanel.setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
                 }
             } );
-            taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
+            taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
             {
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
                 {
                     final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
                     propertyDisplay.setSubMode( subMode );
-                    picturePanel.setShowText( subMode == Lernen );
+                    picturePanel.setShowText( subMode == LERNEN );
                 }
             } );
 

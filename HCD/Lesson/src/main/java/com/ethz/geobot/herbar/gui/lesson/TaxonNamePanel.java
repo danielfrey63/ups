@@ -46,8 +46,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
@@ -119,8 +119,8 @@ public class TaxonNamePanel extends JPanel
         this.taxStateModel = taxStateModel;
 
         final JLabel label = new JLabel( taxon.getName() );
-        panel.add( label, Lernen.name() );
-        panel.add( taxonField, Abfragen.name() );
+        panel.add( label, LERNEN.name() );
+        panel.add( taxonField, ABFRAGEN.name() );
         panel.setBorder( new EmptyBorder( 1, 0, 0, 0 ) );
 
         final CellConstraints cc = new CellConstraints();
@@ -160,7 +160,7 @@ public class TaxonNamePanel extends JPanel
 
     private void swapSubModes()
     {
-        final SubMode newSubMode = taxStateModel.getSubMode( taxon.getName() ).equals( Abfragen ) ? Lernen : Abfragen;
+        final SubMode newSubMode = taxStateModel.getSubMode( taxon.getName() ).equals( ABFRAGEN ) ? LERNEN : ABFRAGEN;
         taxStateModel.setSubMode( getName(), newSubMode );
         setSubMode( newSubMode );
     }
@@ -168,7 +168,7 @@ public class TaxonNamePanel extends JPanel
     public void setSubMode( final SubMode subMode )
     {
         layout.show( panel, subMode.name() );
-        if ( subMode == Lernen )
+        if ( subMode == LERNEN )
         {
             taxonField.setText( "" );
         }

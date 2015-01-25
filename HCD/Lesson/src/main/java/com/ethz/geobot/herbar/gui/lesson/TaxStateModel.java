@@ -24,6 +24,19 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.COLLAPSE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.LEVEL;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.LIST;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.ORDER;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.RENAME;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SCOPE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.TAXA;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
@@ -33,17 +46,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Lernen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Level;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Scope;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
 
 public class TaxStateModel
 {
@@ -90,6 +92,13 @@ public class TaxStateModel
         return current == 0 ? null : taxList[current - 1];
     }
 
+    public void setCollapse()
+    {
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        fire.add( new FireArray( COLLAPSE.name(), false, true ) );
+        fireAllPropertyChangeEvents( fire );
+    }
+
     /**
      * The model (also known as the taxon list) ist set here and all states are adapted to a consistent overall state.
      *
@@ -106,7 +115,7 @@ public class TaxStateModel
             setInternalTaxList( fire );
             setInternalOrdered( fire, true );
             setInternalFocus( fire, taxList[0] );
-            setInternalGlobalSubMode( fire, Lernen );
+            setInternalGlobalSubMode( fire, LERNEN );
             setInternalEditMode( fire, USE );
             fireAllPropertyChangeEvents( fire );
         }
@@ -178,14 +187,14 @@ public class TaxStateModel
         final SubMode oldGlobalSubMode = getGlobalSubMode();
         subModes.put( taxon, subMode );
         final SubMode newGlobalSubMode = getGlobalSubMode();
-        fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, newGlobalSubMode ) );
+        fire.add( new FireArray( SUB_MODUS.name(), oldGlobalSubMode, newGlobalSubMode ) );
         fireAllPropertyChangeEvents( fire );
     }
 
     public void setEditMode( final EditState mode )
     {
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalGlobalSubMode( fire, Lernen );
+        setInternalGlobalSubMode( fire, LERNEN );
         setInternalEditMode( fire, mode );
         final Level[] levels = getModel().getLevels();
         setInternalLevel( fire, ArrayUtils.contains( levels, vals.level ) ? vals.level : levels[levels.length - 1] );
@@ -211,7 +220,7 @@ public class TaxStateModel
     {
         if ( model != null && model != herbarModel )
         {
-            fire.add( new FireArray( Model.name(), herbarModel, model ) );
+            fire.add( new FireArray( LIST.name(), herbarModel, model ) );
             herbarModel = model;
         }
     }
@@ -227,14 +236,14 @@ public class TaxStateModel
     {
         if ( scope != null && scope != vals.scope )
         {
-            fire.add( new FireArray( Scope.name(), vals.scope, scope ) );
+            fire.add( new FireArray( SCOPE.name(), vals.scope, scope ) );
             vals.scope = scope;
 
             final Level[] levels = vals.scope.getSubLevels();
             if ( !ArrayUtils.contains( levels, vals.level ) )
             {
                 final Level level = levels.length == 0 ? scope.getLevel() : levels[levels.length - 1];
-                fire.add( new FireArray( Level.name(), vals.level, level ) );
+                fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
                 vals.level = level;
             }
         }
@@ -251,7 +260,7 @@ public class TaxStateModel
     {
         if ( level != null && level != vals.level )
         {
-            fire.add( new FireArray( Level.name(), vals.level, level ) );
+            fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
             vals.level = level;
         }
     }
@@ -270,7 +279,7 @@ public class TaxStateModel
         {
             newTaxList = new Taxon[]{vals.scope};
         }
-        fire.add( new FireArray( List.name(), taxList, newTaxList ) );
+        fire.add( new FireArray( TAXA.name(), taxList, newTaxList ) );
         taxList = newTaxList;
     }
 
@@ -283,7 +292,7 @@ public class TaxStateModel
      */
     private void setInternalOrdered( final ArrayList<FireArray> fire, final boolean ordered )
     {
-        fire.add( new FireArray( Ordered.name(), vals.ordered, ordered ) );
+        fire.add( new FireArray( ORDER.name(), vals.ordered, ordered ) );
         if ( ordered )
         {
             Arrays.sort( taxList );
@@ -306,7 +315,7 @@ public class TaxStateModel
     {
         if ( focus != null && !focus.equals( vals.focus ) )
         {
-            fire.add( new FireArray( Focus.name(), vals.focus, focus ) );
+            fire.add( new FireArray( FOCUS.name(), vals.focus, focus ) );
             vals.focus = focus;
         }
     }
@@ -316,14 +325,13 @@ public class TaxStateModel
         final SubMode oldGlobalSubMode = getGlobalSubMode();
         if ( subMode != null && subMode != oldGlobalSubMode )
         {
-            fire.add( new FireArray( SubModus.name(), oldGlobalSubMode, subMode ) );
+            fire.add( new FireArray( SUB_MODUS.name(), oldGlobalSubMode, subMode ) );
         }
         subModes.clear();
         Taxon taxon = getFocus();
         // Make sure the root taxon is not included
         while ( taxon.getParentTaxon() != null )
         {
-            //fire.add( new FireArray( SubModus.name(), , subMode ) );
             subModes.put( taxon.getName(), subMode );
             taxon = taxon.getParentTaxon();
         }
@@ -333,7 +341,7 @@ public class TaxStateModel
     {
         EditState oldMode = listState;
         listState = mode;
-        fire.add( new FireArray( Edit.name(), oldMode, mode ) );
+        fire.add( new FireArray( EDIT.name(), oldMode, mode ) );
     }
 
     private void setInternalName( final ArrayList<FireArray> fire, final String name )
@@ -341,7 +349,7 @@ public class TaxStateModel
         final String oldName = getModel().getName();
         getModel().setName( name );
         context.saveModel( getModel() );
-        fire.add( new FireArray( TaxState.Rename.name(), oldName, name ) );
+        fire.add( new FireArray( RENAME.name(), oldName, name ) );
 
     }
 
@@ -382,12 +390,12 @@ public class TaxStateModel
 
     public SubMode getGlobalSubMode()
     {
-        SubMode overallSubMode = Lernen;
+        SubMode overallSubMode = LERNEN;
         for ( final SubMode subMode : subModes.values() )
         {
-            if ( subMode == Abfragen )
+            if ( subMode == ABFRAGEN )
             {
-                overallSubMode = Abfragen;
+                overallSubMode = ABFRAGEN;
             }
         }
         return overallSubMode;
@@ -445,7 +453,7 @@ public class TaxStateModel
 
     public enum TaxState
     {
-        List, Scope, Level, Focus, Ordered, SubModus, Model, Edit, Rename
+        TAXA, SCOPE, LEVEL, FOCUS, ORDER, SUB_MODUS, LIST, EDIT, RENAME, COLLAPSE
     }
 
     /**
@@ -453,7 +461,22 @@ public class TaxStateModel
      */
     public enum SubMode
     {
-        Lernen, Abfragen
+        LERNEN
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "Lernen";
+                    }
+                },
+        ABFRAGEN
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "Abfragen";
+                    }
+                }
     }
 
     /**
@@ -461,7 +484,7 @@ public class TaxStateModel
      */
     public enum EditState
     {
-        EDIT, USE
+        MODIFY, USE
     }
 
     /**

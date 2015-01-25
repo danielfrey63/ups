@@ -3,7 +3,15 @@ package com.ethz.geobot.herbar.gui.lesson;
 import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.RendererPanel;
+import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.COLLAPSE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.LIST;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.ORDER;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.gui.tax.TaxTree;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -14,8 +22,10 @@ import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
+import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,6 +34,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
@@ -40,14 +53,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.EDIT;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.Abfragen;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Ordered;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
-import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.lang.ArrayUtils.contains;
 
 public class NavigationBuilder implements Builder
@@ -115,7 +120,7 @@ public class NavigationBuilder implements Builder
 
     private void setListeners( final TaxTree taxTree )
     {
-        taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -124,7 +129,7 @@ public class NavigationBuilder implements Builder
                 ensureVisibility( taxTree );
             }
         } );
-        taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( LIST.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -133,7 +138,7 @@ public class NavigationBuilder implements Builder
                 ensureVisibility( taxTree );
             }
         } );
-        taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -141,7 +146,7 @@ public class NavigationBuilder implements Builder
                 ensureVisibility( taxTree );
             }
         } );
-        taxStateModel.addPropertyChangeListener( Ordered.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( ORDER.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -149,7 +154,7 @@ public class NavigationBuilder implements Builder
                 ensureVisibility( taxTree );
             }
         } );
-        taxStateModel.addPropertyChangeListener( Edit.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( EDIT.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -163,6 +168,37 @@ public class NavigationBuilder implements Builder
                 taxTree.removeMouseListener( isEdit ? useController : editController );
                 taxTree.addKeyListener( isEdit ? editController : useController );
                 taxTree.addMouseListener( isEdit ? editController : useController );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( COLLAPSE.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                final ArrayList<TreePath> breadcrumb = new ArrayList<TreePath>();
+                TreePath currentPath = taxTree.getSelectionPath();
+                while ( currentPath != null )
+                {
+                    breadcrumb.add( currentPath );
+                    currentPath = currentPath.getParentPath();
+                }
+                final ArrayList<TreePath> expandedPaths = TreeUtils.getExpandedPaths( taxTree );
+                Collections.sort( expandedPaths, new Comparator<TreePath>()
+                {
+                    @Override
+                    public int compare( TreePath o1, TreePath o2 )
+                    {
+                        return o2.getPathCount() - o1.getPathCount();
+                    }
+                } );
+                for ( final TreePath path : expandedPaths )
+                {
+                    if ( !breadcrumb.contains( path ) )
+                    {
+                        taxTree.collapsePath( path );
+                    }
+                }
+                TreeUtils.ensureVisibility( taxTree, breadcrumb.get( 0 ) );
             }
         } );
         taxTree.addAncestorListener( new AncestorListener()
@@ -538,8 +574,16 @@ public class NavigationBuilder implements Builder
         public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
         {
             final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
-            final boolean query = taxStateModel.getSubMode( taxon.getName() ) == Abfragen;
+            final boolean query = taxStateModel.getSubMode( taxon.getName() ) == ABFRAGEN;
             final Taxon filterTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
+            final Taxon selectedTaxon = ((TaxTree) tree).getSelectedTaxon();
+            boolean isParent = false;
+            Taxon current = selectedTaxon;
+            while ( !isParent && current != null )
+            {
+                current = current.getParentTaxon();
+                isParent = current != null && current == taxon && !(taxon == taxStateModel.getModel().getRootTaxon());
+            }
             final Level level = taxon.getLevel();
             final Taxon[] taxList = taxStateModel.getTaxList();
             panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
@@ -548,11 +592,12 @@ public class NavigationBuilder implements Builder
             final boolean containsTaxon = contains( taxList, taxon );
             final boolean listHasTaxon = filterTaxon != null;
             final boolean sameLevels = taxStateModel.getLevel() == taxon.getLevel();
-            panel.setEnabled( listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
+            panel.setEnabled( isParent || listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
             panel.setSelected( taxStateModel.getFocus().equals( taxon ) );
             radio.setEnabled( true );
             radio.setSelected( taxStateModel.getScope().equals( taxon ) );
             panel.update();
+            if ( isParent ) panel.setTextColor( new Color( 0, 200, 0 ) );
             return panel;
         }
     }

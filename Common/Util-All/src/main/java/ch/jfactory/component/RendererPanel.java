@@ -264,6 +264,11 @@ public class RendererPanel extends JPanel
         text.setText( newText );
     }
 
+    public void setTextColor( final Color textColor )
+    {
+        text.setForeground( textColor );
+    }
+
     /**
      * Set this to the text you want to display at the end of the panel. If set to null, the place is freed and nothing is displayed
      *

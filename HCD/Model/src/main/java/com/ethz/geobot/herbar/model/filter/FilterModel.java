@@ -86,7 +86,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         return dependentModel.getLastLevel();
     }
 
-    public Taxon getRootTaxon()
+    public FilterTaxon getRootTaxon()
     {
         return addFilterTaxon( dependentModel.getRootTaxon() );
     }

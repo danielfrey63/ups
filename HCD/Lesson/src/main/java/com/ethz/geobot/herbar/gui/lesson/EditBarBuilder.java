@@ -2,9 +2,13 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.component.ComponentFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.MODIFY;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.LIST;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
+import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -14,11 +18,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.EDIT;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Edit;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.List;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Model;
 
 /**
  * Holds the edit functionality of the navigation/list-edit panel.
@@ -30,13 +29,12 @@ public class EditBarBuilder implements Builder
 
     public EditBarBuilder( final HerbarContext context, final TaxStateModel taxStateModel )
     {
-        bar = new JToolBar();
         final JToggleButton editButton = ComponentFactory.createToggleButton( EditBarBuilder.class, "BUTTON.EDIT", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
             {
-                taxStateModel.setEditMode( taxStateModel.getEditMode() == EDIT ? USE : EDIT );
+                taxStateModel.setEditMode( taxStateModel.getEditMode() == MODIFY ? USE : MODIFY );
             }
         } );
         final JButton newList = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.NEW", new ActionListener()
@@ -48,7 +46,7 @@ public class EditBarBuilder implements Builder
                 final FilterModel newModel = new FilterModel( model, "Neue Liste", false );
                 newModel.addFilterTaxon( model.getRootTaxon() );
                 taxStateModel.setModel( newModel );
-                taxStateModel.setEditMode( EDIT );
+                taxStateModel.setEditMode( MODIFY );
                 context.saveModel( newModel );
             }
         } );
@@ -73,11 +71,41 @@ public class EditBarBuilder implements Builder
                 taxStateModel.setModel( context.getModel( System.getProperty( "herbar.model.default", "" ) ) );
             }
         } );
+        final JButton copyButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.COPY", new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                final HerbarModel model = taxStateModel.getModel();
+                if ( model instanceof FilterModel )
+                {
+                    final FilterModel currentModel = (FilterModel) model;
+                    final FilterModel newModel = new FilterModel( context.getDataModel(), currentModel.getName() + " Kopie", false );
+                    final FilterTaxon taxon = currentModel.getRootTaxon();
+                    collectChildren( newModel, taxon );
+                    taxStateModel.setModel( newModel );
+                    taxStateModel.setEditMode( MODIFY );
+                    context.saveModel( newModel );
+                }
+            }
+        } );
+        final JButton collapseButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.COLLAPSE", new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                taxStateModel.setCollapse();
+            }
+        } );
+
+        bar = new JToolBar();
         bar.add( editButton );
         bar.add( newList );
+        bar.add( copyButton );
         bar.add( renameButton );
         bar.add( deleteButton );
-        taxStateModel.addPropertyChangeListener( Model.name(), new PropertyChangeListener()
+        bar.add( collapseButton );
+        taxStateModel.addPropertyChangeListener( LIST.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
@@ -89,16 +117,24 @@ public class EditBarBuilder implements Builder
                 deleteButton.setEnabled( enable );
             }
         } );
-        taxStateModel.addPropertyChangeListener( Edit.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( MODIFY.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                editButton.setSelected( e.getNewValue() == EDIT );
+                editButton.setSelected( e.getNewValue() == MODIFY );
             }
         } );
     }
 
+    private void collectChildren( final FilterModel newModel, final FilterTaxon taxon )
+    {
+        newModel.addFilterTaxon( taxon.getDependentTaxon() );
+        for ( final FilterTaxon child : taxon.getChildTaxa() )
+        {
+            collectChildren( newModel, child );
+        }
+    }
 
     @Override
     public JComponent getPanel()

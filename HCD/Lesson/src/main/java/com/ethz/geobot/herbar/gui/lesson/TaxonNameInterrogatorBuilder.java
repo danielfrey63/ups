@@ -41,8 +41,8 @@ import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.Focus;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SubModus;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.WEST;
 import static javax.swing.SwingConstants.HORIZONTAL;
@@ -111,7 +111,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
 
     public void setListeners()
     {
-        taxStateModel.addPropertyChangeListener( Focus.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent evt )
@@ -119,7 +119,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
                 setTaxFocus( (Taxon) evt.getNewValue() );
             }
         } );
-        taxStateModel.addPropertyChangeListener( SubModus.name(), new PropertyChangeListener()
+        taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
         {
             @Override
             public void propertyChange( PropertyChangeEvent evt )

@@ -7,11 +7,11 @@
  * implied.  See  the  License  for  the  specific  language governing
  * permissions and limitations under the License.
  */
-package ch.jfactory.image;
+package com.ethz.geobot.herbar.gui.lesson;
 
+import ch.jfactory.image.CachedImagePictureListCellRenderer;
 import ch.jfactory.resource.AsyncPictureLoaderListener;
 import ch.jfactory.resource.CachedImagePicture;
-import ch.jfactory.resource.PictureCache;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Image;
@@ -48,8 +48,6 @@ public class PictureDetailPanel extends JPanel
     public static final String ZOOM = "ZOOM";
 
     private static final Logger LOGGER = LoggerFactory.getLogger( PictureDetailPanel.class );
-
-    private static final int THUMB_HEIGHT = 100;
 
     private ZoomingImageComponent imagePanel;
 
@@ -249,8 +247,4 @@ public class PictureDetailPanel extends JPanel
         }
     }
 
-    public void cacheImage( final String name, final boolean thumb )
-    {
-        cache.cacheImage( name, thumb, false );
-    }
 }

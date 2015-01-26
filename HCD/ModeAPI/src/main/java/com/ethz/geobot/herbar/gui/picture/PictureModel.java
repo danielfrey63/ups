@@ -25,7 +25,6 @@ package com.ethz.geobot.herbar.gui.picture;
 import ch.jfactory.collection.cursor.Cursor;
 import ch.jfactory.collection.cursor.DefaultCursor;
 import com.ethz.geobot.herbar.model.CommentedPicture;
-import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -51,9 +50,9 @@ public class PictureModel
 
     private boolean zoomed = false;
 
-    public PictureModel( final HerbarModel model )
+    public PictureModel( final PictureTheme[] themes )
     {
-        this.themes = model.getPictureThemes();
+        this.themes = themes;
     }
 
     public boolean isZoomed()
@@ -129,6 +128,20 @@ public class PictureModel
         return null;
     }
 
+    public void setTaxon( final Taxon taxon )
+    {
+        LOG.debug( "setting taxon to \"" + taxon + "\"" );
+        try
+        {
+            this.taxon = taxon;
+            cursors = null;
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Error in setTaxon ", e );
+        }
+    }
+
     public Taxon getTaxon()
     {
         return taxon;
@@ -145,19 +158,5 @@ public class PictureModel
             cursors[idx] = new DefaultCursor( getTaxon().getCommentedPictures( themes[idx] ) );
         }
         return cursors[idx];
-    }
-
-    public void setTaxon( final Taxon taxon )
-    {
-        LOG.debug( "setting taxon to \"" + taxon + "\"" );
-        try
-        {
-            this.taxon = taxon;
-            cursors = null;
-        }
-        catch ( Exception e )
-        {
-            LOG.error( "Error in setTaxon ", e );
-        }
     }
 }

@@ -7,8 +7,11 @@
  * implied.  See  the  License  for  the  specific  language governing
  * permissions and limitations under the License.
  */
-package ch.jfactory.resource;
+package com.ethz.geobot.herbar.gui.lesson;
 
+import ch.jfactory.resource.AsyncPictureLoaderListener;
+import ch.jfactory.resource.CachedImage;
+import ch.jfactory.resource.PictureConverter;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -157,7 +160,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
             final double he = p.height - h / 2;
             final int iw = im.getWidth( null );
             final int ih = im.getHeight( null );
-            final double f = (double) PictureConverter.getFittingFactor( (int) ( wi ), (int) ( he ), iw, ih );
+            final double f = (double) PictureConverter.getFittingFactor( (int) (wi), (int) (he), iw, ih );
             // Use time saving smooth scaling for smaller images
             if ( f < 0.2 )
             {

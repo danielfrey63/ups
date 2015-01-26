@@ -7,10 +7,8 @@
  * implied.  See  the  License  for  the  specific  language governing
  * permissions and limitations under the License.
  */
-package ch.jfactory.image;
+package com.ethz.geobot.herbar.gui.lesson;
 
-import ch.jfactory.resource.CachedImageComponent;
-import ch.jfactory.resource.PictureCache;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

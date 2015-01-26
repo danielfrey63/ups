@@ -75,7 +75,7 @@ public class CachedImage
             if ( image != null )
             {
                 d = new Dimension( image.getWidth(), image.getHeight() );
-                LOGGER.info( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
+                LOGGER.debug( "reading size for image \"" + name + "\" with width " + d.width + ", height " + d.height );
             }
             else
             {

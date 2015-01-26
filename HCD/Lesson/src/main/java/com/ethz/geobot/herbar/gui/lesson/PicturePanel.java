@@ -20,13 +20,12 @@
  * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
  * Nutzungsansprüchen zur Verfügung gestellt.
  */
-package com.ethz.geobot.herbar.gui.picture;
+package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.presentation.Constants;
-import ch.jfactory.image.PictureDetailPanel;
 import ch.jfactory.lang.ArrayUtils;
+import com.ethz.geobot.herbar.gui.picture.PictureModel;
 import com.ethz.geobot.herbar.model.CommentedPicture;
-import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -47,7 +46,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static ch.jfactory.image.PictureDetailPanel.IMAGE;
+import static com.ethz.geobot.herbar.gui.lesson.PictureDetailPanel.IMAGE;
 
 /**
  * This control is used to display the Pictures of the different Picture-Themes.
@@ -69,29 +68,23 @@ public class PicturePanel extends JPanel
 
     private PictureTheme[] themes;
 
+    private PictureCache cache;
+
     /**
      * Creates new picture panel showing the text with all themes in the model.
      *
-     * @param herbarModel the main model
+     * @param themes the themes in this panel to show
+     * @param model
+     * @param cache
      */
-    public PicturePanel( final HerbarModel herbarModel )
+    public PicturePanel( final PictureTheme[] themes, final PictureModel model, final PictureCache cache )
     {
-        this( herbarModel, true, herbarModel.getPictureThemes() );
-    }
-
-    /**
-     * Creates the picture panel with the given themes and allows to hide the text.
-     *
-     * @param herbarModel the main model
-     * @param showText    whether to show the text
-     * @param themes      the themes to show
-     */
-    public PicturePanel( final HerbarModel herbarModel, final boolean showText, final PictureTheme[] themes )
-    {
-        model = new PictureModel( herbarModel );
+        this.model = model;
+        this.cache = cache;
         this.themes = themes;
+
         initGUI();
-        setShowText( showText );
+        setShowText( true );
     }
 
     private void tabChanged()
@@ -130,11 +123,6 @@ public class PicturePanel extends JPanel
         } );
     }
 
-    private PictureDetailPanel getDetail( final PictureTheme theme )
-    {
-        return pictureTab.getThemePanel( theme );
-    }
-
     private void cacheTaxon( final Taxon taxon )
     {
         LOG.debug( "caching taxon \"" + taxon + "\"" );
@@ -153,7 +141,7 @@ public class PicturePanel extends JPanel
                 if ( inner != null )
                 {
                     final String picture = inner.getRelativURL();
-                    getDetail( theme ).cacheImage( picture, true );
+                    cache.cacheImage( picture, true, false );
                 }
                 else
                 {
@@ -176,7 +164,9 @@ public class PicturePanel extends JPanel
         pictureTab.clearAll();
         for ( final PictureTheme theme : themes )
         {
-            fillTheme( theme );
+            final PictureDetailPanel detail = pictureTab.getThemePanel( theme );
+            final int counter = fillDetailPanel( detail, theme );
+            pictureTab.setEnabled( model.getIndex( theme ), counter != 0 );
         }
         for ( final Taxon taxonToCache : toCache )
         {
@@ -192,11 +182,6 @@ public class PicturePanel extends JPanel
     {
         this.showText = showText;
         textArea.setVisible( showText );
-        // make sure thumbs do (not) show tooltips
-        if ( model != null && model.getTaxon() != null )
-        {
-            setTaxon( model.getTaxon() );
-        }
     }
 
     private int fillDetailPanel( final PictureDetailPanel detail, final PictureTheme theme )
@@ -210,7 +195,7 @@ public class PicturePanel extends JPanel
             {
                 final String name = inner.getRelativURL();
                 detail.addImage( name, counter, ( showText ? picture.getComment() : "" ) );
-                detail.cacheImage( name, theme != model.getPictureTheme() );
+                cache.cacheImage( name, theme != model.getPictureTheme(), false );
                 counter++;
             }
             else
@@ -219,13 +204,6 @@ public class PicturePanel extends JPanel
             }
         }
         return counter;
-    }
-
-    private void fillTheme( final PictureTheme theme )
-    {
-        final PictureDetailPanel detail = pictureTab.getThemePanel( theme );
-        final int counter = fillDetailPanel( detail, theme );
-        pictureTab.setEnabled( model.getIndex( theme ), counter != 0 );
     }
 
     private void setImage()
@@ -262,7 +240,7 @@ public class PicturePanel extends JPanel
 
     private JComponent buildTab()
     {
-        pictureTab = new TabbedPictureDetailPanel();
+        pictureTab = new TabbedPictureDetailPanel( cache );
         pictureTab.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );
         createTabs();
         pictureTab.addChangeListener( new ChangeListener()

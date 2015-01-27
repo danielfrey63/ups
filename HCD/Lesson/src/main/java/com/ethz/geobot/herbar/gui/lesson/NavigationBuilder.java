@@ -79,7 +79,7 @@ public class NavigationBuilder implements Builder
     public JComponent getPanel()
     {
         final TaxTree taxTree = new TaxTree();
-        setSearchable( taxTree );
+        //setSearchable( taxTree );
         setRenderer( taxTree );
         setController( taxTree );
         setListeners( taxTree );

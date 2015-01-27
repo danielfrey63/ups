@@ -194,7 +194,7 @@ public class PicturePanel extends JPanel
             if ( inner != null )
             {
                 final String name = inner.getRelativURL();
-                detail.addImage( name, counter, ( showText ? picture.getComment() : "" ) );
+                detail.addImage( name, counter );
                 cache.cacheImage( name, theme != model.getPictureTheme(), false );
                 counter++;
             }
@@ -217,7 +217,6 @@ public class PicturePanel extends JPanel
         textArea.setText( comment );
         panel.setToolTipText( comment );
         panel.setImagePanel( ( isPicture ? ( pic.getPicture() == null ? null : pic.getPicture().getName() ) : null ) );
-        panel.setZoomed( model.isZoomed() );
     }
 
     /** This method is called from within the constructor to initialize the form. */

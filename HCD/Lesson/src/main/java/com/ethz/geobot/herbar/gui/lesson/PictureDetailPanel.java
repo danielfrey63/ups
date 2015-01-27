@@ -9,9 +9,12 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
+import static ch.jfactory.application.presentation.Constants.GAP_WITHIN_TOGGLES;
 import ch.jfactory.image.CachedImagePictureListCellRenderer;
 import ch.jfactory.resource.AsyncPictureLoaderListener;
+import ch.jfactory.resource.CachedImage;
 import ch.jfactory.resource.CachedImagePicture;
+import static ch.jfactory.resource.CachedImagePictureSortingAlgorithm.ByName;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Image;
@@ -20,7 +23,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultButtonModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -32,9 +34,6 @@ import net.java.jveez.ui.thumbnails.ThumbnailList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static ch.jfactory.application.presentation.Constants.GAP_WITHIN_TOGGLES;
-import static ch.jfactory.resource.CachedImagePictureSortingAlgorithm.ByName;
-
 /**
  * This control is used to display the Pictures with zooming support
  *
@@ -45,11 +44,9 @@ public class PictureDetailPanel extends JPanel
 {
     public static final String IMAGE = "IMAGE";
 
-    public static final String ZOOM = "ZOOM";
-
     private static final Logger LOGGER = LoggerFactory.getLogger( PictureDetailPanel.class );
 
-    private ZoomingImageComponent imagePanel;
+    private CachedImageComponent imagePanel;
 
     private final PictureCache cache;
 
@@ -85,7 +82,7 @@ public class PictureDetailPanel extends JPanel
     public boolean isShowing()
     {
         final boolean b = super.isShowing();
-        if ( b && ( getParent() != null ) )
+        if ( b && (getParent() != null) )
         {
             final Container parent = this.getParent();
             if ( parent instanceof JTabbedPane )
@@ -109,11 +106,10 @@ public class PictureDetailPanel extends JPanel
         cache.clearCachingList();
     }
 
-    public void addImage( final String name, final int counter, final String toolTip )
+    public void addImage( final String name, final int counter )
     {
         LOGGER.debug( "adding image \"" + name + "\" to picture details panel" );
         final CachedImagePicture picture = new CachedImagePicture( cache.getCachedImage( name ), name );
-        final int size = list.size();
         picture.attach( new AsyncPictureLoaderListener()
         {
             public void loadFinished( final String name, final Image img, final boolean thumb )
@@ -148,11 +144,11 @@ public class PictureDetailPanel extends JPanel
         add( imagePanel, BorderLayout.CENTER );
     }
 
-    private ZoomingImageComponent createImageComponent()
+    private CachedImageComponent createImageComponent()
     {
-        final ZoomingImageComponent image;
+        final CachedImageComponent image;
         final int gap = GAP_WITHIN_TOGGLES;
-        image = new ZoomingImageComponent( cache );
+        image = new CachedImageComponent( cache );
         image.setBorder( BorderFactory.createEmptyBorder( gap, gap, gap, gap ) );
         return image;
     }
@@ -172,7 +168,7 @@ public class PictureDetailPanel extends JPanel
             {
                 if ( !e.getValueIsAdjusting() )
                 {
-                    final String img = imagePanel.getImage();
+                    final CachedImage img = imagePanel.getImage();
                     final CachedImagePicture picture = (CachedImagePicture) thumbPanel.getSelectedValue();
                     final String name = picture == null ? null : picture.getName();
                     imagePanel.setImage( name );
@@ -188,63 +184,4 @@ public class PictureDetailPanel extends JPanel
     {
         propertySupport.addPropertyChangeListener( l );
     }
-
-    public void setZoomed( final boolean b )
-    {
-        final boolean old = imagePanel.isZoomed();
-        if ( b == old )
-        {
-            return;
-        }
-        imagePanel.setZoom( b );
-        propertySupport.firePropertyChange( ZOOM, Boolean.valueOf( old ), Boolean.valueOf( b ) );
-    }
-
-    private class ToggleButtonModel extends DefaultButtonModel
-    {
-        public void setSelected( final boolean b )
-        {
-            if ( isSelected() == b )
-            {
-                return;
-            }
-            if ( b )
-            {
-                stateMask |= SELECTED;
-            }
-            else
-            {
-                stateMask &= ~SELECTED;
-            }
-            setZoomed( b );
-        }
-
-        public void setPressed( final boolean b )
-        {
-            if ( ( isPressed() == b ) || !isEnabled() )
-            {
-                return;
-            }
-            if ( !b && isArmed() )
-            {
-                setSelected( !isSelected() );
-            }
-
-            if ( b )
-            {
-                stateMask |= PRESSED;
-            }
-            else
-            {
-                stateMask &= ~PRESSED;
-            }
-
-        }
-
-        public boolean isSelected()
-        {
-            return imagePanel.isZoomed();
-        }
-    }
-
 }

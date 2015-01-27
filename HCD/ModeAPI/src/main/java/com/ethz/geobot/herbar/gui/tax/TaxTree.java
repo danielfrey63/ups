@@ -29,14 +29,16 @@
  */
 package com.ethz.geobot.herbar.gui.tax;
 
-import ch.jfactory.component.tree.SearchableTree;
+import ch.jfactory.component.tree.TreeUtils;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.event.ModelChangeEvent;
 import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import java.util.Enumeration;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -49,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class TaxTree extends SearchableTree implements ModelChangeListener
+public class TaxTree extends JTree implements ModelChangeListener
 {
     private final static Logger LOG = LoggerFactory.getLogger( TaxTree.class );
 
@@ -75,11 +77,11 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
         if ( tax != null )
         {
             DefaultTaxonTreeNode.clearCache();
-            setRootTreeNode( createTaxonTreeNode( tax ) );
+            setModel( new DefaultTreeModel( createTaxonTreeNode( tax ) ) );
         }
         else
         {
-            setRootTreeNode( EMPTY_TREE );
+            setModel( new DefaultTreeModel( EMPTY_TREE ) );
         }
         revalidate();
         repaint();
@@ -148,7 +150,8 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
         {
             TreePath tp = new TreePath( getModel().getRoot() );
             tp = getTreePathForTaxon( tp, taxon );
-            setSelection( tp );
+            setSelectionPath( tp );
+            TreeUtils.ensureVisibility( this, tp );
         }
         else
         {

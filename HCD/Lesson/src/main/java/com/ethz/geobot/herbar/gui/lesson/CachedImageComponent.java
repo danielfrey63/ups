@@ -43,15 +43,6 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
     private Dimension size;
 
     public static Border BORDER = BorderFactory.createEmptyBorder( 1, 1, 1, 1 );
-//    public static Border BORDER = BorderFactory.createCompoundBorder( BorderFactory.createLineBorder( Color.red, 1 ), BorderFactory.createEmptyBorder( 10, 10, 10, 10 ) );
-
-    public CachedImageComponent( final PictureCache cache, final int fixedSize )
-    {
-        this.cache = cache;
-        this.setBorder( BORDER );
-        this.fixedSize = fixedSize;
-        this.size = new Dimension( fixedSize, fixedSize );
-    }
 
     public CachedImageComponent( final PictureCache cache )
     {
@@ -102,41 +93,6 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
         return cachedImage;
     }
 
-    public Dimension getMaximumSize()
-    {
-        return getPreferredSize();
-    }
-
-    public Dimension getMinimumSize()
-    {
-        return getPreferredSize();
-    }
-
-    public synchronized Dimension getPreferredSize()
-    {
-        super.getPreferredSize();
-        if ( cachedImage == null || cachedImage.getSize() == null )
-        {
-            return minimumSize;
-        }
-        if ( size != null )
-        {
-            return size;
-        }
-        size = new Dimension();
-        final Insets i = getInsets();
-        final int w = i.right + i.left;
-        final int h = i.top + i.bottom;
-        final Dimension s = cachedImage.getSize();
-        double factor = zoomFactor;
-        if ( fixedSize > 0 )
-        {
-            factor *= fixedSize / Math.max( s.getWidth(), s.getHeight() );
-        }
-        size.setSize( ( s.width * factor ) + w, ( s.height * factor ) + h );
-        return size;
-    }
-
     private void loadImage()
     {
         if ( cachedImage != null )
@@ -155,7 +111,7 @@ public class CachedImageComponent extends JComponent implements AsyncPictureLoad
         Image im = ( cachedImage == null ) ? null : cachedImage.getImage( false );
         if ( im != null )
         {
-            final Dimension p = getPreferredSize();
+            final Dimension p = getSize();
             final double wi = p.width - w / 2;
             final double he = p.height - h / 2;
             final int iw = im.getWidth( null );

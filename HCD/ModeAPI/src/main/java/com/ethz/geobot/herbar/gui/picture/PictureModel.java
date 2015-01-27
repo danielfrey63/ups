@@ -22,12 +22,13 @@
  */
 package com.ethz.geobot.herbar.gui.picture;
 
+import ch.jfactory.collection.cursor.ArrayCursor;
 import ch.jfactory.collection.cursor.Cursor;
-import ch.jfactory.collection.cursor.DefaultCursor;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
+import java.lang.reflect.Array;
 import java.util.Iterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ public class PictureModel
 
     private Taxon taxon;
 
-    private Cursor[] cursors;
+    private Cursor<CommentedPicture>[] cursors;
 
     private int selected;
 
@@ -155,7 +156,7 @@ public class PictureModel
         }
         if ( cursors[idx] == null )
         {
-            cursors[idx] = new DefaultCursor( getTaxon().getCommentedPictures( themes[idx] ) );
+            cursors[idx] = new ArrayCursor<CommentedPicture>( getTaxon().getCommentedPictures( themes[idx] ) );
         }
         return cursors[idx];
     }

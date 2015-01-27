@@ -134,15 +134,15 @@ public class TaxStateModel
         }
     }
 
-    public void setLevel( final Level level )
+    public void setLevel( final Taxon taxon )
     {
-        if ( level != null && level != vals.level )
+        if ( taxon != null && taxon.getLevel() != vals.level )
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-            setInternalLevel( fire, level );
+            setInternalLevel( fire, taxon.getLevel() );
             setInternalTaxList( fire );
             setInternalOrdered( fire, vals.ordered );
-            setInternalFocus( fire, taxList[0] );
+            setInternalFocus( fire, taxon );
             fireAllPropertyChangeEvents( fire );
         }
     }

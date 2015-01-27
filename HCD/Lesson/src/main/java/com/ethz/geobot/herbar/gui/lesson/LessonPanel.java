@@ -86,6 +86,7 @@ public class LessonPanel extends ModeActivationPanel
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool( 1 );
 
     private JLabel downloadStatus = new JLabel();
+
     private PictureCache backgroundCache;
 
     /**
@@ -110,7 +111,7 @@ public class LessonPanel extends ModeActivationPanel
             taxStateModel = new TaxStateModel( context, herbarModel );
 
             pictureModel = new PictureModel( herbarModel.getPictureThemes() );
-            cache = new PictureCache( new LessonCachingExceptionHandler( this ), ImageLocator.PICT_LOCATOR );
+            cache = new PictureCache( "Main-Image-Thread", new LessonCachingExceptionHandler( this ), ImageLocator.PICT_LOCATOR );
 
             final JSplitPane splitPane = new NiceSplitPane();
             splitPane.add( picturePanel = new PicturePanel( herbarModel.getPictureThemes(), pictureModel, cache ), LEFT );
@@ -188,7 +189,7 @@ public class LessonPanel extends ModeActivationPanel
         if ( backgroundCache == null )
         {
             backgroundCache = new PictureCache(
-                    new LessonCachingExceptionHandler( this ),
+                    "Background-Image-Thread", new LessonCachingExceptionHandler( this ),
                     new NestedImageCache( new ImageCache[0],
                             new FileImageCache( ImageLocator.getPicturePath(), "jpg" ),
                             new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) ) );
@@ -205,7 +206,7 @@ public class LessonPanel extends ModeActivationPanel
             cache.addPropertyChangeListener( RESUME, new PropertyChangeListener()
             {
                 @Override
-                public void propertyChange( PropertyChangeEvent evt )
+                public void propertyChange( PropertyChangeEvent e )
                 {
                     LOG.info( "switching to main image loader" );
                     backgroundCache.suspend();

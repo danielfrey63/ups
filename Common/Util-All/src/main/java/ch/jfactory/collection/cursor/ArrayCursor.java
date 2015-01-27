@@ -21,11 +21,11 @@ import org.slf4j.LoggerFactory;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $
  */
-class ArrayCursor<T> implements Cursor<T>
+public class ArrayCursor<T> implements Cursor<T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( ArrayCursor.class );
 
-    private final T[] objects;
+    private T[] objects;
 
     private int currentIndex = 0;
 
@@ -36,24 +36,24 @@ class ArrayCursor<T> implements Cursor<T>
 
     public T next()
     {
-        currentIndex = ( currentIndex < getSize() ) ? ++currentIndex : getSize();
+        currentIndex = (currentIndex < getSize()) ? ++currentIndex : getSize();
         return objects[currentIndex];
     }
 
     public T previous()
     {
-        currentIndex = ( currentIndex == 0 ) ? 0 : --currentIndex;
+        currentIndex = (currentIndex == 0) ? 0 : --currentIndex;
         return objects[currentIndex];
     }
 
     public boolean hasNext()
     {
-        return ( currentIndex < getSize() - 1 );
+        return (currentIndex < getSize() - 1);
     }
 
     public boolean hasPrevious()
     {
-        return ( currentIndex > 0 );
+        return (currentIndex > 0);
     }
 
     public int getCurrentIndex()
@@ -96,6 +96,12 @@ class ArrayCursor<T> implements Cursor<T>
         LOGGER.info( "Error setting Current Object to " + obj );
     }
 
+    public void setCollection( final T[] obj )
+    {
+        objects = obj;
+        currentIndex = 0;
+    }
+
     /**
      * check if the cursor is empty.
      *
@@ -103,7 +109,7 @@ class ArrayCursor<T> implements Cursor<T>
      */
     public boolean isEmpty()
     {
-        return ( getSize() == 0 );
+        return (getSize() == 0);
     }
 
     public Iterator<T> getIterator()

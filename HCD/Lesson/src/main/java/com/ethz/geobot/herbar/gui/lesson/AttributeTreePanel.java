@@ -40,14 +40,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.ListSelectionModel;
+import java.util.List;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.TreePath;
 
@@ -110,10 +106,10 @@ public class AttributeTreePanel extends JPanel
         final TreePath[] paths = tree.getSelectionPaths();
         if ( e.isPopupTrigger() && paths != null && paths.length > 0 )
         {
-            final GraphNodeList intersectionInCurrentList = getIntersectionInCurrentList( getSimilarTaxa( paths ) );
-            final Taxon[] taxa = sortTaxa( intersectionInCurrentList );
+            final Taxon[] taxa = getIntersectionInCurrentList( getSimilarTaxa( paths ) );
+            Arrays.sort( taxa, new ToStringComparator<Object>() );
             final JPopupMenu menu = new JPopupMenu();
-            if ( intersectionInCurrentList.size() > THRESHOLD )
+            if ( taxa.length > THRESHOLD )
             {
                 menu.add( getListDialog( taxa ) );
             }
@@ -127,17 +123,20 @@ public class AttributeTreePanel extends JPanel
         }
     }
 
-    private GraphNodeList getIntersectionInCurrentList( final GraphNodeList intersection )
+    private Taxon[] getIntersectionInCurrentList( final GraphNodeList intersection )
     {
+        final List<Taxon> result = new ArrayList<Taxon>();
         for ( int i = 0; i < intersection.size(); i++ )
         {
             final GraphNode taxon = intersection.get( i );
-            if ( taxStateModel.getModel().getTaxon( taxon.getName() ) == null )
+            final Taxon currentTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
+            intersection.remove( taxon );
+            if ( currentTaxon != null )
             {
-                intersection.remove( taxon );
+                result.add( currentTaxon );
             }
         }
-        return intersection;
+        return result.toArray( new Taxon[result.size()] );
     }
 
     private JMenu getPopUp( final Taxon[] copy )
@@ -164,7 +163,7 @@ public class AttributeTreePanel extends JPanel
 
     private void setNewFocus( final Taxon taxon )
     {
-        taxStateModel.setLevel( taxon.getLevel() );
+        taxStateModel.setLevel( taxon );
         taxStateModel.setFocus( taxon );
     }
 
@@ -187,16 +186,6 @@ public class AttributeTreePanel extends JPanel
             }
         } );
         return item;
-    }
-
-    private Taxon[] sortTaxa( final GraphNodeList intersection )
-    {
-        final Object[] list = intersection.getAll();
-        final int length = list.length;
-        final Taxon[] copy = new Taxon[length];
-        System.arraycopy( list, 0, copy, 0, length );
-        Arrays.sort( copy, new ToStringComparator<Object>() );
-        return copy;
     }
 
     private GraphNodeList getSimilarTaxa( final TreePath[] paths )
@@ -225,7 +214,7 @@ public class AttributeTreePanel extends JPanel
         Level level = taxon.getLevel();
         if ( stopperLevel == null || stopperLevel.isHigher( level ) )
         {
-            while ( level != null && ( stopperLevel != null && stopperLevel.isHigher( level ) || stopperLevel == null ) )
+            while ( level != null && (stopperLevel != null && stopperLevel.isHigher( level ) || stopperLevel == null) )
             {
                 vRoot.addChild( 0, taxon.getAsGraphNode() );
                 taxon = taxon.getParentTaxon();

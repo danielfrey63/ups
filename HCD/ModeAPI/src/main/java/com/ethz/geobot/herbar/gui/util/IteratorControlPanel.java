@@ -22,19 +22,15 @@
  */
 package com.ethz.geobot.herbar.gui.util;
 
-import ch.jfactory.collection.cursor.CursorChangeEvent;
-import ch.jfactory.collection.cursor.CursorChangeListener;
-import ch.jfactory.collection.cursor.DefaultNotifiableCursor;
+import ch.jfactory.collection.cursor.ArrayCursor;
+import ch.jfactory.collection.cursor.Cursor;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.resource.Strings;
+import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * User interactive control to set position inside a list of object (Taxon etc.). First, you have to register the IteratorPositionChangeListener to the control. Then set the list using the setList method.
@@ -42,9 +38,9 @@ import javax.swing.SwingConstants;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class IteratorControlPanel extends JPanel implements CursorChangeListener
+public class IteratorControlPanel extends JPanel
 {
-    private final DefaultNotifiableCursor cursor = new DefaultNotifiableCursor();
+    private final Cursor<Taxon> cursor = new ArrayCursor<Taxon>( new Taxon[0] );
 
     private JButton previous;
 
@@ -79,14 +75,14 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         positionInfoText.setEnabled( isEnabled );
     }
 
-    public void setCursor( final Object[] objects )
+    public void setList( final Taxon[] objects )
     {
-        cursor.setCursor( objects );
+        cursor.setCollection( objects );
     }
 
-    public DefaultNotifiableCursor getIteratorCursor()
+    private void setCurrent( Taxon taxon )
     {
-        return cursor;
+        cursor.setCurrent( taxon );
     }
 
     public synchronized void addIteratorControlListener( final IteratorControlListener listener )
@@ -98,9 +94,10 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         iteratorControlListenerList.add( listener );
     }
 
-    public void cursorChange( final CursorChangeEvent event )
+    public void updateControlState( final Taxon taxon )
     {
-        // update control state
+        setCurrent( taxon );
+
         next.setEnabled( isEnabled && cursor.hasNext() );
         previous.setEnabled( isEnabled && cursor.hasPrevious() );
 
@@ -109,8 +106,6 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         final String to = (cursor.isEmpty() ? "0" : "" + cursor.getSize());
         final String text = Strings.getString( "ITERATOR.TEXT", prefix + from, to );
         positionInfoText.setText( text );
-
-        fireItemChange( new IteratorControlEvent( event.getCurrentObject() ) );
     }
 
     protected void fireItemChange( final IteratorControlEvent event )
@@ -138,7 +133,6 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         previous = createPrevButton();
         next = createNextButton();
         positionInfoText = createPositionLabel();
-        cursor.addCursorChangeListener( this );
     }
 
     private JLabel createPositionLabel()
@@ -158,7 +152,8 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         {
             public void actionPerformed( final ActionEvent e )
             {
-                nextActionPerformed();
+                cursor.next();
+                fireItemChange( new IteratorControlEvent( cursor.getCurrent() ) );
             }
         };
         return ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
@@ -170,20 +165,11 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
         {
             public void actionPerformed( final ActionEvent e )
             {
-                previousActionPerformed();
+                cursor.previous();
+                fireItemChange( new IteratorControlEvent( cursor.getCurrent() ) );
             }
         };
         return ComponentFactory.createButton( "BUTTON.NAVIGATION.PREV", action );
-    }
-
-    protected void previousActionPerformed()
-    {
-        cursor.previous();
-    }
-
-    protected void nextActionPerformed()
-    {
-        cursor.next();
     }
 
     public JButton getNextButton()
@@ -199,10 +185,5 @@ public class IteratorControlPanel extends JPanel implements CursorChangeListener
     public JComponent getDisplay()
     {
         return positionInfoText;
-    }
-
-    public void reset()
-    {
-        cursorChange( new CursorChangeEvent( cursor ) );
     }
 }

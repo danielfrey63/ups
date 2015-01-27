@@ -82,6 +82,7 @@ public interface Cursor<T>
      */
     void setCurrent( T obj );
 
+    void setCollection( T[] obj );
     /**
      * return an iterator for all objects. Iteration over it doesn't change the cursor position.
      *

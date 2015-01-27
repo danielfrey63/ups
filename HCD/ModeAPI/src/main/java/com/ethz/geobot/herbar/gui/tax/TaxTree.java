@@ -55,54 +55,14 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
 
     private final static TreeNode EMPTY_TREE = new DefaultMutableTreeNode();
 
-    /** Creates a new instance of TaxTreePanel */
+    /**
+     * Creates a new instance of TaxTreePanel
+     */
     public TaxTree()
     {
         super( EMPTY_TREE );
         this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
         setCellRenderer( new TaxTreeCellRenderer() );
-    }
-
-    /**
-     * Creates a new instance of TaxTreePanel
-     *
-     * @param root the root node to display
-     */
-    public TaxTree( final Taxon root )
-    {
-        super( createTaxonTreeNode( root ) );
-        this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
-        setCellRenderer( new TaxTreeCellRenderer() );
-    }
-
-    /**
-     * initialize a tax tree which displays all taxa in a {@link HerbarModel} Add itself as a {@link ModelChangeListener} to the given {@link HerbarModel}
-     *
-     * @param model the model to be shown
-     */
-    public TaxTree( final HerbarModel model )
-    {
-        this( model.getRootTaxon() );
-        this.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
-        model.addModelChangeListener( this );
-    }
-
-    /**
-     * initialize a tax tree with a new {@link HerbarModel} Add itself as a {@link ModelChangeListener} to the given {@link HerbarModel}
-     *
-     * @param model the model to be shown or null for an empty model
-     */
-    public void setHerbarModel( final HerbarModel model )
-    {
-        if ( model != null )
-        {
-            setRootTaxon( model.getRootTaxon() );
-            model.addModelChangeListener( this );
-        }
-        else
-        {
-            setRootTaxon( null );
-        }
     }
 
     /**
@@ -123,16 +83,6 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
         }
         revalidate();
         repaint();
-    }
-
-    /**
-     * return the root object as TreeNode.
-     *
-     * @return the root TreeNode object
-     */
-    public TreeNode getRootAsTreeNode()
-    {
-        return (TreeNode) this.getModel().getRoot();
     }
 
     /**
@@ -213,56 +163,3 @@ public class TaxTree extends SearchableTree implements ModelChangeListener
         setRootTaxon( model.getRootTaxon() );
     }
 }
-
-// $Log: TaxTree.java,v $
-// Revision 1.1  2007/09/17 11:07:08  daniel_frey
-// - Version 3.0.20070401
-//
-// Revision 1.20  2005/06/17 06:39:58  daniel_frey
-// New ActionButton icons and some corrections on documentation
-//
-// Revision 1.19  2004/08/31 22:10:16  daniel_frey
-// Examlist loading working
-//
-// Revision 1.18  2004/04/25 13:56:42  daniel_frey
-// Moved Dialogs from Herbars modeapi to xmatrix
-//
-// Revision 1.17  2003/04/02 14:49:03  daniel_frey
-// - Revised wizards
-//
-// Revision 1.16  2003/02/18 17:04:02  dirk_hoffmann
-// correct FilterModel issues
-//
-// Revision 1.15  2003/02/18 02:30:51  dirk_hoffmann
-// correct wizard problems
-//
-// Revision 1.14  2003/02/12 19:13:26  dirk_hoffmann
-// delete FilterDefinition
-//
-// Revision 1.13  2003/01/23 10:54:27  daniel_frey
-// - Optimized imports
-//
-// Revision 1.12  2003/01/22 12:26:54  daniel_frey
-// - Removed bug where null Taxon was mapped to root tree node in setSelectedTaxon.
-//
-// Revision 1.11  2003/01/22 11:57:29  daniel_frey
-// - Moved setSelection definitively to super class
-//
-// Revision 1.10  2002/09/13 11:40:25  dirk
-// fix null selection problem
-//
-// Revision 1.9  2002/09/12 13:41:45  dirk
-// suppport null in setRootTaxon
-//
-// Revision 1.8  2002/09/12 12:17:12  dirk
-// add support for empty TaxTree
-//
-// Revision 1.7  2002/08/05 11:27:12  Dani
-// - Moved to ch.xmatrix
-//
-// Revision 1.6  2002/08/02 00:42:18  Dani
-// Optimized import statements
-//
-// Revision 1.5  2002/07/11 13:56:29  dirk
-// add setSelectedTaxon method
-//

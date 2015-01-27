@@ -60,20 +60,3 @@ public class SearchableTree extends JTree implements TreeFinder
         TreeUtils.ensureVisibility( this, tp );
     }
 }
-
-// $Log: SearchableTree.java,v $
-// Revision 1.3  2006/03/14 21:27:55  daniel_frey
-// *** empty log message ***
-//
-// Revision 1.2  2005/11/17 11:54:58  daniel_frey
-// no message
-//
-// Revision 1.1  2005/06/16 06:28:58  daniel_frey
-// Completely merged and finished for UST version 2.0-20050616
-//
-// Revision 1.1  2004/04/19 10:31:21  daniel_frey
-// Replaced top level package com by ch
-//
-// Revision 1.7  2003/03/09 14:44:26  daniel_frey
-// - Enhancements in key handling
-//

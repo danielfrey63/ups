@@ -29,7 +29,7 @@ public class EditBarBuilder implements Builder
 
     public EditBarBuilder( final HerbarContext context, final TaxStateModel taxStateModel )
     {
-        final JToggleButton editButton = ComponentFactory.createToggleButton( EditBarBuilder.class, "BUTTON.EDIT", new ActionListener()
+        final JToggleButton editButton = ComponentFactory.createToggleButton( LessonMode.class, "BUTTON.EDIT", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
@@ -37,7 +37,7 @@ public class EditBarBuilder implements Builder
                 taxStateModel.setEditMode( taxStateModel.getEditMode() == MODIFY ? USE : MODIFY );
             }
         } );
-        final JButton newList = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.NEW", new ActionListener()
+        final JButton newList = ComponentFactory.createButton( LessonMode.class, "BUTTON.NEW", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
@@ -50,7 +50,7 @@ public class EditBarBuilder implements Builder
                 context.saveModel( newModel );
             }
         } );
-        final JButton renameButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.RENAME", new ActionListener()
+        final JButton renameButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.RENAME", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
@@ -62,7 +62,7 @@ public class EditBarBuilder implements Builder
                 }
             }
         } );
-        final JButton deleteButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.DELETE", new ActionListener()
+        final JButton deleteButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.DELETE", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
@@ -71,7 +71,7 @@ public class EditBarBuilder implements Builder
                 taxStateModel.setModel( context.getModel( System.getProperty( "herbar.model.default", "" ) ) );
             }
         } );
-        final JButton copyButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.COPY", new ActionListener()
+        final JButton copyButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.COPY", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
@@ -89,7 +89,7 @@ public class EditBarBuilder implements Builder
                 }
             }
         } );
-        final JButton collapseButton = ComponentFactory.createButton( EditBarBuilder.class, "BUTTON.COLLAPSE", new ActionListener()
+        final JButton collapseButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.COLLAPSE", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )

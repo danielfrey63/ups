@@ -9,8 +9,8 @@
  */
 package ch.jfactory.component;
 
+import ch.jfactory.collection.cursor.ArrayCursor;
 import ch.jfactory.collection.cursor.Cursor;
-import ch.jfactory.collection.cursor.DefaultCursor;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
     public ObjectPopup( final String title, final T[] objects )
     {
         super( title );
-        setCursor( new DefaultCursor<T>( objects ) );
+        setCursor( new ArrayCursor<T>( objects ) );
     }
 
     public ObjectPopup( final T[] objects )
@@ -37,7 +37,7 @@ public abstract class ObjectPopup<T> extends JPopupMenu implements ActionListene
 
     public void setObjects( final T[] objects )
     {
-        setCursor( new DefaultCursor<T>( objects ) );
+        setCursor( new ArrayCursor<T>( objects ) );
     }
 
     public void showPopUp( final Component jb )

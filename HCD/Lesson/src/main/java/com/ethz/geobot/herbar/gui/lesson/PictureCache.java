@@ -84,10 +84,10 @@ public class PictureCache
     /**
      * PictureCache taking images from directory
      */
-    public PictureCache( final CachingExceptionHandler handler, final ImageCache locator )
+    public PictureCache( final String name, final CachingExceptionHandler handler, final ImageCache locator )
     {
         this.locator = locator;
-        cachingThread = new CacheImageThread( handler );
+        cachingThread = new CacheImageThread( name, handler );
         cachingThread.setPriority( Thread.MIN_PRIORITY );
         cachingThread.start();
     }
@@ -99,9 +99,9 @@ public class PictureCache
     {
         synchronized ( queue )
         {
-            final boolean old = queue.size() == 0;
+            final int old = queue.size();
             queue.clear();
-            propertyChangeSupport.firePropertyChange( WAITING, old, true );
+            propertyChangeSupport.firePropertyChange( WAITING, old == 0, true );
             maxSize = 0;
         }
         LOG.debug( "caching list cleared" );
@@ -138,8 +138,8 @@ public class PictureCache
         if ( !getCachedImage( name ).isLoaded( thumb ) )
         {
             LOG.trace( "cached image " + name + " not loaded yet" );
+            final int old = queue.size();
             final boolean isNew;
-            final boolean old = queue.size() == 0;
             synchronized ( queue )
             {
                 isNew = !queue.contains( name );
@@ -166,7 +166,7 @@ public class PictureCache
             }
             if ( isNew )
             {
-                propertyChangeSupport.firePropertyChange( RESUME, old, true );
+                propertyChangeSupport.firePropertyChange( RESUME, old > 0, true );
                 synchronized ( cachingThread )
                 {
                     cachingThread.notify();
@@ -278,10 +278,10 @@ public class PictureCache
     {
         private final CachingExceptionHandler handler;
 
-        public CacheImageThread( final CachingExceptionHandler handler )
+        public CacheImageThread( final String name, final CachingExceptionHandler handler )
         {
+            setName( name );
             this.handler = handler;
-            setName( "Caching-Image-Thread" );
         }
 
         public void run()
@@ -383,7 +383,7 @@ public class PictureCache
 
         public static void main( String[] args )
         {
-            cache = new PictureCache( new CachingExceptionHandler()
+            cache = new PictureCache( "Test-Thread", new CachingExceptionHandler()
             {
                 @Override
                 public void handleCachingException( Throwable e )

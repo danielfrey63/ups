@@ -31,13 +31,7 @@ import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.LIST;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.ORDER;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.RENAME;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.TAXA;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
 import com.ethz.geobot.herbar.gui.util.IteratorControlPanel;
@@ -45,10 +39,7 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.NORTH;
-import static java.awt.BorderLayout.SOUTH;
-import static java.awt.BorderLayout.WEST;
+import static java.awt.BorderLayout.*;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -139,7 +130,7 @@ public class LessonBar extends JPanel
     private IteratorControlPanel createTaxonControl()
     {
         final IteratorControlPanel panel = new IteratorControlPanel( Strings.getString( LessonMode.class, "BUTTON.NAVIGATION.PREFIX" ) );
-        panel.setCursor( taxStateModel.getTaxList() );
+        panel.setList( taxStateModel.getTaxList() );
         panel.addIteratorControlListener( new IteratorControlListener()
         {
             @Override
@@ -218,7 +209,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                taxonControl.setCursor( taxStateModel.getTaxList() );
+                taxonControl.setList( taxStateModel.getTaxList() );
             }
         } );
         taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
@@ -226,8 +217,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final Taxon focus = (Taxon) e.getNewValue();
-                taxonControl.getIteratorCursor().setCurrent( focus );
+                taxonControl.updateControlState( (Taxon) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()

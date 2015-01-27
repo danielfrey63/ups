@@ -433,7 +433,7 @@ public class NavigationBuilder implements Builder
         {
             if ( taxStateModel.getLevel() == null || !taxStateModel.getLevel().equals( taxon.getLevel() ) )
             {
-                taxStateModel.setLevel( taxon.getLevel() );
+                taxStateModel.setLevel( taxon );
                 taxTree.repaint();
             }
         }

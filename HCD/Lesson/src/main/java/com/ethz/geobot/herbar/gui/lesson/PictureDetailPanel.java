@@ -177,6 +177,7 @@ public class PictureDetailPanel extends JPanel
             }
         } );
         thumbPanel.setCellRenderer( new CachedImagePictureListCellRenderer() );
+
         return thumbPanel;
     }
 

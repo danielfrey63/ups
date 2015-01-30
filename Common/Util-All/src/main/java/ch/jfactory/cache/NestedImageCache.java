@@ -48,12 +48,12 @@ public class NestedImageCache implements ImageCache
         disabled.add( cache );
     }
 
-    public void invalidateCache( final ImageCache cache ) throws ImageCacheException
+    public void invalidateCache( final ImageCache cache ) throws ImageRetrieveException
     {
         cache.invalidateCache();
     }
 
-    public BufferedImage getImage( final String name ) throws ImageCacheException
+    public BufferedImage getImage( final String name ) throws ImageRetrieveException, ImageCacheException
     {
         int retryCount = MAX_RETRY_COUNT;
         BufferedImage image = null;
@@ -72,7 +72,7 @@ public class NestedImageCache implements ImageCache
                     {
                         if ( e.getCause() instanceof OutOfMemoryError )
                         {
-                            LOG.warn( "trying to free memory for the " + ( MAX_RETRY_COUNT - retryCount ) + ". time" );
+                            LOG.warn( "trying to free memory for the " + (MAX_RETRY_COUNT - retryCount) + ". time" );
                             System.runFinalization();
                             System.gc();
                         }
@@ -111,7 +111,7 @@ public class NestedImageCache implements ImageCache
         return allHaveIt;
     }
 
-    public void invalidateCache() throws ImageCacheException
+    public void invalidateCache() throws ImageRetrieveException
     {
         for ( final ImageCache cache : cachesToInvalidate )
         {

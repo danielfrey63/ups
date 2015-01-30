@@ -12,6 +12,7 @@ package ch.jfactory.resource;
 import ch.jfactory.cache.FileImageCache;
 import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.cache.ImageRetrieveException;
 import ch.jfactory.cache.NestedImageCache;
 import ch.jfactory.cache.ResourceImageCache;
 import ch.jfactory.cache.UrlImageCache;
@@ -54,6 +55,11 @@ public class ImageLocator
         {
             return new ImageIcon( ICON_LOCATOR.getImage( name ) );
         }
+        catch ( ImageRetrieveException e )
+        {
+            LOGGER.error( "cannot retrieve icon for " + name, e );
+            return new ImageIcon( name );
+        }
         catch ( ImageCacheException e )
         {
             LOGGER.error( "cannot retrieve icon for " + name, e );
@@ -68,6 +74,11 @@ public class ImageLocator
             return new ImageIcon( PICT_LOCATOR.getImage( name ) );
         }
         catch ( ImageCacheException e )
+        {
+            LOGGER.error( "cannot retrieve picture for " + name, e );
+            return new ImageIcon( name );
+        }
+        catch ( ImageRetrieveException e )
         {
             LOGGER.error( "cannot retrieve picture for " + name, e );
             return new ImageIcon( name );

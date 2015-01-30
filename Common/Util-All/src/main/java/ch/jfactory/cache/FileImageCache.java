@@ -23,17 +23,21 @@ import org.slf4j.LoggerFactory;
  */
 public class FileImageCache implements ImageCache
 {
-    /** This class' logger. */
+    /**
+     * This class' logger.
+     */
     private static final Logger LOG = LoggerFactory.getLogger( FileImageCache.class );
 
-    /** The absolute path to search for images. */
+    /**
+     * The absolute path to search for images.
+     */
     private final String path;
 
     private final String format;
 
     public FileImageCache( final String path, final String format )
     {
-        this.path = ( path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path ) + "/";
+        this.path = (path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path) + "/";
         this.format = format;
         ensureDirectoryCreated( path );
     }
@@ -62,7 +66,7 @@ public class FileImageCache implements ImageCache
         return new File( path + image ).getAbsolutePath();
     }
 
-    public BufferedImage getImage( final String name ) throws ImageCacheException
+    public BufferedImage getImage( final String name ) throws ImageRetrieveException
     {
         final String path = locate( name );
         try
@@ -81,7 +85,7 @@ public class FileImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not retrieve image " + name + " from " + path, e, -1, this );
+            throw new ImageRetrieveException( "could not retrieve image " + name + " from " + path, e );
         }
     }
 
@@ -106,7 +110,7 @@ public class FileImageCache implements ImageCache
                     LOG.warn( "could not delete file " + file.getAbsolutePath() );
                 }
             }
-            throw new ImageCacheException( "could not cache image " + name + " to " + path, e, freeSpace, this );
+            throw new ImageCacheException( "could not cache image " + name + " to " + path, e, freeSpace );
         }
     }
 
@@ -118,12 +122,12 @@ public class FileImageCache implements ImageCache
         return exists;
     }
 
-    public void invalidateCache() throws ImageCacheException
+    public void invalidateCache() throws ImageRetrieveException
     {
         deleteFile( new File( path ) );
     }
 
-    private void deleteFile( final File file ) throws ImageCacheException
+    private void deleteFile( final File file ) throws ImageRetrieveException
     {
         final boolean isDirectory = file.isDirectory();
         final File[] files = file.listFiles();
@@ -138,8 +142,8 @@ public class FileImageCache implements ImageCache
         {
             if ( !file.delete() )
             {
-                final String message = "could not remove " + ( isDirectory ? "directory" : "file" ) + " " + file + " from cache";
-                throw new ImageCacheException( message, new IOException( message ), -1, this );
+                final String message = "could not remove " + (isDirectory ? "directory" : "file") + " " + file + " from cache";
+                throw new ImageRetrieveException( message, new IOException( message ) );
             }
         }
     }

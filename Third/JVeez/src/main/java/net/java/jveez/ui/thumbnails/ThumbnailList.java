@@ -155,14 +155,7 @@ public class ThumbnailList<T> extends JList
         }
 
         final int previousIndex = index - 1;
-        if ( previousIndex < 0 )
-        {
-            return numberOfPictures - 1;
-        }
-        else
-        {
-            return previousIndex;
-        }
+        return previousIndex < 0 ? numberOfPictures - 1 : previousIndex;
     }
 
     public int getIndexAfter( final int index )
@@ -175,14 +168,7 @@ public class ThumbnailList<T> extends JList
         }
 
         final int nextIndex = index + 1;
-        if ( nextIndex >= numberOfPictures )
-        {
-            return 0;
-        }
-        else
-        {
-            return nextIndex;
-        }
+        return nextIndex >= numberOfPictures ? 0 : nextIndex;
     }
 
     public int getNumberOfPictures()

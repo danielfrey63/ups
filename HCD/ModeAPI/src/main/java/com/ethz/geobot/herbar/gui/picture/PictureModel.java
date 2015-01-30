@@ -49,21 +49,9 @@ public class PictureModel
 
     private int selected;
 
-    private boolean zoomed = false;
-
     public PictureModel( final PictureTheme[] themes )
     {
         this.themes = themes;
-    }
-
-    public boolean isZoomed()
-    {
-        return zoomed;
-    }
-
-    public void setZoomed( final boolean b )
-    {
-        zoomed = b;
     }
 
     public void setPicture( final String name )

@@ -15,9 +15,9 @@ public interface ImageCache
 {
     boolean isCached( String name );
 
-    BufferedImage getImage( String name ) throws ImageCacheException;
+    BufferedImage getImage( String name ) throws ImageRetrieveException, ImageCacheException;
 
     void setImage( String name, BufferedImage image ) throws ImageCacheException;
 
-    void invalidateCache() throws ImageCacheException;
+    void invalidateCache() throws ImageRetrieveException;
 }

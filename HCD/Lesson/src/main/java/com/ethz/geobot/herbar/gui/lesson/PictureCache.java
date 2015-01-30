@@ -46,6 +46,8 @@ public class PictureCache
 
     public static final String RESUME = "RESUME";
 
+    public static final String FINISHED = "FINISHED";
+
     /**
      * This class' logger.
      */
@@ -249,6 +251,11 @@ public class PictureCache
         propertyChangeSupport.addPropertyChangeListener( reason, listener );
     }
 
+    public void removePropertyChangeListener( final String type, final PropertyChangeListener listener )
+    {
+        propertyChangeSupport.removePropertyChangeListener( type, listener );
+    }
+
     public interface CachingExceptionHandler
     {
         void handleCachingException( final Throwable e );
@@ -266,7 +273,6 @@ public class PictureCache
 
     public void stop()
     {
-        System.out.println( ">>> stopping..." );
         run = false;
         cachingThread.interrupt();
     }
@@ -295,6 +301,10 @@ public class PictureCache
                     {
                         if ( name == null || suspend )
                         {
+                            if ( name == null )
+                            {
+                                propertyChangeSupport.firePropertyChange( FINISHED, false, true );
+                            }
                             synchronized ( this )
                             {
                                 LOG.debug( "caching thread waiting" );

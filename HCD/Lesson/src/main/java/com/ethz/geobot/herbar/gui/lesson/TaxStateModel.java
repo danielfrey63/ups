@@ -24,6 +24,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.MODIFY;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
@@ -53,21 +54,20 @@ public class TaxStateModel
 
     private final HerbarContext context;
 
+    private final TaxStateValues vals = new TaxStateValues();
+
+    private final HashMap<String, SubMode> subModes = new HashMap<String, SubMode>();
+
     private Taxon[] taxList;
 
     private HerbarModel herbarModel;
 
-    private final TaxStateValues vals;
-
     private EditState listState = USE;
 
-    private final HashMap<String, SubMode> subModes = new HashMap<String, SubMode>();
-
-    public TaxStateModel( HerbarContext context, final HerbarModel herbarModel )
+    public TaxStateModel( final HerbarContext context )
     {
-        vals = new TaxStateValues();
         this.context = context;
-        setModel( herbarModel );
+        setModel( context.getDataModel() );
     }
 
     /**
@@ -97,6 +97,20 @@ public class TaxStateModel
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         fire.add( new FireArray( COLLAPSE.name(), false, true ) );
         fireAllPropertyChangeEvents( fire );
+    }
+
+    public void setNewModel( final HerbarModel model )
+    {
+        if ( model != null )
+        {
+            final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+            setInternalModel( fire, model );
+            setInternalScope( fire, model.getRootTaxon() );
+            setInternalLevel( fire, vals.level );
+            setInternalGlobalSubMode( fire, LERNEN );
+            setInternalEditMode( fire, MODIFY );
+            fireAllPropertyChangeEvents( fire );
+        }
     }
 
     /**
@@ -313,7 +327,7 @@ public class TaxStateModel
      */
     private void setInternalFocus( final ArrayList<FireArray> fire, final Taxon focus )
     {
-        if ( focus != null && !focus.equals( vals.focus ) )
+        if ( focus != null && focus != vals.focus )
         {
             fire.add( new FireArray( FOCUS.name(), vals.focus, focus ) );
             vals.focus = focus;
@@ -506,6 +520,12 @@ public class TaxStateModel
             this.name = name;
             this.oldVal = oldVal;
             this.newVal = newVal;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "FireArray[" + name + "," + oldVal + "," + newVal + "]";
         }
     }
 }

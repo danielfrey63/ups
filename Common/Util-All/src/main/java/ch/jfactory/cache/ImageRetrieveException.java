@@ -24,36 +24,20 @@ package ch.jfactory.cache;
  *
  * @author Daniel Frey 05.02.11 14:31
  */
-public class ImageRetrieveException extends ImageCacheException
+public class ImageRetrieveException extends Exception
 {
-    private final long freeSpace;
-
-    private final ImageCache imageCache;
-
-    public ImageRetrieveException( final String message, final Throwable cause, final long freeSpace, final ImageCache imageCache )
+    public ImageRetrieveException( final String message, final Throwable cause )
     {
-        super( message, cause, freeSpace, imageCache );
-        this.freeSpace = freeSpace;
-        this.imageCache = imageCache;
-    }
-
-    public long getFreeSpace()
-    {
-        return freeSpace;
-    }
-
-    public ImageCache getImageCache()
-    {
-        return imageCache;
+        super( message, cause );
     }
 
     public boolean equals( final Object other )
     {
-        if ( !( other instanceof ImageRetrieveException ) )
+        if ( !(other instanceof ImageRetrieveException) )
         {
             return false;
         }
-        final Throwable otherCause = ( (ImageRetrieveException) other ).getCause();
+        final Throwable otherCause = ((ImageRetrieveException) other).getCause();
         final Throwable cause = getCause();
         return cause.getMessage().equals( otherCause.getMessage() );
     }

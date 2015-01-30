@@ -12,8 +12,6 @@ package ch.jfactory.cache;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Loads files from the file system.
@@ -22,18 +20,17 @@ import org.slf4j.LoggerFactory;
  */
 public class ResourceImageCache implements ImageCache
 {
-    /** This class' logger. */
-    private static final Logger LOG = LoggerFactory.getLogger( ResourceImageCache.class );
-
-    /** The classpath prefix to search for images. */
+    /**
+     * The classpath prefix to search for images.
+     */
     private final String path;
 
     public ResourceImageCache( final String path )
     {
-        this.path = ( path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path ) + "/";
+        this.path = (path.endsWith( "/" ) || path.endsWith( "\\" ) ? path.substring( 0, path.length() - 1 ) : path) + "/";
     }
 
-    public BufferedImage getImage( final String name ) throws ImageCacheException
+    public BufferedImage getImage( final String name ) throws ImageRetrieveException
     {
         final String path = locate( name );
         try
@@ -41,7 +38,7 @@ public class ResourceImageCache implements ImageCache
             final InputStream stream = getClass().getResourceAsStream( path );
             if ( stream == null )
             {
-                throw new ImageCacheException( "could not retrieve image " + name + " from " + path, new NullPointerException( "resource at path " + path + " not found" ), -1, this );
+                throw new ImageRetrieveException( "could not retrieve image " + name + " from " + path, new NullPointerException( "resource at path " + path + " not found" ) );
             }
             final BufferedImage image = ImageIO.read( stream );
             stream.close();
@@ -49,7 +46,7 @@ public class ResourceImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not load resource " + path, e, -1, this );
+            throw new ImageRetrieveException( "could not load resource " + path, e );
         }
     }
 

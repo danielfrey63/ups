@@ -25,13 +25,19 @@ import org.slf4j.LoggerFactory;
  */
 public class UrlImageCache implements ImageCache
 {
-    /** This class' logger. */
+    /**
+     * This class' logger.
+     */
     private static final Logger LOG = LoggerFactory.getLogger( UrlImageCache.class );
 
-    /** The absolute path to search for images. */
+    /**
+     * The absolute path to search for images.
+     */
     private final String url;
 
-    /** Write format string. */
+    /**
+     * Write format string.
+     */
     private final String format;
 
     public UrlImageCache( final String url, final String format )
@@ -59,7 +65,7 @@ public class UrlImageCache implements ImageCache
         return null;
     }
 
-    public BufferedImage getImage( final String name ) throws ImageCacheException
+    public BufferedImage getImage( final String name ) throws ImageCacheException, ImageRetrieveException
     {
         final URL url = locate( name );
         try
@@ -70,11 +76,11 @@ public class UrlImageCache implements ImageCache
         }
         catch ( IOException e )
         {
-            throw new ImageRetrieveException( "could not retrieve image " + name + " from " + url + " due to problem with the URL", e, -1, this );
+            throw new ImageRetrieveException( "could not retrieve image " + name + " from " + url + " due to problem with the URL", e );
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", e, -1, this );
+            throw new ImageCacheException( "could not retrieve image " + name + " from " + url + " due to unknown exception", e, -1 );
         }
     }
 
@@ -88,7 +94,7 @@ public class UrlImageCache implements ImageCache
         }
         catch ( Throwable e )
         {
-            throw new ImageCacheException( "could not cache image " + name + " to " + url, e, -1, this );
+            throw new ImageCacheException( "could not cache image " + name + " to " + url, e, -1 );
         }
     }
 
@@ -100,7 +106,7 @@ public class UrlImageCache implements ImageCache
             final String protocol = url.getProtocol();
             if ( protocol != null && "http".equals( protocol ) )
             {
-                return ( (HttpURLConnection) url.openConnection() ).getResponseCode() == 200;
+                return ((HttpURLConnection) url.openConnection()).getResponseCode() == 200;
             }
             else
             {
@@ -119,7 +125,7 @@ public class UrlImageCache implements ImageCache
         return false;
     }
 
-    public void invalidateCache() throws ImageCacheException
+    public void invalidateCache() throws ImageRetrieveException
     {
         try
         {
@@ -134,7 +140,7 @@ public class UrlImageCache implements ImageCache
         }
         catch ( IOException e )
         {
-            throw new ImageCacheException( "could not invalidate the cache at " + url, e, -1, this );
+            throw new ImageRetrieveException( "could not invalidate the cache at " + url, e );
         }
     }
 

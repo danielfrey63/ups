@@ -30,22 +30,23 @@ import ch.jfactory.component.split.NiceSplitPane;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
+import static com.ethz.geobot.herbar.gui.lesson.PictureCache.FINISHED;
 import static com.ethz.geobot.herbar.gui.lesson.PictureCache.RESUME;
 import static com.ethz.geobot.herbar.gui.lesson.PictureCache.WAITING;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.gui.picture.PictureModel;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
 import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
@@ -71,19 +72,17 @@ public class LessonPanel extends ModeActivationPanel
 {
     private final static Logger LOG;
 
-    private final TaxStateModel taxStateModel;
-
-    private final PropertyDisplay propertyDisplay;
-
-    private final PicturePanel picturePanel;
-
-    private final PictureModel pictureModel;
-
     private final PictureCache cache;
 
     private final HerbarContext context;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool( 1 );
+
+    private final NestedImageCache imageCache = new NestedImageCache( new ImageCache[0],
+            new FileImageCache( ImageLocator.getPicturePath(), "jpg" ),
+            new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );
+
+    private LessonCachingExceptionHandler exceptionHandler;
 
     private JLabel downloadStatus = new JLabel();
 
@@ -97,6 +96,7 @@ public class LessonPanel extends ModeActivationPanel
     public LessonPanel( final LessonMode mode )
     {
         LOG.info( "initiate mode panel" );
+
         /*
          * The constructor is called by reflection, so any exceptions occurring
          * during construction would be visible as a simple InvocationException.
@@ -108,14 +108,16 @@ public class LessonPanel extends ModeActivationPanel
             context = mode.getHerbarContext();
 
             final HerbarModel herbarModel = context.getDataModel();
-            taxStateModel = new TaxStateModel( context, herbarModel );
+            final TaxStateModel taxStateModel = new TaxStateModel( context );
+            final PictureModel pictureModel = new PictureModel( herbarModel.getPictureThemes() );
 
-            pictureModel = new PictureModel( herbarModel.getPictureThemes() );
-            cache = new PictureCache( "Main-Image-Thread", new LessonCachingExceptionHandler( this ), ImageLocator.PICT_LOCATOR );
+            exceptionHandler = new LessonCachingExceptionHandler( context.getHerbarGUIManager().getParentFrame() );
+
+            cache = new PictureCache( "Main-Image-Thread", exceptionHandler, ImageLocator.PICT_LOCATOR );
 
             final JSplitPane splitPane = new NiceSplitPane();
-            splitPane.add( picturePanel = new PicturePanel( herbarModel.getPictureThemes(), pictureModel, cache ), LEFT );
-            splitPane.add( propertyDisplay = new PropertyDisplay( context, taxStateModel ), RIGHT );
+            splitPane.add( new PicturePanel( taxStateModel, herbarModel.getPictureThemes(), pictureModel, cache ), LEFT );
+            splitPane.add( new PropertyDisplay( context, taxStateModel ), RIGHT );
 
             final JSplitPane navigationEtAll = new NiceSplitPane();
             navigationEtAll.add( new NavigationBuilder( context, taxStateModel ).getPanel(), LEFT );
@@ -129,12 +131,7 @@ public class LessonPanel extends ModeActivationPanel
 
             splitPane.setDividerLocation( 760 );
 
-            initListeners();
-
-            if ( System.getProperty( "xmatrix.subject", "" ).equals( ENV_SCIENTIFIC ) )
-            {
-                taxStateModel.setModel( context.getModel( System.getProperty( "herbar.model.default", "" ) ) );
-            }
+            taxStateModel.setModel( context.getModel( System.getProperty( System.getProperty( "xmatrix.subject", "" ).equals( ENV_SCIENTIFIC ) ? "herbar.model.default.sc" : "herbar.model.default.de", "" ) ) );
         }
         catch ( RuntimeException e )
         {
@@ -148,34 +145,18 @@ public class LessonPanel extends ModeActivationPanel
         }
     }
 
-    private void initListeners()
-    {
-        taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
-        {
-            @Override
-            public void propertyChange( PropertyChangeEvent e )
-            {
-                final Taxon focus = (Taxon) e.getNewValue();
-                propertyDisplay.setTaxFocus( focus );
-                picturePanel.setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
-            }
-        } );
-        taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
-        {
-            @Override
-            public void propertyChange( PropertyChangeEvent e )
-            {
-                final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
-                propertyDisplay.setSubMode( subMode );
-                picturePanel.setShowText( subMode == LERNEN );
-            }
-        } );
-    }
-
     public void activate()
     {
         super.activate();
         context.getHerbarGUIManager().getStatusBar().addStatusComponent( downloadStatus );
+        downloadStatus.addMouseListener( new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked( MouseEvent e )
+            {
+                exceptionHandler.displayDialog( imageCache );
+            }
+        } );
         ensureBackgroundThread();
         for ( final String name : collectAllPictures() )
         {
@@ -188,13 +169,9 @@ public class LessonPanel extends ModeActivationPanel
     {
         if ( backgroundCache == null )
         {
-            backgroundCache = new PictureCache(
-                    "Background-Image-Thread", new LessonCachingExceptionHandler( this ),
-                    new NestedImageCache( new ImageCache[0],
-                            new FileImageCache( ImageLocator.getPicturePath(), "jpg" ),
-                            new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) ) );
+            backgroundCache = new PictureCache( "Background-Image-Thread", exceptionHandler, imageCache );
             backgroundCache.suspend();
-            cache.addPropertyChangeListener( WAITING, new PropertyChangeListener()
+            final PropertyChangeListener waitingListener = new PropertyChangeListener()
             {
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
@@ -202,14 +179,28 @@ public class LessonPanel extends ModeActivationPanel
                     LOG.info( "switching to background image loader" );
                     backgroundCache.resume();
                 }
-            } );
-            cache.addPropertyChangeListener( RESUME, new PropertyChangeListener()
+            };
+            final PropertyChangeListener resumingListener = new PropertyChangeListener()
             {
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
                 {
                     LOG.info( "switching to main image loader" );
                     backgroundCache.suspend();
+                }
+            };
+            cache.addPropertyChangeListener( WAITING, waitingListener );
+            cache.addPropertyChangeListener( RESUME, resumingListener );
+            backgroundCache.addPropertyChangeListener( FINISHED, new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent evt )
+                {
+                    backgroundCache.stop();
+                    cache.removePropertyChangeListener( WAITING, waitingListener );
+                    cache.removePropertyChangeListener( RESUME, resumingListener );
+                    LOG.info( "switching to main image loader" );
+                    cache.resume();
                 }
             } );
         }
@@ -226,9 +217,9 @@ public class LessonPanel extends ModeActivationPanel
                 final boolean errors = backgroundCache.hadError();
                 final boolean done = status == 0.0;
                 final String percentage = ((int) ((1 - status) * 100)) + "%";
-                downloadStatus.setText( "Überprüfe Offlinestatus: " +
-                        (errors ? (done ? "Es gab Fehler" : percentage + " (Fehler)") :
-                                (done ? "Alles offline verfügbar" : percentage)) );
+                downloadStatus.setText( "Status: " +
+                        (errors ? (done ? "Nicht alles offline verfügbar" : "Überprüfung " + percentage + " fertig (Fehler)") :
+                                (done ? "Alles offline verfügbar" : "Überprüfung " + percentage + " fertig")) );
             }
         }, 0, 1, TimeUnit.SECONDS );
     }
@@ -251,7 +242,15 @@ public class LessonPanel extends ModeActivationPanel
             final CommentedPicture[] pictures = taxon.getCommentedPictures( pictureTheme );
             for ( final CommentedPicture picture : pictures )
             {
-                pictureNames.add( picture.getPicture().getName() );
+                final Picture pic = picture.getPicture();
+                if ( pic != null )
+                {
+                    pictureNames.add( pic.getName() );
+                }
+                else
+                {
+                    LOG.error( "picture for \"" + picture + "\" is null" );
+                }
             }
         }
         for ( final Taxon child : taxon.getChildTaxa() )

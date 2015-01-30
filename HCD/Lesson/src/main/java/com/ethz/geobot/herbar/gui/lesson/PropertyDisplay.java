@@ -23,11 +23,15 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.CardLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -55,7 +59,9 @@ public class PropertyDisplay extends JPanel
     private final ArrayList<AttributeTreePanel> displayPanels = new ArrayList<AttributeTreePanel>();
 
     private final ArrayList<AttributeTreePanel> guessPanels = new ArrayList<AttributeTreePanel>();
-    private final CardLayout cardLayout;
+    private final TaxStateModel taxStateModel;
+
+    private CardLayout cardLayout;
 
     protected HerbarModel herbarModel;
 
@@ -66,6 +72,13 @@ public class PropertyDisplay extends JPanel
      * @param taxStateModel the model
      */
     public PropertyDisplay( final HerbarContext herbarContext, final TaxStateModel taxStateModel )
+    {
+        this.taxStateModel = taxStateModel;
+        initGui( herbarContext, taxStateModel );
+        initListeners();
+    }
+
+    private void initGui( HerbarContext herbarContext, TaxStateModel taxStateModel )
     {
         cardLayout = new CardLayout();
         setLayout( cardLayout );
@@ -118,32 +131,45 @@ public class PropertyDisplay extends JPanel
         }
     }
 
-    public void setTaxFocus( final Taxon focus )
+    public void initListeners()
     {
-        for ( final AttributeTreePanel display : displayPanels )
+        taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
         {
-            if ( display != null )
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
             {
-                display.setTaxonFocus( focus );
+                final Taxon focus = (Taxon) e.getNewValue();
+                for ( final AttributeTreePanel display : displayPanels )
+                {
+                    if ( display != null )
+                    {
+                        display.setTaxonFocus( focus );
+                    }
+                }
+                for ( final AttributeTreePanel display : guessPanels )
+                {
+                    if ( display != null )
+                    {
+                        display.setTaxonFocus( focus );
+                    }
+                }
             }
-        }
-        for ( final AttributeTreePanel display : guessPanels )
+        } );
+        taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
         {
-            if ( display != null )
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
             {
-                display.setTaxonFocus( focus );
+                final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
+                cardLayout.show( PropertyDisplay.this, subMode.name() );
             }
-        }
+        } );
+
     }
 
     public String toString()
     {
         return "" + hashCode();
-    }
-
-    public void setSubMode( final TaxStateModel.SubMode subMode )
-    {
-        cardLayout.show( this, subMode.name() );
     }
 
     private static class TabSyncListener implements ChangeListener

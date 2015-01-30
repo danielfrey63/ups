@@ -5,6 +5,7 @@ import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.MODIFY;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.COLLAPSE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
@@ -159,7 +160,7 @@ public class NavigationBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final boolean isEdit = e.getNewValue() == EDIT;
+                final boolean isEdit = e.getNewValue() == MODIFY;
                 panel.setPrefixComponent( isEdit ? check : radio );
                 panel.setShowPrefixComponent( true );
                 taxTree.setRootTaxon( isEdit ? context.getDataModel().getRootTaxon() : taxStateModel.getModel().getRootTaxon() );
@@ -534,6 +535,7 @@ public class NavigationBuilder implements Builder
                             }
                         }
                         taxTree.repaint();
+                        context.saveModel( model );
                     }
                 }
             } );
@@ -561,6 +563,7 @@ public class NavigationBuilder implements Builder
                             }
                         }
                         taxTree.repaint();
+                        context.saveModel( model );
                     }
                 }
             } );

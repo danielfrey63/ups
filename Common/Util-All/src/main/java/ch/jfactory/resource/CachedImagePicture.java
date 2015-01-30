@@ -10,6 +10,7 @@
 package ch.jfactory.resource;
 
 import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.cache.ImageRetrieveException;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -29,8 +30,7 @@ public class CachedImagePicture implements SimplePicture
         this.image = image;
     }
 
-    public Image loadImage()
-            throws ImageCacheException
+    public Image loadImage() throws ImageCacheException, ImageRetrieveException
     {
         return image.loadImage();
     }

@@ -91,7 +91,7 @@ public class ModeStateModel extends StateCompositeModel
         }
         catch ( Exception ex )
         {
-            LOG.error( "could not load Lesson Mode" );
+            LOG.error( "could not load Lesson Mode", ex );
         }
 
         return node.node( "submodels" );

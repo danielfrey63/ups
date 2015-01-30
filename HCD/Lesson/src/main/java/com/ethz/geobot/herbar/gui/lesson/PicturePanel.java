@@ -24,6 +24,9 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.lang.ArrayUtils;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.gui.picture.PictureModel;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Picture;
@@ -46,7 +49,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.lesson.PictureDetailPanel.IMAGE;
 
 /**
  * This control is used to display the Pictures of the different Picture-Themes.
@@ -57,6 +59,8 @@ import static com.ethz.geobot.herbar.gui.lesson.PictureDetailPanel.IMAGE;
 public class PicturePanel extends JPanel
 {
     private final static Logger LOG = LoggerFactory.getLogger( PicturePanel.class );
+
+    private final TaxStateModel taxStateModel;
 
     private TabbedPictureDetailPanel pictureTab;
 
@@ -73,35 +77,48 @@ public class PicturePanel extends JPanel
     /**
      * Creates new picture panel showing the text with all themes in the model.
      *
-     * @param themes the themes in this panel to show
+     * @param taxStateModel
+     * @param themes        the themes in this panel to show
      * @param model
      * @param cache
      */
-    public PicturePanel( final PictureTheme[] themes, final PictureModel model, final PictureCache cache )
+    public PicturePanel( TaxStateModel taxStateModel, final PictureTheme[] themes, final PictureModel model, final PictureCache cache )
     {
+        this.taxStateModel = taxStateModel;
         this.model = model;
         this.cache = cache;
         this.themes = themes;
 
-        initGUI();
+        initGui();
+        initListeners();
         setShowText( true );
     }
 
-    private void tabChanged()
+    private void initListeners()
     {
-        model.setSelectedIndex( pictureTab.getSelectedIndex() );
-        setImage();
+        taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                final Taxon focus = (Taxon) e.getNewValue();
+                setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
+            }
+        } );
+        taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent e )
+            {
+                final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
+                setShowText( subMode == LERNEN );
+            }
+        } );
     }
 
     private void imageChanged( final String name )
     {
         model.setPicture( name );
-        setImage();
-    }
-
-    private void zoomChanged( final boolean b )
-    {
-        model.setZoomed( b );
         setImage();
     }
 
@@ -111,14 +128,7 @@ public class PicturePanel extends JPanel
         {
             public void propertyChange( final PropertyChangeEvent e )
             {
-                if ( e.getPropertyName().equalsIgnoreCase( IMAGE ) )
-                {
-                    imageChanged( e.getNewValue() == null ? null : e.getNewValue().toString() );
-                }
-                else
-                {
-                    zoomChanged( (Boolean) e.getNewValue() );
-                }
+                imageChanged( e.getNewValue() == null ? null : e.getNewValue().toString() );
             }
         } );
     }
@@ -145,7 +155,7 @@ public class PicturePanel extends JPanel
                 }
                 else
                 {
-                    LOG.error( "picture for " + pic + " is null" );
+                    LOG.error( "picture for \"" + pic + "\" is null" );
                 }
             }
         }
@@ -211,16 +221,18 @@ public class PicturePanel extends JPanel
         final PictureDetailPanel panel = pictureTab.getThemePanel( model.getPictureTheme() );
         final CommentedPicture pic = model.getPicture();
         final boolean isPicture = pic != null;
-        final boolean isShowing = showText && !( isPicture && "".equals( pic.getComment() ) );
-        final String comment = ( isShowing && pic != null ? pic.getComment() : "" );
+        final boolean isShowing = showText && !(isPicture && "".equals( pic.getComment() ));
+        final String comment = (isShowing && pic != null ? pic.getComment() : "");
         textArea.setVisible( isShowing );
         textArea.setText( comment );
         panel.setToolTipText( comment );
-        panel.setImagePanel( ( isPicture ? ( pic.getPicture() == null ? null : pic.getPicture().getName() ) : null ) );
+        panel.setImagePanel( (isPicture ? (pic.getPicture() == null ? null : pic.getPicture().getName()) : null) );
     }
 
-    /** This method is called from within the constructor to initialize the form. */
-    private void initGUI()
+    /**
+     * This method is called from within the constructor to initialize the form.
+     */
+    private void initGui()
     {
         setLayout( new BorderLayout() );
         add( buildSplitter(), BorderLayout.CENTER );
@@ -246,8 +258,10 @@ public class PicturePanel extends JPanel
         {
             public void stateChanged( final ChangeEvent e )
             {
-                LOG.info( "tab changed" );
-                tabChanged();
+                final int index = pictureTab.getSelectedIndex();
+                LOG.info( "tab changed to " + index );
+                model.setSelectedIndex( index );
+                setImage();
             }
         } );
         return pictureTab;

@@ -11,6 +11,7 @@ package ch.jfactory.resource;
 
 import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.ImageCacheException;
+import ch.jfactory.cache.ImageRetrieveException;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
@@ -45,7 +46,7 @@ public class CachedImage
         this.locator = locator;
     }
 
-    public synchronized BufferedImage loadImage() throws ImageCacheException
+    public synchronized BufferedImage loadImage() throws ImageRetrieveException, ImageCacheException
     {
         final BufferedImage i;
         try
@@ -53,6 +54,11 @@ public class CachedImage
             i = locator.getImage( name );
             setImage( i );
             return i;
+        }
+        catch ( ImageRetrieveException e )
+        {
+            LOGGER.error( "cannot retrieve image " + name, e );
+            throw e;
         }
         catch ( ImageCacheException e )
         {
@@ -94,7 +100,7 @@ public class CachedImage
      */
     public boolean isLoaded( final boolean thumb )
     {
-        return getImage( thumb ) != null || thumb && ( getImage( false ) != null );
+        return getImage( thumb ) != null || thumb && (getImage( false ) != null);
     }
 
     public void attach( final AsyncPictureLoaderListener listener )

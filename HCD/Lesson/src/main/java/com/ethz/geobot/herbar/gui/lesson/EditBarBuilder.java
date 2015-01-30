@@ -45,8 +45,7 @@ public class EditBarBuilder implements Builder
                 final HerbarModel model = context.getDataModel();
                 final FilterModel newModel = new FilterModel( model, "Neue Liste", false );
                 newModel.addFilterTaxon( model.getRootTaxon() );
-                taxStateModel.setModel( newModel );
-                taxStateModel.setEditMode( MODIFY );
+                taxStateModel.setNewModel( newModel );
                 context.saveModel( newModel );
             }
         } );

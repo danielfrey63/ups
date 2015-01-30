@@ -85,16 +85,7 @@ public class FilterFactory
         {
             LOG.info( "reading mapping file for filter definition." );
 
-            final String[] lists;
-            if ( HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) )
-            {
-                lists = new String[]{"1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All"};
-            }
-            else
-            {
-                lists = new String[]{};
-            }
-
+            final String[] lists = HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All"} : new String[]{"Alle Taxa"};
             if ( new File( System.getProperty( "herbar.filter.location" ) ).mkdirs() )
             {
                 LOG.info( "created directory for filters" );

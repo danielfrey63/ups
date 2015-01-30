@@ -136,10 +136,7 @@ abstract public class I15nComponentDialog extends JDialog
             }
         };
         final JButton button = ComponentFactory.createButton( "BUTTON.OK", action );
-        if ( isCancelShowing() )
-        {
-            button.setEnabled( false );
-        }
+        button.setEnabled( isCancelShowing() ? false : true );
         return button;
     }
 

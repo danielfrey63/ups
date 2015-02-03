@@ -80,7 +80,6 @@ public class NavigationBuilder implements Builder
     public JComponent getPanel()
     {
         final TaxTree taxTree = new TaxTree();
-        //setSearchable( taxTree );
         setRenderer( taxTree );
         setController( taxTree );
         setListeners( taxTree );
@@ -92,11 +91,6 @@ public class NavigationBuilder implements Builder
         navigation.add( new JScrollPane( taxTree ), BorderLayout.CENTER );
 
         return navigation;
-    }
-
-    private void setSearchable( final TaxTree taxTree )
-    {
-        SearchableUtils.installSearchable( taxTree ).setRecursive( true );
     }
 
     private void initRendererPanel()

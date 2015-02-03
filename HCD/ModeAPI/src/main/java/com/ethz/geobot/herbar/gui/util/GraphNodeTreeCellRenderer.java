@@ -8,7 +8,7 @@
  * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
  * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
  * ihrer  persönlichen  Weiterbildung  nutzen  möchten,  werden  gebeten,  für  die
- * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.– zu bezahlen.
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.? zu bezahlen.
  *
  * Postkonto
  *
@@ -41,19 +41,36 @@ import com.ethz.geobot.herbar.model.trait.MorphologySubject;
 import com.ethz.geobot.herbar.model.trait.MorphologyText;
 import com.ethz.geobot.herbar.model.trait.MorphologyValue;
 import com.ethz.geobot.herbar.model.trait.NameText;
+import java.awt.BorderLayout;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.WEST;
 import java.awt.Component;
+import java.awt.Dimension;
+import static java.lang.Boolean.TRUE;
+import static java.lang.Integer.MAX_VALUE;
 import java.util.HashMap;
+import javax.swing.JEditorPane;
+import static javax.swing.JEditorPane.HONOR_DISPLAY_PROPERTIES;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTree;
-import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.UIManager;
 import javax.swing.tree.TreeCellRenderer;
 
 /**
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:07:08 $
  */
-public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
+public class GraphNodeTreeCellRenderer extends JPanel implements TreeCellRenderer
 {
-    private static final HashMap iconMapping = new HashMap();
+    private static final HashMap<Class, String> iconMapping = new HashMap<Class, String>();
+
+    final JPanel dummyPanel = new JPanel( new BorderLayout() );
+    final JLabel dummyIcon = new JLabel();
+    final JEditorPane dummyText = new JEditorPane( "text/html", "" );
+
+    final JLabel thisIcon = new JLabel();
+    final JEditorPane thisText = new JEditorPane( "text/html", "" );
 
     static
     {
@@ -75,20 +92,59 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
         iconMapping.put( NameText.class, "SYNTEXT" );
     }
 
-    /** @see TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean) */
+    private final JTree tree;
+
+    public GraphNodeTreeCellRenderer( final JTree tree )
+    {
+        this.tree = tree;
+
+        dummyText.setEditable( false );
+        dummyText.putClientProperty( HONOR_DISPLAY_PROPERTIES, TRUE );
+        dummyText.setFont( UIManager.getFont( "Label.font" ) );
+        dummyPanel.setOpaque( false );
+        dummyPanel.add( dummyIcon, WEST );
+        dummyPanel.add( dummyText, CENTER );
+
+        thisText.setEditable( false );
+        thisText.putClientProperty( HONOR_DISPLAY_PROPERTIES, TRUE );
+        thisText.setFont( UIManager.getFont( "Label.font" ) );
+        setOpaque( false );
+        setLayout( new BorderLayout() );
+        add( thisIcon, WEST );
+        add( thisText, CENTER );
+    }
+
+    /**
+     * @see javax.swing.tree.TreeCellRenderer #getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean)
+     */
     public Component getTreeCellRendererComponent( final JTree tree, final Object value, final boolean selected, final boolean expanded,
                                                    final boolean leaf, final int row, final boolean hasFocus )
     {
-        super.getTreeCellRendererComponent( tree, value, selected, expanded, leaf, row, hasFocus );
-        if ( !( value instanceof GraphTreeNode ) )
+        if ( !(value instanceof GraphTreeNode) )
         {
             throw new IllegalStateException( "Renderer only for GraphTreeNodes, not for " + value.getClass().getName() );
         }
-        final GraphTreeNode tNode = (GraphTreeNode) value;
-        final GraphNode node = tNode.getDependent();
-        setText( value.toString() );
+        thisText.setText( value.toString() );
+        thisIcon.setIcon( ImageLocator.getIcon( "icon" + getBaseName( (GraphTreeNode) value ) + ".gif" ) );
+        revalidate();
+        repaint();
+        return this;
+    }
+
+    public Dimension getPreferredSize()
+    {
+        final int width = tree.getSize().width - 40;
+        dummyText.setText( thisText.getText() );
+        dummyText.setSize( width, MAX_VALUE );
+        final int height = dummyText.getPreferredScrollableViewportSize().height;
+        return new Dimension( width, height );
+    }
+
+    private String getBaseName( final GraphTreeNode value )
+    {
+        final GraphNode node = value.getDependent();
         String baseName = "";
-        if ( tNode.isType( Taxon.class ) )
+        if ( value.isType( Taxon.class ) )
         {
             final GraphNodeList levels = node.getChildren( Level.class );
             if ( levels.size() == 1 )
@@ -96,19 +152,15 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
                 baseName = levels.get( 0 ).getName();
             }
         }
-        else if ( tNode.isType( Level.class ) )
+        else if ( value.isType( Level.class ) )
         {
-            baseName = tNode.toString();
+            baseName = value.toString();
         }
         else
         {
-            baseName = getIconBase( tNode ).toString();
+            baseName = getIconBase( value );
         }
-        setIcon( ImageLocator.getIcon( "icon" + baseName + ".gif" ) );
-        setBackgroundNonSelectionColor( tree.getBackground() );
-        revalidate();
-        repaint();
-        return this;
+        return baseName;
     }
 
     private String getIconBase( final GraphTreeNode node )
@@ -118,7 +170,7 @@ public class GraphNodeTreeCellRenderer extends DefaultTreeCellRenderer
             final Class clazz = (Class) o;
             if ( node.isType( clazz ) )
             {
-                return (String) iconMapping.get( clazz );
+                return iconMapping.get( clazz );
             }
         }
         return "";

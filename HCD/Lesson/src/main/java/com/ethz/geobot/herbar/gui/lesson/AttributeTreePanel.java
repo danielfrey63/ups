@@ -38,12 +38,22 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.TreePath;
 
@@ -71,6 +81,12 @@ public class AttributeTreePanel extends JPanel
 
     private final TaxStateModel taxStateModel;
 
+    private JScrollPane sp;
+
+    private int xOffset;
+
+    private int gap = 20;
+
     AttributeTreePanel( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel, final String rootNodeName, final VirtualGraphTreeNodeFilter filter )
     {
         this.herbarContext = herbarContext;
@@ -96,9 +112,20 @@ public class AttributeTreePanel extends JPanel
                 showPopUp( e );
             }
         } );
+        tree.addComponentListener( new ComponentAdapter()
+        {
+            public void componentResized( ComponentEvent e )
+            {
+                final JTree tree = (JTree) e.getComponent();
+                boolean rootVisible = tree.isRootVisible();
+                tree.setRootVisible( !rootVisible );
+                tree.setRootVisible( rootVisible );
+            }
+        } );
         new TreeExpander( tree, 2 );
         this.setLayout( new BorderLayout() );
-        this.add( new JScrollPane( tree ), BorderLayout.CENTER );
+        sp = new JScrollPane( tree, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_NEVER );
+        this.add( sp, BorderLayout.CENTER );
     }
 
     private void showPopUp( final MouseEvent e )

@@ -58,10 +58,11 @@ public class VirtualGraphTreeFactory
         final VirtualGraphTreeNodeModel model = new VirtualGraphTreeNodeModel( filter, m, root );
         final VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode( root, model, filter );
         final GraphTreeNode rootNode = GraphTreeNode.getTreeNode( treeRoot );
-        final JTree jt = new SearchableTree( rootNode );
-        jt.setRootVisible( false );
-        jt.setCellRenderer( new GraphNodeTreeCellRenderer() );
-        return jt;
+        final JTree tree = new SearchableTree( rootNode );
+        tree.setRootVisible( false );
+        tree.setRowHeight( -1 );
+        tree.setCellRenderer( new GraphNodeTreeCellRenderer( tree ) );
+        return tree;
     }
 
     public static JTree getVirtualTree( final VirtualGraphTreeNodeFilter filter )
@@ -82,4 +83,5 @@ public class VirtualGraphTreeFactory
         final VirtualGraphTreeNode treeRoot = VirtualGraphTreeNode.getGraphNode( newRoot, model, filter );
         jt.setModel( new DefaultTreeModel( GraphTreeNode.getTreeNode( treeRoot ) ) );
     }
+
 }

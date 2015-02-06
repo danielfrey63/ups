@@ -28,6 +28,7 @@ import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
+import com.ethz.geobot.herbar.gui.mode.ModeNotFoundException;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import java.awt.Dimension;
@@ -77,14 +78,16 @@ public class AppHerbar
         mainFrame = new MainFrame();
         mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 
-        // set frame position
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        mainFrame.setSize( (int) ( screenSize.width / 1.2 ), (int) ( screenSize.height / 1.2 ) );
-        WindowUtils.centerOnScreen( mainFrame );
-
         // load old user settings
-        mainFrame.loadSettings();
-        mainFrame.setVisible( true );
+        try
+        {
+            mainFrame.loadState();
+            mainFrame.setVisible( true );
+        }
+        catch ( ModeNotFoundException e )
+        {
+            LOG.error( "couldn't load state", e );
+        }
 
         splash.finish();
     }
@@ -147,6 +150,7 @@ public class AppHerbar
                 IOUtils.copy( is, os );
                 os.close();
             }
+            Application.getInstance().getModel().getRootTaxon();
         }
         catch ( IOException e )
         {

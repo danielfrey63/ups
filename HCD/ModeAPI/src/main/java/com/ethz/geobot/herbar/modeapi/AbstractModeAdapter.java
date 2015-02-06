@@ -48,14 +48,6 @@ public class AbstractModeAdapter extends AbstractMode
         this.componentClass = componentClass;
     }
 
-    public void wizardSettingsFinish()
-    {
-    }
-
-    public void wizardSettingsInit()
-    {
-    }
-
     public boolean queryDeactivate()
     {
         final Component vc = viewComponent.get();

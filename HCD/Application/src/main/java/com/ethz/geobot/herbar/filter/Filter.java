@@ -52,6 +52,11 @@ public class Filter
     private boolean fixed;
 
     /**
+     * Indicates the sort order of this filter.
+     */
+    private int rank;
+
+    /**
      * Getter for property name.
      *
      * @return Value of property name.
@@ -99,5 +104,15 @@ public class Filter
     public void setFixed( final boolean fixed )
     {
         this.fixed = fixed;
+    }
+
+    public int getRank()
+    {
+        return rank;
+    }
+
+    public void setRank( int rank )
+    {
+        this.rank = rank;
     }
 }

@@ -77,7 +77,7 @@ class LessonCachingExceptionHandler implements PictureCache.CachingExceptionHand
                 PICT_LOCATOR.disableCache( cache );
             }
         }
-        else
+        else if (exceptions.size() > 0)
         {
             final ListDialog<String> dialog = new ListDialog<String>( parent, "DOWNLOAD.ERROR", exceptions.toArray( new String[exceptions.size()] ) )
             {

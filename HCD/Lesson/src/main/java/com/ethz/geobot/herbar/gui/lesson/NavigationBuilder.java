@@ -1,7 +1,6 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.view.builder.Builder;
-import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
@@ -86,7 +85,8 @@ public class NavigationBuilder implements Builder
 
         initRendererPanel();
 
-        taxTree.setRootTaxon( taxStateModel.getModel().getRootTaxon() );
+        setRootTaxon( taxTree );
+        setFocus( taxTree, taxStateModel.getFocus() );
 
         navigation.add( new JScrollPane( taxTree ), BorderLayout.CENTER );
 
@@ -120,8 +120,7 @@ public class NavigationBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                taxTree.setSelectedTaxon( (Taxon) e.getNewValue() );
-                ensureVisibility( taxTree );
+                setFocus( taxTree, (Taxon) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( LIST.name(), new PropertyChangeListener()
@@ -129,8 +128,7 @@ public class NavigationBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                taxTree.setRootTaxon( taxStateModel.getModel().getRootTaxon() );
-                ensureVisibility( taxTree );
+                setRootTaxon( taxTree );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -217,6 +215,18 @@ public class NavigationBuilder implements Builder
             {
             }
         } );
+    }
+
+    private void setFocus( final TaxTree taxTree, final Taxon taxon )
+    {
+        taxTree.setSelectedTaxon( taxon );
+        ensureVisibility( taxTree );
+    }
+
+    private void setRootTaxon( TaxTree taxTree )
+    {
+        taxTree.setRootTaxon( taxStateModel.getModel().getRootTaxon() );
+        ensureVisibility( taxTree );
     }
 
     /**

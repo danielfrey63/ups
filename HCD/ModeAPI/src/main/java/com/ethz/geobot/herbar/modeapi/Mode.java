@@ -89,13 +89,6 @@ public interface Mode
     void setProperty( String name, Object value );
 
     /**
-     * Return a set of all names containing in the property list.
-     *
-     * @return a set of names
-     */
-    Set getPropertyNames();
-
-    /**
      * Is called by the application to set the mode context.
      *
      * @param context reference to the context object
@@ -104,10 +97,4 @@ public interface Mode
 
     /** Is called before the application release the mode object. */
     void destroy();
-
-    /** tells the mode, that the wizard settings are changed */
-    void wizardSettingsFinish();
-
-    /** Allows for initialization of wizrad setting by the mode. */
-    void wizardSettingsInit();
 }

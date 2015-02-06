@@ -83,6 +83,7 @@ public class LessonBar extends JPanel
 
         initUi();
         initListeners();
+        setScrollerState( taxStateModel.getFocus() );
     }
 
     private void initUi()
@@ -107,6 +108,8 @@ public class LessonBar extends JPanel
         listButton = createListButton();
         orderButton = createOrderButton();
         subModusToggle = createSubModusSwitcher();
+
+        setListButtonText();
 
         final JToolBar toolBar = new JToolBar();
         toolBar.setBorder( new CompoundBorder( new ThinBevelBorder( BevelDirection.RAISED ), new EmptyBorder( 0, 0, 1, 0 ) ) );
@@ -193,7 +196,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
+                setListButtonText();
             }
         } );
         taxStateModel.addPropertyChangeListener( RENAME.name(), new PropertyChangeListener()
@@ -201,7 +204,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent evt )
             {
-                listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
+                setListButtonText();
             }
         } );
         taxStateModel.addPropertyChangeListener( TAXA.name(), new PropertyChangeListener()
@@ -217,7 +220,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                taxonControl.updateControlState( (Taxon) e.getNewValue() );
+                setScrollerState( (Taxon) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -269,6 +272,16 @@ public class LessonBar extends JPanel
                 subModusToggle.setEnabled( enable );
             }
         } );
+    }
+
+    private void setScrollerState( final Taxon taxon )
+    {
+        taxonControl.updateControlState( taxon );
+    }
+
+    private void setListButtonText()
+    {
+        listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
     }
 
     private void setSubMode( final JButton button, final SubMode subMode )

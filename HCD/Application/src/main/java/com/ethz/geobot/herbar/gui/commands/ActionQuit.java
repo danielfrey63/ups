@@ -48,7 +48,7 @@ public class ActionQuit extends AbstractParametrizedAction
     public void actionPerformed( final ActionEvent parm1 )
     {
         final MainFrame mainFrame = ( (MainFrame) parent );
-        mainFrame.storeSettings();
+        mainFrame.saveState();
         final Mode mode = mainFrame.getModel().getMode();
         if ( mode != null && mode.queryDeactivate() )
         {

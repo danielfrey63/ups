@@ -92,6 +92,7 @@ public class PicturePanel extends JPanel
         initGui();
         initListeners();
         setShowText( true );
+        setFocus( taxStateModel.getFocus() );
     }
 
     private void initListeners()
@@ -101,8 +102,7 @@ public class PicturePanel extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final Taxon focus = (Taxon) e.getNewValue();
-                setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
+                setFocus( (Taxon) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -114,6 +114,11 @@ public class PicturePanel extends JPanel
                 setShowText( subMode == LERNEN );
             }
         } );
+    }
+
+    private void setFocus( final Taxon focus )
+    {
+        setTaxon( focus, taxStateModel.getNext(), taxStateModel.getPrev() );
     }
 
     private void imageChanged( final String name )

@@ -29,24 +29,29 @@ import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
-import com.ethz.geobot.herbar.gui.commands.ActionConvertFilterFromUst;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
-import com.ethz.geobot.herbar.gui.commands.ActionSaveBounds;
 import com.ethz.geobot.herbar.gui.mode.ModeManager;
+import static com.ethz.geobot.herbar.gui.mode.ModeManager.COMPONENT;
+import static com.ethz.geobot.herbar.gui.mode.ModeManager.MODE;
 import com.ethz.geobot.herbar.gui.mode.ModeNotFoundException;
 import com.ethz.geobot.herbar.gui.mode.ModeStateModel;
 import com.ethz.geobot.herbar.modeapi.Mode;
-import java.awt.AWTEvent;
+import static com.ethz.geobot.herbar.modeapi.Mode.NAME;
+import static java.awt.AWTEvent.WINDOW_EVENT_MASK;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowEvent;
+import static java.awt.event.WindowEvent.WINDOW_CLOSING;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -94,7 +99,7 @@ public class MainFrame extends JFrame
 
     public MainFrame()
     {
-        enableEvents( AWTEvent.WINDOW_EVENT_MASK );
+        enableEvents( WINDOW_EVENT_MASK );
         try
         {
             init();
@@ -102,7 +107,7 @@ public class MainFrame extends JFrame
             {
                 public void propertyChange( final PropertyChangeEvent e )
                 {
-                    if ( e.getPropertyName().equals( "mode" ) )
+                    if ( e.getPropertyName().equals( MODE ) )
                     {
                         final Mode oldMode = (Mode) e.getOldValue();
                         final Mode newMode = (Mode) e.getNewValue();
@@ -113,9 +118,10 @@ public class MainFrame extends JFrame
                         if ( newMode != null )
                         {
                             newMode.activate();
+                            prefNode.put( MODE, (String) newMode.getProperty( NAME ) );
                         }
                     }
-                    else if ( e.getPropertyName().equals( "viewComponent" ) )
+                    else if ( e.getPropertyName().equals( COMPONENT ) )
                     {
                         final Component oldViewComponent = (Component) e.getOldValue();
                         final Component newViewComponent = (Component) e.getNewValue();
@@ -133,6 +139,39 @@ public class MainFrame extends JFrame
                     }
                 }
             } );
+            this.addComponentListener( new ComponentAdapter()
+            {
+                boolean componentShown = false;
+
+                @Override
+                public void componentResized( ComponentEvent e )
+                {
+                    if ( componentShown )
+                    {
+                        saveState();
+                    }
+                }
+
+                @Override
+                public void componentShown( ComponentEvent e )
+                {
+                    try
+                    {
+                        loadState();
+                        componentShown = true;
+                    }
+                    catch ( ModeNotFoundException e1 )
+                    {
+                        LOG.error( "couldn't load mode", e );
+                    }
+                }
+
+                @Override
+                public void componentHidden( ComponentEvent e )
+                {
+                    saveState();
+                }
+            } );
         }
         catch ( Exception e )
         {
@@ -145,16 +184,22 @@ public class MainFrame extends JFrame
         return modeStateModel;
     }
 
-    public void loadSettings()
+    public void saveState()
     {
-        modeStateModel.loadState( prefNode );
-        loadFrameBounds();
+        prefNode.putInt( PREF_X, getLocation().x );
+        prefNode.putInt( PREF_Y, getLocation().y );
+        prefNode.putInt( PREF_W, getSize().width );
+        prefNode.putInt( PREF_H, getSize().height );
+
+        prefNode.put( MODE, "LessonMode" );
     }
 
-    private void loadFrameBounds()
+    public void loadState() throws ModeNotFoundException
     {
-        pack();
-        WindowUtils.centerOnScreen( this );
+        // Default size and postition
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize( (int) (screenSize.width / 1.2), (int) (screenSize.height / 1.2) );
+        setLocationRelativeTo( null );
 
         // make sure the window does not exceed the screen
         final int x = prefNode.getInt( PREF_X, getLocation().x );
@@ -164,21 +209,8 @@ public class MainFrame extends JFrame
         final Rectangle size = new Rectangle( x, y, w, h );
         final Rectangle screen = OperatingSystem.getScreenBounds();
         setBounds( size.intersection( screen ) );
-    }
 
-    public void storeSettings()
-    {
-        modeStateModel.storeState( prefNode );
-
-        // flush preferences
-        try
-        {
-            prefNode.flush();
-        }
-        catch ( BackingStoreException ex )
-        {
-            LOG.error( "Error storing Mode preferences. ", ex );
-        }
+        modeStateModel.loadState( prefNode );
     }
 
     // overridden so we can exit when window is closed
@@ -186,7 +218,7 @@ public class MainFrame extends JFrame
     protected void processWindowEvent( final WindowEvent e )
     {
         super.processWindowEvent( e );
-        if ( e.getID() == WindowEvent.WINDOW_CLOSING )
+        if ( e.getID() == WINDOW_CLOSING )
         {
             quitItem.doClick();
         }
@@ -212,9 +244,6 @@ public class MainFrame extends JFrame
 
         JMenu sub;
         sub = createMenu( "MENU.APPLICATION" );
-        sub.add( new ActionSaveBounds( this, prefNode ) );
-        sub.add( new ActionConvertFilterFromUst( this ) );
-        sub.addSeparator();
         quitItem = sub.add( new ActionQuit( this ) );
 
         sub = createMenu( "MENU.SETTINGS" );

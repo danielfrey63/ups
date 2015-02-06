@@ -1,4 +1,4 @@
-<filter name="Alle Taxa" fixed="true">
+<filter name="Alle Taxa" fixed="true" rank="1">
     <detail scope="Acer opalus"/>
     <detail scope="Prunus spinosa"/>
     <detail scope="Fabales"/>

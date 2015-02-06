@@ -31,6 +31,7 @@ import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.Mode;
+import static com.ethz.geobot.herbar.modeapi.Mode.NAME;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import java.awt.Component;
 import java.util.Collection;
@@ -82,7 +83,7 @@ public class HerbarContextImpl implements HerbarContext
 
     public Preferences getPreferencesNode()
     {
-        return Preferences.userNodeForPackage( ModeManager.class ).node( (String) mode.getProperty( Mode.NAME ) );
+        return Preferences.userNodeForPackage( ModeManager.class ).node( (String) mode.getProperty( NAME ) );
     }
 
     public HerbarModel getModel( final String modelName )
@@ -100,7 +101,7 @@ public class HerbarContextImpl implements HerbarContext
             }
             catch ( FilterPersistentException ex )
             {
-                Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "ERROR.FILTERLOAD" );
+                Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "Liste kann nicht geladen werden" );
                 model = getDataModel();
             }
         }

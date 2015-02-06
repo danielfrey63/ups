@@ -47,6 +47,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.prefs.Preferences;
 
 public class TaxStateModel
 {
@@ -67,7 +68,17 @@ public class TaxStateModel
     public TaxStateModel( final HerbarContext context )
     {
         this.context = context;
-        setModel( context.getDataModel() );
+
+        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
+        final Preferences prefs = context.getPreferencesNode();
+        final String model = prefs.get( LIST.name().toLowerCase(), null );
+        setInternalModel( fire, model == null ? context.getDataModel() : context.getModel( model ) );
+        setInternalScope( fire, getModel().getTaxon( prefs.get( SCOPE.name().toLowerCase(), getModel().getRootTaxon().getName() ) ) );
+        setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), vals.scope.getAllChildTaxa( vals.level )[0].getName() ) ) );
+        setInternalTaxList( fire );
+        setInternalOrdered( fire, prefs.getBoolean( ORDER.name().toLowerCase(), true ) );
+        setInternalFocus( fire, getModel().getTaxon( prefs.get( FOCUS.name().toLowerCase(), getTaxList()[0].getName() ) ) );
+        fireAllPropertyChangeEvents( fire );
     }
 
     /**
@@ -106,7 +117,7 @@ public class TaxStateModel
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalModel( fire, model );
             setInternalScope( fire, model.getRootTaxon() );
-            setInternalLevel( fire, vals.level );
+            setInternalLevel( fire, vals.scope );
             setInternalGlobalSubMode( fire, LERNEN );
             setInternalEditMode( fire, MODIFY );
             fireAllPropertyChangeEvents( fire );
@@ -125,7 +136,7 @@ public class TaxStateModel
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalModel( fire, model );
             setInternalScope( fire, model.getRootTaxon() );
-            setInternalLevel( fire, vals.level );
+            setInternalLevel( fire, vals.scope );
             setInternalTaxList( fire );
             setInternalOrdered( fire, true );
             setInternalFocus( fire, taxList[0] );
@@ -153,7 +164,7 @@ public class TaxStateModel
         if ( taxon != null && taxon.getLevel() != vals.level )
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-            setInternalLevel( fire, taxon.getLevel() );
+            setInternalLevel( fire, taxon );
             setInternalTaxList( fire );
             setInternalOrdered( fire, vals.ordered );
             setInternalFocus( fire, taxon );
@@ -211,7 +222,7 @@ public class TaxStateModel
         setInternalGlobalSubMode( fire, LERNEN );
         setInternalEditMode( fire, mode );
         final Level[] levels = getModel().getLevels();
-        setInternalLevel( fire, ArrayUtils.contains( levels, vals.level ) ? vals.level : levels[levels.length - 1] );
+        //setInternalLevel( fire, ArrayUtils.contains( levels, vals.level ) ? vals.level : levels[levels.length - 1] );
         setInternalTaxList( fire );
         setInternalFocus( fire, taxList[0] );
         fireAllPropertyChangeEvents( fire );
@@ -236,6 +247,7 @@ public class TaxStateModel
         {
             fire.add( new FireArray( LIST.name(), herbarModel, model ) );
             herbarModel = model;
+            context.getPreferencesNode().put( LIST.name().toLowerCase(), model.getName() );
         }
     }
 
@@ -252,6 +264,7 @@ public class TaxStateModel
         {
             fire.add( new FireArray( SCOPE.name(), vals.scope, scope ) );
             vals.scope = scope;
+            context.getPreferencesNode().put( SCOPE.name().toLowerCase(), scope.getName() );
 
             final Level[] levels = vals.scope.getSubLevels();
             if ( !ArrayUtils.contains( levels, vals.level ) )
@@ -264,18 +277,23 @@ public class TaxStateModel
     }
 
     /**
-     * Sets the level if needed and registers a notification if needed. Make sure model and scope is set correctly
+     * Sets the taxon if needed and registers a notification if needed. Make sure model and scope is set correctly
      * before.
      *
      * @param fire  the notifications list
-     * @param level
+     * @param taxon
      */
-    private void setInternalLevel( final ArrayList<FireArray> fire, final Level level )
+    private void setInternalLevel( final ArrayList<FireArray> fire, final Taxon taxon )
     {
-        if ( level != null && level != vals.level )
+        if ( taxon != null )
         {
-            fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
-            vals.level = level;
+            final Level level = taxon.getLevel();
+            if ( level != null && level != vals.level )
+            {
+                fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
+                vals.level = level;
+                context.getPreferencesNode().put( LEVEL.name().toLowerCase(), taxon.getName() );
+            }
         }
     }
 
@@ -316,6 +334,7 @@ public class TaxStateModel
             RandomUtils.randomize( taxList );
         }
         vals.ordered = ordered;
+        context.getPreferencesNode().putBoolean( ORDER.name().toLowerCase(), ordered );
     }
 
     /**
@@ -331,6 +350,7 @@ public class TaxStateModel
         {
             fire.add( new FireArray( FOCUS.name(), vals.focus, focus ) );
             vals.focus = focus;
+            context.getPreferencesNode().put( FOCUS.name().toLowerCase(), focus.getName() );
         }
     }
 

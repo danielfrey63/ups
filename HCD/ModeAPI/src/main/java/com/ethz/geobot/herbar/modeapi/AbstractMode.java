@@ -56,11 +56,6 @@ abstract public class AbstractMode implements Mode
         return props.get( name );
     }
 
-    final public Set getPropertyNames()
-    {
-        return props.keySet();
-    }
-
     final public void setProperty( final String name, final Object value )
     {
         props.put( name, value );

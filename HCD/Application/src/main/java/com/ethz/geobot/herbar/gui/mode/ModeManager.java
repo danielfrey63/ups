@@ -51,6 +51,10 @@ import org.slf4j.LoggerFactory;
  */
 public class ModeManager implements ModeRegistrationSupport
 {
+    public static final String COMPONENT = "viewComponent";
+
+    public static final String MODE = "mode";
+
     /** Category object for logging. */
     private static final Logger LOG = LoggerFactory.getLogger( ModeManager.class );
 

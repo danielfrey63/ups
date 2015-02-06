@@ -25,6 +25,7 @@ package com.ethz.geobot.herbar.model.graph;
 import ch.jfactory.model.graph.AbsGraphModel;
 import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.GraphNodeList;
+import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.PictureTheme;
@@ -164,7 +165,7 @@ public class GraphHerbarModelImpl implements HerbarModel
 
     public String getName()
     {
-        return "GraphHerbarModel";
+        return Strings.getString( "FILTER_NAME.ALL_TAXA" );
     }
 
     public void setName( final String name )

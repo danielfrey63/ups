@@ -51,6 +51,8 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     private HerbarModel dependentModel;
 
+    private int rank;
+
     /**
      * Map between dependent and filtered taxon.
      */
@@ -69,11 +71,12 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
      * @param name           a name for the model
      * @param fixed          whether the list ist fixed and cannot be altered
      */
-    public FilterModel( final HerbarModel dependentModel, final String name, boolean fixed )
+    public FilterModel( final HerbarModel dependentModel, final String name, final boolean fixed, final int rank )
     {
         super( name );
         this.dependentModel = dependentModel;
         this.fixed = fixed;
+        this.rank = rank;
     }
 
     public Level getRootLevel()
@@ -191,5 +194,15 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     public boolean isFixed()
     {
         return fixed;
+    }
+
+    public int getRank()
+    {
+        return rank;
+    }
+
+    public void setRank( int rank )
+    {
+        this.rank = rank;
     }
 }

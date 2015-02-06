@@ -30,7 +30,7 @@ package com.ethz.geobot.herbar.filter;
 
 import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
-import com.ethz.geobot.herbar.modeapi.HerbarContext;
+import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
@@ -40,15 +40,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 import org.apache.commons.io.FileUtils;
@@ -59,7 +63,6 @@ import org.slf4j.LoggerFactory;
 /**
  * This class is used to store and load FilterModel from the persistent storage.
  * <p/>
- * Todo: Refactoring: Load built-in filter models directly into memory instead of persisting on HD.
  *
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2007/09/17 11:05:50 $
@@ -74,8 +77,6 @@ public class FilterFactory
 
     private final Map<String, FilterModel> nameModelCache = new HashMap<String, FilterModel>();
 
-    private final Map<FilterModel, String> modelNameCache = new HashMap<FilterModel, String>();
-
     /**
      * Creates a new instance of FilterFactory.
      */
@@ -85,17 +86,37 @@ public class FilterFactory
         {
             LOG.info( "reading mapping file for filter definition." );
 
-            final String[] lists = HerbarContext.ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"1 Liste 60", "2 Liste 200", "3 Liste 400", "4 Liste 600", "5 Liste Pharm-Bio", "6 All"} : new String[]{"Alle Taxa"};
-            if ( new File( System.getProperty( "herbar.filter.location" ) ).mkdirs() )
+            boolean deleteAll = true;
+            final File versionFile = new File( FILTER_LOCATION + "/../version.xml" );
+            if ( versionFile.exists() )
             {
-                LOG.info( "created directory for filters" );
+                final Properties props = new Properties();
+                final FileInputStream inputStream = new FileInputStream( versionFile );
+                props.loadFromXML( inputStream );
+                inputStream.close();
+                deleteAll = !"6.0".equals( props.get( "version" ) );
             }
+            final File filterDirectory = new File( System.getProperty( "herbar.filter.location" ) );
+            if ( deleteAll )
+            {
+                FileUtils.deleteDirectory( filterDirectory );
+                final Properties props = new Properties();
+                props.put( "version", "6.0" );
+                filterDirectory.mkdirs();
+                final FileOutputStream outputStream = new FileOutputStream( versionFile );
+                props.storeToXML( outputStream, "" );
+                outputStream.close();
+            }
+            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "400", "600", "Pharm-Bio", "Alle"} : new String[]{"Alle Taxa"};
+            filterDirectory.mkdirs();
 
             for ( final String list : lists )
             {
                 final FileWriter writer = new FileWriter( generateFilterFileName( list ) );
                 IOUtils.copy( getClass().getResourceAsStream( list + ".xml" ), writer );
                 writer.close();
+                final FilterModel model = generateFilterModel( loadFilter( list ) );
+                nameModelCache.put( list, model );
             }
         }
         catch ( Exception ex )
@@ -121,8 +142,7 @@ public class FilterFactory
     private FilterModel generateFilterModel( final Filter filter ) throws FilterPersistentException
     {
         final HerbarModel baseModel = Application.getInstance().getModel();
-        final boolean fixed = filter.getFixed();
-        final FilterModel model = new FilterModel( baseModel, filter.getName(), fixed );
+        final FilterModel model = new FilterModel( baseModel, filter.getName(), filter.getFixed(), filter.getRank() );
         final Detail[] details = filter.getDetails();
         for ( int i = 0; details != null && i < details.length; i++ )
         {
@@ -147,7 +167,7 @@ public class FilterFactory
      * This method makes sure the base model exists, otherwise it is reset to the default. It guarantees also that the
      * name of the model is equal to the name of the file.
      *
-     * @param name the name of the filer
+     * @param name the name of the filter file
      * @return the loaded FilterModel
      * @throws FilterPersistentException is thrown if the load of the filter failed
      */
@@ -158,7 +178,6 @@ public class FilterFactory
         {
             model = generateFilterModel( loadFilter( name ) );
             nameModelCache.put( name, model );
-            modelNameCache.put( model, name );
         }
         return model;
     }
@@ -172,10 +191,8 @@ public class FilterFactory
     public void saveFilterModel( final FilterModel filterModel ) throws FilterPersistentException
     {
         // cleanup old model
-        final String tempName = modelNameCache.get( filterModel );
-        final String modelName = tempName == null ? filterModel.getName() : tempName;
+        final String modelName = filterModel.getName();
         nameModelCache.remove( modelName );
-        modelNameCache.remove( filterModel );
         final String filename = generateFilterFileName( modelName );
         new File( filename ).delete();
 
@@ -200,7 +217,6 @@ public class FilterFactory
         // save new model
         saveFilter( filter );
         nameModelCache.put( filterModel.getName(), filterModel );
-        modelNameCache.put( filterModel, filterModel.getName() );
     }
 
     /**
@@ -212,8 +228,7 @@ public class FilterFactory
     public void removeFilterModel( final FilterModel filterModel ) throws FilterPersistentException
     {
         // make sure the right model is handled even if the name has changed.
-        final String tempName = modelNameCache.get( filterModel );
-        final String modelName = tempName == null ? filterModel.getName() : tempName;
+        final String modelName = filterModel.getName();
         final String filename = generateFilterFileName( modelName );
         final File file = new File( filename );
         if ( !file.delete() )
@@ -223,7 +238,6 @@ public class FilterFactory
         else
         {
             nameModelCache.remove( modelName );
-            modelNameCache.remove( filterModel );
         }
     }
 
@@ -281,6 +295,7 @@ public class FilterFactory
         x.alias( "detail", Detail.class );
         x.addImplicitCollection( Filter.class, "details", Detail.class );
         x.useAttributeFor( Filter.class, "fixed" );
+        x.useAttributeFor( Filter.class, "rank" );
         x.useAttributeFor( Filter.class, "name" );
         x.useAttributeFor( Detail.class, "scope" );
         return x;
@@ -325,7 +340,7 @@ public class FilterFactory
 
     public Collection<? extends HerbarModel> getFilters()
     {
-        final Collection<FilterModel> result = new ArrayList<FilterModel>();
+        final List<FilterModel> result = new ArrayList<FilterModel>();
         final Collection<String> names = getFilterNames();
         for ( final String name : names )
         {
@@ -338,6 +353,14 @@ public class FilterFactory
                 LOG.error( "failed to load filter " + name, e );
             }
         }
+        Collections.sort( result, new Comparator<FilterModel>()
+        {
+            @Override
+            public int compare( final FilterModel o1, final FilterModel o2 )
+            {
+                return o1.getRank() - o2.getRank();
+            }
+        } );
         return result;
     }
 }

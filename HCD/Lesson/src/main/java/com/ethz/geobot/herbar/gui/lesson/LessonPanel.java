@@ -55,6 +55,7 @@ import java.util.TreeSet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.LEFT;
@@ -71,6 +72,9 @@ import org.slf4j.LoggerFactory;
 public class LessonPanel extends ModeActivationPanel
 {
     private final static Logger LOG;
+
+    private final static String SPLIT_LOCATION_1 = "split.location.1";
+    private final static String SPLIT_LOCATION_2 = "split.location.2";
 
     private final PictureCache cache;
 
@@ -106,6 +110,7 @@ public class LessonPanel extends ModeActivationPanel
         try
         {
             context = mode.getHerbarContext();
+            context.getModels();
 
             final HerbarModel herbarModel = context.getDataModel();
             final TaxStateModel taxStateModel = new TaxStateModel( context );
@@ -129,9 +134,8 @@ public class LessonPanel extends ModeActivationPanel
             add( bar, NORTH );
             add( navigationEtAll, CENTER );
 
-            splitPane.setDividerLocation( 760 );
-
-            taxStateModel.setModel( context.getModel( System.getProperty( System.getProperty( "xmatrix.subject", "" ).equals( ENV_SCIENTIFIC ) ? "herbar.model.default.sc" : "herbar.model.default.de", "" ) ) );
+            addListeners( splitPane, navigationEtAll );
+            loadState( splitPane, navigationEtAll );
         }
         catch ( RuntimeException e )
         {
@@ -143,6 +147,33 @@ public class LessonPanel extends ModeActivationPanel
             LOG.error( "LessonPanel(...)", e );
             throw e;
         }
+    }
+
+    private void addListeners( final JSplitPane splitPane, final JSplitPane navigationEtAll )
+    {
+        splitPane.addPropertyChangeListener( JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                context.getPreferencesNode().putInt( SPLIT_LOCATION_1, splitPane.getDividerLocation() );
+            }
+        }  );
+        navigationEtAll.addPropertyChangeListener( JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange( PropertyChangeEvent evt )
+            {
+                context.getPreferencesNode().putInt( SPLIT_LOCATION_2, navigationEtAll.getDividerLocation() );
+            }
+        }  );
+    }
+
+    private void loadState( final JSplitPane splitPane, final JSplitPane navigationEtAll )
+    {
+        final Preferences prefsNode = context.getPreferencesNode();
+        splitPane.setDividerLocation( prefsNode.getInt( SPLIT_LOCATION_1, 760 ) );
+        navigationEtAll.setDividerLocation( prefsNode.getInt( SPLIT_LOCATION_2, 280 ) );
     }
 
     public void activate()

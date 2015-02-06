@@ -43,7 +43,7 @@ public class EditBarBuilder implements Builder
             public void actionPerformed( ActionEvent e )
             {
                 final HerbarModel model = context.getDataModel();
-                final FilterModel newModel = new FilterModel( model, "Neue Liste", false );
+                final FilterModel newModel = new FilterModel( model, "Neue Liste", false, 99 );
                 newModel.addFilterTaxon( model.getRootTaxon() );
                 taxStateModel.setNewModel( newModel );
                 context.saveModel( newModel );
@@ -79,7 +79,7 @@ public class EditBarBuilder implements Builder
                 if ( model instanceof FilterModel )
                 {
                     final FilterModel currentModel = (FilterModel) model;
-                    final FilterModel newModel = new FilterModel( context.getDataModel(), currentModel.getName() + " Kopie", false );
+                    final FilterModel newModel = new FilterModel( context.getDataModel(), currentModel.getName() + " Kopie", false, 99 );
                     final FilterTaxon taxon = currentModel.getRootTaxon();
                     collectChildren( newModel, taxon );
                     taxStateModel.setModel( newModel );
@@ -97,6 +97,8 @@ public class EditBarBuilder implements Builder
             }
         } );
 
+        setEnabledStates( taxStateModel.getModel(), editButton, renameButton, deleteButton );
+
         bar = new JToolBar();
         bar.add( editButton );
         bar.add( newList );
@@ -107,23 +109,28 @@ public class EditBarBuilder implements Builder
         taxStateModel.addPropertyChangeListener( LIST.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent e )
+            public void propertyChange( final PropertyChangeEvent e )
             {
-                final Object newModel = e.getNewValue();
-                final boolean enable = newModel instanceof FilterModel && !((FilterModel) newModel).isFixed();
-                editButton.setEnabled( enable );
-                renameButton.setEnabled( enable );
-                deleteButton.setEnabled( enable );
+                final Object model = e.getNewValue();
+                setEnabledStates( model, editButton, renameButton, deleteButton );
             }
         } );
         taxStateModel.addPropertyChangeListener( MODIFY.name(), new PropertyChangeListener()
         {
             @Override
-            public void propertyChange( PropertyChangeEvent e )
+            public void propertyChange( final PropertyChangeEvent e )
             {
                 editButton.setSelected( e.getNewValue() == MODIFY );
             }
         } );
+    }
+
+    private void setEnabledStates( final Object model, final JToggleButton editButton, final JButton renameButton, final JButton deleteButton )
+    {
+        final boolean enable = model instanceof FilterModel && !((FilterModel) model).isFixed();
+        editButton.setEnabled( enable );
+        renameButton.setEnabled( enable );
+        deleteButton.setEnabled( enable );
     }
 
     private void collectChildren( final FilterModel newModel, final FilterTaxon taxon )

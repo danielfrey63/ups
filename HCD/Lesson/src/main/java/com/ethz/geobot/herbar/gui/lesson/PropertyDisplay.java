@@ -23,6 +23,9 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
+import static ch.jfactory.resource.ImageLocator.getIcon;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
@@ -35,16 +38,13 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import static javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT;
+import static javax.swing.SwingConstants.TOP;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import static ch.jfactory.resource.ImageLocator.getIcon;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
-import static javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT;
-import static javax.swing.SwingConstants.TOP;
 
 /**
  * Displays two tabs. First tab presents the data to learn. The second one tests the user.
@@ -76,6 +76,7 @@ public class PropertyDisplay extends JPanel
         this.taxStateModel = taxStateModel;
         initGui( herbarContext, taxStateModel );
         initListeners();
+        setFocus( taxStateModel.getFocus() );
     }
 
     private void initGui( HerbarContext herbarContext, TaxStateModel taxStateModel )
@@ -139,20 +140,7 @@ public class PropertyDisplay extends JPanel
             public void propertyChange( PropertyChangeEvent e )
             {
                 final Taxon focus = (Taxon) e.getNewValue();
-                for ( final AttributeTreePanel display : displayPanels )
-                {
-                    if ( display != null )
-                    {
-                        display.setTaxonFocus( focus );
-                    }
-                }
-                for ( final AttributeTreePanel display : guessPanels )
-                {
-                    if ( display != null )
-                    {
-                        display.setTaxonFocus( focus );
-                    }
-                }
+                setFocus( focus );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -165,6 +153,24 @@ public class PropertyDisplay extends JPanel
             }
         } );
 
+    }
+
+    private void setFocus( Taxon focus )
+    {
+        for ( final AttributeTreePanel display : displayPanels )
+        {
+            if ( display != null )
+            {
+                display.setTaxonFocus( focus );
+            }
+        }
+        for ( final AttributeTreePanel display : guessPanels )
+        {
+            if ( display != null )
+            {
+                display.setTaxonFocus( focus );
+            }
+        }
     }
 
     public String toString()
@@ -184,7 +190,7 @@ public class PropertyDisplay extends JPanel
         @Override
         public void stateChanged( ChangeEvent e )
         {
-            tabs.setSelectedIndex( ( (JTabbedPane) e.getSource() ).getSelectedIndex() );
+            tabs.setSelectedIndex( ((JTabbedPane) e.getSource()).getSelectedIndex() );
         }
     }
 }

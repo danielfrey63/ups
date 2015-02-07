@@ -67,7 +67,7 @@ public class EditBarBuilder implements Builder
             public void actionPerformed( ActionEvent e )
             {
                 context.removeModel( taxStateModel.getModel() );
-                taxStateModel.setModel( context.getModel( System.getProperty( "herbar.model.default", "" ) ) );
+                taxStateModel.setModel( context.getDefaultModel() );
             }
         } );
         final JButton copyButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.COPY", new ActionListener()

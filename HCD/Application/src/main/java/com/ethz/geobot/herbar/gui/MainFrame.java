@@ -87,7 +87,7 @@ public class MainFrame extends JFrame
 
     private final ModeStateModel modeStateModel = new ModeStateModel();
 
-    private final Preferences prefNode = Preferences.userNodeForPackage( MainFrame.class );
+    private final Preferences prefNode = Preferences.userRoot().node("ebot");
 
     private JMenuItem quitItem;
 

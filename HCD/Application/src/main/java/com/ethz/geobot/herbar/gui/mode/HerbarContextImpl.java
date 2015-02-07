@@ -83,7 +83,21 @@ public class HerbarContextImpl implements HerbarContext
 
     public Preferences getPreferencesNode()
     {
-        return Preferences.userNodeForPackage( ModeManager.class ).node( (String) mode.getProperty( NAME ) );
+        return Preferences.userRoot().node( "ebot" ).node( System.getProperty( "xmatrix.subject" ) ).node( (String) mode.getProperty( NAME ) );
+    }
+
+    public HerbarModel getDefaultModel()
+    {
+        HerbarModel result = null;
+        try
+        {
+            result = Application.getInstance().getModel( System.getProperty( "herbar.model.default." + (ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? "sc" : "de"), "" ) );
+        }
+        catch ( FilterPersistentException e )
+        {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public HerbarModel getModel( final String modelName )

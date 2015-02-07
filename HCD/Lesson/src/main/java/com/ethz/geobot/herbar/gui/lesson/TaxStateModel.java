@@ -71,8 +71,8 @@ public class TaxStateModel
 
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         final Preferences prefs = context.getPreferencesNode();
-        final String model = prefs.get( LIST.name().toLowerCase(), null );
-        setInternalModel( fire, model == null ? context.getDataModel() : context.getModel( model ) );
+        final String model = prefs.get( LIST.name().toLowerCase(), System.getProperty( "herbar.model.default" ) );
+        setInternalModel( fire, model == null ? context.getDefaultModel() : context.getModel( model ) );
         setInternalScope( fire, getModel().getTaxon( prefs.get( SCOPE.name().toLowerCase(), getModel().getRootTaxon().getName() ) ) );
         setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), vals.scope.getAllChildTaxa( vals.level )[0].getName() ) ) );
         setInternalTaxList( fire );

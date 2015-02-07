@@ -35,10 +35,14 @@ import java.util.prefs.Preferences;
  */
 public interface HerbarContext
 {
-    /** Started in the "scientific" environment. */
+    /**
+     * Started in the "scientific" environment.
+     */
     String ENV_SCIENTIFIC = "scientific";
 
-    /** Started in the "dendrology" environment. */
+    /**
+     * Started in the "dendrology" environment.
+     */
     String ENV_DENDROLOGY = "dendrology";
 
     /**
@@ -47,6 +51,13 @@ public interface HerbarContext
      * @return reference to the data model
      */
     HerbarModel getDataModel();
+
+    /**
+     * Returns the default model.
+     *
+     * @return the default model
+     */
+    HerbarModel getDefaultModel();
 
     /**
      * Return a data model filtered by a specified filter.

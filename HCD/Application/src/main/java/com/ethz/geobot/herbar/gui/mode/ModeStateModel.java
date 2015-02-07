@@ -94,7 +94,7 @@ public class ModeStateModel extends StateCompositeModel
             LOG.error( "could not load Lesson Mode", ex );
         }
 
-        return node.node( "submodels" );
+        return node;
     }
 
     public Preferences storeCompositeState( final Preferences node )
@@ -104,6 +104,6 @@ public class ModeStateModel extends StateCompositeModel
             node.put( "mode", (String) mode.getProperty( Mode.NAME ) );
         }
 
-        return node.node( "submodels" );
+        return node;
     }
 }

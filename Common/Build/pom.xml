@@ -34,17 +34,17 @@
         <!-- To deploy the website. The artefact id will be appended automatically, so need revision to distinguish. -->
         <site>
             <id>geobot1</id>
-            <url>scp://geobot1.ethz.ch/var/www/html/site/${project.version}</url>
+            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/site/${project.version}</url>
         </site>
         <repository>
             <id>distribution-repository</id>
             <name>Distribution Repository</name>
-            <url>scp://geobot1.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/releases</url>
         </repository>
         <snapshotRepository>
             <id>distribution-snapshot-repository</id>
             <name>Distribution Snapshot Repository</name>
-            <url>scp://geobot1.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/releases</url>
         </snapshotRepository>
     </distributionManagement>
     <scm>
@@ -694,6 +694,15 @@
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <!-- Enabling the use of SSH -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+        </extensions>
+
     </build>
     <!--
     <profiles>

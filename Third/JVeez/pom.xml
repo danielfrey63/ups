@@ -10,7 +10,7 @@
     <groupId>net.java.jveez</groupId>
     <artifactId>net.java.jveez</artifactId>
     <name>JVeez Picture Viewer</name>
-    <version>1.79.2801</version>
+    <version>1.79-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
@@ -30,9 +30,4 @@
             <artifactId>org.garret.perst</artifactId>
         </dependency>
     </dependencies>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/net.java.jveez-1.79.2801</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/net.java.jveez-1.79.2801</url>
-  </scm>
 </project>

@@ -22,10 +22,8 @@
  */
 package com.ethz.geobot.herbar.gui;
 
-import ch.jfactory.application.presentation.WindowUtils;
 import ch.jfactory.application.view.status.StatusBar;
 import ch.jfactory.resource.ImageLocator;
-import ch.jfactory.resource.OperatingSystem;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
@@ -87,7 +85,7 @@ public class MainFrame extends JFrame
 
     private final ModeStateModel modeStateModel = new ModeStateModel();
 
-    private final Preferences prefNode = Preferences.userRoot().node("ebot");
+    private final Preferences prefNode = Preferences.userRoot().node( "ebot" );
 
     private JMenuItem quitItem;
 
@@ -196,19 +194,13 @@ public class MainFrame extends JFrame
 
     public void loadState() throws ModeNotFoundException
     {
-        // Default size and postition
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize( (int) (screenSize.width / 1.2), (int) (screenSize.height / 1.2) );
-        setLocationRelativeTo( null );
-
         // make sure the window does not exceed the screen
-        final int x = prefNode.getInt( PREF_X, getLocation().x );
-        final int y = prefNode.getInt( PREF_Y, getLocation().y );
-        final int h = prefNode.getInt( PREF_H, getSize().height );
-        final int w = prefNode.getInt( PREF_W, getSize().width );
-        final Rectangle size = new Rectangle( x, y, w, h );
-        final Rectangle screen = OperatingSystem.getScreenBounds();
-        setBounds( size.intersection( screen ) );
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final int x = prefNode.getInt( PREF_X, screen.width / 12 );
+        final int y = prefNode.getInt( PREF_Y, screen.height / 12 );
+        final int w = prefNode.getInt( PREF_W, screen.width * 10 / 12 );
+        final int h = prefNode.getInt( PREF_H, screen.height * 10 / 12 );
+        setBounds( new Rectangle( x, y, w, h ).intersection( new Rectangle( screen.width, screen.height ) ) );
 
         modeStateModel.loadState( prefNode );
     }

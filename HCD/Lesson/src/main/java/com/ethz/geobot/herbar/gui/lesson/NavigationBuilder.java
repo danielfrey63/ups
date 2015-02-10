@@ -571,6 +571,31 @@ public class NavigationBuilder implements Builder
                     }
                 }
             } );
+            menu.addSeparator();
+            menu.add( new AbstractAction( "Alle Parent-Taxa anwählen" )
+            {
+                @Override
+                public void actionPerformed( ActionEvent e )
+                {
+                    final HerbarModel model = taxStateModel.getModel();
+                    if ( model instanceof FilterModel )
+                    {
+                        final FilterModel filterModel = (FilterModel) model;
+                        final FilterTaxon[] list = (FilterTaxon[]) taxStateModel.getTaxList();
+                        for ( FilterTaxon taxon : list )
+                        {
+                            Taxon dependentTaxon = taxon.getDependentTaxon();
+                            while ( dependentTaxon.getParentTaxon() != null )
+                            {
+                                dependentTaxon = dependentTaxon.getParentTaxon();
+                                filterModel.addFilterTaxon( dependentTaxon );
+                            }
+                        }
+                        taxTree.repaint();
+                        context.saveModel( model );
+                    }
+                }
+            } );
             menu.show( taxTree, x, y );
         }
     }

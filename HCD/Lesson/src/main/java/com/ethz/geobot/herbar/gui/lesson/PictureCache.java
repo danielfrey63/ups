@@ -402,7 +402,7 @@ public class PictureCache
                 }
             }, new NestedImageCache( new ImageCache[0],
                     new FileImageCache( "C:/Users/Daniel/.hcd2/sc/cache/", "jpg" ),
-                    new UrlImageCache( "http://geobot2.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
+                    new UrlImageCache( "http://geobot1.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
 
             final JFrame frame = new JFrame();
             final BoxLayout layout = new BoxLayout( frame.getContentPane(), BoxLayout.Y_AXIS );

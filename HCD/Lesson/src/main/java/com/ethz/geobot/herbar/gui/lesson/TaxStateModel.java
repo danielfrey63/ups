@@ -119,7 +119,6 @@ public class TaxStateModel
             setInternalScope( fire, model.getRootTaxon() );
             setInternalLevel( fire, vals.scope );
             setInternalGlobalSubMode( fire, LERNEN );
-            setInternalEditMode( fire, MODIFY );
             fireAllPropertyChangeEvents( fire );
         }
     }

@@ -58,15 +58,11 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
      */
     private Map<Taxon, FilterTaxon> dependentFilteredTaxonList = new HashMap<Taxon, FilterTaxon>();
 
-    /**
-     * Map between filtered and dependent taxon.
-     */
-    private Map<FilterTaxon, Taxon> filteredDependentTaxonList = new HashMap<FilterTaxon, Taxon>();
-
     private final boolean fixed;
 
     /**
      * Construct a filtered data model.
+     *
      * @param dependentModel the model that this model wraps
      * @param name           a name for the model
      * @param fixed          whether the list ist fixed and cannot be altered
@@ -131,19 +127,8 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public FilterTaxon getTaxon( final String taxonName )
     {
-        FilterTaxon filterTaxon = null;
         final Taxon dependentTaxon = dependentModel.getTaxon( taxonName );
-        if ( dependentTaxon != null )
-        {
-            // Todo: Check whether the taxon needs to be created here
-            // search for taxon in cached list otherwise check if taxon is inside this filter
-            filterTaxon = dependentFilteredTaxonList.get( dependentTaxon );
-            if ( filterTaxon == null && contains( dependentTaxon ) )
-            {
-                filterTaxon = addFilterTaxon( dependentTaxon );
-            }
-        }
-        return filterTaxon;
+        return dependentFilteredTaxonList.get( dependentTaxon );
     }
 
     public FilterTaxon addFilterTaxon( final Taxon dependentTaxon )
@@ -153,15 +138,15 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         {
             filteredTaxon = new FilterTaxon( this, dependentTaxon );
             dependentFilteredTaxonList.put( dependentTaxon, filteredTaxon );
-            filteredDependentTaxonList.put( filteredTaxon, dependentTaxon );
         }
+        notifyModelChange();
         return filteredTaxon;
     }
 
     public Level[] getLevels()
     {
         final TreeSet<Level> result = new TreeSet<Level>( new LevelComparator() );
-        for ( final Taxon filteredTaxon : filteredDependentTaxonList.keySet() )
+        for ( final Taxon filteredTaxon : dependentFilteredTaxonList.keySet() )
         {
             result.add( filteredTaxon.getLevel() );
         }
@@ -176,10 +161,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public void removeFilterTaxon( final FilterTaxon taxon )
     {
-        final Taxon dependentTaxon = (taxon instanceof FilterTaxon ? ((FilterTaxon) taxon).getDependentTaxon() : taxon);
-        final Taxon filterTaxon = (taxon instanceof FilterTaxon ? taxon : dependentFilteredTaxonList.get( taxon ));
-        dependentFilteredTaxonList.remove( dependentTaxon );
-        filteredDependentTaxonList.remove( filterTaxon );
+        dependentFilteredTaxonList.remove( taxon );
         notifyModelChange();
     }
 

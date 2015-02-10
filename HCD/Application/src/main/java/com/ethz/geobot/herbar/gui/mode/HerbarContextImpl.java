@@ -88,14 +88,14 @@ public class HerbarContextImpl implements HerbarContext
 
     public HerbarModel getDefaultModel()
     {
-        HerbarModel result = null;
+        HerbarModel result;
         try
         {
             result = Application.getInstance().getModel( System.getProperty( "herbar.model.default." + (ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? "sc" : "de"), "" ) );
         }
         catch ( FilterPersistentException e )
         {
-            e.printStackTrace();
+            result = Application.getInstance().getModel();
         }
         return result;
     }

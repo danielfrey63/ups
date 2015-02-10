@@ -47,6 +47,10 @@ public class EditBarBuilder implements Builder
                 newModel.addFilterTaxon( model.getRootTaxon() );
                 taxStateModel.setNewModel( newModel );
                 context.saveModel( newModel );
+                if (!editButton.isSelected())
+                {
+                    editButton.doClick();
+                }
             }
         } );
         final JButton renameButton = ComponentFactory.createButton( LessonMode.class, "BUTTON.RENAME", new ActionListener()
@@ -67,6 +71,10 @@ public class EditBarBuilder implements Builder
             public void actionPerformed( ActionEvent e )
             {
                 context.removeModel( taxStateModel.getModel() );
+                if (editButton.isSelected())
+                {
+                    editButton.doClick();
+                }
                 taxStateModel.setModel( context.getDefaultModel() );
             }
         } );
@@ -83,8 +91,11 @@ public class EditBarBuilder implements Builder
                     final FilterTaxon taxon = currentModel.getRootTaxon();
                     collectChildren( newModel, taxon );
                     taxStateModel.setModel( newModel );
-                    taxStateModel.setEditMode( MODIFY );
                     context.saveModel( newModel );
+                    if (!editButton.isSelected())
+                    {
+                        editButton.doClick();
+                    }
                 }
             }
         } );

@@ -14,18 +14,22 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
+            <version>4.0.2845</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>6.0.2825</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>6.0.2849</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
+            <version>6.0.2820</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>

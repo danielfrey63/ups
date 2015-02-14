@@ -246,6 +246,7 @@ public class NavigationBuilder implements Builder
                 path = path.getParentPath();
             }
         }
+        TreeUtils.ensureVisibility( taxTree, taxTree.getSelectionPath() );
     }
 
     /**

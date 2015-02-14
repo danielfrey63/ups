@@ -316,7 +316,6 @@ public class PictureCache
                             }
                             // Important to remove the image from the queue also in loaded and exception case
                             removeFromQueue( name );
-                            sleep( 1000 );
                         }
                     }
                     catch ( InterruptedException ex )

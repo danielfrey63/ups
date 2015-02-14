@@ -75,7 +75,7 @@ public class FileImageCache implements ImageCache
             if ( file.exists() )
             {
                 final BufferedImage image = ImageIO.read( file );
-                LOG.debug( "successfully retrieved image " + name + " from " + path );
+                LOG.trace( "successfully retrieved image " + name + " from " + path );
                 return image;
             }
             else

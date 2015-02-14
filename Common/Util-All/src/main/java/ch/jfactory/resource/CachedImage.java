@@ -131,7 +131,7 @@ public class CachedImage
 
     private void setImage( final BufferedImage image )
     {
-        LOGGER.debug( "setting image for \"" + name + "\"" );
+        LOGGER.trace( "setting image for \"" + name + "\"" );
         if ( image == getImage( false ) )
         {
             return;

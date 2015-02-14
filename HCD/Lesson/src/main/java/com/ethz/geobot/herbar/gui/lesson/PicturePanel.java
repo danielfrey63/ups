@@ -38,7 +38,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -147,6 +149,7 @@ public class PicturePanel extends JPanel
         }
         final PictureTheme[] modelThemes = taxon.getPictureThemes();
         final PictureTheme[] themes = ArrayUtils.intersect( modelThemes, this.themes, new PictureTheme[0] );
+        final List<String> images = new ArrayList<String>();
         for ( final PictureTheme theme : themes )
         {
             final CommentedPicture[] pics = taxon.getCommentedPictures( theme );
@@ -155,8 +158,7 @@ public class PicturePanel extends JPanel
                 final Picture inner = pic.getPicture();
                 if ( inner != null )
                 {
-                    final String picture = inner.getRelativURL();
-                    cache.cacheImage( picture, true, false );
+                    images.add( inner.getRelativURL() );
                 }
                 else
                 {
@@ -164,6 +166,7 @@ public class PicturePanel extends JPanel
                 }
             }
         }
+        cache.queueImages( images.toArray( new String[images.size()] ), true, false, true );
     }
 
     /**
@@ -202,6 +205,7 @@ public class PicturePanel extends JPanel
     private int fillDetailPanel( final PictureDetailPanel detail, final PictureTheme theme )
     {
         int counter = 0;
+        final List<String> images = new ArrayList<String>();
         for ( Iterator j = model.getPictureCursor( theme ).getIterator(); j.hasNext(); )
         {
             final CommentedPicture picture = (CommentedPicture) j.next();
@@ -210,7 +214,8 @@ public class PicturePanel extends JPanel
             {
                 final String name = inner.getRelativURL();
                 detail.addImage( name, counter );
-                cache.cacheImage( name, theme != model.getPictureTheme(), false );
+                images.add( name );
+                //cache.queueImage( name, theme != model.getPictureTheme(), false );
                 counter++;
             }
             else
@@ -218,6 +223,7 @@ public class PicturePanel extends JPanel
                 LOG.error( "picture for " + picture + " is null" );
             }
         }
+        cache.queueImages( images.toArray( new String[images.size()] ), true, false, true );
         return counter;
     }
 

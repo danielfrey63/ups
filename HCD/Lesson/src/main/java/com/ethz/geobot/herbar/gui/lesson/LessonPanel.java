@@ -35,7 +35,6 @@ import static com.ethz.geobot.herbar.gui.lesson.PictureCache.RESUME;
 import static com.ethz.geobot.herbar.gui.lesson.PictureCache.WAITING;
 import com.ethz.geobot.herbar.gui.picture.PictureModel;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
-import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
 import com.ethz.geobot.herbar.modeapi.ModeActivationPanel;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.HerbarModel;
@@ -158,7 +157,7 @@ public class LessonPanel extends ModeActivationPanel
             {
                 context.getPreferencesNode().putInt( SPLIT_LOCATION_1, splitPane.getDividerLocation() );
             }
-        }  );
+        } );
         navigationEtAll.addPropertyChangeListener( JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener()
         {
             @Override
@@ -166,7 +165,7 @@ public class LessonPanel extends ModeActivationPanel
             {
                 context.getPreferencesNode().putInt( SPLIT_LOCATION_2, navigationEtAll.getDividerLocation() );
             }
-        }  );
+        } );
     }
 
     private void loadState( final JSplitPane splitPane, final JSplitPane navigationEtAll )
@@ -189,10 +188,8 @@ public class LessonPanel extends ModeActivationPanel
             }
         } );
         ensureBackgroundThread();
-        for ( final String name : collectAllPictures() )
-        {
-            backgroundCache.cacheImage( name, false, false );
-        }
+        final Set<String> images = collectAllPictures();
+        backgroundCache.queueImages( images.toArray( new String[images.size()] ), false, false, cache.getStatus() == 0 );
         updateFromCache();
     }
 
@@ -201,13 +198,12 @@ public class LessonPanel extends ModeActivationPanel
         if ( backgroundCache == null )
         {
             backgroundCache = new PictureCache( "Background-Image-Thread", exceptionHandler, imageCache );
-            backgroundCache.suspend();
             final PropertyChangeListener waitingListener = new PropertyChangeListener()
             {
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
                 {
-                    LOG.info( "switching to background image loader" );
+                    LOG.info( "resuming " + backgroundCache.getName() + " by WAITING of " + cache.getName() );
                     backgroundCache.resume();
                 }
             };
@@ -216,7 +212,7 @@ public class LessonPanel extends ModeActivationPanel
                 @Override
                 public void propertyChange( PropertyChangeEvent e )
                 {
-                    LOG.info( "switching to main image loader" );
+                    LOG.info( "suspending " + backgroundCache.getName() + " by RESUME of " + cache.getName() );
                     backgroundCache.suspend();
                 }
             };
@@ -227,11 +223,11 @@ public class LessonPanel extends ModeActivationPanel
                 @Override
                 public void propertyChange( PropertyChangeEvent evt )
                 {
+                    LOG.info( "finishing " + backgroundCache.getName() );
                     backgroundCache.stop();
                     cache.removePropertyChangeListener( WAITING, waitingListener );
                     cache.removePropertyChangeListener( RESUME, resumingListener );
-                    LOG.info( "switching to main image loader" );
-                    cache.resume();
+                    LOG.info( "resuming " + cache.getName() );
                 }
             } );
         }

@@ -17,6 +17,7 @@ import ch.jfactory.resource.CachedImage;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
@@ -29,7 +30,6 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,10 +77,6 @@ public class PictureCache
 
     private int maxSize = 0;
 
-    private boolean suspend;
-
-    private boolean run = true;
-
     private boolean wasError = false;
 
     /**
@@ -90,8 +86,15 @@ public class PictureCache
     {
         this.locator = locator;
         cachingThread = new CacheImageThread( name, handler );
+        LOG.debug( "trying to set priority of " + cachingThread.getName() + " to " + Thread.MIN_PRIORITY );
         cachingThread.setPriority( Thread.MIN_PRIORITY );
+        LOG.debug( "priority of " + cachingThread.getName() + " set to " + cachingThread.getPriority() );
         cachingThread.start();
+    }
+
+    public String getName()
+    {
+        return cachingThread.getName();
     }
 
     /**
@@ -103,7 +106,7 @@ public class PictureCache
         {
             final int old = queue.size();
             queue.clear();
-            propertyChangeSupport.firePropertyChange( WAITING, old == 0, true );
+            //propertyChangeSupport.firePropertyChange( WAITING, old == 0, true );
             maxSize = 0;
         }
         LOG.debug( "caching list cleared" );
@@ -121,7 +124,7 @@ public class PictureCache
         CachedImage image = cache.get( name );
         if ( image == null )
         {
-            LOG.debug( "adding cached image \"" + name + "\" to cache" );
+            LOG.trace( "adding cached image \"" + name + "\" to cache" );
             image = new CachedImage( locator, name );
             cache.put( name, image );
         }
@@ -131,21 +134,50 @@ public class PictureCache
     /**
      * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the image has to be put at the first position.
      *
-     * @param name  name of the image
-     * @param thumb whether it is a thumbnail
-     * @param first insert at the start of the list
+     * @param name   name of the image
+     * @param thumb  whether it is a thumbnail
+     * @param first  insert at the start of the list
+     * @param resume resume caching thread after queueing images
      */
-    public void cacheImage( final String name, final boolean thumb, final boolean first )
+    public void queueImage( final String name, final boolean thumb, final boolean first, boolean resume )
+    {
+        internalCacheImage( name, thumb, first );
+        if ( queue.size() > 0 && resume )
+        {
+            LOG.info( "resuming " + cachingThread.getName() + " after queueing image" );
+            cachingThread.setResumed();
+        }
+    }
+
+    /**
+     * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the image has to be put at the first position.
+     *
+     * @param names  names of the image
+     * @param thumb  whether it is a thumbnail
+     * @param first  insert at the start of the list
+     * @param resume resume caching thread after queueing images
+     */
+    public void queueImages( final String[] names, final boolean thumb, final boolean first, boolean resume )
+    {
+        for ( final String name : names )
+        {
+            internalCacheImage( name, thumb, first );
+        }
+        if ( queue.size() > 0 && resume )
+        {
+            LOG.info( "resuming " + cachingThread.getName() + " after queueing images" );
+            cachingThread.setResumed();
+        }
+    }
+
+    private void internalCacheImage( String name, boolean thumb, boolean first )
     {
         if ( !getCachedImage( name ).isLoaded( thumb ) )
         {
             LOG.trace( "cached image " + name + " not loaded yet" );
-            final int old = queue.size();
-            final boolean isNew;
             synchronized ( queue )
             {
-                isNew = !queue.contains( name );
-                if ( isNew )
+                if ( !queue.contains( name ) )
                 {
                     if ( first )
                     {
@@ -155,7 +187,7 @@ public class PictureCache
                     else
                     {
                         queue.addLast( name );
-                        LOG.debug( "added cached image " + name + " to last position in the queue " + queue );
+                        LOG.trace( "added cached image " + name + " to last position in the queue " + queue );
                     }
                 }
                 else if ( first && !queue.getFirst().equals( name ) )
@@ -166,73 +198,10 @@ public class PictureCache
                 }
                 maxSize = Math.max( queue.size(), maxSize );
             }
-            if ( isNew )
-            {
-                propertyChangeSupport.firePropertyChange( RESUME, old > 0, true );
-                synchronized ( cachingThread )
-                {
-                    cachingThread.notify();
-                }
-            }
         }
         else
         {
             LOG.trace( "image " + name + " loaded already" );
-        }
-    }
-
-    /**
-     * Registers the image in the queue if not loaded already. Allows for small prioritization by indicating that the image has to be put at the first position.
-     *
-     * @param names names of the image
-     * @param thumb whether it is a thumbnail
-     * @param first insert at the start of the list
-     */
-    public void cacheImages( final String[] names, final boolean thumb, final boolean first )
-    {
-        final boolean old = queue.size() == 0;
-        for ( final String name : names )
-        {
-            if ( !getCachedImage( name ).isLoaded( thumb ) )
-            {
-                LOG.trace( "cached image " + name + " not loaded yet" );
-                synchronized ( queue )
-                {
-                    if ( !queue.contains( name ) )
-                    {
-                        if ( first )
-                        {
-                            queue.addFirst( name );
-                            LOG.debug( "added cached image " + name + " to first position in the queue " + queue );
-                        }
-                        else
-                        {
-                            queue.addLast( name );
-                            LOG.debug( "added cached image " + name + " to last position in the queue " + queue );
-                        }
-                    }
-                    else if ( first && !queue.getFirst().equals( name ) )
-                    {
-                        queue.remove( name );
-                        queue.addFirst( name );
-                        LOG.debug( "moved cached image " + name + " to first position in the queue " + queue );
-                    }
-                    maxSize = Math.max( queue.size(), maxSize );
-                }
-            }
-            else
-            {
-                LOG.trace( "image " + name + " loaded already" );
-            }
-        }
-        if ( queue.size() > 0 )
-        {
-            propertyChangeSupport.firePropertyChange( RESUME, old, true );
-            synchronized ( this )
-            {
-                System.out.println( Thread.currentThread() );
-                cachingThread.setResumed();
-            }
         }
     }
 
@@ -263,18 +232,25 @@ public class PictureCache
 
     public void suspend()
     {
-        cachingThread.setSuspended();
+        if ( cachingThread.isResumed() )
+        {
+            cachingThread.setSuspended();
+        }
     }
 
     public void resume()
     {
-        cachingThread.setResumed();
+        if ( cachingThread.isSuspended() )
+        {
+            cachingThread.setResumed();
+        }
     }
 
     public void stop()
     {
-        run = false;
-        cachingThread.interrupt();
+        LOG.info( "stopping " + cachingThread.getName() );
+        cachingThread.setRunning( false );
+        //cachingThread.interrupt();
     }
 
     /**
@@ -284,48 +260,63 @@ public class PictureCache
     {
         private final CachingExceptionHandler handler;
 
+        private boolean suspended = true;
+
+        private boolean running = true;
+
         public CacheImageThread( final String name, final CachingExceptionHandler handler )
         {
             setName( name );
             this.handler = handler;
+            LOG.debug( "initialized " + name + " with suspend=" + suspended );
         }
 
         public void run()
         {
             try
             {
-                while ( run )
+                while ( running )
                 {
-                    final String name = queue.peek();
+                    String name = queue.peek();
                     try
                     {
-                        if ( name == null || suspend )
+                        if ( name == null )
                         {
-                            if ( name == null )
+                            suspended = true;
+                        }
+                        synchronized ( this )
+                        {
+                            while ( suspended )
                             {
-                                propertyChangeSupport.firePropertyChange( FINISHED, false, true );
-                            }
-                            synchronized ( this )
-                            {
-                                LOG.debug( "caching thread waiting" );
+                                LOG.info( getName() + " suspended by flag" );
+                                propertyChangeSupport.firePropertyChange( WAITING, false, true );
                                 wait();
+                                LOG.info( getName() + " resumed by notify" + (suspended ? " AND STILL SUSPENDED!" : "") );
+                                propertyChangeSupport.firePropertyChange( RESUME, false, true );
+                                // Make sure to peek on the queue again as in the meantime it might has been filled
+                                name = queue.peek();
                             }
+                        }
+                        if ( name == null )
+                        {
+                            propertyChangeSupport.firePropertyChange( FINISHED, false, true );
                         }
                         else
                         {
                             final CachedImage img = getCachedImage( name );
-                            LOG.debug( "loading cached image \"" + name + "\"" );
+                            LOG.info( "loading cached image \"" + name + "\"" );
                             if ( !img.isLoaded( false ) )
                             {
                                 img.loadImage();
-                                LOG.debug( "loaded cached image \"" + name + "\"" );
+                                LOG.trace( "loaded cached image \"" + name + "\"" );
                             }
                             else
                             {
-                                LOG.debug( "cached image \"" + name + "\" loading or loaded already" );
+                                LOG.trace( "cached image \"" + name + "\" loading or loaded already" );
                             }
                             // Important to remove the image from the queue also in loaded and exception case
                             removeFromQueue( name );
+                            sleep( 1000 );
                         }
                     }
                     catch ( InterruptedException ex )
@@ -343,23 +334,43 @@ public class PictureCache
                         }
                     }
                 }
+                propertyChangeSupport.firePropertyChange( FINISHED, false, true );
             }
             catch ( InterruptedException ex )
             {
-                LOG.info( "caching thread dying" );
+                suspended = true;
+                LOG.info( getName() + " stopped" );
             }
+        }
+
+        public void setRunning( final boolean running )
+        {
+            this.running = running;
         }
 
         // Lesson learned: notify needs to be in the runnable!
         public synchronized void setResumed()
         {
-            suspend = false;
-            notify();
+            if ( suspended )
+            {
+                suspended = false;
+                notify();
+            }
+        }
+
+        public boolean isResumed()
+        {
+            return !suspended;
         }
 
         public void setSuspended()
         {
-            suspend = true;
+            suspended = true;
+        }
+
+        public boolean isSuspended()
+        {
+            return suspended;
         }
 
         private void removeFromQueue( final String name )
@@ -369,8 +380,8 @@ public class PictureCache
                 try
                 {
                     queue.remove( name );
-                    propertyChangeSupport.firePropertyChange( WAITING, false, queue.size() == 0 );
-                    LOG.debug( "popped image " + name + " after successful loading from queue " + queue );
+                    //propertyChangeSupport.firePropertyChange( WAITING, false, queue.size() == 0 );
+                    LOG.trace( "popped image " + name + " after successful loading from queue " + queue );
                 }
                 catch ( Exception e )
                 {
@@ -388,12 +399,22 @@ public class PictureCache
 
     public static class Main
     {
-
-        private static PictureCache cache;
+        private static PictureCache front;
+        private static PictureCache back;
 
         public static void main( String[] args )
         {
-            cache = new PictureCache( "Test-Thread", new CachingExceptionHandler()
+            front = new PictureCache( "Manual-Thread", new CachingExceptionHandler()
+            {
+                @Override
+                public void handleCachingException( Throwable e )
+                {
+                    e.printStackTrace();
+                }
+            }, new NestedImageCache( new ImageCache[0],
+                    new FileImageCache( "C:/Users/Daniel/.hcd2/sc/cache/", "jpg" ),
+                    new UrlImageCache( "http://geobot1.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
+            back = new PictureCache( "Background-Thread", new CachingExceptionHandler()
             {
                 @Override
                 public void handleCachingException( Throwable e )
@@ -404,13 +425,39 @@ public class PictureCache
                     new FileImageCache( "C:/Users/Daniel/.hcd2/sc/cache/", "jpg" ),
                     new UrlImageCache( "http://geobot1.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
 
+            front.addPropertyChangeListener( RESUME, new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent evt )
+                {
+                    LOG.debug( "suspending " + back.getName() + " by RESUME of " + front.getName() );
+                    back.suspend();
+                }
+            } );
+            front.addPropertyChangeListener( WAITING, new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent evt )
+                {
+                    LOG.debug( "resuming " + back.getName() + " by WAITING of " + front.getName() );
+                    back.resume();
+                }
+            } );
+            front.addPropertyChangeListener( FINISHED, new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent evt )
+                {
+                    LOG.debug( "resuming " + back.getName() + " by FINISHED of " + front.getName() );
+                    back.resume();
+                }
+            } );
+
             final JFrame frame = new JFrame();
             final BoxLayout layout = new BoxLayout( frame.getContentPane(), BoxLayout.Y_AXIS );
             frame.getContentPane().setLayout( layout );
 
-            final JTextField field = new JTextField( "C:/Users/Daniel/Desktop/list.txt" );
-            frame.add( field );
-            frame.add( createLoadButton( field ) );
+            frame.add( createLoadButton() );
             frame.add( createSuspendButton() );
             frame.add( createResumeButton() );
             frame.add( createStopButton() );
@@ -429,7 +476,7 @@ public class PictureCache
                 @Override
                 public void actionPerformed( ActionEvent e )
                 {
-                    cache.stop();
+                    front.stop();
                 }
             } );
             return button;
@@ -443,7 +490,8 @@ public class PictureCache
                 @Override
                 public void actionPerformed( ActionEvent e )
                 {
-                    cache.resume();
+                    LOG.debug( "resuming " + front.getName() + " after pushing \"Resume\" button" );
+                    front.resume();
                 }
             } );
             return button;
@@ -457,13 +505,13 @@ public class PictureCache
                 @Override
                 public void actionPerformed( ActionEvent e )
                 {
-                    cache.suspend();
+                    front.suspend();
                 }
             } );
             return button;
         }
 
-        private static JButton createLoadButton( final JTextField field )
+        private static JButton createLoadButton()
         {
             final JButton button = new JButton( "Load" );
             button.addActionListener( new ActionListener()
@@ -473,24 +521,29 @@ public class PictureCache
                 {
                     try
                     {
-                        final String filename = field.getText();
-                        final FileReader fileReader = new FileReader( filename );
-                        final BufferedReader bufferedReader = new BufferedReader( fileReader );
-                        final ArrayList<String> lines = new ArrayList<String>();
-                        String line;
-                        while ( (line = bufferedReader.readLine()) != null )
-                        {
-                            lines.add( line );
-                        }
-                        bufferedReader.close();
-                        System.out.println( "loaded " + lines.size() + " pictures" );
-                        cache.cacheImages( lines.toArray( new String[lines.size()] ), false, false );
-                        System.out.println( "cached all images" );
+                        loadFiles( "C:/Users/Daniel/Desktop/list.txt", front, back );
+                        loadFiles( "C:/Users/Daniel/Desktop/list2.txt", back, front );
                     }
                     catch ( IOException ex )
                     {
                         ex.printStackTrace();
                     }
+                }
+
+                private void loadFiles( final String filename, final PictureCache cache, final PictureCache other ) throws IOException
+                {
+                    final FileReader fileReader = new FileReader( filename );
+                    final BufferedReader bufferedReader = new BufferedReader( fileReader );
+                    final ArrayList<String> lines = new ArrayList<String>();
+                    String line;
+                    while ( (line = bufferedReader.readLine()) != null )
+                    {
+                        lines.add( line );
+                    }
+                    bufferedReader.close();
+                    LOG.info( "queueing " + lines.size() + " files for " + cache.getName() );
+                    cache.queueImages( lines.toArray( new String[lines.size()] ), false, false, other.getStatus() > 0 );
+                    LOG.info( "queued " + lines.size() + " files for " + cache.getName() );
                 }
             } );
             return button;

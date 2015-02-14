@@ -191,10 +191,17 @@ public class FilterFactory
     public void saveFilterModel( final FilterModel filterModel ) throws FilterPersistentException
     {
         // cleanup old model
-        final String modelName = filterModel.getName();
+        String modelName = null;
+        for ( final String oldModelName : nameModelCache.keySet() )
+        {
+            final FilterModel oldModel = nameModelCache.get( oldModelName );
+            if ( oldModel == filterModel )
+            {
+                modelName = oldModelName;
+            }
+        }
         nameModelCache.remove( modelName );
-        final String filename = generateFilterFileName( modelName );
-        new File( filename ).delete();
+        new File( generateFilterFileName( modelName ) ).delete();
 
         // dump model to data object
         final Filter filter = new Filter();

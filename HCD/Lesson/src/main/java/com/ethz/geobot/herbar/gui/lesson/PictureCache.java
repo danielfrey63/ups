@@ -30,6 +30,7 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,10 +87,7 @@ public class PictureCache
     {
         this.locator = locator;
         cachingThread = new CacheImageThread( name, handler );
-        LOG.debug( "trying to set priority of " + cachingThread.getName() + " to " + Thread.MIN_PRIORITY );
-        cachingThread.setPriority( Thread.MIN_PRIORITY );
-        LOG.debug( "priority of " + cachingThread.getName() + " set to " + cachingThread.getPriority() );
-        cachingThread.start();
+        cachingThread.execute();
     }
 
     public String getName()
@@ -104,9 +102,7 @@ public class PictureCache
     {
         synchronized ( queue )
         {
-            final int old = queue.size();
             queue.clear();
-            //propertyChangeSupport.firePropertyChange( WAITING, old == 0, true );
             maxSize = 0;
         }
         LOG.debug( "caching list cleared" );
@@ -144,7 +140,7 @@ public class PictureCache
         internalCacheImage( name, thumb, first );
         if ( queue.size() > 0 && resume )
         {
-            LOG.info( "resuming " + cachingThread.getName() + " after queueing image" );
+            LOG.debug( "resuming " + cachingThread.getName() + " after queueing image" );
             cachingThread.setResumed();
         }
     }
@@ -165,7 +161,7 @@ public class PictureCache
         }
         if ( queue.size() > 0 && resume )
         {
-            LOG.info( "resuming " + cachingThread.getName() + " after queueing images" );
+            LOG.debug( "resuming " + cachingThread.getName() + " after queueing images" );
             cachingThread.setResumed();
         }
     }
@@ -250,15 +246,18 @@ public class PictureCache
     {
         LOG.info( "stopping " + cachingThread.getName() );
         cachingThread.setRunning( false );
-        //cachingThread.interrupt();
     }
 
     /**
      * Internal class used to processing the caching image list.
      */
-    private class CacheImageThread extends Thread
+    private class CacheImageThread extends SwingWorker<String, String>
     {
         private final CachingExceptionHandler handler;
+
+        private final String name;
+
+        private boolean nameSet = false;
 
         private boolean suspended = true;
 
@@ -266,15 +265,25 @@ public class PictureCache
 
         public CacheImageThread( final String name, final CachingExceptionHandler handler )
         {
-            setName( name );
+            this.name = name;
             this.handler = handler;
             LOG.debug( "initialized " + name + " with suspend=" + suspended );
         }
 
-        public void run()
+        public String getName()
+        {
+            return name;
+        }
+
+        public String doInBackground()
         {
             try
             {
+                if ( !nameSet )
+                {
+                    Thread.currentThread().setName( name );
+                    nameSet = true;
+                }
                 while ( running )
                 {
                     String name = queue.peek();
@@ -304,7 +313,7 @@ public class PictureCache
                         else
                         {
                             final CachedImage img = getCachedImage( name );
-                            LOG.info( "loading cached image \"" + name + "\"" );
+                            LOG.debug( "loading cached image \"" + name + "\"" );
                             if ( !img.isLoaded( false ) )
                             {
                                 img.loadImage();
@@ -340,6 +349,7 @@ public class PictureCache
                 suspended = true;
                 LOG.info( getName() + " stopped" );
             }
+            return "done";
         }
 
         public void setRunning( final boolean running )

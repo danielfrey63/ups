@@ -161,7 +161,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public void removeFilterTaxon( final FilterTaxon taxon )
     {
-        dependentFilteredTaxonList.remove( taxon );
+        dependentFilteredTaxonList.remove( taxon.getDependentTaxon() );
         notifyModelChange();
     }
 

@@ -100,7 +100,7 @@ public class EnvironmentDialog extends JDialog
 
     private Preferences getPreferences()
     {
-        return Preferences.userRoot().node( "eBot" ).node( "copyright" );
+        return Preferences.userRoot().node( "ebot" ).node( "copyright" );
     }
 
     public boolean ok = false;

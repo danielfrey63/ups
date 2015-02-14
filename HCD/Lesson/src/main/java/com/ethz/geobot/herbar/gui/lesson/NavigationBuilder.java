@@ -37,7 +37,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -202,7 +201,9 @@ public class NavigationBuilder implements Builder
                 final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
                 final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) model.getRoot();
                 final TreePath path = new TreePath( node );
-                ensureVisibleNodes( taxTree, model, path );
+                final boolean visible = taxTree.isRootVisible();
+                taxTree.setRootVisible( !visible );
+                taxTree.setRootVisible( visible );
             }
 
             @Override
@@ -247,29 +248,6 @@ public class NavigationBuilder implements Builder
             }
         }
         TreeUtils.ensureVisibility( taxTree, taxTree.getSelectionPath() );
-    }
-
-    /**
-     * Ensures the visibility of all visible of the node passed and all of its children.
-     *
-     * @param tree  the tree with the visible nodes
-     * @param model the tree model
-     * @param path  the path of the node to ensure visibility
-     */
-    private void ensureVisibleNodes( final JTree tree, final DefaultTreeModel model, final TreePath path )
-    {
-        final Enumeration<TreePath> descendants = tree.getExpandedDescendants( path );
-        final TreeNode node = (TreeNode) path.getLastPathComponent();
-        model.nodeChanged( node );
-        while ( descendants != null && descendants.hasMoreElements() )
-        {
-            final TreePath childPath = descendants.nextElement();
-            ensureVisibleNodes( tree, model, childPath );
-        }
-        for ( int i = 0; i < node.getChildCount(); i++ )
-        {
-            model.nodeChanged( node.getChildAt( i ) );
-        }
     }
 
     public abstract class AbstractController extends MouseAdapter implements KeyListener, ActionListener
@@ -554,21 +532,24 @@ public class NavigationBuilder implements Builder
                     {
                         final FilterModel filterModel = (FilterModel) model;
                         final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
-                        filterModel.removeFilterTaxon( filterTaxon );
-                        final Level[] levels = filterTaxon.getSubLevels();
-                        for ( final Level level : levels )
+                        if ( filterTaxon != null )
                         {
-                            final FilterTaxon[] children = filterTaxon.getAllChildTaxa( level );
-                            for ( final FilterTaxon child : children )
+                            filterModel.removeFilterTaxon( filterTaxon );
+                            final Level[] levels = filterTaxon.getSubLevels();
+                            for ( final Level level : levels )
                             {
-                                if ( child.getLevel() != null )
+                                final FilterTaxon[] children = filterTaxon.getAllChildTaxa( level );
+                                for ( final FilterTaxon child : children )
                                 {
-                                    filterModel.removeFilterTaxon( child );
+                                    if ( child.getLevel() != null )
+                                    {
+                                        filterModel.removeFilterTaxon( child );
+                                    }
                                 }
                             }
+                            taxTree.repaint();
+                            context.saveModel( model );
                         }
-                        taxTree.repaint();
-                        context.saveModel( model );
                     }
                 }
             } );

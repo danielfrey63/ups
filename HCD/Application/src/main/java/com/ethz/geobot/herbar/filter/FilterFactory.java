@@ -243,7 +243,7 @@ public class FilterFactory
 
     private String generateFilterFileName( final String name )
     {
-        return FILTER_LOCATION + "/" + name + ".xml";
+        return FILTER_LOCATION + name + ".xml";
     }
 
     private String generateFilterName( final String filename )

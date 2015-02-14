@@ -105,7 +105,7 @@ public class HerbarContextImpl implements HerbarContext
         HerbarModel model;
         if ( "".equals( modelName ) || modelName == null )
         {
-            model = getDataModel();
+            model = getDefaultModel();
         }
         else
         {
@@ -115,8 +115,8 @@ public class HerbarContextImpl implements HerbarContext
             }
             catch ( FilterPersistentException ex )
             {
-                Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "Liste kann nicht geladen werden" );
-                model = getDataModel();
+                Dialogs.showErrorMessage( getHerbarGUIManager().getParentFrame().getRootPane(), "Fehler", "Liste \"" + modelName + "\" kann nicht geladen werden.\nEs wird die Standardliste geladen." );
+                model = getDefaultModel();
             }
         }
         return model;

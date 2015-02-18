@@ -125,6 +125,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent evt )
             {
+                setTaxFocus( taxStateModel.getFocus() );
                 final SubMode subMode = (SubMode) evt.getNewValue();
                 for ( final TaxonNamePanel taxonNamePanel : taxonNamePanels )
                 {

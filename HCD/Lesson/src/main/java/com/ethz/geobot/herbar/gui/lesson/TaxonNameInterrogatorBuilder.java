@@ -26,26 +26,27 @@ import ch.jfactory.application.view.border.BevelDirection;
 import ch.jfactory.application.view.border.ThinBevelBorder;
 import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.component.ComponentFactory;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.WEST;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import static javax.swing.SwingConstants.HORIZONTAL;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.WEST;
-import static javax.swing.SwingConstants.HORIZONTAL;
 
 /**
  * Displays a text field and an enter button to put guesses of the focused species name. The guesses are appended to
@@ -154,24 +155,24 @@ public class TaxonNameInterrogatorBuilder implements Builder
     private List<TaxonNamePanel> getTaxonNamePanels( Taxon focus )
     {
         final SubMode subMode = taxStateModel.getGlobalSubMode();
-
         final List<TaxonNamePanel> list = new ArrayList<TaxonNamePanel>();
         Taxon parent = focus;
-        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null )
+        int levelCounter = 0;
+        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null && levelCounter < 4 )
         {
-            // Todo: Total hack, generalize or abstract the retrieval of a literal level object.
-            //if ( !(parent.getLevel().getName().equals( "Gattung" ) && taxStateModel.getLevel().getName().equals( "Art" )) )
+            final String name = parent.getLevel().getName();
+            if ( name.startsWith( "Gruppe" ) || name.startsWith( "Nebenschlüssel" ) )
             {
-                LOG.trace( "iterating up to " + parent );
-                final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
-                list.add( taxonNamePanel );
                 parent = parent.getParentTaxon();
+                continue;
             }
-            //else
-            {
-                //    LOG.trace( "skipping addition of " + parent );
-            }
+            levelCounter++;
+            LOG.trace( "iterating up to " + parent );
+            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
+            list.add( taxonNamePanel );
+            parent = parent.getParentTaxon();
         }
+        Collections.reverse( list );
         return list;
     }
 }

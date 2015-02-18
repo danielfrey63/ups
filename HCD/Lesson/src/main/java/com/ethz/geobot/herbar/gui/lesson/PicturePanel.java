@@ -79,12 +79,12 @@ public class PicturePanel extends JPanel
     /**
      * Creates new picture panel showing the text with all themes in the model.
      *
-     * @param taxStateModel
+     * @param taxStateModel the taxon state model to use
      * @param themes        the themes in this panel to show
-     * @param model
-     * @param cache
+     * @param model         the picture model to use
+     * @param cache         the cache to use
      */
-    public PicturePanel( TaxStateModel taxStateModel, final PictureTheme[] themes, final PictureModel model, final PictureCache cache )
+    public PicturePanel( final TaxStateModel taxStateModel, final PictureTheme[] themes, final PictureModel model, final PictureCache cache )
     {
         this.taxStateModel = taxStateModel;
         this.model = model;

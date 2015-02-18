@@ -251,7 +251,7 @@ public class PictureCache
     /**
      * Internal class used to processing the caching image list.
      */
-    private class CacheImageThread extends SwingWorker<String, String>
+    private class CacheImageThread extends SwingWorker<String, Float>
     {
         private final CachingExceptionHandler handler;
 
@@ -297,10 +297,10 @@ public class PictureCache
                         {
                             while ( suspended )
                             {
-                                LOG.info( getName() + " suspended by flag" );
+                                LOG.debug( getName() + " suspended by flag" );
                                 propertyChangeSupport.firePropertyChange( WAITING, false, true );
                                 wait();
-                                LOG.info( getName() + " resumed by notify" + (suspended ? " AND STILL SUSPENDED!" : "") );
+                                LOG.debug( getName() + " resumed by notify" + (suspended ? " AND STILL SUSPENDED!" : "") );
                                 propertyChangeSupport.firePropertyChange( RESUME, false, true );
                                 // Make sure to peek on the queue again as in the meantime it might has been filled
                                 name = queue.peek();

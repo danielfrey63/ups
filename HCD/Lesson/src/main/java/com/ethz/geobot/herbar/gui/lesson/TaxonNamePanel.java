@@ -26,11 +26,16 @@ import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.CorrectnessChecker;
+import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.TaxonSynonym;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -39,17 +44,13 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  * The taxon panel is used to query a taxon from the user. Once the query is answered correctly it displays the
@@ -168,11 +169,7 @@ public class TaxonNamePanel extends JPanel
     public void setSubMode( final SubMode subMode )
     {
         layout.show( panel, subMode.name() );
-        if ( subMode == LERNEN )
-        {
-            taxonField.setText( "" );
-        }
-        doLayout();
+        taxonField.setText( "" );
     }
 
     /**
@@ -205,5 +202,4 @@ public class TaxonNamePanel extends JPanel
         }
         return synonyms;
     }
-
 }

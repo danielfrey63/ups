@@ -100,7 +100,7 @@ public class TaxStateModel
     public Taxon getPrev()
     {
         final int current = ArrayUtils.indexOf( taxList, vals.focus );
-        return current == 0 ? null : taxList[current - 1];
+        return current <= 1 ? null : taxList[current - 1];
     }
 
     public void setCollapse()

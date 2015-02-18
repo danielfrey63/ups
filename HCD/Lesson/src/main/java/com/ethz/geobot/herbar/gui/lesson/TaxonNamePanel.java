@@ -168,6 +168,7 @@ public class TaxonNamePanel extends JPanel
 
     public void setSubMode( final SubMode subMode )
     {
+
         layout.show( panel, subMode.name() );
         taxonField.setText( "" );
     }

@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -42,7 +41,7 @@ public class TestSplash extends JPanel
     public TestSplash() throws IOException
     {
         setLayout( null );
-        image = ImageIO.read( new File( "C:/Users/Daniel/Documents/Develop/UPS/Test/Application-Test/src/main/java/com/ethz/geobot/herbar/gui/splash.gif" ) );
+        image = ImageIO.read( getClass().getResourceAsStream( "splash.gif" ) );
     }
 
     @Override
@@ -83,14 +82,14 @@ class TheFocusListener implements FocusListener
     {
         frame.setSize( 0, 0 );
         captureScreen();
-        System.out.println("focusGained");
+        System.out.println( "focusGained" );
         frame.setSize( 600, 400 );
     }
 
     @Override
     public void focusLost( FocusEvent e )
     {
-        System.out.println("focusLost");
+        System.out.println( "focusLost" );
         frame.setState( ICONIFIED );
     }
 }

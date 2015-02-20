@@ -20,7 +20,7 @@
  * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
  * Nutzungsansprüchen zur Verfügung gestellt.
  */
-package com.ethz.geobot.herbar.gui;
+package ch.xmatrix.test;
 
 import ch.jfactory.application.SystemUtil;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;

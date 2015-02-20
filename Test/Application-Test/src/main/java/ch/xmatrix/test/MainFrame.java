@@ -20,7 +20,7 @@
  * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
  * Nutzungsansprüchen zur Verfügung gestellt.
  */
-package com.ethz.geobot.herbar.gui;
+package ch.xmatrix.test;
 
 import java.awt.BorderLayout;
 import java.awt.Container;

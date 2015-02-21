@@ -36,7 +36,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-/** don't use any vml access here! */
+/**
+ * don't use any vml access here!
+ */
 public class Splash extends JWindow
 {
     public Splash( final ImageIcon imageIcon )
@@ -45,10 +47,11 @@ public class Splash extends JWindow
         final int height = imageIcon.getIconHeight();
         final JLabel label = new JLabel( imageIcon );
         label.setBounds( 0, 0, width, height );
+        setContentPane( new TranslucentPane() );
         setSize( width, height );
-
-        getContentPane().setLayout( null );
-        getContentPane().add( label );
+        setBackground( new Color( 0, 0, 0, 0 ) );
+        setLayout( null );
+        add( label );
 
         WindowUtils.centerOnScreen( this );
         setVisible( true );
@@ -60,11 +63,12 @@ public class Splash extends JWindow
         final int height = imageIcon.getIconHeight();
         final JLabel label = new JLabel( imageIcon );
         label.setBounds( 0, 0, width, height );
+        setContentPane( new TranslucentPane() );
         setSize( width, height );
-
-        getContentPane().setLayout( null );
-        getContentPane().add( scroller );
-        getContentPane().add( label );
+        setBackground( new Color( 0, 0, 0, 0 ) );
+        setLayout( null );
+        add( scroller );
+        add( label );
 
         WindowUtils.centerOnScreen( this );
         setAlwaysOnTop( true );
@@ -79,7 +83,7 @@ public class Splash extends JWindow
     public static void main( final String[] args ) throws FileNotFoundException
     {
         LogUtils.init();
-        final ImageIcon imageIcon = new ImageIcon( "resources/splash.jpg" );
+        final ImageIcon imageIcon = new ImageIcon( "resources/splash.gif" );
         final AnimationQueue scrollingComponent = new AnimationQueue();
         scrollingComponent.setBounds( 100, 68, 200, 167 );
         final Insets insets = new Insets( 0, 10, 0, 10 );
@@ -98,5 +102,6 @@ public class Splash extends JWindow
 
         new Splash( imageIcon, scrollingComponent );
     }
+
 }
 

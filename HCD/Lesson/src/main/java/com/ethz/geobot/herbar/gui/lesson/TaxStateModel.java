@@ -24,7 +24,6 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.MODIFY;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
@@ -42,15 +41,20 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.prefs.Preferences;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TaxStateModel
 {
+    private static final Logger LOG = LoggerFactory.getLogger( TaxStateModel.class );
+
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport( this );
 
     private final HerbarContext context;
@@ -457,6 +461,16 @@ public class TaxStateModel
     {
         for ( final FireArray f : fire )
         {
+            if ( f.name.equals( TAXA.name() ) )
+            {
+                final String oldSize = (f.oldVal == null ? "null" : ((FilterTaxon[]) f.oldVal).length + " taxa");
+                final String newSize = (f.newVal == null ? "null" : ((FilterTaxon[]) f.newVal).length + " taxa");
+                LOG.info( "changing " + f.name + " from \"" + oldSize + "\" to \"" + newSize + "\"" );
+            }
+            else
+            {
+                LOG.info( "changing " + f.name + " from \"" + f.oldVal + "\" to \"" + f.newVal + "\"");
+            }
             propertyChangeSupport.firePropertyChange( f.name, f.oldVal, f.newVal );
         }
     }

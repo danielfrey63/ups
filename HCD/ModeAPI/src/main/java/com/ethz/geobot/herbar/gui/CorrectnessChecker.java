@@ -26,8 +26,6 @@ import ch.jfactory.math.EvaluationResult;
 import ch.jfactory.math.LevenshteinLevel;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +47,7 @@ public class CorrectnessChecker
 
     private static final LevenshteinLevel mustBeEqual = LevenshteinLevel.LEVEL_EQUAL;
 
-    private static final Map<String, String[]> hsh;
+    private static final String[][] allEndings;
 
     private List<String> correctnessText;
 
@@ -67,7 +65,7 @@ public class CorrectnessChecker
         }
 
         // check whether within the given tolerance for species, endings may be wrong
-        if ( taxon.indexOf( ' ' ) >= 0 )
+        if ( taxon.contains( " " ) )
         {
             final Correctness[] iG = checkGenus( taxon, guess );
             final Correctness[] iS = checkEpithethon( taxon, guess );
@@ -193,10 +191,11 @@ public class CorrectnessChecker
     {
         correct = correct.toLowerCase().trim();
         guess = guess.toLowerCase().trim();
+        final int iGuess = guess.indexOf( " " );
         final int iCorrect = correct.indexOf( " " );
-        final String geniusGuess = guess.contains( " " ) ? guess.substring( 0, guess.indexOf( " " ) ).trim() : guess;
-        final String speciesCorrect = correct.substring( 0, iCorrect ).trim();
-        return checkTaxon( speciesCorrect, geniusGuess );
+        final String geniusGuess = iGuess >= 0 ? guess.substring( 0, iGuess ).trim() : guess;
+        final String geniusCorrect = correct.substring( 0, iCorrect ).trim();
+        return checkTaxon( geniusCorrect, geniusGuess );
     }
 
     private Correctness[] checkEpithethon( String correct, String guess )
@@ -233,53 +232,56 @@ public class CorrectnessChecker
         else
         {
             final Correctness[] res = new Correctness[]{IS_FALSE, IS_FALSE};
-            for ( final String s : hsh.keySet() )
+
+            for ( final String[] endings : allEndings )
             {
-                if ( guess.endsWith( s ) )
+                for ( final String ending : endings )
                 {
-                    String guessPostfix = "", correctPostfix = "";
-                    if ( correct.endsWith( s ) && guess.length() == correct.length() )
+                    if ( guess.endsWith( ending ) )
                     {
-                        // both endings match, but bodies are different
-                        res[1] = IS_TRUE;
-                        guessPostfix = s;
-                        correctPostfix = s;
-                    }
-                    else
-                    {
-                        // bodies are different and endings MAY be tolerated. If endings have been determined for
-                        // both strings, there bodies are extracted. Bodies then are compared.
-                        final String[] toleratedEndings = hsh.get(s);
-                        for ( final String alternateEnding : toleratedEndings )
+                        String guessPostfix = "", correctPostfix = "";
+                        if ( correct.endsWith( ending ) && guess.length() == correct.length() )
                         {
-                            if ( guess.endsWith( alternateEnding ) )
+                            // both endings match, but bodies are different
+                            res[1] = IS_TRUE;
+                            guessPostfix = ending;
+                            correctPostfix = ending;
+                        }
+                        else
+                        {
+                            // bodies are different and endings MAY be tolerated. If endings have been determined for
+                            // both strings, there bodies are extracted. Bodies then are compared.
+                            for ( final String alternateEnding : endings )
                             {
-                                guessPostfix = alternateEnding;
-                            }
-                            if ( correct.endsWith( alternateEnding ) )
-                            {
-                                correctPostfix = alternateEnding;
-                                res[1] = IS_NEARLY_TRUE;
+                                if ( guess.endsWith( alternateEnding ) )
+                                {
+                                    guessPostfix = alternateEnding;
+                                }
+                                if ( correct.endsWith( alternateEnding ) )
+                                {
+                                    correctPostfix = alternateEnding;
+                                    res[1] = IS_NEARLY_TRUE;
+                                }
                             }
                         }
+                        final String correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
+                        final String guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
+                        final EvaluationResult strongEval = mustBeEqual.getEval( guessedBody, correctBody );
+                        final EvaluationResult tolerantEval = mayBeTolerated.getEval( guessedBody, correctBody );
+                        if ( strongEval.isPassed() )
+                        {
+                            res[0] = IS_TRUE;
+                        }
+                        else if ( tolerantEval.isPassed() )
+                        {
+                            res[0] = IS_NEARLY_TRUE;
+                        }
+                        else
+                        {
+                            res[0] = IS_FALSE;
+                        }
+                        return res;
                     }
-                    final String correctBody = correct.substring( 0, correct.lastIndexOf( correctPostfix ) );
-                    final String guessedBody = guess.substring( 0, guess.lastIndexOf( guessPostfix ) );
-                    final EvaluationResult strongEval = mustBeEqual.getEval( guessedBody, correctBody );
-                    final EvaluationResult tolerantEval = mayBeTolerated.getEval( guessedBody, correctBody );
-                    if ( strongEval.isPassed() )
-                    {
-                        res[0] = IS_TRUE;
-                    }
-                    else if ( tolerantEval.isPassed() )
-                    {
-                        res[0] = IS_NEARLY_TRUE;
-                    }
-                    else
-                    {
-                        res[0] = IS_FALSE;
-                    }
-                    return res;
                 }
             }
             return res;
@@ -293,19 +295,13 @@ public class CorrectnessChecker
 
     static
     {
-        hsh = new HashMap<String, String[]>();
         // make sure to have the shorter endings at the end...
-        hsh.put( "tans", new String[]{"ens", "tans"} );
-        hsh.put( "ens", new String[]{"ens", "tans"} );
-        hsh.put( "e", new String[]{"er", "is", "e"} );
-        hsh.put( "is", new String[]{"er", "is", "e"} );
-        hsh.put( "er", new String[]{"er", "is", "e"} );
-        hsh.put( "um", new String[]{"um", "us", "a"} );
-        hsh.put( "us", new String[]{"um", "us", "a"} );
-        hsh.put( "a", new String[]{"um", "us", "a"} );
-        hsh.put( "i", new String[]{"ii", "i"} );
-        hsh.put( "ii", new String[]{"ii", "i"} );
-
+        allEndings = new String[][] {
+                {"tans", "ens"},
+                {"er", "is", "ys", "e"},
+                {"um", "us", "a"},
+                {"ii", "i"}
+        };
     }
 
     public static class Correctness
@@ -358,7 +354,7 @@ public class CorrectnessChecker
     {
         final CorrectnessChecker checker = new CorrectnessChecker();
         final boolean testPassed = expected == checker.getCorrectness( taxon, guess, new String[]{"Abies alba"} );
-        if (!testPassed) System.out.println( "- checking \"" + taxon + "\" against \"" + guess + "\" expecting " +
+        if ( !testPassed ) System.out.println( "- checking \"" + taxon + "\" against \"" + guess + "\" expecting " +
                 expected + " - test " + (testPassed ? "passed" : ">> FAILED <<") );
     }
 }

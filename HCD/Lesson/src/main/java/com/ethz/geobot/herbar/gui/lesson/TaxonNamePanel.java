@@ -35,7 +35,7 @@ import com.ethz.geobot.herbar.model.TaxonSynonym;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.CardLayout;
-import java.awt.Font;
+import static java.awt.Font.BOLD;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -103,6 +103,7 @@ public class TaxonNamePanel extends JPanel
      * The taxon behind this panel
      */
     private final Taxon taxon;
+    private final JLabel label;
 
     /**
      * Displays an icon for the taxon level, a entry field or taxon name and a correctness or question mark.
@@ -119,7 +120,7 @@ public class TaxonNamePanel extends JPanel
         this.parent = parent;
         this.taxStateModel = taxStateModel;
 
-        final JLabel label = new JLabel( taxon.getName() );
+        label = new JLabel( " " + taxon.getName() + " " );
         panel.add( label, LERNEN.name() );
         panel.add( taxonField, ABFRAGEN.name() );
         panel.setBorder( new EmptyBorder( 1, 0, 0, 0 ) );
@@ -148,12 +149,12 @@ public class TaxonNamePanel extends JPanel
             public void actionPerformed( ActionEvent e )
             {
                 final String guess = taxonField.getText();
-                LOG.debug( "checking guess " + guess );
                 final CorrectnessChecker.Correctness correctness = handleCorrectness( guess, taxon );
                 if ( correctness == IS_TRUE )
                 {
                     swapSubModes();
                 }
+                LOG.info( "guess of \"" + guess + "\" for \"" + taxon + "\" is " + correctness );
             }
         } );
         setSubMode( subMode );
@@ -168,7 +169,6 @@ public class TaxonNamePanel extends JPanel
 
     public void setSubMode( final SubMode subMode )
     {
-
         layout.show( panel, subMode.name() );
         taxonField.setText( "" );
     }
@@ -193,7 +193,7 @@ public class TaxonNamePanel extends JPanel
         return correctness;
     }
 
-    private String[] extractSynonymTexts( Taxon taxon )
+    private String[] extractSynonymTexts( final Taxon taxon )
     {
         final GraphNodeList syns = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
         final String[] synonyms = new String[syns.getAll().length];

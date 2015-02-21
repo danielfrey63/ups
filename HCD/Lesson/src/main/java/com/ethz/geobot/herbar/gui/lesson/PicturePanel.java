@@ -177,7 +177,7 @@ public class PicturePanel extends JPanel
      */
     public void setTaxon( final Taxon taxon, final Taxon... toCache )
     {
-        LOG.info( "setting taxon to \"" + taxon + "\"" );
+        LOG.debug( "setting taxon to \"" + taxon + "\"" );
         model.setTaxon( taxon );
         pictureTab.clearAll();
         for ( final PictureTheme theme : themes )

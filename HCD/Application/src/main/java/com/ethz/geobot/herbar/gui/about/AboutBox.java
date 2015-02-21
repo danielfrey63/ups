@@ -24,14 +24,15 @@ package com.ethz.geobot.herbar.gui.about;
 
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 
 /**
  * @author $Author: daniel_frey $
@@ -39,45 +40,19 @@ import javax.swing.JWindow;
  */
 public class AboutBox extends JWindow
 {
-    private final ImageIcon about = ImageLocator.getIcon( "splash.jpg" );
-
-    private final JButton buttonSplash = new JButton();
+    private final ImageIcon about = ImageLocator.getIcon( "splash.gif" );
 
     public AboutBox( final JFrame parent )
     {
         super( parent );
         build();
-        addWindowListener();
-        addMouseListener();
-    }
-
-    private void addMouseListener()
-    {
-        buttonSplash.addMouseListener( new MouseAdapter()
+        addMouseListener( new MouseAdapter()
         {
             public void mouseClicked( final MouseEvent me )
             {
-                closeWindow();
+                AboutBox.this.dispose();
             }
         } );
-    }
-
-    private void addWindowListener()
-    {
-        addWindowListener( new WindowAdapter()
-        {
-            public void windowClosing()
-            {
-                closeWindow();
-            }
-
-        } );
-    }
-
-    public void closeWindow()
-    {
-        setVisible( false );
-        dispose();
     }
 
     public void setVisible( final boolean b )
@@ -94,14 +69,15 @@ public class AboutBox extends JWindow
 
     private void build()
     {
-        buttonSplash.setBorder( null );
-        buttonSplash.setIcon( about );
-        buttonSplash.setBounds( 0, 0, 480, 272 );
-
-        final Container contentPane = getContentPane();
-        contentPane.setLayout( null );
-        contentPane.add( buttonSplash );
-        setSize( 480, 272 );
+        final int width = about.getIconWidth();
+        final int height = about.getIconHeight();
+        final JLabel label = new JLabel( about );
+        label.setBounds( 0, 0, width, height );
+        setContentPane( new TranslucentPane() );
+        setSize( width, height );
+        setBackground( new Color( 0, 0, 0, 0 ) );
+        setLayout( null );
+        add( label );
     }
 
     public static void main( final String[] args )

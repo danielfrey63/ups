@@ -201,7 +201,7 @@ public class AppHerbar
 
     private void initSplash()
     {
-        final ImageIcon imageIcon = ImageLocator.getIcon( "splash.jpg" );
+        final ImageIcon imageIcon = ImageLocator.getIcon( "splash.gif" );
         SwingUtilities.invokeLater( new Runnable()
         {
             public void run()

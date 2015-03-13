@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.lesson</artifactId>
     <name>Learning Environment Lession Modul</name>
-    <version>6.0-SNAPSHOT</version>
+    <version>6.0.2932</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -53,4 +53,9 @@
             <artifactId>spring-core</artifactId>
         </dependency>
     </dependencies>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.lesson-6.0.2932</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.lesson-6.0.2932</url>
+  </scm>
 </project>

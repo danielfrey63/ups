@@ -42,9 +42,13 @@ public class IteratorControlPanel extends JPanel
 {
     private final Cursor<Taxon> cursor = new ArrayCursor<Taxon>( new Taxon[0] );
 
+    private JButton first;
+
     private JButton previous;
 
     private JButton next;
+
+    private JButton last;
 
     private JLabel positionInfoText;
 
@@ -130,8 +134,10 @@ public class IteratorControlPanel extends JPanel
      */
     private void initComponents()
     {
+        first = createFirstButton();
         previous = createPrevButton();
         next = createNextButton();
+        last = createLastButton();
         positionInfoText = createPositionLabel();
     }
 
@@ -146,17 +152,20 @@ public class IteratorControlPanel extends JPanel
         return label;
     }
 
-    private JButton createNextButton()
+    private JButton createFirstButton()
     {
         final ActionListener action = new ActionListener()
         {
             public void actionPerformed( final ActionEvent e )
             {
-                cursor.next();
+                while ( cursor.hasPrevious() )
+                {
+                    cursor.previous();
+                }
                 fireItemChange( new IteratorControlEvent( cursor.getCurrent() ) );
             }
         };
-        return ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
+        return ComponentFactory.createButton( "BUTTON.NAVIGATION.FIRST", action );
     }
 
     private JButton createPrevButton()
@@ -172,14 +181,53 @@ public class IteratorControlPanel extends JPanel
         return ComponentFactory.createButton( "BUTTON.NAVIGATION.PREV", action );
     }
 
-    public JButton getNextButton()
+    private JButton createNextButton()
     {
-        return next;
+        final ActionListener action = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                cursor.next();
+                fireItemChange( new IteratorControlEvent( cursor.getCurrent() ) );
+            }
+        };
+        return ComponentFactory.createButton( "BUTTON.NAVIGATION.NEXT", action );
+    }
+
+    private JButton createLastButton()
+    {
+        final ActionListener action = new ActionListener()
+        {
+            public void actionPerformed( final ActionEvent e )
+            {
+                while ( cursor.hasNext() )
+                {
+                    cursor.next();
+                }
+                fireItemChange( new IteratorControlEvent( cursor.getCurrent() ) );
+            }
+        };
+        return ComponentFactory.createButton( "BUTTON.NAVIGATION.LAST", action );
+    }
+
+    public JButton getFirstButton()
+    {
+        return first;
     }
 
     public JButton getPrevButton()
     {
         return previous;
+    }
+
+    public JButton getNextButton()
+    {
+        return next;
+    }
+
+    public JButton getLastButton()
+    {
+        return last;
     }
 
     public JComponent getDisplay()

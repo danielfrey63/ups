@@ -78,9 +78,9 @@ public class TaxStateModel
         final String model = prefs.get( LIST.name().toLowerCase(), System.getProperty( "herbar.model.default" ) );
         setInternalModel( fire, model == null ? context.getDefaultModel() : context.getModel( model ) );
         setInternalScope( fire, getModel().getTaxon( prefs.get( SCOPE.name().toLowerCase(), getModel().getRootTaxon().getName() ) ) );
-        setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), vals.scope.getAllChildTaxa( vals.level )[0].getName() ) ) );
+        setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), context.getCurrentModel().getLastLevel().getName() ) ) );
         setInternalTaxList( fire );
-        setInternalOrdered( fire, prefs.getBoolean( ORDER.name().toLowerCase(), true ) );
+        setInternalOrdered( fire, prefs.getLong( ORDER.name().toLowerCase(), 0 ) == 0 );
         setInternalFocus( fire, getModel().getTaxon( prefs.get( FOCUS.name().toLowerCase(), getTaxList()[0].getName() ) ) );
         fireAllPropertyChangeEvents( fire );
     }
@@ -171,6 +171,7 @@ public class TaxStateModel
             setInternalTaxList( fire );
             setInternalOrdered( fire, vals.ordered );
             setInternalFocus( fire, taxon );
+            setInternalGlobalSubMode( fire, getGlobalSubMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -224,7 +225,7 @@ public class TaxStateModel
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         setInternalGlobalSubMode( fire, LERNEN );
         setInternalEditMode( fire, mode );
-        final Level[] levels = getModel().getLevels();
+        //final Level[] levels = getModel().getLevels();
         //setInternalLevel( fire, ArrayUtils.contains( levels, vals.level ) ? vals.level : levels[levels.length - 1] );
         setInternalTaxList( fire );
         setInternalFocus( fire, taxList[0] );
@@ -312,7 +313,14 @@ public class TaxStateModel
         // Todo: silly workaround b/c the child getter doesn't retrieve the scope.
         if ( vals.scope.getLevel() == vals.level )
         {
-            newTaxList = new Taxon[]{vals.scope};
+            if ( vals.scope instanceof FilterTaxon )
+            {
+                newTaxList = new FilterTaxon[]{(FilterTaxon) vals.scope};
+            }
+            else
+            {
+                LOG.error( "attempt to create a non-filter taxon list" );
+            }
         }
         fire.add( new FireArray( TAXA.name(), taxList, newTaxList ) );
         taxList = newTaxList;
@@ -331,13 +339,21 @@ public class TaxStateModel
         if ( ordered )
         {
             Arrays.sort( taxList );
+            context.getPreferencesNode().remove( ORDER.name().toLowerCase() );
         }
         else
         {
-            RandomUtils.randomize( taxList );
+            final long seed = context.getPreferencesNode().getLong( ORDER.name().toLowerCase(), 0 );
+            if ( seed == 0 )
+            {
+                context.getPreferencesNode().putLong( ORDER.name().toLowerCase(), RandomUtils.randomize( taxList ) );
+            }
+            else
+            {
+                RandomUtils.randomize( taxList, seed );
+            }
         }
         vals.ordered = ordered;
-        context.getPreferencesNode().putBoolean( ORDER.name().toLowerCase(), ordered );
     }
 
     /**
@@ -469,7 +485,7 @@ public class TaxStateModel
             }
             else
             {
-                LOG.info( "changing " + f.name + " from \"" + f.oldVal + "\" to \"" + f.newVal + "\"");
+                LOG.info( "changing " + f.name + " from \"" + f.oldVal + "\" to \"" + f.newVal + "\"" );
             }
             propertyChangeSupport.firePropertyChange( f.name, f.oldVal, f.newVal );
         }

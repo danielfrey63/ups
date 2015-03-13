@@ -120,9 +120,11 @@ public class LessonBar extends JPanel
         toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( orderButton );
         toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
+        toolBar.add( taxonControl.getFirstButton() );
         toolBar.add( taxonControl.getPrevButton() );
         toolBar.add( taxonControl.getDisplay() );
         toolBar.add( taxonControl.getNextButton() );
+        toolBar.add( taxonControl.getLastButton() );
         toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
         toolBar.add( subModusToggle );
         toolBar.add( ComponentFactory.createBarSeparator( 0, 3, 0, 3 ) );
@@ -213,6 +215,7 @@ public class LessonBar extends JPanel
             public void propertyChange( PropertyChangeEvent e )
             {
                 taxonControl.setList( taxStateModel.getTaxList() );
+                setScrollerState( taxStateModel.getFocus() );
             }
         } );
         taxStateModel.addPropertyChangeListener( FOCUS.name(), new PropertyChangeListener()

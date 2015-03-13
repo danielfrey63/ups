@@ -26,6 +26,7 @@ import ch.jfactory.model.graph.GraphNodeList;
 import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.CorrectnessChecker;
+import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_FALSE;
 import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
@@ -188,6 +189,11 @@ public class TaxonNamePanel extends JPanel
         {
             final Object[] buttons = new Object[]{Strings.getString( "BUTTON.OK.TEXT" )};
             JOptionPane.showOptionDialog( parent, answer.toArray(), "Hinweis", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
+        }
+        else if ( correctness == IS_FALSE )
+        {
+            final Object[] buttons = new Object[]{Strings.getString( "BUTTON.OK.TEXT" )};
+            JOptionPane.showOptionDialog( parent, new String[] {"Ihre Eingabe ist nicht zutreffend", "Bitte probieren Sie es nochmals", ""}, "Nächster Versuch", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
         }
         // some new evaluations take place AFTER the correct taxon has been passed, so keep complete state
         return correctness;

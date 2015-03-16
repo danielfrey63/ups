@@ -76,12 +76,30 @@ public class TaxStateModel
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
         final Preferences prefs = context.getPreferencesNode();
         final String model = prefs.get( LIST.name().toLowerCase(), System.getProperty( "herbar.model.default" ) );
+
+        LOG.info( "trying to initialize model to " + model );
         setInternalModel( fire, model == null ? context.getDefaultModel() : context.getModel( model ) );
+        LOG.info( "initialized model to " + herbarModel );
+
+        LOG.info( "trying to initialize scope to " + prefs.get( SCOPE.name().toLowerCase(), null ) );
         setInternalScope( fire, getModel().getTaxon( prefs.get( SCOPE.name().toLowerCase(), getModel().getRootTaxon().getName() ) ) );
-        setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), context.getCurrentModel().getLastLevel().getName() ) ) );
+        LOG.info( "initialized scope to " + vals.scope );
+
+        LOG.info( "trying to initialize level to " + prefs.get( LEVEL.name().toLowerCase(), null ) );
+        setInternalLevel( fire, getModel().getTaxon( prefs.get( LEVEL.name().toLowerCase(), getModel().getLastLevel().getName() ) ) );
+        LOG.info( "initialized level to " + vals.level );
+
         setInternalTaxList( fire );
+        LOG.info( "initialized taxlist to " + taxList.length );
+
+        LOG.info( "trying to initialize order to " + prefs.getLong( ORDER.name().toLowerCase(), 0 ) );
         setInternalOrdered( fire, prefs.getLong( ORDER.name().toLowerCase(), 0 ) == 0 );
+        LOG.info( "initialized ordered to " + vals.ordered );
+
+        LOG.info( "trying to initialize focus to " + prefs.get( FOCUS.name().toLowerCase(), null ) );
         setInternalFocus( fire, getModel().getTaxon( prefs.get( FOCUS.name().toLowerCase(), getTaxList()[0].getName() ) ) );
+        LOG.info( "initialized focus to " + vals.focus );
+
         fireAllPropertyChangeEvents( fire );
     }
 
@@ -285,7 +303,7 @@ public class TaxStateModel
      * before.
      *
      * @param fire  the notifications list
-     * @param taxon
+     * @param taxon the taxon to set the level to
      */
     private void setInternalLevel( final ArrayList<FireArray> fire, final Taxon taxon )
     {
@@ -296,7 +314,7 @@ public class TaxStateModel
             {
                 fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
                 vals.level = level;
-                context.getPreferencesNode().put( LEVEL.name().toLowerCase(), taxon.getName() );
+                context.getPreferencesNode().put( LEVEL.name().toLowerCase(), taxon.getLevel().getName() );
             }
         }
     }
@@ -305,7 +323,7 @@ public class TaxStateModel
      * Recreates the taxon list. Make sure the model, scope and level have been set correctly before. Handles the case
      * where the scope equals to the focus.
      *
-     * @param fire
+     * @param fire the notifications list
      */
     private void setInternalTaxList( final ArrayList<FireArray> fire )
     {

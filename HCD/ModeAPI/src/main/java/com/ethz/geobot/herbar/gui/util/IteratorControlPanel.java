@@ -30,7 +30,11 @@ import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * User interactive control to set position inside a list of object (Taxon etc.). First, you have to register the IteratorPositionChangeListener to the control. Then set the list using the setList method.
@@ -44,7 +48,7 @@ public class IteratorControlPanel extends JPanel
 
     private JButton first;
 
-    private JButton previous;
+    private JButton prev;
 
     private JButton next;
 
@@ -74,8 +78,10 @@ public class IteratorControlPanel extends JPanel
     {
         isEnabled = enabled;
         super.setEnabled( isEnabled );
-        previous.setEnabled( isEnabled && cursor.hasPrevious() );
+        first.setEnabled( isEnabled && cursor.hasPrevious() );
+        prev.setEnabled( isEnabled && cursor.hasPrevious() );
         next.setEnabled( isEnabled && cursor.hasNext() );
+        last.setEnabled( isEnabled && cursor.hasNext() );
         positionInfoText.setEnabled( isEnabled );
     }
 
@@ -102,8 +108,10 @@ public class IteratorControlPanel extends JPanel
     {
         setCurrent( taxon );
 
+        first.setEnabled( isEnabled && cursor.hasPrevious() );
+        prev.setEnabled( isEnabled && cursor.hasPrevious() );
         next.setEnabled( isEnabled && cursor.hasNext() );
-        previous.setEnabled( isEnabled && cursor.hasPrevious() );
+        last.setEnabled( isEnabled && cursor.hasNext() );
 
         final String prefix = (labelString == null ? "" : labelString + " ");
         final String from = (cursor.isEmpty() ? "0" : "" + (cursor.getCurrentIndex() + 1));
@@ -135,7 +143,7 @@ public class IteratorControlPanel extends JPanel
     private void initComponents()
     {
         first = createFirstButton();
-        previous = createPrevButton();
+        prev = createPrevButton();
         next = createNextButton();
         last = createLastButton();
         positionInfoText = createPositionLabel();
@@ -217,7 +225,7 @@ public class IteratorControlPanel extends JPanel
 
     public JButton getPrevButton()
     {
-        return previous;
+        return prev;
     }
 
     public JButton getNextButton()

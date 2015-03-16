@@ -36,14 +36,15 @@ import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.thoughtworks.xstream.XStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -154,8 +155,7 @@ public class FilterFactory
             }
             else
             {
-                LOG.warn( "cannot find scope: " + detail.getScope() +
-                        " for model: " + filter.getName() + " skip detail" );
+                LOG.warn( "cannot find scope  \"" + detail.getScope() + "\" for model \"" + filter.getName() + "\" - skipping detail" );
             }
         }
         return model;
@@ -283,9 +283,10 @@ public class FilterFactory
         final String filename = generateFilterFileName( filter.getName() );
         try
         {
-            final Writer out = new BufferedWriter( new FileWriter( filename ) );
-            getSerializer().toXML( filter, out );
-            out.close();
+            final Writer writer = new OutputStreamWriter( new FileOutputStream( filename ), Charset.forName( "UTF-8" ) );
+            writer.write( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + System.getProperty( "line.separator" ) );
+            getSerializer().toXML( filter, writer );
+            writer.close();
         }
         catch ( Exception ex )
         {

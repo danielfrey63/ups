@@ -22,6 +22,7 @@
  */
 package com.ethz.geobot.herbar.model.filter;
 
+import ch.jfactory.lang.ArrayUtils;
 import com.ethz.geobot.herbar.model.AbstractHerbarModel;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
@@ -82,7 +83,8 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public Level getLastLevel()
     {
-        return dependentModel.getLastLevel();
+        final Level[] levels = getLevels();
+        return levels[levels.length - 1];
     }
 
     public FilterTaxon getRootTaxon()
@@ -122,7 +124,9 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public Level getLevel( final String name )
     {
-        return dependentModel.getLevel( name );
+        final Level[] levels = getLevels();
+        final int i = ArrayUtils.indexOf( levels, name );
+        return i < 0 ? null : levels[i];
     }
 
     public FilterTaxon getTaxon( final String taxonName )
@@ -148,7 +152,10 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
         final TreeSet<Level> result = new TreeSet<Level>( new LevelComparator() );
         for ( final Taxon filteredTaxon : dependentFilteredTaxonList.keySet() )
         {
-            result.add( filteredTaxon.getLevel() );
+            if ( filteredTaxon.getLevel() != null )
+            {
+                result.add( filteredTaxon.getLevel() );
+            }
         }
         return result.toArray( new Level[result.size()] );
     }

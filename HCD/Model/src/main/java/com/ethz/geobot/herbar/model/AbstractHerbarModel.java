@@ -109,7 +109,7 @@ abstract public class AbstractHerbarModel implements HerbarModel
     {
         if ( LOG.isDebugEnabled() )
         {
-            LOG.debug( "rename model form >" + this.name + "< to >" + name + "<" );
+            LOG.debug( "rename model form \"" + this.name + "\" to \"" + name + "\"" );
         }
         this.name = name;
     }

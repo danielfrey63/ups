@@ -28,6 +28,7 @@ import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.filter.FilterPersistentException;
 import com.ethz.geobot.herbar.gui.AppHerbar;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.modeapi.HerbarGUIManager;
 import com.ethz.geobot.herbar.modeapi.Mode;
@@ -58,6 +59,10 @@ public class HerbarContextImpl implements HerbarContext
     private static final Map<Mode, HerbarGUIManager> modeGUIManagers = new HashMap<Mode, HerbarGUIManager>();
 
     private final Mode mode;
+
+    private PictureCache mainCache;
+
+    private PictureCache backgroundCache;
 
     HerbarContextImpl( final Mode mode )
     {
@@ -202,6 +207,30 @@ public class HerbarContextImpl implements HerbarContext
             LOG.info( "change current model to " + model.getName() );
         }
         currentModel = model;
+    }
+
+    @Override
+    public PictureCache getMainCache()
+    {
+        return mainCache;
+    }
+
+    @Override
+    public PictureCache getBackgroundCache()
+    {
+        return backgroundCache;
+    }
+
+    @Override
+    public void setMainCache( PictureCache mainCache )
+    {
+        this.mainCache = mainCache;
+    }
+
+    @Override
+    public void setBackgroundCache( PictureCache backgroundCache )
+    {
+        this.backgroundCache = backgroundCache;
     }
 
     class HerbarGUIManagerImpl implements HerbarGUIManager

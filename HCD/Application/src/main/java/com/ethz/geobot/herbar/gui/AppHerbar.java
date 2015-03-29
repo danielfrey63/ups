@@ -23,21 +23,44 @@
 package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.application.SystemUtil;
-import ch.jfactory.application.presentation.WindowUtils;
+import ch.jfactory.cache.FileImageCache;
+import ch.jfactory.cache.ImageCache;
+import ch.jfactory.cache.NestedImageCache;
+import ch.jfactory.cache.UrlImageCache;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
+import com.ethz.geobot.herbar.gui.mode.ModeManager;
 import com.ethz.geobot.herbar.gui.mode.ModeNotFoundException;
+import com.ethz.geobot.herbar.gui.picture.CachingExceptionHandler;
+import com.ethz.geobot.herbar.gui.picture.ImageCachingExceptionHandler;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
+import static com.ethz.geobot.herbar.gui.picture.PictureCache.FINISHED;
+import static com.ethz.geobot.herbar.gui.picture.PictureCache.RESUME;
+import static com.ethz.geobot.herbar.gui.picture.PictureCache.WAITING;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
+import com.ethz.geobot.herbar.model.CommentedPicture;
+import com.ethz.geobot.herbar.model.HerbarModel;
+import com.ethz.geobot.herbar.model.Picture;
+import com.ethz.geobot.herbar.model.PictureTheme;
+import com.ethz.geobot.herbar.model.Taxon;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import static java.util.jar.Attributes.Name.IMPLEMENTATION_VERSION;
+import java.util.jar.Manifest;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -52,6 +75,8 @@ import org.slf4j.LoggerFactory;
  */
 public class AppHerbar
 {
+    private static final String PROPERTYNAME_VERSION_FULL = "herbar.version";
+
     private static Logger LOG = LoggerFactory.getLogger( AppHerbar.class );
 
     private static final String DIR_SC = "sc";
@@ -62,6 +87,12 @@ public class AppHerbar
 
     private static Splash splash;
 
+    private PictureCache cache;
+
+    private PictureCache backgroundCache;
+
+    private NestedImageCache imageCache;
+
     /**
      * reference to the one and only mainframe
      */
@@ -69,18 +100,19 @@ public class AppHerbar
 
     public AppHerbar( final int selection )
     {
+        setVersion( AppHerbar.class );
         setupDirectories( selection );
         initSplash();
         decompressDatabase( selection );
-        Application.getInstance().getModel();
+        installDownloaders();
         System.setProperty( ImageLocator.PROPERTY_IMAGE_LOCATION, System.getProperty( "xmatrix.picture.path" ) );
 
         mainFrame = new MainFrame();
         mainFrame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-
         // load old user settings
         try
         {
+            ModeManager.getInstance().registerCaches( cache, backgroundCache );
             mainFrame.loadState();
             mainFrame.setVisible( true );
         }
@@ -90,6 +122,91 @@ public class AppHerbar
         }
 
         splash.finish();
+    }
+
+    private void installDownloaders()
+    {
+        CachingExceptionHandler exceptionHandler = new ImageCachingExceptionHandler();
+        cache = new PictureCache( "Main-Image-Thread", exceptionHandler, ImageLocator.PICT_LOCATOR );
+        ensureBackgroundThread( exceptionHandler );
+        final Set<String> images = collectAllPictures();
+        backgroundCache.queueImages( images.toArray( new String[images.size()] ), false, false, cache.getStatus() == 0 );
+    }
+
+    private void ensureBackgroundThread( final CachingExceptionHandler exceptionHandler )
+    {
+        if ( backgroundCache == null )
+        {
+            imageCache = new NestedImageCache( new ImageCache[0], new FileImageCache( ImageLocator.getPicturePath(), "jpg" ), new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );
+            backgroundCache = new PictureCache( "Background-Image-Thread", exceptionHandler, imageCache );
+            final PropertyChangeListener waitingListener = new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent e )
+                {
+                    LOG.info( "resuming " + backgroundCache.getName() + " by WAITING of " + cache.getName() );
+                    backgroundCache.resume();
+                }
+            };
+            final PropertyChangeListener resumingListener = new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent e )
+                {
+                    LOG.info( "suspending " + backgroundCache.getName() + " by RESUME of " + cache.getName() );
+                    backgroundCache.suspend();
+                }
+            };
+            cache.addPropertyChangeListener( WAITING, waitingListener );
+            cache.addPropertyChangeListener( RESUME, resumingListener );
+            backgroundCache.addPropertyChangeListener( FINISHED, new PropertyChangeListener()
+            {
+                @Override
+                public void propertyChange( PropertyChangeEvent evt )
+                {
+                    LOG.info( "finishing " + backgroundCache.getName() );
+                    backgroundCache.stop();
+                    cache.removePropertyChangeListener( WAITING, waitingListener );
+                    cache.removePropertyChangeListener( RESUME, resumingListener );
+                    LOG.info( "resuming " + cache.getName() );
+                }
+            } );
+        }
+    }
+
+    private Set<String> collectAllPictures()
+    {
+        LOG.info( "collecting all pictures" );
+        final HerbarModel dataModel = Application.getInstance().getModel();
+        final Taxon taxon = dataModel.getRootTaxon();
+        final PictureTheme[] themes = dataModel.getPictureThemes();
+        final Set<String> pictureNames = new TreeSet<String>();
+        collectPictures( taxon, themes, pictureNames );
+        return pictureNames;
+    }
+
+    private void collectPictures( final Taxon taxon, final PictureTheme[] themes, final Set<String> pictureNames )
+    {
+        for ( final PictureTheme pictureTheme : themes )
+        {
+            final CommentedPicture[] pictures = taxon.getCommentedPictures( pictureTheme );
+            for ( final CommentedPicture picture : pictures )
+            {
+                final Picture pic = picture.getPicture();
+                if ( pic != null )
+                {
+                    pictureNames.add( pic.getName() );
+                }
+                else
+                {
+                    LOG.error( "picture for \"" + picture + "\" is null" );
+                }
+            }
+        }
+        for ( final Taxon child : taxon.getChildTaxa() )
+        {
+            collectPictures( child, themes, pictureNames );
+        }
     }
 
     public static MainFrame getMainFrame()
@@ -145,7 +262,11 @@ public class AppHerbar
                 LOG.info( "decompressing DB from " + AppHerbar.class.getResource( "/" + file ) );
                 final InputStream is = AppHerbar.class.getResourceAsStream( "/" + file );
                 File destinationFile = new File( homeDir + file );
-                destinationFile.getParentFile().mkdirs();
+                boolean b = destinationFile.getParentFile().mkdirs();
+                if ( !b )
+                {
+                    LOG.debug( "parent directory for DB exists, no need to create one" );
+                }
                 final OutputStream os = new FileOutputStream( destinationFile );
                 IOUtils.copy( is, os );
                 os.close();
@@ -223,4 +344,22 @@ public class AppHerbar
             e.printStackTrace();
         }
     }
+
+    public static void setVersion( final Class clazz )
+    {
+        try
+        {
+            final String classContainer = clazz.getProtectionDomain().getCodeSource().getLocation().toString();
+            final URL manifestUrl = new URL( "jar:" + classContainer + "!/META-INF/MANIFEST.MF" );
+            final Manifest manifest = new Manifest( manifestUrl.openStream() );
+            final String version = manifest.getMainAttributes().getValue( IMPLEMENTATION_VERSION );
+            System.setProperty( PROPERTYNAME_VERSION_FULL, version );
+            LOG.info( "eBot version is " + version );
+        }
+        catch ( IOException e )
+        {
+            System.setProperty( PROPERTYNAME_VERSION_FULL, "6.0.SNAPSHOT" );
+        }
+    }
+
 }

@@ -22,6 +22,7 @@
  */
 package com.ethz.geobot.herbar.modeapi;
 
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import java.util.Collection;
 import java.util.Set;
@@ -126,4 +127,12 @@ public interface HerbarContext
      * @param model reference to the model
      */
     void setCurrentModel( HerbarModel model );
+
+    PictureCache getMainCache();
+
+    PictureCache getBackgroundCache();
+
+    void setMainCache( PictureCache mainCache );
+
+    void setBackgroundCache( PictureCache backgroundCache );
 }

@@ -47,7 +47,7 @@ public class ActionModuleInfo extends AbstractParametrizedAction
     public void actionPerformed( final ActionEvent parm1 )
     {
         final ModuleInfoDialog dlg = new ModuleInfoDialog( parent, "DIALOG.MODULES" );
-        dlg.setSize( 400, 400 );
+        dlg.setSize( 500, 500 );
         dlg.setLocationRelativeTo( AppHerbar.getMainFrame() );
         dlg.setVisible( true );
         dlg.toFront();

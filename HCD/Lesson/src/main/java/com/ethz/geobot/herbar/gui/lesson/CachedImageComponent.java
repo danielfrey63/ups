@@ -12,6 +12,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 import ch.jfactory.resource.AsyncPictureLoaderListener;
 import ch.jfactory.resource.CachedImage;
 import ch.jfactory.resource.PictureConverter;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

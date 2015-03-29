@@ -26,15 +26,32 @@ import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.component.table.BeanTableModel;
 import ch.jfactory.component.table.SortableTableModel;
 import ch.jfactory.component.table.SortedTable;
+import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.update.LocalVersionLocator;
+import com.ethz.geobot.herbar.gui.mode.ModeManager;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.TableColumnModel;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author $Author: daniel_frey $
@@ -42,6 +59,8 @@ import javax.swing.table.TableColumnModel;
  */
 public class ModuleInfoDialog extends I15nComponentDialog
 {
+    private static final Logger LOG = LoggerFactory.getLogger( ModuleInfoDialog.class );
+
     private static final int[] columnWidths = new int[]{150, 20};
 
     public ModuleInfoDialog( final Frame owner, final String prefix ) throws HeadlessException
@@ -72,6 +91,81 @@ public class ModuleInfoDialog extends I15nComponentDialog
         final JPanel panel = new JPanel();
         panel.setLayout( new BorderLayout() );
         panel.add( new JScrollPane( moduleTable ), BorderLayout.CENTER );
+
+        final JButton button = new JButton( "Erweitert..." );
+        button.addActionListener( new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                final JLabel text = new JLabel( "Wenn etwas gelöscht werden soll, wird eBot sofort beendet" );
+                final JCheckBox resetSettings = new JCheckBox( "Alle Einstellungen löschen" );
+                final JCheckBox resetPictures = new JCheckBox( "Alle gecachten Bilder löschen" );
+                final JCheckBox resetLists = new JCheckBox( "Alle Listen löschen" );
+                final int result = JOptionPane.showConfirmDialog( null, new JComponent[]{text, resetSettings, resetPictures, resetLists}, "Zurücksetzen", JOptionPane.YES_NO_OPTION );
+                if ( result == 0 )
+                {
+                    if ( resetSettings.isSelected() )
+                    {
+                        try
+                        {
+                            LOG.info( "deleting all settings for eBot" );
+                            Preferences.userRoot().node( "ebot" ).removeNode();
+                            LOG.info( "all settings deleted" );
+                        }
+                        catch ( BackingStoreException ex )
+                        {
+                            LOG.error( "error deleting all settings", ex );
+                        }
+                    }
+                    if ( resetPictures.isSelected() )
+                    {
+                        try
+                        {
+                            LOG.info( "deleting all pictures for eBot" );
+                            final PictureCache mainCache = ModeManager.getInstance().getMainCache();
+                            mainCache.stop();
+                            mainCache.resume();
+                            final PictureCache backgroundCache = ModeManager.getInstance().getBackgroundCache();
+                            backgroundCache.stop();
+                            backgroundCache.resume();
+                            Thread.currentThread().sleep( 1000 );
+                            FileUtils.deleteDirectory( new File( ImageLocator.getPicturePath() ) );
+                            LOG.info( "all pictures deleted" );
+                        }
+                        catch ( IOException ex )
+                        {
+                            LOG.error( "error deleting all images", ex );
+                        }
+                        catch ( InterruptedException ex )
+                        {
+                            LOG.error( "error sleeping", ex );
+                        }
+                    }
+                    if ( resetLists.isSelected() )
+                    {
+                        try
+                        {
+                            LOG.info( "deleting all lists for eBot" );
+                            FileUtils.deleteDirectory( new File( System.getProperty( "herbar.filter.location" ) ) );
+                            LOG.info( "all lists deleted" );
+                        }
+                        catch ( IOException ex )
+                        {
+                            LOG.error( "error deleting all lists", ex );
+                        }
+                    }
+                    if ( resetLists.isSelected() || resetPictures.isSelected() || resetSettings.isSelected() )
+                    {
+                        System.exit( 0 );
+                    }
+                }
+            }
+        } );
+        final JPanel bottom = new JPanel( new FlowLayout( FlowLayout.CENTER ) );
+        bottom.add( button );
+
+        panel.add( bottom, BorderLayout.SOUTH );
 
         return panel;
     }

@@ -7,7 +7,7 @@
  * implied.  See  the  License  for  the  specific  language governing
  * permissions and limitations under the License.
  */
-package com.ethz.geobot.herbar.gui.lesson;
+package com.ethz.geobot.herbar.gui.picture;
 
 import ch.jfactory.cache.FileImageCache;
 import ch.jfactory.cache.ImageCache;
@@ -221,11 +221,6 @@ public class PictureCache
         propertyChangeSupport.removePropertyChangeListener( type, listener );
     }
 
-    public interface CachingExceptionHandler
-    {
-        void handleCachingException( final Throwable e );
-    }
-
     public void suspend()
     {
         if ( cachingThread.isResumed() )
@@ -251,7 +246,7 @@ public class PictureCache
     /**
      * Internal class used to processing the caching image list.
      */
-    private class CacheImageThread extends SwingWorker<String, Float>
+    public class CacheImageThread extends SwingWorker<String, Float>
     {
         private final CachingExceptionHandler handler;
 

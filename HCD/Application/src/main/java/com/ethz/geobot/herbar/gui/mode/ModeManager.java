@@ -23,6 +23,8 @@
 package com.ethz.geobot.herbar.gui.mode;
 
 import ch.jfactory.resource.ImageLocator;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
+import com.ethz.geobot.herbar.modeapi.AbstractMode;
 import com.ethz.geobot.herbar.modeapi.Mode;
 import com.ethz.geobot.herbar.modeapi.ModeInfo;
 import com.ethz.geobot.herbar.modeapi.ModeRegistration;
@@ -65,6 +67,10 @@ public class ModeManager implements ModeRegistrationSupport
 
     /** HashMap containing all registered modes. */
     private final Map<Object, Mode> registeredModes = new HashMap<Object, Mode>();
+
+    /** Make caches available. */
+    private PictureCache mainCache;
+    private PictureCache backgroundCache;
 
     protected ModeManager()
     {
@@ -169,7 +175,21 @@ public class ModeManager implements ModeRegistrationSupport
         registeredModes.remove( mode.getProperty( Mode.NAME ) );
     }
 
-    /** register all jar files in a directory specified by the "herbar.modedir" environment variable. */
+    public void registerCaches( final PictureCache mainCache, final PictureCache backgroundCache )
+    {
+        for ( Object name : registeredModes.keySet() )
+        {
+            final AbstractMode mode = (AbstractMode) registeredModes.get( name );
+            mode.getHerbarContext().setMainCache( mainCache );
+            mode.getHerbarContext().setBackgroundCache( backgroundCache );
+        }
+        this.mainCache = mainCache;
+        this.backgroundCache = backgroundCache;
+    }
+
+    /**
+     * register all jar files in a directory specified by the "herbar.modedir" environment variable.
+     */
     private void registerAllModes()
     {
         try
@@ -202,9 +222,9 @@ public class ModeManager implements ModeRegistrationSupport
                 } );
                 final int nummodes = files.length;
                 LOG.info( "try to register " + nummodes + " modes from directory " + moddir );
-                for ( int i = 0; i < nummodes; i++ )
+                for ( File f : files )
                 {
-                    registerJarFile( files[i] );
+                    registerJarFile( f );
                 }
             }
         }
@@ -260,5 +280,15 @@ public class ModeManager implements ModeRegistrationSupport
             Class.forName( clazzName );
         }
         return clazzName;
+    }
+
+    public PictureCache getMainCache()
+    {
+        return mainCache;
+    }
+
+    public PictureCache getBackgroundCache()
+    {
+        return backgroundCache;
     }
 }

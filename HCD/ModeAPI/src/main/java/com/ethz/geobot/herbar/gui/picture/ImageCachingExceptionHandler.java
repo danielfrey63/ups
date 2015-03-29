@@ -1,33 +1,24 @@
-package com.ethz.geobot.herbar.gui.lesson;
+package com.ethz.geobot.herbar.gui.picture;
 
-import ch.jfactory.application.view.dialog.I15nComponentDialog;
 import ch.jfactory.application.view.dialog.ListDialog;
 import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.ImageCacheException;
 import ch.jfactory.cache.ImageRetrieveException;
 import ch.jfactory.component.Dialogs;
 import static ch.jfactory.resource.ImageLocator.PICT_LOCATOR;
-import com.ethz.geobot.herbar.gui.picture.ErrorHandlingDialog;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import org.apache.log4j.Logger;
 
-class LessonCachingExceptionHandler implements PictureCache.CachingExceptionHandler
+public class ImageCachingExceptionHandler implements CachingExceptionHandler
 {
-    private static final Logger LOG = Logger.getLogger( LessonCachingExceptionHandler.class );
+    private static final Logger LOG = Logger.getLogger( ImageCachingExceptionHandler.class );
 
     private final List<String> exceptions = new ArrayList<String>();
 
-    private JFrame parent;
-
     private long freeSpace = -1L;
-
-    public LessonCachingExceptionHandler( final JFrame parent )
-    {
-        this.parent = parent;
-    }
 
     public void handleCachingException( final Throwable e )
     {
@@ -77,9 +68,9 @@ class LessonCachingExceptionHandler implements PictureCache.CachingExceptionHand
                 PICT_LOCATOR.disableCache( cache );
             }
         }
-        else if (exceptions.size() > 0)
+        else if ( exceptions.size() > 0 )
         {
-            final ListDialog<String> dialog = new ListDialog<String>( parent, "DOWNLOAD.ERROR", exceptions.toArray( new String[exceptions.size()] ) )
+            final ListDialog<String> dialog = new ListDialog<String>( (JFrame)null, "DOWNLOAD.ERROR", exceptions.toArray( new String[exceptions.size()] ) )
             {
                 @Override
                 protected boolean isApplyShowing()

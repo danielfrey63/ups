@@ -15,6 +15,7 @@ import ch.jfactory.resource.AsyncPictureLoaderListener;
 import ch.jfactory.resource.CachedImage;
 import ch.jfactory.resource.CachedImagePicture;
 import static ch.jfactory.resource.CachedImagePictureSortingAlgorithm.ByName;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Image;

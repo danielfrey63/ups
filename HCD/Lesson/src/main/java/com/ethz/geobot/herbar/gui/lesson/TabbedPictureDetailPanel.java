@@ -22,6 +22,7 @@
  */
 package com.ethz.geobot.herbar.gui.lesson;
 
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;

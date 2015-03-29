@@ -27,6 +27,7 @@ import ch.jfactory.lang.ArrayUtils;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
+import com.ethz.geobot.herbar.gui.picture.PictureCache;
 import com.ethz.geobot.herbar.gui.picture.PictureModel;
 import com.ethz.geobot.herbar.model.CommentedPicture;
 import com.ethz.geobot.herbar.model.Picture;

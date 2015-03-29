@@ -30,6 +30,8 @@ import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.update.LocalVersionLocator;
 import com.ethz.geobot.herbar.gui.mode.ModeManager;
 import com.ethz.geobot.herbar.gui.picture.PictureCache;
+import com.ethz.geobot.herbar.modeapi.Mode;
+import static com.ethz.geobot.herbar.modeapi.Mode.NAME;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -38,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -110,6 +113,11 @@ public class ModuleInfoDialog extends I15nComponentDialog
                         try
                         {
                             LOG.info( "deleting all settings for eBot" );
+                            final Collection<? extends Mode> modes = ModeManager.getInstance().getModes();
+                            for ( final Mode mode : modes )
+                            {
+                                Preferences.userRoot().node( "ebot" ).node( System.getProperty( "xmatrix.subject" ) ).node( (String) mode.getProperty( NAME ) ).removeNode();
+                            }
                             Preferences.userRoot().node( "ebot" ).removeNode();
                             LOG.info( "all settings deleted" );
                         }
@@ -129,7 +137,7 @@ public class ModuleInfoDialog extends I15nComponentDialog
                             final PictureCache backgroundCache = ModeManager.getInstance().getBackgroundCache();
                             backgroundCache.stop();
                             backgroundCache.resume();
-                            Thread.currentThread().sleep( 1000 );
+                            Thread.sleep( 1000 );
                             FileUtils.deleteDirectory( new File( ImageLocator.getPicturePath() ) );
                             LOG.info( "all pictures deleted" );
                         }

@@ -144,7 +144,15 @@ public class PictureModel
         }
         if ( cursors[idx] == null )
         {
-            cursors[idx] = new ArrayCursor<CommentedPicture>( getTaxon().getCommentedPictures( themes[idx] ) );
+            if ( getTaxon() == null )
+            {
+                LOG.error( "found null taxon for which a commented pictures was requested" );
+                cursors[idx] = new ArrayCursor<CommentedPicture>( new CommentedPicture[0] );
+            }
+            else
+            {
+                cursors[idx] = new ArrayCursor<CommentedPicture>( getTaxon().getCommentedPictures( themes[idx] ) );
+            }
         }
         return cursors[idx];
     }

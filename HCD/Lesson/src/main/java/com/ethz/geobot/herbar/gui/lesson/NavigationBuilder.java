@@ -259,15 +259,7 @@ public class NavigationBuilder implements Builder
 
         public AbstractController( final TaxTree taxTree )
         {
-            final Toolkit defaultToolkit = getDefaultToolkit();
-            if ( defaultToolkit != null )
-            {
-                timer = new Timer( (Integer) defaultToolkit.getDesktopProperty( "awt.multiClickInterval" ), this );
-            }
-            else
-            {
-                timer = new Timer( 250, this );
-            }
+            timer = new Timer( 250, this );
             this.taxTree = taxTree;
         }
 

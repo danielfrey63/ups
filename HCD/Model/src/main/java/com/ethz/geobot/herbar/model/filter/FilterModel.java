@@ -84,7 +84,7 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     public Level getLastLevel()
     {
         final Level[] levels = getLevels();
-        return levels[levels.length - 1];
+        return levels.length == 0 ? null : levels[levels.length - 1];
     }
 
     public FilterTaxon getRootTaxon()
@@ -124,8 +124,9 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
 
     public Level getLevel( final String name )
     {
+        final HerbarModel rootModel = getRootModel( dependentModel );
         final Level[] levels = getLevels();
-        final int i = ArrayUtils.indexOf( levels, name );
+        final int i = ArrayUtils.indexOf( levels, rootModel.getLevel( name ) );
         return i < 0 ? null : levels[i];
     }
 
@@ -193,5 +194,10 @@ public class FilterModel extends AbstractHerbarModel implements Cloneable
     public void setRank( int rank )
     {
         this.rank = rank;
+    }
+
+    private HerbarModel getRootModel( final HerbarModel model )
+    {
+        return model instanceof FilterModel ? getRootModel( ((FilterModel) model).dependentModel ) : model;
     }
 }

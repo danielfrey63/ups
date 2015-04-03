@@ -3,12 +3,12 @@
  *
  * Nutzung und Rechte
  *
- * Die Applikation eBot wurde für Studierende der ETH Zürich entwickelt. Sie  steht
+ * Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie  steht
  * allen   an   Hochschulen  oder   Fachhochschulen   eingeschriebenen Studierenden
- * (auch  ausserhalb  der  ETH  Zürich)  für  nichtkommerzielle  Zwecke  im Studium
- * kostenlos zur Verfügung. Nichtstudierende Privatpersonen, die die Applikation zu
- * ihrer  persünlichen  Weiterbildung  nutzen  müchten,  werden  gebeten,  für  die
- * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.ü zu bezahlen.
+ * (auch  ausserhalb  der  ETH  Z\u00fcrich)  f\u00fcr  nichtkommerzielle  Zwecke  im Studium
+ * kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu
+ * ihrer  pers\u00fcnlichen  Weiterbildung  nutzen  m\u00fcchten,  werden  gebeten,  f\u00fcr  die
+ * nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.\u00fc zu bezahlen.
  *
  * Postkonto
  *
@@ -17,8 +17,8 @@
  *
  * Jede andere Nutzung der Applikation  ist vorher mit dem Projektleiter  (Matthias
  * Baltisberger, Email:  balti@ethz.ch) abzusprechen  und mit  einer entsprechenden
- * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bezüglich
- * Nutzungsansprüchen zur Verfügung gestellt.
+ * Vereinbarung zu regeln. Die  Applikation wird ohne jegliche  Garantien bez\u00fcglich
+ * Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt.
  */
 
 /*
@@ -79,12 +79,12 @@ public class EnvironmentDialog extends JDialog
     {
         getRootPane().setDefaultButton( okButton );
         setText( textPane, "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Z\u00fcrich) f\u00fcr nichtkommerzielle Zwecke im Studium kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer pers\u00f6nlichen Weiterbildung nutzen m\u00f6chten, werden gebeten, f\u00fcr die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Matthias Baltisberger, 45-681486-7<br>IBAN: CH91 0900 0000 4568 1486 7</b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bez\u00fcglich Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt." );
-        setText( textPane2, "Im <b>Themenbereich Systematik</b> stehen insgesamt 609 Taxa auf dem Art-Level zur Verf\u00fcgung (4 Flechten, 5 Moose, 18 Farne, 12 Gymnospermen und 570 Angiospermen). Dieser Gesamtstoff kann je nach Lernziel \u00fcber verschiedene Stofflisten eingeschr\u00e4nkt werden:" );
-        setText( textPane3, "Liste 60 enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann)." );
-        setText( textPane4, "Liste 200 enth\u00e4lt 200 Arten; diese sind Pr\u00fcfungsstoff (Teil Artenkenntnis) f\u00fcr Studierende der Biologie und Pharmazie an der ETH Z\u00fcrich. Die Liste 200 ist auch identisch mit der Z\u00fcrcher Liste f\u00fcr die Zertifizierungsstufe 200." );
-        setText( textPane5, "Liste 400 enth\u00e4lt die f\u00fcr die Zertifizierungsstufe 400 verlangten Arten." );
-        setText( textPane6, "Liste 600 enth\u00e4lt die f\u00fcr die Zertifizierungsstufe 600 verlangten Arten." );
-        setText( textPane7, "Alle Taxa ist die vollst\u00e4ndige Liste mit allen 609 Taxa in eBot." );
+        setText( textPane2, "Im <b>Themenbereich Systematik</b> stehen insgesamt 632 Taxa auf dem Art-Level zur Verf\u00fcgung (1 Pilz, 4 Flechten, 5 Moose, 19 Farne, 12 Gymnospermen, 591 Angiospermen). Dieser Gesamtstoff kann je nach Lernziel \u00fcber verschiedene Stofflisten eingeschr\u00e4nkt werden:" );
+        setText( textPane3, "\"Liste 60\" enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann)." );
+        setText( textPane4, "\"Liste 200\" enth\u00e4lt 200 Arten; diese sind Pr\u00fcfungsstoff (Teil Artenkenntnis) f\u00fcr Studierende der Biologie und Pharmazie an der ETH Z\u00fcrich. Die Liste 200 ist auch identisch mit der Z\u00fcrcher Liste f\u00fcr die Zertifizierungsstufe 200." );
+        setText( textPane5, "\"Liste PHARMBIO\" enth\u00e4lt 79 Arten; diese sind Pr\u00fcfungsstoff in der Veranstaltung \"Pharmazeutische Biologie\" (Prof. Dr. Karl-Heinz Altmann)." );
+        setText( textPane6, "\"Liste Alle Taxa\" ist die vollst\u00e4ndige Liste mit allen 632 Taxa in eBot." );
+        setText( textPane7, "Die restlichen festen Listen enthalten die f\u00fcr die Zertifizierungsstufen verlangten Arten: \"Liste 400\" die Arten f\u00fcr Stufe 400 resp. \"Liste 600\" die Arten f\u00fcr Stufe 600 (Arten der Stufe 200 siehe \"Liste 200\"). Die Listen \"Liste 400-200\", \"Liste 600-200\" und \"Liste 600-400\" dienen dem stufenweisen Lernen (Einschr\u00e4nkung auf die bei den Stufen hinzukommen Arten)." );
         demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
         demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
     }
@@ -261,7 +261,7 @@ public class EnvironmentDialog extends JDialog
                         panel2.add( systematicRadio, cc.xy( 1, 3 ) );
 
                         //---- textField2 ----
-                        textField2.setText( "Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre wissenschaftlichen Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen." );
+                        textField2.setText( "Systematik: W\u00e4hlen Sie diese Option, wenn Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen." );
                         textField2.setLineWrap( true );
                         textField2.setWrapStyleWord( true );
                         textField2.setOpaque( false );
@@ -288,7 +288,7 @@ public class EnvironmentDialog extends JDialog
                         panel2.add( textField3, cc.xy( 3, 5 ) );
 
                         //---- textField5 ----
-                        textField5.setText( "Zudem kann man sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMB vertraut machen (Pr\u00fcfungs-Demo)." );
+                        textField5.setText( "Mit dem folgenden Tool k\u00f6nnen Sie sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMBX vertraut machen (Pr\u00fcfungs-Demo)." );
                         textField5.setLineWrap( true );
                         textField5.setWrapStyleWord( true );
                         textField5.setOpaque( false );
@@ -397,7 +397,7 @@ public class EnvironmentDialog extends JDialog
             dialogPane.add( contentPanel, BorderLayout.CENTER );
         }
         contentPane.add( dialogPane, BorderLayout.CENTER );
-        setSize( 615, 695 );
+        setSize( 720, 910 );
         setLocationRelativeTo( null );
 
         //---- buttonGroup1 ----

@@ -108,7 +108,7 @@ public class FilterFactory
                 props.storeToXML( outputStream, "" );
                 outputStream.close();
             }
-            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "400", "600", "Pharm-Bio", "Alle"} : new String[]{"Alle Taxa"};
+            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "400", "600", "600-200", "400-200", "600-400", "Pharm-Bio", "Alle"} : new String[]{"Alle Taxa"};
             filterDirectory.mkdirs();
 
             for ( final String list : lists )

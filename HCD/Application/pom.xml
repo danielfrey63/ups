@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
     <name>eBot 6</name>
-    <version>6.0.3041</version>
+    <version>6.0.SNAPSHOT-SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -217,9 +217,4 @@
             </resource>
         </resources>
     </build>
-
-  <scm>
-    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.application-6.0.3041</developerConnection>
-    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.application-6.0.3041</url>
-  </scm>
 </project>

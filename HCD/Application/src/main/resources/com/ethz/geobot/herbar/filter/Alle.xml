@@ -67,7 +67,7 @@
     <detail scope="Cirsium spinosissimum"/>
     <detail scope="Erigeron uniflorus"/>
     <detail scope="Monocotyledonae"/>
-    <detail scope="Astmoos (= pleurokarp)"/>
+    <detail scope="Astmoos"/>
     <detail scope="Melilotus"/>
     <detail scope="Chaerophyllum hirsutum"/>
     <detail scope="Neottia nidus-avis"/>
@@ -504,7 +504,7 @@
     <detail scope="Dryopteris filix-mas"/>
     <detail scope="Cannabis sativa"/>
     <detail scope="Lunaria annua"/>
-    <detail scope="Gipfelmoos (= akrokarp)"/>
+    <detail scope="Gipfelmoos"/>
     <detail scope="Bromus tectorum"/>
     <detail scope="Carex caryophyllea"/>
     <detail scope="Solidago gigantea"/>
@@ -921,7 +921,7 @@
     <detail scope="Androsace chamaejasme"/>
     <detail scope="Globularia cordifolia"/>
     <detail scope="Phyteuma orbiculare"/>
-    <detail scope="Narcissus poëticus"/>
+    <detail scope="Narcissus poeticus"/>
     <detail scope="Dryas octopetala"/>
     <detail scope="Campanula scheuchzeri"/>
     <detail scope="Fagales"/>

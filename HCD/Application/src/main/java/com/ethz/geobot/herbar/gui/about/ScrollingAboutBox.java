@@ -65,7 +65,7 @@ public class ScrollingAboutBox extends JWindow
 
     private boolean running = false;
 
-    private final ImageIcon about = ImageLocator.getIcon( "splash.gif" );
+    private final ImageIcon about = ImageLocator.getIcon( "splash.png" );
 
     private final ScrollLabel sl = new ScrollLabel();
 

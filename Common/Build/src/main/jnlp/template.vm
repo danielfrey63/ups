@@ -12,9 +12,9 @@
         #if($offlineAllowed)
         <offline-allowed/>
         #end
-        <shortcut online="true">
+        <shortcut online="false">
             <desktop/>
-            <menu submenu="eBot 5"/>
+            <menu submenu="eBot 6"/>
         </shortcut>
     </information>
     #if($allPermissions)

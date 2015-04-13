@@ -51,6 +51,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.text.html.HTMLDocument;
+import net.infonode.util.Alignment;
 
 /**
  * @author Daniel Frey
@@ -293,7 +294,7 @@ public class EnvironmentDialog extends JDialog
                         textField5.setWrapStyleWord( true );
                         textField5.setOpaque( false );
                         textField5.setEditable( false );
-                        panel2.add( textField5, cc.xywh( 1, 7, 3, 1 ) );
+                        //panel2.add( textField5, cc.xywh( 1, 7, 3, 1 ) );
 
                         //---- demoRadio ----
                         demoRadio.addActionListener( new ActionListener()
@@ -304,7 +305,7 @@ public class EnvironmentDialog extends JDialog
                                 setChoice1();
                             }
                         } );
-                        panel2.add( demoRadio, cc.xy( 1, 9 ) );
+                        //panel2.add( demoRadio, cc.xy( 1, 9 ) );
 
                         //---- demoText ----
                         demoText.setText( "Pr\u00fcfungs-Demo (nur auf Windows)" );
@@ -312,62 +313,62 @@ public class EnvironmentDialog extends JDialog
                         demoText.setWrapStyleWord( true );
                         demoText.setOpaque( false );
                         demoText.setEditable( false );
-                        panel2.add( demoText, cc.xy( 3, 9 ) );
+                        //panel2.add( demoText, cc.xy( 3, 9 ) );
 
                         //---- textPane2 ----
                         textPane2.setOpaque( false );
                         textPane2.setEditable( false );
-                        panel2.add( textPane2, cc.xywh( 1, 11, 3, 1 ) );
+                        panel2.add( textPane2, cc.xywh( 1, 7, 3, 1 ) );
 
                         //---- label1 ----
                         label1.setText( "-" );
                         label1.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label1, cc.xy( 1, 13 ) );
+                        panel2.add( label1, cc.xy( 1, 9, CellConstraints.RIGHT, CellConstraints.TOP ) );
 
                         //---- textPane3 ----
                         textPane3.setOpaque( false );
                         textPane3.setEditable( false );
-                        panel2.add( textPane3, cc.xy( 3, 13 ) );
+                        panel2.add( textPane3, cc.xy( 3, 9 ) );
 
                         //---- label2 ----
                         label2.setText( "-" );
                         label2.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label2, cc.xy( 1, 15 ) );
+                        panel2.add( label2, cc.xy( 1, 11, CellConstraints.RIGHT, CellConstraints.TOP ) );
 
                         //---- textPane4 ----
                         textPane4.setOpaque( false );
                         textPane4.setEditable( false );
-                        panel2.add( textPane4, cc.xy( 3, 15 ) );
+                        panel2.add( textPane4, cc.xy( 3, 11 ) );
 
                         //---- label3 ----
                         label3.setText( "-" );
                         label3.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label3, cc.xy( 1, 17 ) );
+                        panel2.add( label3, cc.xy( 1, 13, CellConstraints.RIGHT, CellConstraints.TOP  ) );
 
                         //---- textPane5 ----
                         textPane5.setOpaque( false );
                         textPane5.setEditable( false );
-                        panel2.add( textPane5, cc.xy( 3, 17 ) );
+                        panel2.add( textPane5, cc.xy( 3, 13 ) );
 
                         //---- label4 ----
                         label4.setText( "-" );
                         label4.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label4, cc.xy( 1, 19 ) );
+                        panel2.add( label4, cc.xy( 1, 15, CellConstraints.RIGHT, CellConstraints.TOP  ) );
 
                         //---- textPane6 ----
                         textPane6.setOpaque( false );
                         textPane6.setEditable( false );
-                        panel2.add( textPane6, cc.xy( 3, 19 ) );
+                        panel2.add( textPane6, cc.xy( 3, 15 ) );
 
                         //---- label5 ----
                         label5.setText( "-" );
                         label5.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label5, cc.xy( 1, 21 ) );
+                        panel2.add( label5, cc.xy( 1, 17, CellConstraints.RIGHT, CellConstraints.TOP  ) );
 
                         //---- textPane7 ----
                         textPane7.setOpaque( false );
                         textPane7.setEditable( false );
-                        panel2.add( textPane7, cc.xy( 3, 21 ) );
+                        panel2.add( textPane7, cc.xy( 3, 17 ) );
 
                         //======== buttonBar2 ========
                         {
@@ -388,7 +389,7 @@ public class EnvironmentDialog extends JDialog
                             } );
                             buttonBar2.add( okButton, cc.xy( 2, 1 ) );
                         }
-                        panel2.add( buttonBar2, cc.xywh( 1, 25, 3, 1 ) );
+                        panel2.add( buttonBar2, cc.xywh( 1, 21, 3, 1 ) );
                     }
                     tabbedPane1.addTab( "Auswahl", panel2 );
                 }
@@ -397,7 +398,7 @@ public class EnvironmentDialog extends JDialog
             dialogPane.add( contentPanel, BorderLayout.CENTER );
         }
         contentPane.add( dialogPane, BorderLayout.CENTER );
-        setSize( 720, 910 );
+        setSize( 720, 830 );
         setLocationRelativeTo( null );
 
         //---- buttonGroup1 ----

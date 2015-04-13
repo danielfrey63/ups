@@ -41,7 +41,7 @@ public class TestSplash extends JPanel
     public TestSplash() throws IOException
     {
         setLayout( null );
-        image = ImageIO.read( getClass().getResourceAsStream( "splash.gif" ) );
+        image = ImageIO.read( getClass().getResourceAsStream( "splash.png" ) );
     }
 
     @Override

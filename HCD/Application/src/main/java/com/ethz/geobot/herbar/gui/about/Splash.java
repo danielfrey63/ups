@@ -83,7 +83,7 @@ public class Splash extends JWindow
     public static void main( final String[] args ) throws FileNotFoundException
     {
         LogUtils.init();
-        final ImageIcon imageIcon = new ImageIcon( "resources/splash.gif" );
+        final ImageIcon imageIcon = new ImageIcon( "resources/splash.png" );
         final AnimationQueue scrollingComponent = new AnimationQueue();
         scrollingComponent.setBounds( 100, 68, 200, 167 );
         final Insets insets = new Insets( 0, 10, 0, 10 );

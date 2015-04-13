@@ -40,7 +40,7 @@ import javax.swing.SwingUtilities;
  */
 public class AboutBox extends JWindow
 {
-    private final ImageIcon about = ImageLocator.getIcon( "splash.gif" );
+    private final ImageIcon about = ImageLocator.getIcon( "splash.png" );
 
     public AboutBox( final JFrame parent )
     {

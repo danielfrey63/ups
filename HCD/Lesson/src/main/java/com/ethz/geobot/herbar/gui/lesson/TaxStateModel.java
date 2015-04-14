@@ -216,7 +216,7 @@ public class TaxStateModel
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalFocus( fire, focus );
-            //setInternalGlobalSubMode( fire, getGlobalSubMode() );
+            setInternalGlobalSubMode( fire, getGlobalSubMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }

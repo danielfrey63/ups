@@ -4,11 +4,16 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.data</artifactId>
     <name>Learning Environment Data</name>
-    <version>6.0-SNAPSHOT</version>
+    <version>6.0.3080</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
         <version>1.0</version>
         <relativePath>../../Common/Build</relativePath>
     </parent>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.le.data-6.0.3080</developerConnection>
+    <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.le.data-6.0.3080</url>
+  </scm>
 </project>

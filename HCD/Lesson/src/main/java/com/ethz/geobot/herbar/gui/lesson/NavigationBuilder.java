@@ -52,9 +52,13 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import static org.apache.commons.lang.ArrayUtils.contains;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NavigationBuilder implements Builder
 {
+    private static final Logger LOG = LoggerFactory.getLogger( NavigationBuilder.class );
+
     private final HerbarContext context;
     private final TaxStateModel taxStateModel;
     private final RendererPanel panel = new RendererPanel();
@@ -503,6 +507,7 @@ public class NavigationBuilder implements Builder
                     final HerbarModel model = taxStateModel.getModel();
                     if ( model instanceof FilterModel )
                     {
+                        LOG.info( "editing \"" + model + "\" adding all children to \"" + taxon + "\"" );
                         final FilterModel filterModel = (FilterModel) model;
                         filterModel.addFilterTaxon( taxon );
                         final Level[] levels = taxon.getSubLevels();
@@ -530,6 +535,7 @@ public class NavigationBuilder implements Builder
                     final HerbarModel model = taxStateModel.getModel();
                     if ( model instanceof FilterModel )
                     {
+                        LOG.info( "editing \"" + model + "\" removing all children from \"" + taxon + "\"" );
                         final FilterModel filterModel = (FilterModel) model;
                         final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
                         if ( filterTaxon != null )
@@ -564,6 +570,7 @@ public class NavigationBuilder implements Builder
                     {
                         final FilterModel filterModel = (FilterModel) model;
                         final FilterTaxon[] list = (FilterTaxon[]) taxStateModel.getTaxList();
+                        LOG.info( "editing \"" + model + "\" adding all parents to " + list.length + " taxa in list" );
                         for ( FilterTaxon taxon : list )
                         {
                             Taxon dependentTaxon = taxon.getDependentTaxon();
@@ -572,6 +579,29 @@ public class NavigationBuilder implements Builder
                                 dependentTaxon = dependentTaxon.getParentTaxon();
                                 filterModel.addFilterTaxon( dependentTaxon );
                             }
+                        }
+                        taxTree.repaint();
+                        context.saveModel( model );
+                    }
+                }
+            } );
+            menu.add( new AbstractAction( "Parent-Taxa anwählen" )
+            {
+                @Override
+                public void actionPerformed( ActionEvent e )
+                {
+                    final HerbarModel model = taxStateModel.getModel();
+                    if ( model instanceof FilterModel )
+                    {
+                        LOG.info( "editing \"" + model + "\" adding all parents to \"" + taxon + "\"" );
+                        final FilterModel filterModel = (FilterModel) model;
+                        filterModel.addFilterTaxon( taxon );
+                        final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
+                        Taxon dependentTaxon = filterTaxon.getDependentTaxon();
+                        while ( dependentTaxon.getParentTaxon() != null )
+                        {
+                            dependentTaxon = dependentTaxon.getParentTaxon();
+                            filterModel.addFilterTaxon( dependentTaxon );
                         }
                         taxTree.repaint();
                         context.saveModel( model );

@@ -77,7 +77,7 @@ public class TaxStateModel
         final Preferences prefs = context.getPreferencesNode();
         final String model = prefs.get( LIST.name().toLowerCase(), System.getProperty( "herbar.model.default" ) );
 
-        LOG.info( "trying to initialize model to \"" + model );
+        LOG.info( "trying to initialize model to \"" + model + "\"" );
         setInternalModel( fire, model == null ? context.getDefaultModel() : context.getModel( model ) );
         LOG.info( "initialized model to \"" + herbarModel + "\"" );
 
@@ -312,11 +312,19 @@ public class TaxStateModel
         {
             level = getModel().getLastLevel();
         }
-        if ( level != null && level != vals.level )
+        // Set the level also to null if last taxon was deleted from list. Delete level from prefs in this case.
+        if ( level != vals.level )
         {
             fire.add( new FireArray( LEVEL.name(), vals.level, level ) );
             vals.level = level;
-            context.getPreferencesNode().put( LEVEL.name().toLowerCase(), level.getName() );
+            if ( level == null )
+            {
+                context.getPreferencesNode().remove( LEVEL.name().toLowerCase() );
+            }
+            else
+            {
+                context.getPreferencesNode().put( LEVEL.name().toLowerCase(), level.getName() );
+            }
         }
     }
 

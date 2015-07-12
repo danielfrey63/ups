@@ -168,15 +168,19 @@ public class AppHerbar
                     backgroundCache.stop();
                     cache.removePropertyChangeListener( WAITING, waitingListener );
                     cache.removePropertyChangeListener( RESUME, resumingListener );
-                    try
+                    if ( !backgroundCache.hadError() )
                     {
-                        org.apache.commons.io.FileUtils.touch( new File( fileName ) );
-                        FileUtils.writePropertyToXML( fileName, property, version );
+                        try
+                        {
+                            org.apache.commons.io.FileUtils.touch( new File( fileName ) );
+                            FileUtils.writePropertyToXML( fileName, property, version );
+                        }
+                        catch ( IOException e )
+                        {
+                            e.printStackTrace();
+                        }
                     }
-                    catch ( IOException e )
-                    {
-                        e.printStackTrace();
-                    }
+
                     LOG.info( "resuming " + cache.getName() );
                 }
             } );

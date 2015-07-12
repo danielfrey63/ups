@@ -308,7 +308,7 @@ public class PictureCache
                         else
                         {
                             final CachedImage img = getCachedImage( name );
-                            LOG.debug( "loading cached image \"" + name + "\"" );
+                            LOG.trace( "loading cached image \"" + name + "\"" );
                             if ( !img.isLoaded( false ) )
                             {
                                 img.loadImage();

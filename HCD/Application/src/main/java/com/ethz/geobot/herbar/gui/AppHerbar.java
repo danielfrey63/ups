@@ -27,6 +27,7 @@ import ch.jfactory.cache.FileImageCache;
 import ch.jfactory.cache.ImageCache;
 import ch.jfactory.cache.NestedImageCache;
 import ch.jfactory.cache.UrlImageCache;
+import ch.jfactory.file.FileUtils;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
 import ch.xmatrix.ups.pmb.exam.Main;
@@ -57,9 +58,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import static java.util.jar.Attributes.Name.IMPLEMENTATION_VERSION;
 import java.util.jar.Manifest;
 import javax.swing.ImageIcon;
@@ -99,7 +97,7 @@ public class AppHerbar
      */
     private static MainFrame mainFrame = null;
 
-    public AppHerbar( final int selection )
+    public AppHerbar( final int selection ) throws IOException
     {
         setVersion( AppHerbar.class );
         setupDirectories( selection );
@@ -125,18 +123,19 @@ public class AppHerbar
         splash.finish();
     }
 
-    private void installDownloaders()
+    private void installDownloaders() throws IOException
     {
         CachingExceptionHandler exceptionHandler = new ImageCachingExceptionHandler();
         cache = new PictureCache( "Main-Image-Thread", exceptionHandler, ImageLocator.PICT_LOCATOR );
         ensureBackgroundThread( exceptionHandler );
-        final Set<String> images = collectAllPictures();
-        backgroundCache.queueImages( images.toArray( new String[images.size()] ), false, false, cache.getStatus() == 0 );
     }
 
-    private void ensureBackgroundThread( final CachingExceptionHandler exceptionHandler )
+    private void ensureBackgroundThread( final CachingExceptionHandler exceptionHandler ) throws IOException
     {
-        if ( backgroundCache == null )
+        final String fileName = ImageLocator.getPicturePath() + "/_PictureCacheComplete.xml";
+        final String property = "version";
+        final String version = "6.0.3089";
+        if ( backgroundCache == null && !version.equals( FileUtils.readPropertyFromXML( fileName, property ) ) )
         {
             imageCache = new NestedImageCache( new ImageCache[0], new FileImageCache( ImageLocator.getPicturePath(), "jpg" ), new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );
             backgroundCache = new PictureCache( "Background-Image-Thread", exceptionHandler, imageCache );
@@ -169,9 +168,21 @@ public class AppHerbar
                     backgroundCache.stop();
                     cache.removePropertyChangeListener( WAITING, waitingListener );
                     cache.removePropertyChangeListener( RESUME, resumingListener );
+                    try
+                    {
+                        org.apache.commons.io.FileUtils.touch( new File( fileName ) );
+                        FileUtils.writePropertyToXML( fileName, property, version );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
                     LOG.info( "resuming " + cache.getName() );
                 }
             } );
+
+            final Set<String> images = collectAllPictures();
+            backgroundCache.queueImages( images.toArray( new String[images.size()] ), false, false, cache.getStatus() == 0 );
         }
     }
 

@@ -25,6 +25,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import org.apache.commons.io.IOUtils;
@@ -341,6 +342,29 @@ public class FileUtils
         {
             LOG.error( "problem with url " + url, e );
         }
+    }
+
+    public static void writePropertyToXML( final String filePath, final String property, final String value ) throws IOException
+    {
+        final Properties props = new Properties();
+        props.put( property, value );
+        final FileOutputStream outputStream = new FileOutputStream( new File( filePath ) );
+        props.storeToXML( outputStream, "" );
+        outputStream.close();
+    }
+
+    public static Object readPropertyFromXML( final String filePath, final String property ) throws IOException
+    {
+        File file = new File( filePath );
+        if ( file.exists() )
+        {
+            final Properties props = new Properties();
+            final FileInputStream inputStream = new FileInputStream( filePath );
+            props.loadFromXML( inputStream );
+            inputStream.close();
+            return props.get( property );
+        }
+        return null;
     }
 
     public static interface StringFilter

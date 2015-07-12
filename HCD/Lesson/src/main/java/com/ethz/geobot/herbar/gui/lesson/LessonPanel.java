@@ -159,17 +159,24 @@ public class LessonPanel extends ModeActivationPanel
             @Override
             public void run()
             {
-                final double status = context.getBackgroundCache().getStatus();
-                final boolean errors = context.getBackgroundCache().hadError();
-                final boolean done = status == 0.0;
-                final String percentage = ((int) ((1 - status) * 100)) + "%";
-                downloadStatus.setText( "Status: " +
-                        (errors ? (done ? "Nicht alles offline verfügbar" : "Überprüfung " + percentage + " fertig (Fehler)") :
-                                (done ? "Alles offline verfügbar" : "Überprüfung " + percentage + " fertig")) );
-                if ( done )
+                if ( context.getBackgroundCache() != null )
                 {
-                    LOG.info( "stopping updates from caching threads to status bar" );
-                    scheduler.shutdownNow();
+                    final double status = context.getBackgroundCache().getStatus();
+                    final boolean errors = context.getBackgroundCache().hadError();
+                    final boolean done = status == 0.0;
+                    final String percentage = ((int) ((1 - status) * 100)) + "%";
+                    downloadStatus.setText( "Status: " +
+                            (errors ? (done ? "Nicht alles offline verfügbar" : "Überprüfung " + percentage + " fertig (Fehler)") :
+                                    (done ? "Alles offline verfügbar" : "Überprüfung " + percentage + " fertig")) );
+                    if ( done )
+                    {
+                        LOG.info( "stopping updates from caching threads to status bar" );
+                        scheduler.shutdownNow();
+                    }
+                }
+                else
+                {
+                    downloadStatus.setText( "Status: Alles offline verfügbar" );
                 }
             }
         }, 0, 1, TimeUnit.SECONDS );

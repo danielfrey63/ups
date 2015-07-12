@@ -28,6 +28,7 @@
  */
 package com.ethz.geobot.herbar.filter;
 
+import ch.jfactory.file.FileUtils;
 import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
 import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
@@ -53,10 +54,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,26 +86,17 @@ public class FilterFactory
         {
             LOG.info( "reading mapping file for filter definition." );
 
-            boolean deleteAll = true;
-            final File versionFile = new File( FILTER_LOCATION + "/../version.xml" );
-            if ( versionFile.exists() )
-            {
-                final Properties props = new Properties();
-                final FileInputStream inputStream = new FileInputStream( versionFile );
-                props.loadFromXML( inputStream );
-                inputStream.close();
-                deleteAll = !"6.0".equals( props.get( "version" ) );
-            }
+            final String filePath = FILTER_LOCATION + "/../version.xml";
+            final String version = "6.0";
+            final String property = "version";
             final File filterDirectory = new File( System.getProperty( "herbar.filter.location" ) );
-            if ( deleteAll )
+            if ( version.equals( FileUtils.readPropertyFromXML( filePath, property ) ) )
             {
-                FileUtils.deleteDirectory( filterDirectory );
-                final Properties props = new Properties();
-                props.put( "version", "6.0" );
-                filterDirectory.mkdirs();
-                final FileOutputStream outputStream = new FileOutputStream( versionFile );
-                props.storeToXML( outputStream, "" );
-                outputStream.close();
+                // Delete all filters
+                org.apache.commons.io.FileUtils.deleteDirectory( filterDirectory );
+
+                // Write the version file
+                FileUtils.writePropertyToXML( filePath, property, version );
             }
             final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "400", "600", "600-200", "400-200", "600-400", "PHARMBIO", "Alle"} : new String[]{"Alle"};
             filterDirectory.mkdirs();

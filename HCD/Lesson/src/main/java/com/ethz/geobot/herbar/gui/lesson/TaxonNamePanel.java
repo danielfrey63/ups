@@ -166,6 +166,8 @@ public class TaxonNamePanel extends JPanel
         final SubMode newSubMode = taxStateModel.getSubMode( taxon.getName() ).equals( ABFRAGEN ) ? LERNEN : ABFRAGEN;
         taxStateModel.setSubMode( getName(), newSubMode );
         setSubMode( newSubMode );
+
+        requestFocusInWindow();
     }
 
     public void setSubMode( final SubMode subMode )
@@ -193,7 +195,7 @@ public class TaxonNamePanel extends JPanel
         else if ( correctness == IS_FALSE )
         {
             final Object[] buttons = new Object[]{Strings.getString( "BUTTON.OK.TEXT" )};
-            JOptionPane.showOptionDialog( parent, new String[] {"Ihre Eingabe ist nicht zutreffend", "Bitte probieren Sie es nochmals", ""}, "Nächster Versuch", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
+            JOptionPane.showOptionDialog( parent, new String[] {"Ihre Eingabe ist nicht zutreffend", "Bitte versuchen Sie es nochmals", ""}, "Nächster Versuch", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
         }
         // some new evaluations take place AFTER the correct taxon has been passed, so keep complete state
         return correctness;

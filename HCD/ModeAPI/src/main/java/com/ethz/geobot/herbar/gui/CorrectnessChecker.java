@@ -112,16 +112,17 @@ public class CorrectnessChecker
                 correctnessText.add( "Sie sind nahe dran:                         " );
                 correctnessText.addAll( vA );
                 correctnessText.add( " " );
-                correctnessText.add( "Versuchen Sie es noch einmal...             " );
+                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
             else
             {
                 correctnessText = new ArrayList<String>();
-                correctnessText.add( "Der Vorschlag ist falsch." );
+                correctnessText.add( "Der Vorschlag ist nicht korrekt.            " );
                 correctnessText.add( " " );
-                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
+                correctnessText.add( " " );
                 ret = IS_FALSE;
             }
         }
@@ -139,23 +140,23 @@ public class CorrectnessChecker
                 correctnessText = new ArrayList<String>();
                 correctnessText.add( " " );
                 correctnessText.add( "Sie sind nahe dran:                         " );
-                correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in  " );
+                correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in" );
                 correctnessText.add( "  Ihrem Vorschlag" );
                 correctnessText.add( " " );
                 correctnessText.add( "  " + taxon + " (richtige Lösung)" );
                 correctnessText.add( "  " + guess + " (Ihr Vorschlag)" );
                 correctnessText.add( " " );
-                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
             }
             else if ( isSynonym )
             {
                 correctnessText = new ArrayList<String>();
-                correctnessText.add( "Sie verwenden ein Synonym:      " );
+                correctnessText.add( "Sie verwenden ein Synonym:                  " );
                 correctnessText.add( "  " + guess );
                 correctnessText.add( " " );
-                correctnessText.add( "Wir verwenden jedoch:  " );
+                correctnessText.add( "Wir verwenden jedoch:                       " );
                 correctnessText.add( "  " + taxon );
                 correctnessText.add( " " );
                 ret = IS_NEARLY_TRUE;
@@ -163,9 +164,10 @@ public class CorrectnessChecker
             else
             {
                 correctnessText = new ArrayList<String>();
-                correctnessText.add( "Der Vorschlag ist falsch." );
+                correctnessText.add( "Der Vorschlag ist falsch.                   " );
                 correctnessText.add( " " );
-                correctnessText.add( "Versuchen Sie es noch einmal..." );
+                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
+                correctnessText.add( " " );
                 ret = IS_FALSE;
             }
         }
@@ -298,7 +300,7 @@ public class CorrectnessChecker
         // make sure to have the shorter endings at the end...
         allEndings = new String[][] {
                 {"tans", "ens"},
-                {"er", "is", "ys", "e"},
+                {"er", "ris", "re", "rys", "is"},
                 {"um", "us", "a"},
                 {"ii", "i"}
         };

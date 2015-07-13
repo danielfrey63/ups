@@ -159,11 +159,12 @@ public class TaxonNameInterrogatorBuilder implements Builder
         final List<TaxonNamePanel> list = new ArrayList<TaxonNamePanel>();
         Taxon parent = focus;
         int levelCounter = 0;
-        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null && levelCounter < 4 )
+        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null && levelCounter < 3 )
         {
             final String name = parent.getLevel().getName();
-            if ( name.startsWith( "Gruppe" ) || name.startsWith( "Nebenschlüssel" ) )
+            if ( name.startsWith( "Gruppe" ) || name.startsWith( "Nebenschlüssel" ) || name.startsWith( "Gattung" ) )
             {
+                LOG.trace( "skipping " + parent );
                 parent = parent.getParentTaxon();
                 continue;
             }

@@ -560,7 +560,7 @@ public class NavigationBuilder implements Builder
                 }
             } );
             menu.addSeparator();
-            menu.add( new AbstractAction( "Alle Parent-Taxa anwählen" )
+            menu.add( new AbstractAction( "Eltern aller gewählten Taxa anwählen" )
             {
                 @Override
                 public void actionPerformed( ActionEvent e )
@@ -585,7 +585,7 @@ public class NavigationBuilder implements Builder
                     }
                 }
             } );
-            menu.add( new AbstractAction( "Parent-Taxa anwählen" )
+            menu.add( new AbstractAction( "Eltern dieses Taxons anwählen" )
             {
                 @Override
                 public void actionPerformed( ActionEvent e )

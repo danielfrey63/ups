@@ -94,6 +94,7 @@ public class FilterFactory
             {
                 // Delete all filters
                 org.apache.commons.io.FileUtils.deleteDirectory( filterDirectory );
+                filterDirectory.mkdirs();
 
                 // Write the version file
                 FileUtils.writePropertyToXML( filePath, property, version );

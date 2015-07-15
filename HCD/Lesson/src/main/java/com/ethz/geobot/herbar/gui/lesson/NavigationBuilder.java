@@ -201,9 +201,6 @@ public class NavigationBuilder implements Builder
             @Override
             public void ancestorAdded( final AncestorEvent e )
             {
-                final DefaultTreeModel model = (DefaultTreeModel) taxTree.getModel();
-                final DefaultTaxonTreeNode node = (DefaultTaxonTreeNode) model.getRoot();
-                final TreePath path = new TreePath( node );
                 final boolean visible = taxTree.isRootVisible();
                 taxTree.setRootVisible( !visible );
                 taxTree.setRootVisible( visible );
@@ -484,11 +481,13 @@ public class NavigationBuilder implements Builder
                 final FilterTaxon filterTaxon = filterModel.getTaxon( taxon.getName() );
                 if ( filterTaxon == null )
                 {
-                    filterModel.addFilterTaxon( taxon );
+                    taxStateModel.addTaxonToFilterModel( taxon );
+                    //filterModel.addFilterTaxon( taxon );
                 }
                 else
                 {
-                    filterModel.removeFilterTaxon( filterTaxon );
+                    taxStateModel.removeFilterTaxonFromFilterModel( filterTaxon );
+                    //filterModel.removeFilterTaxon( filterTaxon );
                 }
                 context.saveModel( filterModel );
             }

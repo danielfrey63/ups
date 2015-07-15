@@ -135,9 +135,12 @@ public class ModuleInfoDialog extends I15nComponentDialog
                             mainCache.stop();
                             mainCache.resume();
                             final PictureCache backgroundCache = ModeManager.getInstance().getBackgroundCache();
-                            backgroundCache.stop();
-                            backgroundCache.resume();
-                            Thread.sleep( 1000 );
+                            if ( backgroundCache != null )
+                            {
+                                backgroundCache.stop();
+                                backgroundCache.resume();
+                                Thread.sleep( 1000 );
+                            }
                             FileUtils.deleteDirectory( new File( ImageLocator.getPicturePath() ) );
                             LOG.info( "all pictures deleted" );
                         }

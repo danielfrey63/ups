@@ -99,8 +99,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
         toolBar.setFocusable( false );
 
         panel = new JPanel( new BorderLayout() );
-        panel.add( toolBar, WEST );
-        panel.add( new JToolBar(), CENTER );
+        panel.add( toolBar, CENTER );
 
         setListeners();
     }

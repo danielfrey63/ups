@@ -127,7 +127,7 @@ public class TaxonNamePanel extends JPanel
         panel.setBorder( new EmptyBorder( 1, 0, 0, 0 ) );
 
         final CellConstraints cc = new CellConstraints();
-        setLayout( new FormLayout( "$lcgap, default, $lcgap, default, $ugap", "default" ) );
+        setLayout( new FormLayout( "$lcgap, default, $lcgap, fill:10dlu:grow, $ugap", "default" ) );
         final JLabel levelIcon = new JLabel( ImageLocator.getIcon( "icon" + taxon.getLevel().getName() + ".gif" ) );
         add( levelIcon, cc.xy( 2, 1 ) );
         add( panel, cc.xy( 4, 1 ) );

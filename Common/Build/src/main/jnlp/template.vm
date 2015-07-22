@@ -17,12 +17,10 @@
             <menu submenu="eBot 6"/>
         </shortcut>
     </information>
-    #if($allPermissions)
-    <security>
+    #if($allPermissions)<security>
         <all-permissions/>
     </security>
-    #end
-    <resources>
+    #end<resources>
         <j2se
         #if($max-heap-size) max-heap-size="$max-heap-size"
         #end version="1.6+"/>

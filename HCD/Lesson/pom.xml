@@ -11,6 +11,9 @@
         <version>1.0</version>
         <relativePath>../../Common/Build</relativePath>
     </parent>
+    <properties>
+        <offlineAllowed/>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>

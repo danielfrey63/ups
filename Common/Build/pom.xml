@@ -63,6 +63,8 @@
         <max-heap-size>512m</max-heap-size>
         <!-- The Archiva URL. -->
         <archiva>http://localhost:8080</archiva>
+        <!-- The offline flag. -->
+        <offline-allowed>true</offline-allowed>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -673,6 +675,7 @@
                         <!-- A bug in the plugin makes it necessary to indicate the resource path non-default -->
                         <inputTemplateResourcePath>${project.parent.relativePath}</inputTemplateResourcePath>
                         <inputTemplate>src/main/jnlp/template.vm</inputTemplate>
+                        <offlineAllowed>${offline-allowed}</offlineAllowed>
                     </jnlp>
                     <sign>
                         <!-- Note: Path are relative to the target/jnlp directory -->

@@ -9,21 +9,17 @@
         <vendor>$project.Organization.Name</vendor>
         <homepage href="$project.Url"/>
         <description>$project.Description</description>
-        #if($offlineAllowed=1)
-        <offline-allowed/>
-        #end
+#if($offlineAllowed)        <offline-allowed/>#end
         <shortcut online="false">
             <desktop/>
             <menu submenu="eBot 6"/>
         </shortcut>
     </information>
-    #if($allPermissions)<security>
+#if($allPermissions)    <security>
         <all-permissions/>
     </security>
     #end<resources>
-        <j2se
-        #if($max-heap-size) max-heap-size="$max-heap-size"
-        #end version="1.6+"/>
+        <j2se #if($max-heap-size)max-heap-size="$max-heap-size"#end version="1.6+"/>
         $dependencies
         <property name="file.encoding" value="windows-1252"/>
     </resources>

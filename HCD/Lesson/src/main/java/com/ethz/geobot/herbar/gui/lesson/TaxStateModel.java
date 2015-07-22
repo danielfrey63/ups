@@ -41,7 +41,6 @@ import com.ethz.geobot.herbar.modeapi.HerbarContext;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
 import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.event.ModelChangeListener;
 import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import java.beans.PropertyChangeListener;
@@ -134,10 +133,13 @@ public class TaxStateModel
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             final FilterModel model = (FilterModel) herbarModel;
             final FilterTaxon filterTaxon = model.addFilterTaxon( taxon );
-            final Taxon[] newTaxList = (Taxon[]) ArrayUtils.add( taxList, filterTaxon );
-            fire.add( new FireArray( TAXA.name(), taxList, newTaxList ) );
-            fireAllPropertyChangeEvents( fire );
-            taxList = newTaxList;
+            if ( !ArrayUtils.contains( taxList, filterTaxon ) )
+            {
+                final Taxon[] newTaxList = (Taxon[]) ArrayUtils.add( taxList, filterTaxon );
+                fire.add( new FireArray( TAXA.name(), taxList, newTaxList ) );
+                fireAllPropertyChangeEvents( fire );
+                taxList = newTaxList;
+            }
         }
     }
 
@@ -148,7 +150,7 @@ public class TaxStateModel
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             final FilterModel model = (FilterModel) herbarModel;
             model.removeFilterTaxon( taxon );
-            final Taxon[] newTaxList = (Taxon[]) ArrayUtils.remove( taxList, Arrays.binarySearch( taxList, taxon ) );
+            final Taxon[] newTaxList = (Taxon[]) ArrayUtils.remove( taxList, ArrayUtils.indexOf( taxList, taxon ) );
             fire.add( new FireArray( TAXA.name(), taxList, newTaxList ) );
             fireAllPropertyChangeEvents( fire );
             taxList = newTaxList;

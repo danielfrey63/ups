@@ -482,12 +482,12 @@ public class NavigationBuilder implements Builder
                 if ( filterTaxon == null )
                 {
                     taxStateModel.addTaxonToFilterModel( taxon );
-                    //filterModel.addFilterTaxon( taxon );
+                    LOG.info( "adding \"" + taxon + "\" to list \"" + model.getName() + "\"" );
                 }
                 else
                 {
                     taxStateModel.removeFilterTaxonFromFilterModel( filterTaxon );
-                    //filterModel.removeFilterTaxon( filterTaxon );
+                    LOG.info( "removing \"" + taxon + "\" from list \"" + model.getName() + "\"");
                 }
                 context.saveModel( filterModel );
             }
@@ -498,7 +498,7 @@ public class NavigationBuilder implements Builder
         protected void handlePopup( final Taxon taxon, final int x, final int y )
         {
             final JPopupMenu menu = new JPopupMenu();
-            menu.add( new AbstractAction( "Alle anwählen" )
+            menu.add( new AbstractAction( "Dieses Taxon mit allen Kindern anwählen" )
             {
                 @Override
                 public void actionPerformed( ActionEvent e )
@@ -517,7 +517,7 @@ public class NavigationBuilder implements Builder
                             {
                                 if ( child.getLevel() != null )
                                 {
-                                    filterModel.addFilterTaxon( child );
+                                    taxStateModel.addTaxonToFilterModel( child );
                                 }
                             }
                         }
@@ -526,7 +526,7 @@ public class NavigationBuilder implements Builder
                     }
                 }
             } );
-            menu.add( new AbstractAction( "Alle abwählen" )
+            menu.add( new AbstractAction( "Dieses Taxon mit allen Kinder abwählen" )
             {
                 @Override
                 public void actionPerformed( ActionEvent e )
@@ -548,7 +548,7 @@ public class NavigationBuilder implements Builder
                                 {
                                     if ( child.getLevel() != null )
                                     {
-                                        filterModel.removeFilterTaxon( child );
+                                        taxStateModel.removeFilterTaxonFromFilterModel( child );
                                     }
                                 }
                             }
@@ -567,7 +567,6 @@ public class NavigationBuilder implements Builder
                     final HerbarModel model = taxStateModel.getModel();
                     if ( model instanceof FilterModel )
                     {
-                        final FilterModel filterModel = (FilterModel) model;
                         final FilterTaxon[] list = (FilterTaxon[]) taxStateModel.getTaxList();
                         LOG.info( "editing \"" + model + "\" adding all parents to " + list.length + " taxa in list" );
                         for ( FilterTaxon taxon : list )
@@ -576,7 +575,7 @@ public class NavigationBuilder implements Builder
                             while ( dependentTaxon.getParentTaxon() != null )
                             {
                                 dependentTaxon = dependentTaxon.getParentTaxon();
-                                filterModel.addFilterTaxon( dependentTaxon );
+                                taxStateModel.addTaxonToFilterModel( dependentTaxon );
                             }
                         }
                         taxTree.repaint();
@@ -600,7 +599,7 @@ public class NavigationBuilder implements Builder
                         while ( dependentTaxon.getParentTaxon() != null )
                         {
                             dependentTaxon = dependentTaxon.getParentTaxon();
-                            filterModel.addFilterTaxon( dependentTaxon );
+                            taxStateModel.addTaxonToFilterModel( dependentTaxon );
                         }
                         taxTree.repaint();
                         context.saveModel( model );

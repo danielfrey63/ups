@@ -5,6 +5,7 @@
     <artifactId>ch.xmatrix.le.application</artifactId>
     <name>eBot 6</name>
     <version>6.0.SNAPSHOT</version>
+    <description>Botanik Lernsoftware eBot 6</description>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -16,7 +17,7 @@
         <codebase>http://geobot1.ethz.ch/hcd/webstart-${project.version}</codebase>
         <default-site>scp://geobot1.ethz.ch/hcd/site</default-site>
         <max-heap-size>512m</max-heap-size>
-        <offlineAllowed/>
+        <offlineAllowed>1</offlineAllowed>
     </properties>
     <dependencies>
         <dependency>

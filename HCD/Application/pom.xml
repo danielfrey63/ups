@@ -16,6 +16,7 @@
         <codebase>http://geobot1.ethz.ch/hcd/webstart-${project.version}</codebase>
         <default-site>scp://geobot1.ethz.ch/hcd/site</default-site>
         <max-heap-size>512m</max-heap-size>
+        <offlineAllowed/>
     </properties>
     <dependencies>
         <dependency>

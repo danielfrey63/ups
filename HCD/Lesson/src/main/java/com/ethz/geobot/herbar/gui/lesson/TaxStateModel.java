@@ -130,6 +130,7 @@ public class TaxStateModel
     {
         if ( herbarModel instanceof FilterModel )
         {
+            LOG.info( "adding \"" + taxon + "\" to list \"" + getModel().getName() + "\"" );
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             final FilterModel model = (FilterModel) herbarModel;
             final FilterTaxon filterTaxon = model.addFilterTaxon( taxon );
@@ -147,6 +148,7 @@ public class TaxStateModel
     {
         if ( herbarModel instanceof FilterModel )
         {
+            LOG.info( "removing \"" + taxon + "\" from list \"" + getModel().getName() + "\"");
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             final FilterModel model = (FilterModel) herbarModel;
             model.removeFilterTaxon( taxon );

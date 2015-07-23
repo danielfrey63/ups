@@ -482,12 +482,10 @@ public class NavigationBuilder implements Builder
                 if ( filterTaxon == null )
                 {
                     taxStateModel.addTaxonToFilterModel( taxon );
-                    LOG.info( "adding \"" + taxon + "\" to list \"" + model.getName() + "\"" );
                 }
                 else
                 {
                     taxStateModel.removeFilterTaxonFromFilterModel( filterTaxon );
-                    LOG.info( "removing \"" + taxon + "\" from list \"" + model.getName() + "\"");
                 }
                 context.saveModel( filterModel );
             }

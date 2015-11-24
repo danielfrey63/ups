@@ -81,11 +81,12 @@ public class EnvironmentDialog extends JDialog
         getRootPane().setDefaultButton( okButton );
         setText( textPane, "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Z\u00fcrich) f\u00fcr nichtkommerzielle Zwecke im Studium kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer pers\u00f6nlichen Weiterbildung nutzen m\u00f6chten, werden gebeten, f\u00fcr die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Matthias Baltisberger, 45-681486-7<br>IBAN: CH91 0900 0000 4568 1486 7</b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bez\u00fcglich Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt." );
         setText( textPane2, "Im <b>Themenbereich Systematik</b> stehen insgesamt 632 Taxa auf dem Art-Level zur Verf\u00fcgung (1 Pilz, 4 Flechten, 5 Moose, 19 Farne, 12 Gymnospermen, 591 Angiospermen). Dieser Gesamtstoff kann je nach Lernziel \u00fcber verschiedene Stofflisten eingeschr\u00e4nkt werden:" );
-        setText( textPane3, "\"Liste 60\" enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann)." );
-        setText( textPane4, "\"Liste 200\" enth\u00e4lt 200 Arten; diese sind Pr\u00fcfungsstoff (Teil Artenkenntnis) f\u00fcr Studierende der Biologie und Pharmazie an der ETH Z\u00fcrich. Die Liste 200 ist auch identisch mit der Z\u00fcrcher Liste f\u00fcr die Zertifizierungsstufe 200." );
-        setText( textPane5, "\"Liste PHARMBIO\" enth\u00e4lt 79 Arten; diese sind Pr\u00fcfungsstoff in der Veranstaltung \"Pharmazeutische Biologie\" (Prof. Dr. Karl-Heinz Altmann)." );
-        setText( textPane6, "\"Liste Alle Taxa\" ist die vollst\u00e4ndige Liste mit allen 632 Taxa in eBot." );
-        setText( textPane7, "Die restlichen festen Listen enthalten die f\u00fcr die Zertifizierungsstufen verlangten Arten: \"Liste 400\" die Arten f\u00fcr Stufe 400 resp. \"Liste 600\" die Arten f\u00fcr Stufe 600 (Arten der Stufe 200 siehe \"Liste 200\"). Die Listen \"Liste 400-200\", \"Liste 600-200\" und \"Liste 600-400\" dienen dem stufenweisen Lernen (Einschr\u00e4nkung auf die bei den Stufen hinzukommen Arten)." );
+        setText( textPane3, "Liste \"60\" enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann)." );
+        setText( textPane4, "Liste \"200\" enth&auml;lt 200 Arten; diese sind Pr&uuml;fungsstoff (Teil Artenkenntnis) f&uuml;r Studierende der Biologie und Pharmazie an der ETH Z&uuml;rich (4. Semester). Die Liste \"200\" ist identisch mit der Z&uuml;rcher Liste f&uuml;r das Zertifikat Stufe 200." );
+        setText( textPane5, "Liste \"200CH\" enth\u00e4lt jene 200 Arten, die von der Zertifizierungskommission f\u00fcr das Zertifikat 200 festgelegt wurden; diese Liste \"200CH\" unterscheidet sich von der Liste \"200\" in 29 Arten." );
+        setText( textPane6, "Liste \"PHARMBIO\" enth\u00e4lt 79 Arten; diese sind Pr\u00fcfungsstoff in der Veranstaltung \"Pharmazeutische Biologie\" (Prof. Dr. Karl-Heinz Altmann)." );
+        setText( textPane7, "Liste \"Alle\" ist die vollst\u00e4ndige Liste mit allen 632 Taxa in eBot." );
+        setText( textPane8, "Die restlichen Listen enthalten die f\u00fcr die Zertifizierungsstufen verlangten Arten: Liste \"400\" die Arten f\u00fcr das Zertifikat Stufe 400 resp. Liste \"600\" die Arten f\u00fcr das Zertifikat Stufe 600 (Arten f\u00fcr das Zertifikat Stufe 200 siehe Listen \"200\" und \"200 CH\"). Die Listen \"400\u2013200\", \"600\u2013200\" und \"600\u2013400\" dienen dem stufenweisen Lernen (Einschr\u00e4nkung auf die bei den Stufen hinzukommenden Arten)." );
         demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
         demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
     }
@@ -126,7 +127,7 @@ public class EnvironmentDialog extends JDialog
     private void initComponents()
     {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
+        // Generated using JFormDesigner Evaluation license - Daniel Frey
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         JPanel panel1 = new JPanel();
@@ -156,261 +157,264 @@ public class EnvironmentDialog extends JDialog
         textPane6 = new JTextPane();
         label5 = new JLabel();
         textPane7 = new JTextPane();
+        label6 = new JLabel();
+        textPane8 = new JTextPane();
         JPanel buttonBar2 = new JPanel();
         okButton = new JButton();
         CellConstraints cc = new CellConstraints();
 
         //======== this ========
-        setTitle( "Auswahl des Themenbereiches" );
-        setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
-        setAlwaysOnTop( true );
-        setModal( true );
+        setTitle("Auswahl des Themenbereiches");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setModal(true);
         Container contentPane = getContentPane();
-        contentPane.setLayout( new BorderLayout() );
+        contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
-            dialogPane.setLayout( new BorderLayout() );
+
+            dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
             {
-                contentPanel.setLayout( new FormLayout(
-                        "7dlu, default:grow, 7dlu",
-                        "default, 7dlu, fill:default:grow, 7dlu" ) );
+                contentPanel.setLayout(new FormLayout(
+                    "7dlu, default:grow, 7dlu",
+                    "default, 7dlu, fill:default:grow, 7dlu"));
 
                 //======== panel1 ========
                 {
-                    panel1.setBackground( Color.white );
-                    panel1.setBorder( Borders.DIALOG_BORDER );
-                    panel1.setLayout( new FormLayout(
-                            "default:grow",
-                            "default" ) );
+                    panel1.setBackground(Color.white);
+                    panel1.setBorder(Borders.DIALOG_BORDER);
+                    panel1.setLayout(new FormLayout(
+                        "default:grow",
+                        "default"));
 
                     //---- textField4 ----
-                    textField4.setText( "Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themenbereich" );
-                    textField4.setLineWrap( true );
-                    textField4.setWrapStyleWord( true );
-                    textField4.setOpaque( false );
-                    textField4.setEditable( false );
-                    panel1.add( textField4, cc.xy( 1, 1 ) );
+                    textField4.setText("Hier best\u00e4tigen Sie das Copyright und w\u00e4hlen den Themenbereich");
+                    textField4.setLineWrap(true);
+                    textField4.setWrapStyleWord(true);
+                    textField4.setOpaque(false);
+                    textField4.setEditable(false);
+                    panel1.add(textField4, cc.xy(1, 1));
                 }
-                contentPanel.add( panel1, cc.xywh( 1, 1, 3, 1 ) );
+                contentPanel.add(panel1, cc.xywh(1, 1, 3, 1));
 
                 //======== tabbedPane1 ========
                 {
 
                     //======== panel3 ========
                     {
-                        panel3.setBorder( Borders.DIALOG_BORDER );
-                        panel3.setLayout( new FormLayout(
-                                "default:grow",
-                                "fill:default:grow, $lgap, default" ) );
+                        panel3.setBorder(Borders.DIALOG_BORDER);
+                        panel3.setLayout(new FormLayout(
+                            "default:grow",
+                            "fill:default:grow, $lgap, default"));
 
                         //---- textPane ----
-                        textPane.setOpaque( false );
-                        textPane.setEditable( false );
-                        panel3.add( textPane, cc.xy( 1, 1 ) );
+                        textPane.setOpaque(false);
+                        textPane.setEditable(false);
+                        panel3.add(textPane, cc.xy(1, 1));
 
                         //======== buttonBar ========
                         {
-                            buttonBar.setBorder( Borders.createEmptyBorder( "0dlu, 0dlu, 0dlu, 0dlu" ) );
-                            buttonBar.setLayout( new FormLayout(
-                                    "$glue, $button",
-                                    "pref" ) );
+                            buttonBar.setBorder(Borders.createEmptyBorder("0dlu, 0dlu, 0dlu, 0dlu"));
+                            buttonBar.setLayout(new FormLayout(
+                                "$glue, $button",
+                                "pref"));
 
                             //---- acceptButton ----
-                            acceptButton.setText( "Akzeptieren" );
-                            acceptButton.addActionListener( new ActionListener()
-                            {
+                            acceptButton.setText("Akzeptieren");
+                            acceptButton.addActionListener(new ActionListener() {
                                 @Override
-                                public void actionPerformed( ActionEvent e )
-                                {
+                                public void actionPerformed(ActionEvent e) {
                                     acceptButtonActionPerformed();
                                 }
-                            } );
-                            buttonBar.add( acceptButton, cc.xy( 2, 1 ) );
+                            });
+                            buttonBar.add(acceptButton, cc.xy(2, 1));
                         }
-                        panel3.add( buttonBar, cc.xy( 1, 3 ) );
+                        panel3.add(buttonBar, cc.xy(1, 3));
                     }
-                    tabbedPane1.addTab( "Copyright", panel3 );
+                    tabbedPane1.addTab("Copyright", panel3);
 
                     //======== panel2 ========
                     {
-                        panel2.setBorder( Borders.DIALOG_BORDER );
-                        panel2.setLayout( new FormLayout(
-                                "10dlu, $lcgap, default:grow",
-                                "6*(default, $lgap), 5*(top:default, $lgap), fill:default:grow, 2*($lgap, default)" ) );
+                        panel2.setBorder(Borders.DIALOG_BORDER);
+                        panel2.setLayout(new FormLayout(
+                            "10dlu, $lcgap, default:grow",
+                            "6*(default, $lgap), 6*(top:default, $lgap), fill:default:grow, 2*($lgap, default)"));
 
                         //---- textField1 ----
-                        textField1.setText( "Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus." );
-                        textField1.setLineWrap( true );
-                        textField1.setWrapStyleWord( true );
-                        textField1.setOpaque( false );
-                        textField1.setEditable( false );
-                        panel2.add( textField1, cc.xywh( 1, 1, 3, 1 ) );
+                        textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus.");
+                        textField1.setLineWrap(true);
+                        textField1.setWrapStyleWord(true);
+                        textField1.setOpaque(false);
+                        textField1.setEditable(false);
+                        panel2.add(textField1, cc.xywh(1, 1, 3, 1));
 
                         //---- systematicRadio ----
-                        systematicRadio.setSelected( true );
-                        systematicRadio.addActionListener( new ActionListener()
-                        {
+                        systematicRadio.setSelected(true);
+                        systematicRadio.addActionListener(new ActionListener() {
                             @Override
-                            public void actionPerformed( ActionEvent e )
-                            {
+                            public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
-                        } );
-                        panel2.add( systematicRadio, cc.xy( 1, 3 ) );
+                        });
+                        panel2.add(systematicRadio, cc.xy(1, 3));
 
                         //---- textField2 ----
-                        textField2.setText( "Systematik: W\u00e4hlen Sie diese Option, wenn Sie Ihre Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen." );
-                        textField2.setLineWrap( true );
-                        textField2.setWrapStyleWord( true );
-                        textField2.setOpaque( false );
-                        textField2.setEditable( false );
-                        panel2.add( textField2, cc.xy( 3, 3 ) );
+                        textField2.setText("Systematik: W\u00e4hlen Sie diese Option, falls Sie Ihre wissenschaftlichen Systematikkenntnisse von Pflanzen erweitern oder auffrischen wollen.");
+                        textField2.setLineWrap(true);
+                        textField2.setWrapStyleWord(true);
+                        textField2.setOpaque(false);
+                        textField2.setEditable(false);
+                        panel2.add(textField2, cc.xy(3, 3));
 
                         //---- dendroRadio ----
-                        dendroRadio.addActionListener( new ActionListener()
-                        {
+                        dendroRadio.addActionListener(new ActionListener() {
                             @Override
-                            public void actionPerformed( ActionEvent e )
-                            {
+                            public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
-                        } );
-                        panel2.add( dendroRadio, cc.xy( 1, 5 ) );
+                        });
+                        panel2.add(dendroRadio, cc.xy(1, 5));
 
                         //---- textField3 ----
-                        textField3.setText( "Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis." );
-                        textField3.setLineWrap( true );
-                        textField3.setWrapStyleWord( true );
-                        textField3.setOpaque( false );
-                        textField3.setEditable( false );
-                        panel2.add( textField3, cc.xy( 3, 5 ) );
+                        textField3.setText("Dendrologie: Hier erhalten Sie speziellen Einblick in die Dendrologie mit Fokus auf Artkenntnis.");
+                        textField3.setLineWrap(true);
+                        textField3.setWrapStyleWord(true);
+                        textField3.setOpaque(false);
+                        textField3.setEditable(false);
+                        panel2.add(textField3, cc.xy(3, 5));
 
                         //---- textField5 ----
-                        textField5.setText( "Mit dem folgenden Tool k\u00f6nnen Sie sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMBX vertraut machen (Pr\u00fcfungs-Demo)." );
-                        textField5.setLineWrap( true );
-                        textField5.setWrapStyleWord( true );
-                        textField5.setOpaque( false );
-                        textField5.setEditable( false );
-                        //panel2.add( textField5, cc.xywh( 1, 7, 3, 1 ) );
+                        textField5.setText("Zudem kann man sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMB vertraut machen (Pr\u00fcfungs-Demo).");
+                        textField5.setLineWrap(true);
+                        textField5.setWrapStyleWord(true);
+                        textField5.setOpaque(false);
+                        textField5.setEditable(false);
+                        panel2.add(textField5, cc.xywh(1, 7, 3, 1));
 
                         //---- demoRadio ----
-                        demoRadio.addActionListener( new ActionListener()
-                        {
+                        demoRadio.addActionListener(new ActionListener() {
                             @Override
-                            public void actionPerformed( ActionEvent e )
-                            {
+                            public void actionPerformed(ActionEvent e) {
                                 setChoice1();
                             }
-                        } );
-                        //panel2.add( demoRadio, cc.xy( 1, 9 ) );
+                        });
+                        panel2.add(demoRadio, cc.xy(1, 9));
 
                         //---- demoText ----
-                        demoText.setText( "Pr\u00fcfungs-Demo (nur auf Windows)" );
-                        demoText.setLineWrap( true );
-                        demoText.setWrapStyleWord( true );
-                        demoText.setOpaque( false );
-                        demoText.setEditable( false );
-                        //panel2.add( demoText, cc.xy( 3, 9 ) );
+                        demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
+                        demoText.setLineWrap(true);
+                        demoText.setWrapStyleWord(true);
+                        demoText.setOpaque(false);
+                        demoText.setEditable(false);
+                        panel2.add(demoText, cc.xy(3, 9));
 
                         //---- textPane2 ----
-                        textPane2.setOpaque( false );
-                        textPane2.setEditable( false );
-                        panel2.add( textPane2, cc.xywh( 1, 7, 3, 1 ) );
+                        textPane2.setOpaque(false);
+                        textPane2.setEditable(false);
+                        panel2.add(textPane2, cc.xywh(1, 11, 3, 1));
 
                         //---- label1 ----
-                        label1.setText( "-" );
-                        label1.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label1, cc.xy( 1, 9, CellConstraints.RIGHT, CellConstraints.TOP ) );
+                        label1.setText("-");
+                        label1.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label1, cc.xy(1, 13));
 
                         //---- textPane3 ----
-                        textPane3.setOpaque( false );
-                        textPane3.setEditable( false );
-                        panel2.add( textPane3, cc.xy( 3, 9 ) );
+                        textPane3.setOpaque(false);
+                        textPane3.setEditable(false);
+                        panel2.add(textPane3, cc.xy(3, 13));
 
                         //---- label2 ----
-                        label2.setText( "-" );
-                        label2.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label2, cc.xy( 1, 11, CellConstraints.RIGHT, CellConstraints.TOP ) );
+                        label2.setText("-");
+                        label2.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label2, cc.xy(1, 15));
 
                         //---- textPane4 ----
-                        textPane4.setOpaque( false );
-                        textPane4.setEditable( false );
-                        panel2.add( textPane4, cc.xy( 3, 11 ) );
+                        textPane4.setOpaque(false);
+                        textPane4.setEditable(false);
+                        panel2.add(textPane4, cc.xy(3, 15));
 
                         //---- label3 ----
-                        label3.setText( "-" );
-                        label3.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label3, cc.xy( 1, 13, CellConstraints.RIGHT, CellConstraints.TOP  ) );
+                        label3.setText("-");
+                        label3.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label3, cc.xy(1, 17));
 
                         //---- textPane5 ----
-                        textPane5.setOpaque( false );
-                        textPane5.setEditable( false );
-                        panel2.add( textPane5, cc.xy( 3, 13 ) );
+                        textPane5.setOpaque(false);
+                        textPane5.setEditable(false);
+                        panel2.add(textPane5, cc.xy(3, 17));
 
                         //---- label4 ----
-                        label4.setText( "-" );
-                        label4.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label4, cc.xy( 1, 15, CellConstraints.RIGHT, CellConstraints.TOP  ) );
+                        label4.setText("-");
+                        label4.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label4, cc.xy(1, 19));
 
                         //---- textPane6 ----
-                        textPane6.setOpaque( false );
-                        textPane6.setEditable( false );
-                        panel2.add( textPane6, cc.xy( 3, 15 ) );
+                        textPane6.setOpaque(false);
+                        textPane6.setEditable(false);
+                        panel2.add(textPane6, cc.xy(3, 19));
 
                         //---- label5 ----
-                        label5.setText( "-" );
-                        label5.setHorizontalAlignment( SwingConstants.RIGHT );
-                        panel2.add( label5, cc.xy( 1, 17, CellConstraints.RIGHT, CellConstraints.TOP  ) );
+                        label5.setText("-");
+                        label5.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label5, cc.xy(1, 21));
 
                         //---- textPane7 ----
-                        textPane7.setOpaque( false );
-                        textPane7.setEditable( false );
-                        panel2.add( textPane7, cc.xy( 3, 17 ) );
+                        textPane7.setOpaque(false);
+                        textPane7.setEditable(false);
+                        panel2.add(textPane7, cc.xy(3, 21));
+
+                        //---- label6 ----
+                        label6.setText("-");
+                        label6.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label6, cc.xy(1, 23));
+
+                        //---- textPane8 ----
+                        textPane8.setOpaque(false);
+                        textPane8.setEditable(false);
+                        panel2.add(textPane8, cc.xy(3, 23));
 
                         //======== buttonBar2 ========
                         {
-                            buttonBar2.setBorder( Borders.createEmptyBorder( "0dlu, 0dlu, 0dlu, 0dlu" ) );
-                            buttonBar2.setLayout( new FormLayout(
-                                    "$glue, $button",
-                                    "pref" ) );
+                            buttonBar2.setBorder(Borders.createEmptyBorder("0dlu, 0dlu, 0dlu, 0dlu"));
+                            buttonBar2.setLayout(new FormLayout(
+                                "$glue, $button",
+                                "pref"));
 
                             //---- okButton ----
-                            okButton.setText( "OK" );
-                            okButton.addActionListener( new ActionListener()
-                            {
+                            okButton.setText("OK");
+                            okButton.addActionListener(new ActionListener() {
                                 @Override
-                                public void actionPerformed( ActionEvent e )
-                                {
+                                public void actionPerformed(ActionEvent e) {
                                     okButtonActionPerformed();
                                 }
-                            } );
-                            buttonBar2.add( okButton, cc.xy( 2, 1 ) );
+                            });
+                            buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add( buttonBar2, cc.xywh( 1, 21, 3, 1 ) );
+                        panel2.add(buttonBar2, cc.xywh(1, 27, 3, 1));
                     }
-                    tabbedPane1.addTab( "Auswahl", panel2 );
+                    tabbedPane1.addTab("Auswahl", panel2);
                 }
-                contentPanel.add( tabbedPane1, cc.xy( 2, 3 ) );
+                contentPanel.add(tabbedPane1, cc.xy(2, 3));
             }
-            dialogPane.add( contentPanel, BorderLayout.CENTER );
+            dialogPane.add(contentPanel, BorderLayout.CENTER);
         }
-        contentPane.add( dialogPane, BorderLayout.CENTER );
-        setSize( 720, 830 );
-        setLocationRelativeTo( null );
+        contentPane.add(dialogPane, BorderLayout.CENTER);
+        setSize(800, 930);
+        setLocationRelativeTo(null);
 
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
-        buttonGroup1.add( systematicRadio );
-        buttonGroup1.add( dendroRadio );
-        buttonGroup1.add( demoRadio );
+        buttonGroup1.add(systematicRadio);
+        buttonGroup1.add(dendroRadio);
+        buttonGroup1.add(demoRadio);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
+    // Generated using JFormDesigner Evaluation license - Daniel Frey
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JTextArea textField4;
@@ -435,6 +439,8 @@ public class EnvironmentDialog extends JDialog
     private JTextPane textPane6;
     private JLabel label5;
     private JTextPane textPane7;
+    private JLabel label6;
+    private JTextPane textPane8;
     private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

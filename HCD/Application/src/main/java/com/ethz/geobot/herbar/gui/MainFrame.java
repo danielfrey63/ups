@@ -27,6 +27,7 @@ import ch.jfactory.resource.ImageLocator;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.commands.ActionAbout;
 import com.ethz.geobot.herbar.gui.commands.ActionAppHelp;
+import com.ethz.geobot.herbar.gui.commands.ActionConvertSpeciesList;
 import com.ethz.geobot.herbar.gui.commands.ActionModuleInfo;
 import com.ethz.geobot.herbar.gui.commands.ActionQuit;
 import com.ethz.geobot.herbar.gui.mode.ModeManager;
@@ -236,6 +237,7 @@ public class MainFrame extends JFrame
 
         JMenu sub;
         sub = createMenu( "MENU.APPLICATION" );
+        sub.add( new ActionConvertSpeciesList( this ) );
         quitItem = sub.add( new ActionQuit( this ) );
 
         sub = createMenu( "MENU.SETTINGS" );

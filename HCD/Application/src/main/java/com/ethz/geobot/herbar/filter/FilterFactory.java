@@ -99,7 +99,7 @@ public class FilterFactory
                 // Write the version file
                 FileUtils.writePropertyToXML( filePath, property, version );
             }
-            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "400", "600", "600-200", "400-200", "600-400", "PHARMBIO", "Alle"} : new String[]{"Alle"};
+            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"60", "200", "200CH", "400", "600", "600-200", "400-200", "600-400", "PHARMBIO", "Alle"} : new String[]{"Alle"};
             filterDirectory.mkdirs();
 
             for ( final String list : lists )

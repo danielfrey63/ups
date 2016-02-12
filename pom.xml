@@ -21,7 +21,7 @@
         <module>UPS</module>
         <module>PMB</module>
         <module>Third</module>
-        <module>Maven</module>
-        <module>Test</module>
-    </modules>
+        <!--<module>Maven</module>-->
+        <!--<module>Test</module>-->
+i    </modules>
 </project>

@@ -5,7 +5,7 @@ import ch.jfactory.component.RendererPanel;
 import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.MODIFY;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.COLLAPSE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
@@ -614,7 +614,7 @@ public class NavigationBuilder implements Builder
         public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
         {
             final Taxon taxon = ((TaxonTreeNode) value).getTaxon();
-            final boolean query = taxStateModel.getSubMode( taxon.getName() ) == ABFRAGEN;
+            final boolean query = taxStateModel.getSubMode( taxon ) == ABFRAGEN;
             final Taxon filterTaxon = taxStateModel.getModel().getTaxon( taxon.getName() );
             final Taxon selectedTaxon = ((TaxTree) tree).getSelectedTaxon();
             boolean isParent = false;

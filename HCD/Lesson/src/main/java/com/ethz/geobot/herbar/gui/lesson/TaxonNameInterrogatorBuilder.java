@@ -26,18 +26,18 @@ import ch.jfactory.application.view.border.BevelDirection;
 import ch.jfactory.application.view.border.ThinBevelBorder;
 import ch.jfactory.application.view.builder.Builder;
 import ch.jfactory.component.ComponentFactory;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.model.Taxon;
 import java.awt.BorderLayout;
 import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.WEST;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -78,7 +78,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
     private final JFrame parent;
 
     /**
-     * Model holding the overall submodus states.
+     * Model holding the mode states.
      */
     private final TaxStateModel taxStateModel;
 
@@ -116,7 +116,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent evt )
             {
-                setTaxFocus( (Taxon) evt.getNewValue() );
+                setTaxFocus();
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -124,8 +124,8 @@ public class TaxonNameInterrogatorBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent evt )
             {
-                setTaxFocus( taxStateModel.getFocus() );
-                final SubMode subMode = (SubMode) evt.getNewValue();
+                setTaxFocus();
+                final Mode subMode = (Mode) evt.getNewValue();
                 for ( final TaxonNamePanel taxonNamePanel : taxonNamePanels )
                 {
                     taxonNamePanel.setSubMode( subMode );
@@ -134,9 +134,9 @@ public class TaxonNameInterrogatorBuilder implements Builder
         } );
     }
 
-    public void setTaxFocus( final Taxon focus )
+    public void setTaxFocus()
     {
-        taxonNamePanels = getTaxonNamePanels( focus );
+        taxonNamePanels = getTaxonNamePanels();
         toolBar.removeAll();
         toolBar.add( ComponentFactory.createSeparator( 0, 3, 0, 0 ) );
         for ( int i = 0; i < taxonNamePanels.size(); i++ )
@@ -152,26 +152,15 @@ public class TaxonNameInterrogatorBuilder implements Builder
         toolBar.invalidate();
     }
 
-    private List<TaxonNamePanel> getTaxonNamePanels( Taxon focus )
+    private List<TaxonNamePanel> getTaxonNamePanels()
     {
-        final SubMode subMode = taxStateModel.getGlobalSubMode();
+        final Mode subMode = taxStateModel.getMode();
         final List<TaxonNamePanel> list = new ArrayList<TaxonNamePanel>();
-        Taxon parent = focus;
-        int levelCounter = 0;
-        while ( parent != null && parent != parent.getParentTaxon() && parent.getLevel() != null && levelCounter < 3 )
+        final Map<Taxon, Mode> subModes = taxStateModel.getSubModes();
+        for ( final Taxon taxon : subModes.keySet() )
         {
-            final String name = parent.getLevel().getName();
-            if ( name.startsWith( "Gruppe" ) || name.startsWith( "Nebenschlüssel" ) || name.startsWith( "Gattung" ) )
-            {
-                LOG.trace( "skipping " + parent );
-                parent = parent.getParentTaxon();
-                continue;
-            }
-            levelCounter++;
-            LOG.trace( "iterating up to " + parent );
-            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, parent, subMode );
+            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, taxon, subMode );
             list.add( taxonNamePanel );
-            parent = parent.getParentTaxon();
         }
         Collections.reverse( list );
         return list;

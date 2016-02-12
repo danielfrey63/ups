@@ -28,9 +28,9 @@ import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.ObjectPopup;
 import ch.jfactory.resource.Strings;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.*;
 import com.ethz.geobot.herbar.gui.util.IteratorControlEvent;
 import com.ethz.geobot.herbar.gui.util.IteratorControlListener;
@@ -107,7 +107,7 @@ public class LessonBar extends JPanel
         taxonControl = createTaxonControl();
         listButton = createListButton();
         orderButton = createOrderButton();
-        subModusToggle = createSubModusSwitcher();
+        subModusToggle = createModeSwitcher();
 
         setListButtonText();
 
@@ -177,17 +177,17 @@ public class LessonBar extends JPanel
         return button;
     }
 
-    private JButton createSubModusSwitcher()
+    private JButton createModeSwitcher()
     {
         final JButton button = ComponentFactory.createButton( LessonMode.class, "BUTTON.SUBMODUS", new ActionListener()
         {
             @Override
             public void actionPerformed( ActionEvent e )
             {
-                taxStateModel.setGlobalSubMode( taxStateModel.getGlobalSubMode() == LERNEN ? ABFRAGEN : LERNEN );
+                taxStateModel.setMode( taxStateModel.getMode() == LERNEN ? ABFRAGEN : LERNEN );
             }
         } );
-        setSubMode( button, LERNEN );
+        setMode( button, LERNEN );
         return button;
     }
 
@@ -231,7 +231,7 @@ public class LessonBar extends JPanel
             @Override
             public void propertyChange( final PropertyChangeEvent e )
             {
-                setSubMode( subModusToggle, (SubMode) e.getNewValue() );
+                setMode( subModusToggle, (Mode) e.getNewValue() );
             }
         } );
         taxStateModel.addPropertyChangeListener( ORDER.name(), new PropertyChangeListener()
@@ -248,7 +248,7 @@ public class LessonBar extends JPanel
             public void propertyChange( PropertyChangeEvent e )
             {
                 final boolean isQuery = e.getNewValue() == ABFRAGEN;
-                final SubMode subMode = taxStateModel.getSubMode( taxStateModel.getFocus().getName() );
+                final Mode subMode = taxStateModel.getSubMode( taxStateModel.getFocus() );
                 final JComponent queryPanel = queryBuilder.getPanel();
                 if ( isQuery && subMode != null )
                 {
@@ -287,7 +287,7 @@ public class LessonBar extends JPanel
         listButton.setText( Strings.getString( LessonMode.class, "BUTTON.LIST.TEXT", taxStateModel.getModel().toString() ) );
     }
 
-    private void setSubMode( final JButton button, final SubMode subMode )
+    private void setMode( final JButton button, final Mode subMode )
     {
         button.setText( Strings.getString( LessonMode.class, "BUTTON.SUBMODUS.TEXT", subMode.toString() ) );
     }

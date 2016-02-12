@@ -25,8 +25,8 @@ package com.ethz.geobot.herbar.gui.lesson;
 import ch.jfactory.lang.ArrayUtils;
 import ch.jfactory.math.RandomUtils;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.EditState.USE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.COLLAPSE;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.EDIT;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
@@ -47,7 +47,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.prefs.Preferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,13 +63,15 @@ public class TaxStateModel
 
     private final TaxStateValues vals = new TaxStateValues();
 
-    private final HashMap<String, SubMode> subModes = new HashMap<String, SubMode>();
+    private final Map<Taxon, Mode> subModes = new LinkedHashMap<Taxon, Mode>();
 
     private Taxon[] taxList;
 
     private HerbarModel herbarModel;
 
     private EditState listState = USE;
+
+    private Mode mode = LERNEN;
 
     public TaxStateModel( final HerbarContext context )
     {
@@ -148,7 +151,7 @@ public class TaxStateModel
     {
         if ( herbarModel instanceof FilterModel )
         {
-            LOG.info( "removing \"" + taxon + "\" from list \"" + getModel().getName() + "\"");
+            LOG.info( "removing \"" + taxon + "\" from list \"" + getModel().getName() + "\"" );
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             final FilterModel model = (FilterModel) herbarModel;
             model.removeFilterTaxon( taxon );
@@ -174,7 +177,7 @@ public class TaxStateModel
             setInternalModel( fire, model );
             setInternalScope( fire, model.getRootTaxon() );
             setInternalLevel( fire, vals.scope.getLevel() );
-            setInternalGlobalSubMode( fire, LERNEN );
+            setInternalMode( fire, LERNEN );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -195,7 +198,7 @@ public class TaxStateModel
             setInternalTaxList( fire );
             setInternalOrdered( fire, true );
             setInternalFocus( fire, taxList[0] );
-            setInternalGlobalSubMode( fire, LERNEN );
+            setInternalMode( fire, LERNEN );
             setInternalEditMode( fire, USE );
             fireAllPropertyChangeEvents( fire );
         }
@@ -223,7 +226,7 @@ public class TaxStateModel
             setInternalTaxList( fire );
             setInternalOrdered( fire, vals.ordered );
             setInternalFocus( fire, taxon );
-            setInternalGlobalSubMode( fire, getGlobalSubMode() );
+            setInternalMode( fire, getMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -239,7 +242,7 @@ public class TaxStateModel
             final Taxon focus = getFocus();
             setInternalFocus( fire, taxList[0] );
             setInternalFocus( fire, taxList[ArrayUtils.indexOf( taxList, focus )] );
-            setInternalGlobalSubMode( fire, getGlobalSubMode() );
+            setInternalMode( fire, LERNEN );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -250,32 +253,27 @@ public class TaxStateModel
         {
             final ArrayList<FireArray> fire = new ArrayList<FireArray>();
             setInternalFocus( fire, focus );
-            setInternalGlobalSubMode( fire, getGlobalSubMode() );
+            setInternalMode( fire, getMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
 
-    public void setGlobalSubMode( final SubMode subMode )
+    public void setMode( final Mode subMode )
     {
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalGlobalSubMode( fire, subMode );
+        setInternalMode( fire, subMode );
         fireAllPropertyChangeEvents( fire );
     }
 
-    public void setSubMode( final String taxon, final SubMode subMode )
+    public void setSubMode( final Taxon taxon, final Mode subMode )
     {
-        final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        final SubMode oldGlobalSubMode = getGlobalSubMode();
         subModes.put( taxon, subMode );
-        final SubMode newGlobalSubMode = getGlobalSubMode();
-        fire.add( new FireArray( SUB_MODUS.name(), oldGlobalSubMode, newGlobalSubMode ) );
-        fireAllPropertyChangeEvents( fire );
     }
 
     public void setEditMode( final EditState mode )
     {
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalGlobalSubMode( fire, LERNEN );
+        setInternalMode( fire, LERNEN );
         setInternalEditMode( fire, mode );
         // Make sure the levels are corrected if the old one doesn't occur any more in the new model
         final Level[] levels = getModel().getLevels();
@@ -438,20 +436,34 @@ public class TaxStateModel
         }
     }
 
-    private void setInternalGlobalSubMode( final ArrayList<FireArray> fire, final SubMode subMode )
+    private void setInternalMode( final ArrayList<FireArray> fire, final Mode mode )
     {
-        final SubMode oldGlobalSubMode = getGlobalSubMode();
-        if ( subMode != null && subMode != oldGlobalSubMode )
+        final Mode oldMode = getMode();
+        if ( mode != null && mode != oldMode )
         {
-            fire.add( new FireArray( SUB_MODUS.name(), oldGlobalSubMode, subMode ) );
+            fire.add( new FireArray( SUB_MODUS.name(), oldMode, mode ) );
+            this.mode = mode;
         }
         subModes.clear();
-        Taxon taxon = getFocus();
-        // Make sure the root taxon is not included
-        while ( taxon.getParentTaxon() != null )
+        // LERNEN doesn't need any sub mode controlling
+        if ( ABFRAGEN.equals( mode ) )
         {
-            subModes.put( taxon.getName(), subMode );
-            taxon = taxon.getParentTaxon();
+            Taxon taxon = getFocus();
+            // Make sure the root taxon is not included
+            while ( taxon.getParentTaxon() != null && subModes.size() < 3 )
+            {
+                final String name = taxon.getLevel().getName();
+                if ( name.startsWith( "Gruppe" ) || name.startsWith( "Nebenschlüssel" ) || name.startsWith( "Gattung" ) )
+                {
+                    LOG.trace( "skipping " + taxon );
+                }
+                else
+                {
+                    subModes.put( taxon, mode );
+                    LOG.trace( "iterating up to " + taxon );
+                }
+                taxon = taxon.getParentTaxon();
+            }
         }
     }
 
@@ -502,22 +514,19 @@ public class TaxStateModel
         return vals.ordered;
     }
 
-    public SubMode getSubMode( final String taxon )
+    public Mode getSubMode( final Taxon taxon )
     {
         return subModes.get( taxon );
     }
 
-    public SubMode getGlobalSubMode()
+    public Map<Taxon, Mode> getSubModes()
     {
-        SubMode overallSubMode = LERNEN;
-        for ( final SubMode subMode : subModes.values() )
-        {
-            if ( subMode == ABFRAGEN )
-            {
-                overallSubMode = ABFRAGEN;
-            }
-        }
-        return overallSubMode;
+        return subModes;
+    }
+
+    public Mode getMode()
+    {
+        return mode;
     }
 
     public EditState getEditMode()
@@ -588,7 +597,7 @@ public class TaxStateModel
     /**
      * States representing the two sub-modes.
      */
-    public enum SubMode
+    public enum Mode
     {
         LERNEN
                 {
@@ -627,7 +636,7 @@ public class TaxStateModel
 
         /**
          * @param name   type of the event
-         * @param oldVal old state value or Taxon object (for type {@link SubMode SubMode} only)
+         * @param oldVal old state value or Taxon object (for type {@link Mode SubMode} only)
          * @param newVal new state value
          */
         FireArray( final String name, final Object oldVal, final Object newVal )

@@ -98,7 +98,7 @@ public class PrefsForm extends JDialog
                                                            final boolean isSelected, final boolean cellHasFocus )
             {
                 final JLabel label = (JLabel) super.getListCellRendererComponent( list, object, index, isSelected, cellHasFocus );
-                final NamedValue namedValue = (NamedValue) object;
+                final NamedValue namedValue = ((OrderedNamedValue) object).getNamedValue();
                 final String name = namedValue.getName();
                 final String value = namedValue.getValue();
                 final String text = name + "=" + value;
@@ -203,8 +203,7 @@ public class PrefsForm extends JDialog
         final List<OrderedNamedValue> orderList = new ArrayList<OrderedNamedValue>( orderListSize );
         for ( int i = 0; i < orderListSize; i++ )
         {
-            final NamedValue item = (NamedValue) orderListModel.getElementAt( i );
-            final OrderedNamedValue orderItem = new OrderedNamedValue( item, i );
+            final OrderedNamedValue orderItem = (OrderedNamedValue) orderListModel.getElementAt( i );
             orderList.add( orderItem );
         }
         settings.setOrderTokens( orderList );

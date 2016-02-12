@@ -24,7 +24,7 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.lang.ArrayUtils;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.gui.picture.PictureCache;
@@ -113,7 +113,7 @@ public class PicturePanel extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
+                final TaxStateModel.Mode subMode = taxStateModel.getMode();
                 setShowText( subMode == LERNEN );
             }
         } );

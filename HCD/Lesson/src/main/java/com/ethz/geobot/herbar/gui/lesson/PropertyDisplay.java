@@ -24,8 +24,8 @@ package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import static ch.jfactory.resource.ImageLocator.getIcon;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.FOCUS;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.TaxState.SUB_MODUS;
 import com.ethz.geobot.herbar.modeapi.HerbarContext;
@@ -148,7 +148,7 @@ public class PropertyDisplay extends JPanel
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
-                final TaxStateModel.SubMode subMode = taxStateModel.getGlobalSubMode();
+                final TaxStateModel.Mode subMode = taxStateModel.getMode();
                 cardLayout.show( PropertyDisplay.this, subMode.name() );
             }
         } );

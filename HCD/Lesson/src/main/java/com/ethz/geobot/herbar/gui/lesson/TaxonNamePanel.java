@@ -28,15 +28,14 @@ import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.gui.CorrectnessChecker;
 import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_FALSE;
 import static com.ethz.geobot.herbar.gui.CorrectnessChecker.IS_TRUE;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.ABFRAGEN;
-import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.SubMode.LERNEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
+import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.ethz.geobot.herbar.model.TaxonSynonym;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.CardLayout;
-import static java.awt.Font.BOLD;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -113,7 +112,7 @@ public class TaxonNamePanel extends JPanel
      * @param taxon         the taxon to display and handle
      * @param subMode       the initial sub mode to use
      */
-    public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final SubMode subMode )
+    public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final Mode subMode )
     {
         setName( taxon.getName() ); // Easier debugging
 
@@ -163,14 +162,14 @@ public class TaxonNamePanel extends JPanel
 
     private void swapSubModes()
     {
-        final SubMode newSubMode = taxStateModel.getSubMode( taxon.getName() ).equals( ABFRAGEN ) ? LERNEN : ABFRAGEN;
-        taxStateModel.setSubMode( getName(), newSubMode );
+        final Mode newSubMode = taxStateModel.getSubMode( taxon ).equals( ABFRAGEN ) ? LERNEN : ABFRAGEN;
+        taxStateModel.setSubMode( taxon, newSubMode );
         setSubMode( newSubMode );
 
         requestFocusInWindow();
     }
 
-    public void setSubMode( final SubMode subMode )
+    public void setSubMode( final Mode subMode )
     {
         layout.show( panel, subMode.name() );
         taxonField.setText( "" );

@@ -29,6 +29,10 @@
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.jidesoft</groupId>
+            <artifactId>jide-oss</artifactId>
+        </dependency>
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>

@@ -1,6 +1,7 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.view.builder.Builder;
+import ch.jfactory.application.view.search.TreeSearchable;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
@@ -21,6 +22,7 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
+import com.jidesoft.swing.SearchableUtils;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,16 +39,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
@@ -81,6 +87,7 @@ public class NavigationBuilder implements Builder
     public JComponent getPanel()
     {
         final TaxTree taxTree = new TaxTree();
+        new NavigationTreeSearchable( taxTree ).setRecursive( true );
         setRenderer( taxTree );
         setController( taxTree );
         setListeners( taxTree );
@@ -91,8 +98,35 @@ public class NavigationBuilder implements Builder
         setFocus( taxTree, taxStateModel.getFocus() );
 
         navigation.add( new JScrollPane( taxTree ), BorderLayout.CENTER );
+        navigation.add( createSearchPanel( taxTree ), BorderLayout.NORTH );
 
         return navigation;
+    }
+
+    private Component createSearchPanel( final TaxTree taxTree )
+    {
+        final JPanel panel = new JPanel( new BorderLayout() );
+        final JTextField field = new JTextField();
+        panel.add( field, BorderLayout.CENTER );
+        final JButton button = new JButton( "Selektieren" );
+        button.addActionListener( new ActionListener()
+        {
+            @Override
+            public void actionPerformed( ActionEvent e )
+            {
+                final String text = field.getText();
+                if ( !"".equals( text ) )
+                {
+                    final int index = Integer.parseInt( text );
+                    LOG.info( "seleting at " + index + " path " + taxTree.getPathForRow( index ) );
+                    taxTree.setSelectionRow( index );
+                    taxTree.scrollRowToVisible( index );
+                }
+                LOG.info( "" + taxTree.getSelectionPath() );
+            }
+        } );
+        panel.add( button, BorderLayout.WEST );
+        return panel;
     }
 
     private void initRendererPanel()
@@ -130,7 +164,9 @@ public class NavigationBuilder implements Builder
             @Override
             public void propertyChange( PropertyChangeEvent e )
             {
+                SearchableUtils.uninstallSearchable( taxTree );
                 setRootTaxon( taxTree );
+                new NavigationTreeSearchable( taxTree ).setRecursive( true );
             }
         } );
         taxStateModel.addPropertyChangeListener( SUB_MODUS.name(), new PropertyChangeListener()
@@ -214,6 +250,24 @@ public class NavigationBuilder implements Builder
             @Override
             public void ancestorMoved( final AncestorEvent e )
             {
+            }
+        } );
+        taxTree.addTreeSelectionListener( new TreeSelectionListener()
+        {
+            @Override
+            public void valueChanged( TreeSelectionEvent e )
+            {
+                final TreePath path = e.getNewLeadSelectionPath();
+                if ( path != null )
+                {
+                    final Object object = path.getLastPathComponent();
+                    if ( object instanceof TaxonTreeNode )
+                    {
+                        final Taxon taxon = ((TaxonTreeNode) object).getTaxon();
+                        taxStateModel.setFocus( taxon );
+                        LOG.info( "search result set " + taxon );
+                    }
+                }
             }
         } );
     }
@@ -657,6 +711,32 @@ public class NavigationBuilder implements Builder
             check.setSelected( taxStateModel.getModel().getTaxon( taxon.getName() ) != null );
             panel.update();
             return panel;
+        }
+    }
+
+    class NavigationTreeSearchable extends TreeSearchable
+    {
+        public NavigationTreeSearchable( final JTree tree )
+        {
+            super( tree );
+        }
+
+        @Override
+        protected String convertElementToString( Object obj )
+        {
+            if ( obj instanceof TreePath )
+            {
+                final TreePath path = (TreePath) obj;
+                if ( path.getLastPathComponent() instanceof TaxonTreeNode )
+                {
+                    final Taxon taxon = ((TaxonTreeNode) path.getLastPathComponent()).getTaxon();
+                    if ( taxon.getLevel() == taxStateModel.getLevel() )
+                    {
+                        return super.convertElementToString( obj );
+                    }
+                }
+            }
+            return null;
         }
     }
 }

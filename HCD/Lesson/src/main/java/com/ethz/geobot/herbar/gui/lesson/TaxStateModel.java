@@ -177,7 +177,7 @@ public class TaxStateModel
             setInternalModel( fire, model );
             setInternalScope( fire, model.getRootTaxon() );
             setInternalLevel( fire, vals.scope.getLevel() );
-            setInternalMode( fire, LERNEN );
+            setInternalMode( fire, getMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -198,7 +198,7 @@ public class TaxStateModel
             setInternalTaxList( fire );
             setInternalOrdered( fire, true );
             setInternalFocus( fire, taxList[0] );
-            setInternalMode( fire, LERNEN );
+            setInternalMode( fire, getMode() );
             setInternalEditMode( fire, USE );
             fireAllPropertyChangeEvents( fire );
         }
@@ -242,7 +242,7 @@ public class TaxStateModel
             final Taxon focus = getFocus();
             setInternalFocus( fire, taxList[0] );
             setInternalFocus( fire, taxList[ArrayUtils.indexOf( taxList, focus )] );
-            setInternalMode( fire, LERNEN );
+            setInternalMode( fire, getMode() );
             fireAllPropertyChangeEvents( fire );
         }
     }
@@ -258,10 +258,10 @@ public class TaxStateModel
         }
     }
 
-    public void setMode( final Mode subMode )
+    public void setMode( final Mode mode )
     {
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalMode( fire, subMode );
+        setInternalMode( fire, mode );
         fireAllPropertyChangeEvents( fire );
     }
 
@@ -273,7 +273,7 @@ public class TaxStateModel
     public void setEditMode( final EditState mode )
     {
         final ArrayList<FireArray> fire = new ArrayList<FireArray>();
-        setInternalMode( fire, LERNEN );
+        setInternalMode( fire, getMode() );
         setInternalEditMode( fire, mode );
         // Make sure the levels are corrected if the old one doesn't occur any more in the new model
         final Level[] levels = getModel().getLevels();

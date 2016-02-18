@@ -121,6 +121,10 @@
             <artifactId>uispec4j</artifactId>
             <classifier>jdk16</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.jidesoft</groupId>
+            <artifactId>jide-oss-xmatrix</artifactId>
+        </dependency>
     </dependencies>
     <scm>
         <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.utils-all-3.0.827

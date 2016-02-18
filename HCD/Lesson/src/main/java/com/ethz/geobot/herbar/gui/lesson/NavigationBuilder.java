@@ -1,7 +1,6 @@
 package com.ethz.geobot.herbar.gui.lesson;
 
 import ch.jfactory.application.view.builder.Builder;
-import ch.jfactory.application.view.search.TreeSearchable;
 import ch.jfactory.component.RendererPanel;
 import ch.jfactory.component.tree.TreeUtils;
 import ch.jfactory.resource.ImageLocator;
@@ -23,6 +22,7 @@ import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
 import com.jidesoft.swing.SearchableUtils;
+import com.jidesoft.swing.TreeSearchable;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;

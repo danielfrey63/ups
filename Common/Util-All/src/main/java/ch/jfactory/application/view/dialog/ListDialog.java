@@ -10,9 +10,9 @@
 package ch.jfactory.application.view.dialog;
 
 import ch.jfactory.application.presentation.WindowUtils;
-import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.list.DefaultJList;
 import ch.jfactory.resource.Strings;
+import com.jidesoft.swing.SearchableUtils;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;

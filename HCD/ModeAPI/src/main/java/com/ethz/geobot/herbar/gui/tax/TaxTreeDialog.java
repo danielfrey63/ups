@@ -24,13 +24,12 @@ package com.ethz.geobot.herbar.gui.tax;
 
 import ch.jfactory.application.presentation.Constants;
 import ch.jfactory.application.view.dialog.I15nComponentDialog;
-import ch.jfactory.application.view.search.SearchableUtils;
-import ch.jfactory.application.view.search.TreeSearchable;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.jidesoft.swing.SearchableUtils;
+import com.jidesoft.swing.TreeSearchable;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

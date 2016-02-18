@@ -24,8 +24,6 @@ package com.ethz.geobot.herbar.gui;
 
 import ch.jfactory.action.ComponentFocusListener;
 import ch.jfactory.application.presentation.Constants;
-import ch.jfactory.application.view.search.SearchableUtils;
-import ch.jfactory.application.view.search.TreeSearchable;
 import ch.jfactory.component.ComponentFactory;
 import ch.jfactory.component.TrackableJSplitPane;
 import ch.jfactory.component.tree.GraphTreeNode;
@@ -34,6 +32,8 @@ import ch.jfactory.model.graph.GraphNode;
 import ch.jfactory.model.graph.tree.VirtualGraphTreeNodeFilter;
 import ch.jfactory.resource.Strings;
 import com.ethz.geobot.herbar.model.Taxon;
+import com.jidesoft.swing.SearchableUtils;
+import com.jidesoft.swing.TreeSearchable;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;

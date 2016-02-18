@@ -25,9 +25,7 @@ package com.ethz.geobot.herbar.gui;
 import ch.jfactory.math.EvaluationResult;
 import ch.jfactory.math.LevenshteinLevel;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Calculates the distance of genus and species and prepares an answer.<p> Some mistakes may pass as <code>IS_NEARLY_TRUE</code> if they occur in the follwoing context: <ul> <li>The ending of any name is a commonly mixed up ending</li> <li>Any one addition, deletion or change of a character may occur</li> </ul> So the following guess samples for Cladonia rangiferina should pass: <ul> <li>Cladonia rangiferin<b>um</b></li> <li>Cladoni<b>um</b> rangiferina</li> <li>Cladoni<b>um</b> rangiferin<b>um</b></li> <li>Cl<b>o</b>donia rangiferina</li> <li>Cladonia rang<b>o</b>ferina</li> <li>Cl<b>o</b>doni<b>um</b> rangiferin<b>um</b></li> <li>Cladoni<b>um</b> rang<b>o</b>ferin<b>um</b></li> </ul> Whereas the following shouldn't: <ul> <li>Cl<b>o</b>doni<b>um</b> rang<b>o</b>ferin<b>um</b></li> </ul>
@@ -64,8 +62,41 @@ public class CorrectnessChecker
             guess = guess.substring( 0, iDoubles ) + guess.substring( iDoubles + 1, guess.length() );
         }
 
+        final boolean withinTolerance = mayBeTolerated.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
+        final boolean equal = mustBeEqual.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
+        final boolean isSynonym = checkSynonym( guess, synonyms ) == IS_NEARLY_TRUE;
+        if ( equal )
+        {
+            ret = IS_TRUE;
+        }
+        else if ( withinTolerance )
+        {
+            correctnessText = new ArrayList<String>();
+            correctnessText.add( " " );
+            correctnessText.add( "Sie sind nahe dran:                         " );
+            correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in" );
+            correctnessText.add( "  Ihrem Vorschlag" );
+            correctnessText.add( " " );
+            correctnessText.add( "  " + taxon + " (richtige Lösung)" );
+            correctnessText.add( "  " + guess + " (Ihr Vorschlag)" );
+            correctnessText.add( " " );
+            correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
+            correctnessText.add( " " );
+            ret = IS_NEARLY_TRUE;
+        }
+        else if ( isSynonym )
+        {
+            correctnessText = new ArrayList<String>();
+            correctnessText.add( "Sie verwenden ein Synonym:                  " );
+            correctnessText.add( "  " + guess );
+            correctnessText.add( " " );
+            correctnessText.add( "Wir verwenden jedoch:                       " );
+            correctnessText.add( "  " + taxon );
+            correctnessText.add( " " );
+            ret = IS_NEARLY_TRUE;
+        }
         // check whether within the given tolerance for species, endings may be wrong
-        if ( taxon.contains( " " ) )
+        else if ( taxon.contains( " " ) )
         {
             final Correctness[] iG = checkGenus( taxon, guess );
             final Correctness[] iS = checkEpithethon( taxon, guess );
@@ -127,49 +158,13 @@ public class CorrectnessChecker
             }
         }
         else
-        { // it's not a species
-            final boolean withinTolerance = mayBeTolerated.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
-            final boolean equal = mustBeEqual.getEval( taxon.toLowerCase(), guess.toLowerCase() ).isPassed();
-            final boolean isSynonym = checkSynonym( guess, synonyms ) == IS_NEARLY_TRUE;
-            if ( equal )
-            {
-                ret = IS_TRUE;
-            }
-            else if ( withinTolerance )
-            {
-                correctnessText = new ArrayList<String>();
-                correctnessText.add( " " );
-                correctnessText.add( "Sie sind nahe dran:                         " );
-                correctnessText.add( "- Es befinden sich noch kleine Schreibfehler in" );
-                correctnessText.add( "  Ihrem Vorschlag" );
-                correctnessText.add( " " );
-                correctnessText.add( "  " + taxon + " (richtige Lösung)" );
-                correctnessText.add( "  " + guess + " (Ihr Vorschlag)" );
-                correctnessText.add( " " );
-                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
-                correctnessText.add( " " );
-                ret = IS_NEARLY_TRUE;
-            }
-            else if ( isSynonym )
-            {
-                correctnessText = new ArrayList<String>();
-                correctnessText.add( "Sie verwenden ein Synonym:                  " );
-                correctnessText.add( "  " + guess );
-                correctnessText.add( " " );
-                correctnessText.add( "Wir verwenden jedoch:                       " );
-                correctnessText.add( "  " + taxon );
-                correctnessText.add( " " );
-                ret = IS_NEARLY_TRUE;
-            }
-            else
-            {
-                correctnessText = new ArrayList<String>();
-                correctnessText.add( "Der Vorschlag ist falsch.                   " );
-                correctnessText.add( " " );
-                correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
-                correctnessText.add( " " );
-                ret = IS_FALSE;
-            }
+        {
+            correctnessText = new ArrayList<String>();
+            correctnessText.add( "Der Vorschlag ist falsch.                   " );
+            correctnessText.add( " " );
+            correctnessText.add( "Bitte versuchen Sie es noch einmal...       " );
+            correctnessText.add( " " );
+            ret = IS_FALSE;
         }
         return ret;
     }
@@ -298,11 +293,11 @@ public class CorrectnessChecker
     static
     {
         // make sure to have the shorter endings at the end...
-        allEndings = new String[][] {
+        allEndings = new String[][]{
                 {"tans", "ens"},
-                {"er", "ris", "re", "rys", "is"},
                 {"um", "us", "a"},
-                {"ii", "i"}
+                {"ii", "i"},
+                {"ris", "re", "er"}
         };
     }
 
@@ -334,29 +329,5 @@ public class CorrectnessChecker
                 return "UNKNOWN";
             }
         }
-    }
-
-    public static void main( String[] args )
-    {
-        final Map<String[], Correctness> data = new HashMap<String[], Correctness>();
-        data.put( new String[]{"Abies", "Abies"}, IS_TRUE );
-        data.put( new String[]{"asdf", "Abies alba"}, IS_FALSE );
-        data.put( new String[]{"Abies alba", "Abies alba"}, IS_TRUE );
-        data.put( new String[]{"Abies album", "Abies alba"}, IS_NEARLY_TRUE );
-        data.put( new String[]{"Einblättriges Lebermoos", "Einblättriges Lebermoos"}, IS_TRUE );
-        data.put( new String[]{"Abies alba", "Abies alba i.w.S."}, IS_TRUE );
-        data.put( new String[]{"Abies alba", "Abies alba agg."}, IS_TRUE );
-        for ( final String[] string : data.keySet() )
-        {
-            check( data.get( string ), string[0], string[1] );
-        }
-    }
-
-    static void check( final Correctness expected, final String guess, final String taxon )
-    {
-        final CorrectnessChecker checker = new CorrectnessChecker();
-        final boolean testPassed = expected == checker.getCorrectness( taxon, guess, new String[]{"Abies alba"} );
-        if ( !testPassed ) System.out.println( "- checking \"" + taxon + "\" against \"" + guess + "\" expecting " +
-                expected + " - test " + (testPassed ? "passed" : ">> FAILED <<") );
     }
 }

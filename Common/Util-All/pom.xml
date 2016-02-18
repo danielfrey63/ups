@@ -9,14 +9,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.xmatrix.common</groupId>
     <artifactId>ch.xmatrix.common.utils-all</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.0.3196</version>
     <name>JFactory Components</name>
     <description>JFactory Common Components</description>
     <inceptionYear>2006</inceptionYear>
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.4.2088</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
@@ -97,7 +96,6 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
-            <version>1.79.2801</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
         <dependency>
@@ -127,8 +125,8 @@
         </dependency>
     </dependencies>
     <scm>
-        <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.utils-all-3.0.827
+        <developerConnection>scm:svn:https://svn.id.ethz.ch/ups/tags/ch.xmatrix.common.utils-all-4.0.3196
         </developerConnection>
-        <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.common.utils-all-3.0.827</url>
+        <url>https://svn.id.ethz.ch/viewvc/ups/tags/ch.xmatrix.common.utils-all-4.0.3196</url>
     </scm>
 </project>

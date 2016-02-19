@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.jidesoft</groupId>
-            <artifactId>jide-oss-xmatrix</artifactId>
+            <artifactId>jide-oss</artifactId>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

@@ -55,7 +55,11 @@ import javax.swing.ListSelectionModel;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <Comments here>
@@ -65,6 +69,8 @@ import javax.swing.tree.TreePath;
  */
 public class AttributeTreePanel extends JPanel
 {
+    private static final Logger LOG = LoggerFactory.getLogger( AttributeTreePanel.class );
+
     private static final String SIMILAR_TAXA = "Ähnliche Taxa";
 
     private static final int THRESHOLD = 8;
@@ -82,10 +88,6 @@ public class AttributeTreePanel extends JPanel
     private final TaxStateModel taxStateModel;
 
     private JScrollPane sp;
-
-    private int xOffset;
-
-    private int gap = 20;
 
     AttributeTreePanel( final HerbarContext herbarContext, final Level stopper, final TaxStateModel taxStateModel, final String rootNodeName, final VirtualGraphTreeNodeFilter filter )
     {
@@ -122,6 +124,20 @@ public class AttributeTreePanel extends JPanel
                 tree.setRootVisible( rootVisible );
             }
         } );
+        tree.addTreeSelectionListener( new TreeSelectionListener()
+        {
+            @Override
+            public void valueChanged( TreeSelectionEvent e )
+            {
+                final TreePath path = e.getNewLeadSelectionPath();
+                if ( path != null )
+                {
+                    final Object object = path.getLastPathComponent();
+                    LOG.info( "attribute search result set " + object );
+                }
+            }
+        } );
+
         new TreeExpander( tree, 2 );
         this.setLayout( new BorderLayout() );
         sp = new JScrollPane( tree, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_NEVER );

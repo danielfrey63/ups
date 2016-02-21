@@ -16,7 +16,6 @@
  */
 package ch.xmatrix.ups.uec.constraints;
 
-import ch.jfactory.application.view.search.SearchableUtils;
 import ch.jfactory.component.tree.TreeExpandedRestorer;
 import ch.jfactory.convert.Converter;
 import ch.jfactory.lang.LogicUtils;
@@ -44,6 +43,7 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+import com.jidesoft.swing.SearchableUtils;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;

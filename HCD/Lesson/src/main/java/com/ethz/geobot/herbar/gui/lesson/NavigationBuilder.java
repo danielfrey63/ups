@@ -21,7 +21,6 @@ import com.ethz.geobot.herbar.model.filter.FilterModel;
 import com.ethz.geobot.herbar.model.filter.FilterTaxon;
 import com.ethz.geobot.herbar.util.DefaultTaxonTreeNode;
 import com.ethz.geobot.herbar.util.TaxonTreeNode;
-import com.jidesoft.swing.Searchable;
 import com.jidesoft.swing.SearchableBar;
 import com.jidesoft.swing.SearchableUtils;
 import com.jidesoft.swing.TreeSearchable;
@@ -49,6 +48,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.Timer;
+import javax.swing.ToolTipManager;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -90,6 +90,7 @@ public class NavigationBuilder implements Builder
         setRenderer( taxTree );
         setController( taxTree );
         setListeners( taxTree );
+        ToolTipManager.sharedInstance().registerComponent( taxTree );
 
         initRendererPanel();
 
@@ -105,7 +106,7 @@ public class NavigationBuilder implements Builder
         final SearchableBar bar = new SearchableBar( searchable );
         bar.setCompact( true );
         bar.setHighlightAll( false );
-        bar.setVisibleButtons( 0 );
+        bar.setVisibleButtons( SearchableBar.SHOW_NAVIGATION );
         navigation.add( bar, BorderLayout.NORTH );
 
         return navigation;
@@ -646,6 +647,7 @@ public class NavigationBuilder implements Builder
 
     private class LearnAndQueryTreeCellRenderer implements TreeCellRenderer
     {
+
         @Override
         public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus )
         {
@@ -661,13 +663,23 @@ public class NavigationBuilder implements Builder
                 isParent = current != null && current == taxon && !(taxon == taxStateModel.getModel().getRootTaxon());
             }
             final Level level = taxon.getLevel();
-            final Taxon[] taxList = taxStateModel.getTaxList();
             panel.setIcon( ImageLocator.getIcon( "icon" + (level == null ? "" : level.getName()) + ".gif" ) );
             panel.setText( query ? "Welches Taxon ist das?" : taxon.toString() );
+
+            final Taxon[] taxList = taxStateModel.getTaxList();
             final boolean containsFilterTaxon = contains( taxList, filterTaxon );
             final boolean containsTaxon = contains( taxList, taxon );
             final boolean listHasTaxon = filterTaxon != null;
             final boolean sameLevels = taxStateModel.getLevel() == taxon.getLevel();
+
+            final StringBuilder t = new StringBuilder( query ? taxon.getName() : "" );
+            if ( !sameLevels && taxStateModel.getLevel() != null && taxon.getLevel() != null )
+                t.append( t.length() == 0 ? "" : "<br/>" ).append( "Klick auf Icon links ändert die aktive hierarchische Stufe von \"" ).append( taxStateModel.getLevel() ).append( "\" auf \"" ).append( taxon.getLevel() ).append( "\"" );
+            if ( taxStateModel.getScope() != taxon )
+                t.append( t.length() == 0 ? "" : "<br/>" ).append( "Klick auf Kreis ändert das oberstes Taxon des aktiven Bereiches von \"" ).append( taxStateModel.getScope() ).append( "\" auf \"" ).append( taxon.getName() ).append( "\"" );
+            if ( sameLevels && taxon != taxStateModel.getFocus() )
+                t.append( t.length() == 0 ? "" : "<br/>" ).append( "Klick auf Name ändert das ausgewähltes Taxon von \"" ).append( taxStateModel.getFocus() ).append( "\" auf \"" ).append( taxon.getName() ).append( "\"" );
+            panel.setToolTipText( "".equals( t.toString() ) ? null : "<html>" + t.toString() + "</html>" );
             panel.setEnabled( isParent || listHasTaxon && sameLevels && (containsFilterTaxon || containsTaxon) );
             panel.setSelected( taxStateModel.getFocus().equals( taxon ) );
             radio.setEnabled( true );

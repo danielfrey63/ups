@@ -462,14 +462,14 @@ foreach $artifact (@orders) {
         print "    Release version is $releaseVersion\n";
         my $tag = "$artifact-$releaseVersion";
         print "    Tag is $tag\n";
-        my $prepareLog = "$pwd/${tag}-prepare.log";
-        print "    Logging prepare to $prepareLog\n";
-        `mvn -f $pom -B -Dtag=$tag -DreleaseVersion=$releaseVersion -DdevelopmentVersion=$devVersion release:prepare > $prepareLog`;
-        checkForBuildFailures ($prepareLog);
         my $dir = $pom;
         $dir =~ s/pom\.xml/target/g;
         `rm -rf $dir`;
         print "    Deleted directory " . $dir;
+        my $prepareLog = "$pwd/${tag}-prepare.log";
+        print "    Logging prepare to $prepareLog\n";
+        `mvn -f $pom -B -Dtag=$tag -DreleaseVersion=$releaseVersion -DdevelopmentVersion=$devVersion release:prepare > $prepareLog`;
+        checkForBuildFailures ($prepareLog);
         my $releaseLog = "$pwd/${tag}-release.log";
         print "    Logging release to $releaseLog\n";
         `mvn -f $pom release:perform > $releaseLog`;

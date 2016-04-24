@@ -1,0 +1,27 @@
+﻿> keytool -genkey -keyalg RSA -keysize 2048 -alias xmatrix -keystore keystore.jks
+Geben Sie das Keystore-Passwort ein:
+Geben Sie das Passwort erneut ein:
+Keine ▄bereinstimmung. Versuchen Sie es erneut.
+Geben Sie das Keystore-Passwort ein:
+Geben Sie das Passwort erneut ein:
+Wie lautet Ihr Vor- und Nachname?
+ [Unknown]:  Daniel Frey
+Wie lautet der Name Ihrer organisatorischen Einheit?
+ [Unknown]:  Institute of Integrative Biology
+Wie lautet der Name Ihrer Organisation?
+ [Unknown]:  ETH Zurich
+Wie lautet der Name Ihrer Stadt oder Gemeinde?
+ [Unknown]:  Zurich
+Wie lautet der Name Ihres Bundeslandes oder Ihrer Provinz?
+ [Unknown]:  ZH
+Wie lautet der Landescode (zwei Buchstaben) f³r diese Einheit?
+ [Unknown]:  CH
+Ist CN=Daniel Frey, OU=Institute of Integrative Biology, O=ETH Zurich, L=Zurich, ST=ZH, C=CH richtig?
+ [Nein]:  Ja
+
+Geben Sie das Passwort f³r <xmatrix> ein.
+        (EINGABETASTE, wenn Passwort dasselbe wie f³r Keystore):
+
+> keytool -import -v -trustcacerts -alias root -file ca.crt -keystore keystore.jks
+> keytool -import -v -trustcacerts -alias intermediate -file intermediate-2016-04-19.crt -keystore keystore.jks
+> keytool -import -trustcacerts -alias xmatrix -file daniel-frey-2016-04-19.crt -keystore keystore.jks

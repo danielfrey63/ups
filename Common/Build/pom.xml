@@ -686,8 +686,8 @@
                         <!-- Note: Path are relative to the target/jnlp directory -->
                         <keystore>${project.parent.relativePath}/keystore/keystore.jks</keystore>
                         <keypass></keypass>
-                        <storepass>balti1234</storepass>
-                        <alias>balti</alias>
+                        <storepass>leni1234</storepass>
+                        <alias>xmatrix</alias>
                     </sign>
                     <outputJarVersions>false</outputJarVersions>
                     <verbose>false</verbose>

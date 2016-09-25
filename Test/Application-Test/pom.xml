@@ -13,8 +13,8 @@
     </parent>
     <properties>
         <main-class>ch.xmatrix.test.TestSplash</main-class>
-        <codebase>http://geobot1.ethz.ch/hcd/webstart-${project.version}</codebase>
-        <default-site>scp://geobot1.ethz.ch/hcd/site</default-site>
+        <codebase>http://balti.ethz.ch/hcd/webstart-${project.version}</codebase>
+        <default-site>scp://balti.ethz.ch/hcd/site</default-site>
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>

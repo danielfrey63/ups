@@ -25,3 +25,6 @@ Geben Sie das Passwort f³r <xmatrix> ein.
 > keytool -import -v -trustcacerts -alias root -file ca.crt -keystore keystore.jks
 > keytool -import -v -trustcacerts -alias intermediate -file intermediate-2016-04-19.crt -keystore keystore.jks
 > keytool -import -trustcacerts -alias xmatrix -file daniel-frey-2016-04-19.crt -keystore keystore.jks
+
+-- Import Root CA
+> keytool -import -alias ca -file somecert.cer -keystore cacerts -storepass changeit -file ...

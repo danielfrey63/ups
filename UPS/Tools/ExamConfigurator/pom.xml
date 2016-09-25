@@ -16,7 +16,7 @@
     </description>
     <properties>
         <main-class>ch.xmatrix.ups.uec.Main</main-class>
-        <codebase>http://geobot1.ethz.ch/ups/webstart/uec</codebase>
+        <codebase>http://balti.ethz.ch/ups/webstart/uec</codebase>
     </properties>
     <dependencies>
         <dependency>

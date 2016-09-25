@@ -7,7 +7,7 @@
     <name>xmatrix application components</name>
     <version>1.0</version>
     <description>xmatrix component library</description>
-    <url>http://www.geobot1.ethz.ch</url>
+    <url>http://www.balti.ethz.ch</url>
     <inceptionYear>2009</inceptionYear>
     <organization>
         <name>Institute of Integrative Biology ETH Zurich</name>
@@ -33,18 +33,18 @@
     <distributionManagement>
         <!-- To deploy the website. The artefact id will be appended automatically, so need revision to distinguish. -->
         <site>
-            <id>geobot1</id>
-            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/site/${project.version}</url>
+            <id>balti</id>
+            <url>scpexe://admin@balti.ethz.ch/var/www/html/site/${project.version}</url>
         </site>
         <repository>
             <id>distribution-repository</id>
             <name>Distribution Repository</name>
-            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@balti.ethz.ch/var/www/html/releases</url>
         </repository>
         <snapshotRepository>
             <id>distribution-snapshot-repository</id>
             <name>Distribution Snapshot Repository</name>
-            <url>scpexe://admin@geobot1.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@balti.ethz.ch/var/www/html/releases</url>
         </snapshotRepository>
     </distributionManagement>
     <scm>
@@ -56,7 +56,7 @@
         <!-- Overwrite: Make sure to overwrite that with your projects main class. -->
         <main-class>ch.xmatrix.DummyMain</main-class>
         <!-- Overwrite: Make sure to overwrite that with your projects JNLP code base. -->
-        <codebase>http://geobot1.ethz.ch/ups/webstart/dummy</codebase>
+        <codebase>http://balti.ethz.ch/ups/webstart/dummy</codebase>
         <!-- Overwrite: Make sure to overwrite that with your projects site link. -->
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/dummy</default-site>
         <!-- Heap size used in JNLP projects. -->

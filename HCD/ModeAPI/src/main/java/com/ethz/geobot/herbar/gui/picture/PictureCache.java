@@ -417,7 +417,7 @@ public class PictureCache
                 }
             }, new NestedImageCache( new ImageCache[0],
                     new FileImageCache( "C:/Users/Daniel/.hcd2/sc/cache/", "jpg" ),
-                    new UrlImageCache( "http://geobot1.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
+                    new UrlImageCache( "http://balti.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
             back = new PictureCache( "Background-Thread", new CachingExceptionHandler()
             {
                 @Override
@@ -427,7 +427,7 @@ public class PictureCache
                 }
             }, new NestedImageCache( new ImageCache[0],
                     new FileImageCache( "C:/Users/Daniel/.hcd2/sc/cache/", "jpg" ),
-                    new UrlImageCache( "http://geobot1.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
+                    new UrlImageCache( "http://balti.ethz.ch/hcd/images-6.0/systematic/", "jpg" ) ) );
 
             front.addPropertyChangeListener( RESUME, new PropertyChangeListener()
             {

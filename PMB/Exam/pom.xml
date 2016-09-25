@@ -14,7 +14,7 @@
     <description>Mit diesem Tool können Bilder für die Prüfung dargestellt werden.</description>
     <properties>
         <main-class>ch.xmatrix.ups.pmb.exam.Main</main-class>
-        <codebase>http://geobot1.ethz.ch/ups/webstart/pmbx</codebase>
+        <codebase>http://balti.ethz.ch/ups/webstart/pmbx</codebase>
         <default-site>scp://balti.ethz.ch/var/www/html/ups/site/pmbx</default-site>
         <max-heap-size>512m</max-heap-size>
     </properties>

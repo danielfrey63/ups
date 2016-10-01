@@ -18,10 +18,12 @@
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+        -->
         <dependency>
             <groupId>castor</groupId>
             <artifactId>castor</artifactId>

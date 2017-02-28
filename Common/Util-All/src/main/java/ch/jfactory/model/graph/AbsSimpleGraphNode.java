@@ -108,14 +108,8 @@ public abstract class AbsSimpleGraphNode implements GraphNode, Serializable
 
     public GraphNodeList getChildren( final Class type )
     {
-        final GraphNodeList result = new GraphNodeList();
-        final GraphNodeList list = AbsGraphModel.getFiltered( getChildren(), type );
-        for ( int i = 0; i < list.size(); i++ )
-        {
-            final GraphNode node = list.get( i );
-            result.add( node );
-        }
-        return result;
+        // Simplified, could produce errors...
+        return AbsGraphModel.getFiltered( getChildren(), type );
     }
 
     public GraphNodeList getAllChildren( final Class type )

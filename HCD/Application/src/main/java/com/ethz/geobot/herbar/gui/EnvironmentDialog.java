@@ -87,8 +87,6 @@ public class EnvironmentDialog extends JDialog
         setText( textPane6, "Liste \"PHARMBIO\" enth\u00e4lt 79 Arten; diese sind Pr\u00fcfungsstoff in der Veranstaltung \"Pharmazeutische Biologie\" (Prof. Dr. Karl-Heinz Altmann)." );
         setText( textPane7, "Liste \"Alle\" ist die vollst\u00e4ndige Liste mit allen 632 Taxa in eBot." );
         setText( textPane8, "Die restlichen Listen enthalten die f\u00fcr die Zertifizierungsstufen verlangten Arten: Liste \"400\" die Arten f\u00fcr das Zertifikat Stufe 400 resp. Liste \"600\" die Arten f\u00fcr das Zertifikat Stufe 600 (Arten f\u00fcr das Zertifikat Stufe 200 siehe Listen \"200\" und \"200 CH\"). Die Listen \"400\u2013200\", \"600\u2013200\" und \"600\u2013400\" dienen dem stufenweisen Lernen (Einschr\u00e4nkung auf die bei den Stufen hinzukommenden Arten)." );
-        demoRadio.setEnabled( SystemUtils.IS_OS_WINDOWS );
-        demoText.setEnabled( SystemUtils.IS_OS_WINDOWS );
     }
 
     private void setText( final JTextPane field, final String text )
@@ -143,9 +141,6 @@ public class EnvironmentDialog extends JDialog
         JTextArea textField2 = new JTextArea();
         dendroRadio = new JRadioButton();
         JTextArea textField3 = new JTextArea();
-        textField5 = new JTextArea();
-        demoRadio = new JRadioButton();
-        demoText = new JTextArea();
         textPane2 = new JTextPane();
         label1 = new JLabel();
         textPane3 = new JTextPane();
@@ -173,6 +168,9 @@ public class EnvironmentDialog extends JDialog
 
         //======== dialogPane ========
         {
+
+            // JFormDesigner evaluation mark
+            dialogPane.setBorder(dialogPane.getBorder()); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             dialogPane.setLayout(new BorderLayout());
 
@@ -241,7 +239,7 @@ public class EnvironmentDialog extends JDialog
                         panel2.setBorder(Borders.DIALOG_BORDER);
                         panel2.setLayout(new FormLayout(
                             "10dlu, $lcgap, default:grow",
-                            "6*(default, $lgap), 6*(top:default, $lgap), fill:default:grow, 2*($lgap, default)"));
+                            "4*(default, $lgap), 6*(top:default, $lgap), fill:default:grow, 2*($lgap, default)"));
 
                         //---- textField1 ----
                         textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus.");
@@ -286,95 +284,70 @@ public class EnvironmentDialog extends JDialog
                         textField3.setEditable(false);
                         panel2.add(textField3, cc.xy(3, 5));
 
-                        //---- textField5 ----
-                        textField5.setText("Zudem kann man sich mit der an der ETH Z\u00fcrich in Pr\u00fcfungen verwendeten Applikation PMB vertraut machen (Pr\u00fcfungs-Demo).");
-                        textField5.setLineWrap(true);
-                        textField5.setWrapStyleWord(true);
-                        textField5.setOpaque(false);
-                        textField5.setEditable(false);
-                        panel2.add(textField5, cc.xywh(1, 7, 3, 1));
-
-                        //---- demoRadio ----
-                        demoRadio.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                setChoice1();
-                            }
-                        });
-                        panel2.add(demoRadio, cc.xy(1, 9));
-
-                        //---- demoText ----
-                        demoText.setText("Pr\u00fcfungs-Demo (nur auf Windows)");
-                        demoText.setLineWrap(true);
-                        demoText.setWrapStyleWord(true);
-                        demoText.setOpaque(false);
-                        demoText.setEditable(false);
-                        panel2.add(demoText, cc.xy(3, 9));
-
                         //---- textPane2 ----
                         textPane2.setOpaque(false);
                         textPane2.setEditable(false);
-                        panel2.add(textPane2, cc.xywh(1, 11, 3, 1));
+                        panel2.add(textPane2, cc.xywh(1, 7, 3, 1));
 
                         //---- label1 ----
                         label1.setText("-");
                         label1.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label1, cc.xy(1, 13));
+                        panel2.add(label1, cc.xy(1, 9));
 
                         //---- textPane3 ----
                         textPane3.setOpaque(false);
                         textPane3.setEditable(false);
-                        panel2.add(textPane3, cc.xy(3, 13));
+                        panel2.add(textPane3, cc.xy(3, 9));
 
                         //---- label2 ----
                         label2.setText("-");
                         label2.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label2, cc.xy(1, 15));
+                        panel2.add(label2, cc.xy(1, 11));
 
                         //---- textPane4 ----
                         textPane4.setOpaque(false);
                         textPane4.setEditable(false);
-                        panel2.add(textPane4, cc.xy(3, 15));
+                        panel2.add(textPane4, cc.xy(3, 11));
 
                         //---- label3 ----
                         label3.setText("-");
                         label3.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label3, cc.xy(1, 17));
+                        panel2.add(label3, cc.xy(1, 13));
 
                         //---- textPane5 ----
                         textPane5.setOpaque(false);
                         textPane5.setEditable(false);
-                        panel2.add(textPane5, cc.xy(3, 17));
+                        panel2.add(textPane5, cc.xy(3, 13));
 
                         //---- label4 ----
                         label4.setText("-");
                         label4.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label4, cc.xy(1, 19));
+                        panel2.add(label4, cc.xy(1, 15));
 
                         //---- textPane6 ----
                         textPane6.setOpaque(false);
                         textPane6.setEditable(false);
-                        panel2.add(textPane6, cc.xy(3, 19));
+                        panel2.add(textPane6, cc.xy(3, 15));
 
                         //---- label5 ----
                         label5.setText("-");
                         label5.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label5, cc.xy(1, 21));
+                        panel2.add(label5, cc.xy(1, 17));
 
                         //---- textPane7 ----
                         textPane7.setOpaque(false);
                         textPane7.setEditable(false);
-                        panel2.add(textPane7, cc.xy(3, 21));
+                        panel2.add(textPane7, cc.xy(3, 17));
 
                         //---- label6 ----
                         label6.setText("-");
                         label6.setHorizontalAlignment(SwingConstants.RIGHT);
-                        panel2.add(label6, cc.xy(1, 23));
+                        panel2.add(label6, cc.xy(1, 19));
 
                         //---- textPane8 ----
                         textPane8.setOpaque(false);
                         textPane8.setEditable(false);
-                        panel2.add(textPane8, cc.xy(3, 23));
+                        panel2.add(textPane8, cc.xy(3, 19));
 
                         //======== buttonBar2 ========
                         {
@@ -393,7 +366,7 @@ public class EnvironmentDialog extends JDialog
                             });
                             buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add(buttonBar2, cc.xywh(1, 27, 3, 1));
+                        panel2.add(buttonBar2, cc.xywh(1, 23, 3, 1));
                     }
                     tabbedPane1.addTab("Auswahl", panel2);
                 }
@@ -409,7 +382,6 @@ public class EnvironmentDialog extends JDialog
         ButtonGroup buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(systematicRadio);
         buttonGroup1.add(dendroRadio);
-        buttonGroup1.add(demoRadio);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -425,9 +397,6 @@ public class EnvironmentDialog extends JDialog
     private JTextArea textField1;
     public JRadioButton systematicRadio;
     public JRadioButton dendroRadio;
-    private JTextArea textField5;
-    public JRadioButton demoRadio;
-    private JTextArea demoText;
     private JTextPane textPane2;
     private JLabel label1;
     private JTextPane textPane3;

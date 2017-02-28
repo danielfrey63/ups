@@ -310,7 +310,7 @@ public class AppHerbar
                 dialog.setVisible( true );
                 if ( dialog.ok )
                 {
-                    selection = dialog.systematicRadio.isSelected() ? 1 : dialog.demoRadio.isSelected() ? 3 : 2;
+                    selection = dialog.systematicRadio.isSelected() ? 1 : 2;
                 }
                 else
                 {

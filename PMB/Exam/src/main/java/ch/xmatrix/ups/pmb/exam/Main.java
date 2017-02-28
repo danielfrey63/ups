@@ -56,7 +56,8 @@ public class Main
         {
             public void run()
             {
-                if ( !"".equals( System.getProperty( "password" ) ) )
+                final String password = System.getProperty( "password" );
+                if ( password != null && !"".equals( password ) )
                 {
                     final StartDialog startDialog = new StartDialog( null );
                     startDialog.setDefaultCloseOperation( DISPOSE_ON_CLOSE );

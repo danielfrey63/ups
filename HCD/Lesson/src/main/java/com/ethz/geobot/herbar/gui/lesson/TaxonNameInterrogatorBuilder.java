@@ -150,6 +150,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
 
         toolBar.repaint();
         toolBar.invalidate();
+        taxonNamePanels.get( taxonNamePanels.size() - 1 ).requestFocus();
     }
 
     private List<TaxonNamePanel> getTaxonNamePanels()

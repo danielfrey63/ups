@@ -32,7 +32,7 @@ import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.ABFRAGEN;
 import static com.ethz.geobot.herbar.gui.lesson.TaxStateModel.Mode.LERNEN;
 import com.ethz.geobot.herbar.model.Taxon;
-import com.ethz.geobot.herbar.model.TaxonSynonym;
+import com.ethz.geobot.herbar.model.trait.NameText;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.CardLayout;
@@ -108,7 +108,8 @@ public class TaxonNamePanel extends JPanel
 
     /**
      * Displays an icon for the taxon level, a entry field or taxon name and a correctness or question mark.
-     *  @param taxStateModel the state model
+     *
+     * @param taxStateModel the state model
      * @param taxon         the taxon to display and handle
      * @param subMode       the initial sub mode to use
      * @param list
@@ -170,10 +171,10 @@ public class TaxonNamePanel extends JPanel
 
         for ( TaxonNamePanel panel : list )
         {
-            if ( panel != this && taxStateModel.getSubModes().get(panel.taxon) == ABFRAGEN)
+            if ( panel != this && taxStateModel.getSubModes().get( panel.taxon ) == ABFRAGEN )
             {
                 panel.taxonField.requestFocus();
-                LOG.info( "setting focus to field for \"" + taxon + "\"");
+                LOG.info( "setting focus to field for \"" + taxon + "\"" );
             }
         }
     }
@@ -203,7 +204,7 @@ public class TaxonNamePanel extends JPanel
         else if ( correctness == IS_FALSE )
         {
             final Object[] buttons = new Object[]{Strings.getString( "BUTTON.OK.TEXT" )};
-            JOptionPane.showOptionDialog( parent, new String[] {"Ihre Eingabe ist nicht zutreffend", "Bitte versuchen Sie es nochmals", ""}, "Nächster Versuch", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
+            JOptionPane.showOptionDialog( parent, new String[]{"Ihre Eingabe ist nicht zutreffend", "Bitte versuchen Sie es nochmals", ""}, "Nächster Versuch", YES_NO_OPTION, INFORMATION_MESSAGE, null, buttons, buttons[0] );
         }
         // some new evaluations take place AFTER the correct taxon has been passed, so keep complete state
         return correctness;
@@ -211,12 +212,18 @@ public class TaxonNamePanel extends JPanel
 
     private String[] extractSynonymTexts( final Taxon taxon )
     {
-        final GraphNodeList syns = taxon.getAsGraphNode().getChildren( TaxonSynonym.class );
+        final GraphNodeList syns = taxon.getAsGraphNode().getChildren( NameText.class );
         final String[] synonyms = new String[syns.getAll().length];
         for ( int ix = 0; ix < syns.size(); ix++ )
         {
             synonyms[ix] = syns.get( ix ).toString().toLowerCase();
         }
         return synonyms;
+    }
+
+    @Override
+    public void requestFocus()
+    {
+        taxonField.requestFocus();
     }
 }

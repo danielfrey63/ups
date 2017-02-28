@@ -159,7 +159,7 @@ public class TaxonNameInterrogatorBuilder implements Builder
         final Map<Taxon, Mode> subModes = taxStateModel.getSubModes();
         for ( final Taxon taxon : subModes.keySet() )
         {
-            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, taxon, subMode );
+            final TaxonNamePanel taxonNamePanel = new TaxonNamePanel( this.parent, taxStateModel, taxon, subMode, list );
             list.add( taxonNamePanel );
         }
         Collections.reverse( list );

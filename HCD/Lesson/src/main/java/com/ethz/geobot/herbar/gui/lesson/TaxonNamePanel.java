@@ -104,21 +104,23 @@ public class TaxonNamePanel extends JPanel
      */
     private final Taxon taxon;
     private final JLabel label;
+    private final List<TaxonNamePanel> list;
 
     /**
      * Displays an icon for the taxon level, a entry field or taxon name and a correctness or question mark.
-     *
-     * @param taxStateModel the state model
+     *  @param taxStateModel the state model
      * @param taxon         the taxon to display and handle
      * @param subMode       the initial sub mode to use
+     * @param list
      */
-    public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final Mode subMode )
+    public TaxonNamePanel( final JFrame parent, final TaxStateModel taxStateModel, final Taxon taxon, final Mode subMode, List<TaxonNamePanel> list )
     {
         setName( taxon.getName() ); // Easier debugging
 
         this.taxon = taxon;
         this.parent = parent;
         this.taxStateModel = taxStateModel;
+        this.list = list;
 
         label = new JLabel( " " + taxon.getName() + " " );
         panel.add( label, LERNEN.name() );
@@ -166,7 +168,14 @@ public class TaxonNamePanel extends JPanel
         taxStateModel.setSubMode( taxon, newSubMode );
         setSubMode( newSubMode );
 
-        requestFocusInWindow();
+        for ( TaxonNamePanel panel : list )
+        {
+            if ( panel != this && taxStateModel.getSubModes().get(panel.taxon) == ABFRAGEN)
+            {
+                panel.taxonField.requestFocus();
+                LOG.info( "setting focus to field for \"" + taxon + "\"");
+            }
+        }
     }
 
     public void setSubMode( final Mode subMode )

@@ -11,7 +11,6 @@
 
 #use strict;
 use warnings;
-use strict;
 
 print "Variables are:\n";
 my $root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
@@ -36,10 +35,10 @@ chomp ($pwd);
 my $dev = 0;
 
 # Print debug messages
-my $debug = 0;
+my $debug = 1;
 
 # Print trace messages
-my $trace = 0;
+my $trace = 1;
 
 # Make a release of the main module although no changes can be detected
 my $force = 1;
@@ -80,7 +79,7 @@ my @orders = ();
 persistDependency($thisArtifact);
 my %versions = getVersions();
 print map { "  $_ => $versions{$_}\n" } sort keys %versions;
-my %pairs = getDependencyPairs();
+%pairs = getDependencyPairs();
 print map { "  $_\n"} sort keys %pairs;
 checkForCyclicDependencies();
 
@@ -121,9 +120,9 @@ sub persistDependency
 {
     my $artifactId = $_[0];
     print "\nPersisting dependencies for \"$artifactId\"\n";
-    my %local_poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
+    my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
     my $file = "target/release-script/dependencies/$artifactId.txt";
-    my $pom = $local_poms{$artifactId};
+    my $pom = $poms{$artifactId};
     if ($pom)
     {
         my $f = "\"" . trim(`cygpath -w $pom`) . "\"";
@@ -158,34 +157,34 @@ sub getYoungestTags
     my @temp = `cat $file`;
     chomp(@temp);
     # Find youngest release tag for each module
-    my %local_tags;
+    my %tags;
     foreach (@temp)
     {
         my ($art, $ver) = split (/ /, $_);
         my @verArray = (split(/\./, $ver));
-        my $old = $local_tags{$art};
+        my $old = $tags{$art};
         if ($old)
         {
             my @oldArray = (split(/\./, $old));
             my @all = (\@oldArray, \@verArray);
             my @allSorted = sort {$b->[0] <=> $a->[0] || $b->[1] <=> $a->[1] || $b->[2] <=> $a->[2]} @all;
             my $last = $allSorted[0];
-            $local_tags{$art} = join(".", @$last);
+            $tags{$art} = join(".", @$last);
         }
         else
         {
-            $local_tags{$art} = $ver;
+            $tags{$art} = $ver;
         }
     }
-    return %local_tags;
+    return %tags;
 }
 
 sub getVersions
 {
     print "\nRetrieving versions of dependencies\n";
     my $file = "target/release-script/dependencies/*.txt";
-    my %local_versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
-    return %local_versions;
+    my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
+    return %versions;
 }
 
 sub getPomLocations
@@ -194,10 +193,6 @@ sub getPomLocations
     my %hash = (split(/ /, `cat $allDirectories | tr "\t" " " | tr "\n" " "`));
     return %hash;
 }
-
-my %fromTo = ();
-my %toFrom = ();
-my @pairs;
 
 sub getDependencyPairs
 {
@@ -208,25 +203,28 @@ sub getDependencyPairs
     my $allDependencyFiles = "target/release-script/dependencies/*.txt";
     my @allDependencies = (`cat $allDependencyFiles | tr "\r" "\n" | sed "/^\$/d" | cut -d" " -f1 | /bin/sort -u`);
     $debug and print "  [DEBUG] root artifact is $rootArtifactId\n";
+    my @pairs;
+    my %fromTo = ();
+    my %toFrom = ();
     foreach my $dependency (@allDependencies)
     {
-        my $local_dependency = trim($dependency);
-        $debug and print "  [DEBUG] root dependency is $local_dependency\n";
-        if (-e "target/release-script/dependencies/$local_dependency.txt")
+        my $dependency = trim($dependency);
+        $debug and print "  [DEBUG] root dependency is $dependency\n";
+        if (-e "target/release-script/dependencies/$dependency.txt")
         {
-            my $rootDependents = trim(`grep -H $local_dependency target/release-script/dependencies/*.txt | cut -d" " -d: -f1 | sed "s/^.*dependencies\\///" | sed "s/\\.txt//" | /bin/sort -u | tr "\n" " "`);
+            my $rootDependents = trim(`grep -H $dependency target/release-script/dependencies/*.txt | cut -d" " -d: -f1 | sed "s/^.*dependencies\\///" | sed "s/\\.txt//" | /bin/sort -u | tr "\n" " "`);
             my @lines = split(/ /, $rootDependents);
             foreach my $line (@lines)
             {
-                if ($line ne $local_dependency)
+                if ($line ne $dependency)
                 {
-                    push(@pairs, $line . " " . $local_dependency);
-                    push(@{$fromTo{$line}}, $local_dependency);
-                    push(@{$toFrom{$local_dependency}}, $line);
+                    push(@pairs, $line . " " . $dependency);
+                    push(@{$fromTo{$line}}, $dependency);
+                    push(@{$toFrom{$dependency}}, $line);
                 }
             }
         } else {
-            print "  [WARN ] Dependency file for $local_dependency (expecting target/release-script/dependencies/$local_dependency.txt) does not exist!\n";
+            print "  [WARN ] Dependency file for $dependency (expecting target/release-script/dependencies/$dependency.txt) does not exist!\n";
         }
     }
     print "Dependencies from => to\n";
@@ -264,8 +262,6 @@ sub getDependencyTo
         }
     }
 }
-my %artifactsToReleaseDueToChanges;
-my %releaseVersions;
 
 while (my $leaf = getDependencyTo())
 {
@@ -311,7 +307,7 @@ if (!$dev || ! -e "target/release-script/updates.txt") {
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }
-my $currentRevision = `cat target/release-script/updates.txt`;
+$currentRevision = `cat target/release-script/updates.txt`;
 chomp($currentRevision);
 !$currentRevision and die "There is no current revision\n";
 print "  Current revision is $currentRevision\n";
@@ -358,7 +354,6 @@ foreach my $artifact (@orders) {
                 $debug and print "    [DEBUG] Revision $revision is not substantial ($reason update)\n";
             }
         }
-
     }
     if (!$taggedRevision || $validRevision || ($force && $thisArtifact eq $artifact)) {
         $debug and !$taggedRevision and print "    [DEBUG] No tag found\n";
@@ -378,9 +373,6 @@ foreach my $artifact (@orders) {
 $debug and print "  [DEBUG] We have " . (scalar keys %releaseVersions) . " potential released versions to link later\n";
 
 print "\nChecking for development versions\n";
-
-my %newDevVersions;
-
 for my $artifact ( keys %artifactsToReleaseDueToChanges ) {
     my $currentVersion = $versions{$artifact};
     $trace and print "    [TRACE] current revision is $currentVersion\n";
@@ -401,22 +393,16 @@ for my $artifact ( keys %artifactsToReleaseDueToChanges ) {
     $newDevVersions{$artifact} = $newDevVersion;
     print "    Setting $newDevVersion\n";
 }
-
-my $key;
-my $value;
 %newDevVersions && print "  New development versions are:\n";
 while (($key, $value) = each(%newDevVersions)){
      print "    " . $key . " - " . $value . "\n";
 }
 
-my $artifact;
-my $dir;
-
 %newDevVersions && print "\nStarting release processes\n";
 foreach $artifact (@orders) {
     my $devVersion = $newDevVersions{$artifact};
     my $pom = $poms{$artifact};
-    $dir = $pom;
+    my $dir = $pom;
     $dir =~ s/pom\.xml//;
     if ($devVersion) {
         print "  Releasing $artifact\n";
@@ -444,14 +430,14 @@ foreach $artifact (@orders) {
                     `rm $pom.tmp`;
                     print "      Patched dependency to $dependentArtifact with version $dependentArtifactVersion in $pom\n";
 
-                    my $artifactXPath2 = "/x:project/x:dependencyManagement/x:dependencies/x:dependency[x:artifactId=\'$dependentArtifact\']/x:version";
-                    my $originalVersion = `$xml sel -T -N x="$pomNs" -t -v "$artifactXPath2" ${dir}${parentPom}`;
+                    my $artifactXPath = "/x:project/x:dependencyManagement/x:dependencies/x:dependency[x:artifactId=\'$dependentArtifact\']/x:version";
+                    my $originalVersion = `$xml sel -T -N x="$pomNs" -t -v "$artifactXPath" ${dir}${parentPom}`;
                     $debug and print "      [DEBUG] Original version in parent POM is $originalVersion\n";
 
                     my $dependentVersion = $newDevVersions{$dependentArtifact};
                     if ($dependentVersion && $originalVersion ne $dependentVersion) {
-                        $trace and print "      [TRACE] $xml ed -S -N x=\"$pomNs\" -u \"$artifactXPath2\" -v $dependentVersion $parentPom > $parentPom.tmp\n";
-                        `$xml ed -S -N x="$pomNs" -u "$artifactXPath2" -v $dependentVersion $parentPom > $parentPom.tmp`;
+                        $trace and print "      [TRACE] $xml ed -S -N x=\"$pomNs\" -u \"$artifactXPath\" -v $dependentVersion $parentPom > $parentPom.tmp\n";
+                        `$xml ed -S -N x="$pomNs" -u "$artifactXPath" -v $dependentVersion $parentPom > $parentPom.tmp`;
                         $trace and print "      [TRACE] $xml fo -s 4 $parentPom.tmp > $parentPom\n";
                         `$xml fo -s 4 $parentPom.tmp > $parentPom`;
                         $trace and print "      [TRACE] rm $parentPom.tmp\n";
@@ -476,7 +462,7 @@ foreach $artifact (@orders) {
         print "    Release version is $releaseVersion\n";
         my $tag = "$artifact-$releaseVersion";
         print "    Tag is $tag\n";
-        $dir = $pom;
+        my $dir = $pom;
         $dir =~ s/pom\.xml/target/g;
         `rm -rf $dir`;
         print "    Deleted directory " . $dir . "\n";
@@ -593,11 +579,11 @@ sub checkForBuildFailures {
     $trace and print "    [TRACE] Checking for build failures\n";
     my $log = $_[0];
     my @lines = `cat $_[0]`;
-    my $start = `grep -n "^\\[ERROR\\]" $log | cut -d ":" -f 1`;
+    $start = `grep -n "^\\[ERROR\\]" $log | cut -d ":" -f 1`;
     chomp ($start);
     if ($start) {
-        my $count = 0;
-        foreach my $line (@lines) {
+        $count = 0;
+        foreach $line (@lines) {
             if ($count++ >= $start - 2) {
                 if ($line =~ m/^\[/) {
                     $line =~ s/^\[.*\] /      /g;

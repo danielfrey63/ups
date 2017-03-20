@@ -48,7 +48,7 @@ my $silent = 0;
 
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
-my $reloadAllPomLocations = 0;
+my $reloadAllPomLocations = 1;
 
 print "Settings are:\n";
 print ($dev == 1 ? "  DEV is on\n" : "  DEV is off\n");

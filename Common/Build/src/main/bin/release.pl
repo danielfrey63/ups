@@ -183,8 +183,8 @@ sub getVersions
 {
     print "\nRetrieving versions of dependencies\n";
     my $file = "target/release-script/dependencies/*.txt";
-    my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
-    return %versions;
+    my %l_versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
+    return %l_versions;
 }
 
 sub getPomLocations
@@ -307,7 +307,7 @@ if (!$dev || ! -e "target/release-script/updates.txt") {
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }
-$currentRevision = `cat target/release-script/updates.txt`;
+my $currentRevision = `cat target/release-script/updates.txt`;
 chomp($currentRevision);
 !$currentRevision and die "There is no current revision\n";
 print "  Current revision is $currentRevision\n";
@@ -328,11 +328,15 @@ foreach my $artifact (@orders) {
         # They should not count
         my $dir = $pom;
         $dir =~ s/pom\.xml//g;
-        $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
+#        $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
+        $trace and print "  [TRACE] Revision $taggedRevision\n";
+        $trace and print "  [TRACE] Dir $dir\n";
+
         my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
         open FILE, ">target/release-script/revisions/$artifact.txt";
         for my $revision (@revisions) {
             print FILE "$revision\n";
+            $trace and print "  [TRACE] Writing to file \"target/release-script/revisions/$artifact.txt\" line \"$revision\"\n";
         }
         close FILE;
         $debug and print "    [DEBUG] We have " . @revisions . " potential update" . (scalar @revisions == 1 ? "" : "s") . " since tagged revision $taggedRevision to check\n";
@@ -398,8 +402,8 @@ while (($key, $value) = each(%newDevVersions)){
      print "    " . $key . " - " . $value . "\n";
 }
 
-%newDevVersions && print "\nStarting release processes\n";
-foreach $artifact (@orders) {
+my %newDevVersions && print "\nStarting release processes\n";
+foreach my $artifact (@orders) {
     my $devVersion = $newDevVersions{$artifact};
     my $pom = $poms{$artifact};
     my $dir = $pom;

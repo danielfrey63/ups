@@ -333,6 +333,9 @@ foreach my $artifact (@orders) {
         $trace and print "  [TRACE] Dir $dir\n";
 
         my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
+        for my $revision (@revisions) {
+            $trace and print "  [TRACE] Writing to file \"target/release-script/revisions/$artifact.txt\" line \"$revision\"\n";
+        }
         open FILE, ">target/release-script/revisions/$artifact.txt";
         for my $revision (@revisions) {
             print FILE "$revision\n";

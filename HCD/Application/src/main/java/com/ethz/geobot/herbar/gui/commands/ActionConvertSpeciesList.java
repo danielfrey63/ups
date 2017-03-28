@@ -26,6 +26,7 @@ import ch.jfactory.action.AbstractParametrizedAction;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.filter.Detail;
 import com.ethz.geobot.herbar.filter.Filter;
+import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.thoughtworks.xstream.XStream;
@@ -40,6 +41,8 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO: document
@@ -53,6 +56,8 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
     {
         super( "MENU.ITEM.IMPORT", parent );
     }
+
+    private static Logger LOG = LoggerFactory.getLogger( ActionConvertSpeciesList.class );
 
     private static String lastDirectory = null;
 
@@ -80,12 +85,19 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
             {
                 final String scope = detail.getScope();
                 final Taxon taxon = model.getTaxon( scope );
-                result.add( taxon );
-                Taxon parent = taxon;
-                while ( parent != null )
+                if ( taxon == null )
                 {
-                    result.add( parent );
-                    parent = parent.getParentTaxon();
+                    LOG.error( "species \"" + scope + "\" not found in taxonomy, skipping..." );
+                }
+                else
+                {
+                    result.add( taxon );
+                    Taxon parent = taxon;
+                    while ( parent != null )
+                    {
+                        result.add( parent );
+                        parent = parent.getParentTaxon();
+                    }
                 }
             }
             // Save new model

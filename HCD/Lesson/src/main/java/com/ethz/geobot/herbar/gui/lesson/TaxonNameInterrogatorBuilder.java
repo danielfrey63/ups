@@ -150,7 +150,10 @@ public class TaxonNameInterrogatorBuilder implements Builder
 
         toolBar.repaint();
         toolBar.invalidate();
-        taxonNamePanels.get( taxonNamePanels.size() - 1 ).requestFocus();
+        if ( taxonNamePanels.size() > 0 )
+        {
+            taxonNamePanels.get( taxonNamePanels.size() - 1 ).requestFocus();
+        }
     }
 
     private List<TaxonNamePanel> getTaxonNamePanels()
@@ -165,5 +168,13 @@ public class TaxonNameInterrogatorBuilder implements Builder
         }
         Collections.reverse( list );
         return list;
+    }
+
+    public void requestFocus()
+    {
+        if ( taxonNamePanels.size() > 0 )
+        {
+            taxonNamePanels.get( taxonNamePanels.size() - 1 ).requestFocus();
+        }
     }
 }

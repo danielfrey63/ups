@@ -224,6 +224,6 @@ public class TaxonNamePanel extends JPanel
     @Override
     public void requestFocus()
     {
-        taxonField.requestFocus();
+        taxonField.requestFocusInWindow();
     }
 }

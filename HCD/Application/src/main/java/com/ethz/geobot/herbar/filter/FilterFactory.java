@@ -99,13 +99,18 @@ public class FilterFactory
                 // Write the version file
                 FileUtils.writePropertyToXML( filePath, property, version );
             }
-            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"200 CH", "200 Leuchtmann", "200", "400", "400-200 ZH", "600 Zeiger", "600", "600-200 ZH", "600-400", "Alle Taxa", "PHARMBIO", "Alle Taxa"} : new String[]{"Alle Taxa"};
+            final String[] lists = ENV_SCIENTIFIC.equals( System.getProperty( "xmatrix.subject" ) ) ? new String[]{"200 CH", "200 Leuchtmann", "200 ZH", "400", "400-200 ZH", "600 Zeiger", "600", "600-200 ZH", "600-400", "Alle Taxa", "PHARMBIO", "Alle Taxa"} : new String[]{"Alle Taxa"};
             filterDirectory.mkdirs();
 
             for ( final String list : lists )
             {
                 final FileWriter writer = new FileWriter( generateFilterFileName( list ) );
-                IOUtils.copy( getClass().getResourceAsStream( list + ".xml" ), writer );
+                final String name = list + ".xml";
+                if ( getClass().getResource( name ) == null )
+                {
+                    throw new NullPointerException( "list \"" + name + "\" not found" );
+                }
+                IOUtils.copy( getClass().getResourceAsStream( name ), writer );
                 writer.close();
                 final FilterModel model = generateFilterModel( loadFilter( list ) );
                 nameModelCache.put( list, model );

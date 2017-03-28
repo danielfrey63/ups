@@ -253,6 +253,7 @@ public class LessonBar extends JPanel
                 if ( isQuery && subMode != null )
                 {
                     editAndQueryPanel.add( queryPanel, CENTER );
+                    queryBuilder.requestFocus();
                     editAndQueryPanel.validate();
                     editAndQueryPanel.repaint();
                 }

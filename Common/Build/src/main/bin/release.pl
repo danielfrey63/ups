@@ -12,6 +12,7 @@
 #use strict;
 use warnings;
 
+
 print "Variables are:\n";
 my $root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
 print "  Root directory is         : $root\n";
@@ -50,6 +51,9 @@ my $silent = 0;
 # are persisted. A change is only needed if projects are removed, added or moved.
 my $reloadAllPomLocations = 1;
 
+# Persist all dependencies freshly (1) or skip it (0)
+my $persistDependencies = 0;
+
 print "Settings are:\n";
 print ($dev == 1 ? "  DEV is on\n" : "  DEV is off\n");
 print ($debug == 1 ? "  DEBUG is on\n" : "  DEBUG is off\n");
@@ -58,8 +62,8 @@ print ($trace == 1 ? "  TRACE is on\n" : "  TRACE is off\n");
 checkForWorkingDirectoryOrQuit();
 checkForUpdateOrQuit(".");
 
-if (-d "target/release-script/dependencies" and !$dev) { `rm -r "target/release-script/dependencies"` };
-if (-d "target/release-script/revisions" and !$dev) { `rm -r "target/release-script/revisions"` };
+if (-d "target/release-script/dependencies" and !$dev and !$persistDependencies) { `rm -r "target/release-script/dependencies"` };
+if (-d "target/release-script/revisions" and !$dev and !$persistDependencies) { `rm -r "target/release-script/revisions"` };
 
 checkForReleaseScriptDirectoryOrQuit("target/release-script/dependencies");
 checkForReleaseScriptDirectoryOrQuit("target/release-script/revisions");
@@ -118,6 +122,10 @@ sub persistPomLocations
 
 sub persistDependency
 {
+    if (!$persistDependencies) {
+        print "\nPersisting dependencies skipping...\n";
+        return;
+    }
     my $artifactId = $_[0];
     print "\nPersisting dependencies for \"$artifactId\"\n";
     my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
@@ -328,9 +336,16 @@ foreach my $artifact (@orders) {
         # They should not count
         my $dir = $pom;
         $dir =~ s/pom\.xml//g;
-#        $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
+
         $trace and print "  [TRACE] Revision $taggedRevision\n";
         $trace and print "  [TRACE] Dir $dir\n";
+        $trace and print "  [TRACE] Listing all SVN revisions from $taggedRevision up to head\n";
+        die;
+
+        my @testlines = `svn log -r $taggedRevision:HEAD $dir`;
+        for my $testline (@testlines) {
+            $trace and print "  [TRACE]   $testline\n";
+        }
 
         my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
         for my $revision (@revisions) {

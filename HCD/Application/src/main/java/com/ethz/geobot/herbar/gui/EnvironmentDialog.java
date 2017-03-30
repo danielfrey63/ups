@@ -81,12 +81,15 @@ public class EnvironmentDialog extends JDialog
         getRootPane().setDefaultButton( okButton );
         setText( textPane, "<h3>Nutzung und Rechte</h3><p> Die Applikation eBot wurde f\u00fcr Studierende der ETH Z\u00fcrich entwickelt. Sie steht allen an Hochschulen oder Fachhochschulen eingeschriebenen Studierenden (auch ausserhalb der ETH Z\u00fcrich) f\u00fcr nichtkommerzielle Zwecke im Studium kostenlos zur Verf\u00fcgung. Nichtstudierende Privatpersonen, die die Applikation zu ihrer pers\u00f6nlichen Weiterbildung nutzen m\u00f6chten, werden gebeten, f\u00fcr die nichtkommerzielle Nutzung einen einmaligen Beitrag von Fr. 20.- zu bezahlen.</p><p><b>Postkonto: Matthias Baltisberger, 45-681486-7<br>IBAN: CH91 0900 0000 4568 1486 7</b><p>Jede andere Nutzung der Applikation ist vorher mit dem Projektleiter (Matthias Baltisberger, Email: balti@ethz.ch) abzusprechen und mit einer entsprechenden Vereinbarung zu regeln. Die Applikation wird ohne jegliche Garantien bez\u00fcglich Nutzungsanspr\u00fcchen zur Verf\u00fcgung gestellt." );
         setText( textPane2, "Im <b>Themenbereich Systematik</b> stehen insgesamt 632 Taxa auf dem Art-Level zur Verf\u00fcgung (1 Pilz, 4 Flechten, 5 Moose, 19 Farne, 12 Gymnospermen, 591 Angiospermen). Dieser Gesamtstoff kann je nach Lernziel \u00fcber verschiedene Stofflisten eingeschr\u00e4nkt werden:" );
-        setText( textPane3, "Liste \"60\" enth\u00e4lt 60 Arten; diese sind Pr\u00fcfungsstoff f\u00fcr die Semesterpr\u00fcfung (Wahlfach) von Studierenden in Agrar-, Lebensmittel- und Umweltnaturwissenschaften an der ETH Z\u00fcrich (Prof. Dr. Adrian Leuchtmann)." );
-        setText( textPane4, "Liste \"200\" enth&auml;lt 200 Arten; diese sind Pr&uuml;fungsstoff (Teil Artenkenntnis) f&uuml;r Studierende der Biologie und Pharmazie an der ETH Z&uuml;rich (4. Semester). Die Liste \"200\" ist identisch mit der Z&uuml;rcher Liste f&uuml;r das Zertifikat Stufe 200." );
-        setText( textPane5, "Liste \"200CH\" enth\u00e4lt jene 200 Arten, die von der Zertifizierungskommission f\u00fcr das Zertifikat 200 festgelegt wurden; diese Liste \"200CH\" unterscheidet sich von der Liste \"200\" in 29 Arten." );
-        setText( textPane6, "Liste \"PHARMBIO\" enth\u00e4lt 79 Arten; diese sind Pr\u00fcfungsstoff in der Veranstaltung \"Pharmazeutische Biologie\" (Prof. Dr. Karl-Heinz Altmann)." );
-        setText( textPane7, "Liste \"Alle\" ist die vollst\u00e4ndige Liste mit allen 632 Taxa in eBot." );
-        setText( textPane8, "Die restlichen Listen enthalten die f\u00fcr die Zertifizierungsstufen verlangten Arten: Liste \"400\" die Arten f\u00fcr das Zertifikat Stufe 400 resp. Liste \"600\" die Arten f\u00fcr das Zertifikat Stufe 600 (Arten f\u00fcr das Zertifikat Stufe 200 siehe Listen \"200\" und \"200 CH\"). Die Listen \"400\u2013200\", \"600\u2013200\" und \"600\u2013400\" dienen dem stufenweisen Lernen (Einschr\u00e4nkung auf die bei den Stufen hinzukommenden Arten)." );
+        setText( textPane3, "Liste „200 CH“ enthält jene 200 Arten, die von der Zertifizierungskommission für das Zertifikat 200 festgelegt wurden." );
+        setText( textPane4, "Liste „200 Leuchtmann“ enthält 200 Arten; diese sind Prüfungsstoff (Teil Artenkenntnis) für Studierende der Biologie, Pharmazie und Umweltnaturwissenschaften an der ETH Zürich (4. Semester, Prof. Dr. Adrian Leuchtmann)." +
+                "" );
+        setText( textPane5, "Die Liste „200 ZH“ ist die Zürcher Liste für das Zertifikat Stufe 200; diese Liste „200 ZH“ unterscheidet sich von der Liste „200 CH“ in 29 Arten." );
+        setText( textPane6, "Weitere Listen enthalten die für die Zertifizierungsstufen verlangten Arten: Liste „400“ die Arten für das Zertifikat Stufe 400 resp. Liste „600“ die Arten für das Zertifikat Stufe 600 (Arten für das Zertifikat Stufe 200 siehe Listen „200 CH“ und „200 ZH“). Die Listen „400–200 ZH“, „600–200 ZH“ und „600–400“ dienen dem stufenweisen Lernen (Einschränkung auf die bei den Stufen hinzukommenden Arten)." );
+        setText( textPane7, "Liste „600 Zeiger“ umfasst jene Arten der Liste „600“, die für die Feuchtezahl (F), die Reaktionszahl (R, pH-Wert des Bodens) und die Nährstoffzahl (N) extreme Zeigerwerte aufweisen. F1: sehr trocken, F1.5: trocken, F4.5: nass, F5: überschwemmt bzw. unter Wasser; R1: stark sauer, R5: basisch; N1: sehr nährstoffarm, N5: sehr nährstoffreich bis überdüngt.\n" +
+                "Bitte beachten Sie: Arten mit Zeigerwerten 2 oder 4 können ebenfalls gute Zeigerarten sein; diese Arten werden in eBot als „mässige Zeiger“ bezeichnet.\n" );
+        setText( textPane8, "Liste „PHARMBIO“ enthält 79 Arten; diese sind Prüfungsstoff in der Veranstaltung „Pharmazeutische Biologie“ (Prof. Dr. Karl–Heinz Altmann)." );
+        setText( textPane9, "Liste „Alle“ ist die vollständige Liste mit allen 632 Taxa in eBot." );
     }
 
     private void setText( final JTextPane field, final String text )
@@ -154,6 +157,8 @@ public class EnvironmentDialog extends JDialog
         textPane7 = new JTextPane();
         label6 = new JLabel();
         textPane8 = new JTextPane();
+        label7 = new JLabel();
+        textPane9 = new JTextPane();
         JPanel buttonBar2 = new JPanel();
         okButton = new JButton();
         CellConstraints cc = new CellConstraints();
@@ -170,7 +175,11 @@ public class EnvironmentDialog extends JDialog
         {
 
             // JFormDesigner evaluation mark
-            dialogPane.setBorder(dialogPane.getBorder()); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             dialogPane.setLayout(new BorderLayout());
 
@@ -239,7 +248,7 @@ public class EnvironmentDialog extends JDialog
                         panel2.setBorder(Borders.DIALOG_BORDER);
                         panel2.setLayout(new FormLayout(
                             "10dlu, $lcgap, default:grow",
-                            "4*(default, $lgap), 6*(top:default, $lgap), fill:default:grow, 2*($lgap, default)"));
+                            "4*(default, $lgap), 6*(top:default, $lgap), default, $lgap, fill:default:grow, $lgap, default"));
 
                         //---- textField1 ----
                         textField1.setText("Sie haben zwei Themenbereiche (Systematik und Dendrologie) zur Auswahl, mit denen Sie die Lernumgebung starten k\u00f6nnen. Bitte w\u00e4hlen Sie den gew\u00fcnschten Bereich aus.");
@@ -349,6 +358,16 @@ public class EnvironmentDialog extends JDialog
                         textPane8.setEditable(false);
                         panel2.add(textPane8, cc.xy(3, 19));
 
+                        //---- label7 ----
+                        label7.setText("-");
+                        label7.setHorizontalAlignment(SwingConstants.RIGHT);
+                        panel2.add(label7, cc.xy(1, 21));
+
+                        //---- textPane9 ----
+                        textPane9.setOpaque(false);
+                        textPane9.setEditable(false);
+                        panel2.add(textPane9, cc.xy(3, 21));
+
                         //======== buttonBar2 ========
                         {
                             buttonBar2.setBorder(Borders.createEmptyBorder("0dlu, 0dlu, 0dlu, 0dlu"));
@@ -366,7 +385,7 @@ public class EnvironmentDialog extends JDialog
                             });
                             buttonBar2.add(okButton, cc.xy(2, 1));
                         }
-                        panel2.add(buttonBar2, cc.xywh(1, 23, 3, 1));
+                        panel2.add(buttonBar2, cc.xywh(1, 25, 3, 1));
                     }
                     tabbedPane1.addTab("Auswahl", panel2);
                 }
@@ -375,7 +394,7 @@ public class EnvironmentDialog extends JDialog
             dialogPane.add(contentPanel, BorderLayout.CENTER);
         }
         contentPane.add(dialogPane, BorderLayout.CENTER);
-        setSize(800, 930);
+        setSize(635, 750);
         setLocationRelativeTo(null);
 
         //---- buttonGroup1 ----
@@ -410,6 +429,8 @@ public class EnvironmentDialog extends JDialog
     private JTextPane textPane7;
     private JLabel label6;
     private JTextPane textPane8;
+    private JLabel label7;
+    private JTextPane textPane9;
     private JButton okButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

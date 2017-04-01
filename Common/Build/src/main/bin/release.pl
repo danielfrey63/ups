@@ -12,47 +12,43 @@
 #use strict;
 use warnings;
 
-
 print "Variables are:\n";
-my $root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
+$root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
 print "  Root directory is         : $root\n";
 $root = trim(`cygpath -m $root`);
 print "  Root directory is         : $root\n";
-my $allDirectories = "$root/Common/Build/src/main/config/directories.txt";
+$allDirectories = "$root/Common/Build/src/main/config/directories.txt";
 print "  All directories file is   : $allDirectories\n";
-my $xml = "\"" . trim(`which xml`) . "\"";
+$xml = "\"" . trim(`which xml`) . "\"";
 print "  Programm xmlstarlet xml is: $xml\n";
-my $repository = trim(`svn info | grep "Repository Root" | sed "s/Repository Root: //g"`);
+$repository = trim(`svn info | grep "Repository Root" | sed "s/Repository Root: //g"`);
 print "  Repository root is        : $repository\n";
-my $find = trim(`which find`);
+$find = trim(`which find`);
 print "  Programm for find is      : $find\n";
-my $pomNs = "http://maven.apache.org/POM/4.0.0";
+$pomNs = "http://maven.apache.org/POM/4.0.0";
 print "\n";
 
-my $pwd = `pwd`;
+$pwd = `pwd`;
 chomp ($pwd);
 
 # Simulate SVN and MVN results by loading them from a previous build
-my $dev = 0;
+$dev = 0;
 
 # Print debug messages
-my $debug = 1;
+$debug = 0;
 
 # Print trace messages
-my $trace = 1;
+$trace = 0;
 
 # Make a release of the main module although no changes can be detected
-my $force = 1;
+$force = 1;
 
 # Accept automatically default values for release params.
-my $silent = 0;
+$silent = 0;
 
 # The POM locations don't change often, so we keep one file in the common build directory where all the POM locations
 # are persisted. A change is only needed if projects are removed, added or moved.
-my $reloadAllPomLocations = 1;
-
-# Persist all dependencies freshly (1) or skip it (0)
-my $persistDependencies = 0;
+$reloadAllPomLocations = 0;
 
 print "Settings are:\n";
 print ($dev == 1 ? "  DEV is on\n" : "  DEV is off\n");
@@ -62,26 +58,26 @@ print ($trace == 1 ? "  TRACE is on\n" : "  TRACE is off\n");
 checkForWorkingDirectoryOrQuit();
 checkForUpdateOrQuit(".");
 
-if (-d "target/release-script/dependencies" and !$dev and !$persistDependencies) { `rm -r "target/release-script/dependencies"` };
-if (-d "target/release-script/revisions" and !$dev and !$persistDependencies) { `rm -r "target/release-script/revisions"` };
+if (-d "target/release-script/dependencies" and !$dev) { `rm -r "target/release-script/dependencies"` };
+if (-d "target/release-script/revisions" and !$dev) { `rm -r "target/release-script/revisions"` };
 
 checkForReleaseScriptDirectoryOrQuit("target/release-script/dependencies");
 checkForReleaseScriptDirectoryOrQuit("target/release-script/revisions");
 
-my $thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
+$thisArtifact =  `$xml sel -T -N x=$pomNs -t -v "/x:project/x:artifactId" pom.xml`;
 print "\nRelease script running for\n  $thisArtifact\n";
 
 persistTags();
-my %tags = getYoungestTags();
+%tags = getYoungestTags();
 print map { "  $_ => $tags{$_}\n" } sort keys %tags;
 
 $reloadAllPomLocations && persistPomLocations();
-my %poms = getPomLocations();
+%poms = getPomLocations();
 print map { "  $_ => $poms{$_}\n" } sort keys %poms;
 
-my @orders = ();
+@orders = ();
 persistDependency($thisArtifact);
-my %versions = getVersions();
+%versions = getVersions();
 print map { "  $_ => $versions{$_}\n" } sort keys %versions;
 %pairs = getDependencyPairs();
 print map { "  $_\n"} sort keys %pairs;
@@ -122,10 +118,6 @@ sub persistPomLocations
 
 sub persistDependency
 {
-    if (!$persistDependencies) {
-        print "\nPersisting dependencies skipping...\n";
-        return;
-    }
     my $artifactId = $_[0];
     print "\nPersisting dependencies for \"$artifactId\"\n";
     my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
@@ -191,8 +183,8 @@ sub getVersions
 {
     print "\nRetrieving versions of dependencies\n";
     my $file = "target/release-script/dependencies/*.txt";
-    my %l_versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
-    return %l_versions;
+    my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
+    return %versions;
 }
 
 sub getPomLocations
@@ -212,8 +204,8 @@ sub getDependencyPairs
     my @allDependencies = (`cat $allDependencyFiles | tr "\r" "\n" | sed "/^\$/d" | cut -d" " -f1 | /bin/sort -u`);
     $debug and print "  [DEBUG] root artifact is $rootArtifactId\n";
     my @pairs;
-    my %fromTo = ();
-    my %toFrom = ();
+    %fromTo = ();
+    %toFrom = ();
     foreach my $dependency (@allDependencies)
     {
         my $dependency = trim($dependency);
@@ -315,7 +307,7 @@ if (!$dev || ! -e "target/release-script/updates.txt") {
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }
-my $currentRevision = `cat target/release-script/updates.txt`;
+$currentRevision = `cat target/release-script/updates.txt`;
 chomp($currentRevision);
 !$currentRevision and die "There is no current revision\n";
 print "  Current revision is $currentRevision\n";
@@ -336,25 +328,11 @@ foreach my $artifact (@orders) {
         # They should not count
         my $dir = $pom;
         $dir =~ s/pom\.xml//g;
-
-        $trace and print "  [TRACE] Revision $taggedRevision\n";
-        $trace and print "  [TRACE] Dir $dir\n";
-        $trace and print "  [TRACE] Listing all SVN revisions from $taggedRevision up to head\n";
-        die;
-
-        my @testlines = `svn log -r $taggedRevision:HEAD $dir`;
-        for my $testline (@testlines) {
-            $trace and print "  [TRACE]   $testline\n";
-        }
-
+        $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
         my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
-        for my $revision (@revisions) {
-            $trace and print "  [TRACE] Writing to file \"target/release-script/revisions/$artifact.txt\" line \"$revision\"\n";
-        }
         open FILE, ">target/release-script/revisions/$artifact.txt";
         for my $revision (@revisions) {
             print FILE "$revision\n";
-            $trace and print "  [TRACE] Writing to file \"target/release-script/revisions/$artifact.txt\" line \"$revision\"\n";
         }
         close FILE;
         $debug and print "    [DEBUG] We have " . @revisions . " potential update" . (scalar @revisions == 1 ? "" : "s") . " since tagged revision $taggedRevision to check\n";
@@ -420,8 +398,8 @@ while (($key, $value) = each(%newDevVersions)){
      print "    " . $key . " - " . $value . "\n";
 }
 
-my %newDevVersions && print "\nStarting release processes\n";
-foreach my $artifact (@orders) {
+%newDevVersions && print "\nStarting release processes\n";
+foreach $artifact (@orders) {
     my $devVersion = $newDevVersions{$artifact};
     my $pom = $poms{$artifact};
     my $dir = $pom;

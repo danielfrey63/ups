@@ -35,10 +35,10 @@ chomp ($pwd);
 $dev = 0;
 
 # Print debug messages
-$debug = 0;
+$debug = 1;
 
 # Print trace messages
-$trace = 0;
+$trace = 1;
 
 # Make a release of the main module although no changes can be detected
 $force = 1;

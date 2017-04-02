@@ -34,17 +34,17 @@
         <!-- To deploy the website. The artefact id will be appended automatically, so need revision to distinguish. -->
         <site>
             <id>balti</id>
-            <url>scpexe://admin@balti.ethz.ch/var/www/html/site/${project.version}</url>
+            <url>scpexe://admin@balti.ethz.ch:60022/var/www/html/site/${project.version}</url>
         </site>
         <repository>
             <id>distribution-repository</id>
             <name>Distribution Repository</name>
-            <url>scpexe://admin@balti.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@balti.ethz.ch:60022/var/www/html/releases</url>
         </repository>
         <snapshotRepository>
             <id>distribution-snapshot-repository</id>
             <name>Distribution Snapshot Repository</name>
-            <url>scpexe://admin@balti.ethz.ch/var/www/html/releases</url>
+            <url>scpexe://admin@balti.ethz.ch:60022/var/www/html/releases</url>
         </snapshotRepository>
     </distributionManagement>
     <scm>

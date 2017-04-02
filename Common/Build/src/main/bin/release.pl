@@ -13,13 +13,19 @@
 use warnings;
 
 print "Variables are:\n";
+$perl = trim(`which perl`) . ", " . trim(`perl -version | grep -m 1 e`);
+print "  Perl version is           : $perl\n";
+$svn = trim(`which svn`) . ", " . trim(`svn --version | grep -m 2 e | tr "\\n" ", " | sed 's/  */ /g'`);
+print "  SVN version is            : $svn\n";
 $root = "\"" . trim(`svn info | grep "Working Copy Root Path" | sed "s/Working Copy Root Path: //g"`) . "\"";
 print "  Root directory is         : $root\n";
 $root = trim(`cygpath -m $root`);
 print "  Root directory is         : $root\n";
 $allDirectories = "$root/Common/Build/src/main/config/directories.txt";
 print "  All directories file is   : $allDirectories\n";
-$xml = "\"" . trim(`which xml`) . "\"";
+$xml = trim(`which xml`);
+$xml = trim(`cygpath -m \"$xml\"`);
+$xml = "\"" . $xml . "\"";
 print "  Programm xmlstarlet xml is: $xml\n";
 $repository = trim(`svn info | grep "Repository Root" | sed "s/Repository Root: //g"`);
 print "  Repository root is        : $repository\n";
@@ -35,10 +41,10 @@ chomp ($pwd);
 $dev = 0;
 
 # Print debug messages
-$debug = 1;
+$debug = 0;
 
 # Print trace messages
-$trace = 1;
+$trace = 0;
 
 # Make a release of the main module although no changes can be detected
 $force = 1;
@@ -88,7 +94,7 @@ sub persistTags
     print "\nPersisting list of all tags from repository\n";
     my $file = "target/release-script/tags.txt";
     # Remove trailing slashes, split between artifact and version and sort by artifacts
-    my $command = "svn list $repository/tags | sed \"s/\\///g\" | sed \"s/-\\([0-9]\\)/ \\1/g\" | /bin/sort";
+    my $command = "svn list $repository/tags | sed \"s/\\///g\" | sed \"s/-\\([0-9]\\)/ \\1/g\" | sort";
     executeOrLoad($file, $command);
 }
 
@@ -120,7 +126,7 @@ sub persistDependency
 {
     my $artifactId = $_[0];
     print "\nPersisting dependencies for \"$artifactId\"\n";
-    my %poms = (split(/ /, `cat $allDirectories | tr "\t\n" " "`));
+    my %poms = (split(/ /, `cat $allDirectories | tr "\\t\\n" " "`));
     my $file = "target/release-script/dependencies/$artifactId.txt";
     my $pom = $poms{$artifactId};
     if ($pom)
@@ -128,7 +134,7 @@ sub persistDependency
         my $f = "\"" . trim(`cygpath -w $pom`) . "\"";
         $debug and print "  [DEBUG] checking against $f\n";
         $debug and print "  [DEBUG] persisting dependencies for $artifactId into $file\n";
-        my $command = "mvn -o dependency:tree -f $f | egrep \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort | cut -d: -f2,4 | tr \":\" \" \"";
+        my $command = "mvn -o dependency:tree -f $f | grep -E \"\\:ch\\.xmatrix|\\:com\\.smardec\\.mousegestures|\\:net\\.java\\.jveez\" | sort | cut -d: -f2,4 | tr \":\" \" \"";
         executeOrLoad($file, $command);
         my @array = split( /\n/, `cut -d" " -f1 $file` );
         foreach (@array)
@@ -183,14 +189,14 @@ sub getVersions
 {
     print "\nRetrieving versions of dependencies\n";
     my $file = "target/release-script/dependencies/*.txt";
-    my %versions = (split (/ /, `cat $file | tr "\r" "\n" | sed "/^\$/d" | cut -d: -f2,4 | /bin/sort -u | tr ":\n" " "`));
+    my %versions = (split (/ /, `cat $file | tr "\\r" "\\n" | sed "/^\$/d" | cut -d: -f2,4 | sort -u | tr "\:\\n" " "`));
     return %versions;
 }
 
 sub getPomLocations
 {
     print "\nRetrieving POM locations\n";
-    my %hash = (split(/ /, `cat $allDirectories | tr "\t" " " | tr "\n" " "`));
+    my %hash = (split(/ /, `cat $allDirectories | tr "\\t" " " | tr "\\n" " "`));
     return %hash;
 }
 
@@ -201,7 +207,7 @@ sub getDependencyPairs
     my $artifactIdXPath = "/x:project/x:artifactId";
     my $rootArtifactId = `$xml sel -T -N x="$pomNs" -t -v "$artifactIdXPath" pom.xml`;
     my $allDependencyFiles = "target/release-script/dependencies/*.txt";
-    my @allDependencies = (`cat $allDependencyFiles | tr "\r" "\n" | sed "/^\$/d" | cut -d" " -f1 | /bin/sort -u`);
+    my @allDependencies = (`cat $allDependencyFiles | tr "\\r" "\\n" | sed "/^\$/d" | cut -d" " -f1 | sort -u`);
     $debug and print "  [DEBUG] root artifact is $rootArtifactId\n";
     my @pairs;
     %fromTo = ();
@@ -212,7 +218,7 @@ sub getDependencyPairs
         $debug and print "  [DEBUG] root dependency is $dependency\n";
         if (-e "target/release-script/dependencies/$dependency.txt")
         {
-            my $rootDependents = trim(`grep -H $dependency target/release-script/dependencies/*.txt | cut -d" " -d: -f1 | sed "s/^.*dependencies\\///" | sed "s/\\.txt//" | /bin/sort -u | tr "\n" " "`);
+            my $rootDependents = trim(`grep -H $dependency target/release-script/dependencies/*.txt | cut -d" " -d: -f1 | sed "s/^.*dependencies\\///" | sed "s/\\.txt//" | sort -u | tr "\\n" " "`);
             my @lines = split(/ /, $rootDependents);
             foreach my $line (@lines)
             {
@@ -301,9 +307,10 @@ push (@orders, $thisArtifact);
 
 # Builds a file with the current revision number
 print "\nChecking for current revision\n";
+my $rootPath = trim(`cygpath -w $root`);
 if (!$dev || ! -e "target/release-script/updates.txt") {
     $debug and print "  [DEBUG] Creating target/release-script/updates.txt\n";
-    `svn update $root | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
+    `svn update $rootPath | grep -i Revision | sed "s/[^0-9]//g" > target/release-script/updates.txt`;
 } else {
     $debug and print "  [DEBUG] Reading from saved target/release-script/updates.txt\n";
 }
@@ -328,8 +335,9 @@ foreach my $artifact (@orders) {
         # They should not count
         my $dir = $pom;
         $dir =~ s/pom\.xml//g;
+        $dir = trim(`cygpath -w $dir`);
         $trace and print "    [TRACE] svn log -r $taggedRevision:HEAD $dir | tr \"\\n\" \" \" | tr \"\\r\" \" \" | sed \"s/---*/\\n/g\" | sed \"s/^ *//g\" | sed \"/^\$/d\" | sed \"s/  +/ | /g\"\n";
-        my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\n" " " | tr "\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
+        my @revisions = `svn log -r $taggedRevision:HEAD $dir | tr "\\n" " " | tr "\\r" " " | sed "s/---*/\\n/g" | sed "s/^ *//g" | sed "/^\$/d" | sed "s/  +/ | /g"`;
         open FILE, ">target/release-script/revisions/$artifact.txt";
         for my $revision (@revisions) {
             print FILE "$revision\n";
@@ -466,7 +474,7 @@ foreach $artifact (@orders) {
         $dir =~ s/pom\.xml/target/g;
         `rm -rf $dir`;
         print "    Deleted directory " . $dir . "\n";
-        my $prepareLog = "$pwd/${tag}-prepare.log";
+        my $prepareLog = `cygpath -w "$pwd/${tag}-prepare.log"`;
         print "    Logging prepare to $prepareLog\n";
         `mvn -f $pom -B -Dtag=$tag -DreleaseVersion=$releaseVersion -DdevelopmentVersion=$devVersion release:prepare > $prepareLog`;
         checkForBuildFailures ($prepareLog);
@@ -568,7 +576,7 @@ sub checkForUpdateOrQuit
 sub checkForReleaseScriptDirectoryOrQuit {
     $dir = $_[0];
     if (! -e $dir) {
-        `/bin/mkdir -p $dir`;
+        `mkdir -p $dir`;
     };
     if (! -e $dir) {
         print "ERROR: Directory ($dir) cannot be created." and exit;

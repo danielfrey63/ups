@@ -478,7 +478,7 @@ foreach $artifact (@orders) {
         print "    Logging prepare to $prepareLog\n";
         `mvn -f $pom -B -Dtag=$tag -DreleaseVersion=$releaseVersion -DdevelopmentVersion=$devVersion release:prepare > $prepareLog`;
         checkForBuildFailures ($prepareLog);
-        my $releaseLog = "$pwd/${tag}-release.log";
+        my $releaseLog = `cygpath -w "$pwd/${tag}-release.log"`;
         print "    Logging release to $releaseLog\n";
         `mvn -f $pom release:perform > $releaseLog`;
         checkForBuildFailures ($releaseLog);

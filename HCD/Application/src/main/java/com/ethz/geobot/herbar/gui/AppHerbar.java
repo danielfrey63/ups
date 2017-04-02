@@ -30,7 +30,6 @@ import ch.jfactory.cache.UrlImageCache;
 import ch.jfactory.file.FileUtils;
 import ch.jfactory.logging.LogUtils;
 import ch.jfactory.resource.ImageLocator;
-import ch.xmatrix.ups.pmb.exam.Main;
 import com.ethz.geobot.herbar.Application;
 import com.ethz.geobot.herbar.gui.about.Splash;
 import com.ethz.geobot.herbar.gui.mode.ModeManager;
@@ -323,15 +322,7 @@ public class AppHerbar
             {
                 selection = Integer.parseInt( args[0] );
             }
-            if ( selection == 3 )
-            {
-                System.setProperty( "password", "" );
-                Main.main( null );
-            }
-            else
-            {
-                new AppHerbar( selection );
-            }
+            new AppHerbar( selection );
         }
         catch ( IllegalStateException e )
         {

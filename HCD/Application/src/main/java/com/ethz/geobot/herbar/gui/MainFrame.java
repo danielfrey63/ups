@@ -244,12 +244,7 @@ public class MainFrame extends JFrame
         modeActions = new ArrayList<Action>();
         final AbstractAction lesson = getModeMenu( "Lernen", "LessonMode" );
         sub.add( lesson );
-        final JMenu game = new JMenu( "Spiele" );
-        final AbstractAction hangman = getModeMenu( "Hang Man", "Hangman" );
-        game.add( hangman );
-        game.add( getModeMenu( "Hasch Mich", "Catcher" ) );
-        game.add( getModeMenu( "Labyrinth", "Labyrinth" ) );
-        sub.add( game );
+
 
         sub = createMenu( "MENU.HERBAR" );
         sub.add( new ActionAppHelp( this ) );

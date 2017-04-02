@@ -19,15 +19,15 @@
     </organization>
     <modules>
         <module>Application</module>
-        <module>Catcher</module>
+        <!--<module>Catcher</module>-->
         <module>Data</module>
-        <module>Gallows</module>
+        <!--<module>Gallows</module>-->
         <module>Help</module>
         <module>Lesson</module>
-        <module>Maze</module>
+        <!--<module>Maze</module>-->
         <module>Modeapi</module>
         <module>Model</module>
         <module>Modelimpl</module>
-        <module>News</module>
+        <!--<module>News</module>-->
     </modules>
 </project>

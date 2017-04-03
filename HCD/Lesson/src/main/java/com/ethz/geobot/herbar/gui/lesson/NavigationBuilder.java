@@ -355,7 +355,7 @@ public class NavigationBuilder implements Builder
                 final Taxon taxon = node.getTaxon();
                 final Rectangle bounds = taxTree.getPathBounds( path );
                 lastEvent = e;
-                if ( bounds != null && taxon != null )
+                if ( bounds != null && taxon != null)
                 {
                     final Rectangle boxRegion = panel.getComponent( 2 ).getBounds();
                     final Rectangle iconRegion = panel.getComponent( 1 ).getBounds();

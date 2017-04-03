@@ -14,14 +14,13 @@
     <dependencies>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.3378</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>commons-jxpath</groupId>
             <artifactId>commons-jxpath</artifactId>
@@ -31,7 +30,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

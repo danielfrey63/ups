@@ -36,6 +36,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JFileChooser;
@@ -61,6 +62,11 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
 
     private static String lastDirectory = null;
 
+    /**
+     * Transforms the file of taxa by adding all parent taxa.
+     *
+     * @param e
+     */
     public void actionPerformed( final ActionEvent e )
     {
         try
@@ -79,7 +85,7 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
             final Filter filter = (Filter) getSerializer().fromXML( reader );
             reader.close();
             final Detail[] details = filter.getDetails();
-            final Set<Taxon> result = new HashSet<Taxon>();
+            final Set<Detail> resultSet = new HashSet<Detail>( Arrays.asList( details ) );
             final HerbarModel model = Application.getInstance().getModel();
             for ( Detail detail : details )
             {
@@ -91,29 +97,22 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
                 }
                 else
                 {
-                    result.add( taxon );
                     Taxon parent = taxon;
                     while ( parent != null )
                     {
-                        result.add( parent );
+                        final Detail d = new Detail();
+                        d.setScope( parent.getName() );
+                        resultSet.add( d );
                         parent = parent.getParentTaxon();
                     }
                 }
             }
             // Save new model
-            Detail[] resultDetails = new Detail[result.size()];
-            final Taxon[] taxa = result.toArray( new Taxon[result.size()] );
-            for ( int i = 0; i < result.size(); i++ )
-            {
-                final Detail detail = new Detail();
-                detail.setScope( taxa[i].getName() );
-                resultDetails[i] = detail;
-            }
             final Filter resultFilter = new Filter();
-            resultFilter.setFixed( true );
+            resultFilter.setFixed( false );
             resultFilter.setName( filter.getName() );
             resultFilter.setRank( 0 );
-            resultFilter.setDetails( resultDetails );
+            resultFilter.setDetails( resultSet.toArray( details ) );
             final FileOutputStream out = new FileOutputStream( file );
             out.write( getSerializer().toXML( resultFilter ).getBytes() );
             out.close();

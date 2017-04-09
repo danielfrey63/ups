@@ -554,8 +554,8 @@ public class TaxStateModel
         {
             if ( f.name.equals( TAXA.name() ) )
             {
-                final String oldSize = (f.oldVal == null ? "null" : ((FilterTaxon[]) f.oldVal).length + " taxa");
-                final String newSize = (f.newVal == null ? "null" : ((FilterTaxon[]) f.newVal).length + " taxa");
+                final String oldSize = (f.oldVal == null ? "null" : ((Taxon[]) f.oldVal).length + " taxa");
+                final String newSize = (f.newVal == null ? "null" : ((Taxon[]) f.newVal).length + " taxa");
                 LOG.info( "changing " + f.name + " from \"" + oldSize + "\" to \"" + newSize + "\"" );
             }
             else

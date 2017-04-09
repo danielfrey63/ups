@@ -4,7 +4,7 @@
     <groupId>ch.xmatrix.le</groupId>
     <artifactId>ch.xmatrix.le.application</artifactId>
     <name>eBot 6</name>
-    <version>6.0.SNAPSHOT-SNAPSHOT</version>
+    <version>6.0.SNAPSHOT</version>
     <parent>
         <groupId>ch.xmatrix.common</groupId>
         <artifactId>ch.xmatrix.common.build</artifactId>
@@ -18,7 +18,7 @@
         <max-heap-size>512m</max-heap-size>
     </properties>
     <dependencies>
-        <!--
+<!--
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -30,15 +30,13 @@
 -->
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>1.4.2088</version>
             <artifactId>ch.xmatrix.common.icon</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.common</groupId>
-            <version>4.0.3378</version>
             <artifactId>ch.xmatrix.common.utils-all</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.catcher</artifactId>
@@ -46,10 +44,9 @@
 -->
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>6.0.3372</version>
             <artifactId>ch.xmatrix.le.data</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.gallows</artifactId>
@@ -57,10 +54,9 @@
 -->
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>6.0.3421</version>
             <artifactId>ch.xmatrix.le.lesson</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.maze</artifactId>
@@ -68,27 +64,24 @@
 -->
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>6.0.3383</version>
             <artifactId>ch.xmatrix.le.modeapi</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>6.0.3405</version>
             <artifactId>ch.xmatrix.le.model</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
-            <version>6.0.2820</version>
             <artifactId>ch.xmatrix.le.modelimpl</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>ch.xmatrix.le</groupId>
             <artifactId>ch.xmatrix.le.news</artifactId>
         </dependency>
 -->
         <!-- transient dependencies to be resolved properly for versions -->
-        <!--
+<!--
         <dependency>
             <groupId>ch.xmatrix.ups.pmb.exam</groupId>
             <artifactId>ch.xmatrix.ups.pmb.exam</artifactId>
@@ -130,7 +123,7 @@
             <groupId>com.jgoodies</groupId>
             <artifactId>looks</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>com.smardec</groupId>
             <artifactId>com.smardec.mousegestures</artifactId>
@@ -148,7 +141,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>commons-jxpath</groupId>
             <artifactId>commons-jxpath</artifactId>
@@ -162,7 +155,7 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -174,10 +167,9 @@
         </dependency>
         <dependency>
             <groupId>net.java.jveez</groupId>
-            <version>1.79.2801</version>
             <artifactId>net.java.jveez</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>net.sf.jfcunit</groupId>
             <artifactId>jfcunit</artifactId>
@@ -192,7 +184,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
-        <!--
+<!--
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>

@@ -138,6 +138,7 @@ public class LogUtils
                     }
                 }
                 System.setProperty( (String) key, parsed );
+                props.setProperty( (String) key, parsed );
             }
         }
         catch ( Exception ex )

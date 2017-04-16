@@ -133,7 +133,7 @@ public class AppHerbar
     {
         final String fileName = ImageLocator.getPicturePath() + "/_PictureCacheComplete.xml";
         final String property = "version";
-        final String version = "6.0.3089";
+        final String version = "6.0.3426";
         if ( backgroundCache == null && !version.equals( FileUtils.readPropertyFromXML( fileName, property ) ) )
         {
             imageCache = new NestedImageCache( new ImageCache[0], new FileImageCache( ImageLocator.getPicturePath(), "jpg" ), new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );

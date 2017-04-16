@@ -301,25 +301,23 @@ public class PictureCache
                                 name = queue.peek();
                             }
                         }
-                        if ( name == null )
+                        final CachedImage img = getCachedImage( name );
+                        LOG.trace( "loading cached image \"" + name + "\"" );
+                        if ( !img.isLoaded( false ) )
                         {
-                            propertyChangeSupport.firePropertyChange( FINISHED, false, true );
+                            img.loadImage();
+                            LOG.trace( "loaded cached image \"" + name + "\"" );
                         }
                         else
                         {
-                            final CachedImage img = getCachedImage( name );
-                            LOG.trace( "loading cached image \"" + name + "\"" );
-                            if ( !img.isLoaded( false ) )
-                            {
-                                img.loadImage();
-                                LOG.trace( "loaded cached image \"" + name + "\"" );
-                            }
-                            else
-                            {
-                                LOG.trace( "cached image \"" + name + "\" loading or loaded already" );
-                            }
-                            // Important to remove the image from the queue also in loaded and exception case
-                            removeFromQueue( name );
+                            LOG.trace( "cached image \"" + name + "\" loading or loaded already" );
+                        }
+                        // Important to remove the image from the queue also in loaded and exception case
+                        removeFromQueue( name );
+
+                        if ( queue.size() == 0 )
+                        {
+                            propertyChangeSupport.firePropertyChange( FINISHED, false, true );
                         }
                     }
                     catch ( InterruptedException ex )

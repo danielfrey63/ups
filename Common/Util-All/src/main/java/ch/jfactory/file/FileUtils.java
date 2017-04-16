@@ -346,11 +346,18 @@ public class FileUtils
 
     public static void writePropertyToXML( final String filePath, final String property, final String value ) throws IOException
     {
-        final Properties props = new Properties();
-        props.put( property, value );
-        final FileOutputStream outputStream = new FileOutputStream( new File( filePath ) );
-        props.storeToXML( outputStream, "" );
-        outputStream.close();
+        try
+        {
+            final Properties props = new Properties();
+            props.put( property, value );
+            final FileOutputStream outputStream = new FileOutputStream( new File( filePath ) );
+            props.storeToXML( outputStream, "" );
+            outputStream.close();
+        }
+        catch ( Throwable e )
+        {
+            LOG.warn( "could not write property to XML file (" + filePath + "): " + e.getMessage());
+        }
     }
 
     public static Object readPropertyFromXML( final String filePath, final String property ) throws IOException
@@ -358,11 +365,19 @@ public class FileUtils
         File file = new File( filePath );
         if ( file.exists() )
         {
-            final Properties props = new Properties();
-            final FileInputStream inputStream = new FileInputStream( filePath );
-            props.loadFromXML( inputStream );
-            inputStream.close();
-            return props.get( property );
+            try
+            {
+                final Properties props = new Properties();
+                final FileInputStream inputStream = new FileInputStream( filePath );
+                props.loadFromXML( inputStream );
+                inputStream.close();
+                return props.get( property );
+            }
+            catch (Throwable e)
+            {
+                LOG.warn( "got a problem with an XML file (" + file + ") to read: " + e.getMessage() );
+                return null;
+            }
         }
         return null;
     }

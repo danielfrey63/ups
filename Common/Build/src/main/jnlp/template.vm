@@ -21,8 +21,9 @@
     </security>
     #end<resources>
         <j2se #if($max-heap-size)max-heap-size="$max-heap-size"#end version="1.6+"/>
-        $dependencies
+            $dependenciess
         <property name="file.encoding" value="windows-1252"/>
+        <property name="sun.java2d.dpiaware" value="false"/>
     </resources>
     <application-desc main-class="$mainClass"/>
 </jnlp>

@@ -301,23 +301,30 @@ public class PictureCache
                                 name = queue.peek();
                             }
                         }
-                        final CachedImage img = getCachedImage( name );
-                        LOG.trace( "loading cached image \"" + name + "\"" );
-                        if ( !img.isLoaded( false ) )
+                        if ( name == null )
                         {
-                            img.loadImage();
-                            LOG.trace( "loaded cached image \"" + name + "\"" );
+                            propertyChangeSupport.firePropertyChange( FINISHED, false, true );
                         }
                         else
                         {
-                            LOG.trace( "cached image \"" + name + "\" loading or loaded already" );
-                        }
-                        // Important to remove the image from the queue also in loaded and exception case
-                        removeFromQueue( name );
+                            final CachedImage img = getCachedImage( name );
+                            LOG.trace( "loading cached image \"" + name + "\"" );
+                            if ( !img.isLoaded( false ) )
+                            {
+                                img.loadImage();
+                                LOG.trace( "loaded cached image \"" + name + "\"" );
+                            }
+                            else
+                            {
+                                LOG.trace( "cached image \"" + name + "\" loading or loaded already" );
+                            }
+                            // Important to remove the image from the queue also in loaded and exception case
+                            removeFromQueue( name );
 
-                        if ( queue.size() == 0 )
-                        {
-                            propertyChangeSupport.firePropertyChange( FINISHED, false, true );
+                            if ( queue.size() == 0 )
+                            {
+                                propertyChangeSupport.firePropertyChange( FINISHED, false, true );
+                            }
                         }
                     }
                     catch ( InterruptedException ex )

@@ -43,5 +43,5 @@
         <module>Third</module>
         <!--<module>Maven</module>-->
         <!--<module>Test</module>-->
-i    </modules>
+    </modules>
 </project>

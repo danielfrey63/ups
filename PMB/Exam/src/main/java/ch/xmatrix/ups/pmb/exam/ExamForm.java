@@ -209,14 +209,14 @@ public abstract class ExamForm extends JFrame
                     thumbnailList.setOpaque( false );
                     thumbnailScroller.setViewportView( thumbnailList );
                 }
-                listPanel.add( thumbnailScroller, cc.xy( 1, 1 ) );
+                listPanel.add( thumbnailScroller, cc.xy( 2, 1 ) );
 
                 //---- time ----
                 time.setForeground( Color.orange );
                 time.setBackground( Color.gray );
                 time.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
                 time.setFocusable( false );
-                listPanel.add( time, cc.xy( 2, 1 ) );
+                listPanel.add( time, cc.xy( 1, 1 ) );
             }
             panel1.add( listPanel, cc.xywh( 1, 1, 5, 1 ) );
 

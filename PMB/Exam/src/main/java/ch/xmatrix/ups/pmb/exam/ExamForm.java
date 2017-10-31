@@ -4,7 +4,6 @@
 package ch.xmatrix.ups.pmb.exam;
 
 import ch.jfactory.application.view.status.StatusBar;
-import ch.jfactory.component.ClockPanel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.BorderLayout;
@@ -19,6 +18,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -100,7 +100,7 @@ public abstract class ExamForm extends JFrame
         thumbnailList = new ThumbnailList();
         if ( exam )
         {
-            time = new ClockPanel( new ClockPanel.CombinedFormatter( 2 * 60 * 1000 ), targetProvider, 1000 );
+            time = new ClockPanel( new SimpleDateFormat( "m:ss 'min'" ), targetProvider );
         }
         else
         {
@@ -188,13 +188,13 @@ public abstract class ExamForm extends JFrame
             panel1.setLayout( new FormLayout(
                     "default:grow, $lcgap, [100dlu,default], $lcgap, default:grow",
                     "fill:136px, $lgap, fill:default:grow, $lgap, default" ) );
-            ((FormLayout) panel1.getLayout()).setColumnGroups( new int[][]{ { 1, 5 } } );
+            ((FormLayout) panel1.getLayout()).setColumnGroups( new int[][]{{1, 5}} );
 
             //======== listPanel ========
             {
                 listPanel.setBackground( Color.gray );
                 listPanel.setLayout( new FormLayout(
-                        "pref:grow, default:grow",
+                        "default:grow, center:250dlu",
                         "default:grow" ) );
 
                 //======== thumbnailScroller ========
@@ -209,14 +209,14 @@ public abstract class ExamForm extends JFrame
                     thumbnailList.setOpaque( false );
                     thumbnailScroller.setViewportView( thumbnailList );
                 }
-                listPanel.add( thumbnailScroller, cc.xy( 2, 1 ) );
+                listPanel.add( thumbnailScroller, cc.xy( 1, 1 ) );
 
                 //---- time ----
                 time.setForeground( Color.orange );
                 time.setBackground( Color.gray );
                 time.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
                 time.setFocusable( false );
-                listPanel.add( time, cc.xy( 1, 1 ) );
+                listPanel.add( time, cc.xy( 2, 1 ) );
             }
             panel1.add( listPanel, cc.xywh( 1, 1, 5, 1 ) );
 

@@ -1,0 +1,8 @@
+group = 'ch.xmatrix.le'
+description = 'Learning Environment Model'
+dependencies {
+  compile project(':ch.xmatrix.common.build:ch.xmatrix.common.utils-all')
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+    compile group: 'log4j', name: 'log4j', version:'1.2.17'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.5.10'
+}

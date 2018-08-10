@@ -1,0 +1,86 @@
+group = 'ch.xmatrix.le'
+description = 'eBot 7'
+version = '7.0.'
+
+buildscript {
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'de.gliderpilot.gradle.jnlp:gradle-jnlp-plugin:+'
+    }
+}
+
+dependencies {
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.common.utils-all')
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.le.data')
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.le.lesson')
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.le.modeapi')
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.le.model')
+    compile project(':ch.xmatrix.common.build:ch.xmatrix.le.modelimpl')
+    compile group: 'ch.xmatrix.common', name: 'ch.xmatrix.common.icon', version: '1.4.2088'
+    compile group: 'com.jgoodies', name: 'forms', version: '1.2.1'
+    compile group: 'com.jgoodies', name: 'looks', version: '2.0.4'
+    compile group: 'commons-io', name: 'commons-io', version: '1.3.2'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.2'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'net.java.jveez', name:'net.java.jveez', version: '1.80'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.5.10'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.5.10'
+    compile group: 'xerces', name: 'xercesImpl', version: '2.11.0'
+    compile group: 'xerces', name: 'xmlParserAPIs', version: '2.6.2'
+
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'de.gliderpilot.jnlp'
+
+mainClassName = 'com.ethz.geobot.herbar.gui.AppHerbar'
+
+print "Using Java version " + JavaVersion.current()
+
+/*
+Make sure to run it with JDK 8 or higher
+ */
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': project.mainClassName,
+                'Name': project.name,
+                'Implementation-Version': '7.0',
+                'Implementation-Title': 'eBot'
+        )
+    }
+}
+
+compileJava {
+    options.warnings = false
+    options.deprecation = false
+    options.compilerArgs += ["-nowarn"]
+}
+
+jnlp {
+    useVersions = true
+    j2seParams.version = '8+'
+    signJarParams.alias = 'e9449309-6396-2950-b2dc-e7e7c987ccd2'
+    signJarParams.storepass = 'seq737o'
+    signJarParams.keystore = 'NONE'
+    signJarParams.storetype = 'PKCS11'
+    href 'eBot.jnlp'
+    codebase 'http://balti.ethz.ch/hcd/webstart-7.0.20180704'
+    withXml {
+        information {
+            title 'eBot 7 (c) 1999-2018'
+            vendor 'Institute of Integrative Biology'
+        }
+        security {
+            'all-permissions'()
+        }
+    }
+}

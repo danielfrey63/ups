@@ -24,8 +24,9 @@ package net.java.jveez.vfs.impl;
 import com.drew.imaging.jpeg.JpegMetadataReader;
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifDirectory;
+import com.drew.metadata.exif.ExifDirectoryBase;
 import java.io.File;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
 import net.java.jveez.utils.Utils;
@@ -186,32 +187,36 @@ public class PictureImpl implements ExifPicture
         try
         {
             final Metadata metadata = JpegMetadataReader.readMetadata( getFile() );
-            final ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory( ExifDirectory.class );
+            final ExifDirectoryBase exifDirectory = metadata.getFirstDirectoryOfType( ExifDirectoryBase.class );
             if ( exifDirectory != null )
             {
-                exifDate = exifDirectory.getString( ExifDirectory.TAG_DATETIME_ORIGINAL );
-                exifFocal = exifDirectory.getString( ExifDirectory.TAG_FOCAL_LENGTH );
+                exifDate = exifDirectory.getString( ExifDirectoryBase.TAG_DATETIME_ORIGINAL );
+                exifFocal = exifDirectory.getString( ExifDirectoryBase.TAG_FOCAL_LENGTH );
                 if ( exifFocal != null )
                 {
                     exifFocal += " mm";
                 }
-                exifExposure = exifDirectory.getString( ExifDirectory.TAG_EXPOSURE_TIME );
+                exifExposure = exifDirectory.getString( ExifDirectoryBase.TAG_EXPOSURE_TIME );
                 if ( exifExposure != null )
                 {
                     exifExposure += " s";
                 }
-                exifAperture = exifDirectory.getString( ExifDirectory.TAG_APERTURE );
+                exifAperture = exifDirectory.getString( ExifDirectoryBase.TAG_APERTURE );
                 if ( exifAperture != null )
                 {
                     exifAperture += " APEX";
                 }
-                exifCamera = exifDirectory.getString( ExifDirectory.TAG_MAKE );
-                exifModel = exifDirectory.getString( ExifDirectory.TAG_MODEL );
+                exifCamera = exifDirectory.getString( ExifDirectoryBase.TAG_MAKE );
+                exifModel = exifDirectory.getString( ExifDirectoryBase.TAG_MODEL );
             }
         }
-        catch ( JpegProcessingException e )
+        catch ( final JpegProcessingException e )
         {
             // ignored
+        }
+        catch ( final IOException e )
+        {
+            e.printStackTrace();
         }
         finally
         {
@@ -225,7 +230,7 @@ public class PictureImpl implements ExifPicture
         {
             return true;
         }
-        if ( !( o instanceof PictureImpl ) )
+        if ( !(o instanceof PictureImpl) )
         {
             return false;
         }

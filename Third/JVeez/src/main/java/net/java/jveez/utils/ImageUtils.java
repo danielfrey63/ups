@@ -23,7 +23,8 @@ package net.java.jveez.utils;
 
 import com.drew.imaging.jpeg.JpegMetadataReader;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifDirectory;
+import com.drew.metadata.exif.ExifDirectoryBase;
+import com.drew.metadata.exif.ExifThumbnailDirectory;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
@@ -36,6 +37,7 @@ import java.awt.image.VolatileImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
@@ -79,13 +81,13 @@ public class ImageUtils
                 Utils.freeMemory( retryCounter < 1 );
                 retryCounter--;
             }
-            catch ( OperationCancelledException e )
+            catch ( final OperationCancelledException e )
             {
                 LOG.info( "Thread has been interrupted while loading the picture \"" + picture + "\"" );
                 Thread.currentThread().interrupt();
                 return null;
             }
-            catch ( Throwable t )
+            catch ( final Throwable t )
             {
                 LOG.error( "Could not load the picture \"" + picture + "\"", t );
                 return null;
@@ -99,7 +101,7 @@ public class ImageUtils
     {
         final ImageInputStream imageInputStream = ImageIO.createImageInputStream( picture.getFile() );
         final Iterator<ImageReader> iterator = ImageIO.getImageReaders( imageInputStream );
-        final ImageReader reader = ( iterator.hasNext() ? iterator.next() : null );
+        final ImageReader reader = (iterator.hasNext() ? iterator.next() : null);
         if ( reader == null )
         {
             LOG.warn( "No image reader found for " + picture );
@@ -177,8 +179,8 @@ public class ImageUtils
 
         final double imageWidth = image.getWidth();
         final double imageHeight = image.getHeight();
-        final int reducedWidth = (int) ( imageWidth * scale );
-        final int reducedHeight = (int) ( imageHeight * scale );
+        final int reducedWidth = (int) (imageWidth * scale);
+        final int reducedHeight = (int) (imageHeight * scale);
 
         final BufferedImage reducedImage = graphicsConfiguration.createCompatibleImage( reducedWidth, reducedHeight );
         final Graphics2D g2d = reducedImage.createGraphics();
@@ -196,8 +198,8 @@ public class ImageUtils
             return image;
         }
 
-        final int targetWith = ( rotate ? image.getHeight() : image.getWidth() );
-        final int targetHeight = ( rotate ? image.getWidth() : image.getHeight() );
+        final int targetWith = (rotate ? image.getHeight() : image.getWidth());
+        final int targetHeight = (rotate ? image.getWidth() : image.getHeight());
 
         final AffineTransform transform = new AffineTransform();
 
@@ -244,7 +246,7 @@ public class ImageUtils
         {
             writer.setOutput( output );
             writer.write( bufferedImage );
-            LOG.debug( "image stored in " + ( System.currentTimeMillis() - start ) + "ms" );
+            LOG.debug( "image stored in " + (System.currentTimeMillis() - start) + "ms" );
         }
         catch ( Exception e )
         {
@@ -279,9 +281,18 @@ public class ImageUtils
 
         try
         {
+            byte[] thumbnailBytes = null;
+
             final Metadata metadata = JpegMetadataReader.readMetadata( file );
-            final ExifDirectory exifDirectory = (ExifDirectory) metadata.getDirectory( ExifDirectory.class );
-            final byte[] thumbnailBytes = exifDirectory.getThumbnailData();
+            final ExifThumbnailDirectory dir = metadata.getFirstDirectoryOfType( ExifThumbnailDirectory.class );
+            if ( dir.containsTag( ExifThumbnailDirectory.TAG_COMPRESSION ) )
+            {
+                final Integer off = dir.getInteger( ExifThumbnailDirectory.TAG_THUMBNAIL_OFFSET );
+                final Integer len = dir.getInteger( ExifThumbnailDirectory.TAG_THUMBNAIL_LENGTH );
+                final FileInputStream inputStream = new FileInputStream( file );
+                thumbnailBytes = new byte[len];
+                inputStream.read( thumbnailBytes, off, len );
+            }
 
             // some broken pictures have the thumbnail data EXIF tag but no data
             if ( thumbnailBytes == null || thumbnailBytes.length == 0 )
@@ -303,7 +314,7 @@ public class ImageUtils
                         " loaded successfully from EXIF data for \"" + file + "\"" );
             }
 
-            final int exifOrientation = ( exifDirectory.containsTag( ExifDirectory.TAG_ORIENTATION ) ? exifDirectory.getInt( ExifDirectory.TAG_ORIENTATION ) : 0 );
+            final int exifOrientation = (dir.containsTag( ExifDirectoryBase.TAG_ORIENTATION ) ? dir.getInt( ExifDirectoryBase.TAG_ORIENTATION ) : 0);
 
             if ( exifOrientation > 1 )
             {
@@ -369,7 +380,7 @@ public class ImageUtils
      */
     public static BufferedImage createScaledImage( final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint )
     {
-        final int type = ( img.getTransparency() == Transparency.OPAQUE ) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+        final int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
         // Use multi-step technique: start with original size, then
         // scale down in multiple passes with drawImage()
         // until the target size is reached
@@ -377,22 +388,22 @@ public class ImageUtils
         final int imageHeight = img.getHeight();
         final double scale = getScaleFactor( targetWidth, imageWidth, targetHeight, imageHeight );
         int width, height;
-        if ( hint == RenderingHints.VALUE_INTERPOLATION_BILINEAR && ( imageHeight > targetHeight || imageWidth > targetWidth ) )
+        if ( hint == RenderingHints.VALUE_INTERPOLATION_BILINEAR && (imageHeight > targetHeight || imageWidth > targetWidth) )
         {
-            final double itW = ( (double) imageWidth ) / ( (double) targetWidth );
-            final double itH = ( (double) imageHeight ) / ( (double) targetHeight );
+            final double itW = ((double) imageWidth) / ((double) targetWidth);
+            final double itH = ((double) imageHeight) / ((double) targetHeight);
             if ( itW > itH )
             {
-                final int log = (int) ( Math.log( itW ) / Math.log( 2 ) + 1 );
+                final int log = (int) (Math.log( itW ) / Math.log( 2 ) + 1);
                 final int factor = (int) Math.pow( 2, log );
                 width = targetWidth * factor;
-                height = ( (int) ( (double) targetWidth * imageHeight / imageWidth ) * factor );
+                height = ((int) ((double) targetWidth * imageHeight / imageWidth) * factor);
             }
             else
             {
-                final int log = (int) ( Math.log( itH ) / Math.log( 2 ) + 1 );
+                final int log = (int) (Math.log( itH ) / Math.log( 2 ) + 1);
                 final int factor = (int) Math.pow( 2, log );
-                width = ( (int) ( (double) targetWidth * imageWidth / imageHeight ) * factor );
+                width = ((int) ((double) targetWidth * imageWidth / imageHeight) * factor);
                 height = targetHeight * factor;
             }
         }
@@ -401,11 +412,11 @@ public class ImageUtils
             if ( imageWidth > imageHeight )
             {
                 width = targetWidth;
-                height = (int) ( imageHeight * scale );
+                height = (int) (imageHeight * scale);
             }
             else
             {
-                width = (int) ( imageWidth * scale );
+                width = (int) (imageWidth * scale);
                 height = targetHeight;
             }
         }

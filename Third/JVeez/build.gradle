@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'net.java.jveez'
+version = '1.80.3490'
+
+description = "JVeez Picture Viewer"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+    mavenLocal()
+}
+dependencies {
+    compile group: 'log4j', name: 'log4j', version: '1.2.14'
+    compile group: 'com.smardec', name: 'com.smardec.mousegestures', version: '1.2-SNAPSHOT'
+    compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.10.0'
+    compile group: 'org.garret', name: 'org.garret.perst', version: '410'
+}
+
+print "Using Java version " + JavaVersion.current()

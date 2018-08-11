@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'net.java.jveez'
-version = '1.80.3490'
+version = '1.80.3492'
 
 description = "JVeez Picture Viewer"
 

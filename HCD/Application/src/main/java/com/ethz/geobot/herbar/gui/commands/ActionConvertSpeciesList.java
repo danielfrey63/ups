@@ -30,15 +30,26 @@ import com.ethz.geobot.herbar.gui.AppHerbar;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import java.awt.event.ActionEvent;
+import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
@@ -129,6 +140,11 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
 
     private XStream getSerializer()
     {
+        return getxStream();
+    }
+
+    public static XStream getxStream()
+    {
         final XStream x = new XStream();
         x.alias( "filter", Filter.class );
         x.alias( "detail", Detail.class );
@@ -137,6 +153,12 @@ public class ActionConvertSpeciesList extends AbstractParametrizedAction
         x.useAttributeFor( Filter.class, "rank" );
         x.useAttributeFor( Filter.class, "name" );
         x.useAttributeFor( Detail.class, "scope" );
+        x.addPermission( NoTypePermission.NONE );
+        x.addPermission( NullPermission.NULL );
+        x.addPermission( PrimitiveTypePermission.PRIMITIVES );
+        x.allowTypes( new Class[] { Filter.class, Detail.class, TreeSet.class, Properties.class, Proxy.class, TextAttribute.class, EnumSet.class, EnumMap.class } );
+        x.allowTypeHierarchy( TreeMap.class );
+
         return x;
     }
 

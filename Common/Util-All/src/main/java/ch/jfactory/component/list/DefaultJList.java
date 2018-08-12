@@ -20,7 +20,7 @@ import javax.swing.ListModel;
  * @author $Author: daniel_frey $
  * @version $Revision: 1.1 $ $Date: 2005/11/17 11:54:58 $
  */
-public class DefaultJList<T> extends JList
+public class DefaultJList<T> extends JList<T>
 {
     public DefaultJList()
     {

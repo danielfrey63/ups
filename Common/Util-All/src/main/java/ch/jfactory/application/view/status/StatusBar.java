@@ -9,15 +9,12 @@
  */
 package ch.jfactory.application.view.status;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -29,8 +26,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,9 +44,9 @@ public class StatusBar extends JPanel
 
     private final GridBagConstraints constraints = new GridBagConstraints();
 
-    private List<JComponent> components = new ArrayList<JComponent>();
+    private List<JComponent> components = new ArrayList<>();
 
-    private List<StatusPanel> statusPanels = new ArrayList<StatusPanel>();
+    private List<StatusPanel> statusPanels = new ArrayList<>();
 
     public StatusBar()
     {
@@ -86,9 +81,9 @@ public class StatusBar extends JPanel
     public synchronized void addStatusComponent( final JComponent component, final int index )
     {
         LOG.debug( "adding at " + index + " component " + component.hashCode() );
-        final List<JComponent> componentsCopy = new ArrayList<JComponent>( components );
-        final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>( statusPanels );
-        for ( int i = 1; i < components.size(); i++ )
+        final List<JComponent> componentsCopy = new ArrayList<>( components );
+        final List<StatusPanel> statusPanelsCopy = new ArrayList<>( statusPanels );
+        for ( int i = components.size() - 1; i >= 0; i-- )
         {
             remove( statusPanels.get( i ) );
             components.remove( i );
@@ -117,9 +112,9 @@ public class StatusBar extends JPanel
     {
         LOG.debug( "removing " + component.hashCode() );
         boolean found = false;
-        final List<JComponent> componentsCopy = new ArrayList<JComponent>( components );
-        final List<StatusPanel> statusPanelsCopy = new ArrayList<StatusPanel>( statusPanels );
-        for ( int i = 0; i < componentsCopy.size(); i++ )
+        final List<JComponent> componentsCopy = new ArrayList<>( components );
+        final List<StatusPanel> statusPanelsCopy = new ArrayList<>( statusPanels );
+        for ( int i = componentsCopy.size() - 1; i >= 0; i-- )
         {
             final JComponent comp = componentsCopy.get( i );
             if ( found || comp == component )
@@ -152,16 +147,14 @@ public class StatusBar extends JPanel
         return new Dimension( w, h );
     }
 
-    public static void main( final String[] args ) throws UnsupportedLookAndFeelException
+    public static void main( final String[] args )
     {
-        UIManager.setLookAndFeel( new WindowsLookAndFeel() );
+//        UIManager.setLookAndFeel( new WindowsLookAndFeel() );
 
-        final Map<String, JLabel> map = new HashMap<String, JLabel>();
-        final List<JLabel> list = new ArrayList<JLabel>();
+        final Map<String, JLabel> map = new HashMap<>();
         // For the logo
         final JLabel label = new JLabel();
         map.put( "0", label );
-        list.add( label );
 
         final JButton remove = new JButton( "Remove" );
         final JButton add = new JButton( "Add" );
@@ -177,38 +170,28 @@ public class StatusBar extends JPanel
         panel.add( indexLabel );
         panel.add( index );
 
-        add.addActionListener( new ActionListener()
-        {
-            public void actionPerformed( final ActionEvent e )
+        add.addActionListener( e -> {
+            final JLabel label12 = new JLabel( text.getText() );
+            if ( index.getText() == null || "".equals( index.getText().trim() ) )
             {
-                final JLabel label = new JLabel( text.getText() );
-                if ( index.getText() == null || "".equals( index.getText().trim() ) )
-                {
-                    status.addStatusComponent( label );
-                    map.put( text.getText(), label );
-                    list.add( label );
-                }
-                else
-                {
-                    final int i = Integer.parseInt( index.getText() );
-                    status.addStatusComponent( label, i );
-                    map.put( text.getText(), label );
-                    list.add( i, label );
-                }
-                status.validate();
+                status.addStatusComponent( label12 );
+                map.put( text.getText(), label12 );
             }
+            else
+            {
+                final int i = Integer.parseInt( index.getText() );
+                status.addStatusComponent( label12, i );
+                map.put( text.getText(), label12 );
+            }
+            status.validate();
         } );
 
-        remove.addActionListener( new ActionListener()
-        {
-            public void actionPerformed( final ActionEvent e )
+        remove.addActionListener( e -> {
+            final JLabel label1 = map.get( text.getText() );
+            if ( label1 != null )
             {
-                final JLabel label = map.get( text.getText() );
-                if ( label != null )
-                {
-                    status.removeStatusComponent( label );
-                    status.validate();
-                }
+                status.removeStatusComponent( label1 );
+                status.validate();
             }
         } );
 

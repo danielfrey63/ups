@@ -15,6 +15,7 @@ import ch.jfactory.color.ColorUtils;
 import ch.jfactory.lang.LogicUtils;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
 import java.awt.Color;
@@ -315,7 +316,7 @@ public class RendererPanel extends JPanel
         else
         {
             remove( prefix );
-            layout.setColumnSpec( 4, FormFactory.createGapColumnSpec( Sizes.dluX( 0 ) ) );
+            layout.setColumnSpec( 4, ColumnSpec.createGap( Sizes.dluX( 0 ) ) );
         }
     }
 

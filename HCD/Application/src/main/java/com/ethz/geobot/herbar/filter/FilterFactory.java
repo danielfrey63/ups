@@ -31,6 +31,7 @@ package com.ethz.geobot.herbar.filter;
 import ch.jfactory.file.FileUtils;
 import ch.jfactory.lang.ToStringComparator;
 import com.ethz.geobot.herbar.Application;
+import com.ethz.geobot.herbar.gui.commands.ActionConvertSpeciesList;
 import static com.ethz.geobot.herbar.modeapi.HerbarContext.ENV_SCIENTIFIC;
 import com.ethz.geobot.herbar.model.HerbarModel;
 import com.ethz.geobot.herbar.model.Level;
@@ -294,15 +295,7 @@ public class FilterFactory
 
     private XStream getSerializer()
     {
-        final XStream x = new XStream();
-        x.alias( "filter", Filter.class );
-        x.alias( "detail", Detail.class );
-        x.addImplicitCollection( Filter.class, "details", Detail.class );
-        x.useAttributeFor( Filter.class, "fixed" );
-        x.useAttributeFor( Filter.class, "rank" );
-        x.useAttributeFor( Filter.class, "name" );
-        x.useAttributeFor( Detail.class, "scope" );
-        return x;
+        return ActionConvertSpeciesList.getxStream();
     }
 
     /**

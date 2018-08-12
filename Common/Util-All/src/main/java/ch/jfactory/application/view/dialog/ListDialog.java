@@ -87,7 +87,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
         list.requestFocus();
     }
 
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings("unchecked")
     private T[] copyIntoNewArray( final T[] listData, final int length )
     {
         final List<T> temp = Arrays.asList( listData );
@@ -120,7 +120,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
      *
      * @param renderer the ListCellRenderer
      */
-    public void setListCellRenderer( final ListCellRenderer renderer )
+    public void setListCellRenderer( final ListCellRenderer<? super T> renderer )
     {
         list.setCellRenderer( renderer );
     }
@@ -172,18 +172,19 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
         return new JScrollPane( list );
     }
 
-    @SuppressWarnings( "unchecked" )
-    protected void onApply() throws ComponentDialogException
+    @SuppressWarnings("unchecked")
+    protected void onApply()
     {
-        final Object[] objects = list.getSelectedValues();
-        selectedData = copyIntoNewArray( (T[]) objects, objects.length );
+        final List<T> objects = list.getSelectedValuesList();
+        selectedData = (T[]) objects.toArray();
     }
 
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings("unchecked")
     protected void onCancel()
     {
-        final List<T> temp = Arrays.asList( allData );
-        selectedData = (T[]) Array.newInstance( temp.iterator().next().getClass(), 0 );
+        final List<T> objects = Arrays.asList( allData );
+        selectedData = (T[]) objects.toArray();
+//        selectedData = (T[]) Array.newInstance( objects.iterator().next().getClass(), 0 );
     }
 
     // ListSelectionListener
@@ -191,8 +192,8 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
     public void valueChanged( final ListSelectionEvent e )
     {
         final JList list = (JList) e.getSource();
-        final Object[] selection = list.getSelectedValues();
-        enableApply( selection != null && selection.length > 0 );
+        final List selection = list.getSelectedValuesList();
+        enableApply( selection != null && selection.size() > 0 );
     }
 
     // DocumentListener
@@ -207,27 +208,28 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
         changedUpdate( e );
     }
 
+    @SuppressWarnings("unchecked")
     public void changedUpdate( final DocumentEvent e )
     {
         final Document d = e.getDocument();
-        String str = null;
+        String str;
         try
         {
             str = d.getText( 0, d.getLength() ).toUpperCase();
+            final List<T> currentObjects = new ArrayList<T>();
+            for ( final T o : allData )
+            {
+                if ( o.toString().toUpperCase().contains( str ) )
+                {
+                    currentObjects.add( o );
+                }
+            }
+            list.setListData( (T[]) currentObjects.toArray() );
         }
         catch ( Exception x )
         {
             LOGGER.error( "Error getting text", x );
         }
-        final List<Object> currentObjects = new ArrayList<Object>();
-        for ( final Object o : allData )
-        {
-            if ( o.toString().toUpperCase().indexOf( str ) > -1 )
-            {
-                currentObjects.add( o );
-            }
-        }
-        list.setListData( currentObjects.toArray() );
     }
 
     public static void main( final String[] args )
@@ -252,7 +254,7 @@ public class ListDialog<T> extends I15nComponentDialog implements ListSelectionL
         {
             list.add( "Eintrag " + i );
         }
-        final String[] objects = list.toArray( new String[list.size()] );
+        final String[] objects = list.toArray( new String[0] );
         final ListDialog<String> dialog = new ListDialog<String>( (JFrame) null, "test", objects );
         dialog.setSize( 400, 700 );
         WindowUtils.centerOnScreen( dialog );

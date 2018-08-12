@@ -14,7 +14,7 @@ dependencies {
     }
     compile project(':ch.xmatrix.common.build:ch.xmatrix.le.model')
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
-    compile group: 'net.java.jveez', name:'net.java.jveez', version: '1.80'
+    compile group: 'net.java.jveez', name:'net.java.jveez', version: '1.80.3492'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'org.springframework', name: 'spring-beans', version: '3.2.18.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '3.2.18.RELEASE'

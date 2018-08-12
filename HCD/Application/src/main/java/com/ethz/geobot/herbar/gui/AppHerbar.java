@@ -47,7 +47,6 @@ import com.ethz.geobot.herbar.model.Picture;
 import com.ethz.geobot.herbar.model.PictureTheme;
 import com.ethz.geobot.herbar.model.Taxon;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -88,8 +87,6 @@ public class AppHerbar
     private PictureCache cache;
 
     private PictureCache backgroundCache;
-
-    private NestedImageCache imageCache;
 
     /**
      * reference to the one and only mainframe
@@ -136,56 +133,41 @@ public class AppHerbar
         final String version = "6.0.3426";
         if ( backgroundCache == null && !version.equals( FileUtils.readPropertyFromXML( fileName, property ) ) )
         {
-            imageCache = new NestedImageCache( new ImageCache[0], new FileImageCache( ImageLocator.getPicturePath(), "jpg" ), new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );
+            final NestedImageCache imageCache = new NestedImageCache( new ImageCache[0], new FileImageCache( ImageLocator.getPicturePath(), "jpg" ), new UrlImageCache( ImageLocator.getImageURL(), "jpg" ) );
             backgroundCache = new PictureCache( "Background-Image-Thread", exceptionHandler, imageCache );
-            final PropertyChangeListener waitingListener = new PropertyChangeListener()
-            {
-                @Override
-                public void propertyChange( PropertyChangeEvent e )
-                {
-                    LOG.info( "resuming " + backgroundCache.getName() + " by WAITING of " + cache.getName() );
-                    backgroundCache.resume();
-                }
+            final PropertyChangeListener waitingListener = e -> {
+                LOG.info( "resuming " + backgroundCache.getName() + " by WAITING of " + cache.getName() );
+                backgroundCache.resume();
             };
-            final PropertyChangeListener resumingListener = new PropertyChangeListener()
-            {
-                @Override
-                public void propertyChange( PropertyChangeEvent e )
-                {
-                    LOG.info( "suspending " + backgroundCache.getName() + " by RESUME of " + cache.getName() );
-                    backgroundCache.suspend();
-                }
+            final PropertyChangeListener resumingListener = e -> {
+                LOG.info( "suspending " + backgroundCache.getName() + " by RESUME of " + cache.getName() );
+                backgroundCache.suspend();
             };
             cache.addPropertyChangeListener( WAITING, waitingListener );
             cache.addPropertyChangeListener( RESUME, resumingListener );
-            backgroundCache.addPropertyChangeListener( FINISHED, new PropertyChangeListener()
-            {
-                @Override
-                public void propertyChange( PropertyChangeEvent evt )
+            backgroundCache.addPropertyChangeListener( FINISHED, evt -> {
+                LOG.info( "finishing " + backgroundCache.getName() );
+                backgroundCache.stop();
+                cache.removePropertyChangeListener( WAITING, waitingListener );
+                cache.removePropertyChangeListener( RESUME, resumingListener );
+                if ( !backgroundCache.hadError() )
                 {
-                    LOG.info( "finishing " + backgroundCache.getName() );
-                    backgroundCache.stop();
-                    cache.removePropertyChangeListener( WAITING, waitingListener );
-                    cache.removePropertyChangeListener( RESUME, resumingListener );
-                    if ( !backgroundCache.hadError() )
+                    try
                     {
-                        try
-                        {
-                            org.apache.commons.io.FileUtils.touch( new File( fileName ) );
-                            FileUtils.writePropertyToXML( fileName, property, version );
-                        }
-                        catch ( IOException e )
-                        {
-                            e.printStackTrace();
-                        }
+                        org.apache.commons.io.FileUtils.touch( new File( fileName ) );
+                        FileUtils.writePropertyToXML( fileName, property, version );
                     }
-
-                    LOG.info( "resuming " + cache.getName() );
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
                 }
+
+                LOG.info( "resuming " + cache.getName() );
             } );
 
             final Set<String> images = collectAllPictures();
-            backgroundCache.queueImages( images.toArray( new String[images.size()] ), false, false, cache.getStatus() == 0 );
+            backgroundCache.queueImages( images.toArray( new String[0] ), false, false, cache.getStatus() == 0 );
         }
     }
 
@@ -195,7 +177,7 @@ public class AppHerbar
         final HerbarModel dataModel = Application.getInstance().getModel();
         final Taxon taxon = dataModel.getRootTaxon();
         final PictureTheme[] themes = dataModel.getPictureThemes();
-        final Set<String> pictureNames = new TreeSet<String>();
+        final Set<String> pictureNames = new TreeSet<>();
         collectPictures( taxon, themes, pictureNames );
         return pictureNames;
     }
@@ -338,13 +320,7 @@ public class AppHerbar
     private void initSplash()
     {
         final ImageIcon imageIcon = ImageLocator.getIcon( "splash.png" );
-        SwingUtilities.invokeLater( new Runnable()
-        {
-            public void run()
-            {
-                splash = new Splash( imageIcon );
-            }
-        } );
+        SwingUtilities.invokeLater( () -> splash = new Splash( imageIcon ) );
     }
 
     static

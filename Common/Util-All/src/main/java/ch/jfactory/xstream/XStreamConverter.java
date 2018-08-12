@@ -43,6 +43,7 @@ public class XStreamConverter<T> implements Converter<T>
     public XStreamConverter( final Map<String, Class> aliases, final Map<Class, String> implicitCollections,
                              final Map<Class, String> omits, final Map<String, NamedAlias> aliasesWithNames )
     {
+        XStream.setupDefaultSecurity( xstream );
         xstream.registerConverter( new SqlTimestampConverter() );
         xstream.registerConverter( new ValidatingDateConverter(
                 "yyyyMMddHHmmssSSS", "yyyyMMddHHmmssSSS", "yyyyMMddHHmmss", "yyyyMMddHHmm",

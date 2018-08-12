@@ -10,13 +10,9 @@
 package ch.jfactory.application.presentation;
 
 import ch.jfactory.resource.OperatingSystem;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.IllegalComponentStateException;
-import java.awt.Point;
+import org.slf4j.LoggerFactory;
+
+import java.awt.*;
 import javax.swing.Box.Filler;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -65,6 +61,7 @@ public class WindowUtils
      */
     public static void centerOnScreen( final Component c )
     {
+        Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         final Point p = getCenterLocation( c, OperatingSystem.getScreenBounds().getSize() );
         c.setLocation( p.x, p.y );
     }

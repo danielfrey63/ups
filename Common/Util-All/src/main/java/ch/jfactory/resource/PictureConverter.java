@@ -9,9 +9,6 @@
  */
 package ch.jfactory.resource;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -161,12 +158,7 @@ public class PictureConverter
     public static void saveJPG1( final BufferedImage image, final String name, int quality ) throws IOException
     {
         final BufferedOutputStream out = new BufferedOutputStream( new FileOutputStream( name ) );
-        final JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder( out );
-        final JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam( image );
-        quality = Math.max( 0, Math.min( quality, 100 ) );
-        param.setQuality( (float) quality / 100.0f, false );
-        encoder.setJPEGEncodeParam( param );
-        encoder.encode( image );
+        ImageIO.write(image, "JPG", out);
     }
 
     public static void saveJPG2( final BufferedImage image, final String name ) throws IOException

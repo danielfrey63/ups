@@ -53,7 +53,7 @@ public class Splash extends JWindow
         setLayout( null );
         add( label );
 
-        WindowUtils.centerOnScreen( this );
+        this.setLocationRelativeTo(null);
         setVisible( true );
     }
 

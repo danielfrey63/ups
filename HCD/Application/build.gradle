@@ -1,6 +1,6 @@
 group = 'ch.xmatrix.le'
 description = 'eBot 7'
-version = '6.0.3493'
+version = '6.0.3494'
 
 buildscript {
 

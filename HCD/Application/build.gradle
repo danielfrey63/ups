@@ -1,6 +1,6 @@
 group = 'ch.xmatrix.le'
-description = 'eBot 7'
-version = '6.0.3494'
+description = 'eBot 6'
+version = '6.0.3495'
 
 buildscript {
 
@@ -53,8 +53,8 @@ jar {
                 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': project.mainClassName,
                 'Name': project.name,
-                'Implementation-Version': '7.0',
-                'Implementation-Title': 'eBot'
+                'Implementation-Version': '6.0.3495',
+                'Implementation-Title': 'eBot 6.0.3495'
         )
     }
 }
@@ -72,11 +72,11 @@ jnlp {
     signJarParams.storepass = 'seq737o'
     signJarParams.keystore = 'NONE'
     signJarParams.storetype = 'PKCS11'
-    href 'eBot.jnlp'
-    codebase 'http://balti.ethz.ch/hcd/webstart-7.0.20180704'
+    href 'eBot-6.0.3495.jnlp'
+    codebase 'http://balti.ethz.ch/hcd/webstart-6.0.3495'
     withXml {
         information {
-            title 'eBot 7 (c) 1999-2018'
+            title 'eBot 6 (c) 1999-2018'
             vendor 'Institute of Integrative Biology'
         }
         security {

@@ -149,8 +149,6 @@ public class StatusBar extends JPanel
 
     public static void main( final String[] args )
     {
-//        UIManager.setLookAndFeel( new WindowsLookAndFeel() );
-
         final Map<String, JLabel> map = new HashMap<>();
         // For the logo
         final JLabel label = new JLabel();
